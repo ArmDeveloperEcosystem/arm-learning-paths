@@ -14,7 +14,7 @@
             <div class="c-col c-col-12">
               <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-3 xl:u-grid-columns-3 xxl:u-grid-columns-4">
                 {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-                  <ads-card has-hover-effect class="path-card" link="{{.Permalink}}">
+                  <ads-card has-hover-effect class="path-card global-nav-path-card" link="{{.Permalink}}">
                     <ads-card-image slot="image" src="/{{.Params.cardimage}}" class="u-bg-position-top" style="max-height: 75px;"></ads-card-image>
                     <ads-card-content slot="content">
                         <h4 class="u-color-arm-blue u-margin-top-0 u-margin-bottom-0">{{.Title}}</h4>
