@@ -2,7 +2,7 @@
 
 THIS IS A PROOF OF CONCEPT PROJECT, the URL is temporary. 
 
-This repository contains the source files for the [Arm Learning Paths static website](https://www.armswdev.tk/), serving learning-based technical content for Arm software developers. 
+This repository contains the source files for the [Arm Learning Paths static website](https://www.armswdev.tk/), serving learning based technical content for Arm software developers. 
 
 The Learning Paths created here are maintained by Arm and the Arm software development community. Learning Paths are meant to solve problems developers face while developing on and for Arm. Helpful instructions to install a variety of software tools are also provided.
 
