@@ -1,0 +1,119 @@
+<style>
+    /* overall hw sw container */
+    .nav-hw-sw-div {
+        background-color: var(--arm-dark-grey);
+    }
+    html[theme='dark'] .nav-hw-sw-div {
+        background-color: var(--arm-color-overlay-light);
+    }
+
+    /* HW nav color on left */
+    .nav-hw-row {
+        width: 100%;
+    }
+
+    .nav-hw-row.active {
+        background-color: var(--arm-light-blue);
+    }   
+    html[theme='dark'] .nav-hw-row.active {
+        background-color: var(--arm-blue);
+    }  
+
+
+    /* HW nav Content on right */
+    .nav-hw-right-card {
+        border-style: solid;
+        border-width: 1px;
+        width: 100%;
+        margin-left: 10px;
+
+        border-color: var(--arm-dark-grey);
+        background-color: var(--arm-black);
+    }
+
+    .nav-hw-right-card.active {
+        border-color: var(--arm-light-blue);
+        background-color: white;
+    }
+
+    .nav-hw-right-card > h6 {
+        margin-left: 10px; margin-right: 10px;
+        color: white;
+    }
+
+    .nav-hw-right-card.active > h6 {
+        color: black;
+    }
+
+    html[theme='dark'] .nav-hw-right-card {
+        border-color: var(--arm-color-overlay-light);
+        background-color: var(--arm-color-overlay-dark);
+    }
+    html[theme='dark'] .nav-hw-right-card.active {
+        border-color: var(--arm-blue);
+        background-color: var(--arm-color-surface);
+    }
+
+    html[theme='dark'] .nav-hw-right-card > h6 {
+        color: white;
+    }
+
+    /************* SW *********************/
+
+    .a-nav {
+        width:100%
+    }
+
+    /* SW nav color on left */
+    .nav-sw-row {
+        width: 100%;
+    }
+
+    .nav-hw-row.active {
+        background-color: var(--arm-light-blue);
+    }   
+
+
+    .nav-sw-right-card {
+        border-style: solid;
+        border-width: 1px;
+        width: 100%;
+        margin-left: 30px;
+
+        border-color: var(--arm-dark-grey);
+        background-color: var(--arm-black);
+    }
+
+
+    .nav-sw-right-card > h6 {
+        color: white;
+        margin-left: 10px; margin-right: 10px; margin-top: 5px; margin-bottom: 5px;
+    }
+
+
+
+
+    /* hover effects */
+    .nav-hw-sw-div:hover > .hide {
+        display: block;
+    }
+
+    .nav-hw-row.inactive:hover {
+        background-color: var(--arm-orange); }
+    .nav-hw-row.inactive:hover .nav-hw-right-card {
+        background-color: var(--arm-color-surface); }
+    .nav-hw-row.inactive:hover h6 {
+        color: var(--arm-orange); }
+
+    a:hover {
+        text-decoration: none; }
+        
+
+
+
+
+
+
+    .hide {
+        display: none;}
+</style>

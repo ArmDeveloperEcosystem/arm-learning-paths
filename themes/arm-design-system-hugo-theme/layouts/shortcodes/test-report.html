@@ -1,0 +1,206 @@
+<!-- 
+    Publishes test report on website articles
+    Usage:
+    - id : unique tag
+    - path="install-tools" | "learning-path"
+-->
+
+<!-- list folder content -->
+{{- $id := .Get "id" -}}
+{{- $height := .Get "height" | default "300" -}}
+{{- $pathURL := .Get "pathURL" -}}
+{{- $path := .Get "path" -}}
+{{- $content := "/content/" -}}
+{{- $contentpath := printf "%s" $path | printf "%s%s" $content | printf "%s" -}}
+{{ $nottested := 0 }}
+{{ $tested := 0 }}
+{{ $passed := 0 }}
+{{ $failed := 0 }}
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+<div id='{{ $id }}'></div>
+
+<details>
+    <summary>Expand</summary>
+
+{{ $.Scratch.Set "nottested" $nottested }}
+{{ $.Scratch.Set "tested" $tested }}
+{{ $.Scratch.Set "passed" $passed }}
+{{ $.Scratch.Set "failed" $failed }}
+
+<!-- TODO if learning-paths go 2 levels deeper -->
+{{ if in "learning-paths" $path }}
+
+<table>
+    <th>Area</th>
+    <th>Learning-path</th>
+    <th>Test</th>
+    <th>Targets</th>
+    <th>Status</th>
+
+    {{- $area := readDir $contentpath -}}
+    {{- range $area -}}
+        <!-- level 1: area -->
+        {{ $aname := .Name }}
+        {{ $apath := printf "%s" $aname | printf "%s/%s" $contentpath | printf "%s" }}
+        {{- $lp := readDir $apath -}}
+           
+            {{- range $lp -}}
+                <!-- level 2: learning-path -->
+                {{ if (not (in .Name "_index") ) }}
+                    {{ $lpname := .Name }}
+                    {{ $lppath := printf "%s" $lpname | printf "%s/%s" $apath | printf "%s" }}
+                    <!-- level 3: _index.md -->
+                    {{ if not (in $lppath "_example-learning-path") }}
+                        <tr>
+                            <td>{{ $aname }}</td>
+                            {{ $tpath := replace $lppath "/content" "" }}
+                            {{ $idxpath := printf "%s" "_index.md" | printf "%s/%s" $tpath | printf "%s" }}
+                            <td><a href="{{ $pathURL }}{{ $tpath | relURL | urlize }}">{{ $lpname }}</a></td>
+                            
+                            {{ $c := readFile $idxpath | transform.Unmarshal }}
+
+                            <!-- Test -->
+                            {{ if $c.test_maintenance }}
+                            {{ $.Scratch.Set "tested" ( add 1 ( $.Scratch.Get "tested" ) ) }}
+                            <td>ON</td>
+
+                            <!-- Targets -->
+                            <td>
+                                {{ range $c.test_images }}
+                                <p>{{ . }}</p>
+                                {{ end }}
+                            </td>
+
+                            <!-- Status -->
+                            <td>
+                                {{ range $c.test_status }}
+                                    {{ if in "passed" .}}
+                                    {{ $.Scratch.Set "passed" ( add 1 ( $.Scratch.Get "passed" ) ) }}
+                                    <p style="background-color:green;">{{.}}</p>
+                                    {{ else }}
+                                    {{ $.Scratch.Set "failed" ( add 1 ( $.Scratch.Get "failed" ) ) }}
+                                    <p style="background-color:red;">{{.}}</p>
+                                    {{ end }}
+                                {{ end }}
+                            </td>
+
+                            {{ else }}
+                            {{ $.Scratch.Set "nottested" ( add 1 ( $.Scratch.Get "nottested" ) ) }}
+                            <td><i>off</i></td>
+                            <td></td>
+                            <td></td>
+                            {{ end }}
+                        </tr>
+                    {{ end }}
+                    <!-- level 3: _index.md -->
+                {{ end }}            
+            {{- end -}} <!-- level 2: learning-path -->
+    {{- end -}} <!-- level 1: area -->
+</table>
+
+{{ else }}
+
+<table>
+    <th>Name</th>
+    <th>Test</th>
+    <th>Targets</th>
+    <th>Status</th>
+    {{- $files := readDir $contentpath -}}
+    {{- range $files -}}
+        {{ if and (in .Name ".md") (not (in .Name "_index") ) (not (in .Name "_next-steps") ) (not (in .Name "_review") )}}
+            {{ $name := .Name }}
+            {{ $fpath := printf "%s" $name | printf "%s/%s" $contentpath | printf "%s" }}
+            {{ $sname := replace .Name ".md" "" }}
+            <tr>
+                <td><a href="{{ $pathURL }}/{{ $path }}{{ $sname | relURL | urlize }}"> {{ $sname }}</a></td>
+                {{ $c := readFile $fpath | transform.Unmarshal }}
+
+                <!-- Test -->
+                {{ if $c.test_maintenance }}
+                {{ $.Scratch.Set "tested" ( add 1 ( $.Scratch.Get "tested" ) ) }}
+                <td>ON</td>
+
+                <!-- Targets -->
+                <td>
+                    {{ range $c.test_images }}
+                    <p>{{ . }}</p>
+                    {{ end }}
+                </td>
+
+                <!-- Status -->
+                <td>
+                    {{ range $c.test_status }}
+                        {{ if in "passed" .}}
+                        {{ $.Scratch.Set "passed" ( add 1 ( $.Scratch.Get "passed" ) ) }}
+                        <p style="background-color:green;">{{.}}</p>
+                        {{ else }}
+                        {{ $.Scratch.Set "failed" ( add 1 ( $.Scratch.Get "failed" ) ) }}
+                        <p style="background-color:red;">{{.}}</p>
+                        {{ end }}
+                    {{ end }}
+                </td>
+
+                {{ else }}
+                {{ $.Scratch.Set "nottested" ( add 1 ( $.Scratch.Get "nottested") ) }}
+                <td><i>off</i></td>
+                <td></td>
+                <td></td>
+                {{ end }}
+            </tr>
+        {{ end }}
+    {{- end -}}
+</table>
+
+{{ end }}
+
+{{ $nottested := $.Scratch.Get "nottested"  }}
+{{ $tested := $.Scratch.Get "tested" }}
+{{ $passed := $.Scratch.Get "passed"  }}
+{{ $failed := $.Scratch.Get "failed" }}
+
+</details>
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+var data = [{
+  type: "pie",
+  values: [{{ $tested }}, {{ $nottested }}],
+  labels: ["Tested", "Not tested"],
+  domain: {column: 0},
+  name: 'Coverage',
+  textinfo: "label+percent",
+  textposition: "outside",
+  automargin: true
+},{
+  type: "pie",
+  values: [{{ $passed }}, {{ $failed }}],
+  labels: ["Passed", "Failed"],
+  name: 'Results',
+  domain: {column: 1},
+  textinfo: "label+percent",
+  textposition: "outside",
+  automargin: true
+}]
+
+var layout = {
+  title: "Test coverage and results",
+  height: {{ $height }},
+  margin: {"t": 0, "b": 0, "l": 0, "r": 0},
+  showlegend: false,
+  grid: {rows: 1, columns: 2},
+  paper_bgcolor: 'rgba(0,0,0,0)',
+  paper_bgcolor: 'rgba(0,0,0,0)', 
+  plot_bgcolor: 'rgba(0,0,0,0)',
+  font: { color: 'rgba(130,130,130,1)' },
+  legend: { bgcolor: 'rgba(0,0,0,0)' }
+}
+
+Plotly.newPlot('{{ $id }}', data, layout)
+</script>

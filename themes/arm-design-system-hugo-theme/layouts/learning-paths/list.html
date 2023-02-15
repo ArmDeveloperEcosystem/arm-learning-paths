@@ -1,0 +1,250 @@
+{{define "main"}}
+
+<!-- _shared learning path Hugo processing, include those paths as well -->
+{{ $paths_to_list :=   .Pages }}
+
+
+<!-- This assumes that the directory name of a learning path is the same as the .Title | urlize. If this IS NOT true, change '.TITLE | urilze' to get the name of the directory-->
+{{ $section_title := .Title | urlize}}
+{{ range where $.Site.Pages "Params.shared_path" true}}
+    {{ if in .Params.shared_between $section_title}}
+        {{ $paths_to_list = $paths_to_list | append . }}
+    {{end}}
+{{end}}
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-2 u-padding-bottom-2-1/2">
+    <!-- Filter bar on left -->
+    <div class="c-col u-hide lg:u-display-block u-flex-shrink-0" style="width: 320px; max-width: 320px;">
+        <h3 class="u-margin-top-0">Filter</h3>
+        <!-- Subjects, CLOSED SCHEMA -->
+        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Subject" "tagnames" .Params.subjects_filter)}}  
+        <!-- Operating Systems, CLOSED SCHEMA -->
+        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Operating System" "tagnames" .Params.operatingsystems_filter)}} 
+        <!-- Skill level, CLOSED SCHEMA -->
+        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Skill Level" "tagnames" (slice "Introductory" "Advanced"))}}  
+        <!-- Tools Software Languages -->
+        {{ partial "filtering/open-expansion.html" (dict "context" . "displayname" "Tools, Software, and Languages"  "tagnames" .Params.tools_software_languages_filter)}}
+
+    </div>
+
+    <!-- Search & Results on Right -->
+    <div class="c-col">
+
+        <!-- Dedicated area for top realestate content; hidden for now -->
+        <!-- {{ partial "learning-paths/list-top-learning-paths.html" . }}  -->
+
+        <!-- <ads-alert animation="down" animationDelay=100></ads-alert> -->
+        <ads-alert id="new-to-category-alert" has-close-button="false">
+            <a href="intro"><h6 class="basics-title">New to {{.Title}}? Click here to learn the basics.</h6></a>
+        </ads-alert>
+
+
+        <!-- Search (and filter for mobile)-->
+        <div class="u-flex u-justify-content-between c-col c-col-12 u-flex u-position-relative u-width-100% lg:u-width-auto u-margin-bottom-0">
+            <ads-search id="search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search by name"></ads-search>
+            <div>
+                <ads-button id="filter-button" level="tertiary" class="lg:u-hide u-position-relative" type="button" size="default" onclick="mobileFilterClicked(this)">
+                    <i class="fal fa-filter"></i>
+                </ads-button>
+
+                <div id="filters-container" class="u-hide"> <!-- on filter click, remove u-hide class -->
+                    <div id="filters-overlay" class="overlay-styling" tabindex="-1">
+                    </div>
+                    <div class="u-margin-top-1/2 facets-positioning-container">
+                        <div id="facets-background">
+                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Subjects" "routing" "subjects" "tagnames" .Params.subjects_filter)}} 
+                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "OS" "routing" "operatingsystems" "tagnames" .Params.operatingsystems_filter)}} 
+                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Skill Level" "routing" "skilllevels" "tagnames" (slice "Introductory" "Advanced"))}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- Search (and filter for mobile) end-->
+
+
+
+
+
+
+        <!-- Current tag bar -->
+        <div id="current-tag-bar" class="c-row u-margin-left-1/2">
+            <!-- Filled dynamically by javascript & checkboxes; margin applied to tags only-->
+        </div>
+     
+        <!-- Current results bar -->
+        <div id="results-status-bar" class="c-row u-margin-top-1/2 u-margin-left-1">
+            Displaying&nbsp;
+            <span id="currently-shown-number" class="u-text-bold"> {{len $paths_to_list }} </span>
+            &nbsp;of&nbsp;
+            <span id="total-shown-number" class="u-text-bold"> {{len $paths_to_list }} </span>
+            &nbsp;learning paths.
+        </div>
+     
+        <!-- List of learning paths on right -->
+        <div class="c-row">
+            <div class="c-col c-col-12">
+                <!-- CARD vs LIST container-->
+                <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-4 xxxl:u-grid-columns-4 u-margin-top-1">
+                <!-- <div id='path-container' class="u-display-grid u-gap-0 lg:u-grid-columns-1 u-margin-top-1"> -->
+                    {{ range $paths_to_list.ByLastmod.Reverse }}
+                    <!-- This div does two things, iterating over each tag in the taxonomy:
+                        1) Assign tags for filtering the learning path cards 
+                        2) Keeps track of unique tags to generate the filter column  -->
+                    <div class='path-div search-div
+                                {{ with .Params.skillLevels }}
+                                    tag-{{. | urlize}}
+                                {{ end }}
+                                {{ with .Params.subjects }}
+                                    tag-{{. | urlize}}
+                                {{ end }}
+                                {{ with .Params.armips }}
+                                    {{range .}}
+                                        tag-{{. | urlize}}
+                                    {{end}}
+                                {{ end }}
+                                {{ with .Params.operatingsystems }}
+                                    {{ range .}}
+                                        tag-{{. | urlize}}
+                                    {{ end }}
+                                {{ end }}
+                                {{ with .Params.tools_software_languages }}
+                                    {{ range .}}
+                                        tag-{{replace (. | urlize) "+" "plus"}}
+                                    {{end}}
+                                {{ end }}
+                                '>
+
+                        {{if isset .Params "video_url"}}
+
+                            {{$thumbnail := path.Dir (trim .Page.RelPermalink "/")}}
+                            <!-- /learning-paths/microcontroller/video_example/thumbnail.png -->
+                            <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card'>
+                                <ads-card-image slot="image" style="height: 100px;" src="/{{$thumbnail}}/video_example/thumbnail.png" class="u-bg-position-center"></ads-card-image>
+                                <ads-card-content slot="content">
+                                    <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
+                                        {{ upper .Params.subjects }}
+                                    </p>
+                                    <div class="card-title-div">
+                                        <h6 class="search-title card-title u-margin-top-0 u-margin-bottom-1/2">{{.Title}}</h6>
+                                    </div>
+                                    <p class="card-date u-margin-bottom-0">
+                                        <span>
+                                            {{ if eq .Params.skillLevels "Introductory"}}
+                                                <!-- <i style=" vertical-align:baseline; --fa-primary-color: rgb(225,19,131); --fa-secondary-color: rgb(245,130,31);" class="fad fa-signal-bars-fair"></i>&nbsp;&nbsp; -->
+                                                <i style=" vertical-align:baseline; color: var(--arm-web-safe-green); " class="fa fa-signal-bars-fair"></i>&nbsp;&nbsp;
+                                            {{else}}
+                                            <i style=" vertical-align:baseline; color: var(--arm-orange);" class="fa fa-signal-bars-strong"></i>&nbsp;&nbsp;
+                                            {{end}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <span><i class="fa-solid fa-calendar-days"></i></span>
+                                        &nbsp;{{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                                        &nbsp;&nbsp;
+                                        <span><i class="fa-solid fa-clock"></i></span>&nbsp;{{.Params.minutes_to_complete}} minutes
+                                    </p>
+                                    <!-- <ads-tag class="path-card-tag {{.Params.skillLevels}}" text="{{.Params.skillLevels}}"></ads-tag> -->
+                                    <!-- <p class="card-description">{{.Description}}</p> -->
+                                </ads-card-content>   
+                            </ads-card>
+
+
+                        {{else}}
+                            
+                            <!-- CARD vs LIST container-->
+                            <!--
+                            <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card-list'>
+                                <ads-card-content slot="content" style="vertical-align: baseline;">
+                                    <span>
+                                        {{ if eq .Params.skillLevels "Introductory"}}
+                                            <i style=" vertical-align:baseline; color: var(--arm-web-safe-green);" class="fa-solid fa-gauge-simple-min"></i>&nbsp;&nbsp;
+                                        {{else}}
+                                            <i style=" vertical-align:baseline; color: var(--arm-orange);" class="fa-solid fa-gauge-simple-max"></i>&nbsp;&nbsp;
+                                        {{end}}
+                                    </span>
+                                    <span>
+                                        <h5 style="display: inline-block; vertical-align:baseline; max-width: 60%;" class="search-title card-title-list u-margin-top-0 u-margin-bottom-0">{{.Title}}</h5>
+                                    </span>
+                                    <span>
+                                        <p style="display: inline-block; float: right; vertical-align:baseline;" class="card-date u-margin-top-0 u-margin-bottom-0">{{ .Lastmod.UTC.Format "2 January 2006" }}</p>
+                                    </span>
+                                </ads-card-content>   
+                            </ads-card>
+                            <hr class="card-list-divider">
+                            -->
+                            
+                            <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card'>
+                                <ads-card-content slot="content">
+                                    <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
+                                        {{ upper .Params.subjects }}
+                                    </p>
+                                    <div class="card-title-div">
+                                        <h6 class="search-title card-title u-margin-top-0 u-margin-bottom-1/2">{{.Title}}</h6>
+                                    </div>
+                                    <p class="card-date u-margin-bottom-0">
+                                        <span>
+                                            {{ if eq .Params.skillLevels "Introductory"}}
+                                                <!-- <i style=" vertical-align:baseline; --fa-primary-color: rgb(225,19,131); --fa-secondary-color: rgb(245,130,31);" class="fad fa-signal-bars-fair"></i>&nbsp;&nbsp; -->
+                                                <i style=" vertical-align:baseline; color: var(--arm-web-safe-green); " class="fa fa-signal-bars-fair"></i>&nbsp;&nbsp;
+                                            {{else}}
+                                            <i style=" vertical-align:baseline; color: var(--arm-orange);" class="fa fa-signal-bars-strong"></i>&nbsp;&nbsp;
+                                            {{end}}
+                                        </span>
+                                        &nbsp;&nbsp;
+                                        <span><i class="fa-solid fa-calendar-days"></i></span>
+                                        &nbsp;{{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                                        &nbsp;&nbsp;
+                                        <span><i class="fa-solid fa-clock"></i></span>&nbsp;{{.Params.minutes_to_complete}} minutes
+                                    </p>
+                                    <!-- <ads-tag class="path-card-tag {{.Params.skillLevels}}" text="{{.Params.skillLevels}}"></ads-tag> -->
+                                    <!-- <p class="card-description">{{.Description}}</p> -->
+                                </ads-card-content>   
+                            </ads-card>
+                        {{end}}
+                    </div>           
+                    {{ end }}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div> <!-- End of left-right divide -->
+
+{{ partial "filtering/filter-tag.html" . }}
+{{ partial "ads-cards/ads-card-style.html" . }}
+
+<!-- Include javascript to filter and search -->
+<script src="/js/search-and-filter/filter-learning-paths.js"></script>
+<script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
+<script src="/js/search-and-filter/search-logic.js"></script>
+<script src="/js/search-and-filter/search-handling.js"></script>
+
+
+
+
+
+
+
+<script>
+    (() => {
+        ////////// Search 
+
+        // Assign inputChangeHandler to search box
+        const search_box = document.getElementById('search-box');
+        search_box.inputChangeHandler = searchHandler_LearningPaths;
+
+        // Handle search term from URL
+        let url_str = window.location.search;
+        if (url_str.includes('search=')) {
+            let search_string = parseParamsFromURL(url_str);
+
+            // Call search handler to execute
+            search_box.setAttribute('search-value',search_string);
+            searchHandler_LearningPaths(search_string);
+        }
+    })();
+</script>
+
+{{end}}

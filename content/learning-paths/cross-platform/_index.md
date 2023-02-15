@@ -1,0 +1,74 @@
+---
+softwares_filter:
+- AWS CodeBuild
+- x265
+- Kafka
+- Zookeeper
+- Memcached
+- tensorflow
+- MongoDB
+- C
+- Fortran
+- Python
+- SQL
+- MySQL
+- InnoDB
+- Pointer Authentication
+- PostgreSQL
+- ArmRAL
+- snappy
+- Assembly
+- Vectorscan
+- zlib
+- i3
+- Alacritty
+- NeoVim
+- SSH
+- VS Code
+- VNC
+- C++
+- Java
+- Verilog
+- JavaScript
+- TensorFlow
+- Docker
+- Yocto Linux
+- yml
+title: Cross Platform
+tools_filter:
+- Terraform
+- docker and docker-compose
+- go
+- Docker
+- gcc
+- AWS EC2
+- cbuild
+- GCC
+- Snort
+- Armclang
+- Arm Forge
+- gdb
+- Ansible
+- Arm Mobile Studio
+- Xilinx Vivado
+- Xilinx Vitis
+- Arm Development Studio
+- Arm Compiler for Embedded
+- Arm Fast Models
+- DSTREAM
+- Arm Virtual Hardware
+- GitHub
+- Qemu
+- TVM
+- PaddleOCR
+- Keil MDK
+- MDK
+- Tensorflow
+- STM Cube AI
+- Keil Studio Cloud
+- CMSIS-DAP
+- Corstone-300 FVP
+- cmake
+- Arm Ecosystem FVP
+- ULINK
+---

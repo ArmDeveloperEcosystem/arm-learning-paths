@@ -1,0 +1,54 @@
+---
+operatingsystems:
+  - Linux
+  - Windows
+  - macOS
+  - ChromeOS
+
+  - iOS
+  - Android
+  
+  - RTOS
+  - Baremetal
+  
+  - other
+
+
+subjects:
+  server-and-cloud:
+    - ML
+    - CI-CD
+    - Performance and Architecture
+    - Containers and Virtualization
+    - Databases
+    - Storage
+    - Web
+    - Libraries
+  desktop-and-laptop:
+    - Migration to Arm
+    - CI-CD
+    - Performance and Architecture
+    - Containers and Virtualization
+  mobile:
+    - Gaming
+    - AR-VR
+    - Graphics
+    - ML
+    - CI-CD
+    - Performance and Architecture
+  embedded:
+    - ML
+    - CI-CD
+    - Performance and Architecture
+    - Containers and Virtualization
+    - Automotive 
+    - Storage
+    - Embedded Linux
+  microcontroller:
+    - ML
+    - CI-CD
+    - Performance and Architecture
+    - Security
+    - RTOS Fundamentals
+    - Libraries
+    - Virtual Hardware

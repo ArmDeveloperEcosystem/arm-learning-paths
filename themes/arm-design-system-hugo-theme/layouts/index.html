@@ -1,0 +1,63 @@
+{{ define "main" }}
+<!-- Defines homepage layout-->
+
+<!-- List of Learning Path Topics -->
+<div class="c-row u-margin-top-1">
+    <div class="c-col">
+        <div class="u-display-grid u-gap-2 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
+
+            {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
+            <ads-card has-hover-effect class="main-topic-card" link="{{.Permalink}}">
+                <ads-card-image slot="image" src="{{.Params.cardimage}}" class="u-bg-position-top"></ads-card-image>
+                <ads-card-content slot="content">
+                    <h2 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{.Title}}</h2>
+                    
+                    <p class="main-topic-subtitle">
+                        {{range .Params.key_ip}}
+                        {{.}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        {{end}}
+                    </p>
+                    <!--
+                    {{range .Params.key_ip_icons}}
+                    <img src="{{.}}" width="100px;">&nbsp;&nbsp;
+                    {{end}}
+                    -->
+                    <p class="u-margin-bottom-0">
+                        {{range .Params.differentiating_info}}
+                        {{.}}.&nbsp;&nbsp;&nbsp; 
+                        {{end}}
+                    </p>                    
+
+                </ads-card-content>   
+            </ads-card>
+            {{ end }}
+
+            <ads-card class="main-topic-card">
+                <ads-card-image slot="image" src="/img/main-topic-backgrounds/tools.jpg" class="u-bg-position-center"></ads-card-image>
+                <ads-card-content slot="content">
+                    <p>Looking for instructions to install a tool?</p>
+                        <ads-search has-search-button id="search-box" placeholder="Search by tool name" class="u-width-auto"></ads-search>
+                        <ads-cta-link link='/install-tools' class="u-margin-top-1/2">See all</ads-cta-link>
+                </ads-card-content>
+            </ads-card>
+
+        </div>
+    </div>
+</div>
+
+<div class="u-margin-4"></div>
+
+<!-- Search Submit handling -->
+<script src="/js/search-and-filter/search-handling.js"></script>
+<script>
+      (() => { 
+          document.querySelector('#search-box').searchSubmitHandler = searchSubmit_Tools;
+      })();
+</script>
+
+
+{{ partial "ads-cards/ads-card-style.html" . }}
+
+
+{{ end }}
+

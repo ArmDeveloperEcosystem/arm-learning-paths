@@ -1,0 +1,54 @@
+<meta charset="utf-8">
+
+<!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" as="style" crossorigin="anonymous" />
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
+
+<!-- FontAwesome import (not sure if needed seperate than ADS)-->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+<!-- Viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- ADS Imports
+<link rel="stylesheet" 
+      href="https://cdn.designsystem.arm.com/rel/4.8.2/arm-design-system.css" 
+      integrity="sha384-kC01LgmNAJWWcg8CmV2s3vSbgQ99cYX16td2iO1izkU1OFF5Sv0FqDVqY4ZdOPGQ" 
+      crossorigin="anonymous">
+
+<script type="module" 
+      src="https://cdn.designsystem.arm.com/rel/4.8.2/arm-design-system/arm-design-system.esm.js" 
+      integrity="sha384-xc2X0GG/SI4J9Xozb8s5Fhuw/yyhF9IjHvNdM5Svi6HmiTnNjJedR0oz+LoT43wH" 
+      crossorigin="anonymous"></script>
+-->
+<link rel="stylesheet" 
+      href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" 
+      integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" 
+      crossorigin="anonymous">
+
+<script type="module" 
+      src="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system/arm-design-system.esm.js" 
+      integrity="sha384-K+IGYCWaqyh5adrYnimAXzUamdfAwRYJGwwrybHfAhmsehOIcexAPoEoEyLRJwkC" 
+      crossorigin="anonymous"></script>
+
+
+      
+<!-- Cookie prompt, minimal -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+
+<!-- Prism imports, for style (JS is added in baseof) -->
+<link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" /> 
+
+<!-- All ADS Hugo theme imports, custom for this site -->
+<link href="/css/cross-page.css" rel="stylesheet" /> 
+<link href="/css/content.css" rel="stylesheet" /> 
+<link href="/css/mobile.css" rel="stylesheet" /> 
+<link href="/css/home.css" rel="stylesheet" /> 
+<link href="/css/list-learning-paths.css" rel="stylesheet" /> 
+
+
+<!-- Display the title of the page -->
+{{ $title := print .Site.Title " | " .Title }}
+{{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+<title>{{ $title }}</title>

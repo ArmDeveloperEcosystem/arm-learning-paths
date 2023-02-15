@@ -1,0 +1,42 @@
+<!-- Scratchpad gets populated through call to .Inner -->  
+{{- .Inner -}}
+
+<div class="code-tabpane">
+  <ads-horizontal-tabs id="tabs-{{- $.Ordinal -}}" alt-emphasis="yes">
+    {{- range $index, $element := $.Scratch.Get "tabs" -}}
+      <div slot="content" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
+        <div class="code-toolbar">
+          <pre class="language-en" {{if $element.highlight_lines}} data-line={{$element.highlight_lines}} {{end}}>
+            <code class="{{if $element.language}}language-{{$element.language}}{{else}}language-en{{end}}">
+              {{.content}}
+            </code>
+          </pre>
+        </div>
+      </div>
+    {{end}}
+  </ads-horizontal-tabs>
+</div>
+
+<script>
+  (() => {
+    const tabs = document.querySelector('#tabs-{{- $.Ordinal -}}');
+    tabs.data = [
+      {{- range $index, $element := $.Scratch.Get "tabs" -}}
+        { id: "tab-{{- $.Ordinal -}}-slot-{{$index}}", label: "{{$element.header}}" },
+      {{end}}
+    ];
+    tabs.tabSelectHandler = (evt) => {
+      // This handler isn't doing anything right now. Could be deleted as there is no auto switching 
+                                                                // 'tab-0-slot-1' = evt.id
+      let tab_num = evt.id.split('-slot')[0];                   // 'tab-0'
+      let tabs_id = tab_num.split('-').join('s-');              // 'tabs-0' = id of top level ads-horrizontal-tabs
+      let button_id = "tabs:"+tabs_id+":tab:"+evt.id;           //  tabs:tabs-0:tab:tab-0-slot-1
+
+      let tab_element = document.getElementById(tabs_id);             // get ads-horizontal-tab element 
+      let button = tab_element.shadowRoot.getElementById(button_id);  // get button below this element
+      let tab_language_text = button.outerText;                       // relevent text: 'x86_64', 'aarch64', etc. 
+      console.log('Setting tab to ',tab_language_text);
+    };
+  })();
+</script>
+

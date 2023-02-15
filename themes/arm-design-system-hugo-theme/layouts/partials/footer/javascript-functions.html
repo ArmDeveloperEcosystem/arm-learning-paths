@@ -1,0 +1,24 @@
+<!-- Include javascript to store local preferences of buttons -->
+<script src="/js/stored-user-preferences.js"></script>
+
+<!-- Include code highlighting javascript, Prism-->
+<script src="/js/prism.js"></script> 
+
+<!-- Cookie information -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script>
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#002b49"     // arm-dark-blue
+      },
+      "button": {
+        "background": "#ffc700"     // arm-yellow
+      }
+    },
+    "content": {
+      "dismiss": "Accept and hide this message",
+      "href": " https://www.arm.com/company/policies/cookies"
+    }
+  });
+</script> 

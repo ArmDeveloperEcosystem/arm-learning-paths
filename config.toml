@@ -1,0 +1,66 @@
+baseURL = '/'
+languageCode = 'en-us'
+title = 'Arm Software Developers'
+theme = "arm-design-system-hugo-theme"
+
+enableGitInfo = true
+
+enableRobotsTXT = true
+
+[deployment]
+[[deployment.targets]]
+name = "aws"
+URL = "s3://armswdev.tk?region=us-east-1"
+cloudFrontDistributionID = "E1KJFR5JSKYU64"
+
+[frontmatter]
+    lastmod = [ "lastmod", ":git", "date", "publishDate" ]
+
+[taxonomies]
+    subject                 = "subjects"
+    operatingsystem         = "operatingsystems"
+    skilllevel              = "skilllevels"
+    tool_software_language  = "tools_software_languages"
+    armip                   = "armips"
+
+[permalinks]
+    tools_software_languages = "/tag/:slug/"
+    operatingsystem = "/tag/:slug/"
+    subjects = "/tag/:slug/"
+
+
+
+[related]
+    threshold = 0 
+    includeNewer = true
+    toLower = false
+
+    [[related.indices]]
+        name = "software"
+        weight = 100
+
+    [[related.indices]]
+        name = "tools"
+        weight = 80
+    
+    [[related.indices]]
+        name = "armips"
+        weight = 50
+
+[params]
+# Repository configuration (URLs for in-page links to opening issues and suggesting changes)
+github_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-paths"
+# An optional link to a related project repo. For example, the sibling repository where your product code lives.
+github_project_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-paths"
+
+# Specify a value here if your content directory is not in your repo's root directory
+# github_subdir = ""
+
+# Uncomment this if your GitHub repo does not have "main" as the default branch,
+# or specify a new value if you want to reference another branch in your GitHub links
+github_branch= "main"
+
+# For metadata posting on socials
+  title = 'Arm Learning Paths'
+  description = 'Learn about software development and tools for all types of Arm platforms'
+  image = '/img/logo.png'

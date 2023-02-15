@@ -1,0 +1,60 @@
+
+
+
+/*********************************************************************            
+
+        Main Topic Cards
+
+**********************************************************************/
+
+ads-card.main-topic-card {
+    --ads-card-border-radius: 10px;
+    --ads-card-border-width: 2px;
+
+    --ads-card-border-color-hover: var(--arm-orange);
+}
+
+html[theme='dark'] ads-card.main-topic-card {
+    --ads-card-background-color: var(--arm-color-surface);
+    --ads-card-background-color-hover: var(--arm-color-surface);
+
+    --ads-card-border-color: var(--arm-black);
+
+    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(255, 255, 255, 0.25);
+}
+
+html[theme='light'] ads-card.main-topic-card,  html[theme='sw-hub'] ads-card.main-topic-card  {
+    --ads-card-background-color: var(--white);
+    --ads-card-background-color-hover: var(--white);
+
+    --ads-card-border-color: var(--arm-light-grey);
+
+    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(0,0,0,0.25);
+}
+
+
+/* Title styling */
+/**************************************/
+ads-card.main-topic-card  .main-topic-title {
+    color: var(--arm-blue);
+}
+
+ads-card.main-topic-card:hover  .main-topic-title {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-orange);
+}
+
+html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-title {
+    font-family: "Noi Grotesk", sans-serif;
+}
+
+
+/* Subtitle styling */
+/**************************************/
+ads-card.main-topic-card  .main-topic-subtitle {
+    color: var(--arm-dark-grey);
+}
+
+html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-subtitle {
+    font-family: "Source Code Pro", monospace
+}

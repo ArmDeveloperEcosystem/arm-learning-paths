@@ -1,0 +1,4 @@
+DirectoryPath: "public"
+IgnoreDirectoryMissingTrailingSlash: True
+IgnoreURLs:
+- "fonts.gstatic.com"

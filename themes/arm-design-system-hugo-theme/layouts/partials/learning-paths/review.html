@@ -1,0 +1,88 @@
+<script type="text/javascript">      
+  
+    function handleIt() {
+
+        // Hide all info_texts by default to clear them.
+        const div_help_text = document.querySelectorAll('div.info_text');
+        const correct_div = document.querySelectorAll('div.answer.correct');
+
+        div_help_text.forEach(explanation_div => {
+            //let icon ='<span class="fa-solid fa-circle-check"></span>'
+            //explanation_div.innerHTML(icon);
+            explanation_div.removeAttribute('hidden');
+        });
+        
+        correct_div.forEach(div => {
+            div.classList.add('show');
+        });       
+        
+    }
+  </script>
+
+
+<!-- Markdown content -->
+<div class="content-box">
+    <h2 >What you've learned</h2>
+    {{ range (index .learningpathfiles 0).Params.learning_objectives }}
+        <li class="u-margin-left-2">{{.}}</li>
+    {{end}}
+</div>
+
+
+<!-- Markdown metadata -->
+<div class="content-box">
+    <h2>Knowledge Check</h2>  
+    
+    <form action="javascript:handleIt()">
+            {{range $index, $q := .context.Params.review}}
+                {{$q_num := (add $index 1)}}
+                {{ with $q.questions}}
+                        <!-- Questions -->
+                        <p class="u-margin-bottom-0 u-margin-top-1">{{.question}}</p>
+                        <div id="Q{{$q_num}}-explanation" class="info_text" hidden>
+                                <p class="u-margin-left-2 info_text_paragraph">-> {{.explanation}}</p>
+                        </div>
+        
+                        {{ range $a_num, $answer := .answers }}
+                        <!-- div id = div-q_num-a_num -->
+                        <!-- div class is CORRECT only if it is noted in the metadata-->
+                        <!-- id = q_num-a_num-->
+                        <!-- name = question-q_num-->
+                        <div id="div-{{$q_num}}-{{add $a_num 1}}" class="u-padding-left-1 answer {{if eq $q.questions.correct_answer (add $a_num 1)}}correct{{end}}" >
+                            <input type="radio" class="u-margin-bottom-1/2" id="answer-{{$q_num}}-{{add $a_num 1}}" name="question-{{$q_num}}">
+                            <label class="u-margin-left-1/2" for="answer-{{$q_num}}-{{add $a_num 1}}">{{.}}</label>
+                        </div>
+                        {{end}}
+
+                        <!-- End of Questions-->
+                {{end}}
+            {{end}} 
+
+    <br>
+    <input type="submit" value="See Answers">
+    </form>      
+</div>
+
+
+
+
+
+
+<style>
+    div.answer.correct.show {
+        border-radius: 10px;
+        background-color: var(--arm-green);
+    }
+
+    html[theme='dark']     div.answer.correct.show {
+        background-color: var(--arm-web-safe-green);
+    }
+
+    p.info_text_paragraph {
+        color: var(--arm-web-safe-green);
+    }
+
+    html[theme='dark'] p.info_text_paragraph {
+        color: var(--arm-green);
+    }
+</style>

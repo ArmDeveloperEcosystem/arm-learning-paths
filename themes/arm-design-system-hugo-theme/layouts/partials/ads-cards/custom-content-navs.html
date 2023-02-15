@@ -1,0 +1,10 @@
+<a class="a-tab" href="{{.context.Permalink}}">
+    <div class="c-row tab-row {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">
+        <div class="tab-right-card
+            {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">
+            <h6 style="margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; font-size:1em;">
+                {{ if eq .context.File.TranslationBaseName "_index" }} Introduction {{else}} {{.context.Title}} {{ end }}
+            </h6>
+        </div>
+    </div>
+</a>

@@ -1,0 +1,173 @@
+
+
+ads-alert {
+    margin-top: -32px;
+    z-index: 1; /* mandate lower z-index to enable filter button to grey out this alert as well; non essentaial */
+}
+html[theme="dark"]  ads-alert { 
+    /*--ads-alert-background-color: var(--arm-color-overlay-dark);*/
+    --ads-alert-background-color: var(--arm-color-surface);
+    --ads-alert-color: white;
+}
+html[theme="light"] ads-alert { 
+    /*--ads-alert-background-color: var(--white);*/
+    --ads-alert-background-color: var(--arm-light-grey-alt);
+}
+ads-alert a {
+    color: var(--arm-blue); 
+    text-decoration: none;
+}
+
+/*------------------------------------------------------------
+
+        Learning Path / Tool Install Features
+
+------------------------------------------------------------*/
+
+
+/*          Path Cards 
+***************************************************************/
+ads-card.path-card {
+    --ads-card-border-radius: 10px;
+    --ads-card-border-width: 2px;
+    --ads-card-border-color: var(--arm-light-grey-alt-2);
+    --ads-card-background-color: var(--white);
+
+    --ads-card-border-color-hover: var(--arm-orange);
+
+    --ads-card-background-color-hover: var(--arm-light-grey);
+    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(0,0,0,0.25);
+}
+html[theme='dark'] ads-card.path-card {
+    --ads-card-background-color: var(--arm-color-overlay-dark);
+    --ads-card-border-color: var(--arm-black);
+
+    --ads-card-background-color-hover: var(--black);
+    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(255, 255, 255, 0.25);
+}
+
+
+.basics-title:hover {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-orange);
+    cursor: pointer;
+}
+.basics-title {
+    font-size: 1.15em;
+    margin: 0;
+    color: var(--arm-blue);
+    font-weight: bold;
+}
+
+ads-card.path-card:hover  .card-title {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-orange);
+}
+
+ads-card.path-card  .card-title {
+    font-size: 1.15em;
+}
+
+ads-card.path-card .card-title-div {
+    min-height: 85px;
+}
+
+
+
+
+
+
+
+
+
+/*          Filters
+***************************************************************/
+
+    ads-expansion-panel.learning-path-filters {
+        --ads-expansion-panel-border-color: var(--arm-light-grey);
+
+        --ads-expansion-panel-content-background-color: var(--arm-light-grey-alt);
+
+        --ads-expansion-panel-toggle-background-color: var(--arm-light-grey-alt);
+        --ads-expansion-panel-toggle-background-color-hover: var(--arm-light-grey-alt);
+
+    }
+
+    html[theme='dark'] ads-expansion-panel.learning-path-filters {
+        --ads-expansion-panel-border-color: var(--arm-black);
+
+        --ads-expansion-panel-content-background-color: var(--arm-color-surface);
+
+        --ads-expansion-panel-toggle-background-color: var(--arm-color-surface);
+        --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-surface);
+
+    }
+
+    ads-checkbox {
+        --ads-checkbox-margin-left: 0px;
+    }
+
+
+
+    /* inspiration from here:   https://stackoverflow.com/questions/4253920/how-do-i-change-the-color-of-radio-buttons   */
+    .ads-radio-style {
+        display: inline-block;
+        position: relative;
+        padding: 0;
+        margin: 10px 0 0;
+      }
+      
+      .ads-radio-style input[type='radio'] {
+        display: none;
+      }
+      
+      .ads-radio-style label {
+        color: var(--ads-checkbox-label-color);
+        font-weight: normal;
+      }
+      
+      .ads-radio-style label:before {
+        vertical-align: top; 
+        content: " ";
+        display: inline-block;
+        position: relative;
+        top: 5px;
+        margin: 0 8px 0 0;
+        width: 16px;
+        height: 16px;
+        border-radius: 11px;
+        border: 1px solid var(--ads-checkbox-border-color);
+        background-color: var(--ads-checkbox-background-color);
+      }
+    
+      .ads-radio-style input[type=radio]:hover + label:after {
+        border-radius: 11px;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 9px;
+        left: 4px;
+        content: " ";
+        display: block;
+        background: var(--ads-checkbox-cross-color-hover);  /* depends on theme */
+      }
+
+
+      .ads-radio-style input[type=radio]:checked + label:before {
+        border-color:var(--ads-checkbox-border-color-checked);
+      }
+
+      .ads-radio-style input[type=radio]:checked + label:after {
+        border-radius: 11px;
+        width: 8px;
+        height: 8px;
+        position: absolute;
+        top: 9px;
+        left: 4px;
+        content: " ";
+        display: block;
+        background: var(--ads-checkbox-cross-color-checked);
+      }
+
+
+

@@ -1,0 +1,127 @@
+{{define "main"}}
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
+    <div class="c-col">
+        <div class="content-box">
+            
+            <!--VIDEO, copied from youtube shortcode -->
+            <div class="u-bg-position-center u-margin-top-2 u-margin-right-3 u-margin-left-3" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe src="https://www.youtube-nocookie.com/embed/{{ .Params.video_url }}?rel=0&start=0"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;"
+                        allowfullscreen="" title="{{ .Params.title }}"></iframe>
+            </div>
+              
+
+            <br>
+            <h2>{{.Params.title}}</h2>
+            <p class="u-margin-bottom-0"><span class="video-author">{{.Params.author_primary}}</span>: {{.Params.author_info}}</p>
+            <p class="u-margin-bottom-0">
+                <span><i class="fa-solid fa-calendar-days"></i></span>&nbsp;
+                {{ .Params.video_date }}
+            </p>   
+            <ads-tag class="path-card-tag {{.Params.skillLevels}}" text="{{.Params.skillLevels}}"></ads-tag>
+            <br>
+            <br>
+
+            <p>
+                {{.Params.Description}}
+            </p>
+
+        </div>
+
+        <!-- Related Content, duplicated from next-steps -->
+        
+<!-- 3 columns of helpful hints-->
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
+            <div class="content-box">
+                <h4>Similar Learning Paths</h4>
+                <p>To learn about topics related to this one.</p>
+                <div class="c-row">
+                    <div class="c-col">
+                        <div class="u-display-grid u-gap-1 u-grid-columns-1">
+                            {{$related := (where (.Site.Pages.Related . ) "Params.learning_path_main_page" "yes") | first 2 }}
+                            {{range $related}}
+                            <ads-card has-hover-effect  link="{{.RelPermalink}}" class='path-card'>
+                                <ads-card-content slot="content">
+                                    <ads-tag class="path-card-tag {{.Params.skillLevels}}" text="{{.Params.skillLevels}}"></ads-tag>
+                                    <h6 class="card-title u-margin-top-1/2 u-margin-bottom-1/2 ">{{.Title}}</h6>
+                                    <p class="card-description u-font-size-80%">{{.Description}}</p>
+                                </ads-card-content>   
+                            </ads-card>        
+                            {{end}}                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-box">
+                <h4>Explore Tags</h4>
+                <p>Look at more learning paths under these tags.</p>
+                    {{ range .Params.armips }}
+                        <ads-tag    href='{{ "/" | relLangURL}}armips/{{. | urlize}}'>
+                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                            <span class="fa-solid fa-tag"></span>
+                            {{ replace . "_" " " }}
+                        </ads-tag>
+                        <br>
+                    {{ end }}
+                    {{ range .Params.softwares }}
+                        <ads-tag    href='{{ "/" | relLangURL}}softwares/{{. | urlize}}'>
+                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                            <span class="fa-solid fa-tag"></span>
+                            {{ replace . "_" " " }}
+                        </ads-tag>
+                        <br>
+                    {{ end }}
+                    {{ range .Params.tools }}
+                        <ads-tag    href='{{ "/" | relLangURL}}tools/{{. | urlize}}'>
+                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                            <span class="fa-solid fa-tag"></span>
+                            {{ replace . "_" " " }}
+                        </ads-tag>
+                        <br>
+                    {{ end }}
+            </div>
+            <div class="content-box">
+                <h4>Further Readings</h4>
+                <p>With more information on topics in this learning path.</p>
+                {{ range $index, $r := .Params.further_reading }}
+                    {{ with $r.resource}}
+                        <i class='u-margin-right-1 fa-solid 
+                                    {{if eq .type "blog" }}
+                                        fa-pen-to-square' title='Blog'
+                                    {{ else if eq .type "website" }}
+                                        fa-browser' title='External website'
+                                    {{else if eq .type "documentation" }}
+                                        fa-book' title='Documentation'
+                                    {{else}}
+                                        fa-book' title='Reference'
+                                    {{end}}
+                                ></i>
+                        <a href="{{ .link }}" target="_blank">{{ .title }}</a>
+                        <br class="u-margin-bottom-1">
+                        <!--
+                            <li class="u-margin-left-1"><a href="{{ .link }}" target="_blank">{{ .title }}</a></li>
+                        -->
+                    {{end}}
+                {{end}}
+            </div>
+        </div>
+    </div>
+</div>  
+
+
+
+    </div>
+</div>
+
+{{ partial "ads-cards/ads-card-style.html" . }}
+<style>
+    .video-author {
+        color: var(--arm-green);
+    }
+    [html="dark"].video-author {
+    }
+</style>
+{{end}}

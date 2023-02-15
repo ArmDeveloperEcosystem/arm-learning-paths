@@ -1,0 +1,14 @@
+{{ $_hugo_config := `{ "version": 1 }` }}
+
+{{ $title := delimit $.Params " " }}
+{{ if $title }}
+{{else}}
+    {{$title = "Tip" }}
+{{end}}
+
+<ads-card class="notice-callout">
+    <ads-card-label slot="label">{{$title}}</ads-card-label>
+    <ads-card-content slot="content">
+        {{.Inner}}
+    </ads-card-content>
+</ads-card>

@@ -1,0 +1,29 @@
+
+<div id="expanded-masthead">
+  <ads-masthead theme="dark">
+      {{partial "header/breadcrumbs.html" .}}
+
+      <!-- Change title slightly for Tag entries -->
+      {{ if eq .Kind "term" }}
+        <h1 id="ads-masthead-title" slot="heading"><span>Tag: {{.Title}}</span></h1>
+      {{else}}
+        <h1 id="ads-masthead-title" slot="heading"><span>{{.Title}}</span></h1>
+      {{end}}
+  </ads-masthead>
+</div>
+
+<div id="only-breadcrumb-masthead" hidden>
+    {{partial "header/breadcrumbs.html" .}}
+</div>
+
+
+<style>
+  #only-breadcrumb-masthead {
+    width: 100%;
+    
+    background-color: black;
+
+    padding-left: 40px; /* u-padding-left-2-1/2 */
+    padding-bottom: 8px; 
+  }
+</style>

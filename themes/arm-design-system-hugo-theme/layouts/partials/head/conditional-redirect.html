@@ -1,0 +1,10 @@
+
+
+{{ $lastUrlElement := index (split .Page.Permalink "/") (sub (len (split .Page.Permalink "/")) 2) }}
+
+{{ $pages_to_redirect_home := slice "learning-paths" "cross-platform" }}
+
+{{if in $pages_to_redirect_home $lastUrlElement}}
+<meta http-equiv="refresh" content="0; url=/" />
+{{end}}
+

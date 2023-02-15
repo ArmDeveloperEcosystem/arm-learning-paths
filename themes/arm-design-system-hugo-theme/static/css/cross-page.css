@@ -1,0 +1,71 @@
+/*********************************************************************            
+        Fonts
+                Heading: Noi Grotesk
+                Subheading: Source Code
+                Body: Lato
+        Background colors
+
+**********************************************************************/
+
+/* UNIVERSAL */
+/****************************************************/
+
+/* NOT WORKING, get Jo to help: Make font-size standard */
+/*body {
+        font-size: var(--ads-font-size-small);
+    }
+    @media (max-width: 576px) {
+        body {
+            font-size: var(--ads-font-size-large);
+        }
+    }
+*/    
+
+/* Hide breadcrumb when small screen. */
+@media (max-width: 576px) {
+        #breadcrumb-element {
+                visibility: hidden !important;
+        }
+}
+
+/* Replicate style of breadcrumb in masthead when alone. */
+#only-breadcrumb-masthead {
+width: 100%;
+
+background-color: black;
+
+padding-left: 40px; /* u-padding-left-2-1/2 */
+padding-bottom: 8px; 
+}
+
+
+/* Remove text decorations on all a links */
+a:hover {
+        text-decoration: none;
+}
+
+
+/* Light Theme */
+/****************************************************/
+html[theme='light'] body {
+        background-color: var(--arm-light-grey-alt);
+}
+
+/* Dark Theme */
+/****************************************************/
+html[theme='dark'] body {
+        background-color: var(--arm-color-surface);
+        
+}
+
+/* SW-Hub Theme */
+/****************************************************/
+html[theme='sw-hub'] body {
+        background-color: var(--arm-light-grey);        
+}
+
+html[theme='sw-hub'] h1,h2,h3,h4,h5,h6 {
+        /*font-family: "Noi Grotesk", sans-serif; */
+}
+
+

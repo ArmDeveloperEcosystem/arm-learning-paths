@@ -1,0 +1,121 @@
+{{define "main"}}
+
+
+{{ $tools_to_list := where .Site.Pages "Params.tool_install" true}}
+
+
+<p class="u-margin-top-1 u-margin-left-1 u-margin-bottom-1/2 u-font-size-75%">
+    Don't know a tool by name to search for? Try these common search terms:  
+    <a href="/install-tools/?search=compiler">compiler</a>.
+</p>
+
+<ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search by tool name"></ads-search>
+
+<!-- Current results bar -->
+<div id="results-status-bar" class="c-row u-margin-left-1 u-margin-top-1/2" style="min-height: 30px;">
+    Displaying&nbsp;
+    <span id="currently-shown-number" class="u-text-bold"> {{len $tools_to_list }} </span>
+    &nbsp;of&nbsp;
+    <span id="total-shown-number" class="u-text-bold"> {{len $tools_to_list }} </span>
+    &nbsp;tools.
+</div>
+
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-display-grid u-gap-1 xs:u-grid-columns-1 sm:u-grid-columns-2 md:u-grid-columns-3 lg:u-grid-columns-4 xl:u-grid-columns-5 u-margin-top-1">
+            {{ range $tools_to_list}}
+            <!-- Div used for search hiding-->
+            <div class='search-div
+                        {{ with .Params.additional_search_terms }}
+                            {{range .}}
+                                term-{{. | urlize}}
+                            {{end}}
+                        {{ end }}'>
+                <ads-card has-hover-effect class="tool-card" link="{{.Permalink}}">
+                    <ads-card-content class="tool-card-content u-margin-top-0 u-margin-bottom-0" slot="content">
+                        <p class="search-title u-margin-top-0 u-margin-bottom-0 u-font-size-125%">{{.Title}}</p>
+                    </ads-card-content>   
+                </ads-card>
+            </div>
+            {{end}}
+        </div>
+        <div id="additional-search-term-container"></div>
+    </div>
+</div>
+
+<!-- Include javascript to filter and search -->
+<script src="/js/search-and-filter/search-logic.js"></script>
+<script src="/js/search-and-filter/search-handling.js"></script>
+
+
+
+<script>
+    (() => {
+        // Assign inputChangeHandler to search box
+        const search_box = document.getElementById('search-box');
+        search_box.inputChangeHandler = searchHandler_Tools;
+
+        // Handle search term from URL
+        let url_str = window.location.search;
+        if (url_str.includes('search=')) {
+            let search_string = parseParamsFromURL(url_str);
+
+            // Call search handler to execute
+            search_box.setAttribute('search-value',search_string);
+            searchHandler_Tools(search_string);
+        }
+    })();
+</script>
+
+
+
+
+
+<style>
+
+    ads-card.tool-card {
+        height: 112px;
+        --ads-card-border-width: 1px;
+        --ads-card-border-color: var(--arm-black);
+        --ads-card-border-color-hover: var(--arm-orange);
+    }
+
+    ads-card-content.tool-card-content::before {
+        background-color: var(--arm-web-safe-blue);
+        content: '';
+        height: calc(100% + 2px);
+        left: -1px;
+        position: absolute;
+        top: -1px;
+        transition: background-color;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+        width: 12px;
+      }
+
+    
+
+      ads-card.tool-card:hover ads-card-content.tool-card-content::before {
+        background-color: var(--arm-orange);
+      }
+      ads-card.tool-card p {
+        color: var(--arm-web-safe-blue);
+        margin-left: 8px;
+        transition: color;
+
+        transition: margin-left;
+        transition-duration: 0.3s;
+        transition-timing-function: ease-in-out;
+      }
+      ads-card.tool-card:hover p {
+        color:var(--arm-orange);
+        margin-left: 16px;
+      }
+    
+    </style>
+
+
+
+
+
+{{end}}

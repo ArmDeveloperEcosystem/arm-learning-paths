@@ -1,0 +1,105 @@
+
+
+/*****************************************************************
+      
+        Mobile styling 
+
+*****************************************************************/
+
+div.overlay-styling {
+    background-color: rgba(0,0,0,.75);
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 2;
+}
+
+
+/* Basic behavior of overlay and z-indexing components */
+ads-button#filter-button.is-open { z-index: 5;}
+
+html[theme='dark']   div#facets-background { background-color: var(--arm-color-surface); }
+html[theme='light']  div#facets-background { background-color: var(--arm-light-grey-alt);}
+html[theme='sw-hub'] div#facets-background { background-color: var(--arm-light-grey-alt);}
+
+
+
+/************ 
+    Content pages only (non-list)
+*************/
+
+
+
+/* overall mobile container */
+div.content-head-container-mobile {
+    position:sticky; 
+    top:0px;
+    z-index: 4;
+    width: 100%;
+}
+
+/* Sticky header div, not including expanded nav pane */
+div.content-head-mobile {
+    /* always give position  and high z-index as always prominient */
+    position: relative;
+    z-index: 4;
+
+    display: flex;
+
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--arm-dark-grey);
+
+    background-color: var(--arm-light-grey);
+}
+html[theme='dark'] div.content-head-mobile {
+    background-color: var(--arm-color-overlay-light);
+}
+
+/* sticky header icon and text styling */
+ads-button.content-header-btn-mobile {
+    --ads-button-background-color-tertiary: var(--arm-blue);
+    cursor: pointer;
+
+}
+.content-header-txt-mobile {
+    font-weight: bold;
+}
+
+/* ensure dropdown menu appears in the right location and is visible */
+div.facets-positioning-container {
+    position: absolute;
+    width: 100%;
+    z-index: 5; 
+    
+    right: 0px;
+}
+
+.content-individual-mobile {
+    padding-left: 16px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: var(--arm-dark-grey);
+
+    background-color: var(--arm-light-grey-alt-2);
+}
+html[theme='dark'] .content-individual-mobile {
+    background-color: var(--arm-dark-grey-alt);
+}
+
+#content-table-of-contents-mobile.inactive:hover { border-color: var(--arm-orange); }
+.content-individual-txt-mobile { margin: 0px; }
+.content-individual-txt-mobile.active { color: var(--arm-light-blue); cursor: default ;}
+.content-individual-txt-mobile.inactive:hover { color: var(--arm-orange);} /* change color on inactive only */

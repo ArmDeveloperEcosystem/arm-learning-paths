@@ -1,0 +1,68 @@
+{{define "main"}}
+
+<!-- Define variables for dynamic creation-->
+{{ $thisdir := .File.Dir }}
+{{ $thisfile:= .File.TranslationBaseName}}
+{{ $learningpathfiles := slice }}
+
+
+
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
+    <!-- Left pane -->
+    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0 card-tab-col">
+        <div style="position:sticky; top:5px;">
+
+            <!-- Title of _index.md always top left -->
+            {{ with .Site.GetPage $thisdir}}
+                <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ .Params.Title }}</h6>
+            {{ end }}
+
+
+            <!-- Dynamic, content ordered by weight-->
+            {{ range .Site.Pages.ByWeight }}
+                {{ if (eq .File.Dir $thisdir)}}
+
+                    {{ $learningpathfiles = $learningpathfiles | append . }}
+
+                    <!-- Call partial to fill out navigation tabs -->
+                    {{partial "ads-cards/custom-content-navs.html" (dict "context" . "thisfile" $thisfile)  }}
+
+                {{ end }}
+            {{end}} 
+
+            <!-- GitHub links to edit / log an issue -->
+            {{partial "github/github-links.html" .  }}
+        </div>
+    </div>
+
+    <!-- Right pane, content-->
+    <div class="c-col lg:c-col-9 xl:c-col-10">
+
+        <!-- Mobile only shown navigation - sticky header -->
+        {{partial "ads-cards/custom-content-navs-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $learningpathfiles)  }}
+
+
+        <!-- Custom content layout depending on type -->
+        {{ if eq .File.TranslationBaseName "_index" }}
+            {{partial "learning-paths/introduction" .  }}
+        {{else if eq .File.TranslationBaseName "_review"}}
+            {{partial "learning-paths/review" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+        {{else if eq .File.TranslationBaseName "_next-steps"}}
+            {{partial "learning-paths/next-steps" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+        {{ else }}
+            {{partial "learning-paths/content" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+        {{ end }}
+
+        <!-- Next steps for buttons -->
+        {{partial "learning-paths/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+
+    </div>
+
+</div>
+
+{{ partial "ads-cards/custom-tabs-style.html" . }}
+
+
+{{end}}
+
