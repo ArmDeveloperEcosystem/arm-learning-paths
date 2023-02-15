@@ -124,7 +124,7 @@ function addFacet(element) {
          `
          <ads-tag href="#" class="filter-facet u-margin-left-1/2 u-margin-top-1/2 u-margin-bottom-1/2 `+filter_group+`" id="filter-${tag}">
              <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                 ${display_tag}
+                 <div class="filter-facet-display-name">${display_tag}</div>
                  <a onclick="removeFacet('${tag}')">
                      <span class="fal fa-times-circle"></span>
                  </a>
