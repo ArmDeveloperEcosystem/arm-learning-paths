@@ -51,10 +51,6 @@ function trackSearchInteraction(){
     document.getElementById('search-box').value().then((value) => { 
         let current_search = value;
 
-
-        console.log(formatted_active_filters);
-        console.log(current_search);
-
         // Send tracking data                
         _satellite.track('search-interaction', {   
             'facet-active-names'   : formatted_active_filters,
