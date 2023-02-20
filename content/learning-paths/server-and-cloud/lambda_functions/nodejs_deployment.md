@@ -38,7 +38,7 @@ AWS Lambda is a compute service that lets you run code without provisioning or m
 Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning, automatic scaling and logging.
 To deploy AWS Lambda functions, create the **main.tf**, **output.tf** and **lambda_function (index.js)** files below using a text editor.
 
-Here is the **index.js** file
+Here is the `index.js` file
 
 ```console
 
@@ -51,7 +51,7 @@ exports.handler = function (event, context) {
 
 The above Lambda function will simply print `event.name` value as an output.
 
-Here is the complete **main.tf** file
+Here is the complete `main.tf` file
 
 ```console
 provider "aws" {
@@ -118,14 +118,14 @@ Replace `access_key` and `secret_key` with your values.
 {{% /notice %}}
 
 
-In the **main.tf** file mentioned above, a Lambda function is being created. Additionally, you are creating a Lambda function specific IAM role.
+In the `main.tf` file mentioned above, a Lambda function is being created. Additionally, you are creating a Lambda function specific IAM role.
 
 Lambda functions use the **ZIP** file of code for uploading, so you are using the resource `Archive` for this purpose. 
 
-Use the `lambda invoke` resource in the **main.tf** file for invoking the Lambda function.
+Use the `lambda invoke` resource in the `main.tf` file for invoking the Lambda function.
 
 
-Here is the **output.tf** file
+Here is the `output.tf` file
 
 ```console
 output "lambda" {
@@ -133,9 +133,9 @@ output "lambda" {
 }
 
 ```
-The output displays the **ARN** (Amazon Resource Names) of the Lambda resource in the above **output.tf** file. 
+The output displays the **ARN** (Amazon Resource Names) of the Lambda resource in the above `output.tf` file. 
 
-Now, use the Terraform commands below to deploy **main.tf** file.
+Now, use the Terraform commands below to deploy `main.tf` file.
 
 
 ### Terraform Commands
