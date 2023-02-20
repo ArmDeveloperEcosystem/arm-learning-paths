@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
+## Prerequisites
 
 Before you begin, confirm you have an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) and you can login to the AWS console.
 
@@ -18,9 +18,9 @@ You will also need a computer with [Terraform](/install-tools/terraform/) and th
 
 To generate an **access key** and **secret key**, follow the [instructions in the previous section](/learning-paths/server-and-cloud/lambda_functions/nodejs_deployment/).
 
-To deploy AWS Lambda functions, create the **main.tf**, **output.tf** and **lambda_function (python_lambda.py)** files below using a text editor.
+To deploy AWS Lambda functions, create the `main.tf`, `output.tf` and `lambda_function (python_lambda.py)` files below using a text editor.
 
-Here is the **python_lambda.py** file
+Here is the `python_lambda.py` file
 
 ```console
 
@@ -33,7 +33,7 @@ def lambda_handler(event, context):
 ```
 The above Lambda function will simply print `event.name` value as an output.
 
-Here is the complete **main.tf** file
+Here is the complete `main.tf` file
 
 ```console
 provider "aws" {
@@ -100,13 +100,13 @@ output "result" {
 Replace `access_key` and `secret_key` with your values.
 {{% /notice %}}
 
-In the **main.tf** file mentioned above, a Lambda function is being created. Additionally, you are creating a Lambda function specific IAM role.
+In the `main.tf` file mentioned above, a Lambda function is being created. Additionally, you are creating a Lambda function specific IAM role.
 
 Lambda functions use the **ZIP** file of code for uploading, so you are using the resource `Archive` for this purpose.
 
-Use the `lambda invoke` resource in the **main.tf** file for invoking the Lambda function.
+Use the `lambda invoke` resource in the `main.tf` file for invoking the Lambda function.
 
-Here is the **output.tf** file
+Here is the `output.tf` file
 
 ```console
 output "lambda" {
@@ -114,9 +114,9 @@ output "lambda" {
 }
 
 ```
-The output displays the **ARN** (Amazon Resource Names) of the Lambda resource in the above **output.tf** file.
+The output displays the **ARN** (Amazon Resource Names) of the Lambda resource in the above `output.tf` file.
 
-Now, use the Terraform commands below to deploy **main.tf** file.
+Now, use the Terraform commands below to deploy `main.tf` file.
 
 
 ### Terraform Commands
