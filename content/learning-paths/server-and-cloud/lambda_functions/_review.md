@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 1                    
         explanation: >
-            Yes, AWS Lambda is a serverless computing service.
+            AWS Lambda is a serverless computing service.
 
     - questions:
         question: >
@@ -29,7 +29,7 @@ review:
             - "False"
         correct_answer: 1                     
         explanation: >
-             Yes, You can easily create and modify environment variables from the AWS Lambda Console, CLI, or SDKs.
+             You can easily create and modify environment variables from the AWS Lambda Console, CLI, or SDKs.
                
 
 
