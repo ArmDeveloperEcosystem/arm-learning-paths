@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
+## Prerequisites
 
 Before you begin, confirm you have an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) and you can login to the AWS console.
 
