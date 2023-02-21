@@ -5,12 +5,11 @@ description: Build a web server on Ethernet-enabled STM32 devices from scratch
 
 minutes_to_complete: 20
 
-who_is_this_for: This is a topic for STM32 firmware developers who wish to implement a Web dashboard for their device
+who_is_this_for: This is an introductory topic for STM32 firmware developers who wish to implement a Web dashboard for their device
 
 learning_objectives: 
     - Learn how to use Git, Make and CMSIS to build a bare metal firmware
-    - Learn how to use Mongoose Network Library to implement a web server
-      in a bare metal firmware
+    - Learn how to use Mongoose Network Library to implement a web server with bare metal firmware
 
 prerequisites:
     - Basic knowledge of embedded C programming
