@@ -18,15 +18,17 @@ review:
             - Contains `SysInit()` function, called by the startup code
             - Contains actual firmware functionality
         correct_answer: 2                   
-        explanation: 
+        explanation: >
+            The `sysinit.c` file contains system level initialization code that is executed by the processor at boot time.
 
     - questions:
         question: What is the purpose of ARM and ST CMSIS headers?
         answers:
-            - ARM CMSIS headers contain Cortex-M hardware desription, whilst ST CMSIS headers contain peripheral definitions for specific ST MCUs
-            - ARM and ST CMSIS headers contain API functions to work with a specific MCU
+            - Arm CMSIS headers contain Cortex-M hardware desription, whilst ST CMSIS headers contain peripheral definitions for specific ST MCUs
+            - Arm and ST CMSIS headers contain API functions to work with a specific MCU
         correct_answer: 1
-        explanation: 
+        explanation: >
+            Arm CMSIS headers provide Cortex-M hardware definitions whereas ST CMSIS headers provide the ST MCUs peripheral definitions
 
     - questions:
         question: What does Mongoose Network Library provide?
