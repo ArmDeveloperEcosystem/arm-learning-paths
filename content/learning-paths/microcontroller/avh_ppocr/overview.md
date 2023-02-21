@@ -18,7 +18,7 @@ In this blog, we apply Deep Learning (DL) to the OCR text recognition task and s
 - Use [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) to obtain a trained English text recognition model
 - Export the Paddle inference model 
 - Compile the Paddle inference model with [TVMC](https://tvm.apache.org/docs/tutorial/tvmc_command_line_driver.html#sphx-glr-tutorial-tvmc-command-line-driver-py) for target device
-- Build text recognition application and deploy it on the Arm Virtual Hardware [Corstone-300](https://www.arm.com/products/silicon-ip-subsystems/corstone-300) platform with [Arm Cortex-M55](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m55).
+- Build text recognition application and deploy it on the [Corstone-300 FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) with [Arm Cortex-M55](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m55).
 
 This project highlights a collaboration between Arm and Baidu that fills a previous gap in the workflow of deploy a PaddlePaddle model directly to Arm Cortex-M. This increases the number of deep learning models supported on Cortex-M, thus providing developers with more choices.
 

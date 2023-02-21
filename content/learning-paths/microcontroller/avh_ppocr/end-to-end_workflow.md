@@ -2,7 +2,7 @@
 # User change
 title: "End-to-end workflow"
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -126,20 +126,26 @@ path_to_infer_model/ocr_en/inference.pdmodel \
 
 After compilation, the model file can be found at the directory specified by parameter `--output`. In this example, it ends up in a file called `rec.tar` in the current directory. 
 
-## 4. Deploy on the AVH Corstone-300 platform with Arm Cortex-M55
-Use the ssh command to connect to the AVH AMI instance you launched beforehand, and you can see the terminal interface below. It shows that you have logged in successfully.
+## 4. Deploy on the Corstone-300 FVP with Arm Cortex-M55
+The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-tools/ecosystem_fvp/)
+.
 
-![Successfully login page #center](./Figure6.png "Figure 6. Successfully login page")
+Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-tools/avh#corstone).
+
 
 The steps of model training, exporting, and compiling described in 1-3 can be completed on the local machine or in the AVH AMI environment. Determine it according to your own needs. The complete [sample code](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example), that you can run from the command line, is available to download from [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/dygraph/deploy/avh)’s GitHub repository (under the dygraph branch). This makes it easier for developers to experience the whole workflow, especially the deployment.
 
-After you connect to the AVH AMI instance successfully, you can complete model deployment and view application execution results with the following command.
+After you have downloaded the FVP on your local machine, you will also need to clone the Arm CMSIS and CMSIS-NN repositories from https://github.com/ARM-software/CMSIS_5/ and https://github.com/ARM-software/CMSIS-NN respectively.
+
+You can then complete model deployment and view application execution results with the following command.
 
 ```console
 git clone https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH.git
 cd Paddle-examples-for-AVH/OCR-example
-./run_demo.sh
+./run_demo.sh --cmsis_path <Enter path CMSIS repo> --fvp_path >Enter path to Corstone-300 FVP> --enable_FVP=1
 ```
+Note: You will need to replace `<Enter path to CMSIS repo>` and `<Enter path to Corstone-300 FVP>` with the path to these dependencies on your machine.
+ 
 The [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/blob/main/OCR-example/run_demo.sh) script automates the entire process we have just described. It takes the following 6 steps to help you automatically build and execute the English text recognition application on Corstone-300 platform with Arm Virtual Hardware.
 
 - Step 1. Set up running environment
@@ -149,6 +155,12 @@ The [run_demo.sh](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-A
 - Step 5. Use the Makefile to build the target application
 - Step 6. Run application binary on Corstone-300 platform integrated in AVH
 
-We can use the image in Figure 4 above (QBHOUSE) as an example to verify the inference results on the AVH Corstone-300 platform with Arm Cortex-M55. The results can be seen as Figure 7 which is highly consistent with the inference results of direct inference on server host. It shows we have successfully deployed PP-OCRv3 English recognition model directly on Arm Cortex-M.
+We can use the image in Figure 4 above (QBHOUSE) as an example to verify the inference results on the Corstone-300 FVP with Arm Cortex-M55. The results can be seen as Figure 7 which is highly consistent with the inference results of direct inference on server host. It shows we have successfully deployed PP-OCRv3 English recognition model directly on Arm Cortex-M.
 
-![AVH Corstone-300 with Cortex-M55 inference results #center](./Figure7.png "Figure 7. AVH Corstone-300 with Cortex-M55 inference results")
+![AVH Corstone-300 with Cortex-M55 inference results #center](./Figure7.png "Figure 7. Corstone-300 with Cortex-M55 inference results")
+
+# Conclusion
+You have now successfully deployed the English text recognition model released in PP-OCRv3 on the Corstone-300 FVP with Cortex-M55. Hopefully, these steps have given you an idea of how fast and easy the entire workflow is, so do not hesitate and try it out today! 
+
+Learn more about what Arm and Baidu have been working on and their partnership, in this Blueprint blog post: [Go to Arm Blueprint](https://www.arm.com/blogs/blueprint/baidu-paddlepaddle)
+

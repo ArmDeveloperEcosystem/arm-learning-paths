@@ -44,7 +44,7 @@ review:
             
     - questions:
         question: >
-            Which is the conponent of Arm Virtual Hardware Corstone-300 platform?
+            Which is the processor on the Arm Corstone-300 platform?
         answers:
             - "Cortex-M55"
             - "Cortex-M85"

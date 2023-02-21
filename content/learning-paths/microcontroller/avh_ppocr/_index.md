@@ -1,7 +1,7 @@
 ---
-title: Deploy PaddlePaddle on Arm Cortex-M with Arm Virtual Hardware
+title: Deploy PaddlePaddle on Arm Cortex-M55 with Corstone-300 FVP
 
-description: Learn how to deploy a PP-OCRv3 English text recognition model on Arm Cortex-M55 processor with Arm Virtual Hardware.
+description: Learn how to deploy a PP-OCRv3 English text recognition model on Arm Cortex-M55 processor using the Corstone-300 FVP.
 
 minutes_to_complete: 30
 
@@ -11,12 +11,11 @@ learning_objectives:
     - Train an English text recognition model with PaddleOCR
     - Export Paddle inference model
     - Compile Paddle inference model with TVMC
-    - Deploy on the AVH Corstone-300 platform with Arm Cortex-M55
+    - Deploy on the Corstone-300 FVP with Arm Cortex-M55
 
 prerequisites:
     - Some familiarity with embedded programing is assumed
     - Some familiarity with AI/ML software development is assumed
-    - An AWS account to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). Refer to [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) to create an AWS account.
 
 author_primary: Liliya Yu
 
@@ -30,7 +29,6 @@ operatingsystems:
 tools_software_languages:
     - C
     - Python
-    - AWS EC2
     - GCC
     - TVM
     - PaddleOCR
