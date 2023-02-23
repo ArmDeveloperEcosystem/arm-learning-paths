@@ -47,7 +47,7 @@
                                         fa-book' title='Reference'
                                     {{end}}
                                 ></i>
-                        <a href="{{ .link }}" target="_blank">{{ .title }}</a>
+                        <a href="{{ .link }}" target="_blank">{{ .title }}{{partial "general-formatting/external-link.html"}}</a>
                         </li>
                     {{end}}
                 {{end}}

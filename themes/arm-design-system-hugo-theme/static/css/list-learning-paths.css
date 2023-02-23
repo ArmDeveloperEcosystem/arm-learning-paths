@@ -33,29 +33,29 @@ ads-card.path-card {
     --ads-card-border-color: var(--arm-light-grey-alt-2);
     --ads-card-background-color: var(--white);
 
-    --ads-card-border-color-hover: var(--arm-orange);
+    --ads-card-border-color-hover: var(--arm-web-safe-orange);
 
     --ads-card-background-color-hover: var(--arm-light-grey);
-    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(0,0,0,0.25);
+    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
 }
 html[theme='dark'] ads-card.path-card {
     --ads-card-background-color: var(--arm-color-overlay-dark);
     --ads-card-border-color: var(--arm-black);
 
     --ads-card-background-color-hover: var(--black);
-    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(255, 255, 255, 0.25);
+    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16); /* 0 1px 3px 3px rgba(255,255,255,0.25); */
 }
 
 
 .basics-title:hover {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-orange);
+    color: var(--arm-web-safe-orange);
     cursor: pointer;
 }
 
 ads-card.path-card:hover  .card-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-orange);
+    color: var(--arm-web-safe-orange);
 }
 
 /* Change hight based on ads-breakpoint */

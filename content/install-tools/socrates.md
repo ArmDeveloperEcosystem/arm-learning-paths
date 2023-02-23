@@ -29,7 +29,7 @@ Arm Socrates tooling requires a Linux host machine. Full specifications are give
 
 ## Download installer packages
 
-Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits). It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads).
+Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits). It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
 
 You can download Socrates as an individual standalone component, or you can download the complete success kits. The installer is available for Linux only.
 

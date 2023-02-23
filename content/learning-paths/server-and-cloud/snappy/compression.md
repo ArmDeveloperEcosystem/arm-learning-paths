@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Measure performance of snappy and zstd compression libraries on Arm servers"
+title: "Install lzbench and measure algorithm performance"
 
 weight: 2
 

@@ -35,7 +35,7 @@
 
         <!-- <ads-alert animation="down" animationDelay=100></ads-alert> -->
         <ads-alert id="new-to-category-alert" has-close-button="false">
-            <a href="intro"><h6 class="basics-title">New to {{.Title}}? Click here to learn the basics.</h6></a>
+            <a href="intro"><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
         </ads-alert>
 
 
@@ -121,7 +121,7 @@
                                         {{ if eq .Params.skillLevels "Introductory"}}
                                             <i style=" vertical-align:baseline; color: var(--arm-web-safe-green);" class="fa-solid fa-gauge-simple-min"></i>&nbsp;&nbsp;
                                         {{else}}
-                                            <i style=" vertical-align:baseline; color: var(--arm-orange);" class="fa-solid fa-gauge-simple-max"></i>&nbsp;&nbsp;
+                                            <i style=" vertical-align:baseline; color: var(--arm-web-safe-orange);" class="fa-solid fa-gauge-simple-max"></i>&nbsp;&nbsp;
                                         {{end}}
                                     </span>
                                     <span>
