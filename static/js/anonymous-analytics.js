@@ -15,15 +15,34 @@
                         - content           --> all links from user-generated markdown should have this. the 'render-link.html' should implement this tracker
                     - data-track-name       --> specific name of the element, human readable to link behavior. A click on a learning path should render its title, etc. This is dynamic
 
-        -   search-interaction
+        -   facet-interaction
                 Attributes tracked:
                     - facet-active-names    --> add comma-seperated facets as they get added, including group. Examples:  'subject:CI-CD'     'subject:CI-CD,subject:ML'      'subject:CI-CD,Operating System:Linux'
                     - search-current-query  --> add current search query; done after blur of search query      
-
+        
+        -   search-interaction
+                Attributes tracked:
+                    - search-current-query  --> add current search query; done after blur of search query      
+        
 */
 
+function trackSearchInteraction() {
+    // Get current search term
+    // Send tracker  
 
-function trackSearchInteraction(){
+    // Get search query (inside promise, continue the rest of this inside the promise)
+    document.getElementById('search-box').value().then((value) => { 
+        let current_search = value;
+
+        // Send tracking data                
+        _satellite.track('search-interaction', {   
+            'search-current-query' : current_search
+        }); 
+    });
+}
+
+
+function trackFacetInteraction(){
     // Get active filters
     // Get current search term
     // Send tracker
@@ -31,7 +50,10 @@ function trackSearchInteraction(){
     // Get all active filters, condense into the following str format: 'subject:CI-CD,subject:ML,Operating System:Linux'  
     let formatted_active_filters = ''
     const active_tags = document.getElementsByClassName('filter-facet');
-    if (!(active_tags.length==0)) {  
+    if (active_tags.length==0) { 
+        return false         // Return already if no tags...no firing event neccecary
+    }
+    else {  
         for (tag of active_tags) {
             let all_tag_classes = tag.classList;
             for (c of all_tag_classes) {
@@ -51,18 +73,12 @@ function trackSearchInteraction(){
     document.getElementById('search-box').value().then((value) => { 
         let current_search = value;
 
-
-        console.log(formatted_active_filters);
-        console.log(current_search);
-
         // Send tracking data                
-        _satellite.track('search-interaction', {   
+        _satellite.track('facet-interaction', {   
             'facet-active-names'   : formatted_active_filters,
             'search-current-query' : current_search
         }); 
     });
-
-
 }
 
 
@@ -74,8 +90,9 @@ function trackSearchInteraction(){
         let current_path = window.location.pathname;
 
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
-        console.log(current_path,depth_of_path);
         
+        console.log('depth:',depth_of_path);
+
         //
         //  Homepage
         //  ===================
@@ -86,14 +103,16 @@ function trackSearchInteraction(){
                     3. Tool install 'see all' link         
             */
 
+
             // 1) Learning Path category card
             let main_category_cards = document.getElementsByClassName('main-topic-card');
-            for (card of main_category_cards) {
+            for (let card of main_category_cards) {
+                let category_name = card.id;
                 card.addEventListener("click", () => {
                     _satellite.track('content-interaction', {   
                         'data-track-type'     : 'Homepage Categories',
                         'data-track-location' : 'list-card',
-                        'data-track-name'     : card.id 
+                        'data-track-name'     : category_name
                     });
                 });
             }
@@ -120,9 +139,9 @@ function trackSearchInteraction(){
 
             // 2) Facet boxes
             let filter_facet_elements = document.querySelectorAll('ads-checkbox');            
-            for (facet of filter_facet_elements) {
+            for (let facet of filter_facet_elements) {
                 facet.addEventListener("click", () => {
-                    trackSearchInteraction();
+                    trackFacetInteraction();                            
                 });
             }
 
@@ -140,8 +159,98 @@ function trackSearchInteraction(){
                 });
             }
         }
-      });
+
+
+
+        //
+        //  Learning Path page
+        //  ===================
+        else if ( ( (depth_of_path == 4) | (depth_of_path == 5) ) & (current_path.includes('/learning-paths/')) ) {
+            /* Assign to the following components:
+                    1. Tags (only for intro and next step pages)
+                    2. Review ('check answer' button)
+                    2.5. Review (if all correct, add trigger for analytics somehow)
+                    3. Navigation forward/back (on left hand pannel and next/prev buttons), and mobile      
+            */
+
+            // 1) Tags
+            let tag_elements = document.querySelectorAll('ads-tag');  
+            for (let tag of tag_elements) {
+                tag.addEventListener("click", () => {
+                    let tag_name = (tag.innerText || tag.textContent).trim();
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'Learning Path tag',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : tag_name
+                    });
+                });
+            }
+
+            // 2) Review check answer btn
+            let check_answer_btn = document.getElementById('#check-answer-btn'); 
+            if (check_answer_btn) {
+                check_answer_btn.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'Learning Path review check answer button',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : 'Review - Check Answer button'
+                    });
+                });
+            } 
 
 
 
 
+
+            // 3a) Navitaion from navbar
+            let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  
+            for (let nav_bar_element of in_learning_path_nav_bar_elements) {
+                nav_bar_element.addEventListener("click", () => {
+                    let all_ele_classes = nav_bar_element.classList;
+                    for (c of all_ele_classes) {
+                        if (c.includes('-weight')) {
+                            let weight = parseInt(c.replace('-weight',''))+1; // add 1 to index from 1, not 0
+                            let human_name = (nav_bar_element.innerText || nav_bar_element.textContent).trim();
+                            let track_str = 'page_number:'+weight+','+'page_name:'+human_name; 
+                            _satellite.track('content-interaction', {   
+                                'data-track-type'     : 'Learning Path navbar',
+                                'data-track-location' : 'learning-path-nav',
+                                'data-track-name'     : track_str
+                            });
+                            break // move to next element
+                        }
+                    }
+                });
+            }
+
+
+            // 3b) Navigation forward/back on buttons
+            let in_learning_path_nav_btn_elements = document.getElementsByClassName('inner-learning-path-navbtn-element');  
+            for (let nav_btn_element of in_learning_path_nav_btn_elements) {
+                nav_btn_element.addEventListener("click", () => {
+                    let all_ele_classes = nav_btn_element.classList;
+                    for (c of all_ele_classes) {
+                        if (c.includes('-weight')) {
+                            let weight = parseInt(c.replace('-weight',''))+1; // add 1 to index from 1, not 0
+                            let human_name='Introduction' // default name to Introduction, change if not 1st index
+                            if (weight != 1) {
+                                human_name = nav_btn_element.getAttribute('name'); // get human readable name
+                            }
+                            let track_str = 'page_number:'+weight+','+'page_name:'+human_name; 
+                            _satellite.track('content-interaction', {   
+                                'data-track-type'     : 'Learning Path navbtn',
+                                'data-track-location' : 'learning-path-nav',
+                                'data-track-name'     : track_str
+                            });
+                            break // move to next element
+                        }
+                    }
+                });
+            }
+
+
+        }
+
+
+
+    });

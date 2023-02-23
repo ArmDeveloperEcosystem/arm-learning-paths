@@ -5,20 +5,30 @@
     {{ range .learningpathfiles }}
         {{ if eq .Weight $.context.Weight}}   <!-- This file in ordered array -->
             <!-- $counter is now index of current file in .learningpathfiles -->
+            {{ $backnum := (sub $counter 1)}} <!-- for analytics -->
+            {{ $nextnum := (add $counter 1)}} <!-- for analytics -->
+
+            {{ $backname := (index $.learningpathfiles (sub $counter 1)).Title}} <!-- for analytics -->
+            {{ $nextname := (index $.learningpathfiles (add $counter 1)).Title}} <!-- for analytics -->
+
             {{ $backlink := (index $.learningpathfiles (sub $counter 1)).Permalink }}
             {{ $nextlink := (index $.learningpathfiles (add $counter 1)).Permalink }}
 
             {{ if $backlink }} <!-- is null if introduction page, so don't show a back there-->
             <div class="c-col">
                 <!-- BACK BUTTON -->
-                <ads-button style="float:left" onclick="window.location.href={{$backlink}}" level="tertiary">Back</ads-button>
+                <ads-button name="{{$backname}}" class="inner-learning-path-navbtn-element {{$backnum}}-weight" style="float:left" onclick="window.location.href={{$backlink}}" level="tertiary">
+                    Back
+                </ads-button>
             </div>
             {{ end }}
 
             {{ if $nextlink }} <!-- is null if last page, so don't show a back there-->
             <div class="c-col">
                 <!-- NEXT BUTTON -->
-                <ads-button style="float:right;" onclick="window.location.href={{$nextlink}}" level="primary">Next</ads-button>
+                <ads-button name="{{$nextname}}" class="inner-learning-path-navbtn-element {{$nextnum}}-weight" style="float:right;" onclick="window.location.href={{$nextlink}}" level="primary">
+                    Next
+                </ads-button>
             </div>
 
             {{else}}

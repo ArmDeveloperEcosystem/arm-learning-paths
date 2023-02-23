@@ -20,15 +20,16 @@
 
 
             <!-- Dynamic, content ordered by weight-->
+            {{ $counter := 0 }}       <!-- Counter to track index-->
             {{ range .Site.Pages.ByWeight }}
                 {{ if (eq .File.Dir $thisdir)}}
-
                     {{ $learningpathfiles = $learningpathfiles | append . }}
 
                     <!-- Call partial to fill out navigation tabs -->
-                    {{partial "ads-cards/custom-content-navs.html" (dict "context" . "thisfile" $thisfile)  }}
-
+                    {{partial "ads-cards/custom-content-navs.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
+                    {{ $counter = add $counter 1 }}
                 {{ end }}
+
             {{end}} 
 
             <!-- GitHub links to edit / log an issue -->
