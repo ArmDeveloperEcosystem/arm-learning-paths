@@ -77,7 +77,8 @@
         height: 112px;
         --ads-card-border-width: 1px;
         --ads-card-border-color: var(--arm-black);
-        --ads-card-border-color-hover: var(--arm-orange);
+        --ads-card-border-color-hover: var(--arm-web-safe-orange);
+        --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);
     }
 
     ads-card-content.tool-card-content::before {
@@ -96,7 +97,7 @@
     
 
       ads-card.tool-card:hover ads-card-content.tool-card-content::before {
-        background-color: var(--arm-orange);
+        background-color: var(--arm-web-safe-orange);
       }
       ads-card.tool-card p {
         color: var(--arm-web-safe-blue);
@@ -108,8 +109,8 @@
         transition-timing-function: ease-in-out;
       }
       ads-card.tool-card:hover p {
-        color:var(--arm-orange);
-        margin-left: 16px;
+        color:var(--arm-web-safe-orange);
+        margin-left: 12px;
       }
     
     </style>
