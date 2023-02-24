@@ -274,6 +274,12 @@ Use the deep learning complier [TVM](https://tvm.apache.org/) for model conversi
 
 Use TVM’s Python application TVMC to compile the model. 
 
+Install TVM using conda.
+
+```console
+conda install -c conda-forge tvm-py
+```
+
 You can use the following command to compile the Paddle inference model. By specifying `--target=cmsis-nn,c`, the operators supported by Arm’s [CMSIS-NN](https://github.com/ARM-software/CMSIS_5/tree/develop/CMSIS/NN) library will be offloaded to a CMSIS-NN kernel. It can make the best use of underlying Arm hardware acceleration. Otherwise, it falls back to standard C library implementations. By specifying `--target-cmsis-nn-mcpu=cortex-m55` and `--target-c-mcpu=cortex-m55`, it compiles the code that is suitable for running on [Cortex-M55](https://www.arm.com/products/silicon-ip-cpu/cortex-m/cortex-m55) processor. 
 
 For more specific descriptions of each parameter, you can use the command `tvmc compile --help` after you install the TVM Python package.
