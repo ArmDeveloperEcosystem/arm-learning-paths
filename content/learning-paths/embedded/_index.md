@@ -1,5 +1,4 @@
 ---
-cardimage: img/main-topic-backgrounds/embedded.jpg
 differentiating_info:
 - Linux IoT
 - Automotive
@@ -7,9 +6,6 @@ differentiating_info:
 key_ip:
 - Cortex-A
 - Cortex-R
-key_ip_icons:
-- img/ip-icons/Arm_Cortex-A.png
-- img/ip-icons/Arm_Cortex-R.png
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 3
