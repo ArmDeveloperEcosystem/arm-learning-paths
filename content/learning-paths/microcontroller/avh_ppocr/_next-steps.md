@@ -29,6 +29,10 @@ further_reading:
         title: Paddle examples for AVH
         link: https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/Object-Detection-example
         type: website
+    - resource:
+        title: Arm and Baidu PaddlePaddle build an AI ecosystem together
+        link: https://www.arm.com/blogs/blueprint/baidu-paddlepaddle
+        type: blog
 
 
 

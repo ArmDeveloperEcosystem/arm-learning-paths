@@ -14,8 +14,8 @@ learning_objectives:
     - Deploy on the Corstone-300 FVP with Arm Cortex-M55
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
-    - Some familiarity with AI/ML software development is assumed
+    - Some familiarity with embedded programming 
+    - Some familiarity with AI/ML software development
 
 author_primary: Liliya Yu
 

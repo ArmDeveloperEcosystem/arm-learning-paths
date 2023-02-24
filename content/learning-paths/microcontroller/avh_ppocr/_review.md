@@ -51,7 +51,7 @@ review:
             - "Cortex-M33"
         correct_answer: 1                    
         explanation: >
-            Corstone-300 combines an example subsystem, complementary System IP, and software and tools to streamline SoC development. Corstone-300 leverages Cortex-M55, Arm's most AI capable Cortex-M CPU, and allows for straightforward integration of the Ethos-U55 NPU to build low-power, high-performance endpoint AI systems. For more, please check product specifications at https://developer.arm.com/Processors/Corstone-300. 
+            Corstone-300 combines an example subsystem, complementary System IP, and software and tools to streamline SoC development. Corstone-300 leverages Cortex-M55, Arm's most AI capable Cortex-M CPU.
 
 
 
