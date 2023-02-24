@@ -68,21 +68,38 @@
 
 
         <!-- Current tag bar -->
-        <div id="current-tag-bar" class="c-row u-margin-left-1/2">
+        <div id="current-tag-bar" class="u-margin-left-1 u-margin-right-1">
+            <span>
+                <span id="tag-preface">Filters: </span>
+            </span>
             <!-- Filled dynamically by javascript & checkboxes; margin applied to tags only-->
+            <span  id="tag-clear-btn" hidden onclick="clearAllFilters()">
+                Clear Filters
+            </span>
         </div>
      
-        <!-- Current results bar -->
-        <div id="results-status-bar" class="c-row u-margin-top-1/2 u-margin-left-1">
-            Displaying&nbsp;
-            <span id="currently-shown-number" class="u-text-bold"> {{len $paths_to_list }} </span>
-            &nbsp;of&nbsp;
-            <span id="total-shown-number" class="u-text-bold"> {{len $paths_to_list }} </span>
-            &nbsp;learning paths.
+        <!-- Current results bar & Sorting -->
+        <div class="u-margin-top-1/2 u-margin-left-1 u-margin-right-1 u-margin-bottom-1/2">
+            <div id="results-status-bar" style="float: left;">
+                Displaying 
+                <span id="currently-shown-number" class="u-text-bold">{{len $paths_to_list }}</span>
+                of 
+                <span id="total-shown-number" class="u-text-bold">{{len $paths_to_list }}</span>
+                learning paths.
+            </div>
+
+            <div id="sorting-bar" style="float: right;">
+                <span class="sorting-criteria active">Date</span>
+            </div>
         </div>
+       
      
         <!-- List of learning paths on right -->
         <div class="c-row">
+            <div class="c-col c-col-12">
+                <hr id="divider-line" class="">
+            </div>
+            
             <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
                     {{ range $paths_to_list.ByLastmod.Reverse }}

@@ -18,6 +18,63 @@ ads-alert a {
     text-decoration: none;
 }
 
+
+
+
+
+
+
+
+#current-tag-bar {
+    min-height: 48px;
+}
+#tag-preface {
+    color: #6f777c;
+    display: inline-flex;
+    padding-top: 7px; /* aligning center of tags */
+}
+
+html[theme="dark"] #tag-preface {
+    color: #a3a8ae;
+}
+
+
+#tag-clear-btn {
+    float: right;
+    padding-top: 7px; /* aligning center of tags */
+    cursor: pointer;
+    color: var(--arm-web-safe-blue);
+}
+
+html[theme="dark"] #tag-clear-btn {
+    color: var(--arm-light-blue);
+}
+
+#tag-clear-btn:hover { color: var(--arm-web-safe-orange);}
+html[theme="dark"] #tag-clear-btn:hover { color: var(--arm-web-safe-orange);}
+
+.sorting-criteria.active {
+    position: relative;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #333e48;
+}
+
+html[theme="dark"] .sorting-criteria.active {
+    border-bottom: 2.2px solid hsla(0,0%,100%,.9);
+}
+
+#divider-line {
+    border-top: 1px solid var(--ads-search-border-color);
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+
+
+
+
+
 /*------------------------------------------------------------
 
         Learning Path / Tool Install Features
