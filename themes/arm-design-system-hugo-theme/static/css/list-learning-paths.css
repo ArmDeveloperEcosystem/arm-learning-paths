@@ -214,6 +214,7 @@ ads-card.path-card .card-title-div {
         position: relative;
         padding: 0;
         margin: 10px 0 0;
+        white-space: nowrap;
       }
       
       .ads-radio-style input[type='radio'] {
