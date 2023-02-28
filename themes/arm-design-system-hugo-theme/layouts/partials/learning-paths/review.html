@@ -22,6 +22,8 @@
             if (!a_group.includes(true)) {
                 // No answer was selected in this group, so show error and quit function.
                 document.getElementById("error-answer-all-questions-message").hidden = false;
+                const reflow = document.getElementById("error-answer-all-questions-message").offsetHeight; // Repaint the browser to enable transitions of newly shown element
+                document.getElementById("error-answer-all-questions-message").classList.add('smooth-open');
                 return
             }
         }
@@ -32,8 +34,11 @@
 
 
 
-        ////////////// Hide main form button
+        ////////////// Hide main form button, show Next Steps button
         document.querySelector('div#check-answer-btn-div').hidden=true;
+        document.querySelector('div#push-to-next-steps-div').hidden=false;
+        const reflow = document.getElementById("push-to-next-steps-div").offsetHeight; // Repaint the browser to enable transitions of newly shown element
+        document.getElementById("push-to-next-steps-div").classList.add('smooth-open');
         //////////////
 
         ////////////// Freeze radio button inputs
@@ -53,6 +58,8 @@
                 if (checkbox_status) {
                     // show this icon
                     answer.querySelector('.checkbox-icon').style.visibility = "visible"; 
+                    let reflow = answer.querySelector(".checkbox-icon").offsetHeight; // Repaint the browser to enable transitions of newly shown element
+                    answer.querySelector(".checkbox-icon").classList.add('smooth-open');   
                 }
             }
         }
@@ -85,7 +92,9 @@
 
 
             explanation_div.querySelector('.info_text_preexplination').innerHTML = prepend_html + explanation_div.querySelector('.info_text_preexplination').innerHTML;
-            explanation_div.removeAttribute('hidden');
+            explanation_div.hidden = false;
+            let reflow = explanation_div.querySelector('.info_text_preexplination').offsetHeight; // Repaint the browser to enable transitions of newly shown element
+            explanation_div.querySelector('.info_text_preexplination').classList.add('smooth-open');
         });
         
     }
@@ -95,6 +104,7 @@
 <!-- Markdown content -->
 <div class="content-box">
     <h2 >What you've learned</h2>
+    <p class="u-margin-left-1">You should now know how to:</p>
     {{ range (index .learningpathfiles 0).Params.learning_objectives }}
         <li class="u-margin-left-2">{{.}}</li>
     {{end}}
@@ -132,6 +142,12 @@
     <div id="check-answer-btn-div">
         <input type="submit" value="See Answers" id="check-answer-btn">
     </div>
+    <div id="push-to-next-steps-div" hidden>
+        <ads-button name="Next Steps" class="inner-learning-path-navbtn-element {{sub (len .learningpathfiles) 1}}-weight" onclick="window.location.href={{(index .learningpathfiles (sub (len .learningpathfiles) 1)).Permalink}}" level="primary">
+            View Next Steps
+        </ads-button>
+    </div>
+
     <div id="error-answer-all-questions-message" hidden>
         <p class="incorrect-explain u-margin-bottom-0">You need to answer each question to see the results.</p>
     </div>
@@ -155,4 +171,42 @@
     html[theme='dark'] .fa-times-circle {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
     html[theme='dark'] .incorrect-explain {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
 
+
+    #error-answer-all-questions-message {
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    #error-answer-all-questions-message.smooth-open {
+        opacity: 1;
+    }
+
+
+    #push-to-next-steps-div {
+        opacity: 0;
+        transition-property: opacity;
+        transition-duration: 0.5s;
+        transition-delay: 3s;
+    }
+    #push-to-next-steps-div.smooth-open {
+        opacity: 1;
+    }
+
+    .checkbox-icon {
+        opacity: 0;
+        transition: opacity 1s;  
+    }
+    
+    .checkbox-icon.smooth-open {
+        opacity: 1;
+    }
+
+    .info_text_preexplination {
+        opacity: 0;
+        transition: opacity 1s;  
+    }
+
+    .info_text_preexplination.smooth-open {
+        opacity: 1;
+    }
+    
 </style>

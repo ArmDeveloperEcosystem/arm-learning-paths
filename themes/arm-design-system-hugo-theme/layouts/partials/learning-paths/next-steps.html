@@ -1,23 +1,23 @@
 
 
-<!-- Short info up top -->
-<div class="u-margin-3">
-    <p>Congratulations! You have successfully completed this learning path -> {{ (index .learningpathfiles 0).Title }}: {{(index .learningpathfiles 0).Description}} </p>
+<!-- Feedback at top -->
 
-    <p>{{.context.Params.next_step_guidance  | markdownify}}</p>
-    
-    {{ with .context.Site.GetPage .context.Params.recommended_path}}
-        <ads-cta-link link='{{.Permalink}}'>
-            <span>{{.Title}}</span>
-        </ads-cta-link>
-    {{ end }}
-</div>
-
+{{ partial "general-formatting/feedback.html" .context}}
 
 
 <!-- 3 columns of helpful hints-->
 <div class="c-row">
     <div class="c-col">
+        <h2>Continue Learning</h2>
+        <p>{{.context.Params.next_step_guidance  | markdownify}}</p>
+        {{ with .context.Site.GetPage .context.Params.recommended_path}}
+        <p>Next Learning Path: &nbsp;&nbsp;
+        <span><ads-cta-link link='{{.Permalink}}'>
+            <span>{{.Title}}</span>
+        </ads-cta-link>
+        </span>
+    </p>
+        {{ end }}
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
             <div class="content-box">
                 <h4>Similar Learning Paths</h4>
@@ -59,25 +59,30 @@
                 <h4>Explore Tags</h4>
                 <p>Look at more learning paths under these tags.</p>
                 <span>
+                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{(index .learningpathfiles 0).Params.subjects | urlize}}' style="margin-bottom: 4px;">
+                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                            <span class="fa-solid fa-tag"></span>
+                            {{ (index .learningpathfiles 0).Params.subjects }}
+                        </ads-tag>
                     {{ range (index .learningpathfiles 0).Params.armips }}
-                        <ads-tag    href='{{ "/" | relLangURL}}armips/{{. | urlize}}'>
+                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                             <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                             <span class="fa-solid fa-tag"></span>
                             {{ replace . "_" " " }}
                         </ads-tag>
                     {{ end }}
-                    {{ range (index .learningpathfiles 0).Params.softwares }}
-                        <ads-tag    href='{{ "/" | relLangURL}}softwares/{{. | urlize}}'>
+                    {{ range (index .learningpathfiles 0).Params.operatingsystems }}
+                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                             <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                             <span class="fa-solid fa-tag"></span>
-                            {{ replace . "_" " " }}
+                            {{ . }}
                         </ads-tag>
                     {{ end }}
-                    {{ range (index .learningpathfiles 0).Params.tools }}
-                        <ads-tag    href='{{ "/" | relLangURL}}tools/{{. | urlize}}'>
+                    {{ range (index .learningpathfiles 0).Params.tools_software_languages }}
+                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                             <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                             <span class="fa-solid fa-tag"></span>
-                            {{ replace . "_" " " }}
+                            {{.}}
                         </ads-tag>
                     {{ end }}
                 </span>
