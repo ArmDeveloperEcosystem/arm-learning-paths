@@ -1,5 +1,4 @@
 ---
-cardimage: img/main-topic-backgrounds/mobile.jpg
 differentiating_info:
 - Android
 - Gaming
@@ -8,9 +7,6 @@ key_ip:
 - Cortex-A
 - Mali
 - Immortalis
-key_ip_icons:
-- img/ip-icons/Arm_Cortex-A.png
-- img/ip-icons/Arm_Mali_GPU.png
 maintopic: true
 operatingsystems_filter:
 - Android: 3

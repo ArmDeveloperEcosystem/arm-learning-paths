@@ -80,9 +80,19 @@ function removeFacet(tag) {
             if (value === true) {
                 // uncheck it. NOT WORKING
                 //>>>>????????????????????????????????????????????????????? ADS issue
-                checkbox_element.removeAttribute('checked');
+                //checkbox_element.setAttribute('checked',true); // when setting and unsetting it freezes the checkbox element.
+            
+
+                //checkbox_element.removeAttribute('checked');
+                checkbox_element.checked = false;
             }
         });
+
+    // Remove 'clear filters' command if no filters left 
+    let active_facets = document.querySelectorAll('ads-tag.filter-facet');
+    if (active_facets.length === 0) {
+        document.getElementById('tag-clear-btn').hidden = true;
+    }
 
     // Apply search and filters to current parameters
         // deal with ads promise
@@ -117,8 +127,14 @@ function addFacet(element) {
         }
     };
 
+
+    // Make sure that this tag doesn't already exist (issue with ADS checkboxes, need to verify here otherwise we get repeating facets appearing)
+    if (document.querySelectorAll('ads-tag#filter-'+tag).length > 0) {
+        return //if it does, just leave without doing anything (no need, already exists)
+    }
+
+
      display_tag = element.name;
-     
      document.querySelector('#current-tag-bar').insertAdjacentHTML(
          'beforeend',
          `
@@ -133,6 +149,9 @@ function addFacet(element) {
          `
      );
 
+     // Show 'clear filters' command (if already shown this command does nothing.)
+     document.getElementById('tag-clear-btn').hidden = false;
+
      // Apply search and filters to current parameters
         // deal with ads promise
         document.getElementById('search-box').value().then((value) => { 
@@ -145,6 +164,15 @@ function addFacet(element) {
 
 
 
+function clearAllFilters() {
+    // call removeFacet on each tag
+    let active_facets = document.querySelectorAll('ads-tag.filter-facet');
+    for (facet of active_facets) {
+        let tag  = facet.id.replace('filter-',''); // tag.id = filter-tag-databases   strip off 'filter-'
+        removeFacet(tag);
+    }
+}
+
 
 
 
@@ -156,7 +184,6 @@ function scrollToTopIfApplicable(element) {
             //document.body.scrollTop = 0; // For Safari
             //document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             window.scrollTo({top: 0, behavior: 'smooth'});
-            console.log(c)
             break
         }
     }
@@ -174,6 +201,8 @@ function filterHandler_LearningPaths(element) {
     
         // get status of checkbox (true for checked, false for unchecked)
         element.value().then((value) => {
+            console.log('checkbox value: ',value);
+
             if (value === true) {
                 // add 'checked' value to html
                addFacet(element,all_path_cards);

@@ -53,17 +53,17 @@
                 <!-- First row of info-->
                 <div class="c-row">
                         <div class="c-col">
-                            <table style="table-layout: fixed">
+                            <table style="width: max-content;">
                                 <tr>
                                   <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Reading time:</td>
                                   <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
-                                    <span><i class="fa-solid fa-clock fa-sm"></i></span>&nbsp; {{.Params.minutes_to_complete}} minutes
+                                    <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}"></span>
                                   </td>
                                 </tr>
                                 <tr>
                                   <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Last updated:</td>
                                   <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">                    
-                                    <span><i class="fa-solid fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                                    <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                                   </td>
                                 </tr>
                                 {{ if .Params.official_docs}}
@@ -71,7 +71,7 @@
                                         <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top; white-space: nowrap;">Official docs:</td>
                                         <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
                                             <!-- docs exist! -->
-                                            <a href="{{.Params.official_docs}}">View {{ partial "general-formatting/external-link.html"}} </a>
+                                            <a href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
                                         </td>
                                     </tr>
                                 {{end}}
@@ -156,5 +156,18 @@
 
 {{ partial "ads-cards/custom-tabs-style.html" . }}
 {{ partial "ads-cards/ads-card-style.html" . }}
+
+
+<!-- Include javascript for translating minutes to complete text -->
+<script src="/js/other-functions.js"></script>
+
+<script>
+        (() => {
+            console.log('hi')
+        // For each card, display proper hours and min
+        const time_span_ele = document.getElementsByClassName('time-to-complete-string');
+            for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
+        });
+</script>
 
 {{end}}

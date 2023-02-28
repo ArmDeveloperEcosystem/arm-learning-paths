@@ -1,13 +1,10 @@
 ---
-cardimage: img/main-topic-backgrounds/server-and-cloud.jpg
 differentiating_info:
 - Web
 - Linux
 - HPC
 key_ip:
 - Neoverse
-key_ip_icons:
-- img/ip-icons/Arm_Neoverse.png
 maintopic: true
 operatingsystems_filter:
 - Linux: 32

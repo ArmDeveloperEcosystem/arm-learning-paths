@@ -1,0 +1,217 @@
+<script type="text/javascript">      
+    function starRatingGiven(element,learning_path_name) {
+        // Send star rating to analytics
+        trackStarRating(element.value,learning_path_name);
+
+        // Hide Stars div and surface radio buttons
+        document.getElementById('feedback-1-stars').hidden = true;
+
+        // Show Radio button feedback depending on value
+        document.getElementById('specific-stars').innerHTML = ' of '+element.value+' stars';
+        document.getElementById('feedback-2-choice').hidden = false;
+        if (parseInt(element.value) < 4) {
+            document.getElementById('1-2-3-star-options').hidden = false;
+        }
+        else {
+            document.getElementById('4-5-star-options').hidden = false;
+        }
+        const reflow = document.getElementById('feedback-2-choice').offsetHeight; // Repaint the browser to enable transitions of newly shown element
+        document.getElementById('feedback-2-choice').classList.add('smooth-open');
+
+
+    }
+
+    function choiceFeedbackGiven(learning_path_name) {     
+        // if nothing checked, error
+        if (document.querySelector('input[name="feedback-choice"]:checked')==null) {
+            document.getElementById("choice-select-option-error").hidden = false;
+            document.getElementById('choice-select-option-error').style.display = "inline-block";
+            const reflow = document.getElementById('choice-select-option-error').offsetHeight; // Repaint the browser to enable transitions of newly shown element
+            document.getElementById('choice-select-option-error').classList.add('smooth-open');
+            return
+        }
+
+        // Send multiple-choice feedback to analytics
+        let feedback = document.querySelector('input[name="feedback-choice"]:checked').value
+
+        trackChoiceFeedback(feedback,learning_path_name);
+
+        // Hide Radio button feedback
+        document.getElementById('feedback-2-choice').hidden = true;
+
+        // Show Thanks 
+        document.getElementById('feedback-3-thanks').hidden = false;
+        const reflow = document.getElementById('feedback-3-thanks').offsetHeight; // Repaint the browser to enable transitions of newly shown element
+        document.getElementById('feedback-3-thanks').classList.add('smooth-open');
+
+    }
+
+</script>
+
+
+{{ $pathFormatted := replace .File.Path "\\" "/" -}}
+{{ $gh_repo := ($.Param "github_repo") -}}
+{{ $gh_url := ($.Param "github_url") -}}
+{{ $gh_subdir := ($.Param "github_subdir") -}}
+{{ $gh_project_repo := ($.Param "github_project_repo") -}}
+{{ $gh_branch := (default "master" ($.Param "github_branch")) -}}
+{{ $gh_repo_path := printf "%s/content/%s" $gh_branch $pathFormatted -}}
+
+{{ $issuesURL := printf "%s/issues/new?title=Feedback - %s" $gh_repo (safeURL $.Parent.Title ) -}}
+
+
+
+<div class="c-row">
+    <div class="c-col">
+        <div id="feedback-container">
+
+            <h2>Feedback</h2>
+
+            <!-- 1) Stars -->
+            <div id="feedback-1-stars">
+                <p>How would you rate the overall quality of this Learning Path?</p>
+                <div class="rating" style="float: left">
+                    <input id="rating-5" type="radio" name="rating" value="5" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-5"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-4" type="radio" name="rating" value="4" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-4"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-3" type="radio" name="rating" value="3" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-3"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-2" type="radio" name="rating" value="2" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-2"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-1" type="radio" name="rating" value="1" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-1"><i class="fas fa-2x fa-star"></i></label>
+                </div>
+            </div>
+
+            <!-- 2) Multiple-choice feedback -->
+            <div id="feedback-2-choice" hidden>
+                <p class="u-margin-bottom-0">What is the primary reason for your feedback <span id="specific-stars"></span>?</p>
+                <form action='javascript:choiceFeedbackGiven("{{.Parent.Title}}")'>
+
+                    <div id="1-2-3-star-options" class="u-margin-left-1" hidden>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-1" value="Missing information" name="feedback-choice"></input>
+                            <label for="poor-1">Missing information</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-2" value="Unclear steps or too complicated" name="feedback-choice"></input>
+                            <label for="poor-2">Unclear steps / Too complicated</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-3" value="Code problems" name="feedback-choice"></input>
+                            <label for="poor-3">Code problems</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-4" value="Out of date" name="feedback-choice"></input>
+                            <label for="poor-4">Out of date</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="poor-5" value="Other bad" name="feedback-choice"></input>
+                            <label for="poor-5">Other</label>
+                        </div>
+                    </div>
+
+                    <div id="4-5-star-options" class="u-margin-left-1" hidden>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-1" value="Easy to understand" name="feedback-choice"></input>
+                            <label for="good-1">Easy to understand</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-2" value="Solved my problem" name="feedback-choice"></input>
+                            <label for="good-2">Solved my problem</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-3" value="Helpful code snippets" name="feedback-choice"></input>
+                            <label for="good-3">Excellent code snippets</label>
+                        </div>
+                        <br>
+                        <div class="choice ads-radio-style">
+                            <input type="radio" class="" id="good-4" value="Other good" name="feedback-choice"></input>
+                            <label for="good-4">Other</label>
+                        </div>
+                    </div>
+                    
+                    <span>
+                        <input class="u-margin-top-1 u-margin-bottom-1" type="submit" value="Submit Feedback" id="submit-feedback-btn">
+                        <div id="choice-select-option-error" hidden>
+                            <p id="error-text">&nbsp;&nbsp;&nbsp;Please select a reason before submitting.</p>
+                        </div>
+                    </span>
+
+                </form>
+            </div>
+
+
+            <!-- 2) Multiple-choice feedback -->
+            <div id="feedback-3-thanks" hidden>
+                <p>Thank you. We're grateful for your feedback on how to improve this Learning Path.</p>
+                <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Raise an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
+                <li>Want to discuss this topic with fellow developers and experts? <a href="https://discord.com/invite/armsoftwaredev" target="_blank">Engage in the Arm SW Developer Discord.{{partial "general-formatting/external-link.html" }}</a></li>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+#feedback-container {
+    min-height: 200px;
+
+}
+
+/****************************************************/
+/* Star rating styling */
+
+.rating {
+	direction: rtl;
+	unicode-bidi: bidi-override;
+}
+
+.rating input {
+	display: none;
+}
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked + label,
+.rating input:checked + label ~ label {
+	color: var(--arm-yellow);  /* #ffc107 */
+}
+/****************************************************/
+
+
+#error-text {color: var(--arm-web-safe-red);}
+html[theme='dark'] #error-text {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
+
+
+/*********/
+/* Smooth transition code */
+
+#choice-select-option-error {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+#choice-select-option-error.smooth-open {
+    opacity: 1;
+}
+
+#feedback-2-choice {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+#feedback-2-choice.smooth-open {
+    opacity:1
+}
+
+#feedback-3-thanks {
+    opacity: 0;
+    transition: opacity 1s;
+}
+#feedback-3-thanks.smooth-open {
+    opacity:1
+}
+</style>

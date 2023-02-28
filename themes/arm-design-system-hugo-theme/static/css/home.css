@@ -11,7 +11,7 @@ ads-card.main-topic-card {
     --ads-card-border-radius: 10px;
     --ads-card-border-width: 2px;
 
-    --ads-card-border-color-hover: var(--arm-orange);
+    --ads-card-border-color-hover: var(--arm-web-safe-orange);
 }
 
 html[theme='dark'] ads-card.main-topic-card {
@@ -41,7 +41,7 @@ ads-card.main-topic-card  .main-topic-title {
 
 ads-card.main-topic-card:hover  .main-topic-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-orange);
+    color: var(--arm-web-safe-orange);
 }
 
 html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-title {

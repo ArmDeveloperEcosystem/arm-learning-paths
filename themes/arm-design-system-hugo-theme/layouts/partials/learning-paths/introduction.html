@@ -8,18 +8,21 @@
                 <table style="width: max-content;">
                     <tr>
                         <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Skill level:</td>
-                        <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >{{.Params.skillLevels}}</td>
+                        <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
+                            <span><i class="fa-light fa-lightbulb"></i></span>&nbsp; {{.Params.skillLevels}}
+                        </td>
                       </tr>
                     <tr>
                       <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Reading time:</td>
                       <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
-                        <span><i class="fa-solid fa-clock fa-sm"></i></span>&nbsp; {{.Params.minutes_to_complete}} minutes
+                        <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}"></span>
+                        
                       </td>
                     </tr>
                     <tr>
                       <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Last updated:</td>
                       <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">                    
-                        <span><i class="fa-solid fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                        <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                       </td>
                     </tr>
                     {{ if .Params.test_maintenance}}
@@ -35,14 +38,14 @@
             <div class="c-col lg:c-col-6 xl:c-col-8">
                 <!-- Table if desktop, not mobile-->   
                 <div class="u-hide md:u-display-block u-flex-shrink-0">
-                    <table style="table-layout: fixed">
+                    <table style="width: max-content;">
                         <tr>
                             <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top; white-space: nowrap;">Arm IP:</td>
                             <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 16px;" >
                                 {{ range .Params.armips }}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none;">{{.}} {{ partial "general-formatting/external-link.html"}}</a><span style="margin-right:16px;"></span>{{end}}    
                             </td>
                         </tr>
-                        <tr>
+                        <tr> 
                         <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Tags:</td>
                         <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 16px;" >
                             <span>
@@ -50,7 +53,7 @@
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{ .Params.subjects }}
-                                </ads-tag>
+                                </ads-tag> 
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
@@ -135,3 +138,16 @@
         {{.Content}}     
 </div>
 
+
+
+<!-- Include javascript for translating minutes to complete text -->
+<script src="/js/other-functions.js"></script>
+
+<script>
+        (() => {
+            console.log('hi')
+        // For each card, display proper hours and min
+        const time_span_ele = document.getElementsByClassName('time-to-complete-string');
+            for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
+        });
+</script>

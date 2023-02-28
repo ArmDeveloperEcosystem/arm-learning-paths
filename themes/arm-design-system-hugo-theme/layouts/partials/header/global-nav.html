@@ -66,7 +66,7 @@
         </div>
 
         <div class="c-row u-margin-top-1 u-margin-left-2">
-          <div class="c-col">
+          <div class="c-col" theme="dark">
               {{with .Site.GetPage "/about"}}
                 {{ .Content | replaceRE "<p>" "<p theme=\"dark\">" | safeHTML }}
               {{end}}
@@ -99,7 +99,7 @@
       {
         id: 'theme',
         type: 'button',
-        icon: 'fas fa-lightbulb',
+        icon: 'fal fa-lightbulb',
         title: 'theme',
       },
       /* Uncomment to allow user to change page width
@@ -211,14 +211,18 @@
       if (evt.action === 'theme') {
           const currentTheme = document.querySelector('html').getAttribute("theme");
 
+          //console.log('here',document.getElementById('global-nav-example-default'),document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-lightbulb'));
+
           if (currentTheme === "dark") { // Turn to Light theme
             document.querySelector('html').setAttribute('theme', 'light');
             document.getElementById('prism-code-theme').href='/css/prism-light.css';
+            document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-lightbulb').classList.replace("fal","fas");
             localStorage.setItem('theme', 'light');      
           }
           else if (currentTheme === "light") { // Turn to SW-Hub theme
             document.querySelector('html').setAttribute('theme', 'dark');
             document.getElementById('prism-code-theme').href='/css/prism-dark.css';
+            document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-lightbulb').classList.replace("fas","fal");
             localStorage.setItem('theme', 'dark');          
           }
 
@@ -254,6 +258,8 @@
           document.getElementById("expanded-masthead").removeAttribute('hidden'); // Show title
           document.getElementById("arm-footer").removeAttribute('hidden');      // Show footer
           document.getElementById("only-breadcrumb-masthead").setAttribute('hidden',true); // Hide only breadcrumbs
+          document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-text-height').classList.replace("fal","fas"); // Update icon format
+
         }
         else {
           localStorage.setItem('fullHeight', 'true');      //Save user preference in storage
@@ -263,6 +269,7 @@
           document.getElementById("expanded-masthead").setAttribute('hidden',true); // Hide title
           document.getElementById("arm-footer").setAttribute('hidden',true);      // Hide footer
           document.getElementById("only-breadcrumb-masthead").removeAttribute('hidden'); // Show just breadcrumbs
+          document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-text-height').classList.replace("fas","fal"); // Update icon format
         }
       };
 
