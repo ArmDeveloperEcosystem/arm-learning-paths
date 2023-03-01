@@ -124,9 +124,8 @@ def main():
             else:
                 logging.info("Parsing " + args.instructions)
                 cmd = parse.parse(args.instructions)
-                # If test_maintenance is enabled
-                if len(cmd) != 0:
-                    parse.save(args.instructions, cmd)
+                if parse.save(args.instructions, cmd) == 0:
+                # test_maintenance is enabled
                     res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
                     logging.info("Patching " + args.instructions + " with test results")
                     check.patch(args.instructions, res, args.link)
