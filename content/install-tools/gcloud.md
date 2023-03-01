@@ -25,10 +25,17 @@ This article provides a quick solution to install `gcloud` for Ubuntu on Arm.
 
 Confirm you are using an Arm machine by running:
 
-```bash { command_line="user@localhost | 2" }
+```bash
 uname -m
+```
+
+The output should be:
+
+```console
 aarch64
 ```
+
+If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 ## Download and Install
 

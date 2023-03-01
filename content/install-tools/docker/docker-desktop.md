@@ -71,6 +71,7 @@ To identify the architecture for macOS use the uname command.
 ```console
 uname -m
 ```
+
 Apple Silicon will be reported as `arm64`.
 
 Share images, automate workflows, and more with a free Docker ID:

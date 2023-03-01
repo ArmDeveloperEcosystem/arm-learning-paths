@@ -41,6 +41,8 @@ The output should be:
 aarch64
 ```
 
+If you see a different result, you are not using an Arm computer running 64-bit Linux.
+
 The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment. 
 
 For Ubuntu/Debian run the command:

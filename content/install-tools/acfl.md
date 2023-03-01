@@ -42,10 +42,17 @@ Arm Compiler for Linux supports all 64-bit Arm based server-class hardware.
 
 Confirm you are using an Arm machine by running:
 
-```bash { command_line="user@localhost | 2" }
+```bash
 uname -m
+```
+
+The output should be:
+
+```console
 aarch64
 ```
+
+If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 If any of the following are not already installed by your Linux distribution, you must install them before installing Arm Compiler for Linux:
 

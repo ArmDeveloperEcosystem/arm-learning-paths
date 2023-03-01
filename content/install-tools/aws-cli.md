@@ -31,7 +31,11 @@ Confirm you are using an Arm computer with 64-bit Linux by running:
 uname -m
 ```
 
-The expected output is `aarch64`
+The output should be:
+
+```console
+aarch64
+```
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
