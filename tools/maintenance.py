@@ -124,12 +124,14 @@ def main():
             else:
                 logging.info("Parsing " + args.instructions)
                 cmd = parse.parse(args.instructions)
-                parse.save(args.instructions, cmd)
-                res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
-                logging.info("Patching " + args.instructions + " with test results")
-                check.patch(args.instructions, res, args.link)
-                if not args.debug:
-                    os.remove(args.instructions+"_cmd.json")
+                # If test_maintenance is enabled
+                if len(cmd) != 0:
+                    parse.save(args.instructions, cmd)
+                    res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
+                    logging.info("Patching " + args.instructions + " with test results")
+                    check.patch(args.instructions, res, args.link)
+                    if not args.debug:
+                        os.remove(args.instructions+"_cmd.json")
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
             check_lp(args.instructions, args.link, args.debug)
         else:
