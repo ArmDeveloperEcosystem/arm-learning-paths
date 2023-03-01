@@ -1,7 +1,7 @@
 <script type="text/javascript">      
-    function starRatingGiven(element,learning_path_name) {
+    function starRatingGiven(element) {
         // Send star rating to analytics
-        trackStarRating(element.value,learning_path_name);
+        trackStarRating(element.value);
 
         // Hide Stars div and surface radio buttons
         document.getElementById('feedback-1-stars').hidden = true;
@@ -21,7 +21,7 @@
 
     }
 
-    function choiceFeedbackGiven(learning_path_name) {     
+    function choiceFeedbackGiven() {     
         // if nothing checked, error
         if (document.querySelector('input[name="feedback-choice"]:checked')==null) {
             document.getElementById("choice-select-option-error").hidden = false;
@@ -34,7 +34,7 @@
         // Send multiple-choice feedback to analytics
         let feedback = document.querySelector('input[name="feedback-choice"]:checked').value
 
-        trackChoiceFeedback(feedback,learning_path_name);
+        trackChoiceFeedback(feedback);
 
         // Hide Radio button feedback
         document.getElementById('feedback-2-choice').hidden = true;
@@ -49,15 +49,15 @@
 </script>
 
 
-{{ $pathFormatted := replace .File.Path "\\" "/" -}}
-{{ $gh_repo := ($.Param "github_repo") -}}
-{{ $gh_url := ($.Param "github_url") -}}
-{{ $gh_subdir := ($.Param "github_subdir") -}}
-{{ $gh_project_repo := ($.Param "github_project_repo") -}}
-{{ $gh_branch := (default "master" ($.Param "github_branch")) -}}
+{{ $pathFormatted := replace .context.File.Path "\\" "/" -}}
+{{ $gh_repo := (.context.Param "github_repo") -}}
+{{ $gh_url := (.context.Param "github_url") -}}
+{{ $gh_subdir := (.context.Param "github_subdir") -}}
+{{ $gh_project_repo := (.context.Param "github_project_repo") -}}
+{{ $gh_branch := (default "master" (.context.Param "github_branch")) -}}
 {{ $gh_repo_path := printf "%s/content/%s" $gh_branch $pathFormatted -}}
 
-{{ $issuesURL := printf "%s/issues/new?title=Feedback - %s" $gh_repo (safeURL $.Parent.Title ) -}}
+{{ $issuesURL := printf "%s/issues/new?title=Feedback - %s" $gh_repo (safeURL .context.Parent.Title ) -}}
 
 
 
@@ -69,20 +69,20 @@
 
             <!-- 1) Stars -->
             <div id="feedback-1-stars">
-                <p>How would you rate the overall quality of this Learning Path?</p>
+                <p>How would you rate the overall quality of this {{.learningpath_or_toolinstall}}?</p>
                 <div class="rating" style="float: left">
-                    <input id="rating-5" type="radio" name="rating" value="5" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-5"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-4" type="radio" name="rating" value="4" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-4"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-3" type="radio" name="rating" value="3" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-3"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-2" type="radio" name="rating" value="2" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-2"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-1" type="radio" name="rating" value="1" onclick="starRatingGiven(this, {{.Parent.Title}})"/><label for="rating-1"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-5" type="radio" name="rating" value="5" onclick="starRatingGiven(this)"/><label for="rating-5"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-4" type="radio" name="rating" value="4" onclick="starRatingGiven(this)"/><label for="rating-4"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-3" type="radio" name="rating" value="3" onclick="starRatingGiven(this)"/><label for="rating-3"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-2" type="radio" name="rating" value="2" onclick="starRatingGiven(this)"/><label for="rating-2"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-1" type="radio" name="rating" value="1" onclick="starRatingGiven(this)"/><label for="rating-1"><i class="fas fa-2x fa-star"></i></label>
                 </div>
             </div>
 
             <!-- 2) Multiple-choice feedback -->
             <div id="feedback-2-choice" hidden>
                 <p class="u-margin-bottom-0">What is the primary reason for your feedback <span id="specific-stars"></span>?</p>
-                <form action='javascript:choiceFeedbackGiven("{{.Parent.Title}}")'>
+                <form action='javascript:choiceFeedbackGiven()'>
 
                     <div id="1-2-3-star-options" class="u-margin-left-1" hidden>
                         <div class="choice ads-radio-style">
@@ -146,72 +146,15 @@
 
             <!-- 2) Multiple-choice feedback -->
             <div id="feedback-3-thanks" hidden>
-                <p>Thank you. We're grateful for your feedback on how to improve this Learning Path.</p>
-                <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Raise an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
-                <li>Want to discuss this topic with fellow developers and experts? <a href="https://discord.com/invite/armsoftwaredev" target="_blank">Engage in the Arm SW Developer Discord.{{partial "general-formatting/external-link.html" }}</a></li>
+                <p>Thank you. We're grateful for your feedback on how to improve this {{.learningpath_or_toolinstall}}.</p>
+                <ul>
+                    <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Raise an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
+                    <li>Want to discuss this topic with fellow developers and experts? <a href="https://discord.com/invite/armsoftwaredev" target="_blank">Engage in the Arm SW Developer Discord.{{partial "general-formatting/external-link.html" }}</a></li>
+                </ul>
+                
             </div>
 
         </div>
     </div>
 </div>
 
-
-<style>
-
-#feedback-container {
-    min-height: 200px;
-
-}
-
-/****************************************************/
-/* Star rating styling */
-
-.rating {
-	direction: rtl;
-	unicode-bidi: bidi-override;
-}
-
-.rating input {
-	display: none;
-}
-.rating label:hover,
-.rating label:hover ~ label,
-.rating input:checked + label,
-.rating input:checked + label ~ label {
-	color: var(--arm-yellow);  /* #ffc107 */
-}
-/****************************************************/
-
-
-#error-text {color: var(--arm-web-safe-red);}
-html[theme='dark'] #error-text {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
-
-
-/*********/
-/* Smooth transition code */
-
-#choice-select-option-error {
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-#choice-select-option-error.smooth-open {
-    opacity: 1;
-}
-
-#feedback-2-choice {
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-#feedback-2-choice.smooth-open {
-    opacity:1
-}
-
-#feedback-3-thanks {
-    opacity: 0;
-    transition: opacity 1s;
-}
-#feedback-3-thanks.smooth-open {
-    opacity:1
-}
-</style>

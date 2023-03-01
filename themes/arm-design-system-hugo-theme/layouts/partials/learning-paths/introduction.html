@@ -123,14 +123,14 @@
 
 <!-- Markdown content -->
 <div class="content-box">
-    <h2>Who is this for?</h2>
+    <h3>Who is this for?</h3>
         <p class="u-margin-left-1">{{ .Params.who_is_this_for }}</p>
-    <h2 class="u-margin-top-2">What will you learn?</h2>
+    <h3 class="u-margin-top-2">What will you learn?</h3>
         <p class="u-margin-left-1">Upon completion of this learning path, you will be able to:</p>
         {{ range .Params.learning_objectives }}
             <li class="u-margin-left-2">{{.}}</li>
         {{ end }}  
-    <h2 class="u-margin-top-2">Prerequisites</h2>
+    <h3 class="u-margin-top-2">Prerequisites</h3>
         <p class="u-margin-left-1">Before starting, you will need the following:</p>
     	{{ range .Params.prerequisites }}
             <li class="u-margin-left-2">{{. | markdownify}}</li>
@@ -139,15 +139,11 @@
 </div>
 
 
-
 <!-- Include javascript for translating minutes to complete text -->
 <script src="/js/other-functions.js"></script>
-
 <script>
-        (() => {
-            console.log('hi')
-        // For each card, display proper hours and min
+    (() => {      // For each card, display proper hours and min
         const time_span_ele = document.getElementsByClassName('time-to-complete-string');
-            for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
-        });
+        for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
+    })();
 </script>

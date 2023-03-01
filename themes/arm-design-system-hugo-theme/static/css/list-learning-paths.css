@@ -7,15 +7,10 @@ ads-alert {
 html[theme="dark"]  ads-alert { 
     /*--ads-alert-background-color: var(--arm-color-overlay-dark);*/
     --ads-alert-background-color: var(--arm-color-surface);
-    --ads-alert-color: white;
 }
 html[theme="light"] ads-alert { 
     /*--ads-alert-background-color: var(--white);*/
     --ads-alert-background-color: var(--arm-light-grey-alt);
-}
-ads-alert a {
-    color: var(--arm-blue); 
-    text-decoration: none;
 }
 
 
@@ -31,7 +26,7 @@ ads-alert a {
 #tag-preface {
     color: #6f777c;
     display: inline-flex;
-    padding-top: 7px; /* aligning center of tags */
+    padding-top: 9px; /* aligning center of tags */
 }
 
 html[theme="dark"] #tag-preface {
@@ -62,6 +57,7 @@ html[theme="dark"] #tag-clear-btn:hover { color: var(--arm-web-safe-orange);}
 html[theme="dark"] .sorting-criteria.active {
     border-bottom: 2.2px solid hsla(0,0%,100%,.9);
 }
+
 
 #divider-line {
     border-top: 1px solid var(--ads-search-border-color);
@@ -155,23 +151,27 @@ ads-card.path-card .card-title-div {
 
     .card-subject {
         font-weight: lighter;
-        font-size: 0.9rem;
+        font-size: 0.9rem!important;
     }
 
-    .card-title, .basics-title {
+    html[theme="light"] .card-title, html[theme="light"] .basics-title {
         color: var(--arm-blue);
+    }
+    .card-title, .basics-title {
+        color: var(--arm-light-blue);
         font-weight: bold;
         font-size:1.25rem;
     }
+
     .basics-title {
         margin: 0;
     }
     .card-tag-details {
-        font-size: 0.9rem;
+        font-size: 0.9rem!important;
     }
     .card-date {
         font-weight: lighter;
-        font-size: 0.9rem;
+        font-size: 0.9rem!important;
     }
 
 
