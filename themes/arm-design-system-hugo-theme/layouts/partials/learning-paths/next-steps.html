@@ -1,8 +1,7 @@
 
 
 <!-- Feedback at top -->
-
-{{ partial "general-formatting/feedback.html" .context}}
+{{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
 
 
 <!-- 3 columns of helpful hints-->
@@ -11,9 +10,8 @@
         <h2>Continue Learning</h2>
         <p>{{.context.Params.next_step_guidance  | markdownify}}</p>
         {{ with .context.Site.GetPage .context.Params.recommended_path}}
-        <p>Next Learning Path: &nbsp;&nbsp;
         <span><ads-cta-link link='{{.Permalink}}'>
-            <span>{{.Title}}</span>
+            <span>Next Learning Path:&nbsp;&nbsp;&nbsp;{{.Title}}</span>
         </ads-cta-link>
         </span>
     </p>
