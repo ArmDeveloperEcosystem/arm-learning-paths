@@ -66,7 +66,7 @@ def check_lp(lp_path, link, debug):
                     if i.endswith("_cmd.json"):
                         os.remove(lp_path+"/"+i)
         else:
-            logging.debug("File {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(article))
+            logging.debug("Learning Path {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(lp_path))
     else:
         logging.warn("No _index.md found in Learning Path")
 
