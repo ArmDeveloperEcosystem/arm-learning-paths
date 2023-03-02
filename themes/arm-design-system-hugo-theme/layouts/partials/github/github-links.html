@@ -12,14 +12,17 @@
  {{ $issuesURL := printf "%s/issues/new?title=%s" $gh_repo (safeURL $.Title ) -}}
 
  <div class="github-div">
-    <a href="{{ $issuesURL }}" target="_blank" style="text-decoration: none;"><p class="github-link"><span><img alt="GitHub" style="vertical-align: middle; width: 20px;" class="github-svg" src="/img/github.svg"/>&nbsp;&nbsp;Log an issue</p></span></a>
-    <a href="{{ $editURL }}" target="_blank" style="text-decoration: none;"><p class="github-link"><span><img alt="GitHub" style="vertical-align: middle; width: 20px;" class="github-svg" src="/img/github.svg"/>&nbsp;&nbsp;Fork and edit</p></span></a>
-    <a href="{{ $viewURL }}" target="_blank" style="text-decoration: none;"><p class="github-link"><span><img alt="GitHub" style="vertical-align: middle; width: 20px;" class="github-svg" src="/img/github.svg"/>&nbsp;&nbsp;View page source</p></span></a>   
+    <a href="{{ $issuesURL }}" target="_blank" style="text-decoration: none;"><p class="github-link"><span><i class="left-hand-icon fa-regular fa-scrubber"></i>&nbsp;&nbsp;Log an issue</p></span></a>
+    <a href="{{ $editURL }}" target="_blank" style="text-decoration: none;"><p class="github-link"><span><i class="left-hand-icon fa-solid fa-code-branch"></i>&nbsp;&nbsp;Fork and edit</p></span></a>
+    <a href="https://discord.com/invite/armsoftwaredev" target="_blank" style="text-decoration: none;"><p class="github-link"><span><i class="left-hand-icon fa-brands fa-discord"></i>&nbsp;&nbsp;Discuss on Discord</p></span></a>   
  </div>
-
+ 
  <style>
+    .left-hand-icon {
+        width: 15px;
+    }
+
     p.github-link        { 
-        font-size:1em;
         margin-top: 0px;
         margin-bottom: 0px;
 

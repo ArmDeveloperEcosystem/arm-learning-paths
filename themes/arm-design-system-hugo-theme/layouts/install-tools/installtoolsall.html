@@ -113,9 +113,10 @@
                                         </td>
                                     </tr>
                                 {{end}}
-                              </table>                          
+                              </table>    
+                              <p style="margin-top: 24px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
+                      
                     </div>
-                    <p style="margin-top: 24px; margin-left: 16px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
                 </div>            
             </div>
 
@@ -131,7 +132,7 @@
             <!-- Multi-tool easy routing to new pages, ONLY for main multi_install page -->
             {{if .Params.multi_install}}
                 <div class="content-box markdown-content-div">
-                    <h3>Select a path:</h3> 
+                    <h2>Select a specific tool for install instructions:</h2> 
                     <div class="c-row">
                         <div class="c-col">
                             <div class="u-display-grid u-gap-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
@@ -150,7 +151,13 @@
                 </div>
             {{end}}
 
-
+            <!-- Feedback at bottom -->
+            {{if not .Params.multi_install}}
+                <br>
+                <div style="min-height: 350px;">
+                    {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}
+                </div>   
+            {{end}}         
         </div>
     </div>
 
@@ -160,14 +167,11 @@
 
 <!-- Include javascript for translating minutes to complete text -->
 <script src="/js/other-functions.js"></script>
-
 <script>
-        (() => {
-            console.log('hi')
-        // For each card, display proper hours and min
+    (() => {        // For each card, display proper hours and min
         const time_span_ele = document.getElementsByClassName('time-to-complete-string');
-            for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
-        });
+        for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
+    })();
 </script>
 
 {{end}}

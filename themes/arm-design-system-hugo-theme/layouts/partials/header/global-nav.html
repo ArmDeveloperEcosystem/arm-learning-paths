@@ -6,7 +6,7 @@
 
           <div class="c-row">
             <div class="c-col c-col-12">
-              <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">Software Development Areas</h2>
+              <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">Learning Path Categories</h2>
             </div>
           </div>
 
@@ -110,19 +110,21 @@
         title: 'width',
       },
       */
+      /* Uncomment to allow user to change page height
       {
         id: 'height',
         type: 'button',
         icon: 'fas fa-text-height',
         title: 'height',
       },
+      */
     ];
 
     const contextualData = [
       {
         id: 'category1',
         slotId: 'category1',
-        label: 'Software Development Areas',
+        label: 'Learning Path Categories',
         items: [
           {
             label: 'Server and Cloud',
@@ -211,7 +213,7 @@
       if (evt.action === 'theme') {
           const currentTheme = document.querySelector('html').getAttribute("theme");
 
-          //console.log('here',document.getElementById('global-nav-example-default'),document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-lightbulb'));
+          console.log('here',document.getElementById('global-nav-example-default'),document.getElementById('global-nav-example-default').shadowRoot.querySelector('.fa-lightbulb'));
 
           if (currentTheme === "dark") { // Turn to Light theme
             document.querySelector('html').setAttribute('theme', 'light');
