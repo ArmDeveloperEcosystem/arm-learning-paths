@@ -59,14 +59,14 @@ jobs:
           name: outdated
           
       # Run tests for install tools
-      - name: Test commands and output reports
+      - name: Test commands and output reports for intall-tools
         run: |
           for i in $(tree -i -f content/install-tools/ | tail -n +2 | grep ".md$"); do
             python3 tools/maintenance.py -i $i -l ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           done
            
       # Run tests for learning paths
-      - name: Test commands and output reports
+      - name: Test commands and output reports for learning paths
         run: |
           for i in $(tree -i -d -f content/learning-paths/ | tail -n +2); do
             python3 tools/maintenance.py -i $i -l ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
