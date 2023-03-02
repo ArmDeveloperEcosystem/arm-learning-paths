@@ -1,3 +1,3 @@
 ---
-title: "Select tool you wish to install"
+title: "Select tool to install"
 ---

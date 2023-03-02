@@ -30,8 +30,7 @@ tools_software_languages:
     - Assembly
     - Arm Development Studio
     - Arm Compiler for Embedded
-    - Arm Fast Models   
-
+    - Arm Fast Models
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -31,15 +31,15 @@
         
 */
 
-function trackStarRating(rating,learning_path_title) {
-    // Send tracking data                
+function trackStarRating(rating) {
+    // Send tracking data             
     _satellite.track('feedback-interaction', {   
         'feedback-type' : 'star-rating',
         'feedback-contetn': rating
     }); 
 }
 
-function trackChoiceFeedback(feedback_multiple_choice_answer,learning_path_title) {
+function trackChoiceFeedback(feedback_multiple_choice_answer) {
     // Send tracking data                
     _satellite.track('feedback-interaction', {   
         'feedback-type' : 'reason',
