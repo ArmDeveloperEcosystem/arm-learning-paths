@@ -89,6 +89,7 @@ def main():
     arg_group.add_argument('-f', '--filter-checker', action='store_true', help='Validates the correct closed schema filters are being used in INPUT, reports any errors, and optionally updates _index.md files for each learning path category to reflect the currently supported filters.')
     arg_group.add_argument('-s', '--spelling', metavar='INPUT', action='store', type=str, help='Parse spelling of md file as INPUT. On completion the INPUT is patched with highlighted text and correction.')
     arg_group.add_argument('-i', '--instructions', metavar='INPUT', action='store', type=str, help='Parse instruction from Learning Path(s) and test them. INPUT can be a CSV file with the list of Learning Paths, a single .md file or the Learning Path folder. Test results are stored in Junit XML file. A summary is also added to the Learning Path _index.md page.')
+    arg_group.add_argument('-q', '--query', action='store_true', help='Query data and update website stats.')
     arg_group.add_argument('-r', '--report', metavar='DAYS', action='store', type=int, default=1, help='List articles older than a period in days (default is 1). Output a CSV file. This option is used by default.')
 
     args = arg_parser.parse_args()
@@ -149,6 +150,10 @@ def main():
     elif args.filter_checker:
         logging.info("Filter-check")
         filter_checker.checker(args.type, args.patch)
+    elif args.query:
+        logging.info("Querying data and generating stats...")
+        report.stats()
+        logging.info("Stats updated in content/stats/data.json")
     elif args.report:
         logging.info("Creating report of articles older than {} days".format(args.report))
         report.report(args.report)

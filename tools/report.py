@@ -9,6 +9,14 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta
 
+# List of directories to parse for learning paths
+dname = ["content/install-tools",
+         "content/learning-paths/desktop-and-laptop",
+         "content/learning-paths/embedded",
+         "content/learning-paths/microcontroller",
+         "content/learning-paths/mobile",
+         "content/learning-paths/server-and-cloud"]
+
 
 '''
 Recursive content search in d. Update list of articles older than period. Returns count of articles found
@@ -44,22 +52,11 @@ def content_parser(d, period):
 
 
 '''
-List pages older than a period in days and save result as CSV
-Generate JSON file with data
 '''
-def report(period):
+def stats():
+    global dname
+
     orig = os.path.abspath(os.getcwd())
-
-    # chdir to the root folder
-    os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
-    dname = ["content/install-tools",
-             "content/learning-paths/desktop-and-laptop",
-             "content/learning-paths/embedded",
-             "content/learning-paths/microcontroller",
-             "content/learning-paths/mobile",
-             "content/learning-paths/server-and-cloud"]
-
-    result = {}
 
     # If file exists, load data. Create structure otherwise
     if os.path.exists('content/stats/data.json'):
@@ -147,9 +144,7 @@ def report(period):
 
     total=0
     for d_idx, d in enumerate(dname):
-        res, count = content_parser(d, period)
-        result.update(res)
-        logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
+        res, count = content_parser(d, 0)
         # Sliding windows for data - remove data older than a year - 53 weeks
         if len(data["data"][d_idx]["x"]) > 52:
             data["data"][d_idx]["x"].pop(0)
@@ -158,16 +153,45 @@ def report(period):
         data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
         # Articles counted in category
         data["data"][d_idx]["y"].append(count)
+        logging.info("{} articles found in {}.".format(count, d))
+        total += count
+
+    logging.info("Total number of Learning Paths is {}.".format(total))
+
+    fn='content/stats/data.json'
+    os.chdir(orig)
+    logging.info("Results written in " + orig + "/" + fn)
+
+    # Save data in json file
+    f = open(fn, 'w')
+    # Write results to file
+    json.dump(data, f)    
+    # Closing JSON file
+    f.close()
+
+
+'''
+List pages older than a period in days and save result as CSV
+Generate JSON file with data
+'''
+def report(period):
+    global dname
+
+    orig = os.path.abspath(os.getcwd())
+
+    # chdir to the root folder
+    os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
+
+    result = {}
+
+    total=0
+    for d_idx, d in enumerate(dname):
+        res, count = content_parser(d, period)
+        result.update(res)
+        logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
         total += count
 
     logging.info("Total number of articles is {}.".format(total))
-
-    # Save data in json file
-    f = open('content/stats/data.json', 'w')
-    # Write results to file
-    json.dump(data, f)
-    # Closing JSON file
-    f.close()
 
     fn="outdated_files.csv"
     fields=["File", "Last updated"]
