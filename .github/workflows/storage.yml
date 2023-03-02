@@ -37,10 +37,6 @@ jobs:
       - name: Build
         run: hugo --minify
         
-      # Debug
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        
       #  Copy SSH Key
       - name: copy key
         run: |
@@ -50,6 +46,11 @@ jobs:
         shell: bash
         env:
           SSH_KEY: ${{secrets.SSH_KEY}}
+          
+       # Debug
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        
           
       # SCP Site contents to netstorage
       - name: copy file
