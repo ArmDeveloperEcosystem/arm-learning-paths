@@ -1,24 +1,20 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
-title: NoMachine
-
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - cloud
-
-### Estimated completion time in minutes (please use integer multiple of 5)
+layout: installtoolsall
 minutes_to_complete: 30
-
-### Link to official documentation
+multi_install: false
+multitool_install_part: false
 official_docs: https://www.nomachine.com/all-documents
-
-### PAGE SETUP
-weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: true              # Set to true to be listed in main selection page, else false
-multi_install: false            # Set to true if first page of multi-page article, else false
-multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
-layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+test_images:
+- ubuntu:latest
+test_link: null
+test_maintenance: true
+test_status:
+- passed
+title: NoMachine
+tool_install: true
+weight: 1
 ---
 
 [NoMachine](https://www.nomachine.com/) can be used to connect to a remote Linux desktop, including Arm servers and cloud instances.
@@ -51,7 +47,7 @@ Create two files on the server in the home directory ($HOME). The contents of th
 
 Use a text editor to copy and paste this script into a file on the remote machine at $HOME/nx-key.sh
 
-```bash
+```file { file_name="nx-key.sh" }
 #!/bin/bash
 
 if [ -f $HOME/.ssh/authorized_keys ]; then
@@ -64,16 +60,21 @@ fi
 
 Use a text editor to copy and paste this script into a file on the remote machine at $HOME/install-nomachine.sh
 
-```bash
+```file { file_name="install-nomachine.sh" }
 #!/bin/bash
 
 # install NoMachine for remote desktop
-wget https://download.nomachine.com/download/8.1/Arm/nomachine_8.1.2_1_arm64.deb
-sudo dpkg -i nomachine_8.1.2_1_arm64.deb
+wget https://download.nomachine.com/download/8.4/Arm/nomachine_8.4.2_1_arm64.deb
+sudo dpkg -i nomachine_8.4.2_1_arm64.deb
+if [ $? != 0 ]; then
+  exit 1
+fi
 
 # user of the AMI must run the nx-key.sh to copy their key for NX
 echo "$HOME/nx-key.sh" >> /home/$USER/.bashrc
 sudo systemctl set-default multi-user
+
+exit 0
 ```
 
 Give both scripts executable permission.
@@ -84,7 +85,7 @@ chmod +x nx-key.sh install-nomachine.sh
 
 On the remote machine, run the install script.
 
-```bash
+```bash { ret_code="0" }
 ./install-nomachine.sh
 ```
 
