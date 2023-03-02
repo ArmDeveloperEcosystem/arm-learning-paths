@@ -1,2 +1,4 @@
 junit-xml
 pyyaml
+inclusivewriting
+pyspellchecker
