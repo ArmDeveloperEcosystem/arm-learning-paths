@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 We have been using `printf()` to output our message. A mechanism called [semihosting](https://developer.arm.com/documentation/100966/latest/Getting-Started-with-Fixed-Virtual-Platforms/FVP-debug) was used to handle this output. While this is supported in the FVP, it would not be available on real hardware (without a debugger being present), and so execution would simply stop when the `HLT` instruction that is used by the debugger/FVP to detect semihosting is executed.
 
-We will modify the example to send output to the UART serial port of the FVP.
+We will modify the example to send output to the [PL011 UART](https://developer.arm.com/documentation/ddi0183) of the FVP.
 
 You can check if you are using semihosting by importing the symbol `__use_no_semihosting` to your project (see later). The linker will now throw an error for any functions that use semihosting.
 ```
@@ -17,13 +17,13 @@ Error: L6915E: Library reports error: __use_no_semihosting was requested, but _t
 ```
 ## Retarget fputc to use the UART
 
-Many library functions depend on semihosting. You must modify, or `retarget`, these functions to use the hardware of the target instead of the host system.
+Many library functions depend on semihosting. You must `retarget` these functions to use the hardware of the target instead of the host system.
 
-Here we will retarget `printf()` to use the [PL011 UART](https://developer.arm.com/documentation/ddi0183) of the FVP:
+Copy and paste the following code into a new file `uart.c`.
 
-Write a driver for the UART. Copy and paste the following code into a new file with the filename `uart.c`. This contains code to initialize the UART (`uartInit()`), and a retargeted version of `fputc()` (which is what `printf()` ultimately calls) to make use of the UART. We also create `uart.h` containing various macros.
+This contains code to initialize the UART (`uartInit()`), and a retargeted version of `fputc()` (which `printf()` ultimately calls) to make use of the UART. We also create `uart.h` containing various macros. This code is taken from extended examples supplied with Arm Development Studio.
 
-The source also retargets another semihosting function, `__sys_exit()`, to sit in an infinite loop upon execution completion.
+The source retargets another semihosting function, `__sys_exit()`, which is an infinite while loop after completion. Typically an embedded application will never return.
 
 ### uart.c
 ```C
@@ -76,6 +76,7 @@ int fputc(int c, FILE *f) {
 }
 
 void  __attribute__ ((noreturn)) _sys_exit(int x){
+	printf("In _sys_exit. Use Ctrl+C to quit.\n");
 	while(1);
 }
 ```
@@ -141,7 +142,9 @@ struct pl011_uart {
 ```
 ### Modify hello.c
 
-Modify `hello.c` to initialize the UART before it is used, and also to import the `__use_no_semihosting` symbol to ensure that semihosting is no longer used:
+Modify `hello.c` to initialize the UART before it is used. From the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map), we see that `UART0` is located at `0x1C090000`.
+
+ We also to import the `__use_no_semihosting` symbol to ensure that semihosting is no longer used.
 
 ```C
 #include <stdio.h>
@@ -155,8 +158,7 @@ int main (void) {
   return 0;
 }
 ```
-
-No changes are needed to the scatter file. This new code will be handled by the catch-all `* (+RO)` line.
+No changes are needed to the scatter file. This additional code will be placed by the catch-all `* (+RO)` line.
 
 ## Rebuild the example including the retargeted code:
 ```console
@@ -168,12 +170,12 @@ armlink --scatter=scatter.txt --entry=start64 startup.o uart.o hello.o -o hello.
 
 ## Run the example on the FVP
 
-All output is now directed to the model's UART serial port.
-
-We will now launch the simulation model with the newly compiled image. 
+We will now launch the simulation model with the newly built image. 
 ```console
 FVP_Base_Cortex-A72x2-A53x4 -a hello.axf
 ```
+All `printf()` output is now directed to `UART0` of the FVP.
+
 You will see a terminal pop-up when you run the simulation model with the output "Hello World!". Windows users may need to first [enable Telnet Client](https://social.technet.microsoft.com/wiki/contents/articles/38433.windows-10-enabling-telnet-client.aspx).
 
 The code ends in an infinite loop (in the retargeted `__sys_exit()`), and so you must manually terminate (for example with `Ctrl+C`) the FVP.

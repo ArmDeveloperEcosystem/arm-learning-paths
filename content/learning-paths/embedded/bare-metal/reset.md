@@ -7,10 +7,10 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+A real embedded system will need initialization at startup. Often this initialization must occur before any other code is executed.
 
 ## Write a reset handler
-
-A real embedded system will need initialization at startup. Often this initialization must occur before any other code is executed.
+We will create a minimal reset handler, putting all but one processor to sleep, and executing the application on just one processor.
 
 Create a new file, `startup.s`, with the following contents:
 ```C
@@ -28,7 +28,6 @@ sleep:                        // Else put processor to sleep
   B        sleep
 
 boot:
-  // -------------------------------------------------------------
   MSR      CPTR_EL3, xzr       // Clear all trap bits
 
   // Branch to scatter loading and C library init code
@@ -62,6 +61,7 @@ Link the objects, specifying the symbol `start64` as the entry point.
 ```console
 armlink --scatter=scatter.txt hello_world.o startup.o -o hello.axf --entry=start64
 ```
+The entry point is used by the linker to determine which code is necessary to keep. It is also used by debuggers to know where to start execution from.
 
 ## Run the new application
 
