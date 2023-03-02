@@ -19,7 +19,7 @@ test_images:
 - ubuntu:latest
 - fedora:latest
 test_link: null
-test_maintenance: true
+test_maintenance: false
 test_status:
 - passed
 - passed

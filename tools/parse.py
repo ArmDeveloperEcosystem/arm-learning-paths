@@ -70,7 +70,7 @@ def save(article, cmd, learningpath=False, img=None):
 
     if not hdr["maintain"] and not learningpath:
         logging.info("File {} settings don't enable parsing.".format(article))
-        return
+        return -1
 
     if not img:
         img = hdr["img"]
@@ -136,4 +136,6 @@ def save(article, cmd, learningpath=False, img=None):
 
     with open(fn, 'w') as f:
         json.dump(content, f)
+
+    return 0
 

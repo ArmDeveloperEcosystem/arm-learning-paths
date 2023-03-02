@@ -66,9 +66,9 @@ def check_lp(lp_path, link, debug):
                     if i.endswith("_cmd.json"):
                         os.remove(lp_path+"/"+i)
         else:
-            logging.debug("File {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(article))
+            logging.debug("Learning Path {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(lp_path))
     else:
-        logging.warn("No _index.md found in Learning Path")
+        logging.warning("No _index.md found in Learning Path")
 
 
 '''
@@ -124,12 +124,13 @@ def main():
             else:
                 logging.info("Parsing " + args.instructions)
                 cmd = parse.parse(args.instructions)
-                parse.save(args.instructions, cmd)
-                res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
-                logging.info("Patching " + args.instructions + " with test results")
-                check.patch(args.instructions, res, args.link)
-                if not args.debug:
-                    os.remove(args.instructions+"_cmd.json")
+                if parse.save(args.instructions, cmd) == 0:
+                # test_maintenance is enabled
+                    res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
+                    logging.info("Patching " + args.instructions + " with test results")
+                    check.patch(args.instructions, res, args.link)
+                    if not args.debug:
+                        os.remove(args.instructions+"_cmd.json")
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
             check_lp(args.instructions, args.link, args.debug)
         else:
