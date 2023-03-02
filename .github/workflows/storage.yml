@@ -37,23 +37,16 @@ jobs:
       - name: Build
         run: hugo --minify
         
-       # Debug
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        env:
-          SSH_KEY: ${{secrets.SSH_KEY}}
-        
       #  Copy SSH Key
       - name: copy key
         run: |
-            echo -n $SSH_KEY > tmp
+            echo $SSH_KEY | xargs -n 1 > tmp
             base64 -d < tmp > key
             chmod 400 key
         shell: bash
         env:
           SSH_KEY: ${{secrets.SSH_KEY}}
-        
-          
+                  
       # SCP Site contents to netstorage
       - name: copy file
         run: scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss favicon.png $USR@$HOST:/$ID/
