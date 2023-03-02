@@ -10,7 +10,7 @@ multitool_install_part: false
 official_docs: https://docs.anaconda.com/
 test_images:
 - ubuntu:latest
-test_link: null
+test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
 test_status:
 - passed
