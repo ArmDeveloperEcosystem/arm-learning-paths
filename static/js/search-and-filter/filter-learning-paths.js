@@ -83,8 +83,8 @@ function removeFacet(tag) {
                 //checkbox_element.setAttribute('checked',true); // when setting and unsetting it freezes the checkbox element.
             
 
-                checkbox_element.removeAttribute('checked');
-                //checkbox_element.checked = false;
+                //checkbox_element.removeAttribute('checked');
+                checkbox_element.checked = false;
             }
         });
 
@@ -201,6 +201,8 @@ function filterHandler_LearningPaths(element) {
     
         // get status of checkbox (true for checked, false for unchecked)
         element.value().then((value) => {
+            console.log('checkbox value: ',value);
+
             if (value === true) {
                 // add 'checked' value to html
                addFacet(element,all_path_cards);

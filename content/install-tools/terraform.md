@@ -1,31 +1,19 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
-title: Terraform
-
-### Optional additional search terms (one per line) to assist in finding the article
-additional_search_terms:
-
-### Estimated completion time in minutes (please use integer multiple of 5)
+additional_search_terms: null
+layout: installtoolsall
 minutes_to_complete: 30
-
-### Link to official documentation
+multi_install: false
+multitool_install_part: false
 official_docs: https://developer.hashicorp.com/terraform/docs
-
-### Test setup
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-software-developers-ads/actions/runs/3540052189
+test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
 test_maintenance: true
 test_status:
 - passed
-
-### PAGE SETUP
-weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: true              # Set to true to be listed in main selection page, else false
-multi_install: false            # Set to true if first page of multi-page article, else false
-multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
-layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+title: Terraform
+tool_install: true
+weight: 1
 ---
 
 [Terraform](https://www.terraform.io/) automates cloud infrastructure. It is an infrastructure as code tool. 

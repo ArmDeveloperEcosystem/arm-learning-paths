@@ -4,7 +4,7 @@
 {{ $tools_to_list := where .Site.Pages "Params.tool_install" true}}
 
 
-<p class="u-margin-top-1 u-margin-left-1 u-margin-bottom-1/2 u-font-size-75%">
+<p class="u-margin-top-1 u-margin-left-1 u-margin-bottom-1/2 u-font-size-90%">
     Don't know a tool by name to search for? Try these common search terms:  
     <a href="/install-tools/?search=compiler">compiler</a>.
 </p>
@@ -12,12 +12,12 @@
 <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search by tool name"></ads-search>
 
 <!-- Current results bar -->
-<div id="results-status-bar" class="c-row u-margin-left-1 u-margin-top-1/2" style="min-height: 30px;">
-    Displaying&nbsp;
-    <span id="currently-shown-number" class="u-text-bold"> {{len $tools_to_list }} </span>
-    &nbsp;of&nbsp;
-    <span id="total-shown-number" class="u-text-bold"> {{len $tools_to_list }} </span>
-    &nbsp;tools.
+<div id="results-status-bar" class="u-margin-left-1 u-margin-top-1/2" style="min-height: 30px;">
+    Displaying 
+    <span id="currently-shown-number" class="num-of-paths-text"> {{len $tools_to_list }} </span>
+    of 
+    <span id="total-shown-number" class="num-of-paths-text"> {{len $tools_to_list }} </span>
+    tools.
 </div>
 
 <div class="c-row">
@@ -93,6 +93,9 @@
         transition-timing-function: ease-in-out;
         width: 12px;
       }
+      html[theme="dark"] ads-card-content.tool-card-content::before {
+        background-color: var(--arm-blue);
+      }
 
     
 
@@ -108,9 +111,16 @@
         transition-duration: 0.3s;
         transition-timing-function: ease-in-out;
       }
+      html[theme="dark"] ads-card.tool-card p {
+        color: var(--arm-light-blue);
+      }
+
       ads-card.tool-card:hover p {
         color:var(--arm-web-safe-orange);
         margin-left: 12px;
+      }
+      html[theme="dark"]       ads-card.tool-card:hover p {
+        color:var(--arm-web-safe-orange);
       }
     
     </style>

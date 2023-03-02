@@ -22,9 +22,31 @@
         
         -   search-interaction
                 Attributes tracked:
-                    - search-current-query  --> add current search query; done after blur of search query      
+                    - search-current-query  --> add current search query; done after blur of search query    
+                    
+        -   feedback-interaction
+                Attributes tracked:
+                    - feedback-type         --> either 'star-rating' or 'reason'
+                    - feedback-content      --> specifies the feedback. Star-rating will be 1-5, Reason will be a string (from a limited choice set, not free text) 
         
 */
+
+function trackStarRating(rating) {
+    // Send tracking data             
+    _satellite.track('feedback-interaction', {   
+        'feedback-type' : 'star-rating',
+        'feedback-contetn': rating
+    }); 
+}
+
+function trackChoiceFeedback(feedback_multiple_choice_answer) {
+    // Send tracking data                
+    _satellite.track('feedback-interaction', {   
+        'feedback-type' : 'reason',
+        'feedback-contetn': feedback_multiple_choice_answer
+    }); 
+}
+
 
 function trackSearchInteraction() {
     // Get current search term
@@ -91,7 +113,6 @@ function trackFacetInteraction(){
 
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
         
-        console.log('depth:',depth_of_path);
 
         //
         //  Homepage
@@ -170,7 +191,8 @@ function trackFacetInteraction(){
                     1. Tags (only for intro and next step pages)
                     2. Review ('check answer' button)
                     2.5. Review (if all correct, add trigger for analytics somehow)
-                    3. Navigation forward/back (on left hand pannel and next/prev buttons), and mobile      
+                    3. Feedback (on Next Steps page)
+                    4. Navigation forward/back (on left hand pannel and next/prev buttons), and mobile      
             */
 
             // 1) Tags
@@ -199,10 +221,12 @@ function trackFacetInteraction(){
             } 
 
 
+            // 3) Feedback on Next Steps page
+                // This is called from the feedback.html partial to functions at the top of this file.
+                // trackStarRating
+                // trackChoiceFeedback
 
-
-
-            // 3a) Navitaion from navbar
+            // 4a) Navitaion from navbar
             let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  
             for (let nav_bar_element of in_learning_path_nav_bar_elements) {
                 nav_bar_element.addEventListener("click", () => {
@@ -224,7 +248,7 @@ function trackFacetInteraction(){
             }
 
 
-            // 3b) Navigation forward/back on buttons
+            // 4b) Navigation forward/back on buttons
             let in_learning_path_nav_btn_elements = document.getElementsByClassName('inner-learning-path-navbtn-element');  
             for (let nav_btn_element of in_learning_path_nav_btn_elements) {
                 nav_btn_element.addEventListener("click", () => {

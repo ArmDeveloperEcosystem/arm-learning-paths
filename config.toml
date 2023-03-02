@@ -25,7 +25,7 @@ cloudFrontDistributionID = "E1KJFR5JSKYU64"
 
 [permalinks]
     tools_software_languages = "/tag/:slug/"
-    operatingsystem = "/tag/:slug/"
+    operatingsystems = "/tag/:slug/"
     subjects = "/tag/:slug/"
 
 

@@ -1,0 +1,14 @@
+.copy-to-clipboard-button {
+    color: white!important;
+    background-color: var(--arm-blue)!important;
+}
+
+html[theme="dark"] .copy-to-clipboard-button {
+    color: black!important;
+    background-color: var(--arm-light-blue)!important;
+}
+
+
+.copy-to-clipboard-button:hover span {
+    font-weight: bold;
+}
