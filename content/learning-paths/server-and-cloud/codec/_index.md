@@ -19,10 +19,10 @@ skilllevels: Introductory
 subjects: Libraries
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: null
 test_maintenance: true
 test_status:
-- failed
+- passed
 title: Run x265 (H.265 codec) on Arm servers
 tools_software_languages:
 - x265
