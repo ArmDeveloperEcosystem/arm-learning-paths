@@ -68,7 +68,7 @@ def check_lp(lp_path, link, debug):
         else:
             logging.debug("Learning Path {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(lp_path))
     else:
-        logging.warn("No _index.md found in Learning Path")
+        logging.warning("No _index.md found in Learning Path")
 
 
 '''
