@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have built your first stand-alone embedded application. Why not explore these other embedded software Learning Paths.
+   You have built your first stand-alone Armv8-A embedded application. Why not explore these other embedded software Learning Paths.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/embedded"
@@ -18,12 +18,12 @@ recommended_path: "/learning-paths/embedded"
 
 further_reading:
     - resource:
-        title: Arm Compiler for Embedded User Guide
-        link: https://developer.arm.com/documentation/100748
+        title: Arm Cortex-A Series Programmer's Guide for ARMv8-A
+        link: https://developer.arm.com/documentation/den0024
         type: documentation
     - resource:
-        title: Arm Compiler for Embedded Reference Guide
-        link: https://developer.arm.com/documentation/101754
+        title: Arm Compiler for Embedded User Guide
+        link: https://developer.arm.com/documentation/100748
         type: documentation
 
 # ================================================================================

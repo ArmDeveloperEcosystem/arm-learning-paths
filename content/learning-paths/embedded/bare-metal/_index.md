@@ -1,17 +1,16 @@
 ---
-title: Build and run your first embedded image
+title: Create a bare-metal Armv8-A embedded image
 
-description: Learn how to write, compile, and run a simple embedded system program
+minutes_to_complete: 60   
 
-minutes_to_complete: 30   
-
-who_is_this_for: This is an introductory topic for embedded software developers new to Arm Compiler for Embedded.
+who_is_this_for: This is an introductory topic for embedded software developers new to Armv8-A processors and/or the Arm Compiler for Embedded.
 
 learning_objectives: 
     - Create and build an example project
     - Run example on Fixed Virtual Platform (FVP)
-    - Understand boot code and other syntax
+    - Understand basic boot code and other syntax
     - Extend example to use different I/O mechanisms
+    - Extend example to implement basic exception handling
 
 prerequisites:
     - Some familiarity with embedded programing is assumed

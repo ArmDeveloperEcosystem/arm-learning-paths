@@ -1,0 +1,16 @@
+<!--
+Usage: highlight TEXT TOOLTIP
+With:
+- COLOR: highlighting color
+- TEXT: text to be highlighted in yellow
+- TOOLTIP: tool tip to display when hovering
+-->
+
+{{ $color := .Get 0 }}
+{{ $txt := .Get 1 }}
+{{ $tip := .Get 2 }}
+{{ if ne $tip "None" }}
+<span style="background-color: {{ $color }}; color: black" title={{ $tip }}>{{ $txt }}</span>
+{{ else }}
+<span style="background-color: {{ $color }}; color: black">{{ $txt }}</span>
+{{ end }}

@@ -7,6 +7,7 @@ import os
 import report
 import parse
 import check
+import filter_checker
 
 
 # Set default verbosity level
@@ -66,9 +67,9 @@ def check_lp(lp_path, link, debug):
                     if i.endswith("_cmd.json"):
                         os.remove(lp_path+"/"+i)
         else:
-            logging.debug("File {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(article))
+           logging.warning("Learning Path {} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(lp_path))
     else:
-        logging.warn("No _index.md found in Learning Path")
+        logging.warning("No _index.md found in Learning Path")
 
 
 '''
@@ -80,10 +81,15 @@ def main():
     arg_parser = argparse.ArgumentParser(description='Maintenance tool.', prefix_chars='-')
     arg_parser.add_argument('-v', '--version', action='version', version='Maintenance toolkit version 0.1', help='Display software version')
     arg_parser.add_argument('-d', '--debug', action='store_true', help='Enable debugging messages')
-    arg_parser.add_argument('-l', '--link', metavar='URL', action='store', type=str, help='Specify URL to github actions report. Added wen patching sources files with --instructions')
+    arg_parser.add_argument('-l', '--link', metavar='URL', action='store', type=str, help='Specify URL to github actions report. Added when patching sources files with --instructions')
+    arg_parser.add_argument('-p', '--patch', action='store_true', help='Patch categories _index.md with results when using --filter-checker')
+    arg_parser.add_argument('-t', '--type', metavar='REPORT', action='store', default='all', type=str, help='Specify report type detailing the closed filter status when using --filter-checker. Can be either \'all\', \'subjects\', \'softwares\', \'oses\', \'tools\'')
 
     arg_group = arg_parser.add_mutually_exclusive_group()
-    arg_group.add_argument('-i', '--instructions', metavar='INPUT', action='store', type=str, help='Parse instruction from Learning Path(s) and test them. INPUT can be a CSV file with the list of Learning Paths, a single .md file or the Learning Path folder. Test results are stored in Junit XML file. A summary is also added to the Learning Path _index.md page.')
+    arg_group.add_argument('-f', '--filter-checker', action='store_true', help='Validates the correct closed schema filters are being used in INPUT, reports any errors, and optionally updates _index.md files for each learning path category to reflect the currently supported filters.')
+    arg_group.add_argument('-s', '--spelling', metavar='INPUT', action='store', type=str, help='Parse spelling of md file as INPUT. On completion the INPUT is patched with highlighted text and correction.')
+    arg_group.add_argument('-i', '--instructions', metavar='INPUT', action='store', type=str, help='Parse instructions from Learning Path(s) and test them. INPUT can be a CSV file with the list of Learning Paths, a single .md file or the Learning Path folder. Test results are stored in Junit XML file. A summary is also added to the Learning Path _index.md page.')
+    arg_group.add_argument('-q', '--query', action='store_true', help='Query data and update website stats.')
     arg_group.add_argument('-r', '--report', metavar='DAYS', action='store', type=int, default=1, help='List articles older than a period in days (default is 1). Output a CSV file. This option is used by default.')
 
     args = arg_parser.parse_args()
@@ -106,15 +112,19 @@ def main():
                     if "/learning-paths/" in os.path.abspath(fn):
                         check_lp(fn, args.link, args.debug)
                     elif fn.endswith(".md"):
-                        logging.debug("Parsing " + fn)
-                        cmd = parse.parse(fn)
-                        parse.save(fn, cmd)
-                        logging.info("Checking " + fn)
-                        res = check.check(fn+"_cmd.json", start=True, stop=True)
-                        logging.info("Patching " + fn + " with test results")
-                        check.patch(fn, res, args.link)
-                        if not args.debug:
-                            os.remove(fn+"_cmd.json")
+                        logging.info("Parsing " + fn)
+                        # check if maintenance if enabled
+                        if parse.header(fn)["maintain"]:
+                            cmd = parse.parse(fn)
+                            parse.save(fn, cmd)
+                            logging.info("Checking " + fn)
+                            res = check.check(fn+"_cmd.json", start=True, stop=True)
+                            logging.info("Patching " + fn + " with test results")
+                            check.patch(fn, res, args.link)
+                            if not args.debug:
+                                os.remove(fn+"_cmd.json")
+                        else:
+                            logging.warning("{} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(fn))
                     else:
                         logging.error("Unknown type " + fn)
         elif args.instructions.endswith(".md"):
@@ -123,17 +133,35 @@ def main():
                 check_lp(args.instructions, args.link, args.debug)
             else:
                 logging.info("Parsing " + args.instructions)
-                cmd = parse.parse(args.instructions)
-                parse.save(args.instructions, cmd)
-                res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
-                logging.info("Patching " + args.instructions + " with test results")
-                check.patch(args.instructions, res, args.link)
-                if not args.debug:
-                    os.remove(args.instructions+"_cmd.json")
+                # check if maintenance if enabled
+                if parse.header(args.instructions)["maintain"]:
+                    cmd = parse.parse(args.instructions)
+                    parse.save(args.instructions, cmd)
+                    res = check.check(args.instructions+"_cmd.json", start=True, stop=True)
+                    logging.info("Patching " + args.instructions + " with test results")
+                    check.patch(args.instructions, res, args.link)
+                    if not args.debug:
+                        os.remove(args.instructions+"_cmd.json")
+                else:
+                    logging.warning("{} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.".format(args.instructions))
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
             check_lp(args.instructions, args.link, args.debug)
         else:
-            logging.error("Parsing expects a .md file, a .csv list of files or the Learning Path directory")
+            logging.error("-i/--instructions expects a .md file, a CSV with a list of files or a Learning Path directory")
+    elif args.spelling:
+        logging.info("Checking spelling of {}".format(args.spelling))
+        output = parse.spelling(args.spelling)
+        logging.info("Highlighing mispelling in {}".format(args.spelling))
+        f = open(args.spelling, "w")
+        f.write(output)
+        f.close()
+    elif args.filter_checker:
+        logging.info("Filter-check")
+        filter_checker.checker(args.type, args.patch)
+    elif args.query:
+        logging.info("Querying data and generating stats...")
+        report.stats()
+        logging.info("Stats updated in content/stats/data.json")
     elif args.report:
         logging.info("Creating report of articles older than {} days".format(args.report))
         report.report(args.report)

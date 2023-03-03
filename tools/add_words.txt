@@ -1,0 +1,14 @@
+bare-metal
+x86
+cross-compile
+cross-compiler
+low-level
+toolchain
+toolchains
+on-screen
+microcontrollers
+gcc
+cross-building
+pre-built
+32-bit
+64-bit

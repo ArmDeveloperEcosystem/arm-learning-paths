@@ -3,7 +3,8 @@ title: "Statistics"
 ---
 
 {{< load-plotly >}}
-{{< plotly json="data.json" height="400px" >}}
+{{< plotly json="lp_data.json" height="400px" >}}
+{{< plotly json="contrib_data.json" height="400px" >}}
 
 # Maintenance reports
 

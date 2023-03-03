@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Arm tools
 
 It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
 
@@ -18,11 +18,16 @@ See [Prepare Docker image for Arm embedded development](/learning-paths/cross-pl
 
 We shall use the `FVP_Base_Cortex-A73x2-A53x4` platform, which is a complex FVP system, containing two processor clusters.
 
+## Armv8-A Architecture
+
+This learning path assumes some knowledge of [Armv8-A Architecture](https://developer.arm.com/Architectures/A-Profile%20Architecture). An overview of the instruction set and registers is available [here](https://developer.arm.com/downloads/-/exploration-tools).
+
 ## "Hello World!"
 
 Let's start with a simple C program, and use the `armclang` compiler and `armlink` linker tools to compile and generate an executable image.
 
 Use your favorite editor to create a new source file called `hello.c` with the following contents:
+#### hello.c
 ```C
 #include <stdio.h>
 
@@ -33,7 +38,7 @@ int main(void) {
 ```
 ## Build the example
 
-This command invokes the compiler to compile `hello.c` for the [Armv8-A architecture](https://developer.arm.com/Architectures/A-Profile%20Architecture) and generate an ELF object file `hello.o`:
+This command invokes the compiler to compile `hello.c` for the Armv8-A architecture and generate an ELF object file `hello.o`:
 ```console
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a hello.c
 ```
@@ -56,11 +61,12 @@ We have not yet specified an entry point, and so the entry point defaults to` __
 
 ## Specify the memory map
 
-If you tried to execute the image that you created in the last step on the `FVP_Base_Cortex-A73x2-A53x4 model`, it would not run. This is because the default memory map used by `armlink` does not match the memory map used by the model.
+If you tried to execute the image that you created in the last step on the `FVP_Base_Cortex-A73x2-A53x4 model`, it would not run. This is because the default memory map used by `armlink` does not match the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map) of the FVP.
 
-We must specify a memory map that matches the target and allows the image to run successfully. To do this, we will create a [scatter file](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features).
+We must specify a memory map that matches the target and allows the image to run successfully. To do this, we will use a linker feature known as [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features).
 
 Create a file `scatter.txt` with the following contents:
+#### scatter.txt
 ```console
 ROM_LOAD 0x00000000 0x00010000
 {
@@ -74,8 +80,7 @@ ROM_LOAD 0x00000000 0x00010000
     {
       * (+RW, +ZI)
     }
-    ARM_LIB_STACKHEAP 0x04010000 ALIGN 64 EMPTY 0x10000
-    {}
+    ARM_LIB_STACKHEAP 0x04010000 ALIGN 64 EMPTY 0x10000 {}
 }
 ```
 and link the image using the scatter file.
@@ -110,26 +115,23 @@ In our scatter file, all read-only (`RO`) code/data (including the entry point `
 ```
 `RAM_EXEC` contains any read-write (`RW`) or zero-initialised (`ZI`) data. Because this has been located at a different address (0x04000000, in SRAM), it is not a root region.
 
-`ARM_LIB_STACKHEAP` and `EMPTY` are syntactically significant for the linker.
-
 Region names (such as `ROM_LOAD`, `ROM_EXEC`, and `RAM_EXEC` above) are arbitrary. However there are reserved names for the Stack and Heap regions. We use a single region (`ARM_LIB_STACKHEAP`) for both.
 ```
-ARM_LIB_STACKHEAP 0x04010000 EMPTY 0x10000
-{}
+ARM_LIB_STACKHEAP 0x04010000 EMPTY 0x10000{}
 ```
 * The heap will start at `0x04010000` and grows upwards.
 * The stack will start at `0x04020000` (`0x04010000 + 0x10000`) and grows downwards.
 
-The use of `EMPTY` is used as there are no explicit sections to locate therein.
+`EMPTY` is used as there are no explicit sections to locate therein.
 
 ## Run the image on the FVP
 
-You can now run the executable image `hello.axf` from the command line using the `FVP_Base_Cortex-A73x2-A53x4 model`:
+You can now run the executable image `hello.axf` from the command line using the `FVP_Base_Cortex-A73x2-A53x4` Fixed Virtual Platform (FVP).
 ```console
 FVP_Base_Cortex-A73x2-A53x4 -a hello.axf -C pctl.startup=0.0.1.0
 ```
-When the model is running, the message "Hello World!" appears on screen.
+The code executes on the FVP, and the message "Hello World!" appears on screen.
 
-By default, this model starts all processors in the model running. To avoid this, use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should be used (we will address this in the next section).
+## -C pctl.startup=0.0.1.0
 
-At reset, the code and data will be in the `ROM_LOAD` section. The library function `__main()` is responsible for copying the RW and ZI data, and `__rt_entry()` sets up the stack and heap.
+This particular FVP was chosen as it implements two multi-core processor clusters therein. By default, this model starts all processors in the model running. Use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should run. we will address this in the next section.

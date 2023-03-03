@@ -6,6 +6,10 @@ import subprocess
 import json
 import yaml
 import os
+import string
+import re
+from inclusivewriting.suggestions import detect_and_get_suggestions
+from spellchecker import SpellChecker
 
 
 '''
@@ -28,6 +32,82 @@ def parse(article):
             cmd.append(content[start:end])
             content = content[end+3:]
 
+'''
+Parse file for spelling mistakes in text
+'''
+def spelling(article):
+    language = "en"
+
+    with open(article) as file:
+        content = file.read()
+        file.close()
+
+    spell = SpellChecker(case_sensitive=True)
+    #spell.word_frequency.load_words(['bare-metal', 'x86', 'cross-compile', 'cross-compiler', 'low-level', 'toolchain', 'toolchains', 'on-screen', 'microcontrollers', 'gcc', 'cross-building', 'pre-built', '32-bit', '64-bit'])
+    spell.word_frequency.load_words( open(os.path.dirname(os.path.realpath(__file__)) + '/add_words.txt').read().split() )
+
+    # Skip header
+    start = content.find("---") + 3
+    end = content.find("---", start)
+    if not end == start-3:
+        output = content[start-3:end+3]
+        content = content[end+3:]
+
+    output += "\n\n{{< highlight red \"This article has been checked for spelling mistakes (yellow) and inclusive language (green). Hover your mouse on highlighted words to see suggested correction.\" >}}\n"
+
+    cmd = []
+    icount = 0
+    rcount = 0
+    while (not start == -1 or not end == -1):
+        start = content.find("```")
+        end = content.find("```", start+3)
+
+        if content.find("{{< tabpane") > 0 and content.find("{{< tabpane") < start:
+            start = content.find("{{< tabpane")
+            end = content.find("{{< /tabpane >}}", start+11)
+
+        # split command and text
+        txt = content[:start]
+        cmd = content[start:end+3]
+
+        # check word spelling in text
+        word_list=[]
+        txt_list = re.split(' |\n|#|\(', txt)
+
+        for word in txt_list:
+            # get rid of punctuation and make lower case
+            word_clean = word.translate(str.maketrans('', '', string.punctuation.replace("-","")))
+            if not word_clean == '': 
+                word_list.append(word_clean)
+
+        new_text = txt
+
+        unknown_list = spell.unknown(word_list)
+        used_suggestions, suggestions, updated_text =  detect_and_get_suggestions(txt)
+
+        if (len(used_suggestions) > 0):
+            for word in used_suggestions:
+                replacement_list = "\""
+                for replacement in suggestions[word.lower()].get_replacement_lexemes():
+                    replacement_list = replacement_list + replacement.get_value() + ", "
+                replacement_list = replacement_list + "\""
+                new_text, nsub = re.subn(" {} ".format(word), " {{{{< highlight green {} {} >}}}} ".format(word,replacement_list), new_text)
+                icount += nsub
+        
+        for u in unknown_list:
+            new_text, nsub = re.subn(" {} ".format(u), " {{{{< highlight yellow {} {} >}}}} ".format(u,spell.correction(u)), new_text)
+            rcount += nsub
+        output += new_text
+
+        # concatenate cmd
+        output += cmd
+        content = content[end+3:]
+
+    # No code section left
+    logging.info("{} inclusive language issue(s) found.".format(icount))
+    logging.info("{} spelling mistake(s) found.".format(rcount))
+    return output
+
 
 '''
 Parse header to check file or not
@@ -40,22 +120,24 @@ def header(article):
     dict = {"maintain": False, "img": None, "weight": -1}
     with open(article) as file:
         content = file.read()
-        header = []
-        start = content.find("---") + 3
-        end = content.find("---", start)
-        if end == start-3:
-            # No header
-            logging.debug("No header found in {}".format(article))
-            return dict
-        else:
-            header = content[start:end]
-            data = yaml.safe_load(header, )
-            if "test_maintenance" in data.keys():
-                dict.update(maintain=data["test_maintenance"])
-            if "test_images" in data.keys():
-                dict.update(img= data["test_images"])
-            if "weight" in data.keys():
-                dict.update(wght=data["weight"])
+        file.close()
+
+    header = []
+    start = content.find("---") + 3
+    end = content.find("---", start)
+    if end == start-3:
+        # No header
+        logging.debug("No header found in {}".format(article))
+        return dict
+    else:
+        header = content[start:end]
+        data = yaml.safe_load(header, )
+        if "test_maintenance" in data.keys():
+            dict.update(maintain=data["test_maintenance"])
+        if "test_images" in data.keys():
+            dict.update(img= data["test_images"])
+        if "weight" in data.keys():
+            dict.update(wght=data["weight"])
                     
     return dict
 
