@@ -11,9 +11,13 @@ layout: learningpathall
 * [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/), also known as `kubectl`
 
 # EKS cluster deployment configuration
-For this EKS deployment, the Terraform configuration is broken into 7 files: eks_cluster.tf, variables.tf, vpc.tf, security-groups.tf, main.tf, terraform.tf, output.tf
+To deploy the Elastic Kubernetes Service(EKS) cluster start by creating the terraform configuration on your running Arm machine.
 
-**providers.tf** sets versions for the providers used by the configuration. Add the following code in this file:
+The Terraform configuration for this Elastic Kubernetes Service (EKS) deployment is contained in 7 files: eks_cluster.tf, variables.tf, vpc.tf, security-groups.tf, main.tf, terraform.tf, output.tf
+
+Using an editor of your choice, create and copy the content of the 7 files as shown below.
+
+File 1: **providers.tf** sets versions for the providers used by the configuration. Add the following code in this file:
 ```console
 terraform {
   required_providers {
@@ -42,11 +46,11 @@ terraform {
       version = "~> 2.12.1"
     }
   }
-  required_version = "~> 1.2.4"
+  required_version = "~> 1.3.9"
 }
 ```
 
-**variables.tf** contains a region variable that controls where to create the EKS cluster. Add the following code in this file:
+File 2: **variables.tf** contains a region variable that controls where to create the EKS cluster. Add the following code in this file:
 ```console
 variable "region" {
   description = "AWS region"
@@ -55,7 +59,7 @@ variable "region" {
 }
 ```
 
-**vpc.tf** provisions a VPC, subnets, and availability zones using the [AWS VPC Module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.32.0). Add the following code in this file:
+File 3: **vpc.tf** provisions a VPC, subnets, and availability zones using the [AWS VPC Module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.32.0). Add the following code in this file:
 ```console
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -85,7 +89,7 @@ module "vpc" {
 }
 ```
 
-**security-groups.tf** provisions the security groups, the EKS cluster will use.
+File 4: **security-groups.tf** provisions the security groups, the EKS cluster will use.
 ```console
 resource "aws_security_group" "node_group_one" {
   name_prefix = "node_group_one"
@@ -154,7 +158,7 @@ resource "aws_security_group" "node_group_two" {
 }
 ```
 
-**eks-cluster.tf** uses the [AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/11.0.0) to provision an EKS Cluster and other required resources, including Auto Scaling Groups, Security Groups, IAM Roles, and IAM Policies. Below parameter will create three nodes across two node groups.
+File 5: **eks-cluster.tf** uses the [AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/11.0.0) to provision an EKS Cluster and other required resources, including Auto Scaling Groups, Security Groups, IAM Roles, and IAM Policies. Below parameter will create three nodes across two node groups.
 ```console
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -205,7 +209,7 @@ module "eks" {
 }
 ```
 
-**outputs.tf** defines the output values for this configuration.
+File 6: **outputs.tf** defines the output values for this configuration.
 ```console
 output "cluster_id" {
   description = "EKS cluster ID"
@@ -233,7 +237,7 @@ output "cluster_name" {
 }
 ```
 
-Add below code in **main.tf**
+File 7 : Add below code in **main.tf**
 ```console
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
@@ -258,15 +262,16 @@ resource "random_string" "suffix" {
 
 ## Terraform commands
 ### Initialize Terraform
-Run `terraform init` to initialize the Terraform deployment. This command downloads the AWS modules required to manage your AWS resources.
+Run `terraform init` to initialize the Terraform deployment. This command downloads the AWS modules required to manage your AWS resources. Run this command in the directory which contains the 7 configuration files you created.
 ```console
 terraform init
 ```
-
+The output from running this command should look like what is shown here:
 ![MicrosoftTeams-image (4)](https://user-images.githubusercontent.com/87687468/203512908-be62b51f-ed17-4d48-bc43-4190080e05ef.png)
 
 ### Create Terraform execution plan
-Run `terraform plan` to create an execution plan.
+Creating a terraform execution plan will check for your AWS account credentials. Either set the [AWS environment variables or add a profile to your AWS credentials file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) on your running Arm machine.
+Now, run `terraform plan` to create an execution plan.
 ```console
 terraform plan
 ```
@@ -282,10 +287,13 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 ```
   terraform apply
 ```
+The output from running this command is shown below:
 
 ![image-2](https://user-images.githubusercontent.com/87687468/203513200-14bdb5e8-12c7-41f0-8878-b4ae6bc3aa9f.png)
 
 ### Configure kubectl
+
+Now run the command shown with the terraform output region and cluster_name to match what was previously output
 ```console
 aws eks --region $(terraform output region) update-kubeconfig --name $(terraform output cluster_name)
 ```

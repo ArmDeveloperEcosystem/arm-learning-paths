@@ -10,6 +10,7 @@ layout: learningpathall
 
 ## WordPress Deployment Files
 We use three yaml files to deploy WordPress: kustomization.yaml, mysql-deployment.yaml, and wordpress-deployment.yaml.
+Using an editor of your choice, create these files and copy the contents into them as shown.
 
 Lets start with `kustomization.yaml`
 ```console
