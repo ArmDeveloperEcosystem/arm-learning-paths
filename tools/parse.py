@@ -62,7 +62,7 @@ def spelling(article):
         start = content.find("```")
         end = content.find("```", start+3)
 
-        if content.find("{{< tabpane") < start:
+        if content.find("{{< tabpane") > 0 and content.find("{{< tabpane") < start:
             start = content.find("{{< tabpane")
             end = content.find("{{< /tabpane >}}", start+11)
 
