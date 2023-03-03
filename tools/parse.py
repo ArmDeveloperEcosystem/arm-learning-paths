@@ -108,6 +108,7 @@ def spelling(article):
     logging.info("{} spelling mistake(s) found.".format(rcount))
     return output
 
+
 '''
 Parse header to check file or not
 Returns dict with the following elements:
