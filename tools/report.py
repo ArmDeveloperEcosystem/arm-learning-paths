@@ -6,11 +6,13 @@ import os
 import subprocess
 import csv
 import json
+import re
 from pathlib import Path
 from datetime import datetime, timedelta
 
 # List of directories to parse for learning paths
 dname = ["content/install-tools",
+         "content/learning-paths/cross-platform",
          "content/learning-paths/desktop-and-laptop",
          "content/learning-paths/embedded",
          "content/learning-paths/microcontroller",
@@ -19,36 +21,63 @@ dname = ["content/install-tools",
 
 
 '''
-Recursive content search in d. Update list of articles older than period. Returns count of articles found
+Recursive content search in d. 
+Returns: 
+- list of articles older than period in d
+- count of articles found in d
+- list of primary authors in d
 '''
 def content_parser(d, period):
     count = 0
-    result = {}
+    art_list = {}
+    auth_list = []
     l = os.listdir(d)
     for i in l:
-        if i.endswith(".md") and not i.startswith("_"):
+        item = i
+        if item.endswith(".md") and not item.startswith("_"):
             count = count + 1
-            logging.debug("Checking {}...".format(d+"/"+i))
+            if "learning-paths" in d:
+                item = "_index.md"
 
-            date = subprocess.run(["git", "log", "-1" ,"--format=%cs", d +"/" + i], stdout=subprocess.PIPE)
+            logging.debug("Checking {}...".format(d+"/"+item))
+
+            date = subprocess.run(["git", "log", "-1" ,"--format=%cs", d +"/" + item], stdout=subprocess.PIPE)
             # strip out '\n' and decode byte to string
             date = date.stdout.rstrip().decode("utf-8")
-            logging.debug(date)
+            logging.debug("Last updated on: " + date)
+            author = "None"
+            for l in open(d +"/" + item): 
+                if re.search("author_primary", l):
+                    # split and strip out '\n'
+                    author = l.split(": ")[1].rstrip()
+            logging.debug("Primary author: " + author)
+            if not author in auth_list:
+                auth_list.append(author)
 
             # if empty, this is a temporary file which is not part of the repo
             if(date != ""):
                 date = datetime.strptime(date, "%Y-%m-%d")
                 # check if article is older than the period
                 if date < datetime.now() - timedelta(days = period):
-                    result[d + "/" + i] = "{} days ago".format((datetime.now() - date).days)
+                    if item == "_index.md":
+                        art_list[d + "/"] = "{} days ago".format((datetime.now() - date).days)
+                    else:
+                        art_list[d + "/" + item] = "{} days ago".format((datetime.now() - date).days)
+
+            if "learning-paths" in d:
+                # no need to iterate further
+                break
 
         # if this is a folder, let's get down one level deeper
-        elif os.path.isdir(d + "/" + i):
-            res, c = content_parser(d + "/" + i, period)
-            result.update(res)
+        elif os.path.isdir(d + "/" + item):
+            res, c, a_l = content_parser(d + "/" + item, period)
+            art_list.update(res)
             count = count + c
+            for a in a_l:
+                if not a in auth_list:
+                    auth_list.append(a)
 
-    return [result, count]
+    return [art_list, count, auth_list]
 
 
 '''
@@ -76,6 +105,13 @@ def stats():
                     "type": "bar",
                     "name": "install-tools",
                     "xaxis": "x1"
+                },
+                {
+                    "x": [],
+                    "y": [],
+                    "type": "bar",
+                    "name": "learning-paths/cross-platform",
+                    "xaxis": "x2"
                 },
                 {
                     "x": [],
@@ -144,7 +180,7 @@ def stats():
 
     total=0
     for d_idx, d in enumerate(dname):
-        res, count = content_parser(d, 0)
+        res, count, authors = content_parser(d, 0)
         # Sliding windows for data - remove data older than a year - 53 weeks
         if len(data["data"][d_idx]["x"]) > 52:
             data["data"][d_idx]["x"].pop(0)
@@ -153,8 +189,12 @@ def stats():
         data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
         # Articles counted in category
         data["data"][d_idx]["y"].append(count)
-        logging.info("{} articles found in {}.".format(count, d))
-        total += count
+
+        if "learning-paths" in d:
+            logging.info("{} Learning Paths found in {} and {} contributors.".format(count, d, len(authors)))
+            total += count
+        else:
+            logging.info("{} articles found in {} and {} contributors.".format(count, d, len(authors)))
 
     logging.info("Total number of Learning Paths is {}.".format(total))
 
@@ -186,12 +226,15 @@ def report(period):
 
     total=0
     for d_idx, d in enumerate(dname):
-        res, count = content_parser(d, period)
+        res, count, authors = content_parser(d, period)
         result.update(res)
-        logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
-        total += count
+        if "learning-paths" in d:
+            logging.info("Found {} Learning Paths in {}. {} of them are outdated.".format(count, d, len(res)))
+            total += count
+        else:
+            logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
 
-    logging.info("Total number of articles is {}.".format(total))
+    logging.info("Total number of Learning Paths is {}.".format(total))
 
     fn="outdated_files.csv"
     fields=["File", "Last updated"]
