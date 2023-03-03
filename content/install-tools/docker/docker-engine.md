@@ -80,7 +80,7 @@ To identify the architecture of the machine use the uname command:
 ```console
 uname -m
 ```
-Output values can be aarch64 (Arm 64-bit), armv7l (Arm 32-bit) or x86_64. 
+Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64` 
 
 ### Docker Engine versions
 
