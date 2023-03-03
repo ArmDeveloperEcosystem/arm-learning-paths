@@ -81,23 +81,13 @@ def content_parser(d, period):
 
 
 '''
+Initialize Plotly data structure for stats
+1 graph on the left with data for install tool guides 
+1 graph on the right with data for learning paths
+Input: title for the graph
 '''
-def stats():
-    global dname
-
-    orig = os.path.abspath(os.getcwd())
-
-    # If file exists, load data. Create structure otherwise
-    if os.path.exists('content/stats/data.json'):
-        # Opening JSON file
-        f = open('content/stats/data.json', 'r')
-        # returns JSON object as a dictionary
-        data = json.load(f)
-        # Closing JSON file
-        f.close()
-    else:
-        # Create dict
-        data = { 
+def init_graph(title):
+    data = { 
             "data": [
                 {
                     "x": [],
@@ -151,7 +141,7 @@ def stats():
             ],
             "layout": 
             {
-                "title": "Number of articles", 
+                "title": title, 
                 "xaxis": 
                 {
                     "tickangle": -45,
@@ -178,36 +168,82 @@ def stats():
             }
         }
 
+    return data
+
+
+'''
+Generate JSON data for stats page
+'''
+def stats():
+    global dname
+
+    orig = os.path.abspath(os.getcwd())
+
+    # If file exists, load data. Create structure otherwise
+    if os.path.exists('content/stats/lp_data.json'):
+        # Opening JSON file
+        f = open('content/stats/lp_data.json', 'r')
+        # returns JSON object as a dictionary
+        lp_data = json.load(f)
+        # Closing JSON file
+        f.close()
+    else:
+        # Create dict
+        lp_data = init_graph("Number of installation guides and learning paths")
+
+    # If file exists, load data. Create structure otherwise
+    if os.path.exists('content/stats/contrib_data.json'):
+        # Opening JSON file
+        f = open('content/stats/contrib_data.json', 'r')
+        # returns JSON object as a dictionary
+        contrib_data = json.load(f)
+        # Closing JSON file
+        f.close()
+    else:
+        # Create dict
+        contrib_data = init_graph("Number of contributors")
+
     total=0
     for d_idx, d in enumerate(dname):
         res, count, authors = content_parser(d, 0)
         # Sliding windows for data - remove data older than a year - 53 weeks
-        if len(data["data"][d_idx]["x"]) > 52:
-            data["data"][d_idx]["x"].pop(0)
-            data["data"][d_idx]["y"].pop(0)
+        if len(lp_data["data"][d_idx]["x"]) > 52:
+            lp_data["data"][d_idx]["x"].pop(0)
+            lp_data["data"][d_idx]["y"].pop(0)
+        if len(contrib_data["data"][d_idx]["x"]) > 52:
+            contrib_data["data"][d_idx]["x"].pop(0)
+            contrib_data["data"][d_idx]["y"].pop(0)
         # Date
-        data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
+        lp_data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
+        contrib_data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
         # Articles counted in category
-        data["data"][d_idx]["y"].append(count)
+        lp_data["data"][d_idx]["y"].append(count)
+        # Authors counted in category
+        contrib_data["data"][d_idx]["y"].append(len(authors))
 
         if "learning-paths" in d:
-            logging.info("{} Learning Paths found in {} and {} contributors.".format(count, d, len(authors)))
+            logging.info("{} Learning Paths found in {} and {} contributor(s).".format(count, d, len(authors)))
             total += count
         else:
-            logging.info("{} articles found in {} and {} contributors.".format(count, d, len(authors)))
+            logging.info("{} articles found in {} and {} contributor(s).".format(count, d, len(authors)))
 
     logging.info("Total number of Learning Paths is {}.".format(total))
 
-    fn='content/stats/data.json'
+    fn_lp='content/stats/lp_data.json'
+    fn_contrib='content/stats/contrib_data.json'
     os.chdir(orig)
-    logging.info("Results written in " + orig + "/" + fn)
+    logging.info("Learning Path data written in " + orig + "/" + fn_lp)
+    logging.info("Contributors data written in " + orig + "/" + fn_contrib)
 
     # Save data in json file
-    f = open(fn, 'w')
+    f_lp = open(fn_lp, 'w')
+    f_contrib = open(fn_contrib, 'w')
     # Write results to file
-    json.dump(data, f)    
+    json.dump(lp_data, f_lp)
+    json.dump(contrib_data, f_contrib)    
     # Closing JSON file
-    f.close()
+    f_lp.close()
+    f_contrib.close()
 
 
 '''
