@@ -1,8 +1,6 @@
 ---
 title: Start developing on Arm hardware
 
-description: The place to start for developers new to Arm in server and cloud
-
 minutes_to_complete: 5
 
 who_is_this_for: This is an introductory topic for software developers new to the Arm architecture and looking for server and cloud hardware.

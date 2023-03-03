@@ -1,9 +1,6 @@
 ---
 title: "Deploy WordPress with MySQL on Elastic Kubernetes Service"
 
-description: >
-    Provisioning of EKS cluster on Arm-based instance and then deployment of Wordpress(with Mysql) on Elastic Kubernetes Service.
-
 minutes_to_complete: 80
 
 who_is_this_for: >
@@ -14,10 +11,10 @@ learning_objectives:
     - Deploy Wordpress (with Mysql) on AWS Elastic Kubernetes Service
 
 prerequisites:
-    - An Amazon Web Services (AWS) account
-    - Terraform
-    - The AWS CLI
-    - The Kubernetes CLI also known as `kubectl`
+    - [An Amazon Web Services (AWS) account](https://aws.amazon.com/)
+    - [Terraform](install-tools/terraform/)
+    - [The AWS CLI](install-tools/aws-cli/)
+    - [The Kubernetes CLI also known as kubectl](install-tools/kubectl/)
 
 author_primary: Jason Andrews
 
@@ -30,7 +27,8 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-
+    - AWS CLI
+    - kubectl
 
 #       FIXED, DO NOT MODIFY
 # ================================================================================

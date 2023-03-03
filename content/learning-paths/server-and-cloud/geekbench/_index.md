@@ -2,7 +2,6 @@
 armips:
 - Neoverse
 author_primary: Ronan Synnott
-description: Learn how to run Geekbench 5 benchmark on Arm computers.
 layout: learningpathall
 learning_objectives:
 - Learn how to install and run Geekbench benchmark
@@ -27,5 +26,5 @@ tools_software_languages:
 - Geekbench 5
 weight: 1
 who_is_this_for: This is an introductory topic for software developers interested
-  comparing performance of Arm-based computers using Geekbench.
+  in comparing the performance of Arm-based computers using Geekbench.
 ---
