@@ -6,72 +6,88 @@ import os
 import subprocess
 import csv
 import json
+import re
 from pathlib import Path
 from datetime import datetime, timedelta
 
+# List of directories to parse for learning paths
+dname = ["content/install-tools",
+         "content/learning-paths/cross-platform",
+         "content/learning-paths/desktop-and-laptop",
+         "content/learning-paths/embedded",
+         "content/learning-paths/microcontroller",
+         "content/learning-paths/mobile",
+         "content/learning-paths/server-and-cloud"]
+
 
 '''
-Recursive content search in d. Update list of articles older than period. Returns count of articles found
+Recursive content search in d. 
+Returns: 
+- list of articles older than period in d
+- count of articles found in d
+- list of primary authors in d
 '''
 def content_parser(d, period):
     count = 0
-    result = {}
+    art_list = {}
+    auth_list = []
     l = os.listdir(d)
     for i in l:
-        if i.endswith(".md") and not i.startswith("_"):
+        item = i
+        if item.endswith(".md") and not item.startswith("_"):
             count = count + 1
-            logging.debug("Checking {}...".format(d+"/"+i))
+            if "learning-paths" in d:
+                item = "_index.md"
 
-            date = subprocess.run(["git", "log", "-1" ,"--format=%cs", d +"/" + i], stdout=subprocess.PIPE)
+            logging.debug("Checking {}...".format(d+"/"+item))
+
+            date = subprocess.run(["git", "log", "-1" ,"--format=%cs", d +"/" + item], stdout=subprocess.PIPE)
             # strip out '\n' and decode byte to string
             date = date.stdout.rstrip().decode("utf-8")
-            logging.debug(date)
+            logging.debug("Last updated on: " + date)
+            author = "None"
+            for l in open(d +"/" + item): 
+                if re.search("author_primary", l):
+                    # split and strip out '\n'
+                    author = l.split(": ")[1].rstrip()
+            logging.debug("Primary author: " + author)
+            if not author in auth_list:
+                auth_list.append(author)
 
             # if empty, this is a temporary file which is not part of the repo
             if(date != ""):
                 date = datetime.strptime(date, "%Y-%m-%d")
                 # check if article is older than the period
                 if date < datetime.now() - timedelta(days = period):
-                    result[d + "/" + i] = "{} days ago".format((datetime.now() - date).days)
+                    if item == "_index.md":
+                        art_list[d + "/"] = "{} days ago".format((datetime.now() - date).days)
+                    else:
+                        art_list[d + "/" + item] = "{} days ago".format((datetime.now() - date).days)
+
+            if "learning-paths" in d:
+                # no need to iterate further
+                break
 
         # if this is a folder, let's get down one level deeper
-        elif os.path.isdir(d + "/" + i):
-            res, c = content_parser(d + "/" + i, period)
-            result.update(res)
+        elif os.path.isdir(d + "/" + item):
+            res, c, a_l = content_parser(d + "/" + item, period)
+            art_list.update(res)
             count = count + c
+            for a in a_l:
+                if not a in auth_list:
+                    auth_list.append(a)
 
-    return [result, count]
+    return [art_list, count, auth_list]
 
 
 '''
-List pages older than a period in days and save result as CSV
-Generate JSON file with data
+Initialize Plotly data structure for stats
+1 graph on the left with data for install tool guides 
+1 graph on the right with data for learning paths
+Input: title for the graph
 '''
-def report(period):
-    orig = os.path.abspath(os.getcwd())
-
-    # chdir to the root folder
-    os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
-    dname = ["content/install-tools",
-             "content/learning-paths/desktop-and-laptop",
-             "content/learning-paths/embedded",
-             "content/learning-paths/microcontroller",
-             "content/learning-paths/mobile",
-             "content/learning-paths/server-and-cloud"]
-
-    result = {}
-
-    # If file exists, load data. Create structure otherwise
-    if os.path.exists('content/stats/data.json'):
-        # Opening JSON file
-        f = open('content/stats/data.json', 'r')
-        # returns JSON object as a dictionary
-        data = json.load(f)
-        # Closing JSON file
-        f.close()
-    else:
-        # Create dict
-        data = { 
+def init_graph(title):
+    data = { 
             "data": [
                 {
                     "x": [],
@@ -79,6 +95,13 @@ def report(period):
                     "type": "bar",
                     "name": "install-tools",
                     "xaxis": "x1"
+                },
+                {
+                    "x": [],
+                    "y": [],
+                    "type": "bar",
+                    "name": "learning-paths/cross-platform",
+                    "xaxis": "x2"
                 },
                 {
                     "x": [],
@@ -118,7 +141,7 @@ def report(period):
             ],
             "layout": 
             {
-                "title": "Number of articles", 
+                "title": title, 
                 "xaxis": 
                 {
                     "tickangle": -45,
@@ -145,29 +168,109 @@ def report(period):
             }
         }
 
+    return data
+
+
+'''
+Generate JSON data for stats page
+'''
+def stats():
+    global dname
+
+    orig = os.path.abspath(os.getcwd())
+
+    # If file exists, load data. Create structure otherwise
+    if os.path.exists('content/stats/lp_data.json'):
+        # Opening JSON file
+        f = open('content/stats/lp_data.json', 'r')
+        # returns JSON object as a dictionary
+        lp_data = json.load(f)
+        # Closing JSON file
+        f.close()
+    else:
+        # Create dict
+        lp_data = init_graph("Number of installation guides and learning paths")
+
+    # If file exists, load data. Create structure otherwise
+    if os.path.exists('content/stats/contrib_data.json'):
+        # Opening JSON file
+        f = open('content/stats/contrib_data.json', 'r')
+        # returns JSON object as a dictionary
+        contrib_data = json.load(f)
+        # Closing JSON file
+        f.close()
+    else:
+        # Create dict
+        contrib_data = init_graph("Number of contributors")
+
     total=0
     for d_idx, d in enumerate(dname):
-        res, count = content_parser(d, period)
-        result.update(res)
-        logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
+        res, count, authors = content_parser(d, 0)
         # Sliding windows for data - remove data older than a year - 53 weeks
-        if len(data["data"][d_idx]["x"]) > 52:
-            data["data"][d_idx]["x"].pop(0)
-            data["data"][d_idx]["y"].pop(0)
+        if len(lp_data["data"][d_idx]["x"]) > 52:
+            lp_data["data"][d_idx]["x"].pop(0)
+            lp_data["data"][d_idx]["y"].pop(0)
+        if len(contrib_data["data"][d_idx]["x"]) > 52:
+            contrib_data["data"][d_idx]["x"].pop(0)
+            contrib_data["data"][d_idx]["y"].pop(0)
         # Date
-        data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
+        lp_data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
+        contrib_data["data"][d_idx]["x"].append(datetime.now().strftime("%Y-%b-%d"))
         # Articles counted in category
-        data["data"][d_idx]["y"].append(count)
-        total += count
+        lp_data["data"][d_idx]["y"].append(count)
+        # Authors counted in category
+        contrib_data["data"][d_idx]["y"].append(len(authors))
 
-    logging.info("Total number of articles is {}.".format(total))
+        if "learning-paths" in d:
+            logging.info("{} Learning Paths found in {} and {} contributor(s).".format(count, d, len(authors)))
+            total += count
+        else:
+            logging.info("{} articles found in {} and {} contributor(s).".format(count, d, len(authors)))
+
+    logging.info("Total number of Learning Paths is {}.".format(total))
+
+    fn_lp='content/stats/lp_data.json'
+    fn_contrib='content/stats/contrib_data.json'
+    os.chdir(orig)
+    logging.info("Learning Path data written in " + orig + "/" + fn_lp)
+    logging.info("Contributors data written in " + orig + "/" + fn_contrib)
 
     # Save data in json file
-    f = open('content/stats/data.json', 'w')
+    f_lp = open(fn_lp, 'w')
+    f_contrib = open(fn_contrib, 'w')
     # Write results to file
-    json.dump(data, f)
+    json.dump(lp_data, f_lp)
+    json.dump(contrib_data, f_contrib)    
     # Closing JSON file
-    f.close()
+    f_lp.close()
+    f_contrib.close()
+
+
+'''
+List pages older than a period in days and save result as CSV
+Generate JSON file with data
+'''
+def report(period):
+    global dname
+
+    orig = os.path.abspath(os.getcwd())
+
+    # chdir to the root folder
+    os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
+
+    result = {}
+
+    total=0
+    for d_idx, d in enumerate(dname):
+        res, count, authors = content_parser(d, period)
+        result.update(res)
+        if "learning-paths" in d:
+            logging.info("Found {} Learning Paths in {}. {} of them are outdated.".format(count, d, len(res)))
+            total += count
+        else:
+            logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
+
+    logging.info("Total number of Learning Paths is {}.".format(total))
 
     fn="outdated_files.csv"
     fields=["File", "Last updated"]
