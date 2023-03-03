@@ -46,6 +46,13 @@ jobs:
         shell: bash
         env:
           SSH_KEY: ${{secrets.SSH_KEY}}
+          
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+        env:
+          USR: ${{secrets.SSH_USERNAME}}
+          HOST: ${{secrets.SSH_HOST}}
+          ID: ${{secrets.ID}}
                   
       # SCP Site contents to netstorage
       - name: copy file
