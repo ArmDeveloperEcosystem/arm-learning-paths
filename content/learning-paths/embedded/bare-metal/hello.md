@@ -27,6 +27,7 @@ This learning path assumes some knowledge of [Armv8-A Architecture](https://deve
 Let's start with a simple C program, and use the `armclang` compiler and `armlink` linker tools to compile and generate an executable image.
 
 Use your favorite editor to create a new source file called `hello.c` with the following contents:
+#### hello.c
 ```C
 #include <stdio.h>
 
@@ -62,9 +63,10 @@ We have not yet specified an entry point, and so the entry point defaults to` __
 
 If you tried to execute the image that you created in the last step on the `FVP_Base_Cortex-A73x2-A53x4 model`, it would not run. This is because the default memory map used by `armlink` does not match the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map) of the FVP.
 
-We must specify a memory map that matches the target and allows the image to run successfully. To do this, we will create a [scatter file](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features).
+We must specify a memory map that matches the target and allows the image to run successfully. To do this, we will use a linker feature known as [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features).
 
 Create a file `scatter.txt` with the following contents:
+#### scatter.txt
 ```console
 ROM_LOAD 0x00000000 0x00010000
 {
@@ -78,8 +80,7 @@ ROM_LOAD 0x00000000 0x00010000
     {
       * (+RW, +ZI)
     }
-    ARM_LIB_STACKHEAP 0x04010000 ALIGN 64 EMPTY 0x10000
-    {}
+    ARM_LIB_STACKHEAP 0x04010000 ALIGN 64 EMPTY 0x10000 {}
 }
 ```
 and link the image using the scatter file.
@@ -114,17 +115,14 @@ In our scatter file, all read-only (`RO`) code/data (including the entry point `
 ```
 `RAM_EXEC` contains any read-write (`RW`) or zero-initialised (`ZI`) data. Because this has been located at a different address (0x04000000, in SRAM), it is not a root region.
 
-`ARM_LIB_STACKHEAP` and `EMPTY` are syntactically significant for the linker.
-
 Region names (such as `ROM_LOAD`, `ROM_EXEC`, and `RAM_EXEC` above) are arbitrary. However there are reserved names for the Stack and Heap regions. We use a single region (`ARM_LIB_STACKHEAP`) for both.
 ```
-ARM_LIB_STACKHEAP 0x04010000 EMPTY 0x10000
-{}
+ARM_LIB_STACKHEAP 0x04010000 EMPTY 0x10000{}
 ```
 * The heap will start at `0x04010000` and grows upwards.
 * The stack will start at `0x04020000` (`0x04010000 + 0x10000`) and grows downwards.
 
-The use of `EMPTY` is used as there are no explicit sections to locate therein.
+`EMPTY` is used as there are no explicit sections to locate therein.
 
 ## Run the image on the FVP
 
@@ -134,6 +132,6 @@ FVP_Base_Cortex-A73x2-A53x4 -a hello.axf -C pctl.startup=0.0.1.0
 ```
 The code executes on the FVP, and the message "Hello World!" appears on screen.
 
-### -C pctl.startup=0.0.1.0
+## -C pctl.startup=0.0.1.0
 
-This particular FVP was chosen as it implements two multi-core processor clusters therein. By default, this model starts all processors in the model running. Use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should run (we will address this in the next section).
+This particular FVP was chosen as it implements two multi-core processor clusters therein. By default, this model starts all processors in the model running. Use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should run. we will address this in the next section.

@@ -7,15 +7,12 @@ weight: 6 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Vector tables have a relatively small and fixed number of entries, because the number and type of exceptions are architecturally defined.
-
-A real system will likely require many different interrupts, triggered by different sources. An additional piece of hardware is needed to manage these interrupts. The [Arm Generic Interrupt Controller, GIC](https://developer.arm.com/Architectures/Generic%20Interrupt%20Controller) does exactly this.
+Vector tables have a relatively small and fixed number of entries. A real system will likely require many different interrupts, triggered by different sources. An additional piece of hardware is needed to manage these interrupts. The [Arm Generic Interrupt Controller, GIC](https://developer.arm.com/Architectures/Generic%20Interrupt%20Controller) does exactly this.
 
 ## Set up Generic Interrupt Controller (GIC)
 
-Create `gic.s` and add the following code to initialize the GICv3 implemented in the FVP, and define a source of interrupts from the timer. Don't worry for now if you do not understand the workings of this specific code. For detail, see the [GICv3 and GICv4 Software Overview](https://developer.arm.com/documentation/dai0492).
-
-### gic.s
+Create `gic.s` with the following code to initialize the GICv3 implemented in the FVP, and define the timer as a source of interrupts. Don't worry for now if you do not understand the workings of this specific code. For detail, see the [GICv3 and GICv4 Software Overview](https://developer.arm.com/documentation/dai0492).
+#### gic.s
 ```C
 	.section GIC,"ax"
 	.global gicInit
@@ -97,6 +94,7 @@ For convenience, define these functions in your `gic.s` source:
 * `readIAR0()` reads the value of the [Interrupt Controller Interrupt Acknowledge Register 0, ICC_IAR0_EL1](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ICC-IAR0-EL1--Interrupt-Controller-Interrupt-Acknowledge-Register-0). The lower 24 bits of this register give the interrupt identifier, `INTID`.
 * `writeEOIR0()` writes `INTID` to the [Interrupt Controller End of Interrupt Register 0, ICC_EOIR0_EL1](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ICC-EOIR0-EL1--Interrupt-Controller-End-Of-Interrupt-Register-0), which tells the processor that that interrupt is complete.
 
+#### gic.s
 ```C
 // ------------------------------------------------------------
 	.global readIAR0
@@ -122,7 +120,7 @@ Create `timer.s` defining the following functions:
 * `setTimerPeriod()` which writes to [CNTPS_TVAL_EL1, Counter-timer Physical Secure Timer TimerValue register](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/CNTPS-TVAL-EL1--Counter-timer-Physical-Secure-Timer-TimerValue-register).
 * `enableTimer()` and `disableTimer()` which write to [CNTPS_CTL_EL1, Counter-timer Physical Secure Timer Control register](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/CNTPS-CTL-EL1--Counter-timer-Physical-Secure-Timer-Control-register).
 
-### timer.s
+#### timer.s
 ```C
 	section  AArch64_GenericTimer,"ax"
 
@@ -150,9 +148,9 @@ disableTimer:
 ```
 ## Add code to enable GIC
 
-Modify `hello.c` to enable the GIC and timer, and create a simple test.
+Modify `hello.c` to enable the GIC and timer, and create a simple test. We can use `printf()` statements to follow execution flow.
 
-### hello.c
+#### hello.c
 ```C
 #include <stdio.h>
 #include <stdint.h>
@@ -177,13 +175,12 @@ int main (void) {
   flag = 0;
   gicInit();
 
-  setTimerPeriod(0x1000);
+  setTimerPeriod(0x10000);
   enableTimer();
 
   printf("Waiting for interrupt...\n");
-  while(flag==0){}
-  
-  printf("Got interrupt!\n");
+  while(flag==0){};
+  printf("Returned from interrupt!\n");
   
   return 0;
 }
@@ -192,18 +189,19 @@ int main (void) {
 
 Finally we can create our `fiqHandler()` function, either in its own source file, or can append to `hello.c`. It reads the `INTID` when triggered, disables the timer, and sets `flag`.
 
-### fiqHandler()
+#### hello.c
 ```C
 void fiqHandler(void) {
   uint32_t intid;
   intid = readIAR0(); // Read the interrupt id
+  printf("Interrupt %d occured\n", intid);
 
   if (intid == 29) {
     disableTimer();
 	flag = 1;
   }
   else
-	printf("Another exception occured??\n");
+	printf("Another interrupt occured??\n");
 
   writeEOIR0(intid); // Clear interrupt
   return;
@@ -220,10 +218,10 @@ armclang -c -g --target=aarch64-arm-none-eabi vectors.s
 armclang -c -g --target=aarch64-arm-none-eabi gic.s
 armclang -c -g --target=aarch64-arm-none-eabi timer.s
 armclang -c -g --target=aarch64-arm-none-eabi hello.c
-armlink --scatter=scatter.txt --entry=start64 startup.o uart.o vectors.o gic.o timer.o hello.o -o hello.axf
+armlink --scatter=scatter.txt --entry=el3_entry startup.o uart.o vectors.o gic.o timer.o hello.o -o hello.axf
 ```
-To run the application with the timer running we need to add the `-C bp.refcounter.non_arch_start_at_default=1` option to our command line.
+To enable the timer in the FVP, add the `-C bp.refcounter.non_arch_start_at_default=1` option to the command line.
 ```command
 FVP_Base_Cortex-A73x2-A53x4 -C bp.refcounter.non_arch_start_at_default=1 -a hello.axf
 ```
-Observe the application reporting that the timer exception occured.
+Observe the application reporting that the exception occured.

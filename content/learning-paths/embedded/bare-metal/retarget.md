@@ -17,7 +17,7 @@ Error: L6915E: Library reports error: __use_no_semihosting was requested, but _t
 ```
 ## Retarget fputc to use the UART
 
-Many library functions depend on semihosting. You must `retarget` these functions to use the hardware of the target instead of the host system.
+Many library functions depend on semihosting. You must retarget these functions to use the hardware of the target instead of the host system.
 
 Copy and paste the following code into a new file `uart.c`.
 
@@ -25,7 +25,7 @@ This contains code to initialize the UART (`uartInit()`), and a retargeted versi
 
 The source retargets another semihosting function, `__sys_exit()`, which is an infinite while loop after completion. Typically an embedded application will never return.
 
-### uart.c
+#### uart.c
 ```C
 #include <stdio.h>
 #include "uart.h"
@@ -80,7 +80,7 @@ void  __attribute__ ((noreturn)) _sys_exit(int x){
 	while(1);
 }
 ```
-### uart.h
+#### uart.h
 ```C
 #ifndef __uart_h
 #define __uart_h
@@ -145,7 +145,7 @@ struct pl011_uart {
 Modify `hello.c` to initialize the UART before it is used. From the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map), we see that `UART0` is located at `0x1C090000`.
 
  We also to import the `__use_no_semihosting` symbol to ensure that semihosting is no longer used.
-
+#### hello.c
 ```C
 #include <stdio.h>
 #include "uart.h"
@@ -165,7 +165,7 @@ No changes are needed to the scatter file. This additional code will be placed b
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a startup.s
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a hello.c
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a uart.c
-armlink --scatter=scatter.txt --entry=start64 startup.o uart.o hello.o -o hello.axf
+armlink --scatter=scatter.txt --entry=el3_entry startup.o uart.o hello.o -o hello.axf
 ```
 
 ## Run the example on the FVP

@@ -30,7 +30,7 @@ jobs:
       - name: Generate stat report
         run: |
            pip install -r tools/requirements.txt
-           python3 tools/maintenance.py
+           python3 tools/maintenance.py -q
 
       # Commit stats
       - name: Commit stats
