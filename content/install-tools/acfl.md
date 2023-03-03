@@ -14,6 +14,8 @@ minutes_to_complete: 15
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/102621
 
+author_primary: Florent Lebeau
+
 ### TEST SETTINGS
 test_images:
 - ubuntu:latest
@@ -35,10 +37,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Arm Compiler for Linux runs on 64-bit Arm computers, it is not a cross-compiler.
 
-## Prerequisites
+## Before you begin
 
 Arm Compiler for Linux supports all 64-bit Arm based server-class hardware.
-* [Supported Linux Distributions](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux#Supported-Devices)
+
+Make sure you are running one the of the [supported Linux distributions](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux#Supported-Devices).
 
 Confirm you are using an Arm machine by running:
 
@@ -63,34 +66,36 @@ If any of the following are not already installed by your Linux distribution, yo
   - Ubuntu
     - `libc6-dev`
 
-## Download  {#download}
+## Download
 
-Visit [Download Arm Compiler for Linux](https://developer.arm.com/downloads/-/arm-compiler-for-linux) and select the package for your Linux distribution. 
-The packages contain the C/C++ and Fortran Compilers and Arm Performance Libraries.
 
-Individual packages with only the Arm Performance Libraries (ArmPL) are also available for download.
+Download releases from the command line using `wget`
 
-Download releases from the command line using `wget`.
-
-`Ubuntu`:
+For Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
 wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/22-1/arm-compiler-for-linux_22.1_Ubuntu-20.04_aarch64.tar
 ```
 
-`Red Hat`:
+For Red Hat Linux:
+
 ```bash { target="fedora:latest" }
 wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/22-1/arm-compiler-for-linux_22.1_RHEL-8_aarch64.tar
 ```
 
-## Installation
+Individual packages with only the Arm Performance Libraries (ArmPL) are also available for download.
+
+Visit [Download Arm Compiler for Linux](https://developer.arm.com/downloads/-/arm-compiler-for-linux) to access all of the available download packages.
+
+
+## Install
 
 To install the Arm Compiler for Linux package on your 64-bit Linux Arm machine extract the package and run the installation script. 
 
 Each command sequence includes accepting the license agreement to automate the installation and installing the `modules` software.
 
 
-`Ubuntu`:
+For Ubuntu Linux:
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
 sudo apt-get -y install environment-modules python3 libc6-dev
@@ -99,7 +104,7 @@ cd arm-compiler-for-linux_22.1_Ubuntu-20.04
 sudo ./arm-compiler-for-linux_22.1_Ubuntu-20.04.sh --accept
 ```
 
-`Red Hat`:
+For Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
@@ -112,7 +117,7 @@ Arm Compiler for Linux uses environment modules to dynamically modify your user 
 
 Set up the environment for example in your .bashrc and add module files. 
 
-`Ubuntu`:
+For Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
 echo "source /usr/share/modules/init/bash" >> ~/.bashrc
@@ -120,7 +125,7 @@ echo "module use /opt/arm/modulefiles" >> ~/.bashrc
 source ~/.bashrc
 ```
 
-`Red Hat`:
+For Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 echo "source /usr/share/Modules/init/bash" >> ~/.bashrc
@@ -145,8 +150,6 @@ To configure GCC:
 ```bash { env_source="~/.bashrc" }
 module load gnu/11.2.0
 ```
-
-Refer to the [installation instructions](https://developer.arm.com/documentation/102621) for more details.
 
 ## Setting up product license
 
@@ -223,3 +226,5 @@ The hello-world program will print the string specified in the print statement.
 ## Get started with Arm Performance Libraries
 
 To get started with the [Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) and learn how to select the optimal library for your system, follow the [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102574) guide.
+
+You are ready to use Arm Compiler for Linux. 

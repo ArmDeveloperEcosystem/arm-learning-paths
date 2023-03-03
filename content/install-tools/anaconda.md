@@ -4,7 +4,8 @@ additional_search_terms:
 - TensorFlow
 - Pytorch
 layout: installtoolsall
-minutes_to_complete: 30
+minutes_to_complete: 15
+author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.anaconda.com/
@@ -25,9 +26,9 @@ It includes access to a repository with over 8,000 open-source data science and 
 
 The conda command can be used to quickly install and use Python packages. 
 
-## Introduction
-
 Follow the instructions below to install and use Anaconda Distribution on an Arm server.
+
+## Before you begin
 
 Confirm you are using an Arm machine by running:
 
@@ -67,7 +68,7 @@ wget -O - https://www.anaconda.com/distribution/ 2>/dev/null | sed -ne 's@.*\(ht
 
 Depending on the latest version, the download will be of the form `Anaconda3-202X.0X-Linux-x86_64.sh` where the X values represent the year and month of the latest release.
 
-## Installation {#install}
+## Install
 
 Run the downloaded install script. It will review the license agreement and ask to accept the terms. 
 
@@ -87,11 +88,7 @@ To setup the shell run.
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 ```
 
-## Setting up product license {#license}
-
-Anaconda Distribution is open source and freely available for use. No licenses need to be set up for use.
-
-## Get started {#start}
+## Get started
 
 Test Anaconda Distribution by running simple TensorFlow and Pytorch examples.
 
@@ -177,5 +174,7 @@ tensor([[0.9825, 0.4797, 0.0978],
 ```
 
 
-There are many machine learning articles and examples using TensorFlow and Pytorch on Arm servers.
+You are ready to use Anaconda Distribution. 
+
+Explore the many machine learning articles and examples using TensorFlow and Pytorch.
 
