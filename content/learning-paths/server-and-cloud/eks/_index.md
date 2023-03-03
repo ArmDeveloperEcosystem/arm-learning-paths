@@ -11,10 +11,8 @@ learning_objectives:
     - Deploy Wordpress (with Mysql) on AWS Elastic Kubernetes Service
 
 prerequisites:
-    - [An Amazon Web Services (AWS) account](https://aws.amazon.com/)
-    - [Terraform](install-tools/terraform/)
-    - [The AWS CLI](install-tools/aws-cli/)
-    - [The Kubernetes CLI also known as kubectl](install-tools/kubectl/)
+    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
+    - A machine with [Terraform](install-tools/terraform/), [AWS CLI](/install-tools/aws-cli), and [The Kubernetes CLI kubectl](/install-tools/kubectl) installed.
 
 author_primary: Jason Andrews
 
