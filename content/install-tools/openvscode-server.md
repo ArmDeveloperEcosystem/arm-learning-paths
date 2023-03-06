@@ -33,14 +33,17 @@ Follow the instructions below to install OpenVSCode Server natively on an Arm Li
 
 Confirm you are using an Arm machine by running:
 
-```bash 
+```bash
 uname -m
 ```
-The result should be:
+
+The output should be:
 
 ```console
 aarch64
 ```
+
+If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 ## Download 
 

@@ -14,10 +14,19 @@ layout: "learningpathall"
 
 For Linux, confirm the architecture is Arm AArch64. 
 
+Confirm you are using an Arm machine by running:
+
+```bash
+uname -m
+```
+
+The output should be:
+
 ```console
-$ uname -m
 aarch64
 ```
+
+If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 ## Pull and Run
 

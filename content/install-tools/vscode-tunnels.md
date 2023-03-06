@@ -50,14 +50,19 @@ uname -m
 ```
 Depending on the version of the Arm architecture, the results are shown below. Both Armv8-A and Armv7-A are supported. 
 
-{{< tabpane code=true >}}
-  {{< tab header="Armv8-A">}}
+The output should be one of the values shown below. 
+
+For the Armv8-A architecture the output should be:
+
+```console
 aarch64
-  {{< /tab >}}
-  {{< tab header="Armv7-A">}}
+```
+
+For the Armv7-A architecture the output should be:
+
+```console
 armv7l
-  {{< /tab >}}
-{{< /tabpane >}}
+```
 
 ## Pick a version to download 
 

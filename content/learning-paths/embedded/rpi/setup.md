@@ -49,7 +49,9 @@ Confirm you can SSH to the cloud server and confirm the Arm architecture before 
 
 On both the Raspberry Pi and the cloud server, confirm the Arm 64-bit architecture by running the `uname` command on each computer.
 
-```console
+Confirm you are using an Arm machine by running:
+
+```bash
 uname -m
 ```
 
@@ -58,5 +60,7 @@ The output should be:
 ```console
 aarch64
 ```
+
+If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 The next section identifies the hardware of each machine. 
