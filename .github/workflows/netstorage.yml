@@ -56,7 +56,7 @@ jobs:
                   
       # SCP Site contents to netstorage
       - name: copy file
-        run: scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/ $USR@$HOST:/$ID/
+        run: scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/* $USR@$HOST:/$ID/
         shell: bash
         env:
           USR: ${{secrets.SSH_USERNAME}}
