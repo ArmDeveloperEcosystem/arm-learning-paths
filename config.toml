@@ -28,8 +28,6 @@ cloudFrontDistributionID = "E1KJFR5JSKYU64"
     operatingsystems = "/tag/:slug/"
     subjects = "/tag/:slug/"
 
-
-
 [related]
     threshold = 0 
     includeNewer = true

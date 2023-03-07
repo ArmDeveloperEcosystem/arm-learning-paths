@@ -1,6 +1,14 @@
 {{ define "main" }}
 <!-- Defines homepage layout-->
 
+
+<div style="width:fit-content;  margin: 0 auto;">
+    <h1 id="homepage-header">Learn</h1>
+</div>
+<div style="width:fit-content;  margin: 0 auto;">
+    <p style="margin-bottom: 32px;">Tutorials designed to help you develop Arm software better and faster.</p>
+</div>
+
 <!-- List of Learning Path Topics -->
 <div class="c-row u-margin-top-1">
     <div class="c-col">
@@ -46,6 +54,30 @@
 </div>
 
 <div class="u-margin-4"></div>
+
+
+<style>
+    #homepage-header {
+        margin-top: 64px;
+        margin-bottom: 16px;
+        font-size: 75px;
+        text-align: center;
+    }
+
+
+    html[theme="light"] #homepage-header {
+        background: -webkit-linear-gradient(left,var(--arm-blue), var(--arm-web-safe-green));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    html[theme="dark"] #homepage-header {
+        background: -webkit-linear-gradient(left,var(--arm-light-blue), var(--arm-green));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+</style>
+
 
 <!-- Search Submit handling -->
 <script src="/js/search-and-filter/search-handling.js"></script>

@@ -15,7 +15,7 @@
                     <tr>
                       <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Reading time:</td>
                       <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
-                        <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}"></span>
+                        <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
                         
                       </td>
                     </tr>
@@ -138,12 +138,3 @@
         {{.Content}}     
 </div>
 
-
-<!-- Include javascript for translating minutes to complete text -->
-<script src="/js/other-functions.js"></script>
-<script>
-    (() => {      // For each card, display proper hours and min
-        const time_span_ele = document.getElementsByClassName('time-to-complete-string');
-        for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
-    })();
-</script>
