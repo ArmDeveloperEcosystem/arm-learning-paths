@@ -51,3 +51,12 @@ This Learning Path provides the needed information to create your own Learning P
 
 Project maintainers will review and merge pull requests on a regular basis. 
 
+
+## Contribution process
+
+The complete process consists of three steps, all covered in this Learning Path:
+- **Setup**: prepare required tools and setup GitHub repository
+- **Write**: create new content 
+- **Contribute**: submit a pull request on GitHub and work with project maintainer to resolve any feedback
+
+You will now walk through the details of each of these three steps in this Learning Path.
