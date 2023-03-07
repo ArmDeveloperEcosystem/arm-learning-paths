@@ -1,7 +1,5 @@
 ---
-title: Learn how to build and run CMSIS-DSP tests on Corstone-300
-
-description: Build CMSIS-DSP tests and run on the Corstone-300 locally or with Arm Virtual Hardware.
+title: Learn how to build and run CMSIS-DSP test framework on Corstone-300 FVP
 
 minutes_to_complete: 15
 

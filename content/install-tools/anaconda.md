@@ -24,7 +24,7 @@ weight: 1
 
 It includes access to a repository with over 8,000 open-source data science and machine learning packages.
 
-The conda command can be used to quickly install and use Python packages. 
+The `conda` command can be used to quickly install and use Python packages. 
 
 Follow the instructions below to install and use Anaconda Distribution on an Arm server.
 
@@ -66,13 +66,15 @@ Download the latest Anaconda Distribution.
 wget -O - https://www.anaconda.com/distribution/ 2>/dev/null | sed -ne 's@.*\(https:\/\/repo\.anaconda\.com\/archive\/Anaconda3-.*-Linux-aarch64\.sh\)\">64-Bit (AWS Graviton2 / ARM64) Installer.*@\1@p' | xargs wget
 ```
 
-Depending on the latest version, the download will be of the form `Anaconda3-202X.0X-Linux-x86_64.sh` where the X values represent the year and month of the latest release.
+Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-x86_64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
 
 ## Install
 
-Run the downloaded install script. It will review the license agreement and ask to accept the terms. 
+Run the downloaded install script.
 
-The default installation directory is `$HOME/anconda3`. Change the installation directory as needed using the `-p` option to the install script.
+The default installation directory is `$HOME/anaconda3`. Change the installation directory as needed using the `-p` option to the install script.
+
+If you wish to review the license terms before accepting, remove `-b`.
 
 ```bash
 sh ./Anaconda3-2022.10-Linux-aarch64.sh -b
@@ -129,7 +131,7 @@ Run the example code:
 python ./tf.py
 ```
 
-The expected output is below. Your version may be slightly different. 
+The expected output format is below. Your version may be slightly different. 
 
 ```console
 2.10.0
@@ -163,7 +165,7 @@ Run the example code:
 python ./pytorch.py
 ```
 
-The expected output is:
+The expected output is similar to:
 
 ```console
 tensor([[0.9825, 0.4797, 0.0978],
@@ -177,4 +179,3 @@ tensor([[0.9825, 0.4797, 0.0978],
 You are ready to use Anaconda Distribution. 
 
 Explore the many machine learning articles and examples using TensorFlow and Pytorch.
-
