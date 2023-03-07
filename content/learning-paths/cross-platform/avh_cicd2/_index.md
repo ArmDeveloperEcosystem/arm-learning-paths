@@ -16,7 +16,7 @@ prerequisites:
 author_primary: Pareena Verma
 
 ##### Tags
-skilllevels: advanced
+skilllevels: Advanced
 subjects: CI-CD
 armips:
     - Cortex-M
