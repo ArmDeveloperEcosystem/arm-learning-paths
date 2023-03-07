@@ -1,11 +1,9 @@
 ---
-title: Fully integrate Arm Virtual Hardware into CI/CD workflow
+title: Integrate Arm Virtual Hardware into CI/CD workflow (II of II)
 
-description: Learn to integrate your Arm Virtual Hardware instances on AWS into a GitHub CI/CD development flow
+minutes_to_complete: 30
 
-minutes_to_complete: 20   
-
-who_is_this_for: This is an introductory topic for software developers new to Arm Virtual Hardware and/or AWS.
+who_is_this_for: This is an advanced topic for DevOps integrating AVH into their CI/CD flows
 
 learning_objectives: 
     - Prepare AWS account for GitHub integration
@@ -18,7 +16,7 @@ prerequisites:
 author_primary: Pareena Verma
 
 ##### Tags
-skilllevels: Introductory
+skilllevels: advanced
 subjects: CI-CD
 armips:
     - Cortex-M
@@ -28,6 +26,12 @@ tools_software_languages:
     - Arm Virtual Hardware
     - GitHub
     - AWS EC2 
+
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - embedded
+    - microcontroller
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

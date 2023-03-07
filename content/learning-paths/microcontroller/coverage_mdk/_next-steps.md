@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Check out Get Started with Keil Studio Cloud for more ideas for developing on Cortex-M microcontrollers.
+   Check out this learning path for more ideas for developing on Cortex-M microcontrollers.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/microcontroller/keilstudiocloud/"

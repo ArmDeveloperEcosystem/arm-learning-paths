@@ -1,9 +1,7 @@
 ---
-title: Get started with CI/CD and Arm Virtual Hardware
+title: Integrate Arm Virtual Hardware into CI/CD workflow (I of II)
 
-description: Get started integrating Arm Virtual Hardware on AWS into a GitHub CI/CD development flow
-
-minutes_to_complete: 45
+minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Virtual Hardware and its features.
 
@@ -29,6 +27,12 @@ tools_software_languages:
     - Arm Virtual Hardware
     - GitHub
     - AWS EC2
+
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - embedded
+    - microcontroller
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
