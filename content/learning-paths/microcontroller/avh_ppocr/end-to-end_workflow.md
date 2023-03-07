@@ -60,7 +60,7 @@ pip install "paddleocr>=2.0.1"
 Clone the project from GitHub.
 
 ```console
-https://github.com/PaddlePaddle/PaddleOCR.git
+git clone https://github.com/PaddlePaddle/PaddleOCR.git
 ```
 
 Change to the new directory and change the GitHub Branch.
@@ -191,7 +191,6 @@ Train:
     batch_size_per_card: 128
     drop_last: true
     num_workers: 4
-
 Eval:
   dataset:
     name: SimpleDataSet
@@ -212,7 +211,7 @@ Eval:
         - label_sar
         - length
         - valid_ratio
-   loader:
+  loader:
     shuffle: false
     drop_last: false
     batch_size_per_card: 128
