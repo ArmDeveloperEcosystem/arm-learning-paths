@@ -1,3 +1,3 @@
 ---
-title: "Select tool to install"
+title: "Install Guides"
 ---
