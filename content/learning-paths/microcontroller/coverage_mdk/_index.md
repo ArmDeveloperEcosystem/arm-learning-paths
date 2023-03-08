@@ -16,7 +16,7 @@ author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: CI-CD
+subjects: Performance and Architecture 
 armips:
     - Cortex-M
 operatingsystems:
