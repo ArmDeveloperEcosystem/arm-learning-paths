@@ -57,5 +57,5 @@ jobs:
         shell: bash
         env:
           USR: ${{secrets.SSH_USERNAME2}}
-          HOST: ${{secrets.SSH_HOST}}
+          HOST: ${{secrets.SSH_HOST2}}
           ID: ${{secrets.ID2}}
