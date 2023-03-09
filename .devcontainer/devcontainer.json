@@ -1,0 +1,14 @@
+{
+    "name": "Arm Learning Paths",
+
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    "forwardPorts": [1313],
+
+    "remoteUser": "ubuntu",
+
+    "postStartCommand": "nohup bash -c 'hugo server --baseUrl=/ --liveReloadPort=443 --appendPort=false --bind=0.0.0.0 &' "
+
+}
