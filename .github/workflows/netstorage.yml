@@ -50,8 +50,8 @@ jobs:
       # SCP Site contents to netstorage
       - name: copy site content
         run: |
-          tar -cvzf public.tgz public/
-          scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public.tgz $USR@$HOST:/$ID/
+          zip -r public.zip public/
+          scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public.zip $USR@$HOST:/$ID/
         shell: bash
         env:
           USR: ${{secrets.SSH_USERNAME}}
