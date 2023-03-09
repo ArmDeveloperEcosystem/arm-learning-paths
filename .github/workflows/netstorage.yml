@@ -56,6 +56,6 @@ jobs:
           scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
         shell: bash
         env:
-          USR: ${{secrets.SSH_USERNAME}}
+          USR: ${{secrets.SSH_USERNAME2}}
           HOST: ${{secrets.SSH_HOST}}
-          ID: ${{secrets.ID}}
+          ID: ${{secrets.ID2}}
