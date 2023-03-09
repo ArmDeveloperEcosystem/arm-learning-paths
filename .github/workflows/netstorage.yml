@@ -40,12 +40,12 @@ jobs:
       #  Copy SSH Key
       - name: copy key
         run: |
-            echo $SSH_KEY | xargs -n 1 > tmp
+            echo $SSH_KEY2 | xargs -n 1 > tmp
             base64 -d < tmp > key
             chmod 400 key
         shell: bash
         env:
-          SSH_KEY: ${{secrets.SSH_KEY}}
+          SSH_KEY: ${{secrets.SSH_KEY2}}
           
       # SCP Site contents to netstorage
       - name: copy site content
