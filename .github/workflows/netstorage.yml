@@ -47,21 +47,13 @@ jobs:
         env:
           SSH_KEY: ${{secrets.SSH_KEY}}
           
-      # Debug tmate
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        env:
-          USR: ${{secrets.SSH_USERNAME}}
-          HOST: ${{secrets.SSH_HOST}}
-          ID: ${{secrets.ID}}
-        
-          
       # SCP Site contents to netstorage
       - name: copy site content
         run: |
           cd public
           zip -r public.zip *
-          scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public.zip $USR@$HOST:/$ID/
+          cd ..
+          scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
         shell: bash
         env:
           USR: ${{secrets.SSH_USERNAME}}
