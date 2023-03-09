@@ -11,7 +11,7 @@ Though Cortex-M processors have been designed so that all operations can be prog
 
 We will write assembly level functions conforming to the [Arm Procedure Call Standard](https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst).
 
-[Keil MDK](https://www2.keil.com/mdk5) is used as the toolchain. For installation instructions, see [here](../../../../install-tools/mdk/).
+[Keil MDK](https://www2.keil.com/mdk5) is used as the toolchain. For installation instructions, see [here](/install-tools/mdk/).
 
 ## Efficient Embedded Systems Education Kit
 
