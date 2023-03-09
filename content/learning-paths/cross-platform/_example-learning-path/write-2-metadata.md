@@ -7,9 +7,10 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Learning Path Metadata
 
-Each Learning Path contains metadata which is used to create the Learning Path pages. The metadata is used by the website so all Learning Paths have the same information and look the same. 
+## Modify Learning Path metadata
+
+Each Learning Path contains metadata which is used to create the Learning Path pages. The metadata is used by the website so all Learning Paths have the same information and look similar. 
 
 This section explains how to add Learning Path metadata in three files:
 
@@ -17,23 +18,27 @@ This section explains how to add Learning Path metadata in three files:
 2. Review Questions for comprehension provided in `_review.md`
 3. Next Steps for readers in `_next-steps.md`
 
-## Metadata and Tagging 
+## Metadata and tagging 
 
 The following metadata is defined in the `_index.md` file:
 
 | Learning Path Metadata | Explanation |
 |---------------|----------|
 | title                 | Should start with a verb (learn, build), have no adjectives (amazing, cool), and be as concise as possible (limit one sentence).       |
-| description           | One sentence summary of the Learning Path. |
 | minutes_to_complete   | Time to perform the steps in the Learning Path (not just read it). |
 | who_is_this_for       | One sentence indicating the target audience (developers using tools or software to accomplish tasks). |
 | learning_objectives   | 2-5 bullet points, one sentence each, describing what a reader will learn. Should start with a verb (deploy, measure). |
-| prerequisites         | Details anything needed before this Learning Path can be started. Can include online service accounts, prior knowledge, previous Learning Paths, or specific tools and software. Offers explanatory links when possible. |
+| prerequisites         | Everything needed before this Learning Path can be started. Can include online service accounts, prior knowledge, previous Learning Paths, or specific tools and software. Offers explanatory links when possible. |
 | author_primary      | The name of the person who wrote the Learning Path in case there are questions about the material. |
 
+Look at other Learning Paths for inspiration about how to write a good title, learning objectives, and prerequisites. 
+
 {{% notice Note%}}
-To specify a prerequisite Learning Path, do so with a relative path. An example:
-- *The Learning Path on [Getting Started with Docker](../../docker) should be completed first.* was specified with this link: (../../docker) 
+To specify a prerequisite Learning Path, do so with a relative path. For example:
+
+- The Learning Path [Learn how to use Docker](../../docker) should be completed first 
+
+Note the relative path of `../../docker` 
 {{% /notice %}}
 
 ## Tags
@@ -64,6 +69,7 @@ Specifies the primary subject the Learning Path covers. Can only be one subject 
 
 
 ### operatingsystems (closed)
+
 Specifies the operating systems this Learning Path can run on. Select from this list:
 
 | OS Options    |
@@ -79,6 +85,7 @@ Specifies the operating systems this Learning Path can run on. Select from this 
 
 
 ### tools_software_languages (open)
+
 Specifies the tools, softwares, or languages this Learning Path uses. Please list out any key tools, software, or languages your learning path uses.
 
 | Tag Type     | Examples |
@@ -94,6 +101,7 @@ Specifies the tools, softwares, or languages this Learning Path uses. Please lis
 
 
 ### arm_ips (open)
+
 Specifies the Arm IP this Learning Path involves, providing a quick link to IP information for developers interested in learning more. You can enter multiple specific or groups of IP. Note that this is not used for filtering content, but is clickable for readers to find more information about these IPs through seaching automatically on developer.arm.com.
 
 | Grouping Type | When to use | Examples |
@@ -103,7 +111,7 @@ Specifies the Arm IP this Learning Path involves, providing a quick link to IP i
 
 
 
-## Review Questions 
+## Review questions 
 
 Review questions both validate comprehension and re-enforce specific learning ideas. At least two questions should be provided; three questions is ideal. Each question is multiple choice. They are specified in the _review.md file as follows:
 

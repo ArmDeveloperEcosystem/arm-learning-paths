@@ -8,7 +8,9 @@ weight: 8 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Read this section to effectively write in a style consistent with the rest of the tutorials. Content that deviates too much from these guidelines will have to be revised accordingly. 
+Read this section to effectively write in a style consistent with other Learning Paths. 
+
+Content that deviates significantly from these guidelines will need to be revised.
 
 ## Voice
 
@@ -16,7 +18,7 @@ Voice or tone describes the way something is expressed. This is different from d
 
 Learning Paths should be written in a clear, simple, and informal voice. You should write in a voice that anticipates the needs of your reader and is not pedantic or formal. However, do not write like you are speaking, because that is too informal.  
 
-If you write in this clear, simple, and informal voice, your content will be easy to understand.
+If you write in a clear, simple, and informal voice, your content will be easy to understand.
 
 {{% notice Examples%}}
 Too formal:
@@ -106,6 +108,8 @@ Sometimes, text should not be hyperlinked. For example, when you want the reader
 Use second person to refer to your reader, and when writing user-oriented instructions. Second person uses, or implies, the pronoun you, and addresses your reader directly. 
 
 Using second person helps your reader to engage, and helps to avoid the use of passive voice, because your reader is the subject of the sentence. 
+
+If you have trouble starting a sentence, try starting with: **You can**
 
 {{% notice Examples%}}
 Too passive:

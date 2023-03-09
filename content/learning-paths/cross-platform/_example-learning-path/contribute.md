@@ -8,9 +8,21 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Contribute your changes
+## Commit your changes
 
-Commit your changes to your GitHub fork using git. This can be done with a single commit or a series of commits. 
+As you are working, use Git to commit your changes. Only you can see the changes made to your fork.
+
+{{% notice Note%}}
+Find a Git tutorial if you need help adding and committing the new files. 
+{{% /notice %}}
+
+Commits can be done as a single commit or a series of commits. You can also periodically push your changes to GitHub using the `git push` command. 
+
+Continue to make modifications to your new Learning Path and save them along the way.
+
+When you are ready to submit your Learning Path for review, proceed to the next section and submit a pull request.
+
+## Submit a pull request 
 
 Before submitting a pull request, make sure `hugo` runs without errors on the command line. This should be run from the top level directory of the repository. 
 
@@ -38,10 +50,15 @@ Total in 864 ms
 
 If there are any errors, such as incorrect formatting of metadata, fix them and try again. 
 
-You can now submit a GitHub pull request. Optionally, if you would like to add your new learning path content to the automated testing framework, follow the guidelines in the [Apppendix: How to test your code](/learning-paths/cross-platform/_example-learning-path/appendix-3-test).
 After you have reviewed the new material using `hugo server` and there are no issues running `hugo` submit a GitHub pull request. 
 
-Search for a tutorial about how to create a pull request from a GitHub fork if you need guidance on creating the pull request. 
+You can now submit a GitHub pull request. 
+
+{{% notice Note%}}
+If you are new to GitHub, find a tutorial about how to create a pull request from a GitHub fork.
+{{% /notice %}}
+
+Optionally, if you would like to add your new learning path content to the automated testing framework, follow the guidelines in the [Appendix: How to test your code](/learning-paths/cross-platform/_example-learning-path/appendix-3-test).
 
 ## Publishing
 
@@ -65,5 +82,5 @@ Community members may also submit feedback on Learning Paths so we appreciate an
 
 Keep an eye out for requests and please respond as needed.
 
-Thank you!
+Thank you for creating and sharing a new Learning Path!
 

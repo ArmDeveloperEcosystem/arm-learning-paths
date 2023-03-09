@@ -1,5 +1,5 @@
 ---
-title: Creating a new Learning Path
+title: Create a new Learning Path
 
 description: Learn what type of content belongs in a Learning Path and how to format it.
 
@@ -9,12 +9,12 @@ who_is_this_for: This topic is for content creators and software developers who 
 
 learning_objectives: 
     - Understand what type of content belongs in a Learning Path
-    - Create your own Learning Path
-    - Properly fill out the metadata
-    - Properly format code, pictures, videos and more
+    - Setup the required tools for Learning Path creation
+    - Write and format your own Learning Path using markdown
+    - Contribute your Learning Path for publication
 
 prerequisites:
-    - A GitHub account
+    - A [GitHub](https://github.com/) account
 
 author_primary: Zach Lasiuk
 
