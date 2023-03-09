@@ -20,7 +20,7 @@ Ways of learning include:
 
 * [Videos](https://www.youtube.com/c/armsoftwaredevelopers) provide talks and demos of Arm tools and other software topics.
 
-* [Learning Paths](/) offer concise tutorials to achieve specific outcomes, and are supported by [tool install instructions](/install-tools/) to quickly learn how to install key Arm development tools.
+* [Learning Paths](/) offer concise tutorials to achieve specific outcomes, and are supported by [install guides](/install-tools/) to quickly learn how to install key Arm development tools.
 
 
 ## What is a Learning Path?
@@ -45,9 +45,18 @@ Anyone who wants to share Arm related software developer material can create a L
 
 ## How can I write a Learning Path?
 
-This Learning Path provides the needed information to create your own Learning Path. Please raise an issue on GitHub if you have questions or need help.
+This Learning Path provides the needed information to create your own Learning Path. Please [raise an issue on GitHub](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/issues/new) if you have questions or need help.
 
 ## When are Learning Paths reviewed and published?
 
 Project maintainers will review and merge pull requests on a regular basis. 
 
+
+## Contribution process
+
+The complete process consists of three steps, all covered in this Learning Path:
+- **Setup**: prepare the required tools and setup your GitHub repository
+- **Write**: create the new content 
+- **Contribute**: submit a pull request on GitHub and work with the project maintainers to resolve any feedback
+
+You will now walk through the details of each of these three steps in this Learning Path.

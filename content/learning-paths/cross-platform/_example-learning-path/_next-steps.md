@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   Add your recommendation for next steps here. 
+   Thank you for learning how to create Learning Paths.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "Enter Learning Path relative link here"
+recommended_path: "/learning-paths/cross-platform/_example-learning-path/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
 
 
