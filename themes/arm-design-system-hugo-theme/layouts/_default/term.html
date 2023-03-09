@@ -120,7 +120,7 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     
                                     <span><i class="fa-light fa-clock"></i></span>
-                                    &nbsp;<span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}"></span>
+                                    &nbsp;<span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
                                 </p>
                             </ads-card-content>   
                         </ads-card>
@@ -171,9 +171,6 @@
 {{ partial "ads-cards/ads-card-style.html" . }}
 
 
-<!-- Include javascript for translating minutes to complete text -->
-<script src="/js/other-functions.js"></script>
-
 <!-- Include javascript to filter and search -->
 <script src="/js/search-and-filter/filter-learning-paths.js"></script>
 <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
@@ -185,13 +182,6 @@
 
 <script>
     (() => {
-
-
-        // For each card, display proper hours and min
-        const time_span_ele = document.getElementsByClassName('time-to-complete-string');
-        for (ele of time_span_ele) {    ele.innerHTML = translateDisplayHoursAndMinutes(ele.getAttribute('name')); }
-
-
         // Assign inputChangeHandler to search box
         const search_box = document.getElementById('search-box');
         search_box.inputChangeHandler = searchHandler_LearningPaths;

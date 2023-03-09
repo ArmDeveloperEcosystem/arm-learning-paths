@@ -17,7 +17,7 @@ GitHub requires that a [Personal Access Token](https://docs.github.com/en/authen
 
 A valid [AWS](https://aws.amazon.com/) account is required. Launch the Arm Virtual Hardware AMI. For full instructions see [here](/install-tools/avh#corstone).
 
-## Fork (copy) the example repository
+## Fork the example repository
 
 As we shall be making modifications to the reference example, you must make your own copy (`fork`) of the repository.
 
@@ -60,8 +60,7 @@ nano ../micro_speech/src/command_responder.cc
 ```
 For example, change `Heard` to `The word was` in the `TF_LITE_REPORT_ERROR()` function.
 ```C
-    TF_LITE_REPORT_ERROR(error_reporter, "The word was %s (%d) @%dms", found_command,
-                         score, current_time);
+    TF_LITE_REPORT_ERROR(error_reporter, "The word was %s (%d) @%dms", found_command, score, current_time);
 ```
 ## Rebuild and rerun
 Rebuild and rerun the example.

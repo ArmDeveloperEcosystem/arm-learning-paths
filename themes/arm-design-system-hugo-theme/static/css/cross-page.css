@@ -58,13 +58,20 @@ html[theme='light'] body {
         background-color: var(--arm-light-grey-alt);
         --ads-table-border-color: white!important;
 }
+html[theme='light'] body.gradient-background {
+        background: radial-gradient(400px at top,#55d5e8,var(--arm-light-grey-alt))!important;
+}
 
 /* Dark Theme */
 /****************************************************/
 html[theme='dark'] body {
-        background-color: var(--arm-color-surface);
-        
+        background-color: var(--arm-color-surface);       
 }
+html[theme='dark'] body.gradient-background {
+        background: radial-gradient(400px at top,#207184,var(--arm-color-surface))!important; /*207184*/
+}
+
+
 
 /* SW-Hub Theme */
 /****************************************************/

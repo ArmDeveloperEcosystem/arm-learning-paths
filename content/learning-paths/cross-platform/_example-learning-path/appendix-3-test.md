@@ -1,6 +1,6 @@
 ---
 # User change
-title: "2e) How to test your code (optional)"
+title: "Appendix: How to test your code"
 
 weight: 9 # 1 is first, 2 is second, etc.
 

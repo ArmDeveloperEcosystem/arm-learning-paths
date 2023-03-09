@@ -1,17 +1,28 @@
 ---
 # User change
-title: "3) Submit for publishing"
+title: "Contribute"
 
-weight: 10 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-<!-- ![alt-text #center](3-publishing-process.PNG "Publishing process") -->
 
-## Submit your changes
+## Commit your changes
 
-Commit your changes to your GitHub fork using git. This can be done with a single commit or a series of commits. 
+As you are working, use Git to commit your changes. Only you can see the changes made to your fork.
+
+{{% notice Note%}}
+Find a Git tutorial if you need help adding and committing the new files. 
+{{% /notice %}}
+
+Commits can be done as a single commit or a series of commits. You can also periodically push your changes to GitHub using the `git push` command. 
+
+Continue to make modifications to your new Learning Path and save them along the way.
+
+When you are ready to submit your Learning Path for review, proceed to the next section and submit a pull request.
+
+## Submit a pull request 
 
 Before submitting a pull request, make sure `hugo` runs without errors on the command line. This should be run from the top level directory of the repository. 
 
@@ -41,7 +52,13 @@ If there are any errors, such as incorrect formatting of metadata, fix them and 
 
 After you have reviewed the new material using `hugo server` and there are no issues running `hugo` submit a GitHub pull request. 
 
-Search for a tutorial about how to create a pull request from a GitHub fork if you need guidance on creating the pull request. 
+You can now submit a GitHub pull request. 
+
+{{% notice Note%}}
+If you are new to GitHub, find a tutorial about how to create a pull request from a GitHub fork.
+{{% /notice %}}
+
+Optionally, if you would like to add your new learning path content to the automated testing framework, follow the guidelines in the [Appendix: How to test your code](/learning-paths/cross-platform/_example-learning-path/appendix-3-test).
 
 ## Publishing
 
@@ -54,3 +71,16 @@ If there are small typos or formatting issues, we will fix them before publishin
 {{% notice Note 2 %}}
 If there are large factual or reproducibility errors in your contribution, we will contact you via the pull request to resolve them before publishing.
 {{% /notice %}}
+
+## Updating Learning Paths
+
+Learning Paths should be always up to date and high quality. Over time software may change and instructions may be out of date.
+
+Learning Path content is automatically monitored for out of date material. We may contact you to confirm a Learning Path is still up to date or to request some modifications to a Learning Path that has become out of date. 
+
+Community members may also submit feedback on Learning Paths so we appreciate any help on keeping content current.
+
+Keep an eye out for requests and please respond as needed.
+
+Thank you for creating and sharing a new Learning Path!
+

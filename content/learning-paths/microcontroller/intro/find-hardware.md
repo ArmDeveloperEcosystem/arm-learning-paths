@@ -30,6 +30,10 @@ Other vendors providing such boards include:
 - [CanaKit](https://www.canakit.com/)
 - [Switch Science (Japan only)](https://www.switch-science.com/)
 
-Popular boards may even be available from Amazon or Newegg. 
-
 Please add your favorite vendors and distributors to the lists.
+
+## Boards used within these learning paths
+
+* STM [B-L475E-IOT01A Discovery Board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html)
+* NXP [LPCXpresso55S69 Development Board](https://www.nxp.com/design/development-boards/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK)
+* Raspberry Pi [Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)

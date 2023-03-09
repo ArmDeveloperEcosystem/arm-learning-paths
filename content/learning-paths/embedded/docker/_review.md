@@ -30,7 +30,7 @@ review:
             - "docker run -i -t <image_name> /bin/bash"
         correct_answer: 3
         explanation: >
-            The '-i' option is for interactive.
+            The '-i' option is needed to interact.
 
 
 # ================================================================================

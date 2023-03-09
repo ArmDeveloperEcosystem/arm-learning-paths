@@ -1,30 +1,27 @@
 ---
-title: Processing Text in Mixed C/Assembly Language
-
-description: In this exercise, you will execute assembly code on the Nucleo-F401RE board using the debugger to examine its execution at the processor level.
+title: Write Arm Assembler functions
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers interested in efficiently programming microcontrollers with C/Assembly.
+who_is_this_for: This is an introductory topic for software developers interested programming microcontrollers with C/Assembly.
 
 learning_objectives: 
     - Write a mixed C program and assembly language subroutines for the microcontroller. 
     - Call the subroutines written in assembly in a C function.  
     - Use Arm register calling conventions when writing subroutines in assembly language.  
-    - Use a suitable debugging tool to view and analyse the processor state.  
+    - Step through the code to understand operation
 
 prerequisites:
     - Some familiarity with C/Assembly
-    - Installed Keil MDK IDE
-    - Have an STM32 Nucleo F401RE development board 
+    - Access to Keil MDK
 
 ### Tags
 skilllevels: Introductory
-subjects: Performance and Architecture 
+subjects: Performance and Architecture
 armips:
     - Cortex-M
 operatingsystems:
-    - Windows
+    - Baremetal
 tools_software_languages:
     - C
     - Assembly

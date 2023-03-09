@@ -1,33 +1,31 @@
 ---
 # User change
-title: "2c) Add formatted content"
+title: "Appendix: Format content"
 
 weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-<!-- ![alt-text #center](2-contribution-process.PNG "Contribution process") -->
 
-Refer to this section when you are have questions how to format your content correctly.
+Refer to this section when you are have questions on how to format your content correctly.
 
 ## Learning Path Formatting
 
 Use the quick links below to jump to the appropriate section for each type of formatting. 
 
-1. [Markdown Syntax](#markdown-syntax)
-2. [Code Snippets](#code-snippets)
-3. [Images](#images)
-4. [Videos](#videos)
-5. [Notice Callout](#notice-callout)
-6. [Godbolt Compiler Explorer](#godbolt-compiler-explorer)
+- [Markdown Syntax](#markdown-syntax)
+- [Code Snippets](#code-snippets)
+- [Images](#images)
+- [Videos](#videos)
+- [Notice Callout](#notice-callout)
+- [Godbolt Compiler Explorer](#godbolt-compiler-explorer)
 
 
 ## Markdown Syntax
 This site leverages core Markdown syntax. This picture converes 90% of common syntax needs:
 
 ![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
-
 
 
 

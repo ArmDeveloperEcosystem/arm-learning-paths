@@ -25,7 +25,7 @@ To install locally see:
 - [Arm Compiler for Embedded](/install-tools/armclang/) or
 - [Arm GNU Toolchain](/install-tools/gcc/#Arm-GNU)
 
-## Build the CMSIS-DSP tests
+## Build the CMSIS-DSP test suite
 
 Install python 3 prerequisites for the CMSIS-DSP test suite:
 ```console

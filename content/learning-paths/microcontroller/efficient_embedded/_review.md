@@ -35,14 +35,14 @@ review:
                
     - questions:
         question: >
-            Which registers should be reserved by a subroutine?
+            Which registers should be preserved by a subroutine?
         answers:
             - "r1-r3"
             - "r2-r6"
             - "r4-r11"
         correct_answer: 3
         explanation: >
-            Registers r4 through r11 must be preserved by a subroutine.
+            Registers r4 through r11 must be preserved by a subroutine. r0-r3, and r12, are corruptible by a subroutine, with parameters being passed in r0-r3.
 
 
 

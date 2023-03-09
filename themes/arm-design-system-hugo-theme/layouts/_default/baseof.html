@@ -7,7 +7,7 @@
         {{partial "head/analytics.html" .}}
         {{partial "head/conditional-redirect.html" .}}
     </head>
-    <body>
+    <body {{ if .IsHome }} class="gradient-background" {{end}}>
         {{partial "header/global-nav.html" .}}
         {{partial "header/masthead.html" .}}
         <div id="all-content-div" class="c-container is-full-width" style="min-height: 250px;">

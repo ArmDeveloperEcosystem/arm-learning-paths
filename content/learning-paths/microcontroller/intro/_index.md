@@ -1,11 +1,11 @@
 ---
-title: Start developing on Arm hardware
+title: Acquire an Arm based MCU development board
 
 description: The place to start for developers new to Arm microcontrollers
 
 minutes_to_complete: 5
 
-who_is_this_for: This is an introductory topic for software developers new to the Arm architecture and looking for microcontroller hardware.
+who_is_this_for: This is an introductory topic for developers looking for microcontroller hardware.
 
 learning_objectives:
     - Find microcontroller hardware to use for software development
@@ -17,7 +17,7 @@ author_primary: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
-subjects: Performance and Architecture 
+subjects: Performance and Architecture
 armips:
     - Cortex-M
 operatingsystems:

@@ -1,0 +1,31 @@
+{{/* translateDisplayHoursAndMinutes partial */}}
+
+{{- $h := div (int .) 60 -}}
+{{- $m := mod (int .) 60 -}}
+{{- $formatted_time := "" -}}
+
+{{/* translate hours */}}
+{{- if eq $h 0 -}}
+  {{- $formatted_time = "" -}}
+{{- else if eq $h 1 -}}
+  {{- $formatted_time = (print $h " hr") -}}
+{{- else if gt $h 1 -}}
+  {{- $formatted_time = (print $h " hrs") -}}
+{{- end -}}
+
+{{/* translate minutes */}}
+{{- if eq $m 0 -}}
+  {{- $formatted_time = $formatted_time -}}
+{{- else if and (ne $h 0) (ne $m 0) -}}
+  {{- $formatted_time = (print $formatted_time " " $m " min") -}}
+{{- else -}}
+  {{- $formatted_time = (print $m " min") -}}
+{{- end -}}
+
+{{/* return_str:  '2 hrs 25 min'        '40min'     '1 hr'  */}}
+
+
+
+{{/* Now insert HTML of new time*/}}
+{{$formatted_time}}
+
