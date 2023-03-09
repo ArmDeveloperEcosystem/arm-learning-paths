@@ -37,7 +37,7 @@ jobs:
         run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add content/stats/data.json
+          git add content/stats/*_data.json
           git pull
           git commit -m "Update stats"
           
