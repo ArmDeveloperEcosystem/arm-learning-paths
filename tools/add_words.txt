@@ -12,3 +12,5 @@ cross-building
 pre-built
 32-bit
 64-bit
+open-source
+codec
