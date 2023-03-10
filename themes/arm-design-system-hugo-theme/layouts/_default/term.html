@@ -18,8 +18,8 @@
     <!-- Filter bar on left -->
     <div class="c-col u-hide lg:u-display-block u-flex-shrink-0" style="width: 320px; max-width: 320px;">
         <h3 class="u-margin-top-0">Filter</h3>
-        <!-- Catagories, CLOSED SCHEMA -->
-        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Catagories" "routing" "learning-paths" "tagnames" $main_topic_titles)}} 
+        <!-- Categories, CLOSED SCHEMA -->
+        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_topic_titles)}} 
     </div>
 
     <!-- Search & Results on Right -->
@@ -38,7 +38,7 @@
                     </div>
                     <div class="u-margin-top-1/2 facets-positioning-container">
                         <div id="facets-background">
-                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Catagories" "routing" "learning-paths" "tagnames" $main_topic_titles)}} 
+                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_topic_titles)}} 
                         </div>
                     </div>
                 </div>
