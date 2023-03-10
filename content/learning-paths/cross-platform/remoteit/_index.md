@@ -23,8 +23,7 @@ subjects: CI-CD
 armips:
     - Neoverse
     - Cortex-A
-tools:
-softwares:
+tools_software_languages:
 operatingsystems:
     - Linux
     - Windows

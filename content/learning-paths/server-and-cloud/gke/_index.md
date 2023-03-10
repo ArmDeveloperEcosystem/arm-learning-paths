@@ -23,7 +23,7 @@ subjects: Containers and Virtualization
 armips:
     - Neoverse
 
-tools:
+tools_software_languages:
     - Terraform
     - Kubernetes
 
