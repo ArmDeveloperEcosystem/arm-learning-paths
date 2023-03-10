@@ -1,21 +1,18 @@
 ---
-title: Learn how to deploy PostgreSQL on AWS
-
-description: Deploy a single instance of PostgreSQL and 3-node PostgreSQL through an EC2 instance. 
+title: Learn how to deploy PostgreSQL on AWS 
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an introductory topic for anyone who wants to deploy PostgreSQL on Cloud nodes or physical machines.
+who_is_this_for: This is an advanced topic for anyone who wants to deploy PostgreSQL on AWS Graviton processors.
 
 learning_objectives: 
-    - Deploy single instance of PostgreSQL EC2 instance
     - Automate PostgreSQL EC2 instance creation using Terraform and Ansible
-    - Deploy a 3-node PostgreSQL cluster with two hot standby servers that are read-only
+    - Deploy a single instance of PostgreSQL on AWS Graviton 
+    - Deploy a 3-node PostgreSQL cluster with two hot, read-only standby servers on AWS Graviton
 
 prerequisites:
-    - Cloud nodes or physical machines
-    - Terraform
-    - Ansible
+    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
+    - A machine with [Terraform](/install-tools/terraform/), [AWS CLI](/install-tools/aws-cli), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-tools/ansible/) installed
 
 author_primary: Jason Andrews
 ### Tags

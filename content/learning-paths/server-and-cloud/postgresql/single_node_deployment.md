@@ -10,30 +10,47 @@ layout: "learningpathall"
 
 ##  Deploy a single instance of PostgreSQL 
 
+You can deploy PostgreSQL on AWS Graviton processors using Terraform and Ansible. 
+
+In this topic, you will deploy PostgreSQL on a single AWS EC2 instance, and in the next topic you will deploy PostgreSQL on a three-node cluster. 
+
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
+
 ## Before you begin
-Any computer which has the required tools installed can be used for this section.
 
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
+You should have the prerequisite tools installed before starting the Learning Path. 
 
-Below tools are required on the computer you are using. Follow the links to install the required tools.
-* [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-* [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
-* [Ansible](https://www.cyberciti.biz/faq/how-to-install-and-configure-latest-version-of-ansible-on-ubuntu-linux/)
-* [Terraform](/install-tools/terraform)
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
 
-## Generate Access keys (Access key ID and Secret access key)
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
 
-The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (Access key ID and Secret access key). These access keys are used by Terraform for making programmatic calls to AWS via AWS CLI. To generate an Access key and Secret key, follow this [documentation](/learning-paths/server-and-cloud/aws/terraform#generate-access-keys-access-key-id-and-secret-access-key)
+Before you begin you will also need:
+- An AWS access key ID and secret access key. 
+- An SSH key pair
 
+The instructions to create the keys are below.
 
-## Generate key-pair(public key, private key) using ssh keygen
+### Generate AWS access keys 
 
-Before using Terraform, first generate the key-pair (public key, private key) using `ssh-keygen`. Then associate both public and private keys with AWS EC2 instances. To generate the key-pair, follow this [documentation](/learning-paths/server-and-cloud/aws/terraform#generate-key-pairpublic-key-private-key-using-ssh-keygen).
+Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
 
-## Deploy EC2 instance via Terraform
+To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws/terraform#generate-access-keys-access-key-id-and-secret-access-key).
 
-After generating the public and private keys, we have to create an EC2 instance. Then we will push our public key to the **authorized_keys** folder in **~/.ssh**. We will also create a security group that opens inbound ports **22**(ssh) and **5432**(PSQL). Below is a Terraform file called **main.tf**.
+### Generate an SSH key-pair
 
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access: 
+
+```console
+ssh-keygen -f aws_key -t rsa -b 2048 -P ""
+```
+
+You should now have your AWS access keys and your SSH keys in the current directory.
+
+## Create an AWS EC2 instance using Terraform
+
+Using a text editor, save the code below to in a file called `main.tf`
+
+Scroll down to see the information you need to change in `main.tf`
 
 ```console
 
@@ -44,10 +61,10 @@ provider "aws" {
   secret_key  = "AXXXXXXXXXXXXXXXXXXXX"
 }
 resource "aws_instance" "PSQL_TEST" {
-  ami           = "ami-064593a301006939b"
+  ami           = "ami-0f9bd9098aca2d42b"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = "psql-key"
+  key_name = "aws_key"
  
   tags = {
     Name = "PSQL_TEST"
@@ -70,7 +87,7 @@ ingress {
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
 }
- ingress {
+ingress {
     description      = "TLS from VPC"
     from_port        = 22
     to_port          = 22
@@ -91,7 +108,7 @@ output "Master_public_IP" {
   value = [aws_instance.PSQL_TEST.public_ip]
 }
  resource "aws_key_pair" "deployer" {
-         key_name   = "psql-key"
+         key_name   = "aws_key"
          public_key = "ssh-rsaxxxxxxxxxxxxxx"
   }
 // Generate inventory file
@@ -107,29 +124,103 @@ resource "local_file" "inventory" {
           EOF
 }
 ```
-**NOTE:-** Replace **public_key**, **access_key**, **secret_key**, **key_name** and **filename** with respective values. You can check your current directory using `pwd` command.
 
-Now, use the  Terraform commands below to deploy the **main.tf** file.
+Make the changes listed below in `main.tf` to match your account settings.
+
+1. In the `provider` section, update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
+
+2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0f9bd9098aca2d42b ` No change is needed if you want to use Ubuntu AMI. 
+
+{{% notice Note %}}
+The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+{{% /notice %}}
+
+3. In the `aws_key_pair` section, change the `public_key` value to match your SSH key. Copy and paste the contents of your aws_key.pub file to the `public_key` string. Make sure the string is a single line in the text file.
+
+4. in the `local_file` section, change the `filename` to be the path to your current directory.
+
+The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
+
+
 ## Terraform Commands
 
-### Initialize Terraform and Create a Terraform execution plan
+Use Terraform to deploy the `main.tf` file.
 
-To deploy the instances, we need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [documentation](/learning-paths/server-and-cloud/aws/terraform#initialize-terraform) to initialize and create a Terraform execution plan for main.tf file.
+### Initialize Terraform
+
+Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for AWS.
+
+```console
+terraform init
+```
+    
+The output should be similar to:
+
+```console
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding latest version of hashicorp/local...
+- Finding latest version of hashicorp/aws...
+- Installing hashicorp/local v2.4.0...
+- Installed hashicorp/local v2.4.0 (signed by HashiCorp)
+- Installing hashicorp/aws v4.58.0...
+- Installed hashicorp/aws v4.58.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
+
+### Create a Terraform execution plan
+
+Run `terraform plan` to create an execution plan.
+
+```console
+terraform plan
+```
+
+A long output of resources to be created will be printed. 
 
 ### Apply a Terraform execution plan
 
-Run `terraform apply` to apply the execution plan to your cloud infrastructure. The below command creates all required infrastructure.
+Run `terraform apply` to apply the execution plan and create all AWS resources: 
 
 ```console
 terraform apply
 ```      
-![image](https://user-images.githubusercontent.com/92078754/223036258-5e9a48b8-5104-4f6b-aebf-82f87c3aaa03.png)
+
+Answer `yes` to the prompt to confirm you want to create AWS resources. 
+
+The public IP address will be different, but the output should be similar to:
+
+```console
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+Master_public_IP = [
+  "52.87.146.16",
+]
+```
 
 ## Configure PostgreSQL through Ansible
 
-Here we need to install the PostgreSQL database itself along with the python3-psycopg2 Python library which will allow us to use the ansible PostgreSQL modules. Modify the pg_hba.conf file to allow the user to connect with a connection string. 
+Install the PostgreSQL database and the required dependencies. 
 
-Here is the complete YML file of Ansible-Playbook
+Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. 
+
 ```console
 ---
 - hosts: all
@@ -141,6 +232,7 @@ Here is the complete YML file of Ansible-Playbook
       shell: |
              sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
              sudo wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
+             sudo apt-get update
              sudo apt-get install postgresql -y
              sudo systemctl start postgresql
              sudo systemctl status postgresql
@@ -169,82 +261,190 @@ Here is the complete YML file of Ansible-Playbook
       service: name=postgresql state=restarted
 
 ```
-**NOTE:** In our case, the hosts(inventory) file is generated automatically after the terraform apply command. 
+
+No changes are required to the file.
 
 ### Ansible Commands
 
-To run a Playbook, we need to use the `ansible-playbook` command.
-```console
-ansible-playbook {your_yml_file} -i {your_hosts_file} --key-file {path_to_private_key}
-```
-**NOTE:-** Replace **{{ your_yml_file }}**, **{your_hosts_file}** and **{path_to_private_key}** with respective values.
-
-![image](https://user-images.githubusercontent.com/92078754/223037464-59317988-9f8c-48cf-8534-b88450b8a6ab.png)
-
-Here is the output after successful execution of the **ansible-playbook** command.
-
-![image](https://user-images.githubusercontent.com/92078754/223037577-acadf95d-e0e4-41bf-a430-e2db75bdfa1c.png)
-
-## Connect to Database 
-
-For connecting to the database, we need the **host(public-ip of the node)** where PostgreSQL is deployed. To connect to the host use the below command.
+Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
 
 ```console
-ssh -i ~/.ssh/private_key username@host
+ansible-playbook playbook.yaml -i hosts --key-file aws_key
 ```
-**NOTE:-** Replace **{private_key}**, **{host}** and **username** with respective values.
 
-![image](https://user-images.githubusercontent.com/92078754/223038314-9f61ff45-25e2-40ce-b887-f38fcf8fd883.png)
+Answer `yes` when prompted for the SSH connection. 
 
-Next, log into the postgres by using the below commands.
+Deployment may take a few minutes. 
+
+The output should be similar to:
+
+```console
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+The authenticity of host '3.84.22.24 (3.84.22.24)' can't be established.
+ED25519 key fingerprint is SHA256:igz06Iz4YiilC08oFy8E5E78KCaJzYIthVpt1zhq9KM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+ok: [3.84.22.24]
+
+TASK [Update the Machine & Install PostgreSQL] *********************************
+changed: [3.84.22.24]
+
+TASK [Update apt repo and cache on all Debian/Ubuntu boxes] ********************
+changed: [3.84.22.24]
+
+TASK [Install Python pip & Python package] *************************************
+changed: [3.84.22.24] => (item=python3-pip)
+
+TASK [Find out if PostgreSQL is initialized] ***********************************
+ok: [3.84.22.24]
+
+TASK [Start and enable services] ***********************************************
+ok: [3.84.22.24] => (item=postgresql)
+
+PLAY RECAP *********************************************************************
+3.84.22.24                 : ok=6    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+```
+
+## Connect to the database 
+
+Execute the steps below to try out PostgreSQL.
+
+1. Connect to the database using SSH to the public IP of the AWS EC2 instance. 
+
+```console
+ssh -i aws_key ubuntu@<public-IP-address>
+```
+
+2. Log in to postgres using the commands:
+
 ```console
 cd ~postgres/
 sudo su postgres -c psql
 ```
-![image](https://user-images.githubusercontent.com/92078754/223038516-68a11606-24d9-44e2-a59c-249504b3cc59.png)
 
-Use the below command to create databases.
+This will enter the PostgreSQL command prompt.
+
+```console
+psql (15.2 (Ubuntu 15.2-1.pgdg22.04+1))
+Type "help" for help.
+
+postgres=# 
+```
+
+3. Create a new database:
+
 ```console
 create database testdb;
 ```
-![image](https://user-images.githubusercontent.com/92078754/223055208-55a9da7c-5679-47c9-a885-c21eee0feec4.png)
 
-Use the below command to show databases.
+The output will be:
 
 ```console
- \l;
+CREATE DATABASE
 ```
-![image](https://user-images.githubusercontent.com/92078754/223055558-823a6d15-72d5-4366-a42d-f4517a6747d6.png)
 
-Use the below command to use existing databases.
+4. List all databases: 
+
+```console
+ \l
+```
+
+The output will be:
+
+```console
+                                             List of databases
+   Name    |  Owner   | Encoding | Collate |  Ctype  | ICU Locale | Locale Provider |   Access privileges   
+-----------+----------+----------+---------+---------+------------+-----------------+-----------------------
+ postgres  | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | 
+ template0 | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | =c/postgres          +
+           |          |          |         |         |            |                 | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | =c/postgres          +
+           |          |          |         |         |            |                 | postgres=CTc/postgres
+ testdb    | postgres | UTF8     | C.UTF-8 | C.UTF-8 |            | libc            | 
+(4 rows)
+```
+
+5. Switch to the new databases:
+
 ```console
  \c testdb;
 ```
-![image](https://user-images.githubusercontent.com/92078754/223055687-17cf5d0e-af9c-4de7-9b49-2b4d4e18758f.png)
 
-Use the below command to create the tables.
+The output confirms you have changed to the new database:
+
+```console
+You are now connected to database "testdb" as user "postgres".
+```
+
+6. Create a new table in the database:
+
 ```console
 CREATE TABLE company ( emp_name VARCHAR, emp_dpt VARCHAR);
 ```
-![image](https://user-images.githubusercontent.com/92078754/223057061-8edf1ecd-dfe3-4aea-b065-d1c98b4b9eae.png)
 
-Use the below command to show the tables.
+The output will be:
+
+```console
+CREATE TABLE
+```
+
+7. Display the database tables: 
 
 ```console
  \dt;
 ```
-![image](https://user-images.githubusercontent.com/92078754/223057168-b75bdcb3-eb8e-4ea6-b473-be2d726044b8.png)
 
-Use the below commands to insert values into the table.
+The tables will be printed:
+
+```console
+          List of relations
+ Schema |  Name   | Type  |  Owner   
+--------+---------+-------+----------
+ public | company | table | postgres
+(1 row)
+```
+
+8. Insert data into the table:
+
 ```console
 INSERT INTO company VALUES ('Herry', 'Development'), ('Tom', 'Testing'),('Ankit', 'Sales'),('Manoj', 'HR'),('Noy', 'Presales');
 ```
-![image](https://user-images.githubusercontent.com/92078754/223057644-34abadec-c0f3-47c8-a919-dd8bc57f9418.png)
 
-Use the below command to access the content of the table.
+The output will be:
+
+```console
+INSERT 0 5
+```
+
+9. Print the contents of the table:
 
 ```console
 select * from company;
 ```
-![image](https://user-images.githubusercontent.com/92078754/223057884-296af4cf-4fb5-462c-9008-6131eff00584.png)
 
+The output will be:
+
+```console
+ emp_name |   emp_dpt   
+----------+-------------
+ Herry    | Development
+ Tom      | Testing
+ Ankit    | Sales
+ Manoj    | HR
+ Noy      | Presales
+(5 rows)
+```
+
+You have successfully installed PostgreSQL on an AWS EC2 instance running Graviton processors. 
+
+### Clean up resources
+
+Run `terraform destroy` to delete all resources created.
+
+```console
+terraform destroy
+```
+
+Continue the Learning Path to create a multi-node PostgreSQL deployment. 
