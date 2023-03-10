@@ -109,8 +109,8 @@ table {
 
 /* Fix codeblock spacing in content when only direct decendent of paragraph (not including formatted code blocks, which are in a 'pre' element) (add space before and after, not done right) */
 p > code {
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 

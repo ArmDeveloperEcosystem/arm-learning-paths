@@ -58,6 +58,28 @@ html[theme="dark"] .sorting-criteria.active {
     border-bottom: 2.2px solid hsla(0,0%,100%,.9);
 }
 
+/* Adjust below-search elements when on small screen to fit better */
+@media (max-width: 480px) {
+    #tag-preface {
+        display: none;
+    }
+    #current-tag-bar {
+        min-height: auto;
+    }
+    #results-status-bar {
+        width: 100%;
+        margin-bottom:10px;
+    }
+    #sorting-bar {
+        float: left!important;
+    }
+}
+
+
+
+
+
+
 
 #divider-line {
     border-top: 1px solid var(--ads-search-border-color);
@@ -65,6 +87,10 @@ html[theme="dark"] .sorting-criteria.active {
     border-right: 0;
     border-left: 0;
 }
+
+
+
+
 
 
 
