@@ -7,7 +7,7 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Linux: 32
+- Linux: 34
 - macOS: 1
 - Windows: 1
 pinned_modules:
@@ -18,7 +18,7 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 2
-- Containers and Virtualization: 8
+- Containers and Virtualization: 10
 - Databases: 5
 - Libraries: 5
 - ML: 2
@@ -33,6 +33,7 @@ tools_software_languages_filter:
 - Armclang: 2
 - ArmRAL: 1
 - Assembly: 1
+- AWS CLI: 2
 - AWS CodeBuild: 1
 - AWS EC2: 2
 - Azure: 2
@@ -48,7 +49,8 @@ tools_software_languages_filter:
 - Go: 1
 - InnoDB: 1
 - Kafka: 1
-- Kubernetes: 1
+- kubectl: 1
+- Kubernetes: 2
 - Memcached: 1
 - MongoDB: 1
 - MySQL: 1
@@ -56,15 +58,12 @@ tools_software_languages_filter:
 - Pointer Authentication: 1
 - PostgreSQL: 1
 - Python: 1
-- remote.it: 1
 - snappy: 1
 - Snort: 1
 - SQL: 2
-- SSH: 1
 - Tensorflow: 1
-- Terraform: 6
+- Terraform: 8
 - Vectorscan: 1
-- VNC: 1
 - x265: 1
 - zlib: 1
 - Zookeeper: 1

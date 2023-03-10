@@ -6,14 +6,14 @@ key_ip:
 - Cortex-M
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 7
+- Baremetal: 13
 - RTOS: 5
 - Windows: 1
 subjects_filter:
-- CI-CD: 3
+- CI-CD: 2
 - Libraries: 1
 - ML: 4
-- Performance and Architecture: 4
+- Performance and Architecture: 6
 - RTOS Fundamentals: 2
 - Security: 2
 - Virtual Hardware: 2
@@ -24,15 +24,15 @@ tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Ecosystem FVP: 1
 - Arm Virtual Hardware: 8
-- Assembly: 1
+- Assembly: 2
 - AWS EC2: 8
-- C: 16
+- C: 17
 - cmake: 1
 - CMSIS-DAP: 1
 - Corstone-300 FVP: 3
 - GCC: 2
 - GitHub: 2
-- Keil MDK: 4
+- Keil MDK: 5
 - Keil Studio Cloud: 1
 - MDK: 1
 - PaddleOCR: 1
