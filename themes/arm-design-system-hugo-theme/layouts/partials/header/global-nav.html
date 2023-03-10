@@ -1,91 +1,95 @@
 
-<ads-global-navigation theme="dark" breakpoint="lg" id="global-nav-example-default" sr-label="default navigation">
-    <!-- Slotted Flyout Content -->
-    <div slot="tab-content" id="category1" role="tabpanel" tabindex="0">
+<div id="global-nav-height-fixer">
+  <ads-global-navigation theme="dark" breakpoint="lg" id="global-nav-example-default" sr-label="default navigation">
+      <!-- Slotted Flyout Content -->
+      <div slot="tab-content" id="category1" role="tabpanel" tabindex="0">
+          <div class="flyout-content-container c-container u-padding-top-2 u-padding-bottom-5">
+
+            <div class="c-row">
+              <div class="c-col c-col-12">
+                <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">Learning Path Categories</h2>
+              </div>
+            </div>
+
+            <div class="c-row">
+              <div class="c-col c-col-12">
+                <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-3 xl:u-grid-columns-3 xxl:u-grid-columns-4">
+                  {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
+                    <ads-card has-hover-effect class="path-card global-nav-path-card" link="{{.Permalink}}">
+                      <ads-card-image slot="image" src="/{{.Params.cardimage}}" class="u-bg-position-top" style="max-height: 75px;"></ads-card-image>
+                      <ads-card-content slot="content">
+                          <h4 class="u-color-arm-blue u-margin-top-0 u-margin-bottom-0">{{.Title}}</h4>
+                      </ads-card-content>   
+                  </ads-card>
+                  {{end}}
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+
+      <!-- Slotted Flyout Content -->
+      <div slot="tab-content" id="category2" role="tabpanel" tabindex="1">
         <div class="flyout-content-container c-container u-padding-top-2 u-padding-bottom-5">
 
           <div class="c-row">
             <div class="c-col c-col-12">
-              <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">Learning Path Categories</h2>
+              <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">Install Tools</h2>
             </div>
           </div>
+
+          <div class="c-row u-margin-top-1 u-margin-left-2">
+            <div class="c-col">
+              <p theme="dark">Looking for quick install instructions for a particular tool?</p>
+              
+              <span style="display:inline-block;">
+                  <ads-search theme="dark" has-search-button id="search-box-tools-global-nav" placeholder="Search by tool name" class="u-width-auto"></ads-search>
+              </span>
+              <span style="display:inline-block;" class="u-margin-left-1">
+                  <ads-cta-link theme="dark"  link='/install-tools'><span>See all</span></ads-cta-link>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- Slotted Flyout Content -->
+      <div slot="tab-content" id="category3" role="tabpanel" tabindex="1">
+        <div class="flyout-content-container c-container u-padding-top-2 u-padding-bottom-5">
 
           <div class="c-row">
             <div class="c-col c-col-12">
-              <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-3 xl:u-grid-columns-3 xxl:u-grid-columns-4">
-                {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-                  <ads-card has-hover-effect class="path-card global-nav-path-card" link="{{.Permalink}}">
-                    <ads-card-image slot="image" src="/{{.Params.cardimage}}" class="u-bg-position-top" style="max-height: 75px;"></ads-card-image>
-                    <ads-card-content slot="content">
-                        <h4 class="u-color-arm-blue u-margin-top-0 u-margin-bottom-0">{{.Title}}</h4>
-                    </ads-card-content>   
-                </ads-card>
+              <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">What is this site about?</h2>
+            </div>
+          </div>
+
+          <div class="c-row u-margin-top-1 u-margin-left-2">
+            <div class="c-col" theme="dark">
+                {{with .Site.GetPage "/about"}}
+                  {{ .Content | replaceRE "<p>" "<p theme=\"dark\">" | safeHTML }}
                 {{end}}
-              </div>
             </div>
           </div>
         </div>
-    </div>
-
-
-    <!-- Slotted Flyout Content -->
-    <div slot="tab-content" id="category2" role="tabpanel" tabindex="1">
-      <div class="flyout-content-container c-container u-padding-top-2 u-padding-bottom-5">
-
-        <div class="c-row">
-          <div class="c-col c-col-12">
-            <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">Install Tools</h2>
-          </div>
-        </div>
-
-        <div class="c-row u-margin-top-1 u-margin-left-2">
-          <div class="c-col">
-            <p theme="dark">Looking for quick install instructions for a particular tool?</p>
-            
-            <span style="display:inline-block;">
-                <ads-search theme="dark" has-search-button id="search-box-tools-global-nav" placeholder="Search by tool name" class="u-width-auto"></ads-search>
-            </span>
-            <span style="display:inline-block;" class="u-margin-left-1">
-                <ads-cta-link theme="dark"  link='/install-tools'><span>See all</span></ads-cta-link>
-            </span>
-          </div>
-        </div>
       </div>
+
+
+
+
+
+
+
+    <div slot="top-bar-content-end">
+      {{ $gh_repo := ($.Param "github_repo") -}}
+      <ads-cta-button id="contribute-btn" level="primary" theme="dark" size="small" text="Contribute via GitHub" onclick="window.open('{{$gh_repo}}','_blank')"></ads-cta-button>
     </div>
+  </ads-global-navigation>
+</div>
 
 
-
-    <!-- Slotted Flyout Content -->
-    <div slot="tab-content" id="category3" role="tabpanel" tabindex="1">
-      <div class="flyout-content-container c-container u-padding-top-2 u-padding-bottom-5">
-
-        <div class="c-row">
-          <div class="c-col c-col-12">
-            <h2 class="u-color-arm-light-grey u-font-weight-300 u-margin-top-0 u-margin-bottom-2">What is this site about?</h2>
-          </div>
-        </div>
-
-        <div class="c-row u-margin-top-1 u-margin-left-2">
-          <div class="c-col" theme="dark">
-              {{with .Site.GetPage "/about"}}
-                {{ .Content | replaceRE "<p>" "<p theme=\"dark\">" | safeHTML }}
-              {{end}}
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
-
-
-
-  <div slot="top-bar-content-end">
-    {{ $gh_repo := ($.Param "github_repo") -}}
-    <ads-cta-button id="contribute-btn" level="primary" theme="dark" size="small" text="Contribute via GitHub" onclick="window.open('{{$gh_repo}}','_blank')"></ads-cta-button>
-  </div>
-</ads-global-navigation>
 
 <script>
 (() => {

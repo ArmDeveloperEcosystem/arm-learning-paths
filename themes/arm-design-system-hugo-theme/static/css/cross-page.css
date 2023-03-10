@@ -26,7 +26,52 @@ label {
     font-size: 16px!important;
 }
 
+
+
+/* Fix global nav height */
+/*************************************/
+#global-nav-height-fixer {
+        /*background-color: var(--arm-black);*/
+        background: linear-gradient(0deg, #2d2f34 40%, #010101 40%);
+        max-width: 100vw;
+        min-height: 105px;
+        position: relative;
+        top: 0;
+}
+
+
+@media (max-width: 992px) { /* smaller screens than LG */
+        #global-nav-height-fixer {
+                background: #010101;
+                /*background-color: #010101; */
+                min-height: 50px;
+        }
+}
+
+/* Fix Masthead Height */
+#expanded-masthead  {
+        /*background-color: var(--arm-black);*/
+        background: #010101;
+        max-width: 100vw;
+        min-height: 105px;
+        /*position: relative;
+        top: 0;*/
+}
+
+
+@media (max-width: 768px) { /* smaller screens than MD */
+        #expanded-masthead {
+                background: #010101;
+                /*background-color: #010101; */
+                min-height: 90px;
+        }
+}
     
+/* Fix Search Height */
+ads-search#search-box {
+        min-height: 45px;
+}
+
 
 /* Hide breadcrumb when small screen. */
 @media (max-width: 576px) {
