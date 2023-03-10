@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have created a simple RTOS application using Keil RTX5. Come back soon for more learning paths that go deeper into the RTOS features.
+   You have created a simple RTOS application using Keil RTX5. If you are interested in running Zephyr RTOS on Corstone-300 FVP, follow this recommended learning path:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "Enter learning path relative link here"
+recommended_path: "/learning-paths/microcontroller/zephyr"
 # Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
 
 

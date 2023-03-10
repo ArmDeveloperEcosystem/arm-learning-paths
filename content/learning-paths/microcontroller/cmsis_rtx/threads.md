@@ -13,7 +13,7 @@ In this example we shall create 3 threads. The number and naming of the threads 
 
 ## Create app_main()
 
-Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the following `app_main.c`.
+Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the `app_main.c` file with the contents below:
 
 ```C
 #include "cmsis_os2.h"
@@ -32,7 +32,7 @@ void app_main (void *argument) {
 
 We can now implement the functionality of the threads themselves. Let's start with a simple example... each thread will say hello, and then pause for a period, forever.
 
-Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the following `threads.c`.
+Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the `threads.c` file with contents below:
 ```C
 #include "cmsis_os2.h"
 #include <stdio.h>
@@ -60,7 +60,7 @@ void __attribute__((noreturn)) thread3(void *argument){
 ```
 ## Build and run the example
 
-Save all files, and `build` (`F7`) the example.
+Save all files, and click `build` (`F7`) the example.
 
 Click `Debug` (`Ctrl+F5`) to launch the FVP, and put the IDE into debug mode.
 * Use the menu (`View` > `Watch Windows` > `RTX RTOS`) to observe the RTOS features.
@@ -72,7 +72,7 @@ Observe in the `RTX RTOS` view that the threads have been created. Two other thr
 
 However no output is seen in the `printf viewer`. This is because semihosting is not supported by uVision.
 
-The solution with MDK is a very useful one, both for the FVP and real hardware... [Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html).
+[Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html) can be used instead for the printf functionality. It is supported for both FVPs and real hardware. In the next section, we will cover how to use the Event Recorder functionality with this example.
 
 ## Comments for Arm Development Studio users
 * Recommend to create debug configuration after project has been built.
