@@ -14,7 +14,7 @@ operatingsystems:
 - Linux
 prerequisites:
 - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate
-  cloud service provider.
+  cloud service provider. This learning path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04.`
 skilllevels: Introductory
 subjects: Libraries
 test_images:

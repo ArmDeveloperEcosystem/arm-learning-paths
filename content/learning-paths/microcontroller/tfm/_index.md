@@ -21,7 +21,7 @@ subjects: Security
 armips:
     - Cortex-M
 operatingsystems:
-    - Bare-metal
+    - Baremetal
 tools_software_languages:
     - Corstone-300 FVP
     - Arm Virtual Hardware

@@ -26,7 +26,7 @@ subjects: Security
 armips:
     - Cortex-M
 operatingsystems:
-    - Bare-metal
+    - Baremetal
 tools_software_languages:
     - Arm Compiler for Embedded
     - Keil MDK
