@@ -7,11 +7,13 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+We will primarily use Keil MDK to guide you through this learning path. If you are using Arm Development Studio refer to the comments at the end of each page.
+
 ## Install appropriate device CMSIS-Pack
 
 This learning path is written for the supplied (Cortex-M4) FVP, however it could be run on any of the 9000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
 
-This step is not necessary if using the FVP.
+If you are using the FVP, skip this step.
 
 If using a different platform, click on `Pack Installer` icon, browse for your device, and install any suggested Device Specific pack.
 
@@ -37,7 +39,7 @@ These are the minimal components needed for such an application. Click `OK`.
 
 ## Rename target
 
-A project can contain many `targets`, which refer to the platform that a particular build will run on. The default name is `Target 1`. To give a meaningful name, click `Manage Project Items`, and rename the target (for example, to `FVP`), as well as optionally the `Source Group 1` (to `Source`) that will contain the source code. Arranging code in these folders allows for easy sharing across different target builds.
+A project can contain many targets, which refer to the platform that a particular build will run on. The default name is `Target 1`. To give a meaningful name, click `Manage Project Items`, and rename the target (for example, to `FVP`), as well as optionally the `Source Group 1` (to `Source`) that will contain the source code. Arranging code in these folders allows for easy sharing across different target builds.
 
 ## Target options
 
@@ -54,7 +56,7 @@ You may also wish to disable `Warnings`, change language options or other settin
 
 ### Define memory map
 
-We shall use [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Overview-of-scatter-loading) to define the memory map.
+We use [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Overview-of-scatter-loading) to define the memory map.
 
 The memory map for the FVP is given in the [documentation](https://developer.arm.com/documentation/100964/latest/Microcontroller-Prototyping-System-2/MPS2---memory-maps/MPS2---memory-map-for-models-without-the-Armv8-M-additions).
 
