@@ -54,7 +54,8 @@ Set the relevant `cmake` variables to build the TF-M suite of tests. The `TFM_TO
 ```console
 cmake .. -DTFM_PLATFORM=arm/mps3/an552 -DTEST_NS=ON -DTEST_S=ON -DTFM_TOOLCHAIN_FILE=toolchain_ARMCLANG.cmake
 ```
-All the parameters are defined in the Trusted Firmware-M [documentation](https://tf-m-user-guide.trustedfirmware.org/docs/getting_started/tfm_build_instruction.html).
+All the parameters are defined in the [Trusted Firmware-M documentation](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html#build-and-run-instructions).
+
 
 ## Build using make
 ```console
