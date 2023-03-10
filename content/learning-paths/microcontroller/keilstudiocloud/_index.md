@@ -24,7 +24,7 @@ subjects: Virtual Hardware
 armips:
     - Cortex-M
 operatingsystems:
-    - Bare-metal
+    - Baremetal
 tools_software_languages:
     - C
     - Keil Studio Cloud

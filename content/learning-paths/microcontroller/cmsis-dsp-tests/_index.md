@@ -20,7 +20,7 @@ subjects: Libraries
 armips:
     - Cortex-M
 operatingsystems:
-    - Bare-metal
+    - Baremetal
 tools_software_languages:
     - Arm Virtual Hardware
     - AWS EC2
