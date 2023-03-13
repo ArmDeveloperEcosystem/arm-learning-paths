@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - A machine with [Terraform](/install-tools/terraform/), [AWS CLI](/install-tools/aws-cli), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-tools/ansible/) installed
+    - A machine with [Terraform](/install-tools/terraform/), [AWS CLI](/install-tools/aws-cli), and [Ansible](/install-tools/ansible/) installed
 
 author_primary: Jason Andrews
 ### Tags
