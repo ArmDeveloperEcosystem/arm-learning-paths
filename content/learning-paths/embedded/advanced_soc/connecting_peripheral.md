@@ -1,12 +1,15 @@
 ---
 # User change
-title: "Connecting AXI4 Peripheral to ZYNQ Processing System" 
+title: "Connect AXI4 Peripheral to ZYNQ Processing System" 
 
 weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+Follow the steps outline below to connect the AXI4 peripheral you created in the previous section to the ZYNQ Processing System.
+
 1. Right-click on the empty space again in the diagram and choose “Create Ports” (Ctrl+K). Create 2 ports with the following settings and names: 
 
     ![Creating output port](Images/Picture15.png) 
@@ -29,7 +32,7 @@ layout: "learningpathall"
 
     *Figure 3.4. Changing peripheral address settings*
 
-4. Create a new file called “pins.tcl” using a text editor of your choice within your workspace. Add the following two lines of code within it. These tell Vivado to ignore the unspecified I/O Pin warnings.
+4. Create a new file called “pins.tcl” using a text editor of your choice within your workspace. Add the following two lines of code within it. These two lines inform Vivado to ignore the unspecified I/O Pin warnings.
     ```
     set_property  SEVERITY {Warning} [get_drc_checks NSTD-1]
     set_property  SEVERITY {Warning} [get_drc_checks UCIO-1]
@@ -76,3 +79,5 @@ Right-click the “Constraints” under the sources tab and select “Add source
     set_property -dict { PACKAGE_PIN G14   IOSTANDARD LVCMOS33 } [get_ports { led[2] }]; #IO_0_35 Sch=led[2]
     set_property -dict { PACKAGE_PIN D18   IOSTANDARD LVCMOS33 } [get_ports { led[3] }]; #IO_L3N_T0_DQS_AD1N_35 Sch=led[3]
     ```
+
+You are now ready to generate the bitstream for this project. Continue to the steps in the next section.

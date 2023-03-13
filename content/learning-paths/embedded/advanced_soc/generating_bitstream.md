@@ -1,12 +1,15 @@
 ---
 # User change
-title: "Bitstream generation and Vitis coding" 
+title: "Generate the bitstream and write your application using Vitis IDE" 
 
 weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+In this section you will generate the bitstream for this project and write a C program to toggle the LEDs using the Xilinx Vitis IDE tools .
+
 1. Under the “Sources” tab on the left, expand the “Design Sources” folder, right-click the design1.bd file, choose the “Create HDL Wrapper” and select all default options. 
 
     ![Creating HDL Wrapper](Images/Picture23.png) 
