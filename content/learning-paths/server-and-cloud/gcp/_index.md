@@ -1,7 +1,5 @@
 ---
-title: "Create Arm virtual machines on GCP"
-
-description: Introduction to Arm virtual machines on GCP
+title: "Create Arm virtual machines on Google Cloud Platform"
 
 minutes_to_complete: 60
 
