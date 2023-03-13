@@ -30,16 +30,15 @@
     {{if isset .Attributes "line_numbers"}} line-numbers {{end}}
     {{if or (isset .Attributes "output_lines") (isset .Attributes "command_line") (eq .Type "output")}} output-lines {{end}}
     '>
-
         {{- with .Inner -}}
             {{- $inner := split . "\n" -}}
             {{- $count := 0 }}
             {{- range $inner -}}
                 {{- $count = add $count 1 -}}
                 {{- if in $lines_to_mark_output $count -}}
-                    __output__{{- . -}}
+                    __output__{{- . -}}&#10;
                 {{- else -}}
-                    {{- . -}}
+                    {{- . -}}&#10;
                 {{- end -}}
             {{- end -}}
         {{- end -}}
