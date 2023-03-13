@@ -20,7 +20,7 @@ To check if a Linux system has support use the `lscpu` command and look for `crc
 lscpu | grep crc32
 ```
 
-If the machine is confirmed to include crc32 it may benefit from `zlib-cloudflare`. 
+If the machine is confirmed to include `crc32` it may benefit from `zlib-cloudflare`. 
 
 ## Check if the default zlib includes crc32 instructions
 
@@ -34,7 +34,7 @@ sudo apt install -y libzstd1 build-essential git
 
 Ubuntu and Debian Linux distributions put `zlib` in `/usr/lib/aarch64-linux-gnu`
 
-To check if there are any CRC instructions in a library use objdump to disassemble and look for crc32 instructions. 
+To check if there are any CRC instructions in a library use `objdump` to disassemble and look for `crc32` instructions. 
 
 ```bash
 objdump -d /usr/lib/aarch64-linux-gnu/libz.so.1 | awk -F" " '{print $3}' | grep crc32 | wc -l
