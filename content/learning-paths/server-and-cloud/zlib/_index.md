@@ -9,7 +9,7 @@ learning_objectives:
 - Run example applications using zlib
 - Measure and analyze performance to see improvements
 learning_path_main_page: 'yes'
-minutes_to_complete: 10
+minutes_to_complete: 30
 operatingsystems:
 - Linux
 prerequisites:
