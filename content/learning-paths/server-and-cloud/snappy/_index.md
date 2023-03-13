@@ -9,7 +9,7 @@ learning_objectives:
 - Install and run lzbench with snappy and zstd
 - Measure compression library performance running on 64-bit Arm AWS EC2 instance
 learning_path_main_page: 'yes'
-minutes_to_complete: 30
+minutes_to_complete: 10
 operatingsystems:
 - Linux
 prerequisites:
