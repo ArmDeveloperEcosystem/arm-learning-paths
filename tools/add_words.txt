@@ -7,11 +7,13 @@ cross-compile
 cross-compiler
 gcc
 how-to
+in-memory
 low-level
 microcontrollers
 on-screen
 open-source
 pre-built
+stand-alone
 toolchain
 toolchains
 x86
