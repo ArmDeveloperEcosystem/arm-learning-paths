@@ -31,7 +31,7 @@ sudo apt install -y unzip make
 
 [lzbench](https://github.com/inikep/lzbench) is an in-memory benchmark of open-source compression algorithms. We will use this benchmark to measure stand-alone performance of the compression algorithms on Arm servers. 
 
-This benchmark also contains the source files for the snappy and zstd compression algorithms among others. They are built as part of the lzbench build process.
+This benchmark also contains the source files for the `snappy` and `zstd` compression algorithms among others. They are built as part of the `lzbench` build process.
 
 On your running EC2 instance, run the following command
 
@@ -55,13 +55,13 @@ cd ../lzbench
 
 ## Run lzbench with snappy and zstd
 
-To benchmark the standalone performance of `snappy` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
+To benchmark the stand-alone performance of `snappy` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -esnappy ../silesia/dickens
 ```
 
-To benchmark the standalone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
+To benchmark the stand-alone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -ezstd ../silesia/dickens
@@ -69,7 +69,7 @@ To benchmark the standalone performance of `zstd` with `lzbench`, using one of t
 
 The value passed to `-e` in the command above is the compression algorithm.
 
-For full usage and viewing all the arguments you can pass to lzbench run the command below:
+For full usage and viewing all the arguments you can pass to `lzbench` run the command below:
 
 ```bash { cwd="lzbench" }
 ./lzbench --help
