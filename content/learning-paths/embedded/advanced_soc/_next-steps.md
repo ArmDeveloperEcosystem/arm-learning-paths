@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   As a next step, try some more advanced examples from the Advanced SoC education kit. You can find it [here](https://github.com/arm-university/Advanced-System-on-Chip-Design-Education-Kit)
+   As a next step, try some more advanced examples from the Advanced SoC education kit. You can find it [here](https://github.com/arm-university/Advanced-System-on-Chip-Design-Education-Kit). If you are interested in learning about creating bare-metal applications for Armv8-A processors, follow the next learning path:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/embedded/advanced_soc/"
+recommended_path: "/learning-paths/embedded/bare-metal/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
 
 # further_reading links to references related to this path. Can be:

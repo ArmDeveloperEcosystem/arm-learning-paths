@@ -1,13 +1,16 @@
 ---
 # User change
-title: "Creating custom AXI4 Peripheral" 
+title: "Create a custom AXI4 Peripheral" 
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-1. Xilinx Vivado provides a simplified way to create an AXI4 peripheral using a wizard. Click “Tools” -> “Create and Package New IP”. Click “Next” and choose the following option:
+
+The Xilinx Vivado tools provide a simplified way to create an AXI4 peripheral. You can follow the steps outlined below to create the peripheral.
+
+1. Start by clicking “Tools” -> “Create and Package New IP”. Click “Next” and choose the following option:
 
     ![Creating AXI4 peripheral](Images/Picture7.png) 
 
@@ -19,16 +22,17 @@ layout: "learningpathall"
 
     *Figure 2.2. Adding peripheral details*
 
-3. We need a Subordinate interface and four 32-bit registers are enough for our switched and LEDs.
+3. You need a Subordinate interface and four 32-bit registers for the switches and LEDs.
 
     ![Peripheral settings for Subordinate interface](Images/Picture9.png) 
 
     *Figure 2.3. Peripheral settings for Subordinate interface*
 
-4. Finally, on the last page, choose “Edit IP” and click “Finish”. In the “Sources” window, you will see two Verilog files in Design Sources: 
+4. On the last page, choose “Edit IP” and click “Finish”. In the “Sources” window, you will see two Verilog files in Design Sources: 
 - A top file, i.e., AUP_advanced_SoC_v1_0.v  
-- A file that ends with “S00_AXI”, i.e., AUP_advanced_SoC_v1_0_S00_AXI.v  
-They are a basic template for an AXI-Lite peripheral and we can implement our GPIO logic by some modifications. 
+- A filename that ends with “S00_AXI”, i.e., AUP_advanced_SoC_v1_0_S00_AXI.v  
+
+These are the basic template files generated for an AXI-Lite peripheral. You can now implement custom GPIO logic by making some changes to these template files. 
 
 5. Double-click to open the top-level Verilog file called “AUP_advanced_SoC_v1_0.v”:
 
@@ -44,7 +48,7 @@ They are a basic template for an AXI-Lite peripheral and we can implement our GP
     output wire [3:0] led,
     ```
 
-7. Also add sw and led when instantiating the AXI Bus Interface S00_AXI, so that the code looks like the following:
+7. Also add sw and led when instantiating the AXI Bus Interface S00_AXI, so the code looks like the following:
 
     ```
     // Instantiation of Axi Bus Interface S00_AXI
@@ -128,8 +132,11 @@ They are a basic template for an AXI-Lite peripheral and we can implement our GP
     *Figure 2.7. Adding IP Repository*
 
 16. Click the “+” option under “IP Repositories” on the right and choose the AXI4 peripheral folder you created earlier (if it hasn’t already appeared) and click “Ok”. Right-click in the empty space of the “Diagram” box again and choose “Add IP”. Type “custom” in the search box and choose “custom_axi_gpio_asoc_v1_0” from the options. 
+
 17. Click “Run Connection Automation” and then click “OK” to connect the AXI-Lite Subordinate interface on GPIO peripheral to the AXI Manager interface on Arm processor.
 
     ![Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface](Images/Picture14.png) 
 
     *Figure 2.8. Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface*
+
+Now that you have created the custom AXI4 periperhal which will control the GPIO, you will connect it up to the ZYNQ Processing System in the next section.
