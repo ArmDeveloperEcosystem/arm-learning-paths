@@ -6,7 +6,7 @@ weight: 3
 
 ## Install necessary software packages
 
-* Make sure python3 is available when `python` is run. 
+* Make sure `python3` is available when `python` is run. 
 
 ```bash
 sudo apt install python-is-python3 -y
@@ -14,7 +14,7 @@ sudo apt install python-is-python3 -y
 
 ## Detailed Steps
 
-The previous section explained how to build the Cloudflare `zlib` which incudes the use of `crc32` instructions to improve performance on data compression. 
+The previous section explained how to build the Cloudflare `zlib` which includes the use of `crc32` instructions to improve performance on data compression. 
 
 Let's use a Python example and measure the performance difference with `zlib-cloudflare`.
 
