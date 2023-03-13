@@ -24,6 +24,10 @@ further_reading:
         title: Connect to VM instance
         link: https://cloud.google.com/compute/docs/instances/connecting-to-instance#console
         type: Blog
+    - resource:
+        title: About bastion hosts
+        link: https://cloud.google.com/solutions/connecting-securely#bastion
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
