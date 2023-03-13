@@ -1,3 +1,19 @@
+{{$lines_to_mark_output := slice}}
+{{ if isset .Attributes "output_lines"}}
+    {{range (split .Attributes.output_lines ",")}}
+        {{if in . "-"}}
+            {{$start_num := int (index (split . "-") 0) }}
+            {{$end_num   := int (index (split . "-") 1) }}
+            {{ range seq (add 1 (sub $end_num $start_num ) )}}
+                {{$lines_to_mark_output = $lines_to_mark_output | append (sub (add . $start_num) 1)}}
+            {{ end }}
+        {{else}}
+                {{$lines_to_mark_output = $lines_to_mark_output | append (int .)}}
+        {{end}}
+    {{end}}    
+{{end}}
+
+
 <pre
     {{if isset .Attributes "highlight_lines"}} 
         data-line={{.Attributes.highlight_lines}} 
@@ -12,7 +28,20 @@
 >
     <code class='language-{{.Type}}
     {{if isset .Attributes "line_numbers"}} line-numbers {{end}}
+    {{if or (isset .Attributes "output_lines") (isset .Attributes "command_line") (eq .Type "output")}} output-lines {{end}}
     '>
-        {{.Inner}}
+
+        {{- with .Inner -}}
+            {{- $inner := split . "\n" -}}
+            {{- $count := 0 }}
+            {{- range $inner -}}
+                {{- $count = add $count 1 -}}
+                {{- if in $lines_to_mark_output $count -}}
+                    __output__{{- . -}}
+                {{- else -}}
+                    {{- . -}}
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
     </code>
 </pre>

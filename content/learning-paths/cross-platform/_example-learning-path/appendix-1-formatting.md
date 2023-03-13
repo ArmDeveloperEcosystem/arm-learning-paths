@@ -43,6 +43,7 @@ These are the range of options to add an image:
 - Line highlighting
 - Command line view
 - Code panes
+- Output lines
 
 ### Language highlighting
 Add the specific language name at the start of the code snippet:
@@ -101,7 +102,7 @@ Add command line user context:
 echo ‘hello world’
 ```
 
-With output (note if a reader presses 'copy' the output will be copied as well):
+With output:
 
 ```bash { command_line="root@localhost | 2-6" }
 printf 'HelloWorld\n%.0s' {1..5}
@@ -160,6 +161,68 @@ sudo snap install cmake --classic
 Nothing more to install!
   {{< /tab >}}
 {{< /tabpane >}}
+
+
+
+### Output Lines
+
+There are three ways you can specify command outputs in code:
+1.    Standalone via marking the language as 'output'
+2.    Alongside the 'command_line' functionality 
+3.    Alongside any other language via the 'output_lines' shortcode
+
+{{% notice Note %}}
+In each of the three situations, code marked as 'output' will:
+- Not be copied when clicking the 'copy' button
+- Not be highlightable by a cursor
+- Appear slightly darker
+{{% /notice %}}
+
+Keep reading to see an example of each.
+
+#### Output - standalone block
+Specify this case by making the language 'output'. An example in context:
+
+```bash
+echo 'hello world'
+echo 'test'
+```
+The output from the above command is:
+```output
+hello world
+test
+```
+
+#### Output - alongside "command_line" functionality
+Use the following syntax by specifying the output lines after a pipe like so: { command_line="root@localhost | 2-6" }
+
+Example in context:
+```bash { command_line="root@localhost | 2-6" }
+printf 'HelloWorld\n%.0s' {1..5}
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+```
+
+#### Output - alongside any language
+To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output. Example:
+
+```bash { output_lines = "2-3,5,7-11" }
+echo 'hello world\nh'
+hello world
+h
+echo 'one line output'
+one line output
+printf 'outputline\n%.0s' {1..5}
+outputline
+outputline
+outputline
+outputline
+outputline
+```
+
 
 
 ## Images
