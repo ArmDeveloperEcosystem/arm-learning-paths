@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 
 
-[Snort 3](https://www.snort.org/snort3) is an open-source deep-packet inspection application. Sort 3 integrates Hyperscan, the regex parsing library.
+[Snort 3](https://www.snort.org/snort3) is an open-source deep-packet inspection application. Snort 3 integrates Hyperscan, the regex parsing library.
 
 You can install Snort 3 on an Ubuntu Linux Arm-based server, and run it with Vectorscan, the architecture-inclusive fork of Hyperscan.
 
@@ -131,7 +131,7 @@ sudo ldconfig
 
 ## Download, Compile and Install Snort 3
 
-You can now download, compile and build Sort 3:
+You can now download, compile and build Snort 3:
 
 ```bash
 cd ~/snort_src
