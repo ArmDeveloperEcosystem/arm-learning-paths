@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            True. It can be used to simulate control of such items as LEDs, switches, digital signals and others.
+            The Virtual Input/Output Interface can be used to simulate control of such items as LEDs, switches, digital signals and others.
 
 
 
