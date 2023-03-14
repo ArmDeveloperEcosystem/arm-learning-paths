@@ -1,5 +1,5 @@
 
-Before submitting a pull request for a new Learning Path, please review [Create a Learning Path](https://www.armswdev.tk/learning-paths/cross-platform/_example-learning-path/)
+Before submitting a pull request for a new Learning Path, please review [Create a Learning Path](https://diyqo5teapa5o.cloudfront.net/learning-paths/cross-platform/_example-learning-path/)
 
 Please do not include any confidential information in your contribution. This includes confidential microarchitecture details and unannounced product information. 
 
