@@ -125,7 +125,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 The public IP addresses will be different, but the output should be similar to:
 
-```console
+```output
 Apply complete! Resources: 7 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -247,7 +247,7 @@ CREATE ROLE replication WITH REPLICATION PASSWORD 'r3plicat1on' LOGIN;
 
 The result is:
 
-```console
+```output
 CREATE ROLE
 ```
 
@@ -259,7 +259,7 @@ Run the du command:
 
 The result is
 
-```console
+```output
                                     List of roles
   Role name  |                         Attributes                         | Member of 
 -------------+------------------------------------------------------------+-----------
@@ -366,7 +366,7 @@ sudo systemctl stop postgresql
 2. Next, remove all files in the replica’s data directory in order to start on a clean state and make room for the primary node data directory using below command.
 
 ```console
-sudo rm -rf /var/lib/postgresql/9.6/main/*
+sudo -u postgres bash -c 'rm -rf /var/lib/postgresql/9.6/main/*'
 ```
 
 3. Now run the pg_basebackup utility to copy data from the primary node to the replica node using below command.
@@ -427,7 +427,7 @@ create database postgresql;
 
 The output should be:
 
-```console
+```output
 CREATE DATABASE
 ```
 
@@ -439,7 +439,7 @@ Print the database list:
 
 The output will be similar to:
 
-```console
+```output
                               List of databases
     Name    |  Owner   | Encoding | Collate |  Ctype  |   Access privileges   
 ------------+----------+----------+---------+---------+-----------------------
@@ -475,7 +475,7 @@ create database mydb;
 
 The error shows the database is in read-only mode and does not accept writes:
 
-```console
+```output
 ERROR: 
 
 ```
