@@ -156,7 +156,7 @@ terraform init
     
 The output should be similar to:
 
-```console
+```output
 Initializing the backend...
 
 Initializing provider plugins...
@@ -205,7 +205,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 The public IP address will be different, but the output should be similar to:
 
-```console
+```output
 Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -278,7 +278,7 @@ Deployment may take a few minutes.
 
 The output should be similar to:
 
-```console
+```output
 PLAY [all] *********************************************************************
 
 TASK [Gathering Facts] *********************************************************
@@ -341,7 +341,7 @@ create database testdb;
 
 The output will be:
 
-```console
+```output
 CREATE DATABASE
 ```
 
@@ -353,7 +353,7 @@ CREATE DATABASE
 
 The output will be:
 
-```console
+```output
                                              List of databases
    Name    |  Owner   | Encoding | Collate |  Ctype  | ICU Locale | Locale Provider |   Access privileges   
 -----------+----------+----------+---------+---------+------------+-----------------+-----------------------
@@ -374,7 +374,7 @@ The output will be:
 
 The output confirms you have changed to the new database:
 
-```console
+```output
 You are now connected to database "testdb" as user "postgres".
 ```
 
@@ -386,7 +386,7 @@ CREATE TABLE company ( emp_name VARCHAR, emp_dpt VARCHAR);
 
 The output will be:
 
-```console
+```output
 CREATE TABLE
 ```
 
@@ -414,7 +414,7 @@ INSERT INTO company VALUES ('Herry', 'Development'), ('Tom', 'Testing'),('Ankit'
 
 The output will be:
 
-```console
+```output
 INSERT 0 5
 ```
 
@@ -426,7 +426,7 @@ select * from company;
 
 The output will be:
 
-```console
+```output
  emp_name |   emp_dpt   
 ----------+-------------
  Herry    | Development
