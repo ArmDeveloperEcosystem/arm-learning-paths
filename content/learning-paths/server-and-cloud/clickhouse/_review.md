@@ -13,13 +13,13 @@
 review:
     - questions:
         question: >
-            Can ClickBench be used to measure only the performance of Clickhouse DBMS?
+            Can ClickBench be used to measure only the performance of ClickHouse DBMS?
         answers:
             - "Yes"
             - "No"
         correct_answer: 2
         explanation: >
-            Clickbench can be used to measure the performance of many different Database Management systems running on different architectures.
+            ClickBench can be used to measure the performance of many different Database Management systems running on different architectures.
 
     - questions:
         question: >
