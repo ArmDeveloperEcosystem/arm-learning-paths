@@ -1,37 +1,24 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
-title: Arm Compiler for Linux
-
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - armclang
 - compiler
-
-### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 15
-
-### Link to official documentation
-official_docs: https://developer.arm.com/documentation/102621
-
 author_primary: Florent Lebeau
-
-### TEST SETTINGS
+layout: installtoolsall
+minutes_to_complete: 15
+multi_install: false
+multitool_install_part: false
+official_docs: https://developer.arm.com/documentation/102621
 test_images:
 - ubuntu:latest
 - fedora:latest
 test_link: null
-test_maintenance: false
+test_maintenance: true
 test_status:
 - passed
 - passed
-
-## PAGE SETUP
-weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: true              # Set to true to be listed in main selection page, else false
-multi_install: false            # Set to true if first page of multi-page article, else false
-multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
-layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+title: Arm Compiler for Linux
+tool_install: true
+weight: 1
 ---
 [Arm Compiler for Linux](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux) is a suite of tools containing Arm C/C++ Compiler (armclang), Arm Fortran Compiler (armflang), and Arm Performance Libraries (ArmPL). It is tailored to the development of High Performance Computing (HPC) applications.
 
@@ -98,7 +85,7 @@ Each command sequence includes accepting the license agreement to automate the i
 For Ubuntu Linux:
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
-sudo apt-get -y install environment-modules python3 libc6-dev
+sudo -E apt-get -y install environment-modules python3 libc6-dev
 tar -xvf arm-compiler-for-linux_22.1_Ubuntu-20.04_aarch64.tar 
 cd arm-compiler-for-linux_22.1_Ubuntu-20.04
 sudo ./arm-compiler-for-linux_22.1_Ubuntu-20.04.sh --accept
