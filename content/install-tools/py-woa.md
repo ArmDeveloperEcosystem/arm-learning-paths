@@ -58,39 +58,30 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Test an example
 
-To confirm python is working, save the code below into a file uname.py 
+To confirm python is working, save the code below into a file `uname.py`.
 
 ```python
 import platform
-
 print("Python version", platform.python_version())
-
 print("Machine is", platform.uname().system, platform.uname().release, platform.uname().machine)
 ```
-
 Run the code.
-
 ```console
 py uname.py
 ```
-
 Running on a Windows on Arm machine produces the output:
-
-```console
+```output
 Python version 3.11.0
 Machine is Windows 10 ARM64
 ```
-
 ## Installing packages
 
 Python pip can be used to install packages. 
 
-For example, to install Flask:
-
+For example, to install `Flask`:
 ```console
 pip install Flask
 ```
-
 Save the code below as hello.py
 
 ```python
@@ -105,16 +96,12 @@ def hello():
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
 ```
-
 Run the application.
-
 ```console
 python hello.py
 ```
-
 The output is:
-
-```console
+```output
 C:\>python hello.py
  * Serving Flask app 'hello'
  * Debug mode: off
@@ -124,8 +111,7 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://192.168.68.95:5000
 Press CTRL+C to quit
 ```
-
-Open a browser to the URL printed by the application http://127.0.0.1:5000
+Open a browser to the URL printed by the application ([http://127.0.0.1:5000](http://127.0.0.1:5000) in the above).
 
 The output is in the browser.
 

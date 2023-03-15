@@ -40,7 +40,7 @@ There is no Docker Desktop for Windows on Arm, [please show your support by aski
 
 ### Install and test Docker Engine
 
-From within WSL2 running a Linux distribution on a Windows on Arm laptop, the general Linux install instructions can be used. 
+From within `WSL2` running a Linux distribution on a Windows on Arm laptop, the general Linux install instructions can be used. 
 
 ```console
 curl -fsSL test.docker.com -o get-docker.sh && sh get-docker.sh
@@ -54,27 +54,23 @@ It can be started manually:
 sudo /etc/init.d/docker start
 ```
 
-It can also be started automatically using by editing /etc/wsl2.conf
+It can also be started automatically using by editing `1/etc/wsl2.conf`.
 
 Add the info below to the file:
-
 ```console
 # Set a command to run when a new WSL instance launches. This example starts the Docker container service.
 [boot]
 command = service docker start
 ```
 
-
-
 To confirm the installation is successful run:
-
 ```console
 docker run hello-world
 ```
 
 The output should be a welcome message such as:
 
-```console
+```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 

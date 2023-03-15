@@ -30,13 +30,10 @@ Confirm you are using an Arm machine by running:
 ```bash
 uname -m
 ```
-
 The output should be:
-
-```console
+```output
 aarch64
 ```
-
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
 You must ensure that either [Environment Modules](https://modules.readthedocs.io/en/latest/index.html) or the [Lmod Environment Module System](https://lmod.readthedocs.io/en/latest/) are installed on your Linux machine. The GNU Compiler (GCC) is also required. 
@@ -95,7 +92,7 @@ To configure Arm Compiler for Linux:
 module load armie22/22.0
 ```
 
-To confirm `armie` is install print the version.
+To confirm `armie` is installed, print the version.
 
 ```bash { env_source="~/.bashrc" }
 armie --version
@@ -107,7 +104,7 @@ Arm Instruction Emulator does not require a license.
 
 ## Get started
 
-To verify everything is working after installation refer to [Get started with Arm Instruction Emulator](https://developer.arm.com/documentation/102190/latest/Get-started/Get-started-with-Arm-Instruction-Emulator) for instructions on how to compile and run examples with `armie`
+To verify everything is working after installation refer to [Get started with Arm Instruction Emulator](https://developer.arm.com/documentation/102190/latest/Get-started/Get-started-with-Arm-Instruction-Emulator) for instructions on how to compile and run examples with `armie`.
 
 This uses a couple of simple examples to demonstrate how to compile Scalable Vector Extension (SVE) code and run the resulting binary with Arm Instruction Emulator.
 
