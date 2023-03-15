@@ -2,7 +2,6 @@
 armips:
 - Neoverse
 author_primary: Pareena Verma
-description: Learn how to build and run x265 on Arm servers.
 layout: learningpathall
 learning_objectives:
 - Build x265 codec on Arm server

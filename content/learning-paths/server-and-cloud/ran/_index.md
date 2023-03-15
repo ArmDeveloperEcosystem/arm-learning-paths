@@ -2,8 +2,6 @@
 armips:
 - Neoverse
 author_primary: Ronan Synnott
-description: Learn to install the Arm RAN Acceleration library and build the supplied
-  examples on an Arm based cloud instance
 layout: learningpathall
 learning_objectives:
 - Build and install the Arm RAN Acceleration Library

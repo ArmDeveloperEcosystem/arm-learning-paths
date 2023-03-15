@@ -2,7 +2,6 @@
 armips:
 - Neoverse
 author_primary: Julio Suarez
-description: This learning path presents some ideas on how to tune MySQL
 layout: learningpathall
 learning_objectives:
 - Learn to tune MySQL

@@ -29,7 +29,7 @@ review:
             - "No"
         correct_answer: 1                     
         explanation: >
-            The answer is Yes: Both the compression libraries run on Arm servers
+            Both the compression libraries run on Arm servers
                
 
 # ================================================================================
