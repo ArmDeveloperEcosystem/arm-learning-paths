@@ -25,9 +25,9 @@ See [these instructions](/learning-paths/server-and-cloud/csp/) to launch an Arm
 ## Install necessary build tools
 
 Full details are given in the `Tools` section of the supplied release notes.
-```bash
+```bash { env="DEBIAN_FRONTEND=noninteractive" }
 sudo apt update
-sudo apt install -y build-essential cmake linux-tools-common gcovr doxygen
+sudo -E apt install -y build-essential cmake linux-tools-common gcovr doxygen
 ```
 ## Download and unpack the library
 
