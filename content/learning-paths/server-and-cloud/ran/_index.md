@@ -3,7 +3,7 @@ title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
 
 description: Learn to install the Arm RAN Acceleration library and build the supplied examples on an Arm based cloud instance
 
-minutes_to_complete: 30  
+minutes_to_complete: 10  
 
 who_is_this_for: This is an introductory topic for software developers new to the Arm RAN Acceleration Library (ArmRAL).
 
