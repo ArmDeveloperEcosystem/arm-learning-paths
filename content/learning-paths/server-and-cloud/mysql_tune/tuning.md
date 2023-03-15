@@ -36,7 +36,7 @@ There are different storage engines to choose from for `MySQL`. The default is `
 
 ### Linux-PAM Limits
 
-Linux-PAM limits can be changed in the ```/etc/security/limits.conf``` file, or by using the `ulimit` command. We leave it up to the reader to learn how to edit the `limits.conf` file or use the `ulimit` command.
+Linux-PAM limits can be changed in the `/etc/security/limits.conf` file, or by using the `ulimit` command. We leave it up to the reader to learn how to edit the `limits.conf` file or use the `ulimit` command.
 
 To display all limits:
 ```bash
@@ -115,7 +115,7 @@ mysqld --verbose --help
 
 ### Connections and Prepared Transactions
 
-```
+```console
 max_connections=100000    # Default 151
 max_prepared_stmt_count=4194304   # Default 16382
 ```
@@ -126,7 +126,7 @@ max_prepared_stmt_count=4194304   # Default 16382
 
 ### Memory Related Configuration
 
-```
+```console
 large_pages=ON    # default is OFF
 innodb_buffer_pool_size=<up to 80% of system memory>    # Default is 128MB
 ```
@@ -139,7 +139,7 @@ Other memory related configurations that could be worth exploring are the [Buffe
 
 ### Logging and Disk Flush Behavior
 
-```
+```console
 innodb_use_fdatasync=ON    # Default is OFF
 innodb_log_file_size=20GB    # Default is 48MB
 ```
@@ -152,7 +152,7 @@ Setting `innodb_log_file_size` to much larger than the default (48MB) helps redu
 
 Increasing parallelism allow us to use our available resources more efficiently. It's always a good idea to look at parameters related to parallel execution.
 
-```
+```console
 innodb_io_capacity=1000    # Default is 200
 innodb_io_capacity_max=2000    # Default is 2x innodb_io_capacity
 innodb_read_io_threads=<system CPU count>    # Default is 4
@@ -167,7 +167,7 @@ innodb_write_io_threads=<system CPU count>    # Default is 4
 
 ### Spin Lock Configuration
 
-```
+```console
 innodb_sync_spin_loops=120    # Default is 30
 ```
 
