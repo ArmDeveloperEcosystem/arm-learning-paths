@@ -1,23 +1,27 @@
 <!-- Scratchpad gets populated through call to .Inner -->  
 {{- .Inner -}}
 
+{{$titles := slice}}
+{{- range $index, $element := $.Scratch.Get "tabs" -}}
+  {{$titles = $titles | append (urlize $element.header)}}
+{{end}}
+
 <div class="code-tabpane">
-  <ads-horizontal-tabs id="tabs-{{- $.Ordinal -}}" alt-emphasis="yes">
+  <ads-horizontal-tabs class="code-horizontal-tabs {{if $titles}}{{range $titles}} header-{{.}} {{end}}{{end}}" id="tabs-{{- $.Ordinal -}}" alt-emphasis="yes">
     {{- range $index, $element := $.Scratch.Get "tabs" -}}
-      <div slot="content" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
-        <div class="code-toolbar">
-          <pre class="language-en" {{if $element.highlight_lines}} data-line={{$element.highlight_lines}} {{end}}>
-            <code class="{{if $element.language}}language-{{$element.language}}{{else}}language-en{{end}}">
-              {{.content}}
-            </code>
-          </pre>
-        </div>
+      <div slot="content" class="header-tab-{{urlize $element.header}}" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
+        {{partial "general-formatting/prismjs-codeblock.html" (dict "code" $element.content
+                                                               "language" $element.language
+                                                               "line_numbers" $element.line_numbers 
+                                                               "output_lines" $element.output_lines
+                                                               "command_line" $element.command_line) }}
       </div>
     {{end}}
   </ads-horizontal-tabs>
 </div>
 
 <script>
+  
   (() => {
     const tabs = document.querySelector('#tabs-{{- $.Ordinal -}}');
     tabs.data = [
@@ -25,6 +29,7 @@
         { id: "tab-{{- $.Ordinal -}}-slot-{{$index}}", label: "{{$element.header}}" },
       {{end}}
     ];
+    /*
     tabs.tabSelectHandler = (evt) => {
       // This handler isn't doing anything right now. Could be deleted as there is no auto switching 
                                                                 // 'tab-0-slot-1' = evt.id
@@ -35,8 +40,30 @@
       let tab_element = document.getElementById(tabs_id);             // get ads-horizontal-tab element 
       let button = tab_element.shadowRoot.getElementById(button_id);  // get button below this element
       let tab_language_text = button.outerText;                       // relevent text: 'x86_64', 'aarch64', etc. 
-      console.log('Setting tab to ',tab_language_text);
+      let tab_language_text_urlize = tab_language_text.toLowerCase().replace(/ /g, "-");
+
+      console.log('Setting tab to ',tab_language_text_urlize);
+
+
+
+      // get list of all other horozontal tabs on the screen
+      let all_hor_tabs = document.getElementsByClassName("code-horizontal-tabs");
+      for (tab_group of all_hor_tabs) {
+        // if a subtab has the same tab_language, make that shadowDom active
+        if (tab_group.classList.contains('header-'+tab_language_text_urlize)) {
+          console.log('yes!',tab_group,tab_language_text_urlize);
+          // make shadowDom under this tab_group
+          let matching_tab = tab_group.querySelector("div.header-tab-"+tab_language_text_urlize);
+          console.log('change this div to active',matching_tab);
+          matching_tab.classList.add("active");
+          // unactive all other tabs:
+          tab_group.querySelector("not:div.header-tab-"+tab_language_text_urlize).classList.remove("active");
+          
+        }
+      }
     };
+    */
+
   })();
 </script>
 
