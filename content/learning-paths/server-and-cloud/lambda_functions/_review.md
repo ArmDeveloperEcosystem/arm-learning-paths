@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            AWS Lambda is a serverless computing
+            AWS Lambda is a serverless computing service:
         answers:
             - "True"
             - "False"
@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Does AWS Lambda support environment variables
+            Does AWS Lambda support environment variables?
         answers:
             - "True"
             - "False"

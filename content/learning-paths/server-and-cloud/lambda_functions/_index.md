@@ -1,14 +1,12 @@
 ---
 title: Learn how to deploy AWS Lambda functions
 
-description: Deploy Node.js and Python Lambda functions on the Arm architecture
-
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to deploy Lambda functions on AWS Graviton processors. 
 
 learning_objectives: 
-    - use Terraform to deploy Lambda functions on Graviton processors
+    - Deploy Lambda functions on Graviton processors using Terraform
 
 prerequisites:
     - A computer with [Terraform](/install-tools/terraform/) and the [AWS CLI](/install-tools/aws-cli/) installed. 
@@ -23,6 +21,7 @@ armips:
 tools_software_languages:
     - Terraform
     - AWS CLI
+    - Lambda
 operatingsystems:
     - Linux
 
