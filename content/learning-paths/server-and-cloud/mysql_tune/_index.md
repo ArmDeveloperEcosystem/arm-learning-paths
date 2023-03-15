@@ -28,6 +28,11 @@ tools_software_languages:
     - MySQL
     - InnoDB
 
+### Test
+test_maintenance: true
+test_images:
+- ubuntu:latest
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

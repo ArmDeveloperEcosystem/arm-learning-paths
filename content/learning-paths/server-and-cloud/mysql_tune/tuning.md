@@ -38,27 +38,38 @@ There are different storage engines to choose from for `MySQL`. The default is `
 
 Linux-PAM limits can be changed in the ```/etc/security/limits.conf``` file, or by using the `ulimit` command. We leave it up to the reader to learn how to edit the `limits.conf` file or use the `ulimit` command.
 
-```
-memlock (ulimit -l): Max locked-in-memory address space
+To display all limits:
+```bash
+ulimit -a
 ```
 
-memlock is the only PAM limit we've found is useful to adjust. This is suggested to be set to unlimited when using huge pages with `MySQL`. Enabling huge pages is something we strongly suggest readers try in their deployment because it can result in significant performance gains. We discuss huge pages further below. The suggestion to set `memlock` when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/large-page-support.html).
+To display the `memlock` (Max locked-in-memory address space) limit only:
+```bash
+ulimit -l
+```
+
+`memlock` is the only PAM limit we've found is useful to adjust. This is suggested to be set to unlimited when using huge pages with `MySQL`. Enabling huge pages is something we strongly suggest readers try in their deployment because it can result in significant performance gains. We discuss huge pages further below. The suggestion to set `memlock` when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/large-page-support.html).
 
 ### Linux Virtual Memory Subsystem
 
 Making changes to the Linux Virtual Memory subsystem can also help performance. These settings can be changed in the `/etc/sysctl.conf` file, or by using the `sysctl` command. We leave it up to the reader to learn how to edit the `sysctl.conf` file or use the `sysctl` command. Documentation on each of these parameters can be found in the [admin-guide for sysctl in the Linux source](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/sysctl/vm.rst).
 
+To list all kernel parameters available:
+
+```bash
+sudo sysctl -a
+```
+
 ### vm.nr_hugepages
 
 We've found that `MySQL` benefits greatly from using huge memory pages. This is because huge pages reduces how often virtual memory pages are mapped to physical memory. Before we look at this parameter, we'd like to show the reader how the current huge page configuration can be checked on any linux host. Run the following command on the host:
 
-```
+```bash
 cat /proc/meminfo | grep ^Huge
 ```
 
 The output should look something like the below:
-```
-
+```console
 HugePages_Total:       0
 HugePages_Free:        0
 HugePages_Rsvd:        0
@@ -69,13 +80,23 @@ Hugetlb:               0 kB
 
 This tells us we are not using huge pages because `HugePages_Total` is set to 0 (this is the default). Also take note of what `Hugepagesize` is set to; in our case it's set to 2MB which is the typical default for huge pages on Linux. This huge page size can be adjusted along with other parameters not discuss here. We leave learning about those other parameters up to the reader.
 
-The setting that enables huge pages is shown below:
+The kernel parameter that enables huge pages is shown below:
 
-```
+```console
 vm.nr_hugepages
 ```
 
 This parameter sets the number of huge pages we want the kernel to make available to applications. The total amount of memory that will be used for huge pages will be this number (defaulted to 0) times the `Hugepagesize` we saw earlier (2MiB in our case). As an example, if we want a total of 1GB of huge page space, then we should set `vm.nr_hugepages` to 500 (500x2MB=1GB).
+
+```bash
+sudo sysctl -w vm.nr_hugepages=500
+```
+
+To make the change permanent:
+
+```bash
+sudo sh -c 'echo "vm.nr_hugepages=500" >> /etc/sysctl.conf'
+```
 
 *What should we set `vm.nr_hugepages` to for `MySQL`?*
 
@@ -86,6 +107,11 @@ More information on the different parameters that affect the configuration of hu
 ##  MySQL Configuration
 
 There are different ways to set configuration parameters for `MySQL`. This is discussed in the [MySQL Programs documentation](https://dev.mysql.com/doc/refman/8.0/en/programs.html). The configurations we show below can be directly copied and pasted into a `MySQL` configuration file under the group `mysqld`. It's also possible to specify these configurations on the `mysqld` command line (typically within a linux service file). We leave figuring out how to do this on the `mysqld` command line to the reader.
+
+To display configuration settings:
+```bash { pre_cmd="sudo apt install -y mysql-server" }
+mysqld --verbose --help
+```
 
 ### Connections and Prepared Transactions
 
@@ -101,7 +127,7 @@ max_prepared_stmt_count=4194304   # Default 16382
 ### Memory Related Configuration
 
 ```
-large_pages=ON    # default is ON
+large_pages=ON    # default is OFF
 innodb_buffer_pool_size=<up to 80% of system memory>    # Default is 128MB
 ```
 
