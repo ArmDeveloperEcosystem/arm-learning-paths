@@ -27,6 +27,7 @@ cloudFrontDistributionID = "E1KJFR5JSKYU64"
     tools_software_languages = "/tag/:slug/"
     operatingsystems = "/tag/:slug/"
     subjects = "/tag/:slug/"
+    armips   = "/tag/:slug/"
 
 [related]
     threshold = 0 
