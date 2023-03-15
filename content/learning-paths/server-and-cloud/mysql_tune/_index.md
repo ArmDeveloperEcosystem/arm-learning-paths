@@ -3,7 +3,7 @@ title: Learn how to Tune MySQL
 
 description: This learning path presents some ideas on how to tune MySQL
 
-minutes_to_complete: 60
+minutes_to_complete: 15
 
 
 who_is_this_for: This is an advanced topic for software developers and DevOps professionals interested in optimizing MySQL performance.

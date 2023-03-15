@@ -8,31 +8,31 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section we will discuss MySQL tuning parameters.
+In this section we will discuss `MySQL` tuning parameters.
 
 ##  Why Application Performance Tuning is Important
 
-Application tuning allows us to gain performance without scaling our deployment up or out. This also gives us the option to either use the gained performance, or to trade it for cost savings by reducing the total amount of compute resources provisioned. Below is a graph that shows how big of a difference performance tuning on MySQL can make.
+Application tuning allows us to gain performance without scaling our deployment up or out. This also gives us the option to either use the gained performance, or to trade it for cost savings by reducing the total amount of compute resources provisioned. Below is a graph that shows how big of a difference performance tuning on `MySQL` can make.
 
 ![Before and after Tuning](BeforeAndAfter.png)
 
 ##  A Note on Tuning
 
-Keep in mind that deployment configurations and the profile of SQL requests that are made by clients will be different. This means there is not a one size fits all set of tuning parameters for MySQL. Use the below to get some ideas around how MySQL can be tuned.
+Keep in mind that deployment configurations and the profile of SQL requests that are made by clients will be different. This means there is not a one size fits all set of tuning parameters for `MySQL`. Use the below to get some ideas around how `MySQL` can be tuned.
 
 ##  Storage Technology & File System Format
 
 The underlying storage technology and the file system format can impact performance significantly. In general, locally attached SSD storage will perform best. However, network based storage systems can perform very well too. As always, performance is dependent on the request profile coming from clients. We suggest that the reader spends some time studying and experimenting with different storage technologies and configuration options.
 
-Aside from the storage technology, it is also worth testing different file system formats with MySQL. We've found that xfs is a good starting point (ext4 is probably fine too).
+Aside from the storage technology, it is also worth testing different file system formats with `MySQL`. We've found that `xfs` is a good starting point (`ext4` is probably fine too).
 
 ##  MySQL Storage Engines
 
-There are different storage engines to choose from for MySQL. The default is InnoDB. This is the storage engine we use to do performance testing and tuning on MySQL. Information on alternative storage engines can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/storage-engines.html).
+There are different storage engines to choose from for `MySQL`. The default is `InnoDB`. This is the storage engine we use to do performance testing and tuning on `MySQL`. Information on alternative storage engines can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/storage-engines.html).
 
 ##  Kernel Configurations
 
-MySQL can benefit from adjustments to kernel parameters. Below is a list of some kernel related settings that can have a positive impact on performance.
+`MySQL` can benefit from adjustments to kernel parameters. Below is a list of some kernel related settings that can have a positive impact on performance.
 
 ### Linux-PAM Limits
 
@@ -42,7 +42,7 @@ Linux-PAM limits can be changed in the ```/etc/security/limits.conf``` file, or 
 memlock (ulimit -l): Max locked-in-memory address space
 ```
 
-memlock is the only PAM limit we've found is useful to adjust. This is suggested to be set to unlimited when using huge pages with MySQL. Enabling huge pages is something we strongly suggest readers try in their deployment because it can result in significant performance gains. We discuss huge pages further below. The suggestion to set memlock when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/large-page-support.html).
+memlock is the only PAM limit we've found is useful to adjust. This is suggested to be set to unlimited when using huge pages with `MySQL`. Enabling huge pages is something we strongly suggest readers try in their deployment because it can result in significant performance gains. We discuss huge pages further below. The suggestion to set memlock when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/large-page-support.html).
 
 ### Linux Virtual Memory Subsystem
 
@@ -50,7 +50,7 @@ Making changes to the Linux Virtual Memory subsystem can also help performance. 
 
 ### vm.nr_hugepages
 
-We've found that MySQL benefits greatly from using huge memory pages. This is because huge pages reduces how often virtual memory pages are mapped to physical memory. Before we look at this parameter, we'd like to show the reader how the current huge page configuration can be checked on any linux host. Run the following command on the host:
+We've found that `MySQL` benefits greatly from using huge memory pages. This is because huge pages reduces how often virtual memory pages are mapped to physical memory. Before we look at this parameter, we'd like to show the reader how the current huge page configuration can be checked on any linux host. Run the following command on the host:
 
 ```
 cat /proc/meminfo | grep ^Huge
@@ -77,15 +77,15 @@ vm.nr_hugepages
 
 This parameter sets the number of huge pages we want the kernel to make available to applications. The total amount of memory that will be used for huge pages will be this number (defaulted to 0) times the `Hugepagesize` we saw earlier (2MiB in our case). As an example, if we want a total of 1GB of huge page space, then we should set `vm.nr_hugepages` to 500 (500x2MB=1GB).
 
-*What should we set `vm.nr_hugepages` to for MySQL?*
+*What should we set `vm.nr_hugepages` to for `MySQL`?*
 
-We should set `vm.nr_hugepages` to a value that gives us a total huge page space of slightly bigger than the MySQL buffer pool (discussed later). The reason we need to make it slightly larger than the buffer pool is because MySQL will use additional memory for other control structures. Also note, that we also need to configure MySQL to use the huge pages (discussed below).
+We should set `vm.nr_hugepages` to a value that gives us a total huge page space of slightly bigger than the `MySQL` buffer pool (discussed later). The reason we need to make it slightly larger than the buffer pool is because `MySQL` will use additional memory for other control structures. Also note, that we also need to configure `MySQL` to use the huge pages (discussed below).
 
 More information on the different parameters that affect the configuration of huge pages can be found in the [admin-guide for hugetlbpage in the Linux source](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/mm/hugetlbpage.rst).
 
 ##  MySQL Configuration
 
-There are different ways to set configuration parameters for MySQL. This is discussed in the [MySQL Programs documentation](https://dev.mysql.com/doc/refman/8.0/en/programs.html). The configurations we show below can be directly copied and pasted into a MySQL configuration file under the group `mysqld`. It's also possible to specify these configurations on the `mysqld` command line (typically within a linux service file). We leave figuring out how to do this on the `mysqld` command line to the reader.
+There are different ways to set configuration parameters for `MySQL`. This is discussed in the [MySQL Programs documentation](https://dev.mysql.com/doc/refman/8.0/en/programs.html). The configurations we show below can be directly copied and pasted into a `MySQL` configuration file under the group `mysqld`. It's also possible to specify these configurations on the `mysqld` command line (typically within a linux service file). We leave figuring out how to do this on the `mysqld` command line to the reader.
 
 ### Connections and Prepared Transactions
 
@@ -145,4 +145,4 @@ innodb_write_io_threads=<system CPU count>    # Default is 4
 innodb_sync_spin_loops=120    # Default is 30
 ```
 
-We suggest that readers try experimenting with the `innodb_sync_spin_loops` parameter. This sets the number of times a thread checks for an InnoDB mutex to be free before yielding execution to another thread. When we profiled MySQL with Linux Perf, we found that MySQL spends a lot of time waiting for locks to be freed. Thus, we figured that experimenting with tuning parameters around locks might help. In our experimentation, we found that increasing the number of times a lock is checked before the thread yields reduces context switching. This reduction in context switching gave us an increase in performance. We settled on 120 by doing a binary search with `innodb_sync_spin_loops`. That is, we tested this parameter set to 30, 60, 120, and 240. We found 120 yielded the highest query throughput and lowest query latency. We could have further tested with 180 (taking the binary search further), but we decided to stop at 120.
+We suggest that readers try experimenting with the `innodb_sync_spin_loops` parameter. This sets the number of times a thread checks for an `InnoDB` mutex to be free before yielding execution to another thread. When we profiled `MySQL` with Linux `Perf`, we found that `MySQL` spends a lot of time waiting for locks to be freed. Thus, we figured that experimenting with tuning parameters around locks might help. In our experimentation, we found that increasing the number of times a lock is checked before the thread yields reduces context switching. This reduction in context switching gave us an increase in performance. We settled on 120 by doing a binary search with `innodb_sync_spin_loops`. That is, we tested this parameter set to 30, 60, 120, and 240. We found 120 yielded the highest query throughput and lowest query latency. We could have further tested with 180 (taking the binary search further), but we decided to stop at 120.
