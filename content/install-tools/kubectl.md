@@ -28,14 +28,12 @@ The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/reference
 This article provides a quick solution to install `kubectl` for Ubuntu on Arm.
 
 Confirm you are using an Arm machine by running:
-
 ```bash
 uname -m
 ```
 
 The output should be:
-
-```console
+```output
 aarch64
 ```
 

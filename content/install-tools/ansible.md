@@ -33,7 +33,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
@@ -60,7 +60,7 @@ ansible-playbook --version
 
 The output should be similar to:
 
-```console
+```output
 ansible-playbook [core 2.14.3]
   config file = /etc/ansible/ansible.cfg
   configured module search path = ['/home/ubuntu/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
