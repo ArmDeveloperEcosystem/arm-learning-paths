@@ -2,8 +2,6 @@
 armips:
 - Neoverse
 author_primary: Pareena Verma
-description: Learn how to install and measure the performance of compression libraries
-  on Arm servers
 layout: learningpathall
 learning_objectives:
 - Install and run lzbench with snappy and zstd

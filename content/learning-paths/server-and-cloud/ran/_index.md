@@ -1,35 +1,31 @@
 ---
-title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
-
-description: Learn to install the Arm RAN Acceleration library and build the supplied examples on an Arm based cloud instance
-
-minutes_to_complete: 30  
-
-who_is_this_for: This is an introductory topic for software developers new to the Arm RAN Acceleration Library (ArmRAL).
-
-learning_objectives: 
-    - Build and install the Arm RAN Acceleration Library
-    - Test the capabilities of your platform
-
-prerequisites:
-    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/server-and-cloud/csp/).
-
+armips:
+- Neoverse
 author_primary: Ronan Synnott
-
-### Tags
+layout: learningpathall
+learning_objectives:
+- Build and install the Arm RAN Acceleration Library
+- Test the capabilities of your platform
+learning_path_main_page: 'yes'
+minutes_to_complete: 10
+operatingsystems:
+- Linux
+prerequisites:
+- An Arm computer running Linux. Cloud instances can be used, refer to the list of
+  [Arm cloud service providers](/learning-paths/server-and-cloud/csp/).
 skilllevels: Introductory
 subjects: Performance and Architecture
-armips:
-    - Neoverse
-operatingsystems:
-    - Linux
+test_images:
+- ubuntu:latest
+test_link: null
+test_maintenance: true
+test_status:
+- passed
+title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
 tools_software_languages:
-    - ArmRAL
-    - GCC
-
-### FIXED, DO NOT MODIFY
-# ================================================================================
-weight: 1                       # _index.md always has weight of 1 to order correctly
-layout: "learningpathall"       # All files under learning paths have this same wrapper
-learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+- ArmRAL
+- GCC
+weight: 1
+who_is_this_for: This is an introductory topic for software developers new to the
+  Arm RAN Acceleration Library (ArmRAL).
 ---
