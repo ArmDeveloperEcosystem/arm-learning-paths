@@ -30,6 +30,15 @@ review:
         explanation: >
             Terraform is not specific to AWS and was created by HashiCorp.
 
+    - questions:
+        question: >
+            We can connect to a VM that does not have an external IP address using a bastion host.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            When we use a bastion host, we log into the bastion host first, and then into the target private VM.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

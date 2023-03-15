@@ -1,15 +1,14 @@
 ---
-title: "Create Arm virtual machines on GCP"
-
-description: Introduction to Arm virtual machines on GCP
+title: "Create Arm virtual machines on Google Cloud Platform"
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers new to Arm virtual machines in the Google Computer Platform (GCP)
+who_is_this_for: This is an introductory topic for anyone new to using Arm virtual machines in the Google Cloud Platform (GCP)
 
 learning_objectives:
     - Deploy Arm virtual machines using the Google Cloud Console
     - Automate Arm virtual machine creation using Terraform
+    - Deploy Arm instances on GCP and provide access via Jump Server
 
 prerequisites:
     - A Google Cloud account
