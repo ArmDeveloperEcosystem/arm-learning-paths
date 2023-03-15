@@ -1,40 +1,34 @@
 ---
 layout: learningpathall
-title: Run Clickhouse and measure its performance
+title: Run ClickHouse and measure performance
 weight: 2
 ---
 
-[Clickhouse](https://clickhouse.com/docs/en/home) is a column-oriented database management system (DBMS) for online analytical processing of queries (OLAP).
-We will measure the processing time (query latency) of Clickhouse on Arm based servers.
+[ClickHouse](https://clickhouse.com/docs/en/home) is a column-oriented database management system (DBMS) for online analytical processing of queries (OLAP).
 
-## Prerequisites
+You can use ClickBench to measure the processing time (query latency) of ClickHouse on Arm servers.
 
-You will need a local Arm platform or an [Arm based instance](/learning-paths/server-and-cloud/csp/) from your cloud service providers, running an appropriate operating system (at time of writing, `Ubuntu 16.04 LTS` or later). You will also need sufficient storage on the instance for the web-analytics dataset used for measuring Clickhouser performance. We used 50GB in our instances.
+ClickBench is open-source software used to evaluate the performance of various database management systems for web analytics.
 
-You can either install both the clickhouse server and client standalone on your Arm instances, or skip this step as it is installed as part of the benchmark script we will run next.
+## Before you begin
 
-## Standalone Installation of clickouse-server and clickhouse-client
-You can install clickhouse-server and clickhouse-client on your Arm server instance, using the package manager on your Linux Distribution. The installation instructions are outlined [here](https://clickhouse.com/docs/en/install)
+You will need an Arm server or an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider running a recent version of Ubuntu for Arm. 
 
-## Run benchmark 
+You will also need sufficient storage on the instance for the web-analytics dataset used for measuring ClickHouse performance, 500 GB is recommended.
 
-To measure the query latency time of Clickhouse, we run ClickBench. ClickBench is open-sourced and can be used to evaluate the performance of various Database management systems to use for a web analytics system. 
 
-Start by cloning the ClickBench repository
+## Install ClickHouse
 
-```bash
-sudo apt install -y git wget curl
-git clone https://github.com/ClickHouse/ClickBench.git
-```
-Then navigate into the `clickhouse` directory and run the steps outlined in `benchmark.sh`. We will break each of these commands out
+Install ClickHouse and start the server. For detailed installation instructions refer to the [installation guide](https://clickhouse.com/docs/en/install).
 
-First, install clickhouse if you haven't already done so through the standalone instructions
+1. Install ClickHouse:
 
 ```bash
 curl https://clickhouse.com/ | sh
 sudo DEBIAN_FRONTEND=noninteractive ./clickhouse install
 ```
-Then, set the compression method for clickhouse-server to use `zstd` and then start the server
+
+2. Set the compression method for `clickhouse-server` to use `zstd` by running the commands: 
 
 ```bash
 echo "
@@ -42,40 +36,71 @@ compression:
     case:
         method: zstd
 " | sudo tee /etc/clickhouse-server/config.d/compression.yaml
+```
 
+3. Start the ClickHouse server:
+
+```bash
 sudo clickhouse start
 ```
-Now, create a table:
+
+## Run ClickBench 
+
+1. Clone the ClickBench repository:
+
+```bash
+sudo apt install -y git wget curl
+git clone https://github.com/ClickHouse/ClickBench.git
+```
+
+2. Navigate to the repository and create a table:
 
 ```bash
 cd ClickBench/clickhouse
 clickhouse-client < create.sql
 ```
 
-Let's load the data. It uses the [Anonymized Web Analytics dataset](https://clickhouse.com/docs/en/getting-started/example-datasets/metrica/).
+3. Load the benchmark data 
+
+The data file is very large and takes more than 10 minutes to download and uncompress. 
 
 ```console
 wget --continue 'https://datasets.clickhouse.com/hits_compatible/hits.tsv.gz'
 gzip -d hits.tsv.gz
+```
 
+4. Import the data using `clickhouse-client`:
+
+Importing the data takes more than 5 minutes. 
+
+```console
 clickhouse-client --time --query "INSERT INTO hits FORMAT TSV" < hits.tsv
 ```
 
-Finally, execute the run script. This script loops through each query three times. A total of 43 queries are run.
+The data is the [Anonymized Web Analytics dataset](https://clickhouse.com/docs/en/getting-started/example-datasets/metrica/).
+
+5. Execute the benchmark 
+
+The script loops through each query three times. A total of 43 queries are run.
 
 ```bash
-cd ClickBench/clickhouse
 ./run.sh
 ```
 
-## View Results
+### ClickBench results
 
-On the execution of the `run.sh` script. the query processing time for each individual query is displayed on the console. It looks like the output shown below. The three comma separated values represent the query latency time for each of the three times the query is run.
+When you execute the `run.sh` script, the query processing time for each individual query is displayed on the console. 
 
-```console
+The three comma separated values represent the query latency time for each of the three times the query is run.
+
+```output
 [0.002, 0.001, 0.001],
 [0.028, 0.023, 0.022],
 [0.066, 0.052, 0.052],
 ```
 
-The summarized results are also output to the `results.csv` file in your working directory. 
+The summarized results are also saved to the `results.csv` file in the current directory. The `results.csv` file has 129 lines (43 queries each run 3 times).
+
+You can try different types of hardware and compare results. For example, if you use AWS try c6g.2xlarge and compare to c7g.2xlarge to see the difference between AWS Graviton2 and Graviton3 processors. 
+
+
