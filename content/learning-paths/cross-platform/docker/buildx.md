@@ -13,14 +13,12 @@ layout: "learningpathall"
 Any computer running Docker can be used for this section. 
 
 Before you begin, confirm Docker buildx is installed by running the `docker buildx` command.
-
 ```console
 docker buildx help
 ```
 
-The result should be the usage message from buildx. It starts with the the text below. 
-
-```console
+The result should be the usage message from `buildx`. It starts with the the text below:
+```output
 Usage:  docker buildx [OPTIONS] COMMAND
 ```
 
@@ -36,8 +34,8 @@ For Ubuntu, install emulation support using the command below.
 sudo apt-get install qemu-user-static
 ```
 
-If emulation support is not installed on a Linux machine running Docker Engine, an error message similar to this one will occur. 
-```console
+If emulation support is not installed on a Linux machine running Docker Engine, an error message similar to this one will occur:
+```output
 standard_init_linux.go:228: exec user process caused: exec format error
 ```
 
@@ -72,7 +70,6 @@ A pull is required because the image is not present on the local machine.
 ```console
 docker run --rm username/uname-x
 ```
-
 It's also possible to run the image for a different architecture than the current machine by adding `--platform`.
 
 Depending on the architecture of the machine, pick a different platform and run the image using one of the commands.
@@ -82,15 +79,13 @@ docker run --rm  --platform linux/arm64 username/uname-x
 docker run --rm  --platform linux/arm/v7 username/uname-x
 docker run --rm  --platform linux/amd64 username/uname-x
 ```
-
-For example, on a machine with a uname of aarch64, run the amd64 image.
+For example, on a machine with a `uname` of `aarch64`, run the `amd64` image.
 
 ```console
 docker run --rm  --platform linux/amd64 username/uname-x
 ```
-
 The output will be:
-```console
+```output
 Architecture is x86_64
 ```
 
@@ -127,4 +122,3 @@ To remove a builder use the `rm` command.
 ```console
 docker buildx rm mybuilder
 ```
-

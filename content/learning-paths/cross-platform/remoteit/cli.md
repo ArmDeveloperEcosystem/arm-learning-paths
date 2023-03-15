@@ -10,10 +10,7 @@ You can use the Remote.It CLI application to create connections without the Desk
 
 The CLI downloads are single binary applications and ready to run.
 
-You can change the name of them and make sure they have execute permission on Linux. Full instructions for other operating systems can be found on the download page.
-
-Example
-please use the most current url from the [download page](https://link.remote.it/download/cli):
+You can change the name of them and make sure they have execute permission on Linux. Full instructions for other operating systems, and the most current URLs can be found on the [download page](https://link.remote.it/download/cli):
 
 ```console
 wget https://downloads.remote.it/cli/v3.0.14/remoteit.aarch64-linux
@@ -30,7 +27,7 @@ Create an [access keys](https://app.remote.it/#/account/accessKey) from your acc
 
 Copy the access key and secret access key. Protect the secret access key.
 
-Manually create the file `~/.remoteit/credentials` with the 3 lines below. Enter your `access-key` and `secret-access-key`.
+Manually create the file `~/.remoteit/credentials` with the 3 lines below. Enter your own `access-key` and `secret-access-key`.
 
 ```console
 [default]
@@ -69,13 +66,13 @@ sudo remoteit status
 
 The CLI provides commands such as to register this device as a target for connections.
 
-You can get help within the CLI by using the help command. You can also append the --help flag to any CLI commands to get more details on flags.
+You can get help within the CLI by using the `help` command. You can also append the `--help` flag to any CLI commands to get more details on flags.
 
 ```console
 sudo remoteit --help
 ```
 
-Example help command for adding a connection
+Example `help` command for adding a connection:
 
 ```console
 sudo remoteit connection add --help
