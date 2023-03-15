@@ -38,7 +38,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
@@ -110,7 +110,7 @@ conda activate tf
 
 The shell prompt will now show the tf environment.
 
-```console
+```output
 (tf) ubuntu@ip-10-0-0-251:~$
 ```
 
@@ -133,7 +133,7 @@ python ./tf.py
 
 The expected output format is below. Your version may be slightly different. 
 
-```console
+```output
 2.10.0
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
@@ -167,7 +167,7 @@ python ./pytorch.py
 
 The expected output is similar to:
 
-```console
+```output
 tensor([[0.9825, 0.4797, 0.0978],
         [0.2175, 0.8025, 0.9663],
         [0.6342, 0.5408, 0.4781],

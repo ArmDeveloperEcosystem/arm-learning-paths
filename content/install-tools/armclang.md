@@ -43,49 +43,50 @@ Individual compiler packages for all supported host platforms can be downloaded 
 
 These can either be used standalone or [integrated](#armds) into your Arm Development Studio installation.
 
+See also: [What should I do if I want to download a legacy release of Arm Compiler?](https://developer.arm.com/documentation/ka005184)
+
+## Install compiler packages
+
 To install on Windows, unzip the downloaded package, launch the installer, and follow on-screen prompts.
 ```console
 win-x86_64\setup.exe
 ```
-To install on Linux hosts, untar, then run the install script (note the exact filenames are version and host dependent). For example:
+To install on Linux hosts, `untar` the downloaded package and run the install script (note the exact filenames are version and host dependent). For example:
 
-{{< tabpane code=true >}}
-  {{< tab header="x86_64" >}}
+### x86_64
+```console
 mkdir tmp
 mv ARMCompiler6.19_standalone_linux-x86_64.tar.gz tmp
 cd tmp
 tar xvfz ARMCompiler6.19_standalone_linux-x86_64.tar.gz
 ./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.19
-{{< /tab >}}
-{{< tab header="aarch64" >}}
+```
+### aarch64
+```console
 mkdir tmp
 mv ARMCompiler6.19_standalone_linux-aarch64.tar.gz tmp
 cd tmp
 tar xvfz ARMCompiler6.19_standalone_linux-aarch64.tar.gz
 ./install_aarch64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.19
-{{< /tab >}}
-{{< /tabpane >}}
-
+```
 Remove the install data when complete.
-
 ```console
 cd ..
 rm -r tmp
 ```
 Add the `bin` directory of the installation to the `PATH` and confirm `armclang` can be invoked.
-
-{{< tabpane code=true >}}
-  {{< tab header="bash" >}}
+### bash
+```console
 export PATH=/home/$USER/ArmCompilerforEmbedded6.19/bin:$PATH
-{{< /tab >}}
-  {{< tab header="csh/tcsh" >}}
+armclang --version
+```
+### csh/tcsh
+```console
 set path=(/home/$USER/ArmCompilerforEmbedded6.19/bin $path)
-{{< /tab >}}
-{{< /tabpane >}}
+armclang --version
+```
 
-See also: [What should I do if I want to download a legacy release of Arm Compiler?](https://developer.arm.com/documentation/ka005184)
-
-## Integrate with Arm Development Studio {#armds}
+### Integrate with Arm Development Studio {#armds}
 
 To integrate this compiler with Arm Development Studio, [register](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain) the installation before then [configuring](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain/Configure-a-compiler-toolchain-for-the-Arm-DS-command-prompt) the environment to use that version.
 
@@ -97,10 +98,6 @@ Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed
 
 ## Verify installation
 
-Check that the correct compiler version is being used:
-```console
-armclang --version
-```
 To verify everything is working, build a simple `Hello World` example as described [here](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).
 ```C
 // hello.c

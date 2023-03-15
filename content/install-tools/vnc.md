@@ -36,7 +36,7 @@ VNC is a client server application. A VNC server runs on a remote machine. A VNC
 
 To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This receipe uses [TigerVNC](https://tigervnc.org/)
 
-Desktop software is also needed. There are many options for this, but using xfce4 makes for a minimal install with good performance. 
+Desktop software is also needed. There are many options for this, but using `xfce4` makes for a minimal install with good performance. 
 
 Install the desktop software.
 
@@ -62,7 +62,7 @@ Remember the password for later when the client is conneted.
 
 ### Configure the desktop startup
 
-Create a file at $HOME/.vnc/xstartup with the contents:
+Create a file at `$HOME/.vnc/xstartup` with the contents:
 
 ```console
 #!/bin/sh
@@ -70,9 +70,7 @@ unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
 exec startxfce4
 ```
-
-Make sure he xstartup file has executable permission.
-
+Make sure the `xstartup` file has executable permission.
 ```bash
 chmod +x $HOME/.vnc/xstartup
 ```
@@ -82,8 +80,6 @@ chmod +x $HOME/.vnc/xstartup
 To create a systemd service to start the VNC server create the file /etc/systemd/system/vncserver@.service
 
 Use sudo or root as it is located in a read-only area.
-
-
 ```console
  [Unit]
  Description=Remote desktop service (VNC)
@@ -102,8 +98,7 @@ Use sudo or root as it is located in a read-only area.
  WantedBy=multi-user.target
 
  ```
-
-The commands below are for any Linux distrbution using systemd. 
+The commands below are for any Linux distrbution using `systemd`.
 
 To start the SSH daemon:
 
@@ -125,7 +120,7 @@ sudo systemctl restart vncserver@1.service
 
 ### Use port forwarding via SSH to connect
 
-The default port for the first instance of VNC is 5901. SSH port forwarding is the best solution for accessing the Linux desktop on a cloud machine. This way no additional ports need to be opened in the security group. 
+The default port for the first instance of VNC is `5901`. SSH port forwarding is the best solution for accessing the Linux desktop on a cloud machine. This way no additional ports need to be opened in the security group. 
 
 SSH to your remote Linux machine. Refer to [SSH](/install-tools/ssh/) for additional details. 
 
@@ -137,11 +132,12 @@ ssh -i <private_key> -L 5901:localhost:5901 ubuntu@<public_ip_address>
 
 Once connected via SSH, use a VNC client to connect. [Download](https://sourceforge.net/projects/tigervnc/files/stable/1.12.0/) an install a TigerVNC client for your computer.
 
-Open the VNC client and enter localhost:5901 for the VNC server. 
-
-You will be prompted for the password created earlier with vncpasswd.
+Open the VNC client and enter the following for the VNC server.
+```console
+localhost:5901
+```
+You will be prompted for the password created earlier with `vncpasswd`.
 
 A remote Linux Desktop should appear on your local computer. Make sure to close the VNC client first and then exit the SSH connection. 
 
 ![Linux desktop](/install-tools/_images/xfce4.png)
-
