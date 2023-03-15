@@ -42,7 +42,7 @@ Linux-PAM limits can be changed in the ```/etc/security/limits.conf``` file, or 
 memlock (ulimit -l): Max locked-in-memory address space
 ```
 
-memlock is the only PAM limit we've found is useful to adjust. This is suggested to be set to unlimited when using huge pages with `MySQL`. Enabling huge pages is something we strongly suggest readers try in their deployment because it can result in significant performance gains. We discuss huge pages further below. The suggestion to set memlock when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/large-page-support.html).
+memlock is the only PAM limit we've found is useful to adjust. This is suggested to be set to unlimited when using huge pages with `MySQL`. Enabling huge pages is something we strongly suggest readers try in their deployment because it can result in significant performance gains. We discuss huge pages further below. The suggestion to set `memlock` when huge pages are enabled can be found in the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/large-page-support.html).
 
 ### Linux Virtual Memory Subsystem
 
@@ -96,7 +96,7 @@ max_prepared_stmt_count=4194304   # Default 16382
 
 `max_connections` doesn't impact performance, but if a high client connection count is expected/required, it's a good idea to raise this in order to not reject request from clients. Keep in mind that more client connections means more resources will be consumed (especially memory). Setting this to something higher is completely dependent on use case and requirements.
 
-`max_prepared_stmt_count` is 16382 by default. It's a good idea to set this as small as possible in order to help prevent denial-of-service attacks. We set it very large because we are in a test environment that uses many prepared statements.
+`max_prepared_stmt_count` is 16382 by default. It's a good idea to set this as small as possible in order to help prevent denial of service attacks. We set it very large because we are in a test environment that uses many prepared statements.
 
 ### Memory Related Configuration
 
@@ -118,7 +118,7 @@ innodb_use_fdatasync=ON    # Default is OFF
 innodb_log_file_size=20GB    # Default is 48MB
 ```
 
-Setting `innodb_use_fdatasync` to ON helps reduce the number of system calls that occur when flushing data to disk. In short, using fdatasync reduces flushing by not updating the meta data associated with files when those files are written to. For most use cases, this is acceptable.
+Setting `innodb_use_fdatasync` to ON helps reduce the number of system calls that occur when flushing data to disk. In short, using `fdatasync` reduces flushing by not updating the meta data associated with files when those files are written to. For most use cases, this is acceptable.
 
 Setting `innodb_log_file_size` to much larger than the default (48MB) helps reduce how much flushing and checking pointing occurs. See the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size) for more. Also note, there is another parameter called `innodb_log_buffer_size` that may be worth experimenting with as well. We currently do not have a recommendation for this parameter. [Documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_buffer_size) on this parameter is also available. 
 
@@ -133,7 +133,7 @@ innodb_read_io_threads=<system CPU count>    # Default is 4
 innodb_write_io_threads=<system CPU count>    # Default is 4
 ```
 
-`innodb_io_capacity` tells the innodb storage engine how much IOPS it can issue to storage. The default of 200 is on the smaller side and more appropriate for rotational storage. Modern SSD storage and even cloud based storage can benefit greatly from increasing this value. The [MySQL InnoDB I/O Capacity documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-configuring-io-capacity.html) suggests this be set to around 1000 for higher performing storage. Our testing agrees with this suggestion. However, because there are all sorts of storage technologies available; we strongly suggest experimenting with this setting.
+`innodb_io_capacity` tells the `InnoDB` storage engine how much IOPS it can issue to storage. The default of 200 is on the smaller side and more appropriate for rotational storage. Modern SSD storage and even cloud based storage can benefit greatly from increasing this value. The [MySQL InnoDB I/O Capacity documentation](https://dev.mysql.com/doc/refman/8.0/en/innodb-configuring-io-capacity.html) suggests this be set to around 1000 for higher performing storage. Our testing agrees with this suggestion. However, because there are all sorts of storage technologies available; we strongly suggest experimenting with this setting.
 
 `innodb_io_capacity_max` defaults to 2x of `innodb_io_capacity`. It might be worth experimenting with this further in use cases that experience heavy disk usage.
 
