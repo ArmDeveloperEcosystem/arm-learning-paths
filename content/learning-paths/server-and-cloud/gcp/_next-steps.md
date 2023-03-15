@@ -21,9 +21,13 @@ further_reading:
         link: https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#startinstanceconsole
         type: documentation
     - resource:
-        title: Connect to VM instance
+        title: Connect to Linux VMs 
         link: https://cloud.google.com/compute/docs/instances/connecting-to-instance#console
-        type: Blog
+        type: documentation
+    - resource:
+        title: About bastion hosts
+        link: https://cloud.google.com/solutions/connecting-securely#bastion
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
