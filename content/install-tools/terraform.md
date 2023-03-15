@@ -29,14 +29,11 @@ In some cases the instructions don't work well for Arm platforms.
 This article provides a quick solution to install Terraform for Ubuntu on Arm.
 
 Confirm you are using an Arm machine by running:
-
 ```bash
 uname -m
 ```
-
 The output should be:
-
-```console
+```output
 aarch64
 ```
 

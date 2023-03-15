@@ -31,7 +31,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
@@ -63,7 +63,7 @@ gcloud -v
 
 The output should be similar to:
 
-```console
+```output
 Google Cloud SDK 418.0.0
 alpha 2023.02.13
 beta 2023.02.13

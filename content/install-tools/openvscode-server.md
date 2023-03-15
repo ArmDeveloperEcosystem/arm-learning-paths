@@ -32,14 +32,12 @@ OpenVSCode Server supports the Arm architecture and is useful for developing on 
 Follow the instructions below to install OpenVSCode Server natively on an Arm Linux machine.
 
 Confirm you are using an Arm machine by running:
-
 ```bash
 uname -m
 ```
 
 The output should be:
-
-```console
+```output
 aarch64
 ```
 
@@ -86,9 +84,9 @@ Use the -L option of ssh to Forward port 3000.
 ssh -L 3000:localhost:3000 user@ip-address
 ```
 
-After connecting with port forwarding, use the localhost link printed by openvscode-server. It includes a token for security and  will be similar to:
+After connecting with port forwarding, use the localhost link printed by `openvscode-server`. It includes a token for security and will be similar to:
 
-```console
+```output
 http://localhost:3000/?tkn=40711257-5e5d-4906-b88f-fe13b1f317b7
 ```
 

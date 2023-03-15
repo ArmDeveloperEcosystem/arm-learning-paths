@@ -33,7 +33,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
@@ -41,7 +41,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Download and install AWS CLI version 2
 
-Before starting, install `unzip` 
+Before starting, install `unzip`:
 
 ```bash { target="ubuntu:latest" }
 sudo apt update

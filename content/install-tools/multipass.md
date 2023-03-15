@@ -70,10 +70,9 @@ To see the available images run the `find` command. Any of the listed images can
 ```console
 multipass find 
 ```
+The output from `find` will be similar to the below.
 
-The current output from `find` is shown below.
-
-```console
+```output
 Image                       Aliases           Version          Description
 18.04                       bionic            20230112         Ubuntu 18.04 LTS
 20.04                       focal             20230111         Ubuntu 20.04 LTS
@@ -121,7 +120,7 @@ multipass exec m1u -- uname -a
 
 The uname output will look similar to:
 
-```console
+```output
 Linux m1u 5.15.0-58-generic #64-Ubuntu SMP Thu Jan 5 12:06:43 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
 ```
 

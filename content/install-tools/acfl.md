@@ -51,7 +51,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 

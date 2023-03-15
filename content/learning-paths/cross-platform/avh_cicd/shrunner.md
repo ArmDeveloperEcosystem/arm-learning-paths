@@ -54,7 +54,7 @@ In the AVH runner terminal, you will see that it reports `Running job: ci_demons
 In the browser, navigate to `Actions`, and observe that the `virtual_hardware_sh.yml` workflow has started (and eventually completes). Click on `ci_demonstration` to see the progress of the run, and a complete log of all outputs.
 
 Under the `Run the microspeech example` step, you will find the output:
-```
+```output
 The runner heard yes (146) @1000ms
 The runner heard no (145) @5600ms
 ...

@@ -33,18 +33,15 @@ https://developer.arm.com/downloads/-/download-flexnet-publisher
 Access the [Software Licensing Portal](https://developer.arm.com/support/licensing) to generate your license. You will need the `HOSTID` of the license server and your product license key from Arm.
 
 ## End-user set up
-
 Users should set the environment variable `ARMLMD_LICENSE_FILE` to map to the location of your license server.
-
-{{< tabpane code=true >}}
-  {{< tab header="Windows" >}}
+### Windows
+```console
 set ARMLMD_LICENSE_FILE=port@server
-{{< /tab >}}
-  {{< tab header="Linux" >}}
+```
+### Linux
+```console
 export ARMLMD_LICENSE_FILE=port@server
-{{< /tab >}}
-{{< /tabpane >}}
-
+```
 ## Activate via tools IDE
 
 The license can also be activated in the various Arm tool IDEs.

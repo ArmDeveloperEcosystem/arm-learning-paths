@@ -42,7 +42,7 @@ docker run hello-world
 
 The output should be a welcome message such as:
 
-```console
+```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 

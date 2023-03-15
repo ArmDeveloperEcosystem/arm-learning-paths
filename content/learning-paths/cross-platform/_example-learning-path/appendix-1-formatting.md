@@ -55,6 +55,17 @@ print(hello world) \
 print(hello world)
 ```
 
+\`\`\`C \
+int foo(void){ \
+  return 0; \
+} \
+\`\`\`
+```C
+int foo(void){
+  return 0;
+}
+```
+
 ### Line numbers
 Specify that line_numbers are true in the following way:
 

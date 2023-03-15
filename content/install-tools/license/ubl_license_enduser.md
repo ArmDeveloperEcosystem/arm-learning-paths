@@ -24,15 +24,14 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the success kit product code and your internal server.
 
-{{< tabpane code=true >}}
-  {{< tab header="HSK" >}}
+### HSK
+```console
 export ARMLM_ONDEMAND_ACTIVATION=HWSKT-STD0@https://internal.ubl.server
-{{< /tab >}}
-  {{< tab header="SSK" >}}
+```
+### SSK
+```console
 export ARMLM_ONDEMAND_ACTIVATION=SWSKT-STD0@https://internal.ubl.server
-{{< /tab >}}
-{{< /tabpane >}}
-
+```
 A license will be checked out whenever a UBL enabled tool is used.
 
 ## Activate via tools IDE
@@ -44,18 +43,15 @@ For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Sof
 ## Manually set up
 
 Open a command prompt, and navigate to the bin directory of any UBL enabled product. Activate an appropriate success kit license:
-
-{{< tabpane code=true >}}
-  {{< tab header="HSK" >}}
+### HSK
+```console
 armlm activate --server https://internal.ubl.server --product HWSKT-STD0
-{{< /tab >}}
-  {{< tab header="SSK" >}}
+```
+### SSK
+```
 armlm activate --server https://internal.ubl.server --product SWSKT-STD0
-{{< /tab >}}
-{{< /tabpane >}}
-
+```
 ## Confirm license check-out
-
 To confirm you have checked-out a license, enter the command:
 ```console
 armlm inspect

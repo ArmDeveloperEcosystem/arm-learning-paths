@@ -58,7 +58,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
@@ -95,14 +95,11 @@ To install the most common development tools use the commands below. If the mach
 sudo yum update -y
 sudo yum groupinstall 'Development Tools' -y
 ```
-
 If `sudo` is not available become _root_ and omit the `sudo`.
-
 ```console
 yum update
 yum groupinstall 'Development Tools' -y
 ```
-
 ## Setting up product license
 
 GCC is open source and freely available for use. 
@@ -126,22 +123,15 @@ int main()
     return 0;
 }
 ```
-
-To compile the hello-world program use:
-
+To compile and run the application use:
 ```bash
 gcc -o hello-world hello-world.c
-```
-
-To run the application enter:
-
-```bash { command_line="user@localhost | 2" }
 ./hello-world
+```
+Observe the output:
+```output
 Hello, Arm World!
 ```
-
-The program will print the string in the printf() statement.
-
 [Return to the top](#top)
 
 # Install GCC as a cross-compiler {#cross}
@@ -307,36 +297,30 @@ source ~/.bashrc
 
 ### Installing on macOS
 
-Downloads for macOS are available as tar files (`.tar.xz`) and package files (`.pkg`). 
+Downloads for `macOS` are available as tar files (`.tar.xz`) and package files (`.pkg`). 
 
 For `.tar.xz` files, unpack the downloaded file to the install directory.
-
-{{< tabpane code=true >}}
-  {{< tab header="x86_64">}}
+### x86_64
+```console
 tar xJf arm-gnu-toolchain-12.2.rel1-darwin-x86_64-<TRIPLE>.tar.xz -C /path/to/install/dir
-  {{< /tab >}}
-  {{< tab header="aarch64">}}
+```
+### aarch64
+```console
 tar xJf arm-gnu-toolchain-12.2.rel1-darwin-arm64-<TRIPLE>.tar.xz -C /path/to/install/dir
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 For `.pkg` files use the installer. 
-
-{{< tabpane code=true >}}
-  {{< tab header="x86_64">}}
+### x86_64
+```console
 sudo installer -pkg arm-gnu-toolchain-12.2.rel1-darwin-x86_64-<TRIPLE>.pkg -target /
-  {{< /tab >}}
-  {{< tab header="aarch64">}}
+```
+### aarch64
+```console
 sudo installer -pkg arm-gnu-toolchain-12.2.rel1-darwin-arm64-<TRIPLE>.pkg -target /
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 Use a text editor to add the `bin` directory as a new line in `/etc/paths`.
-
 ```console
 sudo nano /etc/paths
 ```
-
 For example the path could be: `/Applications/ArmGNUToolchain/12.2.rel1/arm-none-eabi/bin`
 
 The `/etc/paths` file is a list of paths to search.
@@ -350,7 +334,7 @@ The `/etc/paths` file is a list of paths to search.
 /sbin
 /Applications/ArmGNUToolchain/12.2.rel1/arm-none-eabi/bin
 ```
-
+### Apple Silicon
 Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target. 
 
 ```console

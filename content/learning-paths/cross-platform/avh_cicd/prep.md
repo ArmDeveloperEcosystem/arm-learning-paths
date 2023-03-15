@@ -47,7 +47,7 @@ To run on the Virtual Hardware, use the provided script:
 ./run_example.sh
 ```
 Observe the output:
-```
+```output
 Heard yes (146) @1000ms
 Heard no (145) @5600ms
 ...
@@ -69,7 +69,7 @@ cbuild.sh microspeech.Example.cprj
 ./run_example.sh
 ```
 Observe that the output has changed as expected.
-```
+```output
 The word was yes (146) @1000ms
 The word was no (145) @5600ms
 ...

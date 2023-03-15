@@ -53,14 +53,11 @@ Depending on the version of the Arm architecture, the results are shown below. B
 The output should be one of the values shown below. 
 
 For the Armv8-A architecture the output should be:
-
-```console
+```output
 aarch64
 ```
-
 For the Armv7-A architecture the output should be:
-
-```console
+```output
 armv7l
 ```
 
@@ -72,15 +69,14 @@ Download either the CLI version or the desktop version of VS Code. The desktop v
 
 Download a command line (CLI) release of VS Code from the Downloads page. 
 
-{{< tabpane code=true >}}
-  {{< tab header="Armv8-A">}}
+### Armv8-A
+```console
 wget -O vscode.tgz 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-arm64'
-  {{< /tab >}}
-  {{< tab header="Armv7-A">}}
+```
+### Armv7-A
+```console
 wget -O vscode.tgz 'https://code.visualstudio.com/sha/download?build=stable&os=cli-linux-armhf'
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 
 ### Download desktop version of VS Code (tunnel and desktop)
 
@@ -100,36 +96,33 @@ The snap install is for a non-Arm architecture and doesn't work.
 
 For CLI, extract the file. The result is a single executable named `code`. It is placed in the current directory. For desktop install the Debian package.
 
-{{< tabpane code=true >}}
-  {{< tab header="CLI">}}
+### CLI
+```console
 tar xvf vscode.tgz
-  {{< /tab >}}
-  {{< tab header="desktop">}}
+```
+### Desktop
+```console
 sudo apt install ./vscode.deb
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 ## Start a VS Code Tunnel
 
 On the remote machine start a VS Code tunnel. The ./ is used to indicate the CLI version which was extracted in the current directory. For the desktop install the code executable is in the search path and the ./ should be omitted. 
 
-{{< tabpane code=true >}}
-  {{< tab header="CLI">}}
+### CLI
+```console
 ./code tunnel --name my-tunnel-1 --accept-server-license-terms
-  {{< /tab >}}
-  {{< tab header="desktop">}}
+```
+### Desktop
+```console
 code tunnel --name my-tunnel-1 --accept-server-license-terms
-  {{< /tab >}}
-{{< /tabpane >}}
-
+```
 If `--name` is not used, a name will be assigned to the tunnel. 
 
 The VS Code tunnel server will print a URL to authenticate and link it to your GitHub account. 
 
 Visit the [device link](https://github.com/login/device) and then enter the code shown.
 
-
-```console
+```output
 *
 * Visual Studio Code Server
 *
@@ -139,7 +132,6 @@ Visit the [device link](https://github.com/login/device) and then enter the code
 *
 To grant access to the server, please log into https://github.com/login/device and use code A4F7-33D4
 ```
-
 After the code is entered, the remote device is connected to your GitHub account. 
 
 ![Device Connect](/install-tools/_images/vsc-device-connect.png)

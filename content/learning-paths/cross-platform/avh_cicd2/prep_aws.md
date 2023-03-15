@@ -24,7 +24,7 @@ For documentation on the CI/CD workflow see [here](https://arm-software.github.i
 ## CloudFormation stack {#steps}
 
 Within this project, there is a file:
-```
+```output
     infrastructure/cloudformation/Arm-AVH-CloudFormation-Template.yaml
 ```
 which can be used to help set up your AWS account appropriately.
@@ -46,7 +46,7 @@ When complete, a list of key values will be shown in the `Outputs` tab. We shall
 ### Stack generation issues
 
 `Arm-AVH-CloudFormation-Template.yaml` contains permission settings that relate to corporate AWS accounts. If you have issues generating the stack, edit the file, commenting out lines containing:
-```console
+```
     PermissionsBoundary: !Sub 'arn:aws:iam::${AWS::AccountId}:policy/ProjAdminsPermBoundaryv2'
 ```
 and repeat the [steps](#steps) to create the stack.

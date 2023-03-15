@@ -51,7 +51,7 @@ tar -xf flexnetls-armlmd-<version>.tar.gz
 sudo flexnetls-armlmd-<version>/install_license_server
 ```
 The installer will automatically start the license server software. You will see the following output:
-```
+```output
 Waiting for license server... (up to 120 seconds)
 License server ready.
 ```
@@ -105,7 +105,7 @@ Install the license file on the license server with:
 armlm_update_licenses --data-file <license_file>
 ```
 You will see the following output when successful.
-```
+```output
 Licenses have been successfully updated. No confirmation is required.
 ```
 The licenses are now ready to use by the end-users.

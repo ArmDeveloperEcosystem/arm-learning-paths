@@ -32,7 +32,7 @@ hugo
 
 The output should be a table similar to the one below with no other error messages.
 
-```console
+```output
 
                    | EN
 -------------------+------
