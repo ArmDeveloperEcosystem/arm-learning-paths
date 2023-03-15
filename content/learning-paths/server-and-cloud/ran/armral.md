@@ -46,7 +46,7 @@ cd build
 ```
 ## Build the library as appropriate
 
-The Arm Architecture defines three increasing levels of vectorizing optimization technology, each a superset of the previous.
+The Arm Architecture defines three vector processing technologies.
 - [Neon](https://developer.arm.com/Architectures/Neon) (Advanced SIMD - `asimd`)
 - [Scalable Vector Extension](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions) (SVE)
 - and [SVE2](https://developer.arm.com/documentation/102340/)
@@ -99,7 +99,7 @@ sudo make install
 ```
 
 ## Build and run tests
-To build and run the supplied benchmarking example, use:
+To build and run the supplied benchmark example, use:
 ```bash { cwd="arm-ran-acceleration-library-23.01/build"; ret_code="0" }
 make check
 ```
