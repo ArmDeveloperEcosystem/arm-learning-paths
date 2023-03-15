@@ -1,8 +1,8 @@
 ---
 differentiating_info:
-- Web
-- Linux
+- 5G
 - HPC
+- Networking
 key_ip:
 - Neoverse
 maintopic: true
