@@ -41,9 +41,9 @@ Next source the script as shown below to initialize your build environment for y
 ```bash
 source oe-init-build-env build-qemu-arm64
 ```
-The output from running this is shown below
+The output from running this is shown below:
 
-```console
+```output
 You had no conf/local.conf file. This configuration file has therefore been
 created for you with some default values. You may wish to edit it to, for
 example, select a different MACHINE (target hardware). See conf/local.conf
@@ -108,14 +108,7 @@ You should see linux booting on your console. Enter `root` when presented with t
 Run `uname -a` to check the linux distribution running and the target hardware architecture.
 You should the output below
 
-```console
+```output
 Linux qemuarm64 5.15.78-yocto-standard #1 SMP PREEMPT Wed Nov 16 14:17:41 UTC 2022 aarch64 GNU/Linux
 ```
-
 Congratulations! You have successfully built and run a minimal Yocto Linux image on an example 64-bit Arm machine running in QEMU.
-
-
-
-
-
-

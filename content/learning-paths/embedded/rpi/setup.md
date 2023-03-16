@@ -57,10 +57,10 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-The next section identifies the hardware of each machine. 
+The next section identifies the hardware of each machine.
