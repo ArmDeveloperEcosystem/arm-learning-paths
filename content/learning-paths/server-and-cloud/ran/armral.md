@@ -105,7 +105,7 @@ make check
 ```
 
 You will observe run time errors if you build for optimization features that are not available:
-```console
+```output
 ...
      Start  5: arm_fir_filter_cs16
 5/55 Test  #5: arm_fir_filter_cs16 ..................***Exception: Illegal  0.12 sec

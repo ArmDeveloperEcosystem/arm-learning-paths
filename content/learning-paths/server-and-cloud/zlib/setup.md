@@ -116,7 +116,7 @@ ldd ./test
 ```
 
 The output will show the shared libraries used by test.
-```console
+```output
 linux-vdso.so.1 (0x0000ffffababe000)
 libz.so.1 => /lib/aarch64-linux-gnu/libz.so.1 (0x0000ffffaba52000)
 libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffffab8df000)

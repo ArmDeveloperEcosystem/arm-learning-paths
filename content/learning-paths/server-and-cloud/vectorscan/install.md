@@ -193,7 +193,7 @@ Run a check to validate that `Vectorscan` is built and running correctly:
 
 All the unit tests should run successfully. At the end of execution you will see output similar to:
 
-```
+```output
 [----------] Global test environment tear-down
 [==========] 3746 tests from 33 test cases ran. (197558 ms total)
 [  PASSED  ] 3746 tests.
