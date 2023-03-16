@@ -35,11 +35,11 @@ The installer will start.
 
 Check "Add python.exe to PATH" if you want to easily invoke python from any directory.
 
-![Install](/install-tools/_images/py1-woa.png)
+![Install](/install-guides/_images/py1-woa.png)
 
 Wait for the installer to complete and show the message, "Setup was successful".
 
-![Complete](/install-tools/_images/py2-woa.png)
+![Complete](/install-guides/_images/py2-woa.png)
 
 
 ## Invoke python
@@ -115,13 +115,13 @@ Open a browser to the URL printed by the application ([http://127.0.0.1:5000](ht
 
 The output is in the browser.
 
-![Complete](/install-tools/_images/flask-woa.png)
+![Complete](/install-guides/_images/flask-woa.png)
 
 
 ## Using IDLE
 
 Python IDLE is included in the installation. IDLE is a simple IDE for python development.
 
-![Complete](/install-tools/_images/py3-woa.png)
+![Complete](/install-guides/_images/py3-woa.png)
 
 For more information check the [Linaro Windows on Arm project](https://www.linaro.org/windows-on-arm/python/)

@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 ## Prerequisites
 
-You must have [Keil MDK](/install-tools/mdk/) installed.
+You must have [Keil MDK](/install-guides/mdk/) installed.
 
 Code coverage can be performed on any project that runs on a suitable target. We shall use one of the supplied RTX examples that runs on the supplied Cortex-M FVP.
 

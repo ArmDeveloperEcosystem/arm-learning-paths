@@ -155,7 +155,7 @@ git clone https://github.com/<your-github-account-name>/arm-learning-paths
 
 There are a number of good options for text editors if you don't have a full Linux desktop available on the remote server.
 
-To use Visual Studio Code in the browser on your remote Linux server check the install information for [OpenVSCode Server](/install-tools/openvscode-server/) and [VS Code Tunnels](/install-tools/vscode-tunnels/)
+To use Visual Studio Code in the browser on your remote Linux server check the install information for [OpenVSCode Server](/install-guides/openvscode-server/) and [VS Code Tunnels](/install-guides/vscode-tunnels/)
 
 Run hugo to launch a development version of website on your machine.
 

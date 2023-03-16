@@ -13,9 +13,9 @@ You can connect the [Arm Development Studio](https://developer.arm.com/Tools%20a
 
 ## Prerequisites
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
+It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
-It is also assumed you have installed Arm Fast Models and configured your license and build tools. For full instructions see [here](/install-tools/fm/).
+It is also assumed you have installed Arm Fast Models and configured your license and build tools. For full instructions see [here](/install-guides/fm/).
 
 ### If Fast Models are not available
 

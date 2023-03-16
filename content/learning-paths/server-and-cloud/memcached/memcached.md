@@ -15,7 +15,7 @@ This learning path has been tested on AWS and Oracle platforms.
 
 Launch an Arm-based instance running `Ubuntu 20.04`.
 
-Install `gcc` on your instance following the steps [here](/install-tools/gcc/#native).
+Install `gcc` on your instance following the steps [here](/install-guides/gcc/#native).
 
 Install [libevent](https://libevent.org/):
 ```bash

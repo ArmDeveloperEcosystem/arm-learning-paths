@@ -23,7 +23,7 @@ DSTREAM-ST provides full debug capability over JTAG and SWD interfaces, as well 
 
 ## Prerequisites
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
+It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
 It is assumed you have access to a DSTREAM unit, and an appropriate development board. For this example, we shall use an [MPS2+](https://developer.arm.com/Tools%20and%20Software/MPS2%20Plus%20FPGA%20Prototyping%20Board) programmed for Cortex-M3 (`AN385`), which is the same hardware as modeled by the FVPs used previously.
 

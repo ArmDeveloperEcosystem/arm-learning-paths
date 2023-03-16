@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Prerequisites
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
+It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
 ## Getting started with the IDE
 

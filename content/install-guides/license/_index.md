@@ -1,19 +1,10 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Arm User based licenses
-
-### Optional additional search terms (one per line) to assist in finding the article
+author_primary: Ronan Synnott
 additional_search_terms:
-- licensing
 - success-kits
 
-### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 20
-
-### Link to official documentation
-official_docs: 
-
+### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
 multi_install: true             # Set to true if first page of multi-page article, else false

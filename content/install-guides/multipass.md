@@ -53,7 +53,7 @@ sudo installer -pkg  multipass-1.10.1+mac-Darwin.pkg -target /
 
 The getting started instructions below use the command line interface. Multipass installs a tray icon for those who want to access basic features from the user interface.
 
-![Connect](/install-tools/_images/multipass-tray.png)
+![Connect](/install-guides/_images/multipass-tray.png)
 
 ## Get started with Multipass
 
@@ -128,7 +128,7 @@ Linux m1u 5.15.0-58-generic #64-Ubuntu SMP Thu Jan 5 12:06:43 UTC 2023 aarch64 a
 
 It's helpful to demonstrate a few other common commands by downloading and installing an application. To demonstrate file copy, the download is done from macOS and the file is copied into the instance.
 
-Download and install [OpenVSCode Server](/install-tools/openvscode-server/).
+Download and install [OpenVSCode Server](/install-guides/openvscode-server/).
 
 On the macOS host computer use `wget` for the download.
 

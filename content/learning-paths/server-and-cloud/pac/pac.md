@@ -23,7 +23,7 @@ For instructions on how to create an AWS instance, see [this article](/learning-
 
 We will create a simple `hello world` type application on such an AWS instance and build with the appropriate compiler options to understand the PAC instructions.
 
-Install [GCC](/install-tools/gcc/#native) and other necessary tools.
+Install [GCC](/install-guides/gcc/#native) and other necessary tools.
 
 ```bash
 sudo apt install gcc make gdb-multiarch -y

@@ -30,7 +30,7 @@ Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ```
 
-If any other output is shown return to [Installing Docker](/install-tools/docker/) and follow the installation instructions.
+If any other output is shown return to [Installing Docker](/install-guides/docker/) and follow the installation instructions.
 
 Try out some Docker projects to confirm they build and run as expected. Some simple ones are in GitHub in a [project called hello-arm](https://github.com/jasonrandrews/hello-arm). 
 

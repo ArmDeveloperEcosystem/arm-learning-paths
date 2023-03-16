@@ -15,8 +15,8 @@ Any computer which has the required tools installed can be used for this section
 You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
 
 Two tools are required on the computer you are using. Follow the links to install the required tools.
-* [Terraform](/install-tools/terraform)
-* [Google Cloud CLI](/install-tools/gcloud)
+* [Terraform](/install-guides/terraform)
+* [Google Cloud CLI](/install-guides/gcloud)
 
 ## Deploy Arm instances on GCP and provide access via Jump Server
 

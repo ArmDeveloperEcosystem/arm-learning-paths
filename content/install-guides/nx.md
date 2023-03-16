@@ -130,21 +130,21 @@ The default port for NoMachine is 4000. If needed, open this port in the securit
 
 Start NoMachine on the client computer. The first step is to connect. Enter a name for the connection and the (public) IP of the remote machine. The default port is 4000.
 
-![Connect](/install-tools/_images/nx-connect.png)
+![Connect](/install-guides/_images/nx-connect.png)
 
 The next screen is the login screen. Enter the username and password for the account on the remote machine.
 
-![Login](/install-tools/_images/nx-login.png)
+![Login](/install-guides/_images/nx-login.png)
 
 A question about creating a new display may be presented, answer Yes.
 
-![Confirm](/install-tools/_images/nx-confirm.png)
+![Confirm](/install-guides/_images/nx-confirm.png)
 
 NoMachine will resize the remote desktop to fit in the client window. The best option is to change the remote display resolution to match the client window size. 
 
-![Resize](/install-tools/_images/nx-resize.png)
+![Resize](/install-guides/_images/nx-resize.png)
 
 Finally, the desktop will appear and is ready to use. 
 
-![Linux desktop](/install-tools/_images/nx-desktop.png)
+![Linux desktop](/install-guides/_images/nx-desktop.png)
 

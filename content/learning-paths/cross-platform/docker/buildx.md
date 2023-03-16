@@ -22,7 +22,7 @@ The result should be the usage message from `buildx`. It starts with the the tex
 Usage:  docker buildx [OPTIONS] COMMAND
 ```
 
-If any other output is shown return to [Installing Docker](/install-tools/docker/) and install the most recent version.
+If any other output is shown return to [Installing Docker](/install-guides/docker/) and install the most recent version.
 
 ### Note for Docker Engine
 

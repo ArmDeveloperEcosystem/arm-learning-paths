@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 Development Studio installs with the latest [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) version available at the time of its release. It may be that you need to use a specific compiler version for your project (particularly common if the [Arm Compiler for Embedded FuSa](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded%20FuSa) is needed).
 
-Full download and install instructions are given [here](/install-tools/armclang/).
+Full download and install instructions are given [here](/install-guides/armclang/).
 
 To change the compiler version used for a project, right-click on the project, and select `Properties` (or from the menu, select `Project > Properties`), then `C/C++ Build > Tool Chain Editor`, and select the appropriate compiler version from the `Current toolchain` pulldown. Click `Apply and Close`, and rebuild the project.
 

@@ -27,7 +27,7 @@ Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ```
          
-Note: If you do not see the message above, go to [Installing Docker](/install-tools/docker/) and follow the instructions to complete the installation.
+Note: If you do not see the message above, go to [Installing Docker](/install-guides/docker/) and follow the instructions to complete the installation.
 
 The sections describe how you:
 - Build a Docker image

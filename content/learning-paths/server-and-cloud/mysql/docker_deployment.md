@@ -13,7 +13,7 @@ layout: "learningpathall"
 
 * An [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)
 * [Docker](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu)
-* [Terraform](/install-tools/terraform)
+* [Terraform](/install-guides/terraform)
 
 ## Deploy MySQL via Docker
 Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.

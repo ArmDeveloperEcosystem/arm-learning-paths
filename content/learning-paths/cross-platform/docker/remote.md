@@ -17,7 +17,7 @@ This section explains how to use the `docker context` command to build an image 
 
 Docker should also be installed on a remote Arm machine which can be reached via ssh without password. 
 
-For more information about ssh configuration refer to [SSH](/install-tools/ssh/).
+For more information about ssh configuration refer to [SSH](/install-guides/ssh/).
 
 To learn how to create an Arm virtual machine using a cloud service provider refer to [Get started with Arm-based cloud service csp](/learning-paths/server-and-cloud/csp/).
 

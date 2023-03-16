@@ -28,8 +28,8 @@ It supports more than 9,500 devices and is easy to learn and use.
 ## Prerequisites
 
 - Install an appropriate compiler toolchain.
-    * [Install Arm Compiler for Embedded toolchain](/install-tools/armclang/)
-    * [Install Arm GNU toolchain](/install-tools/gcc/#Arm-GNU)
+    * [Install Arm Compiler for Embedded toolchain](/install-guides/armclang/)
+    * [Install Arm GNU toolchain](/install-guides/gcc/#Arm-GNU)
 - Install [CMake](https://cmake.org/) and [Ninja](https://ninja-build.org/).
 - Install [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases).
 - Initialize or update the catalog of public CMSIS-Pack versions (using [cpackget](https://github.com/Open-CMSIS-Pack/cpackget)). 

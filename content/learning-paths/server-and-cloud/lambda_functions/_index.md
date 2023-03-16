@@ -9,7 +9,7 @@ learning_objectives:
     - Deploy Lambda functions on Graviton processors using Terraform
 
 prerequisites:
-    - A computer with [Terraform](/install-tools/terraform/) and the [AWS CLI](/install-tools/aws-cli/) installed. 
+    - A computer with [Terraform](/install-guides/terraform/) and the [AWS CLI](/install-guides/aws-cli/) installed. 
     
 author_primary: Jason Andrews
 

@@ -15,17 +15,17 @@ These instructions assume an Ubuntu Linux host machine, or use of [Arm Virtual H
 
 ## Corstone-300 FVP {#fvp}
 
-The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-tools/ecosystem_fvp/).
+The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-guides/ecosystem_fvp/).
 
-Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-tools/avh#corstone).
+Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-guides/avh#corstone).
 
 ## Install appropriate compiler
 
 The examples can be built with [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) or [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain). Both toolchains are installed within Arm Virtual Hardware.
 
 To install locally see:
-- [Arm Compiler for Embedded](/install-tools/armclang/) or
-- [Arm GNU Toolchain](/install-tools/gcc/#Arm-GNU)
+- [Arm Compiler for Embedded](/install-guides/armclang/) or
+- [Arm GNU Toolchain](/install-guides/gcc/#Arm-GNU)
 
 ## Prerequisites
 

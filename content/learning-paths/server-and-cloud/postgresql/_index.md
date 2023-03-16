@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - A machine with [Terraform](/install-tools/terraform/), [AWS CLI](/install-tools/aws-cli), and [Ansible](/install-tools/ansible/) installed
+    - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli), and [Ansible](/install-guides/ansible/) installed
 
 author_primary: Jason Andrews
 ### Tags

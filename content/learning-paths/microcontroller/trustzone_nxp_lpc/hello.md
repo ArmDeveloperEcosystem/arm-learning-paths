@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## Prerequisites
 
-A Windows development computer with the Keil MDK [installed](/install-tools/mdk).
+A Windows development computer with the Keil MDK [installed](/install-guides/mdk).
 
-Arm Compiler for Embedded [installed](/install-tools/armclang).
+Arm Compiler for Embedded [installed](/install-guides/armclang).
 
 A NXP LPCXpresso55S69 board
 
