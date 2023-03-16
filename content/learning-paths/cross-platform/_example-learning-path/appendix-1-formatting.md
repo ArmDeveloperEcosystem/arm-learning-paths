@@ -181,7 +181,7 @@ echo 'hello world'
 &nbsp;  
 
 {{< tabpane code=true >}}
-  {{< tab header="Python" language="python" output_lines="2-4,6" line_numbers="true">}}
+  {{< tab header="Python" language="python" output_lines="2-4,6">}}
 print('hello world')*3
 hello world
 hello world
@@ -199,10 +199,10 @@ hello world
 
 
 {{< tabpane code=true >}}
-  {{< tab header="Ubuntu 22.04" >}}
+  {{< tab header="Ubuntu 22.04"  line_numbers="true">}}
 sudo apt-get install jq minicom make cmake gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
   {{< /tab >}}
-  {{< tab header="Ubuntu 20.04" >}}
+  {{< tab header="Ubuntu 20.04"  line_numbers="true">}}
 sudo apt-get install jq minicom make gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
 sudo snap install cmake --classic
   {{< /tab >}}
