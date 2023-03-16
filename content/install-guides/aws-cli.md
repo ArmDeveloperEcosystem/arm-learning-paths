@@ -74,3 +74,5 @@ sudo apt install awscli -y
 ```
 
 Review [AWS CLI v2 is now generally available](https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/) to review the new features in version 2. 
+
+You are ready to use the AWS CLI.

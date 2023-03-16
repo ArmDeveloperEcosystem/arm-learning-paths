@@ -1,18 +1,27 @@
 ---
+### Title the install tools article with the name of the tool to be installed
+### Include vendor name where appropriate
 title: Docker for Windows on Arm
-minutes_to_complete: 30
-official_docs: 
-author_primary: Jason Andrews
-weight: 4        
 
-### FIXED, DO NOT MODIFY
+### Optional additional search terms (one per line) to assist in finding the article
+additional_search_terms:
+- containers
+- virtual machines
+
+### Estimated completion time in minutes (please use integer multiple of 5)
+minutes_to_complete: 30
+
+### Link to official documentation
+official_docs: https://docs.docker.com/engine/
+
+weight: 4                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Install Docker on Windows on Arm {#docker-woa}
+## Install Docker for Windows on Arm {#docker-woa}
 
 Docker can be run on Windows on Arm machines using the Windows Subsystem for Linux 2 (WSL2).
 
@@ -45,7 +54,7 @@ It can be started manually:
 sudo /etc/init.d/docker start
 ```
 
-It can also be started automatically using by editing `1/etc/wsl2.conf`.
+It can also be started automatically using by editing `/etc/wsl2.conf`
 
 Add the info below to the file:
 ```console
@@ -85,8 +94,16 @@ For more examples and ideas, visit:
 
 ```
 
-### More information
+Use the `uname` command to identify the architecture:
 
-There are numerous Linux distribution options from the Microsoft Store including [Ubuntu on Windows](https://apps.microsoft.com/store/detail/ubuntu-on-windows/9NBLGGH4MSV6?hl=en-us&gl=us).
+```console
+uname -m
+```
 
-For more information about [installing WSL 2](https://docs.microsoft.com/en-us/windows/wsl/install)
+The output is `aarch64` (Arm 64-bit).
+
+Docker Engine is now ready to use for Windows on Arm. You can explore [Docker related Learning Paths](/tag/docker/) or learn more about [WSL for Windows on Arm](/learning-paths/desktop-and-laptop/wsl2/).
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+

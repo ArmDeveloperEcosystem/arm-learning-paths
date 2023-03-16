@@ -1,11 +1,20 @@
 ---
+### Title the install tools article with the name of the tool to be installed
+### Include vendor name where appropriate
 title: Docker Engine
-minutes_to_complete: 30
-official_docs: https://docs.docker.com/engine/
-author_primary: Jason Andrews
-weight: 2       
 
-### FIXED, DO NOT MODIFY
+### Optional additional search terms (one per line) to assist in finding the article
+additional_search_terms:
+- containers
+- virtual machines
+
+### Estimated completion time in minutes (please use integer multiple of 5)
+minutes_to_complete: 30
+
+### Link to official documentation
+official_docs: https://docs.docker.com/engine/
+
+weight: 2                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
@@ -66,7 +75,7 @@ For more examples and ideas, visit:
 
 ```
 
-To identify the architecture of the machine use the uname command:
+Use the `uname` command to identify the architecture:
 
 ```console
 uname -m
@@ -138,6 +147,7 @@ Then stop docker.socket:
 sudo systemctl stop docker.socket
 ```
 
-### More information
+Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
 
-Refer to the [Installation instructions](https://docs.docker.com/engine/install/) for more information about installing Docker Engine on Linux.
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/

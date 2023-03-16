@@ -1,11 +1,20 @@
 ---
+### Title the install tools article with the name of the tool to be installed
+### Include vendor name where appropriate
 title: Docker Desktop
-minutes_to_complete: 30
-official_docs: https://docs.docker.com/desktop/
-author_primary: Jason Andrews
-weight: 3    
 
-### FIXED, DO NOT MODIFY
+### Optional additional search terms (one per line) to assist in finding the article
+additional_search_terms:
+- containers
+- virtual machines
+
+### Estimated completion time in minutes (please use integer multiple of 5)
+minutes_to_complete: 30
+
+### Link to official documentation
+official_docs: https://docs.docker.com/desktop/
+
+weight: 3                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
@@ -57,16 +66,15 @@ For more examples and ideas, visit:
 
 ```
 
-To identify the architecture for macOS use the uname command. 
+Use the `uname` command to identify the architecture:
 
 ```console
 uname -m
 ```
 
-Apple Silicon will be reported as `arm64`.
+Apple Silicon is reported as `arm64`.
+
+Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
 
 Share images, automate workflows, and more with a free Docker ID:
  https://hub.docker.com/
-
-For more examples and ideas, visit:
- https://docs.docker.com/get-started/

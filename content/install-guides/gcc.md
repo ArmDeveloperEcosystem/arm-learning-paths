@@ -5,7 +5,7 @@ layout: installtoolsall
 minutes_to_complete: 15
 multi_install: false
 multitool_install_part: false
-official_docs: null
+official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
 - ubuntu:latest
 - fedora:latest
