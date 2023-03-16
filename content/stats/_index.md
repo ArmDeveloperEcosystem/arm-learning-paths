@@ -8,9 +8,9 @@ title: "Statistics"
 
 # Maintenance reports
 
-## install-tools
+## install-guides
 
-{{< test-report path="install-tools" id="install" >}}
+{{< test-report path="install-guides" id="install" >}}
 
 ## learning-paths
 
