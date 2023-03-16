@@ -136,7 +136,7 @@ Inspect the disassembled contents of functions `main` and `func1` in `main_nopac
 make dump_none
 ```
 You will see the following output:
-```console
+```output
 Dump of assembler code for function main:
    0x0000000000400718 <+0>:     stp     x29, x30, [sp, #-32]!
    0x000000000040071c <+4>:     mov     x29, sp
@@ -176,7 +176,7 @@ Now let us inspect the disassembled contents of the same functions in `main_pac`
 make dump_pac
 ```
 You will see the following output
-```console
+```output
 Dump of assembler code for function main:
    0x0000000000400720 <+0>:     paciasp
    0x0000000000400724 <+4>:     stp     x29, x30, [sp, #-32]!
