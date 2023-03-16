@@ -22,9 +22,9 @@ This is the source code for the Lambda function.
 
 ```Python
 def lambda_handler(event, context):
-  message = 'Hello {}{}!'.format(event['first_name'], event['last_name'])
-  return {
-    'message' : message
+    message = 'Hello {}{}!'.format(event['first_name'], event['last_name'])
+    return {
+      'message' : message
   }
 ```
 

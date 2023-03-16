@@ -1,5 +1,6 @@
 
 {{/* Incoming Variables:
+        input_from          Str:  "normal" or "tabpane"
         code                Str:  echo('Hello world')....
         language            Str:  python
         line_numbers        Bool: true or false
@@ -49,12 +50,13 @@
                 {{- $inner := split . "\n" -}}
                 {{- $count := 0 }}
                 {{- range $inner -}}
+                    {{if eq $.input_from "normal"}} {{- $count = add $count 1 -}} {{end}}
                     {{- if in $lines_to_mark_output $count -}}
                         __output__{{- . -}}&#10;
                     {{- else -}}
                         {{- . -}}&#10;
                     {{- end -}}
-                    {{- $count = add $count 1 -}}
+                    {{if eq $.input_from "tabpane"}} {{- $count = add $count 1 -}} {{end}}
                 {{- end -}}
             {{- end -}}
         {{/* Functionally the same as above on linux, but this makes it easier for Windows reading of non-output code blocks */}}
