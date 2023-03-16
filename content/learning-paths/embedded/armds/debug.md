@@ -26,7 +26,7 @@ If you do not have access to Arm Fast Models, you can still learn how to connect
 A number of ready made example systems are provided with Arm Fast Models, including all of the Fixed Virtual Platform (FVP) examples.
 
 We shall use the supplied `FVP_MPS2_Cortex-M3` Fast Models example, which is installed in the
-```
+```console
 FastModelsPortfolio_<version>\examples\LISA\FVP_MPS2\Build_Cortex-M3
 ```
 directory of your Fast Models installation.
