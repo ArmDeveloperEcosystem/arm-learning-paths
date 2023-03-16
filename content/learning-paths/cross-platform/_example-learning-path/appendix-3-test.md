@@ -225,7 +225,7 @@ If the Learning Path contains sub-articles, the framework will run their instruc
 Specify the `.md` file directly for single file tool install articles.
 
 ```bash
-./tools/maintenance.py -i content/install-tools/mytool.md
+./tools/maintenance.py -i content/install-guides/mytool.md
 ```
 
 ## Result summary

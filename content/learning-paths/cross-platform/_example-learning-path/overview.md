@@ -20,7 +20,7 @@ Ways of learning include:
 
 * [Videos](https://www.youtube.com/c/armsoftwaredevelopers) provide talks and demos of Arm tools and other software topics.
 
-* [Learning Paths](/) offer concise tutorials to achieve specific outcomes, and are supported by [install guides](/install-tools/) to quickly learn how to install key Arm development tools.
+* [Learning Paths](/) offer concise tutorials to achieve specific outcomes, and are supported by [install guides](/install-guides/) to quickly learn how to install key Arm development tools.
 
 
 ## What is a Learning Path?

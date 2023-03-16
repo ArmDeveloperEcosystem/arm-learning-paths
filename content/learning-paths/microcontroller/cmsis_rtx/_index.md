@@ -9,7 +9,7 @@ learning_objectives:
     - Learn how to implement a basic RTOS-based application
 
 prerequisites:
-    - Arm [Keil MDK](/install-tools/mdk) or [Arm Development Studio](/install-tools/armds) (MDK recommended)
+    - Arm [Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
 author_primary: Christopher Seidl 

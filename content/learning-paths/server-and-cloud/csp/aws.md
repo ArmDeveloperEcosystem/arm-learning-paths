@@ -101,7 +101,7 @@ will identify the host machine as `aarch64`.
 
 ### hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following, else see [here](/install-tools/gcc):
+Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following, else see [here](/install-guides/gcc):
 ```console
 sudo apt-get update
 sudo apt install -y gcc

@@ -1,20 +1,11 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Arm User-Based License (UBL) Cloud server
-
-### Optional additional search terms (one per line) to assist in finding the article
-additional_search_terms:
-- licensing
-- success-kits
-
-### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
-
-### Link to official documentation
 official_docs: https://developer.arm.com/documentation/107573
+author_primary: Ronan Synnott
+weight: 4        
 
-weight: 4                       # Defines page ordering. Must be 1 for first (or only) page.
+### FIXED, DO NOT MODIFY
 tool_install: false             # Set to true to be listed in main selection page, else false
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false

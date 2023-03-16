@@ -122,7 +122,7 @@ sudo systemctl restart vncserver@1.service
 
 The default port for the first instance of VNC is `5901`. SSH port forwarding is the best solution for accessing the Linux desktop on a cloud machine. This way no additional ports need to be opened in the security group. 
 
-SSH to your remote Linux machine. Refer to [SSH](/install-tools/ssh/) for additional details. 
+SSH to your remote Linux machine. Refer to [SSH](/install-guides/ssh/) for additional details. 
 
 Substitute your private key file and public IP address of the remote machine.
 
@@ -140,4 +140,4 @@ You will be prompted for the password created earlier with `vncpasswd`.
 
 A remote Linux Desktop should appear on your local computer. Make sure to close the VNC client first and then exit the SSH connection. 
 
-![Linux desktop](/install-tools/_images/xfce4.png)
+![Linux desktop](/install-guides/_images/xfce4.png)

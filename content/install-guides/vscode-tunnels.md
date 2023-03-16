@@ -134,7 +134,7 @@ To grant access to the server, please log into https://github.com/login/device a
 ```
 After the code is entered, the remote device is connected to your GitHub account. 
 
-![Device Connect](/install-tools/_images/vsc-device-connect.png)
+![Device Connect](/install-guides/_images/vsc-device-connect.png)
 
 The remote machine is now ready to accept client connections. These can be from a browser or VS Code desktop. 
 
@@ -154,7 +154,7 @@ If you don't remember or can't see the tunnel name, open https://vscode.dev in a
 
 When VS Code opens click on the lower left corner and select "Connect to Tunnel". 
 
-![Remote](/install-tools/_images/vsc-remote.png)
+![Remote](/install-guides/_images/vsc-remote.png)
 
 A list of tunnels attached to your account will be opened. If you are not signed in to GitHub it will require authentication before showing the list of tunnels. The tunnel list also shows if the tunnel is online and ready for a connection.
 
@@ -166,7 +166,7 @@ Connecting to a tunnel from VS Code Desktop requires the [Remote - Tunnels Exten
 
 Just as with the browser connection, click on the lower left corner and select "Connect to Tunnel". 
 
-![Remote](/install-tools/_images/vsc-remote.png)
+![Remote](/install-guides/_images/vsc-remote.png)
 
 A list of tunnels attached to your account will be opened. If you are not signed in to GitHub it will require authentication before showing the list of tunnels. The tunnel list also shows if the tunnel is online and ready for a connection.
 

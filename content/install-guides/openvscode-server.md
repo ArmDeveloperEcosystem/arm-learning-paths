@@ -76,7 +76,7 @@ The server will print a URL to access VS Code in a browser. The URL is localhost
 
 ### Option 1 
 
-Refer to [SSH](/install-tools/ssh/) for more info about SSH. 
+Refer to [SSH](/install-guides/ssh/) for more info about SSH. 
 
 Use the -L option of ssh to Forward port 3000.
 
@@ -102,7 +102,7 @@ With the port open, substitute the public IP address of the instance instead of 
 
 On ChromeOS you can use the Linux configuration settings to automatically do port forwarding. No SSH connection is needed.
 
-![port forwarding](/install-tools/_images/ChromeOSpf.png)
+![port forwarding](/install-guides/_images/ChromeOSpf.png)
 
 ## Other information
 

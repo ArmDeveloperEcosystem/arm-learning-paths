@@ -1,7 +1,5 @@
 ---
 title: PLACEHOLDER TITLE
-minutes_to_complete: PLACEHOLDER MINUTES
-official_docs: PLACEHOLDER LINK
 author_primary: PLACEHOLDER NAME
 
 ### FIXED, DO NOT MODIFY

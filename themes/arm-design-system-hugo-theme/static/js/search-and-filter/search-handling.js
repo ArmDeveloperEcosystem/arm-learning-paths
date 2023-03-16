@@ -114,11 +114,11 @@ function searchHandler_OpenFilter(search_string) {
 
 function searchSubmit_Tools(evt) {
     if (evt.value == null){
-        window.location.href = "/install-tools/?search=";
+        window.location.href = "/install-guides/?search=";
     }
     else {
         const safe_search_string = evt.value.replaceAll(/[^a-z A-Z 0-9]+/g, "");
         const safe_formatted_search_string = safe_search_string.replaceAll(' ','+');
-        window.location.href = "/install-tools/?search="+safe_formatted_search_string;
+        window.location.href = "/install-guides/?search="+safe_formatted_search_string;
     }
 }

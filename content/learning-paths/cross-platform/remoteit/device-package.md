@@ -8,7 +8,7 @@ This section explains how to setup Remote.It when you have access to the target 
 
 ## Install Remote.It device package on a target device and connect using SSH
 
-Use a local console or SSH to access the target device. Refer to [SSH](/install-tools/ssh/) for help installing and configuring SSH.
+Use a local console or SSH to access the target device. Refer to [SSH](/install-guides/ssh/) for help installing and configuring SSH.
 
 Follow the steps below to install the target device package software and connect using SSH.
 

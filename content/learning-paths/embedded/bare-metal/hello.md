@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## Arm tools
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
+It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
-Alternatively you can install [Arm Compiler for Embedded](/install-tools/armclang/) and [Arm Fixed Virtual Platforms (FVP)](/install-tools/fm#fvp) individually.
+Alternatively you can install [Arm Compiler for Embedded](/install-guides/armclang/) and [Arm Fixed Virtual Platforms (FVP)](/install-guides/fm#fvp) individually.
 
 See [Prepare Docker image for Arm embedded development](/learning-paths/cross-platform/docker/) for an example Docker image containing all these tools.
 

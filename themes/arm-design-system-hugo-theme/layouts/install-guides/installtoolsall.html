@@ -48,6 +48,8 @@
             {{end}}
 
             <!-- Markdown metadata -->
+            {{if .Params.multi_install}}
+            {{else}}
             <div class="content-box">
                 <h2>About this install guide</h2>
                 <!-- First row of info-->
@@ -119,6 +121,7 @@
                     </div>
                 </div>            
             </div>
+            {{end}}
 
             
             <!-- Main content display!-->

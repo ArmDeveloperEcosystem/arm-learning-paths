@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - A computer with Docker installed. This can be Windows, macOS, or Linux. Any architecture can be used. 
-    - An Arm server running Linux with Docker installed. For information about installation refer to [Installing Docker](/install-tools/docker/).
+    - An Arm server running Linux with Docker installed. For information about installation refer to [Installing Docker](/install-guides/docker/).
 
 author_primary: Jason Andrews
 

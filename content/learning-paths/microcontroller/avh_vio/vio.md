@@ -11,7 +11,7 @@ Arm Virtual Hardware (AVH) supports [Virtual Interfaces](https://arm-software.gi
 
 ## Before you begin
 
-Launch the Arm Virtual Hardware AMI. For full instructions see [here](/install-tools/avh#corstone).
+Launch the Arm Virtual Hardware AMI. For full instructions see [here](/install-guides/avh#corstone).
 
 The example used here makes use of the [Tkinter](https://docs.python.org/3/library/tkinter.html) Python interface to Tcl/Tk, and can be installed in the AVH terminal with:
 ```console
@@ -34,7 +34,7 @@ You can now run the executable on the AVH FVP by executing the following script:
 ```console
 ./run.sh
 ```
-You can interact with the Virtual LEDs. If they are not displayed you may need to implement a [VNC connection](/install-tools/avh#vnc) to the AVH instance.
+You can interact with the Virtual LEDs. If they are not displayed you may need to implement a [VNC connection](/install-guides/avh#vnc) to the AVH instance.
 
 ## Understand the example
 

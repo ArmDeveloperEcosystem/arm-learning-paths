@@ -64,7 +64,7 @@ export DONT_PROMPT_WSL_INSTALL=1
 
 The third way to run VS Code on WSL is using OpenVSCodeServer.
 
-Refer to the [installation instructions](/install-tools/openvscode-server/) for details. 
+Refer to the [installation instructions](/install-guides/openvscode-server/) for details. 
 
 VS Code can be accessed from a Windows browser using localhost:3000 without any special port forwarding.
 

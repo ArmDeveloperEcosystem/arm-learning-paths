@@ -11,7 +11,7 @@ from pathlib import Path
 from datetime import datetime, timedelta
 
 # List of directories to parse for learning paths
-dname = ["content/install-tools",
+dname = ["content/install-guides",
          "content/learning-paths/cross-platform",
          "content/learning-paths/desktop-and-laptop",
          "content/learning-paths/embedded",
@@ -93,7 +93,7 @@ def init_graph(title):
                     "x": [],
                     "y": [],
                     "type": "bar",
-                    "name": "install-tools",
+                    "name": "install-guides",
                     "xaxis": "x1"
                 },
                 {

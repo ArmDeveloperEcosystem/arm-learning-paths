@@ -31,7 +31,7 @@ FVPs use binary translation technology to deliver fast, functional simulations o
 
 Ecosystem FVPs are available without license control for direct download. They are supported by relevant Open Source Software projects. You can use the Corstone-300 Ecosystem FVP together with [MDK-Community](https://keil.arm.com/mdk-community) to develop software running on the Arm Cortex-M55 without requiring access to hardware.
 
-It is assumed that you have downloaded and installed [Arm Keil MDK](/install-tools/mdk) in the default directory (`C:\Keil_v5`). To get full aceess to the Arm Compiler without code size restrictions, cut a free-of-charge (non-commercial) MDK-Community license.
+It is assumed that you have downloaded and installed [Arm Keil MDK](/install-guides/mdk) in the default directory (`C:\Keil_v5`). To get full aceess to the Arm Compiler without code size restrictions, cut a free-of-charge (non-commercial) MDK-Community license.
 
 ## Corstone-300 Ecosystem FVP
 
@@ -39,7 +39,7 @@ The Corstone-300 model is aligned with the Arm MPS3 development platform. It is 
 
 The Corstone-300 model can be downloaded from [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps):
 
-![Download Corstone-300 Ecosystem FVP](/install-tools/_images/download_ecosys_fvp.png)
+![Download Corstone-300 Ecosystem FVP](/install-guides/_images/download_ecosys_fvp.png)
 
 1. Click the plus sign next to "Corstone-300 Ecosystem FVPs".
 2. Click the "Download Windows" button. The download of a ZIP compressed file starts immediately.

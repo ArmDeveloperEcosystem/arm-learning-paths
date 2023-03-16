@@ -16,9 +16,9 @@ Any computer which has the required tools installed can be used for this section
 You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed. 
 
 Three tools are required on the computer you are using. Follow the links to install the required tools.
-* [Terraform](/install-tools/terraform)
-* [Kubectl](/install-tools/kubectl/)
-* [Google Cloud CLI](/install-tools/gcloud)
+* [Terraform](/install-guides/terraform)
+* [Kubectl](/install-guides/kubectl/)
+* [Google Cloud CLI](/install-guides/gcloud)
 
 ## Create a GKE cluster using Terraform
 
