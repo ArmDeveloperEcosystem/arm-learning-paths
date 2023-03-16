@@ -1,8 +1,5 @@
 <script type="text/javascript">      
     function starRatingGiven(element) {
-        // Send star rating to analytics
-        trackStarRating(element.value);
-
         // Hide Stars div and surface radio buttons
         document.getElementById('feedback-1-stars').hidden = true;
 
@@ -30,11 +27,6 @@
             document.getElementById('choice-select-option-error').classList.add('smooth-open');
             return
         }
-
-        // Send multiple-choice feedback to analytics
-        let feedback = document.querySelector('input[name="feedback-choice"]:checked').value
-
-        trackChoiceFeedback(feedback);
 
         // Hide Radio button feedback
         document.getElementById('feedback-2-choice').hidden = true;
@@ -82,7 +74,7 @@
             <!-- 2) Multiple-choice feedback -->
             <div id="feedback-2-choice" hidden>
                 <p class="u-margin-bottom-0">What is the primary reason for your feedback <span id="specific-stars"></span>?</p>
-                <form action='javascript:choiceFeedbackGiven()'>
+                <form id='feedback-choice-form' action='javascript:choiceFeedbackGiven()'>
 
                     <div id="1-2-3-star-options" class="u-margin-left-1" hidden>
                         <div class="choice ads-radio-style">

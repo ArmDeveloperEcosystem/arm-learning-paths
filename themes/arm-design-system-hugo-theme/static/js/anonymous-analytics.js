@@ -95,11 +95,25 @@ function trackFacetInteraction(){
     document.getElementById('search-box').value().then((value) => { 
         let current_search = value;
 
-        // Send tracking data                
+        // Send tracking data  
+        console.log(formatted_active_filters,current_search);              
         _satellite.track('facet-interaction', {   
             'facet-active-names'   : formatted_active_filters,
             'search-current-query' : current_search
         }); 
+    });
+}
+
+
+
+
+function trackHeaderInteraction(type,name){
+    // type = 'header-mainnav-clicks' or 'header-subnav-clicks' or 'header-social-clicks' or 'header-other-clicks' or 'header-breadcrumb-clicks'
+    // name = like 'Theme change' or 'Discord', etc.
+    _satellite.track('content-interaction', {   
+        'data-track-type'     : type,
+        'data-track-location' : 'global-nav',
+        'data-track-name'     : name
     });
 }
 
@@ -110,10 +124,8 @@ function trackFacetInteraction(){
     // wait for all DOM elements to be loaded first, then can assign event listeners to them.
     document.addEventListener("DOMContentLoaded", function() {  
         let current_path = window.location.pathname;
-
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
         
-
         //
         //  Homepage
         //  ===================
@@ -201,7 +213,7 @@ function trackFacetInteraction(){
                 tag.addEventListener("click", () => {
                     let tag_name = (tag.innerText || tag.textContent).trim();
                     _satellite.track('content-interaction', {   
-                        'data-track-type'     : 'Learning Path tag',
+                        'data-track-type'     : 'page-tag-clicks',
                         'data-track-location' : 'metadata',
                         'data-track-name'     : tag_name
                     });
@@ -213,7 +225,7 @@ function trackFacetInteraction(){
             if (check_answer_btn) {
                 check_answer_btn.addEventListener("click", () => {
                     _satellite.track('content-interaction', {   
-                        'data-track-type'     : 'Learning Path review check answer button',
+                        'data-track-type'     : 'learning-path-review-check-answer-button',
                         'data-track-location' : 'metadata',
                         'data-track-name'     : 'Review - Check Answer button'
                     });
@@ -222,9 +234,19 @@ function trackFacetInteraction(){
 
 
             // 3) Feedback on Next Steps page
-                // This is called from the feedback.html partial to functions at the top of this file.
-                // trackStarRating
+            // trackStarRating
+            let stars = document.querySelectorAll('input[name=rating]');
+            for (let star of stars) {
+                star.addEventListener("click", () => {
+                    trackStarRating(star.value);
+                });
+            }
                 // trackChoiceFeedback
+            let feedback_form = document.getElementById('feedback-choice-form');
+            feedback_form.addEventListener("submit", () => {
+                let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
+                trackChoiceFeedback(feedback);
+            });
 
             // 4a) Navitaion from navbar
             let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  
@@ -277,4 +299,64 @@ function trackFacetInteraction(){
 
 
 
+    });
+
+    
+
+    
+    
+    //
+    //  Header (takes forever to load in client-side JS)
+    //  ===================
+    window.addEventListener('load', () => {
+        console.log('All site loaded.');
+        let globalNav = document.getElementById('global-nav-example-default');
+        let breadcrumbs  = document.getElementById('breadcrumb-element');
+
+
+        // top left header
+        let top_left_logo  = globalNav.shadowRoot.querySelector('.c-navigation-logo');
+        top_left_logo.addEventListener("click", () => {   trackHeaderInteraction('header-mainnav-clicks','hub-logo');        });   
+
+
+        // theme button
+        let theme_btn  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:theme');
+        theme_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','theme-change');        });   
+
+
+        // contribute button
+        let contribute_btn  = document.getElementById('contribute-btn');
+        contribute_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','contribute-on-github');        });   
+
+
+        // subnav buttons
+        let LP_categories  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category1');
+        LP_categories.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','learning-path-categories');        });   
+
+        let install_guides  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category2');
+        install_guides.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','install-guides');        });   
+
+        let about  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category3');
+        about.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','about');        });   
+
+
+        // social links
+        let discord  = globalNav.shadowRoot.querySelector('.fa-discord').parentElement;
+        discord.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','discord');        });   
+    
+        let github  = globalNav.shadowRoot.querySelector('.fa-github').parentElement;
+        github.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','github');        });   
+
+        let twitter  = globalNav.shadowRoot.querySelector('.fa-twitter').parentElement;
+        twitter.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','twitter');        });   
+
+        let youtube  = globalNav.shadowRoot.querySelector('.fa-youtube').parentElement;
+        youtube.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','youtube');        });    
+
+
+        // breadcrumbs
+        for (crumb of breadcrumbs.children) {
+            let crumb_name = crumb.innerText;
+            crumb.addEventListener("click", () => {   trackHeaderInteraction('header-breadcrumb-clicks',crumb_name);        });    
+        }
     });
