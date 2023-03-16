@@ -60,7 +60,7 @@ If you have sudo or root access, install the executable in a common location for
 ```bash { target="ubuntu:latest" }
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
-If you do not have sudo or root permission, add executble permission and add the location to the `$PATH` environment variable.
+If you do not have sudo or root permission, add executable permission and add the location to the `$PATH` environment variable.
 
 ```console
 chmod +x kubectl
@@ -72,3 +72,5 @@ Confirm the executable is available and get the version of the client:
 ```bash { target="ubuntu:latest" }
 kubectl version -o json --client
 ```
+
+You are ready to use the Kubernetes command-line tool, `kubectl`

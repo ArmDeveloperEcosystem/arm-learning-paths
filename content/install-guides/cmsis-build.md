@@ -29,15 +29,21 @@ CMSIS-Build unifies project information, making it easy to share between IDEs an
 
 The instructions below cover how to install, configure, and use CMSIS-Build from the Linux command line. This is useful for developers who prefer Linux and for automated testing driven by scripts on Linux.
 
-## Introduction
-
 CMSIS-Build is developed on [GitHub](https://github.com/Open-CMSIS-Pack/devtools) and is part of the [Open-CMSIS-Pack project](https://www.open-cmsis-pack.org/).
 
 Follow the instructions below to install CMSIS-Build on a Linux machine.
 
-## Prerequisites
+## Before you begin
 
-The instructions are the same for an Arm or x86_64 Linux machine, and Ubuntu or a Debian based Linux distribution is assumed.
+The install instructions are for Ubuntu or Debian Linux, and are the same for the Arm and x86_64 architectures.
+
+Use the `uname` command to identify your architecture:
+
+```console
+uname -m
+```
+
+Output values can be `aarch64` or `x86_64` 
 
 CMSIS-Build has the following prerequisites: 
 - cmake
@@ -47,12 +53,19 @@ CMSIS-Build has the following prerequisites:
 Install the prerequisites.
 
 ```bash
+sudo apt update
 sudo apt install cmake ninja-build -y
 ```
 
-The minimum cmake version is 3.18
+The minimum `cmake` version is 3.18
 
-If the cmake version from the Linux package manager is too old it can be updated to a newer version using snap.
+Print the `cmake` version:
+
+```bash
+cmake --version
+```
+
+If the `cmake` version from the Linux package manager is less than 3.18 it can be upgraded to a newer version using `snap`.
 
 ```bash
 sudo apt remove cmake -y
@@ -63,10 +76,10 @@ sudo snap install cmake --classic
 
 Download the latest install file from GitHub. Downloads are provided in the [Releases area](https://github.com/Open-CMSIS-Pack/devtools/releases)
 
-The current version is 1.3.0. 
+The current version is 1.5.0. 
 
 ```console
-wget https://github.com/Open-CMSIS-Pack/devtools/releases/download/tools%2Fbuildmgr%2F1.3.0/cbuild_install.sh
+wget https://github.com/Open-CMSIS-Pack/devtools/releases/download/tools%2Fbuildmgr%2F1.5.0/cbuild_install.sh
 ```
 
 ## Installation
@@ -93,7 +106,7 @@ The path will be different based on your selections.
 source /home/ubuntu/cbuild/etc/setup
 ```
 
-The command to source the setup file can be added to .bashrc or .profile 
+The command to source the setup file can be added to `.bashrc` or `.profile` 
 
 To change any settings after installation, modify the `etc/setup` file. 
 
@@ -126,10 +139,18 @@ $HOME/ArmCompilerforEmbedded6.19
 EOF
 ```
 
-Run the installer with the input file. Make sure the directory for the CMSIS Packs exists before running the install.
+Make sure the directory for the CMSIS Packs exists before running the install.
+
+Run the installer with the input file:
 
 ```bash
 bash ./cbuild_install.sh < cmsis.input
+```
+
+Source the setup file using the location specified in the `cmsis.input` file:
+
+```bash
+source /home/ubuntu/ctools/etc/setup
 ```
 
 ## Setting up product license {#license}
@@ -153,10 +174,12 @@ cd Blinky_LPCXpresso55S69_RTX
 
 Build it using `cbuild.sh` to confirm CMSIS-Build and the compiler are installed and working.
 
-The necessary CMSIS Packs will be installed and 
-
 ```bash
 cbuild.sh Blinky.cprj  --packs
 ```
 
+The necessary CMSIS Packs will be installed and the project will be compiled. 
+
 If all goes well `Objects/image.axf` will be produced and no errors will occur.
+
+You are ready to use CMSIS-Build for your projects.

@@ -8,12 +8,12 @@ official_docs: https://cloud.google.com/sdk/docs/install-sdk
 test_images:
 - ubuntu:latest
 test_maintenance: false
-title: Google Cloud CLI (gcloud)
+title: Google Cloud CLI 
 tool_install: true
 weight: 1
 ---
 
-The Google Cloud CLI allows you to run commands in your Google Cloud account.
+The Google Cloud CLI, `gcloud`, allows you to run commands in your Google Cloud account.
 
 `gcloud` is available for Windows, macOS, Linux and supports the Arm architecture. 
 
@@ -73,3 +73,4 @@ core 2023.02.13
 gcloud-crc32c 1.0.0
 gsutil 5.20
 ```
+You are ready to use the Google Cloud CLI.

@@ -12,7 +12,7 @@ test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4
 test_maintenance: true
 test_status:
 - passed
-title: Microsoft Azure CLI
+title: Azure CLI
 tool_install: true
 weight: 1
 ---
@@ -65,3 +65,5 @@ The pip install updates $HOME/.profile with the path the `az` executable. Check 
 source $HOME/.profile
 az version
 ```
+
+You are ready to use the Azure CLI.
