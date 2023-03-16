@@ -1,9 +1,9 @@
 ---
-title: "PLACEHOLDER STEP TITLE 2"
+title: PLACEHOLDER STEP TITLE 2
 weight: 3
 
-# FIXED, DO NOT MODIFY
-layout: "learningpathall"
+### FIXED, DO NOT MODIFY
+layout: learningpathall
 ---
 
 ## PLACEHOLDER HEADER OF SECOND STEP

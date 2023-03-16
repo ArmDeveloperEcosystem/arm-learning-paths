@@ -10,9 +10,7 @@ layout: "learningpathall"
 
 ## Add a new Learning Path
 
-To add a new Learning Path, navigate to the appropriate directory under `content/learning-paths` in your fork.
-
-There are 5 categories into which you can contribute content:
+To add a new Learning Path, first decide the appropriate category. There are 5 categories into which you can contribute content:
 * server-and-cloud
 * desktop-and-laptop
 * embedded
@@ -25,21 +23,10 @@ Place your Learning Path in the category closest to the environment where the so
 
 ### Create a new Learning Path
 
-Create a directory for your new Learning Path in the appropriate category. 
-
-For example, to create a new `server-and-cloud` Learning Path:
-
-```
-cd content/learning-paths/server-and-cloud
-mkdir my-new-learning-path
-```
-
-Next, copy the files from the provided Learning Path template to modify with your metadata and content. The command is:
+You should start building your Learning Path from the provided template using a straightforward one-line command. For example, to create a new Learning Path with the directory name `my-new-learning-path` under the `microcontroller` category, run the following command (from the root directory of this project):
 ```bash
-cd my-new-learning-path
-cp -r ../../../../templates-for-content/_learning-path-template/* .
+hugo new --kind learning-path learning-paths/microcontroller/my-new-learning-path
 ```
-
 This will then add the following markdown files in the `my-new-learning-path` directory:
 
 
