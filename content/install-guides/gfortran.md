@@ -23,7 +23,7 @@ weight: 1
 
 GFortran is available on all Linux distributions and can be installed using the package manager.
 
-## Introduction
+## Before you begin
 
 Follow the instructions below to install and use gfortran on an Arm Linux distribution.
 
