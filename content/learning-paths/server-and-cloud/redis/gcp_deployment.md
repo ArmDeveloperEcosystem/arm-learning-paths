@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 You can deploy Redis on Google Cloud using Terraform and Ansible. 
 
-In this topic, you will deploy Redis on a single Google Cloud instance, and in the next topic you will deploy Redis on a Docker container. 
+In this section, you will deploy Redis on a single Google Cloud instance.
 
 If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
 
@@ -128,7 +128,7 @@ terraform init
     
 The output should be similar to:
 
-```console
+```output
 Initializing the backend...
 
 Initializing provider plugins...
@@ -178,7 +178,7 @@ Answer `yes` to the prompt to confirm you want to create GCP resources.
 
 The public IP address will be different, but the output should be similar to:
 
-```console
+```output
 Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -207,7 +207,7 @@ Deployment may take a few minutes.
 
 The output should be similar to:
 
-```console
+```output
 PLAY [all] *****************************************************************************************************************************************************
 
 TASK [Gathering Facts] *****************************************************************************************************************************************
@@ -251,7 +251,7 @@ apt install redis-tools
 redis-cli -h <public-IP-address> -p 6379
 ```
 The output will be:
-```console
+```output
 ubuntu@ip-172-31-38-39:~$ redis-cli -h 34.68.176.131 -p 6379
 34.68.176.131:6379> 
 ```
