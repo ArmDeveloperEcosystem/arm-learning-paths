@@ -17,13 +17,13 @@
         {{if eq .Layout "installtoolsall"}}
             {{/* Install guide standalone pages */}}
             {{ if eq .Parent.Title "Install Guides"}}
-                {{$title  = printf "%s Install Guide" .Title }}
-                {{$desc   = printf "%s installation guide, intended to get you up and running quickly with the most common tool settings." .Title}}
+                {{$title  = printf "%s: Install Guide" .Title }}
+                {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." .Title}}
                 {{$author = .Params.author_primary}}
             {{/* Install guide subpages in multiinstall */}}
             {{else}}
-                {{$title  = printf "%s Install Guide" .Title }}
-                {{$desc   = printf "%s installation guide, intended to get you up and running quickly with the most common tool settings." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
+                {{$title  = printf "%s: Install Guide" .Title }}
+                {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
                 {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
             {{end}}
         {{else}}
@@ -35,8 +35,8 @@
     {{else if $is_content}}
         {{if eq .Layout "installtoolsall"}}
             {{/* Install guide _index.md page */}}
-            {{$title  = printf "%s Install Guide" .Title}}
-            {{$desc   = printf "%s installation guide, intended to get you up and running quickly with the most common tool settings." .Title}}
+            {{$title  = printf "%s: Install Guide" .Title}}
+            {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." .Title}}
             {{$author = .Params.author_primary}}
         {{else}}
             {{/* Learning path _index.md page */}}
