@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about Redis.
+    If you are interested in running other databases on Arm, like MongoDB continue on to the recommended learning path.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/redis/"
+recommended_path: "/learning-paths/server-and-cloud/mongodb/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
 
 
