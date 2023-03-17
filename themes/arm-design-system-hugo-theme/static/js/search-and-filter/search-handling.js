@@ -50,7 +50,16 @@ function applySearchAndFilters(all_path_cards, search_string, page) {
 }
 
 
+function sanitizeInput(potentially_unsafe_str) {
+    // Sanitize the input by only allowing the following characters through, replacing all others with nothing:
+        // a-z
+        // A-Z
+        // 0-9 digits
+        // special characters: .()-
+    let sanitized_str = potentially_unsafe_str.replaceAll(/[^a-z A-Z 0-9 .()-]+/g, "");
 
+    return sanitized_str
+}
 
 
 function searchHandler_LearningPaths(search_string) {
@@ -58,7 +67,9 @@ function searchHandler_LearningPaths(search_string) {
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
-
+    
+    // Sanitize the input
+    search_string = sanitizeInput(search_string);
 
     const all_path_cards = document.querySelectorAll('div.search-div');
     // Apply search and filters to current parameters
@@ -78,6 +89,9 @@ function searchHandler_Tools(search_string) {
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
+        
+    // Sanitize the input
+    search_string = sanitizeInput(search_string);
 
     const all_path_cards = document.querySelectorAll('div.search-div');
     // Apply search and filters to current parameters
@@ -96,6 +110,9 @@ function searchHandler_OpenFilter(search_string) {
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
+
+    // Sanitize the input
+    search_string = sanitizeInput(search_string);
 
     const all_filter_boxes = document.querySelectorAll('div.openfilter-search-div'); 
 
@@ -117,7 +134,7 @@ function searchSubmit_Tools(evt) {
         window.location.href = "/install-guides/?search=";
     }
     else {
-        const safe_search_string = evt.value.replaceAll(/[^a-z A-Z 0-9]+/g, "");
+        const safe_search_string = sanitizeInput(evt.value);
         const safe_formatted_search_string = safe_search_string.replaceAll(' ','+');
         window.location.href = "/install-guides/?search="+safe_formatted_search_string;
     }
