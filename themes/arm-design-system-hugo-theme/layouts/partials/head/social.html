@@ -15,10 +15,17 @@
     {{/* Specific values for content */}}
     {{if and ($is_content) ($is_subpage)}}
         {{if eq .Layout "installtoolsall"}}
-            {{/* Install guide subpages */}}
-            {{$title  = printf "%s Install Guide" .Title}}
-            {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
-            {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+            {{/* Install guide standalone pages */}}
+            {{ if eq .Parent.Title "Install Guides"}}
+                {{$title  = printf "%s Install Guide" .Title }}
+                {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." .Title}}
+                {{$author = .Params.author_primary}}
+            {{/* Install guide subpages in multiinstall */}}
+            {{else}}
+                {{$title  = printf "%s Install Guide" .Title }}
+                {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
+                {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+            {{end}}
         {{else}}
             {{/* Learning path subpages */}}
             {{$title  = printf "%s: %s" ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title .Title}}
@@ -38,7 +45,6 @@
             {{$author = .Params.author_primary}}
         {{end}}
     {{end}}
-
 
 
 
@@ -66,3 +72,5 @@
 {{/* Author / Creator */}}
 <meta name="author" content="{{$author}}">
 <meta name="twitter:creator" content="{{.Site.Params.twitter_handle}}">
+
+
