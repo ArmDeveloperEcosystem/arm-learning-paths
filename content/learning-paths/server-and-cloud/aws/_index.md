@@ -1,9 +1,7 @@
 ---
-title: Deploying Arm Instances on AWS
+title: Deploy Arm Instances on AWS
 
-description: Introduction to AWS EC2 deployment of Graviton processors
-
-minutes_to_complete: 60   
+minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for software developers new to AWS EC2 and AWS Graviton processors.
 
@@ -12,8 +10,8 @@ learning_objectives:
     - Automate AWS EC2 instance creation using Terraform
 
 prerequisites:
-    - An Amazon Web Services (AWS) account
-    - A computer with Terraform installed
+    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
+    - A computer with [Terraform](/install-guides/terraform) installed
 
 author_primary: Jason Andrews
 
