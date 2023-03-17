@@ -10,7 +10,9 @@ layout: "learningpathall"
 
 ## Deploy Arm instances on AWS and provide access via Jump Server
 
-## Prerequisites
+## Before you begin
+Make sure you have the following setup on your machine:
+
 * An AWS account
 * An installation of [AWS CLI](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-install.html)
 * An installation of [Terraform](https://www.terraform.io/cli/install/apt)
@@ -19,9 +21,10 @@ layout: "learningpathall"
 A Jump Server (also known as bastion host) is an intermediary device responsible for funnelling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
 ## Deploying Arm instances on AWS and providing access via Jump Server
-For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 7 files: ec2.tf, outputs.tf, provider.tf, security_groups.tf, ssh_key_gen.tf, variables.tf and VPC_subnet_IG_RT.tf
+For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 7 files: `ec2.tf`, `outputs.tf`, `provider.tf`, `security_groups.tf`, `ssh_key_gen.tf`, `variables.tf` and `VPC_subnet_IG_RT.tf`
 
-**ssh_key_gen.tf** creates a private key (id_rsa) and public key (id_rsa.pub) and saves the it in `~/.ssh/` path. It is necessary to save the key in order to SSH into Bastion Host at a later time.
+`ssh_key_gen.tf` creates a private key (id_rsa) and public key (id_rsa.pub) and saves the it in `~/.ssh/` path. It is necessary to save the key in order to SSH into Bastion Host at a later time.
+
 ```console
 	resource "tls_private_key" task1_p_key  {
 		algorithm = "RSA"
@@ -51,7 +54,8 @@ For deploying Arm instances on AWS and providing access via Jump Server, the Ter
 	}
 ```
 
-**variable.tf** configures the region, ami, instance type, disk size, and IP range.
+`variable.tf` configures the region, ami, instance type, disk size, and IP range.
+
 ```console
 	variable "region" {
 		description = "The AWS region to create resources in."
@@ -95,14 +99,15 @@ For deploying Arm instances on AWS and providing access via Jump Server, the Ter
 	}
 ```
 
-**provider.tf** contains a region variable that controls where to deploy the instances.
+`provider.tf` contains a region variable that controls where to deploy the instances.
+
 ```console
 provider "aws" {
         region = "${var.region}"
 }
 ```
 
-**VPC_subnet_IG_RT.tf** writes an infrastructure as code, which automatically creates a VPC with a CIDR block size of /16.
+`VPC_subnet_IG_RT.tf` writes an infrastructure as code, which automatically creates a VPC with a CIDR block size of /16.
 In that VPC, we have to create 2 subnets with a CIDR block size of /24 each:
   1.  Public Subnet (Accessible for Public World)
   2.  Private Subnet (Restricted for Public World)
@@ -204,7 +209,7 @@ Then create a routing table for the Internet gateway so that instance can connec
 	}
 ```
 		
-**security_groups.tf** creates two security groups, one for Bastion Host and one for Private Instance, in order to allow SSH access from this Bastion Host.
+`security_groups.tf` creates two security groups, one for Bastion Host and one for Private Instance, in order to allow SSH access from this Bastion Host.
 ```console
 	resource "aws_security_group" "only_ssh_bastion" {
 		depends_on=[aws_subnet.Public_Subnet]
@@ -259,7 +264,7 @@ Then create a routing table for the Internet gateway so that instance can connec
 	}
 ```
 
-**ec2.tf** creates a Bastion/Jump server and a Private Instance.
+`ec2.tf` creates a Bastion/Jump server and a Private Instance.
 ```console
 	// Bastion/Jump server
 	
@@ -304,7 +309,7 @@ Then create a routing table for the Internet gateway so that instance can connec
 	}
 ```
 
-**outputs.tf** defines the output values for this configuration.
+`outputs.tf` defines the output values for this configuration.
 ```console
 output "EC2-public_ip" {
   value = aws_instance.ec2.public_ip
@@ -326,6 +331,7 @@ Run `terraform init` to initialize the Terraform deployment. This command is res
 ```console
   terraform init
 ```
+The output should be similar to what is shown below:
 
 ![tf init](https://user-images.githubusercontent.com/71631645/203960502-a22b68bb-c1d2-49bf-bb7c-5eee5ac6944c.jpg)
 
@@ -340,6 +346,8 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 ```console
   terraform apply
 ```      
+The output should be similar to what is shown below:
+
    ![tf apply](https://user-images.githubusercontent.com/71631645/203950999-94167eaa-6f22-45f5-9647-ef2d131e9daa.jpg)
 
 ### Verify the Instance and Bastion Host setup
@@ -355,6 +363,8 @@ Connect to a target server via a Jump Host using the `-J` flag from the command 
 ```console
   ssh -J username@jump-host-IP username@target-server-IP
 ```
+The output is shown below:
+
 ![ssh-j](https://user-images.githubusercontent.com/71631645/203960729-38f353d1-8a4e-4704-b039-04608896d114.jpg)
 
 ### Clean up resources

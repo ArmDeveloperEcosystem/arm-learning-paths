@@ -10,7 +10,11 @@ layout: "learningpathall"
 
 ##  Deploy Graviton based EC2 instances with Terraform 
 
-## Prerequisites
+Another way to start an AWS EC2 instance is with Terraform. You can follow the steps here to automate your AWS EC2 instance creation.
+
+## Before you begin
+
+Before you begin, make sure you have the following setup:
 
 * An AWS account
 * An [installation of Terraform](https://www.terraform.io/cli/install/apt)
@@ -71,14 +75,16 @@ resource "<PROVIDER>_<TYPE>" "<NAME>" {
 1. "PROVIDER_TYPE" is AWS 
 2. "NAME" - Select a name
    
-This is how our main.tf will look like for AWS -
-   
+This is how `main.tf` will look like for AWS:
+
+```console   
       provider "aws" {
       region     = "eu-central-1"
       access_key = "XXXXXXXXXXXXXXXXXXXX"
       secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       } 
-      
+```
+
 ### Resource - "aws_instance"
 Next, after defining the provider, we are going to define the resource. Resource is something that we are going to provision/start on AWS. We are going to provision an EC2 instance on AWS.
 But before we provision the EC2 instance, we need to gather a few points -
@@ -102,8 +108,9 @@ copy the AMI ID from the search result.
 
 ### How to find correct instance_type
 We can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
-Since I am looking for a very basic instance_type not production level instance, so I choose **t4g.nano**
-Here is the aws_instance configuration -
+For a very basic instance_type not production level instance, choose **t4g.nano**
+
+Shown below is the aws_instance configuration:
    
 ```console
 resource "aws_instance" "ec2_example" {
@@ -113,10 +120,8 @@ resource "aws_instance" "ec2_example" {
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 ```
-
-#### Here is the complete main.tf file
+ Here is the complete `main.tf` file:
     
-
 ```console
 provider "aws" {
   region     = "us-east-2"
@@ -185,7 +190,9 @@ resource "aws_key_pair" "deployer" {
 }
 ```
 
-NOTE : "Key_name" and "Public_key" should be replaced with actual value.
+{{% notice Note %}}
+"Key_name" and "Public_key" should be replaced with actual value.
+{{% /notice %}}
 
 ## Terraform commands
     
@@ -196,6 +203,7 @@ Run `terraform init` to initialize the Terraform deployment. This command is res
 ```console
 terraform init
 ```
+The output from this command will look similar to:
     
 ![image](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png)
 
@@ -206,8 +214,9 @@ Run `terraform plan` to create an execution plan.
 ```console
 terraform plan
 ```
-
-**NOTE:** The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+{{% notice Note %}}
+The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+{{% /notice %}}
 
 ### Apply a Terraform execution plan
 
