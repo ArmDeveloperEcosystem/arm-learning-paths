@@ -127,7 +127,7 @@ terraform init
     
 The output should be similar to:
 
-```console
+```output
 Initializing the backend...
 
 Initializing provider plugins...
@@ -176,7 +176,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 The output should be similar to:
 
-```console
+```output
 Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 ```
 
@@ -241,7 +241,7 @@ Deployment may take a few minutes.
 
 The output should be similar to:
 
-```console
+```output
 PLAY [Redis Cluster Install] *************************************************************************************************************************************
 
 TASK [Gathering Facts] *******************************************************************************************************************************************
@@ -336,7 +336,7 @@ Replace `redis-deployment[n].public_ip` with their respective values.
 
 The output should be similar to:
 
-```console
+```output
 >>> Performing hash slots allocation on 6 nodes...
 Master[0] -> Slots 0 - 5460
 Master[1] -> Slots 5461 - 10922
@@ -397,7 +397,7 @@ Replace `{redis-deployment[n].public_ip}` with the IP of any of the instances cr
 
 The output should be similar to:
 
-```console
+```output
 cluster_state:ok
 cluster_slots_assigned:16384
 cluster_slots_ok:16384
@@ -424,7 +424,7 @@ redis-cli -c -h {redis-deployment[n].public_ip} -p 6379 cluster nodes
 ```
 The output should be similar to:
 
-```console
+```output
 a871235e3fc81a8feee28527c3ae1435d4f9a7f0 172.31.26.201:6379@16379 master - 0 1678791540000 2 connected 5461-10922
 d8965922e7ec90de5e8218c136f2b744be4cb258 172.31.19.70:6379@16379 master - 0 1678791539596 3 connected 10923-16383
 cadd3b1b0c3975726fbf9859105df8ef60b837d2 172.31.29.216:6379@16379 slave a871235e3fc81a8feee28527c3ae1435d4f9a7f0 0 1678791539000 6 connected
@@ -445,7 +445,7 @@ apt install redis-tools
 redis-cli -c -h <public-IP-address> -p 6379
 ```
 The output will be:
-```console
+```output
 ubuntu@ip-172-31-38-39:~$ redis-cli -c -h ec2-18-117-150-63.us-east-2.compute.amazonaws.com -p 6379
 ec2-18-117-150-63.us-east-2.compute.amazonaws.com:6379>
 ```
