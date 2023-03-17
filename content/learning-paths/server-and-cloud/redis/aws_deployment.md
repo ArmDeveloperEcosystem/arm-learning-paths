@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 You can deploy Redis on AWS Graviton processors using Terraform and Ansible. 
 
-In this topic, you will deploy Redis on a single AWS EC2 instance, and in the next topic you will deploy Redis on a single Azure instance. 
+In this section, you will deploy Redis on a single AWS EC2 instance.
 
 If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
 
@@ -48,9 +48,7 @@ You should now have your AWS access keys and your SSH keys in the current direct
 
 ## Create an AWS EC2 instance using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`.
-
-Scroll down to see the information you need to change in `main.tf`.
+Using a text editor, save the code below in a file called `main.tf`:
 
 ```console
 provider "aws" {
@@ -140,7 +138,7 @@ terraform init
     
 The output should be similar to:
 
-```console
+```output
 Initializing the backend...
 
 Initializing provider plugins...
@@ -189,7 +187,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 The public IP address will be different, but the output should be similar to:
 
-```console
+```output
 Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -245,7 +243,7 @@ Using a text editor, save the code below to in a file called `playbook.yaml`. Th
       shell: redis-cli -p 6379 CONFIG SET requirepass "{password}"
       become_user: ubuntu
 ```
-Replace `{password}` with your value.
+Replace `{password}` in this file with your value.
 
 ### Ansible Commands
 
@@ -261,7 +259,7 @@ Deployment may take a few minutes.
 
 The output should be similar to:
 
-```console
+```output
 PLAY [all] *****************************************************************************************************************************************************
 
 TASK [Gathering Facts] *****************************************************************************************************************************************
@@ -305,11 +303,11 @@ apt install redis-tools
 redis-cli -h <public-IP-address> -p 6379
 ```
 The output will be:
-```console
+```output
 ubuntu@ip-172-31-38-39:~$ redis-cli -h 172.31.30.40 -p 6379
 172.31.30.40:6379> 
 ```
-3. Authorize Redis with the password set by us in playbook.yaml file.
+3. Authorize Redis with the password set by us in `playbook.yaml` file.
 ```console
 172.31.30.40:6379> ping
 (error) NOAUTH Authentication required.
