@@ -8,11 +8,11 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Install Redis on a Docker container 
+##  Install Redis with a Docker container 
 
-You can deploy Redis on a Docker container using Terraform and Ansible. 
+You can deploy Redis with a Docker container using Terraform and Ansible. 
 
-In this topic, you will deploy Redis on a Docker container, and in the next topic you will deploy Redis in a multi-node configuration. 
+In this topic, you will deploy Redis with a Docker container.
 
 ## Before you begin
 
@@ -38,7 +38,7 @@ terraform init
     
 The output should be similar to:
 
-```console
+```output
 Initializing the backend...
 
 Initializing provider plugins...
@@ -87,7 +87,7 @@ Answer `yes` to the prompt to confirm you want to create AWS resources.
 
 The public IP address will be different, but the output should be similar to:
 
-```console
+```output
 Apply complete! Resources: 4 added, 0 changed, 0 destroyed.
 
 Outputs:
@@ -97,7 +97,7 @@ Master_public_IP = [
 ]
 ```
 
-## Install Redis on a Docker container through Ansible
+## Install Redis with a Docker container through Ansible
 Install the Redis and the required dependencies. 
 
 Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. 
@@ -151,7 +151,7 @@ Deployment may take a few minutes.
 
 The output should be similar to:
 
-```console
+```output
 PLAY [all] *****************************************************************************************************************************************************
 
 TASK [Gathering Facts] *****************************************************************************************************************************************
@@ -195,7 +195,7 @@ apt install redis-tools
 redis-cli -h <public-IP-address> -p 6379
 ```
 The output will be:
-```console
+```output
 ubuntu@ip-172-31-38-39:~$ redis-cli -h 172.31.30.40 -p 6379
 172.31.30.40:6379> 
 ```
