@@ -93,7 +93,7 @@ Most developers are likely to want to modify the defaults.
 Use the command below to launch a virtual machine instance with non-default values.
 
 ```console
-multipass launch lts --name m1u --cpus 4 --disk 16G --mem 4G
+multipass launch lts --name m1u --cpus 4 --disk 16G --memory 4G
 ```
 
 Once launched, the command prompt returns and the instance is running in the background.
