@@ -18,12 +18,12 @@
             {{/* Install guide standalone pages */}}
             {{ if eq .Parent.Title "Install Guides"}}
                 {{$title  = printf "%s Install Guide" .Title }}
-                {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." .Title}}
+                {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common tool settings." .Title}}
                 {{$author = .Params.author_primary}}
             {{/* Install guide subpages in multiinstall */}}
             {{else}}
                 {{$title  = printf "%s Install Guide" .Title }}
-                {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
+                {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common tool settings." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
                 {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
             {{end}}
         {{else}}
@@ -36,7 +36,7 @@
         {{if eq .Layout "installtoolsall"}}
             {{/* Install guide _index.md page */}}
             {{$title  = printf "%s Install Guide" .Title}}
-            {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." .Title}}
+            {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common tool settings." .Title}}
             {{$author = .Params.author_primary}}
         {{else}}
             {{/* Learning path _index.md page */}}
