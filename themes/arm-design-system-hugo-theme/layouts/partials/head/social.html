@@ -1,15 +1,66 @@
+{{/* Change displayed metadata if content page or other (homepage/list) */}}
+{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
+
+{{/* If IsPage (meaning a non _index.md content page), access the _index.md's metadata to fill out social media info */}}
+{{$is_subpage := .IsPage }}
+
+
+{{/* Obtain Variables depending on where you are in the site */}}
+
+    {{/* Default values site-wide */}}
+    {{$title:= .Site.Params.title}}
+    {{$desc := .Site.Params.description}}
+    {{$author := ""}}
+
+    {{/* Specific values for content */}}
+    {{if and ($is_content) ($is_subpage)}}
+        {{if eq .Layout "installtoolsall"}}
+            {{/* Install guide subpages */}}
+            {{$title  = printf "%s Install Guide" .Title}}
+            {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
+            {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+        {{else}}
+            {{/* Learning path subpages */}}
+            {{$title  = printf "%s: %s" ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title .Title}}
+            {{$desc   = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.who_is_this_for}}
+            {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+        {{end}}
+    {{else if $is_content}}
+        {{if eq .Layout "installtoolsall"}}
+            {{/* Install guide _index.md page */}}
+            {{$title  = printf "%s Install Guide" .Title}}
+            {{$desc   = printf "%s installation guide intended to get you up and running quickly with the most common settings." .Title}}
+            {{$author = .Params.author_primary}}
+        {{else}}
+            {{/* Learning path _index.md page */}}
+            {{$title  = .Title}}
+            {{$desc   = .Params.who_is_this_for}}
+            {{$author = .Params.author_primary}}
+        {{end}}
+    {{end}}
+
+
+
+
+
+
+
+
+
+
+
 {{/* Basics */}}
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:type" content="{{ if $is_content }}article{{ else }}website{{ end }}">
 <meta name="twitter:card" content="summary_large_image">
 
 {{/* Title */}}
-<meta property="og:title"  content="{{ if .IsPage }}{{.Title}}{{ else }}{{.Site.Params.title}}{{ end }}">
-<meta name="twitter:title" content="{{ if .IsPage }}{{.Title}}{{ else }}{{.Site.Params.title}}{{ end }}">
+<meta property="og:title"  content="{{$title}}">
+<meta name="twitter:title" content="{{$title}}">
 
 {{/* Description */}}
-<meta property="og:description"  content="{{ if .IsPage }}{{.Page.Params.description}}{{ else }}{{.Site.Params.description}}{{ end }}">
-<meta name="twitter:description" content="{{ if .IsPage }}{{.Page.Params.description}}{{ else }}{{.Site.Params.description}}{{ end }}">
+<meta property="og:description"  content="{{$desc}}">
+<meta name="twitter:description" content="{{$desc}}">
 
 {{/* Image (2x1 aspect ratio, less than 5Mb) */}}
 <meta name="twitter:image" content="{{ .Site.Params.social_image | absURL }}">
@@ -19,7 +70,10 @@
 <meta property="og:image:height" content="883">
 
 {{/* Author / Creator */}}
-{{ if .Page.Params.author_primary }}
-<meta name="author" content="{{ .Page.Params.author_primary }}">
+<meta name="author" content="{{$author}}">
 <meta name="twitter:creator" content="{{.Site.Params.twitter_handle}}">
-{{end}}
+
+
+
+<meta name="Zach" content="DESCRIPTION: {{$author}}">
+
