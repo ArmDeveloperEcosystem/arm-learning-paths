@@ -67,7 +67,7 @@ Install the prerequisites using the package manager:
 sudo apt update
 sudo apt install python3-pip python-is-python3 python3-venv -y
   {{< /tab >}}
-  {{< tab header="AL 2023" language="bash">}}
+  {{< tab header="AL2023" language="bash">}}
 sudo dnf install git -y
 sudo dnf install python3.11 -y
   {{< /tab >}}
@@ -82,7 +82,7 @@ sudo add-apt-repository 'deb https://apt.corretto.aws stable main' -y
 sudo apt-get update; sudo apt-get install -y java-17-amazon-corretto-jdk
 sudo apt install maven -y
   {{< /tab >}}
-  {{< tab header="AL 2023" language="bash">}}
+  {{< tab header="AL2023" language="bash">}}
 sudo dnf install java-17-amazon-corretto -y
 sudo dnf install maven -y
   {{< /tab >}}
@@ -107,7 +107,7 @@ To setup to run as a python script, create a Python virtual environment:
   {{< tab header="Ubuntu" language="bash">}}
 python3 -m venv .venv
   {{< /tab >}}
-  {{< tab header="AL 2023" language="bash">}}
+  {{< tab header="AL2023" language="bash">}}
 python3.11 -m venv .venv
   {{< /tab >}}
 {{< /tabpane >}}
@@ -180,7 +180,7 @@ Run Porting Advisor on a Go sample with the executable:
 The recommendations for this application will be printed along with links on where to get more details.
 
 ```output
-4 files scanned.
+2 files scanned.
 detected go code. min version 1.16 is required. version 1.18 or above is recommended. we detected that you have version 1.15. see https://github.com/aws/aws-graviton-getting-started/blob/main/golang.md for more details.
 sample-projects/go-samples/incompatible/go.mod: using dependency library github.com/golang/snappy version 0.0.1. upgrade to at least version 0.0.2
 ```
