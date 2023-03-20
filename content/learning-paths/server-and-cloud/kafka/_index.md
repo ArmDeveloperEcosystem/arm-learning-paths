@@ -1,5 +1,5 @@
 ---
-title: Deploying a Kafka Cluster on Arm
+title: Deploy a Kafka Cluster on Arm
 
 description: Learn how to setup a 3 node Kafka cluster, configure Zookeeper, and test write/read events into the cluster
 
