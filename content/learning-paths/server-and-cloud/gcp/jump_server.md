@@ -17,9 +17,9 @@ A Jump Server (also known as a bastion host) is an intermediary device responsib
 
 To acquire user credentials follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#acquire-user-credentials).
 
-### Generate key-pair(public key, private key) using ssh keygen
+### Generate key pair(public key, private key) using SSH keygen
 
-Before using Terraform, first generate the key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#generate-key-pairpublic-key-private-key-using-ssh-keygen).
+Before using Terraform, first generate the key pair (public key, private key) using `ssh-keygen`. To generate the key pair, follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#generate-key-pairpublic-key-private-key-using-ssh-keygen).
 
 ### Deploying Arm instances on GCP and providing access via Jump Server
 For deploying Arm instances on GCP and providing access via Jump Server, the Terraform configuration is broken into 4 files: **main.tf**, **outputs.tf**, **variables.tf**, **terraform.tfvars**, and a modules directory that contains **vpc-network** and **network-firewall** directories.
@@ -452,7 +452,7 @@ In the Google Cloud console, go to the [VM instances page](https://console.cloud
 ![image](https://user-images.githubusercontent.com/67620689/222353051-483be628-6466-44f5-85b5-d7a7039b7dad.PNG)
 
 ### Use Jump Host to access the Private Instance
-Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells ssh to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.
+Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.
 ```console
   ssh -J username@jump-host-IP username@target-server-IP
 ```

@@ -29,7 +29,7 @@ Choose a Zone for this VM that supports [Tau T2A](https://cloud.google.com/compu
 
 ![image](https://user-images.githubusercontent.com/67620689/202097168-6208b6ae-3627-47b3-a397-7783769e6727.PNG)
 
-Select `GENERAL-PURPOSE` from the Machine family options. Select T2A from the Series and a T2A Machine type from the drop-down menu.
+Select `GENERAL-PURPOSE` from the Machine family options. Select `T2A` from the Series and a `T2A` Machine type from the drop-down menu.
 
 ![image](https://user-images.githubusercontent.com/67620689/203740482-d820ced1-5eeb-4c07-99a3-18a7a7511966.PNG)
 
@@ -50,7 +50,7 @@ To create and start the VM, click Create.
 
 ![image](https://user-images.githubusercontent.com/67620689/202098038-7bfb0b6c-af18-4d5c-92a8-ca90a57bc25b.PNG)
 
-## Generate key-pair(public key, private key) using ssh keygen
+## Generate key-pair(public key, private key) using SSH keygen
 Generate the key pair using the following command:
 
 ```

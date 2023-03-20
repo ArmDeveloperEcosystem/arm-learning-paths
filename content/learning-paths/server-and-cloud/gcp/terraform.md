@@ -27,7 +27,7 @@ Now paste the authentication code as below:
 
 ![image](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
 
-## Generate key-pair(public key, private key) using ssh keygen
+## Generate key-pair(public key, private key) using SSH keygen
 Before using Terraform, we need to first generate the key-pair(public key, private key) using ssh-keygen. Then we are going to associate both public and private keys with Arm VMs.
 
 Generate the key pair using the following command:
@@ -98,7 +98,7 @@ Run `terraform plan` to create an execution plan.
 
 * The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
 * The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
-* The optional -out parameter allows you to specify an output file for the plan. Using the -out parameter ensures that the plan you reviewed is exactly what is applied.
+* The optional `-out` parameter allows you to specify an output file for the plan. Using the `-out` parameter ensures that the plan you reviewed is exactly what is applied.
 
 ### Apply a Terraform execution plan
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
