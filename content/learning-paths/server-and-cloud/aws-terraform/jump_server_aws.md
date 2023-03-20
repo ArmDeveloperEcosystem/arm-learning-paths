@@ -333,7 +333,7 @@ Run `terraform init` to initialize the Terraform deployment. This command is res
 ```
 The output should be similar to what is shown below:
 
-![tf init](https://user-images.githubusercontent.com/71631645/203960502-a22b68bb-c1d2-49bf-bb7c-5eee5ac6944c.jpg)
+![alt-text #center](https://user-images.githubusercontent.com/71631645/203960502-a22b68bb-c1d2-49bf-bb7c-5eee5ac6944c.jpg "Terraform init")
 
 ### Create a Terraform execution plan
 Run `terraform plan` to create an execution plan.
@@ -348,24 +348,24 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 ```      
 The output should be similar to what is shown below:
 
-   ![tf apply](https://user-images.githubusercontent.com/71631645/203950999-94167eaa-6f22-45f5-9647-ef2d131e9daa.jpg)
+   ![alt-text #center](https://user-images.githubusercontent.com/71631645/203950999-94167eaa-6f22-45f5-9647-ef2d131e9daa.jpg "Terraform apply")
 
 ### Verify the Instance and Bastion Host setup
 Let's verify the setup by going to the AWS console.
 Goto **EC2 -> instances** you should see the instances running.
 
-![Jump Server](https://user-images.githubusercontent.com/71631645/203951115-5a8f8ac1-e415-4e82-bb3d-aae65c1f3c65.png)
+![alt-text #center](https://user-images.githubusercontent.com/71631645/203951115-5a8f8ac1-e415-4e82-bb3d-aae65c1f3c65.png "Verify")
 
 You can also see the tag name - terraform and bastion-host, which we mentioned in the Terraform script.
    
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells ssh to make a connection to the jump host and then establish a TCP forwarding to the target server, from there
 ```console
-  ssh -J username@jump-host-IP username@target-server-IP
+ssh -J username@jump-host-IP username@target-server-IP
 ```
 The output is shown below:
 
-![ssh-j](https://user-images.githubusercontent.com/71631645/203960729-38f353d1-8a4e-4704-b039-04608896d114.jpg)
+![alt-text #center](https://user-images.githubusercontent.com/71631645/203960729-38f353d1-8a4e-4704-b039-04608896d114.jpg "ssh -j")
 
 ### Clean up resources
 Run `terraform destroy` to delete all resources created.
@@ -374,4 +374,4 @@ Run `terraform destroy` to delete all resources created.
 ```
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
 
-![tf destroy](https://user-images.githubusercontent.com/71631645/203960620-bc580385-2fd6-477d-93c3-29895eeb5290.jpg)
+![alt-text #center](https://user-images.githubusercontent.com/71631645/203960620-bc580385-2fd6-477d-93c3-29895eeb5290.jpg "Terraform destroy")

@@ -26,15 +26,15 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
   
 ### Go to My Security Credentials
    
-![image](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png "Security credentials")
 
 ### On Your Security Credentials page click on create access keys (access key ID and secret access key)
    
-![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png "Access keys")
    
 ### Copy the Access Key ID and Secret Access Key 
 
-![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png "Copy keys")
 
 ## Generate key-pair(public key, private key) using ssh keygen
 
@@ -52,28 +52,30 @@ By default, the above command will generate the public as well as private key at
 
 Output when a key pair is generated:
       
-![image](https://user-images.githubusercontent.com/87687468/192259698-8219d63c-e28b-41e2-a67c-7f77dff20e9a.png)
-      
-**Note:** Use the public key aws_keys.pub inside the Terraform file to provision/start the instance and private key aws_keys to connect to the instance.
+![alt-text #center](https://user-images.githubusercontent.com/87687468/192259698-8219d63c-e28b-41e2-a67c-7f77dff20e9a.png "Example output")
+
+{{% notice Note %}}
+Use the public key `aws_keys.pub` inside the Terraform file to provision/start the instance and private key `aws_keys` to connect to the instance.
+{{% /notice %}}
+
 
 ## Create your first Terraform infrastructure (main.tf)
 
-Terraform files are created with a  **.tf** extension. Start by creating an empty main.tf file.
+Terraform files are created with a  **.tf** extension. Start by creating a `main.tf` file.
 
 ### Provider
 
-Tell Terraform which cloud provider we are going to connect, AWS for this example. 
+Tell `Terraform` which cloud provider we are going to connect, `AWS` for this example. 
 
-Here is the basic syntax for the provider
-      
+Here is the basic syntax for the provider:
 ```console
 resource "<PROVIDER>_<TYPE>" "<NAME>" {
   [CONFIG …]
 }
 ```
-      
-1. "PROVIDER_TYPE" is AWS 
-2. "NAME" - Select a name
+Set:
+  * `PROVIDER_TYPE` to `aws`
+  * `NAME` optional name
    
 This is how `main.tf` will look like for AWS:
 
@@ -92,19 +94,20 @@ But before we provision the EC2 instance, we need to gather a few points -
 1. **ami** = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
 2. **instance_type** = Also based on your need you have to choose the instance_type and it can be t4g.nano, t4g.micro, t4g.small etc.
 
-### How to find ami(Amazon Machine Image)
-1. To find the correct ami you need to Goto >> **EC2**
+### How to find Amazon Machine Image (AMI)
+
+1. To find the correct AMI you need to go to **EC2** in your AWS Dashboard.
    
-![image](https://user-images.githubusercontent.com/87687468/190343196-051e752a-a61d-4a6b-80d6-25369f41e97c.png)
-   
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190343196-051e752a-a61d-4a6b-80d6-25369f41e97c.png "EC2")
+
 2. In the left Navigation you will find **Images -> AMIs**
    
-![image](https://user-images.githubusercontent.com/87687468/190343512-54fb7a3c-d048-4c23-bb66-0a0ebfb0fa80.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190343512-54fb7a3c-d048-4c23-bb66-0a0ebfb0fa80.png "AMIs")
    
-3. On the search menu click on public images and then apply filters as per your reuirment. e.g. architecture=arm64, platform=ubuntu.
+3. On the search menu click on public images and then apply filters as per your reuirment. e.g. `architecture=arm64`, `platform=ubuntu`.
 copy the AMI ID from the search result.
    
-![image](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png "AMI ID")
 
 ### How to find correct instance_type
 We can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
@@ -120,7 +123,7 @@ resource "aws_instance" "ec2_example" {
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 ```
- Here is the complete `main.tf` file:
+ Here is a complete `main.tf` file example:
     
 ```console
 provider "aws" {
@@ -205,7 +208,7 @@ terraform init
 ```
 The output from this command will look similar to:
     
-![image](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png "Terraform init")
 
 ### Create a Terraform execution plan
 
@@ -226,15 +229,15 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 terraform apply
 ```      
 
-![image](https://user-images.githubusercontent.com/87687468/199248572-9966e305-f502-4444-943d-7eb0ba0ee9ae.png)
-   
+![alt-text #center](https://user-images.githubusercontent.com/87687468/199248572-9966e305-f502-4444-943d-7eb0ba0ee9ae.png "Terraform apply")
+
 ### Verify the EC2 setup
 
 Verify the setup by going back to the AWS console.
 
 Goto **EC2 -> instances** you should see the instance running.   
    
-![image](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png)
+![alt-text #center](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png "Verify")
 
 You can also see the tag name, Terraform EC2, which was used in the Terraform script.
    
@@ -244,7 +247,7 @@ The EC2 instance is running, now connect using the private key.
 
 You can find the connect command from the AWS console.
 
-![image](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png)   
+![alt-text #center](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png "Use private key")
    
 ### Clean up resources
 
@@ -256,5 +259,4 @@ terraform destroy
 
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
    
-![image](https://user-images.githubusercontent.com/87687468/199249004-71ba8ba6-d67e-49ae-bb8d-865b5c16d54f.png)
-
+![alt-text #center](https://user-images.githubusercontent.com/87687468/199249004-71ba8ba6-d67e-49ae-bb8d-865b5c16d54f.png "Terraform destroy")
