@@ -1,8 +1,6 @@
 ---
 title: Deploy a Kafka Cluster on Arm
 
-description: Learn how to setup a 3 node Kafka cluster, configure Zookeeper, and test write/read events into the cluster
-
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers who want to learn how to use Kafka and Zookeeper.
