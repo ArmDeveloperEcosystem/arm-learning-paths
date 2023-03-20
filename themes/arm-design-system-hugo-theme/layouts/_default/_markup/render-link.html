@@ -1,8 +1,11 @@
+{{/* Any link in markdown will be processed through this code. 
+        [.Text](.Destination ".Title")  
+*/}}
 
-
+{{/* If external link (http), open in new tab and append external button to the end. If not, continue in same tab. */}}
 <a  href="{{ .Destination | safeURL }}"
     {{ with .Title}} title="{{ . }}"{{ end }}
     {{ if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end }}>
-{{ .Text | safeHTML }}
-{{ if strings.HasPrefix .Destination "http" }} {{partial "general-formatting/external-link.html"}}  {{end}}
+        {{ .Text | safeHTML }}
+        {{ if strings.HasPrefix .Destination "http" }} {{partial "general-formatting/external-link.html"}}  {{end}}
 </a>

@@ -1,2 +1,8 @@
-<!-- <h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }} <a href="#{{ .Anchor | safeURL }}">¶</a></h{{ .Level }}> -->
-    <h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</h{{ .Level }}>
+{{/* Any heading (# ## ### #### ) in markdown will be processed through this code. 
+    .Level = # = 1     ## = 2 ...
+    .Anchor =     An auto-generated html id unique to the header within the page
+    .Text = Whatever user inputs after the #     
+*/}}
+
+{{/* Give each heading a specific ID, making it possible to share links in the url with 'url#heading'  */}}
+<h{{ .Level }} id="{{ .Anchor | safeURL }}">{{ .Text | safeHTML }}</h{{ .Level }}>

@@ -69,32 +69,9 @@
 
 
 
+        <!-- Bars containing Active Filter tags, how many content are displayed, and sorting info -->
+        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "content_type" "learning paths")}} 
 
-        <!-- Current tag bar -->
-        <div id="current-tag-bar" class="u-margin-left-1 u-margin-right-1">
-            <span>
-                <span id="tag-preface">Filters: </span>
-            </span>
-            <!-- Filled dynamically by javascript & checkboxes; margin applied to tags only-->
-            <span  id="tag-clear-btn" hidden onclick="clearAllFilters()">
-                Clear Filters
-            </span>
-        </div>
-     
-        <!-- Current results bar & Sorting -->
-        <div class="u-margin-top-1/2 u-margin-left-1 u-margin-right-1 u-margin-bottom-1/2">
-            <div id="results-status-bar" style="float: left;">
-                Displaying 
-                <span id="currently-shown-number" class="num-of-paths-text">{{len $paths_to_list }}</span>
-                of 
-                <span id="total-shown-number" class="num-of-paths-text">{{len $paths_to_list }}</span>
-                learning paths.
-            </div>
-
-            <div id="sorting-bar" style="float: right;">
-                <span class="sorting-criteria active">Date</span>
-            </div>
-        </div>
        
      
         <!-- List of learning paths on right -->
@@ -110,60 +87,30 @@
                         1) Assign tags for filtering the learning path cards 
                         2) Keeps track of unique tags to generate the filter column  -->
                     <div class='path-div search-div
-                                {{ with .Params.skillLevels }}
+                            {{ with .Params.skillLevels }}
+                                tag-{{. | urlize}}
+                            {{ end }}
+                            {{ with .Params.subjects }}
+                                tag-{{. | urlize}}
+                            {{ end }}
+                            {{ with .Params.armips }}
+                                {{range .}}
+                                    tag-{{. | urlize}}
+                                {{end}}
+                            {{ end }}
+                            {{ with .Params.operatingsystems }}
+                                {{ range .}}
                                     tag-{{. | urlize}}
                                 {{ end }}
-                                {{ with .Params.subjects }}
-                                    tag-{{. | urlize}}
-                                {{ end }}
-                                {{ with .Params.armips }}
-                                    {{range .}}
-                                        tag-{{. | urlize}}
-                                    {{end}}
-                                {{ end }}
-                                {{ with .Params.operatingsystems }}
-                                    {{ range .}}
-                                        tag-{{. | urlize}}
-                                    {{ end }}
-                                {{ end }}
-                                {{ with .Params.tools_software_languages }}
-                                    {{ range .}}
-                                        tag-{{replace (. | urlize) "+" "plus"}}
-                                    {{end}}
-                                {{ end }}
-                                '>                            
-                            <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card'>
-                                <ads-card-content slot="content">
-                                    <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
-                                        {{ upper .Params.subjects }}
-                                    </p>
-                                    <div class="card-title-div">
-                                        <h6 class="search-title card-title u-margin-top-0 u-margin-bottom-1/2">{{.Title}}</h6>
-                                    </div>
-                                    <div class="card-tag-details-div">
-                                        <p class="card-tag-details">
-                                            <!-- Tags -->
-                                            {{ delimit ( (union .Params.tools_software_languages .Params.operatingsystems) | first 5 ) " - "}}
-                                        </p>
-                                    </div>
-                                    <p class="card-date u-margin-bottom-0" style="margin-top: auto">
-                                        <!--
-                                        <span><i class="fa-light fa-lightbulb"></i></span>
-                                        &nbsp;{{ .Params.skillLevels}}
-                                        &nbsp;&nbsp;
-                                        -->
-                                        <span><i class="fa-light fa-calendar-days"></i></span>
-                                        &nbsp;{{ .Lastmod.UTC.Format "2 Jan 2006" }}
-
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        
-                                        <span><i class="fa-light fa-clock"></i></span>
-                                        &nbsp;<span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">
-                                            {{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}
-                                        </span>
-                                    </p>
-                                </ads-card-content>   
-                            </ads-card>
+                            {{ end }}
+                            {{ with .Params.tools_software_languages }}
+                                {{ range .}}
+                                    tag-{{replace (. | urlize) "+" "plus"}}
+                                {{end}}
+                            {{ end }}
+                            '>                            
+                        <!-- Path card formatting -->
+                        {{ partial "general-formatting/path-ads-card.html" . }}    
                     </div>           
                     {{ end }}
                 </div>
@@ -173,9 +120,8 @@
     </div>
 
 
-</div> <!-- End of left-right divide -->
+</div>
 
-{{ partial "filtering/filter-tag.html" . }}
 {{ partial "ads-cards/ads-card-style.html" . }}
 
 <!-- Include javascript to filter and search -->

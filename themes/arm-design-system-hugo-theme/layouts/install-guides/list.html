@@ -11,14 +11,9 @@
 
 <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search by tool name"></ads-search>
 
-<!-- Current results bar -->
-<div id="results-status-bar" class="u-margin-left-1 u-margin-top-1/2" style="min-height: 30px;">
-    Displaying 
-    <span id="currently-shown-number" class="num-of-paths-text"> {{len $tools_to_list }} </span>
-    of 
-    <span id="total-shown-number" class="num-of-paths-text"> {{len $tools_to_list }} </span>
-    tools.
-</div>
+<!-- Bars containing Active Filter tags, how many content are displayed, and sorting info -->
+{{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $tools_to_list "content_type" "tools")}} 
+
 
 <div class="c-row">
     <div class="c-col">
