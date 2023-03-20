@@ -1,0 +1,32 @@
+
+{{- if ne .content_type "tools" -}}
+    <!-- Current tag bar -->
+    <div id="current-tag-bar">
+        <span>
+            <span id="tag-preface">Filters: </span>
+        </span>
+        <!-- Filled dynamically by javascript & checkboxes; margin applied to tags only-->
+        <span  id="tag-clear-btn" hidden onclick="clearAllFilters()">
+            Clear Filters
+        </span>
+    </div>
+{{- end -}}
+
+<!-- Current results bar & Sorting -->
+<div id="result-sort-div">
+    <div id="results-status-bar">
+        Displaying 
+        <span id="currently-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
+        of 
+        <span id="total-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
+        {{.content_type}}.
+    </div>
+
+    <!-- Sorting display -->
+    {{- if ne .content_type "tools" -}}
+        <div id="sorting-bar">
+            <span class="sorting-criteria active">Date</span>
+        </div>
+    {{- end -}}
+</div>
+
