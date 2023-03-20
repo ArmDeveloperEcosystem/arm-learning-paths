@@ -15,8 +15,7 @@ minutes_to_complete: 30
 operatingsystems:
 - Linux
 prerequisites:
-- An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate
-  cloud service provider.
+- An Arm based instance from an appropriate cloud service provider.
 skilllevels: Introductory
 subjects: Databases
 test_images:

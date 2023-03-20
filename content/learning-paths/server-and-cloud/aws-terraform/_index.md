@@ -1,5 +1,5 @@
 ---
-title: Deploy Arm Instances on AWS
+title: Deploy Arm Instances on AWS using Terraform
 
 minutes_to_complete: 30   
 
