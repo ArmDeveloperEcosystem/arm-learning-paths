@@ -106,7 +106,7 @@ Run the program and see the version.
 ```
 
 The printed version will be something like:
-```console
+```output
 1.2.11
 ```
 
