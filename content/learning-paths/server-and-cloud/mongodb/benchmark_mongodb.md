@@ -18,6 +18,7 @@ To run YCSB, additional software packages are required, [Apache Maven](https://m
 Apache Maven:
 
 ```bash
+   cd ~
    wget http://ftp.heanet.ie/mirrors/www.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
    sudo tar xzf apache-maven-*-bin.tar.gz -C /usr/local
    cd /usr/local
@@ -48,15 +49,12 @@ mkdir ycsb && cd ycsb
 curl -O --location https://github.com/brianfrankcooper/YCSB/releases/download/0.17.0/ycsb-0.17.0.tar.gz
 tar xfvz ycsb-0.17.0.tar.gz
 ```
-
 Now `cd` into project folder and run the executable to print a description of how to use the benchmark.
 
 ```bash { env="M2_HOME=/usr/local/maven; PATH=/usr/local/maven/bin:${PATH}" cwd="./ycsb" ret_code="2" }
 cd ycsb-0.17.0
-bin/ycsb
+./bin/ycsb
 ```
-
-
 ## Load/Insert Test on MongoDB
 
 To test the performance of loading data(INSERT) into default database `ycsb` at `localhost:27017` where MongoDB is running using the asynchronous driver run the following command:
@@ -72,9 +70,6 @@ To load/insert data using the synchronous driver instead run the following comma
 ```console
 ./bin/ycsb load mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
 ```
-
-
-
 ## Update/Read/Read Modify Write Test on MongoDB
 
 To test the performance of executing a workload which includes running UPDATE, Read Modify Write(RMW) and/or READ operations on the data using 10 threads for example, use the following command:
@@ -93,7 +88,7 @@ For more detailed information on all the parameters for running a workload refer
 
 At the end of each test, statistics are printed to the console. Shown below is the output from the end of Load/Insert test
 
-```
+```output
 2022-07-06 15:50:18:917 1 sec: 1000 operations; 542.01 current ops/sec; [CLEANUP: Count=10, Max=12951, Min=0, Avg=1295.2, 90=4, 99=12951, 99.9=12951, 99.99=12951] [INSERT: Count=1000, Max=134655, Min=561, Avg=8506.37, 90=10287, 99=39903, 99.9=134015, 99.99=134655]
 [OVERALL], RunTime(ms), 1849
 [OVERALL], Throughput(ops/sec), 540.8328826392644
@@ -119,10 +114,9 @@ At the end of each test, statistics are printed to the console. Shown below is t
 [INSERT], 95thPercentileLatency(us), 11871
 [INSERT], 99thPercentileLatency(us), 39903
 [INSERT], Return=OK, 1000
-
+...
 ```
-
-## Further Reading
+## Other tests
 
 For instructions on running any other tests or more details on the metrics reported, refer to the [github project for the YCSB](https://github.com/brianfrankcooper/YCSB/wiki/).
 

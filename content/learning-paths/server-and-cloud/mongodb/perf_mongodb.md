@@ -42,24 +42,32 @@ java -jar ./latest-version/mongodb-performance-test.jar
 This will print a description of how to use the java application
 
 
-## Insert Test on MongoDB
+## Run Insert test
 
-To insert 1 million documents on localhost:27017 (default) where MongoDB is running by 10 threads into database `test`, collection `perf` run the following commands:
+We run a test that inserts documents on `localhost:27017` (default).
 
+Use the following options:
+  * `-m` defines the test
+  * `-o` defines the number of iterations
+    * Alternatively, use `-d` to specify a time limit (in seconds)
+  * `-t` defines the number of threads
+  * `-db` defines the database to use
+  * `-c` defines how the data is collected.
+  
+  For example:
 ```bash { cwd="./mongodb-performance-test" }
 export jarfile=./latest-version/mongodb-performance-test.jar
 java -jar $jarfile -m insert -o 1000000 -t 10 -db test -c perf
 ```
+As the test runs, the count will be printed periodically. It will increase until it reaches 1 million and then the test will end.
 
-As the test runs, the count will be printed periodically. It will increase until it reaches 1 million and then the test will end. It takes about two minutes to complete.
+## Run Update-one test
 
-## Update one document Test on MongoDB
-
-To test the performance of updating one document per query using 10, 20 and finally 30 threads for 1 hour each run (3 hours in total) run the following command:
-
+Similarly, to run this test, updating one document per query using 10, 20 and finally 30 threads for 1 hour each run (3 hours in total) run the following command:
 ```console
 java -jar $jarfile -m update_one -d 3600 -t 10 20 30 -db test -c perf
 ```
+For instructions on running any other tests or more details on the metrics reported, refer to the [github project for the performance tool](https://github.com/idealo/mongodb-performance-test#readme).
 
 ## View the results
 
@@ -87,7 +95,3 @@ stats-per-run-INSERT
 ```
 
 The metrics are also output to the `stats-per-second-[mode].csv` which is located in the same folder as the jar file. `[mode]` is  the executed mode(s), i.e. either `INSERT`, `UPDATE_ONE`, `UPDATE_MANY`, `COUNT_ONE`, `COUNT_MANY`, `ITERATE_ONE`, `ITERATE_MANY`, `DELETE_ONE` or `DELETE_MANY`.
-
-## Further Reading
-
-For instructions on running any other tests or more details on the metrics reported, refer to the [github project for the performance tool](https://github.com/idealo/mongodb-performance-test#readme).
