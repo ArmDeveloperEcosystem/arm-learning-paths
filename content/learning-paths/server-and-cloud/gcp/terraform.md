@@ -8,11 +8,6 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
-* An [installation of Terraform](https://www.terraform.io/cli/install/apt)
-* A Google cloud account
-* An [installation of Google Cloud CLI](https://cloud.google.com/sdk/docs/install-sdk#deb)
-
 # Deploy an Arm based VM using Terraform
 
 ## Acquire user credentials

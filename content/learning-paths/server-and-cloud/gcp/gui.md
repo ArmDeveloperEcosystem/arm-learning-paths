@@ -8,10 +8,6 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
-
-* A Google cloud account
-
 ## Deploy Arm based VMs via GUI
 Log in to your Google account and in the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135).
 
