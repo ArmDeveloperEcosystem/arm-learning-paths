@@ -38,6 +38,9 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: scan
+        uses: mxschmitt/action-tmate@v3
+
       - name: check html links
         # Don't fail the build on broken links
         continue-on-error: true
