@@ -12,23 +12,23 @@
 review:
     - questions:
         question: >
-            You can recover the deleted GKE cluster from GCP.
+            You can recover a deleted GKE cluster from GCP.
         answers:
             - "True"
             - "False"
         correct_answer: 2
         explanation: >
-            No, cluster that have been deleted cannot be recovered unless you have created backup of it.
+            Clusters that have been deleted cannot be recovered unless you have created backup of it.
 
     - questions:
         question: >
-            Can we delete a node pools without affecting the whole cluster?
+            Can you delete node pools without affecting the whole cluster?
         answers:
-            - "True"
-            - "False"
+            - "Yes"
+            - "No"
         correct_answer: 1
         explanation: >
-            You can create, upgrade, and delete node pools individually without affecting the whole cluster but you can't configure a single node in the node pool; any configuration change affects all nodes in the node pool.
+            You can create, upgrade, and delete node pools individually without affecting the whole cluster, but you can't configure a single node in the node pool; any configuration change affects all nodes in the node pool.
 
 
 # ================================================================================

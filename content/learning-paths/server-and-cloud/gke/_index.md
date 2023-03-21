@@ -5,10 +5,10 @@ description: Learn how to deploy Arm based GKE using terraform.
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an introductory topic for software developers who want to deploy an Arm based Kubernetes cluster using Google Kubernetes Engine (GKE).
+who_is_this_for: This is an introductory topic for software developers who want to deploy an Arm-based Kubernetes cluster using Google Kubernetes Engine (GKE).
 
 learning_objectives:
-    - Automate the deployment of an Arm GKE cluster using Terraform
+    - Automate the deployment of an Arm-based GKE cluster using Terraform
 
 prerequisites:
     - A Google Cloud account
