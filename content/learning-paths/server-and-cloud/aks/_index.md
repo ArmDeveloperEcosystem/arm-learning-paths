@@ -1,33 +1,36 @@
 ---
-title: Azure Kubernetes Service on Arm
-
-description: Learn how to deploy AKS using WordPress as an example.
+title: Create an Arm-based Kubernetes cluster on Azure Kubernetes Service 
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an advanced topic for software developers looking to deploy Kubernetes workloads in Azure Kubernetes Service (AKS) on Arm.
+who_is_this_for: This is an advanced topic for software developers who want to deploy an Arm-based Kubernetes cluster using Azure Kubernetes Service (AKS).
 
 learning_objectives: 
-    - Deploy Azure Kubernetes Service (AKS)
+    - Automate the deployment of an Arm-based AKS cluster using Terraform
     - Install Wordpress on AKS as an example workload
 
 prerequisites:
     - An Azure account
-    - A computer with Terraform installed
+    - A computer with the following tools installed`:` Terraform, Azure CLI (az), Kubernetes CLI (kubectl)
 
 author_primary: Jason Andrews
 
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
+
 armips:
     - Neoverse
-operatingsystems:
-    - Linux
+
 tools_software_languages:
     - Terraform
     - Kubernetes
+    - kubectl
+    - az
     - Azure
+
+operatingsystems:
+    - Linux
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

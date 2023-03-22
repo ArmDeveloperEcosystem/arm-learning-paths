@@ -8,22 +8,25 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Before you begin
 
-* [An AKS cluster](/learning-paths/server-and-cloud/aks/cluster_deployment/)
+You should have an AKS cluster already running from the previous topic. 
+
+You can use the cluster to deploy an example application, WordPress.
 
 ## Deploy WordPress Example
 
-The Kubernetes yaml files below are a modified version of the [Kubernetes WordPress Tutorial](https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/) in the Kubernetes documentation. 
+### Create Terraform files
 
-We found that running this tutorial as-is does not work. Therefore, we suggest using the modified version.
+The yaml files below are a modified version of the [Kubernetes WordPress Tutorial](https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/) in the Kubernetes documentation. 
 
-We use three yaml files to deploy WordPress: 
-- kustomization.yaml
-- mysql-deployment.yaml
-- wordpress-deployment.yaml
+You will use three yaml files to deploy WordPress on your AKS cluster:
 
-Add the following code in **kustomization.yaml**
+- `kustomization.yaml`
+- `mysql-deployment.yaml`
+- `wordpress-deployment.yaml`
+
+1. Use a text editor to create the file `kustomization.yaml` with the code below: 
 
 ```console
 secretGenerator:
@@ -35,7 +38,7 @@ resources:
   - wordpress-deployment.yaml
 ```
 
-Add the following code in **mysql-deployment.yaml**
+2. Use a text editor to create the file `mysql-deployment.yaml` with the code below: 
 
 ```console
 apiVersion: v1
@@ -115,7 +118,7 @@ spec:
           claimName: mysql-pv-claim
 ```
 
-Add the following code in **wordpress-deployment.yaml** 
+3. Use a text editor to create the file `wordpress-deployment.yaml` with the code below: 
 
 ```console
 apiVersion: v1
@@ -193,44 +196,101 @@ spec:
           claimName: wp-pv-claim
 ```
 
-Apply the configuration.
+### Apply the Terraform files 
+
+Run `kubectl apply` to update the configuration:
 
 ```console
 kubectl apply -k ./
 ```
 
-Check on volume claims.
+The output is similar to:
+
+```output
+secret/mysql-pass-9mftfh2cbc created
+service/wordpress created
+service/wordpress-mysql created
+persistentvolumeclaim/mysql-pv-claim created
+persistentvolumeclaim/wp-pv-claim created
+deployment.apps/wordpress created
+deployment.apps/wordpress-mysql created
+```
+
+### Confirm WordPress is running
+
+1. Check on volume claims to confirm the 20 Gb of storage has been created for MySQL and WordPress:
 
 ```console
 kubectl get pvc
 ```
 
-![volume_screenshot](https://user-images.githubusercontent.com/67620689/200744736-3ff29b97-fa8f-4170-ab64-623f683beb53.PNG)
+The output is similar to:
 
-Confirm the WordPress and MySQL pods are running.
+```output
+NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mysql-pv-claim   Bound    pvc-b5ed7959-9a05-4759-a178-86f7e1393be0   20Gi       RWO            managed-csi    107s
+wp-pv-claim      Bound    pvc-cb03c97b-adab-4e4f-ad91-fcfaa69b1a30   20Gi       RWO            managed-csi    107s
+```
+
+2. Verify the WordPress and MySQL pods are running:
 
 ```console
 kubectl get pods
 ```
 
-![pods_screenshot](https://user-images.githubusercontent.com/67620689/200744412-d6772971-e8bd-4e30-bc89-4f59e06d40a4.PNG)
+The output is similar to:
 
-Now that the pods are running, verify that the persistent volumes have been attached.
+```output
+NAME                               READY   STATUS    RESTARTS   AGE
+wordpress-6c5db6d5d7-zznww         1/1     Running   0          5m11s
+wordpress-mysql-75467487bf-zs5vk   1/1     Running   0          5m11s
+```
+
+3. Verify that the persistent volumes have been attached:
 
 ```console
 kubectl get volumeattachments
 ```
 
-![attach_vol_screenshot](https://user-images.githubusercontent.com/67620689/200745055-af49fcad-0d7b-4100-b3a5-7c64cdd996d5.PNG)
+The output is similar to:
 
-Get the external IP address of the WordPress deployment.
+```output
+NAME                                                                   ATTACHER             PV                                         NODE                               ATTACHED   AGE
+csi-643e8fc7abcd16d5e98eeffcb0cff690c20aa2fb90a55c38889a570295fa07d2   disk.csi.azure.com   pvc-b5ed7959-9a05-4759-a178-86f7e1393be0   aks-demopool-85935132-vmss000001   true       5m52s
+csi-eecaead981dd085e638d388afaa2a325019fcda81bfcda91e867b69d41fc4482   disk.csi.azure.com   pvc-cb03c97b-adab-4e4f-ad91-fcfaa69b1a30   aks-demopool-85935132-vmss000001   true       5m52s
+```
+
+4. Get the external IP address of the WordPress deployment:
 
 ```console
 kubectl get svc
 ```
 
-![ip_screenshot](https://user-images.githubusercontent.com/67620689/200745202-973893d4-2455-47a6-9297-2c30b75b358d.PNG)
+The output is similar to:
 
-Open the external IP a browser. The WordPress welcome screen will be displayed.
+```output
+NAME              TYPE           CLUSTER-IP   EXTERNAL-IP     PORT(S)        AGE
+kubernetes        ClusterIP      10.0.0.1     <none>          443/TCP        21m
+wordpress         LoadBalancer   10.0.69.21   20.10.212.247   80:31829/TCP   7m23s
+wordpress-mysql   ClusterIP      None         <none>          3306/TCP       7m22s
+```
+
+The IP address in the `EXTERNAL-IP` column is the one to use.
+
+5. Open the external IP a browser.
+
+The WordPress welcome screen will be displayed. 
 
 ![homescreen_screenshot](https://user-images.githubusercontent.com/67620689/200745521-1e004de9-f982-4b6d-b7e7-638569da2aec.PNG)
+
+You have successfully installed WordPress on your Arm-based AKS cluster.
+
+### Clean up resources
+
+Run `terraform destroy` to delete all resources created.
+
+```console
+terraform destroy
+```
+
+Answer `yes` at the prompt to destroy all resources. 
