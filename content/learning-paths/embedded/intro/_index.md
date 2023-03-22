@@ -1,5 +1,5 @@
 ---
-title: Start developing on Arm hardware
+title: Start developing for Arm embedded applications
 
 description: The place to start for developers new to Arm embedded systems
 

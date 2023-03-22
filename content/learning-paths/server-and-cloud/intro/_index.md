@@ -1,5 +1,5 @@
 ---
-title: Start developing on Arm hardware
+title: Get started with Arm based servers
 
 minutes_to_complete: 5
 
