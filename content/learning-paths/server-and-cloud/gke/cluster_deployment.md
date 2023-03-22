@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy an Arm based GKE Cluster using Terraform"
+title: "Deploy an Arm-based GKE Cluster using Terraform"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-You can run Google Kubernetes Engine (GKE), a fully managed Kubernetes platform, on the Tau T2A family of virtual machines. Tau T2A is powered by Ampere Altra Arm-based processors and offers compelling price performance.
+You can run Google Kubernetes Engine (GKE), a fully managed Kubernetes platform, on the Tau T2A family of virtual machines. Tau T2A is powered by Ampere Altra Arm-based processors and offers compelling price-performance.
 
 ## Before you begin
 
@@ -17,6 +17,7 @@ Any computer which has the required tools installed can be used for this section
 You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed. 
 
 Three tools are required on the computer you are using. Follow the links to install the required tools.
+
 * [Terraform](/install-guides/terraform)
 * [Kubectl](/install-guides/kubectl/)
 * [Google Cloud CLI](/install-guides/gcloud)
@@ -114,13 +115,13 @@ For advanced usage, you can learn how to create and manage the [service accounts
 
 ### Create Terraform files
 
-To create the cluster on GKE, the Terraform configuration is broken into four files: 
-* providers.tf
-* variables.tf
-* main.tf
-* terraform.tfvars
+To create the cluster on GKE, the Terraform configuration is separated into four files: 
+- `providers.tf`
+- `variables.tf`
+- `main.tf`
+- `terraform.tfvars`
 
-You will create each of the files, the last two need to be modified using your account data. 
+Create each of the files, the last two need to be modified using your account data. 
 
 1. Use a text editor to create the file `providers.tf` with the code below: 
 
@@ -298,11 +299,11 @@ There are various standards for the [Tau T2A machine series](https://cloud.googl
 
 ## Run the Terraform commands
 
+Run the Terraform commands in the directory where you saved the Terraform files.
+
 ### Initialize Terraform
 
-Run `terraform init` to initialize the Terraform deployment. 
-
-This command is responsible for downloading all dependencies which are required for Google Cloud as a provider.
+Run `terraform init` to download the dependencies required for Google Cloud as a provider and set up a working directory.
 
 ```console
 terraform init
@@ -491,6 +492,7 @@ uname -a
 ```
 
 The output confirm the node is an Arm instance:
+
 ```output
 Linux gke-arm-cluster-default-node-pool-82579cfc-rs99 5.15.65+ #1 SMP Sat Jan 21 10:10:29 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
 ```
