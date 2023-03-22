@@ -1,0 +1,17 @@
+
+<!-- Calculate main_category_titles, for term pages only -->
+{{ $main_category_titles := slice }}
+{{ range where $.context.Site.Pages "Params.maintopic" true}}
+    {{ $main_category_titles = $main_category_titles | append .Title }}
+{{end}}
+
+
+<!-- Display filters for specific categories -->
+{{ if eq .page_type "learning-path-category"}}
+    {{ partial "filtering/closed-expansion.html" (dict "context" .context "displayname" "Subjects" "routing" "subjects" "tagnames" .context.Params.subjects_filter)}} 
+    {{ partial "filtering/closed-expansion.html" (dict "context" .context "displayname" "OS" "routing" "operatingsystems" "tagnames" .context.Params.operatingsystems_filter)}} 
+    {{ partial "filtering/closed-expansion.html" (dict "context" .context "displayname" "Skill Level" "routing" "skilllevels" "tagnames" (slice "Introductory" "Advanced"))}}
+    {{ partial "filtering/open-expansion.html"   (dict "context" .context "displayname" "Tools, Software, and Languages"  "tagnames" .context.Params.tools_software_languages_filter)}}
+{{ else if eq .page_type "learning-path-term"}}
+    {{ partial "filtering/closed-expansion.html" (dict "context" .context "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_category_titles)}} 
+{{end}}

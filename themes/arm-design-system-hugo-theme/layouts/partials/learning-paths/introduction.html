@@ -4,50 +4,62 @@
     <h2>About this Learning Path</h2>
     <!-- First row of info-->
     <div class="c-row">
-            <div class="c-col lg:c-col-6 xl:c-col-4">
-                <table style="width: max-content;">
-                    <tr>
-                        <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Skill level:</td>
-                        <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
-                            <span><i class="fa-light fa-lightbulb"></i></span>&nbsp; {{.Params.skillLevels}}
-                        </td>
-                      </tr>
-                    <tr>
-                      <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Reading time:</td>
-                      <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
+        <div class="c-col lg:c-col-6 xl:c-col-4">
+            <table class="width-max-content">
+                <tr>
+                    <td class="td-metadata-key">
+                        Skill level:
+                    </td>
+                    <td class="td-metadata-value">
+                        <span><i class="fa-light fa-lightbulb"></i></span>&nbsp; {{.Params.skillLevels}}
+                    </td>
+                    </tr>
+                <tr>
+                    <td class="td-metadata-key nowrap">
+                        Reading time:
+                    </td>
+                    <td class="td-metadata-value" >
                         <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
-                        
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Last updated:</td>
-                      <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">                    
+                    </td>
+                </tr>
+                <tr>
+                    <td class="td-metadata-key">
+                        Last updated:
+                    </td>
+                    <td class="td-metadata-value">                    
                         <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
-                      </td>
-                    </tr>
-                    {{ if .Params.test_maintenance}}
+                    </td>
+                </tr>
+            {{ if .Params.test_maintenance}}
+                <tr>
+                    <td class="td-metadata-key">
+                        Test status:
+                    </td>
+                    <td class="td-metadata-value">
+                        {{ partial "test-maintenance/test-maintenance" . }}
+                    </td>
+                </tr>
+            {{end}}
+            </table>          
+        </div>
+        <!-- Second column table-->
+        <div class="c-col lg:c-col-6 xl:c-col-8">
+            <!-- Normal view (not mobile) -->
+            <div class="u-hide md:u-display-block u-flex-shrink-0">
+                <table class="width-max-content">
                     <tr>
-                        <td style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Test status:</td>
-                        <td style="height: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">
-                            {{ partial "test-maintenance/test-maintenance" . }}
+                        <td class="td-metadata-key width-max-content" style="white-space: nowrap;">
+                            Arm IP:
+                        </td>
+                        <td class="td-metadata-value">
+                            {{ range .Params.armips }}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none;">{{.}} {{ partial "general-formatting/external-link.html"}}</a><span style="margin-right:16px;"></span>{{end}}    
                         </td>
                     </tr>
-                    {{end}}
-                  </table>          
-            </div>
-            <div class="c-col lg:c-col-6 xl:c-col-8">
-                <!-- Table if desktop, not mobile-->   
-                <div class="u-hide md:u-display-block u-flex-shrink-0">
-                    <table style="width: max-content;">
-                        <tr>
-                            <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top; white-space: nowrap;">Arm IP:</td>
-                            <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 16px;" >
-                                {{ range .Params.armips }}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none;">{{.}} {{ partial "general-formatting/external-link.html"}}</a><span style="margin-right:16px;"></span>{{end}}    
-                            </td>
-                        </tr>
-                        <tr> 
-                        <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Tags:</td>
-                        <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 16px;" >
+                    <tr> 
+                        <td class="td-metadata-key width-max-content">
+                            Tags:
+                        </td>
+                        <td class="td-metadata-value">
                             <span>
                                 <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
@@ -70,55 +82,59 @@
                                 {{ end }}
                             </span>  
                         </td>
-                        </tr>
-                    </table>   
-                </div>
-                <!-- Table mobile-sized windows only -->   
-                <div class="md:u-hide u-display-block">
-                    <table>
-                        <tr>
-                            <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top; white-space: nowrap;">Arm IP:</td>
-                        </tr>
-                        <tr>
-                            <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px;" >
-                                {{ range .Params.armips }}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none;">{{.}} {{ partial "general-formatting/external-link.html"}}</a><div></div>{{end}}    
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Tags:</td>
-                        </tr>
-                        <tr>
-                            <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px;" >
-                                <span>
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
-                                        <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                                        <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.subjects }}
-                                    </ads-tag>
-                                    {{ range .Params.operatingsystems }}
-                                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
-                                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                                            <span class="fa-solid fa-tag"></span>
-                                            {{ . }}
-                                        </ads-tag>
-                                    {{ end }}
-                                    {{ range .Params.tools_software_languages }}
-                                        <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
-                                            <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                                            <span class="fa-solid fa-tag"></span>
-                                            {{ . }}
-                                        </ads-tag>
-                                    {{ end }}
-                                </span>  
-                            </td>
-                        </tr>
-                    </table>   
-                </div>                
+                    </tr>
+                </table>   
             </div>
+            <!-- Table mobile-sized windows only -->   
+            <div class="md:u-hide u-display-block">
+                <table>
+                    <tr>
+                        <td class="td-metadata-key width-max-content">
+                            Arm IP:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-metadata-value margin-l-0">
+                            {{ range .Params.armips }}
+                                <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none;">{{.}} {{ partial "general-formatting/external-link.html"}}</a>
+                            {{end}}    
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-metadata-key width-max-content">
+                            Tags:
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="td-metadata-value margin-l-0">
+                            <span>
+                                <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
+                                    <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                                    <span class="fa-solid fa-tag"></span>
+                                    {{ .Params.subjects }}
+                                </ads-tag>
+                            {{ range .Params.operatingsystems }}
+                                <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
+                                    <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                                    <span class="fa-solid fa-tag"></span>
+                                    {{ . }}
+                                </ads-tag>
+                            {{ end }}
+                            {{ range .Params.tools_software_languages }}
+                                <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
+                                    <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                                    <span class="fa-solid fa-tag"></span>
+                                    {{ . }}
+                                </ads-tag>
+                            {{ end }}
+                            </span>  
+                        </td>
+                    </tr>
+                </table>   
+            </div>                
+        </div>
     </div>            
 </div>
-
-
 
 
 <!-- Markdown content -->

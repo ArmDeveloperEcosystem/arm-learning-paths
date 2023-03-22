@@ -10,7 +10,10 @@ Called from:
     - baseof
 
 Calls to:
-    - partial filtering/closed-expansion.html
+    - partial general-formatting/list-filter-definition.html
+    - partial general-formatting/list-mobile-search-filter.html
+    - partial general-formatting/list-tag-result-sort-bar.html
+    - partial general-formatting/path-ads-card.html                 
 */}}
 
 
@@ -30,74 +33,46 @@ Calls to:
     <!-- Filter bar on left -->
     <div class="c-col filter-column-div u-hide lg:u-display-block u-flex-shrink-0">
         <h3 class="u-margin-top-0">Filter</h3>
-        <!-- Categories, CLOSED SCHEMA -->
-        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_category_titles)}} 
+        {{ partial "general-formatting/list-filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
-        <!-- Search (and filter for mobile)-->
-        <div class="u-flex u-justify-content-between c-col c-col-12 u-flex u-position-relative u-width-100% lg:u-width-auto u-margin-bottom-0">
-            <ads-search id="search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search by name">
-            </ads-search>
-            <div>
-                <ads-button id="filter-button" level="tertiary" class="lg:u-hide u-position-relative" type="button" size="default" onclick="mobileFilterClicked(this)">
-                    <i class="fal fa-filter"></i>
-                </ads-button>
+        <!-- Mobile: Search & Filter -->
+        {{ partial "general-formatting/list-mobile-search-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
 
-                <div id="filters-container" class="u-hide"> <!-- on filter click, remove u-hide class -->
-                    <div id="filters-overlay" class="overlay-styling" tabindex="-1">
-                    </div>
-                    <div class="u-margin-top-1/2 facets-positioning-container">
-                        <div id="facets-background">
-                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_category_titles)}} 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Bars containing Active Filter tags, how many content are displayed, and sorting info -->
-        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "content_type" "learning paths")}} 
-
+        <!-- Bars: Active Filters, # content displayed, sort by. -->
+        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
 
         <!-- List of learning paths on right -->
         <div class="c-row">
             <div class="c-col c-col-12">
+                <hr id="divider-line" class="">
+            </div>
+
+            <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
                     {{ range $paths_to_list.ByLastmod.Reverse }}
-                    <!-- This div does two things, iterating over each tag in the taxonomy:
-                        1) Assign tags for filtering the learning path cards 
-                        2) Keeps track of unique tags to generate the filter column  -->
-
-                    <!-- TAG PAGE FILTERING, need to filter by category
-                        If in cross-platform:
-                            Iterate through '.Params.shared_between'
-                        Else: (in main topic)
-                            Get title of parent page                    
-                    -->
-                    <div class='path-div search-div
-                                {{if eq .Parent.Title "Cross Platform"}}
-                                    {{ with .Params.shared_between }}
-                                        {{ range .}}
-                                            tag-{{. | urlize}}
-                                        {{ end }}
-                                    {{ end }}   
-                                {{else}}
-                                    tag-{{.Parent.Title | urlize}}
-                                {{end}}
-                                '>  
-                        <!-- Path card formatting -->
-                        {{ partial "general-formatting/path-ads-card.html" . }}                    
-                    </div>           
+                        <!-- This div assigns a category tag for each LP for filtering (cross platform need to iterate over the shared_between var) -->
+                        <div class='path-div search-div
+                                    {{if eq .Parent.Title "Cross Platform"}}
+                                        {{ with .Params.shared_between }}
+                                            {{ range .}}
+                                                tag-{{. | urlize}}
+                                            {{ end }}
+                                        {{ end }}   
+                                    {{else}}
+                                        tag-{{.Parent.Title | urlize}}
+                                    {{end}}'>  
+                            <!-- Path card formatting -->
+                            {{ partial "general-formatting/path-ads-card.html" . }}                    
+                        </div>           
                     {{ end }}
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-{{ partial "ads-cards/ads-card-style.html" . }}
 
 
 <!-- Include javascript to filter and search -->
