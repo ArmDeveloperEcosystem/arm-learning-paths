@@ -1,5 +1,5 @@
 ---
-title: Start developing on Arm hardware
+title: Start developing Arm mobile applications
 
 description: The place to start for developers new to Arm in mobile development
 
