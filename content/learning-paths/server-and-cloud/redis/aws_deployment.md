@@ -14,7 +14,7 @@ You can deploy Redis on AWS Graviton processors using Terraform and Ansible.
 
 In this section, you will deploy Redis on a single AWS EC2 instance.
 
-If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -34,7 +34,7 @@ The instructions to create the keys are below.
 
 Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
 
-To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws/terraform#generate-access-keys-access-key-id-and-secret-access-key).
+To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws-terraform/terraform#generate-access-keys-access-key-id-and-secret-access-key).
 
 ### Generate an SSH key-pair
 
