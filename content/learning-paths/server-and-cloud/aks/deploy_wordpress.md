@@ -277,7 +277,7 @@ wordpress-mysql   ClusterIP      None         <none>          3306/TCP       7m2
 
 The IP address in the `EXTERNAL-IP` column is the one to use.
 
-5. Open the external IP a browser.
+5. Open the external IP in a browser.
 
 The WordPress welcome screen will be displayed. 
 
