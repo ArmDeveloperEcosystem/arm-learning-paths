@@ -10,7 +10,12 @@ Called from:
     - baseof
 
 Calls to:
-    - XXX               
+    - partial github/github-links.html
+    - partial navigation/content-navigation-mobile.html
+    - partial general-formatting/external-link.html
+    - partial test-maintenance/test-maintenance.html
+    - partial general-formatting/feedback.html
+    - partial general-formatting/feedback.html
 */}}
 
 {{define "main"}}
@@ -61,8 +66,8 @@ Calls to:
 
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
     <!-- Left pane info -->
-    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0 card-tab-col">
-        <div style="position:sticky; top:5px;">
+    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="left-nav-pane">
             <!-- Title top left -->
             <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ $main_tool_title }}</h6>
 
@@ -77,7 +82,7 @@ Calls to:
 
         <!-- if multi-tool, Mobile only shown navigation - sticky header -->
         {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
-            {{partial "ads-cards/custom-content-navs-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $toolfiles)  }}
+            {{partial "navigation/content-navigation-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $toolfiles)  }}
         {{end}}
 
         <!-- Markdown metadata shown in table for easier formatting  -->
@@ -202,8 +207,6 @@ Calls to:
         {{end}}         
     </div>
 </div>
-
-{{ partial "ads-cards/custom-tabs-style.html" . }}
 
 
 {{end}}

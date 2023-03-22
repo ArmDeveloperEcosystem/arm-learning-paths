@@ -8,7 +8,7 @@ Called from:
     - baseof
 
 Calls to:
-    - partial general-formatting/list-tag-result-sort-bar.html
+    - partial filter-search-sort/active-filter-and-sort-bar.html
 */}}
 
 {{define "main"}}
@@ -25,7 +25,7 @@ Calls to:
 <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search by tool name"></ads-search>
 
 <!-- Bars containing Active Filter tags, how many content are displayed, and sorting info -->
-{{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $tools_to_list "page_type" "tools")}} 
+{{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $tools_to_list "page_type" "tools")}} 
 
 
 <!-- Page wrapping row and column -->
@@ -50,30 +50,6 @@ Calls to:
         </div>
     </div>
 </div>
-
-<!-- Include javascript to filter and search -->
-<script src="/js/search-and-filter/search-logic.js"></script>
-<script src="/js/search-and-filter/search-handling.js"></script>
-
-
-
-<script>
-    (() => {
-        // Assign inputChangeHandler to search box
-        const search_box = document.getElementById('search-box');
-        search_box.inputChangeHandler = searchHandler_Tools;
-
-        // Handle search term from URL
-        let url_str = window.location.search;
-        if (url_str.includes('search=')) {
-            let search_string = parseParamsFromURL(url_str);
-
-            // Call search handler to execute
-            search_box.setAttribute('search-value',search_string);
-            searchHandler_Tools(search_string);
-        }
-    })();
-</script>
 
 
 {{end}}

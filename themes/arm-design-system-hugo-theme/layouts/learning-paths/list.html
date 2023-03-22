@@ -9,11 +9,11 @@ Called from:
     - baseof
 
 Calls to:
-    - partial general-formatting/list-filter-definition.html
-    - partial general-formatting/list-mobile-search-filter.html
-    - partial general-formatting/list-tag-result-sort-bar.html
+    - partial filter-search-sort/filter-definition.html
+    - partial filter-search-sort/mobile-search-and-filter.html
+    - partial filter-search-sort/active-filter-and-sort-bar.html
     - partial general-formatting/path-ads-card.html      
-    - partial learning-paths/list-top-learning-paths.html       (not currently used)
+    - partial general-formatting/list-top-learning-paths.html       (not currently used)
 */}}
 
 
@@ -37,14 +37,14 @@ Calls to:
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-2 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
     <div class="c-col u-hide lg:u-display-block u-flex-shrink-0 filter-column-div">
-        {{ partial "general-formatting/list-filter-definition.html" (dict "context" . "page_type" "learning-path-category")}} 
+        {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-category")}} 
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
 
         <!-- Guided content implementation...hidden for now. -->
-        <!-- {{ partial "learning-paths/list-top-learning-paths.html" . }}  -->
+        <!-- {{ partial "general-formatting/list-top-learning-paths.html" . }}  -->
 
         <!-- Guided content for new starters -->
         <div style="text-align: center; margin-top: -16px; padding-bottom: 16px;">
@@ -52,10 +52,10 @@ Calls to:
         </div>
 
         <!-- Mobile: Search & Filter -->
-        {{ partial "general-formatting/list-mobile-search-filter.html" (dict "context" . "page_type" "learning-path-category")}} 
+        {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-category")}} 
 
         <!-- Bars: Active Filters, # content displayed, sort by. -->
-        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
 
      
         <!-- List of learning paths on right -->
@@ -101,29 +101,5 @@ Calls to:
     </div>
 </div>
 
-
-<!-- Include javascript to filter and search -->
-<script src="/js/search-and-filter/filter-learning-paths.js"></script>
-<script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
-<script src="/js/search-and-filter/search-logic.js"></script>
-<script src="/js/search-and-filter/search-handling.js"></script>
-
-<script>
-    (() => {
-        // Assign inputChangeHandler to search box
-        const search_box = document.getElementById('search-box');
-        search_box.inputChangeHandler = searchHandler_LearningPaths;
-
-        // Handle search term from URL
-        let url_str = window.location.search;
-        if (url_str.includes('search=')) {
-            let search_string = parseParamsFromURL(url_str);
-
-            // Call search handler to execute
-            search_box.setAttribute('search-value',search_string);
-            searchHandler_LearningPaths(search_string);
-        }
-    })();
-</script>
 
 {{end}}

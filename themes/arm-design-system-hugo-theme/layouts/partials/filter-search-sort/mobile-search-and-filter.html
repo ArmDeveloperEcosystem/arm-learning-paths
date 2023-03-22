@@ -11,9 +11,9 @@
             <div class="u-margin-top-1/2 facets-positioning-container">
                 <div id="facets-background">
                     {{ if eq .page_type "learning-path-category"}}
-                        {{ partial "general-formatting/list-filter-definition.html" (dict "context" .context "page_type" "learning-path-category")}} 
+                        {{ partial "filter-search-sort/filter-definition.html" (dict "context" .context "page_type" "learning-path-category")}} 
                     {{ else if eq .page_type "learning-path-term"}}
-                        {{ partial "general-formatting/list-filter-definition.html" (dict "context" .context "page_type" "learning-path-term")}} 
+                        {{ partial "filter-search-sort/filter-definition.html" (dict "context" .context "page_type" "learning-path-term")}} 
                     {{end}}
                 </div>
             </div>

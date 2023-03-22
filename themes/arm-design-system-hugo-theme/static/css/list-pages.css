@@ -154,6 +154,15 @@ ads-checkbox {
     --ads-checkbox-margin-left: 0px;
 }
 
+.open-filter-container {
+    /* set max height & scrolling */
+    max-height: 300px;   
+    overflow:auto;
+    /* align scrollbar with ads component */
+    margin-right: -16px
+}
+
+
 
 
 /* inspiration from here:   https://stackoverflow.com/questions/4253920/how-do-i-change-the-color-of-radio-buttons   */

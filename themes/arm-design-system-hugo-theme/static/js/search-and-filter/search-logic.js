@@ -69,7 +69,13 @@ function updateShownNumber(prepend_id_string) {
     let total_num = document.getElementById(prepend_id_string+'total-shown-number').innerHTML;
     var hidden_paths = document.querySelectorAll('div.'+prepend_id_string+'search-div[hidden]:not([hidden=""])');
 
-    document.getElementById(prepend_id_string+'currently-shown-number').innerHTML = parseInt(total_num) - hidden_paths.length;
+    // adjust string length when open filter (not sure why needed currently)
+    let paths_hidden = hidden_paths.length;
+    if (prepend_id_string == 'openfilter-') {
+        paths_hidden = hidden_paths.length /2;
+    }
+
+    document.getElementById(prepend_id_string+'currently-shown-number').innerHTML = parseInt(total_num) - paths_hidden;
 }
 
 
