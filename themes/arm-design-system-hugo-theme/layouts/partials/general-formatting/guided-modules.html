@@ -1,0 +1,51 @@
+{{/*
+Guided modules, groups of Learning Paths recommended to get started.
+
+Where it is used:
+    - learning path list pages (server-and-cloud is where the example is)
+
+Called from:
+    - learning-paths/list.html
+
+Format to use this in a learning path category _index.md file is as follows:
+    pinned_modules:
+    - module:
+        name: Recommended getting started learning paths
+        paths:
+        - providers
+        - migration
+*/}}
+
+<!-- Top level context for this learning path-->
+{{if isset .Params "pinned_modules"}}
+<div class="c-col c-col-12 u-margin-bottom-2">
+    <!-- <header><h2>{{.Params.subtitle}}</h2></header> -->
+    <div class="c-row">
+        <div class="c-col c-col-12">
+            <div class="u-display-grid u-gap-1 lg:u-grid-columns-1 xl:u-grid-columns-1 xxl:u-grid-columns-1 xxxl:u-grid-columns-2 u-margin-top-1">
+                {{range .Params.pinned_modules}}
+                    {{ with .module }}
+                        <ads-card class='module-card'>
+                            <ads-card-content slot="content">
+                                <h6 class="module-card-title u-text-bold u-margin-top-0 u-margin-bottom-0">{{.name}}</h6>
+                                <p class="module-card-subtitle u-margin-top-0 u-margin-bottom-1/2">{{.subtitle}}</p>
+                                <ul>
+                                    {{ range .paths}}
+                                        {{$this_path_link := printf "%s%s" $.Page.RelPermalink .}}
+                                        {{$this_path_index_link := printf "%s/%s" . "_index.md"}}
+                                            <li class="module-card-title-path-name u-margin-left-1 u-margin-top-0 u-margin-bottom-0">
+                                                <a class="module-card-a" href="{{$this_path_link }}">
+                                                    {{ with $.GetPage $this_path_index_link }}{{ .Title }}{{ end }}
+                                                </a>
+                                            </li>
+                                    {{end}}
+                                </ul>
+                            </ads-card-content>   
+                        </ads-card>  
+                    {{end}}
+                {{end}}
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

@@ -1,3 +1,11 @@
+{{/*
+Defines the Masthead element. Must be loaded dynamically by ADS, so a height placeholder also put in to avoid jumping.
+
+Where it is used:
+    - all, called from baseof
+*/}}
+
+<!-- No masthead on homepage, as that has a special gradient look/feel -->
 {{ if .IsHome }}
 {{else}}
 
@@ -17,17 +25,5 @@
   <div id="only-breadcrumb-masthead" hidden>
       {{partial "header/breadcrumbs.html" .}}
   </div>
-
-
-  <style>
-    #only-breadcrumb-masthead {
-      width: 100%;
-      
-      background-color: black;
-
-      padding-left: 40px; /* u-padding-left-2-1/2 */
-      padding-bottom: 8px; 
-    }
-  </style>
 
 {{end}}
