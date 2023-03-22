@@ -1,5 +1,5 @@
 ---
-title: Acquire an Arm based MCU development board
+title: Start developing for Arm microcontroller applications
 
 description: The place to start for developers new to Arm microcontrollers
 
@@ -9,6 +9,7 @@ who_is_this_for: This is an introductory topic for developers looking for microc
 
 learning_objectives:
     - Find microcontroller hardware to use for software development
+    - Learn about other available resources
 
 prerequisites:
     - None
