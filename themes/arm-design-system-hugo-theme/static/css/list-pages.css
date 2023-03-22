@@ -1,21 +1,25 @@
+/* Search / Status bar for active filters, # displayed, and sorting 
+*******************************************************************/ 
 #result-sort-div {
     margin-top: 4px;
-    margin-left: 8px;
     margin-right: 8px;
     margin-bottom: 4px;
+    margin-left: 8px;
 }
 
 #current-tag-bar {
-    min-height: 30px;
+    min-height: 48px;
+
     margin-top: 4px;
-    margin-left: 8px;
     margin-right: 8px;
+    margin-left: 8px;
 }
 
 #results-status-bar {
     min-height: 30px;
-    margin-top: 4px;
     float: left;    
+
+    margin-top: 4px;
 }
 
 .num-of-paths-text {
@@ -27,13 +31,42 @@
     float: right;
 }
 
-.filter-column-div {
-    /* Ensures left-hand column filter is always at a consistent width (hidden at mobile size) */
-    width: 320px;
-    max-width: 320px;
+#tag-preface {
+    color: #6f777c;
+    display: inline-flex;
+    padding-top: 9px; /* aligning center of tags */
+}
+html[theme="dark"] #tag-preface {
+    color: #a3a8ae;
 }
 
 
+#tag-clear-btn {
+    float: right;
+    padding-top: 7px; /* aligning center of tags */
+    cursor: pointer;
+    color: var(--arm-web-safe-blue);
+}
+html[theme="dark"] #tag-clear-btn {
+    color: var(--arm-light-blue);
+}
+
+#tag-clear-btn:hover { 
+    color: var(--arm-web-safe-orange);
+}
+html[theme="dark"] #tag-clear-btn:hover { 
+    color: var(--arm-web-safe-orange);
+}
+
+.sorting-criteria.active {
+    position: relative;
+    padding-bottom: 2px;
+    border-bottom: 2px solid #333e48;
+}
+
+html[theme="dark"] .sorting-criteria.active {
+    border-bottom: 2.2px solid hsla(0,0%,100%,.9);
+}
 
 .filter-facet {
     --ads-tag-background-color: #fff;
@@ -42,7 +75,7 @@
     --ads-tag-border-color-hover: 1px solid #11809f;
     --ads-tag-color: #5d6c7a;
     --ads-tag-color-hover: #11809f;
-  }
+}
 html[theme="dark"] .filter-facet {
     --ads-tag-background-color: #1F2023;
     --ads-tag-background-color-hover: #1a1a1a;
@@ -50,4 +83,82 @@ html[theme="dark"] .filter-facet {
     --ads-tag-border-color-hover: 1px solid #00c1de;
     --ads-tag-color: #fff;
     --ads-tag-color-hover: #11809f;
-  }
+}
+
+
+#divider-line {
+    border-top: 1px solid var(--ads-search-border-color);
+    border-bottom: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+
+/* Adjust elements when on small screen to fit better */
+@media (max-width: 480px) {
+    #tag-preface {
+        display: none;
+    }
+    #current-tag-bar {
+        min-height: auto;
+    }
+    #results-status-bar {
+        width: 100%;
+        margin-bottom:10px;
+    }
+    #sorting-bar {
+        float: left!important;
+    }
+}
+
+
+/* Filter column
+*******************************************************************/ 
+.filter-column-div {
+    /* Ensures left-hand column filter is always at a consistent width (hidden at mobile size via ads) */
+    width: 320px;
+    max-width: 320px;
+}
+
+
+
+
+
+
+/* Module Card 
+         not currently used, but could be for guided learning
+*******************************************************************/   
+ads-card.module-card {
+    --ads-card-border-radius: 10px;
+    --ads-card-border-width: 2px;
+
+    --ads-card-border-color: var(--arm-light-grey-alt-2);
+    --ads-card-border-color-hover: var(--arm-light-grey-alt-2);
+
+    --ads-card-background-color: var(--arm-light-grey-alt);
+    --ads-card-background-color-hover: var(--arm-light-grey-alt);
+
+}
+html[theme='dark'] ads-card.module-card {
+    --ads-card-border-color: var(--arm-black);
+    --ads-card-border-color-hover: var(--arm-black);
+
+    --ads-card-background-color: var(--arm-color-overlay-dark);
+    --ads-card-background-color-hover: var(--arm-color-overlay-dark);
+}
+
+.module-card-a:hover {
+    text-decoration: none;
+}
+.module-card-a {
+    color: var(--arm-blue);
+}
+.module-card-a:hover {
+    color: var(--arm-web-safe-orange);;
+}
+
+.module-card-subtitle {
+    color: var(--arm-dark-grey);
+    font-size: 0.9rem;
+}
+/***********************************/   

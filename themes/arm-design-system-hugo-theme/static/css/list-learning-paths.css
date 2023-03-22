@@ -1,109 +1,3 @@
-
-
-ads-alert {
-    margin-top: -32px;
-    z-index: 1; /* mandate lower z-index to enable filter button to grey out this alert as well; non essentaial */
-}
-html[theme="dark"]  ads-alert { 
-    /*--ads-alert-background-color: var(--arm-color-overlay-dark);*/
-    --ads-alert-background-color: var(--arm-color-surface);
-}
-html[theme="light"] ads-alert { 
-    /*--ads-alert-background-color: var(--white);*/
-    --ads-alert-background-color: var(--arm-light-grey-alt);
-}
-
-
-
-
-
-
-
-
-#current-tag-bar {
-    min-height: 48px;
-}
-#tag-preface {
-    color: #6f777c;
-    display: inline-flex;
-    padding-top: 9px; /* aligning center of tags */
-}
-
-html[theme="dark"] #tag-preface {
-    color: #a3a8ae;
-}
-
-
-#tag-clear-btn {
-    float: right;
-    padding-top: 7px; /* aligning center of tags */
-    cursor: pointer;
-    color: var(--arm-web-safe-blue);
-}
-
-html[theme="dark"] #tag-clear-btn {
-    color: var(--arm-light-blue);
-}
-
-#tag-clear-btn:hover { color: var(--arm-web-safe-orange);}
-html[theme="dark"] #tag-clear-btn:hover { color: var(--arm-web-safe-orange);}
-
-.sorting-criteria.active {
-    position: relative;
-    padding-bottom: 2px;
-    border-bottom: 2px solid #333e48;
-}
-
-html[theme="dark"] .sorting-criteria.active {
-    border-bottom: 2.2px solid hsla(0,0%,100%,.9);
-}
-
-/* Adjust below-search elements when on small screen to fit better */
-@media (max-width: 480px) {
-    #tag-preface {
-        display: none;
-    }
-    #current-tag-bar {
-        min-height: auto;
-    }
-    #results-status-bar {
-        width: 100%;
-        margin-bottom:10px;
-    }
-    #sorting-bar {
-        float: left!important;
-    }
-}
-
-
-
-
-
-
-
-#divider-line {
-    border-top: 1px solid var(--ads-search-border-color);
-    border-bottom: 0;
-    border-right: 0;
-    border-left: 0;
-}
-
-
-
-
-
-
-
-
-
-
-/*------------------------------------------------------------
-
-        Learning Path / Tool Install Features
-
-------------------------------------------------------------*/
-
-
 /*          Path Cards 
 ***************************************************************/
 ads-card.path-card {
@@ -132,21 +26,21 @@ html[theme='dark'] ads-card.path-card {
     cursor: pointer;
 }
 
-ads-card.path-card:hover  .card-title {
+ads-card.path-card:hover  .learning-path-title {
     transition: color 0.3s ease-in-out;
     color: var(--arm-web-safe-orange);
 }
 
 /* Change hight based on ads-breakpoint */
     /* default to 50px high at SMALLSEST breakpoint */
-ads-card.path-card .card-title-div {
+ads-card.path-card .learning-path-title-div {
     /*min-height: 85px; */
     min-height: 50px;
 }
 
     /* above, make min-height slightly larger*/
 @media (min-width: 768px) { /* md */
-    ads-card.path-card .card-title-div {
+    ads-card.path-card .learning-path-title-div {
         min-height: 70px;
     }
 }
@@ -180,13 +74,16 @@ ads-card.path-card .card-title-div {
         font-size: 0.9rem!important;
     }
 
-    html[theme="light"] .card-title, html[theme="light"] .basics-title {
+    html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
         color: var(--arm-blue);
     }
-    .card-title, .basics-title {
+    .learning-path-title, .basics-title {
         color: var(--arm-light-blue);
         font-weight: bold;
         font-size:1.25rem;
+
+        margin-top: 0px;
+        margin-bottom: 4px;
     }
 
     .basics-title {
@@ -201,6 +98,11 @@ ads-card.path-card .card-title-div {
     }
 
 
+    .install-guide-title {
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-size: 1.25rem!important;
+    }
 
 
 

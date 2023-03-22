@@ -177,6 +177,20 @@ div.answer label {
 
 
 
+/* Tags */
+/***********************************/   
+html[theme='light'] ads-tag {
+    --ads-tag-color: var(--arm-black);
+    --ads-tag-border-color: var(--arm-dark-grey);
+    --ads-tag-background-color: white;
+
+    --ads-tag-color-hover: var(--arm-blue);
+    --ads-tag-border-color-hover: var(--arm-blue);
+    --ads-tag-background-color-hover: white;
+}
+
+
+
 
 /* select every P and H1,2,3,4,5,6 that is the first child of markdown-content-div to have 0 top margin */
 div.markdown-content-div > h1:first-child,

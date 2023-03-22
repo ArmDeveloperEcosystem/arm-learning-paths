@@ -1,10 +1,31 @@
+{{/*
+A list page that shows all Learning Paths pages under the selected category.
+
+Where it is used:
+    - /learning-paths/:main-category/
+    - /learning-paths/microcontrollers/
+
+Called from:
+    - baseof
+
+Calls to:
+    - partial general-formatting/list-filter-definition.html
+    - partial general-formatting/list-mobile-search-filter.html
+    - partial general-formatting/list-tag-result-sort-bar.html
+    - partial learning-paths/list-top-learning-paths.html       (not currently used)
+    - partial general-formatting/path-ads-card.html      
+*/}}
+
+
 {{define "main"}}
 
-<!-- _shared learning path Hugo processing, include those paths as well -->
-{{ $paths_to_list :=   .Pages }}
+<!-- Get all learning path pages in this category -->
+{{ $paths_to_list := .Pages }}
 
-
-<!-- This assumes that the directory name of a learning path is the same as the .Title | urlize. If this IS NOT true, change '.TITLE | urilze' to get the name of the directory-->
+<!-- Add learning paths from cross-platform that are in this category. 
+    This function assumes that the directory name of a learning path is the same as the .Title | urlize. If this IS NOT true, either:
+        A) change '.TITLE | urilze' to get the name of the directory, or 
+        B) change the shared_path links in cross-platform to match. -->
 {{ $section_title := .Title | urlize}}
 {{ range where $.Site.Pages "Params.shared_path" true}}
     {{ if in .Params.shared_between $section_title}}
@@ -12,67 +33,30 @@
     {{end}}
 {{end}}
 
+<!-- Page wrapping row -->
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-2 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
-    <div class="c-col u-hide lg:u-display-block u-flex-shrink-0" style="width: 320px; max-width: 320px;">
-        <!-- Subjects, CLOSED SCHEMA -->
-        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Subject" "tagnames" .Params.subjects_filter)}}  
-        <!-- Operating Systems, CLOSED SCHEMA -->
-        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Operating System" "tagnames" .Params.operatingsystems_filter)}} 
-        <!-- Skill level, CLOSED SCHEMA -->
-        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Skill Level" "tagnames" (slice "Introductory" "Advanced"))}}  
-        <!-- Tools Software Languages -->
-        {{ partial "filtering/open-expansion.html" (dict "context" . "displayname" "Tools, Software, and Languages"  "tagnames" .Params.tools_software_languages_filter)}}
-
+    <div class="c-col u-hide lg:u-display-block u-flex-shrink-0 filter-column-div">
+        {{ partial "general-formatting/list-filter-definition.html" (dict "context" . "page_type" "learning-path-category")}} 
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
 
-        <!-- Dedicated area for top realestate content; hidden for now -->
+        <!-- Guided content implementation...hidden for now. -->
         <!-- {{ partial "learning-paths/list-top-learning-paths.html" . }}  -->
 
-        <!-- <ads-alert animation="down" animationDelay=100></ads-alert> -->
+        <!-- Guided content for new starters -->
         <div style="text-align: center; margin-top: -16px; padding-bottom: 16px;">
             <a href="intro"><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
         </div>
-        <!--
-            <ads-alert id="new-to-category-alert" has-close-button="false">
-                <a href="intro"><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
-            </ads-alert>
-        -->
 
-        <!-- Search (and filter for mobile)-->
-        <div class="u-flex u-justify-content-between c-col c-col-12 u-flex u-position-relative u-width-100% lg:u-width-auto u-margin-bottom-0">
-            <ads-search id="search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search by name"></ads-search>
-            <div>
-                <ads-button id="filter-button" level="tertiary" class="lg:u-hide u-position-relative" type="button" size="default" onclick="mobileFilterClicked(this)">
-                    <i class="fal fa-filter"></i>
-                </ads-button>
+        <!-- Mobile: Search & Filter -->
+        {{ partial "general-formatting/list-mobile-search-filter.html" (dict "context" . "page_type" "learning-path-category")}} 
 
-                <div id="filters-container" class="u-hide"> <!-- on filter click, remove u-hide class -->
-                    <div id="filters-overlay" class="overlay-styling" tabindex="-1">
-                    </div>
-                    <div class="u-margin-top-1/2 facets-positioning-container">
-                        <div id="facets-background">
-                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Subjects" "routing" "subjects" "tagnames" .Params.subjects_filter)}} 
-                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "OS" "routing" "operatingsystems" "tagnames" .Params.operatingsystems_filter)}} 
-                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Skill Level" "routing" "skilllevels" "tagnames" (slice "Introductory" "Advanced"))}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    <!-- Search (and filter for mobile) end-->
+        <!-- Bars: Active Filters, # content displayed, sort by. -->
+        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
 
-
-
-
-
-        <!-- Bars containing Active Filter tags, how many content are displayed, and sorting info -->
-        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "content_type" "learning paths")}} 
-
-       
      
         <!-- List of learning paths on right -->
         <div class="c-row">
@@ -83,46 +67,40 @@
             <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
                     {{ range $paths_to_list.ByLastmod.Reverse }}
-                    <!-- This div does two things, iterating over each tag in the taxonomy:
-                        1) Assign tags for filtering the learning path cards 
-                        2) Keeps track of unique tags to generate the filter column  -->
-                    <div class='path-div search-div
-                            {{ with .Params.skillLevels }}
-                                tag-{{. | urlize}}
-                            {{ end }}
-                            {{ with .Params.subjects }}
-                                tag-{{. | urlize}}
-                            {{ end }}
-                            {{ with .Params.armips }}
-                                {{range .}}
-                                    tag-{{. | urlize}}
-                                {{end}}
-                            {{ end }}
-                            {{ with .Params.operatingsystems }}
-                                {{ range .}}
+                        <!-- This div assigns tags for each LP for filtering. -->
+                        <div class='path-div search-div
+                                {{ with .Params.skillLevels }}
                                     tag-{{. | urlize}}
                                 {{ end }}
-                            {{ end }}
-                            {{ with .Params.tools_software_languages }}
-                                {{ range .}}
-                                    tag-{{replace (. | urlize) "+" "plus"}}
-                                {{end}}
-                            {{ end }}
-                            '>                            
-                        <!-- Path card formatting -->
-                        {{ partial "general-formatting/path-ads-card.html" . }}    
-                    </div>           
+                                {{ with .Params.subjects }}
+                                    tag-{{. | urlize}}
+                                {{ end }}
+                                {{ with .Params.armips }}
+                                    {{range .}}
+                                        tag-{{. | urlize}}
+                                    {{end}}
+                                {{ end }}
+                                {{ with .Params.operatingsystems }}
+                                    {{ range .}}
+                                        tag-{{. | urlize}}
+                                    {{ end }}
+                                {{ end }}
+                                {{ with .Params.tools_software_languages }}
+                                    {{ range .}}
+                                        tag-{{replace (. | urlize) "+" "plus"}}
+                                    {{end}}
+                                {{ end }}
+                                '>                            
+                            <!-- Path card formatting -->
+                            {{ partial "general-formatting/path-ads-card.html" . }}    
+                        </div>           
                     {{ end }}
                 </div>
             </div>
         </div>
-
     </div>
-
-
 </div>
 
-{{ partial "ads-cards/ads-card-style.html" . }}
 
 <!-- Include javascript to filter and search -->
 <script src="/js/search-and-filter/filter-learning-paths.js"></script>
@@ -130,16 +108,8 @@
 <script src="/js/search-and-filter/search-logic.js"></script>
 <script src="/js/search-and-filter/search-handling.js"></script>
 
-
-
-
-
-
-
 <script>
     (() => {
-        ////////// Search 
-
         // Assign inputChangeHandler to search box
         const search_box = document.getElementById('search-box');
         search_box.inputChangeHandler = searchHandler_LearningPaths;

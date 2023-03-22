@@ -1,5 +1,5 @@
 
-{{- if ne .content_type "tools" -}}
+{{- if ne .page_type "tools" -}}
     <!-- Current tag bar -->
     <div id="current-tag-bar">
         <span>
@@ -19,11 +19,11 @@
         <span id="currently-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
         of 
         <span id="total-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
-        {{.content_type}}.
+        {{.page_type}}.
     </div>
 
     <!-- Sorting display -->
-    {{- if ne .content_type "tools" -}}
+    {{- if ne .page_type "tools" -}}
         <div id="sorting-bar">
             <span class="sorting-criteria active">Date</span>
         </div>

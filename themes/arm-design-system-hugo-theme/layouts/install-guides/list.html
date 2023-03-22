@@ -1,9 +1,23 @@
+{{/*
+A list page that shows all Tool Install Guide pages.
+
+Where it is used:
+    - /install-guides/
+
+Called from:
+    - baseof
+
+Calls to:
+    - partial filtering/closed-expansion.html
+    - partial general-formatting/list-tag-result-sort-bar.html
+*/}}
+
 {{define "main"}}
 
-
+<!-- Get all tool install pages -->
 {{ $tools_to_list := where .Site.Pages "Params.tool_install" true}}
 
-
+<!-- Filter replacement: List of additional search terms -->
 <p class="u-margin-top-1 u-margin-left-1 u-margin-bottom-1/2 u-font-size-90%">
     Don't know a tool by name to search for? Try these common search terms:  
     <a href="/install-guides/?search=compiler">compiler</a>.
@@ -12,29 +26,29 @@
 <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search by tool name"></ads-search>
 
 <!-- Bars containing Active Filter tags, how many content are displayed, and sorting info -->
-{{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $tools_to_list "content_type" "tools")}} 
+{{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $tools_to_list "page_type" "tools")}} 
 
 
+<!-- Page wrapping row and column -->
 <div class="c-row">
     <div class="c-col">
         <div class="u-display-grid u-gap-1 xs:u-grid-columns-1 sm:u-grid-columns-2 md:u-grid-columns-3 lg:u-grid-columns-4 xl:u-grid-columns-5 u-margin-top-1">
             {{ range $tools_to_list}}
-            <!-- Div used for search hiding-->
-            <div class='search-div
-                        {{ with .Params.additional_search_terms }}
-                            {{range .}}
-                                term-{{. | urlize}}
-                            {{end}}
-                        {{ end }}'>
-                <ads-card has-hover-effect class="tool-card" link="{{.Permalink}}">
-                    <ads-card-content class="tool-card-content u-margin-top-0 u-margin-bottom-0" slot="content">
-                        <p class="search-title u-margin-top-0 u-margin-bottom-0 u-font-size-125%">{{.Title}}</p>
-                    </ads-card-content>   
-                </ads-card>
-            </div>
+              <!-- div used for search hiding via additional search terms -->
+              <div class='search-div
+                          {{ with .Params.additional_search_terms }}
+                              {{range .}}
+                                  term-{{. | urlize}}
+                              {{end}}
+                          {{ end }}'>
+                  <ads-card has-hover-effect class="tool-card" link="{{.Permalink}}">
+                      <ads-card-content class="tool-card-content" slot="content">
+                          <p class="search-title install-guide-title">{{.Title}}</p>
+                      </ads-card-content>   
+                  </ads-card>
+              </div>
             {{end}}
         </div>
-        <div id="additional-search-term-container"></div>
     </div>
 </div>
 
@@ -74,6 +88,11 @@
         --ads-card-border-color: var(--arm-black);
         --ads-card-border-color-hover: var(--arm-web-safe-orange);
         --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);
+    }
+
+    ads-card-content.tool-card-content {
+      margin-top: 0px;
+      margin-bottom: 0px;
     }
 
     ads-card-content.tool-card-content::before {
