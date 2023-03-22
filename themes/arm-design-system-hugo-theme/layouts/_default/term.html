@@ -10,9 +10,9 @@ Called from:
     - baseof
 
 Calls to:
-    - partial general-formatting/list-filter-definition.html
-    - partial general-formatting/list-mobile-search-filter.html
-    - partial general-formatting/list-tag-result-sort-bar.html
+    - partial filter-search-sort/filter-definition.html
+    - partial filter-search-sort/mobile-search-and-filter.html
+    - partial filter-search-sort/active-filter-and-sort-bar.html
     - partial general-formatting/path-ads-card.html                 
 */}}
 
@@ -33,16 +33,16 @@ Calls to:
     <!-- Filter bar on left -->
     <div class="c-col filter-column-div u-hide lg:u-display-block u-flex-shrink-0">
         <h3 class="u-margin-top-0">Filter</h3>
-        {{ partial "general-formatting/list-filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
+        {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
         <!-- Mobile: Search & Filter -->
-        {{ partial "general-formatting/list-mobile-search-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
+        {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
 
         <!-- Bars: Active Filters, # content displayed, sort by. -->
-        {{ partial "general-formatting/list-tag-result-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
 
         <!-- List of learning paths on right -->
         <div class="c-row">
@@ -73,33 +73,5 @@ Calls to:
         </div>
     </div>
 </div>
-
-
-<!-- Include javascript to filter and search -->
-<script src="/js/search-and-filter/filter-learning-paths.js"></script>
-<script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
-<script src="/js/search-and-filter/search-logic.js"></script>
-<script src="/js/search-and-filter/search-handling.js"></script>
-
-
-
-
-<script>
-    (() => {
-        // Assign inputChangeHandler to search box
-        const search_box = document.getElementById('search-box');
-        search_box.inputChangeHandler = searchHandler_LearningPaths;
-
-        // Handle search term from URL
-        let url_str = window.location.search;
-        if (url_str.includes('search=')) {
-            let search_string = parseParamsFromURL(url_str);
-
-            // Call search handler to execute
-            search_box.setAttribute('search-value',search_string);
-            searchHandler_LearningPaths(search_string);
-        }
-    })();
-</script>
 
 {{ end }}
