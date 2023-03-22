@@ -1,3 +1,13 @@
+/*
+Covers the following pages:
+    - /learning-paths/:category/  5x
+    - /install-guides/            1x
+    - /tag/:slug/                 many!   term.html
+/*
+
+
+
+
 /* Search / Status bar for active filters, # displayed, and sorting 
 *******************************************************************/ 
 #result-sort-div {
@@ -119,6 +129,239 @@ html[theme="dark"] .filter-facet {
     width: 320px;
     max-width: 320px;
 }
+
+ads-expansion-panel.learning-path-filters {
+    --ads-expansion-panel-border-color: var(--arm-light-grey);
+
+    --ads-expansion-panel-content-background-color: var(--arm-light-grey-alt);
+
+    --ads-expansion-panel-toggle-background-color: var(--arm-light-grey-alt);
+    --ads-expansion-panel-toggle-background-color-hover: var(--arm-light-grey-alt);
+
+}
+
+html[theme='dark'] ads-expansion-panel.learning-path-filters {
+    --ads-expansion-panel-border-color: var(--arm-black);
+
+    --ads-expansion-panel-content-background-color: var(--arm-color-surface);
+
+    --ads-expansion-panel-toggle-background-color: var(--arm-color-surface);
+    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-surface);
+
+}
+
+ads-checkbox {
+    --ads-checkbox-margin-left: 0px;
+}
+
+
+
+/* inspiration from here:   https://stackoverflow.com/questions/4253920/how-do-i-change-the-color-of-radio-buttons   */
+.ads-radio-style {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 10px 0 0;
+    white-space: nowrap;
+  }
+  
+  .ads-radio-style input[type='radio'] {
+    display: none;
+  }
+  
+  .ads-radio-style label {
+    color: var(--ads-checkbox-label-color);
+    font-weight: normal;
+  }
+  
+  .ads-radio-style label:before {
+    vertical-align: top; 
+    content: " ";
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin: 0 8px 0 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 11px;
+    border: 1px solid var(--ads-checkbox-border-color);
+    background-color: var(--ads-checkbox-background-color);
+  }
+
+  .ads-radio-style input[type=radio]:hover + label:after {
+    border-radius: 11px;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 9px;
+    left: 4px;
+    content: " ";
+    display: block;
+    background: var(--ads-checkbox-cross-color-hover);  /* depends on theme */
+  }
+
+
+  .ads-radio-style input[type=radio]:checked + label:before {
+    border-color:var(--ads-checkbox-border-color-checked);
+  }
+
+  .ads-radio-style input[type=radio]:checked + label:after {
+    border-radius: 11px;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 9px;
+    left: 4px;
+    content: " ";
+    display: block;
+    background: var(--ads-checkbox-cross-color-checked);
+  }
+
+
+
+/* LP and Install card styling 
+*******************************************************************/   
+
+
+/* Learning Path Card styling 
+*******************************************************************/   
+ads-card.path-card {
+    --ads-card-border-radius: 10px;
+    --ads-card-border-width: 2px;
+    --ads-card-border-color: var(--arm-light-grey-alt-2);
+    --ads-card-background-color: var(--white);
+
+    --ads-card-border-color-hover: var(--arm-web-safe-orange);
+
+    --ads-card-background-color-hover: var(--arm-light-grey);
+    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
+}
+html[theme='dark'] ads-card.path-card {
+    --ads-card-background-color: var(--arm-color-overlay-dark);
+    --ads-card-border-color: var(--arm-black);
+
+    --ads-card-background-color-hover: var(--black);
+    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16); /* 0 1px 3px 3px rgba(255,255,255,0.25); */
+}
+
+
+.basics-title:hover {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-web-safe-orange);
+    cursor: pointer;
+}
+
+ads-card.path-card:hover  .learning-path-title {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-web-safe-orange);
+}
+
+/* adjust height depending on screen size */
+ads-card.path-card .learning-path-title-div { /* xs and sm */
+    min-height: 50px;
+}
+@media (min-width: 768px) { /* md and up */
+    ads-card.path-card .learning-path-title-div {
+        min-height: 70px;
+    }
+}
+
+
+.card-subject {
+    font-weight: lighter;
+    font-size: 0.9rem!important;
+}
+
+html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
+    color: var(--arm-blue);
+}
+.learning-path-title, .basics-title {
+    color: var(--arm-light-blue);
+    font-weight: bold;
+    font-size:1.25rem;
+
+    margin-top: 0px;
+    margin-bottom: 4px;
+}
+
+.basics-title {
+    margin: 0;
+}
+.card-tag-details {
+    font-size: 0.9rem!important;
+}
+.card-date {
+    font-weight: lighter;
+    font-size: 0.9rem!important;
+}
+
+
+/* Install Guide card styling 
+*******************************************************************/   
+.install-guide-title {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 1.25rem!important;
+}
+
+
+ads-card.tool-card {
+    height: 112px;
+    --ads-card-border-width: 1px;
+    --ads-card-border-color: var(--arm-black);
+    --ads-card-border-color-hover: var(--arm-web-safe-orange);
+    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);
+}
+
+ads-card-content.tool-card-content {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+ads-card-content.tool-card-content::before {
+    background-color: var(--arm-web-safe-blue);
+    content: '';
+    height: calc(100% + 2px);
+    left: -1px;
+    position: absolute;
+    top: -1px;
+    transition: background-color;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+    width: 12px;
+  }
+  html[theme="dark"] ads-card-content.tool-card-content::before {
+    background-color: var(--arm-blue);
+  }
+
+
+
+  ads-card.tool-card:hover ads-card-content.tool-card-content::before {
+    background-color: var(--arm-web-safe-orange);
+  }
+  ads-card.tool-card p {
+    color: var(--arm-web-safe-blue);
+    margin-left: 8px;
+    transition: color;
+
+    transition: margin-left;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+  }
+  html[theme="dark"] ads-card.tool-card p {
+    color: var(--arm-light-blue);
+  }
+
+  ads-card.tool-card:hover p {
+    color:var(--arm-web-safe-orange);
+    margin-left: 12px;
+  }
+  html[theme="dark"]       ads-card.tool-card:hover p {
+    color:var(--arm-web-safe-orange);
+  }
+
+
+
 
 
 

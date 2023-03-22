@@ -1,0 +1,25 @@
+.width-max-content {
+    width: max-content;
+}
+td.nowrap {
+    white-space: nowrap;
+}
+
+.td-metadata-key {
+    height: fit-content;
+    padding: 0px;
+    margin: 0px;
+    vertical-align:top;
+}
+
+.td-metadata-value {
+    height: fit-content; 
+    width: fit-content; 
+    padding: 0px; 
+    margin: 0px; 
+    padding-left: 8px;
+}
+
+.margin-l-0 {
+    padding-left: 0px!important;
+}

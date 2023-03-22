@@ -8,7 +8,6 @@ Called from:
     - baseof
 
 Calls to:
-    - partial filtering/closed-expansion.html
     - partial general-formatting/list-tag-result-sort-bar.html
 */}}
 
@@ -75,72 +74,6 @@ Calls to:
         }
     })();
 </script>
-
-
-
-
-
-<style>
-
-    ads-card.tool-card {
-        height: 112px;
-        --ads-card-border-width: 1px;
-        --ads-card-border-color: var(--arm-black);
-        --ads-card-border-color-hover: var(--arm-web-safe-orange);
-        --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);
-    }
-
-    ads-card-content.tool-card-content {
-      margin-top: 0px;
-      margin-bottom: 0px;
-    }
-
-    ads-card-content.tool-card-content::before {
-        background-color: var(--arm-web-safe-blue);
-        content: '';
-        height: calc(100% + 2px);
-        left: -1px;
-        position: absolute;
-        top: -1px;
-        transition: background-color;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
-        width: 12px;
-      }
-      html[theme="dark"] ads-card-content.tool-card-content::before {
-        background-color: var(--arm-blue);
-      }
-
-    
-
-      ads-card.tool-card:hover ads-card-content.tool-card-content::before {
-        background-color: var(--arm-web-safe-orange);
-      }
-      ads-card.tool-card p {
-        color: var(--arm-web-safe-blue);
-        margin-left: 8px;
-        transition: color;
-
-        transition: margin-left;
-        transition-duration: 0.3s;
-        transition-timing-function: ease-in-out;
-      }
-      html[theme="dark"] ads-card.tool-card p {
-        color: var(--arm-light-blue);
-      }
-
-      ads-card.tool-card:hover p {
-        color:var(--arm-web-safe-orange);
-        margin-left: 12px;
-      }
-      html[theme="dark"]       ads-card.tool-card:hover p {
-        color:var(--arm-web-safe-orange);
-      }
-    
-    </style>
-
-
-
 
 
 {{end}}
