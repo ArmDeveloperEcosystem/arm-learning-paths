@@ -1,16 +1,27 @@
+{{/* 
+Codeblock formatting for prismjs
 
-{{/* Incoming Variables:
+Where it is used:
+    - any content page from a contributor
+
+Called from:
+    - _default/_markup/render-codeblock.html
+    - shortcode tabpane.html
+
+
+    Incoming Variables:
         input_from          Str:  "normal" or "tabpane"
         code                Str:  echo('Hello world')....
         language            Str:  python
         line_numbers        Bool: true or false
         output_lines        Str:  5 or 1-4, 9
         command_line        Str:  "root@localhost"
-    */}}
+*/}}
 
 
+<!-- Hugo processing first -->
 
-{{/* If output_lines specified, prepare list of lines to mark as output */}}
+<!-- If output_lines specified, prepare list of lines to mark as output -->
 {{$lines_to_mark_output := slice}}
 {{ if .output_lines}}
     {{range (split .output_lines ",")}}
@@ -32,7 +43,7 @@
 {{end}}
 
 
-
+<!-- Start with the 'pre' element, then 'code' element, then the code content -->
 <pre
     {{if .command_line}} 
         class="command-line"
@@ -45,6 +56,7 @@
                  {{if .line_numbers}}   line-numbers {{end}}
                  {{if $output_present}} output-lines {{end}}'>
 
+        <!-- custom implementation of adding __output__ when needed for in-block output processing (no copying, no highlighting) -->
         {{if $output_present}}
             {{- with .code -}}
                 {{- $inner := split . "\n" -}}
@@ -59,7 +71,7 @@
                     {{if eq $.input_from "tabpane"}} {{- $count = add $count 1 -}} {{end}}
                 {{- end -}}
             {{- end -}}
-        {{/* Functionally the same as above on linux, but this makes it easier for Windows reading of non-output code blocks */}}
+        <!-- Functionally the same as above on linux, but this makes it easier for Windows reading of non-output code blocks as Windows doesn't like the line-break character -->
         {{else}}
             {{.code}}
         {{end}}

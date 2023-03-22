@@ -12,6 +12,7 @@ Called from:
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
 {{$is_list := and (not $is_content) (.IsNode) }}             <!-- includes about and home pages for now... should exclude -->                                         
 
+<!-- Feedback is on     _next-steps.md learning path          install tool everything-->
 
 <!-- All pages -->
 <script src="/js/ads-component-creation/ads-footer.js"></script>
@@ -35,5 +36,8 @@ Called from:
 {{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
     <script src="/js/prism.js"></script>                        <!-- Include code highlighting javascript, Prism-->
     <script src="/js/prism_post_output_formating.js"></script>  <!-- must be called after prism.js to modify it once rendered -->
+{{end}}
+{{if $is_content}}
+    <script src="/js/feedback-form-behavior.js"></script>       <!-- Only needed on install guide pages and content pages -->
 {{end}}
 
