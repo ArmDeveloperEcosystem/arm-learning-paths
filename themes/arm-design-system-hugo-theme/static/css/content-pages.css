@@ -59,6 +59,10 @@ html[theme='dark'] .tab-right-card > h6 {
     color: white;
 }
 
+.tab-right-card-header {
+    margin: 10px;
+    font-size:1em;
+}
 
 
 
@@ -105,4 +109,57 @@ div.github-div {
 
 html[theme='dark'] div.github-div {
     border-color: var(--arm-color-overlay-light);
+}
+
+
+
+/* Review page styling
+*******************************************************************/   
+.fa-circle-check {color: var(--arm-web-safe-green);}
+.correct-explain {color: var(--arm-web-safe-green);}
+html[theme='dark'] .fa-circle-check {color: var(--arm-green);}
+html[theme='dark'] .correct-explain {color: var(--arm-green);}
+
+
+.fa-times-circle   {color: var(--arm-web-safe-red);}
+.incorrect-explain {color: var(--arm-web-safe-red);}
+html[theme='dark'] .fa-times-circle {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
+html[theme='dark'] .incorrect-explain {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
+
+
+#error-answer-all-questions-message {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+#error-answer-all-questions-message.smooth-open {
+    opacity: 1;
+}
+
+
+#push-to-next-steps-div {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-delay: 3s;
+}
+#push-to-next-steps-div.smooth-open {
+    opacity: 1;
+}
+
+.checkbox-icon {
+    opacity: 0;
+    transition: opacity 1s;  
+}
+
+.checkbox-icon.smooth-open {
+    opacity: 1;
+}
+
+.info_text_preexplination {
+    opacity: 0;
+    transition: opacity 1s;  
+}
+
+.info_text_preexplination.smooth-open {
+    opacity: 1;
 }

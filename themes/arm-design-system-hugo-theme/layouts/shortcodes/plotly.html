@@ -1,3 +1,7 @@
+{{/*
+Create stat page plots.
+*/}}
+
 {{ $json := .Get "json" }}
 {{ $height := .Get "height" | default "200px" }}
 <div id="{{$json}}" class="plotly" style="height:{{$height}}"></div>

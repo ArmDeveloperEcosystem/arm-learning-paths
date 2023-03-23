@@ -8,9 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Assign inputChangeHandler to search box
     const search_box = document.getElementById('search-box');
-
-    if (document.title.includes('Install Guides')) {    search_box.inputChangeHandler = searchHandler_Tools;    }
-    else {                                              search_box.inputChangeHandler = searchHandler_LearningPaths;      }
+    if (document.title.includes('Install Guides') | (document.title=='Arm Learning Paths')) {    // Tools page OR Homepage
+        search_box.inputChangeHandler = searchHandler_Tools;    
+    }
+    else {
+        search_box.inputChangeHandler = searchHandler_LearningPaths;
+    }
 
     // Handle search term from URL
     let url_str = window.location.search;

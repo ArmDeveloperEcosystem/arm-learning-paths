@@ -1,21 +1,32 @@
+{{/*
+Last page in Learning Paths, with feedback and resources for next steps.
+
+Where it is used:
+    - learning paths, next steps
+
+Called from:
+    - partials learning-paths/learningpathall.html
+*/}}
 
 
 <!-- Feedback at top -->
 {{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
 
 
-<!-- 3 columns of helpful hints-->
 <div class="c-row">
     <div class="c-col">
+        <!-- Main CTA for next learning path: -->
         <h2>Continue Learning</h2>
         <p>{{.context.Params.next_step_guidance  | markdownify}}</p>
         {{ with .context.Site.GetPage .context.Params.recommended_path}}
-        <span><ads-cta-link link='{{.Permalink}}'>
-            <span>Next Learning Path:&nbsp;&nbsp;&nbsp;{{.Title}}</span>
-        </ads-cta-link>
-        </span>
-    </p>
+            <span>
+                <ads-cta-link link='{{.Permalink}}'>
+                    <span>Next Learning Path:&nbsp;&nbsp;&nbsp;{{.Title}}</span>
+                </ads-cta-link>
+            </span>
         {{ end }}
+
+        <!-- 3 columns of next steps -->
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
             <div class="content-box">
                 <h4>Similar Learning Paths</h4>
@@ -50,7 +61,6 @@
                     {{end}}
                 {{end}}
                 </ul>
-
             </div>
 
             <div class="content-box">
@@ -85,7 +95,6 @@
                     {{ end }}
                 </span>
             </div>
-
         </div>
     </div>
 </div>  
