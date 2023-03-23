@@ -58,3 +58,32 @@ ads-card.main-topic-card  .main-topic-subtitle {
 html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-subtitle {
     font-family: "Source Code Pro", monospace
 }
+
+
+
+
+/* Header formatting and spacing */
+/**************************************/
+.homepage-top-divs {
+    width:fit-content;  
+    margin: 0 auto;
+}
+
+#homepage-header {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 75px;
+    text-align: center;
+}
+
+
+html[theme="light"] #homepage-header {
+    background: -webkit-linear-gradient(left,var(--arm-blue), var(--arm-web-safe-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+html[theme="dark"] #homepage-header {
+    background: -webkit-linear-gradient(left,var(--arm-light-blue), var(--arm-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

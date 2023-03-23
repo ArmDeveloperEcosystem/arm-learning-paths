@@ -1,13 +1,23 @@
-<!-- MOBILE ONLY -->
+{{/*
+Moves navigation pane from left pane to sticky top on mobile.
+
+Where it is used:
+    - install guides, multi-tool only
+    - learning paths
+
+Called from:
+    - install-guides/installtoolsall.html
+    - learning-paths/learningpathall.html
+*/}}
 
 
-
+<!-- Hugo save as var to access in other range statements -->
 {{$thisfile:=.thisfile}}
 
 
 <div class="content-head-container-mobile lg:u-hide">
     <div>
-        <!-- Sticky Header -->
+        <!-- Sticky Header, always visible -->
         <div class="content-head-mobile lg:u-hide u-flex">
             <ads-button id="filter-button" is-circular="" class="u-position-relative u-align-self-center lg:u-hide content-header-btn-mobile" level="tertiary" size="default" onclick="mobileFilterClicked(this)">
                 <i class="fas fa-list" style="color:white;"></i>
@@ -15,10 +25,9 @@
             <h6 class="u-margin-top-1/2 u-margin-left-1 u-position-relative lg:u-hide content-header-txt-mobile">
                 {{ with .context.Site.GetPage .thisdir}}{{ .Params.Title }}{{ end }}
             </h6>
-
         </div>
 
-        <!-- Navigation -->
+        <!-- Navigation bar, opens on click -->
         <div id="filters-container" class="u-hide"> <!-- on filter click, remove u-hide class -->
             <div id="filters-overlay" class="overlay-styling" tabindex="-1">
             </div>
@@ -36,69 +45,8 @@
                         </a>
                         {{ $counter = add $counter 1 }}
                     {{end}}
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
-
-
-
-
-
-
-
-
-
-<!-- 
-
-<div class="content-head-container-mobile lg:u-hide" id="content-head-container-mobile-id">
-    {{ $mobile_expanded_id := "content-table-of-contents-mobile" }}
-    <div class="content-header-mobile">
-        <ads-button is-circular="" class="content-header-btn-mobile" level="tertiary" size="default" onclick="showMobileTableOfContents('{{$mobile_expanded_id}}')">
-            <i class="fas fa-list" style="color:white;"></i>
-        </ads-button>
-
-        {{ with .context.Site.GetPage .thisdir}}
-            <h6 class="u-margin-top-1/2 content-header-txt-mobile">&nbsp;&nbsp;{{ .Params.Title }}</h6>
-        {{ end }}
-
-    </div>
-    <div id="{{$mobile_expanded_id}}" hidden="true">
-        {{range .filesindir}}
-            <a href="{{.Permalink}}" class="content-individual-a-mobile">
-                <div class="content-individual-mobile {{ if eq .File.TranslationBaseName $thisfile}} active {{else}} inactive {{ end }}">
-                    <p class="content-individual-txt-mobile {{ if eq .File.TranslationBaseName $thisfile}} active {{else}} inactive {{ end }}">
-                        {{ if eq .File.TranslationBaseName "_index" }} Introduction {{else}} {{.Title}} {{ end }}
-                    </p>
-                </div>
-            </a>
-        {{end}}
-    </div>
-
-</div>
-
-
-
-<script>
-    function showMobileTableOfContents(mobile_div_to_affect__id) {
-        console.log(mobile_div_to_affect__id)
-        const div_to_affect = document.getElementById(mobile_div_to_affect__id);
-
-        if (div_to_affect.getAttribute('hidden')) {
-            div_to_affect.removeAttribute('hidden');
-            document.getElementById('content-head-container-mobile-id').classList.add("open");
-        }
-        else {
-            div_to_affect.setAttribute('hidden',true);
-            document.getElementById('content-head-container-mobile-id').classList.remove("open");
-        }
-
-    }
-</script>
--->

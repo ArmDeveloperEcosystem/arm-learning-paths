@@ -1,8 +1,16 @@
+{{/*
+Introduction page for learning path formatting.
 
-<!-- Markdown metadata -->
+Where it is used:
+    - learning paths, intro page
+
+Called from:
+    - partials learning-paths/learningpathall.html
+*/}}
+
+<!-- Markdown metadata table -->
 <div class="content-box">
     <h2>About this Learning Path</h2>
-    <!-- First row of info-->
     <div class="c-row">
         <div class="c-col lg:c-col-6 xl:c-col-4">
             <table class="width-max-content">
@@ -137,7 +145,7 @@
 </div>
 
 
-<!-- Markdown content -->
+<!-- Learning objectives & Prereq box -->
 <div class="content-box">
     <h3>Who is this for?</h3>
         <p class="u-margin-left-1">{{ .Params.who_is_this_for }}</p>
@@ -149,8 +157,7 @@
     <h3 class="u-margin-top-2">Prerequisites</h3>
         <p class="u-margin-left-1">Before starting, you will need the following:</p>
     	{{ range .Params.prerequisites }}
+            <!-- Markdownify to support links -->
             <li class="u-margin-left-2">{{. | markdownify}}</li>
         {{ end }}
-        {{.Content}}     
 </div>
-
