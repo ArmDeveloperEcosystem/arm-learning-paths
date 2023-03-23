@@ -59,9 +59,13 @@ sudo apt install unzip default-jdk -y
 You will need to set environment variables to allow AWS IoT Greengrass to connect with your AWS account. These varaibles were obtained in the [previous section](#prepare-your-aws-role).
 
 ```bash { target="ubuntu:latest" }
-export AWS_REGION="us-east-1"
 export AWS_ACCESS_KEY_ID=AKIAIOSFODNN7EXAMPLE
+```
+```bash { target="ubuntu:latest" }
 export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+```
+```bash { target="ubuntu:latest" }
+export AWS_REGION="us-east-1"
 ```
 {{% notice Note %}}
 Replace `us-east-1` with the AWS region you want to use.
@@ -70,8 +74,8 @@ Replace `us-east-1` with the AWS region you want to use.
 Download the zip file with `curl`, extract the installer, and run it.  
 
 ```bash { target="ubuntu:latest" }
-curl "https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip" -o "greengrass-nucleus-lastest.zip"
-unzip greengrass-nucleus-lastest.zip
+curl "https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-nucleus-latest.zip" -o "greengrass-nucleus-latest.zip"
+unzip greengrass-nucleus-latest.zip -d GreengrassInstaller && rm greengrass-nucleus-latest.zip
 
 sudo -E java -Droot="/greengrass/v2" -Dlog.store=FILE \
   -jar ./GreengrassInstaller/lib/Greengrass.jar \
@@ -86,12 +90,24 @@ sudo -E java -Droot="/greengrass/v2" -Dlog.store=FILE \
   --setup-system-service true
 
 ```
+{{% notice Note %}}
+The `ggc_user` and `ggc_group` names will be used to create a local system user and group, respectively, for running AWS IoT Greengrass components.
+{{% /notice %}}
+
 This will install the AWS IoT Greengrass v2 software on your device, and and register that device with the Greengrass service.
 
-Confirm the AWS IoT Greengrass CLI is available by invoking the `greengrass-cli` command to print the version.
+Confirm the AWS IoT Greengrass system service was installed and is running:
 
-```bash { target="ubuntu:latest" command_line="pi@ubuntu | 2-2"}
-/greengrass/v2/bin/greengrass-cli --version
-Greengrass CLI Version: 2.9.4
+``` { target="ubuntu:latest" command_line="root@localhost | 2-11"}
+systemctl status greengrass
+● greengrass.service - Greengrass Core
+     Loaded: loaded (/etc/systemd/system/greengrass.service; enabled; vendor pr>
+     Active: active (running) since Thu 2023-03-23 02:52:28 UTC; 13h ago
+   Main PID: 750 (sh)
+      Tasks: 50 (limit: 4467)
+     Memory: 525.3M
+        CPU: 11.976s
+     CGroup: /system.slice/greengrass.service
+             ├─750 /bin/sh /greengrass/v2/alts/current/distro/bin/loader
+             └─767 java -Dlog.store=FILE -Dlog.store=FILE -Droot=/greengrass/v2>
 ```
-
