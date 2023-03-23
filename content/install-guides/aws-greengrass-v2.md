@@ -32,8 +32,67 @@ Before installing AWS IoT Greengrass on your device you first need to create an 
 1. Create a new IAM user named `gguser`
 1. Create new group named `ggusergroup`
 1. Click the `Create policy` button (this will open in a new tab)
-1. Switch to the `JSON` tab and paste in this [Minimum Policy for Greengrass Installer](https://docs.aws.amazon.com/greengrass/v2/developerguide/provision-minimal-iam-policy.html)
-1. You will need to replace both instances of `account-id` in the JSON with your AWS account ID (located in the user menu in the top-right corner of the AWS console) \
+1. Switch to the `JSON` tab and paste in the following:
+```json {line_numbers=true}
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "CreateTokenExchangeRole",
+            "Effect": "Allow",
+            "Action": [
+                "iam:AttachRolePolicy",
+                "iam:CreatePolicy",
+                "iam:CreateRole",
+                "iam:GetPolicy",
+                "iam:GetRole",
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::account-id:role/GreengrassV2TokenExchangeRole",
+                "arn:aws:iam::account-id:policy/GreengrassV2TokenExchangeRoleAccess"
+            ]
+        },
+        {
+            "Sid": "CreateIoTResources",
+            "Effect": "Allow",
+            "Action": [
+                "iot:AddThingToThingGroup",
+                "iot:AttachPolicy",
+                "iot:AttachThingPrincipal",
+                "iot:CreateKeysAndCertificate",
+                "iot:CreatePolicy",
+                "iot:CreateRoleAlias",
+                "iot:CreateThing",
+                "iot:CreateThingGroup",
+                "iot:DescribeEndpoint",
+                "iot:DescribeRoleAlias",
+                "iot:DescribeThingGroup",
+                "iot:GetPolicy"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "DeployDevTools",
+            "Effect": "Allow",
+            "Action": [
+                "greengrass:CreateDeployment",
+                "iot:CancelJob",
+                "iot:CreateJob",
+                "iot:DeleteThingShadow",
+                "iot:DescribeJob",
+                "iot:DescribeThing",
+                "iot:DescribeThingGroup",
+                "iot:GetThingShadow",
+                "iot:UpdateJob",
+                "iot:UpdateThingShadow"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
+```
+1. Replace  `account-id` on lines 16 and 17 with your AWS account ID (located in the user menu in the top-right corner of the AWS console) \
 ![Role Permissions Editor](../_images/gg-role-permissions.png)
 1. Name the new policy `GGDeploymentAccess`
 1. Back on the group creation page, click the refresh button then search for and select `GGDeploymentAccess` \
