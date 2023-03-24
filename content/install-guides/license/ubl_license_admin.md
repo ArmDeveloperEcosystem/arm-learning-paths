@@ -50,16 +50,13 @@ Waiting for license server... (up to 120 seconds, or press CTRL-C to stop waitin
 
 License server running and ready to accept requests at http://<external server name or IP address>:7070
 ```
-To check the status of the server application, use:
-```console
-sudo systemctl status flexnetls-armlmd
-```
 ### Add install directory to PATH
 
 It is recommended to add the server install directory to the `PATH`. For example:
 ```console
 export PATH=/opt/flexnetls-armlmd/bin:$PATH
 ```
+
 ### Set administrator password
 
 You must set an appropriate administrator password to be able to execute subsequent commands. Use the following:
@@ -73,7 +70,7 @@ The default `hostid` was selected by the license server installer. To view the s
 ```console
 armlm_show_hostid
 ```
-which will output (in JSON format) a list of the `selected` and all available hostids. For example:
+which will output all available hostids, and highlight as `selected` the one that will be used. For example:
 ```output
 {
   "selected" : {
@@ -119,8 +116,12 @@ Licenses have been successfully updated. No confirmation is required.
 ```
 The licenses are now ready to use by the end-users.
 
-## Monitor license server usage
+## Monitor license server status and usage
 
+To check the status of the server application, use:
+```console
+armlm_check_server_status
+```
 To list the number of licenses (total and used) use:
 ```console
 armlm_list_products
