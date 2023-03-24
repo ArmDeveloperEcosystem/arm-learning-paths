@@ -1,5 +1,5 @@
-<!-- 
-    Publishes test result with a badge
+{{/*
+Publishes test result with a badge
     Usage: in article header
     # Maintenance settings
     test_maintenance: true        # Enables maintenance tests on article
@@ -10,7 +10,7 @@
     test_status:
         - passed
         - failed
--->
+*/}}
 
 <!-- if maintenance mode is enabled -->
 {{ if eq true $.Page.Params.test_maintenance }}

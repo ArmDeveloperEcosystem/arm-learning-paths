@@ -267,6 +267,8 @@ Run `terraform init` to initialize the Terraform deployment. This command downlo
 terraform init
 ```
 The output from running this command should look like what is shown here:
+
+
 ![MicrosoftTeams-image (4)](https://user-images.githubusercontent.com/87687468/203512908-be62b51f-ed17-4d48-bc43-4190080e05ef.png)
 
 ### Create Terraform execution plan

@@ -1,3 +1,8 @@
+{{/*
+Only used by 'tabpane' shortcode to process code in tabs.
+*/}}
+
+
 <!-- Make sure that we are enclosed within a tabpane shortcode block -->
 {{ with $.Parent }}
 {{- if ne $.Parent.Name "tabpane" -}}
@@ -10,16 +15,15 @@
 
 <!-- store all tab info in dict tab -->
 {{ $tab := dict "header" $header }}
-{{ with $.Get "lang" }}
-{{ $tab = merge $tab (dict "language" ($.Get "lang")) }}
-{{ end }}
-{{ with $.Get "highlight" }}
-{{ $tab = merge $tab (dict "highlight_lines" ($.Get "highlight")) }}
-{{ end }}
+{{ with $.Get "language" }}        {{ $tab = merge $tab (dict "language" ($.Get "language")) }}               {{ end }}
+{{ with $.Get "line_numbers" }}    {{ $tab = merge $tab (dict "line_numbers" ($.Get "line_numbers")) }}       {{ end }}
+{{ with $.Get "output_lines" }}    {{ $tab = merge $tab (dict "output_lines" ($.Get "output_lines")) }}       {{ end }}
+{{ with $.Get "command_line" }}    {{ $tab = merge $tab (dict "command_line" ($.Get "command_line")) }}       {{ end }}
 {{ with $.Inner }}
 <!-- Trim any leading and trailing newlines from .Inner, this avoids
-     spurious lines during syntax highlighting -->
-{{ $tab = merge $tab (dict "content" (trim $.Inner "\n")) }}
+     spurious lines during syntax highlighting 
+{{ $tab = merge $tab (dict "content" (trim $.Inner "\n")) }}-->
+{{ $tab = merge $tab (dict "content" ($.Inner)) }}
 {{ end }}
 
 <!-- add dict tab to parent's scratchpad -->

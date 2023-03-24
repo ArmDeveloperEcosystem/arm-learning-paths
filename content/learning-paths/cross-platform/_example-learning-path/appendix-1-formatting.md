@@ -43,6 +43,7 @@ These are the range of options to add an image:
 - Line highlighting
 - Command line view
 - Code panes
+- Output lines
 
 ### Language highlighting
 Add the specific language name at the start of the code snippet:
@@ -52,6 +53,17 @@ print(hello world) \
 \`\`\`
 ```python
 print(hello world)
+```
+
+\`\`\`C \
+int foo(void){ \
+  return 0; \
+} \
+\`\`\`
+```C
+int foo(void){
+  return 0;
+}
 ```
 
 ### Line numbers
@@ -67,32 +79,69 @@ echo ‘hello world’
 echo ‘I am line two’ 
 ``` 
 
-### Line highlighting
-One or multiple lines can be highlighted in different code areas:
 
-\`\`\`bash { highlight_lines = 5 } \
-echo ‘hello world’ \
-echo ‘I am line two’ \
-\`\`\` \
 
-```bash { highlight_lines = 1 }
-echo ‘hello world’
-echo ‘I am line two’ 
+### Output Lines
+
+There are three ways you can specify command outputs in code:
+1.    Standalone via marking the language as 'output'
+2.    Alongside the 'command_line' functionality 
+3.    Alongside any other language via the 'output_lines' shortcode
+
+{{% notice Note %}}
+In each of the three situations, code marked as 'output' will:
+- Not be copied when clicking the 'copy' button
+- Not be highlightable by a cursor
+- Appear slightly darker
+{{% /notice %}}
+
+Keep reading to see an example of each.
+
+#### Output - standalone block
+Specify this case by making the language 'output'. An example in context:
+
+```bash
+echo 'hello world'
+echo 'test'
+```
+The output from the above command is:
+```output
+hello world
+test
 ```
 
-\`\`\`bash { highlight_lines = "1-2, 4" } \
-echo ‘hello world’ \
-echo ‘I am line two’ \
-echo ‘I am line three’ \ 
-echo ‘I am line four’ \
-\`\`\` \
+#### Output - alongside "command_line" functionality
+Use the following syntax by specifying the output lines after a pipe like so: { command_line="root@localhost | 2-6" }
 
-```bash { highlight_lines = "1-2, 4"  }
-echo ‘hello world’
-echo ‘I am line two’
-echo ‘I am line three’ 
-echo ‘I am line four’ 
+Example in context:
+```bash { command_line="root@localhost | 2-6" }
+printf 'HelloWorld\n%.0s' {1..5}
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
+HelloWorld
 ```
+
+#### Output - alongside any language
+To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output. Example:
+
+```bash { output_lines = "2-3,5,7-11" }
+echo 'hello world\nh'
+hello world
+h
+echo 'one line output'
+one line output
+printf 'outputline\n%.0s' {1..5}
+outputline
+outputline
+outputline
+outputline
+outputline
+```
+
+
+
 
 ### Command line view
 Add command line user context:
@@ -101,7 +150,7 @@ Add command line user context:
 echo ‘hello world’
 ```
 
-With output (note if a reader presses 'copy' the output will be copied as well):
+With output:
 
 ```bash { command_line="root@localhost | 2-6" }
 printf 'HelloWorld\n%.0s' {1..5}
@@ -112,6 +161,7 @@ HelloWorld
 HelloWorld
 ```
 
+
 ### Code Panes  
 
 Adding a code pane, for code dependent on OS, architecture, or similar. Code panes are incompatible with the other forms of code styling.
@@ -119,29 +169,29 @@ Adding a code pane, for code dependent on OS, architecture, or similar. Code pan
 Code pane example with language selector:
 
 {{< tabpane code=true >}}
-  {{< tab header="Python" lang="python">}}
+  {{< tab header="Python" language="python" output_lines="2">}}
 print('hello world')
+hello world
   {{< /tab >}}
-  {{< tab header="Bash" lang="bash">}}
+  {{< tab header="Bash" language="bash">}}
 echo 'hello world'
   {{< /tab >}}
 {{< /tabpane >}}
 
 &nbsp;  
 
-Example with line highlighting
-
 {{< tabpane code=true >}}
-  {{< tab header="Python" lang="python" highlight="2-3">}}
-print('hello world')
-print('higlight me')
-print('and also me')
+  {{< tab header="Python" language="python" output_lines="2-4,6">}}
+print('hello world')*3
+hello world
+hello world
+hello world
+print('another example')
+another example
   {{< /tab >}}
-  {{< tab header="Bash" lang="bash" highlight="2,4">}}
+  {{< tab header="Bash" language="bash" command_line="root@localhost | 2">}}
 echo 'hello world'
-echo 'highlight me'
-echo 'not me'
-echo 'but me'
+hello world
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -149,10 +199,10 @@ echo 'but me'
 
 
 {{< tabpane code=true >}}
-  {{< tab header="Ubuntu 22.04" >}}
+  {{< tab header="Ubuntu 22.04"  line_numbers="true">}}
 sudo apt-get install jq minicom make cmake gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
   {{< /tab >}}
-  {{< tab header="Ubuntu 20.04" >}}
+  {{< tab header="Ubuntu 20.04"  line_numbers="true">}}
 sudo apt-get install jq minicom make gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
 sudo snap install cmake --classic
   {{< /tab >}}
@@ -160,6 +210,9 @@ sudo snap install cmake --classic
 Nothing more to install!
   {{< /tab >}}
 {{< /tabpane >}}
+
+
+
 
 
 ## Images

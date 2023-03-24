@@ -8,54 +8,67 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+[AWS Lambda](https://aws.amazon.com/lambda/) is a serverless, event-driven compute service that lets you run code without managing servers. 
+
+Lambda runs your code on high-availability compute infrastructure and frees you from spending time administering servers.
+
+You can configure Lambda functions to run on Graviton2 processors. 
+
+This Learning Path shows you how to deploy AWS Lambda functions using Terraform and select Graviton2 as the architecture.
+
+## Before you begin
+
+You should have the prerequisite tools installed before starting the Learning Path. 
+
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+
+Before you begin you will also need:
+- An AWS access key ID and secret access key. 
+
+The instructions to create the keys are below.
+
+### Generate AWS access keys 
+
+Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
+
+To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws-terraform/terraform#generate-access-keys-access-key-id-and-secret-access-key).
 
 Before you begin, confirm you have an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) and you can login to the AWS console.
 
-You will also need a computer with [Terraform](/install-tools/terraform/) and the [AWS CLI](/install-tools/aws-cli/) installed. This can be any operating system as long as these tools installed. 
+## Deploy a Lambda function using Terraform
 
+1. Using a text editor, save the code below to in a file called `index.js`
 
-## Generate Access keys (access key ID and secret access key)
-
-The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
-  
-Go to **Security Credentials**
-   
-![190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431](https://user-images.githubusercontent.com/92315883/217728054-4259add4-5c40-4b69-9329-4252037a5afd.png)
-
-
-On Your **Security Credentials** page, click on **Create access key** (access key ID and secret access key)
-   
-![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
-   
-Copy the **Access key ID** and **Secret access key**
-
-![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
-
-## Deploy Lambda function via Terraform
-
-AWS Lambda is a compute service that lets you run code without provisioning or managing servers.
-Lambda runs your code on a high-availability compute infrastructure and performs all of the administration of the compute resources, including server and operating system maintenance, capacity provisioning, automatic scaling and logging.
-To deploy AWS Lambda functions, create the **main.tf**, **output.tf** and **lambda_function (index.js)** files below using a text editor.
-
-Here is the `index.js` file
+This is the source code for the Lambda function. 
 
 ```console
-
 exports.handler = function (event, context) {
         console.log(event);
         context.succeed('hello ' + event.name + ', are you using ' + event.type);
 };
-
 ```
 
-The above Lambda function will simply print `event.name` value as an output.
+The Lambda function will simply print a message. The message adds the `event.name` and `event.type` inputs to the output string. 
 
-Here is the complete `main.tf` file
+2. Copy the `index.js` to a subdirectory named `nodejs`
+
+```console
+mkdir nodejs ; cp index.js nodejs
+```
+
+Terraform will zip the Lambda source code so the source needs to be separated from the rest of the project files in a subdirectory.
+
+3. Using a text editor, save the code below to in a file called `main.tf`
+
+Change the `main.tf` `provider` section and update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
+
+After editing the `provider` section, save the file.
 
 ```console
 provider "aws" {
-  region = "us-east-2"
+  region = "us-east-1"
   access_key  = "Axxxxxxxxxxxxxxxxxxxxxxxxx"
   secret_key   = "Rxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
@@ -113,45 +126,60 @@ output "result" {
 
 ```
 
-{{% notice Note %}}
-Replace `access_key` and `secret_key` with your values.
-{{% /notice %}}
-
-
-In the `main.tf` file mentioned above, a Lambda function is being created. Additionally, you are creating a Lambda function specific IAM role.
-
-Lambda functions use the **ZIP** file of code for uploading, so you are using the resource `Archive` for this purpose. 
-
-Use the `lambda invoke` resource in the `main.tf` file for invoking the Lambda function.
-
-
-Here is the `output.tf` file
+4. Using a text editor, save the code below to in a file called `output.tf`
 
 ```console
 output "lambda" {
   value = "${aws_lambda_function.lambda.qualified_arn}"
 }
-
 ```
-The output displays the **ARN** (Amazon Resource Names) of the Lambda resource in the above `output.tf` file. 
 
-Now, use the Terraform commands below to deploy `main.tf` file.
+You should have three files ready to deploy the Lambda function using Terraform. You have `main.tf` and `output.tf` in the current directory, and `index.js` in a subdirectory named `nodejs`
 
+Running the Lambda function displays the **ARN** (Amazon Resource Names) of the Lambda resource and the output message from the code.
 
-### Terraform Commands
+## Terraform Commands
 
-**Initialize Terraform**
+Use Terraform to deploy the `main.tf` file.
 
-Run `terraform init` to initialize the Terraform deployment. This command is responsible for downloading all dependencies which are required for the AWS provider.
+### Initialize Terraform
+
+Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for AWS.
 
 ```console
 terraform init
 ```
     
-![Screenshot (255)](https://user-images.githubusercontent.com/92315883/209255228-8c8b1b17-ce55-4c7d-9916-6c15918fc82e.png)
+The output should be similar to:
 
+```output
+Initializing the backend...
 
-**Create a Terraform execution plan**
+Initializing provider plugins...
+- Finding latest version of hashicorp/aws...
+- Finding latest version of hashicorp/archive...
+- Installing hashicorp/aws v4.58.0...
+- Installed hashicorp/aws v4.58.0 (signed by HashiCorp)
+- Installing hashicorp/archive v2.3.0...
+- Installed hashicorp/archive v2.3.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
+
+### Create a Terraform execution plan
 
 Run `terraform plan` to create an execution plan.
 
@@ -159,30 +187,75 @@ Run `terraform plan` to create an execution plan.
 terraform plan
 ```
 
-{{% notice Note %}}
-The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
-{{% /notice %}}
+A long output of resources to be created will be printed.
 
-**Apply a Terraform execution plan**
+Any errors in the Terraform setup are usually identified by `terraform plan`.
 
-Run `terraform apply` to apply the execution plan to your cloud infrastructure. The below command creates all required infrastructure.
+### Apply a Terraform execution plan
+
+Run `terraform apply` to apply the execution plan and create all AWS resources:
 
 ```console
 terraform apply
 ```      
 
-![Screenshot (360)](https://user-images.githubusercontent.com/92315883/216524630-0e24329d-5278-4dd2-9bfc-3e314842d4b6.png)
+Answer yes to the prompt to confirm you want to create AWS resources.
 
+The result should print output similar to:
+
+```output
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+lambda = "arn:aws:lambda:us-east-1:200211127965:function:indexjs:$LATEST"
+result = "\"hello Arm_user, are you using Testing\""
+```
+
+You have successfully created and executed the Lambda function on AWS.
 
 ### Verify the Lambda function
 
-To verify the deployment of Lambda functions on AWS console, go to **Lambda » Functions**. Verify the Lambda function is displayed.
+To verify the creation of the Lambda function to to the AWS console and select AWS Lambda. Click on Functions and verify the Lambda function `indexjs` is displayed.
 
 ![Screenshot (348)](https://user-images.githubusercontent.com/92315883/216253082-792bc564-dbb1-46ec-a3ba-e3220f31dd2d.jpg)
 
+Click on the function `indexjs` and scroll down to the `Runtime settings`
+
+You will see the Architecture listed as arm64
+
 ![Screenshot (358)](https://user-images.githubusercontent.com/92315883/216524063-a3d36a0a-9b42-44c5-a5b6-a0c90a3725d3.png)
 
-{{% notice Note %}}
-To execute Lambda functions on the Graviton processor, set architectures = ["arm64"].
-{{% /notice %}}
+You can use the Test tab of the Lambda console to run the function again.
+
+Enter the text below in the `Event JSON` input area.
+
+```json
+{
+  "name": "Arm_user",
+  "type": "Testing"
+}
+```
+
+Click the `Test` button to run the function. 
+
+You should see the same output as running the function with Terraform.
+
+```output
+"hello Arm_user, are you using Testing"
+```
+
+You have successfully deployed a Lambda function using Node.js on an AWS Graviton2 processor.
+
+### Clean up resources
+
+Run `terraform destroy` to delete all resources created.
+
+```console
+terraform destroy
+```
+
+After you run `terraform destroy` the Lambda function is gone from the AWS console.
+
+Continue the Learning Path to create a Lambda function in Python.
 

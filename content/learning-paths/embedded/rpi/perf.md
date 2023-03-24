@@ -95,7 +95,7 @@ perf stat -e stalled-cycles-backend tar cfz test.tgz ./linux/
 
 The expected output should be similar to:
 
-```console
+```output
  Performance counter stats for 'tar cfz test.tgz ./linux/':
 
     27,701,570,350      stalled-cycles-backend    #    0.00% backend cycles idle
@@ -115,7 +115,7 @@ perf stat -e stalled-cycles-backend tar cfz test.tgz ./linux/
 
 The expected output shows the `stalled-cycles-backend` is not available.
 
-```console
+```output
  Performance counter stats for 'tar cfz test.tgz ./linux/':
 
    <not supported>      stalled-cycles-backend
@@ -127,4 +127,4 @@ The expected output shows the `stalled-cycles-backend` is not available.
 
 ```			
 					
-Linux `perf` is available on the Arm server and the Raspberry Pi 4. The events are slightly different due to the processor, but perf generally works the same on both. 
+Linux `perf` is available on the Arm server and the Raspberry Pi 4. The events are slightly different due to the processor, but `perf` generally works the same on both. 

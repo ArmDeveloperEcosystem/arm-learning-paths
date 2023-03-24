@@ -1,0 +1,20 @@
+{{/*
+Left navigation pane for learning paths.
+
+Where it is used:
+    - learning paths
+
+Called from:
+    - learning-paths/learningpathall.html
+*/}}
+
+<a class="a-tab inner-learning-path-navbar-element {{.counter}}-weight" href="{{.context.Permalink}}">
+    <div class="c-row tab-row {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">
+        <div class="tab-right-card
+            {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">
+            <h6 class="tab-right-card-header">
+                {{ if eq .context.File.TranslationBaseName "_index" }} Introduction {{else}} {{.context.Title}} {{ end }}
+            </h6>
+        </div>
+    </div>
+</a>

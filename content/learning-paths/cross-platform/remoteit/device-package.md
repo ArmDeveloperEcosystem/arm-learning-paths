@@ -8,13 +8,13 @@ This section explains how to setup Remote.It when you have access to the target 
 
 ## Install Remote.It device package on a target device and connect using SSH
 
-Use a local console or SSH to access the target device. Refer to [SSH](/install-tools/ssh/) for help installing and configuring SSH.
+Use a local console or SSH to access the target device. Refer to [SSH](/install-guides/ssh/) for help installing and configuring SSH.
 
 Follow the steps below to install the target device package software and connect using SSH.
 
 1 Create an account and log in to your Remote.It Dashboard by using the Web Portal [https://app.remote.it](https://app.remote.it) with a browser or the [Remote.It Desktop Application](https://link.remote.it/download/desktop)
 
-2 Click the + icon in the Dashboard and your device type or cloud instance type to add a new target device
+2 Click the `+` icon in the Dashboard and your device type or cloud instance type to add a new target device
 
 3 Copy the generated command, paste it in the target device terminal or SSH terminal, and press return to execute the command to install.
 
@@ -65,27 +65,23 @@ Before pasting the generated command from Remote.It, add the following to the fi
 
 Paste the generated command on the second line.
 
-The results should look similar to the two lines below, but with your actual registration code. Do not use this example.
+The results should look similar to the two lines below, but with your actual registration code. **Do not use this example**.
 
-```console
+```output
 #!/bin/sh
 R3_REGISTRATION_CODE="XXXXX-ABCD-1432-5555-123456789ABC" sh -c "$(curl -L https://downloads.remote.it/remoteit/install_agent.sh)"
 ```
 
 Watch the Remote.It Dashboard until the new device appears. Click the Connect button under the SSH server to make the networking connection between the target device and you.
 
-4 You can use the icons in the blue connection box to copy the portions of the url you need for your client. For example, the host or the port or the command. Click on the icon that looks like a chain link to copy the ssh command.
+6 You can use the icons in the blue connection box to copy the portions of the url you need for your client. For example, the host or the port or the command. Click on the icon that looks like a chain link to copy the ssh command.
 
 AWS EC2 instances use a key pair for SSH. The key pair is configured during EC2 setup in the AWS console. Replace `keyfile.pem` with the path and name of your SSH private key file.
 
 For example, if the username of the account on the EC2 instance (target device) is `ubuntu` run:
-
-For example:
-
 ```console
 ssh -i /pemkeys/keyfile.pem ssh://ubuntu@proxy50.rt3.io:37348
 ```
-
 You are now connected to the target device.
 
 The startup time may be slightly longer for a new EC2 instance due to the target device software installation time, but with the benefit of increased security.

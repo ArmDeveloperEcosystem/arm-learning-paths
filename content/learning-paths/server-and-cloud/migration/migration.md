@@ -9,21 +9,21 @@ layout: "learningpathall"
 
 ---
 
-## Prerequisites
+You can migrate applications to the Arm architecture and benefit from improved price performance.
 
-* An [Arm based Linux machine](/learning-paths/server-and-cloud/csp/) from a cloud service provider to use as a development machine.
-
+This Learning Path provides a general overview of application migration to Arm servers. Specific migration examples are not covered, but technical guidance is provided which is useful for developers.
 
 ## Development machine
 
-This article provides a general overview of application migration to Arm servers. It doesn't provide specific migration examples, but includes technical guidance and is useful for developers running software on Arm Linux systems. 
-
-The first step in application migration is to setup a Linux development machine (normally a virtual machine) and begin to explore and experiment with application dependencies. 
+The first step in application migration is to setup a Linux development machine. Most of the time this an Arm based instance from a cloud service provider, but it can be any kind of virtual machine such as [Multipass](/install-guides/multipass/). You can use a development machine to explore and experiment with application dependencies. 
 
 Assuming a Linux machine is available, analyze and make a list of what is needed to migrate a particular application to an Arm server.
 
-Which development tools are important?
-- Programming languages for the application
+Identify and create a list of development tools. 
+
+Common development tools are:
+
+- Programming languages for applications
 - Build tools and languages used in build and run scripts
 - Container tools
 - Performance analysis tools
@@ -53,8 +53,9 @@ Applications typically fall into three categories as shown on the table below.
 | -----------|--------------|---------|
 | Easy       | Interpreted languages and Jit compilers (Python, Java, PHP, Node.js) | Use multi-arch container images and popular Linux distributions |
 | More difficult | Compiled languages (C/C++, Go, Rust) | Recompile on an Arm development machine or cross-compile applications |
-| Not possible | Windows applications | Today, Windows Server is not available on Arm |
+| Not possible | Something not available on Arm | A language, runtime, or operating system which is not available on Arm |
 
+While most software is available on Arm, you may come across dependencies which are not possible to run on Arm. 
 
 ## Tips
 

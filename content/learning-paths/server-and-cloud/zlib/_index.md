@@ -2,14 +2,13 @@
 armips:
 - Neoverse
 author_primary: Jason Andrews
-description: Learn how to build and use Cloudflare zlib on on Arm servers
 layout: learningpathall
 learning_objectives:
 - Build zlib-cloudflare on an Arm server
 - Run example applications using zlib
 - Measure and analyze performance to see improvements
 learning_path_main_page: 'yes'
-minutes_to_complete: 10
+minutes_to_complete: 30
 operatingsystems:
 - Linux
 prerequisites:

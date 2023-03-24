@@ -1,23 +1,33 @@
+{{/*
+Populates breadcrumb element dynamically, with a special consideration for the taxonomy page to avoid strange Hugo defaults.
+
+Where it is used:
+    - all, called from baseof
+*/}}
+
+
+<!-- ADS breadcrumb component -->
 <ads-breadcrumbs id="breadcrumb-element" theme="dark" slot="breadcrumbs" sr-label="Breadcrumbs">
     {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
 </ads-breadcrumbs>
 
-
+<!-- Define breadcrumb element and populate as appropriate -->
 {{ define "breadcrumbnav" }}
-{{ if .p1.Parent }}
-{{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }}
-{{ else if not .p1.IsHome }}
-{{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
-{{ end }}
-    <!-- Filter out breadcrumbs we don't want to show: taxonomy pages and the 'learning-path' routing page -->
-        {{ if and (ne .p1.Title "Learning-paths") (ne .p1.Kind "taxonomy") }}
-            {{ if ne .p1.Kind "term"}}
-                <!-- Normal breadcrumb-->
-                <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" link="{{ .p1.Permalink }}"  {{ if eq .p1 .p2 }} current="true"{{ end }}>{{.p1.Title}}</ads-breadcrumb>
-            {{else}}
-                <!-- With tag -->
-                <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" link="{{ .p1.Permalink }}"  {{ if eq .p1 .p2 }} current="true"{{ end }}>Tag: {{.p1.Title}}</ads-breadcrumb>
-            {{end}}
+    {{ if .p1.Parent }}
+        {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }}
+    {{ else if not .p1.IsHome }}
+        {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
+    {{ end }}
+
+    <!-- Filter out breadcrumbs we don't want to show: taxonomy pages  -->
+    {{ if and (ne .p1.Title "Learning-paths") (ne .p1.Kind "taxonomy") }}
+        {{ if ne .p1.Kind "term"}}
+            <!-- Normal breadcrumb-->
+            <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" link="{{ .p1.Permalink }}"  {{ if eq .p1 .p2 }} current="true"{{ end }}>{{.p1.Title}}</ads-breadcrumb>
+        {{else}}
+            <!-- With tag -->
+            <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" link="{{ .p1.Permalink }}"  {{ if eq .p1 .p2 }} current="true"{{ end }}>Tag: {{.p1.Title}}</ads-breadcrumb>
         {{end}}
+    {{end}}
 
 {{ end }}

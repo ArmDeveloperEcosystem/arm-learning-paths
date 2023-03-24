@@ -19,7 +19,7 @@ review:
             - "No"
         correct_answer: 2                    
         explanation: >
-            The answer is no: Pointer Authentication and Branch Target Identification is available only on Arm CPUs using ARMv8.3-A architecture and later extensions. It was also introduced in Armv8.1-M acrchitecture CPUs.
+            Pointer Authentication and Branch Target Identification is available only on Arm processors implementing Armv8.3-A architecture and later extensions. It was also introduced in Armv8.1-M processors.
 
     - questions:
         question: >

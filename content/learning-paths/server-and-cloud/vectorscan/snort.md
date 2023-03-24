@@ -9,44 +9,36 @@ layout: "learningpathall"
 ---
 
 
-[Snort3](https://www.snort.org/snort3) is a very popular open-source deep-packet inspection application. It has integrated Hyperscan, the regex parsing library.
+[Snort 3](https://www.snort.org/snort3) is an open-source deep-packet inspection application. Snort 3 integrates Hyperscan, the regex parsing library.
 
-[Vectorscan](https://github.com/VectorCamp/vectorscan) is an architecture-inclusive fork of [Hyperscan](https://github.com/intel/hyperscan), that preserves the support for x86 and modifies the framework to allow for Arm architectures and vector engine implementations.
+You can install Snort 3 on an Ubuntu Linux Arm-based server, and run it with Vectorscan, the architecture-inclusive fork of Hyperscan.
 
-In this article we will detail the steps to install Snort3 on an Ubuntu Linux Arm-based platform, and run it with Vectorscan.
+## Before you begin
 
-## Prerequisites
+You should already have an Arm server running Ubuntu Linux from the previous topic. 
 
-First, ensure you system is up to date with the latest packages:
+Install the Snort 3 dependencies:
 
-```console
-sudo apt-get update && sudo apt-get dist-upgrade -y
+```bash
+sudo apt update 
+sudo apt-get install -y build-essential autotools-dev libdumbnet-dev libluajit-5.1-dev libpcap-dev \
+zlib1g-dev pkg-config libhwloc-dev cmake liblzma-dev openssl libssl-dev cpputest libsqlite3-dev \
+libtool uuid-dev git autoconf bison flex libcmocka-dev libnetfilter-queue-dev libunwind-dev \
+libmnl-dev ethtool libjemalloc-dev ragel
 ```
 
-Next, ensure your system has the correct time zone:
-```console
-sudo dpkg-reconfigure tzdata
-```
+## Download and install other required software
 
-Now, create a directory where you will download and install the tarballs for the packages `snort` requires
+Create a directory where you can download and build the other required software:
+
 ```bash
 mkdir ~/snort_src
 cd ~/snort_src
 ```
 
-Install the `Snort3` prerequisites to this directory
+Install the [Safe C library](https://rurban.github.io/safeclib/doc/safec-3.3/index.html):
 
 ```bash
-sudo apt-get install -y build-essential autotools-dev libdumbnet-dev libluajit-5.1-dev libpcap-dev \
-zlib1g-dev pkg-config libhwloc-dev cmake liblzma-dev openssl libssl-dev cpputest libsqlite3-dev \
-libtool uuid-dev git autoconf bison flex libcmocka-dev libnetfilter-queue-dev libunwind-dev \
-libmnl-dev ethtool libjemalloc-dev
-```
-
-## Download and install [safec](https://rurban.github.io/safeclib/doc/safec-3.3/index.html) for runtime bound checks:
-
-```bash
-cd ~/snort_src
 wget https://github.com/rurban/safeclib/releases/download/v02092020/libsafec-02092020.tar.gz
 tar -xzvf libsafec-02092020.tar.gz
 cd libsafec-02092020.0-g6d921f
@@ -55,7 +47,7 @@ make -j$(nproc)
 sudo make install
 ```
 
-## Download and install [gperftools 2.9](https://github.com/gperftools/gperftools) performance analysis tools:
+Install [gperftools](https://github.com/gperftools/gperftools) performance analysis tools:
 
 ```bash
 cd ~/snort_src
@@ -67,12 +59,8 @@ make -j$(nproc)
 sudo make install
 ```
 
-## Install `Ragel`:
-```bash
-sudo apt install ragel
-```
+Install [PCRE (Perl Compatible Regular Expressions)](https://www.pcre.org/):
 
-## Install `PCRE` to your `snort_src` folder:
 ```bash
 cd ~/snort_src/
 wget wget https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.gz
@@ -83,36 +71,34 @@ make -j$(nproc)
 sudo make install
 ```
 
-## Download (but do not install) `Boost` C++ Libraries:
+Download (but do not build) [Boost C++ Libraries](https://www.boost.org/):
+
 ```bash
 cd ~/snort_src
 wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz
 tar -xvzf boost_1_77_0.tar.gz
 ```
 
-## Download `Vectorscan` source
+Download Vectorscan:
+
 ```bash
 cd ~/snort_src
 git clone https://github.com/VectorCamp/vectorscan 
 cd vectorscan 
-#git checkout v5.3.2 
 cd .. 
 mkdir hyperscan-build 
-cd hyperscan-build/ 
+cd hyperscan-build 
 ```
 
-## Fix source to build with glibc>=2.34
+Configure and build Vectorscan:
 
-There is a current issue where builds fail with `glibc >= 2.34` and a pending [PR](https://github.com/intel/hyperscan/issues/359).
-
-For now, workaround this issue by making the changes to `STACK_SIZE` as mentioned in the [pull request](https://github.com/intel/hyperscan/pull/358/files/eac1e5e0354f3ead2c832e798d89f86082b77d75).
-
-## Configure and build Vectorscan
 ```bash { cwd="snort_src/hyperscan-build" }
 cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DBOOST_ROOT=~/snort_src/boost_1_77_0/ ~/snort_src/vectorscan/
 make -j$(nproc) && sudo make install 
 ```
-## Install flatbuffers
+
+Install [FlatBuffers](https://google.github.io/flatbuffers/):
+
 ```bash
 cd ~/snort_src
 wget https://github.com/google/flatbuffers/archive/refs/tags/v2.0.0.tar.gz -O flatbuffers-v2.0.0.tar.gz
@@ -124,7 +110,7 @@ make -j$(nproc)
 sudo make install
 ```
 
-## Download and install Data Acquisition library(DAQ)
+Install [Data Acquisition library (DAQ)](https://github.com/snort3/libdaq):
 
 ```bash
 cd ~/snort_src
@@ -137,12 +123,16 @@ make -j$(nproc)
 sudo make install
 ```
 
-## Update shared libraries
+Update shared libraries:
+
 ```bash
 sudo ldconfig
 ```
 
-## Download, Compile and Install `Snort3` with the default settings
+## Download, Compile and Install Snort 3
+
+You can now download, compile and build Snort 3:
+
 ```bash
 cd ~/snort_src
 wget https://github.com/snort3/snort3/archive/refs/tags/3.1.18.0.tar.gz -O snort3-3.1.18.0.tar.gz
@@ -154,16 +144,19 @@ make -j$(nproc)
 sudo make install
 ```
 
-## Check Snort3 is installed and running properly
+## Confirm Snort 3 is installed and running properly
 
-`Snort3` should be installed in `/usr/local/bin`. Verify it is installed and running correctly by checking the version:
+Snort 3 should be installed in `/usr/local/bin`. 
+
+Verify it is installed and running correctly by printing the version:
 
 ```bash
 /usr/local/bin/snort -V
 ```
 
 You should see output similar to the following:
-```
+
+```output
    ,,_     -*> Snort++ <*-
   o"  )~   Version 3.1.18.0
    ''''    By Martin Roesch & The Snort Team
@@ -181,9 +174,12 @@ You should see output similar to the following:
            Using LZMA version 5.2.5
 ```
 
-## Test Snort3 with Vectorscan
+## Test Snort 3 with Vectorscan
 
-To test the performance of `Snort3` with `Vectorscan` on your Arm instance, first download a capture file to test with:
+You can test the performance of Snort 3 with Vectorscan on your Arm instance.
+
+Download a capture file to using for testing: 
+
 ```bash
 mkdir ~/snort3_test
 cd ~/snort3_test
@@ -191,13 +187,15 @@ wget https://download.netresec.com/pcap/maccdc-2012/maccdc2012_00001.pcap.gz
 gunzip maccdc2012_00001.pcap.gz
 ```
 
-Now run the following command to use `hyperscan` (i.e. `vectorscan`) with `snort3` on the downloaded capture file. It uses the default configuration file:
+Run the following command to use Snort 3 with Vectorscan on the downloaded capture file:
+
 ```bash { cwd="~/snort3_test" }
 snort -c /usr/local/etc/snort/snort.lua --lua 'search_engine.search_method="hyperscan"' -r maccdc2012_00001.pcap
 ```
 
 You should see detailed output with packet and file statistics and a summary similar to the below.
-```
+
+```output
 Summary Statistics
 --------------------------------------------------
 timing

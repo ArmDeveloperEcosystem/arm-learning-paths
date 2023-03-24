@@ -19,11 +19,11 @@ recommended_path: "/learning-paths/server-and-cloud/sve/"
 further_reading:
     - resource:
         title: Learn the architecture - Providing protection for complex software
-        link: https://developer.arm.com/documentation/102433/0100
+        link: https://developer.arm.com/documentation/102433
         type: documentation
     - resource:
         title: Arm A-profile Instruction Set Architecture
-        link: https://developer.arm.com/documentation/ddi0602/2022-09/?lang=en
+        link: https://developer.arm.com/documentation/ddi0602
         type: documentation
     - resource:
         title: pwntools Documentation

@@ -16,7 +16,7 @@ layout: "learningpathall"
 * [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 * [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
 * [Ansible](https://www.cyberciti.biz/faq/how-to-install-and-configure-latest-version-of-ansible-on-ubuntu-linux/)
-* [Terraform](/install-tools/terraform)
+* [Terraform](/install-guides/terraform)
 
 ## Generate Access keys (access key ID and secret access key)
 

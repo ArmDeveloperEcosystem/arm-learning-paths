@@ -25,9 +25,8 @@ tools_software_languages_filter:
 - GitHub: 1
 - i3: 1
 - NeoVim: 1
-- remote.it: 1
-- SSH: 2
-- VNC: 2
+- SSH: 1
+- VNC: 1
 - VS Code: 1
 - yml: 1
 weight: 2

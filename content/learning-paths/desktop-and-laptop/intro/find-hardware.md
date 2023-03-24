@@ -6,7 +6,7 @@ weight: 2
 
 ## Find Arm Hardware 
 
-Desktop and laptop hardware, based on Arm processors, is available with different operating systems including Windows, Linux, and Chrome OS. 
+Desktop and laptop hardware, based on Arm processors, is available with different operating systems including Windows, Linux, and ChromeOS. 
 
 ### Windows
 
@@ -18,13 +18,13 @@ Windows on Arm laptops can also be used for software development.
 - [Surface Pro 9 with 5G](https://www.microsoft.com/en-us/d/surface-pro-9/93vkd8np4fvk)
 
 
-### Chrome OS
+### ChromeOS
 
 Chromebooks with Arm processors can also be used for software development. A recent 2-in-1 with good performance is the [Acer Spin 513](https://www.acer.com/us-en/chromebooks/acer-chromebook-spin-513-cp513-2h/pdp/NX.K0LAA.001).
 
 ### Linux
 
-Both Windows and Chrome OS have a Linux subsystem which can be used for software development tasks. See [this article](/learning-paths/desktop-and-laptop/wsl2) for more information.
+Both Windows and ChromeOS have a Linux subsystem which can be used for software development tasks. See [this article](/learning-paths/desktop-and-laptop/wsl2) for more information.
 
 Some single board computers have enough performance to implement Linux based desktop computers. The [Pinebook](https://www.pine64.org/pinebook/) and [Pinebook Pro](https://www.pine64.org/pinebook-pro/) are good examples of these. The [Raspberry Pi 400](https://www.raspberrypi.com/products/raspberry-pi-400/) is powered by a [Raspberry Pi 4b](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) module.
 

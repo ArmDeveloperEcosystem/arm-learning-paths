@@ -25,12 +25,12 @@ docker run hello-world
 
 If Docker is installed the result will be a welcome message which starts with the text shown.
 
-```console
+```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ```
 
-If any other output is shown return to [Installing Docker](/install-tools/docker/) and follow the installation instructions.
+If any other output is shown return to [Installing Docker](/install-guides/docker/) and follow the installation instructions.
 
 Try out some Docker projects to confirm they build and run as expected. Some simple ones are in GitHub in a [project called hello-arm](https://github.com/jasonrandrews/hello-arm). 
 
@@ -107,7 +107,7 @@ docker run --rm username/hello
 
 The expected output is:
 
-```console
+```output
 64-bit userspace
 ```
 
@@ -130,10 +130,8 @@ docker run --rm username/hello
 
 The expected output is:
 
-```console
+```output
 32-bit userspace
 ```
 
 This Docker image will also work on a 32-bit version of Raspberry Pi OS. Compared to a non-Arm machine, creating this 32-bit container image is easier and performance is better.
-
-

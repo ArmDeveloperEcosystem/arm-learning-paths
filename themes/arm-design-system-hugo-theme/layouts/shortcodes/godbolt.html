@@ -1,16 +1,18 @@
-<!-- 
-    Uses Godbolt to compile C code with aarch64 GCC 12
-    Usage:
-    - width=""
-    - height=""
-    - src="": Input source code in clear text. Use \n to jump to line
-    3 modes available:
-        - mode="diff" -lopt="X" -ropt="Y": Displays assembly and compares when compiled with options X (left) and Y (right)
-        OR
-        - mode="output" -opt="X" Displays assembly and compiler output when compiled with options X
-        OR
-        - mode="assembly" -opt="X" Displays assembly when compiled with options X
--->
+{{/*
+Uses Godbolt to compile C code with aarch64 GCC 12
+
+Usage:
+- width=""
+- height=""
+- src="": Input source code in clear text. Use \n to jump to line
+3 modes available:
+    - mode="diff" -lopt="X" -ropt="Y": Displays assembly and compares when compiled with options X (left) and Y (right)
+    OR
+    - mode="output" -opt="X" Displays assembly and compiler output when compiled with options X
+    OR
+    - mode="assembly" -opt="X" Displays assembly when compiled with options X
+*/}}
+
 
 <!-- Global variables -->
 {{ $root       := "https://godbolt.org/" }}

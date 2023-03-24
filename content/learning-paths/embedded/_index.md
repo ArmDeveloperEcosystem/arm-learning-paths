@@ -8,13 +8,13 @@ key_ip:
 - Cortex-R
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 3
-- Linux: 6
+- Baremetal: 4
+- Linux: 7
 - macOS: 1
 - Windows: 2
 subjects_filter:
-- CI-CD: 1
-- Containers and Virtualization: 2
+- CI-CD: 3
+- Containers and Virtualization: 3
 - Embedded Linux: 3
 - Performance and Architecture: 4
 subtitle: Build secure, connected, smart IoT devices
@@ -23,21 +23,21 @@ tools_software_languages_filter:
 - Arm Compiler for Embedded: 3
 - Arm Development Studio: 3
 - Arm Fast Models: 3
-- Arm Virtual Hardware: 1
+- Arm Virtual Hardware: 3
 - Assembly: 2
-- C: 4
+- AWS EC2: 2
+- C: 5
 - Docker: 3
 - DSTREAM: 1
-- GitHub: 1
+- GitHub: 3
 - JavaScript: 1
+- MXNet: 1
 - QEMU: 1
-- remote.it: 1
-- SSH: 1
 - TensorFlow: 1
 - Verilog: 1
-- VNC: 1
 - Xilinx Vitis: 1
 - Xilinx Vivado: 1
+- yml: 2
 - Yocto Linux: 1
 weight: 4
 ---

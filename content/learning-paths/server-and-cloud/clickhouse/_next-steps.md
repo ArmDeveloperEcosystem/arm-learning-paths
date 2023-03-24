@@ -18,7 +18,7 @@ recommended_path: "/learning-paths/server-and-cloud/memcached/"
 
 further_reading:
     - resource:
-        title: Clickhouse Documentation
+        title: ClickHouse Documentation
         link: https://clickhouse.com/docs/en/home/
         type: documentation
     - resource:
@@ -26,7 +26,7 @@ further_reading:
         link: https://github.com/ClickHouse/ClickBench/#readme
         type: documentation
     - resource:
-        title: Improve Clickhouse performance on Arm-based AWS Graviton3 servers
+        title: Improve ClickHouse performance on Arm-based AWS Graviton3 servers
         link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3
         type: blog
 

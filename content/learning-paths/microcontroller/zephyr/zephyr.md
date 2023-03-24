@@ -17,9 +17,9 @@ These instructions assume an Ubuntu Linux host machine, or use of [Arm Virtual H
 
 ## Corstone-300 FVP {#fvp}
 
-The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-tools/ecosystem_fvp/).
+The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-guides/ecosystem_fvp/).
 
-Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-tools/avh#corstone).
+Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-guides/avh#corstone).
 
 ## Install prerequisites for Zephyr build
 

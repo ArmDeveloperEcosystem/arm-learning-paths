@@ -43,8 +43,4 @@ Next, enter the username and password (set earlier while creating the VM instanc
 
 ### Explore your instance
 
-Open `Control Panel` > `System`, and verify that `Device` > `System Type` identifies as an ARM-based processor.
-
-
-
-
+Open `Control Panel` > `System`, and verify that `Device` > `System Type` identifies as an Arm-based processor.

@@ -63,5 +63,5 @@ Enter the Linux username and password for the WSL distribution.
 
 VNC can also be used for a virtual desktop. 
 
-Refer to [VNC](/install-tools/vnc/) for details. The instructions work exactly as presented for WSL2.
+Refer to [VNC](/install-guides/vnc/) for details. The instructions work exactly as presented for WSL2.
 

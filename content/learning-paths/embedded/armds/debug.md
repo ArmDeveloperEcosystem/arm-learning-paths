@@ -13,9 +13,9 @@ You can connect the [Arm Development Studio](https://developer.arm.com/Tools%20a
 
 ## Prerequisites
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
+It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
-It is also assumed you have installed Arm Fast Models and configured your license and build tools. For full instructions see [here](/install-tools/fm/).
+It is also assumed you have installed Arm Fast Models and configured your license and build tools. For full instructions see [here](/install-guides/fm/).
 
 ### If Fast Models are not available
 
@@ -26,7 +26,7 @@ If you do not have access to Arm Fast Models, you can still learn how to connect
 A number of ready made example systems are provided with Arm Fast Models, including all of the Fixed Virtual Platform (FVP) examples.
 
 We shall use the supplied `FVP_MPS2_Cortex-M3` Fast Models example, which is installed in the
-```
+```console
 FastModelsPortfolio_<version>\examples\LISA\FVP_MPS2\Build_Cortex-M3
 ```
 directory of your Fast Models installation.

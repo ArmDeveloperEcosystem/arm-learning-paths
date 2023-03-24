@@ -1,8 +1,6 @@
 ---
 title: Use Pointer Authentication on AWS Graviton3
 
-description: Learn how to use Pointer Authentication on AWS Graviton3
-
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers interested in using Pointer Authentication on AWS Graviton3 servers.
@@ -13,7 +11,7 @@ learning_objectives:
     - Exploit the applications with and without Pointer Authentication to demonstrate how Pointer Authentication instructions enhance security.
 
 prerequisites:
-    - An [AWS Graviton3 instance](/learning-paths/server-and-cloud/csp/aws), the instance type must be C7g.
+    - A [AWS Graviton3 instance](/learning-paths/server-and-cloud/csp/aws), the instance type must be C7g.
 
 author_primary: Pareena Verma
 

@@ -40,7 +40,7 @@ Configure the Matter development environment on each instance, which again can b
 source scripts/activate.sh
 ```
 These will take a few minutes to complete. Don't forget to run scripts on each instance, which you can perform in parallel. You should see
-```
+```output
 Environment looks good, you are ready to go!
 ```
 when complete.
@@ -76,7 +76,7 @@ In the `lighting-app` instance, run that application.
 ./out/debug/chip-lighting-app
 ```
 The application will initialize, and you will see boot log echoed in the console. You will see in the log:
-```
+```output
 [TIMESTAMP][INSTANCEID] CHIP:DL: PlatformBlueZInit init success
 ```
 Confirming it is ready to use (other messages in the log can be ignored).
@@ -112,7 +112,7 @@ In the `chip-tool` instance, send a message to turn the light ON, using the comm
 ./out/debug/chip-tool onoff on 0x11 1
 ```
 Observe in the `lighting-app` log (you may need to scroll back a little) that this state is reflected with:
-```
+```output
 [TIMESTAMP][INSTANCEID] CHIP:ZCL: On/Off set value: 1 1
 [TIMESTAMP][INSTANCEID] CHIP:ZCL: Toggle on/off from 0 to 1
 ```
@@ -121,7 +121,7 @@ Similarly to turn the light OFF, in the `chip-tool` instance use:
 ./out/debug/chip-tool onoff off 0x11 1
 ```
 And observe in the `lighting-app` log:
-```
+```output
 [TIMESTAMP][INSTANCEID] CHIP:ZCL: On/Off set value: 1 0
 [TIMESTAMP][INSTANCEID] CHIP:ZCL: Toggle on/off from 1 to 0
 ```

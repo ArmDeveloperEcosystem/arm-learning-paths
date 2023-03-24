@@ -149,7 +149,7 @@ After `lighting-app` is initialized, you can toggle the light with your `chip-to
 ./out/debug/chip-tool onoff off 0x11 1
 ```
 Observer your new message in the `run_lighting_app` log, for example:
-```
+```output
 [TIMESTAMP][INSTANCEID] CHIP:ZCL: HELLO WORLD! Toggle on/off from 1 to 0
 ```
 The workflow will cleanly terminate `lighting-app` after 120 seconds.

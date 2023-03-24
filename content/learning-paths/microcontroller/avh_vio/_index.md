@@ -1,7 +1,5 @@
 ---
-title: Investigate an example Virtual Peripheral with Arm Virtual Hardware
-
-description: Explore an example Python implementation of a Virtual Peripheral with Arm Virtual Hardware and Virtual IO
+title: Implement an example Virtual Peripheral with Arm Virtual Hardware
 
 minutes_to_complete: 15
 
@@ -11,7 +9,8 @@ learning_objectives:
     - Create and integrate an LED peripheral with the Virtual IO (VIO) interface of AVH.
 
 prerequisites:
-    - Some familiarity with Python
+    - A valid [AWS](https://aws.amazon.com/) account
+    - Some familiarity with Python 
 
 author_primary: Pareena Verma
 

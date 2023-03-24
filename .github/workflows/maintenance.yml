@@ -58,10 +58,10 @@ jobs:
         with:
           name: outdated
           
-      # Run tests for install tools
-      - name: Test commands and output reports for intall-tools
+      # Run tests for install guides
+      - name: Test commands and output reports for intall-guides
         run: |
-          for i in $(tree -i -f content/install-tools/ | tail -n +2 | grep ".md$"); do
+          for i in $(tree -i -f content/install-guides/ | tail -n +2 | grep ".md$"); do
             python3 tools/maintenance.py -i $i -l ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           done
            

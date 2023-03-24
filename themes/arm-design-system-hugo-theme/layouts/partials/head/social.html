@@ -1,17 +1,81 @@
-{{ "<!-- Twitter -->" | safeHTML }}
-<meta name="twitter:card" content="{{ if .IsHome }}summary_large_image{{ else }}summary{{ end }}">
-<meta name="twitter:site" content="@{{ .Site.Params.twitter }}">
-<meta name="twitter:creator" content="@{{ .Site.Params.twitter }}">
-<meta name="twitter:title" content="{{ .Title | markdownify }}">
-<meta name="twitter:description" content="{{ .Page.Params.description | default .Site.Params.description | markdownify }}">
-<meta name="twitter:image" content="{{ if .IsHome }}{{ .Site.Params.social_image_path | absURL }}{{ else }}{{ .Site.Params.social_logo_path | absURL }}{{ end }}">
+{{/*
+Sets the page parameters that social media will read for a preview of this webpage. Highly dependent on page to optimize viewing.
 
-{{ "<!-- Facebook -->" | safeHTML }}
+Where it is used:
+    - all, called from baseof
+*/}}
+
+<!-- Change displayed metadata if content page or other (homepage/list) -->
+{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
+
+<!-- If IsPage (meaning a non _index.md content page), access the _index.md's metadata to fill out social media info -->
+{{$is_subpage := .IsPage }}
+
+
+<!-- Obtain Variables depending on where you are in the site -->
+
+    <!-- Default values site-wide -->
+    {{$title:= .Site.Params.title}}
+    {{$desc := .Site.Params.description}}
+    {{$author := ""}}
+
+    <!-- Specific values for content -->
+    {{if and ($is_content) ($is_subpage)}}
+        {{if eq .Layout "installtoolsall"}}
+            <!-- Install guide standalone pages -->
+            {{ if eq .Parent.Title "Install Guides"}}
+                {{$title  = printf "%s: Install Guide" .Title }}
+                {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." .Title}}
+                {{$author = .Params.author_primary}}
+            <!-- Install guide subpages in multiinstall -->
+            {{else}}
+                {{$title  = printf "%s: Install Guide" .Title }}
+                {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title}}
+                {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+            {{end}}
+        {{else}}
+            <!-- Learning path subpages -->
+            {{$title  = printf "%s: %s" ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Title .Title}}
+            {{$desc   = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.who_is_this_for}}
+            {{$author = ($.Site.GetPage (path.Dir (path.Dir .RelPermalink))).Params.author_primary}}
+        {{end}}
+    {{else if $is_content}}
+        {{if eq .Layout "installtoolsall"}}
+            <!-- Install guide _index.md page -->
+            {{$title  = printf "%s: Install Guide" .Title}}
+            {{$desc   = printf "Get up and running quickly with the most common tool settings with code snippets, using this %s installation guide." .Title}}
+            {{$author = .Params.author_primary}}
+        {{else}}
+            <!-- Learning path _index.md page -->
+            {{$title  = .Title}}
+            {{$desc   = .Params.who_is_this_for}}
+            {{$author = .Params.author_primary}}
+        {{end}}
+    {{end}}
+
+
+
+
+<!-- Basics -->
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:title" content="{{ .Site.Params.title | markdownify }}">
-<meta property="og:description" content="{{ .Page.Params.description | default .Site.Params.description | markdownify }}">
-<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
-<meta property="og:image" content="{{ .Site.Params.image | absURL }}">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
+<meta property="og:type" content="{{ if $is_content }}article{{ else }}website{{ end }}">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Title -->
+<meta property="og:title"  content="{{$title}}">
+<meta name="twitter:title" content="{{$title}}">
+
+<!-- Description -->
+<meta property="og:description"  content="{{$desc}}">
+<meta name="twitter:description" content="{{$desc}}">
+
+<!-- Image (2x1 aspect ratio, less than 5Mb) -->
+<meta name="twitter:image" content="{{ .Site.Params.social_image | absURL }}">
+<meta property="og:image"  content="{{ .Site.Params.social_image | absURL }}">
+<meta property="og:image:type" content="image/jpg">
+<meta property="og:image:width" content="1766">
+<meta property="og:image:height" content="883">
+
+<!-- Author / Creator -->
+<meta name="author" content="{{$author}}">
+<meta name="twitter:creator" content="{{.Site.Params.twitter_handle}}">

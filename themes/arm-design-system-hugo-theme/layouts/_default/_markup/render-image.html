@@ -1,20 +1,21 @@
-<!-- Default for install-tools image routing from shared img folder -->
+{{/* Any image in markdown will be processed through this code. 
+        ![.Text](.Destination ".Title")  
+*/}}
+
 {{$full_img_path := .Destination}}
 
-<!-- Read directory of the page the image is on -->
+{{/* Change routing to grab image in same directory as learning path if a learning path*/}}
 {{$path_front := path.Dir (trim .Page.RelPermalink "/")}}
-
-<!-- Change routing to grab image in same directory as learning path if a learning path-->
 {{if in $path_front "learning-paths"}}
     {{$full_img_path = printf "/%s/%s" $path_front  .Destination}}
 {{end}}
 
-<!-- Change routing to grab image for the web for all locations -->
+{{/* Change routing to grab image for the web for all locations */}}
 {{if or (in $full_img_path "www.") (in $full_img_path "https://")}}
     {{$full_img_path = .Destination}}
 {{end}}
 
-<!-- Check if we should center the image and caption-->
+{{/* Check if we should center the image and caption*/}}
 {{$center := "#center"}}
 
 <img src="{{ $full_img_path | safeURL }}" alt='Image Alt Text: {{ replace .Text $center "" }}' title="{{ .Title }}" class="content-uploaded-image {{if strings.HasSuffix .Text $center}}centered{{end}}" />

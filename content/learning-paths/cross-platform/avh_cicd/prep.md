@@ -15,7 +15,7 @@ A valid [GitHub](https://github.com) account.
 
 GitHub requires that a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) be set. If you do not have this on your account already, navigate to `Settings` > `Developer Settings` > `Personal Access Tokens`, click on `Generate new token`, and save the token locally.
 
-A valid [AWS](https://aws.amazon.com/) account is required. Launch the Arm Virtual Hardware AMI. For full instructions see [here](/install-tools/avh#corstone).
+A valid [AWS](https://aws.amazon.com/) account is required. Launch the Arm Virtual Hardware AMI. For full instructions see [here](/install-guides/avh#corstone).
 
 ## Fork the example repository
 
@@ -47,7 +47,7 @@ To run on the Virtual Hardware, use the provided script:
 ./run_example.sh
 ```
 Observe the output:
-```
+```output
 Heard yes (146) @1000ms
 Heard no (145) @5600ms
 ...
@@ -69,7 +69,7 @@ cbuild.sh microspeech.Example.cprj
 ./run_example.sh
 ```
 Observe that the output has changed as expected.
-```
+```output
 The word was yes (146) @1000ms
 The word was no (145) @5600ms
 ...

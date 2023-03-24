@@ -86,7 +86,7 @@ def main():
     arg_parser.add_argument('-t', '--type', metavar='REPORT', action='store', default='all', type=str, help='Specify report type detailing the closed filter status when using --filter-checker. Can be either \'all\', \'subjects\', \'softwares\', \'oses\', \'tools\'')
 
     arg_group = arg_parser.add_mutually_exclusive_group()
-    arg_group.add_argument('-f', '--filter-checker', action='store_true', help='Validates the correct closed schema filters are being used in INPUT, reports any errors, and optionally updates _index.md files for each learning path category to reflect the currently supported filters.')
+    arg_group.add_argument('-f', '--filter-checker', action='store_true', help='Validates the correct closed schema filters are being used, reports any errors, and optionally updates _index.md files for each learning path category to reflect the currently supported filters.')
     arg_group.add_argument('-s', '--spelling', metavar='INPUT', action='store', type=str, help='Parse spelling of md file as INPUT. On completion the INPUT is patched with highlighted text and correction.')
     arg_group.add_argument('-i', '--instructions', metavar='INPUT', action='store', type=str, help='Parse instructions from Learning Path(s) and test them. INPUT can be a CSV file with the list of Learning Paths, a single .md file or the Learning Path folder. Test results are stored in Junit XML file. A summary is also added to the Learning Path _index.md page.')
     arg_group.add_argument('-q', '--query', action='store_true', help='Query data and update website stats.')

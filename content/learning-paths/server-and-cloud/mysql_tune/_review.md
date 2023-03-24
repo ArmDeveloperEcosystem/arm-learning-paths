@@ -38,7 +38,7 @@ review:
             Why might it be a good idea to increase how often a mutex lock is checked before the running thread yields?
         answers:
             - "Checking locks more often speeds up disk access"
-            - "Reduces context switching is expensive"
+            - "Checking locks more often reduces context switching, which is expensive"
             - "Checking locks more often speeds up buffer pool reads"
         correct_answer: 2
         explanation: >

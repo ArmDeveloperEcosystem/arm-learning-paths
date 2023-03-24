@@ -70,7 +70,7 @@ Enter `q` to quit.
 
 The output from a `parted` session is shown below for reference.
 
-```console
+```output
 GNU Parted 3.3
 Using /dev/loop10
 Welcome to GNU Parted! Type 'help' to view a list of commands.

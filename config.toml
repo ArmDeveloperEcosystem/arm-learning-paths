@@ -1,10 +1,10 @@
+title = 'Arm Learning Paths'
+
 baseURL = '/'
 languageCode = 'en-us'
-title = 'Arm Software Developers'
 theme = "arm-design-system-hugo-theme"
 
 enableGitInfo = true
-
 enableRobotsTXT = true
 
 [deployment]
@@ -27,6 +27,7 @@ cloudFrontDistributionID = "E1KJFR5JSKYU64"
     tools_software_languages = "/tag/:slug/"
     operatingsystems = "/tag/:slug/"
     subjects = "/tag/:slug/"
+    armips   = "/tag/:slug/"
 
 [related]
     threshold = 0 
@@ -59,6 +60,7 @@ github_project_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-pat
 github_branch= "main"
 
 # For metadata posting on socials
-  title = 'Arm Learning Paths'
-  description = 'Learn about software development and tools for all types of Arm platforms'
-  image = '/img/logo.png'
+title = 'Arm Learning Paths'
+description = 'Tutorials with code examples, created by the Arm ecosystem to develop better code faster across all platforms: Servers, phones, laptops, embedded devices, and microcontrollers.'
+social_image = '/img/social-image.jpg'
+twitter_handle = '@ArmSoftwareDev'

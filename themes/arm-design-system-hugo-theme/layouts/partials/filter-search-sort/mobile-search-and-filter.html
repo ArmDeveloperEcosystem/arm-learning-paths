@@ -1,0 +1,41 @@
+{{/*
+Mobile search and filter components, copying developer.arm.com style.
+
+Where it is used:
+    - /learning-paths/:category/
+    - /tag/:slug/
+
+Called from:
+    - _default/term.html
+    - learning-paths/list.html
+
+Calls to:
+    - partial filter-search-sort/filter-definition.html
+*/}}
+
+<!-- Search / filter now occupy same row -->
+<div class="u-flex u-justify-content-between c-col c-col-12 u-flex u-position-relative u-width-100% lg:u-width-auto u-margin-bottom-0">
+    <ads-search id="search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search by name"></ads-search>
+    <!-- Filter div -->
+    <div>
+        <!-- Filter button -->
+        <ads-button id="filter-button" level="tertiary" class="lg:u-hide u-position-relative" type="button" size="default" onclick="mobileFilterClicked(this)">
+            <i class="fal fa-filter"></i>
+        </ads-button>
+
+        <!-- Filter container, overlaying the page content with the filters until closed -->
+        <div id="filters-container" class="u-hide"> <!-- on filter click, remove u-hide class -->
+            <div id="filters-overlay" class="overlay-styling" tabindex="-1">
+            </div>
+            <div class="u-margin-top-1/2 facets-positioning-container">
+                <div id="facets-background">
+                    {{ if eq .page_type "learning-path-category"}}
+                        {{ partial "filter-search-sort/filter-definition.html" (dict "context" .context "page_type" "learning-path-category")}} 
+                    {{ else if eq .page_type "learning-path-term"}}
+                        {{ partial "filter-search-sort/filter-definition.html" (dict "context" .context "page_type" "learning-path-term")}} 
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

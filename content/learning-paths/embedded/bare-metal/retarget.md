@@ -12,7 +12,7 @@ We have been using `printf()` to output our message. A mechanism called [semihos
 We will modify the example to send output to the [PL011 UART](https://developer.arm.com/documentation/ddi0183) of the FVP.
 
 You can check if you are using semihosting by importing the symbol `__use_no_semihosting` to your project (see later). The linker will now throw an error for any functions that use semihosting.
-```
+```output
 Error: L6915E: Library reports error: __use_no_semihosting was requested, but _ttywrch was referenced
 ```
 ## Retarget fputc to use the UART

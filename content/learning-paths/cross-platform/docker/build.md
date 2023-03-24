@@ -22,12 +22,12 @@ docker run hello-world
 
 If Docker is installed and working correctly you see the following message:
 
-```console
+```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ```
          
-Note: If you do not see the message above, go to [Installing Docker](/install-tools/docker/) and follow the instructions to complete the installation.
+Note: If you do not see the message above, go to [Installing Docker](/install-guides/docker/) and follow the instructions to complete the installation.
 
 The sections describe how you:
 - Build a Docker image
@@ -39,7 +39,7 @@ The sections describe how you:
 
 To build a Docker image:
 
-1. Navigate to an empty directory and save the two lines below in a file named `Dockerfile`
+1. Navigate to an empty directory and save the two lines below in a file named `Dockerfile`:
 
 ```dockerfile
 FROM ubuntu:latest
@@ -52,7 +52,7 @@ CMD echo -n "Architecture is " && uname -m
 docker build -t uname  .
 ```
 
-Note: The -t argument is the tag, a human-readable name for the final image. The `.` specifies the `PATH` to find the files for the build.
+Note: The `-t` argument is the tag, a human-readable name for the final image. The `.` specifies the `PATH` to find the files for the build.
 
 ## Create a container from a Docker image
 
@@ -85,7 +85,7 @@ docker images
 
 The output is similar to this example:
 
-```console
+```output
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
 uname        latest    f0a8125a81d3   5 days ago   69.2MB
 ```

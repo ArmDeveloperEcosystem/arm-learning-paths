@@ -15,7 +15,7 @@ Linux users may need to preceed the `docker` commands below with `sudo`, as the 
 
 ## Prerequisites
 
-Download and [install](/install-tools/docker/) the appropriate Docker environment for your host platform.
+Download and [install](/install-guides/docker/) the appropriate Docker environment for your host platform.
 
 ## Prepare files to copy into image
 
@@ -37,9 +37,9 @@ This file copies the installers to the Docker image. The exact filename(s) will 
 
 Edit the Dockerfile as necessary (`ACfE` and `FVP` arguments therein), else edit on the build command line (see later).
 
-Whilst installing the [compiler](/install-tools/armclang/) and [FVP library](/install-tools/fvp), the EULA(s) are silently accepted. Be sure that this is satisfactory for you.
+Whilst installing the [compiler](/install-guides/armclang/) and [FVP library](/install-guides/fvp), the EULA(s) are silently accepted. Be sure that this is satisfactory for you.
 
-You will need to edit the licensing portion of the file to match your internal license setup. See [Arm User-Based Licenses](/install-tools/license/) for more information.
+You will need to edit the licensing portion of the file to match your internal license setup. See [Arm User-Based Licenses](/install-guides/license/) for more information.
 
 ## Dockerfile {#dockerfile}
 ```Dockerfile

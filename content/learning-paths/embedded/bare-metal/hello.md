@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## Arm tools
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-tools/armds/).
+It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
-Alternatively you can install [Arm Compiler for Embedded](/install-tools/armclang/) and [Arm Fixed Virtual Platforms (FVP)](/install-tools/fm#fvp) individually.
+Alternatively you can install [Arm Compiler for Embedded](/install-guides/armclang/) and [Arm Fixed Virtual Platforms (FVP)](/install-guides/fm#fvp) individually.
 
 See [Prepare Docker image for Arm embedded development](/learning-paths/cross-platform/docker/) for an example Docker image containing all these tools.
 
@@ -90,13 +90,13 @@ armlink --scatter=scatter.txt hello.o -o hello.axf
 ### Understanding the scatter file
 
 The statements in the scatter file define the different regions of memory and their purpose. The following defines a `load region`, starting at address 0x0, and of size 0x10000 bytes. A `load region` is an area of memory that contains the image file at reset before execution starts (typically defining the Flash memory addresses of a real system).
-```
+```output
 ROM_LOAD 0x00000000 0x00010000
 {...}
 ```
 
 Within the `load region` we define `execution region(s)`, where the code/data will be located at run-time:
-```
+```output
   ROM_EXEC +0x0 0x10000
   {
     * (InRoot$$Sections)
@@ -106,8 +106,7 @@ Within the `load region` we define `execution region(s)`, where the code/data wi
 An execution region is called a `root region` if it has the same load-time and execute-time address. The initial entry point of an image must be in a root region, as this is executed before scatterloading can occur to relocate that code. You can use the `InRoot$$Sections` section name to ensure the appropriate C library code for scatterloading is in this section (useful when there are multiple code regions).
 
 In our scatter file, all read-only (`RO`) code/data (including the entry point `__main()`) is placed in the `ROM_EXEC` root region.
-
-```
+```output
   RAM_EXEC 0x04000000 0x10000
   {
     * (+RW, +ZI)
@@ -116,7 +115,7 @@ In our scatter file, all read-only (`RO`) code/data (including the entry point `
 `RAM_EXEC` contains any read-write (`RW`) or zero-initialised (`ZI`) data. Because this has been located at a different address (0x04000000, in SRAM), it is not a root region.
 
 Region names (such as `ROM_LOAD`, `ROM_EXEC`, and `RAM_EXEC` above) are arbitrary. However there are reserved names for the Stack and Heap regions. We use a single region (`ARM_LIB_STACKHEAP`) for both.
-```
+```output
 ARM_LIB_STACKHEAP 0x04010000 EMPTY 0x10000{}
 ```
 * The heap will start at `0x04010000` and grows upwards.

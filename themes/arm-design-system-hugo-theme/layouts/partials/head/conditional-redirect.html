@@ -1,10 +1,18 @@
+{{/*
+Redirects specific pages that do not contain any content/info, but have to be potentially gotten to for clarity in breadcrumb structure
+
+Where it is used:
+    - all, called from baseof
+
+Pages to redirect to the homepage:
+    - /learning-paths/
+    - /learning-paths/cross-platform/
+*/}}
 
 
 {{ $lastUrlElement := index (split .Page.Permalink "/") (sub (len (split .Page.Permalink "/")) 2) }}
-
 {{ $pages_to_redirect_home := slice "learning-paths" "cross-platform" }}
 
 {{if in $pages_to_redirect_home $lastUrlElement}}
-<meta http-equiv="refresh" content="0; url=/" />
+    <meta http-equiv="refresh" content="0; url=/" />
 {{end}}
-

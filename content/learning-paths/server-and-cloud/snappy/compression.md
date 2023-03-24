@@ -9,15 +9,6 @@ layout: "learningpathall"
 
 ---
 
-## Prerequisites
-
-* An Arm-based instance from your preferred cloud service [provider](/learning-paths/server-and-cloud/csp/). See the supported operating systems below.
-* GCC for your Arm Linux distribution. Install using the steps [here](/install-tools/gcc/#native).
-* Unzip and make utilities
-```bash { pre_cmd="sudo apt install -y gcc g++" }
-sudo apt install -y unzip make
-```
-
 ## Detailed Steps
 
 The latest released version of [Snappy](http://google.github.io/snappy/) and [Zstandard](http://facebook.github.io/zstd/) data compression algorithms are supported on the following Linux distributions:
@@ -28,11 +19,19 @@ The latest released version of [Snappy](http://google.github.io/snappy/) and [Zs
 
 The detailed steps below have been tested on `AWS EC2` and `Oracle OCI` Arm-based servers running `Ubuntu 20.04`.
 
+## Install necessary software packages
+
+* GNU gcc and g++ for your Arm Linux distribution. Install using the steps [here](/install-guides/gcc/#native).
+* Unzip and make utilities
+```bash { pre_cmd="sudo apt install -y gcc g++" }
+sudo apt install -y unzip make
+```
+
 ## Install lzbench
 
 [lzbench](https://github.com/inikep/lzbench) is an in-memory benchmark of open-source compression algorithms. We will use this benchmark to measure stand-alone performance of the compression algorithms on Arm servers. 
 
-This benchmark also contains the source files for the snappy and zstd compression algorithms among others. They are built as part of the lzbench build process.
+This benchmark also contains the source files for the `snappy` and `zstd` compression algorithms among others. They are built as part of the `lzbench` build process.
 
 On your running EC2 instance, run the following command
 
@@ -56,13 +55,13 @@ cd ../lzbench
 
 ## Run lzbench with snappy and zstd
 
-To benchmark the standalone performance of `snappy` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
+To benchmark the stand-alone performance of `snappy` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -esnappy ../silesia/dickens
 ```
 
-To benchmark the standalone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
+To benchmark the stand-alone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -ezstd ../silesia/dickens
@@ -70,12 +69,12 @@ To benchmark the standalone performance of `zstd` with `lzbench`, using one of t
 
 The value passed to `-e` in the command above is the compression algorithm.
 
-For full usage and viewing all the arguments you can pass to lzbench run the command below
+For full usage and viewing all the arguments you can pass to `lzbench` run the command below:
 
 ```bash { cwd="lzbench" }
 ./lzbench --help
 ```
-You can repeat with other file
+You can repeat with another file.
 
 ## View Results
 

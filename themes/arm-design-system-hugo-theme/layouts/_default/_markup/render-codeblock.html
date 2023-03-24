@@ -1,18 +1,12 @@
-<pre
-    {{if isset .Attributes "highlight_lines"}} 
-        data-line={{.Attributes.highlight_lines}} 
-    {{end}}
 
-    {{if isset .Attributes "command_line"}} 
-        class="command-line"
-        data-user= {{ trim (index (split (index (split .Attributes.command_line "|") 0) "@") 0 ) " "}}
-        data-host= {{ trim (index (split (index (split .Attributes.command_line "|") 0) "@") 1 ) " "}}
-        data-output={{ trim (index (split .Attributes.command_line "|") 1) " "}}
-    {{end}}
->
-    <code class='language-{{.Type}}
-    {{if isset .Attributes "line_numbers"}} line-numbers {{end}}
-    '>
-        {{.Inner}}
-    </code>
-</pre>
+{{/* Any codeblock in markdown will be processed through this code. Linking to the following partial to remain consistent with tabpane shortcode.
+    ```.Type { line_numbers = .Attributes.line_numbers   output_lines = .Attributes.output_lines    command_line = .Attributes.command_line  }
+        .Inner
+    ```
+*/}}
+{{partial "general-formatting/prismjs-codeblock.html" (dict "input_from" "normal"
+                                                            "code" .Inner
+                                                            "language" .Type
+                                                            "line_numbers" .Attributes.line_numbers 
+                                                            "output_lines" .Attributes.output_lines
+                                                            "command_line" .Attributes.command_line) }}

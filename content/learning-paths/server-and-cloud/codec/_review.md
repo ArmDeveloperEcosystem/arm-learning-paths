@@ -29,7 +29,7 @@ review:
             - "No"
         correct_answer: 1                   
         explanation: >
-            Yes. You can vary the preset settings on the different resolution images and measure the impact on performance.
+            You can vary the preset settings on the different resolution images and measure the impact on performance.
                
 
 # ================================================================================

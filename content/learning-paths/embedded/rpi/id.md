@@ -26,19 +26,19 @@ uname -a
 
 For the Raspberry Pi 4, the output is:
 
-```console
+```output
 Linux raspberrypi 5.15.30-v8+ #1536 SMP PREEMPT Mon Mar 28 13:53:14 BST 2022 aarch64 GNU/Linux
 ```
 
 For an Oracle Cloud Ampere A1 instance, the output is:
 
-```console
+```output
 Linux instance-20220413-2250 5.15.0-1027-oracle #33~20.04.1-Ubuntu SMP Tue Jan 10 11:17:00 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
 ```
 					
 For an AWS Graviton2 instance, the output is:
 
-```console
+```output
 Linux ip-10-0-0-162 5.15.0-1028-aws #32-Ubuntu SMP Mon Jan 9 12:29:05 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
 ```
 
@@ -50,7 +50,7 @@ lscpu
 
 The Raspberry Pi 4 output is below. The processor name is Cortex-A72 and there are only few flags. Also inspect the cache sizes. 
 
-```console
+```output
 Architecture:                    aarch64
 CPU op-mode(s):                  32-bit, 64-bit
 Byte Order:                      Little Endian
@@ -85,7 +85,7 @@ Flags:                           fp asimd evtstrm crc32 cpuid
 					
 For the AWS Graviton2 instance the processor name is Neoverse-N1. There are numerous additional flags printed which are not present on the Raspberry Pi 4, and the cache sizes are different.
 
-```console
+```output
 Architecture:           aarch64
   CPU op-mode(s):       32-bit, 64-bit
   Byte Order:           Little Endian

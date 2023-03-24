@@ -109,8 +109,8 @@ table {
 
 /* Fix codeblock spacing in content when only direct decendent of paragraph (not including formatted code blocks, which are in a 'pre' element) (add space before and after, not done right) */
 p > code {
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 
@@ -177,6 +177,20 @@ div.answer label {
 
 
 
+/* Tags */
+/***********************************/   
+html[theme='light'] ads-tag {
+    --ads-tag-color: var(--arm-black);
+    --ads-tag-border-color: var(--arm-dark-grey);
+    --ads-tag-background-color: white;
+
+    --ads-tag-color-hover: var(--arm-blue);
+    --ads-tag-border-color-hover: var(--arm-blue);
+    --ads-tag-background-color-hover: white;
+}
+
+
+
 
 /* select every P and H1,2,3,4,5,6 that is the first child of markdown-content-div to have 0 top margin */
 div.markdown-content-div > h1:first-child,
@@ -187,4 +201,24 @@ div.markdown-content-div > h5:first-child,
 div.markdown-content-div > h6:first-child,
 div.markdown-content-div > p:first-child {
     margin-top: 0px;
+}
+
+
+
+/* prism adjustments, for copy code fixes */
+/*  Stop them being selectable so the user can just copy the commands 
+.command-line code span.output {
+    user-select: none;
+  }
+*/
+/* if '__output__' is at the start of a line, style differently */
+/*in prismjs:  		if (element.classList.contains('language-output')) { return } */
+/*in prismjs:  return element.textContent.replace(/^\_\_output\_\_.*\n?/gm, '');  */
+pre > code > span.hidden-output-text {
+    display: none;
+}
+pre > code > span.output {
+    user-select: none;
+    /*color: hsla(0,0%,93%,.15); */
+    opacity: .7;
 }

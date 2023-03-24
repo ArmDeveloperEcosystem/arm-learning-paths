@@ -1,7 +1,5 @@
 ---
-title: AXI-Lite and GPIOs
-
-description: Design and implement AXI-Lite peripheral to control General Purpose Input and Output Ports (GPIOs). 
+title: Design an AXI-Lite peripheral to control GPIOs
 
 minutes_to_complete: 60
 
@@ -9,13 +7,13 @@ who_is_this_for: This is an introductory topic for software developers intereste
 
 learning_objectives: 
     - Configure and integrate an AXI-Lite peripheral with a Cortex-A9 Processing System.
-    - Modify a C code to program the Cortex-A9 processor so that it reads the state of switches and control the LEDs.
-    - Demonstrate a functional simple system that lights up the LEDs based on the status of the switches.  
+    - Program the Cortex-A9 processor to read the state of switches and control the LEDs using a C program.
+    - Demonstrate a basic functional system that lights up the LEDs based on the status of the switches.  
 
 prerequisites:
     - Some familiarity with Verilog
-    - Basic understanding of System on Chip
-    - Have a 'Zybo Z7-10' development board 
+    - Basic understanding of System on Chip design
+    - A 'Zybo Z7-10' development board 
 
 ### Tags
 skilllevels: Introductory
