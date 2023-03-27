@@ -1,0 +1,61 @@
+# This is a basic workflow to help you get started with Actions
+
+name: build-and-deploy
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build_and_deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with:
+          submodules: true  # Fetch Hugo Themes
+          fetch-depth: 0 
+
+      # Sets Up Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+            hugo-version: '0.98.0'
+            extended: true
+            
+      # Post-CSS install
+      - name: Install Post-CSS
+        run: npm install postcss-cli
+
+      # Builds arm-learning-paths repo
+      - name: Build
+        run: hugo --minify
+        
+      #  Copy SSH Key
+      - name: copy key
+        run: |
+            echo $SSH_KEY | xargs -n 1 > tmp
+            base64 -d < tmp > key
+            chmod 400 key
+        shell: bash
+        env:
+          SSH_KEY: ${{secrets.SSH_KEY}}
+          
+      # SCP Site contents to netstorage
+      - name: copy site content
+        run: |
+          cd public
+          zip -r public.zip *
+          cd ..
+          scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
+        shell: bash
+        env:
+          USR: ${{secrets.SSH_USERNAME}}
+          HOST: ${{secrets.SSH_HOST}}
+          ID: ${{secrets.ID}}
