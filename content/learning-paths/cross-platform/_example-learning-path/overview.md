@@ -34,6 +34,7 @@ A Learning Path is not ...
 - product documentation
 - marketing material 
 - product or developer news
+- a place embed or link to videos
 
 ## Where is the Learning Path source code?
 

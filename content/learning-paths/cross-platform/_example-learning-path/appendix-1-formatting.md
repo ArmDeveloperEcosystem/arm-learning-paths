@@ -8,7 +8,11 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+Learning Paths are created using Markdown. 
+
 Refer to this section when you are have questions on how to format your content correctly.
+
+You can also refer to other Markdown resources, and if you are unsure, look [this page in GitHub](https://github.com/jasonrandrews/arm-learning-paths/blob/main/content/learning-paths/cross-platform/_example-learning-path/appendix-1-formatting.md?plain=1) to see how to do formatting.
 
 ## Learning Path Formatting
 
@@ -17,23 +21,44 @@ Use the quick links below to jump to the appropriate section for each type of fo
 - [Markdown Syntax](#markdown-syntax)
 - [Code Snippets](#code-snippets)
 - [Images](#images)
-- [Videos](#videos)
 - [Notice Callout](#notice-callout)
 - [Godbolt Compiler Explorer](#godbolt-compiler-explorer)
 
 
 ## Markdown Syntax
-This site leverages core Markdown syntax. This picture converes 90% of common syntax needs:
+
+The most common Markdown syntax is in the table.
+
+| Element     | Syntax                   |
+| ----------- | ----------- |
+| Heading 1   | # Most Important Heading |
+| Heading 2   | ## Second Level Heading  |
+| Heading 3   | ### Third Level Heading  |
+| **Bold text** | \*\*bold text\*\*   |
+| *Italic text* | \*Italic text\*     |
+| `Code font`   | \`code font\`       |
+
+You can insert images using Markdown.
+
+Provide alternative text (displayed if the image cannot load) in brackets followed by the image source and subtitle in parenthesis. 
+
+Here is a simple example:
 
 ![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
 
+The Markdown used to add the picture is:
 
+```console
+![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
+```
 
 ## Code Snippets
-You can add images in the standard markdown format. Provide alternative text (displayed if the image cannot load) in brackets followed by the image source and subtitle in parenthesis. Simple example:
 
-You can add code snippets in the standard markdown format, plus additional capabilities. A simple example:
-```
+You can add code snippets in the standard markdown format, plus additional capabilities. 
+
+Here is a simple example:
+
+```console
 echo ‘hello world’
 ```
 
@@ -51,6 +76,7 @@ Add the specific language name at the start of the code snippet:
 \`\`\`python \
 print(hello world) \
 \`\`\`
+
 ```python
 print(hello world)
 ```
@@ -67,6 +93,7 @@ int foo(void){
 ```
 
 ### Line numbers
+
 Specify that line_numbers are true in the following way:
 
 \`\`\`bash { line_numbers = "true" } \
@@ -78,8 +105,6 @@ echo ‘I am line two’ \
 echo ‘hello world’ 
 echo ‘I am line two’ 
 ``` 
-
-
 
 ### Output Lines
 
@@ -111,6 +136,7 @@ test
 ```
 
 #### Output - alongside "command_line" functionality
+
 Use the following syntax by specifying the output lines after a pipe like so: { command_line="root@localhost | 2-6" }
 
 Example in context:
@@ -124,6 +150,7 @@ HelloWorld
 ```
 
 #### Output - alongside any language
+
 To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output. Example:
 
 ```bash { output_lines = "2-3,5,7-11" }
@@ -140,10 +167,8 @@ outputline
 outputline
 ```
 
-
-
-
 ### Command line view
+
 Add command line user context:
 
 ```bash { command_line="root@localhost" }
@@ -211,10 +236,6 @@ Nothing more to install!
   {{< /tab >}}
 {{< /tabpane >}}
 
-
-
-
-
 ## Images
 
 You can add images in the standard markdown format. Provide alternative text (displayed if the image cannot load) in brackets followed by the image source and subtitle in parenthesis. Simple example:
@@ -230,6 +251,7 @@ These are the range of options to add an image:
     - Center-aligned
 
 ### Image Hosting (internal or external)
+
 Internal hosting is straightforward. Add the picture (.png or .jpeg format) into the Learning Path directory alongside the *.md files, and refer to it by name. This example is using 'arm-pic.png' which you can find in this directory:
 
 ![Arm sample pic](arm-pic.png "Figure 2. Local hosting example")
@@ -247,32 +269,11 @@ Center aligned:
 ![alt-text #center](arm-pic.png "Figure 5. Centered example")
 
 ### Image Sizing
+
 Images are displayed in their specified size. To shrink an image, download the image, modify the size, and host the image locally.
 
-## Videos
-
-You can add videos through a Hugo shortcode format. Only the video id is required. A simple example:
-
-![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
-
-Videos can be hosted in two ways:
-    - YouTube
-    - Vimeo
-
-### YouTube Hosting
-Use the following format (note that the 'nocookie' wording prevents YouTube from adding tracking cookies into this site via an embedded video):
-
-{{</* youtube-nocookie *video_id* */>}}     
-
-{{< youtube-nocookie 146022717 >}}
-
-
-### Vimeo Hosting
-Use the following format:
-{{< vimeo 146022717 >}}
-
-
 ## Notice Callout
+
 Use this format to add a note / tip for a reader in a highlighted way. The format is:   
 
 {{%/* notice *optional_title* */%}}  
