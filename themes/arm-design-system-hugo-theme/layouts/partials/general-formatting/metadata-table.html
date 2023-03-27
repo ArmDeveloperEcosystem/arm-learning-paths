@@ -1,17 +1,18 @@
 {{/*
+Formats metadata for content at top of page.
 
-{{ $url := "/csv/contributors.csv" }}
-{{ $sep := "," }}
-{{ range $i, $r := getCSV $sep $url }}
-    {{$i}}
-    {{$r}}
-{{ end }}
+Where it is used:
+    - install guides (all but the main of a multi-install, like 'docker')
+    - learning path _intro
 
-
+Called from:
+    - install-guides/installtoolsall.html
+    - partials learning-paths/introduction.html
 */}}
 
 
-{{$author := ""}}
+<!-- Hugo processing -->
+{{$author := .Params.author_primary}}
 {{$author_company := ""}}
 {{$github_url := ""}}
 {{$linkedin_url := ""}}
@@ -27,7 +28,7 @@
 {{ $main_tool_title := .Params.Title }}
 
 
-
+<!-- Differentiate between learning paths and install guide formatting -->
 {{if eq .Section "learning-paths"}}
     {{$is_learning_path = true}}
     {{$table_name = "Learning Path"}}
@@ -35,21 +36,30 @@
 
 
 
-
-{{if .Params.author}}
-    {{range .Params.author}}
-                {{if .name}}            {{$author = .name}}                     {{end}}
-                {{if .company_name}}    {{$author_company = .company_name}}     {{end}}
-        {{if .personal_socials}}
-            {{range .personal_socials}}
-                {{if .github}}          {{$github_url = printf "https://github.com/%s" .github}}         {{end}}
-                {{if .linkedin}}        {{$linkedin_url = printf "https://linkedin.com/in/%s" .linkedin}}{{end}}
-                {{if .twitter}}         {{$twitter_url =  printf "https://twitter.com/%s" .twitter}}     {{end}}
-                {{if .personal_website}}{{$website_url = .personal_website}}                             {{end}}
+<!-- Get metadata of author from CSV file -->
+{{ range $i, $row := getCSV "," "contributors.csv" }}
+    {{if eq $author (index $row 0)}}
+        {{ if and (ne $author "Jason Andrews") (ne $author "Pareena Verma") (ne $author "Ronan Synnott") (ne $author "Florent Lebeau") }}
+            {{$author_company = index $row 1}}
+            {{if (index $row 2)}}
+                {{$github_url = printf "https://github.com/%s" (index $row 2)}}
             {{end}}
+            {{if (index $row 3)}}
+                {{$linkedin_url = printf "https://linkedin.com/in/%s" (index $row 3)}}
+            {{end}}
+            {{if (index $row 4)}}
+                {{$twitter_url = printf "https://twitter.com/%s" (index $row 4)}}
+            {{end}}
+            {{if (index $row 5)}}
+                {{$website_url = index $row 5}}
+            {{end}}
+        {{else}}
+            {{$author = "Arm"}}
         {{end}}
     {{end}}
-{{end}}
+{{ end }}
+
+
 
 <!-- get list of names (urlized) of all tools_software_languages from across each learning path (cross platform already taken into account) -->
 {{ range where .Site.Pages "Params.maintopic" true}}
