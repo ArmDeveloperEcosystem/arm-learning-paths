@@ -23,3 +23,13 @@ td.nowrap {
 .margin-l-0 {
     padding-left: 0px!important;
 }
+.margin-l-12 {
+    padding-left: 12px!important;
+}
+.margin-l-24 {
+    padding-left: 24px!important;
+}
+
+.author-social-icon {
+    padding-left: 12px;
+}
