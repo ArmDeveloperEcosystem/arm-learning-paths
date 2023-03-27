@@ -53,7 +53,7 @@ jobs:
           cd public
           zip -r public.zip *
           cd ..
-          scp -v -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
+          scp -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
         shell: bash
         env:
           USR: ${{secrets.SSH_USERNAME}}
