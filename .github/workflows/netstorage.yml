@@ -36,13 +36,6 @@ jobs:
       # Builds arm-learning-paths repo
       - name: Build
         run: hugo --minify
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        env:
-          SSH_KEY: ${{secrets.SSH_KEY}}
-          USR: ${{secrets.SSH_USERNAME}}
-          HOST: ${{secrets.SSH_HOST}}
-          ID: ${{secrets.ID}}
         
       #  Copy SSH Key
       - name: copy key
