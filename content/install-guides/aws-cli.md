@@ -3,6 +3,7 @@ additional_search_terms:
 - cloud
 layout: installtoolsall
 minutes_to_complete: 15
+author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html

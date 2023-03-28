@@ -2,7 +2,8 @@
 additional_search_terms:
 - Kubernetes
 layout: installtoolsall
-minutes_to_complete: 30
+minutes_to_complete: 15
+author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://kubernetes.io/docs/reference/kubectl

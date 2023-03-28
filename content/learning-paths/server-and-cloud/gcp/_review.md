@@ -18,7 +18,7 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            No, instances that have been deleted cannot be retrieved. However, if an instance is simply stopped, you can start it again.
+            Instances that have been deleted cannot be retrieved. However, if an instance is simply stopped, you can start it again.
 
     - questions:
         question: >

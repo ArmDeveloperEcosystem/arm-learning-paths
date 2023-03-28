@@ -3,7 +3,7 @@ title: Learn how to deploy MySQL on AWS
 
 description: Deploy single instance of MySQL through Docker, RDS and EC2 instance
 
-minutes_to_complete: 60   
+minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on AWS.
 
@@ -12,8 +12,12 @@ learning_objectives:
     - Automate MySQL EC2 instance creation using Terraform and Ansible
 
 prerequisites:
-    - An Amazon Web Services (AWS) account
-    - A computer with Terraform and Ansible installed
+    - An [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
+    - A computer with [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed
+    - A computer with [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) installed
+    - A computer with [Ansible](https://www.cyberciti.biz/faq/how-to-install-and-configure-latest-version-of-ansible-on-ubuntu-linux/) installed
+    - A computer with [Terraform](/install-guides/terraform) installed
+    - A computer with [Docker](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu) installed
 
 author_primary: Jason Andrews
 ### Tags

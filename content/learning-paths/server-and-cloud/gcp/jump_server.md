@@ -8,16 +8,6 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-
-Two tools are required on the computer you are using. Follow the links to install the required tools.
-* [Terraform](/install-guides/terraform)
-* [Google Cloud CLI](/install-guides/gcloud)
-
 ## Deploy Arm instances on GCP and provide access via Jump Server
 
 ### Introduction to Jump Server
@@ -464,7 +454,7 @@ In the Google Cloud console, go to the [VM instances page](https://console.cloud
 ![image](https://user-images.githubusercontent.com/67620689/222353051-483be628-6466-44f5-85b5-d7a7039b7dad.PNG)
 
 ### Use Jump Host to access the Private Instance
-Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells ssh to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.
+Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.
 ```console
   ssh -J username@jump-host-IP username@target-server-IP
 ```

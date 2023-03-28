@@ -8,17 +8,6 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-
-Two tools are required on the computer you are using. Follow the links to install the required tools.
-
-* [Terraform](/install-guides/terraform)
-* [Google Cloud CLI](/install-guides/gcloud)
-
 # Deploy an Arm based VM using Terraform
 
 ## Generate an SSH key-pair
@@ -102,7 +91,7 @@ Run `terraform plan` to create an execution plan.
 
 * The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
 * The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
-* The optional -out parameter allows you to specify an output file for the plan. Using the -out parameter ensures that the plan you reviewed is exactly what is applied.
+* The optional `-out` parameter allows you to specify an output file for the plan. Using the `-out` parameter ensures that the plan you reviewed is exactly what is applied.
 
 ### Apply a Terraform execution plan
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.

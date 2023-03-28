@@ -10,6 +10,8 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
+author_primary: Ronan Synnott
+
 ### Link to official documentation
 official_docs:
 
@@ -26,7 +28,7 @@ An Arm account is required to access Arm IP Explorer. To create an Arm account, 
 
 ## Installation
 
-Arm IP Explorer is a cloud based tool and does not require any local installtion.
+Arm IP Explorer is a cloud based tool and does not require any local installation.
 
 It can be accessed [here](https://ipexplorer.arm.com/) using any browser of your choice.
 

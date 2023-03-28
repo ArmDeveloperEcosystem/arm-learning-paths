@@ -8,20 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Deploy single instance of MySQL 
-
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
-
-Four tools are required on the computer you are using. Follow the links to install the required tools.
-
-* [AWS CLI](/install-guides/aws-cli)
-* [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
-* [Ansible](/install-guides/ansible)
-* [Terraform](/install-guides/terraform)
+#  Deploy single instance of MySQL 
 
 ## Generate an SSH key-pair
 
@@ -36,15 +23,15 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
   
-### Go to My Security Credentials
+- Go to My Security Credentials
    
 ![image](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png)
 
-### On Your Security Credentials page click on create access keys (access key ID and secret access key)
+- On Your Security Credentials page click on create access keys (access key ID and secret access key)
    
 ![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
    
-### Copy the Access Key ID and Secret Access Key 
+- Copy the Access Key ID and Secret Access Key 
 
 ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
 
@@ -52,14 +39,13 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 
 After generating the public and private keys, we have to create an EC2 instance. Then we will push our public key to the **authorized_keys** folder in `~/.ssh`. We will also create a security group that opens inbound ports `22`(ssh) and `3306`(MySQL). Below is a Terraform file called `main.tf` which will do this for us.
 
-    
-
 ```console
 provider "aws" {
   region = "us-east-2"
   access_key  = "AXXXXXXXXXXXXXXXXXXX"
   secret_key   = "AAXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
+
 resource "aws_instance" "MYSQL_TEST" {
   ami           = "ami-064593a301006939b"
   instance_type = "t4g.small"
@@ -68,7 +54,6 @@ resource "aws_instance" "MYSQL_TEST" {
   tags = {
     Name = "MYSQL_TEST"
   }
-
 }
 
 resource "aws_default_vpc" "main" {
@@ -76,6 +61,7 @@ resource "aws_default_vpc" "main" {
     Name = "main"
   }
 }
+
 resource "aws_security_group" "Terraformsecurity" {
   name        = "Terraformsecurity"
   description = "Allow TLS inbound traffic"
@@ -87,7 +73,7 @@ resource "aws_security_group" "Terraformsecurity" {
     to_port          = 3306
     protocol         = "tcp"
     cidr_blocks      = ["0.0.0.0/0"]
-}
+  }
   ingress {
     description      = "TLS from VPC"
     from_port        = 22
@@ -105,8 +91,8 @@ resource "aws_security_group" "Terraformsecurity" {
   tags = {
     Name = "Terraformsecurity"
   }
+}
 
- }
 resource "local_file" "inventory" {
     depends_on=[aws_instance.MYSQL_TEST]
     filename = "/home/ubuntu/inventory.txt"
@@ -117,11 +103,13 @@ ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.MYSQL_TEST.pu
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "id_rsa"
-        public_key = file("~/.ssh/id_rsa.pub")
+        key_name   = "mysql_key"
+        public_key = file("~/.ssh/mysql_key.pub")
  }
 ```
-**NOTE:-** Replace `access_key`, and `secret_key` with your values.
+{{% notice Note %}}
+Replace `access_key`, and `secret_key` with your values.
+{{% /notice %}}
 
 Now, use the below Terraform commands to deploy the `main.tf` file.
 
@@ -132,39 +120,86 @@ Now, use the below Terraform commands to deploy the `main.tf` file.
 
 Run `terraform init` to initialize the Terraform deployment. This command is responsible for downloading all dependencies which are required for the AWS provider.
 
-```console
+```bash
 terraform init
 ```
 
-![Screenshot (320)](https://user-images.githubusercontent.com/92315883/213113408-91133eef-645c-44ed-9136-f48cce40e220.png)
+This gives the following output:
+
+```output
+Initializing the backend...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Reusing previous version of hashicorp/local from the dependency lock file
+- Using previously-installed hashicorp/local v2.4.0
+- Using previously-installed hashicorp/aws v4.59.0
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
 
 #### Create a Terraform execution plan
 
 Run `terraform plan` to create an execution plan.
 
-```console
+```bash
 terraform plan
 ```
 
-**NOTE:** The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+{{% notice Note %}}
+The `terraform plan` command is optional. You can directly run `terraform apply` command. But it is always better to check the resources about to be created.
+{{% /notice %}}
 
 #### Apply a Terraform execution plan
 
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. The below command creates all required infrastructure.
 
-```console
+```bash
 terraform apply
-```      
-![Screenshot (322)](https://user-images.githubusercontent.com/92315883/213113585-2f406ed0-3fc7-475b-ab6a-c988ca734349.png)
+```
 
+In the output, you will need to confirm the actions to perform by typing `yes`: 
+
+```output
+[...]
+Plan: 5 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+aws_key_pair.deployer: Creating...
+aws_default_vpc.main: Creating...
+aws_key_pair.deployer: Creation complete after 1s [id=mysql_key]
+aws_default_vpc.main: Creation complete after 3s [id=vpc-08d4df87625044841]
+aws_security_group.Terraformsecurity: Creating...
+aws_security_group.Terraformsecurity: Creation complete after 3s [id=sg-020f83a21c9b398ee]
+aws_instance.MYSQL_TEST: Creating...
+aws_instance.MYSQL_TEST: Still creating... [10s elapsed]
+aws_instance.MYSQL_TEST: Creation complete after 13s [id=i-0d52fbdc1c16b977e]
+local_file.inventory: Creating...
+local_file.inventory: Creation complete after 0s [id=849e18d25f98a73da5064c52221d65a094b11d5a]
+
+Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
+```
 
 ## Configure MySQL through Ansible
 Ansible is a software tool that provides simple but powerful automation for cross-platform computer support.
 Ansible allows you to configure not just one computer, but potentially a whole network of computers at once.
-To run Ansible, we have to create a `.yml` file, which is also known as `Ansible-Playbook`. Playbook contains a collection of tasks.
+To run Ansible, we have to create a `playbook.yml` file, which is also known as `Ansible-Playbook`. This playbook contains a collection of tasks.
 
-### Here is the complete YML file of Ansible-Playbook
-```console
+Here is the complete YML file of `Ansible-Playbook`.
+```yaml
 ---
 - hosts: all
   remote_user: root
@@ -232,15 +267,26 @@ To run Ansible, we have to create a `.yml` file, which is also known as `Ansible
         name: mysql
         state: restarted
 ```
-**NOTE:-** Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` with your password.
+{{% notice Note %}}
+Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` with your password.
+{{% /notice %}}
 
-In our case, the inventory file will generate automatically after the `terraform apply` command.
+In our case, the inventory file `inventory.txt` will be generated automatically after the `terraform apply` command.
 
 ### Ansible Commands
-To run a Playbook, we need to use the `ansible-playbook` command.
-```console
-ansible-playbook {your_yml_file} -i {your_inventory_file}
+
+This `ansible` Playbook uses the MySQL community module that can be installed by running the following command after installation:
+
+```bash
+ansible-galaxy collection install community.mysql
 ```
+
+To run a Playbook, we need to use the `ansible-playbook` command. 
+
+```bash
+ansible-playbook playbook.yml -i inventory.txt --key-file /home/ubuntu/.ssh/mysql_key
+```
+
 Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes.
@@ -292,29 +338,31 @@ changed: [ansible-target1]
 
 PLAY RECAP ******************************************************************************************************************************
 ansible-target1            : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-
 ```
 
 ## Connect to Database using EC2 instance
 
-To connect to the database, we need the `public-ip` of the instance where MySQL is deployed. We also need to use the MySQL Client to interact with the MySQL database.
+To connect to the database, we also need to use the MySQL Client on the local machine to interact with the remote MySQL database. You can install it with:
 
-```console
-apt install mysql-client
+```bash
+sudo apt install mysql-client
 ```
 
-```console
-mysql -h {public_ip of instance where Mysql deployed} -P3306 -u {user of database} -p{password of database}
+We also need to retrieve the `public-ip` of the instance where MySQL is deployed. 
+
+```bash
+mysql -h {public_ip of instance where Mysql deployed} -P3306 -u Local_user -p{password of database}
 ```
 
-**NOTE:-** Replace `{public_ip of instance where Mysql deployed}`, `{user_name of database}` and `{password of database}` with your values. In our case `user_name`= `Local_user`, which we have created through the `.yml` file. 
+{{% notice Note %}}
+Replace `{public_ip of instance where Mysql deployed}` and `{password of database}` with your values. In our case, we have set the user name to `Local_user` through the `playbook.yml` file.
+{{% /notice %}}
 
-The output will be:
+Here is the expected output:
+
 ```output
-ubuntu@ip-172-31-38-39:~/aws-mysql$ mysql -h 3.21.27.138 -P3306 -u Local_user -p
-Enter password:
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 9
+Your MySQL connection id is 14
 Server version: 8.0.32-0ubuntu0.22.04.2 (Ubuntu)
 
 Copyright (c) 2000, 2023, Oracle and/or its affiliates.
@@ -330,36 +378,76 @@ mysql>
 
 ### Access Database and Create Table
 
-We can access our database by using the below commands.
+We can list available databases by using the below command in MySQL console.
 
-```console
+```console { output_lines = "2-11" }
 show databases;
++--------------------+
+| Database           |
++--------------------+
+| arm_test           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.10 sec)
 ```
-```console
-use {your_database};
+
+And access our database by using:
+
+```console { output_lines = "2" }
+use arm_test;
+Database changed
 ```
-![Screenshot (328)](https://user-images.githubusercontent.com/92315883/213133358-c69840b7-3df3-4a4c-b882-c9b3a0bdde29.png)
 
-Use the below commands to create a table and insert values into it.
+To list tables in the database:
 
-```console
+```console { output_lines= "2" }
+show tables;
+Empty set (0.09 sec)
+```
+
+Use the below commands to create a table:
+
+```console { output_lines= "2" }
 create table book(name char(10),id varchar(10));
+Query OK, 0 rows affected (0.12 sec)
 ```
-```console
-insert into book(name,id) values ('Abook','10'),('Bbook','20'),('Cbook','20'),('Dbook','30'),('Ebook','45'),('Fbook','40'),('Gbook
-','69');
+
+And insert values into it.
+
+```console { output_lines= "2,3" }
+insert into book(name,id) values ('Abook','10'),('Bbook','20'),('Cbook','20'),('Dbook','30'),('Ebook','45'),('Fbook','40'),('Gbook','69');
+Query OK, 7 rows affected (0.11 sec)
+Records: 7  Duplicates: 0  Warnings: 0
 ```
-```console
+To display information about the table:
+```console { output_lines= "2-8" }
 describe book;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | char(10)    | YES  |     | NULL    |       |
+| id    | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.10 sec)
 ```
-![Screenshot (326)](https://user-images.githubusercontent.com/92315883/213132819-9590b8aa-b2f9-46ca-a60c-4059edf2132c.png)
 
 Use the below command to access the content of the table.
 
-```console
-select * from {{your_table_name}};
+```console { output_lines= "2-13" }
+select * from book;
++--------+------+
+| name   | id   |
++--------+------+
+| Abook  | 10   |
+| Bbook  | 20   |
+| Cbook  | 20   |
+| Dbook  | 30   |
+| Ebook  | 45   |
+| Fbook  | 40   |
+| Gbook  | 69   |
++--------+------+
+7 rows in set (0.09 sec)
 ```
-
-![Screenshot (327)](https://user-images.githubusercontent.com/92315883/213132389-db0c8949-eef8-4db8-bda7-7f55dc25193e.png)
-
-

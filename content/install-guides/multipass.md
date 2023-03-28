@@ -10,6 +10,8 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30
 
+author_primary: Jason Andrews
+
 ### Link to official documentation
 official_docs: https://multipass.run/docs
 

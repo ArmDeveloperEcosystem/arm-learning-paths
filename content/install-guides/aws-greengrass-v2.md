@@ -1,6 +1,6 @@
 ---
 title: AWS IoT Greengrass
-author-primary: Michael Hall <michael.hall@arm.com>
+author_primary: Michael Hall
 additional_search_terms:
 - iot
 layout: installtoolsall
