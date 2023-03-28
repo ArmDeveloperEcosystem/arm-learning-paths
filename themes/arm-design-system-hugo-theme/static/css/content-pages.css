@@ -157,8 +157,8 @@ html[theme='dark'] .correct-explain {color: var(--arm-green);}
 
 .fa-times-circle   {color: var(--arm-web-safe-red);}
 .incorrect-explain {color: var(--arm-web-safe-red);}
-html[theme='dark'] .fa-times-circle {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
-html[theme='dark'] .incorrect-explain {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
+html[theme='dark'] .fa-times-circle {color: #e86868} /* 27% lighter than arm's websafe red */
+html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's websafe red */
 
 
 #error-answer-all-questions-message {

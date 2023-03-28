@@ -13,9 +13,11 @@ Called from:
 <div class="content-box">
     <h2 >What you've learned</h2>
     <p class="u-margin-left-1">You should now know how to:</p>
+    <ul>
     {{ range (index .learningpathfiles 0).Params.learning_objectives }}
         <li class="u-margin-left-2">{{.}}</li>
     {{end}}
+    </ul>
 </div>
 
 

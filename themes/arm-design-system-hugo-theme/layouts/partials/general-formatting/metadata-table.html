@@ -39,7 +39,9 @@ Called from:
 <!-- Get metadata of author from CSV file -->
 {{ range $i, $row := getCSV "," "contributors.csv" }}
     {{if eq $author (index $row 0)}}
-        {{ if and (ne $author "Jason Andrews") (ne $author "Pareena Verma") (ne $author "Ronan Synnott") (ne $author "Florent Lebeau") }}
+        {{ if or (eq $author "Pareena Verma") (eq $author "Jason Andrews")  (eq $author "Ronan Synnott") (eq $author "Florent Lebeau") }}
+            {{$author = "Arm"}}
+        {{else}}
             {{$author_company = index $row 1}}
             {{if (index $row 2)}}
                 {{$github_url = printf "https://github.com/%s" (index $row 2)}}
@@ -53,8 +55,6 @@ Called from:
             {{if (index $row 5)}}
                 {{$website_url = index $row 5}}
             {{end}}
-        {{else}}
-            {{$author = "Arm"}}
         {{end}}
     {{end}}
 {{ end }}
@@ -213,7 +213,7 @@ Called from:
                                 Arm IP:
                             </td>
                             <td class="td-metadata-value">
-                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none; margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}    
+                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}    
                             </td>
                         </tr>
                     {{else}}
@@ -310,7 +310,7 @@ Called from:
                         <tr>
                             <td class="td-metadata-value margin-l-24">
                                 {{- range .Params.armips -}}
-                                    <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="text-decoration: none; margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
+                                    <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
                                 {{- end -}}    
                             </td>
                         </tr>
