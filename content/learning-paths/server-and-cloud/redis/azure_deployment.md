@@ -30,21 +30,19 @@ Before you begin you will also need:
 
 The instructions to login to Azure CLI and to create the keys are below.
 
+### Generate the SSH key-pair
+
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
+
 ### Azure authentication
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For authentication, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/azure/terraform#azure-authentication).
-
-### Generate an SSH key-pair
-
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Azure access. 
-
-```console
-ssh-keygen -f azure_key -t rsa -b 2048 -P ""
-```
-
-You should now have your SSH keys in the current directory.
+For Azure authentication, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/azure/terraform#azure-authentication).
 
 ## Create an Azure instance using Terraform
 For Azure Arm based instance deployment, the Terraform configuration is broken into four files: `providers.tf`, `variables.tf`, `main.tf`, and `outputs.tf`.
@@ -224,7 +222,7 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
 
   admin_ssh_key {
     username= "ubuntu"
-    public_key = file("/home/ubuntu/.ssh/azure_key.pub")
+    public_key = file("~/.ssh/id_rsa.pub")
   }
 
   boot_diagnostics {
@@ -243,9 +241,7 @@ ansible-target1 ansible_connection=ssh ansible_host=${azurerm_linux_virtual_mach
 ```
 Make the changes listed below in `main.tf` to match your account settings.
 
-1. In the `admin_ssh_key` section, change the `public_key` value to match your SSH key.
-
-2. In the `local_file` section, change the `filename` to be the path to your current directory.
+1. In the `local_file` section, change the `filename` to be the path to your current directory.
 
 The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
 
@@ -342,7 +338,7 @@ You can use the same `playbook.yaml` file used in the topic, [Install Redis on a
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file azure_key
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 

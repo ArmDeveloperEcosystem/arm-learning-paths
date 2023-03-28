@@ -1,3 +1,10 @@
+{{/*
+Contains all information in the head of an html file.
+
+Where it is used:
+    - all, called from baseof
+*/}}
+
 <meta charset="utf-8">
 
 <!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
@@ -5,14 +12,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
 
-<!-- FontAwesome import (not sure if needed seperate than ADS)-->
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-
-<!-- Viewport -->
+<!-- Set the viewport appropriatly -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- ADS Imports -->
-
 <link rel="stylesheet" 
       href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" 
       integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" 
@@ -23,22 +26,26 @@
       crossorigin="anonymous"></script>
 
       
-<!-- Cookie prompt, customized from cookie consent: https://cdn.jsdelivr.net/npm/cookieconsent@3/ -->
+<!-- Cookie prompt style. Customized to look/feel like Arm from this cookie consent: https://cdn.jsdelivr.net/npm/cookieconsent@3/ -->
 <link rel="stylesheet" type="text/css" href="/css/cookie.css" />
 
-<!-- Prism imports, for style (JS is added in baseof) -->
+<!-- Prism style imports (defaults to dark, replaced with light if selected by user via theme change) -->
 <link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" /> 
 <link href="/css/prism-added-styles.css" rel="stylesheet" /> 
 
-<!-- All ADS Hugo theme imports, custom for this site -->
+<!-- All custom CSS for this site -->
 <link href="/css/cross-page.css" rel="stylesheet" /> 
 <link href="/css/content.css" rel="stylesheet" /> 
 <link href="/css/mobile.css" rel="stylesheet" /> 
 <link href="/css/home.css" rel="stylesheet" /> 
-<link href="/css/list-learning-paths.css" rel="stylesheet" /> 
 <link href="/css/feedback.css" rel="stylesheet" /> 
+<link href="/css/list-pages.css" rel="stylesheet" /> 
+<link href="/css/context-tables.css" rel="stylesheet" /> 
+<link href="/css/content-pages.css" rel="stylesheet" /> 
 
-<!-- Display the title of the page -->
+<!-- Display the title of the page in the web browser -->
 {{ $title := print .Site.Title " | " .Title }}
-{{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+{{ if .IsHome }}
+    {{ $title = .Site.Title }}
+{{ end }}
 <title>{{ $title }}</title>

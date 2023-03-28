@@ -10,25 +10,23 @@
 ads-card.main-topic-card {
     --ads-card-border-radius: 10px;
     --ads-card-border-width: 2px;
-
-    --ads-card-border-color-hover: var(--arm-web-safe-orange);
 }
 
 html[theme='dark'] ads-card.main-topic-card {
-    --ads-card-background-color: var(--arm-color-surface);
-    --ads-card-background-color-hover: var(--arm-color-surface);
-
+    --ads-card-background-color: var(--arm-color-overlay-dark);
     --ads-card-border-color: var(--arm-black);
 
+    --ads-card-background-color-hover: var(--black);
+    --ads-card-border-color-hover: var(--arm-web-safe-orange);
     --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(255, 255, 255, 0.25);
 }
 
-html[theme='light'] ads-card.main-topic-card,  html[theme='sw-hub'] ads-card.main-topic-card  {
-    --ads-card-background-color: var(--white);
-    --ads-card-background-color-hover: var(--white);
-
+html[theme='light'] ads-card.main-topic-card{
+    --ads-card-background-color: var(--arm-light-grey-alt);
     --ads-card-border-color: var(--arm-light-grey);
 
+    --ads-card-background-color-hover: var(--arm-light-grey);
+    --ads-card-border-color-hover: var(--arm-orange);
     --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(0,0,0,0.25);
 }
 
@@ -52,9 +50,45 @@ html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-title {
 /* Subtitle styling */
 /**************************************/
 ads-card.main-topic-card  .main-topic-subtitle {
-    color: var(--arm-dark-grey);
+    color: var(--arm-black);
+    font-family: "Source Code Pro", monospace;   
 }
 
-html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-subtitle {
-    font-family: "Source Code Pro", monospace
+html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
+    color: var(--arm-light-grey); 
+}
+
+
+
+/* Install Guide cta link */
+/**************************************/
+.install-guide-cta {
+    --ads-cta-link-color: #107a97; /* slightly darker web safe blue */
+}
+
+
+/* Header formatting and spacing */
+/**************************************/
+.homepage-top-divs {
+    width:fit-content;  
+    margin: 0 auto;
+}
+
+#homepage-header {
+    margin-top: 32px;
+    margin-bottom: 16px;
+    font-size: 75px;
+    text-align: center;
+}
+
+
+html[theme="light"] #homepage-header {
+    background: -webkit-linear-gradient(left,var(--arm-blue), var(--arm-web-safe-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+html[theme="dark"] #homepage-header {
+    background: -webkit-linear-gradient(left,var(--arm-light-blue), var(--arm-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

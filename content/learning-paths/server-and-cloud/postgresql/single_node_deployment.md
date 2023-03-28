@@ -14,7 +14,7 @@ You can deploy PostgreSQL on AWS Graviton processors using Terraform and Ansible
 
 In this topic, you will deploy PostgreSQL on a single AWS EC2 instance, and in the next topic you will deploy PostgreSQL on a three-node cluster. 
 
-If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -30,21 +30,19 @@ Before you begin you will also need:
 
 The instructions to create the keys are below.
 
-### Generate AWS access keys 
+### Generate the SSH key-pair
 
-Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
 
-To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws/terraform#generate-access-keys-access-key-id-and-secret-access-key).
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
 
-### Generate an SSH key-pair
+### Generate AWS access keys
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access: 
+Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI.
 
-```console
-ssh-keygen -f aws_key -t rsa -b 2048 -P ""
-```
-
-You should now have your AWS access keys and your SSH keys in the current directory.
+To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws-terraform/terraform#generate-access-keys-access-key-id-and-secret-access-key).
 
 ## Create an AWS EC2 instance using Terraform
 
@@ -64,7 +62,7 @@ resource "aws_instance" "PSQL_TEST" {
   ami           = "ami-0f9bd9098aca2d42b"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = "aws_key"
+  key_name = aws_key_pair.deployer.key_name
  
   tags = {
     Name = "PSQL_TEST"
@@ -108,8 +106,8 @@ output "Master_public_IP" {
   value = [aws_instance.PSQL_TEST.public_ip]
 }
  resource "aws_key_pair" "deployer" {
-         key_name   = "aws_key"
-         public_key = "ssh-rsaxxxxxxxxxxxxxx"
+         key_name   = "id_rsa"
+         public_key = file("~/.ssh/id_rsa.pub")
   }
 // Generate inventory file
 resource "local_file" "inventory" {
@@ -135,9 +133,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
-3. In the `aws_key_pair` section, change the `public_key` value to match your SSH key. Copy and paste the contents of your aws_key.pub file to the `public_key` string. Make sure the string is a single line in the text file.
-
-4. in the `local_file` section, change the `filename` to be the path to your current directory.
+3. in the `local_file` section, change the `filename` to be the path to your current directory.
 
 The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
 
@@ -269,7 +265,7 @@ No changes are required to the file.
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file aws_key
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 
@@ -314,7 +310,7 @@ Execute the steps below to try out PostgreSQL.
 1. Connect to the database using SSH to the public IP of the AWS EC2 instance. 
 
 ```console
-ssh -i aws_key ubuntu@<public-IP-address>
+ssh ubuntu@<public-IP-address>
 ```
 
 2. Log in to postgres using the commands:

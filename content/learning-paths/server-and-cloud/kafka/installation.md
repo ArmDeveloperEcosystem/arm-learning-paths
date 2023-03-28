@@ -21,12 +21,9 @@ Kafka is an event streaming platform. It is a distributed system consisting of s
 
 ## Setup
 
-In this learning path, we will deploy 3 Kafka nodes, 3 Zookeeper nodes and a client node as shown in the diagram here. 
+In this learning path, we will deploy 3 Kafka nodes, 3 Zookeeper nodes and a client node as shown in the diagram here. For a simpler single node setup, follow the Kafka [quick start guide](https://kafka.apache.org/quickstart).
 
 ![KAFKA_image3 (3)](https://user-images.githubusercontent.com/66300308/189855554-51b0c9d2-095b-4196-8a2d-e8a768880d72.png)
-
-For a simpler single node setup, follow the Kafka [quick start guide](https://kafka.apache.org/quickstart).
-
 
 ## Install Java:
 

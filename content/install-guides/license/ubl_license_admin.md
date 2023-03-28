@@ -13,7 +13,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 ## License portal
 
-To generate your licenses you need access to the Arm user-based licensing portal, with the account that the licenses were assigned to. Verify you can access before you begin.
+To generate your licenses you need access to the Arm user-based licensing portal, with the account that the licenses were assigned to.
+
+Verify you can access the following before you begin.
 ```url
 https://developer.arm.com/support/licensing/user-based
 ```
@@ -36,42 +38,55 @@ The local license server (LLS) software can be downloaded from:
 ```url
 https://lm.arm.com/downloads
 ```
-Expand the tarball, and install the license server software.
+Expand the tarball (named `flexnetls-armlmd-<version>.tar.gz`), and install the license server software.
 ```console
-tar -xf flexnetls-armlmd-<version>.tar.gz
-sudo flexnetls-armlmd-<version>/install_license_server
+tar -xf flexnetls-armlmd-1.2022120.0.tar.gz
+sudo flexnetls-armlmd-1.2022120.0/install_license_server
 ```
 The installer will automatically start the license server software. You will see the following output:
 ```output
-Waiting for license server... (up to 120 seconds)
-License server ready.
-```
-To check the status of the server application, use:
-```console
-sudo systemctl status flexnetls-armlmd
-```
-### Set environment variables
+License server service flexnetls-armlmd is starting, and will start automatically on system start-up.
+Waiting for license server... (up to 120 seconds, or press CTRL-C to stop waiting)
 
-It is recommended to add the install directory to the `PATH`, and to set the `FLEXNETLS_BASEURL` environment variable. For example:
+License server running and ready to accept requests at http://<external server name or IP address>:7070
+```
+### Add install directory to PATH
+
+It is recommended to add the server install directory to the `PATH`. For example:
 ```console
 export PATH=/opt/flexnetls-armlmd/bin:$PATH
-export FLEXNETLS_BASEURL=http://localhost:7070/api/1.0/instances/~
 ```
+
 ### Set administrator password
 
-The first time you install the LLS server, you must set an appropriate password so as to be able to configure it. Use the following command:
+You must set an appropriate administrator password to be able to execute subsequent commands. Use the following:
 ```console
 armlm_change_admin_password
 ```
+
 ### Verify server hostid
 
 The default `hostid` was selected by the license server installer. To view the selected hostid use:
 ```console
 armlm_show_hostid
 ```
-which will output (in JSON format) a list of the selected and all available hostids.
-
-If you wish to change the selected hostid, edit the `/server/local-configuration.yaml` file. See the [documentation](https://developer.arm.com/documentation/107573/latest/Getting-started-with-user-based-licensing/Register-your-license-server) for full details.
+which will output all available hostids, and highlight as `selected` the one that will be used. For example:
+```output
+{
+  "selected" : {
+    "hostidType" : "ETHERNET",
+    "hostidValue" : "001122334455"
+  },
+  "hostids" : [ {
+    "hostidType" : "ETHERNET",
+    "hostidValue" : "223344556677"
+  }, {
+    "hostidType" : "ETHERNET",
+    "hostidValue" : "445566778899"
+  } ]
+}
+```
+If you wish to change the `selected` hostid, edit the `/server/local-configuration.yaml` file. See the [documentation](https://developer.arm.com/documentation/107573/latest/Getting-started-with-user-based-licensing/Register-your-license-server) for full details.
 
 ### Register license server with Arm
 
@@ -101,8 +116,12 @@ Licenses have been successfully updated. No confirmation is required.
 ```
 The licenses are now ready to use by the end-users.
 
-## Monitor license server usage
+## Monitor license server status and usage
 
+To check the status of the server application, use:
+```console
+armlm_check_server_status
+```
 To list the number of licenses (total and used) use:
 ```console
 armlm_list_products

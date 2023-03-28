@@ -1,0 +1,44 @@
+{{/*
+Displays the search status under the search bar: active filters, what is being sorted, and how many results are displaying.
+
+Where it is used:
+    - List pages (term, learning path, install guides)
+
+Called from:
+    - _default/term.html
+    - learning-paths/list.html
+    - filter-search-sort/mobile-search-and-filter.html
+
+*/}}
+
+<!-- Display on learning path list pages only -->
+{{- if ne .page_type "tools" -}}
+    <div id="current-tag-bar">
+        <span>
+            <span id="tag-preface">Filters: </span>
+        </span>
+        <!-- This area is filled dynamically by javascript & checkboxes -->
+        <span  id="tag-clear-btn" hidden onclick="clearAllFilters()">
+            Clear Filters
+        </span>
+    </div>
+{{- end -}}
+
+<!-- Current results & sorting bar -->
+<div id="result-sort-div">
+    <div id="results-status-bar">
+        <!-- Automatically updates the currently shown number span based on dynamic filtering -->
+        Displaying 
+        <span id="currently-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
+        of 
+        <span id="total-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
+        {{.page_type}}.
+    </div>
+
+    <!-- Sorting display -->
+    {{- if ne .page_type "tools" -}}
+        <div id="sorting-bar">
+            <span class="sorting-criteria active">Date</span>
+        </div>
+    {{- end -}}
+</div>

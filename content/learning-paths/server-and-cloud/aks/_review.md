@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            The Azure command line interface (CLI) commands start with
+            The Azure command line interface (CLI) commands start with:
         answers:
             - "ms"
             - "az"
@@ -24,13 +24,13 @@ review:
             The Azure CLI commands start with az
     - questions:
         question: >
-            The WordPress tutorial from the Kubernetes documentation works without any changes in AKS. 
+            The WordPress tutorial from the Kubernetes documentation works without any changes in AKS with Arm-based instances. 
         answers:
             - "True"
             - "False"
         correct_answer: 2                     
         explanation: >
-            This Learning Path includes a modified WordPress example which works on AKS.
+            This Learning Path includes a modified WordPress example which works on AKS with Arm-based instances.
 
 
 # ================================================================================

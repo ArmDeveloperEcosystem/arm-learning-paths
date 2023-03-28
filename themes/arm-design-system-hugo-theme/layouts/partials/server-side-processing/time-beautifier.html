@@ -1,10 +1,26 @@
-{{/* translateDisplayHoursAndMinutes partial */}}
+{{/*
+Only returns a string, the properly formatted time in hrs and mins, preprocessed before site is served.
+
+Where it is used:
+    - learning path list page
+    - term list page
+    - learning path introduction
+    - install guide
+
+Called from:
+    - partials learning-paths/introduction.html
+    - learning-paths/list.html
+    - _default/term.html
+    - partials install-guides/installtoolsall.html
+
+*/}}
+
 
 {{- $h := div (int .) 60 -}}
 {{- $m := mod (int .) 60 -}}
 {{- $formatted_time := "" -}}
 
-{{/* translate hours */}}
+<!-- translate hours -->
 {{- if eq $h 0 -}}
   {{- $formatted_time = "" -}}
 {{- else if eq $h 1 -}}
@@ -13,7 +29,7 @@
   {{- $formatted_time = (print $h " hrs") -}}
 {{- end -}}
 
-{{/* translate minutes */}}
+<!-- translate minutes -->
 {{- if eq $m 0 -}}
   {{- $formatted_time = $formatted_time -}}
 {{- else if and (ne $h 0) (ne $m 0) -}}
@@ -22,10 +38,9 @@
   {{- $formatted_time = (print $m " min") -}}
 {{- end -}}
 
-{{/* return_str:  '2 hrs 25 min'        '40min'     '1 hr'  */}}
+<!-- return_str:  '2 hrs 25 min'        '40min'     '1 hr'  -->
 
 
 
-{{/* Now insert HTML of new time*/}}
+<!-- Now insert HTML of new time -->
 {{$formatted_time}}
-

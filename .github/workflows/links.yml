@@ -38,6 +38,11 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: scan
+        run: |
+          tools/install-scan.sh
+          clamscan -r -i public
+
       - name: check html links
         # Don't fail the build on broken links
         continue-on-error: true

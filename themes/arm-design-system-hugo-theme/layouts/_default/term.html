@@ -1,328 +1,77 @@
+{{/*
+A list page that shows all Learning Paths pages that match the specified term.
+
+Where it is used:
+    - /tag/:anything/
+    - /tag/rtos/
+    - /tag/c/
+
+Called from:
+    - baseof
+
+Calls to:
+    - partial filter-search-sort/filter-definition.html
+    - partial filter-search-sort/mobile-search-and-filter.html
+    - partial filter-search-sort/active-filter-and-sort-bar.html
+    - partial general-formatting/path-ads-card.html                 
+*/}}
+
+
 {{ define "main" }}
 
-
+<!-- Sort pages with this term by most recently changed first -->
 {{ $paths_to_list := (sort .Data.Pages ".Lastmod").Reverse }}
 
-
-
-
-
-
-<!-- Hugo crawl over learning path directories and display all titles where '.Param.maintopic: true'-->
-{{ $main_topic_titles := slice }}
+<!--  Hugo crawl over learning path directories and display the main categories -->
+{{ $main_category_titles := slice }}
 {{ range where $.Site.Pages "Params.maintopic" true}}
-    {{ $main_topic_titles = $main_topic_titles | append .Title }}
+    {{ $main_category_titles = $main_category_titles | append .Title }}
 {{end}}
 
+<!-- Page wrapping row -->
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
-    <div class="c-col u-hide lg:u-display-block u-flex-shrink-0" style="width: 320px; max-width: 320px;">
+    <div class="c-col filter-column-div u-hide lg:u-display-block u-flex-shrink-0">
         <h3 class="u-margin-top-0">Filter</h3>
-        <!-- Categories, CLOSED SCHEMA -->
-        {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_topic_titles)}} 
+        {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
-        <!-- Search (and filter for mobile)-->
-        <div class="u-flex u-justify-content-between c-col c-col-12 u-flex u-position-relative u-width-100% lg:u-width-auto u-margin-bottom-0">
-            <ads-search id="search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search by name">
-            </ads-search>
-            <div>
-                <ads-button id="filter-button" level="tertiary" class="lg:u-hide u-position-relative" type="button" size="default" onclick="mobileFilterClicked(this)">
-                    <i class="fal fa-filter"></i>
-                </ads-button>
+        <!-- Mobile: Search & Filter -->
+        {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
 
-                <div id="filters-container" class="u-hide"> <!-- on filter click, remove u-hide class -->
-                    <div id="filters-overlay" class="overlay-styling" tabindex="-1">
-                    </div>
-                    <div class="u-margin-top-1/2 facets-positioning-container">
-                        <div id="facets-background">
-                            {{ partial "filtering/closed-expansion.html" (dict "context" . "displayname" "Categories" "routing" "learning-paths" "tagnames" $main_topic_titles)}} 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Search (and filter for mobile) end-->
-
-
-
-
-
-        <!-- Current tag bar -->
-        <div id="current-tag-bar" class="c-row u-margin-top-1/2" style="min-height: 30px;">
-            <!-- Filled dynamically by javascript & checkboxes-->
-        </div>
-     
-        <!-- Current results bar -->
-        <div id="results-status-bar" class="c-row u-margin-top-1/2" style="min-height: 30px;">
-            Displaying&nbsp;
-            <span id="currently-shown-number" class="u-text-bold"> {{len $paths_to_list }} </span>
-            &nbsp;of&nbsp;
-            <span id="total-shown-number" class="u-text-bold"> {{len $paths_to_list }} </span>
-            &nbsp;learning paths.
-        </div>
-     
-
-
+        <!-- Bars: Active Filters, # content displayed, sort by. -->
+        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
 
         <!-- List of learning paths on right -->
         <div class="c-row">
             <div class="c-col c-col-12">
+                <hr id="divider-line" class="">
+            </div>
+
+            <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
                     {{ range $paths_to_list.ByLastmod.Reverse }}
-                    <!-- This div does two things, iterating over each tag in the taxonomy:
-                        1) Assign tags for filtering the learning path cards 
-                        2) Keeps track of unique tags to generate the filter column  -->
-
-                    <!-- TAG PAGE FILTERING, need to filter by category
-                        If in cross-platform:
-                            Iterate through '.Params.shared_between'
-                        Else: (in main topic)
-                            Get title of parent page                    
-                    -->
-                    <div class='path-div search-div
-                                {{if eq .Parent.Title "Cross Platform"}}
-                                    {{ with .Params.shared_between }}
-                                        {{ range .}}
-                                            tag-{{. | urlize}}
-                                        {{ end }}
-                                    {{ end }}   
-                                {{else}}
-                                    tag-{{.Parent.Title | urlize}}
-                                {{end}}
-                                '>  
-                                
-                        <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card'>
-                            <ads-card-content slot="content">
-                                <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
-                                    {{ upper .Params.subjects }}
-                                </p>
-                                <div class="card-title-div">
-                                    <h6 class="search-title card-title u-margin-top-0 u-margin-bottom-1/2">{{.Title}}</h6>
-                                </div>
-                                <div class="card-tag-details-div">
-                                    <p class="card-tag-details">
-                                        <!-- Tags -->
-                                        {{ delimit ( (union .Params.tools_software_languages .Params.operatingsystems) | first 5 ) " - "}}
-                                    </p>
-                                </div>
-                                <p class="card-date u-margin-bottom-0" style="margin-top: auto">
-                                    <!--
-                                    <span><i class="fa-light fa-lightbulb"></i></span>
-                                    &nbsp;{{ .Params.skillLevels}}
-                                    &nbsp;&nbsp;
-                                    -->
-                                    <span><i class="fa-light fa-calendar-days"></i></span>
-                                    &nbsp;{{ .Lastmod.UTC.Format "2 Jan 2006" }}
-
-                                    &nbsp;&nbsp;&nbsp;&nbsp;
-                                    
-                                    <span><i class="fa-light fa-clock"></i></span>
-                                    &nbsp;<span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
-                                </p>
-                            </ads-card-content>   
-                        </ads-card>
-
-
-                        <!-- 
-                        <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card'>
-                            <ads-card-content slot="content">
-                                <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
-                                    {{ upper .Params.subjects }}
-                                </p>
-                                <div class="card-title-div">
-                                    <h6 class="search-title card-title u-margin-top-0 u-margin-bottom-1/2">{{.Title}}</h6>
-                                </div>
-                                <p class="card-date u-margin-bottom-0">
-                                    <span>
-                                        {{ if eq .Params.skillLevels "Introductory"}}
-                                            <i style=" vertical-align:baseline; color: var(--arm-web-safe-green); " class="fa fa-signal-bars-fair"></i>&nbsp;&nbsp;
-                                        {{else}}
-                                        <i style=" vertical-align:baseline; color: var(--arm-web-safe-orange);" class="fa fa-signal-bars-strong"></i>&nbsp;&nbsp;
-                                        {{end}}
-                                    </span>
-                                    &nbsp;&nbsp;
-                                    <span><i class="fa-solid fa-calendar-days"></i></span>
-                                    &nbsp;{{ .Lastmod.UTC.Format "2 Jan 2006" }}
-                                    &nbsp;&nbsp;
-                                    <span><i class="fa-solid fa-clock"></i></span>&nbsp;{{.Params.minutes_to_complete}} minutes
-                                </p>
-                            </ads-card-content>   
-                        </ads-card>
-                        -->
-                        
-                    </div>           
+                        <!-- This div assigns a category tag for each LP for filtering (cross platform need to iterate over the shared_between var) -->
+                        <div class='path-div search-div
+                                    {{if eq .Parent.Title "Cross Platform"}}
+                                        {{ with .Params.shared_between }}
+                                            {{ range .}}
+                                                tag-{{. | urlize}}
+                                            {{ end }}
+                                        {{ end }}   
+                                    {{else}}
+                                        tag-{{.Parent.Title | urlize}}
+                                    {{end}}'>  
+                            <!-- Path card formatting -->
+                            {{ partial "general-formatting/path-ads-card.html" . }}                    
+                        </div>           
                     {{ end }}
                 </div>
             </div>
         </div>
-
-
-
-
-
-
     </div>
-</div> <!-- End of left-right divide -->
-
-{{ partial "filtering/filter-tag.html" . }}
-{{ partial "ads-cards/ads-card-style.html" . }}
-
-
-<!-- Include javascript to filter and search -->
-<script src="/js/search-and-filter/filter-learning-paths.js"></script>
-<script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
-<script src="/js/search-and-filter/search-logic.js"></script>
-<script src="/js/search-and-filter/search-handling.js"></script>
-
-
-
-
-<script>
-    (() => {
-        // Assign inputChangeHandler to search box
-        const search_box = document.getElementById('search-box');
-        search_box.inputChangeHandler = searchHandler_LearningPaths;
-
-        // Handle search term from URL
-        let url_str = window.location.search;
-        if (url_str.includes('search=')) {
-            let search_string = parseParamsFromURL(url_str);
-
-            // Call search handler to execute
-            search_box.setAttribute('search-value',search_string);
-            searchHandler_LearningPaths(search_string);
-        }
-    })();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<div>
-    <h3>Tagged learning paths</h3>
-    <ads-tag class="u-margin-bottom-1/2">
-        <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-        <span class="fa-solid fa-tag"></span>
-        {{ .Title }}
-    </ads-tag>
-    <div class="c-row u-gap-1/2 u-flex-nowrap">
-        <div class="c-col u-display-block" style="max-width:fit-content;">
-            <p> Jump to a topic:</p>
-        </div>
-        <div class="c-col u-display-block">
-            <div class="u-display-grid u-gap-1/2 xs:u-grid-columns-2 sm:u-grid-columns-2 md:u-grid-columns-3 lg:u-grid-columns-5 xl:u-grid-columns-7">
-                {{ range where .Site.Pages "Params.maintopic" true}}
-                    {{ partial "ads-cards/main-topic-buttons.html" (dict "context" . "current_title" "nothing" "link_to" (printf "#%s" .Title) )}}
-                {{end}}
-            </div>
-        </div>
-    </div>
-
-    {{ $pages_with_term := (sort .Data.Pages ".Lastmod").Reverse }}
-
-    <div class="c-row">
-        <div class="c-col c-col-12">
-            {{range $index, $element := where .Site.Pages "Params.maintopic" true}}
-
-                <div id="{{$element.Title}}" class="topic-header" name="{{$index}}" onclick="expandAndContract(this)">
-                    <h4>
-                        {{$element.Title}}
-                        <span name="{{$index}}" class="far fa-chevron-down" style="float:right;"></span>
-                    </h4>
-                </div>
-                <hr>
-
-                <div name="{{$index}}" id="grid-div-for-{{$index}}" class="u-margin-left-2 u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-4  u-margin-top-1">
-                    {{ range $pages_with_term }}
-                        {{ if eq .Parent.Title $element.Title}}
-                            <div class='path-div learning-path-div-for-{{$index}}'>
-                                <ads-card has-hover-effect  link="{{.Permalink}}" class='path-card'>
-                                <ads-card-content slot="content">
-                                    <ads-tag class="path-card-tag {{.Params.skillLevels}}" text="{{.Params.skillLevels}}"></ads-tag>
-                                    <h4 class="card-title u-margin-top-1/2 u-margin-bottom-1/2">{{.Title}}</h4>
-                                    <p class="card-date">Updated {{ .Lastmod.UTC.Format "Jan 2, 2006" }}</p>
-                                    <p class="card-description">{{.Description}}</p>
-                                </ads-card-content>   
-                                </ads-card>
-                            </div>
-                        {{end}}
-                    {{end}}
-                </div>
-            {{end}}
-        </div>
-    </div>
-
 </div>
 
-
-{{ partial "ads-cards/ads-card-style.html" . }}
-
-
-<script>
-    // Javascript for dynamically adding cards, needed to sort them correctly    
-    function expandAndContract(element) {
-        let topic_number = element.getAttribute('name');
-
-        // Visually change chevron on topic
-        var chevron = element.querySelector('span[name="'+topic_number+'"]');
-        if (chevron.classList.contains("fa-chevron-down")) {
-            chevron.classList.remove("fa-chevron-down");
-            chevron.classList.add("fa-chevron-right");
-        }
-        else {
-            chevron.classList.remove("fa-chevron-right");
-            chevron.classList.add("fa-chevron-down");          
-        }
-
-
-        // Hide learning paths under this topic
-        let learning_path_divs = document.getElementsByClassName('learning-path-div-for-'+topic_number);
-        let learning_path_grid = document.getElementById('grid-div-for-'+topic_number);
-        for (var i=0; i<learning_path_divs.length; i++) {
-            console.log(learning_path_divs[i]);
-            if (learning_path_divs[i].getAttribute('hidden')) {
-                learning_path_divs[i].removeAttribute('hidden');
-                //learning_path_grid.classList.add('u-margin-bottom-4');
-            }
-            else {
-                learning_path_divs[i].setAttribute('hidden',true);
-                //learning_path_grid.classList.remove('u-margin-bottom-4');
-            }
-        }
-    }
-</script>
-
-
-<style>
-    div.topic-header {
-        cursor: pointer;
-    }
-</style>
--->
-
 {{ end }}
-

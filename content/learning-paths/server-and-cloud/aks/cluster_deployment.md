@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy an AKS Cluster"
+title: "Deploy an Arm-based AKS Cluster using Terraform"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,22 +8,47 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+You can run Azure Kubernetes Service (AKS), a fully managed Kubernetes platform, on the Azure Dpsv5 Virtual Machine series featuring Ampere Altra Arm–based processors. Dpsv5 virtual machines offer compelling price-performance.
 
-* [Azure account](https://azure.microsoft.com/)
-* [Install Terraform](https://www.terraform.io/downloads)
-* [Install Kubectl](https://kubernetes.io/docs/tasks/tools/)
-* [Install Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt)
+## Before you begin
 
-## Deploy the AKS cluster
+Any computer which has the required tools installed can be used for this section. 
 
-For AKS deployment, the Terraform configuration is separated into four files: 
-- providers.tf
-- variables.tf
-- main.tf
-- outputs.tf
+You will need an [Azure account](https://azure.microsoft.com/). Create an account if needed.
 
-Add the following code in **providers.tf** file:
+Three tools are required on the computer you are using. Follow the links to install the required tools.
+
+* [Terraform](/install-guides/terraform)
+* [Kubectl](/install-guides/kubectl/)
+* [Azure CLI](/install-guides/azure-cli/)
+
+## Azure authentication
+
+For Azure authentication, follow this [documentation](/learning-paths/server-and-cloud/azure/terraform#azure-authentication).
+
+## Create an SSH key pair
+
+Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
+
+## Create an AKS cluster using Terraform
+
+You can create a new AKS cluster using Terraform.
+
+### Create Terraform files
+
+To create the cluster on AKS, the Terraform configuration is separated into four files: 
+- `providers.tf`
+- `variables.tf`
+- `main.tf`
+- `outputs.tf`
+
+Create each of the files with the provided content. 
+
+1. Use a text editor to create the file `providers.tf` with the code below: 
 
 ```console
 terraform {
@@ -44,7 +69,7 @@ provider "azurerm" {
 }
 ```
 
-Add the following code in **variables.tf** file:
+2. Use a text editor to create the file `variables.tf` with the code below: 
 
 ```console
 variable "agent_count" {
@@ -69,7 +94,7 @@ variable "ssh_public_key" {
 }
 ```
 
-Add the following code in **outputs.tf** file:
+3. Use a text editor to create the file `outputs.tf` with the code below: 
 
 ```console
 output "resource_group_name" {
@@ -77,7 +102,7 @@ output "resource_group_name" {
 }
 ```
 
-Add the following code in **main.tf** file:
+4. Use a text editor to create the file `main.tf` with the code below: 
 
 ```console
 # Generate random resource group name
@@ -113,61 +138,173 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 }
 ```
 
-The block labeled **default_node_pool** is where we select the VM **(vm_size)** and number of nodes **(node_count)** for the cluster. **vm_size** is how we set the cluster to be deployed with Altra Arm-based VMs. Here we select **Standard_D2ps_v5** which is a 2 vCPU Altra-based VM with standard SSDs.
+The block labeled `default_node_pool` is used to select the virtual machine type, size, and the number of nodes. 
 
-There are various Arm-based VMs that can be selected. The [Azure VM series descriptions](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/) show that the Dpsv5, Dpdsv5, Dplsv5, Dpldsv5, Epsv5, Epdsv5 all use Ampere Altra. Using any of these VM types creates an Arm-based cluster.
+The nodes are specified to use the `Standard_D2ps_v5` virtual machine type which is a 2 vCPU Altra-based virtual machine with standard SSDs.
 
-Log into Azure.
+There are various Arm-based virtual machines that can be selected. The [Azure VM series descriptions](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/) shows that the Dpsv5, Dpdsv5, Dplsv5, Dpldsv5, Epsv5, Epdsv5 all use Ampere Altra. Any of these virtual machine types can be used to create an Arm-based cluster.
 
-```console
-az login
-```
+### Run the Terraform commands
 
-Create an SSH key pair.
+Run the Terraform commands in the directory where you saved the Terraform files.
 
-```console
-ssh-keygen -m PEM -t rsa -b 4096
-```
+### Initialize Terraform
 
-Initialize a working directory containing Terraform configuration files.
+Run `terraform init` to download the dependencies required for Azure as a provider and set up a working directory.
 
 ```console
 terraform init
 ```
 
-Deploy the cluster with Terraform.
+The output will be similar to:
+
+```output
+Initializing the backend...
+
+Initializing provider plugins...
+- Finding hashicorp/random versions matching "~> 3.0"...
+- Finding hashicorp/azurerm versions matching "~> 3.0"...
+- Installing hashicorp/random v3.4.3...
+- Installed hashicorp/random v3.4.3 (signed by HashiCorp)
+- Installing hashicorp/azurerm v3.48.0...
+- Installed hashicorp/azurerm v3.48.0 (signed by HashiCorp)
+
+Terraform has created a lock file .terraform.lock.hcl to record the provider
+selections it made above. Include this file in your version control repository
+so that Terraform can guarantee to make the same selections by default when
+you run "terraform init" in the future.
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
+
+### Deploy the AKS cluster and connect
+
+Run `terraform apply` to create the infrastructure:
 
 ```console
 terraform apply
 ```
-Once it completes the name of the resource group is displayed.
 
-![Output_screenshot](https://user-images.githubusercontent.com/67620689/201339586-c2d12941-a24f-4ca7-9418-c8475834abc7.PNG)
+Answer yes to the prompt to confirm you want to create Google Cloud resources.
 
-Download the cluster credentials so that we can use the kubectl command. 
+It will take about 5 minutes to create the resources. 
 
-Within the Kubernetes services console, select the cluster and click on connect.
+When it completes the name of the resource group is printed.
+
+```output
+Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+resource_group_name = "arm-aks-demo-rg-exact-wombat"
+```
+
+### Configure kubectl
+
+1. In a browser, go to the Azure Kubernetes services console, select the cluster, and click on connect.
 
 ![Connect_screenshot](https://user-images.githubusercontent.com/67620689/201339809-5bc576c8-d945-431f-ab0b-f0b426b1edec.PNG)
 
-Clicking connect brings up instructions that list two commands. An **az account** set command, and an **az aks get-credentials** command. 
-
-Once these two commands are executed, we will be able to use kubectl.
+Instructions for running `az account` and `az aks get-credentials` will be displayed. 
 
 ![aks_screenshot](https://user-images.githubusercontent.com/67620689/201339840-5d3a414b-e944-4a3e-96a5-bbbe7a3b13f3.PNG)
 
-Run the following command to see the status of the nodes. They should be in the ready state.
+2. Copy the 2 commands and run them
+
+Run the `az account` and `az aks get-credentials` commands you copied.
+
+There is no output from the first command.
+
+The output from the second command is similar to:
+
+```output
+Merged "arm-aks-cluster-demo" as current context in /home/ubuntu/.kube/config
+```
+
+You are now ready to use `kubectl`
+
+3. Run the following command to see the status of the nodes. 
 
 ```console
 kubectl get nodes
 ```
 
-![status_screenshot](https://user-images.githubusercontent.com/67620689/200743934-20374d3f-21af-4f4e-893c-154bbae573d8.PNG)
+Three nodes should be in the `Ready` state:
 
-Run the following command to see the current pods running on the cluster.
+```output
+NAME                               STATUS   ROLES   AGE   VERSION
+aks-demopool-40436376-vmss000000   Ready    agent   10m   v1.24.9
+aks-demopool-40436376-vmss000001   Ready    agent   10m   v1.24.9
+aks-demopool-40436376-vmss000002   Ready    agent   10m   v1.24.9
+```
+
+4. Run the following command to see the current pods running on the cluster.
 
 ```console
 kubectl get pods -A
 ```
 
-![pod_screenshot](https://user-images.githubusercontent.com/67620689/200744042-582be388-fabb-4c86-a983-af230f3806f0.PNG)
+The output will be similar to:
+
+```output
+NAMESPACE     NAME                                  READY   STATUS    RESTARTS   AGE
+kube-system   azure-ip-masq-agent-fw66d             1/1     Running   0          12m
+kube-system   azure-ip-masq-agent-q7ltm             1/1     Running   0          12m
+kube-system   azure-ip-masq-agent-qs2rp             1/1     Running   0          12m
+kube-system   cloud-node-manager-k8fdg              1/1     Running   0          12m
+kube-system   cloud-node-manager-ml5jq              1/1     Running   0          12m
+kube-system   cloud-node-manager-phng2              1/1     Running   0          12m
+kube-system   coredns-59b6bf8b4f-msdzd              1/1     Running   0          13m
+kube-system   coredns-59b6bf8b4f-wbcgl              1/1     Running   0          11m
+kube-system   coredns-autoscaler-5655d66f64-g94zj   1/1     Running   0          13m
+kube-system   csi-azuredisk-node-9njln              3/3     Running   0          12m
+kube-system   csi-azuredisk-node-mnqnz              3/3     Running   0          12m
+kube-system   csi-azuredisk-node-rjmq7              3/3     Running   0          12m
+kube-system   csi-azurefile-node-7qmdn              3/3     Running   0          12m
+kube-system   csi-azurefile-node-fbpm7              3/3     Running   0          12m
+kube-system   csi-azurefile-node-j2sf5              3/3     Running   0          12m
+kube-system   konnectivity-agent-77467c5c84-52zsj   1/1     Running   0          2m19s
+kube-system   konnectivity-agent-77467c5c84-wdhms   1/1     Running   0          2m15s
+kube-system   kube-proxy-hnbpp                      1/1     Running   0          12m
+kube-system   kube-proxy-wr6rm                      1/1     Running   0          12m
+kube-system   kube-proxy-zssbf                      1/1     Running   0          12m
+kube-system   metrics-server-5f8d84558d-5rtgs       2/2     Running   0          11m
+kube-system   metrics-server-5f8d84558d-lh2xk       2/2     Running   0          11m
+```
+
+5. Run `kubectl` to open a shell on one of the nodes.
+
+```console
+kubectl debug node/aks-demopool-40436376-vmss000000 -it --image=ubuntu
+```
+
+The terminal will open a shell with output similar to:
+
+```output
+Creating debugging pod node-debugger-aks-demopool-40436376-vmss000000-b9tj5 with container debugger on node aks-demopool-40436376-vmss000000.
+If you don't see a command prompt, try pressing enter.
+root@aks-demopool-40436376-vmss000000:/# 
+```
+
+6. At the new shell prompt, run the `uname` command:
+
+```console
+uname -a
+```
+
+The output confirm the node is an Arm instance:
+
+```output
+Linux aks-demopool-40436376-vmss000000 5.15.0-1034-azure #41-Ubuntu SMP Fri Feb 10 19:59:55 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
+``` 
+
+You have successfully created a Kubernetes cluster on AKS using Arm-based instances. 
+

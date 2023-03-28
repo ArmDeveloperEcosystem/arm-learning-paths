@@ -1,3 +1,8 @@
+{{/*
+Only used by 'tabpane' shortcode to process code in tabs.
+*/}}
+
+
 <!-- Make sure that we are enclosed within a tabpane shortcode block -->
 {{ with $.Parent }}
 {{- if ne $.Parent.Name "tabpane" -}}

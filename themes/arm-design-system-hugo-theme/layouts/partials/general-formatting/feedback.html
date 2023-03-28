@@ -1,46 +1,16 @@
-<script type="text/javascript">      
-    function starRatingGiven(element) {
-        // Hide Stars div and surface radio buttons
-        document.getElementById('feedback-1-stars').hidden = true;
+{{/*
+Adds feedback option, with input tracked via analytics.
 
-        // Show Radio button feedback depending on value
-        document.getElementById('specific-stars').innerHTML = ' of '+element.value+' stars';
-        document.getElementById('feedback-2-choice').hidden = false;
-        if (parseInt(element.value) < 4) {
-            document.getElementById('1-2-3-star-options').hidden = false;
-        }
-        else {
-            document.getElementById('4-5-star-options').hidden = false;
-        }
-        const reflow = document.getElementById('feedback-2-choice').offsetHeight; // Repaint the browser to enable transitions of newly shown element
-        document.getElementById('feedback-2-choice').classList.add('smooth-open');
+Where it is used:
+    - install guides (all but the main of a multi-install, like 'docker')
+    - learning path _next-steps
 
+Called from:
+    - install-guides/installtoolsall.html
+    - partials learning-paths/next-steps.html
+*/}}
 
-    }
-
-    function choiceFeedbackGiven() {     
-        // if nothing checked, error
-        if (document.querySelector('input[name="feedback-choice"]:checked')==null) {
-            document.getElementById("choice-select-option-error").hidden = false;
-            document.getElementById('choice-select-option-error').style.display = "inline-block";
-            const reflow = document.getElementById('choice-select-option-error').offsetHeight; // Repaint the browser to enable transitions of newly shown element
-            document.getElementById('choice-select-option-error').classList.add('smooth-open');
-            return
-        }
-
-        // Hide Radio button feedback
-        document.getElementById('feedback-2-choice').hidden = true;
-
-        // Show Thanks 
-        document.getElementById('feedback-3-thanks').hidden = false;
-        const reflow = document.getElementById('feedback-3-thanks').offsetHeight; // Repaint the browser to enable transitions of newly shown element
-        document.getElementById('feedback-3-thanks').classList.add('smooth-open');
-
-    }
-
-</script>
-
-
+<!-- Hugo processing to get GitHub 'issues' link -->
 {{ $pathFormatted := replace .context.File.Path "\\" "/" -}}
 {{ $gh_repo := (.context.Param "github_repo") -}}
 {{ $gh_url := (.context.Param "github_url") -}}
@@ -52,7 +22,7 @@
 {{ $issuesURL := printf "%s/issues/new?title=Feedback - %s" $gh_repo (safeURL .context.Parent.Title ) -}}
 
 
-
+<!-- Give an independent row -->
 <div class="c-row">
     <div class="c-col">
         <div id="feedback-container">
@@ -75,7 +45,7 @@
             <div id="feedback-2-choice" hidden>
                 <p class="u-margin-bottom-0">What is the primary reason for your feedback <span id="specific-stars"></span>?</p>
                 <form id='feedback-choice-form' action='javascript:choiceFeedbackGiven()'>
-
+                    <!-- Bad options, 1-3 stars given -->
                     <div id="1-2-3-star-options" class="u-margin-left-1" hidden>
                         <div class="choice ads-radio-style">
                             <input type="radio" class="" id="poor-1" value="Missing information" name="feedback-choice"></input>
@@ -102,7 +72,8 @@
                             <label for="poor-5">Other</label>
                         </div>
                     </div>
-
+                    
+                    <!-- Good options, 4-5 stars given -->
                     <div id="4-5-star-options" class="u-margin-left-1" hidden>
                         <div class="choice ads-radio-style">
                             <input type="radio" class="" id="good-1" value="Easy to understand" name="feedback-choice"></input>
@@ -125,6 +96,7 @@
                         </div>
                     </div>
                     
+                    <!-- Error message if submit without selection; hidden by default. -->
                     <span>
                         <input class="u-margin-top-1 u-margin-bottom-1" type="submit" value="Submit Feedback" id="submit-feedback-btn">
                         <div id="choice-select-option-error" hidden>
@@ -135,18 +107,14 @@
                 </form>
             </div>
 
-
-            <!-- 2) Multiple-choice feedback -->
+            <!-- 3) Thank you message -->
             <div id="feedback-3-thanks" hidden>
                 <p>Thank you. We're grateful for your feedback on how to improve this {{.learningpath_or_toolinstall}}.</p>
                 <ul>
                     <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Raise an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
                     <li>Want to discuss this topic with fellow developers and experts? <a href="https://discord.com/invite/armsoftwaredev" target="_blank">Engage in the Arm SW Developer Discord.{{partial "general-formatting/external-link.html" }}</a></li>
                 </ul>
-                
             </div>
-
         </div>
     </div>
 </div>
-

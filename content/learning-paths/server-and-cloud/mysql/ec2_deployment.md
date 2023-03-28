@@ -10,9 +10,16 @@ layout: "learningpathall"
 
 #  Deploy single instance of MySQL 
 
-## Retrieve EC2 credentials
+## Generate an SSH key-pair
 
-- Generate Access keys (access key ID and secret access key)
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [
+documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
+
+## Generate Access keys (access key ID and secret access key)
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
   
@@ -27,49 +34,6 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 - Copy the Access Key ID and Secret Access Key 
 
 ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
-
-
-## Generate SSH key pair on local host
-
-Before using Terraform, first generate the key pair (public key, private key) using ssh-keygen. Then associate both public and private keys with AWS EC2 instances.
-
-Generate the key pair using the following command:
-
-```bash
-ssh-keygen -t rsa -b 2048
-```
-       
-By default, the above command will generate the public as well as private key at location **$HOME/.ssh**. You can override the end destination with a custom path.
-
-Output when a key pair is generated:
-
-```output
-Generating public/private rsa key pair.
-Enter file in which to save the key (/home/ubuntu/.ssh/id_rsa): /home/ubuntu/.ssh/mysql_key
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
-Your identification has been saved in /home/ubuntu/.ssh/mysql_key
-Your public key has been saved in /home/ubuntu/.ssh/mysql_key.pub
-The key fingerprint is:
-SHA256:cj0rJeu30JXNzUWXprOrwNG9SrJjW0XAoY4PhiT0iWA ubuntu@ip-172-31-27-185
-The key's randomart image is:
-+---[RSA 2048]----+
-| E .      .o.   +|
-|. o o .   ...  +.|
-|   o +   .   .o .|
-|    o . o.. o* o.|
-|     ..+So+.oo= o|
-|      .o+=.+...  |
-|        +=oo ..  |
-|       . =B ..   |
-|        o+++.    |
-+----[SHA256]-----+
-```
-
-{{% notice Note %}}
-Use the public key mysql_key.pub inside the Terraform file to provision/start the instance and private key mysql_key to connect to the instance.
-{{% /notice %}}
-
 
 ## Deploy EC2 instance via Terraform
 
@@ -86,7 +50,7 @@ resource "aws_instance" "MYSQL_TEST" {
   ami           = "ami-064593a301006939b"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = "mysql_key"
+  key_name = aws_key_pair.deployer.key_name
   tags = {
     Name = "MYSQL_TEST"
   }
@@ -140,11 +104,11 @@ ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.MYSQL_TEST.pu
 
 resource "aws_key_pair" "deployer" {
         key_name   = "mysql_key"
-        public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUZXm6T6JTQBuxw7aFaH6gmxDnjSOnHbrI59nf+YCHPqIHMlGaxWw0/xlaJiJynjOt67Zjeu1wNPifh2tzdN3UUD7eUFSGcLQaCFBDorDzfZpz4wLDguRuOngnXw+2Z3Iihy2rCH+5CIP2nCBZ+LuZuZ0oUd9rbGy6pb2gLmF89GYzs2RGG+bFaRR/3n3zR5ehgCYzJjFGzI8HrvyBlFFDgLqvI2KwcHwU2iHjjhAt54XzJ1oqevRGBiET/8RVsLNu+6UCHW6HE9r+T5yQZH50nYkSl/QKlxBj0tGHXAahhOBpk0ukwUlfbGcK6SVXmqtZaOuMNlNvssbocdg1KwOH ubuntu@ip-172-31-27-185"
-}
+        public_key = file("~/.ssh/mysql_key.pub")
+ }
 ```
 {{% notice Note %}}
-Replace `public_key`, `access_key`, `secret_key`, and `key_name` with your values.
+Replace `access_key`, and `secret_key` with your values.
 {{% /notice %}}
 
 Now, use the below Terraform commands to deploy the `main.tf` file.
@@ -310,6 +274,7 @@ Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` with your password
 In our case, the inventory file `inventory.txt` will be generated automatically after the `terraform apply` command.
 
 ### Ansible Commands
+
 This `ansible` Playbook uses the MySQL community module that can be installed by running the following command after installation:
 
 ```bash
@@ -322,58 +287,57 @@ To run a Playbook, we need to use the `ansible-playbook` command.
 ansible-playbook playbook.yml -i inventory.txt --key-file /home/ubuntu/.ssh/mysql_key
 ```
 
-This will give the following output when successful. Note that you will need to confirm the host when connecting for the first time:
+Answer `yes` when prompted for the SSH connection.
+
+Deployment may take a few minutes.
+
+The output should be similar to:
 
 ```output
+PLAY [all] *****************************************************************************************************************************************************
 
-PLAY [all] **********************************************************************************************************************************
-
-TASK [Gathering Facts] **********************************************************************************************************************
-The authenticity of host '18.224.5.169 (18.224.5.169)' can't be established.
-ECDSA key fingerprint is SHA256:m7xYpfgXyBHgQKcN1VQPriPb0/jcepf2c5dxO9pCyuM.
+TASK [Gathering Facts] *****************************************************************************************************************************************
+The authenticity of host '3.21.27.138 (3.21.27.138)' can't be established.
+ED25519 key fingerprint is SHA256:LHk4u86Sw5Uw7WPPvKaz7qp2mKyxn+X7Gxz1DogTL+4.
+This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Enter passphrase for key '/home/ubuntu/.ssh/mysql_key': 
 ok: [ansible-target1]
 
-TASK [Update the Machine] *******************************************************************************************************************
-[WARNING]: Consider using the apt module rather than running 'apt-get'.  If you need to use command because apt is insufficient you can add
-'warn: false' to this command task or set 'command_warnings=False' in ansible.cfg to get rid of this message.
+TASK [Update the Machine] ***************************************************************************************************************
 changed: [ansible-target1]
 
-TASK [Installing Mysql-Server] **************************************************************************************************************
+TASK [Installing Mysql-Server] **********************************************************************************************************
 changed: [ansible-target1]
 
-TASK [Installing PIP for enabling MySQL Modules] ********************************************************************************************
+TASK [Installing PIP for enabling MySQL Modules] ****************************************************************************************
 changed: [ansible-target1]
 
-TASK [Installing Mysql dependencies] ********************************************************************************************************
+TASK [Installing Mysql dependencies] ****************************************************************************************************
 changed: [ansible-target1]
 
-TASK [start and enable mysql service] *******************************************************************************************************
+TASK [start and enable mysql service] ***************************************************************************************************
 ok: [ansible-target1]
 
-TASK [Change Root Password] *****************************************************************************************************************
-[WARNING]: Consider using 'become', 'become_method', and 'become_user' rather than running sudo
+TASK [Change Root Password] *************************************************************************************************************
 changed: [ansible-target1]
 
-TASK [Create database user with password and all database privileges and 'WITH GRANT OPTION'] ***********************************************
-[WARNING]: Module did not set no_log for update_password
+TASK [Create database user with password and all database privileges and 'WITH GRANT OPTION'] *******************************************
 changed: [ansible-target1]
 
-TASK [Create a new database with name 'arm_test'] *******************************************************************************************
+TASK [Create a new database with name 'arm_test'] ***************************************************************************************
 changed: [ansible-target1]
 
-TASK [MySQL secure installation] ************************************************************************************************************
+TASK [MySQL secure installation] ********************************************************************************************************
 changed: [ansible-target1]
 
-TASK [Enable remote login by changing bind-address] *****************************************************************************************
+TASK [Enable remote login by changing bind-address] *************************************************************************************
 changed: [ansible-target1]
 
-RUNNING HANDLER [Restart mysql] *************************************************************************************************************
+RUNNING HANDLER [Restart mysql] *********************************************************************************************************
 changed: [ansible-target1]
 
-PLAY RECAP **********************************************************************************************************************************
-ansible-target1            : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0 
+PLAY RECAP ******************************************************************************************************************************
+ansible-target1            : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Connect to Database using EC2 instance
@@ -409,7 +373,7 @@ owners.
 
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
-mysql> 
+mysql>
 ```
 
 ### Access Database and Create Table

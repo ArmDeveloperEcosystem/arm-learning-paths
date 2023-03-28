@@ -1,3 +1,8 @@
+{{/*
+Create code panes via horizontal tabs. Uses the 'prismjs-codeblock.html' partial to align formatting with normal code blocks.
+*/}}
+
+
 <!-- Scratchpad gets populated through call to .Inner -->  
 {{- .Inner -}}
 
@@ -21,8 +26,8 @@
   </ads-horizontal-tabs>
 </div>
 
+<!-- This javascript uses Hugo vars, requiring it to be in this HTML file and not a seperate JS file. -->
 <script>
-  
   (() => {
     const tabs = document.querySelector('#tabs-{{- $.Ordinal -}}');
     tabs.data = [
@@ -30,41 +35,5 @@
         { id: "tab-{{- $.Ordinal -}}-slot-{{$index}}", label: "{{$element.header}}" },
       {{end}}
     ];
-    /*
-    tabs.tabSelectHandler = (evt) => {
-      // This handler isn't doing anything right now. Could be deleted as there is no auto switching 
-                                                                // 'tab-0-slot-1' = evt.id
-      let tab_num = evt.id.split('-slot')[0];                   // 'tab-0'
-      let tabs_id = tab_num.split('-').join('s-');              // 'tabs-0' = id of top level ads-horrizontal-tabs
-      let button_id = "tabs:"+tabs_id+":tab:"+evt.id;           //  tabs:tabs-0:tab:tab-0-slot-1
-
-      let tab_element = document.getElementById(tabs_id);             // get ads-horizontal-tab element 
-      let button = tab_element.shadowRoot.getElementById(button_id);  // get button below this element
-      let tab_language_text = button.outerText;                       // relevent text: 'x86_64', 'aarch64', etc. 
-      let tab_language_text_urlize = tab_language_text.toLowerCase().replace(/ /g, "-");
-
-      console.log('Setting tab to ',tab_language_text_urlize);
-
-
-
-      // get list of all other horozontal tabs on the screen
-      let all_hor_tabs = document.getElementsByClassName("code-horizontal-tabs");
-      for (tab_group of all_hor_tabs) {
-        // if a subtab has the same tab_language, make that shadowDom active
-        if (tab_group.classList.contains('header-'+tab_language_text_urlize)) {
-          console.log('yes!',tab_group,tab_language_text_urlize);
-          // make shadowDom under this tab_group
-          let matching_tab = tab_group.querySelector("div.header-tab-"+tab_language_text_urlize);
-          console.log('change this div to active',matching_tab);
-          matching_tab.classList.add("active");
-          // unactive all other tabs:
-          tab_group.querySelector("not:div.header-tab-"+tab_language_text_urlize).classList.remove("active");
-          
-        }
-      }
-    };
-    */
-
   })();
 </script>
-

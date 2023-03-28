@@ -34,7 +34,7 @@ resource "aws_instance" "redis-deployment" {
   ami = "ami-0ca2eafa23bc3dd01"
   count = "6"
   instance_type = "t4g.small"
-  key_name= "aws_key"
+  key_name= aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 
@@ -92,8 +92,8 @@ ansible_user=ubuntu
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "aws_key"
-        public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/GFk2t5I2WOGWIP11kk9+sS2hwb+SuZV8b6KAi8IPR50pDjBXtBBt/8Apl+cyTmUjIlVxnyV6rS4sGVdKLC7SDNU8nl1SfDuh1HJRtlbMu8k+OmA3i9T/rihz2Qs9htkbSkdZ3bADCd5tcregPIht1bdQkjFK5zpbmiNHqIC1KJYIKfiwHMCLt+3ZQWr8iw1G19hHLbfpvDr0H/ewlrpMNG3StJSo6E2Jec6NZ09takFMl0a2r9Cej3bSQz5TuDnxWFDm1xk2svLojROnNeSH2sVx6UoPDpt05eniqgpYdMysYzxeOwS+qMHzR2IV2+0UoDFMxgcSgnhM36qlSk7H ubuntu@ip-172-XX-XX-XX"
+        key_name   = "id_rsa"
+        public_key = file("~/.ssh/id_rsa.pub")
 }
 ```
 Make the changes listed below in `main.tf` to match your account settings.
@@ -106,9 +106,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
-3. In the `aws_key_pair` section, change the `public_key` value to match your SSH key. Copy and paste the contents of your `aws_key.pub` file to the `public_key` string. Make sure the string is a single line in the text file.
-
-4. In the `local_file` section, change the `filename` to be the path to your current directory.
+3. In the `local_file` section, change the `filename` to be the path to your current directory.
 
 The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
 
@@ -232,7 +230,7 @@ Using a text editor, save the code below to in a file called `playbook.yaml`. Th
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file aws_key
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 

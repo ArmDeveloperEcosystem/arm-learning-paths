@@ -1,172 +1,147 @@
+{{/*
+A content page that acts as a wrapper for all install guide content, rendering different depending on what type of page it is.
+
+Where it is used:
+    - /install-guides/armclang/                 (single tool install)   most common
+    - /install-guides/docker/                   (multi-tool main page)
+    - /install-guides/docker/docker-engine/     (multi-tool sub page)
+
+Called from:
+    - baseof
+
+Calls to:
+    - partial general-formatting/metadata-table.html
+    - partial general-formatting/github-links.html
+    - partial navigation/content-navigation-mobile.html
+    - partial general-formatting/external-link.html
+    - partial test-maintenance/test-maintenance.html
+    - partial general-formatting/feedback.html
+    - partial general-formatting/feedback.html
+*/}}
+
 {{define "main"}}
 
-<!-- Define variables for dynamic creation-->
+<!-- Define variables for easier distribution into partials -->
 {{ $thisdir := .File.Dir }}
 {{ $thisfile:= .File.TranslationBaseName}}
 {{ $toolfiles := slice }}
+{{ $tools_software_languages := slice}}
+{{ $main_tool_title := .Params.Title }}
+{{ $active_tag := "" }}
+{{$author := ""}}
+{{$author_company := ""}}
 
+    <!-- get author metadata -->
+    {{if .Params.author}}
+        {{range .Params.author}}
+            {{if .name}}            {{$author = .name}}                     {{end}}
+            {{if .company_name}}    {{$author_company = .company_name}}     {{end}}
+        {{end}}
+    {{end}}
 
+    <!-- get all subpages in a multi-tool install -->
+    {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
+        {{ range .Site.Pages.ByWeight }}
+            {{ if (eq .File.Dir $thisdir)}}
+                {{ $toolfiles = $toolfiles | append . }}
+            {{ end }}
+        {{end}} 
+    {{end}}
 
-
-    <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
-        <!-- Left pane -->
-        <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0 card-tab-col">
-            <div style="position:sticky; top:5px;">
-
-                <!-- Title top left -->
-                {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
-                    {{ with .Site.GetPage $thisdir}}
-                        <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ .Params.Title }}</h6>
-                    {{ end }}             
+    <!-- get list of names (urlized) of all tools_software_languages from across each learning path (cross platform already taken into account) -->
+    {{ range where .Site.Pages "Params.maintopic" true}}
+        {{range .Params.tools_software_languages_filter}}
+            {{ range $key, $value := . }}
+                {{ if in $tools_software_languages (urlize $key)}}
                 {{else}}
-                    <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ .Params.Title }}</h6>
+                    {{ $tools_software_languages = $tools_software_languages | append (urlize $key) }}
                 {{end}}
+            {{ end }}
+        {{end}}
+    {{end}}  
+    
+    <!-- Update main_tool_title to primary in multi-tool setting -->
+    {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
+        {{ with .Site.GetPage $thisdir}}
+            <!-- update -->
+            {{ $main_tool_title = .Params.Title }}
+        {{ end }}             
+    {{end}}
 
-                <!-- If Multi_install, create dynamic nav menu, content ordered by weight-->
-                <!-- REMOVED, not helpful 
-                {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
-                    {{ range .Site.Pages.ByWeight }}
-                        {{ if (eq .File.Dir $thisdir)}}
-                            {{ $toolfiles = $toolfiles | append . }}
-                            {{partial "ads-cards/custom-content-navs.html" (dict "context" . "thisfile" $thisfile)  }}
-                        {{ end }}
-                    {{end}} 
-                {{end}}
-                -->
+    <!-- Check if there are any matching learning paths to this tool (or the main tool) -->
+    {{ if in $tools_software_languages (.Title | urlize)}}
+        {{ $active_tag = .Title }}
+    {{ else if in $tools_software_languages ($main_tool_title | urlize) }}
+        {{ $active_tag = $main_tool_title }}
+    {{end}}
 
-                <!-- GitHub links to edit / log an issue -->
-                {{partial "github/github-links.html" .  }}
-            </div>
-        </div>
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
+    <!-- Left pane info -->
+    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="left-nav-pane">
+            <!-- Title top left -->
+            <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ $main_tool_title }}</h6>
 
-        <!-- Right pane, content-->
-        <div class="c-col lg:c-col-9 xl:c-col-10">
-
-            <!-- if multi-tool, Mobile only shown navigation - sticky header -->
-            {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
-                {{partial "ads-cards/custom-content-navs-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $toolfiles)  }}
-            {{end}}
-
-            <!-- Markdown metadata -->
-            {{if .Params.multi_install}}
-            {{else}}
-            <div class="content-box">
-                <h2>About this install guide</h2>
-                <!-- First row of info-->
-                <div class="c-row">
-                        <div class="c-col">
-                            <table style="width: max-content;">
-                                <tr>
-                                  <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Reading time:</td>
-                                  <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
-                                    <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Last updated:</td>
-                                  <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">                    
-                                    <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
-                                  </td>
-                                </tr>
-                                {{ if .Params.official_docs}}
-                                    <tr>
-                                        <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top; white-space: nowrap;">Official docs:</td>
-                                        <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;" >
-                                            <!-- docs exist! -->
-                                            <a href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
-                                        </td>
-                                    </tr>
-                                {{end}}
-                                {{ if .Params.test_maintenance}}
-                                    <!-- Desktop Row View -->
-                                        <tr class="u-hide md:u-display-table-row u-flex-shrink-0">
-                                            <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Test status:</td>
-                                            <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">
-                                                {{ partial "test-maintenance/test-maintenance" . }}
-                                            </td>
-                                        </tr>
-                                    <!-- Mobile Row View -->
-                                        <tr class="md:u-hide u-display-table-row">
-                                            <td style="height: fit-content; width: max-content; padding: 0px; margin: 0px; vertical-align:top;">Test status:</td>
-                                        </tr>
-                                        <tr class="md:u-hide u-display-table-row">
-                                            <td style="height: fit-content; width: fit-content; padding: 0px; margin: 0px; padding-left: 8px;">
-                                                {{ partial "test-maintenance/test-maintenance" . }}
-                                            </td>
-                                        </tr>
-                                {{end}}
-                               
-                                {{ $tool_tags := (.Site.GetPage "learning-paths/cross-platform").Params.tools_filter }}
-                                {{ $urlized_tool_tags := apply $tool_tags "urlize" "." }}
-                                {{ if in $urlized_tool_tags (.Title | urlize) }}
-                                    <tr>
-                                        <td  colspan="2" style="height: fit-content; padding: 0px; margin: 0px; vertical-align:top;">Learning Paths using this tool:</td>
-                                    </tr>
-                                    <tr>
-                                        <td  colspan="2" style="height: fit-content; padding: 0px; margin: 0px;" >
-                                            <span>
-                                                    <!-- Clickable tag -->
-                                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Title | urlize}}'>
-                                                        <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                                                        <span class="fa-solid fa-tag"></span>
-                                                        {{.Title}}
-                                                    </ads-tag>
-                                            </span>                             
-                                        </td>
-                                    </tr>
-                                {{end}}
-                              </table>    
-                              <p style="margin-top: 24px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
-                      
-                    </div>
-                </div>            
-            </div>
-            {{end}}
-
-            
-            <!-- Main content display!-->
-            <div class="content-box markdown-content-div">
-                <!-- Content -->
-                {{ with .Content }}
-                {{ . }}
-                {{ end }}
-            </div>
-
-            <!-- Multi-tool easy routing to new pages, ONLY for main multi_install page -->
-            {{if .Params.multi_install}}
-                <div class="content-box markdown-content-div">
-                    <h2>Select a specific tool for install instructions:</h2> 
-                    <div class="c-row">
-                        <div class="c-col">
-                            <div class="u-display-grid u-gap-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
-                                {{range $index, $multi := $toolfiles}}
-                                    {{ if ne .File.TranslationBaseName "_index" }} 
-                                        <ads-card has-hover-effect class="path-card" link="{{.Permalink}}">
-                                            <ads-card-content slot="content">
-                                                <h3 class="u-color-arm-blue u-margin-top-1/2 u-margin-bottom-1/2">{{.Title}}</h3>
-                                            </ads-card-content>   
-                                        </ads-card>
-                                    {{end}}
-                                {{end}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            {{end}}
-
-            <!-- Feedback at bottom -->
-            {{if not .Params.multi_install}}
-                <br>
-                <div style="min-height: 350px;">
-                    {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}
-                </div>   
-            {{end}}         
+            <!-- GitHub links to edit / log an issue -->
+            {{partial "general-formatting/github-links.html" .  }}
         </div>
     </div>
 
-{{ partial "ads-cards/custom-tabs-style.html" . }}
-{{ partial "ads-cards/ads-card-style.html" . }}
 
+    <!-- Right pane, content-->
+    <div class="c-col lg:c-col-9 xl:c-col-10">
+
+        <!-- if multi-tool, Mobile only shown navigation - sticky header -->
+        {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
+            {{partial "navigation/content-navigation-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $toolfiles)  }}
+        {{end}}
+
+        <!-- Markdown metadata shown in table for easier formatting  -->
+        {{if .Params.multi_install}} 
+            <!-- Don't show if mult-install main page, only on the content pages themselves -->
+        {{else}}
+            {{partial "general-formatting/metadata-table.html" .}}
+        {{end}}
+
+        <!-- Main content display-->
+        <div class="content-box markdown-content-div">
+            <!-- Content -->
+            {{ with .Content }}
+                {{ . }}
+            {{ end }}
+        </div>
+
+        <!-- Multi-tool routing to subtool pages, only for main multi_install page -->
+        {{if .Params.multi_install}}
+            <div class="content-box markdown-content-div">
+                <h2>Select a specific tool for install instructions:</h2> 
+                <div class="c-row">
+                    <div class="c-col">
+                        <div class="u-display-grid u-gap-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
+                            {{range $index, $multi := $toolfiles}}
+                                {{ if ne .File.TranslationBaseName "_index" }} 
+                                    <ads-card has-hover-effect class="path-card" link="{{.Permalink}}">
+                                        <ads-card-content slot="content">
+                                            <h3 class="multi-tool-selection-title">{{.Title}}</h3>
+                                        </ads-card-content>   
+                                    </ads-card>
+                                {{end}}
+                            {{end}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{end}}
+
+        <!-- Feedback at bottom -->
+        {{if not .Params.multi_install}}
+            <br>
+            <div style="min-height: 350px;">
+                {{partial "general-formatting/feedback.html" (dict "context" . "learningpath_or_toolinstall" "tool quick-install guide")  }}
+            </div>   
+        {{end}}         
+    </div>
+</div>
 
 
 {{end}}

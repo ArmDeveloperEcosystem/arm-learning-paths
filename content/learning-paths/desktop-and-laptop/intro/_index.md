@@ -1,5 +1,5 @@
 ---
-title: Start developing on Arm hardware
+title: Get started with Arm hardware
 
 description: The place to start for developers new to Arm for desktop and laptop hardware
 
@@ -14,6 +14,7 @@ prerequisites:
     - None
 
 author_primary: Jason Andrews
+
 
 ### Tags
 skilllevels: Introductory

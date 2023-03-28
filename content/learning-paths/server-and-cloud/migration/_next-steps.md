@@ -33,6 +33,10 @@ further_reading:
         title: Data points you need to know about ARM for your application code migration
         link: https://dev.to/aws-builders/data-points-you-need-to-know-about-arm-for-your-application-code-migration-5c0f
         type: blog
+    - resource:
+        title: Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton
+        link: https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/
+        type: blog
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

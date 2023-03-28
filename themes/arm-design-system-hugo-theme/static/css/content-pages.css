@@ -1,0 +1,199 @@
+/* Left-hand page navigation
+*******************************************************************/   
+.left-nav-pane {
+    position:sticky;
+    top:5px;
+}
+
+
+ /* Tab color on left */
+ .tab-row {
+    background-color: var(--arm-dark-grey);
+}
+html[theme='dark'] .tab-row {
+    background-color: var(--arm-color-overlay-light);
+}
+
+.tab-row.active {
+    background-color: var(--arm-light-blue);
+}   
+html[theme='dark'] .tab-row.active {
+    background-color: var(--arm-blue);
+}  
+
+
+/* Tab Content on right */
+.tab-right-card {
+    border-style: solid;
+    border-width: 1px;
+    width: 100%;
+    margin-left: 10px;
+
+    border-color: var(--arm-dark-grey);
+    background-color: var(--arm-black);
+}
+
+.tab-right-card.active {
+    border-color: var(--arm-light-blue);
+    background-color: white;
+}
+
+.tab-right-card > h6 {
+    color: white;
+}
+
+.tab-right-card.active > h6 {
+    color: black;
+}
+
+html[theme='dark'] .tab-right-card {
+    border-color: var(--arm-color-overlay-light);
+    background-color: var(--arm-color-overlay-dark);
+}
+html[theme='dark'] .tab-right-card.active {
+    border-color: var(--arm-blue);
+    background-color: var(--arm-color-surface);
+}
+
+html[theme='dark'] .tab-right-card > h6 {
+    color: white;
+}
+
+.tab-right-card-header {
+    margin: 10px;
+    font-size:1em;
+}
+
+
+
+/* hover effects */
+a:hover {
+    text-decoration: none; }
+.tab-row.inactive:hover {
+    background-color:var(--arm-web-safe-orange); }
+.tab-row.inactive:hover .tab-right-card {
+    background-color: var(--arm-color-surface); }
+.tab-row.inactive:hover h6 {
+    color: var(--arm-web-safe-orange); }
+
+
+
+
+/* Github links
+*******************************************************************/   
+.left-hand-icon {
+    width: 15px;
+}
+
+p.github-link        { 
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    color: var(--arm-web-safe-blue);
+    text-decoration: none;
+}
+
+html[theme='dark'] p.github-link        { 
+    color: var(--arm-light-blue);
+}
+
+
+div.github-div {
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+
+    margin-top: 16px;
+
+    border-style: solid;
+    border-width: 1px;
+
+    border-color: var(--arm-dark-grey);
+}
+
+html[theme='dark'] div.github-div {
+    border-color: var(--arm-color-overlay-light);
+}
+
+p.github-link:hover {
+    color: var(--arm-web-safe-orange);
+}
+html[theme='dark'] p.github-link:hover {
+    color: var(--arm-orange);
+}
+
+
+/* Multi-tool page styling (like for docker)
+*******************************************************************/   
+.multi-tool-selection-title {
+    color: var(--arm-web-safe-blue);
+
+    margin-top: 4px!important;
+    margin-bottom: 4px!important;
+}
+html[theme='dark'] .multi-tool-selection-title {
+    color: var(--arm-light-blue);
+}
+ads-card.path-card:hover .multi-tool-selection-title{
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-web-safe-orange);
+}
+html[theme='dark'] ads-card.path-card:hover .multi-tool-selection-title {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-orange);
+}
+
+
+
+
+/* Review page styling
+*******************************************************************/   
+.fa-circle-check {color: var(--arm-web-safe-green);}
+.correct-explain {color: var(--arm-web-safe-green);}
+html[theme='dark'] .fa-circle-check {color: var(--arm-green);}
+html[theme='dark'] .correct-explain {color: var(--arm-green);}
+
+
+.fa-times-circle   {color: var(--arm-web-safe-red);}
+.incorrect-explain {color: var(--arm-web-safe-red);}
+html[theme='dark'] .fa-times-circle {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
+html[theme='dark'] .incorrect-explain {color: hsl(0, 73.9%, 60%);} /* 10% lighter than arm's websafe red */
+
+
+#error-answer-all-questions-message {
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+#error-answer-all-questions-message.smooth-open {
+    opacity: 1;
+}
+
+
+#push-to-next-steps-div {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 0.5s;
+    transition-delay: 3s;
+}
+#push-to-next-steps-div.smooth-open {
+    opacity: 1;
+}
+
+.checkbox-icon {
+    opacity: 0;
+    transition: opacity 1s;  
+}
+
+.checkbox-icon.smooth-open {
+    opacity: 1;
+}
+
+.info_text_preexplination {
+    opacity: 0;
+    transition: opacity 1s;  
+}
+
+.info_text_preexplination.smooth-open {
+    opacity: 1;
+}

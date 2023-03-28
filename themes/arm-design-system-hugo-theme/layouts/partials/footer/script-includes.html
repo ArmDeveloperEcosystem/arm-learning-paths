@@ -1,0 +1,51 @@
+{{/*
+Contians all javascript functions to include, specific to each page.
+
+Where it is used:
+    - all
+
+Called from:
+    - baseof (the end)
+*/}}
+
+<!-- Hugo processing -->
+{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
+{{$is_list := and (not $is_content) (.IsNode) }}             <!-- includes about and home pages for now... should exclude -->                                         
+
+<!-- Feedback is on     _next-steps.md learning path          install tool everything-->
+
+<!-- All pages -->
+<script src="/js/stored-user-preferences.js"></script>      <!-- Include javascript to store local preferences of themes -->
+<script src="/js/anonymous-analytics.js"></script>          <!-- Include javascript to track custom analytics -->
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
+<script src="/js/cookie-init.js"></script>                  <!-- Initialize cookie -->
+
+<!-- Homepage only -->
+{{if .IsHome }}
+    <script src="/js/search-and-filter/search-handling.js"></script>
+    <script src="/js/search-and-filter/change-handler-search-hook.js"></script> <!-- Attaches search hooks to elements -->
+{{end}}
+
+<!-- List pages only -->
+{{if $is_list}}
+    <script src="/js/search-and-filter/filter-learning-paths.js"></script>
+    <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script>
+    <script src="/js/search-and-filter/search-logic.js"></script>
+    <script src="/js/search-and-filter/search-handling.js"></script>
+    <script src="/js/search-and-filter/change-handler-search-hook.js"></script> <!-- Attaches search hooks to elements -->
+{{end}}
+
+<!-- Content pages only that are not _index, _next-steps, or _review -->
+{{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
+    <script src="/js/prism.js"></script>                        <!-- Include code highlighting javascript, Prism-->
+    <script src="/js/prism_post_output_formating.js"></script>  <!-- must be called after prism.js to modify it once rendered -->
+{{end}}
+{{if $is_content}}
+    <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js"></script> <!-- Always need on content, contains mobile content page nav -->
+    <script src="/js/feedback-form-behavior.js"></script>       <!-- Only needed on install guide pages and content pages -->
+{{end}}
+{{if hasPrefix .File.TranslationBaseName "_review"}}
+    <script src="/js/review-question-behavior.js"></script>       <!-- Only needed on install guide pages and content pages -->
+{{end}}
+
+

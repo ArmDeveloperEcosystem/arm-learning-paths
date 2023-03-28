@@ -1,3 +1,24 @@
+{{/*
+A content page that acts as a wrapper for all learning path content, rendering different depending on what type of page it is.
+
+Where it is used:
+    - /learning-paths/:category/:learning-path/:optional-step
+    - /learning-paths/server-and-cloud/gke/
+
+Called from:
+    - baseof
+
+Calls to:
+    - partial navigation/content-navigation.html
+    - partial general-formatting/github-links.html
+    - partial navigation/content-navigation-mobile.html
+    - partial learning-paths/introduction
+    - partial learning-paths/review
+    - partial learning-paths/next-steps
+    - partial learning-paths/content
+    - partial navigation/nav-buttons
+*/}}
+
 {{define "main"}}
 
 <!-- Define variables for dynamic creation-->
@@ -10,8 +31,8 @@
 
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
     <!-- Left pane -->
-    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0 card-tab-col">
-        <div style="position:sticky; top:5px;">
+    <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="left-nav-pane">
 
             <!-- Title of _index.md always top left -->
             {{ with .Site.GetPage $thisdir}}
@@ -26,14 +47,13 @@
                     {{ $learningpathfiles = $learningpathfiles | append . }}
 
                     <!-- Call partial to fill out navigation tabs -->
-                    {{partial "ads-cards/custom-content-navs.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
+                    {{partial "navigation/content-navigation.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
                     {{ $counter = add $counter 1 }}
                 {{ end }}
-
             {{end}} 
 
             <!-- GitHub links to edit / log an issue -->
-            {{partial "github/github-links.html" .  }}
+            {{partial "general-formatting/github-links.html" .  }}
         </div>
     </div>
 
@@ -41,7 +61,7 @@
     <div class="c-col lg:c-col-9 xl:c-col-10">
 
         <!-- Mobile only shown navigation - sticky header -->
-        {{partial "ads-cards/custom-content-navs-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $learningpathfiles)  }}
+        {{partial "navigation/content-navigation-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $learningpathfiles)  }}
 
 
         <!-- Custom content layout depending on type -->
@@ -56,13 +76,9 @@
         {{ end }}
 
         <!-- Next steps for buttons -->
-        {{partial "learning-paths/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+        {{partial "navigation/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
 
     </div>
-
 </div>
 
-{{ partial "ads-cards/custom-tabs-style.html" . }}
-
 {{end}}
-

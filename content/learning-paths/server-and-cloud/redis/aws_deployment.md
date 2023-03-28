@@ -14,7 +14,7 @@ You can deploy Redis on AWS Graviton processors using Terraform and Ansible.
 
 In this section, you will deploy Redis on a single AWS EC2 instance.
 
-If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -30,21 +30,19 @@ Before you begin you will also need:
 
 The instructions to create the keys are below.
 
-### Generate AWS access keys 
+### Generate the SSH key-pair
 
-Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
 
-To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws/terraform#generate-access-keys-access-key-id-and-secret-access-key).
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
 
-### Generate an SSH key-pair
+### Generate AWS access keys
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. 
+Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI.
 
-```console
-ssh-keygen -f aws_key -t rsa -b 2048 -P ""
-```
-
-You should now have your AWS access keys and your SSH keys in the current directory.
+To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws-terraform/terraform#generate-access-keys-access-key-id-and-secret-access-key).
 
 ## Create an AWS EC2 instance using Terraform
 
@@ -59,7 +57,7 @@ provider "aws" {
 resource "aws_instance" "redis-deployment" {
   ami = "ami-0ca2eafa23bc3dd01"
   instance_type = "t4g.small"
-  key_name= "aws_key"
+  key_name= aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 
@@ -103,8 +101,8 @@ ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.redis-deploym
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "aws_key"
-        public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCUZXm6T6JTQBuxw7aFaH6gmxDnjSOnHbrI59nf+YCHPqIHMlGaxWw0/xlaJiJynjOt67Zjeu1wNPifh2tzdN3UUD7eUFSGcLQaCFBDorDzfZpz4wLDguRuOngnXw+2Z3Iihy2rCH+5CIP2nCBZ+LuZuZ0oUd9rbGy6pb2gLmF89GYzs2RGG+bFaRR/3n3zR5ehgCYzJjFGzI8HrvyBlFFDgLqvI2KwcHwU2iHjjhAt54XzJ1oqevRGBiET/8RVsLNu+6UCHW6HE9r+T5yQZH50nYkSl/QKlxBj0tGHXAahhOBpk0ukwUlfbGcK6SVXmqtZaOuMNlNvssbocdg1KwOH ubuntu@ip-172-31-XXXX-XXXX"
+        key_name   = "id_rsa"
+        public_key = file("~/.ssh/id_rsa.pub")
 }
 ```
 Make the changes listed below in `main.tf` to match your account settings.
@@ -117,9 +115,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
-3. In the `aws_key_pair` section, change the `public_key` value to match your SSH key. Copy and paste the contents of your `aws_key.pub` file to the `public_key` string. Make sure the string is a single line in the text file.
-
-4. In the `local_file` section, change the `filename` to be the path to your current directory.
+3. In the `local_file` section, change the `filename` to be the path to your current directory.
 
 The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
 
@@ -250,7 +246,7 @@ Replace `{password}` in this file with your value.
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file aws_key
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 
