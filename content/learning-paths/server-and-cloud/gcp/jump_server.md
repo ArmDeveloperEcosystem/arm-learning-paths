@@ -23,13 +23,17 @@ Two tools are required on the computer you are using. Follow the links to instal
 ### Introduction to Jump Server
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
+### Generate an SSH key-pair
+
+Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
+
 ### Acquire user credentials
 
 To acquire user credentials follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#acquire-user-credentials).
-
-### Generate key-pair(public key, private key) using ssh keygen
-
-Before using Terraform, first generate the key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#generate-key-pairpublic-key-private-key-using-ssh-keygen).
 
 ### Deploying Arm instances on GCP and providing access via Jump Server
 For deploying Arm instances on GCP and providing access via Jump Server, the Terraform configuration is broken into 4 files: **main.tf**, **outputs.tf**, **variables.tf**, **terraform.tfvars**, and a modules directory that contains **vpc-network** and **network-firewall** directories.
@@ -52,7 +56,7 @@ data "google_client_openid_userinfo" "me" {}
 resource "google_os_login_ssh_public_key" "cache" {
   project = var.project
   user = data.google_client_openid_userinfo.me.email
-  key  = file("path/to/id_rsa.pub")
+  key  = file("~/.ssh/id_rsa.pub")
 }
 
 # Ensure IAM user is allowed to use OS Login
@@ -105,8 +109,6 @@ resource "google_compute_instance" "private" {
   }
 }
 ```
-
-**NOTE:-** Replace **path/to/id_rsa.pub** with the location of the public key file.
 
 Add the following code in **outputs.tf**. It defines the output values for this configuration.
 ```console

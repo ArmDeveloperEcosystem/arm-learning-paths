@@ -30,19 +30,17 @@ Before you begin you will also need:
 
 The instructions to login to Google Cloud CLI and to create the keys are below.
 
+### Generate the SSH key-pair
+
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
+
 ### Acquire user credentials
 
 To obtain user access credentials, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/gcp/terraform#acquire-user-credentials).
-
-### Generate an SSH key-pair
-
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Google Cloud access. 
-
-```console
-ssh-keygen -f gcp_key -t rsa -b 2048 -P ""
-```
-
-You should now have your SSH keys in the current directory.
 
 ## Create a GCP instance using Terraform
 
@@ -54,11 +52,6 @@ provider "google" {
   project = "{project_id}"
   region = "us-central1"
   zone = "us-central1-a"
-}
-
-resource "google_compute_project_metadata_item" "ssh-keys" {
-  key   = "gcp_key"
-  value = "ubuntu:${file("{public_key_location}")}"
 }
 
 resource "google_compute_firewall" "rules" {
@@ -90,6 +83,9 @@ resource "google_compute_instance" "vm_instance" {
       // Ephemeral public IP
     }
   }
+  metadata = {
+     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+  }
 }
 output "Master_public_IP" {
   value = [google_compute_instance.vm_instance.network_interface.0.access_config.0.nat_ip]
@@ -108,9 +104,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 
 1. In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.
 
-2. In the `google_compute_project_metadata_item` section, change the `public_key_location` value to match your SSH key.
-
-3. In the `local_file` section, change the `filename` to be the path to your current directory.
+2. In the `local_file` section, change the `filename` to be the path to your current directory.
 
 The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
 
@@ -198,7 +192,7 @@ You can use the same `playbook.yaml` file used in the topic, [Install Redis on a
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file gcp_key
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 
