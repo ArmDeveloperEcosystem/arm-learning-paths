@@ -33,24 +33,31 @@ Previous releases required WoA applications to be cross-compiled on other hosts.
 
 Check the [Microsoft Learn](https://learn.microsoft.com/en-us/windows/arm/overview) site For the latest updates on Arm-native development.
 
-## Install C and C++ support
+## Install C and C++ support in Visual Studio
 
 During installation process, you will be asked what workloads you wish to install. At a minimum, select `Desktop development with C++`.
 
 See the [documentation](https://learn.microsoft.com/en-us/cpp/build/vscpp-step-0-installation) for more information.
 
-## Runtime libraries
+## Runtime libraries in Visual Studio
 
 If needed, download the Arm64 redistributable [runtime libraries](https://aka.ms/vs/17/release/vc_redist.arm64.exe) as described [here](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist).
 
+## Install LLVM support in Visual Studio
+
+To build native Windows Applications using the LLVM toolchain in Visual Studio, follow these [installation steps](https://learn.microsoft.com/en-us/cpp/build/clang-support-msbuild?view=msvc-170#install-1). For example, Visual Studio 2022 Version 17.5.3 includes LLVM 15.0.1. 
+
+
 # LLVM toolchain
 
-[LLVM](https://llvm.org/) (LLVM 14 or higher) natively supports Windows on Arm.
+[LLVM](https://llvm.org/) (LLVM 12 or higher) natively supports Windows on Arm.
 
 Previous releases required cross-compiling on another host, or using x86 emulation. Typically compilation is twice as fast using the native toolchain vs emulation.
 
 You can download the latest LLVM builds from [here](https://releases.llvm.org/download.html).
   - The pre-built binary for Windows on Arm is typically named `LLVM-<version>-woa64.exe`.
+
+The latest version of LLVM with Windows on Arm native support is 16.0.0. The pre-built binary for this version can be downloaded [here](https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/LLVM-16.0.0-woa64.exe)
 
 ## Compatibility with existing Visual Studio / MSVC projects
 
