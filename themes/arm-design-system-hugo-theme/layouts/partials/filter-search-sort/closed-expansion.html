@@ -38,12 +38,12 @@ Calls to:
                 <!-- Radio buttons -->
                 {{if eq $input_type "radio"}}
                     <div class="form-group ads-radio-style">
-                        <input type="radio" class="tag-{{$name | urlize}} group-{{$group_name}}" id="{{$name | urlize}}" name="{{$group_name}}" onchange="filterHandler_radio_LearningPaths(this)"></input>
+                        <input type="radio" class="tag-{{$name | urlize}} group-{{$group_name}}" data-urlized-name="{{$name | urlize}}" name="{{$group_name}}" onchange="filterHandler_radio_LearningPaths(this)"></input>
                         <label for="{{$name | urlize}}">{{$name}}</label>
                     </div>
                 <!-- Checkboxes -->
                 {{else}}
-                    <ads-checkbox class="is-small tag-{{$name | urlize}} group-{{$group_name}}" id="{{$name | urlize}}" name="{{$name}}" onclick="filterHandler_LearningPaths(this)">
+                    <ads-checkbox class="is-small tag-{{$name | urlize}} group-{{$group_name}}" data-urlized-name="{{$name | urlize}}" name="{{$name}}" onclick="filterHandler_LearningPaths(this)">
                             {{ $name }} 
                     </ads-checkbox>
                 {{end}}

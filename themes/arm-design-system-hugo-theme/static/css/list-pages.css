@@ -3,8 +3,7 @@ Covers the following pages:
     - /learning-paths/:category/  5x
     - /install-guides/            1x
     - /tag/:slug/                 many!   term.html
-/*
-
+*/
 
 
 
@@ -133,10 +132,9 @@ html[theme="dark"] .filter-facet {
 ads-expansion-panel.learning-path-filters {
     --ads-expansion-panel-border-color: var(--arm-light-grey);
 
-    --ads-expansion-panel-content-background-color: var(--arm-light-grey-alt);
-
-    --ads-expansion-panel-toggle-background-color: var(--arm-light-grey-alt);
-    --ads-expansion-panel-toggle-background-color-hover: var(--arm-light-grey-alt);
+    --ads-expansion-panel-content-background-color: var(--white);
+    --ads-expansion-panel-toggle-background-color: var(--white);
+    --ads-expansion-panel-toggle-background-color-hover: var(--white);
 
 }
 
@@ -144,7 +142,6 @@ html[theme='dark'] ads-expansion-panel.learning-path-filters {
     --ads-expansion-panel-border-color: var(--arm-black);
 
     --ads-expansion-panel-content-background-color: var(--arm-color-surface);
-
     --ads-expansion-panel-toggle-background-color: var(--arm-color-surface);
     --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-surface);
 
@@ -238,7 +235,7 @@ ads-card.path-card {
     --ads-card-border-radius: 10px;
     --ads-card-border-width: 2px;
     --ads-card-border-color: var(--arm-light-grey-alt-2);
-    --ads-card-background-color: var(--white);
+    --ads-card-background-color: var(--arm-light-grey-alt);
 
     --ads-card-border-color-hover: var(--arm-web-safe-orange);
 

@@ -91,20 +91,29 @@ padding-bottom: 8px;
 }
 
 
-/* Remove text decorations on all a links */
+/* Remove text decorations on all a links when highlighted */
 a:hover {
         text-decoration: none;
 }
+/* Make all links in paragraphs underlined */
+a {
+    text-decoration: underline;
+}
+
+
+
 
 
 /* Light Theme */
 /****************************************************/
 html[theme='light'] body {
-        background-color: var(--arm-light-grey-alt);
+        /*background-color: var(--arm-light-grey-alt); */
+        background-color: white;
         --ads-table-border-color: white!important;
 }
 html[theme='light'] body.gradient-background {
-        background: radial-gradient(400px at top,#55d5e8,var(--arm-light-grey-alt))!important;
+        background: radial-gradient(400px at top,#55d5e8,white)!important; 
+        /*background: radial-gradient(400px at top, rgba(0,193,222,1) 0%,var(--arm-light-grey-alt))!important; */
 }
 
 /* Dark Theme */
@@ -116,16 +125,5 @@ html[theme='dark'] body.gradient-background {
         background: radial-gradient(400px at top,#207184,var(--arm-color-surface))!important; /*207184*/
 }
 
-
-
-/* SW-Hub Theme */
-/****************************************************/
-html[theme='sw-hub'] body {
-        background-color: var(--arm-light-grey);        
-}
-
-html[theme='sw-hub'] h1,h2,h3,h4,h5,h6 {
-        /*font-family: "Noi Grotesk", sans-serif; */
-}
 
 

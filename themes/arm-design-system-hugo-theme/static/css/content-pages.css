@@ -89,9 +89,14 @@ p.github-link        {
     margin-top: 0px;
     margin-bottom: 0px;
 
-    color: var(--arm-blue);
+    color: var(--arm-web-safe-blue);
     text-decoration: none;
 }
+
+html[theme='dark'] p.github-link        { 
+    color: var(--arm-light-blue);
+}
+
 
 div.github-div {
     padding-left: 16px;
@@ -110,6 +115,35 @@ div.github-div {
 html[theme='dark'] div.github-div {
     border-color: var(--arm-color-overlay-light);
 }
+
+p.github-link:hover {
+    color: var(--arm-web-safe-orange);
+}
+html[theme='dark'] p.github-link:hover {
+    color: var(--arm-orange);
+}
+
+
+/* Multi-tool page styling (like for docker)
+*******************************************************************/   
+.multi-tool-selection-title {
+    color: var(--arm-web-safe-blue);
+
+    margin-top: 4px!important;
+    margin-bottom: 4px!important;
+}
+html[theme='dark'] .multi-tool-selection-title {
+    color: var(--arm-light-blue);
+}
+ads-card.path-card:hover .multi-tool-selection-title{
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-web-safe-orange);
+}
+html[theme='dark'] ads-card.path-card:hover .multi-tool-selection-title {
+    transition: color 0.3s ease-in-out;
+    color: var(--arm-orange);
+}
+
 
 
 

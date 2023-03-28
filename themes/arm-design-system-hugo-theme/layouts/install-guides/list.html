@@ -18,8 +18,14 @@ Calls to:
 
 <!-- Filter replacement: List of additional search terms -->
 <p class="u-margin-top-1 u-margin-left-1 u-margin-bottom-1/2 u-font-size-90%">
-    Don't know a tool by name to search for? Try these common search terms:  
-    <a href="/install-guides/?search=compiler">compiler</a>.
+    Don't know a tool by name to search for? Try these common search terms:   
+    {{- range $i, $e := .Params.additional_search_terms -}}
+        {{- if $i -}}
+            , 
+        {{- end -}}
+        &nbsp;<a class="common-search-term-link" href='/install-guides/?search={{$e}}'>{{$e}}</a>
+    {{- end -}}
+    .
 </p>
 
 <ads-search class="u-margin-top-0" has-search-button id="search-box" placeholder="Search by tool name"></ads-search>

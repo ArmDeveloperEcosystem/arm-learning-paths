@@ -6,7 +6,7 @@ title: Arm Virtual Hardware
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - CI/CD
-- virtual platforms
+- virtual platform
 - FVP
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
