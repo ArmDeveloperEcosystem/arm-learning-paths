@@ -69,7 +69,7 @@ cat /proc/meminfo | grep ^Huge
 ```
 
 The output should look something like the below:
-```console
+```output
 HugePages_Total:       0
 HugePages_Free:        0
 HugePages_Rsvd:        0
@@ -82,7 +82,7 @@ This tells us we are not using huge pages because `HugePages_Total` is set to 0 
 
 The kernel parameter that enables huge pages is shown below:
 
-```console
+```output
 vm.nr_hugepages
 ```
 
@@ -115,7 +115,7 @@ mysqld --verbose --help
 
 ### Connections and Prepared Transactions
 
-```console
+```output
 max_connections=100000    # Default 151
 max_prepared_stmt_count=4194304   # Default 16382
 ```
@@ -126,7 +126,7 @@ max_prepared_stmt_count=4194304   # Default 16382
 
 ### Memory Related Configuration
 
-```console
+```output
 large_pages=ON    # default is OFF
 innodb_buffer_pool_size=<up to 80% of system memory>    # Default is 128MB
 ```
@@ -139,7 +139,7 @@ Other memory related configurations that could be worth exploring are the [Buffe
 
 ### Logging and Disk Flush Behavior
 
-```console
+```output
 innodb_use_fdatasync=ON    # Default is OFF
 innodb_log_file_size=20GB    # Default is 48MB
 ```
@@ -152,7 +152,7 @@ Setting `innodb_log_file_size` to much larger than the default (48MB) helps redu
 
 Increasing parallelism allow us to use our available resources more efficiently. It's always a good idea to look at parameters related to parallel execution.
 
-```console
+```output
 innodb_io_capacity=1000    # Default is 200
 innodb_io_capacity_max=2000    # Default is 2x innodb_io_capacity
 innodb_read_io_threads=<system CPU count>    # Default is 4
@@ -167,7 +167,7 @@ innodb_write_io_threads=<system CPU count>    # Default is 4
 
 ### Spin Lock Configuration
 
-```console
+```output
 innodb_sync_spin_loops=120    # Default is 30
 ```
 

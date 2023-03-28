@@ -7,28 +7,15 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
-
-Three tools are required on the computer you are using. Follow the links to install the required tools.
-
-* [AWS CLI](/install-guides/aws-cli)
-* [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
-* [Terraform](/install-guides/terraform)
 
 ## Deploy MySQL RDS instances
 
 RDS is a Relational database service provided by AWS. More information can be found [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html). To deploy a MySQL RDS instance, we need to create a `main.tf` Terraform file.
-To generate an access key and secret key, follow the instructions mentioned in this [document](https://github.com/Avinashpuresoftware/arm-software-developers-ads/blob/local_testing/content/learning-paths/server-and-cloud/mysql/ec2_deployment.md#generate-access-keys-access-key-id-and-secret-access-key).
+To generate an access key and secret key, follow the instructions mentioned in this [document](/learning-paths/server-and-cloud/mysql/ec2_deployment#generate-ssh-key-pair-on-local-host).
 
-### Here is the complete main.tf file
-
+Here is the complete main.tf file:
 
 ```console
-
 provider "aws" {
   region = "us-east-2"
   access_key  = var.access_key # access through credential file. 
@@ -46,25 +33,21 @@ resource "aws_db_instance" "Testing_Mysql" {
   skip_final_snapshot  =  true
   username              = var.username
   password              = var.password
-  availability_zone     = "us-east-1a"
+  availability_zone     = "us-east-2a"
   publicly_accessible  = true
   deletion_protection   = false
 
   tags = {
         name                 = "TEST MYSQL"
   }
-
 }
-
 ``` 
 
 To find the correct instance type for RDS, Check the [list](https://aws.amazon.com/rds/mysql/instance-types/) of supported instance types. We selected a Graviton (Arm) based instance type.
 
 ![Screenshot (260)](https://user-images.githubusercontent.com/92315883/209249327-3755d7ef-581b-456c-a64b-e2167080dd59.png)
 
-We also need to create a `credentail.tf` file, for passing our secret keys and password.
-
-### Here is credential.tf file for credentials
+We also need to create a `credential.tf` file, for passing our secret keys and password. Here is the file content:
 
 ```console
 variable "username"{
@@ -72,7 +55,7 @@ variable "username"{
 }
 
 variable "password"{
-      default  = "Armtest"    #we_can_choose_any_password, except special_characters.
+      default  = "Arm4test"    #we_can_choose_any_password, except special_characters.
 }
 
 variable "access_key"{
@@ -82,44 +65,39 @@ variable "access_key"{
 variable "secret_key"{
       default  = "EXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
-
-
 ```
-**NOTE:** Replace `secret_key` and `access_key` with the your AWS credentials.
+
+{{% notice Note %}}
+Replace `secret_key` and `access_key` with your AWS credentials.
+{{% /notice%}}
 
 Now, use the below Terraform commands to deploy the `main.tf` file.
 
 ## Terraform commands
 
+Same instructions as on the [previous page](/learning-paths/server-and-cloud/mysql/ec2_deployment#terraform-commands).
+
 ### Initialize Terraform
 
-Run `terraform init` to initialize the Terraform deployment. This command is responsible for downloading all dependencies which are required for the AWS provider.
-
-
-```console
+```bash
 terraform init
 ```
-![Screenshot (255)](https://user-images.githubusercontent.com/92315883/209247057-71265c2d-e52a-411c-91f2-e774d51874bb.png)
 
-### Create a Terraform execution plan
+### Create a Terraform execution plan (optional)
 
-Run `terraform plan` to create an execution plan.
-
-```console
+```bash
 terraform plan
 ```
 
-**NOTE:** The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
-
 ### Apply a Terraform execution plan
 
-Run `terraform apply` to apply the execution plan to your cloud infrastructure. The below command creates all required infrastructure.
-
-```console
+```bash
 terraform apply
 ```      
 
-![Screenshot (256)](https://user-images.githubusercontent.com/92315883/209247083-91a719df-8707-4380-9637-d1238cacf8b3.png)
+{{% notice Note %}}
+Creating the RDS database may take a few minutes.
+{{% /notice %}}
 
 ### Verify the RDS setup
 
@@ -131,34 +109,76 @@ To verify the setup on AWS console. Go to **RDS » Databases**, you should see t
 
 To access the RDS instance, we need to make sure that our instance is correctly associated with a security group and VPC. To access RDS outside the VPC, Follow this [document](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.Connect.html).
 
-To connect to the RDS instance, we need the `Endpoint` of the RDS instance. To find the Endpoint, Go to **RDS »Dashboard » {{YOUR_RDS_INSTANCE}}**.
+To connect to the RDS instance, we need the `Endpoint` of the RDS instance. To find the Endpoint, Go to **RDS » Dashboard » {{YOUR_RDS_INSTANCE}}**.
 
 ![Screenshot (280)](https://user-images.githubusercontent.com/92315883/209741254-55b40b52-1c56-482a-ab48-e33f510a1cf6.png)
 
 
-Now, we can connect to RDS using the above Endpoint. Use the `user` and `password` mentioned in the `credential.tf` file.
+Now, we can connect to RDS with the MySQL Client installed locally using the above Endpoint. Use the `username` and `password` mentioned in the `credential.tf` file.
 
-```console
-mysql -h {{Endpoint}} -u {{user}} -p {{password}}
+```bash { output_lines="2-15"}
+mysql -h {{Endpoint}} -u admin -pArm4test
+mysql: [Warning] Using a password on the command line interface can be insecure.
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 32
+Server version: 8.0.28 Source distribution
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> 
 ```
-**NOTE:** Replace `{{Endpoint}}`, `{{user}}` and `{{password}}` with your values.
-
-![Screenshot (277)](https://user-images.githubusercontent.com/92315883/209741354-7872aac9-97cd-4554-ade8-80f8a4bbdf25.png)
+{{% notice Note %}}
+Replace `{{Endpoint}}`, user name and password with your values.
+{{% /notice %}}
 
 
 ### Create Database and Table
-Use the below command to create a database.
+Use the below command to list, create and use database.
 
-```console
-create database {name_of_your_database};
-```
-```console
+```console { output_lines="2-11" }
 show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.10 sec)
 ```
-```console
-use {name_of_your_database};
+
+```console { output_lines="2" }
+create database arm_test;
+Query OK, 1 row affected (0.11 sec)
 ```
-![Screenshot (333)](https://user-images.githubusercontent.com/92315883/213410009-1149699d-a643-452d-b28b-cb69d95413e9.png)
+
+```console { output_lines="2-12" }
+show databases;
++--------------------+
+| Database           |
++--------------------+
+| arm_test           |
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+6 rows in set (0.10 sec)
+```
+
+```console { output_lines="2" }
+use arm_test;
+Database changed
+```
 
 To create and access a table, follow this [document](/learning-paths/server-and-cloud/mysql/ec2_deployment#access-database-and-create-table).
 

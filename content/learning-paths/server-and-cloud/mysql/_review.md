@@ -28,7 +28,7 @@ review:
             - "False"
         correct_answer: 1                     
         explanation: >
-             Yes, it is possible to keep secret data in your Ansible content with the use of Vault in playbooks.
+            It is possible to keep secret data in your Ansible content with the use of Vault in playbooks.
                
 # ================================================================================
 #       FIXED, DO NOT MODIFY

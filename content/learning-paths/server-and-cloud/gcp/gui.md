@@ -8,12 +8,6 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-
 ## Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
@@ -43,7 +37,7 @@ Choose a Zone for this VM that supports [Tau T2A](https://cloud.google.com/compu
 
 ![image](https://user-images.githubusercontent.com/67620689/202097168-6208b6ae-3627-47b3-a397-7783769e6727.PNG)
 
-Select `GENERAL-PURPOSE` from the Machine family options. Select T2A from the Series and a T2A Machine type from the drop-down menu.
+Select `GENERAL-PURPOSE` from the Machine family options. Select `T2A` from the Series and a `T2A` Machine type from the drop-down menu.
 
 ![image](https://user-images.githubusercontent.com/67620689/203740482-d820ced1-5eeb-4c07-99a3-18a7a7511966.PNG)
 
