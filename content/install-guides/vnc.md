@@ -9,8 +9,10 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30
 
+author_primary: Jason Andrews
+
 ### Link to official documentation
-official_docs: 
+official_docs: https://tigervnc.org/
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

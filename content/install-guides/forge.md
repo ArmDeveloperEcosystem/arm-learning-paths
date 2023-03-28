@@ -14,6 +14,8 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
+author_primary: Florent Lebeau
+
 ### Link to official documentation
 official_docs: https://www.linaroforge.com/documentation/
 

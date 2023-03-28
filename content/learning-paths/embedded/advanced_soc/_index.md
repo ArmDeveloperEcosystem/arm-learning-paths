@@ -15,6 +15,8 @@ prerequisites:
     - Basic understanding of System on Chip design
     - A 'Zybo Z7-10' development board 
 
+author_primary: Pareena Verma
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
