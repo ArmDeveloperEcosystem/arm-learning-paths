@@ -240,7 +240,7 @@ function filterHandler_LearningPaths(element) {
             // Remove all other subject facets
             const all_radio_btns_with_same_group = document.querySelectorAll('input.radio-group-'+element.name);
             for (let radio_btn of all_radio_btns_with_same_group) {
-                if (radio_btn.id != element.id) {
+                if (radio_btn.id != element.getAttribute('data-urlized-name')) {
                     let tag = 'tag-'+radio_btn.id;
                     if (document.getElementById('filter-'+tag)) {
                         removeFacet('tag-'+radio_btn.id);

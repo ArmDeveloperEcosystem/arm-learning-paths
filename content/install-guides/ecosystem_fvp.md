@@ -5,10 +5,7 @@ title: Arm Ecosystem FVPs
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
-  - ecosystem
-  - fvp
-  - keil
-  - mdk
+  - virtual platform
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10

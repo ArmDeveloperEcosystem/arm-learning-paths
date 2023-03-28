@@ -135,7 +135,8 @@ function searchSubmit_Tools(evt) {
     }
     else {
         const safe_search_string = sanitizeInput(evt.value);
-        const safe_formatted_search_string = safe_search_string.replaceAll(' ','+');
+        //const safe_formatted_search_string = safe_search_string.replaceAll(' ','+');
+        const safe_formatted_search_string = encodeURIComponent(safe_search_string);
         window.location.href = "/install-guides/?search="+safe_formatted_search_string;
     }
 }

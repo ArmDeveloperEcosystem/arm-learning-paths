@@ -1,5 +1,6 @@
 ---
-additional_search_terms: null
+additional_search_terms: 
+- cloud
 layout: installtoolsall
 minutes_to_complete: 5
 multi_install: false

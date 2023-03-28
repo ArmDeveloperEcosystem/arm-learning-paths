@@ -12,15 +12,14 @@ function searchByTitle(card,search_word_array) {
 
 function searchByAdditionalSearchTerm(card,search_word_array) {
     let result = true;
-
+    
+    let search_word_dash = search_word_array.join("-")
     let card_classes = card.classList;
-    card_classes.forEach(function (term, i) {
-        //console.log(term);
+
+    card_classes.forEach(function (term, i) {    
         if (term.startsWith('term-')) {
-            // now iterate through this
-            var additional_search_match = search_word_array.every(item => (term.replace('term-','')==item));
-            if (additional_search_match) {
-                result=false; // show it
+            if (search_word_dash == term.replace('term-','')) {
+                result=false; //show it
             }
         }
     });
@@ -34,7 +33,9 @@ function parseParamsFromURL(url_str) {
         let search_str = url_params[url_params.findIndex(e => e.includes("search="))];
         
         // Remove '?', 'search=', and replace '+' with spaces leaving just the string.
-        search_str = search_str.replaceAll('?','').replace('search=','').replaceAll('+',' ');
+        //search_str = search_str.replaceAll('?','').replace('search=','').replaceAll('+',' ');
+        search_str = search_str.replaceAll('?','').replace('search=','');
+        search_str = decodeURIComponent(search_str);
         // Again, for safety, strip all non numbers and letters
         search_str = search_str.replaceAll(/[^a-z A-Z 0-9]+/g, "");
 
