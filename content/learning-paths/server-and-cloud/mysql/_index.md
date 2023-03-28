@@ -3,7 +3,7 @@ title: Learn how to deploy MySQL on AWS
 
 description: Deploy single instance of MySQL through Docker, RDS and EC2 instance
 
-minutes_to_complete: 60   
+minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on AWS.
 
