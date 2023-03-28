@@ -56,16 +56,16 @@ provider "aws" {
   access_key  = "AXXXXXXXXXXXXXXXXXXX"
   secret_key   = "AXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
-  resource "aws_instance" "MYSQL_TEST" {
+resource "aws_instance" "MYSQL_TEST" {
   count         = "2"
   ami           = "ami-0ca2eafa23bc3dd01"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity1.name]
-  key_name = "id_rsa"
+  key_name = aws_key_pair.deployer.key_name
   tags = {
     Name = "MYSQL_TEST"
   }
-
+}
 resource "aws_default_vpc" "main" {
   tags = {
     Name = "main"
@@ -286,7 +286,7 @@ Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` in this file with 
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file ~/.ssh/id_rsa
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 
@@ -296,7 +296,7 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
-ubuntu@ip-172-31-38-39:~/aws-mysql$ ansible-playbook mysqlmodule.yml -i hosts --key-file ~/.ssh/id_rsa
+ubuntu@ip-172-31-38-39:~/aws-mysql$ ansible-playbook mysqlmodule.yml -i hosts
 
 PLAY [mysql1, mysql2] ********************************************************************************************************************************************
 

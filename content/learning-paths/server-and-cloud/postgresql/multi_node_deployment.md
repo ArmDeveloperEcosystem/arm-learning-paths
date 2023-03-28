@@ -44,7 +44,7 @@ resource "aws_instance" "PSQL_TEST" {
   ami           = "ami-0f9bd9098aca2d42b"
   instance_type = "t4g.small"
   security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = "aws_key"
+  key_name = aws_key_pair.deployer.key_name
  
   tags = {
     Name = "PSQL_TEST"
@@ -89,8 +89,8 @@ output "Master_public_IP" {
   value = [aws_instance.PSQL_TEST[0].public_ip, aws_instance.PSQL_TEST[1].public_ip, aws_instance.PSQL_TEST[2].public_ip]
 }
  resource "aws_key_pair" "deployer" {
-         key_name   = "aws_key"
-         public_key = "ssh-rsaxxxxxxxxxxxxxx"
+         key_name   = "id_rsa"
+         public_key = file("~/.ssh/id_rsa.pub")
   }
 // Generate inventory file
 // 3 node change: replace the single public_ip line with the three shown here.
@@ -169,7 +169,7 @@ Use the public IP addresses for your EC2 instances.
 Log in to each node using SSH:
 
 ```console
-ssh -i aws_key ubuntu@<public-IP-address>
+ssh ubuntu@<public-IP-address>
 ```
 
 Run the commands to install PostgreSQL:
@@ -188,7 +188,7 @@ sudo apt-get install postgresql-9.6 -y
 SSH to the primary node and perform the steps listed to configure the primary node.
  
 ```console
-ssh -i aws_key ubuntu@<primary-node-public-IP-address>
+ssh ubuntu@<primary-node-public-IP-address>
 ```
 
 1. Use a text editor to modify the main configuration file `/etc/postgresql/9.6/main/postgresql.conf` (you will need to use sudo to edit)

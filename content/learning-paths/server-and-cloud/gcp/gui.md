@@ -8,9 +8,19 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Before you begin
 
-* A Google cloud account
+Any computer which has the required tools installed can be used for this section.
+
+You will need a [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
+
+## Generate an SSH key-pair
+
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
 
 ## Deploy Arm based VMs via GUI
 Log in to your Google account and in the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135).
@@ -50,26 +60,18 @@ Then click on select.
 
 ![image](https://user-images.githubusercontent.com/67620689/204448774-b75b0c07-5cc3-4aa2-8d5d-0e0ced437e22.PNG)
 
+Now expand the Advance options section then click on Security. Expand VM access and add the public key by clicking on `ADD ITEM`.
+
+![image](https://user-images.githubusercontent.com/67620689/225616099-8fc7791a-24b3-4195-b957-154eaca43080.PNG)
+
 To create and start the VM, click Create.
 
 ![image](https://user-images.githubusercontent.com/67620689/202098038-7bfb0b6c-af18-4d5c-92a8-ca90a57bc25b.PNG)
-
-## Generate key-pair(public key, private key) using ssh keygen
-Generate the key pair using the following command:
-
-```
-ssh-keygen -t rsa -b 2048
-```
-![image](https://user-images.githubusercontent.com/67620689/203761628-d7f4ade8-a132-4af9-b012-778c82b6d94d.PNG)
-
-## Add the public key
-In the VM instance page select your Project. Go to Metadata click on SSH keys and then add the public key.
-![image](https://user-images.githubusercontent.com/67620689/203762984-abfcecf4-87d6-4a06-b546-ad955dee4bc6.PNG)
 
 ## SSH into the launched instance
 Run following command to connect to VM through SSH:
 
 ```
-ssh -i "/home/ubuntu/gcp/gcp_keys" ubuntu@<Public IP/DNS address>
+ssh ubuntu@<Public IP>
 ```
-![image](https://user-images.githubusercontent.com/67620689/203761659-9be08da4-f537-4971-b9aa-51f7c1eddcb4.PNG)
+![image](https://user-images.githubusercontent.com/67620689/227440469-b3d8c556-326d-498d-8e78-668fe68c4eb0.PNG)

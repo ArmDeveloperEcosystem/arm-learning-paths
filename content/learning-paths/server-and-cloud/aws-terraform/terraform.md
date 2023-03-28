@@ -14,12 +14,23 @@ Another way to start an AWS EC2 instance is with Terraform. You can follow the s
 
 ## Before you begin
 
-Before you begin, make sure you have the following setup:
+Any computer which has the required tools installed can be used for this section.
 
-* An AWS account
-* An [installation of Terraform](https://www.terraform.io/cli/install/apt)
-* An installation of [AWS CLI](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-install.html)
-      
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
+
+Two tools are required on the computer you are using. Follow the links to install the required tools.
+
+* [Terraform](/install-guides/terraform)
+* [AWS CLI](/install-guides/aws-cli)
+
+## Generate the SSH key-pair
+
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
+
 ## Generate Access keys (access key ID and secret access key)
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
@@ -35,29 +46,6 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 ### Copy the Access Key ID and Secret Access Key 
 
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png "Copy keys")
-
-## Generate key-pair(public key, private key) using ssh keygen
-
-### Generate the public key and private key
-
-Before using Terraform, first generate the key-pair (public key, private key) using ssh-keygen. Then associate both public and private keys with AWS EC2 instances.
-
-Generate the key-pair using the following command:
-
-```console
-ssh-keygen -t rsa -b 2048
-```
-       
-By default, the above command will generate the public as well as private key at location **$HOME/.ssh**. You can override the end destination with a custom path (for example, /home/ubuntu/aws/ followed by key name aws_keys).
-
-Output when a key pair is generated:
-      
-![alt-text #center](https://user-images.githubusercontent.com/87687468/192259698-8219d63c-e28b-41e2-a67c-7f77dff20e9a.png "Example output")
-
-{{% notice Note %}}
-Use the public key `aws_keys.pub` inside the Terraform file to provision/start the instance and private key `aws_keys` to connect to the instance.
-{{% /notice %}}
-
 
 ## Create your first Terraform infrastructure (main.tf)
 
@@ -119,7 +107,7 @@ Shown below is the aws_instance configuration:
 resource "aws_instance" "ec2_example" {
   ami = "ami-02a92e06fd643c11b"  
   instance_type = "t4g.nano" 
-  key_name= "aws_key"
+  key_name= aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 ```
@@ -135,7 +123,7 @@ provider "aws" {
 resource "aws_instance" "ec2_example" {
   ami = "ami-02a92e06fd643c11b"  
   instance_type = "t4g.nano" 
-  key_name= "aws_key"
+  key_name= aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 
   provisioner "remote-exec" {
@@ -153,7 +141,7 @@ resource "aws_instance" "ec2_example" {
     type        = "ssh"
     host        = self.public_ip
     user        = "ubuntu"
-    private_key = file("/home/ubuntu/aws/aws_key")
+    private_key = file("~/.ssh/id_rsa")
     timeout     = "4m"
   }
 }
@@ -188,14 +176,10 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_key_pair" "deployer" {
-  key_name   = "aws_key"
-  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbvRN/gvQBhFe+dE8p3Q865T/xTKgjqTjj56p1IIKbq8SDyOybE8ia0rMPcBLAKds+wjePIYpTtRxT9UsUbZJTgF+SGSG2dC6+ohCQpi6F3xM7ryL9fy3BNCT5aPrwbR862jcOIfv7R1xVfH8OS0WZa8DpVy5kTeutsuH5suehdngba4KhYLTzIdhM7UKJvNoUMRBaxAqIAThqH9Vt/iR1WpXgazoPw6dyPssa7ye6tUPRipmPTZukfpxcPlsqytXWlXm7R89xAY9OXkdPPVsrQdkdfhnY8aFb9XaZP8cm7EOVRdxMsA1DyWMVZOTjhBwCHfEIGoePAS3jFMqQjGWQd xxxx@xxx-HP-ZBook-15-G2"
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 ```
-
-{{% notice Note %}}
-"Key_name" and "Public_key" should be replaced with actual value.
-{{% /notice %}}
 
 ## Terraform commands
     
@@ -237,18 +221,18 @@ Verify the setup by going back to the AWS console.
 
 Goto **EC2 -> instances** you should see the instance running.   
    
-![alt-text #center](https://user-images.githubusercontent.com/87687468/192154191-7c0c97c6-4119-4395-bd8a-2873835e2f73.png "Verify")
+![alt-text #center](https://user-images.githubusercontent.com/67620689/226522634-3da95b61-5655-4c27-b5ab-913d3f731c2c.PNG "Verify")
 
 You can also see the tag name, Terraform EC2, which was used in the Terraform script.
    
-### Use private key 'aws_key' to SSH into EC2 instance
+### SSH into EC2 instance
 
-The EC2 instance is running, now connect using the private key.
+The EC2 instance is running, now connect using the private key '~/.ssh/id_rsa'.
 
 You can find the connect command from the AWS console.
 
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190621116-0e9fb285-960f-437d-bfc0-77352349372c.png "Use private key")
-   
+![alt-text #center](https://user-images.githubusercontent.com/67620689/226522564-67404d25-85ad-49e1-ba63-ca64725e6e51.PNG "Use private key")
+
 ### Clean up resources
 
 Run `terraform destroy` to delete all resources created.

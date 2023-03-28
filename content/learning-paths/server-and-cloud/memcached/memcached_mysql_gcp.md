@@ -198,7 +198,7 @@ You can use the same `playbook.yaml` file used in the section, [Deploy Memcached
 Substitute your private key name, and run the playbook using the `ansible-playbook` command:
 
 ```console
-ansible-playbook playbook.yaml -i hosts --key-file ~/.ssh/id_rsa
+ansible-playbook playbook.yaml -i hosts
 ```
 
 Answer `yes` when prompted for the SSH connection. 
@@ -208,7 +208,7 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
-ubuntu@ip-172-31-38-39:~/gcp-mysql$ ansible-playbook playbook.yaml -i hosts --key-file ~/.ssh/id_rsa
+ubuntu@ip-172-31-38-39:~/gcp-mysql$ ansible-playbook playbook.yaml -i hosts
 
 PLAY [mysql1, mysql2] ********************************************************************************************************************************************
 

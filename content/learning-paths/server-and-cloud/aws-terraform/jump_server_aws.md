@@ -11,11 +11,14 @@ layout: "learningpathall"
 ## Deploy Arm instances on AWS and provide access via Jump Server
 
 ## Before you begin
-Make sure you have the following setup on your machine:
 
-* An AWS account
-* An installation of [AWS CLI](https://docs.aws.amazon.com/cli/v1/userguide/cli-chap-install.html)
-* An installation of [Terraform](https://www.terraform.io/cli/install/apt)
+Any computer which has the required tools installed can be used for this section.
+
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
+
+Two tools are required on the computer you are using. Follow the links to install the required tools.
+* [Terraform](/install-guides/terraform)
+* [AWS CLI](/install-guides/aws-cli)
 
 ## Introduction to Jump Server
 A Jump Server (also known as bastion host) is an intermediary device responsible for funnelling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.

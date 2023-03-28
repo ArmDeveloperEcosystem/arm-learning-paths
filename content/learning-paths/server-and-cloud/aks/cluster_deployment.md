@@ -14,13 +14,25 @@ You can run Azure Kubernetes Service (AKS), a fully managed Kubernetes platform,
 
 Any computer which has the required tools installed can be used for this section. 
 
-You will need a [Azure account](https://azure.microsoft.com/). Create an account if needed. 
+You will need an [Azure account](https://azure.microsoft.com/). Create an account if needed.
 
 Three tools are required on the computer you are using. Follow the links to install the required tools.
 
 * [Terraform](/install-guides/terraform)
 * [Kubectl](/install-guides/kubectl/)
 * [Azure CLI](/install-guides/azure-cli/)
+
+## Azure authentication
+
+For Azure authentication, follow this [documentation](/learning-paths/server-and-cloud/azure/terraform#azure-authentication).
+
+## Create an SSH key pair
+
+Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+
+{{% notice Note %}}
+If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+{{% /notice %}}
 
 ## Create an AKS cluster using Terraform
 
@@ -131,36 +143,6 @@ The block labeled `default_node_pool` is used to select the virtual machine type
 The nodes are specified to use the `Standard_D2ps_v5` virtual machine type which is a 2 vCPU Altra-based virtual machine with standard SSDs.
 
 There are various Arm-based virtual machines that can be selected. The [Azure VM series descriptions](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/) shows that the Dpsv5, Dpdsv5, Dplsv5, Dpldsv5, Epsv5, Epdsv5 all use Ampere Altra. Any of these virtual machine types can be used to create an Arm-based cluster.
-
-### Setup Azure
-
-1. Log in to Azure using the command line interface (CLI):
-
-```console
-az login
-```
-
-The output will include a link to visit and a code to use. 
-
-Your output will be similar to:
-
-```output
-To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code EMHNUYS8J to authenticate.
-```
-
-Open the link in your browser, enter the code, and sign into your Azure account. 
-
-Once the log in process is done, the CLI command will complete and print information about your login. 
-
-2. Create an SSH key pair:
-
-The `ssh-keygen` command will generate the public and private key in the `$HOME/.ssh` directory. 
-
-```console
-ssh-keygen -m PEM -t rsa -b 4096
-```
-
-You can see the location of the public key specified in `variables.tf`
 
 ### Run the Terraform commands
 
