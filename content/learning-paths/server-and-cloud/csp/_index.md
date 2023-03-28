@@ -1,7 +1,7 @@
 ---
 title: Get started with Arm-based cloud instances
 
-description: Learn how to get started with Arm-based cloud instances from a number of service providers
+author_primary: Ronan Synnott
 
 minutes_to_complete: 15
 

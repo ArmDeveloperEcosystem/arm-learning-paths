@@ -3,6 +3,8 @@ title: Write Arm Assembler functions
 
 minutes_to_complete: 60
 
+author_primary: Ronan Synnott
+
 who_is_this_for: This is an introductory topic for software developers interested programming microcontrollers with C/Assembly.
 
 learning_objectives: 
