@@ -29,11 +29,11 @@ The installation of Terraform on your desktop or laptop needs to communicate wit
 ![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
 
 
-## Generate SSH key-pair on local host
+## Generate SSH key pair on local host
 
-Before using Terraform, first generate the key-pair (public key, private key) using ssh-keygen. Then associate both public and private keys with AWS EC2 instances.
+Before using Terraform, first generate the key pair (public key, private key) using ssh-keygen. Then associate both public and private keys with AWS EC2 instances.
 
-Generate the key-pair using the following command:
+Generate the key pair using the following command:
 
 ```bash
 ssh-keygen -t rsa -b 2048
@@ -202,7 +202,7 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 terraform apply
 ```
 
-In the output, you will need to confirm the actions to perform bt typing `yes`: 
+In the output, you will need to confirm the actions to perform by typing `yes`: 
 
 ```output
 [...]

@@ -110,7 +110,7 @@ To verify the setup on AWS console. Go to **RDS » Databases**, you should see t
 
 To access the RDS instance, we need to make sure that our instance is correctly associated with a security group and VPC. To access RDS outside the VPC, Follow this [document](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.Connect.html).
 
-To connect to the RDS instance, we need the `Endpoint` of the RDS instance. To find the Endpoint, Go to **RDS »Dashboard » {{YOUR_RDS_INSTANCE}}**.
+To connect to the RDS instance, we need the `Endpoint` of the RDS instance. To find the Endpoint, Go to **RDS » Dashboard » {{YOUR_RDS_INSTANCE}}**.
 
 ![Screenshot (280)](https://user-images.githubusercontent.com/92315883/209741254-55b40b52-1c56-482a-ab48-e33f510a1cf6.png)
 
