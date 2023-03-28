@@ -3,6 +3,7 @@ additional_search_terms:
 - Ansible
 layout: installtoolsall
 minutes_to_complete: 10
+author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.ansible.com/ansible/latest/index.html

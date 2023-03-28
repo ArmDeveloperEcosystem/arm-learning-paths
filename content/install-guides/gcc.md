@@ -3,6 +3,7 @@ additional_search_terms:
 - compiler
 layout: installtoolsall
 minutes_to_complete: 15
+author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://gcc.gnu.org/onlinedocs/
