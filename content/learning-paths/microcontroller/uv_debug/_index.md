@@ -2,12 +2,10 @@
 title: "Start Debugging with µVision"
 # Should start with a verb, have no adjectives (amazing, cool, etc.), and be as concise as possible.
 
-description: >
-    Learn how to use the powerful debug features of µVision.
-# One sentance, is a quick summary of this learning path, viewable when searching through all learning paths. 
-
 minutes_to_complete: 90
 # Always measured in minutes. Should be an integer, to complete the learning path (not just read it).
+
+author_primary: Christopher Seidl
 
 who_is_this_for: >
     This is an advanced topic for Software developers who want to master embedded microcontroller debugging using µVision.

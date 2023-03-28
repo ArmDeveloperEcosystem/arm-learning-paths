@@ -1,9 +1,9 @@
 ---
 title: Processing Text in Mixed C/Assembly Language
 
-description: In this exercise, you will execute assembly code on the Nucleo-F401RE board using the debugger to examine its execution at the processor level.
-
 minutes_to_complete: 60
+
+author_primary: Ronan Synnott
 
 who_is_this_for: This is an introductory topic for software developers interested in efficiently programming microcontrollers with C/Assembly.
 
