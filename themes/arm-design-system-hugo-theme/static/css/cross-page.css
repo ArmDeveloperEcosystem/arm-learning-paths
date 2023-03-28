@@ -95,11 +95,11 @@ padding-bottom: 8px;
 a:hover {
         text-decoration: none;
 }
-/* Make all links in paragraphs underlined */
-a {
+/* Make all links in paragraphs underlined 
+p > a, li > a, td > a {
     text-decoration: underline;
 }
-
+*/
 
 
 
