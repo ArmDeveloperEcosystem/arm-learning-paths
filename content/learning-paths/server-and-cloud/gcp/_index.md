@@ -1,5 +1,5 @@
 ---
-title: "Create Arm virtual machines on Google Cloud Platform"
+title: "Deploy Arm virtual machines on Google Cloud Platform"
 
 minutes_to_complete: 30
 
