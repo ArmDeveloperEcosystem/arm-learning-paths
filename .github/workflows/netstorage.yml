@@ -40,8 +40,8 @@ jobs:
       #  Copy SSH Key
       - name: copy key
         run: |
-            echo $SSH_KEY | xargs -n 1 > tmp
-            base64 -d < tmp > key
+            echo $SSH_KEY | xargs -n 1 > tmpkey
+            base64 -d < tmpkey > key
             chmod 400 key
         shell: bash
         env:
