@@ -142,7 +142,7 @@ To access the Redis server running inside the Docker container on port `6379`, w
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts
+ansible-playbook playbook.yaml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection. 

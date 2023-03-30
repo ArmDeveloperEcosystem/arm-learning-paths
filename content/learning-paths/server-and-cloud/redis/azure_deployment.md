@@ -232,18 +232,14 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
 
 resource "local_file" "inventory" {
     depends_on=[azurerm_linux_virtual_machine.my_terraform_vm]
-    filename = "(your_current_directory)/hosts"
+    filename = "/tmp/inventory"
     content = <<EOF
 [all]
 ansible-target1 ansible_connection=ssh ansible_host=${azurerm_linux_virtual_machine.my_terraform_vm.public_ip_address} ansible_user=ubuntu
                 EOF
 }
 ```
-Make the changes listed below in `main.tf` to match your account settings.
-
-1. In the `local_file` section, change the `filename` to be the path to your current directory.
-
-The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
+The inventory file is automatically generated and does not need to be changed.
 
 
 Add the below code in `outputs.tf` to get Resource group name and Public IP.
@@ -338,7 +334,7 @@ You can use the same `playbook.yaml` file used in the topic, [Install Redis on a
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts
+ansible-playbook playbook.yaml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection. 

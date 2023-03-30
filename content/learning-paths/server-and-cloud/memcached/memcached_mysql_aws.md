@@ -104,7 +104,7 @@ resource "aws_security_group" "Terraformsecurity1" {
  }
 resource "local_file" "inventory" {
     depends_on=[aws_instance.MYSQL_TEST]
-    filename = "(your_current_directory)/hosts"
+    filename = "/tmp/inventory"
     content = <<EOF
 [mysql1]
 ${aws_instance.MYSQL_TEST[0].public_ip}
@@ -132,9 +132,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
-3. In the `local_file` section, change the `filename` to be the path to your current directory.
-
-The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
+The inventory file is automatically generated and does not need to be changed.
 
 ## Terraform Commands
 
@@ -286,7 +284,7 @@ Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` in this file with 
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
 
 ```console
-ansible-playbook playbook.yaml -i hosts
+ansible-playbook playbook.yaml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection. 
@@ -296,8 +294,6 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
-ubuntu@ip-172-31-38-39:~/aws-mysql$ ansible-playbook mysqlmodule.yml -i hosts
-
 PLAY [mysql1, mysql2] ********************************************************************************************************************************************
 
 TASK [Gathering Facts] *******************************************************************************************************************************************
@@ -514,7 +510,7 @@ You will create two `.py` files on the host machine to deploy Memcached as a MyS
 MYSQL_TEST=[["{{public_ip of MYSQL_TEST[0]}}", "arm_test1"],
 ["{{public_ip of MYSQL_TEST[1]}}", "arm_test2"]]
 ```
-Replace `{{public_ip of MYSQL_TEST[0]}}` & `{{public_ip of MYSQL_TEST[1]}}` with the public IPs generated in the `hosts` file after running the Terraform commands.       
+Replace `{{public_ip of MYSQL_TEST[0]}}` & `{{public_ip of MYSQL_TEST[1]}}` with the public IPs generated in the `hosts` file after running the Terraform commands.
 `memcached.py` to access data from Memcached and, if not present, store it in the Memcached.       
 ```console
 import sys

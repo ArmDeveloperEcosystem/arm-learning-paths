@@ -96,7 +96,7 @@ output "Master_public_IP" {
 // 3 node change: replace the single public_ip line with the three shown here.
 resource "local_file" "inventory" {
     depends_on= [aws_instance.PSQL_TEST]
-    filename = "(your_current_directory)/hosts"
+    filename = "/tmp/inventory"
     content = <<EOF
           [db_master]
           ${aws_instance.PSQL_TEST[0].public_ip}
