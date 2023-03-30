@@ -93,7 +93,7 @@ output "Master_public_IP" {
 
 resource "local_file" "inventory" {
     depends_on=[aws_instance.redis-deployment]
-    filename = "(your_current_directory)/hosts"
+    filename = "/tmp/inventory"
     content = <<EOF
 [all]
 ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.redis-deployment.public_dns} ansible_user=ubuntu
@@ -115,9 +115,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
-3. In the `local_file` section, change the `filename` to be the path to your current directory.
-
-The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
+The inventory file is automatically generated and does not need to be changed.
 
 
 ## Terraform Commands
@@ -246,7 +244,7 @@ Replace `{password}` in this file with your value.
 Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
 
 ```console
-ansible-playbook playbook.yaml -i hosts
+ansible-playbook playbook.yaml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection. 

@@ -98,7 +98,7 @@ resource "google_compute_network" "default" {
 }
 resource "local_file" "inventory" {
     depends_on=[google_compute_instance.MYSQL_TEST]
-    filename = "(your_current_directory)/hosts"
+    filename = "/tmp/inventory"
     content = <<EOF
 [mysql1]
 ${google_compute_instance.MYSQL_TEST[0].network_interface.0.access_config.0.nat_ip}
@@ -110,13 +110,9 @@ ansible_user=ubuntu
                 EOF
 }
 ```
-Make the changes listed below in `main.tf` to match your account settings.
+In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.
 
-1. In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.
-
-2. In the `local_file` section, change the `filename` to be the path to your current directory.
-
-The hosts file is automatically generated and does not need to be changed, change the path to the location of the hosts file.
+The inventory file is automatically generated and does not need to be changed.
 
 ## Terraform Commands
 
@@ -198,7 +194,7 @@ You can use the same `playbook.yaml` file used in the section, [Deploy Memcached
 Substitute your private key name, and run the playbook using the `ansible-playbook` command:
 
 ```console
-ansible-playbook playbook.yaml -i hosts
+ansible-playbook playbook.yaml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection. 
@@ -208,8 +204,6 @@ Deployment may take a few minutes.
 The output should be similar to:
 
 ```output
-ubuntu@ip-172-31-38-39:~/gcp-mysql$ ansible-playbook playbook.yaml -i hosts
-
 PLAY [mysql1, mysql2] ********************************************************************************************************************************************
 
 TASK [Gathering Facts] *******************************************************************************************************************************************

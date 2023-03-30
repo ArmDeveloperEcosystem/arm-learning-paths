@@ -95,7 +95,7 @@ resource "aws_security_group" "Terraformsecurity" {
 
 resource "local_file" "inventory" {
     depends_on=[aws_instance.MYSQL_TEST]
-    filename = "/home/ubuntu/inventory.txt"
+    filename = "/tmp/inventory"
     content = <<EOF
 [all]
 ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.MYSQL_TEST.public_ip} ansible_user=ubuntu
@@ -271,7 +271,7 @@ Here is the complete YML file of `Ansible-Playbook`.
 Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` with your password.
 {{% /notice %}}
 
-In our case, the inventory file `inventory.txt` will be generated automatically after the `terraform apply` command.
+In our case, the inventory file `/tmp/inventory` will be generated automatically after the `terraform apply` command.
 
 ### Ansible Commands
 
@@ -284,7 +284,7 @@ ansible-galaxy collection install community.mysql
 To run a Playbook, we need to use the `ansible-playbook` command. 
 
 ```bash
-ansible-playbook playbook.yml -i inventory.txt --key-file /home/ubuntu/.ssh/mysql_key
+ansible-playbook playbook.yml -i /tmp/inventory --key-file /home/ubuntu/.ssh/mysql_key
 ```
 
 Answer `yes` when prompted for the SSH connection.
