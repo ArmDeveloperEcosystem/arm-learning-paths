@@ -51,7 +51,7 @@ jobs:
       - name: copy site content
         run: |
           cd public
-          zip -r public.zip *
+          zip -r public.zip .
           cd ..
           scp -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
         shell: bash
