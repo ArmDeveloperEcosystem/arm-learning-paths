@@ -1,6 +1,6 @@
 ---
 # User change
-title: Build and run on MPS3
+title: Build and run Trusted Firmware on the MPS3
 
 weight: 4 # 1 is first, 2 is second, etc.
 

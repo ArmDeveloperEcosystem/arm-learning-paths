@@ -1,6 +1,6 @@
 ---
 # User change
-title: Pre-requisites
+title: Required hardware and software
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -9,26 +9,38 @@ layout: "learningpathall"
 ---
 Arm Trusted Firmware provides a reference implementation of Platform Security Architecture (PSA). Reference implementations are available for a number of [platforms](https://tf-m-user-guide.trustedfirmware.org/platform/index.html).
 
-We shall use the [Corstone-1000](https://www.arm.com/en/products/silicon-ip-subsystems/corstone-1000) implementation.
+This Learning Path uses the [Corstone-1000](https://www.arm.com/en/products/silicon-ip-subsystems/corstone-1000) platform.
 
-The software stack can be executed on the Corstone-1000 FVP or MPS3 FPGA implementation.
+The software stack can be executed on the Corstone-1000 Fixed Virtual Platform (FVP) and the MPS3 FPGA prototyping board.
 
-The FPGA implementation can also demonstrate Authenticated Debug (PSA-ADAC) in conjunction with Arm Development Studio.
+You can also use the FPGA prototyping board to demonstrate Authenticated Debug (PSA-ADAC) in conjunction with Arm Development Studio.
 
-## Build machine
+## Before you begin
 
-A Linux machine running Ubuntu 18.04 or later is required. You may wish to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware) which is hosted on `AWS`, and includes the Corstone-1000 FVP.
+You will need the hardware and software listed below to complete the steps in this Learning Path. 
 
-This learning path was written using the [AMI](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g), running on a `t3.xlarge` instance with `100GB` of storage.
+### Development machine
 
-## FVP
+Use a Linux computer running Ubuntu 18.04 or later (x86_64 architecture) as the development machine.
 
-If not using Arm Virtual Hardware, the Corstone-1000 FVP can be downloaded and installed locally from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page.
+If you don't have the required computer, you can use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware) which is hosted on `AWS` and includes the Corstone-1000 FVP.
 
-## MPS3
+The instructions have been tested using the [Arm Virtual Hardware AMI](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) running on a `t3.xlarge` EC2 instance with `100GB` of storage.
 
-If you wish to use the FPGA implementation (necessary for Authenticated Debug later), you require an [MPS3 FPGA Prototyping Board](https://developer.arm.com/Tools%20and%20Software/MPS3%20FPGA%20Prototyping%20Board) programmed with [AN550](https://developer.arm.com/downloads/view/AN550). The image requires `QSPI Flash Module` to be installed (see section 8.2 of the supplied documentation).
+### Corstone-1000 FVP
 
-## Arm Development Studio and DSTREAM
+Download and install the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) on your development machine.
 
-To demonstrate PSA-ADAC Authenticated Debug, you also need a valid [Arm Development Studio](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio) Silver (or higher) license, with version 2022.3 or later. You also require an appropriate [DSTREAM](https://www.arm.com/products/development-tools/debug-probes/dstream-st) Probe.
+If you are using Arm Virtual Hardware, the Corstone-1000 FVP is already installed on the virtual machine. 
+
+### MPS3 FPGA prototyping board
+
+You will need an [MPS3 FPGA Prototyping Board](https://developer.arm.com/Tools%20and%20Software/MPS3%20FPGA%20Prototyping%20Board) programmed with [AN550](https://developer.arm.com/downloads/view/AN550) to demonstrate Authenticated Debug.
+
+The image requires the `QSPI Flash Module` to be installed. Refer to section 8.2 of the [AN550 documentation](https://developer.arm.com/documentation/dai0550/latest/).
+
+### Arm Development Studio and DSTREAM
+
+To demonstrate PSA-ADAC Authenticated Debug, you will need [Arm Development Studio](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio) Silver (or higher), version 2022.3 or later. Refer to the [install guide](/install-guides/armds/) for installation instructions. 
+
+You will also need an appropriate [DSTREAM](https://www.arm.com/products/development-tools/debug-probes/dstream-st) Debug Probe. 
