@@ -13,6 +13,9 @@ name = "aws"
 URL = "s3://armswdev.tk?region=us-east-1"
 cloudFrontDistributionID = "E1KJFR5JSKYU64"
 
+
+
+
 [frontmatter]
     lastmod = [ "lastmod", ":git", "date", "publishDate" ]
 
@@ -51,6 +54,9 @@ cloudFrontDistributionID = "E1KJFR5JSKYU64"
 github_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-paths"
 # An optional link to a related project repo. For example, the sibling repository where your product code lives.
 github_project_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-paths"
+# location of assets
+assetsDir = "assets"
+
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""

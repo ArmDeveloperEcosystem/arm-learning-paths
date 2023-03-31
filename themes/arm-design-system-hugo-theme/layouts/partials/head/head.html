@@ -20,8 +20,7 @@ Where it is used:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set the viewport appropriatly -->
 <title>{{ $title }}</title>
-            <!-- Cookie -->
-<link rel="stylesheet" type="text/css" href="/css/cookie.css" async />     <!-- Cookie prompt style. Customized to look/feel like Arm from this cookie consent: https://cdn.jsdelivr.net/npm/cookieconsent@3/ -->
+
             <!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
             <!-- Done automatically now in cross-page.css locally to speed up process
                 <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -29,38 +28,43 @@ Where it is used:
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
             -->
 
-            <!-- ADS Imports -->
+    <!-- ADS Imports -->
 <link rel="stylesheet" href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" crossorigin="anonymous">
 <script type="module" src="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system/arm-design-system.esm.js" integrity="sha384-K+IGYCWaqyh5adrYnimAXzUamdfAwRYJGwwrybHfAhmsehOIcexAPoEoEyLRJwkC" crossorigin="anonymous"></script>
-            <!-- Custom CSS styles -->
-<link href="/css/cross-page.css" rel="stylesheet" /> 
-<link href="/css/mobile.css" rel="stylesheet" /> 
 
+    <!-- Custom CSS minified -->
+<!-- {{ $css_all_pages := slice (resources.Get "css/cookie.css") (resources.Get "css/cross-page.css") (resources.Get "css/mobile.css") | resources.Concat "css/mini_allpage.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css_all_pages.Permalink }}">
+-->
 
+{{$all_page_css := slice (resources.Get "css/cookie.css") (resources.Get "css/cross-page.css") (resources.Get "css/mobile.css")}}
 
 <!-- Homepage only -->
 {{if .IsHome }}
-    <link href="/css/home.css" rel="stylesheet" /> 
+    {{ $css_home := $all_page_css | append 
+        (resources.Get "css/home.css")
+        | resources.Concat "css/mini_home.css" | minify | fingerprint  }}
+    <link rel="stylesheet" href="{{ $css_home.Permalink }}">
 {{end}}
-
-
 
 <!-- List pages only -->
 {{if $is_list}}
-    <link href="/css/list-pages.css" rel="stylesheet" /> 
+    {{ $css_list := $all_page_css | append 
+        (resources.Get "css/list-pages.css")
+        | resources.Concat "css/mini_list.css" | minify | fingerprint  }}
+        <link rel="stylesheet" href="{{ $css_list.Permalink }}">
 {{end}}
 
       
 <!-- Content pages only that are not _index, _next-steps, or _review -->
 {{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
-    <link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" /> <!-- dark replaced with light in JS if selected via theme change -->
-    <link href="/css/prism-added-styles.css" rel="stylesheet" />    <!-- called after prism -->
+    <!-- already minified, and need the ID to change it as appropritate by theme --> 
+    <link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" media="print" onload="this.media='all'" /> <!-- dark replaced with light in JS if selected via theme change -->
+    <link href="/css/prism-added-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />    <!-- called after prism -->
 {{end}}
 {{if $is_content}}
-    <link href="/css/content.css" rel="stylesheet" /> 
-    <link href="/css/feedback.css" rel="stylesheet" /> 
-    <link href="/css/context-tables.css" rel="stylesheet" /> 
-    <link href="/css/content-pages.css" rel="stylesheet" /> 
+    {{ $css_content := $all_page_css | append 
+        (resources.Get "css/content.css") (resources.Get "css/feedback.css") (resources.Get "css/context-tables.css") (resources.Get "css/content-pages.css")
+        | resources.Concat "css/mini_content.css" | minify | fingerprint  }}
+    <link rel="stylesheet" href="{{ $css_content.Permalink }}">
 {{end}}
-
-
