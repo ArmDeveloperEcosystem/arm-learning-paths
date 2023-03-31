@@ -7,9 +7,72 @@
 
 **********************************************************************/
 
+
+
+
+/* UNIVERSAL FONTS */
+/****************************************************/
+/* Lato font get from local fonts folder, not fonts.google.com as it loads facebook/youtube tracking data */
+    /* Normal, Italic, Bold 
+        300, 400, 500 */
+
+        
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/LatoLatin-Light.woff2') format('woff2'),
+         url('../fonts/LatoLatin-Light.ttf') format('ttf');
+    /* font-display: swap; */
+  }
+  
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/LatoLatin-Regular.woff2') format('woff2'),
+         url('../fonts/LatoLatin-Regular.ttf') format('ttf');
+    /* font-display: swap; */
+  }
+  
+  @font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/LatoLatin-Medium.woff2') format('woff2'),
+         url('../fonts/LatoLatin-Medium.ttf') format('ttf');
+    /* font-display: swap; */
+  }
+  
+@font-face {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 300;
+    src: url('../fonts/LatoLatin-LightItalic.woff2') format('woff2'),
+         url('../fonts/LatoLatin-LightItalic.ttf') format('ttf');
+    /* font-display: swap; */
+  }  
+  @font-face {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 400;
+    src: url('../fonts/LatoLatin-Italic.woff2') format('woff2'),
+         url('../fonts/LatoLatin-Italic.ttf') format('ttf');
+    /* font-display: swap; */
+  }  
+  @font-face {
+    font-family: 'Lato';
+    font-style: italic;
+    font-weight: 500;
+    src: url('../fonts/LatoLatin-MediumItalic.woff2') format('woff2'),
+         url('../fonts/LatoLatin-MediumItalic.ttf') format('ttf');
+    /* font-display: swap; */
+  }
+
+
+
 /* UNIVERSAL */
 /****************************************************/
-
 
 /* Font size hardcoding to fix ADS */
 ads-tag div {

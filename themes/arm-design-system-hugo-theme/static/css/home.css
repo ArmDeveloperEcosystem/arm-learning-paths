@@ -42,10 +42,6 @@ ads-card.main-topic-card:hover  .main-topic-title {
     color: var(--arm-web-safe-orange);
 }
 
-html[theme='sw-hub'] ads-card.main-topic-card  .main-topic-title {
-    font-family: "Noi Grotesk", sans-serif;
-}
-
 
 /* Subtitle styling */
 /**************************************/
