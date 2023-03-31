@@ -279,12 +279,14 @@ ads-card.path-card .learning-path-title-div { /* xs and sm */
 }
 
 html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
-    color: var(--arm-blue);
+    color: var(--arm-web-safe-blue);
 }
 .learning-path-title, .basics-title {
     color: var(--arm-light-blue);
-    font-weight: bold;
+    /*font-weight: bold;
     font-size:1.25rem;
+    */
+    font-weight: 500;
 
     margin-top: 0px;
     margin-bottom: 4px;

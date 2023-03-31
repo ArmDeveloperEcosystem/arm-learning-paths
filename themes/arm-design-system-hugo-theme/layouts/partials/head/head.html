@@ -5,47 +5,62 @@ Where it is used:
     - all, called from baseof
 */}}
 
-<meta charset="utf-8">
 
-<!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
-<link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" as="style" crossorigin="anonymous" />
-<link rel="preconnect" href="https://fonts.gstatic.com" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
-
-<!-- Set the viewport appropriatly -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- ADS Imports -->
-<link rel="stylesheet" 
-      href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" 
-      integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" 
-      crossorigin="anonymous">
-<script type="module" 
-      src="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system/arm-design-system.esm.js" 
-      integrity="sha384-K+IGYCWaqyh5adrYnimAXzUamdfAwRYJGwwrybHfAhmsehOIcexAPoEoEyLRJwkC" 
-      crossorigin="anonymous"></script>
-
-      
-<!-- Cookie prompt style. Customized to look/feel like Arm from this cookie consent: https://cdn.jsdelivr.net/npm/cookieconsent@3/ -->
-<link rel="stylesheet" type="text/css" href="/css/cookie.css" />
-
-<!-- Prism style imports (defaults to dark, replaced with light if selected by user via theme change) -->
-<link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" /> 
-<link href="/css/prism-added-styles.css" rel="stylesheet" /> 
-
-<!-- All custom CSS for this site -->
-<link href="/css/cross-page.css" rel="stylesheet" /> 
-<link href="/css/content.css" rel="stylesheet" /> 
-<link href="/css/mobile.css" rel="stylesheet" /> 
-<link href="/css/home.css" rel="stylesheet" /> 
-<link href="/css/feedback.css" rel="stylesheet" /> 
-<link href="/css/list-pages.css" rel="stylesheet" /> 
-<link href="/css/context-tables.css" rel="stylesheet" /> 
-<link href="/css/content-pages.css" rel="stylesheet" /> 
-
-<!-- Display the title of the page in the web browser -->
+<!-- Hugo processing -->
+{{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}             <!-- includes about for now... should exclude -->                                         
+    <!-- assign title of page -->
 {{ $title := print .Site.Title " | " .Title }}
 {{ if .IsHome }}
     {{ $title = .Site.Title }}
 {{ end }}
+
+
+<!-- All pages -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set the viewport appropriatly -->
 <title>{{ $title }}</title>
+            <!-- Cookie -->
+<link rel="stylesheet" type="text/css" href="/css/cookie.css" async />     <!-- Cookie prompt style. Customized to look/feel like Arm from this cookie consent: https://cdn.jsdelivr.net/npm/cookieconsent@3/ -->
+            <!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
+            <!-- Done automatically now in cross-page.css locally to speed up process
+                <link rel="preconnect" href="https://fonts.gstatic.com" />
+                <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" as="style" crossorigin="anonymous" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
+            -->
+
+            <!-- ADS Imports -->
+<link rel="stylesheet" href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" crossorigin="anonymous">
+<script type="module" src="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system/arm-design-system.esm.js" integrity="sha384-K+IGYCWaqyh5adrYnimAXzUamdfAwRYJGwwrybHfAhmsehOIcexAPoEoEyLRJwkC" crossorigin="anonymous"></script>
+            <!-- Custom CSS styles -->
+<link href="/css/cross-page.css" rel="stylesheet" /> 
+<link href="/css/mobile.css" rel="stylesheet" /> 
+
+
+
+<!-- Homepage only -->
+{{if .IsHome }}
+    <link href="/css/home.css" rel="stylesheet" /> 
+{{end}}
+
+
+
+<!-- List pages only -->
+{{if $is_list}}
+    <link href="/css/list-pages.css" rel="stylesheet" /> 
+{{end}}
+
+      
+<!-- Content pages only that are not _index, _next-steps, or _review -->
+{{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
+    <link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" /> <!-- dark replaced with light in JS if selected via theme change -->
+    <link href="/css/prism-added-styles.css" rel="stylesheet" />    <!-- called after prism -->
+{{end}}
+{{if $is_content}}
+    <link href="/css/content.css" rel="stylesheet" /> 
+    <link href="/css/feedback.css" rel="stylesheet" /> 
+    <link href="/css/context-tables.css" rel="stylesheet" /> 
+    <link href="/css/content-pages.css" rel="stylesheet" /> 
+{{end}}
+
+
