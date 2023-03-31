@@ -16,37 +16,47 @@ Called from:
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->
 
 <!-- All pages -->
-<script src="/js/stored-user-preferences.js"></script>      <!-- Include javascript to store local preferences of themes -->
-<script src="/js/anonymous-analytics.js" defer></script>          <!-- Include javascript to track custom analytics -->
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false" defer></script>
-<script src="/js/cookie-init.js" defer></script>                  <!-- Initialize cookie -->
+{{$all_page_js := slice (resources.Get "js/stored-user-preferences.js") (resources.Get "js/anonymous-analytics.js") (resources.GetRemote "https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js") (resources.Get "js/cookie-init.js")}}
 
 <!-- Homepage only -->
 {{if .IsHome }}
-    <script src="/js/search-and-filter/search-handling.js" defer></script>
-    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> <!-- Attaches search hooks to elements -->
+    {{ $js_home := $all_page_js | append 
+        (resources.Get "js/search-and-filter/search-handling.js") (resources.Get "/js/search-and-filter/change-handler-search-hook.js")
+        | resources.Concat "js/mini_home.js" | minify | fingerprint  }}
+    <script href="{{ $js_home.Permalink }}" defer></script>
 {{end}}
 
 <!-- List pages only -->
 {{if $is_list}}
-    <script src="/js/search-and-filter/filter-learning-paths.js" defer></script>
-    <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js" defer></script>
-    <script src="/js/search-and-filter/search-logic.js" defer></script>
-    <script src="/js/search-and-filter/search-handling.js" defer></script>
-    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> <!-- Attaches search hooks to elements -->
+    {{ $js_list := $all_page_js | append 
+        (resources.Get "/js/search-and-filter/filter-learning-paths.js") (resources.Get "/js/search-and-filter/filter-and-navigate-mobile-behavior.js") (resources.Get "/js/search-and-filter/search-logic.js") (resources.Get "/js/search-and-filter/search-handling.js") (resources.Get "/js/search-and-filter/change-handler-search-hook.js")
+        | resources.Concat "js/mini_list.js" | minify | fingerprint  }}
+    <script href="{{ $js_list.Permalink }}" defer></script>
 {{end}}
 
 <!-- Content pages only that are not _index, _next-steps, or _review -->
 {{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
-    <script src="/js/prism.js" defer></script>                        <!-- Include code highlighting javascript, Prism-->
-    <script src="/js/prism_post_output_formating.js" defer></script>  <!-- must be called after prism.js to modify it once rendered -->
+{{/*
+    {{ $js_prism := $all_page_js | append 
+        (resources.Get "/js/prism.js") (resources.Get "/js/prism_post_output_formating.js")
+        | resources.Concat "js/mini_prism.js" | minify | fingerprint  }}
+    <script href="{{ $js_prism.Permalink }}" defer></script>
+    */}}
+    <script src="/js/prism.js" defer></script>
+    <script src="/js/mini_prism.js" defer></script>       
+
 {{end}}
 {{if $is_content}}
-    <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js" defer></script> <!-- Always need on content, contains mobile content page nav -->
-    <script src="/js/feedback-form-behavior.js" defer></script>       <!-- Only needed on install guide pages and content pages -->
+    {{ $js_content := $all_page_js | append 
+        (resources.Get "/js/search-and-filter/filter-and-navigate-mobile-behavior.js") (resources.Get "/js/feedback-form-behavior.js")
+        | resources.Concat "js/mini_content.js" | minify | fingerprint  }}
+    <script href="{{ $js_content.Permalink }}" defer></script>
 {{end}}
 {{if hasPrefix .File.TranslationBaseName "_review"}}
-    <script src="/js/review-question-behavior.js" defer></script>       <!-- Only needed on install guide pages and content pages -->
+    {{ $js_review := $all_page_js | append 
+        (resources.Get "/js/review-question-behavior.js")
+        | resources.Concat "js/mini_review.js" | minify | fingerprint  }}
+    <script href="{{ $js_review.Permalink }}" defer></script>
 {{end}}
 
 
