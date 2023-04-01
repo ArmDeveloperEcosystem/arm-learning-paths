@@ -20,7 +20,7 @@ review:
             - "Half the number of CPUs on the system"
         correct_answer: 2                     
         explanation: >
-            The total number of CPUs is a good starting point because it can ensure we are using all compute resources on the system. That said, it's important to understand the parameter and to also try some experimentation with the parameter. It is also possible that a much smaller number than that total number of CPUs on the system is optimal.
+            The total number of CPUs is a good starting point because it can ensure we are using all compute resources on the system. 
 
     - questions:
         question: >
@@ -31,7 +31,7 @@ review:
             - "60%-80%"
         correct_answer: 1
         explanation: >
-            The PostgreSQL documentation suggests 25%-40%. Our own testing also agrees with this suggestion.
+            The PostgreSQL documentation suggests 25%-40%.
                
     - questions:
         question: >
@@ -41,7 +41,7 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            This is a bit of a trick question. Huge pages will not increase or decrease the shared buffer hit rate. What it does is reduce how often physical memory will need to be unmapped/mapped to virtual memory pages.
+            This is a bit of a trick question. Huge pages will not increase or decrease the shared buffer hit rate. It does reduce how often physical memory will need to be unmapped/mapped to virtual memory pages.
 
 
 

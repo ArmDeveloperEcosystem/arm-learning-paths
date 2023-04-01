@@ -20,6 +20,10 @@ further_reading:
         title: MySQL documentation
         link: https://www.mysql.com/
         type: documentation
+    - resource:
+        title: Running MySQL on ARM
+        link: https://mysqlonarm.github.io/Running-MySQL-on-ARM/
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
