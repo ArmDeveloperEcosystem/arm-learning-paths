@@ -20,6 +20,10 @@ further_reading:
         title: PostgreSQL documentation
         link: https://www.postgresql.org/
         type: documentation
+    - resource:
+        title: "PostgreSQL on ARM: default page size matters"
+        link: https://dev.to/aws-heroes/postgresql-on-arm-default-page-size-matters-2n7a
+        type: blog
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

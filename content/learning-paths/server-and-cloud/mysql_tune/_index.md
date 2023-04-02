@@ -1,30 +1,37 @@
 ---
-armips:
-- Neoverse
-author_primary: Julio Suarez
-layout: learningpathall
+title: Learn how to Tune MySQL
+
+minutes_to_complete: 30
+
+who_is_this_for: This is an advanced topic for software developers and DevOps professionals interested in optimizing MySQL performance.
+
 learning_objectives:
-- Learn to tune MySQL
-learning_path_main_page: 'yes'
-minutes_to_complete: 15
-operatingsystems:
-- Linux
+    - Tune MySQL to increase performance
+
 prerequisites:
-- Bare-metal or cloud installation of MySQL
+    - Bare-metal or cloud installation of MySQL
+
+author_primary: Julio Suarez
+
 skilllevels: Advanced
 subjects: Databases
+armips:
+    - Neoverse
+operatingsystems:
+    - Linux
+tools_software_languages:
+    - SQL
+    - MySQL
+    - InnoDB
+
 test_images:
-- ubuntu:latest
+    - ubuntu:latest
 test_link: null
 test_maintenance: true
 test_status:
-- passed
-title: Learn how to Tune MySQL
-tools_software_languages:
-- SQL
-- MySQL
-- InnoDB
+    - passed
+
 weight: 1
-who_is_this_for: This is an advanced topic for software developers and DevOps professionals
-  interested in optimizing MySQL performance.
+layout: learningpathall
+learning_path_main_page: 'yes'
 ---

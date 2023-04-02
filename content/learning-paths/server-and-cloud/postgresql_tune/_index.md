@@ -1,20 +1,21 @@
 ---
 title: Learn how to Tune PostgreSQL
 
-description: This learning path presents some ideas on how to tune PostgreSQL
-
-minutes_to_complete: 60
-
+minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers and DevOps professionals interested in optimizing PostgreSQL performance.
 
 learning_objectives:
-    - Learn to tune PostgreSQL
+    - Tune PostgreSQL to increase performance
 
 prerequisites:
     - Bare-metal or cloud installation of PostgreSQL
 
 author_primary: Julio Suarez
+
+test_images:
+    - ubuntu:latest
+test_maintenance: true
 
 ### Tags
 skilllevels: Advanced

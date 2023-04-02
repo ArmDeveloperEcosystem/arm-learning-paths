@@ -20,7 +20,7 @@ review:
             - "Half the number of CPUs on the system"
         correct_answer: 2                     
         explanation: >
-            The total number of CPUs is a good starting point because it can ensure we are using all compute resources on the system. That said, it's important to understand the parameter and to also try some experimentation with the parameter. It is also possible that a much smaller number than that total number of CPUs on the system is optimal.
+            The total number of CPUs is a good starting point because it can ensure we are using all compute resources on the system. 
 
     - questions:
         question: >
@@ -31,7 +31,7 @@ review:
             - "Up to 80% of system memory"
         correct_answer: 3
         explanation: >
-            The MySQL documentation suggests up to 80% of system memory. Our own testing also agrees with this suggestion. That said, depending on the use case, it's also possible that a much smaller percentage performs just as well as 80%.
+            The MySQL documentation suggests up to 80% of system memory. Depending on the use case, it's also possible that a much smaller percentage performs just as well as 80%.
                
     - questions:
         question: >
@@ -42,7 +42,7 @@ review:
             - "Checking locks more often speeds up buffer pool reads"
         correct_answer: 2
         explanation: >
-            In our testing, we found that reducing context switching helps performance. Hence, spending a bit longer in checking locks before yielding by increasing innodb_sync_spin_loops gave us performance gains. Note, we suggest that readers try experimenting with this parameter to determine if it will benefit their use case.
+            Reducing context switching helps performance. Spending a bit longer in checking locks before yielding by increasing innodb_sync_spin_loops usually provides performance gains. 
 
 
 
