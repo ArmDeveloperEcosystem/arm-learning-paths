@@ -103,8 +103,8 @@ ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.MYSQL_TEST.pu
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "mysql_key"
-        public_key = file("~/.ssh/mysql_key.pub")
+        key_name   = "id_rsa"
+        public_key = file("~/.ssh/id_rsa.pub")
  }
 ```
 {{% notice Note %}}
@@ -180,7 +180,7 @@ Do you want to perform these actions?
 
 aws_key_pair.deployer: Creating...
 aws_default_vpc.main: Creating...
-aws_key_pair.deployer: Creation complete after 1s [id=mysql_key]
+aws_key_pair.deployer: Creation complete after 1s [id=id_rsa]
 aws_default_vpc.main: Creation complete after 3s [id=vpc-08d4df87625044841]
 aws_security_group.Terraformsecurity: Creating...
 aws_security_group.Terraformsecurity: Creation complete after 3s [id=sg-020f83a21c9b398ee]
@@ -284,7 +284,7 @@ ansible-galaxy collection install community.mysql
 To run a Playbook, we need to use the `ansible-playbook` command. 
 
 ```bash
-ansible-playbook playbook.yml -i /tmp/inventory --key-file /home/ubuntu/.ssh/mysql_key
+ansible-playbook playbook.yml -i /tmp/inventory --key-file /home/ubuntu/.ssh/id_rsa
 ```
 
 Answer `yes` when prompted for the SSH connection.
