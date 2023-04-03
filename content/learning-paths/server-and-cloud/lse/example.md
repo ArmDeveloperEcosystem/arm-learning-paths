@@ -92,7 +92,7 @@ Now let’s move to a T4g instance with Graviton2.
 
 #### **T4g Instance**
 
-Compile the same application on a T4g instance. This instance uses an Neoverse-N1 with LSE. Similar machines with Neoverse-N1 can also be used.
+Compile the same application on a T4g instance. This instance uses Neoverse-N1 with LSE. Similar machines with Neoverse-N1 can also be used.
  
 ```bash
 gcc -g atomic.c -o t4g -march=armv8.2-a -lpthread
