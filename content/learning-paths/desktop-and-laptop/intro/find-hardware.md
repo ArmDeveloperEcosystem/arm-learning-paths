@@ -24,12 +24,12 @@ Chromebooks with Arm processors can also be used for software development. A rec
 
 ### Linux
 
-Both Windows and ChromeOS have a Linux subsystem which can be used for software development tasks. See [this learning path](/learning-paths/desktop-and-laptop/wsl2) for more information.
+Both Windows and ChromeOS have a Linux subsystem which can be used for software development tasks. Read [WSL for Windows on Arm](/learning-paths/desktop-and-laptop/wsl2) to learn more.
 
 Some single board computers have enough performance to implement Linux based desktop computers. The [Pinebook](https://www.pine64.org/pinebook/) and [Pinebook Pro](https://www.pine64.org/pinebook-pro/) are good examples of these. The [Raspberry Pi 400](https://www.raspberrypi.com/products/raspberry-pi-400/) is powered by a [Raspberry Pi 4b](https://www.raspberrypi.com/products/raspberry-pi-4-model-b/) module.
 
 ## Cloud-based Virtual Machines
 
-A popular alternative to using local hardware is to use a virtual machine in the cloud. Most cloud service providers now provide Arm-based instances.
+A popular alternative to using local hardware is to use a virtual machine in the cloud. Most cloud service providers offer Arm-based instances.
 
-To learn more, see [this learning path](/learning-paths/server-and-cloud/intro).
+Read [Get started with Arm based servers](/learning-paths/server-and-cloud/intro) to learn more.
