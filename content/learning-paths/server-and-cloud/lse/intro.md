@@ -37,9 +37,9 @@ In architecture versions prior to LSE, read-modify-write sequences use load excl
 
 Because atomic accesses use multiple instructions each processor is required to implement an exclusive monitor. The exclusive monitor is a hardware state machine to track the read-modify-write sequences and match up the loads and stores. You can read about the exclusive monitor in the technical reference manual of a processor such as the [Cortex-A53](https://developer.arm.com/documentation/ddi0500/j/Level-1-Memory-System/L1-Data-memory-system/Internal-exclusive-monitor?lang=en).
 
-If the number of processors is small, this works fine. Increasing processor counts combined with increased caching, make it hard to maintain fairness as processors closer to each other have a better chance of completing atomic sequences.
+If the number of processors is small, this works fine. Increasing the number of processor combined with increased caching, make it hard to maintain fairness as processors closer to each other have a better chance of completing atomic sequences.
 
-With LSE, atomic instructions provide a non-interruptible read-modify-write sequence in a single instruction. The atomic instructions can perform simple arithmetic or logical operations on the specified memory location, and return the updated value to the processor. Programmer’s benefit from the atomic instructions because it’s easier to specify a single instruction compared to a sequence of instructions with a loop around them if the sequence fails. 
+With LSE, atomic instructions provide a non-interruptible read-modify-write sequence in a single instruction. The atomic instructions can perform simple arithmetic or logical operations on the specified memory location, and return the updated value to the processor. Programmers benefit from the atomic instructions because it’s easier to specify a single instruction compared to a sequence of instructions with a loop around them if the sequence fails. 
 
 Atomic instructions work better in situations such as networking software where many counters are atomically updated from many processors. The atomic instructions result in faster performance and less variability. 
 
@@ -59,26 +59,25 @@ Let’s look at how to make sure you get the best performance on Neoverse.
 
 **How do I know if my Linux kernel supports atomics?**
 
-There are a couple of ways to check. First, look in the kernel ring buffer messages to see if LSE is present.
+There are a couple of ways to check. First, look in the kernel ring buffer messages to see if LSE is present:
 
 ```bash
 sudo dmesg | grep LSE
 ```
-Look for output with an LSE message:
+If LSE is present, the output from the command will look like:
 
-```console
+```output
 [    0.001296] CPU features: detected: LSE atomic instructions
 ```
 
-Another way is to use the lscpu command to print the processor information. Look specifically at the flags (last item).
+Another way is to use the lscpu command to print the processor information:
 
-Here is the output from an AWS A1 instance:
 ```bash
 lscpu
 ```
+Here is the output from running `lscpu` an AWS A1 instance:
 
-The output is:
-```console
+```output
 Architecture:                    aarch64
 CPU op-mode(s):                  32-bit, 64-bit
 Byte Order:                      Little Endian
@@ -108,16 +107,11 @@ Vulnerability Srbds:             Not affected
 Vulnerability Tsx async abort:   Not affected
 Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid
 ```
+Look specifically at the flags information printed at the end.
 
-Here is the output from an AWS T4g instance.
+Here is the output from runnig `lscpu` on an AWS T4g instance:
 
-```bash
-lscpu
-```
-
-The output is:
-
-```console
+```output
 Architecture:                    aarch64
 CPU op-mode(s):                  32-bit, 64-bit
 Byte Order:                      Little Endian
@@ -154,7 +148,7 @@ For Neoverse-N1 the “atomics” flag is listed indicating LSE support.
 
 **Which versions of the GCC compiler support LSE?**
 
-LSE support started way back in GCC 6, but currently GCC 9 and GCC 10 are good to use.
+LSE support started in GCC 6, but currently GCC 10 and GCC 11 are good to use.
 
 **What are out-of-line atomics?**
 
@@ -164,7 +158,7 @@ The gcc command line options -moutline-atomics and -mno-outline-atomics enable o
 
 With GCC 9.3.1 and later, you can use the above options to enable/disable out-of-line atomics.
 
-With GCC 10.1, out-of-line atomics are enabled by default. Refer to [Making the most of the Arm architecture with GCC 10](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/making-the-most-of-the-arm-architecture-in-gcc-10) for more info. 
+With GCC 10.1 and higher, out-of-line atomics are enabled by default. Refer to [Making the most of the Arm architecture with GCC 10](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/making-the-most-of-the-arm-architecture-in-gcc-10) for more info. 
 
 **Which CPU or architecture version should I specify with gcc?**
 

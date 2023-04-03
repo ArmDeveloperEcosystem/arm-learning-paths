@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 Let’s take a look at an example to learn more and find out if the compiler is generating LSE instructions. 
 
-Here is an [example program from cppreference.com](https://en.cppreference.com/w/c/language/atomic):
+Shown below is an [example program from cppreference.com](https://en.cppreference.com/w/c/language/atomic). Using a file editor of your choice, save this content into a file called `atomic.c` on your running instance:
 
 ```cpp
 #include <stdio.h>
@@ -48,7 +48,7 @@ Let’s start on an AWS A1 instance. This is Cortex-A72, without LSE. This can a
 
 #### **A1 Instance**
 
-On Ubuntu 20.04 the default gcc version is 9.4.0:
+On Ubuntu 20.04 the default gcc version is 9.4.0. Check this by running:
 
 ```bash
 gcc --version
@@ -56,21 +56,21 @@ gcc --version
 
 The output is:
 
-```console
+```output
 gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0
 Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-Save the above C program as atomic.c and compile the application:
+Now compile the application:
 
 ```bash
 gcc -g atomic.c -o a1 -march=armv8-a -lpthread
 objdump -S a1 > a1.dis
 ```
 
-Review the file a1.dis and check the instructions for incrementing acnt. The sequence is:
+Review the diassembly file `a1.dis` and check the instructions for incrementing acnt. The sequence is:
 
 - Address of acnt is loaded into x0
 - Value of acnt is loaded into w1 using load exclusive
@@ -78,8 +78,9 @@ Review the file a1.dis and check the instructions for incrementing acnt. The seq
 - Store exclusive to write the new value
 - Check if the store succeed and if not loop back to 0x998 and load again
 
-Here is the disassembly:
-```console
+Here is a snippet of the disassembly performing this sequence:
+
+```output
 994:   f947e400        ldr     x0, [x0, #4040]
 998:   885ffc01        ldaxr   w1, [x0]
 99c:   0b020021        add     w1, w1, w2
@@ -91,7 +92,7 @@ Now let’s move to a T4g instance with Graviton2.
 
 #### **T4g Instance**
 
-Compile the application. This is Neoverse-N1 with LSE. Similar machines with Neoverse-N1 can also be used.
+Compile the same application on a T4g instance. This instance uses Neoverse-N1 with LSE. Similar machines with Neoverse-N1 can also be used.
  
 ```bash
 gcc -g atomic.c -o t4g -march=armv8.2-a -lpthread
@@ -103,13 +104,14 @@ Review the file t4g.dis and check the instructions for incrementing acnt. The se
 - Address of acnt is loaded into x0
 - Value of acnt is updated using a single instruction to add 1 to a word in memory
 
-Here is the disassembly:
-```console
+Here is a snippet of the disassembly performing this sequence:
+
+```output
 994:   f947e400        ldr     x0, [x0, #4040]
 998:   b8e10002        ldaddal w1, w2, [x0]
 ```
 
-Staying on the T4g instance, let’s compile with outline-atomics:
+Staying on the T4g instance, let’s compile the application with outline-atomics:
 
 ```console
 gcc -g atomic.c -o t4g.outline  -moutline-atomics -lpthread
@@ -118,11 +120,11 @@ objdump -S t4g.outline > outline.dis
 
 Review the file outline.dis and see that the instruction to increment acnt is now a branch to something called __aarch64_ldadd4_acq_rel at address 0xb90:
 
-```console
+```output
  a24:   9400005b        bl      b90 <__aarch64_ldadd4_acq_rel>
 ```
 
-The code for both the load exclusive sequence and the atomic instruction are present. The first section of code is run on the T4g and the second section (after the first ret) is run on the A1. This binary will run on both instances with no changes. In exchange for this flexibility there is the overhead to take a branch and run the correct code path.
+The code for both the load exclusive sequence and the atomic instruction are present as shown in the disassembly snippet below. The section of instructions before the first ret instruction is run on the T4g and the following instructions are run on the A1. This binary will run on both instances with no changes. In exchange for this flexibility there is the overhead to take a branch and run the correct code path.
 
 ```console
 0000000000000b90 <__aarch64_ldadd4_acq_rel>:
@@ -140,7 +142,7 @@ The code for both the load exclusive sequence and the atomic instruction are pre
  bbc:   d65f03c0        ret
 ```
 
-As a final check, move back to the A1 instance and compile for armv8.2-a. The atomic instruction is illegal on the Cortex-A72 and fails.
+As a final check, move back to the A1 instance and compile for `armv8.2-a` architecture. The atomic instruction is illegal on the Cortex-A72 and fails.
 
 ```bash
 gcc -g atomic.c -o a1 -march=armv8.2-a -lpthread
@@ -149,7 +151,7 @@ gcc -g atomic.c -o a1 -march=armv8.2-a -lpthread
 
 The result is:
 
-```console
+```output
 Illegal instruction (core dumped)
 ```
 
@@ -172,6 +174,7 @@ objdump -d a1 | grep -i 'ldxr\|ldaxr\|stxr\|stlxr' | wc -l
 Running on the t4g.outline executable which supports both architectures will report both types of instructions. 
 
 Another way to confirm an executable supports both architectures is to run the command:
+
 ```bash
 nm t4g.outline | grep __aarch64_have_lse_atomics | wc -l
 ```
