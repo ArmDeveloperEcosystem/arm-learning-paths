@@ -41,6 +41,16 @@ To specify a prerequisite Learning Path, do so with a relative path. For example
 Note the relative path of `../../docker` 
 {{% /notice %}}
 
+### Author information
+
+If you provide your name in the `author_primary` metadata it will be listed on the top of the Learning Path in the `Author` field.
+
+Displaying your name on the content you contributed is a great way to promote your work. 
+
+If you do not want your name to be displayed leave `author_primary` blank. 
+
+You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/contributors.csv) at the top of the repository. This file collects your compnay name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
+
 ## Tags
 Tagging metadata is also expected to increase visibility via filtering. Some tags are closed (you must select from a pre-defined list) and some are open (enter anything). The tags are:
 
