@@ -15,9 +15,9 @@ This guide is to help you get started with [compute services](https://www.oracle
 
 Detailed instructions are available in the Oracle [documentation](https://docs.oracle.com/en-us/iaas/Content/Compute/References/arm.htm#create-instances).
 
-## Create an account and log in
+## Create an account
 
-Creating a personal account is straight forward. Click on [Sign in to Oracle Cloud](https://www.oracle.com/cloud), and follow the on-screen instructions to log in, else register as a new user. You will get immediate access to [OCI Cloud Free Tier](https://www.oracle.com/cloud/free) services.
+Before you start, creating an account. For a personal account, click on [Sign in to Oracle Cloud](https://www.oracle.com/cloud), and follow the on-screen instructions to log in, else register as a new user. You will get immediate access to [OCI Cloud Free Tier](https://www.oracle.com/cloud/free) services.
 
 If using an organization's account, you will likely need to consult with your internal administrator.
 
@@ -39,7 +39,7 @@ Use the `Create Instance` button to get to the `Create compute instance` dialog.
 
 ### Name your instance
 
-Give your instance a meaningful, but arbitrary, name. This is particularly useful when creating multiple instances in parallel. Select the above `compartment` in which to create the instance.
+Give your instance a meaningful, but arbitrary, name. This is particularly useful when creating multiple instances. Select the above `compartment` in which to create the instance.
 
 ### Placement
 
@@ -58,11 +58,11 @@ Select the `Shape name` (for example `VM.Standard.A1.Flex`), and use slider to s
 
 ### Networking
 
-These settings can likely be left as default. Ensure that a public IP address is assigned so that you can access the instance (see later). See the Oracle documentation for settings information if necessary.
+These settings can likely be left as default. Ensure that a public IP address is assigned so that you can access the instance.
 
 ### Add SSH keys
 
-To be able to access the instance (see later), you must use a [key pair](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/managingkeypairs.htm). Use the dialog to generate a new key pair, else you can upload an existing public key. Note that if you do not generate a key, you will not be able to connect to the instance.
+To be able to access the instance, you must use a [key pair](https://docs.oracle.com/en-us/iaas/Content/Compute/Tasks/managingkeypairs.htm). Use the dialog to generate a new key pair, else you can upload an existing public key. Note that if you do not generate a key, you will not be able to connect to the instance.
 
 ### Boot volume and other advanced options
 
@@ -75,6 +75,7 @@ When all options are set, click `Create` to get started. Your compute instance w
 ## Connect to your instance
 
 You can connect to the instance with your preferred SSH client. For example if using `ubuntu` image:
+
 ```console
 ssh -i <private_key> ubuntu@<public_ip_address>
 ```
@@ -94,15 +95,15 @@ will identify the host machine as `aarch64`.
 
 ### hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following, else see [here](/install-guides/gcc):
+Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands, else see [here](/install-guides/gcc):
+
 ```console
 sudo apt-get update
 sudo apt install -y gcc
 ```
-Create a simple source file:
-```console
-nano hello.c
-```
+
+Using a text editor of your choice, create a file `hello.c` with the contents below:
+
 ```C
 #include <stdio.h>
 int main(){
@@ -111,18 +112,9 @@ int main(){
 }
 ```
 Build and run the application:
+
 ```console
 gcc hello.c -o hello
 ./hello
 ```
 
-You are now ready to get started with the [Server and Cloud learning paths](/learning-paths/server-and-cloud/).
-
-## Other resources
-
-| Type          | Content             |
-| ---           | ---                 |
-| Documentation | [Get Started with Oracle Cloud Infrastructure Free Tier](https://docs.oracle.com/en/learn/cloud_free_tier/index.html) |
-| Documentation | [Launching your first Linux instance](https://docs.oracle.com/en-us/iaas/Content/GSG/Reference/overviewworkflow.htm) |
-| YouTube       | [Oracle Learning](https://www.youtube.com/user/OracleLearning) |
-| Misc          | [Oracle Developer Resource Center](https://developer.oracle.com/arm/) |
