@@ -1,11 +1,9 @@
 ---
 title: Get started with Arm hardware
 
-description: The place to start for developers new to Arm for desktop and laptop hardware
-
 minutes_to_complete: 5
 
-who_is_this_for: Developers new to the Arm architecture and looking for desktop and laptop hardware.
+who_is_this_for: This is an introductory topic for developers new to the Arm architecture and looking for desktop and laptop hardware.
 
 learning_objectives:
     - Find desktop and laptop hardware to use for software development
@@ -23,7 +21,7 @@ armips:
 operatingsystems:
     - Linux
     - Windows
-    - macOS
+    - ChromeOS
 tools_software_languages:
 
 
