@@ -27,7 +27,7 @@ further_reading:
         type: documentation
     - resource:
         title: Corstone-1000 software stack User Guide
-        link: https://corstone1000.docs.arm.com/en/corstone1000-2022.11.23/user-guide.html
+        link: https://corstone1000.docs.arm.com/en/latest/user-guide.html
         type: documentation
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -27,7 +27,7 @@ Then install Anaconda. Anaconda is a distribution of Python language for data sc
 
 ### Use Anaconda
 
-With Anaconda installed, you will now install the necessary conda packages for building and training the NN model including [Jupyter notebook](https://jupyter.org/). Follow the steps as shown below:
+With Anaconda installed, you will now install the necessary `conda` packages for building and training the NN model including [Jupyter notebook](https://jupyter.org/). Follow the steps as shown below:
 
 1. First open Anaconda Prompt
 2. Create an environment by typing:
@@ -59,7 +59,7 @@ jupyter notebook
 
 Now, open lab.ipynb from the extracted project files folder on the notebook. Then, execute the first code block to import the required packages
 
-```console
+```python
 import tensorflow as tf
 
 from tensorflow.keras.models import Sequential
@@ -80,7 +80,7 @@ import os
 Next, load the CIFAR-10 dataset. We can easily get the dataset because TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the 
 dataset.
 
-```console
+```python
 # Load data from TF Keras
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 
@@ -92,7 +92,7 @@ num_classes = len(class_names)
 
 Then, we will save one image per class from the test set for testing with the board later. Execute the following code block to save the images.
 
-```console
+```python
 path_images = "./Data/images/"
 
 # Create directory
@@ -108,7 +108,7 @@ for image_index in range(0,100):
 
 This code block below will visualize the saved images.
 
-```console
+```python
 # Show saved images
 files = os.listdir(path_images) 
 for img in files:
@@ -129,7 +129,7 @@ The expected output is shown below
 
 Next, we will normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so we divide the training and testing data by 255.
 
-```console
+```python
 # Normalize pixel values to be between 0 and 1
 x_train = x_train.astype(np.float32)/255
 x_test = x_test.astype(np.float32)/255
@@ -145,7 +145,7 @@ print('y_test shape:', y_test.shape)
 
 The expected output is shown below:
 
-```console
+```output
 x_train shape: (50000, 32, 32, 3)
 y_train shape: (50000, 10)
 x_test shape: (10000, 32, 32, 3)
@@ -162,7 +162,7 @@ Here is an image illustrating the network architecture. Note that only convoluti
 
 Execute the code blocks below to create a sequential model and add the layers
 
-```console
+```python
 # Hyperparameters
 batch_size = 32
 num_classes = len(class_names)
@@ -171,7 +171,7 @@ img_rows, img_cols = x_train.shape[1], x_train.shape[2]
 input_shape = (x_train.shape[1], x_train.shape[2], 1)
 ```
 
-```console
+```python
 # Creating a Sequential Model and adding the layers
 model = Sequential()
 model.add(Conv2D(16, (3, 3), padding='same', input_shape=(32,32,3)))
@@ -205,7 +205,7 @@ model.add(Activation('softmax'))
 
 Execute the code blocks below to compile and train the model. If we use tens of epochs, the training could take more than 10 hours because the dataset has 50,000 training images. Therefore, the model trained for 50 epochs is provided for testing (File: ‘Data/models/cifar10_model.h5’). You can use the model if you don't have enough time to train your own model. 
 
-```console
+```python
 # Check model structure and the number of parameters
 model.summary()
 # Let's train the model using Adam optimizer
@@ -221,7 +221,7 @@ history = model.fit(x=x_train,
 
 Let's save the model and evaluate the model. Note that since we trained the model for 1 epoch only, the accuracy would not be that good. Please try a larger number of epochs later to obtain better performance.
 
-```console
+```python
 # Save keras model
 path_models = "./Data/models/"
 path_keras_model = path_models + "own_cifar10_model.h5"
@@ -239,7 +239,7 @@ print('Test accuracy:', scores[1])
 
 Finally, we are going to save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in CSV format. Execute the code block to save the test data.
 
-```console
+```python
 path_csv = "./Data/"
 path_csv_file = path_csv+"own_cifar10_validation_20image.csv"
 # Create directory
@@ -279,7 +279,7 @@ data = data.flatten()
 
 This code block will save the list of image classes. Execute the code block to save the label file.
 
-```console
+```python
 path_labels = "./Data/labels/”
 path_labels_file = path_labels+"own_cifar10_labels.txt"
 # Create directory

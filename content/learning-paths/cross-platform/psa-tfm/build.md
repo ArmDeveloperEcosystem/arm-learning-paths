@@ -19,13 +19,13 @@ Set up your build environment by installing the required software packages.
 sudo apt-get install -y git curl wget build-essential libssl-dev python3 python3-pip cmake make
 ```
 
-If you want to use Arm Virtual Hardware as a development machine, set it up now using the [install guide](/install-guides/avh/). All required software is pre-installed in the virtual machine so there is nothing to install. 
+If you want to use Arm Virtual Hardware as a development machine, set it up now using the [install guide](/install-guides/avh/).
 
 You can review the [Trusted Firmware Getting Started](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html) documentation for more information.
 
-## Install additional software
+## Install prerequisites for Corstone-1000 stack
 
-Install additional required software packages:
+As per the [User Guide](https://corstone1000.docs.arm.com/en/latest/user-guide.html), install these additional required software packages:
 
 ```console
 sudo apt-get update
@@ -34,6 +34,9 @@ sudo apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
  xz-utils debianutils iputils-ping python3-git libegl1-mesa libsdl1.2-dev \
  xterm zstd liblz4-tool picocom
 sudo apt-get upgrade -y libstdc++6
+```
+The [kas](https://pypi.org/project/kas/) utility is used to build the supplied projects. Install with:
+```console
 sudo pip3 install kas
 ```
 
@@ -89,5 +92,4 @@ Use `root` as your username to proceed.
 
 You have run Trusted Firmware on the Corstone-1000 FVP. 
 
-Refer to the [User Guide](https://tf-m-user-guide.trustedfirmware.org/platform/arm/corstone1000/readme.html) for complete documentation.
-
+Refer to the [Trusted Firmware-M User Guide](https://tf-m-user-guide.trustedfirmware.org/platform/arm/corstone1000/readme.html) for complete documentation.
