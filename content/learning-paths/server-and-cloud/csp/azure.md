@@ -15,9 +15,9 @@ This guide is to help you get started with [Virtual Machines](https://azure.micr
 
 Full [documentation and quickstart guides](https://learn.microsoft.com/en-us/azure/virtual-machines/) are available.
 
-## Create an account and log in
+## Create an account
 
-Creating a personal account is straight forward. Click on `Free account` or `Try Azure for free` on the [Azure homepage](https://azure.microsoft.com), and follow the on-screen instructions to log in, else register as a new user. You can use an existing Microsoft account if you have one.
+Before you begin, create an account. For a personal account, click on `Free account` or `Try Azure for free` on the [Azure homepage](https://azure.microsoft.com), and follow the on-screen instructions to log in, else register as a new user. You can use an existing Microsoft account if you have one.
 
 If using an organization's account, you will likely need to consult with your internal administrator.
 
@@ -39,7 +39,7 @@ This section defines the virtual machine to be created.
 
 ### Virtual machine name
 
-Give your VM a meaningful name. This is especially useful if you intend to create multiple VMs.
+Give your virtual machine (VM) a meaningful name. This is especially useful if you intend to create multiple VMs.
 
 ### Region
 
@@ -47,7 +47,7 @@ This is the location of the server where your VM will reside. While it is genera
 
 ### Availability options / Security type
 
-This are reliability and security setting. See the documentation for details. This can generally be left as default.
+This are reliability and security settings. This can generally be left as default.
 
 ### Image
 
@@ -77,7 +77,7 @@ This section defines how users [connect](https://learn.microsoft.com/en-us/azure
 
  ### Username
 
- Create an appropriate user name (default is `azureuser`). Windows VMs will also require a password to be set.
+ Create an appropriate user name. The default user name is `azureuser`. Windows VMs will also require a password to be set.
 
  ### SSH public key resource / Key pair name (Linux systems)
 
@@ -85,7 +85,7 @@ This section defines how users [connect](https://learn.microsoft.com/en-us/azure
 
 ## Inbound port rules
 
-These settings can be used to limit access to your VM. See the documentation for more info. This can generally be left as default. Linux systems will be connected to by SSH. Windows by Remote Desktop Protocol (RDP).
+These settings can be used to limit access to your VM. See the documentation for more info. This can generally be left as default. You can connect to Linux machines using SSH. You can connect to Windows machines using Remote Desktop Protocol (RDP).
 
 ## Licensing (Windows only)
 
@@ -93,19 +93,20 @@ Tick the box to confirm you have an appropriate license to deploy a Windows virt
 
 ## Other settings
 
-There are other tabs defining many advanced settings. See the documentation for full detail. They can generally be left as default.
+There are other tabs defining many advanced settings. They can generally be left as default.
 
 ## Create instance
 
 When the VM settings are to your liking, click on `Review + create`. Your settings will be validated by Azure. If valid, click on `Create` to create your VM instance.
 
-After a short time, the VM will be created. Click on `Go to resource` to see various parameters, notably the `Public IP address`.
+After a short time, the VM will be created. Click on `Go to resource` to see various parameters, particularly the `Public IP address`.
 
 ## Connect to your VM instance (Linux)
 
-These instructions are for Linux-based virtual machines. If using a Windows-based virtual machine, please jump to [here](#windows).
+These instructions are for Linux-based virtual machines. If you are using a Windows-based virtual machine, please jump to the section [here](#windows).
 
 You can connect to the instance with your preferred SSH client. For example if using default `azureuser` username:
+
 ```console
 ssh -i <private_key> azureuser@<public_ip_address>
 ```
@@ -116,12 +117,11 @@ Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https
 ### Explore your instance
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
+
 ```console
 uname -m
 ```
 will identify the host machine as `aarch64`.
-
-You are now ready to get started with the [Server and Cloud learning paths](/learning-paths/server-and-cloud/).
 
 ## Connect to your VM instance (Windows) {#windows}
 
@@ -135,12 +135,4 @@ You will be prompted for the user password (set earlier), and you will connect. 
 
 Open `Control Panel` > `System`, and verify that `Device` > `System Type` identifies as an ARM-based processor.
 
-You are now ready to get started with the [Server and Cloud learning paths](/learning-paths/server-and-cloud/).
 
-## Other resources
-
-| Type          | Content             |
-| ---           | ---                 |
-| Documentation | [Developer resources](https://learn.microsoft.com/en-us/azure/developer/) |
-| Documentation | [Virtual machines in Azure](https://learn.microsoft.com/en-us/azure/virtual-machines/) |
-| Training      | [Create a Linux virtual machine in Azure](https://learn.microsoft.com/en-us/training/modules/create-linux-virtual-machine-in-azure/) |

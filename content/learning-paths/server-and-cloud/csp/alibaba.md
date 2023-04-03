@@ -17,7 +17,7 @@ Detailed instructions are available in the Alibaba Cloud [documentation](https:/
 
 ## Create an account
 
-Creating a personal account is straight forward. Click on [Free Trial](https://www.alibabacloud.com/), and follow the on-screen instructions to register. You can select an individual or business account.
+Before you begin, create an account. For a personal account, click on [Free Trial](https://www.alibabacloud.com/), and follow the on-screen instructions to register. You can select an individual or business account.
 
 If using an organization's existing account, you will likely need to consult with your internal administrator.
 
@@ -41,17 +41,17 @@ Use the `Create ECS Instance` button to get started. Select `Custom Launch` conf
 
 ### Select Instance Type
 
-Using the `Type-based Selection` tab, set `Architecture` as `ARM`, and `Category` as `General Purpose`, to see the available instance types. If you already know the desired instance type, yo can enter this in the filter.
+Using the `Type-based Selection` tab, set `Architecture` as `ARM`, and `Category` as `General Purpose`, to see the available instance types. If you already know the desired instance type, you can enter this in the filter.
 
 ### Select OS image
 
 There are many images available on the [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), providing pre-installed or pre-configured setups.
 
-For now, select `Ubuntu` version (e.g. `20.04 64-bit for ARM`) from the pull down(s).
+For now, select `Ubuntu` version (e.g. `20.04 64-bit for ARM`) from the pull down menu.
 
 ### Other settings
 
-Other settings, such as storage size are selectable. For now, leave as default. Click `Next` to move to `Networking`, which can also all be likely left as default. Click `Next` to move to `System Configurations`.
+Other settings, such as storage size are selectable. For now, use the default selection. Click `Next` to move to `Networking`. Proceed with the default selection for `Networking`. Click `Next` to move to `System Configurations`.
 
 ### Set a Key Pair and other security settings
 
@@ -59,7 +59,7 @@ To be able to access the instance (see later), you must use a [key pair](https:/
 
 Select `Logon Credentials` and  set `Logon Username` to `ecs-user` and an appropriate  `password` if desired.
 
-Other settings such as `Instance Name` and `Description` are free-form for appropriate personal input. Other settings can likely be left as default.
+Other settings such as `Instance Name` and `Description` are free-form for appropriate personal input. Other settings can be left as default.
 
 In the `Preview` stage, click `Create Instance`. After a few moments, the instance will be available for use.
 
@@ -69,17 +69,19 @@ There are a number of different [Connection methods](https://www.alibabacloud.co
 
 Connecting by [SSH Key Pair](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/connect-to-a-linux-instance-by-using-an-ssh-key-pair) is likely the most convenient.
 
-For example if using `ubuntu` image:
+For example, to ssh into your virtual machine instance:
+
 ```console
-ssh -i <private_key> ubuntu@<public_ip_address>
+ssh -i <private_key> ecs-user@<public_ip_address>
 ```
-Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used.
+Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used to connect via `ssh`.
 
 ## Explore your instance
 
 ### uname
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
+
 ```console
 uname -m
 ```
@@ -87,15 +89,14 @@ will identify the host machine as `aarch64`.
 
 ### hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following, else see [here](/install-guides/gcc):
+Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands, otherwise see [here](/install-guides/gcc):
+
 ```console
 sudo apt-get update
 sudo apt install -y gcc
 ```
-Create a simple source file:
-```console
-nano hello.c
-```
+Using a text editor of your choice, create a file `hello.c` with the contents below:
+
 ```C
 #include <stdio.h>
 int main(){
@@ -104,16 +105,8 @@ int main(){
 }
 ```
 Build and run the application:
+
 ```console
 gcc hello.c -o hello
 ./hello
 ```
-You are now ready to get started with the [Server and Cloud learning paths](/learning-paths/server-and-cloud/).
-
-## Other resources
-
-| Type          | Content             |
-| ---           | ---                 |
-| Documentation | [ECS Learning Path](https://www.alibabacloud.com/getting-started/learningpath/ecs) |
-| Documentation | [ECS documentation](https://www.alibabacloud.com/help/en/elastic-compute-service) |
-
