@@ -94,9 +94,21 @@ Leave all other files as before.
 
 Power-on MPS3, and connect to local machine via USB.
 
-Four COM ports will be created, and enumerated, for example `COM4-COM7`. The exact numbers will depend on the host machine.
+Four COM ports will be created, and enumerated, for example `COM0-COM3`. The exact numbers will depend on the host machine, but will always be in this order (`COM(n+0)-COM(n+3)`).
 
-Connect to the lowest numbered one (`COM4`) with a serial terminal, such as `PuTTY`, and observe the boot sequence from whatever was previously programmed on the board.
+Connect to the lowest numbered port (`COM0`) with a serial terminal, such as `PuTTY`, and observe the boot sequence from whatever was previously programmed on the board.
+
+Recommend to also connect to `COM1` and `COM2`.
+
+| Attribute   | Setting     |
+|-------------|-------------|
+| Baud        | 115200      |
+| Data        | 8b          |
+| Stop-bits   | 1           |
+| Parity      | None        |
+| Flow        | None        |
+| New line    | CR (COM0)   |
+|             | LF (COM1-3) |
 
 ### Reprogram MPS3
 
@@ -108,4 +120,17 @@ If you have issues with this, you can also manually remove the micro-SD card fro
 
 Reboot the board, either by power-cycling, or using the `reboot` command on the terminal. The FPGA will be updated and the software stack will be executed.
 
-After a while you will see login terminal on second COM port (`COM5`).
+Observe the steps of the secure boot process reported on the `Secure Enclave (SE)` UART (`COM1`), and Linux on the `SSE-710` UART (`COM2`).
+
+After a few minutes you will see login terminal on the `SSE-710` UART (`COM2`).
+```output
+corstone1000-mps3 login:
+```
+Login as `root`, and proceed as you wish. For example:
+```console
+uname -a
+```
+will return:
+```output
+Linux corstone1000-mps3 6.1.20-yocto-standard #1 SMP PREEMPT Sat Mar 18 02:48:04 UTC 2023 aarch64 GNU/Linux
+```
