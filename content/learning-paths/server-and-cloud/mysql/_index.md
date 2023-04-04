@@ -1,14 +1,16 @@
 ---
-title: Learn how to deploy MySQL on AWS
+title: Deploy MySQL on Arm
 
 description: Deploy single instance of MySQL through Docker, RDS and EC2 instance
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on AWS.
+who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL.
 
 learning_objectives: 
     - Deploy single instance of MySQL through Docker, RDS and an AWS EC2
+    - Deploy single instance of MySQL through an Azure
+    - Deploy single instance of MySQL through GCP
     - Automate MySQL EC2 instance creation using Terraform and Ansible
 
 prerequisites:

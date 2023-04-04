@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy single instance of MySQL"
+title: "Install MySQL on an AWS Arm based instance"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-#  Deploy single instance of MySQL 
+#  Install MySQL on an AWS Arm based instance
 
 ## Generate an SSH key-pair
 
@@ -206,14 +206,13 @@ Here is the complete YML file of `Ansible-Playbook`.
   become: true
 
   tasks:
-    - name: Update the Machine
-      shell: apt-get update -y
-    - name: Installing Mysql-Server
-      shell: apt-get -y install mysql-server
-    - name: Installing PIP for enabling MySQL Modules
-      shell: apt -y install python3-pip
-    - name: Installing Mysql dependencies
-      shell: pip3 install PyMySQL
+    - name: Update the Machine and Install dependencies
+      shell: |
+             apt-get update -y
+             apt-get -y install mysql-server
+             apt -y install python3-pip
+             pip3 install PyMySQL
+      become: true
     - name: start and enable mysql service
       service:
         name: mysql
@@ -284,7 +283,7 @@ ansible-galaxy collection install community.mysql
 To run a Playbook, we need to use the `ansible-playbook` command. 
 
 ```bash
-ansible-playbook playbook.yml -i /tmp/inventory --key-file /home/ubuntu/.ssh/id_rsa
+ansible-playbook playbook.yml -i /tmp/inventory
 ```
 
 Answer `yes` when prompted for the SSH connection.
@@ -303,16 +302,7 @@ This key is not known by any other names
 Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 ok: [ansible-target1]
 
-TASK [Update the Machine] ***************************************************************************************************************
-changed: [ansible-target1]
-
-TASK [Installing Mysql-Server] **********************************************************************************************************
-changed: [ansible-target1]
-
-TASK [Installing PIP for enabling MySQL Modules] ****************************************************************************************
-changed: [ansible-target1]
-
-TASK [Installing Mysql dependencies] ****************************************************************************************************
+TASK [Update the Machine and Install dependencies] **************************************************************************************
 changed: [ansible-target1]
 
 TASK [start and enable mysql service] ***************************************************************************************************
@@ -337,7 +327,7 @@ RUNNING HANDLER [Restart mysql] ************************************************
 changed: [ansible-target1]
 
 PLAY RECAP ******************************************************************************************************************************
-ansible-target1            : ok=12   changed=10   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+ansible-target1            : ok=9   changed=7   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
 ## Connect to Database using EC2 instance
