@@ -38,9 +38,15 @@ curl https://cdimage.ubuntu.com/jammy/daily-live/current/jammy-desktop-arm64.iso
 
 1. Open the Hyper-V Manager by searching for it in the Start Menu
 
-2. Click on "New" in the Actions pane and select "Virtual Machine"
+2. Click on **New** in the Actions pane and select **Virtual Machine**
 
 ![New Hyper-V virtual machine](hyper-v-new.png)
+
+If you don't see **New** in the Actions pane click on your computer name on the left pane and it should appear. 
+
+If you don't see your computer name under **Hyper-V Manager** on the left pane, click **Connect to Server...** in the Actions pane. Select **Local computer** and your computer should appear in the left pane. 
+
+If you still don't see your computer in the left pane, use **Connect to Server...** in the Actions pane, select **Another computer**, and enter `127.0.0.1` and your computer should appear in the left pane. 
 
 Proceed through the wizard answering questions and making choices.
 
