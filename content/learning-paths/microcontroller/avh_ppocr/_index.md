@@ -18,7 +18,7 @@ prerequisites:
     - Some familiarity with AI/ML software development is assumed
     - An AWS account to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). Refer to [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) to create an AWS account.
 
-author_primary: Liliya Yu
+author_primary: Liliya Wu
 
 ### Tags
 skilllevels: Introductory
