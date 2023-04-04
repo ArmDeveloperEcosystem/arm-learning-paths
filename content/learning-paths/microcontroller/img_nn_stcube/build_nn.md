@@ -25,7 +25,7 @@ Then install Anaconda. Anaconda is a distribution of Python language for data sc
 4. Open the Anaconda installer and install using default options.
 5. Now, the installation is finished.
 
-### Use Anaconda
+### Setup Anaconda environment
 
 With Anaconda installed, you will now install the necessary `conda` packages for building and training the NN model including [Jupyter notebook](https://jupyter.org/). Follow the steps as shown below:
 
@@ -47,7 +47,7 @@ conda config --add channels conda-forge
 conda install jupyter pandas tensorflow matplotlib numpy 
 ```
 
-### Data Pre-processing
+### Data preprocessing
 
 To create the NN model, there are certain data pre-processing steps that need to be performed.
 
@@ -56,9 +56,9 @@ First, open the Jupyter Notebook through an Anaconda Prompt.
 ```console
 jupyter notebook
 ```
+Open `lab.ipynb` from the extracted project files folder on the notebook.
 
-Now, open lab.ipynb from the extracted project files folder on the notebook. Then, execute the first code block to import the required packages
-
+Execute (click `Run`) the first code block to import the required packages:
 ```python
 import tensorflow as tf
 
@@ -77,7 +77,7 @@ from PIL import Image
 import os
 ```
 
-Next, load the CIFAR-10 dataset. We can easily get the dataset because TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the 
+Next, load the `CIFAR-10` dataset. We can easily get the dataset because TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the 
 dataset.
 
 ```python
@@ -294,6 +294,4 @@ for i in range(0,len(class_names)):
  with open(path_labels_file, 'a') as f:
  f.write(str(i)+","+class_names[i]+"\n")
 ```
-
 We have now completed the steps to create the model and are ready to deploy it on the ST board.
-
