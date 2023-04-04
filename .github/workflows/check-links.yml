@@ -5,6 +5,10 @@ name: check-links
 # Controls when the workflow will run
 on:
 
+  # run once a day at 6AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -37,11 +41,6 @@ jobs:
       # Builds arm-software-developer repo
       - name: Build
         run: hugo --minify
-
-      - name: scan
-        run: |
-          tools/install-scan.sh
-          clamscan -r -i public
 
       - name: check html links
         # Don't fail the build on broken links
