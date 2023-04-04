@@ -202,7 +202,7 @@ Called from:
                                 {{- if $github_url -}}      <a href="{{$github_url}}"   target="_blank"><i class="author-social-icon fab fa-github"></i></a>    {{- end -}}
                                 {{- if $linkedin_url -}}    <a href="{{$linkedin_url}}" target="_blank"><i class="author-social-icon fab fa-linkedin"></i></a>  {{- end -}}
                                 {{- if $twitter_url -}}     <a href="{{$twitter_url}}"  target="_blank"><i class="author-social-icon fab fa-twitter"></i></a>   {{- end -}}
-                                {{- if $website_url -}}     <a href="{{$website_url}}"  target="_blank"><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
+                                {{- if $website_url -}}     <a href='{{if in $website_url "http"}}{{$website_url | safeURL}}{{else}}https://{{$website_url | safeURL}}{{end}}'  target="_blank"><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
                             </span>
                         </td>                        
                     </tr>
@@ -298,7 +298,7 @@ Called from:
                                 {{- if $github_url -}}      <a href="{{$github_url}}"   target="_blank"><i class="author-social-icon fab fa-github"></i></a>    {{- end -}}
                                 {{- if $linkedin_url -}}    <a href="{{$linkedin_url}}" target="_blank"><i class="author-social-icon fab fa-linkedin"></i></a>  {{- end -}}
                                 {{- if $twitter_url -}}     <a href="{{$twitter_url}}"  target="_blank"><i class="author-social-icon fab fa-twitter"></i></a>   {{- end -}}
-                                {{- if $website_url -}}     <a href="{{$website_url}}"  target="_blank"><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
+                                {{- if $website_url -}}     <a href='{{if in $website_url "http"}}{{$website_url | safeURL}}{{else}}https://{{$website_url | safeURL}}{{end}}'  target="_blank"><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
                         </td>
                     </tr>
                     {{if $is_learning_path}}
