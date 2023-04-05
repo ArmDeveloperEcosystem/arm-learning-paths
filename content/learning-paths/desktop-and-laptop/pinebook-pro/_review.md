@@ -19,7 +19,7 @@ review:
             - "long term support OS"
         correct_answer: 1               
         explanation: >
-            Arch keeps up to date always using the latest available version of the kernel
+            Arch Linux keeps up to date always using the latest available version of the kernel
 
     - questions:
         question: >
