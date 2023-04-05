@@ -14,19 +14,19 @@ Linux software developers use `perf` to analyze performance.
 
 Install and enable `perf` using the commands below. Make sure to become root where indicated. 
 
-For Ubuntu running on the Arm server run this command to install `perf`.
+For Ubuntu running on the Arm server run this command to install `perf`:
 
 ```console
 sudo apt install linux-tools-common linux-tools-generic linux-tools-`uname -r` -y
 ```
 
-For the Raspberry Pi 4 run this command.
+For the Raspberry Pi 4 run this command:
 
 ```bash		
 sudo apt-get install linux-perf	-y
 ```
 
-Become root to enable access to the perf data.
+Become root to enable access to the perf data:
 
 ```bash
 sudo su -
@@ -46,7 +46,7 @@ exit
 ```
 					
 
-If you don't have the Linux source tree from the previous step, retrieve it again using git. 
+If you don't have the Linux source tree used in the [Linux Kernel Compile section](/learning-paths/embedded/rpi/kernel/), retrieve it again using git:
 
 ```console
 git clone --depth=1 https://github.com/raspberrypi/linux
@@ -54,13 +54,13 @@ git clone --depth=1 https://github.com/raspberrypi/linux
 
 In some cases, `perf` may not work on the Raspberry Pi 4 due to a mismatch between your running kernel and the `linux-perf` Debian package. To overcome this, build `perf` from source code. 
 
-Install the required tools for kernel building. 
+Install the required tools for kernel building:
 
 ```console
 sudo apt install git bc bison flex libssl-dev make
 ```
 
-Build `perf` using `make`.
+Build `perf` using `make`:
 
 ```console
 cd linux
@@ -83,7 +83,7 @@ $HOME/linux/tools/perf/perf list
 
 Linux `perf` works on both the Arm server and the Raspberry Pi 4. Arm servers have additional perf events because of the different processor type.
 
-An example event which is included on the Arm server is stalled-cycles-backend. This event is not available on the Raspberry Pi 4.
+An example event which is included on the Arm server is `stalled-cycles-backend`. This event is not available on the Raspberry Pi 4.
 
 Run a `tar` command to compress the Linux kernel source tree and count the `stalled-cycles-backend` event. 
 

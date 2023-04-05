@@ -1,8 +1,6 @@
 ---
 title: Get started with the Raspberry Pi 4
 
-description: comparing the Raspberry Pi 4 with an Arm cloud server
-
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for software developers interested in the Raspberry Pi 4.
@@ -12,7 +10,6 @@ learning_objectives:
     - Compare and contrast the Raspberry Pi 4 to an Arm cloud server
 
 prerequisites:
-    - Some familiarity with embedded Linux is assumed
     - A Raspberry Pi 4 board
     - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate cloud service provider.
 

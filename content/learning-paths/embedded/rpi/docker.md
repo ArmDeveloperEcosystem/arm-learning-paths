@@ -32,7 +32,7 @@ This message shows that your installation appears to be working correctly.
 
 If any other output is shown return to [Installing Docker](/install-guides/docker/) and follow the installation instructions.
 
-Try out some Docker projects to confirm they build and run as expected. Some simple ones are in GitHub in a [project called hello-arm](https://github.com/jasonrandrews/hello-arm). 
+Try out some Docker projects to confirm they build and run as expected. Some simple ones are in a [GitHub project called hello-arm](https://github.com/jasonrandrews/hello-arm). 
 
 Also try out official images from Docker Hub such as Ubuntu. None of the projects detect anything different between Raspberry Pi 4 and the Arm server.
 
@@ -44,7 +44,7 @@ It’s also possible to build 32-bit Arm images on the Arm server and run those 
 
 An example C program which prints out the size of a pointer to indicate if the Linux userspace is 32-bit or 64-bit is shown below. 
 
-Copy and paste the code into a file `hello.c`
+Using a text editor of your choice, copy and paste the code below into a file `hello.c`:
 
 ```C
 #ifndef ARCH
@@ -70,9 +70,7 @@ int main()
 }
 ```
 
-A Dockerfile to build the program is shown below. 
-
-Copy and paste the text into a file named `Dockerfile`.
+A Dockerfile to build the program is shown below. Copy and paste this text into a file named `Dockerfile`:
 
 ```docker
 FROM alpine AS builder
@@ -88,11 +86,9 @@ COPY --from=builder /home/hello .
 CMD ["./hello"]
 ```
 
-The example can be used to build a Docker image on the Arm server and share it using Docker Hub to the Raspberry Pi 4. The result will be a 64-bit userspace. 
+The example is used to build a Docker image on the Arm server and share it using Docker Hub to the Raspberry Pi 4. 
 
-Substitute your Docker Hub user name for `username`.
-
-On the Arm server run the commands:
+On the Arm server run the commands below to build and then share the image. Substitute your Docker Hub user name for `username`:
 
 ```console
 docker build -t username/hello .
@@ -115,7 +111,7 @@ The expected output is:
 
 Now try the build with the `--platform` flag to set the architecture to 32-bit Arm.
 
-On the Arm server run the commands:
+On the Arm server run the commands shown below. Again, substitute your Docker Hub user name for `username`:
 
 ```console
 docker build --platform linux/arm/v7 -t username/hello .
