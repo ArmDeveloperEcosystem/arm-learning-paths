@@ -235,3 +235,5 @@ For the symbols in the tree view to display correctly you will need to download 
 A good place to start is [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
 
 Neovim is a great option for the Pinebook Pro running the i3 window manager. 
+
+![i3 window manager  alt-text#center](i3.jpg)
