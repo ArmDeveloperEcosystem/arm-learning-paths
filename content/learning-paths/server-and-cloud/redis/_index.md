@@ -12,6 +12,7 @@ learning_objectives:
     - Install Redis on a single GCP Arm based instance
     - Install Redis with a docker container on a single node
     - Install Redis in a multi-node configuration (sharding)
+    - Deploy Redis as a cache for MySQL on AWS, Azure and GCP Arm based instance
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
