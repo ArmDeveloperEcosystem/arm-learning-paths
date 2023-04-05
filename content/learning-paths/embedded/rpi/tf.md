@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## TensorFlow for machine learning	
 				
-To compare TensorFlow on the Raspberry Pi 4 and the Arm cloud server install it and run an example. 
+To compare the performance of TensorFlow on the Raspberry Pi 4 and the Arm cloud server, install it and run an example. 
 		
-Install `pip` and confirm `python` is `python3`. 
+Install `pip` and `python3`.
 
 ```bash
 sudo apt install python-is-python3 python3-pip -y
@@ -24,13 +24,13 @@ Install TensorFlow.
 pip install tensorflow-aarch64 tensorflow_io 
 ```
 				
-Run a [TensorFlow quickstart example](https://www.tensorflow.org/tutorials/quickstart/beginner) by following the instructions. 
+You can now follow the instructions in the [TensorFlow quickstart example](https://www.tensorflow.org/tutorials/quickstart/beginner) or proceed to the steps in the Quickstart example below. 
 
 ## Quickstart example
 
-To save time entering the commands from the TensorFlow example, the code is shared below. 
+To save time entering the commands from the TensorFlow example, the code is shared here. 
 
-Copy it and save it in a file named example.py.
+Using a text editor of your choice, copy the contents below and save it in a file named `example.py`:
 
 ```python
 import tensorflow as tf
@@ -80,7 +80,7 @@ time python ./example.py
 
 ## Results 
 
-The results below show the performance of the Raspberry Pi and the Arm server.
+The results below show the time taken to run the tensorflow example on the Raspberry Pi and the Arm server. This gives you an idea of the relative performance.
 
 | System | Time to complete              |
 |--------|------------------------------:|				

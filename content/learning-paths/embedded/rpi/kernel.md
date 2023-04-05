@@ -32,7 +32,7 @@ The cloud server data shown is for an always free A1 instance on Oracle Cloud wi
 
 The kernel build command sequence is shown below for reference.
 
-For the Raspbery Pi 4.
+For the Raspbery Pi 4:
 
 ```console
 sudo apt install git bc bison flex libssl-dev make
@@ -48,7 +48,7 @@ sudo cp arch/arm64/boot/dts/overlays/README /boot/overlays/
 sudo cp arch/arm64/boot/Image.gz /boot/$KERNEL.img
 ```
 
-For an Arm cloud server running `Ubuntu 22.04`.
+For an Arm cloud server running `Ubuntu 22.04`:
 
 ```console
 sudo apt install git bc bison flex libssl-dev make libc6-dev libncurses5-dev
