@@ -13,9 +13,3 @@ Processors implemented by Arm will have access to the full list of performance c
 Graphics profiling supports any Arm GPU from the Mali-T700 series or later. The Mali-400 series (Utgard family) and Mali-T600 series (first generation Midgard family) products are not supported.
 
 Refer to the Arm Mobile Studio [supported list of devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) to find devices with Arm CPU implementations and Mali GPUs. 
-
-## Next Steps
-
-To be determined.
-
-
