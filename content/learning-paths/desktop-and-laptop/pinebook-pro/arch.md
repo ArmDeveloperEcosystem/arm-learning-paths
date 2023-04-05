@@ -21,7 +21,7 @@ Basic command line knowledge is helpful, but most of the commands you need are i
 
 Some vim knowledge is required. If you need to a crash course or a want to do a refresher, on a computer with vim installed run the following command: 
 
-```cmd
+```console
 vimtutor
 ```
 It takes about 15-30 minutes to complete to complete the tutorial. 
@@ -110,7 +110,7 @@ You can enable automatic connection by running the command below.
 
 Note that `wlan0` should be the wireless adapter for the Pinebook Pro, but if for some reason it's not you can verify by going to `/etc/netctl` and looking inside the file that is named with your Wi-Fi device name. 
 
-```cmd
+```console
 sudo systemctl enable netctl-auto@wlan0.service
 ```
 
