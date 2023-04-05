@@ -209,7 +209,7 @@ Feel free to tweak any settings to your preferences. These were adapted from [Ne
 
 4. Run the following command inside Neovim to install the plugins
 
-```cmd
+```console
 :PlugInstall
 ```
 
