@@ -8,9 +8,12 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, we will deploy the model directly on the STM32 board. [STM32Cube.AI](https://www.st.com/content/st_com/en/campaigns/stm32cube-ai.html) is an extension of [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html).
+In this section, we will deploy the model directly on the STM32 board.
 
 ## Install STM32CubeMX and STM32Cube.AI
+
+[STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html) is a graphical tool for configuring STM32 microcontrollers.\
+[STM32Cube.AI](https://www.st.com/content/st_com/en/campaigns/stm32cube-ai.html) is an extension of STM32CubeMX to import ML models.
 
 1. Download the Windows installer of STM32CubeMX from [here](https://www.st.com/en/development-tools/stm32cubemx.html)
 2. Run the Windows installer and install in desired location of your Windows Machine.
@@ -44,27 +47,31 @@ To validate the model on the target, we need to first generate code and install 
 
 
 ## Demonstrate example application
-## RONAN TO DO
-
-Stuck in __io_putchar()??
+# RONAN TO DO
+Stuck in `__io_putchar()`??
 
 
 ## Demo with the sample application
 
-1. We already implemented a sample application, so you can test the application with your board.
-2. Open any terminal application to see the output from the board. Set up the serial connection. The speed is 115200.
-3. Import our application. Click the File tab and click [Import]. Select [Existing project into workspace]. Go to [tf_stm32] and select [MCU_Activity_Recognition].
-4. Open X-CUBE-AI/App/app_x-cube-ai.c. We already filled the functions for data acquisition from the accelerometer sensor and feature extraction. Install the code with [Run As].
-5. Now you can see the output on the terminal.
+A sample application is provided, so you can test the application with your board.
+
+1. Using a terminal application (such as `PuTTY`), set up the serial connection to the board. `COM` number will be as before. The speed is 115200.
+2. Import our application. Click the File tab and click `Import`. Select `Existing project into workspace`. Go to `tf_stm32` folder and select `MCU_Activity_Recognition`.
+3. Open `X-CUBE-AI/App/app_x-cube-ai.c`. We provide functions for data acquisition from the accelerometer sensor and feature extraction.
+4. Build application and flash to target with `Run As`.
+5. Obseve output on the terminal.
 6. Press the blue button on the board, draw a letter, then press the button again.
 
-## Generate Cube AI Application
+## Create your own application
+# RONAN TO DO
+Flow slightly different with latest version of STM32CubeMX
 
-Now the model is validated, let's implement an application with the model.
+1. Open the list of Software Packages. Change the device application as `Application`.
+2. Click `Generate Code` again, then the project is updated.
+3. Open `STM32CubeIDE`. Since we re-generated the code again, we need to delete the existing project and import the project again.
+4. Open `X-CUBE-AI/App/app_x-cube-ai.c`. This is the auto-generated code by `STM32CubeMX`.
+5. Between `USER_CODE_BEGIN` and `USER_CODE_END`, you can write code for your application.
 
-1. Open the list of Software Packages. Change the device application as [Application].
-2. Click [Generate Code] again, then the project is updated.
-3. Open STM Cube IDE. Since we re-generated the code again, we need to delete the existing project and import the project again.
-4. Open X-CUBE-AI/App/app_x-cube-ai.c. This is the auto-generated code by STM Cube MX.
-5. Between USER_CODE_BEGIN and USER_CODE_END, you can write code for your application.
-6. There are two main functions that you should fill. The first function is [acquire_and_process_data]. This function is for getting data from sensors and processing the data, for example, extracting features. The second function is [postprocess] for postprocessing the output.
+There are two main functions that you should implement:
+ * `acquire_and_process_data()` is for getting data from sensors and processing the data, for example, extracting features.
+ * `postprocess()` is for postprocessing the output
