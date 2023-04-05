@@ -1,7 +1,5 @@
 ---
-title: Start developing Arm mobile applications
-
-description: The place to start for developers new to Arm in mobile development
+title: Get started with Arm hardware
 
 minutes_to_complete: 5
 
