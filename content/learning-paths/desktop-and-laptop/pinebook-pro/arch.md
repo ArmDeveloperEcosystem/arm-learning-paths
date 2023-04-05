@@ -7,58 +7,111 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Prerequisites
+You can install Arch Linux on the [Pinebook Pro laptop](https://www.pine64.org/pinebook-pro/) and use it for Linux development on Arm. 
 
-You will need a Pinebook Pro and a microSD card of at least 8GB and class 10 or faster. If you are doing the initial microSD card setup on a second computer be aware the instructions are written for Linux. macOS can be used, but the steps required to partition will be different as fdisk on macOS is different and as such will be outside the scope of these instructions.
+## Before you begin
 
-Basic command line knowledge will be helpful, but the vast majority of commands are written in the instructions.
+You will need a Pinebook Pro laptop and a microSD card of at least 8GB and class 10 or faster. 
 
-There is no avoiding it, some basic vi / vim knowledge is required. If you need to a crash course or a refresher, on a computer with vim installed run the following command. It shouldn't take long to complete, only 15 - 30 minutes. 
+You will also need a second computer to write the software image to the microSD card. The instructions for writing the microSD card are written for Linux. 
+
+You can use macOS as the second computer, but the steps required to partition the microSD card are different. There are no macOS instructions here, but you are free to try. You can also ask for help on GitHub. 
+
+Basic command line knowledge is helpful, but most of the commands you need are included in the instructions.
+
+Some vim knowledge is required. If you need to a crash course or a want to do a refresher, on a computer with vim installed run the following command: 
+
 ```cmd
 vimtutor
 ```
+It takes about 15-30 minutes to complete to complete the tutorial. 
 
 ## Installing Arch Linux ARM
 
-For reference, the latest release and instructions can be found here: https://github.com/SvenKiljan/archlinuxarm-pbp/releases/latest. The first steps will be taken from there so they are kept up to date alongside the latest Pinebook Pro Arch Linux Arm image.
+Install Arch Linux using the instructions on GitHub. 
 
-* Follow the instructions under "Installation on microSD card or eMMC module" https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md
-    * If wifi-menu isn't working first try: The Pinebook Pro has a WiFi privacy kill switch. Press the Pine64 logo key + F11. If the num lock light blinks twice WiFi has just been enabled. If it blinks three times WiFi has just been disabled. Enable it, then shutdown, wait a few seconds, the power back on.
-    * Sometimes after rebooting the wireless device isn't seen and so WiFi doesn't work. The solution I have found so far is confirming the kill switch is off, shutting down, waiting, then starting back up.
-* Optional, but it's what I did: if you want to run the OS off the internal eMMC module rather than off the SD card, follow the steps under "Installation of eMMC module without a USB adapter" next.
+1. Follow the instructions titled [Installation on microSD card or eMMC module](https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/INSTALL.md)
 
-## Initial Configurations
+The instructions explain how to create the microSD card and boot Arch Linux. 
 
-* Create a user, replace \<username> with desired username
-```cmd
-useradd -m <username>
+{{% notice Note %}}
+If the `wifi-menu` isn't working on the first try, check the Wi-Fi privacy kill switch. 
+
+Press the Pine64 logo key + F11. If the num lock light blinks twice Wi-Fi has just been enabled. If it blinks three times Wi-Fi has just been disabled. 
+
+Enable it, then shutdown, wait a few seconds, the power back on.
+{{% /notice %}}
+
+2. (optional) Run the operating system from the internal eMMC instead of the SD card
+
+To install the OS to eMMC follow the steps under "Installation of eMMC module without a USB adapter". Using eMMC provides faster performance and you won't need to have the microSD card in the slot during future use. 
+
+After completing the installation you should be at a root command prompt with no window manager and the Wi-Fi is connected. 
+
+Refer to the [Frequently asked questions](https://github.com/SvenKiljan/archlinuxarm-pbp/blob/main/FAQ.md) for more information. 
+
+Continue with the steps below to create a new user and update the Arch Linux software. 
+
+## Initial configuration
+
+1. Create a user, replace `username` with your desired user name
+
+```console
+useradd -m username
 ```
 
-* Give the user a password
-```cmd
-passwd <username>
+2. Create a password for the `username`
+
+```console
+passwd username
 ```
 
-* Install sudo
-```cmd
-pacman -Sy sudo
-```
+3. Update the system and packages
 
-* Add the new user to the sudoers group
-```cmd
-sudo visudo
-```
-    
-* Navigate to the bottom of the file, and under the line "root ALL=(ALL:ALL) ALL" add a new line with "\<username> ALL=ALL(ALL:ALL) ALL" then save and exit
+Because Arch is a rolling release, the following command should be ran often. At least once a week, or before installing new software.
 
-* Update the system and packages. Because Arch is a rolling release, the following command should be ran often. At least once a week, or before installing new software.
-```cmd
+```console
 pacman -Syu
 ```
 
-* The wifi-menu doesn't keep you connected after restarting, so to enable automatic connection we will run the following command. Note that wlan0 should be the wireless adapter for the Pinebook Pro, but if for some reason it's not you can verify by going to /etc/netctl/ and looking inside the file that is named after your wifi address.
+4. Install `sudo`
+
+```console
+pacman -Sy sudo
+```
+
+5. Add the new user to the sudoers group
+
+You are already root so you can directly edit the sudoers file.
+
+```console
+visudo
+```
+    
+Navigate to the bottom of the file. About 10 lines from the bottom look for this line:
+
+```output
+root ALL=(ALL:ALL) ALL 
+```
+
+Add a new line which is the same, but with your `username`:
+
+```console
+username ALL=ALL(ALL:ALL) ALL
+```
+
+Save the file and exit. 
+
+6. Automatically connect Wi-Fi on start-up
+
+The `wifi-menu` doesn't reconnect after restarting. 
+
+You can enable automatic connection by running the command below.
+
+Note that `wlan0` should be the wireless adapter for the Pinebook Pro, but if for some reason it's not you can verify by going to `/etc/netctl` and looking inside the file that is named with your Wi-Fi device name. 
+
 ```cmd
 sudo systemctl enable netctl-auto@wlan0.service
 ```
 
-The barebones Arch should now be installed and configured.
+Arch Linux is now installed and configured.

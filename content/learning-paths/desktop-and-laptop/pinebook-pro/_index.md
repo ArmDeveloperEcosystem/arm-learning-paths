@@ -1,26 +1,23 @@
 ---
-title: Setting up the Pinebook Pro with Arch and i3 for use as a development machine
-
-description: Learn the steps to setup the Pinebook Pro with Arch Linux ARM, i3 windows manager, and developer tools
+title: Install Arch Linux with the i3 window manager on a Pinebook Pro
 
 minutes_to_complete: 120 
 
-who_is_this_for: Anyone who wants to use the Pinebook Pro for development in a way that feels fast and snappy.
+who_is_this_for: This is an advanced topic for developers who want to use the Pinebook Pro as an Arm Linux development machine. 
 
 learning_objectives:
-    - Install and configure Arch Linux ARM
-    - Install and configure i3 windows manager
-    - Install and configure NeoVim
+    - Install and configure Arch Linux for Arm 
+    - Install and configure the i3 window manager
+    - Install and configure the Neovim editor
 
 prerequisites:
-    - A Pinebook Pro
+    - A Pinebook Pro laptop
     - A microSD card (8GB or greater; class 10 or faster)
 
 author_primary: Gabriel Peterson
 
-
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Cortex-A72
@@ -30,7 +27,7 @@ operatingsystems:
 tools_software_languages:
     - i3
     - Alacritty
-    - NeoVim
+    - Neovim
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

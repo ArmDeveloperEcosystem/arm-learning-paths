@@ -5,13 +5,18 @@ weight: 4
 layout: learningpathall
 ---
 
-## Background
+This section is optional, but demonstrates a possible developer setup on the Pinebook Pro with the i3 window manager and Neovim. 
 
-This section is optional, and is highly dependant on workflow and preference. This is just one possible setup, and can be replaced with any other code editor on the Pinebook Pro. I am going with Neovim because it is very lightweight and keeps the best parts of Vim while improving on it in many ways. It has Lua extensibility built-in while still supporting Vimscript and so is able to be modified beyond what was possible with Vim, but the vast majority of Vim plugins will still work. 
+Neovim is lightweight and keeps the best parts of vim and improves it. Neovim has Lua extensibility while still supporting Vimscript. It's able to go beyond what is possible with vim, and the majority of vim plugins work as expected. 
 
-### Example configurations
+If you have been curious about Neovim but never used it, this is a good way to try.
 
-When opening it for the first time it will look almost exactly like Vim, but here are some examples showing what can be done with it. These are far more elaborate than the one I will walk you through, but it's nice to see what is possible:
+## Example configurations
+
+When opening Neovim for the first time it will look almost exactly like vim, but it is more customizable.  
+
+Here are some configuration and customization examples demonstrating what is possible. 
+
 * https://github.com/NvChad/NvChad
 * https://github.com/jdhao/nvim-config
 * https://github.com/CosmicNvim/CosmicNvim
@@ -20,54 +25,80 @@ When opening it for the first time it will look almost exactly like Vim, but her
 
 ## Installation and setup of Neovim
 
-For this particular setup we will install Python and Node, mainly because they are required for some of the plugins to work correctly without throwing errors each time Neovim is opened.
+In addition to Neovim, you should install Python and Node so that plugins to work correctly. Without these you may see errors each time Neovim is opened.
 
-Also note that Neovim is launched with the nvim command.
+{{% notice Note %}}
+Neovim is launched with the `nvim` command.
+{{% /notice %}}
 
 ### Installation
 
-* Install Neovim
-```cmd
+1. Install Neovim
+
+```console
 sudo pacman -Sy neovim
 ```
 
-* Install the vim-plug plugin manager
-```cmd
+2. Install the vim-plug plugin manager
+
+```console
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 ```
 
-* Install the Node Version Manager
-```cmd
+3. Install the Node version manager
+
+```console
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 ```
 
-* Use the Node Version Manager to install the latest long term support version of Node. If the following command doesn't work you may need to restart your terminal emulator
-```cmd
+The install.sh will modify your shell `.bashrc` to add `nvm` to your path.
+
+Reread the updated `.bashrc` file to complete the install.
+
+```console
+. ~/.bashrc
+```
+
+4. Use the Node Version Manager to install the latest long term support version of Node. 
+
+```console
 nvm install --lts
 ```
 
-* Install the current release of Python and Pip
-```cmd
+5.  Install the current release of Python and Pip
+
+```console
 sudo pacman -Sy python python-pip
 ```
 
-* Install the Vim Pip dependencies
-```cmd
+6. Install the vim pip dependencies
+
+```console
 pip3 install pynvim
 ```
 
-### Configuration / customization
+### Configuration and customization
 
-* Create a Neovim init.vim file at ~/.config/nvim/init.vim. The directory most likely won't exist and will need to be created.
+Use `nvim` to create the configuration file `init.vim`
 
-* Navigate there and open the file using Neovim
-```cmd
-nvim init.vim
+1. Create a new directory for the `init.vim` configuration file
+
+```console
+mkdir -p ~/.config/nvim
 ```
 
-* Copy the following and paste it into the file. Feel free to tweak any settings to your preferences. These were adapted from https://medium.com/geekculture/neovim-configuration-for-beginners-b2116dbbde84 
+2. Open the configuration file `init.vim` using Neovim
+
+```console
+nvim ~/.config/nvim/init.vim
 ```
+
+3. Add the configuration information to the file. 
+
+Copy the text below and paste it into the `init.vim` file. 
+
+```console
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
@@ -174,16 +205,33 @@ require("nvim-tree").setup({
 EOF
 ```
 
-* Run the following command inside Neovim to install the plugins listed between the call plug#begin and call plug#end
+Feel free to tweak any settings to your preferences. These were adapted from [Neovim configuration for beginners](https://medium.com/geekculture/neovim-configuration-for-beginners-b2116dbbde84)
+
+4. Run the following command inside Neovim to install the plugins
+
 ```cmd
 :PlugInstall
 ```
 
-* One of the plugins, nvim-tree, can be viewed by using the Neovim command. More commands and settings can be seen here: https://github.com/nvim-tree/nvim-tree.lua/blob/master/doc/nvim-tree-lua.txt. Also not covered in this tutorial as it is very much a personal preference, but for the symbols in the tree view to display correctly you will need to download and install a patched font. A good place to choose one is from here: https://github.com/ryanoasis/nerd-fonts
-```cmd
+The plugins listed between the call plug#begin and call plug#end are installed.
+
+5. Try the nvim-tree plugin
+
+Open nvim-tree in `nvim` using:
+
+```console
 :NvimTreeOpen
 ```
-and
-```cmd
+
+Close nvim-tree in `nvim` using:
+
+```console
 :NVimTreeClose
 ```
+
+More nvim-tree commands and settings are available in the [GitHub documentation](https://github.com/nvim-tree/nvim-tree.lua/blob/master/doc/nvim-tree-lua.txt)
+
+For the symbols in the tree view to display correctly you will need to download and install a patched font. 
+A good place to start is [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+
+Neovim is a great option for the Pinebook Pro running the i3 window manager. 
