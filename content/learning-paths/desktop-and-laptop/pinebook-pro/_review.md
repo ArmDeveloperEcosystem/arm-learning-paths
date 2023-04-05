@@ -13,23 +13,23 @@
 review:
     - questions:
         question: >
-            Arch is a rolling-release OS, or a long term support OS
+            Is Arch Linux a rolling-release OS or a long term support OS?
         answers:
-            - "rolling-release OS"
+            - "rolling release OS"
             - "long term support OS"
         correct_answer: 1               
         explanation: >
-            Arch keeps up to date always using the latest available version of the kernel
+            Arch Linux keeps up to date always using the latest available version of the kernel
 
     - questions:
         question: >
-            i3 can be installed on a fresh Arch Linux ARM install without requiring any additional packages or software
+            Can i3 be installed on a fresh Arch Linux ARM install without any additional software packages?
         answers:
-            - "True"
-            - "False"
+            - "Yes"
+            - "No"
         correct_answer: 2                     
         explanation: >
-            For i3 to work on a fresh Arch Linux ARM install it requires display packages, a dynamic menu package, and a terminal emulator at a minimum
+            For i3 to work on a fresh Arch Linux install it requires display packages, a dynamic menu package, and a terminal emulator at a minimum
                
     - questions:
         question: >

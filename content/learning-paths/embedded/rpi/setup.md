@@ -18,7 +18,7 @@ Install Raspberry Pi OS on your Raspberry Pi 4 using the [Raspberry Pi documenta
 
 Make sure to install the 64-bit version of Raspberry Pi OS. This provides compatibility with Arm cloud servers to compare and contrast development tasks.
 
-Insert the SD card into the Raspberry Pi 4 and go through the setup steps to set your country, create a username and password, connect wifi, and update the software. 
+Insert the SD card into the Raspberry Pi 4 and go through the setup steps to set your country, create a username and password, connect Wi-Fi, and update the software. 
 
 Reboot to start again with the updated settings. 
 
