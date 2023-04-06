@@ -24,8 +24,6 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-# LLVM toolchain
-
 [LLVM version 12 or higher](https://llvm.org/) natively supports Windows on Arm. [View the supported Arm architecture features](https://developer.arm.com/Tools%20and%20Software/LLVM%20Toolchain#Supported-Devices) in the open-sourced LLVM toolchain.
 
 ## Download and Install

@@ -37,7 +37,7 @@ During the installation process, you will be asked to choose the workloads you w
 
 ![img1](/install-guides/_images/vs-woa.png)
 
-## Install LLVM support in Visual Studio
+# Install LLVM support in Visual Studio
 
 To build native Windows Applications using the LLVM toolchain in Visual Studio, you need to install additional components.
 
