@@ -46,6 +46,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: htmltest-report
-          path: htmltest.log
+          path: tmp/.htmltest/htmltest.log
           retention-days: 7 # Default is 90 days
 
