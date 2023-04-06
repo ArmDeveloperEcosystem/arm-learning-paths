@@ -13,7 +13,8 @@ Any Windows on Arm computer which has the required tools installed can be used f
 
 Follow the links to install the required tools. 
 
-* [Visual Studio 2022 or higher](/install-guides/woa/#visual-studio). Install [LLVM support](https://learn.microsoft.com/en-us/cpp/build/clang-support-msbuild?view=msvc-170#install-1) in Visual Studio.
+* [Visual Studio 2022 or higher](/install-guides/vs-woa). 
+* [Install LLVM support in Visual Studio](/install-guides/vs-woa/#install-llvm-support-in-visual-studio).
 * [Strawberry Perl](https://strawberryperl.com/) 
 
 {{% notice Note %}}
@@ -95,7 +96,7 @@ Scroll down and find `CMake variables and Cache` and click on `Save and generate
 
 This will change the configuration on the top of Visual Studio to `arm64-Clang-Debug`
 
-On the top toolbar open the drop down and click `arm64-Clang-Debug`. This will trigger Visual Studio to generate the `CMakeCache.txt` file for your new `arm64-Clang-Debug` configuration.
+On the top toolbar open the drop down and click `arm64-Clang-Debug`. Then select `Project -> Configure Cache`. This will trigger Visual Studio to generate the `CMakeCache.txt` file for your new `arm64-Clang-Debug` configuration.
 
 In the output window, you will see messages similar to:
 
@@ -151,7 +152,7 @@ If you would like to build with a different version of LLVM, you will need to ma
 
 At the time of writing, the latest version with Windows on Arm support is LLVM 16.0.0. 
 
-Ensure you have downloaded and installed [LLVM 16.0.0](/install-guides/woa/#llvm-toolchain)
+Ensure you have downloaded and installed [LLVM 16.0.0](/install-guides/llvm-woa)
 
 On `CMake Settings` page in Visual Studio, select the `Show advanced variables`checkbox under `CMake variables and cache`.
 
