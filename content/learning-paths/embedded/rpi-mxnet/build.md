@@ -8,11 +8,11 @@ layout: "learningpathall"
 
 ---
 
-## Build MXNet using the `chroot`
+## Build MXNet
 
-From the last section, you should be in the chroot file system as root with the `#` prompt. 
+You should now be inside the Raspberry Pi OS file system as root with the `#` prompt. 
 
-Install required software to build MxNet.
+Install required software to build MXNet.
 
 ```console
 apt update
@@ -76,22 +76,34 @@ cd ../python
 sudo pip3 install -e . 
 ```
 
-Building MxNet takes about 20 minutes on an AWS c6g.2xlarge EC2 instance.
+Test the result with Python. 
 
-A native build on a Raspberry Pi 4 can be done using the steps above. Setting the number of jobs too high will result in out of memory failures. With `-j4` and the build fails, even on a Raspberry Pi with Gb RAM. With `-j1` the build completes, but takes over 6 hours.
-
-Test the result with Python. Run python3 and enter the commands at the Python prompt to `import mxnet` and print the version. 
+Using a text editor copy and paste the code below into a text file named `test.py`
 
 ```console
-$ python3
-Python 3.7.3 (default, Jul 25 2020, 13:03:44) 
-[GCC 8.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import mxnet
->>> mxnet.__version__
-'2.0.0'
->>> quit()
+import mxnet
+print(mxnet.__version__)
 ```
+
+Run the example code:
+
+```console
+python3 ./test.py
+```
+
+The version of MXNet should be printed. 
+
+The expected output format is below. Your version may be slightly different. 
+
+```output
+2.0.0
+```
+
+## Summary 
+
+Building MXNet takes about 20 minutes on an AWS c6g.2xlarge EC2 instance.
+
+A native build on a Raspberry Pi 4 can be done using the steps above. Setting the number of jobs too high will result in out of memory failures. With `-j4` and the build fails, even on a Raspberry Pi with Gb RAM. With `-j1` the build completes, but takes over 6 hours.
 
 Continue to the next section to download the new image and install it on a Raspberry Pi for testing. 
 

@@ -28,7 +28,7 @@ This section provides info about how to setup VNC on a remote Arm Linux machine.
 
 Feel free to seek out additional VNC tutorials or add more information to this page. 
 
-This installation only works on newer versions of Ubuntu and Debian. It was sucessfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
+This installation only works on newer versions of Ubuntu and Debian. It was successfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
 
 ## VNC 
 
@@ -36,7 +36,7 @@ VNC is a client server application. A VNC server runs on a remote machine. A VNC
 
 ### Install VNC server and xfce4 desktop
 
-To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This receipe uses [TigerVNC](https://tigervnc.org/)
+To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This recipe uses [TigerVNC](https://tigervnc.org/)
 
 Desktop software is also needed. There are many options for this, but using `xfce4` makes for a minimal install with good performance. 
 
