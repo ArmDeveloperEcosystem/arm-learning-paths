@@ -11,12 +11,12 @@ layout: "learningpathall"
 
 ## Copy the image to your local machine
 
-Download the new Raspberry Pi image with the compiled MXNet to your local machine using `scp`
+If you are working on an Arm cloud instance or remote server, download the new Raspberry Pi image with the compiled MXNet to your local machine using `scp`
 
-Fill in the IP address of your Arm server and the name of your SSH key (if needed).
+Use the IP address of your Arm server and the name of your SSH key in the command below to download the image:
 
 ```console
-scp -i key.pem ubuntu@<ip-addr>:~/2022-09-22-raspios-bullseye-arm64-lite.img .
+scp -i <your-key.pem> ubuntu@<your-ip-addr>:~/2023-02-21-raspios-bullseye-arm64-lite.img .
 ```
 
 ## Write an SD card 
@@ -40,15 +40,25 @@ sudo pip3 install -e .
 
 Confirm MXNet loads on the Raspberry Pi using the same commands used on the Arm server. 
 
+Using a text editor copy and paste the code below into a text file named `test.py`
+
 ```console
-$ python3
-Python 3.7.3 (default, Jul 25 2020, 13:03:44) 
-[GCC 8.3.0] on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import mxnet
->>> mxnet.__version__
-'2.0.0'
->>> quit()
+import mxnet
+print(mxnet.__version__)
+```
+
+Run the example code:
+
+```console
+python3 ./test.py
+```
+
+The version of MXNet should be printed. 
+
+The expected output format is below. Your version may be slightly different. 
+
+```output
+2.0.0
 ```
 
 You have significantly reduced MXNet compile time, transferred the result to an SD card, and confirmed MXNet can immediately run on a Raspberry Pi. 
