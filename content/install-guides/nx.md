@@ -44,9 +44,9 @@ sudo apt-get install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xfce4-t
 
 ### Install NoMachine on the remote server
 
-Create two files on the server in the home directory ($HOME). The contents of the files is below.
+Create two files on the server in the home directory `$HOME`. The contents of the files is below.
 
-Use a text editor to copy and paste this script into a file on the remote machine at $HOME/nx-key.sh
+Use a text editor to copy and paste this script into a file on the remote machine at `$HOME/nx-key.sh`
 
 ```file { file_name="nx-key.sh" }
 #!/bin/bash
@@ -59,7 +59,7 @@ else
 fi
 ```
 
-Use a text editor to copy and paste this script into a file on the remote machine at $HOME/install-nomachine.sh
+Use a text editor to copy and paste this script into a file on the remote machine at `$HOME/install-nomachine.sh`
 
 ```file { file_name="install-nomachine.sh" }
 #!/bin/bash
@@ -96,7 +96,7 @@ For NoMachine to work, it's best to have a user account on the remote machine wi
 
 If the user account already has a password, this step can be skipped. 
 
-To enable passwords edit the file /etc/sshd_config and set PasswordAuthentication to yes
+To enable passwords edit the file `/etc/sshd_config` and set `PasswordAuthentication to yes`
 
 To enable it in a script or from the command line use:
 

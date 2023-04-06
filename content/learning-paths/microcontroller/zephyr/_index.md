@@ -1,14 +1,12 @@
 ---
-title: Run Zephyr RTOS on Arm Corstone-300
+title: Run the Zephyr RTOS on Arm Corstone-300
 
-description: Build Zephyr and run on Arm Corstone-300 Fixed Virtual Platform
+minutes_to_complete: 30
 
-minutes_to_complete: 20
-
-who_is_this_for: This is an introductory topic for software developers getting started with Zephyr RTOS.
+who_is_this_for: This is an introductory topic for software developers getting started with the Zephyr RTOS.
 
 learning_objectives: 
-    - Build and run Zephyr applications on Corstone-300.
+    - Build and run Zephyr applications on the Corstone-300
 
 prerequisites:
     - Some familiarity with embedded C programming
