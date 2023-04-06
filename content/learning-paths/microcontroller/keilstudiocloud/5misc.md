@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Miscellaneous other topics"
+title: "Mbed OS projects"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
