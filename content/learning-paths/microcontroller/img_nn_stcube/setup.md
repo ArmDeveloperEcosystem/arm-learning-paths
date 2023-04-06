@@ -1,24 +1,85 @@
 ---
 # User change
-title: Build an image classification NN model trained with the CIFAR-10 dataset
+title: Prepare environment
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+
+In this learning path, we will build a convolution neural network model for image classification. We will train the model with CIFAR-10 dataset, one of the most popular image datasets, which contains 60,000 images with 10 different categories. The model takes an RGB image and predicts the category of the image.
+
+## Set up Anaconda
+
+Anaconda is a distribution of Python language for data science and machine learning. With Anaconda, you can easily install open-source machine learning packages.
+
+1. Visit the official [Anaconda](https://www.anaconda.com/) page.
+2. Download the Anaconda Installer, and install using default options.
+
+With Anaconda installed, you will now install the necessary `conda` packages for data collection and machine learning including [Jupyter notebook](https://jupyter.org/).
+
+Follow the steps as shown below:
+
+1. First open Anaconda Prompt
+2. Create an environment by typing:
+```console
+conda create -n ml_lab python=3.8
+```
+3. Activate your environment by typing:
+```console
+conda activate ml_lab
+```
+4. Add conda-forge channel to install packages:
+```console
+conda config --add channels conda-forge
+```
+5. Then install python packages:
+```console
+conda install jupyter pandas tensorflow matplotlib numpy 
+```
+6. Users have reported issues where the steps below result in `dead kernel` errors. To address the issue (as described [here](https://github.com/dmlc/xgboost/issues/1715)), use:
+```console
+conda install nomkl
+```
+## Get project files
+
+On your development machine,  All the project files needed to run the examples in this learning path are provided.
+
+The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontroller/img_nn_stcube/Project_Files/img_class_stcube.zip). Unzip into a working folder.
+
+## Open Jupyter Notebook
+
+In the same environment you activated using Anaconda earlier, navigate to the above folder and enter:
+```console
+jupyter notebook lab.ipynb
+```
+You are now ready to train your first neural network model with TensorFlow and deploy the inference with STM Cube AI. 
+
+
+### Data preprocessing
+
+
 Follow all these steps within the `Jupyter notebook` opened in the previous page. Click `Run` to execute each step.
 
 For each step, you will see
-* `In[ ]` when the step has not yet been run
-* `In[*]` when the step is running, and
-* `In[N]`, where `N` is the step number, when complete.
+    * `In[ ]` when the step has not yet been run
+    * `In[*]` when the step is running, and
+    * `In[N]`, where `N` is the step number, when complete.
+    
 
-## Data preprocessing
+
 
 To create the NN model, there are certain data pre-processing steps that need to be performed.
 
-Execute the first code block to import the required packages:
+First, open the Jupyter Notebook through an Anaconda Prompt.
+
+```console
+jupyter notebook
+```
+Open `lab.ipynb` from the extracted project files folder on the notebook.
+
+Execute (click `Run`) the first code block to import the required packages:
 ```python
 import tensorflow as tf
 
@@ -36,9 +97,10 @@ from PIL import Image
 
 import os
 ```
-Next, load the `CIFAR-10` dataset. We can easily get the dataset because TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST.
 
-Execute the next code block to get the dataset.
+Next, load the `CIFAR-10` dataset. We can easily get the dataset because TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the 
+dataset.
+
 ```python
 # Load data from TF Keras
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
@@ -49,7 +111,7 @@ class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog',
 num_classes = len(class_names)
 ```
 
-Then, save one image per class from the test set for testing with the board later. Execute the following to save the images.
+Then, we will save one image per class from the test set for testing with the board later. Execute the following code block to save the images.
 
 ```python
 path_images = "./Data/images/"
@@ -64,7 +126,9 @@ for image_index in range(0,100):
  im = Image.fromarray(x_test[image_index])
  im.save("./images/"+str(class_names[int(y_test[image_index])])+ext)
 ```
+
 This code block below will visualize the saved images.
+
 ```python
 # Show saved images
 files = os.listdir(path_images) 
@@ -79,11 +143,12 @@ for img in files:
  plt.xlabel(os.path.splitext(img)[0])
 plt.show()
 ```
+
 The expected output is shown below
 
 ![output1](Images/lab4_1.PNG)
 
-Next, normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so we divide the training and testing data by 255.
+Next, we will normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so we divide the training and testing data by 255.
 
 ```python
 # Normalize pixel values to be between 0 and 1
@@ -98,7 +163,9 @@ print('y_train shape:', y_train.shape)
 print('x_test shape:', x_test.shape)
 print('y_test shape:', y_test.shape)
 ```
+
 The expected output is shown below:
+
 ```output
 x_train shape: (50000, 32, 32, 3)
 y_train shape: (50000, 10)
@@ -108,7 +175,7 @@ y_test shape: (10000, 10)
 
 ### Create the Model
 
-We will create a small convolutional neural network for image classification. The image size of CIFAR-10 dataset is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is `(32, 32, 3)`. Since the number of classes is 10, so the last dense layer should have 10 units.
+We are going to create a small convolutional neural network for image classification. The image size of CIFAR10 is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is (32, 32, 3). Since the number of classes is 10, so the last dense layer should have 10 units.
 
 Here is an image illustrating the network architecture. Note that only convolution and dense layers are illustrated in this image.
 
@@ -156,7 +223,8 @@ model.add(Dropout(0.5))
 model.add(Dense(10)) #The number of classes we have
 model.add(Activation('softmax'))
 ```
-Execute the code blocks below to compile and train the model. This training uses only one epoch for time constraint, but will still take ~15 minutes to execute.
+
+Execute the code blocks below to compile and train the model. If we use tens of epochs, the training could take more than 10 hours because the dataset has 50,000 training images. Therefore, the model trained for 50 epochs is provided for testing (File: ‘Data/models/cifar10_model.h5’). You can use the model if you don't have enough time to train your own model. 
 
 ```python
 # Check model structure and the number of parameters
@@ -164,8 +232,6 @@ model.summary()
 # Let's train the model using Adam optimizer
 model.compile(loss='categorical_crossentropy', optimizer='adam', 
 metrics=['accuracy'])
-```
-```python
 # Train model
 history = model.fit(x=x_train,
  y=y_train,
@@ -173,9 +239,8 @@ history = model.fit(x=x_train,
  epochs=epochs, 
  validation_data=(x_test, y_test))
 ```
-Save and evaluate the model. Note that since we trained the model for 1 epoch only, the accuracy will not be that good.
 
-You can retry with a larger number of epochs later to obtain better performance. A model trained for 50 epochs is provided (`Data/models/cifar10_model.h5`).
+Let's save the model and evaluate the model. Note that since we trained the model for 1 epoch only, the accuracy would not be that good. Please try a larger number of epochs later to obtain better performance.
 
 ```python
 # Save keras model
@@ -190,11 +255,10 @@ scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
 ```
-### Validation data
 
-Finally, we are going to save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in `CSV` format.
+### Save Data for Testing
 
-Execute the code block to save the test data.
+Finally, we are going to save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in CSV format. Execute the code block to save the test data.
 
 ```python
 path_csv = "./Data/"
