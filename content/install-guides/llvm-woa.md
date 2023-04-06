@@ -33,13 +33,13 @@ The latest version of the LLVM toolchain with Windows on Arm native support is 1
 
 After download, run `LLVM-16.0.0-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
 
-![img1](llvm-setup.png)
+![img1](/install-guides/_images/llvm-setup.png)
 
 Proceed with `Install`. 
 
 The setup will complete successfully. Select `Finish` to close the installer.
 
-![img2](llvm-finish.png)
+![img2](/install-guides/_images/llvm-finish.png)
 
 ## Check Installation
 

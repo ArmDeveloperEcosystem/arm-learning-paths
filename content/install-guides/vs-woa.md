@@ -35,7 +35,7 @@ Once downloaded, run the `VisualStudioSetup.exe` file on a Windows on Arm machin
 # Install C and C++ support in Visual Studio
 During the installation process, you will be asked to choose the workloads you want and customize your installation. At a minimum, select `Desktop development with C++`.
 
-![img1](vs-woa.png)
+![img1](/install-guides/_images/vs-woa.png)
 
 ## Install LLVM support in Visual Studio
 
@@ -43,7 +43,7 @@ To build native Windows Applications using the LLVM toolchain in Visual Studio, 
 
 In the installer, select the `Individual components` tab. Enter `clang` in the search bar. Two results are displayed: The LLVM compiler and MSBuild support for LLVM. Select both these options
 
-![img2](llvm_vs.png)
+![img2](/install-guides/_images/llvm_vs.png)
 
 Different versions of Visual Studio include different LLVM toolchain versions. For example, Visual Studio 2022 Version 17.5.3 installs LLVM 15.0.1.
 
