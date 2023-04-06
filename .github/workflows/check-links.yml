@@ -34,10 +34,6 @@ jobs:
             hugo-version: '0.98.0'
             extended: true
             
-      # Post-CSS install
-      - name: Install Post-CSS
-        run: npm install postcss-cli
-
       # Builds arm-software-developer repo
       - name: Build
         run: hugo --minify
@@ -45,15 +41,11 @@ jobs:
       - name: check html links
         # Don't fail the build on broken links
         continue-on-error: true
-        uses: wjdp/htmltest-action@master
-        with:
-          # For consistency, use the same config file as for local builds
-          config: .htmltest.yml
-      - name: Archive htmltest results
+        run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
+      - name: htmltest results
         uses: actions/upload-artifact@v3
-        # Note: Set ACTIONS_RUNTIME_TOKEN env variable to test with nektos/act
         with:
           name: htmltest-report
-          path: tmp/.htmltest/htmltest.log
+          path: htmltest.log
           retention-days: 7 # Default is 90 days
 
