@@ -30,10 +30,10 @@ This message shows that your installation appears to be working correctly.
 Note: If you do not see the message above, go to [Installing Docker](/install-guides/docker/) and follow the instructions to complete the installation.
 
 The sections describe how you:
-- Build a Docker image
-- Run a Docker container
-- Display local Docker images
-- Save and share the created Docker image
+- [Build a Docker image](#build-a-docker-image-from-a-dockerfile)
+- [Run a Docker container](#create-a-container-from-a-docker-image)
+- [Display local Docker images](#display-local-docker-images)
+- [Save and share the created Docker image](#save-and-share-a-docker-image)
 
 ## Build a Docker image from a Dockerfile
 
@@ -68,7 +68,7 @@ The output depends on the operating system and architecture of your computer. Th
 
 | Operating System and Architecture | Console Output |
 | ----------- | ----------- |
-| Any OS on Intel | `Architecture is x64_86` |
+| Any OS on Intel or AMD | `Architecture is x64_86` |
 | Linux on Arm 64-bit | `Architecture is aarch64` |
 | Linux on Arm 32-bit | `Architecture is armv7l` |
 | macOS on Apple Silicon | `Architecture is arm64` |
