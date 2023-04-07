@@ -21,7 +21,7 @@ This section requires two machines, each with a different architecture. One mach
 
 ## Build a simple Dockerfile to print the machine architecture
 
-Create a new directory and save the two lines below into a file named Dockerfile, or re-use the same file from the previous sections.
+Create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous sections.
 
 ```dockerfile
 FROM ubuntu:latest
@@ -69,9 +69,9 @@ docker manifest create username/uname:latest \
 docker manifest push --purge username/uname:latest
 ```
 
-The `--purge` option is not needed the first time, but to update one of the images and update the multi-arch image it is needed. It doesn't hurt to always use it. 
+The `--purge` option is not needed the first time, but to update one of the images and update the multi-architecture image it is needed. It doesn't hurt to always use it. 
 
-After the `docker manifest push`, a new multi-arch image with the latest tag is available. Running `uname:latest` from either machine now works, and there is no need to pay attention to the architecture.
+After the `docker manifest push`, a new multi-architecture image with the latest tag is available. Running `uname:latest` from either machine now works, and there is no need to pay attention to the architecture.
 
 The experimental docker manifest command offers a way to create multi-architecture images by joining multiple images using a manifest. Docker manifest provides additional features not covered here, and is useful to create, inspect, and modify manifest lists. 
 
