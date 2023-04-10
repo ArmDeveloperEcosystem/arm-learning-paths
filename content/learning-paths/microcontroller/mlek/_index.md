@@ -1,8 +1,6 @@
 ---
 title: Get started with MLEK and Open-IoT-SDK
 
-description: Learn how to build and run reference IoT software stack examples on Arm Corstone-300 FVP.
-
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in using the reference IoT software examples on Arm Corstone-300 FVP.
@@ -13,7 +11,7 @@ learning_objectives:
     - Run the examples on Corstone-300
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
 
 author_primary: Ronan Synnott
 
