@@ -13,14 +13,14 @@
 review:
     - questions:
         question: >
-            Why benchmark cloud-based server instances?
+            Why would you use Geekbench to compare different hardware systems and configurations?
         answers:
             - "Because fastest is best"
             - "To select an appropriate configuration for your workload"
             - "To verify the server is working correctly"
         correct_answer: 2
         explanation: >
-            Cloud based server instances are provided with a number of configuration options. It is best to select an appropriate configuration to balance operating cost and necessary performance.
+            Systems are available with a number of configuration options. It is best to select an appropriate configuration to balance cost and performance.
 
     - questions:
         question: >
