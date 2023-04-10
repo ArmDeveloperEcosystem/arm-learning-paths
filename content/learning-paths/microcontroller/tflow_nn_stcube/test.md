@@ -79,7 +79,7 @@ In this example, see that the training and validation accuracy start to converge
 
 ![output2](Images/output2.PNG)
 
-## Investigate learning rate
+## Investigate learning rate (optional)
 
 For training the model, we used the default learning rate. But how will the model change with different learning rates? If the learning rate is too high, the model is more likely to overshoot the minima, meaning that the model cannot converge to the minima. On the other hand, if the learning rate is too low, the model reaches the minima too slowly, requiring more training time.
 
