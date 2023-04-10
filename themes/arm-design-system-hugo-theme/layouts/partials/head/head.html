@@ -57,17 +57,23 @@ Where it is used:
 
       
 <!-- Content pages only that are not _index, _next-steps, or _review -->
-{{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
-    <!-- already minified, and need the ID to change it as appropritate by theme --> 
-    <link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" media="print" onload="this.media='all'" /> <!-- dark replaced with light in JS if selected via theme change -->
-    <link href="/css/prism-added-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />    <!-- called after prism -->
-{{end}}
 {{if $is_content}}
     {{ $css_content := $all_page_css | append 
         (resources.Get "css/content.css") (resources.Get "css/feedback.css") (resources.Get "css/context-tables.css") (resources.Get "css/content-pages.css")
         | resources.Concat "css/mini_content.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_content.Permalink }}">
 {{end}}
+{{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
+    <!-- already minified, and need the ID to change it as appropritate by theme 
+    <link id="prism-code-theme" href="/css/prism-dark.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="/css/prism-added-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    --> 
+    {{ $css_prism := slice | append (resources.Get "/css/prism-dark.css") (resources.Get "/css/prism-added-styles.css")
+        | resources.Concat "css/mini_prism.css" | minify | fingerprint  }}
+    <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
+
+{{end}}
+
 
 <!-- About page only -->
 {{ if eq "About" .Title  }}
