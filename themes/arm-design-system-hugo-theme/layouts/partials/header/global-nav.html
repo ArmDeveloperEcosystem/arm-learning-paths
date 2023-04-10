@@ -105,6 +105,7 @@ Where it is used:
       alt: 'Arm Dev Hub logo',
     };
 
+    /* Uncomment to allow user to change page width, height, and theme
     const actions = [
       {
         id: 'theme',
@@ -112,23 +113,20 @@ Where it is used:
         icon: 'fal fa-lightbulb',
         title: 'theme',
       },
-      /* Uncomment to allow user to change page width
       {
         id: 'width',
         type: 'button',
         icon: 'fas fa-text-width',
         title: 'width',
       },
-      */
-      /* Uncomment to allow user to change page height
       {
         id: 'height',
         type: 'button',
         icon: 'fas fa-text-height',
         title: 'height',
       },
-      */
     ];
+    */
 
     const contextualData = [
       {
@@ -295,13 +293,14 @@ Where it is used:
 
 
 
-<!-- Search Submit handling -->
+<!-- Search Submit handling 
 <script src="/js/search-and-filter/search-handling.js"></script>
 <script>
       (() => { 
           document.querySelector('#search-box-tools-global-nav').searchSubmitHandler = searchSubmit_Tools;
       })();
 </script>
+-->
 
 
 

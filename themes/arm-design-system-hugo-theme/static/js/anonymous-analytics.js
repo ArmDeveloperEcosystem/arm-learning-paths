@@ -243,10 +243,12 @@ function trackHeaderInteraction(type,name){
             }
                 // trackChoiceFeedback
             let feedback_form = document.getElementById('feedback-choice-form');
-            feedback_form.addEventListener("submit", () => {
-                let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
-                trackChoiceFeedback(feedback);
-            });
+            if (feedback_form) {
+                feedback_form.addEventListener("submit", () => {
+                    let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
+                    trackChoiceFeedback(feedback);
+                });
+            }
 
             // 4a) Navitaion from navbar
             let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  

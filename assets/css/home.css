@@ -68,6 +68,10 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 .homepage-top-divs {
     width:fit-content;  
     margin: 0 auto;
+    text-align: center;
+}
+.homepage-top-desc {
+    margin-bottom: 32px;
 }
 
 #homepage-header {
@@ -84,7 +88,7 @@ html[theme="light"] #homepage-header {
     -webkit-text-fill-color: transparent;
 }
 html[theme="dark"] #homepage-header {
-    background: -webkit-linear-gradient(left,var(--arm-light-blue), var(--arm-green));
+    background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
