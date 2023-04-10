@@ -4,33 +4,65 @@ title: Download and run Geekbench
 weight: 2
 ---
 
-When creating a cloud instance, users may struggle to select an appropriate configuration for their workloads. Simple benchmarking runs on different configurations is a good idea to help you decide.
+When selecting Arm-based hardware, you may need a way to compare different systems and select a hardware configuration for your workload. Running benchmarks on different systems with different configurations is a good way to get more information about system performance. 
 
-[Geekbench](https://www.geekbench.com/index.html) is a cross-platform benchmark that easily measures your system's performance. Preview builds for Arm were provided in [Geekbench 5.4](https://www.geekbench.com/blog/2021/03/geekbench-54/). Newer versions may be available, check the Geekbench [downloads](https://www.geekbench.com/download/) section for latest information.
+[Geekbench](https://www.geekbench.com/index.html) is a cross-platform benchmark that makes it easy to measure system performance. [Preview Versions](https://www.geekbench.com/preview/) are available for Linux on Arm. You can also check the Geekbench [downloads](https://www.geekbench.com/download/) area for additional operating system options.
 
-It provides an overall score (for both single and multi-core configuration), as well as individual performance scores for specific tests, which can easily be compared against other configurations (higher is better).
+Geekbench provides a single-core score and a multi-core score, as well as individual performance scores for specific tests. You can use the scores to compare different systems and different configurations. A higher score is better. 
 
 Additional features are available with a purchased [license](https://www.primatelabs.com/store/).
 
-## Prerequisites
+## Before you begin
 
-You will need a local Arm platform or an [Arm based instance](/learning-paths/server-and-cloud/csp/) from your cloud service providers, running an appropriate operating system (at time of writing, `Ubuntu 16.04 LTS` or later).
+You will need a local Arm platform or an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider. Geekbench 5 requires `Ubuntu 16.04 LTS` or later and Geekbench 6 requires `Ubuntu 18.04 LTS` or later.
 
-## Fetch pre-built binaries
-The binaries are available to download from the Geekbench website directly. Check the website for the latest link. The below is for the 5.4 preview build.
+## Download 
 
-Once downloaded `untar` the archive, and navigate into its directory:
+Both Geekbench 5 and Geekbench 6 binaries are available to download. The instructions below are for the Geekbench 6 preview version.
+
+1. Install `wget` to use for the download:
+
 ```bash
-sudo apt install -y tar wget
-wget https://cdn.geekbench.com/Geekbench-5.4.0-LinuxARMPreview.tar.gz
-tar -xf Geekbench-5.4.0-LinuxARMPreview.tar.gz
+sudo apt install -y wget
 ```
-## Run benchmark
-Run the `geekbench5` benchmark.
-```bash
-cd Geekbench-5.4.0-LinuxARMPreview
-./geekbench5
-```
-It will run a number of single-core and multi-core tests. When complete, it will upload your results to the [Geekbench browser](https://browser.geekbench.com) and provide a link to the specific results for your platform.
 
-You can browse other platform scores, or repeat your test with other cloud configurations to see how they compare. We also encourage you to compare against servers build with other architectures.
+2. Download, extract the archive, and navigate to the directory:
+
+```bash
+wget https://cdn.geekbench.com/Geekbench-6.0.2-LinuxARMPreview.tar.gz
+tar -xf Geekbench-6.0.2-LinuxARMPreview.tar.gz
+cd Geekbench-6.0.2-LinuxARMPreview
+```
+
+## Run 
+
+There is no need for a browser or Linux desktop to run the benchmark. The Linux command line is all you need. 
+
+Run the `geekbench6` benchmark. 
+
+```bash
+./geekbench6
+```
+
+A number of single-core and multi-core tests are run. When complete, Geekbench uploads the results automatically and provides a link to the results. The `<id>` is a number for your run.
+
+```output
+Uploading results to the Geekbench Browser. This could take a minute or two
+depending on the speed of your internet connection.
+
+Upload succeeded. Visit the following link and view your results online:
+
+  https://browser.geekbench.com/v6/cpu/<id>
+```
+
+## Save your results
+
+You can create an account on [Geekbench browser](https://browser.geekbench.com) and save the results from your runs. This makes it easy to run Geekbench on a variety of systems and see your results together and compare them. You can also add notes to the results to help remember information about each run.
+
+The `<id>` and `<key>` will be unique numbers for your run. 
+
+```output
+Visit the following link and add this result to your profile:
+
+  https://browser.geekbench.com/v6/cpu/<id>/claim?key=<key>
+```

@@ -25,6 +25,10 @@ further_reading:
         title: GCP, AWS, and Azure ARM-based server performance comparison
         link: https://apisix.apache.org/blog/2022/08/12/arm-performance-google-aws-azure-with-apisix/
         type: blog
+    - resource:
+        title: Geekbench How it actually works
+        link: https://www.xda-developers.com/geekbench/
+        type: website
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
