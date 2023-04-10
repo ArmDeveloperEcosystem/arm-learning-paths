@@ -12,12 +12,11 @@ layout: "learningpathall"
 
 Modern CPUs have vector units that operate in a SIMD fashion. This greatly improves application performance, depending on the vector width.
 
-The Arm v7 ISA introduced Advanced SIMD or Arm NEON instructions. These instructions are supported on the latest Arm v8 and Arm v9 ISA. NEON registers are composed of 32 128-bit registers V0-V31 and support multiple data types: integer, single-precision (SP) floating-point and double-precision (DP) floating-point.
+The Arm v7 Instruction Set Architecture (ISA) introduced Advanced SIMD or Arm NEON instructions. These instructions are supported on the latest Arm v8 and Arm v9 ISA. NEON registers are composed of 32 128-bit registers V0-V31 and support multiple data types: integer, single-precision (SP) floating-point and double-precision (DP) floating-point.
 
 ## Arm SVE
 
-In order to alleviate restrictions regarding fixed-length vector sizes, Arm has designed the Scalable Vector Extension (SVE).
-
+In order to reduce restrictions regarding fixed-length vector sizes, Arm has designed the Scalable Vector Extension (SVE).
 Arm SVE is vector-length agnostic, allowing vector width from 128 up to 2048 bits. This enables software to scale dynamically to any SVE capable Arm hardware. 
 
 SVE is not an extension of NEON but a separate, optional extension of Arm v8-A with a new set of instruction encodings.
@@ -25,9 +24,9 @@ Initial focus is HPC and general-purpose server. SVE2 extends capabilities to en
 
 ## SVE Vector Length
 
-Even though SVE is vector length agnostic, developers are interested in vector length. Sometimes performance may differ between machines and vector length could be a factor. Operating systems and hypervisors may reduce the vector length for applications so it's a good idea to confirm the vector length during development and when investigating SVE performance. 
+Even though SVE is vector length agnostic, developers are interested in vector length. Sometimes performance may differ between machines and vector length could be a factor impacting the performance. Operating systems and hypervisors may reduce the vector length for applications, so it's a good idea to confirm the vector length while investigating SVE performance. 
 
-To print the vector length copy the program below to file named sve.c 
+Using a text editor of your choice, copy the program below to file named `sve.c`:
 
 ```c
 #include <stdio.h>
@@ -42,22 +41,22 @@ int main()
     printf("SVE vector length is: %ld bytes\n", svcntb());
 }
 ```
-
-Compile the program using the gcc SVE architecture flag for SVE. Without the SVE flag the code will not compile.
+This program prints the vector length.
+Compile the program using the gcc SVE architecture flag for SVE as shown below. Without the SVE flag the code will not compile.
 
 ```bash
 gcc -march=armv8-a+sve sve.c -o sve
 ```
 
-Run the program. 
+Run the program:
 
 ```bash 
 ./sve
 ```
 
-For AWS Graviton3 processors the vector length is printed.
+On AWS Graviton3 processors the output will look like:
 
-```console
+```output
 SVE vector length is: 32 bytes
 ```
 
@@ -79,11 +78,13 @@ SVE is a predicate-centric architecture with:
 
 ### Simple addition example
 
-Here is an example code compiled for SVE (left) and for NEON (right):
+Take a look at the example code compiled for SVE (left) and for NEON (right):
 
 {{< godbolt width="100%" height="700px" mode="diff" lopt="-O3 -march=armv8-a" ropt="-O3 -march=armv8-a+sve" src="int fun(double * restrict a, double * restrict b, int size)\n{\n  for (int i=0; i < size; ++i)\n  {\n    b[i] += a[i];\n  }\n}" >}}
 
-Note how small the SVE assembly is in comparison to NEON. This is due to the predicate behaviour which avoids generating assembly for remainder loops (scalar operations performed when the iteration domain is not a multiple of the vector length). The following describes the behaviour of the SVE assembly. 
+Notice how small the SVE assembly is in comparison to NEON. This is due to the predicate behaviour which avoids generating assembly for remainder loops (scalar operations performed when the iteration domain is not a multiple of the vector length. 
+
+Let's look at what the SVE assembly instructions are doing:
 
 The first 4 lines initialize the registers R2, R3, R4. R2 corresponds to the array size, R3 to the loop index, and R4 to the vector length.
 
