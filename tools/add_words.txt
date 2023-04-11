@@ -1,5 +1,7 @@
 32-bit
 64-bit
+aarch64
+architectures
 bare-metal
 codec
 cross-building
@@ -9,11 +11,13 @@ distributions
 drop-down
 gcc
 how-to
+human-readable
 in-memory
 linker
 Linux
 low-level
 microcontrollers
+multi-architecture
 mutex
 on-screen
 open-source

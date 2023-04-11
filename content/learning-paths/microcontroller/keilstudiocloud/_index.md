@@ -12,7 +12,7 @@ learning_objectives:
     - Run the example on Arm Virtual Hardware
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
 
 author_primary: Christopher Seidl 

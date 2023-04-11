@@ -7,30 +7,19 @@
     # question:         A one sentence question
     # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
     # correct_answer:   An integer indicating what answer is correct (index starts from 0)
-    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
+    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add aditional context if desired
 
 
 review:
     - questions:
         question: >
-            Do Java applications run on Arm servers?
+            Arm Total Solutions for IoT are available as SDKs for use with Arm Virtual Hardware.
         answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                   
+            - "True"
+            - "False"
+        correct_answer: 1
         explanation: >
-            Java does run on Arm servers, use a recent version such ask JDK 11 to get the best performance.
-
-    - questions:
-        question: >
-            Do all containers run on Arm servers?
-        answers:
-            - "Yes"
-            - "No"
-        correct_answer: 2                     
-        explanation: >
-            No. Most containers are multi-architecture images and run on Arm, but not all. Check your containers for Arm support.
-               
+            True. Arm Virtual Hardware provides a ready to use environment to build and test your applications, integrated into CI/CD and MLOps workflows.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

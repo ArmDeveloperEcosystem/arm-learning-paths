@@ -7,13 +7,13 @@
     # question:         A one sentence question
     # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
     # correct_answer:   An integer indicating what answer is correct (index starts from 0)
-    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add aditional context if desired
+    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
 
 review:
     - questions:
         question: >
-            Do the number of color channels in yor dataset impact the input shape of the convolution layer?
+            Do the number of color channels in your dataset impact the input shape of the convolution layer?
         answers:
             - "Yes"
             - "No"

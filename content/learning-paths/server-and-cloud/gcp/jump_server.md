@@ -13,12 +13,12 @@ layout: "learningpathall"
 ### Introduction to Jump Server
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
-### Generate an SSH key-pair
+### Generate an SSH key pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate an SSH key pair (public key, private key) using `ssh-keygen`. To generate the key pair, follow this [documentation](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
-If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+If you already have an SSH key pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
 ### Acquire GCP Access Credentials
@@ -145,9 +145,17 @@ project = "project_ID"
 region = "us-central1"
 zone = "us-central1-a"
 ```
-**NOTE:-** Replace **project_ID** with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In our case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
+
+{{% notice Note %}}
+Replace **project_ID** with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In our case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
+{{% /notice %}}
 
 Now create a **modules** directory and inside it create a **network-firewall** and **vpc-network** directories.
+
+```bash
+mkdir -p modules/network-firewall
+mkdir -p modules/vpc-network
+```
 
 Add the following code in **vpc-network/main.tf**.
 ```console
@@ -461,9 +469,23 @@ Connect to a target server via a Jump Host using the `-J` flag from the command 
   ssh -J username@jump-host-IP username@target-server-IP
 ```
 
-![image](https://user-images.githubusercontent.com/67620689/222424103-1a3309c4-357d-4b23-964d-deb69e69376b.PNG)
+Output should be similar to:
 
-**NOTE:-** Replace **jump-host-IP** with the external IP of the host, **target-server-IP** with the internal IP of the private instance and **username** with the IAM email address like abc@1234.com -> abc_1234_com
+```output
+The authenticity of host '34.90.184.41 (34.90.184.41)' can't be established.
+ECDSA key fingerprint is SHA256:6kCBV5W8ZlXSbxGbFjWVVcKqeMQAYmY1F4VWXhlEKI0.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '34.90.184.41' (ECDSA) to the list of known hosts.
+The authenticity of host '10.0.16.2 (<no hostip for proxy command>)' can't be established.
+ECDSA key fingerprint is SHA256:fwAf7+hlpO4CiUxpAZ38VF+hbWoZAFatQ3mZB/ddltc.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.0.16.2' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-1030-gcp aarch64)
+```
+
+{{% notice Note %}}
+Replace **jump-host-IP** with the external IP of the bastion host, **target-server-IP** with the internal IP of the private instance and **username** with the IAM email address like abc@1234.com -> abc_1234_com
+{{% /notice %}}
 
 
 ### Clean up resources
@@ -472,4 +494,20 @@ Run `terraform destroy` to delete all resources created.
   terraform destroy
 ```
 
-![image](https://user-images.githubusercontent.com/67620689/222353072-8d13897c-ebeb-4c4c-ad31-f65681b74dc6.PNG)
+Output should be similar to:
+
+```output
+module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Destroying... [id=projects/massive-woods-383015/regions/us-central1-a/subnetworks/bastion-subnetwork-private]
+module.management_network.google_compute_subnetwork.vpc_subnetwork_public: Still destroying... [id=projects/massive-woods-383015/regions/u.../subnetworks/bastion-subnetwork-public, 30s elapsed]
+module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Still destroying... [id=projects/massive-woods-383015/regions/u...subnetworks/bastion-subnetwork-private, 10s elapsed]
+module.management_network.google_compute_subnetwork.vpc_subnetwork_public: Destruction complete after 32s
+module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Still destroying... [id=projects/massive-woods-383015/regions/u...subnetworks/bastion-subnetwork-private, 20s elapsed]
+module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Destruction complete after 22s
+module.management_network.google_compute_network.vpc: Destroying... [id=projects/massive-woods-383015/global/networks/bastion-network]
+module.management_network.google_compute_network.vpc: Still destroying... [id=projects/massive-woods-383015/global/networks/bastion-network, 10s elapsed]
+module.management_network.google_compute_network.vpc: Still destroying... [id=projects/massive-woods-383015/global/networks/bastion-network, 20s elapsed]
+module.management_network.google_compute_network.vpc: Destruction complete after 21s
+
+Destroy complete! Resources: 12 destroyed.
+```
+

@@ -16,7 +16,7 @@ It is assumed you have installed Arm Development Studio and configured your lice
 
 Launch the IDE (`armds_ide`). If this is the first time launching the IDE, you will be presented with a pane to set some basic visual preferences. The IDE opens into a workspace, a base directory on your host machine from which all projects are located. You can use `File > Switch Workspace` to select a new location.
 
-You can move indivudual panes around the GUI as you wish, opening other panes with the `+` button visible in the tab bar of panes. If ever you are unhappy with the look, you can select `Window > Perspective > Reset Perspective` from the menu to return to the default configuration. 
+You can move individual panes around the GUI as you wish, opening other panes with the `+` button visible in the tab bar of panes. If ever you are unhappy with the look, you can select `Window > Perspective > Reset Perspective` from the menu to return to the default configuration. 
 
 ## Import and build an example project
 

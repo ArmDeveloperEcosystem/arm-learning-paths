@@ -30,7 +30,7 @@ Examples here are for the Remote.It Desktop Application.
 Refer to [Install CLI](/learning-paths/cross-platform/remoteit/cli) to create connections by command line.
 {{% /notice %}}
 
-Connections made with the Desktop or CLI will default to connect using Peer to Peer and if that fails will try a Proxy connection. You can change this setting by updaing the Routing in your connection configuration.
+Connections made with the Desktop or CLI will default to connect using Peer to Peer and if that fails will try a Proxy connection. You can change this setting by updating the Routing in your connection configuration.
 
 Start the SSH service from the Desktop application on the initiator computer. The url provided resolves to `localhost`. This is so you can bookmark these connections and the connection url can help you identify the connection without knowing which connection and port it is. 
 

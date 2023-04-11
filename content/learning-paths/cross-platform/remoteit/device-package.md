@@ -92,6 +92,6 @@ You can use Remote.It to connect to additional services that are running on your
 
 From your Remote.It Dashboard target device page, click the + (Add Device) link. Select the type of service, leave the service host/url blank and verify the details for port. If your service type is not found, you can select either TCP or UDP and provide the port information.
 
-If you need to create a connection to a port that is not running directly on your target devicem and your target device can access it via internal IP address or internal DNS, add a service in the same way above, but add the details of the IP or interal DNS name in the service host/url field.
+If you need to create a connection to a port that is not running directly on your target device and your target device can access it via internal IP address or internal DNS, add a service in the same way above, but add the details of the IP or internal DNS name in the service host/url field.
 
 Start your connection and use the connection information in the client application that will use the connection. For example, if it is a web address, you will use a browser Or if it is a VNC connection, you will use your VNC client.

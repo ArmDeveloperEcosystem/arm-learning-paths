@@ -8,7 +8,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for embedded software developers interested in building neural network models for microcontrollers.
 
 learning_objectives: 
-    - Build a convolution neural network(CNN) model for image classfication.
+    - Build a convolution neural network(CNN) model for image classification.
     - Run the CNN model on an STM32 B-L475E-IOT01A2 board using STM Cube AI
 
 prerequisites:

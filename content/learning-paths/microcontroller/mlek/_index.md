@@ -1,14 +1,13 @@
 ---
-title: Get started with MLEK and Open-IoT-SDK
+title: Build and run the Arm Machine Learning Evaluation Kit examples
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for embedded software developers interested in using the reference IoT software examples on Arm Corstone-300 FVP.
+who_is_this_for: This is an introductory topic for embedded software developers interested in learning about machine learning.
 
 learning_objectives: 
     - Build examples from Machine Learning Evaluation Kit (MLEK)
-    - Build examples from Open-IoT-SDK
-    - Run the examples on Corstone-300
+    - Run the examples on Corstone-300 FVP or Virtual Hardware
 
 prerequisites:
     - Some familiarity with embedded programming is assumed
@@ -26,8 +25,8 @@ tools_software_languages:
     - C
     - Corstone-300 FVP
     - Arm Virtual Hardware
+    - GCC
     - Arm Compiler for Embedded
-    - AWS EC2
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

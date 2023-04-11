@@ -67,7 +67,7 @@ sudo yum install openssh-server
 
 ### Start and Stop the SSH daemon {#startstop}
 
-The commands below are for any Linux distrbution using systemd. This includes Debian, Ubuntu, and Amazon Linux. 
+The commands below are for any Linux distribution using systemd. This includes Debian, Ubuntu, and Amazon Linux. 
 
 To start the SSH daemon:
 ```console

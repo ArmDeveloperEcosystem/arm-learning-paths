@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 The following prerequisites are needed to try the steps yourself:
 
-- A Linux machine running Ubuntu 22.04 with atleast 60 GB of disk space
+- A Linux machine running Ubuntu 22.04 with at least 60 GB of disk space
 
 ## Introduction
 
@@ -21,7 +21,7 @@ Developers can configure their custom builds of Yocto using a set of recipes. In
 
 ## Build minimal Yocto Linux image for 64-bit Arm target
 
-Poky is a reference distribution of the Yocto Project. It is a great starting point to build your own custom ditribution as it contains both the build system and the the baseline functional distribution. Along with containing recipes for real target boards, it also contains the recipes for building the image for example 64-bit Arm machines supported in QEMU. The example 64-bit machine emulated by QEMU does not emulate any particular board but is a great starting point to learn and try the basics of running this distribution.
+Poky is a reference distribution of the Yocto Project. It is a great starting point to build your own custom distribution as it contains both the build system and the the baseline functional distribution. Along with containing recipes for real target boards, it also contains the recipes for building the image for example 64-bit Arm machines supported in QEMU. The example 64-bit machine emulated by QEMU does not emulate any particular board but is a great starting point to learn and try the basics of running this distribution.
 
 The first step is to install the packages required to build and run Yocto
 

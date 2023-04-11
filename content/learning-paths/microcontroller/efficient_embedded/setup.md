@@ -14,7 +14,7 @@ The first thing to do is set up a new project. Simply open Keil and go to 'Proje
 
 Select an appropriate place and name for the project.
 
-A window will show up requesting you to select the target device for the project. In this exercise, we are targetting the Nucleo F401RE, as shown in this image:
+A window will show up requesting you to select the target device for the project. In this exercise, we are targeting the Nucleo F401RE, as shown in this image:
 
 ![TargetBoard](Images/SelectDevice2.png)
 

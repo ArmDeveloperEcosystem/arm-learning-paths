@@ -18,7 +18,7 @@ already, navigate to `Settings` > `Developer Settings` > `Personal Access Tokens
 
 ## Create a new GitHub repository 
 
-We will create a new repository in GitHub to test a simple hello world commnd running on the Windows Arm VM using GitHub Actions for CI/CD.
+We will create a new repository in GitHub to test a simple hello world command running on the Windows Arm VM using GitHub Actions for CI/CD.
 
 Log in using your GitHub account. Select the [New Button](https://github.com/new) to create a new repository. Give the repository a name. Then select `Create Repository`. 
 

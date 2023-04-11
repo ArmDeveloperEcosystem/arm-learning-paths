@@ -1,30 +1,31 @@
 ---
-title: Learn how to build and run CMSIS-DSP test framework on Corstone-300 FVP
+title: Build and run Arm Total Solutions for IoT
 
-minutes_to_complete: 15
+minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for software developers new to CMSIS-DSP.
+who_is_this_for: This is an introductory topic for embedded software developers interested in using the reference IoT software examples on Arm Corstone-300 FVP.
 
 learning_objectives: 
-    - Build CMSIS-DSP tests for the Corstone-300 FVP
-    - Run CMSIS-DSP tests on the Corstone-300 FVP
+    - Build examples from Open-IoT-SDK
+    - Run the examples on Corstone-300
 
 prerequisites:
     - Some familiarity with embedded programming is assumed
 
-author_primary: Pareena Verma
+author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: Libraries
+subjects: ML
 armips:
     - Cortex-M
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - Arm Virtual Hardware
-    - AWS EC2
     - C
+    - Corstone-300 FVP
+    - Arm Virtual Hardware
+    - Arm Compiler for Embedded
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
