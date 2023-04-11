@@ -25,7 +25,7 @@ If you already have an SSH key pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [documentation](/install-guides/gcp_login).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcp_login).
 
 ### Deploying Arm instances on GCP and providing access via Jump Server
 For deploying Arm instances on GCP and providing access via Jump Server, the Terraform configuration is broken into 4 files: **main.tf**, **outputs.tf**, **variables.tf**, **terraform.tfvars**, and a modules directory that contains **vpc-network** and **network-firewall** directories.
