@@ -18,7 +18,7 @@ In this topic, you will deploy Redis with a Docker container.
 
 You should have the prerequisite tools installed from the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/server-and-cloud/redis/aws_deployment#create-an-aws-ec2-instance-using-terraform).
 
-Use the same AWS access key ID and secret access key and the same SSH key pair.
+Use the same SSH key pair.
 
 ## Create an AWS EC2 instance using Terraform
 

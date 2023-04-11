@@ -41,8 +41,6 @@ After editing the `provider` section, save the file.
 ```console
 provider "aws" {
   region = "us-east-1"
-  access_key  = "Axxxxxxxxxxxxxxxxxxxx"
-  secret_key   = "Rxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 provider "archive" {}

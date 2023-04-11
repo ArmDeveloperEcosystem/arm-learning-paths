@@ -38,9 +38,11 @@ Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use fo
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-### Acquire user credentials
+### Acquire GCP Access Credentials
 
-To obtain user access credentials, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/gcp/terraform#acquire-user-credentials).
+The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
+
+To obtain GCP user credentials, follow this [documentation](/install-guides/gcp_login).
 
 ## Create a GCP instance using Terraform
 

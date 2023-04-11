@@ -12,57 +12,18 @@ layout: "learningpathall"
 
 ## Generate an SSH key pair
 
-Generate an SSH key pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate an SSH key pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Acquire user credentials
-On your local machine, run the following command to obtain user access credentials:
-```
-gcloud auth application-default login
-```
-URL is generated as the output of the command.
 
-```output
-You are running on a Google Compute Engine virtual machine.
-The service credentials associated with this virtual machine
-will automatically be used by Application Default
-Credentials, so it is not necessary to use this command.
+## Acquire GCP Access Credentials
 
-If you decide to proceed anyway, your user credentials may be visible
-to others with access to this virtual machine. Are you sure you want
-to authenticate with your personal account?
+The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-Do you want to continue (Y/n)?  Y
-
-Go to the following link in your browser:
-
-    https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=764083051850-6qr4p6gpi6hn506pt8ejuqx3di341hur.
-    apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fapplicationdefaultauthcode.html&scope=
-    openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-
-    platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Faccounts.reauth&
-    state=QUXo6coL6c6q5aWVuu06B5yKQtigM0&prompt=consent&access_type=offline&code_challenge=yxm7-LJJ6S0I0QmWFHV5B5iuxIj2qRaffjDI9eJ-
-    1E8&code_challenge_method=S256
-
-Enter authorization code:
-```
-
-Open the URL in the browser and copy the authentication code.
-
-![image](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
-
-Now paste the authentication code as below:
-
-```output
-
-Enter authorization code: 4/0AVHEtk63wdhyU3PuszSM-NYL7Gn5JRYHhTH99--zW4siip0hNpPp6Ii_XTGJJksJvV-sAQ
-
-Credentials saved to file: [/home/ubuntu/.config/gcloud/application_default_credentials.json]
-
-These credentials will be used by any library that requests Application Default Credentials (ADC).
-```
+To obtain GCP user credentials, follow this [guide](/install-guides/gcp_login).
 
 ## Terraform infrastructure
 Add resources required to create a VM in `main.tf`.

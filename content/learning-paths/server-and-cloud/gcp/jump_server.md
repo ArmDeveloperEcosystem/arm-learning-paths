@@ -15,15 +15,17 @@ A Jump Server (also known as a bastion host) is an intermediary device responsib
 
 ### Generate an SSH key pair
 
-Generate an SSH key pair (public key, private key) using `ssh-keygen`. To generate the key pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate an SSH key pair (public key, private key) using `ssh-keygen`. To generate the key pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-### Acquire user credentials
+### Acquire GCP Access Credentials
 
-To acquire user credentials follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#acquire-user-credentials).
+The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
+
+To obtain GCP user credentials, follow this [guide](/install-guides/gcp_login).
 
 ### Deploying Arm instances on GCP and providing access via Jump Server
 For deploying Arm instances on GCP and providing access via Jump Server, the Terraform configuration is broken into 4 files: **main.tf**, **outputs.tf**, **variables.tf**, **terraform.tfvars**, and a modules directory that contains **vpc-network** and **network-firewall** directories.
