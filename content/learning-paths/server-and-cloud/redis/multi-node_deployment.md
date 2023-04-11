@@ -16,7 +16,7 @@ You can deploy Redis in a multi-node configuration on AWS Graviton processors us
 
 You should have the prerequisite tools installed from the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/server-and-cloud/redis/aws_deployment).
 
-Use the same AWS access key ID and secret access key and the same SSH key pair.
+Use the same SSH key pair.
 
 ## Create AWS EC2 instances using Terraform
 
@@ -27,8 +27,6 @@ Scroll down to see the information you need to change in `main.tf`.
 ```console
 provider "aws" {
   region = "us-east-2"
-  access_key  = "AXXXXXXXXXXXXXXXXXXX"
-  secret_key   = "AXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
 resource "aws_instance" "redis-deployment" {
   ami = "ami-0ca2eafa23bc3dd01"
@@ -98,7 +96,7 @@ resource "aws_key_pair" "deployer" {
 ```
 Make the changes listed below in `main.tf` to match your account settings.
 
-1. In the `provider` section, update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
+1. In the `provider` section, update value to use your preferred AWS region.
 
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
 

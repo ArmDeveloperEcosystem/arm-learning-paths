@@ -31,21 +31,11 @@ Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use fo
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Generate Access keys (access key ID and secret access key)
+## Acquire AWS Access Credentials
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
-  
-### Go to My Security Credentials
-   
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png "Security credentials")
 
-### On Your Security Credentials page click on create access keys (access key ID and secret access key)
-   
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png "Access keys")
-   
-### Copy the Access Key ID and Secret Access Key 
-
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png "Copy keys")
+To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
 
 ## Create your first Terraform infrastructure (main.tf)
 
@@ -69,9 +59,7 @@ This is how `main.tf` will look like for AWS:
 
 ```console   
       provider "aws" {
-      region     = "eu-central-1"
-      access_key = "XXXXXXXXXXXXXXXXXXXX"
-      secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        region     = "us-east-2"
       } 
 ```
 
@@ -116,8 +104,6 @@ resource "aws_instance" "ec2_example" {
 ```console
 provider "aws" {
   region     = "us-east-2"
-  access_key = "Axxxxxxxxxxxxxxxxxxxx"
-  secret_key = "JzZKiCia2vjbq4zGGGxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 resource "aws_instance" "ec2_example" {

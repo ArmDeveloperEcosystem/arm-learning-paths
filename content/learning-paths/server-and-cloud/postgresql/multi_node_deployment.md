@@ -16,7 +16,7 @@ You can deploy PostgreSQL on a three-node cluster running on AWS Graviton proces
 
 You should have the prerequisite tools installed from the previous topic, [Deploy a single instance of PostgreSQL](../single_node_deployment/). 
 
-Use the same AWS access key ID and secret access key and the same SSH key pair. 
+Use the same SSH key pair.
 
 ## Create three AWS EC2 instances using Terraform
 
@@ -35,8 +35,6 @@ There are three required modifications to `main.tf`. Each change is marked with 
 // instance creation
 provider "aws" {
   region = "us-east-1"
-  access_key  = "AXXXXXXXXXXXXXXXXXXXX"
-  secret_key  = "AXXXXXXXXXXXXXXXXXXXX"
 }
 // 3 node change: add the count line to specify 3 instances
 resource "aws_instance" "PSQL_TEST" {

@@ -29,11 +29,11 @@ Before you begin you will also need:
 
 The instructions to create the keys are below.
 
-### Generate AWS access keys 
+### Acquire AWS Access Credentials
 
-Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
+The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
-To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws-terraform/terraform#generate-access-keys-access-key-id-and-secret-access-key).
+To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
 
 Before you begin, confirm you have an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) and you can login to the AWS console.
 
@@ -69,8 +69,6 @@ After editing the `provider` section, save the file.
 ```console
 provider "aws" {
   region = "us-east-1"
-  access_key  = "Axxxxxxxxxxxxxxxxxxxxxxxxx"
-  secret_key   = "Rxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 provider "archive" {}

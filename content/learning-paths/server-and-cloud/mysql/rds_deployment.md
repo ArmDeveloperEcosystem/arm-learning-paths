@@ -11,15 +11,13 @@ layout: "learningpathall"
 ## Deploy MySQL RDS instances
 
 RDS is a Relational database service provided by AWS. More information can be found [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html). To deploy a MySQL RDS instance, we need to create a `main.tf` Terraform file.
-To generate an access key and secret key, follow the instructions mentioned in this [document](/learning-paths/server-and-cloud/mysql/ec2_deployment#generate-ssh-key-pair-on-local-host).
+To generate and configure the Access key ID and Secret access key, follow the instructions mentioned in this [document](/install-guides/aws_access_keys).
 
 Here is the complete main.tf file:
 
 ```console
 provider "aws" {
   region = "us-east-2"
-  access_key  = var.access_key # access through credential file. 
-  secret_key   = var.secret_key
 }
 
 resource "aws_db_instance" "Testing_Mysql" {
@@ -58,18 +56,7 @@ variable "password"{
       default  = "Arm4test"    #we_can_choose_any_password, except special_characters.
 }
 
-variable "access_key"{
-      default  = "AKIXXXXXXXXXXXXXX"
-}
-
-variable "secret_key"{
-      default  = "EXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-}
 ```
-
-{{% notice Note %}}
-Replace `secret_key` and `access_key` with your AWS credentials.
-{{% /notice%}}
 
 Now, use the below Terraform commands to deploy the `main.tf` file.
 

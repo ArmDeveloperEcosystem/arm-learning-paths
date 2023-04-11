@@ -38,11 +38,11 @@ Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use fo
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-### Generate AWS access keys
+### Acquire AWS Access Credentials
 
-Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI.
+The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
-To generate an access key and secret access key, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/aws-terraform/terraform#generate-access-keys-access-key-id-and-secret-access-key).
+To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
 
 ## Create an AWS EC2 instance using Terraform
 
@@ -55,8 +55,6 @@ Scroll down to see the information you need to change in `main.tf`
 // instance creation
 provider "aws" {
   region = "us-east-1"
-  access_key  = "AXXXXXXXXXXXXXXXXXXXX"
-  secret_key  = "AXXXXXXXXXXXXXXXXXXXX"
 }
 resource "aws_instance" "PSQL_TEST" {
   ami           = "ami-0f9bd9098aca2d42b"
@@ -125,7 +123,7 @@ resource "local_file" "inventory" {
 
 Make the changes listed below in `main.tf` to match your account settings.
 
-1. In the `provider` section, update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
+1. In the `provider` section, update value to use your preferred AWS region.
 
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm in the us-east-1 region is `ami-0f9bd9098aca2d42b ` No change is needed if you want to use Ubuntu AMI in us-east-1. The AMI ID values are region specific and need to be changed if you use another AWS region. Use the AWS EC2 console to find an AMI ID or refer to [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
 

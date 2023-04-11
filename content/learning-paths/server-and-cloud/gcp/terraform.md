@@ -18,22 +18,11 @@ Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Acquire user credentials
-Run the following command to obtain user access credentials:
-```
-gcloud auth application-default login
-```
-URL is generated as the output of the command.
+## Acquire GCP Access Credentials
 
-![image](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
+The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-Open the URL in the browser and copy the authentication code.
-
-![image](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
-
-Now paste the authentication code as below:
-
-![image](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
+To obtain GCP user credentials, follow this [documentation](/install-guides/gcp_login).
 
 ## Terraform infrastructure
 Add resources required to create a VM in `main.tf`.

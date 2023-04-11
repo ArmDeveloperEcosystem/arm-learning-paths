@@ -38,11 +38,11 @@ Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use fo
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-### Azure authentication
+### Acquire Azure Access Credentials
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For Azure authentication, follow the [steps from the Terraform Learning Path](/learning-paths/server-and-cloud/azure/terraform#azure-authentication).
+For Azure authentication, follow this [documentation](/install-guides/azure_login).
 
 ## Create an Azure instance using Terraform
 For Azure Arm based instance deployment, the Terraform configuration is broken into four files: `providers.tf`, `variables.tf`, `main.tf`, and `outputs.tf`.

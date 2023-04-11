@@ -30,19 +30,11 @@ documentation](/install-guides/ssh#ssh-keys).
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Azure authentication
+## Acquire Azure Access Credentials
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For Azure authentication, we need to run `az login` which provides code to run in browser.
-
-![image](https://user-images.githubusercontent.com/42368140/196459799-6278da9d-e91c-4dc1-b8c3-c327dfa0394b.png)
-
-Run in browser as below:
-![image](https://user-images.githubusercontent.com/42368140/196459871-9a3e1c1e-0582-4d55-838a-03e397d68ed7.png)
-
-You will see details in command line as below after logging in browser
-![image](https://user-images.githubusercontent.com/42368140/197953418-ddb9cd41-72b9-4a97-88f1-1f490644f36b.PNG)
+For Azure authentication, follow this [documentation](/install-guides/azure_login).
 
 ## Image References
 
