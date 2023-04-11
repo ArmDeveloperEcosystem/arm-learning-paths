@@ -13,12 +13,12 @@ layout: "learningpathall"
 ### Introduction to Jump Server
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
-### Generate an SSH key-pair
+### Generate an SSH key pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate an SSH key pair (public key, private key) using `ssh-keygen`. To generate the key pair, follow this [documentation](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
-If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
+If you already have an SSH key pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
 ### Acquire user credentials
