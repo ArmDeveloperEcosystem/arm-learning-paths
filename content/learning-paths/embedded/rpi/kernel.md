@@ -32,7 +32,7 @@ The cloud server data shown is for an always free A1 instance on Oracle Cloud wi
 
 The kernel build command sequence is shown below for reference.
 
-For the Raspbery Pi 4:
+For the Raspberry Pi 4:
 
 ```console
 sudo apt install git bc bison flex libssl-dev make

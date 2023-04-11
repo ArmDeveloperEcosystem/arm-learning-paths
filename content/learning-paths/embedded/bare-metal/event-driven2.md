@@ -194,14 +194,14 @@ Finally we can create our `fiqHandler()` function, either in its own source file
 void fiqHandler(void) {
   uint32_t intid;
   intid = readIAR0(); // Read the interrupt id
-  printf("Interrupt %d occured\n", intid);
+  printf("Interrupt %d occurred\n", intid);
 
   if (intid == 29) {
     disableTimer();
 	flag = 1;
   }
   else
-	printf("Another interrupt occured??\n");
+	printf("Another interrupt occurred??\n");
 
   writeEOIR0(intid); // Clear interrupt
   return;
@@ -224,4 +224,4 @@ To enable the timer in the FVP, add the `-C bp.refcounter.non_arch_start_at_defa
 ```command
 FVP_Base_Cortex-A73x2-A53x4 -C bp.refcounter.non_arch_start_at_default=1 -a hello.axf
 ```
-Observe the application reporting that the exception occured.
+Observe the application reporting that the exception occurred.

@@ -80,7 +80,7 @@ lower_el_aarch64_fiq:
 
 ## Create first level FIQ Handler
 
-Each exception has a window of 0x80 bytes in the vector table area to use for its code. In this case we will simply branch to `fiqFirstLevelHandler`, which preserves all registers, before calling `fiqHandler()` (which we shall implement later). When `fiqHandler()` returns, we undo the register preservation, before returning to where the code was before the exception occured, using the `ERET` instruction.
+Each exception has a window of 0x80 bytes in the vector table area to use for its code. In this case we will simply branch to `fiqFirstLevelHandler`, which preserves all registers, before calling `fiqHandler()` (which we shall implement later). When `fiqHandler()` returns, we undo the register preservation, before returning to where the code was before the exception occurred, using the `ERET` instruction.
 
 Add the following to your `vectors.s`:
 #### vectors.s

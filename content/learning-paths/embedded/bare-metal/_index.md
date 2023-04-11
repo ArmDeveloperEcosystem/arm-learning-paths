@@ -13,7 +13,7 @@ learning_objectives:
     - Extend example to implement basic exception handling
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
 
 author_primary: Ronan Synnott
 

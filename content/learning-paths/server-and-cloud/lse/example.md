@@ -70,7 +70,7 @@ gcc -g atomic.c -o a1 -march=armv8-a -lpthread
 objdump -S a1 > a1.dis
 ```
 
-Review the diassembly file `a1.dis` and check the instructions for incrementing acnt. The sequence is:
+Review the disassembly file `a1.dis` and check the instructions for incrementing acnt. The sequence is:
 
 - Address of acnt is loaded into x0
 - Value of acnt is loaded into w1 using load exclusive

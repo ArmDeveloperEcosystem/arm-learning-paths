@@ -142,7 +142,7 @@ To make environment variables persistent, it is possible to store them in the .b
     ```
 ```
 
-If you want to manage the environement with a tool such as [environment modules](https://modules.sourceforge.net/) to load the enviroment, you can couple `env_source` with `pre_cmd` which will silently run a command before instructions in the code block:
+If you want to manage the environment with a tool such as [environment modules](https://modules.sourceforge.net/) to load the environment, you can couple `env_source` with `pre_cmd` which will silently run a command before instructions in the code block:
 
 ```
     ```bash { env_source="/usr/share/modules/init/bash", pre_cmd="module load gcc-12" }

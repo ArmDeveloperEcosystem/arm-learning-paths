@@ -60,7 +60,7 @@ Run the password command to set a password for VNC. This is not the password for
 vncpasswd
 ```
 
-Remember the password for later when the client is conneted. 
+Remember the password for later when the client is connected. 
 
 ### Configure the desktop startup
 
@@ -100,7 +100,7 @@ Use sudo or root as it is located in a read-only area.
  WantedBy=multi-user.target
 
  ```
-The commands below are for any Linux distrbution using `systemd`.
+The commands below are for any Linux distribution using `systemd`.
 
 To start the SSH daemon:
 

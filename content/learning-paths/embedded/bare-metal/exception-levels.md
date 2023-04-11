@@ -35,7 +35,7 @@ We will also need to modify the `EL3` initialization:
 * Create an `EL3` stack (as `__main` will now be called in `EL1`)
 * Disable timer exceptions at `EL3`
 * Set `EL1` execution state to be `Aarch64`
-* Execute priviledged code (`gicInit`) before switching to `EL1`
+* Execute privileged code (`gicInit`) before switching to `EL1`
 * Switch to `EL1` level
 
 ### EL3 stack

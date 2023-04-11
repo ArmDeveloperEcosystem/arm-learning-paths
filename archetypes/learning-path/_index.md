@@ -5,7 +5,7 @@ description: PLACEHOLDER DESCRIPTION
 
 minutes_to_complete: PLACEHOLDER MINUTES
 
-who_is_this_for: PLACEHOLDER SENTANCE
+who_is_this_for: PLACEHOLDER SENTENCE
 
 learning_objectives: 
     - PLACEHOLDER OBJECTIVE 1
