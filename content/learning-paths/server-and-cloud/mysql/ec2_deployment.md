@@ -13,7 +13,7 @@ layout: "learningpathall"
 ## Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [
-documentation](/install-guides/ssh#ssh-keys).
+guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -23,7 +23,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
-To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
 
 ## Deploy EC2 instance via Terraform
 
