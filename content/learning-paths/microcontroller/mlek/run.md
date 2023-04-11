@@ -47,7 +47,7 @@ End the simulation by pressing Control-C in the terminal where to started the FV
 
 You now have the ML Evaluation Kit examples running. Experiment with the different examples provided.
 
-## Addedum: Setting model parameters
+## Addendum: Setting model parameters
 
 You can specify additional parameters to configure certain aspects of the simulated Corstone-300.
 
