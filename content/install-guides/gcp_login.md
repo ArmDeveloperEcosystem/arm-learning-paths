@@ -20,11 +20,9 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Before moving ahead make sure that Google Cloud CLI is installed in your local sysytem. To install Google Cloud CLI, follow this [documentation](/install-guides/gcloud).
+Before you begin, make sure that Google Cloud CLI is installed in your local machine. To install Google Cloud CLI, follow this [guide](/install-guides/gcloud).
 
-In this section you will see on how to obtain user access credentials via a web flow and puts them in the well-known location for Application Default Credentials (ADC).
-
-Feel free to seek out additional login tutorials or add more information to this page.
+In this section you will see on how to obtain user access credentials through a web flow. You will puts the credentials in a well-known location for Application Default Credentials (ADC).
 
 ## Acquire user credentials
 
@@ -34,7 +32,7 @@ Run the following command to obtain user access credentials::
 gcloud auth application-default login
 ```
 
-URL is generated as the output of the command.
+A URL is generated as the output of the command:
 
 ![image](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
 
@@ -42,8 +40,8 @@ Open the URL in the browser and copy the authentication code.
 
 ![image](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
 
-Now paste the authentication code as below:
+Now paste the authentication code as shown below:
 
 ![image](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
 
-After successfully logging in, you will then be able to use automation tools like Terraform from the terminal that is logged in.
+After successfully logging in, you will be able to use automation tools like Terraform from the terminal.
