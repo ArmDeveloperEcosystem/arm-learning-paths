@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 # Application setup
 
-In this Learning Path, we are going to port an edge detection algorithm on an embedded Linux aarch64 system using Docker containers.
+In this Learning Path, we are going to port an edge detection algorithm on an embedded Linux aarch64 system.
 
-The application already builds on x86_64. Clone the repository with:
+The application already builds on Linux x86_64. Clone the repository with:
 
 ```bash
 git clone https://github.com/m3y54m/sobel-simd-opencv.git

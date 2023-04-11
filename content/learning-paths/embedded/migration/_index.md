@@ -3,7 +3,7 @@ title: Migrating x86_64 workloads to aarch64
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for embedded software developers looking at migrating containerized workload to aarch64.
+who_is_this_for: This is an advanced topic for embedded software developers looking at migrating Linux workloads to aarch64.
 
 learning_objectives: 
     - Software migration methodology
@@ -11,11 +11,11 @@ learning_objectives:
     - Porting compiler intrinsics
 
 prerequisites:
-    - Knowledge about software containers
-    - Understanding of building workflows
+    - Understanding of software containers
+    - Knowledge about building workflows
     - Access to an aarch64 or x86_64 machine 
 
-author_primary: Kasper Mecklenburg, Florent Lebeau
+author_primary: Kasper Mecklenburg
 
 ### Tags
 skilllevels: Advanced
