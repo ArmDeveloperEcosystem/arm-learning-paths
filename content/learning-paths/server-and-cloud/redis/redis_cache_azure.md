@@ -34,12 +34,12 @@ The instructions to login to the Azure CLI and create the keys are below.
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For Azure authentication, follow this [documentation](/install-guides/azure_login).
+For Azure authentication, follow this [guide](/install-guides/azure_login).
 
 ### Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Azure instance access. To generate the key-pair, follow this [
-documentation](/install-guides/ssh#ssh-keys).
+guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}} 
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
