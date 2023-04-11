@@ -7,13 +7,16 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Before you begin
 
 This Learning Path assumes you have a  Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or a Lenovo Thinkpad X13s laptop running Windows 11. 
 
-All major cloud csp have introduced Arm virtual machine instances. For more information about how to get started refer to [Getting Started with Arm-based Cloud Services](/learning-paths/server-and-cloud/csp/). 
+WSL is beneficial if you use develop on Arm virtual machine instances in the cloud.
 
-Using the same Arm architecture on a local development machine and on the cloud provides interoperability, consistency, and saves time. 
+WSL is also useful if you are developing with embedded Linux on Arm on single board computers. 
+
+Using the same Arm architecture on your local development machine and on the cloud or your embedded board provides interoperability, consistency, and saves time. 
+
 
 ## Installing WSL 2
 
@@ -25,21 +28,29 @@ WSL 2 can also run containers for application development. WSL 2 provides much f
 
 Installing WSL 2 requires Windows 11. A recent Windows 10 version is also possible, but these instructions were tested on Windows 11. Windows 11 is recommended to complete all of the examples in this Learning Path. All of the examples have been tested using WSL2. If only WSL is specified it means WSL2.
 
-Below is the short version on how to install WSL2. Microsoft documentation provides a [Quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
+Below is the short version on how to install WSL2. Microsoft documentation provides a [quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
 
 There are three steps to setup WSL 2.
 
-First, open “Turn Windows features on or off” in the Windows control panel and make sure “Virtual Machine Platform” and “Windows Subsystem for Linux” are checked. 
+1. Enable Windows features
+
+Open “Turn Windows features on or off” in the Windows control panel and make sure “Virtual Machine Platform” and “Windows Subsystem for Linux” are checked. 
 
 ![Turn Windows features on or off](https://dev-to-uploads.s3.amazonaws.com/i/9kubnntqzsfq9lxfrfrk.PNG#center)
 
-Next, download and install WSL 2 from the [Microsoft Store](https://apps.microsoft.com/store/detail/windows-subsystem-for-linux-preview/9P9TQF7MRM4R).
+2. Download WSL
 
-The last step is to set the default version to WSL 2 by running the following command at a PowerShell or Command Prompt.
+Download and install WSL 2 from the [Microsoft Store](https://apps.microsoft.com/store/detail/windows-subsystem-for-linux-preview/9P9TQF7MRM4R).
+
+3. Set the default to WSL 2
+
+Set the default version to WSL 2 by running the following command at a PowerShell or Command Prompt.
 
 ```console
 wsl --set-default-version 2
 ```
+
+## Install a Linux distribution
 
 Once WSL 2 is installed, the Microsoft store is the easiest place to find a Linux distribution. [Installing Ubuntu 22.04](https://apps.microsoft.com/store/detail/ubuntu-22041-lts/9PN20MSR04DW) is quick and easy from the store. 
 
@@ -47,7 +58,7 @@ There are other Linux distributions available in the Microsoft Store. Make sure 
 
 Another way to install Linux distributions is using the WSL command. 
 
-Using a Windows Command Prompt list the distributions available.
+Using a Windows Command Prompt list the distributions available:
 
 ```cmd 
 wsl --list --online
@@ -77,15 +88,15 @@ Windows Terminal supports multiple command lines: PowerShell, Command Prompt, an
 
 From Windows, bash.exe (or just bash) can be used to run commands in WSL. 
 
-The default WSL distribution can be entered by running bash from a Windows Command Prompt.
+You can enter the default WSL distribution by running bash from a Windows Command Prompt:
 
 ```cmd
 bash.exe
 ```
 
-The -c option to bash.exe can be used to run a command in WSL and collect the result. 
+Use the -c option to bash.exe to run a command in WSL and collect the result. 
 
-List the contents of /usr/bin in WSL from a Windows Command Prompt.
+To list the contents of /usr/bin in WSL from a Windows Command Prompt run:
 
 ```cmd
 bash.exe -c "ls /usr/bin"
@@ -93,53 +104,52 @@ bash.exe -c "ls /usr/bin"
 
 ## WSL command line options
 
-Review the  WSL command line options.
+Here is a quick review the  WSL command line options.
+
+Print the usage information and see the command line arguments:
 
 ```console
 wsl --help
 ```
 
-List the installed distributions. 
+List the installed distributions: 
 
 ```console
 wsl --list
 ```
 
-List only the running distributions.
+List only the running distributions:
 
 ```console
 wsl --list --running
 ```
 
-Terminate a running distribution.
+Terminate a running distribution:
 
 ```console
 wsl --terminate Ubuntu-22.04
 ```
 
-Shutdown all running distributions.
+Shutdown all running distributions:
 
 ```console
 wsl --shutdown
 ```
 
-Unregister the Linux distribution and delete the filesystem.
+Unregister the Linux distribution and delete the filesystem:
 
 ```console
 wsl --unregister Ubuntu-22.04
 ```
 
-To update WSL use the update flag.
+Update WSL to the latest version:
 
 ```console
 wsl --update
 ```
 
-To start the default distribution.
+Start the default distribution:
 
 ```console
 wsl
 ```
-
-
-
