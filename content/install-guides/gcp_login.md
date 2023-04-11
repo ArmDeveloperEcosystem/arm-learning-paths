@@ -1,13 +1,15 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Acquire GCP Access Credentials for Automation
+title: Google Cloud Credentials
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
+
+author_primary: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login
@@ -20,9 +22,11 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Before you begin, make sure that Google Cloud CLI is installed in your local machine. To install Google Cloud CLI, follow this [guide](/install-guides/gcloud).
+In this section you will learn how to obtain user access credentials for Google Cloud using a web flow. You will puts the credentials in a well-known location for Application Default Credentials (ADC).
 
-In this section you will see on how to obtain user access credentials through a web flow. You will puts the credentials in a well-known location for Application Default Credentials (ADC).
+## Before you begin
+
+Install the Google Cloud CLI on your machine using the [install guide](/install-guides/gcloud/).
 
 ## Acquire user credentials
 
@@ -44,4 +48,4 @@ Now paste the authentication code as shown below:
 
 ![image](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
 
-After successfully logging in, you will be able to use automation tools like Terraform from the terminal.
+After a successful log in, you will be able to use the Google Cloud CLI and automation tools like Terraform from the terminal.
