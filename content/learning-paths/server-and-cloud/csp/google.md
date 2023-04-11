@@ -29,7 +29,7 @@ Also note in which [region](https://cloud.google.com/compute/docs/regions-zones#
 
 ## Create your Compute Engine instance
 
-The easiest way to launch your instance is via the [Google Cloud Console](https://console.cloud.google.com). Activities can be seperated by `Project`. By default, when you first login, you will be in `My First Project`. If you wish to rename this, navigate to `IAM & Admin` > `Settings`, and rename. You can also create new project(s) from the pull down menu, or [directly](https://console.cloud.google.com/projectcreate).
+The easiest way to launch your instance is via the [Google Cloud Console](https://console.cloud.google.com). Activities can be separated by `Project`. By default, when you first login, you will be in `My First Project`. If you wish to rename this, navigate to `IAM & Admin` > `Settings`, and rename. You can also create new project(s) from the pull down menu, or [directly](https://console.cloud.google.com/projectcreate).
 
 Select `Compute Engine` from the `Quick access` section, if shown. Else navigate to `Compute Engine` > `VM instances`. If it is your first time, you will be prompted to enable `Compute Engine API`. Go to the [VM instances](https://console.cloud.google.com/compute/instances) area of the console.
 
@@ -63,7 +63,7 @@ When satisfied, click `CREATE`. After a few moments the instance will be availab
 
 ## Connect to your instance
 
-Once running, the IP addresse will be displayed, and you are able to connect to the instance.
+Once running, the IP address will be displayed, and you are able to connect to the instance.
 
 Select `Open in browser window` to open an SSH shell directly.
 

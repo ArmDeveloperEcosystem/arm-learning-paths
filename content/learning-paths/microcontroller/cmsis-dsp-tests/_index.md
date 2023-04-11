@@ -10,7 +10,7 @@ learning_objectives:
     - Run CMSIS-DSP tests on the Corstone-300 FVP
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
 
 author_primary: Pareena Verma
 
