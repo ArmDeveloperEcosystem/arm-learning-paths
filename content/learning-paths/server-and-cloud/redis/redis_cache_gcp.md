@@ -34,12 +34,12 @@ The instructions to login to the Google Cloud CLI and create the keys are below.
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [documentation](/install-guides/gcp_login).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcp_login).
 
 ### Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for GCP instance access. To generate the key-pair, follow this [
-documentation](/install-guides/ssh#ssh-keys).
+guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}} 
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
