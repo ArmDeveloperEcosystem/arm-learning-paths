@@ -69,7 +69,7 @@ Run following command to connect to VM through SSH:
 ssh <username>@<Public IP>
 ```
 {{% notice Note %}}
-Replace `<username>` with the user name that created the SSH key you have uploaded. The `<Public IP>` can be retrieved from the UI when the instance is online.
+Replace `<username>` with the user name that created the SSH key you have uploaded. The `<Public IP>` can be retrieved from the console when the instance is online.
 {{% /notice %}}
 
 Output should be similar to:
