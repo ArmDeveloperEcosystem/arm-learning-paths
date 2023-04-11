@@ -26,7 +26,7 @@ Three tools are required on the computer you are using. Follow the links to inst
 
 The installation of Terraform on your desktop or laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For Azure authentication, follow this [documentation](/install-guides/azure_login).
+For Azure authentication, follow this [guide](/install-guides/azure_login).
 
 ## Create an SSH key pair
 
