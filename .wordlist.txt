@@ -541,7 +541,7 @@ NvChad
 OAuth
 OCI
 OCRv
-OCR’s
+OCR's
 OLAP
 ONEDNN
 OTG
