@@ -84,6 +84,6 @@ docker buildx build --platform linux/amd64 -t arm-compiler-for-linux .
 As an alternative, you can also pull the image from Docker Hub:
 
 ```bash
-docker pull flebeau/arm-compiler-for-linux
-docker tag flebeau/arm-compiler-for-linux arm-compiler-for-linux
+docker pull armswdev/arm-compiler-for-linux
+docker tag armswdev/arm-compiler-for-linux arm-compiler-for-linux
 ```
