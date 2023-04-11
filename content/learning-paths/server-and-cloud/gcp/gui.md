@@ -17,7 +17,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 {{% /notice %}}
 
 ## Deploy Arm based VMs via GUI
-Log in to your Google account and in the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135).
+Log in to your Google account and in the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135) ( you may need to enable the API the first time).
 
 ![image](https://user-images.githubusercontent.com/67620689/202090364-2946214c-2347-4538-b2b0-3a36f45caee0.PNG)
 
@@ -66,6 +66,18 @@ To create and start the VM, click Create.
 Run following command to connect to VM through SSH:
 
 ```
-ssh ubuntu@<Public IP>
+ssh <username>@<Public IP>
 ```
-![image](https://user-images.githubusercontent.com/67620689/227440469-b3d8c556-326d-498d-8e78-668fe68c4eb0.PNG)
+{{% notice Note %}}
+Replace `<username>` with the user name that created the SSH key you have uploaded. The `<Public IP>` can be retrieved from the UI when the instance is online.
+{{% /notice %}}
+
+Output should be similar to:
+
+```output
+The authenticity of host '34.91.147.54 (34.91.147.54)' can't be established.
+ECDSA key fingerprint is SHA256:xwUGlczMr7M0ekr3g4axqREera7wUsCc1vEWpeENUAo.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '34.91.147.54' (ECDSA) to the list of known hosts.
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-1030-gcp aarch64)
+```
