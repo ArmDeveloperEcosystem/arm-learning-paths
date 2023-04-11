@@ -32,7 +32,7 @@ Use Ctrl-D to end the cat command after one line of text has been entered.
 
 Do the same thing on the second web server.
 
-If Nginx was running before you created the file on the two webservers, restart it on each web server and on the API gateway using the command:
+If Nginx was running before you created the file on the two web servers, restart it on each web server and on the API gateway using the command:
 
 ```console
 systemctl restart nginx

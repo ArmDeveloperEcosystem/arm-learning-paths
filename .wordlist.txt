@@ -110,6 +110,7 @@ Pareena
 PassRole
 Portainer
 PowerShell
+powershell
 Pytorch
 Quickstart
 README
@@ -117,6 +118,7 @@ RHEL
 RTOS
 Ronan
 SDK
+SDKs
 SLES
 SSK
 SSKs
@@ -254,6 +256,7 @@ ppc
 pre
 printf
 profiler
+pstools
 pulldown
 py
 readme
@@ -652,7 +655,6 @@ TPROC
 TVAL
 TVM
 TVMC
-TVM’s
 TargetBoard
 TargetOptions
 Tbrk
@@ -737,6 +739,7 @@ Zynq
 aaarch
 abc
 accelerometer
+acknowledgements
 acnt
 acq
 ade
