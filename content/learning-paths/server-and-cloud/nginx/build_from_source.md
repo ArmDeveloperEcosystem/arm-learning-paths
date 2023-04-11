@@ -4,17 +4,15 @@ weight: 3
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Before you begin
 
-A physical machine or cloud instance with Ubuntu installed.
-
-Update the Ubuntu repository information.
+To build Nginx from source, first update the Ubuntu repository information:
 
 ```bash
 sudo apt-get update
 ```
 
-Install the needed tools and libraries to build from source.
+Next, install the needed tools and libraries:
 
 ```bash
 sudo apt-get install wget unzip mercurial gcc libssl-dev make -y
@@ -23,9 +21,9 @@ sudo apt-get install wget unzip mercurial gcc libssl-dev make -y
 
 ## Build Nginx from source
 
-Refer to [the documentation](http://nginx.org/en/docs/configure.html) for more details on to build Nginx from the source.
+Refer to [the official documentation](http://nginx.org/en/docs/configure.html) for details on to build Nginx from the source or follow the quick start steps as shown below.
 
-### Quick start 
+### Quick start for building Nginx from source
 
 Follow these steps to build Nginx from source.
 
@@ -36,7 +34,7 @@ wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-1
 unzip pcre2-10.40.zip
 ```
 
-The zlib library distribution (version 1.1.3 - 1.2.11) needs to be downloaded from the [zlib](https://zlib.net/fossils/) site and extracted. 
+Download and extract the [zlib](https://zlib.net/fossils/) library distribution (version 1.1.3 - 1.2.11):
 
 ```bash
 wget https://zlib.net/fossils/zlib-1.2.11.tar.gz
@@ -50,7 +48,7 @@ hg clone http://hg.nginx.org/nginx
 cd nginx/
 ```
 
-The build is configured using the **configure** command. It defines various aspects of the system, including the methods Nginx is allowed to use for connection processing. In the end, it creates a Makefile.
+The build is configured using the `configure` command. It defines various aspects of the system, including the methods Nginx is allowed to use for connection processing. At the end, it creates a Makefile.
 
 ```bash { cwd="./nginx" }
 ./auto/configure --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --with-http_ssl_module --modules-path=/etc/nginx/modules --with-stream=dynamic --with-pcre=../pcre2-10.40 --with-zlib=../zlib-1.2.11
@@ -58,20 +56,26 @@ The build is configured using the **configure** command. It defines various aspe
 
 There are many configuration options available in Nginx. To find all the configuration options available in Nginx check the [documentation](http://nginx.org/en/docs/configure.html).
 
-After configuration, Nginx is compiled and installed using make:
+After configuration, compile and install Nginx using make:
 
 ```bash { cwd="./nginx" }
 make
 sudo make install
 ```
 
-To verify if Nginx is installed or not check its version by using the command:
+Check the version to verify installation by using the command:
 
 ```bash
 nginx -v
 ```
 
-To enable the systemd service, create a file named **/lib/systemd/system/nginx.service** and add the below script in the file.
+The output will look like
+
+```output
+nginx version: nginx/1.23.4
+```
+
+To enable the systemd service, use a file editor of your choice and create a file named `/lib/systemd/system/nginx.service` with the contents below:
 
 ```console
 [Unit]
@@ -92,14 +96,23 @@ PrivateTmp=true
 WantedBy=multi-user.target
 ```
 
-Now Nginx can be managed using systemd.
+Start Nginx using systemd:
 
 ```console
 sudo systemctl start nginx
 ```
 
-To confirm Nginx is running use the status command.
+To confirm Nginx is running, check the status:
 
 ```console
 sudo systemctl status nginx
 ```
+
+The output from this command will look like:
+
+```output
+● nginx.service - A high performance web server and a reverse proxy server
+     Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
+     Active: active (running) since Tue 2023-04-11 14:36:35 UTC; 14min ago
+```
+Nginx is successfully running as shown.

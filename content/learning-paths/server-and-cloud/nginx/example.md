@@ -5,26 +5,23 @@ layout: "learningpathall"
 ---
 
 
-## Prerequisites
+## Before you begin
 
-Two [web servers](../basic_static_file_server)
-A [Reverse Proxy and API gateway](../reverse_proxy_and_api_gateway)
+Setup [two web servers](../basic_static_file_server) and setup a [Reverse Proxy and API gateway](../reverse_proxy_and_api_gateway)
 
-## To wget a file from the server
 
-This section continues with the 3 machine setup from the previous step.
+## Use wget to get a a file from the server 
 
-### Quick start 
+You will use the 3 machine setup from the previous section to `wget` a file from a server.
 
-Switch to root.
+Switch to root:
 
 ```console
 sudo su -
 ```
+Create a file in each of the two web servers. The file should be placed in /usr/share/nginx/html
 
-Create a file in each of the two web servers.
-
-The file should be placed in /usr/share/nginx/html
+For example:
 
 ```console
 cat > /usr/share/nginx/html/file.txt
@@ -35,25 +32,23 @@ Use Ctrl-D to end the cat command after one line of text has been entered.
 
 Do the same thing on the second web server.
 
-If Nginx was running before file creation restart it on each web server and on the API gateway using the command:
+If Nginx was running before you created the file on the two webservers, restart it on each web server and on the API gateway using the command:
 
 ```console
 systemctl restart nginx
 ```
 
-Run the following wget command in the client instance, the <dns-name> is the DNS name of the reverse proxy machine. 
+Run the `wget` command in the client instance, the <dns-name> is the DNS name of the reverse proxy machine. 
 
 ```console
 wget https://<dns-name>/file.txt --no-check-certificate
 ```
 
-## To curl to retrieve a webpage
+## Use curl to retrieve a webpage
 
-The default index.html is already on each web server. Use curl to retrieve it.
+The default index.html is already on each web server. 
 
-### Quick start
-
-Run the following curl from another machine to retrieve the index.html
+Run the `curl` command from another machine to retrieve the index.html.
 
 Again, <dns-name> will be the DNS name of the reverse proxy machine.
 
