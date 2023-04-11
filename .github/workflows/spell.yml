@@ -4,6 +4,10 @@ name: spell
 # Controls when the workflow will run
 on:
 
+  # run once a day at 6AM UTC
+  schedule:
+    - cron: '0 6 * * *'
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
