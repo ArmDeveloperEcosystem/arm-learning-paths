@@ -11,7 +11,7 @@ We shall prepare a docker image containing [Arm Compiler for Embedded](https://d
 
 The OS of the docker image is `Ubuntu`, though the host machine could be Windows or a different flavor of Linux.
 
-Linux users may need to preceed the `docker` commands below with `sudo`, as the docker daemon always runs as the root user.
+Linux users may need to precede the `docker` commands below with `sudo`, as the docker daemon always runs as the root user.
 
 ## Prerequisites
 

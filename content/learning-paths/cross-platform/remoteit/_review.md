@@ -7,7 +7,7 @@
 # question:         A one sentence question
 # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
 # correct_answer:   An integer indicating what answer is correct (index starts from 0)
-# explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add aditional context if desired
+# explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
 review:
   - questions:
@@ -37,7 +37,7 @@ review:
         - "False"
       correct_answer: 1
       explanation: >
-        Remote.it works on all types of network backhauls such as traditional cable/DSL, cellular and satellite connections because Remote.It doesn't need a unique public IP address which are often not available on cellular or satellite networks which use CGNAT.
+        Remote.it works on all types of network backhauls such as tradditional cable/DSL, cellular and satellite connections because Remote.It doesn't need a unique public IP address which are often not available on cellular or satellite networks which use CGNAT.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

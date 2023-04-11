@@ -25,7 +25,7 @@ Readers should have experience with [Docker](https://www.docker.com/) and be int
 
 ## Use an example GitHub Project
 
-Let’s start learning CodeBuild on AWS Graviton procesors using a small Docker image for Arm. The [GitHub repository](https://github.com/jasonrandrews/hello-arm) contains a simple collection of “hello world” applications.
+Let’s start learning CodeBuild on AWS Graviton processors using a small Docker image for Arm. The [GitHub repository](https://github.com/jasonrandrews/hello-arm) contains a simple collection of “hello world” applications.
 
 Let’s imagine hello.c is an actual software project which changes regularly, and the Docker image needs to be rebuilt when the source file changes. This article does not cover GitHub Actions to trigger automatic builds, but actions can be easily added. The goal is to go from a button click in the AWS Console to new images in container repositories.
 

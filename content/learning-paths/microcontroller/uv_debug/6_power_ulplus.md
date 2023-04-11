@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Power Measurement with ULINKplus
 
-An Arm Keil [ULINKplus debug adapter](https://developer.arm.com/Tools%20and%20Software/ULINKplus) offers serial-wiere debug capabilities, measures the CPU core clock directly, and adds power measurement. Together with Event Statistics, this can be used to create power profiles for code sections.
+An Arm Keil [ULINKplus debug adapter](https://developer.arm.com/Tools%20and%20Software/ULINKplus) offers serial-wire debug capabilities, measures the CPU core clock directly, and adds power measurement. Together with Event Statistics, this can be used to create power profiles for code sections.
 
 {{% notice Note %}}
 For details on how to connect the ULINKplus to your board, refer to the [documentation](https://developer.arm.com/documentation/101636/latest/Power-Measurement?lang=en).

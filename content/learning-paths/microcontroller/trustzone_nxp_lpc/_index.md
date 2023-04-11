@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for software developers new to us
 learning_objectives: 
     - Install the Keil MDK Tools
     - Run a hello world Trustzone example
-    - Understand swtiching of security states
+    - Understand switching of security states
     - Learn how secure functions are called from a non-secure state
 
 prerequisites:

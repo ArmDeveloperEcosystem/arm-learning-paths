@@ -139,4 +139,4 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
 
     *Figure 2.8. Connect AXI-Lite Subordinate interface (Custom IP) to AXI Manager interface*
 
-Now that you have created the custom AXI4 periperhal which will control the GPIO, you will connect it up to the ZYNQ Processing System in the next section.
+Now that you have created the custom AXI4 peripheral which will control the GPIO, you will connect it up to the ZYNQ Processing System in the next section.

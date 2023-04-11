@@ -14,7 +14,7 @@ learning_objectives:
     - Use GitHub Actions to manage ongoing development in a CI/CD workflow
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
 
 author_primary: Ronan Synnott
 
