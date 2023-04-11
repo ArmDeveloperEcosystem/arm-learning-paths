@@ -2,8 +2,6 @@
 armips:
 - Neoverse
 author_primary: Pareena Verma
-description: Learn how to install and run MongoDB Community Edition on differet flavors
-  of AWS EC2 instances powered by Arm64 achitecture
 layout: learningpathall
 learning_objectives:
 - Install and run MongoDB on your 64-bit Arm AWS EC2 instance

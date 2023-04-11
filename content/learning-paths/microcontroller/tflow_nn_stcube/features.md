@@ -78,6 +78,8 @@ model = tf.keras.Sequential(
 
 model.summary()
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+```
+```python
 model.fit(x_train, y_train, batch_size=32, epochs=500, validation_split=0.4)
 ```
 

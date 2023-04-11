@@ -11,7 +11,7 @@ layout: "learningpathall"
 In this section, we will break down the application we ran to understand some basic concepts of Trustzone which include
 
 * Switching security states
-* Calling secure fucntions from the non-secure world
+* Calling secure functions from the non-secure world
 
 ## How to switch between security states 
 
@@ -24,7 +24,7 @@ In the `main()` function, board hardware initialization is performed followed by
 PRINTF("Hello from secure world!\r\n");
 PRINTF("Entering normal world.\r\n");
 ```
-The Cortex-M33 processor on the NXP board is running in secure mode upto this point. After these prints, the `TZM_JumpToNormalWorld(NON_SECURE_START)` function is called which initiates the switch to the non-secure world. This function is defined in the `tzm_api.c` source file. This function sets up the non-secure main stack and vector table and gets a pointer to the non-secure resethandler with `__attribute__((cmse_nonsecure_call))`. This key attribute directs the compiler (Arm compiler for embedded in our example) to generate a `BLXNS` instruction. This instruction causes the processor to swtich from secure to non-secure world.
+The Cortex-M33 processor on the NXP board is running in secure mode upto this point. After these prints, the `TZM_JumpToNormalWorld(NON_SECURE_START)` function is called which initiates the switch to the non-secure world. This function is defined in the `tzm_api.c` source file. This function sets up the non-secure main stack and vector table and gets a pointer to the non-secure resethandler with `__attribute__((cmse_nonsecure_call))`. This key attribute directs the compiler (Arm compiler for embedded in our example) to generate a `BLXNS` instruction. This instruction causes the processor to switch from secure to non-secure world.
 
 ## Call a secure function from non-secure world
 

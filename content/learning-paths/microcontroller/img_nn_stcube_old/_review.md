@@ -7,28 +7,28 @@
     # question:         A one sentence question
     # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
     # correct_answer:   An integer indicating what answer is correct (index starts from 0)
-    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add aditional context if desired
+    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
 
 review:
     - questions:
         question: >
-            Does the neural network model change with different learning rates?
+            Do the number of color channels in your dataset impact the input shape of the convolution layer?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1                  
         explanation: >
-            The learning rate impacts the model. If it's too high, the model overshoots the minima and if it's too low the model reaches the minima too slowly.
+            The number of color channels also referred to as depth is one of the array inputs to the CNN.
     - questions:
         question: >
-            Does NN model accuracy improve with feature extraction?
+            Does model training time vary based on number of epochs used?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1                  
         explanation: >
-            Feature extraction removes redundant data and improves model accuracy.
+            As the number of epochs increases, the same number of times weights are changed in the neural network and hence it takes longer.
 
 
 # ================================================================================

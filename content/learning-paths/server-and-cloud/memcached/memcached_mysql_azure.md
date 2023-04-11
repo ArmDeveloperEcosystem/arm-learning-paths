@@ -315,7 +315,7 @@ Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 
 ## Configure MySQL through Ansible
 
-Install MySQL and the required dependencies on both the inastances.
+Install MySQL and the required dependencies on both the instances.
 
 You can use the same `playbook.yaml` file used in the section, [Deploy Memcached as a cache for MySQL on an AWS Arm based Instance](/learning-paths/server-and-cloud/memcached/memcached_mysql_aws#configure-mysql-through-ansible).
 

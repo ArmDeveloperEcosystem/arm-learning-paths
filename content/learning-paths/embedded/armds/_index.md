@@ -13,7 +13,7 @@ learning_objectives:
     - Debug example with user hardware and DSTREAM debug probe
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
 
 author_primary: Ronan Synnott
 

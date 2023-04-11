@@ -10,11 +10,12 @@ layout: "learningpathall"
 
 ## Arm Instruction Emulator
 
+If you don't have access to Arm SVE capable hardware, you can run still run SVE instructions by using the the Arm Instruction Emulator.
 Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
 
 ## Example code
 
-Copy this code example `sve_add.c`, to perform an addition between two 127 double-precision arrays:
+Copy this code example `sve_add.c`, to add two 127 double-precision arrays:
 
 ```c  { line_numbers = "true" }
 #include <stdlib.h>
@@ -46,6 +47,7 @@ int main()
 ```
 
 ### Compile
+Compile your applications using the commands shown:
 
 {{< tabpane >}}
   {{< tab header="GNU" >}}
@@ -58,26 +60,29 @@ int main()
 
 ### Run
 
-Of course, running the application on the host is not possible:
+Run the application on the host:
 
 ```bash {  command_line="user@localhost | 2"  }
 ./sve_add.exe
 Illegal instruction (core dumped)
 ```
+You can see an illegal instruction is reported as the host does not support SVE.
 
 ## Arm Instruction Emulator Usage
 
-Armie requires the `-msve-vector-bits` parameter to specify the SVE vector length:
+Now run the application with Armie as shown:
 
 ```bash {  command_line="user@localhost" }
 armie -msve-vector-bits=256 -- ./sve_add.exe
 ```
+Armie requires the `-msve-vector-bits` parameter to specify the SVE vector length.
 
 ## Plugins
+Armie has plugins you can use to analyze your application.
 
 ### Count SVE instructions
 
-The `libinscount_emulated.so` plugin reports the amount of executed instructions:
+The `libinscount_emulated.so` plugin reports the amount of executed instructions. Run the command below and check the output:
 
 ```bash {  command_line="user@localhost | 2-4"  }
 armie -msve-vector-bits=256 -i libinscount_emulated.so  -- ./sve_add.exe
@@ -86,7 +91,7 @@ Done.
 146163 instructions executed of which 193 were emulated instructions
 ```
 
-Increasing the vector width from 256 to 512 divides the amount of emulated SVE instructions by two:
+Increasing the vector width from 256 to 512 divides the amount of emulated SVE instructions by two as shown:
 
 ```bash {  command_line="user@localhost | 2-4"  }
 armie -msve-vector-bits=512 -i libinscount_emulated.so  -- ./sve_add.exe
@@ -97,13 +102,14 @@ Done.
 
 ### SVE instruction breakdown
 
-To get more information on which instruction are executed, the `libopcodes_emulated.so` plugin can be used:
+To get more information on which instruction are executed, the `libopcodes_emulated.so` plugin can be used as shown:
 
 ```bash {  command_line="user@localhost" }
 armie -msve-vector-bits=512 -i libopcodes_emulated.so -- ./sve_add.exe
 ```
 
-Undecoded instructions are stored in a file with the format `undecoded.APP.PID.log`. To decode them, a script `enc2instr.py` is provided with Armie. It requires llvm-mc and python 2.7.
+Undecoded instructions are stored in a file with the format `undecoded.APP.PID.log`. To decode them, use the script `enc2instr.py`, provided with Armie. 
+This script requires llvm-mc and python 2.7. Install, using the command shown:
 
 ```bash {  command_line="user@localhost" }
 sudo apt install llvm python
@@ -117,7 +123,7 @@ awk -F" : " '{print $2}' undecoded.sve_add.exe.175166.log | LLVM_MC=$(which llvm
 
 Which gives the following output:
 
-```console
+```output
        16 : 0xe5e14000  st1d { z0.d }, p0, [x0, x1, lsl #3]
        16 : 0xa5e14260  ld1d { z0.d }, p0/z, [x19, x1, lsl #3]
        16 : 0xa5e14001  ld1d { z1.d }, p0/z, [x0, x1, lsl #3]
@@ -152,7 +158,7 @@ void fun(double * restrict a, double * restrict b, int size)
 
 ### Rebuild application and trace memory accesses
 
-Rebuild the application and add the options `-a -roi` to Armie to filter data for the RoI.
+Rebuild the application and add the options `-a -roi` to Armie to filter data for the RoI:
 
 ```bash {  command_line="user@localhost" }
 armie -e libmemtrace_sve_512.so -i libinstrace_emulated.so -a -roi -- ./sve_add.exe
@@ -170,7 +176,7 @@ awk -F"," '{print $2}' instrace.sve_add.exe.235921.0000.log | LLVM_MC=$(which ll
 
 The output will look like this:
 
-```console
+```output
 1, -1042929472, 0, 0, 64, 0xffff81d096a0, 0xffff81cf66d8        ld1d { z1.d }, p0/z, [x0, x1, lsl #3]
 2, -1042929472, 0, 0, 64, 0xffff81d092a0, 0xffff81cf66dc        ld1d { z0.d }, p0/z, [x19, x1, lsl #3]
 3, -1042929472, 0, 1, 64, 0xffff81d096a0, 0xffff81cf66e4        st1d { z0.d }, p0, [x0, x1, lsl #3]

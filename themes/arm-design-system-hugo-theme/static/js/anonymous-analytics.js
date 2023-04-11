@@ -131,10 +131,21 @@ function trackHeaderInteraction(type,name){
         //  ===================
         if (current_path == '/') {
             /* Assign to the following components:
+                    0. Contribute button
                     1. Each main LP category card
                     2. Tool install search box
                     3. Tool install 'see all' link         
             */
+
+            // 0) Contribute button 
+            let contribute_btn = document.getElementById('contribute-btn');
+            contribute_btn.addEventListener("click", () => {
+                _satellite.track('content-interaction', {   
+                    'data-track-type'     : 'Homepage CTAs',
+                    'data-track-location' : 'CTA',
+                    'data-track-name'     : 'contribute-btn'
+                });
+            });
 
 
             // 1) Learning Path category card
@@ -220,14 +231,41 @@ function trackHeaderInteraction(type,name){
                 });
             }
 
-            // 2) Review check answer btn
-            let check_answer_btn = document.getElementById('#check-answer-btn'); 
+            // 2) Review check answer btn and answers
+            let check_answer_btn = document.getElementById('check-answer-btn'); 
             if (check_answer_btn) {
+                // check answer button
                 check_answer_btn.addEventListener("click", () => {
+                    // button was pressed
                     _satellite.track('content-interaction', {   
                         'data-track-type'     : 'learning-path-review-check-answer-button',
                         'data-track-location' : 'metadata',
                         'data-track-name'     : 'Review - Check Answer button'
+                    });
+
+                    // current checked answers
+                    let selected_answers = '';
+                    let checked_boxes = document.querySelectorAll('input:checked');
+                    for (let box of checked_boxes) {
+                        // what question?
+                        let question_number = box.getAttribute('name'); // question-1
+
+                        // what answer?
+                        let id_to_name = box.getAttribute('id');
+                        let answer = document.querySelector('label[for="'+id_to_name+'"]').innerText;
+
+                        // right or wrong?
+                        let correct_or_not = 'incorrect'
+                        if (box.parentElement.classList.contains('correct')) {
+                            correct_or_not = 'correct'
+                        }
+                        selected_answers = selected_answers+',,'+   question_number+'::'+answer+'__'+correct_or_not;
+                    }
+                    // selected_answers = ,,question-1::False__correct,,question-2::False__incorrect
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-review-check-answer-checkboxes',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : selected_answers
                     });
                 });
             } 
@@ -243,10 +281,12 @@ function trackHeaderInteraction(type,name){
             }
                 // trackChoiceFeedback
             let feedback_form = document.getElementById('feedback-choice-form');
-            feedback_form.addEventListener("submit", () => {
-                let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
-                trackChoiceFeedback(feedback);
-            });
+            if (feedback_form) {
+                feedback_form.addEventListener("submit", () => {
+                    let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
+                    trackChoiceFeedback(feedback);
+                });
+            }
 
             // 4a) Navitaion from navbar
             let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  
@@ -309,7 +349,7 @@ function trackHeaderInteraction(type,name){
     //  Header (takes forever to load in client-side JS)
     //  ===================
     window.addEventListener('load', () => {
-        console.log('All site loaded.');
+        //console.log('All site loaded.');
         let globalNav = document.getElementById('global-nav-example-default');
         let breadcrumbs  = document.getElementById('breadcrumb-element');
 
@@ -320,8 +360,8 @@ function trackHeaderInteraction(type,name){
 
 
         // theme button
-        let theme_btn  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:theme');
-        theme_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','theme-change');        });   
+        //let theme_btn  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:theme');
+        //theme_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','theme-change');        });   
 
 
         // contribute button

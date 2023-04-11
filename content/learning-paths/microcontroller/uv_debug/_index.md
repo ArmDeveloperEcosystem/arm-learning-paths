@@ -16,16 +16,16 @@ learning_objectives:
     - Learn sophisticated debugging using Event Recorder and Serial Wire Viewer
     - Master ETM Trace for optimum performance
     - Check your power consumption with ULINKplus
-# 2-5 bullet points, one sentance each. Should start with a verb (Deploy, Measure) and indicate the value of the objective if possible.
+# 2-5 bullet points, one sentence each. Should start with a verb (Deploy, Measure) and indicate the value of the objective if possible.
 
 prerequisites:
-    - Some familiarity with embedded programing is assumed
+    - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
     - Installation of [Arm Keil MDK](/install-guides/mdk/) with an active MDK-Community license
     - Installation of the [Corstone-300 Ecosystem FVP](/install-guides/ecosystem_fvp/)
 # List any prereqs needed before this learning path can be completed. Can include:
     # Online service accounts                                   (An Amazon Web Services account)
-    # Prior knowledge                                           (Some familiarity with embedded programing)
+    # Prior knowledge                                           (Some familiarity with embedded programming)
     # Previous learning paths                                   (The Learning Path: Getting Started with Arm Virtual Hardware)
     # Particular tools/environments already being initialized   (An EC2 instance with AVH installed)
 

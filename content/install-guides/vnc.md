@@ -28,7 +28,7 @@ This section provides info about how to setup VNC on a remote Arm Linux machine.
 
 Feel free to seek out additional VNC tutorials or add more information to this page. 
 
-This installation only works on newer versions of Ubuntu and Debian. It was sucessfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
+This installation only works on newer versions of Ubuntu and Debian. It was successfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
 
 ## VNC 
 
@@ -36,7 +36,7 @@ VNC is a client server application. A VNC server runs on a remote machine. A VNC
 
 ### Install VNC server and xfce4 desktop
 
-To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This receipe uses [TigerVNC](https://tigervnc.org/)
+To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This recipe uses [TigerVNC](https://tigervnc.org/)
 
 Desktop software is also needed. There are many options for this, but using `xfce4` makes for a minimal install with good performance. 
 
@@ -60,7 +60,7 @@ Run the password command to set a password for VNC. This is not the password for
 vncpasswd
 ```
 
-Remember the password for later when the client is conneted. 
+Remember the password for later when the client is connected. 
 
 ### Configure the desktop startup
 
@@ -100,7 +100,7 @@ Use sudo or root as it is located in a read-only area.
  WantedBy=multi-user.target
 
  ```
-The commands below are for any Linux distrbution using `systemd`.
+The commands below are for any Linux distribution using `systemd`.
 
 To start the SSH daemon:
 

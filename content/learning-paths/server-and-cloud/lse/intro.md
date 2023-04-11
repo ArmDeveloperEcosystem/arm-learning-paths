@@ -109,7 +109,7 @@ Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 cpui
 ```
 Look specifically at the flags information printed at the end.
 
-Here is the output from runnig `lscpu` on an AWS T4g instance:
+Here is the output from running `lscpu` on an AWS T4g instance:
 
 ```output
 Architecture:                    aarch64

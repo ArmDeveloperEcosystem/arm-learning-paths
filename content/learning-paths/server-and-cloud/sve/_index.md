@@ -1,9 +1,7 @@
 ---
 title: Port Code to Arm Scalable Vector Extension (SVE)
 
-description: Learning path for porting code from Arm NEON to the Scalable Vector Extension (SVE)
-
-minutes_to_complete: 20   
+minutes_to_complete: 40   
 
 who_is_this_for: This is an introductory topic for software developers using SIMD instructions for High-Performance Computing, Machine Learning, Digital Signal Processing, Audio and Video Codec applications.
 

@@ -7,6 +7,9 @@ Where it is used:
 
 <!-- No masthead on homepage, as that has a special gradient look/feel -->
 {{ if .IsHome }}
+<div id="only-breadcrumb-masthead">
+    {{partial "header/breadcrumbs.html" .}}
+</div>
 {{else}}
 
   <div id="expanded-masthead">

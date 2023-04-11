@@ -7,20 +7,20 @@
     # question:         A one sentence question
     # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
     # correct_answer:   An integer indicating what answer is correct (index starts from 0)
-    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add aditional context if desired
+    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
 
 review:
     - questions:
         question: >
-            Why benchmark cloud-based server instances?
+            Why would you use Geekbench to compare different hardware systems and configurations?
         answers:
             - "Because fastest is best"
             - "To select an appropriate configuration for your workload"
             - "To verify the server is working correctly"
         correct_answer: 2
         explanation: >
-            Cloud based server instances are provided with a number of configuration options. It is best to select an appropriate configuration to balance operating cost and necessary performance.
+            Systems are available with a number of configuration options. It is best to select an appropriate configuration to balance cost and performance.
 
     - questions:
         question: >

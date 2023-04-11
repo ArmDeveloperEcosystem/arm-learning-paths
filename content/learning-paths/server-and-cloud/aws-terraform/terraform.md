@@ -92,7 +92,7 @@ But before we provision the EC2 instance, we need to gather a few points -
    
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/190343512-54fb7a3c-d048-4c23-bb66-0a0ebfb0fa80.png "AMIs")
    
-3. On the search menu click on public images and then apply filters as per your reuirment. e.g. `architecture=arm64`, `platform=ubuntu`.
+3. On the search menu click on public images and then apply filters as per your requirement. e.g. `architecture=arm64`, `platform=ubuntu`.
 copy the AMI ID from the search result.
    
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png "AMI ID")

@@ -33,7 +33,7 @@ Navigate to `CloudFormation` area of your AWS console, and click on `Create stac
 
 Select `Template is ready`, and `Upload a template file`, and browse to the above `Arm-AVH-CloudFormation-Template.yaml`. Click Next.
 
-Enter an (arbirary) `Stack name` and `S3BucketName`, and select the `VpcId` (likely only one option present) from the pull down. Click Next.
+Enter an (arbitrary) `Stack name` and `S3BucketName`, and select the `VpcId` (likely only one option present) from the pull down. Click Next.
 
 Leave `Configure stack options` as default for all. Click Next.
 

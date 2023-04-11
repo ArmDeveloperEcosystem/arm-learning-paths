@@ -7,7 +7,7 @@
     # question:         A one sentence question
     # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
     # correct_answer:   An integer indicating what answer is correct (index starts from 0)
-    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add aditional context if desired
+    # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
 
 review:
@@ -19,13 +19,13 @@ review:
             - "Any vector length from 128 to 2048 bits"
         correct_answer: 2                   
         explanation: >
-            SVE and SVE2 do not define the size of the vector registers, but constrains it to a range of possible values, from a minimum of 128 bits up to a maximum of 2048 in 128-bit wide units.
+            SVE and SVE2 do not define the size of the vector registers, but limit the range, from a minimum of 128 bits up to a maximum of 2048 in 128-bit wide units.
     - questions:
         question: >
             Complete the sentence: the size of the predicate register is...
         answers:
             - "1/8th the size of SVE registers"
-            - "the same as the vector register"
+            - "the same size as the vector register"
             - "128 bits"
         correct_answer: 1                    
         explanation: >
