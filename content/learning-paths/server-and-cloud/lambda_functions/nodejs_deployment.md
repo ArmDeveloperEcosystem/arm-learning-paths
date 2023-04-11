@@ -33,7 +33,7 @@ The instructions to create the keys are below.
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
-To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
 
 Before you begin, confirm you have an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) and you can login to the AWS console.
 
