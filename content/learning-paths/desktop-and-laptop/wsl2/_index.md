@@ -3,7 +3,7 @@ title: WSL for Windows on Arm
 
 description: Learn how to setup and use the Windows Subsystem for Linux (WSL) on Arm computers
 
-minutes_to_complete: 120 
+minutes_to_complete: 90 
 
 who_is_this_for: Software developers with Windows on Arm computers doing Linux or cloud native development.
 
