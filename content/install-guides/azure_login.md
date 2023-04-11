@@ -20,7 +20,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Before you begin, make sure that azure cli is installed in your local sysytem. To install azure cli, follow this [guide](/install-guides/azure-cli).
+Before you begin, make sure that azure cli is installed in your local machine. To install azure cli, follow this [guide](/install-guides/azure-cli).
 
 In this section you will learn how to authenticate to the Azure environment using Azure CLI. Once logged in, the CLI allows you to query and interact with the cloud resource.
 
