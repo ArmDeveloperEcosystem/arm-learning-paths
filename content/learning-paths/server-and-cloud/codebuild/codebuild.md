@@ -28,13 +28,13 @@ Head over to the [AWS Console](https://aws.amazon.com/console/) to get started w
 
 In the AWS Console navigate to Elastic Container Registry. Create an ECR Public repository by clicking on the Public tab and then using the "Create repository" button on the top right. For more details refer to the [getting started guide](https://docs.aws.amazon.com/AmazonECR/latest/public/public-getting-started.html).
 
-Create a repository named c-hello-world and tagged it for the ARM 64 architecture. The new repository should now be visible in the ECR Public Gallery. Note the URI of the repository which should be similar to: `public.ecr.aws/m6s3k6o5/c-hello-world`.
+Create a repository named `c-hello-world` and tagged it for the ARM 64 architecture. The new repository should now be visible in the ECR Public Gallery. Note the URI of the repository which should be similar to: `public.ecr.aws/m6s3k6o5/c-hello-world`.
  
 There is no need to push an image yet, CodeBuild will do that automatically.
 
 ## Create a repository in Docker Hub
 
-Login to your [Docker Hub](https://hub.docker.com/) account and create a new repository. Use the Create Repository button near the top right, select a name, and mark the repository as public. Create a c-hello-world repository and confirm it is visible on Docker Hub.  
+Login to your [Docker Hub](https://hub.docker.com/) account and create a new repository. Use the Create Repository button near the top right, select a name, and mark the repository as public. Create a `c-hello-world` repository and confirm it is visible on Docker Hub.  
 
 You should now have two repositories ready to receive the Docker images created from CodeBuild. Let’s see how to use CodeBuild to populate ECR Public and Docker Hub with the docker image. 
 
@@ -50,9 +50,9 @@ More information can be found in AWS documentation, look at the section [Store y
 
 ## Create a CodeBuild project
 
-Head over to [CodeBuild](https://aws.amazon.com/codebuild/) in the AWS Console. CodeBuild uses a file describing what to do when a build is started, buildspec.yml by default.
+Head over to [CodeBuild](https://aws.amazon.com/codebuild/) in the AWS Console. CodeBuild uses a file describing what to do when a build is started, `buildspec.yml` by default.
 
-One way to get started is to create a buildspec.yml file and add it to the GitHub repository. CodeBuild will look for it at the top of the directory structure, but more to come on the buildspec in the sections below.
+One way to get started is to create a `buildspec.yml` file and add it to the GitHub repository. CodeBuild will look for it at the top of the directory structure, but more to come on the `buildspec.yml` in the sections below.
 
 Open CodeBuild in the AWS Console and create a new CodeBuild project. Use the "Create project" button on the upper right of the page.
 
@@ -64,7 +64,7 @@ The Source section is where the GitHub project info is entered. To connect to Gi
 
 ![Source provider](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/pypw0obhcr4lzi1p6k4f.png)
 
-After the GitHub connection is made enter the GitHub URL for the project. I entered the link to the hello-world project in my GitHub account. 
+After the GitHub connection is made enter the GitHub URL for the project. I entered the link to the `hello-world` project in my GitHub account. 
 
 ![Source provider](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/dh14k17dk9y8f9561a8q.png)
 
@@ -80,7 +80,7 @@ The trickiest part of the setup is the Service role. By default a new role is cr
 
 ![Environment](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/vq24z9yhiaqooskwk5qh.png)
 
-The Buildspec section tells CodeBuild where to find the buildspec.yml. The default will be in the top directory of the GitHub repository, but the name and location can be changed here. The second option is to create the buildspec.yml file right in the CodeBuild project. With this option there is no need to modify the GitHub repository, but it will live in this CodeBuild project. 
+The Buildspec section tells CodeBuild where to find the `buildspec.yml`. The default will be in the top directory of the GitHub repository, but the name and location can be changed here. The second option is to create the `buildspec.yml` file right in the CodeBuild project. With this option there is no need to modify the GitHub repository, but it will live in this CodeBuild project. 
 
 ![Buildspec](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/gdpwntbze9ithqkrvzc7.png)
 

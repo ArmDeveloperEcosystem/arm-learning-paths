@@ -30,7 +30,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Pull and Run
 
-If CodeBuild is complete, the images are ready to pull and run. Both images are identical and the output from the uname is the same and shows the image was built on Amazon Linux 2.
+If CodeBuild is complete, the images are ready to pull and run. Both images are identical and the output from the `uname` is the same and shows the image was built on Amazon Linux 2.
 
 To get the image from Docker Hub:
 
