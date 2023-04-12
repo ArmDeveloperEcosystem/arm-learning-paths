@@ -92,6 +92,12 @@ def check(json_file, start, stop):
             subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
             # Create user and configure
+            username="user"
+            if  "arm-tools" in img:
+                username="ubuntu"
+                cmd = ["docker exec test_{} apt update".format(i)]
+                logging.debug(cmd)
+                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             if "ubuntu" in img or "mongo" in img:
                 cmd = ["docker exec test_{} apt update".format(i)]
                 logging.debug(cmd)
@@ -198,13 +204,13 @@ def check(json_file, start, stop):
 
         for k in inst:
             # Copy over the file with commands
-            cmd = ["docker cp {} test_{}:/home/user/".format(fn, k)]
+            cmd = ["docker cp {} test_{}:/home/{}/".format(fn, k, username)]
             subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             logging.debug(cmd)
 
             # Check type
             if t["type"] == "bash":
-                cmd = ["docker exec -u user -w /home/user test_{} bash {}".format(k, fn)]
+                cmd = ["docker exec -u {} -w /home/{} test_{} bash {}".format(username, username, k, fn)]
             else:
                 logging.debug("Omitting type: {}".format(t["type"]))
                 cmd = []
