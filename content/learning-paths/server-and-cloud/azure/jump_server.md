@@ -72,35 +72,9 @@ provider "azurerm" {
 }
 ``` 
 
-### Variables
-
-Define required variables to create a virtual machine.
-
-Add below code in `variables.tf` file: 
-
-```console
-# Define prefix for consistent resource naming.
-variable "resource_prefix" {
-  default     = "bastion-test"
-  description = "Service prefix to use for naming of resources."
-}
-
-# Define Azure region for resource placement.
-variable "location" {
-  default     = "eastus2"
-  description = "Azure region for deployment of resources."
-}
-
-# Define username for use on the hosts.
-variable "username" {
-  default     = "ubuntu"
-  description = "Username to build and use on the VM hosts."
-}
-```
-
 ### Create required resources
 
-Add the resources required to create a virtual machine in `main.tf`.
+Add below code in `main.tf` file to create the required resources and VM:
 
 ```console
 # Create a resource group if it doesn’t exist.
@@ -336,6 +310,32 @@ resource "azurerm_linux_virtual_machine" "target_vm" {
 }
 ```
  
+### Variables
+
+Define required variables to create a virtual machine.
+
+Add below code in `variables.tf` file: 
+
+```console
+# Define prefix for consistent resource naming.
+variable "resource_prefix" {
+  default     = "bastion-test"
+  description = "Service prefix to use for naming of resources."
+}
+
+# Define Azure region for resource placement.
+variable "location" {
+  default     = "eastus2"
+  description = "Azure region for deployment of resources."
+}
+
+# Define username for use on the hosts.
+variable "username" {
+  default     = "ubuntu"
+  description = "Username to build and use on the VM hosts."
+}
+```
+
 ### Outputs
 
 Add the below code in `outputs.tf` to get **Private IP addresses** name and **Public IP Address of bastion VM**:
