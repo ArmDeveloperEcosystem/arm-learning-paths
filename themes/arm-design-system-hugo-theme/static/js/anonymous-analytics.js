@@ -211,12 +211,28 @@ function trackHeaderInteraction(type,name){
         //  ===================
         else if ( ( (depth_of_path == 4) | (depth_of_path == 5) ) & (current_path.includes('/learning-paths/')) ) {
             /* Assign to the following components:
+                    0. Onload detection
                     1. Tags (only for intro and next step pages)
                     2. Review ('check answer' button)
                     2.5. Review (if all correct, add trigger for analytics somehow)
                     3. Feedback (on Next Steps page)
-                    4. Navigation forward/back (on left hand pannel and next/prev buttons), and mobile      
             */
+
+                    
+           // 0) onload digital data setting
+           let lp_title = document.getElementById('learning-path-title').innerText;
+           let lp_step = document.getElementById('learning-path-step-active').innerText;
+           let lp_step_num = document.getElementById('learning-path-step-active').getAttribute('data-step-num');
+           var digitalData = {};
+           digitalData.learningPath = {
+                pageInfo: {
+                    learningPathName: lp_title, 
+                    learningTabName: lp_step,
+                    pageNumber: "page " +lp_step_num
+                }
+            };
+            
+
 
             // 1) Tags
             let tag_elements = document.querySelectorAll('ads-tag');  
@@ -286,7 +302,7 @@ function trackHeaderInteraction(type,name){
                     let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
                     trackChoiceFeedback(feedback);
                 });
-            }
+            } 
 
             // 4a) Navitaion from navbar
             let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  

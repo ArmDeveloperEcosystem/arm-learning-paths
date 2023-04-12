@@ -82,11 +82,6 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 }
 
 
-html[theme="light"] #homepage-header {
-    background: -webkit-linear-gradient(left,var(--arm-blue), var(--arm-web-safe-green));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 html[theme="dark"] #homepage-header {
     background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
     -webkit-background-clip: text;
