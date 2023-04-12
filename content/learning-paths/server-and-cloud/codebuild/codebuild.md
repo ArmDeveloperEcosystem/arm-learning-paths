@@ -8,13 +8,6 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
-
-* An [AWS account](/learning-paths/server-and-cloud/csp/aws/) to access AWS CodeBuild
-* An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
-
-This learning path is specific to AWS services, but the resulting Docker images can be run on any Arm machine.
-
 ## Introduction
 
 [AWS CodeBuild supports Arm workloads on AWS Graviton processors](https://aws.amazon.com/about-aws/whats-new/2021/02/aws-codebuild-supports-arm-based-workloads-using-aws-graviton2/). 
@@ -35,7 +28,7 @@ Head over to the [AWS Console](https://aws.amazon.com/console/) to get started w
 
 In the AWS Console navigate to Elastic Container Registry. Create an ECR Public repository by clicking on the Public tab and then using the “Create repository” button on the top right. For more details refer to the [getting started guide](https://docs.aws.amazon.com/AmazonECR/latest/public/public-getting-started.html).
 
-Create a repository named c-hello-world and tagged it for the ARM 64 architecture. The new repository should now be visible in the ECR Public Gallery. 
+Create a repository named c-hello-world and tagged it for the ARM 64 architecture. The new repository should now be visible in the ECR Public Gallery. Note the URI of the repository which should be similar to: `public.ecr.aws/m6s3k6o5/c-hello-world`.
  
 There is no need to push an image yet, CodeBuild will do that automatically.
 
@@ -43,9 +36,17 @@ There is no need to push an image yet, CodeBuild will do that automatically.
 
 Login to your [Docker Hub](https://hub.docker.com/) account and create a new repository. Use the Create Repository button near the top right, select a name, and mark the repository as public. Create a c-hello-world repository and confirm it is visible on Docker Hub.  
 
-For Docker Hub we also need to login to be able to push the image. AWS provides [Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secure way to store Docker Hub credentials. The credentials can be retrieved and used during the build. Now is a good time to setup your Docker Hub credentials in Secrets Manager. Go to Secrets Manager in the AWS Console and click "Store a new secret". The main points are the name for the secret and the key/value pairs for the username and password. Make sure to disable automatic rotation. More information can be found in AWS documentation, look at the section [Store your DockerHub credentials with AWS Secrets Manager](https://aws.amazon.com/premiumsupport/knowledge-center/codebuild-docker-pull-image-error). 
-
 You should now have two repositories ready to receive the Docker images created from CodeBuild. Let’s see how to use CodeBuild to populate ECR Public and Docker Hub with the docker image. 
+
+## Add credentials as secrets
+
+AWS provides [Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secure way to store Docker Hub credentials. The credentials can be retrieved and used during the build. Now is a good time to setup your AWS ECR alias and Docker Hub credentials in Secrets Manager. Go to Secrets Manager in the AWS Console and click "Store a new secret". The main points are the name for the secret and the key/value pairs. 
+
+Select `Store a new secret` and `Other type of secret` for the AWS ECR alias. Add the key `uri` and specify your ECR URI which should be similar to: `public.ecr.aws/m6s3k6o5/`. Save the secret as `aws_ecr`. Make sure to disable automatic rotation. 
+
+For Docker Hub we also need to login to be able to push the image. Follow the same steps to add a key called `dockerhub` and specify two key/value pairs. The first called `username` and the second called `password` with your Docker Hub credentials.  
+
+More information can be found in AWS documentation, look at the section [Store your DockerHub credentials with AWS Secrets Manager](https://aws.amazon.com/premiumsupport/knowledge-center/codebuild-docker-pull-image-error). 
 
 ## Create a CodeBuild project
 
@@ -101,7 +102,7 @@ Click on the role and then the triangle to expand the policy.
 
 ![Role](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/sexl3ilhapebdnjkqqsw.png)
 
-Click the "Edit policy" button and JSON tab to add the statements below to the IAM policy which is attached to the AWS CodeBuild service role created above. 
+Click the "Edit policy" button and JSON tab to add the statements below to the IAM policy "Statement" list which is attached to the AWS CodeBuild service role created above. 
 
 ```json
 {
