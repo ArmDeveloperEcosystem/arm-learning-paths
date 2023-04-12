@@ -30,7 +30,7 @@ Common development tools are:
 
 Other requirements could be a Linux Desktop to run graphical applications. 
 
-Remember that all software needs to be for the Arm architecture. While most applications in the Linux ecosystem run on Arm, keep an eye out for exceptions.
+Remember that all software needs to be available for the Arm architecture. While most applications in the Linux ecosystem run on Arm, keep an eye out for exceptions.
 
 ## Migration challenges
 
@@ -53,7 +53,7 @@ Applications typically fall into three categories as shown on the table below.
 | -----------|--------------|---------|
 | Easy       | Interpreted languages and Jit compilers (Python, Java, PHP, Node.js) | Use multi-arch container images and popular Linux distributions |
 | More difficult | Compiled languages (C/C++, Go, Rust) | Recompile on an Arm development machine or cross-compile applications |
-| Not possible | Something not available on Arm | A language, runtime, or operating system which is not available on Arm |
+| Not possible | Something significant is not available on Arm | A language, runtime, or operating system which is not available on Arm |
 
 While most software is available on Arm, you may come across dependencies which are not possible to run on Arm. 
 
@@ -80,7 +80,7 @@ Here are a number of real-world migration scenarios. They cover migrations rangi
 
 | Application migration | Migration results |
 |-----------------------|--------------------|
-|Node.js application    | Just works! nothing special for Arm |
+|Node.js application    | Just works! nothing special for Arm and you may not even notice it is running on Arm|
 |C++ application has some x86_64 intrinsics | [Migrate to NEON](/learning-paths/server-and-cloud/intrinsics/) using sse2neon or SIMDe|
 |Pandoc (documentation tool) has a filter not available on Arm|Rebuild dependency library from source (and ask maintainers for Arm support)|
 |Encryption in a Java app is slow | Use  -XX:+UnlockDiagnosticVMOptions -XX:+UseAESCTRIntrinsics flags to improve Arm crypto performance|
@@ -91,7 +91,7 @@ Benchmark results are mediocre on Arm|Rebuild C++ components with newer compiler
 
 Arm servers enable the best price performance for many applications. The majority of software is available now to make it possible to migrate applications to Arm. 
 
-
+Continue to get more guidance on a variety of migration topics. 
 
 
 
