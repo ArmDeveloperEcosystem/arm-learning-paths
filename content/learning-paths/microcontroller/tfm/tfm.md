@@ -66,7 +66,7 @@ All the parameters are defined in the [Trusted Firmware-M documentation](https:/
 ```bash { cwd="trusted-firmware-m/cmake_build" }
 make install
 ```
-On a successful build, the TF-M test binaries are created in the `bin` directory. This includes binaries files for the `MCUBoot bootloader`, `TF-M secure firmware` and `TF-M non-secure` app. Signed variants of both the TF-M secure and non-secure images are created along with a combined signed image of both the secure and non-secure image.
+On a successful build, the TF-M test executables are created in the `bin` directory. This includes binary files for the `MCUBoot bootloader`, `TF-M secure firmware` and `TF-M non-secure` app. Signed variants of both the TF-M secure and non-secure images are created along with a combined signed image of both the secure and non-secure image.
 
 ## Run the TF-M tests on the Corstone-300 FVP
 
