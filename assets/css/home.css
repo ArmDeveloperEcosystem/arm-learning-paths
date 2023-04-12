@@ -59,7 +59,7 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 /* Install Guide cta link */
 /**************************************/
 .install-guide-cta {
-    --ads-cta-link-color: #107a97; /* slightly darker web safe blue */
+    --ads-cta-link-color: var(--arm-light-blue); /* #107a97 slightly darker web safe blue */
 }
 
 
