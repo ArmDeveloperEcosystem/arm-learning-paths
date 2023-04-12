@@ -13,6 +13,16 @@
 review:
     - questions:
         question: >
+            Can you connect to a VM that does not have an external IP address using a bastion host?
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Using bastion host, you can log into the bastion host first, and then into the target private VM.
+
+    - questions:
+        question: >
             The Azure CLI can be used to find virtual machine images to deploy on Arm instances.
         answers:
             - "True"

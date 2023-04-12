@@ -8,8 +8,9 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for software developers new to Azure Arm virtual machines.
 
 learning_objectives: 
-    - Deploy Arm virtual machines using the Azure Console
+    - Deploy Arm VMs on Azure
     - Automate Arm virtual machine creation using Terraform
+    - Deploy Arm VMs on Azure and provide access via Jump Server
 
 prerequisites:
     - An Azure account

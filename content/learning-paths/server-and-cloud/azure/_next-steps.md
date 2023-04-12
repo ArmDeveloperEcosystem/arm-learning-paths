@@ -25,6 +25,10 @@ further_reading:
         title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
         link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
         type: Blog
+    - resource:
+        title: About Azure bastion
+        link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
+        type: Documentation
 
 
 # ================================================================================
