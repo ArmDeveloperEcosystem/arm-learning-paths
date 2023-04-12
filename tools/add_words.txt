@@ -3,12 +3,14 @@
 aarch64
 architectures
 bare-metal
+bootloader
 codec
 cross-building
 cross-compile
 cross-compiler
 distributions
 drop-down
+executables
 gcc
 how-to
 human-readable
@@ -19,6 +21,7 @@ low-level
 microcontrollers
 multi-architecture
 mutex
+non-secure
 on-screen
 open-source
 optimizations
