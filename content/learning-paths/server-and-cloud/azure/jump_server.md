@@ -39,13 +39,13 @@ For Azure authentication, follow this [guide](/install-guides/azure_login).
 
 ### Deploying Arm VMs on Azure and providing access via Jump Server
 For deploying Arm VMs on Azure and providing access via Jump Server, the Terraform configuration is broken into 4 files: `main.tf`, `variables.tf`, `outputs.tf` and `providers.tf`.
+It creates an instance with OS Login configured to use as a bastion host and a private instance to use alongside the bastion host.
 
-Add the following code in `main.tf`. It creates an instance with OS Login configured to use as a bastion host and a private instance to use alongside the bastion host.
 ### Providers
 
 Tell Terraform which cloud provider we are going to connect, Azure for this example.
 
-Add below code in `providers.tf` file:
+Using a file editor of your choice, add the code below to a file named `providers.tf`:
 
 ```console
 terraform {
@@ -74,7 +74,7 @@ provider "azurerm" {
 
 ### Create required resources
 
-Add below code in `main.tf` file to create the required resources and VM:
+Add the code shown below in a file named `main.tf` to create the required resources and VM:
 
 ```console
 # Create a resource group if it doesn’t exist.
@@ -312,9 +312,7 @@ resource "azurerm_linux_virtual_machine" "target_vm" {
  
 ### Variables
 
-Define required variables to create a virtual machine.
-
-Add below code in `variables.tf` file: 
+To define the variables required to create a virtual machine, add the code below in a file named `variables.tf`: 
 
 ```console
 # Define prefix for consistent resource naming.
@@ -338,7 +336,7 @@ variable "username" {
 
 ### Outputs
 
-Add the below code in `outputs.tf` to get **Private IP addresses** name and **Public IP Address of bastion VM**:
+Add the code below in `outputs.tf` to get the **Private IP addresses** name and **Public IP Address of bastion VM**:
 
 ```console
 # IP address of public IP addresses provisioned for bastion VM.
@@ -355,26 +353,27 @@ output "private_ip_addresses" {
 ```
 
 ### Terraform Commands
-To deploy the VMs, we need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [documentation](/learning-paths/server-and-cloud/azure/terraform#terraform-commands) to deploy the `main.tf` file.
+To deploy the VMs, you need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [section of the learning path](/learning-paths/server-and-cloud/azure/terraform#terraform-commands) to deploy the `main.tf` file.
 
 ### Verify the Instance and Bastion Host setup
-In the Azure Portal, go to the [Virtual Machines page](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines). The instances we created through Terraform must be displayed on the screen.
+In the Azure Portal, go to the [Virtual Machines page](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines). The instances created through Terraform will be displayed on the screen.
 
 ![azure_vm](https://user-images.githubusercontent.com/42368140/230090582-49331e8f-7afb-45ed-ae12-8d49da0dde34.png)
 
 ### Use Jump Host to access the Private Instance
-Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.
+Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server:
 ```console
   ssh -J ubuntu@bastion-vm-public-IP ubuntu@target-vm-private-IP
 ```
 
 ![azure_connect_vm](https://user-images.githubusercontent.com/42368140/230090899-246a5391-a504-47a7-9ae7-5a3826c25ebe.png)
 
-**NOTE:-** Replace **bastion-vm-public-IP** with the public IP of the bastion vm, **target-vm-private-IP** with the private IP of the target vm.
-
+{{% notice Note %}}
+Replace **bastion-vm-public-IP** with the public IP of the bastion VM and **target-vm-private-IP** with the private IP of the target VM.
+{{% /notice %}}
 
 ### Clean up resources
-Run `terraform destroy` to delete all resources created.
+Run `terraform destroy` to delete all resources created:
 ```console
   terraform destroy
 ```
