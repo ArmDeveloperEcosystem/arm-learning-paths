@@ -18,7 +18,7 @@ Readers should have experience with [Docker](https://www.docker.com/) and be int
 
 ## Use an example GitHub Project
 
-Let’s start learning CodeBuild on AWS Graviton processors using a small Docker image for Arm. The [GitHub repository](https://github.com/jasonrandrews/hello-arm) contains a simple collection of “hello world” applications.
+Let’s start learning CodeBuild on AWS Graviton processors using a small Docker image for Arm. The [GitHub repository](https://github.com/jasonrandrews/hello-arm) contains a simple collection of "hello world" applications.
 
 Let’s imagine hello.c is an actual software project which changes regularly, and the Docker image needs to be rebuilt when the source file changes. This article does not cover GitHub Actions to trigger automatic builds, but actions can be easily added. The goal is to go from a button click in the AWS Console to new images in container repositories.
 
@@ -26,7 +26,7 @@ Head over to the [AWS Console](https://aws.amazon.com/console/) to get started w
 
 ## Create a repository in ECR Public
 
-In the AWS Console navigate to Elastic Container Registry. Create an ECR Public repository by clicking on the Public tab and then using the “Create repository” button on the top right. For more details refer to the [getting started guide](https://docs.aws.amazon.com/AmazonECR/latest/public/public-getting-started.html).
+In the AWS Console navigate to Elastic Container Registry. Create an ECR Public repository by clicking on the Public tab and then using the "Create repository" button on the top right. For more details refer to the [getting started guide](https://docs.aws.amazon.com/AmazonECR/latest/public/public-getting-started.html).
 
 Create a repository named c-hello-world and tagged it for the ARM 64 architecture. The new repository should now be visible in the ECR Public Gallery. Note the URI of the repository which should be similar to: `public.ecr.aws/m6s3k6o5/c-hello-world`.
  
@@ -54,7 +54,7 @@ Head over to [CodeBuild](https://aws.amazon.com/codebuild/) in the AWS Console. 
 
 One way to get started is to create a buildspec.yml file and add it to the GitHub repository. CodeBuild will look for it at the top of the directory structure, but more to come on the buildspec in the sections below.
 
-Open CodeBuild in the AWS Console and create a new CodeBuild project. Use the “Create project” button on the upper right of the page.
+Open CodeBuild in the AWS Console and create a new CodeBuild project. Use the "Create project" button on the upper right of the page.
 
 The Project configuration section has the project name and description.
 
