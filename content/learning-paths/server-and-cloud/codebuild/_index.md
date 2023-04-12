@@ -1,7 +1,5 @@
 ---
-title: Build and share Docker images using AWS CodeBuild and Graviton
-
-description: Learn how to build and share docker imsages using AWS CodeBuild on Arm servers.
+title: Build and share Docker images using AWS CodeBuild
 
 minutes_to_complete: 30
 

@@ -8,9 +8,11 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Install Docker
+## Before you begin
 
-[Install Docker](/install-guides/docker/) on any Arm machine you want to run the images created in the previous article. 
+You can run the created images on any Arm machine with Docker installed. 
+
+[Install Docker](/install-guides/docker/) on the machine you want to run the created images.
 
 For Linux, confirm the architecture is Arm AArch64. 
 
