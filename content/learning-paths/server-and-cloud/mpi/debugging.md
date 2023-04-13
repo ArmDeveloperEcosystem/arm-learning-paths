@@ -2,7 +2,7 @@
 # User change
 title: "Debug your application"
 
-weight: 2 # (intro is 1), 2 is first, 3 is second, etc.
+weight: 3 # (intro is 1), 2 is first, 3 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -63,7 +63,7 @@ If you have enabled the compiler's address sanitizer, a report will be output wh
 
 ### Use a parallel debugger
 
-Parallelism can introduce specific bugs such as race conditions or deadlocks. To control the parallel execution and visualize the source code, a parallel debugger such as Arm DDT can help. 
+Parallelism can introduce specific bugs such as race conditions or deadlocks. To control the parallel execution and visualize the source code, a parallel debugger such as [Linaro DDT](/install-guides/forge/) can help. 
 
 In the same folder previously selected, run the C/Fortran application in parallel with:
 

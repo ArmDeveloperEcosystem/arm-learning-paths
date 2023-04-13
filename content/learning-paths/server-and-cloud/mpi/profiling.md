@@ -1,7 +1,7 @@
 ---
 # User change
 title: "Optimize your code"
-weight: 3 # (intro is 1), 2 is first, 3 is second, etc.
+weight: 4 # (intro is 1), 2 is first, 3 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -43,7 +43,7 @@ This will provide information on a few hardware counter events as well as the el
 
 ### Use a parallel profiler
 
-In the same folder previously selected, run the C/Fortran application in parallel with:
+In the same folder previously selected, run the C/Fortran application in parallel with [Linaro MAP](/install-guides/forge/) :
 
 ```bash {  command_line="user@localhost" }
 map mpirun ./mmult 1024
