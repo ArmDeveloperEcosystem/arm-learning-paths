@@ -223,7 +223,7 @@ function trackHeaderInteraction(type,name){
            let lp_title = document.getElementById('learning-path-title').innerText;
            let lp_step = document.getElementById('learning-path-step-active').innerText;
            let lp_step_num = document.getElementById('learning-path-step-active').getAttribute('data-step-num');
-           var digitalData = {};
+          
            digitalData.learningPath = {
                 pageInfo: {
                     learningPathName: lp_title, 

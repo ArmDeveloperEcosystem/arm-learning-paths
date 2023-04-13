@@ -1,9 +1,14 @@
+var digitalData={};
+
+
 (() => {
       // Always check local storage to keep these attributes constant:
         // Theme  (light, dark)
         // Width  (is-full-width)
         // Height (expanded-masthead and contextual data)
     	//Check Storage. Keep user preference on page reload
+
+
 
 	if (localStorage.getItem('theme')=='dark') {
     document.querySelector('html').setAttribute('theme', 'dark');
