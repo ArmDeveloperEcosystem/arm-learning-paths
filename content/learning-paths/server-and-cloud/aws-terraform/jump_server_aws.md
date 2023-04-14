@@ -13,38 +13,7 @@ A Jump Server (also known as bastion host) is an intermediary device responsible
 
 ## Deploying Arm instances on AWS and providing access via Jump Server
 
-For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 7 files: `ec2.tf`, `outputs.tf`, `provider.tf`, `security_groups.tf`, `ssh_key_gen.tf`, `variables.tf` and `VPC_subnet_IG_RT.tf`
-
-`ssh_key_gen.tf` creates a private key (id_rsa) and public key (id_rsa.pub) and saves the it in `~/.ssh/` path. It is necessary to save the key in order to SSH into Bastion Host at a later time.
-
-```console
-	resource "tls_private_key" task1_p_key  {
-		algorithm = "RSA"
-	}
-
-	resource "aws_key_pair" "task1-key" {
-		key_name    = "task1-key"
-		public_key = tls_private_key.task1_p_key.public_key_openssh
-	  }
-
-	resource "local_file" "public_key" {
-		depends_on = [
-		  tls_private_key.task1_p_key,
-		]
-		filename = pathexpand("~/.ssh/id_rsa.pub")
-		content  = tls_private_key.task1_p_key.public_key_openssh
-		file_permission = "400"
-	}
-
-	resource "local_file" "private_key" {
-		depends_on = [
-		  tls_private_key.task1_p_key,
-		]
-		filename = pathexpand("~/.ssh/id_rsa")
-		content  = tls_private_key.task1_p_key.private_key_openssh
-		file_permission = "400"
-	}
-```
+For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 7 files: `ec2.tf`, `outputs.tf`, `provider.tf`, `security_groups.tf`, `variables.tf` and `VPC_subnet_IG_RT.tf`
 
 `variable.tf` configures the region, ami, instance type, disk size, and IP range.
 
@@ -265,7 +234,7 @@ Then create a routing table for the Internet gateway so that instance can connec
 		instance_type = "${var.bastionhost-instance-type}"
 		subnet_id = aws_subnet.Public_Subnet.id
 		vpc_security_group_ids = [ aws_security_group.only_ssh_bastion.id ]
-		key_name = "task1-key"
+		key_name = aws_key_pair.deployer.key_name
 
 		root_block_device {
 			volume_size = "${var.bastionhost-disk-size}"
@@ -286,7 +255,7 @@ Then create a routing table for the Internet gateway so that instance can connec
 		instance_type = "${var.instance-type-1}"
 		subnet_id = aws_subnet.Private_Subnet.id
 		vpc_security_group_ids = [ aws_security_group.only_ssh_private_instance.id]
-		key_name = "task1-key"
+		key_name = aws_key_pair.deployer.key_name
 
 		root_block_device {
 			volume_size = "${var.disk-size-1}"
@@ -299,6 +268,10 @@ Then create a routing table for the Internet gateway so that instance can connec
 			Name = "terraform"
 			}
 	}
+        resource "aws_key_pair" "deployer" {
+               key_name   = "id_rsa"
+               public_key = file("~/.ssh/id_rsa.pub")
+        }
 ```
 
 `outputs.tf` defines the output values for this configuration.
