@@ -14,9 +14,8 @@ learning_objectives:
 
 prerequisites:
     - General knowledge about distributed parallelism (MPI)
-    - Installation of C, Fortran compiler and MPI framework
-    - Installation of BLAS library
-    - Installation of Python with NumPy, SciPy and MPI4Py
+    - Some understanding of C, Python, and Linux commands
+    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/server-and-cloud/csp/).
 
 author_primary: Florent Lebeau
 
@@ -33,7 +32,7 @@ tools_software_languages:
     - Python
     - GCC
     - Armclang
-    - Arm Forge
+    - Linaro Forge
     - gdb
 
 ### FIXED, DO NOT MODIFY
