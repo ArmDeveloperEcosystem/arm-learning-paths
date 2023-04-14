@@ -38,12 +38,12 @@ python3.8 -m pip install imgtool cffi intelhex cbor2 cbor pytest click jinja2 Py
 ```
 
 ## Clone the TF-M repository
-```bash
+```bash { pre_cmd="sudo chown ubuntu:ubuntu /shared"; cwd="/shared" }
 git clone https://git.trustedfirmware.org/TF-M/trusted-firmware-m.git
 cd trusted-firmware-m
 ```
 TF-M uses `cmake` as the build system. Install if necessary, then create and navigate into a build directory.
-```bash { cwd="trusted-firmware-m" }
+```bash { cwd="/shared/trusted-firmware-m" }
 sudo apt install -y cmake
 mkdir cmake_build
 cd cmake_build
@@ -56,14 +56,14 @@ cmake .. -DTFM_PLATFORM=arm/mps3/an552 -DTEST_NS=ON -DTEST_S=ON -DTFM_TOOLCHAIN_
 
 Or, with GCC:
 
-```bash { cwd="trusted-firmware-m/cmake_build" }
+```bash { cwd="/shared/trusted-firmware-m/cmake_build"}
 cmake .. -DTFM_PLATFORM=arm/mps3/an552 -DTEST_NS=ON -DTEST_S=ON -DTFM_TOOLCHAIN_FILE=../toolchain_GNUARM.cmake
 ```
 All the parameters are defined in the [Trusted Firmware-M documentation](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html#build-and-run-instructions).
 
 
 ## Build using make
-```bash { cwd="trusted-firmware-m/cmake_build" }
+```bash { cwd="/shared/trusted-firmware-m/cmake_build" }
 make install
 ```
 On a successful build, the TF-M test executables are created in the `bin` directory. This includes binary files for the `MCUBoot bootloader`, `TF-M secure firmware` and `TF-M non-secure` app. Signed variants of both the TF-M secure and non-secure images are created along with a combined signed image of both the secure and non-secure image.
@@ -73,7 +73,7 @@ On a successful build, the TF-M test executables are created in the `bin` direct
 To run the tests on the FVP use:
 
 ### Standalone
-```console
+```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55"; cwd="/shared/trusted-firmware-m/cmake_build" }
 FVP_Corstone_SSE-300_Ethos-U55 -a cpu0*="bin/bl2.axf" --data "bin/tfm_s_ns_signed.bin"@0x01000000
 ```
 ### Within Arm Virtual Hardware
