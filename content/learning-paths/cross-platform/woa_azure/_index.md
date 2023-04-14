@@ -15,7 +15,7 @@ author_primary: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
-subjects: CI-CD
+subjects: Containers and Virtualization
 armips:
     - Neoverse
 operatingsystems:

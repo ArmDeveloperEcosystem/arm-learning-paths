@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Deploy AWS Graviton EC2 instances using the AWS Console"
+draft: true
 
 weight: 2 # 1 is first, 2 is second, etc.
 
