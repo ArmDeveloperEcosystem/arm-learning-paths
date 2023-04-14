@@ -1,25 +1,24 @@
 ---
 # User change
-title: "Automate virtual machine creation with Terraform"
+title: "Automate Azure VM creation with Terraform"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
+This learning path uses [Terraform Cloud](https://registry.terraform.io/) to automate instantiation of Arm instances. Reader may wish to also see:
+* [Getting Started with Microsoft Azure](/learning-paths/server-and-cloud/csp/azure/)
+* [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/)
 
 You will need an [Azure portal account](https://portal.azure.com/). Create an account if needed.
+
+## Before you begin
 
 Two tools are required on the computer you are using. Follow the links to install the required tools.
 
 * [Terraform](/install-guides/terraform)
 * [Azure CLI](/install-guides/azure-cli)
-
-##  Deploy a Arm based virtual machine using Terraform.
 
 ## Generate an SSH key-pair
 
@@ -66,7 +65,7 @@ az vm image list --location eastus2 --publisher Canonical --offer 0001-com-ubunt
 
 **Image list:**
 
-![image](https://user-images.githubusercontent.com/42368140/196460588-3aa72ac1-5f0f-4c57-a6d7-70e81787f137.PNG)
+![image #center](https://user-images.githubusercontent.com/42368140/196460588-3aa72ac1-5f0f-4c57-a6d7-70e81787f137.PNG)
 
 ## Terraform infrastructure
 Start by creating an empty `providers.tf`, `variables.tf`, `main.tf` and `outputs.tf` files.
@@ -276,7 +275,7 @@ Run `terraform init` to initialize the Terraform deployment. This command downlo
 terraform init
 ```
 
-![image](https://user-images.githubusercontent.com/42368140/196460749-f9d7ea1e-fc69-4ba6-887c-da488053ef91.PNG)
+![image #center](https://user-images.githubusercontent.com/42368140/196460749-f9d7ea1e-fc69-4ba6-887c-da488053ef91.PNG)
 
 ### Create a Terraform execution plan
 
@@ -297,23 +296,23 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 ```console
 terraform apply main.tfplan
 ```
-![image](https://user-images.githubusercontent.com/67620689/227440412-c01e6f30-c32f-431b-819e-6b7e1937a0df.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/227440412-c01e6f30-c32f-431b-819e-6b7e1937a0df.PNG)
 
 ### Verify created resources
 Go to Azure Dashboard and choose **Resource group** created from Terraform.
 
-![image](https://user-images.githubusercontent.com/67620689/227440421-20642716-8eee-4f82-a5de-f4dd4592b65d.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/227440421-20642716-8eee-4f82-a5de-f4dd4592b65d.PNG)
 
 Go to Azure Dashboard and choose **Virtual Machine** created from Terraform.
 
-![image](https://user-images.githubusercontent.com/67620689/227440425-fe5d1685-e957-46ec-b49c-e848d211fbe3.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/227440425-fe5d1685-e957-46ec-b49c-e848d211fbe3.PNG)
 
 ### Use private key to SSH into Azure VM
 Connect to Azure VM using the private key(~/.ssh/id_rsa) created through `ssh-keygen`.
 
 Use the connect command mentioned in the azure VM **GOTO >> connect** section:
 
-![image](https://user-images.githubusercontent.com/67620689/227440429-f2b1249e-18eb-4db0-bce0-2eed07204fed.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/227440429-f2b1249e-18eb-4db0-bce0-2eed07204fed.PNG)
 
 Run following command to connect to VM through SSH:
 
@@ -321,7 +320,7 @@ Run following command to connect to VM through SSH:
 ssh azureuser@<Public IP>
 ```
 
-![image](https://user-images.githubusercontent.com/67620689/227440438-90f5c9e9-ba55-486e-a874-0e5c2d7f9958.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/227440438-90f5c9e9-ba55-486e-a874-0e5c2d7f9958.PNG)
 
 ### Clean up resources
 
@@ -332,5 +331,4 @@ terraform destroy
 ```
 
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
-![image](https://user-images.githubusercontent.com/42368140/196463306-1e559148-4b9a-414c-b862-06c6aa33557e.PNG)
-
+![image #center](https://user-images.githubusercontent.com/42368140/196463306-1e559148-4b9a-414c-b862-06c6aa33557e.PNG)

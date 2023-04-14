@@ -1,9 +1,7 @@
 ---
 title: Deploy Arm Instances on AWS using Terraform
 
-minutes_to_complete: 30   
-
-who_is_this_for: This is an introductory topic for software developers new to AWS EC2 and AWS Graviton processors.
+minutes_to_complete: 60   
 
 learning_objectives: 
     - Deploy AWS EC2 instances based on AWS Graviton processors from the AWS console
@@ -16,7 +14,7 @@ prerequisites:
 author_primary: Jason Andrews
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Containers and Virtualization
 armips:
     - Neoverse

@@ -7,23 +7,12 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-
-## Deploy Arm instances on AWS and provide access via Jump Server
-
-## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
-
-Two tools are required on the computer you are using. Follow the links to install the required tools.
-* [Terraform](/install-guides/terraform)
-* [AWS CLI](/install-guides/aws-cli)
-
 ## Introduction to Jump Server
+
 A Jump Server (also known as bastion host) is an intermediary device responsible for funnelling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
 ## Deploying Arm instances on AWS and providing access via Jump Server
+
 For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 7 files: `ec2.tf`, `outputs.tf`, `provider.tf`, `security_groups.tf`, `variables.tf` and `VPC_subnet_IG_RT.tf`
 
 `variable.tf` configures the region, ami, instance type, disk size, and IP range.

@@ -8,36 +8,12 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
+## Introduction to Jump Server
 
-Any computer which has the required tools installed can be used for this section.
-
-You will need an [Azure portal account](https://portal.azure.com/). Create an account if needed.
-
-Two tools are required on the computer you are using. Follow the links to install the required tools.
-
-* [Terraform](/install-guides/terraform)
-* [Azure CLI](/install-guides/azure-cli)
-
-## Deploy Arm VMs on Azure and provide access via Jump Server
-
-### Introduction to Jump Server
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
-### Generate an SSH key-pair
+## Deploying Arm VMs on Azure and providing access via Jump Server
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
-
-{{% notice Note %}}
-If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
-{{% /notice %}}
-
-### Azure authentication
-The installation of Terraform on your desktop or laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
-
-For Azure authentication, follow this [guide](/install-guides/azure_login).
-
-### Deploying Arm VMs on Azure and providing access via Jump Server
 For deploying Arm VMs on Azure and providing access via Jump Server, the Terraform configuration is broken into 4 files: `main.tf`, `variables.tf`, `outputs.tf` and `providers.tf`.
 It creates an instance with OS Login configured to use as a bastion host and a private instance to use alongside the bastion host.
 
@@ -352,21 +328,24 @@ output "private_ip_addresses" {
 }
 ```
 
-### Terraform Commands
+## Deploy Virtual Machines
+
 To deploy the VMs, you need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [section of the learning path](/learning-paths/server-and-cloud/azure/terraform#terraform-commands) to deploy the `main.tf` file.
 
 ### Verify the Instance and Bastion Host setup
+
 In the Azure Portal, go to the [Virtual Machines page](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Compute%2FVirtualMachines). The instances created through Terraform will be displayed on the screen.
 
-![azure_vm](https://user-images.githubusercontent.com/42368140/230090582-49331e8f-7afb-45ed-ae12-8d49da0dde34.png)
+![azure_vm #center](https://user-images.githubusercontent.com/42368140/230090582-49331e8f-7afb-45ed-ae12-8d49da0dde34.png)
 
 ### Use Jump Host to access the Private Instance
+
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server:
 ```console
   ssh -J ubuntu@bastion-vm-public-IP ubuntu@target-vm-private-IP
 ```
 
-![azure_connect_vm](https://user-images.githubusercontent.com/42368140/230090899-246a5391-a504-47a7-9ae7-5a3826c25ebe.png)
+![azure_connect_vm #center](https://user-images.githubusercontent.com/42368140/230090899-246a5391-a504-47a7-9ae7-5a3826c25ebe.png)
 
 {{% notice Note %}}
 Replace **bastion-vm-public-IP** with the public IP of the bastion VM and **target-vm-private-IP** with the private IP of the target VM.
@@ -378,4 +357,4 @@ Run `terraform destroy` to delete all resources created:
   terraform destroy
 ```
 
-![azure_terraform_destroy](https://user-images.githubusercontent.com/42368140/230092816-e2db8e58-b1ec-4d85-b3d4-012ce3e5385a.png)
+![azure_terraform_destroy #center](https://user-images.githubusercontent.com/42368140/230092816-e2db8e58-b1ec-4d85-b3d4-012ce3e5385a.png)
