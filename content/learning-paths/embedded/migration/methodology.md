@@ -37,7 +37,7 @@ To illustrate this, we have summarized our example's original configuration in t
 
 | Source code | Build type | OS | Compiler | Build tools | External libraries |
 | ----------- | ---------- | -- | -------- | ----------- | ------------------ |
-| C++ | Native build | Ubuntu 20.04.05 | GCC 9.4.0 | Cmake 3.25.3 | OpenCV 4.2.0 |
+| C++ | Native build | Ubuntu 20.04.5 | GCC 9.4.0 | Cmake 3.25.3 | OpenCV 4.2.0 |
 
 This configuration can easily be reproduced on aarch64 by installing Ubuntu 20.04.05 and installing the system's packages. We can already foresee that building the pure C and the OpenCV version of the Sobel filter on aarch64 won't be an issue.
 

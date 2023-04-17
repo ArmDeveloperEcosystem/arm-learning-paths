@@ -42,15 +42,18 @@ RUN if ! [ "$(arch)" = "aarch64" ] ; then exit 1; fi
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -y update
-RUN apt-get -y install vim sudo wget git tar build-essential libopencv-dev
+RUN apt-get -y install vim wget sudo git tar build-essential libopencv-dev
 RUN apt-get clean
-
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-aarch64.sh
-RUN bash ./cmake-3.25.3-linux-aarch64.sh --skip-license --prefix=/
 
 ENV USER=ubuntu
 RUN useradd --create-home -s /bin/bash -m $USER && echo "$USER:ubuntu" | chpasswd && adduser $USER sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-aarch64.sh
+RUN mkdir -p /opt/cmake
+RUN bash ./cmake-3.25.3-linux-aarch64.sh --skip-license --prefix=/opt/cmake
+
+RUN echo "export PATH=/opt/cmake/bin:\$PATH" >> /home/ubuntu/.bashrc
 
 WORKDIR /home/ubuntu
 USER ubuntu
@@ -85,14 +88,14 @@ As an alternative, you can also pull this image from Docker Hub:
 
 ```bash
 docker pull armswdev/arm-compiler-for-linux
-docker tag armswdev/arm-compiler-for-linux arm-compiler-for-linux
+docker tag armswdev/arm-compiler-for-linux sobel_example
 ```
 
 This image is based on Ubuntu 22.04 and provides the latest version of the Arm Compiler for Linux and GCC.
 
 #### Install dependencies
 
-The image has generic software development tools but still miss the OpenCV libraries our application requires. To install them, run:
+The image has generic software development tools but still miss the OpenCV libraries our application requires. When the container is running (see next page for how to launch it), use the following command to install them:
 
 ```bash
 sudo apt install -y libopencv-dev

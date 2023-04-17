@@ -13,8 +13,9 @@ layout: "learningpathall"
 To visualize the result, we need to set up X11 before building and pass some extra arguments when launching the Docker container:
 
 ```bash
+sudo apt install -y x11-xserver-utils
 xhost +local:*
-docker run --rm -ti --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v $HOME/.Xauthority:/home/ubuntu/.Xauthority flebeau/arm-compiler-for-linux
+docker run --rm -ti --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v $HOME/.Xauthority:/home/ubuntu/.Xauthority sobel_example
 ```
 
 In the container:
@@ -43,7 +44,7 @@ To fix this, let edit the `Makefile` to replace this flag with compiler options 
 sed -i "s/-mavx/-O2\ -march=armv8.2-a+fp16+rcpc+dotprod+crypto/g" src/CMakeLists.txt
 ```
 
-## Enable NEON instinsics
+## Enable NEON intrinsics
 
 At this point, we would be able to build the pure C and OpenCV version of the algorithm but we fail to build the whole application because of SIMD AVX instrinsics.
 
@@ -111,9 +112,12 @@ $ sed -i "7i set(CMAKE_CXX_COMPILER\ \"/opt/arm/arm-linux-compiler-23.04_Ubuntu-
 ## Summary
 
 In this example we have illustrated key aspects of application porting:
-- check your application library dependencies. This is the most portable solution: the porting work may already have been done.
-- check your building options. Some compiler flags may be architecture-specific.
-- check if the application uses instrinsics. Libraries such as SIMD Everywhere will ease the migration and ensures the appropriate features of the processor are used.
+- Start by building the application on the original architecture, investigate the system environment and check how the application is built. List all application dependencies.
+- Try to replicate the original environment as much as possible on the target architecture.
+- Plan what need work to complete the migration. Look out for non-portable compiler flags, architecture-specific intrinsics and third-party libraries.
+  - As a general rule, always prefer using libraries instead of custom implementations. The porting work may have been done already!
+- Perform the first stage of the migration with a similar setup than on the original architecture.
+- Finally, iteratively update third-party libraries and tools to take advantage of the latest features of the target processor.
 
 | Version | G++ 12.2.0 | ACfL 23.04 |
 | ----------- | ----------- | ----------- |
