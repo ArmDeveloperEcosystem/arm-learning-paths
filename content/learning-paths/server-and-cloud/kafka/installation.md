@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Install Kafka and Zookeeper"
+title: "Introduction to Kafka and Zookeeper"
 
 weight: 2
 
@@ -12,11 +12,15 @@ layout: "learningpathall"
 ## Before you begin
 
 You will need 7 physical Arm machines or cloud instances with Ubuntu/Debian installed. 
-Make sure ports 8080, 2888, 3888 and 2181 are open in the security group of the IP addresses for these machines.
+Make sure ports 8080, 2888, 3888, 2181 and 9092 are open in the security group of the IP addresses for these machines.
 
 ## Introduction to Kafka
 
 Kafka is an event streaming platform. It is a distributed system consisting of servers and clients that communicate via a high-performance TCP network protocol. It can be deployed on bare-metal hardware, virtual machines, and containers in on-premise as well as cloud environments. The [Getting Started Guide](https://kafka.apache.org/documentation/#gettingStarted) is a great resource to learn more about Kafka.
+
+## Introduction to Zookeeper
+
+Zookeeper is an open sourced project that provides a centralized service for maintainence of configuration information, naming and group services. It is used by a cluster or a group of nodes to share data. Kafka is built to use Zookeeper to coordinate tasks.
 
 ## Setup
 
