@@ -6,7 +6,7 @@ weight: 2
 
 ## Find your Arm Hardware 
 
-Evaluation boards (also known as starter kits, or similar) for are available from various Arm partners to support their devices. They are used for early software development, prototyping, and demonstration. They come in a wide variety of feature sets and price points. They are typically used stand-alone as provided.
+Evaluation boards (also known as starter kits, or similar) are available from various Arm partners to support their devices. They are used for early software development, prototyping, and demonstration. They come in a wide variety of feature sets and price points. They are typically used stand-alone as provided.
 
 Other boards, often refered to as edge computing boards or modules, or as single board computers (SBCs), can be directly used in a final product. These boards typically have a small form-factor so as to be easily designed into commercial products. Debug interfaces, and other features beneficial for early software may not be available.
 
