@@ -60,3 +60,5 @@ Default output format [json]: json
 ```
 
 Replace the value of `Access Key ID`, `Secret Access Key`, `region name` and `output format` with your values.
+
+After a successful configuration, you will be able to use the AWS CLI and automation tools like Terraform from the terminal.
