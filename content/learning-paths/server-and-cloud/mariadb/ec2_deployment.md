@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ##  Install MariaDB on an AWS Arm based instance
 
-You can deploy MariaDB on AWS Graviton processors using Terraform and Ansible. 
+You can deploy [MariaDB](https://mariadb.org/) on AWS Graviton processors using Terraform and Ansible. 
 
 In this topic, you will deploy MariaDB on a single AWS EC2 instance. 
 
@@ -18,9 +18,7 @@ If you are new to Terraform, you should look at [Automate AWS EC2 instance creat
 
 ## Before you begin
 
-You should have the prerequisite tools installed before starting the Learning Path. 
-
-Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+Any computer which has [Terraform](/install-guides/terraform/), [Ansible](/install-guides/ansible/), and the [AWS CLI](/install-guides/aws-cli/) installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine.
 
 You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
 
@@ -32,28 +30,27 @@ The instructions to create the keys are below.
 
 ### Generate an SSH key-pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [
-guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow the [SSH install guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-
 ### Acquire AWS Access Credentials
 
 Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI. 
 
-To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow the [AWS Credentials install guide](/install-guides/aws_access_keys).
 
-## Deploy EC2 instance via Terraform
+## Deploy an AWS EC2 instance using Terraform
 
-After generating the public and private keys, we have to create an EC2 instance. Then we will push our public key to the **authorized_keys** folder in `~/.ssh`. We will also create a security group that opens inbound ports `22`(ssh) and `3306`(MariaDB). Below is a Terraform file named `main.tf` that will do this for us.
+Before installing MariaDB, you need to create an AWS EC2 instance. 
    
+Use a text editor to add the contents below to a new file named `main.tf`.
 
 ```terraform
 provider "aws" {
-  region = "us-east-2"
+  region = "us-east-1"
 }
 
 resource "aws_instance" "Mariadb_TEST" {
@@ -118,15 +115,19 @@ resource "aws_key_pair" "deployer" {
 }
 
 ```
-Make the changes listed below in `main.tf` to match your account settings.
 
-1. In the `provider` section, update value to use your preferred AWS region.
+There are 2 optional changes you can make to the `main.tf` file. 
 
-2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
+1. (optional) In the `provider` section, change the region to be your preferred AWS region.
+
+2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. 
 
 {{% notice Note %}}
 The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+
+The created security group opens inbound ports `22` (ssh) and `3306` (MariaDB). 
 {{% /notice %}}
+
 
 ## Terraform Commands
 
@@ -190,8 +191,12 @@ Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 
 ## Configure MariaDB through Ansible
-Ansible is a software tool that provides simple but powerful automation for cross-platform computer support.
-Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook.
+
+Ansible is a software tool that provides simple, but powerful, automation of repeated tasks. 
+
+Using a text editor, save the code below in a file named `playbook.yaml` 
+
+This is the YAML file for the Ansible playbook.
 
 ```yml
 ---
@@ -252,22 +257,26 @@ Using a text editor, save the code below to in a file called `playbook.yaml`. Th
         state: restarted
 
 ```
-{{% notice Note %}} Replace **{{Your_mariadb_password}}** and **{{Give_any_password}}** with your password. {{% /notice %}}
 
-In the above `playbook.yml` file, we are creating a user (**Local_user**) with all privileges granted and setting the password for the **root** user.
-We are also enabling remote login by changing the **bind address** to **0.0.0.0** in the **/mariadb.conf.d/50-server.cnf** file.
+{{% notice Note %}} 
+Replace `{{Your_mariadb_password}}` and `{{Give_any_password}}` with your password. 
+{{% /notice %}}
 
-In our case, the inventory file `/tmp/inventory` will be generated automatically after the `terraform apply` command.
+In the above `playbook.yml` file, you are creating a local user with all privileges granted and setting the password for the `root` user.
+
+You are also enabling remote login by changing the `bind address` to `0.0.0.0` in the `/etc/mysql/mariadb.conf.d/50-server.cnf` file.
+
+The inventory file `/tmp/inventory` will be generated automatically after the `terraform apply` command.
 
 ### Ansible Commands
 
-This `ansible` Playbook uses the MySQL community module that can be installed by running the following command after installation:
+This `ansible` Playbook uses the MySQL community module that can be installed by running:
 
 ```bash
 ansible-galaxy collection install community.mysql
 ```
 
-To run a Playbook, we need to use the `ansible-playbook` command. 
+To run a Playbook, use the `ansible-playbook` command: 
 
 ```bash
 ansible-playbook playbook.yml -i /tmp/inventory
@@ -317,19 +326,25 @@ ansible-target1            : ok=8    changed=6    unreachable=0    failed=0    s
 
 ## Connect to Database from local machine
 
-To connect to the database, we need the `public-ip` of the instance where MariaDB is deployed. We also need to use the MariaDB Client to interact with the MariaDB database.
+To connect to the database, you need the `public-ip` of the instance where MariaDB is deployed. 
+
+You also need to use the MariaDB Client to interact with the MariaDB database.
 
 ```console
 apt install mariadb-client
 ```
 
+Replace `{public_ip of instance where MariaDB deployed}`, `{user_name of database}` and `{password of database}` with your values. 
+
+In this case `user_name`= `Local_user`, which is have created through the `playbook.yml` file. 
+
+
 ```console
 mariadb -h {public_ip of instance where MariaDB deployed} -P3306 -u {user of database} -p{password of database}
 ```
 
-{{% notice Note %}} Replace `{public_ip of instance where MariaDB deployed}`, `{user_name of database}` and `{password of database}` with your values. In our case `user_name`= `Local_user`, which we have created through the `playbook.yml` file. {{% /notice %}}
-
 The output will be:
+
 ```output
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 6
@@ -357,6 +372,7 @@ The output will be:
 MariaDB [(none)]> create database arm_test;
 Query OK, 1 row affected (0.001 sec)
 ```
+
 2. List all databases:
 
 ```mysql
@@ -417,6 +433,7 @@ MariaDB [arm_test]> insert into book(name,id) values ('Abook','10'),('Bbook','20
 Query OK, 7 rows affected (0.01 sec)
 Records: 7  Duplicates: 0  Warnings: 0
 ```
+
 6. Display the database tables:
 
 ```mysql
