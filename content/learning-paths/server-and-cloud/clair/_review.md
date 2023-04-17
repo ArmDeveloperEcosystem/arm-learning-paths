@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            In combined deployment, the Clair processes run in single OS process. Whereas in distributed deployment, each Clair process runs in its own OS processes.
+            In a combined deployment, the Clair components run in single OS process. In a distributed deployment, each Clair process runs in its own OS processes.
 
     - questions:
         question: >
@@ -29,7 +29,7 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            By default, clairctl will look for Clair at localhost:6060. We can configure it to another host and port by using clairctl's "--host" flag.
+            By default, clairctl will look for Clair at localhost:6060. You can configure it to another host and port by using the "--host" flag.
 
 
 
