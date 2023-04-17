@@ -1,22 +1,24 @@
 ---
 layout: learningpathall
-title: Using sse2neon to port intrinsics to Neoverse
+title: Using sse2neon to port code to Arm
 weight: 4
 ---
 
-## Using sse2neon 
+## sse2neon 
 
-The [sse2neon project](https://github.com/DLTcollab/sse2neon) is a quick way to get C/C++ applications compiling and running on Neoverse. The sse2neon header file provides NEON implementations for x64 intrinsics so no source code changes are needed. 
+The [sse2neon project](https://github.com/DLTcollab/sse2neon) is a quick way to get C/C++ applications compiling and running on Arm. The `sse2neon.h` header file provides NEON implementations for x64 intrinsics so no further source code changes are needed. 
 
-Each function call (intrinsic) is simply replaced with NEON instructions and will just work on Neoverse. 
+Each intrinsic is replaced with NEON code and so will run on an appropriate Arm platform.
 
-To make this application compile and run on Neoverse there are three steps.
+## Porting with sse2neon
+
+To make this application compile and run on Arm there are three steps.
 
 - Adjust the SSE specific header file usage for the Arm architecture
-- Include sse2neon.h to map the intrinsics to NEON instructions
+- Include `sse2neon.h` to map the intrinsics to NEON instructions
 - Change the g++ compiler flags for the Arm architecture
 
-Here is the new program. The only change is related to the include files.
+Here is the new code (`neon.cpp`). The only change is related to the include files.
 
 ```cpp { file_name="neon.cpp" }
 #include <iostream>
@@ -47,18 +49,20 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
+This can be compiled and run on your Arm instance using the commands below.
 
-Assuming the new file is renamed to be neon.cpp this version can be compiled and run on the Arm architecture using the commands below. Install wget, the g++ compiler and use these options recommended for Neoverse-N1.
+Install `wget` and `g++` compiler, and use appropriate `g++` command options:
 
 ```bash { target="arm64v8/ubuntu:latest" }
 sudo apt install -y wget g++
 wget https://raw.githubusercontent.com/DLTcollab/sse2neon/master/sse2neon.h
 g++ -O2 -I. -march=armv8.2-a+fp16+rcpc+dotprod+crypto --std=c++14 neon.cpp -o neon
 ```
-
-Execute and check the program output:
-
+Run the code:
 ```bash { target="arm64v8/ubuntu:latest"; command_line="user@localhost | 2" }
 ./neon
+```
+and observe the output:
+```output
 result equals 6,8,10,12
-`
+```

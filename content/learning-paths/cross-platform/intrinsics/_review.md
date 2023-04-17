@@ -9,28 +9,27 @@
     # correct_answer:   An integer indicating what answer is correct (index starts from 0)
     # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
-
 review:
     - questions:
         question: >
-            Does SIMD Everywhere work to port AVX512 to NEON?
+            Does SIMD Everywhere work to port AVX512 to Arm Neon?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1                  
         explanation: >
-            Yes, SIMD Everywhere can port AVX512 to NEON. 
+            Yes, SIMD Everywhere can port AVX512 to Neon. However sse2neon cannot.
 
     - questions:
         question: >
-            When porting code to Arm Neoverse, SSE intrinsics must be re-written to use NEON intrinsics
+            When porting code to Arm Neon, SSE intrinsics must be re-written to use NEON intrinsics
         answers:
             - "True"
             - "False"
         correct_answer: 2                    
         explanation: >
-            False, there is no need to re-write intrinsics. 
-               
+            False. With the use of sse2neon or SIMDe, there is no need to re-write intrinsics.
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
