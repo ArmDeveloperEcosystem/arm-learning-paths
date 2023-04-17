@@ -1,27 +1,24 @@
 ---
 # User change
-title: "Automate AWS EC2 instance creation using Terraform"
+title: "Automate AWS instance creation using Terraform"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+This learning path uses [Terraform Cloud](https://registry.terraform.io/) to automate instantiation of Arm instances. Reader may wish to also see:
+* [Getting Started with AWS](/learning-paths/server-and-cloud/csp/aws/)
 
-##  Deploy Graviton based EC2 instances with Terraform 
-
-Another way to start an AWS EC2 instance is with Terraform. You can follow the steps here to automate your AWS EC2 instance creation.
+You will need an [AWS account](https://portal.aws.amazon.com). Create an account if needed.
 
 ## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
 
 Two tools are required on the computer you are using. Follow the links to install the required tools.
 
 * [Terraform](/install-guides/terraform)
 * [AWS CLI](/install-guides/aws-cli)
+
 
 ## Generate the SSH key-pair
 

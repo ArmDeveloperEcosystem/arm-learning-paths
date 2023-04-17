@@ -1,35 +1,33 @@
 ---
-title: Implement CI/CD with Windows on Arm host
+title: Deploy a Windows on Arm virtual machine on Microsoft Azure
 
-description: Get started with GitHub CI/CD development flow on a Windows on Arm machine (or virtual machine).
+minutes_to_complete: 15
 
-minutes_to_complete: 30
-
-who_is_this_for: This is an introductory topic for software developers interested in running their CI flows on Windows on Arm machines.
+who_is_this_for: This is an introductory topic for software developers interested using Windows on Arm in the cloud.
 
 learning_objectives: 
-    - Setup a CI/CD flow with GitHub Actions to use Windows on Arm as the self-hosted runner host
-    - Run a simple workflow
+    - Start a Windows on Arm virtual machine in Azure cloud
 
 prerequisites:
-    - Some familiarity with CI/CD concepts is assumed
-    - Valid GitHub account
-    - Microsoft Azure account (if using virtual machine)
+    - Valid Azure Cloud account
 
 author_primary: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
-subjects: CI-CD
+subjects: Containers and Virtualization
 armips:
     - Neoverse
 operatingsystems:
     - Windows
 tools_software_languages:
-    - C
-    - yml
-    - GitHub
     - Azure
+
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - server-and-cloud
+    - desktop-and-laptop
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
