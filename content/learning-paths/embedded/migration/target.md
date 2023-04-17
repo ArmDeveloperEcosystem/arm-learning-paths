@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Application porting" 
+title: "Target system setup" 
 
 weight: 4 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,9 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-# Application porting
+# Target system setup
+
+Embedded systems are increasingly using container engines such as Docker to deploy and isolate applications. In our example, we are going to show how to build or pull a container image to perform our porting and build natively on aarch64.
 
 ## Access aarch64 system
 
@@ -33,34 +35,23 @@ Launch an aarch64 Graviton instance using [AWS EC2](https://aws.amazon.com/ec2/)
 Create a Dockerfile with the content below to set up the necessary development tools:
 
 ```
-FROM ubuntu:22.04
- 
+FROM ubuntu:20.04
+
 RUN if ! [ "$(arch)" = "aarch64" ] ; then exit 1; fi
- 
+
 ENV DEBIAN_FRONTEND=noninteractive
- 
+
 RUN apt-get -y update
-RUN apt-get -y install vim wget sudo git make cmake tar
-RUN apt-get -y install environment-modules python3 libc6-dev
+RUN apt-get -y install vim sudo wget git tar build-essential libopencv-dev
 RUN apt-get clean
- 
+
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-aarch64.sh
+RUN bash ./cmake-3.25.3-linux-aarch64.sh --skip-license --prefix=/
+
 ENV USER=ubuntu
 RUN useradd --create-home -s /bin/bash -m $USER && echo "$USER:ubuntu" | chpasswd && adduser $USER sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
- 
-ENV ACFL_MAJ_VER=23
-ENV ACFL_MIN_VER=04
- 
-RUN wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/${ACFL_MAJ_VER}-${ACFL_MIN_VER}/arm-compiler-for-linux_${ACFL_MAJ_VER}.${ACFL_MIN_VER}_Ubuntu-22.04_aarch64.tar
-RUN tar xf arm-compiler-for-linux_${ACFL_MAJ_VER}.${ACFL_MIN_VER}_Ubuntu-22.04_aarch64.tar
-RUN cd arm-compiler-for-linux_${ACFL_MAJ_VER}.${ACFL_MIN_VER}_Ubuntu-22.04 && ./arm-compiler-for-linux_${ACFL_MAJ_VER}.${ACFL_MIN_VER}_Ubuntu-22.04.sh -a
-RUN rm -rf arm-compiler-for-linux_${ACFL_MAJ_VER}.${ACFL_MIN_VER}_Ubuntu-20.04*
- 
-RUN echo "source /usr/share/modules/init/bash" >> /home/ubuntu/.bashrc
-RUN echo "module use /opt/arm/modulefiles" >> /home/ubuntu/.bashrc
-RUN echo "module load binutils acfl gnu" >> /home/ubuntu/.bashrc
-RUN echo "echo Arm Compiler for Linux environment loaded." >> /home/ubuntu/.bashrc
- 
+
 WORKDIR /home/ubuntu
 USER ubuntu
 ```
@@ -70,20 +61,39 @@ USER ubuntu
 On AVA or AWS Graviton:
 
 ```bash
-docker build -t arm-compiler-for-linux .
+docker build -t sobel_example .
 ```
 
 On x86_64:
 
 ```bash
-docker buildx build --platform linux/amd64 -t arm-compiler-for-linux .
+docker buildx build --platform linux/amd64 -t sobel_example .
 ```
 
-### Pull image
+You can check the environment with a few commands:
 
-As an alternative, you can also pull the image from Docker Hub:
+```bash
+cat /etc/issue
+gcc --version
+cmake --version
+cat /usr/lib/aarch64-linux-gnu/pkgconfig/opencv4.pc | grep Version
+```
+
+### [Alternative] Pull ACfL development image
+
+As an alternative, you can also pull this image from Docker Hub:
 
 ```bash
 docker pull armswdev/arm-compiler-for-linux
 docker tag armswdev/arm-compiler-for-linux arm-compiler-for-linux
+```
+
+This image is based on Ubuntu 22.04 and provides the latest version of the Arm Compiler for Linux and GCC.
+
+#### Install dependencies
+
+The image has generic software development tools but still miss the OpenCV libraries our application requires. To install them, run:
+
+```bash
+sudo apt install -y libopencv-dev
 ```

@@ -2,13 +2,11 @@
 # User change
 title: "Native build" 
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-
-# Native build
 
 ## Launch Docker container instance
 
@@ -27,13 +25,7 @@ sudo chown ubuntu:ubuntu ~/.Xauthority
 
 ## Build on aarch64
 
-### Install dependencies
 
-The image has generic software development tools but still miss the OpenCV libraries our application requires. To install them, run:
-
-```bash
-sudo apt install -y libopencv-dev
-```
 
 ## Clone repository
 
@@ -102,7 +94,7 @@ make
 
 ## ACfL
 
-To change the compiler for our project, we need to edit `src/CMakeListrs.txt` to add the following:
+If you are using the `armswdev/arm-compiler-for-linux` you can swich compiler to build the application. To do so, you need to edit `src/CMakeListrs.txt` to add the following:
 
 ```
 set(CMAKE_C_COMPILER "/opt/arm/arm-linux-compiler-23.04_Generic-AArch64_Ubuntu-22.04_aarch64-linux/bin/armclang")
