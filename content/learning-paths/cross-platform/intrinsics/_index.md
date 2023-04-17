@@ -8,7 +8,7 @@ layout: learningpathall
 learning_objectives:
 - Understand what intrinsics are and how to find them in code
 - Evaluate options and use header-only libraries to port architecture specific intrinics
-  to Arm Neoverse
+  to Arm
 learning_path_main_page: 'yes'
 minutes_to_complete: 30
 operatingsystems:
@@ -31,7 +31,7 @@ title: Porting architecture specific intrinsics
 tools_software_languages: null
 weight: 1
 who_is_this_for: This is an advanced topic for software developers interested in porting
-  architecture specific intrinics to Arm Neoverse processors.
+  architecture specific intrinics to Arm processors.
 
 ### Cross-platform metadata only
 shared_path: true
