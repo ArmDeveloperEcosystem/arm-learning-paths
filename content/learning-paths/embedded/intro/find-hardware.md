@@ -36,4 +36,4 @@ Other board providers include [Phytec](https://www.phytec.com/product-category/s
 
 ## Cortex-R evaluation boards
 
-Cortex-R boards are less common in the public domain, but are available to support devices from [Texas Instruments](https://www.ti.com/microcontrollers-mcus-processors/arm-based-microcontrollers/arm-cortex-r-mcus/overview.html) or [Renesas](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/rz-mpus/rzt-series-mpu) amongst others.
+Cortex-R boards are less common in the public domain, but are available to support devices from [Texas Instruments](https://www.ti.com/microcontrollers-mcus-processors/arm-based-microcontrollers/arm-cortex-r-mcus/overview.html) or [Renesas](https://www.renesas.com/us/en/products/microcontrollers-microprocessors/rz-mpus/rzt-series-mpu) among others.

@@ -8,9 +8,11 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Install Docker
+## Before you begin
 
-[Install Docker](/install-guides/docker/) on any Arm machine you want to run the images created in the previous article. 
+You can run the created images on any Arm machine with Docker installed. 
+
+[Install Docker](/install-guides/docker/) on the machine you want to run the created images.
 
 For Linux, confirm the architecture is Arm AArch64. 
 
@@ -22,7 +24,7 @@ uname -m
 
 The output should be:
 
-```console
+```output
 aarch64
 ```
 
@@ -30,33 +32,41 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Pull and Run
 
-If CodeBuild is complete, the images are ready to pull and run. Both images are identical and the output from the uname is the same and shows the image was built on Amazon Linux 2.
+If CodeBuild is complete, the images are ready to pull and run. Both images are identical and the output from the `uname` is the same and shows the image was built on Amazon Linux 2.
 
 To get the image from Docker Hub:
 
-```console
-docker pull jasonrandrews/c-hello-world
+```bash
+docker pull <username>/c-hello-world
 ```
+
+{{% notice Note %}}
+Replace `<username>` with your Docker Hub user name.
+{{% /notice %}}
 
 To get the image from AWS ECR:
-```console
-docker pull public.ecr.aws/z9p7l6s8/c-hello-world
+```bash
+docker pull public.ecr.aws/<alias>/c-hello-world
 ```
 
+{{% notice Note %}}
+Replace `<alias>` with your AWS ECR alias (similar to `m6s3k6o5`)
+{{% /notice %}}
+
 To run the Docker Hub image:
-```console
-docker run --rm jasonrandrews/c-hello-world
+```bash
+docker run --rm <username>/c-hello-world
 ```
 
 The output should be similar to:
-```console
+```output
 Hello, architecture from uname is Linux 39d131c8e64b 4.14.219-161.340.amzn2.aarch64 #1 SMP Thu Feb 4 05:54:27 UTC 2021 aarch64 Linux
 64-bit userspace
 ```
 
 To run the AWS ECR image:
-```console
-docker run --rm public.ecr.aws/z9p7l6s8/c-hello-world
+```bash
+docker run --rm public.ecr.aws/<alias>/c-hello-world
 ```
 
 The output should be the same as above.

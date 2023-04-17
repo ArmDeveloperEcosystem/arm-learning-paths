@@ -13,23 +13,13 @@
 review:
     - questions:
         question: >
-            Windows on Arm machines can be used in your GitHub Actions CI/CD workflows.
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 1
-        explanation: >
-            GitHub provides you the option to a self-hosted runner for your Windows on Arm machine.
-
-    - questions:
-        question: >
-            You can only create Linux on Arm virtual machines in the Azure cloud.
+            Only ubuntu machines can be used in your GitHub Actions CI/CD workflows.
         answers:
             - "True"
             - "False"
         correct_answer: 2
         explanation: >
-            You can also create Windows on Arm64 virtual machines in the Azure cloud.
+            GitHub now provides the option to a self-hosted runner for your Windows on Arm machine.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

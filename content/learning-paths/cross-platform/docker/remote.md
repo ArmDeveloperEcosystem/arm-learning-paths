@@ -13,11 +13,11 @@ layout: "learningpathall"
 
 Building Docker images for the Arm architecture on the non-Arm machine on your desk using emulation may be slow. 
 
-This section explains how to use the `docker context` command to build an image for the Arm architecture using a remote machine accessible via ssh. 
+This section explains how to use the `docker context` command to build an image for the Arm architecture using a remote machine accessible via SSH. 
 
-Docker should also be installed on a remote Arm machine which can be reached via ssh without password. 
+Docker should also be installed on a remote Arm machine which can be reached via SSH without password. 
 
-For more information about ssh configuration refer to [SSH](/install-guides/ssh/).
+For more information about SSH configuration refer to [SSH](/install-guides/ssh/).
 
 To learn how to create an Arm virtual machine using a cloud service provider refer to [Get started with Arm-based cloud service csp](/learning-paths/server-and-cloud/csp/).
 
@@ -25,7 +25,7 @@ To learn how to create an Arm virtual machine using a cloud service provider ref
 
 This section contrasts a local build for the x86_64 architecture and a remote build for the Arm architecture. 
 
-On your local computer, create a new directory and save the two lines below into a file named Dockerfile, or re-use the same file from the previous section.
+On your local computer, create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous section.
 
 ```dockerfile
 FROM ubuntu:latest
@@ -48,7 +48,7 @@ The output prints the architecture of the local machine.
 
 The previous section explained how to use `docker buildx` to create a multi-architecture image which included the Arm support. This was done using instruction emulation. 
 
-If the build process is complex, emulation will take too long. A different way to build for the Arm architecture is to use a remote builder. A remote builder provides better performance compared to local buildx with emulation. For example, building a large C++ project may have significant slowdown with buildx. 
+If the build process is complex, emulation will take too long. A different way to build for the Arm architecture is to use a remote builder. A remote builder provides better performance compared to local `buildx` with emulation. For example, building a large C++ project may have significant slowdown with `buildx`. 
 
 Using the same Dockerfile, an image for the Arm architecture can be created from the local machine by using the remote machine. 
 
@@ -69,7 +69,7 @@ To build an image on the remote machine use `docker build`. Replace `username` w
 docker build -t username/uname  .
 ```
 
-If you manually ssh to the remote machine and use `docker images` the results is the same as running `docker images` on the local machine with the remote context set. 
+If you manually use SSH to the remote machine and use `docker images` the results is the same as running `docker images` on the local machine with the remote context set. 
 
 With the remote context, the run command will also execute on the remote machine. 
 

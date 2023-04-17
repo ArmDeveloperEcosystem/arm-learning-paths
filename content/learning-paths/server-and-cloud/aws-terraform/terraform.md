@@ -1,51 +1,38 @@
 ---
 # User change
-title: "Automate AWS EC2 instance creation using Terraform"
+title: "Automate AWS instance creation using Terraform"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
+This learning path uses [Terraform Cloud](https://registry.terraform.io/) to automate instantiation of Arm instances. Reader may wish to also see:
+* [Getting Started with AWS](/learning-paths/server-and-cloud/csp/aws/)
 
-##  Deploy Graviton based EC2 instances with Terraform 
-
-Another way to start an AWS EC2 instance is with Terraform. You can follow the steps here to automate your AWS EC2 instance creation.
+You will need an [AWS account](https://portal.aws.amazon.com). Create an account if needed.
 
 ## Before you begin
-
-Any computer which has the required tools installed can be used for this section.
-
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
 
 Two tools are required on the computer you are using. Follow the links to install the required tools.
 
 * [Terraform](/install-guides/terraform)
 * [AWS CLI](/install-guides/aws-cli)
 
+
 ## Generate the SSH key-pair
 
-Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Generate Access keys (access key ID and secret access key)
+## Acquire AWS Access Credentials
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
-  
-### Go to My Security Credentials
-   
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png "Security credentials")
 
-### On Your Security Credentials page click on create access keys (access key ID and secret access key)
-   
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png "Access keys")
-   
-### Copy the Access Key ID and Secret Access Key 
-
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png "Copy keys")
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
 
 ## Create your first Terraform infrastructure (main.tf)
 
@@ -69,9 +56,7 @@ This is how `main.tf` will look like for AWS:
 
 ```console   
       provider "aws" {
-      region     = "eu-central-1"
-      access_key = "XXXXXXXXXXXXXXXXXXXX"
-      secret_key = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+        region     = "us-east-2"
       } 
 ```
 
@@ -116,8 +101,6 @@ resource "aws_instance" "ec2_example" {
 ```console
 provider "aws" {
   region     = "us-east-2"
-  access_key = "Axxxxxxxxxxxxxxxxxxxx"
-  secret_key = "JzZKiCia2vjbq4zGGGxxxxxxxxxxxxxxxxxxxxxx"
 }
 
 resource "aws_instance" "ec2_example" {

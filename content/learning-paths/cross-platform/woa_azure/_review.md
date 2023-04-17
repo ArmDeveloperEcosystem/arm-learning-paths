@@ -13,24 +13,13 @@
 review:
     - questions:
         question: >
-            Does SIMD Everywhere work to port AVX512 to NEON?
-        answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                  
-        explanation: >
-            Yes, SIMD Everywhere can port AVX512 to NEON. 
-
-    - questions:
-        question: >
-            When porting code to Arm Neoverse, SSE intrinsics must be re-written to use NEON intrinsics
+            You can only create Linux on Arm virtual machines in the Azure cloud.
         answers:
             - "True"
             - "False"
-        correct_answer: 2                    
+        correct_answer: 2
         explanation: >
-            False, there is no need to re-write intrinsics. 
-               
+            You can also create Windows on Arm virtual machines in the Azure cloud.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

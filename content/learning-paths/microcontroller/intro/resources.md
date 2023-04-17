@@ -25,6 +25,6 @@ Coursera offer [Arm Cortex-M Architecture and Software Development Specializatio
 
 ## Bespoke training courses
 
-Arm offers bespoke [Instructor-led training](https://developer.arm.com/Training&f[navigationhierarchiescontenttype]=Instructor-led%20Training) for organizations wishing for  deeper technical training, including specialized topics such as [Arm Helium](https://www.arm.com/technologies/helium) technology, [Trustzone for Cortex-M](https://www.arm.com/technologies/trustzone-for-cortex-m), and others.
+Arm offers bespoke [Instructor-led training](https://developer.arm.com/Training) for organizations wishing for  deeper technical training, including specialized topics such as [Arm Helium](https://www.arm.com/technologies/helium) technology, [Trustzone for Cortex-M](https://www.arm.com/technologies/trustzone-for-cortex-m), and others.
 
 Arm has a number of [Approved Training Partners](https://www.arm.com/partners/arm-approved-program/training-partners) who can provide training courses to meet your needs.

@@ -30,45 +30,50 @@ To install locally see:
 ## Prerequisites
 
 Install `python 3` prerequisites for TF-M:
-```console
+```bash
 sudo apt update
-sudo apt install -y python3.8-venv
+sudo apt install -y python3.8-venv python3-pip
 sudo ln -s /usr/local/bin/pip3 /usr/bin/pip3.8
-python3.8 -m pip install imgtool cbor2
-python3.9 -m pip install imgtool cffi intelhex cbor2 cbor pytest click
+python3.8 -m pip install imgtool cffi intelhex cbor2 cbor pytest click jinja2 PyYAML
 ```
 
 ## Clone the TF-M repository
-```console
+```bash { pre_cmd="sudo chown ubuntu:ubuntu /shared"; cwd="/shared" }
 git clone https://git.trustedfirmware.org/TF-M/trusted-firmware-m.git
 cd trusted-firmware-m
 ```
 TF-M uses `cmake` as the build system. Install if necessary, then create and navigate into a build directory.
-```console
+```bash { cwd="/shared/trusted-firmware-m" }
 sudo apt install -y cmake
 mkdir cmake_build
 cd cmake_build
 ```
-Set the relevant `cmake` variables to build the TF-M suite of tests. The `TFM_TOOLCHAIN_FILE` parameter is used to select a toolchain. For example:
+Set the relevant `cmake` variables to build the TF-M suite of tests. The `TFM_TOOLCHAIN_FILE` parameter is used to select a toolchain. For example, to build with Arm Compiler:
 
 ```console
-cmake .. -DTFM_PLATFORM=arm/mps3/an552 -DTEST_NS=ON -DTEST_S=ON -DTFM_TOOLCHAIN_FILE=toolchain_ARMCLANG.cmake
+cmake .. -DTFM_PLATFORM=arm/mps3/an552 -DTEST_NS=ON -DTEST_S=ON -DTFM_TOOLCHAIN_FILE=../toolchain_ARMCLANG.cmake
+```
+
+Or, with GCC:
+
+```bash { cwd="/shared/trusted-firmware-m/cmake_build"}
+cmake .. -DTFM_PLATFORM=arm/mps3/an552 -DTEST_NS=ON -DTEST_S=ON -DTFM_TOOLCHAIN_FILE=../toolchain_GNUARM.cmake
 ```
 All the parameters are defined in the [Trusted Firmware-M documentation](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html#build-and-run-instructions).
 
 
 ## Build using make
-```console
+```bash { cwd="/shared/trusted-firmware-m/cmake_build" }
 make install
 ```
-On a successful build, the TF-M test binaries are created in the `bin` directory. This includes binaries files for the `MCUBoot bootloader`, `TF-M secure firmware` and `TF-M non-secure` app. Signed variants of both the TF-M secure and non-secure images are created along with a combined signed image of both the secure and non-secure image.
+On a successful build, the TF-M test executables are created in the `bin` directory. This includes binary files for the `MCUBoot bootloader`, `TF-M secure firmware` and `TF-M non-secure` app. Signed variants of both the TF-M secure and non-secure images are created along with a combined signed image of both the secure and non-secure image.
 
 ## Run the TF-M tests on the Corstone-300 FVP
 
 To run the tests on the FVP use:
 
 ### Standalone
-```console
+```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55"; cwd="/shared/trusted-firmware-m/cmake_build" }
 FVP_Corstone_SSE-300_Ethos-U55 -a cpu0*="bin/bl2.axf" --data "bin/tfm_s_ns_signed.bin"@0x01000000
 ```
 ### Within Arm Virtual Hardware
@@ -84,7 +89,7 @@ The memory map for the FVP is documented [here](https://developer.arm.com/docume
 
 The test results will be output in a `telnet` window.
 
-```
+```output
 *** Non-secure test suites summary ***
 Test suite 'SFN Backend NS test (TFM_NS_SFN_TEST_1XXX)' has PASSED
 Test suite 'PSA protected storage NS interface tests (TFM_NS_PS_TEST_1XXX)' has PASSED

@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about migrating applications to Arm. 
+   You have successfully learned how to build applications with Arm64EC on a Windows on Arm device. You might be interested in how to setup and use the Windows Subsystem for Linux (WSL) on Arm computers.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/migration/"
+recommended_path: "/learning-paths/desktop-and-laptop/wsl2"
 # Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
 
 
@@ -18,14 +18,9 @@ recommended_path: "/learning-paths/server-and-cloud/migration/"
 
 further_reading:
     - resource:
-        title: Terraform on Azure
-        link: https://www.udemy.com/course/terraform-on-azure-basic-tutorial
-        type: Tutorial
-    - resource:
-        title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
-        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
-        type: Blog
-
+        title: Get started with Arm64EC
+        link: https://learn.microsoft.com/en-us/windows/arm/arm64ec-build
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

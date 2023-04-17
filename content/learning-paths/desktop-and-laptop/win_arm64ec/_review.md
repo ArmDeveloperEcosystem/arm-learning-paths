@@ -13,27 +13,23 @@
 review:
     - questions:
         question: >
-            The Azure CLI can be used to find virtual machine images to deploy on Arm instances.
+            Applications can be built with Arm64EC on Windows 10 machines.
         answers:
             - "True"
             - "False"
-        correct_answer: 1                     
+        correct_answer: 2               
         explanation: >
-            The "vm image" command is a good way to find virtual machine images.
+            Arm64EC requires an Arm machine running Windows 11.
 
     - questions:
         question: >
-            Which command implements changes in a Terraform configuration?
+            Arm64EC code is not interoperable with x64 code running under emulation.
         answers:
-            - tf apply
-            - tf init
-            - tf plan
-        correct_answer: 1                     
+            - "True"
+            - "False"
+        correct_answer: 2
         explanation: >
-            Terraform apply is used to apply changes to the configuration.
-               
-
-
+            Arm64EC code is interoperable with x64 code. Arm64EC code runs with native Arm performance, whereas any x64 code runs using emulation on Windows 11. 
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

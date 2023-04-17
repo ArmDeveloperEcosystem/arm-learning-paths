@@ -1,20 +1,22 @@
 ---
 armips:
 - Neoverse
+- Cortex-A
 author_primary: Jason Andrews
-description: Learn how to port architecture intrinsics to Arm Neoverse processors.
+description: Learn how to port architecture specific intrinsics to Arm processors.
 layout: learningpathall
 learning_objectives:
 - Understand what intrinsics are and how to find them in code
 - Evaluate options and use header-only libraries to port architecture specific intrinics
-  to Arm Neoverse
+  to Arm
 learning_path_main_page: 'yes'
-minutes_to_complete: 20
+minutes_to_complete: 30
 operatingsystems:
 - Linux
 prerequisites:
-- An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate
-  cloud service provider.
+- Some understanding of SIMD concepts
+- An Arm based machine or [cloud instance](/learning-paths/server-and-cloud/csp/) running Ubuntu Linux.
+- Optionally an `x86_64` machine also running Ubuntu.
 skilllevels: Advanced
 subjects: Performance and Architecture
 test_images:
@@ -25,9 +27,15 @@ test_maintenance: true
 test_status:
 - passed
 - passed
-title: Porting Architecture Specific Intrinsics
+title: Porting architecture specific intrinsics
 tools_software_languages: null
 weight: 1
 who_is_this_for: This is an advanced topic for software developers interested in porting
-  architecture specific intrinics to Arm Neoverse processors.
+  architecture specific intrinics to Arm processors.
+
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - server-and-cloud
+    - desktop-and-laptop
 ---

@@ -13,13 +13,13 @@
 review:
     - questions:
         question: >
-            Nginx is difficult to build from source code.
+            Nginx can only be installed by building it from source.
         answers:
             - "True"
             - "False"
         correct_answer: 2                    
         explanation: >
-            Nginx is easy to build from source, it has just a few dependencies.
+            Nginx can be installed from the package manager or built from source.
 
     - questions:
         question: >
@@ -35,13 +35,13 @@ review:
                
     - questions:
         question: >
-            Nginx excels at handling a high number of connections.
+            Nginx can handle a large number of connections.
         answers:
             - "True"
             - "False"
         correct_answer: 1                    
         explanation: >
-            Nginx can often serve 10x more requests than previous web servers.
+            Nginx can often serve 10x more requests than other web servers.
 
 
 

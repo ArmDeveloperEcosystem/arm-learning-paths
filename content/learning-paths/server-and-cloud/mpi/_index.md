@@ -14,10 +14,8 @@ learning_objectives:
 
 prerequisites:
     - General knowledge about distributed parallelism (MPI)
-    - A C and Fortran compiler. Tested ![c_compiler](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/gcc.svg) ![f_compiler](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/gfortran.svg)
-    - MPI framework. Tested ![openmpi](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/openmpi.svg)
-    - BLAS library. Tested ![blas](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/blas.svg)
-    - Python with NumPy, SciPy and MPI4Py. Tested ![python](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/python.svg) ![numpy](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/numpy.svg) ![scipy](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/scipy.svg) ![mpi4py](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/badges/mpi4py.svg)
+    - Some understanding of C, Python, and Linux commands
+    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/server-and-cloud/csp/).
 
 author_primary: Florent Lebeau
 
@@ -34,7 +32,7 @@ tools_software_languages:
     - Python
     - GCC
     - Armclang
-    - Arm Forge
+    - Linaro Forge
     - gdb
 
 ### FIXED, DO NOT MODIFY

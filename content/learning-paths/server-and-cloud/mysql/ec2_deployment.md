@@ -13,27 +13,17 @@ layout: "learningpathall"
 ## Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [
-documentation](/install-guides/ssh#ssh-keys).
+guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Generate Access keys (access key ID and secret access key)
+## Acquire AWS Access Credentials
 
-The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
-  
-- Go to My Security Credentials
-   
-![image](https://user-images.githubusercontent.com/87687468/190137370-87b8ca2a-0b38-4732-80fc-3ea70c72e431.png)
+The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
-- On Your Security Credentials page click on create access keys (access key ID and secret access key)
-   
-![image](https://user-images.githubusercontent.com/87687468/190137925-c725359a-cdab-468f-8195-8cce9c1be0ae.png)
-   
-- Copy the Access Key ID and Secret Access Key 
-
-![image](https://user-images.githubusercontent.com/87687468/190138349-7cc0007c-def1-48b7-ad1e-4ee5b97f4b90.png)
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
 
 ## Deploy EC2 instance via Terraform
 
@@ -42,8 +32,6 @@ After generating the public and private keys, we have to create an EC2 instance.
 ```console
 provider "aws" {
   region = "us-east-2"
-  access_key  = "AXXXXXXXXXXXXXXXXXXX"
-  secret_key   = "AAXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 }
 
 resource "aws_instance" "MYSQL_TEST" {
@@ -107,9 +95,6 @@ resource "aws_key_pair" "deployer" {
         public_key = file("~/.ssh/id_rsa.pub")
  }
 ```
-{{% notice Note %}}
-Replace `access_key`, and `secret_key` with your values.
-{{% /notice %}}
 
 Now, use the below Terraform commands to deploy the `main.tf` file.
 

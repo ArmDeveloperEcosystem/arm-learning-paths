@@ -87,12 +87,18 @@ def check(json_file, start, stop):
         for i, img in enumerate(data["image"]):
             # Launch
             logging.info("Container instance test_{} is {}".format(i, img))
-            cmd = ["docker run --rm -t -d --name test_{} {}".format(i, img)]
+            cmd = ["docker run --rm -t -d -v $PWD/shared:/shared --name test_{} {}".format(i, img)]
             logging.debug(cmd)
             subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
             # Create user and configure
-            if "ubuntu" in img or "mongo" in img:
+            username="user"
+            if  "arm-tools" in img:
+                username="ubuntu"
+                cmd = ["docker exec test_{} apt update".format(i)]
+                logging.debug(cmd)
+                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+            elif "ubuntu" in img or "mongo" in img:
                 cmd = ["docker exec test_{} apt update".format(i)]
                 logging.debug(cmd)
                 subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
@@ -198,13 +204,19 @@ def check(json_file, start, stop):
 
         for k in inst:
             # Copy over the file with commands
-            cmd = ["docker cp {} test_{}:/home/user/".format(fn, k)]
+            cmd = ["docker cp {} test_{}:/home/{}/".format(fn, k, username)]
             subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             logging.debug(cmd)
 
             # Check type
-            if t["type"] == "bash":
-                cmd = ["docker exec -u user -w /home/user test_{} bash {}".format(k, fn)]
+            if t["type"] == "fvp":
+                # Only allow single line commands
+                if t["fvp_name"] == "FVP_Corstone_SSE-300_Ethos-U65":
+                    cmd = t["0"].replace("FVP_Corstone_SSE-300_Ethos-U65", "docker run --rm -ti -v $PWD/shared:/shared -w {} -e ETHOS_U65=1 -e NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp".format(t["cwd"]))
+                else:
+                    cmd = t["0"].replace("FVP_Corstone_SSE-300_Ethos-U55", "docker run --rm -ti -v $PWD/shared:/shared -w {} -e NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp".format(t["cwd"]))
+            elif t["type"] == "bash":
+                cmd = ["docker exec -u {} -w /home/{} test_{} bash {}".format(username, username, k, fn)]
             else:
                 logging.debug("Omitting type: {}".format(t["type"]))
                 cmd = []
@@ -264,6 +276,11 @@ def check(json_file, start, stop):
             cmd = ["docker stop test_{}".format(i)]
             logging.debug(cmd)
             subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+
+        logging.info("Removing shared directory...")
+        cmd = ["sudo rm -rf shared"]
+        logging.debug(cmd)
+        subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     else:
         logging.debug("Skip container(s) termination...")
 

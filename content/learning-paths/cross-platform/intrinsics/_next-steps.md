@@ -22,6 +22,10 @@ further_reading:
         link: https://developer.arm.com/documentation/102581/0200/Port-with-SSE2Neon-and-SIMDe
         type: documentation
     - resource:
+        title: Neon Programmer's Guide
+        link: https://developer.arm.com/documentation/den0018
+        type: documentation
+    - resource:
         title: Porting SSE to Neon, Are libraries the way forward?
         link: https://community.arm.com/arm-community-blogs/b/ai-and-ml-blog/posts/porting-sse-to-neon-are-libraries-the-way-forward
         type: blog

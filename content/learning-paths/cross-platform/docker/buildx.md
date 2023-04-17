@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 Any computer running Docker can be used for this section. 
 
-Before you begin, confirm Docker buildx is installed by running the `docker buildx` command.
+Before you begin, confirm Docker `buildx` is installed by running the `docker buildx` command.
 ```console
 docker buildx help
 ```
@@ -43,7 +43,7 @@ The next section explains how to use `docker buildx` to create multi-architectur
 
 ## Build a multi-architecture Docker image from a Dockerfile
 
-Create a new directory and save the two lines below into a file named Dockerfile, or re-use the same file from the previous section.
+Create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous section.
 
 ```dockerfile
 FROM ubuntu:latest
@@ -57,7 +57,7 @@ docker buildx create --use --name mybuilder
 docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t username/uname-x --push .
 ```
 
-Docker buildx must push the multi-architecture image to a registry. The docker daemon cannot save the image locally. This will change with the future transition from dockerd to containerd, so stay tuned. 
+Docker `buildx` must push the multi-architecture image to a registry. The docker daemon cannot save the image locally. This will change with the future transition from dockerd to containerd, so stay tuned. 
 
 After the build, the `docker images` command does not show a local image, but the multi-architecture image is present in Docker Hub. The missing local image is a common misunderstanding for developers.
 

@@ -1,18 +1,20 @@
 ---
-title: Get started with CI/CD for Windows on Arm with a Github self-hosted runner 
+title: Implement CI/CD with Windows on Arm host
 
-description: Get started with GitHub CI/CD development flow on a Windows on Arm virtual machine hosted in Azure cloud
+description: Get started with GitHub CI/CD development flow on a Windows on Arm machine (or virtual machine).
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers interested in running their CI flows on Windows Arm machines.
+who_is_this_for: This is an introductory topic for software developers interested in running their CI flows on Windows on Arm machines.
 
 learning_objectives: 
-    - Start a Windows on Arm virtual machine in Azure cloud
-    - Setup a CI/CD flow with GitHub Actions to use the Windows on Arm virtual machine as the self-hosted runner
+    - Setup a CI/CD flow with GitHub Actions to use Windows on Arm as the self-hosted runner host
+    - Run a simple workflow
 
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed
+    - Valid GitHub account
+    - Microsoft Azure account (if using virtual machine)
 
 author_primary: Pareena Verma
 

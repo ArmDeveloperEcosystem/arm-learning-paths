@@ -22,13 +22,15 @@ Three tools are required on the computer you are using. Follow the links to inst
 * [Kubectl](/install-guides/kubectl/)
 * [Azure CLI](/install-guides/azure-cli/)
 
-## Azure authentication
+## Acquire Azure Access Credentials
 
-For Azure authentication, follow this [documentation](/learning-paths/server-and-cloud/azure/terraform#azure-authentication).
+The installation of Terraform on your desktop or laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
+
+For Azure authentication, follow this [guide](/install-guides/azure_login).
 
 ## Create an SSH key pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.

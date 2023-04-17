@@ -185,17 +185,22 @@ html[theme='light'] body.gradient-background {
 html[theme='dark'] body {
         background-color: var(--arm-color-surface);       
 }
+
 html[theme='dark'] body.gradient-background {
+    background: radial-gradient(300px at top,var(--arm-light-blue),var(--arm-color-surface))!important; 
+}
+/*
     background: var(--arm-color-surface);
     background-image: radial-gradient(200px at bottom left, var(--arm-light-blue) 0%, var(--arm-color-surface) 100%), radial-gradient(200px at bottom right, var(--arm-green) 0%, var(--arm-color-surface) 100%);
     background-size: 50%, 50%;
     background-repeat: no-repeat, no-repeat;
 }
 
-/* For extremely small screen devices, and up through breakpoints */
+// Gradients on left and right corner, taking into account footer height
 @media only screen and (max-width: 576px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 1600px), calc(100% - 0px) calc(100% - 1600px)!important;}}
 @media only screen and (min-width: 576px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 1000px), calc(100% - 0px) calc(100% - 1000px)!important;}}
 @media only screen and (min-width: 768px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 990px), calc(100% - 0px) calc(100% - 990px)!important;}}
 @media only screen and (min-width: 992px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 520px), calc(100% - 0px) calc(100% - 520px)!important;}}
 @media only screen and (min-width: 1200px){body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 490px), calc(100% - 0px) calc(100% - 490px)!important;}}
 @media only screen and (min-width: 1400px){body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 490px), calc(100% - 0px) calc(100% - 490px)!important;}}
+*/

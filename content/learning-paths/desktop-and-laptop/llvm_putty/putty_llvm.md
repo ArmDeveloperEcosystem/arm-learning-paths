@@ -18,7 +18,7 @@ Follow the links to install the required tools.
 * [Strawberry Perl](https://strawberryperl.com/) 
 
 {{% notice Note %}}
-There is no Arm version of Strawberry Perl. Install the 32-bit x86 version.
+There is currently no Arm version of Strawberry Perl. Install the 32-bit x86 version.
 {{% /notice %}}
 
 ## Compile PuTTY natively on Windows on Arm with Clang
