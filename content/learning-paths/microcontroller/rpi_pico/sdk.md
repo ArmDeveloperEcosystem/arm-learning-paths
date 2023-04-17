@@ -12,7 +12,7 @@ The [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
 
 The Pico is a low cost board and a good way to get started learning programming for Arm Cortex-M.
 
-The [Pico SDK](https://github.com/raspberrypi/pico-sdk) uses the GCC compiler and cbuild to build applications. 
+The [Pico SDK](https://github.com/raspberrypi/pico-sdk) uses the GCC compiler and Cmake to build applications. 
 
 [Getting started with Raspberry Pi Pico C/C++ development](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) contains more details of C/C++ programming on the Pico.
 
@@ -76,7 +76,7 @@ Source the new .bashrc file as new variables are added by the Pico SDK.
 source ~/.bashrc
 ```
 
-There are four added variables. Display them with the env command.
+There are four added variables. Display them with the `env` command.
 
 ```bash
 env | grep PICO
