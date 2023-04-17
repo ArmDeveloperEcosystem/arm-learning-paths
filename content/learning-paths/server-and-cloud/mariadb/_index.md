@@ -1,25 +1,19 @@
 ---
-title: Deploy MariaDB on Arm
-
-description: Deploy single instance of MariaDB through Docker, RDS and EC2 instance
+title: Deploy MariaDB on Arm servers
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for software developers who want to deploy MariaDB.
+who_is_this_for: This is an introductory topic for software developers who want to deploy MariaDB on Arm servers.
 
 learning_objectives: 
-    - Deploy single instance of MariaDB through Docker, RDS and an AWS EC2
-    - Deploy single instance of MariaDB through an Azure
-    - Deploy single instance of MariaDB through GCP
+    - Deploy MariaDB on virtual machines from different cloud service providers 
+    - Deploy MariaDB using Docker
+    - Deploy MariaDB using Amazon RDS (Relational Database Service)
     - Automate MariaDB EC2 instance creation using Terraform and Ansible
 
 prerequisites:
-    - An [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
-    - A computer with [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed
-    - A computer with [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) installed
-    - A computer with [Ansible](https://www.cyberciti.biz/faq/how-to-install-and-configure-latest-version-of-ansible-on-ubuntu-linux/) installed
-    - A computer with [Terraform](/install-guides/terraform) installed
-    - A computer with [Docker](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu) installed
+    - Cloud service provider accounts for each service you want to use including AWS, Azure, and GCP
+    - A local computer with [Docker](/install-guides/docker/), [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), and [Ansible](/install-guides/ansible/) installed
 
 author_primary: Jason Andrews
 ### Tags
@@ -32,6 +26,7 @@ operatingsystems:
 tools_software_languages:
     - Terraform
     - Ansible
+    - AWS CLI
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
