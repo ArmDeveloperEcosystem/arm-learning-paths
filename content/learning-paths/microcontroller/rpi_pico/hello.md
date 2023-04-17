@@ -8,17 +8,11 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
-
-A Linux development computer with the Raspberry Pi Pico SDK installed.
-
-## Detailed Steps
-
 The first program to run on the Pico both prints "Hello" and blinks an LED.
 
 The print statements are directed to USB.
 
-### Build hello
+## Build hello
 
 Save the C code bellow to a file named hello.c
 
@@ -90,7 +84,7 @@ make
 
 The hello application is now ready to run.
 
-### Run hello
+## Run hello
 
 To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plugin the USB cable between the Pico and your development computer. 
 

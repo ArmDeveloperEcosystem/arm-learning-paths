@@ -163,8 +163,20 @@ def save(article, cmd, learningpath=False, img=None):
 
     for i_idx,i  in enumerate(cmd):
         l = list(filter(None, i.split("\n")))
-        # if bash type, check fo arguments
-        if "bash" in l[0]:
+        # if fvp type, check for arguments
+        if "fvp" in l[0]:
+            content[i_idx] = {"type": "fvp"}
+            # check if current directory is specified
+            if "cwd" in l[0]:
+                cwd = l[0].split("cwd=\"")[1].split("\"")[0]
+                content[i_idx].update({"cwd": cwd })
+            if "fvp_name" in l[0]:
+                model = l[0].split("fvp_name=\"")[1].split("\"")[0]
+                content[i_idx].update({"fvp_name": model })
+            else:
+                content[i_idx].update({"fvp_name": "FVP_Corstone_SSE-300_Ethos-U55" })
+        # if bash type, check for arguments
+        elif "bash" in l[0]:
             content[i_idx] = {"type": "bash"}
             # check if return code is specified
             if "ret_code" in l[0]:
