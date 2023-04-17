@@ -12,18 +12,11 @@ The [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/)
 
 The Pico is a low cost board and a good way to get started learning programming for Arm Cortex-M.
 
-## Prerequisites
-
-- Raspberry Pi Pico board
-- A development computer such as a Raspberry Pi 3, 4 or 400 running Raspberry Pi OS or other Linux computer running Ubuntu 
-
-## Detailed Steps
-
 The [Pico SDK](https://github.com/raspberrypi/pico-sdk) uses the GCC compiler and cbuild to build applications. 
 
 [Getting started with Raspberry Pi Pico C/C++ development](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) contains more details of C/C++ programming on the Pico.
 
-### Use the Pico SDK installation script
+## Use the Pico SDK installation script
 
 The Pico SDK installation script is managed in GitHub and is named pico_setup.sh 
 
@@ -73,7 +66,7 @@ bash ./pico_setup.sh
 {{< /tabpane >}}
 
 
-### Check the development tools
+## Check the development tools
 
 Before continuing, confirm the required tools are operational. 
 
@@ -91,7 +84,7 @@ env | grep PICO
 
 Here is the output.
 
-```console
+```output
 PICO_EXTRAS_PATH=/home/pi/pico/pico-extras
 PICO_SDK_PATH=/home/pi/pico/pico-sdk
 PICO_PLAYGROUND_PATH=/home/pi/pico/pico-playground

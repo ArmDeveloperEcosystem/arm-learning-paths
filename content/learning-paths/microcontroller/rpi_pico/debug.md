@@ -8,14 +8,6 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
-
-- Raspberry Pi Pico with debug interface pins
-- Raspberry Pi 3, 4, or 400 development computer with the Raspberry Pi Pico SDK installed
-- Wires to connect the development computer GPIO pins to the debug interface on the Raspberry Pi Pico
-
-## Detailed Steps
-
 The steps below explain how to load programs and do interactive debugging by connecting the Debug pins of the Raspberry Pi Pico. 
 
 This is helpful because holding the BOOTSEL button and connecting the USB cable is tedious during debugging sessions. 
