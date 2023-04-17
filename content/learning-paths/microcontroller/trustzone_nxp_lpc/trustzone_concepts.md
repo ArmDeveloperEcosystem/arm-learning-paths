@@ -15,24 +15,24 @@ In this section, we will break down the application we ran to understand some ba
 
 ## How to switch between security states 
 
-Start another debug session with the application. This time instead of hitting "Run" and viewing the complete output we will walk through some key Trustzone concepts used in this application.
+Start another debug session with the application. This time, instead of hitting "Run" and viewing the complete output we will walk through some key Trustzone concepts used in this application.
 At the start of execution, the program counter is at the start of `main()` in `hello_world_s.c`. The secure mode copy of the startup code has already been executed right at reset time. 
 
-In the `main()` function, board hardware initialization is performed followed by the first 2 printf statements we saw in our console output
+In the `main()` function, board hardware initialization is performed followed by the first 2 `printf` statements we saw in our console output:
 
-```console
+```output
 PRINTF("Hello from secure world!\r\n");
 PRINTF("Entering normal world.\r\n");
 ```
-The Cortex-M33 processor on the NXP board is running in secure mode upto this point. After these prints, the `TZM_JumpToNormalWorld(NON_SECURE_START)` function is called which initiates the switch to the non-secure world. This function is defined in the `tzm_api.c` source file. This function sets up the non-secure main stack and vector table and gets a pointer to the non-secure resethandler with `__attribute__((cmse_nonsecure_call))`. This key attribute directs the compiler (Arm compiler for embedded in our example) to generate a `BLXNS` instruction. This instruction causes the processor to switch from secure to non-secure world.
+The Cortex-M33 processor on the NXP board is running in secure mode up to this point. After these prints, the `TZM_JumpToNormalWorld(NON_SECURE_START)` function is called which initiates the switch to the non-secure world. This function is defined in the `tzm_api.c` source file. This function sets up the non-secure main stack and vector table and gets a pointer to the non-secure resethandler with `__attribute__((cmse_nonsecure_call))`. This key attribute directs the compiler (Arm compiler for embedded in our example) to generate a `BLXNS` instruction. This instruction causes the processor to switch from secure to non-secure world.
 
 ## Call a secure function from non-secure world
 
 Now that the processor has switched to non-secure mode it will not be able to access memory and peripherals of the secure world. The processor now executes the non-secure copy of the startup code and reaches the `main()` function of the `hello_world_ns.c` source file. 
 
-Here again there are two key print statements which we previously saw in our output
+Here again there are two key print statements which we previously saw in our output:
 
-```console
+```output
 PRINTF_NSE("Welcome in normal world!\r\n");
 PRINTF_NSE("This is a test printed from the normal world!\r\n");
 ```
