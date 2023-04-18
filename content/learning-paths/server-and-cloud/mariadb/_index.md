@@ -1,7 +1,7 @@
 ---
 title: Deploy MariaDB on Arm servers
 
-minutes_to_complete: 30   
+minutes_to_complete: 90   
 
 who_is_this_for: This is an introductory topic for software developers who want to deploy MariaDB on Arm servers.
 
@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - Cloud service provider accounts for each service you want to use including AWS, Azure, and GCP
-    - A local computer with [Docker](/install-guides/docker/), [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), and [Ansible](/install-guides/ansible/) installed
+    - A local computer with [Docker](/install-guides/docker/), [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [Azure CLI](/install-guides/azure-cli/), [Google Cloud CLI](/install-guides/gcloud/), and [Ansible](/install-guides/ansible/) installed
 
 author_primary: Jason Andrews
 ### Tags
@@ -27,6 +27,7 @@ tools_software_languages:
     - Terraform
     - Ansible
     - AWS CLI
+    - Azure CLI
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

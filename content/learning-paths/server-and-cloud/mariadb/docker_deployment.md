@@ -8,26 +8,23 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+##  Install MariaDB in a Docker container 
 
-##  Install MariaDB with a Docker container 
-
-You can deploy MariaDB with a Docker container using Terraform and Ansible. 
-
-In this topic, you will deploy MariaDB with a Docker container.
+You can deploy MariaDB in a Docker container using Terraform and Ansible. 
 
 ## Before you begin
 
-You should have the prerequisite tools installed from the topic, [Install MariaDB on a single AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#deploy-ec2-instance-via-terraform).
+The required tools for this section are the same as the previous section, You will need a computer which has [Terraform](/install-guides/terraform/), [Ansible](/install-guides/ansible/), and the [AWS CLI](/install-guides/aws-cli/) installed.
 
-Use the same SSH key pair.
+You an use the same SSH key pair.
 
 ## Create an AWS EC2 instance using Terraform
 
-You can use the same `main.tf` file used in the topic, [Install MariaDB on a single AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#deploy-ec2-instance-via-terraform).
+You can use the same Terraform file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#deploy-ec2-instance-via-terraform).
 
 ## Terraform Commands
 
-Use Terraform to deploy the `main.tf` file.
+Use a text editor to copy and save `main.tf`. If you already have it from the last topic you can use the same file. 
 
 ### Initialize Terraform
 
@@ -92,12 +89,17 @@ The public IP address will be different, but the output should be similar to:
 Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 ```
 
-## Deploy MariaDB container using Ansible
-Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.
+You now have an AWS EC2 virtual machine running, and are ready to deploy MariaDB. 
 
-To run Ansible, we have to create a `playbook.yml` file, which is also known as `Ansible-Playbook`.
-In our `playbook.yml` file, we use the **community.docker** collection to deploy the MariaDB container.
-We also need to map the container port to the host port, which is `3306`. Below is the complete `playbook.yml` file that will do this for us.
+## Deploy a MariaDB container using Ansible
+
+Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. If you are new to Docker, consider reviewing [Learn how to use Docker](/learning-paths/cross-platform/docker/).
+
+To run Ansible, you can an Ansible playbook. The playbook uses the `community.docker` collection to deploy MariaDB in a container.
+
+The playbook maps the container port to the host port, which is `3306`. 
+
+1. Use a text editor to add the contents below to a new file named `playbook.yml`.
 
 ```yml
 ---
@@ -141,19 +143,22 @@ We also need to map the container port to the host port, which is `3306`. Below 
           MARIADB_DATABASE: arm_test
 
 ```
-{{% notice Note %}} Replace **docker_container.env** variables of **Deploy mariadb docker container** task with your own MariaDB user and password. Also, replace **{{dockerhub_uname}}** and **{{dockerhub_pass}}** with your dockerhub credentials. {{% /notice %}}
 
-In our case, the inventory file will generate automatically after the `terraform apply` command.
+2. Edit `playbook.yml` to use your values 
+
+Replace **{{your_mariadb_password}}** with your own password. 
+
+Also, replace **{{dockerhub_uname}}** and **{{dockerhub_pass}}** with your [Docker Hub](https://hub.docker.com/) credentials. 
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+1. Run the playbook using the `ansible-playbook` command:
 
 ```bash
 ansible-playbook playbook.yaml -i /tmp/inventory
 ```
 
-Answer `yes` when prompted for the SSH connection. 
+2. Answer `yes` when prompted for the SSH connection. 
 
 Deployment may take a few minutes. 
 
@@ -184,9 +189,9 @@ PLAY RECAP *********************************************************************
 ansible-target1            : ok=3    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-## Connect to Database using local machine
+## Connect to Database using your local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/mariadb/ec2_deployment#connect-to-database-from-local-machine) to connect to the database from local machine.
+You can use the instructions from the previous topic to [connect to the database](/learning-paths/server-and-cloud/mariadb/ec2_deployment#connect-to-database-from-local-machine) and confirm the Docker container deployment is working. 
 
 ### Clean up resources
 
