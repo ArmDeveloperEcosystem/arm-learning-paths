@@ -20,7 +20,7 @@ Kafka is an event streaming platform. It is a distributed system consisting of s
 
 ## Introduction to Zookeeper
 
-Zookeeper is an open sourced project that provides a centralized service for maintainence of configuration information, naming and group services. It is used by a cluster or a group of nodes to share data. Kafka is built to use Zookeeper to coordinate tasks.
+Zookeeper is an open sourced project that provides a centralized service for maintenance of configuration information, naming and group services. It is used by a cluster or a group of nodes to share data. Kafka is built to use Zookeeper to coordinate tasks.
 
 ## Setup
 

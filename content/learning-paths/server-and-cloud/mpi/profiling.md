@@ -332,7 +332,7 @@ The output will be similar to:
 
 ## Use optimized routines
 
-Performance varies with different versions of libraries. You can investigate two different libraries to try and review the resuts. 
+Performance varies with different versions of libraries. You can investigate two different libraries to try and review the results. 
 
 ### Use BLAS libraries
 
