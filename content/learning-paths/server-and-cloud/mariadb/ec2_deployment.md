@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Install MariaDB on an AWS Arm based instance
+## Install MariaDB on an AWS Arm based instance
 
 You can deploy [MariaDB](https://mariadb.org/) on AWS Graviton processors using Terraform and Ansible. 
 
@@ -331,7 +331,7 @@ To connect to the database, you need the `public-ip` of the instance where Maria
 You also need to use the MariaDB Client to interact with the MariaDB database.
 
 ```console
-apt install mariadb-client
+sudo apt install mariadb-client
 ```
 
 Replace `{public_ip of instance where MariaDB deployed}`, `{user_name of database}` and `{password of database}` with your values. 
