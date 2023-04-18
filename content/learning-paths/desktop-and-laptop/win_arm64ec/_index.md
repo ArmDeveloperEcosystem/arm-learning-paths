@@ -23,6 +23,7 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - Arm64EC
+    - Visual Studio
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
