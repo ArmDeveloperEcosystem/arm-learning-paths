@@ -51,7 +51,7 @@ bin/kafka-server-start.sh config/server.properties
 
 ### Node 2:
 
-Run the commnds shown to download and setup Kafka on node 2:
+Run the commands shown to download and setup Kafka on node 2:
 
 ```console
 mkdir kafka_node2
