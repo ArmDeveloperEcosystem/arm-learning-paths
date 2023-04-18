@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Clair in the combined mode"
+title: "Create a combined deployment"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,19 +8,22 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+You can setup Clair as a combined deployment.
 
-* Cloud node or a physical machine.
-* [docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/linux/) (latest version preferred).
-* [go](https://go.dev/doc/install) (latest version preferred).
+## Before you begin
 
-## Install and run Clair in the Combined Mode
+You will need an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or any Arm server running Linux.
 
-In combined deployment, all Clair services run in a single OS process. This is the easiest deployment model to configure as it involves limited resources.
+The instructions are tested on Ubuntu. Other Linux distributions are possible with some modifications.
 
-NOTE: The below mentioned steps are tested successfully with Clair v4.5.1.
+Install [Docker](/install-guides/docker/docker-engine/) and [Go](/install-guides/go/) (latest versions preferred).
 
-Download Clair v4.5.1:
+
+## Install and run Clair (combined)
+
+In combined deployment, all Clair services run in a single OS process. This is the easiest deployment model to configure.
+
+1. Download Clair:
 
 ```console
 wget https://github.com/quay/clair/releases/download/v4.5.1/clair-v4.5.1.tar.gz
@@ -28,49 +31,102 @@ tar -xvf clair-v4.5.1.tar.gz
 cd clair-v4.5.1
 ```
 
-We will setup a postgres database for Clair to store all vulnerabilities specific to containers. The `docker-compose.yaml` already has a target "clair-database" to setup a postgres database for Clair. For combined mode, since postgres service will run inside a private container network and Clair service runs on localhost, we are required to expose postgres port 5432 to localhost. To do so, add the following to "clair-database" target in `docker-compose.yaml` file.
+2. Edit `docker-compose.yaml` to setup the database
+
+You need a postgres database for Clair to store all vulnerabilities specific to containers. 
+
+Because postgres runs inside a private container network and Clair runs on `localhost`, you need to expose postgres port 5432 to `localhost`. 
+
+Use a text editor to open `docker-compose.yaml` and search for the `clair-database` section.
+
+Add the 2 lines to the `clair-database` section of the compose file:
 
 ```console
-ports:
+    ports:
       - "5432:5432"
 ```
 
-Next, setup the postgres service as below:
+The `clair-database` section should look like this:
 
-```console
-sudo docker-compose up -d clair-database
+```output
+  clair-database:
+    ports:
+      - "5432:5432"
+    container_name: clair-database
 ```
 
-We can view the running postgres service with `docker ps`. Below is the output:
+3. Start the postgres service:
 
-![postgres_pic](https://user-images.githubusercontent.com/87687089/213442653-79fd8b49-12ce-44e7-a82f-1cfd32665c5e.PNG)
+Use `docker compose` to start the database service:
 
+```console
+sudo docker compose up -d clair-database
+```
 
-Clair uses a configuration file to configure indexer, matcher and notifier. In combined mode, we will configure indexer, matcher and notifier to communicate to postgres service exposed to port 5432 on localhost. We will use the configuration file present at `clair/local-dev/clair/config.yaml`, and modify the `connstring` of indexer, matcher and notifier as below:
+You can view the running postgres service with Docker:
+
+```console
+docker ps
+```
+
+The output will be similar to:
+
+```output
+CONTAINER ID   IMAGE         COMMAND                  CREATED          STATUS                    PORTS                                       NAMES
+f4f1cba58e9e   postgres:12   "docker-entrypoint.s…"   29 seconds ago   Up 20 seconds (healthy)   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp   clair-database
+```
+
+4. Modify the `config.yaml` file
+
+Clair uses a configuration file to configure the indexer, matcher and notifier. 
+
+In combined mode, you need to configure the indexer, matcher and notifier to communicate with postgres exposed on port 5432 of `localhost`. 
+
+Use a text editor to open and modify the configuration file at `clair/local-dev/clair/config.yaml` 
+
+Find the value of `connstring` 3 times in the file. There is a `connstring` for the indexer, matcher and notifier.
+
+In each case, replace the `connstring` with the new value:
+
+Indexer:
 
 ```console
 indexer:
   connstring: host=localhost port=5432 user=clair dbname=indexer sslmode=disable
+```
 
+Matcher:
+
+```console
 matcher:
   connstring: host=localhost port=5432 user=clair dbname=matcher sslmode=disable
+```
 
+Notifier:
+
+```console
 notifier:
   connstring: host=localhost port=5432 user=clair dbname=notifier sslmode=disable
 ```
 
-Next, generate the Clair binary with go, as below:
+5. Build Clair
+
+Generate the Clair binary with go: 
 
 ```console
-sudo go build ./cmd/clair
+go build ./cmd/clair
 ```
 
-This will generate a Clair binary in the root of the repo.
+This will create a `clair` binary in the top directory.
 
-Now the postgres service is running and Clair's configuration is ready, run Clair in the combined mode as below:
+6. Run Clair
+
+Run the Clair combined deployment:
 
 ```console
 ./clair -conf "./local-dev/clair/config.yaml" -mode "combo"
 ```
 
-The running logs on your screen confirms that Clair is running successfully in the combined mode. You can now open a new terminal and submit the manifest to generate the vulnerability report.
+The log in the terminal confirms that Clair is running successfully as a combined deployment. 
+
+You can now open a new terminal and submit the manifest to generate the vulnerability report.

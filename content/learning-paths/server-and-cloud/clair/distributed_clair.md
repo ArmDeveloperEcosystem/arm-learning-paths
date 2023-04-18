@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Clair in the distributed mode"
+title: "Create a distributed deployment"
 
 weight: 4 # 1 is first, 2 is second, etc.
 
@@ -8,19 +8,34 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+You can setup Clair as a distributed deployment.
 
-* Cloud node or a physical machine.
-* [docker](https://docs.docker.com/engine/install/ubuntu/) and [docker-compose](https://docs.docker.com/compose/install/linux/) (latest version preferred).
-* [go](https://go.dev/doc/install) (latest version preferred).
+## Before you begin
 
-## Install and run Clair in the Distributed Mode
 
-In distributed deployment, each Clair service i.e. indexer, matcher and notifier, runs in its own OS process. The `docker-compose.yaml` already has targets defined to run these three services. Unlike Combined mode, all three services will run inside containers. So, there is no need to expose postgres port 5432, as all three services of Clair are in same container network as postgres.
+You will need an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or any Arm server running Linux.
 
-NOTE: The below mentioned steps are tested successfully with Clair v4.5.1.
+The instructions are tested on Ubuntu. Other Linux distributions are possible with some modifications.
 
-Download Clair v4.5.1:
+Install [Docker](/install-guides/docker/docker-engine/) and [Go](/install-guides/go/) (latest versions preferred).
+
+{{% notice Note %}}
+If you completed the combined deployment in the previous section, you have Docker and Go installed already.
+{{% /notice %}}
+
+
+## Install and run Clair (distributed)
+
+In distributed deployment, each Clair component (indexer, matcher and notifier) runs in a separate OS process. 
+
+Unlike the combined deployment, all three components run inside containers. 
+There is no need to expose postgres port 5432, as all three services of are on same container network with postgres.
+
+{{% notice Note %}}
+If you completed the combined deployment in the previous section, you can delete the Clair directory and start again for the distributed deployment.
+{{% /notice %}}
+
+1. Download Clair:
 
 ```console
 wget https://github.com/quay/clair/releases/download/v4.5.1/clair-v4.5.1.tar.gz
@@ -28,41 +43,74 @@ tar -xvf clair-v4.5.1.tar.gz
 cd clair-v4.5.1
 ```
 
-Execute the below command to setup postgres database:
+2. Start the postgres service:
+
+Use `docker compose` to start the database service:
 
 ```console
-sudo docker-compose up -d clair-database
+sudo docker compose up -d clair-database
 ```
 
-We will need a load balancer to divert traffic to the correct service i.e. indexer, matcher and notifier as requested. We will use "Traefik" here, which will run on port 6060. To setup traefik, execute the below command:
+3. Start the load balancer 
+
+You need a load balancer to direct traffic to the correct service.
+
+You can use Traefik running on port 6060: 
 
 ```console
-sudo docker-compose up -d traefik
+sudo docker compose up -d traefik
 ```
 
-Next, run indexer, matcher and notifier as three separate processes. The `docker-compose.yaml` already has targets defined for the same.
+4. Start the Clair components
+
+The `docker-compose.yaml` file already includes the needed services so there is nothing to change. 
+
+Run the indexer, matcher and notifier as three separate processes: 
 
 ```console
-sudo docker-compose up -d indexer matcher notifier
+sudo docker compose up -d indexer matcher notifier
 ```
 
-You can verify using docker CLI if all five containers, i.e. clair-database, traefik, indexer, matcher, notifier, are running:
+5. Confirm everything is running
+
+You can verify all five containers are running with Docker: 
 
 ```console
-sudo docker ps
+docker ps
 ```
 
-Below is the output:
+The output will be similar to:
 
-![docker_ps_pic](https://user-images.githubusercontent.com/87687089/213442748-e9c25ea8-3b55-4395-87a9-92c671a288e8.PNG)
+```output
+CONTAINER ID   IMAGE                             COMMAND                  CREATED              STATUS                        PORTS                                                                                                                                                                                    NAMES
+cdbf4f727877   quay.io/projectquay/golang:1.17   "go run . -conf /etc…"   51 seconds ago       Up 47 seconds                                                                                                                                                                                                          clair-notifier
+a8a21d27fa67   traefik:v2.2                      "/entrypoint.sh trae…"   58 seconds ago       Up 55 seconds                 0.0.0.0:6060->6060/tcp, :::6060->6060/tcp, 80/tcp, 0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 0.0.0.0:32769->5432/tcp, :::32769->5432/tcp, 0.0.0.0:32768->8443/tcp, :::32768->8443/tcp   clair-traefik
+24b066458f3d   quay.io/projectquay/golang:1.17   "go run . -conf /etc…"   About a minute ago   Up 55 seconds                                                                                                                                                                                                          clair-matcher
+faa1c5754262   quay.io/projectquay/golang:1.17   "go run . -conf /etc…"   About a minute ago   Up 56 seconds                                                                                                                                                                                                          clair-indexer
+890d6f3a64e5   postgres:12                       "docker-entrypoint.s…"   About a minute ago   Up About a minute (healthy)   5432/tcp                                                                                                                                                                                 clair-database
+```
 
+You can check the logs from each service:
 
-To check logs in each of the Clair's service:
+Indexer:
 
 ```console
 sudo docker logs clair-indexer
+```
+
+Matcher:
+
+```console
 sudo docker logs clair-matcher
+```
+
+Notifier:
+
+```console
 sudo docker logs clair-notifier
 ```
 
-Now that everything is running, you can submit manifest for generating the vulnerability report.
+
+The logs confirm each service is running.
+
+You can now open a new terminal and submit the manifest to generate the vulnerability report.

@@ -11,7 +11,7 @@ learning_objectives:
     - Test write/read events into the Kafka cluster
 
 prerequisites:
-    - Seven physical machines or seven cloud instances with Ubuntu or Debian installed to create three Kafka nodes, three Zookeeper nodes, and one client node.
+    - Seven physical Arm machines or cloud instances with either Ubuntu or Debian installed. 
 
 author_primary: Pareena Verma
 

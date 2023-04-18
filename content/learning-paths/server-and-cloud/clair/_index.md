@@ -1,18 +1,17 @@
 ---
-title: Learn how to generate vulnerability reports using Clair on Arm servers
-
-description: Learn how to run Clair in the combined and the distributed mode, submit the containers to Clair and generate the Vulnerability report that can affect the content.
+title: Use Clair to scan container images and generate vulnerability reports
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for software developers interested in checking container images for vulnerabilities.
+who_is_this_for: This is an advanced topic for software developers interested in scanning container images for vulnerabilities on Arm servers.
 
 learning_objectives:
-    - Install and run Clair in both combined and distributed mode
-    - Submit container images to Clair using clairctl and generate a vulnerability report
+    - Install Clair on an Arm server
+    - Run Clair using combined and distributed deployment models
+    - Submit container images using the Clair CLI (command-line interface) and generate vulnerability reports
 
 prerequisites:
-    - A computer with the latest versions of docker, docker-compose, and go installed.
+    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or an Arm server with recent versions of Docker and Go installed.
 
 author_primary: Jason Andrews
 
