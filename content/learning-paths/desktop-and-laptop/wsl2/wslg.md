@@ -7,29 +7,30 @@ layout: learningpathall
 
 ## Run graphical Linux applications
 
-On Windows 11 graphical Linux applications be run by installing them and running them from the Linux command line.
+On Windows 11, you can run graphical Linux applications by installing and running them from the Linux command line.
 
-For example, install the Linux terminator application on Ubuntu 22.04.
+For example, install the Linux terminator application on Ubuntu 22.04:
 
 ```bash
+sudo apt-get update
 sudo apt install terminator -y
 ```
 
-Run the application.
+Run the application:
 
 ```bash
 terminator &
 ```
 
-A new terminal window will appear on the Windows desktop. 
+A new terminal window will appear on your Windows desktop. 
 
 ![Running terminator #center](wsl-terminator.png)
 
-Linux applications will appear on the Windows taskbar with a small penguin. It's possible to pin them to the taskbar and add icons to the applications menu.
+Linux applications will appear on the Windows taskbar with a small penguin. You can pin them to the taskbar and add icons to the applications menu.
 
 Windows runs a containerized Linux with XServer, Wayland, and Pulse Audio. 
 
-Inspect the Linux environment variables for more information.
+To inspect the Linux environment variables:
 
 ```console
 echo $WAYLAND_DISPLAY

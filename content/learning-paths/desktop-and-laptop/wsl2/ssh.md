@@ -1,5 +1,5 @@
 ---
-title: SSH to WSL
+title: Use SSH to connect to WSL
 
 weight: 5
 layout: learningpathall
@@ -14,7 +14,7 @@ If you only want to copy files between Windows and WSL on the current machine, S
 
 WSL automatically mounts the Windows `C:\` drive on `/mnt/c`
 
-For example, if a file was downloaded using a browser in the Windows Downloads directory and you want to bring it into Linux use the `cp` command.
+For example, if you download a file while using a browser in the Windows `Downloads` directory and you want to bring it into Linux use the `cp` command.
 
 Substitute your username and the filename to be copied.
 
@@ -22,7 +22,7 @@ Substitute your username and the filename to be copied.
 cp /mnt/c/Users/<username>/Downloads/<filename> .
 ```
 
-If SSH is needed to access WSL from a different machine continue with the instructions below. 
+If SSH is needed to access WSL from a different machine continue with the instructions below:
 
 ## Install SSH server
 
@@ -32,7 +32,7 @@ Install the SSH server inside the Linux distribution.
 sudo apt install openssh-server -y
 ```
 
-Start the SSH server.
+Start the SSH server:
 
 ```bash
 sudo /etc/init.d/ssh start
@@ -56,14 +56,14 @@ Modify the SSH config file to change the port number for the SSH server.
 
 Use port 2022 for SSH instead of the default port 22.
 
-Use a text editor to modify the file `/etc/ssh/sshd_config` and uncomment the #Port 22 to be just Port 2022
+Use a text editor to modify the file `/etc/ssh/sshd_config` and uncomment the `#Port 22` to be just `Port 2022`
 
-Do the editing from the command line:
+To edit from the command line:
 ```
 sudo sed -i -E 's,^#?Port.*$,Port 2022,' /etc/ssh/sshd_config
 ```
 
-Restart the SSH server for the new port to be used.
+Restart the SSH server for the new port to be used:
 
 ```bash
 sudo /etc/init.d/ssh stop
@@ -76,7 +76,9 @@ Use `ssh` with `-p` to specify the new port.
 ssh user@localhost -p 2022
 ```
 
-There are two options to SSH from another machine on the local network.
+There are two options to SSH from another machine on the local network:
+ - Bridged networking
+ - Port forwarding
 
 # Bridged networking
 
@@ -112,7 +114,7 @@ netsh interface portproxy add v4tov4 listenport=2022 listenaddress=0.0.0.0 conne
 
 Try to ssh from another machine on the local network. 
 
-Get the IP address of Windows.
+Get the IP address of Windows:
 
 ```cmd
 ipconfig
