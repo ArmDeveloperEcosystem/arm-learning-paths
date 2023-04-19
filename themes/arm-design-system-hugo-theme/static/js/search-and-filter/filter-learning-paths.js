@@ -68,6 +68,13 @@ function filter_LearningPath_card(card) {
 
 
 
+
+
+
+
+
+
+
 function removeFacet(tag) {
     const all_path_cards = document.querySelectorAll('div.search-div');
      //////// Remove Facet
@@ -162,6 +169,32 @@ function addFacet(element) {
         );
 }
 
+
+function turnOnFilters(filters_list) {
+    // parse incoming list
+    // try to get checkbox element matching the incoming filter request
+    // addFacets for all relevent filters
+
+
+    // parse list
+    for (let filter of filters_list) {
+        let filter_group = filter.split('=')[0];
+        let filter_name = filter.split('=')[1];
+
+        // get checkbox elements to check (mobile and desktop apperance) by 'data-urlized-name'
+        let checkbox_elements = document.querySelectorAll("ads-checkbox[data-urlized-name='"+filter_name+"']");
+        // if checkbox_elements are inside the correct group (via class  'group-os' or similar) verify the elements are in the group
+        for (let element of checkbox_elements) {
+            if (element.classList.contains("group-"+filter_group)) {
+                // check the checkbox (ISSUES WITH ADS)
+                element.checked = true;
+                // add a facet
+                addFacet(element);
+            }
+        }
+    }
+
+}
 
 
 function clearAllFilters() {

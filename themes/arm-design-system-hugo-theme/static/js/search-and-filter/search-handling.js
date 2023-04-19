@@ -55,17 +55,23 @@ function sanitizeInput(potentially_unsafe_str) {
         // a-z
         // A-Z
         // 0-9 digits
-        // special characters: .()-
-    let sanitized_str = potentially_unsafe_str.replaceAll(/[^a-z A-Z 0-9 .()-]+/g, "");
+        // special characters: .-=
+            // - very common in code
+            // = needed for param filtering to work easily in parseParamsFromURL
+    let sanitized_str = potentially_unsafe_str.replaceAll(/[^a-z A-Z 0-9 .=-]+/g, "");
 
     return sanitized_str
 }
 
 
-function searchHandler_LearningPaths(search_string) {
+function searchHandler_LearningPaths(search_string,filters_from_url_only) {
     // HANDLE if coming from ads search box (event.value) or URL (string)
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
+    }
+    // if getting filters from URL, activate the filters instantly before any other processing
+    if (filters_from_url_only) {
+        turnOnFilters(filters_from_url_only);
     }
     
     // Sanitize the input
@@ -135,7 +141,6 @@ function searchSubmit_Tools(evt) {
     }
     else {
         const safe_search_string = sanitizeInput(evt.value);
-        //const safe_formatted_search_string = safe_search_string.replaceAll(' ','+');
         const safe_formatted_search_string = encodeURIComponent(safe_search_string);
         window.location.href = "/install-guides/?search="+safe_formatted_search_string;
     }
