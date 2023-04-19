@@ -1,5 +1,5 @@
 ---
-title: Get started with Windows Subsystem for Linux(WSL) on Arm
+title: Get started with Windows Subsystem for Linux (WSL) on Arm
 
 minutes_to_complete: 90 
 
