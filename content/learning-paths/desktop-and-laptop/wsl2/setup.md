@@ -11,24 +11,23 @@ layout: "learningpathall"
 
 This Learning Path assumes you have a  Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or a Lenovo Thinkpad X13s laptop running Windows 11. 
 
-WSL is beneficial if you use develop on Arm virtual machine instances in the cloud.
-
-WSL is also useful if you are developing with embedded Linux on Arm on single board computers. 
+WSL is useful if you are developing on Arm virtual machine instances in the cloud. It is also useful if you are developing with embedded Linux on Arm on single board computers. 
 
 Using the same Arm architecture on your local development machine and on the cloud or your embedded board provides interoperability, consistency, and saves time. 
 
 
-## Installing WSL 2
+## Introduction to WSL 2
 
 Software developers often use Linux for creating applications and containers. Windows on Arm includes the [Windows Subsystem for Linux 2](https://docs.microsoft.com/en-us/windows/wsl/about) (WSL 2). 
 
 WSL 2 replaces the system call translation layer provided in WSL 1 with the latest virtualization technology to run a complete Linux kernel. WSL 2 running on a Windows on Arm computer provides a complete Linux kernel and supports many Arm Linux distributions. 
 
-WSL 2 can also run containers for application development. WSL 2 provides much faster file I/O compared to WSL 1.
+WSL 2 can run containers for application development. WSL 2 provides much faster file I/O compared to WSL 1.
 
-Installing WSL 2 requires Windows 11. A recent Windows 10 version is also possible, but these instructions were tested on Windows 11. Windows 11 is recommended to complete all of the examples in this Learning Path. All of the examples have been tested using WSL2. If only WSL is specified it means WSL2.
+## Install WSL 2
+Installing WSL 2 requires Windows 11. It is also possible to install WSL 2 on certain Windows 10 versions, but these instructions were tested on Windows 11. Windows 11 is recommended to complete all of the examples in this Learning Path. All of the examples have been tested using WSL2. If only WSL is specified it means WSL2.
 
-Below is the short version on how to install WSL2. Microsoft documentation provides a [quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
+Here is the short version on how to install WSL2. Microsoft documentation provides a [quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
 
 There are three steps to setup WSL 2.
 
@@ -42,12 +41,19 @@ Open “Turn Windows features on or off” in the Windows control panel and make
 
 Download and install WSL 2 from the [Microsoft Store](https://apps.microsoft.com/store/detail/windows-subsystem-for-linux-preview/9P9TQF7MRM4R).
 
-3. Set the default to WSL 2
+3. Set the default version to WSL 2
 
-Set the default version to WSL 2 by running the following command at a PowerShell or Command Prompt.
+Open a Windows PowerShell or Command Prompt and run the command:
 
 ```console
 wsl --set-default-version 2
+```
+
+The output from this command will look like:
+
+```output
+For information on key differences with WSL 2 please visit https://aka.ms/wsl2
+The operation completed successfully.
 ```
 
 ## Install a Linux distribution
@@ -58,19 +64,30 @@ There are other Linux distributions available in the Microsoft Store. Make sure 
 
 Another way to install Linux distributions is using the WSL command. 
 
-Using a Windows Command Prompt list the distributions available:
+Open a Windows Powershell or Command Prompt and list the distributions available:
 
 ```cmd 
 wsl --list --online
 ```
 
-Install a distribution from the list returned by the list online command.
+The output will list the available distributions:
 
-Be patient, the progress may stay on 0 for a bit.
+```output
+NAME            FRIENDLY NAME
+Ubuntu          Ubuntu
+Debian          Debian GNU/Linux
+Ubuntu-18.04    Ubuntu 18.04 LTS
+Ubuntu-20.04    Ubuntu 20.04 LTS
+Ubuntu-22.04    Ubuntu 22.04 LTS
+```
+
+Install a distribution from this list:
 
 ```cmd
 wsl --install Ubuntu
 ```
+
+Be patient, the progress may stay on 0 for a bit.
 
 After installation, each Linux distribution will have an icon on the Windows application menu. Use this icon to start WSL with the Linux distribution. 
 
@@ -82,11 +99,11 @@ A new window should open with a Linux shell.
 
 Windows Terminal is a great way to use WSL. It can be installed from the [Microsoft Store](https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701). The [repository is on GitHub](https://github.com/microsoft/terminal). 
 
-Windows Terminal supports multiple command lines: PowerShell, Command Prompt, and WSL Linux. It's also very configurable.
+Windows Terminal supports multiple command lines: PowerShell, Command Prompt, and WSL Linux. It is very configurable.
 
 ## Run bash.exe
 
-From Windows, bash.exe (or just bash) can be used to run commands in WSL. 
+From Windows, `bash.exe` (or just bash) can be used to run commands in WSL. 
 
 You can enter the default WSL distribution by running bash from a Windows Command Prompt:
 
@@ -94,9 +111,9 @@ You can enter the default WSL distribution by running bash from a Windows Comman
 bash.exe
 ```
 
-Use the -c option to bash.exe to run a command in WSL and collect the result. 
+Use the `-c` option to `bash.exe` to run a command in WSL and collect the result. 
 
-To list the contents of /usr/bin in WSL from a Windows Command Prompt run:
+For example, to list the contents of /usr/bin in WSL from a Windows Command Prompt run:
 
 ```cmd
 bash.exe -c "ls /usr/bin"
