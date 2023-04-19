@@ -68,5 +68,5 @@ github_branch= "main"
 # For metadata posting on socials
 title = 'Arm Learning Paths'
 description = 'Tutorials with code examples, created by the Arm ecosystem to develop better code faster across all platforms: Servers, phones, laptops, embedded devices, and microcontrollers.'
-social_image = '/img/Arm-Learning_Path-social-image-1280x640px.jpg'
+social_image = '/img/social-image.png'
 twitter_handle = '@ArmSoftwareDev'
