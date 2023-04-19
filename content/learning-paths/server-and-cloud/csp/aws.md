@@ -31,7 +31,7 @@ You then select an `instance size`, which will be one of a number of pre-defined
 
 The easiest way to launch your instance is via the [AWS Console](https://console.aws.amazon.com).
 
-Note the `region` you have logged into (for example `US East (N.Virginia)`) is displayed in the upper right. You can select a different location from the pull down menu if your default region does not offer Graviton servers.
+Note the `region` you have logged into (for example `us-east-1`) is displayed in the upper right. You can select a different location from the pull down menu if your default region does not offer Graviton servers.
 
 Navigate to `EC2 dashboard`, either by searching (`Alt+S`) for `EC2`, else via `Services` > `Compute` > `EC2`.
 
@@ -124,5 +124,3 @@ Build and run the application:
 gcc hello.c -o hello
 ./hello
 ```
-
-
