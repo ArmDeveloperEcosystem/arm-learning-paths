@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The learning path on deploying Memcached as a cache is a great next step.
+    We recommend you continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The learning path on MongoDB is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/memcached_cache/"
+recommended_path: "/learning-paths/server-and-cloud/mongodb/"
 # Link to the next learning path being recommended.
 
 
@@ -20,11 +20,7 @@ further_reading:
     - resource:
         title: Memcached Wiki
         link: https://github.com/memcached/memcached/wiki
-        type: documentation
-    - resource:
-        title: Benchmarking memcached performance on AWS Graviton2 servers
-        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/memcached-benchmarking-aws-graviton2-50-p-p-gains
-        type: blog
+        type: documentation    
 
 
 # ================================================================================
