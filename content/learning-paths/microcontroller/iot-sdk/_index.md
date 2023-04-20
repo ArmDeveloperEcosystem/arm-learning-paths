@@ -10,8 +10,8 @@ learning_objectives:
     - Run the examples on Corstone-300 virtual hardware
 
 prerequisites:
-    - Some familiarity with embedded programming is assumed
-    - An AWS account is necessary for Arm Virtual Hardware
+    - Some familiarity with embedded programming
+    - An AWS account (required for Arm Virtual Hardware)
 
 author_primary: Ronan Synnott
 
