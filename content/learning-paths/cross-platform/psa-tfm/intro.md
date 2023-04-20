@@ -13,8 +13,6 @@ This Learning Path uses the [Corstone-1000](https://www.arm.com/en/products/sili
 
 The software stack can be executed on the Corstone-1000 Fixed Virtual Platform (FVP) and the MPS3 FPGA prototyping board.
 
-You can also use the FPGA prototyping board to demonstrate Authenticated Debug (PSA-ADAC) in conjunction with Arm Development Studio.
-
 ## Before you begin
 
 You will need the hardware and software listed below to complete the steps in this Learning Path. 
@@ -35,12 +33,6 @@ If you are using Arm Virtual Hardware, the Corstone-1000 FVP is already installe
 
 ### MPS3 FPGA prototyping board
 
-You will need an [MPS3 FPGA Prototyping Board](https://developer.arm.com/Tools%20and%20Software/MPS3%20FPGA%20Prototyping%20Board) programmed with [AN550](https://developer.arm.com/downloads/view/AN550) to demonstrate Authenticated Debug.
+You can also use [MPS3 FPGA Prototyping Board](https://developer.arm.com/Tools%20and%20Software/MPS3%20FPGA%20Prototyping%20Board) programmed with [AN550](https://developer.arm.com/downloads/view/AN550).
 
 The image requires the `QSPI Flash Module` to be installed. Refer to section 8.2 of the [AN550 documentation](https://developer.arm.com/documentation/dai0550/latest/).
-
-### Arm Development Studio and DSTREAM
-
-To demonstrate PSA-ADAC Authenticated Debug, you will need [Arm Development Studio](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio) Silver (or higher), version 2022.3 or later. Refer to the [install guide](/install-guides/armds/) for installation instructions. 
-
-You will also need an appropriate [DSTREAM](https://www.arm.com/products/development-tools/debug-probes/dstream-st) Debug Probe. 

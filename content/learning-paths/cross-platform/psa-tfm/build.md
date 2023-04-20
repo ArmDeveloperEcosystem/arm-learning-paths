@@ -1,6 +1,6 @@
 ---
 # User change
-title: Build and run Trusted Firmware on the FVP
+title: Build Corstone-1000 software stack
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -59,37 +59,24 @@ git clone https://git.yoctoproject.org/git/meta-arm
 
 ## Build the software 
 
-You should build for the FVP first. 
-
-If you want to skip the FVP and move to the MPS3 board, proceed to the next section.
+You can build the software for FVP or MPS3
 
 {{% notice Note%}}
-The build can take over one hour to complete!
+Each build can take over one hour to complete!
 {{% /notice %}}
 
-### Build for the FVP
+### Build for Corstone-1000 FVP
 
 Start the build:
 
 ```console
 kas build meta-arm/kas/corstone1000-fvp.yml
 ```
-## Run the software on the FVP
 
-When the build is complete, run the image on the FVP:
+### Build for MPS3 AN550
+
+Start the build:
 
 ```console
-meta-arm/scripts/runfvp --terminals=xterm build/tmp/deploy/images/corstone1000-fvp/corstone1000-image-corstone1000-fvp.fvpconf
+kas build meta-arm/kas/corstone1000-mps3.yml
 ```
-
-When the boot sequence is complete, you will be presented with a login prompt.
-
-```output
-corstone1000-fvp login:
-```
-
-Use `root` as your username to proceed.
-
-You have run Trusted Firmware on the Corstone-1000 FVP. 
-
-Refer to the [Trusted Firmware-M User Guide](https://tf-m-user-guide.trustedfirmware.org/platform/arm/corstone1000/readme.html) for complete documentation.

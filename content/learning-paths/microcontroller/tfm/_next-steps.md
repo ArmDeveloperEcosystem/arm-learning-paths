@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Further learning regarding Trusted Firmware-M can be found at the [project website](https://www.trustedfirmware.org/projects/tf-m/). Also check out the learning path on running the Open-IoT SDK on the Corstone-300 FVP.
+   Further learning regarding Trusted Firmware-M can be found at the [project website](https://www.trustedfirmware.org/projects/tf-m/). Also check out the learning path on building Corstone-1000 examples.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/microcontroller/mlek"

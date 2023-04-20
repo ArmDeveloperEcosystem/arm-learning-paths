@@ -1,42 +1,40 @@
 ---
 # User change
-title: Build and run Trusted Firmware on the MPS3
+title: Run on FVP or MPS3
 
 weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-The default build for MPS3 will run as per the FVP. If you just wish to build that, jump to [here](#build).
 
-However the MPS3 FPGA image implements CoreSight [SDC-600](https://www.arm.com/en/products/silicon-ip-system/coresight-debug-trace/sdc-600) Secure Debug Channel.
+## Run the software on Corstone-1000 FVP
 
-Used in conjunction with [Arm Development Studio](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio), it can be used to demonstrate the use of [PSA-ADAC Authenticated Debug](https://developer.arm.com/documentation/107745/latest/Platform-Security-Architecture-Authenticated-Debug-Access-Control).
+When the build is complete, run the image on the FVP:
 
-## Configure build to enable SDC-600
-
-Navigate into the build recipes, and locate `trusted-firmware-m.inc`:
 ```console
-cd /meta-arm/meta-arm/recipes-bsp/trusted-firmware-m
-ls
-```
-Modify `trusted-firmware-m.inc` to add this macro to the build recipe:
-```console
-# Enable Authenticated Debug
-EXTRA_OEMAKE += "-DPLATFORM_PSA_ADAC_SECURE_DEBUG=TRUE"
+meta-arm/scripts/runfvp --terminals=xterm build/tmp/deploy/images/corstone1000-fvp/corstone1000-image-corstone1000-fvp.fvpconf
 ```
 
-## Build software stack {#build}
+When the boot sequence is complete, you will be presented with a login prompt.
 
-{{% notice Note%}}
-The build step can take over one hour to complete!
-{{% /notice %}}
-
-### Build for MPS3
-```console
-kas build meta-arm/kas/corstone1000-mps3.yml
+```output
+corstone1000-fvp login:
 ```
- When complete, the binaries are generated, and can be found in this directory:
+
+Login as `root`, and proceed as you wish. For example:
+```console
+uname -a
+```
+will return:
+```output
+TO DO
+```
+
+
+## Run software on MPS3 AN550
+
+When the MPS3 build is complete, the generated binaries can be found in this directory:
 ```console
 /build/tmp/deploy/images/corstone1000-mps3
 ```
@@ -52,7 +50,7 @@ mv es_flashfw.bin es0.bin
 mv corstone1000-image-corstone1000-<timestamp>-mps3.wic.nopt cs1000.bin
 ```
 
-## Set up MPS3
+### Set up MPS3
 
 It is recommended to prepare files to be uploaded to MPS3 on local machine, rather than directly on MPS3.
 
@@ -134,3 +132,9 @@ will return:
 ```output
 Linux corstone1000-mps3 6.1.20-yocto-standard #1 SMP PREEMPT Sat Mar 18 02:48:04 UTC 2023 aarch64 GNU/Linux
 ```
+
+## Further reading
+
+You have run Trusted Firmware on the Corstone-1000 FVP and/or MPS3.
+
+Refer to the [Trusted Firmware-M User Guide](https://tf-m-user-guide.trustedfirmware.org/platform/arm/corstone1000/readme.html) for complete documentation.

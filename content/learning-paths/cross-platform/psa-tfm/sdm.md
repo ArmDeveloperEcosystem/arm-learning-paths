@@ -1,6 +1,7 @@
 ---
 # User change
 title: Demonstrate Authenticated Debug
+draft: true
 
 weight: 5 # 1 is first, 2 is second, etc.
 
