@@ -9,11 +9,15 @@ layout: "learningpathall"
 ---
 [Arm Total Solutions for IoT](https://www.arm.com/markets/iot/total-solutions-iot) provide reference software stacks, integrating various Arm technologies, such as [Arm Trusted Firmware-M](https://developer.arm.com/Tools%20and%20Software/Trusted%20Firmware-M) and the [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit).
 
-The SDK is designed to be used with [Arm Virtual Hardware (AVH)](https://www.arm.com/products/development-tools/simulation/virtual-hardware), which provides [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Virtual Hardware.
+The Open-IoT-SDK is designed to be used with [Arm Virtual Hardware (AVH)](https://www.arm.com/products/development-tools/simulation/virtual-hardware), which provides [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Virtual Hardware.
 
 ## Before you begin
 
-See [Arm Virtual Hardware](/install-guides/avh#corstone) for set up instructions.
+Follow the [Arm Virtual Hardware](/install-guides/avh/) install guide for set up instructions. 
+
+Use your AWS account to create an EC2 instance (virtual machine) from the Arm Virtual Hardware (AVH) Amazon Machine Instance (AMI). 
+
+Once your AVH instance is running and you can connect using SSH you are ready to start. Everything can be done from a Linux terminal, and no graphical desktop is needed.
 
 ## Install the required software
 
@@ -22,6 +26,12 @@ In your AVH instance, install the required python software:
 ```console
 sudo apt update
 sudo apt install python3.8-venv -y
+sudo cp /usr/local/bin/pip3.8 /usr/bin
+```
+
+Install Python packages:
+
+```console
 python3.8 -m pip install imgtool cbor2
 python3.9 -m pip install imgtool cffi intelhex cbor2 cbor pytest click
 ```
@@ -43,19 +53,29 @@ cd open-iot-sdk/v8m
 
 ## Build an example
 
-The projects are located in the `examples` folder. See a complete list of available projects:
+The projects are located in the `examples` folder. Review the list of available projects:
+
 ```console
 ls examples
 ```
+
+The output is:
+
 ```output
 blinky  keyword  speech
 ```
-Use the `ats.sh` script to build the examples. The `blinky` example is built with:
+
+Use the `ats.sh` script to build the examples. 
+
+The `blinky` example demonstrates how to use Trusted Firmware-M to create secure and non-secure partitions, and blink the LED from the non-secure code.
+
+Build `blinky` example by running:
 
 ```console
 ./ats.sh build blinky
 ```
-See the supplied `README.md` for full details.
+
+Ignore any warnings from the build. 
 
 ## Run the example on Arm Virtual Hardware
 
@@ -93,3 +113,5 @@ LED on
 LED off
 ...
 ```
+
+Press Control-C to stop the simulation.
