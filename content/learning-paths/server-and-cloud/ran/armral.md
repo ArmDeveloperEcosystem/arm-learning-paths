@@ -34,13 +34,13 @@ sudo -E apt install -y build-essential cmake linux-tools-common gcovr doxygen
 The library can be downloaded from the [Arm Developer](https://developer.arm.com/downloads/-/arm-ran-acceleration-library) website.
 
 Untar the package to your instance:
-```bash { pre_cmd="wget https://developer.arm.com/-/media/Arm%20Developer%20Community/Downloads/Arm%20RAN%20Acceleration%20Library/arm-ran-acceleration-library-23.01-aarch64.tar.gz" }
-tar -xf arm-ran-acceleration-library-23.01-aarch64.tar.gz
+```bash { pre_cmd="wget https://developer.arm.com/-/media/Arm%20Developer%20Community/Downloads/Arm%20RAN%20Acceleration%20Library/arm-ran-acceleration-library-23.04-aarch64.tar.gz" }
+tar -xf arm-ran-acceleration-library-23.04-aarch64.tar.gz
 ```
 ### Create build folder
 Navigate into the library directory, then create and enter a build folder (naming is arbitrary)
 ```bash
-cd arm-ran-acceleration-library-23.01
+cd arm-ran-acceleration-library-23.04
 mkdir build
 cd build
 ```
@@ -60,7 +60,7 @@ cat /proc/cpuinfo
 We shall build the library along with the supplied validation tests.
 
 If your platform supports (only) Neon, set up build with:
-```bash { cwd="arm-ran-acceleration-library-23.01/build" }
+```bash { cwd="arm-ran-acceleration-library-23.04/build" }
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=NEON  ..
 ```
 
@@ -88,19 +88,19 @@ For a full description of available build options, see the [Arm RAN Acceleration
 
 ### Build
 To build the library, use:
-```bash { cwd="arm-ran-acceleration-library-23.01/build" }
+```bash { cwd="arm-ran-acceleration-library-23.04/build" }
 make
 ```
 
 ## Install the library
 To install the library, use the command:
-```bash { cwd="arm-ran-acceleration-library-23.01/build" }
+```bash { cwd="arm-ran-acceleration-library-23.04/build" }
 sudo make install
 ```
 
 ## Build and run tests
 To build and run the supplied benchmark example, use:
-```bash { cwd="arm-ran-acceleration-library-23.01/build"; ret_code="0" }
+```bash { cwd="arm-ran-acceleration-library-23.04/build"; ret_code="0" }
 make check
 ```
 
