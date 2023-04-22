@@ -62,7 +62,7 @@ export DONT_PROMPT_WSL_INSTALL=1
 
 ## Use VS Code Remote Tunnels
 
-You can use the [install guide for VS Code Tunnels]() to install the VS Code CLI inside a WSL Linux distribution and and connect to it from any other machine running VS Code, including the local Windows on Arm machine.
+You can use the [install guide for VS Code Tunnels](/install-guides/vscode-tunnels/) to install the VS Code CLI inside a WSL Linux distribution and and connect to it from any other machine running VS Code, including the local Windows on Arm machine.
 
 ## Use OpenVSCode Server
 

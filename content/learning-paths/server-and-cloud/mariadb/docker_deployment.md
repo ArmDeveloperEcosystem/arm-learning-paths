@@ -20,7 +20,7 @@ You an use the same SSH key pair.
 
 ## Create an AWS EC2 instance using Terraform
 
-You can use the same Terraform file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#deploy-ec2-instance-via-terraform).
+You can use the same Terraform file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment).
 
 ## Terraform Commands
 
