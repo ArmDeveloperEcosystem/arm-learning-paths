@@ -14,7 +14,7 @@ You also need to [install Visual Studio 2022 or higher](/install-guides/vs-woa) 
 
 ## Overview of Arm64EC
 
-Arm64EC (Emulation Compatible) is an application binary interface for applications running on Arm devices running Windows 11. 
+Arm64EC (Emulation Compatible) is an application binary interface for applications running on Arm devices with Windows 11. 
 
 With Arm64EC, you can build new native applications and migrate existing x86 or x64 applications to devices using the Arm architecture. Traditionally, applications are compiled for a specific target architecture and require integration of third party libraries. This makes migrating an application built for the x86 or x64 architecture to the Arm architecture difficult as you have to recompile the entire application and its dependencies. 
 
@@ -292,6 +292,10 @@ You have now successfully built this application with the `arm64EC Release` conf
 
 10. You can now run the same application you built with two different configurations: `x64 Release` and `arm64EC Release` on your Windows 11 Arm machine and compare the performance.
 
+{{% notice Note %}}
+Change the path below if you created the project in a different location. 
+{{% /notice %}}
+
 Open a Windows PowerShell prompt and navigate to the build directory with the 2 configurations:
 
 ```console
@@ -334,8 +338,8 @@ Matrix size: 400x400, Trial count: 50, Elapsed time [s]: 46.32
 Matrix size: 500x500, Trial count: 50, Elapsed time [s]: 133.90
 ```
 {{% notice Note %}}
-The time taken will vary based on the machine you are using. The output shown here is from running the application on a Windows 11 VM on Azure.
-The thing to notice is the performance improvement from running the same application as Arm64EC versus x64.
+The time taken will vary based on the machine you are using. The output shown is from the application running on a Lenovo ThinkPad X13s.
+Notice the performance improvement from running the application as Arm64EC versus x64.
 {{% /notice %}}
 
 You have sucessfully created and run an application using Arm64EC. 
