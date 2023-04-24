@@ -40,7 +40,7 @@ Arm Virtual Hardware (AVH) is available as an Amazon Machine Instance (AMI) on [
 
 A `c5.large` instance type is recommended for AVH.
 
-Further information on launching an AWS instance is available [here](/learning-paths/server-and-cloud/csp/aws/).
+Information about launching an AWS instance is available in the [Getting Started with AWS](/learning-paths/server-and-cloud/csp/aws/) install guide.
 
 ### Connect to instance terminal via SSH
 
@@ -66,27 +66,29 @@ http://localhost:8080
 ```
 ### Enable Virtual Network Computing (VNC) {#vnc}
 
-In the AVH terminal, enable and set VNC password (You do not need to enter a view-only password when prompted):
+In the AVH terminal, enable and set VNC password (you do not need to enter a view-only password when prompted):
+
 ```console
 vncpasswd
 ```
+
 Start the VNC server for the session:
+
 ```console
 sudo systemctl start vncserver@1.service
 ```
+
 On your local machine, forward port `5901`.
+
 ```console
 ssh -I <key.pem> -N –L 5901:localhost:5901 ubuntu@<AMI_IP_addr>
 ```
+
 Connect your VNC client to port `5901`. You will be prompted for the VNC password.
-
-### Free credits
-
-To help you get started, Arm are offering 100+ hours of free AWS EC2 CPU credits. These credits have been provided by AWS for the first 1,000 qualified users. To claim your credits, apply online [here](https://www.arm.com/company/contact-us/virtual-hardware).
 
 ### Example projects
 
-A number of [Example](https://arm-software.github.io/AVH/main/examples/html/index.html) projects are available to further help you get started.
+A number of [example](https://arm-software.github.io/AVH/main/examples/html/index.html) projects are available to further help you get started.
 
 ## Arm Virtual Hardware 3rd Party {#thirdparty}
 

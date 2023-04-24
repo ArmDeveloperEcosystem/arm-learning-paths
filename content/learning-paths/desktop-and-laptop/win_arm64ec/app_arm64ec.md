@@ -9,11 +9,16 @@ layout: "learningpathall"
 ## Before you begin
 
 You will need a Arm computer running Windows 11 to use Arm64EC.
-[Install Visual Studio 2022 or higher](/install-guides/vs-woa) on your machine.
+
+You also need to [install Visual Studio 2022 or higher](/install-guides/vs-woa) on your machine.
 
 ## Overview of Arm64EC
 
-Arm64EC(Emulation Compatible) is an application binary interface for applications running on Arm devices running Windows 11. With Arm64EC, you can build new native applications and migrate existing x86 or x64 applications to devices using the Arm architecture. Traditionally, applications are compiled for a specific target architecture and require integration of third party libraries. This makes migrating an application built for the Intel x86 or x64 architecture to the Arm architecture difficult as you have to recompile the entire application and its dependencies. Arm64EC makes this process a lot easier as it gives you the capability to rebuild parts of your application that don't support Arm yet as Arm64EC. Code built as Arm64EC is interoperable with code built as x64 running under emulation and lets you take advantage of the native speed and performance of Arm based devices.
+Arm64EC (Emulation Compatible) is an application binary interface for applications running on Arm devices with Windows 11. 
+
+With Arm64EC, you can build new native applications and migrate existing x86 or x64 applications to devices using the Arm architecture. Traditionally, applications are compiled for a specific target architecture and require integration of third party libraries. This makes migrating an application built for the x86 or x64 architecture to the Arm architecture difficult as you have to recompile the entire application and its dependencies. 
+
+Arm64EC makes this process easier as it gives you the capability to rebuild parts of your application that don't support Arm yet as Arm64EC. Code built as Arm64EC is interoperable with code built as x64 running under emulation and lets you take advantage of the native speed and performance of Arm based devices.
 
 ## Use Arm64EC with a C++ application
 
@@ -23,11 +28,13 @@ In this learning path, you will build and run a C++ application on a Windows 11 
 
 ![img1](arm64ec_1.png)
 
-2. Enter a Project Name (Matrix_multiply) and select the Location where you want to save your new project. You can also select the checkbox to Place solution and project in the same directory as shown and then click **Create**:
+2. Enter a Project Name (Matrix_multiply) and select the Location where you want to save your new project. You can also select the checkbox to **Place solution and project in the same directory** as shown and then click **Create**:
 
 ![img2](arm64ec_2.png)
 
-3. A project will be created and the CMake generation will automatically start for the default configuration: `x64 Debug`. Visual Studio adds 4 configurations to your project:
+3. A project will be created and the CMake generation will automatically start for the default configuration: `x64 Debug`. 
+
+Visual Studio adds 4 configurations to your project:
 
 - x64 Debug
 - x64 Release
@@ -36,9 +43,9 @@ In this learning path, you will build and run a C++ application on a Windows 11 
 
 You can check the configurations by inspecting the `CMakePresets.json` file in your project.
 
-4. Open up the `Matrix_multiply.cpp` file from the `Solution Explorer`pane on the right.
+4. Open up the `Matrix_multiply.cpp` file from the `Solution Explorer` pane on the right.
 
-Delete the code in this file. Then, copy the code shown below into it:
+Delete all the code in this file, and copy the code shown below into the file instead:
 
 ```console
 #include "Matrix_multiply.h"
@@ -190,7 +197,7 @@ int main(int argc, char** argv)
 
 Save the changes. 
 
-The function `performanceTest` calculates the product of two pseudo-randomly generated square matrices of different sizes and measures the execution time. You will use the execution time to compare the performance of the application built with different configurations later in this learning path.
+The function `performanceTest` calculates the product of two pseudo-randomly generated square matrices of different sizes and measures the execution time. You will use the execution time to compare the performance of the application built with different configurations in future steps.
 
 5. Select the `x64 Release` configuration option from the drop-down menu on top. This will automatically trigger the CMake generation for this x64 Release configuration.
 
@@ -223,7 +230,7 @@ C:\Matrix_multiply\Matrix_multiply.cpp(92): warning C4244: 'return': conversion 
 
 Build All succeeded.
 ```
-You will run the `x64 Release` executable later in this learning path.
+You will run the `x64 Release` executable in a future step.
 
 7. Open up the `CMakePresets.json` file from the Solution explorer pane. Add a new configuration `arm64EC-release` to the end of this file by copying the code below into the file:
 
@@ -285,6 +292,10 @@ You have now successfully built this application with the `arm64EC Release` conf
 
 10. You can now run the same application you built with two different configurations: `x64 Release` and `arm64EC Release` on your Windows 11 Arm machine and compare the performance.
 
+{{% notice Note %}}
+Change the path below if you created the project in a different location. 
+{{% /notice %}}
+
 Open a Windows PowerShell prompt and navigate to the build directory with the 2 configurations:
 
 ```console
@@ -300,11 +311,11 @@ Run the application built with `x64 Release` configuration. Pass a command line 
 The output will be similar to:
 
 ```output
-Matrix size: 100x100, Trial count: 50, Elapsed time [s]: 1.63
-Matrix size: 200x200, Trial count: 50, Elapsed time [s]: 11.15
-Matrix size: 300x300, Trial count: 50, Elapsed time [s]: 38.25
-Matrix size: 400x400, Trial count: 50, Elapsed time [s]: 133.72
-Matrix size: 500x500, Trial count: 50, Elapsed time [s]: 315.45
+Matrix size: 100x100, Trial count: 50, Elapsed time [s]: 1.52
+Matrix size: 200x200, Trial count: 50, Elapsed time [s]: 6.67
+Matrix size: 300x300, Trial count: 50, Elapsed time [s]: 21.55
+Matrix size: 400x400, Trial count: 50, Elapsed time [s]: 50.53
+Matrix size: 500x500, Trial count: 50, Elapsed time [s]: 193.53
 ```
 
 11. Now run the same application built with the `arm64EC Release` configuration. Pass the same count as before for the number of calculations:
@@ -320,16 +331,15 @@ While the application is running, open up the Windows Task Manager. Click on the
 The output from the application will be similar to:
 
 ```output
-Matrix size: 100x100, Trial count: 50, Elapsed time [s]: 1.15
-Matrix size: 200x200, Trial count: 50, Elapsed time [s]: 9.52
-Matrix size: 300x300, Trial count: 50, Elapsed time [s]: 34.63
-Matrix size: 400x400, Trial count: 50, Elapsed time [s]: 124.50
-Matrix size: 500x500, Trial count: 50, Elapsed time [s]: 294.67
+Matrix size: 100x100, Trial count: 50, Elapsed time [s]: 0.93
+Matrix size: 200x200, Trial count: 50, Elapsed time [s]: 5.52
+Matrix size: 300x300, Trial count: 50, Elapsed time [s]: 20.00
+Matrix size: 400x400, Trial count: 50, Elapsed time [s]: 46.32
+Matrix size: 500x500, Trial count: 50, Elapsed time [s]: 133.90
 ```
 {{% notice Note %}}
-The time taken will vary based on the machine you are using. The output shown here is from running the application on a Windows 11 VM on Azure.
-The thing to notice is the performance improvement from running the same application as Arm64EC versus x64.
+The time taken will vary based on the machine you are using. The output shown is from the application running on a Lenovo ThinkPad X13s.
+Notice the performance improvement from running the application as Arm64EC versus x64.
 {{% /notice %}}
 
-
-
+You have sucessfully created and run an application using Arm64EC. 

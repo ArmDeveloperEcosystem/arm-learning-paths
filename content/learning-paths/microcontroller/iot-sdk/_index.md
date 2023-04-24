@@ -3,14 +3,15 @@ title: Build and run Arm Total Solutions for IoT
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for embedded software developers interested in using the reference IoT software examples on Arm Corstone-300 FVP.
+who_is_this_for: This is an introductory topic for embedded software developers interested in learning how a complete IoT software stack is constructed.
 
 learning_objectives: 
     - Build examples from Open-IoT-SDK
-    - Run the examples on Corstone-300
+    - Run the examples on Corstone-300 virtual hardware
 
 prerequisites:
-    - Some familiarity with embedded programming is assumed
+    - Some familiarity with embedded programming
+    - An AWS account (required for Arm Virtual Hardware)
 
 author_primary: Ronan Synnott
 

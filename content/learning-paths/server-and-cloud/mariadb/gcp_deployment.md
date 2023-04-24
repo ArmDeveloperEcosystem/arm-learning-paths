@@ -2,7 +2,7 @@
 # User change
 title: "Install MariaDB on a GCP Arm based instance"
 
-weight: 6 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -12,15 +12,13 @@ layout: "learningpathall"
 
 You can deploy MariaDB on Google Cloud using Terraform and Ansible. 
 
-In this section, you will deploy MariaDB on a single Google Cloud instance.
+In this topic, you will deploy MariaDB on a single Google Cloud instance.
 
 If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
-You should have the prerequisite tools installed before starting the Learning Path. 
-
-Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+Any computer which has [Terraform](/install-guides/terraform/), [Ansible](/install-guides/ansible/), and the [Google Cloud CLI](/install-guides/gcloud/) installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine.
 
 You will need an [Google Cloud account](https://console.cloud.google.com/?hl=en-au) to complete this Learning Path. Create an account if you don't have one.
 
@@ -32,9 +30,9 @@ The instructions to login to Google Cloud CLI and to create the keys are below.
 
 ### Acquire GCP Access Credentials
 
-The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
+Terraform on your local machine needs to communicate with GCP.
 
-To obtain GCP user credentials, follow this [documentation](/install-guides/gcp_login).
+To obtain GCP user credentials, follow the [Google Cloud Credentials](/install-guides/gcp_login) install guide.
 
 ### Generate an SSH key-pair
 
@@ -47,9 +45,8 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 ## Create a GCP instance using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`.
+1. Use a text editor to add the contents below to a new file named `main.tf`
 
-Scroll down to see the information you need to change in `main.tf`.
 ```terraform
 // instance creation
 provider "google" {
@@ -106,17 +103,22 @@ ansible-target1 ansible_connection=ssh ansible_host=${google_compute_instance.vm
                 EOF
 }
 ```
+
+2. Update `main.tf` with your values
+
 In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.
 
 The inventory file is automatically generated and does not need to be changed.
 
 ## Terraform Commands
 
-Use Terraform to deploy the `main.tf` file.
+Use Terraform to deploy MariaDB on GCP.
 
 ### Initialize Terraform
 
-Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for Google Cloud.
+Run `terraform init` to initialize the Terraform deployment. 
+
+This command downloads the dependencies required for Google Cloud.
 
 ```bash
 terraform init
@@ -164,13 +166,13 @@ A long output of resources to be created will be printed.
 
 ### Apply a Terraform execution plan
 
-Run `terraform apply` to apply the execution plan and create all GCP resources. 
+1. Run `terraform apply` to apply the execution plan and create all GCP resources. 
 
 ```bash
 terraform apply
 ```      
 
-Answer `yes` to the prompt to confirm you want to create GCP resources. 
+2. Answer `yes` to the prompt to confirm you want to create GCP resources. 
 
 The public IP address will be different, but the output should be similar to:
 
@@ -185,13 +187,16 @@ Master_public_IP = [
 ```
 
 ## Configure MariaDB through Ansible
-Install the MariaDB and the required dependencies. 
+
+You can install the MariaDB and the required dependencies using Ansible.
 
 You can use the same `playbook.yaml` file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#configure-mariadb-through-ansible).
 
+Use a text editor to save the `playbook.yaml` file if you don't already have it. 
+
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the  `ansible-playbook` command:
 
 ```bash
 ansible-playbook playbook.yaml -i /tmp/inventory 
@@ -240,7 +245,7 @@ ansible-target1            : ok=8    changed=6    unreachable=0    failed=0    s
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/mariadb/ec2_deployment#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions from the previous section to [connect to the database](/learning-paths/server-and-cloud/mariadb/ec2_deployment#connect-to-database-from-local-machine).
 
 You have successfully deploy MariaDB on a Google Cloud instance.
 

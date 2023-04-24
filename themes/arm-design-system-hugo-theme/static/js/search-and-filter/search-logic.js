@@ -28,18 +28,23 @@ function searchByAdditionalSearchTerm(card,search_word_array) {
 
 
 function parseParamsFromURL(url_str) {
-        // Split by & and get element that has 'search='
+        // Split by & and get search string ('search=') and filters ('filter-')
         let url_params = url_str.split('&');
-        let search_str = url_params[url_params.findIndex(e => e.includes("search="))];
-        
-        // Remove '?', 'search=', and replace '+' with spaces leaving just the string.
-        //search_str = search_str.replaceAll('?','').replace('search=','').replaceAll('+',' ');
-        search_str = search_str.replaceAll('?','').replace('search=','');
-        search_str = decodeURIComponent(search_str);
-        // Again, for safety, strip all non numbers and letters
-        search_str = search_str.replaceAll(/[^a-z A-Z 0-9]+/g, "");
 
-        return search_str
+        // iterate over all url_params and get search / filter params. Sanitize and decode them.
+        let search_str = '';
+        let filters = [];
+        for (let param of url_params)
+        {
+            if (param.includes('search=')) {
+                search_str = sanitizeInput(decodeURIComponent(param.replace('?','').replace('search=','')));
+            }
+            else if (param.includes('-filter=')) {
+                filters.push(sanitizeInput(decodeURIComponent(param.replace('?','').replace('-filter=','='))));
+            }
+        }
+
+        return [search_str,filters]
 }
 
 

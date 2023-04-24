@@ -22,6 +22,10 @@ further_reading:
         link: https://developer.arm.com/documentation/102433
         type: documentation
     - resource:
+        title: Code reuse attacks - the compiler story
+        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/code-reuse-attacks-the-compiler-story
+        type: blog
+    - resource:
         title: Arm A-profile Instruction Set Architecture
         link: https://developer.arm.com/documentation/ddi0602
         type: documentation
@@ -30,10 +34,9 @@ further_reading:
         link: https://docs.pwntools.com/en/stable/
         type: documentation
     - resource:
-        title: Pointer Authentication on Armv8.3
-        link: https://www.qualcomm.com/content/dam/qcomm-martech/dm-assets/documents/pointer-auth-v7.pdf
+        title: -mbranch-protection (armclang)
+        link: https://developer.arm.com/documentation/101754/0620/armclang-Reference/armclang-Command-line-Options/-mbranch-protection
         type: documentation
-
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================

@@ -4,10 +4,11 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you to continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The learning path on how to tune MariaDB is a great next step.
+    We recommend you to continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. 
+
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/mysql/"
+recommended_path: "/learning-paths/server-and-cloud/clair/" 
 # Link to the next learning path being recommended.
 
 
@@ -29,10 +30,11 @@ further_reading:
         title: Ansible
         link: https://docs.ansible.com/
         type: documentation
+    - resource:
+        title: Key considerations in moving to Graviton2 for Amazon RDS and Amazon Aurora databases
+        link: https://aws.amazon.com/blogs/database/key-considerations-in-moving-to-graviton2-for-amazon-rds-and-amazon-aurora-databases/
+        type: blog
 
-# ================================================================================
-#       FIXED, DO NOT MODIFY
-# ================================================================================
 weight: 21                  # set to always be larger than the content in this path, and one more than 'review'
 title: "Next Steps"         # Always the same
 layout: "learningpathall"   # All files under learning paths have this same wrapper

@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 1                     
         explanation: >
-             The default port number for both MySQL and MariaDB is 3306, but you can change it as required with changing the port variable in the /etc/mysql/mariadb.conf.d/50-server.cnf file.
+             The default port number for both MySQL and MariaDB is 3306, but you can change it as required with changing the port variable in the /etc/mysql/mariadb.conf.d/50-server.cnf file
     - questions:
         question: >
             Ansible is a pull-based configuration management tool
@@ -28,7 +28,7 @@ review:
             - "False"
         correct_answer: 2                     
         explanation: >
-            Ansible works on the Push mechanism.
+            Ansible works on the push mechanism.
     - questions:
         question: >
             We can keep secret data in the playbook
@@ -37,7 +37,7 @@ review:
             - "False"
         correct_answer: 1                     
         explanation: >
-             Yes, it is possible to keep secret data in your Ansible content with the use of Vault in playbooks.
+             Yes, it is possible to keep secret data in your Ansible content using a vault in the playbook
                
 # ================================================================================
 #       FIXED, DO NOT MODIFY

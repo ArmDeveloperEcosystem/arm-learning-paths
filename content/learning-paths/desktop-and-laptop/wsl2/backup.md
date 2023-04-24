@@ -13,4 +13,4 @@ Use the export command to save the state of a WSL instance.
 wsl --export Ubuntu-22.04 ubuntu-backup.tar
 ```
 
-The tar file can be copied and imported on the same machine or on another machine.
+The tar file can be copied and imported to the same machine or to another machine.

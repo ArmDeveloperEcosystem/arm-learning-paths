@@ -20,6 +20,15 @@ review:
         correct_answer: 1
         explanation: >
             True. Arm Virtual Hardware provides a ready to use environment to build and test your applications, integrated into CI/CD and MLOps workflows.
+    - questions:
+        question: >
+            You can send data from a simulated IoT device to AWS IoT cloud services to test software without having a physical board.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            True. You can use the Corstone-300 Fixed Virtual Platform (FVP) for software testing and confirm operation with AWS IoT services.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

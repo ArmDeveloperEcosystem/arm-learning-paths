@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on MongoDB is a great next step.
+    We recommend you continue learning about creating Linux machines using Hyper-V on Windows on Arm machines.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/geekbench/"
+recommended_path: "/learning-paths/desktop-and-laptop/hyper-v/"
 # Link to the next learning path being recommended.
 
 

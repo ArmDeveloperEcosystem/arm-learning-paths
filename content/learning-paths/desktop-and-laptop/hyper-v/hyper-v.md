@@ -136,7 +136,7 @@ There are a number of other Linux distributions which can be used with Hyper-V a
 - [Debian Bookworm](https://www.debian.org/releases/bookworm/)
 - [openSUSE Leap](https://get.opensuse.org/leap/15.4/)
 - [openSUSE Tumbleweed](https://get.opensuse.org/tumbleweed/)
-- [Fedora Workstation](https://getfedora.org/en/workstation/download/)
+- [Fedora Workstation](https://getfedora.org/workstation/download/)
 
 Look for the `aarch64` image and download the `.iso` file. 
 

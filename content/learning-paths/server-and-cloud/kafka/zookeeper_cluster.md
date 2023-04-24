@@ -71,7 +71,7 @@ Starting zookeeper ... STARTED
 
 ### Node 2:
 
-Run the following commnds to download and install Zookeeper node 2:
+Run the following commands to download and install Zookeeper node 2:
 
 ```console
 mkdir Zookeeper_node2
