@@ -6,8 +6,8 @@ minutes_to_complete: 20
 who_is_this_for: This is an introductory topic for software developers who want to use Arm64EC with Windows on Arm devices. 
 
 learning_objectives:
-    - Learn how to build native Arm applications and move x86 or x64 applications to Arm using Arm64EC.
-    - Compare the performance of a simple application using different build configurations.
+    - Build native Arm applications and migrate x86 or x64 applications to Arm using Arm64EC
+    - Compare the performance of a simple application using different build configurations
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit) or Lenovo Thinkpad X13s running Windows 11.
