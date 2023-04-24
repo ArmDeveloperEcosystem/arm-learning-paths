@@ -1,8 +1,8 @@
 ---
 # User change
-title: "Deploy MariaDB using RDS"
+title: "Deploy MariaDB using RDS(AWS)"
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
