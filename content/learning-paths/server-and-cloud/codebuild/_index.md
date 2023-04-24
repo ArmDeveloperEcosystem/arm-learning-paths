@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - An [AWS account](/learning-paths/server-and-cloud/csp/aws/) for accessing AWS cloud services.
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
+    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
 
 author_primary: Jason Andrews
 

@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue investigating application migration to Arm by setting up a development machine and giving it a try on your favorite application. 
+    You can continue investigating application migration to Arm by setting up a development machine and giving it a try on your favorite application. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/server-and-cloud/csp/"

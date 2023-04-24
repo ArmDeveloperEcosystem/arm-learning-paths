@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about creating Linux machines using Hyper-V on Windows on Arm machines.
+    You can continue learning about creating Linux machines using Hyper-V on Windows on Arm machines.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/desktop-and-laptop/hyper-v/"

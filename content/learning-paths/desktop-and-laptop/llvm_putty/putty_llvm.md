@@ -128,7 +128,7 @@ After the change, it should look like:
 ```
 
 {{% notice Note %}}
-The cmake helper tool `cmcldeps.exe` has an issue understanding the entire command-line syntax with "/" used to to pass a command-line option. So we switch to use "-" instead to pass the command line option.
+The cmake helper tool `cmcldeps.exe` has an issue understanding the entire command-line syntax with "/" used to to pass a command-line option. You can use "-" instead to pass the command line option.
 {{% /notice %}}
 
 10. Build the application
