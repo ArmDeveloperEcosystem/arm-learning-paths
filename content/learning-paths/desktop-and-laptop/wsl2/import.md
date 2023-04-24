@@ -1,5 +1,5 @@
 ---
-title: Import filesystems into WSL
+title: Import file systems into WSL
 
 weight: 8
 layout: learningpathall
@@ -15,7 +15,7 @@ Check the [Alpine Downloads](https://alpinelinux.org/downloads/)
 
 Look for the mini root filesystem for `aarch64` and download it.
 
-In the commands below use your Windows user name instead of `<username>`.
+In the commands below substitute `<username>` with your Windows username.
 
 At a Windows Command Prompt import the downloaded filesystem into WSL as a Linux distribution:
 
@@ -49,7 +49,7 @@ Check the [Raspberry Pi OS Downloads](http://downloads.raspberrypi.org/)
 
 Navigate to [raspios_lite_arm64](http://downloads.raspberrypi.org/raspios_lite_arm64/)
 
-Download the root filesystem named `root.tar.xz`
+Download the root filesystem named [root.tar.xz](http://downloads.raspberrypi.org/raspios_lite_arm64/root.tar.xz)
 
 At a Windows Command Prompt import the downloaded filesystem into WSL as a Linux distribution:
 
@@ -59,7 +59,7 @@ wsl --import rpios c:\Users\<username>\rpios root.tar.xz
 
 The name of the distribution will be `rpios`
 
-The storage will be in `c:\Users\<username>\rpios`
+The storage will be in `C:\Users\<username>\rpios`
 
 When the import is complete, list the installed distributions:
 
@@ -69,7 +69,7 @@ wsl --list
 
 The new `rpios` distribution will be on the list.
 
-Start Raspberry Pi OS.
+Start Raspberry Pi OS:
 
 ```cmd
 wsl -d rpios

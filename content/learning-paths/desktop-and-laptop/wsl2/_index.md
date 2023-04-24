@@ -1,7 +1,5 @@
 ---
-title: WSL for Windows on Arm
-
-description: Learn how to setup and use the Windows Subsystem for Linux (WSL) on Arm computers
+title: Get started with Windows Subsystem for Linux (WSL) on Arm
 
 minutes_to_complete: 90 
 
@@ -11,7 +9,7 @@ learning_objectives:
     - Configure and run WSL with various Linux distributions
     - Run graphical Linux applications on Windows
     - Use ssh to connect to WSL
-    - Use the Windows RDP (remote desktop) and VNC to connect to a Linux desktop
+    - Use Windows RDP (remote desktop) and VNC to connect to a Linux desktop
     - Learn multiple options for running VS Code
     - Import other file systems into WSL
     - Export the WSL file system as a backup
