@@ -6,7 +6,7 @@ weight: 2
 
 ## Prerequisites
 
-Launch an [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate cloud service provider running a suitable `Ubuntu` Linux distribution.
+Launch an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider running an Ubuntu Linux distribution.
 
 Install `gcc` on your instance following the steps [here](/install-guides/gcc/#native).
 
