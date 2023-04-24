@@ -115,6 +115,10 @@ def check(json_file, start, stop):
                 cmd = ["docker exec test_{} rm /home/user/.bashrc".format(i)]
                 logging.debug(cmd)
                 subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                # Allow write permissions on shared folder
+                cmd = ["docker exec test_{} chmod ugo+rw /shared".format(i)]
+                logging.debug(cmd)
+                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
             elif "fedora" in img:
                 cmd = ["docker exec test_{} yum update".format(i)]
                 logging.debug(cmd)
@@ -126,6 +130,10 @@ def check(json_file, start, stop):
                 logging.debug(cmd)
                 subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
                 cmd = ["docker exec test_{} bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"".format(i)]
+                logging.debug(cmd)
+                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                # Allow write permissions on shared folder
+                cmd = ["docker exec test_{} chmod ugo+rw /shared".format(i)]
                 logging.debug(cmd)
                 subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
