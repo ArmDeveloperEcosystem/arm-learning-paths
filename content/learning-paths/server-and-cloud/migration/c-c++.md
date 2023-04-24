@@ -61,7 +61,7 @@ Refer to the Learning Path [Learn about Large System Extensions](/learning-paths
 
 You may have applications which include x86_64 intrinsics. These need special treatment when recompiling.
 
-Refer to the Learning Path [Porting Architecture Specific Intrinsics](/learning-paths/server-and-cloud/intrinsics/) for the available options to migrate x86_64 intrinsics to NEON.
+Refer to the Learning Path [Porting Architecture Specific Intrinsics](/learning-paths/cross-platform/intrinsics/) for the available options to migrate x86_64 intrinsics to NEON.
 
 ### Signed and unsigned char data types
 

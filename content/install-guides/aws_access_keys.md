@@ -12,7 +12,7 @@ minutes_to_complete: 10
 author_primary: Jason Andrews
 
 ### Link to official documentation
-official_docs: https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html#cli-configure-files-methods
+official_docs: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -26,7 +26,7 @@ In this section you will learn how to generate Access keys. Access keys consist 
 
 ## Before you begin
 
-Install the AWS CLI on your machine using the [install guide](/install-guides/aws-cli).
+Install the AWS CLI on your machine using the [install guide](/install-guides/aws-cli/).
 
 ## Generate Access keys (access key ID and secret access key)
 

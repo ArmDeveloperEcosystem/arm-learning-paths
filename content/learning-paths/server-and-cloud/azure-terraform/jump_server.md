@@ -330,7 +330,7 @@ output "private_ip_addresses" {
 
 ## Deploy Virtual Machines
 
-To deploy the VMs, you need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [section of the learning path](/learning-paths/server-and-cloud/azure/terraform#terraform-commands) to deploy the `main.tf` file.
+To deploy the VMs, you need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [section of the learning path](/learning-paths/server-and-cloud/azure-terraform/terraform#terraform-commands) to deploy the `main.tf` file.
 
 ### Verify the Instance and Bastion Host setup
 
