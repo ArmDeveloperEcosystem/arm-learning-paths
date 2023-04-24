@@ -14,19 +14,9 @@ Embedded systems are increasingly using container engines such as Docker to depl
 
 ## Access aarch64 system
 
-### AVA
+You can build the example natively using [AWS EC2 Graviton instances](https://aws.amazon.com/ec2/) or a Raspberry Pi 4 and install [Docker](/install-guides/docker/docker-engine).
 
-[AVA system](https://www.adlinktech.com/Products/Computer_on_Modules/COM-HPC-Server-Carrier-and-Starter-Kit/AVA_Developer_Platform) running [SOAFEE](https://www.soafee.io/) reference implementation: Yocto-based Linux [EWAOL](https://gitlab.com/soafee/ewaol/meta-ewaol).
-
-EWAOL comes with Docker installed.
-
-### Qemu 
-
-On a x86_64 machine with Docker installed, we can use [buildx](/learning-paths/cross-platform/docker/buildx) to run multi-architecture containers.
-
-### AWS Graviton
-
-Launch an aarch64 Graviton instance using [AWS EC2](https://aws.amazon.com/ec2/) and install [Docker](/install-guides/docker/docker-engine).
+You can even build the example for `aarch64` on a `x86_64` machine with Docker. [Buildx](/learning-paths/cross-platform/docker/buildx) can be used to run multi-architecture containers.
 
 ## Docker software development image
 
@@ -35,25 +25,19 @@ Launch an aarch64 Graviton instance using [AWS EC2](https://aws.amazon.com/ec2/)
 Create a Dockerfile with the content below to set up the necessary development tools:
 
 ```
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 RUN if ! [ "$(arch)" = "aarch64" ] ; then exit 1; fi
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get -y update
-RUN apt-get -y install vim wget sudo git tar build-essential libopencv-dev
+RUN apt-get -y install vim wget sudo git tar build-essential libopencv-dev cmake
 RUN apt-get clean
 
 ENV USER=ubuntu
 RUN useradd --create-home -s /bin/bash -m $USER && echo "$USER:ubuntu" | chpasswd && adduser $USER sudo
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.25.3/cmake-3.25.3-linux-aarch64.sh
-RUN mkdir -p /opt/cmake
-RUN bash ./cmake-3.25.3-linux-aarch64.sh --skip-license --prefix=/opt/cmake
-
-RUN echo "export PATH=/opt/cmake/bin:\$PATH" >> /home/ubuntu/.bashrc
 
 WORKDIR /home/ubuntu
 USER ubuntu

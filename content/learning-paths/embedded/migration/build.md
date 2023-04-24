@@ -95,7 +95,7 @@ make
 
 ## ACfL
 
-If you are using the `armswdev/arm-compiler-for-linux` you can swich compiler to build the application. To do so, you need to edit `src/CMakeListrs.txt` to add the following:
+If you are using the `armswdev/arm-compiler-for-linux` you can swich compiler to build the application. To do so, you need to edit `src/CMakeLists.txt` to add the following:
 
 ```
 set(CMAKE_C_COMPILER "/opt/arm/arm-linux-compiler-23.04_Generic-AArch64_Ubuntu-22.04_aarch64-linux/bin/armclang")
@@ -108,6 +108,16 @@ This can be done quickly with these two commands:
 $ sed -i "6i set(CMAKE_C_COMPILER\ \"/opt/arm/arm-linux-compiler-23.04_Ubuntu-22.04/bin/armclang\")" src/CMakeLists.txt
 $ sed -i "7i set(CMAKE_CXX_COMPILER\ \"/opt/arm/arm-linux-compiler-23.04_Ubuntu-22.04/bin/armclang++\")\n" src/CMakeLists.txt
 ```
+
+Then, rebuild the example with the same commands:
+
+```bash
+cmake -S src -B build
+cd build/
+make
+./sobel_simd_opencv
+```
+
 
 ## Summary
 

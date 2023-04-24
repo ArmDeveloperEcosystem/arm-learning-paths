@@ -2,7 +2,7 @@
 # User change
 title: "Porting methodology" 
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -33,17 +33,48 @@ These questions help draw a picture of the migration process to identify:
 
 To minimize compatibility issues between software versions and facilitate the migration, it is important to replicate the same setup as much as possible.
 
-To illustrate this, we have summarized our example's original configuration in the table below:
+To illustrate this, we are going to port [this edge detection application](https://github.com/m3y54m/sobel-simd-opencv.git) on an embedded Linux aarch64 system.
 
-| Source code | Build type | OS | Compiler | Build tools | External libraries |
-| ----------- | ---------- | -- | -------- | ----------- | ------------------ |
-| C++ | Native build | Ubuntu 20.04.5 | GCC 9.4.0 | Cmake 3.25.3 | OpenCV 4.2.0 |
+This application runs several implementations of the same algorithm:
+- a pure C version
+- a version with intrinsics to enable SIMD processing
+- an OpenCV version
 
-This configuration can easily be reproduced on aarch64 by installing Ubuntu 20.04.05 and installing the system's packages. We can already foresee that building the pure C and the OpenCV version of the Sobel filter on aarch64 won't be an issue.
+We have summarized our example's dependencies and configuration below:
+ 
+* Build type: Native
+* Source code: C++
+* OS: Ubuntu 22.04
+
+| | | Available in aarch64 system repository? |
+| -- | -- | -- |
+| Compiler | GNU GCC | [Yes](https://packages.ubuntu.com/jammy/g++) |
+| External libraries | OpenCV | [Yes](https://packages.ubuntu.com/jammy/libopencv-dev) |
+| Build toolchain | Cmake | [Yes](https://packages.ubuntu.com/jammy/cmake) |
+
+We will describe how to set up our `x86_64` and `aarch64` systems in the next section. At this point, we foresee that building the application on `aarch64` should not be a problem as the toolchain is available.
 
 ## Identify non-portable settings
 
-Running the application on the original architecture and inspecting the source code can provide useful information. With this, we suspect that most of the porting work on our example will be spent on the SIMD version of the Sobel filter because it uses architecture-specific intrinsics. The header file `x86intrin.h` will likely be problematic when building natively on aarch64.
+Inspecting the building options and the source code of the applciation provides useful information.
+
+In `src/main.cpp`:
+- The header file `x86intrin.h` won't be available when building natively on `aarch64`.
+- The function `SobelSimd` may need to be re-written: all the intrinsics prefixed with `_mm_` won't be supported on `aarch64`.
+
+In `src/CMakeLists.txt`:
+
+```cmake
+# Enable SIMD instructions for Intel Intrinsics
+# https://software.intel.com/sites/landingpage/IntrinsicsGuide/
+if(NOT WIN32)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mavx")
+endif()
+```
+  
+The flag `-mavx` used with GCC is architecture-specific, only available on [x86_64](https://man7.org/linux/man-pages/man1/gcc.1.html) and will prevent building the application entirely, even if the pure C version `SobelNonSimd` and the OpenCV version `SobelOpenCV` of the Sobel filter are portable.
+
+
 
 In addition, inspecting the compilers options when building indicates that an architecture-specific flag `-mavx` is used with GCC. Again, this might also be an issue and might prevent building the application completely.
 
