@@ -3,11 +3,11 @@ title: Build and run Arm Trusted Firmware examples on Corstone-1000
 
 minutes_to_complete: 120
 
-who_is_this_for: This an advanced topic is for software developers new to Platform Security Architecture (PSA) and Arm Trusted Firmware components
+who_is_this_for: This an introductory topic is for software developers new to Platform Security Architecture (PSA) and Arm Trusted Firmware components
 
 learning_objectives: 
-    - Build and run the Trusted Firmware software stack on the Corstone-1000 FVP
-    - Build and run the PSA-ADAC enabled example on an MPS3 prototyping board
+    - Build the complete Trusted Firmware software stack
+    - Run the stack on FVP and/or MPS3 board
 
 prerequisites:
     - Ubuntu host or access to AWS
@@ -16,7 +16,7 @@ prerequisites:
 author_primary: Ronan Synnott
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Security
 armips:
     - Cortex-A

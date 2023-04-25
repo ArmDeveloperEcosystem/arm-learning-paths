@@ -61,9 +61,9 @@ For example, the `Product Code` of [Arm Development Studio](https://developer.ar
 edmgr entitlements -p <ProductCode>
 ```
 
-From this output, you will get a six-digit numeric `ID` of the product you wish to download. We shall refer to this as `ProductID` to avoid confusion.
+From this output, you will get a six-digit numeric `ID` of the product you wish to download. This ID is referred to as `ProductID` to avoid confusion.
 
-For example, the `ProductID` of Arm Development Studio is `169189`.
+For example, the `ProductID` of `Arm Development Studio` is `169189`.
 
 ## Determine the Release ID
 
@@ -71,13 +71,13 @@ For a given product, there will likely be multiple versions available for downlo
 ```cmd
 edmgr releases -e <ProductID>
 ```
-From this table, an `ID` will be shown for each available version. We shall refer to this as the `ReleaseID`.
+From this table, an `ID` will be shown for each available version. This ID is referred to as the `ReleaseID`.
 
-For example, the `ReleaseID` of Arm Development Studio, version 2022.2, is `d2650553-3806-4c0e-92d7-2e46fd468074`.
+For example, the `ReleaseID` of `Arm Development Studio`, version `2022.2`, is `d2650553-3806-4c0e-92d7-2e46fd468074`.
 
 ## Determine the Artifact ID
 
-Finally, we must determine the `ArtifactID`, which is the specific package we wish to download. For example, with Arm Development Studio you may wish to download the Linux installer.
+Finally, you must determine the `ArtifactID`, which is the specific package to download.
 
 To determine the `ArtifactID`, we need the `ProductID` and `ReleaseID` from above:
 ```cmd
@@ -85,11 +85,11 @@ edmgr artifacts -e <ProductID> -r <ReleaseID>
 ```
 The `ID` given in the output are the available `ArtifactID`s for this item.
 
-To continue our example, the Development Studio 2022.2 Linux installer artifact is `7db814ee-c1e3-4d68-a65d-a7e6b437e1ef`.
+To continue the example, the `Arm Development Studio` > `2022.2` > `Linux installer` artifact is `7db814ee-c1e3-4d68-a65d-a7e6b437e1ef`.
 
 ## Download the artifact
 
-The package can now be downloaded. We must specify the various `ID`s from above. Use `-d` to specify a directory to store the downloaded package.
+The package can now be downloaded. you must specify the various `ID`s from above. Use `-d` to specify a directory to store the downloaded package.
 ```cmd
 edmgr download-artifacts -e <ProductID> -r <ReleaseID> -a <ArtifactID> -d <directory>
 ```

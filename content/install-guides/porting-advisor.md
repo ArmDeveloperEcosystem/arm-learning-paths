@@ -25,7 +25,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Porting Advisor for Graviton is a command line tool for assessing portability of software to AWS Graviton processors. 
+[Porting Advisor for Graviton](https://github.com/aws/porting-advisor-for-graviton/) is a command line tool for assessing the portability of software to AWS Graviton processors. 
 
 Porting Advisor analyzes source code for known patterns and dependencies, and generates a report with any incompatibilities.
 

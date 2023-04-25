@@ -11,9 +11,13 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
+{{% notice License end-users%}}
+The below is for those who are using Arm tools managed by Arm UBL licenses.
+{{% /notice %}}
+
 ## Set up by environment variable
 
-Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the success kit product code and your internal server.
+Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the Success Kit product code and your internal UBL license server. Contact your internal license administrators for information on your internal server.
 
 ### HSK
 ```console

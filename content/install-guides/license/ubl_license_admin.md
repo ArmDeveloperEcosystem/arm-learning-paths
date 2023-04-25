@@ -11,6 +11,10 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
+{{% notice License Administration%}}
+The below is for those who are setting up the UBL license server, not end users.
+{{% /notice %}}
+
 ## License portal
 
 To generate your licenses you need access to the Arm user-based licensing portal, with the account that the licenses were assigned to.
@@ -114,7 +118,7 @@ You will see the following output when successful.
 ```output
 Licenses have been successfully updated. No confirmation is required.
 ```
-The licenses are now ready to use by the end-users.
+The licenses are now ready to use by the [end-users](../ubl_license_enduser).
 
 ## Monitor license server status and usage
 

@@ -30,7 +30,7 @@ NoMachine is a client server application. The NoMachine server runs on the remot
 
 ### Install the xfce4 desktop
 
-To connect to a remote desktop, desktop software must be installed. There are many options for this, but using xfce4 makes for a minimal install with good performance. 
+To connect to a remote desktop, desktop software must be installed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance. 
 
 Install the desktop software.
 
@@ -96,7 +96,7 @@ For NoMachine to work, it's best to have a user account on the remote machine wi
 
 If the user account already has a password, this step can be skipped. 
 
-To enable passwords edit the file `/etc/sshd_config` and set `PasswordAuthentication to yes`
+To enable passwords edit the file `/etc/sshd_config` and set `PasswordAuthentication to yes`.
 
 To enable it in a script or from the command line use:
 
@@ -123,29 +123,28 @@ Remember the password for later when the client is connected.
 
 ### Open the NoMachine port 
 
-The default port for NoMachine is 4000. If needed, open this port in the security group. Make sure to open ports only from your IP address, not from anywhere. 
+The default port for NoMachine is `4000`. If needed, open this port in the security group. Make sure to open ports only from your IP address, not from anywhere. 
 
 ### Install the NoMachine client
 
 [Download](https://downloads.nomachine.com/) and install NoMachine on the client you want to connect from. There are options for most operating systems including Android and iOS. 
 
-Start NoMachine on the client computer. The first step is to connect. Enter a name for the connection and the (public) IP of the remote machine. The default port is 4000.
+Start NoMachine on the client computer. The first step is to connect. Enter a name for the connection and the (public) IP of the remote machine. The default port is `4000`.
 
-![Connect](/install-guides/_images/nx-connect.png)
+![Connect #center](/install-guides/_images/nx-connect.png)
 
 The next screen is the login screen. Enter the username and password for the account on the remote machine.
 
-![Login](/install-guides/_images/nx-login.png)
+![Login #center](/install-guides/_images/nx-login.png)
 
 A question about creating a new display may be presented, answer Yes.
 
-![Confirm](/install-guides/_images/nx-confirm.png)
+![Confirm #center](/install-guides/_images/nx-confirm.png)
 
 NoMachine will resize the remote desktop to fit in the client window. The best option is to change the remote display resolution to match the client window size. 
 
-![Resize](/install-guides/_images/nx-resize.png)
+![Resize #center](/install-guides/_images/nx-resize.png)
 
 Finally, the desktop will appear and is ready to use. 
 
-![Linux desktop](/install-guides/_images/nx-desktop.png)
-
+![Linux desktop #center](/install-guides/_images/nx-desktop.png)

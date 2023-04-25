@@ -32,9 +32,9 @@ There is nothing to download to enable Hyper-V.
 
 ## Before you begin
 
-Arm virtual machines on Windows with Hyper-V require Windows 11 version 22H2 or newer. 
+Arm virtual machines on Windows with Hyper-V require `Windows 11 version 22H2` or newer. 
 
-To check your Windows version hold down the Windows Key and press R. In the Run dialog box type `winver`
+To check your Windows version hold down the Windows Key and press R. In the Run dialog box type `winver`.
 
 A dialog will appear with your version information. 
 
@@ -42,7 +42,7 @@ Look for `Version 22H2` or newer.
 
 Here is a screenshot of `winver`:
 
-![Windows version](/install-guides/_images/winver.png)
+![Windows version #center](/install-guides/_images/winver.png)
 
 
 {{% notice Note %}}
@@ -61,15 +61,15 @@ Pick one alternative, you don't need to do both.
 
 1. Click the Windows button, find and open the Control Panel 
 
-2. In Control Panel click Programs and then click Turn Windows features on or off
+2. In Control Panel click `Programs` and then click Turn Windows features on or off
 
 A dialog should appear:
 
-![Hyper-V off](/install-guides/_images/hyper-v-1.png)
+![Hyper-V off #center](/install-guides/_images/hyper-v-1.png)
 
 3. Select Hyper-V and click OK
 
-![Hyper-V on](/install-guides/_images/hyper-v-2.png)
+![Hyper-V on #center](/install-guides/_images/hyper-v-2.png)
 
 ## Enable Hyper-V from the command line
 
@@ -96,8 +96,6 @@ Restart your computer to finish enabling Hyper-V.
 
 Hyper-V Manager should now be available in the applications menu.
 
-![Hyper-V manager](/install-guides/_images/hyper-v-manager.png)
+![Hyper-V manager #center](/install-guides/_images/hyper-v-manager.png)
 
 You are now ready to use Hyper-V to create virtual machines on your Windows on Arm device. 
-
-

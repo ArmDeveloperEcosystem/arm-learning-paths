@@ -47,9 +47,9 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Download 
 
-Download a release of OpenVSCode Server from the [GitHub release area](https://github.com/gitpod-io/openvscode-server/releases). The releases are in sync with VS Code and change frequently. Make sure to download the arm64 version.
+Download a release of OpenVSCode Server from the [GitHub release area](https://github.com/gitpod-io/openvscode-server/releases). The releases are in sync with VS Code and change frequently. Make sure to download the `arm64` version.
 
-For example, use wget to download.
+For example, use `wget` to download.
 
 ```bash
 wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.72.2/openvscode-server-v1.72.2-linux-arm64.tar.gz 
@@ -80,7 +80,7 @@ The server will print a URL to access VS Code in a browser. The URL is localhost
 
 Refer to [SSH](/install-guides/ssh/) for more info about SSH. 
 
-Use the -L option of ssh to Forward port 3000.
+Use the `-L` option of `ssh` to forward port 3000.
 
 ```bash
 ssh -L 3000:localhost:3000 user@ip-address
@@ -96,7 +96,7 @@ Open the link in your local browser and VS Code will appear.
 
 ### Option 2 
 
-The second option is to open port 3000 for access. On a cloud instance this involves changing the security group to open TCP port 3000. For best security, Make sure to open the port for your IP address only, not from all IP addresses. 
+The second option is to open port `3000` for access. On a cloud instance this involves changing the security group to open TCP port 3000. For best security, Make sure to open the port for your IP address only, not from all IP addresses. 
 
 Each cloud provider will have instructions on how to work with security group. Refer to the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#adding-security-group-rule) as an example.
 
@@ -104,7 +104,7 @@ With the port open, substitute the public IP address of the instance instead of 
 
 On ChromeOS you can use the Linux configuration settings to automatically do port forwarding. No SSH connection is needed.
 
-![port forwarding](/install-guides/_images/ChromeOSpf.png)
+![port forwarding #center](/install-guides/_images/ChromeOSpf.png)
 
 ## Other information
 
@@ -114,7 +114,7 @@ There are command line options to change the port, the token, and other configur
 ./openvscode-server-v1.72.2-linux-arm64/bin/openvscode-server --help
 ```
 
-If you are running all on a local machine the token can be eliminated using the --without-connection-token option.
+If you are running all on a local machine the token can be eliminated using the `--without-connection-token` option.
 
 It's also possible to run an existing docker image which uses Ubuntu Linux for Arm and mounts your host directory to access files on your computer. Refer to the [GitHub README](https://github.com/gitpod-io/openvscode-server#readme) for more information.
 
