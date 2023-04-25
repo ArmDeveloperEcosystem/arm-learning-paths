@@ -25,9 +25,11 @@ weight: 1
 A safety qualified branch of Arm Compiler for Embedded, known as [Arm Compiler for Embedded FuSa](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded%20FuSa), is available for safety critical applications.
 
 
-## Use as supplied with Arm Development Studio or Keil MDK
+## Use the version contained in Arm Development Studio or Keil MDK
 
-The easiest way to access the Arm Compiler for Embedded is to use the version provided with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio). A given Development Studio version will contain the latest compiler version available at the time of release, and is generally up to date.
+The easiest way to access the Arm Compiler for Embedded is to use the version provided with [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
+
+A given Development Studio version will contain the latest compiler version available at the time of release, and is generally up to date.
 
 Cortex-M users can also use the compiler as provided with [Keil MDK](https://www2.keil.com/mdk5).
 

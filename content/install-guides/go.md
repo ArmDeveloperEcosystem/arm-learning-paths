@@ -19,9 +19,9 @@ weight: 1
 
 ## Introduction
 
-Go is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
+`Go` is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
 
-This article provides a quick solution to install Go for Ubuntu on Arm.
+This article provides a quick solution to install `Go` for Ubuntu on Arm.
 
 Confirm you are using an Arm machine by running:
 

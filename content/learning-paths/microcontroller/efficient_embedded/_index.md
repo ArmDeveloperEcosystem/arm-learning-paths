@@ -24,7 +24,7 @@ subjects: Performance and Architecture
 armips:
     - Cortex-M
 operatingsystems:
-    - Windows
+    - Baremetal
 tools_software_languages:
     - C
     - Assembly

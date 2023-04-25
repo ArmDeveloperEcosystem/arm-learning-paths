@@ -11,6 +11,9 @@ minutes_to_complete: 10
 
 author_primary: Jason Andrews
 
+### Combined with gcloud install. This install guide to be deleted.
+draft: true
+
 ### Link to official documentation
 official_docs: https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login
 
@@ -22,30 +25,29 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-In this section you will learn how to obtain user access credentials for Google Cloud using a web flow. You will puts the credentials in a well-known location for Application Default Credentials (ADC).
+In this section you will learn how to obtain user access credentials for Google Cloud using a web flow. You will put the credentials in a well-known location for Application Default Credentials (`ADC`).
 
 ## Before you begin
 
-Install the Google Cloud CLI on your machine using the [install guide](/install-guides/gcloud/).
+Install the `Google Cloud CLI` on your machine using the [install guide](/install-guides/gcloud/).
 
 ## Acquire user credentials
 
 Run the following command to obtain user access credentials::
-
 ```console
 gcloud auth application-default login
 ```
 
 A URL is generated as the output of the command:
 
-![image](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
 
 Open the URL in the browser and copy the authentication code.
 
-![image](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
 
 Now paste the authentication code as shown below:
 
-![image](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
+![image #center](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
 
-After a successful log in, you will be able to use the Google Cloud CLI and automation tools like Terraform from the terminal.
+After a successful log in, you will be able to use the `Google Cloud CLI` and automation tools like [Terraform](../terraform) from the terminal.

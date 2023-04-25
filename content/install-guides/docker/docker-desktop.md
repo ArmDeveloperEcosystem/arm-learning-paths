@@ -34,16 +34,13 @@ All of the download files are available on the
 | [Mac OS](https://docs.docker.com/desktop/install/mac-install) |
 | [Apple Silicon](https://docs.docker.com/desktop/mac/apple-silicon/) |
 
-All of the Docker Desktop products use the x86_64 / amd64 architecture except macOS on Apple Silicon.
+All of the Docker Desktop products use the `x86_64` / `amd64` architecture except macOS on Apple Silicon.
 
-On any platform, To confirm the Docker Desktop installation is successful run:
-
+On any platform, confirm the Docker Desktop installation is successful with:
 ```console
 docker run hello-world
 ```
-
 The output should be a welcome message such as:
-
 ```output
 Hello from Docker!
 This message shows that your installation appears to be working correctly.
@@ -65,15 +62,12 @@ Share images, automate workflows, and more with a free Docker ID:
 
 For more examples and ideas, visit:
  https://docs.docker.com/get-started/
-
 ```
 
 Use the `uname` command to identify the architecture:
-
 ```console
 uname -m
 ```
-
 Apple Silicon is reported as `arm64`.
 
 Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).

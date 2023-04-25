@@ -38,26 +38,22 @@ The installer will start.
 
 Check "Add python.exe to PATH" if you want to easily invoke python from any directory.
 
-![Install](/install-guides/_images/py1-woa.png)
+![Install #center](/install-guides/_images/py1-woa.png)
 
 Wait for the installer to complete and show the message, "Setup was successful".
 
-![Complete](/install-guides/_images/py2-woa.png)
+![Complete #center](/install-guides/_images/py2-woa.png)
 
 
 ## Invoke python
 
-At a Windows Command prompt or a PowerShell prompt run python. 
-
-Both python or py can be used to start the interpreter.
-
+At a Windows Command prompt or a PowerShell prompt use `python` or `py` to start the interpreter.
 ```cmd
 C:\>py
 Python 3.11.0 (main, Oct 24 2022, 18:15:22) [MSC v.1933 64 bit (ARM64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
-
 
 ## Test an example
 
@@ -79,13 +75,13 @@ Machine is Windows 10 ARM64
 ```
 ## Installing packages
 
-Python pip can be used to install packages. 
+Python `pip` can be used to install packages. 
 
 For example, to install `Flask`:
 ```console
 pip install Flask
 ```
-Save the code below as hello.py
+Save the code below as `hello.py`:
 
 ```python
 import platform
@@ -99,11 +95,13 @@ def hello():
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
 ```
-Run the application.
+
+Run the application:
 ```console
 python hello.py
 ```
-The output is:
+
+The output will be similar to:
 ```output
 C:\>python hello.py
  * Serving Flask app 'hello'
@@ -114,18 +112,17 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://192.168.68.95:5000
 Press CTRL+C to quit
 ```
-Open a browser to the URL printed by the application ([http://127.0.0.1:5000](http://127.0.0.1:5000) in the above).
+Open a browser to the URL printed by the application.
 
 The output is in the browser.
 
-![Complete](/install-guides/_images/flask-woa.png)
+![Complete #center](/install-guides/_images/flask-woa.png)
 
 
 ## Using IDLE
 
-Python IDLE is included in the installation. IDLE is a simple IDE for python development.
+Python `IDLE` is included in the installation. IDLE is a simple IDE for python development.
 
-![Complete](/install-guides/_images/py3-woa.png)
+![Complete #center](/install-guides/_images/py3-woa.png)
 
 You are now ready to use Python on your Windows on Arm device. 
-

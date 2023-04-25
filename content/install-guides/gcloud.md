@@ -75,4 +75,25 @@ core 2023.02.13
 gcloud-crc32c 1.0.0
 gsutil 5.20
 ```
-You are ready to use the Google Cloud CLI.
+
+## Acquire user credentials
+
+In this section you will learn how to obtain user access credentials for Google Cloud using a web flow. You will put the credentials in a well-known location for Application Default Credentials (`ADC`).
+
+Run the following command to obtain user access credentials:
+```console
+gcloud auth application-default login
+```
+A URL is generated as the output of the command:
+
+![image #center](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
+
+Open the URL in the browser and copy the authentication code.
+
+![image #center](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
+
+Now paste the authentication code as shown below:
+
+![image #center](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
+
+After a successful log in, you will be able to use the `Google Cloud CLI` and automation tools like [Terraform](../terraform) from the terminal.

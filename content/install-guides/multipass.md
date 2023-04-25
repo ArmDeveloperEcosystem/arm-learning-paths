@@ -22,10 +22,11 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
+{{% notice Note %}}
+A computer running macOS with Apple Silicon is required to complete the steps below.
+{{% /notice %}}
 
-[Multipass](https://multipass.run/) provides cloud style virtual machines (VMs). Multipass is popular among developers for efficient, local testing. When run on macOS with Apple Silicon, Multipass provides a similar experience to cloud instances.
-
-A local, software compatible equivalent of an Arm cloud instance on your desk with good performance, and no cost, is an important option for developers. 
+[Multipass](https://multipass.run/) provides cloud style virtual machines (VMs). Multipass is popular among developers for efficient, local testing. When run on macOS with Apple Silicon, Multipass provides a similar experience to cloud instances. A local, software compatible equivalent of an Arm cloud instance on your desk with good performance, and no cost, is an important option for developers. 
 
 Multipass provides a clear CLI to easily start virtual machine instances, do development tasks, and clean the VMs from your computer.
 
@@ -34,8 +35,6 @@ Multipass provides a clear CLI to easily start virtual machine instances, do dev
 Multipass runs on a variety of platforms and host operating systems. The information below covers running Multipass on macOS with Apple Silicon with the goal of creating a compatible Ubuntu Linux environment for developers working on cloud instances. 
 
 Multipass uses the terms virtual machine and instance synonymously. 
-
-A computer running macOS with Apple Silicon is required to complete the steps below.
 
 ## Download  {#download}
 
@@ -55,7 +54,7 @@ sudo installer -pkg  multipass-1.10.1+mac-Darwin.pkg -target /
 
 The getting started instructions below use the command line interface. Multipass installs a tray icon for those who want to access basic features from the user interface.
 
-![Connect](/install-guides/_images/multipass-tray.png)
+![Connect #center](/install-guides/_images/multipass-tray.png)
 
 ## Get started with Multipass
 
@@ -120,7 +119,7 @@ To run a specific command from the host on the instance use the `exec` command. 
 multipass exec m1u -- uname -a
 ```
 
-The uname output will look similar to:
+The `uname` output will look similar to:
 
 ```output
 Linux m1u 5.15.0-58-generic #64-Ubuntu SMP Thu Jan 5 12:06:43 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
@@ -174,9 +173,10 @@ multipass info m1u
 
 Copy the IP address from the info output and paste it into a browser with port 3000.
 
-Modify the IP address to use your information.
-
-[http://192.168.64.39:3000](http://192.168.64.39:3000)
+Modify the IP address to use your information, for example:
+```output
+http://192.168.64.39:3000
+```
 
 You now have a running VS Code Server in your Multipass instance with Ubuntu 22.04 running on Arm.
 
@@ -227,17 +227,16 @@ Use the `delete` command to delete.
 ```console
 multipass delete m1u
 ```
-
-After delete, the state will change to Deleted, but it's not actually deleted.
-
-Deleted instances can be recovered with the `recover` command.
+After delete, the state will change to Deleted, but it is still recoverable.
 
 ```console
 multipass recover m1u
 ```
-
-To completely delete use the `purge` command; all deleted instances are permanently removed.
+Use the `purge` command to permanently remove all deleted instances.
 
 ```console
 multipass purge 
 ```
+{{% notice Note %}}
+Purged instances are no longer recoverable.
+{{% /notice %}}

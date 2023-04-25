@@ -30,7 +30,11 @@ Feel free to seek out additional SSH tutorials or add more information to this p
 
 ## SSH 
 
-SSH is a client server application. An SSH server, also called the SSH deamon, runs on a remote machine.  An SSH client runs on the local machine (the one you are typing on) and connects to the remote daemon. 
+SSH is a client server application.
+
+An SSH server, also called the SSH deamon, runs on a remote machine. 
+
+An SSH client runs on the local machine (the one you are typing on) and connects to the remote daemon. 
 
 ### Decide if the SSH daemon is already running
 
@@ -65,9 +69,9 @@ For Red Hat and Amazon Linux distributions.
 sudo yum install openssh-server 
 ```
 
-### Start and Stop the SSH daemon {#startstop}
+### Start and stop the SSH daemon {#startstop}
 
-The commands below are for any Linux distribution using systemd. This includes Debian, Ubuntu, and Amazon Linux. 
+The commands below are for any Linux distribution using `systemd`. This includes Debian, Ubuntu, and Amazon Linux. 
 
 To start the SSH daemon:
 ```console

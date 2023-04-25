@@ -25,6 +25,7 @@ Access the [Software Licensing Portal](https://developer.arm.com/support/licensi
 
 ## End-user set up
 Users should set the environment variable `ARMLMD_LICENSE_FILE` to map to the location of your license server.
+
 ### Windows
 ```console
 set ARMLMD_LICENSE_FILE=port@server
@@ -37,4 +38,4 @@ export ARMLMD_LICENSE_FILE=port@server
 
 The license can also be activated in the various Arm tool IDEs.
 
-For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager`.
+For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager`. You will also need to specify the Development Studio `Edition` that the license supports.
