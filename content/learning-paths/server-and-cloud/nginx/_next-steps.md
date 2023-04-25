@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The learning path on MongoDB is a great next step.
+    You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The learning path on MongoDB is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/server-and-cloud/mongodb/"

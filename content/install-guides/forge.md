@@ -109,7 +109,7 @@ You do not need to install a license file on a machine running Linaro Forge Remo
 
 When compiling the program that you want to debug, you must add the debug flag to your compile command. For most compilers this is `-g`.
 
-We recommend that you turn off compiler optimizations as they can produce unexpected results when debugging.
+You should turn off compiler optimizations as they can produce unexpected results when debugging.
 
 Linaro Forge's debugging tool, Linaro DDT, can be launched with the `ddt` command. For MPI applications, you can prefix the mpirun/mpiexec command normally used to run in parallel:
 
@@ -143,7 +143,7 @@ In most cases, if your program is already compiled with debugging symbols (`-g`)
 
 Typically you should keep optimization flags enabled when profiling (rather than profiling a debug build). This will give more representative results.
 
-Linaro Forge's profiling tool, Linaro MAP, can be launched with the `map` command to launch the GUI. When running on a HPC cluster with MPI, we recommend to use `map --profile` when running or submitting a job to the compute nodes:
+Linaro Forge's profiling tool, Linaro MAP, can be launched with the `map` command to launch the GUI. When running on a HPC cluster with MPI, you should use `map --profile` when running or submitting a job to the compute nodes:
 
 With *Express Launch*:
 ```bash

@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Install Nginx on an [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate cloud service provider.
+Install Nginx on an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider.
 
 This learning path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04` and `Ubuntu Linux 22.04`.
 

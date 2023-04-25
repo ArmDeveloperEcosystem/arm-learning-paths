@@ -13,7 +13,7 @@ You will need a valid [GitHub](https://github.com) account to complete this lear
 
 ## Create a new GitHub repository 
 
-We will create a new repository in GitHub to test a simple `hello world` command running on the Windows Arm VM using GitHub Actions for CI/CD.
+You can create a new repository in GitHub to test a simple `hello world` command running on the Windows Arm VM using GitHub Actions for CI/CD.
 
 In a browser, log in using your GitHub account. Select the [New Button](https://github.com/new) to create a new repository. Give the repository a name. Click `Create Repository`. 
 
