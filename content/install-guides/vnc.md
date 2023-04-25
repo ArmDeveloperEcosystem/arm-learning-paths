@@ -36,9 +36,9 @@ VNC is a client server application. A VNC server runs on a remote machine. A VNC
 
 ### Install VNC server and xfce4 desktop
 
-To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This recipe uses [TigerVNC](https://tigervnc.org/)
+To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This recipe uses [TigerVNC](https://tigervnc.org/).
 
-Desktop software is also needed. There are many options for this, but using `xfce4` makes for a minimal install with good performance. 
+Desktop software is also needed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance. 
 
 Install the desktop software.
 
@@ -142,4 +142,4 @@ You will be prompted for the password created earlier with `vncpasswd`.
 
 A remote Linux Desktop should appear on your local computer. Make sure to close the VNC client first and then exit the SSH connection. 
 
-![Linux desktop](/install-guides/_images/xfce4.png)
+![Linux desktop #center](/install-guides/_images/xfce4.png)

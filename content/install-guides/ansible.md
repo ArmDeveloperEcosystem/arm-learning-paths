@@ -20,7 +20,7 @@ Ansible is an open source, command-line automation used to configure systems and
 
 Ansible command-line tools can be installed on a variety of Linux distributions. 
 
-[General installation information](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) is available which covers all supported operating systems, but it doesn't talk about Arm. 
+[General installation information](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) is available which covers all supported operating systems, but it doesn't talk about Arm-based hosts.
 
 ## Introduction
 
@@ -38,7 +38,7 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you are not using an Arm-based machine running 64-bit Linux.
 
 ## Download and Install
 

@@ -22,7 +22,7 @@ weight: 1
 ---
 [Arm Compiler for Linux](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux) is a suite of tools containing Arm C/C++ Compiler (armclang), Arm Fortran Compiler (armflang), and Arm Performance Libraries (ArmPL). It is tailored to the development of High Performance Computing (HPC) applications.
 
-Arm Compiler for Linux runs on 64-bit Arm computers, it is not a cross-compiler.
+Arm Compiler for Linux runs on 64-bit Arm machines, it is not a cross-compiler.
 
 ## Before you begin
 

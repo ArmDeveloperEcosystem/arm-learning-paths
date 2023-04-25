@@ -91,39 +91,34 @@ wget -O vscode.deb 'https://code.visualstudio.com/sha/download?build=stable&os=l
 ```
 
 {{% notice Warning %}}
-The snap install is for a non-Arm architecture and doesn't work.
+The `snap` install is for a non-Arm architecture and does not work.
 {{% /notice %}}
 
 ## Install the downloaded version
 
-For CLI, extract the file. The result is a single executable named `code`. It is placed in the current directory. For desktop install the Debian package.
-
-### CLI
+For CLI, extract the file. The result is a single executable named `code`. It is placed in the current directory.
 ```console
 tar xvf vscode.tgz
 ```
-### Desktop
+For the desktop, install the Debian package.
 ```console
 sudo apt install ./vscode.deb
 ```
 ## Start a VS Code Tunnel
 
-On the remote machine start a VS Code tunnel. The ./ is used to indicate the CLI version which was extracted in the current directory. For the desktop install the code executable is in the search path and the ./ should be omitted. 
+On the remote machine start a VS Code tunnel. The `./` is used to indicate the CLI version which was extracted in the current directory.
 
-### CLI
 ```console
 ./code tunnel --name my-tunnel-1 --accept-server-license-terms
 ```
-### Desktop
+
+For the desktop, ensure the `code` executable is on `PATH`. The `./` should be omitted:
 ```console
 code tunnel --name my-tunnel-1 --accept-server-license-terms
 ```
-If `--name` is not used, a name will be assigned to the tunnel. 
+If `--name` is not used, an arbitrary name will be assigned to the tunnel. 
 
-The VS Code tunnel server will print a URL to authenticate and link it to your GitHub account. 
-
-Visit the [device link](https://github.com/login/device) and then enter the code shown.
-
+The VS Code tunnel server will print a URL to authenticate and link it to your GitHub account.
 ```output
 *
 * Visual Studio Code Server
@@ -132,15 +127,19 @@ Visit the [device link](https://github.com/login/device) and then enter the code
 * the Visual Studio Code Server License Terms (https://aka.ms/vscode-server-license) and
 * the Microsoft Privacy Statement (https://privacy.microsoft.com/en-US/privacystatement).
 *
-To grant access to the server, please log into https://github.com/login/device and use code A4F7-33D4
+To grant access to the server, please log into https://github.com/login/device and use code XXXX-YYYY
 ```
+Visit [device link](https://github.com/login/device) and then enter the code shown.
+
 After the code is entered, the remote device is connected to your GitHub account. 
 
-![Device Connect](/install-guides/_images/vsc-device-connect.png)
+![Device Connect #center](/install-guides/_images/vsc-device-connect.png)
 
-The remote machine is now ready to accept client connections. These can be from a browser or VS Code desktop. 
+## Connect to remote machine
 
-### Connection Option 1: using a browser
+The remote machine is now ready to accept client connections. These can be from a [browser](#browser) or [VS Code desktop](#vsdesktop). 
+
+### Connect using a browser {#browser}
 
 The quickest way to connect to the remote machine is using a browser. Even a tablet or phone can be used. 
 
@@ -149,26 +148,30 @@ Connect using a browser by visiting the link which is printed by the server.
 The link will contain the tunnel name specified with `--name` or a created name if no name was provided.
 
 In the example above, the tunnel link is: 
-
+```url
 https://vscode.dev/tunnel/my-tunnel-1
+```
+If you do not remember or cannot see the tunnel name, open:
+```url
+https://vscode.dev
+```
+When VS Code opens, click on the lower left corner and select `Connect to Tunnel`. 
 
-If you don't remember or can't see the tunnel name, open https://vscode.dev in a browser.
-
-When VS Code opens click on the lower left corner and select "Connect to Tunnel". 
-
-![Remote](/install-guides/_images/vsc-remote.png)
+![Remote #center](/install-guides/_images/vsc-remote.png)
 
 A list of tunnels attached to your account will be opened. If you are not signed in to GitHub it will require authentication before showing the list of tunnels. The tunnel list also shows if the tunnel is online and ready for a connection.
 
 Select the tunnel to open and VS Code will connect to the remote machine and you are ready to use VS Code on the remote machine.
 
-### Connection Option 2: using VS Code desktop
+### Connect using VS Code desktop {#vsdesktop}
 
-Connecting to a tunnel from VS Code Desktop requires the [Remote - Tunnels Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-server). Search for "remote tunnels" in the Extensions Marketplace and install the extension.
+Connecting to a tunnel from VS Code Desktop requires the [Remote - Tunnels Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-server).
 
-Just as with the browser connection, click on the lower left corner and select "Connect to Tunnel". 
+Search for `remote tunnels` in the Extensions Marketplace and install the extension.
 
-![Remote](/install-guides/_images/vsc-remote.png)
+Just as with the browser connection, click on the lower left corner and select `Connect to Tunnel`. 
+
+![Remote #center](/install-guides/_images/vsc-remote.png)
 
 A list of tunnels attached to your account will be opened. If you are not signed in to GitHub it will require authentication before showing the list of tunnels. The tunnel list also shows if the tunnel is online and ready for a connection.
 
@@ -176,9 +179,8 @@ Select the tunnel to open and VS Code will connect to the remote machine and you
 
 ## Close a tunnel connection
 
-On both browser and desktop, click the lower left (which now shows the name of the connected tunnel) and select "Close Remote Connection" to disconnect from the tunnel server. 
+On both browser and desktop, click the lower left (which now shows the name of the connected tunnel) and select `Close Remote Connection` to disconnect from the tunnel server. 
 
 ## Summary 
 
 VS Code tunnels and your GitHub account make it easy to connect to Arm machines running Linux for terminal access or to do development on a remote machine with VS Code. This is done without any open ports or SSH port forwarding.
-

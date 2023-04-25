@@ -59,6 +59,6 @@ Default region name [us-east-2]: us-east-2
 Default output format [json]: json
 ```
 
-Replace the value of `Access Key ID`, `Secret Access Key`, `region name` and `output format` with your values.
+Replace the value of `Access Key ID`, `Secret Access Key`, `region name` and `output format` with your unique values.
 
-After a successful configuration, you will be able to use the AWS CLI and automation tools like Terraform from the terminal.
+After a successful configuration, you will be able to use the AWS CLI and automation tools like [Terraform](../terraform) from the terminal.

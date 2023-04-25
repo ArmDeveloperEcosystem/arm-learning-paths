@@ -25,20 +25,20 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[LLVM version 12 or higher](https://llvm.org/) natively supports Windows on Arm. [View the supported Arm architecture features](https://developer.arm.com/Tools%20and%20Software/LLVM%20Toolchain#Supported-Devices) in the open-sourced LLVM toolchain.
+[LLVM version 12 or higher #center](https://llvm.org/) natively supports Windows on Arm. [View the supported Arm architecture features](https://developer.arm.com/Tools%20and%20Software/LLVM%20Toolchain#Supported-Devices) in the open-sourced LLVM toolchain.
 
 ## Download and Install
 The latest version of the LLVM toolchain with Windows on Arm native support is 16.0.0. [Download the pre-built binary here](https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/LLVM-16.0.0-woa64.exe)
 
 After download, run `LLVM-16.0.0-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
 
-![img1](/install-guides/_images/llvm-setup.png)
+![img1 #center](/install-guides/_images/llvm-setup.png)
 
 Proceed with `Install`. 
 
 The setup will complete successfully. Select `Finish` to close the installer.
 
-![img2](/install-guides/_images/llvm-finish.png)
+![img2 #center](/install-guides/_images/llvm-finish.png)
 
 ## Check Installation
 
@@ -58,11 +58,7 @@ InstalledDir: C:\Program Files\LLVM\bin
  
 ## Other versions of LLVM
 
-You can download other LLVM builds from [here](https://releases.llvm.org/download.html).
+You can download other LLVM builds from [the download repository](https://releases.llvm.org/download.html).
 {{% notice Note %}}
 The pre-built binary for Windows on Arm is typically named `LLVM-<version>-woa64.exe`.
 {{% /notice %}}
-
-
-
-

@@ -29,22 +29,22 @@ For any Linux machine, the commands below will install Docker.
 
 These commands are the (almost) universal install instructions for Docker on Linux.
 
-The architecture can be x86_64 or Arm, including a cloud server and a Raspberry Pi.
+The architecture can be `x86_64` or `Arm`, from a cloud server to a `Raspberry Pi`.
 
-The commands can also be used in the Windows Subsystem for Linux (WSL) and on a Chromebook.
+The commands can also be used in the `Windows Subsystem for Linux (WSL)` and on a `Chromebook`.
 
-For information about starting the docker daemon on WSL refer to the section on Installing Docker on Windows on Arm.
+For information about starting the docker daemon on WSL refer to [Installing Docker on Windows on Arm](../docker-woa).
 
+### Run installer
 ```console
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
-
-Add the user to the docker group. The newgrp command avoids the need to logout and back in.
-
+### Add user
+Add the user to the docker group. The `newgrp` command avoids the need to logout and back in.
 ```console
 sudo usermod -aG docker $USER ; newgrp docker
 ```
-
+### Confirm installation
 To confirm the installation is successful run:
 
 ```console
@@ -78,23 +78,22 @@ For more examples and ideas, visit:
 ```
 
 Use the `uname` command to identify the architecture:
-
 ```console
 uname -m
 ```
-Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64` 
+Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64`.
 
 ### Docker Engine versions
 
-The Stable channel (get.docker.com) provides the latest releases for general availability.
+The Stable channel (`get.docker.com`) provides the latest releases for general availability.
 
-The Test channel (test.docker.com) installs pre-releases that are for testing before general availability. 
+The Test channel (`test.docker.com`) installs pre-releases that are for testing before general availability. 
 
-Replace get.docker.com with test.docker.com to use the test version.
+Replace `get.docker.com` with `test.docker.com` above to use the test version.
 
-### Linux distributions where [get.docker.com](https://get.docker.com) isn't supported
+### Linux distributions where get.docker.com isn't supported
 
-Some Linux distributions are not supported by get.docker.com
+Some Linux distributions are not supported by [get.docker.com]((https://get.docker.com))
 
 Generally, the supported list is:
 * Ubuntu
@@ -106,7 +105,7 @@ Generally, the supported list is:
 
 An example of a distribution which is not supported and popular on Arm is [Manjaro](https://manjaro.org).
 
-On Manjaro, install docker using pacman.
+On Manjaro, install docker using `pacman`.
 
 ```console
 sudo pacman -Syu 
