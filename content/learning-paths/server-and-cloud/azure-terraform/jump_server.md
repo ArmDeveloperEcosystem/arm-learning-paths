@@ -12,6 +12,10 @@ layout: "learningpathall"
 
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
 
+{{% notice Note %}}
+An alternative to setting up a Jump server like below is to use [Azure Bastion](https://learn.microsoft.com/en-us/azure/bastion/bastion-overview).
+{{% /notice %}}
+
 ## Deploying Arm VMs on Azure and providing access via Jump Server
 
 For deploying Arm VMs on Azure and providing access via Jump Server, the Terraform configuration is broken into 4 files: `main.tf`, `variables.tf`, `outputs.tf` and `providers.tf`.

@@ -9,6 +9,10 @@ layout: "learningpathall"
 ---
 You will learn how to create a Windows on Arm virtual machine in the Azure cloud.
 
+{{% notice Note %}}
+These same instructions can be used to deploy a Linux image on the Arm Virtual Machine. Simply select a Linux distribution instead of Windows.
+{{% /notice %}}
+
 ## Create Windows on Arm virtual machine
 
 [Microsoft Azure](https://portal.azure.com/#home) is a cloud computing platform. You can log into Azure using either your personal subsciption or your organization's subscription.
