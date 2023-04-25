@@ -13,10 +13,10 @@
 review:
     - questions:
         question: >
-            Question?
+            What vector engine technologies does Arm have?
         answers:
-            - "Answer1"
-            - "Answer2"
+            - "AVX"
+            - "NEON, SVE"
         correct_answer: 2
         explanation: >
             Answer2. 
