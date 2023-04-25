@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 Skip this section if you already have a performance test methodology for your `PostgreSQL` deployment. 
 
-This section presents a method for testing `PostgreSQL` using HammerDB TPROC-C. This is useful information if you do not already have an established test methodology. To understand the impact of tuning on specific use cases and deployments, we recommend that you develop a performance test strategy that reflects your use cases.
+This section presents a method for testing `PostgreSQL` using HammerDB TPROC-C. This is useful information if you do not already have an established test methodology. To understand the impact of tuning on specific use cases and deployments, it is recommended that you develop a performance test strategy that reflects your use cases.
 
 ## Before you begin
 

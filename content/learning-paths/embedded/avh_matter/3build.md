@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 ## Fork Matter repository to your personal GitHub account
 
-So that we can manage the development with GitHub actions later, we must create a personal fork of the public repository.
+So that you can manage the development with GitHub actions later, you must create a personal fork of the public repository.
 
 Browse to the Matter repository on Github:
 ```console
@@ -49,9 +49,9 @@ Full [documentation](https://github.com/project-chip/connectedhomeip/blob/master
 
 ## Build the examples
 
-We are now ready to build the examples.
+You are now ready to build the examples.
 
-In the first Virtual Hardware instance we shall build `chip-tool`, a Matter controller implementation that allows to commission a Matter device into the network and to communicate with it using Matter messages.
+In the first Virtual Hardware instance you shall build `chip-tool`, a Matter controller implementation that allows to commission a Matter device into the network and to communicate with it using Matter messages.
 ```console
 cd examples/chip-tool
 gn gen out/debug
@@ -59,7 +59,7 @@ ninja -C out/debug
 ```
 Full [documentation](https://github.com/project-chip/connectedhomeip/tree/master/examples/chip-tool) for `chip-tool` is provided in the repository.
 
-In the other instance we shall build the reference `lighting-app` for Linux, which will be controlled by the above `chip-tool`.
+In the other instance you shall build the reference `lighting-app` for Linux, which will be controlled by the above `chip-tool`.
 ```console
 cd examples/lighting-app/linux
 gn gen out/debug

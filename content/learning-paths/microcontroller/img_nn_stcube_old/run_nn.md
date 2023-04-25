@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, we will deploy the model we built in the previous section on the ST board using STM Cube AI and STM Cube IDE. STM Cube AI is an extension software of STM Cube MX. So we will need to instal both STM Cube MX and the extension software, STM Cube AI.
+In this section, deploy the model built in the previous section on the ST board using STM Cube AI and STM Cube IDE. STM Cube AI is an extension software of STM Cube MX. So you will need to instal both STM Cube MX and the extension software, STM Cube AI.
 
 ## Install STM Cube MX and ST CUbe AI
 
@@ -16,9 +16,9 @@ In this section, we will deploy the model we built in the previous section on th
 2. Run the Windows installer and install in desired location of your Windows Machine.
 3. Open STM Cube MX.
 4. Click [Access to Board Selector]. Find your board and click [Start Project].
-5. First we need to configure the project. Go to [Project Manager]. Write the project name and select the project location where the project will be saved.
-6. This figure shows the configuration of pinouts. We don't need to use all of them. So, we are going to clear the pinouts. On [Pinout] menu, click [Clear pinouts].
-7. Now we are going to install Cube AI and enable it for your project.
+5. First you need to configure the project. Go to [Project Manager]. Write the project name and select the project location where the project will be saved.
+6. This figure shows the configuration of pinouts. On [Pinout] menu, click [Clear pinouts].
+7. Now install Cube AI and enable it for your project.
 8. On [Software Packs] menu, click [Select Components].
 9. Click [Install] button. Expand the menu and enable Cube AI. For device application, choose [Validation].
 10. You can see that Cube AI is now enabled.
@@ -49,11 +49,11 @@ If you got the ‘undefined reference’ error, go to ‘Core/Src/main.c’. In 
 
 ![output8](Images/lab4_8.PNG)
 
-With the model now deployed on the ST board, we are ready to test it.
+With the model now deployed on the ST board, you are ready to test it.
 
 ### Test the model
 
-For testing, we are going to use a custom tool for sending images to the board. The tool is provided by STMicroelectronics. Open Anaconda Prompt and activate your environment for the lab. We need to install several packages to run the tool.
+For testing, you will use a custom tool for sending images to the board. The tool is provided by STMicroelectronics. Open Anaconda Prompt and activate your environment for the lab. You need to install several packages to run the tool.
 
 ```console
  python -m pip install -U opencv-python protobuf tqdm==4.50.2
@@ -72,7 +72,7 @@ Select the network (‘Data/models/cifar10_model.h5’) and open the label file 
 
 ![output10](Images/lab4_10.PNG)
 
-Open an image to test. The tool will automatically show the inference result. We can see that the model correctly predicted the label. In addition, we can see the time taken to finish the prediction.
+Open an image to test. The tool will automatically show the inference result. Observe that the model correctly predicted the label. In addition, note the time taken to finish the prediction.
 
 ![output11](Images/lab4_11.PNG)
 

@@ -47,7 +47,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 ## Create Azure instances using Terraform
 
-For Azure Arm based instance deployment, the Terraform configuration is broken into three files: `providers.tf`, `variables.tf` and `main.tf`. Here we are creating 2 instances.
+For Azure Arm based instance deployment, the Terraform configuration is broken into three files: `providers.tf`, `variables.tf` and `main.tf`. Here you are creating 2 instances.
 
 Add the following code in `providers.tf` file to configure Terraform to communicate with Azure.
     

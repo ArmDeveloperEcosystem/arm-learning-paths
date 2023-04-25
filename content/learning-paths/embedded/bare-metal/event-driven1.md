@@ -7,7 +7,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Embedded systems typically monitor inputs waiting for an event, which then triggers a response by the system. You need to write code that listens for these events and acts on them. With Armv8-A we enable asynchronous exceptions (`IRQs`, `FIQs`, and `SErrors`) which are taken when the processor needs to handle an event outside to the current flow of execution.
+Embedded systems typically monitor inputs waiting for an event, which then triggers a response by the system. You need to write code that listens for these events and acts on them. With Armv8-A, enable asynchronous exceptions (`IRQs`, `FIQs`, and `SErrors`) which are taken when the processor needs to handle an event outside to the current flow of execution.
 
 For example, a thermostat might monitor room temperature until it drops below a specified threshold. When the threshold is reached, the system must turn on the heating system.
 
@@ -28,7 +28,7 @@ Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com
 	MSR  SCR_EL3, x1
 ```
 ### Point to the exception vector table
-Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. We will create `vectors` in the next section.
+Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. You will create `vectors` in the next section.
 #### startup.s
 ```C
 // Install vector table
@@ -49,7 +49,7 @@ Clear appropriate bits within [DAIF, Interrupt Mask Bits](https://developer.arm.
 
 The [exception vector table](https://developer.arm.com/documentation/den0024/latest/AArch64-Exception-Handling/AArch64-exception-table) tells the processor what code to run in the event of an exception. The format of this table is fixed and architecturally defined.
 
-Create `vectors.s` containing the following code. We will implement only the necessary FIQ exception for this example. A real system would need to implement all handlers.
+Create `vectors.s` containing the following code. you will implement only the necessary FIQ exception for this example. A real system would need to implement all handlers.
 
 #### vectors.s
 ```C
@@ -80,7 +80,7 @@ lower_el_aarch64_fiq:
 
 ## Create first level FIQ Handler
 
-Each exception has a window of 0x80 bytes in the vector table area to use for its code. In this case we will simply branch to `fiqFirstLevelHandler`, which preserves all registers, before calling `fiqHandler()` (which we shall implement later). When `fiqHandler()` returns, we undo the register preservation, before returning to where the code was before the exception occurred, using the `ERET` instruction.
+Each exception has a window of 0x80 bytes in the vector table area to use for its code. In this case you will simply branch to `fiqFirstLevelHandler`, which preserves all registers, before calling `fiqHandler()` (which shall be implemented later). When `fiqHandler()` returns, undo the register preservation, before returning to where the code was before the exception occurred, using the `ERET` instruction.
 
 Add the following to your `vectors.s`:
 #### vectors.s

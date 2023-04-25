@@ -41,13 +41,13 @@ gicInit:
 	STR      wzr, [x1]
 	DSB      SY
 
-waiting:   // We now have to wait for ChildrenAsleep to read 0
+waiting:   // Wait for ChildrenAsleep to read 0
 	LDR      w0, [x1]
 	AND      w0, w0, #0x6
 	CBNZ     w0, waiting
 
 	// Configure CPU interface
-	// We need to set the SRE bits for each EL to enable
+	// Set the SRE bits for each EL to enable
 	// access to the interrupt controller registers
 	MOV      x0, #0x8		// ICC_SRE_ELn.Enable
 	ORR      x0, x0, #0x1	// ICC_SRE_ELn.SRE
@@ -110,7 +110,7 @@ writeEOIR0:
 	MSR        ICC_EOIR0_EL1, x0 // Write x0 to ICC_EOIR0_EL1
 	RET
 ```
-We will use these functions in our fiqHandler() implementation.
+These functions will be used in your `fiqHandler()` implementation.
 
 ## Generic Timer
 
@@ -148,7 +148,7 @@ disableTimer:
 ```
 ## Add code to enable GIC
 
-Modify `hello.c` to enable the GIC and timer, and create a simple test. We can use `printf()` statements to follow execution flow.
+Modify `hello.c` to enable the GIC and timer, and create a simple test. You can use `printf()` statements to follow execution flow.
 
 #### hello.c
 ```C
@@ -187,7 +187,7 @@ int main (void) {
 ```
 ## Create fiqHandler code
 
-Finally we can create our `fiqHandler()` function, either in its own source file, or can append to `hello.c`. It reads the `INTID` when triggered, disables the timer, and sets `flag`.
+Finally you can create the `fiqHandler()` function, either in its own source file, or can append to `hello.c`. It reads the `INTID` when triggered, disables the timer, and sets `flag`.
 
 #### hello.c
 ```C
@@ -210,7 +210,7 @@ void fiqHandler(void) {
 
 ## Build and run the complete project
 
-We are now ready to test our application. Build the project with:
+You are now ready to test the application. Build the project with:
 ```command
 armclang -c -g --target=aarch64-arm-none-eabi startup.s
 armclang -c -g --target=aarch64-arm-none-eabi uart.c

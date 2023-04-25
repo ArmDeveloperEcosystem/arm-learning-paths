@@ -72,7 +72,7 @@ Start by creating an empty `providers.tf`, `variables.tf`, `main.tf` and `output
 
 ### Providers
 
-Tell Terraform which cloud provider we are going to connect, Azure for this example.
+Tell Terraform which cloud provider to connect to, Azure for this example.
 
 Add below code in `providers.tf` file:
 
@@ -286,7 +286,7 @@ terraform plan -out main.tfplan
 ```
 **Key points:**
 
-* The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+* The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
 * The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
 * The optional -out parameter allows you to specify an output file for the plan. Using the -out parameter ensures that the plan you reviewed is exactly what is applied.
 

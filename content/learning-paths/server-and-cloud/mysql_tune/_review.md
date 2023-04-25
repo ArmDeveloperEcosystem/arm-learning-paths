@@ -20,7 +20,7 @@ review:
             - "Half the number of CPUs on the system"
         correct_answer: 2                     
         explanation: >
-            The total number of CPUs is a good starting point because it can ensure we are using all compute resources on the system. 
+            The total number of CPUs is a good starting point because it can ensure you are using all compute resources on the system. 
 
     - questions:
         question: >

@@ -54,7 +54,7 @@ To understand possible options, use the following command:
 
 ## Build memtier_benchmark
 
-[memtier_benchmark](https://github.com/RedisLabs/memtier_benchmark) is a command line utility developed by Redis Labs for load generation and bechmarking NoSQL key-value databases. We will use this to benchmark the performance of memcached.
+[memtier_benchmark](https://github.com/RedisLabs/memtier_benchmark) is a command line utility developed by Redis Labs for load generation and bechmarking NoSQL key-value databases. You will use this to benchmark the performance of memcached.
 
 ```bash
 git clone https://github.com/RedisLabs/memtier_benchmark

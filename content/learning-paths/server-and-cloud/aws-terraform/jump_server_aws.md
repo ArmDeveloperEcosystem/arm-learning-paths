@@ -69,11 +69,11 @@ provider "aws" {
 ```
 
 `VPC_subnet_IG_RT.tf` writes an infrastructure as code, which automatically creates a VPC with a CIDR block size of /16.
-In that VPC, we have to create 2 subnets with a CIDR block size of /24 each:
+In that VPC, create 2 subnets with a CIDR block size of /24 each:
   1.  Public Subnet (Accessible for Public World)
   2.  Private Subnet (Restricted for Public World)
 
-Then create a routing table for the Internet gateway so that instance can connect to the outside world, update it, and associate it with the private subnet. Create a NAT gateway to connect our VPC/Network to the internet and attach this gateway to our VPC in the public network.
+Then create a routing table for the Internet gateway so that instance can connect to the outside world, update it, and associate it with the private subnet. Create a NAT gateway to connect your VPC/Network to the internet and attach this gateway to your VPC in the public network.
 ```console
 		// VPC creation
 		resource "aws_vpc" "Demo_VPC" {
@@ -316,12 +316,12 @@ The output should be similar to what is shown below:
    ![alt-text #center](https://user-images.githubusercontent.com/71631645/203950999-94167eaa-6f22-45f5-9647-ef2d131e9daa.jpg "Terraform apply")
 
 ### Verify the Instance and Bastion Host setup
-Let's verify the setup by going to the AWS console.
+Verify the setup by going to the AWS console.
 Goto **EC2 -> instances** you should see the instances running.
 
 ![alt-text #center](https://user-images.githubusercontent.com/71631645/203951115-5a8f8ac1-e415-4e82-bb3d-aae65c1f3c65.png "Verify")
 
-You can also see the tag name - terraform and bastion-host, which we mentioned in the Terraform script.
+You can also see the tag name - terraform and bastion-host, which were mentioned in the Terraform script.
    
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells ssh to make a connection to the jump host and then establish a TCP forwarding to the target server, from there

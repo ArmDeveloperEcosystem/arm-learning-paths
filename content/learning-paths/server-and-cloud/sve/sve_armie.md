@@ -133,7 +133,7 @@ Which gives the following output:
         1 : 0x25e21fe0  whilelo p0.d, xzr, x2
 ```
 
-In this list, we see SVE instructions identified in the previous tutorial  [Compile for SVE](/learning-paths/server-and-cloud/sve/sve_compile/). In the main loop, they are executed 16 times to compute the addition of 127 array elements (16 batches of 512-bit SVE instructions).
+In this list, see SVE instructions identified in the previous tutorial  [Compile for SVE](/learning-paths/server-and-cloud/sve/sve_compile/). In the main loop, they are executed 16 times to compute the addition of 127 array elements (16 batches of 512-bit SVE instructions).
 
 ### Trace SVE memory accesses on specific code sections
 
@@ -189,4 +189,4 @@ The output will look like this:
 48, -1042929472, 0, 1, 56, 0xffff81d09a60, 0xffff81cf66e4       st1d { z0.d }, p0, [x0, x1, lsl #3]
 ```
 
-We can identify 16 batches of 512-bit SVE load and stores. All of them are unpredicated and handle 64 bytes, except the last iteration which handles 56 bytes to compute elements indexes [120-126].
+You can identify 16 batches of 512-bit SVE load and stores. All of them are unpredicated and handle 64 bytes, except the last iteration which handles 56 bytes to compute elements indexes [120-126].

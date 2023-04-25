@@ -35,7 +35,7 @@ sudo pip install pybind11
 ```
 ## Clone the MLPerf Inference Benchmarks Repo for Image Classification and Object Detection
 
-We use the MLPerf Inference benchmark suite from MLCommons to benchmark models for a widely used ML use-case such as Image classification and Object detection. 
+You will use the MLPerf Inference benchmark suite from MLCommons to benchmark models for a widely used ML use-case such as Image classification and Object detection. 
 Start by cloning the repository below.
 
 ```bash
@@ -55,13 +55,13 @@ sudo python3 setup.py develop
 
 ## Install Tensorflow
 
-MLPerf Inference Benchmark suite can use different backends such as onnx or tensorflow. We will install Tensorflow as the backend. Install tensorflow using the commands below.
+MLPerf Inference Benchmark suite can use different backends such as onnx or tensorflow. You will install Tensorflow as the backend. Install tensorflow using the commands below.
 
 ```bash
 pip install tensorflow
 pip install tensorflow-io
 ```
-We set 2 environment variables:
+Set 2 environment variables:
 * Enable oneDNN, an open-source cross-platform performance library for deep learning applications
 * Use 16-bit floating-point storage format (BF16) to accelerate performance
 
@@ -73,7 +73,7 @@ AWS Graviton3 instances are the first instances with BF16 support.
 
 ## Download the ML Model 
 
-Next, download the ML model you want to run the benchmark with. In this example, we download the resnet50-v1.5 model.
+Next, download the ML model you want to run the benchmark with. In this example, download the `resnet50-v1.5` model.
 
 ```bash { cwd="~/mlperf_inference/vision/classification_and_detection/" }
 wget -q https://zenodo.org/record/2535873/files/resnet50_v1.pb
@@ -83,7 +83,7 @@ wget -q https://zenodo.org/record/2535873/files/resnet50_v1.pb
 
 You will also need to download a dataset for the ML model you want to benchmark. The imagenet2012 validation dataset is best used with this ML model. You can download the dataset after you register on the site [here](http://image-net.org/challenges/LSVRC/2012/)
 
-For this example, we will generate a fake image dataset using the tooling included in the repo. Use the command below
+For this example, you will generate a fake image dataset using the tooling included in the repo. Use the command below:
 
 ```bash { cwd="~/mlperf_inference/vision/classification_and_detection/" }
 tools/make_fake_imagenet.sh

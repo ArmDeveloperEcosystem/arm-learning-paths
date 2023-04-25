@@ -7,13 +7,13 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-In this section we will learn how to manage ongoing development in an automated CI/CD workflow, using [GitHub Actions](https://github.com/features/actions) and self-hosted runner.
+In this section you will learn how to manage ongoing development in an automated CI/CD workflow, using [GitHub Actions](https://github.com/features/actions) and self-hosted runner.
 
 In the `lighting-app` console, stop the app (`Ctrl+C`) if still running.
 
 ## Prepare repository for workflows
 
-The Matter repository from where the examples are sourced contains very many workflows for rebuilding different configurations. For the convenience of time, let us remove these, and install only our new workflow.
+The Matter repository from where the examples are sourced contains very many workflows for rebuilding different configurations. For the convenience of time, let us remove these, and install only the new workflow.
 
 In the `lighting-app` console, navigate to the `.github/workflows` directory, and delete all.
 ```console
@@ -56,7 +56,6 @@ jobs:
           cd examples/lighting-app/linux
           timeout 120s ./out/debug/chip-lighting-app || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
 ```
-To save time, we shall `push` these changes later.
 
 ## Create GitHub self-hosted runner
 

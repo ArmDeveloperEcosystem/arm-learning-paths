@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Deploy MySQL via Docker
 Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly.
-To deploy the MySQL container, we have to create a `main.tf` Terraform file. Here is the file content:
+To deploy the MySQL container, create a `main.tf` Terraform file. Here is the file content:
 
 ```console
 terraform {
@@ -48,7 +48,7 @@ Replace `{{your_mysql_password}}` with your MySQL password.
 Use the below Terraform commands to deploy the `main.tf` file.
 
 {{% notice Note %}}
-We are running this Terraform file directly on the host (where we want to deploy MySQL).
+You are running this Terraform file directly on the host (where you want to deploy MySQL).
 {{% /notice %}}
 
 ## Terraform Commands
@@ -86,10 +86,10 @@ CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS   
 4b627bd94296   mysql:8   "docker-entrypoint.s…"   About a minute ago   Up About a minute   127.0.0.1:3306->3306/tcp, 33060/tcp   mysql
 ```
 
-As we can see in the above image, our container has been created with `mysql:8` image.
+As you can see in the above image, your container has been created with `mysql:8` image.
 
 ### Access the docker container
-To connect to the MySQL container, we need to use the MySQL client installed locally to interact with the database.
+To connect to the MySQL container, you need to use the MySQL client installed locally to interact with the database.
 
 ```bash { output_lines="2-24" }
 mysql -h 127.0.0.1 -P3306 -uroot -p

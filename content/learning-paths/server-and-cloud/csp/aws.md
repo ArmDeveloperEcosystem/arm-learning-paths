@@ -61,7 +61,7 @@ To be able to access the instance, you must use a [key pair](https://docs.aws.am
 
 It is strongly recommended that you create (or use an existing) [security group](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-security-groups.html) to ensure that only users on your IP address can access your instance. Simple settings can be set here, such as selecting `My IP` from the `Allow SSH traffic from` pull down menu. Other settings can be left as default.
 
-For advanced settings, we recommend you search `security groups` and create and configure such a group in this dialog. You can then select that group when creating the instance.
+For advanced settings, it is recommended you search `security groups` and create and configure such a group in this dialog. You can then select that group when creating the instance.
 
 ### Launch instance
 

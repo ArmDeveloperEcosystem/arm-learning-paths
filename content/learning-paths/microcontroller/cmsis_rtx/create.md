@@ -7,7 +7,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-We will primarily use Keil MDK to guide you through this learning path. If you are using Arm Development Studio refer to the comments at the end of each page.
+You will primarily use Keil MDK to guide you through this learning path. If you are using Arm Development Studio refer to the comments at the end of each page.
 
 ## Install appropriate device CMSIS-Pack
 
@@ -25,7 +25,7 @@ In the MDK menu, navigate to `Project` > `New uVision Project`, and create a new
 
 You will then be prompted to `Select Device` for your project. A list of all devices with their CMSIS-Packs installed will be shown.
 
-For this example, we shall select `Arm` > `Arm Cortex-M4` > `ARMCM4`.
+For this example, select `Arm` > `Arm Cortex-M4` > `ARMCM4`.
 
 ## Manage Run-Time Environment
 
@@ -56,7 +56,7 @@ You may also wish to disable `Warnings`, change language options or other settin
 
 ### Define memory map
 
-We use [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Overview-of-scatter-loading) to define the memory map.
+Use [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Overview-of-scatter-loading) to define the memory map.
 
 The memory map for the FVP is given in the [documentation](https://developer.arm.com/documentation/100964/latest/Microcontroller-Prototyping-System-2/MPS2---memory-maps/MPS2---memory-map-for-models-without-the-Armv8-M-additions).
 
@@ -78,7 +78,7 @@ LOAD 0x0 0x400000 {
 ```
 For more on scatter-loading, see this [learning path](/learning-paths/embedded/bare-metal).
 
-We are now ready to build our example.
+You are now ready to build your example.
 
 ## Comments for Arm Development Studio users
 * Add required CMSIS-Packs via the `CMSIS Pack Manager` perspective.

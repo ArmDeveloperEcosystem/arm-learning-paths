@@ -379,7 +379,7 @@ ansible-target1            : ok=7    changed=6    unreachable=0    failed=0    s
 ## Connecting to the Redis server from local machine
 
 Execute the steps below to connect to the remote Redis server from your local machine.
-1. We need to install redis-tools to interact with redis-server.
+1. Install redis-tools to interact with redis-server.
 ```console
 apt install redis-tools
 ```

@@ -69,7 +69,7 @@ On your host, open terminal(s), and connect to the virtual hardware instance(s) 
 
 ## Install necessary software components
 
-We shall build the Matter examples on the virtual Raspberry Pi 4 instances. To prepare for this, install the necessary dependencies on **each** instance. This can be done in parallel on both instances.
+You shall build the Matter examples on the virtual Raspberry Pi 4 instances. To prepare for this, install the necessary dependencies on **each** instance. This can be done in parallel on both instances.
 ```console
 sudo apt-get update
 sudo apt-get install -y git gcc g++ python pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev

@@ -133,8 +133,6 @@ LD_PRELOAD=/usr/local/lib/libz.so ./test
 
 The `LD_PRELOAD` variable informs the linker to use these libraries before the default libraries. 
 
-The version of `zlib-cloudflare` will print. It may be older than the default, but we are interested in `crc32` not using the latest.
+The version of `zlib-cloudflare` will print. It may be older than the default, but you are interested in `crc32` not using the latest.
 
-In the next section let's see how to use `zlib-cloudflare` in an application doing data compression. 
-
-
+In the next section you will explore how to use `zlib-cloudflare` in an application doing data compression. 

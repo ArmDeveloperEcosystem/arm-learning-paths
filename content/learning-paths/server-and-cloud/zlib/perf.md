@@ -20,7 +20,7 @@ sudo sh -c "echo '1' > /proc/sys/kernel/perf_event_paranoid"
 
 ## Detailed Steps
 
-The previous section explained how to run a Python program to compress large files and increase performance with `zlib-cloudflare`. Now, let's use `perf` to look at the performance.
+The previous section explained how to run a Python program to compress large files and increase performance with `zlib-cloudflare`. Now use `perf` to look at the performance.
 
 Continue with the same `zip.py` program as the previous section. Make sure to start with `zip.py` and `largefile` available. Confirm the application is working and `largefile.gz` is created when it is run.
 

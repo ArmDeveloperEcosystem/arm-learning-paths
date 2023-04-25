@@ -7,9 +7,9 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-We shall now implement the main RTOS thread (`app_main()`), whose role is primarily to start and manage the other threads of the system.
+Implement the main RTOS thread (`app_main()`), whose role is primarily to start and manage the other threads of the system.
 
-In this example we shall create 3 threads. The number and naming of the threads is arbitrary.
+In this example you shall create 3 threads. The number and naming of the threads is arbitrary.
 
 ## Create app_main()
 
@@ -30,7 +30,7 @@ void app_main (void *argument) {
 ```
 ## Create threads
 
-We can now implement the functionality of the threads themselves. Let's start with a simple example... each thread will say hello, and then pause for a period, forever.
+You can now implement the functionality of the threads themselves. Start with a simple example... each thread will say hello, and then pause for a period, forever.
 
 Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the `threads.c` file with contents below:
 ```C
@@ -72,7 +72,7 @@ Observe in the `RTX RTOS` view that the threads have been created. Two other thr
 
 However no output is seen in the `printf viewer`. This is because semihosting is not supported by uVision.
 
-[Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html) can be used instead for the printf functionality. It is supported for both FVPs and real hardware. In the next section, we will cover how to use the Event Recorder functionality with this example.
+[Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html) can be used instead for the printf functionality. It is supported for both FVPs and real hardware. In the next section, you will learn how to use the Event Recorder functionality with this example.
 
 ## Comments for Arm Development Studio users
 * Recommend to create debug configuration after project has been built.

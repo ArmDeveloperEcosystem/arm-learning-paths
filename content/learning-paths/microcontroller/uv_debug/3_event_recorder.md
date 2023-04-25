@@ -135,7 +135,7 @@ It is possible to filter the window contents. Modify the information displayed i
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 7. The Event Recorder window no longer contains printf frames as shown below:  
    ![Filtered Event Recorder window](./evtrec_window_filtered.png)  
-In this case, you only need to unselect the Op column. The other frames do not exist in our simple example.
+In this case, you only need to unselect the Op column. The other frames do not exist in this simple example.
 
 #### Save Filter Settings
 

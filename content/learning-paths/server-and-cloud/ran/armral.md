@@ -57,7 +57,7 @@ cat /proc/cpuinfo
 ```
 ### Configure build
 
-We shall build the library along with the supplied validation tests.
+Build the library along with the supplied validation tests.
 
 If your platform supports (only) Neon, set up build with:
 ```bash { cwd="arm-ran-acceleration-library-23.04/build" }

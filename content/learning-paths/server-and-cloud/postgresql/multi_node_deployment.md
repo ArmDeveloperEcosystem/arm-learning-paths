@@ -143,14 +143,12 @@ Three nodes are deployed.
 
 Choose the first one one as the primary node and the other two as replica nodes. 
 
-For example, we can choose as below:
-
-Primary node IP address: 44.202.150.180
-
-Replica node 1 IP address: 44.208.26.66 (read-only)
-
-Replica node 2 IP address: 35.175.144.82 (read-only)
-
+For example, you can choose as below:
+```output
+Primary node IP address:   44.202.150.180
+Replica node 1 IP address: 44.208.26.66   (read-only)
+Replica node 2 IP address: 35.175.144.82  (read-only)
+```
 Substitute your IP addresses as you follow the steps. 
 
 ### Install PostgreSQL

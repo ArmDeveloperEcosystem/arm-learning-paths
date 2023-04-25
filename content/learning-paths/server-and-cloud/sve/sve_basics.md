@@ -84,7 +84,7 @@ Take a look at the example code compiled for SVE (left) and for NEON (right):
 
 Notice how small the SVE assembly is in comparison to NEON. This is due to the predicate behaviour which avoids generating assembly for remainder loops (scalar operations performed when the iteration domain is not a multiple of the vector length. 
 
-Let's look at what the SVE assembly instructions are doing:
+Observer what the SVE assembly instructions are doing:
 
 The first 4 lines initialize the registers R2, R3, R4. R2 corresponds to the array size, R3 to the loop index, and R4 to the vector length.
 
@@ -102,6 +102,6 @@ Finally, the value of the loop index R3 is incremented by the vector length R4 a
 - Increment a counter for each predicate lane in P0, starting from R3 (the loop index),
 - Set the corresponding lane as “active” (or true) if the index is less than R2.
 
-If all lanes are inactive, we break the loop.
+If all lanes are inactive, break the loop.
 
 This example illustrates the logic behind SVE: it keeps the code simple and increases vectorization.

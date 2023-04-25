@@ -39,13 +39,13 @@ Also select "64-bit (Arm)" from Architecture drop down
 
 ## Choose an Instance Type
 
-For instance type, we select an Arm based t4g.nano instance as shown below. More information on Arm based Graviton instance types can be found on the [AWS Graviton page](https://aws.amazon.com/ec2/graviton/).
+For instance type, select an Arm based t4g.nano instance as shown below. More information on Arm based Graviton instance types can be found on the [AWS Graviton page](https://aws.amazon.com/ec2/graviton/).
    
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/192596029-21b7dcc2-917c-41d0-bda2-3763584f7f00.png "Instance Type")
  
 ## SSH Key pair
 
-Use a key pair to securely connect to our instance. Choose an existing key pair, or create a new one. It is generally preferred that instead of using the same key pair for all instances, you should create a new one for different groups of instances.
+Use a key pair to securely connect to your instance. Choose an existing key pair, or create a new one. It is generally preferred that instead of using the same key pair for all instances, you should create a new one for different groups of instances.
    
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/189890580-0b647d1e-baad-4597-95ad-7fcad81e9324.png "SSH Key pair")
 
