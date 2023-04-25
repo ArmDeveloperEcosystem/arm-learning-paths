@@ -13,7 +13,7 @@ learning_objectives:
 
 prerequisites:
     - Some familiarity with embedded Linux is assumed
-    - A linux machine to build and run the image
+    - A linux machine running Ubuntu 22.04 with at least 60 GB of disk space
 
 author_primary: Pareena Verma
 

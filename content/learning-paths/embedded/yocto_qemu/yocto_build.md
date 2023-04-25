@@ -8,12 +8,6 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
-
-The following prerequisites are needed to try the steps yourself:
-
-- A Linux machine running Ubuntu 22.04 with at least 60 GB of disk space
-
 ## Introduction
 
 The [Yocto Project](https://www.yoctoproject.org/) is an open-source project with a build system that allows software developers create custom embedded Linux OS distributions regardless of the hardware architecture. 
@@ -27,7 +21,7 @@ The first step is to install the packages required to build and run Yocto
 
 ```bash
 sudo apt update
-sudo apt-get install gawk wget git-core diffstat unzip texinfo build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev lz4
+sudo apt-get install -y gawk wget git-core diffstat unzip texinfo build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev lz4
 ```
 Now download the Poky reference distribution and checkout the branch/tag you wish to build. You will build `yocto-4.0.6` in this example.
 
@@ -83,12 +77,12 @@ Other commonly useful commands are:
 
 You will now be in the `build-qemu-arm64` directory which is your build directory and where the images for your target are built. As the output from running the command above indicates, you will now need to select the target hardware MACHINE in the conf/local.conf file. To do this, run `sed` to uncomment `MACHINE ?= "qemuarm64"` in conf/local.conf file.
 
-```bash
+```bash { cwd="poky" }
 sed -i '/qemuarm64/s/^#//g' conf/local.conf
 ```
 With the right machine now selected, proceed to building the minimal core image for your target.
 
-```bash
+```bash { cwd="poky"; env_source="poky/oe-init-build-env build-qemu-arm64" }
 bitbake core-image-minimal
 ```
 Depending on your machine, this build step can take a while to complete. On my machine, it took about an hour.
@@ -100,7 +94,7 @@ QEMU is installed on your machine as part of cloning the Poky repository and sou
 
 You can now run the command below to launch run the image you built on the 64-bit Arm Qemu target
 
-```bash
+```console
 runqemu qemuarm64 nographic
 ```
 
