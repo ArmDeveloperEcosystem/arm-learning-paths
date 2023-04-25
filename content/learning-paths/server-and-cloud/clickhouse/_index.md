@@ -10,7 +10,7 @@ learning_objectives:
     - Determine the appropriate instance configuration needed for your workloads
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate cloud service provider or an Arm server.
+    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or an Arm server.
 
 author_primary: Pareena Verma
 

@@ -24,9 +24,10 @@ In the `blank.yml` file, locate for the following line:
 ```console
 runs-on: ubuntu-latest
 ```
+
 This specifies the type of runner that will be used to execute the job. The default case is an Ubuntu machine provided by GitHub.
 
-We want to test our CI workflow on the machine configured as a GitHub Actions runner. To do that, change this line to `self-hosted`:
+To test the CI workflow on the machine configured as a GitHub Actions runner, change this line to `self-hosted`:
 
 ```console
 runs-on: self-hosted

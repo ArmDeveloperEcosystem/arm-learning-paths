@@ -7,7 +7,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-AWS and GitHub provide powerful functionality for cloud-based development flows. We will learn how to integrate these technologies for the purpose of automating test and validation on Arm Virtual Hardware.
+AWS and GitHub provide powerful functionality for cloud-based development flows. You will learn how to integrate these technologies for the purpose of automating test and validation on Arm Virtual Hardware.
 
 ## Fork and clone example project
 
@@ -41,7 +41,7 @@ Optionally make tag and other settings in the `Review stackname` page, else keep
 
 Your `CloudFormation stack` will be generated. The process takes a few minutes, click refresh to follow progress.
 
-When complete, a list of key values will be shown in the `Outputs` tab. We shall return to these later.
+When complete, a list of key values will be shown in the `Outputs` tab. 
 
 ### Stack generation issues
 

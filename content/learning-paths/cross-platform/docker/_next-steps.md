@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about creating Docker images on Arm servers. The Learning Path using AWS CodeBuild is a great next step.
+    You can continue learning about creating Docker images on Arm servers. The Learning Path using AWS CodeBuild is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/server-and-cloud/codebuild/"
