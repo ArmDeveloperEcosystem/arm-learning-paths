@@ -14,14 +14,14 @@ layout: "learningpathall"
 
 Before migrating to Arm, it is important to understand the original platform environment to build, run and develop the application.
 
-- What is the original platform architecture (e.g. x86_64)?
-- Does the application benefit from hardware acceleration (e.g. Nvidia GPU)?
 - What OS does the application run on?
 - Does the application run in a virtual machine or a software container?
 - What is the application's source langage?
+- Does the application use any intrinsics or assembly code?
 - Is the application built natively or cross-compiled?
 - What are the application's system dependencies? Does the application use external libraries?
 - How is the application built (e.g. configuration) and which tools are used (e.g. compilers)?
+- Does the application benefit from hardware acceleration (e.g. Nvidia GPU)?
 
 These questions help draw a picture of the migration process to identify:
 
@@ -56,11 +56,14 @@ We will describe how to set up our x86_64 and aarch64 systems in the next sectio
 
 ## Identify non-portable settings
 
-Inspecting the building options and the source code of the applciation provides useful information.
+Inspecting the building options and the source code of the application provides useful information. Look out for:
+- assembly code - which will need to be rewritten,
+- instrinsics - which can be ported with minimal changes using for example [SIMD Everywhere (SIMDe)](https://github.com/simd-everywhere/simde),
+- build options - which may be architecture-specific.
 
-In `src/main.cpp`:
+Let's illustrate this with our example, in `src/main.cpp`:
 - The header file `x86intrin.h` won't be available when building natively on aarch64.
-- The function `SobelSimd` may need to be re-written: all the intrinsics prefixed with `_mm_` won't be supported on aarch64.
+- The function `SobelSimd` uses x86_64 intrinsics (prefixed with `_mm_`).
 
 In `src/CMakeLists.txt`:
 
@@ -72,4 +75,4 @@ if(NOT WIN32)
 endif()
 ```
   
-The flag `-mavx` used with GCC is architecture-specific, only available on [x86_64](https://man7.org/linux/man-pages/man1/gcc.1.html) and will prevent building the application entirely, even if the pure C version `SobelNonSimd` and the OpenCV version `SobelOpenCV` of the Sobel filter are portable.
+The flag `-mavx` used with GCC is architecture-specific, only available on [x86_64](https://man7.org/linux/man-pages/man1/gcc.1.html). This will prevent building the application entirely, even if the pure C version `SobelNonSimd` and the OpenCV version `SobelOpenCV` of the Sobel filter are portable.
