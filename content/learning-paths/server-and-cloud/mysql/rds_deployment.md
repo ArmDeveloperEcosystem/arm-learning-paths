@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy MySQL using RDS"
+title: "Deploy MySQL using RDS(AWS)"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Deploy MySQL RDS instances
+## Deploy MySQL using Amazon RDS (Relational Database Service)
 
 RDS is a Relational database service provided by AWS. More information can be found [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html). To deploy a MySQL RDS instance, we need to create a `main.tf` Terraform file.
 To generate and configure the Access key ID and Secret access key, follow the instructions mentioned in this [guide](/install-guides/aws_access_keys).
