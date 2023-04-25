@@ -13,15 +13,22 @@
 review:
     - questions:
         question: >
-            What vector engine technologies does Arm have?
+            What SIMD instructions sets are supported by the latest Arm processors?
         answers:
-            - "AVX"
-            - "NEON, SVE"
+            - "SSE and AVX"
+            - "NEON and SVE"
         correct_answer: 2
         explanation: >
-            Answer2. 
-
-
+            NEON and SVE and supported by Neoverse V1, Neoverse N2 or Cortex-X2.
+    - questions:
+        question: >
+            Should I rewrite all my code when migrating to aarch64?
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 2
+        explanation: >
+            Most applications can be migrated without rewriting any code. Common libraries and tools are already available on aarch64. If your application uses intrinsics, you can use tools like SIMD Everywhere with minimal code changes.
 
 
 # ================================================================================
