@@ -7,7 +7,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify
 layout: "learningpathall"
 ---
-We will create a simple `hello world` type application to demonstrate how pointer authentication works.
+Create a simple `hello world` type application to demonstrate how pointer authentication works.
 
 The example contains a function `func2()` to start a shell, that is never called by the application.
 
@@ -197,4 +197,4 @@ See how in this case the instructions used at function entry (`paciasp`) and ret
 * [paciasp](https://developer.arm.com/documentation/ddi0602/latest/Base-Instructions/PACIA--PACIA1716--PACIASP--PACIAZ--PACIZA--Pointer-Authentication-Code-for-Instruction-address--using-key-A-) signs the link register(`lr`) with Stack Pointer(`sp`) as the modifier.
 * [retaa](https://developer.arm.com/documentation/ddi0602/latest/Base-Instructions/RETAA--RETAB--Return-from-subroutine--with-pointer-authentication-) is a function return with pointer authentication.
 
-In the next section, we will exploit `main_nopac` and show how the same technique does not work on `main_pac` due to pointer authentication.
+In the next section, you will exploit `main_nopac` and show how the same technique does not work on `main_pac` due to pointer authentication.

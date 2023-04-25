@@ -19,7 +19,7 @@ A valid [AWS](https://aws.amazon.com/) account is required. Launch the Arm Virtu
 
 ## Fork the example repository
 
-As we shall be making modifications to the reference example, you must make your own copy (`fork`) of the repository.
+As you shall be making modifications to the reference example, you must make your own copy (`fork`) of the repository.
 
 In a web browser, navigate to the repository at:
 ```console

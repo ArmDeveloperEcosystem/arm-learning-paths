@@ -15,7 +15,7 @@ Right-click `Source Group 1` and select `Add New Item`. Select `C file (.c)` and
 
 ## The main Function
 
-Create the `main` C function. This function creates two character arrays, `a` and `b`, and calls two functions, `my_strcpy` and `my_capitalize`, that we shall implement later.
+Create the `main` C function. This function creates two character arrays, `a` and `b`, and calls two functions, `my_strcpy` and `my_capitalize`, that shall be implemented later.
 
 ```C
 void my_strcpy(const char *src, char *dst);
@@ -34,7 +34,7 @@ int main(void)
 ```
 ## Register usage and the Arm Procedure Call Standard
 
-There are certain register use conventions which we need to follow if we would like our assembly code to coexist with the C code.
+There are certain register use conventions which must be followed for the assembly code to coexist with the C code.
 
 ### Calling functions and passing arguments
 
@@ -89,7 +89,7 @@ Observe that `r0-r2` are corrupted by this function, and will contain different 
 
 You can implement a function to capitalize all the lower-case letters in the string. The function will load each character, check to see if it is a lower-case `ASCII` letter, and if so, capitalize it. 
 
-Each character in the string is represented with its ASCII code. For example, `A` is represented with a 65 (0x41), `B` with 66 (0x42), and so on up to `Z` which uses 90 (0x5a). The lower case letters start at `a` (97, or 0x61) and end with `z` (122, or 0x7a). We can convert a lower case letter to an upper case letter by subtracting 32 (0x20).
+Each character in the string is represented with its ASCII code. For example, `A` is represented with a 65 (0x41), `B` with 66 (0x42), and so on up to `Z` which uses 90 (0x5a). The lower case letters start at `a` (97, or 0x61) and end with `z` (122, or 0x7a). Convert a lower case letter to upper case by subtracting 32 (0x20).
 
 ```C
 __attribute__((naked)) void my_capitalize(char *str)
@@ -116,7 +116,7 @@ The code loads the first byte into `r1`. If the value is less than `a` the code 
 
 Note the first `CMP` instruction compares `r1` against the character immediately before `a` in the table. There is no `lower than` condition, just `lower or same` (LS).
 
-To use the conditional `BLS` branch instruction, we need to reduce by one the value we compare `r1` against.
+To use the conditional `BLS` branch instruction, reduce by one the value `r1` is compared against.
 
 ## Build the example
 

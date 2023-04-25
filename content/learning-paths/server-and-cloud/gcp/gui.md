@@ -46,7 +46,7 @@ In the Boot disk section, click Change.
 ![image](https://user-images.githubusercontent.com/67620689/204448755-f1259724-a386-4dc3-9b88-8ece7057d4de.PNG)
 
 Then on the `PUBLIC IMAGES` tab, choose the following:
- * The default Debian-11-Arm64 image or any other supported Arm OS. Here we have chosen Ubuntu 22.04 LTS.
+ * The default Debian-11-Arm64 image or any other supported Arm OS. Here Ubuntu 22.04 LTS is chosen.
  * Boot disk type
  * Boot disk size
 

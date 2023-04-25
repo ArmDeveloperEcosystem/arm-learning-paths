@@ -7,9 +7,9 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-We have been using `printf()` to output our message. A mechanism called [semihosting](https://developer.arm.com/documentation/100966/latest/Getting-Started-with-Fixed-Virtual-Platforms/FVP-debug) was used to handle this output. While this is supported in the FVP, it would not be available on real hardware (without a debugger being present), and so execution would simply stop when the `HLT` instruction that is used by the debugger/FVP to detect semihosting is executed.
+You have been using `printf()` to output your message. A mechanism called [semihosting](https://developer.arm.com/documentation/100966/latest/Getting-Started-with-Fixed-Virtual-Platforms/FVP-debug) was used to handle this output. While this is supported in the FVP, it would not be available on real hardware (without a debugger being present), and so execution would simply stop when the `HLT` instruction that is used by the debugger/FVP to detect semihosting is executed.
 
-We will modify the example to send output to the [PL011 UART](https://developer.arm.com/documentation/ddi0183) of the FVP.
+Modify the example to send output to the [PL011 UART](https://developer.arm.com/documentation/ddi0183) of the FVP.
 
 You can check if you are using semihosting by importing the symbol `__use_no_semihosting` to your project (see later). The linker will now throw an error for any functions that use semihosting.
 ```output
@@ -21,7 +21,7 @@ Many library functions depend on semihosting. You must retarget these functions 
 
 Copy and paste the following code into a new file `uart.c`.
 
-This contains code to initialize the UART (`uartInit()`), and a retargeted version of `fputc()` (which `printf()` ultimately calls) to make use of the UART. We also create `uart.h` containing various macros. This code is taken from extended examples supplied with Arm Development Studio.
+This contains code to initialize the UART (`uartInit()`), and a retargeted version of `fputc()` (which `printf()` ultimately calls) to make use of the UART. Create `uart.h` containing various macros. This code is taken from extended examples supplied with Arm Development Studio.
 
 The source retargets another semihosting function, `__sys_exit()`, which is an infinite while loop after completion. Typically an embedded application will never return.
 
@@ -142,9 +142,9 @@ struct pl011_uart {
 ```
 ### Modify hello.c
 
-Modify `hello.c` to initialize the UART before it is used. From the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map), we see that `UART0` is located at `0x1C090000`.
+Modify `hello.c` to initialize the UART before it is used. From the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map), `UART0` is located at `0x1C090000`.
 
- We also to import the `__use_no_semihosting` symbol to ensure that semihosting is no longer used.
+ Import the `__use_no_semihosting` symbol to ensure that semihosting is no longer used.
 #### hello.c
 ```C
 #include <stdio.h>
@@ -170,7 +170,7 @@ armlink --scatter=scatter.txt --entry=el3_entry startup.o uart.o hello.o -o hell
 
 ## Run the example on the FVP
 
-We will now launch the simulation model with the newly built image. 
+Launch the simulation model with the newly built image. 
 ```console
 FVP_Base_Cortex-A72x2-A53x4 -a hello.axf
 ```

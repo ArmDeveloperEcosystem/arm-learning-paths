@@ -25,7 +25,7 @@ If you do not have access to Arm Fast Models, you can still learn how to connect
 
 A number of ready made example systems are provided with Arm Fast Models, including all of the Fixed Virtual Platform (FVP) examples.
 
-We shall use the supplied `FVP_MPS2_Cortex-M3` Fast Models example, which is installed in the
+Use the supplied `FVP_MPS2_Cortex-M3` Fast Models example, which is installed in the
 ```console
 FastModelsPortfolio_<version>\examples\LISA\FVP_MPS2\Build_Cortex-M3
 ```
@@ -37,7 +37,7 @@ In Arm Fast Models `System Canvas`, use `File` > `Load project`, and navigate to
 
 In the `Arm Development Studio IDE` menu, select `File` > `New` > `Other` > `Configuration Database` > `Configuration Database`, and give it a meaningful name. This creates a project folder where the debugger stores all user-made configurations.
 
-Then select `File` > `New` > `Other` > `Configuration Database` > `Model Configuration`, which will be the actual configuration we wish to create. When prompted, select the above `Configuration Database` to store in. Click `Next`.
+Then select `File` > `New` > `Other` > `Configuration Database` > `Model Configuration`, which will be the actual configuration to create. When prompted, select the above `Configuration Database` to store in. Click `Next`.
 
 You will be prompted to ask which debug interface to use, `Iris` or `CADI`. `Iris` is the default and recommended interface. Click `Next`.
 
@@ -61,7 +61,7 @@ Regardless of how you connect to the model, a `.mdf` file will be created. Speci
 
 If not previously imported, use `File` > `Import...` > `Arm Development Studio` > `Examples and Programming Libraries`, and browse for `startup_Cortex-M3_AC6` (use the text filter box to easily locate this).
 
-Although this project is pre-configured to be debugged with the FVP supplied with Arm Development Studio, we shall instead debug on the newly built FVP.
+Although this project is pre-configured to be debugged with the FVP supplied with Arm Development Studio, you shall instead debug on the newly built FVP.
 
 ## Create a new Debug Configuration for your Virtual Platform
 

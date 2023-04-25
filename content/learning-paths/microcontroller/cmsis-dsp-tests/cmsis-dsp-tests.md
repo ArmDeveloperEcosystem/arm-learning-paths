@@ -70,7 +70,7 @@ The output executables from the build are created in the `Objects` directory as 
 
 ## Run the CMSIS-DSP tests on the Corstone-300 FVP
 
-Now that we have successfully built the CMSIS-DSP suite of tests, we are ready it to run it on the Corstone-300 FVP that is already installed on the AMI.
+The CMSIS-DSP suite of tests are ready to be run on the Corstone-300 FVP that is already installed on the AMI.
 
 Use the command similar to the below to launch the simulation with the CMSIS-DSP tests:
 

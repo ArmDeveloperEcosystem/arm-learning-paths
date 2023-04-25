@@ -606,7 +606,7 @@ b"('Amovie', '1') ('Bmovie', '2') ('Cmovie', '3')"
 
 Execute the steps below to verify that the MySQL query is getting stored in Redis cache.
 
-1. We need to install redis-tools to interact with redis-server.
+1. Install redis-tools to interact with redis-server.
 ```console
 apt install redis-tools
 ```
@@ -618,7 +618,7 @@ redis-cli -p 6379
 ```console
 get <key>
 ```
-**NOTE:-** Key is the variable in which we store the data. In the above command, we are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
+**NOTE:-** Key is the variable in which you store the data. In the above command, you are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
 
 The output will be:
 

@@ -31,7 +31,7 @@ review:
             Ansible works on the push mechanism.
     - questions:
         question: >
-            We can keep secret data in the playbook
+            You can keep secret data in the playbook
         answers:
             - "True"
             - "False"

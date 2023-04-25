@@ -7,11 +7,12 @@ weight: 7 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-So far, everything we have ran has been at the most privileged `EL3` exception level, which the processor starts in at reset. In general, you would want your application code to run at a lower level so that it cannot corrupt system settings, maliciously or otherwise. Switching between levels is performed by the `ERET` exception return instruction.
+So far, everything has been at the most privileged `EL3` exception level, which the processor starts in at reset. In general, you would want your application code to run at a lower level so that it cannot corrupt system settings, maliciously or otherwise. Switching between levels is performed by the `ERET` exception return instruction.
 
 ## Changing exception levels
 
-We shall extend the example to make use of `El1`. In your `startup.s` source, add the following. `el1_entry` to be the `EL1` entry point, and continue to the `main()` function from there.
+Extend the example to make use of `El1`. In your `startup.s` source, add the following. `el1_entry` to be the `EL1` entry point, and continue to the `main()` function from there.
+
 #### startup.s
 ```C
     .global el1_entry
@@ -31,7 +32,7 @@ el1_entry:
 
 ## Modify EL3 initialization
 
-We will also need to modify the `EL3` initialization:
+You will also need to modify the `EL3` initialization:
 * Create an `EL3` stack (as `__main` will now be called in `EL1`)
 * Disable timer exceptions at `EL3`
 * Set `EL1` execution state to be `Aarch64`
@@ -39,12 +40,12 @@ We will also need to modify the `EL3` initialization:
 * Switch to `EL1` level
 
 ### EL3 stack
-We will create a new execution egion `STACK_EL3` in our scatter file for the EL3 stack.
+Create a new execution region `STACK_EL3` in the scatter file for the EL3 stack.
 ##### scatter.txt
 ```
 	STACK_EL3 0x04020000 EMPTY 0x10000{}
 ```
-We can reference this in our code as follows:
+Reference this in the code as follows:
 ### startup.s
 ```C
 boot:
@@ -52,7 +53,7 @@ boot:
 	MOV  sp, x0
 ```
 ### SCR_EL3
-In the code to set up [SCR_EL3](https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/SCR-EL3--Secure-Configuration-Register), set the `ST` bit to disable timer exceptions, and the `RW` bit so that `EL1` executes in `Aarch64` state. Also, remove the code to set the `FIQ` bit, as we now want to trap this exception in `EL1`.
+In the code to set up [SCR_EL3](https://developer.arm.com/documentation/ddi0595/2021-06/AArch64-Registers/SCR-EL3--Secure-Configuration-Register), set the `ST` bit to disable timer exceptions, and the `RW` bit so that `EL1` executes in `Aarch64` state. Also, remove the code to set the `FIQ` bit, as you now want to trap this exception in `EL1`.
 #### startup.s
 ```C
 // Configure SCR_EL3
@@ -94,7 +95,7 @@ Rather than branching to `__main`, the `EL3` reset handler must instead perform 
 	ERET					// Returning to EL1
 ```
 ## Build and run the example
-We are now ready to rebuild the complete example as before:
+You are now ready to rebuild the complete example as before:
 ```command
 armclang -c -g --target=aarch64-arm-none-eabi startup.s
 armclang -c -g --target=aarch64-arm-none-eabi uart.c

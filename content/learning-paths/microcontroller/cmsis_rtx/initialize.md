@@ -47,4 +47,4 @@ void thread(void *);
 ```
 where the argument is passed as the second parameter of the [osThreadNew()](https://www.keil.com/pack/doc/CMSIS/RTOS2/html/group__CMSIS__RTOS__ThreadMgmt.html#ga48d68b8666d99d28fa646ee1d2182b8f) function. Use `NULL` if no argument to pass.
 
-In the above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, we shall spawn all other threads of the RTOS.
+In the above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, you shall spawn all other threads of the RTOS.

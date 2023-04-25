@@ -8,7 +8,7 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-We need to add a 'main.c' file to the source folder. To do this, right-click 'Source Group 1' > 'Add New Item'.
+You need to add a 'main.c' file to the source folder. To do this, right-click 'Source Group 1' > 'Add New Item'.
 
 ![AddSource](Images/AddSource.png)
 
@@ -16,17 +16,17 @@ Select 'C file (.c)' and then name it 'main'. Choose an appropriate location to 
 
 ![AddSource2](Images/AddSource2.png)
 
-Now let's populate it with some code.
+Now populate it with some code.
 
 ## 5.1 Mixing Assembly Language and C Code
 
-We will program the board in C, but add assembly language subroutines to perform the string copy and capitalization operations. Some embedded systems are coded purely in assembly language, but most are coded in C and resort to assembly language only for time-critical processing. This is because the code development process is much faster (and hence much less expensive) when writing in C when compared to assembly language. Writing an assembly language function which can be called as a C function results in a modular program which gives us the best of both worlds: the fast, modular development of C and the fast performance of assembly language. It is also possible to add inline assembly code to C code, but this requires much greater knowledge of how the compiler generates code.
+You will program the board in C, but add assembly language subroutines to perform the string copy and capitalization operations. Some embedded systems are coded purely in assembly language, but most are coded in C and resort to assembly language only for time-critical processing. This is because the code development process is much faster (and hence much less expensive) when writing in C when compared to assembly language. Writing an assembly language function which can be called as a C function results in a modular program which gives us the best of both worlds: the fast, modular development of C and the fast performance of assembly language. It is also possible to add inline assembly code to C code, but this requires much greater knowledge of how the compiler generates code.
 
 The keyword used to allow assembly code within a wider section of C code is '__asm'. This will be shown as an example later in the exercise.
 
 ## 5.2 The Main Function
 
-First we will create the main C function. This function contains two variables (a and b) with character arrays.
+First create the `main()` C function. This function defines two variables (`a` and `b`) with character arrays.
 
 ```c
 int main(void)
@@ -43,7 +43,8 @@ int main(void)
 
 ## 5.3 Register Use Conventions
 
-There are certain register use conventions which we need to follow if we would like our assembly code to coexist with C code. We will examine these in more detail later in the module “C as implemented in Assembly Language”.
+There are certain register use conventions to enable the assembly code to coexist with C code.
+
 
 ### 5.3.1 Calling Functions and Passing Arguments
 
@@ -86,9 +87,9 @@ __attribute__((naked)) void my_strcpy(const char *src, char *dst)
 
 ## 5.5 String Capitalization
 
-Let’s look at a function to capitalize all the lower-case letters in the string. We need to load each character, check to see if it is a letter, and if so, capitalize it. 
+Examine the function to capitalize all the lower-case letters in the string. The code loads each character, checks to see if it is a letter, and if so, capitalizes it. 
 
-Each character in the string is represented with its ASCII code. For example, ‘A’ is represented with a 65 (0x41), ‘B’ with 66 (0x42), and so on up to ‘Z’ which uses 90 (0x5a). The lower case letters start at ‘a’ (97, or 0x61) and end with ‘z’ (122, or 0x7a). We can convert a lower case letter to an upper case letter by subtracting 32. 
+Each character in the string is represented with its ASCII code. For example, ‘A’ is represented with a 65 (0x41), ‘B’ with 66 (0x42), and so on up to ‘Z’ which uses 90 (0x5a). The lower case letters start at ‘a’ (97, or 0x61) and end with ‘z’ (122, or 0x7a). Convert a lower case letter to an upper case letter by subtracting 32. 
 
 ```c
 __attribute__((naked)) void my_capitalize(char *str)
@@ -114,4 +115,4 @@ __attribute__((naked)) void my_capitalize(char *str)
 
 The code is shown above. It loads the byte into r1. If the byte is less than ‘a’ then the code skips the rest of the tests and proceeds to finish up the loop iteration. 
 
-This code has a quirk – the first compare instruction compares r1 against the character immediately before ‘a’ in the table. Why? What we would like is to compare r1 against ‘a’ and then branch if it is lower. However, there is no branch lower instruction, just branch lower or same (BLS). To use that instruction, we need to reduce by one the value we compare r1 against.
+This code has a quirk – the first compare instruction compares r1 against the character immediately before ‘a’ in the table. Why? The code is to compare `r1` against ‘a’ and then branch if it is lower. However, there is no branch lower instruction, just branch lower or same (BLS). To use that instruction, reduce by one the value to compare `r1` against.

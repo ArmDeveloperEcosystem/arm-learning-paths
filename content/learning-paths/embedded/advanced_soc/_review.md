@@ -31,7 +31,7 @@ review:
             - "Processor System Reset"
         correct_answer: 2
         explanation: >
-            We connected the switch and LED to our custom AXI GPIO peripheral. 
+            The switch was connected to the LED to the custom AXI GPIO peripheral. 
                
     - questions:
         question: >

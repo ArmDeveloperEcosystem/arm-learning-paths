@@ -29,7 +29,7 @@ sudo apt install -y unzip make
 
 ## Install lzbench
 
-[lzbench](https://github.com/inikep/lzbench) is an in-memory benchmark of open-source compression algorithms. We will use this benchmark to measure stand-alone performance of the compression algorithms on Arm servers. 
+[lzbench](https://github.com/inikep/lzbench) is an in-memory benchmark of open-source compression algorithms.Use this benchmark to measure stand-alone performance of the compression algorithms on Arm servers. 
 
 This benchmark also contains the source files for the `snappy` and `zstd` compression algorithms among others. They are built as part of the `lzbench` build process.
 
@@ -42,7 +42,7 @@ make
 
 ## Download a data set to benchmark the compression algorithms
 
-To benchmark the data compression algorithms, you will need a data set to run the compression and decompression algorithms on. In this how-to guide we will use the [Silesia corpus](https://sun.aei.polsl.pl//~sdeor/index.php?page=silesia) data set, which is a data set of files that covers the typical data types used nowadays.
+To benchmark the data compression algorithms, you will need a data set to run the compression and decompression algorithms on. Use the [Silesia corpus](https://sun.aei.polsl.pl//~sdeor/index.php?page=silesia) data set, which is a data set of files that covers the typical data types used nowadays.
 
 Download and unpack the data set:
 ```bash { cwd="lzbench" }
@@ -55,13 +55,13 @@ cd ../lzbench
 
 ## Run lzbench with snappy and zstd
 
-To benchmark the stand-alone performance of `snappy` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
+To benchmark the stand-alone performance of `snappy` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set you installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -esnappy ../silesia/dickens
 ```
 
-To benchmark the stand-alone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set we installed run the following command:
+To benchmark the stand-alone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set you installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -ezstd ../silesia/dickens

@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this learning path, we will build a neural network model with TensorFlow and deploy the model on the [STM32 B-L475E-IOT01A2 board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html). This board has an MCU based on the Arm Cortex-M4 core. We will implement a letter recognition model which takes accelerometer data from the board and predicts the letter based on the accelerometer data. 
+In this learning path, you will build a neural network model with TensorFlow and deploy the model on the [STM32 B-L475E-IOT01A2 board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html). This board has an MCU based on the Arm Cortex-M4 core. You will implement a letter recognition model which takes accelerometer data from the board and predicts the letter based on the accelerometer data. 
 
 ## Get Setup
 
@@ -50,7 +50,7 @@ conda install jupyter pandas pyserial scikit-learn tensorflow matplotlib
 
 ### Prepare the data collection
 
-Next, you need to program the STM32 B-L475E-IOT01A2 board to acquire accelerometer data for your neural network model. We have already implemented the data collection code for this learning path, so you can just import the code and program the board using STM Code IDE.
+Next, you need to program the STM32 B-L475E-IOT01A2 board to acquire accelerometer data for your neural network model. The data collection code for this learning path is provided, so you can just import the code and program the board using STM Code IDE.
 
 To do so, you need to download STM32 Cube IDE on your Windows machine. 
 
@@ -101,7 +101,7 @@ samples_dir = os.path.join(base_dir, 'Samples')
 
 ### Connect the board
 
-Next we are going to connect the board for data collection. Make sure that you plugged the board into your computer via the USB ST-LINK port, not the USB OTG port. Execute this code block and check which port the board is connected to. In our case the board is connected to COM3 port. Enter the port number.
+Next, connect the board for data collection. Make sure that you plugged the board into your computer via the USB ST-LINK port, not the USB OTG port. Execute this code block and check which port the board is connected to. In this case the board is connected to COM3 port. Enter the port number.
 
 ```console
 print('Com ports list:')
@@ -112,7 +112,7 @@ chooseComPort = input('Please insert port number: ')
 ser = serial.Serial('COM{}'.format(chooseComPort), 115200)
 ```
 
-Now we have the serial connection with the board. This code block contains several helper functions for computation. Execute the code block to have these functions.
+Now you have the serial connection with the board. This code block contains several helper functions for computation. Execute the code block to have these functions.
 
 ```console
 def convert_to_list(value):
@@ -132,7 +132,7 @@ def convert_list_to_df(lst):
 
 ### Acquire the dataset
 
-Now we are ready to acquire the dataset. Execute the code block shown below. This code block will acquire sensor data from the board and save training samples for machine learning. 
+Now you are ready to acquire the dataset. Execute the code block shown below. This code block will acquire sensor data from the board and save training samples for machine learning. 
 
 ```console
 letter = input('Please insert letter to collect data: ')
@@ -167,7 +167,7 @@ xyz_df.to_csv(f, index=False)
 
 ### Load the dataset
 
-Let's check the dataset you collected. Execute this code block to load the dataset. In my dataset, We used the letter o and letter s. The label for letter o is 0 and the label for letter s is 1. 
+Check the dataset you collected. Execute this code block to load the dataset. In this dataset, the letters `o` and `s` were used. The label for letter `o` is `0` and the label for letter `s` is `1`. 
 
 ```console
 data_files = [file for file in os.listdir(samples_dir) if '.csv' in file]
@@ -222,7 +222,7 @@ Expected output is shown below:
 
 ### Create a model
 
-Now we are going to train a multi-layer perceptron model with the dataset.  First, we define a multi-layer perceptron model with 3 dense layers.
+Now you are going to train a multi-layer perceptron model with the dataset.  First, define a multi-layer perceptron model with 3 dense layers.
 
 ```console
 x_train, y_train = sklearn.utils.shuffle(np.array(data), np.array(labels))
@@ -243,7 +243,8 @@ model = tf.keras.Sequential(
 model.summary()
 ```
 
-Compile the model. Then you can see the model has 3392 parameters in total. We train the model for 200 epochs. We will explain why we chose 200 for the number of epochs after the training is finished. 
+Compile the model. Then you can see the model has 3392 parameters in total. Train the model for 200 epochs.
+
 
 ```console
 model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
@@ -252,15 +253,15 @@ history = model.fit(x_train, y_train, batch_size=1, epochs=200, validation_split
 model.save('raw_model.h5')
 ```
 
-Now, let us plot the training and validation accuracy over epoch. You can see that the training and validation accuracy start to converge after around 150 epochs. This means that the 200 epochs are enough to train the model. If we train the model for too many epochs, then the validation accuracy may drop due to overfitting.
+Now, let us plot the training and validation accuracy over epoch. You can see that the training and validation accuracy start to converge after around 150 epochs. This means that the 200 epochs are enough to train the model. If you train the model for too many epochs, then the validation accuracy may drop due to overfitting.
 
 ![output2](Images/output2.PNG)
 
 ### Learning Rate
 
-For training the model,  we used the default learning rate. But how will the model change with different learning rates? If the learning rate is too high, the model is more likely to overshoot the minima, meaning that the model cannot converge to the minima. On the other hand, if the learning rate is too low, the model reaches the minima too slowly, requiring more training time.
+For training the model,  you used the default learning rate. But how will the model change with different learning rates? If the learning rate is too high, the model is more likely to overshoot the minima, meaning that the model cannot converge to the minima. On the other hand, if the learning rate is too low, the model reaches the minima too slowly, requiring more training time.
 
-Let's first try a high learning rate. Here, I set the learning rate of the optimizer as 1000. Execute the code block. This graph shows the training and validation loss values over epoch. You can see that the loss values fluctuate a lot so the model has difficulty in reaching the minima.
+First try a high learning rate. Here, I set the learning rate of the optimizer as 1000. Execute the code block. This graph shows the training and validation loss values over epoch. You can see that the loss values fluctuate a lot so the model has difficulty in reaching the minima.
 
 ```console
 # High learning rate (lr = 1000)
@@ -282,7 +283,7 @@ Expected output shown below:
 
 ![output3](Images/output3.PNG)
 
-Now let's try a lower learning rate, which is 0.0001. Execute the code block. The graph shows the training and validation loss values decrease much more slowly. So, it is important to use a proper learning rate in training.
+Now try a lower learning rate, which is 0.0001. Execute the code block. The graph shows the training and validation loss values decrease much more slowly. So, it is important to use a proper learning rate in training.
 
 ```console
 # Low learning rate (lr = 0.0001)
@@ -304,11 +305,11 @@ Expected output shown below:
 
 ![output4](Images/output4.PNG)
 
-With the model trained, we are now ready to test it.
+With the model trained, you are now ready to test it.
 
 ## Test the model
 
-To test the model we trained, run the code block shown below. 
+To test the model, run the code block shown below. 
 
 ```console
 input('Press Enter once MCU is ready')
@@ -324,7 +325,7 @@ z = new_df['Z'].to_numpy()
 inf_data = np.array([x, y, z])
 plot_single_sample(data_sample=inf_data.reshape((3, stride)))
 
-# For inference we have to explicitly tell that the data has a batch size of 1
+# For inference you have to explicitly tell that the data has a batch size of 1
 inf_data = inf_data.reshape((1, 3, stride))
 
 pred = model.predict(inf_data)
@@ -337,9 +338,9 @@ print('Model Prediction: ', np.argmax(pred))
 
 ## Extract features
 
-Until now, we trained and tested the model with the raw accelerometer data. Now, we are going to extract features from the data and train a model which makes prediction based on the extracted features. Here, we are going to use the mean and standard deviation of each axis as features.
+Until now, you trained and tested the model with the raw accelerometer data. Now, you are going to extract features from the data and train a model which makes prediction based on the extracted features. Here, you are going to use the mean and standard deviation of each axis as features.
 
-First, we extract the features from the collected dataset and save the features for training. You can check the extracted features with this code block. These are the extracted features from one data sample.
+First, extract the features from the collected dataset and save the features for training. You can check the extracted features with this code block. These are the extracted features from one data sample.
 
 ```console
 data_files = [file for file in os.listdir(samples_dir) if '.csv' in file]
@@ -377,7 +378,7 @@ Expected output shown below:
 
 ![output5](Images/output5.PNG)
 
-Then, we create a new multi-layer perceptron model for the features. The new model has 1592 parameters because it uses a smaller input than the previous model. Train the model and check the accuracy. 
+Then, create a new multi-layer perceptron model for the features. The new model has 1592 parameters because it uses a smaller input than the previous model. Train the model and check the accuracy. 
 
 ```console
 x_train, y_train = sklearn.utils.shuffle(np.array(feature_data), np.array(feature_labels))
@@ -423,7 +424,7 @@ y_std_ext = np.array([np.std(y[i:i + slidingWindowExt]) for i in range(0, stride
 z_std_ext = np.array([np.std(z[i:i + slidingWindowExt]) for i in range(0, stride, slidingWindowExt)])
 
 inf_data = np.array([x_mean_ext, y_mean_ext, z_mean_ext, x_std_ext, y_std_ext, z_std_ext])
-# For inference we have to explicitly tell that the data has a batch size of 1
+# For inference you have to explicitly tell that the data has a batch size of 1
 plot_single_feature_sample(data_sample=inf_data)
 inf_data = inf_data.reshape((1, data_shape[0], data_shape[1]))
 

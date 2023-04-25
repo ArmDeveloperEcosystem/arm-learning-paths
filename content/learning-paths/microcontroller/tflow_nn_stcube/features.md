@@ -8,15 +8,15 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Until now, we trained and tested the model with the raw accelerometer data.
+Until now, you trained and tested the model with the raw accelerometer data.
 
-Now, we are going to extract features from the data and train a model which makes prediction based on the extracted features.
+Now, you are going to extract features from the data and train a model which makes prediction based on the extracted features.
 
-Here, we are going to use the mean and standard deviation of each axis as features.
+Here, you are going to use the mean and standard deviation of each axis as features.
 
 ## Extract features
 
-First, we extract the features from the collected dataset and save the features for training.
+First, extract the features from the collected dataset and save the features for training.
 
 ```python
 data_files = [file for file in os.listdir(samples_dir) if '.csv' in file]
@@ -106,7 +106,7 @@ y_std_ext = np.array([np.std(y[i:i + slidingWindowExt]) for i in range(0, stride
 z_std_ext = np.array([np.std(z[i:i + slidingWindowExt]) for i in range(0, stride, slidingWindowExt)])
 
 inf_data = np.array([x_mean_ext, y_mean_ext, z_mean_ext, x_std_ext, y_std_ext, z_std_ext])
-# For inference we have to explicitly tell that the data has a batch size of 1
+# For inference, explicitly tell that the data has a batch size of 1
 plot_single_feature_sample(data_sample=inf_data)
 inf_data = inf_data.reshape((1, data_shape[0], data_shape[1]))
 

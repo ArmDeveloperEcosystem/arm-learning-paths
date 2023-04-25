@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 You must have [Keil MDK](/install-guides/mdk/) installed.
 
-Code coverage can be performed on any project that runs on a suitable target. We shall use one of the supplied RTX examples that runs on the supplied Cortex-M FVP.
+Code coverage can be performed on any project that runs on a suitable target. You shall use one of the standard RTX examples that runs on the supplied Cortex-M FVP.
 
 ## Import and build the example project
 
@@ -39,7 +39,7 @@ Click `OK` to save settings, then start a debug session (`Ctrl+F5`).
 
 If not already open, navigate to `View` > `Analysis Windows` > `Code Coverage` to enable that view.
 
-Run the application for a few seconds, going through a number of iterations of the LEDs turning on and off. Observe that the Code Coverage data is not updated (with FVP). We must close the debug session, and start a new one to load the coverage data. Code coverage data is now displayed in the `Code Coverage` window.
+Run the application for a few seconds, going through a number of iterations of the LEDs turning on and off. Observe that the Code Coverage data is not updated (with FVP). Close the debug session, and start a new one to load the coverage data. Code coverage data is now displayed in the `Code Coverage` window.
 
 ## Investigate the code coverage output
 

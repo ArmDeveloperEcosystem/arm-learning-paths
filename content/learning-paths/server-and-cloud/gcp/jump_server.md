@@ -147,7 +147,7 @@ zone = "us-central1-a"
 ```
 
 {{% notice Note %}}
-Replace **project_ID** with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In our case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
+Replace **project_ID** with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In this case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
 {{% /notice %}}
 
 Now create a **modules** directory and inside it create a **network-firewall** and **vpc-network** directories.
@@ -456,10 +456,10 @@ variable "project" {
 ```
 
 ### Terraform Commands
-To deploy the instances, we need to initialize Terraform, generate an execution plan and apply the execution plan to our cloud infrastructure. Follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#terraform-commands) to deploy the **main.tf** file.
+To deploy the instances, you need to initialize Terraform, generate an execution plan and apply the execution plan to your cloud infrastructure. Follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#terraform-commands) to deploy the **main.tf** file.
 
 ### Verify the Instance and Bastion Host setup
-In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances we created through Terraform must be displayed on the screen.
+In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances you created through Terraform must be displayed on the screen.
 
 ![image](https://user-images.githubusercontent.com/67620689/222353051-483be628-6466-44f5-85b5-d7a7039b7dad.PNG)
 

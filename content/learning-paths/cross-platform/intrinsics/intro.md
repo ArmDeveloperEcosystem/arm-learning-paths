@@ -30,7 +30,7 @@ Below is a small example application containing intrinsics.
 The source code comes from a [short course titled Efficient Vectorisation with C++](https://chryswoods.com/vector_c++/emmintrin.html) and is copyright (C) Christopher Woods, 2006-2015.\
 It is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-We use this example to show how to port such code to Arm.
+This example can be used to show how to port such code to Arm.
 
 Copy the source code into a file named `sse.cpp`.
 
@@ -61,13 +61,13 @@ int main(int argc, char **argv)
 ```
 ## Understand the code
 
-We see a reference to the `__SSE2__` preprocessor define and the `emmintrin.h` header file. These are architecture specific extensions.
+There is a reference to the `__SSE2__` preprocessor define and the `emmintrin.h` header file. These are architecture specific extensions.
 
 The function calls starting with `_mm` are [Intel SSE intrinsics](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html).
 
 ## Run the example on x86_64
 
-We can build this example on an `x86_64` machine.
+You can build this example on an `x86_64` machine.
 
 If not already installed, install `g++` with the following command (on Ubuntu):
 

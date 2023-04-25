@@ -108,7 +108,7 @@ Run `terraform plan` to create an execution plan.
 ```
 **Key points:**
 
-* The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+* The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
 * The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
 * The optional `-out` parameter allows you to specify an output file for the plan. Using the `-out` parameter ensures that the plan you reviewed is exactly what is applied.
 
@@ -131,7 +131,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
 
 ### Verify created resource
-In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The VM we created through Terraform must be displayed in the screen.
+In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The VM created through Terraform must be displayed in the screen.
 
 ![image](https://user-images.githubusercontent.com/67620689/204244210-00741212-de05-49f9-b4eb-e4943b809c70.PNG)
 

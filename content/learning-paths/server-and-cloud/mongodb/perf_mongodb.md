@@ -6,7 +6,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-To measure the performance of MongoDB, we use the [MongoDB performance test tool](https://github.com/idealo/mongodb-performance-test).
+To measure the performance of MongoDB, use the [MongoDB performance test tool](https://github.com/idealo/mongodb-performance-test).
 
 This is an open sourced java application that tests the MongoDB performance, such as latency and throughput, by running one or more threads executing either all the same or different database operations, such as Inserts, Updates, Deletes, Counts or Finds until a defined number of operations is executed or a defined maximum runtime is reached.
 
@@ -44,7 +44,7 @@ This will print a description of how to use the java application
 
 ## Run Insert test
 
-We run a test that inserts documents on `localhost:27017` (default).
+Run a test that inserts documents on `localhost:27017` (default).
 
 Use the following options:
   * `-m` defines the test

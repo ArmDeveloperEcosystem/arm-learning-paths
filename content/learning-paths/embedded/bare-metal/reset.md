@@ -7,7 +7,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-A real embedded system will need initialization before any other code is executed. We will create a minimal reset handler, putting all but one processor to sleep, and executing the application on just one processor.
+A real embedded system will need initialization before any other code is executed. You will create a minimal reset handler, putting all but one processor to sleep, and executing the application on just one processor.
 
 ## Write a reset handler
 
@@ -47,7 +47,8 @@ Setting [CPTR_EL3](https://developer.arm.com/documentation/ddi0595/2021-12/AArch
 
 ## Link the application
 
-Modify the scatter file so that the startup code goes into the root region `ROM_EXEC`. We need this to be located as the `FIRST` section in the region, so that it is at exactly 0x0, and so is executed when the processors start.
+Modify the scatter file so that the startup code goes into the root region `ROM_EXEC`. This must be located as the `FIRST` section in the region, so that it is at exactly `0x0`, and so is executed when the processors start.
+
 #### scatter.txt
 ```console
   ROM_EXEC +0x0
@@ -65,7 +66,7 @@ The entry point is used by the linker to determine which code is necessary to ke
 
 ## Run the new application
 
-We can now successfully execute on the FVP without the additional parameter from before.
+You can now successfully execute on the FVP without the additional parameter from before.
 ```console
 FVP_Base_Cortex-A73x2-A53x4 -a hello.axf
 ```

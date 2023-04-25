@@ -163,7 +163,7 @@ To check for atomic instructions in applications run objdump on the T4g executab
 objdump -d t4g | grep -i 'cas\|casp\|swp\|ldadd\|stadd\|ldclr\|stclr\|ldeor\|steor\|ldset\|stset\|ldsmax\|stsmax\|ldsmin\|stsmin\|ldumax\|stumax\|ldumin\|stumin' | wc -l
 ```
 
-The above command will report a count of 1 instruction, the ldaddal we looked at. 
+The above command will report a count of 1 instruction, the `ldaddal` instruction.
 
 To check whether applications contain load exclusives and store exclusives run this command on the A1 executable. It will report a count of 2.
 

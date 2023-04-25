@@ -7,11 +7,11 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-In this section we will learn how to control Arm Virtual Hardware via the [AVH API](https://app.avh.arm.com/api/docs). This can be used stand-alone, or as part of your overall CI/CD workflow.
+In this section you will learn how to control Arm Virtual Hardware via the [AVH API](https://app.avh.arm.com/api/docs). This can be used stand-alone, or as part of your overall CI/CD workflow.
 
 Applications to interface with the API can be written in JavaScript, Python, or C. This example uses JavaScript.
 
-We shall extend the workflow from the previous section to automatically transmit the `chip-tool` commands.
+You shall extend the workflow from the previous section to automatically transmit the `chip-tool` commands.
 
 ## Set up API Token as GitHub secret
 
@@ -156,8 +156,8 @@ A new run of the Action will be triggered.
 
 Navigate to the `Actions` tab of your GitHub repository, and open the current workflow to follow progress. Observe that there are now three `jobs`, with the jobs to run `lighting-app` and `chip-tool` executing in parallel. You can follow progress in GitHub Actions log, and observe `chip-tool` toggling `lighting-app` automatically. You will also see the commands appear in the `chip-tool` console.
 
-Congratulations! You have entirely automated the process to build and test our applications.
+Congratulations! You have entirely automated the process to build and test your applications.
 
 ## Next Steps
 
-We have built up a rudimentary CI/CD environment to start `Matter` development. Through the powerful AVH API and workflow methodology of GitHub Actions and other similar technologies, it is possible to construct an intelligent and always available CI/CD scheme, instantiating (and terminating) Virtual Hardware targets as required for your unit tests in a highly scalable way.
+You have built up a rudimentary CI/CD environment to start `Matter` development. Through the powerful AVH API and workflow methodology of GitHub Actions and other similar technologies, it is possible to construct an intelligent and always available CI/CD scheme, instantiating (and terminating) Virtual Hardware targets as required for your unit tests in a highly scalable way.
