@@ -59,6 +59,7 @@ InstalledDir: C:\Program Files\LLVM\bin
 ## Other versions of LLVM
 
 You can download other LLVM builds from [the download repository](https://releases.llvm.org/download.html).
-{{% notice Note %}}
+
+{{% notice Note%}}
 The pre-built binary for Windows on Arm is typically named `LLVM-<version>-woa64.exe`.
 {{% /notice %}}
