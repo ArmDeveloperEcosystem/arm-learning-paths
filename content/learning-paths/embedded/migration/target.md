@@ -14,15 +14,15 @@ Embedded systems are increasingly using container engines such as Docker to depl
 
 ## Access aarch64 system
 
-You can build the example natively using [AWS EC2 Graviton instances](https://aws.amazon.com/ec2/) or a Raspberry Pi 4 and install [Docker](/install-guides/docker/docker-engine).
+You can build the example natively on aarch64 using [AWS EC2 Graviton instances](https://aws.amazon.com/ec2/) or a Raspberry Pi 4 and install [Docker](/install-guides/docker/docker-engine).
 
-You can even build the example for `aarch64` on a `x86_64` machine with Docker. [Buildx](/learning-paths/cross-platform/docker/buildx) can be used to run multi-architecture containers.
+You can even build the example for aarch64 on a x86_64 machine with Docker. [Buildx](/learning-paths/cross-platform/docker/buildx) can be used to run multi-architecture containers.
 
 ## Docker software development image
 
 ### Dockerfile
 
-Create a Dockerfile with the content below to set up the necessary development tools:
+Create a Dockerfile with the content below to set up the necessary development tools and replicate the configuration shown in the previous section:
 
 ```
 FROM ubuntu:22.04
@@ -45,7 +45,7 @@ USER ubuntu
 
 ### Build image
 
-On AVA or AWS Graviton:
+On a aarch64 system:
 
 ```bash
 docker build -t sobel_example .
@@ -56,9 +56,14 @@ On x86_64:
 ```bash
 docker buildx build --platform linux/amd64 -t sobel_example .
 ```
+### Run container and check the environment
 
-You can check the environment with a few commands:
+Run an interactive session with a container instance:
+```bash
+docker run --rm -ti sobel_example
+```
 
+When launched, you can check the environment configuration with a few commands:
 ```bash
 cat /etc/issue
 gcc --version
@@ -68,18 +73,28 @@ cat /usr/lib/aarch64-linux-gnu/pkgconfig/opencv4.pc | grep Version
 
 ### [Alternative] Pull ACfL development image
 
-As an alternative, you can also pull this image from Docker Hub:
-
+As an alternative, instead of building a Docker image from scratch, you can also pull this image from Docker Hub:
 ```bash
 docker pull armswdev/arm-compiler-for-linux
+```
+
+This image is based on Ubuntu 22.04 and provides the latest version of the [Arm Compiler for Linux](/install-guides/acfl/), but also GCC and cmake. 
+
+For the rest of the Learning Path, you can tag the image `sobel_example`:
+
+```bash
 docker tag armswdev/arm-compiler-for-linux sobel_example
 ```
 
-This image is based on Ubuntu 22.04 and provides the latest version of the Arm Compiler for Linux and GCC.
+And launch an interactive session with the same command than above:
+```bash
+docker run --rm -ti sobel_example
+```
+
 
 #### Install dependencies
 
-The image has generic software development tools but still miss the OpenCV libraries our application requires. When the container is running (see next page for how to launch it), use the following command to install them:
+This image doesn't have the OpenCV libraries installed. So, when the container is launched, use the following command to install them:
 
 ```bash
 sudo apt install -y libopencv-dev

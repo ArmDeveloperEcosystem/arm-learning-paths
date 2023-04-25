@@ -52,15 +52,15 @@ We have summarized our example's dependencies and configuration below:
 | External libraries | OpenCV | [Yes](https://packages.ubuntu.com/jammy/libopencv-dev) |
 | Build toolchain | Cmake | [Yes](https://packages.ubuntu.com/jammy/cmake) |
 
-We will describe how to set up our `x86_64` and `aarch64` systems in the next section. At this point, we foresee that building the application on `aarch64` should not be a problem as the toolchain is available.
+We will describe how to set up our x86_64 and aarch64 systems in the next section. At this point, we foresee that building the application on aarch64 should not be a problem as the toolchain is available.
 
 ## Identify non-portable settings
 
 Inspecting the building options and the source code of the applciation provides useful information.
 
 In `src/main.cpp`:
-- The header file `x86intrin.h` won't be available when building natively on `aarch64`.
-- The function `SobelSimd` may need to be re-written: all the intrinsics prefixed with `_mm_` won't be supported on `aarch64`.
+- The header file `x86intrin.h` won't be available when building natively on aarch64.
+- The function `SobelSimd` may need to be re-written: all the intrinsics prefixed with `_mm_` won't be supported on aarch64.
 
 In `src/CMakeLists.txt`:
 
@@ -73,8 +73,3 @@ endif()
 ```
   
 The flag `-mavx` used with GCC is architecture-specific, only available on [x86_64](https://man7.org/linux/man-pages/man1/gcc.1.html) and will prevent building the application entirely, even if the pure C version `SobelNonSimd` and the OpenCV version `SobelOpenCV` of the Sobel filter are portable.
-
-
-
-In addition, inspecting the compilers options when building indicates that an architecture-specific flag `-mavx` is used with GCC. Again, this might also be an issue and might prevent building the application completely.
-

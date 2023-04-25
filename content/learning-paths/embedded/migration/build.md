@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Launch Docker container instance
 
-To visualize the result, we need to set up X11 before building and pass some extra arguments when launching the Docker container:
+Because our example uses X11 to display the results, we need some extra set up before launching the Docker container:
 
 ```bash
 sudo apt install -y x11-xserver-utils
@@ -18,7 +18,7 @@ xhost +local:*
 docker run --rm -ti --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v $HOME/.Xauthority:/home/ubuntu/.Xauthority sobel_example
 ```
 
-In the container:
+In the container interactive session:
 
 ```bash
 sudo chown ubuntu:ubuntu ~/.Xauthority
@@ -37,16 +37,16 @@ cd sobel-simd-opencv
 
 ## Fix building options
 
-If we try to build the application now, the compiler will report an issue with `-mavx` not being recognized on aarch64. This flags enables AVX SIMD instructions on x86_64 processors.
+If we try to build the application now, the compiler will report an issue with `-mavx` not being recognized on aarch64, as we expected.
 
-To fix this, let edit the `Makefile` to replace this flag with compiler options for Neoverse N1 processors on AVA and Graviton2:
+To fix this, let edit the `Makefile` to replace this flag with compiler options for Neoverse N1 processors used by AWS Graviton2 for example:
 ```bash
 sed -i "s/-mavx/-O2\ -march=armv8.2-a+fp16+rcpc+dotprod+crypto/g" src/CMakeLists.txt
 ```
 
 ## Enable NEON intrinsics
 
-At this point, we would be able to build the pure C and OpenCV version of the algorithm but we fail to build the whole application because of SIMD AVX instrinsics.
+At this point, we would be able to build the pure C and OpenCV version of the algorithm but we still fail to build the whole application because of SIMD AVX instrinsics.
 
 Fortunately, we can enable NEON SIMD support on aarch64 without rewriting the application using [SIMD Everywhere](/learning-paths/server-and-cloud/intrinsics/simde):
 
@@ -54,9 +54,9 @@ Fortunately, we can enable NEON SIMD support on aarch64 without rewriting the ap
 git clone https://github.com/simd-everywhere/simde.git
 ```
 
-We need to edit `src/CMakeLists.txt` to add the following:
+Then, edit `src/CMakeLists.txt` to add the following:
 
-```
+```cmake
 # Add SIMDe options
 include_directories(../simde)
 set(CMAKE_CXX_STANDARD 14)
@@ -64,7 +64,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 ```
 
-And `main.cpp` to include the SIMD Everywhere AVX headers:
+And `src/main.cpp` to include the SIMD Everywhere AVX headers:
 
 ```C
 #define SIMDE_ENABLE_NATIVE_ALIASES
@@ -75,7 +75,7 @@ And `main.cpp` to include the SIMD Everywhere AVX headers:
 #endif
 ```
 
-This can be done quickly with these two commands:
+This two fixes can be applied quickly with these commands:
 
 ```bash
 sed -i "28i # Add SIMDe options\ninclude_directories(../simde)\nset(CMAKE_CXX_STANDARD 14)\nset(CMAKE_CXX_STANDARD_REQUIRED ON)\nset(CMAKE_CXX_EXTENSIONS OFF)\n" src/CMakeLists.txt
@@ -84,7 +84,7 @@ sed -i "40i #define SIMDE_ENABLE_NATIVE_ALIASES\n#ifdef __aarch64__\n#include \"
 
 ## GCC
 
-We are now able to build and run the application:
+We can now build and run the application:
 
 ```bash
 cmake -S src -B build
@@ -95,21 +95,22 @@ make
 
 ## ACfL
 
-If you are using the `armswdev/arm-compiler-for-linux` you can swich compiler to build the application. To do so, you need to edit `src/CMakeLists.txt` to add the following:
+If you are using the `armswdev/arm-compiler-for-linux` Docker image, you can swich compiler to build the application. 
 
-```
+Edit `src/CMakeLists.txt` to add the following:
+
+```cmake
 set(CMAKE_C_COMPILER "/opt/arm/arm-linux-compiler-23.04_Generic-AArch64_Ubuntu-22.04_aarch64-linux/bin/armclang")
 set(CMAKE_CXX_COMPILER "/opt/arm/arm-linux-compiler-23.04_Generic-AArch64_Ubuntu-22.04_aarch64-linux/bin/armclang++")
 ```
 
-This can be done quickly with these two commands:
-
+This change can be applied quickly with this command:
 ```bash
 $ sed -i "6i set(CMAKE_C_COMPILER\ \"/opt/arm/arm-linux-compiler-23.04_Ubuntu-22.04/bin/armclang\")" src/CMakeLists.txt
 $ sed -i "7i set(CMAKE_CXX_COMPILER\ \"/opt/arm/arm-linux-compiler-23.04_Ubuntu-22.04/bin/armclang++\")\n" src/CMakeLists.txt
 ```
 
-Then, rebuild the example with the same commands:
+Then, rebuild the example (remove the `build` directory if the application has already been built beforehand):
 
 ```bash
 cmake -S src -B build
@@ -129,8 +130,17 @@ In this example we have illustrated key aspects of application porting:
 - Perform the first stage of the migration with a similar setup than on the original architecture.
 - Finally, iteratively update third-party libraries and tools to take advantage of the latest features of the target processor.
 
-| Version | G++ 12.2.0 | ACfL 23.04 |
-| ----------- | ----------- | ----------- |
-| non-SIMD | | |
-| SIMD | | |
-| OpenCV | | |
+### Performance results
+
+After completing our migration to aarch64, we can start exploring the performance of different processors and different compilers with no further optimization:
+
+| | Graviton2 | | Graviton3 | |
+| --- | --- | --- | --- | --- | --- | --- |
+| Compiler | GCC 12.2.0 | ACfL 22.1 | GCC 12.2.0 | ACfL 22.1 |
+| Non-SIMD | 1.0 | 1.0 | 1.7 | 1.8 |
+| SIMD     | 3.4 | 3.8 | 5.8 | 6.7 |
+| OpenCV   | 0.3 | 0.3 | 0.4 | 0.5 |
+
+The results above are normalized to the _Graviton2 Non-SIMD_ value, and give the relative speed-up of the different versions. We can see the benefit of:
+* Graviton3 vs. Graviton2, especially when using SIMD. Graviton 3 has two 256-bit SIMD pipeplines vs. two 128-bit SIMD pipelines for Graviton 2.
+* ACfL vs. GCC on the current source code, especially when using SIMD.
