@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ##  Install Redis on a single AWS Arm based instance 
 
-You can deploy Redis on AWS Graviton processors using Terraform and Ansible. 
+You can deploy Redis on AWS Arm based instances using Terraform and Ansible. 
 
 In this section, you will deploy Redis on a single AWS EC2 instance.
 
@@ -18,15 +18,16 @@ If you are new to Terraform, you should look at [Automate AWS EC2 instance creat
 
 ## Before you begin
 
-You should have the prerequisite tools installed before starting the Learning Path. 
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. 
 
-Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+Install [Terraform](/install-guides/terraform) and [Ansible](/install-guides/ansible) on your computer.
 
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+Any computer which has these tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the requi
+red tools.
 
 Before you begin you will also need:
+- A SSH key pair
 - An AWS access key ID and secret access key
-- An SSH key pair
 
 The instructions to create the keys are below.
 
@@ -42,11 +43,11 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 Terraform requires AWS authentication to create AWS resources. You can generate access keys (access key ID and secret access key) to perform authentication. Terraform uses the access keys to make calls to AWS using the AWS CLI.
 
-To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
 
 ## Create an AWS EC2 instance using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`:
+Use a file editor and save the code below in a file called `main.tf`:
 
 ```console
 provider "aws" {
@@ -105,6 +106,8 @@ resource "aws_key_pair" "deployer" {
 ```
 Make the changes listed below in `main.tf` to match your account settings.
 
+1. In the `provider` section, update the `region` value to use your preferred AWS region.
+
 1. In the `provider` section, update value to use your preferred AWS region.
 
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
@@ -122,7 +125,7 @@ Use Terraform to deploy the `main.tf` file.
 
 ### Initialize Terraform
 
-Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for AWS.
+Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for AWS:
 
 ```console
 terraform init
@@ -159,23 +162,23 @@ commands will detect it and remind you to do so if necessary.
 
 ### Create a Terraform execution plan
 
-Run `terraform plan` to create an execution plan.
+Run `terraform plan` to create an execution plan:
 
 ```console
 terraform plan
 ```
 
-A long output of resources to be created will be printed. 
+A long output of resources to be created will be printed on the console. 
 
 ### Apply a Terraform execution plan
 
-Run `terraform apply` to apply the execution plan and create all AWS resources. 
+Run `terraform apply` to apply the execution plan and create all AWS resources:
 
 ```console
 terraform apply
 ```      
 
-Answer `yes` to the prompt to confirm you want to create AWS resources. 
+Answer `yes` when prompted to confirm you want to create AWS resources. 
 
 The public IP address will be different, but the output should be similar to:
 
@@ -190,7 +193,7 @@ Master_public_IP = [
 ```
 
 ## Configure Redis through Ansible
-Install the Redis and the required dependencies. 
+Install Redis and the required dependencies. 
 
 Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. 
 
@@ -239,7 +242,7 @@ Replace `{password}` in this file with your value.
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory
@@ -283,24 +286,26 @@ PLAY RECAP *********************************************************************
 ansible-target1            : ok=7    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-## Connecting to the Redis server from local machine
+## Connect to the Redis server from local machine
 
 Execute the steps below to connect to the remote Redis server from your local machine.
-1. Install redis-tools to interact with redis-server.
+
+1. Install redis-tools to interact with redis-server:
 ```console
-apt install redis-tools
+sudo apt install redis-tools
 ```
-2. Connect to redis-server through redis-cli.
+2. Connect to the redis-server through `redis-cli`:
 ```console
 redis-cli -h <public-IP-address> -p 6379
 ```
-The output will be:
+The output from this command will be similar to:
 ```output
 ubuntu@ip-172-31-38-39:~$ redis-cli -h 172.31.30.40 -p 6379
 172.31.30.40:6379> 
 ```
-3. Authorize Redis with the password set by us in `playbook.yaml` file.
-```console
+3. Authorize Redis with the password you set in the `playbook.yaml` file using `AUTH`.
+An example of authorizing Redis is shown below:
+```output
 172.31.30.40:6379> ping
 (error) NOAUTH Authentication required.
 172.31.30.40:6379> AUTH 123456789
@@ -309,7 +314,9 @@ OK
 PONG
 ```
 4. Try out commands in the redis-cli.
-```console
+Shown here is the output from running some commands:
+
+```output
 172.31.30.40:6379> set name test
 OK
 172.31.30.40:6379> get name
@@ -320,11 +327,5 @@ You have successfully installed Redis on an AWS EC2 instance running Graviton pr
 
 ### Clean up resources
 
-Run `terraform destroy` to delete all resources created.
-
-```console
-terraform destroy
-```
-
-Continue the Learning Path to deploy Redis on a single Azure instance.
+Run `terraform destroy` to delete all resources created:
 
