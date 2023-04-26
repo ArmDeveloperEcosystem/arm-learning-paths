@@ -2,7 +2,7 @@
 # User change
 title: "Application execution" 
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -30,8 +30,8 @@ docker run -it --rm --platform linux/aarch64 --net=host -e DISPLAY=$DISPLAY -v /
 ```
 
 Then follow the instructions from sections:
-* [Application porting - Compiler options porting](../3_application_porting#compiler-options-porting)
-* [Application porting - x86 intrinsics porting](../3_application_porting#x86-intrinsics-porting)
+* [Application porting - Compiler options porting](../5_application_porting#compiler-options-porting)
+* [Application porting - x86 intrinsics porting](../5_application_porting#x86-intrinsics-porting)
 
 Finally, compile and run the application.
 ```bash
@@ -79,8 +79,8 @@ docker run --rm -ti --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-
 ```
 
 Now follow the instructions from sections:
-* [Application porting - Compiler options porting](../3_application_porting#compiler-options-porting)
-* [Application porting - x86 intrinsics porting](../3_application_porting#x86-intrinsics-porting)
+* [Application porting - Compiler options porting](../5_application_porting#compiler-options-porting)
+* [Application porting - x86 intrinsics porting](../5_application_porting#x86-intrinsics-porting)
 
 Finally, compile and run the application.
 ```bash
@@ -105,8 +105,8 @@ sudo apt-get update && sudo apt-get install -y libopencv-dev
 ```
 
 Now follow the instructions from sections:
-* [Application porting - Compiler options porting](../3_application_porting#compiler-options-porting)
-* [Application porting - x86 intrinsics porting](../3_application_porting#x86-intrinsics-porting)
+* [Application porting - Compiler options porting](../5_application_porting#compiler-options-porting)
+* [Application porting - x86 intrinsics porting](../5_application_porting#x86-intrinsics-porting)
 
 We want to set ACfL as the C/C++ compiler, this is achieved by adding these lines to `CMakeLists.txt`.
 ```output
