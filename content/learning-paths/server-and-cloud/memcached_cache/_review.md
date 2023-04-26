@@ -37,7 +37,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            Yes, it is possible to share a single instance of Memcache between multiple projects because Memcache is a memory store space and it can be run on one or more servers. 
+            It is possible to share a single instance of Memcache between multiple projects because Memcache is a memory store space and can be run on one or more servers. 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
