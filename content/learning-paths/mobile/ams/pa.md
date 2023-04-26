@@ -19,7 +19,7 @@ Build your application, and setup Android device as per Streamline instructions.
 
 Open a terminal or command prompt, and navigate to the `Arm Mobile Studio` install directory. Therein, locate the `lwi_me.py` script:
 ```console
-cd <installation_directory>/performance_advisor/bin/android
+cd <installation_directory>/streamline/bin/android
 ```
 To run the script, use:
 ```console
