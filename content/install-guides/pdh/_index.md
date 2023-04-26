@@ -15,8 +15,8 @@ The [Arm Product Download Hub](https://developer.arm.com/downloads) (PDH) is the
 
 PDH can be freely browsed, but an Arm account is required to download any packages.
 
-Clicking on the persona button in the upper-right corner will allow you to login to PDH.
+Selecting the profile icon in the upper-right corner of the top navigation will reveal a login option.
 
 New users should use the `Register` option to create their free account.
 
-It can be accessed via a browser or via an API.
+PDH can be accessed via a browser or via an API.
