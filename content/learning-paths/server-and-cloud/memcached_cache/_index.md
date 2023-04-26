@@ -2,7 +2,7 @@
 armips:
 - Neoverse
 author_primary: Pareena Verma
-description: Learn how to deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers
+description: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers
 layout: learningpathall
 learning_objectives:
 - Deploy memcached as a cache for MySQL on AWS, Azure and GCP Arm based Instance
