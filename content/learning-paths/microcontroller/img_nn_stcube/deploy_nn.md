@@ -7,7 +7,7 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-In this section, we will deploy the model directly on the STM32 board.
+In this section, you will deploy the model directly on the STM32 board.
 
 ## Setup STM32CubeMX project
 
@@ -24,7 +24,7 @@ In this section, we will deploy the model directly on the STM32 board.
 4. Click `Access to Board Selector`. Find your `B-L475E-IOT01A` board and click `Start Project`.
 5. Go to `Project Manager`. Enter a project name and select the project location where the project will be saved.
 6. Under `Pinout & Configuration`, expand `Pinout` menu, and click `Clear pinouts`.
-7. Now we are going to install Cube AI and enable it for your project.
+7. Now install Cube AI and enable it for your project.
 8. Expand `Software Packs` menu, and click `Select Components`.
 9. Locate `X-CUBE-AI`, and click its `Install` button.
 10. Expand the menu and enable `X-CUBE-AI` > `Core`. For device application, choose `Validation`. If the status shows a yellow warning, click `Resolve` to install any necessary dependencies.
@@ -67,4 +67,4 @@ In this section, we will deploy the model directly on the STM32 board.
 
 ![output8](Images/lab4_8.PNG)
 
-With the model now deployed on the STM32 board, we are ready to test it.
+With the model now deployed on the STM32 board, you are ready to test it.

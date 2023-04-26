@@ -36,7 +36,7 @@ from PIL import Image
 
 import os
 ```
-Next, load the `CIFAR-10` dataset. We can easily get the dataset because TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST.
+Next, load the `CIFAR-10` dataset. TensorFlow provides API for downloading well-known datasets, such as `CIFAR-10` and `MNIST`.
 
 Execute the next code block to get the dataset.
 ```python
@@ -83,7 +83,7 @@ The expected output is shown below
 
 ![output1](Images/lab4_1.PNG)
 
-Next, normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so we divide the training and testing data by 255.
+Next, normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so divide the training and testing data by 255.
 
 ```python
 # Normalize pixel values to be between 0 and 1
@@ -108,7 +108,7 @@ y_test shape: (10000, 10)
 
 ### Create the Model
 
-We will create a small convolutional neural network for image classification. The image size of CIFAR-10 dataset is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is `(32, 32, 3)`. Since the number of classes is 10, so the last dense layer should have 10 units.
+You will create a small convolutional neural network for image classification. The image size of CIFAR-10 dataset is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is `(32, 32, 3)`. Since the number of classes is 10, so the last dense layer should have 10 units.
 
 Here is an image illustrating the network architecture. Note that only convolution and dense layers are illustrated in this image.
 
@@ -153,7 +153,7 @@ model.add(Flatten())
 model.add(Dense(32))
 model.add(Activation('relu'))
 model.add(Dropout(0.5))
-model.add(Dense(10)) #The number of classes we have
+model.add(Dense(10)) #The number of classes
 model.add(Activation('softmax'))
 ```
 Execute the code blocks below to compile and train the model. This training uses only one epoch for time constraint, but will still take ~15 minutes to execute.
@@ -161,7 +161,7 @@ Execute the code blocks below to compile and train the model. This training uses
 ```python
 # Check model structure and the number of parameters
 model.summary()
-# Let's train the model using Adam optimizer
+# train the model using Adam optimizer
 model.compile(loss='categorical_crossentropy', optimizer='adam', 
 metrics=['accuracy'])
 ```
@@ -173,7 +173,7 @@ history = model.fit(x=x_train,
  epochs=epochs, 
  validation_data=(x_test, y_test))
 ```
-Save and evaluate the model. Note that since we trained the model for 1 epoch only, the accuracy will not be that good.
+Save and evaluate the model. Note that since the model was trained for 1 epoch only, the accuracy will not be that good.
 
 You can retry with a larger number of epochs later to obtain better performance. A model trained for 50 epochs is provided (`Data/models/cifar10_model.h5`).
 
@@ -192,7 +192,7 @@ print('Test accuracy:', scores[1])
 ```
 ### Validation data
 
-Finally, we are going to save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in `CSV` format.
+Finally, save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in `CSV` format.
 
 Execute the code block to save the test data.
 
@@ -251,4 +251,4 @@ for i in range(0,len(class_names)):
  with open(path_labels_file, 'a') as f:
  f.write(str(i)+","+class_names[i]+"\n")
 ```
-We have now completed the steps to create the model and are ready to deploy it on the ST board.
+You have now completed the steps to create the model and are ready to deploy it on the ST board.

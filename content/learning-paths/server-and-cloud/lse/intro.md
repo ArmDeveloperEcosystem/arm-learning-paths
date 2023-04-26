@@ -26,7 +26,7 @@ From the Architecture Reference Manual, FEAT_LSE introduces a set of atomic inst
 - Atomic memory operation instructions, LD and ST, where is one of ADD, CLR, EOR, SET, SMAX, SMIN, UMAX, and UMIN
 - Swap instruction, SWP
 
-Additional architecture improvements were made in Armv8.4-A and made optional in Armv8.2-A, but we won’t cover the low-level hardware details. This additional feature is referred to as FEAT_LSE2 in the Architecture Reference Manual.
+Additional architecture improvements were made in Armv8.4-A and made optional in Armv8.2-A, but the low-level hardware details are not covered here. This additional feature is referred to as FEAT_LSE2 in the Architecture Reference Manual.
 
 In architecture versions prior to LSE, read-modify-write sequences use load exclusive and store exclusive instructions. Incrementing a shared variable uses a sequence such as:
 

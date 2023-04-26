@@ -4,7 +4,9 @@ title: Installing the Remote.It Device Package
 weight: 3
 ---
 
-This section explains how to setup Remote.It when you have access to the target device. You may be sitting near the target device now or can connect using SSH, but want to access it from somewhere else in the future. For example, you may at home with a Raspberry Pi 3 or 4 device and you want to connect to it later using SSH when you are not at home.
+This section explains how to setup `Remote.It` when you have access to the target device. You may be sitting near the target device now or can connect using SSH, but want to access it from somewhere else in the future.
+
+For example, you may have a Raspberry Pi 3 or 4 device at home, but you want to connect to it later using SSH when you are not at home.
 
 ## Install Remote.It device package on a target device and connect using SSH
 
@@ -22,7 +24,7 @@ Watch the Remote.It Dashboard until the new device appears. Click the Connect bu
 
 4 Click the Launch icon on the right in the blue box. Add the SSH username when the prompted and click save. It should launch your default terminal application. If you would rather create the connection directly in the SSH client of your choice, you can use the other icons to copy the portions of the url you need for your client. For example, the host or the port.
 
-For example, if the username on the target device is 'ubuntu' run:
+For example, if the username on the target device is `ubuntu` run:
 
 ```console
 ssh ssh://ubuntu@proxy50.rt3.io:37348
@@ -34,7 +36,7 @@ The command can also be formatted with the port number using the `-p` option.
 ssh ubuntu@proxy50.rt3.io -p 37348
 ```
 
-If you use a key pair for security and not a password, you can modify your ssh command as needed to pass in the PemKey path location on your computer.
+If you use a key pair for security and not a password, you can modify your `ssh` command as needed to pass in the PemKey path location on your computer.
 
 ## Install Remote.It during creation of a new AWS EC2 instance
 

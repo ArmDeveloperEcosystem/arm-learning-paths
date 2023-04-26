@@ -17,7 +17,7 @@ The following prerequisites are needed to try the steps yourself:
 ## Introduction
 
 The [Yocto Project](https://www.yoctoproject.org/) is an open-source project with a build system that allows software developers create custom embedded Linux OS distributions regardless of the hardware architecture. 
-Developers can configure their custom builds of Yocto using a set of recipes. In this learning path we will outline the steps to build a minimal Yocto Linux image for a 64-bit Arm target and run it on [QEMU](https://www.qemu.org/). 
+Developers can configure their custom builds of Yocto using a set of recipes. In this learning path you will learn the steps to build a minimal Yocto Linux image for a 64-bit Arm target and run it on [QEMU](https://www.qemu.org/). 
 
 ## Build minimal Yocto Linux image for 64-bit Arm target
 
@@ -29,7 +29,7 @@ The first step is to install the packages required to build and run Yocto
 sudo apt update
 sudo apt-get install gawk wget git-core diffstat unzip texinfo build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint xterm python3-subunit mesa-common-dev lz4
 ```
-Now download the Poky reference distribution and checkout the branch/tag you wish to build. We will build yocto-4.0.6 in this example.
+Now download the Poky reference distribution and checkout the branch/tag you wish to build. You will build `yocto-4.0.6` in this example.
 
 ```bash
 git clone git://git.yoctoproject.org/poky
@@ -81,12 +81,12 @@ Other commonly useful commands are:
  - 'oe-pkgdata-util' handles common target package tasks
 ```
 
-You will now be in the `build-qemu-arm64` directory which is your build directory and where the images for your target are built. As the output from running the command above indicates, you will now need to select the target hardware MACHINE in the conf/local.conf file. We do this by running `sed` and uncommenting out `MACHINE ?= "qemuarm64"` in conf/local.conf file.
+You will now be in the `build-qemu-arm64` directory which is your build directory and where the images for your target are built. As the output from running the command above indicates, you will now need to select the target hardware MACHINE in the conf/local.conf file. To do this, run `sed` to uncomment `MACHINE ?= "qemuarm64"` in conf/local.conf file.
 
 ```bash
 sed -i '/qemuarm64/s/^#//g' conf/local.conf
 ```
-With the right machine now selected, proceed to building the minimal core image for our target.
+With the right machine now selected, proceed to building the minimal core image for your target.
 
 ```bash
 bitbake core-image-minimal
@@ -96,7 +96,7 @@ After the build is complete, the images are output in the build-qemu-arm64/tmp/d
 
 ## Run the image on the 64-bit Arm QEMU target
 
-QEMU is installed on your machine as part of cloning the Poky repository and sourcing the environment script as we did in the previous steps. 
+QEMU is installed on your machine as part of cloning the Poky repository and sourcing the environment script as in the previous steps. 
 
 You can now run the command below to launch run the image you built on the 64-bit Arm Qemu target
 

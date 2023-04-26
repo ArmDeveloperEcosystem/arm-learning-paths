@@ -42,7 +42,7 @@ Click on **Create new** under the Resource group label.
 
 ## Request Quota
 
-While choosing size like **D2psv5 vCPUs**, we get validation error that **2vCPUs are needed for this configuration but only 0 vCPUs are available**. We need to select **Request quota** and submit request to increase the limit.
+While choosing size like **D2psv5 vCPUs**, you get validation error that **2vCPUs are needed for this configuration but only 0 vCPUs are available**. Select **Request quota** and submit request to increase the limit.
 
 **Note:** Please skip this section, if you don't have above error of not enough vCPUs available.
 
@@ -50,13 +50,13 @@ While choosing size like **D2psv5 vCPUs**, we get validation error that **2vCPUs
 
 ## SSH Public Key
 
-Use a public key to securely connect to our VM. We can choose from an existing public key, or create a new one. It is generally preferred that instead of using the same public key for all servers, we should create a new one for certain groups of servers. To do that, we can choose **Generate new key pair** and enter name of the key(Eg: Myvm1_key).
+Use a public key to securely connect to your VM. You can choose from an existing public key, or create a new one. It is generally preferred that instead of using the same public key for all servers, you should create a new one for certain groups of servers. To do that, you can choose **Generate new key pair** and enter name of the key(Eg: Myvm1_key).
 
 ![image #center](https://user-images.githubusercontent.com/42368140/196379560-695da753-ec49-4489-9370-c8040afe2d5d.PNG)
 
 ## Disks
 
-After providing instance details, click on **Next: Disks**. We can modify the details required or proceed with default disk configuration as below.
+After providing instance details, click on **Next: Disks**. You can modify the details required or proceed with default disk configuration as below.
 
 ![image #center](https://user-images.githubusercontent.com/42368140/196379817-dfcc3427-2be1-40fd-8600-e1571a5c52c6.PNG)
 
@@ -114,13 +114,13 @@ Check all the resources created and deployed.
 
 ## Connect to azure VM
 
-We can login into created VM using SSH. To do that, we require access to the key pair (Pem file) which we have downloaded. By default, pem file permission is set to `rw-r--r--`. This is not allowed for SSH Pem files. We have to change the permission for this Pem file to 400, so that only the current user can read this Pem file.
+You can login into created VM using SSH. To do that, you require access to the key pair (Pem file) which you have downloaded. By default, pem file permission is set to `rw-r--r--`. This is not allowed for SSH Pem files. You must change the permission for this Pem file to 400, so that only the current user can read this Pem file.
 
 ```console
 chmod 400 Myvm1_key.pem
 ```
 
-To get the publicIP and user details, we need to Go to resource **Myvm1(VM)** and **GO TO >> connect**
+To get the publicIP and user details, go to resource **Myvm1(VM)** and **GO TO >> connect**
 
 ![image #center](https://user-images.githubusercontent.com/42368140/196381065-1e810dd3-091b-4672-8f94-738b427115cd.PNG)
 

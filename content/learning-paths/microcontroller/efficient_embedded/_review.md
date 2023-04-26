@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            What keyword can we use to incorporate inline assembly code?
+            What keyword can be used to incorporate inline assembly code?
         answers:
             - "__asm"
             - "__arm"

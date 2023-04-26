@@ -219,7 +219,7 @@ Using a text editor, save the code below to in a file called `playbook.yaml`. Th
         chdir: "/home/ubuntu/redis"
       become_user: ubuntu
 ```
-**NOTE:-** Since the allocation of primary and replica nodes is random at the time of cluster creation, it is difficult to know which nodes are primary and which nodes are replica. Hence, for the multi-node configuration, we need to turn off **protected-mode**, which is enabled by default, so that we can connect to the primary and replica nodes. Also, the **bind address** is by default set to `127.0.0.1` due to which port 6379 becomes unavailable for binding with the public IP of the remote server. Thus, we set the bind configuration option to `0.0.0.0`.
+**NOTE:-** Since the allocation of primary and replica nodes is random at the time of cluster creation, it is difficult to know which nodes are primary and which nodes are replica. Hence, for the multi-node configuration, turn off **protected-mode**, which is enabled by default, so that you can connect to the primary and replica nodes. Also, the **bind address** is by default set to `127.0.0.1` due to which port 6379 becomes unavailable for binding with the public IP of the remote server. Thus, set the bind configuration option to `0.0.0.0`.
 
 ### Ansible Commands
 
@@ -430,7 +430,7 @@ e01e0295b9e1e4129f86c33880f8eb5873c77f05 172.31.23.74:6379@16379 myself,master -
 ## Connecting to Redis cluster from local machine
 
 Execute the steps below to connect to the remote Redis server from your local machine.
-1. We need to install redis-tools to interact with redis-server.
+1. Install redis-tools to interact with redis-server.
 ```console
 apt install redis-tools
 ```
@@ -444,7 +444,7 @@ ubuntu@ip-172-31-38-39:~$ redis-cli -c -h ec2-18-117-150-63.us-east-2.compute.am
 ec2-18-117-150-63.us-east-2.compute.amazonaws.com:6379>
 ```
 3. Try out commands in the redis-cli.              
-The redis-cli will run in interactive mode. We can connect to any of the nodes, the command will get redirected to primary node.
+The redis-cli will run in interactive mode. You can connect to any of the nodes, the command will get redirected to primary node.
 ```console
 ec2-18-117-150-63.us-east-2.compute.amazonaws.com:6379> ping
 PONG

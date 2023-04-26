@@ -300,7 +300,7 @@ The hard fault handler exception vector is found in the startup file of your dev
    ```
    g, EventRecord2
    ```
-   This puts the PC at the start of this function. `EventRecord2` returns with a `POP` instruction which we will use to create a hard fault with `LR = 0`. The assembly and sources in the **Disassembly** window do not always match up and this is caused by anomalies in ELF/DWARF specification. In general, scroll downwards in this window to provide the best match.
+   This puts the PC at the start of this function. `EventRecord2` returns with a `POP` instruction which you will use to create a hard fault with `LR = 0`. The assembly and sources in the **Disassembly** window do not always match up and this is caused by anomalies in ELF/DWARF specification. In general, scroll downwards in this window to provide the best match.
 6. Clear the **Trace Data** window by clicking on the ![Clear trace](./b_uv4_er_killall.png) clear trace icon. This helps to see what is happening.
 7. In the **Register** window, double-click on the `R14 (LR)` register and set it to `'0'`. This will cause a hard fault when the processor places `LR = 0` into the PC and tries to execute the non-existent instruction at memory location `0x0`.
 8. ![Run](./b_uv4_run.png) **Run (F5)** the application and almost immediately it will stop on the hard fault exception branch instruction.

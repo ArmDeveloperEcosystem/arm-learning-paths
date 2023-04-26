@@ -27,7 +27,7 @@ To generate and configure the Access key ID and Secret access key, follow this [
 
 ## Deploy EC2 instance via Terraform
 
-After generating the public and private keys, we have to create an EC2 instance. Then we will push our public key to the **authorized_keys** folder in `~/.ssh`. We will also create a security group that opens inbound ports `22`(ssh) and `3306`(MySQL). Below is a Terraform file called `main.tf` which will do this for us.
+After generating the public and private keys, create an EC2 instance. Then push the public key to the **authorized_keys** folder in `~/.ssh`. You will also create a security group that opens inbound ports `22`(ssh) and `3306`(MySQL). Below is a Terraform file called `main.tf` which will do this for us.
 
 ```console
 provider "aws" {
@@ -181,7 +181,7 @@ Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 ## Configure MySQL through Ansible
 Ansible is a software tool that provides simple but powerful automation for cross-platform computer support.
 Ansible allows you to configure not just one computer, but potentially a whole network of computers at once.
-To run Ansible, we have to create a `playbook.yml` file, which is also known as `Ansible-Playbook`. This playbook contains a collection of tasks.
+To run Ansible, create a `playbook.yml` file, which is also known as `Ansible-Playbook`. This playbook contains a collection of tasks.
 
 Here is the complete YML file of `Ansible-Playbook`.
 ```yaml
@@ -255,7 +255,7 @@ Here is the complete YML file of `Ansible-Playbook`.
 Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` with your password.
 {{% /notice %}}
 
-In our case, the inventory file `/tmp/inventory` will be generated automatically after the `terraform apply` command.
+In this case, the inventory file `/tmp/inventory` will be generated automatically after the `terraform apply` command.
 
 ### Ansible Commands
 
@@ -265,7 +265,7 @@ This `ansible` Playbook uses the MySQL community module that can be installed by
 ansible-galaxy collection install community.mysql
 ```
 
-To run a Playbook, we need to use the `ansible-playbook` command. 
+To run a Playbook, use the `ansible-playbook` command. 
 
 ```bash
 ansible-playbook playbook.yml -i /tmp/inventory
@@ -317,20 +317,20 @@ ansible-target1            : ok=9   changed=7   unreachable=0    failed=0    ski
 
 ## Connect to Database using EC2 instance
 
-To connect to the database, we also need to use the MySQL Client on the local machine to interact with the remote MySQL database. You can install it with:
+To connect to the database, use the MySQL Client on the local machine to interact with the remote MySQL database. You can install it with:
 
 ```bash
 sudo apt install mysql-client
 ```
 
-We also need to retrieve the `public-ip` of the instance where MySQL is deployed. 
+Retrieve the `public-ip` of the instance where MySQL is deployed. 
 
 ```bash
 mysql -h {public_ip of instance where Mysql deployed} -P3306 -u Local_user -p{password of database}
 ```
 
 {{% notice Note %}}
-Replace `{public_ip of instance where Mysql deployed}` and `{password of database}` with your values. In our case, we have set the user name to `Local_user` through the `playbook.yml` file.
+Replace `{public_ip of instance where Mysql deployed}` and `{password of database}` with your values. In this case, set the user name to `Local_user` through the `playbook.yml` file.
 {{% /notice %}}
 
 Here is the expected output:
@@ -353,7 +353,7 @@ mysql>
 
 ### Access Database and Create Table
 
-We can list available databases by using the below command in MySQL console.
+You can list available databases by using the below command in MySQL console.
 
 ```console { output_lines = "2-11" }
 show databases;
@@ -369,7 +369,7 @@ show databases;
 5 rows in set (0.10 sec)
 ```
 
-And access our database by using:
+And access the database by using:
 
 ```console { output_lines = "2" }
 use arm_test;

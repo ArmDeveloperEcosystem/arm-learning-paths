@@ -65,7 +65,7 @@ def convert_list_to_df(lst):
     return df
 ```
 
-Now we are ready to acquire the dataset.
+Now you are ready to acquire the dataset.
 
 ## Acquire the dataset
 
@@ -105,7 +105,7 @@ xyz_df.to_csv(f, index=False)
 
 ## Load the dataset
 
-Let's check the dataset you collected. Execute this code block to load the dataset.
+Check the dataset you collected. Execute this code block to load the dataset.
 
 ```python
 data_files = [file for file in os.listdir(samples_dir) if '.csv' in file]
@@ -128,7 +128,7 @@ for idx, file in enumerate(data_files):
         
     print('Added {} data to the data list with label: {}'.format(file, idx))
 ```
-In my dataset, We used the letter `a` and `z``. The label for `a` is `0` and the label for `z` is `1`. This step should output:
+If in your dataset you used the letters `a` and `z`, where the label for `a` is `0` and the label for `z` is `1`, this step should output:
 ```output
 Added letter_a_stride_30.csv data to the data list with label: 0
 Added letter_z_stride_30.csv data to the data list with label: 1

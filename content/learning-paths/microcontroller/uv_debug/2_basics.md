@@ -85,7 +85,7 @@ When the program is stopped, the list of stacked functions is displayed. This is
 
 The [**Watch**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Watch-Window) and [**Memory**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Memory-Window) windows display variable values in real-time using Arm CoreSight technology. It is also possible to “put” or insert values into these memory locations in real-time using the **Memory** window while the program is running. You can change memory in a **Watch** window if data is not changing fast.
 
-There is a global variable `g_msTicks` located in `Blinky.c` near line 11 we can use in the **Watch** and **Memory** windows.
+There is a global variable `g_msTicks` located in `Blinky.c` near line 11 you can use in the **Watch** and **Memory** windows.
 
 ### Watch Window
 
@@ -111,7 +111,7 @@ You do not need to stop the program execution to enter variables, raw addresses 
 ### Memory Window
 
 1. Right click on `g_msTicks` and select **Add ‘`g_msTicks` ' to…** and select **Memory 1**.
-2. Note the changing value of `g_msTicks` is displaying its address in **Memory 1** as if it is a pointer. This is useful to see what address a pointer is pointing to. But this not what we want to see at this time.
+2. Note the changing value of `g_msTicks` is displaying its address in **Memory 1** as if it is a pointer. This is useful to see what address a pointer is pointing to. But this not what you want to see at this time.
 3. Right click in **Memory 1** and select **Unsigned Long** to see the data field as 32-bit numbers.
 4. Add an ampersand `&` in front of the variable name `g_msTicks` and press Enter. Now the physical address is shown (0x2000_0008) in this case. This physical address could change with different compilation optimizations.
 5. The data contents of `g_msTicks` is displayed as shown:  

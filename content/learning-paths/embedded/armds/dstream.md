@@ -25,7 +25,7 @@ DSTREAM-ST provides full debug capability over JTAG and SWD interfaces, as well 
 
 It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
 
-It is assumed you have access to a DSTREAM unit, and an appropriate development board. For this example, we shall use an [MPS2+](https://developer.arm.com/Tools%20and%20Software/MPS2%20Plus%20FPGA%20Prototyping%20Board) programmed for Cortex-M3 (`AN385`), which is the same hardware as modeled by the FVPs used previously.
+It is assumed you have access to a DSTREAM unit, and an appropriate development board. For this example, you shall use an [MPS2+](https://developer.arm.com/Tools%20and%20Software/MPS2%20Plus%20FPGA%20Prototyping%20Board) programmed for Cortex-M3 (`AN385`), which is the same hardware as modeled by the FVPs used previously.
 
 ## Updating IP Address
 
@@ -37,11 +37,11 @@ Firmware for the DSTREAM family is provided with Arm Development Studio, and gen
 
 ## Create a Platform Configuration for your Hardware
 
-Arm Development Studio is supplied with out-of-the-box configurations for many development boards. This step could be skipped as the MPS2+ platform is provided, but we shall do this to illustrate how to create a configuration for any board.
+Arm Development Studio is supplied with out-of-the-box configurations for many development boards. This step could be skipped as the MPS2+ platform is provided, but this example is to illustrate how to create a configuration for any board.
 
 If not done previously, select `File` > `New` > `Other` > `Configuration Database` > `Configuration Database`, and give it a meaningful name. This is where the debugger stores all user-made configurations.
 
-Then select `File` > `New` > `Other` > `Configuration Database` > `Platform Configuration`, which will be the actual configuration we wish to create. When prompted, select the above `Configuration Database`.
+Then select `File` > `New` > `Other` > `Configuration Database` > `Platform Configuration`, which will be the actual configuration to create. When prompted, select the above `Configuration Database`.
 
 You may then be prompted to ask how to generate such a configuration. Select Automatic, and click Next. Browse for your DSTREAM unit, which should be connected to your target hardware. The unit will interrogate the target and determine which Arm processors are present. Save the configuration with an appropriate name.
 

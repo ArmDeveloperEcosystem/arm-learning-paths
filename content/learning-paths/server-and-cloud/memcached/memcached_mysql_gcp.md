@@ -47,7 +47,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 ## Create GCP instances using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`. Here we are creating 2 instances.
+Using a text editor, save the code below in a file called `main.tf`. Here you are creating 2 instances.
     
 ```console
 provider "google" {

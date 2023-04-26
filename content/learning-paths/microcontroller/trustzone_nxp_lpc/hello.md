@@ -41,5 +41,4 @@ Both strings are equal!
 
 As shown by the printed messages, the application boots in secure world and then switches to the non-secure world. From the non-secure world it calls from secure functions and then exits. 
 
-In the following section we will break down the application we ran to elaborate on some of the key Trustzone concepts used in this application.
-
+In the following section you will learn some of the key Trustzone concepts used in this application.

@@ -91,7 +91,7 @@ These are the basic template files generated for an AXI-Lite peripheral. You can
     assign led[3:0] = slv_reg1[3:0];
     ```
 
-12. Save the changes in the file (Ctrl+S). Next, go to the “Package IP – AUP_advanced_SoC” tab, choose the “Customization Parameters” option on the left and click “Merge Changes  from Customization Parameters Wizard” to update the IP package with the changes we made in HDL files:
+12. Save the changes in the file (Ctrl+S). Next, go to the “Package IP – AUP_advanced_SoC” tab, choose the “Customization Parameters” option on the left and click “Merge Changes from Customization Parameters Wizard” to update the IP package with the changes made in HDL files:
 
     ![. Saving all the changes](Images/Picture12.png) 
 

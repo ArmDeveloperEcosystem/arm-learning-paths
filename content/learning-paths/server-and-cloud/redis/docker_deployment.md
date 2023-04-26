@@ -135,7 +135,7 @@ Using a text editor, save the code below to in a file called `playbook.yaml`. Th
 ```
 Replace `{password}` with your value.
 
-To access the Redis server running inside the Docker container on port `6379`, we need to expose it to any available port on the machine using `-p {port_no_of_machine}:6379` argument. We need to replace `{port_no_of_machine}` with its respective value. In our example, we have used port number `6000`.
+To access the Redis server running inside the Docker container on port `6379`, you need to expose it to any available port on the machine using `-p {port_no_of_machine}:6379` argument. Replace `{port_no_of_machine}` with its respective value. In this example, you have used port number `6000`.
 
 ### Ansible Commands
 
@@ -186,7 +186,7 @@ ansible-target1            : ok=7    changed=6    unreachable=0    failed=0    s
 ## Connecting to the Redis server from local machine
 
 Execute the steps below to connect to the remote Redis server from your local machine.
-1. We need to install redis-tools to interact with redis-server.
+1. Install redis-tools to interact with redis-server.
 ```console
 apt install redis-tools
 ```
