@@ -8,7 +8,7 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, we will deploy the model directly on the STM32 board.
+In this section, you will deploy the model directly on the STM32 board.
 
 ## Setup STM32CubeMX project
 
@@ -27,7 +27,7 @@ In this section, we will deploy the model directly on the STM32 board.
 
 ## Validate the NN model
 
-We will now validate the NN model we built in the previous section on the desktop and the development board.
+You will now validate the NN model built in the previous section on the desktop and the development board.
 
 ### Validate on desktop
 
@@ -39,7 +39,7 @@ We will now validate the NN model we built in the previous section on the deskto
 
 ### Validate on development board
 
-To validate the model on the target, we need to first generate code and install the code on the target.
+To validate the model on the target, you need to first generate code and install the code on the target.
 
 6. Click `Validate on target`, and enable `Automatic compilation and download`. Select the appropriate toolchain (`STM32CubeIDE`), and click `OK`.
 
@@ -72,7 +72,7 @@ You can create your own application from the model you have trained.
 
 1. Open the list of Software Packages. Change the device application as `Application`.
 2. Click `Generate Code` then the project is updated.
-3. Open `STM32CubeIDE`. Since we re-generated the code again, we need to delete the existing project and import the project again.
+3. Open `STM32CubeIDE`. Since you re-generated the code again, you need to delete the existing project and import the project again.
 4. Open `X-CUBE-AI/App/app_x-cube-ai.c`. This is the auto-generated code by `STM32CubeMX`.
 5. Between `USER_CODE_BEGIN` and `USER_CODE_END`, you can write code for your application.
 

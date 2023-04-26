@@ -14,7 +14,7 @@ As one of the key applications in the field of Computer Vision (CV), Optical Cha
 ![Example of English text recognition #center](./Figure1.png "Figure 1. Example of English text recognition (Image source: https://iapr.org/archives/icdar2015/index.html)")
 
 
-In this blog, we apply Deep Learning (DL) to the OCR text recognition task and show you an end-to-end development workflow all the way from model training to application deployment. You will learn how to:
+In this learning path, you will apply Deep Learning (DL) to the OCR text recognition task and show you an end-to-end development workflow all the way from model training to application deployment. You will learn how to:
 - Use [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) to obtain a trained English text recognition model
 - Export the Paddle inference model 
 - Compile the Paddle inference model with [TVMC](https://tvm.apache.org/docs/tutorial/tvmc_command_line_driver.html#sphx-glr-tutorial-tvmc-command-line-driver-py) for target device

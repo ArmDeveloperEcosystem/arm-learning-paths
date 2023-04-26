@@ -16,7 +16,7 @@ Alternatively you can install [Arm Compiler for Embedded](/install-guides/armcla
 
 See [Prepare Docker image for Arm embedded development](/learning-paths/cross-platform/docker/) for an example Docker image containing all these tools.
 
-We shall use the `FVP_Base_Cortex-A73x2-A53x4` platform, which is a complex FVP system, containing two processor clusters.
+Use the `FVP_Base_Cortex-A73x2-A53x4` platform, which is a complex FVP system, containing two processor clusters.
 
 ## Armv8-A Architecture
 
@@ -24,7 +24,7 @@ This learning path assumes some knowledge of [Armv8-A Architecture](https://deve
 
 ## "Hello World!"
 
-Let's start with a simple C program, and use the `armclang` compiler and `armlink` linker tools to compile and generate an executable image.
+Start with a simple C program, and use the `armclang` compiler and `armlink` linker tools to compile and generate an executable image.
 
 Use your favorite editor to create a new source file called `hello.c` with the following contents:
 #### hello.c
@@ -44,7 +44,7 @@ armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a hello.c
 ```
 
 The options used in this command are:
-- `-c` tells the compiler to stop after compiling to object code. We will perform the link step to create the final executable in the next step.
+- `-c` tells the compiler to stop after compiling to object code. The link step to create the final executable will be performed later.
 - `-g` tells the compiler to include debug information in the image.
 - `--target=aarch64-arm-none-eabi` tells the compiler to target the Armv8-A AArch64 ABI.
 - `-march=armv8-a` explicitly selects the architecture version. Alternatively you can specify a particular processor with `-mcpu`.
@@ -53,7 +53,7 @@ Create an executable image by linking the object using armlink. This generates a
 ```console
 armlink hello.o -o hello.axf
 ```
-We have not yet specified an entry point, and so the entry point defaults to` __main()` in the Arm libraries. These libraries perform a number of setup activities, including:
+An entry point has not yet been specified, and so the entry point defaults to` __main()` in the Arm libraries. These libraries perform a number of setup activities, including:
 
 - Copying all the code and data from the image into memory.
 - Setting up an area of memory for the application stack and heap.
@@ -63,7 +63,7 @@ We have not yet specified an entry point, and so the entry point defaults to` __
 
 If you tried to execute the image that you created in the last step on the `FVP_Base_Cortex-A73x2-A53x4 model`, it would not run. This is because the default memory map used by `armlink` does not match the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map) of the FVP.
 
-We must specify a memory map that matches the target and allows the image to run successfully. To do this, we will use a linker feature known as [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features).
+You must specify a memory map that matches the target and allows the image to run successfully. An Arm linker feature known as [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features) is used.
 
 Create a file `scatter.txt` with the following contents:
 #### scatter.txt
@@ -95,7 +95,7 @@ ROM_LOAD 0x00000000 0x00010000
 {...}
 ```
 
-Within the `load region` we define `execution region(s)`, where the code/data will be located at run-time:
+Within the `load region` define `execution region(s)`, where the code/data will be located at run-time:
 ```output
   ROM_EXEC +0x0 0x10000
   {
@@ -105,7 +105,7 @@ Within the `load region` we define `execution region(s)`, where the code/data wi
 ```
 An execution region is called a `root region` if it has the same load-time and execute-time address. The initial entry point of an image must be in a root region, as this is executed before scatterloading can occur to relocate that code. You can use the `InRoot$$Sections` section name to ensure the appropriate C library code for scatterloading is in this section (useful when there are multiple code regions).
 
-In our scatter file, all read-only (`RO`) code/data (including the entry point `__main()`) is placed in the `ROM_EXEC` root region.
+In the scatter file, all read-only (`RO`) code/data (including the entry point `__main()`) is placed in the `ROM_EXEC` root region.
 ```output
   RAM_EXEC 0x04000000 0x10000
   {
@@ -114,7 +114,7 @@ In our scatter file, all read-only (`RO`) code/data (including the entry point `
 ```
 `RAM_EXEC` contains any read-write (`RW`) or zero-initialised (`ZI`) data. Because this has been located at a different address (0x04000000, in SRAM), it is not a root region.
 
-Region names (such as `ROM_LOAD`, `ROM_EXEC`, and `RAM_EXEC` above) are arbitrary. However there are reserved names for the Stack and Heap regions. We use a single region (`ARM_LIB_STACKHEAP`) for both.
+Region names (such as `ROM_LOAD`, `ROM_EXEC`, and `RAM_EXEC` above) are arbitrary. However there are reserved names for the Stack and Heap regions. Use a single region (`ARM_LIB_STACKHEAP`) for both.
 ```output
 ARM_LIB_STACKHEAP 0x04010000 EMPTY 0x10000{}
 ```
@@ -133,4 +133,4 @@ The code executes on the FVP, and the message "Hello World!" appears on screen.
 
 ## -C pctl.startup=0.0.1.0
 
-This particular FVP was chosen as it implements two multi-core processor clusters therein. By default, this model starts all processors in the model running. Use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should run. we will address this in the next section.
+This particular FVP was chosen as it implements two multi-core processor clusters therein. By default, this model starts all processors in the model running. Use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should run. This will be addressed in the next section.

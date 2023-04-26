@@ -21,7 +21,7 @@ Click `OK` to save.
 
 ## Add Event Recorder to main
 
-We must add a function call to initialize the event recorder. Open `main.c` in the editor.
+Add a function call to initialize the `event recorder`. Open `main.c` in the editor.
 
 Include the header file:
 ```C
@@ -98,7 +98,7 @@ id=0x0001	0x00000002, 0x00000000
 ```
 ## Component Viewer
 
-To make these events more meaningful in the Event Recorder viewer, we can use the [Component Viewer](https://www.keil.com/pack/doc/compiler/EventRecorder/html/cv_use.html) functionality.
+To make these events more meaningful in the Event Recorder viewer, use the [Component Viewer](https://www.keil.com/pack/doc/compiler/EventRecorder/html/cv_use.html) functionality.
 
 Create a [Component Viewer Description File](https://www.keil.com/pack/doc/compiler/EventRecorder/html/SCVD_Format.html) (e.g. `rtos.scvd`) with the following:
 ```xml

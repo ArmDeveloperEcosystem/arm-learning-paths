@@ -13,7 +13,7 @@ There are four ways to run VS Code in WSL:
 - Use VS Code Remote Tunnels
 - Use OpenVSCode Server
 
-Let's look at each of these options.
+This learning path will explore each of these options.
 
 ## Native on Windows
 

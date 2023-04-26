@@ -79,7 +79,7 @@ For example, the `ReleaseID` of `Arm Development Studio`, version `2022.2`, is `
 
 Finally, you must determine the `ArtifactID`, which is the specific package to download.
 
-To determine the `ArtifactID`, we need the `ProductID` and `ReleaseID` from above:
+To determine the `ArtifactID`, you need the `ProductID` and `ReleaseID` from above:
 ```cmd
 edmgr artifacts -e <ProductID> -r <ReleaseID>
 ```

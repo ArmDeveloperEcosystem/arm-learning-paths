@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 Though Cortex-M processors have been designed so that all operations can be programmed with C/C++ code, it can be useful to also understand how to create assembler level code, which can be more efficient than compiler generated code.
 
-We will write assembly level functions conforming to the [Arm Procedure Call Standard](https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst).
+You will write assembly level functions conforming to the [Arm Procedure Call Standard](https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst).
 
 [Keil MDK](https://www2.keil.com/mdk5) is used as the toolchain. For installation instructions, see [here](/install-guides/mdk/).
 
@@ -17,7 +17,7 @@ We will write assembly level functions conforming to the [Arm Procedure Call Sta
 
 This learning path is based on examples from the [Efficient Embedded Systems Education Kit](https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit), which uses the [Nucleo-F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html) development board.
 
-Here we will use the Cortex-M4 Fixed Virtual Platform provided with MDK.
+You will use the Cortex-M4 Fixed Virtual Platform provided with MDK.
 
 ## Create MDK Project
 

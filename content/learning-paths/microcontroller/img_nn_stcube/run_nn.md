@@ -7,7 +7,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-For testing, we are going to use a custom python tool for sending images to the board. The tool is provided by STMicroelectronics.
+For testing, use a custom python tool for sending images to the board. The tool is provided by STMicroelectronics.
 
 ## Anaconda setup
 
@@ -45,7 +45,7 @@ Select the network and the label file (`Data/labels/cifar10_labels.txt`)
 
 Open an image to test. The tool will automatically launch a new pane, and show the inference result.
 
-We can see that the model correctly predicted the label. In addition, we can see the time taken to finish the prediction.
+Observe that the model correctly predicted the label. In addition, note the time taken to finish the prediction.
 
 ![output11](Images/lab4_11.PNG)
 

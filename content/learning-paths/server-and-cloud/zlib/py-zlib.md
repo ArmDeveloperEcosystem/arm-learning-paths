@@ -16,7 +16,7 @@ sudo apt install python-is-python3 -y
 
 The previous section explained how to build the Cloudflare `zlib` which includes the use of `crc32` instructions to improve performance on data compression. 
 
-Let's use a Python example and measure the performance difference with `zlib-cloudflare`.
+Use a Python example and measure the performance difference with `zlib-cloudflare`.
 
 Copy and save the file below as `zip.py`
 

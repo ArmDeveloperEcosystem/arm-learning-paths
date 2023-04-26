@@ -54,9 +54,11 @@ Create these secrets from the following `Stack Key` values:
 
 ## Set up GitHub Actions
 
-The example project contains two different CI/CD workflows. For convenience, we shall disable `blinky` workflow. Navigate to the `Actions` tab of your project repository, and select the `Arm Virtual Hardware Blinky example` action. Click the `meatball menu` (three dots) button, and select `Disable workflow`.
+The example project contains two different CI/CD workflows. For convenience, disable the `blinky` workflow.
 
-Next, navigate to the `./github/workflows/basic.yml` file, which defines the workflow that we intend to run. Observe that the above `secrets` are used by the workflow:
+Navigate to the `Actions` tab of your project repository, and select the `Arm Virtual Hardware Blinky example` action. Click the `menu` (three dots) button, and select `Disable workflow`.
+
+Next, navigate to the `./github/workflows/basic.yml` file, which defines the workflow that you intend to run. Observe that the above `secrets` are used by the workflow:
 ```yaml
 # TO DO - PUSH THESE CHANGES TO THE MAIN REPO
 # FOR NOW, OVERWRITE basic.yml WITH THESE CODE SNIPPETS

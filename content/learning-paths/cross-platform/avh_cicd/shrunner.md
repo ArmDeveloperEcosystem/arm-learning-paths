@@ -13,7 +13,7 @@ In this section you will learn how to integrate Arm Virtual Hardware into a CI/C
 
 Open your browser, and navigate to your fork of the example repository.
 
-Navigate to `Actions`. If prompted that `workflows` have been disabled, click the `I understand my workflows, go ahead and enable them` button.
+Navigate to `Actions`. If prompted that `workflows` have been disabled, click `I understand my workflows, go ahead and enable them` button.
 
 ## Create a Self-hosted Runner
 
@@ -33,7 +33,6 @@ Return to the original terminal, and edit `command_responder.cc` source file for
 ```console
 nano ../micro_speech/src/command_responder.cc
 ```
-We will not rebuild and re-run at this step.
 
 ## Update the GitHub repository
 

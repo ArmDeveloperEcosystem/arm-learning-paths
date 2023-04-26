@@ -12,10 +12,10 @@ layout: "learningpathall"
 
 You can deploy MySQL in a Docker container using Ansible. 
 
+
 ## Before you begin
 
 For this section you will need a computer which has [Ansible](/install-guides/ansible/) installed. You can use the same SSH key pair. You also need a cloud instance or VM, or a physical machine with Ubuntu installed, running and ready to deploy MySQL.
- 
  
 ## Deploy a MySQL container using Ansible
 
@@ -93,7 +93,6 @@ Replace **{{public_ip of VM where MySQL to be deployed}}** and **{{user_of VM wh
 ```bash
 ansible-playbook playbook.yaml -i {your_inventory_file_location}
 ```
-
 2. Answer `yes` when prompted for the SSH connection. 
 
 Deployment may take a few minutes. 

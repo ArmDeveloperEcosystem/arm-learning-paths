@@ -7,9 +7,9 @@ weight: 4 # (intro is 1), 2 is first, 3 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-To further measure the performance of MongoDB, we will run the [Yahoo Cloud Serving Benchmark](http://github.com/brianfrankcooper/YCSB).
+To further measure the performance of MongoDB, you will run the [Yahoo Cloud Serving Benchmark](http://github.com/brianfrankcooper/YCSB).
 
-[YCSB](https://research.yahoo.com/news/yahoo-cloud-serving-benchmark/) is an open sourced project which provides the framework and common set of workloads to evaluate the performance of different "key-value" and "cloud" serving stores. Here we will list out the steps to run YCSB to evaluate the performance of MongoDB running on 64-bit Arm machine.
+[YCSB](https://research.yahoo.com/news/yahoo-cloud-serving-benchmark/) is an open sourced project which provides the framework and common set of workloads to evaluate the performance of different "key-value" and "cloud" serving stores. Here are the steps to run YCSB to evaluate the performance of MongoDB running on 64-bit Arm machine.
 
 ## Additional software packages
 
@@ -62,7 +62,7 @@ To test the performance of loading data(INSERT) into default database `ycsb` at 
 ```console
 ./bin/ycsb load mongodb-async -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
 ```
-The "-P" parameter is used to load property files. In this example, we used it load the workloada parameter file which sets the recordcount to 1000 in addition to other parameters. The "-threads" parameter indicates the number of threads and is set to 1 by default.
+The "-P" parameter is used to load property files. In this example, you used it load the workloada parameter file which sets the recordcount to 1000 in addition to other parameters. The "-threads" parameter indicates the number of threads and is set to 1 by default.
 
 
 To load/insert data using the synchronous driver instead run the following command:

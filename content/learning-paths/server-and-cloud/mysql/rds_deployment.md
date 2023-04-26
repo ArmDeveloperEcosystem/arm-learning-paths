@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Deploy MySQL using Amazon RDS (Relational Database Service)
 
-RDS is a Relational database service provided by AWS. More information can be found [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html). To deploy a MySQL RDS instance, we need to create a `main.tf` Terraform file.
+RDS is a Relational database service provided by AWS. More information can be found [here](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html). To deploy a MySQL RDS instance, Create a `main.tf` Terraform file.
 To generate and configure the Access key ID and Secret access key, follow the instructions mentioned in this [guide](/install-guides/aws_access_keys).
 
 Here is the complete main.tf file:
@@ -41,11 +41,11 @@ resource "aws_db_instance" "Testing_Mysql" {
 }
 ``` 
 
-To find the correct instance type for RDS, Check the [list](https://aws.amazon.com/rds/mysql/instance-types/) of supported instance types. We selected a Graviton (Arm) based instance type.
+To find the correct instance type for RDS, Check the [list](https://aws.amazon.com/rds/mysql/instance-types/) of supported instance types. Select a Graviton (Arm) based instance type.
 
 ![Screenshot (260)](https://user-images.githubusercontent.com/92315883/209249327-3755d7ef-581b-456c-a64b-e2167080dd59.png)
 
-We also need to create a `credential.tf` file, for passing our secret keys and password. Here is the file content:
+Create a `credential.tf` file, for passing your secret keys and password. Here is the file content:
 
 ```console
 variable "username"{
@@ -94,14 +94,14 @@ To verify the setup on AWS console. Go to **RDS » Databases**, you should see t
 
 ## Connect to RDS using EC2 instance
 
-To access the RDS instance, we need to make sure that our instance is correctly associated with a security group and VPC. To access RDS outside the VPC, Follow this [document](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.Connect.html).
+To access the RDS instance, make sure that your instance is correctly associated with a security group and VPC. To access RDS outside the VPC, Follow this [document](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_CommonTasks.Connect.html).
 
-To connect to the RDS instance, we need the `Endpoint` of the RDS instance. To find the Endpoint, Go to **RDS » Dashboard » {{YOUR_RDS_INSTANCE}}**.
+To connect to the RDS instance, you need the `Endpoint` of the RDS instance. To find the Endpoint, Go to **RDS » Dashboard » {{YOUR_RDS_INSTANCE}}**.
 
 ![Screenshot (280)](https://user-images.githubusercontent.com/92315883/209741254-55b40b52-1c56-482a-ab48-e33f510a1cf6.png)
 
 
-Now, we can connect to RDS with the MySQL Client installed locally using the above Endpoint. Use the `username` and `password` mentioned in the `credential.tf` file.
+Now, connect to RDS with the MySQL Client installed locally using the above Endpoint. Use the `username` and `password` mentioned in the `credential.tf` file.
 
 ```bash { output_lines="2-15"}
 mysql -h {{Endpoint}} -u admin -pArm4test

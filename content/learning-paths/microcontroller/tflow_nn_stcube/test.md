@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Create a model
 
-Now we are going to train a multi-layer perceptron model with the dataset. Define a multi-layer perceptron model with 3 dense layers.
+Now you will train a multi-layer perceptron model with the dataset. Define a multi-layer perceptron model with 3 dense layers.
 
 ```python
 x_train, y_train = sklearn.utils.shuffle(np.array(data), np.array(labels))
@@ -75,15 +75,15 @@ plt.ylabel('Loss')
 plt.ylim([0, 1000])
 plt.legend(loc='lower right')
 ```
-In this example, see that the training and validation accuracy start to converge after around 150 epochs. This means that the 200 epochs are enough to train the model. If we train the model for too many epochs, then the validation accuracy may drop due to overfitting. If you experience this, re-run [training](#train) with an appropriate epoch value.
+In this example, see that the training and validation accuracy start to converge after around 150 epochs. This means that the 200 epochs are enough to train the model. If you train the model for too many epochs, then the validation accuracy may drop due to overfitting. If you experience this, re-run [training](#train) with an appropriate epoch value.
 
 ![output2](Images/output2.PNG)
 
 ## Investigate learning rate (optional)
 
-For training the model, we used the default learning rate. But how will the model change with different learning rates? If the learning rate is too high, the model is more likely to overshoot the minima, meaning that the model cannot converge to the minima. On the other hand, if the learning rate is too low, the model reaches the minima too slowly, requiring more training time.
+For training the model, you used the default learning rate. But how will the model change with different learning rates? If the learning rate is too high, the model is more likely to overshoot the minima, meaning that the model cannot converge to the minima. On the other hand, if the learning rate is too low, the model reaches the minima too slowly, requiring more training time.
 
-Let's first try a high learning rate. Here, I set the learning rate of the optimizer as 1000. Execute the code block. This graph shows the training and validation loss values over epoch. You can see that the loss values fluctuate a lot so the model has difficulty in reaching the minima.
+First try a high learning rate. Here, I set the learning rate of the optimizer as 1000. Execute the code block. This graph shows the training and validation loss values over epoch. You can see that the loss values fluctuate a lot so the model has difficulty in reaching the minima.
 
 ```python
 # High learning rate (lr = 1000)
@@ -104,7 +104,7 @@ Expected output shown below:
 
 ![output3](Images/output3.PNG)
 
-Now let's try a lower learning rate, which is 0.0001. Execute the code block. The graph shows the training and validation loss values decrease much more slowly. So, it is important to use a proper learning rate in training.
+Now try a lower learning rate, which is 0.0001. Execute the code block. The graph shows the training and validation loss values decrease much more slowly. So, it is important to use a proper learning rate in training.
 
 ```python
 # Low learning rate (lr = 0.0001)
@@ -126,11 +126,11 @@ Expected output shown below:
 
 ![output4](Images/output4.PNG)
 
-With the model trained, we are now ready to test it.
+With the model trained, you are now ready to test it.
 
 ## Test the model
 
-To test the model we trained, run the code block shown below. 
+To test the model you trained, run the code block shown below. 
 
 ```python
 input('Press Enter once MCU is ready')
@@ -146,7 +146,7 @@ z = new_df['Z'].to_numpy()
 inf_data = np.array([x, y, z])
 plot_single_sample(data_sample=inf_data.reshape((3, stride)))
 
-# For inference we have to explicitly tell that the data has a batch size of 1
+# For inference you have to explicitly tell that the data has a batch size of 1
 inf_data = inf_data.reshape((1, 3, stride))
 
 pred = model.predict(inf_data)

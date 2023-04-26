@@ -280,7 +280,7 @@ terraform plan
 
 **Key points:**
 
-* The **terraform plan** command is optional. We can directly run **terraform apply** command. But it is always better to check the resources about to be created.
+* The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
 * The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
 
 ### Apply Terraform execution plan

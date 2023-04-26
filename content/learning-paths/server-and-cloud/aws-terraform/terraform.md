@@ -40,7 +40,7 @@ Terraform files are created with a  **.tf** extension. Start by creating a `main
 
 ### Provider
 
-Tell `Terraform` which cloud provider we are going to connect, `AWS` for this example. 
+Tell `Terraform` which cloud provider to connect to, `AWS` for this example. 
 
 Here is the basic syntax for the provider:
 ```console
@@ -61,8 +61,8 @@ This is how `main.tf` will look like for AWS:
 ```
 
 ### Resource - "aws_instance"
-Next, after defining the provider, we are going to define the resource. Resource is something that we are going to provision/start on AWS. We are going to provision an EC2 instance on AWS.
-But before we provision the EC2 instance, we need to gather a few points -
+Next, after defining the provider, define the resource. Resource is something to provision/start on AWS. You will provision an EC2 instance on AWS.
+But before you provision the EC2 instance, you need to gather a few points -
    
 1. **ami** = you need to tell Terraform which AMI(Amazon Machine Image) you are going to use. Is it going to be Ubuntu, CentOS or something else
 2. **instance_type** = Also based on your need you have to choose the instance_type and it can be t4g.nano, t4g.micro, t4g.small etc.
@@ -83,7 +83,7 @@ copy the AMI ID from the search result.
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png "AMI ID")
 
 ### How to find correct instance_type
-We can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
+YOu can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
 For a very basic instance_type not production level instance, choose **t4g.nano**
 
 Shown below is the aws_instance configuration:

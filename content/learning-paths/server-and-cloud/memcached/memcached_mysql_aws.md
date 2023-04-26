@@ -612,7 +612,7 @@ telnet localhost 11211
 ```console
 get <key>
 ```
-**NOTE:-** Key is the variable in which we store the data. In the above command, we are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
+**NOTE:-** Key is the variable in which to store the data. In the above command, you are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
 
 The output will be:
 
