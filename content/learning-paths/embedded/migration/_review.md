@@ -19,16 +19,25 @@ review:
             - "NEON and SVE"
         correct_answer: 2
         explanation: >
-            NEON and SVE and supported by Neoverse V1, Neoverse N2 or Cortex-X2.
+            NEON and SVE and supported by Neoverse V1, Neoverse N2 and Cortex-X2.
     - questions:
         question: >
-            Should I rewrite all my code when migrating to aarch64?
+            Do I need rewrite all my code when migrating to aarch64?
         answers:
             - "True"
             - "False"
         correct_answer: 2
         explanation: >
             Most applications can be migrated without rewriting any code. Common libraries and tools are already available on aarch64. If your application uses intrinsics, you can use tools like SIMD Everywhere with minimal code changes.
+    - questions:
+        question: >
+            If I don't have physical access to Arm hardware, can I still start migrating to Arm?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 1
+        explanation: >
+            Migration to Arm can be done without physical access to Arm hardware by using e.g., QEMU or remote hardware. A cross-platform built container can run in QEMU and a user can easily access AWS Graviton remote using ssh. Don't forget, the very first step is to analyze the current system!
 
 
 # ================================================================================
