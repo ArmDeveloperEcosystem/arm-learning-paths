@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Basic run/stop debugging"
+title: "Use basic run/stop debug"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,13 +8,15 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Before you begin
 
-To follow the tutorial, please clone or download the [Blinky example project repo](https://github.com/Arm-Examples/Blinky_AVH_uV). Double-click the `Blinky.uvprojx` file to open it in µVision.
+To follow the instructions in this learning path, clone or download the [Blinky example project repo](https://github.com/Arm-Examples/Blinky_AVH_uV) on the same machine where you have installed Arm Keil MDK and the Corstone-300 Ecosystem FVP. Double-click the `Blinky.uvprojx` file to open it in µVision.
 
 ## Hardware Breakpoints
 
-1. ![Build](./b_uv4_build_target.png) **Build (F7)** the example project.
+To use hardware breakpoints in µVision follow the steps outlined below:
+
+1. ![Build](./b_uv4_build_target.png) **Build (F7)** the example Blinky project you opened.
 1. ![Start debug](./b_uv4_debug.png) **Start a Debug Session (Ctrl+F5)** to enter the µVision debugger.
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 1. Bring `Blinky.c` in focus by clicking on its tab. If it is not visible, double-click on it in the **Project** window.
@@ -29,7 +31,7 @@ To follow the tutorial, please clone or download the [Blinky example project rep
 8. Each time you click on ![Run](./b_uv4_run.png) **Run (F5)**, the program will cycle to the next breakpoint.
 
 {{% notice Notes %}}
-- Sometimes the compiler will optimize out code. Breakpoints cannot be set on this code as evidenced by the lack of the grey blocks. Setting the compiler to an optimization level of `-O0` will usually help (this is set in this example project already).
+- Sometimes the compiler will optimize out code. Breakpoints cannot be set on this code as shown by the lack of grey blocks. Setting the compiler to an optimization level of `-O0` will usually help (this is set in this example project already).
 - You can set/unset hardware breakpoints with μVision while the program is running or stopped.
 - Arm hardware breakpoints are no skid. They do not execute nor change the instruction they are set to.
 - Your instructions in flash are not substituted or modified. Your flash contents are not changed.
@@ -60,7 +62,7 @@ When the program is stopped, the list of stacked functions is displayed. This is
 
 1. Stop the program with the ![Stop](./b_uv4_stop.png) **Stop** icon. The program will probably stop in the `Delay` function.
 2. Click on the **Call Stack + Locals** window in the bottom right corner of μVision.
-3. Inspect the various entries in the Call Stack + Locals window as shown below right in this very simple example. Local variables are displayed only when they are in scope:  
+3. Inspect the various entries in the Call Stack + Locals window as shown below in this simple example. Local variables are displayed only when they are in scope:  
    ![Call Stack + Locals Window](./callStackLocals.png)  
 1. Set a breakpoint in the `while (1)` loop at line 50 on the `g_ledSet = 1;`.
 5. ![Run](./b_uv4_run.png) **Run (F5)** the application.
@@ -76,16 +78,16 @@ When the program is stopped, the list of stacked functions is displayed. This is
 {{% notice Notes %}}
 - You can modify a variable value in the **Call Stack & Locals** window when the program is stopped.
 - This window is only valid when the processor is halted. It does not update while the program is running because locals are normally kept in a CPU register which cannot be read by the debugger while the program is running. Any local variable values are visible only when they are in scope.
-- This is standard “run/stop” debugging. Arm CoreSight debugging technology can do much better than this. You can display global or static variables and structures updated in real-time while the program is running. No additions or changes to your code are required. They only must be converted to global or static variables so they always remain in scope.
-- When Keil RTX5 is used, all threads are displayed, even if not running. The active thread name and its number are highlighted in green.
+- This is standard “run/stop” debugging. With Arm CoreSight debug technology you can do more. You can display global or static variables and structures updated in real-time while the program is running. No additions or changes to your code are required. They only must be converted to global or static variables so they always remain in scope.
+- When Keil RTX5 is used, all threads are displayed, even if they are not running. The active thread name and its number are highlighted in green.
 - Single ![Step into](./b_uv4_stepinto.png) **Step (F11)**: If you click inside a source window to bring it into focus, the program will step one source line at a time. If you click inside the **Disassembly** window to bring it into focus, it will then step one instruction at a time.
 {{% /notice %}}
 
 ## Watch and Memory Windows
 
-The [**Watch**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Watch-Window) and [**Memory**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Memory-Window) windows display variable values in real-time using Arm CoreSight technology. It is also possible to “put” or insert values into these memory locations in real-time using the **Memory** window while the program is running. You can change memory in a **Watch** window if data is not changing fast.
+The [**Watch**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Watch-Window) and [**Memory**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Memory-Window) windows display variable values in real-time using Arm CoreSight technology. It is also possible to `put` or insert values into these memory locations in real-time using the **Memory** window while the program is running. You can change memory in a **Watch** window if data is not changing fast.
 
-There is a global variable `g_msTicks` located in `Blinky.c` near line 11 you can use in the **Watch** and **Memory** windows.
+There is a global variable `g_msTicks` located in `Blinky.c` near line 11 that you can use in the **Watch** and **Memory** windows.
 
 ### Watch Window
 
@@ -120,17 +122,17 @@ You do not need to stop the program execution to enter variables, raw addresses 
 7. ![Stop](./b_uv4_stop.png) **Stop** the application.
 
 {{% notice Notes %}}
-- You can configure the **Watch** and **Memory** windows while the program is running in real-time without stealing any CPU cycles. You can change a Memory window value on-the-fly.
+- You can configure the **Watch** and **Memory** windows while the program is running in real-time without using any CPU cycles. You can change a Memory window value on-the-fly.
 - [**View - Periodic Window Update**](https://developer.arm.com/documentation/101407/latest/User-Interface/View-Menu) must be selected. Otherwise variables update only when the program is stopped.
 {{% /notice %}}
 
 #### How It Works
 
-μVision uses Arm CoreSight technology to read or write memory locations without stealing CPU cycles. Most of the time, this is non-intrusive and does not impact the program execution timings. The Armv7-M/Armv8-M are Harvard architectures. This means they have separate instruction and data buses. While the CPU is fetching instructions at full speed, there is plenty of time for the CoreSight debug module to read or write to memory without stealing any CPU cycles. This can be slightly intrusive in the unlikely event the CPU and μVision reads or writes to the same memory location at exactly the same time. Then the CPU will be stalled for one clock cycle. In practice, this cycle stealing never happens.  
+μVision uses Arm CoreSight technology to read or write memory locations without using CPU cycles. Most of the time, this is non-intrusive and does not impact the program execution timings. The Armv7-M/Armv8-M are Harvard architectures. This means they have separate instruction and data buses. While the CPU is fetching instructions at full speed, there is plenty of time for the CoreSight debug module to read or write to memory without stealing any CPU cycles. This can be slightly intrusive in the unlikely event the CPU and μVision reads or writes to the same memory location at exactly the same time. Then the CPU will be stalled for one clock cycle. In practice, this use of additional CPU cycles never happens.  
 
 ## System Viewer
 
-The [**System Viewer**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/System-Viewer) provides the ability to view certain registers of peripherals and the CPU core. In many cases, these windows are updated in real-time while your program is running. They are available only while in debug mode. Go to **Peripherals - System Viewer** to open the peripheral windows. Select CPU core registers by going to **Peripherals - Core Peripherals**.
+The [**System Viewer**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/System-Viewer) provides the ability to view certain registers of peripherals and the CPU core. In many cases, these windows are updated in real-time while your program is running. They are available only in debug mode. Go to **Peripherals - System Viewer** to open the peripheral windows. Select CPU core registers by going to **Peripherals - Core Peripherals**.
 
 #### SysTick Timer
 
@@ -143,7 +145,7 @@ The example application uses the Arm Cortex-M system tick timer.
 6. While the program is running, type `0x10000` in the `SysTick -> LOAD` register and click in another register or press Enter.
 7. The program execution will speed up. This is the power of Arm CoreSight debugging.
 8. Replace LOAD with 0x007CFF. A ![Stop](./b_uv4_stop.png) **Stop** and ![Reset](./b_uv4_reset.png) **Reset** will also accomplish this.
-9. When you are done, ![Stop](./b_uv4_stop.png) **stop** the application and close the **SysTick Tick Timer (SysTick)** window.
+9. When you are done, ![Stop](./b_uv4_stop.png) **Stop** the application and close the **SysTick Tick Timer (SysTick)** window.
 
 {{% notice Notes %}}
 - The [documentation](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Core-Peripherals/Armv8-M-cores/Armv8-M--System-Tick-Timer) provides more information about the **System Tick Timer S (SysTick)** window.
@@ -162,7 +164,7 @@ The example application uses the Arm Cortex-M system tick timer.
 **Watchpoints** can be thought of as conditional (access) breakpoints. Most Armv7-M and Armv8-M based processors have four data comparators. Since each watchpoint uses two comparators, you can configure two of them. The **Logic Analyzer** uses the same comparators in its operations. This means in μVision you must have two variables free in the Logic Analyzer to use watchpoints. μVision supports only one watchpoint.
 
 {{% notice Note %}}
-The following does not work with the modelling technology used in this example. Switch to a real hardware target to use watchpoints.
+The following does not work with the FVP used in this example. Switch to a real hardware target to use watchpoints.
 {{% /notice %}}
 
 ### Configure a Watchpoint
