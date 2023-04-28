@@ -342,4 +342,4 @@ The time taken will vary based on the machine you are using. The output shown is
 Notice the performance improvement from running the application as Arm64EC versus x64.
 {{% /notice %}}
 
-You have sucessfully created and run an application using Arm64EC. 
+You have successfully created and run an application using Arm64EC. 

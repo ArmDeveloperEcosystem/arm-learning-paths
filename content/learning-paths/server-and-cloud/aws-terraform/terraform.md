@@ -83,7 +83,7 @@ copy the AMI ID from the search result.
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png "AMI ID")
 
 ### How to find correct instance_type
-YOu can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
+You can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
 For a very basic instance_type not production level instance, choose **t4g.nano**
 
 Shown below is the aws_instance configuration:

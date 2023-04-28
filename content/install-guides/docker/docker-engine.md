@@ -93,7 +93,7 @@ Replace `get.docker.com` with `test.docker.com` above to use the test version.
 
 ### Linux distributions where get.docker.com isn't supported
 
-Some Linux distributions are not supported by [get.docker.com]((https://get.docker.com))
+Some Linux distributions are not supported by [get.docker.com](https://get.docker.com)
 
 Generally, the supported list is:
 * Ubuntu

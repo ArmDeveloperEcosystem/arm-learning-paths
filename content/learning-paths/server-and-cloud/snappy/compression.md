@@ -21,7 +21,7 @@ The detailed steps below have been tested on `AWS EC2` and `Oracle OCI` Arm-base
 
 ## Install necessary software packages
 
-* GNU gcc and g++ for your Arm Linux distribution. Install using the steps [here](/install-guides/gcc/#native).
+* GNU gcc and g++ for your Arm Linux distribution. Install using the steps [here](/install-guides/gcc/native/).
 * Unzip and make utilities
 ```bash { pre_cmd="sudo apt install -y gcc g++" }
 sudo apt install -y unzip make

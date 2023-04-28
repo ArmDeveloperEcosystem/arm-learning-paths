@@ -14,7 +14,7 @@ You can deploy Memcached as a cache for Postgres on Azure using Terraform and An
 
 In this section, you will deploy Memcached as a cache for Postgres on an Azure instance. 
 
-If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/server-and-cloud/azure/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/server-and-cloud/azure-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -312,8 +312,8 @@ Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 
 Install Postgres and the required dependencies on both the instances.
 
-You can use the same `playbook.yaml` file used in the section, [Deploy Memcached as a cache for Postgres on an AWS Arm based Instance](/learning-paths/server-and-cloud/memcached/memcached_psql_aws#configure-postgres-through-ansible).
-
+You can use the same `playbook.yaml` file used in the section, [Deploy Memcached as a cache for Postgres on an AWS Arm based Instance](/learning-paths/server-and-cloud/memcached_cache/memcached_psql_aws#configure-postgres-through-ansible).
+  
 ### Ansible Commands
 
 Run the playbook using the  `ansible-playbook` command:
@@ -377,11 +377,11 @@ PLAY RECAP *********************************************************************
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/memcached/memcached_psql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/memcached_cache/memcached_psql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
 
 ## Deploy Memcached as a cache for Postgres using Python
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/memcached/memcached_psql_aws#deploy-memcached-as-a-cache-for-postgres-using-python) to deploy Memcached as a cache for Postgres using Python.
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/memcached_cache/memcached_mysql_aws#deploy-memcached-as-a-cache-for-mysql-using-python) to deploy Memcached as a cache for Postgres using Python.
 
 You have successfully deployed Memcached as a cache for PostgreSQL on an Azure Arm based Instance.
 

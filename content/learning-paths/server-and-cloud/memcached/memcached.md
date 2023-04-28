@@ -8,7 +8,7 @@ weight: 2
 
 Launch an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider running an Ubuntu Linux distribution.
 
-Install `gcc` on your instance following the steps [here](/install-guides/gcc/#native).
+Install `gcc` on your instance following the steps [here](/install-guides/gcc/native/).
 
 This learning path has been tested on `AWS` and `Oracle Cloud` platforms.
 
