@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Alternative (Optional)" 
+title: "Evaluating real hardware (Optional)" 
 
 weight: 7 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 7 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-# Alternative (Optional) 
+# Evaluating real hardware (Optional) 
 
 In this section we'll show alternative ways to build the development environment and compile with a different compiler, on Arm hardware. The changes we made in `main.cpp` and `CMakeLists.txt` in [Application porting](../5_application_porting) stay the same when running on actual Arm hardware.
 
@@ -23,17 +23,16 @@ The following Arm hardware has been selected for this guide due to their high av
 ### AWS EC2
 
 The Graviton instances are Arm and in this example two different have been selected because they use different vector engine technologies.
-* Graviton2 (t4g.medium)
+* Graviton2 (c6g.medium)
   * Ubuntu 22.04.2 LTS,
   * 16GB storage (default is 8GB)
   * Arm Neoverse N1
-    * NEON 128b vector width
+    * 2 x NEON engine 128b vector width
 * Graviton3 (c7g.medium)
   * Ubuntu 22.04.2 LTS
   * 16GB storage (default is 8GB)
   * Arm Neoverse V1
-    * SVE 256b vector width
-      * SVE can run NEON instructions
+    * 2 x SVE engine 256b vector width (4 x NEON engine 128b vector width support)
 
 For more information on Graviton, see [AWS Graviton Getting Started](https://github.com/aws/aws-graviton-getting-started).
 

@@ -32,10 +32,10 @@ In the results presented below, a value >1 is faster and a value <1 is slower in
 | OpenCV   | 0.02 |
 
 The results in the table above have been normalized to the _QEMU Non-SIMD_ value, giving the relative speed-up. We observe the following: 
-* the non-SIMD implementation is the fastest
+* the non-SIMD implementation is the fastest but does not reflect the performance on an `aarch64` system
 
 ## Closing notes
 
 You have now ported an `x86_64` application to `aarch64`, built and run the ported application on `aarch64` using emulation, well done!
 
-Next, check out [Alternative (Optional)](../8_alternative), or jump straight to the [Review](../_review) to test your knowledge and [Next Steps](../_next-steps) for further reading.
+Next, check out [Evaluating real hardware](../7_alternative), or jump straight to the [Review](../_review) to test your knowledge and [Next Steps](../_next-steps) for further reading.

@@ -18,11 +18,15 @@ A Sobel filter implementation was selected as the example application to port as
 * OpenCV
   * a computer vision library
 
-The application is built on an `x86_64` machine and runs on CPU only, i.e., no hardware acceleration. Find additional details in the table below.
+We have already built the application on a `x86_64` machine and ran on CPU only, i.e., no hardware acceleration. Let's follow the porting methodology we introduced and gather information about the application's environment.
 
-| OS | Compiler | Build tools | Programming language | Intrinsics | External libraries |
-| --- | --- | --- | --- | --- | --- |
-| Ubuntu 22.04.2 LTS | GCC 11.3.0 | CMake 3.22.1 | C++14 | AVX | OpenCV 4.5.4 |
+|                      |                       | version          |
+| -------------------- | --------------------- | ---------------- |
+| Programming language | C++                   |                  |
+| OS                   | Ubuntu                | 22.04 LTS        |
+| Compiler             | GCC                   | 11.3.0           |
+| Build tools          | CMake                 | 3.22.1           |
+| External libraries   | OpenCV                | 4.5.4            |
 
 These bullets and table act as the starting point for the porting analysis.
 
@@ -57,15 +61,14 @@ p3 = _mm_loadu_si128((__m128i *)(inputPointer + i * width + j + 2));
 The lines of code above is just a snippet from the function `SobelSimd` which has intrinsics prefixed with `_mm_`. These aren't supported on `aarch64` and will need to be ported for the application to compile on `aarch64`.
 
 The table below summarizes the migration analysis.
-| | `aarch64` compatible? | `aarch64` version | Comment |
+| | version | available on `aarch64` | Comment |
 | --- | --- | --- | --- |
-| Ubuntu           | Yes | 22.04 LTS        | [Ubuntu for Arm](https://ubuntu.com/download/server/arm) |
-| GCC              | Yes | 11.3.0 or 12.2.0 | GCC is the standard compiler for Ubuntu |
-| CMake            | Yes | 3.22.1           | |
-| Compiler options | No  | N/A              | needs to be modifed |
-| C++              | Yes | 14               | |
-| AVX              | No  | N/A              | intrinsics are architecture specific |
-| OpenCV           | Yes | 4.5.4            | |
+| Ubuntu                | 22.04 LTS        | Yes | [Ubuntu for Arm](https://ubuntu.com/download/server/arm) |
+| GCC                   | 11.3.0           | Yes | |
+| CMake                 | 3.22.1           | Yes | |
+| OpenCV                | 4.5.4            | Yes | |
+| Compiler option -mavx | N/A              | No  | x86-specific |
+| AVX intrinsics        | N/A              | No  | x86-specific |
 
 The following conclusions can be drawn:
 * the compiler options need to be modified

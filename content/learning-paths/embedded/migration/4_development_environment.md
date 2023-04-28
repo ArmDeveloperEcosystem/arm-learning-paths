@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 # Development environment
 
-The original application uses GNU Compiler Collection ([GCC](https://gcc.gnu.org/)) so we want to create a development environment with this compiler and with the same version (when possible). For convenience and to be able to run on `x86_64`, we'll use a container for our development environments. This will allow us to compile and run the ported application using a `aarch64` container on our `x86_64` machine.
+The original application uses GNU Compiler Collection ([GCC](https://gcc.gnu.org/)) so we want to create a development environment with this compiler and with the same version (when possible). To migrate the application to `aarch64`, we are going to use the same `x86_64` machine we used to run the application. We'll use a `aarch64` container for our development environment which will allow us to compile and run the ported application on our `x86_64` machine.
 
 See [Docker Engine](https://learn.arm.com/install-guides/docker/docker-engine/) for instructions how to install Docker in your Linux environment.
 
@@ -45,7 +45,8 @@ docker buildx build --platform linux/aarch64 -t sobel_gcc_example .
 
 ## Run the container
 
-Finally, we want to run the cross-platform built container on our `x86_64` machine. Do so by running the command below.
+Finally, we want to run the cross-platform built container on our `x86_64` machine. Because the application will open a few X windows to display the image results, we need to enable graphical display when launching the container. Do so by running the command below.
+
 ```bash
 xhost +local:*
 docker run -it --rm --platform linux/aarch64 --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v $HOME/.Xauthority:/home/ubuntu/.Xauthority sobel_gcc_example /bin/bash
