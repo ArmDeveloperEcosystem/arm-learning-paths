@@ -22,8 +22,7 @@ You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=
 
 Install [Terraform](/install-guides/terraform) and [Ansible](/install-guides/ansible) on your computer.
 
-Any computer which has these tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the requi
-red tools.
+Any computer which has these tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
 
 Before you begin you will also need:
 - A SSH key pair
