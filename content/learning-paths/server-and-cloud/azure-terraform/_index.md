@@ -1,5 +1,5 @@
 ---
-title: Deploy Arm virtual machines on Azure with Terraform
+title: Deploy Arm VMs on Azure with Terraform
 
 description: Learn how to automate the creation of Azure Arm virtual machines using Terraform
 
