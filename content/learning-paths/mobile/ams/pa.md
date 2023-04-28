@@ -19,7 +19,7 @@ Build your application, and setup Android device as per Streamline instructions.
 
 Open a terminal or command prompt, and navigate to the `Arm Mobile Studio` install directory. Therein, locate the `lwi_me.py` script:
 ```console
-cd <installation_directory>/performance_advisor/bin/android
+cd <installation_directory>/streamline/bin/android
 ```
 To run the script, use:
 ```console
@@ -49,17 +49,17 @@ In the terminal window, navigate to the stored data folder. List contents with `
 
 Run Performance Analyzer on the appropriate folder to generate the report which can then be opened with any browser. The default name is `report.html`.
 ```console
-pa <options> my_capture.apc
+Streamline-cli -pa <options> my_capture.apc
 ```
 The available options are documented [here](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command), else can be seen with:
 ```console
-pa -h
+Streamline-cli -pa -h
 ```
 They can also be passed within an [options file](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command/pa-command-line-options-file).
 
 ### Performance budget
 
-You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, see [here](https://developer.arm.com/documentation/102687).
+You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, see [here](https://developer.arm.com/documentation/102009/0805/Quick-start-guide/Setting-performance-budgets).
 
 ## Generate a JSON performance report
 
@@ -69,5 +69,5 @@ In the terminal window, navigate to the stored data folder. List contents with `
 
 Run Performance Analyzer on the appropriate folder to generate the report (named `report.json` in below):
 ```console
-pa --type=json:report.json <other_options> my_capture.apc
+Streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
 ```
