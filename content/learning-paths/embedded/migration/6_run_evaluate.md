@@ -34,6 +34,8 @@ In the results presented below, a value >1 is faster and a value <1 is slower in
 The results in the table above have been normalized to the _QEMU Non-SIMD_ value, giving the relative speed-up. We observe the following: 
 * the non-SIMD implementation is the fastest but does not reflect the performance on an `aarch64` system
 
+Note: emulation does not give a representative view of how efficiently the algorithms run on Arm, it is only useful for functional purposes, **not** to measure performance
+
 ## Closing notes
 
 You have now ported an `x86_64` application to `aarch64`, built and run the ported application on `aarch64` using emulation, well done!

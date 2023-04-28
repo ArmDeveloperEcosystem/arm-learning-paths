@@ -26,12 +26,12 @@ The Graviton instances are Arm and in this example two different have been selec
 * Graviton2 (c6g.medium)
   * Ubuntu 22.04.2 LTS,
   * 16GB storage (default is 8GB)
-  * Arm Neoverse N1
+  * [Arm Neoverse N1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-n1)
     * 2 x NEON engine 128b vector width
 * Graviton3 (c7g.medium)
   * Ubuntu 22.04.2 LTS
   * 16GB storage (default is 8GB)
-  * Arm Neoverse V1
+  * [Arm Neoverse V1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v1)
     * 2 x SVE engine 256b vector width (4 x NEON engine 128b vector width support)
 
 For more information on Graviton, see [AWS Graviton Getting Started](https://github.com/aws/aws-graviton-getting-started).

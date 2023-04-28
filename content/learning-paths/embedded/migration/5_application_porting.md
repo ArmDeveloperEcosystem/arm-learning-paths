@@ -60,20 +60,20 @@ sed -i "40i #define SIMDE_ENABLE_NATIVE_ALIASES\n#ifdef __aarch64__\n#include \"
 
 ## Compiler options porting
 
-In the `CMakeLists.txt` file, the `-mavx` compiler option needs to be replaced with `armv8-a`. By using the `armv8-a` compiler option the application compiles on all `aarch64` hardware. We're also adding the optimization flag `-O2` as it's recommended [when trasitioning to Arm](https://simd-everywhere.github.io/blog/2020/06/22/transitioning-to-arm-with-simde.html).
+The `-mavx` compiler option needs to be removed. We'll add the optimization flag `-O2` as it's recommended [when trasitioning to Arm](https://simd-everywhere.github.io/blog/2020/06/22/transitioning-to-arm-with-simde.html). Below we can see the desirable changes to `CMakeLists.txt`.
 ```output
 # Enable SIMD instructions for Intel Intrinsics
 # https://software.intel.com/sites/landingpage/IntrinsicsGuide/
 if(NOT WIN32)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2 march=armv8-a")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 endif()
 ```
 
  This can be done by running the following command.
 ```bash
-sed -i "s/-mavx/-O2\ -march=armv8-a/g" src/CMakeLists.txt
+sed -i "s/-mavx/-O2/g" src/CMakeLists.txt
 ```
 
-Note: compiler options should be tuned and optimized to achieve higher performance, but in this guide we'll keep it simple as performance optimization comes at a later phase
+Note: compiler options should be tuned and optimized to achieve higher performance, but in this guide we'll keep it simple as performance optimization comes at a later phase when migrating (not covered in this learning path)
 
 The application porting is now complete and next we'll compile and run the ported application!

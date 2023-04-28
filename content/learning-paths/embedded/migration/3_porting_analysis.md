@@ -18,7 +18,7 @@ A Sobel filter implementation was selected as the example application to port as
 * OpenCV
   * a computer vision library
 
-We have already built the application on a `x86_64` machine and ran on CPU only, i.e., no hardware acceleration. Let's follow the porting methodology we introduced and gather information about the application's environment.
+We have already built and run the application on a `x86_64` machine. The application runs on CPU only, i.e., no hardware acceleration. Let's follow the porting methodology we introduced and gather information about the application.
 
 |                      |                       | version          |
 | -------------------- | --------------------- | ---------------- |
@@ -28,11 +28,11 @@ We have already built the application on a `x86_64` machine and ran on CPU only,
 | Build tools          | CMake                 | 3.22.1           |
 | External libraries   | OpenCV                | 4.5.4            |
 
-These bullets and table act as the starting point for the porting analysis.
+This table is our starting point for the porting analysis.
 
-Using the original software and tool versions when porting an application isn't a requirement, however it is recommended as it will make the porting smoother. By looking at the [Sobel SIMD OpenCV repo](https://github.com/m3y54m/sobel-simd-opencv/) and with the questions from the previous section in mind start the analysis.
+Using the original software and tool versions when porting an application isn't a requirement, however it is recommended as it will make the porting smoother. By looking at the Sobel filter code and with the questions from the previous section in mind, we'll start the porting analysis.
 
-In `src/CMakeLists.txt`:
+In [src/CMakeLists.txt#L12](https://github.com/m3y54m/sobel-simd-opencv/blob/master/src/CMakeLists.txt#L12):
 ```output
 # Enable SIMD instructions for Intel Intrinsics
 # https://software.intel.com/sites/landingpage/IntrinsicsGuide/

@@ -1,0 +1,213 @@
+Start building sites … 
+hugo v0.111.2-4164f8fef9d71f50ef3962897e319ab6219a1dad linux/amd64 BuildDate=2023-03-05T12:32:20Z VendorInfo=gohugoio
+WARN 2023/04/28 17:19:07 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:19:08 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+
+                   | EN   
+-------------------+------
+  Pages            | 884  
+  Paginator pages  |   0  
+  Non-page files   | 276  
+  Static files     |  53  
+  Processed images |   0  
+  Aliases          |   0  
+  Sitemaps         |   1  
+  Cleaned          |   0  
+
+Built in 1898 ms
+Watching for changes in /workspaces/arm-learning-paths/{archetypes,assets,content,themes}
+Watching for config changes in /workspaces/arm-learning-paths/config.toml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at / (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2023-04-28 17:27:12.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:27:12 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:27:12 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 75 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:27:58.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:27:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:27:58 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 68 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:28:04.898 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:28:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:28:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 68 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:28:10.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:28:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:28:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 68 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:28:31.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:28:31 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:28:31 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 70 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:28:43.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:28:43 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:28:43 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 67 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:29:58.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:29:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:29:58 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 70 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:30:22.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:30:22 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:30:22 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 66 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:30:50.398 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:30:50 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:30:50 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 65 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:30:53.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:30:53 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:30:53 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 74 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:35:42.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:35:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:35:42 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 67 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:36:04.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:36:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:36:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 67 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:36:19.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:36:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:36:19 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 70 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:36:45.398 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:36:45 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:36:45 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 68 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:37:04.898 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:37:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:37:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 66 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:39:11.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:39:11 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:39:11 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 68 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:39:28.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:39:28 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:39:28 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 70 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:41:44.398 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/6_run_evaluate.md"
+WARN 2023/04/28 17:41:44 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:41:44 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 67 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:41:56.898 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/6_run_evaluate.md"
+WARN 2023/04/28 17:41:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:41:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 63 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:53:39.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/7_alternative.md"
+WARN 2023/04/28 17:53:39 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:53:39 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 79 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:54:04.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/7_alternative.md"
+WARN 2023/04/28 17:54:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:54:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 65 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:56:53.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/7_alternative.md"
+WARN 2023/04/28 17:56:53 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:56:53 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 73 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:56:56.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/6_run_evaluate.md"
+WARN 2023/04/28 17:56:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:56:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 79 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:56:57.399 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/5_application_porting.md"
+WARN 2023/04/28 17:56:57 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:56:57 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 72 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:56:57.899 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/2_porting_methodology.md"
+WARN 2023/04/28 17:56:57 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:56:57 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 74 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:56:59.398 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/3_porting_analysis.md"
+WARN 2023/04/28 17:56:59 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:56:59 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 83 ms
+
+Change detected, rebuilding site.
+2023-04-28 17:57:00.398 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/embedded/migration/4_development_environment.md"
+WARN 2023/04/28 17:57:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/04/28 17:57:00 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 70 ms
