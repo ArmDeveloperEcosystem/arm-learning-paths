@@ -32,7 +32,7 @@ The instructions to login to Google Cloud CLI and to create the keys are below.
 
 Terraform on your local machine needs to communicate with GCP.
 
-To obtain GCP user credentials, follow the [Google Cloud Credentials](/install-guides/gcp-login/) install guide.
+To obtain GCP user credentials, follow the [Google Cloud Credentials](/install-guides/gcloud#acquire-user-credentials) install guide.
 
 ### Generate an SSH key-pair
 

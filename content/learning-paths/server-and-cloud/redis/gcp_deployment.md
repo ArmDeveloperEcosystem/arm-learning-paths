@@ -42,7 +42,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [documentation](/install-guides/gcp-login/).
+To obtain GCP user credentials, follow this [documentation](/install-guides/gcloud#acquire-user-credentials).
 
 ## Create a GCP instance using Terraform
 

@@ -16,7 +16,7 @@ Redis, which stands for Remote Dictionary Server, is an open source, in-memory, 
 ### Configuring Redis Server
 You can configure the Redis server using the [redis.conf](https://redis.io/docs/management/config-file/) file. Alternatively, you can configure Redis servers by [passing arguments via the command line](https://redis.io/docs/management/config/#passing-arguments-via-the-command-line) when fewer configuration variables need to be set.
 
-### Single node configuratio
+### Single node configuration
 By default Redis runs on localhost (`127.0.0.1`) on port **6379**. As a result, port **6379** becomes unavailable for binding with the public IP of the remote server. You need to set the bind configuration option in the **redis.conf** file to `0.0.0.0`.
 
 For a single-node Redis server, set the following configuration options as shown in the **redis.conf** file:
