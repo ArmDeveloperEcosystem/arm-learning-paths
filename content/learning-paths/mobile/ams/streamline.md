@@ -43,7 +43,7 @@ Select an appropriate [counter template](https://developer.arm.com/documentation
 
 ## Set location to store data (optional)
 
-Navigate to `Window` > `Preferences` > `Data Locations`, and configure location to store data. New reports will be created in the top-most folder specified.
+Navigate to `Window` > `Preferences` > `Data Locations`, and configure location to store data. New reports will be created in the topmost folder specified.
 
 ## Profile application
 
