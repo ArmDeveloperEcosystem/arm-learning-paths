@@ -37,7 +37,7 @@ More developer hardware options are available from the [Works on Arm initiative]
 
 Servers typically run, and are provided with, the Linux operating system. Popular distributions for servers include Ubuntu, Red Hat, SUSE Linux, and Debian. Vendor specific distributions, such as Amazon Linux and Oracle Linux are also available.
 
-If `gcc` is not pre-installed with your distribution, you can [install using a package manager](/install-guides/gcc/#native).
+If `gcc` is not pre-installed with your distribution, you can [install using a package manager](/install-guides/gcc/native/).
 
 You may also wish to install [Arm Compiler for Linux](/install-guides/acfl/) for HPC applications.
 

@@ -33,7 +33,7 @@ Earlier Graviton platforms do NOT support Pointer Authentication.
 
 ## Prepare your c7g instance
 
-Install [GCC](/install-guides/gcc/#native) and other build tools to proceed.
+Install [GCC](/install-guides/gcc/native/) and other build tools to proceed.
 
 ```console
 sudo apt update

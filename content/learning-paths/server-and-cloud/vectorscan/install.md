@@ -30,7 +30,7 @@ Update the sources list for the package manager.
 sudo apt update
 ```
 
-GCC for your Arm Linux distribution. If needed, refer to the [installation guide](/install-guides/gcc/#native).
+GCC for your Arm Linux distribution. If needed, refer to the [installation guide](/install-guides/gcc/native/).
 
 ```bash
 sudo apt install -y build-essential 

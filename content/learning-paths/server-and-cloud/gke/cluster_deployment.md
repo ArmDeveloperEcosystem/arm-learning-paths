@@ -50,7 +50,7 @@ Three tools are required on the computer you are using. Follow the links to inst
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [guide](/install-guides/gcp_login).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcp-login/).
 
 ### Enable APIs
 

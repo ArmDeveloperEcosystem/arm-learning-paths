@@ -23,7 +23,7 @@ The examples can be built with [Arm Compiler for Embedded](https://developer.arm
 
 To install locally see:
 - [Arm Compiler for Embedded](/install-guides/armclang/) or
-- [Arm GNU Toolchain](/install-guides/gcc/#Arm-GNU)
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 
 ## Build the CMSIS-DSP test suite
 
