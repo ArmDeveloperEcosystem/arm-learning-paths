@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Advanced debugging with ETM trace"
+title: "Advanced debug with ETM trace"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -14,7 +14,7 @@ Many Armv7-M/Armv8-M devices include an **Embedded Trace Macrocell (ETM)** which
 
 #### Types of Problems that can only be found with ETM Trace
 
-There are the types of problems that can only be found with a quality trace, such as:
+There are certain types of problems that can only be found with a quality trace, such as:
 
 1. Pointer problems.
 2. Illegal instructions and data aborts (such as misaligned writes): How I did I get to this fault vector?
@@ -122,6 +122,7 @@ The data stream capture can be controlled and filtered by using tracepoints. μV
 3. [TraceHalt](https://developer.arm.com/documentation/101407/latest/Debug-Commands/TraceHalt): Stops all trace data, including ETM. Trace collection can be resumed only with a STOP/RUN sequence in the µVision debugger.
 
 They are selected from the context menu by right-clicking on a valid assembly instruction in the **Disassembly** window or a **C source line**:
+
 ![Insert Trace Point](./insert_tracepoint.png)
 
 #### How it works

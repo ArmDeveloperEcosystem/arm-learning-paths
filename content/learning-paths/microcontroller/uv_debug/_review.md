@@ -32,15 +32,15 @@ review:
             - "ULINKplus"
         correct_answer: 3
         explanation: >
-            ULINKplus is the power-aware debug adapter from Arm for Cortex-M based microconotrollers.
+            ULINKplus is the power-aware debug adapter from Arm for Cortex-M based microcontrollers.
                
     - questions:
         question: >
-            Event Recorder requires...?
+            What does an Event Recorder require?
         answers:
-            - "...an ETM to be present."
-            - "...only a small amount of memory."
-            - "...a 20-pin debug connector on the board."
+            - An ETM to be present.
+            - Only a small amount of memory.
+            - A 20-pin debug connector on the board.
         correct_answer: 2
         explanation: >
             Event Recorder is independent of specific debug interfaces and only uses a small amount of RAM for storing debug data.

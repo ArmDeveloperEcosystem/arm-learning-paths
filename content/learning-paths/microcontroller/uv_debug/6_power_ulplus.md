@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Power Measurement with ULINKplus"
+title: "Measure Power with ULINKplus"
 
 weight: 6 # 1 is first, 2 is second, etc.
 
@@ -8,7 +8,7 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Power Measurement with ULINKplus
+## Measure Power with ULINKplus
 
 An Arm Keil [ULINKplus debug adapter](https://developer.arm.com/Tools%20and%20Software/ULINKplus) offers serial-wire debug capabilities, measures the CPU core clock directly, and adds power measurement. Together with Event Statistics, this can be used to create power profiles for code sections.
 
@@ -33,7 +33,7 @@ You can configure the ULINKplus adapter with a set of debug commands that you ca
 
 ULINKplus is now configured and ready to use.
 
-### Measure Power in System Analyzer
+#### Measure Power in System Analyzer
 
 1. ![Build](./b_uv4_debug.png) **Start a Debug Session (Ctrl+F5)** to enter the µVision debugger.
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.  
@@ -50,7 +50,7 @@ The **Current** and **Voltage** waveforms are shown in the **Consumption** secti
 - The **Voltage** and **Current** Y axis numbers are adaptive and will change dynamically to suit the values displayed.
 {{% /notice %}}
 
-### Power Consumption in the Event Statistics Window
+#### Power Consumption in the Event Statistics Window
 
 1. Go to **View - Analysis Windows** and select ![Event Statistics](./b_uv4_event_statistics.png) **Event Statistics** to open the window:  
    ![Event Statistics with Power Consumption](./evtstat_window_w_power.png)
