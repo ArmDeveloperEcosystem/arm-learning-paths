@@ -21,6 +21,7 @@ learning_objectives:
 prerequisites:
     - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
+    - A Windows machine
     - Installation of [Arm Keil MDK](/install-guides/mdk/) with an active MDK-Community license
     - Installation of the [Corstone-300 Ecosystem FVP](/install-guides/ecosystem_fvp/)
 # List any prereqs needed before this learning path can be completed. Can include:

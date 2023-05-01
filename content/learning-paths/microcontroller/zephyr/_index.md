@@ -11,6 +11,7 @@ operatingsystems:
 - RTOS
 prerequisites:
 - Some familiarity with embedded C programming
+- A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 skilllevels: Introductory
 subjects: RTOS Fundamentals
 test_images:

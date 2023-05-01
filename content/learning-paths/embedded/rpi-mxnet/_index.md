@@ -1,8 +1,6 @@
 ---
 title: Build embedded Linux applications on an Arm server
 
-description: reduce compile time using an Arm server
-
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers who want to reduce compile time for embedded Linux software projects.
