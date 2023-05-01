@@ -1,8 +1,6 @@
 ---
 title: Deploy PaddlePaddle on Arm Cortex-M with Arm Virtual Hardware
 
-description: Learn how to deploy a PP-OCRv3 English text recognition model on Arm Cortex-M55 processor with Arm Virtual Hardware.
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers interested in using PaddlePaddle for Arm Cortex-M processors.
@@ -14,9 +12,9 @@ learning_objectives:
     - Deploy on the AVH Corstone-300 platform with Arm Cortex-M55
 
 prerequisites:
-    - Some familiarity with embedded programming is assumed
-    - Some familiarity with AI/ML software development is assumed
-    - An AWS account to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). Refer to [this guide](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) to create an AWS account.
+    - Some familiarity with embedded programming 
+    - Some familiarity with AI/ML software development 
+    - An Amazon Web Services(AWS) [account](https://aws.amazon.com/) to subscribe [Arm Virtual Hardware](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) Amazon Machine Image(AMI). 
 
 author_primary: Liliya Wu
 
@@ -32,8 +30,6 @@ tools_software_languages:
     - Python
     - AWS EC2
     - GCC
-    - TVM
-    - PaddleOCR
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
