@@ -8,7 +8,7 @@ Where it is used:
 
 <!-- Hugo processing -->
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
-{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) (ne "About" .Title) }}  
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}  
     <!-- assign title of page -->
 {{ $title := print .Site.Title " | " .Title }}
 {{ if .IsHome }}
@@ -73,14 +73,4 @@ Where it is used:
     <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
 
 {{end}}
-
-
-<!-- About page only -->
-{{ if eq "About" .Title  }}
-    {{ $css_about := $all_page_css | append 
-        (resources.Get "css/content.css")
-        | resources.Concat "css/mini_about.css" | minify | fingerprint  }}
-    <link rel="stylesheet" href="{{ $css_about.Permalink }}">
-{{end}}
-
 
