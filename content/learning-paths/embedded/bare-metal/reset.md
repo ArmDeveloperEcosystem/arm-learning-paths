@@ -60,7 +60,7 @@ Modify the scatter file so that the startup code goes into the root region `ROM_
 ```
 Link the objects, specifying the symbol `el3_entry` as the entry point.
 ```console
-armlink --scatter=scatter.txt hello_world.o startup.o -o hello.axf --entry=el3_entry
+armlink --scatter=scatter.txt hello.o startup.o -o hello.axf --entry=el3_entry
 ```
 The entry point is used by the linker to determine which code is necessary to keep. It is also used by debuggers to know where to start execution from.
 
