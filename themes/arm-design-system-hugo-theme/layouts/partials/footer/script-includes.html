@@ -10,7 +10,7 @@ Called from:
 
 <!-- Hugo processing -->
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
-{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}             <!-- includes about for now... should exclude -->                                         
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}                                              
 
 
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->
@@ -72,7 +72,7 @@ Called from:
 
 <!-- Hugo processing -->
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}                                       
-{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) (ne "About" .Title) }}  
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}  
 
 
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->

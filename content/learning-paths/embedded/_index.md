@@ -9,7 +9,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 4
-- Linux: 7
+- Linux: 8
 - macOS: 1
 - Windows: 2
 subjects_filter:
@@ -29,6 +29,8 @@ tools_software_languages_filter:
 - C: 5
 - Docker: 3
 - DSTREAM: 1
+- FVP: 1
+- GCC: 1
 - GitHub: 3
 - JavaScript: 1
 - MXNet: 1
