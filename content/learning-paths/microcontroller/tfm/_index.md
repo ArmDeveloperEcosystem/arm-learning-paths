@@ -2,7 +2,6 @@
 armips:
 - Cortex-M
 author_primary: Pareena Verma
-description: Build TF-M tests and run on Corstone-300 FVP
 layout: learningpathall
 learning_objectives:
 - Build and run the reference TF-M tests.
@@ -12,6 +11,7 @@ operatingsystems:
 - Baremetal
 prerequisites:
 - Some familiarity with embedded C programming
+- A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 skilllevels: Introductory
 subjects: Security
 test_images:
