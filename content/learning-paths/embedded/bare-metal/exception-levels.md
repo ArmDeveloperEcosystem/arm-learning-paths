@@ -88,7 +88,7 @@ Rather than branching to `__main`, the `EL3` reset handler must instead perform 
 	MOV		x1, #0x5
 	MSR		SPSR_EL3,x1		// Set return level to EL1
 
-	LDR		x0, =el1_entry_aarch64
+	LDR		x0, =el1_entry
 	MSR		ELR_EL3, x0		// Set return address to EL1 entry point
 
 	ISB						// Ensure all above fully executes before...
@@ -103,7 +103,7 @@ armclang -c -g --target=aarch64-arm-none-eabi vectors.s
 armclang -c -g --target=aarch64-arm-none-eabi gic.s
 armclang -c -g --target=aarch64-arm-none-eabi timer.s
 armclang -c -g --target=aarch64-arm-none-eabi hello.c
-armlink --scatter=scatter.txt --entry=start64 startup.o uart.o vectors.o gic.o timer.o hello.o -o hello.axf
+armlink --scatter=scatter.txt --entry=el3_entry startup.o uart.o vectors.o gic.o timer.o hello.o -o hello.axf
 ```
 ```command
 FVP_Base_Cortex-A73x2-A53x4 -C bp.refcounter.non_arch_start_at_default=1 -a hello.axf

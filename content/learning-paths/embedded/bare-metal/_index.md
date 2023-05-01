@@ -3,7 +3,7 @@ title: Create a bare-metal Armv8-A embedded image
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an introductory topic for embedded software developers new to Armv8-A processors and/or the Arm Compiler for Embedded.
+who_is_this_for: This is an introductory topic for embedded software developers new to Armv8-A processors and/or the [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded).
 
 learning_objectives: 
     - Create and build an example project
