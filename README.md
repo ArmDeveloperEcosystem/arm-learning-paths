@@ -13,20 +13,29 @@ The Learning Paths created here are maintained by Arm and the Arm software devel
 # How To Contribute
 
 All contributions are welcome as long as they relate to software development for the Arm architecture. 
+  * Write a Learning Path (or improve existing content)
+    * Fork this repo and submit pull requests; follow the step by step instructions in [Create a Learning Path](/learning-paths/cross-platform/_example-learning-path/) on the website.
+  * Ideas for a new Learning Path
+    * Create a new GitHub idea under the [Discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) area in this GitHub repo.
+  * Log a code issue (or other general issues)
+    * Log a [issue on GitHub](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/issues) or from the Learning Path on the left-hand nav bar.
 
-You can fork this repository and submit pull requests to contribute new Learning Paths or to provide other improvements. 
-
-The step-by-step instructions to contribute a Learning Path are contained in a Learning Path called Create a Learning Path.
-
-For all other questions please create a GitHub issue. 
+Note that all site content, including new contributions, is licensed under a [Creative Commons Attribution 4.0 International license](https://creativecommons.org/licenses/by/4.0/).
 
 <br/>
+
+# Other Arm Learning Resources
+The Learning Path site contains software-based Learning Paths and Tool Install Guides, and complements the other Arm resources in the Arm Developer Hub and beyond. Here are links to other areas depending on what/how you want to learn:
+  * [Learning Paths](/)
+  * [Tool Install Guides](/)
+  * [Arm IP Documentation](https://developer.arm.com)  
+
+
 
 # Directory Structure
 
 This site is built on the [Hugo](https://gohugo.io/) web framework, ideal for generating static websites. Below is a brief description of the key files and directories:
 
-/
   * /content
     * where all learning path and tool installation content is located
   * /themes
