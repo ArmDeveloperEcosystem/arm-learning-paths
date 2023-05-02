@@ -33,7 +33,7 @@ Specify a Name for your VM. For more information, see [Resource naming conventio
 
 ![image](https://user-images.githubusercontent.com/67620689/202098830-532b5dc8-f6b5-4cff-931c-ec41edd08516.PNG)
 
-Choose a Zone for this VM that supports [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines). This series is available only in select regions and zones. More information on regions and zones at which it is available can be found [here](https://cloud.google.com/compute/docs/regions-zones#available).
+Choose a Zone for this VM that supports [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines). Tau T2A is only available in select regions and zones. Check the [available regions and zones](https://cloud.google.com/compute/docs/regions-zones#available) information to find out which regions offer Tau T2A.
 
 ![image](https://user-images.githubusercontent.com/67620689/202097168-6208b6ae-3627-47b3-a397-7783769e6727.PNG)
 

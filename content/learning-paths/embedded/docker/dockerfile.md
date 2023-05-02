@@ -7,15 +7,16 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-You shall prepare a docker image containing [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) and a library of [Fixed Virtual Platforms (FVPs)](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms), for use as a basic build and run environment.
 
-The OS of the docker image is `Ubuntu`, though the host machine could be Windows or a different flavor of Linux.
+You can prepare a Docker image containing [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) and a library of [Fixed Virtual Platforms (FVPs)](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms), for use as a basic build and run environment.
+
+The operating system of the docker image is `Ubuntu`, though the host machine could be Windows or a different flavor of Linux.
 
 Linux users may need to precede the `docker` commands below with `sudo`, as the docker daemon always runs as the root user.
 
-## Prerequisites
+## Before you begin
 
-Download and [install](/install-guides/docker/) the appropriate Docker environment for your host platform.
+Download and [install](/install-guides/docker/) the appropriate version of Docker for your host platform.
 
 ## Prepare files to copy into image
 
@@ -35,7 +36,7 @@ In the same directory, create a text file named exactly `Dockerfile` containing 
 
 This file copies the installers to the Docker image. The exact filename(s) will depend on the versions used.
 
-Edit the Dockerfile as necessary (`ACfE` and `FVP` arguments therein), else edit on the build command line (see later).
+Edit the Dockerfile as necessary (`ACfE` and `FVP` arguments), else edit on the build command line (see later).
 
 Whilst installing the [compiler](/install-guides/armclang/) and [FVP library](/install-guides/fvp), the EULA(s) are silently accepted. Be sure that this is satisfactory for you.
 
@@ -119,4 +120,4 @@ and you will enter the terminal of the docker image. Verify everything is workin
 ```console
 armclang --version
 ```
-Congratulations. You have a docker environment containing the Arm Compiler for Embedded and the FVP library, which you can share and replicate as needed.
+You have created a docker environment containing Arm Compiler for Embedded and the FVP library, which you can share and replicate as needed.

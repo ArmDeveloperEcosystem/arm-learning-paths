@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ##  Use the AWS Console to deploy EC2 instances with Graviton processors
 
-AWS Graviton processors are Arm based processors designed specifically for AWS. More information can be found [here](https://aws.amazon.com/pm/ec2-graviton/).
+AWS Graviton processors are Arm based processors designed specifically for AWS. More information is available from [AWS](https://aws.amazon.com/pm/ec2-graviton/).
 
 ## Deploy Graviton based EC2 instances using the AWS Console
 

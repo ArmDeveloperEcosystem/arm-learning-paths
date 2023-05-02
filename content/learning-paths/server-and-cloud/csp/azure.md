@@ -7,7 +7,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Microsoft Azure](https://azure.microsoft.com/) is a mature cloud computing platform. An overview of their services is described [here](https://azure.microsoft.com/en-us/get-started/).
+[Microsoft Azure](https://azure.microsoft.com/) is a public cloud computing platform. 
 
 As with most cloud service providers, Azure offers a pay-as-you-use [pricing policy](https://azure.microsoft.com/en-us/pricing/), including a number of [free](https://azure.microsoft.com/en-us/free/) services.
 
@@ -103,7 +103,7 @@ After a short time, the VM will be created. Click on `Go to resource` to see var
 
 ## Connect to your VM instance (Linux)
 
-These instructions are for Linux-based virtual machines. If you are using a Windows-based virtual machine, please jump to the section [here](#windows).
+These instructions are for Linux-based virtual machines. If you are using a Windows-based virtual machine, please jump to the [Windows section](#windows).
 
 You can connect to the instance with your preferred SSH client. For example if using default `azureuser` username:
 
@@ -116,8 +116,7 @@ Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https
 
 ### Explore your instance
 
-Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
-
+Use `uname` to verify that you are using an Arm-based server. For example:
 ```console
 uname -m
 ```

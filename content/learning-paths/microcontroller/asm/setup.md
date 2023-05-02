@@ -11,11 +11,11 @@ Though Cortex-M processors have been designed so that all operations can be prog
 
 You will write assembly level functions conforming to the [Arm Procedure Call Standard](https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst).
 
-[Keil MDK](https://www2.keil.com/mdk5) is used as the toolchain. For installation instructions, see [here](/install-guides/mdk/).
+[Keil MDK](https://www2.keil.com/mdk5) is used as the toolchain. For installation instructions, refer to the [Keil MDK install guide](/install-guides/mdk/).
 
 ## Efficient Embedded Systems Education Kit
 
-This learning path is based on examples from the [Efficient Embedded Systems Education Kit](https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit), which uses the [Nucleo-F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html) development board.
+This Learning Path is based on examples from the [Efficient Embedded Systems Education Kit](https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit), which uses the [Nucleo-F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html) development board.
 
 You will use the Cortex-M4 Fixed Virtual Platform provided with MDK.
 

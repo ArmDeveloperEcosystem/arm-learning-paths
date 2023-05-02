@@ -164,7 +164,7 @@ Recommended:
 
 ## Expected skills of your target audience
 
-The learning paths are intended for software developers with differing experience levels (Introductory and advanced). The intended audience is expected to have some domain specific knowledge, examples of which are listed below:
+Learning Paths are intended for software developers with differing experience levels (Introductory and advanced). The intended audience is expected to have some domain specific knowledge, examples of which are listed below:
 
 | Software Development Areas                 | Skills |
 |-------------------------------------       |----------|

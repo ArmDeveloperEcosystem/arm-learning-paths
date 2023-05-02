@@ -11,11 +11,11 @@ layout: "learningpathall"
 
 You can connect the [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) debugger to your virtual platform and interact with it as if were real hardware.
 
-## Prerequisites
+## Before you begin
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
+You should have Arm Development Studio installed and your license configured. Refer to the [Arm Development Studio install guide](/install-guides/armds/) for more information.
 
-It is also assumed you have installed Arm Fast Models and configured your license and build tools. For full instructions see [here](/install-guides/fm/).
+You should also have Arm Fast Models installed and your license configured. Refer to the [Arm Fast Models install guide](/install-guides/fm/) for more information.
 
 ### If Fast Models are not available
 

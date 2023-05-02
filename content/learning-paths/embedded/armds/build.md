@@ -8,11 +8,11 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Prerequisites
+## Before you begin
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
+You should have Arm Development Studio installed and your license configured. Refer to the [Arm Development Studio install guide](/install-guides/armds/) for more information.
 
-## Getting started with the IDE
+## Get started with the IDE
 
 Launch the IDE (`armds_ide`). If this is the first time launching the IDE, you will be presented with a pane to set some basic visual preferences. The IDE opens into a workspace, a base directory on your host machine from which all projects are located. You can use `File > Switch Workspace` to select a new location.
 

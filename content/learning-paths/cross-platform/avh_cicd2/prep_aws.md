@@ -17,9 +17,9 @@ Fork the example into your GitHub repository from:
 ```url
 https://github.com/ARM-software/AVH-GetStarted/fork
 ```
-Full documentation on the example is available [here](https://arm-software.github.io/AVH/main/examples/html/GetStarted.html).
 
-For documentation on the CI/CD workflow see [here](https://arm-software.github.io/AVH/main/examples/html/GetStarted.html#GS_SetupCI).
+Additional documentation is available which covers the [example](https://arm-software.github.io/AVH/main/examples/html/GetStarted.html) and the [CI workflow](https://arm-software.github.io/AVH/main/examples/html/GetStarted.html#GS_SetupCI).
+
 
 ## CloudFormation stack {#steps}
 

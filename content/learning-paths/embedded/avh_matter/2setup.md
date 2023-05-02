@@ -7,23 +7,26 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Prerequisites
 
-A user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to [Arm Virtual Hardware](/install-guides/avh#thirdparty) in the install tools area.
+## Before you begin
 
-A valid [GitHub](https://github.com) account.
+You will need a user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to [Arm Virtual Hardware install guide](/install-guides/avh#thirdparty) for more information.
+
+A [GitHub](https://github.com) account is also required.
 
 GitHub requires that a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) be set. If you do not have this on your account already, navigate to `Settings` > `Developer Settings` > `Personal Access Tokens`, click on `Generate new token`, and save the token locally.
 
 Ensure you have enabled the token to `Update GitHub Action workflows`.
 
 You may wish to create a local scratchpad text file containing the below details (which will be unique to you), so that you can easily copy-and-paste from.
+
 ```
 YOUR_GITHUB_USERNAME
 YOUR_PERSONAL_ACCESS_TOKEN
 git config --global user.name "YOUR_GITHUB_USERNAME"
 git config --global user.email YOUR_EMAIL_ADDRESS
 ```
+
 ## Login to Arm Virtual Hardware console
 
 Open your browser, and navigate to Arm Virtual Hardware dashboard:

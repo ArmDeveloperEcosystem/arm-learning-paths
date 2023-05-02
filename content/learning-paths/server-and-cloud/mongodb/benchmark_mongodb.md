@@ -120,5 +120,3 @@ At the end of each test, statistics are printed to the console. Shown below is t
 
 For instructions on running any other tests or more details on the metrics reported, refer to the [github project for the YCSB](https://github.com/brianfrankcooper/YCSB/wiki/).
 
-To view performance results of MongoDB on AWS Graviton2-based Amazon EC2 R6g instance and how it compares to Intel Xeon-based R5 instances read the [blog here](https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2).
-

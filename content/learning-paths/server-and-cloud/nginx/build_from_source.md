@@ -27,7 +27,7 @@ Refer to [the official documentation](http://nginx.org/en/docs/configure.html) f
 
 Follow these steps to build Nginx from source.
 
-Download and extract the latest source code of PCRE from [here](http://www.pcre.org/), the example shows version 10.40. 
+Download and extract the latest source code of [PCRE](http://www.pcre.org/), the example shows version 10.40. 
 
 ```bash { pre_cmd="sudo apt remove -y nginx" }
 wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.zip

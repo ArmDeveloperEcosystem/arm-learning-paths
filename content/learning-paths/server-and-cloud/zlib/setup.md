@@ -26,7 +26,7 @@ If the machine is confirmed to include `crc32` it may benefit from `zlib-cloudfl
 
 Some Linux system may already make use of `crc32` with the default library. If the default `zlib` is already optimized, then using `zlib-cloudflare` may not have any impact on performance. 
 
-If `zlib` is not installed, you can install it with the following command on Ubuntu, as well as additional packages for this learning path. 
+If `zlib` is not installed, you can install it with the following command on Ubuntu, as well as additional packages for this Learning Path. 
 
 ```bash
 sudo apt install -y libzstd1 build-essential git

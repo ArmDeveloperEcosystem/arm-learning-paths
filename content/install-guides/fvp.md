@@ -32,6 +32,6 @@ Furthermore Arm provides a collection of free-of-charge [Ecosystem FVPs](../ecos
 
 You can download the FVP library installer from the [Product Download Hub](https://developer.arm.com/downloads/view/FM000A). Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
 
-## Setting up product license
+## Set up the product license
 
-Arm FVPs (other than Ecosystem FVPs) are license managed. License setup instructions are available [here](../license/).
+Arm FVPs (other than Ecosystem FVPs) are license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).

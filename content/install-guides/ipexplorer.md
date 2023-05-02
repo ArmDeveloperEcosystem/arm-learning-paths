@@ -22,20 +22,17 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-[Arm IP Explorer](https://ipexplorer.arm.com/) is a cloud-based tool used to accelerate IP selection and SoC design. 
 
-An Arm account is required to access Arm IP Explorer. To create an Arm account, register [here](https://www.arm.com/register).
+Arm IP Explorer is a cloud-based tool used to accelerate IP selection and SoC design. 
+
+An Arm account is required to access Arm IP Explorer. To create an Arm account, enter your e-mail on the [registration form](https://www.arm.com/register) and follow the instructions.
 
 ## Installation
 
 Arm IP Explorer is a cloud based tool and does not require any local installation.
 
-It can be accessed [here](https://ipexplorer.arm.com/) using any browser of your choice.
+Access [Arm IP Explorer](https://ipexplorer.arm.com/) using a browser.
 
-## Licensing
-
-Arm IP Explorer does not require additional licenses to be setup for use. 
-
-## Getting started
+## Get started
 
 There are several [Tutorials](https://ipexplorer.arm.com/support) available to help you get started quickly with the Arm IP Explorer tool.

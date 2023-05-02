@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this learning path, you will build a neural network model with TensorFlow and deploy the model on the [STM32 B-L475E-IOT01A2 board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html). This board has an MCU based on the [Arm Cortex-M4](https://developer.arm.com/Processors/Cortex-M4) processor.
+In this Learning Path, you will build a neural network model with TensorFlow and deploy the model on the [STM32 B-L475E-IOT01A2 board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html). This board has an MCU based on the [Arm Cortex-M4](https://developer.arm.com/Processors/Cortex-M4) processor.
 
 You will implement a letter recognition model which takes accelerometer data from the board and predicts the letter based on the accelerometer data. 
 
@@ -44,13 +44,13 @@ conda install jupyter pandas pyserial scikit-learn tensorflow matplotlib
 
 Next, you need to program the STM32 `B-L475E-IOT01A2` board to acquire accelerometer data for your neural network model.
 
-The data collection code for this learning path is provided, so you can just import the project and program the board using [STM Code IDE](https://www.st.com/en/development-tools/stm32cubeide.html).
+The data collection code for this Learning Path is provided, so you can just import the project and program the board using [STM Code IDE](https://www.st.com/en/development-tools/stm32cubeide.html).
 
-The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontroller/tflow_nn_stcube/Project_Files/tf_stm32.zip). Download and expand into a `tf_stm32` folder.
+Download the [zip file](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontroller/tflow_nn_stcube/Project_Files/tf_stm32.zip) and expand it into a `tf_stm32` folder.
 
 ### Install STM32CubeIDE
 
-Download and run the installer from the `Get Software` section of the official [STMicroelectronics website](https://www.st.com/en/development-tools/stm32cubeide.html).
+Download and run the installer from the `Get Software` section of the [STMicroelectronics website](https://www.st.com/en/development-tools/stm32cubeide.html).
 
 ### Program the board 
 

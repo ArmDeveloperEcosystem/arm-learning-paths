@@ -50,7 +50,7 @@ If Hugo is not already running start it.
 hugo server
 ```
 
-2. View the learning path you just created in your browser
+2. View the Learning Path you just created in your browser
 
 In a browser tab, open [http://localhost:1313/learning-paths/server-and-cloud/my-new-learning-path](http://localhost:1313/learning-paths/server-and-cloud/my-new-learning-path)
 
@@ -63,7 +63,7 @@ You should take a few minutes to understand how to format your Learning Path and
 
 4. Start modifying the Learning Path
 
-You can now start modifying the markdown files using your text editor to write content for your new learning path. 
+You can now start modifying the markdown files using your text editor to write content for your new Learning Path. 
 
 Check the results in the browser to see how they look. 
 

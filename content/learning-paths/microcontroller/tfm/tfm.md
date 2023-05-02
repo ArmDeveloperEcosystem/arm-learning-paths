@@ -17,7 +17,7 @@ These instructions assume an Ubuntu Linux host machine, or use of [Arm Virtual H
 
 The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-guides/ecosystem_fvp/).
 
-Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-guides/avh#corstone).
+Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions refer to the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
 ## Install appropriate compiler
 
@@ -30,6 +30,7 @@ To install locally see:
 ## Prerequisites
 
 Install `python 3` prerequisites for TF-M:
+
 ```bash
 sudo apt update
 sudo apt install -y python3.8-venv python3-pip
@@ -85,7 +86,7 @@ where:
 - `tfm_s_ns_signed.bin` is the combined signed image for the TF-M secure and non-secure image
   - `@<addr>` indicates where in the Corstone-300 FVP memory the image is loaded. 
 
-The memory map for the FVP is documented [here](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/Memory-map-overview-for-Corstone-SSE-300).
+The memory map for the FVP is documented in the [FVP Reference Guide](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/Memory-map-overview-for-Corstone-SSE-300).
 
 The test results will be output in a `telnet` window.
 

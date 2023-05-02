@@ -12,7 +12,7 @@ Raspberry Pi products have made a significant impact in many areas of computing.
 
 Software developers use the Raspberry Pi 4 to prototype embedded Linux and IoT projects. The architecture compatibility between the Raspberry Pi 4 and Arm cloud instances make a good combination for developers. Developers are interested to compare and contrast Arm cloud virtual machines with single board computers such as the Raspberry Pi 4. 
 
-This learning path introduces the Raspberry Pi 4 using a few common developer tasks as examples. It also compares and contrasts the Raspberry Pi 4 with Arm cloud instances. 
+This Learning Path introduces the Raspberry Pi 4 using a few common developer tasks as examples. It also compares and contrasts the Raspberry Pi 4 with Arm cloud instances. 
 
 ## Raspberry Pi 4 hardware specs
 
