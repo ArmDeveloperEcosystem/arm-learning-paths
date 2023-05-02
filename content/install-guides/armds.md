@@ -26,7 +26,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) is the most comprehensive embedded C/C++ dedicated software development solution. It is used for validation of SoC debug through emulation, simulation, FPGA, and silicon bring-up design and verification stages. It has the earliest support for all Arm CPUs and interconnects.
 
-## Prerequisites
+## Before you begin
 
 Arm Development Studio can be installed on Windows and Linux hosts.
 
@@ -40,17 +40,19 @@ Gold, Silver, and Bronze editions are one installer, with available features def
 
 Development Studio Platinum Edition has its own installation package. The version is denoted by `year.index`, where `index` is a letter (for example `2022.c`).
 
-You can download the Development Studio installer from the [Product Download Hub](https://developer.arm.com/downloads). For more information on the Download Hub, see [here](../pdh).
+You can download the Development Studio installer from the [Product Download Hub](https://developer.arm.com/downloads). 
+
+For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](../pdh).
 
 ## Install Arm Development Studio
 
-For Windows hosts, follow the installation instructions provided [here](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Windows).
+For Windows hosts, follow the installation instructions provided in Windows section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Windows).
 
-For Linux hosts, follow the installation instructions provided [here](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux). Note also [additional Linux libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) are required.
+For Linux hosts, follow the installation instructions provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux). Note also [additional Linux libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) may be required.
 
-## Setting up license
+## Set up the product license
 
-Arm Development Studio is license managed. License setup instructions are available [here](../license/).
+Arm Development Studio is license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).
 
 When you launch the IDE for the first time, you may be prompted to select the Development Studio Edition in `Help` > `Arm License Manager`.
 

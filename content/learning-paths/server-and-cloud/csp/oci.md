@@ -7,7 +7,7 @@ weight: 6 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Oracle Cloud Infrastructure (OCI)](https://oracle.com/cloud/) is a mature cloud computing platform. An overview of their services is described [here](https://www.oracle.com/cloud/why-oci/).
+[Oracle Cloud Infrastructure (OCI)](https://oracle.com/cloud/) is a public cloud computing platform. 
 
 As with most cloud service providers, OCI offers a pay-as-you-use [pricing policy](https://www.oracle.com/cloud/pricing/), including a number of [free](https://www.oracle.com/cloud/free/) services.
 
@@ -85,7 +85,7 @@ Detailed instructions are given in the Oracle [documentation](https://docs.oracl
 
 ## Explore your instance
 
-### uname
+### Run uname
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
 ```console
@@ -93,9 +93,9 @@ uname -m
 ```
 will identify the host machine as `aarch64`.
 
-### hello world
+### Run hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands, else see [here](/install-guides/gcc):
+Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
 
 ```console
 sudo apt-get update

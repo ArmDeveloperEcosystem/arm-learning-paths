@@ -37,7 +37,7 @@ The Learning Path site contains software-based Learning Paths and Tool Install G
 This site is built on the [Hugo](https://gohugo.io/) web framework, ideal for generating static websites. Below is a brief description of the key files and directories:
 
   * /content
-    * where all learning path and tool installation content is located
+    * contains all Learning Paths and install guides
   * /themes
     * where the html elements are defined to render /content into stylized HTML
   * /tools

@@ -7,11 +7,11 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-You will primarily use Keil MDK to guide you through this learning path. If you are using Arm Development Studio refer to the comments at the end of each page.
+You will primarily use Keil MDK to guide you through this Learning Path. If you are using Arm Development Studio refer to the comments at the end of each page.
 
 ## Install appropriate device CMSIS-Pack
 
-This learning path is written for the supplied (Cortex-M4) FVP, however it could be run on any of the 9000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+This Learning Path is written for the supplied (Cortex-M4) FVP, however it could be run on any of the 9000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
 
 If you are using the FVP, skip this step.
 
@@ -76,7 +76,7 @@ LOAD 0x0 0x400000 {
 	ARM_LIB_STACK 0x20050000 EMPTY 0x10000 {}
 }
 ```
-For more on scatter-loading, see this [learning path](/learning-paths/embedded/bare-metal).
+For more on scatter-loading, refer to the Learning Path [Create a bare-metal Armv8-A embedded image](/learning-paths/embedded/bare-metal).
 
 You are now ready to build your example.
 

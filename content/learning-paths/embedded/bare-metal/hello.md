@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Arm tools
 
-It is assumed you have installed Arm Development Studio and configured your license. For full instructions see [here](/install-guides/armds/).
+You should have Arm Development Studio installed and your license configured. Refer to the [Arm Development Studio install guide](/install-guides/armds/) for more information.
 
 Alternatively you can install [Arm Compiler for Embedded](/install-guides/armclang/) and [Arm Fixed Virtual Platforms (FVP)](/install-guides/fm#fvp) individually.
 
@@ -20,14 +20,14 @@ Use the `FVP_Base_Cortex-A73x2-A53x4` platform, which is a complex FVP system, c
 
 ## Armv8-A Architecture
 
-This learning path assumes some knowledge of [Armv8-A Architecture](https://developer.arm.com/Architectures/A-Profile%20Architecture). An overview of the instruction set and registers is available [here](https://developer.arm.com/downloads/-/exploration-tools).
+This Learning Path assumes some knowledge of [Armv8-A Architecture](https://developer.arm.com/Architectures/A-Profile%20Architecture). If you need more background,[Architecture Exploration Tools](https://developer.arm.com/downloads/-/exploration-tools) provide an overview of the instruction set and registers. 
 
-## "Hello World!"
+## Create a "Hello World!" program
 
 Start with a simple C program, and use the `armclang` compiler and `armlink` linker tools to compile and generate an executable image.
 
 Use your favorite editor to create a new source file called `hello.c` with the following contents:
-#### hello.c
+
 ```C
 #include <stdio.h>
 
@@ -36,9 +36,11 @@ int main(void) {
   return 0;
 }
 ```
+
 ## Build the example
 
 This command invokes the compiler to compile `hello.c` for the Armv8-A architecture and generate an ELF object file `hello.o`:
+
 ```console
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a hello.c
 ```
@@ -131,6 +133,6 @@ FVP_Base_Cortex-A73x2-A53x4 -a hello.axf -C pctl.startup=0.0.1.0
 ```
 The code executes on the FVP, and the message "Hello World!" appears on screen.
 
-## -C pctl.startup=0.0.1.0
+## Enable single core simulation
 
-This particular FVP was chosen as it implements two multi-core processor clusters therein. By default, this model starts all processors in the model running. Use the `-C pctl.startup=0.0.1.0` option to specify that only a single core should run. This will be addressed in the next section.
+This particular FVP was chosen because it includes two multi-core processor clusters. By default, the model starts all processors running. The `-C pctl.startup=0.0.1.0` option specifies that only a single core should run. This will be addressed in the next section.

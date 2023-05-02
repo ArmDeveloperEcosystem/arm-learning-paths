@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ##  Use the GUI to deploy Azure Arm based virtual machines
 
-Azure currently offers various Arm based VMs including the Dpsv5, Dpdsv5, Dplsv5, Dpldsv5, Epsv5, and Epdsv5. More information about Azure virtual machines can be found [here](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/).
+Azure currently offers various Arm based VMs including the Dpsv5, Dpdsv5, Dplsv5, Dpldsv5, Epsv5, and Epdsv5. More information about virtual machines is available from [Azure](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/).
 
 Create an Azure account at https://portal.azure.com with a [Pay-As-You-Go](https://signup.azure.com/signup?offer=MS-AZR-0003P) subscription to use dpsv5 Arm virtual machines.
 

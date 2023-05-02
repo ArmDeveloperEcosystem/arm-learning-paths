@@ -91,17 +91,20 @@ armclang --version
 
 ### Integrate with Arm Development Studio {#armds}
 
-To integrate this compiler with Arm Development Studio, [register](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain) the installation before then [configuring](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain/Configure-a-compiler-toolchain-for-the-Arm-DS-command-prompt) the environment to use that version.
+To integrate this compiler with Arm Development Studio, [register](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain) the installation and [configure](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain/Configure-a-compiler-toolchain-for-the-Arm-DS-command-prompt) the environment to use that version.
 
 Full installation instructions are given in the [documentation](https://developer.arm.com/documentation/100748/latest/Getting-Started/Installing-Arm-Compiler-for-Embedded).
 
-## Setting up product license
+## Set up the product license
 
-Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed. License setup instructions are available [here](../license/).
+Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).
 
 ## Verify installation
 
-To verify everything is working, build a simple `Hello World` example as described [here](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).
+To verify everything works, compile a simple `Hello World` example.
+
+Use a text editor to copy and paste the code below into a file named `hello.c`:
+
 ```C
 // hello.c
 #include <stdio.h>
@@ -110,6 +113,13 @@ int main() {
   return 0;
 }
 ```
+
+Compile the code with `armclang`:
+
 ```console
 armclang --target=aarch64-arm-none-eabi hello.c
 ```
+
+If the the command completes with no errors, the compiler is working.
+
+More information about the example is available in the [Arm Compiler for Embedded User Guide](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).

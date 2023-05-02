@@ -7,17 +7,17 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Amazon Web Services (AWS)](https://aws.amazon.com/) is a mature cloud computing platform. An overview of their services is described [here](https://aws.amazon.com/what-is-aws/).
+[Amazon Web Services (AWS)](https://aws.amazon.com/) is a public cloud computing platform. 
 
 As with most cloud service providers, AWS offers a pay-as-you-use [pricing policy](https://aws.amazon.com/pricing/), including a number of [free](https://aws.amazon.com/free/) services.
 
 This guide is to help you get started with [Amazon Elastic Compute Cloud (EC2)](https://aws.amazon.com/ec2/) compute services, using Arm-based [Graviton](https://aws.amazon.com/ec2/graviton/) processors. This is a general purpose compute platform, essentially your own personal computer in the cloud.
 
-Detailed instructions are available in [this tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) from AWS.
+Detailed instructions are available in the [Get started tutorial](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EC2_GetStarted.html) from AWS.
 
 ## Create an account
 
-Before you begin, create an account. For a personal account, click on [Create an AWS account](https://aws.amazon.com/), and follow the on-screen instructions to register. See [this guide](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.
+Before you begin, create an account. For a personal account, click on [Create an AWS account](https://aws.amazon.com/), and follow the on-screen instructions to register. See the [Creating an AWS account documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.
 
 If using an organization's account, you will likely need to consult with your internal administrator. See [this guide](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html) for additional information.
 
@@ -75,8 +75,6 @@ Once the `Instance state` reports that it is `Running`, you are able to connect 
 
 In the `Instance summary` view, click `Connect`, and select the `EC2 Instance Connect` tab. Click the `Connect` button to open a terminal in the browser.
 
-Full documentation available [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-connect-set-up.html).
-
 ### SSH client Connect
 
 You can connect to the instance with your preferred SSH client. In the `Instance summary` view, click `Connect`, and select the `SSH client` tab to see the command line to launch the native SSH client.
@@ -88,11 +86,13 @@ ssh -i <private_key> ubuntu@<public_ip_address>
 ```
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used.
 
-Default user names for standard AMIs are listed [here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html).
+Different Linux distributions have different default user names you can use to connect. 
+
+[Default user names](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connection-prereqs.html) for AMIs are listed in a table. Find your operating system and see the default user name you should use to connect.
 
 ## Explore your instance
 
-### uname
+### Run uname
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
 
@@ -101,14 +101,15 @@ uname -m
 ```
 will identify the host machine as `aarch64`.
 
-### hello world
+### Run hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands, else see [here](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
 
 ```console
 sudo apt-get update
 sudo apt install -y gcc
 ```
+
 Using a text editor of your choice, create a file `hello.c` with the contents below:
 
 ```C

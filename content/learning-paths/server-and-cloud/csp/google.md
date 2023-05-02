@@ -7,13 +7,13 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Google Cloud](https://cloud.google.com/) is a mature cloud computing platform. An overview of their services is described [here](https://cloud.google.com/why-google-cloud).
+[Google Cloud](https://cloud.google.com/) is a public cloud computing platform. 
 
 As with most cloud service providers, Google Cloud offers a pay-as-you-use [pricing policy](https://cloud.google.com/pricing), including a number of [free](https://cloud.google.com/free/docs/free-cloud-features) services.
 
 This section is to help you get started with [Google Cloud Compute Engine](https://cloud.google.com/compute) compute services, using Arm-based [Tau T2A](https://cloud.google.com/tau-vm) Virtual Machines. This is a general purpose compute platform, essentially your own personal computer in the cloud.
 
-Detailed instructions are available in the Google Cloud [documentation](https://cloud.google.com/compute/docs/instances). There is an interactive `Quickstart` tutorial [here](http://console.cloud.google.com/?tutorial=compute_short_quickstart).
+Detailed instructions are available in the Google Cloud [documentation](https://cloud.google.com/compute/docs/instances). 
 
 ## Create an account
 
@@ -41,7 +41,7 @@ Give your instance a meaningful, but arbitrary, name. This is particularly usefu
 
 ### Select Region and Zone for your instance.
 
-Select an appropriate `region` and `zone` that supports Arm-based servers. Latest information is listed [here](https://cloud.google.com/compute/docs/regions-zones#available).
+Select an appropriate `region` and `zone` that supports Arm-based servers. Check the latest information about [available regions and zones](https://cloud.google.com/compute/docs/regions-zones#available).
 
 ### Machine configuration
 
@@ -76,7 +76,7 @@ Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https
 
 ## Explore your instance
 
-### uname
+### Run uname
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
 
@@ -85,9 +85,10 @@ uname -m
 ```
 will identify the host machine as `aarch64`.
 
-### hello world
+### Run hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands, else see [here](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
+
 ```console
 sudo apt-get update
 sudo apt install -y gcc

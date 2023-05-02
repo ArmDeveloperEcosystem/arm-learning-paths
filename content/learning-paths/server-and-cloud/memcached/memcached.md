@@ -8,9 +8,9 @@ weight: 2
 
 Launch an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider running an Ubuntu Linux distribution.
 
-Install `gcc` on your instance following the steps [here](/install-guides/gcc/native/).
+Install `gcc` on your instance by following the steps in the [GNU compiler install guide](/install-guides/gcc/native/).
 
-This learning path has been tested on `AWS` and `Oracle Cloud` platforms.
+This Learning Path has been tested on `AWS` and `Oracle Cloud` platforms.
 
 ## Install necessary software and packages
 
@@ -40,7 +40,7 @@ tar -zxvf memcached-1.6.19.tar.gz
 cd memcached-1.6.19
 ./configure && make && make test && sudo make install
 ```
-You can verify the latest available version [here](https://memcached.org/downloads).
+You can verify the latest available version on the [downloads page](https://memcached.org/downloads).
 
 ### Run memcached on Arm server
 When built, start the `memcached` daemon with:

@@ -10,7 +10,7 @@ learning_objectives:
     - Integrate Arm Virtual Hardware into CI/CD flow with GitHub Actions
 
 prerequisites:
-    - This Learning Path builds on concepts introduced [here](../avh_cicd/).
+    - You should have completed part one of [Integrate Arm Virtual Hardware into CI/CD workflow](../avh_cicd/).
     - Valid AWS and GitHub accounts are required
 
 author_primary: Pareena Verma

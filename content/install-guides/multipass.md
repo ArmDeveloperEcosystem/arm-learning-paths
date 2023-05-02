@@ -30,7 +30,7 @@ A computer running macOS with Apple Silicon is required to complete the steps be
 
 Multipass provides a clear CLI to easily start virtual machine instances, do development tasks, and clean the VMs from your computer.
 
-## Prerequisites
+## Before you begin
 
 Multipass runs on a variety of platforms and host operating systems. The information below covers running Multipass on macOS with Apple Silicon with the goal of creating a compatible Ubuntu Linux environment for developers working on cloud instances. 
 

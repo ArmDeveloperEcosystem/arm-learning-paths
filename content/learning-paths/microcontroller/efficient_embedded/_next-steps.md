@@ -4,7 +4,8 @@
 # ================================================================================
 
 next_step_guidance: >
-   As a next step, try some more advanced examples from the Efficient Embedded education kit. You can find it [here](https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit)
+   As a next step, try some more advanced examples from the [Advanced SoC education kit](https://github.com/arm-university/Advanced-System-on-Chip-Design-Education-Kit). 
+
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/microcontroller/efficient_embedded/"

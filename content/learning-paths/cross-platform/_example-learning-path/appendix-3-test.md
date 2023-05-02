@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 This repository provides a framework to help testing instructions, code snippets and maintain content.
 
-The framework allows to parse Learning Path articles and generate instructions to be run on a Docker container instance. It checks for expected behaviour and stores results in Junit XML files. It creates one XML file by Learning Path sub-article.
+The framework allows to parse Learning Path articles and generate instructions to be run on a Docker container instance. It checks for expected behavior and stores results in Junit XML files. It creates one XML file by Learning Path sub-article.
 
 1. [Install dependencies](#install-dependencies)
 2. [Edit Learning Path pages](#edit-learning-path-pages)
@@ -30,7 +30,7 @@ The framework is located in the `tools` folder. From the project root folder, in
 pip install -r tools/requirements.txt
 ```
 
-Docker is also required. Check the instructions [here](https://docs.docker.com/engine/install/ubuntu/) to install Doker on Ubuntu.
+Docker is also required. Refer to the [Docker Engine install guide](http://localhost:1313/install-guides/docker/docker-engine/) to install Docker on Ubuntu.
 
 ## Edit Learning Path pages
 
@@ -244,7 +244,7 @@ test_status:
 
 The field `test_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed. 
 
-In the example above, the summary indicates that for this learning path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures are stored in Junit XML files.
+In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures are stored in Junit XML files.
 
 ## Visualize results
 

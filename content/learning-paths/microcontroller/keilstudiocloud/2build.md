@@ -14,7 +14,7 @@ To access Keil Studio Cloud, you need an [Arm Account](https://developer.arm.com
 
 To work with development boards over USB, you must use Keil Studio in a desktop browser that supports the WebUSB standard: Google Chrome or Microsoft Edge (Chromium). All other features are supported in the latest versions of the following desktop browsers: Google Chrome, Microsoft Edge, Opera, Safari, and Mozilla Firefox.
 
-## Getting started with the IDE
+## Get started with the IDE
 
 1. Go to [keil.arm.com](https://keil.arm.com).
 

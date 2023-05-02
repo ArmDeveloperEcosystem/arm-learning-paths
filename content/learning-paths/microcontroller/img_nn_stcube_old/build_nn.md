@@ -8,11 +8,11 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this learning path, you will build a convolution neural network model for image classification. You will train the model with CIFAR-10 dataset, one of the most popular image datasets, which contains 60,000 images with 10 different categories. The model takes an RGB image and predicts the category of the image.
+In this Learning Path, you will build a convolution neural network model for image classification. You will train the model with CIFAR-10 dataset, one of the most popular image datasets, which contains 60,000 images with 10 different categories. The model takes an RGB image and predicts the category of the image.
 
 ## Get Setup
 
-On your Windows 10 development machine,  start by downloading all the project files you'll need to run the example in this learning path.
+On your Windows 10 development machine,  start by downloading all the project files you'll need to run the example in this Learning Path.
 The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontroller/img_nn_stcube/Project_Files/img_class_stcube.zip)
 
 Then install Anaconda. Anaconda is a distribution of Python language for data science and machine learning. With Anaconda, you can easily install open-source machine learning packages. Here are the steps to install Anaconda on your machine.
