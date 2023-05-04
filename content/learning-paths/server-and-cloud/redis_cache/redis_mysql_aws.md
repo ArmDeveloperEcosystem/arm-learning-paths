@@ -2,7 +2,7 @@
 # User change
 title: "Deploy Redis as a cache for MySQL on an AWS Arm based Instance"
 
-weight: 8 # 1 is first, 2 is second, etc.
+weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"

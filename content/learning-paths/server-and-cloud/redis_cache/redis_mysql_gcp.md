@@ -2,7 +2,7 @@
 # User change
 title: "Deploy Redis as a cache for MySQL on a GCP Arm based Instance"
 
-weight: 10 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -189,7 +189,7 @@ Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Install MySQL and the required dependencies on both the instances. 
 
-You can use the same `playbook.yaml` file used in the section, [Deploy Redis as a cache for MySQL on an AWS Arm based Instance](/learning-paths/server-and-cloud/redis/redis_cache_aws#configure-mysql-through-ansible).
+You can use the same `playbook.yaml` file used in the section, [Deploy Redis as a cache for MySQL on an AWS Arm based Instance](/learning-paths/server-and-cloud/redis_cache/redis_mysql_aws#configure-mysql-through-ansible).
 
 ### Ansible Commands
 
@@ -263,11 +263,11 @@ PLAY RECAP *********************************************************************
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis/redis_cache_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_mysql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
 
 ## Deploy Redis as a cache for MySQL using Python
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis/redis_cache_aws#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_mysql_aws#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
 
 You have successfully deployed Redis as a cache for MySQL on a Google Cloud Arm based Instance.
 
