@@ -10,7 +10,7 @@ official_docs: https://cloud.google.com/sdk/docs/install-sdk
 test_images:
 - ubuntu:latest
 test_maintenance: false
-title: Google Cloud CLI 
+title: Google Cloud Platform (GCP) CLI 
 tool_install: true
 weight: 1
 ---
