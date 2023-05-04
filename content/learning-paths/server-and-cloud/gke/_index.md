@@ -1,5 +1,5 @@
 ---
-title: Create an Arm-based Kubernetes cluster on Google Cloud
+title: Create an Arm-based Kubernetes cluster on Google Cloud Platform (GCP)
  
 minutes_to_complete: 60   
 
