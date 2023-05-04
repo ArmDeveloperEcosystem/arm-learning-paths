@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Cluster Automatically (GCP)"
+title: "Deploy a cluster automatically on GCP"
 
 weight: 7 # 1 is first, 2 is second, etc.
 
