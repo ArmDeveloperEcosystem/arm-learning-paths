@@ -271,7 +271,7 @@ Use the deep learning complier [TVM](https://tvm.apache.org/) for model conversi
 
 ![Schematic diagram of compilation process #center](./Figure5.png "Figure 5. Schematic diagram of compilation process")
 
-Use TVM’s Python application TVMC to compile the model. 
+Use TVM's Python application TVMC to compile the model. 
 
 Install TVM using conda.
 
@@ -310,9 +310,9 @@ In this example, it ends up in a file called `rec.tar` in the current directory.
 
 ## 4. Deploy on the Corstone-300 FVP with Arm Cortex-M55
 
-The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [Arm Ecosystem FVPs](/install-tools/ecosystem_fvp/).
+The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [Arm Ecosystem FVPs](/install-guides/ecosystem_fvp/).
 
-Alternatively, you can access the FVP using [Arm Virtual Hardware](/install-tools/avh/).
+Alternatively, you can access the FVP using [Arm Virtual Hardware](/install-guides/avh/).
 
 The complete [sample code](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example), that you can run from the command line, is available to download from [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/dygraph/deploy/avh)’s GitHub repository (under the dygraph branch). This makes it easier for developers to experience the whole workflow, especially the deployment.
 

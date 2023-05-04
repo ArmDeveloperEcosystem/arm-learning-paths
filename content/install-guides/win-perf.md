@@ -95,7 +95,7 @@ cd Downloads\windowsperf-bin-2.4.0\wperf-driver
 ```
 
 {{% notice  Note%}}
-You may need to navigate back to the Downloads directory dependng on where the Command Prompt starts.
+You may need to navigate back to the Downloads directory depending on where the Command Prompt starts.
 {{% /notice %}}
 
 Install the driver:
