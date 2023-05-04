@@ -271,7 +271,7 @@ Use the deep learning complier [TVM](https://tvm.apache.org/) for model conversi
 
 ![Schematic diagram of compilation process #center](./Figure5.png "Figure 5. Schematic diagram of compilation process")
 
-Use TVM’s Python application TVMC to compile the model. 
+Use TVM's Python application TVMC to compile the model. 
 
 Install TVM using conda.
 

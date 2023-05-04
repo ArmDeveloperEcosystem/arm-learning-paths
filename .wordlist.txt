@@ -1332,4 +1332,5 @@ firefox
 esr
 DRM
 woolyss
-TVM’s
+TVM's
+windowsperf
