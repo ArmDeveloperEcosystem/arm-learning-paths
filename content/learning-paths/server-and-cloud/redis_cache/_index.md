@@ -1,17 +1,13 @@
 ---
-title: Deploy Redis on Arm
+title: Deploy Redis as a cache for MySQL and PostgreSQL on Arm servers
 
-minutes_to_complete: 50
+minutes_to_complete: 60   
 
-who_is_this_for: This is an introductory topic for developers who want to deploy Redis on Arm based virtual machines.
+who_is_this_for: This is an advanced topic for developers who want to deploy Redis as a cache on Arm based virtual machines.
 
 learning_objectives: 
-    - Understand Redis deployment configurations
-    - Install Redis on a single AWS Arm based instance
-    - Install Redis on a single Azure Arm based instance
-    - Install Redis on a single GCP Arm based instance
-    - Install Redis with a docker container on a single node
-    - Install Redis in a multi-node configuration (sharding)
+    - Deploy Redis as a cache for MySQL on AWS, Azure and GCP Arm based instance
+    - Deploy Redis as a cache for Postgres on AWS, Azure and GCP Arm based instance
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
@@ -21,7 +17,7 @@ prerequisites:
 
 author_primary: Jason Andrews
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Databases
 armips:
     - Neoverse
@@ -37,4 +33,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
