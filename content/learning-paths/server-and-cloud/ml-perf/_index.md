@@ -2,7 +2,6 @@
 armips:
 - Neoverse
 author_primary: Pareena Verma
-description: Learn how to measure machine learning inference performance on Arm servers
 layout: learningpathall
 learning_objectives:
 - Install and run tensorflow on your Arm-based cloud server

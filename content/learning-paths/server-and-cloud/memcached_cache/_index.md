@@ -24,7 +24,7 @@ test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4
 test_maintenance: true
 test_status:
 - passed
-title: Deploy Memcached as a cache for MySQL & PostgreSQL
+title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm based servers
 tools_software_languages:
 - Memcached
 weight: 1
