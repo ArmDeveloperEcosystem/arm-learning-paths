@@ -9,7 +9,7 @@ learning_objectives:
     - Tune PostgreSQL to increase performance
 
 prerequisites:
-    - Bare-metal or cloud installation of PostgreSQL
+    - Bare-metal or cloud installation of PostgreSQL on an Arm based cloud virtual machine or Arm bsed server
 
 author_primary: Julio Suarez
 

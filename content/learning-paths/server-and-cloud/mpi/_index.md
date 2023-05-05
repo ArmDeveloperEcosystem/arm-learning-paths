@@ -1,8 +1,6 @@
 ---
 title: Get started with parallel application development
 
-description: Learning path for building and running parallel applications on Arm and tips to debug and optimize them.
-
 minutes_to_complete: 30   
 
 who_is_this_for: This is an advanced topic for HPC software developers writing MPI applications.

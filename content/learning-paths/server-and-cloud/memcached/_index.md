@@ -2,8 +2,6 @@
 armips:
 - Neoverse
 author_primary: Pareena Verma
-description: Learn how to install and measure the performance of memcached on Arm
-  servers
 layout: learningpathall
 learning_objectives:
 - Install and run memcached on your Arm-based cloud server
