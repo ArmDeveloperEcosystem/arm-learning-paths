@@ -35,31 +35,45 @@ Select `Compute Engine` from the `Quick access` section, if shown. Else navigate
 
 Click the `CREATE INSTANCE` button.
 
+![image](https://user-images.githubusercontent.com/67620689/202090364-2946214c-2347-4538-b2b0-3a36f45caee0.PNG)
+
 ### Name your instance
 
 Give your instance a meaningful, but arbitrary, name. This is particularly useful when creating multiple instances. You can optionally add [labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels) as additional identifiers.
+
+![image](https://user-images.githubusercontent.com/67620689/202098830-532b5dc8-f6b5-4cff-931c-ec41edd08516.PNG)
 
 ### Select Region and Zone for your instance.
 
 Select an appropriate `region` and `zone` that supports Arm-based servers. Check the latest information about [available regions and zones](https://cloud.google.com/compute/docs/regions-zones#available).
 
+![image](https://user-images.githubusercontent.com/67620689/202097168-6208b6ae-3627-47b3-a397-7783769e6727.PNG)
+
 ### Machine configuration
 
 Select `T2A` from the `Series` pull down menu. Then select an appropriate `Machine type` configuration for your needs.
+
+![image](https://user-images.githubusercontent.com/67620689/203740482-d820ced1-5eeb-4c07-99a3-18a7a7511966.PNG)
 
 ### Boot disk configuration
 
 Click the `CHANGE` button if you wish to change the virtual disk size, or the operating system or version, for example to `Ubuntu 20.04 LTS`. Be sure to select Arm compatible image.
 
+![image](https://user-images.githubusercontent.com/67620689/204448755-f1259724-a386-4dc3-9b88-8ece7057d4de.PNG)
+
 ## Security and SSH key pair
 
 By default, you can access your instance via the browser. If you wish to use an SSH terminal, you must [create](https://cloud.google.com/compute/docs/connect/create-ssh-keys) and [add](https://cloud.google.com/compute/docs/connect/add-ssh-keys)  an appropriate SSH key pair.
+
+![image](https://user-images.githubusercontent.com/67620689/225616099-8fc7791a-24b3-4195-b957-154eaca43080.PNG)
 
 ### Other options
 
 Other options, such as `Confidential VM service`, can optionally be enabled. For now, leave as default (disabled). See the Google Cloud documentation for an explanation of these configurations.
 
 When satisfied, click `CREATE`. After a few moments the instance will be available, and listed in your [console](https://console.cloud.google.com/compute/instances).
+
+![image](https://user-images.githubusercontent.com/67620689/202098038-7bfb0b6c-af18-4d5c-92a8-ca90a57bc25b.PNG)
 
 ## Connect to your instance
 
