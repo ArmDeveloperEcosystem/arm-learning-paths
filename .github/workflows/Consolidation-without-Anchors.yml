@@ -28,14 +28,23 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Check HTML links
+      ## Used w3c-Link checker. 
+      - name: Check w3c-linkchecker links
         continue-on-error: true
-        run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
+        
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y w3c-linkchecker
 
-      - name: HTML test results
+      - name: Check links
+        run: |
+          linkchecker --check-extern --ignore-url=mailto: --no-warnings --no-status -F log -o htmltest.log .htmltest.yml
+      
+      - name: Upload output file as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: htmltest-report
+          name: w3c-linkchecker-output
           path: htmltest.log
           retention-days: 7 # Default is 90 days
 
