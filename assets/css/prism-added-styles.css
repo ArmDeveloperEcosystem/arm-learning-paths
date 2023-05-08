@@ -5,3 +5,19 @@ html[theme="dark"] .copy-to-clipboard-button {
     color: black!important;
     background-color: var(--arm-light-blue)!important;}
 .copy-to-clipboard-button:hover span {font-weight: bold;}
+
+/* if '__output__' is at the start of a line, style differently */
+/*in prismjs:  		if (element.classList.contains('language-output')) { return } */
+/*in prismjs:  return element.textContent.replace(/^\_\_output\_\_.*\n?/gm, '');  */
+pre > code > span.hidden-output-text {
+    display: none;
+}
+pre > code > span.output {
+    user-select: none;
+    /*color: hsla(0,0%,93%,.15); */
+    opacity: 0.8!important;
+}
+
+.command-line-prompt>span:before {
+    opacity: 0.8!important;
+}

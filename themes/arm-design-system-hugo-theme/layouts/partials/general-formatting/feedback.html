@@ -33,11 +33,11 @@ Called from:
             <div id="feedback-1-stars">
                 <p>How would you rate the overall quality of this {{.learningpath_or_toolinstall}}?</p>
                 <div class="rating" style="float: left">
-                    <input id="rating-5" type="radio" name="rating" value="5" onclick="starRatingGiven(this)"/><label for="rating-5"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-4" type="radio" name="rating" value="4" onclick="starRatingGiven(this)"/><label for="rating-4"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-3" type="radio" name="rating" value="3" onclick="starRatingGiven(this)"/><label for="rating-3"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-2" type="radio" name="rating" value="2" onclick="starRatingGiven(this)"/><label for="rating-2"><i class="fas fa-2x fa-star"></i></label>
-                    <input id="rating-1" type="radio" name="rating" value="1" onclick="starRatingGiven(this)"/><label for="rating-1"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-5" type="radio" name="rating" value="5" onclick="starRatingGiven(this)"/><label title="Excellent" for="rating-5"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-4" type="radio" name="rating" value="4" onclick="starRatingGiven(this)"/><label title="Good" for="rating-4"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-3" type="radio" name="rating" value="3" onclick="starRatingGiven(this)"/><label title="Okay" for="rating-3"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-2" type="radio" name="rating" value="2" onclick="starRatingGiven(this)"/><label title="Bad" for="rating-2"><i class="fas fa-2x fa-star"></i></label>
+                    <input id="rating-1" type="radio" name="rating" value="1" onclick="starRatingGiven(this)"/><label title="Very Bad" for="rating-1"><i class="fas fa-2x fa-star"></i></label>
                 </div>
             </div>
 
@@ -101,7 +101,7 @@ Called from:
             <div id="feedback-3-thanks" hidden>
                 <p>Thank you. We're grateful for your feedback on how to improve this {{.learningpath_or_toolinstall}}.</p>
                 <ul>
-                    <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Raise an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
+                    <li>Have more detailed feedback about what to improve or add next? <a href="{{$issuesURL}}" target="_blank">Log an issue on GitHub.{{partial "general-formatting/external-link.html" }}</a></li>
                     <li>Want to discuss this topic with fellow developers and Arm Experts? <a href="https://discord.com/invite/armsoftwaredev" target="_blank">Collaborate in the Arm Developer Discord server.{{partial "general-formatting/external-link.html" }}</a></li>
                 </ul>
             </div>
