@@ -43,7 +43,12 @@ jobs:
        run: |
          ./scripts/build/gn_bootstrap.sh
          source scripts/activate.sh
-         cd examples/lighting-app/linux
+         git clone https://github.com/project-chip/zap.git ./zap
+         cd ./zap
+         sudo src-script/install-packages-ubuntu
+         npm ci
+         export ZAP_DEVELOPMENT_PATH=$PWD
+         cd ../examples/lighting-app/linux
          gn gen out/debug
          ninja -C out/debug
          
@@ -51,10 +56,10 @@ jobs:
     needs: rebuild_lighting_app
     runs-on: self-hosted
     steps:
-      - name: Run lighting-app for 1 minute
+      - name: Run lighting-app for 3 minutes
         run: |
           cd examples/lighting-app/linux
-          timeout 120s ./out/debug/chip-lighting-app || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
+          timeout 180s ./out/debug/chip-lighting-app || code=$?; if [[ $code -ne 124 && $code -ne 0 ]]; then exit $code; fi
 ```
 
 ## Create GitHub self-hosted runner
@@ -92,13 +97,13 @@ This is in a source file named `on-off-server.cpp`.
 cd ~/connectedhomeip
 nano src/app/clusters/on-off-server/on-off-server.cpp
 ```
-Locate the `Toggle on/off` message (if using `nano`, use `Ctrl+_` to jump to line `137`):
+Locate the `Toggle on/off` message (if using `nano`, use `Ctrl+_` to jump to line `175`):
 ```C
-    emberAfOnOffClusterPrintln("Toggle on/off from %x to %x", currentValue, newValue);
+    emberAfOnOffClusterPrintln("Toggle ep%x on/off from state %x to %x", endpoint, currentValue, newValue);
 ```
 Edit to give a new output message, for example:
 ```C
-    emberAfOnOffClusterPrintln("HELLO WORLD! Toggle on/off from %x to %x", currentValue, newValue);
+    emberAfOnOffClusterPrintln("HELLO WORLD! Toggle ep%x on/off from state %x to %x", endpoint, currentValue, newValue);
 ```
 Exit (`Ctrl+X`) and save your change.
 
@@ -149,6 +154,6 @@ After `lighting-app` is initialized, you can toggle the light with your `chip-to
 ```
 Observer your new message in the `run_lighting_app` log, for example:
 ```output
-[TIMESTAMP][INSTANCEID] CHIP:ZCL: HELLO WORLD! Toggle on/off from 1 to 0
+[TIMESTAMP][INSTANCEID] CHIP:ZCL: HELLO WORLD! Toggle ep1 on/off from state 1 to 0
 ```
 The workflow will cleanly terminate `lighting-app` after 120 seconds.

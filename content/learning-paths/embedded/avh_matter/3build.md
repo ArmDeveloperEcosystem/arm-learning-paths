@@ -113,8 +113,8 @@ In the `chip-tool` instance, send a message to turn the light ON, using the comm
 ```
 Observe in the `lighting-app` log (you may need to scroll back a little) that this state is reflected with:
 ```output
-[TIMESTAMP][INSTANCEID] CHIP:ZCL: On/Off set value: 1 1
-[TIMESTAMP][INSTANCEID] CHIP:ZCL: Toggle on/off from 0 to 1
+[TIMESTAMP][INSTANCEID] CHIP:ZCL: Toggle ep1 on/off from state 0 to 1
+[TIMESTAMP][INSTANCEID] CHIP:ZCL: On Command - OffWaitTime :  0
 ```
 Similarly to turn the light OFF, in the `chip-tool` instance use:
 ```console
@@ -122,7 +122,7 @@ Similarly to turn the light OFF, in the `chip-tool` instance use:
 ```
 And observe in the `lighting-app` log:
 ```output
-[TIMESTAMP][INSTANCEID] CHIP:ZCL: On/Off set value: 1 0
-[TIMESTAMP][INSTANCEID] CHIP:ZCL: Toggle on/off from 1 to 0
+[TIMESTAMP][INSTANCEID] CHIP:ZCL: Toggle ep1 on/off from state 1 to 0
+[TIMESTAMP][INSTANCEID] CHIP:ZCL: Setting on/off to OFF due to level change
 ```
 Congratulations! You have successfully enabled two Virtual Hardware instances to communicate to each other via `Matter`.
