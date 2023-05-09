@@ -18,7 +18,7 @@ GitHub requires that a [Personal Access Token](https://docs.github.com/en/authen
 
 Ensure you have enabled the token to `Update GitHub Action workflows`.
 
-You may wish to create a local scratchpad text file containing the below details (which will be unique to you), so that you can easily copy-and-paste from.
+You may wish to create a local scratch pad text file containing the below details (which will be unique to you), so that you can easily copy and paste from.
 
 ```
 YOUR_GITHUB_USERNAME
