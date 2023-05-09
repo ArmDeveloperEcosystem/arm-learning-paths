@@ -1,18 +1,31 @@
-name: Assign Reviewer
+name: Assign PR Reviewers
 
 on:
-  pull_request_review_requested:
-    types: [review_requested]
+  pull_request:
+    types: [opened,review_requested]
 
 jobs:
-  assign_reviewer:
+  add-reviewers:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign Reviewers
-        uses: peter-evans/create-pull-request@v3.6.2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} ## Please add the PAT token in the secrets with this name "GITHUB_TOKEN" 
-          commit-message: 'Automatically assign reviewer to pull request'
-          title: 'Please review my pull request'
-          body: 'I would appreciate if you could review my pull request.'
-          reviewers: pareena.verma@arm.com,jason.randrews@arm.com
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Install dependencies
+      run: npm install @actions/github
+    - name: Add reviewers
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  ## Please add the PAT token in the secrets with this name "GITHUB_TOKEN" 
+        commit-message: 'Automatically assign reviewer to pull request'
+        title: 'Please review my pull request'
+        body: 'I would appreciate if you could review my pull request.'
+      run: |
+        const { context, GitHub } = require('@actions/github');
+        const github = new GitHub(process.env.GITHUB_TOKEN);
+        const prNumber = context.payload.pull_request.number;
+        const reviewers = ['pareena.verma@arm.com', 'jason.randrews@arm.com'];
+        github.pulls.createReviewRequest({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          pull_number: prNumber,
+          reviewers: reviewers
+        });
