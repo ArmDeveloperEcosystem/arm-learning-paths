@@ -80,6 +80,7 @@ html[theme="dark"]  div.markdown-content-div > table tbody { background-color: v
 
 div.markdown-content-div > div.code-toolbar {
     margin-left: 16px;
+    margin-right: 16px;         /*provide spacing from right side*/
 }
 
 /* If a header is the first child of markdown-content-div, it should add no extra padding (already done by markdown-content-div for all) */
@@ -201,24 +202,4 @@ div.markdown-content-div > h5:first-child,
 div.markdown-content-div > h6:first-child,
 div.markdown-content-div > p:first-child {
     margin-top: 0px;
-}
-
-
-
-/* prism adjustments, for copy code fixes */
-/*  Stop them being selectable so the user can just copy the commands 
-.command-line code span.output {
-    user-select: none;
-  }
-*/
-/* if '__output__' is at the start of a line, style differently */
-/*in prismjs:  		if (element.classList.contains('language-output')) { return } */
-/*in prismjs:  return element.textContent.replace(/^\_\_output\_\_.*\n?/gm, '');  */
-pre > code > span.hidden-output-text {
-    display: none;
-}
-pre > code > span.output {
-    user-select: none;
-    /*color: hsla(0,0%,93%,.15); */
-    opacity: .7;
 }
