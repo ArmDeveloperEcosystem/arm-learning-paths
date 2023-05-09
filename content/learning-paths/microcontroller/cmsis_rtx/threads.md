@@ -58,7 +58,7 @@ void __attribute__((noreturn)) thread3(void *argument){
 	}
 }
 ```
-## Build and run the example
+## Build and run the example (Keil MDK)
 
 Save all files, and click `build` (`F7`) the example.
 
@@ -74,15 +74,24 @@ However no output is seen in the `printf viewer`. This is because semihosting is
 
 [Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html) can be used instead for the printf functionality. It is supported for both FVPs and real hardware. In the next section, you will learn how to use the Event Recorder functionality with this example.
 
-## Comments for Arm Development Studio users
-* Recommend to create debug configuration after project has been built.
+## Build and run the example (Arm Development Studio)
+
+Save all files, then right-click on the project, and select `Build Project`.
+
+A `.axf` file will be generated in the `Configuration Name` folder.
+
+You must now create a `Debug Configuration`:
   * Navigate the menu to `File` > `New` > `Model Connection`.
   * Create a Debug connection, and associate it with your project.
   * Select the `MPS2_Cortex-M4` from the selection of FVPs Installed with Arm DS.
   * In the Debug configuration view:
-    * Navigate to `Files` tab, and browse for your image.
-	* Navigate to `Debugger` tab, and `Debug from symbol (main)`
-	* Navigate to `OS Awareness` tab, and select `Keil CMSIS-RTOS RTX` from the pull-down.
-  * When debugging, use the `OS Data` pane to observe RTOS information.
-* Arm Debugger does support semihosting. You will see the printf() output in `Target Console` pane.
-* Arm Debugger does not support Event Recorder Viewer.
+    * In `Files` tab, browse for your `.axf` image.
+	* In `Debugger` tab, select `Debug from symbol (main)`
+	* In `OS Awareness` tab, select `Keil CMSIS-RTOS RTX` from the pull-down.
+	* Click `Apply` to save all settings, then click `Debug`.
+	  * Subsequent debug sessions can be invoked directly from the `Debug Control` pane.
+
+When debugging, use the `OS Data` pane to observe RTOS information.
+
+You will see the printf() output in `Target Console` pane.
+

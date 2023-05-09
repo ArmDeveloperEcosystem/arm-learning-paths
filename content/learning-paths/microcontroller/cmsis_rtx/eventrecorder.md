@@ -11,6 +11,12 @@ Event Recorder allows for annotations in the application code or software compon
 
 I/O functions such as `printf()` can easily be retargeted to make use of this buffer.
 
+Event recorder functionality can be extended by the Keil MDK Component Viewer.
+
+{{% notice  Arm Development Studio%}}
+Event Recorder and Component Viewer are not supported. This section can be ignored.
+{{% /notice %}}
+
 ## Manage run-time environment
 
 Open the `Manage run-time environment` dialog, and enable `Compiler` > `Event Recorder` (`DAP` variant).
@@ -143,6 +149,3 @@ Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 Observe the events in the viewer, filtering as appropriate.
 
 If no RTOS events are visible, verify that they are enabled in `Target Options` > `Debug` > `Manage Component Viewer Description Files`.
-
-## Comments for Arm Development Studio users
-* Event Recorder viewer functionality is not supported by Arm Debugger.
