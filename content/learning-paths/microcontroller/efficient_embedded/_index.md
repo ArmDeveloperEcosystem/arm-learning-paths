@@ -14,6 +14,7 @@ learning_objectives:
     - Use a suitable debugging tool to view and analyse the processor state.  
 
 prerequisites:
+    - A Windows machine
     - Some familiarity with C/Assembly
     - Installed Keil MDK IDE
     - Have an STM32 Nucleo F401RE development board 

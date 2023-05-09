@@ -15,14 +15,22 @@ In this section, you will deploy the model directly on the STM32 board.
 [STM32CubeMX](https://www.st.com/en/development-tools/stm32cubemx.html) is a graphical tool for configuring STM32 microcontrollers.\
 [STM32Cube.AI](https://www.st.com/content/st_com/en/campaigns/stm32cube-ai.html) is an extension of STM32CubeMX to import ML models.
 
-1. Download and install STM32CubeMX from [here](https://www.st.com/en/development-tools/stm32cubemx.html)
+1. Download and install STM32CubeMX from the [STM32CubeMX product page](https://www.st.com/en/development-tools/stm32cubemx.html).
+
 2. Open STM32CubeMX IDE.
+
 3. Click `Access to Board Selector`. Find your `B-L475E-IOT01A` board and click `Start Project`.
+
 4. Go to `Project Manager`. Enter a project name and select the project location where the project will be saved.
+
 5. Under `Pinout & Configuration`, expand `Pinout` menu, and click `Clear pinouts`.
+
 6. Expand `Software Packs` menu, and click `Select Components`.
+
 7. Locate `X-CUBE-AI`, and click its `Install` button.
+
 8. Expand the menu and enable `X-CUBE-AI` > `Core`. For device application, choose `Validation`. If the status shows a yellow warning, click `Resolve` to install any necessary dependencies.
+
 9. Click `OK` when done.
 
 ## Validate the NN model
@@ -32,9 +40,13 @@ You will now validate the NN model built in the previous section on the desktop 
 ### Validate on desktop
 
 1. On the STM32CubeAI menu, locate `X-CUBE-AI` configuration from the list of `Categories`.
+
 2. click `Add network`. Browse to the generated model (`.h5` file). You can also specify other values, such as validation input, and validation output. Leave as default for now.
+
 3. Click `Analyze`, then it will generate a detailed report on the model. You can check the number of parameters, the size of the weights, and the amount of memory to be used.
+
 4. Click `Show graph` to visualize your model.
+
 5. Click `Validate on Desktop` to validate the model with the provided input and output on your desktop.
 
 ### Validate on development board
@@ -59,10 +71,15 @@ and move to before the call to
 {{% /notice %}}
 
 1. Using a terminal application (such as `PuTTY`), set up the serial connection to the board. `COM` number will be as before. The baud rate should be 115200.
+
 2. Import the application. Click the File tab and click `Import`. Select `Existing project into workspace`. Go to `tf_stm32` folder and select `MCU_Activity_Recognition`.
+
 3. Open `X-CUBE-AI/App/app_x-cube-ai.c`. Observe that functions are provided for data acquisition from the accelerometer sensor and feature extraction.
+
 4. Build application and flash to target with `Run As`.
+
 5. Observe output on the terminal.
+
 6. Press the blue button on the board, draw a letter, then press the button again.
 
 
@@ -71,9 +88,13 @@ and move to before the call to
 You can create your own application from the model you have trained.
 
 1. Open the list of Software Packages. Change the device application as `Application`.
+
 2. Click `Generate Code` then the project is updated.
+
 3. Open `STM32CubeIDE`. Since you re-generated the code again, you need to delete the existing project and import the project again.
+
 4. Open `X-CUBE-AI/App/app_x-cube-ai.c`. This is the auto-generated code by `STM32CubeMX`.
+
 5. Between `USER_CODE_BEGIN` and `USER_CODE_END`, you can write code for your application.
 
 There are two main functions that you should implement:

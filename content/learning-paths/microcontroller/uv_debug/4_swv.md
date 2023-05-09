@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Debugging using Serial Wire Viewer"
+title: "Debug using Serial Wire Viewer"
 
 weight: 4 # 1 is first, 2 is second, etc.
 
@@ -17,7 +17,7 @@ layout: "learningpathall"
 - Connect a debug adapter to real target hardware.
 {{% /notice %}}
 
-#### What kind of data can the Serial Wire Viewer display?
+#### What types of data can the Serial Wire Viewer display?
 
 1. Global variables.
 2. Static variables.
@@ -26,7 +26,7 @@ layout: "learningpathall"
 5. Can see executed instructions. SWV only samples them. Use ETM to capture all instructions executed.
 6. CPU counters. Folded instructions, extra cycles and interrupt overhead.
 
-#### What Kind of Data the Serial Wire Viewer can’t display
+#### What types of data can the Serial Wire Viewer not display?
 
 1. Can’t see local variables (just make them global or static).
 2. Can’t see register operations. PC Samples records some of the instructions but not the data values.
@@ -52,7 +52,7 @@ layout: "learningpathall"
 - μVision uses the core clock value to calculate various timing displays even if SWV is not used. If the times displayed in various windows are incorrect, check these settings.
 {{% /notice %}}
 
-### Display Exceptions and Interrupts in the Trace Exceptions Window
+#### Display Exceptions and Interrupts in the Trace Exceptions Window
 
 The [**Trace Exceptions**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Trace-Exceptions) window displays statistical data about the traced exceptions and interrupts.
 
@@ -65,7 +65,7 @@ The [**Trace Exceptions**](https://developer.arm.com/documentation/101407/latest
 5. Various statistics are displayed. Any other active exceptions will automatically be displayed (not in this example).
 6. *Period*=14.13/14122 = 1 ms. Thus, the SysTick is generating an interrupt every millisecond.
 
-### Display Exceptions and Interrupts in the Trace Data Window
+#### Display Exceptions and Interrupts in the Trace Data Window
 
 The [**Trace Data**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Trace-Data-Window) window shows the history of executed instructions for Cortex-M devices.
 

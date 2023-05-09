@@ -20,7 +20,7 @@ author_primary: Zach Lasiuk
 
 ### Tags
 skilllevels: Introductory
-subjects: NONE
+subjects: 
 armips:
     - All
 operatingsystems:

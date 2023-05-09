@@ -2,12 +2,12 @@
 # User change
 title: "Getting Started with Alibaba Cloud Services"
 
-weight: 2 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Alibaba Cloud](https://www.alibabacloud.com/) is a mature cloud computing platform. An overview of their services is described [here](https://www.alibabacloud.com/about).
+[Alibaba Cloud](https://www.alibabacloud.com/) is a public cloud computing platform. 
 
 As with most cloud service providers, Alibaba Cloud offers a pay-as-you-use [pricing policy](https://www.alibabacloud.com/pricing), including a number of [free](https://www.alibabacloud.com/free) services.
 
@@ -78,7 +78,7 @@ Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https
 
 ## Explore your instance
 
-### uname
+### Run uname
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
 
@@ -87,14 +87,15 @@ uname -m
 ```
 will identify the host machine as `aarch64`.
 
-### hello world
+### Run hello world
 
-Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands, otherwise see [here](/install-guides/gcc):
+Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
 
 ```console
 sudo apt-get update
 sudo apt install -y gcc
 ```
+
 Using a text editor of your choice, create a file `hello.c` with the contents below:
 
 ```C
@@ -104,6 +105,7 @@ int main(){
     return 0;
 }
 ```
+
 Build and run the application:
 
 ```console

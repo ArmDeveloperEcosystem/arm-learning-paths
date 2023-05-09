@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you to continue learning about the porting cloud applications to Arm architecture for increased performance and cost savings. The learning path on PostgerSQL is a next great step.
+    We recommend you to continue learning about the porting cloud applications to Arm architecture for increased performance and cost savings. The Learning Path on PostgerSQL is a next great step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/server-and-cloud/mysql_tune/"

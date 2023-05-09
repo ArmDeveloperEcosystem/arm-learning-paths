@@ -14,8 +14,7 @@ layout: "learningpathall"
 
 * An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider running `Ubuntu Linux 20.04`.
 
-This learning path has been tested on AWS and Oracle platforms.
-
+This Learning Path has been tested on AWS and Oracle platforms.
 
 ## Install necessary software and packages required by MLPerf Inference Suite
 
@@ -81,7 +80,7 @@ wget -q https://zenodo.org/record/2535873/files/resnet50_v1.pb
 
 ## Download the dataset 
 
-You will also need to download a dataset for the ML model you want to benchmark. The imagenet2012 validation dataset is best used with this ML model. You can download the dataset after you register on the site [here](http://image-net.org/challenges/LSVRC/2012/)
+You will also need to download a dataset for the ML model you want to benchmark. The imagenet2012 validation dataset is best used with this ML model. You can [download the dataset](http://image-net.org/challenges/LSVRC/2012/) after you register.
 
 For this example, you will generate a fake image dataset using the tooling included in the repo. Use the command below:
 

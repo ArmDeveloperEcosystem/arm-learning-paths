@@ -392,10 +392,7 @@ function trackHeaderInteraction(type,name){
         let install_guides  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category2');
         install_guides.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','install-guides');        });   
 
-        let about  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category3');
-        about.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','about');        });   
-
-
+        
         // social links
         let discord  = globalNav.shadowRoot.querySelector('.fa-discord').parentElement;
         discord.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','discord');        });   

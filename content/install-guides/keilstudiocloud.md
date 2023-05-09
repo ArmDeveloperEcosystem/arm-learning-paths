@@ -25,9 +25,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. Keil Studio Cloud, a browser-based IDE for IoT, ML and embedded development accelerates your next project with zero-installation tools, ready-to-run examples, git integration and web debugging.
 
-## Prerequisites
-
-- This tool does not require any installation. To run the browser-based IDE, you need to have a [Chromium](https://www.chromium.org/)-based browser (Chromium, Chrome, Edge).
+Keil Studio Cloud does not require any installation. To run the browser-based IDE, you need to use a [Chromium](https://www.chromium.org/)-based browser (Chromium, Chrome, Edge, Brave, or Vivaldi).
 
 ## Open Keil Studio Cloud
 

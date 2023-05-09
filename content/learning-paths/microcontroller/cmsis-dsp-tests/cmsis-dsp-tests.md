@@ -15,7 +15,7 @@ These instructions assume an Ubuntu Linux host machine, or use of [Arm Virtual H
 
 The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [this article](/install-guides/ecosystem_fvp/).
 
-Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions see [here](/install-guides/avh#corstone).
+Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). For setup instructions refer to the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
 ## Build the example applications
 
@@ -23,7 +23,7 @@ The examples can be built with [Arm Compiler for Embedded](https://developer.arm
 
 To install locally see:
 - [Arm Compiler for Embedded](/install-guides/armclang/) or
-- [Arm GNU Toolchain](/install-guides/gcc/#Arm-GNU)
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 
 ## Build the CMSIS-DSP test suite
 
@@ -59,7 +59,7 @@ python processTests.py -e BasicTestsF32
 
 CMSIS-DSP repository has a cmsis_build directory with all the files to build the tests for different AVH simulation targets. Run the commands below to first install the CMSIS-DSP pack and then build the selected tests for Corstone-300 AVH FVP.
 
-Check [here](https://github.com/ARM-software/CMSIS-DSP/releases) for the latest released version.
+Check the [CMSIS-DSP GitHub project](https://github.com/ARM-software/CMSIS-DSP/releases) for the latest released version.
 
 ```console
 cd cmsis_build

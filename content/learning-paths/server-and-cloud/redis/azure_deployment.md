@@ -18,17 +18,17 @@ If you are new to Terraform, you should look at [Automate Azure instance creatio
 
 ## Before you begin
 
-You should have the prerequisite tools installed before starting the Learning Path. 
+Install [Terraform](/install-guides/terraform) and [Ansible](/install-guides/ansible) on your computer. 
 
-Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+Any computer which has these tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
 
 You will need an [an Azure portal account](https://azure.microsoft.com/en-in/get-started/azure-portal) to complete this Learning Path. Create an account if you don't have one.
 
-Before you begin you will also need:
-- Login to Azure CLI
-- An SSH key pair
+You will also need:
+- A SSH key pair
+- Azure Access Credentials to login to Azure CLI
 
-The instructions to login to Azure CLI and to create the keys are below.
+The instructions to generate the SSH key pair and login to Azure CLI are below.
 
 ### Generate the SSH key-pair
 
@@ -42,12 +42,12 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
-For Azure authentication, follow this [documentation](/install-guides/azure_login).
+For Azure authentication, follow this [guide](/install-guides/azure_login).
 
 ## Create an Azure instance using Terraform
-For Azure Arm based instance deployment, the Terraform configuration is broken into four files: `providers.tf`, `variables.tf`, `main.tf`, and `outputs.tf`.
+For Azure Arm based instance deployment, the Terraform configuration is broken down into four files: `providers.tf`, `variables.tf`, `main.tf`, and `outputs.tf`.
 
-Add the following code in `providers.tf` file to configure Terraform to communicate with Azure.
+Use a text editor and add the following code in `providers.tf` file to configure Terraform to communicate with Azure.
 
 ```console
 terraform {
@@ -74,7 +74,7 @@ provider "azurerm" {
 }
 ``` 
 
-Create a `variables.tf` file for describing the variables referenced in the other files with their type and a default value.
+Use a text editor and create a `variables.tf` file with the content below. This file describes the variables referenced in the other terraform files with their type and default value.
 
 ```console
 variable "resource_group_location" {
@@ -88,7 +88,7 @@ variable "resource_group_name_prefix" {
 }
 ```
 
-Add the resources required to create a virtual machine in `main.tf`.
+Add the resources required to create a virtual machine in a file named `main.tf`.
 
 Scroll down to see the information you need to change in `main.tf`.
 
@@ -242,7 +242,7 @@ ansible-target1 ansible_connection=ssh ansible_host=${azurerm_linux_virtual_mach
 The inventory file is automatically generated and does not need to be changed.
 
 
-Add the below code in `outputs.tf` to get Resource group name and Public IP.
+Add the code below in `outputs.tf` to get the Resource group name and Public IP.
 
 ```console
 output "resource_group_name" {
@@ -300,7 +300,7 @@ Run `terraform plan` to create an execution plan.
 terraform plan
 ```
 
-A long output of resources to be created will be printed. 
+A long output of resources to be created will be printed to the console. 
 
 ### Apply a Terraform execution plan
 
@@ -310,7 +310,7 @@ Run `terraform apply` to apply the execution plan and create all Azure resources
 terraform apply
 ```      
 
-Answer `yes` to the prompt to confirm you want to create Azure resources. 
+Answer `yes` wen prompted to confirm you want to create Azure resources. 
 
 The public IP address will be different, but the output should be similar to:
 
@@ -325,7 +325,7 @@ resource_group_name = "rg-tight-dove"
 
 ## Configure Redis through Ansible
 
-Install the Redis and the required dependencies.
+Install Redis and the required dependencies.
 
 You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/server-and-cloud/redis/aws_deployment#configure-redis-through-ansible).
 
@@ -379,21 +379,22 @@ ansible-target1            : ok=7    changed=6    unreachable=0    failed=0    s
 ## Connecting to the Redis server from local machine
 
 Execute the steps below to connect to the remote Redis server from your local machine.
-1. Install redis-tools to interact with redis-server.
+1. Install redis-tools to interact with redis-server:
 ```console
-apt install redis-tools
+sudo apt install redis-tools
 ```
-2. Connect to redis-server through redis-cli.
+2. Connect to redis-server through redis-cli:
 ```console
 redis-cli -h <public-IP-address> -p 6379
 ```
-The output will be:
+The output will be similar to:
 ```output
 ubuntu@ip-172-31-38-39:~$ redis-cli -h 20.110.186.231 -p 6379
 20.110.186.231:6379> 
 ```
 3. Authorize Redis with the password set by us in playbook.yaml file.
-```console
+The output from running the authorization command is shown below:
+```output
 20.110.186.231:6379> ping
 (error) NOAUTH Authentication required.
 20.110.186.231:6379> AUTH 123456789
@@ -401,8 +402,8 @@ OK
 20.110.186.231:6379> ping
 PONG
 ```
-4. Try out commands in the redis-cli.
-```console
+4. Try out commands in the redis-cli. Example output from some commands is shown here:
+```output
 20.110.186.231:6379> set name test
 OK
 20.110.186.231:6379> get name

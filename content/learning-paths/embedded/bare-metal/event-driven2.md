@@ -122,7 +122,7 @@ Create `timer.s` defining the following functions:
 
 #### timer.s
 ```C
-	section  AArch64_GenericTimer,"ax"
+	.section  AArch64_GenericTimer,"ax"
 
 	.global setTimerPeriod
 	.type setTimerPeriod, "function"

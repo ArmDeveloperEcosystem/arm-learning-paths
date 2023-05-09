@@ -25,7 +25,7 @@ The examples can be built with [Arm Compiler for Embedded](https://developer.arm
 
 Use the install guides to install the compilers on your computer:
 - [Arm Compiler for Embedded](/install-guides/armclang/)
-- [Arm GNU Toolchain](/install-guides/gcc/#Arm-GNU)
+- [Arm GNU Toolchain](/install-guides/gcc/arm-gnu)
 
 Both compilers are pre-installed in Arm Virtual Hardware. 
 

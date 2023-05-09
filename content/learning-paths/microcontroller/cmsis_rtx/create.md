@@ -7,19 +7,29 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-You will primarily use Keil MDK to guide you through this learning path. If you are using Arm Development Studio refer to the comments at the end of each page.
+You will primarily use Keil MDK through this Learning Path. If you are using Arm Development Studio refer to the appropriate comments.
 
 ## Install appropriate device CMSIS-Pack
 
-This learning path is written for the supplied (Cortex-M4) FVP, however it could be run on any of the 9000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 9000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
 
-If you are using the FVP, skip this step.
+If you are using the FVP, there is no need to install an additional CMSIS-Pack.
 
 If using a different platform, click on `Pack Installer` icon, browse for your device, and install any suggested Device Specific pack.
+
+{{% notice  Arm Development Studio%}}
+Add required `CMSIS-Packs` via the `CMSIS Pack Manager` perspective.
+{{% /notice %}}
 
 ## Create project in Keil MDK
 
 In the MDK menu, navigate to `Project` > `New uVision Project`, and create a new project (recommend to locate in a new folder).
+
+{{% notice  Arm Development Studio%}}
+When creating the project navigate to `File` > `New` > `Project...` > `C/C++` > `C Project`.
+
+Then select `CMSIS C/C++ Project`, using `Arm Compiler for Embedded 6`.
+{{% /notice %}}
 
 ### Select device
 
@@ -37,9 +47,19 @@ Under `Device`, select `Startup` (`C Startup`).
 
 These are the minimal components needed for such an application. Click `OK`.
 
+{{% notice  Arm Development Studio%}}
+Run-time environment is managed by the `.rteconfig` file within the project.
+{{% /notice %}}
+
 ## Rename target
 
 A project can contain many targets, which refer to the platform that a particular build will run on. The default name is `Target 1`. To give a meaningful name, click `Manage Project Items`, and rename the target (for example, to `FVP`), as well as optionally the `Source Group 1` (to `Source`) that will contain the source code. Arranging code in these folders allows for easy sharing across different target builds.
+
+{{% notice  Arm Development Studio%}}
+Default `Configuration` names are `Debug` and `Release`.
+
+Name and other settings (see below) are managed in `Project Properties` (`Alt+Enter`), under `C/C++ Build` > `Settings`.
+{{% /notice %}}
 
 ## Target options
 
@@ -49,18 +69,24 @@ Click `Options for Target`, to open that dialog. This is where build and other s
 
 Navigate to the `Debug` tab, and select `Models Cortex-M Debugger` from the `Use` pull-down list. Click `Settings`, then the `Command` browse (`...`) button, to locate the `Cortex-M4 FVP` within your Keil MDK installation (`ARM\FVP\MPS2_Cortex-M` folder). Click `OK`.
 
+{{% notice  Arm Development Studio%}}
+Ignore this step for now. Debug configuration will be set up later.
+{{% /notice %}}
+
 ### Compiler optimization options
 
 Navigate to `C/C++ (AC6)` tab, and (optionally) change optimization level to `-O2` for high performance code.
-You may also wish to disable `Warnings`, change language options or other settings.
+You may also wish to disable Warnings, change language options, or other settings.
 
 ### Define memory map
 
-Use [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Overview-of-scatter-loading) to define the memory map.
+Use [scatter-loading](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Overview-of-scatter-loading) to define the memory map to the linker.
 
 The memory map for the FVP is given in the [documentation](https://developer.arm.com/documentation/100964/latest/Microcontroller-Prototyping-System-2/MPS2---memory-maps/MPS2---memory-map-for-models-without-the-Armv8-M-additions).
 
-Navigate to the `Linker` tab, and de-select `Use Memory Layout from Target Dialog`. Click the browse (`...`) button and create a text file in the same folder as the project. Click `Edit` to open the file in the IDE. The following is a typical scatter file for the FVP.
+Navigate to the `Linker` tab, and de-select `Use Memory Layout from Target Dialog` (as you shall create your own).
+
+Click the browse (`...`) button and create a text file in the same folder as the project. Click `Edit` to open the file in the IDE. The following is a typical scatter file for the FVP.
 ```text
 LOAD 0x0 0x400000 {
 	ROOT 0x0 0x400000 {
@@ -76,13 +102,6 @@ LOAD 0x0 0x400000 {
 	ARM_LIB_STACK 0x20050000 EMPTY 0x10000 {}
 }
 ```
-For more on scatter-loading, see this [learning path](/learning-paths/embedded/bare-metal).
-
-You are now ready to build your example.
-
-## Comments for Arm Development Studio users
-* Add required CMSIS-Packs via the `CMSIS Pack Manager` perspective.
-* When creating the project navigate the menu to `File` > `New` > `Project...` > `C/C++` > `C Project`, then select `CMSIS C/C++ Project`, using `Arm Compiler for Embedded 6`.
-* Run-time environment is managed by the `.rteconfig` file within the project.
-* Build settings are in the `Project Properties` (`Alt+Enter`), under `C/C++ Build` > `Settings`.
-* Debug configuration will be set later.
+{{% notice  Arm Development Studio%}}
+The IDE recognises `.sct` files as scatter files, and provides a graphical representation of the layout in a `Memory Map` tab.
+{{% /notice %}}

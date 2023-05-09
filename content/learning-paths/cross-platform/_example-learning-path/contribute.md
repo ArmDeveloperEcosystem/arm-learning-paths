@@ -58,7 +58,7 @@ You can now submit a GitHub pull request.
 If you are new to GitHub, find a tutorial about how to create a pull request from a GitHub fork.
 {{% /notice %}}
 
-Optionally, if you would like to add your new learning path content to the automated testing framework, follow the guidelines in the [Appendix: How to test your code](/learning-paths/cross-platform/_example-learning-path/appendix-3-test).
+Optionally, if you would like to add your new Learning Path content to the automated testing framework, follow the guidelines in the [Appendix: How to test your code](/learning-paths/cross-platform/_example-learning-path/appendix-3-test).
 
 ## Publishing
 

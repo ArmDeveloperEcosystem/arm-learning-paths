@@ -1,8 +1,6 @@
 ---
 title: Prepare Docker image for Arm embedded development
 
-description: Learn how to prepare a Docker image for Arm embedded development
-
 minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Docker.

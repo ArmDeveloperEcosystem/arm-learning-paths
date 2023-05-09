@@ -10,6 +10,7 @@ learning_objectives:
     - Understand basics of the Code Coverage report
 
 prerequisites:
+    - A Windows machine
     - Basic familiarity with Keil MDK
 
 author_primary: Ronan Synnott

@@ -8,7 +8,8 @@ minutes_to_complete: 60
 who_is_this_for: Android application and games developers new to Arm Mobile Studio.
 
 learning_objectives:
-    - Learn the basic features of each component of Arm Mobile Studio. - Get started profiling and optimizing your application.
+    - Learn the basic features of each component of Arm Mobile Studio. 
+    - Get started profiling and optimizing your application.
 
 prerequisites:
     - These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm, and confirmed to work with Arm Mobile Studio.

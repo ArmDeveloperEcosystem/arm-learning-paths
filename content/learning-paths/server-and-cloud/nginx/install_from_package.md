@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 Install Nginx on an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider.
 
-This learning path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04` and `Ubuntu Linux 22.04`.
+This Learning Path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04` and `Ubuntu Linux 22.04`.
 
 You can install Nginx either by using the package manager or build it from source. In this section, installation using the package manager is shown.
 

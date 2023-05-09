@@ -15,7 +15,9 @@ From there, the `RTX5` initialization code is always essentially the same, setti
 
 ## Create main()
 
-Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the `main.c`file with the contents below:
+Right click on the `Source` folder under the `FVP` target, and `Add a new item`.
+
+Select `C file (.c)`, and create the `main.c`file with the contents below:
 
 ```C
 #include "RTE_Components.h"
@@ -37,9 +39,16 @@ int __attribute__((noreturn)) main (void) {
 	while(1);                                   // If you get to here, something has gone wrong!
 }
 ```
+{{% notice  Arm Development Studio%}}
+Right-click on the project, and select `New` > `Source File` from the pop-up menu.
+{{% /notice %}}
+
+
 ## Understanding the code
 
-The function [osKernelStart()](https://www.keil.com/pack/doc/CMSIS/RTOS2/html/group__CMSIS__RTOS__KernelCtrl.html#ga9ae2cc00f0d89d7b6a307bba942b5221) should never return. If your code gets to the infinite `while()` loop, something has gone wrong - most likely with the platform initialization code.
+The function [osKernelStart()](https://www.keil.com/pack/doc/CMSIS/RTOS2/html/group__CMSIS__RTOS__KernelCtrl.html#ga9ae2cc00f0d89d7b6a307bba942b5221) should never return.
+
+If your code gets to the infinite `while()` loop, something has gone wrong - most likely with the platform initialization code.
 
 All threads use a prototype of the form:
 ```C

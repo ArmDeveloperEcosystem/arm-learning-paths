@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            In this learning path, you wired the switch and the LED to which of the following blocks?
+            In this Learning Path, you wired the switch and the LED to which of the following blocks?
         answers:
             - "ZYNQ7_Processing_System"
             - "axi_gpio_asoc"

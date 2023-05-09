@@ -8,19 +8,20 @@ minutes_to_complete: 90
 author_primary: Christopher Seidl
 
 who_is_this_for: >
-    This is an advanced topic for Software developers who want to master embedded microcontroller debugging using µVision.
+    This is an advanced topic for software developers who want to debug microcontrollers using µVision.
 # One sentence that should indicate exactly who the target audience is (developers in X industries using Y tools/software for Z use-case).
 
 learning_objectives: 
-    - Use basic run/stop debugging
-    - Learn sophisticated debugging using Event Recorder and Serial Wire Viewer
-    - Master ETM Trace for optimum performance
-    - Check your power consumption with ULINKplus
+    - Use basic run/stop debug
+    - Learn advanced debug techniques using Event Recorder and Serial Wire Viewer
+    - Learn to use ETM Trace for optimum performance
+    - Measure your power consumption with ULINKplus
 # 2-5 bullet points, one sentence each. Should start with a verb (Deploy, Measure) and indicate the value of the objective if possible.
 
 prerequisites:
     - Some familiarity with embedded programming is assumed
     - An [Arm Account](https://developer.arm.com/register) is required
+    - A Windows machine
     - Installation of [Arm Keil MDK](/install-guides/mdk/) with an active MDK-Community license
     - Installation of the [Corstone-300 Ecosystem FVP](/install-guides/ecosystem_fvp/)
 # List any prereqs needed before this learning path can be completed. Can include:
@@ -40,8 +41,7 @@ operatingsystems:
 tools_software_languages:
     - C
     - Keil MDK
-    - Arm Ecosystem FVP
-    - ULINK
+    - Arm FVP
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -11,7 +11,7 @@ Arm Virtual Hardware (AVH) supports [Virtual Interfaces](https://arm-software.gi
 
 ## Before you begin
 
-Launch the Arm Virtual Hardware AMI. For full instructions see [here](/install-guides/avh#corstone).
+Launch the Arm Virtual Hardware AMI in your AWS account. For full instructions refer to the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
 The example used here makes use of the [Tkinter](https://docs.python.org/3/library/tkinter.html) Python interface to Tcl/Tk, and can be installed in the AVH terminal with:
 ```console

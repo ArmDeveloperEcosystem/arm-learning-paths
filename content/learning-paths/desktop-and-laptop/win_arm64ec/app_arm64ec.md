@@ -22,7 +22,7 @@ Arm64EC makes this process easier as it gives you the capability to rebuild part
 
 ## Use Arm64EC with a C++ application
 
-In this learning path, you will build and run a C++ application on a Windows 11 Arm machine using Arm64EC. 
+In this Learning Path, you will build and run a C++ application on a Windows 11 Arm machine using Arm64EC. 
 
 1. Launch Visual Studio. From the Get started options, select **Create a new project**. Select the **CMake Project** template and click **Next**:
 
@@ -342,4 +342,4 @@ The time taken will vary based on the machine you are using. The output shown is
 Notice the performance improvement from running the application as Arm64EC versus x64.
 {{% /notice %}}
 
-You have sucessfully created and run an application using Arm64EC. 
+You have successfully created and run an application using Arm64EC. 

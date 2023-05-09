@@ -1,8 +1,6 @@
 ---
 title: Get started with Trustzone on NXP LPCXpresso55S69
 
-description: Run secure and non-secure applications on the Cortex-M33 processor on the NXP LPCXpresso55S59 board
-
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers new to using Trustzone.

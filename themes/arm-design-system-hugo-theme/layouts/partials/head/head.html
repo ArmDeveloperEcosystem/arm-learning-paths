@@ -8,7 +8,7 @@ Where it is used:
 
 <!-- Hugo processing -->
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
-{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) (ne "About" .Title) }}  
+{{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}  
     <!-- assign title of page -->
 {{ $title := print .Site.Title " | " .Title }}
 {{ if .IsHome }}
@@ -21,12 +21,12 @@ Where it is used:
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set the viewport appropriatly -->
 <title>{{ $title }}</title>
 
-            <!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
-            <!-- Done automatically now in cross-page.css locally to speed up process
-                <link rel="preconnect" href="https://fonts.gstatic.com" />
-                <link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" as="style" crossorigin="anonymous" />
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
-            -->
+<!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
+<!-- Can be done automatically now in cross-page.css locally to speed up process -->
+<link rel="preconnect" href="https://fonts.gstatic.com" />
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" as="style" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400&display=swap" crossorigin="anonymous" />
+
 
     <!-- ADS Imports -->
 <link rel="stylesheet" href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" crossorigin="anonymous">
@@ -50,16 +50,16 @@ Where it is used:
 <!-- List pages only -->
 {{if $is_list}}
     {{ $css_list := $all_page_css | append 
-        (resources.Get "css/list-pages.css")
+        (resources.Get "css/list-pages.css") (resources.Get "css/ads-radio-button.css")
         | resources.Concat "css/mini_list.css" | minify | fingerprint  }}
         <link rel="stylesheet" href="{{ $css_list.Permalink }}">
 {{end}}
 
       
-<!-- Content pages only that are not _index, _next-steps, or _review -->
+<!-- Content pages -->
 {{if $is_content}}
     {{ $css_content := $all_page_css | append 
-        (resources.Get "css/content.css") (resources.Get "css/feedback.css") (resources.Get "css/context-tables.css") (resources.Get "css/content-pages.css")
+        (resources.Get "css/content.css") (resources.Get "css/feedback.css") (resources.Get "css/context-tables.css") (resources.Get "css/content-pages.css") (resources.Get "css/ads-radio-button.css")
         | resources.Concat "css/mini_content.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_content.Permalink }}">
 {{end}}
@@ -73,14 +73,4 @@ Where it is used:
     <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
 
 {{end}}
-
-
-<!-- About page only -->
-{{ if eq "About" .Title  }}
-    {{ $css_about := $all_page_css | append 
-        (resources.Get "css/content.css")
-        | resources.Concat "css/mini_about.css" | minify | fingerprint  }}
-    <link rel="stylesheet" href="{{ $css_about.Permalink }}">
-{{end}}
-
 

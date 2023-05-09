@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 You will learn how to setup a GitHub [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) on a [Windows on Arm](/learning-paths/desktop-and-laptop/intro) machine or [cloud instance](/learning-paths/cross-platform/woa_azure/).
 
-You will need a valid [GitHub](https://github.com) account to complete this learning path.
+You will need a valid [GitHub](https://github.com) account to complete this Learning Path.
 
 ## Create a new GitHub repository 
 

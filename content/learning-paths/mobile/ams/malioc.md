@@ -17,7 +17,7 @@ malioc --list
 ```
 To get information on API support for a given GPU, use:
 ```console
-malioc --list --core <GPU_name>
+malioc --info --core <GPU_name>
 ```
 ## Compile your shader
 

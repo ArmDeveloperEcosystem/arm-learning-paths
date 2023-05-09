@@ -1,18 +1,18 @@
 ---
 # User change
-title: "Deploy Redis as a cache for MySQL on an Azure Arm based Instance"
+title: "Deploy Redis as a cache for Postgres on an Azure Arm based Instance"
 
-weight: 9 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-##  Deploy Redis as a cache for MySQL on an Azure Arm based Instance
+##  Deploy Redis as a cache for Postgres on an Azure Arm based Instance
 
-You can deploy Redis as a cache for MySQL on Azure using Terraform and Ansible. 
+You can deploy Redis as a cache for Postgres on Azure using Terraform and Ansible. 
 
-In this section, you will deploy Redis as a cache for MySQL on an Azure instance. 
+In this section, you will deploy Redis as a cache for Postgres on an Azure instance. 
 
 If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/server-and-cloud/azure-terraform/terraform/) before starting this Learning Path.
 
@@ -47,10 +47,10 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 ## Create Azure instances using Terraform
 
-For Azure Arm based instance deployment, the Terraform configuration is broken into three files: `providers.tf`, `variables.tf` and `main.tf`. Here you are creating 2 instances.
+For Azure Arm based instance deployment, the Terraform configuration is broken into three files: `providers.tf`, `variables.tf` and `main.tf`. Here we are creating 2 instances.
 
 Add the following code in `providers.tf` file to configure Terraform to communicate with Azure.
-    
+
 ```console
 terraform {
   required_version = ">=0.12"
@@ -145,13 +145,13 @@ resource "azurerm_network_security_group" "my_terraform_nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name= "MYSQL"
+    name= "PSQL"
     priority= 1002
     direction= "Inbound"
     access = "Allow"
     protocol= "Tcp"
     source_port_range= "*"
-    destination_port_range = "3306"
+    destination_port_range = "5432"
     source_address_prefix= "*"
     destination_address_prefix = "*"
   }
@@ -199,8 +199,8 @@ resource "azurerm_storage_account" "my_storage_account" {
 }
 
 # Create virtual machine
-resource "azurerm_linux_virtual_machine" "MYSQL_TEST" {
-  name= "MYSQL_TEST${format("%02d", count.index + 1)}"
+resource "azurerm_linux_virtual_machine" "PSQL_TEST" {
+  name= "PSQL_TEST${format("%02d", count.index + 1)}"
   count= 2
   location= azurerm_resource_group.rg.location
   resource_group_name= azurerm_resource_group.rg.name
@@ -234,13 +234,12 @@ resource "azurerm_linux_virtual_machine" "MYSQL_TEST" {
   }
 }
 resource "local_file" "inventory" {
-    depends_on=[azurerm_linux_virtual_machine.MYSQL_TEST]
+    depends_on=[azurerm_linux_virtual_machine.PSQL_TEST]
     filename = "/tmp/inventory"
     content = <<EOF
-[mysql1]
-${azurerm_linux_virtual_machine.MYSQL_TEST[0].public_ip_address}
-[mysql2]
-${azurerm_linux_virtual_machine.MYSQL_TEST[1].public_ip_address}
+[db_master]
+${azurerm_linux_virtual_machine.PSQL_TEST[0].public_ip_address}
+${azurerm_linux_virtual_machine.PSQL_TEST[1].public_ip_address}
 [all:vars]
 ansible_connection=ssh
 ansible_user=ubuntu
@@ -260,12 +259,11 @@ Run `terraform init` to initialize the Terraform deployment. This command downlo
 ```console
 terraform init
 ```
-    
+
 The output should be similar to:
 
 ```output
 Initializing the backend...
-
 Initializing provider plugins...
 - Reusing previous version of hashicorp/local from the dependency lock file
 - Reusing previous version of hashicorp/tls from the dependency lock file
@@ -275,13 +273,10 @@ Initializing provider plugins...
 - Using previously-installed hashicorp/tls v4.0.4
 - Using previously-installed hashicorp/azurerm v2.99.0
 - Using previously-installed hashicorp/random v3.4.3
-
 Terraform has been successfully initialized!
-
 You may now begin working with Terraform. Try running "terraform plan" to see
 any changes that are required for your infrastructure. All Terraform commands
 should now work.
-
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
@@ -313,91 +308,21 @@ The output should be similar to:
 Apply complete! Resources: 16 added, 0 changed, 0 destroyed.
 ```
 
-## Configure MySQL through Ansible
+## Configure Postgres through Ansible
 
-Install MySQL and the required dependencies on both the instances.
+Install Postgres and the required dependencies on both the instances.
 
-You can use the same `playbook.yaml` file used in the section, [Deploy Redis as a cache for MySQL on an AWS Arm based Instance](/learning-paths/server-and-cloud/redis/redis_cache_aws#configure-mysql-through-ansible).
-
-### Ansible Commands
-
-Run the playbook using the  `ansible-playbook` command:
-
-```console
-ansible-playbook playbook.yaml -i /tmp/inventory
-```
-
-Answer `yes` when prompted for the SSH connection. 
-
-Deployment may take a few minutes. 
-
-The output should be similar to:
-
-```output
-PLAY [mysql1, mysql2] ********************************************************************************************************************************************
-
-TASK [Gathering Facts] *******************************************************************************************************************************************
-The authenticity of host '20.114.166.37 (20.114.166.37)' can't be established.
-ED25519 key fingerprint is SHA256:AFYNvATg2zT/PQJ8I5Qr0JKO+3Jwq6lGYSex4/2gDKs.
-This key is not known by any other names
-The authenticity of host '20.114.166.67 (20.114.166.67)' can't be established.
-ED25519 key fingerprint is SHA256:0gpYKMdRIHpFxaXePtYFxs+k6JSioKcVEN6CMrCJUBA.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-yes
-ok: [20.114.166.37]
-ok: [20.114.166.67]
-
-TASK [Update the Machine and Install dependencies] ***************************************************************************************************************
-changed: [20.114.166.37]
-changed: [20.114.166.67]
-
-TASK [start and enable mysql service] ****************************************************************************************************************************
-ok: [20.114.166.67]
-ok: [20.114.166.37]
-
-TASK [Change Root Password] **************************************************************************************************************************************
-changed: [20.114.166.37]
-changed: [20.114.166.67]
-
-TASK [Create database user with password and all database privileges and 'WITH GRANT OPTION'] ********************************************************************
-changed: [20.114.166.37]
-changed: [20.114.166.67]
-
-TASK [Create a new database with name 'arm_test1'] ***************************************************************************************************************
-skipping: [20.114.166.67]
-changed: [20.114.166.37]
-
-TASK [Create a new database with name 'arm_test2'] ***************************************************************************************************************
-skipping: [20.114.166.37]
-changed: [20.114.166.67]
-
-TASK [MySQL secure installation] *********************************************************************************************************************************
-changed: [20.114.166.67]
-changed: [20.114.166.37]
-
-TASK [Enable remote login by changing bind-address] **************************************************************************************************************
-changed: [20.114.166.67]
-changed: [20.114.166.37]
-
-RUNNING HANDLER [Restart mysql] **********************************************************************************************************************************
-changed: [20.114.166.67]
-changed: [20.114.166.37]
-
-PLAY RECAP *******************************************************************************************************************************************************
-20.114.166.37              : ok=9    changed=7    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-20.114.166.67              : ok=9    changed=7    unreachable=0    failed=0    skipped=1    rescued=0    ignored=0
-```
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_psql_aws#configure-postgres-through-ansible) to configure Postgres through Ansible.
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis/redis_cache_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_psql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
 
-## Deploy Redis as a cache for MySQL using Python
+## Deploy Redis as a cache for Postgres using Python
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis/redis_cache_aws#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
+Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_psql_aws#deploy-redis-as-a-cache-for-postgres-using-python) to deploy Redis as a cache for Postgres using Python.
 
-You have successfully deployed Redis as a cache for MySQL on an Azure Arm based Instance.
+You have successfully deployed Redis as a cache for PostgreSQL on an Azure Arm based Instance.
 
 ### Clean up resources
 
@@ -407,4 +332,4 @@ Run `terraform destroy` to delete all resources created.
 terraform destroy
 ```
 
-Continue the Learning Path to deploy Redis as a cache for MySQL on a GCP Arm based Instance.
+Continue the Learning Path to deploy Redis as a cache for Postgres on a GCP Arm based Instance.

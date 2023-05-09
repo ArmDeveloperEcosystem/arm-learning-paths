@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Debugging using Event Recorder"
+title: "Debug using Event Recorder"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -10,11 +10,11 @@ layout: "learningpathall"
 
 ## Debug using Event Recorder
 
-[**Event Recorder (EVR)**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Event-Recorder) provides an API (function calls) for event annotations in the application code or software component libraries. It only uses CoreSight DAP to output data from the target (memory reads/writes). This means any debug adapter can be used. [MDK-Middleware](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK/MDK-Middleware), [Keil RTX5](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK/RTX5%20RTOS), and [CMSIS-FreeRTOS](https://github.com/ARM-software/CMSIS-FreeRTOS) are already annotated. EVR requires a certain amount of system RAM.
+[**Event Recorder (EVR)**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Event-Recorder) provides an API (function calls) for event annotations in the application code or software component libraries. It uses CoreSight DAP to output data from the target (memory reads/writes). This means any debug adapter can be used. [MDK-Middleware](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK/MDK-Middleware), [Keil RTX5](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK/RTX5%20RTOS), and [CMSIS-FreeRTOS](https://github.com/ARM-software/CMSIS-FreeRTOS) are already annotated. EVR requires a certain amount of system RAM.
 
 ### printf without a UART
 
-μVision provides a simple `printf` utility using the **Event Recorder**. It does not require a UART and it is much faster. Text is displayed in the [**Debug (printf) Viewer**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Debug--printf--Viewer) window as shown below.
+μVision provides a simple `printf` utility using the **Event Recorder**. It does not require a UART and it is much faster. Text is displayed in the [**Debug (printf) Viewer**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Debug--printf--Viewer) window.
 
 #### Configure Event Recorder
 
@@ -36,7 +36,7 @@ layout: "learningpathall"
     EventRecorderStart();
     ```
 
-**Use Event Recorder**
+#### Use Event Recorder
 
 Now, create a global variable named `counter` whose value will be printed on **Debug (printf) Viewer** window.
 
@@ -49,11 +49,11 @@ Now, create a global variable named `counter` whose value will be printed on **D
    counter++;
    if (counter > 0x0F) counter = 0;
    ```
-1. Near the top of the file (around line 80, add:
+1. Near the top of the file (around line 80), add:
    ```c
    #include "stdio.h"
    ```
-2. Near/at line 48 (just after the statement `if (counter > 0x0F…`), add:
+2. Near line 48, just after the statement `if (counter > 0x0F…`), add:
    ```c
    printf("Hello %d\n", counter);
    ```

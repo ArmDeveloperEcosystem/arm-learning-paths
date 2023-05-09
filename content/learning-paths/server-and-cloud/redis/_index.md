@@ -1,9 +1,9 @@
 ---
 title: Deploy Redis on Arm
 
-minutes_to_complete: 60   
+minutes_to_complete: 50
 
-who_is_this_for: This is an advanced topic for developers who want to deploy Redis on Arm based virtual machines.
+who_is_this_for: This is an introductory topic for developers who want to deploy Redis on Arm based virtual machines.
 
 learning_objectives: 
     - Understand Redis deployment configurations
@@ -12,7 +12,6 @@ learning_objectives:
     - Install Redis on a single GCP Arm based instance
     - Install Redis with a docker container on a single node
     - Install Redis in a multi-node configuration (sharding)
-    - Deploy Redis as a cache for MySQL on AWS, Azure and GCP Arm based instance
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
@@ -22,7 +21,7 @@ prerequisites:
 
 author_primary: Jason Andrews
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Databases
 armips:
     - Neoverse

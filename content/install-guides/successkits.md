@@ -36,7 +36,7 @@ Arm Success Kits are a component of [Arm Flexible Access](https://www.arm.com/en
 
 All downloads are provided via the [Arm Product Download Hub](https://developer.arm.com/downloads).
 
-For more information on the Download Hub, see [here](../pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
 
 You can download individual components, or the complete Success Kits.
 

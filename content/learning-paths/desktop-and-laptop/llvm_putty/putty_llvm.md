@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Any Windows on Arm computer which has the required tools installed can be used for this learning path.
+Any Windows on Arm computer which has the required tools installed can be used for this Learning Path.
 
 Follow the links to install the required tools. 
 

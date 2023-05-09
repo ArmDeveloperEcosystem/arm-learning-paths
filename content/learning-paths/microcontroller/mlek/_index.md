@@ -10,7 +10,8 @@ learning_objectives:
     - Run the examples on Corstone-300 FVP or Virtual Hardware
 
 prerequisites:
-    - Some familiarity with embedded programming is assumed
+    - Some familiarity with embedded programming
+    - Either a Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 
 author_primary: Ronan Synnott
 

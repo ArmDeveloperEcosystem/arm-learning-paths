@@ -23,7 +23,7 @@ If you want to use Arm Virtual Hardware as a development machine, set it up now 
 
 You can review the [Trusted Firmware Getting Started](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html) documentation for more information.
 
-## Install prerequisites for Corstone-1000 stack
+## Install the required software for the Corstone-1000 stack
 
 As per the [User Guide](https://corstone1000.docs.arm.com/en/latest/user-guide.html), install these additional required software packages:
 
@@ -36,6 +36,7 @@ sudo apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
 sudo apt-get upgrade -y libstdc++6
 ```
 The [kas](https://pypi.org/project/kas/) utility is used to build the supplied projects. Install with:
+
 ```console
 sudo pip3 install kas
 ```

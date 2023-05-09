@@ -96,7 +96,7 @@ Specifies the operating systems this Learning Path can run on. Select from this 
 
 ### tools_software_languages (open)
 
-Specifies the tools, softwares, or languages this Learning Path uses. Please list out any key tools, software, or languages your learning path uses.
+Specifies the tools, softwares, or languages this Learning Path uses. Please list out any key tools, software, or languages your Learning Path uses.
 
 | Tag Type     | Examples |
 |---------------|----------|

@@ -1,16 +1,14 @@
 ---
 title: Get started with Arm Development Studio
 
-description: Learn how to import, build, and debug your first Arm Development Studio project
-
 minutes_to_complete: 30   
 
-who_is_this_for: This is an introductory topic for Embedded software developers new to Arm Development Studio.
+who_is_this_for: This is an introductory topic for embedded software developers new to Arm Development Studio.
 
 learning_objectives: 
     - Import and build an example project
-    - Debug example with supplied Fixed Virtual Platform (FVP)
-    - Debug example with user hardware and DSTREAM debug probe
+    - Debug the example code running on a Fixed Virtual Platform (FVP)
+    - Debug the example code running on a board with a DSTREAM debug probe
 
 prerequisites:
     - Some familiarity with embedded programming is assumed

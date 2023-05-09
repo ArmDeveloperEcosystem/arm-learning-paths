@@ -4,7 +4,8 @@
 # ================================================================================
 
 next_step_guidance: >
-   Learn more about Arm's Total Compute Strategy [here](https://www.arm.com/solutions/mobile-computing/total-compute).
+   Learn more about Arm's [Total Compute Strategy](https://www.arm.com/solutions/mobile-computing/total-compute).
+
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "Enter learning path relative link here"

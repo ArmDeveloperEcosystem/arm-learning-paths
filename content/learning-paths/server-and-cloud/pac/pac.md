@@ -15,7 +15,7 @@ Pointer Authentication is a feature, available for `Armv8.3-A` and `Armv9.0-A` (
 
 If attackers attempt to modify such a pointer in memory they will also need to compute the right `PAC` signature for it. Using the ROP example, if the return address stored in the stack is signed and verified before returning to it, the attacker will not be able to control the program flow and an exception is raised.
 
-Generation and use of `PAC` in applications requires compiler support, as function calls and returns will need to be modified. This learning path will help you understand the impact of protecting your code in this way..
+Generation and use of `PAC` in applications requires compiler support, as function calls and returns will need to be modified. This Learning Path will help you understand the impact of protecting your code in this way..
 
 See [Code reuse attacks: the compiler story](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/code-reuse-attacks-the-compiler-story) for a deeper discussion.
 
@@ -25,7 +25,7 @@ The [AWS C7g EC2](https://aws.amazon.com/ec2/instance-types/c7g/) instances are 
 
 For instructions on how to create an AWS instance, see [this article](/learning-paths/server-and-cloud/csp/aws).
 
-The instance type should start with `c7g`. This learning path assumes `Ubuntu` as the operating system.
+The instance type should start with `c7g`. This Learning Path assumes `Ubuntu` as the operating system.
 
 {{% notice Note %}}
 Earlier Graviton platforms do NOT support Pointer Authentication.
@@ -33,7 +33,7 @@ Earlier Graviton platforms do NOT support Pointer Authentication.
 
 ## Prepare your c7g instance
 
-Install [GCC](/install-guides/gcc/#native) and other build tools to proceed.
+Install [GCC](/install-guides/gcc/native/) and other build tools to proceed.
 
 ```console
 sudo apt update

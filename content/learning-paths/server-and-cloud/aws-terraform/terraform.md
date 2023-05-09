@@ -7,7 +7,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-This learning path uses [Terraform Cloud](https://registry.terraform.io/) to automate creation of Arm instances. Reader may wish to also see:
+This Learning Path uses [Terraform Cloud](https://registry.terraform.io/) to automate creation of Arm instances. Reader may wish to also see:
 * [Getting Started with AWS](/learning-paths/server-and-cloud/csp/aws/)
 
 You will need an [AWS account](https://portal.aws.amazon.com). Create an account if needed.
@@ -83,7 +83,7 @@ copy the AMI ID from the search result.
 ![alt-text #center](https://user-images.githubusercontent.com/87687468/190345166-846344fe-09b8-4ab8-96b0-907b67fd0abd.png "AMI ID")
 
 ### How to find correct instance_type
-YOu can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
+You can find the correct ìnstance_type by visiting [this page](https://aws.amazon.com/ec2/instance-types/).
 For a very basic instance_type not production level instance, choose **t4g.nano**
 
 Shown below is the aws_instance configuration:

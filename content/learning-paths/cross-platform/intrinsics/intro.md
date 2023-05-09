@@ -8,7 +8,7 @@ weight: 2
 
 Migrating C/C++ applications from x64 to Arm requires recompiling the source code for the Arm architecture. A simple recompile works much of the time, but not always.
 
-SIMD extensions are one of the common barriers encountered when porting C/C++ applications from x64 to Arm. This article is a short background on intrinsics and how to identify them in code. This learning path presents options for how to get the code compiled and running on an Arm-based platform. 
+SIMD extensions are one of the common barriers encountered when porting C/C++ applications from x64 to Arm. This article is a short background on intrinsics and how to identify them in code. This Learning Path presents options for how to get the code compiled and running on an Arm-based platform. 
 
 ## Intrinsics
 
