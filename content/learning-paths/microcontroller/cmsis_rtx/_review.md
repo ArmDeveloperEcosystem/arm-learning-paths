@@ -23,13 +23,24 @@ review:
 
     - questions:
         question: >
+            Which function is used to invoke an OS thread?
+        answers:
+            - "osKernelInitialize()"
+            - "osKernelStart()"
+            - "osThreadNew()"
+        correct_answer: 3
+        explanation: >
+            osThreadNew() is called before osKernelStart() to define the main thread, and then by the main thread to start other threads.
+
+    - questions:
+        question: >
             Event Recorder can only be used with FVPs?
         answers:
             - "True"
             - "False"
         correct_answer: 2
         explanation: >
-            Event Recorder supports both, FVPs and real hardware.
+            Event Recorder supports both FVPs and real hardware.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
