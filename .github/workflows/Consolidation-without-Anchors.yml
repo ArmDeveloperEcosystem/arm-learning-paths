@@ -34,11 +34,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y w3c-linkchecker  
-          sudo apt-get install linkchecker
 
       - name: Check links
         run: |
-          linkchecker --check-extern --ignore-url=mailto: --no-warnings --no-status -F log -o htmltest.log .htmltest.yml
+          checklink --check-extern --ignore-url=mailto: --no-warnings --no-status -F log -o htmltest.log .htmltest.yml
       
       - name: Upload output file as artifact
         uses: actions/upload-artifact@v2
