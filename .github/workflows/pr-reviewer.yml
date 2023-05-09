@@ -1,31 +1,30 @@
-name: Assign PR Reviewers
+name: Pull Request Review
 
 on:
   pull_request:
-    types: [opened,review_requested]
+    types: [opened]
 
 jobs:
-  add-reviewers:
+  build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install dependencies
-      run: npm install @actions/github
-    - name: Add reviewers
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  ## Please add the PAT token in the secrets with this name "GITHUB_TOKEN" 
-        commit-message: 'Automatically assign reviewer to pull request'
-        title: 'Please review my pull request'
-        body: 'I would appreciate if you could review my pull request.'
-      run: |
-        const { context, GitHub } = require('@actions/github');
-        const github = new GitHub(process.env.GITHUB_TOKEN);
-        const prNumber = context.payload.pull_request.number;
-        const reviewers = ['pareena.verma@arm.com', 'jason.randrews@arm.com'];
-        github.pulls.createReviewRequest({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          pull_number: prNumber,
-          reviewers: reviewers
-        });
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Request review from multiple users
+        uses: peter-evans/request-reviews@v1.5.2
+        with:
+          reviewers: pareena.verma@arm.com, jason.randrews@arm.com
+          wait-for-approvals: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Automatically assign reviewer to pull request'
+          title: 'Please review my pull request'
+          body: 'I would appreciate if you could review my pull request.'
+          number-of-reviewers: 1
+
+      - name: Wait for pull request approval
+        uses: styfle/wait-for-reviews-action@v2  
+        with:
+          reviewers: pareena.verma@arm.com, jason.randrews@arm.com
+          number-of-reviews: 1  # action will wait for One reviews before continuing with the workflow.
+          allow-changes: false  # the action will fail if any changes are made to the pull request after reviews have been requested.
