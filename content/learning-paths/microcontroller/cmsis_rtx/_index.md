@@ -6,13 +6,13 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers new to RTOS development.
 
 learning_objectives: 
-    - Learn how to implement a basic RTOS-based application
+    - Implement a basic RTOS-based application
 
 prerequisites:
     - Arm [Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
-author_primary: Christopher Seidl 
+author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory

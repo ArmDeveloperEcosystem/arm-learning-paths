@@ -2,14 +2,20 @@
 # User change
 title: "Using Event Recorder"
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Event Recorder allows for annotations in the application code or software component libraries. These annotations are stored in an `event buffer`.
+We saw in the last section that Keil MDK does not support semihosting.
 
-I/O functions such as `printf()` can easily be retargeted to make use of this buffer.
+[Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html) can be used instead for the printf functionality. It is supported for both FVPs and real hardware.
+
+Event recorder functionality can be further extended by the Keil MDK [Component Viewer](https://www.keil.com/pack/doc/compiler/EventRecorder/html/cv_use.html). Annotations can be made in the application code or software component libraries. These annotations are stored in an `event buffer`.
+
+{{% notice  Arm Development Studio%}}
+Event Recorder and Component Viewer are not supported. This section can be ignored.
+{{% /notice %}}
 
 ## Manage run-time environment
 
@@ -37,8 +43,7 @@ The event buffer must be located in an uninitialized region of writable memory.
 
 Edit the scatter file, creating a new execution region (after `ARM_LIB_STACK`):
 ```text
-	EVENT_BUFFER  0x20060000 UNINIT 0x10000 {
-		EventRecorder.o (+ZI)               }
+	EVENT_BUFFER 0x20060000 UNINIT 0x10000 {EventRecorder.o (+ZI)}
 ```
 If you get a link-time warning:
 ```text
@@ -52,7 +57,7 @@ Save all files, and `build` (`F7`) the example.
 
 Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 
-Observer the thread output in the `printf viewer`
+The thread output is now displayed in the `printf viewer`:
 ```
 hello from thread 1
 hello from thread 2
@@ -65,7 +70,11 @@ hello from thread 2
 
 Use the menu (`View` > `Analysis Windows` > `Event Recorder`) to open the viewer.
 
-Observe that printf output is in the form of the ASCII codes of the text output. For this view it is better to use [EventRecorder Data](https://www.keil.com/pack/doc/compiler/EventRecorder/html/group__EventRecorder__Data.html) rather than printf statements.
+Observe that printf output is in the form of the ASCII codes of the text output.
+
+![Event Viewer #center](ev_raw.png)
+
+For this view it is better to use [EventRecorder Data](https://www.keil.com/pack/doc/compiler/EventRecorder/html/group__EventRecorder__Data.html) rather than printf statements.
 
 ## EventRecorder Data
 
@@ -88,17 +97,14 @@ Save all files, and `rebuild` (`F7`) the example.
 Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 
 Observe the events in the Event Recorder viewer. Use the filter to hide `STDIO` events, which shall remove the printf strings.
-```text
-id=0x0001	0x00000001, 0x00000000
-id=0x0001	0x00000002, 0x00000000
-id=0x0001	0x00000003, 0x00000000
-id=0x0001	0x00000001, 0x00000000
-id=0x0001	0x00000002, 0x00000000
-...
-```
+
+The thread number is output as the first `Value`:
+
+![Event Viewer #center](ev_data.png)
+
 ## Component Viewer
 
-To make these events more meaningful in the Event Recorder viewer, use the [Component Viewer](https://www.keil.com/pack/doc/compiler/EventRecorder/html/cv_use.html) functionality.
+To make these events more meaningful in the Event Recorder viewer, use the Component Viewer functionality.
 
 Create a [Component Viewer Description File](https://www.keil.com/pack/doc/compiler/EventRecorder/html/SCVD_Format.html) (e.g. `rtos.scvd`) with the following:
 ```xml
@@ -124,14 +130,9 @@ Click `Add Component Viewer Description File`, and browse for the above. Save th
 Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 
 Observe these events in the Event Recorder viewer, optionally filtering out `STDIO`.
-```text
-Logging		goodbye from thread 1
-Logging		goodbye from thread 2
-Logging		goodbye from thread 3
-Logging		goodbye from thread 1
-Logging		goodbye from thread 2
-...
-```
+
+![Event Viewer #center](ev_cv.png)
+
 ## Observe RTX events in the Event Viewer
 
 The RTX source contains many Event Recorder annotations. To see these events in the viewer, return to the IDE, and open the `Manage run-time environment` dialog.
@@ -144,5 +145,4 @@ Observe the events in the viewer, filtering as appropriate.
 
 If no RTOS events are visible, verify that they are enabled in `Target Options` > `Debug` > `Manage Component Viewer Description Files`.
 
-## Comments for Arm Development Studio users
-* Event Recorder viewer functionality is not supported by Arm Debugger.
+![Event Viewer #center](ev_rtos.png)

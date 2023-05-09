@@ -24,7 +24,7 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-[Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) is the most comprehensive embedded C/C++ dedicated software development solution. It is used for validation of SoC debug through emulation, simulation, FPGA, and silicon bring-up design and verification stages. It has the earliest support for all Arm CPUs and interconnects.
+[Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) is the most comprehensive embedded C/C++ dedicated software development solution. It is used for validation of SoC debug through emulation, simulation, FPGA, and silicon bring-up design and verification stages. It has the earliest support for all Arm processors and interconnects.
 
 ## Before you begin
 
@@ -36,30 +36,72 @@ Full host platform requirements are given in the [Getting Started Guide](https:/
 
 The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to. 
 
-Gold, Silver, and Bronze editions are one installer, with available features defined by the license. The version is denoted by `year.index`, where `index` is a number (for example `2022.2`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the Gold Edition.
+Gold, Silver, and Bronze editions are one installer, with available features defined by the license. The version is denoted by `year.index`, where `index` is a number (for example `2023.0`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the Gold Edition.
 
-Development Studio Platinum Edition has its own installation package. The version is denoted by `year.index`, where `index` is a letter (for example `2022.c`).
+You can download the Development Studio installer from the [Product Download Hub](https://developer.arm.com/downloads/view/DS000B).
 
-You can download the Development Studio installer from the [Product Download Hub](https://developer.arm.com/downloads). 
+Development Studio Platinum Edition has its own installation package. The version is denoted by `year.index`, where `index` is a letter (for example `2023.a`). Platinum Edition is only available to certain Arm licensees.
 
 For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](../pdh).
 
 ## Install Arm Development Studio
 
-For Windows hosts, follow the installation instructions provided in Windows section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Windows).
+### Windows
 
-For Linux hosts, follow the installation instructions provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux). Note also [additional Linux libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) may be required.
+Unzip the downloaded installation archive.
+
+It is easiest to simply double-click the installation wizard (`armds-<version>.exe`), and follow on-screen instructions.
+
+To install silently from the command line, use similar to the following:
+```command
+msiexec /i DS000-BN-00000-r23p0-00rel0\data\armds-2023.0.msi EULA=1 SKIP_DRIVERS=1 /qn
+```
+{{% notice  Drivers%}}
+This command does not install the debug probe USB drivers. If these are needed, remove `SKIP_DRIVERS=1` from the above. This requires manual interaction. They can also be installed manually later (`<install_dir>\sw\driver_files\driver_install.bat`) if necessary.
+{{% /notice %}}
+
+Full installation instructions are provided in the Windows section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Windows).
+
+### Linux
+
+Untar the downloaded package:
+```command
+tar -xf DS000-BN-00001-r23p0-00rel0.tgz
+cd DS000-BN-00001-r23p0-00rel0
+```
+To install silently from the command line, use similar to the following.
+```command
+sudo ./armds-2023.0.sh --i-agree-to-the-contained-eula --no-interactive -f -q
+```
+{{% notice  Libraries%}}
+The install may report that additional [libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) are needed to be installed.
+{{% /notice %}}
+
+Navigate to `bin` directory of your install, for example:
+```command
+cd /home/ubuntu/developmentstudio-2023.0/bin
+```
+Use `suite_exec` to start an appropriate command prompt, for example:
+```command
+sudo ./suite_exec bash
+```
+Full installation instructions are provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux).
+
+## Arm Development Studio IDE
+
+Launch the Arm Development Studio IDE from your desktop, or from the above prompt using:
+```command
+./armds_ide
+```
 
 ## Set up the product license
 
-Arm Development Studio is license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).
+Arm Development Studio is license managed. When you launch the IDE for the first time, you should be prompted to set up your license and select the Edition. You can return to this view from `Help` > `Arm License Manager`.
 
-When you launch the IDE for the first time, you may be prompted to select the Development Studio Edition in `Help` > `Arm License Manager`.
+License setup instructions are available in the [Arm Licensing install guide](../license/).
 
-A free 30 day evaluation license for Arm Development Studio is also available. You can generate this in `Help` > `Arm License Manager`. Click on `Add`, and follow instructions therein to obtain the evaluation license (requires Arm login).
+A free 30 day evaluation license for Arm Development Studio is also available. You can generate this in `Arm License Manager`. Click on `Add`, and follow instructions therein to obtain the evaluation license (requires Arm login).
 
-## Verify installation
+## Get started
 
-To verify everything is installed correctly and to get started with your first project, follow the [Hello World Tutorial](https://developer.arm.com/documentation/101469/latest/Tutorials/Tutorial--Hello-World).
-
-A number of [example projects](https://developer.arm.com/documentation/101469/latest/Projects-and-examples-in-Arm-Development-Studio/Examples-provided-with-Arm-Development-Studio) are also provided.
+You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded/armds/) learning path for more information.
