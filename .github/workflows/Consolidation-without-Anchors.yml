@@ -28,14 +28,12 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      ## Used w3c-Link checker. 
+      ## Used w3c-Link checker.  
       - name: Check w3c-linkchecker links
         continue-on-error: true
-        
-      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y w3c-linkchecker
+          sudo apt-get install -y w3c-linkchecker  
 
       - name: Check links
         run: |
