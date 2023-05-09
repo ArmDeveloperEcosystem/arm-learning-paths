@@ -97,30 +97,36 @@ async function main() {
 		console.log(`WebSocket open.`);};
 	mySocket.onerror = function() {
 		console.log('WebSocket Connection Error.')};
+
+	// Log in - comment the lines below if user has already logged in using the UI console
+	mySocket.send("pi\n");
+	await delay(1000);
+    mySocket.send("raspberry\n");
+    await delay(1000);
 	
 	console.log("Wait 60s to ensure lighting-app is initialized...");
 	await delay(60000);
 	
 	console.log("Turn light on...");
-	mySocket.send("./out/debug/chip-tool onoff on 0x11 1\n");
+	mySocket.send("/home/pi/connectedhomeip/examples/chip-tool/out/debug/chip-tool onoff on 0x11 1\n");
 	
 	console.log("Wait 5 seconds...");
 	await delay(5000);
 	
 	console.log("Turn light off...");
-	mySocket.send("./out/debug/chip-tool onoff off 0x11 1\n");
+	mySocket.send("/home/pi/connectedhomeip/examples/chip-tool/out/debug/chip-tool onoff off 0x11 1\n");
 	
 	console.log("Wait 5 seconds...");
 	await delay(5000);
 	
 	console.log("Turn light on again...");
-	mySocket.send("./out/debug/chip-tool onoff on 0x11 1\n");
+	mySocket.send("/home/pi/connectedhomeip/examples/chip-tool/out/debug/chip-tool onoff on 0x11 1\n");
 	
 	console.log("Wait 5 seconds...");
 	await delay(5000);
 	
 	console.log("Turn light off again...");
-	mySocket.send("./out/debug/chip-tool onoff off 0x11 1\n");
+	mySocket.send("/home/pi/connectedhomeip/examples/chip-tool/out/debug/chip-tool onoff off 0x11 1\n");
 	
 	console.log("Wait 5 seconds...");
 	await delay(5000);

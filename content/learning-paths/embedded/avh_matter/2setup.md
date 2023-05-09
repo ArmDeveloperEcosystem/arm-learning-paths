@@ -18,7 +18,7 @@ GitHub requires that a [Personal Access Token](https://docs.github.com/en/authen
 
 Ensure you have enabled the token to `Update GitHub Action workflows`.
 
-You may wish to create a local scratchpad text file containing the below details (which will be unique to you), so that you can easily copy-and-paste from.
+You may wish to create a local scratch pad text file containing the below details (which will be unique to you), so that you can easily copy and paste from.
 
 ```
 YOUR_GITHUB_USERNAME
@@ -62,9 +62,9 @@ It is also possible to log in via the CLCD window view. However it is easier to 
 
 The `Console` view within the browser will suffice to complete this Learning Path.
 
-If you wish to connect via `SSH` (rather than `Console`), it is easiest to download and install the appropriate [OpenVPN Community](https://openvpn.net/community-downloads) version for your host.
+If you wish to connect via `SSH` (rather than `Console`), it is easiest to follow the SSH tunnel connection instructions specified in the `Connect` tab. 
 
-In the Arm Virtual Hardware `Connect` tab, Click on `DOWNLOAD OVPN FILE` within the `Connect via VPN` section.
+As an alternative, you can also download and install the appropriate [OpenVPN Community](https://openvpn.net/community-downloads) version for your host. Click on `DOWNLOAD OVPN FILE` within the `Connect via VPN` section.
 
 In the `OpenVPN` GUI, select `Import` > `Import file...` and browse to the downloaded `OVPN file`. Click `Connect`.
 
@@ -75,6 +75,17 @@ On your host, open terminal(s), and connect to the virtual hardware instance(s) 
 You shall build the Matter examples on the virtual Raspberry Pi 4 instances. To prepare for this, install the necessary dependencies on **each** instance. This can be done in parallel on both instances.
 ```console
 sudo apt-get update
-sudo apt-get install -y git gcc g++ python pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev
+sudo apt-get install -y git gcc g++ pkg-config libssl-dev libdbus-1-dev libglib2.0-dev libavahi-client-dev ninja-build python3-venv python3-dev python3-pip unzip libgirepository1.0-dev libcairo2-dev libreadline-dev libpango1.0-dev
+```
+We shall also build ZAP from source on our instances. ZAP is generally installed as a third-party tool via CIPD during the build environment bootstrap but zap packages are currently NOT available for arm64.
+```console
+git clone https://github.com/project-chip/zap.git ~/zap
+cd ~/zap
+curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs
+sudo src-script/install-packages-ubuntu
+npm ci
+export ZAP_DEVELOPMENT_PATH=~/zap
+cd ~
 ```
 This will also verify that your instances are working correctly.
