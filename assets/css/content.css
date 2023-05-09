@@ -192,7 +192,6 @@ html[theme='light'] ads-tag {
 
 
 
-
 /* select every P and H1,2,3,4,5,6 that is the first child of markdown-content-div to have 0 top margin */
 div.markdown-content-div > h1:first-child,
 div.markdown-content-div > h2:first-child,
@@ -202,4 +201,24 @@ div.markdown-content-div > h5:first-child,
 div.markdown-content-div > h6:first-child,
 div.markdown-content-div > p:first-child {
     margin-top: 0px;
+}
+
+
+
+/* prism adjustments, for copy code fixes */
+/*  Stop them being selectable so the user can just copy the commands 
+.command-line code span.output {
+    user-select: none;
+  }
+*/
+/* if '__output__' is at the start of a line, style differently */
+/*in prismjs:  		if (element.classList.contains('language-output')) { return } */
+/*in prismjs:  return element.textContent.replace(/^\_\_output\_\_.*\n?/gm, '');  */
+pre > code > span.hidden-output-text {
+    display: none;
+}
+pre > code > span.output {
+    user-select: none;
+    /*color: hsla(0,0%,93%,.15); */
+    opacity: .7;
 }
