@@ -80,6 +80,7 @@ html[theme="dark"]  div.markdown-content-div > table tbody { background-color: v
 
 div.markdown-content-div > div.code-toolbar {
     margin-left: 16px;
+    margin-right: 16px;         /*provide spacing from right side*/
 }
 
 /* If a header is the first child of markdown-content-div, it should add no extra padding (already done by markdown-content-div for all) */
@@ -188,7 +189,6 @@ html[theme='light'] ads-tag {
     --ads-tag-border-color-hover: var(--arm-blue);
     --ads-tag-background-color-hover: white;
 }
-
 
 
 
