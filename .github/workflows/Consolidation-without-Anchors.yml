@@ -28,7 +28,7 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      ## Used w3c-Link checker.  
+      ## Used w3c-checker check_links
       - name: Check w3c-linkchecker links
         continue-on-error: true
         run: |
