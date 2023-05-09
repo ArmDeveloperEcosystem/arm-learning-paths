@@ -36,16 +36,16 @@ The Graviton instances are Arm and in this example two different have been selec
 
 For more information on Graviton, see [AWS Graviton Getting Started](https://github.com/aws/aws-graviton-getting-started).
 
-Once the Graviton instance is running, connect to it using `ssh` with the `-X` option to allow for display forwarding. Don't forget to replace `INSERT_KEY.PEM` and `INSERT_GRAVITON_INSTANCE_IP_ADDRESS` before running the command.
+Once the Graviton instance is running, connect to it using `ssh` with the `-X` option to allow for display forwarding. Don't forget to replace `INSERT_KEY_PEM_FILE` and `INSERT_GRAVITON_INSTANCE_IP_ADDRESS` before running the command.
 ```bash
-ssh -X -i "INSERT_KEY.PEM" ubuntu@INSERT_GRAVITON_INSTANCE_IP_ADDRESS
+ssh -X -i "INSERT_KEY_PEM_FILE" ubuntu@INSERT_GRAVITON_INSTANCE_IP_ADDRESS
 ```
 
 Install [Docker Engine](https://learn.arm.com/install-guides/docker/docker-engine/).
 
 ### Raspberry Pi 4
 
-The Raspberry Pi is setup just like a normal dekstop computer and the following is assumed:
+The Raspberry Pi is setup just like a normal desktop computer and the following is assumed:
 * Running Raspberry Pi OS (64-bit)
 * Docker is installed
   * See [Install Docker Engine on Debian](https://docs.docker.com/engine/install/debian/)
@@ -55,7 +55,7 @@ The Raspberry Pi is setup just like a normal dekstop computer and the following 
 
 ## Development environment and application porting
 
-Use the same Dockerfile as before, see [Development environment](4_development_environment#gcc), we'll build our development environment natively on Arm, i.e., not use `buildx`. To build the GCC development environment, run the following command.
+Use the same Dockerfile as before, see [Development environment](../4_development_environment#gcc), we'll build our development environment natively on Arm, i.e., not use `buildx`. To build the GCC development environment, run the following command
 ```bash
 docker build -t sobel_gcc_example .
 ```
