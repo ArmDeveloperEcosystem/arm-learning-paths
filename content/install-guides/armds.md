@@ -64,7 +64,7 @@ Full installation instructions are provided in the Windows section of the [Arm D
 
 ### Linux
 
-Untar the downloaded package:
+Extract the downloaded package:
 ```command
 tar -xf DS000-BN-00001-r23p0-00rel0.tgz
 cd DS000-BN-00001-r23p0-00rel0

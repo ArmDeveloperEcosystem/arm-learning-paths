@@ -103,5 +103,5 @@ LOAD 0x0 0x400000 {
 }
 ```
 {{% notice  Arm Development Studio%}}
-The IDE recognises `.sct` files as scatter files, and provides a graphical representation of the layout in a `Memory Map` tab.
+The IDE recognizes `.sct` files as scatter files, and provides a graphical representation of the layout in a `Memory Map` tab.
 {{% /notice %}}

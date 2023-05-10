@@ -42,7 +42,7 @@ To import a project:
 
 2. Expand `Examples` and expand the example types to see the available examples.
 
-For example, expand `Armv7 Bare-Metal` and select `startup_Cortex-M3_AC6` with a checkmark and click `Finish` to import the project into your workspace.
+For example, expand `Armv7 Bare-Metal` and select `startup_Cortex-M3_AC6` with a check mark and click `Finish` to import the project into your workspace.
 
 {{% notice  Filter%}}
 Enter `m3` (or similar) in the text box at top of pane to easily locate the example project.
