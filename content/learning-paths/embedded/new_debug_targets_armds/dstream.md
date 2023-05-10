@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Debug with Arm DSTREAM"
+title: Debug connection with Arm DSTREAM
 
 weight: 4 # 1 is first, 2 is second, etc.
 

@@ -25,14 +25,15 @@ review:
 
     - questions:
         question: >
-            Which debug adapter is provided on-board MPS2+
+            Which flavor of DSTREAM hardware supports 32-bit parallel trace output?
         answers:
-            - "DSTREAM"
-            - "ULINK2"
-            - "CMSIS-DAP"
-        correct_answer: 3
+            - "DSTREAM-ST"
+            - "DSTREAM-PT"
+            - "DSTREAM-HT"
+            - "DSTREAM-XT"
+        correct_answer: 2
         explanation: >
-            CMSIS-DAP is the interface firmware for a debug Unit that connects the Debug Port to USB.
+            DSTREAM-PT supports 32-bit wide trace capture at up to 300 MHz DDR.
                
     - questions:
         question: >

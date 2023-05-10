@@ -15,8 +15,14 @@ The Product Download Hub has an API to enable end users to automate management a
 
 ## Entitlements and Download Manager
 
-The easiest way to manage access is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the PDH database, and download the required packages. It can be used from Windows command line or a Linux terminal.
+The easiest way to manage access is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the PDH database, and download the required packages. It can be used from Windows command line or a Linux terminal. These instructions are for Linux (Ubuntu).
 
+Install pre-requisites
+```
+sudo apt update
+sudo apt install -y python pip
+sudo apt install -y python-is-python3
+```
 To install the utility use:
 ```cmd
 python -m pip install edmgr

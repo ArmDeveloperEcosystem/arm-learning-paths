@@ -1,8 +1,8 @@
 ---
 # User change
-title: "Miscellaneous other topics"
+title: Other compilers and project types
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
