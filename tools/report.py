@@ -13,11 +13,11 @@ from datetime import datetime, timedelta
 # List of directories to parse for learning paths
 dname = ["content/install-guides",
          "content/learning-paths/cross-platform",
-         "content/learning-paths/desktop-and-laptop",
-         "content/learning-paths/embedded",
-         "content/learning-paths/microcontroller",
-         "content/learning-paths/mobile",
-         "content/learning-paths/server-and-cloud"]
+         "content/learning-paths/laptops-and-desktops",
+         "content/learning-paths/embedded-systems",
+         "content/learning-paths/microcontrollers",
+         "content/learning-paths/smartphones-and-mobile",
+         "content/learning-paths/servers-and-cloud-computing"]
 
 
 '''
@@ -107,35 +107,35 @@ def init_graph(title):
                     "x": [],
                     "y": [],
                     "type": "bar",
-                    "name": "learning-paths/desktop-and-laptop",
+                    "name": "learning-paths/laptops-and-desktops",
                     "xaxis": "x2"
                 },
                 {
                     "x": [],
                     "y": [],
                     "type": "bar",
-                    "name": "learning-paths/embedded",
+                    "name": "learning-paths/embedded-systems",
                     "xaxis": "x2"
                 },
                 {
                     "x": [],
                     "y": [],
                     "type": "bar",
-                    "name": "learning-paths/microcontroller",
+                    "name": "learning-paths/microcontrollers",
                     "xaxis": "x2"
                 },
                 {
                     "x": [],
                     "y": [],
                     "type": "bar",
-                    "name": "learning-paths/mobile",
+                    "name": "learning-paths/smartphones-and-mobile",
                     "xaxis": "x2"
                 },
                 {
                     "x": [],
                     "y": [],
                     "type": "bar",
-                    "name": "learning-paths/server-and-cloud",
+                    "name": "learning-paths/servers-and-cloud-computing",
                     "xaxis": "x2"
                 }
             ],

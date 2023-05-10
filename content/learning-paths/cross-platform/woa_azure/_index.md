@@ -26,8 +26,8 @@ tools_software_languages:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - server-and-cloud
-    - desktop-and-laptop
+    - servers-and-cloud-computing
+    - laptops-and-desktops
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

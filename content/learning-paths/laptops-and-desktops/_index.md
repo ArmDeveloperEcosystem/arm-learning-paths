@@ -17,7 +17,7 @@ subjects_filter:
 - Migration to Arm: 4
 - Performance and Architecture: 3
 subtitle: Create and migrate apps for power efficient performance
-title: Desktop and Laptop
+title: Laptops and Desktops
 tools_software_languages_filter:
 - Alacritty: 1
 - Arm64EC: 1

@@ -270,7 +270,7 @@ def checker(report = 'all', update_md_files = False):
     # 2
     # Loop over all content, read into new dic
     # { subjects: 
-    #       server-and-cloud:
+    #       servers-and-cloud-computing:
     #           CI-CD:
     #               allowed: True
     #               count: 2...

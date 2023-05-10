@@ -36,6 +36,6 @@ who_is_this_for: This is an advanced topic for software developers interested in
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - server-and-cloud
-    - desktop-and-laptop
+    - servers-and-cloud-computing
+    - laptops-and-desktops
 ---

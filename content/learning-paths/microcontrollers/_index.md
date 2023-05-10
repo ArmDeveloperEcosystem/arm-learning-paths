@@ -18,7 +18,7 @@ subjects_filter:
 - Security: 3
 - Virtual Hardware: 2
 subtitle: Learn best practices for microcontroller development
-title: Microcontroller
+title: Microcontrollers
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 4
 - Arm Development Studio: 1
