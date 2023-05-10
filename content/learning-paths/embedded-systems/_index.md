@@ -18,7 +18,7 @@ subjects_filter:
 - Embedded Linux: 3
 - Performance and Architecture: 4
 subtitle: Build secure, connected, smart IoT devices
-title: Embedded
+title: Embedded Systems
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 3
 - Arm Development Studio: 3

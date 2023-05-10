@@ -14,7 +14,7 @@ operatingsystems_filter:
 subjects_filter:
 - Performance and Architecture: 3
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
-title: Mobile
+title: Smartphones and Mobile
 tools_software_languages_filter:
 - Arm Mobile Studio: 1
 - C++: 1

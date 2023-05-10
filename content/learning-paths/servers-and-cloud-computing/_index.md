@@ -26,7 +26,7 @@ subjects_filter:
 - Storage: 1
 - Web: 3
 subtitle: Optimize cloud native apps on Arm for performance and cost
-title: Server and Cloud
+title: Servers and Cloud Computing
 tools_software_languages_filter:
 - Ansible: 4
 - Armclang: 2
