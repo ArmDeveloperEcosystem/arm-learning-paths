@@ -1,96 +1,51 @@
 ---
 # User change
-title: "Debugging with Arm Fast Models"
+title: Debug the example
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Arm Fast Models](https://developer.arm.com/Tools%20and%20Software/Fast%20Models) are accurate, flexible programmer's view models of Arm IP. They are used to build a virtual platform, either standalone, or as part of Hybrid Simulation environment within EDA partner environments. Use the virtual platform for software development and verification throughout the development process, even long before any real hardware is available.
+Arm Development Studio provides a library of [Fixed Virtual Platforms (FVPs)](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) to execute (and debug) the example on without the need for any target hardware.
 
-You can connect the [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) debugger to your virtual platform and interact with it as if were real hardware.
+If you have hardware, you may wish to run the example on that. The supplied Cortex-M FVPs are digital twins of the [MPS2+](https://developer.arm.com/Tools%20and%20Software/MPS2%20Plus%20FPGA%20Prototyping%20Board) platform, in this case programmed for Cortex-M3 (`AN385`).
 
-## Before you begin
+## Debug the example project with FVP
 
-You should have Arm Development Studio installed and your license configured. Refer to the [Arm Development Studio install guide](/install-guides/armds/) for more information.
+The project contains `startup_Cortex-M3_AC6_FVP.launch` within the project folder. This is a ready-to use debug configuration for the FVP.
 
-You should also have Arm Fast Models installed and your license configured. Refer to the [Arm Fast Models install guide](/install-guides/fm/) for more information.
+1. Double-click on the `.launch` file to inspect. Observe settings in various panes, defining the FVP to connect to, the image to be loaded, and other connection options.
 
-### If Fast Models are not available
+2. Click `Debug` to start the debug session.
 
-If you do not have access to Arm Fast Models, you can still learn how to connect to a custom virtual platform, using the same FVP as supplied with Development Studio (`bin` directory) instead.
+{{% notice  %}}
+Subsequent debug sessions can be launched directly from the `Debug Control` pane.
+{{% /notice %}}
 
-## Build Fast Model example
+## Debug the example project with MPS2+
 
-A number of ready made example systems are provided with Arm Fast Models, including all of the Fixed Virtual Platform (FVP) examples.
+The project contains `startup_Cortex-M3_AC6_MPS2.launch` within the project folder.
 
-Use the supplied `FVP_MPS2_Cortex-M3` Fast Models example, which is installed in the
-```console
-FastModelsPortfolio_<version>\examples\LISA\FVP_MPS2\Build_Cortex-M3
-```
-directory of your Fast Models installation.
+1. Double-click on the `.launch` file to inspect. Observe settings in various panes, defining the MPS2+ configuration to connect to, the image to be loaded, and other connection options.
 
-In Arm Fast Models `System Canvas`, use `File` > `Load project`, and navigate to the `FVP_MPS2_Cortex-M3.sgproj` project as above. Click `Build`.
+2. From the `Target Connection` pulldown, select the debug adapter used to connect to the target. `CMSIS-DAP` is an on-board debug adapter that connects via USB, and so no additional hardware is needed.
 
-## Create a Model Configuration for your Virtual Platform
+3. Click `Browse` to identify your debug adapter, then click `Apply` to save.
 
-In the `Arm Development Studio IDE` menu, select `File` > `New` > `Other` > `Configuration Database` > `Configuration Database`, and give it a meaningful name. This creates a project folder where the debugger stores all user-made configurations.
+4. Click `Debug` to start the debug session.
 
-Then select `File` > `New` > `Other` > `Configuration Database` > `Model Configuration`, which will be the actual configuration to create. When prompted, select the above `Configuration Database` to store in. Click `Next`.
+{{% notice  %}}
+Subsequent debug sessions can be launched directly from the `Debug Control` pane.
+{{% /notice %}}
 
-You will be prompted to ask which debug interface to use, `Iris` or `CADI`. `Iris` is the default and recommended interface. Click `Next`.
 
-You are then prompted to either launch the model, or browse for an already running model:
+## Navigate the GUI
 
-### Launch and connect to specific model
+You can control execution (`step`, `continue`, `stop`, etc) from the buttons in the `Debug Control` pane.
 
-If this is selected, click `Next`, and browse for the Fast Model executable. The debugger will append necessary command options to enable debug. This is the most straight forward option, and recommended for first time users.
+The `Commands` pane reflects all actions done in the GUI. The debugger can also be fully controlled by entering [commands](https://developer.arm.com/documentation/101471) in this pane.
 
-### Browse for model running on local host
+Explore the various [views](https://developer.arm.com/documentation/101470/latest/Perspectives-and-Views) to understand how to use the debugger. There are `Register`, `Memory`, `Stack`, `Disassembly`, and many other views available. To open new views, use `Window` > `Show View` menu option, or click the `+` icon alongside already opened views.
 
-If this is selected, you must previously have launched the Fast Model either from the command line, else via `System Canvas` > `Run` dialog, with `-I` option to start the Iris server in the model. If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used.
-
-### Browse for model running on remote host
-
-If this is selected (where the virtual platform is running on a different machine on the network), you must previously have launched the Fast Model either from the command line, else via `System Canvas` > `Run` dialog, with `-I -A` options to start the Iris server in the model and allow remote access. If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used. You will be prompted for the server address (the machine running the virtual platform) and port number.
-
-Regardless of how you connect to the model, a `.mdf` file will be created. Specify an appropriate manufacturer and platform name, and click Import.
-
-## Import Software example
-
-If not previously imported, use `File` > `Import...` > `Arm Development Studio` > `Examples and Programming Libraries`, and browse for `startup_Cortex-M3_AC6` (use the text filter box to easily locate this).
-
-Although this project is pre-configured to be debugged with the FVP supplied with Arm Development Studio, you shall instead debug on the newly built FVP.
-
-## Create a new Debug Configuration for your Virtual Platform
-
-Select `File` > `New` > `Model Connection`, and give it a meaningful name. It is recommended to associate with the specific project (`startup_Cortex-M3_AC6`).
-
-Select the model configuration you created above (the text filter can assist if many targets defined), and click Finish.
-
-You can again select to launch a new instance of the model (recommended) or connect to an already running model.
-
-### Launch a new model
-
-No further configuration needed.
-
-### Browse for model running on local host
-
-If this is selected, you must launch the Fast Model either from the command line, else via `System Canvas` > `Run` dialog, with `-I` option to start the Iris server in the model. If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used.
-
-Specify the connection address as `localhost:<port>`
-
-### Browse for model running on remote host
-
-If this is selected (where the virtual platform is running on a different machine on the network), you must launch the Fast Model either from the command line, else via `System Canvas` > `Run` dialog, with `-I -A` options to start the Iris server in the model and allow remote access. If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used. You will be prompted for the server address (the machine running the virtual platform) and port number.
-
-Specify the connection address as `hostname:<port>`
-
-## Load image
-
-Navigate to the `Files` tab, and browse (within Workspace) to the `startup_Cortex-M3_AC6.axf` pre-built image. Then, in the `Debugger` tab, select `Debug from entry point`.
-
-If connecting to an already running model with a loaded image (`-a <image>`), select `Load symbols from file` from the `Files` tab. In this scenario, in the `Debugger` tab, select `Connect Only`.
-
-Click `Debug` to connect to the virtual platform, and commence your debug session.
+Click the disconnect button in the `Debug Control` pane (or use `quit` command) to end the debug session.

@@ -73,23 +73,55 @@ To install silently from the command line, use similar to the following.
 ```command
 sudo ./armds-2023.0.sh --i-agree-to-the-contained-eula --no-interactive -f -q
 ```
-{{% notice  Libraries%}}
+{{% notice Libraries%}}
 The install may report that additional [libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) are needed to be installed.
 {{% /notice %}}
 
+Full installation instructions are provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux).
+
+## Configure command line
+
+### Windows
+
+You will see `Arm DS <version> Command Prompt` installed. This configures all necessary environment variables for use with the tools. You can select an appropriate toolchain with:
+```command
+select_toolchain
+```
+or set a default version with:
+```command
+select_default_toolchain
+```
+{{% notice  Toolchains%}}
+By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/2023-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+{{% /notice %}}
+
+### Linux
+
 Navigate to `bin` directory of your install, for example:
 ```command
-cd /home/ubuntu/developmentstudio-2023.0/bin
+cd /opt/arm/developmentstudio-2023.0/bin
 ```
 Use `suite_exec` to start an appropriate command prompt, for example:
 ```command
-sudo ./suite_exec bash
+suite_exec --toolchain "Arm Compiler for Embedded 6" bash
 ```
-Full installation instructions are provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux).
+To remove the need for the `--toolchain` option, first run:
+```command
+select_default_toolchain
+```
+and select the desired toolchain. You can then configure with simply:
+```command
+suite_exec bash
+```
+{{% notice  Toolchains%}}
+By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/2023-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+{{% /notice %}}
 
 ## Arm Development Studio IDE
 
-Launch the Arm Development Studio IDE from your desktop, or from the above prompt using:
+Arm Development Studio is provided with a fully featured Eclipse based IDE and integrated debugger.
+
+Launch the IDE from your desktop, or from the above prompt using:
 ```command
 ./armds_ide
 ```
@@ -98,10 +130,14 @@ Launch the Arm Development Studio IDE from your desktop, or from the above promp
 
 Arm Development Studio is license managed. When you launch the IDE for the first time, you should be prompted to set up your license and select the Edition. You can return to this view from `Help` > `Arm License Manager`.
 
-License setup instructions are available in the [Arm Licensing install guide](../license/).
-
 A free 30 day evaluation license for Arm Development Studio is also available. You can generate this in `Arm License Manager`. Click on `Add`, and follow instructions therein to obtain the evaluation license (requires Arm login).
+
+Alternative license setup instructions are available in the [Arm Licensing install guide](../license/).
 
 ## Get started
 
+To verify everything is working OK, run the compiler from your command prompt:
+```command
+armclang --version
+```
 You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded/armds/) learning path for more information.
