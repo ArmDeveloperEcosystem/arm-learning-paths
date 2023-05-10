@@ -133,8 +133,11 @@ label {
 /* Fix Search Height and pdding*/
 ads-search#search-box {
         min-height: 45px;
-        padding-left: 14px;             /*provide spacing to search field from left*/
-        padding-right: 14px;            /*provide spacing to search field from right*/
+}
+/*in install guides provide spacing to search field from left and right*/
+ads-search#search-box.install-guide{
+        padding-left: 14px;             
+        padding-right: 14px;
 }
 
 
