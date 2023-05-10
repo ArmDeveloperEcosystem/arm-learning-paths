@@ -40,7 +40,7 @@ Open `System Canvas`, and select `File` > `Load project` from the menu.
 
 Navigate to the `FVP_MPS2_Cortex-M3.sgproj` project as above. Click `Open` to load.
 
-Click `Build` to create the FVP. The FVP executable wll be in the appropriate subfolder depending on platform and compiler version, for example:
+Click `Build` to create the FVP. The FVP executable will be in the appropriate subfolder depending on platform and compiler version, for example:
 ```text
 Win64-Release-VC2019\isim_system_Win64-Release-VC2019.exe
 ```
