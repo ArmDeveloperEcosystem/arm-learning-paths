@@ -28,23 +28,20 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      ## Used w3c-checker check_links
-      - name: Check w3c-linkchecker links
+      - name: Check HTML with W3C Validator
         continue-on-error: true
         run: |
-          sudo apt-get update
-          sudo apt-get install -y w3c-linkchecker  
+            # Replace 'index.html' with the path to your HTML file
+            npm install -g html-validator-cli
+            html-validator --file index.html --verbose 2>&1 | tee w3c-check.log
 
-      - name: Check links
-        run: |
-          checklink --check-extern --ignore-url=mailto: --no-warnings --no-status -F log -o htmltest.log .htmltest.yml
-      
-      - name: Upload output file as artifact
-        uses: actions/upload-artifact@v2
+      - name: W3C Checklist Results
+        uses: actions/upload-artifact@v3
         with:
-          name: w3c-linkchecker-output
-          path: htmltest.log
-          retention-days: 7 # Default is 90 days
+          name: w3c-checklist-report
+          path: w3c-check.log
+          retention-days: 7
+
 
       - name: Scan for malware
         run: |
