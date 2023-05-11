@@ -28,16 +28,20 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Check HTML links
+      - name: Check HTML with W3C Validator
         continue-on-error: true
-        run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
+        run: |
+            # Replace 'index.html' with the path to your HTML file
+            npm install -g html-validator-cli
+            html-validator --file bin/htmltest -c .htmltest.yml --verbose 2>&1 | tee w3c-check.log
 
-      - name: HTML test results
-        uses: actions/upload-artifact@v2
+      - name: W3C Checklist Results
+        uses: actions/upload-artifact@v3
         with:
-          name: htmltest-report
-          path: htmltest.log
-          retention-days: 7 # Default is 90 days
+          name: w3c-checklist-report
+          path: w3c-check.log
+          retention-days: 7
+
 
       - name: Scan for malware
         run: |
