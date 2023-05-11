@@ -28,11 +28,12 @@ jobs:
         run: |
              echo "${{ secrets.GITHUB_TOKEN }}"
              
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+      #- name: Setup tmate session
+      #  uses: mxschmitt/action-tmate@v3
              
       # Run python script to update files
       - name: Run Python script to update files
         run: |
-             pip install -r tools/requirements.txt
-             python3 tools/stats_data_generate.py
+             cd tools/
+             pip install -r requirements.txt
+             python3 stats_data_generate.py
