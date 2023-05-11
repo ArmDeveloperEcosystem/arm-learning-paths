@@ -366,13 +366,18 @@ function trackHeaderInteraction(type,name){
     //  ===================
     window.addEventListener('load', () => {
         //console.log('All site loaded.');
+        let armTopNav = document.querySelector('arm-top-navigation');
         let globalNav = document.getElementById('global-nav-example-default');
         let breadcrumbs  = document.getElementById('breadcrumb-element');
 
 
         // top left header
-        let top_left_logo  = globalNav.shadowRoot.querySelector('.c-navigation-logo');
-        top_left_logo.addEventListener("click", () => {   trackHeaderInteraction('header-mainnav-clicks','hub-logo');        });   
+        // let top_left_logo  = globalNav.shadowRoot.querySelector('.c-navigation-logo');
+        // top_left_logo.addEventListener("click", () => {   trackHeaderInteraction('header-mainnav-clicks','hub-logo');        });   
+        let logo_primary = armTopNav.shadowRoot.querySelector('.c-logo-arm-primary');
+        let logo_secondary = armTopNav.shadowRoot.querySelector('.c-logo-arm-secondary');
+        logo_primary.addEventListener("click", () => { trackHeaderInteraction('header-mainnav-clicks','arm-logo'); });
+        logo_secondary.addEventListener("click", () => { trackHeaderInteraction('header-mainnav-clicks','hub-logo'); });
 
 
         // theme button
@@ -381,30 +386,41 @@ function trackHeaderInteraction(type,name){
 
 
         // contribute button
-        let contribute_btn  = document.getElementById('contribute-btn');
-        contribute_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','contribute-on-github');        });   
+        // let contribute_btn  = document.getElementById('contribute-btn');
+        // contribute_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','contribute-on-github');        });   
 
 
         // subnav buttons
-        let LP_categories  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category1');
-        LP_categories.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','learning-path-categories');        });   
+        // let LP_categories  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category1');
+        // LP_categories.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','learning-path-categories');        });   
 
-        let install_guides  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category2');
-        install_guides.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','install-guides');        });   
+        // let install_guides  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category2');
+        // install_guides.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','install-guides');        });   
 
         
-        // social links
-        let discord  = globalNav.shadowRoot.querySelector('.fa-discord').parentElement;
-        discord.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','discord');        });   
-    
-        let github  = globalNav.shadowRoot.querySelector('.fa-github').parentElement;
-        github.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','github');        });   
-
-        let twitter  = globalNav.shadowRoot.querySelector('.fa-twitter').parentElement;
-        twitter.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','twitter');        });   
-
-        let youtube  = globalNav.shadowRoot.querySelector('.fa-youtube').parentElement;
-        youtube.addEventListener("click", () => {   trackHeaderInteraction('header-social-clicks','youtube');        });    
+        // social links desktop
+        let discord = armTopNav.shadowRoot.querySelector('.icon-discord');
+        discord.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','discord'); });
+        let reddit = armTopNav.shadowRoot.querySelector('.icon-reddit');
+        reddit.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','reddit'); });
+        let github = armTopNav.shadowRoot.querySelector('.icon-github');
+        github.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','github'); });
+        let twitter = armTopNav.shadowRoot.querySelector('.icon-twitter');
+        twitter.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','twitter'); });
+        let youtube = armTopNav.shadowRoot.querySelector('.icon-youtube');
+        youtube.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','youtube'); });
+        
+        // social links mobile
+        let mDiscord = armTopNav.shadowRoot.querySelector('.icon-mobile-discord');
+        mDiscord.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','discord'); });
+        let mReddit = armTopNav.shadowRoot.querySelector('.icon-mobile-reddit');
+        mReddit.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','reddit'); });
+        let mGithub = armTopNav.shadowRoot.querySelector('.icon-mobile-github');
+        mGithub.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','github'); });
+        let mTwitter = armTopNav.shadowRoot.querySelector('.icon-mobile-twitter');
+        mTwitter.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','twitter'); });
+        let mYoutube = armTopNav.shadowRoot.querySelector('.icon-mobile-youtube');
+        mYoutube.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','youtube'); });
 
 
         // breadcrumbs
