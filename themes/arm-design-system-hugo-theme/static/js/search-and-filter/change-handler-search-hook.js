@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
         openfilter_search_box.inputChangeHandler = searchHandler_OpenFilter;
     }
     
+    console.log('DEBUG: in change-handler-search-hook.js. Doc title: ',document.title,document.title.includes('Install Guides'));
+    console.log('DEBUG: in change-handler-search-hook.js. url_str: ',window.location.search,window.location.search.includes('?'));
+
 
     // Assign inputChangeHandler to search box
     const search_box = document.getElementById('search-box');
