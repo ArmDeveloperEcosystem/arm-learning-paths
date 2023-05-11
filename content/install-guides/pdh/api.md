@@ -13,19 +13,20 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 The Product Download Hub has an API to enable end users to automate management and download of their Arm products. It is currently a beta-level feature, but is available for users to experiment with today.
 
-## Entitlements and Download Manager
+## Install download manager
 
 The easiest way to manage access is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the PDH database, and download the required packages. It can be used from Windows command line or a Linux terminal. These instructions are for Linux (Ubuntu).
 
-Install pre-requisites
+### Install pre-requisites
 ```
 sudo apt update
-sudo apt install -y python pip
-sudo apt install -y python-is-python3
+sudo apt install -y python-is-python3 python3-pip
 ```
-To install the utility use:
+### Install edmgr
+
+To install the `edmgr` utility use:
 ```cmd
-python -m pip install edmgr
+sudo pip install edmgr
 ```
 For a complete list of available commands, use:
 ```cmd
@@ -35,22 +36,22 @@ For a complete list of options for a given command, use:
 ```cmd
 edmgr <command> --help
 ```
-
 ## Generate user token
-
-To confirm your identity, generate and copy your token from the below:
+In a browser, login and then copy your token from the below:
 ```url
 https://developer.arm.com/downloads/token
 ```
 The token is a very long text string, and is valid for one hour.
-
-You are now ready to interact with PDH.
 
 ## Login manager to PDH
 
 Using the token above, register your identity with the `edmgr` utility.
 ```cmd
 edmgr login token <your_token>
+```
+A successful login should return something similar to:
+```output
+Token saved in /home/ubuntu/.edm
 ```
 
 ## Determine the Product ID
@@ -67,9 +68,7 @@ For example, the `Product Code` of [Arm Development Studio](https://developer.ar
 edmgr entitlements -p <ProductCode>
 ```
 
-From this output, you will get a six-digit numeric `ID` of the product you wish to download. This ID is referred to as `ProductID` to avoid confusion.
-
-For example, the `ProductID` of `Arm Development Studio` is `169189`.
+From this output, you will get a six-digit numeric `ID` of the product you wish to download. This is the `ProductID`.
 
 ## Determine the Release ID
 
@@ -79,7 +78,7 @@ edmgr releases -e <ProductID>
 ```
 From this table, an `ID` will be shown for each available version. This ID is referred to as the `ReleaseID`.
 
-For example, the `ReleaseID` of `Arm Development Studio`, version `2022.2`, is `d2650553-3806-4c0e-92d7-2e46fd468074`.
+For example, you can return the `ReleaseID` of `Arm Development Studio 2023.0` of the form `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
 
 ## Determine the Artifact ID
 
@@ -91,7 +90,7 @@ edmgr artifacts -e <ProductID> -r <ReleaseID>
 ```
 The `ID` given in the output are the available `ArtifactID`s for this item.
 
-To continue the example, the `Arm Development Studio` > `2022.2` > `Linux installer` artifact is `7db814ee-c1e3-4d68-a65d-a7e6b437e1ef`.
+To continue the example, the `Arm Development Studio 2023.0 Linux installer` `ArtifactID` is of the form `yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy`.
 
 ## Download the artifact
 
@@ -112,7 +111,9 @@ The default output format of the above is a human readable table. Add the `-f js
 ```cmd
 edmgr entitlements -f json
 ```
-This output can be used to implement scripts to manage your downloads. A simple Python example may be:
+This output can be used to implement scripts to manage your downloads. A Python script to download the latest `Arm Development Studio` is shown below.
+
+### pdh.py
 
 ```python
 import json
@@ -131,7 +132,7 @@ ProductID = data1[0]['id']
 # Output ProductID for debug purposes
 print("ProductID =", ProductID)
 
-# Determine Release ID
+# Determine ReleaseID
 cmd2="edmgr releases -e "+ProductID+" -f json > "+ProductID+".json"
 os.system(cmd2)
 f2 = open(""+ProductID+".json", "r")
@@ -141,23 +142,47 @@ ReleaseID = data2[0]['id']
 # Output ReleaseID for debug purposes
 print ("ReleaseID =", ReleaseID)
 
-# Determine Artifact ID
+# Determine ArtifactID
 cmd3="edmgr artifacts -e "+ProductID+" -r "+ReleaseID+" -f json > "+ReleaseID+".json"
 os.system(cmd3)
 f3 = open(""+ReleaseID+".json", "r")
 data3 =  json.loads(f3.read())
 f3.close()
-ArtifactID = data3[0]['id']
+ArtifactID1 = data3[0]['id']
+ArtifactID2 = data3[1]['id']
 # Output ArtifactID for debug purposes
-print ("ArtifactID =", ArtifactID)
+print ("Two artifacts available (Windows and Linux installers)")
+print ("ArtifactID1 =", ArtifactID1)
+print ("ArtifactID2 =", ArtifactID2)
 
-# Download Artifact to current directory
-cmd4="edmgr download-artifacts -e "+ProductID+" -r "+ReleaseID+" -a "+ArtifactID+" -d ."
+# Download Artifacts to current directory
+cmd4="edmgr download-artifacts -e "+ProductID+" -r "+ReleaseID+" -a "+ArtifactID1+" -d ."
 os.system(cmd4)
+cmd5="edmgr download-artifacts -e "+ProductID+" -r "+ReleaseID+" -a "+ArtifactID2+" -d ."
+os.system(cmd5)
 print("Download complete")
 
 # Tidy up (optional)
 os.system("rm -rf *.json")
 os.system("ls -l")
 os.system("edmgr logout")
+```
+which can be executed with:
+```cmd
+python pdh.py
+```
+You should see output similar to:
+```output
+ProductID = pppppp
+ReleaseID = xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+Two artifacts available (Windows and Linux installers)
+ArtifactID1 = yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy
+ArtifactID2 = zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz
+Downloading <windows_installer>
+...
+All done!
+Downloading <linux_installer>
+...
+All done!
+Download complete
 ```
