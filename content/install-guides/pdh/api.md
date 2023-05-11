@@ -11,11 +11,13 @@ multi_install: false             # Set to true if first page of multi-page artic
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-The Product Download Hub has an API to enable end users to automate management and download of their Arm products. It is currently a beta-level feature, but is available for users to experiment with today.
+The Product Download Hub has an API to enable end users to automate management and download of their Arm products.
 
-## Install download manager
+## Entitlements and Download Manager
 
-The easiest way to manage access is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the PDH database, and download the required packages. It can be used from Windows command line or a Linux terminal. These instructions are for Linux (Ubuntu).
+The easiest way to manage access PDH is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the PDH database, and download the required packages.
+
+It can be used from Windows command line or a Linux terminal. These instructions are for Linux (Ubuntu 22.04LTS).
 
 ### Install pre-requisites
 ```
@@ -28,16 +30,8 @@ To install the `edmgr` utility use:
 ```cmd
 sudo pip install edmgr
 ```
-For a complete list of available commands, use:
-```cmd
-edmgr --help
-```
-For a complete list of options for a given command, use:
-```cmd
-edmgr <command> --help
-```
 ## Generate user token
-In a browser, login and then copy your token from the below:
+In a browser, login to PDH and copy your token from the below:
 ```url
 https://developer.arm.com/downloads/token
 ```
@@ -52,6 +46,14 @@ edmgr login token <your_token>
 A successful login should return something similar to:
 ```output
 Token saved in /home/ubuntu/.edm
+```
+If you get an error similar to:
+```output
+Error: public_key() missing 1 required positional argument: 'backend'
+```
+You likely need to update the cryptography module on your host:
+```cmd
+pip install --upgrade pyjwt[crypto]
 ```
 
 ## Determine the Product ID
