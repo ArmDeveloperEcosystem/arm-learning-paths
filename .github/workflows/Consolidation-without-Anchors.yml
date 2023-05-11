@@ -28,21 +28,15 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get install -y python3
-          pip3 install --upgrade w3c-linkchecker
-
       - name: Check HTML links
         run: |
-          w3c-linkchecker --check-extern --concurrency=8 --timeout=15 --depth=2 --quiet --verbose=info --output=results.html .
-          if grep -q ' class="error"' results.html; then exit 1; fi
+          docker run --rm -v $(pwd):/data w3cmarkupservices/html-validator linkcheck .
 
       - name: W3C Checklist Results
         uses: actions/upload-artifact@v3
         with:
           name: w3c-checklist-report
-          path: results.html
+          path: linkcheck.log
           retention-days: 7
 
       - name: Scan for malware
