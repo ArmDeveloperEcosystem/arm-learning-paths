@@ -68,12 +68,13 @@ function sanitizeInput(potentially_unsafe_str) {
 
 
 function searchHandler_LearningPaths(search_string,filters_from_url_only) {
-    console.log('DEBUG: in searchHandler_LPs. Search_string: ',search_string,sanitizeInput(search_string));
-
     // HANDLE if coming from ads search box (event.value) or URL (string)
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
+    console.log('DEBUG: in searchHandler_LPs. Search_string: ',search_string,sanitizeInput(search_string));
+
+
     // if getting filters from URL, activate the filters instantly before any other processing
     if (filters_from_url_only) {
         turnOnFilters(filters_from_url_only);
@@ -96,14 +97,13 @@ function searchHandler_LearningPaths(search_string,filters_from_url_only) {
 
 
 function searchHandler_Tools(search_string) {
-    console.log('DEBUG: in searchHandler_Tools. Search_string: ',search_string,sanitizeInput(search_string));
-
-
     // HANDLE if coming from ads search box (event.value) or URL (string)
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
-        
+    console.log('DEBUG: in searchHandler_Tools. Search_string: ',search_string,sanitizeInput(search_string));
+
+    
     // Sanitize the input
     search_string = sanitizeInput(search_string);
 
