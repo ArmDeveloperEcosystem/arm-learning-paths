@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 This repository provides a framework to help testing instructions, code snippets and maintain content.
 
-The framework allows to parse Learning Path articles and generate instructions to be run on a Docker container instance. It checks for expected behaviour and stores results in Junit XML files. It creates one XML file by Learning Path sub-article.
+The framework allows to parse Learning Path articles and generate instructions to be run on a Docker container instance. It checks for expected behavior and stores results in Junit XML files. It creates one XML file by Learning Path sub-article.
 
 1. [Install dependencies](#install-dependencies)
 2. [Edit Learning Path pages](#edit-learning-path-pages)
@@ -30,7 +30,7 @@ The framework is located in the `tools` folder. From the project root folder, in
 pip install -r tools/requirements.txt
 ```
 
-Docker is also required. Check the instructions [here](https://docs.docker.com/engine/install/ubuntu/) to install Doker on Ubuntu.
+Docker is also required. Refer to the [Docker Engine install guide](http://localhost:1313/install-guides/docker/docker-engine/) to install Docker on Ubuntu.
 
 ## Edit Learning Path pages
 
@@ -217,7 +217,7 @@ The `test_images` field is a list of Docker container images the framework can p
 From the project root folder, run:
 
 ```bash
-./tools/maintenance.py -i content/learning-paths/server-and-cloud/mynewlearningpath
+./tools/maintenance.py -i content/learning-paths/servers-and-cloud-computing/mynewlearningpath
 ```
 
 If the Learning Path contains sub-articles, the framework will run their instructions in order, depending on the sub-articles weight.
@@ -244,7 +244,7 @@ test_status:
 
 The field `test_status` is a list that indicated whether all tests passed for a corresponding Docker container image or if at least one test failed. 
 
-In the example above, the summary indicates that for this learning path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures are stored in Junit XML files.
+In the example above, the summary indicates that for this Learning Path all tests passed for the image `ubuntu:latest` but at least one test failed for the image `fedora:latest`. More information about the failures are stored in Junit XML files.
 
 ## Visualize results
 
@@ -261,7 +261,25 @@ npm i -g xunit-viewer
 Then, launch the web server (e.g. on port 5050) on the folder where the XML Junit files have been created:
 
 ```
-xunit-viewer -r content/learning-paths/server-and-cloud/mynewlearningpath/ -s -p 5050
+xunit-viewer -r content/learning-paths/servers-and-cloud-computing/mynewlearningpath/ -s -p 5050
 ```
 
+## Advanced usage for embedded development
+#### Using the Corstone-300 FVP
+
+By default, the framework runs instructions on the Docker images specified by the [metadata](#edit-metadata). For embedded development, it is possible to build software in a container instance and then check its behaviour on the Corstone-300 FVP. 
+
+For this, all container instances used by the test framework mount a volume in `/shared`. This is where software for the target FVP can be stored. To check the execution, the FVP commands just need to be identified as a `fvp` section for the framework. 
+
+For example:
+
+```markdown
+    We have previously built software for Corstone-300 in /shared/trusted-firmware-m/cmake_build/bin. To run the software on the FVP:
+
+    ```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55"; cwd="/shared/trusted-firmware-m/cmake_build" }
+    FVP_Corstone_SSE-300_Ethos-U55 -a cpu0*="bin/bl2.axf" --data "bin/tfm_s_ns_signed.bin"@0x01000000
+    ```
+```
+
+The `fvp_name` allows to specify the FVP to run on. Currently, only `FVP_Corstone_SSE-300_Ethos-U55` and `FVP_Corstone_SSE-300_Ethos-U65` are supported.
 

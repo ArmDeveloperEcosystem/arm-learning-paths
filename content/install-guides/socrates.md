@@ -25,9 +25,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Socrates](https://developer.arm.com/Tools%20and%20Software/Socrates) is a tool used to select, configure and create Arm IP for easy and error free integration into a System on Chip(SoC). 
 
-## Prerequisites
+## Before you begin
 
-Arm Socrates tooling requires a Linux host machine. Full specifications are given in section 3.2 of the [Installation Guide](https://developer.arm.com/documentation/101400)
+Arm Socrates requires a Linux machine running Red Hat Enterprise Linux. 
+
+Full specifications are given in section 3.2 of the [Installation Guide](https://developer.arm.com/documentation/101400)
 
 ## Download installer packages
 
@@ -35,13 +37,13 @@ Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/produ
 
 You can download Socrates as an individual standalone component, or you can download the complete success kits. The installer is available for Linux only.
 
-Full installation instructions are provided [here](https://developer.arm.com/documentation/101400).
+Full installation instructions are provided in the [Arm Socrates Installation Guide](https://developer.arm.com/documentation/101400).
 
-For more information on the Download Hub, see [here](../pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
 
-## Setting up product license
+## Set up the product license
 
-Arm Socrates Tool is license managed. License setup instructions are available [here](../license/).
+Arm Socrates Tool is license managed. License setup instructions are available in the [Arm License install guide](../license/).
 
 Configuration of some Arm IP products require a corresponding license for that IP.
 

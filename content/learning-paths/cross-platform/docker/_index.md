@@ -32,9 +32,9 @@ tools_software_languages:
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
-    - server-and-cloud
-    - desktop-and-laptop
-    - embedded
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - embedded-systems
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

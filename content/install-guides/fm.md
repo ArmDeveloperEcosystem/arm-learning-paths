@@ -27,7 +27,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 This article discusses the stand alone use case. If using as part of an EDA partner's environment, please contact the relevant vendor for guidance.
 
-## Prerequisites
+## Before you begin
 
 A Fast Model based virtual platform is an executable that runs on your Linux or Windows host. To **build** such an executable, you must ensure that the appropriate host toolchain is installed.
 
@@ -35,19 +35,19 @@ For Linux hosts, use `gcc 9.3.0`.
 
 For Windows hosts use [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/) 16.7.3 (or later). Express or Community editions can NOT be used.
 
-More information is given in [the documentation](https://developer.arm.com/documentation/100965/latest/Installing-Fast-Models/Requirements-for-Fast-Models).
+More information is provided in the [Fast Models User Guide](https://developer.arm.com/documentation/100965/latest/Installing-Fast-Models/Requirements-for-Fast-Models).
 
 ## Download installer packages
 
 You can download the Fast Models installer from the [Product Download Hub](https://developer.arm.com/downloads/view/FM000A). Linux and Windows hosts are supported.
 
-Full installation instructions are provided [here](https://developer.arm.com/documentation/100965/latest/Installing-Fast-Models/Installation).
+Full installation instructions are provided in the [Fast Models User Guide](https://developer.arm.com/documentation/100965/latest/Installing-Fast-Models/Installation).
 
 Windows users, once installed, open the System Canvas IDE, and select File > Preferences > Applications, and locate the folder containing `devenv.com` in your Visual Studio installation (`\\Common7\IDE`).
 
-## Setting up product license
+## Set up the product license
 
-Arm Fast Models are license managed. License setup instructions are available [here](../license/).
+Arm Fast Models are license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).
 
 ## Verify installation
 
@@ -62,4 +62,4 @@ To verify everything is working OK, you can build one of the many example projec
 
 ## Fixed Virtual Platforms {#fvp}
 
-Arm supplies a selection of ready made [Fixed Virtual Platforms (FVPs)](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) that can be used without Arm Fast Models installed. See [this article](../fvp) for more information.
+Arm supplies a selection of ready made [Fixed Virtual Platforms (FVPs)](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) that can be used without Arm Fast Models installed. Refer to the [Arm Fixed Virtual Platforms install guide](../fvp) for more information.

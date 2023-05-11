@@ -29,10 +29,12 @@ Docker can be run on Windows on Arm machines using the Windows Subsystem for Lin
 
 There is no Docker Desktop for Windows on Arm, [please show your support by asking for it](https://github.com/docker/roadmap/issues/91)
 
-### Prerequisites
+### Before you begin
 
 - Install WSL 2 on the Windows on Arm laptop
 - Install a Linux distribution such as Ubuntu 22.04 Linux distribution in WSL 2 from the Microsoft Store
+
+More information is available in the Learning Path [Get started with Windows Subsystem for Linux (WSL) on Arm](/learning-paths/laptops-and-desktops/wsl2/).
 
 ### Example Windows on Arm computers
 
@@ -104,7 +106,7 @@ uname -m
 
 The output is `aarch64` (Arm 64-bit).
 
-Docker Engine is now ready to use for Windows on Arm. You can explore [Docker related Learning Paths](/tag/docker/) or learn more about [WSL for Windows on Arm](/learning-paths/desktop-and-laptop/wsl2/).
+Docker Engine is now ready to use for Windows on Arm. You can explore [Docker related Learning Paths](/tag/docker/) or learn more about [WSL for Windows on Arm](/learning-paths/laptops-and-desktops/wsl2/).
 
 Share images, automate workflows, and more with a free Docker ID:
  https://hub.docker.com/

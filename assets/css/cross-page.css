@@ -12,18 +12,20 @@
 
 /* UNIVERSAL FONTS */
 /****************************************************/
+/* Ignored for now, adding in head.html via google fonts. Can use this locally to optimize if needed */
+
+
 /* Lato font get from local fonts folder, not fonts.google.com as it loads facebook/youtube tracking data */
     /* Normal, Italic, Bold 
         300, 400, 500 */
 
-        
+/*
 @font-face {
     font-family: 'Lato';
     font-style: normal;
     font-weight: 300;
     src: url('../fonts/LatoLatin-Light.woff2') format('woff2'),
          url('../fonts/LatoLatin-Light.ttf') format('ttf');
-    /* font-display: swap; */
   }
   
   @font-face {
@@ -32,7 +34,6 @@
     font-weight: 400;
     src: url('../fonts/LatoLatin-Regular.woff2') format('woff2'),
          url('../fonts/LatoLatin-Regular.ttf') format('ttf');
-    /* font-display: swap; */
   }
   
   @font-face {
@@ -41,7 +42,6 @@
     font-weight: 500;
     src: url('../fonts/LatoLatin-Medium.woff2') format('woff2'),
          url('../fonts/LatoLatin-Medium.ttf') format('ttf');
-    /* font-display: swap; */
   }
   
 @font-face {
@@ -50,7 +50,6 @@
     font-weight: 300;
     src: url('../fonts/LatoLatin-LightItalic.woff2') format('woff2'),
          url('../fonts/LatoLatin-LightItalic.ttf') format('ttf');
-    /* font-display: swap; */
   }  
   @font-face {
     font-family: 'Lato';
@@ -58,7 +57,6 @@
     font-weight: 400;
     src: url('../fonts/LatoLatin-Italic.woff2') format('woff2'),
          url('../fonts/LatoLatin-Italic.ttf') format('ttf');
-    /* font-display: swap; */
   }  
   @font-face {
     font-family: 'Lato';
@@ -66,9 +64,8 @@
     font-weight: 500;
     src: url('../fonts/LatoLatin-MediumItalic.woff2') format('woff2'),
          url('../fonts/LatoLatin-MediumItalic.ttf') format('ttf');
-    /* font-display: swap; */
   }
-
+*/
 
 
 /* UNIVERSAL */
@@ -130,9 +127,14 @@ label {
         }
 }
     
-/* Fix Search Height */
+/* Fix Search Height and pdding*/
 ads-search#search-box {
         min-height: 45px;
+}
+/*in install guides provide spacing to search field from left and right*/
+ads-search#search-box.install-guide{
+        padding-left: 14px;             
+        padding-right: 14px;
 }
 
 
@@ -164,6 +166,11 @@ p > a, li > a, td > a {
     text-decoration: underline;
 }
 */
+
+/* Make external link icon have proper spacing */
+.external-link-icon {
+    
+}
 
 
 

@@ -8,11 +8,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Assign inputChangeHandler to search box
     const search_box = document.getElementById('search-box');
-    if (document.title.includes('Arm Learning Paths')) {
-        search_box.inputChangeHandler = searchHandler_LearningPaths;
+    if (document.title.includes('Install Guides')) {
+        search_box.inputChangeHandler = searchHandler_Tools;    
     }
     else {
-        search_box.inputChangeHandler = searchHandler_Tools;    
+        search_box.inputChangeHandler = searchHandler_LearningPaths;
     }
 
     // Handle search term from URL
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Call search handler to execute
         search_box.setAttribute('search-value',search_string);
 
-        if (document.title.includes('Arm Learning Paths')) { searchHandler_LearningPaths(search_string,filters_list); }
-        else {                                               searchHandler_Tools(search_string); }
+        if (document.title.includes('Install Guides')) {     searchHandler_Tools(search_string); }
+        else {                                               searchHandler_LearningPaths(search_string,filters_list); }
     }
   });

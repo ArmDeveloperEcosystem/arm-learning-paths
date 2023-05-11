@@ -1,0 +1,29 @@
+---
+summary:
+  content_total: 30
+  tests_enabled_total: 10
+  tests_passing: 9
+
+
+categories:
+  server:
+    intrinsics:
+      enabled: true
+      status: 
+        - test1:
+          framework: Docker
+          target: amd64/ubuntu:latest
+          status: passed
+        - test2:
+          framework: Docker
+          target: arm64v8/ubuntu:latest
+          status: passed
+    avh_cicd:
+      enabled: true
+      status: 
+        - test1:
+          framework: AVH
+          target: RPi3:latest
+          status: passed
+    csp:
+      enabled: false

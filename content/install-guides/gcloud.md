@@ -10,7 +10,7 @@ official_docs: https://cloud.google.com/sdk/docs/install-sdk
 test_images:
 - ubuntu:latest
 test_maintenance: false
-title: Google Cloud CLI 
+title: Google Cloud Platform (GCP) CLI 
 tool_install: true
 weight: 1
 ---
@@ -78,12 +78,14 @@ gsutil 5.20
 
 ## Acquire user credentials
 
-In this section you will learn how to obtain user access credentials for Google Cloud using a web flow. You will put the credentials in a well-known location for Application Default Credentials (`ADC`).
+You can use `gcloud` to obtain user access credentials for Google Cloud using a web flow. You will put the credentials in a well-known location for Application Default Credentials (`ADC`).
 
 Run the following command to obtain user access credentials:
+
 ```console
 gcloud auth application-default login
 ```
+
 A URL is generated as the output of the command:
 
 ![image #center](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)

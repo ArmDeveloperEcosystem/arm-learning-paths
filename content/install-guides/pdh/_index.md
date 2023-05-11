@@ -11,12 +11,10 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 The [Arm Product Download Hub](https://developer.arm.com/downloads) (PDH) is the portal to access all Arm IP and software product deliverables.
 
-## Login with your Arm Account
+PDH can be freely browsed, but an Arm account is required to download most packages.
 
-PDH can be freely browsed, but an Arm account is required to download any packages.
-
-Clicking on the persona button in the upper-right corner will allow you to login to PDH.
+Selecting the profile icon in the upper-right corner of the top navigation will reveal a login option.
 
 New users should use the `Register` option to create their free account.
 
-It can be accessed via a browser or via an API.
+PDH can be accessed via a browser or via an API.

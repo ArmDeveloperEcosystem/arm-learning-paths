@@ -69,7 +69,7 @@ This can be compiled and run on your Arm instance using the commands below.
 Install `wget`, `git`, and `g++` compiler, and use appropriate `g++` command options:
 
 ```bash { target="arm64v8/ubuntu:latest" }
-sudo apt install -y git g++
+sudo apt install -y git g++ wget
 git clone https://github.com/simd-everywhere/simde.git
 g++ -O2 -I simde/ -march=armv8.2-a+fp16+rcpc+dotprod+crypto --std=c++14 neon.cpp -o neon
 ```

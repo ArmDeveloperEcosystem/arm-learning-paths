@@ -96,7 +96,7 @@ Specifies the operating systems this Learning Path can run on. Select from this 
 
 ### tools_software_languages (open)
 
-Specifies the tools, softwares, or languages this Learning Path uses. Please list out any key tools, software, or languages your learning path uses.
+Specifies the tools, softwares, or languages this Learning Path uses. Please list out any key tools, software, or languages your Learning Path uses.
 
 | Tag Type     | Examples |
 |---------------|----------|
@@ -132,7 +132,7 @@ Review questions both validate comprehension and re-enforce specific learning id
 | correct_answer    | An integer indicating what answer is correct (1 for the first listed, etc.)  |
 | explanation       | A short, 1-2 sentence explanation of why the question has that answer.  |
 
-For a great simple example of this concept see the [MongoDB Learning Path review](../../../server-and-cloud/mongodb/_review).
+For a great simple example of this concept see the [MongoDB Learning Path review](/learning-paths/servers-and-cloud-computing/mongodb/_review).
 
 {{% notice %}}
 The explanation is displayed whether or not the reader selects the correct answer. Avoid phrases like "Correct! *This* is because..." and opt for phrasing like "*this* is correct because..."

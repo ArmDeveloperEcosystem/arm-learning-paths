@@ -51,7 +51,7 @@ Add the path to the downloaded Android SDK platform tools directory to your `PAT
 
 Arm Mobile Studio is free of charge and is not license managed (earlier versions of Mobile Studio Professional Edition required a license).
 
-Arm Development Studio is license managed. License setup instructions are available [here](../license/).
+Arm Development Studio is license managed. License setup instructions are available in the [Arm License install guide](../license/).
 
 ## Get started
 

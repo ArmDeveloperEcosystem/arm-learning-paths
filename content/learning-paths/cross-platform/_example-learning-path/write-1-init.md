@@ -25,7 +25,7 @@ Place your Learning Path in the category closest to the environment where the so
 
 You should start building your Learning Path from the provided template using a straightforward one-line command. For example, to create a new Learning Path with the directory name `my-new-learning-path` under the `microcontroller` category, run the following command (from the root directory of this project):
 ```bash
-hugo new --kind learning-path learning-paths/microcontroller/my-new-learning-path
+hugo new --kind learning-path learning-paths/microcontrollers/my-new-learning-path
 ```
 This will then add the following markdown files in the `my-new-learning-path` directory:
 
@@ -50,9 +50,9 @@ If Hugo is not already running start it.
 hugo server
 ```
 
-2. View the learning path you just created in your browser
+2. View the Learning Path you just created in your browser
 
-In a browser tab, open [http://localhost:1313/learning-paths/server-and-cloud/my-new-learning-path](http://localhost:1313/learning-paths/server-and-cloud/my-new-learning-path)
+In a browser tab, open [http://localhost:1313/learning-paths/servers-and-cloud-computing/my-new-learning-path](http://localhost:1313/learning-paths/servers-and-cloud-computing/my-new-learning-path)
 
 3. Refer to the appendices listed below for content formatting and style guidance
 
@@ -63,7 +63,7 @@ You should take a few minutes to understand how to format your Learning Path and
 
 4. Start modifying the Learning Path
 
-You can now start modifying the markdown files using your text editor to write content for your new learning path. 
+You can now start modifying the markdown files using your text editor to write content for your new Learning Path. 
 
 Check the results in the browser to see how they look. 
 
