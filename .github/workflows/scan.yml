@@ -37,14 +37,24 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: scan
-        run: |
-          tools/install-scan.sh
-          clamscan -r -i public -l scanlog
-      - name: scan results
-        uses: actions/upload-artifact@v3
+      # - name: scan
+      # run: |
+      #   tools/install-scan.sh
+      #   clamscan -r -i public -l scanlog
+      - name: Setup OpenVAS
+        uses: docker://mikesplain/openvas
         with:
-          name: clamscan-log
-          path: scanlog
-          retention-days: 7 # Default is 90 days
+          args: bash -c "greenbone-nvt-sync && greenbone-scapdata-sync && greenbone-certdata-sync"
+
+      - name:  Run OpenVAS Scan
+        uses: docker://mikesplain/gvm-docker
+        with:
+          args: bash -c "gvm-start && gvm-feed-update && openvasmd --create-scanner='GitHub Scanner' && openvasmd --scanner='GitHub Scanner' --new-target='github.com' && openvasmd --scanner='GitHub Scanner' --start-task='Full and fast' && gvm-stop"
+
+      #- name: scan results
+      # uses: actions/upload-artifact@v3
+      # with:
+      #   name: clamscan-log
+      #   path: scanlog
+      #   retention-days: 7 # Default is 90 days
 
