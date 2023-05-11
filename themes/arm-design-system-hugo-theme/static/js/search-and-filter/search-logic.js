@@ -11,6 +11,7 @@ function searchByTitle(card,search_word_array) {
 }
 
 function searchByAdditionalSearchTerm(card,search_word_array) {
+    console.log('DEBUG: in searchByAdditionalSearchTerm. in tools area, searching array: ',search_word_array);
     let result = true;
     
     let search_word_dash = search_word_array.join("-")
