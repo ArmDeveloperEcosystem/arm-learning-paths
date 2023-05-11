@@ -140,4 +140,4 @@ To verify everything is working OK, run the compiler from your command prompt:
 ```command
 armclang --version
 ```
-You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded/armds/) learning path for more information.
+You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded-systems/armds/) learning path for more information.

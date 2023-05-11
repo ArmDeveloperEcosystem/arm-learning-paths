@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 This Learning Path uses [Terraform Cloud](https://registry.terraform.io/) to automate creation of Arm instances. Reader may wish to also see:
-* [Getting Started with AWS](/learning-paths/server-and-cloud/csp/aws/)
+* [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/)
 
 You will need an [AWS account](https://portal.aws.amazon.com). Create an account if needed.
 

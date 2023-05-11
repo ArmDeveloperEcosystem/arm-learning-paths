@@ -14,7 +14,7 @@ You can deploy MySQL on Google Cloud using Terraform and Ansible.
 
 In this section, you will deploy MySQL on a single Google Cloud instance.
 
-If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/servers-and-cloud-computing/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -189,7 +189,7 @@ Master_public_IP = [
 ## Configure MySQL through Ansible
 Install the MySQL and the required dependencies. 
 
-You can use the same `playbook.yaml` file used in the topic, [Install MySQL on an AWS Arm based instance](/learning-paths/server-and-cloud/mysql/ec2_deployment#configure-mysql-through-ansible).
+You can use the same `playbook.yaml` file used in the topic, [Install MySQL on an AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#configure-mysql-through-ansible).
 
 ### Ansible Commands
 
@@ -245,7 +245,7 @@ ansible-target1            : ok=9   changed=7   unreachable=0    failed=0    ski
 
 ## Connecting to the MySQL server from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/mysql/ec2_deployment#connect-to-database-using-ec2-instance) to connect to the database from local machine.
+Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#connect-to-database-using-ec2-instance) to connect to the database from local machine.
 
 You have successfully deploy MySQL on a Google Cloud instance.
 

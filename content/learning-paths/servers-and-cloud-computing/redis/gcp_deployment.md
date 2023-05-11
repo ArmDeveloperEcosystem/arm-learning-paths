@@ -14,7 +14,7 @@ You can deploy Redis on Google Cloud using Terraform and Ansible.
 
 In this section, you will deploy Redis on a single Google Cloud instance.
 
-If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/servers-and-cloud-computing/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -183,7 +183,7 @@ Master_public_IP = [
 ## Configure Redis through Ansible
 Install the Redis and the required dependencies. 
 
-You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/server-and-cloud/redis/aws_deployment#configure-redis-through-ansible).
+You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#configure-redis-through-ansible).
 
 ### Ansible Commands
 

@@ -12,7 +12,7 @@ learning_objectives:
     - Run Snort 3 with Vectorscan on capture files and and measure performance
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or an Arm server with Ubuntu 20.04 or Ubuntu 22.04 installed.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server with Ubuntu 20.04 or Ubuntu 22.04 installed.
 
 author_primary: Pareena Verma
 

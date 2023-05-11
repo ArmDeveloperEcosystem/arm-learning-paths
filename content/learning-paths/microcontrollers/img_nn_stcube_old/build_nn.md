@@ -13,7 +13,7 @@ In this Learning Path, you will build a convolution neural network model for ima
 ## Get Setup
 
 On your Windows 10 development machine,  start by downloading all the project files you'll need to run the example in this Learning Path.
-The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontroller/img_nn_stcube/Project_Files/img_class_stcube.zip)
+The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontrollers/img_nn_stcube/Project_Files/img_class_stcube.zip)
 
 Then install Anaconda. Anaconda is a distribution of Python language for data science and machine learning. With Anaconda, you can easily install open-source machine learning packages. Here are the steps to install Anaconda on your machine.
 

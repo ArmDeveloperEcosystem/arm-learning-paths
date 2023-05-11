@@ -7,7 +7,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-You will learn how to setup a GitHub [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) on a [Windows on Arm](/learning-paths/desktop-and-laptop/intro) machine or [cloud instance](/learning-paths/cross-platform/woa_azure/).
+You will learn how to setup a GitHub [self-hosted runner](https://docs.github.com/en/actions/hosting-your-own-runners/about-self-hosted-runners) on a [Windows on Arm](/learning-paths/laptops-and-desktops/intro) machine or [cloud instance](/learning-paths/cross-platform/woa_azure/).
 
 You will need a valid [GitHub](https://github.com) account to complete this Learning Path.
 

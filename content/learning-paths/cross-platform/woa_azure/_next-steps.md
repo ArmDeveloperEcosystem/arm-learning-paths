@@ -7,8 +7,8 @@ next_step_guidance: >
    You have successfully set up a basic Windows on Arm virtual machine. You might be interested in how to setup and use the Windows Subsystem for Linux (WSL) on Arm computers.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/desktop-and-laptop/wsl2"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/laptops-and-desktops/wsl2"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:

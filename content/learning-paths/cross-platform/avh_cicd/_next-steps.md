@@ -9,7 +9,7 @@ next_step_guidance: >
 
 recommended_path: "/learning-paths/cross-platform/avh_cicd2/"
 
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)

@@ -7,8 +7,8 @@ next_step_guidance: >
    Why not try some of our other learning paths for Cortex-M programming.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontroller/cmsis_rtx/"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/microcontrollers/cmsis_rtx/"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)

@@ -85,7 +85,7 @@ Here are a number of real-world migration scenarios. They cover migrations rangi
 |Pandoc (documentation tool) has a filter not available on Arm|Rebuild dependency library from source (and ask maintainers for Arm support)|
 |Encryption in a Java app is slow | Use  -XX:+UnlockDiagnosticVMOptions -XX:+UseAESCTRIntrinsics flags to improve Arm crypto performance|
 |Dependent container not available for Arm|Build the container yourself (and ask the maintainers for Arm support)|
-Benchmark results are mediocre on Arm|Rebuild C++ components with newer compiler and enable [Large System Extensions](/learning-paths/server-and-cloud/lse/)|
+Benchmark results are mediocre on Arm|Rebuild C++ components with newer compiler and enable [Large System Extensions](/learning-paths/servers-and-cloud-computing/lse/)|
 
 ## Summary
 

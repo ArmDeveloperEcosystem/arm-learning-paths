@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 You can deploy three node Zookeeper cluster, three node Kafka cluster and one client on Google Cloud using Terraform and Ansible. 
  
-If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/servers-and-cloud-computing/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -139,11 +139,11 @@ The inventory file is automatically generated and does not need to be changed.
 
 Use Terraform to deploy the `main.tf` file.
 
-To initialize Terraform, create a Terraform execution plan and apply the Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#terraform-commands).
+To initialize Terraform, create a Terraform execution plan and apply the Terraform execution plan follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#terraform-commands).
 
 ## Configure three node Zookeeper cluster through Ansible
 
-You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-zookeeper-cluster-through-ansible).
+You can use the same `zookeeper_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#configure-three-node-zookeeper-cluster-through-ansible).
 
 ### Ansible Commands
 
@@ -155,11 +155,11 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#ansible-commands).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#ansible-commands).
 
 ## Configure three node Kafka cluster through Ansible
 
-You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-three-node-kafka-cluster-through-ansible). 
+You can use the same `kafka_cluster.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#configure-three-node-kafka-cluster-through-ansible). 
 
 ### Ansible Commands
 
@@ -171,7 +171,7 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#ansible-commands-1).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#ansible-commands-1).
 
 Kafka servers are started on all the three instances and keep the terminal open. Now open a new terminal on the same machine and configure the client through Ansible.
 
@@ -179,7 +179,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it by creati
 
 ## Configure client through Ansible
 
-You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#configure-client-through-ansible).
+You can use the same `client.yaml` file used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#configure-client-through-ansible).
 
 ### Ansible Commands
 
@@ -191,19 +191,19 @@ Answer `yes` when prompted for the SSH connection.
 
 Deployment may take a few minutes. 
 
-The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#ansible-commands-2).
+The output should be similar to the output attached in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#ansible-commands-2).
 
 ## Describe the topic created:
 
-To describe the topic created ssh on the client instance and run the command used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#describe-the-topic-created).
+To describe the topic created ssh on the client instance and run the command used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#describe-the-topic-created).
 
 ## Run the producer client to write events into the created topic:
 
-To run the producer client to write events into the created topic follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#run-the-producer-client-to-write-events-into-the-created-topic).
+To run the producer client to write events into the created topic follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#run-the-producer-client-to-write-events-into-the-created-topic).
 
 ## Run the consumer client to read all the events created:
 
-To run the consumer client to read all the events created follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/server-and-cloud/kafka/kafka_aws#run-the-consumer-client-to-read-all-the-events-created).
+To run the consumer client to read all the events created follow the document used in the section, [Deploy Cluster Automatically (AWS)](/learning-paths/servers-and-cloud-computing/kafka/kafka_aws#run-the-consumer-client-to-read-all-the-events-created).
 
 Write a message into the producer client terminal and press enter. You should see the same message appear on consumer client terminal. 
 

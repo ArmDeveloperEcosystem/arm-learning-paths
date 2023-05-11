@@ -7,7 +7,7 @@ next_step_guidance: >
     You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on Memcached is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/memcached/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/memcached/"
 # Link to the next learning path being recommended.
 
 

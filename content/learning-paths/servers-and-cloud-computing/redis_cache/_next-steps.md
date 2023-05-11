@@ -7,8 +7,8 @@ next_step_guidance: >
     If you are interested in running other databases on Arm, like MongoDB continue on to the recommended Learning Path.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/mongodb/"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/servers-and-cloud-computing/mongodb/"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:

@@ -14,7 +14,7 @@ You can deploy MariaDB on Azure using Terraform and Ansible.
 
 In this topic, you will deploy MariaDB on a single Azure instance. 
 
-If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/server-and-cloud/azure-terraform/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -330,7 +330,7 @@ resource_group_name = "rg-tight-dove"
 
 You can install the MariaDB and the required dependencies using Ansible.
 
-Use the same `playbook.yaml` file used in the topic, [Install MariaDB on a single AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#configure-mariadb-through-ansible).
+Use the same `playbook.yaml` file used in the topic, [Install MariaDB on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#configure-mariadb-through-ansible).
 
 Use a text editor to save the `playbook.yaml` file if you don't already have it. 
 
@@ -385,7 +385,7 @@ ansible-target1            : ok=8    changed=6    unreachable=0    failed=0    s
 
 ## Connect to Database from local machine
 
-Follow the instructions from the previous section to [connect to the database](/learning-paths/server-and-cloud/mariadb/ec2_deployment#connect-to-database-from-local-machine).
+Follow the instructions from the previous section to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#connect-to-database-from-local-machine).
 
 You have successfully deployed MariaDB on an Azure instance.
 

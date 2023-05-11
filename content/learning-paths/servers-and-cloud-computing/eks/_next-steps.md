@@ -7,7 +7,7 @@ next_step_guidance: >
     You can continue learning about deploying applications on Arm servers. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/zlib/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/zlib/"
 # Link to the next learning path being recommended.
 
 # further_reading links to references related to this path. Can be:

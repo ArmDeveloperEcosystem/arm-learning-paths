@@ -12,7 +12,7 @@ learning_objectives:
     - Review common migration scenarios
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
 
 author_primary: Jason Andrews
 

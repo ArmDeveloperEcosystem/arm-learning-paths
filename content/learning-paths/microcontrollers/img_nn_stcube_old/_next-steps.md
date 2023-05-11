@@ -7,8 +7,8 @@ next_step_guidance: >
    Check out how to build and run a letter recognition NN model on an STM32L4 Discovery board
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontroller/tflow_nn_stcube/"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/microcontrollers/tflow_nn_stcube/"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:

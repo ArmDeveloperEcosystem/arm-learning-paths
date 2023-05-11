@@ -7,8 +7,8 @@ next_step_guidance: >
    Machine learning is a key feature of IoT devices. Connected devices must also be secure. Trusted Firmware-M is also integrated into the Open-IoT-SDK. Learn about this here.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontroller/tfm"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/microcontrollers/tfm"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:

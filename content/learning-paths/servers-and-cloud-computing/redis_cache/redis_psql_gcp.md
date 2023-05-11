@@ -14,7 +14,7 @@ You can deploy Redis as a cache for Postgres on Google Cloud using Terraform and
 
 In this section, you will deploy Redis as a cache for Postgres on a Google Cloud instance.
 
-If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/servers-and-cloud-computing/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -181,15 +181,15 @@ Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Install Postgres and the required dependencies on both the instances.
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_psql_aws#configure-postgres-through-ansible) to configure Postgres through Ansible.
+Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/redis_cache/redis_psql_aws#configure-postgres-through-ansible) to configure Postgres through Ansible.
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_psql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/redis_cache/redis_psql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
 
 ## Deploy Redis as a cache for Postgres using Python
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/redis_cache/redis_psql_aws#deploy-redis-as-a-cache-for-postgres-using-python) to deploy Redis as a cache for PostgreSQL using Python.
+Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/redis_cache/redis_psql_aws#deploy-redis-as-a-cache-for-postgres-using-python) to deploy Redis as a cache for PostgreSQL using Python.
 
 You have successfully deployed Redis as a cache for PostgreSQL on a Google Cloud Arm based Instance.
 

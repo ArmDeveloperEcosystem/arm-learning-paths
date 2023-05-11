@@ -14,7 +14,7 @@ You can deploy MariaDB on Google Cloud using Terraform and Ansible.
 
 In this topic, you will deploy MariaDB on a single Google Cloud instance.
 
-If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/servers-and-cloud-computing/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -190,7 +190,7 @@ Master_public_IP = [
 
 You can install the MariaDB and the required dependencies using Ansible.
 
-You can use the same `playbook.yaml` file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/server-and-cloud/mariadb/ec2_deployment#configure-mariadb-through-ansible).
+You can use the same `playbook.yaml` file used in the topic, [Install MariaDB on an AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#configure-mariadb-through-ansible).
 
 Use a text editor to save the `playbook.yaml` file if you don't already have it. 
 
@@ -245,7 +245,7 @@ ansible-target1            : ok=8    changed=6    unreachable=0    failed=0    s
 
 ## Connect to Database from local machine
 
-Follow the instructions from the previous section to [connect to the database](/learning-paths/server-and-cloud/mariadb/ec2_deployment#connect-to-database-from-local-machine).
+Follow the instructions from the previous section to [connect to the database](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#connect-to-database-from-local-machine).
 
 You have successfully deploy MariaDB on a Google Cloud instance.
 

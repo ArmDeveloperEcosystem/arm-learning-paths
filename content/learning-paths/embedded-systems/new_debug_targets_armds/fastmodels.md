@@ -20,7 +20,7 @@ If necessary refer to the appropriate `Install Guide`:
 * [Arm Development Studio](/install-guides/armds/)
 * [Arm Licensing](/install-guides/license/)
 
-If you are unfamiliar with the Development Studio IDE, first see the [Get started with Arm Development Studio](/learning-paths/embedded/armds/) learning path.
+If you are unfamiliar with the Development Studio IDE, first see the [Get started with Arm Development Studio](/learning-paths/embedded-systems/armds/) learning path.
 
 {{% notice %}}
 If you do not have access to Arm Fast Models, you can still learn how to connect to a custom virtual platform, using an FVP as supplied with Development Studio instead.

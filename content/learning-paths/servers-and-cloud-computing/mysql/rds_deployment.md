@@ -62,7 +62,7 @@ Now, use the below Terraform commands to deploy the `main.tf` file.
 
 ## Terraform commands
 
-Same instructions as on the [previous page](/learning-paths/server-and-cloud/mysql/ec2_deployment#terraform-commands).
+Same instructions as on the [previous page](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#terraform-commands).
 
 ### Initialize Terraform
 
@@ -167,6 +167,6 @@ use arm_test;
 Database changed
 ```
 
-To create and access a table, follow this [document](/learning-paths/server-and-cloud/mysql/ec2_deployment#access-database-and-create-table).
+To create and access a table, follow this [document](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#access-database-and-create-table).
 
 More information about [Creating and connecting to a MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html) is available from AWS.

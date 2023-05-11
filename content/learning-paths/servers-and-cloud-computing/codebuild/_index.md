@@ -10,8 +10,8 @@ learning_objectives:
     - Pull and run the created Docker images on any Arm computer with Docker installed
 
 prerequisites:
-    - An [AWS account](/learning-paths/server-and-cloud/csp/aws/) for accessing AWS cloud services.
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
+    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) for accessing AWS cloud services.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or any Arm server, laptop, or single-board computer running [Docker](/install-guides/docker/) used to run the created images
 
 author_primary: Jason Andrews
 

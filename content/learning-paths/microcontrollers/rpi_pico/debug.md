@@ -43,7 +43,7 @@ When using the debug interface, the application .elf file is used instead of the
 
 Program loading is done using openocd. Two configuration files are passed to openocd which describe the hardware. These are provided by the Raspberry Pi Pico SDK. After the configuration files, a series of commands are passed to openocd to load the application and run it. 
 
-Run the same hello world application used in a [previous step](/learning-paths/microcontroller/rpi_pico/hello/). If `build/hello.elf` is not present, rebuild the application.
+Run the same hello world application used in a [previous step](/learning-paths/microcontrollers/rpi_pico/hello/). If `build/hello.elf` is not present, rebuild the application.
 
 ```console
 openocd -f $PICO_SDK_PATH/../openocd/tcl/interface/raspberrypi-swd.cfg -f $PICO_SDK_PATH/../openocd/tcl/target/rp2040.cfg -c "program build/hello.elf verify reset exit"

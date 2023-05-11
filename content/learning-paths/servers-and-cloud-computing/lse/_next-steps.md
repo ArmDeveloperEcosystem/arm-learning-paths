@@ -7,7 +7,7 @@ next_step_guidance: >
     Developers looking to learn more about the Arm architecture may be interested in the Scalable Vector Extensions
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/sve/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/sve/"
 # Link to the next learning path being recommended.
 
 

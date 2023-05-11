@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 You can deploy three node Zookeeper cluster, three node Kafka cluster and one client on AWS Graviton processors using Terraform and Ansible. 
  
-If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws-terraform/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 

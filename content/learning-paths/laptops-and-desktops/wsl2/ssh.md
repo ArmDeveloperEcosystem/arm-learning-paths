@@ -38,7 +38,7 @@ Start the SSH server:
 sudo /etc/init.d/ssh start
 ```
 
-The SSH server can also be started automatically using systemd. Refer to the [systemd](/learning-paths/desktop-and-laptop/wsl2/systemd/) information.
+The SSH server can also be started automatically using systemd. Refer to the [systemd](/learning-paths/laptops-and-desktops/wsl2/systemd/) information.
 
 Once the SSH server is started, it's possible to ssh from the Windows Command Prompt to WSL. 
 
