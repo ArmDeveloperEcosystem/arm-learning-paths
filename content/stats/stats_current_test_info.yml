@@ -1,29 +1,18 @@
 ---
 summary:
   content_total: 30
-  tests_enabled_total: 10
-  tests_passing: 9
+  content_with_tests_enabled: 10
+  content_with_all_tests_passing: 9
 
 
 categories:
   server:
     intrinsics:
-      enabled: true
-      status: 
-        - test1:
-          framework: Docker
-          target: amd64/ubuntu:latest
-          status: passed
-        - test2:
-          framework: Docker
-          target: arm64v8/ubuntu:latest
-          status: passed
+      readable_title: Integrate Intrinsics here
+      tests_and_status: 
+        - amd64/ubuntu:latest: passed
+        - arm64v8/ubuntu:latest: passed
     avh_cicd:
-      enabled: true
-      status: 
-        - test1:
-          framework: AVH
-          target: RPi3:latest
-          status: passed
-    csp:
-      enabled: false
+      readable_title: AVH Title
+      tests_and_status: 
+        - RPi3:latest: passed
