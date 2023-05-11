@@ -217,7 +217,7 @@ The `test_images` field is a list of Docker container images the framework can p
 From the project root folder, run:
 
 ```bash
-./tools/maintenance.py -i content/learning-paths/server-and-cloud/mynewlearningpath
+./tools/maintenance.py -i content/learning-paths/servers-and-cloud-computing/mynewlearningpath
 ```
 
 If the Learning Path contains sub-articles, the framework will run their instructions in order, depending on the sub-articles weight.
@@ -261,7 +261,7 @@ npm i -g xunit-viewer
 Then, launch the web server (e.g. on port 5050) on the folder where the XML Junit files have been created:
 
 ```
-xunit-viewer -r content/learning-paths/server-and-cloud/mynewlearningpath/ -s -p 5050
+xunit-viewer -r content/learning-paths/servers-and-cloud-computing/mynewlearningpath/ -s -p 5050
 ```
 
 ## Advanced usage for embedded development

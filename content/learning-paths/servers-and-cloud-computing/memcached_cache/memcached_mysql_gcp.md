@@ -14,7 +14,7 @@ You can deploy Memcached as a cache for MySQL on Google Cloud using Terraform an
 
 In this section, you will deploy Memcached as a cache for MySQL on a Google Cloud instance.
 
-If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/server-and-cloud/gcp/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate GCP instance creation using Terraform](/learning-paths/servers-and-cloud-computing/gcp/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -189,7 +189,7 @@ Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 
 Install MySQL and the required dependencies on both the instances. 
 
-You can use the same `playbook.yaml` file used in the section, [Deploy Memcached as a cache for MySQL on an AWS Arm based Instance](/learning-paths/server-and-cloud/memcached_cache/memcached_mysql_aws#configure-mysql-through-ansible).
+You can use the same `playbook.yaml` file used in the section, [Deploy Memcached as a cache for MySQL on an AWS Arm based Instance](/learning-paths/servers-and-cloud-computing/memcached_cache/memcached_mysql_aws#configure-mysql-through-ansible).
 
 ### Ansible Commands
 
@@ -263,11 +263,11 @@ PLAY RECAP *********************************************************************
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/memcached_cache/memcached_mysql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/memcached_cache/memcached_mysql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
 
 ## Deploy Memcached as a cache for MySQL using Python
 
-Follow the instructions given in this [documentation](/learning-paths/server-and-cloud/memcached_cache/memcached_mysql_aws#deploy-memcached-as-a-cache-for-mysql-using-python) to deploy Memcached as a cache for MySQL using Python.
+Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/memcached_cache/memcached_mysql_aws#deploy-memcached-as-a-cache-for-mysql-using-python) to deploy Memcached as a cache for MySQL using Python.
 
 You have successfully deployed Memcached as a cache for MySQL on a Google Cloud Arm based Instance.
 

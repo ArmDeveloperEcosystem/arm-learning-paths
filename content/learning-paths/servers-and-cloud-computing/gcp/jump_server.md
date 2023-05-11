@@ -456,7 +456,7 @@ variable "project" {
 ```
 
 ### Terraform Commands
-To deploy the instances, you need to initialize Terraform, generate an execution plan and apply the execution plan to your cloud infrastructure. Follow this [documentation](/learning-paths/server-and-cloud/gcp/terraform#terraform-commands) to deploy the **main.tf** file.
+To deploy the instances, you need to initialize Terraform, generate an execution plan and apply the execution plan to your cloud infrastructure. Follow this [documentation](/learning-paths/servers-and-cloud-computing/gcp/terraform#terraform-commands) to deploy the **main.tf** file.
 
 ### Verify the Instance and Bastion Host setup
 In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances you created through Terraform must be displayed on the screen.

@@ -15,7 +15,7 @@ operatingsystems:
 - Linux
 prerequisites:
 - Some understanding of SIMD concepts
-- An Arm based machine or [cloud instance](/learning-paths/server-and-cloud/csp/) running Ubuntu Linux.
+- An Arm based machine or [cloud instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu Linux.
 - Optionally an `x86_64` machine also running Ubuntu.
 skilllevels: Advanced
 subjects: Performance and Architecture

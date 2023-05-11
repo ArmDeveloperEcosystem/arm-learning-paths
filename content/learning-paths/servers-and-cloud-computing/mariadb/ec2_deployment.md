@@ -14,7 +14,7 @@ You can deploy [MariaDB](https://mariadb.org/) on AWS Graviton processors using 
 
 In this topic, you will deploy MariaDB on a single AWS EC2 instance. 
 
-If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws-terraform/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 

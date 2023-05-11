@@ -13,7 +13,7 @@ next_step_guidance: >
 If you are interested in migrating applications to Arm servers, follow:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/migration"
+recommended_path: "/learning-paths/servers-and-cloud-computing/migration"
 # Link to the next learning path being recommended.
 
 

@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-A Raspberry Pi 4 running Raspberry Pi OS and an Arm based instance from a cloud service provider are required for this Learning Path. Refer to [Get started with Arm-based cloud instances](/learning-paths/server-and-cloud/csp/) to select a cloud provider. 
+A Raspberry Pi 4 running Raspberry Pi OS and an Arm based instance from a cloud service provider are required for this Learning Path. Refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to select a cloud provider. 
 
 ## Install Raspberry Pi OS 
 

@@ -14,7 +14,7 @@ You can deploy Memcached as a cache for Postgres on an AWS Arm based Instance us
 
 In this section, you will deploy Memcached as a cache for Postgres on an AWS Instance. 
 
-If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/server-and-cloud/aws-terraform/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 

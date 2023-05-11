@@ -13,7 +13,7 @@ In this learning path, you will build a neural network model with TensorFlow and
 ## Get Setup
 
 On your Windows 10 development machine, start by downloading all the project files you'll need to run the example in this learning path.
-The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontroller/tflow_nn_stcube/Project_Files/tf_stm32.zip)
+The zipped contents are available [here](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontrollers/tflow_nn_stcube/Project_Files/tf_stm32.zip)
 
 start by installing Anaconda. Anaconda is a distribution of Python language for data science and machine learning. With Anaconda, you can easily install open-source machine learning packages. Here are the steps to install Anaconda on your machine.
 

@@ -162,7 +162,7 @@ For more information about accessing RDS refer to [Connecting to an Amazon RDS D
 
 ### Create Database and Table
 
-You can use the instructions from the previous topic to [access the Database and create a table](/learning-paths/server-and-cloud/mariadb/ec2_deployment#access-database-and-create-table).
+You can use the instructions from the previous topic to [access the Database and create a table](/learning-paths/servers-and-cloud-computing/mariadb/ec2_deployment#access-database-and-create-table).
 
 ### Clean up resources
 

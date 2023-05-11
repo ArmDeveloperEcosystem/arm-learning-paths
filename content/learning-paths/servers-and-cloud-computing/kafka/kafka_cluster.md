@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Setup 3 node Kafka Cluster:
 
-In this section, you will setup a Kafka cluster on 3 Arm machines. Ensure that the [3 Node Zookeeper cluster](/learning-paths/server-and-cloud/kafka/zookeeper_cluster) is running.
+In this section, you will setup a Kafka cluster on 3 Arm machines. Ensure that the [3 Node Zookeeper cluster](/learning-paths/servers-and-cloud-computing/kafka/zookeeper_cluster) is running.
 
 ### Node 1:
 

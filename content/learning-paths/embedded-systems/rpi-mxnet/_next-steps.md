@@ -7,7 +7,7 @@ next_step_guidance: >
     You can continue learning about embedded Linux development. The Learning Path Get started with Yocto Linux on Qemu is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/embedded/yocto_qemu/" 
+recommended_path: "/learning-paths/embedded-systems/yocto_qemu/" 
 # Link to the next learning path being recommended.
 
 

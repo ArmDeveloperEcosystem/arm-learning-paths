@@ -23,7 +23,7 @@ See [Code reuse attacks: the compiler story](https://community.arm.com/arm-commu
 
 The [AWS C7g EC2](https://aws.amazon.com/ec2/instance-types/c7g/) instances are powered by AWS Graviton3, which uses the [Arm Neoverse V1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v1) processor, and includes Pointer Authentication.
 
-For instructions on how to create an AWS instance, see [this article](/learning-paths/server-and-cloud/csp/aws).
+For instructions on how to create an AWS instance, see [this article](/learning-paths/servers-and-cloud-computing/csp/aws).
 
 The instance type should start with `c7g`. This Learning Path assumes `Ubuntu` as the operating system.
 

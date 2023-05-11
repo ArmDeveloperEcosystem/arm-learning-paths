@@ -7,7 +7,7 @@ next_step_guidance: >
     How about learning about other libraries available to run on Arm platforms?
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/snappy/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/snappy/"
 # Link to the next learning path being recommended.
 
 

@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 This Learning Path uses [Terraform Cloud](https://registry.terraform.io/) to automate instantiation of Arm instances. Reader may wish to also see:
-* [Getting Started with Microsoft Azure](/learning-paths/server-and-cloud/csp/azure/)
+* [Getting Started with Microsoft Azure](/learning-paths/servers-and-cloud-computing/csp/azure/)
 * [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/)
      * These same instructions can be used to deploy Linux as well.
 
