@@ -29,4 +29,7 @@ jobs:
     steps:
     # Runs a single command using the runners shell
     - name: Send greeting
-      run: echo "hi"
+      run: |
+           echo "${{ secrets.GITHUB_TOKEN }}"
+           pip install -r tools/requirements.txt
+           python3 tools/stats_data_generate.py
