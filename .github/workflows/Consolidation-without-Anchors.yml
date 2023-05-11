@@ -30,7 +30,7 @@ jobs:
 
       - name: Check HTML links
         run: |
-          docker run --rm -v $(pwd):/data w3cmarkupservices/html-validator linkcheck .
+          docker run --rm -v $(pwd):/data validator/validator linkcheck --verbose /data
 
       - name: W3C Checklist Results
         uses: actions/upload-artifact@v3
