@@ -99,7 +99,13 @@ new_tests_entry = {}
 #############################################################################
 
 
-
+def pretty(d, indent=0):
+   for key, value in d.items():
+      print('\t' * indent + str(key))
+      if isinstance(value, dict):
+         pretty(value, indent+1)
+      else:
+         print('\t' * (indent+1) + str(value))
 
 def urlize(in_str):
     # Replacate Hugo urlize function to make it easier to process strings for consistent analysis.
@@ -125,9 +131,6 @@ def mdToMetadata(md_file_path):
     metadata_dic = yaml.safe_load(metadata_text)
     return metadata_dic
 
-
-
-
 def authorAdd(author_name,tracking_dic):
     ### Update 'authors' area, raw number by each author.
     # Check if author already exists as key. If not, add new key
@@ -142,24 +145,18 @@ def authorAdd(author_name,tracking_dic):
     ### Update 'contributions' area, internal vs external contributions
     
     # open the contributors CSV file
-    found=False
     with open('../contributors.csv', mode ='r')as file:
         csvFile = csv.reader(file)
         for line in csvFile:
             company = line[1]
             # If author in the line, check if they work at Arm or not, and increment contributions number for internal or external
             if author_name in line:
-                found=True
                 if company == 'Arm':
                     tracking_dic['contributions']['internal'] = tracking_dic['contributions']['internal'] + 1
                 else:
                     tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
     
-    if not found:
-        print('problem! author not found: ',author_name)
-
-    return tracking_dic, found
-
+    return tracking_dic
 
 def iterateContentIndexMdFiles():
     # set variables to track as we iterate
@@ -211,6 +208,10 @@ def iterateContentIndexMdFiles():
                     continue
             except:
                 pass
+            # If the example learning path, continue
+            if '_example-learning-path' in str(content_index_file.parent):
+                continue
+
 
             # Add to content total (both tests and weekly places for redundency sake)
             weekly_count_dic['total'] = weekly_count_dic['total'] + 1
@@ -219,9 +220,8 @@ def iterateContentIndexMdFiles():
             weekly_count_dic[category] = weekly_count_dic[category] + 1
 
             ######### AUTHOR info
-            weekly_authors_contributions_dic, found = authorAdd(content_metadic['author_primary'],weekly_authors_contributions_dic)
-            if not found:
-                print(content_metadic['title'])
+            weekly_authors_contributions_dic = authorAdd(content_metadic['author_primary'],weekly_authors_contributions_dic)
+            
 
             # Record entry in test file
             try:
@@ -262,13 +262,8 @@ def iterateContentIndexMdFiles():
     new_weekly_entry[date_today]['authors'] = weekly_authors_contributions_dic['authors']
     new_weekly_entry[date_today]['contributions'] = weekly_authors_contributions_dic['contributions']            
 
-def pretty(d, indent=0):
-   for key, value in d.items():
-      print('\t' * indent + str(key))
-      if isinstance(value, dict):
-         pretty(value, indent+1)
-      else:
-         print('\t' * (indent+1) + str(value))
+def callGitHubAPI():
+    pass
 
 
 def main():
@@ -296,6 +291,7 @@ def main():
 
     # Get new stats, filling in new stat dictionaries:
     iterateContentIndexMdFiles()
+    callGitHubAPI()
 
 
     # Update/replace yaml files
@@ -304,7 +300,7 @@ def main():
     new_tests_entry.overwrite tests_status_file_path
 
     '''
-    #pretty(new_weekly_entry)
+    pretty(new_weekly_entry)
     #pretty(new_tests_entry)
     with open('data.yml', 'w') as outfile:
         yaml.dump(new_tests_entry, outfile, default_flow_style=False)
