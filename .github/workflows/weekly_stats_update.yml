@@ -28,6 +28,9 @@ jobs:
         run: |
              echo "${{ secrets.GITHUB_TOKEN }}"
              
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
+             
       # Run python script to update files
       - name: Run Python script to update files
         run: |
