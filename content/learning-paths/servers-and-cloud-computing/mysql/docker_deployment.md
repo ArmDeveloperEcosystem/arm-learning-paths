@@ -126,4 +126,4 @@ ansible-target1            : ok=3    changed=4    unreachable=0    failed=0    s
 
 ## Connect to Database using your local machine
 
-You can use the instructions from the previous topic to [connect to the database](/learning-paths/server-and-cloud/mysql/ec2_deployment#connect-to-database-using-ec2-instance) and confirm the Docker container deployment is working. 
+You can use the instructions from the previous topic to [connect to the database](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#connect-to-database-using-ec2-instance) and confirm the Docker container deployment is working. 

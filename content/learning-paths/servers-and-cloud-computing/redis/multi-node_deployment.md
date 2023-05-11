@@ -14,7 +14,7 @@ You can deploy Redis in a multi-node configuration on AWS Graviton processors us
 
 ## Before you begin
 
-You should have the prerequisite tools installed from the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/server-and-cloud/redis/aws_deployment).
+You should have the prerequisite tools installed from the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment).
 
 Use the same SSH key pair.
 

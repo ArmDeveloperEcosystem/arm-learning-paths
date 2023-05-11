@@ -12,7 +12,7 @@ You can setup Clair as a combined deployment.
 
 ## Before you begin
 
-You will need an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or any Arm server running Linux.
+You will need an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or any Arm server running Linux.
 
 The instructions are tested on Ubuntu. Other Linux distributions are possible with some modifications.
 

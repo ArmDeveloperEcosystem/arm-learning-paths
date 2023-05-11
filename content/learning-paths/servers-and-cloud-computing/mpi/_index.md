@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - General knowledge about distributed parallelism (MPI)
     - Some understanding of C, Python, and Linux commands
-    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/server-and-cloud/csp/).
+    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author_primary: Florent Lebeau
 

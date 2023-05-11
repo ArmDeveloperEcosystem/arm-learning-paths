@@ -7,7 +7,7 @@ next_step_guidance: >
     You can continue learning about some other Arm architecture features for increased performance and cost savings. The Learning Path on large system extensions is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/lse/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/lse/"
 # Link to the next learning path being recommended.
 
 

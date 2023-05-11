@@ -14,13 +14,13 @@ The Arm RAN Acceleration Library (ArmRAL) contains a set of functions for accele
 
 ### Local development platform
 
-It may be that you have access to application specific hardware already. Else you may wish to use an [Arm-based desktop](/learning-paths/desktop-and-laptop/intro/).
+It may be that you have access to application specific hardware already. Else you may wish to use an [Arm-based desktop](/learning-paths/laptops-and-desktops/intro/).
 
 ### Launch an Arm-based instance from Cloud Service Provider
 
 Most Cloud Service Providers (CSPs) now provide Arm-based instances.
 
-See [these instructions](/learning-paths/server-and-cloud/csp/) to launch an Arm-based instance.
+See [these instructions](/learning-paths/servers-and-cloud-computing/csp/) to launch an Arm-based instance.
 
 ## Install necessary build tools
 

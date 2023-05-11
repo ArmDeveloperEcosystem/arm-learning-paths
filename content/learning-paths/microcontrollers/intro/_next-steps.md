@@ -7,7 +7,7 @@ next_step_guidance: >
    Now that you have a basic understanding of where to find Arm microcontrollers, learn how to use Keil Studio Cloud.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontroller/keilstudiocloud/"
+recommended_path: "/learning-paths/microcontrollers/keilstudiocloud/"
 
 
 # further_reading links to references related to this path. Can be:

@@ -11,7 +11,7 @@ learning_objectives:
     - Submit container images using the Clair CLI (command-line interface) and generate vulnerability reports
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or an Arm server with recent versions of Docker and Go installed.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server with recent versions of Docker and Go installed.
 
 author_primary: Jason Andrews
 

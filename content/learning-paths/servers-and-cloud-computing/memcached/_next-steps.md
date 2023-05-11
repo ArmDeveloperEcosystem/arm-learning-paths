@@ -7,7 +7,7 @@ next_step_guidance: >
     We recommend you continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on deploying Memcached as a cache is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/memcached_cache/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/memcached_cache/"
 # Link to the next learning path being recommended.
 
 

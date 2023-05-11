@@ -14,7 +14,7 @@ Additional features are available with a purchased [license](https://www.primate
 
 ## Before you begin
 
-You will need a local Arm platform or an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider. Geekbench 5 requires `Ubuntu 16.04 LTS` or later and Geekbench 6 requires `Ubuntu 18.04 LTS` or later.
+You will need a local Arm platform or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. Geekbench 5 requires `Ubuntu 16.04 LTS` or later and Geekbench 6 requires `Ubuntu 18.04 LTS` or later.
 
 ## Download 
 

@@ -13,16 +13,6 @@
 review:
     - questions:
         question: >
-            Does PaddleOCR use configuration files(.yml) to control network training and evaluation parameters?
-        answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                     
-        explanation: >
-            PaddleOCR uses configuration files(.yml) to control network training and evaluation parameters. In the configuration file, you can set the parameters for building the model, optimizer, loss function, and model pre- and post-processing. PaddleOCR reads these parameters from the configuration file, and then forms a complete training process to complete the model training.
-
-    - questions:
-        question: >
             Does the TVM compiler compile trained PaddlePaddle models directly?
         answers:
             - "Yes"
@@ -31,17 +21,6 @@ review:
         explanation: >
             You need to export the trained PaddlePaddle model to a Paddle inference model that TVM can compile to generate code which is suitable to run on a Cortex-M processor. 
                
-    - questions:
-        question: >
-            What happens to operators when you specify --target=cmsis-nn,c ... while using TVMC to compile the model?
-        answers:
-            - "Operators offload to standard C library"
-            - "Operators offload to CMSIS-NN library"
-            - "Operators which are supported by Arm’s CMSIS-NN library will be offloaded to a CMSIS–NN kernel and the rest will fall back to standard C library."
-        correct_answer: 3                    
-        explanation: >
-            By specifying --target=cmsis-nn,c, the operators supported by Arm’s CMSIS-NN library will be offloaded to a CMSIS–NN kernel which best makes use of underlying Arm hardware acceleration. All other operators fall back to standard C library implementations.
-            
     - questions:
         question: >
             Which is a component of Arm Virtual Hardware Corstone-300 platform?

@@ -158,7 +158,7 @@ Setup the Trace Triggers:
 
 #### Trace Skid
 
-The trace triggers use the same CoreSight hardware as the [Watchpoints](/learning-paths/microcontroller/uv_debug/2_basics/#watchpoints). This means that it is possible a program counter skid might happen. The program might not start or stop on the exact location you set the trigger to. You might have to adjust the trigger point location to minimize this effect. This is because of the nature of the comparators in the CoreSight module and it is normal behavior.
+The trace triggers use the same CoreSight hardware as the [Watchpoints](/learning-paths/microcontrollers/uv_debug/2_basics/#watchpoints). This means that it is possible a program counter skid might happen. The program might not start or stop on the exact location you set the trigger to. You might have to adjust the trigger point location to minimize this effect. This is because of the nature of the comparators in the CoreSight module and it is normal behavior.
 
 ### Code Coverage
 

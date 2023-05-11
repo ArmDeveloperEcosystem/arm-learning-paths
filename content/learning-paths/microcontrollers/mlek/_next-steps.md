@@ -7,8 +7,8 @@ next_step_guidance: >
    The ML Evaluation Kit is a key building block of Arm Total Solutions for IoT. Learn how to build and run a complete software stack here.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontroller/iot-sdk"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/microcontrollers/iot-sdk"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:

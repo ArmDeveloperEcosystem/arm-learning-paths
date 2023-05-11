@@ -23,7 +23,7 @@ Free tier offers are currently available.
 - [Oracle free tier includes up to 4 instances of ARM Ampere A1 Compute which are always free](https://www.oracle.com/cloud/free/)
 - [Until April 5, 2023 Tau T2A VMs in Google Cloud are available for a free trial](https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#t2afreetrial)
 
-[Get started with Arm-based cloud service platforms](/learning-paths/server-and-cloud/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
+[Get started with Arm-based cloud service platforms](/learning-paths/servers-and-cloud-computing/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
 
 ##  Arm SystemReady Certified hardware
 
@@ -41,4 +41,4 @@ If `gcc` is not pre-installed with your distribution, you can [install using a p
 
 You may also wish to install [Arm Compiler for Linux](/install-guides/acfl/) for HPC applications.
 
-[Migrating applications to Arm servers](/learning-paths/server-and-cloud/migration/) is a good place to start analyzing existing applications and reviewing guidance for developers interested in trying Arm hardware. 
+[Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) is a good place to start analyzing existing applications and reviewing guidance for developers interested in trying Arm hardware. 

@@ -12,7 +12,7 @@ ClickBench is open-source software used to evaluate the performance of various d
 
 ## Before you begin
 
-You will need an Arm server or an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider running a recent version of Ubuntu for Arm. 
+You will need an Arm server or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running a recent version of Ubuntu for Arm. 
 
 You will also need sufficient storage on the instance for the web-analytics dataset used for measuring ClickHouse performance, 500 GB is recommended.
 

@@ -14,7 +14,7 @@ You can deploy Redis on Azure using Terraform and Ansible.
 
 In this section, you will deploy Redis on a single Azure instance. 
 
-If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/server-and-cloud/azure-terraform/terraform/) before starting this Learning Path.
+If you are new to Terraform, you should look at [Automate Azure instance creation using Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
@@ -327,7 +327,7 @@ resource_group_name = "rg-tight-dove"
 
 Install Redis and the required dependencies.
 
-You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/server-and-cloud/redis/aws_deployment#configure-redis-through-ansible).
+You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#configure-redis-through-ansible).
 
 ### Ansible Commands
 

@@ -11,7 +11,7 @@ learning_objectives:
     - Verify Nginx installation
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or an Arm server running `Ubuntu 20.04` or `Ubuntu 22.04`.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server running `Ubuntu 20.04` or `Ubuntu 22.04`.
 
 author_primary: Jason Andrews
 

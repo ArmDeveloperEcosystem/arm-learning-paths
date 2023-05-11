@@ -12,7 +12,7 @@ minutes_to_complete: 20
 operatingsystems:
 - Linux
 prerequisites:
-- An [Arm based instance](/learning-paths/server-and-cloud/csp/) from an appropriate
+- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
   cloud service provider.
 skilllevels: Introductory
 subjects: ML

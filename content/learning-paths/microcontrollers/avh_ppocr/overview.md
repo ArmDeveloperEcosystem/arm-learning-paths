@@ -41,6 +41,6 @@ For example, the text recognition model introduces [SVTR](https://arxiv.org/abs/
 
 ![PP-OCRv3 pipeline diagram #center](./Figure2.png "Figure 2. PP-OCRv3 pipeline diagram (Image source: https://github.com/PaddlePaddle/PaddleOCR/blob/dygraph/doc/doc_en/PP-OCRv3_introduction_en.md)")
 
-
+In the next section, you will deploy a trained PP-OCR text recognition model on the Arm Corstone-300 FVP.
 
 

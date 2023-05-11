@@ -8,7 +8,7 @@ next_step_guidance: >
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/clair/" 
+recommended_path: "/learning-paths/servers-and-cloud-computing/clair/" 
 # Link to the next learning path being recommended.
 
 

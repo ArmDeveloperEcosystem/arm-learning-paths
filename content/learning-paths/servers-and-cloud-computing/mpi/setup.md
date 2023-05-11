@@ -11,7 +11,7 @@ You can use a variety of open source tools and Linaro Forge to learn how to debu
 
 ## Before you begin
 
-You will need an [Arm based instance](/learning-paths/server-and-cloud/csp/) from a cloud service provider or any Arm server or laptop running Linux.
+You will need an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or any Arm server or laptop running Linux.
 
 The instructions are tested on Ubuntu 20.04. Other Linux distributions are possible with some modifications.
 

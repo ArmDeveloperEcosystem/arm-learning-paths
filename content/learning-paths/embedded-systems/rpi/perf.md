@@ -46,7 +46,7 @@ exit
 ```
 					
 
-If you don't have the Linux source tree used in the [Linux Kernel Compile section](/learning-paths/embedded/rpi/kernel/), retrieve it again using git:
+If you don't have the Linux source tree used in the [Linux Kernel Compile section](/learning-paths/embedded-systems/rpi/kernel/), retrieve it again using git:
 
 ```console
 git clone --depth=1 https://github.com/raspberrypi/linux
