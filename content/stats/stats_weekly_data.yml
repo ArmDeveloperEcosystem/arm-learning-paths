@@ -1,0 +1,55 @@
+---
+weekly_dates_in_yyyy_mm_dd:
+  2023-05-03:
+    content:
+        ucontroller: 5
+        embedded: 2
+        desktop: 1
+        server: 10
+        mobile: 3
+        cross: 2
+        install_guides: 10
+    authors:
+        jason_andrews: 24
+        pareena_verma: 22
+        ronan_synnott: 15
+        florent_lebeau: 9
+        jane_doe: 2
+        john_smith: 2
+    contributions:
+        internal: 70
+        external: 4
+    issues:
+        avg_close_time_hrs: 42
+        percent_closed_vs_total: 90.5
+        num_issues: 66
+    github_engagement:
+        num_prs: 34
+        num_forks: 20
+
+  2023-05-07:
+    content:
+        ucontroller: 8
+        embedded: 4
+        desktop: 2
+        server: 10
+        mobile: 5
+        cross: 2
+        install_guides: 13
+    authors:
+        jason_andrews: 25
+        pareena_verma: 22
+        ronan_synnott: 19
+        florent_lebeau: 9
+        jane_doe: 7
+        john_smith: 2
+    contributions:
+        internal: 75
+        external: 9
+    issues:
+        avg_close_time_hrs: 41.2
+        percent_closed_vs_total: 92.2
+        num_issues: 68
+    github_engagement:
+        num_prs: 40
+        num_forks: 21

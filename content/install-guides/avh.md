@@ -40,7 +40,7 @@ Arm Virtual Hardware (AVH) is available as an Amazon Machine Instance (AMI) on [
 
 A `c5.large` instance type is recommended for AVH.
 
-Information about launching an AWS instance is available in the [Getting Started with AWS](/learning-paths/server-and-cloud/csp/aws/) install guide.
+Information about launching an AWS instance is available in the [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/) install guide.
 
 ### Connect to instance terminal via SSH
 

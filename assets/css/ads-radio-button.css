@@ -1,0 +1,61 @@
+
+/* inspiration from here:   https://stackoverflow.com/questions/4253920/how-do-i-change-the-color-of-radio-buttons   */
+.ads-radio-style {
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    margin: 10px 0 0;
+    white-space: nowrap;
+  }
+  
+  .ads-radio-style input[type='radio'] {
+    display: none;
+  }
+  
+  .ads-radio-style label {
+    color: var(--ads-checkbox-label-color);
+    font-weight: normal;
+  }
+  
+  .ads-radio-style label:before {
+    vertical-align: top; 
+    content: " ";
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    margin: 0 8px 0 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 11px;
+    border: 1px solid var(--ads-checkbox-border-color);
+    background-color: var(--ads-checkbox-background-color);
+  }
+
+  .ads-radio-style input[type=radio]:hover + label:after {
+    border-radius: 11px;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 9px;
+    left: 4px;
+    content: " ";
+    display: block;
+    background: var(--ads-checkbox-cross-color-hover);  /* depends on theme */
+  }
+
+
+  .ads-radio-style input[type=radio]:checked + label:before {
+    border-color:var(--ads-checkbox-border-color-checked);
+  }
+
+  .ads-radio-style input[type=radio]:checked + label:after {
+    border-radius: 11px;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 9px;
+    left: 4px;
+    content: " ";
+    display: block;
+    background: var(--ads-checkbox-cross-color-checked);
+  }

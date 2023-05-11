@@ -11,7 +11,7 @@ enableRobotsTXT = true
 [[deployment.targets]]
 name = "aws"
 URL = "s3://armswdev.tk?region=us-east-1"
-cloudFrontDistributionID = "E1KJFR5JSKYU64"
+cloudFrontDistributionID = "E2VDQ2CYZATMO9"
 
 
 
