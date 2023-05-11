@@ -33,7 +33,7 @@ jobs:
         run: |
             # Replace 'index.html' with the path to your HTML file
             npm install -g html-validator-cli
-            html-validator --file index.html --verbose 2>&1 | tee w3c-check.log
+            html-validator --file bin/htmltest -c .htmltest.yml --verbose 2>&1 | tee w3c-check.log
 
       - name: W3C Checklist Results
         uses: actions/upload-artifact@v3
