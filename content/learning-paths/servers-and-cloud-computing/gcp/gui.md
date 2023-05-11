@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy an Arm based VMs using the console"
+title: "Deploy Arm based VMs using the console"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
