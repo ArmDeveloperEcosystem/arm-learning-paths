@@ -76,6 +76,7 @@ import os
 import sys
 import csv
 import yaml
+import argparse
 from pathlib import Path
 from datetime import datetime
 
@@ -262,12 +263,23 @@ def iterateContentIndexMdFiles():
     new_weekly_entry[date_today]['authors'] = weekly_authors_contributions_dic['authors']
     new_weekly_entry[date_today]['contributions'] = weekly_authors_contributions_dic['contributions']            
 
-def callGitHubAPI():
-    pass
+def callGitHubAPI(GitHub_token,GitHub_repo_name):
+    print('hiiiiiiiiiiiiiiii')
+    print(GitHub_token)
+    print(GitHub_repo_name)
+    sys.exit()
 
 
 def main():
     global data_weekly_file_path, tests_status_file_path, learning_path_dir, install_guide_dir, date_today, new_weekly_entry, new_tests_entry
+
+    # Read in params needed for reading GitHub API
+    arg_parser = argparse.ArgumentParser(description='Update Stats')
+    arg_parser.add_argument('-t','--token', help='GitHub personal access token', required=True)
+    arg_parser.add_argument('-r','--repo', help='GitHub repository name', required=True)
+    args = arg_parser.parse_args()
+
+
 
     # Read in data file as python dict
     existing_weekly_dic = yaml.safe_load(data_weekly_file_path.read_text())
@@ -291,7 +303,7 @@ def main():
 
     # Get new stats, filling in new stat dictionaries:
     iterateContentIndexMdFiles()
-    callGitHubAPI()
+    callGitHubAPI(args.token, args.repo)
 
 
     # Update/replace yaml files
