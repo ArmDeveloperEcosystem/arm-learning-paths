@@ -1,7 +1,7 @@
 name: Check Code Quality
 
 on:
-  # run once a day at 6AM UTC
+  # Run once a day at 6AM UTC
   schedule:
     - cron: '0 6 * * *'
 
@@ -33,33 +33,25 @@ jobs:
 
       - name: Check HTML links
         continue-on-error: true
-        run: |
-          source ~/.bashrc || true # Ensure the checklink command is in the PATH
-          echo "PATH: $PATH" # Print the PATH for troubleshooting
-          which w3c-checklink # Check the location of w3c-checklink
+        run: checklink public
 
-          # Install checklink if not already installed
-          if ! command -v w3c-checklink &> /dev/null; then
-           if ! curl -sL https://install.w3.org/checklink | bash > install.log 2>&1; then
-              echo "Failed to install checklink"
-              cat install.log
-              exit 1
-           fi
-          source ~/.bashrc || true # Source .bashrc again after installation
-          fi
+      - name: Get URLs from environment variable
+        run: echo "${{ env.URLS }}" > urls.txt
 
-          w3c-checklink -c .htmltest.yml > htmltest.log
+      - name: Run w3c-checklist
+        run: w3c-checklist -i urls.txt -o output.txt
 
       - name: HTML test results
         uses: actions/upload-artifact@v2
         with:
           name: htmltest-report
-          path: htmltest.log
+          path: output.txt
           retention-days: 7 # Default is 90 days
 
       - name: Scan for malware
         run: |
-          tools/install-scan.sh
+          sudo apt-get update
+          sudo apt-get install -y clamav
           clamscan -r -i public -l scanlog
 
       - name: Scan results
