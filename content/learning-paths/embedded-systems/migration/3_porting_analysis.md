@@ -10,7 +10,9 @@ layout: "learningpathall"
 
 # Porting analysis 
 
-A Sobel filter implementation was selected as the example application to port as it is an applicable embedded computer vision workload. The [Sobel SIMD OpenCV repo](https://github.com/m3y54m/sobel-simd-opencv/) is implemented in three different ways which makes it a great example candidate to show different aspects of porting. It is implemented in the following ways:
+A Sobel filter implementation is used as the example application as it is an applicable embedded computer vision workload. The [Sobel SIMD OpenCV repo](https://github.com/m3y54m/sobel-simd-opencv/) is implemented in three different ways which makes it a great example candidate to show different aspects of porting. 
+
+It is implemented in the following ways:
 * Non-SIMD
   * pure C++ code
 * SIMD 
@@ -18,7 +20,9 @@ A Sobel filter implementation was selected as the example application to port as
 * OpenCV
   * a computer vision library
 
-We have already built and run the application on a `x86_64` machine. The application runs on CPU only, i.e., no hardware acceleration. Let's follow the porting methodology we introduced and gather information about the application.
+The application builds and runs on an `x86_64` machine. The application runs on CPU only (no hardware acceleration). 
+
+You will follow the porting methodology and gather information about the application.
 
 |                      |                       | version          |
 | -------------------- | --------------------- | ---------------- |
@@ -28,9 +32,9 @@ We have already built and run the application on a `x86_64` machine. The applica
 | Build tools          | CMake                 | 3.22.1           |
 | External libraries   | OpenCV                | 4.5.4            |
 
-This table is our starting point for the porting analysis.
+This table is the starting point for the porting analysis.
 
-Using the original software and tool versions when porting an application isn't a requirement, however it is recommended as it will make the porting smoother. By looking at the Sobel filter code and with the questions from the previous section in mind, we'll start the porting analysis.
+Using the original software and tool versions when porting an application isn't a requirement, however it is recommended as it will make the porting smoother. By looking at the Sobel filter code and with the questions from the previous section in mind, you can start the porting analysis.
 
 In [src/CMakeLists.txt#L12](https://github.com/m3y54m/sobel-simd-opencv/blob/master/src/CMakeLists.txt#L12):
 ```output
@@ -41,7 +45,7 @@ if(NOT WIN32)
 endif()
 ```
   
-The flag `-mavx` used with GCC is architecture-specific. It is only available on [x86_64](https://man7.org/linux/man-pages/man1/gcc.1.html) and will prevent the application from compiling entirely. Even though the application won't compile, no changes to the source code for the non-SIMD and OpenCV implementations will be necessary.
+The flag `-mavx` used with GCC is architecture-specific. It is only available on [x86_64](https://man7.org/linux/man-pages/man1/gcc.1.html) and will prevent the application from compiling. Even though the application won't compile, no changes to the source code for the non-SIMD and OpenCV implementations are necessary.
 
 In [src/main.cpp#L26](https://github.com/m3y54m/sobel-simd-opencv/blob/master/src/main.cpp#L26):
 ```output
@@ -61,7 +65,7 @@ p3 = _mm_loadu_si128((__m128i *)(inputPointer + i * width + j + 2));
 The lines of code above is just a snippet from the function `SobelSimd` which has intrinsics prefixed with `_mm_`. These aren't supported on `aarch64` and will need to be ported for the application to compile on `aarch64`.
 
 The table below summarizes the migration analysis.
-| | version | available on `aarch64` | Comment |
+| | version | available on Arm | Comment |
 | --- | --- | --- | --- |
 | Ubuntu                | 22.04 LTS        | Yes | [Ubuntu for Arm](https://ubuntu.com/download/server/arm) |
 | GCC                   | 11.3.0           | Yes | |
@@ -70,10 +74,10 @@ The table below summarizes the migration analysis.
 | Compiler option -mavx | N/A              | No  | x86-specific |
 | AVX intrinsics        | N/A              | No  | x86-specific |
 
-The following conclusions can be drawn:
-* the compiler options need to be modified
+You can draw the following conclusions:
+* The compiler options need to be modified
   * see [aarch64 options](https://gcc.gnu.org/onlinedocs/gcc/AArch64-Options.html) for compatible compiler options
-* the AVX intrinsics need to ported to utilize Arm SIMD intrinsics
+* The AVX intrinsics need to ported to utilize Arm SIMD intrinsics
   * Arm has three SIMD technologies
     * [NEON](https://developer.arm.com/documentation/den0018/a)
     * Scalable Vector Extension ([SVE](https://developer.arm.com/documentation/102131/0100/?lang=en))
