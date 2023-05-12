@@ -40,8 +40,12 @@ jobs:
 
           # Install checklink if not already installed
           if ! command -v w3c-checklink &> /dev/null; then
-           curl -sL https://install.w3.org/checklink | bash
-           source ~/.bashrc || true # Source .bashrc again after installation
+           if ! curl -sL https://install.w3.org/checklink | bash > install.log 2>&1; then
+              echo "Failed to install checklink"
+              cat install.log
+              exit 1
+           fi
+          source ~/.bashrc || true # Source .bashrc again after installation
           fi
 
           w3c-checklink -c .htmltest.yml > htmltest.log
