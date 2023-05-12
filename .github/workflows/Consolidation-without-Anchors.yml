@@ -31,7 +31,7 @@ jobs:
       - name: Check HTML links
         continue-on-error: true
         run: |
-          sudo apt-get install w3c-checklink -y
+          curl -sL https://install.w3.org/checklink | bash
           w3c-checklink -r public > htmltest.log
 
       - name: HTML test results
