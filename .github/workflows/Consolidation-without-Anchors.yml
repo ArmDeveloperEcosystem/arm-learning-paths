@@ -28,19 +28,28 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Check HTML with W3C Validator
-        continue-on-error: true
+      - name: Install dependencies
         run: |
-            # Replace 'index.html' with the path to your HTML file
-            npm install -g html-validator-cli
-            html-validator --file .htmltest.yml --verbose 2>&1 | tee w3c-check.log
-      - name: W3C Checklist Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: w3c-checklist-report
-          path: w3c-check.log
-          retention-days: 7
+         sudo apt-get update && sudo apt-get install -y python3
+         pip install html5lib
+         pip install linkchecker
 
+      - name: Run W3C Link Checker
+        run: |
+         linkchecker --check-extern -F yaml -f linkchecker-output.yaml -r 2 .htmltest.yml
+
+        continue-on-error: true
+
+      - name: Upload Link Checker output
+        uses: actions/upload-artifact@v2
+        with:
+         name: linkchecker-output
+         path: linkchecker-output.txt
+
+      - name: Retain artifacts
+        uses: actions/retain-artifacts@v1
+        with:
+          retention-days: 7
 
       - name: Scan for malware
         run: |
