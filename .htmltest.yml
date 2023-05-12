@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html>
+  <head>
 DirectoryPath: "public"
 IgnoreDirectoryMissingTrailingSlash: True
 IgnoreURLs:
@@ -10,3 +12,5 @@ IgnoreURLs:
 - "localhost"
 - "127.0.0.1"
 - "192.168.64.39"
+</head>
+ </html>
