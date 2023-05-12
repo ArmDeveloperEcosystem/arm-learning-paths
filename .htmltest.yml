@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title> Urls w3c </title>
+  </head>
+  <body>
 DirectoryPath: "public"
 IgnoreDirectoryMissingTrailingSlash: True
 IgnoreURLs:
@@ -12,5 +15,5 @@ IgnoreURLs:
 - "localhost"
 - "127.0.0.1"
 - "192.168.64.39"
-</head>
- </html>
+  </body>
+</html>
