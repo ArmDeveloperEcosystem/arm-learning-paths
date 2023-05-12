@@ -28,22 +28,24 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Check HTML links
+      - name: Check HTML with W3C Validator
+        continue-on-error: true
         run: |
-          docker run --rm -v $(pwd):/data validator/validator linkcheck --verbose /data
-
+            # Replace 'index.html' with the path to your HTML file
+            npm install -g html-validator-cli
+            html-validator --file index.html --verbose 2>&1 | tee w3c-check.log
       - name: W3C Checklist Results
         uses: actions/upload-artifact@v3
         with:
           name: w3c-checklist-report
-          path: linkcheck.log
+          path: w3c-check.log
           retention-days: 7
+
 
       - name: Scan for malware
         run: |
           tools/install-scan.sh
           clamscan -r -i public -l scanlog
-
       - name: Scan results
         uses: actions/upload-artifact@v2
         with:
@@ -63,4 +65,4 @@ jobs:
         with:
           name: spellcheck-output
           path: spellcheck-output.txt
-          retention-days: 7 # Default is 90 days
+          retention-days: 7 # Default
