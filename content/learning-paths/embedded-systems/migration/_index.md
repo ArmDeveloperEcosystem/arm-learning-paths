@@ -6,14 +6,14 @@ minutes_to_complete: 30
 who_is_this_for: This is an advanced topic for embedded software developers looking at migrating Linux workloads to aarch64.
 
 learning_objectives: 
-    - Software migration methodology
-    - Arm compiler ecosystem and libraries
-    - Porting compiler intrinsics
+    - Understand software migration methodology
+    - Use different Arm compilers and libraries
+    - Port applications containing compiler intrinsics
 
 prerequisites:
-    - Understanding of software containers
+    - Introductory understanding of software containers
     - Knowledge about building workflows
-    - Access to an aarch64 or x86_64 machine 
+    - Access to an aarch64 or x86_64 machine running Linux
 
 author_primary: Kasper Mecklenburg
 
