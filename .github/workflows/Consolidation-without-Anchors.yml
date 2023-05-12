@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
+        uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: '0.98.0'
           extended: true
@@ -40,7 +40,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload Link Checker output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: linkchecker-output
           path: linkchecker-output.yaml
