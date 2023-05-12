@@ -9,7 +9,6 @@ official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-in
 prerequisites: AWS Account with IAM use role
 test_images:
 - ubuntu:latest
-
 tool_install: true
 multi_install: false
 multitool_install_part: false

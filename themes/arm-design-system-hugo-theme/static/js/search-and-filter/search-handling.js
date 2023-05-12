@@ -1,4 +1,6 @@
 function applySearchAndFilters(all_path_cards, search_string, page) {
+    console.log('DEBUG: in applySearchAndFilters. page: ',page);
+    
     // Skip search bits if no search string
     let skip_search = false;
     if ((typeof search_string) == 'undefined') {
@@ -31,6 +33,7 @@ function applySearchAndFilters(all_path_cards, search_string, page) {
 
             // Tool-based search only
             if (page=='tools') {
+                console.log('DEBUG: in applySearchAndFilters. in tools area, searching array: ',search_word_array);
                 if (searchByTitle(card,search_word_array) && searchByAdditionalSearchTerm(card,search_word_array)) { 
                     results_to_hide.push(card); // set card to be hidden
                 }
@@ -69,6 +72,9 @@ function searchHandler_LearningPaths(search_string,filters_from_url_only) {
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
+    console.log('DEBUG: in searchHandler_LPs. Search_string: ',search_string,sanitizeInput(search_string));
+
+
     // if getting filters from URL, activate the filters instantly before any other processing
     if (filters_from_url_only) {
         turnOnFilters(filters_from_url_only);
@@ -95,7 +101,9 @@ function searchHandler_Tools(search_string) {
     if (! (typeof search_string === 'string')) {
         search_string = search_string.value;
     }
-        
+    console.log('DEBUG: in searchHandler_Tools. Search_string: ',search_string,sanitizeInput(search_string));
+
+    
     // Sanitize the input
     search_string = sanitizeInput(search_string);
 
