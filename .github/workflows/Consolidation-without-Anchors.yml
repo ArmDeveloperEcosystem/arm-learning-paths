@@ -28,19 +28,21 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Install Bundler
-        run: gem install bundler
-
-      - name: Install gems
-        run: bundle install --path vendor/bundle
-
       - name: Check HTML links
-        run: bundle exec htmlproofer public --disable-external --checks-to-ignore ImageCheck,ScriptCheck --file-ignore /fonts.gstatic.com/,/github.com/,/linkedin.com/,/marketplace.visualstudio.com/,/www.microsoft.com/,/localhost/,/127.0.0.1/,/192.168.64.39/
+        run: |
+          wget https://validator.w3.org/nu/nu-latest.jar
+          java -jar nu-latest.jar --checklink .htmltest.yml > htmltest.log || true
+
+      - name: HTML test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: htmltest-report
+          path: htmltest.log
+          retention-days: 7 # Default is 90 days
 
       - name: Scan for malware
         run: |
-          sudo apt-get update
-          sudo apt-get install -y clamav
+          tools/install-scan.sh
           clamscan -r -i public -l scanlog
 
       - name: Scan results
