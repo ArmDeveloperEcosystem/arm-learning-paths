@@ -10,6 +10,7 @@ IgnoreURLs:
 - "fonts.gstatic.com"
 - "github.com"
 - "linkedin.com"
+- "innovifel.com"
 - "marketplace.visualstudio.com"
 - "www.microsoft.com"
 - "localhost"
