@@ -77,6 +77,7 @@ import sys
 import csv
 import yaml
 import argparse
+import requests
 from pathlib import Path
 from datetime import datetime
 
@@ -267,7 +268,22 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
     print('hiiiiiiiiiiiiiiii')
     print(GitHub_token)
     print(GitHub_repo_name)
+
+    headers = {
+        'Authorization': f'token {GitHub_token}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+    url = f'{GitHub_repo_name}/issues'
+
+    response = requests.get(url, headers=headers)
+    if response.ok:
+        issues = response.json()
+        for issue in issues:
+            print(issue['title'])
+    else:
+        print(f'Failed to fetch issues: {response.status_code} {response.reason}')
     sys.exit()
+
 
 
 def main():
