@@ -41,16 +41,10 @@ jobs:
       # run: |
       #   tools/install-scan.sh
       #   clamscan -r -i public -l scanlog
-      - name: Setup OpenVAS
-        uses: docker://mikesplain/openvas
-        with:
-          args: bash -c "greenbone-nvt-sync && greenbone-scapdata-sync && greenbone-certdata-sync"
-
-      - name:  Run OpenVAS Scan
-        uses: docker://mikesplain/gvm-docker
-        with:
-          args: bash -c "gvm-start && gvm-feed-update && openvasmd --create-scanner='GitHub Scanner' && openvasmd --scanner='GitHub Scanner' --new-target='github.com' && openvasmd --scanner='GitHub Scanner' --start-task='Full and fast' && gvm-stop"
-
+      - name: Install dependencies
+        run: sudo apt-get install -y openvas
+      - name: Run OpenVAS
+        run: sudo openvas-start
       #- name: scan results
       # uses: actions/upload-artifact@v3
       # with:
