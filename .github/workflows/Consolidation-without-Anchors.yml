@@ -28,13 +28,14 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Install html-proofer
-        run: |
-          gem install --user-install html-proofer
-          echo 'export PATH="$HOME/.gem/ruby/3.0.0/bin:$PATH"' >> $GITHUB_ENV
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install gems
+        run: bundle install --path vendor/bundle
 
       - name: Check HTML links
-        run: htmlproofer public --disable-external --checks-to-ignore ImageCheck,ScriptCheck --file-ignore /fonts.gstatic.com/,/github.com/,/linkedin.com/,/marketplace.visualstudio.com/,/www.microsoft.com/,/localhost/,/127.0.0.1/,/192.168.64.39/
+        run: bundle exec htmlproofer public --disable-external --checks-to-ignore ImageCheck,ScriptCheck --file-ignore /fonts.gstatic.com/,/github.com/,/linkedin.com/,/marketplace.visualstudio.com/,/www.microsoft.com/,/localhost/,/127.0.0.1/,/192.168.64.39/
 
       - name: Scan for malware
         run: |
