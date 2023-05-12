@@ -1,49 +1,54 @@
-{{/*
-Filter code for open lists, with a search box (checkbox only)
-
-Where it is used:
-    - /learning-paths/:category/
-    - /learning-paths/microcontroller/
-
-Called from:
-    - filter-search-sort/filter-definition.html
-*/}}
-
+{{/* Filter code for open lists, with a search box (checkbox only) Where it is
+used: - /learning-paths/:category/ - /learning-paths/microcontroller/ Called
+from: - filter-search-sort/filter-definition.html */}}
 
 <!-- Hugo process parameters first -->
-{{ $counter := 0 }}
-{{ range .tagnames}}
-    {{$counter = add $counter 1}}
-{{end}}
+{{ $counter := 0 }} {{ range .tagnames}} {{$counter = add $counter 1}} {{end}}
 {{$group_name := .displayname | urlize}}
 
-
 <!-- HTML code -->
-<ads-expansion-panel is-default-expanded class="learning-path-filters u-padding-bottom-1">
-    <span slot="toggle">{{.displayname}}</span>
-    <div slot="content">
-        <div class="u-flex u-flex-column">
-            <ads-search id="openfilter-search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search"></ads-search>
-            <div id="openfilter-results-status-bar" class="u-margin-bottom-1/2">
-                Displaying 
-                <span id="openfilter-currently-shown-number" class="u-text-bold"> {{$counter }} </span>
-                of 
-                <span id="openfilter-total-shown-number" class="u-text-bold"> {{$counter }} </span>
-                filters.
-            </div>
+<ads-expansion-panel
+  is-default-expanded
+  class="learning-path-filters u-padding-bottom-1"
+>
+  <span slot="toggle">{{.displayname}}</span>
+  <div slot="content">
+    <div class="u-flex u-flex-column">
+      <ads-search
+        id="openfilter-search-box"
+        class="u-margin-top-0 u-width-100% openfilter-search-box"
+        has-search-button=""
+        placeholder="Search"
+      ></ads-search>
+      <div id="openfilter-results-status-bar" class="u-margin-bottom-1/2">
+        Displaying
+        <span id="openfilter-currently-shown-number" class="u-text-bold">
+          {{$counter }}
+        </span>
+        of
+        <span id="openfilter-total-shown-number" class="u-text-bold">
+          {{$counter }}
+        </span>
+        filters.
+      </div>
 
-            <div class="open-filter-container">
-                {{ range $x, $y := .tagnames }}
-                    {{range $name, $count := $y}}
-                        <div class="openfilter-search-div">
-                            <!-- Make the ID safe as it is used in processing; change + to 'plus' and urlize removing spaces & capitalizations-->
-                            <ads-checkbox class='is-small tag-{{replace ($name | urlize) "+" "plus"}} group-{{$group_name}} to-page-top' id='{{replace ($name | urlize) "+" "plus"}}' data-urlized-name='{{replace ($name | urlize) "+" "plus"}}' name="{{$name}}" onclick="filterHandler_LearningPaths(this)">
-                                <div class="search-title">{{$name}}</div>
-                            </ads-checkbox>
-                        </div>
-                    {{end}}
-                {{end}}
-            </div>
+      <div class="open-filter-container">
+        {{ range $x, $y := .tagnames }} {{range $name, $count := $y}}
+        <div class="openfilter-search-div">
+          <!-- Make the ID safe as it is used in processing; change + to 'plus' and urlize removing spaces & capitalizations-->
+          <ads-checkbox
+            class='is-small tag-{{replace ($name | urlize) "+" "plus"}} group-{{$group_name}} to-page-top'
+            id='{{replace ($name | urlize) "+" "plus"}}'
+            data-urlized-name='{{replace ($name | urlize) "+" "plus"}}'
+            name="{{$name}}"
+            onclick="filterHandler_LearningPaths(this)"
+            tabindex="0"
+          >
+            <div class="search-title">{{$name}}</div>
+          </ads-checkbox>
         </div>
+        {{end}} {{end}}
+      </div>
     </div>
+  </div>
 </ads-expansion-panel>
