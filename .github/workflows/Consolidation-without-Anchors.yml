@@ -34,7 +34,8 @@ jobs:
       - name: Check HTML links
         continue-on-error: true
         run: |
-          source ~/.bashrc # Ensure the checklink command is in the PATH
+          source ~/.bashrc || true # Ensure the checklink command is in the PATH
+          export PATH="$PATH:$HOME/.local/bin" # Add the .local/bin directory to the PATH
           w3c-checklink -r public > htmltest.log
 
       - name: HTML test results
