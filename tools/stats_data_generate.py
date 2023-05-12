@@ -273,7 +273,7 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
         'Authorization': f'token {GitHub_token}',
         'Accept': 'application/vnd.github.v3+json'
     }
-    url = f'{GitHub_repo_name}/issues'
+    url = f'{GitHub_repo_name}issues'
 
     print(url)
     print(headers)
