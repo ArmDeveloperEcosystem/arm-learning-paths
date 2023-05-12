@@ -36,7 +36,7 @@ jobs:
 
       - name: Run W3C Link Checker
         run: |
-          linkchecker --check-extern -F txt -f linkchecker-output.txt -r 2 .htmltest.yml
+          linkchecker --check-extern -F yaml -f linkchecker-output.yaml -r 2 .htmltest.yml
         continue-on-error: true
 
       - name: Upload Link Checker output
@@ -48,7 +48,7 @@ jobs:
       - name: Retain artifacts
         run: |
           mkdir -p .github/artifacts
-          cp linkchecker-output.txt .github/artifacts/linkchecker-output.txt
+          cp linkchecker-output.yaml .github/artifacts/linkchecker-output.yaml
         env:
           RETENTION_DAYS: 7
 
