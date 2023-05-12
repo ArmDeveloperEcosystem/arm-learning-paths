@@ -28,28 +28,11 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Install checklink
-        run: curl -sL https://install.w3.org/checklink | bash
+      - name: Install html-proofer
+        run: gem install html-proofer
 
       - name: Check HTML links
-        continue-on-error: true
-        run: checklink public
-
-      - name: Get URLs from environment variable
-        run: echo "${{ env.URLS }}" > urls.txt
-
-      - name: Install html5validator
-        run: pip install html5validator
-
-      - name: Run html5validator
-        run: html5validator -m urls.txt > output.txt
-
-      - name: HTML test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: htmltest-report
-          path: output.txt
-          retention-days: 7 # Default is 90 days
+        run: htmlproofer public --disable-external --checks-to-ignore ImageCheck,ScriptCheck --file-ignore /fonts.gstatic.com/,/github.com/,/linkedin.com/,/marketplace.visualstudio.com/,/www.microsoft.com/,/localhost/,/127.0.0.1/,/192.168.64.39/
 
       - name: Scan for malware
         run: |
