@@ -29,7 +29,7 @@ jobs:
         run: hugo --minify
 
       - name: Download W3C Link Checker
-        run: wget https://github.com/validator/validator/releases/latest/download/vnu.jar -O vnu.jar
+        run: wget https://validator.w3.org/nu/nu-latest.jar -O vnu.jar
 
       - name: Check HTML links
         run: java -jar vnu.jar --skip-non-html --also-check-css --format json public > htmltest.log || true
