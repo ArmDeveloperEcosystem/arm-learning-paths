@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Assign inputChangeHandler to openfilter boxes (if present)
-    const openfilter_search_box = document.getElementById('openfilter-search-box');
-    if (openfilter_search_box) {
-        openfilter_search_box.inputChangeHandler = searchHandler_OpenFilter;
+  // Assign inputChangeHandler to openfilter boxes (if present)
+  const openfilter_search_box = document.getElementsByClassName(
+    "openfilter-search-box"
+  );
+
+  if (openfilter_search_box) {
+    for (i = 0; i < openfilter_search_box.length; i++) {
+      openfilter_search_box[i].inputChangeHandler = searchHandler_OpenFilter;
     }
-    
+  }
 
     // Assign inputChangeHandler to search box
     const search_box = document.getElementById('search-box');
