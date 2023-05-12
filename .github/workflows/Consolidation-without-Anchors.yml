@@ -44,7 +44,7 @@ jobs:
            source ~/.bashrc || true # Source .bashrc again after installation
           fi
 
-          w3c-checklink -r public > htmltest.log
+          w3c-checklink -c .htmltest.yml > htmltest.log
 
       - name: HTML test results
         uses: actions/upload-artifact@v2
