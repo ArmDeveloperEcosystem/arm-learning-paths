@@ -275,6 +275,9 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
     }
     url = f'{GitHub_repo_name}/issues'
 
+    print(url)
+    print(headers)
+
     response = requests.get(url, headers=headers)
     if response.ok:
         issues = response.json()
