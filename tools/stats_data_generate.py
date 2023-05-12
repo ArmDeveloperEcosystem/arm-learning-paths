@@ -265,27 +265,52 @@ def iterateContentIndexMdFiles():
     new_weekly_entry[date_today]['contributions'] = weekly_authors_contributions_dic['contributions']            
 
 def callGitHubAPI(GitHub_token,GitHub_repo_name):
-    print('hiiiiiiiiiiiiiiii')
-    print(GitHub_token)
-    print(GitHub_repo_name)
+
+    weekly_github_dic = {'issues': {}, 'github_engagement': {}}
+
 
     headers = {
         'Authorization': f'token {GitHub_token}',
         'Accept': 'application/vnd.github.v3+json'
     }
     url = f'{GitHub_repo_name}issues'
-
-    print(url)
-    print(headers)
-
     response = requests.get(url, headers=headers)
     if response.ok:
         issues = response.json()
+
+        # Iterate over each issue and read the state
+        closed_num = 0
+        time_differences = []
         for issue in issues:
-            print(issue['title'])
+            if issue['state'] == 'closed':
+                # Increment number of closed
+                closed_num = closed_num + 1
+
+                # Get average time
+                created_at = datetime.fromisoformat(issue['created_at'][:-1])
+                closed_at = datetime.fromisoformat(issue['closed_at'][:-1])
+                difference = closed_at - created_at
+                time_differences.append(difference.total_seconds() / 3600)  # Convert to hours
+                
+            print(issue['title'],issue['state'])
+
+        # Calculate average time to close
+        if time_differences:
+            avg_time_to_close = sum(time_differences) / len(time_differences)
+        else:
+            avg_time_to_close = 0
+
+        # Store all stats in github dic            
+        weekly_github_dic['issues']['num_issues'] = len(issues)
+        weekly_github_dic['issues']['percent_closed_vs_total'] = closed_num / len(issues)
+        weekly_github_dic['issues']['avg_close_time_hrs'] = round(avg_time_to_close,2)
+           
     else:
-        print(f'Failed to fetch issues: {response.status_code} {response.reason}')
-    sys.exit()
+        print(f'ERROR: Failed to fetch GitHub API issues: {response.status_code} {response.reason}')
+        sys.exit(1)
+    
+    print(weekly_github_dic)
+    sys.exit()  
 
 
 
