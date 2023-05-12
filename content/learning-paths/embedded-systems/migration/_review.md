@@ -22,7 +22,7 @@ review:
             NEON and SVE and supported by Neoverse V1, Neoverse N2 and Cortex-X2.
     - questions:
         question: >
-            Do I need rewrite all my code when migrating to aarch64?
+            I need rewrite all my code when migrating to aarch64.
         answers:
             - "True"
             - "False"
