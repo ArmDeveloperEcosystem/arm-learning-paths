@@ -7,7 +7,6 @@ Where it is used:
 Called from:
     - baseof (the end)
 
-
 <!-- Hugo processing -->
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
 {{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}                                              
@@ -16,20 +15,18 @@ Called from:
 <!-- Feedback is on     _next-steps.md learning path          install tool everything-->
 
 <!-- All pages -->
-{{$all_page_js := slice (resources.Get "js/stored-user-preferences.js") (resources.Get "js/anonymous-analytics.js") (resources.GetRemote "https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js") (resources.Get "js/cookie-init.js")}}
+{{$all_page_js := slice (resources.Get "js/globalVarsandPreferences.js") (resources.Get "js/anonymous-analytics.js") (resources.GetRemote "https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js") (resources.Get "js/cookie-init.js")}}
 
 <!-- Homepage only -->
 {{if .IsHome }}
-    {{ $js_home := $all_page_js | append 
-        (resources.Get "js/search-and-filter/search-handling.js") (resources.Get "/js/search-and-filter/change-handler-search-hook.js")
-        | resources.Concat "js/mini_home.js" | minify | fingerprint  }}
+    {{ $js_home := $all_page_js | resources.Concat "js/mini_home.js" | minify | fingerprint  }}
     <script href="{{ $js_home.Permalink }}" defer></script>
 {{end}}
 
 <!-- List pages only -->
 {{if $is_list}}
     {{ $js_list := $all_page_js | append 
-        (resources.Get "/js/search-and-filter/filter-learning-paths.js") (resources.Get "/js/search-and-filter/filter-and-navigate-mobile-behavior.js") (resources.Get "/js/search-and-filter/search-logic.js") (resources.Get "/js/search-and-filter/search-handling.js") (resources.Get "/js/search-and-filter/change-handler-search-hook.js")
+        (resources.Get "js/search-and-filter.js") (resources.Get "js/filter-and-navigate-mobile-behavior.js")
         | resources.Concat "js/mini_list.js" | minify | fingerprint  }}
     <script href="{{ $js_list.Permalink }}" defer></script>
 {{end}}
@@ -38,23 +35,23 @@ Called from:
 {{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
     <script src="/js/prism.js" defer></script>
     <script src="/js/mini_prism.js" defer></script>       
-
 {{end}}
+
 {{if $is_content}}
     {{ $js_content := $all_page_js | append 
-        (resources.Get "/js/search-and-filter/filter-and-navigate-mobile-behavior.js") (resources.Get "/js/feedback-form-behavior.js")
+        (resources.Get "js/filter-and-navigate-mobile-behavior.js") (resources.Get "js/feedback-form-behavior.js")
         | resources.Concat "js/mini_content.js" | minify | fingerprint  }}
     <script href="{{ $js_content.Permalink }}" defer></script>
 {{end}}
 {{if hasPrefix .File.TranslationBaseName "_review"}}
     {{ $js_review := $all_page_js | append 
-        (resources.Get "/js/review-question-behavior.js")
+        (resources.Get "js/review-question-behavior.js")
         | resources.Concat "js/mini_review.js" | minify | fingerprint  }}
     <script href="{{ $js_review.Permalink }}" defer></script>
 {{end}}
-
-
 */}}
+
+
 
 
 
@@ -86,17 +83,23 @@ Called from:
 
 <!-- Homepage only -->
 {{if .IsHome }}
+    <script src="/js/search-and-filter.js" defer></script>
+    <!-- Unified into one file
     <script src="/js/search-and-filter/search-handling.js" defer></script>
-    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> <!-- Attaches search hooks to elements -->
+    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> 
+    -->
 {{end}}
 
 <!-- List pages only -->
 {{if $is_list}}
+    <script src="/js/search-and-filter.js" defer></script>
+    <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script>
+    <!-- Unified into one file
     <script src="/js/search-and-filter/filter-learning-paths.js" defer></script>
-    <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js" defer></script>
     <script src="/js/search-and-filter/search-logic.js" defer></script>
     <script src="/js/search-and-filter/search-handling.js" defer></script>
-    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> <!-- Attaches search hooks to elements -->
+    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> 
+    -->
 {{end}}
 
 <!-- Content pages only that are not _index, _next-steps, or _review -->
@@ -105,7 +108,7 @@ Called from:
     <script src="/js/prism_post_output_formating.js" defer></script>  <!-- must be called after prism.js to modify it once rendered -->
 {{end}}
 {{if $is_content}}
-    <script src="/js/search-and-filter/filter-and-navigate-mobile-behavior.js" defer></script> <!-- Always need on content, contains mobile content page nav -->
+    <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script> <!-- Always need on content, contains mobile content page nav -->
     <script src="/js/feedback-form-behavior.js" defer></script>       <!-- Only needed on install guide pages and content pages -->
 {{end}}
 {{if hasPrefix .File.TranslationBaseName "_review"}}
