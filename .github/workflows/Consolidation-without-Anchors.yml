@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
         with:
           submodules: true
           fetch-depth: 0
@@ -28,39 +28,25 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Install dependencies
-        run: |
-          sudo apt-get update && sudo apt-get install -y python3
-          pip install html5lib
-          pip install linkchecker
-
-      - name: Run W3C Link Checker
-        run: |
-          linkchecker --check-extern -F yaml -f linkchecker-output.yaml -r 2 .htmltest.yml
+      - name: Check HTML links
         continue-on-error: true
+        run: |
+          w3c-checklink -r public > htmltest.log
 
-      - name: Upload Link Checker output
+      - name: HTML test results
         uses: actions/upload-artifact@v2
         with:
-          name: linkchecker-output
-          path: linkchecker-output.yaml
-
-      - name: Retain artifacts
-        run: |
-          mkdir -p .github/artifacts
-          cp linkchecker-output.yaml .github/artifacts/linkchecker-output.yaml
-        env:
-          RETENTION_DAYS: 7
-
-      - name: Cleanup
-        run: rm -rf .github/artifacts
+          name: htmltest-report
+          path: htmltest.log
+          retention-days: 7 # Default is 90 days
 
       - name: Scan for malware
         run: |
           tools/install-scan.sh
           clamscan -r -i public -l scanlog
+
       - name: Scan results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: clamscan-log
           path: scanlog
@@ -74,8 +60,8 @@ jobs:
           output_file: spellcheck-output.txt
 
       - name: Spelling results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: spellcheck-output
           path: spellcheck-output.txt
-          retention-days: 7 # Default
+          retention-days: 7 # Default is 90 days
