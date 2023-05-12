@@ -49,8 +49,8 @@ jobs:
                 
                 
       # Run python script to update files
-      #- name: Run Python script to update files
-      #  run: |
-      #       cd tools/
-      #       pip install -r requirements.txt
-      #       python3 stats_data_generate.py
+      - name: Run Python script to update files
+        run: |
+             cd tools/
+             pip install -r requirements.txt
+             python3 stats_data_generate.py --token ${{ secrets.GITHUB_TOKEN }} --repo https://api.github.com/repos/ArmDeveloperEcosystem/arm-learning-paths/
