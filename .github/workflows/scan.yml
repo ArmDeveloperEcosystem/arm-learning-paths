@@ -36,19 +36,22 @@ jobs:
       # Builds arm-software-developer repo
       - name: Build
         run: hugo --minify
+      
+      - name: Install OpenVAS
+        run: sudo apt-get install openvas
 
-      # - name: scan
-      # run: |
-      #   tools/install-scan.sh
-      #   clamscan -r -i public -l scanlog
-      - name: Install dependencies
-        run: sudo apt-get install -y openvas
-      - name: Run OpenVAS
-        run: sudo openvas-start
-      #- name: scan results
-      # uses: actions/upload-artifact@v3
-      # with:
-      #   name: clamscan-log
-      #   path: scanlog
-      #   retention-days: 7 # Default is 90 days
+      - name: Run OpenVAS scan
+        run: |
+          sudo openvas-start
+          sudo openvasmd --rebuild --progress
+          sudo openvasmd --create-user=admin --role=Admin
+          sudo openvasmd --user=admin --new-password= P@$$w)rd!@
+          sudo openvasmd --get-users
+
+      - name: Upload report
+        uses: actions/upload-artifact@v2
+        with:
+          name: report
+          path: /var/log/gvm/gvmd.log
+
 
