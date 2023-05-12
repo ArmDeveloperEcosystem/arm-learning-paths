@@ -1,0 +1,12 @@
+DirectoryPath: "public"
+IgnoreDirectoryMissingTrailingSlash: True
+IgnoreURLs:
+- "fonts.gstatic.com"
+- "github.com"
+- "linkedin.com"
+- "innovifel."
+- "marketplace.visualstudio.com"
+- "www.microsoft.com"
+- "localhost"
+- "127.0.0.1"
+- "192.168.64.39"
