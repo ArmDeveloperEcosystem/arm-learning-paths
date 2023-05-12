@@ -38,8 +38,11 @@ jobs:
       - name: Get URLs from environment variable
         run: echo "${{ env.URLS }}" > urls.txt
 
-      - name: Run w3c-checklist
-        run: w3c-checklist -i urls.txt -o output.txt
+      - name: Install html5validator
+        run: pip install html5validator
+
+      - name: Run html5validator
+        run: html5validator -m urls.txt > output.txt
 
       - name: HTML test results
         uses: actions/upload-artifact@v2
