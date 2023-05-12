@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Urls w3c</title>
-  </head>
-  <body>
-    <ul>
-      <li>fonts.gstatic.com</li>
-      <li>github.com</li>
-      <li>linkedin.com</li>
-      <li>innovifel.</li>
-      <li>marketplace.visualstudio.com</li>
-      <li>www.microsoft.com</li>
-      <li>localhost</li>
-      <li>127.0.0.1</li>
-      <li>192.168.64.39</li>
-    </ul>
-  </body>
-</html>
+DirectoryPath: "public"
+IgnoreDirectoryMissingTrailingSlash: True
+IgnoreURLs:
+- "fonts.gstatic.com"
+- "github.com"
+- "linkedin.com"
+- "marketplace.visualstudio.com"
+- "www.microsoft.com"
+- "localhost"
+- "127.0.0.1"
+- "192.168.64.39"
