@@ -331,9 +331,10 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
         print(f'ERROR: Failed to fetch GitHub API issues:  {url_issues} {response.status_code} {response.reason}')
         sys.exit(1)
     
-    print(weekly_github_dic)
-    sys.exit()  
 
+    # Assign to main file
+    new_weekly_entry[date_today]['issues'] = weekly_github_dic['issues']
+    new_weekly_entry[date_today]['github_engagement'] = weekly_github_dic['github_engagement']
 
 
 def main():
@@ -379,9 +380,12 @@ def main():
 
     '''
     pretty(new_weekly_entry)
-    #pretty(new_tests_entry)
-    with open('data.yml', 'w') as outfile:
+    print('============================================================================')
+    pretty(new_tests_entry)
+    with open('test.yml', 'w') as outfile:
         yaml.dump(new_tests_entry, outfile, default_flow_style=False)
+    with open('weekly.yml', 'w') as outfile:
+        yaml.dump(new_weekly_entry, outfile, default_flow_style=False)
 
 
 if __name__ == "__main__":
