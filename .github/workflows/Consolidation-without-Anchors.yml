@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.98.0'
           extended: true
@@ -30,26 +30,30 @@ jobs:
 
       - name: Install dependencies
         run: |
-         sudo apt-get update && sudo apt-get install -y python3
-         pip install html5lib
-         pip install linkchecker
+          sudo apt-get update && sudo apt-get install -y python3
+          pip install html5lib
+          pip install linkchecker
 
       - name: Run W3C Link Checker
         run: |
-         linkchecker --check-extern -F yaml -f linkchecker-output.yaml -r 2 .htmltest.yml
-
+          linkchecker --check-extern -F yaml -f linkchecker-output.yaml -r 2 .htmltest.yml
         continue-on-error: true
 
       - name: Upload Link Checker output
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-         name: linkchecker-output
-         path: linkchecker-output.txt
+          name: linkchecker-output
+          path: linkchecker-output.yaml
 
       - name: Retain artifacts
-        uses: actions/retain-artifacts@v1
-        with:
-          retention-days: 7
+        run: |
+          mkdir -p .github/artifacts
+          cp linkchecker-output.yaml .github/artifacts/linkchecker-output.yaml
+        env:
+          RETENTION_DAYS: 7
+
+      - name: Cleanup
+        run: rm -rf .github/artifacts
 
       - name: Scan for malware
         run: |
