@@ -273,8 +273,30 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
         'Authorization': f'token {GitHub_token}',
         'Accept': 'application/vnd.github.v3+json'
     }
-    url = f'{GitHub_repo_name}issues'
-    response = requests.get(url, headers=headers)
+    url_issues = f'{GitHub_repo_name}issues'
+    url_pulls  = f'{GitHub_repo_name}pulls'
+    url_forks  = f'{GitHub_repo_name}forks'
+
+    # Get Number of Forks
+    response = requests.get(url_forks, headers=headers)
+    if response.ok:
+        forks = response.json()
+        weekly_github_dic['github_engagement']['num_forks'] = len(forks)
+    else:
+        print(f'ERROR: Failed to fetch GitHub API forks: {url_forks} {response.status_code} {response.reason}')
+        sys.exit(1)
+
+    # Get Number of Pull Requests
+    response = requests.get(url_pulls, headers=headers)
+    if response.ok:
+        pulls = response.json()
+        weekly_github_dic['github_engagement']['num_prs'] = len(pulls)
+    else:
+        print(f'ERROR: Failed to fetch GitHub API forks: {url_pulls} {response.status_code} {response.reason}')
+        sys.exit(1)
+
+    # Get Issues information
+    response = requests.get(url_issues, headers=headers)
     if response.ok:
         issues = response.json()
 
@@ -302,11 +324,11 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
 
         # Store all stats in github dic            
         weekly_github_dic['issues']['num_issues'] = len(issues)
-        weekly_github_dic['issues']['percent_closed_vs_total'] = closed_num / len(issues)
-        weekly_github_dic['issues']['avg_close_time_hrs'] = round(avg_time_to_close,2)
+        weekly_github_dic['issues']['percent_closed_vs_total'] = round( (closed_num/len(issues)) * 100, 1) 
+        weekly_github_dic['issues']['avg_close_time_hrs'] = round(avg_time_to_close,1)
            
     else:
-        print(f'ERROR: Failed to fetch GitHub API issues: {response.status_code} {response.reason}')
+        print(f'ERROR: Failed to fetch GitHub API issues:  {url_issues} {response.status_code} {response.reason}')
         sys.exit(1)
     
     print(weekly_github_dic)
