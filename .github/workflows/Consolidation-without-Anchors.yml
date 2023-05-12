@@ -28,10 +28,13 @@ jobs:
       - name: Build
         run: hugo --minify
 
+      - name: Install checklink
+        run: curl -sL https://install.w3.org/checklink | bash
+
       - name: Check HTML links
         continue-on-error: true
         run: |
-          curl -sL https://install.w3.org/checklink | bash
+          source ~/.bashrc # Ensure the checklink command is in the PATH
           w3c-checklink -r public > htmltest.log
 
       - name: HTML test results
