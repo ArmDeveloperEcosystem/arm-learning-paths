@@ -53,3 +53,17 @@ The FVPs provided with Arm Development Studio and/or Keil MDK Professional Editi
 ## Verify installation
 
 To verify everything is working OK, navigate to the install directory, and launch any of the supplied FVP executables. No additional command options are needed.
+
+For example:
+```command
+./FVP_MPS2/FVP_MPS2_Cortex-M3
+```
+The FVP will launch, and output text in a terminal similar to:
+```output
+telnetterminal0: Listening for serial connection on port 5000
+telnetterminal1: Listening for serial connection on port 5001
+telnetterminal2: Listening for serial connection on port 5002
+```
+A visualization of the FVP will also be displayed.
+
+Terminate the FVP with `Ctrl+C`.

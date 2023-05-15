@@ -37,7 +37,22 @@ For full list of available options, use `--help`:
 
 Arm Ecosystem FVPs are not license managed.
 
-To verify everything is working OK, run the installed FVP executable. No additional command options are needed.
+To verify everything is working OK, run the installed FVP executable, located in the `models/<build_environment>` folder of the installed directory. No additional command options are needed.
+
+For example:
+```command
+./models/Linux64_GCC-9.3/FVP_Corstone-1000
+```
+The FVP will launch, and output text in a terminal similar to:
+```output
+host_terminal_0: Listening for serial connection on port 5000
+host_terminal_1: Listening for serial connection on port 5001
+secenc_terminal: Listening for serial connection on port 5002
+extsys_terminal: Listening for serial connection on port 5003
+```
+A visualization of the FVP will also be displayed.
+
+Terminate the FVP with `Ctrl+C`.
 
 ## Integration with Arm Toolchains
 
