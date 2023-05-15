@@ -15,7 +15,7 @@ Arm Ecosystem FVPs are available free-of-charge. They are supported by relevant 
 
 ## Download Ecosystem FVPs
 
-Arm Ecosystem FVPs can be download from the [Arm Developer](The Corstone-300 model can be downloaded from [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) website.
+Arm Ecosystem FVPs can be download from [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) on the `Arm Developer` website.
 
 ## Installation
 
