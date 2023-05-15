@@ -23,7 +23,6 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - C
-    - yml
     - Arm Virtual Hardware
     - GitHub
     - AWS EC2
