@@ -27,7 +27,6 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - C
-    - yml
     - GitHub
     - Azure
 
