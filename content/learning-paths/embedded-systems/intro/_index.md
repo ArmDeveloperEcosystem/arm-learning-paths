@@ -1,13 +1,12 @@
 ---
-title: Start developing for Arm embedded applications
+title: Get started with Embedded Systems
 
-description: The place to start for developers new to Arm embedded systems
+minutes_to_complete: 10
 
-minutes_to_complete: 5
-
-who_is_this_for: This is an introductory topic for Developers new to the Arm architecture and looking for embedded hardware.
+who_is_this_for: This is an introductory topic for software developers working on embedded systems and new to the Arm architecture.
 
 learning_objectives:
+    - Understand where the Arm architecture is used in embedded systems
     - Find embedded hardware to use for your software development projects
 
 prerequisites:

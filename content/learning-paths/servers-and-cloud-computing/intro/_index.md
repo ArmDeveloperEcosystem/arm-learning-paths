@@ -1,12 +1,12 @@
 ---
-title: Get started with Arm Servers and Cloud Computing
+title: Get started with Servers and Cloud Computing
 
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for software developers working on server and cloud applications and new to the Arm architecture.
 
 learning_objectives:
-    - Understand where the Arm architecture is used in Servers and Cloud Computing
+    - Understand where the Arm architecture is used in servers and cloud computing
     - Find server and cloud hardware to use for software development
 
 prerequisites:
