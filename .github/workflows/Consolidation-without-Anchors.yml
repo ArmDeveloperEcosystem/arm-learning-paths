@@ -30,14 +30,13 @@ jobs:
 
       - name: Download and install W3C LinkChecker
         run: |
-          curl -LO https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
-          tar -xzf W3C-LinkChecker-5.0.0.tar.gz
-          cd W3C-LinkChecker-5.0.0
-          cpan CSS::DOM CSS::DOM::Constants CSS::DOM::Style CSS::DOM::Util Config::General HTTP::Cookies LWP::RobotUA LWP::UserAgent Locale::Country Locale::Language Net::HTTP::Methods Net::IP
+          git clone https://github.com/w3c/link-checker.git
+          cd link-checker
+          cpanm --installdeps .
           perl Makefile.PL
           make
           make test
-          make install
+          make install # as root unless you are using local::lib
       - name: Check HTML links with W3C LinkChecker
         continue-on-error: true
         run: |
