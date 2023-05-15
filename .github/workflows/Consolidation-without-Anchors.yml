@@ -30,7 +30,7 @@ jobs:
 
       - name: Download and install W3C LinkChecker
         run: |
-          curl -LO https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
+          wget https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
           tar -xzf W3C-LinkChecker-5.0.0.tar.gz
           cd W3C-LinkChecker-5.0.0
 
@@ -49,6 +49,7 @@ jobs:
           make
           make test
           make install
+
 
 
 
