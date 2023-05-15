@@ -40,7 +40,8 @@ jobs:
 
       - name: Check HTML links with W3C LinkChecker
         continue-on-error: true
-        run: linkchecker .htmltest.yml -o cli
+        run: |
+          checklink -o cli --config .htmltest.yml > htmltest.log || true
 
       - name: HTML test results
         uses: actions/upload-artifact@v2
