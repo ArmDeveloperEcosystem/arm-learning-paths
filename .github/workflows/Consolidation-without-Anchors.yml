@@ -27,6 +27,11 @@ jobs:
 
       - name: Build
         run: hugo --minify
+        
+         sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
 
       - name: Download and install W3C LinkChecker
         run: |
