@@ -46,10 +46,17 @@ jobs:
              pip install -r requirements.txt
              python3 stats_data_generate.py --token ${{ secrets.GITHUB_TOKEN }} --repo https://api.github.com/repos/ArmDeveloperEcosystem/arm-learning-paths/
     
+      # GitHub credential setup
+      - name: setup git config
+        run: |
+              # setup the username and email. 
+              git config user.name "GitHub Actions Stats Bot"
+              git config user.email "<>"
+        
       # Commit updated files in a new PR
       - name: Commit updated stats files to repository
         run: |
-            git add content/stats/stats_weekly_data.yml content/stats/stats_current_test_info.yml
-            git commit -m 'automatic update of stats files'
-            git push
+              git add content/stats/stats_weekly_data.yml content/stats/stats_current_test_info.yml
+              git commit -m 'automatic update of stats files'
+              git push origin master
 
