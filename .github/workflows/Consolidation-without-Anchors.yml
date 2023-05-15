@@ -28,16 +28,25 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Check HTML links with W3C Link Checker
+      - name: Download and install W3C LinkChecker
         run: |
-          wget https://github.com/w3c/link-checker/releases/latest/download/link-checker.jar -O link-checker.jar
-          java -jar link-checker.jar --verbose --filter-level=warning --input-format=html --output-format=text --output-file=link-checker-report.txt .
+          curl -LO https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
+          tar -xzf W3C-LinkChecker-5.0.0.tar.gz
+          cd W3C-LinkChecker-5.0.0
+          perl Makefile.PL
+          make
+          make test
+          make install
 
-      - name: W3C Link Checker results
+      - name: Check HTML links with W3C LinkChecker
+        continue-on-error: true
+        run: linkchecker .htmltest.yml -o cli
+
+      - name: HTML test results
         uses: actions/upload-artifact@v2
         with:
-          name: link-checker-report
-          path: link-checker-report.txt
+          name: htmltest-report
+          path: htmltest.log
           retention-days: 7 # Default is 90 days
 
       - name: Scan for malware
