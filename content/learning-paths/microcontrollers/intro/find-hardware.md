@@ -1,12 +1,10 @@
 ---
 layout: learningpathall
 title: Find Arm hardware
-weight: 2
+weight: 3
 ---
 
-## Find your Arm Hardware 
-
-Evaluation boards (also known as starter kits, or similar) are available from various Arm partners to support their devices. They are used for early software development, prototyping, and demonstration. They come in a wide variety of feature sets and price points. They are typically used stand-alone as provided.
+Evaluation boards (also known as starter kits) are available from various Arm partners to support their devices. They are used for early software development, prototyping, and demonstration. They come in a wide variety of feature sets and price points. They are typically used stand-alone as provided.
 
 Other boards, often referred to as edge computing boards or modules, or as single board computers (SBCs), can be directly used in a final product. These boards typically have a small form-factor so as to be easily designed into commercial products. Debug interfaces, and other features beneficial for early software may not be available.
 
@@ -32,7 +30,7 @@ Other vendors providing such boards include:
 
 Please add your favorite vendors and distributors to the lists.
 
-## Boards used within these learning paths
+## Boards used in Learning Paths
 
 * STM [B-L475E-IOT01A Discovery Board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html)
 * NXP [LPCXpresso55S69 Development Board](https://www.nxp.com/design/development-boards/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK)

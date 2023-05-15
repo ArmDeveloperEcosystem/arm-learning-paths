@@ -1,7 +1,7 @@
 ---
 layout: learningpathall
 title: Find Arm hardware
-weight: 2
+weight: 3
 ---
 
 ## Find Arm Hardware 
@@ -20,7 +20,7 @@ Windows on Arm laptops can also be used for software development.
 
 ### ChromeOS
 
-Chromebooks with Arm processors can also be used for software development. A recent 2-in-1 with good performance is the [Acer Spin 513](https://www.acer.com/us-en/chromebooks/acer-chromebook-spin-513-cp513-2h/pdp/NX.K0LAA.001).
+Chromebooks with Arm processors can also be used for software development. A recent 2-in-1 with good performance is the [Acer Spin 513](https://www.acer.com/us-en/chromebooks/acer-chromebook-spin-513-cp513-2h/pdp/NX.K0LAA.001). The Lenovo [Duet 3](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/ideapad-duet-3-chromebook-(11-inch,-qlc)/len101i0034) and [Duet 5](https://www.lenovo.com/us/en/p/laptops/lenovo/lenovo-edu-chromebooks/ideapad-duet-5-chromebook/len101i0023) are popular detachable Chromebooks. 
 
 ### Linux
 
