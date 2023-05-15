@@ -35,6 +35,7 @@ jobs:
           cd W3C-LinkChecker-5.0.0
           cpan CSS::DOM CSS::DOM::Constants CSS::DOM::Style CSS::DOM::Util Config::General HTTP::Cookies LWP::RobotUA LWP::UserAgent Locale::Country Locale::Language Net::HTTP::Methods Net::IP
           cpan CPAN
+          cpan local::lib
           perl Makefile.PL
           make
           make test
