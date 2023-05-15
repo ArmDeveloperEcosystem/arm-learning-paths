@@ -33,13 +33,22 @@ jobs:
           curl -LO https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
           tar -xzf W3C-LinkChecker-5.0.0.tar.gz
           cd W3C-LinkChecker-5.0.0
-          cpan CSS::DOM CSS::DOM::Constants CSS::DOM::Style CSS::DOM::Util Config::General HTTP::Cookies LWP::RobotUA LWP::UserAgent Locale::Country Locale::Language Net::HTTP::Methods Net::IP
-          cpan CPAN
-          cpan local::lib
+
+          # Install cpanm (CPAN Minus)
+          curl -LO https://cpanmin.us && chmod +x cpanmin.us && ./cpanmin.us local::lib
+
+          # Configure local::lib
+          eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+
+          # Install the required modules using cpanm
+          cpanm CSS::DOM CSS::DOM::Constants CSS::DOM::Style CSS::DOM::Util Config::General HTTP::Cookies LWP::RobotUA LWP::UserAgent Locale::Country Locale::Language Net::HTTP::Methods Net::IP
+
+          # Build and install the W3C LinkChecker module
           perl Makefile.PL
           make
           make test
           make install
+
 
       - name: Check HTML links with W3C LinkChecker
         continue-on-error: true
