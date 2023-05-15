@@ -32,7 +32,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 The latest version of the LLVM toolchain with Windows on Arm native support is 16.0.0. [Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/LLVM-16.0.0-woa64.exe).
 
 {{% notice Note %}}
-A warning message may appear in your browser due to the publisher being listed as Unknown. The warning is: Microsoft Defender SmartScreen couldn't verify if this file is safe because it isn't commonly downloaded. Make sure you trust the file you're downloading or its source before you open it.
+A warning message may appear in your browser due to the publisher being listed as Unknown. The warning is: Microsoft Defender SmartScreen couldn't verify if this file is safe because it isn't commonly downloaded. Make sure you trust the file you're downloading or its source before you open it. It is safe to ignore this warning and proceed.
 {{% /notice %}}
 
 After download, run `LLVM-16.0.0-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
