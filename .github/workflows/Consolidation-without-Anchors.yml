@@ -33,6 +33,7 @@ jobs:
           curl -LO https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
           tar -xzf W3C-LinkChecker-5.0.0.tar.gz
           cd W3C-LinkChecker-5.0.0
+          cpan CSS::DOM CSS::DOM::Constants CSS::DOM::Style CSS::DOM::Util Config::General HTTP::Cookies LWP::RobotUA LWP::UserAgent Locale::Country Locale::Language Net::HTTP::Methods Net::IP
           perl Makefile.PL
           make
           make test
