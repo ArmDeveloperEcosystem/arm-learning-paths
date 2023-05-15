@@ -11,8 +11,8 @@ A real embedded system will need initialization before any other code is execute
 
 ## Write a reset handler
 
-Create a new file, `startup.s`, with the following contents:
-#### startup.s
+Create a new file, `startup_el3.s`, with the following contents:
+#### startup_el3.s
 ```C
   .section  BOOT,"ax"   // Define an executable ELF section, BOOT
   .global el3_entry
@@ -35,9 +35,12 @@ boot:
 ```
 Build the startup code with:
 ```console
-armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a startup.s
+armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a startup_el3.s
 ```
-Identifying the file as `.s` tells the compiler that this is in fact assembler source.
+{{% notice %}}
+The compiler identifies `.s` files as assembler source.
+{{% /notice %}}
+
 
 ### Understanding the reset handler
 
@@ -53,21 +56,24 @@ Modify the scatter file so that the startup code goes into the root region `ROM_
 ```console
   ROM_EXEC +0x0
   {
-    startup.o(BOOT, +FIRST)
+    startup_el3.o (BOOT, +FIRST)
     * (InRoot$$Sections)
     * (+RO)
   }
 ```
 Link the objects, specifying the symbol `el3_entry` as the entry point.
 ```console
-armlink --scatter=scatter.txt hello.o startup.o -o hello.axf --entry=el3_entry
+armlink --scatter=scatter.txt hello.o startup_el3.o -o hello.axf --entry=el3_entry
 ```
 The entry point is used by the linker to determine which code is necessary to keep. It is also used by debuggers to know where to start execution from.
 
 ## Run the new application
 
-You can now successfully execute on the FVP without the additional parameter from before.
+You can now successfully execute on the FVP without the additional `pctl.startup` parameter from before.
 ```console
-FVP_Base_Cortex-A73x2-A53x4 -a hello.axf
+FVP_Base_AEMv8 -a hello.axf
 ```
-The "Hello World!" message appears on screen.
+A single "Hello World!" message is displayed.
+```output
+Hello World!
+```
