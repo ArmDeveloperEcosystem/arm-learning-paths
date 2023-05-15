@@ -393,8 +393,8 @@ def main():
     ### Weekly
     # if weekly dict is empty, create key
     if not existing_weekly_dic:
-        existing_weekly_dic[date_today] = {}
-    # if key already exists in dic, simply update that specific date
+        existing_weekly_dic = {}
+    # if key already exists in dic, overwrite that day with more recent info
     if date_today in existing_tests_dic:
         existing_weekly_dic[date_today].update(new_weekly_entry[date_today])
     else:
