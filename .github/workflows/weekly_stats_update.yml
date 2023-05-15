@@ -58,5 +58,7 @@ jobs:
         run: |
               git add content/stats/stats_weekly_data.yml content/stats/stats_current_test_info.yml
               git commit -m 'automatic update of stats files'
+              git show-ref
+              git status
               git push origin master
 
