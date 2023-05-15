@@ -19,33 +19,34 @@ Steps:
 '''
 
 '''
-2023-Mar-03:                    # Date, updated weekly, in YYYY-MMM-DD format
-  content:                      # Dict of content related stats. Source: # of LP in each directory
-      total: 33                 # raw sum of all all below
-      ucontroller: 5            
-      embedded: 2               
-      desktop: 1                
-      server: 10                
-      mobile: 3                 
-      cross: 2                  # Number of learning paths in cross-platform area; for awareness
-      install_guides: 10        
-  authors:                      # Dict of author stats. Source: Crawl over each LP and IG, urlize author name, and add totals
-      jason_andrews: 24
-      pareena_verma: 22
-      ronan_synnott: 15
-      florent_lebeau: 9
-      jane_doe: 2
-      john_smith: 2
-  contributions:                # Dict of contribution stats. Source: Cross-match found author names in LPs and IGs with 'contributors.csv' to identify them as internal (with company Arm) or external (all others)
-      internal: 70
-      external: 4
-  issues:                               # Dict of GitHub issues raised in this repo. Source: GitHub API
-      avg_close_time_hrs: 42            
-      percent_closed_vs_total: 90.5
-      num_issues: 66
-  github_engagement:                    # Dict of GitHub repo webpage engagement numbers. Source: GitHub API
-      num_prs: 34
-      num_forks: 20
+weekly_in_YYYY_MMM_DD:
+    2023-Mar-03:                    # Date, updated weekly, in YYYY-MMM-DD format
+    content:                      # Dict of content related stats. Source: # of LP in each directory
+        total: 33                 # raw sum of all all below
+        ucontroller: 5            
+        embedded: 2               
+        desktop: 1                
+        server: 10                
+        mobile: 3                 
+        cross: 2                  # Number of learning paths in cross-platform area; for awareness
+        install_guides: 10        
+    authors:                      # Dict of author stats. Source: Crawl over each LP and IG, urlize author name, and add totals
+        jason_andrews: 24
+        pareena_verma: 22
+        ronan_synnott: 15
+        florent_lebeau: 9
+        jane_doe: 2
+        john_smith: 2
+    contributions:                # Dict of contribution stats. Source: Cross-match found author names in LPs and IGs with 'contributors.csv' to identify them as internal (with company Arm) or external (all others)
+        internal: 70
+        external: 4
+    issues:                               # Dict of GitHub issues raised in this repo. Source: GitHub API
+        avg_close_time_hrs: 42            
+        percent_closed_vs_total: 90.5
+        num_issues: 66
+    github_engagement:                    # Dict of GitHub repo webpage engagement numbers. Source: GitHub API
+        num_prs: 34
+        num_forks: 20
 '''
 
 
@@ -388,10 +389,20 @@ def main():
     printInfo(new_weekly_entry,new_tests_entry)
 
     # Update/replace yaml files
-    existing_weekly_dic.update(new_weekly_entry)
+
+    ### Weekly
+    # if weekly dict is empty, create key
+    if not existing_weekly_dic:
+        existing_weekly_dic[date_today] = {}
+    # if key already exists in dic, simply update that specific date
+    if date_today in existing_tests_dic:
+        existing_weekly_dic[date_today].update(new_weekly_entry[date_today])
+    else:
+        existing_weekly_dic.update(new_weekly_entry)
     with open(data_weekly_file_path, 'w') as outfile:
         yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
+    ### Tests
     existing_tests_dic = new_tests_entry
     with open(tests_status_file_path, 'w') as outfile:
         yaml.dump(existing_tests_dic, outfile, default_flow_style=False)
