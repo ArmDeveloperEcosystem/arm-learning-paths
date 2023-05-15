@@ -30,13 +30,15 @@ jobs:
 
       - name: Download and install W3C LinkChecker
         run: |
+          sudo apt-get update
+          sudo apt-get install -y cpanminus
           git clone https://github.com/w3c/link-checker.git
           cd link-checker
           cpanm --installdeps .
           perl Makefile.PL
           make
           make test
-          make install # as root unless you are using local::lib
+          make install
       - name: Check HTML links with W3C LinkChecker
         continue-on-error: true
         run: |
