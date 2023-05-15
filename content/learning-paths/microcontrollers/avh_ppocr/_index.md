@@ -6,7 +6,6 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers interested in using PaddlePaddle for Arm Cortex-M processors.
 
 learning_objectives: 
-    - Train an English text recognition model with PaddleOCR
     - Export Paddle inference model
     - Compile Paddle inference model with TVMC
     - Deploy on the AVH Corstone-300 platform with Arm Cortex-M55

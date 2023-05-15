@@ -22,7 +22,6 @@ armips:
     - Cortex-M
 operatingsystems:
 tools_software_languages:
-    - yml
     - Arm Virtual Hardware
     - GitHub
     - AWS EC2 
