@@ -30,7 +30,7 @@ Starting with version 3.11, an official installer is available.
 
 ## Download and install
 
-[Download the installer](https://www.linaro.org/blog/windows-on-arm-now-supported-in-python-3-11-release/) to get started.
+[Download the installer](https://www.python.org/ftp/python/3.11.0/python-3.11.0-arm64.exe) to get started.
 
 Once downloaded, run the installer exe file on a Windows on Arm machine. 
 
