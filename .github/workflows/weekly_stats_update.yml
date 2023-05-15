@@ -57,6 +57,7 @@ jobs:
       - name: Commit updated stats files to repository
         run: |
               git add content/stats/stats_weekly_data.yml content/stats/stats_current_test_info.yml
-              git commit -m 'automatic update of stats files'
-              git push origin main
+              # Push and commit only if changes to commit; if not, say so and end.
+              git commit -m 'automatic update of stats files' && git push origin main || echo "No changes to commit"
+
 
