@@ -1,7 +1,7 @@
 name: Check Code Quality
 
 on:
-  # Run once a day at 6AM UTC
+  # run once a day at 6AM UTC
   schedule:
     - cron: '0 6 * * *'
 
@@ -28,17 +28,16 @@ jobs:
       - name: Build
         run: hugo --minify
 
-      - name: Download W3C Link Checker
-        run: wget https://validator.w3.org/nu/nu-latest.jar -O vnu.jar
+      - name: Check HTML links with W3C Link Checker
+        run: |
+          wget https://github.com/w3c/link-checker/releases/latest/download/link-checker.jar -O link-checker.jar
+          java -jar link-checker.jar --verbose --filter-level=warning --input-format=html --output-format=text --output-file=link-checker-report.txt .
 
-      - name: Check HTML links
-        run: java -jar vnu.jar --skip-non-html --also-check-css --format json public > htmltest.log || true
-
-      - name: HTML test results
+      - name: W3C Link Checker results
         uses: actions/upload-artifact@v2
         with:
-          name: htmltest-report
-          path: htmltest.log
+          name: link-checker-report
+          path: link-checker-report.txt
           retention-days: 7 # Default is 90 days
 
       - name: Scan for malware
