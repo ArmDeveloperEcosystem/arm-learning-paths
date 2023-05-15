@@ -109,6 +109,16 @@ def pretty(d, indent=0):
       else:
          print('\t' * (indent+1) + str(value))
 
+def printInfo(week,test):
+    print('============================================================================')
+    print('New weekly entry dict appended:')
+    pretty(week)
+    print('============================================================================')
+    print('New test entry dict overwriting:')
+    pretty(test)
+    print('============================================================================')
+
+
 def urlize(in_str):
     # Replacate Hugo urlize function to make it easier to process strings for consistent analysis.
         # ' ' -> '-'
@@ -372,21 +382,19 @@ def main():
     iterateContentIndexMdFiles()
     callGitHubAPI(args.token, args.repo)
 
+    
+
+    # Debug prints in flow
+    printInfo(new_weekly_entry,new_tests_entry)
 
     # Update/replace yaml files
-    '''
-    existing_weekly_dic.update()
-    new_tests_entry.overwrite tests_status_file_path
-
-    '''
-    pretty(new_weekly_entry)
-    print('============================================================================')
-    pretty(new_tests_entry)
-    with open('test.yml', 'w') as outfile:
+    existing_weekly_dic.update(new_weekly_entry)
+    with open(data_weekly_file_path, 'w') as outfile:
         yaml.dump(new_tests_entry, outfile, default_flow_style=False)
-    with open('weekly.yml', 'w') as outfile:
-        yaml.dump(new_weekly_entry, outfile, default_flow_style=False)
 
+    existing_tests_dic = new_tests_entry
+    with open(tests_status_file_path, 'w') as outfile:
+        yaml.dump(existing_tests_dic, outfile, default_flow_style=False)
 
 if __name__ == "__main__":
     main()
