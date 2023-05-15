@@ -28,7 +28,7 @@ jobs:
       - name: Build
         run: hugo --minify
         
-         sudo rm -rf *.tar.bz         
+         sudo rm -rf *       
 
       - name: Download and install W3C LinkChecker
         run: |
