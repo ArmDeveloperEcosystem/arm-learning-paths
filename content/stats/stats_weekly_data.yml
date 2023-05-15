@@ -1,55 +1,137 @@
----
-weekly_dates_in_yyyy_mm_dd:
-  2023-05-03:
-    content:
-        ucontroller: 5
-        embedded: 2
-        desktop: 1
-        server: 10
-        mobile: 3
-        cross: 2
-        install_guides: 10
-    authors:
-        jason_andrews: 24
-        pareena_verma: 22
-        ronan_synnott: 15
-        florent_lebeau: 9
-        jane_doe: 2
-        john_smith: 2
-    contributions:
-        internal: 70
-        external: 4
-    issues:
-        avg_close_time_hrs: 42
-        percent_closed_vs_total: 90.5
-        num_issues: 66
-    github_engagement:
-        num_prs: 34
-        num_forks: 20
-
-  2023-05-07:
-    content:
-        ucontroller: 8
-        embedded: 4
-        desktop: 2
-        server: 10
-        mobile: 5
-        cross: 2
-        install_guides: 13
-    authors:
-        jason_andrews: 25
-        pareena_verma: 22
-        ronan_synnott: 19
-        florent_lebeau: 9
-        jane_doe: 7
-        john_smith: 2
-    contributions:
-        internal: 75
-        external: 9
-    issues:
-        avg_close_time_hrs: 41.2
-        percent_closed_vs_total: 92.2
-        num_issues: 68
-    github_engagement:
-        num_prs: 40
-        num_forks: 21
+summary:
+  content_total: 141
+  content_with_all_tests_passing: 29
+  content_with_tests_enabled: 29
+sw_categories:
+  cross-platform:
+    intrinsics:
+      readable_title: Porting architecture specific intrinsics
+      tests_and_status:
+      - amd64/ubuntu:latest: passed
+      - arm64v8/ubuntu:latest: passed
+  embedded-systems: {}
+  install-guides:
+    acfl:
+      readable_title: Arm Compiler for Linux
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    anaconda:
+      readable_title: Anaconda
+      tests_and_status:
+      - ubuntu:latest: passed
+    arm-gnu:
+      readable_title: Arm GNU Toolchain
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    armclang:
+      readable_title: Arm Compiler for Embedded
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    aws-cli:
+      readable_title: AWS CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    azure-cli:
+      readable_title: Azure CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    cross:
+      readable_title: Cross-compiler
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    gfortran:
+      readable_title: GFortran
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    kubectl:
+      readable_title: Kubectl
+      tests_and_status:
+      - ubuntu:latest: passed
+    native:
+      readable_title: Native compiler
+      tests_and_status:
+      - ubuntu:latest: passed
+      - fedora:latest: passed
+    nomachine:
+      readable_title: NoMachine
+      tests_and_status:
+      - ubuntu:latest: passed
+    terraform:
+      readable_title: Terraform
+      tests_and_status:
+      - ubuntu:latest: passed
+  laptops-and-desktops: {}
+  microcontrollers:
+    tfm:
+      readable_title: Get started with Trusted Firmware-M
+      tests_and_status:
+      - armswdev/arm-tools:bare-metal-compilers: passed
+    zephyr:
+      readable_title: Run the Zephyr RTOS on Arm Corstone-300
+      tests_and_status:
+      - amd64/ubuntu:latest: passed
+  servers-and-cloud-computing:
+    clickhouse:
+      readable_title: Measure performance of ClickHouse on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    codec:
+      readable_title: Run x265 (H.265 codec) on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    geekbench:
+      readable_title: Get started with Geekbench on Arm
+      tests_and_status:
+      - ubuntu:latest: passed
+    memcached:
+      readable_title: Run memcached on Arm servers and measure its performance
+      tests_and_status:
+      - ubuntu:latest: passed
+    memcached_cache:
+      readable_title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm
+        based servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    ml-perf:
+      readable_title: Measure Machine Learning Inference Performance on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    mongodb:
+      readable_title: Learn about MongoDB on Arm servers
+      tests_and_status:
+      - mongo:latest: passed
+    mysql_tune:
+      readable_title: Learn how to Tune MySQL
+      tests_and_status:
+      - ubuntu:latest: passed
+    nginx:
+      readable_title: Learn how to install, configure, and use Nginx
+      tests_and_status:
+      - ubuntu:latest: passed
+    postgresql_tune:
+      readable_title: Learn how to Tune PostgreSQL
+      tests_and_status:
+      - ubuntu:latest: passed
+    ran:
+      readable_title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
+      tests_and_status:
+      - ubuntu:latest: passed
+    snappy:
+      readable_title: Measure performance of compression libraries on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    vectorscan:
+      readable_title: Install Vectorscan (Hyperscan on Arm) and use it with Snort
+        3
+      tests_and_status:
+      - ubuntu:latest: passed
+    zlib:
+      readable_title: Learn how to build and use Cloudflare zlib on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+  smartphones-and-mobile: {}
