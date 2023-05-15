@@ -390,7 +390,7 @@ def main():
     # Update/replace yaml files
     existing_weekly_dic.update(new_weekly_entry)
     with open(data_weekly_file_path, 'w') as outfile:
-        yaml.dump(new_tests_entry, outfile, default_flow_style=False)
+        yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
     existing_tests_dic = new_tests_entry
     with open(tests_status_file_path, 'w') as outfile:
