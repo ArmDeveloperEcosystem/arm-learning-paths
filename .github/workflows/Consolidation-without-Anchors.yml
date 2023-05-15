@@ -50,9 +50,6 @@ jobs:
           make test
           make install
 
-
-
-
       - name: Check HTML links with W3C LinkChecker
         continue-on-error: true
         run: |
