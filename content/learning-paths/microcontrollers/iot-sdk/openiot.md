@@ -11,13 +11,9 @@ layout: "learningpathall"
 
 The Open-IoT-SDK is designed to be used with [Arm Virtual Hardware (AVH)](https://www.arm.com/products/development-tools/simulation/virtual-hardware), which provides [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Virtual Hardware.
 
-## Before you begin
+## Arm Virtual Hardware
 
-Follow the [Arm Virtual Hardware](/install-guides/avh/) install guide for set up instructions. 
-
-Use your AWS account to create an EC2 instance (virtual machine) from the Arm Virtual Hardware (AVH) Amazon Machine Instance (AMI). 
-
-Once your AVH instance is running and you can connect using SSH you are ready to start. Everything can be done from a Linux terminal, and no graphical desktop is needed.
+Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
 ## Install the required software
 
