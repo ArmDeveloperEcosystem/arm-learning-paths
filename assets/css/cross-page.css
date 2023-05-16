@@ -71,11 +71,12 @@
 /* UNIVERSAL */
 /****************************************************/
 
+/* ADS FIXES */
+/***************************************************/
 /* Font size hardcoding to fix ADS */
 ads-tag div {
-        font-size: 14px!important;
-    }
-    
+    font-size: 14px!important;
+}
 p,
 li,
 code,
@@ -85,142 +86,178 @@ input,
 label {
     font-size: 16px!important;
 }
+/* Fix Search Height and pdding*/
+ads-search#search-box {
+    min-height: 45px;
+}
+/*in install guides provide spacing to search field from left and right*/
+ads-search#search-box.install-guide{
+    padding-left: 14px;             
+    padding-right: 14px;
+}
 
+/* Colors of buttons & links to match DevHub styling */
+ads-button {
+    /* primary */
+    --ads-button-background-color-primary-hover: var(--arm-green);
+    --ads-button-border-color-primary-hover: var(--arm-green);
 
+    /* secondary */
+    --ads-button-border-color-secondary-hover: var(--arm-green);
+    --ads-button-color-secondary-hover: var(--arm-green);
+
+    /* tertiary */
+    --ads-button-border-color-tertiary-hover: var(--arm-green);
+    --ads-button-color-tertiary-hover: var(--arm-green);
+}
+/* button, form submit syntax */
+input[type="submit"]:hover {
+    background-color: var(--arm-green);
+    border-color: var(--arm-green);
+    box-shadow: none;
+}
+ads-tag {
+    --ads-tag-border-color-hover: var(--arm-green);
+    --ads-tag-color-hover: var(--arm-green);
+}
+
+/* Remove text decorations on all a links when highlighted */
+a:hover {
+    text-decoration: none;
+    color: var(--arm-green);
+}
+ads-cta-link {
+    --ads-cta-link-color-hover: var(--arm-green);
+}
+ads-search {
+    --ads-search-border-color-hover: var(--arm-green);
+    --ads-search-border-color-focus: var(--arm-green);
+    --ads-search-button-color-hover: var(--arm-green);
+    --ads-search-input-color-focus: var(--arm-green);
+    --ads-search-input-clear-color-hover: var(--arm-green);
+}
+/* counter ADS table defaults */
+table {
+    background-color: transparent;
+    border-color: transparent;  
+}
+table tbody td {
+    border-top: transparent;
+}
 
 /* Fix global nav height */
 /*************************************/
 #global-nav-height-fixer {
-        /*background-color: var(--arm-black);*/
-        background: linear-gradient(0deg, #2d2f34 40%, #010101 40%);
-        max-width: 100vw;
-        min-height: 80px;
-        position: relative;
-        top: 0;
+    background: var(--arm-color-footing);
+    background-color: var(--arm-color-footing);
+    max-width: 100vw;
+    min-height: 80px;
+    position: relative;
+    top: 0;
 }
-
-
 @media (max-width: 1024px) { /* smaller screens than LG */
         #global-nav-height-fixer {
-                background: #010101;
-                /*background-color: #010101; */
-                min-height: 60px;
+            background: var(--arm-color-footing);
+            background-color: var(--arm-color-footing);
+            min-height: 60px;
         }
 }
+
 
 /* Fix Masthead Height */
 #expanded-masthead  {
-        /*background-color: var(--arm-black);*/
-        background: #010101;
-        max-width: 100vw;
-        min-height: 105px;
-        /*position: relative;
-        top: 0;*/
+        background-image: url("/img/masthead-background.png"); /* The image used */
+        background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
+        height: 105px;                      /* You must set a specified height */
+        background-position: center;        /* Center the image */
+        background-repeat: no-repeat;       /* Do not repeat the image */
+        background-size: cover;             /* Resize the background image to cover the entire container */
 }
-
-
 @media (max-width: 768px) { /* smaller screens than MD */
-        #expanded-masthead {
-                background: #010101;
-                /*background-color: #010101; */
-                min-height: 90px;
-        }
+    #expanded-masthead {
+        background-image: url("/img/masthead-background.png"); /* The image used */
+        background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
+        height: 90px;                      /* You must set a specified height */
+        background-position: center;        /* Center the image */
+        background-repeat: no-repeat;       /* Do not repeat the image */
+        background-size: cover;             /* Resize the background image to cover the entire container */
+    }
 }
     
-/* Fix Search Height and pdding*/
-ads-search#search-box {
-        min-height: 45px;
-}
-/*in install guides provide spacing to search field from left and right*/
-ads-search#search-box.install-guide{
-        padding-left: 14px;             
-        padding-right: 14px;
+ads-breadcrumbs {
+    --ads-breadcrumb-color: var(--arm-green);
+    --ads-breadcrumbs-link-color: var(--arm-green);
+    --ads-breadcrumbs-link-color-visited: var(--arm-green);
 }
 
 
 /* Hide breadcrumb when small screen. */
-/* @media (max-width: 576px) {
+ @media (max-width: 576px) {
         #breadcrumb-element {
                 visibility: hidden !important;
+                height: 0px;
         }
-} */
+}
 
 /* Replicate style of breadcrumb in masthead when alone. */
 #only-breadcrumb-masthead {
-width: 100%;
-
-background-color: black;
-
-padding-top: 8px;
-padding-left: 15px; /* u-padding-left-2-1/2 */
-padding-bottom: 8px; 
+    width: 100%;
+    background-color: var(--arm-color-footing);
+    padding-top: 8px;
+    padding-left: 15px; /* u-padding-left-2-1/2 */
+    padding-bottom: 8px; 
 }
 
 
-/* Remove text decorations on all a links when highlighted */
-a:hover {
-        text-decoration: none;
-}
+
 /* Make all links in paragraphs underlined 
 p > a, li > a, td > a {
     text-decoration: underline;
 }
 */
 
-/* Make external link icon have proper spacing */
-.external-link-icon {
-    
-}
-
-
-
 
 /* Light Theme */
 /****************************************************/
 html[theme='light'] body {
-        /*background-color: var(--arm-light-grey-alt); */
-        background-color: white;
-        --ads-table-border-color: white!important;
-}
-html[theme='light'] body.gradient-background {
-        background: radial-gradient(400px at top,#55d5e8,white)!important; 
-        /*background: radial-gradient(400px at top, rgba(0,193,222,1) 0%,var(--arm-light-grey-alt))!important; */
+    background-color: white;
+    --ads-table-border-color: white!important;
 }
 
 /* Dark Theme */
 /****************************************************/
-html[theme='dark'] body {
-        background-color: var(--arm-color-surface);       
+/* Mobile background */
+@media (max-width: 768px) {
+    html[theme='dark'] body {
+        background-image: url("/img/bg-img-736x800.png"); 
+        background-color: var(--arm-color-footing);      
+        background-position: 0% 100%;
+        background-attachment: fixed;
+        background-size: 100% 100%;         /* Forces smaller width; best solution for mobile sizes */
+    } 
+}
+/* Desktop background */
+@media (min-width: 768px) {
+    html[theme='dark'] body {
+        background-image: url("/img/bg-img-1920x1600.png");
+        background-color: var(--arm-color-footing);      
+        background-position: 0% 100%;
+        background-attachment: fixed;
+        background-size: cover;             /* Stretches image to fit; best solution for desktop sizes */
+    } 
 }
 
-html[theme='dark'] body.gradient-background {
-    background: radial-gradient(300px at top,var(--arm-light-blue),var(--arm-color-surface))!important; 
-}
-/*
-    background: var(--arm-color-surface);
-    background-image: radial-gradient(200px at bottom left, var(--arm-light-blue) 0%, var(--arm-color-surface) 100%), radial-gradient(200px at bottom right, var(--arm-green) 0%, var(--arm-color-surface) 100%);
-    background-size: 50%, 50%;
-    background-repeat: no-repeat, no-repeat;
-}
 
-// Gradients on left and right corner, taking into account footer height
-@media only screen and (max-width: 576px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 1600px), calc(100% - 0px) calc(100% - 1600px)!important;}}
-@media only screen and (min-width: 576px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 1000px), calc(100% - 0px) calc(100% - 1000px)!important;}}
-@media only screen and (min-width: 768px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 990px), calc(100% - 0px) calc(100% - 990px)!important;}}
-@media only screen and (min-width: 992px) {body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 520px), calc(100% - 0px) calc(100% - 520px)!important;}}
-@media only screen and (min-width: 1200px){body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 490px), calc(100% - 0px) calc(100% - 490px)!important;}}
-@media only screen and (min-width: 1400px){body.gradient-background {   background-position: calc(0% + 0px) calc(100% - 490px), calc(100% - 0px) calc(100% - 490px)!important;}}
-*/
 
 .is-responsive-width {
-        margin: 0 auto;
-        max-width: 60rem;
-        width: 100%;
+    margin: 0 auto;
+    max-width: 60rem;
+    width: 100%;
 }
 @media (min-width: 768px) {
-        .is-responsive-width {
-                max-width: 70rem !important
-        }
+    .is-responsive-width {
+        max-width: 70rem !important
+    }
 }
 @media (min-width: 992px) {
         .is-responsive-width {

@@ -99,7 +99,7 @@ html[theme='dark'] .content-individual-mobile {
     background-color: var(--arm-dark-grey-alt);
 }
 
-#content-table-of-contents-mobile.inactive:hover { border-color: var(--arm-web-safe-orange); }
+#content-table-of-contents-mobile.inactive:hover { border-color: var(--arm-green); }
 .content-individual-txt-mobile { margin: 0px; }
 .content-individual-txt-mobile.active { color: var(--arm-light-blue); cursor: default ;}
-.content-individual-txt-mobile.inactive:hover { color: var(--arm-web-safe-orange);} /* change color on inactive only */
+.content-individual-txt-mobile.inactive:hover { color: var(--arm-green);} /* change color on inactive only */
