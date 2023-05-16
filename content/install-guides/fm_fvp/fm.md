@@ -67,9 +67,6 @@ Full instructions are provided in the [Fast Models User Guide](https://developer
 
 Arm Fast Models are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license).
 
-![System Canvas #center](sgcanvas.png)
-
-
 ## Verify installation
 
 To verify everything is working OK, you can build one of the many example projects provided.
