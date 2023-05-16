@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Appendix: How to test your code"
+title: "Test your code"
 
 weight: 9 # 1 is first, 2 is second, etc.
 
