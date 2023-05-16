@@ -26,11 +26,11 @@ further_reading:
         type: website
     - resource:
         title: Migrating applications to Arm servers
-        link: /learning-paths/server-and-cloud/migration
+        link: /learning-paths/servers-and-cloud-computing/migration
         type: blog
     - resource:
         title: Port Code to Arm Scalable Vector Extension (SVE)
-        link: /learning-paths/server-and-cloud/sve/
+        link: /learning-paths/servers-and-cloud-computing/sve/
         type: blog
 
 # ================================================================================

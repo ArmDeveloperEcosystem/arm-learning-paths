@@ -16,7 +16,7 @@ You can connect the [Arm Development Studio](https://developer.arm.com/Tools%20a
 It is assumed that `Arm Fast Models` and `Arm Development Studio` are installed, and the appropriate license(s) configured.
 
 If necessary refer to the appropriate `Install Guide`:
-* [Arm Fast Models](/install-guides/fm/)
+* [Arm Fast Models](/install-guides/fm_fvp/fm/)
 * [Arm Development Studio](/install-guides/armds/)
 * [Arm Licensing](/install-guides/license/)
 
