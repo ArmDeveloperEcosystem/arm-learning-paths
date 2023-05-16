@@ -1,11 +1,12 @@
 ---
-title: Get started with Arm hardware
+title: Get started with Laptops and Desktops
 
-minutes_to_complete: 5
+minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for developers new to the Arm architecture and looking for desktop and laptop hardware.
+who_is_this_for: This is an introductory topic for developers working on laptops and desktops and new to the Arm architecture.
 
 learning_objectives:
+    - Understand where the Arm architecture is used in desktop and laptop computers
     - Find desktop and laptop hardware to use for software development
 
 prerequisites:

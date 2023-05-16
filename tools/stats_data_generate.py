@@ -19,33 +19,34 @@ Steps:
 '''
 
 '''
-2023-Mar-03:                    # Date, updated weekly, in YYYY-MMM-DD format
-  content:                      # Dict of content related stats. Source: # of LP in each directory
-      total: 33                 # raw sum of all all below
-      ucontroller: 5            
-      embedded: 2               
-      desktop: 1                
-      server: 10                
-      mobile: 3                 
-      cross: 2                  # Number of learning paths in cross-platform area; for awareness
-      install_guides: 10        
-  authors:                      # Dict of author stats. Source: Crawl over each LP and IG, urlize author name, and add totals
-      jason_andrews: 24
-      pareena_verma: 22
-      ronan_synnott: 15
-      florent_lebeau: 9
-      jane_doe: 2
-      john_smith: 2
-  contributions:                # Dict of contribution stats. Source: Cross-match found author names in LPs and IGs with 'contributors.csv' to identify them as internal (with company Arm) or external (all others)
-      internal: 70
-      external: 4
-  issues:                               # Dict of GitHub issues raised in this repo. Source: GitHub API
-      avg_close_time_hrs: 42            
-      percent_closed_vs_total: 90.5
-      num_issues: 66
-  github_engagement:                    # Dict of GitHub repo webpage engagement numbers. Source: GitHub API
-      num_prs: 34
-      num_forks: 20
+weekly_in_YYYY_MMM_DD:
+    2023-Mar-03:                    # Date, updated weekly, in YYYY-MMM-DD format
+    content:                      # Dict of content related stats. Source: # of LP in each directory
+        total: 33                 # raw sum of all all below
+        ucontroller: 5            
+        embedded: 2               
+        desktop: 1                
+        server: 10                
+        mobile: 3                 
+        cross: 2                  # Number of learning paths in cross-platform area; for awareness
+        install_guides: 10        
+    authors:                      # Dict of author stats. Source: Crawl over each LP and IG, urlize author name, and add totals
+        jason_andrews: 24
+        pareena_verma: 22
+        ronan_synnott: 15
+        florent_lebeau: 9
+        jane_doe: 2
+        john_smith: 2
+    contributions:                # Dict of contribution stats. Source: Cross-match found author names in LPs and IGs with 'contributors.csv' to identify them as internal (with company Arm) or external (all others)
+        internal: 70
+        external: 4
+    issues:                               # Dict of GitHub issues raised in this repo. Source: GitHub API
+        avg_close_time_hrs: 42            
+        percent_closed_vs_total: 90.5
+        num_issues: 66
+    github_engagement:                    # Dict of GitHub repo webpage engagement numbers. Source: GitHub API
+        num_prs: 34
+        num_forks: 20
 '''
 
 
@@ -76,6 +77,8 @@ import os
 import sys
 import csv
 import yaml
+import argparse
+import requests
 from pathlib import Path
 from datetime import datetime
 
@@ -99,6 +102,22 @@ new_tests_entry = {}
 #############################################################################
 
 
+def pretty(d, indent=0):
+   for key, value in d.items():
+      print('\t' * indent + str(key))
+      if isinstance(value, dict):
+         pretty(value, indent+1)
+      else:
+         print('\t' * (indent+1) + str(value))
+
+def printInfo(week,test):
+    print('============================================================================')
+    print('New weekly entry dict appended:')
+    pretty(week)
+    print('============================================================================')
+    print('New test entry dict overwriting:')
+    pretty(test)
+    print('============================================================================')
 
 
 def urlize(in_str):
@@ -125,9 +144,6 @@ def mdToMetadata(md_file_path):
     metadata_dic = yaml.safe_load(metadata_text)
     return metadata_dic
 
-
-
-
 def authorAdd(author_name,tracking_dic):
     ### Update 'authors' area, raw number by each author.
     # Check if author already exists as key. If not, add new key
@@ -142,24 +158,18 @@ def authorAdd(author_name,tracking_dic):
     ### Update 'contributions' area, internal vs external contributions
     
     # open the contributors CSV file
-    found=False
     with open('../contributors.csv', mode ='r')as file:
         csvFile = csv.reader(file)
         for line in csvFile:
             company = line[1]
             # If author in the line, check if they work at Arm or not, and increment contributions number for internal or external
             if author_name in line:
-                found=True
                 if company == 'Arm':
                     tracking_dic['contributions']['internal'] = tracking_dic['contributions']['internal'] + 1
                 else:
                     tracking_dic['contributions']['external'] = tracking_dic['contributions']['external'] + 1
     
-    if not found:
-        print('problem! author not found: ',author_name)
-
-    return tracking_dic, found
-
+    return tracking_dic
 
 def iterateContentIndexMdFiles():
     # set variables to track as we iterate
@@ -211,6 +221,10 @@ def iterateContentIndexMdFiles():
                     continue
             except:
                 pass
+            # If the example learning path, continue
+            if '_example-learning-path' in str(content_index_file.parent):
+                continue
+
 
             # Add to content total (both tests and weekly places for redundency sake)
             weekly_count_dic['total'] = weekly_count_dic['total'] + 1
@@ -219,9 +233,8 @@ def iterateContentIndexMdFiles():
             weekly_count_dic[category] = weekly_count_dic[category] + 1
 
             ######### AUTHOR info
-            weekly_authors_contributions_dic, found = authorAdd(content_metadic['author_primary'],weekly_authors_contributions_dic)
-            if not found:
-                print(content_metadic['title'])
+            weekly_authors_contributions_dic = authorAdd(content_metadic['author_primary'],weekly_authors_contributions_dic)
+            
 
             # Record entry in test file
             try:
@@ -262,17 +275,89 @@ def iterateContentIndexMdFiles():
     new_weekly_entry[date_today]['authors'] = weekly_authors_contributions_dic['authors']
     new_weekly_entry[date_today]['contributions'] = weekly_authors_contributions_dic['contributions']            
 
-def pretty(d, indent=0):
-   for key, value in d.items():
-      print('\t' * indent + str(key))
-      if isinstance(value, dict):
-         pretty(value, indent+1)
-      else:
-         print('\t' * (indent+1) + str(value))
+def callGitHubAPI(GitHub_token,GitHub_repo_name):
+
+    weekly_github_dic = {'issues': {}, 'github_engagement': {}}
+
+
+    headers = {
+        'Authorization': f'token {GitHub_token}',
+        'Accept': 'application/vnd.github.v3+json'
+    }
+    url_issues = f'{GitHub_repo_name}issues'
+    url_pulls  = f'{GitHub_repo_name}pulls'
+    url_forks  = f'{GitHub_repo_name}forks'
+
+    # Get Number of Forks
+    response = requests.get(url_forks, headers=headers)
+    if response.ok:
+        forks = response.json()
+        weekly_github_dic['github_engagement']['num_forks'] = len(forks)
+    else:
+        print(f'ERROR: Failed to fetch GitHub API forks: {url_forks} {response.status_code} {response.reason}')
+        sys.exit(1)
+
+    # Get Number of Pull Requests
+    response = requests.get(url_pulls, headers=headers)
+    if response.ok:
+        pulls = response.json()
+        weekly_github_dic['github_engagement']['num_prs'] = len(pulls)
+    else:
+        print(f'ERROR: Failed to fetch GitHub API forks: {url_pulls} {response.status_code} {response.reason}')
+        sys.exit(1)
+
+    # Get Issues information
+    response = requests.get(url_issues, headers=headers)
+    if response.ok:
+        issues = response.json()
+
+        # Iterate over each issue and read the state
+        closed_num = 0
+        time_differences = []
+        for issue in issues:
+            if issue['state'] == 'closed':
+                # Increment number of closed
+                closed_num = closed_num + 1
+
+                # Get average time
+                created_at = datetime.fromisoformat(issue['created_at'][:-1])
+                closed_at = datetime.fromisoformat(issue['closed_at'][:-1])
+                difference = closed_at - created_at
+                time_differences.append(difference.total_seconds() / 3600)  # Convert to hours
+                
+            print(issue['title'],issue['state'])
+
+        # Calculate average time to close
+        if time_differences:
+            avg_time_to_close = sum(time_differences) / len(time_differences)
+        else:
+            avg_time_to_close = 0
+
+        # Store all stats in github dic            
+        weekly_github_dic['issues']['num_issues'] = len(issues)
+        weekly_github_dic['issues']['percent_closed_vs_total'] = round( (closed_num/len(issues)) * 100, 1) 
+        weekly_github_dic['issues']['avg_close_time_hrs'] = round(avg_time_to_close,1)
+           
+    else:
+        print(f'ERROR: Failed to fetch GitHub API issues:  {url_issues} {response.status_code} {response.reason}')
+        sys.exit(1)
+    
+
+    # Assign to main file
+    new_weekly_entry[date_today]['issues'] = weekly_github_dic['issues']
+    new_weekly_entry[date_today]['github_engagement'] = weekly_github_dic['github_engagement']
 
 
 def main():
     global data_weekly_file_path, tests_status_file_path, learning_path_dir, install_guide_dir, date_today, new_weekly_entry, new_tests_entry
+
+    # Read in params needed for reading GitHub API
+    arg_parser = argparse.ArgumentParser(description='Update Stats')
+    arg_parser.add_argument('-t','--token', help='GitHub personal access token', required=True)
+    arg_parser.add_argument('-r','--repo', help='GitHub repository name', required=True)
+    args = arg_parser.parse_args()
+
+
 
     # Read in data file as python dict
     existing_weekly_dic = yaml.safe_load(data_weekly_file_path.read_text())
@@ -296,19 +381,31 @@ def main():
 
     # Get new stats, filling in new stat dictionaries:
     iterateContentIndexMdFiles()
+    callGitHubAPI(args.token, args.repo)
 
+    
+
+    # Debug prints in flow
+    printInfo(new_weekly_entry,new_tests_entry)
 
     # Update/replace yaml files
-    '''
-    existing_weekly_dic.update()
-    new_tests_entry.overwrite tests_status_file_path
 
-    '''
-    #pretty(new_weekly_entry)
-    #pretty(new_tests_entry)
-    with open('data.yml', 'w') as outfile:
-        yaml.dump(new_tests_entry, outfile, default_flow_style=False)
+    ### Weekly
+    # if weekly dict is empty, create key
+    if not existing_weekly_dic:
+        existing_weekly_dic = {}
+    # if key already exists in dic, overwrite that day with more recent info
+    if date_today in existing_tests_dic:
+        existing_weekly_dic[date_today].update(new_weekly_entry[date_today])
+    else:
+        existing_weekly_dic.update(new_weekly_entry)
+    with open(data_weekly_file_path, 'w') as outfile:
+        yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
+    ### Tests
+    existing_tests_dic = new_tests_entry
+    with open(tests_status_file_path, 'w') as outfile:
+        yaml.dump(existing_tests_dic, outfile, default_flow_style=False)
 
 if __name__ == "__main__":
     main()

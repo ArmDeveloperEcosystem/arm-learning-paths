@@ -1,15 +1,13 @@
 ---
-title: Start developing for Arm microcontroller applications
+title: Get started with Microcontrollers
 
-description: The place to start for developers new to Arm microcontrollers
+minutes_to_complete: 10
 
-minutes_to_complete: 5
-
-who_is_this_for: This is an introductory topic for developers looking for microcontroller hardware.
+who_is_this_for: This is an introductory topic for software developers working on microcontroller applications and new to the Arm architecture.
 
 learning_objectives:
+    - Understand where the Arm architecture is used in microcontrollers
     - Find microcontroller hardware to use for software development
-    - Learn about other available resources
 
 prerequisites:
     - None
