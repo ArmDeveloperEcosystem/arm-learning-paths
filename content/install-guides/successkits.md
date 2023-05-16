@@ -48,7 +48,7 @@ Bundles are provided for Windows, Linux, or Mac OS. Not all components are suppo
 
 [Install Arm Compiler for Embedded](../armclang/)
 
-[Install Arm Fast Models](../fm/)
+[Install Arm Fast Models](../fm_fvp/)
 
 [Install Arm Socrates](../socrates/)
 

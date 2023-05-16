@@ -52,7 +52,7 @@ Install [Docker Engine](/install-guides/docker/docker-engine/) on the EC2 instan
 The Raspberry Pi is setup just like a normal desktop computer and the following is assumed:
 * Running Raspberry Pi OS (64-bit)
 * Docker is installed
-* uSD card inserted
+* MicroSD card inserted
 * Display, mouse and keyboard connected
 * Internet connection
 
@@ -60,7 +60,7 @@ Refer to [Get started with the Raspberry Pi 4](/learning-paths/embedded-systems/
 
 ## Development environment and application porting
 
-Use the same Dockerfile as before, see [Development environment](../4_development_environment#gcc).
+Use the same Dockerfile as before, see [Development environment](../4_development_environment#gcc-container).
 
 You can build the development environment natively on Arm using `docker build` instead of `docker buildx`. 
 

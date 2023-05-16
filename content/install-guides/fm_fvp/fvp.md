@@ -43,7 +43,7 @@ For full list of available options, use:
 
 ## Set up the product license
 
-FVPs are license managed. License setup instructions are available in the [Arm Licensing install guide](install-guides/license).
+FVPs are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license).
 
 {{% notice  Arm Development Tools%}}
 The FVPs provided with Arm Development Studio and/or Keil MDK Professional Edition use the license of that product, not that of the FVP library.
