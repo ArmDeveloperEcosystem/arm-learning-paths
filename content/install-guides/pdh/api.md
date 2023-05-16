@@ -37,7 +37,7 @@ https://developer.arm.com/downloads/token
 ```
 The token is a very long text string, and is valid for one hour.
 
-## Login manager to PDH
+## Login manager to PDH {#login}
 
 Using the token above, register your identity with the `edmgr` utility.
 ```cmd
@@ -45,7 +45,7 @@ edmgr login token <your_token>
 ```
 A successful login should return something similar to:
 ```output
-Token saved in /home/ubuntu/.edm
+Token saved in <save_location>
 ```
 If you get an error similar to:
 ```output
@@ -169,7 +169,7 @@ os.system("rm -rf *.json")
 os.system("ls -l")
 os.system("edmgr logout")
 ```
-which can be executed with:
+which can be executed (after [logging in](#login)) with:
 ```cmd
 python pdh.py
 ```

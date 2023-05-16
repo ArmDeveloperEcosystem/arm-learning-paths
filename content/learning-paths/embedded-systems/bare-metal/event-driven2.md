@@ -11,7 +11,10 @@ Vector tables have a relatively small and fixed number of entries. A real system
 
 ## Set up Generic Interrupt Controller (GIC)
 
-Create `gic.s` with the following code to initialize the GICv3 implemented in the FVP, and define the timer as a source of interrupts. Don't worry for now if you do not understand the workings of this specific code. For detail, see the [GICv3 and GICv4 Software Overview](https://developer.arm.com/documentation/dai0492).
+Create `gic.s` with the following code to initialize the GICv3 implemented in the FVP, and define the timer as a source of interrupts.
+
+For detail on this code, see the [GICv3 and GICv4 Software Overview](https://developer.arm.com/documentation/dai0492).
+
 #### gic.s
 ```C
 	.section GIC,"ax"
@@ -90,7 +93,7 @@ waiting:   // Wait for ChildrenAsleep to read 0
 
 ## Other functions
 
-For convenience, define these functions in your `gic.s` source:
+Define these functions in your `gic.s` source:
 * `readIAR0()` reads the value of the [Interrupt Controller Interrupt Acknowledge Register 0, ICC_IAR0_EL1](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ICC-IAR0-EL1--Interrupt-Controller-Interrupt-Acknowledge-Register-0). The lower 24 bits of this register give the interrupt identifier, `INTID`.
 * `writeEOIR0()` writes `INTID` to the [Interrupt Controller End of Interrupt Register 0, ICC_EOIR0_EL1](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ICC-EOIR0-EL1--Interrupt-Controller-End-Of-Interrupt-Register-0), which tells the processor that that interrupt is complete.
 
@@ -110,7 +113,7 @@ writeEOIR0:
 	MSR        ICC_EOIR0_EL1, x0 // Write x0 to ICC_EOIR0_EL1
 	RET
 ```
-These functions will be used in your `fiqHandler()` implementation.
+These functions will be used in your `fiqHandler()` implementation (written in C).
 
 ## Generic Timer
 
@@ -146,7 +149,7 @@ disableTimer:
 	ISB
 	RET
 ```
-## Add code to enable GIC
+## Enable GIC and Timer
 
 Modify `hello.c` to enable the GIC and timer, and create a simple test. You can use `printf()` statements to follow execution flow.
 
@@ -154,17 +157,19 @@ Modify `hello.c` to enable the GIC and timer, and create a simple test. You can 
 ```C
 #include <stdio.h>
 #include <stdint.h>
+
 #include "uart.h"
 __asm(".global __use_no_semihosting\n\t");
 
 // defined in gic.s
-extern void gicInit(void);
+extern void		gicInit(void);
 extern uint32_t readIAR0(void);
-extern void writeEOIR0(uint32_t);
+extern void		writeEOIR0(uint32_t);
+
 // defined in timer.s
-extern void setTimerPeriod(uint32_t);
-extern void enableTimer(void);
-extern void disableTimer(void);
+extern void 	setTimerPeriod(uint32_t);
+extern void 	enableTimer(void);
+extern void 	disableTimer(void);
 
 volatile uint32_t flag;
 
@@ -185,9 +190,9 @@ int main (void) {
   return 0;
 }
 ```
-## Create fiqHandler code
+## Create fiqHandler()
 
-Finally you can create the `fiqHandler()` function, either in its own source file, or can append to `hello.c`. It reads the `INTID` when triggered, disables the timer, and sets `flag`.
+Create the `fiqHandler()` function in `hello.c`. It reads the `INTID` register when triggered, disables the timer, and sets `flag`.
 
 #### hello.c
 ```C
@@ -212,16 +217,23 @@ void fiqHandler(void) {
 
 You are now ready to test the application. Build the project with:
 ```command
-armclang -c -g --target=aarch64-arm-none-eabi startup.s
+armclang -c -g --target=aarch64-arm-none-eabi startup_el3.s
 armclang -c -g --target=aarch64-arm-none-eabi uart.c
 armclang -c -g --target=aarch64-arm-none-eabi vectors.s
 armclang -c -g --target=aarch64-arm-none-eabi gic.s
 armclang -c -g --target=aarch64-arm-none-eabi timer.s
 armclang -c -g --target=aarch64-arm-none-eabi hello.c
-armlink --scatter=scatter.txt --entry=el3_entry startup.o uart.o vectors.o gic.o timer.o hello.o -o hello.axf
+armlink --scatter=scatter.txt --entry=el3_entry startup_el3.o uart.o vectors.o gic.o timer.o hello.o -o hello.axf
 ```
 To enable the timer in the FVP, add the `-C bp.refcounter.non_arch_start_at_default=1` option to the command line.
 ```command
-FVP_Base_Cortex-A73x2-A53x4 -C bp.refcounter.non_arch_start_at_default=1 -a hello.axf
+FVP_Base_AEMvA -C bp.refcounter.non_arch_start_at_default=1 -a hello.axf
 ```
 Observe the application reporting that the exception occurred.
+```output
+Hello World!
+Waiting for interrupt...
+Interrupt 29 occurred
+Returned from interrupt!
+In _sys_exit. Use Ctrl+C to quit.
+```

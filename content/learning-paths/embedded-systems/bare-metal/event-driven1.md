@@ -13,14 +13,14 @@ For example, a thermostat might monitor room temperature until it drops below a 
 
 ## Configure exception routing to EL3
 
-Our example will implement an FIQ. Specify that the exception is at the highest exception level, `EL3`.
+This example will implement an FIQ. When this occurs, it will go to the highest exception level, `EL3`.
 
-Modify `startup.s` to extend the reset handler to perform the following before branching to `__main`.
+Modify `startup_el3.s` to extend the `boot` code to perform the following, before branching to `__main`.
 
 ### Enable exception routing to EL3
 
 Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/SCR-EL3--Secure-Configuration-Register) to route FIQ exceptions to `EL3`.
-#### startup.s
+#### startup_el3.s
 ```C
 // Configure SCR_EL3
 	MOV  w1, #0
@@ -29,7 +29,7 @@ Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com
 ```
 ### Point to the exception vector table
 Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. You will create `vectors` in the next section.
-#### startup.s
+#### startup_el3.s
 ```C
 // Install vector table
 	.global vectors
@@ -39,17 +39,22 @@ Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/docu
 ```
 ### Disable masking of exceptions at EL3 by PSTATE
 Clear appropriate bits within [DAIF, Interrupt Mask Bits](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/DAIF--Interrupt-Mask-Bits).
-#### startup.s
+#### startup_el3.s
 ```C
 // Clear interrupt masks
 	MSR  DAIFClr, #0xF
 ```
+Save your `startup_el3.s` file.
 
 ## Create exception vector table
 
 The [exception vector table](https://developer.arm.com/documentation/den0024/latest/AArch64-Exception-Handling/AArch64-exception-table) tells the processor what code to run in the event of an exception. The format of this table is fixed and architecturally defined.
 
-Create `vectors.s` containing the following code. you will implement only the necessary FIQ exception for this example. A real system would need to implement all handlers.
+Create `vectors.s` containing the following code.
+
+{{% notice Note%}}
+You will implement only the necessary FIQ exception for this example. A real system would need to implement all handlers.
+{{% /notice %}}
 
 #### vectors.s
 ```C
@@ -80,7 +85,9 @@ lower_el_aarch64_fiq:
 
 ## Create first level FIQ Handler
 
-Each exception has a window of 0x80 bytes in the vector table area to use for its code. In this case you will simply branch to `fiqFirstLevelHandler`, which preserves all registers, before calling `fiqHandler()` (which shall be implemented later). When `fiqHandler()` returns, undo the register preservation, before returning to where the code was before the exception occurred, using the `ERET` instruction.
+Each exception has a window of 0x80 bytes in the vector table area to use for its code. In this case you will simply branch to `fiqFirstLevelHandler`, which preserves all registers, before calling `fiqHandler()` (which shall be implemented later).
+
+When `fiqHandler()` returns, undo the register preservation, before returning to where the code was before the exception occurred, using the `ERET` instruction.
 
 Add the following to your `vectors.s`:
 #### vectors.s

@@ -18,9 +18,6 @@ Set up your build environment by installing the required software packages.
 ```console
 sudo apt-get install -y git curl wget build-essential libssl-dev python3 python3-pip cmake make
 ```
-
-If you want to use Arm Virtual Hardware as a development machine, set it up now using the [install guide](/install-guides/avh/).
-
 You can review the [Trusted Firmware Getting Started](https://tf-m-user-guide.trustedfirmware.org/getting_started/index.html) documentation for more information.
 
 ## Install the required software for the Corstone-1000 stack
@@ -33,6 +30,8 @@ sudo apt-get install -y gawk wget git-core diffstat unzip texinfo gcc-multilib \
  build-essential chrpath socat cpio python3 python3-pip python3-pexpect \
  xz-utils debianutils iputils-ping python3-git libegl1-mesa libsdl1.2-dev \
  xterm zstd liblz4-tool picocom
+```
+```console
 sudo apt-get upgrade -y libstdc++6
 ```
 The [kas](https://pypi.org/project/kas/) utility is used to build the supplied projects. Install with:
