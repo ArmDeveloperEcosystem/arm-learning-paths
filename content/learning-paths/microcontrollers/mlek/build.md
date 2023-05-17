@@ -31,7 +31,7 @@ Both compilers are pre-installed in Arm Virtual Hardware.
 
 ### Corstone-300 FVP {#fvp}
 
-To install the Corstone-300 FVP on your computer refer to the [install guide for Arm Ecosystem FVPs](/install-guides/ecosystem_fvp/). 
+To install the Corstone-300 FVP on your computer refer to the [install guide for Arm Ecosystem FVPs](/install-guides/fm_fvp). 
 
 The Corstone-300 FVP is pre-installed in Arm Virtual Hardware. 
 

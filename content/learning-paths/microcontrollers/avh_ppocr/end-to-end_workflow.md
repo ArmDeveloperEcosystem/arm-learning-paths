@@ -20,11 +20,11 @@ The steps involved in the model deployment are shown in the figure below:
 
 Start by launching the [Arm Virtual Hardware AMI](/install-guides/avh/).
 
-Alternatively, you can also download the Corstone-300 FVP from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [Arm Ecosystem FVPs](/install-guides/ecosystem_fvp/).
+Alternatively, you can also download the Corstone-300 FVP from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. For installation instructions see [Arm Ecosystem FVPs](/install-guides/fm_fvp/eco_fvp/).
 
 The code for this [project](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH/tree/main/OCR-example), is available to download from [ArmDeveloperEcosystem](https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH) GitHub repository as well as [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR/tree/dygraph/deploy/avh)’s GitHub repository (under the dygraph branch). 
 
-Start by cloning the code respository on your running AVH AMI instance:
+Start by cloning the code repository on your running AVH AMI instance:
 
 ```console
 git clone https://github.com/ArmDeveloperEcosystem/Paddle-examples-for-AVH.git

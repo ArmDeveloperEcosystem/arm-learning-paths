@@ -1,7 +1,7 @@
 ---
 layout: learningpathall
 title: Find Arm hardware
-weight: 2
+weight: 3
 ---
 Server hardware, based on Arm Neoverse processors, is available from cloud service providers (CSPs) and server vendors. 
 
@@ -11,17 +11,19 @@ Creating an account with a cloud service provider (CSPs) is the easiest way to g
 
 Software developers often try Arm hardware as a way to reduce cost and improve application performance.
 
-Major cloud providers offer Arm instances based on Neoverse processors. For example:
+Cloud providers offer Arm instances based on Neoverse processors. For example:
 - [Alibaba Cloud](https://www.alibabacloud.com/product/ecs/g8m)
 - [Amazon Web Services (AWS)](https://aws.amazon.com/ec2/graviton/)
 - [Google Cloud](https://cloud.google.com/compute/docs/instances/arm-on-compute)
 - [Microsoft Azure](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/)
 - [Oracle Cloud](https://www.oracle.com/cloud/compute/arm/)
+- [Scaleway](https://www.scaleway.com/en/amp2-instances/)
+- [Hetzner Cloud](https://www.hetzner.com/news/arm64-cloud)
 
 Free tier offers are currently available.
 - [Amazon EC2 t4g.small instances powered by AWS Graviton2 processors are free until Dec 31st 2023](https://aws.amazon.com/ec2/instance-types/t4/)
 - [Oracle free tier includes up to 4 instances of ARM Ampere A1 Compute which are always free](https://www.oracle.com/cloud/free/)
-- [Until April 5, 2023 Tau T2A VMs in Google Cloud are available for a free trial](https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#t2afreetrial)
+- [Until March 31, 2024 Tau T2A VMs in Google Cloud are available for a free trial](https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#t2afreetrial)
 
 [Get started with Arm-based cloud service platforms](/learning-paths/servers-and-cloud-computing/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
 

@@ -15,7 +15,7 @@ You can connect the [Arm Development Studio](https://developer.arm.com/Tools%20a
 
 You should have Arm Development Studio installed and your license configured. Refer to the [Arm Development Studio install guide](/install-guides/armds/) for more information.
 
-You should also have Arm Fast Models installed and your license configured. Refer to the [Arm Fast Models install guide](/install-guides/fm/) for more information.
+You should also have Arm Fast Models installed and your license configured. Refer to the [Arm Fast Models install guide](/install-guides/fm_fvp/) for more information.
 
 ### If Fast Models are not available
 
