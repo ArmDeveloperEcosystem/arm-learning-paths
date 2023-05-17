@@ -1,57 +1,15 @@
-
-name: scan
-
-# Controls when the workflow will run
-on:
-
-  # run once a day at 6AM UTC
-  schedule:
-    - cron: '0 6 * * *'
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-jobs:
-  # This workflow contains a single job called "build"
-  scan:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+- name: Azure DevOps Security Scan
+        uses: actions/setup-dotnet@v3
         with:
-          submodules: true  # Fetch Hugo Themes
-          fetch-depth: 0 
+          dotnet-version: |
+            5.0.x
+            6.0.x
+- name: Run Microsoft Security DevOps
+        uses: microsoft/security-devops-action@preview
+        id: msdo
 
-      # Sets Up Hugo
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+- name: Upload results to Security tab
+        uses: actions/upload-artifact@v3
         with:
-            hugo-version: '0.98.0'
-            extended: true
-            
-      # Builds arm-software-developer repo
-      - name: Build
-        run: hugo --minify
-      
-      - name: Install OpenVAS
-        run: sudo apt-get install openvas
-
-      - name: Run OpenVAS scan
-        run: |
-          sudo openvas-start
-          sudo openvasmd --rebuild --progress
-          sudo openvasmd --create-user=admin --role=Admin
-          sudo openvasmd --user=admin --new-password= P@$$w)rd!@
-          sudo openvasmd --get-users
-
-      - name: Upload report
-        uses: actions/upload-artifact@v2
-        with:
-          name: report
-          path: /var/log/gvm/gvmd.log
-
-
+          path: ${{ steps.msdo.outputs.sarifFile }}
+          retention-days: 7 # Default is 90 days

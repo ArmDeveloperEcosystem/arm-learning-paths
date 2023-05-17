@@ -1,0 +1,44 @@
+name: profanity
+
+# Controls when the workflow will run
+on: 
+  push:
+    branches: [ main ]
+  
+  workflow_dispatch:
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  profanity_scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: true  # Fetch Hugo Themes
+          fetch-depth: 0 
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.3
+  
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install better_profanity
+
+      - name: Scan for profanities
+        run: |
+          cd tools
+          pwd
+          python profanity.py
+          cat ../profanity_log.txt
+      
+      - name: Export profanities
+        uses: actions/upload-artifact@v3
+        with:
+          name: profanities
+          path: profanity_log.txt
+          retention-days: 7
