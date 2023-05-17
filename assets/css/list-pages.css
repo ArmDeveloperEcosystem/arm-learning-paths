@@ -141,13 +141,22 @@ ads-expansion-panel.learning-path-filters {
 }
 
 html[theme='dark'] ads-expansion-panel.learning-path-filters {
-    --ads-expansion-panel-border-color: var(--arm-black);
+    --ads-expansion-panel-border-color: var(--arm-color-footing);
+    --ads-expansion-panel-content-background-color: var(--arm-color-footing);
+    --ads-expansion-panel-toggle-background-color: var(--arm-color-footing);
+    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-footing);
 
-    --ads-expansion-panel-content-background-color: var(--arm-color-surface);
-    --ads-expansion-panel-toggle-background-color: var(--arm-color-surface);
-    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-surface);
-
+    --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
 }
+
+/* mobile facets styling */
+div#facets-background > ads-expansion-panel.learning-path-filters {
+    --ads-expansion-panel-border-color: var(--arm-color-base);
+    --ads-expansion-panel-content-background-color: var(--arm-color-base);
+    --ads-expansion-panel-toggle-background-color: var(--arm-color-base);
+    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-base);   
+}
+
 
 ads-checkbox {
     --ads-checkbox-margin-left: 0px;

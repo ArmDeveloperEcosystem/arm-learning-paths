@@ -95,6 +95,9 @@ ads-search#search-box.install-guide{
     padding-left: 14px;             
     padding-right: 14px;
 }
+ads-search {
+    --ads-search-button-background-color: var(--arm-color-base);
+}
 
 /* Colors of buttons & links to match DevHub styling */
 ads-button {
@@ -208,6 +211,32 @@ ads-breadcrumbs {
     padding-bottom: 8px; 
 }
 
+
+
+/*************************************/
+/* Beta tag                         */
+#beta-tag {
+    font-size: 12px!important;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 0px;
+    border-color: rgba(149, 214, 0, 0.25); /* var(--arm-green) with 25% transparency */
+    border-color: rgba(0, 193, 222, 0.25); /* var(--arm-light-blue) with 25% transparency */
+
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 2px;
+    vertical-align: top;
+    display:inline-block;
+
+    width: fit-content;
+    height: fit-content;
+
+    background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 
 /* Make all links in paragraphs underlined 
