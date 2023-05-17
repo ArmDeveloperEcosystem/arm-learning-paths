@@ -27,7 +27,8 @@ div.content-box {
     border-width: 1px;
     border-radius: 5px;
 
-    border-color: var(--arm-dark-grey);
+    border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
+    background-color: rgba(31,32,35,0.75);  /* var(--arm-color-base) at 75% transparency */
 }
 html[theme="light"] div.content-box {
     background-color: white;
@@ -74,8 +75,8 @@ div.markdown-content-div > table {
     margin-left: 16px;
     margin-bottom: 24px;
 }
-html[theme="light"] div.markdown-content-div > table tbody { background-color: var(--arm-light-grey-alt); }
-html[theme="dark"]  div.markdown-content-div > table tbody { background-color: var(--arm-color-overlay-light); }
+html[theme="light"] div.markdown-content-div > table tbody { background-color: var(--arm-white); }
+html[theme="dark"]  div.markdown-content-div > table tbody { background-color: var(--arm-color-base); }
 
 
 div.markdown-content-div > div.code-toolbar {

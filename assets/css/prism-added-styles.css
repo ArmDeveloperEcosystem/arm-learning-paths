@@ -4,7 +4,11 @@
 html[theme="dark"] .copy-to-clipboard-button {
     color: black!important;
     background-color: var(--arm-light-blue)!important;}
-.copy-to-clipboard-button:hover span {font-weight: bold;}
+
+html[theme="dark"] .copy-to-clipboard-button:hover {
+    background-color: var(--arm-green)!important;
+    border: 1px solid var(--arm-green)!important;
+}
 
 /* if '__output__' is at the start of a line, style differently */
 /*in prismjs:  		if (element.classList.contains('language-output')) { return } */
