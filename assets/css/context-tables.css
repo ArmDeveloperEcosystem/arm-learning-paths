@@ -1,35 +1,42 @@
 .width-max-content {
-    width: max-content;
+  width: max-content;
 }
 td.nowrap {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .td-metadata-key {
-    height: fit-content;
-    padding: 0px;
-    margin: 0px;
-    vertical-align:top;
+  height: fit-content;
+  padding: 0px;
+  margin: 0px;
+  vertical-align: top;
 }
 
 .td-metadata-value {
-    height: fit-content; 
-    width: fit-content; 
-    padding: 0px; 
-    margin: 0px; 
-    padding-left: 8px;
+  height: fit-content;
+  width: fit-content;
+  padding: 0px;
+  margin: 0px;
+  padding-left: 8px;
 }
 
 .margin-l-0 {
-    padding-left: 0px!important;
+  padding-left: 0px !important;
 }
 .margin-l-12 {
-    padding-left: 12px!important;
+  padding-left: 12px !important;
 }
 .margin-l-24 {
-    padding-left: 24px!important;
+  padding-left: 24px !important;
 }
 
 .author-social-icon {
-    padding-left: 12px;
+  padding-left: 12px;
+}
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 24px;
 }

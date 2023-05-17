@@ -1,16 +1,18 @@
 {{/*
-Formats content from markdown files.
-
-Where it is used:
-    - learning paths
-
-Called from:
-    - partials learning-paths/learningpathall.html
-*/}}
-
-<!-- Markdown content -->
-<div class="content-box markdown-content-div">
-    {{ with .context.Content }}
-        {{ . }}
-    {{ end }}
-</div>
+    Formats content from markdown files.
+    
+    Where it is used:
+        - learning paths
+    
+    Called from:
+        - partials learning-paths/learningpathall.html
+    */}}
+    
+    <!-- Markdown content -->
+    <div class="content-box markdown-content-div">
+        {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }}
+        {{ with .context.Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+            {{ . }}
+        {{ end }}
+    </div>
+    
