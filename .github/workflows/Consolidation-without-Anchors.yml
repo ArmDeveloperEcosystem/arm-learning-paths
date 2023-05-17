@@ -27,30 +27,13 @@ jobs:
 
       - name: Build
         run: hugo --minify
-        
-         sudo rm -rf *.tar.bz         
 
-      - name: Download and install W3C LinkChecker
-        run: |
-          wget https://cpan.metacpan.org/authors/id/D/DH/DHM/W3C-LinkChecker-5.0.0.tar.gz
-          tar -xzf W3C-LinkChecker-5.0.0.tar.gz
-          cd W3C-LinkChecker-5.0.0
-          # Install cpanm (CPAN Minus)
-          curl -LO https://cpanmin.us
-          perl cpanmin.us --self-upgrade --no-wget App::cpanminus
-          # Configure local::lib
-          eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
-          # Install the required modules using cpanm
-          cpanm CSS::DOM CSS::DOM::Constants CSS::DOM::Style CSS::DOM::Util Config::General HTTP::Cookies LWP::RobotUA LWP::UserAgent Locale::Country Locale::Language Net::HTTP::Methods Net::IP
-          # Build and install the W3C LinkChecker module
-          perl Makefile.PL
-          make
-          make test
-          make install
-      - name: Check HTML links with W3C LinkChecker
+      - name: Check HTML links
         continue-on-error: true
         run: |
-          checklink -o cli --config .htmltest.yml > htmltest.log || true
+          sudo apt-get install w3c-checklink
+          w3c-checklink -r public > htmltest.log
+
       - name: HTML test results
         uses: actions/upload-artifact@v2
         with:
@@ -62,6 +45,7 @@ jobs:
         run: |
           tools/install-scan.sh
           clamscan -r -i public -l scanlog
+
       - name: Scan results
         uses: actions/upload-artifact@v2
         with:
