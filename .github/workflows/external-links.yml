@@ -16,16 +16,24 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11.3
+
       - name: Check external HTML links
         continue-on-error: true
         run: |
-          sudo pip3 install linkchecker 
-          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/servers-and-cloud-computing/
-          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/laptops-and-desktops/
-          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/smartphones-and-mobile/
-          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/embedded-systems/
-          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/microcontrollers/
-        shell: bash
-        env:
-          URL: ${{secrets.STAGE_URL}}
+          pip install linkchecker 
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/laptops-and-desktops/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/servers-and-cloud-computing/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/smartphones-and-mobile/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/embedded-systems/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/microcontrollers/
 

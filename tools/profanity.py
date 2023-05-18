@@ -15,7 +15,6 @@ def scan_for_profanities(directory, log_file, excluded_words_file=None):
         for root, dirs, files in os.walk(directory):
             for file in files:
                 if file.endswith('.md'):  # Read only markdown files
-                    print(file)
                     file_path = os.path.join(root, file)
                     with open(file_path, 'r') as code_file:
                         content = code_file.read()

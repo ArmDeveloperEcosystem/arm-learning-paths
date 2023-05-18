@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check_links:
+  check_content:
     runs-on: ubuntu-latest
 
     steps:
