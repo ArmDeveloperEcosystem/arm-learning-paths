@@ -27,7 +27,7 @@ jobs:
 
       - name: Build
         run: hugo --minify
-
+ 
       - name: Check HTML links
         continue-on-error: true
         run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
