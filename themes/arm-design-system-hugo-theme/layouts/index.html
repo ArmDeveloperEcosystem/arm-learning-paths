@@ -19,62 +19,152 @@ Website homepage.
 <!-- Header, replacing the masthead -->
 <div class="homepage-top-divs" id="title-div">
     <span>
-        <h1 id="homepage-header">Learning Paths</h1>
+        <h1 id="homepage-header" class="orchard-breeze-text">Learning Paths</h1>
         <div id="beta-tag">beta</div>
     </span>
 </div>
 <div class="homepage-top-divs homepage-top-desc">
     <p style="margin: 0px;">Tutorials designed to help you develop quality Arm software faster.</p>
-    <!-- <p style="margin: 0px; margin-bottom: 16px;">This site is hosted through GitHub, where you can view the <a target="_blank" href="{{$gh_project_repo}}">source code{{partial "general-formatting/external-link"}}</a> and submit <a target="_blank" href="{{$gh_project_repo}}">ideas for new Learning Paths{{partial "general-formatting/external-link"}}</a>. You can author a Learning Path by following <a target="_blank" href="{{$gh_project_repo}}">these steps{{partial "general-formatting/external-link"}}</a>.</p> -->
-    <p style="margin: 0px; margin-bottom: 16px;">You can request a new Learning Path be created if it does not exist yet, or contribute yourself alongside Arm Engineers and the Arm Ecosystem.</p>
-    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute</ads-button>
-    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request</ads-button> 
 </div>
 
 
 <!-- List of Learning Path Topics & Install Guide -->
 <div class="c-row u-margin-top-1">
     <div class="c-col">
-        <div class="u-display-grid u-gap-2 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
-
+        <div class="u-display-grid u-gap-2 md:u-grid-columns-3 lg:u-grid-columns-3 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
             <ads-card has-hover-effect id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
-                <ads-card-image slot="image" alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.jpg" class="u-bg-position-top"></ads-card-image>
-                <ads-card-content slot="content">
-                    <h2 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{.Title}} </h2>      
-                    <p class="main-topic-subtitle">
-                        <
-                        {{- delimit .Params.key_ip "&nbsp;&nbsp;&nbsp;" -}}
-                        >
+                <ads-card-content class="maintopic-content" slot="content">
+                    <!--
+                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.png" style="width: 100%;" />
+                    <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
+                    -->
+                    <span >
+                        <img style="vertical-align:middle; margin-left:-16px; margin-top:-4px;" alt="{{.Title}} image" src="img/icons/{{.Title | urlize}}.png" class="maintopic-image" />
+                        <h5 style="display:inline-block" class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h5>   
+                    </span>
+
+
+                    <p class="main-topic-subtitle u-margin-top-0 u-margin-bottom-0">
+                        {{- delimit .Params.key_ip ", " -}}
                     </p>
-                    <p class="u-margin-bottom-0">
-                        {{range .Params.differentiating_info}}
-                        {{.}}.&nbsp;&nbsp;&nbsp; 
-                        {{end}}
-                    </p>                    
+                    <p class="u-margin-bottom-0 u-margin-top-1/2">
+                        {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
+                    </p>   
                 </ads-card-content>   
             </ads-card>
             {{ end }}
 
-            <ads-card class="main-topic-card" id="tool-install">
-                <ads-card-image slot="image" alt="install guide image" src="/img/main-topic-backgrounds/tools.jpg" class="u-bg-position-center"></ads-card-image>
-                <ads-card-content slot="content">
-                    <p>Looking for instructions to install a tool?</p>
-                        <ads-search has-search-button id="search-box" placeholder="Search by tool name" class="u-width-auto"></ads-search>
-                        <ads-cta-link link='/install-guides' class="install-guide-cta u-margin-top-1/2">See all</ads-cta-link>
-                </ads-card-content>
-            </ads-card>
+            <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
+                <ads-card-content class="maintopic-content" slot="content">
+                    <!-- <img alt="install guide image" src="/img/main-topic-backgrounds/tools.jpg" class="maintopic-image" /> -->
+                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.png" style="width: 100%;" />
 
+                    <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3>   
+                    <p class="main-topic-subtitle u-margin-top-0 u-margin-bottom-0">
+                        Arm,  Open Source,  Commercial
+                    </p>
+                    <p class="u-margin-bottom-0 u-margin-top-1/2">
+                        Simple guides to install new tools.
+                    </p>   
+                </ads-card-content> 
+            </ads-card>
         </div>
     </div>
 </div>
-<!--
-<div class="c-row u-margin-top-3">
+
+
+<!-- Top Contributors table -->
+<div class="homepage-top-divs">
+    <h2 style="margin-top:64px; margin-bottom:8px" class="orchard-breeze-text">Supported by the Arm Ecosystem</h2>
+    <p style="margin: 0px; margin-bottom: 16px;">You can request a new Learning Path be created if it does not exist yet, or contribute yourself alongside Arm Engineers and the Arm Ecosystem.</p>
+    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute</ads-button>
+    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request</ads-button> 
+</div>
+
+<div class="c-row u-margin-top-1">
     <div class="c-col">
-        <p>Want to create a Learning Path yourself? Read the <a href="/learning-paths/cross-platform/_example-learning-path/">contributor learning path here</a>.</p>
+        <div class="u-display-grid u-gap-3 u-grid-columns-1">
+            <table class="contributor-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Author
+                        </th>
+                        <th>
+                            Company
+                        </th>
+                        <th>
+                            Recently created Learning Path
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <span>
+                                <span class="u-margin-right-1">Gabriel Peterson</span>
+                                <a href='{{printf "https://github.com/%s" "gabrieldpeterson"}}'   target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>
+                                <a href='{{printf "https://linkedin.com/in/%s" "gabrieldpeterson"}}' target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>
+                                <a href='{{printf "https://twitter.com/%s" "@gabedpeterson"}}'  target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>   
+                                <a href='{{"https://corteximplant.com/@gabe" | safeURL}}'  target="_blank"  aria-label="author-social"><i class="author-social-icon fa  fa-blog"></i></a>      
+                            </span>                            
+                        </td>
+                        <td>
+                            Arm
+                        </td>
+                        <td>
+                            <a href="/learning-paths/laptops-and-desktops/pinebook-pro/">AWS IoT Greengrass</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>
+                                <span class="u-margin-right-1">Brenda Strech</span>
+                                <a href='{{printf "https://github.com/%s" "bstrech"}}'   target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>
+                                <a href='{{printf "https://linkedin.com/in/%s" "bstrech"}}' target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>
+                                <a href='{{printf "https://twitter.com/%s" "@remote_it"}}'  target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>   
+                                <a href='{{"https://www.remote.it" | safeURL}}'  target="_blank"  aria-label="author-social"><i class="author-social-icon fa  fa-blog"></i></a>      
+                            </span>       
+                        </td>
+                        <td>
+                            Remote.It
+                        </td>
+                        <td>
+                            <a href="/learning-paths/cross-platform/remoteit/">Access remote devices with Remote.It</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Christopher Seidl
+                        </td>
+                        <td>
+                            Arm
+                        </td>
+                        <td>
+                            <a href="/learning-paths/microcontrollers/keilstudiocloud/">Get Started with Keil Studio Cloud</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>                           
+                            <span>
+                                <span class="u-margin-right-1">Julio Suarez</span>
+                                <a href='{{printf "https://github.com/%s" "jsrz"}}'   target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>
+                                <a href='{{printf "https://linkedin.com/in/%s" "juliosuarez"}}' target="_blank" aria-label="linkedin"><i class="author-social-icon fab fa-linkedin"></i></a>
+                            </span>     
+                        </td>
+                        <td>
+                            Arm
+                        </td>
+                        <td>
+                            <a href="/learning-paths/servers-and-cloud-computing/mysql_tune/">Learn how to Tune MySQL</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
--->
 
 <!-- Space from page bottom -->
 <div class="u-margin-4"></div>

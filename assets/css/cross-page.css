@@ -148,11 +148,24 @@ table tbody td {
     border-top: transparent;
 }
 
+
+
+/* Fix Nav Masthead Breadcrumb container */
+/*************************************/
+#nav-masthead-breadcrumbs {
+    background-image: url("/img/masthead-background.png"); /* The image used */
+    background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
+    background-size: cover;
+}
+
+
+
+
 /* Fix global nav height */
 /*************************************/
 #global-nav-height-fixer {
-    background: var(--arm-color-footing);
-    background-color: var(--arm-color-footing);
+    background: transparent;
+    background-color: transparent;
     max-width: 100vw;
     min-height: 80px;
     position: relative;
@@ -160,8 +173,6 @@ table tbody td {
 }
 @media (max-width: 1024px) { /* smaller screens than LG */
         #global-nav-height-fixer {
-            background: var(--arm-color-footing);
-            background-color: var(--arm-color-footing);
             min-height: 60px;
         }
 }
@@ -169,8 +180,7 @@ table tbody td {
 
 /* Fix Masthead Height */
 #expanded-masthead  {
-        background-image: url("/img/masthead-background.png"); /* The image used */
-        background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
+        background-color: transparent;
         height: 105px;                      /* You must set a specified height */
         background-position: center;        /* Center the image */
         background-repeat: no-repeat;       /* Do not repeat the image */
@@ -178,15 +188,12 @@ table tbody td {
 }
 @media (max-width: 768px) { /* smaller screens than MD */
     #expanded-masthead {
-        background-image: url("/img/masthead-background.png"); /* The image used */
-        background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
         height: 90px;                      /* You must set a specified height */
-        background-position: center;        /* Center the image */
-        background-repeat: no-repeat;       /* Do not repeat the image */
-        background-size: cover;             /* Resize the background image to cover the entire container */
     }
 }
     
+
+
 ads-breadcrumbs {
     --ads-breadcrumb-color: var(--arm-green);
     --ads-breadcrumbs-link-color: var(--arm-green);

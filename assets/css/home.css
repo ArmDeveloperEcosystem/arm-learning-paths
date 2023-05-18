@@ -13,12 +13,17 @@ ads-card.main-topic-card {
 }
 
 html[theme='dark'] ads-card.main-topic-card {
-    --ads-card-background-color: var(--arm-color-overlay-dark);
-    --ads-card-border-color: var(--arm-black);
 
-    --ads-card-background-color-hover: var(--black);
-    --ads-card-border-color-hover: var(--arm-web-safe-orange);
-    --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(255, 255, 255, 0.25);
+    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-border-color: #000000;
+    --ads-card-box-shadow:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
+    
+    /* hover state */
+    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-border-color-hover: var(--arm-green);
+    --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
+
+
 }
 
 html[theme='light'] ads-card.main-topic-card{
@@ -30,16 +35,25 @@ html[theme='light'] ads-card.main-topic-card{
     --ads-card-box-shadow-hover: 0 1px 3px 3px rgba(0,0,0,0.25);
 }
 
+.maintopic-content {
+    text-align: left;
+}
+
+.maintopic-image {
+    /*width: 124px;*/
+    /*height: 70px;*/
+    height: 50px;
+}
 
 /* Title styling */
 /**************************************/
 ads-card.main-topic-card  .main-topic-title {
-    color: var(--arm-blue);
+    color: var(--arm-light-blue);
 }
 
 ads-card.main-topic-card:hover  .main-topic-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-web-safe-orange);
+    color: var(--arm-green);
 }
 
 
@@ -47,11 +61,12 @@ ads-card.main-topic-card:hover  .main-topic-title {
 /**************************************/
 ads-card.main-topic-card  .main-topic-subtitle {
     color: var(--arm-black);
-    font-family: "Source Code Pro", monospace;   
+    font-family: "Source Code Pro", sans-serif;   
+    font-weight: lighter;
 }
 
 html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
-    color: var(--arm-light-grey); 
+    color:  #A3A8AE;
 }
 
 
@@ -87,8 +102,36 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 }
 
 
-html[theme="dark"] #homepage-header {
+html[theme="dark"] .orchard-breeze-text {
     background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+
+
+
+
+
+
+
+
+/*******************************/
+/* Table styled */
+
+
+table.contributor-table {
+    min-width: max-content;     /* No full-length tables unless there is a reason */
+
+    margin-top: 16px;
+    margin-left: 192px;
+    margin-right: 192px;
+    margin-bottom: 24px;
+}
+table.contributor-table th { 
+    background-color: #A3A8AE; 
+    color: black;
+}
+table.contributor-table tbody { 
+    background-color: var(--arm-color-base); 
 }
