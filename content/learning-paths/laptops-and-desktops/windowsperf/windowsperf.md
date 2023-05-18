@@ -7,96 +7,47 @@ weight: 2
 
 Learn more in this [blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf) announcing the first release.
 
-## Windows on Arm platform
+For installation instructions see the [install guide](/install-guides/wperf).
 
-You will need access to a Windows on Arm (WoA) [Desktop, laptop, or development platform](/learning-paths/laptops-and-desktops/intro/find-hardware).
+## Using WindowsPerf
 
-{{% notice  Virtual Machines%}}
-WindowsPerf cannot be used on virtual machines, such as cloud instances.
-{{% /notice %}}
-
-## Windows Driver Kit (WDK) and Visual Studio
-
-WindowsPerf relies on `dll` files installed with Visual Studio and installers from the Windows Driver Kit extension.
-
-This Microsoft [article](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) explains the installation process.
-
-See also the [Visual Studio on WoA install guide](/install-guides/vs-woa/).
-
-## Download WindowsPerf
-
-The latest release package `windowsperf-bin-<version>.zip` can be downloaded from the Linaro GitLab repository:
-```url
-https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
-```
-Unzip the package to your preferred location.
-
-Open a `Windows Command Prompt` terminal as `Administrator`, and navigate to the `windowsperf-bin-<version>` directory.
-
-## Install wperf driver
-
-You can install the kernel driver using either the Visual Studio [devcon](#devcon) utility or the supplied [installer](#devgen).
-
-### Install with devcon {#devcon}
-
-Navigate into the `wperf-driver` folder, and use `devcon` to install the driver:
+For a list of all available options, enter:
 ```command
-cd wperf-driver
-devcon install wperf-driver.inf Root\WPERFDRIVER
-```
-You will see output similar to:
-```output
-Device node created. Install is complete when drivers are installed...
-Updating drivers for Root\WPERFDRIVER from <path>\wperf-driver.inf.
-Drivers installed successfully.
-```
-### Install with wperf-devgen {#devgen}
-
-Copy the `wperf-devgen.exe` executable to the `wperf-driver` folder.
-```command
-copy wperf-devgen.exe wperf-driver\
-```
-Navigate to the `wperf-driver` folder and run the installer:
-```command
-cd wperf-driver
-wperf-devgen install
-```
-You will see output similar to:
-```output
-Executing command: install.
-Install requested.
-Waiting for device creation...
-Device installed successfully.
-Trying to install driver...
-Success installing driver.
-```
-
-## Verify install
-
-You can check everything is working by running the `wperf` executable:
-```command
-cd ..
-wperf -version
-```
-You should see output similar to:
-```output
-Component     Version
-=========     =======
-wperf         2.4.0
-wperf-driver  2.4.0
-```
-
-## Using wperf
-For a complete list of available options enter:
-```cmd
 wperf -h
 ```
-### Generate a test output
 
-Generate a list of available `events` to be profiled with:
+## List available events
+
+WindowsPerf uses Arm processor `Performance Monitoring Unit` (`PMU`) counters to generate its data. The available `events` that can be profiled will vary per target.
+
+To generate a list of available events, use:
 ```command
-wperf -l
+wperf list
 ```
+
+The output should be similar to:
+
+```output
+List of pre-defined events (to be used in -e)
+
+        Alias Name              Raw Index  Event Type
+        ==========              =========  ==========
+        sw_incr                      0x00  [core PMU event]
+        l1i_cache_refill             0x01  [core PMU event]
+...
+
+List of supported metrics (to be used in -m)
+
+        Metric  Events
+        ======  ======
+        dcache  {l1d_cache,l1d_cache_refill,l2d_cache,l2d_cache_refill,inst_retired}
+        dtlb    {l1d_tlb,l1d_tlb_refill,l2d_tlb,l2d_tlb_refill,inst_retired}
+        icache  {l1i_cache,l1i_cache_refill,l2i_cache,l2i_cache_refill,inst_retired}
+...
+```
+
+## Generate sample profile
+
 Specify the `event` to profile with `-e`. Groups of events, known as `metrics` can be specified with `-m`.
 
 For example, generate a report for Core 0 (`-c 0`) for two seconds (`-d 2`) with:
