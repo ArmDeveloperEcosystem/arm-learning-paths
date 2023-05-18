@@ -145,7 +145,7 @@ function addFacet(element) {
      document.querySelector('#current-tag-bar').insertAdjacentHTML(
          'beforeend',
          `
-         <ads-tag href="#" class="filter-facet u-margin-left-1/2 u-margin-top-1/2 u-margin-bottom-1/2 `+filter_group+`" id="filter-${tag}">
+         <ads-tag class="filter-facet u-margin-left-1/2 u-margin-top-1/2 u-margin-bottom-1/2 `+filter_group+`" id="filter-${tag}">
              <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                  <div class="filter-facet-display-name">${display_tag}</div>
                  <a onclick="removeFacet('${tag}')">
