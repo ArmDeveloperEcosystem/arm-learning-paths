@@ -39,18 +39,6 @@ jobs:
           path: htmltest.log
           retention-days: 7 # Default is 90 days
 
-      - name: Scan for malware
-        run: |
-          tools/install-scan.sh
-          clamscan -r -i public -l scanlog
-
-      - name: Scan results
-        uses: actions/upload-artifact@v2
-        with:
-          name: clamscan-log
-          path: scanlog
-          retention-days: 7 # Default is 90 days
-
       - name: Spell check
         uses: rojopolis/spellcheck-github-actions@0.30.0
         with:
@@ -63,4 +51,32 @@ jobs:
         with:
           name: spellcheck-output
           path: spellcheck-output.txt
+          retention-days: 7 # Default is 90 days
+
+      - name: Scan for malware
+        run: |
+          tools/install-scan.sh
+          clamscan -r -i public -l scanlog
+
+      - name: Scan results
+        uses: actions/upload-artifact@v2
+        with:
+          name: clamscan-log
+          path: scanlog
+          retention-days: 7 # Default is 90 days
+
+      - name: Azure DevOps Security Scan
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            5.0.x
+            6.0.x
+      - name: Run Microsoft Security DevOps
+        uses: microsoft/security-devops-action@preview
+        id: msdo
+
+      - name: Upload results to Security tab
+        uses: actions/upload-artifact@v3
+        with:
+          path: ${{ steps.msdo.outputs.sarifFile }}
           retention-days: 7 # Default is 90 days

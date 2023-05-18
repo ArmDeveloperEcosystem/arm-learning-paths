@@ -1,0 +1,31 @@
+
+name: external-links
+
+# Controls when the workflow will run
+on:
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  check-external-links:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Check external HTML links
+        continue-on-error: true
+        run: |
+          sudo pip3 install linkchecker 
+          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/servers-and-cloud-computing/
+          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/laptops-and-desktops/
+          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/smartphones-and-mobile/
+          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/embedded-systems/
+          linkchecker --no-robots --ignore-url github.com --check-extern $URL/learning-paths/microcontrollers/
+        shell: bash
+        env:
+          URL: ${{secrets.STAGE_URL}}
+
