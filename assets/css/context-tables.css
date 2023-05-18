@@ -40,3 +40,6 @@ td.nowrap {
   margin-left: 16px;
   margin-bottom: 24px;
 }
+.table-wrapper table tbody td {
+  word-break: break-word;
+}
