@@ -99,7 +99,7 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 #homepage-header {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 75px;
+/*    font-size: 75px; */
     padding-bottom: 16px;
     display: inline-block;
 }
