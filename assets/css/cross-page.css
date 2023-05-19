@@ -234,15 +234,32 @@ ads-breadcrumbs {
     padding-left: 4px;
     padding-right: 4px;
     padding-bottom: 2px;
-    vertical-align: top;
-    display:inline-block;
-
     width: fit-content;
     height: fit-content;
 
     background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+.beta-homepage {
+    vertical-align: top;
+    display:inline-block;
+}
+.beta-masthead {
+    right: 16px; 
+    position: absolute; 
+    top: 40px;
+    padding-left: 4px;
+    padding-right: 4px;
+    padding-bottom: 2px;
+}
+
+
+
+
+.table-wrapper-for-overflow {
+    width: 100%;
+    overflow-x: auto;
 }
 
 

@@ -88,6 +88,9 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
     width:fit-content;  
     margin: 0 auto;
     text-align: center;
+    padding-left: 16px;
+    padding-right: 16px;
+
 }
 .homepage-top-desc {
     margin-bottom: 32px;
@@ -121,17 +124,20 @@ html[theme="dark"] .orchard-breeze-text {
 
 
 table.contributor-table {
-    min-width: max-content;     /* No full-length tables unless there is a reason */
-
-    margin-top: 16px;
-    margin-left: 192px;
-    margin-right: 192px;
-    margin-bottom: 24px;
+    width: fit-content;
+    margin: 0 auto; /* center hor */
 }
+
+table.contributor-table td { 
+    padding-right: 16px;
+}
+
 table.contributor-table th { 
+    padding-right: 16px;
     background-color: #A3A8AE; 
     color: black;
 }
 table.contributor-table tbody { 
     background-color: var(--arm-color-base); 
 }
+

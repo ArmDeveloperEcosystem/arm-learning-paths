@@ -106,9 +106,7 @@ Calls to:
         <!-- Main content display-->
         <div class="content-box markdown-content-div">
             <!-- Content -->
-            {{ with .Content }}
-                {{ . }}
-            {{ end }}
+            {{partial "general-formatting/markdown-content-formatting.html" .Content}}
         </div>
 
         <!-- Multi-tool routing to subtool pages, only for main multi_install page -->
