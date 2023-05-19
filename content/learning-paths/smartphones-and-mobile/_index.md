@@ -5,6 +5,7 @@ differentiating_info:
 - Graphics
 key_ip:
 - Cortex-A
+- Cortex-X
 - Mali
 - Immortalis
 maintopic: true

@@ -254,9 +254,25 @@ ads-breadcrumbs {
     padding-bottom: 2px;
 }
 
+/*************************************/
+/* Simple Div container JUST for border gradient outline. */
+/*
+div.path-div::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    padding: 1px;
+    background: linear-gradient(45deg,#95D629,#20C1DE);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: add, add;
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+*/
 
-
-
+/*************************************/
+/* Table overflow for all tables     */
 .table-wrapper-for-overflow {
     width: 100%;
     overflow-x: auto;
