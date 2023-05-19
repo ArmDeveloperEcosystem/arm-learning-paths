@@ -40,7 +40,7 @@ Website homepage.
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
             <ads-card has-hover-effect id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
                 <ads-card-content class="maintopic-content" slot="content">
-                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.png" style="width: 100%;" />
+                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
                     <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
 
                     <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
@@ -55,7 +55,7 @@ Website homepage.
 
             <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
                 <ads-card-content class="maintopic-content" slot="content">
-                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.png" style="width: 100%;" />
+                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
                     <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
                     <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
                         Arm,  Open Source,  Commercial
@@ -126,7 +126,7 @@ Website homepage.
             <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
                 <ads-card-content class="maintopic-content" slot="content">
                      <span>
-                        <img style="vertical-align:middle; margin-left:-16px; margin-top:-4px;" alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.jpg" class="maintopic-image" />
+                        <img style="vertical-align:middle; margin-right: 12px; margin-top:-4px;" alt="{{.Title}} image" src="img/icons/tools.png" class="maintopic-image" />
                         <h5 style="display:inline-block" class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h5>   
                     </span>
                     <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">

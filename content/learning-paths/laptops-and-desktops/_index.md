@@ -5,6 +5,7 @@ differentiating_info:
 - Linux
 key_ip:
 - Cortex-A
+- Cortex-X
 maintopic: true
 operatingsystems_filter:
 - ChromeOS: 1
