@@ -1,0 +1,20 @@
+{{/* All content is filtered through this partial to add styling/formatting to markdown files from authors. Currently:
+    1. Add a <div> around tables for mobile scrolling.
+*/}}
+
+{{$formatted_content := .}}
+
+
+
+
+{{/* Table modification */}}
+{{$wrappedTable := printf "<div class=table-wrapper-for-overflow> ${1} </div>"}}
+{{/* (?:...) A non-capturing group allows you to apply quantifiers to part of your regex but does not capture/assign an ID.  */}}
+{{$formatted_content = $formatted_content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML}}
+
+
+
+{{/* display content */}}
+{{with $formatted_content }}
+    {{.}}
+{{end}}

@@ -35,7 +35,7 @@ html[theme='sw-hub'] div#facets-background { background-color: var(--arm-light-g
 /* overall mobile container */
 div.content-head-container-mobile {
     position:sticky; 
-    top:0px;
+    top:57px; /* Sticky to top, leaving space for global nav */
     z-index: 4;
     width: 100%;
 }
