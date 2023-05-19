@@ -33,7 +33,7 @@ After the installation completes, close the installer.
 
 ## Compile a WPF application natively on Windows on Arm with .NET 6 framework
 
-This Learning Path uses a sample Windows Presentation Foundation (WPF) application that solves a well-known algorithmic problem: the [Travelling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem).
+This Learning Path uses a sample Windows Presentation Foundation (WPF) application that solves a well-known algorithmic problem: the [Traveling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem).
 
 This sample application is chosen because it is CPU intensive, and makes use of graphics to test the capabilities of WPF in .NET 6.
 
@@ -47,7 +47,7 @@ To compile and run this WPF application using .NET 6 on a Windows on Arm device,
 
 ![img3](net3.png)
 
-3. In the `Repository location` field enter `https://github.com/GVerelst/TravelingSalesman`.
+3. In the `Repository location` field enter `https://github.com/GVerelst/TravelingSalesman`
 
 4. Enter an appropriate `Path` where you would like to clone the repository on your machine. In this example, it is `C:\TravelingSalesman`. Then select `Clone`.
 
@@ -61,7 +61,7 @@ To compile and run this WPF application using .NET 6 on a Windows on Arm device,
 
 ![img5](net5.png)
 
-8. Save the changes to the project(Ctrl+S)
+8. Save the changes to the project (Ctrl+S)
 
 9. In Solution Explorer, right-click the `TSP.WPF` project and select `Publish`. The Publish dialog appears.  
 
@@ -85,11 +85,11 @@ To compile and run this WPF application using .NET 6 on a Windows on Arm device,
 
 ![img9](net9.png)
 
-16. Click Publish. Visual Studio compiles a version of the project that is native executable on Aarch64 devices as shown in the image below:
+16. Click Publish. Visual Studio compiles a version of the project that is native executable on Arm devices as shown in the image below:
 
 ![img10](net10.png)
 
-17. You should see a message that Publish succeedded. Click on `Open Folder` to view the generated binaries including the `TSP.WPF` application.
+17. You should see a message that Publish succeeded. Click on `Open Folder` to view the generated binaries including the `TSP.WPF` application.
 
 ![img11](net11.png)
 
