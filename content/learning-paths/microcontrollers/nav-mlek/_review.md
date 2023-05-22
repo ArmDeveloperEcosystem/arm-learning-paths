@@ -13,33 +13,24 @@
 review:
     - questions:
         question: >
-            Data replication is supported in Redis.
+            Is it possible to develop machine learning applications without a physical board?
         answers:
-            - "True"
-            - "False"
-        correct_answer: 1                     
-        explanation: >        
-            Redis uses by default asynchronous replication.
+            - "Yes"
+            - "No"
+        correct_answer: 1                  
+        explanation: >
+            You can develop applications on models, but remember that models are abstracted and are not recommended for detailed benchmarking. 
+
     - questions:
         question: >
-            Redis-cli is used to interact with Redis.
+            Machine learning applications use the same software building blocks, and only the training data changes based on the application. 
         answers:
             - "True"
             - "False"
-        correct_answer: 1                     
+        correct_answer: 2                  
         explanation: >
-            Redis-cli allows sending commands to Redis and read the replies sent by the server directly from the terminal.
-               
-    - questions:
-        question: >
-            Redis is a multi-threaded architecture.
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 2                     
-        explanation: >
-            Redis is a single-threaded architecture.
-            
+            There are numerous ways to create ML applications on Cortex-M using a variety of ML frameworks and libraries. 
+
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
