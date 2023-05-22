@@ -1,7 +1,7 @@
 ---
 title: Deploy Redis as a cache for MySQL and PostgreSQL on Arm servers
 
-minutes_to_complete: 60   
+minutes_to_complete: 90   
 
 who_is_this_for: This is an advanced topic for developers who want to deploy Redis as a cache on Arm based virtual machines.
 
