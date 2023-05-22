@@ -7,14 +7,19 @@
   
   <!-- No masthead on homepage, as that has a special gradient look/feel -->
   {{ if .IsHome }}
-    <div id="global-nav-height-fixer">
+     <div id="global-nav-height-fixer" class="nav-black">
         <arm-top-navigation></arm-top-navigation>
+    </div>
+    <div id="only-breadcrumb-masthead">
+        <div class="is-responsive-width">
+            {{partial "header/breadcrumbs.html" .}}
+        </div>
     </div>
   {{else}}
 
     <div id="nav-masthead-breadcrumbs">
         <!-- Global Nav -->
-        <div id="global-nav-height-fixer">
+        <div id="global-nav-height-fixer" class="nav-transparent">
             <arm-top-navigation></arm-top-navigation>
         </div>
         <!-- Masthead -->

@@ -20,7 +20,7 @@ html[theme='dark'] ads-card.main-topic-card {
     
     /* hover state */
     --ads-card-background-color-hover: var(--arm-color-base);
-    --ads-card-border-color-hover: var(--arm-green);
+    --ads-card-border-color-hover: transparent;
     --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
 
 
@@ -61,7 +61,7 @@ ads-card.main-topic-card:hover  .main-topic-title {
 /**************************************/
 ads-card.main-topic-card  .main-topic-subtitle {
     color: var(--arm-black);
-    font-family: "Source Code Pro", sans-serif;   
+    font-family: "Source Code Pro", monospace;
     font-weight: lighter;
 }
 
@@ -75,6 +75,18 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 /**************************************/
 .install-guide-cta {
     --ads-cta-link-color: var(--arm-light-blue); /* #107a97 slightly darker web safe blue */
+}
+
+
+.homepage-or {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+/* Hide 'or' when small screen. */
+@media (max-width: 576px) {
+    .homepage-or {
+            display: none!important;
+    }
 }
 
 

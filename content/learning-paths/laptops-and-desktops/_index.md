@@ -4,8 +4,8 @@ differentiating_info:
 - ChromeOS
 - Linux
 key_ip:
-- Cortex-A
 - Cortex-X
+- Cortex-A
 maintopic: true
 operatingsystems_filter:
 - ChromeOS: 1

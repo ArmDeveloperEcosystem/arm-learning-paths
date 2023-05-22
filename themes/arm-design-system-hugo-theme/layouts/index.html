@@ -22,6 +22,19 @@ Website homepage.
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- Header, replacing the masthead -->
 <div class="homepage-top-divs" id="title-div">
     <span>
@@ -31,14 +44,6 @@ Website homepage.
 </div>
 <div class="homepage-top-divs homepage-top-desc">
     <p style="margin: 0px; color: #A3A8AE;">Tutorials designed to help you develop quality Arm software faster.</p>
-    <p style="margin: 0px; margin-bottom: 0px; color: #A3A8AE;">You can request a new Learning Path be created if it does not exist yet, or contribute yourself alongside Arm Engineers and the Arm Ecosystem.</p>
-    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">All content is covered by the<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
-        Creative Commons License
-        {{partial "general-formatting/external-link.html"}}         
-    </a>.</p>
-
-    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute</ads-button>
-    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request</ads-button> 
 </div>
 
 <!-- List of Learning Path Topics & Install Guide -->
@@ -46,33 +51,37 @@ Website homepage.
     <div class="c-col">
         <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-            <ads-card has-hover-effect id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
-                <ads-card-content class="maintopic-content" slot="content">
-                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
-                    <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
+            <div class="gradient-box">
+                <ads-card  id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
+                    <ads-card-content class="maintopic-content" slot="content">
+                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
 
-                    <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                        {{- delimit .Params.key_ip ", " -}}
-                    </p>
-                    <p class="u-margin-bottom-0 u-margin-top-0">
-                        {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
-                    </p>   
-                </ads-card-content>   
-            </ads-card>
+                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
+                            <{{- delimit .Params.key_ip ", " -}}>
+                        </p>
+                        <p class="u-margin-bottom-0 u-margin-top-0">
+                            {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
+                        </p>   
+                    </ads-card-content>   
+                </ads-card>
+            </div>
             {{ end }}
+            <div class="gradient-box">
 
-            <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
-                <ads-card-content class="maintopic-content" slot="content">
-                    <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
-                    <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
-                    <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                        Arm,  Open Source,  Commercial
-                    </p>
-                    <p class="u-margin-bottom-0 u-margin-top-0">
-                        Simple guides to install new tools.
-                    </p>   
-                </ads-card-content> 
-            </ads-card>
+                <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
+                    <ads-card-content class="maintopic-content" slot="content">
+                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
+                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
+                            &#60;Arm,  Open Source,  Commercial>
+                        </p>
+                        <p class="u-margin-bottom-0 u-margin-top-0">
+                            Simple guides to install new tools.
+                        </p>   
+                    </ads-card-content> 
+                </ads-card>
+            </div>
         </div>
     </div>
 </div>
@@ -81,18 +90,21 @@ Website homepage.
 
 
 
+<div class="homepage-top-divs">
+    <h3 style="margin-top:64px; margin-bottom:8px">Created by the Arm Ecosystem</h3>
+    <p style="margin: 0px; margin-bottom: 0px; color: #A3A8AE;">You can request a new Learning Path be created if it does not exist yet, or contribute yourself alongside Arm Engineers and the Arm Ecosystem.</p>
+    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">All content is covered by the<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
+        Creative Commons License
+        {{partial "general-formatting/external-link.html"}}         
+    </a>.</p>
 
-<br><br><br><br><br><br><br><br><br><br><br><br>
+    <ads-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request a new path</ads-button> 
+    <span class="homepage-or" style="color: #A3A8AE;">or</span>
+    <ads-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute a new path</ads-button>
+</div>
 
 
-
-
-
-
-
-
-
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 
@@ -105,46 +117,50 @@ Website homepage.
 </div>
 <div class="homepage-top-divs homepage-top-desc">
     <p style="margin: 0px; color: #A3A8AE;">Tutorials designed to help you develop quality Arm software faster.</p>
+    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">Contribute yourself alongside Arm Engineers and the Arm Ecosystem. All content is covered by the<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
+        Creative Commons License
+        {{partial "general-formatting/external-link.html"}}         
+    </a>.</p>
+    <ads-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request a new path</ads-button> 
+    <span class="homepage-or" style="color: #A3A8AE;">or</span>
+    <ads-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute a new path</ads-button>
 </div>
 
-
-
 <!-- List of Learning Path Topics & Install Guide -->
-<div class="c-row u-margin-top-1">
+<div class="c-row u-margin-top-0">
     <div class="c-col">
-        <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
+        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-            <ads-card has-hover-effect id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
-                <ads-card-content class="maintopic-content" slot="content">
-                    <span>
-                        <img style="vertical-align:middle; margin-left:-16px; margin-top:-4px;" alt="{{.Title}} image" src="img/icons/{{.Title | urlize}}.png" class="maintopic-image" />
-                        <h5 style="display:inline-block" class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h5>   
-                    </span>
+            <div class="gradient-box">
+                <ads-card has-hover-effect id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
+                    <ads-card-content class="maintopic-content" slot="content">
+                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
 
-                    <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                        {{- delimit .Params.key_ip ", " -}}
-                    </p>
-                    <p class="u-margin-bottom-0 u-margin-top-0">
-                        {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
-                    </p>   
-                </ads-card-content>   
-            </ads-card>
+                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
+                            <{{- delimit .Params.key_ip ", " -}}>
+                        </p>
+                        <p class="u-margin-bottom-0 u-margin-top-0">
+                            {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
+                        </p>   
+                    </ads-card-content>   
+                </ads-card>
+            </div>
             {{ end }}
-
-            <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
-                <ads-card-content class="maintopic-content" slot="content">
-                     <span>
-                        <img style="vertical-align:middle; margin-right: 12px; margin-top:-4px;" alt="{{.Title}} image" src="img/icons/tools.png" class="maintopic-image" />
-                        <h5 style="display:inline-block" class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h5>   
-                    </span>
-                    <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                        Arm,  Open Source,  Commercial
-                    </p>
-                    <p class="u-margin-bottom-0 u-margin-top-0">
-                        Simple guides to install new tools.
-                    </p>   
-                </ads-card-content> 
-            </ads-card>
+            <div class="gradient-box">
+                <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
+                    <ads-card-content class="maintopic-content" slot="content">
+                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
+                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
+                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
+                            &#60;Arm,  Open Source,  Commercial>
+                        </p>
+                        <p class="u-margin-bottom-0 u-margin-top-0">
+                            Simple guides to install new tools.
+                        </p>   
+                    </ads-card-content> 
+                </ads-card>
+            </div>
         </div>
     </div>
 </div>
@@ -153,18 +169,7 @@ Website homepage.
 
 
 
-<!-- Top Contributors table -->
-<div class="homepage-top-divs">
-    <h3 style="margin-top:64px; margin-bottom:8px" class="orchard-breeze-text">Supported by the Arm Ecosystem</h3>
-    <p style="margin: 0px; margin-bottom: 0px; color: #A3A8AE;">You can request a new Learning Path be created if it does not exist yet, or contribute yourself alongside Arm Engineers and the Arm Ecosystem.</p>
-    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">All content is covered by the<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
-        Creative Commons License
-        {{partial "general-formatting/external-link.html"}}         
-    </a>.</p>
 
-    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute</ads-button>
-    <ads-button id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request</ads-button> 
-</div>
 
 
 <!-- Space from page bottom -->
