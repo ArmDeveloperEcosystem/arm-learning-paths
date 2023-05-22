@@ -47,7 +47,7 @@ To generate and configure the Access key ID and Secret access key, follow this [
 
 ## Create an AWS EC2 instance using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`.
+Using a text editor, save the code below in a file called `main.tf`:
     
 ```console
 provider "aws" {
@@ -173,7 +173,7 @@ Run `terraform plan` to create an execution plan.
 terraform plan
 ```
 
-A long output of resources to be created will be printed. 
+A long output of resources to be created will be printed to the console.
 
 ### Apply a Terraform execution plan
 
@@ -278,7 +278,7 @@ Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` in this file with 
 
 ### Ansible Commands
 
-Run the playbook using the  `ansible-playbook` command:
+Run the playbook using the `ansible-playbook` command:
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory
@@ -348,7 +348,7 @@ PLAY RECAP *********************************************************************
 
 ## Connect to Database from local machine
 
-To connect to the database, you need the `public-ip` of the instance where MySQL is deployed. You also need to use the MySQL Client to interact with the MySQL database.
+To connect to the database, you need the `public-ip` of the instance where MySQL is deployed. You also need to use the MySQL Client to interact with the MySQL database. Run the commands as shown:
 
 ```console
 apt install mysql-client
@@ -380,7 +380,7 @@ mysql>
 
 ### Access Database and Create Table
 
-1. You can access your database by using the below commands.
+1. You can access your database by using the commands as shown:
 
 ```console
 show databases;
@@ -408,7 +408,7 @@ mysql> use arm_test1;
 Database changed
 ```
 
-2. Use the below commands to create a table and insert values into it.
+2. Use the commands below to create a table and insert values into it:
 
 ```console
 create table book(name char(10),id varchar(10));
@@ -431,7 +431,7 @@ Records: 7  Duplicates: 0  Warnings: 0
 
 ```
 
-3. Use the below command to access the content of the table.
+3. Use the command below to access the content of the table:
 
 ```console
 select * from {{your_table_name}};
@@ -456,7 +456,7 @@ mysql> select * from book;
 7 rows in set (0.00 sec)
 ```
 
-4. Now connect to the second instance and repeat the above steps with a different data as shown below.    
+4. Now connect to the second instance and repeat the above steps with a different database as shown below:
        
 The output will be:
 
@@ -503,14 +503,16 @@ mysql> select * from movie;
 
 You will create two `.py` files on the host machine to deploy Redis as a MySQL cache using Python: `values.py` and `redis_cache.py`.
 
-`values.py` to store the IP addresses of the instances and the databases created in them.
+Using a text editor of your choice, create the file `values.py` with the content below: 
 ```console
 MYSQL_TEST=[["{{public_ip of MYSQL_TEST[0]}}", "arm_test1"],
 ["{{public_ip of MYSQL_TEST[1]}}", "arm_test2"]]
 ```
 Replace `{{public_ip of MYSQL_TEST[0]}}` & `{{public_ip of MYSQL_TEST[1]}}` with the public IPs generated in the `/tmp/inventory` file after running the Terraform commands.
 
-`redis_cache.py` to access data from Redis Cache and, if not present, store it in the Redis Cache.   
+`values.py` is used to store the IP addresses of the instances and the databases created in them.
+
+Now create the file `redis_cache.py` with the content below: 
 ```console
 import sys
 import MySQLdb
@@ -558,6 +560,8 @@ else:
 ```
 Replace `{{Your_database_user}}` & `{{Your_database_password}}` with the database user and password created through Ansible-Playbook. Also change the `range` in `for loop` according to the number of instances created.
 
+`redis_cache.py` is used to access data from Redis Cache and, if not present, store it in the Redis Cache.
+
 Install the required Python modules using `pip` and other required dependencies:
 ```console
 apt-get install redis libmysqlclient-dev
@@ -574,7 +578,7 @@ Replace `{database_name}` with the database you want to access, `{query}` with t
 
 When the script is executed for the first time, the data is loaded from the MySQL database and stored in the Redis cache.
 
-The output will be:
+The output will be similar to:
 ```output
 ubuntu@ip-172-31-38-39:~/mysql$ python3 redis_cache.py  -db arm_test1 -k AA -q "select * from book limit 3"
 Updated redis with MySQL data
@@ -618,7 +622,9 @@ redis-cli -p 6379
 ```console
 get <key>
 ```
-**NOTE:-** Key is the variable in which you store the data. In the above command, you are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
+{{% notice Note %}}
+Key is the variable in which you store the data. In the above command, you are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
+{{% /notice %}}
 
 The output will be:
 

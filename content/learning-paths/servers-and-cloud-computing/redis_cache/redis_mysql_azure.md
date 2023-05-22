@@ -38,8 +38,7 @@ For Azure authentication, follow this [guide](/install-guides/azure_login).
 
 ### Generate an SSH key-pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Azure instance access. To generate the key-pair, follow this [
-guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Azure instance access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}} 
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -49,7 +48,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 For Azure Arm based instance deployment, the Terraform configuration is broken into three files: `providers.tf`, `variables.tf` and `main.tf`. Here you are creating 2 instances.
 
-Add the following code in `providers.tf` file to configure Terraform to communicate with Azure.
+Add the following code in `providers.tf` file to configure Terraform to communicate with Azure:
     
 ```console
 terraform {
@@ -76,7 +75,7 @@ provider "azurerm" {
 }
     
 ```
-Create a `variables.tf` file for describing the variables referenced in the other files with their type and a default value.
+Create a `variables.tf` file for describing the variables referenced in the other files:
 
 ```console
 variable "resource_group_location" {
@@ -90,7 +89,7 @@ variable "resource_group_name_prefix" {
 }
 ```
 
-Add the resources required to create a virtual machine in `main.tf`.
+Add the resources required to create a virtual machine in `main.tf`:
 
 ```console
 resource "random_pet" "rg_name" {
@@ -321,7 +320,7 @@ You can use the same `playbook.yaml` file used in the section, [Deploy Redis as 
 
 ### Ansible Commands
 
-Run the playbook using the  `ansible-playbook` command:
+Run the playbook using the `ansible-playbook` command:
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory
@@ -391,11 +390,11 @@ PLAY RECAP *********************************************************************
 
 ## Connect to Database from local machine
 
-Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
+Follow the instructions in this [section](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#connect-to-database-from-local-machine) to connect to the database from local machine.
 
 ## Deploy Redis as a cache for MySQL using Python
 
-Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
+Follow the instructions in this [section](/learning-paths/servers-and-cloud-computing/redis_cache/redis_mysql_aws#deploy-redis-as-a-cache-for-mysql-using-python) to deploy Redis as a cache for MySQL using Python.
 
 You have successfully deployed Redis as a cache for MySQL on an Azure Arm based Instance.
 
