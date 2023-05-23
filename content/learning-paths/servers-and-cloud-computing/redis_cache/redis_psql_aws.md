@@ -397,7 +397,7 @@ arm_test1=# select * from book;
 (7 rows)
 ```
 
-4. Now connect to the second instance and repeat the above steps with a different databaseas shown below.    
+4. Now connect to the second instance and repeat the above steps with a different database as shown below.    
 
 The output will be:
 
