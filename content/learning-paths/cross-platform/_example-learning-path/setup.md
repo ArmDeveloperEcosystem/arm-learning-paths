@@ -28,7 +28,7 @@ No matter which computer option you choose, the first step is to fork the GitHub
 3. Follow the prompts to create a new fork. 
 This provides your own copy for you to make changes without impacting the main repository. 
 
-## Setup a development machine 
+## Set up a development machine 
 
 Three possible ways to setup a development machine are covered below. 
 
@@ -38,7 +38,7 @@ Select **one** that works for you. Please share other ways that work for you
 - A [Gitpod instance](#setup-gitpod) with tools pre-installed (easiest to setup and manage)
 - A [remote Linux server](#setup-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
 
-## Option 1: Setup a local computer
+## Option 1: Set up a local computer
 
 The first option is to install the required tools on your local computer. 
 
