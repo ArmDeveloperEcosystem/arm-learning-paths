@@ -40,7 +40,7 @@ WindowsPerf relies on `dll` files installed with Visual Studio (Community Editio
 
 [Download the Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) explains the WDK installation process.
 
-See also the [Visual Studio on WoA install guide](/install-guides/vs-woa/).
+See also the [Visual Studio for Windows on Arm install guide](/install-guides/vs-woa/).
 
 ## Download WindowsPerf
 
