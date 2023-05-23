@@ -352,7 +352,7 @@ html[theme='light'] body {
         background-size: 100% 100%;         /* Forces smaller width; best solution for mobile sizes */
     } 
 }
-/* Desktop background */
+/* Laptop background */
 @media (min-width: 768px) {
     html[theme='dark'] body {
         background-image: url("/img/bg-img-1920x1600.png");
@@ -363,6 +363,16 @@ html[theme='light'] body {
     } 
 }
 
+/* Large Monitor background */
+@media (min-width: 1400px) {
+    html[theme='dark'] body {
+        background-image: url("/img/bg-img-2500x1700.png");
+        background-color: var(--arm-color-footing);      
+        background-position: 0% 100%;
+        background-attachment: fixed;
+        background-size: cover;             /* Stretches image to fit; best solution for desktop sizes */
+    } 
+}
 
 
 .is-responsive-width {
