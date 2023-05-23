@@ -308,13 +308,47 @@ div.path-div::before {
     margin: -2px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(45deg, #95D629, #20C1DE);
+    background: linear-gradient(90deg, #95D629, #20C1DE);
     opacity: 0;
     transition: opacity 0.3s ease; 
 }
 .gradient-box:hover::before {
     opacity: 1;
 }
+
+
+
+.gradient-box-tool {
+    display: inline-block;
+    position: relative;
+    border-radius: 0px;
+    z-index:1;
+  }
+
+.gradient-box-tool::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 1px;
+    left: 2px;
+    margin: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #95D629, #20C1DE );
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+}
+.gradient-box-tool:hover::before {
+    opacity: 1;
+}
+
+
+
+
+
+
+
 
   
 
