@@ -39,7 +39,7 @@ Website homepage.
         <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
             <div class="gradient-box">
-                <ads-card has-hover-effect id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
+                <ads-card  id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
                     <ads-card-content class="maintopic-content" slot="content">
                         <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
                         <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   

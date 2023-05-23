@@ -276,21 +276,6 @@ ads-breadcrumbs {
 
 /*************************************/
 /* Simple Div container JUST for border gradient outline. */
-
-/*
-div.path-div::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 10px;
-    padding: 1px;
-    background: linear-gradient(45deg,#95D629,#20C1DE);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: add, add;
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-}
-*/
 .gradient-box {
     display: inline-block;
     position: relative;
@@ -305,7 +290,7 @@ div.path-div::before {
     right: 0;
     bottom: 0;
     left: 0;
-    margin: -2px;
+    margin: -1px;
     z-index: -1;
     border-radius: inherit;
     background: linear-gradient(90deg, #95D629, #20C1DE);

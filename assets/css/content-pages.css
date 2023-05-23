@@ -127,11 +127,11 @@ html[theme='dark'] div.github-div {
 *******************************************************************/  
 ads-card.multi-install-card {
     --ads-card-border-radius: 10px;
-    --ads-card-border-width: 2px;
-    --ads-card-border-color: var(--arm-light-grey-alt-2);
+    --ads-card-border-width: 1px;
+    --ads-card-border-color: transparent;
     --ads-card-background-color: var(--arm-light-grey-alt);
 
-    --ads-card-border-color-hover: var(--arm-web-safe-orange);
+    --ads-card-border-color-hover: transparent;
 
     --ads-card-background-color-hover: var(--arm-light-grey);
     --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
@@ -139,12 +139,12 @@ ads-card.multi-install-card {
 html[theme='dark'] ads-card.multi-install-card {
     --ads-card-background-color: var(--arm-color-base);
     --ads-card-border-color: #000000;
-    --ads-card-box-shadow:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
+    /*--ads-card-box-shadow:  0 3px 12px rgba(0, 0, 0, 0.5);*/
 
     /* hover state */
     --ads-card-background-color-hover: var(--arm-color-base);
-    --ads-card-border-color-hover: var(--arm-green);
-    --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
+    --ads-card-border-color-hover: transparent;
+    /*--ads-card-box-shadow-hover:  0 3px 12px rgba(0, 0, 0, 0.5);*/
 
 }
 
