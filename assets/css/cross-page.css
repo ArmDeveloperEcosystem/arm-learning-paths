@@ -277,7 +277,7 @@ ads-breadcrumbs {
 /*************************************/
 /* Simple Div container JUST for border gradient outline. */
 .gradient-box {
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     border-radius: 10px;
     z-index:1;
@@ -304,7 +304,7 @@ ads-breadcrumbs {
 
 
 .gradient-box-tool {
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     border-radius: 0px;
     z-index:1;
