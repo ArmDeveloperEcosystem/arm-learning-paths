@@ -11,19 +11,39 @@ You have been using `printf()` to output your message. A mechanism called [semih
 
 Modify the example to send output to the [PL011 UART](https://developer.arm.com/documentation/ddi0183) of the FVP.
 
-You can check if you are using semihosting by importing the symbol `__use_no_semihosting` to your project (see later). The linker will now throw an error for any functions that use semihosting.
+You can check if you are using semihosting by importing the symbol `__use_no_semihosting` to your project.
+
+Modify `hello.c` to import the symbol:
+#### hello.c
+```C
+#include <stdio.h>
+__asm(".global __use_no_semihosting\n\t");
+
+int main(void) {
+  printf("Hello World!\n");
+  return 0;
+}
+```
+Rebuild the example:
+```command
+armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a hello.c
+armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a startup_el3.s
+armlink --scatter=scatter.txt hello.o startup_el3.o -o hello.axf --entry=el3_entry
+```
+The linker will error for any functions that use semihosting:
 ```output
+Error: L6915E: Library reports error: __use_no_semihosting was requested, but _sys_exit was referenced
+Error: L6915E: Library reports error: __use_no_semihosting was requested, but _sys_open was referenced
 Error: L6915E: Library reports error: __use_no_semihosting was requested, but _ttywrch was referenced
 ```
+
 ## Retarget fputc to use the UART
 
 Many library functions depend on semihosting. You must retarget these functions to use the hardware of the target instead of the host system.
 
 Copy and paste the following code into a new file `uart.c`.
 
-This contains code to initialize the UART (`uartInit()`), and a retargeted version of `fputc()` (which `printf()` ultimately calls) to make use of the UART. Create `uart.h` containing various macros. This code is taken from extended examples supplied with Arm Development Studio.
-
-The source retargets another semihosting function, `__sys_exit()`, which is an infinite while loop after completion. Typically an embedded application will never return.
+This contains code to initialize the UART (`uartInit()`), and a retargeted version of `fputc()` (which is called by `printf()` and other functions) to write to the UART directly, not via the semihosted `_ttywrch()` function.
 
 #### uart.c
 ```C
@@ -80,6 +100,13 @@ void  __attribute__ ((noreturn)) _sys_exit(int x){
 	while(1);
 }
 ```
+{{% notice __sys_exit%}}
+The source also retargets `__sys_exit()` as an infinite while loop.
+
+Typically an embedded application will never return.
+{{% /notice %}}
+
+Create `uart.h` containing various macros used above. This code is taken from extended examples supplied with Arm Development Studio.
 #### uart.h
 ```C
 #ifndef __uart_h
@@ -142,9 +169,8 @@ struct pl011_uart {
 ```
 ### Modify hello.c
 
-Modify `hello.c` to initialize the UART before it is used. From the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map), `UART0` is located at `0x1C090000`.
+Modify `hello.c` to initialize the UART before any messages are printed. From the [memory map](https://developer.arm.com/documentation/100964/latest/Base-Platform/Base---memory/Base-Platform-memory-map), `UART0` is located at `0x1C090000`.
 
- Import the `__use_no_semihosting` symbol to ensure that semihosting is no longer used.
 #### hello.c
 ```C
 #include <stdio.h>
@@ -158,24 +184,34 @@ int main (void) {
   return 0;
 }
 ```
-No changes are needed to the scatter file. This additional code will be placed by the catch-all `* (+RO)` line.
+No changes are needed to the scatter file. The additional code will be placed by the catch-all `* (+RO)` line.
 
 ## Rebuild the example including the retargeted code:
 ```console
-armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a startup.s
+armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a startup_el3.s
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a hello.c
 armclang -c -g --target=aarch64-arm-none-eabi -march=armv8-a uart.c
-armlink --scatter=scatter.txt --entry=el3_entry startup.o uart.o hello.o -o hello.axf
+armlink --scatter=scatter.txt --entry=el3_entry startup_el3.o uart.o hello.o -o hello.axf
 ```
+The application now builds without linker errors.
 
 ## Run the example on the FVP
 
 Launch the simulation model with the newly built image. 
 ```console
-FVP_Base_Cortex-A72x2-A53x4 -a hello.axf
+FVP_Base_AEMvA -a hello.axf
 ```
 All `printf()` output is now directed to `UART0` of the FVP.
 
-You will see a terminal pop-up when you run the simulation model with the output "Hello World!". Windows users may need to first [enable Telnet Client](https://social.technet.microsoft.com/wiki/contents/articles/38433.windows-10-enabling-telnet-client.aspx).
+You will see a terminal pop-up with the output:
+```output
+Hello World!
+In _sys_exit. Use Ctrl+C to quit.
+```
+
+{{% notice Telnet Client%}}
+Windows users may need to first [enable Telnet Client](https://social.technet.microsoft.com/wiki/contents/articles/38433.windows-10-enabling-telnet-client.aspx) to see the output message.
+{{% /notice %}}
+
 
 The code ends in an infinite loop (in the retargeted `__sys_exit()`), and so you must manually terminate (for example with `Ctrl+C`) the FVP.

@@ -12,7 +12,7 @@ learning_objectives:
     - Utilize an Arm server to reduce compile time for your own embedded Linux projects
 
 prerequisites:
-    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/)
+    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 3 or 4 board
 
 

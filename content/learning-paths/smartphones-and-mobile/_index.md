@@ -4,9 +4,10 @@ differentiating_info:
 - Gaming
 - Graphics
 key_ip:
+- Cortex-X
 - Cortex-A
-- Mali
 - Immortalis
+- Mali
 maintopic: true
 operatingsystems_filter:
 - Android: 3

@@ -106,9 +106,7 @@ Calls to:
         <!-- Main content display-->
         <div class="content-box markdown-content-div">
             <!-- Content -->
-            {{ with .Content }}
-                {{ . }}
-            {{ end }}
+            {{partial "general-formatting/markdown-content-formatting.html" .Content}}
         </div>
 
         <!-- Multi-tool routing to subtool pages, only for main multi_install page -->
@@ -120,11 +118,13 @@ Calls to:
                         <div class="u-display-grid u-gap-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
                             {{range $index, $multi := $toolfiles}}
                                 {{ if ne .File.TranslationBaseName "_index" }} 
-                                    <ads-card has-hover-effect class="path-card" link="{{.Permalink}}">
-                                        <ads-card-content slot="content">
-                                            <h3 class="multi-tool-selection-title">{{.Title}}</h3>
-                                        </ads-card-content>   
-                                    </ads-card>
+                                    <div class="gradient-box">
+                                        <ads-card class="multi-install-card" link="{{.Permalink}}">
+                                            <ads-card-content slot="content">
+                                                <h3 class="multi-tool-selection-title">{{.Title}}</h3>
+                                            </ads-card-content>   
+                                        </ads-card>
+                                    </div>
                                 {{end}}
                             {{end}}
                         </div>

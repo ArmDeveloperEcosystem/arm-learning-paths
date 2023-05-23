@@ -21,11 +21,9 @@ The Ubuntu version can be 20.04 or 22.04. The `x86_64` architecture must be used
 
 ## Corstone-300 FVP {#fvp}
 
-To install the Corstone-300 FVP on your computer refer to the [install guide for Arm Ecosystem FVPs](/install-guides/ecosystem_fvp/). 
+The Corstone-300 FVP is available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp).
 
-Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). 
-
-The [Arm Virtual Hardware install guide](/install-guides/avh#corstone) provides setup instructions for AVH. 
+Alternatively, you can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). Setup instructions are given in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
 ## Install the required software to build Zephyr
 

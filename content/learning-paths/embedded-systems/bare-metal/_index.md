@@ -1,5 +1,5 @@
 ---
-title: Create a bare-metal Armv8-A embedded image
+title: Create an Armv8-A embedded application
 
 minutes_to_complete: 60   
 

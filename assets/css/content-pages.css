@@ -11,14 +11,14 @@
     background-color: var(--arm-dark-grey);
 }
 html[theme='dark'] .tab-row {
-    background-color: var(--arm-color-overlay-light);
+    background-color: var(--arm-black); /* rgba(163, 168, 174,1); #2A2B2D; */
 }
 
 .tab-row.active {
     background-color: var(--arm-light-blue);
 }   
 html[theme='dark'] .tab-row.active {
-    background-color: var(--arm-blue);
+    background-color: var(--arm-light-blue);
 }  
 
 
@@ -47,12 +47,11 @@ html[theme='dark'] .tab-row.active {
 }
 
 html[theme='dark'] .tab-right-card {
-    border-color: var(--arm-color-overlay-light);
-    background-color: var(--arm-color-overlay-dark);
+    border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
+    background-color: rgb(23,25,27);  /* CLOSE to this, but hard coded as they are close to background gradient var(--arm-color-base) at 75% transparency */
 }
 html[theme='dark'] .tab-right-card.active {
-    border-color: var(--arm-blue);
-    background-color: var(--arm-color-surface);
+    border-color: var(--arm-light-blue);
 }
 
 html[theme='dark'] .tab-right-card > h6 {
@@ -70,11 +69,13 @@ html[theme='dark'] .tab-right-card > h6 {
 a:hover {
     text-decoration: none; }
 .tab-row.inactive:hover {
-    background-color:var(--arm-web-safe-orange); }
+    background-color:var(--arm-green); }
 .tab-row.inactive:hover .tab-right-card {
-    background-color: var(--arm-color-surface); }
+    background-color: var(--arm-color-surface); 
+    border-color: var(--arm-green);
+}
 .tab-row.inactive:hover h6 {
-    color: var(--arm-web-safe-orange); }
+    color: var(--arm-green); }
 
 
 
@@ -96,7 +97,9 @@ p.github-link        {
 html[theme='dark'] p.github-link        { 
     color: var(--arm-light-blue);
 }
-
+html[theme='dark'] p.github-link:hover {
+    color: var(--arm-green);
+}
 
 div.github-div {
     padding-left: 16px;
@@ -113,35 +116,53 @@ div.github-div {
 }
 
 html[theme='dark'] div.github-div {
-    border-color: var(--arm-color-overlay-light);
+    border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
+    background-color: rgb(23,25,27);;  /* CLOSE to this, but not due to close to gradient background. var(--arm-color-base) at 75% transparency */
+
 }
 
-p.github-link:hover {
-    color: var(--arm-web-safe-orange);
-}
-html[theme='dark'] p.github-link:hover {
-    color: var(--arm-orange);
-}
 
 
 /* Multi-tool page styling (like for docker)
-*******************************************************************/   
+*******************************************************************/  
+ads-card.multi-install-card {
+    --ads-card-border-radius: 10px;
+    --ads-card-border-width: 1px;
+    --ads-card-border-color: transparent;
+    --ads-card-background-color: var(--arm-light-grey-alt);
+
+    --ads-card-border-color-hover: transparent;
+
+    --ads-card-background-color-hover: var(--arm-light-grey);
+    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
+} 
+html[theme='dark'] ads-card.multi-install-card {
+    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-border-color: #000000;
+    /*--ads-card-box-shadow:  0 3px 12px rgba(0, 0, 0, 0.5);*/
+
+    /* hover state */
+    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-border-color-hover: transparent;
+    /*--ads-card-box-shadow-hover:  0 3px 12px rgba(0, 0, 0, 0.5);*/
+
+}
+
 .multi-tool-selection-title {
     color: var(--arm-web-safe-blue);
-
     margin-top: 4px!important;
     margin-bottom: 4px!important;
 }
 html[theme='dark'] .multi-tool-selection-title {
     color: var(--arm-light-blue);
 }
-ads-card.path-card:hover .multi-tool-selection-title{
+ads-card.multi-install-card:hover .multi-tool-selection-title{
     transition: color 0.3s ease-in-out;
-    color: var(--arm-web-safe-orange);
+    color: var(--arm-green);
 }
-html[theme='dark'] ads-card.path-card:hover .multi-tool-selection-title {
+html[theme='dark'] ads-card.multi-install-card:hover .multi-tool-selection-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-orange);
+    color: var(--arm-green);
 }
 
 

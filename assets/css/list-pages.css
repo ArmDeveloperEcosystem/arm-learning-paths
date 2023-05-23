@@ -141,13 +141,22 @@ ads-expansion-panel.learning-path-filters {
 }
 
 html[theme='dark'] ads-expansion-panel.learning-path-filters {
-    --ads-expansion-panel-border-color: var(--arm-black);
+    --ads-expansion-panel-border-color: var(--arm-color-footing);
+    --ads-expansion-panel-content-background-color: var(--arm-color-footing);
+    --ads-expansion-panel-toggle-background-color: var(--arm-color-footing);
+    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-footing);
 
-    --ads-expansion-panel-content-background-color: var(--arm-color-surface);
-    --ads-expansion-panel-toggle-background-color: var(--arm-color-surface);
-    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-surface);
-
+    --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
 }
+
+/* mobile facets styling */
+div#facets-background > ads-expansion-panel.learning-path-filters {
+    --ads-expansion-panel-border-color: var(--arm-color-base);
+    --ads-expansion-panel-content-background-color: var(--arm-color-base);
+    --ads-expansion-panel-toggle-background-color: var(--arm-color-base);
+    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-base);   
+}
+
 
 ads-checkbox {
     --ads-checkbox-margin-left: 0px;
@@ -177,23 +186,26 @@ ads-card.path-card {
     --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
 }
 html[theme='dark'] ads-card.path-card {
-    --ads-card-background-color: var(--arm-color-overlay-dark);
-    --ads-card-border-color: var(--arm-black);
-
-    --ads-card-background-color-hover: var(--black);
-    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16); /* 0 1px 3px 3px rgba(255,255,255,0.25); */
+    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-border-color: #000000;
+    --ads-card-box-shadow:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
+    
+    /* hover state */
+    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-border-color-hover: transparent;
+    --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
 }
 
 
 .basics-title:hover {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-web-safe-orange);
+    color: var(--arm-green);
     cursor: pointer;
 }
 
 ads-card.path-card:hover  .learning-path-title {
     transition: color 0.3s ease-in-out;
-    color: var(--arm-web-safe-orange);
+    color: var(--arm-green);
 }
 
 /* adjust height depending on screen size */
@@ -208,7 +220,7 @@ ads-card.path-card .learning-path-title-div { /* xs and sm */
 
 
 .card-subject {
-    font-weight: lighter;
+    color: #A3A8AE;
     font-size: 0.9rem!important;
 }
 
@@ -231,9 +243,10 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
 }
 .card-tag-details {
     font-size: 0.9rem!important;
+    font-family: 'Source Code Pro', monospace;
 }
 .card-date {
-    font-weight: lighter;
+    color: #A3A8AE;
     font-size: 0.9rem!important;
 }
 
@@ -249,10 +262,20 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
 
 ads-card.tool-card {
     height: 112px;
-    --ads-card-border-width: 1px;
-    --ads-card-border-color: var(--arm-black);
-    --ads-card-border-color-hover: var(--arm-web-safe-orange);
-    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);
+    --ads-card-border-radius: 0px;
+    --ads-card-border-width: 1px;    
+}
+
+
+html[theme='dark'] ads-card.tool-card {
+    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-border-color: #000000;
+    --ads-card-box-shadow: #000 @50%, X:0 Y: 3 B:12;     /* shadow likely not working */
+
+
+    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-border-color-hover: transparent;
+    --ads-card-box-shadow-hover: #000 @50%, X:0 Y: 3 B:12; /* 0 3px 6px 1px rgba(0,0,0,0.16);*/
 }
 
 ads-card-content.tool-card-content {
@@ -279,7 +302,7 @@ ads-card-content.tool-card-content::before {
 
 
   ads-card.tool-card:hover ads-card-content.tool-card-content::before {
-    background-color: var(--arm-web-safe-orange);
+    background-color: var(--arm-green);
   }
   ads-card.tool-card p {
     color: var(--arm-web-safe-blue);
@@ -295,11 +318,11 @@ ads-card-content.tool-card-content::before {
   }
 
   ads-card.tool-card:hover p {
-    color:var(--arm-web-safe-orange);
+    color:var(--arm-green);
     margin-left: 12px;
   }
   html[theme="dark"]       ads-card.tool-card:hover p {
-    color:var(--arm-web-safe-orange);
+    color:var(--arm-green);
   }
 
 

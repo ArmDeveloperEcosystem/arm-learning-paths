@@ -7,6 +7,10 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+{{% notice  MPS3%}}
+MPS3 users can jump to [here](#mps3).
+{{% /notice %}}
+
 
 ## Run the software on Corstone-1000 FVP
 
@@ -26,13 +30,13 @@ Login as `root`, and proceed as you wish. For example:
 ```console
 uname -a
 ```
-will return:
+will return similar to:
 ```output
-TO DO
+Linux corstone1000-fvp 6.1.20-yocto-standard #1 SMP PREEMPT Sat Mar 18 02:48:04 UTC 2023 aarch64 GNU/Linux
 ```
 
 
-## Run software on MPS3 AN550
+## Run software on MPS3 AN550 {#mps3}
 
 When the MPS3 build is complete, the generated binaries can be found in this directory:
 ```console
@@ -128,7 +132,7 @@ Login as `root`, and proceed as you wish. For example:
 ```console
 uname -a
 ```
-will return:
+will return similar to:
 ```output
 Linux corstone1000-mps3 6.1.20-yocto-standard #1 SMP PREEMPT Sat Mar 18 02:48:04 UTC 2023 aarch64 GNU/Linux
 ```

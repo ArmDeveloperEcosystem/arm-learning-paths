@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Appendix: Format content"
+title: "Format content"
 
 weight: 7 # 1 is first, 2 is second, etc.
 

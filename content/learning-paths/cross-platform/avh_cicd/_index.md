@@ -1,5 +1,5 @@
 ---
-title: Integrate Arm Virtual Hardware into CI/CD workflow (I of II)
+title: Integrate Arm Virtual Hardware into CI/CD workflow (1 of 2)
 
 minutes_to_complete: 30
 
@@ -23,7 +23,6 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - C
-    - yml
     - Arm Virtual Hardware
     - GitHub
     - AWS EC2

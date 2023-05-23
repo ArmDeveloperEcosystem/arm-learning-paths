@@ -15,9 +15,10 @@ You will need a [GitHub](https://github.com) account.
 
 GitHub requires that a [Personal Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) be set. If you do not have this on your account already, navigate to `Settings` > `Developer Settings` > `Personal Access Tokens`, click on `Generate new token`, and save the token locally.
 
-An [AWS account](https://aws.amazon.com/) is also required. 
+Ensure you have enabled the token to `Update GitHub Action workflows`.
 
-Launch the Arm Virtual Hardware AMI from your AWS account. For full instructions refer to the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
+Setup your AVH instance, following the instructions in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone). An [AWS account](https://aws.amazon.com/) is  required.
+
 
 ## Fork the example repository
 

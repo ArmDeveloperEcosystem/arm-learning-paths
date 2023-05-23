@@ -1,0 +1,8 @@
+[filtering]
+ignore=
+  github.com
+  arrow.com
+  mouser.com
+  avnet.com
+  packt.com
+  

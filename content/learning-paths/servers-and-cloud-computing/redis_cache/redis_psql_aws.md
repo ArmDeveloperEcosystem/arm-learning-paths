@@ -32,8 +32,7 @@ The instructions to create the keys are below.
 
 ### Generate an SSH key-pair
 
-Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [
-guide](/install-guides/ssh#ssh-keys).
+Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -48,7 +47,7 @@ To generate and configure the Access key ID and Secret access key, follow this [
 
 ## Create an AWS EC2 instance using Terraform
 
-Using a text editor, save the code below in a file called `main.tf`.
+Using a text editor, save the code below in a file called `main.tf`:
 
 ```console
 provider "aws" {
@@ -122,7 +121,7 @@ resource "local_file" "inventory" {
 ```
 Make the changes listed below in `main.tf` to match your account settings.
 
-1. In the `provider` section, update value to use your preferred AWS region.
+1. In the `provider` section, update the region value to use your preferred AWS region.
 
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
 
@@ -332,7 +331,7 @@ postgres=#
 
 ### Access Database and Create Table
 
-1. You can create and access your database by using the below commands.
+1. You can create and access your database by using the commands below:
 
 ```console
 create database {your_database};
@@ -355,7 +354,7 @@ SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, co
 You are now connected to database "arm_test1" as user "postgres".```
 ```
 
-2. Use the below commands to create a table and insert values into it.
+2. Use the commands below to create a table and insert values into it:
 
 ```console
 create table book(name char(10),id varchar(10));
@@ -375,7 +374,7 @@ arm_test1=# insert into book(name,id) values ('Abook','10'),('Bbook','20'),('Cbo
 INSERT 0 7
 ```
 
-3. Use the below command to access the content of the table.
+3. Use the command below to access the content of the table.
 
 ```console
 select * from {{your_table_name}};
@@ -398,7 +397,7 @@ arm_test1=# select * from book;
 (7 rows)
 ```
 
-4. Now connect to the second instance and repeat the above steps with a different data as shown below.    
+4. Now connect to the second instance and repeat the above steps with a different database as shown below.    
 
 The output will be:
 
@@ -433,14 +432,14 @@ arm_test2=# select * from movie;
 
 You will create two `.py` files on the host machine to deploy Redis as a Postgres cache using Python: `values.py` and `redis_cache.py`.
 
-`values.py` to store the IP addresses of the instances and the databases created in them.
+Create `values.py` with the content below to store the IP addresses of the instances and the databases created in them.
 ```console
 PSQL_TEST=[["{{public_ip of PSQL_TEST[0]}}", "arm_test1"],
 ["{{public_ip of PSQL_TEST[1]}}", "arm_test2"]]
 ```
 Replace `{{public_ip of PSQL_TEST[0]}}` & `{{public_ip of PSQL_TEST[1]}}` with the public IPs generated in the `/tmp/inventory` file after running the Terraform commands.
 
-`redis_cache.py` to access data from Redis Cache and, if not present, store it in the Redis Cache.   
+Create `redis_cache.py` with content below to access data from Redis Cache and, if not present, store it in the Redis Cache.   
 ```console
 import sys
 import psycopg2
@@ -545,7 +544,9 @@ redis-cli -p 6379
 ```console
 get <key>
 ```
-**NOTE:-** Key is the variable in which you store the data. In the above command, you are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
+{{% notice Note %}}
+Key is the variable in which you store the data. In the above command, you are storing the data from the tables `book` and `movie` in `AA` and `BB` respectively.
+{{% /notice %}}
 
 The output will be:
 

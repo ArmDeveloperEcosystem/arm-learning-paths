@@ -68,7 +68,7 @@ Calls to:
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
                     {{ range $paths_to_list.ByLastmod.Reverse }}
                         <!-- This div assigns tags for each LP for filtering. -->
-                        <div class='path-div search-div
+                        <div class='path-div search-div gradient-box
                                 {{ with .Params.skillLevels }}
                                     tag-{{. | urlize}}
                                 {{ end }}

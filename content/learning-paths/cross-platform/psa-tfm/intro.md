@@ -1,6 +1,6 @@
 ---
 # User change
-title: Required hardware and software
+title: Corstone-1000 FVP or MPS3 image
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -13,25 +13,14 @@ This Learning Path uses the [Corstone-1000](https://www.arm.com/en/products/sili
 
 The software stack can be executed on the Corstone-1000 Fixed Virtual Platform (FVP) and the MPS3 FPGA prototyping board.
 
-## Before you begin
+## Corstone-1000 FVP {#fvp}
 
-You will need the hardware and software listed below to complete the steps in this Learning Path. 
+You can access the FVP with [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware). Setup instructions are given in the [Arm Virtual Hardware install guide](/install-guides/avh#corstone).
 
-### Development machine
+The Corstone-1000 FVP is also available from the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) page. Setup instructions are given in the [install guide](/install-guides/fm_fvp). Use this for a local (Linux) development environment.
 
-Use a Linux computer running Ubuntu 18.04 or later (x86_64 architecture) as the development machine.
 
-If you don't have the required computer, you can use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware) which is hosted on `AWS` and includes the Corstone-1000 FVP.
-
-The instructions have been tested using the [Arm Virtual Hardware AMI](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g) running on a `t3.xlarge` EC2 instance with `100GB` of storage.
-
-### Corstone-1000 FVP
-
-Download and install the [Arm Ecosystem FVP](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) on your development machine.
-
-If you are using Arm Virtual Hardware, the Corstone-1000 FVP is already installed on the virtual machine. 
-
-### MPS3 FPGA prototyping board
+## MPS3 FPGA prototyping board
 
 You can also use [MPS3 FPGA Prototyping Board](https://developer.arm.com/Tools%20and%20Software/MPS3%20FPGA%20Prototyping%20Board) programmed with [AN550](https://developer.arm.com/downloads/view/AN550).
 

@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 1                     
         explanation: >        
-            Data replication is supported in Redis.
+            Redis uses by default asynchronous replication.
     - questions:
         question: >
             Redis-cli is used to interact with Redis.

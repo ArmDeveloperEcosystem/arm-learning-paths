@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Appendix: Writing style guide"
+title: "Writing style guide"
 
 weight: 8 # 1 is first, 2 is second, etc.
 
