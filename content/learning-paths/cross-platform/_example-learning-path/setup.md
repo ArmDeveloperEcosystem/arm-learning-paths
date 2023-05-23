@@ -34,9 +34,9 @@ Three possible ways to setup a development machine are covered below.
 
 Select **one** that works for you. Please share other ways that work for you
 
-- A [local computer (Linux, macOS, or Windows)](#setup-a-local-computer)
-- A [Gitpod instance](#setup-gitpod) with tools pre-installed (easiest to setup and manage)
-- A [remote Linux server](#setup-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
+- A [local computer (Linux, macOS, or Windows)](#option-1-set-up-a-local-computer)
+- A [Gitpod instance](#option-2-set-up-gitpod) with tools pre-installed (easiest to setup and manage)
+- A [remote Linux server](#option-3-set-up-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
 
 ## Option 1: Set up a local computer
 
