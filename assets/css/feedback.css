@@ -15,12 +15,44 @@
 .rating input {
 	display: none;
 }
+.rating label {
+    color: white;
+    position: relative;
+}
+/*
 .rating label:hover,
-.rating label:hover ~ label,
+.rating label:hover ~ label, 
 .rating input:checked + label,
 .rating input:checked + label ~ label {
-	color: var(--arm-yellow);  /* #ffc107 */
+	color: pink!important; 
 }
+*/
+.rating label:hover:before,
+.rating label:hover ~ label:before,
+.rating input:checked + label:before,
+.rating input:checked + label ~ label:before {
+  content: "\f005"; /* fa-star */
+  font-family: "Font Awesome 6 Pro";
+  font-weight: 900;
+  font-size: 2rem; /* fa-2x */
+  color: white!important;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-top:-8px;
+}
+
+
+/*
+.rating i.fa-star::before {
+    content: "\f005";
+
+    padding-right:5px;
+    color: white;
+}
+*/
+
+
 /****************************************************/
 
 
