@@ -1359,3 +1359,10 @@ semihosted
 baidu
 paddlepaddle
 Makefiles
+WDK
+devcon
+devgen
+dotnet
+WPF
+NPU
+MACs
