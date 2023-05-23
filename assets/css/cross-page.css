@@ -113,6 +113,20 @@ ads-button {
     --ads-button-border-color-tertiary-hover: var(--arm-green);
     --ads-button-color-tertiary-hover: var(--arm-green);
 }
+ads-cta-button {
+      /* primary */
+      --ads-cta-button-background-color-primary-hover: var(--arm-green);
+      --ads-cta-button-border-color-primary-hover: var(--arm-green);
+  
+      /* secondary */
+      --ads-cta-button-border-color-secondary-hover: var(--arm-green);
+      --ads-cta-button-color-secondary-hover: var(--arm-green);
+  
+      /* tertiary */
+      --ads-cta-button-border-color-tertiary-hover: var(--arm-green);
+      --ads-cta-button-color-tertiary-hover: var(--arm-green);  
+}
+
 /* button, form submit syntax */
 input[type="submit"]:hover {
     background-color: var(--arm-green);
