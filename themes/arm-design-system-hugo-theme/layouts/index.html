@@ -19,22 +19,6 @@ Website homepage.
 {{ $gh_repo_idea_path := printf "%s/discussions/categories/ideas" $gh_project_repo -}}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Header, replacing the masthead -->
 <div class="homepage-top-divs" id="title-div">
     <span>
@@ -44,86 +28,9 @@ Website homepage.
 </div>
 <div class="homepage-top-divs homepage-top-desc">
     <p style="margin: 0px; color: #A3A8AE;">Tutorials designed to help you develop quality Arm software faster.</p>
-</div>
-
-<!-- List of Learning Path Topics & Install Guide -->
-<div class="c-row u-margin-top-1">
-    <div class="c-col">
-        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
-            {{ range (where .Site.Pages "Params.maintopic" true).ByWeight}}
-            <div class="gradient-box">
-                <ads-card  id="{{.Title | urlize}}" class="main-topic-card" link="{{.Permalink}}">
-                    <ads-card-content class="maintopic-content" slot="content">
-                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/{{.Title | urlize}}.svg" style="width: 100%;" />
-                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">{{replace .Title "and" "&"}}</h3>   
-
-                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                            <{{- delimit .Params.key_ip ", " -}}>
-                        </p>
-                        <p class="u-margin-bottom-0 u-margin-top-0">
-                            {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
-                        </p>   
-                    </ads-card-content>   
-                </ads-card>
-            </div>
-            {{ end }}
-            <div class="gradient-box">
-
-                <ads-card class="main-topic-card" id="tool-install" link="/install-guides">
-                    <ads-card-content class="maintopic-content" slot="content">
-                        <img alt="{{.Title}} image" src="img/main-topic-backgrounds/tools.svg" style="width: 100%;" />
-                        <h3 class="main-topic-title u-margin-top-1/2 u-margin-bottom-1/2">Install Guides</h3> 
-                        <p class="main-topic-subtitle u-margin-top-1/2 u-margin-bottom-0">
-                            &#60;Arm,  Open Source,  Commercial>
-                        </p>
-                        <p class="u-margin-bottom-0 u-margin-top-0">
-                            Simple guides to install new tools.
-                        </p>   
-                    </ads-card-content> 
-                </ads-card>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-<div class="homepage-top-divs">
-    <h3 style="margin-top:64px; margin-bottom:8px">Created by the Arm Ecosystem</h3>
-    <p style="margin: 0px; margin-bottom: 0px; color: #A3A8AE;">You can request a new Learning Path be created if it does not exist yet, or contribute yourself alongside Arm Engineers and the Arm Ecosystem.</p>
-    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">All content is covered by the<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
-        Creative Commons License
-        {{partial "general-formatting/external-link.html"}}         
-    </a>.</p>
-
-    <ads-cta-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request a new path</ads-cta-button> 
-    <span class="homepage-or" style="color: #A3A8AE;">or</span>
-    <ads-cta-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute a new path</ads-cta-button>
-</div>
-
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-
-
-<!-- Header, replacing the masthead -->
-<div class="homepage-top-divs" id="title-div">
-    <span>
-        <h1 id="homepage-header" class="orchard-breeze-text">Learning Paths</h1>
-        <div id="beta-tag" class="beta-homepage">beta</div>
-    </span>
-</div>
-<div class="homepage-top-divs homepage-top-desc">
-    <p style="margin: 0px; color: #A3A8AE;">Tutorials designed to help you develop quality Arm software faster.</p>
-    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">Contribute yourself alongside Arm Engineers and the Arm Ecosystem. All content is covered by the<a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">
-        Creative Commons License
-        {{partial "general-formatting/external-link.html"}}         
-    </a>.</p>
-    <ads-cta-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="secondary">Request a new path</ads-cta-button> 
-    <span class="homepage-or" style="color: #A3A8AE;">or</span>
-    <ads-cta-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="primary">Contribute a new path</ads-cta-button>
+    <p style="margin: 0px; margin-bottom: 16px; color: #A3A8AE;">You can submit a request for a new Learning Path, or create one yourself with the help of the Arm community.</p>
+    <ads-cta-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.open('{{$gh_repo_idea_path}}','_blank')" level="tertiary">Request</ads-cta-button> 
+    <ads-cta-button class='u-margin-bottom-1' id='contribute-btn' name="contribute-cta" onclick="window.location.href='/learning-paths/cross-platform/_example-learning-path/'" level="secondary">Create</ads-cta-button>
 </div>
 
 <!-- List of Learning Path Topics & Install Guide -->
@@ -164,7 +71,7 @@ Website homepage.
         </div>
     </div>
 </div>
-
+<p style="text-align: center; margin: 0 auto; margin-top: 16px; color: #A3A8AE;">All content is covered by the <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons License{{partial "general-formatting/external-link.html"}}</a>.</p>
 
 
 
@@ -173,7 +80,7 @@ Website homepage.
 
 
 <!-- Space from page bottom -->
-<div class="u-margin-4"></div>
+<div class="homepage-dynamic-bottom-spacing"></div>
 
 <!-- Search Submit handling -->
 <script src="/js/search-and-filter/search-handling.js"></script> 

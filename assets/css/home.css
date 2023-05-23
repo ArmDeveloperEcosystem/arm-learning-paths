@@ -153,3 +153,22 @@ table.contributor-table tbody {
     background-color: var(--arm-color-base); 
 }
 
+
+
+
+
+
+
+
+
+@media (min-width: 1400px) { 
+    .homepage-dynamic-bottom-spacing { /* larger screens than XXL */
+        margin-bottom: 160px;
+    }
+}
+
+@media (max-width: 1400px) { /* smaller screens than XXL */
+    .homepage-dynamic-bottom-spacing {
+        margin-bottom: 32px;
+    }
+}
