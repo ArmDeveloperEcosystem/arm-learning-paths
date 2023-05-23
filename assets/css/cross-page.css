@@ -164,8 +164,6 @@ table tbody td {
 /* Fix global nav height */
 /*************************************/
 #global-nav-height-fixer {
-    background: transparent;
-    background-color: transparent;
     max-width: 100vw;
     min-height: 80px;
     position: relative;
@@ -175,6 +173,14 @@ table tbody td {
         #global-nav-height-fixer {
             min-height: 60px;
         }
+}
+.nav-transparent {
+    background: transparent;
+    background-color: transparent;
+}
+.nav-black {
+    background: #010101;
+    background-color: #010101;  
 }
 
 
@@ -256,6 +262,7 @@ ads-breadcrumbs {
 
 /*************************************/
 /* Simple Div container JUST for border gradient outline. */
+
 /*
 div.path-div::before {
     content: "";
@@ -270,6 +277,32 @@ div.path-div::before {
     mask-composite: exclude;
 }
 */
+.gradient-box {
+    display: inline-block;
+    position: relative;
+    border-radius: 10px;
+    z-index:1;
+  }
+
+.gradient-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(45deg, #95D629, #20C1DE);
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+}
+.gradient-box:hover::before {
+    opacity: 1;
+}
+
+  
 
 /*************************************/
 /* Table overflow for all tables     */

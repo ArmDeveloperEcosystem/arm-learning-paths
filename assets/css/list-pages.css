@@ -246,7 +246,7 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
 }
 .card-tag-details {
     font-size: 0.9rem!important;
-    font-family: 'Source Code Pro', sans-serif;
+    font-family: 'Source Code Pro', monospace;
 }
 .card-date {
     color: #A3A8AE;
