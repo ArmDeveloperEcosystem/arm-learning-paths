@@ -4,6 +4,7 @@ differentiating_info:
 - tinyML
 key_ip:
 - Cortex-M
+- Ethos-U
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 17
