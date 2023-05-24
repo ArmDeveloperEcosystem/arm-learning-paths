@@ -1,5 +1,5 @@
 ---
-title: Navigate Cortex-M and Ethos-U Machine Learning development 
+title: Navigate Machine Learning development with Ethos-U processors
 
 armips:
 - Cortex-M
