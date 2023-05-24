@@ -1,5 +1,5 @@
 ---
-title: Development Platforms
+title: Development platforms
 
 weight: 3
 
