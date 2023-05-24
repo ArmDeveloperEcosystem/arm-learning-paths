@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Write: Initialize a directory"
+title: "Create a new Learning Path"
 
 weight: 4 # 1 is first, 2 is second, etc.
 
