@@ -1,19 +1,18 @@
 ---
-title: "Deploy Arm virtual machines on Google Cloud Platform (GCP)"
+title: "Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform"
 
-minutes_to_complete: 30
+minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for anyone new to using Arm virtual machines in the Google Cloud Platform (GCP)
 
 learning_objectives:
-    - Deploy Arm virtual machines using the Google Cloud Console
     - Automate Arm virtual machine creation using Terraform
     - Deploy Arm instances on GCP and provide access via Jump Server
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
-    - A computer with [Terraform](/install-guides/terraform) installed
-    - A computer with [Google Cloud CLI](/install-guides/gcloud) installed
+    - A computer with [Terraform](/install-guides/terraform) installed.
+    - A computer with [Google Cloud CLI](/install-guides/gcloud) installed.
 
 author_primary: Jason Andrews
 
