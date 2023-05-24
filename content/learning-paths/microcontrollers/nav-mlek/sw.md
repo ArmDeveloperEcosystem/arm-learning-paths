@@ -1,13 +1,13 @@
 ---
-title: "Learn about tools and software"
+title: Software development considerations
 
-weight: 3 
+weight: 4
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-## Development platforms
+## Development environment
 
 You should use an `x86_64` development machine running Windows or Linux for the best experience. 
 
@@ -45,28 +45,6 @@ A number of other tools are common in ML applications.
 - cmake
 - [CMSIS-Build](/install-guides/cmsis-build/)
 
-## Machine learning Frameworks
-
-[TensorFlow Lite for Microcontrollers](https://www.tensorflow.org/lite/microcontrollers/) is the most common framework for microcontroller ML applications.
-
-TensorFlow uses [`xxd`](https://linux.die.net/man/1/xxd/) to convert TensorFlow Lite models into C data structures. 
-
-[PyTorch](https://pytorch.org/) is also used on microcontrollers. 
-
-[Apache TVM](https://tvm.apache.org/) is an open-source compiler framework for ML and can be used on microcontrollers.
-
-The ML ecosystem is changing rapidly with many new companies and software. You can refer to the [AI Ecosystem Catalog](https://www.arm.com/partners/ai-ecosystem-catalog/) to find ML solutions for Cortex-M microcontrollers.
-
-## NPU software
-
-[Vela](https://pypi.org/project/ethos-u-vela/) is used to compile a TensorFlow Lite for Microcontrollers neural network model into an optimized version that can run on hardware containing an Arm Ethos-U NPU.
-
-Install it using `pip3`:
-
-```console
-pip install ethos-u-vela
-```
-
 ## Using Docker
 
 You may want to use Docker to simplify ML development environment creation. 
@@ -81,17 +59,48 @@ git submodule update --init
 
 Use an editor or program such as `more` or `cat` to view the Dockerfile.
 
+## Machine learning Frameworks
+
+[TensorFlow Lite for Microcontrollers (TFLM)](https://www.tensorflow.org/lite/microcontrollers/) is the most common framework for microcontroller ML applications.
+
+TensorFlow uses [`xxd`](https://linux.die.net/man/1/xxd/) to convert TensorFlow Lite models into C data structures. 
+
+[PyTorch](https://pytorch.org/) is also used on microcontrollers. 
+
+[Apache TVM](https://tvm.apache.org/) is an open-source compiler framework for ML and can be used on microcontrollers.
+
+The ML ecosystem is changing rapidly with many new companies and software. You can refer to the [AI Ecosystem Catalog](https://www.arm.com/partners/ai-ecosystem-catalog/) to find ML solutions for Cortex-M microcontrollers.
+
+### Ethos optimized model
+
+[Vela](https://pypi.org/project/ethos-u-vela/) is used to compile a TFLM neural network model into an optimized version that can run on hardware containing an Arm Ethos-U NPU.
+
+Install it using `pip3`:
+
+```console
+pip install ethos-u-vela
+```
+
+### CMSIS-NN
+
+The [CMSIS-NN](https://www.keil.com/pack/doc/CMSIS/NN/html/index.html) software library is a collection of efficient neural network kernels developed to maximize the performance and minimize the memory footprint of neural networks on Arm Cortex-M processors.
+
+This library is used by frameworks for operations that cannot be executed on the Ethos processor.
+
+[This](https://blog.tensorflow.org/2021/02/accelerated-inference-on-arm-microcontrollers-with-tensorflow-lite.html) blog provides an excellent overview of the TFLM use case.
+
+
 ## Example applications
 
 Resources for learning about ML applications are listed below for you to investigate and learn from.
 
-1. Arm ML Evaluation Kit (MLEK)
+### Arm ML Evaluation Kit (MLEK)
 
-The MLEK provides a number of example ML applications. 
+The MLEK provides a number of example ML applications.
 
 [Build the ML Evaluation Kit examples](/learning-paths/microcontrollers/mlek/) is the fastest way to build and run the MLEK examples, and includes next steps to learn more. 
 
-2. Micro speech
+### Micro speech
 
 The [Micro speech example for TensorFlow Lite](https://github.com/ARM-software/AVH-TFLmicrospeech/) is a good way to get started learning ML applications. 
  
@@ -126,23 +135,22 @@ Heard yes (143) @17100ms
 Heard no (145) @21600ms
 ```
 
-3. Open-IoT-SDK
+### Open-IoT-SDK
 
 The Open-IoT-SDK includes a number of ML applications and demonstrates concepts such as how to integrate Arm Trusted Firmware for Cortex-M with an ML application. 
 
 Refer to [Build and run Open-IoT-SDK examples](/learning-paths/microcontrollers/iot-sdk/) to learn how to use the SDK.
 
-4. TVM example
+### TVM example
 
 To learn about TVM, refer to [Running TVM on bare metal Cortex-M55 and Ethos-U55 NPU with CMSIS-NN](https://tvm.apache.org/docs/how_to/work_with_microtvm/micro_ethosu.html).
 
 You will learn the basics of TVM and more about [CMSIS-NN](https://github.com/ARM-software/CMSIS-NN/), the software library of efficient neural network kernels for Cortex-M.
 
-5. Arm ML example repository
+### Arm ML example repository
 
 Additional examples are in an Arm GitHub repository called [ML-examples](https://github.com/ARM-software/ML-examples/)
 
-## Summary 
+## Example use cases
 
-Please propose your favorite applications for Cortex-M and Ethos-U ML in [GitHub discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions/categories/ideas/).
-
+The potential use cases of machine learning are very broad. Please propose your favorite applications for Cortex-M and Ethos-U ML in [GitHub discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions/categories/ideas/).
