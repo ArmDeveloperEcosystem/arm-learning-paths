@@ -29,6 +29,7 @@ operatingsystems:
 tools_software_languages:
     - SQL
     - PostgreSQL
+    - HammerDB
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

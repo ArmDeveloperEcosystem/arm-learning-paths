@@ -22,7 +22,8 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-    - AWS EC2
+    - AWS
+    - Bastion
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

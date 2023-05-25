@@ -25,8 +25,6 @@ armips:
 tools_software_languages:
     - Terraform
     - Kubernetes
-    - kubectl
-    - az
     - Azure
 
 operatingsystems:

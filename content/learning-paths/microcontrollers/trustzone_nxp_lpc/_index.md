@@ -1,5 +1,5 @@
 ---
-title: Get started with Trustzone on NXP LPCXpresso55S69
+title: Get started with TrustZone on NXP LPCXpresso55S69
 
 minutes_to_complete: 20
 
@@ -26,9 +26,10 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
+    - TrustZone
     - Arm Compiler for Embedded
-    - Keil MDK
-    - C
+    - Keil
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

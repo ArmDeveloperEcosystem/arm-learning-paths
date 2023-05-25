@@ -32,6 +32,8 @@ operatingsystems:
     - Android
 tools_software_languages:
     - GCC
+    - Total Compute
+    - Fixed Virtual Platform
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

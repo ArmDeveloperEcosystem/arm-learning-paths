@@ -29,8 +29,7 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Arm Mobile Studio
-    - C++
-    - Java
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

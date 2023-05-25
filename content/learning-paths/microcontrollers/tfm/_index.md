@@ -1,6 +1,7 @@
 ---
 armips:
 - Cortex-M
+- Corstone
 author_primary: Pareena Verma
 layout: learningpathall
 learning_objectives:
@@ -22,10 +23,12 @@ test_status:
 - passed
 title: Get started with Trusted Firmware-M
 tools_software_languages:
-- Corstone-300 FVP
 - Arm Virtual Hardware
-- AWS EC2
-- C
+- Fixed Virtual Platform
+- TrustZone
+- Trusted Firmware
+- Coding
+
 weight: 1
 who_is_this_for: This is an introductory topic for software developers new to Trusted
   Firmware-M.

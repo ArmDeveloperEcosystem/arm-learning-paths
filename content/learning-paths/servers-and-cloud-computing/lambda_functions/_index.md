@@ -19,9 +19,11 @@ subjects: Containers and Virtualization
 armips:
     - Neoverse
 tools_software_languages:
+    - AWS
     - Terraform
-    - AWS CLI
     - Lambda
+    - Coding
+
 operatingsystems:
     - Linux
 
