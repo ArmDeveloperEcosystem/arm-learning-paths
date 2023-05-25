@@ -28,8 +28,13 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - AWS
+    - Azure
+    - Google Cloud
+    - Docker
     - Terraform
     - Ansible
+    - Redis
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

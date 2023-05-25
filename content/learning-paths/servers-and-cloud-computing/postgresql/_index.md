@@ -23,8 +23,11 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - AWS
     - Terraform
     - Ansible
+    - SQL
+    - PostgreSQL
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

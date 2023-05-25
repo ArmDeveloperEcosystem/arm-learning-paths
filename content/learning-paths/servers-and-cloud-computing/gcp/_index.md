@@ -25,6 +25,8 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
+    - Bastion
+    - Google Cloud
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

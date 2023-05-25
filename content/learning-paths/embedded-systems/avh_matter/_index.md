@@ -20,14 +20,13 @@ author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: Embedded Linux
+subjects: CI-CD
 armips:
     - Cortex-A
 operatingsystems:
     - Linux
 tools_software_languages:
-    - C
-    - JavaScript
+    - Matter
     - Arm Virtual Hardware
     - GitHub
 

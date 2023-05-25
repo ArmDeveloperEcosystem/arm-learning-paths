@@ -26,10 +26,12 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - C
-    - Assembly
+    - SVE
+    - Neon
+    - Coding
+    - armie
     - GCC
-    - Armclang
+    - armclang
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

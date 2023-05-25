@@ -22,6 +22,11 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - Google Cloud
+    - Azure
+    - AWS
+    - Oracle
+    - Alibaba
 
 
 ### FIXED, DO NOT MODIFY

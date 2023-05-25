@@ -17,7 +17,7 @@ There are some ML examples which can be developed using Windows tools.
 
 The same development tools for general embedded projects are needed for ML applications, but there are additional tools and software which are also common in ML applications. 
 
-### Compilers 
+### C/C++ Compilers 
 
 You can build ML applications with [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded/) or [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain/). 
 
@@ -31,11 +31,11 @@ Both compilers are pre-installed in Arm Virtual Hardware.
 
 Use the [Arm Development Studio install guide](/install-guides/armds/) to set up Arm DS on Linux or Windows. 
 
-[Keil MDK](/install-guides/mdk/) is popular for Windows development. 
+[Keil MDK](/install-guides/mdk/) is a popular microcontroller development toolkit on Windows.
 
-Both IDEs connect to FVPs and provide software debugging features. 
+Both IDEs contain `Arm Compiler for Embedded` to build applications, and can connect to the `Ecosystem Corstone-300 FVP` for software debug and test.
 
-[Arm Keil Studio Cloud](/install-guides/keilstudiocloud/) also offers the ability to run software on the Corstone-300 FVP. A [list of software projects](https://www.keil.arm.com/boards/arm-v2m-mps3-sse-300-fvp-610bb98/projects/) is available for you to browse.
+[Arm Keil Studio Cloud](/install-guides/keilstudiocloud/) also offers the ability to run software on the `Corstone-300 FVP`. A [list of software projects](https://www.keil.arm.com/boards/arm-v2m-mps3-sse-300-fvp-610bb98/projects/) is available for you to browse.
 
 ## Other tools
 
@@ -47,7 +47,7 @@ A number of other tools are common in ML applications.
 
 ## Using Docker
 
-You may want to use Docker to simplify ML development environment creation. 
+You may want to use [Docker](/install-guides/docker) to simplify ML development environment creation. 
 
 As an example, clone the MLEK repository and look at the `Dockerfile` at the top of the repository to see one way to use Docker in ML application development:
 
@@ -131,8 +131,7 @@ Heard yes (146) @1000ms
 Heard no (145) @5600ms
 Heard yes (143) @9100ms
 Heard no (145) @13600ms
-Heard yes (143) @17100ms
-Heard no (145) @21600ms
+...
 ```
 
 ### Open-IoT-SDK
