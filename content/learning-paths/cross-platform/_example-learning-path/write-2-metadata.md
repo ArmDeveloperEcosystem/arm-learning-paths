@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Write: Modify Metadata"
+title: "Modify Learning Path metadata"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
