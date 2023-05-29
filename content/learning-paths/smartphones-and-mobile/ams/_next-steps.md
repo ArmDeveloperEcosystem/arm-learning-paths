@@ -18,6 +18,26 @@ recommended_path: "Enter learning path relative link here"
 
 further_reading:
     - resource:
+        title: Get started with Streamline Tutorial
+        link: https://developer.arm.com/documentation/102477
+        type: documentation
+    - resource:
+        title: Arm Streamline Performance Advisor User Guide
+        link: https://developer.arm.com/documentation/102009
+        type: documentation
+    - resource:
+        title: Graphics Analyzer video tutorial
+        link: https://www.youtube.com/watch?v=6j68rtcTYRc
+        type: website
+    - resource:
+        title: Mali Offline Compiler video tutorial
+        link: https://www.youtube.com/watch?v=zEybNlwd7SI
+        type: website
+    - resource:
+        title: Integrate Arm Mobile Studio into a CI workflow
+        link: https://developer.arm.com/documentation/102543
+        type: documentation
+    - resource:
         title: Optimization advice for graphics content on mobile devices
         link: https://developer.arm.com/documentation/102643
         type: documentation
@@ -29,14 +49,6 @@ further_reading:
         title: Arm GPU Best Practices Developer Guide
         link: https://developer.arm.com/documentation/101897
         type: documentation
-    - resource:
-        title: Graphics Analyzer video tutorial
-        link: https://www.youtube.com/watch?v=6j68rtcTYRc
-        type: website
-    - resource:
-        title: Mali Offline Compiler video tutorial
-        link: https://www.youtube.com/watch?v=zEybNlwd7SI
-        type: website
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
