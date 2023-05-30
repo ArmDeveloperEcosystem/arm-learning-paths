@@ -20,11 +20,11 @@ weight: 1
 
 [AWS CLI](https://docs.aws.amazon.com/cli/index.html) is a cross-platform command-line tool that can be installed on development computers. The AWS Command Line Interface (AWS CLI) is a unified tool that provides a consistent interface for interacting with all parts of Amazon Web Services. 
 
-It is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
+It is available for a variety of operating systems and Linux distributions, supports the Arm architecture and has multiple ways to install it. 
 
 ## Introduction
 
-This article provides a quick solution to install AWS CLI version 2 for Ubuntu on Arm.
+This article provides quick solutions to install AWS CLI versions 2 and 1 for Ubuntu on Arm.
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
@@ -42,6 +42,8 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Download and install AWS CLI version 2
 
+The easiest way to install AWS CLI version 2 for Ubuntu on Arm is to download and run the installer from AWS.
+
 Before starting, install `unzip`:
 
 ```bash { target="ubuntu:latest" }
@@ -57,11 +59,15 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-Confirm the CLI is available by invoking the `aws` command to print the version.
+Confirm the CLI version 2 is available by invoking the `aws` command to print the version.
 
 ```bash { target="ubuntu:latest" }
 aws --version
 ```
+
+Review [AWS CLI v2 is now generally available](https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/) to review the new features in version 2. 
+
+You are ready to use the AWS CLI version 2.
 
 ## Install AWS CLI version 1
 
@@ -74,6 +80,10 @@ sudo apt update
 sudo apt install awscli -y
 ```
 
-Review [AWS CLI v2 is now generally available](https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/) to review the new features in version 2. 
+Confirm the CLI version 1 is available by invoking the `aws` command to print the version.
 
-You are ready to use the AWS CLI.
+```bash { target="ubuntu:latest" }
+aws --version
+```
+
+You are ready to use the AWS CLI version 1.
