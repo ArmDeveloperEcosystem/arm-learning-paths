@@ -21,6 +21,14 @@ These settings are enabled as default within [Unity](https://unity.com/) when [D
 
 You can optionally provide [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) to your code which will be displayed in the Streamline report, to assist readability of the report.
 
+### Open-source projects
+
+Arm provides open-source projects that can be used by application developers as part of their development.
+
+* [Unity Integration](https://github.com/ARM-software/mobile-studio-integration-for-unity/)
+* [Arm ASTC Encoder texture compressor](https://github.com/ARM-software/astc-encoder)
+* [libGPUInfo library](https://github.com/ARM-software/libGPUInfo)
+
 ## Set up Android device
 
 Ensure that [Developer Mode](https://developer.android.com/studio/debug/dev-options) is enabled, then enable `USB Debugging` under `Settings > Developer options`.
@@ -59,4 +67,4 @@ The captured data will be processed into a report that the user can manually exa
 
 Understanding the output of the report is key to the usefulness of Streamline. [Android performance triage with Streamline](https://developer.arm.com/documentation/102540) describes how to understand the report from a number of points of view, depending on what information you are trying to extract from it.
 
-To further simplify analysis of Streamline reports, use Performance Advisor.
+To further enhance your analysis of Streamline reports, use [Performance Advisor](../pa).
