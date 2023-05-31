@@ -24,6 +24,11 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - AWS
+    - Coding
+    - Neon
+    - SVE
+    - Go
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

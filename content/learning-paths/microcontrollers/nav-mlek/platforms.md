@@ -117,7 +117,7 @@ FVP and VHT platforms can be configured with:
 
 The Ethos-U model used in FVPs can run at a faster speed with less simulation detail. 
 
-Use a configuration parameter to enable fast mode:
+Use this configuration parameter to enable fast mode:
 
 ```console
 -C ethosu.extra_args="--fast"

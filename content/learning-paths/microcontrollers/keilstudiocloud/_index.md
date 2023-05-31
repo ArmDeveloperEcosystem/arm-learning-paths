@@ -25,12 +25,13 @@ armips:
     - Cortex-M
 operatingsystems:
     - Baremetal
+    - RTOS
 tools_software_languages:
-    - C
-    - Keil Studio Cloud
+    - Keil
     - Arm Compiler for Embedded
     - Arm Virtual Hardware
-    - CMSIS-DAP
+    - CMSIS
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -27,6 +27,13 @@ test_status:
 title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm based servers
 tools_software_languages:
 - Memcached
+- AWS
+- Azure
+- Google Cloud
+- SQL
+- MySQL
+- PostgreSQL
+
 weight: 1
 who_is_this_for: This is an advanced topic for developers who want to use memcached as their in-memory key-value store.
 

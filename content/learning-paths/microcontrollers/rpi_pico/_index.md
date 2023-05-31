@@ -29,9 +29,8 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - C
-    - GCC
-    - cmake
+    - Raspberry Pi
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

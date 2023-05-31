@@ -11,7 +11,7 @@ Performance Advisor is a tool that provides a report showing how your Android ap
 
 ## Before you begin
 
-Performance Advisor uses a Python script to connect to your device. You will need `Python 3.5` or later installed on your host machine.
+Performance Advisor uses a Python script to connect to your device. You will need `Python 3.6` or later installed on your host machine.
 
 Build your application, and setup Android device as per Streamline instructions.
 
@@ -55,17 +55,13 @@ In the terminal window, navigate to the stored data folder. List contents with `
 
 Run Performance Analyzer on the appropriate folder to generate the report which can then be opened with any browser. The default name is `report.html`.
 ```console
-Streamline-cli -pa <options> my_capture.apc
+streamline-cli -pa <options> my_capture.apc
 ```
 The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command), else can be seen with:
 ```console
-Streamline-cli -pa -h
+streamline-cli -pa -h
 ```
 They can also be passed within an [options file](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command/pa-command-line-options-file).
-
-### Performance budget
-
-You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, refer to the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/0805/Quick-start-guide/Setting-performance-budgets) section on performance budgets.
 
 ## Generate a JSON performance report
 
@@ -75,5 +71,14 @@ In the terminal window, navigate to the stored data folder. List contents with `
 
 Run Performance Analyzer on the appropriate folder to generate the report (named `report.json` in below):
 ```console
-Streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
+streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
 ```
+
+## Performance budget
+
+You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, refer to the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) section on performance budgets.
+
+## Example Performance Advisor report
+
+An  example report and explanation of the detail is given in the [Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest/Example-Performance-Advisor-report).
+

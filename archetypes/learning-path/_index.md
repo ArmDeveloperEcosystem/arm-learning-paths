@@ -3,7 +3,7 @@ title: PLACEHOLDER TITLE
 
 description: PLACEHOLDER DESCRIPTION
 
-minutes_to_complete: PLACEHOLDER MINUTES
+minutes_to_complete: 10
 
 who_is_this_for: PLACEHOLDER SENTENCE
 

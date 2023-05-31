@@ -24,6 +24,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - Raspberry Pi
     - TensorFlow
     - Docker
 

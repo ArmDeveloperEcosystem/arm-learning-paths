@@ -21,10 +21,12 @@ subjects: CI-CD
 armips:
     - Cortex-M
 operatingsystems:
+    - Baremetal
 tools_software_languages:
+    - Coding
     - Arm Virtual Hardware
     - GitHub
-    - AWS EC2 
+    - AWS
 
 ### Cross-platform metadata only
 shared_path: true

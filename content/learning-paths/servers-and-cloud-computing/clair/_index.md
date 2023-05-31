@@ -24,7 +24,6 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Docker
-    - Docker Compose
     - Go 
     - Clair
 

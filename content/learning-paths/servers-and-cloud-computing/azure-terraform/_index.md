@@ -26,6 +26,7 @@ operatingsystems:
 tools_software_languages:
     - Terraform
     - Azure
+    - Bastion
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
