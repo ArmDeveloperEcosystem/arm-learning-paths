@@ -69,13 +69,17 @@ az vm image list --location eastus2 --publisher Canonical --offer 0001-com-ubunt
 ![image #center](https://user-images.githubusercontent.com/42368140/196460588-3aa72ac1-5f0f-4c57-a6d7-70e81787f137.PNG)
 
 ## Terraform infrastructure
-Start by creating an empty `providers.tf`, `variables.tf`, `main.tf` and `outputs.tf` files.
+Start by creating empty `providers.tf`, `variables.tf`, `main.tf` and `outputs.tf` files in your desired directory:
+
+```console
+touch providers.tf variables.tf main.tf outputs.tf
+```
 
 ### Providers
 
 Tell Terraform which cloud provider to connect to, Azure for this example.
 
-Add below code in `providers.tf` file:
+Add below code to the `providers.tf` file:
 
 ```console
 terraform {
@@ -106,7 +110,7 @@ provider "azurerm" {
 
 Define required variables to create a virtual machine.
 
-Add below code in `variables.tf` file: 
+Add below code to the `variables.tf` file: 
 
 ```console
 variable "resource_group_location" {
@@ -122,7 +126,9 @@ variable "resource_group_name_prefix" {
 
 ### Create required resources
 
-Add the resources required to create a virtual machine in `main.tf`.
+Define required resources to create a virtual machine.
+
+Add below code to the `main.tf` file:
 
 ```console
 resource "random_pet" "rg_name" {
@@ -254,7 +260,9 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
  
 ### Outputs
 
-Add the below code in `outputs.tf` to get **Resource group** name and **Public IP**:
+Get the **Resource group** name and **Public IP** to output after Terraform deployment.
+
+Add below code to the `outputs.tf` file: 
 
 ```console
 output "resource_group_name" {
@@ -280,7 +288,7 @@ terraform init
 
 ### Create a Terraform execution plan
 
-Run `terraform plan` to create an execution plan.
+Run `terraform plan` to create and preview an execution plan before applying it to your cloud infrastructure.
 
 ```console
 terraform plan -out main.tfplan
@@ -293,18 +301,27 @@ terraform plan -out main.tfplan
 
 ### Apply a Terraform execution plan
 
-Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
+Run `terraform apply` to apply the execution plan to your cloud infrastructure. The command below creates all required infrastructure.
 ```console
 terraform apply main.tfplan
 ```
+
+Make note of the `public_ip_address` and `resource_group_name` outputs, as shown in the image below.
+
+These outputs will be used to verify your created resources in the Azure Portal.
+
 ![image #center](https://user-images.githubusercontent.com/67620689/227440412-c01e6f30-c32f-431b-819e-6b7e1937a0df.PNG)
 
 ### Verify created resources
-Go to Azure Dashboard and choose **Resource group** created from Terraform.
+On the Azure Portal, go to **Azure Dashboard** and choose **Resource group** created from Terraform. 
+
+Verify that the Resource Group Name matches your output.
 
 ![image #center](https://user-images.githubusercontent.com/67620689/227440421-20642716-8eee-4f82-a5de-f4dd4592b65d.PNG)
 
 Go to Azure Dashboard and choose **Virtual Machine** created from Terraform.
+
+Verify that the Resource Group Name and Public IP Address match your output.
 
 ![image #center](https://user-images.githubusercontent.com/67620689/227440425-fe5d1685-e957-46ec-b49c-e848d211fbe3.PNG)
 
