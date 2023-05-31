@@ -55,11 +55,11 @@ In the terminal window, navigate to the stored data folder. List contents with `
 
 Run Performance Analyzer on the appropriate folder to generate the report which can then be opened with any browser. The default name is `report.html`.
 ```console
-Streamline-cli -pa <options> my_capture.apc
+streamline-cli -pa <options> my_capture.apc
 ```
 The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command), else can be seen with:
 ```console
-Streamline-cli -pa -h
+streamline-cli -pa -h
 ```
 They can also be passed within an [options file](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command/pa-command-line-options-file).
 
@@ -71,7 +71,7 @@ In the terminal window, navigate to the stored data folder. List contents with `
 
 Run Performance Analyzer on the appropriate folder to generate the report (named `report.json` in below):
 ```console
-Streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
+streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
 ```
 
 ## Performance budget
