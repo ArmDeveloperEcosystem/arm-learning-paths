@@ -11,7 +11,7 @@ Mali Offline Compiler is a command-line tool that you can use to compile all sha
 
 ## Supported GPUs
 
-To see the full list of [supported GPUs](The [User Guide](https://developer.arm.com/documentation/101863/latest/Platform-support/GPU-support) use:
+To see the full list of [supported GPUs](https://developer.arm.com/documentation/101863/latest/Platform-support/GPU-support) use:
 ```console
 malioc --list
 ```
