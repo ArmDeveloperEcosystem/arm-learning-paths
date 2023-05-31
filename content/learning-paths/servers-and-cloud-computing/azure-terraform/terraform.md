@@ -349,4 +349,5 @@ terraform destroy
 ```
 
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
+
 ![image #center](https://user-images.githubusercontent.com/42368140/196463306-1e559148-4b9a-414c-b862-06c6aa33557e.PNG)
