@@ -75,7 +75,7 @@ g++ -O2 -I simde/ -march=armv8.2-a+fp16+rcpc+dotprod+crypto --std=c++14 neon.cpp
 ```
 
 Run the code:
-```bash { target="arm64v8/ubuntu:latest"; command_line="user@localhost | 2" }
+```bash { target="arm64v8/ubuntu:latest" }
 ./neon
 ```
 and observe the output:

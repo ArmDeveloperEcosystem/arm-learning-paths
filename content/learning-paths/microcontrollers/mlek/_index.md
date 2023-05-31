@@ -20,12 +20,14 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Cortex-M
+    - Ethos-U
+    - Corstone
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - C
-    - Corstone-300 FVP
+    - Coding
     - Arm Virtual Hardware
+    - Fixed Virtual Platform
     - GCC
     - Arm Compiler for Embedded
 

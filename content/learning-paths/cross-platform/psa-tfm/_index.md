@@ -21,10 +21,12 @@ subjects: Security
 armips:
     - Cortex-A
     - Cortex-M
+    - Corstone
 operatingsystems:
     - Linux
 tools_software_languages:
-    - FVP
+    - Trusted Firmware
+    - Fixed Virtual Platform
     - GCC
 
 ### Cross-platform metadata only

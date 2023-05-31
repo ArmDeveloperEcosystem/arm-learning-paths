@@ -26,7 +26,7 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - C
+    - Coding
     - GitHub
     - Azure
 

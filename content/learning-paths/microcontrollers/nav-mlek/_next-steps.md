@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Try Build and run the Arm Machine Learning Evaluation Kit examples to get hands-on experience with the Machine Learning Evaluation Kit. 
+   Try to build and run the Arm Machine Learning Evaluation Kit examples to get hands-on experience an ML example. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/microcontrollers/mlek/"
@@ -28,7 +28,7 @@ further_reading:
     - resource:
         title: Machine Learning on Arm Cortex-M Microcontrollers
         link: https://armkeil.blob.core.windows.net/developer/Files/pdf/ethos/Arm_ML_on_Cortex-M_Microcontrollers_v2.pdf
-        type: white paper
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

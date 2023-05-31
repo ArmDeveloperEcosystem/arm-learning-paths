@@ -23,7 +23,8 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Pointer Authentication
+    - Coding
+    - AWS
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

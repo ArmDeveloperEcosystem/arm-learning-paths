@@ -27,9 +27,8 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - C
-    - Assembly
-    - Keil MDK
+    - Coding
+    - Keil
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

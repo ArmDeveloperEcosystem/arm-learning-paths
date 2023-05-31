@@ -23,9 +23,9 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - AWS CodeBuild
+    - AWS
     - Docker
-
+    - AWS CodeBuild
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

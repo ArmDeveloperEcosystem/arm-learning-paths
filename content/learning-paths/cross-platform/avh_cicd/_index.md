@@ -22,10 +22,10 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - C
+    - Coding
     - Arm Virtual Hardware
     - GitHub
-    - AWS EC2
+    - AWS
 
 ### Cross-platform metadata only
 shared_path: true
