@@ -1,19 +1,19 @@
 ---
 # User change
-title: "Arm Performance Advisor"
+title: "Performance Advisor with your application"
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Performance Advisor is a tool that provides a report showing how your Android application performs on a mobile device.
+Now that you have seen an example Performance Analyzer report, you can use it with your own application.
 
 ## Before you begin
 
 Performance Advisor uses a Python script to connect to your device. You will need `Python 3.6` or later installed on your host machine.
 
-Build your application, and setup Android device as per Streamline instructions.
+Build your application, and setup Android device as per previous [instructions](../streamline).
 
 ## Connect to the device
 
@@ -22,9 +22,7 @@ Open a terminal or command prompt, and navigate to the `Arm Mobile Studio` insta
 ```console
 cd <installation_directory>/streamline/bin/android
 ```
-
 To run the script, use:
-
 ```console
 python3 lwi_me.py <options>
 ```
@@ -77,8 +75,3 @@ streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
 ## Performance budget
 
 You can specify a performance budget which will be reflected in the Performance Advisor report. For more information, refer to the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Quick-start-guide/Setting-performance-budgets) section on performance budgets.
-
-## Example Performance Advisor report
-
-An  example report and explanation of the detail is given in the [Performance Advisor tutorial](https://developer.arm.com/documentation/102478/latest/Example-Performance-Advisor-report).
-

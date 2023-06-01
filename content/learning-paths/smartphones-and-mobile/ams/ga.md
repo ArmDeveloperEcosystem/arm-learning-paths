@@ -2,7 +2,7 @@
 # User change
 title: "Graphics Analyzer"
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -13,7 +13,7 @@ The tool allows you to observe API call arguments and return values, and interac
 
 ## Prerequisites
 
-Build your application, and setup Android device as per Streamline instructions.
+Build your application, and setup Android device as per [Streamline](../streamline) instructions.
 
 ## Connect to the device
 
