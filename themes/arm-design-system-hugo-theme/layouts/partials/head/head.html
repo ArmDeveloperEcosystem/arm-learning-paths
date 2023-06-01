@@ -9,6 +9,7 @@ Where it is used:
 <!-- Hugo processing -->
 {{$is_content := or (eq .Layout "learningpathall") (eq .Layout "installtoolsall")}}
 {{$is_list := and (not $is_content) (.IsNode) (not .IsHome) }}  
+
     <!-- assign title of page -->
 {{ $title := print .Title " | " .Site.Title  }}
 {{ if .IsHome }}
@@ -41,15 +42,8 @@ Where it is used:
 <link rel="stylesheet" href="{{ $css_all_pages.Permalink }}">
 -->
 
-<!-- Chartist loading -->
-<link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-<script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-<script type="text/javascript" src="/js/chartist/chartist-plugin-fill-donut.min.js"></script>
-<script type="text/javascript" src="/js/chartist/chartist-plugin-legend.js"></script>
 
-
-
-{{$all_page_css := slice (resources.Get "css/chartist.css") (resources.Get "css/cookie.css") (resources.Get "css/cross-page.css") (resources.Get "css/mobile.css")}}
+{{$all_page_css := slice (resources.Get "css/cookie.css") (resources.Get "css/cross-page.css") (resources.Get "css/mobile.css")}}
 
 <!-- Homepage only -->
 {{if .IsHome }}
@@ -86,3 +80,18 @@ Where it is used:
 
 {{end}}
 
+
+<!-- Stats only -->
+{{if eq .Layout "stats_page"}}
+    <!-- Include JS files (and external stylesheet for chartest via CDN) -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script type="text/javascript" src="/js/chartist/chartist-plugin-fill-donut.min.js"></script>
+    <script type="text/javascript" src="/js/chartist/chartist-plugin-legend.js"></script>
+    
+    <!-- minify local CSS files -->
+    {{ $css_stats := $all_page_css | append 
+        (resources.Get "css/chartist.css")
+        | resources.Concat "css/mini_stats.css" | minify | fingerprint  }}
+    <link rel="stylesheet" href="{{ $css_stats.Permalink }}">
+{{end}}
