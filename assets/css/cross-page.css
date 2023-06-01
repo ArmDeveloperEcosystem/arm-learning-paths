@@ -205,11 +205,16 @@ table tbody td {
         background-position: center;        /* Center the image */
         background-repeat: no-repeat;       /* Do not repeat the image */
         background-size: cover;             /* Resize the background image to cover the entire container */
+        border-bottom: 1px solid #303133; /* bottom border across page */
 }
 @media (max-width: 768px) { /* smaller screens than MD */
     #expanded-masthead {
         height: 90px;                      /* You must set a specified height */
     }
+}
+/* remove bottom border from ads-masthead component */
+ads-masthead {
+    --ads-masthead-border-bottom-color: transparent;
 }
     
 
@@ -424,3 +429,8 @@ html[theme='light'] body {
 @media (min-width: 1200px) {
         ads-masthead { --ads-masthead-horizontal-padding: 5px; }
 }
+
+
+
+
+
