@@ -22,7 +22,7 @@ Select the example to import, and click `Finish`.
 ![Samples #center](images/samples.png "Select sample captures")
 
 Double-click on the report in `Streamline Data`, then click `Analyze` when prompted. The report will be processed, and an interactive timeline will be shown.
-![Timeline #center](images/analysis.png "Streamline Timeline")
+![Timeline #center](images/timeline.png "Streamline Timeline")
 
 ## Analyze the capture
 
