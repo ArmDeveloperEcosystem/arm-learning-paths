@@ -20,7 +20,7 @@ Called from:
         <p>{{.context.Params.next_step_guidance  | markdownify}}</p>
         {{ with .context.Site.GetPage .context.Params.recommended_path}}
             <span>
-                <ads-cta-link id="next-learning-path" link='{{.Permalink}}'>
+                <ads-cta-link link='{{.Permalink}}'>
                     <span>Next Learning Path:&nbsp;&nbsp;&nbsp;{{.Title}}</span>
                 </ads-cta-link>
             </span>
@@ -28,7 +28,7 @@ Called from:
 
         <!-- 3 columns of next steps -->
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
-            <div id="similar-lp-div" class="content-box">
+            <div class="content-box">
                 <h4>Similar Learning Paths</h4>
                 <p>To learn about topics related to this one.</p>
                 <ul>
@@ -39,7 +39,7 @@ Called from:
                 </ul>
             </div>
 
-            <div id="further-reading-div" class="content-box">
+            <div class="content-box">
                 <h4>Further Reading</h4>
                 <p>With more information on topics in this learning path.</p>
                 <ul class="fa-ul u-margin-left-0">
@@ -63,7 +63,7 @@ Called from:
                 </ul>
             </div>
 
-            <div id="explore-tags-div" class="content-box">
+            <div class="content-box">
                 <h4>Explore Tags</h4>
                 <p>Look at more learning paths under these tags.</p>
                 <span>
