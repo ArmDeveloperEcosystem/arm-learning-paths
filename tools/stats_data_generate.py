@@ -362,9 +362,7 @@ def main():
     # Read in data file as python dict
     existing_weekly_dic = yaml.safe_load(data_weekly_file_path.read_text())
     existing_tests_dic  = yaml.safe_load(tests_status_file_path.read_text())
-    print('printing weekly dict format')
-    print(existing_weekly_dic)
-    
+
     # Structure new data formats:
     new_weekly_entry = { date_today: {
         "content": {},
@@ -402,7 +400,7 @@ def main():
 
     # Alter existing dic to be a list of dates for easier processing:
     with open(data_weekly_file_path, 'w') as outfile:
-        print('printing weekly dict format')
+        print('printing weekly dict formatz')
         print(existing_weekly_dic)
         yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
