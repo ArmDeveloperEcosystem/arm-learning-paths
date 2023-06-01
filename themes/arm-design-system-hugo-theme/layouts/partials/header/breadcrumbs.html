@@ -31,8 +31,8 @@ Where it is used:
         {{$selected_category := "cross-platform"}}
         {{if .p2.Params.shared_between}}
             {{$selected_category = (index .p2.Params.shared_between 0)}}
-        {{else if .p1.Params.shared_between}}
-            {{$selected_category = (index .p1.Params.shared_between 0)}}
+        {{else if .p2.Parent.Params.shared_between }}
+            {{$selected_category = (index .p2.Parent.Params.shared_between 0)}}
         {{end}}
 
         {{$breadcrumb_title = replace $selected_category "-" " " | title }} <!-- un-urlize -->
