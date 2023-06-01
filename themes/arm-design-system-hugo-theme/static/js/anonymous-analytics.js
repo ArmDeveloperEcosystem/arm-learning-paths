@@ -125,7 +125,7 @@ function trackHeaderInteraction(type,name){
         let current_path = window.location.pathname;
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
 
-        
+
         //
         //  Header 
         //  ===================
@@ -234,16 +234,50 @@ function trackHeaderInteraction(type,name){
                     
            // 0) onload digital data setting
            let lp_title = document.getElementById('learning-path-title').innerText;
-           let lp_step = document.getElementById('learning-path-step-active').innerText;
+           let lp_step = document.getElementById('learning-path-step-active').innerText.trim();
            let lp_step_num = document.getElementById('learning-path-step-active').getAttribute('data-step-num');
-          
-           digitalData.learningPath = {
-                pageInfo: {
-                    learningPathName: lp_title, 
-                    learningTabName: lp_step,
-                    pageNumber: "page " +lp_step_num
+
+            // specific to intro page only; 
+            if (document.getElementById('skill-level')) {
+                let lp_skill_level = document.getElementById('skill-level').innerText.trim();
+                let lp_reading_time = document.getElementById('reading-time').innerText.trim();
+                let lp_last_updated = document.getElementById('last-updated').innerText.trim();
+                let lp_author = document.getElementById('author').innerText.trim();
+                let lp_tag_elements = document.querySelectorAll('#tags-for-content ads-tag');
+                let lp_tags = ''
+                for (let ele of lp_tag_elements) {
+                     lp_tags = lp_tags + ',' + ele.innerText.trim()
                 }
-            };
+                lp_tags = lp_tags.replaceAll(',,',''); // remove extra ,,
+
+
+                // send digital data
+                digitalData.learningPath = {
+                    pageInfo: {
+                        learningPathName: lp_title, 
+                        learningTabName: lp_step,
+                        pageNumber: "page " +lp_step_num,
+                        skillLevel: lp_skill_level,
+                        readingTime: lp_reading_time,
+                        lastUpdated: lp_last_updated,
+                        learningPathAuthor: lp_author,
+                        learningPathTags: lp_tags
+                    }
+                };
+            }
+            else {
+                // send smaller digital data
+                digitalData.learningPath = {
+                    pageInfo: {
+                        learningPathName: lp_title, 
+                        learningTabName: lp_step,
+                        pageNumber: "page " +lp_step_num,
+                    }
+                };
+            }
+
+
+
             
 
 
@@ -318,13 +352,16 @@ function trackHeaderInteraction(type,name){
             } 
                 // metadata marking for similar learning paths, further reading, next learning path.
             let next_learning_path_link = document.getElementById('next-learning-path');
-            next_learning_path_link.addEventListener("click", () => {
-                _satellite.track('content-interaction', {   
-                    'data-track-type'     : 'learning-path-next-steps',
-                    'data-track-location' : 'metadata',
-                    'data-track-name'     : 'next-learning-path'
+            if (next_learning_path_link) {
+                next_learning_path_link.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : 'next-learning-path'
+                    });
                 });
-            });
+            }
+
 
             let similar_lp_links = document.querySelectorAll('#similar-lp-div a');
             for (let link of similar_lp_links) {
@@ -436,10 +473,31 @@ function trackHeaderInteraction(type,name){
         //  Install Guide page
         //  ===================
         else if ( ( (depth_of_path == 3) | (depth_of_path == 4) ) & (current_path.includes('/install-guides/')) ) {
+            
             /* Assign to the following components:
                     1. Official Docs click
                     2. Feedback (on Next Steps page)
             */
+
+
+
+
+
+           // 0) onload digital data setting, only on pages with metadata table
+           if (document.getElementById('reading-time')) {
+            let ig_title = document.getElementById('install-guide-title').innerText;
+            let ig_reading_time = document.getElementById('reading-time').innerText.trim();
+            let ig_last_updated = document.getElementById('last-updated').innerText.trim();
+            let ig_author = document.getElementById('author').innerText.trim();
+ 
+            digitalData.installGuide = {
+                 pageInfo: {
+                     installGuideName: ig_title, 
+                     readingTime: ig_reading_time,
+                     learningPathAuthor: ig_author,
+                     lastUpdated: ig_last_updated
+                }
+            };
 
             // 1) Official Docs click
             let offical_doc_link = document.getElementById('official-doc-link');
@@ -467,9 +525,10 @@ function trackHeaderInteraction(type,name){
                     let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
                     trackChoiceFeedback(feedback);
                 });
-            } 
-        }
-    });
+            }
+        } 
+    }
+});
 
     
 

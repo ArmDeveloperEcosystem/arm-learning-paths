@@ -10,20 +10,21 @@
 <br><br>
 
 <!-- Get most recent data slice from weekly data -->
-{{ $this_week_data := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
+{{ $this_week := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
+{{$current_date := ""}}
+{{$current_stats := ""}}
+{{ range $date, $stats := $this_week }}
+    {{$current_date = $date}}
+    {{$current_stats = $stats}}
+{{end}}
 
 <p>yooooooo</p>
 
 
 
+{{$current_date}}
 
-{{ range $date, $vals := $this_week_data }}
-    {{$date}}
-    <br>
-    {{$vals.authors}}
-    <br><br><br>
-{{end}}
-
+{{$current_stats}}
 
 <div class="c-row u-margin-top-0">
     <div class="c-col c-col-9">
@@ -55,7 +56,9 @@
     var pie_labels = []
     var pie_series = []
 
-    {{range $key, $val := $this_week_data.content}}
+
+
+    {{range $key, $val := $current_stats.content}}
         {{if ne $key "total"}}
             {{if ne $key "install-guides"}}
                 pie_labels.push({{$key}})
