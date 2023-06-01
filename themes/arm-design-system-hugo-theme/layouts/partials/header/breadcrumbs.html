@@ -24,7 +24,6 @@ Where it is used:
     {{ if and (ne .p1.Title "Learning-paths") (ne .p1.Kind "taxonomy") }}
         {{ if ne .p1.Kind "term"}}
             <!-- Normal breadcrumb-->
-                <!-- If cross-platform, go into page and determine deal. -->
             <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" {{ if ne .p1 .p2 }} link="{{ .p1.Permalink }}" {{else}} current="true"{{ end }}>{{.p1.Title}}</ads-breadcrumb>
         {{else}}
             <!-- With tag -->

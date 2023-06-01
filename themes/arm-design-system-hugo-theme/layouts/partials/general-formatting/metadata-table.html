@@ -93,7 +93,7 @@ Called from:
 
  <!-- Markdown metadata table -->
  <div class="content-box">
-    <h2 id="about-marker">About this {{$table_name}}</h2>
+    <h2>About this {{$table_name}}</h2>
     <div class="c-row">
         <div class="c-col xs:c-col-12 sm:c-col-12 md:c-col-12 lg:c-col-6 xl:c-col-4">
             <!-- RIGHT TABLE, non mobile-->
@@ -224,7 +224,7 @@ Called from:
                             </td>
                             <td class="td-metadata-value" >
                                 <!-- docs exist! -->
-                                <a id="official-doc-link" href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                                <a href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
                             </td>
                         </tr>
                         {{end}}
@@ -326,7 +326,7 @@ Called from:
                         <tr>
                             <td class="td-metadata-value margin-l-24" >
                                 <!-- docs exist! -->
-                                <a id="official-doc-link" href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                                <a href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
                             </td>
                         </tr>
                         {{end}}
