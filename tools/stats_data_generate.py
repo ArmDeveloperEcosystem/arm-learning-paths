@@ -396,7 +396,16 @@ def main():
         existing_weekly_dic = [new_weekly_entry]
     # Otherwise append it
     else:  
-        existing_weekly_dic.append(new_weekly_entry)
+        # Check if date already a key in there
+        exists=False
+        for dic in existing_weekly_dic:
+            if date_today in dic:
+                print('date today included, don"t save')
+                exists=True
+                break
+        if not exists:
+            print('date doesn"t exist, appending data')
+            existing_weekly_dic.append(new_weekly_entry)
 
     # Alter existing dic to be a list of dates for easier processing:
     with open(data_weekly_file_path, 'w') as outfile:
