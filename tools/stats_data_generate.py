@@ -393,9 +393,11 @@ def main():
     ### Weekly
     # if weekly dict is empty, create key
     if not existing_weekly_dic:
+        print('no existing dic, starting from scratch.')
         existing_weekly_dic = [new_weekly_entry]
     # Otherwise append it
     else:  
+        print('weekly data exists...checking to see if date exists.')
         # Check if date already a key in there
         exists=False
         for dic in existing_weekly_dic:
@@ -409,7 +411,7 @@ def main():
 
     # Alter existing dic to be a list of dates for easier processing:
     with open(data_weekly_file_path, 'w') as outfile:
-        print('printing weekly dict formatz')
+        print('printing weekly dict format, and dumping into this file: '+outfile)
         print(existing_weekly_dic)
         yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
