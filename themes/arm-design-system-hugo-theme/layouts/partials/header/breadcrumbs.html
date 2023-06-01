@@ -20,15 +20,31 @@ Where it is used:
         {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
     {{ end }}
 
+
+
+    <!-- Process breadcrumb title, dealing with tags and cross platform differences -->
+    {{$breadcrumb_title := .p1.Title}}
+    {{$breadcrumb_link := .p1.Permalink}}
+
+    {{ if eq .p1.Title "Cross Platform"}}
+        <!-- Set title and permalink to the first category in cross-platform _index.md file -->
+        {{$selected_category := "cross-platform"}}
+        {{if .p2.Params.shared_between}}
+            {{$selected_category = (index .p2.Params.shared_between 0)}}
+        {{else if .p1.Params.shared_between}}
+            {{$selected_category = (index .p1.Params.shared_between 0)}}
+        {{end}}
+
+        {{$breadcrumb_title = replace $selected_category "-" " " | title }} <!-- un-urlize -->
+        {{$breadcrumb_link = print "/learning-paths/" $selected_category}}
+
+    {{ else if eq .p1.Kind "term"}}
+        {{$breadcrumb_title = print "Tag: " .p1.Title}}
+    {{end}}
+
     <!-- Filter out breadcrumbs we don't want to show: taxonomy pages  -->
     {{ if and (ne .p1.Title "Learning-paths") (ne .p1.Kind "taxonomy") }}
-        {{ if ne .p1.Kind "term"}}
-            <!-- Normal breadcrumb-->
-            <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" {{ if ne .p1 .p2 }} link="{{ .p1.Permalink }}" {{else}} current="true"{{ end }}>{{.p1.Title}}</ads-breadcrumb>
-        {{else}}
-            <!-- With tag -->
-            <ads-breadcrumb slot="breadcrumb" label="{{ .p1.Permalink }}" {{ if ne .p1 .p2 }} link="{{ .p1.Permalink }}" {{else }} current="true"{{ end }}>Tag: {{.p1.Title}}</ads-breadcrumb>
-        {{end}}
+        <ads-breadcrumb slot="breadcrumb" label="{{ $breadcrumb_link }}" {{ if ne .p1 .p2 }} link="{{ $breadcrumb_link }}" {{else }} current="true"{{ end }}>{{$breadcrumb_title}}</ads-breadcrumb>
     {{end}}
 
 {{ end }}
