@@ -2,7 +2,7 @@
 # User change
 title: "Mali Offline Compiler"
 
-weight: 6 # 1 is first, 2 is second, etc.
+weight: 8 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -64,7 +64,7 @@ The full list of available options are documented in the [User Guide](https://de
 malioc --help
 ```
 
-# Analyze the report
+## Analyze the report
 
 The report will provide an approximate cycle cost breakdown for the major functional units in the design. Use this information to optimize your shader.
 
@@ -114,6 +114,6 @@ Shortest path cycles:        0.54    0.00    0.25    2.50        T
 Longest path cycles:         0.96    0.00    0.25    2.50        T
 A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
-Significantly reducing the Arithmetic cycles.
+Observer that the number of Arithmetic cycles has been significantly reduced.
 
 Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. This brief [video tutorial](https://www.youtube.com/watch?v=zEybNlwd7SI) is an excellent starter.
