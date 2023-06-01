@@ -96,7 +96,6 @@ function trackFacetInteraction(){
         let current_search = value;
 
         // Send tracking data  
-        console.log(formatted_active_filters,current_search);              
         _satellite.track('facet-interaction', {   
             'facet-active-names'   : formatted_active_filters,
             'search-current-query' : current_search
@@ -125,7 +124,21 @@ function trackHeaderInteraction(type,name){
     document.addEventListener("DOMContentLoaded", function() {  
         let current_path = window.location.pathname;
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
+
         
+        //
+        //  Header 
+        //  ===================
+        // breadcrumbs
+        let breadcrumbs  = document.getElementById('breadcrumb-element');
+        for (let crumb of breadcrumbs.children) {
+            let crumb_name = crumb.innerText;
+            crumb.addEventListener("click", () => {   trackHeaderInteraction('header-breadcrumb-clicks',crumb_name);        });    
+        }
+
+
+
+
         //
         //  Homepage
         //  ===================
@@ -192,7 +205,7 @@ function trackHeaderInteraction(type,name){
 
             // 3) Learning Path cards
             let learning_path_card = document.querySelectorAll('.path-card:not(.global-nav-path-card)');        // Exclude global nav cards, if existant.
-            for (card of learning_path_card) {
+            for (let card of learning_path_card) {
                 card.addEventListener("click", () => {
                     let card_title = card.querySelector('.search-title').innerHTML;
                     _satellite.track('content-interaction', {   
@@ -303,6 +316,47 @@ function trackHeaderInteraction(type,name){
                     trackChoiceFeedback(feedback);
                 });
             } 
+                // metadata marking for similar learning paths, further reading, next learning path.
+            let next_learning_path_link = document.getElementById('next-learning-path');
+            next_learning_path_link.addEventListener("click", () => {
+                _satellite.track('content-interaction', {   
+                    'data-track-type'     : 'learning-path-next-steps',
+                    'data-track-location' : 'metadata',
+                    'data-track-name'     : 'next-learning-path'
+                });
+            });
+
+            let similar_lp_links = document.querySelectorAll('#similar-lp-div a');
+            for (let link of similar_lp_links) {
+                link.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : 'similar-learning-path-link'
+                    });
+                });
+            }
+            let further_reading_links = document.querySelectorAll('#further-reading-div a');
+            for (let link of further_reading_links) {
+                link.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : 'further-reading-link'
+                    });
+                });
+            }
+            let explore_tag_links = document.querySelectorAll('#explore-tags-div ads-tag');
+            for (let link of explore_tag_links) {
+                link.addEventListener("click", () => {
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'learning-path-next-steps',
+                        'data-track-location' : 'metadata',
+                        'data-track-name'     : 'explore-tags-tag'
+                    });
+                });
+            }
+
 
             // 4a) Navitaion from navbar
             let in_learning_path_nav_bar_elements = document.getElementsByClassName('inner-learning-path-navbar-element');  
@@ -331,7 +385,7 @@ function trackHeaderInteraction(type,name){
             for (let nav_btn_element of in_learning_path_nav_btn_elements) {
                 nav_btn_element.addEventListener("click", () => {
                     let all_ele_classes = nav_btn_element.classList;
-                    for (c of all_ele_classes) {
+                    for (let c of all_ele_classes) {
                         if (c.includes('-weight')) {
                             let weight = parseInt(c.replace('-weight',''))+1; // add 1 to index from 1, not 0
                             let human_name='Introduction' // default name to Introduction, change if not 1st index
@@ -349,83 +403,74 @@ function trackHeaderInteraction(type,name){
                     }
                 });
             }
-
-
         }
+        //
+        //  Install Guide list page
+        //  ===================
+        else if ( (depth_of_path == 2) & (current_path.includes('/install-guides/')) ) {
+            /* Assign to the following components:
+                    1. Search box -> On deselect (left search bar, including clicking on content) or after 5 sec inactivity (scrolling down page, keep typing in search or delete search)
+                    2. Install Guide cards
+            */
+
+            // 1) Search box
+            let search_box = document.getElementById('search-box');
+            search_box.addEventListener('blur', () => {
+                trackSearchInteraction();
+            });
+
+            // 2) Install Guide cards
+            let install_guide_card = document.querySelectorAll('.tool-card');
+            for (let card of install_guide_card) {
+                card.addEventListener("click", () => {
+                    let card_title = card.querySelector('.search-title').innerHTML;
+                    _satellite.track('content-interaction', {   
+                        'data-track-type'     : 'Install Guide result card',
+                        'data-track-location' : 'list-card',
+                        'data-track-name'     : card_title 
+                    });
+                });
+            }
+        }
+        //
+        //  Install Guide page
+        //  ===================
+        else if ( ( (depth_of_path == 3) | (depth_of_path == 4) ) & (current_path.includes('/install-guides/')) ) {
+            /* Assign to the following components:
+                    1. Official Docs click
+                    2. Feedback (on Next Steps page)
+            */
+
+            // 1) Official Docs click
+            let offical_doc_link = document.getElementById('official-doc-link');
+            offical_doc_link.addEventListener("click", () => {
+                _satellite.track('content-interaction', {   
+                    'data-track-type'     : 'install-guide-next-steps',
+                    'data-track-location' : 'metadata',
+                    'data-track-name'     : 'official-docs-link'
+                });
+            });
 
 
-
-    });
-
-    
-
-    
-    
-    //
-    //  Header (takes forever to load in client-side JS)
-    //  ===================
-    window.addEventListener('load', () => {
-        //console.log('All site loaded.');
-        let armTopNav = document.querySelector('arm-top-navigation');
-        let globalNav = document.getElementById('global-nav-example-default');
-        let breadcrumbs  = document.getElementById('breadcrumb-element');
-
-
-        // top left header
-        // let top_left_logo  = globalNav.shadowRoot.querySelector('.c-navigation-logo');
-        // top_left_logo.addEventListener("click", () => {   trackHeaderInteraction('header-mainnav-clicks','hub-logo');        });   
-        let logo_primary = armTopNav.shadowRoot.querySelector('.c-logo-arm-primary');
-        let logo_secondary = armTopNav.shadowRoot.querySelector('.c-logo-arm-secondary');
-        logo_primary.addEventListener("click", () => { trackHeaderInteraction('header-mainnav-clicks','arm-logo'); });
-        logo_secondary.addEventListener("click", () => { trackHeaderInteraction('header-mainnav-clicks','hub-logo'); });
-
-
-        // theme button
-        //let theme_btn  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:theme');
-        //theme_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','theme-change');        });   
-
-
-        // contribute button
-        // let contribute_btn  = document.getElementById('contribute-btn');
-        // contribute_btn.addEventListener("click", () => {   trackHeaderInteraction('header-other-clicks','contribute-on-github');        });   
-
-
-        // subnav buttons
-        // let LP_categories  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category1');
-        // LP_categories.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','learning-path-categories');        });   
-
-        // let install_guides  = globalNav.shadowRoot.getElementById('global-nav-example-default:tab:category2');
-        // install_guides.addEventListener("click", () => {   trackHeaderInteraction('header-subnav-clicks','install-guides');        });   
-
-        
-        // social links desktop
-        let discord = armTopNav.shadowRoot.querySelector('.icon-discord');
-        discord.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','discord'); });
-        let reddit = armTopNav.shadowRoot.querySelector('.icon-reddit');
-        reddit.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','reddit'); });
-        let github = armTopNav.shadowRoot.querySelector('.icon-github');
-        github.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','github'); });
-        let twitter = armTopNav.shadowRoot.querySelector('.icon-twitter');
-        twitter.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','twitter'); });
-        let youtube = armTopNav.shadowRoot.querySelector('.icon-youtube');
-        youtube.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','youtube'); });
-        
-        // social links mobile
-        let mDiscord = armTopNav.shadowRoot.querySelector('.icon-mobile-discord');
-        mDiscord.addEventListener("click", () => { trackHeaderInteraction('header-social-clicks','discord'); });
-        let mReddit = armTopNav.shadowRoot.querySelector('.icon-mobile-reddit');
-        mReddit.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','reddit'); });
-        let mGithub = armTopNav.shadowRoot.querySelector('.icon-mobile-github');
-        mGithub.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','github'); });
-        let mTwitter = armTopNav.shadowRoot.querySelector('.icon-mobile-twitter');
-        mTwitter.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','twitter'); });
-        let mYoutube = armTopNav.shadowRoot.querySelector('.icon-mobile-youtube');
-        mYoutube.addEventListener("click", () => {  trackHeaderInteraction('header-social-clicks','youtube'); });
-
-
-        // breadcrumbs
-        for (crumb of breadcrumbs.children) {
-            let crumb_name = crumb.innerText;
-            crumb.addEventListener("click", () => {   trackHeaderInteraction('header-breadcrumb-clicks',crumb_name);        });    
+            // 2) Feedback on Next Steps page
+                // trackStarRating
+            let stars = document.querySelectorAll('input[name=rating]');
+            for (let star of stars) {
+                star.addEventListener("click", () => {
+                    trackStarRating(star.value);
+                });
+            }
+                // trackChoiceFeedback
+            let feedback_form = document.getElementById('feedback-choice-form');
+            if (feedback_form) {
+                feedback_form.addEventListener("submit", () => {
+                    let feedback = document.querySelector('input[name="feedback-choice"]:checked').value;
+                    trackChoiceFeedback(feedback);
+                });
+            } 
         }
     });
+
+    
+
+    
