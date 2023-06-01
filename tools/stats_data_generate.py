@@ -411,7 +411,8 @@ def main():
 
     # Alter existing dic to be a list of dates for easier processing:
     with open(data_weekly_file_path, 'w') as outfile:
-        print('printing weekly dict format, and dumping into this file: '+outfile)
+        print('printing weekly dict format, and dumping into this file: ')
+        print(outfile)
         print(existing_weekly_dic)
         yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
