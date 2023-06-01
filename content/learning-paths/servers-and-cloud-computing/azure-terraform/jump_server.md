@@ -316,7 +316,7 @@ variable "username" {
 
 ### Outputs
 
-Add the code below in `outputs.tf` to get the **Private IP addresses** name and **Public IP Address of bastion VM**:
+Add the code below in `outputs.tf` to get the **Private IP addresses** names and **Public IP Address of bastion VM** name after Terraform deployment:
 
 ```console
 # IP address of public IP addresses provisioned for bastion VM.
@@ -344,21 +344,23 @@ In the Azure Portal, go to the [Virtual Machines page](https://portal.azure.com/
 
 ### Use Jump Host to access the Private Instance
 
-Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server:
+Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server from there:
 ```console
   ssh -J ubuntu@bastion-vm-public-IP ubuntu@target-vm-private-IP
 ```
 
-![azure_connect_vm #center](https://user-images.githubusercontent.com/42368140/230090899-246a5391-a504-47a7-9ae7-5a3826c25ebe.png)
-
 {{% notice Note %}}
-Replace **bastion-vm-public-IP** with the public IP of the bastion VM and **target-vm-private-IP** with the private IP of the target VM.
+Replace `bastion-vm-public-IP` with the public IP of the bastion VM and `target-vm-private-IP` with the private IP of the target VM.
 {{% /notice %}}
+
+![azure_connect_vm #center](https://user-images.githubusercontent.com/42368140/230090899-246a5391-a504-47a7-9ae7-5a3826c25ebe.png)
 
 ### Clean up resources
 Run `terraform destroy` to delete all resources created:
 ```console
   terraform destroy
 ```
+
+It will remove all resource groups, virtual networks, and all other resources created through Terraform.
 
 ![azure_terraform_destroy #center](https://user-images.githubusercontent.com/42368140/230092816-e2db8e58-b1ec-4d85-b3d4-012ce3e5385a.png)
