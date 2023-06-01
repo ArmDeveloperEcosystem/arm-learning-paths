@@ -91,8 +91,6 @@ variable "resource_group_name_prefix" {
 
 Add the resources required to create a virtual machine in `main.tf`.
 
-Scroll down to see the information you need to change in `main.tf`.
-
 ```console
 resource "random_pet" "rg_name" {
   prefix = var.resource_group_name_prefix
@@ -325,13 +323,13 @@ resource_group_name = "rg-tight-dove"
 
 ## Configure MySQL through Ansible
 
-Install the MySQL and the required dependencies.
+Install MySQL and the required dependencies.
 
 You can use the same `playbook.yaml` file used in the topic, [Install MySQL on an AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#configure-mysql-through-ansible).
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the  `ansible-playbook` command.
 
 ```bash
 ansible-playbook playbook.yaml -i /tmp/inventory
@@ -386,7 +384,7 @@ ansible-target1            : ok=9   changed=7   unreachable=0    failed=0    ski
 
 Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#connect-to-database-using-ec2-instance) to connect to the database from local machine.
 
-You have successfully deploy MySQL on a Azure instance.
+You have successfully deployed MySQL on an Azure instance.
 
 ### Clean up resources
 

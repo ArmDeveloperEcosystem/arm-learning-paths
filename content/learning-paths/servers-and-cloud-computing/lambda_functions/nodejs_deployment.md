@@ -39,7 +39,7 @@ Before you begin, confirm you have an [AWS account](https://portal.aws.amazon.co
 
 ## Deploy a Lambda function using Terraform
 
-1. Using a text editor, save the code below to in a file called `index.js`
+1. Using a text editor, save the code below in a file called `index.js`
 
 This is the source code for the Lambda function. 
 
@@ -60,7 +60,7 @@ mkdir nodejs ; cp index.js nodejs
 
 Terraform will zip the Lambda source code so the source needs to be separated from the rest of the project files in a subdirectory.
 
-3. Using a text editor, save the code below to in a file called `main.tf`
+3. Using a text editor, save the code below in a file called `main.tf`
 
 Change the `main.tf` `provider` section and update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
 
@@ -124,7 +124,7 @@ output "result" {
 
 ```
 
-4. Using a text editor, save the code below to in a file called `output.tf`
+4. Using a text editor, save the code below in a file called `output.tf`
 
 ```console
 output "lambda" {

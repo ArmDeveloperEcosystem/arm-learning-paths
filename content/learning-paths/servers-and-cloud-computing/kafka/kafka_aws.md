@@ -44,9 +44,9 @@ To generate and configure the Access key ID and Secret access key, follow this [
 
 ## Create seven AWS EC2 instance using Terraform
 
-Using a text editor, save the code below to in a file called `main.tf`
+Using a text editor, save the code below in a file called `main.tf`.
 
-Scroll down to see the information you need to change in `main.tf`
+Scroll down to see the information you need to change in `main.tf`.
 ```console
 provider "aws" {
   region = "us-east-2"
@@ -161,7 +161,7 @@ Make the changes listed below in **main.tf** to match your account settings.
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm in the us-east-2 region is `ami-0ca2eafa23bc3dd01 ` No change is needed if you want to use Ubuntu AMI in us-east-2. The AMI ID values are region specific and need to be changed if you use another AWS region. Use the AWS EC2 console to find an AMI ID or refer to [Find a Linux AMI](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html).
 
 {{% notice Note %}}
-The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
 The inventory file is automatically generated and does not need to be changed.
@@ -223,7 +223,7 @@ Apply complete! Resources: 11 added, 0 changed, 0 destroyed.
 ```
 ## Configure three node Zookeeper cluster through Ansible
 
-Using a text editor, save the code below to in a file called `zookeeper_cluster.yaml`. It will install the Zookeeper and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `zookeeper_cluster.yaml`. It will install the Zookeeper and the required dependencies. This is the YAML file for the Ansible playbook.
 ```console
 - hosts: zookeeper1, zookeeper2, zookeeper3
   become: True    
@@ -375,7 +375,7 @@ PLAY RECAP *********************************************************************
 ```
 ## Configure three node Kafka cluster through Ansible
 
-Using a text editor, save the code below to in a file called `kafka_cluster.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `kafka_cluster.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook.
 ```console
 - hosts: kafka1, kafka2, kafka3
   become: True    
@@ -538,7 +538,7 @@ After successfully setting up a 3 node Kafka cluster, we can verify it by creati
 
 ## Configure client through Ansible
 
-Using a text editor, save the code below to in a file called `client.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `client.yaml`. It will install the Kafka and the required dependencies. This is the YAML file for the Ansible playbook.
 ```console
 - hosts: client
   become: true

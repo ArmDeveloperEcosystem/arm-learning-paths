@@ -141,7 +141,7 @@ You will need the IP addresses of each instance in future steps. If needed, you 
 
 Three nodes are deployed.
 
-Choose the first one one as the primary node and the other two as replica nodes. 
+Choose the first one as the primary node and the other two as replica nodes. 
 
 For example, you can choose as below:
 ```output
