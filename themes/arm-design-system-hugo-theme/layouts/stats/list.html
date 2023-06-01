@@ -12,8 +12,16 @@
 <!-- Get most recent data slice from weekly data -->
 {{ $this_week_data := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
 
-{{ range $key, $val := $this_week_data.content}}
-    {{$key}}{{$val}}
+<p>yooooooo</p>
+
+
+
+
+{{ range $date, $vals := $this_week_data }}
+    {{$date}}
+    <br>
+    {{$vals.authors}}
+    <br><br><br>
 {{end}}
 
 
