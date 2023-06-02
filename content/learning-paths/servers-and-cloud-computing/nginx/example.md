@@ -46,7 +46,7 @@ wget https://<dns-name>/file.txt --no-check-certificate
 
 ## Use curl to retrieve a webpage
 
-The default index.html is already on each web server. 
+The default `index.html` is already on each web server. 
 
 Run the `curl` command from another machine to retrieve the index.html.
 

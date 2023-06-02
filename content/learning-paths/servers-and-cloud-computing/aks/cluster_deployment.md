@@ -12,23 +12,26 @@ You can run Azure Kubernetes Service (AKS), a fully managed Kubernetes platform,
 
 ## Before you begin
 
-Any computer which has the required tools installed can be used for this section. 
 
-You will need an [Azure account](https://azure.microsoft.com/). Create an account if needed.
+You should have the prerequisite tools installed before starting the Learning Path.
 
-Three tools are required on the computer you are using. Follow the links to install the required tools.
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
 
-* [Terraform](/install-guides/terraform)
-* [Kubectl](/install-guides/kubectl/)
-* [Azure CLI](/install-guides/azure-cli/)
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
 
-## Acquire Azure Access Credentials
+Before you begin, you will also need:
+- An AWS access key ID and secret access key.
+- An SSH key pair
+
+The instructions to create the keys are below.
+
+### Acquire Azure Access Credentials
 
 The installation of Terraform on your desktop or laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
 For Azure authentication, follow this [guide](/install-guides/azure_login).
 
-## Create an SSH key pair
+### Create an SSH key pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen`. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 

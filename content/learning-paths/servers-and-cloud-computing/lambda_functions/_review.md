@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            AWS Lambda is a serverless computing service:
+            AWS Lambda is a serverless computing service.
         answers:
             - "True"
             - "False"

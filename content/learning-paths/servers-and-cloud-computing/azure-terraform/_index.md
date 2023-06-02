@@ -6,7 +6,6 @@ description: Learn how to automate the creation of Azure Arm virtual machines us
 minutes_to_complete: 60   
 
 learning_objectives: 
-    - Deploy Arm VMs on Azure
     - Automate Arm virtual machine creation using Terraform
     - Deploy Arm VMs on Azure and provide access via Jump Server
 

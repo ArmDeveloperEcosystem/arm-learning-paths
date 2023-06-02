@@ -49,7 +49,6 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 Using a text editor, save the code below in a file called `main.tf`.
 
-Scroll down to see the information you need to change in `main.tf`.
 ```
 // instance creation
 provider "google" {
@@ -106,9 +105,7 @@ ansible-target1 ansible_connection=ssh ansible_host=${google_compute_instance.vm
                 EOF
 }
 ```
-Make the changes listed below in `main.tf` to match your account settings.
-
-1. In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.
+In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.
 
 The inventory file is automatically generated and does not need to be changed.
 
@@ -187,13 +184,13 @@ Master_public_IP = [
 ```
 
 ## Configure MySQL through Ansible
-Install the MySQL and the required dependencies. 
+Install MySQL and the required dependencies.
 
 You can use the same `playbook.yaml` file used in the topic, [Install MySQL on an AWS Arm based instance](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#configure-mysql-through-ansible).
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the `ansible-playbook` command.
 
 ```bash
 ansible-playbook playbook.yaml -i /tmp/inventory 
@@ -247,7 +244,7 @@ ansible-target1            : ok=9   changed=7   unreachable=0    failed=0    ski
 
 Follow the instructions given in this [documentation](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#connect-to-database-using-ec2-instance) to connect to the database from local machine.
 
-You have successfully deploy MySQL on a Google Cloud instance.
+You have successfully deployed MySQL on a Google Cloud instance.
 
 ### Clean up resources
 
