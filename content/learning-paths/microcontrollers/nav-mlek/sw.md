@@ -85,9 +85,9 @@ pip install ethos-u-vela
 
 The [CMSIS-NN](https://www.keil.com/pack/doc/CMSIS/NN/html/index.html) software library is a collection of efficient neural network kernels developed to maximize the performance and minimize the memory footprint of neural networks on Arm Cortex-M processors.
 
-This library is used by frameworks for operations that cannot be executed on the Ethos processor.
+The library is used by frameworks for operations that cannot be executed on the Ethos processor.
 
-[This](https://blog.tensorflow.org/2021/02/accelerated-inference-on-arm-microcontrollers-with-tensorflow-lite.html) blog provides an excellent overview of the TFLM use case.
+[Accelerated inference on Arm microcontrollers with TensorFlow Lite for Microcontrollers and CMSIS-NN](https://blog.tensorflow.org/2021/02/accelerated-inference-on-arm-microcontrollers-with-tensorflow-lite.html) provides an excellent overview.
 
 
 ## Example applications

@@ -22,8 +22,6 @@ Use the quick links below to jump to the appropriate section for each type of fo
 - [Code Snippets](#code-snippets)
 - [Images](#images)
 - [Notice Callout](#notice-callout)
-- [Godbolt Compiler Explorer](#godbolt-compiler-explorer)
-
 
 ## Markdown Syntax
 
