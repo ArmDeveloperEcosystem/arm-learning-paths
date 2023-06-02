@@ -29,6 +29,10 @@ further_reading:
         title: Porting SSE to Neon, Are libraries the way forward?
         link: https://community.arm.com/arm-community-blogs/b/ai-and-ml-blog/posts/porting-sse-to-neon-are-libraries-the-way-forward
         type: blog
+    - resource:
+        title: Porting Advisor for Graviton, AWS Online Tech Talks
+        link: https://youtu.be/Ya9Co04fszI
+        type: video
 
 
 # ================================================================================
