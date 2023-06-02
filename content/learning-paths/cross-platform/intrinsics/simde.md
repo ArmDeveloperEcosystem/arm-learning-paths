@@ -1,6 +1,6 @@
 ---
 layout: learningpathall
-title: Using SIMD Everywhere to port code to Arm
+title: Use SIMD Everywhere to port code to Arm
 weight: 5
 ---
 

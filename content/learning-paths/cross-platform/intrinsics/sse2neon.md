@@ -1,6 +1,6 @@
 ---
 layout: learningpathall
-title: Using sse2neon to port code to Arm
+title: Use sse2neon to port code to Arm
 weight: 4
 ---
 
