@@ -1372,3 +1372,4 @@ libGPUInfo
 nav
 TrustZone
 TFLM
+VHT
