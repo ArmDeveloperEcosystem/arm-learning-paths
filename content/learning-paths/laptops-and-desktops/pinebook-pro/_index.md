@@ -18,7 +18,7 @@ author_primary: Gabriel Peterson
 
 ### Tags
 skilllevels: Advanced
-subjects: Performance and Architecture
+subjects: Migration to Arm
 armips:
     - Cortex-A72
     - Cortex-A53

@@ -27,6 +27,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - Raspberry Pi
     - MXNet
 
 ### FIXED, DO NOT MODIFY

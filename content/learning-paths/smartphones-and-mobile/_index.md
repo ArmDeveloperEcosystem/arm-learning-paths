@@ -18,8 +18,9 @@ subtitle: Optimize Android apps and build faster games using cutting-edge Arm te
 title: Smartphones and Mobile
 tools_software_languages_filter:
 - Arm Mobile Studio: 1
-- C++: 1
+- Coding: 1
+- Fixed Virtual Platform: 1
 - GCC: 1
-- Java: 1
+- Total Compute: 1
 weight: 3
 ---

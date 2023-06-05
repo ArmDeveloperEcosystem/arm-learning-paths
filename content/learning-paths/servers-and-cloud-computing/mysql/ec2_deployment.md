@@ -8,9 +8,29 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-#  Install MySQL on an AWS Arm based instance
+##  Install MySQL on an AWS Arm based instance
+You can deploy MySQL on AWS using Terraform and Ansible.
 
-## Generate an SSH key-pair
+In this section, you will deploy MySQL on a single AWS instance.
+
+If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/terraform/) before starting this Learning Path.
+
+## Before you begin
+
+You should have the prerequisite tools installed before starting the Learning Path. 
+
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+
+Before you begin, you will also need:
+- An AWS access key ID and secret access key
+- An SSH key pair
+
+The instructions to create the keys are below.
+
+
+### Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [
 guide](/install-guides/ssh#ssh-keys).
@@ -19,7 +39,7 @@ guide](/install-guides/ssh#ssh-keys).
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Acquire AWS Access Credentials
+### Acquire AWS Access Credentials
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
@@ -425,4 +445,11 @@ select * from book;
 | Gbook  | 69   |
 +--------+------+
 7 rows in set (0.09 sec)
+```
+### Clean up resources
+
+Run `terraform destroy` to delete all resources created.
+
+```console
+terraform destroy
 ```

@@ -38,10 +38,11 @@ armips:
     - Cortex-M
 operatingsystems:
     - RTOS
+    - Baremetal
 tools_software_languages:
-    - C
-    - Keil MDK
-    - Arm FVP
+    - Coding
+    - Keil
+    - Fixed Virtual Platform
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

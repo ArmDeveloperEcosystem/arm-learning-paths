@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Write: Modify Metadata"
+title: "Modify Learning Path metadata"
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Modify Learning Path metadata
 
-Each Learning Path contains metadata which is used to create the Learning Path pages. The metadata is used by the website so all Learning Paths have the same information and look similar. 
+Each Learning Path contains metadata which is used to create the Learning Path pages. The metadata is used by the website so all Learning Paths have the same information and are consistent. 
 
 This section explains how to add Learning Path metadata in three files:
 
@@ -52,7 +52,7 @@ If you do not want your name to be displayed leave `author_primary` blank.
 You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/contributors.csv) at the top of the repository. This file collects your company name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
 
 ## Tags
-Tagging metadata is also expected to increase visibility via filtering. Some tags are closed (you must select from a pre-defined list) and some are open (enter anything). The tags are:
+Tagging metadata is also expected to increase visibility through filtering. Some tags are closed (you must select from a pre-defined list) and some are open (enter anything). The tags are:
 
 ### skilllevels (closed)
 Indicates the skill level needed as a developer to complete this Learning Path.
@@ -128,7 +128,7 @@ Review questions both validate comprehension and re-enforce specific learning id
 | Review Metadata | Explanation |
 |---------------|----------|
 | question          | A one sentence question to the reader       |
-| answers           | The multiple choice answers  |
+| answers           | The multiple-choice answers  |
 | correct_answer    | An integer indicating what answer is correct (1 for the first listed, etc.)  |
 | explanation       | A short, 1-2 sentence explanation of why the question has that answer.  |
 

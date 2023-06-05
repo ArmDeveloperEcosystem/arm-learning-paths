@@ -1,0 +1,201 @@
+{{define "main"}}
+    <!-- Load chartist library -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js" integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+
+{{ range .Site.Data.stats_weekly_data }}
+    {{.}}
+{{end}}
+
+<br><br>
+
+<!-- Get most recent data slice from weekly data -->
+{{ $this_week := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
+{{$current_date := ""}}
+{{$current_stats := ""}}
+{{ range $date, $stats := $this_week }}
+    {{$current_date = $date}}
+    {{$current_stats = $stats}}
+{{end}}
+
+<p>yooooooo</p>
+
+
+
+{{$current_date}}
+
+{{$current_stats}}
+
+<div class="c-row u-margin-top-0">
+    <div class="c-col c-col-9">
+        <!-- All content line chart -->
+    <p>hi</p>
+    </div>
+    <div class="c-col c-col-3">
+        <!-- LP by category pie chart -->
+        <div id="pie-legend"></div>
+
+        <div class="ct-square" id="chart-pie"></div>
+    </div>
+</div>
+
+
+<!--
+<div class="ct-chart ct-golden-section" id="my-chart"></div>
+-->
+
+
+
+
+
+
+<script>
+
+    /* Learning Path pie chart */
+    /////////////////////////////////////////////////////////
+    var pie_labels = []
+    var pie_series = []
+
+
+
+    {{range $key, $val := $current_stats.content}}
+        {{if ne $key "total"}}
+            {{if ne $key "install-guides"}}
+                pie_labels.push({{$key}})
+                pie_series.push({{$val}})
+            {{end}}
+        {{end}}
+    {{end}}
+    
+    var data = {
+        labels: pie_labels,
+        series: pie_series
+    };
+    var options = {
+        labelInterpolationFnc: function(value, index) {
+            return data.series[index].value;
+          },
+        plugins: [
+            Chartist.plugins.legend({position: document.getElementById('pie-legend')})
+        ]
+      };
+      
+      var responsiveOptions = [
+        ['screen and (min-width: 640px)', {
+          chartPadding: 30,
+          labelOffset: 100,
+          labelDirection: 'implode',
+          labelInterpolationFnc: function(value) {
+            return value;
+          }
+        }],
+        ['screen and (min-width: 1024px)', {
+          labelOffset: 80,
+          chartPadding: 20
+        }]
+      ];
+      
+    new Chartist.Pie('#chart-pie', data, options);
+    /////////////////////////////////////////////////////////
+
+
+
+
+
+    // Initialize a Line chart in the container with the ID chart1
+    var data1 = {
+        labels: [1, 2, 3, 4],
+        series: [[100, 120, 180, 200]]
+    }
+    new Chartist.Line('#chart1', data1);
+
+  // Initialize a Line chart in the container with the ID chart2
+    var data2 = {
+        labels: [1, 2, 3, 4],
+        series: [[5, 2, 8, 3]]
+    }
+    new Chartist.Line('#chart2', data2);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    var chart = new Chartist.Pie('#my-chart', 
+    {
+        series: [160, 60 ],
+        labels: ['', '']
+    }, {
+        donut: true,
+        donutWidth: 20,
+        startAngle: 210,
+        total: 260,
+        showLabel: false,
+        plugins: [
+            Chartist.plugins.fillDonut({
+                items: [{
+                    content: '<i class="fa fa-tachometer"></i>',
+                    position: 'bottom',
+                    offsetY : 10,
+                    offsetX: -2
+                }, {
+                    content: '<h3>160<span class="small">mph</span></h3>'
+                }]
+            })
+        ],
+    });
+
+chart.on('draw', function(data) {
+    if(data.type === 'slice' && data.index == 0) {
+        // Get the total path length in order to use for dash array animation
+        var pathLength = data.element._node.getTotalLength();
+
+        // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+        data.element.attr({
+            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+        });
+
+        // Create animation definition while also assigning an ID to the animation for later sync usage
+        var animationDefinition = {
+            'stroke-dashoffset': {
+                id: 'anim' + data.index,
+                dur: 1200,
+                from: -pathLength + 'px',
+                to:  '0px',
+                easing: Chartist.Svg.Easing.easeOutQuint,
+                fill: 'freeze'
+            }
+        };
+
+        // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+        data.element.attr({
+            'stroke-dashoffset': -pathLength + 'px'
+        });
+
+        // We can't use guided mode as the animations need to rely on setting begin manually
+        // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+        data.element.animate(animationDefinition, true);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+</script>
+
+{{end}}

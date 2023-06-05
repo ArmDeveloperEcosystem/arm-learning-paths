@@ -1,6 +1,6 @@
 ---
 layout: learningpathall
-title: Using sse2neon to port code to Arm
+title: Use sse2neon to port code to Arm
 weight: 4
 ---
 
@@ -59,7 +59,7 @@ wget https://raw.githubusercontent.com/DLTcollab/sse2neon/master/sse2neon.h
 g++ -O2 -I. -march=armv8.2-a+fp16+rcpc+dotprod+crypto --std=c++14 neon.cpp -o neon
 ```
 Run the code:
-```bash { target="arm64v8/ubuntu:latest"; command_line="user@localhost | 2" }
+```bash { target="arm64v8/ubuntu:latest" }
 ./neon
 ```
 and observe the output:

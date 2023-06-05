@@ -61,7 +61,7 @@ resource "google_compute_instance" "vm_instance" {
 ```
 
 {{% notice Note %}}
-Replace **project_ID** with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console.
+Replace `project_ID` with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console.
 {{% /notice %}}
 
 ## Terraform commands
@@ -106,11 +106,8 @@ Run `terraform plan` to create an execution plan.
 ```
   terraform plan -out main.tfplan
 ```
-**Key points:**
+A long output of resources to be created will be printed.
 
-* The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
-* The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
-* The optional `-out` parameter allows you to specify an output file for the plan. Using the `-out` parameter ensures that the plan you reviewed is exactly what is applied.
 
 ### Apply a Terraform execution plan
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
@@ -163,24 +160,4 @@ Run `terraform destroy` to delete all resources created.
 
 ```
   terraform destroy
-```
-
-Output should be similar to:
-
-
-```output
-Do you really want to destroy all resources?
-  Terraform will destroy all your managed infrastructure, as shown above.
-  There is no undo. Only 'yes' will be accepted to confirm.
-
-  Enter a value: yes
-
-google_compute_instance.vm_instance: Destroying... [id=projects/massive-woods-383015/zones/us-central1-a/instances/instance-arm]
-google_compute_instance.vm_instance: Still destroying... [id=projects/massive-woods-383015/zones/us-central1-a/instances/instance-arm, 10s elapsed]
-google_compute_instance.vm_instance: Still destroying... [id=projects/massive-woods-383015/zones/us-central1-a/instances/instance-arm, 20s elapsed]
-google_compute_instance.vm_instance: Still destroying... [id=projects/massive-woods-383015/zones/us-central1-a/instances/instance-arm, 30s elapsed]
-google_compute_instance.vm_instance: Still destroying... [id=projects/massive-woods-383015/zones/us-central1-a/instances/instance-arm, 40s elapsed]
-google_compute_instance.vm_instance: Still destroying... [id=projects/massive-woods-383015/zones/us-central1-a/instances/instance-arm, 50s elapsed]
-google_compute_instance.vm_instance: Destruction complete after 51s
-
 ```

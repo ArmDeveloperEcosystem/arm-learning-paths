@@ -123,7 +123,7 @@ There are 2 optional changes you can make to the `main.tf` file.
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. 
 
 {{% notice Note %}}
-The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
 
 The created security group opens inbound ports `22` (ssh) and `3306` (MariaDB). 
 {{% /notice %}}

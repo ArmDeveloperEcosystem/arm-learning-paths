@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 This repository provides a framework to help testing instructions, code snippets and maintain content.
 
-The framework allows to parse Learning Path articles and generate instructions to be run on a Docker container instance. It checks for expected behavior and stores results in Junit XML files. It creates one XML file by Learning Path sub-article.
+The framework allows you to parse Learning Path articles and generate instructions to be run on a Docker container instance. It checks for expected behavior and stores results in Junit XML files. It creates one XML file for each section in a Learning Path.
 
 1. [Install dependencies](#install-dependencies)
 2. [Edit Learning Path pages](#edit-learning-path-pages)
@@ -55,7 +55,7 @@ Bash instructions can be tested:
     ```
 ```
 
-The framework will check the return code. If different than 0, an error will be reported.
+The framework will check the return code. If not 0, an error will be reported.
 
 #### Specify expected return code
 
@@ -82,7 +82,7 @@ When a command output is displayed in the instructions:
     ```
 ```
 
-The framework will check if the command return the same output and report an error otherwise.
+The framework will check if the command returns the same output and report an error otherwise.
 
 #### Context between instruction blocks
 
@@ -102,7 +102,7 @@ The framework understands instructions in the Learning Path share some context, 
     ```
 ```
 
-But the framework does run each code block as a separate terminal session. As such, environment variables don't persist and it assumes the current directory is $HOME. If the current directory needs to be changed, it can be specified as follows:
+It is important to note that the framework does run each code block as a separate terminal session. As such, environment variables do not persist and it assumes the current directory is $HOME. If the current directory needs change, you can specify it as follows:
 
 ```markdown
     Let's create a file in a folder:
@@ -142,7 +142,7 @@ To make environment variables persistent, it is possible to store them in the .b
     ```
 ```
 
-If you want to manage the environment with a tool such as [environment modules](https://modules.sourceforge.net/) to load the environment, you can couple `env_source` with `pre_cmd` which will silently run a command before instructions in the code block:
+If you want to manage the environment with a tool such as [environment modules](https://modules.sourceforge.net/) to load the environment, you can use `env_source` with `pre_cmd` which will silently run a command before instructions in the code block:
 
 ```
     ```bash { env_source="/usr/share/modules/init/bash", pre_cmd="module load gcc-12" }

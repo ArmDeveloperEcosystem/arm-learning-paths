@@ -16,7 +16,7 @@ You can reuse everything your learned from the previous topic and replace the No
 
 ## Deploy Lambda function via Terraform
 
-1. Using a text editor, save the code below to in a file called `python_lambda.py`
+1. Using a text editor, save the code below in a file called `python_lambda.py`
 
 This is the source code for the Lambda function. 
 
@@ -32,7 +32,7 @@ The Lambda function will simply print a message. The message adds the `first_nam
 
 This example doesn't place the Python source code in a subdirectory, leave it in the current directory.
 
-2. Using a text editor, save the code below to in a file called `main.tf`
+2. Using a text editor, save the code below in a file called `main.tf`
 
 Change the `main.tf` `provider` section and update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
 
@@ -95,7 +95,7 @@ output "result" {
 }
 ```
 
-3. Using a text editor, save the code below to in a file called `output.tf`
+3. Using a text editor, save the code below in a file called `output.tf`
 
 ```console
 output "lambda" {

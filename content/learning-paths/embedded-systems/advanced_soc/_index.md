@@ -23,11 +23,9 @@ subjects: Performance and Architecture
 armips:
     - Cortex-A
 operatingsystems:
-    - Windows
+    - Baremetal
 tools_software_languages:
-    - Verilog
-    - Xilinx Vivado
-    - Xilinx Vitis
+    - FPGA
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

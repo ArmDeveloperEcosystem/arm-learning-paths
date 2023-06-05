@@ -24,7 +24,7 @@ When you are ready to submit your Learning Path for review, proceed to the next 
 
 ## Submit a pull request 
 
-Before submitting a pull request, make sure `hugo` runs without errors on the command line. This should be run from the top level directory of the repository. 
+Before submitting a pull request, make sure `hugo` runs without errors on the command line. Run this from the top level directory of the repository. 
 
 ```console
 hugo

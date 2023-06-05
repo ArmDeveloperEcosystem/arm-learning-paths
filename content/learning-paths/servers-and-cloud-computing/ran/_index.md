@@ -24,6 +24,7 @@ test_status:
 title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
 tools_software_languages:
 - ArmRAL
+- 5G
 - GCC
 weight: 1
 who_is_this_for: This is an introductory topic for software developers new to the

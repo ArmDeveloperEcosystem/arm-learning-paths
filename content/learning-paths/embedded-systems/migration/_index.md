@@ -27,8 +27,9 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - GCC
-    - ACfL
+    - Arm Compiler for Linux
     - Docker
+    - Neon
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

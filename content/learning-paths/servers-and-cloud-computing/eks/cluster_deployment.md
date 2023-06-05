@@ -4,53 +4,49 @@ weight: 2
 layout: learningpathall
 ---
 
-# Prerequisites
-* An [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start)
-* AWS CLI, [installed](/install-guides/aws-cli) and [configured](/install-guides/aws_access_keys)
-* [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html)
-* [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/install-kubectl/), also known as `kubectl`
+## Before you begin
 
-# EKS cluster deployment configuration
+You should have the prerequisite tools installed before starting the Learning Path.
+
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
+
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+
+## EKS cluster deployment configuration
 To deploy the Elastic Kubernetes Service(EKS) cluster start by creating the terraform configuration on your running Arm machine.
 
-The Terraform configuration for this Elastic Kubernetes Service (EKS) deployment is contained in 7 files: eks_cluster.tf, variables.tf, vpc.tf, security-groups.tf, main.tf, terraform.tf, output.tf
+The Terraform configuration for this Elastic Kubernetes Service (EKS) deployment is contained in 7 files: `eks_cluster.tf`, `variables.tf`, `vpc.tf`, `security-groups.tf`, `main.tf`, `terraform.tf`, `output.tf`.
 
 Using an editor of your choice, create and copy the content of the 7 files as shown below.
 
-File 1: **providers.tf** sets versions for the providers used by the configuration. Add the following code in this file:
+File 1: `providers.tf` sets versions for the providers used by the configuration. Add the following code in this file:
 ```console
 terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "~> 4.15.0"
     }
 
     random = {
       source  = "hashicorp/random"
-      version = "~> 3.1.0"
     }
 
     tls = {
       source  = "hashicorp/tls"
-      version = "~> 3.4.0"
     }
 
     cloudinit = {
       source  = "hashicorp/cloudinit"
-      version = "~> 2.2.0"
     }
 
     kubernetes = {
       source  = "hashicorp/kubernetes"
-      version = "~> 2.12.1"
     }
   }
-  required_version = "~> 1.3.9"
 }
 ```
 
-File 2: **variables.tf** contains a region variable that controls where to create the EKS cluster. Add the following code in this file:
+File 2: `variables.tf` contains a region variable that controls where to create the EKS cluster. Add the following code in this file:
 ```console
 variable "region" {
   description = "AWS region"
@@ -59,7 +55,7 @@ variable "region" {
 }
 ```
 
-File 3: **vpc.tf** provisions a VPC, subnets, and availability zones using the [AWS VPC Module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.32.0). Add the following code in this file:
+File 3: `vpc.tf` provisions a VPC, subnets, and availability zones using the [AWS VPC Module](https://registry.terraform.io/modules/terraform-aws-modules/vpc/aws/2.32.0). Add the following code in this file:
 ```console
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -89,7 +85,7 @@ module "vpc" {
 }
 ```
 
-File 4: **security-groups.tf** provisions the security groups, the EKS cluster will use.
+File 4: `security-groups.tf` provisions the security groups, the EKS cluster will use.
 ```console
 resource "aws_security_group" "node_group_one" {
   name_prefix = "node_group_one"
@@ -158,7 +154,7 @@ resource "aws_security_group" "node_group_two" {
 }
 ```
 
-File 5: **eks-cluster.tf** uses the [AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/11.0.0) to provision an EKS Cluster and other required resources, including Auto Scaling Groups, Security Groups, IAM Roles, and IAM Policies. Below parameter will create three nodes across two node groups.
+File 5: `eks-cluster.tf` uses the [AWS EKS Module](https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/11.0.0) to provision an EKS Cluster and other required resources, including Auto Scaling Groups, Security Groups, IAM Roles, and IAM Policies. Below parameter will create three nodes across two node groups.
 ```console
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -209,7 +205,7 @@ module "eks" {
 }
 ```
 
-File 6: **outputs.tf** defines the output values for this configuration.
+File 6: `outputs.tf` defines the output values for this configuration.
 ```console
 output "cluster_id" {
   description = "EKS cluster ID"
@@ -237,7 +233,7 @@ output "cluster_name" {
 }
 ```
 
-File 7 : Add below code in **main.tf**
+File 7 : Add below code in `main.tf`
 ```console
 provider "kubernetes" {
   host                   = module.eks.cluster_endpoint
@@ -269,7 +265,33 @@ terraform init
 The output from running this command should look like what is shown here:
 
 
-![MicrosoftTeams-image (4)](https://user-images.githubusercontent.com/87687468/203512908-be62b51f-ed17-4d48-bc43-4190080e05ef.png)
+```output
+Initializing modules...
+
+Initializing the backend...
+
+Initializing provider plugins...
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Reusing previous version of hashicorp/random from the dependency lock file
+- Reusing previous version of hashicorp/tls from the dependency lock file
+- Reusing previous version of hashicorp/cloudinit from the dependency lock file
+- Reusing previous version of hashicorp/kubernetes from the dependency lock file
+- Using previously-installed hashicorp/aws v4.15.1
+- Using previously-installed hashicorp/random v3.1.3
+- Using previously-installed hashicorp/tls v3.4.0
+- Using previously-installed hashicorp/cloudinit v2.2.0
+- Using previously-installed hashicorp/kubernetes v2.12.1
+
+Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
 
 ### Create Terraform execution plan
 Creating a terraform execution plan will check for your AWS account credentials. Either set the [AWS environment variables or add a profile to your AWS credentials file](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html) on your running Arm machine.
@@ -277,11 +299,7 @@ Now, run `terraform plan` to create an execution plan.
 ```console
 terraform plan
 ```
-
-**Key points:**
-
-* The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
-* The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
+A long output of resources to be created will be printed.
 
 ### Apply Terraform execution plan
 
@@ -291,7 +309,17 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 ```
 The output from running this command is shown below:
 
-![image-2](https://user-images.githubusercontent.com/87687468/203513200-14bdb5e8-12c7-41f0-8878-b4ae6bc3aa9f.png)
+```output
+Apply complete! Resources: 56 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+cluster_endpoint = "https://8AD4D643BDAA50CA99B369951048E106.gr7.us-east-2.eks.amazonaws.com"
+cluster_id = "demo-eks-HjmS0zFi"
+cluster_name = "demo-eks-HjmS0zFi"
+cluster_security_group_id = "sg-0b571848495e3542b"
+region = "us-east-2"
+```
 
 ### Configure kubectl
 
@@ -305,13 +333,28 @@ Run the following command to see the status of the nodes. They should be in the 
 kubectl get nodes
 ```
 
-![get_nodes](https://user-images.githubusercontent.com/87687468/203513615-0f316d24-586d-4452-a220-33f1a9b5a8b6.png)
+```output
+NAME                                       STATUS   ROLES    AGE   VERSION
+ip-10-0-4-111.us-east-2.compute.internal   Ready    <none>   19m   v1.22.17-eks-0a21954
+ip-10-0-4-204.us-east-2.compute.internal   Ready    <none>   19m   v1.22.17-eks-0a21954
+ip-10-0-6-209.us-east-2.compute.internal   Ready    <none>   19m   v1.22.17-eks-0a21954
+```
 
 Run the following command to see the current pods running on the cluster.
 ```console
-kubectl get pods
+kubectl get pods -A
 ```
 
-![get_pods](https://user-images.githubusercontent.com/87687468/203513853-704731f2-1a2a-4278-95d4-2af438c3ffd3.png)
+```output
+NAMESPACE     NAME                       READY   STATUS    RESTARTS   AGE
+kube-system   aws-node-2ckzl             1/1     Running   0          6m28s
+kube-system   aws-node-8bqrx             1/1     Running   0          6m18s
+kube-system   aws-node-hnd5x             1/1     Running   0          6m17s
+kube-system   coredns-5db97b446d-4c4wn   1/1     Running   0          10m
+kube-system   coredns-5db97b446d-hg6p6   1/1     Running   0          10m
+kube-system   kube-proxy-drt6g           1/1     Running   0          6m28s
+kube-system   kube-proxy-mjtws           1/1     Running   0          6m18s
+kube-system   kube-proxy-v252s           1/1     Running   0          6m18s
+```
 
 Make sure that all of these services are in a running state as shown above.

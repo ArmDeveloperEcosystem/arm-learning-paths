@@ -1,15 +1,13 @@
 ---
 # User change
-title: "Arm Streamline"
+title: "Streamline with your application"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Streamline as supplied with Arm Mobile Studio supports Android application profiling only.
-
-For other use cases, use the version supplied as a component of [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
+Now that you have seen an example Streamline capture, you can use it with your own application.
 
 ## Build your application
 
@@ -20,6 +18,14 @@ The [Target setup guide for Android](https://developer.arm.com/documentation/101
 These settings are enabled as default within [Unity](https://unity.com/) when [Development Build](https://docs.unity3d.com/2021.1/Documentation/Manual/UnityCloudBuildDevelopmentBuilds.html) is selected in `Build settings`.
 
 You can optionally provide [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) to your code which will be displayed in the Streamline report, to assist readability of the report.
+
+### Open-source projects
+
+Arm provides open-source projects that can be used by application developers as part of their development.
+
+* [Unity Integration](https://github.com/ARM-software/mobile-studio-integration-for-unity/)
+* [Arm ASTC Encoder texture compressor](https://github.com/ARM-software/astc-encoder)
+* [libGPUInfo library](https://github.com/ARM-software/libGPUInfo)
 
 ## Set up Android device
 
@@ -53,10 +59,4 @@ Start the application on the device., and interact as desired for the profiling 
 
 When satisfied, simply click on `Stop capture`. Streamline will stop capturing data, remove the daemon, and process the captured data.
 
-## Analyze the capture
-
-The captured data will be processed into a report that the user can manually examine. Calipers in the timeline view allow you to focus on particular windows of activity. A full description of the capabilities is given in the [Streamline User Guide](https://developer.arm.com/documentation/101816/latest/Analyze-your-capture).
-
-Understanding the output of the report is key to the usefulness of Streamline. [Android performance triage with Streamline](https://developer.arm.com/documentation/102540) describes how to understand the report from a number of points of view, depending on what information you are trying to extract from it.
-
-To further simplify analysis of Streamline reports, use Performance Advisor.
+Double-click on the capture to display in the timeline.

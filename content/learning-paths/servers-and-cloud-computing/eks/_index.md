@@ -25,8 +25,10 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-    - AWS CLI
-    - kubectl
+    - AWS
+    - Kubernetes
+    - SQL
+    - MySQL
 
 #       FIXED, DO NOT MODIFY
 # ================================================================================

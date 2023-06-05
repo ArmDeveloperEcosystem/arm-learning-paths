@@ -279,7 +279,7 @@ Replace `{{Your_mysql_password}}` and `{{Give_any_password}}` in this file with 
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
+Run the playbook using the  `ansible-playbook` command:
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory
@@ -508,7 +508,8 @@ You will create two `.py` files on the host machine to deploy Memcached as a MyS
 MYSQL_TEST=[["{{public_ip of MYSQL_TEST[0]}}", "arm_test1"],
 ["{{public_ip of MYSQL_TEST[1]}}", "arm_test2"]]
 ```
-Replace `{{public_ip of MYSQL_TEST[0]}}` & `{{public_ip of MYSQL_TEST[1]}}` with the public IPs generated in the `hosts` file after running the Terraform commands.
+Replace `{{public_ip of MYSQL_TEST[0]}}` & `{{public_ip of MYSQL_TEST[1]}}` with the public IPs generated in the `/tmp/inventory` file after running the Terraform commands.
+
 `memcached.py` to access data from Memcached and, if not present, store it in the Memcached.       
 ```console
 import sys
@@ -560,7 +561,7 @@ Replace `{{Your_database_user}}` & `{{Your_database_password}}` with the databas
 
 To execute the script, run the following command:
 ```console
-python3 mem.py -db {database_name} -k {key} -q {query}
+python3 memcached.py -db {database_name} -k {key} -q {query}
 ```
 Replace `{database_name}` with the database you want to access, `{query}` with the query you want to run in the database, and `{key}` with a variable to store the result of the query in Memcached.
 
