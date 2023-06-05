@@ -80,7 +80,7 @@ Calls to:
     <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
         <div class="left-nav-pane">
             <!-- Title top left -->
-            <h6 class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ $main_tool_title }}</h6>
+            <h6 id="install-guide-title" class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ $main_tool_title }}</h6>
 
             <!-- GitHub links to edit / log an issue -->
             {{partial "general-formatting/github-links.html" .  }}
@@ -118,11 +118,13 @@ Calls to:
                         <div class="u-display-grid u-gap-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">
                             {{range $index, $multi := $toolfiles}}
                                 {{ if ne .File.TranslationBaseName "_index" }} 
-                                    <ads-card has-hover-effect class="multi-install-card" link="{{.Permalink}}">
-                                        <ads-card-content slot="content">
-                                            <h3 class="multi-tool-selection-title">{{.Title}}</h3>
-                                        </ads-card-content>   
-                                    </ads-card>
+                                    <div class="gradient-box">
+                                        <ads-card class="multi-install-card" link="{{.Permalink}}">
+                                            <ads-card-content slot="content">
+                                                <h3 class="multi-tool-selection-title">{{.Title}}</h3>
+                                            </ads-card-content>   
+                                        </ads-card>
+                                    </div>
                                 {{end}}
                             {{end}}
                         </div>

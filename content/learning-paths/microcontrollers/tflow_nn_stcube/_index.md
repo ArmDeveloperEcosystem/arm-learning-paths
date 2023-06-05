@@ -26,9 +26,9 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - C
     - Tensorflow
-    - STM32CubeAI
+    - STM32
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

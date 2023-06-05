@@ -2,7 +2,7 @@
 # User change
 title: "Automate Azure VM creation with Terraform"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -12,16 +12,21 @@ This Learning Path uses [Terraform Cloud](https://registry.terraform.io/) to aut
 * [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/)
      * These same instructions can be used to deploy Linux as well.
 
-You will need an [Azure portal account](https://portal.azure.com/). Create an account if needed.
-
 ## Before you begin
 
-Two tools are required on the computer you are using. Follow the links to install the required tools.
+You should have the prerequisite tools installed before starting the Learning Path.
 
-* [Terraform](/install-guides/terraform)
-* [Azure CLI](/install-guides/azure-cli)
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
 
-## Generate an SSH key-pair
+You will need an [Azure portal account](https://azure.microsoft.com/en-in/get-started/azure-portal) to complete this Learning Path. Create an account if you don't have one.
+
+Before you begin, you will also need:
+- Login to the Azure CLI
+- An SSH key pair
+
+The instructions to login to the Azure CLI and create the keys are below.
+
+### Generate an SSH key-pair
 
 Generate an SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [
 guide](/install-guides/ssh#ssh-keys).
@@ -30,7 +35,7 @@ guide](/install-guides/ssh#ssh-keys).
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Acquire Azure Access Credentials
+### Acquire Azure Access Credentials
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with Azure. Thus, Terraform needs to be authenticated.
 
@@ -66,16 +71,35 @@ az vm image list --location eastus2 --publisher Canonical --offer 0001-com-ubunt
 
 **Image list:**
 
-![image #center](https://user-images.githubusercontent.com/42368140/196460588-3aa72ac1-5f0f-4c57-a6d7-70e81787f137.PNG)
+```output
+ubuntu@ip-172-31-38-39:~$ az vm image list --location eastus2 --publisher Canonical --offer 0001-com-ubuntu-server-focal --sku 20_04-lts-arm64 --all --output table
+Architecture    Offer                         Publisher    Sku              Urn                                                                     Version
+--------------  ----------------------------  -----------  ---------------  ----------------------------------------------------------------------  ---------------
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202206150  20.04.202206150
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202206220  20.04.202206220
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202207050  20.04.202207050
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202207130  20.04.202207130
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202208100  20.04.202208100
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202209050  20.04.202209050
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202209200  20.04.202209200
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202210100  20.04.202210100
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202210140  20.04.202210140
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202210180  20.04.202210180
+Arm64           0001-com-ubuntu-server-focal  Canonical    20_04-lts-arm64  Canonical:0001-com-ubuntu-server-focal:20_04-lts-arm64:20.04.202211151  20.04.202211151
+```
 
 ## Terraform infrastructure
-Start by creating an empty `providers.tf`, `variables.tf`, `main.tf` and `outputs.tf` files.
+Start by creating empty `providers.tf`, `variables.tf`, `main.tf` and `outputs.tf` files in your desired directory:
+
+```console
+touch providers.tf variables.tf main.tf outputs.tf
+```
 
 ### Providers
 
 Tell Terraform which cloud provider to connect to, Azure for this example.
 
-Add below code in `providers.tf` file:
+Add below code to the `providers.tf` file:
 
 ```console
 terraform {
@@ -106,7 +130,7 @@ provider "azurerm" {
 
 Define required variables to create a virtual machine.
 
-Add below code in `variables.tf` file: 
+Add below code to the `variables.tf` file: 
 
 ```console
 variable "resource_group_location" {
@@ -122,7 +146,9 @@ variable "resource_group_name_prefix" {
 
 ### Create required resources
 
-Add the resources required to create a virtual machine in `main.tf`.
+Define required resources to create a virtual machine.
+
+Add below code to the `main.tf` file:
 
 ```console
 resource "random_pet" "rg_name" {
@@ -254,7 +280,9 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
  
 ### Outputs
 
-Add the below code in `outputs.tf` to get **Resource group** name and **Public IP**:
+Get the **Resource group** name and **Public IP** to output after Terraform deployment.
+
+Add below code to the `outputs.tf` file: 
 
 ```console
 output "resource_group_name" {
@@ -276,35 +304,62 @@ Run `terraform init` to initialize the Terraform deployment. This command downlo
 terraform init
 ```
 
-![image #center](https://user-images.githubusercontent.com/42368140/196460749-f9d7ea1e-fc69-4ba6-887c-da488053ef91.PNG)
+The output should be similar to:
+
+```output
+Initializing the backend...
+Initializing provider plugins...
+- Reusing previous version of hashicorp/local from the dependency lock file
+- Reusing previous version of hashicorp/tls from the dependency lock file
+- Reusing previous version of hashicorp/azurerm from the dependency lock file
+- Reusing previous version of hashicorp/random from the dependency lock file
+- Using previously-installed hashicorp/local v2.4.0
+- Using previously-installed hashicorp/tls v4.0.4
+- Using previously-installed hashicorp/azurerm v2.99.0
+- Using previously-installed hashicorp/random v3.4.3
+Terraform has been successfully initialized!
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
 
 ### Create a Terraform execution plan
 
-Run `terraform plan` to create an execution plan.
+Run `terraform plan` to create and preview an execution plan before applying it to your cloud infrastructure.
 
 ```console
 terraform plan -out main.tfplan
 ```
-**Key points:**
-
-* The **terraform plan** command is optional. You can directly run **terraform apply** command. But it is always better to check the resources about to be created.
-* The terraform plan command creates an execution plan, but doesn't execute it. Instead, it determines what actions are necessary to create the configuration specified in your configuration files. This pattern allows you to verify whether the execution plan matches your expectations before making any changes to actual resources.
-* The optional -out parameter allows you to specify an output file for the plan. Using the -out parameter ensures that the plan you reviewed is exactly what is applied.
+A long output of resources to be created will be printed.
 
 ### Apply a Terraform execution plan
 
-Run `terraform apply` to apply the execution plan to your cloud infrastructure. Below command creates all required infrastructure.
+Run `terraform apply` to apply the execution plan to your cloud infrastructure. The command below creates all required infrastructure.
 ```console
 terraform apply main.tfplan
 ```
-![image #center](https://user-images.githubusercontent.com/67620689/227440412-c01e6f30-c32f-431b-819e-6b7e1937a0df.PNG)
+```output
+Apply complete! Resources: 11 added, 0 changed,0 destroyed
+
+outputs:
+
+public_ip_address = *20.242.3.39"
+resource. group_name = *rg-definite-mole"
+```
 
 ### Verify created resources
-Go to Azure Dashboard and choose **Resource group** created from Terraform.
+On the Azure Portal, go to **Azure Dashboard** and choose **Resource group** created from Terraform. 
+
+Verify that the Resource Group Name matches your output.
 
 ![image #center](https://user-images.githubusercontent.com/67620689/227440421-20642716-8eee-4f82-a5de-f4dd4592b65d.PNG)
 
 Go to Azure Dashboard and choose **Virtual Machine** created from Terraform.
+
+Verify that the Resource Group Name and Public IP Address match your output.
 
 ![image #center](https://user-images.githubusercontent.com/67620689/227440425-fe5d1685-e957-46ec-b49c-e848d211fbe3.PNG)
 
@@ -321,7 +376,16 @@ Run following command to connect to VM through SSH:
 ssh azureuser@<Public IP>
 ```
 
-![image #center](https://user-images.githubusercontent.com/67620689/227440438-90f5c9e9-ba55-486e-a874-0e5c2d7f9958.PNG)
+```output
+ubuntu@ip-172-31-17-218:~$ ssh azureuser@20.242.3.39
+The authenticity of host *20.242.3.39 (20.242.3.39)" can't be established.
+ED25519 key fingerprint is SHA256:9HqZbneGF wsn2L JrNu70a+S50s 1xvK7aCHImSDNOCH.
+This key is not known by any other names
+
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '20.242.3.35' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 20.04.5 LTS (GNU/Linux 5.15.0-1020-azure aarch64)
+```
 
 ### Clean up resources
 
@@ -332,4 +396,3 @@ terraform destroy
 ```
 
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
-![image #center](https://user-images.githubusercontent.com/42368140/196463306-1e559148-4b9a-414c-b862-06c6aa33557e.PNG)

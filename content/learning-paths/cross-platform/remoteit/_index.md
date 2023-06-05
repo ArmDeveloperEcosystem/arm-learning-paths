@@ -28,6 +28,7 @@ operatingsystems:
     - Linux
     - Windows
     - macOS
+    - Remote.It
 
 ### Test
 test_images:

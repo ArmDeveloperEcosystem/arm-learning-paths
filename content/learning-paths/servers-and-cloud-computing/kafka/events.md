@@ -29,7 +29,13 @@ Run this command in the same client terminal where the topic was created. Replac
 
 The output from this command is shown below:
 
-![describe](https://user-images.githubusercontent.com/66300308/199558769-69cb218c-6360-4289-9a7f-cca6893cfbeb.png)
+```output
+ubuntu@ip-172-31-19-179:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-topics.sh --topic test-topic --bootstrap-server 3.144.181.100:9092,3.15.19.197:9092,18.191.61.20:9092 --describe
+Topic: test-topic       TopicId: WMy9lruTQC6uuuuyep-C_Q PartitionCount: 64      ReplicationFactor: 3    Configs: segment.bytes=1073741824
+        Topic: test-topic       Partition: 0    Leader: 3       Replicas: 3,1,2 Isr: 3,1,2
+        Topic: test-topic       Partition: 1    Leader: 1       Replicas: 1,2,3 Isr: 1,2,3
+        Topic: test-topic       Partition: 2    Leader: 2       Replicas: 2,3,1 Isr: 2,3,1
+```
 
 ## Run the producer client to write events into the created topic:
 
@@ -40,7 +46,11 @@ Run this command in the same client terminal where the topic was created. Replac
 ```
 Write a message, example shown below:
 
-![producer](https://user-images.githubusercontent.com/66300308/199559053-3f8b4ea7-88b6-4f90-8cc6-45bf0ca95340.png)
+```output
+ubuntu@ip-172-31-19-179:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-producer.sh --topic test-topic --bootstrap-server 3.144.181.100:9092,3.15.19.197:9092,18.191.61.20:9092
+>This is the first message written on producer
+>
+```
 
 ## Run the consumer client to read all the events created:
 
@@ -52,6 +62,9 @@ Open a new terminal on the client machine to run the consumer client. Replace `k
 
 The same message you wrote in the producer client terminal should appear on the consumer client. Example shown below:
 
-![consumer](https://user-images.githubusercontent.com/66300308/199558517-4d52e7b9-3952-4d54-b8c5-21d36406bad7.png)
+```output
+ubuntu@ip-172-31-19-179:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server 3.144.181.100:9092,3.15.19.197:9092,18.191.61.20:9092
+This is the first message written on producer
+```
 
 You have now successfully verified that the Kafka cluster is working.

@@ -2,7 +2,7 @@
 # User change
 title: "Deploy Arm instances on GCP and provide access via Jump Server"
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -28,9 +28,9 @@ The installation of Terraform on your Desktop/Laptop needs to communicate with G
 To obtain GCP user credentials, follow this [guide](/install-guides/gcloud/#acquire-user-credentials). 
 
 ### Deploying Arm instances on GCP and providing access via Jump Server
-For deploying Arm instances on GCP and providing access via Jump Server, the Terraform configuration is broken into 4 files: **main.tf**, **outputs.tf**, **variables.tf**, **terraform.tfvars**, and a modules directory that contains **vpc-network** and **network-firewall** directories.
+For deploying Arm instances on GCP and providing access via Jump Server, the Terraform configuration is broken into 4 files: `main.tf`, `outputs.tf`, `variables.tf`, `terraform.tfvars`, and a modules directory that contains `vpc-network` and `network-firewall` directories.
 
-Add the following code in **main.tf**. It creates an instance with OS Login configured to use as a bastion host and a private instance to use alongside the bastion host.
+Add the following code in `main.tf`. It creates an instance with OS Login configured to use as a bastion host and a private instance to use alongside the bastion host.
 ```console
 terraform {
   required_version = ">= 0.12.26"
@@ -102,7 +102,7 @@ resource "google_compute_instance" "private" {
 }
 ```
 
-Add the following code in **outputs.tf**. It defines the output values for this configuration.
+Add the following code in `outputs.tf`. It defines the output values for this configuration.
 ```console
 output "public_ip_bastion_host" {
   description = "The public IP of the bastion host."
@@ -115,7 +115,7 @@ output "private_ip_instance" {
 }
 ```
 
-Create a **variables.tf** describing the variables referenced in the other files with their type and a default value.
+Create a `variables.tf` describing the variables referenced in the other files with their type and a default value.
 ```console
 variable "project" {
   description = "The name of the GCP Project where all resources will be launched."
@@ -147,17 +147,17 @@ zone = "us-central1-a"
 ```
 
 {{% notice Note %}}
-Replace **project_ID** with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In this case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
+Replace `project_ID` with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In this case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
 {{% /notice %}}
 
-Now create a **modules** directory and inside it create a **network-firewall** and **vpc-network** directories.
+Now create a `modules` directory and inside it create a `network-firewall` and `vpc-network` directories.
 
 ```bash
 mkdir -p modules/network-firewall
 mkdir -p modules/vpc-network
 ```
 
-Add the following code in **vpc-network/main.tf**.
+Add the following code in `vpc-network/main.tf`.
 ```console
 resource "google_compute_network" "vpc" {
   name    = "bastion-network"
@@ -351,7 +351,7 @@ variable "allowed_public_restricted_subnetworks" {
 }
 ```
 
-Add the following code in **network-firewall/main.tf**.
+Add the following code in `network-firewall/main.tf`.
 ```console
 data "google_compute_subnetwork" "public_subnetwork" {
   self_link = var.public_subnetwork
@@ -426,7 +426,7 @@ resource "google_compute_firewall" "private_allow_restricted_network_inbound" {
 }
 ```
 
-Add the following code in **network-firewall/variables.tf**.
+Add the following code in `network-firewall/variables.tf`.
 ```console
 variable "network" {
   description = "A reference (self_link) to the VPC network to apply firewall rules to"
@@ -456,7 +456,7 @@ variable "project" {
 ```
 
 ### Terraform Commands
-To deploy the instances, you need to initialize Terraform, generate an execution plan and apply the execution plan to your cloud infrastructure. Follow this [documentation](/learning-paths/servers-and-cloud-computing/gcp/terraform#terraform-commands) to deploy the **main.tf** file.
+To deploy the instances, you need to initialize Terraform, generate an execution plan and apply the execution plan to your cloud infrastructure. Follow this [documentation](/learning-paths/servers-and-cloud-computing/gcp/terraform#terraform-commands) to deploy the `main.tf` file.
 
 ### Verify the Instance and Bastion Host setup
 In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances you created through Terraform must be displayed on the screen.
@@ -484,7 +484,7 @@ Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.0-1030-gcp aarch64)
 ```
 
 {{% notice Note %}}
-Replace **jump-host-IP** with the external IP of the bastion host, **target-server-IP** with the internal IP of the private instance and **username** with the IAM email address like abc@1234.com -> abc_1234_com
+Replace `jump-host-IP` with the external IP of the bastion host, `target-server-IP` with the internal IP of the private instance and **username** with the IAM email address like abc@1234.com -> abc_1234_com
 {{% /notice %}}
 
 
@@ -493,21 +493,3 @@ Run `terraform destroy` to delete all resources created.
 ```console
   terraform destroy
 ```
-
-Output should be similar to:
-
-```output
-module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Destroying... [id=projects/massive-woods-383015/regions/us-central1-a/subnetworks/bastion-subnetwork-private]
-module.management_network.google_compute_subnetwork.vpc_subnetwork_public: Still destroying... [id=projects/massive-woods-383015/regions/u.../subnetworks/bastion-subnetwork-public, 30s elapsed]
-module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Still destroying... [id=projects/massive-woods-383015/regions/u...subnetworks/bastion-subnetwork-private, 10s elapsed]
-module.management_network.google_compute_subnetwork.vpc_subnetwork_public: Destruction complete after 32s
-module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Still destroying... [id=projects/massive-woods-383015/regions/u...subnetworks/bastion-subnetwork-private, 20s elapsed]
-module.management_network.google_compute_subnetwork.vpc_subnetwork_private: Destruction complete after 22s
-module.management_network.google_compute_network.vpc: Destroying... [id=projects/massive-woods-383015/global/networks/bastion-network]
-module.management_network.google_compute_network.vpc: Still destroying... [id=projects/massive-woods-383015/global/networks/bastion-network, 10s elapsed]
-module.management_network.google_compute_network.vpc: Still destroying... [id=projects/massive-woods-383015/global/networks/bastion-network, 20s elapsed]
-module.management_network.google_compute_network.vpc: Destruction complete after 21s
-
-Destroy complete! Resources: 12 destroyed.
-```
-

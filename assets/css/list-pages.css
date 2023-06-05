@@ -192,11 +192,8 @@ html[theme='dark'] ads-card.path-card {
     
     /* hover state */
     --ads-card-background-color-hover: var(--arm-color-base);
-    --ads-card-border-color-hover: var(--arm-green);
+    --ads-card-border-color-hover: transparent;
     --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
-    /*
-    --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16); 
-    */
 }
 
 
@@ -265,13 +262,19 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
 
 ads-card.tool-card {
     height: 112px;
-    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-border-radius: 0px;
+    --ads-card-border-width: 1px;    
+}
 
-    --ads-card-border-width: 1px;
+
+html[theme='dark'] ads-card.tool-card {
+    --ads-card-background-color: var(--arm-color-base);
     --ads-card-border-color: #000000;
-    --ads-card-border-color-hover: var(--arm-green); /* gradient? */
-    /* shadow likely not working */
-    --ads-card-box-shadow: #000 @50%, X:0 Y: 3 B:12;
+    --ads-card-box-shadow: #000 @50%, X:0 Y: 3 B:12;     /* shadow likely not working */
+
+
+    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-border-color-hover: transparent;
     --ads-card-box-shadow-hover: #000 @50%, X:0 Y: 3 B:12; /* 0 3px 6px 1px rgba(0,0,0,0.16);*/
 }
 

@@ -28,9 +28,8 @@ operatingsystems:
     - Windows
     - Linux
 tools_software_languages:
-    - SSH
+    - WSL
     - VS Code
-    - VNC
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

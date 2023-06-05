@@ -12,7 +12,7 @@ learning_objectives:
     - Get started profiling and optimizing your application.
 
 prerequisites:
-    - These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm, and confirmed to work with Arm Mobile Studio.
+    - An appropriate Android device. These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm, and confirmed to work with Arm Mobile Studio.
     - Download and install Arm Mobile Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
@@ -29,8 +29,7 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Arm Mobile Studio
-    - C++
-    - Java
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

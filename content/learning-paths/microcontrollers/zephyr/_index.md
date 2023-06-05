@@ -22,11 +22,11 @@ test_status:
 - passed
 title: Run the Zephyr RTOS on Arm Corstone-300
 tools_software_languages:
-- Corstone-300 FVP
-- Arm Virtual Hardware
-- AWS EC2
-- C
 - Zephyr
+- Arm Virtual Hardware
+- Fixed Virtual Platform
+- Coding
+
 weight: 1
 who_is_this_for: This is an introductory topic for software developers getting started
   with the Zephyr RTOS.

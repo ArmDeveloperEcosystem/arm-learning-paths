@@ -2,7 +2,7 @@
 # User change
 title: "Automate AWS instance creation using Terraform"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 2 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -10,17 +10,21 @@ layout: "learningpathall"
 This Learning Path uses [Terraform Cloud](https://registry.terraform.io/) to automate creation of Arm instances. Reader may wish to also see:
 * [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/)
 
-You will need an [AWS account](https://portal.aws.amazon.com). Create an account if needed.
-
 ## Before you begin
 
-Two tools are required on the computer you are using. Follow the links to install the required tools.
+You should have the prerequisite tools installed before starting the Learning Path.
 
-* [Terraform](/install-guides/terraform)
-* [AWS CLI](/install-guides/aws-cli)
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
 
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
 
-## Generate the SSH key-pair
+Before you begin, you will also need:
+- An AWS access key ID and secret access key
+- An SSH key pair
+
+The instructions to create the keys are below.
+
+### Generate the SSH key-pair
 
 Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
@@ -28,7 +32,7 @@ Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use fo
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
 {{% /notice %}}
 
-## Acquire AWS Access Credentials
+### Acquire AWS Access Credentials
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS. For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to AWS via the AWS CLI.
 
@@ -175,7 +179,21 @@ terraform init
 ```
 The output from this command will look similar to:
     
-![alt-text #center](https://user-images.githubusercontent.com/87687468/190346590-e5be6def-5d6b-470a-a0cb-1057a1334cd7.png "Terraform init")
+```output
+Initializing the backend...
+Initializing provider plugins...
+- Reusing previous version of hashicorp/local from the dependency lock file
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/local v2.3.0
+- Using previously-installed hashicorp/aws v4.52.0
+Terraform has been successfully initialized!
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
 
 ### Create a Terraform execution plan
 
@@ -196,8 +214,13 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 terraform apply
 ```      
 
-![alt-text #center](https://user-images.githubusercontent.com/87687468/199248572-9966e305-f502-4444-943d-7eb0ba0ee9ae.png "Terraform apply")
+Answer `yes` to the prompt to confirm you want to create AWS resources.
 
+The output should be similar to:
+
+```output
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+```
 ### Verify the EC2 setup
 
 Verify the setup by going back to the AWS console.
@@ -225,5 +248,3 @@ terraform destroy
 ```
 
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
-   
-![alt-text #center](https://user-images.githubusercontent.com/87687468/199249004-71ba8ba6-d67e-49ae-bb8d-865b5c16d54f.png "Terraform destroy")

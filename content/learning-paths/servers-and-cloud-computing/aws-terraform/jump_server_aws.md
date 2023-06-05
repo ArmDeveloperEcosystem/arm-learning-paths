@@ -2,7 +2,7 @@
 # User change
 title: "Deploy Arm instances on AWS and provide access via Jump Server"
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -13,7 +13,7 @@ A Jump Server (also known as bastion host) is an intermediary device responsible
 
 ## Deploying Arm instances on AWS and providing access via Jump Server
 
-For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 7 files: `ec2.tf`, `outputs.tf`, `provider.tf`, `security_groups.tf`, `variables.tf` and `VPC_subnet_IG_RT.tf`
+For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration is broken into 6 files: `ec2.tf`, `outputs.tf`, `provider.tf`, `security_groups.tf`, `variables.tf` and `VPC_subnet_IG_RT.tf`
 
 `variable.tf` configures the region, ami, instance type, disk size, and IP range.
 
@@ -298,7 +298,21 @@ Run `terraform init` to initialize the Terraform deployment. This command is res
 ```
 The output should be similar to what is shown below:
 
-![alt-text #center](https://user-images.githubusercontent.com/71631645/203960502-a22b68bb-c1d2-49bf-bb7c-5eee5ac6944c.jpg "Terraform init")
+```output
+Initializing the backend...
+Initializing provider plugins...
+- Reusing previous version of hashicorp/local from the dependency lock file
+- Reusing previous version of hashicorp/aws from the dependency lock file
+- Using previously-installed hashicorp/local v2.3.0
+- Using previously-installed hashicorp/aws v4.52.0
+Terraform has been successfully initialized!
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
+```
 
 ### Create a Terraform execution plan
 Run `terraform plan` to create an execution plan.
@@ -313,7 +327,16 @@ Run `terraform apply` to apply the execution plan to your cloud infrastructure. 
 ```      
 The output should be similar to what is shown below:
 
-   ![alt-text #center](https://user-images.githubusercontent.com/71631645/203950999-94167eaa-6f22-45f5-9647-ef2d131e9daa.jpg "Terraform apply")
+```output
+Apply complete! Resources: 19 added, 0 changed, 0 destroyed
+
+outputs:
+
+EC2-private_ip = "10.1.2.76"
+
+EC2-public_ip = "34.201 148.104"
+bastionhots-public_ip = "54.205.132.186"
+```
 
 ### Verify the Instance and Bastion Host setup
 Verify the setup by going to the AWS console.
@@ -330,7 +353,20 @@ ssh -J username@jump-host-IP username@target-server-IP
 ```
 The output is shown below:
 
-![alt-text #center](https://user-images.githubusercontent.com/71631645/203960729-38f353d1-8a4e-4704-b039-04608896d114.jpg "ssh -j")
+```output
+ubuntu@ip-172-31-46-24:~/ $ ssh -J ubuntu@54.205.132.186 ubuntu@10.1.2.76
+The authenticity of host '54.205.132.186 (54.205.132.186)' can't be established.
+ED25519 key fingerprint is SHA256:LEP11QPanpvagrBEfz71C5111gUQjAUTtzIF8ovAdzT.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '54.205.132.186' (ED25519) to the list of known hosts.
+The authenticity of host '10.1.2.76 (<no hostip for proxy command>)' can't be established.
+ED25519 key fingerprint is SHA256:4FsZ5txilwvvrbaIkvdxJuznb6dKQiN2FSyd7/I/EtQ.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.1.2.76' (ED25519) to the list of known hosts.
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-1019-aws aarch64)
+```
 
 ### Clean up resources
 Run `terraform destroy` to delete all resources created.
@@ -338,5 +374,3 @@ Run `terraform destroy` to delete all resources created.
   terraform destroy
 ```
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
-
-![alt-text #center](https://user-images.githubusercontent.com/71631645/203960620-bc580385-2fd6-477d-93c3-29895eeb5290.jpg "Terraform destroy")

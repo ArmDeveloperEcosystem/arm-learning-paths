@@ -24,8 +24,9 @@ operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-    - C
-    - MDK
+    - Coding
+    - Keil
+    - Fixed Virtual Platform
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

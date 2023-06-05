@@ -1359,3 +1359,17 @@ semihosted
 baidu
 paddlepaddle
 Makefiles
+WDK
+devcon
+devgen
+dotnet
+WPF
+NPU
+MACs
+unoptimized
+ASTC
+libGPUInfo
+nav
+TrustZone
+TFLM
+VHT

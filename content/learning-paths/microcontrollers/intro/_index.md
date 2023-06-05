@@ -19,7 +19,9 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-M
+    - Ethos-U
 operatingsystems:
+    - Baremetal
     - RTOS
 tools_software_languages:
 

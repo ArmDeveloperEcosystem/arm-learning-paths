@@ -93,7 +93,7 @@ Called from:
 
  <!-- Markdown metadata table -->
  <div class="content-box">
-    <h2>About this {{$table_name}}</h2>
+    <h2 id="about-marker">About this {{$table_name}}</h2>
     <div class="c-row">
         <div class="c-col xs:c-col-12 sm:c-col-12 md:c-col-12 lg:c-col-6 xl:c-col-4">
             <!-- RIGHT TABLE, non mobile-->
@@ -104,7 +104,7 @@ Called from:
                         <td class="td-metadata-key">
                             Skill level:
                         </td>
-                        <td class="td-metadata-value">
+                        <td id="skill-level" class="td-metadata-value">
                             <span><i class="fa-light fa-lightbulb"></i></span>&nbsp; {{.Params.skillLevels}}
                         </td>
                     </tr>
@@ -113,7 +113,7 @@ Called from:
                         <td class="td-metadata-key nowrap">
                             Reading time:
                         </td>
-                        <td class="td-metadata-value" >
+                        <td id="reading-time" class="td-metadata-value" >
                             <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
                         </td>
                     </tr>
@@ -121,7 +121,7 @@ Called from:
                         <td class="td-metadata-key">
                             Last updated:
                         </td>
-                        <td class="td-metadata-value">                    
+                        <td id="last-updated" class="td-metadata-value">                    
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                         </td>
                     </tr>
@@ -147,7 +147,7 @@ Called from:
                         </td>
                     </tr>
                     <tr>
-                        <td class="td-metadata-value margin-l-24" >
+                        <td id="skill-level" class="td-metadata-value margin-l-24" >
                             <span><i class="fa-light fa-lightbulb"></i></span>&nbsp; {{.Params.skillLevels}}
                         </td>
                     </tr>
@@ -158,7 +158,7 @@ Called from:
                         </td>
                     </tr>
                     <tr>
-                        <td class="td-metadata-value margin-l-24" >
+                        <td id="reading-time" class="td-metadata-value margin-l-24" >
                             <span><i class="fa-light fa-clock fa-sm"></i></span>&nbsp; <span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
                         </td>
                     </tr>
@@ -168,7 +168,7 @@ Called from:
                         </td>
                     </tr>
                     <tr>
-                        <td class="td-metadata-value margin-l-24">                    
+                        <td id="last-updated" class="td-metadata-value margin-l-24">                    
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                         </td>
                     </tr>
@@ -196,7 +196,7 @@ Called from:
                         <td class="td-metadata-key width-max-content nowrap">
                             Author:
                         </td>
-                        <td class="td-metadata-value">
+                        <td id="author" class="td-metadata-value">
                             <span>
                                 {{$author}}{{if $author_company}}, <span class="u-margin-right-1">{{$author_company}}</span>{{end}}
                                 {{- if $github_url -}}      <a href="{{$github_url}}"   target="_blank" aria-label="github"><i class="author-social-icon fab fa-github"></i></a>    {{- end -}}
@@ -224,7 +224,7 @@ Called from:
                             </td>
                             <td class="td-metadata-value" >
                                 <!-- docs exist! -->
-                                <a href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                                <a id="official-doc-link" href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
                             </td>
                         </tr>
                         {{end}}
@@ -237,7 +237,7 @@ Called from:
                         <td class="td-metadata-key width-max-content">
                             Tags:
                         </td>
-                        <td class="td-metadata-value">
+                        <td id="tags-for-content" class="td-metadata-value">
                             <span>
                                 {{ if .Params.subjects}}
                                 <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
@@ -291,7 +291,7 @@ Called from:
                         </td>
                     </tr>
                     <tr>
-                        <td class="td-metadata-value margin-l-24">
+                        <td id="author" class="td-metadata-value margin-l-24">
                                 {{$author}}{{if $author_company}}, {{$author_company}}{{end}}
                         </td>
                     </tr>
@@ -326,7 +326,7 @@ Called from:
                         <tr>
                             <td class="td-metadata-value margin-l-24" >
                                 <!-- docs exist! -->
-                                <a href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
+                                <a id="official-doc-link" href="{{.Params.official_docs}}" target="_blank">View {{ partial "general-formatting/external-link.html"}} </a>
                             </td>
                         </tr>
                         {{end}}
@@ -340,7 +340,7 @@ Called from:
                             </td>
                         </tr>
                         <tr>
-                            <td class="td-metadata-value margin-l-0">
+                            <td id="tags-for-content" class="td-metadata-value margin-l-0">
                                 <span>
                                     {{ if .Params.subjects}}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">

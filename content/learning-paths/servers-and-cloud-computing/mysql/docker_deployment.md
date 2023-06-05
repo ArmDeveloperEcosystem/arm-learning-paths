@@ -71,9 +71,9 @@ The playbook maps the container port to the host port, which is `3306`.
 
 2. Edit `playbook.yml` to use your values 
 
-Replace **{{your_MySQL_password}}** with your own password. 
+Replace `{{your_MySQL_password}}` with your own password.
 
-Also, replace **{{dockerhub_uname}}** and **{{dockerhub_pass}}** with your [Docker Hub](https://hub.docker.com/) credentials.
+Also, replace `{{dockerhub_uname}}` and `{{dockerhub_pass}}` with your [Docker Hub](https://hub.docker.com/) credentials.
 
 3. Create a `inventory.txt` file and copy the contents given below:
 ```ansible
@@ -82,7 +82,7 @@ ansible-target1 ansible_connection=ssh ansible_host={{public_ip of VM where MySQ
 ```
 4. Edit `inventory.txt` to use your values 
 
-Replace **{{public_ip of VM where MySQL to be deployed}}** and **{{user_of VM where MySQL to be deployed}}** with your own values.
+Replace `{{public_ip of VM where MySQL to be deployed}}` and `{{user_of VM where MySQL to be deployed}}` with your own values.
 
 {{% notice Note %}} You can use your own inventory file. {{% /notice %}}
 

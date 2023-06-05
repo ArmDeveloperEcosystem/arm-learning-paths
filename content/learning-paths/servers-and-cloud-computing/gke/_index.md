@@ -24,9 +24,7 @@ armips:
 tools_software_languages:
     - Terraform
     - Kubernetes
-    - kubectl
-    - gcloud
-    - GCP
+    - Google Cloud
 
 operatingsystems:
     - Linux

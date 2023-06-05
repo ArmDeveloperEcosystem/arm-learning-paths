@@ -13,7 +13,7 @@ layout: "learningpathall"
 RDS is a Relational database service provided by AWS. To deploy a MySQL RDS instance, Create a `main.tf` Terraform file.
 To generate and configure the Access key ID and Secret access key, follow the instructions mentioned in the [AWS Credentials install guide](/install-guides/aws_access_keys/).
 
-Here is the complete main.tf file:
+Here is the complete `main.tf` file:
 
 ```console
 provider "aws" {
@@ -41,7 +41,7 @@ resource "aws_db_instance" "Testing_Mysql" {
 }
 ``` 
 
-To find the correct instance type for RDS, Check the [list](https://aws.amazon.com/rds/mysql/instance-types/) of supported instance types. Select a Graviton (Arm) based instance type.
+To find the correct instance type for RDS, check the [list](https://aws.amazon.com/rds/mysql/instance-types/) of supported instance types. Select a Graviton (Arm) based instance type.
 
 ![Screenshot (260)](https://user-images.githubusercontent.com/92315883/209249327-3755d7ef-581b-456c-a64b-e2167080dd59.png)
 
@@ -170,3 +170,11 @@ Database changed
 To create and access a table, follow this [document](/learning-paths/servers-and-cloud-computing/mysql/ec2_deployment#access-database-and-create-table).
 
 More information about [Creating and connecting to a MySQL DB instance](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html) is available from AWS.
+
+### Clean up resources
+
+Run `terraform destroy` to delete all resources created.
+
+```console
+terraform destroy
+```

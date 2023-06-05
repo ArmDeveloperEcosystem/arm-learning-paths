@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 Learning Paths are created using Markdown. 
 
-Refer to this section when you are have questions on how to format your content correctly.
+Refer to this section when you have questions on how to format your content correctly.
 
 You can also refer to other Markdown resources, and if you are unsure, look [this page in GitHub](https://github.com/jasonrandrews/arm-learning-paths/blob/main/content/learning-paths/cross-platform/_example-learning-path/appendix-1-formatting.md?plain=1) to see how to do formatting.
 
@@ -22,8 +22,6 @@ Use the quick links below to jump to the appropriate section for each type of fo
 - [Code Snippets](#code-snippets)
 - [Images](#images)
 - [Notice Callout](#notice-callout)
-- [Godbolt Compiler Explorer](#godbolt-compiler-explorer)
-
 
 ## Markdown Syntax
 
@@ -38,23 +36,9 @@ The most common Markdown syntax is in the table.
 | *Italic text* | \*Italic text\*     |
 | `Code font`   | \`code font\`       |
 
-You can insert images using Markdown.
-
-Provide alternative text (displayed if the image cannot load) in brackets followed by the image source and subtitle in parenthesis. 
-
-Here is a simple example:
-
-![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
-
-The Markdown used to add the picture is:
-
-```console
-![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
-```
-
 ## Code Snippets
 
-You can add code snippets in the standard markdown format, plus additional capabilities. 
+You can add code snippets in the standard markdown format. You can also add additional options for the code snippet. 
 
 Here is a simple example:
 
@@ -62,7 +46,7 @@ Here is a simple example:
 echo ‘hello world’
 ```
 
-These are the range of options to add an image:
+These are the range of options to add to a code snippet:
 - Language highlighting
 - Line numbers
 - Line highlighting
@@ -115,9 +99,9 @@ There are three ways you can specify command outputs in code:
 
 {{% notice Note %}}
 In each of the three situations, code marked as 'output' will:
-- Not be copied when clicking the 'copy' button
-- Not be highlightable by a cursor
-- Appear slightly darker
+- not be copied when clicking the 'copy' button
+- not be highlightable by a cursor
+- appear slightly darker
 {{% /notice %}}
 
 Keep reading to see an example of each.
@@ -137,7 +121,7 @@ test
 
 #### Output - alongside "command_line" functionality
 
-Use the following syntax by specifying the output lines after a pipe like so: { command_line="root@localhost | 2-6" }
+Use the following syntax by specifying the output lines after a pipe as follows: { command_line="root@localhost | 2-6" }
 
 Example in context:
 ```bash { command_line="root@localhost | 2-6" }
@@ -151,7 +135,7 @@ HelloWorld
 
 #### Output - alongside any language
 
-To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output. Example:
+To place output in the same code block as the generating command, use the shortcode `{ output_lines = "2-3, 5, 7-11" }` styling. Note that when hitting the `copy` button, only the commands are copied to the clipboard, not the specified output. For example:
 
 ```bash { output_lines = "2-3,5,7-11" }
 echo 'hello world\nh'
@@ -189,7 +173,7 @@ HelloWorld
 
 ### Code Panes  
 
-Adding a code pane, for code dependent on OS, architecture, or similar. Code panes are incompatible with the other forms of code styling.
+Adding a code pane, for code dependent on OS or architecture. Code panes are incompatible with the other forms of code styling.
 
 Code pane example with language selector:
 
@@ -242,7 +226,13 @@ You can add images in the standard markdown format. Provide alternative text (di
 
 ![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
 
-These are the range of options to add an image:
+The Markdown used to add the picture is:
+
+```console
+![example image alt-text#center](arm-pic.png "Figure 1. Example image caption")
+```
+
+These are the options when adding an image:
 - Hosting
     - Local
     - External
@@ -260,21 +250,24 @@ External image referencing is also simple. Obtain the picture link and place tha
 
 ![Arm sample pic](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuMSonKjWrTHvrR00sIUfPtOAxJ-RjUKmWUqCai5hMWC6MiHq8ZsUYBDWYDQ1WsjTb2e4&usqp=CAU "Figure 4. External hosting example")
 
-### Image Alignment (center or left) 
+### Image Alignment (left or center) 
 
 Left-alignment is the default image behavior. 
-To center an image, add '#center' at the end of the alt-text and the image + subtitle will center on the page.
+To center an image, add '#center' at the end of the alt-text and the image + subtitle will render in the center of the page.
 
 Center aligned:
 ![alt-text #center](arm-pic.png "Figure 5. Centered example")
 
 ### Image Sizing
 
-Images are displayed in their specified size. To shrink an image, download the image, modify the size, and host the image locally.
+Images are displayed in their specified size. To resize an image:
+1. Download the image
+2. Modify the size
+3. Host the image locally.
 
 ## Notice Callout
 
-Use this format to add a note / tip for a reader in a highlighted way. The format is:   
+Use the following format to add a note / tip for a reader in a highlighted way.
 
 {{%/* notice *optional_title* */%}}  
 Text inside  
@@ -293,7 +286,4 @@ You can also give a custom title as specified here.
 - Work
 {{% /notice %}}
 
-## Godbolt Compiler Explorer
-
-To be written
 

@@ -24,6 +24,7 @@ operatingsystems:
 tools_software_languages:
     - LLVM
     - VS Code
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

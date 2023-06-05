@@ -4,9 +4,12 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prerequisites
+## Before you begin
 
-* [An EKS cluster](/learning-paths/servers-and-cloud-computing/eks/cluster_deployment/)
+You should have [an EKS cluster](/learning-paths/servers-and-cloud-computing/eks/cluster_deployment/) deployed before starting the Learning Path.
+
+Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
+
 
 ## WordPress Deployment Files
 You will use three yaml files to deploy WordPress: `kustomization.yaml`, `mysql-deployment.yaml`, and `wordpress-deployment.yaml`.
@@ -206,7 +209,11 @@ kubectl get pvc
 
 Eventually the volume claims will be bounded to the cluster and appear similar to the image below.
 
-![image](https://user-images.githubusercontent.com/87687468/203515130-83c5604b-fc85-49e9-8f1a-1da2f00066b6.png)
+```output
+NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+mysql-pv-claim   Bound    pvc-fe0fb47e-5390-438c-b977-287580a43e4c   5Gi        RWO            gp2            36s
+wp-pv-claim      Bound    pvc-20a1b6e9-97c7-49be-80d2-33a62fe51bee   5Gi        RWO            gp2            36s
+```
 
 Next, check on the WordPress and MySQL pods by running the following command.
 ```console
@@ -215,14 +222,23 @@ kubectl get pods
 
 It may take a little while for the pods to be created and get into the running state. Eventually the pods should look like the image below.
 
-![image](https://user-images.githubusercontent.com/87687468/203515032-0d6bd00f-068a-4848-b3f9-75e86e895ec9.png)
+```output
+NAME                               READY   STATUS    RESTARTS   AGE
+wordpress-747cb6b5dc-5mgl8         1/1     Running   0          56s
+wordpress-mysql-6bf867b44f-rl95q   1/1     Running   0          56s
+```
 
 To verify WordPress is working, connect to WordPress through a browser. To get the external IP address of the WordPress deployment run the following command.
 ```console
 kubectl get svc
 ```
 
-![image](https://user-images.githubusercontent.com/87687468/203515908-db800aa4-602c-4e80-ae70-d7fc44c8e16b.png)
+```output
+NAME              TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+kubernetes        ClusterIP      172.20.0.1       <none>        443/TCP        20m
+wordpress         LoadBalancer   172.20.229.108   3.145.125.76  80:32337/TCP   78s
+wordpress-mysql   ClusterIP      None             <none>        3306/TCP       78s
+```
 
 At this point, point a browser to the external IP address (in this case, it's 3.145.125.76) and see the WordPress welcome screen as shown below.
 
