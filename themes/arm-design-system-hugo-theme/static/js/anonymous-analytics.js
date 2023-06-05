@@ -230,12 +230,13 @@ function trackHeaderInteraction(type,name){
                     2.5. Review (if all correct, add trigger for analytics somehow)
                     3. Feedback (on Next Steps page)
             */
-
+            
                     
            // 0) onload digital data setting
            let lp_title = document.getElementById('learning-path-title').innerText;
            let lp_step = document.getElementById('learning-path-step-active').innerText.trim();
            let lp_step_num = document.getElementById('learning-path-step-active').getAttribute('data-step-num');
+           let lp_category = current_path.split('/')[2];
 
             // specific to intro page only; 
             if (document.getElementById('skill-level')) {
@@ -257,6 +258,7 @@ function trackHeaderInteraction(type,name){
                         learningPathName: lp_title, 
                         learningTabName: lp_step,
                         pageNumber: "page " +lp_step_num,
+                        learningPathCategory: lp_category,
                         skillLevel: lp_skill_level,
                         readingTime: lp_reading_time,
                         lastUpdated: lp_last_updated,
@@ -272,6 +274,7 @@ function trackHeaderInteraction(type,name){
                         learningPathName: lp_title, 
                         learningTabName: lp_step,
                         pageNumber: "page " +lp_step_num,
+                        learningPathCategory: lp_category
                     }
                 };
             }
