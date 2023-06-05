@@ -2,7 +2,7 @@
 # User change
 title: "Deploy Arm VMs on Azure and provide access via Jump Server"
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -316,7 +316,7 @@ variable "username" {
 
 ### Outputs
 
-Add the code below in `outputs.tf` to get the **Private IP addresses** names and **Public IP Address of bastion VM** name after Terraform deployment:
+Add the code below in `outputs.tf` to get the Private IP addresses name and Public IP address of Bastion VM:
 
 ```console
 # IP address of public IP addresses provisioned for bastion VM.
@@ -349,11 +349,45 @@ Connect to a target server via a Jump Host using the `-J` flag from the command 
   ssh -J ubuntu@bastion-vm-public-IP ubuntu@target-vm-private-IP
 ```
 
+```output
+ubuntu@ip-172-31-38-39:~/azure_jumpserver$ ssh -J ubuntu@20.242.22.182 ubuntu@l0.0.2.4
+The authenticity of host '20.242.22.182 (20.242.22.182)" can't be established.
+ED25519 key fingerprint is SHA256:013xvbJhZRyRrvT} +p4g/YpLya6Q7/xSOhwusOUGKQ -
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 20.242.22.163  (ED3519) to the List of known hosts.
+The authenticity of host '10.0.2.4 (<no hostip for proxy command>)' can't be established.
+ED25519 key fingerprint is SHA256:hSQPO0LVa/UB4AHOZe2IpCCOHXOrCCYyYJKnmVxlzk .
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added '10.0.2.4' (ED25519) to the List of known hosts.
+Welcome to Ubuntu 20.04.5 LTS (GNU/Linux 5.15.6-1020-azure aarch64)
+* Documentation:   https://help.ubuntu.com
+* Management:      https://landscape.canonical.com
+* Support:         https: //ubuntu.con/advantage
+
+System information as of Wed Apr 5 12:54:51 UTC 2023
+
+System load:   0.0 			Processes: 		127
+Usage of /:    4.6% of 28.0068 		Users logged in: 	0
+Memory usage:  3% 			IPv4 address for eth0:  10.0.2.4
+Swap usage:    0%
+
+0 updates can be applied immediately.
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+
+Last login: Wed Apr 5 12:54:23 2023 from 10.0.1.4
+To run a command as administrator (user "root"), use "sudo <command>".
+See "man sudo_root" for details.
+
+ubuntu@bastion-test-trgt-vnoo1:~s
+```
+
 {{% notice Note %}}
 Replace `bastion-vm-public-IP` with the public IP of the bastion VM and `target-vm-private-IP` with the private IP of the target VM.
 {{% /notice %}}
-
-![azure_connect_vm #center](https://user-images.githubusercontent.com/42368140/230090899-246a5391-a504-47a7-9ae7-5a3826c25ebe.png)
 
 ### Clean up resources
 Run `terraform destroy` to delete all resources created:
@@ -362,5 +396,3 @@ Run `terraform destroy` to delete all resources created:
 ```
 
 It will remove all resource groups, virtual networks, and all other resources created through Terraform.
-
-![azure_terraform_destroy #center](https://user-images.githubusercontent.com/42368140/230092816-e2db8e58-b1ec-4d85-b3d4-012ce3e5385a.png)

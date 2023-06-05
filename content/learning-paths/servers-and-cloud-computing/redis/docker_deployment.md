@@ -12,17 +12,17 @@ layout: "learningpathall"
 
 You can deploy Redis with a Docker container using Terraform and Ansible. 
 
-In this topic, you will deploy Redis with a Docker container.
+In this section, you will deploy Redis with a Docker container.
 
 ## Before you begin
 
-You should have the prerequisite tools installed from the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#create-an-aws-ec2-instance-using-terraform).
+You should have the prerequisite tools installed from the section, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#create-an-aws-ec2-instance-using-terraform).
 
 Use the same SSH key pair.
 
 ## Create an AWS EC2 instance using Terraform
 
-You can use the same `main.tf` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment).
+You can use the same `main.tf` file used in the section, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment).
 
 ## Terraform Commands
 
@@ -100,7 +100,7 @@ Master_public_IP = [
 ## Install Redis with a Docker container through Ansible
 Install the Redis and the required dependencies. 
 
-Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook.
 ```console
 ---
 - hosts: all
@@ -139,7 +139,7 @@ To access the Redis server running inside the Docker container on port `6379`, y
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the  `ansible-playbook` command.
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory

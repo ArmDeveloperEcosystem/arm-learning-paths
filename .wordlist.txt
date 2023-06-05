@@ -1366,3 +1366,10 @@ dotnet
 WPF
 NPU
 MACs
+unoptimized
+ASTC
+libGPUInfo
+nav
+TrustZone
+TFLM
+VHT

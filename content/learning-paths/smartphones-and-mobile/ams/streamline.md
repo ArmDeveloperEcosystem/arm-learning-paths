@@ -59,4 +59,4 @@ Start the application on the device., and interact as desired for the profiling 
 
 When satisfied, simply click on `Stop capture`. Streamline will stop capturing data, remove the daemon, and process the captured data.
 
-Doublie-click on the capture to display in the timeline.
+Double-click on the capture to display in the timeline.

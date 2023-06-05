@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - An Azure account
-    - A computer with the following tools installed`:` Terraform, Azure CLI (az), Kubernetes CLI (kubectl)
+    - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
 
 author_primary: Jason Andrews
 

@@ -4,8 +4,8 @@ title: Deploy Arm Instances on AWS using Terraform
 minutes_to_complete: 60   
 
 learning_objectives: 
-    - Deploy AWS EC2 instances based on AWS Graviton processors from the AWS console
     - Automate AWS EC2 instance creation using Terraform
+    - Deploy Arm instances on AWS and provide access via Jump Server
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)

@@ -22,7 +22,7 @@ Install [Terraform](/install-guides/terraform) and [Ansible](/install-guides/ans
 
 Any computer which has these tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
 
-You will need an [an Azure portal account](https://azure.microsoft.com/en-in/get-started/azure-portal) to complete this Learning Path. Create an account if you don't have one.
+You will need [an Azure portal account](https://azure.microsoft.com/en-in/get-started/azure-portal) to complete this Learning Path. Create an account if you don't have one.
 
 You will also need:
 - A SSH key pair
@@ -89,8 +89,6 @@ variable "resource_group_name_prefix" {
 ```
 
 Add the resources required to create a virtual machine in a file named `main.tf`.
-
-Scroll down to see the information you need to change in `main.tf`.
 
 ```console
 resource "random_pet" "rg_name" {
@@ -310,7 +308,7 @@ Run `terraform apply` to apply the execution plan and create all Azure resources
 terraform apply
 ```      
 
-Answer `yes` wen prompted to confirm you want to create Azure resources. 
+Answer `yes` when prompted to confirm you want to create Azure resources.
 
 The public IP address will be different, but the output should be similar to:
 
@@ -327,11 +325,11 @@ resource_group_name = "rg-tight-dove"
 
 Install Redis and the required dependencies.
 
-You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#configure-redis-through-ansible).
+You can use the same `playbook.yaml` file used in the section, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#configure-redis-through-ansible).
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the  `ansible-playbook` command.
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory
