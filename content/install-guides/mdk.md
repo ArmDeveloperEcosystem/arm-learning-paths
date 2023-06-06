@@ -6,6 +6,12 @@ title: Arm Keil MDK
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - cortex-m
+- microcontroller
+- mcu
+- success kits
+- ssk
+- iot
+- cmsis
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10

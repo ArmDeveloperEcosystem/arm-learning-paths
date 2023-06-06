@@ -8,8 +8,8 @@ additional_search_terms:
   - forge
   - ddt
   - map
-  - performance_reports
-  - allinea_studio
+  - performance reports
+  - allinea
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15

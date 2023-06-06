@@ -7,7 +7,9 @@ title: Arm Virtual Hardware
 additional_search_terms:
 - CI/CD
 - virtual platform
-- FVP
+- fvp
+- avh
+- vht
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15

@@ -7,6 +7,12 @@ title: Visual Studio for Windows on Arm
 additional_search_terms:
 - clang
 - compiler
+- ide
+- vs
+- windows
+- woa
+- windows on arm
+
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30
