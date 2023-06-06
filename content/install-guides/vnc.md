@@ -1,10 +1,12 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: VNC
+title: VNC on Arm Linux
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
+- desktop
+- linux
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30

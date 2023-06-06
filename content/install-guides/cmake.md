@@ -2,6 +2,10 @@
 title: CMake
 
 additional_search_terms:
+- linux
+- ide
+- ci/cd
+
 
 minutes_to_complete: 10
 

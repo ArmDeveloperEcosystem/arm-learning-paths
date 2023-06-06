@@ -2,6 +2,9 @@
 additional_search_terms:
 - SVE
 - Neoverse
+- cloud
+- hpc
+
 layout: installtoolsall
 minutes_to_complete: 10
 author_primary: Jason Andrews

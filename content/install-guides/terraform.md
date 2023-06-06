@@ -1,5 +1,11 @@
 ---
-additional_search_terms: null
+additional_search_terms:
+- cloud
+- vm
+- virtual machines
+- deploy
+
+
 layout: installtoolsall
 minutes_to_complete: 30
 author_primary: Jason Andrews

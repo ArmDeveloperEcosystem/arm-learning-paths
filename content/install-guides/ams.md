@@ -8,6 +8,9 @@ additional_search_terms:
 - Gaming
 - Graphics
 - Android
+- profiling
+- mali
+- cortex-a
 
 
 ### Estimated completion time in minutes (please use integer multiple of 5)

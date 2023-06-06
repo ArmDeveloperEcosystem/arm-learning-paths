@@ -6,6 +6,13 @@ title: Porting Advisor for Graviton
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - cloud
+- sve
+- neon
+- Armv8
+- Armv8-A
+- Armv9
+- Armv9-A
+
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
