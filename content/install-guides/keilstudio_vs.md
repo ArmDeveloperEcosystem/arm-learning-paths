@@ -5,8 +5,16 @@ title: Arm Keil Studio (VS Code Extension)
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
-- keil
 - cortex-m
+- microcontroller
+- mcu
+- iot
+- ide
+- vs code
+- vscode
+- visual studio
+- cmsis
+
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15

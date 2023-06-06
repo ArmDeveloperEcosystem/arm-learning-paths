@@ -1,6 +1,12 @@
 ---
 additional_search_terms:
 - Kubernetes
+- k8s
+- deploy
+- containers
+- ci/cd
+
+
 layout: installtoolsall
 minutes_to_complete: 15
 author_primary: Jason Andrews

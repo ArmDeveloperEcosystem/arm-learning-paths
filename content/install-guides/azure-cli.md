@@ -1,6 +1,8 @@
 ---
 additional_search_terms:
 - cloud
+- azure
+- 
 layout: installtoolsall
 minutes_to_complete: 15
 author_primary: Jason Andrews
