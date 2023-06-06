@@ -11,6 +11,7 @@ additional_search_terms:
 - windows
 - woa
 - windows on arm
+- open source windows on arm
 
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
