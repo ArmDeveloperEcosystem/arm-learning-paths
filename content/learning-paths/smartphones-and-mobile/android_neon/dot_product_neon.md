@@ -230,7 +230,11 @@ You have now added all the code to this file and can proceed to building the app
 
 ## Build and Run the code
 
-To build the code in Android Studio, select `Build-> Make Project`. Once the build completes, you should see output similar to what is shown below:
+By default, the Build Variant is `debug` for this project. Select `Build-> Select Build Variant...` and change the Active Build Variant to `release` as shown in the image below:
+
+![img7](neon7.png)
+
+Now build the code. Select `Build-> Make Project`. Once the build completes, you should see output similar to what is shown below:
 
 ```output
 BUILD SUCCESSFUL in 1m 9s
@@ -239,10 +243,12 @@ BUILD SUCCESSFUL in 1m 9s
 Build Analyzer results available
 ```
 
-You can now run the app on your Arm powered Android smartphone. Connnect your phone to the development computer on which you have built the app. You can connect it either using the USB cable or `Pair using Wi-Fi`. We used a Google Pixel 7 phone to run the app on. The image below shows the app running on it:
+You can now run the app on your 64-bit Arm powered Android smartphone. With your phone connected, select `Run-> Run app`. The image below shows the app running on a Google Pixel 7 phone:
 
 [neon_img]
 
-Using built-in Neon intrinsics provided over a 30 percent improvement in elapsed time. The results will vary based on the phone you are running on.
+In this case, using built-in Neon intrinsics provided over a 30 percent improvement in elapsed time. The results will vary based on the phone you are running on.
+
+You have now successfully implemented dot product using Neon intrinsics on your 64-bit Arm smartphone running Android.
 
 

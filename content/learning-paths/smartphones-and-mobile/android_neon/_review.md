@@ -28,7 +28,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            Using Neon intrinsics can provide over 30 percent performance improvement to dot product implementation on Arm v8 powered phones running Android. 
+            Using Neon intrinsics can provide over 30 percent performance improvement to dot product implementation on 64-bit Arm powered phones running Android. 
 
 
 # ================================================================================
