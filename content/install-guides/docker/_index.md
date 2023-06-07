@@ -3,7 +3,9 @@ title: Docker
 author_primary: Jason Andrews
 additional_search_terms:
 - containers
-- virtual machines
+- virtual machine
+- vm
+- deploy
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

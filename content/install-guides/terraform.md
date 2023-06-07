@@ -2,7 +2,7 @@
 additional_search_terms:
 - cloud
 - vm
-- virtual machines
+- virtual machine
 - deploy
 
 

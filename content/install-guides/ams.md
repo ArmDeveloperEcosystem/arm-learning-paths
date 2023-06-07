@@ -10,6 +10,7 @@ additional_search_terms:
 - Android
 - profiling
 - mali
+- immortalis
 - cortex-a
 
 
