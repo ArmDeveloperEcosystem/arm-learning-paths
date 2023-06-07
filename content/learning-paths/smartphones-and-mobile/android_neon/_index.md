@@ -3,15 +3,16 @@ title: Get started with Neon Intrinsics on Android
 
 minutes_to_complete: 40
 
-who_is_this_for: This is an introductory topic for software developers interested in learning how to use Neon instrinsics for Arm powered mobile devices. 
+who_is_this_for: This is an introductory topic for software developers interested in learning how to use Neon instrinsics on Arm powered mobile devices running Android. 
 
 learning_objectives:
     - Enable Neon intrinsics support in Android Studio.
-    - Implement an Android application that uses the Android Native Development Kit (NDK) to calculate the dot product of two vectors in C/C++. Measure the performance uplift by using Neon instrinsics.
+    - Implement an Android application that uses the Android Native Development Kit (NDK) to calculate the dot product of two vectors in C/C++. 
+    - Measure the performance uplift by using Neon intrinsics.
 
 prerequisites:
-    - Any development machine with Android Studio installed.
-    - An Arm powered smartphone running Android.
+    - A x86_64 or Apple M1 development machine with Android Studio installed.
+    - A 64-bit Arm powered smartphone running Android.
 
 author_primary: Pareena Verma
 

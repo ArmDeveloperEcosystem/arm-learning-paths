@@ -22,7 +22,7 @@ review:
             Dot product instructions were added in the Arm v8.4-A architecture. 
     - questions:
         question: >
-            Neon intrinsics provide a performance improvement to dot product implementation.
+            Implementing dot product of two vectors with Neon intrinsics provides a performance improvement.
         answers:
             - "True"
             - "False"

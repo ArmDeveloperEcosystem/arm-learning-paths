@@ -11,7 +11,7 @@ In this section you will implement the dot product of two vectors using C++. Sta
 
 ## Implement dot product without Neon intrinsics
 
-You will first implement the dot product of two vectors without using Neon intrinsics. Open `app/src/main/cpp/native-lib.cpp` from the Project pane and replace the contents of this file with the code below:
+You will first implement the dot product of two vectors without using Neon intrinsics. Open `app/cpp/native-lib.cpp` from the Project pane and replace the contents of this file with the code below:
 
 ```console
 #include <jni.h>
@@ -53,7 +53,9 @@ int dotProduct(short* vector1, short* vector2, short len) {
 ```
 
 With this code, you have now implemented two helper methods `generateRamp` and `µsElapsedTime`.
-`generateRamp` generates the ramp, which is the vector of 16-bit integers. `µsElapsedTime` is used to measure the code execution time. 
+
+- `generateRamp` generates the ramp, which is the vector of 16-bit integers. 
+- `µsElapsedTime` is used to measure the code execution time. 
 
 The `dotProduct` function calculates the dot product of two equal length vectors by multiplying the vectors element by element and then accumulating the resulting products. This implementation of dot product uses a for loop and does not use Neon intrinsics.
 
@@ -72,15 +74,15 @@ To represent various register vectors, Neon intrinsics use the following name co
 
 In this convention:
 
-`<type>` is the data type (int, uint, float, or poly).
-`<size>` is the number of bits used for the data type (8, 16, 32, 64).
-`<number of lanes>` defines how many lanes.
+- `<type>` is the data type (int, uint, float, or poly).
+- `<size>` is the number of bits used for the data type (8, 16, 32, 64).
+- `<number of lanes>` defines how many lanes.
 
 For example, int16x4_t represents a vector register with 4 lanes of 16-bit integer elements, which is equivalent to a four-element int16 one-dimensional array (short[4]).
 
 Use dedicated methods to load data from the arrays to CPU registers. The names of these methods start with `vld`. Method naming uses a convention that is similar to the one for type naming. All methods start with `v`, which is followed by a method short name, like `ld` for load, and the combination of a letter and a number of bits, for example, `s16`, to specify the input data type.
 
-Add the implementation of the dot product of two vectors using Neon intrinsics to the `app/src/main/cpp/native-lib.cpp` file. Append the code below into the file:
+Add the implementation of the dot product of two vectors using Neon intrinsics to the `app/cpp/native-lib.cpp` file. Append the code below into the file:
 
 ```console
 int dotProductNeon(short* vector1, short* vector2, short len) {
@@ -167,7 +169,7 @@ When the partial sums are back in memory, sum them to get the final result.
 
 ## Measure the performance uplift by using Neon intrinsics
 
-You will finally add the `MainActivity.stringFromJNI` method to `app/src/main/cpp/native-lib.cpp` file. Append the code shown below to this file:
+You will finally add the `MainActivity.stringFromJNI` method to `app/cpp/native-lib.cpp` file. Append the code shown below to this file:
 
 ```console
 extern "C" JNIEXPORT jstring JNICALL
