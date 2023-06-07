@@ -245,7 +245,7 @@ Build Analyzer results available
 
 You can now run the app on your 64-bit Arm powered Android smartphone. With your phone connected, select `Run-> Run app`. The image below shows the app running on a Google Pixel 7 phone:
 
-[neon_img]
+![neon_img](dot_product.png)
 
 In this case, using built-in Neon intrinsics provided over a 30 percent improvement in elapsed time. The results will vary based on the phone you are running on.
 
