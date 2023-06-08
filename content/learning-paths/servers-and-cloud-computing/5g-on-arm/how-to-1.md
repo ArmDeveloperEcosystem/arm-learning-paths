@@ -91,7 +91,9 @@ For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be 
  
    We had issue when boot with USB Ubuntu from VGA or remote access, after adding "console=tty0" to the kernel boot argument, we are able to access via VGA
 
-   this server can have only two PCIe slots, so not much we can play with for 5G server. Probably ideal for 5GCN Core server.
+   This server can have only two PCIe slots, so not much we can play with for 5G server. Probably ideal for 5GCN Core server.
+
+   Another noticeble thing is that HPE server supports 220V only, you can't use in 110V outlet.
 
 #### A few thoughts about Arm ServerReady
 
@@ -103,7 +105,7 @@ For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be 
 
         iii. and the top slots never work, wasting two precious locations
 
-2. must make ServerReady pass PCIe card detection as required (not necessary to test its driver to work), but at least the PCIe slots on server should bind to PCIe standard in voltage spec. verify by "lspci -t -nn -v "
+2. must make ServerReady pass PCIe card detection as required (not necessary to test its driver to work), but at least the PCIe slots should follow the PCIe standard in voltage spec. And it can be verified by commnad of "lspci -t -nn -v "
 
 3. must require ODM/OEM who apply for ServerReady to have a support team ready for at least one-year period after passing certification, in case the customers run into any issue with their server during evaluation. 
 

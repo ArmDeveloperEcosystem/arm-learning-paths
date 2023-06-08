@@ -44,17 +44,19 @@ To update the firmeware, take the example of Foxconn server:
    ipmitool -C 3 -I lanplus -H 10.118.45.98 -U admin -P admin -z 8196 hpm upgrade altra_scp_signed_2.10.20220531.hpm force
 ```
 
+Please note that the update of the firmware via IPMI interface is hardware dependent, check your server ODM/OEM for the IPMI detail for updating its firmware.
+
 ### BIOS Setting
 
 Typically SR-IOV enablement is required for Arm server to support 5G deployment in container environment. Through BIOS options, you can enable SR-IOV.
 
 ### PCIe Setting
 
-This is really depending on the server ODM, for example for SuperMicro server PCIe slots need to be configured.
+This is really depending on the server ODM, for example for SuperMicro server PCIe slots need to be re-configured for certain PCIe devices. Contact ODM/OEM to find out details.
 
 ### CPU Frequency Setting
 
-Following script can be run on each boot to temporarily force the cores to run at max CPU frequency
+Following script can be run to temporarily force the cores to run at max CPU frequency
 
 ```bash
 #!/bin/bash
@@ -212,17 +214,18 @@ It's worth noting that disabling the audit system is generally not recommended, 
 
 A low latency kernel is a version of the Linux operating system that has been optimized for real-time applications. The goal of a low latency kernel is to minimize the time it takes for the operating system to respond to events and processes, so that applications can run with minimal delay or interruption.
 
-Low latency kernels are commonly used in applications that require real-time processing, such as audio and video production, gaming, and scientific computing. They are also used in environments where the time taken by the operating system to respond to events is critical, such as in financial trading systems and other high-frequency data processing systems.
+Low latency kernels are commonly used in applications that require real-time processing, such as audio and video production, gaming, and scientific computing, of course in 5G space as well. They are also used in environments where the time taken by the operating system to respond to events is critical, such as in financial trading systems and other high-frequency data processing systems.
 
 To achieve low latency, low latency kernels typically implement a number of changes to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. They may also make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
-How to install Lowlatency kernel on Arm server
+How to install Lowlatency kernel on Arm server:
+
 ```bash
 sudo apt update
 sudo apt-cache policy 'linux-image-5.*-lowlatency'
 sudo apt install linux-headers-5.15.0-46-lowlatency linux-image-5.15.0-46-lowlatency -y
 ```
-then run this to verify the new low-latency kernel:
+then run this follwoing script to verify the new low-latency kernel:
 
 awk -F\' '$1=="menuentry " {print i++ " : " $2} $1=="submenu " {print i++ " : " $2; j=0} $1=="\tmenuentry " {print "\t", j++ " : " $2}' /boot/grub/grub.cfg
 
@@ -231,7 +234,8 @@ it will show:
          0 : Ubuntu, with Linux 5.15.0-46-lowlatency
          1 : Ubuntu, with Linux 5.15.0-46-lowlatency (recovery mode)
 
-need to disable upgrade OS kernel:
+We will also need to disable upgrade OS kernel so the kernel will stay same version as we desire:
+
 ```bash
 sudo vi /etc/apt/apt.conf.d/20auto-upgrades, change 1 to 0:
 APT::Periodic::Update-Package-Lists "0";
@@ -242,7 +246,7 @@ APT::Periodic::Unattended-Upgrade "0";
 
 An RT kernel is designed to provide a guaranteed minimum response time for certain system events and processes, even under heavy load conditions. This is achieved through a number of optimizations to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. Additionally, RT kernels may make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
-At this moment, RT kernel is not ready from apt repository, we have to rebuild the kernel to enable RT for Arm
+At this moment, RT kernel is not ready from apt repository, we have to rebuild the kernel to enable RT for Arm. We will update as soob as it becomes widely available.
 
 ### SR-IOV
 
@@ -351,13 +355,153 @@ This command displays the following sample output.
 ### PTP Setting
 In 5G world, the time synchronization is critical to synchronize all components in same timing cadence   
 
-#### GrandMaster based PTP
+#### GrandMaster Hardware based PTP
+
 requires a GrandMaster Qulsar with GPS capability
 
-Also requires a PTP enabled switch, currently Arista switch seems to be able to PTP sync'ed all slave nodes like Nvidia/Keysight.
+Also requires a PTP enabled switch, currently Arista switch seems to be able to have PTP sync'ed all slave nodes like Nvidia/Keysight.
 
 #### SW based PTP
-setup ptp4l/phc2sys on Linux:
+
+How to setup ptp4l/phc2sys on Linux:
+
+Configure Slave node setting:
+
+```bash
+$ cat /etc/5g-ptp.conf
+[global]
+verbose 1
+domainNumber 24
+slaveOnly 1
+priority1 128
+priority2 128
+use_syslog 0
+logging_level 6
+tx_timestamp_timeout 900
+hybrid_e2e 0
+dscp_event 46
+dscp_general 46
+#clock_type BC
+boundary_clock_jbod 1
+ 
+[enP1p3s0f0np0]
+logAnnounceInterval -3
+announceReceiptTimeout 3
+logSyncInterval -4
+logMinDelayReqInterval -4
+delay_mechanism E2E
+network_transport L2
+```
+
+Setup Slave node PTP4L service: note that we need to assign a core for this task to run
+
+```bash
+$ cat /lib/systemd/system/ptp4l.service
+[Unit]
+Description=Precision Time Protocol (PTP) service
+Documentation=man:ptp4l
+ 
+[Service]
+Type=simple
+ExecStart=taskset -c 32 /usr/sbin/ptp4l -f /etc/5g-ptp.conf
+ 
+[Install]
+WantedBy=multi-user.target
+``` 
+
+Setup Slave node PHC2SYS service: note the NIC interface used here is enP1p3s0f0np0, also assign a core to run it
+```bash 
+$ cat /lib/systemd/system/phc2sys.service
+[Unit]
+Description=Synchronize system clock or PTP hardware clock (PHC)
+Documentation=man:phc2sys
+After=ntpdate.service
+Requires=ptp4l.service
+After=ptp4l.service
+ 
+[Service]
+Type=simple
+ExecStart=/bin/sh -c "taskset -c 31 /usr/sbin/phc2sys -s /dev/ptp$(ethtool -T enP1p3s0f0np0 | grep PTP | awk '{print $4}') -c CLOCK_REALTIME -n 24 -O 0 -R 256 -u 256"
+ 
+[Install]
+WantedBy=multi-user.target
+```
+ 
+Configure Master node setting:
+```bash
+$ cat /etc/5g-ptp.conf
+[global]
+verbose 1
+domainNumber 24
+priority1 128
+priority2 128
+use_syslog 1
+logging_level 6
+tx_timestamp_timeout 30
+hybrid_e2e 0
+dscp_event 46
+dscp_general 46
+[ens1f0np0]
+logAnnounceInterval -3
+announceReceiptTimeout 3
+logSyncInterval -4
+logMinDelayReqInterval -3
+delay_mechanism E2E
+network_transport L2
+```
+ 
+Setup Master node PTP4L service: note that we need to assign a core for this task to run
+```bash 
+$ cat /lib/systemd/system/ptp4l.service
+[Unit]
+Description=Precision Time Protocol (PTP) service
+Documentation=man:ptp4l
+ 
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=taskset -c 32 /usr/sbin/ptp4l -f /etc/5g-ptp.conf
+ 
+[Install]
+WantedBy=multi-user.target
+```
+ 
+Setup Master node PHC2SYS service: note the NIC interface used here is enP1p3s0f0np0, also assign a core to run it
+```bash 
+$ cat /lib/systemd/system/phc2sys.service
+[Unit]
+Description=Synchronize system clock or PTP hardware clock (PHC)
+Documentation=man:phc2sys
+After=ntpdate.service
+Requires=ptp4l.service
+After=ptp4l.service
+ 
+[Service]
+Type=simple
+Restart=always
+RestartSec=5s
+ExecStart=/bin/sh -c "taskset -c 31 /usr/sbin/phc2sys -s /dev/ptp$(ethtool -T enP1p3s0f0np0 | grep PTP | awk '{print $4}') -c CLOCK_REALTIME -n 24 -O 0 -R 256 -u 256"
+ 
+[Install]
+WantedBy=multi-user.target
+```
+ 
+Start PTP/PHC2SYS services:
+
+```bash 
+#PTP.service
+sudo systemctl daemon-reload
+sudo systemctl restart ptp4l.service
+sudo systemctl enable ptp4l.service
+sudo systemctl status ptp4l.service
+ 
+#phc2sys.service
+sudo systemctl daemon-reload
+sudo systemctl restart phc2sys.service
+sudo systemctl enable phc2sys.service
+sudo systemctl status phc2sys.service
+``` 
 
 Issues with synchronization of NIC port
 There was a problem with A100X NIC port enP1p3s0f0np0, every time to run phc2sys, the timedatectl will be set to the bogus ToD like 2093. work around:
