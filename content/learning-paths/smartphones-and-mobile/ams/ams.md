@@ -16,26 +16,4 @@ layout: "learningpathall"
 | [Graphics Analyzer](https://developer.arm.com/Tools%20and%20Software/Graphics%20Analyzer) | enables you to analyze Open GL ES and Vulkan API calls in your application, to identify rendering defects and investigate problem scenes. |
 | [Mali Offline Compiler](https://developer.arm.com/Tools%20and%20Software/Mali%20Offline%20Compiler) | enables you to analyze how your shader programs would perform on a range of Mali GPUs. |
 
-## Licensing
-
-As of the 2022.4 release, all features of Arm Mobile Studio are available for use free of charge without any additional license.
-
-## Installation
-
-Arm Mobile Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0).
-
-Full installation and application launch instructions are given in the Arm Mobile Studio [Release Notes](https://developer.arm.com/documentation/107649).
-
-### Windows
-
-Run the supplied `Arm_Mobile_Studio_<version>.exe` installer, and follow on-screen instructions.
-
-### Linux
-
-Unpack the supplied `Arm_Mobile_Studio_<version>_linux.tgz` installation package.
-```command
-tar -xf Arm_Mobile_Studio_2023.1_linux.tgz
-```
-### macOS
-
-Run the supplied `Arm_Mobile_Studio_<version>_macos.dmg` installer, and follow on-screen instructions.
+Arm Mobile Studio is supported on Windows, Linux, and MacOS hosts. See the [Install Guide](/install-guides/ams) for installation instructions.

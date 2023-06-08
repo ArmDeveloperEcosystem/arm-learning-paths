@@ -8,6 +8,8 @@ additional_search_terms:
 - compiler
 - ide
 - ArmDS
+- success kits
+- ssk
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10

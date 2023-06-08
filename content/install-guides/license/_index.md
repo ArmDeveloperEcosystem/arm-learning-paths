@@ -2,7 +2,11 @@
 title: Arm Licensing
 author_primary: Ronan Synnott
 additional_search_terms:
-- success-kits
+- success kits
+- ssk
+- hsk
+- ubl
+- flex
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.

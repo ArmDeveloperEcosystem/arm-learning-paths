@@ -2,6 +2,10 @@
 additional_search_terms:
 - armclang
 - compiler
+- hpc
+- linux
+- allinea
+
 author_primary: Florent Lebeau
 layout: installtoolsall
 minutes_to_complete: 15
@@ -61,13 +65,13 @@ Download releases from the command line using `wget`
 For Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/22-1/arm-compiler-for-linux_22.1_Ubuntu-20.04_aarch64.tar
+wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.04.1_Ubuntu-22.04_aarch64.tar
 ```
 
 For Red Hat Linux:
 
 ```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/22-1/arm-compiler-for-linux_22.1_RHEL-8_aarch64.tar
+wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.04.1_RHEL-8_aarch64.tar
 ```
 
 Individual packages with only the Arm Performance Libraries (ArmPL) are also available for download.
@@ -86,18 +90,18 @@ For Ubuntu Linux:
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
-tar -xvf arm-compiler-for-linux_22.1_Ubuntu-20.04_aarch64.tar 
-cd arm-compiler-for-linux_22.1_Ubuntu-20.04
-sudo ./arm-compiler-for-linux_22.1_Ubuntu-20.04.sh --accept
+tar -xvf arm-compiler-for-linux_23.04.1_Ubuntu-22.04_aarch64.tar
+cd ./arm-compiler-for-linux_23.04.1_Ubuntu-22.04
+sudo ./arm-compiler-for-linux_23.04.1_Ubuntu-22.04.sh --accept
 ```
 
 For Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
-tar -xvf arm-compiler-for-linux_22.1_RHEL-8_aarch64.tar
-cd arm-compiler-for-linux_22.1_RHEL-8
-sudo ./arm-compiler-for-linux_22.1_RHEL-8.sh --accept
+tar -xvf arm-compiler-for-linux_23.04.1_RHEL-8_aarch64.tar
+cd arm-compiler-for-linux_23.04.1_RHEL-8
+sudo ./arm-compiler-for-linux_23.04.1_RHEL-8.sh --accept
 ```
 
 Arm Compiler for Linux uses environment modules to dynamically modify your user environment on Linux. If needed, refer to the [Environment Modules documentation](https://lmod.readthedocs.io/en/latest/#id) for more information.
@@ -129,13 +133,13 @@ module avail
 To configure Arm Compiler for Linux:
 
 ```bash { env_source="~/.bashrc" }
-module load acfl/22.1
+module load acfl/23.04.1
 ```
 
 To configure GCC:
 
 ```bash { env_source="~/.bashrc" }
-module load gnu/11.2.0
+module load gnu/12.2.0
 ```
 
 ## Setting up product license
