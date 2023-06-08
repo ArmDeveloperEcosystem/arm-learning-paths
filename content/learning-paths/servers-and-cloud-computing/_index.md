@@ -7,7 +7,7 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Linux: 38
+- Linux: 39
 - macOS: 1
 - Windows: 2
 pinned_modules:
@@ -19,7 +19,7 @@ pinned_modules:
 subjects_filter:
 - CI-CD: 2
 - Containers and Virtualization: 11
-- Databases: 8
+- Databases: 9
 - Libraries: 5
 - ML: 2
 - Performance and Architecture: 7
@@ -28,48 +28,51 @@ subjects_filter:
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
-- Ansible: 4
-- Armclang: 2
+- 5G: 1
+- Alibaba: 2
+- Ansible: 5
+- armclang: 1
+- armie: 1
 - ArmRAL: 1
-- Assembly: 1
-- AWS CLI: 3
+- AWS: 15
 - AWS CodeBuild: 1
-- AWS EC2: 2
-- az: 1
-- Azure: 3
-- Azure CLI: 1
-- C: 2
-- cbuild: 1
+- Azure: 10
+- Bastion: 3
 - Clair: 1
 - ClickBench: 1
 - ClickHouse: 1
-- Docker: 3
-- Docker Compose: 1
+- Coding: 6
+- Docker: 6
 - Fortran: 1
-- GCC: 5
-- gcloud: 1
-- GCP: 1
+- gcc: 1
+- GCC: 4
 - gdb: 1
-- Geekbench 6: 1
-- Go: 1
+- Geekbench: 1
+- Go: 2
+- Google Cloud: 9
+- HammerDB: 1
 - InnoDB: 1
+- Intrinsics: 1
 - Kafka: 1
-- kubectl: 3
-- Kubernetes: 2
+- Kubernetes: 3
 - Lambda: 1
 - Linaro Forge: 1
+- MariaDB: 1
 - Memcached: 2
 - MongoDB: 1
-- MySQL: 1
+- mpi: 1
+- MySQL: 5
+- Neon: 3
 - Nginx: 1
-- Pointer Authentication: 1
-- PostgreSQL: 1
-- Python: 1
+- Oracle: 2
+- PostgreSQL: 3
+- Redis: 2
 - snappy: 1
 - Snort: 1
-- SQL: 2
+- SQL: 7
+- SVE: 3
 - Tensorflow: 1
-- Terraform: 11
+- Terraform: 12
 - Vectorscan: 1
 - x265: 1
 - zlib: 1

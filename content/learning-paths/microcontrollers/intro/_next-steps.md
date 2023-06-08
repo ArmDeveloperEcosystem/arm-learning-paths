@@ -4,11 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   Now that you have a basic understanding of where to find Arm microcontrollers, learn how to use Keil Studio Cloud.
+   The Machine Learning (ML) capabilities of embedded devices is rapidly increasing. Why not learn about ML development?
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontrollers/keilstudiocloud/"
-
+recommended_path: "/learning-paths/microcontrollers/nav-mlek/"
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)

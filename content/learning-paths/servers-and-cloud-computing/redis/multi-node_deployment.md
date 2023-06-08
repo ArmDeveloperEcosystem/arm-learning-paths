@@ -14,7 +14,7 @@ You can deploy Redis in a multi-node configuration on AWS Graviton processors us
 
 ## Before you begin
 
-You should have the prerequisite tools installed from the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment).
+You should have the prerequisite tools installed from the section, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment).
 
 Use the same SSH key pair.
 
@@ -101,7 +101,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
 
 {{% notice Note %}}
-The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
 The inventory file is automatically generated and does not need to be changed.
@@ -177,7 +177,7 @@ Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 ## Install Redis in a multi-node configuration through Ansible
 Install the Redis and the required dependencies. 
 
-Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. The following playbook contains a collection of tasks that install Redis in a multi-node configuration (3 primary and 3 replica nodes). 
+Using a text editor, save the code below in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. The following playbook contains a collection of tasks that install Redis in a multi-node configuration (3 primary and 3 replica nodes).
 
 ```console
 ---
@@ -223,7 +223,7 @@ Using a text editor, save the code below to in a file called `playbook.yaml`. Th
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the  `ansible-playbook` command.
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory

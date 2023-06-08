@@ -23,6 +23,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - System Ready
 
 
 ### FIXED, DO NOT MODIFY

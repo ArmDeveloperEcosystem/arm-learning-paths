@@ -84,8 +84,8 @@ from datetime import datetime
 
 
 # Set paths 
-data_weekly_file_path  = Path('../content/stats/stats_weekly_data.yml')
-tests_status_file_path = Path('../content/stats/stats_current_test_info.yml')
+data_weekly_file_path  = Path('../data/stats_weekly_data.yml')
+tests_status_file_path = Path('../data/stats_current_test_info.yml')
 learning_path_dir = Path('../content/learning-paths/')
 install_guide_dir = Path('../content/install-guides/')
 lp_and_ig_content_dirs = ['microcontrollers','embedded-systems','laptops-and-desktops','servers-and-cloud-computing','smartphones-and-mobile','cross-platform','install-guides']
@@ -393,13 +393,27 @@ def main():
     ### Weekly
     # if weekly dict is empty, create key
     if not existing_weekly_dic:
-        existing_weekly_dic = {}
-    # if key already exists in dic, overwrite that day with more recent info
-    if date_today in existing_tests_dic:
-        existing_weekly_dic[date_today].update(new_weekly_entry[date_today])
-    else:
-        existing_weekly_dic.update(new_weekly_entry)
+        print('no existing dic, starting from scratch.')
+        existing_weekly_dic = [new_weekly_entry]
+    # Otherwise append it
+    else:  
+        print('weekly data exists...checking to see if date exists.')
+        # Check if date already a key in there
+        exists=False
+        for dic in existing_weekly_dic:
+            if date_today in dic:
+                print('date today included, don"t save')
+                exists=True
+                break
+        if not exists:
+            print('date doesn"t exist, appending data')
+            existing_weekly_dic.append(new_weekly_entry)
+
+    # Alter existing dic to be a list of dates for easier processing:
     with open(data_weekly_file_path, 'w') as outfile:
+        print('printing weekly dict format, and dumping into this file: ')
+        print(outfile)
+        print(existing_weekly_dic)
         yaml.dump(existing_weekly_dic, outfile, default_flow_style=False)
 
     ### Tests

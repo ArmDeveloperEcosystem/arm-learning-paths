@@ -22,7 +22,7 @@ You should have the prerequisite tools installed before starting the Learning Pa
 
 Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
 
-You will need an [Google Cloud account](https://console.cloud.google.com/?hl=en-au) to complete this Learning Path. Create an account if you don't have one.
+You will need a [Google Cloud account](https://console.cloud.google.com/?hl=en-au) to complete this Learning Path. Create an account if you don't have one.
 
 Before you begin you will also need:
 - Login to Google Cloud CLI 
@@ -32,7 +32,7 @@ The instructions to login to Google Cloud CLI and to create the keys are below.
 
 ### Generate the SSH key-pair
 
-Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [documentation](/install-guides/ssh#ssh-keys).
+Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for Arm VMs access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
 
 {{% notice Note %}}
 If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
@@ -42,7 +42,7 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 
 The installation of Terraform on your Desktop/Laptop needs to communicate with GCP. Thus, Terraform needs to be authenticated.
 
-To obtain GCP user credentials, follow this [documentation](/install-guides/gcloud#acquire-user-credentials).
+To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acquire-user-credentials).
 
 ## Create a GCP instance using Terraform
 
@@ -183,11 +183,11 @@ Master_public_IP = [
 ## Configure Redis through Ansible
 Install the Redis and the required dependencies. 
 
-You can use the same `playbook.yaml` file used in the topic, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#configure-redis-through-ansible).
+You can use the same `playbook.yaml` file used in the section, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment#configure-redis-through-ansible).
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command.
+Run the playbook using the  `ansible-playbook` command.
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory

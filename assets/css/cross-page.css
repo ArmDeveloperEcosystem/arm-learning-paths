@@ -205,11 +205,16 @@ table tbody td {
         background-position: center;        /* Center the image */
         background-repeat: no-repeat;       /* Do not repeat the image */
         background-size: cover;             /* Resize the background image to cover the entire container */
+        border-bottom: 1px solid #303133; /* bottom border across page */
 }
 @media (max-width: 768px) { /* smaller screens than MD */
     #expanded-masthead {
         height: 90px;                      /* You must set a specified height */
     }
+}
+/* remove bottom border from ads-masthead component */
+ads-masthead {
+    --ads-masthead-border-bottom-color: transparent;
 }
     
 
@@ -276,23 +281,8 @@ ads-breadcrumbs {
 
 /*************************************/
 /* Simple Div container JUST for border gradient outline. */
-
-/*
-div.path-div::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 10px;
-    padding: 1px;
-    background: linear-gradient(45deg,#95D629,#20C1DE);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: add, add;
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-}
-*/
 .gradient-box {
-    display: inline-block;
+    /*display: inline-block;*/
     position: relative;
     border-radius: 10px;
     z-index:1;
@@ -305,16 +295,50 @@ div.path-div::before {
     right: 0;
     bottom: 0;
     left: 0;
-    margin: -2px;
+    margin: -1px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(45deg, #95D629, #20C1DE);
+    background: linear-gradient(90deg, #95D629, #20C1DE);
     opacity: 0;
     transition: opacity 0.3s ease; 
 }
 .gradient-box:hover::before {
     opacity: 1;
 }
+
+
+
+.gradient-box-tool {
+    /*display: inline-block;*/
+    position: relative;
+    border-radius: 0px;
+    z-index:1;
+  }
+
+.gradient-box-tool::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 1px;
+    left: 2px;
+    margin: -2px;
+    z-index: -1;
+    border-radius: inherit;
+    background: linear-gradient(90deg, #95D629, #20C1DE );
+    opacity: 0;
+    transition: opacity 0.3s ease; 
+}
+.gradient-box-tool:hover::before {
+    opacity: 1;
+}
+
+
+
+
+
+
+
 
   
 
@@ -352,7 +376,7 @@ html[theme='light'] body {
         background-size: 100% 100%;         /* Forces smaller width; best solution for mobile sizes */
     } 
 }
-/* Desktop background */
+/* Laptop background */
 @media (min-width: 768px) {
     html[theme='dark'] body {
         background-image: url("/img/bg-img-1920x1600.png");
@@ -363,6 +387,16 @@ html[theme='light'] body {
     } 
 }
 
+/* Large Monitor background */
+@media (min-width: 1400px) {
+    html[theme='dark'] body {
+        background-image: url("/img/bg-img-2500x1700.png");
+        background-color: var(--arm-color-footing);      
+        background-position: 0% 100%;
+        background-attachment: fixed;
+        background-size: cover;             /* Stretches image to fit; best solution for desktop sizes */
+    } 
+}
 
 
 .is-responsive-width {
@@ -395,3 +429,8 @@ html[theme='light'] body {
 @media (min-width: 1200px) {
         ads-masthead { --ads-masthead-horizontal-padding: 5px; }
 }
+
+
+
+
+

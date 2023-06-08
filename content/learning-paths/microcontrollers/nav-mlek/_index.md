@@ -1,8 +1,10 @@
 ---
-title: Navigate Cortex-M and Ethos-U Machine Learning development 
+title: Navigate Machine Learning development with Ethos-U processors
 
 armips:
 - Cortex-M
+- Ethos-U
+- Corstone
 
 author_primary: Jason Andrews
 
@@ -28,7 +30,7 @@ subjects: ML
 test_maintenance: false
 
 tools_software_languages:
-    - Corstone-300 FVP
+    - Fixed Virtual Platform
     - Arm Virtual Hardware
     - GCC
     - Arm Compiler for Embedded

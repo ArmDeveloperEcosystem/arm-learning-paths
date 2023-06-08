@@ -28,7 +28,7 @@ test_images:
 test_status:
     - passed
 tools_software_languages:
-    - Geekbench 6
+    - Geekbench
 
 weight: 1
 layout: learningpathall

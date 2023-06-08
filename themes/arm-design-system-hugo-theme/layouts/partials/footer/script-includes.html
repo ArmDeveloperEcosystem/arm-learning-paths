@@ -84,22 +84,12 @@ Called from:
 <!-- Homepage only -->
 {{if .IsHome }}
     <script src="/js/search-and-filter.js" defer></script>
-    <!-- Unified into one file
-    <script src="/js/search-and-filter/search-handling.js" defer></script>
-    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> 
-    -->
 {{end}}
 
 <!-- List pages only -->
 {{if $is_list}}
     <script src="/js/search-and-filter.js" defer></script>
     <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script>
-    <!-- Unified into one file
-    <script src="/js/search-and-filter/filter-learning-paths.js" defer></script>
-    <script src="/js/search-and-filter/search-logic.js" defer></script>
-    <script src="/js/search-and-filter/search-handling.js" defer></script>
-    <script src="/js/search-and-filter/change-handler-search-hook.js" defer></script> 
-    -->
 {{end}}
 
 <!-- Content pages only that are not _index, _next-steps, or _review -->

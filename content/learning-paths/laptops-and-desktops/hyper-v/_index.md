@@ -20,6 +20,7 @@ armips:
     - Cortex-A
 operatingsystems:
     - Windows
+    - Linux
 tools_software_languages:
     - Hyper-V
 

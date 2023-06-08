@@ -22,13 +22,16 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Cortex-M
+    - Corstone
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - C
-    - Python
-    - AWS EC2
+    - AWS
+    - Arm Virtual Hardware
+    - Coding
     - GCC
+    - Paddle
+    - TVMC
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

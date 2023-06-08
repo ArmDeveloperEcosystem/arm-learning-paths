@@ -26,8 +26,11 @@ operatingsystems:
 tools_software_languages:
     - Terraform
     - Ansible
-    - AWS CLI
-    - Azure CLI
+    - MariaDB
+    - AWS
+    - Azure
+    - Google Cloud
+    - Docker
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

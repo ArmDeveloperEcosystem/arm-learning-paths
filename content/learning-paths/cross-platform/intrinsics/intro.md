@@ -81,7 +81,7 @@ g++ -O2 -msse2 --std=c++14 sse.cpp -o sse
 ```
 
 Run the code:
-```bash { target="amd64/ubuntu:latest"; command_line="user@localhost | 2" }
+```bash { target="amd64/ubuntu:latest" }
 ./sse
 ```
 

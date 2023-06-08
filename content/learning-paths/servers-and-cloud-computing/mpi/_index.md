@@ -25,13 +25,13 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - C
+    - Coding
     - Fortran
-    - Python
-    - GCC
-    - Armclang
+    - gcc
     - Linaro Forge
     - gdb
+    - mpi
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -25,8 +25,7 @@ test_status:
 title: Learn about MongoDB on Arm servers
 tools_software_languages:
 - MongoDB
-- AWS EC2
-- cbuild
+- AWS
 - GCC
 - Snort
 weight: 1

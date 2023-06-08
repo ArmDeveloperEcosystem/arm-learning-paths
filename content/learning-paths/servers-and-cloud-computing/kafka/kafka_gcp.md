@@ -45,7 +45,7 @@ To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acqui
 
 ## Create seven GCP EC2 instance using Terraform
 
-Using a text editor, save the code below to in a file called `main.tf`
+Using a text editor, save the code below in a file called `main.tf`
 
 Scroll down to see the information you need to change in `main.tf`
 ```console

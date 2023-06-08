@@ -107,12 +107,10 @@ Make the changes listed below in `main.tf` to match your account settings.
 
 1. In the `provider` section, update the `region` value to use your preferred AWS region.
 
-1. In the `provider` section, update value to use your preferred AWS region.
-
 2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
 
 {{% notice Note %}}
-The instance type is t4g.small. This an an Arm-based instance and requires an Arm Linux distribution.
+The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
 {{% /notice %}}
 
 The inventory file is automatically generated and does not need to be changed.
@@ -194,7 +192,7 @@ Master_public_IP = [
 ## Configure Redis through Ansible
 Install Redis and the required dependencies. 
 
-Using a text editor, save the code below to in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. 
+Using a text editor, save the code below in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook.
 
 ```console
 ---
@@ -241,7 +239,7 @@ Replace `{password}` in this file with your value.
 
 ### Ansible Commands
 
-Substitute your private key name, and run the playbook using the  `ansible-playbook` command:
+Run the playbook using the  `ansible-playbook` command:
 
 ```console
 ansible-playbook playbook.yaml -i /tmp/inventory
@@ -328,3 +326,4 @@ You have successfully installed Redis on an AWS EC2 instance running Graviton pr
 
 Run `terraform destroy` to delete all resources created:
 
+Continue the Learning Path to deploy Redis on an Azure Arm based Instance

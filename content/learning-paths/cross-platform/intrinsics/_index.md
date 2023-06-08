@@ -28,7 +28,12 @@ test_status:
 - passed
 - passed
 title: Porting architecture specific intrinsics
-tools_software_languages: null
+tools_software_languages:
+  - Neon
+  - SVE
+  - Coding
+  - Intrinsics
+
 weight: 1
 who_is_this_for: This is an advanced topic for software developers interested in porting
   architecture specific intrinics to Arm processors.

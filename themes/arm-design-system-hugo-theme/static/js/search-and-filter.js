@@ -492,7 +492,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (document.title.includes('Install Guides')) {
         search_box.inputChangeHandler = searchHandler_Tools;    
     }
-    else {
+    else if (document.title.includes('Learning Paths') && !(document.title.includes('Home'))) {
         search_box.inputChangeHandler = searchHandler_LearningPaths;
     }
 

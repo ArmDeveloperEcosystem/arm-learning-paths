@@ -20,12 +20,13 @@ skilllevels: Introductory
 subjects: Libraries
 armips:
     - Cortex-M
+    - Corstone
 operatingsystems:
     - Baremetal
 tools_software_languages:
     - Arm Virtual Hardware
-    - AWS EC2
-    - C
+    - CMSIS
+    - Coding
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
