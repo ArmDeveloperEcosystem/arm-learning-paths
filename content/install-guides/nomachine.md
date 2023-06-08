@@ -1,6 +1,9 @@
 ---
 additional_search_terms:
 - cloud
+- desktop
+- linux
+
 layout: installtoolsall
 minutes_to_complete: 30
 author_primary: Jason Andrews

@@ -1,6 +1,12 @@
 ---
 additional_search_terms:
 - compiler
+- fortran
+- hpc
+- forge
+- linux
+- cloud
+
 layout: installtoolsall
 minutes_to_complete: 15
 author_primary: Florent Lebeau

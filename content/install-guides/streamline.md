@@ -6,6 +6,21 @@ title: Arm Streamline
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - profiler
+- perf
+- spe
+- Neoverse
+- Cortex-A
+- Armv8
+- Armv8-A
+- Armv9
+- Armv9-A
+- Mali
+- immortalis
+- Gaming
+- Graphics
+- Android
+- Linux
+
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10

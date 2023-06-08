@@ -1,6 +1,11 @@
 ---
 additional_search_terms: 
 - cloud
+- google cloud
+- google
+- gcloud
+
+
 layout: installtoolsall
 minutes_to_complete: 5
 author_primary: Jason Andrews

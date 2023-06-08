@@ -5,8 +5,13 @@ title: Arm Socrates
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
-- arctitecture
-- soc_design
+- architecture
+- soc
+- ip
+- coresight
+- corelink
+- success kits
+- hsk
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 30

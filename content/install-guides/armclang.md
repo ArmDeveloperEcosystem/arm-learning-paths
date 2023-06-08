@@ -2,6 +2,9 @@
 additional_search_terms:
 - armclang
 - compiler
+- success kits
+- ssk
+
 layout: installtoolsall
 minutes_to_complete: 15
 author_primary: Ronan Synnott

@@ -3,6 +3,9 @@ title: AWS IoT Greengrass
 author_primary: Michael Hall
 additional_search_terms:
 - iot
+- cloud
+- deploy
+
 layout: installtoolsall
 minutes_to_complete: 15
 official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-installation.html
