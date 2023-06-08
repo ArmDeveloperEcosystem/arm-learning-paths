@@ -117,11 +117,6 @@ html[theme='dark'] ads-card.main-topic-card  .main-topic-subtitle {
 }
 
 
-html[theme="dark"] .orchard-breeze-text {
-    background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
 
 
 

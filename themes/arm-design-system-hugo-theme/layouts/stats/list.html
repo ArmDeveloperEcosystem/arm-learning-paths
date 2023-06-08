@@ -1,48 +1,467 @@
 {{define "main"}}
-    <!-- Load chartist library -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js" integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
 
-{{ range .Site.Data.stats_weekly_data }}
-    {{.}}
-{{end}}
+{{/* Hugo Processing  */}}
+{{/*===================================================================*/}}
+    <!--  Create accessable data vars -->
+    {{ $this_week_stats := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
 
-<br><br>
+    <!-- reorganize contributor data -->
+    {{$authors_dict_array := slice }}
+    {{$unique_internal := 0}}
+    {{$unique_external := 0}}
 
-<!-- Get most recent data slice from weekly data -->
-{{ $this_week := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
-{{$current_date := ""}}
-{{$current_stats := ""}}
-{{ range $date, $stats := $this_week }}
-    {{$current_date = $date}}
-    {{$current_stats = $stats}}
-{{end}}
+    {{range $author_urlized, $contributions := $this_week_stats.authors}}
+        <!-- find company name of author -->
+        {{$company := ""}}
+        {{$author := replace $author_urlized "-" " " | title }}
+        {{ range $i, $row := getCSV "," "contributors.csv" }}
+            {{ if eq  $author (index $row 0)}}
+                <!-- Get company name of author -->
+                {{ $company = index $row 1 }}
 
-<p>yooooooo</p>
+                <!-- Get unique internal/external contributor numbers -->
+                {{ if eq $company "Arm"}}
+                    {{$unique_internal = add 1 $unique_internal}}
+                {{else}}
+                    {{$unique_external = add 1 $unique_external}}
+                {{end}}
+            {{ end }}
+        {{ end }}
+        <!-- create sortable dict -->
+        {{ $temp := dict "author" $author "contributions" $contributions "company" $company }}
+        {{ $authors_dict_array = $authors_dict_array | append $temp }}
+    {{end}}
+{{/*===================================================================*/}}
+{{/*===================================================================*/}}
 
 
 
-{{$current_date}}
 
-{{$current_stats}}
 
-<div class="c-row u-margin-top-0">
-    <div class="c-col c-col-9">
-        <!-- All content line chart -->
-    <p>hi</p>
+
+<div class="c-row u-margin-top-3 u-margin-bottom-1">
+    <div class="c-col">
+        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2">
+            <!-- left card = total content -->
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <h1 id="total-content-num" class="orchard-breeze-text">
+                        {{$this_week_stats.content.total}}
+                    </h1>
+                    <p class="u-margin-left-1 total-content-context">Total Learning Paths and Install Guides as of {{$this_week_stats.date}}</p>
+                </ads-card-content>   
+            </ads-card>
+            <!-- right card = internal AND external contributors -->
+            <div class="u-display-grid u-gap-2 u-grid-columns-1">
+                <!-- Internal -->
+                <ads-card class="stats-card" has-hover-effect>
+                    <ads-card-content slot="content">
+                        <h1 class="unique-contributor-num fullbourn-sunrise-text">
+                            {{$unique_internal}}
+                        </h1>
+                        <p class="u-margin-left-1">Internal unique contributors</p>
+                    </ads-card-content>   
+                </ads-card>
+                <!-- External -->
+                <ads-card class="stats-card" has-hover-effect>
+                    <ads-card-content slot="content">
+                        <h1 class="unique-contributor-num fullbourn-sunrise-text">
+                            {{$unique_external}}
+                        </h1>
+                        <p class="u-margin-left-1">External unique contributors</p>                    
+                    </ads-card-content>   
+                </ads-card>
+            </div>
+        </div>
     </div>
-    <div class="c-col c-col-3">
-        <!-- LP by category pie chart -->
-        <div id="pie-legend"></div>
+</div>
 
-        <div class="ct-square" id="chart-pie"></div>
+<hr>
+
+<div class="c-row">
+    <h1>Content History</h1>
+</div>
+<div class="c-row u-margin-top-3 u-margin-bottom-1">
+    <div class="c-col">
+        <!-- Content line chart container -->
+        <div id="ct-content-line"></div>
     </div>
 </div>
 
 
-<!--
-<div class="ct-chart ct-golden-section" id="my-chart"></div>
--->
+<div class="c-row">
+    <h1>Contributions History</h1>
+</div>
+<div class="c-row u-margin-top-3 u-margin-bottom-1">
+    <div class="c-col">
+        <!-- Contributions line chart container -->
+        <div id="ct-contributions-line"></div>
+    </div>
+</div>
+
+
+
+
+<div class="c-row">
+    <h1>Logged Issues History</h1>
+</div>
+<div class="c-row u-margin-top-3 u-margin-bottom-1">
+    <div class="c-col">
+        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-3">
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Average time to close issues:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.avg_close_time_hrs}} hours</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Issues raised, total:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.num_issues}}</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Current open issue percentage:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.percent_closed_vs_total}} %</h1>
+                </ads-card-content>   
+            </ads-card>            
+        </div>
+    </div>
+</div>
+
+
+<div class="c-row">
+    <h2>Authors</h2>
+    <div class="table-wrapper-for-overflow">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Company
+                    </th>
+                    <th>
+                        Content written
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range sort $authors_dict_array "contributions" "desc" }}
+                <tr>
+                    <td>
+                        {{.author}} 
+                    </td>
+                    <td>
+                        {{.company}} 
+                    </td>
+                    <td>
+                        {{.contributions}} 
+                    </td>
+                </tr>
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="c-row">
+    <h2>Tests</h2>
+</div>
+<div class="c-row u-margin-top-3 u-margin-bottom-1">
+    <div class="c-col">
+        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-3">
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Number of content with failing tests:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{.Site.Data.stats_current_test_info.summary.content_with_tests_enabled}} - {{.Site.Data.stats_current_test_info.summary.content_with_all_tests_passing}}</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>???:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">???</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Content currently tested percentage:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{.Site.Data.stats_current_test_info.summary.content_with_all_tests_passing}} / {{.Site.Data.stats_current_test_info.summary.content_total}} %</h1>
+                </ads-card-content>   
+            </ads-card>            
+        </div>
+    </div>
+</div>
+
+
+<div class="c-row">
+    <div class="table-wrapper-for-overflow">
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Content Name
+                    </th>
+                    <th>
+                        Test Status
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {{ range $key, $details := .Site.Data.stats_current_test_info.sw_categories }}
+                    {{if $details}}
+                    <tr>
+                        <td colspan="3" class="stats-table-row-highlight">
+                            {{replace $key "-" " " | title}}    
+                        </td>
+                    </tr>
+                        {{ range $name, $info := $details}}
+                            <tr>
+                                <td>
+                                    {{$level_one_dir := "/learning-paths/"}}
+                                    {{if eq $key "install-guides"}}
+                                        {{$level_one_dir = "/"}}
+                                    {{end}}
+                                    <a href="{{$level_one_dir}}{{$key}}/{{$name}}">{{$info.readable_title}}</a>
+                                </td>
+                                <td>
+                                    <ul>
+                                    {{range $index, $test_status := $info.tests_and_status}}
+                                        {{range $k, $v := $test_status}}                                                
+                                            {{- if eq $v "passed" -}}
+                                                - <span class="test-status-pass">{{$k}}: {{$v}}</span>
+                                            {{- else -}}
+                                                - <span class="test-status-fail">{{$k}}: {{$v}}</span>
+                                            {{end}}
+                                            <br>
+                                        {{end}}
+                                    {{end}}
+                                    </ul>
+                                </td>
+                            </tr>
+                        {{end}}
+                    {{end}}
+                {{ end }}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="margin-bottom:150px"></div>
+
+
+<script>
+/* CONTENT - Line chart */
+/////////////////////////////////////////////////////////    
+
+
+/***********************************************************************/
+/* Hugo Processing for this chart */
+/***********************************************************************/
+{{$dates := slice}}
+{{$legend := slice         "Cross Platform"        "Embedded Systems"        "Install Guides"        "Laptops and Desktops"        "Microcontrollers"        "Servers and Cloud Computing"        "Smartphones and Mobile"}}
+{{$data_and_legend := dict "Cross Platform" slice  "Embedded Systems" slice  "Install Guides" slice  "Laptops and Desktops" slice  "Microcontrollers" slice  "Servers and Cloud Computing" slice  "Smartphones and Mobile" slice }}
+{{$data := slice}}
+{{ range .Site.Data.stats_weekly_data }}
+
+    {{/* Add date to array */}}
+    {{ $dates = $dates | append .date }}
+        
+    {{range $category, $num_content := .content}}
+        {{if ne $category "total"}}
+            {{/* Append a new content value to its array of the current key */}}
+            {{ $key := replace $category "-" " " | title }}
+            {{ $updated_content_slice := (index $data_and_legend $key) | append $num_content }}
+            {{ $change := dict $key $updated_content_slice}}
+            {{ $data_and_legend = merge $data_and_legend $change }}            
+                        {{/* Example of what is happening:
+                            {{ $countries := dict "1" "Germany" "2" "France" "3" "Italy" }}
+                            {{ $change := dict "2" "Belgium" }}
+                            {{ $countries := merge $countries $change }}
+                                $countries -> "1": "Germany", "2": Belgium, "3": "Italy"
+                        */}}
+        {{end}}
+    {{end}}
+{{end}}
+
+{{/* Append data arrays into one array for graph display */}}
+{{range $data_and_legend}}
+    {{$data = $data | append (slice .)}}
+{{end}}
+/***********************************************************************/
+/* End Hugo Processing for this chart */
+
+
+
+
+    var dates_content_line = []     // [ '2023-06-23' , '2023-06-30' ]
+    var data_content_line = []      // [ [3,4,5,6] [3,5,5,6] ]
+    var legend_content_line = []    // [ 'Servers', 'uControllers']
+
+    {{range $dates}}
+        dates_content_line.push({{.}})
+    {{end}}
+    {{range $legend}}
+        legend_content_line.push({{.}})
+    {{end}}
+    temp_data = []
+    {{range $data}}
+        temp_data = []
+        {{ range .}}
+            temp_data.push({{.}})
+        {{end}}
+        data_content_line.push(temp_data)
+    {{end}}
+
+    console.log(legend_content_line)
+
+
+
+    new Chartist.Line('#ct-content-line', {
+        labels: dates_content_line,
+        series: data_content_line}, 
+        {
+            fullWidth: true,
+            chartPadding: {
+                right: 40
+            },
+            plugins: [
+                Chartist.plugins.legend({
+                    legendNames: legend_content_line,
+                }),
+                Chartist.plugins.tooltip()
+            ]
+        }
+    );
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    /* CONTRIBUTION - Line chart */
+    /////////////////////////////////////////////////////////    
+    
+    
+    /***********************************************************************/
+    /* Hugo Processing for this chart */
+    /***********************************************************************/
+    {{$dates := slice}}
+    {{$legend := slice         "Forks"        "Pull Requests"}}
+    {{$data_and_legend := dict "Forks" slice  "Pull Requests" slice}}
+    {{$data := slice}}
+    {{ range .Site.Data.stats_weekly_data }}
+
+        {{/* Add date to array */}}
+        {{ $dates = $dates | append .date }}
+            
+        {{range $name, $val := .github_engagement}}
+            {{ $key := ""}}
+            {{if eq $name "num_forks"}}
+                {{ $key = "Forks" }}
+            {{ else if eq $name "num_prs"}}
+                {{ $key = "Pull Requests" }}
+            {{end}}
+            {{/* Append a new content value to its array of the current key */}}
+            {{ $updated_content_slice := (index $data_and_legend $key) | append $val }}
+            {{ $change := dict $key $updated_content_slice}}
+            {{ $data_and_legend = merge $data_and_legend $change }}            
+                    {{/* Example of what is happening:
+                        {{ $countries := dict "1" "Germany" "2" "France" "3" "Italy" }}
+                        {{ $change := dict "2" "Belgium" }}
+                        {{ $countries := merge $countries $change }}
+                            $countries -> "1": "Germany", "2": Belgium, "3": "Italy"
+                    */}}
+
+        {{end}}
+    {{end}}
+
+    {{/* Append data arrays into one array for graph display */}}
+    {{range $data_and_legend}}
+        {{$data = $data | append (slice .)}}
+    {{end}}
+    /***********************************************************************/
+    /* End Hugo Processing for this chart */
+    
+    
+    
+    
+        var dates_content_line = []     // [ '2023-06-23' , '2023-06-30' ]
+        var data_content_line = []      // [ [3,4,5,6] [3,5,5,6] ]
+        var legend_content_line = []    // [ 'Servers', 'uControllers']
+    
+        {{range $dates}}
+            dates_content_line.push({{.}})
+        {{end}}
+        {{range $legend}}
+            legend_content_line.push({{.}})
+        {{end}}
+        let temp_data = []
+        {{range $data}}
+            temp_data = []
+            {{ range .}}
+                temp_data.push({{.}})
+            {{end}}
+            data_content_line.push(temp_data)
+        {{end}}
+    
+        console.log(legend_content_line)
+    
+    
+    
+        new Chartist.Line('#ct-contributions-line', {
+            labels: dates_content_line,
+            series: data_content_line}, 
+            {
+                fullWidth: true,
+                chartPadding: {
+                    right: 40
+                },
+                plugins: [
+                    Chartist.plugins.legend({
+                        legendNames: legend_content_line,
+                    }),
+                    Chartist.plugins.tooltip()
+                ]
+            }
+        );
+    
+    
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -51,14 +470,21 @@
 
 <script>
 
+
+
+
+
+
+
     /* Learning Path pie chart */
     /////////////////////////////////////////////////////////
     var pie_labels = []
     var pie_series = []
 
+    
 
 
-    {{range $key, $val := $current_stats.content}}
+    {{range $key, $val := $this_week_stats.content}}
         {{if ne $key "total"}}
             {{if ne $key "install-guides"}}
                 pie_labels.push({{$key}})
