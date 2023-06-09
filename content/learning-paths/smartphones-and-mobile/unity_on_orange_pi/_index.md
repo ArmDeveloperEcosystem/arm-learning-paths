@@ -15,6 +15,7 @@ prerequisites:
     - An Orange Pi 5
     - A microSD card (16GB or greater; class 10 or faster)
     - An ethernet connection
+    - A mouse and keyboard connected to the Orange Pi
 
 author_primary: Gabriel Peterson
 

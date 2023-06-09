@@ -13,22 +13,35 @@
 review:
     - questions:
         question: >
-            Dot Product instructions were added in the Arm v7-A architecture.
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 2
-        explanation: >
-            Dot product instructions were added in the Arm v8.4-A architecture. 
-    - questions:
-        question: >
-            Implementing dot product of two vectors with Neon intrinsics provides a performance improvement.
+            Any SD card imaging software can be used to load the Droid OS image onto a microSD card
         answers:
             - "True"
             - "False"
         correct_answer: 1
         explanation: >
-            Using Neon intrinsics can provide over 30 percent performance improvement to dot product implementation on 64-bit Arm powered phones running Android. 
+            You will get errors if you don't use SDDiskTool_v1.72
+
+    - questions:
+        question: >
+            In Unity, what platform needs to be selected when you build your game?
+        answers:
+            - "iOS"
+            - "WebGL"
+            - "Android"
+            - "Windows, Mac, Linux"
+        correct_answer: 2
+        explanation: >
+            Droid OS runs Android SDKs
+
+    - questions:
+        question: >
+            You run the game on the Orange Pi by clicking on the APK file
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Clicking the APK file is how you install the game. To run it you find the game in your app drawer
 
 
 # ================================================================================
