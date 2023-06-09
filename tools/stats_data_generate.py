@@ -364,7 +364,8 @@ def main():
     existing_tests_dic  = yaml.safe_load(tests_status_file_path.read_text())
 
     # Structure new data formats:
-    new_weekly_entry = { date_today: {
+    new_weekly_entry = { "week": {
+        "date": date_today,
         "content": {},
         "authors": {},
         "contributions": {},
@@ -401,7 +402,7 @@ def main():
         # Check if date already a key in there
         exists=False
         for dic in existing_weekly_dic:
-            if date_today in dic:
+            if date_today == dic.date:
                 print('date today included, don"t save')
                 exists=True
                 break
