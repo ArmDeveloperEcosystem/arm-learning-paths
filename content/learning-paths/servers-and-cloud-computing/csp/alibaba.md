@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 As with most cloud service providers, Alibaba Cloud offers a pay-as-you-use [pricing policy](https://www.alibabacloud.com/pricing), including a number of [free](https://www.alibabacloud.com/free) services.
 
-This guide is to help you get started with their [Elastic Compute Service (ECS)](https://www.alibabacloud.com/product/ecs), using [Arm-based](https://www.alibabacloud.com/product/ecs/g8m) processors. This is a general purpose compute platform, essentially your own personal computer in the cloud.
+This guide is to help you get started with their [Elastic Compute Service (ECS)](https://www.alibabacloud.com/product/ecs), using [Arm-based](https://www.alibabacloud.com/product/ecs/g8m) processors. This is a general-purpose compute platform, essentially your own personal computer in the cloud.
 
 Detailed instructions are available in the Alibaba Cloud [documentation](https://www.alibabacloud.com/help/en/elastic-compute-service), as well as their [ECS Learning Path](https://www.alibabacloud.com/getting-started/learningpath/ecs).
 
@@ -31,7 +31,7 @@ You then select an `instance size`, which will be one of a number of pre-defined
 
 The easiest way to launch your instance is via the [ECS Console](https://ecs.console.aliyun.com/).
 
-Navigate to `Elastic Compute Service`, either by search, else via menu.
+Navigate to `Elastic Compute Service` by search or the menu.
 
 Use the `Create ECS Instance` button to get started. Select `Custom Launch` configuration.
 
@@ -47,7 +47,7 @@ Using the `Type-based Selection` tab, set `Architecture` as `ARM`, and `Category
 
 There are many images available on the [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), providing pre-installed or pre-configured setups.
 
-For now, select `Ubuntu` version (e.g. `20.04 64-bit for ARM`) from the pull down menu.
+For now, select `Ubuntu` version (e.g. `20.04 64-bit for ARM`) from the pull-down menu.
 
 ### Other settings
 
@@ -55,9 +55,9 @@ Other settings, such as storage size are selectable. For now, use the default se
 
 ### Set a Key Pair and other security settings
 
-To be able to access the instance (see later), you must use a [key pair](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/key-pairs). If this is your first time logging in, use the `Create Key Pair` dialog to create your key. The `public-key` will be downloaded to your local machine. When created, select from the pull down.
+To be able to access the instance (see later), you must use a [key pair](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/key-pairs). If this is your first time logging in, use the `Create Key Pair` dialog to create your key. The `public-key` will be downloaded to your local machine. When created, select from the pull-down.
 
-Select `Logon Credentials` and  set `Logon Username` to `ecs-user` and an appropriate  `password` if desired.
+Select `Logon Credentials` and set `Logon Username` to `ecs-user` and an appropriate  `password` if desired.
 
 Other settings such as `Instance Name` and `Description` are free-form for appropriate personal input. Other settings can be left as default.
 
@@ -71,7 +71,7 @@ Connecting by [SSH Key Pair](https://www.alibabacloud.com/help/en/elastic-comput
 
 For example, to ssh into your virtual machine instance:
 
-```console
+```bash
 ssh -i <private_key> ecs-user@<public_ip_address>
 ```
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used to connect via `ssh`.
@@ -82,7 +82,7 @@ Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
 
-```console
+```bash
 uname -m
 ```
 will identify the host machine as `aarch64`.
@@ -91,12 +91,12 @@ will identify the host machine as `aarch64`.
 
 Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
 
-```console
+```bash
 sudo apt-get update
 sudo apt install -y gcc
 ```
 
-Using a text editor of your choice, create a file `hello.c` with the contents below:
+Using a text editor of your choice, create a file named `hello.c` with the contents below:
 
 ```C
 #include <stdio.h>
@@ -108,7 +108,7 @@ int main(){
 
 Build and run the application:
 
-```console
+```bash
 gcc hello.c -o hello
 ./hello
 ```
