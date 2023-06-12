@@ -11,7 +11,7 @@
     {{$unique_internal := 0}}
     {{$unique_external := 0}}
 
-    {{range $author_urlized, $contributions := $this_week_stats.authors}}
+    {{range $author_urlized, $contributions := $this_week_stats.individual_authors}}
         <!-- find company name of author -->
         {{$company := ""}}
         {{$author := replace $author_urlized "-" " " | title }}

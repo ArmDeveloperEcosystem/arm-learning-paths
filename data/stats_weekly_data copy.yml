@@ -1,5 +1,6 @@
-- date: '2023-05-15'
-  individual_authors:
+- week: 
+  date: '2023-05-15'
+  authors:
     brenda-strech: 1
     christopher-seidl: 2
     florent-lebeau: 5
@@ -30,8 +31,9 @@
     avg_close_time_hrs: 0
     num_issues: 4
     percent_closed_vs_total: 0.0
-- date: '2023-05-15'
-  individual_authors:
+- week: 
+  date: '2023-05-22'
+  authors:
     brenda-strech: 1
     christopher-seidl: 2
     florent-lebeau: 5
@@ -62,8 +64,9 @@
     avg_close_time_hrs: 0
     num_issues: 2
     percent_closed_vs_total: 0.0
-- date: '2023-06-01'
-  individual_authors:
+- week:
+  date: '2023-06-01'
+  authors:
     brenda-strech: 1
     christopher-seidl: 2
     florent-lebeau: 5
@@ -94,8 +97,9 @@
     avg_close_time_hrs: 0
     num_issues: 3
     percent_closed_vs_total: 0.0
-- date: '2023-06-05'
-  individual_authors:
+- week:
+  date: '2023-06-05'
+  authors:
     brenda-strech: 1
     christopher-seidl: 2
     florent-lebeau: 5
