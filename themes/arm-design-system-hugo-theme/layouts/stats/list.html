@@ -1,48 +1,288 @@
 {{define "main"}}
-    <!-- Load chartist library -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist/0.11.4/chartist.min.js" integrity="sha512-9rxMbTkN9JcgG5euudGbdIbhFZ7KGyAuVomdQDI9qXfPply9BJh0iqA7E/moLCatH2JD4xBGHwV6ezBkCpnjRQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
 
-{{ range .Site.Data.stats_weekly_data }}
-    {{.}}
-{{end}}
+{{/* Hugo Processing  */}}
+{{/*===================================================================*/}}
+    <!--  Create accessable data vars -->
+    {{ $this_week_stats := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
 
-<br><br>
+    <!-- reorganize contributor data -->
+    {{$authors_dict_array := slice }}
+    {{$unique_internal := 0}}
+    {{$unique_external := 0}}
 
-<!-- Get most recent data slice from weekly data -->
-{{ $this_week := index .Site.Data.stats_weekly_data (sub (len .Site.Data.stats_weekly_data) 1) }}
-{{$current_date := ""}}
-{{$current_stats := ""}}
-{{ range $date, $stats := $this_week }}
-    {{$current_date = $date}}
-    {{$current_stats = $stats}}
-{{end}}
+    {{range $author_urlized, $contributions := $this_week_stats.individual_authors}}
+        <!-- find company name of author -->
+        {{$company := ""}}
+        {{$author := replace $author_urlized "-" " " | title }}
+        {{ range $i, $row := getCSV "," "contributors.csv" }}
+            {{ if eq  $author (index $row 0)}}
+                <!-- Get company name of author -->
+                {{ $company = index $row 1 }}
 
-<p>yooooooo</p>
+                <!-- Get unique internal/external contributor numbers -->
+                {{ if eq $company "Arm"}}
+                    {{$unique_internal = add 1 $unique_internal}}
+                {{else}}
+                    {{$unique_external = add 1 $unique_external}}
+                {{end}}
+            {{ end }}
+        {{ end }}
+        <!-- create sortable dict -->
+        {{ $temp := dict "author" $author "contributions" $contributions "company" $company }}
+        {{ $authors_dict_array = $authors_dict_array | append $temp }}
+    {{end}}
+{{/*===================================================================*/}}
+{{/*===================================================================*/}}
 
 
 
-{{$current_date}}
 
-{{$current_stats}}
 
-<div class="c-row u-margin-top-0">
-    <div class="c-col c-col-9">
-        <!-- All content line chart -->
-    <p>hi</p>
+
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-display-grid sm:u-gap-0 md:u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2">
+            <!-- left card = total content -->
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <h1 id="total-content-num" class="orchard-breeze-text">
+                        {{$this_week_stats.content.total}}
+                    </h1>
+                    <p class="u-margin-left-1 total-content-context">Total Learning Paths and Install Guides as of {{$this_week_stats.a_date}}</p>
+                </ads-card-content>   
+            </ads-card>
+            <!-- right card = internal AND external contributors -->
+            <div class="u-display-grid u-grid-columns-1">
+                <!-- Internal -->
+                <ads-card class="stats-card" has-hover-effect>
+                    <ads-card-content slot="content">
+                        <h1 class="unique-contributor-num fullbourn-sunrise-text">
+                            {{$unique_internal}}
+                        </h1>
+                        <p class="u-margin-left-1">Internal unique contributors</p>
+                    </ads-card-content>   
+                </ads-card>
+                <!-- External -->
+                <ads-card class="stats-card" has-hover-effect>
+                    <ads-card-content slot="content">
+                        <h1 class="unique-contributor-num fullbourn-sunrise-text">
+                            {{$unique_external}}
+                        </h1>
+                        <p class="u-margin-left-1">External unique contributors</p>                    
+                    </ads-card-content>   
+                </ads-card>
+            </div>
+        </div>
     </div>
-    <div class="c-col c-col-3">
-        <!-- LP by category pie chart -->
-        <div id="pie-legend"></div>
+</div>
 
-        <div class="ct-square" id="chart-pie"></div>
+<br>
+<hr>
+<br>
+
+<div class="c-row">
+    <div class="c-col">
+        <h1>Content History</h1>
+        <p class="subtitle-stats">Tracks the number of individual Learning Paths (and Install Guides) created, updated every week.</p>
+    </div>
+</div>
+<div class="c-row u-margin-top-2">
+    <div class="c-col">
+        <!-- Content line chart container -->
+        <canvas id="content-history-chart"></canvas>
+    </div>
+</div>
+
+<br>
+<hr class="stats-dividing-bar">
+<br>
+
+<div class="c-row">
+    <div class="c-col">
+        <h1>Contributions History</h1>
+        <p class="subtitle-stats">Tracks the number of GitHub related engagement stats, updated every week.</p>
+    </div>
+</div>
+<div class="c-row u-margin-top-2">
+    <div class="c-col">
+        <!-- Contributions line chart container -->
+        <canvas id="contribution-history-chart"></canvas>    
+    </div>
+</div>
+
+<br>
+<hr class="stats-dividing-bar">
+<br>
+
+<div class="c-row">
+    <div class="c-col">
+        <h1>Logged Issues History</h1>
+    </div>
+</div>
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-display-grid sm:u-gap-0 md:u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-3">
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Average time to close issues:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.avg_close_time_hrs}} hours</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Issues raised, total:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.num_issues}}</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Current open issue percentage:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{$this_week_stats.issues.percent_closed_vs_total}} %</h1>
+                </ads-card-content>   
+            </ads-card>            
+        </div>
+    </div>
+</div>
+
+<br>
+<hr class="stats-dividing-bar">
+<br>
+
+<div class="c-row">
+    <div class="c-col">
+        <h2>Authors</h2>
+    </div>
+</div>
+<div class="c-row">
+    <div class="c-col">
+        <div class="table-wrapper-for-overflow">
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Author
+                        </th>
+                        <th>
+                            Company
+                        </th>
+                        <th>
+                            Content written
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range sort $authors_dict_array "contributions" "desc" }}
+                    <tr>
+                        <td>
+                            {{.author}} 
+                        </td>
+                        <td>
+                            {{.company}} 
+                        </td>
+                        <td>
+                            {{.contributions}} 
+                        </td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<br>
+<hr class="stats-dividing-bar">
+<br>
+
+<div class="c-row">
+    <div class="c-col">
+        <h2>Tests</h2>
+    </div>
+</div>
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-display-grid sm:u-gap-0 md:u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2">
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Number of content with failing tests:</p>
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{ sub .Site.Data.stats_current_test_info.summary.content_with_tests_enabled .Site.Data.stats_current_test_info.summary.content_with_all_tests_passing}}</h1>
+                </ads-card-content>   
+            </ads-card>
+            <ads-card class="stats-card" has-hover-effect>
+                <ads-card-content slot="content">
+                    <p>Content currently tested percentage:</p>
+                    {{$total := float .Site.Data.stats_current_test_info.summary.content_total}}
+                    {{$passed:= float .Site.Data.stats_current_test_info.summary.content_with_all_tests_passing }}
+                    <h1 style="width:fit-content;" class="minhang-mist-text">{{ printf "%.1f%%" (mul (div $passed $total) 100.0) }}</h1>
+                </ads-card-content>   
+            </ads-card>            
+        </div>
     </div>
 </div>
 
 
-<!--
-<div class="ct-chart ct-golden-section" id="my-chart"></div>
--->
+<div class="c-row">
+    <div class="c-col">
+        <div class="table-wrapper-for-overflow">
+            <table class="stats-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Content Name
+                        </th>
+                        <th>
+                            Test Status
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range $key, $details := .Site.Data.stats_current_test_info.sw_categories }}
+                        {{if $details}}
+                        <tr>
+                            <td colspan="3" class="stats-table-row-highlight">
+                                {{replace $key "-" " " | title}}    
+                            </td>
+                        </tr>
+                            {{ range $name, $info := $details}}
+                                <tr>
+                                    <td>
+                                        {{$level_one_dir := "/learning-paths/"}}
+                                        {{if eq $key "install-guides"}}
+                                            {{$level_one_dir = "/"}}
+                                        {{end}}
+                                        <a href="{{$level_one_dir}}{{$key}}/{{$name}}">{{$info.readable_title}}</a>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                        {{range $index, $test_status := $info.tests_and_status}}
+                                            {{range $k, $v := $test_status}}                                                
+                                                {{- if eq $v "passed" -}}
+                                                    - <span class="test-status-pass">{{$k}}: {{$v}}</span>
+                                                {{- else -}}
+                                                    - <span class="test-status-fail">{{$k}}: {{$v}}</span>
+                                                {{end}}
+                                                <br>
+                                            {{end}}
+                                        {{end}}
+                                        </ul>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        {{end}}
+                    {{ end }}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div style="margin-bottom:150px"></div>
+
+
+
+
+
 
 
 
@@ -50,152 +290,318 @@
 
 
 <script>
+    function getArmColor(i) {
+        var armColorsHex = [
+            "#0091bd", // arm blue
+            "#95d600", // arm green
+            "#ffc700", // arm yellow
+            "#ff6b00", // arm orange
+            "#6f777c", // arm websafe grey
+            "#e03030", // arm websafe red
+            "#eff5f4"  // arm light grey alt 2
+        ]
+      return armColorsHex[i];
+    }
+</script>
 
-    /* Learning Path pie chart */
-    /////////////////////////////////////////////////////////
-    var pie_labels = []
-    var pie_series = []
 
 
+<script>
+/* CONTENT - Line chart */
+/////////////////////////////////////////////////////////    
 
-    {{range $key, $val := $current_stats.content}}
-        {{if ne $key "total"}}
-            {{if ne $key "install-guides"}}
-                pie_labels.push({{$key}})
-                pie_series.push({{$val}})
-            {{end}}
+
+/***********************************************************************/
+/* Hugo Processing for this chart */
+/***********************************************************************/
+{{$dates := slice}}
+{{$legend := slice         "Cross Platform"        "Embedded Systems"        "Install Guides"        "Laptops and Desktops"        "Microcontrollers"        "Servers and Cloud Computing"        "Smartphones and Mobile"}}
+{{$data_and_legend := dict "Cross Platform" slice  "Embedded Systems" slice  "Install Guides" slice  "Laptops and Desktops" slice  "Microcontrollers" slice  "Servers and Cloud Computing" slice  "Smartphones and Mobile" slice }}
+{{$data := slice}}
+{{ range .Site.Data.stats_weekly_data }}
+
+    {{/* Add date to array */}}
+    {{ $dates = $dates | append .a_date }}
+        
+    {{range $category, $num_content := .content}}
+        {{if ne $category "total"}}
+            {{/* Append a new content value to its array of the current key */}}
+            {{ $key := replace $category "-" " " | title }}
+            {{ $updated_content_slice := (index $data_and_legend $key) | append $num_content }}
+            {{ $change := dict $key $updated_content_slice}}
+            {{ $data_and_legend = merge $data_and_legend $change }}            
+                        {{/* Example of what is happening:
+                            {{ $countries := dict "1" "Germany" "2" "France" "3" "Italy" }}
+                            {{ $change := dict "2" "Belgium" }}
+                            {{ $countries := merge $countries $change }}
+                                $countries -> "1": "Germany", "2": Belgium, "3": "Italy"
+                        */}}
         {{end}}
     {{end}}
-    
-    var data = {
-        labels: pie_labels,
-        series: pie_series
-    };
-    var options = {
-        labelInterpolationFnc: function(value, index) {
-            return data.series[index].value;
-          },
-        plugins: [
-            Chartist.plugins.legend({position: document.getElementById('pie-legend')})
-        ]
+{{end}}
+
+{{/* Append data arrays into one array for graph display */}}
+{{range $data_and_legend}}
+    {{$data = $data | append (slice .)}}
+{{end}}
+/***********************************************************************/
+/* End Hugo Processing for this chart */
+
+
+
+
+    var dates_content_line = []     // [ '2023-06-23' , '2023-06-30' ]
+    var data_content_line = []      // [ [3,4,5,6] [3,5,5,6] ]
+    var legend_content_line = []    // [ 'Servers', 'uControllers']
+
+    {{range $dates}}
+        dates_content_line.push({{.}})
+    {{end}}
+    {{range $legend}}
+        legend_content_line.push({{.}})
+    {{end}}
+    temp_data = []
+    {{range $data}}
+        temp_data = []
+        {{ range .}}
+            temp_data.push({{.}})
+        {{end}}
+        data_content_line.push(temp_data)
+    {{end}}
+
+    var max_y = parseInt("{{$this_week_stats.content.total}}")
+
+    // Format data in Chart.JS format:
+    var line_datasets = [];
+    for (var i = 0; i < data_content_line.length; i++) {
+      var dataset = {
+        label: legend_content_line[i], // Server and Cloud
+        data: data_content_line[i],     // [5,6,4,3]
+        borderColor: getArmColor(i),    //#91bb00
+        fill: false
       };
-      
-      var responsiveOptions = [
-        ['screen and (min-width: 640px)', {
-          chartPadding: 30,
-          labelOffset: 100,
-          labelDirection: 'implode',
-          labelInterpolationFnc: function(value) {
-            return value;
+      line_datasets.push(dataset);
+    }
+    // Format data in Chart.JS format:
+    var bar_datasets = [];
+    for (var i = 0; i < data_content_line.length; i++) {
+        var dataset = {
+            label: legend_content_line[i], // Server and Cloud
+            data: data_content_line[i],     // [5,6,4,3]
+            backgroundColor: getArmColor(i),
+            borderColor: getArmColor(i),
+            borderWidth: 1,
+            stack: 'stack 1' // Assign the stack name
+        };
+        bar_datasets.push(dataset);
+    }
+
+
+
+   
+
+
+    const ctx = document.getElementById('content-history-chart');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: dates_content_line,
+        datasets: bar_datasets
+      },
+      options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                labels: { color: 'white'}
+            }
+        },
+        scales: {
+          y: {
+            max: max_y,
+            ticks: { color: 'white', beginAtZero: true }
+          },
+          x: {
+            ticks: { color: 'white' }
           }
-        }],
-        ['screen and (min-width: 1024px)', {
-          labelOffset: 80,
-          chartPadding: 20
-        }]
-      ];
-      
-    new Chartist.Pie('#chart-pie', data, options);
-    /////////////////////////////////////////////////////////
-
-
-
-
-
-    // Initialize a Line chart in the container with the ID chart1
-    var data1 = {
-        labels: [1, 2, 3, 4],
-        series: [[100, 120, 180, 200]]
-    }
-    new Chartist.Line('#chart1', data1);
-
-  // Initialize a Line chart in the container with the ID chart2
-    var data2 = {
-        labels: [1, 2, 3, 4],
-        series: [[5, 2, 8, 3]]
-    }
-    new Chartist.Line('#chart2', data2);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    var chart = new Chartist.Pie('#my-chart', 
-    {
-        series: [160, 60 ],
-        labels: ['', '']
-    }, {
-        donut: true,
-        donutWidth: 20,
-        startAngle: 210,
-        total: 260,
-        showLabel: false,
-        plugins: [
-            Chartist.plugins.fillDonut({
-                items: [{
-                    content: '<i class="fa fa-tachometer"></i>',
-                    position: 'bottom',
-                    offsetY : 10,
-                    offsetX: -2
-                }, {
-                    content: '<h3>160<span class="small">mph</span></h3>'
-                }]
-            })
-        ],
+        }
+      },
+      plugins: {
+        tooltip: {
+          enabled: true,
+          mode: 'index',
+          intersect: false,
+          callbacks: {
+            label: function(context) {
+              var label = context.dataset.label || '';
+              if (label) {
+                label += ': ';
+              }
+              label += context.parsed.y;
+              return label;
+            }
+          }
+        }
+      }
     });
 
-chart.on('draw', function(data) {
-    if(data.type === 'slice' && data.index == 0) {
-        // Get the total path length in order to use for dash array animation
-        var pathLength = data.element._node.getTotalLength();
-
-        // Set a dasharray that matches the path length as prerequisite to animate dashoffset
-        data.element.attr({
-            'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
-        });
-
-        // Create animation definition while also assigning an ID to the animation for later sync usage
-        var animationDefinition = {
-            'stroke-dashoffset': {
-                id: 'anim' + data.index,
-                dur: 1200,
-                from: -pathLength + 'px',
-                to:  '0px',
-                easing: Chartist.Svg.Easing.easeOutQuint,
-                fill: 'freeze'
-            }
-        };
-
-        // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
-        data.element.attr({
-            'stroke-dashoffset': -pathLength + 'px'
-        });
-
-        // We can't use guided mode as the animations need to rely on setting begin manually
-        // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
-        data.element.animate(animationDefinition, true);
-    }
-});
-
-
-
-
-
-
-
-
-
-
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    /* CONTRIBUTION - Line chart */
+    /////////////////////////////////////////////////////////    
+    
+    
+    /***********************************************************************/
+    /* Hugo Processing for this chart */
+    /***********************************************************************/
+    {{$dates := slice}}
+    {{$legend := slice         "Forks"        "Pull Requests"}}
+    {{$data_and_legend := dict "Forks" slice  "Pull Requests" slice}}
+    {{$data := slice}}
+    {{ range .Site.Data.stats_weekly_data }}
+
+        {{/* Add date to array */}}
+        {{ $dates = $dates | append .a_date }}
+            
+        {{range $name, $val := .github_engagement}}
+            {{ $key := ""}}
+            {{if eq $name "num_forks"}}
+                {{ $key = "Forks" }}
+            {{ else if eq $name "num_prs"}}
+                {{ $key = "Pull Requests" }}
+            {{end}}
+            {{/* Append a new content value to its array of the current key */}}
+            {{ $updated_content_slice := (index $data_and_legend $key) | append $val }}
+            {{ $change := dict $key $updated_content_slice}}
+            {{ $data_and_legend = merge $data_and_legend $change }}            
+                    {{/* Example of what is happening:
+                        {{ $countries := dict "1" "Germany" "2" "France" "3" "Italy" }}
+                        {{ $change := dict "2" "Belgium" }}
+                        {{ $countries := merge $countries $change }}
+                            $countries -> "1": "Germany", "2": Belgium, "3": "Italy"
+                    */}}
+
+        {{end}}
+    {{end}}
+
+    {{/* Append data arrays into one array for graph display */}}
+    {{range $data_and_legend}}
+        {{$data = $data | append (slice .)}}
+    {{end}}
+    /***********************************************************************/
+    /* End Hugo Processing for this chart */
+    
+    
+    
+    
+        var dates_content_line = []     // [ '2023-06-23' , '2023-06-30' ]
+        var data_content_line = []      // [ [3,4,5,6] [3,5,5,6] ]
+        var legend_content_line = []    // [ 'Servers', 'uControllers']
+    
+        {{range $dates}}
+            dates_content_line.push({{.}})
+        {{end}}
+        {{range $legend}}
+            legend_content_line.push({{.}})
+        {{end}}
+        let temp_data = []
+        {{range $data}}
+            temp_data = []
+            {{ range .}}
+                temp_data.push({{.}})
+            {{end}}
+            data_content_line.push(temp_data)
+        {{end}}
+    
+
+
+
+
+    // Format data in Chart.JS format:
+    var line_datasets = [];
+    for (var i = 0; i < data_content_line.length; i++) {
+    var dataset = {
+        label: legend_content_line[i], // Server and Cloud
+        data: data_content_line[i],     // [5,6,4,3]
+        borderColor: getArmColor(i),    //#91bb00
+        fill: false
+    };
+    line_datasets.push(dataset);
+    }
+    // Format data in Chart.JS format:
+    var bar_datasets = [];
+    for (var i = 0; i < data_content_line.length; i++) {
+        var dataset = {
+            label: legend_content_line[i], // Server and Cloud
+            data: data_content_line[i],     // [5,6,4,3]
+            backgroundColor: getArmColor(i),
+            borderColor: getArmColor(i),
+            borderWidth: 1,
+            stack: 'stack 1' // Assign the stack name
+        };
+        bar_datasets.push(dataset);
+    }
+
+
+
+    
+        const ctxx = document.getElementById('contribution-history-chart');
+  
+        new Chart(ctxx, {
+          type: 'bar',
+          data: {
+            labels: dates_content_line,
+            datasets: bar_datasets
+          },
+          options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    labels: { color: 'white'}
+                }
+            },
+            scales: {
+              y: {
+                ticks: { color: 'white', beginAtZero: true }
+              },
+              x: {
+                ticks: { color: 'white' }
+              }
+            }
+          },
+          plugins: {
+            tooltip: {
+              enabled: true,
+              mode: 'index',
+              intersect: false,
+              callbacks: {
+                label: function(context) {
+                  var label = context.dataset.label || '';
+                  if (label) {
+                    label += ': ';
+                  }
+                  label += context.parsed.y;
+                  return label;
+                }
+              }
+            }
+          }
+        });
+
+
+    </script>
+
 
 {{end}}

@@ -34,7 +34,7 @@ Where it is used:
 <script type="module" src="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system/arm-design-system.esm.js" integrity="sha384-K+IGYCWaqyh5adrYnimAXzUamdfAwRYJGwwrybHfAhmsehOIcexAPoEoEyLRJwkC" crossorigin="anonymous"></script>
 
     <!-- Arm Imports -->
-<script type="text/javascript" src="/js/app.53d2d5ebb6d02525c2f6.learn.js"></script>
+<script type="text/javascript" src="/js/app.65ad9058db6c4c8b38fb.devhub.js"></script>
 
     
     <!-- Custom CSS minified -->
@@ -83,15 +83,12 @@ Where it is used:
 
 <!-- Stats only -->
 {{if eq .Layout "stats_page"}}
-    <!-- Include JS files (and external stylesheet for chartest via CDN) -->
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
-    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <script type="text/javascript" src="/js/chartist/chartist-plugin-fill-donut.min.js"></script>
-    <script type="text/javascript" src="/js/chartist/chartist-plugin-legend.js"></script>
-    
+    <!-- Include JS files -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- minify local CSS files -->
     {{ $css_stats := $all_page_css | append 
-        (resources.Get "css/chartist.css")
+        (resources.Get "css/stats.css")
         | resources.Concat "css/mini_stats.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_stats.Permalink }}">
 {{end}}

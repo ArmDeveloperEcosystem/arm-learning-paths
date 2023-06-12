@@ -15,6 +15,7 @@ additional_search_terms:
 - Armv9
 - Armv9-A
 - Mali
+- immortalis
 - Gaming
 - Graphics
 - Android
