@@ -365,7 +365,7 @@ def main():
 
     # Structure new data formats:
     new_weekly_entry = { 
-        "date": date_today,
+        "a_date": date_today,
         "content": {},
         "individual_authors": {},
         "contributions": {},
@@ -401,7 +401,7 @@ def main():
         # Check if date already a key in there
         exists=False
         for dic in existing_weekly_dic:
-            if date_today == dic["date"]:
+            if date_today == dic["a_date"]:
                 print('date today included, don"t save')
                 exists=True
                 break

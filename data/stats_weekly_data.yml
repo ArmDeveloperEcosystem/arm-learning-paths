@@ -10,7 +10,7 @@
   contributions:
     external: 1
     internal: 140
-  date: '2023-05-15'
+  a_date: '2023-05-15'
   github_engagement:
     num_forks: 30
     num_prs: 4
@@ -42,7 +42,7 @@
   contributions:
     external: 1
     internal: 141
-  date: '2023-05-15'
+  a_date: '2023-05-15'
   github_engagement:
     num_forks: 30
     num_prs: 2
@@ -74,7 +74,7 @@
   contributions:
     external: 1
     internal: 144
-  date: '2023-06-01'
+  a_date: '2023-06-01'
   github_engagement:
     num_forks: 30
     num_prs: 3
@@ -106,7 +106,7 @@
   contributions:
     external: 1
     internal: 144
-  date: '2023-06-05'
+  a_date: '2023-06-05'
   github_engagement:
     num_forks: 30
     num_prs: 3
@@ -125,36 +125,4 @@
   issues:
     avg_close_time_hrs: 0
     num_issues: 3
-    percent_closed_vs_total: 0.0
-- content:
-    cross-platform: 7
-    embedded-systems: 11
-    install-guides: 61
-    laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 5
-    total: 148
-  contributions:
-    external: 1
-    internal: 147
-  date: '2023-06-12'
-  github_engagement:
-    num_forks: 30
-    num_prs: 5
-  individual_authors:
-    brenda-strech: 1
-    christopher-seidl: 2
-    florent-lebeau: 5
-    gabriel-peterson: 1
-    jason-andrews: 73
-    julio-suarez: 2
-    kasper-mecklenburg: 1
-    liliya-wu: 1
-    michael-hall: 1
-    pareena-verma: 29
-    ronan-synnott: 32
-  issues:
-    avg_close_time_hrs: 0
-    num_issues: 5
     percent_closed_vs_total: 0.0
