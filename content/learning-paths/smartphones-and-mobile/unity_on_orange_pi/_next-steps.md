@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Proceed to Get Started with Arm Mobile Studio to continue learning about Android performance analysis.
+   Learn more about Unity and the Orange Pi 5
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
@@ -20,16 +20,16 @@ recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
 
 further_reading:
     - resource:
-        title: Exploring the Arm dot product instructions
-        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/exploring-the-arm-dot-product-instructions
-        type: blog
-    - resource:
-        title: Using Neon Intrinsics
-        link: https://developer.arm.com/documentation/den0018/a/NEON-Intrinsics/Using-NEON-intrinsics
+        title: Build your application for Android
+        link: https://docs.unity3d.com/2022.2/Documentation/Manual/android-BuildProcess.html
         type: documentation
     - resource:
-        title: Intrinsics
-        link: https://developer.arm.com/architectures/instruction-sets/intrinsics/
+        title: Orange Pi OS Droid
+        link: http://www.orangepi.org/html/softWare/orangePiOS/droid.html
+        type: website
+    - resource:
+        title: Unity Learn
+        link: https://learn.unity.com/
         type: website
 
 
