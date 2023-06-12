@@ -11,7 +11,7 @@
     {{$unique_internal := 0}}
     {{$unique_external := 0}}
 
-    {{range $author_urlized, $contributions := $this_week_stats.authors}}
+    {{range $author_urlized, $contributions := $this_week_stats.individual_authors}}
         <!-- find company name of author -->
         {{$company := ""}}
         {{$author := replace $author_urlized "-" " " | title }}
@@ -49,7 +49,7 @@
                     <h1 id="total-content-num" class="orchard-breeze-text">
                         {{$this_week_stats.content.total}}
                     </h1>
-                    <p class="u-margin-left-1 total-content-context">Total Learning Paths and Install Guides as of {{$this_week_stats.date}}</p>
+                    <p class="u-margin-left-1 total-content-context">Total Learning Paths and Install Guides as of {{$this_week_stats.a_date}}</p>
                 </ads-card-content>   
             </ads-card>
             <!-- right card = internal AND external contributors -->
@@ -321,7 +321,7 @@
 {{ range .Site.Data.stats_weekly_data }}
 
     {{/* Add date to array */}}
-    {{ $dates = $dates | append .date }}
+    {{ $dates = $dates | append .a_date }}
         
     {{range $category, $num_content := .content}}
         {{if ne $category "total"}}
@@ -473,7 +473,7 @@
     {{ range .Site.Data.stats_weekly_data }}
 
         {{/* Add date to array */}}
-        {{ $dates = $dates | append .date }}
+        {{ $dates = $dates | append .a_date }}
             
         {{range $name, $val := .github_engagement}}
             {{ $key := ""}}
