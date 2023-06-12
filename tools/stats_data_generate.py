@@ -271,9 +271,9 @@ def iterateContentIndexMdFiles():
     new_tests_entry['summary']['content_with_all_tests_passing'] = content_with_all_tests_passing
 
     # Update stats
-    new_weekly_entry[date_today]['content'] = weekly_count_dic
-    new_weekly_entry[date_today]['authors'] = weekly_authors_contributions_dic['authors']
-    new_weekly_entry[date_today]['contributions'] = weekly_authors_contributions_dic['contributions']            
+    new_weekly_entry['week']['content'] = weekly_count_dic
+    new_weekly_entry['week']['authors'] = weekly_authors_contributions_dic['authors']
+    new_weekly_entry['week']['contributions'] = weekly_authors_contributions_dic['contributions']            
 
 def callGitHubAPI(GitHub_token,GitHub_repo_name):
 
@@ -344,8 +344,8 @@ def callGitHubAPI(GitHub_token,GitHub_repo_name):
     
 
     # Assign to main file
-    new_weekly_entry[date_today]['issues'] = weekly_github_dic['issues']
-    new_weekly_entry[date_today]['github_engagement'] = weekly_github_dic['github_engagement']
+    new_weekly_entry['week']['issues'] = weekly_github_dic['issues']
+    new_weekly_entry['week']['github_engagement'] = weekly_github_dic['github_engagement']
 
 
 def main():
