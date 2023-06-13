@@ -1,6 +1,6 @@
 ---
 title: Arm Product Download Hub
-author_primary: Jason Andrews
+author_primary: Ronan Synnott
 
 additional_search_terms:
     - pdh

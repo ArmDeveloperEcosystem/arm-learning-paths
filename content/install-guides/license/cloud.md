@@ -1,5 +1,5 @@
 ---
-title: Arm User-Based License (UBL) Cloud server
+title: User-Based License (UBL) cloud server
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author_primary: Ronan Synnott
