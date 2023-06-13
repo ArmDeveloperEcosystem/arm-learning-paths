@@ -149,7 +149,7 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
 
     // Sum up partial sums
     int result = 0;
-    for(int i = 0; i < transferSize; i++) {
+    for(i=0; i < transferSize; i++) {
         result += partialSums[i];
     }
 
@@ -157,7 +157,7 @@ int dotProductNeon(short* vector1, short* vector2, short len) {
 }
 ```
 
-To load data from memory, use the `vld1_s16` method. This method loads four elements to the CPU registers from the array of shorts signed 16-bit integers or s16for short,
+To load data from memory, the `vld1_s16` method is used. This method loads four elements to the CPU registers from the array of short signed 16-bit integers, or s16 for short. The `vld1q_s16` method is used where we want to load eight s16 elements at once.
 
 When the elements are in the CPU registers, add the elements using the `vmlal` (multiply and accumulate) method. This method adds elements from two arrays and accumulates the result in a third array.
 
@@ -225,7 +225,7 @@ The`MainActivity.stringFromJNI` method does the following:
 
  1. Creates two equal-length vectors using `generateRamp` methods.
  2. Calculates the dot product of these vectors using the method without Neon intrinsics `dotProduct`. Repeats this calculation several times (trials constant) and measures the computation time using `µsElasedTime`.
- 3. Performs the same operations as in Step 1 and Step 2, but now using the method with Neon intrinsics`dotProductNeon`.
+ 3. Repeats Step 2, but this time using the method with Neon intrinsics `dotProductNeon`.
  4. Combines the results of these two methods along with the computation times within `resultsString`. This is displayed in the TextView.
 
 You have now added all the code to this file and can proceed to building the app.
