@@ -1,5 +1,5 @@
 ---
-title: Arm Licensing
+title: Arm Software Licensing
 author_primary: Ronan Synnott
 additional_search_terms:
 - success kits
