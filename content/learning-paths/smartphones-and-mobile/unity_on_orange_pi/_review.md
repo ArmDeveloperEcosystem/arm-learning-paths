@@ -13,11 +13,11 @@
 review:
     - questions:
         question: >
-            Any SD card imaging software can be used to load the Droid OS image onto a microSD card
+            Any SD card imaging software can be used to load the Droid OS image onto a microSD card.
         answers:
             - "True"
             - "False"
-        correct_answer: 1
+        correct_answer: 2
         explanation: >
             You will get errors if you don't use SDDiskTool_v1.72
 
@@ -29,19 +29,19 @@ review:
             - "WebGL"
             - "Android"
             - "Windows, Mac, Linux"
-        correct_answer: 2
+        correct_answer: 3
         explanation: >
             Droid OS runs Android SDKs
 
     - questions:
         question: >
-            You run the game on the Orange Pi by clicking on the APK file
+            You run the game on the Orange Pi by clicking on the APK file.
         answers:
             - "True"
             - "False"
-        correct_answer: 1
+        correct_answer: 2
         explanation: >
-            Clicking the APK file is how you install the game. To run it you find the game in your app drawer
+            Clicking the APK file is how you install the game. To run it, you find the game in your app drawer.
 
 
 # ================================================================================
