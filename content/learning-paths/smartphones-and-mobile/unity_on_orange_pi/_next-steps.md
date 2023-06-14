@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Learn more about Unity and the Orange Pi 5
+   Proceed to Get Started with Arm Mobile Studio to continue learning about Android performance analysis.
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
