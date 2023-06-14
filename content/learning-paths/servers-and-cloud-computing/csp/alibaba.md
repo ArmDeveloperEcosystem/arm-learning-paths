@@ -71,7 +71,7 @@ Connecting by [SSH Key Pair](https://www.alibabacloud.com/help/en/elastic-comput
 
 For example, to ssh into your virtual machine instance:
 
-```bash
+```console
 ssh -i <private_key> ecs-user@<public_ip_address>
 ```
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used to connect via `ssh`.
@@ -82,7 +82,7 @@ Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
 
-```bash
+```console
 uname -m
 ```
 will identify the host machine as `aarch64`.
@@ -91,7 +91,7 @@ will identify the host machine as `aarch64`.
 
 Install the `gcc` compiler. If you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
 
-```bash
+```console
 sudo apt-get update
 sudo apt install -y gcc
 ```
@@ -108,7 +108,7 @@ int main(){
 
 Build and run the application:
 
-```bash
+```console
 gcc hello.c -o hello
 ./hello
 ```

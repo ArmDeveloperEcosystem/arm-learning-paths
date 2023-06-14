@@ -115,7 +115,7 @@ Your compute instance will be created and be available after initialization, whe
 
 You can connect to the instance with your preferred SSH client. For example, if using `ubuntu` image:
 
-```bash
+```console
 ssh -i <private_key> ubuntu@<public_ip_address>
 ```
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used.
@@ -129,7 +129,7 @@ Once connected, you are now ready to use your instance.
 ### Run uname
 
 Use the [uname](https://en.wikipedia.org/wiki/Uname) utility to verify that you are using an Arm-based server. For example:
-```bash
+```console
 uname -m
 ```
 will identify the host machine as `aarch64`.
@@ -138,7 +138,7 @@ will identify the host machine as `aarch64`.
 
 Install the `gcc` compiler. Assuming you are using `Ubuntu`, use the following commands. If not, refer to the [GNU compiler install guide](/install-guides/gcc):
 
-```bash
+```console
 sudo apt-get update
 sudo apt install -y gcc
 ```
@@ -154,7 +154,7 @@ int main(){
 ```
 Build and run the application:
 
-```bash
+```console
 gcc hello.c -o hello
 ./hello
 ```
