@@ -1,5 +1,5 @@
 ---
-title: Arm User-Based License (UBL) End-user setup
+title: User-Based License (UBL) end-user setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/102516
 author_primary: Ronan Synnott

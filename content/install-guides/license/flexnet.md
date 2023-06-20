@@ -1,5 +1,5 @@
 ---
-title: Arm FlexNet Publisher Floating licenses
+title: FlexNet Publisher floating licenses
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/dui0209
 author_primary: Ronan Synnott
