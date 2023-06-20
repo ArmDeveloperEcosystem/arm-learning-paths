@@ -213,15 +213,15 @@ The output should be similar to what is shown below:
     
 ```output
 Initializing the backend...
+
 Initializing provider plugins...
-- Reusing previous version of hashicorp/local from the dependency lock file
-- Reusing previous version of hashicorp/aws from the dependency lock file
-- Using previously-installed hashicorp/local v2.3.0
-- Using previously-installed hashicorp/aws v4.52.0
+
 Terraform has been successfully initialized!
+
 You may now begin working with Terraform. Try running "terraform plan" to see
 any changes that are required for your infrastructure. All Terraform commands
 should now work.
+
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
@@ -259,7 +259,7 @@ terraform apply main.tfplan
 
 If prompted to confirm if you want to create AWS resources, answer `yes`.
 
-The output should be similar to:
+The bottom of the output should be similar to:
 
 ```output
 aws_instance.ec2_example: Creation complete after 31s [id=i-000a33ed1fe30b5df]
@@ -294,7 +294,7 @@ ssh -i <private_key> ubuntu@<public_ip_address>
 ```
 
 {{% notice Note %}}
-Replace `<private_key>` with your private key on your local machine and `<public_ip_address>` with the public IP of the target VM.
+Replace `<private_key>` with the private key on your local machine and `<public_ip_address>` with the public IP of the target VM.
 {{% /notice %}}
 
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used.
@@ -307,13 +307,19 @@ Once connected, you are now ready to use your instance.
 
 ### Clean up resources
 
-Run `terraform destroy` to delete all resources created.
+Run `terraform destroy` to delete all resources created through Terraform, including resource groups, virtual networks, and all other resources.
 
 ```console
 terraform destroy
 ```
 
-It will remove all resource groups, virtual networks, and all other resources created through Terraform.
+A long output of resources to destroy will be printed. If prompted to confirm if you want to destroy all resources, answer `yes`.
+
+The bottom of the output should be similar to:
+
+```output
+Destroy complete! Resources: 1 destroyed.
+```
 
 ## Explore your instance
 

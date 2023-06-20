@@ -352,15 +352,15 @@ The output should be similar to what is shown below:
 
 ```output
 Initializing the backend...
+
 Initializing provider plugins...
-- Reusing previous version of hashicorp/local from the dependency lock file
-- Reusing previous version of hashicorp/aws from the dependency lock file
-- Using previously-installed hashicorp/local v2.3.0
-- Using previously-installed hashicorp/aws v4.52.0
+
 Terraform has been successfully initialized!
+
 You may now begin working with Terraform. Try running "terraform plan" to see
 any changes that are required for your infrastructure. All Terraform commands
 should now work.
+
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
@@ -372,7 +372,6 @@ Run `terraform plan` to create an execution plan.
 ```console
 terraform plan -out main.tfplan
 ```
-
 
 A long output of resources to be created will be printed. The bottom of the output should be similar to:
 
@@ -389,7 +388,6 @@ Changes to Outputs:
 Saved the plan to: main.tfplan
 ```
 
-
 ### Apply a Terraform execution plan
 Run `terraform apply` to apply the execution plan to your cloud infrastructure. The command below creates all required infrastructure.
 
@@ -399,7 +397,7 @@ terraform apply main.tfplan
 
 If prompted to confirm if you want to create AWS resources, answer `yes`.
 
-The output should be similar to what is shown below:
+The bottom of the output should be similar to what is shown below:
 
 ```output
 Apply complete! Resources: 19 added, 0 changed, 0 destroyed
@@ -460,11 +458,19 @@ Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-1019-aws aarch64)
 ```
 
 ### Clean up resources
-Run `terraform destroy` to delete all resources created.
+Run `terraform destroy` to delete all resources created through Terraform, including resource groups, virtual networks, and all other resources.
+
 ```console
-  terraform destroy
+terraform destroy
 ```
-It will remove all resource groups, virtual networks, and all other resources created through Terraform.
+
+A long output of resources to destroy will be printed. If prompted to confirm if you want to destroy all resources, answer `yes`.
+
+The bottom of the output should be similar to:
+
+```output
+Destroy complete! Resources: 19 destroyed.
+```
 
 ## Explore your instance
 

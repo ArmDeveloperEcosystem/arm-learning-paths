@@ -309,19 +309,15 @@ The output should be similar to:
 
 ```output
 Initializing the backend...
+
 Initializing provider plugins...
-- Reusing previous version of hashicorp/local from the dependency lock file
-- Reusing previous version of hashicorp/tls from the dependency lock file
-- Reusing previous version of hashicorp/azurerm from the dependency lock file
-- Reusing previous version of hashicorp/random from the dependency lock file
-- Using previously-installed hashicorp/local v2.4.0
-- Using previously-installed hashicorp/tls v4.0.4
-- Using previously-installed hashicorp/azurerm v2.99.0
-- Using previously-installed hashicorp/random v3.4.3
+
 Terraform has been successfully initialized!
+
 You may now begin working with Terraform. Try running "terraform plan" to see
 any changes that are required for your infrastructure. All Terraform commands
 should now work.
+
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
@@ -359,10 +355,10 @@ terraform apply main.tfplan
 
 If prompted to confirm if you want to create Azure resources, answer `yes`.
 
-The output should be similar to:
+The bottom of the output should be similar to:
 
 ```output
-Apply complete! Resources: 11 added, 0 changed,0 destroyed
+Apply complete! Resources: 11 added, 0 changed, 0 destroyed
 
 Outputs:
 
@@ -397,17 +393,17 @@ Follow the connect instructions and commands mentioned in the Azure VM **Connect
 For example, if using the default username `azureuser`:
 
 ```console
-ssh azureuser@<Public IP>
+ssh -i <private_key> azureuser@<public_ip_address>
 ```
 
 {{% notice Note %}}
-Replace `<Public IP>` with the public IP of the target VM.
+Replace `<private_key>` with the private key on your local machine and `<public_ip_address>` with the public IP of the target VM.
 {{% /notice %}}
 
 Once connected, the output should be similar to below:
 
 ```output
-ubuntu@ip-172-31-17-218:~$ ssh azureuser@20.242.3.39
+ubuntu@ip-172-31-17-218:~$ ssh -i id_rsa azureuser@20.242.3.39
 The authenticity of host *20.242.3.39 (20.242.3.39)" can't be established.
 ED25519 key fingerprint is SHA256:9HqZbneGF wsn2L JrNu70a+S50s 1xvK7aCHImSDNOCH.
 This key is not known by any other names
@@ -421,13 +417,19 @@ You are now ready to use your instance.
 
 ### Clean up resources
 
-Run `terraform destroy` to delete all resources created.
+Run `terraform destroy` to delete all resources created through Terraform, including resource groups, virtual networks, and all other resources.
 
 ```console
 terraform destroy
 ```
 
-It will remove all resource groups, virtual networks, and all other resources created through Terraform.
+A long output of resources to destroy will be printed. If prompted to confirm if you want to destroy all resources, answer `yes`.
+
+The bottom of the output should be similar to:
+
+```output
+Destroy complete! Resources: 11 destroyed.
+```
 
 ## Explore your instance
 
