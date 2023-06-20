@@ -159,7 +159,9 @@ module load gnu/12.2.0
 
 ## Download and install with Spack {#spack}
 
-Arm Compiler for Linux is available with the [Spack](https://spack.io/) package manager. See [Arm Compiler for Linux and Arm PL now available in Spack](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/arm-compiler-for-linux-and-arm-pl-now-available-in-spack) for full details.
+`Arm Compiler for Linux` is available with the [Spack](https://spack.io/) package manager.
+
+See the [Arm Compiler for Linux and Arm PL now available in Spack](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/arm-compiler-for-linux-and-arm-pl-now-available-in-spack) blog for full details.
 
 ### Setup Spack
 
@@ -193,7 +195,6 @@ spack compiler find
 `ACfL` is now [ready to use](#armclang).
 
 
-
 ## Get started with Arm C/C++ compiler {#armclang}
 
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below. 
@@ -203,7 +204,7 @@ Check that the correct compiler version is being used:
 armclang --version
 ```
 
-To compile an example program, create a text file named `hello.c` with the contents below.
+Create a text file named `hello.c` with the contents below.
 
 ```C { file_name="hello.c" }
 #include <stdio.h>
@@ -215,32 +216,33 @@ int main()
 }
 ```
 
-To compile the hello-world program use:
+Build the application with:
 
 ```console { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
 armclang hello.c -o hello
 ```
 
-Run the application.
+Run the application with:
 
 ```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
 ./hello
 ```
 
-The hello-world program will print the string specified in the print statement.
-
+The program will output the string specified.
+```output
+Hello, C World!
+```
 
 ## Get started with Arm Fortran compiler {#fortran}
 
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below. 
 
-To confirm the installation is complete run:
-
+Check that the correct compiler version is being used:
 ```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
 armflang --version
 ```
 
-To compile an example program, create a text file named hello.f90 with the contents below.
+Create a text file named `hello.f90` with the contents below.
 
 ```fortran { file_name="hello.f90" }
 program hello
@@ -249,19 +251,20 @@ program hello
 end program hello
 ```
 
-To compile the hello-world program use:
-
+Build the application with:
 ```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
 armflang hello.f90 -o hello
 ```
 
-To run the application enter:
-
+Run the application with:
 ```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
 ./hello
 ```
 
-The hello-world program will print the string specified in the print statement.
+The program will output the string specified.
+```output
+Hello, Fortran World!
+```
 
 ## Get started with Arm Performance Libraries {#armpl}
 
