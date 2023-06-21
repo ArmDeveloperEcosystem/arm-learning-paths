@@ -82,7 +82,7 @@ sed -i '/qemuarm64/s/^#//g' conf/local.conf
 ```
 With the right machine now selected, proceed to building the minimal core image for your target.
 
-```bash { cwd="poky"; env_source="poky/oe-init-build-env build-qemu-arm64" }
+```bash { cwd="poky",env_source="poky/oe-init-build-env build-qemu-arm64" }
 bitbake core-image-minimal
 ```
 Depending on your machine, this build step can take a while to complete. On my machine, it took about an hour.

@@ -25,7 +25,7 @@ Apache Maven:
    sudo ln -s apache-maven-* maven
    cd ~/
    export M2_HOME=/usr/local/maven
-   export PATH=${M2_HOME}/bin:${PATH}
+   export PATH="$M2_HOME/bin:$PATH"
 ```
 Python 2.7
 
@@ -51,7 +51,7 @@ tar xfvz ycsb-0.17.0.tar.gz
 ```
 Now `cd` into project folder and run the executable to print a description of how to use the benchmark.
 
-```bash { env="M2_HOME=/usr/local/maven; PATH=/usr/local/maven/bin:${PATH}" cwd="./ycsb" ret_code="2" }
+```bash { env="M2_HOME=/usr/local/maven,PATH=/usr/local/maven/bin:$PATH",cwd="./ycsb",ret_code="2" }
 cd ycsb-0.17.0
 ./bin/ycsb
 ```
