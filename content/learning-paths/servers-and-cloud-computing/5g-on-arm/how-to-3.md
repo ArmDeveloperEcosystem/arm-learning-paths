@@ -14,7 +14,6 @@ Please refer to early section of setting kernel boot arguments and the CPU scali
 
 ### DPDK Tuning
 
-
 #### System level setting:
 
 Core isolation from Linux scheduler, Disabling interrupts, Huge page usage to minimize TLB misses are important before running DPDK PMDs.
@@ -44,9 +43,6 @@ Refer testpmd application https://doc.dpdk.org/guides/testpmd_app_ug/run_app.htm
 #### Before running the 5G stack, check whether maximum no drop rate is achieved using DPDK test pmd application.
 
 Refer the same link above to run test pmd on Ampere. This will ensure that the Ethernet PMD is operating at optimal performance. 
-
-### Memory Tuning
-### IO Tuning
 
 ### Profiling/Tracing
 

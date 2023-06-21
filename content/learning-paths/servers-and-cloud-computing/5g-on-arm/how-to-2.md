@@ -10,9 +10,7 @@ layout: learningpathall
 
 ### Firmware Maintenance
 
-It is important to have server's BIOS firmware updated, it is important to be in the loop of any ODM/OEM updating with its firmware. We need to have close relationship with ODM/OEM's FW team to address any issue we have encountered 
-
-It is also important to have server's BMC firmware updated, it is important to be in the loop of any ODM/OEM updating with its FW. We need to have close relationship with ODM/OEM's FW team to address any issue we have encountered 
+The BIOS firmware would have impact on some of the functionalities and performance of the server. So it is important to have server's BIOS and BMC firmware updated, it is important to be in the loop of any ODM/OEM update with its firmware. We need to have close relationship with ODM/OEM's firmware team to address any issue we would have encountered.
 
 BMC should always support IPMI standard protocol which allows automation of controlling the servers
 
@@ -52,7 +50,7 @@ Typically SR-IOV enablement is required for Arm server to support 5G deployment 
 
 ### PCIe Setting
 
-This is really depending on the server ODM, for example for SuperMicro server PCIe slots need to be re-configured for certain PCIe devices. Contact ODM/OEM to find out details.
+This is really depending on the server ODM, contact ODM/OEM to find out details.
 
 ### CPU Frequency Setting
 
@@ -99,7 +97,7 @@ sudo systemctl disable ondemand
 
 #### Disable freq scaling
 
-set in the boot argument with cpufreq.off=1 
+Set in the boot argument with cpufreq.off=1 
 
 cpufreq.off=1 is a kernel parameter in Linux that is used to disable CPU frequency scaling. CPU frequency scaling, also known as CPU throttling, is the process of adjusting the clock speed of the CPU to conserve energy and reduce heat generation. This is typically done by the operating system based on the load and performance requirements of the system.
 
@@ -503,26 +501,5 @@ sudo systemctl enable phc2sys.service
 sudo systemctl status phc2sys.service
 ``` 
 
-Issues with synchronization of NIC port
-There was a problem with A100X NIC port enP1p3s0f0np0, every time to run phc2sys, the timedatectl will be set to the bogus ToD like 2093. work around:
-
-changed /lib/systemd/system/phc2sys.service:
-
-ExecStart=/bin/sh -c "taskset -c 31 /usr/sbin/phc2sys -s CLOCK_REALTIME  -c /dev/ptp$(ethtool -T enP1p3s0f0np0 | grep PTP | awk '{print $4}') -n 24 -O 0 -R 256 -u 256"
-
-then run:
-```bash
-sudo ntpdate us.pool.ntp.org
-sudo hwclock -w
-sudo systemctl daemon-reload
-sudo systemctl restart phc2sys.service
-sudo systemctl enable phc2sys.service
-sudo systemctl status phc2sys.service 
-```
-then changed back the /lib/systemd/system/phc2sys.service
-
-it will start sync' up with switch.
-
-the A100X device somehow got messed up for its time clock, above steps are to update it with right ToD.
 
 
