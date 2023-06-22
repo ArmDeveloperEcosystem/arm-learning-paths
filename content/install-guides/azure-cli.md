@@ -69,4 +69,4 @@ source $HOME/.profile
 az version
 ```
 
-You are ready to use the Azure CLI.
+After a successful log in, you will be able to use the [Azure CLI](../azure-cli) and automation tools like [Terraform](../terraform) from the terminal.
