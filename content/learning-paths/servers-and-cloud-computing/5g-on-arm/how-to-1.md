@@ -9,7 +9,7 @@ layout: learningpathall
 ## How to Choose Right 5G Servers
 ---
 
-#### We have done extensive 5G development on Arm servers with various HW configurations and SW components:
+#### We have done extensive 5G development and testing on Arm servers with various HW configurations and SW components:
 
      1. 5G-in-one-box (software only)
 
@@ -17,7 +17,7 @@ layout: learningpathall
 
      3. 5G with Nvidia A100X (A100 GPU + BlueField2 NIC)
 
-#### We have evaluated variety of Arm server platforms from Foxconn, Gigabyte, WIWYNN, SuperMicro and HPE
+#### We have evaluated a variety of Arm server platforms from Foxconn, Gigabyte, WIWYNN, Supermicro and HPE
 
      1. Gigabyte (Mt. Snow 1P)
 
@@ -25,7 +25,7 @@ layout: learningpathall
 
      3. Foxconn (Mt. Collins 2P)
 
-     4. SuperMicro (R12SPD 1P)
+     4. Supermicro (R12SPD 1P)
 
      5. HPE (ProLiant RL300 Gen11 (P59870-B21) 1P) 
 
@@ -33,19 +33,19 @@ layout: learningpathall
 
 1P vs 2P systems:
 
-For evlaution purpose, 1P system should be sufficient to run any 5G software (L1/L2/L3) considering that the Arm CPU has at least 80 cores. 2P system would be great to run more processes on single box, however, it also adds more overhead introduced by numa system. So for simplicity, we would recommend 1P system to start with.
+For evaluation purpose, we recommend a 1P system which should be sufficient to run any 5G software stacks (L1/L2/L3) considering that the Arm CPU has at least 80 cores. 2P system would be great to run more processes on single box, however, we need to avoid socket communication, especially when some PCIe devices sit in a different node across from the CPU. 
 
-1U vs. 2U systems:
+1U vs 2U systems:
 
-1U would be sufficient to run 5G CN Core software while 2U is definitely required for needing additional HW such as PCIe card for L1 processing, e.g. the Nvidia A100X and Genvisio.
+1U would be sufficient to run 5G CN Core software or pure 5G software stacks while 2U is definitely required for needing additional HW such as several PCIe cards or a full length PCIe card for L1 processing, for example, the Nvidia A100X and Genvisio.
 
-#### Accommodate PCIe Accelerators
+#### Accommodating PCIe Accelerators
 
-Please note due to nature of PCIe devices, we need to consider carefully for picking up right Arm server to accommodating the PCIe Accelerators we are going to use.
+Due to nature of PCIe devices, we need to consider carefully for picking up right Arm server to accommodating the PCIe Accelerators we are going to use.
 
-For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also some PCIe full profile devices requirea little bit higher voltage to run properly, SuperMicro ARM server seems to accommondate Genevisio card better, the second Arm server we tested and it can support is the FoxConn ARM server, but it is an 2P system, a bit overkill to start with.
+For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's ARM server seems to accommodate Genevisio card better.
 
-For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC in one devices, we need to make sure its NIC ports face out. At this moment, only SuperMicro ARM server has designed its server with A100X support in mind.
+For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC in one devices, we need to make sure its NIC ports face out. At this moment, only Supermicro ARM server has designed its server with A100X support in mind.
 
 #### Available ARM Servers
 
@@ -63,7 +63,7 @@ For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be 
 
    It seems to have some issues for different PCIe devices, so you need to make sure it can work for your hardware requirement.
 
-3. SuperMicro server
+3. Supermicro server
 
    SMC seems to have its solutions for some of PCIe devices we would have issues with other servers. At this moment it is the server can support all of various PCIe devices we intend to use such as Nvidia 100X with proper orientation for its ethernet ports. 
 

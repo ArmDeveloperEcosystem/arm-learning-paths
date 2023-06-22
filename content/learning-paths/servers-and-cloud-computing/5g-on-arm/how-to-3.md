@@ -44,6 +44,14 @@ Refer testpmd application https://doc.dpdk.org/guides/testpmd_app_ug/run_app.htm
 
 Refer the same link above to run test pmd on Ampere. This will ensure that the Ethernet PMD is operating at optimal performance. 
 
+### Allocate Cores to Different Tasks
+
+It is critical to be carefully alloacting the cores to various tasks for 5G stack. Make sure all of processes have their own cores to run on, not to step over each other.
+
+For multiple socket server, always use numactl to launch your program to associate with the cpu and the PCIe device your program will access on same node.
+
+Use taskset command to launch your program on specific cores.
+
 ### Profiling/Tracing
 
 #### Using perf tools like :
@@ -184,3 +192,14 @@ perf stat -A --output $1_Inst_Spec_BR_$du_worker_core_a.txt -e r8,r1b,r78,r79,r7
 perf stat -A --output $1_Inst_Spec_BR_$cu_worker_core_b.txt -e r8,r1b,r78,r79,r7a -I $interval -C "$cu_worker_core_b" -x "," sleep $sleep_sec
 ```
 
+#### Take Advantage of Arm RAL and SVE/NEON 
+
+Arm 5G RAN Acceleration Library (ArmRAL):
+https://learn.arm.com/learning-paths/servers-and-cloud-computing/ran/
+
+Port Code to Arm Scalable Vector Extension (SVE)
+https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve/
+
+#### Using Other Arm Tools
+
+Refer this link https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer for Streamline Performance Analyzer

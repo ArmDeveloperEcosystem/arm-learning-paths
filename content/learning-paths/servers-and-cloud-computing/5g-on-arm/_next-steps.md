@@ -1,22 +1,31 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+# ================================================================================
+#       Edit
+# ================================================================================
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+next_step_guidance: Please contact us for futher discussion for your need for 5G on Arm.
+
+recommended_path: "/learning-paths/servers-and-cloud-computing/ran/"
+# Link to the next learning path being recommended.
+
+# further_reading links to references related to this path. Can be:
+    # Manuals for a tool / software mentioned   (type: documentation)
+    # Blog about related topics                 (type: blog)
+    # General online references                 (type: website) 
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: 5G Infrastructure
+        link: https://www.arm.com/en/markets/5g/infrastructure
+        type: website
+    - resource:
+        title: Arm RAN Acceleration Library Reference Guide
+        link: https://developer.arm.com/documentation/102249
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
-
+        title: 5G RAN for Dummies
+        link: https://www.arm.com/resources/dummies-guide/5g-ran
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

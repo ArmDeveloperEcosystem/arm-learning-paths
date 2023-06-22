@@ -3,6 +3,7 @@ title: 5G On Arm Handbook
 
 description: This
 
+learning_path_main_page: 'yes'
 minutes_to_complete:  10
 
 who_is_this_for: This is an introductory topic for 5G software migrating to Arm.
@@ -13,24 +14,22 @@ learning_objectives:
 
 prerequisites:
     - Arm Neoverse server 
-    - 5G stacks
+    - 5G ORAN stack
 
 author_primary: 5G Solution Team/Arm Performance and Solution Engineering Team
 
 ### Tags
 skilllevels: Introductory
-subjects: 5G ORAN stacks
+subjects: 5G
 armips:
-    - Arm Neoverse IP
-tools:
-    - Arm development toolset
-    - Virtualization software
-softwares:
-    - Any ORAN stacks
-    - L1 with or without HW accerlators
+    - Neoverse
+tools_software_languages:
+    - SVE
+    - GCC
+    - 5G ORAN
+    - Containers and Virtualization
 operatingsystems:
-    - Ubuntu 20.04+
-
+    - Linux
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
