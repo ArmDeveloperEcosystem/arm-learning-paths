@@ -45,7 +45,7 @@ Run the supplied `Arm_Mobile_Studio_<version>.exe` installer, and follow on-scre
 
 Unpack the supplied `Arm_Mobile_Studio_<version>_linux.tgz` installation package.
 ```command
-tar -xf Arm_Mobile_Studio_2023.1_linux.tgz
+tar -xf Arm_Mobile_Studio_2023.2_linux.tgz
 ```
 ### macOS
 

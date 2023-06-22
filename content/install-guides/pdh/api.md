@@ -2,7 +2,7 @@
 title: Access via API
 minutes_to_complete: 15
 official_docs: https://anypoint.mulesoft.com/exchange/portals/arm-3/f5af04c7-2f93-4d1e-8355-a60625973e1f/product-entitlement-customer-experience-api/
-author_primary: Jason Andrews
+author_primary: Ronan Synnott
 weight: 3    
 
 ### FIXED, DO NOT MODIFY
@@ -15,19 +15,17 @@ The Product Download Hub has an API to enable end users to automate management a
 
 ## Entitlements and Download Manager
 
-The easiest way to manage access PDH is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the PDH database, and download the required packages.
+The easiest way to manage access is with the [Entitlements and Download Manager](https://pypi.org/project/edmgr/). This Python based utility can be used to interrogate the download database, and fetch the required packages.
 
 It can be used from Windows command line or a Linux terminal. These instructions are for Linux (Ubuntu 22.04LTS).
 
 ### Install pre-requisites
-```
+```command
 sudo apt update
 sudo apt install -y python-is-python3 python3-pip
 ```
 ### Install edmgr
-
-To install the `edmgr` utility use:
-```cmd
+```command
 sudo pip install edmgr
 ```
 ## Generate user token
@@ -43,17 +41,9 @@ Using the token above, register your identity with the `edmgr` utility.
 ```cmd
 edmgr login token <your_token>
 ```
-A successful login should return something similar to:
+A successful login will output:
 ```output
 Token saved in <save_location>
-```
-If you get an error similar to:
-```output
-Error: public_key() missing 1 required positional argument: 'backend'
-```
-You likely need to update the cryptography module on your host:
-```cmd
-pip install --upgrade pyjwt[crypto]
 ```
 
 ## Determine the Product ID
@@ -62,7 +52,7 @@ To generate a list of products you are entitled to download use:
 ```cmd
 edmgr entitlements
 ```
-This may be a long list. You can filter this by using the [Product Code](https://developer.arm.com/downloads/product-code-mappings) of the item you wish to download.
+This may be a long list. You can filter by using the [Product Code](https://developer.arm.com/downloads/product-code-mappings) of the item you wish to download.
 
 For example, the `Product Code` of [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) is `DS000B`.
 
@@ -96,7 +86,7 @@ To continue the example, the `Arm Development Studio 2023.0 Linux installer` `Ar
 
 ## Download the artifact
 
-The package can now be downloaded. you must specify the various `ID`s from above. Use `-d` to specify a directory to store the downloaded package.
+The package can now be downloaded. You must specify the various `ID`s from above. Use `-d` to specify a directory to store the downloaded package.
 ```cmd
 edmgr download-artifacts -e <ProductID> -r <ReleaseID> -a <ArtifactID> -d <directory>
 ```

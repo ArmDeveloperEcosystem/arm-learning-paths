@@ -1,6 +1,4 @@
-THE LEARNING PATH WEBSITE IS BEING MIGRATED TO A NEW URL AND NOT CURRENTLY AVAILABLE. 
-
-THE NEW URL WILL BE POSTED HERE WHEN THE MIGRATION IS COMPLETE.
+The Arm Learning Paths website is available at https://learn.arm.com/
 
 # Arm Learning Paths 
 
@@ -14,7 +12,7 @@ The Learning Paths created here are maintained by Arm and the Arm software devel
 
 All contributions are welcome as long as they relate to software development for the Arm architecture. 
   * Write a Learning Path (or improve existing content)
-    * Fork this repo and submit pull requests; follow the step by step instructions in [Create a Learning Path](/learning-paths/cross-platform/_example-learning-path/) on the website.
+    * Fork this repo and submit pull requests; follow the step by step instructions in [Create a Learning Path](https://learn.arm.com//learning-paths/cross-platform/_example-learning-path/) on the website.
   * Ideas for a new Learning Path
     * Create a new GitHub idea under the [Discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) area in this GitHub repo.
   * Log a code issue (or other general issues)
@@ -26,8 +24,8 @@ Note that all site content, including new contributions, is licensed under a [Cr
 
 # Other Arm Learning Resources
 The Learning Path site contains software-based Learning Paths and Tool Install Guides, and complements the other Arm resources in the Arm Developer Hub and beyond. Here are links to other areas depending on what/how you want to learn:
-  * [Learning Paths](/)
-  * [Tool Install Guides](/)
+  * [Learning Paths](https://learn.arm.com/learning-paths)
+  * [Tool Install Guides](https://learn.arm.com/install-guides)
   * [Arm IP Documentation](https://developer.arm.com)  
 
 

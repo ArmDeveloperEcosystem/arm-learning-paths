@@ -90,16 +90,14 @@ The instructions below use USB debugging. For more information about wireless de
 
 3. Connect to Android 
 
-Connect a USB cable between your computer with `adb` installed and the Android device.
+Connect a USB cable between your computer with `adb` installed and the Android device. A prompt saying `Allow USB Debugging?` may appear on your device. If so, press `OK`.
 
 Run the `devices` command:
 ```console
 adb devices
 ```
 
-If the Android device is found it will be listed with an ID number. 
-
-If the device is found, the output is similar to:
+If the Android device is found it will be listed with an ID number. The output will be similar to:
 
 ```output
 List of devices attached

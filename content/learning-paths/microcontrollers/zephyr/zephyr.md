@@ -59,7 +59,7 @@ pip install west
 
 4. Download the Zephyr source code and install additional python dependencies declared in the source:
 
-```bash { env_source="/shared/zephyrproject/.venv/bin/activate"; cwd="/shared" }
+```bash { env_source="/shared/zephyrproject/.venv/bin/activate",cwd="/shared" }
 west init zephyrproject
 cd zephyrproject
 west update
@@ -95,7 +95,7 @@ There are sample applications included in the Zephyr source code repository.
 
 You can build the [hello world](https://docs.zephyrproject.org/latest/samples/hello_world/README.html) application for the Corstone-300 using `west`: 
 
-```bash { env_source="/shared/zephyrproject/.venv/bin/activate"; cwd="/shared" }
+```bash { env_source="/shared/zephyrproject/.venv/bin/activate",cwd="/shared" }
 cd zephyrproject/zephyr
 west build -p auto -b mps3_an547 samples/hello_world
 ```
@@ -112,7 +112,7 @@ Select either option.
 
 To run on your computer: 
 
-```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55"; cwd="/shared/zephyrproject/zephyr" }
+```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55",cwd="/shared/zephyrproject/zephyr" }
 FVP_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf --simlimit 24
 ```
 

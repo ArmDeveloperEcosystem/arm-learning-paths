@@ -31,9 +31,9 @@ jobs:
         continue-on-error: true
         run: |
           pip install linkchecker 
-          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/laptops-and-desktops/
-          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/servers-and-cloud-computing/
-          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/smartphones-and-mobile/
-          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/embedded-systems/
-          linkchecker --no-robots --config .linkcheckerrc --check-extern https://dgklawewg9zw3.cloudfront.net/learning-paths/microcontrollers/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://learn.arm.com/learning-paths/laptops-and-desktops/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://learn.arm.com/learning-paths/servers-and-cloud-computing/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://learn.arm.com/learning-paths/smartphones-and-mobile/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://learn.arm.com/learning-paths/embedded-systems/
+          linkchecker --no-robots --config .linkcheckerrc --check-extern https://learn.arm.com/learning-paths/microcontrollers/
 

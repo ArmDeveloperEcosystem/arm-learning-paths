@@ -39,7 +39,7 @@ python3.8 -m pip install imgtool cffi intelhex cbor2 cbor pytest click jinja2 Py
 ```
 
 ## Clone the TF-M repository
-```bash { pre_cmd="sudo chown ubuntu:ubuntu /shared"; cwd="/shared" }
+```bash { pre_cmd="sudo chown ubuntu:ubuntu /shared",cwd="/shared" }
 git clone https://git.trustedfirmware.org/TF-M/trusted-firmware-m.git
 cd trusted-firmware-m
 ```
@@ -74,7 +74,7 @@ On a successful build, the TF-M test executables are created in the `bin` direct
 To run the tests on the FVP use:
 
 ### Standalone
-```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55"; cwd="/shared/trusted-firmware-m/cmake_build" }
+```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55",cwd="/shared/trusted-firmware-m/cmake_build" }
 FVP_Corstone_SSE-300_Ethos-U55 -a cpu0*="bin/bl2.axf" --data "bin/tfm_s_ns_signed.bin"@0x01000000
 ```
 ### Within Arm Virtual Hardware

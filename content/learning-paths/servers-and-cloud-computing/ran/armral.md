@@ -100,7 +100,7 @@ sudo make install
 
 ## Build and run tests
 To build and run the supplied benchmark example, use:
-```bash { cwd="arm-ran-acceleration-library-23.04/build"; ret_code="0" }
+```bash { cwd="arm-ran-acceleration-library-23.04/build",ret_code="0" }
 make check
 ```
 

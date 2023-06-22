@@ -31,9 +31,9 @@ Recommended:
 &nbsp;  
 &nbsp;  
 
-## Use shorter words
+## Keep It Short and Simple
 
-Avoid a long or complex word when a simpler, shorter word will make the same point. 
+Use short words, sentences, paragraphs and sections. Avoid a long or complex word when a simpler, shorter word will make the same point. Conditional words are ambiguous. For example, instead of “could”, “would”, “should”, and “may”, use “can”, “will”, and “might”.
 
 {{% notice Examples%}}
 Too confusing:
@@ -48,11 +48,11 @@ Recommended:
 
 ## Use active voice
 
-Use active voice and present tense when possible. In the active voice, the subject of the sentence performs the action. In the passive voice, the action happens to the subject of the sentence. 
+Use active voice. Active voice is direct. The reader knows what the subject and object of a sentence is, and the subject appears first in a sentence 
 
-**Active voice:** Press the F1 key to display help information in a separate window. 
+**Active voice:** Software in external memory builds the MMU page table. 
 
-**Passive voice:** When the F1 key is pressed, help information is displayed in a separate window.  
+**Passive voice:** The MMU page table is built by software in external memory.
 
 {{% notice Examples%}}
 Passive voice (bad):
@@ -65,9 +65,25 @@ Recommended:
 &nbsp;  
 &nbsp;  
 
+## Use present tense
+
+Use present tense because it is concrete. It emphasizes what the user can do now. And it uses fewer words. 
+
+{{% notice Examples%}}
+Not recommended:
+- If you’ve entered the correct data, your product should work.
+
+Recommended:
+- Enter the correct data and your product works.
+{{% /notice %}}
+
+&nbsp;
+&nbsp;
+
 ## Avoid jargon
 
 Avoid overuse of adjectives. Avoid jargon including Latin abbreviations. 
+Make content user-focused. Arm is committed to making the language we use inclusive, meaningful, and respectful. 
 
 {{% notice Examples%}}
 Too many 'filler' words:
@@ -161,6 +177,15 @@ Too nebulous:
 Recommended:
 - The library works on Linux and Windows 11.
 {{% /notice %}}
+
+&nbsp;
+&nbsp;
+
+## Be consistent
+
+Be consistent because we like finding patterns and repetition. We understand content quicker if it is consistent. 
+Make sure that you use the same words to describe the same things. For example, “This table/figure/example shows …” not depicts, lists, illustrates, defines. Use the same spelling, not “keywords” in one place and “key words” in another.
+
 
 ## Expected skills of your target audience
 
