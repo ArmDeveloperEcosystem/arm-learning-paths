@@ -21,11 +21,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Rust](https://www.rust-lang.org/) is an open source programming language.
 
-## Introduction
+## Before you begin
 
-`Rust` is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
+Rust is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
 
-This article provides a quick solution to install `Rust` on an Arm Linux distribution.
+This article provides a quick solution to install Rust on an Arm Linux distribution.
 
 Confirm you are using an Arm machine by running:
 
@@ -45,7 +45,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ### Installing dependencies on Debian based distributions such as Ubuntu
 
-Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
+Use the `apt` command to install the required software packages on any Debian based Linux distribution, including Ubuntu.
 
 ```bash { target="ubuntu:latest" }
 sudo apt update -y
@@ -56,7 +56,7 @@ sudo apt install -y curl gcc
 
 These Linux distributions use `yum` as the package manager.
 
-To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
+Use the `yum` command to install the required software packages. If the machine has `sudo` you can use it.
 
 ```bash { target="fedora:latest" }
 sudo yum update -y
@@ -65,15 +65,15 @@ sudo yum install -y curl gcc
 
 ### Download and install Rust
 
-To install the installation run the following command:
+Run the following command to download and install Rust:
 
 ```bash
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
-This will download and install the latest stable version of `Rust`. The installer will output:
+The installer output will be similar to:
 
-```console
+```output
 info: downloading installer
 info: profile set to 'default'
 info: default host triple is aarch64-unknown-linux-gnu
@@ -109,25 +109,27 @@ To configure your current shell, run:
 source "$HOME/.cargo/env"
 ```
 
-The installer updated `$HOME/.bashrc` and `SHOME/.profile` file to setup the environment. Either restart a new shell or run the following command to continue:
+The latest version of Rust is now installed. 
+
+The installer updates `$HOME/.bashrc` and `SHOME/.profile` to setup the environment. Start a new shell or run the following command to continue:
 
 ```bash
 source "$HOME/.cargo/env"
 ```
 
-To confirm the installation is complete run (`cargo` is the `Rust` package manager):
+To confirm the installation is complete run `cargo version` (`cargo` is the Rust package manager):
 
 ```bash { env_source="~/.bashrc" }
 cargo version
 ```
 
-The command should print the version:
+The command will print the version:
 
-```console
+```output
 cargo 1.70.0 (ec8a8a0ca 2023-04-25)
 ```
 
-You are ready to use the Rust programming language on your Arm machine running Linux.
+You are ready to use the Rust programming language on your Arm Linux machine.
 
 ## Get started {#start}
 
@@ -139,9 +141,9 @@ cd hello
 cargo run
 ```
 
-The last command will output:
+The `cargo run` command will output:
 
-```console
+```output
    Compiling hello v0.1.0 (/hello)
     Finished dev [unoptimized + debuginfo] target(s) in 0.44s
      Running `target/debug/hello`
