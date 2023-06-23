@@ -3,6 +3,8 @@ title: Deploy Arm Instances on AWS using Terraform
 
 minutes_to_complete: 60   
 
+who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on AWS using Terraform.
+ 
 learning_objectives: 
     - Automate AWS EC2 instance creation using Terraform
     - Deploy Arm instances on AWS and provide access via Jump Server
