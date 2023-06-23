@@ -25,7 +25,7 @@ Open up your game in Unity
 
     4. Select Add Modules.
 
-    5. Check Android Build Support. Expand the item and make sure all subitems are checked.
+    5. Check Android Build Support. Expand the item and make sure all sub-items are checked.
 
 3. Click the Player Settings button on the bottom left
 
