@@ -13,17 +13,17 @@
 review:
     - questions:
         question: >
-            Performance Analyzer is used to extract actionable information from Streamline captures.
+            Performance Advisor is used to extract actionable information from Streamline captures.
         answers:
             - "True"
             - "False"
         correct_answer: 1
         explanation: >
-            Streamline captures can be complicated for a new user. With Performance Analyzer you can generate an easy to understand report highlighting key areas to focus on.
+            Streamline captures can be complicated for a new user. With Performance Advisor you can generate an easy to understand report highlighting key areas to focus on.
 
     - questions:
         question: >
-            Performance Analyzer can generate its report in JSON format?
+            Performance Advisor can generate its report in JSON format?
         answers:
             - "True"
             - "False"

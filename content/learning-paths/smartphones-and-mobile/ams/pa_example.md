@@ -11,11 +11,11 @@ Performance Advisor analyzes a Streamline capture to better illustrate how your 
 
 ## Generate example report
 
-The supplied Streamline capture from [earlier](../streamline_example) can be used to generate a `Performance Analyzer` report.
+The supplied Streamline capture from [earlier](../streamline_example) can be used to generate a `Performance Advisor` report.
 
 Open a terminal, and navigate to the location of the imported capture.
 
-Run the Performance Analyzer tool on the report:
+Run the Performance Advisor tool on the report:
 ```command
 streamline-cli -pa "Android - GPU Bound Example.apc"
 ```
@@ -35,7 +35,7 @@ Generating report type html...
 Report performance_advisor-<timestamp>.html" successfully generated
 ```
 Open the report in a browser and explore the report.
-![Performance Analyzer #center](images/pa.png "Performance Analyzer report")
+![Performance Advisor #center](images/pa.png "Performance Advisor report")
 
 ## Understand the report
 

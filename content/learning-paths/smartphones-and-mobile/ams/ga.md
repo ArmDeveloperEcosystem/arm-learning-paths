@@ -20,12 +20,22 @@ Build your application, and setup Android device as per [Streamline](../streamli
 In the Graphics Analyzer menu, select `Debug` > `Device Manager`, and select your device from the list of detected devices.
 
 Select the required APIs (OpenGL ES and/or Vulkan) for your application.
+![Device Manager #center](images/ga_device_manager.png "Device Manager")
 
 ## Profile application
 
 Click `Start capture` to connect to the device and install Graphics Analyzer daemon on the device.
 
-Start the application on the device., and interact as desired for the profiling run you wish to do.
+Start the application on the device, and interact as desired. Graphics Analyzer will collect API calls from the device.
+
+### Frame Buffer
+
+To collect `Frame Buffer` data, pause the application when you reach the frame of interest.
+
+Click the `camera` icon to capture the frame buffer output.
+
+Optionally, enable `Overdraw`, `Shader`, and/or `Fragment count` data to be captured. Click the `camera` icon to capture this additionaly enabled data.
+
 
 When satisfied, simply click on `Stop tracing`. Graphics Analyzer will stop collecting data, remove the daemon(s), and process the captured data.
 
