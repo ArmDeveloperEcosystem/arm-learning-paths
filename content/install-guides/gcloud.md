@@ -24,7 +24,7 @@ The Google Cloud CLI, `gcloud`, allows you to run commands in your Google Cloud 
 
 `gcloud` is available for Windows, macOS, Linux and supports the Arm architecture. 
 
-## Introduction
+## Before you begin
 
 Use the documentation link to find alternative installation options. 
 
