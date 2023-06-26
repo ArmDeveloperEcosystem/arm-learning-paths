@@ -37,9 +37,15 @@ If the connection is successful, running the `adb devices` command on the host r
 
 Install the [debuggable](https://developer.android.com/studio/debug) application.
 
+### Unity applications
+
+To set `Unity` applications to be debuggable, enable `Development Build` in `Build Settings`.
+![Build Settings #center](images/build_settings.png "Unity Build Settings")
+
 ## Connect to the device
 
 In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices.
+![Connect to device #center](images/start.png "Connect to the device")
 
 This will install the `gatord` daemon and connect to the device.
 
@@ -55,8 +61,11 @@ Navigate to `Window` > `Preferences` > `Data Locations`, and configure location 
 
 Click on `Start capture` to start capturing profile data from the target.
 
-Start the application on the device., and interact as desired for the profiling run you wish to do.
+Start the application on the device, and interact as desired for the profiling run you wish to do.
 
-When satisfied, simply click on `Stop capture`. Streamline will stop capturing data, remove the daemon, and process the captured data.
+When satisfied, simply click on `Stop capture` in upper-right of screen.
+![Stop capture #center](images/stop_capture.png "Stop Capture")
+
+Streamline will stop capturing data, remove the daemon, and process the captured data.
 
 Double-click on the capture to display in the timeline.
