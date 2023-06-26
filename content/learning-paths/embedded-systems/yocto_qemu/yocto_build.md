@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Introduction
+## Before you begin
 
 The [Yocto Project](https://www.yoctoproject.org/) is an open-source project with a build system that allows software developers create custom embedded Linux OS distributions regardless of the hardware architecture. 
 Developers can configure their custom builds of Yocto using a set of recipes. In this Learning Path you will learn the steps to build a minimal Yocto Linux image for a 64-bit Arm target and run it on [QEMU](https://www.qemu.org/). 

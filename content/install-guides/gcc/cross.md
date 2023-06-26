@@ -23,7 +23,7 @@ GCC is available on all Linux distributions and can be installed using the packa
 
 This covers `gcc` and `g++` for compiling C and C++ as a cross-compiler targeting the Arm architecture.
 
-## Introduction
+## Before you begin
 
 GCC is often used to cross-compile software for Arm microcontrollers and embedded devices which have firmware and other low-level software. The executables are `arm-none-eabi-gcc` and `arm-none-eabi-g++`.
 

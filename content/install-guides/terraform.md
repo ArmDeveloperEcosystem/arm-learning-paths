@@ -27,7 +27,7 @@ weight: 1
 
 Terraform is available for Windows, macOS, Linux and supports the Arm architecture. 
 
-## Introduction
+## Before you begin
 
 [General installation information](https://developer.hashicorp.com/terraform/downloads) is available which covers all supported operating systems. 
 

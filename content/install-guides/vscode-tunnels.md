@@ -43,7 +43,7 @@ To create a tunnel a command-line instance of VS Code is run on the remote machi
 Creating VS Code tunnels requires a [GitHub](https://github.com/) account.
 {{% /notice %}}
 
-## Introduction
+## Before you begin
 
 Follow the instructions below to install either the CLI version or the desktop version of VS Code on an Arm Linux machine. This is the remote machine you want to use for development.
 

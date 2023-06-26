@@ -1414,3 +1414,4 @@ rst
 hwcaps
 softWare
 Inspiron
+Brossard

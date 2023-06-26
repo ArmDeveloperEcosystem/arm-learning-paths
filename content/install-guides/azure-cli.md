@@ -24,7 +24,7 @@ weight: 1
 
 It is available for a variety of operating systems and Linux distributions and has multiple ways to install it. 
 
-## Introduction
+## Before you begin
 
 [General installation information](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt) is available which covers all supported Linux distributions. The instructions state that Azure CLI doesn't support Linux on Arm. 
 
