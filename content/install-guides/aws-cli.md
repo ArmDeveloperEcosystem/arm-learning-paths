@@ -27,7 +27,7 @@ It is available for a variety of operating systems and Linux distributions, supp
 
 ## Introduction
 
-This article provides quick solutions to install AWS CLI versions 2 and 1 for Ubuntu on Arm.
+This article provides quick solutions to install the latest version of AWS CLI, version 2, for Ubuntu on Arm.
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
@@ -45,7 +45,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Download and install AWS CLI version 2
 
-The easiest way to install AWS CLI version 2 for Ubuntu on Arm is to download and run the installer from AWS.
+The easiest way to install the latest version of the AWS CLI for Ubuntu on Arm is to download and run the installer from AWS.
 
 Before starting, install `unzip`:
 
@@ -70,23 +70,4 @@ aws --version
 
 Review [AWS CLI v2 is now generally available](https://aws.amazon.com/blogs/developer/aws-cli-v2-is-now-generally-available/) to review the new features in version 2. 
 
-You are ready to use the AWS CLI version 2.
-
-## Install AWS CLI version 1
-
-AWS CLI version 2 is recommended, but version 1 can be installed using the Linux package manager.
-
-Both versions should not be installed on the same computer.
-
-```console
-sudo apt update
-sudo apt install awscli -y
-```
-
-Confirm the CLI version 1 is available by invoking the `aws` command to print the version.
-
-```bash { target="ubuntu:latest" }
-aws --version
-```
-
-You are ready to use the AWS CLI version 1.
+You now have the latest version of the AWS CLI installed. Follow [this guide](/install-guides/aws_access_keys/) to generate and configure access keys needed to use the AWS CLI.

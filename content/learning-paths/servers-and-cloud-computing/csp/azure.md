@@ -150,6 +150,11 @@ You can connect to the instance with your preferred SSH client. For example, if 
 ```console
 ssh -i <private_key> azureuser@<public_ip_address>
 ```
+
+{{% notice Note %}}
+Replace `<private_key>` with the private key on your local machine and `<public_ip_address>` with the public IP of the target VM.
+{{% /notice %}}
+
 You will also see this command under the `Connect` > `SSH` tab.
 
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used.

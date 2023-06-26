@@ -74,6 +74,11 @@ For example, to ssh into your virtual machine instance:
 ```console
 ssh -i <private_key> ecs-user@<public_ip_address>
 ```
+
+{{% notice Note %}}
+Replace `<private_key>` with the private key on your local machine and `<public_ip_address>` with the public IP of the target VM.
+{{% /notice %}}
+
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used to connect via `ssh`.
 
 ## Explore your instance
