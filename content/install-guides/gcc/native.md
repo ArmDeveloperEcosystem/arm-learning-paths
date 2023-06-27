@@ -21,7 +21,7 @@ weight: 2
 ---
 GCC is available on all Linux distributions and can be installed using the package manager.
 
-## Introduction
+## Before you begin
 
 Follow the instructions below to install GCC on an Arm Linux distribution. This covers `gcc` and `g++` for compiling C and C++ applications.
 

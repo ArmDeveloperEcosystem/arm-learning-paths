@@ -47,7 +47,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 Download Multipass for macOS.
 
 ```console
-wget https://github.com/canonical/multipass/releases/download/v1.10.1/multipass-1.10.1+mac-Darwin.pkg
+wget https://github.com/canonical/multipass/releases/download/v1.12.0/multipass-1.12.0+mac-Darwin.pkg
 ```
 
 ## Installation
@@ -55,7 +55,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.10.1/multipass-
 Install the download using the package command.
 
 ```console
-sudo installer -pkg  multipass-1.10.1+mac-Darwin.pkg -target /
+sudo installer -pkg  multipass-1.12.0+mac-Darwin.pkg -target /
 ```
 
 The getting started instructions below use the command line interface. Multipass installs a tray icon for those who want to access basic features from the user interface.
@@ -81,14 +81,18 @@ The output from `find` will be similar to the below.
 
 ```output
 Image                       Aliases           Version          Description
-18.04                       bionic            20230112         Ubuntu 18.04 LTS
-20.04                       focal             20230111         Ubuntu 20.04 LTS
-22.04                       jammy,lts         20230107         Ubuntu 22.04 LTS
+20.04                       focal             20230616         Ubuntu 20.04 LTS
+22.04                       jammy,lts         20230616         Ubuntu 22.04 LTS
+23.04                       lunar             20230621         Ubuntu 23.04
+
+Blueprint                   Aliases           Version          Description
 anbox-cloud-appliance                         latest           Anbox Cloud Appliance
 charm-dev                                     latest           A development and testing environment for charmers
-docker                                        latest           A Docker environment with Portainer and related tools
+docker                                        0.4              A Docker environment with Portainer and related tools
 jellyfin                                      latest           Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.
 minikube                                      latest           minikube is local Kubernetes
+ros-noetic                                    0.1              A development and testing environment for ROS Noetic.
+ros2-humble                                   0.1              A development and testing environment for ROS 2 Humble.
 ```
 
 ### Launching instances
@@ -140,13 +144,13 @@ Download and install [OpenVSCode Server](/install-guides/openvscode-server/).
 On the macOS host computer use `wget` for the download.
 
 ```console
-wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.72.2/openvscode-server-v1.72.2-linux-arm64.tar.gz
+wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.79.2/openvscode-server-v1.79.2-linux-arm64.tar.gz
 ```
 
 To copy a file to the instance
 
 ```console
-multipass transfer openvscode-server-v1.72.2-linux-arm64.tar.gz m1u:/home/ubuntu
+multipass transfer openvscode-server-v1.79.2-linux-arm64.tar.gz m1u:/home/ubuntu
 ```
 
 Now switch to the instance and extract the download and run the application. 
@@ -160,13 +164,13 @@ multipass shell m1u
 Extract the download. 
 
 ```console
-tar xvfz openvscode-server-v1.72.2-linux-arm64.tar.gz
+tar xvfz openvscode-server-v1.79.2-linux-arm64.tar.gz
 ```
 
 Run the application.
 
 ```console
-./openvscode-server-v1.72.2-linux-arm64/bin/openvscode-server --host=0.0.0.0 --without-connection-token
+./openvscode-server-v1.79.2-linux-arm64/bin/openvscode-server --host=0.0.0.0 --without-connection-token
 ```
 
 Connect to OpenVSCode Server using a browser. From the macOS host computer use the `info` command to get the IP address of the instance.

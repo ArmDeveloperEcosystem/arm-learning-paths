@@ -66,7 +66,7 @@ For example:
 sudo apt update
 sudo apt install -y python-is-python3 libc6-dev
 ```
-You are now ready to install ACfl [manually](#manual) or with [Spack](#spack).
+You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 
 ## Download and install manually {#manual}
 

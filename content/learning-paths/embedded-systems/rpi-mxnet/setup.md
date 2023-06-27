@@ -16,7 +16,7 @@ Setup the machine and verify you can use SSH to connect.
 
 A Raspberry Pi 3 or Raspberry Pi 4 is needed to test the compiled application. This step is optional and can be skipped if a board is not available. 
 
-## Introduction 
+## Before you begin 
 
 For large embedded software projects you can reduce compile time using an Arm server and transfer the compiled applications to embedded Linux hardware. A Raspberry Pi running Raspberry Pi OS is used as an example embedded system. MXNet, a flexible and efficient library for deep learning, is used as an example software application. This strategy can be applied to other applications and other Arm hardware. 
 
