@@ -28,7 +28,7 @@ Click `Start capture` to connect to the device and install Graphics Analyzer dae
 
 Start the application on the device, and interact as desired. Graphics Analyzer will collect API calls from the device.
 
-When satisfied, simply click on `Stop tracing`. Graphics Analyzer will stop collecting data, remove the daemon(s), and process the captured data.
+When satisfied, click on `Stop tracing`. Graphics Analyzer will stop collecting data, remove the daemon(s), and process the captured data.
 
 ### Frame Buffer
 
