@@ -21,7 +21,11 @@ To add a new Learning Path, first decide the appropriate category. There are 5 c
 Place your Learning Path in the category closest to the environment where the software runs. The tags on the [front page of the website](/) help explain the categories. Feel free to ask on GitHub if you are unsure which category best matches your Learning Path. 
 {{% /notice %}}
 
+You can also add a new install guide. Install guides are short descriptions providing commonly used information to install tools and software. Install guides are easy to reference from multiple Learning Paths and avoid repetition.
+
 ### Create a new Learning Path
+
+This section creates a new Learning Path. Refer to the next section to create a new install guide.
 
 Start creating your Learning Path from the template provided using a straightforward one-line command. For example, to create a new Learning Path with the directory name `my-new-learning-path` under the `microcontrollers` category, run the following command from the root directory of this project:
 ```bash
@@ -38,11 +42,25 @@ Result: The following markdown files are added to the `my-new-learning-path` dir
 | _review.md            | This file contains simple questions and answers to reinforce knowledge gained from your Learning Path.    |
 | _next_steps.md        | This file contains the next recommended steps and related resources for the reader to use on completion of this Learning Path.   |
 
+### Create a new install guide
+
+Create a new install guide by copying an existing file in the `content/install-guides` directory and modifying the contents.
+
+For example, copy the AWS CLI install guide to create your new install guide.
+
+```bash
+cp content/install-guides/aws-cli.md content/install-guides/my-new-install-guide.md
+```
+
+Use a text editor to open `my-new-install-guide.md` and change the title of the new install guide to your desired title. 
+
+The new install guide will be visible in the install guide category when you run `hugo server` in the next section. You can continue to edit the file to create your new install guide.
+
 ### View the new Learning Path
 
 You can verify you have correctly copied the template by viewing the new Learning Path. 
 
-1. Run Hugo server locally
+1. Run Hugo server 
 
 If Hugo is not already running start it. 
 
