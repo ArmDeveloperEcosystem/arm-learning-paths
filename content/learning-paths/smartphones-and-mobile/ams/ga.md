@@ -28,16 +28,15 @@ Click `Start capture` to connect to the device and install Graphics Analyzer dae
 
 Start the application on the device, and interact as desired. Graphics Analyzer will collect API calls from the device.
 
+When satisfied, simply click on `Stop tracing`. Graphics Analyzer will stop collecting data, remove the daemon(s), and process the captured data.
+
 ### Frame Buffer
 
 To collect `Frame Buffer` data, pause the application when you reach the frame of interest.
 
 Click the `camera` icon to capture the frame buffer output.
 
-Optionally, enable `Overdraw`, `Shader`, and/or `Fragment count` data to be captured. Click the `camera` icon to capture this additionaly enabled data.
-
-
-When satisfied, simply click on `Stop tracing`. Graphics Analyzer will stop collecting data, remove the daemon(s), and process the captured data.
+You can also enable `Overdraw`, `Shader`, and/or `Fragment count` data to be captured. Click the `camera` icon to capture this data.
 
 ## Analyze the capture
 
