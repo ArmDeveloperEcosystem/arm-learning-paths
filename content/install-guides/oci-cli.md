@@ -30,8 +30,7 @@ It is available for a variety of operating systems and Linux distributions and h
 
 [General installation information](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm#InstallingCLI__linux_and_unix) is available which covers all supported Linux distributions. 
  
-
-This article provides a quick solution to install OCI CLI for Ubuntu on Arm.
+This install guide provides a quick solution to install OCI CLI for Ubuntu on Arm.
 
 Confirm you are using an Arm machine by running:
 
@@ -49,19 +48,22 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Download and Install
 
-The easiest way to install OCI CLI for Ubuntu on Arm is to use Linux. 
+The easiest way to install OCI CLI for Ubuntu on Arm is to use the installer script. 
 
 Install OCI using the command below. 
 
 ```bash { target="ubuntu:latest" }
 bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 ```
+You are prompted by the installation script with the following questions:
+- In what directory would you like to place the install? (leave blank to use '/home/ubuntu/lib/oracle-cli'):
+- In what directory would you like to place the 'oci' executable? (leave blank to use '/home/ubuntu/bin'):
+- In what directory would you like to place the OCI scripts? (leave blank to use '/home/ubuntu/bin/oci-cli-scripts'):
+- What optional CLI packages would you like to be installed (comma separated names; press enter if you don't need any optional packages)?:
 
-Respond to the Installation Script Prompts.
+You can press Enter for the the default selection on all the questions or enter the path to a directory of your choice.
 
-
-
-Verify OCI CLI installed. 
+Verify OCI CLI installed:
 
 ```bash { target="ubuntu:latest" }
 oci --version
