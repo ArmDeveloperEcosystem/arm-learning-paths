@@ -385,7 +385,7 @@ Using a text editor, save the code below in a file called `kafka_cluster.yaml`. 
            apt update
            apt install -y default-jdk
            mkdir kafka_node
-           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
+           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz && tar -xzf kafka_2.13-3.5.0.tgz && cd kafka_2.13-3.5.0
 
   - name: On all kafka instances create log directory
     shell: mkdir /tmp/kafka-logs
@@ -393,7 +393,7 @@ Using a text editor, save the code below in a file called `kafka_cluster.yaml`. 
   - name: On kafka1 instance update broker id
     when: "'kafka1' in group_names"
     lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/config/server.properties
       regexp: '^(.*)broker.id(.*)$'
       line: 'broker.id=1'
       backrefs: yes
@@ -401,7 +401,7 @@ Using a text editor, save the code below in a file called `kafka_cluster.yaml`. 
   - name: On kafka2 instance update broker id
     when: "'kafka2' in group_names"
     lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/config/server.properties
       regexp: '^(.*)broker.id(.*)$'
       line: 'broker.id=2'
       backrefs: yes
@@ -409,27 +409,27 @@ Using a text editor, save the code below in a file called `kafka_cluster.yaml`. 
   - name: On kafka3 instance update broker id
     when: "'kafka3' in group_names"
     lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/config/server.properties
       regexp: '^(.*)broker.id(.*)$'
       line: 'broker.id=3'
       backrefs: yes
 
   - name: On all kafka instance uncomment listeners
     lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/config/server.properties
       regexp: '^(.*)#listeners=PLAINTEXT://:9092(.*)$'
       line: 'listeners=PLAINTEXT://:9092'
       backrefs: yes
  
   - name: On all kafka instance update zookeeper.connect
     lineinfile:
-      path: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties
+      path: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/config/server.properties
       regexp: '^(.*)zookeeper.connect=localhost:2181(.*)$'
       line: 'zookeeper.connect={{zk_1_ip}}:2181,{{zk_2_ip}}:2181,{{zk_3_ip}}:2181'
       backrefs: yes
       
   - name: Start kafka_server
-    command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.2.3/config/server.properties        
+    command: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/bin/kafka-server-start.sh /home/ubuntu/kafka_node/kafka_2.13-3.5.0/config/server.properties        
 ```
 
 ### Ansible Commands
@@ -548,10 +548,10 @@ Using a text editor, save the code below in a file called `client.yaml`. It will
            apt update
            apt install -y default-jdk
            mkdir kafka_node
-           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.2.3/kafka_2.13-3.2.3.tgz && tar -xzf kafka_2.13-3.2.3.tgz && cd kafka_2.13-3.2.3
+           cd kafka_node/ && wget https://dlcdn.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz && tar -xzf kafka_2.13-3.5.0.tgz && cd kafka_2.13-3.5.0
            
   - name: Create a topic
-    command: /home/ubuntu/kafka_node/kafka_2.13-3.2.3/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
+    command: /home/ubuntu/kafka_node/kafka_2.13-3.5.0/bin/kafka-topics.sh --create --topic test-topic --bootstrap-server {{kf_1_ip}}:9092,{{kf_2_ip}}:9092,{{kf_3_ip}}:9092 --replication-factor 3 --partitions 64
 ```
 
 ### Ansible Commands
@@ -591,7 +591,7 @@ PLAY RECAP *********************************************************************
 To describe the topic created ssh on the client instance and run the following command.
 ```console
 ssh ubuntu@client_ip
-cd kafka_node/kafka_2.13-3.2.3
+cd kafka_node/kafka_2.13-3.5.0
 ./bin/kafka-topics.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092 --describe
 ```
 Replace the `client_ip`, `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of client, kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
@@ -682,7 +682,7 @@ ubuntu@ip-172-31-31-117:~/kafka_node/kafka_2.13-3.2.3$ ./bin/kafka-console-produ
 Open a new terminal on the client machine and run the consumer client using the following command.
 ```console
 ssh ubuntu@client_ip
-cd kafka_node/kafka_2.13-3.2.3
+cd kafka_node/kafka_2.13-3.5.0
 ./bin/kafka-console-consumer.sh --topic test-topic --bootstrap-server kf_1_ip:9092,kf_2_ip:9092,kf_3_ip:9092
 ```
 Replace the `client_ip`, `kf_1_ip`, `kf_2_ip`, `kf_3_ip` with the IP of client, kafka1, kafka2 and kafka3 respectively generated in inventory file present at location `/tmp/inventory`.
