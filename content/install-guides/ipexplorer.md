@@ -19,7 +19,7 @@ minutes_to_complete: 10
 author_primary: Ronan Synnott
 
 ### Link to official documentation
-official_docs:
+official_docs: https://www.arm.com/products/ip-explorer
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -30,15 +30,22 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 
 Arm IP Explorer is a cloud-based tool used to accelerate IP selection and SoC design. 
+It also includes a simulation feature used by software developers for benchmarking Arm processors as part of the IP selection process.
+
+## Before you begin
 
 An Arm account is required to access Arm IP Explorer. To create an Arm account, enter your e-mail on the [registration form](https://www.arm.com/register) and follow the instructions.
 
 ## Installation
 
-Arm IP Explorer is a cloud based tool and does not require any local installation.
+Arm IP Explorer is a cloud application and does not require any installation.
 
-Access [Arm IP Explorer](https://ipexplorer.arm.com/) using a browser.
+You can access Arm IP Explorer using a browser by visiting [ipexplorer.arm.com](https://ipexplorer.arm.com/)
+
+If your Arm account is not setup for access you are presented with a request access form. Fill out the form and someone will review your request and grant access.
 
 ## Get started
 
-There are several [Tutorials](https://ipexplorer.arm.com/support) available to help you get started quickly with the Arm IP Explorer tool.
+Once you log in, there are several tutorials available to help you get started quickly. Click on Support in the upper right corner. 
+
+IP Explorer is currently in beta. Additional Learning Paths will be available at the end of the beta period. 
