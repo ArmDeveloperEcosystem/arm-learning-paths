@@ -1,7 +1,7 @@
 summary:
-  content_total: 148
-  content_with_all_tests_passing: 29
-  content_with_tests_enabled: 29
+  content_total: 150
+  content_with_all_tests_passing: 30
+  content_with_tests_enabled: 30
 sw_categories:
   cross-platform:
     intrinsics:
@@ -43,6 +43,10 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    forge:
+      readable_title: Linaro Forge
+      tests_and_status:
+      - ubuntu:latest: passed
     gfortran:
       readable_title: GFortran
       tests_and_status:
