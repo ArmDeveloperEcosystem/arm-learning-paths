@@ -55,18 +55,28 @@ Install OCI using the command below.
 ```bash { target="ubuntu:latest" }
 bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 ```
-You are prompted by the installation script with the following questions:
-- In what directory would you like to place the install? (leave blank to use '/home/ubuntu/lib/oracle-cli'):
-- In what directory would you like to place the 'oci' executable? (leave blank to use '/home/ubuntu/bin'):
-- In what directory would you like to place the OCI scripts? (leave blank to use '/home/ubuntu/bin/oci-cli-scripts'):
-- What optional CLI packages would you like to be installed (comma separated names; press enter if you don't need any optional packages)?:
+To run a 'silent' install that accepts all default values with no prompts, use the --accept-all-defaults parameter.
 
-You can press Enter for the the default selection on all the questions or enter the path to a directory of your choice.
+Otherwise respond to the Installation Script Prompts if you wish to make a change.
+ 
 
-Verify OCI CLI installed:
+
+Verify OCI CLI installed. 
 
 ```bash { target="ubuntu:latest" }
 oci --version
+```
+
+ Run the command below to have OCI work after the initial install.
+
+```bash { target="ubuntu:latest" }
+source $HOME/.bashrc
+```
+
+
+Run the command below to get started on OCI.
+```bash { target="ubuntu:latest" }
+oci setup config
 ```
 
 After a successful log in, you can use the [OCI CLI](../oci-cli) and automation tools like [Terraform](../terraform) from the terminal.
