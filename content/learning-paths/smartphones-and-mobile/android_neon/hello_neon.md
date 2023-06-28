@@ -15,9 +15,9 @@ You will also need a Armv8 powered smartphone running Android to run your applic
 
 ## Overview
 
-Do not repeat yourself (DRY) is one of the major principles of software development. Following this principle means reusing your code using functions. However, invoking a function adds extra overhead. To reduce this overhead, compilers take advantage of built-in functions called intrinsics. The compiler replaces the intrinsics that are used in high-level programming languages, for example C/C++, with mostly 1:1 mapped assembly instructions.
+Do not repeat yourself (DRY) is one of the major principles of software development. Following this principle means reusing your code using functions. However, invoking a function adds extra overhead. In certain cases compilers can reduce this overhead by taking advantage of built-in functions called intrinsics. The compiler replaces the intrinsics that are used in high-level programming languages, for example C/C++, with mostly 1:1 mapped assembly instructions.
 
-To further improve performance, you need to use assembly code. However, with Arm Neon intrinsics you can avoid the complication of writing assembly functions. Instead you only need to program in C/C++ and call the intrinsics or instruction functions that are declared in the `arm_neon.h` header file. Neon intrinsics can help improve the performance of your application.
+To further improve performance, you need to use assembly code. However, with Arm Neon intrinsics you can avoid the complication of writing assembly functions. Instead you only need to program in C/C++ and call the intrinsics or instruction functions that are declared in the `arm_neon.h` header file. Neon intrinsics can improve the performance of your application.
 
 [Arm Neon intrinsics technology](https://developer.arm.com/architectures/instruction-sets/intrinsics/) is an advanced Single Instruction Multiple Data (SIMD) architecture extension for Arm processors. SIMD performs the same operation on a sequence, or vector, of data during a single CPU cycle.
 
@@ -145,9 +145,8 @@ BUILD SUCCESSFUL in 2m 44s
 Build Analyzer results available
 ```
 
-10. Run this application on an 64-bit Arm powered smartphone running Android. We ran the app on a Google Pixel 7 phone using a USB cable connected to the development machine running Android Studio. You can also pair your phone over Wi-Fi.
-
-Select `Tools->Device Manager`. Select the `Physical` tab and your connected phone should show up on the list of devices as shown in the image below:
+10. Run this application on an 64-bit Arm powered smartphone running Android. We ran the app on a Google Pixel 7 phone using a USB cable connected to the development machine running Android Studio. You can also pair your phone over Wi-Fi.   
+Connect your device and select `Tools->Device Manager`. Select the `Physical` tab and your connected phone should show up on the list of devices as shown in the image below:
 
 ![img6](neon6.png)
 

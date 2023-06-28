@@ -336,8 +336,21 @@ ads-breadcrumbs {
 
 
 
-
-
+html[theme="dark"] .orchard-breeze-text {
+    background: -webkit-linear-gradient(left,var(--arm-green), var(--arm-light-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+html[theme="dark"] .fullbourn-sunrise-text {
+    background: -webkit-linear-gradient(left,var(--arm-yellow), var(--arm-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+html[theme="dark"] .minhang-mist-text {
+    background: -webkit-linear-gradient(left,var(--arm-light-blue), var(--arm-light-grey));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 
   
