@@ -62,10 +62,6 @@ Terraform will zip the Lambda source code so the source needs to be separated fr
 
 3. Using a text editor, save the code below in a file called `main.tf`
 
-Change the `main.tf` `provider` section and update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
-
-After editing the `provider` section, save the file.
-
 ```console
 provider "aws" {
   region = "us-east-1"
@@ -94,17 +90,17 @@ data "aws_iam_policy_document" "policy" {
 
 resource "aws_iam_role" "iam_for_lambda" {
   name               = "iam_for_lambda"
-  assume_role_policy = "${data.aws_iam_policy_document.policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.policy.json
 }
 
 resource "aws_lambda_function" "lambda" {
-  function_name = "indexjs"
-  filename         = "${data.archive_file.lambda_zip_dir.output_path}"
-  source_code_hash = "${data.archive_file.lambda_zip_dir.output_base64sha256}"
-  role    = "${aws_iam_role.iam_for_lambda.arn}"
-  handler = "index.handler"
-  runtime = "nodejs18.x"
-  architectures = ["arm64"]
+  function_name    = "indexjs"
+  filename         = data.archive_file.lambda_zip_dir.output_path
+  source_code_hash = data.archive_file.lambda_zip_dir.output_base64sha256
+  role             = aws_iam_role.iam_for_lambda.arn
+  handler          = "index.handler"
+  runtime          = "nodejs18.x"
+  architectures    = ["arm64"]
 }
 
 data "aws_lambda_invocation" "example" {
@@ -119,16 +115,15 @@ JSON
 }
 
 output "result" {
-  value = "${data.aws_lambda_invocation.example.result}"
+  value = data.aws_lambda_invocation.example.result
 }
-
 ```
 
 4. Using a text editor, save the code below in a file called `output.tf`
 
 ```console
 output "lambda" {
-  value = "${aws_lambda_function.lambda.qualified_arn}"
+  value = aws_lambda_function.lambda.qualified_arn
 }
 ```
 

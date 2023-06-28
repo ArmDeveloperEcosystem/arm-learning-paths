@@ -34,10 +34,6 @@ This example doesn't place the Python source code in a subdirectory, leave it in
 
 2. Using a text editor, save the code below in a file called `main.tf`
 
-Change the `main.tf` `provider` section and update all 3 values to use your preferred AWS region and your AWS access key ID and secret access key.
-
-After editing the `provider` section, save the file.
-
 ```console
 provider "aws" {
   region = "us-east-1"
@@ -48,7 +44,7 @@ provider "archive" {}
 data "archive_file" "lambda_zip_dir" {
   type        = "zip"
   output_path = "python_lambda.zip"
-  source_file  = "python_lambda.py"
+  source_file = "python_lambda.py"
 }
 data "aws_iam_policy_document" "policy" {
   statement {
@@ -66,17 +62,17 @@ data "aws_iam_policy_document" "policy" {
 
 resource "aws_iam_role" "iam_for_lambda" {
   name               = "iam_for_lambda"
-  assume_role_policy = "${data.aws_iam_policy_document.policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.policy.json
 }
 
 resource "aws_lambda_function" "lambda" {
-  function_name = "python_lambda"
-  filename         = "${data.archive_file.lambda_zip_dir.output_path}"
-  source_code_hash = "${data.archive_file.lambda_zip_dir.output_base64sha256}"
-  role    = "${aws_iam_role.iam_for_lambda.arn}"
-  handler = "python_lambda.lambda_handler"
-  runtime = "python3.8"
-  architectures = ["arm64"]
+  function_name    = "python_lambda"
+  filename         = data.archive_file.lambda_zip_dir.output_path
+  source_code_hash = data.archive_file.lambda_zip_dir.output_base64sha256
+  role             = aws_iam_role.iam_for_lambda.arn
+  handler          = "python_lambda.lambda_handler"
+  runtime          = "python3.8"
+  architectures    = ["arm64"]
 }
 
 data "aws_lambda_invocation" "example" {
@@ -91,7 +87,7 @@ JSON
 }
 
 output "result" {
-  value = "${data.aws_lambda_invocation.example.result}"
+  value = data.aws_lambda_invocation.example.result
 }
 ```
 
@@ -99,7 +95,7 @@ output "result" {
 
 ```console
 output "lambda" {
-  value = "${aws_lambda_function.lambda.qualified_arn}"
+  value = aws_lambda_function.lambda.qualified_arn
 }
 ```
 

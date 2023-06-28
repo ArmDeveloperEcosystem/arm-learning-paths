@@ -24,23 +24,23 @@ File 1: `providers.tf` sets versions for the providers used by the configuration
 terraform {
   required_providers {
     aws = {
-      source  = "hashicorp/aws"
+      source = "hashicorp/aws"
     }
 
     random = {
-      source  = "hashicorp/random"
+      source = "hashicorp/random"
     }
 
     tls = {
-      source  = "hashicorp/tls"
+      source = "hashicorp/tls"
     }
 
     cloudinit = {
-      source  = "hashicorp/cloudinit"
+      source = "hashicorp/cloudinit"
     }
 
     kubernetes = {
-      source  = "hashicorp/kubernetes"
+      source = "hashicorp/kubernetes"
     }
   }
 }
@@ -167,7 +167,7 @@ module "eks" {
   subnet_ids = module.vpc.public_subnets
 
   eks_managed_node_group_defaults = {
-    ami_type = "AL2_ARM_64"
+    ami_type                              = "AL2_ARM_64"
     attach_cluster_primary_security_group = true
     # Disabling and using externally provided security groups
     create_security_group = false
@@ -175,11 +175,11 @@ module "eks" {
 
   eks_managed_node_groups = {
     one = {
-      name = "node-group-1"
-      instance_types = ["t4g.large"]
-      min_size     = 1
-      max_size     = 3
-      desired_size = 2
+      name                    = "node-group-1"
+      instance_types          = ["t4g.large"]
+      min_size                = 1
+      max_size                = 3
+      desired_size            = 2
       pre_bootstrap_user_data = <<-EOT
       echo 'foo bar'
       EOT
@@ -189,11 +189,11 @@ module "eks" {
     }
 
     two = {
-      name = "node-group-2"
-      instance_types = ["t4g.large"]
-      min_size     = 1
-      max_size     = 2
-      desired_size = 1
+      name                    = "node-group-2"
+      instance_types          = ["t4g.large"]
+      min_size                = 1
+      max_size                = 2
+      desired_size            = 1
       pre_bootstrap_user_data = <<-EOT
       echo 'foo bar'
       EOT

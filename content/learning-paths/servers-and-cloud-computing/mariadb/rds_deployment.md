@@ -39,8 +39,7 @@ To deploy an RDS instance of MariaDB you can use Terraform files.
 
 1. Use a text editor to add the contents below to a new file named `main.tf`.
 
-```terraform
-
+```console
 provider "aws" {
   region = "us-east-1"
 }
@@ -58,31 +57,29 @@ resource "aws_db_instance" "Testing_mariadb" {
   engine_version       = "10.6.10"
   instance_class       = "db.m6g.large"
   parameter_group_name = "mariadb"
-  skip_final_snapshot  =  true
-  username              = var.username
-  password              = var.password
-  availability_zone     = "us-east-2a"
+  skip_final_snapshot  = true
+  username             = var.username
+  password             = var.password
+  availability_zone    = "us-east-2a"
   publicly_accessible  = true
-  deletion_protection   = false
+  deletion_protection  = false
 
   tags = {
-        name                 = "TEST MariaDB"
+    name = "TEST MariaDB"
   }
 }
-
 ```  
 
 2. Use a text editor to add the contents below to a new file named `credential.tf`.
 
-```terraform
-variable "username"{
-      default  = "admin"
+```console
+variable "username" {
+  default = "admin"
 }
 
-variable "password"{
-      default  = "Armtest"    #we_can_choose_any_password, except special_characters.
+variable "password" {
+  default = "Armtest" #we_can_choose_any_password, except special_characters.
 }
-
 ```
 
 This file is used for configuring your password.  

@@ -51,12 +51,12 @@ Scroll down to see the information you need to change in `main.tf`
 ```console
 provider "google" {
   project = "project_id"
-  region = "us-central1"
-  zone = "us-central1-a"
+  region  = "us-central1"
+  zone    = "us-central1-a"
 }
 
 resource "google_compute_instance" "KAFKA_TEST" {
-  name         = "kafkatest-${count.index+1}"
+  name         = "kafkatest-${count.index + 1}"
   count        = "7"
   machine_type = "t2a-standard-1"
 
@@ -73,24 +73,24 @@ resource "google_compute_instance" "KAFKA_TEST" {
     }
   }
   metadata = {
-     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
 
 resource "google_compute_firewall" "rules" {
-  project     = "project_id"
-  name        = "my-firewall-rule"
-  network     = "default"
-  description = "Open ssh connection and kafka port"
+  project       = "project_id"
+  name          = "my-firewall-rule"
+  network       = "default"
+  description   = "Open ssh connection and kafka port"
   source_ranges = ["0.0.0.0/0"]
-  
+
   allow {
     protocol = "icmp"
   }
 
   allow {
-    protocol  = "tcp"
-    ports     = ["22", "2181", "3888", "2888", "9092"]
+    protocol = "tcp"
+    ports    = ["22", "2181", "3888", "2888", "9092"]
   }
 }
 
@@ -98,9 +98,9 @@ resource "google_compute_network" "default" {
   name = "test-network"
 }
 resource "local_file" "inventory" {
-    depends_on=[google_compute_instance.KAFKA_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [google_compute_instance.KAFKA_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [zookeeper1]
 ${google_compute_instance.KAFKA_TEST[0].network_interface.0.access_config.0.nat_ip}
 [zookeeper2]
@@ -127,7 +127,6 @@ kf_2_ip=${google_compute_instance.KAFKA_TEST[4].network_interface.0.access_confi
 kf_3_ip=${google_compute_instance.KAFKA_TEST[5].network_interface.0.access_config.0.nat_ip}
                 EOF
 }
-
 ```
 
 In the `provider` and `google_compute_firewall` sections, update the `project_id` with your value.

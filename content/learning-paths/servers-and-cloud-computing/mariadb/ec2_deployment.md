@@ -48,16 +48,16 @@ Before installing MariaDB, you need to create an AWS EC2 instance.
    
 Use a text editor to add the contents below to a new file named `main.tf`.
 
-```terraform
+```console
 provider "aws" {
   region = "us-east-1"
 }
 
 resource "aws_instance" "Mariadb_TEST" {
-  ami           = "ami-0ca2eafa23bc3dd01"
-  instance_type = "t4g.small"
-  security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = aws_key_pair.deployer.key_name
+  ami             = "ami-0ca2eafa23bc3dd01"
+  instance_type   = "t4g.small"
+  security_groups = [aws_security_group.Terraformsecurity.name]
+  key_name        = aws_key_pair.deployer.key_name
   tags = {
     Name = "Mariadb_TEST"
   }
@@ -75,24 +75,24 @@ resource "aws_security_group" "Terraformsecurity" {
   vpc_id      = aws_default_vpc.main.id
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 3306
-    to_port          = 3306
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
@@ -101,19 +101,18 @@ resource "aws_security_group" "Terraformsecurity" {
 }
 
 resource "local_file" "inventory" {
-    depends_on=[aws_instance.Mariadb_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [aws_instance.Mariadb_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [all]
 ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.Mariadb_TEST.public_ip} ansible_user=ubuntu
                 EOF
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "id_rsa"
-        public_key = file("~/.ssh/id_rsa.pub")
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
 }
-
 ```
 
 There are 2 optional changes you can make to the `main.tf` file. 

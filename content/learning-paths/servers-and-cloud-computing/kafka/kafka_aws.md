@@ -53,13 +53,13 @@ provider "aws" {
 }
 
 resource "aws_instance" "KAFKA_TEST" {
-count         = "7"
-ami           = "ami-0ca2eafa23bc3dd01"
-instance_type = "t4g.small"
-security_groups= [aws_security_group.Terraformsecurity.name]
-key_name = aws_key_pair.deployer.key_name  
-tags = {
-  Name = "KAFKA_TEST"
+  count           = "7"
+  ami             = "ami-0ca2eafa23bc3dd01"
+  instance_type   = "t4g.small"
+  security_groups = [aws_security_group.Terraformsecurity.name]
+  key_name        = aws_key_pair.deployer.key_name
+  tags = {
+    Name = "KAFKA_TEST"
   }
 }
 
@@ -74,45 +74,45 @@ resource "aws_security_group" "Terraformsecurity" {
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.main.id
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 2181
-    to_port          = 2181
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
+    description = "TLS from VPC"
+    from_port   = 2181
+    to_port     = 2181
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 9092
-    to_port          = 9092
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
+    description = "TLS from VPC"
+    from_port   = 9092
+    to_port     = 9092
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 2888
-    to_port          = 2888
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
+    description = "TLS from VPC"
+    from_port   = 2888
+    to_port     = 2888
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 3888
-    to_port          = 3888
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
+    description = "TLS from VPC"
+    from_port   = 3888
+    to_port     = 3888
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   tags = {
     Name = "Terraformsecurity"
@@ -120,9 +120,9 @@ resource "aws_security_group" "Terraformsecurity" {
 }
 
 resource "local_file" "inventory" {
-    depends_on=[aws_instance.KAFKA_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [aws_instance.KAFKA_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [zookeeper1]
 ${aws_instance.KAFKA_TEST[0].public_ip}
 [zookeeper2]
@@ -150,8 +150,8 @@ kf_3_ip=${aws_instance.KAFKA_TEST[5].public_ip}
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "id_rsa"
-        public_key = file("~/.ssh/id_rsa.pub")
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 ```
 Make the changes listed below in **main.tf** to match your account settings.
