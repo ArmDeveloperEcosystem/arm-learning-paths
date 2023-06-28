@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build and run in the cloud"
+title: "Build and run ArmRAL"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -10,104 +10,141 @@ layout: "learningpathall"
 
 The Arm RAN Acceleration Library (ArmRAL) contains a set of functions for accelerating telecommunications applications such as, but not limited to, 5G Radio Access Networks (RANs).
 
-## Select your target hardware
+ArmRAL is an open-source code base under the permissive BSD license.
 
-### Local development platform
+## Before you begin
 
-It may be that you have access to application specific hardware already. Else you may wish to use an [Arm-based desktop](/learning-paths/laptops-and-desktops/intro/).
+A development machine is required to build and run ArmRAL.
 
-### Launch an Arm-based instance from Cloud Service Provider
+You can use a local Arm server or [Arm laptop or desktop machine](/learning-paths/laptops-and-desktops/intro/) as a development platform.
 
-Most Cloud Service Providers (CSPs) now provide Arm-based instances.
+Alternatively, you can use an Arm-based instance from a cloud service provider. Refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for cloud options.
 
-See [these instructions](/learning-paths/servers-and-cloud-computing/csp/) to launch an Arm-based instance.
+The instructions are for Ubuntu or Debian Linux distributions.
 
 ## Install necessary build tools
 
-Full details are given in the `Tools` section of the supplied release notes.
+Install the necessary tools to build the code:
+
 ```bash { env="DEBIAN_FRONTEND=noninteractive" }
 sudo apt update
 sudo -E apt install -y build-essential cmake linux-tools-common gcovr doxygen
 ```
-## Download and unpack the library
 
-The library can be downloaded from the [Arm Developer](https://developer.arm.com/downloads/-/arm-ran-acceleration-library) website.
+## Download the source code
 
-Untar the package to your instance:
-```bash { pre_cmd="wget https://developer.arm.com/-/media/Arm%20Developer%20Community/Downloads/Arm%20RAN%20Acceleration%20Library/arm-ran-acceleration-library-23.04-aarch64.tar.gz" }
-tar -xf arm-ran-acceleration-library-23.04-aarch64.tar.gz
-```
-### Create build folder
-Navigate into the library directory, then create and enter a build folder (naming is arbitrary)
+The source code is available from the [GitLab repository](https://gitlab.arm.com/networking/ral/-/tree/main)
+
+Use `git` to download the code:
+
 ```bash
-cd arm-ran-acceleration-library-23.04
+git clone https://git.gitlab.arm.com/networking/ral.git
+```
+
+## Create a build folder
+
+Navigate to the source directory and create an empty build directory: 
+
+```bash
+cd ral
 mkdir build
 cd build
 ```
-## Build the library as appropriate
+
+## Inspect the Arm processor features
 
 The Arm Architecture defines three vector processing technologies.
-- [Neon](https://developer.arm.com/Architectures/Neon) (Advanced SIMD - `asimd`)
-- [Scalable Vector Extension](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions) (SVE)
-- and [SVE2](https://developer.arm.com/documentation/102340/)
 
-To inspect what features are available on your platform, use:
+- [Neon](https://developer.arm.com/Architectures/Neon) (`asimd`)
+- [Scalable Vector Extension](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions) (`sve`)
+- [SVE2](https://developer.arm.com/documentation/102340/) (`sve2`)
+
+To check which features are available on your platform, use:
+
 ```bash
 cat /proc/cpuinfo
 ```
-### Configure build
 
-Build the library along with the supplied validation tests.
+Look at the flags and check for values `asimd`, `sve`, or `sve2`.
 
-If your platform supports (only) Neon, set up build with:
-```bash { cwd="arm-ran-acceleration-library-23.04/build" }
+Use the features available on your hardware when you run `cmake` in the next section.
+
+## Configure the build
+
+If your platform supports only Neon (`asimd`), set up the build with:
+
+```bash { cwd="ral/build" }
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=NEON  ..
 ```
 
-If you have SVE support, set up build with:
+If you have SVE support, set up the build with:
+
 ```console
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=SVE  ..
 ```
 
-If you have SVE2 support, set up build with:
+If you have SVE2 support, set up the build with:
+
 ```console
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=SVE2  ..
 ```
 
-The default install location is `/usr/local`. If you do not have write access to this directory, add:
-```console
--DCMAKE_INSTALL_PREFIX=<path>
-```
+The default install location is `/usr/local`. If you do not have write access to this directory, set a different installation location by adding `-DCMAKE_INSTALL_PREFIX=<path>` to the `cmake` command.
 
-to your `cmake` command line above, for example:
+For example:
+
 ```console
 cmake -DBUILD_TESTING=On -DARMRAL_ARCH=SVE -DCMAKE_INSTALL_PREFIX=/home/ubuntu/armral ..
 ```
 
-For a full description of available build options, see the [Arm RAN Acceleration Library Reference Guide](https://developer.arm.com/documentation/102249).
+## Build the code
 
-### Build
-To build the library, use:
-```bash { cwd="arm-ran-acceleration-library-23.04/build" }
+Build the library using `make`:
+
+```bash { cwd="ran/build" }
 make
 ```
 
 ## Install the library
-To install the library, use the command:
-```bash { cwd="arm-ran-acceleration-library-23.04/build" }
+
+Install the library: 
+
+```bash { cwd="ran/build" }
 sudo make install
 ```
 
-## Build and run tests
-To build and run the supplied benchmark example, use:
-```bash { cwd="arm-ran-acceleration-library-23.04/build",ret_code="0" }
+## Run the tests
+
+Build and run the supplied benchmark example by running:
+
+```bash { cwd="ral/build",ret_code="0" }
 make check
 ```
 
-You will observe run time errors if you build for optimization features that are not available:
+If everything runs correctly you see the message:
+
+```output
+100% tests passed, 0 tests failed out of 56
+```
+
+You will see errors if you build for optimization features that are not available:
+
+The output will be similar to:
+
 ```output
 ...
-     Start  5: arm_fir_filter_cs16
-5/55 Test  #5: arm_fir_filter_cs16 ..................***Exception: Illegal  0.12 sec
+56/56 Test #56: tail_biting_convolutional_decoding ...***Exception: Illegal  0.05 sec
+
+2% tests passed, 55 tests failed out of 56
+
+Total Test time (real) =   2.80 sec
+
+The following tests FAILED:
+	  1 - fft_cf32 (ILLEGAL)
+
 ...
 ```
+
+You are now ready to create applications with ArmRAL.
+
+For a full description of available build options, see the [Arm RAN Acceleration Library Reference Guide](https://developer.arm.com/documentation/102249).

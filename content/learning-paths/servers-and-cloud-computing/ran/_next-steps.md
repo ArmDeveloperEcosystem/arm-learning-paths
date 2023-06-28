@@ -29,6 +29,10 @@ further_reading:
         title: 5G RAN for Dummies
         link: https://www.arm.com/resources/dummies-guide/5g-ran
         type: documentation
+    - resource:
+        title: The next chapter for Arm RAN Acceleration Library Open-sourcing the code base & accelerating adoption
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/arm-ral-is-now-open-source
+        type: blog
 
 
 # ================================================================================
