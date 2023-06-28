@@ -16,6 +16,7 @@ Windows on Arm laptops can also be used for software development.
 
 - [Lenovo ThinkPad X13s](https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadx/thinkpad-x13s-(13-inch-snapdragon)/len101t0019)
 - [Surface Pro 9 with 5G](https://www.microsoft.com/en-us/d/surface-pro-9/93vkd8np4fvk)
+- [Dell Inspiron 14](https://www.dell.com/en-us/shop/dell-laptops/inspiron-14-laptop/spd/inspiron-14-3420-laptop)
 
 
 ### ChromeOS

@@ -19,7 +19,14 @@ author_primary: Florent Lebeau
 ### Link to official documentation
 official_docs: https://www.linaroforge.com/documentation/
 
-author_primary: Florent Lebeau
+### test_automation
+test_images:
+- ubuntu:latest
+test_link: null
+test_maintenance: true
+test_status:
+- passed
+
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -34,70 +41,53 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 Linaro Forge consists of
 * [Linaro DDT](https://www.linaroforge.com/linaroDdt/) for parallel high-performance application debugging
 * [Linaro MAP](https://www.linaroforge.com/linaroMap/) for performance profiling and optimization advice, and
-* [Linaro Performance Reports](https://docs.linaroforge.com/22.1.3/html/101136_arm-forge-user-guide/performance_reports/index.html) for summarizing and characterizing both scalar and MPI application performance.
+* [Linaro Performance Reports](https://www.linaroforge.com/linaroPerformanceReports/) for summarizing and characterizing both scalar and MPI application performance.
 
 ## Supported platforms
 
-Linaro Forge runs on Linux and multiple architectures.
+Linaro Forge runs on Linux hosts and multiple architectures. See the Linaro Forge [documentation](https://docs.linaroforge.com/latest/html/forge/supported_platforms/reference_table.html) for a full list of supported configurations.
 
-| Architecture | Operating systems | MPI | Compilers | Accelerators |
-| ------------ | ----------------- | --- | --------- | ------------ |
-| Armv8 (AArch64) | Red Hat Enterprise Linux / CentOS 7 and 8 <br />SuSE Linux Enterprise Server 12 and 15 <br />Ubuntu 16.04 to 20.04 | Cray MPT <br />HPE MPI <br />MPICH <br />MVAPICH2 <br />Open MPI 3 to 4 | Arm Compiler for Linux <br />Cray Compiling Environment <br />GNU C/C++/Fortran Compiler <br />NVIDIA HPC (PGI) Compiler | Nvidia CUDA Toolkit 11.0 to 11.1 |
-| Intel and AMD (x86_64) | Red Hat Enterprise Linux/CentOS 7 and 8 <br />SuSE Linux Enterprise Server 12 and 15 <br />Ubuntu 16.04 to 20.04 | Cray MPT <br />HPE MPI <br />Intel MPI <br />MPICH <br />MVAPICH2 <br />Open MPI 3 to 4 | Cray Compiling Environment <br />GNU C/C++/Fortran Compiler <br />Intel Parallel Studio <br />NVIDIA HPC (PGI) Compiler | Nvidia CUDA Toolkit 9.0 to 11.1 |
-| IBM Power (ppc64le) | Red Hat Enterprise Linux/CentOS 7 and 8 | IBM Spectrum MPI <br />Open MPI 3 to 4 | GNU C/C++/Fortran Compiler <br />IBM XL Compiler <br />NVIDIA HPC (PGI) Compiler | Nvidia CUDA Toolkit 9.2 to 11.1 |
-
-Linaro Forge provides native remote clients for other operating systems to connect to your cluster where you can run, debug, profile, edit, and compile your application files.
-
-| Architecture | Operating systems |
-| ------------ | ----------------- |
-| Armv8 (AArch64) | MacOS 10.13 (High Sierra), and above. <br /> Any of the Linux platforms listed above. |
-| Intel and AMD (x86_64) | MacOS 10.13 (High Sierra), and above. <br />Any of the Linux platforms listed above. <br /> Windows 7 and above. |
+This install guide assumes an Arm AArch64 platform running Ubuntu Linux.
 
 ## Download 
 
-Download the installation package from [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/)
+Download and extract the appropriate installation package from [Linaro Forge Downloads](https://www.linaroforge.com/downloadForge/).
 
-## Install on Linux
-
-Extract the installation package and run the installer executable with these commands:
-
-```bash
-tar xf arm-forge-<version>-linux-<arch>.tar
-cd arm-forge-<version>-linux-<arch>
+```bash { target="ubuntu:latest" }
+sudo apt install wget
+wget https://downloads.linaroforge.com/23.0/linaro-forge-23.0-linux-aarch64.tar
+tar -xf linaro-forge-23.0-linux-aarch64.tar
+cd linaro-forge-23.0-linux-aarch64
 ```
 
-For example, on an Arm machine:
+## Installation
 
-```bash
-tar xf arm-forge-22.1.4-linux-aarch64.tar
-cd arm-forge-22.1.4-linux-aarch64
+### Linux host
+
+Run the installer from the command line with:
+```
+./textinstall.sh [--accept-license] [install_dir]
+```
+If no install directory is specified, you will be prompted to specify this while the installer runs.
+
+To install to the default directory, non-interactively:
+```bash { target="ubuntu:latest" }
+./textinstall.sh --accept-license /home/ubuntu/linaro/forge/23.0
 ```
 
-Run the installer and follow the steps. 
+### Install on MacOS (remote client only)
 
-To install with the graphical installer, run:
+Drag and drop the client application bundle icon into the Applications directory.
 
-```bash
-./installer
-```
+### Install on Windows (remote client only)
 
-To install with the text-mode installer, run:
-
-```bash
-./textinstall.sh
-```
-
-## Install on MacOS (remote client only)
-
-Drag and drop the client application bundle icon into the Applications directory
-
-## Install on Windows (remote client only)
-
-Run the Windows file executable to install the Linaro Forge Remote Client
+Run the Windows file executable to install the Linaro Forge Remote Client.
 
 ## Setting up the product license
 
-You must install a license file on a machine running Linaro Forge tools to debug or profile. Setup instructions can be found [License Server User Guide](https://docs.linaroforge.com/22.1.3/html/101169_arm-licence-server-user-guide/index.html).
+You must install a license file on a machine running Linaro Forge tools to debug or profile.
+
+See the Linaro Forge [documentation](https://docs.linaroforge.com/latest/html/forge/forge/licensing/index.html) for set up instructions depending on the type of license you have.
 
 You do not need to install a license file on a machine running Linaro Forge Remote Client for connecting remotely to Linaro Forge tools on a remote system.
 

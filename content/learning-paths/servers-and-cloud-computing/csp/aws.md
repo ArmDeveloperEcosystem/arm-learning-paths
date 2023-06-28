@@ -35,9 +35,9 @@ Note the `region` you have logged into (for example `us-east-1`) is displayed in
 
 ![alt-text #center](https://user-images.githubusercontent.com/67620689/235883425-70e3e428-1f31-4603-9893-0c4034166615.png "Select an appropriate region")
 
-Navigate to `EC2 Dashboard`, either by searching (`Alt+S`) for `EC2`, or via `Services` > `Compute` > `EC2`.
+Navigate to the `EC2 Dashboard`, either by searching (`Alt+S`) for `EC2`, or via `Services` > `Compute` > `EC2`.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235869564-b45b3d54-f08e-4719-b87e-6c697d26cf49.PNG "Navigate to EC2 Dashboard")
+![alt-text #center](https://user-images.githubusercontent.com/97123064/246459829-1ecc75fd-a916-4018-87cf-2f804836aaee.png "Navigate to the EC2 Dashboard")
 
 Use the `Launch instance` pull-down menu and select `Launch instance`.
 
@@ -129,6 +129,11 @@ For example if using `ubuntu` image:
 ```console
 ssh -i <private_key> ubuntu@<public_ip_address>
 ```
+
+{{% notice Note %}}
+Replace `<private_key>` with the private key on your local machine and `<public_ip_address>` with the public IP of the target VM.
+{{% /notice %}}
+
 Terminal applications such as [PuTTY](https://www.putty.org/), [MobaXterm](https://mobaxterm.mobatek.net/) and similar can be used.
 
 Different Linux distributions have different default usernames you can use to connect. 

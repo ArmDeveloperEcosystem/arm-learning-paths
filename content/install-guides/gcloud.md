@@ -24,7 +24,7 @@ The Google Cloud CLI, `gcloud`, allows you to run commands in your Google Cloud 
 
 `gcloud` is available for Windows, macOS, Linux and supports the Arm architecture. 
 
-## Introduction
+## Before you begin
 
 Use the documentation link to find alternative installation options. 
 
@@ -91,16 +91,22 @@ Run the following command to obtain user access credentials:
 gcloud auth application-default login
 ```
 
-A URL is generated as the output of the command:
+The command outputs a uniquely generated URL and a prompt to enter an authorization code, as shown below:
 
 ![image #center](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
 
-Open the URL in the browser and copy the authentication code.
+Open the URL in your browser and copy the unique authentication code.
 
-![image #center](https://user-images.githubusercontent.com/67620689/204244780-6c0542ab-4240-4be3-8272-fb1e6e38ec08.PNG)
+![image #center](https://user-images.githubusercontent.com/97123064/247288608-abb5945a-d57e-40ad-9bf6-de8df9757ea2.png)
 
-Now paste the authentication code as shown below:
+Now, paste the authentication code as shown below. The following output indicates a successful log in:
 
-![image #center](https://user-images.githubusercontent.com/67620689/204242841-58e30570-1f88-4755-b3d2-32d7052a9b5d.PNG)
+```output
+Enter authorization code: 4/0AfgeXvsdW0jpvy3dBg5SH03DryspZyV5nz0j3lIDg4LwjL1AgikjjJYHgWlcap3Xtb0ioA
+
+Credentials saved to file: [/home/ubuntu/.config/gcloud/application_default_credentials.json]
+
+These credentials will be used by any library that requests Application Default Credentials (ADC).
+```
 
 After a successful log in, you will be able to use the `Google Cloud CLI` and automation tools like [Terraform](../terraform) from the terminal.

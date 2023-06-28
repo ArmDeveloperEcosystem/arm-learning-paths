@@ -7,7 +7,7 @@ weight: 6 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Now that you have seen an example Performance Analyzer report, you can use it with your own application.
+Now that you have seen an example Performance Advisor report, you can use it with your own application.
 
 ## Before you begin
 
@@ -17,21 +17,21 @@ Build your application, and setup Android device as per previous [instructions](
 
 ## Connect to the device
 
-Open a terminal or command prompt, and navigate to the `Arm Mobile Studio` install directory. Therein, locate the `lwi_me.py` script:
+Open a terminal or command prompt, and navigate to the `Arm Mobile Studio` install directory. Therein, locate the `streamline_me.py` script:
 
 ```console
 cd <installation_directory>/streamline/bin/android
 ```
-To run the script, use:
+Run the script, enabling frame boundaries, with:
 ```console
-python3 lwi_me.py <options>
+python3 streamline_me.py --lwi-mode=counters
 ```
 
-The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-lwi-me-py-script-options), else can be seen with:
-
+To see all available options, use:
 ```console
-python3 lwi_me.py -h
+python3 streamline_me.py --help
 ```
+See the [Get started with Performance Advisor Tutorial](https://developer.arm.com/documentation/102478/latest/Run-the-streamline-me-py-script) for full instructions.
 
 The script returns a numbered list of the Android package names for the debuggable applications that are installed on your device. Enter the number of the application you want to profile.
 
@@ -45,13 +45,13 @@ Start the application on the device, and interact as desired for the profiling r
 
 When satisfied, click on `Stop capture`. Note the location where the captured data is stored.
 
-Return to your terminal, and terminate the `lwi_me.py` script.
+Return to your terminal, and terminate the `streamline_me.py` script.
 
 ## Generate a HTML performance report
 
 In the terminal window, navigate to the stored data folder. List contents with `dir` or `ls` depending on host. The Streamline data will be in a `.apc` directory.
 
-Run Performance Analyzer on the appropriate folder to generate the report which can then be opened with any browser. The default name is `report.html`.
+Run `Performance Advisor` on the appropriate folder to generate the report which can then be opened with any browser. The default name is `report.html`.
 ```console
 streamline-cli -pa <options> my_capture.apc
 ```
@@ -67,7 +67,7 @@ This feature is particularly useful when used within a [CI workflow](https://dev
 
 In the terminal window, navigate to the stored data folder. List contents with `dir` or `ls` depending on host. The Streamline data will be in a `.apc` directory.
 
-Run Performance Analyzer on the appropriate folder to generate the report (named `report.json` in below):
+Run Performance Advisor on the appropriate folder to generate the report (named `report.json` in below):
 ```console
 streamline-cli -pa --type=json:report.json <other_options> my_capture.apc
 ```

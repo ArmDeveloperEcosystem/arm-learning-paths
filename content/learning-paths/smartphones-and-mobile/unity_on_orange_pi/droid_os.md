@@ -15,7 +15,7 @@ Currently, all files and documentation are found on a Google Drive belonging to 
 [Manual](https://drive.google.com/drive/folders/1Bre2q0bGgXQuQlYaYDMvwstpvtHLmcgX)
 [Droid OS Image and SDDiskTool_v1.72 Imaging Software](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-pi-5.html)
 
-## Download the Droid OS Image
+## Download the Droid OS image
 
 1. Go to the [Orange Pi 5 support page](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/service-and-support/Orange-pi-5.html).
 
@@ -61,7 +61,7 @@ It is important to use the exact version of the SDDiskTool, version 1.72, otherw
 
 14. Insert the card into the Orange Pi 5 and then plug in the power.
 
-## Inital Setup
+## Initial setup
 
 There isn't much to set up initially, just a few small items. All developer options should be turned on by default, but you can double check.
 

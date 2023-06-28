@@ -28,7 +28,7 @@ The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/reference
 
 `kubectl` is available for Windows, macOS, Linux and supports the Arm architecture.
 
-## Introduction
+## Before you begin
 
 [General installation information](https://kubernetes.io/docs/tasks/tools/) is available which covers all supported operating systems, but it doesn't talk about Arm. 
 
