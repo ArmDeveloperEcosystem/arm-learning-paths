@@ -7,7 +7,7 @@ learning_objectives:
 - Build and install the Arm RAN Acceleration Library
 - Test the capabilities of your platform
 learning_path_main_page: 'yes'
-minutes_to_complete: 10
+minutes_to_complete: 15
 operatingsystems:
 - Linux
 prerequisites:
@@ -21,7 +21,7 @@ test_link: null
 test_maintenance: true
 test_status:
 - passed
-title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
+title: Get started with the Arm 5G RAN Acceleration Library (ArmRAL)
 tools_software_languages:
 - ArmRAL
 - 5G
