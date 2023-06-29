@@ -51,17 +51,16 @@ Using a text editor, save the code below in a file called `main.tf`
 Scroll down to see the information you need to change in `main.tf`
 
 ```console
-
 // instance creation
 provider "aws" {
   region = "us-east-1"
 }
 resource "aws_instance" "PSQL_TEST" {
-  ami           = "ami-0f9bd9098aca2d42b"
-  instance_type = "t4g.small"
-  security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = aws_key_pair.deployer.key_name
- 
+  ami             = "ami-0f9bd9098aca2d42b"
+  instance_type   = "t4g.small"
+  security_groups = [aws_security_group.Terraformsecurity.name]
+  key_name        = aws_key_pair.deployer.key_name
+
   tags = {
     Name = "PSQL_TEST"
   }
@@ -76,44 +75,44 @@ resource "aws_security_group" "Terraformsecurity" {
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.main.id
 
-ingress {
-    description      = "TLS from VPC"
-    from_port        = 5432
-    to_port          = 5432
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
-ingress {
-    description      = "TLS from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
- tags = {
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
     Name = "Terraformsecurity"
   }
- }
+}
 output "Master_public_IP" {
   value = [aws_instance.PSQL_TEST.public_ip]
 }
- resource "aws_key_pair" "deployer" {
-         key_name   = "id_rsa"
-         public_key = file("~/.ssh/id_rsa.pub")
-  }
+resource "aws_key_pair" "deployer" {
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
+}
 // Generate inventory file
 resource "local_file" "inventory" {
-    depends_on= [aws_instance.PSQL_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [aws_instance.PSQL_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
           [db_master]
-          ${aws_instance.PSQL_TEST.public_ip}         
+          ${aws_instance.PSQL_TEST.public_ip}
           [all:vars]
           ansible_connection=ssh
           ansible_user=ubuntu
