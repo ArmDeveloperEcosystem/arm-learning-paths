@@ -55,7 +55,12 @@ Install OCI using the command below.
 ```bash { target="ubuntu:latest" }
 bash -c "$(curl -L https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh)"
 ```
-To run a 'silent' install that accepts all default values with no prompts, use the --accept-all-defaults parameter.
+Hit return for the first prompt then run accept all. To run a 'silent' install that accepts all default values with no prompts, use the --accept-all-defaults parameter. 
+
+
+```bash { target="ubuntu:latest" }
+ --accept-all-defaults
+```
 
 Otherwise respond to the Installation Script Prompts if you wish to make a change.
  
@@ -78,5 +83,18 @@ Run the command below to get started on OCI.
 ```bash { target="ubuntu:latest" }
 oci setup config
 ```
+
+
+After 'oci setup config' login to the OCI web console to access your OCID and API key you will need this later.
+
+To locate your OCID you open the Profile menu and click Tenancy: <your_tenancy_name>.
+
+![alt-text #center](https://user-images.githubusercontent.com/89662128/249609571-34848e91-c4a5-4266-b5e3-45d48f797de9.png)
+
+
+To locate your API KEYS open your profile and click API KEYS:
+
+![alt-text #center](https://user-images.githubusercontent.com/89662128/249819544-faa03f40-6d4f-448a-aaef-25870cf3a48c.jpeg "Click add API key, from there generate your API key pair")
+
 
 After a successful log in, you can use the [OCI CLI](../oci-cli) and automation tools like [Terraform](../terraform) from the terminal.
