@@ -30,11 +30,11 @@ Add resources required to create a VM in `main.tf`.
 
 Add below code in `main.tf` file:
 
-```
+```console
 provider "google" {
   project = "project_id"
-  region = "us-central1"
-  zone = "us-central1-a"
+  region  = "us-central1"
+  zone    = "us-central1-a"
 }
 
 resource "google_compute_instance" "vm_instance" {
@@ -55,7 +55,7 @@ resource "google_compute_instance" "vm_instance" {
   }
 
   metadata = {
-     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
 ```

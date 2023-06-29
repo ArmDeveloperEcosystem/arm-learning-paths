@@ -28,15 +28,15 @@ resource "aws_db_instance" "Testing_Mysql" {
   engine_version       = "8.0.28"
   instance_class       = "db.t3.micro"
   parameter_group_name = "default.mysql8.0"
-  skip_final_snapshot  =  true
-  username              = var.username
-  password              = var.password
-  availability_zone     = "us-east-2a"
+  skip_final_snapshot  = true
+  username             = var.username
+  password             = var.password
+  availability_zone    = "us-east-2a"
   publicly_accessible  = true
-  deletion_protection   = false
+  deletion_protection  = false
 
   tags = {
-        name                 = "TEST MYSQL"
+    name = "TEST MYSQL"
   }
 }
 ``` 
@@ -48,14 +48,13 @@ To find the correct instance type for RDS, check the [list](https://aws.amazon.c
 Create a `credential.tf` file, for passing your secret keys and password. Here is the file content:
 
 ```console
-variable "username"{
-      default  = "admin"
+variable "username" {
+  default = "admin"
 }
 
-variable "password"{
-      default  = "Arm4test"    #we_can_choose_any_password, except special_characters.
+variable "password" {
+  default = "Arm4test" #we_can_choose_any_password, except special_characters.
 }
-
 ```
 
 Now, use the below Terraform commands to deploy the `main.tf` file.

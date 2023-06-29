@@ -31,19 +31,18 @@ Use a text editor to make the required edits to `main.tf`. You are changing from
 There are three required modifications to `main.tf`. Each change is marked with comments identified by **3 node change**.
 
 ```console
-
 // instance creation
 provider "aws" {
   region = "us-east-1"
 }
 // 3 node change: add the count line to specify 3 instances
 resource "aws_instance" "PSQL_TEST" {
-  count         = "3"
-  ami           = "ami-0f9bd9098aca2d42b"
-  instance_type = "t4g.small"
-  security_groups= [aws_security_group.Terraformsecurity.name]
-  key_name = aws_key_pair.deployer.key_name
- 
+  count           = "3"
+  ami             = "ami-0f9bd9098aca2d42b"
+  instance_type   = "t4g.small"
+  security_groups = [aws_security_group.Terraformsecurity.name]
+  key_name        = aws_key_pair.deployer.key_name
+
   tags = {
     Name = "PSQL_TEST"
   }
@@ -58,44 +57,44 @@ resource "aws_security_group" "Terraformsecurity" {
   description = "Allow TLS inbound traffic"
   vpc_id      = aws_default_vpc.main.id
 
-ingress {
-    description      = "TLS from VPC"
-    from_port        = 5432
-    to_port          = 5432
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
-ingress {
-    description      = "TLS from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
-egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
- tags = {
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+  tags = {
     Name = "Terraformsecurity"
   }
- }
-// 3 node change: replace the previous value = line with this line 
+}
+// 3 node change: replace the previous value = line with this line
 output "Master_public_IP" {
   value = [aws_instance.PSQL_TEST[0].public_ip, aws_instance.PSQL_TEST[1].public_ip, aws_instance.PSQL_TEST[2].public_ip]
 }
- resource "aws_key_pair" "deployer" {
-         key_name   = "id_rsa"
-         public_key = file("~/.ssh/id_rsa.pub")
-  }
+resource "aws_key_pair" "deployer" {
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
+}
 // Generate inventory file
 // 3 node change: replace the single public_ip line with the three shown here.
 resource "local_file" "inventory" {
-    depends_on= [aws_instance.PSQL_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [aws_instance.PSQL_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
           [db_master]
           ${aws_instance.PSQL_TEST[0].public_ip}
           ${aws_instance.PSQL_TEST[1].public_ip}
