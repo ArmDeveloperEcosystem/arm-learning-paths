@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for embedded software developers 
 learning_objectives: 
     - Instantiate Arm Virtual Hardware instances
     - Learn how to create Balena OS images for Arm Virtual Hardware
-    - Deploy pre-build Balena Hub applications on Arm Virtual Hardware
+    - Deploy pre-built Balena Hub applications on Arm Virtual Hardware
 
 prerequisites:
     - An account on the [Balena Cloud](balena-cloud.com) platform
@@ -28,7 +28,7 @@ operatingsystems:
     - Balena OS
 tools:
     - Arm Virtual Hardware
-    - AWS IoT Greengrass
+    - Balena Cloud
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
