@@ -35,7 +35,16 @@ You will next be prompted to select software components that you wish to include
 
 Click the `Options for target` icon.
 
-In the `Debug` tab, select `Models Cortex-M Debugger`. Click `Settings`, and browse for the FVP provided with MDK (`Keil_v5/ARM/FVP/MPS2_Cortex-M/FVP_MPS2_Cortex-M4_MDK.exe`) in the `Command` pane.
+In the `Debug` tab, select `Models Cortex-M Debugger`. Click `Settings`, and browse for the FVP provided with MDK in the `Command` pane.
+```
+Keil_v5/ARM/VHT/VHT_MPS2_Cortex-M4_MDK.exe
+```
+
+{{% notice  Note%}}
+MDK versions before 5.37 will find the FVP at
+
+`Keil_v5/ARM/FVP/MPS2_Cortex-M/FVP_MPS2_Cortex-M4_MDK.exe`
+{{% /notice %}}
 
 ### Configure build settings
 
