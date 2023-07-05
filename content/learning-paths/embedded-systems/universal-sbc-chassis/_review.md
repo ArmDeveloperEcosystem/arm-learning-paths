@@ -17,7 +17,7 @@ review:
         answers:
             - "true"
             - "false"
-        correct_answer: 1
+        correct_answer: 2
         explanation: >
             The GitHub repository contains the Fusion 360 project files, so you are free to modify the design as needed
 
@@ -28,7 +28,7 @@ review:
             - "ABS"
             - "PLA"
             - "PETG"
-        correct_answer: 2
+        correct_answer: 3
         explanation: >
             PETG has the ability to flex without breaking, which is needed for the thumb tabs on the card plate
 
@@ -40,7 +40,7 @@ review:
             - "PrusaSlicer"
             - "OctoPrint"
             - "Whatever works best with your printer"
-        correct_answer: 3
+        correct_answer: 4
         explanation: >
             The STL files are software agnostic. Use whichever you are most comfortable with, and that works with your printer
     
