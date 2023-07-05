@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about Arm-based server infrastructure
+    You can continue learning about Arm-based embedded systems.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/geekbench/"
+recommended_path: "/learning-paths/embedded-systems/intro/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
