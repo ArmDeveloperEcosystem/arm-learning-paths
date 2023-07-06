@@ -1,7 +1,7 @@
 ---
 next_step_guidance: You now have the beginnings of a virtual fleet of IoT devices and the ability to deploy and manage applications to them. You can continue to use your free instance of Balena Cloud and Arm Virtual Hardware to create more devices and deploy other applications from the Balena Hub, or [create your own](https://docs.balena.io/learn/develop/dockerfile/) applications to deploy.
 
-recommended_path: /learning-paths/embedded-systems
+recommended_path: /learning-paths/embedded-systems/rpi/
 
 further_reading:
     - resource:
