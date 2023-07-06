@@ -105,15 +105,15 @@ cd /opt/arm/developmentstudio-2023.0/bin
 ```
 Use `suite_exec` to start an appropriate command prompt, for example:
 ```command
-suite_exec --toolchain "Arm Compiler for Embedded 6" bash
+./suite_exec --toolchain "Arm Compiler for Embedded 6" bash
 ```
 To remove the need for the `--toolchain` option, first run:
 ```command
-select_default_toolchain
+./select_default_toolchain
 ```
 and select the desired toolchain. You can then configure with simply:
 ```command
-suite_exec bash
+./suite_exec bash
 ```
 {{% notice  Toolchains%}}
 By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/2023-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
