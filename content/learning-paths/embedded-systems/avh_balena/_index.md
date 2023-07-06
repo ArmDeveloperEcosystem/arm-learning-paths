@@ -25,10 +25,12 @@ skilllevels: Introductory
 subjects: Embedded Linux
 armips:
     - Cortex-A
+
 operatingsystems:
     - Linux
     - Balena OS
-tools:
+
+tools_software_languages:
     - Arm Virtual Hardware
     - Balena Cloud
     - Raspberry Pi

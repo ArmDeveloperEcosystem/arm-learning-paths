@@ -44,8 +44,8 @@ tools_software_languages_filter:
 - Coding: 6
 - Docker: 6
 - Fortran: 1
-- GCC: 4
 - gcc: 1
+- GCC: 4
 - gdb: 1
 - Geekbench: 1
 - Go: 2

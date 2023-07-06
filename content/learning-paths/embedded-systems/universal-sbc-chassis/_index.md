@@ -7,7 +7,7 @@ minutes_to_complete: 120
 
 learning_objectives: 
     - Acquire and print the required materials
-    - Assemble and install the universal SBC rack mount system in a 4U chasis
+    - Assemble and install the universal SBC rack mount system in a 4U chassis
     - Install single board computers in the racks
 
 prerequisites:
