@@ -1,20 +1,22 @@
 ---
-title: Deploy IoT apps using Balena Cloud with Arm Virtual Hardware
+title: Deploy IoT apps using Balena Cloud and Arm Virtual Hardware
 
 description: Learn how to deploy applications from the Balena Hub onto Arm Virtual Hardware
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for embedded software developers new to Balena OS.
+who_is_this_for: This is an introductory topic for embedded software developers interested in Balena OS.
 
 learning_objectives: 
-    - Instantiate Arm Virtual Hardware instances
-    - Learn how to create Balena OS images for Arm Virtual Hardware
-    - Deploy pre-built Balena Hub applications on Arm Virtual Hardware
+    - Start a Raspberry Pi Arm Virtual Hardware instance
+    - Create a Balena OS image for Arm Virtual Hardware
+    - Deploy a pre-built Balena Hub application 
 
 prerequisites:
-    - An account on the [Balena Cloud](balena-cloud.com) platform
-    - Some familiarity with embedded programming is assumed
+    - A Balena Cloud account
+    - An Arm Virtual Hardware account
+    - A Linux machine with root access
+    - Some familiarity with embedded Linux
 
 author_primary: Michael Hall
 
@@ -29,6 +31,7 @@ operatingsystems:
 tools:
     - Arm Virtual Hardware
     - Balena Cloud
+    - Raspberry Pi
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
