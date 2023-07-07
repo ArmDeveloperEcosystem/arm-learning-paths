@@ -10,7 +10,7 @@ review:
             - Package
         correct_answer: 3                    
         explanation: >
-            Applications in AWS IoT Greengrass are referred to as "Components".
+            Applications in AWS IoT Greengrass are referred to as "components".
 
     - questions:
         question: >
@@ -22,7 +22,7 @@ review:
             - Image
         correct_answer: 2                   
         explanation: >
-            Sets of applications (or Components) are referred to as "Deployments".
+            Sets of applications (or components) are referred to as "deployments".
                
     - questions:
         question: >

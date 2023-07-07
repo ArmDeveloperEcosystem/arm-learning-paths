@@ -1,7 +1,7 @@
 ---
 next_step_guidance: You now have the beginnings of a group of virtual IoT devices and the ability to deploy and manage applications to them. Try out other public AWS Greengrass components by revising your deployment, or create your own custom AWS Greengrass components.
 
-recommended_path: /learning-paths/embedded-systems
+recommended_path: /learning-paths/embedded-systems/avh_balena/
 
 further_reading:
     - resource:

@@ -1,5 +1,5 @@
 ---
-title: Setup your AWS IoT Greengrass account
+title: Setup your accounts and create a virtual device
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,29 +8,47 @@ layout: learningpathall
 
 ## Before you begin
 
-You will need a user account for [Arm Virtual Hardware 3rd Party Hardware](https://avh.arm.com/). Refer to [Arm Virtual Hardware install guide](/install-guides/avh#thirdparty) for more information.
+You will need accounts for Arm Virtual Hardware (AVH) and Amazon Web Services (AWS) for this Learning Path.
 
-You will also need a user account for [Amazon AWS](https://aws.amazon.com). This service requires a credit card to use, but this tutorial will only use resources that fall under the free tier, so you can follow along without paying anything.
+### AVH account 
+
+You need a user account for [AVH](https://app.avh.arm.com/). If you don't have an account, you can create one using the `Create an Arm account` link below the `LOGIN` button. If you create a new account, you will be automatically enrolled in a free 30-day trial. 
+
+### AWS account
+
+You also need a user account for [AWS](https://aws.amazon.com). AWS requires a credit card, but this Learning Path uses free tier only. It can be completed without incurring any charges.
+
+Click the `Create an AWS Account` button to start creating a new account.
 
 ## Create a Device
 
-From the AVH dashboard, click on the `Create Device` button. You will be presented with a list of devices to choose from, for this tutorial we are using a Raspberry Pi 4, so select that device.
+Log in to AVH to begin.
+
+From the AVH dashboard, click the `Create Device` button. You will be presented with a list of devices to choose from. 
+
+Select Raspberry Pi 4 from the list of devices and proceed to the configure dialog. 
 
 ![create device](./create_device.png)
 
-On the next screen you will be asked to configure your device by choosing the firmware to use. AWS IoT Greengrass Core will run on either the Ubuntu Server or Raspberry Pi OS firmware images. For this tutorial we will be using the Ubuntu Server firmware. Select that and click `Next`.
+AWS IoT Greengrass Core runs on Ubuntu Server and Raspberry Pi OS. 
 
-The last step is to give your new AVH device a unique name. You can use whatever you'd like, or go with `greengrass-testing-device` for this tutorial. You do not need to set any advances boot options.
+For this Learning Path select `Ubuntu Server on RPi` and click `Next`.
+
+The last step is to give your new AVH device a unique name. Select your own name or use `greengrass-testing-device`.
+
+You do not need to set any advanced boot options.
+
+Wait for the device to be created. 
 
 ![device ready](device_ready.png)
 
-Once the device creation is complete, log in with the default username `pi` and password `raspberry`.
+ When it is ready, log in with the default username `pi` and password `raspberry`.
 
-You are now ready to install AWS IoT Greengrass Core onto your virtual Raspberry Pi.
+You are now ready to install AWS IoT Greengrass Core on your virtual Raspberry Pi.
 
 ## Install AWS IoT Greengrass Core
 
-AWS IoT Greengrass Core is the software component that runs on your IoT devices. You will need to install and configure it on your new AVH device, using the console provided by AVH or over an SSH connection.
+AWS IoT Greengrass Core is the software component that runs on your IoT devices. You will need to install and configure it on your new AVH device. You can do this using the AVH console or an SSH connection.
 
-Follow the [AWS IoT Greengrass install guide](../../../install-guides/aws-greengrass-v2.md) to finish setting up your device.
+Follow the [AWS IoT Greengrass install guide](/install-guides/aws-greengrass-v2/) to finish setting up your device.
 
