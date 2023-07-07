@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            What is an application in AWS IoT Greegrass called?
+            What is an application in AWS IoT Greengrass called?
         answers:
             - App
             - Block
