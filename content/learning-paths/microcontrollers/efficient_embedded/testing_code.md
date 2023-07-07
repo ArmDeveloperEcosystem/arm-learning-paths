@@ -8,24 +8,33 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-1. Compile the code
+You are now ready to build the code and run it on the target hardware.
 
-![Build](Images/Build.png)
+## Compile the code
 
-2. Ensure your board is plugged in and load it onto your board.
+Click the `Build` button to compile source code, and link together.
 
-![Flash](Images/Flash.png)
+![Build #center](Images/Build.png)
 
-3. Once flashed onto the board, you can start a debug session.
 
-![Debug](Images/Debug.png)
+ ## Run and debug the code on the target
 
-4. Keep an eye on the Call Stack + Locals tab in the bottom right of the IDE. This will show the value of the variables 'a' and 'b'.
+Ensure your board is connected to your host machine. Click `Download` to load it onto the Flash memory on the board.
 
-![CallStack](Images/CallStack.png)
+![Flash #center](Images/Flash.png)
 
-5.	Step through the program and notice how the values of 'a' and 'b' change. You should see the string "Hello world!" copy across and then eventually turn into capitals.
+Once flashed onto the board, you can start a debug session.
 
-![Callstack2](Images/CallStack2.png)
+![Debug #center](Images/Debug.png)
 
-![CallStack3](Images/CallStack3.png)
+Open the `Call Stack + Locals` tab in the IDE. This will show the value of the variables `a` and `b`.
+
+![CallStack #center](Images/CallStack.png)
+
+Step through the program and notice how the values of `a` and `b` change.
+
+![Callstack2 #center](Images/CallStack2.png)
+
+You will see the string "Hello world!" copy across and then eventually turn into capitals.
+
+![CallStack3 #center](Images/CallStack3.png)
