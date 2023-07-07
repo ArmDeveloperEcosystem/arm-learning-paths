@@ -1,19 +1,17 @@
 ---
-title: Deploy IoT apps using Balena Cloud and Arm Virtual Hardware
+title: Deploy IoT apps using AWS IoT Greengrass and Arm Virtual Hardware
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for embedded software developers interested in Balena OS.
+who_is_this_for: This is an introductory topic for embedded software developers interested in AWS IoT Greengrass.
 
 learning_objectives: 
     - Start a Raspberry Pi Arm Virtual Hardware instance
-    - Create a Balena OS image for Arm Virtual Hardware
-    - Deploy a pre-built Balena Hub application 
+    - Deploy pre-built AWS IoT Greengrass components on Arm Virtual Hardware
 
 prerequisites:
-    - A Balena Cloud account
+    - An Amazon AWS account
     - An Arm Virtual Hardware account
-    - A Linux machine with root access
     - Some familiarity with embedded Linux
 
 author_primary: Michael Hall
@@ -28,12 +26,12 @@ armips:
 
 operatingsystems:
     - Linux
-    - Balena OS
 
 tools_software_languages:
     - Arm Virtual Hardware
-    - Balena Cloud
+    - AWS IoT Greengrass
     - Raspberry Pi
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

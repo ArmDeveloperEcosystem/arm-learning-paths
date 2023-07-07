@@ -1446,3 +1446,7 @@ Balena
 balena
 Grafana
 OpenBalena
+ggcRootPath
+hV
+iotcore
+pubsub
