@@ -67,6 +67,7 @@ tools_software_languages_filter:
 - Oracle: 2
 - PostgreSQL: 3
 - Redis: 2
+- Remote.It: 1
 - snappy: 1
 - Snort: 1
 - SQL: 7
