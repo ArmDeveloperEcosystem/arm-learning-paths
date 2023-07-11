@@ -130,7 +130,7 @@ https://<dns-name>/
 
 The browser will show the Nginx welcome message: 
 
-![file_server_screenshot](https://user-images.githubusercontent.com/67620689/194551227-3590f90c-8c58-4f1d-bed6-71527cec7c62.PNG)
+![nginx #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/81ceb173-a9f3-40ec-b661-e39493aa1fa6)
 
 {{% notice Note %}}
 Make sure that port 443 or port 80 are open in the security group for the IP address of your machine.

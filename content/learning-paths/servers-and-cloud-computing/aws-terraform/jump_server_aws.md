@@ -421,8 +421,8 @@ Go to **EC2 -> instances** you should see the following two instances running:
 
 Click on the **Instance ID**s to display the **Instance Summary** view which includes more details about your instances. 
 
-![alt-text #center](https://user-images.githubusercontent.com/71631645/203951115-5a8f8ac1-e415-4e82-bb3d-aae65c1f3c65.png "Locate your instances on the AWS Console")
-   
+![jumpserver #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/eb7569b7-ddfb-4c5a-b450-ab903cf4e8df "Locate your instances on the AWS Console")
+
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server from there. For example, if using a `ubuntu` AMI:
 
