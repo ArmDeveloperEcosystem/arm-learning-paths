@@ -28,23 +28,23 @@ Three tools are required on the computer you are using. Follow the links to inst
 
 1. Log in to your GCP account and create a project in the console using the dropdown menu next to the Google Cloud logo. 
 
-![Untitled](https://user-images.githubusercontent.com/92863151/215955072-86a16917-2607-4e67-83b4-4303d3c1ffa6.png)
+![cd1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/5cd656ef-db67-40f4-9fa0-499790b6b59f)
 
 2. Click **New Project** on the top right corner.
 
-![Untitled](https://user-images.githubusercontent.com/92863151/215955423-5c97a106-bafe-41bd-9275-e0e8aa5eda3f.png)
+![cd2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/a27708a0-3788-48be-a5fb-7631dc153779)
 
 3. Enter the name of your project in the **Project name** field.
 
 4. Click **Create**. The console navigates to the Dashboard page and your project is created within a few minutes.  
 
-![215677455-5b6bf782-fbfa-43f3-b79e-4808d2975214](https://user-images.githubusercontent.com/92863151/215962792-0e1b4b75-38c1-42c6-9dc8-1c31012cbde0.png)
+![cd3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/1ed0debc-be11-48fd-98cc-4b525f2992b4)
 
 5. Go to the **[Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE)** in the Google Cloud console. 
 
 6. Save the **Project ID** as shown in the **Project info** Dashboard. You will need it for future steps.
 
-![image](https://user-images.githubusercontent.com/92863151/216250615-c4ca08e0-052c-4573-97db-8a0698b9c341.png)
+![image #center](https://user-images.githubusercontent.com/92863151/216250615-c4ca08e0-052c-4573-97db-8a0698b9c341.png)
 
 ### Acquire GCP Access Credentials
 
@@ -68,15 +68,15 @@ Service Account credentials are needed for Terraform to interact with the **Goog
 
 2. Click on **CREATE SERVICE ACCOUNT**. 
 
-![service](https://user-images.githubusercontent.com/92863151/215972459-56135d89-05ad-4e48-b523-9773775b944b.png)
+![cd5 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/87f8f96c-7eef-445f-bb4e-710359d86bf6)
 
 3. Enter a **Service account name** and click on **Create and continue**. 
 
-![service name](https://user-images.githubusercontent.com/92863151/215978422-ff66739a-d4ac-465c-b752-1606de0618bb.png)
+![cd6 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/060c3336-f6b3-4b7e-8178-9bad9596e46c)
 
 4. When promoted for a role select **Basic: Owner** from dropdown menu and Click the **DONE** button to finish service account creation. 
 
-![image](https://user-images.githubusercontent.com/92863151/215679930-b6fa31e4-9f8c-427a-af12-96047bbe1158.png)
+![cd7 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/f5dbdf3d-1963-4fcc-b1e2-dd38e4679936)
 
 Save your service account name for a future step, it will be of the form `your-service-account-name@your-project-id.iam.gserviceaccount.com`
 
@@ -349,17 +349,17 @@ Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
 
 1. In the Google Cloud console go to **Kubernetes Engine » Clusters**.
 
-![ke cluster](https://user-images.githubusercontent.com/92863151/216003253-5d58eb04-59b4-4785-a9ce-0372beb4dd5a.jpg)
+![cd8 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/5b74429c-d133-4874-b5f9-e20edfd05634)
 
 2. In Kubernetes Engine, select the **cluster** and use the three dots to select **Connect**.
 
-![Untitled](https://user-images.githubusercontent.com/92863151/215472556-5c3a2e09-d7b2-40eb-8643-7b23f074b5ec.png)
+![cd9 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/4862a8b7-1d25-48cd-93cf-6a3fa7935fcd)
 
 3. Copy the `gcloud` command shown 
 
 This command will retrieve the access credentials for your cluster and automatically configure kubectl. 
 
-![image](https://user-images.githubusercontent.com/92863151/216004839-165a8333-569b-455a-a1a2-1686e9d57e9e.png)
+![cd10 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/38d98e84-4c6a-482f-8eca-620717da0151)
 
 4. Paste the `gcloud` command in your terminal.
 
