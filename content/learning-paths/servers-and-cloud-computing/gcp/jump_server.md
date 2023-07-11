@@ -461,7 +461,7 @@ To deploy the instances, you need to initialize Terraform, generate an execution
 ### Verify the Instance and Bastion Host setup
 In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances you created through Terraform must be displayed on the screen.
 
-![image](https://user-images.githubusercontent.com/67620689/222353051-483be628-6466-44f5-85b5-d7a7039b7dad.PNG)
+![gcp_jump #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/47ebebb4-678d-464d-b85e-e6bcc3d8c0f1)
 
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.
