@@ -28,12 +28,12 @@ armips:
 
 operatingsystems:
     - Linux
-    - Balena OS
 
 tools_software_languages:
     - Arm Virtual Hardware
     - Balena Cloud
     - Raspberry Pi
+    - Balena OS
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
