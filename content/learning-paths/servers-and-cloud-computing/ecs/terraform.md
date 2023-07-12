@@ -24,7 +24,7 @@ To create a repository in ECR, use a text editor to create a file named `main.tf
 terraform {
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
       version = "4.45.0"
     }
   }
@@ -132,7 +132,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 Terraform has created the repository in ECR. You can confirm this on your Amazon Elastic Container Registry Repositories list.
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/e2b0170c-3cf8-4cf7-8fff-c8feeebaa178)
+![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/7c31127b-ca5e-438c-9888-3cf2ae3b2c83)
 
 Push the container image to the new repository using `docker push` as in the previous section.
 
@@ -142,7 +142,7 @@ docker push [your account number].dkr.ecr.us-east-2.amazonaws.com/myapp
 
 Refresh the repository’s page to verify you’ve successfully pushed the image to the AWS ECR repository.
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/cc056b76-edca-49d0-af4f-de989999f071)
+![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/a5908779-39a3-4729-a680-f472d166598e)
 
 ## Create an ECS Cluster
 
@@ -171,7 +171,7 @@ terraform apply
 
 Navigate to Amazon ECS Clusters and verify that you can see the changes:
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/136f3ec4-b7ca-4f73-a988-7d35e2a23b18)
+![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/784dcd60-109d-41e4-9a75-1141dee2743e)
 
 ## Configure an AWS ECS task 
 
@@ -219,7 +219,7 @@ resource "aws_ecs_task_definition" "app_task" {
   network_mode             = "awsvpc"    # add the AWS VPN network mode as this is required for Fargate
   memory                   = 512         # Specify the memory the container requires
   cpu                      = 256         # Specify the CPU the container requires
-  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
+  execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
 ```
 {{% notice Note %}} Change `containerPort`, `hostPort`, `memory` & `cpu` as per your requirement.{{% /notice %}}
@@ -234,7 +234,7 @@ Create a resource to execute this role as follows:
 # main.tf
 resource "aws_iam_role" "ecsTaskExecutionRole" {
   name               = "ecsTaskExecutionRole"
-  assume_role_policy = "${data.aws_iam_policy_document.assume_role_policy.json}"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
 
 data "aws_iam_policy_document" "assume_role_policy" {
@@ -249,7 +249,7 @@ data "aws_iam_policy_document" "assume_role_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
-  role       = "${aws_iam_role.ecsTaskExecutionRole.name}"
+  role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 ```
@@ -262,7 +262,7 @@ terraform apply
 
 Navigate to Amazon ECS Task Definitions and you can see the task definitions: 
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/f39983c4-233f-4eb5-af48-7884aaaa881c)
+![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/6734dd1d-1c8d-41a7-9c4c-02970ed0717e)
 
 ## Launch the Container
 
@@ -349,16 +349,16 @@ resource "aws_lb_target_group" "target_group" {
   port        = 80
   protocol    = "HTTP"
   target_type = "ip"
-  vpc_id      = "${aws_default_vpc.default_vpc.id}" # default VPC
+  vpc_id      = aws_default_vpc.default_vpc.id # default VPC
 }
 
 resource "aws_lb_listener" "listener" {
-  load_balancer_arn = "${aws_alb.application_load_balancer.arn}" #  load balancer
+  load_balancer_arn = aws_alb.application_load_balancer.arn #  load balancer
   port              = "80"
   protocol          = "HTTP"
   default_action {
     type             = "forward"
-    target_group_arn = "${aws_lb_target_group.target_group.arn}" # target group
+    target_group_arn = aws_lb_target_group.target_group.arn # target group
   }
 }
 ```
@@ -373,21 +373,21 @@ You can add the service by adding the following to your `main.tf`:
 ```console
 # main.tf
 resource "aws_ecs_service" "app_service" {
-  name            = "app-first-service"     # Name the service
-  cluster         = "${aws_ecs_cluster.my_cluster.id}"   # Reference the created Cluster
-  task_definition = "${aws_ecs_task_definition.app_task.arn}" # Reference the task that the service will spin up
+  name            = "app-first-service"                  # Name the service
+  cluster         = aws_ecs_cluster.my_cluster.id        # Reference the created Cluster
+  task_definition = aws_ecs_task_definition.app_task.arn # Reference the task that the service will spin up
   launch_type     = "FARGATE"
   desired_count   = 3 # Set up the number of containers to 3
 
   load_balancer {
-    target_group_arn = "${aws_lb_target_group.target_group.arn}" # Reference the target group
-    container_name   = "${aws_ecs_task_definition.app_task.family}"
+    target_group_arn = aws_lb_target_group.target_group.arn # Reference the target group
+    container_name   = aws_ecs_task_definition.app_task.family
     container_port   = 80 # Specify the container port
   }
 
   network_configuration {
     subnets          = ["${aws_default_subnet.default_subnet_a.id}", "${aws_default_subnet.default_subnet_b.id}"]
-    assign_public_ip = true     # Provide the containers with public IPs
+    assign_public_ip = true                                                # Provide the containers with public IPs
     security_groups  = ["${aws_security_group.service_security_group.id}"] # Set up the security group
   }
 }
@@ -401,11 +401,10 @@ Create a `aws_security_group.service_security_group` resource as follows in `mai
 # main.tf
 resource "aws_security_group" "service_security_group" {
   ingress {
-    from_port = 0
-    to_port   = 0
-    protocol  = "-1"
-    # Only allowing traffic in from the load balancer security group
-    security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
+    from_port       = 0
+    to_port         = 0
+    protocol        = "-1"
+    security_groups = ["${aws_security_group.load_balancer_security_group.id}"] # Only allowing traffic in from the load balancer security group
   }
 
   egress {
@@ -506,13 +505,13 @@ Outputs:
 app_url = "load-balancer-dev-xxxxxxxxxx.us-east-x.elb.amazonaws.com"
 ```
 
-You can also access the URL from your `load-balancer-dev`` as the DNS name. 
+You can also access the URL from your `load-balancer-dev` as the DNS name.
 
 Copy the URL to your browser. 
 
 You will see NGINX running:
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/5b361020-2547-459c-88fa-b1ed3d1ad00e)
+![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/52271e11-a078-4c52-8462-cd89cc1fd973)
 
 {{% notice Note %}} 
 If you see a `503 Service Temporarily Unavailable` immediately after running the `terraform apply` command you should wait a few seconds for all infrastructure to be created and try again. 
