@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Project conversion on the command line using vcpkg
 
-[vcpkg](https://vcpkg.io/en/index.html) is a free C/C++ package manager for acquiring and managing libraries. It runs on all platforms, buildsystems, and worklows. it is maintained by the Microsoft C++ team and open source contributors.
+[vcpkg](https://vcpkg.io/en/index.html) is a free C/C++ package manager for acquiring and managing libraries. It runs on all platforms, build systems, and work flows. it is maintained by the Microsoft C++ team and open source contributors.
 
 In your favorite terminal application, change to the directory containing the uvprojx-based project.
 
@@ -16,19 +16,19 @@ In your favorite terminal application, change to the directory containing the uv
 
    **Windows (cmd)**:
    
-   ```
+   ```console
    curl -LO https://aka.ms/vcpkg-init.cmd && .\vcpkg-init.cmd
    ```
    
    **Windows (PowerShell)**:
    
-   ```
+   ```console
    iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
    ```
    
    **Linux/macOS**:
    
-   ```
+   ```console
    . <(curl https://aka.ms/vcpkg-init.sh -L)
    ```
 
@@ -36,37 +36,37 @@ In your favorite terminal application, change to the directory containing the uv
 
    **Windows (cmd)**:
    
-   ```
+   ```console
    %USERPROFILE%\.vcpkg\vcpkg-init.cmd
    ```
    
    **Windows (PowerShell)**:
    
-   ```
+   ```console
    . ~/.vcpkg/vcpkg-init.ps1
    ```
    
    **Linux/macOS**:
    
-   ```
+   ```console
    . ~/.vcpkg/vcpkg-init
    ```
 
 2. Update the Arm vcpkg registry (this will give you access to tools hosted by Arm):
 
-   ```
+   ```console
    vcpkg x-update-registry
    ```
 
 3. Enable the `uv2csolution` conversion tool:
 
-   ```
+   ```console
    vcpkg use uv2csolution
    ```
 
 4. Run the conversion (in this example, the project is called `MyProject.uvprojx`):
 
-   ```
+   ```console
    uv2csolution MyProject.uvprojx
    ```
 
@@ -77,19 +77,19 @@ In your favorite terminal application, change to the directory containing the uv
 
 5. Activate the vcpkg configuration (this will install all required tools on your machine):
 
-   ```
+   ```console
    vcpkg activate
    ```
 
 6. Build the project:
 
-   ```
+   ```console
    cbuild MyProject.csolution.yaml --update-rte
    ```
 
    A successful project build will end with:
 
-   ```
+   ```output
    Program size: Code=... RO-data=... RW-data=... ZI-data=...
    info cbuild: build finished successfully!
    ```

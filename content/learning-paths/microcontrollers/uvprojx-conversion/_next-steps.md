@@ -1,7 +1,7 @@
 ---
-next_step_guidance: Here is more information about Keil Studio
+next_step_guidance: You can continue learning about about Keil Studio.
 
-recommended_path: /learning-paths/microcontrollers/keilstudiocloud/
+recommended_path: "/learning-paths/microcontrollers/keilstudiocloud/"
 
 further_reading:
     - resource:

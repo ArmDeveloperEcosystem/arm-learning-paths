@@ -8,13 +8,15 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 19
-- Linux: 1
+- Linux: 2
+- macOS: 1
 - RTOS: 7
+- Windows: 1
 subjects_filter:
 - CI-CD: 2
 - Libraries: 1
 - ML: 6
-- Performance and Architecture: 6
+- Performance and Architecture: 7
 - RTOS Fundamentals: 2
 - Security: 3
 - Virtual Hardware: 2
@@ -26,12 +28,13 @@ tools_software_languages_filter:
 - Arm Virtual Hardware: 11
 - AWS: 3
 - CMSIS: 2
+- CMSIS-Toolbox: 1
 - Coding: 18
 - Fixed Virtual Platform: 8
 - GCC: 4
 - GitHub: 2
 - Keil: 6
-- Keil MDK: 1
+- Keil MDK: 2
 - MPS3: 1
 - Paddle: 1
 - Raspberry Pi: 1

@@ -1,5 +1,5 @@
 ---
-title: Usig Keil Studio Desktop
+title: Using Keil Studio Desktop
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -21,7 +21,7 @@ layout: learningpathall
    - `Blinky.cproject.yaml`
    - `vcpkg-configuration.json`
 
-1. The vckpg configuration file is automatically activated. You notice an active configuration in the **Status Bar** at the bottom:
+1. The vcpkg configuration file is automatically activated. You notice an active configuration in the **Status Bar** at the bottom:
 
    ![vcpkg activated](./vcpkg-activated.png)
 
@@ -33,7 +33,7 @@ layout: learningpathall
 
 1. The `cbuild` task starts. A successful project build will end with:
 
-   ```
+   ```output
    Program size: Code=... RO-data=... RW-data=... ZI-data=...
    info cbuild: build finished successfully!
    Build complete
