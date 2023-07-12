@@ -1458,3 +1458,5 @@ AmazonECR
 ecr
 hs
 ln
+uvprojx
+vcpkg

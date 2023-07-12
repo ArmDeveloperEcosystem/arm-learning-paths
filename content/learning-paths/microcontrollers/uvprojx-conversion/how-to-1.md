@@ -1,5 +1,5 @@
 ---
-title: Usig Keil Studio Desktop
+title: Using Keil Studio Desktop
 weight: 2
 
 ### FIXED, DO NOT MODIFY

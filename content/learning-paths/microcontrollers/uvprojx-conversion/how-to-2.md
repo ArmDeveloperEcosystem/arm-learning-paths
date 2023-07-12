@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Project conversion on the command line using vcpkg
 
-[vcpkg](https://vcpkg.io/en/index.html) is a free C/C++ package manager for acquiring and managing libraries. It runs on all platforms, buildsystems, and worklows. it is maintained by the Microsoft C++ team and open source contributors.
+[vcpkg](https://vcpkg.io/en/index.html) is a free C/C++ package manager for acquiring and managing libraries. It runs on all platforms, build systems, and work flows. it is maintained by the Microsoft C++ team and open source contributors.
 
 In your favorite terminal application, change to the directory containing the uvprojx-based project.
 
