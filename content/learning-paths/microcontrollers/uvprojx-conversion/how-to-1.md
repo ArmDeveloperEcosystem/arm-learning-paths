@@ -21,7 +21,7 @@ layout: learningpathall
    - `Blinky.cproject.yaml`
    - `vcpkg-configuration.json`
 
-1. The vckpg configuration file is automatically activated. You notice an active configuration in the **Status Bar** at the bottom:
+1. The vcpkg configuration file is automatically activated. You notice an active configuration in the **Status Bar** at the bottom:
 
    ![vcpkg activated](./vcpkg-activated.png)
 
