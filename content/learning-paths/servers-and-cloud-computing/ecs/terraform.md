@@ -188,7 +188,7 @@ These specifications include:
 
 An AWS ECS workload has two main launch types: EC2 and Fargate.
 
-Fargate is an AWS orchestration tool. It allows you to give AWS the role of managing your container lifecycle and the hosting infrastructure. Fargate is serverless, which means you don’t need to provision your container using EC2 instances (virtual machines). 
+Fargate is an AWS orchestration tool. It allows you to give AWS the role of managing your container life cycle and the hosting infrastructure. Fargate is serverless, which means you don’t need to provision your container using EC2 instances (virtual machines). 
 
 You can use Fargate to run your container on ECS without provisioning a virtual machine on AWS.
 
@@ -222,7 +222,7 @@ resource "aws_ecs_task_definition" "app_task" {
   execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
 }
 ```
-{{% notice Note %}} Change `containerPort`, `hostPort`, `memory` & `cpu` as per your requirment.{{% /notice %}}
+{{% notice Note %}} Change `containerPort`, `hostPort`, `memory` & `cpu` as per your requirement.{{% /notice %}}
 
 As described in the above config block, Terraform will create a task named `app-first-task` and assign the resources needed to run the container using this task. This process includes assigning the deployed image, container ports, launch type, and the hardware requirements that the container needs to run.
 
