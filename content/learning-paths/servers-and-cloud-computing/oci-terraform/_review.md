@@ -2,37 +2,24 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            Terraform is an infrastructure as Code (IaC) solution created by OCI?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-        correct_answer: 1                    
+            - True
+            - False
+        correct_answer: 2                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            Terraform is not specific to OCI and was created by HashiCorp.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            If I accidentally delete my instance, I can retrieve it?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - True
+            - False
+        correct_answer: 2                  
         explanation: >
-            PLACEHOLDER EXPLANATION 2
-               
-    - questions:
-        question: >
-            PLACEHOLDER QUESTION 3?
-        answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
-        explanation: >
-            PLACEHOLDER EXPLANATION 3
+            Instances that have been deleted cannot be retrieved. However, if an instance is simply stopped, you can start it again.
+            
 
 
 
