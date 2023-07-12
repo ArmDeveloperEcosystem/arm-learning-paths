@@ -33,7 +33,7 @@ layout: learningpathall
 
 1. The `cbuild` task starts. A successful project build will end with:
 
-   ```
+   ```output
    Program size: Code=... RO-data=... RW-data=... ZI-data=...
    info cbuild: build finished successfully!
    Build complete

@@ -1,8 +1,6 @@
 ---
 title: Convert uvprojx-based projects to csolution
 
-description: This learning path explains how to convert a uvprojx-based project to the new csolution format.
-
 minutes_to_complete: 10
 
 who_is_this_for: Users of MDK v5 who want to migrate to MDK v6.
@@ -20,18 +18,17 @@ author_primary: Christopher Seidl
 
 ### Tags
 skilllevels: Intermediate
-subjects: Keil Studio
+subjects: Performance and Architecture
 armips:
     - Cortex-M
-tools:
-    - Keil MDK v6
-softwares:
-    - CMSIS-Toolbox
-operatingsystems:
+tools_software_languages:
     - Keil MDK
     - CMSIS-Toolbox
-    - CLI
-    - GUI
+operatingsystems:
+    - Windows
+    - Linux
+    - macOS
+
 
 
 ### FIXED, DO NOT MODIFY
