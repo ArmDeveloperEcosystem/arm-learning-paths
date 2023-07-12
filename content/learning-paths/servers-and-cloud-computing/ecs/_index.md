@@ -1,19 +1,18 @@
 ---
-title: "Deploy ECS containers on AWS Graviton processor"
+title: "Deploy containers on Amazon ECS with AWS Graviton processors"
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for anyone new to using AWS ECS.
+who_is_this_for: This is an introductory topic for developers who want to use AWS Graviton processors with Amazon Elastic Container Service (ECS).
 
 learning_objectives:
-    - Create an AWS ECS cluster
+    - Create an AWS ECS cluster with Fargate and AWS Graviton processors
     - Create and run an AWS ECS task
+    - Use Terraform to automate deployment of an ECS cluster
 
 prerequisites:
     - An AWS account
-    - A computer with Docker installed
-    - Terraform
-    - GIT
+    - A computer with Docker, AWS CLI, and Terraform installed
 
 author_primary: Jason Andrews
 
@@ -26,6 +25,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
+    - ECS
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
