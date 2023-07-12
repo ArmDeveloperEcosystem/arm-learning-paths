@@ -4,16 +4,17 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you continue learning about different learning pats of Arm.
+    You can continue learning about deploying applications on Arm. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/server-and-cloud/"
-# Link to the next learning path being recommended(For example this could be /learning-paths/server-and-cloud/mongodb).
+recommended_path: "/learning-paths/servers-and-cloud-computing/memcached/"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
+
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
     # Blog about related topics                 (type: blog)
-    # General online references                 (type: website)
+    # General online references                 (type: website) 
 
 further_reading:
     - resource:
@@ -24,6 +25,7 @@ further_reading:
         title: What is IAM?
         link: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
         type: documentation
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

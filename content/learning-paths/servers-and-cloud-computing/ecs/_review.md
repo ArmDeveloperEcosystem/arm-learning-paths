@@ -12,33 +12,33 @@
 review:
     - questions:
         question: >
-            If I accidentally delete my cluser, I can retrieve it.
+            If you accidentally delete your ECS cluster, can it be restored?
         answers:
-            - "True"
-            - "False"
+            - "Yes"
+            - "No"
         correct_answer: 2
         explanation: >
-            No, Cluster that have been deleted cannot be retrieved.
+            No, deleted clusters cannot be restored.
 
     - questions:
         question: >
-            Does Amazon ECS support any other container types?
+            Does Amazon ECS support AWS Graviton processors?
         answers:
-            - "True"
-            - "False"
-        correct_answer: 2
+            - "Yes"
+            - "No"
+        correct_answer: 1
         explanation: >
-            No, docker is the only container platform supported by Amazon ECS at this time.
+            Yes, both Fargate and EC2 instances can be used with ECS and AWS Graviton processors.
 
     - questions:
         question: >
             Does Amazon ECS support dynamic port mapping?
         answers:
-            - "True"
-            - "False"
+            - "Yes"
+            - "No"
         correct_answer: 1
         explanation: >
-            Yes, it is possible to associate a service on Amazon ECS to an Application Load Balancer (ALB) for the ELB service.
+            Yes, it is possible to associate a service on Amazon ECS to an Application Load Balancer (ALB) and provide dynamic port mapping.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

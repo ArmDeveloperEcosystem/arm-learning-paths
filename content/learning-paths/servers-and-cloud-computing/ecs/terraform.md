@@ -9,21 +9,15 @@ layout: "learningpathall"
 ---
 
 
-## Deploy a Dockerised Application on AWS ECS With Terraform
-Another way to deploy Dockerised Application on AWS ECS is with Terraform. You can follow the steps here to automate your ECS deployment.
+You can also automate the deployment of containerized applications on AWS ECS with Terraform. 
 
-## Before you begin
-You should have the prerequisite tools installed before starting the Learning Path. 
+This section incrementally constructs a Terraform file named `main.tf` to automate the same steps for deployment of Nginx on ECS.
 
-Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
+## Create a repository in AWS ECS for container images
 
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+ECR is an AWS service for sharing and deploying container applications. 
 
-You will also need an IAM user with `AdministratorAccess` policy attached. Login with that user and [configure](install-guides/aws_access_keys#configure-the-aws-cli) AWS CLI.
-
-
-## Create an Elastic Container Registry (ECR) on AWS ECS
-ECR is an AWS service for sharing and deploying container applications. This service offers a fully managed container registry that makes the process of storing, managing, sharing, and deploying your containers easier and faster. To set up an ECR, create a `main.tf` file inside your working directory and put below code in it:
+To create a repository in ECR, use a text editor to create a file named `main.tf` with the contents below:
 
 ```console
 # main.tf
@@ -40,12 +34,13 @@ resource "aws_ecr_repository" "app_ecr_repo" {
 }
 ```
 
-Start by running the `terraform init` command. This should be the first command executed after creating a new Terraform configuration. It creates the Terraform configuration files in your working directory.
+Run the `terraform init` command. This should be the first command executed after creating a new Terraform configuration. It creates the Terraform configuration files in your working directory.
 
 ```console
 terraform init
 ```
-The message `Terraform has been successfully initialized!` should be displayed on your terminal, as shown:
+
+The message `Terraform has been successfully initialized!` will be displayed on your terminal:
 
 ```output
 Initializing the backend...
@@ -71,12 +66,15 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 
-To create an ECR, run the `plan` command, you’ll be able to preview the above Terraform configuration file and the resource that will be created:
+To create a repository in ECR, run the `plan` command. You will be able to preview the above Terraform configuration file and the resources that will be created:
 
 ```console
 terraform plan
 ```
-Terraform plan will let you see the resource that will be added, changed, or deployed to AWS. In this case, one resource `aws_ecr_repository.app_ecr_repo`, will be added to AWS.
+
+Terraform `plan` displays the resources that will be added, changed, or deployed to AWS. 
+
+In this example, one resource `aws_ecr_repository.app_ecr_repo` will be added to AWS.
 
 ```output
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
@@ -99,12 +97,13 @@ Terraform will perform the following actions:
 Plan: 1 to add, 0 to change, 0 to destroy.
 ```
 
-To provision the displayed configuration infrastructure on AWS, apply the above execution plan:
+To provision the displayed infrastructure on AWS, run the `apply` command: 
 
 ```console
 terraform apply
 ```
-Enter yes when prompted to allow Terraform to execute this command as expected.
+
+Enter yes when prompted to allow Terraform to execute the command.
 
 ```output
 Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
@@ -131,22 +130,29 @@ aws_ecr_repository.app_ecr_repo: Creation complete after 0s [id=myapp]
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
 
-Terraform will create the ECR. You can confirm this on your Amazon Elastic Container Registry Repositories list.
+Terraform has created the repository in ECR. You can confirm this on your Amazon Elastic Container Registry Repositories list.
 
 ![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/e2b0170c-3cf8-4cf7-8fff-c8feeebaa178)
 
-Now that you have an ECR repository ready, it’s time to create the Docker image and upload it to ECR. Follow below steps to do so:
-* [Create the Docker image](/learning-paths/server-and-cloud/ecs/deployment#create-the-docker-image)
-* [Give the Docker CLI permission to access of your Amazon account](/learning-paths/server-and-cloud/ecs/deployment#give-the-docker-cli-permission-to-access-of-your-amazon-account)
-* [Upload your docker image to ECR](/learning-paths/server-and-cloud/ecs/deployment#upload-your-docker-image-to-ecr)
+Push the container image to the new repository using `docker push` as in the previous section.
 
-Finally, refresh the repository’s page to verify you’ve successfully pushed the image to the AWS ECR repository.
+```console
+docker push [your account number].dkr.ecr.us-east-2.amazonaws.com/myapp
+```
+
+Refresh the repository’s page to verify you’ve successfully pushed the image to the AWS ECR repository.
 
 ![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/cc056b76-edca-49d0-af4f-de989999f071)
 
 ## Create an ECS Cluster
-So far, you’ve created a repository and deployed the image. But whenever you want to launch, you’ll need a target. A cluster acts as the container target. It takes a task into the cluster configuration and runs that task within the cluster.
-To create a cluster where you’ll run your task, add the following configurations to your main.tf file:
+
+You have created a repository and put a container image into the repository. 
+
+Next, create a cluster to act as a target to run containers. 
+
+Clusters run ECS tasks which specify the containers to create. 
+
+To create a cluster to run your tasks, use a text editor to add the following configurations to your main.tf file:
 
 ```console
 # main.tf
@@ -154,18 +160,26 @@ resource "aws_ecs_cluster" "my_cluster" {
   name = "app-cluster" # Name your cluster here
 }
 ```
-This will instruct ECS to create a new cluster named app-cluster. Re-run the apply command to add these changes to AWS:
+
+This instructs ECS to create a new cluster named `app-cluster`
+
+Re-run the `apply` command to add these changes:
 
 ```console
 terraform apply
 ```
-Head over to Amazon ECS Clusters, and verify that you can see these changes:
+
+Navigate to Amazon ECS Clusters and verify that you can see the changes:
 
 ![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/136f3ec4-b7ca-4f73-a988-7d35e2a23b18)
 
-## Configure AWS ECS Task Definition
-The image is now hosted in the ECR, but to run the image, you need to launch it onto an ECS container.
-To deploy the image to ECS, you first need to create a task. A task tells ECS how you want to spin up your Docker container. A task is a true blueprint for your application. It describes the container’s critical specifications of how to launch your application container. These specifications include:
+## Configure an AWS ECS task 
+
+To run the image, you can launch it as an ECS container.
+
+To deploy the image to ECS, you can create a task. A task tells ECS how you want to run your Docker container. A task describes the container’s critical specifications of how to launch your container. 
+
+These specifications include:
 
 * Port mappings
 * Application image
@@ -173,8 +187,12 @@ To deploy the image to ECS, you first need to create a task. A task tells ECS ho
 * Container launch types such as EC2 or Fargate
 
 An AWS ECS workload has two main launch types: EC2 and Fargate.
-Fargate is an AWS orchestration tool. It allows you to give AWS the role of managing your container lifecycle and the hosting infrastructure. Fargate runs your container as serverless, which means you don’t need to provision your container using EC2 instances. Instead of using the ECS clusters to run your container, you can use Fargate to spin up and run your container on ECS without provisioning a virtual machine on AWS.
-Add below configuration in your `main.tf`:
+
+Fargate is an AWS orchestration tool. It allows you to give AWS the role of managing your container lifecycle and the hosting infrastructure. Fargate is serverless, which means you don’t need to provision your container using EC2 instances (virtual machines). 
+
+You can use Fargate to run your container on ECS without provisioning a virtual machine on AWS.
+
+Add below configuration in your `main.tf` file:
 
 ```console
 # main.tf
@@ -206,8 +224,11 @@ resource "aws_ecs_task_definition" "app_task" {
 ```
 {{% notice Note %}} Change `containerPort`, `hostPort`, `memory` & `cpu` as per your requirment.{{% /notice %}}
 
-As described in the above config block, Terraform will create a task named app-first-task and also assign the resources needed to power up the container through this task. This process includes assigning the deployed image, container ports, launch type, and the hardware requirements that the container needs to run.
-Creating a task definition requires `ecsTaskExecutionRole` to be added to your IAM. The above task definition needs this role, and it is specified as `aws_iam_role.ecsTaskExecutionRole.arn`. In the next step, create a resource to execute this role as follows:
+As described in the above config block, Terraform will create a task named `app-first-task` and assign the resources needed to run the container using this task. This process includes assigning the deployed image, container ports, launch type, and the hardware requirements that the container needs to run.
+
+Creating a task definition requires `ecsTaskExecutionRole` to be added to your IAM. The above task definition needs this role, and it is specified as `aws_iam_role.ecsTaskExecutionRole.arn`. 
+
+Create a resource to execute this role as follows:
 
 ```console
 # main.tf
@@ -232,16 +253,26 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
 ```
-Run `terraform apply` to add these changes to AWS. Navigate to Amazon ECS Task Definitions, and these changes should reflect as such:
+
+Run the `apply` command to add these changes to AWS. 
+
+```console
+terraform apply
+```
+
+Navigate to Amazon ECS Task Definitions and you can see the task definitions: 
 
 ![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/f39983c4-233f-4eb5-af48-7884aaaa881c)
 
 ## Launch the Container
-At this point, AWS has most of the configurations needed. However, you need to connect all the above-created specifications together to launch your container successfully.
+
+You now have most of the configurations needed. You need to connect all the above-created specifications together to launch your container successfully.
 
 ### Create a VPC
-First, you need to create a Virtual Private Cloud Module (VPC) and subnet to launch your cluster into. VPC and subnet allow you to connect to the internet, communicate with ECS, and expose the application to available zones.
-Go ahead and create a default VPC and subnets information for your AWS availability zones.
+
+You need to create a Virtual Private Cloud Module (VPC) and subnet to launch your cluster into. VPC and subnet allow you to connect to the internet, communicate with ECS, and expose the application to available zones.
+
+Create a default VPC and a subnet for your AWS availability zones by adding the resources below to your `main.tf` file:
 
 ```console
 # main.tf
@@ -262,7 +293,10 @@ resource "aws_default_subnet" "default_subnet_b" {
 ```
 
 ### Implement a Load Balancer
-Next, create a security group that will route the HTTP traffic using a load balancer. Go ahead and implement a load balancer as follows:
+
+Create a security group that will route HTTP traffic using a load balancer. 
+
+Add a load balancer by adding the lines below to `main.tf`:
 
 ```console
 # main.tf
@@ -277,10 +311,14 @@ resource "aws_alb" "application_load_balancer" {
   security_groups = ["${aws_security_group.load_balancer_security_group.id}"]
 }
 ```
-The above configuration creates a load balancer that will distribute the workloads across multiple resources to ensure application’s availability, scalability, and security.
 
-### Create a Security Group for the Load Balancer
-The next important part of allowing HTTP traffic to access the ECS cluster is to create a security group. This will be crucial for accessing the application later in this guide. Go ahead and add the security group for the load balancer as follows:
+The configuration creates a load balancer that will distribute the workloads across multiple resources to ensure application’s availability, scalability, and security.
+
+### Create a security group for the load balancer
+
+A security group allows HTTP traffic to access the ECS cluster. This is be required for access to the application. 
+
+Add the security group for the load balancer as by adding the lines below to `main.tf`: 
 
 ```console
 # main.tf
@@ -302,7 +340,7 @@ resource "aws_security_group" "load_balancer_security_group" {
 }
 ```
 
-Configure the load balancer with the VPC networking we created earlier. This will distribute the balancer traffic to the available zone:
+Configure the load balancer with the VPC you created earlier by adding the lines below to `main.tf`:
 
 ```console
 # main.tf
@@ -325,7 +363,12 @@ resource "aws_lb_listener" "listener" {
 }
 ```
 ### Create an ECS Service
-The last step is to create an ECS Service and its details to maintain task definition in an Amazon ECS cluster. The service will run the cluster, task, and Fargate behind the created load balancer to distribute traffic across the containers that are associated with the service. You can achieve this with the following block:
+
+The last step is to create an ECS Service to maintain the task definition in the ECS cluster. 
+
+The service will run the cluster, task, and Fargate containers behind the created load balancer and distribute traffic across the containers that are associated with the service. 
+
+You can add the service by adding the following to your `main.tf`:
 
 ```console
 # main.tf
@@ -350,7 +393,9 @@ resource "aws_ecs_service" "app_service" {
 }
 ```
 
-To access the ECS service over HTTP while ensuring the VPC is more secure, create security groups that will only allow the traffic from the created load balancer. To do so, create a `aws_security_group.service_security_group` resource as follows:
+To access the ECS service over HTTP while ensuring the VPC is secure, create security groups that will only allow the traffic from the created load balancer. 
+
+Create a `aws_security_group.service_security_group` resource as follows in `main.tf`:
 
 ```console
 # main.tf
@@ -371,7 +416,8 @@ resource "aws_security_group" "service_security_group" {
   }
 }
 ```
-Additionally, add an output config that will extract the load balancer URL value from the state file and log it onto the terminal.
+
+Add an output configuration to `main.tf`` that will extract the load balancer URL value from the state file and print it to the terminal.
 
 ```console
 # main.tf
@@ -380,25 +426,28 @@ output "app_url" {
   value = aws_alb.application_load_balancer.dns_name
 }
 ```
-At this point, Terraform is set to create and provision infrastructure on AWS ECS. Go ahead and run the following commands:
 
-* `terraform validate`: This allows you to detect syntax errors, version errors, and other problems associated with your Terraform module (main.tf).
+You are now ready to create and provision all infrastructure on AWS. 
+
+Run the `validate` command to detect syntax errors, version errors, and other problems associated with your `main.tf` module.
 
 ```console
 terraform validate
 ```
 
-* `terraform plan`: Running this command gives you the ability to observe what Terraform will actually perform and what resources it will create.
+Run the `plan` command to inspect what Terraform will perform and the resources it will create.
 
 ```console
 terraform plan
 ```
-* `terraform apply`: This uses your configuration to provision infrastructure on AWS. Remember to enter yes when prompted to do so.
+
+Run the `apply` command to provision infrastructure on AWS. Remember to enter yes when prompted to do so.
 
 ```console
 terraform apply
 ```
-After this, You should see the application’s URL on your terminal.
+
+When the `apply` command is complete you will see the application’s URL on your terminal.
 
 ```output
 Plan: 9 to add, 0 to change, 0 to destroy.
@@ -457,15 +506,20 @@ Outputs:
 app_url = "load-balancer-dev-xxxxxxxxxx.us-east-x.elb.amazonaws.com"
 ```
 
-You can also access the URL from your load-balancer-dev as the DNS name. Copy it to your browser. You’ll see that the AWS ECS provisioned application has been served.
+You can also access the URL from your `load-balancer-dev`` as the DNS name. 
+
+Copy the URL to your browser. 
+
+You will see NGINX running:
 
 ![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/5b361020-2547-459c-88fa-b1ed3d1ad00e)
 
-Note that you can get a `503 Service Temporarily Unavailable` if you test your application immediately after running the `terraform apply` command. Give the infrastructure a few seconds to bring all components online.
+{{% notice Note %}} 
+If you see a `503 Service Temporarily Unavailable` immediately after running the `terraform apply` command you should wait a few seconds for all infrastructure to be created and try again. 
+{{% /notice %}}
 
-To destroy this dev infrastructure and avoid AWS additional costs, run the following command:
+To destroy the infrastructure and avoid additional cost, run the `destroy` command:
 
 ```console
 terraform destroy
 ```
-
