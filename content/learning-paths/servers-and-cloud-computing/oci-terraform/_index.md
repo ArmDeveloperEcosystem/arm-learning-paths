@@ -1,0 +1,38 @@
+---
+title: Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform
+
+description: Learn how to automate the creation of OCI Arm virtual machines using Terraform
+minutes_to_complete: 60
+
+who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on OCI using Terraform.
+
+learning_objectives: 
+    - Automate Arm virtual machine creation using Terraform
+    # - Deploy Arm VMs on OCI and provide access via Jump Server
+
+prerequisites:
+    - An OCI account
+    - A computer with Terraform installed
+
+author_primary: Daniel Gubay
+
+### Tags
+skilllevels: Advanced
+subjects: Containers and Virtualization
+armips:
+    - Neoverse
+
+operatingsystems:
+    - Linux
+tools_software_languages:
+    - Terraform
+    - OCI
+    - Bastion
+
+
+### FIXED, DO NOT MODIFY
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+---
