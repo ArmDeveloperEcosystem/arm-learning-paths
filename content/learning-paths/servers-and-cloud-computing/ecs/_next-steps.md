@@ -4,10 +4,12 @@
 # ================================================================================
 
 next_step_guidance: >
-   You should now be familiar with the basic features of Keil Studio Cloud.
+    You can continue learning about deploying applications on Arm. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontrollers/uvprojx-conversion/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/memcached/"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
+
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
@@ -16,21 +18,13 @@ recommended_path: "/learning-paths/microcontrollers/uvprojx-conversion/"
 
 further_reading:
     - resource:
-        title: Keil Studio
-        link: https://keil.arm.com
-        type: website
+        title: Amazon Elastic Container Registry
+        link: https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html?pg=ln&sec=hs
+        type: documentation
     - resource:
-        title: List of supported boards
-        link: https://keil.arm.com/boards
-        type: website
-    - resource:
-        title: Keil Studio documentation
-        link: https://developer.arm.com/documentation/102497/latest/Arm-Keil-Studio
-        type: website
-    - resource:
-        title: Which Keil tool should I care about?
-        link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/which-keil-tool-should-i-care-about
-        type: blog
+        title: What is IAM?
+        link: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
+        type: documentation
 
 
 # ================================================================================

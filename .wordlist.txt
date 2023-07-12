@@ -1454,3 +1454,9 @@ csolution
 gcp
 msql
 jumpserver
+AmazonECR
+ecr
+hs
+ln
+uvprojx
+vcpkg
