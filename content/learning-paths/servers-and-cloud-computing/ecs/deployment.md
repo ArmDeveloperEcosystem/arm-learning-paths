@@ -26,15 +26,15 @@ You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=
 
 Login to your AWS account as the root user and search for IAM.
 
-![image #center](https://user-images.githubusercontent.com/87687468/235642307-130785da-6ddd-4eb4-afc3-382d441c1c9d.png)
+![ecs1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/4b23375b-a3b8-49f7-b77f-1f3651b2ecf2)
 
 From the IAM dashboard select `Users` from the left menu and click on `Add user` from the top of the page.
 
-![user #center](https://user-images.githubusercontent.com/87687468/235642557-f2db9563-7c4f-4882-a40a-d81a3c84b9d3.png)
+![ecs2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/8659eace-12fb-40cd-a239-2a6ca5521d97)
 
 On the `Add user` screen enter a username and select the check box before `Provide user access to the AWS Management Console`. Then select `I want to create an IAM user` and click `Next`
 
-![image #center](https://user-images.githubusercontent.com/87687468/236792673-6e6f4690-f06e-45b3-b87d-243872ddc3a6.png)
+![ecs3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/0efeb281-2b19-4bc7-b132-10b62f609755)
 
 ### Create an ECR policy
 
@@ -42,17 +42,17 @@ You will need access to the Amazon Elastic Container Registry (ECR) to store con
 
 To do so, select `Create policy`.
 
-![permission #center](https://user-images.githubusercontent.com/87687468/237015604-85e79e95-20c8-42b4-a489-f8453693c6ce.png)
+![ecs4 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/43763182-a73e-435d-8a29-05cff61c59ee)
 
 Under `Service`, select `Elastic Container Registry`. 
 
 Select `All Elastic Container Registry actions (ecr:*)` under `Actions allowed`. 
 
-![policy #center](https://user-images.githubusercontent.com/87687468/237007344-ef0af46f-d96c-49ed-96e2-9cae5415cc95.png)
+![ecs5 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/0e500091-a103-4387-a862-d0c17eb51036)
 
 Under `Resources`, select `specific` and `Add ARN`. Here you can select the `region` and select `Any` for Repository name under `This account` and click on `Add ARNs`.
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/17dc8e33-deec-49e5-a38f-21e204b8c2eb)
+![ecs6 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/e2feb854-4bdc-4f38-bf75-d1defbf6e75e)
 
 Skip the tags by clicking `Next`. 
 
@@ -68,11 +68,11 @@ Select `Attach existing policies directly` under `Set permissions` and search fo
 
 Select the checkbox next to the policies.
 
-![permission1 #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/fb69eced-d5be-413f-b550-bef713cad2cc)
+![ecs7 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/c903a3d6-4908-41ab-ad03-3f3f53053fe2)
 
 Select `Next` to review and then `Create user`. 
 
-![image #center](https://user-images.githubusercontent.com/87687468/237018931-b11edaa3-a78e-40e1-9680-b87cdca27a3e.png)
+![ecs8 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/8e4ca606-56fb-4421-b3b6-4ae2fa6ea203)
 
 When you create the user you will see a confirmation screen. 
 
@@ -82,18 +82,18 @@ A new user is now visible on the `IAM > Users` page. Click on the user and go to
 
 Click on `Create access key`
 
-![image #center](https://user-images.githubusercontent.com/87687468/236796346-390f5193-b5cf-4132-a18d-37ea23eba5a9.png)
+![ecs9 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/996129d3-7d59-43e2-b1d8-84373f0a9d3e)
 
 
-![image #center](https://user-images.githubusercontent.com/87687468/236796580-521971ca-d3ad-4ce6-a5c4-47aa59d62427.png)
+![ecs10 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/1c59aa74-ac56-4477-90c1-5d601163d373)
 
 Select `Command Line Interface (CLI)` and click on `Next`
 
-![image #center](https://user-images.githubusercontent.com/87687468/236796940-8a5dcb6a-2008-49c2-a117-72379df22f9d.png)
+![ecs11 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/7dd0b41b-34d5-419f-937d-9c6ff656be84)
 
 Add a description and click `Create access key`
 
-![image #center](https://user-images.githubusercontent.com/87687468/236797205-a6a795af-6988-41ed-96da-e2da63bd0a4a.png)
+![ecs12 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/67ca5f82-67bc-4528-9564-3e7ecb48c886)
 
 Save `Access key` and `Secret access key`, you will need them to configure the AWS CLI. 
 
@@ -107,19 +107,19 @@ Log in to the AWS console with the `test_user` credentials you created earlier.
 
 AWS will ask for your `account id`, `username`, and `password`.
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/15119efa-95ec-4dcc-b886-f9152f0f7bc8)
+![ecs13 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/360c57f3-ec3d-425b-8339-f9050d3cb0bd)
 
 Change your password when prompted. 
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/f741024d-1dd2-4a4a-88ed-e340eff26726)
+![ecs14 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/b5be4ac8-daf5-471d-aab5-782151647ace)
 
 Once you log in, search for Elastic Container Registry.
 
-![image #center](https://user-images.githubusercontent.com/87687468/236801302-7ea5a6ff-09ff-4a35-81d6-576880e240bd.png)
+![ecs15 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/5b9c2db7-f770-4d6c-a717-167775a5a04e)
 
 From there fill in the name of the repository as `myapp` and leave the defaults for everything else.
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/727d18c4-fe52-4211-abc0-7a0f0d9ea123)
+![ecs16 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/eaca4082-371b-4d11-b390-1d0a89423d31)
 
 Select `Create Repository` in the lower right of the page and your repository will be created. 
 
@@ -127,7 +127,7 @@ You will see your repository in the list, and the ARN (here it is called a URI f
 
 Copy the URI for the next step.
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/aa09712b-9950-49f3-8280-8109aee81135)
+![ecs17 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/c1463f63-88a2-4912-86e4-e129541b3f56)
 
 ## Create the Docker image
 
@@ -193,7 +193,7 @@ Search for `Elastic Container Service` and select `Elastic Container Service`
 
 From the left menu select `Clusters` and then select `Create cluster`
 
-![image #center](https://user-images.githubusercontent.com/87687468/235840042-e7461d64-1c1f-4a61-b930-fb1c24d36281.png)
+![ecs18 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/21bb5009-0c2f-40a4-b0b8-4861e8d6cb80)
 
 Name the cluster and the leave the other options with the default values. 
 
@@ -203,7 +203,7 @@ Select `Create`
 
 A cluster will be created as shown below:
 
-![image #center](https://user-images.githubusercontent.com/87687468/235840972-51355567-ac19-476d-b969-7c010cb41688.png)
+![ecs20 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/0a5d8d23-cb37-4b5c-a32a-faccd194f2e9)
 
 ## Create an ECS task
 
@@ -213,7 +213,7 @@ To create an ECS Task do the following:
 
 Select `Task Definitions` from the left menu. Then select `Create new Task Definition`
 
-![image #center](https://user-images.githubusercontent.com/87687468/235845002-667547ac-5cb4-4dfb-b81c-0c379bd45745.png)
+![ecs21 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/74d6e0d1-a1a2-49df-a476-cbaf12a2cee3)
 
 Enter the name of the `Task definition family` in  `Task definition configuration` 
 
@@ -223,7 +223,7 @@ You can copy this from the ECR dashboard if you haven’t already. Leave everyth
 
 Click `Next`
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/9f057197-22c6-41b3-86f3-813f2a5a9aaf)
+![ecs22 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/649e1811-d322-428e-901c-8b73636e018e)
 
 {{% notice Note %}} No additional port mapping is needed because Nginx runs on port 80 by default.{{% /notice %}} 
 
@@ -231,24 +231,22 @@ Under Environment Section, select `Operating system/Architecture` as  `Linux/ARM
 
 Click `Next` in the lower right corner of the dialog.
 
-![mod1 #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/3730bb71-bd9e-4b84-ae1c-e39214507292)
-
 ![image #center](https://user-images.githubusercontent.com/87687468/235848013-599bfcbe-27a1-4a47-a7ab-2914081b9b2d.png)
 
 
-![image #center](https://github.com/akhandpuresoftware/arm-learning-paths/assets/87687468/507793d5-08be-46cf-b31f-e626d0bc3505)
+![ecs23 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/3d54fea6-2a2d-4f99-90f5-bd44e8096e21)
 
 Review everything and click on `create` 
 
 Go to the ECS page, select Task Definitions and you should see the new task with a status of ACTIVE.
 
-![image #center](https://user-images.githubusercontent.com/87687468/235849100-2865c98a-77fd-45f9-8d49-5c9acac0f5e9.png)
+![ecs26 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/8e5435f9-1abc-433d-b58c-f64b5c6fe7bc)
 
 Select the task in the task definition list. 
 
 Click `Deploy` and select `Run Task`
 
-![image #center](https://user-images.githubusercontent.com/87687468/235880090-aad4cd44-51fd-4e2d-aaf4-d4450db656e5.png)
+![ecs27 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/fe258c65-5809-4d04-9c89-9f8bfe568a90)
 
 Select your cluster from drop down menu of `Existing cluster`. 
 
@@ -277,15 +275,15 @@ When the `Last status`` of your cluster changes to `RUNNING`, your app is up and
 
 You may have to refresh the table a couple of times before the status is `RUNNING` 
 
-![image #center](https://user-images.githubusercontent.com/87687468/236180290-963d6e6b-a67c-4a74-a102-20f8faa871f5.png)
+![ecs30 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/fd34b03f-46ff-4db5-b26a-43dc7324800f)
 
 Click on the link in the Task column and find the Public IP address in the `Configuration` section of the Task page.
 
-![image #center](https://user-images.githubusercontent.com/87687468/236181529-38d2bb22-59d6-4cd5-a7bc-123fcbe39917.png)
+![ecs31 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/053c0f13-ee8c-4903-9832-a601014ddaa6)
 
 Enter the public IP address in your browser to see your app running.
 
-![image #center](https://user-images.githubusercontent.com/87687468/236188907-5953f69d-98c2-4def-b5b2-b6b71186af19.png)
+![ecs32 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/25457add-25bc-4c6d-9c2d-cd2fefebcfe2)
 
 ## Shut down the app
 
@@ -293,10 +291,10 @@ When you are done, you’ll want to shut down your Nginx application to avoid ch
 
 From the ECS page select `Clusters` from the left menu and select your cluster from the list of clusters.
 
-![image #center](https://user-images.githubusercontent.com/87687468/236189556-7516dd61-f9fd-4807-96c3-a9a47d08c9b2.png)
+![ecs33 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/c578a377-bcd6-4934-8eff-5cfb839fca1a)
 
 From the table at the bottom of the page select `Tasks`. 
 
 Check the box next to the running task and select `Stop` from the dropdown menu at the top of the table.
 
-![image #center](https://user-images.githubusercontent.com/87687468/236190146-48ec2000-50dc-4772-b4c4-f440577b50b4.png)
+![ecs34 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/5c48811b-35a8-4ee0-85b1-03ba946ea04d)
