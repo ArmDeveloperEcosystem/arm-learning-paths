@@ -1,7 +1,10 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: You can continue learning about migrating applications to Arm.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+
+
+recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
+
 
 further_reading:
     - resource:
