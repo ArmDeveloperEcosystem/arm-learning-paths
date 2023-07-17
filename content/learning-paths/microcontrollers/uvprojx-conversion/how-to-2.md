@@ -55,7 +55,7 @@ In your favorite terminal application, change to the directory containing the uv
 2. Update the Arm vcpkg registry (this will give you access to tools hosted by Arm):
 
    ```console
-   vcpkg x-update-registry
+   vcpkg x-update-registry arm
    ```
 
 3. Enable the `uv2csolution` conversion tool:
@@ -79,6 +79,18 @@ In your favorite terminal application, change to the directory containing the uv
 
    ```console
    vcpkg activate
+   ```
+
+5. Get an MDK-Community license:
+
+   ```console
+   armlm activate -product KEMDK-COM0 -server https://mdk-preview.keil.arm.com
+   ```
+
+5. [Optional] Check your license:
+
+   ```console
+   armlm inspect
    ```
 
 6. Build the project:
