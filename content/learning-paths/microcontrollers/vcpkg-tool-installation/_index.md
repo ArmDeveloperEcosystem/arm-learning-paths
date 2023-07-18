@@ -1,11 +1,9 @@
 ---
 title: Install tools on the command line using vcpkg 
 
-description: This learning path explains how to install tools on the command line using vcpkg.
-
 minutes_to_complete: 10
 
-who_is_this_for: Developers who want to create reproducible tool installations on the command line.
+who_is_this_for: This is an introductory topic for software developers who want to create reproducible tool installations on the command line.
 
 learning_objectives: 
     - Install vcpkg
@@ -30,8 +28,6 @@ tools:
     - Arm Compiler for Embedded
     - GCC
 softwares:
-    - PLACEHOLDER SOFTWARE E
-    - PLACEHOLDER SOFTWARE F
 operatingsystems:
     - Linux
     - Windows
