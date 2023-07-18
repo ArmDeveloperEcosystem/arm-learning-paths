@@ -1,6 +1,5 @@
 ---
-next_step_guidance: Thank you for learning how to create use vcpkg to create reproducible installations on the command line.
-
+next_step_guidance: You can continue learning about migrating your projects from MDK v5 to MDK v6.
 recommended_path: "/learning-paths/microcontrollers/uvprojx-conversion/"
 
 further_reading:
