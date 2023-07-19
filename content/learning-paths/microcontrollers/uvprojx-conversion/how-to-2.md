@@ -14,59 +14,47 @@ In your favorite terminal application, change to the directory containing the uv
 
 1. If you have not done it before, install vcpkg (otherwise continue to step 2):
 
-   **Windows (cmd)**:
-   
-   ```console
+   {{< tabpane code=true >}}
+     {{< tab header="Windows (cmd)" language="shell">}}
    curl -LO https://aka.ms/vcpkg-init.cmd && .\vcpkg-init.cmd
-   ```
-   
-   **Windows (PowerShell)**:
-   
-   ```console
+     {{< /tab >}}
+     {{< tab header="Windows (PowerShell)" language="shell">}}
    iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
-   ```
-   
-   **Linux/macOS**:
-   
-   ```console
-   . <(curl https://aka.ms/vcpkg-init.sh -L)
-   ```
+     {{< /tab >}}
+     {{< tab header="Linux/macOS" language="shell">}}
+   . < (curl https://aka.ms/vcpkg-init.sh -L)
+     {{< /tab >}}
+   {{< /tabpane >}}
 
 1. Initialize vcpkg:
 
-   **Windows (cmd)**:
-   
-   ```console
+   {{< tabpane code=true >}}
+     {{< tab header="Windows (cmd)" language="shell">}}
    %USERPROFILE%\.vcpkg\vcpkg-init.cmd
-   ```
-   
-   **Windows (PowerShell)**:
-   
-   ```console
+     {{< /tab >}}
+     {{< tab header="Windows (PowerShell)" language="shell">}}
    . ~/.vcpkg/vcpkg-init.ps1
-   ```
-   
-   **Linux/macOS**:
-   
-   ```console
+     {{< /tab >}}
+     {{< tab header="Linux/macOS" language="shell">}}
    . ~/.vcpkg/vcpkg-init
-   ```
+     {{< /tab >}}
+   {{< /tabpane >}}
 
 2. Update the Arm vcpkg registry (this will give you access to tools hosted by Arm):
 
-   ```console
-   vcpkg x-update-registry
+   ```shell
+   vcpkg x-update-registry arm
    ```
 
 3. Enable the `uv2csolution` conversion tool:
 
-   ```console
+   ```shell
    vcpkg use uv2csolution
    ```
 
 4. Run the conversion (in this example, the project is called `MyProject.uvprojx`):
 
-   ```console
+   ```shell
    uv2csolution MyProject.uvprojx
    ```
 
@@ -77,13 +65,25 @@ In your favorite terminal application, change to the directory containing the uv
 
 5. Activate the vcpkg configuration (this will install all required tools on your machine):
 
-   ```console
+   ```shell
    vcpkg activate
+   ```
+
+5. Get an MDK-Community license:
+
+   ```shell
+   armlm activate -product KEMDK-COM0 -server https://mdk-preview.keil.arm.com
+   ```
+
+5. [Optional] Check your license:
+
+   ```shell
+   armlm inspect
    ```
 
 6. Build the project:
 
-   ```console
+   ```shell
    cbuild MyProject.csolution.yaml --update-rte
    ```
 
