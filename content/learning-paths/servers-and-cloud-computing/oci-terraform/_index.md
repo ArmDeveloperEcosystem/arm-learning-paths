@@ -7,8 +7,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on OCI using Terraform.
 
 learning_objectives: 
-    - Automate Arm virtual machine creation using Terraform
-    # - Deploy Arm VMs on OCI and provide access via Jump Server
+    - Automate Arm virtual machine creation on OCI using Terraform
 
 prerequisites:
     - An OCI account
@@ -24,10 +23,9 @@ armips:
 
 operatingsystems:
     - Linux
+
 tools_software_languages:
     - Terraform
-    - OCI
-    - Bastion
 
 
 ### FIXED, DO NOT MODIFY
