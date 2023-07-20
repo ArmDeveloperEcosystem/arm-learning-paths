@@ -8,14 +8,15 @@ weight: 4 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-## Arm Instruction Emulator
+There are two ways to run SVE instructions if you don't have SVE capable hardware: QEMU and the Arm Instruction Emulator (ArmIE). Each of these is covered below. 
 
-If you don't have access to Arm SVE capable hardware, you can run still run SVE instructions by using the the Arm Instruction Emulator.
-Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
+The steps shown are for an Arm v8-A system with Ubuntu 22.04 and no SVE support. 
 
 ## Example code
 
-Copy this code example `sve_add.c`, to add two 127 double-precision arrays:
+The example code adds two 127 double-precision arrays.
+
+Use a text editor to copy the code below and save it in a file named `sve_add.c`
 
 ```c  { line_numbers = "true" }
 #include <stdlib.h>
@@ -47,7 +48,8 @@ int main()
 ```
 
 ### Compile
-Compile your applications using the commands shown:
+
+Compile the applications using the commands shown:
 
 {{< tabpane >}}
   {{< tab header="GNU" >}}
@@ -60,17 +62,46 @@ Compile your applications using the commands shown:
 
 ### Run
 
-Run the application on the host:
+Run the application on the Arm Linux host:
 
 ```bash {  command_line="user@localhost | 2"  }
 ./sve_add.exe
 Illegal instruction (core dumped)
 ```
-You can see an illegal instruction is reported as the host does not support SVE.
+
+An illegal instruction message confirms the host does not support SVE. 
+
+## QEMU 
+
+You can run applications containing SVE instructions without SVE capable hardware using [QEMU](https://www.qemu.org/), a generic and open source machine emulator and virtualizer.
+
+Install `qemu-user` to run the example on processors which do not support SVE:
+
+```bash {  command_line="user@localhost" }
+sudo apt install qemu-user -y
+```
+Run the example application with a vector length of 256 bits:
+
+```bash {  command_line="user@localhost | 2"  }
+qemu-aarch64 -cpu max,sve-default-vector-length=256 ./sve_add.exe 
+Done.
+```
+
+The application now runs and prints the expected message.
+
+## Arm Instruction Emulator
+
+You can also run the application using the the Arm Instruction Emulator.
+
+Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
+
+{{% notice Note %}}
+The Arm Instruction Emulator has been deprecated. It is still available for download, but there is no active development. 
+{{% /notice %}}
 
 ## Arm Instruction Emulator Usage
 
-Now run the application with Armie as shown:
+Now run the application with ArmIE as shown:
 
 ```bash {  command_line="user@localhost" }
 armie -msve-vector-bits=256 -- ./sve_add.exe
