@@ -6,17 +6,17 @@ description: This
 learning_path_main_page: 'yes'
 minutes_to_complete:  10
 
-who_is_this_for: This is an introductory topic for 5G software migrating to Arm.
+who_is_this_for: This is a startup guide for running 5G stack on Arm
 
 learning_objectives: 
-    - Chooce the proper Arm server model to develop/deploy 5G stacks and 5GCN server
-    - Suggest the best practice and configuration for setting up Arm servers for 5G stacks
+    - How to choose the right Arm server for 5G stack - gNB (L1/CU/DU) and Core
+    - Tuning Guide for the selected servers for running 5G stack
 
 prerequisites:
     - Arm Neoverse server 
     - 5G ORAN stack
 
-author_primary: 5G Solution Team/Arm Performance and Solution Engineering Team
+author_primary: Arm Performance and Solution Engineering Team
 
 ### Tags
 skilllevels: Introductory

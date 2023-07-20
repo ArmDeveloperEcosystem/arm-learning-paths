@@ -13,9 +13,11 @@ layout: learningpathall
 
      1. 5G-in-one-box (software only)
 
-     2. 5G with Genevisio NXP L1 Accelerator
+     2. 5G with Inline L1 Accelerator
 
-     3. 5G with Nvidia A100X (A100 GPU + BlueField2 NIC)
+     3. 5G with L1 GPU Offload
+
+     4. 5G with Lookaside Accelerator Offload
 
 #### We have evaluated a variety of Arm server platforms from Foxconn, Gigabyte, WIWYNN, Supermicro and HPE
 
@@ -43,19 +45,17 @@ For evaluation purpose, we recommend a 1P system which should be sufficient to r
 
 Due to nature of PCIe devices, we need to consider carefully for picking up right Arm server to accommodating the PCIe Accelerators we are going to use.
 
-For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's ARM server seems to accommodate Genevisio card better.
+For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's ARM server seems to better accommodate some Inline L1 Accelerator cards.
 
-For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC in one devices, we need to make sure its NIC ports face out. At this moment, only Supermicro ARM server has designed its server with A100X support in mind.
+For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC in one device, we need to make sure its NIC ports face out. At this moment, only Supermicro ARM server has designed its server with the full length PCIe cards such as Nvidia A100X converged card.
 
-#### 5G ServerReady
+#### 5G Ready on Arm
 
-We like to develop a way to qualify any server from ODM/OEM to be 5G ServerReady:
+This handbook attempt to provide the guide to make Arm servers ready for 5G development and deployment:
 
-   1. Using existing PoC example to run the qualification to see if the server can pass with possible automation
+   1. Using existing PoC example to run the qualification to see if the server can pass with automation
 
-   2. Using Performance PoC example to test to see if the server can meet our performance goal with possible automation
+   2. Using Performance PoC example to test to see if the server can meet our performance goal with automation
 
-   3. Developing General Testing Scripts to check the requirement for configuration and compliance for 5G ServerReady
 
-   4. Incorporate Testing equipment like Keysight and Viavi for 5G ServerReady tests
 

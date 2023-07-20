@@ -10,9 +10,7 @@ layout: learningpathall
 
 ### Firmware Maintenance
 
-The BIOS firmware would have impact on some of the functionalities and performance of the server. So it is important to have server's BIOS and BMC firmware updated, it is important to be in the loop of any ODM/OEM update with its firmware. We need to have close relationship with ODM/OEM's firmware team to address any issue we would have encountered.
-
-BMC should always support IPMI standard protocol which allows automation of controlling the servers
+The BIOS firmware would have impact on some of the functionalities and performance of the server. So it is important to sign up for firmware updates from your server vendors
 
 ### How to update firmware
 
@@ -87,7 +85,7 @@ return "ondemand" in the current setup.
 
 We may want to change the CPU governor from "ondemand" to "performance".
 
-The following instructions show how we do it on x86.
+The following instructions show how we do it:
 
 ```bash
 sudo apt install cpufrequtils
@@ -95,20 +93,14 @@ echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils
 sudo systemctl disable ondemand
 ```
 
-#### Disable freq scaling
-
-Set in the boot argument with cpufreq.off=1 
-
-cpufreq.off=1 is a kernel parameter in Linux that is used to disable CPU frequency scaling. CPU frequency scaling, also known as CPU throttling, is the process of adjusting the clock speed of the CPU to conserve energy and reduce heat generation. This is typically done by the operating system based on the load and performance requirements of the system.
-
-By setting cpufreq.off=1, you are telling the Linux kernel not to use CPU frequency scaling. This means that the CPU will run at its maximum clock speed all the time, even if it is not needed. This can have performance and power consumption implications, as well as potential stability issues, so it's generally not recommended to disable CPU frequency scaling unless you have a specific use case that requires it.
-
 ### Linux Requirements
 
 #### Boot Parameters
 
 ##### Hugepage setting
 default_hugepagesz=1G hugepagesz=1G hugepages=32
+
+The huge page setting is required for DPDK support which is commonly adopted in 5G networking. It reduces the TLB misses, improves performance by lowering memory overhead, and improves memory efficiency with larger and contiguois memory allocation
 
 ##### isolcpus=cpuX-cpuY
 The setting "isolcpus" is a kernel command line parameter that is used to isolate specific CPUs in a multi-CPU system, such that they are not used for general purpose processing. Instead, they are reserved for real-time or other special purpose tasks that require dedicated and predictable processing resources.

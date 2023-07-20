@@ -31,7 +31,7 @@ review:
             - "Low latency Linux kernel must be required for supporting 5G stack"
         correct_answer: 2                    
         explanation: >
-            Low Latency Kernel minimize the time it takes for the operating system to respond to events and processes, it is essential for 5G stack.
+            Low Latency Kernel minimize the time it takes for the operating system to respond to events and processes, it is essential for latency sensitive of processes in 5G stack.
     - questions:
         question: >
             What is potential issue with a 2P server?        
