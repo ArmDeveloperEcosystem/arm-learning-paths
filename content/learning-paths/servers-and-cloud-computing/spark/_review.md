@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Spark can only run on Hadoop staorage?
+            Spark can only run on Hadoop storage.
         answers:
             - "True"
             - "False"
@@ -23,13 +23,13 @@ review:
             
     - questions:
         question: >
-           Ansible is a configuration management tool?
+           Ansible is a configuration management tool.
         answers:
             - "True"
             - "False"
         correct_answer: 1                  
         explanation: >
-            Ansible is used for configuration management
+            Ansible is used for configuration management.
                
 # ================================================================================
 #       FIXED, DO NOT MODIFY
