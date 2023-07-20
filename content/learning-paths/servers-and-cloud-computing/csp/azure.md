@@ -29,7 +29,7 @@ Locate [Virtual Machines](https://portal.azure.com/#view/HubsExtension/BrowseRes
 
 You will be presented with the `Create a virtual machine` dialog.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617724-651be04c-2002-4906-9dcc-4de5488d3793.PNG "Create an Azure virtual machine")
+![az1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/0d7dbd32-3ea2-4b5a-9886-2218ca78cc8a "Create an Azure virtual machine")
 
 ## Project details
 
@@ -37,7 +37,7 @@ This section is used to separate instances, usually for internal budgeting or ac
 
 If a `Resource group` to contain your VMs does not yet exist, click on `Create new`. If you do not create a group, a new one will automatically be created based on your first VM name.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235624790-48c0757f-1451-4e07-a56a-1cb69d54bd7d.PNG "Select or create a Resource group")
+![az2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/f15a254d-4c32-4541-8c7c-110d0c3742d7 "Select or create a Resource group")
 
 ## Instance details
 
@@ -47,25 +47,25 @@ This section defines key configuration details of the virtual machine.
 
 Give your virtual machine (VM) a meaningful, but arbitrary name. This is especially useful if you intend to create multiple VMs.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235648745-03e88576-a673-4be9-9e9d-ba14631bb5d3.PNG "Specify a name for the virtual machine")
+![az3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/52fc152b-6c28-4164-8b09-352a203f2c17 "Specify a name for the virtual machine")
 
 ### Region
 
 This is the location of the server where your VM will reside. While it is generally recommended to select a region closest to your location, not all regions may support Arm-based servers. You may need to change region to get access to such a server.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617809-148d1860-571e-4816-807a-28cadb5b89ce.PNG "Select an appropriate region")
+![az4 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/f51d05ee-217e-4f48-b94a-d4248cae0fd5 "Select an appropriate region")
 
 ### Availability options / Security type
 
 These are reliability and security settings. They can generally be left as default.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235648749-becadea7-7452-4389-af47-9f013b5440f2.PNG "Select Availability options and Security type if necessary")
+![az5 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/a3b6181b-c15a-4015-a5ee-b6c299c0c214 "Select Availability options and Security type if necessary")
 
 ### Image
 
 This is the operating system that will run on your VM. Select the appropriate one from the pull-down. Some will have additional pricing associated with them. 
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617811-ea68be13-ae53-44c5-8711-35d004f078dd.PNG "Select an image available for Arm VMs")
+![az6 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/2ba2a2bc-cace-440c-80d0-f5050f30ad49 "Select an image available for Arm VMs")
 
 Not all are available for Arm VMs. To filter, click on `See all images`, then select `Arm64` from the `Image Type` filter.
 
@@ -93,7 +93,7 @@ This is a low-cost pricing option. See [Azure documentation](https://learn.micro
 
 Select an appropriate [size](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes) for your compute needs from the pull-down.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617748-5f17514b-5809-474c-b506-a9dec57448f5.PNG "Select an appropriate VM size")
+![az11 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/49e9bf84-9ab4-4b61-a122-13e133bc59cb "Select an appropriate VM size")
 
 ## Administrator account
 
@@ -109,19 +109,19 @@ This section defines how users [connect](https://learn.microsoft.com/en-us/azure
 
  Create an appropriate username. The default username is `azureuser`. Windows VMs will also require a password to be set.
 
- ![alt-text #center](https://user-images.githubusercontent.com/67620689/235617796-f8112d4f-b16f-48f2-aa04-a27d8e3f1899.PNG "Set a username for the VM")
+![az13 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/76ad2452-9c74-4de0-92db-32a33b047ade "Set a username for the VM")
 
  ### SSH public key resource / Key pair name (Linux systems)
 
  Use an existing key pair or generate a new one, as defined by `Key pair name`. If `Generate new key pair` is selected, your private key will be generated during the [Create](#create-instance) step.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617798-5ed36a5c-1a0b-495c-ad54-eb81d650dea5.PNG "Select or create a key pair")
+![az14 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/224e2eba-dba7-4e0e-8c59-a0b62406bdd3 "Select or create a key pair")
 
 ## Inbound port rules
 
 These settings can be used to limit access to your VM. See the documentation for more info. This can generally be left as default. You can connect to Linux machines using SSH. You can connect to Windows machines using Remote Desktop Protocol (RDP).
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617801-055e0c32-6e0b-46be-9070-e6bcf9bed77f.PNG "Configure inbound ports if necessary")
+![az15 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/1162315f-4b6f-44b4-ad2a-30874184287b "Configure inbound ports if necessary")
 
 ## Licensing (Windows only)
 
@@ -131,7 +131,7 @@ Tick the box to confirm you have an appropriate license to deploy a Windows virt
 
 There are other tabs defining many advanced settings. They can generally be left as default.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235617807-c796c760-67c3-4a96-a7ed-ce2f95f2405b.PNG "Additional settings to configure the VM")
+![az16 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/8777ba85-aaa7-4454-88bd-88c82543bb46 "Additional settings to configure the VM")
 
 ## Create instance
 

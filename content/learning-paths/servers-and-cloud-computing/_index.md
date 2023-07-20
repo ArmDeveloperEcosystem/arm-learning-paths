@@ -7,7 +7,7 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Linux: 39
+- Linux: 40
 - macOS: 1
 - Windows: 2
 pinned_modules:
@@ -18,7 +18,7 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 2
-- Containers and Virtualization: 11
+- Containers and Virtualization: 12
 - Databases: 9
 - Libraries: 5
 - ML: 2
@@ -43,9 +43,10 @@ tools_software_languages_filter:
 - ClickHouse: 1
 - Coding: 6
 - Docker: 6
+- ECS: 1
 - Fortran: 1
-- GCC: 4
 - gcc: 1
+- GCC: 4
 - gdb: 1
 - Geekbench: 1
 - Go: 2
@@ -67,12 +68,13 @@ tools_software_languages_filter:
 - Oracle: 2
 - PostgreSQL: 3
 - Redis: 2
+- Remote.It: 1
 - snappy: 1
 - Snort: 1
 - SQL: 7
 - SVE: 3
 - Tensorflow: 1
-- Terraform: 12
+- Terraform: 13
 - Vectorscan: 1
 - x265: 1
 - zlib: 1

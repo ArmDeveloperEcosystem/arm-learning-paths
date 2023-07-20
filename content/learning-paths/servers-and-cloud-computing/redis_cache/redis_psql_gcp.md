@@ -51,12 +51,12 @@ Using a text editor, save the code below in a file called `main.tf`. Here we are
 ```console
 provider "google" {
   project = "{project_id}"
-  region = "us-central1"
-  zone = "us-central1-a"
+  region  = "us-central1"
+  zone    = "us-central1-a"
 }
 
 resource "google_compute_instance" "PSQL_TEST" {
-  name         = "psqltest-${count.index+1}"
+  name         = "psqltest-${count.index + 1}"
   count        = "2"
   machine_type = "t2a-standard-1"
 
@@ -73,15 +73,15 @@ resource "google_compute_instance" "PSQL_TEST" {
     }
   }
   metadata = {
-     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
 
 resource "google_compute_firewall" "rules" {
-  project     = "{project_id}"
-  name        = "my-firewall-rule"
-  network     = "default"
-  description = "Open ssh connection and psql port"
+  project       = "{project_id}"
+  name          = "my-firewall-rule"
+  network       = "default"
+  description   = "Open ssh connection and psql port"
   source_ranges = ["0.0.0.0/0"]
 
   allow {
@@ -89,8 +89,8 @@ resource "google_compute_firewall" "rules" {
   }
 
   allow {
-    protocol  = "tcp"
-    ports     = ["22", "5432"]
+    protocol = "tcp"
+    ports    = ["22", "5432"]
   }
 }
 
@@ -98,9 +98,9 @@ resource "google_compute_network" "default" {
   name = "test-network1"
 }
 resource "local_file" "inventory" {
-    depends_on=[google_compute_instance.PSQL_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [google_compute_instance.PSQL_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [db_master]
 ${google_compute_instance.PSQL_TEST[0].network_interface.0.access_config.0.nat_ip}
 ${google_compute_instance.PSQL_TEST[1].network_interface.0.access_config.0.nat_ip}

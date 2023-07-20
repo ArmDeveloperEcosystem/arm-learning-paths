@@ -445,7 +445,7 @@ In the Azure Portal, go to the [Virtual Machines page](https://portal.azure.com/
 
 Click on the Instance **Name**s to display more details about your instances, including the Private IP Address.
 
-![azure_vm #center](https://user-images.githubusercontent.com/42368140/230090582-49331e8f-7afb-45ed-ae12-8d49da0dde34.png)
+![jump #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/651f1907-4669-4f1e-9aed-25a69dffef54)
 
 ### Use Jump Host to access the Private Instance
 

@@ -375,20 +375,20 @@ From the **Azure Dashboard**, go to **Resource groups** and ensure that your res
 
 The **Resource group** name should match your output above.
 
-![image #center](https://user-images.githubusercontent.com/67620689/227440421-20642716-8eee-4f82-a5de-f4dd4592b65d.PNG)
+![terraform1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/720a6ad2-854d-4eec-8a0b-180b583e2d77)
 
 Also from the **Azure Dashboard**, go to **Virtual machines** and ensure that your virtual machine has been created from Terraform. 
 
 The **Resource group** name and **Public IP address** of this virtual machine should match your output above.
 
-![image #center](https://user-images.githubusercontent.com/67620689/227440425-fe5d1685-e957-46ec-b49c-e848d211fbe3.PNG)
+![terraform2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/6b03fb92-fd64-4397-a7c4-b7d7fa3ad663)
 
 ### Use private key to SSH into Azure VM
 Connect to your Azure VM with your preferred SSH client. You will be using the private key created through [ssh-keygen](/install-guides/ssh#ssh-keys), located at `~/.ssh/id_rsa`.
 
 Follow the connect instructions and commands mentioned in the Azure VM **Connect** section:
 
-![image #center](https://user-images.githubusercontent.com/67620689/227440429-f2b1249e-18eb-4db0-bce0-2eed07204fed.PNG)
+![terraform3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/3102e24c-6b98-4393-8d4f-f89c074089ce)
 
 For example, if using the default username `azureuser`:
 

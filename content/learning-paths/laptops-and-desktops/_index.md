@@ -33,6 +33,7 @@ tools_software_languages_filter:
 - LLVM: 1
 - Neon: 1
 - Neovim: 1
+- Remote.It: 1
 - SVE: 1
 - Visual Studio: 2
 - VS Code: 2

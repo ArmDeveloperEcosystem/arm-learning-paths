@@ -38,17 +38,17 @@ terraform {
 
 # Create a Management Network for shared services
 module "management_network" {
-  source = "./modules/vpc-network"
-  project     = var.project
-  region      = var.region
+  source  = "./modules/vpc-network"
+  project = var.project
+  region  = var.region
 }
 
 # Add public key to IAM user
 data "google_client_openid_userinfo" "me" {}
 resource "google_os_login_ssh_public_key" "cache" {
   project = var.project
-  user = data.google_client_openid_userinfo.me.email
-  key  = file("~/.ssh/id_rsa.pub")
+  user    = data.google_client_openid_userinfo.me.email
+  key     = file("~/.ssh/id_rsa.pub")
 }
 
 # Ensure IAM user is allowed to use OS Login
@@ -64,7 +64,7 @@ resource "google_compute_instance" "bastion_host" {
   name         = "bastion-vm"
   machine_type = "t2a-standard-1"
   zone         = var.zone
-  tags = ["public"]
+  tags         = ["public"]
   boot_disk {
     initialize_params {
       image = "ubuntu-os-cloud/ubuntu-2204-lts-arm64"
@@ -82,12 +82,12 @@ resource "google_compute_instance" "bastion_host" {
 }
 # Create a private instance to use alongside the bastion host.
 resource "google_compute_instance" "private" {
-  project = var.project
-  name         = "bastion-private"
-  machine_type = "t2a-standard-1"
-  zone         = var.zone
+  project                   = var.project
+  name                      = "bastion-private"
+  machine_type              = "t2a-standard-1"
+  zone                      = var.zone
   allow_stopping_for_update = true
-  tags = ["private"]
+  tags                      = ["private"]
   boot_disk {
     initialize_params {
       image = "ubuntu-os-cloud/ubuntu-2204-lts-arm64"
@@ -169,7 +169,7 @@ resource "google_compute_network" "vpc" {
 }
 
 resource "google_compute_router" "vpc_router" {
-  name = "bastion-router"
+  name    = "bastion-router"
   project = var.project
   region  = var.region
   network = google_compute_network.vpc.self_link
@@ -177,14 +177,14 @@ resource "google_compute_router" "vpc_router" {
 
 # Public Subnetwork Config
 resource "google_compute_subnetwork" "vpc_subnetwork_public" {
-  name = "bastion-subnetwork-public"
-  project = var.project
-  region  = var.region
-  network = google_compute_network.vpc.self_link
+  name                     = "bastion-subnetwork-public"
+  project                  = var.project
+  region                   = var.region
+  network                  = google_compute_network.vpc.self_link
   private_ip_google_access = true
   ip_cidr_range            = cidrsubnet(var.cidr_block, var.cidr_subnetwork_width_delta, 0)
   secondary_ip_range {
-    range_name = "public-cluster"
+    range_name    = "public-cluster"
     ip_cidr_range = cidrsubnet(var.secondary_cidr_block, var.secondary_cidr_subnetwork_width_delta, 0)
   }
   secondary_ip_range {
@@ -206,10 +206,10 @@ resource "google_compute_subnetwork" "vpc_subnetwork_public" {
 }
 
 resource "google_compute_router_nat" "vpc_nat" {
-  name = "bastion-nat"
-  project = var.project
-  region  = var.region
-  router  = google_compute_router.vpc_router.name
+  name                   = "bastion-nat"
+  project                = var.project
+  region                 = var.region
+  router                 = google_compute_router.vpc_router.name
   nat_ip_allocate_option = "AUTO_ONLY"
   # "Manually" define the subnetworks for which the NAT is used, so that we can exclude the public subnetwork
   source_subnetwork_ip_ranges_to_nat = "LIST_OF_SUBNETWORKS"
@@ -221,12 +221,12 @@ resource "google_compute_router_nat" "vpc_nat" {
 
 # Private Subnetwork Config
 resource "google_compute_subnetwork" "vpc_subnetwork_private" {
-  name = "bastion-subnetwork-private"
-  project = var.project
-  region  = var.region
-  network = google_compute_network.vpc.self_link
+  name                     = "bastion-subnetwork-private"
+  project                  = var.project
+  region                   = var.region
+  network                  = google_compute_network.vpc.self_link
   private_ip_google_access = true
-  ip_cidr_range = cidrsubnet(var.cidr_block, var.cidr_subnetwork_width_delta, 1 * (1 + var.cidr_subnetwork_spacing))
+  ip_cidr_range            = cidrsubnet(var.cidr_block, var.cidr_subnetwork_width_delta, 1 * (1 + var.cidr_subnetwork_spacing))
   secondary_ip_range {
     range_name = "private-services"
     ip_cidr_range = var.private_services_secondary_cidr_block != null ? var.private_services_secondary_cidr_block : cidrsubnet(
@@ -247,12 +247,12 @@ resource "google_compute_subnetwork" "vpc_subnetwork_private" {
 
 # Attach Firewall Rules to allow inbound traffic to tagged instances
 module "network_firewall" {
-  source = "../network-firewall"
+  source                                = "../network-firewall"
   project                               = var.project
   network                               = google_compute_network.vpc.self_link
   allowed_public_restricted_subnetworks = var.allowed_public_restricted_subnetworks
-  public_subnetwork  = google_compute_subnetwork.vpc_subnetwork_public.self_link
-  private_subnetwork = google_compute_subnetwork.vpc_subnetwork_private.self_link
+  public_subnetwork                     = google_compute_subnetwork.vpc_subnetwork_public.self_link
+  private_subnetwork                    = google_compute_subnetwork.vpc_subnetwork_private.self_link
 }
 ```
 
@@ -363,13 +363,13 @@ data "google_compute_subnetwork" "private_subnetwork" {
 
 # public - allow ingress from anywhere
 resource "google_compute_firewall" "public_allow_all_inbound" {
-  name = "bastion-public-allow-ingress"
-  project = var.project
-  network = var.network
+  name          = "bastion-public-allow-ingress"
+  project       = var.project
+  network       = var.network
   target_tags   = ["public"]
   direction     = "INGRESS"
   source_ranges = ["0.0.0.0/0"]
-  priority = "1000"
+  priority      = "1000"
   allow {
     protocol = "all"
   }
@@ -377,14 +377,14 @@ resource "google_compute_firewall" "public_allow_all_inbound" {
 
 # public - allow ingress from specific sources
 resource "google_compute_firewall" "public_restricted_allow_inbound" {
-  count = length(var.allowed_public_restricted_subnetworks) > 0 ? 1 : 0
-  name = "bastion-public-restricted-allow-ingress"
-  project = var.project
-  network = var.network
+  count         = length(var.allowed_public_restricted_subnetworks) > 0 ? 1 : 0
+  name          = "bastion-public-restricted-allow-ingress"
+  project       = var.project
+  network       = var.network
   target_tags   = ["public-restricted"]
   direction     = "INGRESS"
   source_ranges = var.allowed_public_restricted_subnetworks
-  priority = "1000"
+  priority      = "1000"
   allow {
     protocol = "all"
   }
@@ -392,9 +392,9 @@ resource "google_compute_firewall" "public_restricted_allow_inbound" {
 
 # private - allow ingress from within this network
 resource "google_compute_firewall" "private_allow_all_network_inbound" {
-  name = "bastion-private-allow-ingress"
-  project = var.project
-  network = var.network
+  name        = "bastion-private-allow-ingress"
+  project     = var.project
+  network     = var.network
   target_tags = ["private"]
   direction   = "INGRESS"
   source_ranges = [
@@ -412,14 +412,14 @@ resource "google_compute_firewall" "private_allow_all_network_inbound" {
 
 # private-persistence - allow ingress from `private` and `private-persistence` instances in this network
 resource "google_compute_firewall" "private_allow_restricted_network_inbound" {
-  name = "bastion-allow-restricted-inbound"
-  project = var.project
-  network = var.network
+  name        = "bastion-allow-restricted-inbound"
+  project     = var.project
+  network     = var.network
   target_tags = ["private-persistence"]
   direction   = "INGRESS"
   # source_tags is implicitly within this network; tags are only applied to instances that rest within the same network
   source_tags = ["private", "private-persistence"]
-  priority = "1000"
+  priority    = "1000"
   allow {
     protocol = "all"
   }
@@ -461,7 +461,7 @@ To deploy the instances, you need to initialize Terraform, generate an execution
 ### Verify the Instance and Bastion Host setup
 In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances you created through Terraform must be displayed on the screen.
 
-![image](https://user-images.githubusercontent.com/67620689/222353051-483be628-6466-44f5-85b5-d7a7039b7dad.PNG)
+![gcp_jump #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/47ebebb4-678d-464d-b85e-e6bcc3d8c0f1)
 
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.

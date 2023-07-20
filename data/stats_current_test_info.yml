@@ -1,7 +1,7 @@
 summary:
-  content_total: 150
-  content_with_all_tests_passing: 30
-  content_with_tests_enabled: 30
+  content_total: 156
+  content_with_all_tests_passing: 31
+  content_with_tests_enabled: 31
 sw_categories:
   cross-platform:
     intrinsics:
@@ -65,6 +65,10 @@ sw_categories:
       readable_title: NoMachine
       tests_and_status:
       - ubuntu:latest: passed
+    oci-cli:
+      readable_title: Oracle Cloud Infrastructure (OCI) CLI
+      tests_and_status:
+      - ubuntu:latest: passed
     terraform:
       readable_title: Terraform
       tests_and_status:
@@ -122,7 +126,7 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
     ran:
-      readable_title: Get started with Arm 5G RAN Acceleration Library (ArmRAL)
+      readable_title: Get started with the Arm 5G RAN Acceleration Library (ArmRAL)
       tests_and_status:
       - ubuntu:latest: passed
     snappy:

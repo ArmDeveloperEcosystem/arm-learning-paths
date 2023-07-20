@@ -54,11 +54,11 @@ provider "aws" {
   region = "us-east-2"
 }
 resource "aws_instance" "MYSQL_TEST" {
-  count         = "2"
-  ami           = "ami-0ca2eafa23bc3dd01"
-  instance_type = "t4g.small"
-  security_groups= [aws_security_group.Terraformsecurity1.name]
-  key_name = aws_key_pair.deployer.key_name
+  count           = "2"
+  ami             = "ami-0ca2eafa23bc3dd01"
+  instance_type   = "t4g.small"
+  security_groups = [aws_security_group.Terraformsecurity1.name]
+  key_name        = aws_key_pair.deployer.key_name
   tags = {
     Name = "MYSQL_TEST"
   }
@@ -74,35 +74,35 @@ resource "aws_security_group" "Terraformsecurity1" {
   vpc_id      = aws_default_vpc.main.id
 
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 3306
-    to_port          = 3306
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
-}
+    description = "TLS from VPC"
+    from_port   = 3306
+    to_port     = 3306
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   ingress {
-    description      = "TLS from VPC"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "TLS from VPC"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
     Name = "Terraformsecurity1"
   }
 
- }
+}
 resource "local_file" "inventory" {
-    depends_on=[aws_instance.MYSQL_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [aws_instance.MYSQL_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [mysql1]
 ${aws_instance.MYSQL_TEST[0].public_ip}
 [mysql2]
@@ -114,10 +114,9 @@ ansible_user=ubuntu
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "id_rsa"
-        public_key = file("~/.ssh/id_rsa.pub")
-} 
-    
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
+}
 ```
 Make the changes listed below in `main.tf` to match your account settings.
 

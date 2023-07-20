@@ -53,9 +53,9 @@ provider "aws" {
   region = "us-east-2"
 }
 resource "aws_instance" "redis-deployment" {
-  ami = "ami-0ca2eafa23bc3dd01"
-  instance_type = "t4g.small"
-  key_name= aws_key_pair.deployer.key_name
+  ami                    = "ami-0ca2eafa23bc3dd01"
+  instance_type          = "t4g.small"
+  key_name               = aws_key_pair.deployer.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
 }
 
@@ -64,24 +64,24 @@ resource "aws_security_group" "main" {
   description = "Allow TLS inbound traffic"
 
   ingress {
-    description      = "Open redis connection port"
-    from_port        = 6379
-    to_port          = 6379
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "Open redis connection port"
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   ingress {
-    description      = "Allow ssh to instance"
-    from_port        = 22
-    to_port          = 22
-    protocol         = "tcp"
-    cidr_blocks      = ["0.0.0.0/0"]
+    description = "Allow ssh to instance"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
-    from_port        = 0
-    to_port          = 0
-    protocol         = "-1"
-    cidr_blocks      = ["0.0.0.0/0"]
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
@@ -90,17 +90,17 @@ output "Master_public_IP" {
 }
 
 resource "local_file" "inventory" {
-    depends_on=[aws_instance.redis-deployment]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [aws_instance.redis-deployment]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [all]
 ansible-target1 ansible_connection=ssh ansible_host=${aws_instance.redis-deployment.public_dns} ansible_user=ubuntu
                 EOF
 }
 
 resource "aws_key_pair" "deployer" {
-        key_name   = "id_rsa"
-        public_key = file("~/.ssh/id_rsa.pub")
+  key_name   = "id_rsa"
+  public_key = file("~/.ssh/id_rsa.pub")
 }
 ```
 Make the changes listed below in `main.tf` to match your account settings.

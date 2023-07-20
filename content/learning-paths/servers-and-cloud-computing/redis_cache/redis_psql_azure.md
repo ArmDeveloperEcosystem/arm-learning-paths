@@ -56,16 +56,16 @@ terraform {
 
   required_providers {
     azurerm = {
-      source= "hashicorp/azurerm"
+      source  = "hashicorp/azurerm"
       version = "~>2.0"
     }
     random = {
-      source= "hashicorp/random"
+      source  = "hashicorp/random"
       version = "~>3.0"
     }
     tls = {
-    source = "hashicorp/tls"
-    version = "~>4.0"
+      source  = "hashicorp/tls"
+      version = "~>4.0"
     }
   }
 }
@@ -73,18 +73,17 @@ terraform {
 provider "azurerm" {
   features {}
 }
-    
 ```
 Create a `variables.tf` file for describing the variables referenced in the other files:
 
 ```console
 variable "resource_group_location" {
-  default = "eastus2"
+  default     = "eastus2"
   description = "Location of the resource group."
 }
 
 variable "resource_group_name_prefix" {
-  default = "rg"
+  default     = "rg"
   description = "Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription."
 }
 ```
@@ -98,83 +97,83 @@ resource "random_pet" "rg_name" {
 
 resource "azurerm_resource_group" "rg" {
   location = var.resource_group_location
-  name = random_pet.rg_name.id
+  name     = random_pet.rg_name.id
 }
 
 # Create virtual network
 resource "azurerm_virtual_network" "my_terraform_network" {
-  name = "myVnet"
-  address_space = ["10.1.0.0/16"]
-  location = azurerm_resource_group.rg.location
+  name                = "myVnet"
+  address_space       = ["10.1.0.0/16"]
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 }
 
 # Create subnet
 resource "azurerm_subnet" "my_terraform_subnet" {
-  name = "mySubnet"
-  resource_group_name = azurerm_resource_group.rg.name
+  name                 = "mySubnet"
+  resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.my_terraform_network.name
-  address_prefixes = ["10.1.1.0/24"]
+  address_prefixes     = ["10.1.1.0/24"]
 }
 
 # Create Public IPs
 resource "azurerm_public_ip" "my_terraform_public_ip" {
-  name = "myPublicIP${format("%02d", count.index)}-test"
-  count= 2
-  location = azurerm_resource_group.rg.location
+  name                = "myPublicIP${format("%02d", count.index)}-test"
+  count               = 2
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
-  allocation_method = "Dynamic"
+  allocation_method   = "Dynamic"
 }
 
 # Create Network Security Group and rule
 resource "azurerm_network_security_group" "my_terraform_nsg" {
-  name= "myNetworkSecurityGroup"
-  location= azurerm_resource_group.rg.location
+  name                = "myNetworkSecurityGroup"
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   security_rule {
-    name= "SSH"
-    priority= 1001
-    direction= "Inbound"
-    access = "Allow"
-    protocol= "Tcp"
-    source_port_range= "*"
-    destination_port_range = "22"
-    source_address_prefix= "*"
+    name                       = "SSH"
+    priority                   = 1001
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "22"
+    source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
   security_rule {
-    name= "PSQL"
-    priority= 1002
-    direction= "Inbound"
-    access = "Allow"
-    protocol= "Tcp"
-    source_port_range= "*"
-    destination_port_range = "5432"
-    source_address_prefix= "*"
+    name                       = "PSQL"
+    priority                   = 1002
+    direction                  = "Inbound"
+    access                     = "Allow"
+    protocol                   = "Tcp"
+    source_port_range          = "*"
+    destination_port_range     = "5432"
+    source_address_prefix      = "*"
     destination_address_prefix = "*"
   }
 }
 
 # Create network interface
 resource "azurerm_network_interface" "my_terraform_nic" {
-  count= 2
-  name= "NIC-${format("%02d", count.index)}-test"
-  location= azurerm_resource_group.rg.location
+  count               = 2
+  name                = "NIC-${format("%02d", count.index)}-test"
+  location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 
   ip_configuration {
-    name= "my_nic_configuration"
-    subnet_id = azurerm_subnet.my_terraform_subnet.id
+    name                          = "my_nic_configuration"
+    subnet_id                     = azurerm_subnet.my_terraform_subnet.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id= azurerm_public_ip.my_terraform_public_ip.*.id[count.index]
+    public_ip_address_id          = azurerm_public_ip.my_terraform_public_ip.*.id[count.index]
   }
 }
 
 # Connect the security group to the network interface
 resource "azurerm_network_interface_security_group_association" "example" {
-  count= 2
-  network_interface_id= azurerm_network_interface.my_terraform_nic.*.id[count.index]
+  count                     = 2
+  network_interface_id      = azurerm_network_interface.my_terraform_nic.*.id[count.index]
   network_security_group_id = azurerm_network_security_group.my_terraform_nsg.id
 }
 
@@ -190,41 +189,41 @@ resource "random_id" "random_id" {
 
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "my_storage_account" {
-  name = "diag${random_id.random_id.hex}"
-  location = azurerm_resource_group.rg.location
-  resource_group_name= azurerm_resource_group.rg.name
-  account_tier = "Standard"
+  name                     = "diag${random_id.random_id.hex}"
+  location                 = azurerm_resource_group.rg.location
+  resource_group_name      = azurerm_resource_group.rg.name
+  account_tier             = "Standard"
   account_replication_type = "LRS"
 }
 
 # Create virtual machine
 resource "azurerm_linux_virtual_machine" "PSQL_TEST" {
-  name= "PSQL_TEST${format("%02d", count.index + 1)}"
-  count= 2
-  location= azurerm_resource_group.rg.location
-  resource_group_name= azurerm_resource_group.rg.name
+  name                  = "PSQL_TEST${format("%02d", count.index + 1)}"
+  count                 = 2
+  location              = azurerm_resource_group.rg.location
+  resource_group_name   = azurerm_resource_group.rg.name
   network_interface_ids = [azurerm_network_interface.my_terraform_nic.*.id[count.index]]
-  size= "Standard_D2ps_v5"
+  size                  = "Standard_D2ps_v5"
 
   os_disk {
-    name = "myOsDisk${format("%02d", count.index + 1)}"
-    caching= "ReadWrite"
+    name                 = "myOsDisk${format("%02d", count.index + 1)}"
+    caching              = "ReadWrite"
     storage_account_type = "Premium_LRS"
   }
 
   source_image_reference {
     publisher = "Canonical"
-    offer = "0001-com-ubuntu-server-focal"
-    sku= "20_04-lts-arm64"
-    version= "20.04.202209200"
+    offer     = "0001-com-ubuntu-server-focal"
+    sku       = "20_04-lts-arm64"
+    version   = "20.04.202209200"
   }
 
-  computer_name= "myvm"
-  admin_username= "ubuntu"
+  computer_name                   = "myvm"
+  admin_username                  = "ubuntu"
   disable_password_authentication = true
 
   admin_ssh_key {
-    username= "ubuntu"
+    username   = "ubuntu"
     public_key = file("~/.ssh/id_rsa.pub")
   }
 
@@ -233,9 +232,9 @@ resource "azurerm_linux_virtual_machine" "PSQL_TEST" {
   }
 }
 resource "local_file" "inventory" {
-    depends_on=[azurerm_linux_virtual_machine.PSQL_TEST]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [azurerm_linux_virtual_machine.PSQL_TEST]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [db_master]
 ${azurerm_linux_virtual_machine.PSQL_TEST[0].public_ip_address}
 ${azurerm_linux_virtual_machine.PSQL_TEST[1].public_ip_address}

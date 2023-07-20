@@ -49,23 +49,23 @@ To obtain GCP user credentials, follow this [guide](/install-guides/gcloud#acqui
 Using a text editor, save the code below in a file called `main.tf`.
 
 Scroll down to see the information you need to change in `main.tf`.
-```
+```console
 provider "google" {
   project = "{project_id}"
-  region = "us-central1"
-  zone = "us-central1-a"
+  region  = "us-central1"
+  zone    = "us-central1-a"
 }
 
 resource "google_compute_firewall" "rules" {
-  project     = "{project_id}"
-  name        = "my-firewall-rule"
-  network     = "default"
-  description = "Open Redis connection port"
+  project       = "{project_id}"
+  name          = "my-firewall-rule"
+  network       = "default"
+  description   = "Open Redis connection port"
   source_ranges = ["0.0.0.0/0"]
 
   allow {
-    protocol  = "tcp"
-    ports     = ["6379"]
+    protocol = "tcp"
+    ports    = ["6379"]
   }
 }
 
@@ -86,7 +86,7 @@ resource "google_compute_instance" "vm_instance" {
     }
   }
   metadata = {
-     ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
+    ssh-keys = "ubuntu:${file("~/.ssh/id_rsa.pub")}"
   }
 }
 output "Master_public_IP" {
@@ -94,9 +94,9 @@ output "Master_public_IP" {
 }
 
 resource "local_file" "inventory" {
-    depends_on=[google_compute_instance.vm_instance]
-    filename = "/tmp/inventory"
-    content = <<EOF
+  depends_on = [google_compute_instance.vm_instance]
+  filename   = "/tmp/inventory"
+  content    = <<EOF
 [all]
 ansible-target1 ansible_connection=ssh ansible_host=${google_compute_instance.vm_instance.network_interface.0.access_config.0.nat_ip} ansible_user=ubuntu
                 EOF
