@@ -9,22 +9,22 @@ layout: "learningpathall"
 ---
 
 ##  Deploy a single node of Spark 
-Apache Spark is an open-source, distributed processing system used for big data workloads. It utilizes in-memory caching and optimized query execution for fast queries against data of any size. Simply we can say, Spark is a fast and general engine for large-scale data processing.
+Apache Spark is an open-source, distributed processing system used for big data workloads. It utilizes in-memory caching and optimized query execution for fast queries against data of any size. Spark is a fast and general engine for large-scale data processing.
 
 You can deploy Spark on AWS Graviton processors using Terraform. 
-In this topic, you will deploy Spark on a single AWS EC2 instance. 
+In this learning path, you will deploy Spark on a single AWS EC2 instance. 
 If you are new to Terraform, you should look at [Automate AWS EC2 instance creation using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/terraform/) before starting this Learning Path.
 
 ## Before you begin
 
-You should have the prerequisite tools installed before starting the Learning Path. 
+You should have the prerequisite tools installed before starting the learning path. 
 
 Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools. 
 
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this learning path. Create an account if you don't have one.
 
 Before you begin you will also need:
-- An AWS access key ID and secret access key. 
+- An AWS access key ID and secret access key
 - An SSH key pair
 
 The instructions to create the keys are below.
@@ -33,7 +33,7 @@ The instructions to create the keys are below.
 
 The installation of Terraform on your desktop or laptop needs to communicate with AWS. Thus, Terraform needs to be able to authenticate with AWS.
 
-To generate and configure the Access key ID and Secret access key, follow this [documentation](/install-guides/aws_access_keys).
+To generate and configure the Access key ID and Secret access key, follow this [guide](/install-guides/aws_access_keys).
 ### Generate a SSH key-pair
 
 Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for AWS EC2 access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
@@ -45,8 +45,6 @@ If you already have an SSH key-pair present in the `~/.ssh` directory, you can s
 ## Create an AWS EC2 instance using Terraform
 
 Using a text editor, save the code below in a file called `main.tf`.
-
-Scroll down to see the information you need to change in `main.tf`
 
 ```json
 provider "aws" {
@@ -165,6 +163,7 @@ Master_public_IP = [
   "18.217.147.103",
 ]
 ```
+You can configure Spark either manually or by using Ansible. Choose one way and proceed using the steps outlined below.
 
 ## Configure Spark manually
 **SSH to the instance**
@@ -176,7 +175,8 @@ ssh ubuntu@Master_public_IP
 ```
 **Installation of required dependencies on AWS EC2 instance**
 
-For deploying Spark on AWS graviton2, we need to install below tools and dependencies on our EC2 instance:
+For deploying Spark on AWS graviton2, you need to install the tools and dependencies shown below on your EC2 instance:
+
 ```console
 sudo apt-get update
 sudo apt install openjdk-11-jdk python3-pip -y
@@ -186,7 +186,7 @@ export PATH=/home/ubuntu/.local/bin:$PATH
 
 ## Running Jupyter Notebook
 
-The following runs Jupyter notebook on the instance:
+Use the command below to run a Jupyter notebook on the instance:
 ```console
  jupyter notebook --ip="0.0.0.0"
 ```
@@ -201,10 +201,9 @@ For a successful launch, Jupyter prints the URLs containing a token to access th
      or http://127.0.0.1:8888/?token=392463586bee6e1aa974cd254db8cee79f27ce9334ee22fa
 ```
 
-{{% notice Note %}} Follow the above mentioned steps for configuring Spark manually or follow the below ansible steps for configuration of Spark in AWS EC2 instance. {{% /notice %}}
-
 ## Configure Spark by Ansible
-Using a text editor, save the code below to a file called `spark.yaml`. It will install the Spark and the required dependencies. Below is the YAML file for the Ansible playbook.
+Using a text editor, save the code below to a file called `spark.yaml`. This is the YAML file for the Ansible playbook to install Spark and the required dependencies. 
+
 ```yaml
 - name: Spark config
   hosts: all
@@ -254,6 +253,7 @@ Using a text editor, save the code below to a file called `spark.yaml`. It will 
 
 ## Ansible Commands
 Run the playbook using the `ansible-playbook` command:
+
 ```console
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook spark.yaml -i /tmp/inventory
 ```
@@ -274,7 +274,7 @@ PLAY RECAP *********************************************************************
 
 ## Running Jupyter Notebook
 
-Run the below code line by line in Jupyter notebook:
+Run the below code line by line in the Jupyter notebook:
 
 ```python
 import pyspark
@@ -287,11 +287,11 @@ countries = [
 ]
 df = spark.createDataFrame(data=countries)
 ```
-The Spark log level is set to warning by deafult and hence you may find warnings when excuting the code. Below is the interface of Jupyter notebook:
+The Spark log level is set to warning by default and so you may find warnings when executing the code. Shown below is the interface of Jupyter notebook:
 
 ![image](spark_jupyter.png)
 
-You have successfully deployed Spark on an AWS EC2 instance running Graviton processors.
+You have successfully deployed Spark on an AWS EC2 instance running on Graviton processors.
 
 ### Clean up resources
 
