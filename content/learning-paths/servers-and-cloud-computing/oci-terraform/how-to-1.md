@@ -1,5 +1,5 @@
 ---
-title: Automate OCI instance creation using Terraform
+title: Automate OCI VM instance creation using Terraform
 
 weight: 2
 
@@ -7,134 +7,95 @@ weight: 2
 layout: learningpathall
 ---
 
-This Learning Path uses [Terraform Cloud](https://registry.terraform.io/) to automate creation of Arm instances. Reader may wish to also see:
-* [Getting Started with Oracle OCI](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/oci/)
+This Learning Path uses Terraform to automate creation of Arm virtual machine instances on the Oracle Cloud Infrastructure (OCI). 
 
 ## Before you begin 
-You should have the prerequisite tools installed before starting the Learning Path.
 
-Any computer which has the required tools installed can be used for this section. The computer can be your desktop, laptop, or a virtual machine with the required tools.
+You may want to review the Learning Path [Getting Started with Oracle OCI](/learning-paths/servers-and-cloud-computing/csp/oci/) before you begin.
+
+Any computer which has the required tools installed can be used. The computer can be your desktop, laptop, or a virtual machine with the required tools.
+
+Refer to the [Terraform install guide](/install-guides/terraform/) for instructions to install Terraform.
 
 You will need an [Oracle OCI account](https://login.oci.oraclecloud.com/) to complete this Learning Path. Create an account if you don’t have one.
 
-Before you begin, you will also need:
+Before you begin, you will also need an SSH key pair. 
 
-- Login to the OCI CLI
-- An SSH key pair 
+## Acquire OCI Access Credentials
 
-The instructions to login to the OCI CLI and create these keys are below.
-
-### Generate an SSH key-pair
-
-Generate the SSH key-pair (public key, private key) using `ssh-keygen` to use for OCI access. To generate the key-pair, follow this [guide](/install-guides/ssh#ssh-keys).
-
-{{% notice Note %}}
-If you already have an SSH key-pair present in the `~/.ssh` directory, you can skip this step.
-{{% /notice %}}
-
-
-
-### Acquire OCI Access Credentials
-
-The installation of Terraform on your desktop or laptop needs to communicate with OCI. Thus, Terraform needs to be authenticated.
+The installation of Terraform on your desktop or laptop needs to communicate with OCI. To to this, Terraform needs to be authenticated.
 
 For authentication, generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to OCI via the OCI CLI.
 
 To generate and configure the Access key ID and Secret access key, follow the steps below: 
 
-First Check if Terraform is installed.
+Confirm Terraform is installed:
 
 ```bash { target="ubuntu:latest" }
 terraform -v
 ```
 
-
-example output:
+The output will be similar to: 
 
 ```bash { target="ubuntu:latest" }
-Terraform v1.5.2
+Terraform v1.5.3
 on linux_arm64
 ```
 
-
-if terraform is not installed follow this [guide](https://learn.arm.com/install-guides/terraform/)
-
-Now that you have confirmed Terraform is installed we will now configure terraform with OCI. 
+Start configuration by creating a new directory for OCI:
 
 ```bash { target="ubuntu:latest" }
 mkdir $HOME/.oci
 ```
 
-You must generate a private key in PEM format and configure the API key with Oracle. follow the steps below to do so: 
+Generate a private key in PEM format and adjust the permissions:
+
 ```bash { target="ubuntu:latest" }
 openssl genrsa -out $HOME/.oci/rsa_private.pem 2048
-```
-This makes it so only you can read and write to the key
-```bash { target="ubuntu:latest" }
 chmod 600 $HOME/.oci/rsa_private.pem 
 ```
 
-Generate the public key:
-This makes it so only you can read and write to the key
+Generate a public key:
+
 ```bash { target="ubuntu:latest" }
 openssl rsa -pubout -in $HOME/.oci/rsa_private.pem -out $HOME/.oci/rsa_public.pem 
 ```
 
-open the file:
+Display the public key file:
+
 ```bash { target="ubuntu:latest" }
 cd $HOME/.oci
-ls -lta 
-```
-
-Copy the public key including the ----BEGIN PUBLIC KEY---- and ----END PUBLIC KEY---:
-```bash { target="ubuntu:latest" }
 cat rsa_public.pem
 ```
 
-Example output: 
+Copy the public key including the `----BEGIN PUBLIC KEY----` and `----END PUBLIC KEY---`
 
-```bash { target="ubuntu:latest" }
-dr.xxxxx.   2 opc opc   51 May  4 01:30 .
--rw-rw-r--. 1 opc opc  451 May  4 01:30 rsa_public.pem
--rw-------. 1 opc opc 1629 May  4 01:30 rsa_private.pem
-drwx------. 5 opc opc 145  May  4 01:29 .. 
-opc @terraform-test.oci $ cat rsa_public.pem
------BEGIN PUBLIC KEY------
-# Your key here
------END PUBLIC KEY-------
-```
+In the OCI web console, click on the Profile icon in the upper right corner and then click your profile on the drop down menu. 
 
+Click `API Keys` on the left side of the page and then `ADD API Key`
 
-
-Now you add your public key to your user account in the OCI web console:
+Select `Paste a public key` as shown below and paste the contents of your public key in the box. Make sure to include the `----BEGIN PUBLIC KEY----` and `----END PUBLIC KEY---`
 
 ![alt-text #center](https://user-images.githubusercontent.com/89662128/250157622-288f0781-7707-4e6a-8a15-a389e453307b.jpg "Click paste a public key")
 
 Now you have connected your RSA keys to your OCI account.
 
+## Create Terraform scripts 
 
+Create a directory for the Terraform scripts. 
 
-## Create Scripts 
+In your home directory, create a directory called tf-provider and change to that directory.
 
-For this section you need you API key for terraform authentication.
-
-First, set up a directory for Terraform scripts. Then add a provider script so your OCI account can authenticate the scripts running from this directory.
-
-
-In <your-home-directory>, create a directory called tf-provider and change to that directory.
 ```bash { target="ubuntu:latest" }
-mkdir tf-provider
-cd tf-provider
+mkdir $HOME/tf-provider
+cd $HOME/tf-provider
 ```
 
-Create a file called "provider.tf"
+Use a text editor to create a new file named `provider.tf`
 
-Add the following code to provider.tf:
+Add the code below to `provider.tf` and save the file:
 
-Replace the fields with brackets, with information from the Gather Required Information section.
-Add quotations around string values.
-
-```bash { target="ubuntu:latest" }
+```console
 provider "oci" {
   tenancy_ocid = "<tenancy-ocid>"
   user_ocid = "<user-ocid>" 
@@ -143,17 +104,26 @@ provider "oci" {
   region = "<region-identifier>"
 }
 ```
-Tip: you can find all the values needed in your profile. use this article to find your region: [guide](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
 
+Replace each field with the values for your account. You can find these in your profile in the OCI console.
 
-### Add a Data Source
-
-In this section, you fetch a list of the availability domains in your tenancy. By fetching data, you confirm that your OCI account authenticates your provider.tf script and you get information from your account.
-
-
-In the tf-provider directory, create a file called availability-domains.tf
+To get the key finger print for your private key run the `openssl` command:
 
 ```bash { target="ubuntu:latest" }
+openssl rsa -pubout -outform DER -in ~/.oci/rsa_private.pem | openssl md5 -c
+```
+
+{{% notice Note %}}
+Find your region using the [OCI documentation](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)
+{{% /notice %}}
+
+
+### Add a data source
+
+In the same `tf-provider` directory use a text editor to create a file named `availability-domains.tf`:
+
+```bash { target="ubuntu:latest" }
+
 # Source from https://registry.terraform.io/providers/oracle/oci/latest/docs/data-sources/identity_availability_domains
 
 # Tenancy is the root or parent to all compartments.
@@ -164,17 +134,17 @@ data "oci_identity_availability_domains" "ads" {
 }
 ```
 
-##### IMPORTANT
-Ensure provider.tf and availability-domains.tf are in the same directory. Terraform processes all the files in a directory in the correct order, based on their relationship. For a modular approach and future reuse, separate the provider file from other scripts.
+Modify the `<tenancy-ocid>` value to be your tenancy OCID from your profile. 
 
+{{% notice Note %}}
+Make sure `provider.tf` and `availability-domains.tf` are in the same directory. Terraform processes all the files in a directory in the correct order.
+{{% /notice %}}
 
-### Add Outputs
+### Add outputs
 
-The data source oci_identity_availability_domains, fetches a list of availability domains. In this section, you declare an output block to print the fetched information.
+The data source `oci_identity_availability_domains` fetches a list of availability domains. In this section, you declare an output block to print the fetched information.
 
-In the tf-provider directory, create a file called outputs.tf
-
-Add the following code to outputs.tf
+In the `tf-provider directory`, use a text editor to create a file named `outputs.tf` with the content below: 
 
 
 ```bash { target="ubuntu:latest" }
@@ -184,22 +154,17 @@ output "all-availability-domains-in-your-tenancy" {
 }
 ```
 
-##### IMPORTANT
-Ensure outputs.tf, provider.tf, and availability-domains.tf are in the same directory.
+## Initialize Terraform 
 
-
-## Run Scripts
-
-Run your Terraform scripts. After your account authenticates the scripts, Terraform fetches your tenancy's availability domains.
+Use `terraform init` to run the scripts: 
 
 ```bash { target="ubuntu:latest" }
-    terraform init
+terraform init
 ```
 
-Example output:
+The output should be similar to: 
 
-```bash { target="ubuntu:latest" }
-    ubuntu@gubay-oracle-test:~/tf-provider$ terraform init
+```output
 
 Initializing the backend...
 
@@ -219,33 +184,29 @@ Terraform has created a lock file .terraform.lock.hcl to record the provider sel
 ╵
 
 Terraform has been successfully initialized!
+
+You may now begin working with Terraform. Try running "terraform plan" to see
+any changes that are required for your infrastructure. All Terraform commands
+should now work.
+
+If you ever set or change modules or backend configuration for Terraform,
+rerun this command to reinitialize your working directory. If you forget, other
+commands will detect it and remind you to do so if necessary.
 ```
 
+You now have a folder named `.terraform`` that includes the plugins for the OCI provider.
 
-
-
-Check the contents of the tf-provider directory: 
-
-```bash { target="ubuntu:latest" }
-    ls -a
-```
-
-You now have a folder called .terraform that includes the plugins for the oci provider.
-
-### Plan
+### Terraform Plan
 
 Run the Terraform plan command.
 
 ```bash { target="ubuntu:latest" }
-    terraform plan
+terraform plan
 ```
 
-Confirm that you have Plan: 0 to add, 0 to change, 0 to destroy.
+The output will be similar to:
 
-Example output:
-
-
-```bash { target="ubuntu:latest" }
+```output
    Changes to Outputs:
   + all-availability-domains-in-your-tenancy = [
       + {
@@ -270,12 +231,12 @@ infrastructure.
 ```
 
 
-### Apply
+### Terraform Apply
 
 Run your Terraform scripts and get your outputs:
 
 ```bash { target="ubuntu:latest" }
-    terraform apply
+terraform apply
 ```
 When prompted for confirmation, enter yes, for your resource to be created.
 
@@ -312,7 +273,7 @@ all-availability-domains-in-your-tenancy = tolist([
 
 Congratulations! Your Oracle Cloud Infrastructure account can now authenticate your Oracle Cloud Infrastructure Terraform provider scripts.
 
-
+# Question: Is a new compartment really needed? Can you use the default (root) compartment? 
 
 ## OCI COMPARTMENT ID
 
@@ -334,13 +295,13 @@ cp ../tf-provider/provider.tf .
 ```
 
 
-### Declare a Compartment rescource 
+### Declare a Compartment resource 
 
 Declare an Oracle Cloud Infrastructure compartment resource and then define the specifics for the compartment. 
 
 Create a file called compartment.tf.
 
-Replace the compartment_id with your tenency-ocid, and name your compartment whatever you please.    
+Replace the compartment_id with your tenancy-ocid, and name your compartment whatever you please.    
 
 Copy the provider.tf from earlier 
 
@@ -470,14 +431,3 @@ compartment-name = <your-compartment-name>
 ```
 
 Congratulations! You have successfully logged in and created a compartment in your tenancy, using the Oracle Cloud Infrastructure Terraform provider.
-
-
-
-
-
-
-
-
-
-
-
