@@ -1,5 +1,5 @@
 ---
-title: How to Setup and Configure 5G Servers
+title: Setup and Configure 5G Arm Servers
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +10,7 @@ layout: learningpathall
 
 ### Firmware Maintenance
 
-The BIOS firmware would have impact on some of the functionalities and performance of the server. So it is important to sign up for firmware updates from your server vendors
+The BIOS firmware impacts some of the functionality and performance of the server. So it is important to sign up for firmware updates from your server vendors.
 
 ### How to update firmware
 
@@ -20,18 +20,18 @@ Most of Arm servers provide web UI for managing the firmware.
 
 Log into BMC IP via browser, 
 
-   1. check its current FW version by clicking its Firmware information
+   1. Check the current FW version by clicking its `Firmware information`.
 
-   2. go to its Firmware maintenance section to click Firmware update and follow up its interface to update BIOS/SCP and BMC software 
+   2. Go to the `Firmware maintenance` section and click on `Firmware update`. Follow te prompts to update BIOS/SCP and BMC software.
 
 
 #### Via ipmitool command line
 
-The benefit of using ipmitool is for automation of controlling the servers remotely.
+The benefit of using `ipmitool` is for automation of controlling the servers remotely.
 
-To update the firmeware, take the example of Foxconn server:
+To update the firmware, for example on the Foxconn server:
 
-```bash
+```console
    ipmitool -C 3 -I lanplus -H 10.118.45.98 -U admin -P admin raw 0x32 0x8f 0x3 0x1
    ipmitool -C 3 -I lanplus -H 10.118.45.98 -U admin -P admin -z 8196 hpm upgrade MtCollinsBmc0_43_4.hpm force
    ipmitool -C 3 -I lanplus -H 10.118.45.98 -U admin -P admin raw 0x32 0x8f 0x3 0x1
@@ -40,19 +40,21 @@ To update the firmeware, take the example of Foxconn server:
    ipmitool -C 3 -I lanplus -H 10.118.45.98 -U admin -P admin -z 8196 hpm upgrade altra_scp_signed_2.10.20220531.hpm force
 ```
 
-Please note that the update of the firmware via IPMI interface is hardware dependent, check your server ODM/OEM for the IPMI detail for updating its firmware.
+{{% notice Note %}}
+The update of the firmware via IPMI interface is hardware dependent, check your server ODM/OEM for the IPMI detail for updating its firmware.
+{{% /notice %}}
 
 ### BIOS Setting
 
-Typically SR-IOV enablement is required for Arm server to support 5G deployment in container environment. Through BIOS options, you can enable SR-IOV.
+Typically SR-IOV enablement is required for Arm servers to support 5G deployment in a container environment. Through BIOS options, you can enable SR-IOV.
 
 ### PCIe Setting
 
-This is really depending on the server ODM, contact ODM/OEM to find out details.
+This setting is dependent on the server ODM, contact ODM/OEM to find out details.
 
 ### CPU Frequency Setting
 
-Following script can be run to temporarily force the cores to run at max CPU frequency
+The following script can be run to temporarily force the cores to run at max CPU frequency:
 
 ```bash
 #!/bin/bash
@@ -77,15 +79,16 @@ done
 
 #### Change frequency scaling
 
-There should be a way in the BIOS to disable frequency scaling. There's also a Linux option, described in the following. 
+Typically there is a way in the BIOS to disable frequency scaling. There's also a Linux option, described below: 
 
+```console
 cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+```
+This command returns `ondemand` in the current setup.
 
-return "ondemand" in the current setup.
+You may want to change the CPU governor from `ondemand` to `performance`.
 
-We may want to change the CPU governor from "ondemand" to "performance".
-
-The following instructions show how we do it:
+The following instructions show you how to do it:
 
 ```bash
 sudo apt install cpufrequtils
@@ -97,10 +100,12 @@ sudo systemctl disable ondemand
 
 #### Boot Parameters
 
+The individual parameters are described below:
+
 ##### Hugepage setting
 default_hugepagesz=1G hugepagesz=1G hugepages=32
 
-The huge page setting is required for DPDK support which is commonly adopted in 5G networking. It reduces the TLB misses, improves performance by lowering memory overhead, and improves memory efficiency with larger and contiguois memory allocation
+The huge page setting is required for DPDK support which is commonly adopted in 5G networking. It reduces the TLB misses, improves performance by lowering memory overhead, and improves memory efficiency with larger and contiguous memory allocation.
 
 ##### isolcpus=cpuX-cpuY
 The setting "isolcpus" is a kernel command line parameter that is used to isolate specific CPUs in a multi-CPU system, such that they are not used for general purpose processing. Instead, they are reserved for real-time or other special purpose tasks that require dedicated and predictable processing resources.
@@ -208,25 +213,28 @@ Low latency kernels are commonly used in applications that require real-time pro
 
 To achieve low latency, low latency kernels typically implement a number of changes to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. They may also make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
-How to install Lowlatency kernel on Arm server:
+To install Low latency kernel on Arm server:
 
-```bash
+```console
 sudo apt update
 sudo apt-cache policy 'linux-image-5.*-lowlatency'
 sudo apt install linux-headers-5.15.0-46-lowlatency linux-image-5.15.0-46-lowlatency -y
 ```
-then run this follwoing script to verify the new low-latency kernel:
+Then run this following script to verify the new low-latency kernel:
 
+```console
 awk -F\' '$1=="menuentry " {print i++ " : " $2} $1=="submenu " {print i++ " : " $2; j=0} $1=="\tmenuentry " {print "\t", j++ " : " $2}' /boot/grub/grub.cfg
+```
+The output from this command will look like:
 
-it will show:
-
+```output
          0 : Ubuntu, with Linux 5.15.0-46-lowlatency
          1 : Ubuntu, with Linux 5.15.0-46-lowlatency (recovery mode)
+```
 
-We will also need to disable upgrade OS kernel so the kernel will stay same version as we desire:
+You will also need to disable upgrade OS kernel so the kernel will stay at the same version:
 
-```bash
+```console
 sudo vi /etc/apt/apt.conf.d/20auto-upgrades, change 1 to 0:
 APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Unattended-Upgrade "0";
@@ -236,7 +244,7 @@ APT::Periodic::Unattended-Upgrade "0";
 
 An RT kernel is designed to provide a guaranteed minimum response time for certain system events and processes, even under heavy load conditions. This is achieved through a number of optimizations to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. Additionally, RT kernels may make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
-At this moment, RT kernel is not ready from apt repository, we have to rebuild the kernel to enable RT for Arm. We will update as soob as it becomes widely available.
+At this moment, RT kernel is not ready from apt repository, you will need to rebuild the kernel to enable RT for Arm. 
 
 ### SR-IOV
 
@@ -272,7 +280,7 @@ At this moment, RT kernel is not ready from apt repository, we have to rebuild t
        - Bare-Metal (SR-IOV VFs and Configuration map)
 
 
-```bash
+```console
 insertModules:
   - "i40e"
   - "vfio-pci"
@@ -311,13 +319,13 @@ resourceConfig:
 SR-IOV Network Device Plugin supports running in a virtualized environment. However, not all device selectors are applicable as the VFs are passthrough to the VM without any association to their respective PF, hence any device selector that relies on the association between a VF and its PF will not work and therefore the pfNames and rootDevices extended selectors will not work in a virtual deployment. The common selector pciAddress can be used to select the virtual device.
 
 #### Configuring SR-IOV Resources
-perform the following steps on the bare-metal host for enabling SR-IOV.
+Perform the following steps on the bare-metal host for enabling SR-IOV.
 
-Enable SR-IOV in BIOS settings.
+- Enable SR-IOV in BIOS settings.
 
-Execute the following command to append iommu.passthrough=1 option. GRUB_CMLINE_LINUX in /etc/default/grub
+- Execute the following command to append iommu.passthrough=1 option. GRUB_CMLINE_LINUX in /etc/default/grub
 
-Run the grub-mkconfig -o /boot/grub/grub.cfg script to update boot partitions grub configuration file.
+- Run the grub-mkconfig -o /boot/grub/grub.cfg script to update boot partitions grub configuration file.
 
 Reboot Linux to reflect the changes.
 
@@ -326,10 +334,14 @@ echo 2 > /sys/class/net/<interface name>/device/sriov_numvfs
 
 Execute the following command to check if the SR-IOV VFs interface names are displayed.
 
-"lshw -c network -businfo"
-NOTE: Execute the following command to remove the SR-IOV from the bare-metal host systems.
+```console
+lshw -c network -businfo
+```
+Execute the following command to remove the SR-IOV from the bare-metal host systems.
 
+```console
 echo 0 > /sys/class/net/<interface name>/device/sriov_numvfs
+```
 Type II - SR-IOV Configuration for Bare-metal Deployment
 Example of a SR-IOV deployment yaml file used for UPF
 
@@ -338,8 +350,9 @@ Perform the following step to verify the SR-IOV CNI resource configuration.
 
 Execute the following command in the master node and confirm if allocatable resources were created on the worker node used for UPF deployment.
 
+```console
 kubectl get node <node name> -o json | jq '.status.allocatable'
-
+```
 This command displays the following sample output.
 
 ### PTP Setting
@@ -347,9 +360,9 @@ In 5G world, the time synchronization is critical to synchronize all components 
 
 #### GrandMaster Hardware based PTP
 
-requires a GrandMaster Qulsar with GPS capability
+This option requires a GrandMaster Qulsar with GPS capability
 
-Also requires a PTP enabled switch, currently Arista switch seems to be able to have PTP sync'ed all slave nodes like Nvidia/Keysight.
+Also requires a PTP enabled switch, currently Arista switch has PTP sync'ed to all slave nodes like Nvidia/Keysight.
 
 #### SW based PTP
 
@@ -357,7 +370,7 @@ How to setup ptp4l/phc2sys on Linux:
 
 Configure Slave node setting:
 
-```bash
+```console
 $ cat /etc/5g-ptp.conf
 [global]
 verbose 1
@@ -385,7 +398,7 @@ network_transport L2
 
 Setup Slave node PTP4L service: note that we need to assign a core for this task to run
 
-```bash
+```console
 $ cat /lib/systemd/system/ptp4l.service
 [Unit]
 Description=Precision Time Protocol (PTP) service
@@ -400,7 +413,7 @@ WantedBy=multi-user.target
 ``` 
 
 Setup Slave node PHC2SYS service: note the NIC interface used here is enP1p3s0f0np0, also assign a core to run it
-```bash 
+```console 
 $ cat /lib/systemd/system/phc2sys.service
 [Unit]
 Description=Synchronize system clock or PTP hardware clock (PHC)
@@ -418,7 +431,7 @@ WantedBy=multi-user.target
 ```
  
 Configure Master node setting:
-```bash
+```console
 $ cat /etc/5g-ptp.conf
 [global]
 verbose 1
@@ -441,7 +454,7 @@ network_transport L2
 ```
  
 Setup Master node PTP4L service: note that we need to assign a core for this task to run
-```bash 
+```console 
 $ cat /lib/systemd/system/ptp4l.service
 [Unit]
 Description=Precision Time Protocol (PTP) service
@@ -458,7 +471,7 @@ WantedBy=multi-user.target
 ```
  
 Setup Master node PHC2SYS service: note the NIC interface used here is enP1p3s0f0np0, also assign a core to run it
-```bash 
+```console
 $ cat /lib/systemd/system/phc2sys.service
 [Unit]
 Description=Synchronize system clock or PTP hardware clock (PHC)
@@ -479,7 +492,7 @@ WantedBy=multi-user.target
  
 Start PTP/PHC2SYS services:
 
-```bash 
+```console 
 #PTP.service
 sudo systemctl daemon-reload
 sudo systemctl restart ptp4l.service
