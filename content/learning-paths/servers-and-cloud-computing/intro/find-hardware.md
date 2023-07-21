@@ -28,9 +28,11 @@ Free tier offers are currently available.
 
 [Get started with Arm-based cloud service platforms](/learning-paths/servers-and-cloud-computing/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
 
-## Works on arm (free Arm based cloud resources)
+## Works on Arm (free cloud resources)
 
-The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) initiative enables developers to build, test, and optimize projects on the Arm64 architecture by providing free-of-cost access to Arm based developer platforms, cloud instances, and CI/CD environments. Arm has partnered with cloud platform providers to make Neoverse-based compute available for cloud-to-edge solutions, while offering choice and flexibility. Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
+The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) initiative enables developers to build, test, and optimize projects on the Arm64 architecture by providing free access to Arm based developer platforms, cloud instances, and CI/CD environments. Arm has partnered with cloud service providers to make Neoverse compute available to developers.
+
+Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
 
 ##  Arm SystemReady Certified hardware
 
