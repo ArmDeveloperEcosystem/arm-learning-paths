@@ -7,6 +7,9 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Infrastructure automation for other Learning Paths
+
+Some learning paths may require one or more server nodes to complete. The Terraform files shown here can be used as a platform to work on those learning paths. The intent is for you to modify these as needed to support other learning path activities.
 
 ## Introduction to Jump Server
 
