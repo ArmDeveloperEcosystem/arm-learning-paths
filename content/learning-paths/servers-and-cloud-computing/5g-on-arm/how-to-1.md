@@ -1,15 +1,15 @@
 ---
-title: How to Choose Right 5G Servers
+title: Choose the appropriate Arm server for running the 5G stack
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## How to Choose Right 5G Servers
+## Choose the appropriate Arm 5G Servers
 ---
 
-#### We have done extensive 5G development and testing on Arm servers with various HW configurations and SW components:
+#### Extensive 5G development and testing on Arm servers has been done on the hardware configurations and software components listed below:
 
      1. 5G-in-one-box (software only)
 
@@ -19,7 +19,7 @@ layout: learningpathall
 
      4. 5G with Lookaside Accelerator Offload
 
-#### We have evaluated a variety of Arm server platforms from Foxconn, Gigabyte, WIWYNN, Supermicro and HPE
+#### The Arm server platforms listed below have been evaluated to run the 5G stack on:
 
      1. Gigabyte (Mt. Snow 1P)
 
@@ -35,27 +35,27 @@ layout: learningpathall
 
 1P vs 2P systems:
 
-For evaluation purpose, we recommend a 1P system which should be sufficient to run any 5G software stacks (L1/L2/L3) considering that the Arm CPU has at least 80 cores. 2P system would be great to run more processes on single box, however, we need to avoid socket communication, especially when some PCIe devices sit in a different node across from the CPU. 
+For evaluation purposes, a 1P system is recommended which should be sufficient to run any 5G software stacks (L1/L2/L3) considering that the Arm CPU has at least 80 cores. 2P system would be great to run more processes on single box, however, socket communication should be avoided, especially when some PCIe devices sit in a different node across from the CPU. 
 
 1U vs 2U systems:
 
-1U would be sufficient to run 5G CN Core software or pure 5G software stacks while 2U is definitely required for needing additional HW such as several PCIe cards or a full length PCIe card for L1 processing, for example, the Nvidia A100X and Genvisio.
+1U is sufficient to run 5G CN Core software or pure 5G software stacks while 2U is required when you need additional hardware such as several PCIe cards or a full length PCIe card for L1 processing, for example, the Nvidia A100X and Genvisio.
 
 #### Accommodating PCIe Accelerators
 
-Due to nature of PCIe devices, we need to consider carefully for picking up right Arm server to accommodating the PCIe Accelerators we are going to use.
+Due to the nature of PCIe devices, you need to carefully select the right Arm server to accommodate the PCIe Accelerators you are going to use.
 
-For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's ARM server seems to better accommodate some Inline L1 Accelerator cards.
+For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's Arm server better accommodate some Inline L1 Accelerator cards.
 
-For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC in one device, we need to make sure its NIC ports face out. At this moment, only Supermicro ARM server has designed its server with the full length PCIe cards such as Nvidia A100X converged card.
+For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC in one device, you need to make sure its NIC ports face out. At this moment, only Supermicro Arm server has designed its server with the full length PCIe cards such as Nvidia A100X converged card.
 
 #### 5G Ready on Arm
 
-This handbook attempt to provide the guide to make Arm servers ready for 5G development and deployment:
+This learning path attempts to provide the guidance to make Arm servers ready for 5G development and deployment:
 
    1. Using existing PoC example to run the qualification to see if the server can pass with automation
 
-   2. Using Performance PoC example to test to see if the server can meet our performance goal with automation
+   2. Using Performance PoC example to test to see if the server can meet performance goals with automation
 
 
 
