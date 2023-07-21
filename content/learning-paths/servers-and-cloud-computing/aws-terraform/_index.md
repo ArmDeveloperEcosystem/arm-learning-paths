@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for software developers who are n
 learning_objectives: 
     - Automate AWS EC2 instance creation using Terraform
     - Deploy Arm instances on AWS and provide access via Jump Server
-    - Give you Infrastructure as Code knowledge and files that could help with future learning paths
+    - Provide infrastructure basics, code knowledge and files that could help with future learning paths
 
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
