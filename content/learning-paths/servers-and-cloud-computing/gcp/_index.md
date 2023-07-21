@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for anyone new to using Arm virtu
 learning_objectives:
     - Automate Arm virtual machine creation using Terraform
     - Deploy Arm instances on GCP and provide access via Jump Server
-    - Give you Infrastructure as Code knowledge and files that could help with future learning paths
+    - Provide infrastructure basics, code knowledge and files that could help with future learning paths
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
