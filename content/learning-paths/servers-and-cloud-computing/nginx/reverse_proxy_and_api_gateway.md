@@ -6,170 +6,148 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Setup two [basic web servers](../basic_static_file_server) using the instructions in the previous section.
-You will setup the third machine that will serve as a reverse proxy.
+Setup at least two [file servers](../basic_static_file_server) using the instructions in the previous section. If you wish, you can use your own custom configured file servers instead.
 
-This section creates 2 upstream web servers behind the reverse proxy or API Gateway. You can create as many upstream web servers as you wish, but the example here assumes two are already created.
+In this section, a third node is setup that will run a Reverse Proxy & API Gateway (this will also be referred to a RP/APIGW). This RP/APIGW will use the two file servers as the upstream servers it will load balance across. The configuration shown here is a bare minimum. Tuning will be explored in an advanced learning path. Once you are done here, you should review the [Nginx documentation](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) on Reverse Proxies. There are also some [Nginx blogs](https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/) that discuss the deployment of API Gateways.
 
 ## Setup a Reverse Proxy and API Gateway
 
-The steps below are used to setup Reverse Proxy and API Gateway.
+### Nginx configuration
 
-Switch to root:
+SSH into the node that will run the RP/APIGW.
 
-```console
-sudo su -
-```
+Using a file editor of your choice, add the following top level Nginx configuration to `/etc/nginx/nginx.conf`. You will need to open the file editor with `sudo`.
 
-Use a file editor of you choice and add the following code in `/etc/nginx/nginx.conf`:
+If the file already has a configuration in it, remove it and add the below.
 
 ```console
 user www-data;
 worker_processes auto;
-worker_rlimit_nofile 1000000;
 pid /run/nginx.pid;
+
 events {
- worker_connections 1024;
- accept_mutex off;
- multi_accept off;
 }
 http {
- ##
- # Basic Settings
- ##
- sendfile on;
- tcp_nopush on;
- tcp_nodelay on;
- keepalive_timeout 75;
- keepalive_requests 1000000000;
- types_hash_max_size 2048;
- include /etc/nginx/mime.types;
- default_type application/octet-stream;
+  include /etc/nginx/mime.types;
+  default_type application/octet-stream;
 
- ##
- # Virtual Host Configs
- ##
- include /etc/nginx/conf.d/*.conf;
- include /etc/nginx/sites-enabled/*;
+  ##
+  # Virtual Host Configs
+  ##
+  include /etc/nginx/conf.d/*.conf;
 }
 ```
 
-Add the code shown below in `/etc/nginx/conf.d/default.conf`.
+These directives have already been discussed in the [Setup a static file server](../basic_static_file_server) section.
 
-If the file already has information in it, remove and add the code shown.
+The above doesn't configure the RP/APIGW. You can think of the above as a file that sets global configurations for Nginx. Additional blocks and directives are needed in order to create the RP/APIGW. The additional configurations needed will be placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
 
-Replace `$hostname` with the DNS name of the machine. For AWS this would take the form of, ec2-23-20-129-140.compute-1.amazonaws.com
-
-Replace <private_ip_1> and <private_ip_2> with the private IP of the upstream web servers that you created in the previous step.
+Next, to complete the definition of the RP/APIGW; add the following configuration to `/etc/nginx/conf.d/loadbalance.conf`:
 
 ```console
 # Upstreams for https
 upstream ssl_file_server_com {
- server <private_ip_1>:443;
- server <private_ip_2>:443;
- keepalive 1024;
+  server <fileserver_1_ip_or_dns>:443;
+  server <fileserver_2_ip_or_dns>:443;
 }
 
 # HTTPS reverse proxy and API Gateway
 server {
- listen 443 ssl reuseport backlog=60999;
- root /usr/share/nginx/html;
- index index.html index.htm;
- server_name $hostname;
- ssl on;
- ssl_certificate /etc/nginx/ssl/ecdsa.crt;
- ssl_certificate_key /etc/nginx/ssl/ecdsa.key;
- ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384;
+  listen 443 ssl;
+  root /usr/share/nginx/html;
+  index index.html index.htm;
+  server_name $hostname;
 
- # API Gateway Path
- location ~ ^/api_old/.*$ {
- limit_except GET {
- deny all;
- }
- rewrite ^/api_old/(.*)$ /api_new/$1 last;
- }
- location /api_new {
- internal;
- proxy_pass https://ssl_file_server_com;
- proxy_http_version 1.1;
- proxy_set_header Connection "";
- }
+  ssl_certificate /etc/nginx/ssl/ecdsa.crt;
+  ssl_certificate_key /etc/nginx/ssl/ecdsa.key;
+  ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384;
 
- # Reverse Proxy Path
- location / {
- limit_except GET {
- deny all;
- }
- proxy_pass https://ssl_file_server_com;
- proxy_http_version 1.1;
- proxy_set_header Connection "";
- }
+  # API Gateway Path
+  location ~ ^/api_old/.*$ {
+    rewrite ^/api_old/(.*)$ /api_new/$1 last;
+  }
+  location /api_new {
+    internal;
+    proxy_pass https://ssl_file_server_com;
+  }
+
+  # Reverse Proxy Path
+   location / {
+   proxy_pass https://ssl_file_server_com;
+  }
 }
 ```
 
+Much of what is in this file should look familiar if you followed the instructions in the [Setup a static file server](../basic_static_file_server) section. Only what is new will be discussed here. 
 
-Create ECDSA key and certificate for the files `ecdsa.rt` and `ecdsa.key`.
+First, there is the block called `upstream`. This lists all of the upstream file servers the RP/APIGW will load balance across. This block of servers is given the name `ssl_file_server_com`. Next, there are three `location` blocks. The first two configure the API Gateway functionality and the third one configures a Reverse Proxy. The difference between a Reverse Proxy and an API Gateway is that an API Gateway rewrites a client's requested URI, and then routes that rewritten request to the upstreams. This rewriting of the URI allows for separating a public API from a private API. The API Gateway in this configuration will look for `/api_old/` at the beginning of the URI, and replace it with `/api_new/`. Once the rewrite happens, the second location block will handle forwarding the rewritten URI to the upstream server (notice the reference to `ssl_file_server_com` here). The third location block simply forwards all other requests that don't start with `/api_new/` to the upstream server without a URI rewrite.
 
-Install OpenSSL, which is required to create the key and certificate:
+### Creating ECDSA key and certificate for the RP/APIGW file server
 
-```console
-apt-get install openssl -y
-```
+Please refer to the section [Setup a static file server](../basic_static_file_server) for instruction on how to generate the keys and certificate that will be used by the RP/APIGW.
 
-Run the following commands to create the keys and certificate:
+### Checking Nginx configuration and starting the server
 
-```console
-mkdir /etc/nginx/ssl/
-openssl ecparam -out ecdsa.key -name prime256v1 -genkey
-openssl req -new -sha256 -key ecdsa.key -out server.csr
-openssl x509 -req -sha256 -days 365 -in server.csr -signkey ecdsa.key -out ecdsa.crt
-```
-
-You will be prompted for several things including Country Name, Locality Name, Organization Name. Hit enter to use the default for all except **Common Name**. For **Common Name** enter the the IP address or DNS name of your machine.
-
-Copy the key and certificate to the location specified in the Nginx configuration files:
-
-```console
-cp ecdsa.key /etc/nginx/ssl/ecdsa.key
-cp ecdsa.crt /etc/nginx/ssl/ecdsa.crt
-```
-Check the configuration for correct syntax run and then start Nginx server using the commands below.
+Check the configuration for correct syntax and then start the Nginx RP/APIGW using the following command:
 
 ```console
 nginx -t -v
 ```
+The output from this command will look like:
 
-Start Nginx using systemd.
-
-```console
-systemctl start nginx
+```output
+nginx version: nginx/1.23.4
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
-Verify the reverse proxy and API gateway.
-
-Run the following commands on the two upstream web servers to generate the files to be served.
+Start Nginx (see [Install Nginx via a package manager & check configuration](../install_from_package) for a sample service file):
 
 ```console
-dd if=/dev/urandom of=/usr/share/nginx/html/1kb bs=1024 count=1
+sudo service nginx start
+```
+
+### Create sample file for APIGW path
+
+SSH into each of the upstream file servers and switch to root.
+
+```console
+sudo su -
+```
+Create files to serve for the RP and APIGW paths. The files should be placed in `/usr/share/nginx/html` (this is what the `root` directive was set to in file server configuration in the [previous section](../basic_static_file_server)).
+
+```console
+echo Hello, this is a text file to serve > /usr/share/nginx/html/file.txt
 mkdir -p /usr/share/nginx/html/api_new
-cp /usr/share/nginx/html/1kb /usr/share/nginx/html/api_new
+cp /usr/share/nginx/html/file.txt /usr/share/nginx/html/api_new/apigw_file.txt
 ```
 
-Verify the reverse proxy server is running by opening the URL in your browser:
+### Verify the RP/APIGW
 
-The file will be downloaded.
 
-Here <dns-name> will be the DNS name of the machine:
+This can be done in two steps. First SSH into the RP/APIGW node and try to download a file using `localhost`, then SSH into a different node and try to download the file using the IP address or DNS name of the RP/APIGW. Doing it this way allows for figuring out if adjustments to the network configuration are needed.
+
+SSH into the RP/APIGW node. Then run the `wget` command shown below. 
 
 ```console
-https://<dns-name>/1kb
+# Reverse Proxy Path
+wget --no-check-certificate https://localhost/file.txt
+
+# API Gateway Path
+wget --no-check-certificate https://localhost/api_old/apigw_file.txt
 ```
-Open the URL in your browser and now the other file will be downloaded from the API gateway:
+
+The switch `--no-check-certificate` tells `wget` to not bother with checking the certificate. This is because it's a self-signed certificate, so the check will fail. In a production environment, this switch is not needed (and not recommended) because the certificate will be signed by a 3rd party certificate authority. In that case, the certificate will be verified by `wget`.
+
+Next, SSH into a node that is not the RP/APIGW node and run the below.
 
 ```console
-https://<dns-name>/api_old/1kb
-```
+# Reverse Proxy Path
+wget --no-check-certificate https://<rpapigw_ip_or_dns>/file.txt
 
-{{% notice Note %}}
-Make sure that port 443 or port 80 are open in the security group for the IP address of your machine.
-{{% /notice %}}
+# API Gateway Path
+wget --no-check-certificate https://<rpapigw_ip_or_dns>/api_old/apigw_file.txt
+```
+If the above works, then the RP/APIGW is setup properly.
+
+Feel free to experiment with the file server configuration. The Nginx documentation, guides, and blogs can be used as a reference. 
