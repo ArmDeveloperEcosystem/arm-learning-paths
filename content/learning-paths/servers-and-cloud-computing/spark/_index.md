@@ -1,32 +1,28 @@
 ---
-title: Deploy Arm Instances on AWS using Terraform
+title: Learn how to deploy Spark on AWS Graviton2
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on AWS using Terraform.
- 
-learning_objectives: 
-    - Automate AWS EC2 instance creation using Terraform
-    - Deploy Arm instances on AWS and provide access via Jump Server
-    - Provide infrastructure basics, code knowledge and files that could help with future learning paths
+who_is_this_for: This is an advanced topic for anyone who wants to deploy Spark on AWS Graviton2.
 
+learning_objectives: 
+    - Automate Spark EC2 instance creation using Terraform and Ansible
+    - Deploy a single instance of Spark on AWS Graviton2 
+    
 prerequisites:
     - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - A computer with [Terraform](/install-guides/terraform) installed
+    - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli/), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed 
 
 author_primary: Jason Andrews
-
 ### Tags
-skilllevels: Advanced
-subjects: Containers and Virtualization
+skilllevels: Introductory
+subjects: Databases
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-    - AWS
-    - Bastion
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -34,3 +30,6 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+
+
+

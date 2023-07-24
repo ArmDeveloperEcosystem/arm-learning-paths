@@ -10,6 +10,7 @@ who_is_this_for: This is an introductory topic for software developers who are n
 learning_objectives: 
     - Automate Arm virtual machine creation using Terraform
     - Deploy Arm VMs on Azure and provide access via Jump Server
+    - Provide infrastructure basics, code knowledge and files that could help with future learning paths
 
 prerequisites:
     - An Azure account

@@ -183,3 +183,7 @@ The output is shown below:
 ```output
 hello world
 ```
+
+## Automating Arm Based Infrastructure Deployment
+
+Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [AWS Cloud Formation](https://aws.amazon.com/cloudformation/). However, there are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/). In fact, there is a [deploying Arm instances on AWS using Terraform learning path](/learning-paths/servers-and-cloud-computing/aws-terraform) that should be reviewed next.
