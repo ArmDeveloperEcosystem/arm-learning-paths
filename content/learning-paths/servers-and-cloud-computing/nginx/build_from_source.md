@@ -12,7 +12,7 @@ Before building from source, it's helpful to look at the build configuration of 
 
 The [nginx.com documentation](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) explains how to compile and install Nginx from source. The documentation does not provide specific guidance on configuration and compile options. Additional information about the configuration options can also be found on the [nginx.org documentation](http://nginx.org/en/docs/configure.html).
 
-Nginx is quite performant and doesn't need a significant amount of configuration. As long as you enable the features you need, it should work well. Supplemental information that will help you decide how to configure Nginx is provided below.
+Nginx doesn't need a significant amount of configuration. As long as you enable the features you need, it should work well. Supplemental information that will help you decide how to configure Nginx is provided below.
 
 ### Configuration and compile options
 
@@ -41,7 +41,7 @@ The final build configuration is now reduced to:
 --with-cc-opt='-g -O2 -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
 
-Use your judgement to decide if you should keep or drop each configuration option. 
+Use your judgment to decide if you should keep or drop each configuration option. 
 
 ### Building Nginx and dependencies
 
