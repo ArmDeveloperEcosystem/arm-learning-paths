@@ -12,7 +12,7 @@ Before building from source, it's helpful to look at the build configuration of 
 
 The [nginx.com documentation](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) explains how to compile and install Nginx from source. The documentation does not provide specific guidance on configuration and compile options. Additional information about the configuration options can also be found on the [nginx.org documentation](http://nginx.org/en/docs/configure.html).
 
-Nginx is quite performant and doesn't need a significant amount of configuration. As long as you enable the features you need, it should work well. Supplemental information that will help you decide how to configure Nginx is provided below.
+Nginx doesn't need a significant amount of configuration. As long as you enable the features you need, it should work well. Supplemental information that will help you decide how to configure Nginx is provided below.
 
 ### Configuration and compile options
 
