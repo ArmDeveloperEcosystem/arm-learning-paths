@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   Now that you have your Arm-based instance up and running, why not test out its performance?
+   Now that you have your Arm-based instance up and running, you can learn about automating instance deployment.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/geekbench/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/aws-terraform/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
