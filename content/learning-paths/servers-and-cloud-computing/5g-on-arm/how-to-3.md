@@ -20,7 +20,7 @@ Core isolation from Linux scheduler, Disabling interrupts, Huge page usage to mi
 
 Make sure that each memory channel has at least one memory DIMM inserted with 8GB memory size.
 
-Enable cache stashing on ampere to stash the packets coming through NIC to SLC cache.
+Enable cache stashing on ampere to stash the packets coming through NIC to SLC cache (System Level Cache, aks Level 3 Cache).
 
 Cache stashing feature enable/disable on Ampere dynamically (No reboot required). slc_inst_s0 script can be found in attachment:   slc_inst_s0                                                                                                                   
 ```bash

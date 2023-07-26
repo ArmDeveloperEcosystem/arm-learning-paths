@@ -10,24 +10,24 @@ layout: learningpathall
 
 ### Firmware Maintenance
 
-The BIOS firmware impacts some of the functionality and performance of the server. So it is important to sign up for firmware updates from your server vendors.
+The BIOS (Basic Input/Output System) firmware impacts some of the functionality and performance of the server. So it is important to sign up for firmware updates from your server vendors.
 
 ### How to update firmware
 
-#### Via Web UI
+#### Via Web UI (User Interface)
 
-Most of Arm servers provide web UI for managing the firmware.
+Most of Arm servers provide web UI for managing the FW (firmware).
 
-Log into BMC IP via browser, 
+Log into the BMC (Baseboard Management Controller) IP address via browser, 
 
    1. Check the current FW version by clicking its `Firmware information`.
 
-   2. Go to the `Firmware maintenance` section and click on `Firmware update`. Follow te prompts to update BIOS/SCP and BMC software.
+   2. Go to the `Firmware maintenance` section and click on `Firmware update`. Follow te prompts to update BIOSP and BMC software.
 
 
 #### Via ipmitool command line
 
-The benefit of using `ipmitool` is for automation of controlling the servers remotely.
+The benefit of using IPMI (Intelligent Platform Management Interface) tool `ipmitool` is for automation of controlling the servers remotely.
 
 To update the firmware, for example on the Foxconn server:
 
@@ -41,12 +41,12 @@ To update the firmware, for example on the Foxconn server:
 ```
 
 {{% notice Note %}}
-The update of the firmware via IPMI interface is hardware dependent, check your server ODM/OEM for the IPMI detail for updating its firmware.
+The update of the firmware via IPMI interface is hardware dependent, check your server ODM/OEM (Original Design/Equipment Manufacturer) for the IPMI detail for updating its firmware.
 {{% /notice %}}
 
 ### BIOS Setting
 
-Typically SR-IOV enablement is required for Arm servers to support 5G deployment in a container environment. Through BIOS options, you can enable SR-IOV.
+Typically SR-IOV (Single Root IO Virtualization) enablement is required for Arm servers to support 5G deployment in a container environment. Through BIOS options, you can enable SR-IOV.
 
 ### PCIe Setting
 
@@ -105,7 +105,7 @@ The individual parameters are described below:
 ##### Hugepage setting
 default_hugepagesz=1G hugepagesz=1G hugepages=32
 
-The huge page setting is required for DPDK support which is commonly adopted in 5G networking. It reduces the TLB misses, improves performance by lowering memory overhead, and improves memory efficiency with larger and contiguous memory allocation.
+The huge page setting is required for DPDK (Data Plane Development Kit) support which is commonly adopted in 5G networking. It reduces the TLB (Translation Lookaside Buffer) misses, improves performance by lowering memory overhead, and improves memory efficiency with larger and contiguous memory allocation.
 
 ##### isolcpus=cpuX-cpuY
 The setting "isolcpus" is a kernel command line parameter that is used to isolate specific CPUs in a multi-CPU system, such that they are not used for general purpose processing. Instead, they are reserved for real-time or other special purpose tasks that require dedicated and predictable processing resources.
@@ -152,9 +152,9 @@ The "nosoftlockup" setting disables the software lockup detection mechanism. Whe
 It's important to carefully consider the impact of the "nosoftlockup" setting before using it in a production environment. Disabling the software lockup detection mechanism may result in the system hanging or becoming unresponsive if a software lockup occurs. This can cause data loss, corruption, or other serious problems. Additionally, it can make it more difficult to diagnose and resolve software lockup issues. As a result, it's generally recommended to leave the software lockup detection mechanism enabled, unless there is a specific reason to disable it.
 
 ##### iommu.passthrough=1
-The "iommu.passthrough=1" setting is used to enable IOMMU pass-through, which allows virtual machines to access physical devices without any virtualization of the I/O memory.
+The "iommu.passthrough=1" setting is used to enable IOMMU (Input–Output Memory Management Unit) pass-through, which allows virtual machines to access physical devices without any virtualization of the I/O memory.
 
-This setting is used in virtualization environments where it is important to have high performance I/O for certain applications or devices. For example, some graphics-intensive applications require direct access to the physical GPU, which can be achieved by enabling IOMMU pass-through. However, enabling IOMMU pass-through can also make the virtualization environment less secure, as it provides direct access to physical devices, bypassing any virtualization or security features. As a result, the setting is typically used with caution, and only in specific cases where the performance benefits outweigh the security risks. (from ChatGPT)
+This setting is used in virtualization environments where it is important to have high performance I/O for certain applications or devices. For example, some graphics-intensive applications require direct access to the physical GPU, which can be achieved by enabling IOMMU pass-through. However, enabling IOMMU pass-through can also make the virtualization environment less secure, as it provides direct access to physical devices, bypassing any virtualization or security features. As a result, the setting is typically used with caution, and only in specific cases where the performance benefits outweigh the security risks. 
 
 #####  cpufreq.off=1  
 The setting "cpufreq.off=1" is a kernel command line parameter that is used to disable the CPU frequency scaling feature in the Linux kernel. CPU frequency scaling, also known as CPU speed scaling, is a technique that allows the operating system to dynamically adjust the clock speed of the CPU based on the workload. This can help to conserve energy and reduce heat generation, while still providing sufficient performance for the current workload.
@@ -178,7 +178,7 @@ modprobe.blacklist=cppc_cpufreq is a kernel parameter in Linux that blacklists t
 By blacklisting the cppc_cpufreq module, you are telling the Linux kernel not to load it at boot time. This means that the functionality provided by the module will not be available to the system.
 
 ##### tsc=reliable 
-The setting "tsc=reliable" is a kernel command line parameter that is used to set the time stamp counter (TSC) as a reliable source of time for the Linux kernel. The TSC is a CPU register that increments at a fixed rate based on the clock speed of the CPU. It is commonly used as a source of time for the operating system, as it provides a high-resolution and constant-rate timer that is usable even when other system timers are unavailable or unreliable.
+The setting "tsc=reliable" is a kernel command line parameter that is used to set the Time Stamp Counter (TSC) as a reliable source of time for the Linux kernel. The TSC is a CPU register that increments at a fixed rate based on the clock speed of the CPU. It is commonly used as a source of time for the operating system, as it provides a high-resolution and constant-rate timer that is usable even when other system timers are unavailable or unreliable.
 
 The "tsc=reliable" setting is used to indicate that the TSC is a reliable source of time, and that it should be used as the primary source of time for the Linux kernel. This can be useful in some cases where the TSC is known to be reliable and accurate, as it can provide more consistent and accurate timing information for the operating system.
 
@@ -240,7 +240,7 @@ APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Unattended-Upgrade "0";
 ```
 
-### RT Kernel
+### RT (Rime-Time) Kernel
 
 An RT kernel is designed to provide a guaranteed minimum response time for certain system events and processes, even under heavy load conditions. This is achieved through a number of optimizations to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. Additionally, RT kernels may make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
@@ -248,7 +248,7 @@ At this moment, RT kernel is not ready from apt repository, you will need to reb
 
 ### SR-IOV
 
-#### Supported SR-IOV NICs
+#### Supported SR-IOV NICs (Network Interface Cards)
 
   Intel® Ethernet 800 Series (E810)
 
@@ -272,11 +272,11 @@ At this moment, RT kernel is not ready from apt repository, you will need to reb
 
 ####  Creating SR-IOV Resources
 
-  Creating SR-IOV virtual functions (VFs)
+  Creating SR-IOV Virtual Functions (VFs)
 
   Generation SR-IOV configuration maps for kubernetes
   
-       - VM based (K8s configuration map for corresponding worker node)
+       - VM (Virtual Machine) based (K8s configuration map for corresponding worker node)
        - Bare-Metal (SR-IOV VFs and Configuration map)
 
 
@@ -316,7 +316,7 @@ resourceConfig:
 
 #### Configure Device Plugin extended selectors in virtual environments
 
-SR-IOV Network Device Plugin supports running in a virtualized environment. However, not all device selectors are applicable as the VFs are passthrough to the VM without any association to their respective PF, hence any device selector that relies on the association between a VF and its PF will not work and therefore the pfNames and rootDevices extended selectors will not work in a virtual deployment. The common selector pciAddress can be used to select the virtual device.
+SR-IOV Network Device Plugin supports running in a virtualized environment. However, not all device selectors are applicable as the VFs (Virtual Functions) are passthrough to the VM (Virtual Machine) without any association to their respective PF (Physical Function), hence any device selector that relies on the association between a VF and its PF will not work and therefore the pfNames and rootDevices extended selectors will not work in a virtual deployment. The common selector pciAddress can be used to select the virtual device.
 
 #### Configuring SR-IOV Resources
 Perform the following steps on the bare-metal host for enabling SR-IOV.
@@ -343,10 +343,10 @@ Execute the following command to remove the SR-IOV from the bare-metal host syst
 echo 0 > /sys/class/net/<interface name>/device/sriov_numvfs
 ```
 Type II - SR-IOV Configuration for Bare-metal Deployment
-Example of a SR-IOV deployment yaml file used for UPF
+Example of a SR-IOV deployment yaml file used for UPF (User Plane Function)
 
 ### SR-IOV CNI Resource Verification
-Perform the following step to verify the SR-IOV CNI resource configuration.
+Perform the following step to verify the SR-IOV CNI (Cloud Native Interface) resource configuration.
 
 Execute the following command in the master node and confirm if allocatable resources were created on the worker node used for UPF deployment.
 
@@ -355,7 +355,7 @@ kubectl get node <node name> -o json | jq '.status.allocatable'
 ```
 This command displays the following sample output.
 
-### PTP Setting
+### PTP (Precision Time Protocol) Setting
 In 5G world, the time synchronization is critical to synchronize all components in same timing cadence   
 
 #### GrandMaster Hardware based PTP

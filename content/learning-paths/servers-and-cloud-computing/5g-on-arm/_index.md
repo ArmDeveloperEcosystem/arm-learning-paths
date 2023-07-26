@@ -14,7 +14,7 @@ prerequisites:
     - Arm server 
     - 5G ORAN stack
 
-author_primary: Jici Gao
+author_primary: Arm
 
 ### Tags
 skilllevels: Introductory
