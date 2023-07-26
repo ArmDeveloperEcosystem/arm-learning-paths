@@ -1,19 +1,21 @@
 ---
-title: Learn how to install, configure, and use Nginx
+title: Learn how to deploy Nginx
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers who want to use Nginx on Arm-based cloud instances.
+who_is_this_for: This is an introductory topic for engineers who want to use Nginx on Arm.
 
 learning_objectives:
-    - Install and run Nginx on Arm
+    - Install and run Nginx on Arm servers
     - Setup Nginx as a web server, reverse proxy, or an API Gateway
-    - Verify Nginx installation
+    - Verify Nginx is working correctly
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm server running `Ubuntu 20.04` or `Ubuntu 22.04`.
+    - To create a file server you will need at least one [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or one on-premises Arm server.
+    - To create a reverse proxy or API gateway you will need at least three Arm based instances from a cloud service provider or at least three on-premises Arm servers.
+    - Network settings (firewalls and security groups) which allow communication on port 22 (SSH) and port 443 (HTTPS).
 
-author_primary: Jason Andrews
+author_primary: Julio Suarez
 
 ### Tags
 skilllevels: Introductory

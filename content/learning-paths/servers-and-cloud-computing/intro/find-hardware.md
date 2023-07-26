@@ -17,6 +17,7 @@ Cloud providers offer Arm instances based on Neoverse processors. For example:
 - [Google Cloud](https://cloud.google.com/compute/docs/instances/arm-on-compute)
 - [Microsoft Azure](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/)
 - [Oracle Cloud](https://www.oracle.com/cloud/compute/arm/)
+- [Equinix](https://deploy.equinix.com/product/servers/c3-large-arm64/)
 - [Scaleway](https://www.scaleway.com/en/amp2-instances/)
 - [Hetzner Cloud](https://www.hetzner.com/news/arm64-cloud)
 
@@ -26,6 +27,12 @@ Free tier offers are currently available.
 - [Until March 31, 2024 Tau T2A VMs in Google Cloud are available for a free trial](https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#t2afreetrial)
 
 [Get started with Arm-based cloud service platforms](/learning-paths/servers-and-cloud-computing/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
+
+## Works on Arm (free cloud resources)
+
+The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) initiative enables developers to build, test, and optimize projects on the Arm64 architecture by providing free access to Arm based developer platforms, cloud instances, and CI/CD environments. Arm has partnered with cloud service providers to make Neoverse compute available to developers.
+
+Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
 
 ##  Arm SystemReady Certified hardware
 

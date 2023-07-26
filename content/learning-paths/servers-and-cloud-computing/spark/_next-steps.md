@@ -4,11 +4,11 @@
 # ================================================================================
 
 next_step_guidance: >
-   Now that you have your Arm-based instance up and running, you can learn about automating instance deployment.
+    We recommend you to continue learning about the porting cloud applications to Arm architecture for increased performance and cost savings. The learning path on deploying MySQL is a next great step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/aws-terraform/"
-# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
+recommended_path: "/learning-paths/server-and-cloud/mysql/"
+# Link to the next learning path being recommended.
 
 
 # further_reading links to references related to this path. Can be:
@@ -18,25 +18,14 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/aws-terraform/"
 
 further_reading:
     - resource:
-        title: Alibaba ECS Learning Path
-        link: https://www.alibabacloud.com/getting-started/learningpath/ecs
-        type: website
+        title: Optimize Spark on AWS Graviton2
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/optimize-spark-on-aws-graviton2-best-practices-k-means-clustering
+        type: blog
+
     - resource:
-        title: Getting Started with AWS
-        link: https://aws.amazon.com/getting-started
-        type: website
-    - resource:
-        title: Google Cloud Training and tutorials
-        link: https://cloud.google.com/compute/docs#training-and-tutorials
-        type: website
-    - resource:
-        title: Microsoft Azure Developer resources
-        link: https://learn.microsoft.com/en-us/azure/developer
-        type: website
-    - resource:
-        title: Oracle Developer Resource Center
-        link: https://developer.oracle.com/arm/
-        type: website
+        title: Achieve better performance for Spark workloads
+        link: https://aws.amazon.com/blogs/big-data/achieve-up-to-27-better-price-performance-for-spark-workloads-with-aws-graviton2-on-amazon-emr-serverless/
+        type: blog 
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
@@ -45,3 +34,9 @@ weight: 21                  # set to always be larger than the content in this p
 title: "Next Steps"         # Always the same
 layout: "learningpathall"   # All files under learning paths have this same wrapper
 ---
+  
+
+
+
+
+

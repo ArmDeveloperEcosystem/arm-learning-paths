@@ -7,9 +7,17 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Infrastructure automation for other Learning Paths
+
+Some learning paths may require one or more server nodes to complete. The Terraform files shown here can be used as a platform to work on those learning paths. The intent is for you to modify these as needed to support other learning path activities.
+
 ## Introduction to Jump Server
 
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
+
+{{% notice Note %}}
+An alternative to setting up a Jump server like below is to use [Linux Bastion Hosts](https://aws.amazon.com/solutions/implementations/linux-bastion/) or [AWS Systems Manager service](https://aws.amazon.com/systems-manager/).
+{{% /notice %}}
 
 ## Deploying Arm instances on AWS and providing access via Jump Server
 
