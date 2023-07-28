@@ -50,13 +50,7 @@ For full length PCIe cards, you need at least a 2U server, however not every 2U 
 
 For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC (Network Interface Card) in one device, you need to make sure its NIC ports face out. At this moment, only Supermicro Arm server has designed its server with the full length PCIe cards such as Nvidia A100X converged card.
 
-#### 5G Ready on Arm
 
-This learning path attempts to provide the guidance to make Arm servers ready for 5G development and deployment:
-
-   1. Using existing PoC example to run the qualification to see if the server can pass with automation
-
-   2. Using Performance PoC example to test to see if the server can meet performance goals with automation
 
 
 
