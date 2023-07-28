@@ -10,7 +10,7 @@ layout: learningpathall
 
 ### Kernel Tuning
 
-Please refer to early section of setting kernel boot arguments and the CPU scaling.
+For kernel tuning, please refer to the previous section on setting kernel boot arguments and CPU scaling.
 
 ### DPDK Tuning
 
@@ -23,13 +23,14 @@ Make sure that each memory channel has at least one memory DIMM inserted with 8G
 Enable cache stashing on ampere to stash the packets coming through NIC to SLC cache (System Level Cache, aks Level 3 Cache).
 
 Cache stashing feature enable/disable on Ampere dynamically (No reboot required). slc_inst_s0 script can be found in attachment:   slc_inst_s0                                                                                                                   
-```bash
+```console
    ./slc_inst_s0 1  -- enable SLC installation for all root ports on Socket 0                                                                                                                                                                                                                       
    ./slc_inst_s0 0  -- disable SLC installation for all root ports on Socket 0
 ```
 
-Here is the grub settings from Ampere machine:
-```bash
+Here are the grub settings from Ampere machine:
+
+```console
       # cat /proc/cmdline
         BOOT_IMAGE=/boot/vmlinuz-5.15.0-46-lowlatency root=UUID=c0ef447a-8367-4d45-8991-47ece2fcb425 ro iommu.passthrough=1 default_hugepagesz=1G hugepagesz=1G hugepages=20  isolcpus=1-69 irqaffinity=0 rcu_nocbs=1-69 nohz_full=1-69 kpti=off nosoftlockup
 ```
@@ -46,7 +47,7 @@ Refer the same link above to run test pmd on Ampere. This will ensure that the E
 
 ### Allocate Cores to Different Tasks
 
-It is critical to be carefully alloacting the cores to various tasks for 5G stack. Make sure all of processes have their own cores to run on, not to step over each other.
+It is critical to carefully alloacte the cores to various tasks for 5G stack. Make sure all of processes have their own cores to run on, not to step over each other.
 
 For multiple socket server, always use numactl to launch your program to associate with the cpu and the PCIe device your program will access on same node.
 
@@ -58,8 +59,9 @@ Use taskset command to launch your program on specific cores.
 
    - "perf record & report" can be used to identify bottleneck based on events on specific core
    - "perf stat" can be used to statistically measure the KPIs like IPC, Front End/Back End Stalls and L1/L2/LLC Cache misses.
-   - Perf script to run on Neoverse based system is attached here:
-```bash
+   - Perf script to run on an Arm Neoverse based system is shown below:
+
+```console
 #!/bin/bash
 # This script must be run for every use case captured in SoW. This script captures the perf events on all the CU and DU DPDK and worker cores for 10 sec at 100 msec interval.
 if [ $# -eq 0 ]; then
@@ -195,11 +197,10 @@ perf stat -A --output $1_Inst_Spec_BR_$cu_worker_core_b.txt -e r8,r1b,r78,r79,r7
 #### Take Advantage of Arm RAL and SVE/NEON 
 
 Arm 5G RAN Acceleration Library (ArmRAL):
-https://learn.arm.com/learning-paths/servers-and-cloud-computing/ran/
+To learn more about getting started with the Arm 5G RAM Acceleration Library, refer to this [learning path]
+(https://learn.arm.com/learning-paths/servers-and-cloud-computing/ran/)
 
 Port Code to Arm Scalable Vector Extension (SVE)
-https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve/
+To learn about porting your code to use Arm SVE, refer to this [learning path] (https://learn.arm.com/learning-paths/servers-and-cloud-computing/sve/)
 
-#### Using Other Arm Tools
 
-Refer this link https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer for Streamline Performance Analyzer
