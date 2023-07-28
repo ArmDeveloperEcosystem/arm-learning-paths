@@ -7,12 +7,14 @@ layout: learningpathall
 ---
 
 ## How to Setup and Configure 5G Servers
+In this section you get an overview of the different settings used to configure your Arm server. 
 
 ### Firmware Maintenance
 
 The BIOS (Basic Input/Output System) firmware impacts some of the functionality and performance of the server. So it is important to sign up for firmware updates from your server vendors.
 
 ### How to update firmware
+Lets look at the different ways you can update the firmware on your server.
 
 #### Via Web UI (User Interface)
 
@@ -213,7 +215,7 @@ Low latency kernels are commonly used in applications that require real-time pro
 
 To achieve low latency, low latency kernels typically implement a number of changes to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. They may also make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
-To install a Llw latency kernel on Arm server, run the following commands:
+To install a low latency kernel on Arm server, run the following commands:
 
 ```console
 sudo apt update
@@ -274,7 +276,7 @@ At this moment, RT kernel is not ready from apt repository, you will need to reb
 
   Creating SR-IOV Virtual Functions (VFs)
 
-  Generation SR-IOV configuration maps for kubernetes
+  Generation of SR-IOV configuration maps for kubernetes
   
        - VM (Virtual Machine) based (K8s configuration map for corresponding worker node)
        - Bare-Metal (SR-IOV VFs and Configuration map)
@@ -356,7 +358,7 @@ kubectl get node <node name> -o json | jq '.status.allocatable'
 This command displays the following sample output.
 
 ### PTP (Precision Time Protocol) Setting
-In 5G world, the time synchronization is critical to synchronize all components in same timing cadence   
+In 5G world, the time synchronization is critical to synchronize all components in same timing cadence.   
 
 #### GrandMaster Hardware based PTP
 
@@ -368,7 +370,7 @@ Also requires a PTP enabled switch, currently Arista switch has PTP sync'ed to a
 
 How to setup ptp4l/phc2sys on Linux:
 
-Configure Slave node setting:
+Configure Slave node setting as shown below:
 
 ```console
 $ cat /etc/5g-ptp.conf
@@ -396,7 +398,7 @@ delay_mechanism E2E
 network_transport L2
 ```
 
-Setup Slave node PTP4L service: note that we need to assign a core for this task to run
+Setup Slave node PTP4L service: note that you need to assign a core for this task to run
 
 ```console
 $ cat /lib/systemd/system/ptp4l.service
@@ -413,6 +415,7 @@ WantedBy=multi-user.target
 ``` 
 
 Setup Slave node PHC2SYS service: note the NIC interface used here is enP1p3s0f0np0, also assign a core to run it
+
 ```console 
 $ cat /lib/systemd/system/phc2sys.service
 [Unit]
