@@ -16,20 +16,20 @@ The BIOS (Basic Input/Output System) firmware impacts some of the functionality 
 
 #### Via Web UI (User Interface)
 
-Most of Arm servers provide web UI for managing the FW (firmware).
+Most of Arm servers provide web UI for managing the firmware (FW).
 
-Log into the BMC (Baseboard Management Controller) IP address via browser, 
+Log into the Baseboard Management Controller (BMC) IP address via your browser, 
 
    1. Check the current FW version by clicking its `Firmware information`.
 
-   2. Go to the `Firmware maintenance` section and click on `Firmware update`. Follow te prompts to update BIOSP and BMC software.
+   2. Go to the `Firmware maintenance` section and click on `Firmware update`. Follow the prompts to update BIOSP and BMC software.
 
 
 #### Via ipmitool command line
 
-The benefit of using IPMI (Intelligent Platform Management Interface) tool `ipmitool` is for automation of controlling the servers remotely.
+The benefit of using the Intelligent Platform Management Interface (IPMI) tool `ipmitool` is for automation of controlling the servers remotely.
 
-To update the firmware, for example on the Foxconn server:
+ For example on the Foxconn server, run the following commands to update the firmware:
 
 ```console
    ipmitool -C 3 -I lanplus -H 10.118.45.98 -U admin -P admin raw 0x32 0x8f 0x3 0x1
@@ -46,17 +46,17 @@ The update of the firmware via IPMI interface is hardware dependent, check your 
 
 ### BIOS Setting
 
-Typically SR-IOV (Single Root IO Virtualization) enablement is required for Arm servers to support 5G deployment in a container environment. Through BIOS options, you can enable SR-IOV.
+Typically, Single Root IO Virtualization (SR-IOV) enablement is required for Arm servers to support 5G deployment in a container environment. Through BIOS options, you can enable SR-IOV.
 
 ### PCIe Setting
 
-This setting is dependent on the server ODM, contact ODM/OEM to find out details.
+This setting is dependent on the server ODM, contact the ODM/OEM to find out details.
 
 ### CPU Frequency Setting
 
 The following script can be run to temporarily force the cores to run at max CPU frequency:
 
-```bash
+```console
 #!/bin/bash
   
 for ((i=0;i<`nproc`;i++))
@@ -88,9 +88,9 @@ This command returns `ondemand` in the current setup.
 
 You may want to change the CPU governor from `ondemand` to `performance`.
 
-The following instructions show you how to do it:
+The following commands show you how to do it:
 
-```bash
+```console
 sudo apt install cpufrequtils
 echo 'GOVERNOR="performance"' | sudo tee /etc/default/cpufrequtils
 sudo systemctl disable ondemand
@@ -100,7 +100,7 @@ sudo systemctl disable ondemand
 
 #### Boot Parameters
 
-The individual parameters are described below:
+The individual Linux kernel command-line parameters that impact running the 5G stack are described below:
 
 ##### Hugepage setting
 default_hugepagesz=1G hugepagesz=1G hugepages=32
@@ -213,7 +213,7 @@ Low latency kernels are commonly used in applications that require real-time pro
 
 To achieve low latency, low latency kernels typically implement a number of changes to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. They may also make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
-To install Low latency kernel on Arm server:
+To install a Llw latency kernel on Arm server, run the following commands:
 
 ```console
 sudo apt update
@@ -240,7 +240,7 @@ APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Unattended-Upgrade "0";
 ```
 
-### RT (Rime-Time) Kernel
+### Real-Time (RT) Kernel
 
 An RT kernel is designed to provide a guaranteed minimum response time for certain system events and processes, even under heavy load conditions. This is achieved through a number of optimizations to the standard Linux kernel, such as reducing the frequency of interrupts, minimizing the number of context switches, and reducing the amount of time spent processing system calls. Additionally, RT kernels may make use of specialized scheduling algorithms and memory management techniques to further optimize performance.
 
