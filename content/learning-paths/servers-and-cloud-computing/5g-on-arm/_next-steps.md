@@ -3,7 +3,7 @@
 #       Edit
 # ================================================================================
 
-next_step_guidance: Please contact us for futher discussion for your need for 5G on Arm.
+next_step_guidance: As a next step, we recommend the learning path about getting started with the Arm 5G RAN Acceleration Library.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/ran/"
 # Link to the next learning path being recommended.
