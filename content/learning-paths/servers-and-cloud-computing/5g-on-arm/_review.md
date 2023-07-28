@@ -25,24 +25,24 @@ review:
             The Supermicro server is designed to support A100X with correct orientation for its ethernet ports
     - questions:
         question: >
-            Which statement is corrected?
+            Which statement is correct?
         answers:
-            - "Regular Linux kernel should be enough for supporting 5G stack"
-            - "Low latency Linux kernel must be required for supporting 5G stack"
+            - "Regular Linux kernel is sufficient for supporting the 5G stack"
+            - "Low latency Linux kernel is required for supporting 5G stack"
         correct_answer: 2                    
         explanation: >
-            Low Latency Kernel minimize the time it takes for the operating system to respond to events and processes, it is essential for latency sensitive of processes in 5G stack.
+            Low Latency Kernel minimizes the time it takes for the operating system to respond to events and processes, it is essential for the latency sensitive processes in the 5G stack.
     - questions:
         question: >
-            What is potential issue with a 2P server?        
+            What is the potential issue with a 2P server?        
         answers:
             - "PCIe devices sit on different node from the CPU"
             - "Cross socket communication overhead"
-            - "Sometime can't put PCIe device and CPU on same node"
+            - "Sometimes you can't put the PCIe device and CPU on same node"
             - "All the above"
         correct_answer: 4                    
         explanation: >
-            Explain all potential issues related to multiple socket server
+            These are all potential issues related to multiple socket servers.
     - questions:
         question: >
             What is isolcpus?
@@ -52,10 +52,10 @@ review:
             - "Reserved for real-time or other special purpose tasks"
         correct_answer: 3                    
         explanation: >
-            Explain isolcpus setting is important for the dedicated tasks not interfered by the kernel
+            The isolcpus setting is important for dedicated tasks that are not interfered by the kernel
     - questions:
         question: >
-            Which way to affinitize your program to cores?
+            How do you affinitize your program to cores?
         answers:
             - "taskset"
             - "numactl"
@@ -63,7 +63,7 @@ review:
             - "All the above"
         correct_answer: 4                    
         explanation: >
-            Explain the ways of how to assign your program to cpu/cores
+            These are all the ways you can assign your program to cpu/cores
 
 
 
