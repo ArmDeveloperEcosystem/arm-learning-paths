@@ -8,6 +8,7 @@ layout: learningpathall
 
 ## Choose the appropriate Arm 5G Servers
 ---
+It is essential to choose the appropriate Arm server to run the 5G stack on. In this section, you can learn about the different configurations of Arm servers the 5G stack has been developed and tested on. You can also learn about what needs to be considered when choosing the appropriate Arm server for this task.
 
 #### Extensive 5G development and testing on Arm servers has been done on the hardware configurations and software components listed below:
 
@@ -45,7 +46,7 @@ For evaluation purposes, a 1P system is recommended which should be sufficient t
 
 Due to the nature of PCIe devices, you need to carefully select the right Arm server to accommodate the PCIe Accelerators you are going to use.
 
-For full length PCIe cards, you need at least an 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's Arm server better accommodate some Inline L1 Accelerator cards.
+For full length PCIe cards, you need at least a 2U server, however not every 2U server will support full length/full width PCIe devices. Also, some PCIe full profile devices require more power to run properly, for example, Supermicro's Arm server better accommodate some Inline L1 Accelerator cards.
 
 For PCIe cards taking up two PCIe slots like Nvidia A100X, not every 2U will be right choice. Because A100X combines GPU and Mellanox NIC (Network Interface Card) in one device, you need to make sure its NIC ports face out. At this moment, only Supermicro Arm server has designed its server with the full length PCIe cards such as Nvidia A100X converged card.
 
