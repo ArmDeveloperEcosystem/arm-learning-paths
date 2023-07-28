@@ -39,19 +39,19 @@ Here are the grub settings from Ampere machine:
 
 DPDK Ethernet PMDs does the packet processing in a batch of 32 packets. Tuning the NIC Rx/Tx threshold through DPDK EAL config might provide performance boost.
 
-Refer testpmd application https://doc.dpdk.org/guides/testpmd_app_ug/run_app.html and look for "–rxd" and "–txd" options to set the descriptor threshold.         
+Refer to `testpmd` application at https://doc.dpdk.org/guides/testpmd_app_ug/run_app.html and look for "–rxd" and "–txd" options to set the descriptor threshold.         
 
-#### Before running the 5G stack, check whether maximum no drop rate is achieved using DPDK test pmd application.
+#### Before running the 5G stack, check whether maximum no drop rate is achieved using DPDK testpmd application.
 
-Refer the same link above to run test pmd on Ampere. This will ensure that the Ethernet PMD is operating at optimal performance. 
+Refer to the same link above to run `testpmd` on Ampere. This will ensure that the Ethernet PMD is operating at optimal performance. 
 
 ### Allocate Cores to Different Tasks
 
-It is critical to carefully alloacte the cores to various tasks for 5G stack. Make sure all of processes have their own cores to run on, not to step over each other.
+It is critical to carefully allocate the cores to various tasks for 5G stack. Make sure all of processes have their own cores to run on, not to step over each other.
 
-For multiple socket server, always use numactl to launch your program to associate with the cpu and the PCIe device your program will access on same node.
+For multiple socket server, always use `numactl` to launch your program to associate with the cpu and the PCIe device your program will access on same node.
 
-Use taskset command to launch your program on specific cores.
+Use `taskset` command to launch your program on specific cores.
 
 ### Profiling/Tracing
 
@@ -59,7 +59,8 @@ Use taskset command to launch your program on specific cores.
 
    - "perf record & report" can be used to identify bottleneck based on events on specific core
    - "perf stat" can be used to statistically measure the KPIs like IPC, Front End/Back End Stalls and L1/L2/LLC Cache misses.
-   - Perf script to run on an Arm Neoverse based system is shown below:
+
+An example perf script that is run on an Arm Neoverse based server is shown below:
 
 ```console
 #!/bin/bash
