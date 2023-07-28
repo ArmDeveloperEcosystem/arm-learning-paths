@@ -327,7 +327,7 @@ Perform the following steps on the bare-metal host for enabling SR-IOV.
 
 - Execute the following command to append iommu.passthrough=1 option. GRUB_CMLINE_LINUX in /etc/default/grub
 
-- Run the grub-mkconfig -o /boot/grub/grub.cfg script to update boot partitions grub configuration file.
+- Run the `grub-mkconfig -o /boot/grub/grub.cfg` script to update boot partitions grub configuration file.
 
 Reboot Linux to reflect the changes.
 
@@ -370,7 +370,7 @@ Also requires a PTP enabled switch, currently Arista switch has PTP sync'ed to a
 
 How to setup ptp4l/phc2sys on Linux:
 
-Configure Slave node setting as shown below:
+Configure the slave node with the contents of the configuration file shown below:
 
 ```console
 $ cat /etc/5g-ptp.conf
