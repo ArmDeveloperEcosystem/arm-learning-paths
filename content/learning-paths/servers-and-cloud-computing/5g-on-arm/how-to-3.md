@@ -22,7 +22,7 @@ Make sure that each memory channel has at least one memory DIMM inserted with 8G
 
 Enable cache stashing on ampere to stash the packets coming through NIC to SLC cache (System Level Cache, aks Level 3 Cache).
 
-Cache stashing feature enable/disable on Ampere dynamically (No reboot required). slc_inst_s0 script can be found in attachment:   slc_inst_s0                                                                                                                   
+Cache stashing feature enable/disable on Ampere dynamically (No reboot required). slc_inst_s0 is a program can be available upon request:
 ```console
    ./slc_inst_s0 1  -- enable SLC installation for all root ports on Socket 0                                                                                                                                                                                                                       
    ./slc_inst_s0 0  -- disable SLC installation for all root ports on Socket 0

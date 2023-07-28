@@ -276,12 +276,12 @@ At this moment, RT kernel is not ready from apt repository, you will need to reb
 
   Creating SR-IOV Virtual Functions (VFs)
 
-  Generation of SR-IOV configuration maps for kubernetes
+  Generation of SR-IOV configuration maps for Kubernetes
   
        - VM (Virtual Machine) based (K8s configuration map for corresponding worker node)
        - Bare-Metal (SR-IOV VFs and Configuration map)
 
-
+  Example of SR-IOV configuration map for Kubernetes:
 ```console
 insertModules:
   - "i40e"
@@ -325,7 +325,7 @@ Perform the following steps on the bare-metal host for enabling SR-IOV.
 
 - Enable SR-IOV in BIOS settings.
 
-- Execute the following command to append iommu.passthrough=1 option. GRUB_CMLINE_LINUX in /etc/default/grub
+- Append iommu.passthrough=1 option to GRUB_CMLINE_LINUX line in /etc/default/grub
 
 - Run the `grub-mkconfig -o /boot/grub/grub.cfg` script to update boot partitions grub configuration file.
 
@@ -334,7 +334,7 @@ Reboot Linux to reflect the changes.
 #### Type I - SR-IOV Configuration for VM Deployment
 echo 2 > /sys/class/net/<interface name>/device/sriov_numvfs
 
-Execute the following command to check if the SR-IOV VFs interface names are displayed.
+Execute the following command to check if the SR-IOV VFs interface names are displayed:
 
 ```console
 lshw -c network -businfo
@@ -345,17 +345,422 @@ Execute the following command to remove the SR-IOV from the bare-metal host syst
 echo 0 > /sys/class/net/<interface name>/device/sriov_numvfs
 ```
 Type II - SR-IOV Configuration for Bare-metal Deployment
-Example of a SR-IOV deployment yaml file used for UPF (User Plane Function)
+Example of a SR-IOV deployment yaml file used for UPF (User Plane Function):
+
+```console
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    meta.helm.sh/release-name: upfnf
+    meta.helm.sh/release-namespace: radisys-upf1
+  creationTimestamp: "2023-04-28T09:51:46Z"
+  generation: 1
+  labels:
+    app: upf
+    app.kubernetes.io/managed-by: Helm
+    svc: upf
+  name: upf
+  namespace: radisys-upf1
+  resourceVersion: "11234556"
+  uid: 1c98264a-93bf-4ac7-b807-5187779495dc
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: upf
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[ { "name": "upf1-ngu-interface", "interface":
+          "net1" }, { "name": "upf1-n6-interface", "interface": "net2" } ]'
+        myLivenessPath: /fgc-livez
+        myProbePort: "8090"
+        myReadinessPath: /fgc-readyz
+      creationTimestamp: null
+      labels:
+        app: upf
+    spec:
+      containers:
+      - command:
+        - /bin/bash
+        - -c
+        - sysctl -w net.ipv6.conf.all.disable_ipv6=0;sysctl -w net.ipv4.conf.all.arp_ignore=1;/root/bin/upf
+        env:
+        - name: INTF_NAME
+          value: eth0
+        - name: LOG_OUTPUT
+          value: STDOUT
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        - name: MY_POD_LIVENESS_PATH
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations['myLivenessPath']
+        - name: MY_POD_READINESS_PATH
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations['myReadinessPath']
+        - name: MY_POD_PROBE_PORT
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations['myProbePort']
+        image: docker.io/library/upfsp:4.0.2-upfarm
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /fgc-livez
+            port: 8090
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: upfsp
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /fgc-readyz
+            port: 8090
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            hugepages-1Gi: 2Gi
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            hugepages-1Gi: 2Gi
+            memory: 1Gi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/podinfo
+          name: podinfo
+        - mountPath: /dev/shm
+          name: shm
+        - mountPath: /dev/hugepages
+          name: hugepage
+        - mountPath: /run/vpp
+          name: upf-memif
+        - mountPath: /root/config
+          name: oam-config-volume
+        - mountPath: /etc/fgc/upf
+          name: day0-config-volume
+        - mountPath: /var/local/core-dumps
+          name: core-path
+      - command:
+        - /bin/bash
+        - -c
+        - sysctl -w net.ipv6.conf.all.autoconf=0;sysctl -w net.ipv6.conf.default.autoconf=0;/opt/upf_fp/bin/upffpmgr
+        env:
+        - name: INTF_NAME
+          value: eth0
+        - name: nguIntType
+          value: sriov
+        - name: n6IntType
+          value: sriov
+        - name: nguResourcePrefix
+          value: intel.com
+        - name: nguResourceName
+          value: sriov_netdevice_ngu_upf
+        - name: nguPciDeviceName
+          value: PCIDEVICE_INTEL_COM_SRIOV_NETDEVICE_NGU_UPF
+        - name: n6ResourcePrefix
+          value: intel.com
+        - name: n6ResourceName
+          value: sriov_netdevice_n6_upf
+        - name: n6PciDeviceName
+          value: PCIDEVICE_INTEL_COM_SRIOV_NETDEVICE_N6_UPF
+        - name: LOG_OUTPUT
+          value: STDOUT
+        - name: LD_LIBRARY_PATH
+          value: /opt/upf_fp/vpp/lib/:/lib/x86_64-linux-gnu
+        - name: PATH
+          value: /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/upf_fp/vpp/bin
+        image: docker.io/library/upffp:4.0.2-upfarm
+        imagePullPolicy: IfNotPresent
+        name: upffp
+        resources:
+          limits:
+            cpu: "4"
+            hugepages-1Gi: 3Gi
+            intel.com/sriov_netdevice_n6_upf: "1"
+            intel.com/sriov_netdevice_ngu_upf: "1"
+            memory: 1Gi
+          requests:
+            cpu: "4"
+            hugepages-1Gi: 3Gi
+            intel.com/sriov_netdevice_n6_upf: "1"
+            intel.com/sriov_netdevice_ngu_upf: "1"
+            memory: 1Gi
+        securityContext:
+          privileged: true
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /lib/modules
+          name: modules
+        - mountPath: /dev/vfio
+          name: dev
+        - mountPath: /sys/devices
+          name: devices
+        - mountPath: /sys/bus/pci
+          name: pci
+        - mountPath: /sys/module
+          name: sysmodule
+        - mountPath: /etc/podinfo
+          name: podinfo
+        - mountPath: /run/vpp
+          name: upf-memif
+        - mountPath: /dev/hugepages
+          name: hugepage
+        - mountPath: /dev/shm
+          name: shm
+        - mountPath: /opt/upf_fp/conf
+          name: config-volume
+        - mountPath: /opt/upf_fp/config
+          name: oam-config-volume
+        - mountPath: /var/local/core-dumps
+          name: core-path
+      - command:
+        - /bin/bash
+        - -c
+        - rsyslogd -n
+        env:
+        - name: INTF_NAME
+          value: eth0
+        - name: LOG_OUTPUT
+          value: STDOUT
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: MY_POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: status.podIP
+        image: localhost:5000/upfrsyslog:v1
+        imagePullPolicy: IfNotPresent
+        name: upfrsyslog
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/log/upfv3
+          name: upfv3-syslog
+        - mountPath: /etc/rsyslog.d
+          name: rsyslog-config-volume
+      dnsPolicy: ClusterFirst
+      nodeName: node1
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - hostPath:
+          path: /lib/modules
+          type: ""
+        name: modules
+      - hostPath:
+          path: /dev/vfio
+          type: ""
+        name: dev
+      - hostPath:
+          path: /sys/devices
+          type: ""
+        name: devices
+      - hostPath:
+          path: /sys/bus/pci
+          type: ""
+        name: pci
+      - hostPath:
+          path: /sys/module
+          type: ""
+        name: sysmodule
+      - downwardAPI:
+          defaultMode: 420
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.labels
+            path: labels
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.annotations
+            path: annotations
+        name: podinfo
+      - emptyDir: {}
+        name: upf-memif
+      - hostPath:
+          path: /dev/shm/
+          type: ""
+        name: shm
+      - emptyDir:
+          medium: HugePages
+        name: hugepage
+      - configMap:
+          defaultMode: 420
+          name: upf-radisys-upf1-configmap
+        name: config-volume
+      - configMap:
+          defaultMode: 420
+          name: upf-radisys-upf1-oam-configmap
+        name: oam-config-volume
+      - configMap:
+          defaultMode: 420
+          name: upf-radisys-upf1-day0-configmap
+        name: day0-config-volume
+      - configMap:
+          defaultMode: 420
+          name: upf-radisys-upf1-rsyslog-configmap
+        name: rsyslog-config-volume
+      - hostPath:
+          path: /var/local/core-dumps
+          type: ""
+        name: core-path
+      - hostPath:
+          path: /var/log/upfv3
+          type: ""
+        name: upfv3-syslog
+status:
+  conditions:
+  - lastTransitionTime: "2023-04-28T09:51:46Z"
+    lastUpdateTime: "2023-04-28T09:51:46Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  - lastTransitionTime: "2023-04-28T10:01:47Z"
+    lastUpdateTime: "2023-04-28T10:01:47Z"
+    message: ReplicaSet "upf-5bf69d8f7c" has timed out progressing.
+    reason: ProgressDeadlineExceeded
+    status: "False"
+    type: Progressing
+  observedGeneration: 1
+  replicas: 1
+  unavailableReplicas: 1
+  updatedReplicas: 1
+```
+
+```console
+git clone https://github.com/k8snetworkplumbingwg/sriov-cni
+kubectl apply -f sriov-cni/images/k8s-v1.16/sriov-cni-daemonset.yaml
+```
+
+sriov-cni-daemonset.yaml:
+```console
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: kube-sriov-cni-ds-arm64
+  namespace: kube-system
+  labels:
+    tier: node
+    app: sriov-cni
+spec:
+  selector:
+    matchLabels:
+      name: sriov-cni
+  template:
+    metadata:
+      labels:
+        name: sriov-cni
+        tier: node
+        app: sriov-cni
+    spec:
+      nodeSelector:
+        kubernetes.io/arch: arm64
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: kube-sriov-cni-arm64
+        image: localhost:5000/sriov-cni-arm64:latest
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          capabilities:
+            drop:
+              - ALL
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "50Mi"
+          limits:
+            cpu: "100m"
+            memory: "50Mi"
+        volumeMounts:
+        - name: cnibin
+          mountPath: /host/opt/cni/bin
+      volumes:
+        - name: cnibin
+          hostPath:
+            path: /opt/cni/bin
+```
 
 ### SR-IOV CNI Resource Verification
 Perform the following step to verify the SR-IOV CNI (Cloud Native Interface) resource configuration.
 
-Execute the following command in the master node and confirm if allocatable resources were created on the worker node used for UPF deployment.
+Execute the following command in the master node and confirm if allocatable resources were created on the worker node used for UPF deployment:
 
 ```console
 kubectl get node <node name> -o json | jq '.status.allocatable'
 ```
-This command displays the following sample output.
+This command displays the following sample output:
+```console
+{
+    "cpu": "31900m",
+    "ephemeral-storage": "189274027310",
+    "hugepages-1Gi": "10Gi",
+    "memory": "120754964Ki",
+    "pods": "110",
+    "arm.com/intel_sriov_netdevice_upf_n6": "1",
+    "arm.com/intel_sriov_netdevice_upf_ngu": "1"
+}
+```
 
 ### PTP (Precision Time Protocol) Setting
 In 5G world, the time synchronization is critical to synchronize all components in same timing cadence.   
