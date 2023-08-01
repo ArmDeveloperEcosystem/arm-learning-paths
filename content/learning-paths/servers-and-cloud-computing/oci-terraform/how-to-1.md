@@ -431,3 +431,338 @@ compartment-name = <your-compartment-name>
 ```
 
 Congratulations! You have successfully logged in and created a compartment in your tenancy, using the Oracle Cloud Infrastructure Terraform provider.
+
+## Create a Compute Instance
+
+  Create SSH Encryption Keys 
+
+  Run the command below to generate SSH Keys
+```bash { target="ubuntu:latest" }
+ssh-keygen -t rsa -N "" -b 2048 -C <your-ssh-key-name> -f <your-ssh-key-name>
+```
+The command generates some random text art used to generate the keys. When complete, you have two files:
+
+The private key file: <your-ssh-key-name>
+The public key file: <your-ssh-key-name>.pub
+
+You use these files to connect to your compute instance.
+
+### Create a Virtual Cloud Network (VCN)
+
+1. To create a VCN you must open your OCI console and click the Oracle Cloud Icon to go to the main landing page. 
+
+      Scroll down to Launch Resources.
+      Select set up a network with a wizard.
+
+2. In the Start VCN Wizard workflow, select VCN with Internet Connectivity and then click Start VCN Wizard .
+
+3. Fill in basic information:
+
+      VCN Name: your-vcn-name
+     
+      Compartment: your-compartment-name
+
+4. In the Configure VCN and Subnets section, keep the default values for the CIDR blocks:
+
+      VCN CIDR BLOCK: 10.0.0.0/16
+
+      PUBLIC SUBNET CIDR BLOCK: 10.0.0.0/24
+
+      PRIVATE SUBNET CIDR BLOCK: 10.0.1.0/24
+
+5. For DNS Resolution, uncheck Use DNS hostnames in this VCN.
+
+6. Click Next.
+
+      The Create a VCN with Internet Connectivity configuration dialog is displayed (not shown here) confirming all the values you just entered.
+
+7. Click Create to create your VCN.
+      The Creating Resources dialog is displayed (not shown here) showing all VCN components being created.
+    
+8. Click View Virtual Cloud Network to view your new VCN.
+
+
+
+### Required Information
+
+1. Compartment Name: your-compartment-name
+      Find your compartment name from the Create a Compartment tutorial you performed in the Before you Begin section.
+
+2. Collect the following information from the Oracle Cloud Infrastructure Console.
+
+      In the Console search bar, enter your-compartment-name.
+  
+      Click your-compartment-name in the search results.
+      
+      Copy the OCID.
+
+
+      Subnet ID: <subnet-ocid>
+      Open the navigation menu and click Networking, and then click Virtual Cloud Networks.
+
+      Click <your-vcn-name> from section 2.
+
+      Click the public subnet and copy OCID.
+
+    
+3. Find the source id for the image of the compute instance.
+      Source ID: source-ocid
+
+    In the Console's top navigation bar, find your region.
+
+    Go to [Image Release Notes]([guide](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)).
+
+    Click Ubuntu 20.04 and click the latest image: Canonical-Ubuntu-20.04-aarch64-2023.06.30-0
+
+    Find the image for your region and copy OCID
+
+4. Choose the shape for the compute instance.
+  
+  Shape: VM.Standard.A1.Flex
+    To choose a different ARM shape, go to [VM Standard Shapes](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm#vmshapes__vm-standard).
+
+5. Collect the following information from your environment.
+
+    SSH Authorized Key (public key path): ssh-public-key-path
+
+    From section 1, get the path to the SSH public key on your environment.
+
+      You use this path when you set up the compute instance.
+
+
+    Private SSH Key Path: ssh-private-key-path
+
+      From the Create SSH Encryption Keys section, get the path to the SSH private key.
+        
+      You use this private key to connect to your compute instance.
+
+
+## Add Authentication
+
+First, set up a directory for your Terraform scripts. Then add a provider script so your Oracle Cloud Infrastructure account can authenticate the scripts running from this directory.
+
+In your $HOME directory, create a directory called tf-compute and change to that directory.
+
+```bash { target="ubuntu:latest" }
+mkdir tf-compute
+```
+```bash { target="ubuntu:latest" }
+cd tf-compute
+```
+
+
+Copy the provider.tf file from earlier, into the tf-compute directory.
+
+```bash { target="ubuntu:latest" }
+cp ../tf-provider/provider.tf .
+```
+
+Next fetch the name of an availability domain from your account. An availability domain is one of the required inputs to create a compute instance.
+
+Copy the availability-domains.tf file from before, into the tf-compute directory.
+
+```bash { target="ubuntu:latest" }
+cp ../tf-provider/availability-domains.tf .
+```
+
+Example code:
+
+```bash { target="ubuntu:latest" }
+# Source from https://registry.terraform.io/providers/oracle/oci/latest/docs/data-sources/identity_availability_domains
+
+data "oci_identity_availability_domains" "ads" {
+  compartment_id = "<tenancy-ocid>"
+}
+```
+
+
+In the tf-compute directory, create a file called outputs.tf.
+
+To output the name of the first availability domain in the list of oci_identity_availability_domains, add the following code to outputs.tf.
+
+```bash { target="ubuntu:latest" }
+
+# The "name" of the availability domain to be used for the compute instance.
+output "name-of-first-availability-domain" {
+  value = data.oci_identity_availability_domains.ads.availability_domains[0].name
+}
+```
+
+Run your scripts with Terraform:
+
+
+```bash { target="ubuntu:latest" }
+terraform init
+```
+
+
+
+```bash { target="ubuntu:latest" }
+terraform plan
+```
+
+
+```bash { target="ubuntu:latest" }
+terraform apply
+```
+
+Example output:
+
+
+```bash { target="ubuntu:latest" }
+name-of-first-availability-domain = QnsC:US-ASHBURN-AD-1
+```
+
+Declare an Oracle Cloud Infrastructure compute resource, and then define the specifics for the instance.
+
+Create a file called compute.tf.
+
+Add the following code to compute.tf
+
+```bash { target="ubuntu:latest" }
+resource "oci_core_instance" "ubuntu_instance" {
+    # Required
+    availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+    compartment_id = "<compartment-ocid>"
+    shape = "VM.Standard2.1"
+    source_details {
+        source_id = "<source-ocid>"
+        source_type = "image"
+    }
+
+    # Optional
+    display_name = "<your-ubuntu-instance-name>"
+    create_vnic_details {
+        assign_public_ip = true
+        subnet_id = "<subnet-ocid>"
+    }
+    metadata = {
+        ssh_authorized_keys = file("<ssh-public-key-path>")
+    } 
+    preserve_boot_volume = false
+}
+```
+
+
+## Add Outputs
+
+Add output blocks to your code to get information about your compute instance after Terraform creates it.
+
+Open the outputs.tf file.
+
+Create an output block for the public IP of the instance:
+
+The public IP is available after the instance is created.
+
+You use the public IP to connect to the instance.
+
+Add the following code to outputs.tf:
+
+```bash { target="ubuntu:latest" }
+
+# Outputs for compute instance
+
+output "public-ip-for-compute-instance" {
+  value = oci_core_instance.ubuntu_instance.public_ip
+}
+```
+
+Add a few more outputs to describe the compute instance:
+  
+  display_name
+  
+  id
+  
+  region
+  
+  shape
+  
+  state
+  
+  ocpus
+  
+  memory_in_gbs
+  
+  time_created
+
+  ```bash { target="ubuntu:latest" }
+
+output "instance-name" {
+  value = oci_core_instance.ubuntu_instance.display_name
+}
+
+output "instance-OCID" {
+  value = oci_core_instance.ubuntu_instance.id
+}
+
+output "instance-region" {
+  value = oci_core_instance.ubuntu_instance.region
+}
+
+output "instance-shape" {
+  value = oci_core_instance.ubuntu_instance.shape
+}
+
+output "instance-state" {
+  value = oci_core_instance.ubuntu_instance.state
+}
+
+output "instance-OCPUs" {
+  value = oci_core_instance.ubuntu_instance.shape_config[0].ocpus
+}
+
+output "instance-memory-in-GBs" {
+  value = oci_core_instance.ubuntu_instance.shape_config[0].memory_in_gbs
+}
+
+output "time-created" {
+  value = oci_core_instance.ubuntu_instance.time_created
+}
+```
+
+### Create an Instance 
+
+Run your Terraform scripts. After, your account authenticates the scripts, Terraform creates a compute instance in a compartment in your tenancy. Use your SSH keys to connect to the instance. When you no longer need your instance, destroy it with Terraform.
+
+```bash { target="ubuntu:latest" }
+terraform init
+```
+
+```bash { target="ubuntu:latest" }
+terraform plan
+```
+
+
+```bash { target="ubuntu:latest" }
+terraform apply
+```
+
+When prompted for confirmation, enter yes, for your resource to be created.
+
+After the instance is created, the outputs that you defined including your-public-ip-address are displayed in the output terminal.
+
+### Connect to the instance 
+
+From your terminal, enter the outputs for your compute instance:
+
+```bash { target="ubuntu:latest" }
+terraform output
+```
+
+Copy the public IP address from the outputs.
+
+From your Linux machine, connect to your VM with this ssh command:
+
+```bash { target="ubuntu:latest" }
+ssh -i <ssh-private-key-path> ubuntu@<your-public-ip-address>
+```
+
+### Destroy the Instance 
+
+After you no longer need your compute instance, you can terminate it with the following command:
+
+```bash { target="ubuntu:latest" }
+terraform destroy
+```
+
+When prompted for confirmation, enter yes, for your compute instance to be terminated.
