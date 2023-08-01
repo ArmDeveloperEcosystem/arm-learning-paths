@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Install, Configure, and Check MySQL"
+title: "Install, configure and check MySQL"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -36,7 +36,7 @@ MySQL server is a large project with many features. The [MySQL Reference Manual]
 
 ##  MySQL installation options
 
-If using a cloud service like AWS RDS, then the installation of MySQL is handled by those services. However, if working with a bare metal or cloud node, there are a few different [installation options](https://dev.mysql.com/doc/refman/8.1/en/installing.html). You should decide what approach you want to take for installing MySQL after reviewing the documentation.
+If you are using a cloud service like AWS RDS, then the installation of MySQL is handled by those services. However, if you are working with a bare metal or cloud node, there are a few different [installation options](https://dev.mysql.com/doc/refman/8.1/en/installing.html). You should decide what approach you want to take for installing MySQL after reviewing the documentation.
 
 ##  MySQL Server Configuration
 
@@ -46,7 +46,7 @@ Getting MySQL server up and running is easy. This is because the default out of 
 
 Installations of MySQL will also install a CLI client application called `mysql`. Once a database is up and running, this tool can be used to connect to the database and make sure it is working. Review the [instructions](https://dev.mysql.com/doc/refman/8.1/en/mysql.html) on how to use the `mysql` CLI tool.
 
-Below is a sample output of what you should see when you connect to the database successfully.
+Shown below is sample output of what you should see when you connect to the database successfully.
 
 ```output
 Welcome to the MySQL monitor.  Commands end with ; or \g.
@@ -66,14 +66,15 @@ mysql>
 
 ### Sample MySQL Commands
 
-There are plenty of resources that explain how to do basic interactions with a MySQL database. It's suggested that the reader search for these resources on their own. That said, a few basic command examples are shown below.
+There are plenty of resources that explain how to do basic interactions with a MySQL database. That said, a few basic command examples are shown below.
 
-Create a data base.
-```
+Create a data base:
+
+```console
 create DATABASE arm_test;
 ```
 
-List available databases.
+List available databases:
 
 ```console { output_lines = "2-11" }
 show databases;
@@ -89,35 +90,35 @@ show databases;
 5 rows in set (0.10 sec)
 ```
 
-Access the database.
+Access the database:
 
 ```console { output_lines = "2" }
 use arm_test;
 Database changed
 ```
 
-List tables in the database.
+List tables in the database:
 
 ```console { output_lines= "2" }
 show tables;
 Empty set (0.09 sec)
 ```
 
-Create a table.
+Create a table:
 
 ```console { output_lines= "2" }
 create table book(name char(10),id varchar(10));
 Query OK, 0 rows affected (0.12 sec)
 ```
 
-Insert values into the table.
+Insert values into the table:
 
 ```console { output_lines= "2,3" }
 insert into book(name,id) values ('Abook','10'),('Bbook','20'),('Cbook','20'),('Dbook','30'),('Ebook','45'),('Fbook','40'),('Gbook','69');
 Query OK, 7 rows affected (0.11 sec)
 Records: 7  Duplicates: 0  Warnings: 0
 ```
-Display information about the table.
+Display information about the table:
 ```console { output_lines= "2-8" }
 describe book;
 +-------+-------------+------+-----+---------+-------+
@@ -129,7 +130,7 @@ describe book;
 2 rows in set (0.10 sec)
 ```
 
-Access the content of the table.
+Access the content of the table:
 
 ```console { output_lines= "2-13" }
 select * from book;
