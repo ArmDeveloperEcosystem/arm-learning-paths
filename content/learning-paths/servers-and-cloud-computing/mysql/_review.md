@@ -13,22 +13,22 @@
 review:
     - questions:
         question: >
-            Ansible is a pull-based configuration management tool
+            The MySQL serve default configuration (or out of box configuration) works without issue.
         answers:
             - "True"
             - "False"
-        correct_answer: 2                     
+        correct_answer: 1
         explanation: >
-            Ansible works on the Push mechanism.
+            The default configuration of MySQL works. However, the Learn how to Tune MySQL learning path should be completed to learn how to tune a MySQL server that is running on Arm.
     - questions:
         question: >
-            You can keep secret data in the playbook
+            There are numerous options for deploying MySQL on Arm.
         answers:
             - "True"
             - "False"
         correct_answer: 1                     
         explanation: >
-            It is possible to keep secret data in your Ansible content with the use of Vault in playbooks.
+            From bare metal, to cloud VMs, to cloud provider database services. There are many ways to get a hold of Arm HW for deploying MySQL server.
                
 # ================================================================================
 #       FIXED, DO NOT MODIFY
