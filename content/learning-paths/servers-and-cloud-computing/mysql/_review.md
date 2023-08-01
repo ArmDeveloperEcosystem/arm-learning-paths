@@ -28,7 +28,7 @@ review:
             - "False"
         correct_answer: 1                     
         explanation: >
-            From bare metal, to cloud VMs, to cloud provider database services. There are many ways to get a hold of Arm HW for deploying MySQL server.
+            From bare metal, to cloud VMs, to cloud provider database services. There are many ways to get access to different Arm based hardware for deploying MySQL server.
                
 # ================================================================================
 #       FIXED, DO NOT MODIFY
