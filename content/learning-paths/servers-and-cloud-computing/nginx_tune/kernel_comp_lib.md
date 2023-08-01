@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ##  Kernel configuration
 
-Keep in mind that the profile of requests made by clients will be different from use case to use case. This means there is no one size fits all set of tuning parameters for Nginx. Use the information below as general guidance on tuning Nginx.
+The profile of requests made by clients will differ based on the use case. This means there is no one size fits all set of tuning parameters for Nginx. Use the information below as general guidance to tune Nginx.
 
 ### Linux Network Stack
 
@@ -14,13 +14,13 @@ The Linux Network stack settings can be changed in the `/etc/sysctl.conf` file, 
 
 Documentation on each of the parameters discussed below can be found in the [admin-guide](https://github.com/torvalds/linux/blob/master/Documentation/admin-guide/sysctl/net.rst) and [networking](https://github.com/torvalds/linux/blob/master/Documentation/networking/ip-sysctl.rst) documentation within the Linux source.
 
-Run the the below to list all kernel parameters.
+Run the command below to list all kernel parameters.
 
 ```bash
 sudo sysctl -a
 ```
 
-Below are the network stack settings used for performance testing.
+Shown below are the network stack settings used for performance testing.
 
 ```
 sudo sysctl -w net.core.somaxconn=65535
@@ -69,7 +69,7 @@ If you need to understand how to configure a build of Nginx. Please review the [
 
 ##  OpenSSL Considerations
 
-Nginx relies on [OpenSSL](https://www.openssl.org/) for cryptographic operations. Thus, the version of OpenSSL used with Nginx (and the GCC version and switches used to compile it) can impact performance. That said, typically using the Linux distribution default version of OpenSSL is sufficient.
+Nginx relies on [OpenSSL](https://www.openssl.org/) for cryptographic operations. Thus, the version of OpenSSL used with Nginx (and the GCC version and switches used to compile it) can impact performance. Typically using the Linux distribution default version of OpenSSL is sufficient.
 
 However, it is possible to use newer versions of OpenSSL which could yield performance improvements. This is achieved by using the `--with-openssl` switch when configuring the Nginx build. Point this switch to the directory that contains the source code to the version of OpenSSL you'd like to have Nginx link to. The Nginx build system takes care of the rest. Note, there is also a `--with-openssl-opt` switch which allows you to add options to the build for OpenSSL.
 
