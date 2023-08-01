@@ -22,11 +22,11 @@ The Mobile Studio package is supported with the Unity Editor version 2018.4 LTS 
 
 1. In Unity, go to **Window > Package Manager**.
 
-1. In the top left corner, click the **+** icon and select **Add package from git URL…**.
+2. In the top left corner, click the **+** icon and select **Add package from git URL…**.
 
 ![Adding a package from a Git URL](unity_add_package_from_git_url.png "Figure 2. Adding a package from a Git URL")
 
-1. Enter the git URL `https://github.com/ARM-software/mobile-studio-integration-for-unity.git` and click **Add**. When the install completes, you should then see Mobile Studio in your list of installed packages.
+3. Enter the git URL `https://github.com/ARM-software/mobile-studio-integration-for-unity.git` and click **Add**. When the install completes, you should then see Mobile Studio in your list of installed packages.
 
     {{% notice Note %}}
     You must use the exact Git Repository URL including the extension “.git”.
@@ -38,7 +38,7 @@ The Mobile Studio package is supported with the Unity Editor version 2018.4 LTS 
 
 The simplest annotations are single markers, which can have a name and a color. To use them in a Unity project where you have installed this package, simply call into the Mobile Studio library as follows:
 
-```
+```console
 private void Start()
 {
     MobileStudio.Annotations.marker("Game Started", Color.green);
@@ -53,7 +53,7 @@ This will emit a timestamped marker with the label "Game Started", with the colo
 
 To define regions of interest within the game, you can specify a pair of markers prefixed with “Region Start” and “Region End”, for example:
 
-```
+```console
 MobileStudio.Annotations.marker("Region Start Times Square");
 // Do work
 MobileStudio.Annotations.marker("Region End Times Square");
@@ -77,7 +77,7 @@ Channels are custom event timelines associated with a software thread. You can c
 
 To create a channel called "Spawner" and insert an annotation called "Spawning Wave", with the color red:
 
-```
+```console
 private MobileStudio.Annotations.Channel channel;
 private void Start()
 {
@@ -108,13 +108,13 @@ Multiple counter series can use the same title, which means that they will be pl
 
 To create a counter:
 
-```
+```console
 counter = new MobileStudio.Annotations.Counter("Title", "Series", MobileStudio.Annotations.CounterType.Absolute);
 ```
 
-Counter values are set easily:
+Counter values are set easily as shown below:
 
-```
+```console
 counter.setValue(42.2f);
 ```
 
@@ -128,7 +128,7 @@ CAM annotations allow you to define and visualize the execution of a complex dep
 
 To create a custom activity map and add tracks to it:
 
-```
+```console
 private MobileStudio.Annotations.CAM gameCAM;
 private MobileStudio.Annotations.CAM.CAMTrack waveTrack;
 private MobileStudio.Annotations.CAM.CAMTrack uiTrack; 
@@ -149,7 +149,7 @@ private void Start()
 
 To create a job within a track, there are two methods. The first is an immediate-mode API which starts a job when it is created, and stops it when the job's `stop()` method is called.
 
-```
+```console
 private MobileStudio.Annotations.CAM.CAMJob waveJob;
 private void HandleNewWaveStartedEvent()
 {
@@ -163,7 +163,7 @@ private void HandleWaveCompleted(object sender, EventArgs e)
 
 The other method is to store the start and end times of your work, and then add them to the track later.
 
-```
+```console
 UInt64 startTime = MobileStudio.Annotations.getTime();
 // Do work
 UInt64 endTime = MobileStudio.Annotations.getTime();
