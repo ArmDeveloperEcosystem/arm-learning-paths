@@ -20,8 +20,8 @@ author_primary: Julie Gaskin
 skilllevels: Introductory
 subjects: Profiling
 armips:
-    - Arm CPUs
-    - Mali GPUs
+    - Cortex-A
+    - Mali
 tools:
     - Unity
     - Arm Mobile Studio
