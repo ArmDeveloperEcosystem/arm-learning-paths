@@ -14,4 +14,4 @@ Application tuning allows you to gain performance without scaling your deploymen
 
 ![API Gateway Before and after Tuning](BeforeAndAfterAPIGW.png)
 
-Depending on the use case requirements. The m7g.2xlarge shown above could be down sized to a m7g.xlarge to gain cost savings.
+Depending on the use case requirements. The AWS m7g.2xlarge instance type shown above could be down sized to a m7g.xlarge to gain cost savings.
