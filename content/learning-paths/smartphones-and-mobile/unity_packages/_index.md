@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - Familiarity with Unity and the Unity Profiler
-    - Familiarity with Arm Mobile Studio toolsa
+    - Familiarity with Arm Mobile Studio tools
 
 author_primary: Julie Gaskin
 
