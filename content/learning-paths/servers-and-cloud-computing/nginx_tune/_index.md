@@ -1,9 +1,9 @@
 ---
-title: Learn how to Tune Nginx
+title: Learn how to tune Nginx
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for engineers who want to use Nginx on Arm.
+who_is_this_for: This is an advanced topic for software developers who want to use Nginx on Arm.
 
 learning_objectives:
     - Learn about kernel parameters that can impact Nginx performance
@@ -27,13 +27,6 @@ tools_software_languages:
     - Nginx    
 operatingsystems:
     - Linux
-
-test_images:
-- ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
-test_maintenance: true
-test_status:
-- passed
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
