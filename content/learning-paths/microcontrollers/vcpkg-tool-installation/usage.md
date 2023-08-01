@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Use vcpkg
 
-The following commands help you to work with `vcpkg`. The most important one is `activate` as this activates all tools specfied by the conifguration file.
+The following commands help you to work with `vcpkg`. The most important one is `activate` as this activates all tools specified by the configuration file.
 
 ### Activate vcpkg
 
@@ -103,19 +103,19 @@ arm:compilers/arm/armclang                                       6.20.0         
 
 ### Working with the vcpkg-configuration.json file
 
-#### Create a new vcpkg-configuraton.json file
+#### Create a new vcpkg-configuration.json file
 
 ```shell
 vcpkg new --application
 ```
 
-#### Add artifact to vcpkg-configuraton.json file
+#### Add artifact to vcpkg-configuration.json file
 
 ```shell
  vcpkg add artifact cmake
 ```
 
-#### Remove artifact to vcpkg-configuraton.json file
+#### Remove artifact to vcpkg-configuration.json file
 
 ```shell
  vcpkg remove microsoft:tools/kitware/cmake
