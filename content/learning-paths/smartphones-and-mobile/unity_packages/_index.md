@@ -1,26 +1,23 @@
 ---
-title: Arm integration packages for Unity
-
-description: Arm provides some Unity packages to enhance your profiling workflow for mobile games. This topic describes how to install and use these packages in Unity.
+title: Install and Use Arm integration packages for Unity
 
 minutes_to_complete: 20
 
-who_is_this_for: Unity developers who are targeting Android devices and want to get more insight into how their game performs on devices with Arm CPUs and GPUs.
+who_is_this_for: This is an introductory topic for Unity developers who are targeting Android devices and want to get more insight into how their game performs on devices with Arm CPUs and GPUs.
 
 learning_objectives: 
-    - How to install the packages in Unity
-    - How to see Mali metrics in the Unity Profiler
-    - How to annotate your Unity game with markers that give context to a profile in Arm Mobile Studio tools
+    - Install the packages in Unity
+    - View Mali metrics in the Unity Profiler
+    - Annotate your Unity game with markers that give context to a profile in Arm Mobile Studio tools
 
 prerequisites:
     - Familiarity with Unity and the Unity Profiler
-    - Familiarity with Arm Mobile Studio tools
-    - A requirement for deeper analyses of CPU and GPU performance on Android.
+    - Familiarity with Arm Mobile Studio toolsa
 
 author_primary: Julie Gaskin
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: Profiling
 armips:
     - Arm CPUs
