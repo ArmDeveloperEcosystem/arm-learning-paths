@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Work through the get started guides to learn how to use Arm Mobile Studio tools to profile mobile games.
+next_step_guidance: The getting started guides to learn how to use Arm Mobile Studio tools to profile mobile games is a good next step.
 
 recommended_path: /learning-paths/smartphones-and-mobile/ams/
 
