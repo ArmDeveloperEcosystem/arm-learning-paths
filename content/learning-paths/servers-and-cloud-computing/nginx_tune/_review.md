@@ -41,7 +41,7 @@ review:
             - "False"
         correct_answer: 1                    
         explanation: >
-            GCC is constantly updated with improvements for Arm. It's important to use as new a version of GCC as you can.
+            GCC is constantly updated with improvements for Arm. It's important to use the latest available version of GCC.
 
 
 
