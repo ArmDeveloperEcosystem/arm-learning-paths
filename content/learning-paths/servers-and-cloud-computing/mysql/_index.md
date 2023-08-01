@@ -3,14 +3,14 @@ title: Learn how to deploy MySQL
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for engineers who want to deploy MySQL on Arm.
+who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on Arm.
 
 learning_objectives: 
     - Learn about the various ways MySQL can be deployed.
     - Learn how to interact with a MySQL database using a MySQL client CLI tool.
 
 prerequisites:
-    - One Arm based instance from a cloud service provider, or one on-premises Arm server.
+    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If you do not have an Arm node, the next section discusses some options.
 
 author_primary: Jason Andrews
