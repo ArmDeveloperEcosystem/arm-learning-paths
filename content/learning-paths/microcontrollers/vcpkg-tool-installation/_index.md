@@ -27,11 +27,12 @@ armips:
 tools:
     - Arm Compiler for Embedded
     - GCC
-softwares:
+tools_software_languages:
+    - vcpkg
 operatingsystems:
     - Linux
     - Windows
-    - MacOS
+    - macOS
 
 
 ### FIXED, DO NOT MODIFY

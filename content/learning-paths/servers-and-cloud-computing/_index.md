@@ -7,7 +7,7 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Linux: 40
+- Linux: 41
 - macOS: 1
 - Windows: 2
 pinned_modules:
@@ -19,7 +19,7 @@ pinned_modules:
 subjects_filter:
 - CI-CD: 2
 - Containers and Virtualization: 12
-- Databases: 9
+- Databases: 10
 - Libraries: 5
 - ML: 2
 - Performance and Architecture: 7
@@ -30,19 +30,19 @@ title: Servers and Cloud Computing
 tools_software_languages_filter:
 - 5G: 1
 - Alibaba: 2
-- Ansible: 5
+- Ansible: 4
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
-- AWS: 15
+- AWS: 14
 - AWS CodeBuild: 1
-- Azure: 10
+- Azure: 9
 - Bastion: 3
 - Clair: 1
 - ClickBench: 1
 - ClickHouse: 1
 - Coding: 6
-- Docker: 6
+- Docker: 5
 - ECS: 1
 - Fortran: 1
 - gcc: 1
@@ -50,7 +50,7 @@ tools_software_languages_filter:
 - gdb: 1
 - Geekbench: 1
 - Go: 2
-- Google Cloud: 9
+- Google Cloud: 8
 - HammerDB: 1
 - InnoDB: 1
 - Intrinsics: 1

@@ -9,6 +9,9 @@ def mdToMetadata(md_file_path):
     content_text  = "" 
     inMetadata = False
 
+    # print the files so if 1 has an error, it can be fixed
+    print(md_file_path)
+
     # Remove last '---' to propery read in yaml metadata component of .md file
     with open(md_file_path) as f:
         for line in (f.readlines()):
