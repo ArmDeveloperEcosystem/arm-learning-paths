@@ -18,11 +18,11 @@ author_primary: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
-subjects: Profiling
+subjects: Performance and Architecture
 armips:
     - Cortex-A
     - Mali
-tools:
+tools_software_languages:
     - Unity
     - Arm Mobile Studio
 operatingsystems:

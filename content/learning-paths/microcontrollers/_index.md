@@ -8,12 +8,12 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 19
-- Linux: 2
-- macOS: 1
+- Linux: 3
+- macOS: 2
 - RTOS: 7
-- Windows: 1
+- Windows: 2
 subjects_filter:
-- CI-CD: 2
+- CI-CD: 3
 - Libraries: 1
 - ML: 6
 - Performance and Architecture: 7
@@ -44,6 +44,7 @@ tools_software_languages_filter:
 - Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
+- vcpkg: 1
 - Zephyr: 1
 weight: 5
 ---
