@@ -23,7 +23,7 @@ The [Arm Architecture Reference Manual](https://developer.arm.com/documentation/
 From the Architecture Reference Manual, FEAT_LSE introduces a set of atomic instructions:
 
 - Compare and Swap instructions, CAS and CASP
-- Atomic memory operation instructions, LD and ST, where is one of ADD, CLR, EOR, SET, SMAX, SMIN, UMAX, and UMIN
+- Atomic memory operation instructions, LD\<op\> and ST\<op\>, where \<op\> is one of ADD, CLR, EOR, SET, SMAX, SMIN, UMAX, and UMIN
 - Swap instruction, SWP
 
 Additional architecture improvements were made in Armv8.4-A and made optional in Armv8.2-A, but the low-level hardware details are not covered here. This additional feature is referred to as FEAT_LSE2 in the Architecture Reference Manual.
