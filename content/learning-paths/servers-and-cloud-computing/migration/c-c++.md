@@ -91,6 +91,12 @@ The following options are target specific:
 
 Notice that this version of GCC defaults `-march` to Arm ISA version ARMv8.A (v8.0). This could be under optimized if the application will run an on ISA version that is newer than ARMv8.A (8.0). However, it will result in a binary that can execute across a wider spectrum of Arm processors. This is precisely why the default is ARMv8.A and not something newer like ARMv8.3-A (or ARMv9.0-A). If you know the minimum ISA version of CPU your application will execute on, you could also consider selecting the ISA. This can be done with either the `-mcpu` (recommended) or `-march` switches. Valid values for the ISA version can be found in the [GCC Arm options documentation](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html).
 
+### GCC Link Time Optimization
+
+A GCC option that almost always results in higher performance on Arm is `-flto=auto`. This flag will analyze and optimize the application as though the whole program was compiled within a single translation unit. The `=auto` part of this switch speeds up the optimization process by using multiple threads. It is recommended to give this switch a try.
+
+More information on this switch can be found in the [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html).
+
 ### Large-System Extensions
 
 Neoverse processors have support for Large-System Extensions (LSE). LSE provides low-cost atomic operations which can improve system throughput for locks and mutexes.
