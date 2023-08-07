@@ -35,29 +35,29 @@ sudo sysctl -w net.ipv4.tcp_wmem="4096 8338607 8338607"
 These settings open up the network stack to make sure it is not a bottleneck.
 
 * `net.core.somaxconn`:
-  * Selects the maximum number of connections the kernel will allow.
-  * If the Nginx server is expect to support a large number of clients, it may be helpful to increase this parameter.
+  * This setting is used to select the maximum number of connections the kernel will allow.
+  * If the Nginx server is expected to support a large number of clients, it may be helpful to increase this parameter.
   * A value of 65535 is probably excessively large for production. In practice, this just needs to be large enough to support the peak number of connections that will be made.
 * `net.core.rmem_max`:
-  * Maximum read socket buffer size.
+  * This setting is used to set the maximum read socket buffer size.
   * 8MB is likely more than enough for most use cases.
   * Socket buffer utilization can be checked with a tool like `ss` (Socket Statistics). The information provided by this tool can be used to select a value for this parameter.
 * `net.core.wmem_max`:
-  * Maximum write socket buffer size.
+  * This setting is used to set the maximum write socket buffer size.
   * 8MB is likely more than enough for most use cases.
   * Socket buffer utilization can be checked with a tool like `ss` (Socket Statistics). The information provided by this tool can be used to select a value for this parameter.
 * `net.ipv4.tcp_max_syn_backlog`:
-  * Selects the maximum number of connection requests that are pending but not established yet.
+  * This setting is used to select the maximum number of connection requests that are pending but not established yet.
   * A value of 65535 is probably excessively large for production. In practice, this just needs to be large enough to support the peak number of connection requests that will be made.
 * `net.ipv4.ip_local_port_range`:
-  * Selects the range of ports the kernel can use.
-  * Although the port range is expanded above. Typically the default range is sufficient.
+  * This setting is used to select the range of ports the kernel can use.
+  * The port range is expanded above. Typically the default range is sufficient.
 * `net.ipv4.tcp_rmem`:
-  * Maximum TCP read socket buffer size.
+  * This setting is used to set the maximum TCP read socket buffer size.
   * 8MB is likely more than enough for most use cases.
   * TCP buffer utilization can be checked with a tool like `ss` (Socket Statistics). The information provided by this tool can be used to select a value for this parameter.
 * `net.ipv4.tcp_wmem`:
-  * Max TCP write socket buffer size.
+  * This setting is used to set the maximum TCP write socket buffer size.
   * 8MB is likely more than enough for most use cases.
   * TCP buffer utilization can be checked with a tool like `ss` (Socket Statistics). The information provided by this tool can be used to select a value for this parameter.
 
@@ -71,6 +71,6 @@ If you need to understand how to configure a build of Nginx. Please review the [
 
 Nginx relies on [OpenSSL](https://www.openssl.org/) for cryptographic operations. Thus, the version of OpenSSL used with Nginx (and the GCC version and switches used to compile it) can impact performance. Typically using the Linux distribution default version of OpenSSL is sufficient.
 
-However, it is possible to use newer versions of OpenSSL which could yield performance improvements. This is achieved by using the `--with-openssl` switch when configuring the Nginx build. Point this switch to the directory that contains the source code to the version of OpenSSL you'd like to have Nginx link to. The Nginx build system takes care of the rest. Note, there is also a `--with-openssl-opt` switch which allows you to add options to the build for OpenSSL.
+However, it is possible to use newer versions of OpenSSL which could yield performance improvements. This is achieved by using the `--with-openssl` switch when configuring the Nginx build. Point this switch to the directory that contains the source code of the version of OpenSSL you'd like to have Nginx link to. The Nginx build system takes care of the rest. There is also a `--with-openssl-opt` switch which allows you to add options to the build for OpenSSL.
 
-The version of OpenSSL Nginx is using can be verified by running `nginx -V`.
+The version of OpenSSL Nginx is using can be verified by running the command `nginx -V`.
