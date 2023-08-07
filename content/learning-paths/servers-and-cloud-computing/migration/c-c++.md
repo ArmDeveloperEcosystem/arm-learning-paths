@@ -93,7 +93,7 @@ Notice that this version of GCC defaults `-march` to Arm ISA version ARMv8.A (v8
 
 ### GCC Link Time Optimization
 
-A GCC option that almost always results in higher performance on Arm is `-flto=auto`. This flag will analyze and optimize the application as though the whole program was compiled within a single translation unit. The `=auto` part of this switch speeds up the optimization process by using multiple threads. It is recommended to give this switch a try.
+A GCC option that almost always results in higher performance on Arm is `-flto=auto`. This flag analyzes and optimizes the application as though the whole program is compiled within a single translation unit. The `=auto` part of this switch speeds up the optimization process by using multiple threads. It is recommended to give this switch a try.
 
 More information on this switch can be found in the [GCC documentation](https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html).
 
