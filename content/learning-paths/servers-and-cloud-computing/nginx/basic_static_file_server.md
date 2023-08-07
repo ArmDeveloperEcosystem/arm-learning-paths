@@ -6,9 +6,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-You can use Nginx to setup an HTTPS file server. 
-
-Make sure the network allows communication on port 22 (SSH) and port 443 (HTTPS) before proceeding.
+This learning path leaves developing an understanding of how to use Nginx configurations files as an exercise for the reader. It's ok to go through this section even if you don't have an understanding of Nginx configuration files. However, once you are done here, you should read the [documentation on serving static content](https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/) to better understand what is being shown below. This section walks through a bare minimum HTTPS file server setup. Tuning of a file server configuration will be explored in the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
 
 ## Setup a static file server
 
@@ -63,7 +61,7 @@ Here are the configuration file parameters:
 * [`default_type`](https://nginx.org/en/docs/http/ngx_http_core_module.html#default_type):
   * A default mime type to use if a resource requested from the service doesn't match any type that is in the `mime.types` file. `application/octet-stream` defines a generic binary stream of data.
 
-The `nginx.conf` files defines a set of global configurations for Nginx. Additional blocks and directives are needed in order to create a file server. The additional configurations are placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
+The above doesn't configure the file server. You can think of the above as a file that sets global configurations for Nginx. Additional blocks and directives are needed in order to create a file server. The additional configurations needed will be placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
 
 To complete the definition of the HTTPS file server use a text editor to add the following configuration information to `/etc/nginx/conf.d/fileserver.conf`
 
