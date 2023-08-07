@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            The kernel parameters can impact Nginx performance.
+            Linux kernel parameters can impact Nginx performance.
         answers:
             - "True"
             - "False"
@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Which of the following directives selects the port and protocol an Nginx file server will use.
+            Which of the following directives selects the port and protocol an Nginx file server will use?
         answers:
             - "root"
             - "worker_connections"
