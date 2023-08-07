@@ -4,13 +4,11 @@ weight: 5
 layout: "learningpathall"
 ---
 
-##  About Reverse Proxy & API Gateway performance tuning
-
-Keep in mind that the profile of requests made by clients will be different from use case to use case. This means there is no one size fits all set of tuning parameters for Nginx. Use the information below as general guidance on tuning Nginx.
+Use the information below as general guidance for tuning Nginx.
 
 ##  Nginx Reverse Proxy and API Gateway Configuration
 
-In the [Setup Reverse Proxy and API Gateway](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum Reverse Proxy and API Gateway configuration was discussed. In this section, a tuned configuration is discussed.
+In the [Setup Reverse Proxy and API Gateway](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum Reverse Proxy and API Gateway configuration was discussed. In this section, you will look at a tuned configuration.
 
 ### Top Level nginx.conf
 
@@ -18,8 +16,7 @@ The same top level config used in [Tune a static file server](../tune_static_fil
 
   ### Reverse Proxy and API Gateway configuration
 
-A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](../tune_static_file_server) will be discussed.
-
+A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](../tune_static_file_server) are explained here.
 ```
 # Upstreams for https
 upstream ssl_file_server_com {
@@ -66,11 +63,11 @@ server {
 ```
 
 * [`keepalive`](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive):
-  * Enables connection caching for upstream servers.
+  * This directive enables connection caching for upstream servers.
   * This is disabled by default. It should be turned on because it can improve performance significantly. This value should be increased further when more upstream servers are added to the `upstream` block.
   * The value of 1024 shown above is probably more than enough for most production deployments. It is recommended that you test in order to find an appropriate value for your deployment.
   * When this directive is used, the `proxy_http_version` should be set to 1.1 and `proxy_set_header` connection header should be cleared for upstream keep alive to work properly.
 * [`proxy_cache_path`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_path)
   * This directive is not in the configuration above. However it is worth mentioning because it can impact performance greatly. This enables a cache within the Reverse Proxy or API Gateway.
   * When this directive is used, both `proxy_cache_lock` and `proxy_cache_valid` should be considered as additional optimizations.
-  * The Nginx [admin-guide](https://docs.nginx.com/nginx/admin-guide/) has a section on [content-caching](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/) that should be explored.
+  * The [Nginx admin-guide](https://docs.nginx.com/nginx/admin-guide/) has a section on [content-caching](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/) that should be explored.
