@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Arm Keil Studio (VS Code Extension)
+title: Arm Keil Studio for VS Code
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -22,7 +22,7 @@ minutes_to_complete: 15
 author_primary: Ronan Synnott
 
 ### Link to official documentation
-official_docs: https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-web/README.md
+official_docs: https://developer.arm.com/documentation/108029
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -39,19 +39,23 @@ It supports more than 10,000 Arm Cortex-M-based devices and is easy to learn and
 
 - Install [Microsoft Visual Studio Code](https://code.visualstudio.com/) on your machine (Linux, macOS, Windows are supported).
 
-## Install the extensions
+## Install the Keil Studio extensions
 
 The [Keil Studio VS Code extensions](https://github.com/ARM-software/vscode-keil-studio-pack) are available for [Desktop](https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-desktop/README.md) and [Web-based](https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-web/README.md) instances.
 
-1. In VS Code, go to the `Extensions` view.
-2. Search for `Keil Studio Pack`.
-3. Click the `Install` button for the appropriate extension pack.
+To install within the `VS Code` IDE
 
-Visual Studio Code installs the extensions. All recommended extensions are now available in the `Extensions` view.
+1. Go to the `Extensions` view (`Ctrl` + `Shift` + `X`).
+2. Search for `Keil Studio Pack`.
+3. Click the `Install` button to install all extensions (**recommended**), or select individually.
+
+Visual Studio Code installs the extensions. The extensions are now available in the `Activity Bar`.
+
+You will be prompted to enable an [MDK Community License](https://www.keil.arm.com/community/) for non-commercial use. If you have a commercial license for `Keil MDK` installed, decline this option.
 
 ## Get started
 
-In the `Extensions` view, select the `Keil Studio Pack` extension and follow the supplied tutorial to verify everything is installed correctly.
+Follow the [Getting started with an example project](https://developer.arm.com/documentation/108029/latest/Get-started-with-an-example-project) tutorial to verify everything is installed correctly.
 
 For more information on the extensions, see the links below.
 
