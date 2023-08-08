@@ -49,7 +49,7 @@ See [The New Era of MCUXpresso Starts Today with VS Code and Open-CMSIS-Packs](h
 
 To install within the `VS Code` IDE
 
-1. Go to the `Extensions` view (`Ctrl` + `Shift` + `X`).
+1. Go to the `Extensions` view (`Ctrl/Cmd` + `Shift` + `X`).
 2. Search for `MCUXpresso`.
 3. Click the `Install` button.
 

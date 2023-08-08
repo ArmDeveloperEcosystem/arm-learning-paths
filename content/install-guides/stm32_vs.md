@@ -49,7 +49,7 @@ The `STM32 VS Code Extension` is available on the [Visual Studio Marketplace](ht
 
 To install within the `VS Code` IDE
 
-1. Go to the `Extensions` view (`Ctrl` + `Shift` + `X`).
+1. Go to the `Extensions` view (`Ctrl/Cmd` + `Shift` + `X`).
 2. Search for `STM32 VS Code Extension`.
 3. Click the `Install` button.
 

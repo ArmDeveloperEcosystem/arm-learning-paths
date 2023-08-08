@@ -45,7 +45,7 @@ The [Keil Studio VS Code extensions](https://github.com/ARM-software/vscode-keil
 
 To install within the `VS Code` IDE
 
-1. Go to the `Extensions` view (`Ctrl` + `Shift` + `X`).
+1. Go to the `Extensions` view (`Ctrl/Cmd` + `Shift` + `X`).
 2. Search for `Keil Studio Pack`.
 3. Click the `Install` button to install all extensions (**recommended**), or select individually.
 
