@@ -34,9 +34,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [MCUXpresso for Visual Studio Code](https://www.nxp.com/design/software/development-software/mcuxpresso-software-and-tools-/mcuxpresso-for-visual-studio-code:MCUXPRESSO-VSC) provides an optimized embedded developer experience for code editing and development.
 
-`MCUXpresso` is available as a set of [VS Code](https://code.visualstudio.com/) extensions that offer the same functionality as the cloud-native version.
+`MCUXpresso` is available as a [VS Code](https://code.visualstudio.com/) extension that offers the same functionality as the traditional version.
 
-See the blog post [The New Era of MCUXpresso Starts Today with VS Code and Open-CMSIS-Packs](https://www.nxp.com/company/blog/the-new-era-of-mcuxpresso-starts-today-with-vs-code-and-open-cmsis-packs:BL-THE-NEW-ERA-OF-MCUXPRESSO) for more information.
+See [The New Era of MCUXpresso Starts Today with VS Code and Open-CMSIS-Packs](https://www.nxp.com/company/blog/the-new-era-of-mcuxpresso-starts-today-with-vs-code-and-open-cmsis-packs:BL-THE-NEW-ERA-OF-MCUXPRESSO) for more information.
 
 
 ## Before you begin
