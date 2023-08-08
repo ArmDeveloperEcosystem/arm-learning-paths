@@ -1,18 +1,17 @@
 ---
-title: Learn how to deploy PostgreSQL on AWS 
+title: Learn how to deploy PostgreSQL
 
-minutes_to_complete: 60   
+minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for anyone who wants to deploy PostgreSQL on AWS Graviton processors.
+who_is_this_for: This is an introductory topic for software developers who want to deploy PostgreSQL on Arm.
 
 learning_objectives: 
-    - Automate PostgreSQL EC2 instance creation using Terraform and Ansible
-    - Deploy a single instance of PostgreSQL on AWS Graviton 
-    - Deploy a 3-node PostgreSQL cluster with two hot, read-only standby servers on AWS Graviton
+    - Learn about the various ways PostgreSQL can be deployed.
+    - Learn how to interact with a PostgreSQL database using the psql client tool.
 
 prerequisites:
-    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli), and [Ansible](/install-guides/ansible/) installed
+    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
+    - If you do not have an Arm node, the next section discusses some options.
 
 author_primary: Jason Andrews
 ### Tags
@@ -23,9 +22,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - AWS
-    - Terraform
-    - Ansible
     - SQL
     - PostgreSQL
 
