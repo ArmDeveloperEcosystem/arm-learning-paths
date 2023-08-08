@@ -41,29 +41,33 @@ See [The New Era of MCUXpresso Starts Today with VS Code and Open-CMSIS-Packs](h
 
 ## Before you begin
 
-- Install [Microsoft Visual Studio Code](https://code.visualstudio.com/) on your machine (Linux, macOS, Windows are supported).
+[Download](https://code.visualstudio.com/download), install, and start Visual Studio Code on your machine. Linux, macOS, and Windows are supported.
 
 ## Install MCUXpresso for VS Code
 
 `MCUXpresso for VS Code` is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=NXPSemiconductors.mcuxpresso).
 
-To install within the `VS Code` IDE
+Install the `MCUXpresso` extension: 
 
-1. Go to the `Extensions` view (`Ctrl/Cmd` + `Shift` + `X`).
-2. Search for `MCUXpresso`.
-3. Click the `Install` button.
+1. Browse for extensions using the `View -> Extensions` menu item or the `Ctrl/Cmd` + `Shift` + `X` keyboard shortcut
+2. Search for `MCUXpresso`
+3. Click the `Install` button
 
 Visual Studio Code will install the extension. `MCUXpresso` is now available in the `Activity Bar`.
 
 ### Install additional dependencies
 
-Additional software packages can be installed with the appropriate [MCUXpresso Installer](https://github.com/nxp-mcuxpresso/vscode-for-mcux/wiki/Dependency-Installation) for your host.
+Additional software packages can be installed with the [MCUXpresso Installer](https://github.com/nxp-mcuxpresso/vscode-for-mcux/wiki/Dependency-Installation) for your host operating system.
+
+Download and run the installer. 
+
+Select one or more packages and click `Install`. 
 
 ![MCUXpresso Installer #center](/install-guides/_images/MCUXpresso_Installer.png)
 
 ### Keil Studio for VS Code
 
-For Keil users, [Keil Studio for VS Code](https://www.keil.arm.com/) is also available.
+[Keil Studio for VS Code](https://www.keil.arm.com/) is also available. Refer to the [Arm Keil Studio for VS Code install guide](/install-guides/keilstudio_vs/) for more information.
 
-See this [install guide](../keilstudio_vs) for more information.
+
 
