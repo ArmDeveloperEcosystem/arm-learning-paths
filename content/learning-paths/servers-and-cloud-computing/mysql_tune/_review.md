@@ -37,12 +37,12 @@ review:
         question: >
             Why might it be a good idea to increase how often a mutex lock is checked before the running thread yields?
         answers:
-            - "Checking locks more often speeds up disk access"
-            - "Checking locks more often reduces context switching, which is expensive"
-            - "Checking locks more often speeds up buffer pool reads"
+            - "Checking locks more before a yield speeds up disk access"
+            - "Checking locks more before a yield reduces context switching, which is expensive"
+            - "Checking locks more before a yield speeds up buffer pool reads"
         correct_answer: 2
         explanation: >
-            Reducing context switching helps performance. Spending a bit longer in checking locks before yielding by increasing innodb_sync_spin_loops usually provides performance gains. 
+            Reducing context switching helps performance. Spending a bit longer in checking locks before yielding by increasing innodb_sync_spin_loops usually provides performance gains.
 
 
 
