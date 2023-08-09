@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-In this section you will learn how to install, configure and check your PostgreSQL database. If you already know how to deploy a PostgreSQL database, you can skip this learning path, and instead explore the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path. 
+In this section you will learn about different options to install, configure and check your PostgreSQL database. If you already know how to deploy a PostgreSQL database, you can skip this learning path, and instead explore the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path. 
 
 ## Arm deployment options
 
@@ -40,13 +40,13 @@ If you are using a cloud service like AWS RDS, then the installation of PostgreS
 
 ## PostgreSQL Server Configuration
 
-Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this out of box configuration is most likely under optimized. In fact, a graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path. That said, for the purpose of learning, it’s ok to start with the out of box configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
+Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this default configuration is most likely under optimized. A graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path. For the purpose of learning, it’s ok to start with the default configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
 
 ## Get PostgreSQL Build Configuration
 
-It can be helpful to know the build configuration of an installation of PostgreSQL. Run `pg_config` to get this information. Below is an example output.
+It can be helpful to know the build configuration of an installation of PostgreSQL. Run `pg_config` to get this information. Shown below is an example output:
 
-```
+```output
 BINDIR = /usr/lib/postgresql/14/bin
 DOCDIR = /usr/share/doc/postgresql-doc-14
 HTMLDIR = /usr/share/doc/postgresql-doc-14
@@ -72,14 +72,14 @@ LIBS = -lpgcommon -lpgport -lselinux -llz4 -lxslt -lxml2 -lpam -lssl -lcrypto -l
 VERSION = PostgreSQL 14.8
 ```
 
-In particular, the switches CFLAGS, CXXFLAGS, and LDFLAGS listed in the `CONFIGURE` line can be very helpful if you plan to build PostgreSQL from source. Tuning compilation options is discussed in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path.
+The switches CFLAGS, CXXFLAGS, and LDFLAGS listed in the `CONFIGURE` line can be very helpful if you plan to build PostgreSQL from source. Tuning compilation options is discussed in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path.
 
 ## Connect to the database 
 
 Installations of PostgreSQL will also install a CLI client application called [`psql`](https://www.postgresql.org/docs/current/app-psql.html). Once a database is up and running, this tool can be used to connect to the database and make sure it is working. Review the [instructions](https://www.postgresql.org/docs/15/tutorial-accessdb.html) on how to use the `psql` CLI tool.
 
 Below is sample output of what you should see when you connect to the database successfully.
-```console
+```output
 psql (15.2)
 Type "help" for help.
 
@@ -88,7 +88,7 @@ postgres=#
 
 ## Sample PostgreSQL Commands
 
-Create a new database
+Create a new database using the command shown:
 
 ```console
 postgres=# create database testdb;
@@ -151,3 +151,4 @@ postgres=# select * from company;
  Noy      | Presales
 (5 rows)
 ```
+Using these sample commands shown above you have successfully validated your installation of PostgreSQL database.
