@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            The command pg_config can be used to understand how an installation of PostgreSQL was installed.
+            The command pg_config can be used to understand how PostgreSQL was installed.
         answers:
             - "True"
             - "False"
