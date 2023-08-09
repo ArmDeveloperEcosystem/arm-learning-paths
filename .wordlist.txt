@@ -1490,3 +1490,11 @@ UnityMain
 Gaskin
 systemmetrics
 Autoconnect
+CubeCLT
+mcux
+mcuxpresso
+wrk
+psql
+CFLAGS
+CXXFLAGS
+LDFLAGS

@@ -61,7 +61,7 @@ http {
   * The default is 512 which means this directive can be removed from the configuration above. However, it is shown here to emphasize that if your deployment needs to sustain a large number of connections, this value needs to be increased (along with `worker_rlimit_nofile`).
 * [`sendfile`](https://nginx.org/en/docs/http/ngx_http_core_module.html#sendfile):
   * This directive allows Nginx to directly copy data from one file descriptor to another without copying the data into a buffer first. The elimination of this copy can boost performance.
-  * This is a common optimization that you will see in almost all Ngnix configurations.
+  * This is a common optimization that you will see in almost all Nginx configurations.
 * [`tcp_nopush`](https://nginx.org/en/docs/http/ngx_http_core_module.html#tcp_nopush):
   * This directive allows Nginx to send HTTP response headers along with file data in the same packet.
   * This is a common optimization and is suggested to be enabled when `sendfile` is enabled.
@@ -71,7 +71,7 @@ http {
   * This directive sets the number of requests that can be served through a single connection before it is closed by Nginx.
   * The default is 1000 which could be too small for some use cases. If you know that individual clients will make numerous requests on a single connection, it is important to increase this setting. Otherwise performance penalties will be paid to reestablish connections.
 * [`access_log`](https://nginx.org/en/docs/http/ngx_http_log_module.html#access_log):
-  * The access log directive is off by default. It is shown here to emphasize that if this is turned on, it will impact performance significantly. This negative performance impact can be reduced by turing on the buffer for the access log.
+  * The access log directive is off by default. It is shown here to emphasize that if this is turned on, it will impact performance significantly. This negative performance impact can be reduced by tuning on the buffer for the access log.
 * [`error_log`](https://nginx.org/en/docs/ngx_core_module.html#error_log):
   * The error log is on by default. There is no significant impact to performance if Nginx is functioning properly (i.e. not reporting errors). If errors are being reported, this logging may impact performance, but this is a moot point because the errors should be addressed anyway.
 

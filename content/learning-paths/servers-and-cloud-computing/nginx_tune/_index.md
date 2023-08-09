@@ -9,7 +9,7 @@ learning_objectives:
     - Learn about kernel parameters that can impact Nginx performance
     - Learn about compiler and libraries that can impact Nginx performance
     - Tune an Nginx file server configuration file
-    - Tune an Nginx Reverse Proxy & API GAteway configuration file
+    - Tune an Nginx Reverse Proxy & API Gateway configuration file
     - Learn how to test Nginx performance
 
 prerequisites:
