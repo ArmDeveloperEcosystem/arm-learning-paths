@@ -8,9 +8,9 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  PostgreSQL Tuning
+## Before you begin
 
-If you already know how to deploy a PostgreSQL database. You might want to skip this learning path, and instead explore the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path. That learning path covers how to get more performance out of an Arm based PostgreSQL server.
+In this section you will learn how to install, configure and check your PostgreSQL database. If you already know how to deploy a PostgreSQL database, you can skip this learning path, and instead explore the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path. 
 
 ## Arm deployment options
 
