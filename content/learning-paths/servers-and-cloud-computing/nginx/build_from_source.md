@@ -10,7 +10,7 @@ Before building from source, it's helpful to look at the build configuration of 
 
 ## Build Nginx from source
 
-The [nginx.com documentation](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) and [nginx.org documentation](http://nginx.org/en/docs/configure.html) explains how to compile and install Nginx from source. However, they do not give guidance on configuration and compile options (it just gives examples of how to select options). The good news is that Nginx doesn't need a significant amount of configuration. As long as you enable the features you need, it will work well. That said, this learning path will provide some supplemental information that will help you decide how to configure Nginx beyond what is noted in the documentation.
+The [nginx.com documentation](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) and [nginx.org documentation](http://nginx.org/en/docs/configure.html) explain how to compile and install Nginx from source. However, they do not give guidance on configuration and compilation options. The good news is that Nginx doesn't need a significant amount of configuration. As long as you enable the features you need, it will work well. That said, this learning path will provide some supplemental information that will help you decide how to configure Nginx beyond what is noted in the documentation.
 
 ### Configuration and compile options
 
@@ -39,11 +39,11 @@ The final build configuration is now reduced to:
 --with-cc-opt='-g -O2 -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
 
-You will have to use your judgement to figure out if you should keep or drop a configuration option. In the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path, GCC options that can be used to improve performance will be explored.
+You will have to use your judgement to figure out which configuration options to use. In the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path, GCC options that can be used to improve performance will be explored.
 
 ### Building Nginx and dependencies
 
-Once you know your configuration options, you can follow the build [instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source). With respect to the three dependencies of PCRE, zlib, and OpenSSL; you can also install prebuilts of those libraries using a package manager to skip having to build them as the instructions show. That said, it may be advantageous to build these as additional performance benefits could be gained. This point will be explored in the [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
+Once you know your configuration options, you can follow the build [instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source). With respect to the three dependencies of PCRE, zlib, and OpenSSL; you can also install prebuilt versions of those libraries using a Linux package manager and skip building them from source as shown in the instructions. That said, it may be advantageous to build these as additional performance benefits could be gained. This point will be explored in the [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
 
 ### Running Nginx as a service
 
