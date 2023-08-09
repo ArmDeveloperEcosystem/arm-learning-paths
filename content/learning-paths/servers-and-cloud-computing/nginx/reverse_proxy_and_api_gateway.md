@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 You will need to setup two [file servers](../basic_static_file_server) using the instructions in the previous section before moving forward.
 
-In this section, a third node is setup that will run a Reverse Proxy & API Gateway (this will also be referred to a RP/APIGW). This RP/APIGW will use the two file servers as the upstream servers it will load balance across. The configuration shown here is a bare minimum. Tuning will be explored In the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path. Once you are done here, you should review the [Nginx documentation](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) on Reverse Proxies. There are also some [Nginx blogs](https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/) that discuss the deployment of API Gateways.
+In this section, a third node is setup that will run a Reverse Proxy & API Gateway (this will also be referred to a RP/APIGW). This RP/APIGW will use the two file servers as the upstream servers it will load balance across. The configuration shown here is a bare minimum. Tuning will be explored in the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path. Once you complete this section, you should review the [Nginx documentation](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) on Reverse Proxies. There are also some [Nginx blogs](https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/) that discuss the deployment of API Gateways.
 
 ## Setup a reverse proxy and API gateway
 
