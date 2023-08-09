@@ -6,9 +6,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-You can use Nginx to setup an HTTPS file server. 
-
-Make sure the network allows communication on port 22 (SSH) and port 443 (HTTPS) before proceeding.
+This section gives you an overview of how to setup a bare minimum HTTPS file server. To understand how to use Nginx configurations files, you should read the [documentation on serving static content](https://docs.nginx.com/nginx/admin-guide/web-server/serving-static-content/). Tuning of a file server configuration will be explored in the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
 
 ## Setup a static file server
 
@@ -63,7 +61,7 @@ Here are the configuration file parameters:
 * [`default_type`](https://nginx.org/en/docs/http/ngx_http_core_module.html#default_type):
   * A default mime type to use if a resource requested from the service doesn't match any type that is in the `mime.types` file. `application/octet-stream` defines a generic binary stream of data.
 
-The `nginx.conf` files defines a set of global configurations for Nginx. Additional blocks and directives are needed in order to create a file server. The additional configurations are placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
+The content in the file shown above doesn't configure the file server. It sets global configurations for Nginx. Additional blocks and directives are needed in order to create a file server. These additional configurations will be placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
 
 To complete the definition of the HTTPS file server use a text editor to add the following configuration information to `/etc/nginx/conf.d/fileserver.conf`
 

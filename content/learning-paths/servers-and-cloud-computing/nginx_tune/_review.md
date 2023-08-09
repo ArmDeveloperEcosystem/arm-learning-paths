@@ -13,24 +13,39 @@
 review:
     - questions:
         question: >
-            The command pg_config can be used to understand how PostgreSQL was installed.
+            Linux kernel parameters can impact Nginx performance.
         answers:
             - "True"
             - "False"
-        correct_answer: 1                     
+        correct_answer: 1
         explanation: >
-            pg_config is a helpful tool, especially if you plan on building PostgreSQL from source.
-            
+            Kernel network stack can have a direct impact on Nginx.
+
     - questions:
         question: >
-            AWS RDS does not support PostgreSQL on Arm.
+            Which of the following directives selects the port and protocol an Nginx file server will use?
+        answers:
+            - "root"
+            - "worker_connections"
+            - "sendfile"
+            - "listen"
+        correct_answer: 4                  
+        explanation: >
+            The listen directive can select a port and protocol like HTTP or HTTPS.
+               
+    - questions:
+        question: >
+            You should use the latest version of GCC to build Nginx from source.
         answers:
             - "True"
             - "False"
-        correct_answer: 2                    
+        correct_answer: 1                    
         explanation: >
-            AWS RDS can deploy PostgreSQL on Arm.
-               
+            GCC is constantly updated with improvements for Arm. It's important to use the latest available version of GCC.
+
+
+
+
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
@@ -38,6 +53,3 @@ title: "Review"                 # Always the same title
 weight: 20                      # Set to always be larger than the content in this path
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 ---
-
-
-
