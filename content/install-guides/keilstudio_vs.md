@@ -31,21 +31,23 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-[Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. The desktop version is available as a set of [Visual Studio Code](https://code.visualstudio.com/) extensions and the install instructions are given below. 
+[Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. The desktop version is available as a set of [Visual Studio Code](https://code.visualstudio.com/) extensions.
 
 Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides the same functionality, but runs in a browser and requires no installation. 
 
 ## Before you begin
 
-[Download](https://code.visualstudio.com/download), install, and start Visual Studio Code on your machine. Linux, macOS, and Windows are supported. 
+[Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
+
+Linux, macOS, and Windows are supported. 
 
 ## Install the Keil Studio extensions
 
-The [Keil Studio extensions](https://github.com/ARM-software/vscode-keil-studio-pack) are available for [Desktop](https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-desktop/README.md) and [Web-based](https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-web/README.md) instances.
+The `Keil Studio Pack` extensions is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack).
 
 Install the Keil Studio extensions: 
 
-1. Browse for extensions using the `View -> Extensions` menu item or the `Ctrl/Cmd` + `Shift` + `X` keyboard shortcut
+1. Open the `Extensions` view in Visual Studio Code
 2. Search for `Keil Studio Pack`
 3. Click the `Install` button to install all extensions in the `Keil Studio Pack`
 

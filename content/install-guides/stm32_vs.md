@@ -34,14 +34,16 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 STM provides a range of [software development tools](https://www.st.com/en/development-tools/stm32-software-development-tools.html) to simplify configuring and developing for [STM32](https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html) devices.
 
-The tools are available as a [VS Code](https://code.visualstudio.com/) extension .
+The tools are available as a [VS Code](https://code.visualstudio.com/) extension.
 
 See [STMicroelectronics provides full STM32 support for Microsoft Visual Studio Code](https://newsroom.st.com/media-center/press-item.html/t4536.html) for more information.
 
 
 ## Before you begin
 
-[Download](https://code.visualstudio.com/download), install, and start Visual Studio Code on your machine. Linux, macOS, and Windows are supported.
+[Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
+
+Linux, macOS, and Windows are supported. 
 
 ## Install STM32 VS Code Extension
 
@@ -49,7 +51,7 @@ The `STM32 VS Code Extension` is available on the [Visual Studio Marketplace](ht
 
 Install the `STM32` extension: 
 
-1. Browse for extensions using the `View -> Extensions` menu item or the `Ctrl/Cmd` + `Shift` + `X` keyboard shortcut
+1. Open the `Extensions` view in Visual Studio Code
 2. Search for `STM32 VS Code Extension`
 3. Click the `Install` button
 
