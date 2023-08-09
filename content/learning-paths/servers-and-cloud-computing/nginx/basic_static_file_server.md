@@ -61,7 +61,7 @@ Here are the configuration file parameters:
 * [`default_type`](https://nginx.org/en/docs/http/ngx_http_core_module.html#default_type):
   * A default mime type to use if a resource requested from the service doesn't match any type that is in the `mime.types` file. `application/octet-stream` defines a generic binary stream of data.
 
-The above doesn't configure the file server. You can think of the above as a file that sets global configurations for Nginx. Additional blocks and directives are needed in order to create a file server. The additional configurations needed will be placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
+The content in the file shown above doesn't configure the file server. It sets global configurations for Nginx. Additional blocks and directives are needed in order to create a file server. These additional configurations will be placed in `/etc/nginx/conf.d` since this location is included in the configuration above.
 
 To complete the definition of the HTTPS file server use a text editor to add the following configuration information to `/etc/nginx/conf.d/fileserver.conf`
 
