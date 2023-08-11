@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ##  About database performance tuning
 
-Keep in mind that deployment configurations and the profile of SQL requests made by clients will be different. This means there is no one size fits all set of tuning parameters for `MySQL`.  Use the information in this learning path to help you tune `MySQL` for your use case.
+Deployment configurations and the profile of SQL requests made by clients will differ based on your use case. This means there is no one size fits all set of tuning parameters for `MySQL`.  Use the information in this learning path to help you tune `MySQL` for your use case.
 
 ##  Importance of tuning
 
