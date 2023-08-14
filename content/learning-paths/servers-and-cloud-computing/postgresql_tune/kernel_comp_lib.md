@@ -31,12 +31,13 @@ ulimit -a
 
 An explanation about why these Linux-PAM settings can help performance is found in the [PostgreSQL documentation](https://www.postgresql.org/docs/current/kernel-resources.html).
 
-```output
-nofile (ulimit -n):  Max number of open file descriptors
-nproc (ulimit -u):   Max number of processes
-data (ulimit -d):    Max data segment size
-memlock (ulimit -l): Max locked-in-memory address space
-```
+Some of the key settings that can affect performance are:
+
+- Maximum number of open file descriptors (`ulimit -n`)
+- Maximum number of processes (`ulimit -u`)
+- Maximum data segment size (`ulimit -d`)
+- Maximum locked-in-memory address space (`ulimit -l`)
+
 
 ### Linux virtual memory subsystem
 
@@ -56,12 +57,20 @@ sudo sysctl -a
 
 ### Overcommit memory
 
-```output
-vm.overcommit_memory
-```
+The overcommit policy is set via the sysctl `vm.overcommit_memory' setting. 
 
 The recommended setting for `vm.overcommit_memory` is 2 according to the [PostgreSQL documentation](https://www.postgresql.org/docs/15/kernel-resources.html). 
 
+To set the overcommit_memory parameter to 2 temporarily, run the following command:
+
+```console
+sudo sysctl -w vm.overcommit_memory=2
+```
+To make the change permanent:
+
+```bash
+sudo sh -c 'echo "vm.overcommit_memory=2" >> /etc/sysctl.conf'
+```
 This tells Linux to never over commit memory. Setting `vm.overcommit_memory` to 2 is to avoid a situation where the kernel might terminate the `PostgreSQL` postmaster when memory is scarce.
 
 ### Huge memory pages
@@ -123,19 +132,14 @@ More information on the different parameters that affect the configuration of hu
 
 ### Page cache parameters
 
-`PostgreSQL` writes data to files like any Linux process does. The behavior of the page cache can affect performance. These two parameters control how often the kernel flushes the page cache data to disk.
+`PostgreSQL` writes data to files like any Linux process does. The behavior of the page cache can affect performance. There are two sysctl that parameters control how often the kernel flushes the page cache data to disk.
 
-```output
-vm.dirty_background_ratio
-```
+- `vm.dirty_background_ratio`
+- `vm.dirty_ratio`
 
 The `vm.dirty_background_ratio` sets the percentage of the page cache that needs to be dirty in order for a flush to disk to start in the background. 
 
 Setting this value to lower than the default (typically 10) helps write heavy workloads. This is because by lowering this threshold, you are spreading writes to storage over time. This reduces the probability of saturating storage.
-
-```output
-vm.dirty_ratio
-```
 
 The `vm.dirty_ratio` sets the percentage of the page cache that needs to be dirty in order for threads that are writing to storage to be paused to allow flushing to catch up. 
 
