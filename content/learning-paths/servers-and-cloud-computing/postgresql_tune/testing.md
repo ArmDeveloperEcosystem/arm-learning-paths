@@ -2,7 +2,7 @@
 # User change
 title: "Testing PostgreSQL Tunings"
 
-weight: 2 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
