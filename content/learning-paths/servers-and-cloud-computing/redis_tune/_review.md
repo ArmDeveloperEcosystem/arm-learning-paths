@@ -35,11 +35,10 @@ review:
         question: >
             Which compiler flags can be used to potentially gain additional performance on Arm?
         answers:
-            - "O3"
-            - "flto"
-            - "mcpu"
-            - "all above"
-        correct_answer: 4                    
+            - "-flto"
+            - "-mcpu"
+            - "all two above"
+        correct_answer: 3                    
         explanation: >
             The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag -mcpu, 03, and flto can be used to potentially gain additional performance.
 

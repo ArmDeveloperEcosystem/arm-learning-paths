@@ -67,7 +67,7 @@ These settings open up the network stack to make sure it is not a bottleneck.
 
 ##  Compiler Considerations
 
-The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag `-mcpu`, `03`, and `flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c-c++) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag `-mcpu` and `-flto` can be used to potentially gain additional performance. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c-c++) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
 If you need to understand how to configure a build of Redis. Please review the [build Redis from source](https://redis.io/docs/getting-started/installation/install-redis-from-source/).
 
@@ -77,4 +77,3 @@ Redis relies on [OpenSSL](https://www.openssl.org/) for cryptographic operations
 
 However, it is possible to use newer versions of OpenSSL which could yield performance improvements. This is achieved by using the `--with-openssl` switch when configuring the Redis build. Point this switch to the directory that contains the source code of the version of OpenSSL you'd like to have Redis link to. The Redis build system takes care of the rest. There is also a `--with-openssl-opt` switch which allows you to add options to the build for OpenSSL.
 
-The version of OpenSSL Redis is using can be verified by running the command `Redis -V`.

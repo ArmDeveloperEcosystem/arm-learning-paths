@@ -7,7 +7,7 @@ next_step_guidance: >
     The Learning Path on Nginx is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/nginx/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/nginx_tune/"
 # Link to the next learning path being recommended.
 
 

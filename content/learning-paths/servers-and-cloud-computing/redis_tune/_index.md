@@ -14,7 +14,7 @@ prerequisites:
     - Cloud or bare-metal installation of an Redis file server or load balancer
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have an Redis setup
 
-author_primary: Elham Harirpoush
+author_primary: Arm
 
 ### Tags
 skilllevels: Advanced
