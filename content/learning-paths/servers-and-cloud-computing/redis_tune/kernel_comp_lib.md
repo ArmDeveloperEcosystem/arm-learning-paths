@@ -28,7 +28,7 @@ sudo echo 'vm.swappiness=1' >> /etc/sysctl.conf
 
 ### Transparent Huge Page
 
-Redis by default will disable transparent huge page (THP) for the Redis process if it is enabled in order to avoid latency problems. You should disable this parameter in case this config has no effect.
+Redis by default will disable transparent huge page (THP) if it is enabled for Redis process to avoid latency problems. You should disable this parameter in case this config has no effect.
   
 ```
 sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled  

@@ -8,10 +8,10 @@ who_is_this_for: This is an advanced topic for software developers who want to u
 learning_objectives:
     - Learn about kernel parameters that can impact Redis performance
     - Learn about compiler and libraries that can impact Redis performance
-    - Tune an Redis file server configuration file
+    - Tune an Redis configuration file for deployment
 
 prerequisites:
-    - Cloud or bare-metal installation of an Redis file server or load balancer
+    - Cloud or bare-metal installation of an Redis file server 
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have an Redis setup
 
 author_primary: Arm

@@ -40,7 +40,7 @@ review:
             - "all two above"
         correct_answer: 3                    
         explanation: >
-            The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag -mcpu, 03, and flto can be used to potentially gain additional performance.
+            The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag -mcpu and -flto can be used to potentially gain additional performance.
 
 
 

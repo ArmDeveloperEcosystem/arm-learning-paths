@@ -1,14 +1,14 @@
 ---
-title: "Tune Redis deployment"
+title: "Tune Redis"
 weight: 4
 layout: "learningpathall"
 ---
-Optimizing Redis application allows you to gain performance improvement without scaling your deployment up (bigger machines/nodes) or out (more machines/nodes). This gained performance can either be used, or traded for cost savings by reducing the amount of compute resources provisioned.
 
 
-##  Tuning Redis Deployment 
 
-The profile of requests made by clients will vary based on the use case. This means there is no one size fits all set of tuning parameters for Redis. Use the information below as general guidance on tuning Redis.
+##  Redis Deployment Tuning
+
+Optimizing Redis application allows you to gain performance improvement without scaling your deployment up (bigger machines/nodes) or out (more machines/nodes). This gained performance can either be used, or traded for cost savings by reducing the amount of compute resources provisioned. The profile of requests made by clients will vary based on the use case. This means there is no one size fits all set of tuning parameters for Redis. Use the information below as general guidance on tuning Redis.
 
 ##  Redis File Configuration
 
@@ -40,7 +40,7 @@ maxmemory <bytes>
 * `stop-writes-on-bgsave-error`:
   *  If you have setup your proper monitoring of the Redis server and persistence, you may want to disable background saving so that Redis will continue to work as usual even if there are problems with disk, permissions, and so forth.
 * `maxclients`:
-  * If your system has a many, set the maxclients to a higher value (default is 10000). 
+  * If your system has a many connections, set the maxclients to a higher value (default is 10000). 
   * If your resources are limited but you're employing efficient horizontal sharding through a Redis cluster, consider reducing this value to prevent potential bottlenecks from arising.
 * `maxmemory`:
-  * In case maxmemory is not defined, Redis will continuously allocate memory based on its requirements, potentially consuming all available free memory over time. Therefore, it is generally recommended to configure 75% or 80% of total memory to prevent this from occurring.
+  * In case maxmemory is not defined, Redis will continuously allocate memory based on its requirements, potentially consuming all available free memory over time. Therefore, it is generally recommended to configure certain limit to prevent this from occurring. Therefore setting it to take 75-80% of your memory dedicated for Redis is reasonable.
