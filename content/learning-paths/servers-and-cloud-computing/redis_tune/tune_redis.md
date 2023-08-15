@@ -35,12 +35,13 @@ maxmemory <bytes>
 ```
 
 * `save`:
-  * Redis by defualt tries to store data on the disk which creates forks that can result in overall system slowdown. You can prevent this by commenting out the lines that begin with "save". 
-  * You can entirely disable snapshotting by providing a single empty string argument.
+  * Redis by defualt tries to store data on the disk which creates forks that can result in overall system slowdown. You can prevent this by commenting out the lines that begin with "save".
+  * To entirely disable snapshotting, you can provide a single empty string argument.
 * `stop-writes-on-bgsave-error`:
   *  If you have setup your proper monitoring of the Redis server and persistence, you may want to disable background saving so that Redis will continue to work as usual even if there are problems with disk, permissions, and so forth.
 * `maxclients`:
   * If your system has a many connections, set the maxclients to a higher value (default is 10000). 
   * If your resources are limited but you're employing efficient horizontal sharding through a Redis cluster, consider reducing this value to prevent potential bottlenecks from arising.
 * `maxmemory`:
-  * In case maxmemory is not defined, Redis will continuously allocate memory based on its requirements, potentially consuming all available free memory over time. Therefore, it is generally recommended to configure certain limit to prevent this from occurring. Therefore setting it to take 75-80% of your memory dedicated for Redis is reasonable.
+  * In case maxmemory is not defined, Redis will continuously allocate memory based on its requirements, potentially consuming all available free memory over time. Therefore, it is generally recommended to configure this value to certain limits to prevent this from occurring. 
+  * You can allocate 75-80% of your memory to Redis by changing maxmemory value in the configuration file. 
