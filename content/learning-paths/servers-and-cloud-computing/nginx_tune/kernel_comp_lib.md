@@ -1,5 +1,5 @@
 ---
-title: "Kernel, compiler, and OpenSSL"
+title: "Kernel, compiler, and libraries"
 weight: 3
 layout: "learningpathall"
 ---
@@ -67,10 +67,18 @@ The easiest way to gain performance is to use the latest version of GCC. Aside f
 
 If you need to understand how to configure a build of Nginx. Please review the [build Nginx from source](/learning-paths/servers-and-cloud-computing/nginx/build_from_source) section of the [Learn to deploy Nginx learning path](/learning-paths/servers-and-cloud-computing/nginx/).
 
-##  OpenSSL Considerations
+##  OpenSSL
 
 Nginx relies on [OpenSSL](https://www.openssl.org/) for cryptographic operations. Thus, the version of OpenSSL used with Nginx (and the GCC version and switches used to compile it) can impact performance. Typically using the Linux distribution default version of OpenSSL is sufficient.
 
 However, it is possible to use newer versions of OpenSSL which could yield performance improvements. This is achieved by using the `--with-openssl` switch when configuring the Nginx build. Point this switch to the directory that contains the source code of the version of OpenSSL you'd like to have Nginx link to. The Nginx build system takes care of the rest. There is also a `--with-openssl-opt` switch which allows you to add options to the build for OpenSSL.
 
 The version of OpenSSL Nginx is using can be verified by running the command `nginx -V`.
+
+##  Perl Compatible Regular Expressions (PCRE)
+
+Nginx relies on [PCRE](https://www.pcre.org/) for regular expression processing. One scenario where RegEx is used is for an API Gateway. Typically, using the Linux distribution default version of PCRE is sufficient. However, it is possible to use a newer version of PCRE to potentially gain performance. The Nginx [installation instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) explain how to build the latest version of PCRE if this is something you want to explore.
+
+##  zlib for HTTP response compression
+
+Nginx relies on [zlib](https://zlib.net/) for HTTP response compression (when the `ngx_http_gzip_module` directives are used). Typically, using the Linux distribution default version of zlib is sufficient. However, it is possible to use a newer version of zlib to potentially gain performance. The Nginx [installation instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) explain how to build the latest version of zlib if this is something you want to explore.
