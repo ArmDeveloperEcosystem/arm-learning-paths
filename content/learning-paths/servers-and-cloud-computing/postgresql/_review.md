@@ -13,23 +13,23 @@
 review:
     - questions:
         question: >
-            Does PostgreSQL offers data types to store IPv4, IPv6, and MAC address?
+            The command pg_config can be used to understand how PostgreSQL was installed.
         answers:
             - "True"
             - "False"
         correct_answer: 1                     
         explanation: >
-            PostgreSQL offers data types to store IPv4, IPv6, and MAC addresses.
+            pg_config is a helpful tool, especially if you plan on building PostgreSQL from source.
             
     - questions:
         question: >
-            Ansible is a pull-based configuration management tool.
+            AWS RDS does not support PostgreSQL on Arm.
         answers:
             - "True"
             - "False"
         correct_answer: 2                    
         explanation: >
-             Ansible works on the Push mechanism.
+            AWS RDS can deploy PostgreSQL on Arm.
                
 # ================================================================================
 #       FIXED, DO NOT MODIFY

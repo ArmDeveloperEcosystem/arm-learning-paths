@@ -1,8 +1,6 @@
 ---
 title: PLACEHOLDER TITLE
 
-description: PLACEHOLDER DESCRIPTION
-
 minutes_to_complete: 10
 
 who_is_this_for: PLACEHOLDER SENTENCE
@@ -23,12 +21,9 @@ subjects: PLACEHOLDER SUBJECT
 armips:
     - PLACEHOLDER IP A
     - PLACEHOLDER IP B
-tools:
-    - PLACEHOLDER TOOL C
-    - PLACEHOLDER TOOL D
-softwares:
-    - PLACEHOLDER SOFTWARE E
-    - PLACEHOLDER SOFTWARE F
+tools_software_languages:
+    - PLACEHOLDER TOOL OR SOFTWARE C
+    - PLACEHOLDER TOOL OR SOFTWARE D
 operatingsystems:
     - PLACEHOLDER OS G
 

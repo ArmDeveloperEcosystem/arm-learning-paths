@@ -1,23 +1,17 @@
 ---
-title: Deploy MySQL on Arm
+title: Learn how to deploy MySQL
 
-minutes_to_complete: 30   
+minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL.
+who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on Arm.
 
 learning_objectives: 
-    - Deploy single instance of MySQL through Docker, RDS and an AWS EC2
-    - Deploy single instance of MySQL through an Azure
-    - Deploy single instance of MySQL through GCP
-    - Automate MySQL EC2 instance creation using Terraform and Ansible
+    - Learn about the various ways MySQL can be deployed.
+    - Learn how to interact with a MySQL database using a MySQL client CLI tool.
 
 prerequisites:
-    - An [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start). Create an account if needed.
-    - A computer with [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) installed
-    - A computer with [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html) installed
-    - A computer with [Ansible](https://www.cyberciti.biz/faq/how-to-install-and-configure-latest-version-of-ansible-on-ubuntu-linux/) installed
-    - A computer with [Terraform](/install-guides/terraform) installed
-    - A computer with [Docker](https://www.simplilearn.com/tutorials/docker-tutorial/how-to-install-docker-on-ubuntu) installed
+    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
+    - If you do not have an Arm node, the next section discusses some options.
 
 author_primary: Jason Andrews
 ### Tags
@@ -30,12 +24,6 @@ operatingsystems:
 tools_software_languages:
     - SQL
     - MySQL
-    - Terraform
-    - Ansible
-    - AWS
-    - Google Cloud
-    - Azure
-    - Docker
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
