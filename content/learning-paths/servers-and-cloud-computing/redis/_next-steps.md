@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    If you are interested in deploying Redis as a cache on Arm, continue on to the recommended Learning Path.
+    You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on MongoDB is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/redis_cache/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/mongodb/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/redis_cache).
 
 

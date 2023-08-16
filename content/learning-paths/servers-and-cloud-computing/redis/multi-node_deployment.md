@@ -1,323 +1,45 @@
 ---
 # User change
-title: "Install Redis in a multi-node configuration"
+title: "Configure Redis multi-node"
 
-weight: 7 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-##  Install Redis in a multi-node configuration 
+### Multi-node configuration
+A Redis multi-node cluster requires 3 primary and 3 replica nodes in a minimal configuration to work properly.  
 
-You can deploy Redis in a multi-node configuration on AWS Graviton processors using Terraform and Ansible. You will create three primary nodes and three replica nodes.
+You can use 6 different ports of the same host as shown in this command:
+```console
+redis-cli --cluster create HOST:port1 HOST:port2 HOST:port3 HOST:port4 HOST:port5 HOST:port6
+```
 
-## Before you begin
+Alternatively, create 6 different hosts with Redis server running on same port as shown:
+```console
+redis-cli --cluster create HOST1:port HOST2:port HOST3:port HOST4:port HOST5:port HOST6:port
+```
+Here, you are using the second approach, where you create 6 different hosts with Redis server running on **6379** port.
 
-You should have the prerequisite tools installed from the section, [Install Redis on a single AWS Arm based instance](/learning-paths/servers-and-cloud-computing/redis/aws_deployment).
-
-Use the same SSH key pair.
-
-## Create AWS EC2 instances using Terraform
-
-Using a text editor, save the code below in a file called `main.tf`. You will create a security group that opens inbound port `22`(ssh). Also every Redis Cluster node requires two TCP connections open. The normal Redis TCP port used to serve clients, for example `6379` plus the port obtained by adding 10000 to the data port, so `16379` in the example.
-
-Scroll down to see the information you need to change in `main.tf`.
+Shown here is the minimal template of **redis.conf** file:
 
 ```console
-provider "aws" {
-  region = "us-east-2"
-}
-resource "aws_instance" "redis-deployment" {
-  ami                    = "ami-0ca2eafa23bc3dd01"
-  count                  = "6"
-  instance_type          = "t4g.small"
-  key_name               = aws_key_pair.deployer.key_name
-  vpc_security_group_ids = [aws_security_group.main.id]
-}
-
-resource "aws_security_group" "main" {
-  name        = "main"
-  description = "Allow TLS inbound traffic"
-
-  ingress {
-    description = "Open redis connection port"
-    from_port   = 6379
-    to_port     = 6379
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    description = "Open port for Cluster bus"
-    from_port   = 16379
-    to_port     = 16379
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    description = "Allow ssh to instance"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-}
-
-resource "local_file" "inventory" {
-  depends_on = [aws_instance.redis-deployment]
-  filename   = "/tmp/inventory"
-  content    = <<EOF
-[redis]
-
-${aws_instance.redis-deployment[0].public_dns}
-${aws_instance.redis-deployment[1].public_dns}
-${aws_instance.redis-deployment[2].public_dns}
-${aws_instance.redis-deployment[3].public_dns}
-${aws_instance.redis-deployment[4].public_dns}
-${aws_instance.redis-deployment[5].public_dns}
-
-[all:vars]
-host_key_checking=false
-ansible_connection=ssh
-ansible_user=ubuntu
-                EOF
-}
-
-resource "aws_key_pair" "deployer" {
-  key_name   = "id_rsa"
-  public_key = file("~/.ssh/id_rsa.pub")
-}
-```
-Make the changes listed below in `main.tf` to match your account settings.
-
-1. In the `provider` section, update value to use your preferred AWS region.
-
-2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
-
-{{% notice Note %}}
-The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
-{{% /notice %}}
-
-The inventory file is automatically generated and does not need to be changed.
-
-
-## Terraform Commands
-
-Use Terraform to deploy the `main.tf` file.
-
-### Initialize Terraform
-
-Run `terraform init` to initialize the Terraform deployment. This command downloads the dependencies required for AWS.
-
-```console
-terraform init
-```
-    
-The output should be similar to:
-
-```output
-Initializing the backend...
-
-Initializing provider plugins...
-- Finding latest version of hashicorp/local...
-- Finding latest version of hashicorp/aws...
-- Installing hashicorp/local v2.4.0...
-- Installed hashicorp/local v2.4.0 (signed by HashiCorp)
-- Installing hashicorp/aws v4.58.0...
-- Installed hashicorp/aws v4.58.0 (signed by HashiCorp)
-
-Terraform has created a lock file .terraform.lock.hcl to record the provider
-selections it made above. Include this file in your version control repository
-so that Terraform can guarantee to make the same selections by default when
-you run "terraform init" in the future.
-
-Terraform has been successfully initialized!
-
-You may now begin working with Terraform. Try running "terraform plan" to see
-any changes that are required for your infrastructure. All Terraform commands
-should now work.
-
-If you ever set or change modules or backend configuration for Terraform,
-rerun this command to reinitialize your working directory. If you forget, other
-commands will detect it and remind you to do so if necessary.
+bind 0.0.0.0
+protected-mode no
+port 6379
+cluster-enabled yes
+cluster-config-file nodes.conf
+cluster-node-timeout 5000
+daemonize yes
+appendonly yes
 ```
 
-### Create a Terraform execution plan
+To connect to the remote Redis multi-node cluster, you need to use Redis Client (`redis-cli`) with:
+- **-c** option to enable cluster mode
+- **-h** option providing hostname
+- **-p** option providing the port number.
 
-Run `terraform plan` to create an execution plan.
-
-```console
-terraform plan
-```
-
-A long output of resources to be created will be printed. 
-
-### Apply a Terraform execution plan
-
-Run `terraform apply` to apply the execution plan and create all AWS resources. 
-
-```console
-terraform apply
-```      
-
-Answer `yes` to the prompt to confirm you want to create AWS resources. 
-
-The output should be similar to:
-
-```output
-Apply complete! Resources: 9 added, 0 changed, 0 destroyed.
-```
-
-## Install Redis in a multi-node configuration through Ansible
-Install the Redis and the required dependencies. 
-
-Using a text editor, save the code below in a file called `playbook.yaml`. This is the YAML file for the Ansible playbook. The following playbook contains a collection of tasks that install Redis in a multi-node configuration (3 primary and 3 replica nodes).
-
-```console
----
-- name: Redis Cluster Install
-  hosts: redis
-  become: true
-  become_user: root
-  remote_user: ubuntu
-  tasks:
-    - name: Update the Machine and install dependencies
-      shell: |
-             apt-get update -y
-             curl -fsSL "https://packages.redis.io/gpg" | gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
-             echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" |  tee /etc/apt/sources.list.d/redis.list
-             apt install -y redis-tools redis
-    - name: Create directories
-      file:
-        path: "/home/ubuntu/redis"
-        state: directory
-      become_user: ubuntu
-    - name: Create configuration files
-      copy:
-       dest: "/home/ubuntu/redis/redis.conf"
-       content: |
-         bind 0.0.0.0
-         protected-mode no
-         port 6379
-         cluster-enabled yes
-         cluster-config-file nodes.conf
-         cluster-node-timeout 5000
-         daemonize yes
-         appendonly yes
-      become_user: ubuntu
-    - name: Stop redis-server
-      shell: service redis-server stop
-    - name: Start redis server with configuration files
-      shell: redis-server redis.conf
-      args:
-        chdir: "/home/ubuntu/redis"
-      become_user: ubuntu
-```
-**NOTE:-** Since the allocation of primary and replica nodes is random at the time of cluster creation, it is difficult to know which nodes are primary and which nodes are replica. Hence, for the multi-node configuration, turn off **protected-mode**, which is enabled by default, so that you can connect to the primary and replica nodes. Also, the **bind address** is by default set to `127.0.0.1` due to which port 6379 becomes unavailable for binding with the public IP of the remote server. Thus, set the bind configuration option to `0.0.0.0`.
-
-### Ansible Commands
-
-Run the playbook using the  `ansible-playbook` command.
-
-```console
-ansible-playbook playbook.yaml -i /tmp/inventory
-```
-
-Answer `yes` when prompted for the SSH connection. 
-
-Deployment may take a few minutes. 
-
-The output should be similar to:
-
-```output
-PLAY [Redis Cluster Install] *************************************************************************************************************************************
-
-TASK [Gathering Facts] *******************************************************************************************************************************************
-The authenticity of host 'ec2-13-58-162-195.us-east-2.compute.amazonaws.com (172.31.28.72)' can't be established.
-ED25519 key fingerprint is SHA256:tr9tgt90kYwO0TTcqixWAL3FfpfxVHN2pEZlWevxp+g.
-This key is not known by any other names
-The authenticity of host 'ec2-18-217-125-204.us-east-2.compute.amazonaws.com (172.31.23.206)' can't be established.
-ED25519 key fingerprint is SHA256:liR6mlOvk2hfxArrwNkYvrP9a6flWDE63rIYHUMol7s.
-This key is not known by any other names
-The authenticity of host 'ec2-3-142-240-147.us-east-2.compute.amazonaws.com (172.31.21.161)' can't be established.
-ED25519 key fingerprint is SHA256:k0xJlAKunLQhmtQzay0D0i+XO8C9N8y1AxF4qnoKOxI.
-This key is not known by any other names
-The authenticity of host 'ec2-3-17-132-158.us-east-2.compute.amazonaws.com (172.31.30.32)' can't be established.
-ED25519 key fingerprint is SHA256:Bvhc5zvHx4vl4Cnpz1VUgwE0WwSjnj8CSvHStiNwnA0.
-This key is not known by any other names
-The authenticity of host 'ec2-3-23-96-163.us-east-2.compute.amazonaws.com (172.31.27.229)' can't be established.
-ED25519 key fingerprint is SHA256:Z5XybSrhgkScd1P0eeFMVWgFVm8to+771TAaRyvBVlY.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-yes
-yes
-ok: [ec2-13-58-162-195.us-east-2.compute.amazonaws.com]
-The authenticity of host 'ec2-3-17-161-89.us-east-2.compute.amazonaws.com (172.31.23.88)' can't be established.
-ED25519 key fingerprint is SHA256:8dKquVwCvXEjCpJ6oOJ4OScISz4UwYlkFJRWJBt11ZM.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-yes
-ok: [ec2-18-217-125-204.us-east-2.compute.amazonaws.com]
-yes
-ok: [ec2-3-142-240-147.us-east-2.compute.amazonaws.com]
-ok: [ec2-3-17-132-158.us-east-2.compute.amazonaws.com]
-ok: [ec2-3-23-96-163.us-east-2.compute.amazonaws.com]
-ok: [ec2-3-17-161-89.us-east-2.compute.amazonaws.com]
-
-TASK [Update the Machine and install dependencies] ***************************************************************************************************************
-changed: [ec2-3-23-96-163.us-east-2.compute.amazonaws.com]
-changed: [ec2-18-217-125-204.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-132-158.us-east-2.compute.amazonaws.com]
-changed: [ec2-13-58-162-195.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-142-240-147.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-161-89.us-east-2.compute.amazonaws.com]
-
-TASK [Create directories] ****************************************************************************************************************************************
-changed: [ec2-3-142-240-147.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-23-96-163.us-east-2.compute.amazonaws.com]
-changed: [ec2-18-217-125-204.us-east-2.compute.amazonaws.com]
-changed: [ec2-13-58-162-195.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-132-158.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-161-89.us-east-2.compute.amazonaws.com]
-
-TASK [Create configuration files] ********************************************************************************************************************************
-changed: [ec2-3-17-132-158.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-142-240-147.us-east-2.compute.amazonaws.com]
-changed: [ec2-13-58-162-195.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-23-96-163.us-east-2.compute.amazonaws.com]
-changed: [ec2-18-217-125-204.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-161-89.us-east-2.compute.amazonaws.com]
-
-TASK [Stop redis-server] *****************************************************************************************************************************************
-changed: [ec2-3-17-132-158.us-east-2.compute.amazonaws.com]
-changed: [ec2-13-58-162-195.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-142-240-147.us-east-2.compute.amazonaws.com]
-changed: [ec2-18-217-125-204.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-23-96-163.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-161-89.us-east-2.compute.amazonaws.com]
-
-TASK [Start redis server with configuration files] ***************************************************************************************************************
-changed: [ec2-13-58-162-195.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-132-158.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-23-96-163.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-142-240-147.us-east-2.compute.amazonaws.com]
-changed: [ec2-18-217-125-204.us-east-2.compute.amazonaws.com]
-changed: [ec2-3-17-161-89.us-east-2.compute.amazonaws.com]
-
-PLAY RECAP *******************************************************************************************************************************************************
-ec2-13-58-162-195.us-east-2.compute.amazonaws.com : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-ec2-18-217-125-204.us-east-2.compute.amazonaws.com : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-ec2-3-142-240-147.us-east-2.compute.amazonaws.com : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-ec2-3-17-132-158.us-east-2.compute.amazonaws.com : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-ec2-3-17-161-89.us-east-2.compute.amazonaws.com : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-ec2-3-23-96-163.us-east-2.compute.amazonaws.com : ok=6    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-```
 
 ## Create a Redis cluster
 
@@ -472,4 +194,7 @@ Run `terraform destroy` to delete all resources created.
 ```console
 terraform destroy
 ```
+
+
+
 

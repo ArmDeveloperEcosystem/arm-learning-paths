@@ -7,17 +7,13 @@ who_is_this_for: This is an introductory topic for developers who want to deploy
 
 learning_objectives: 
     - Understand Redis deployment configurations
-    - Install Redis on a single AWS Arm based instance
-    - Install Redis on a single Azure Arm based instance
-    - Install Redis on a single GCP Arm based instance
-    - Install Redis with a docker container on a single node
-    - Install Redis in a multi-node configuration (sharding)
+    - Install and run Redis in a single-node configuration 
+    - Install and run Redis in a multi-node configuration (sharding) 
 
 prerequisites:
-    - An Amazon Web Services (AWS) [account](https://aws.amazon.com/)
-    - An Azure portal [account](https://azure.microsoft.com/en-in/get-started/azure-portal)
-    - A Google Cloud [account](https://console.cloud.google.com/)
-    - A machine with [Terraform](/install-guides/terraform/), [AWS CLI](/install-guides/aws-cli), [Google Cloud CLI](/install-guides/gcloud), [Azure CLI](/install-guides/azure-cli), [AWS IAM authenticator](https://docs.aws.amazon.com/eks/latest/userguide/install-aws-iam-authenticator.html), and [Ansible](/install-guides/ansible/) installed
+
+    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
+    - If you do not have an Arm node, the next section discusses some options.
 
 author_primary: Jason Andrews
 ### Tags
@@ -28,12 +24,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - AWS
-    - Azure
-    - Google Cloud
-    - Docker
-    - Terraform
-    - Ansible
     - Redis
 
 ### FIXED, DO NOT MODIFY
