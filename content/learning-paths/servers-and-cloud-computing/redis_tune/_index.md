@@ -8,7 +8,7 @@ who_is_this_for: This is an advanced topic for software developers who want to u
 learning_objectives:
     - Learn about kernel parameters that can impact Redis performance
     - Learn about compiler and libraries that can impact Redis performance
-    - Tune an Redis configuration file for deployment
+    - Tune a Redis configuration file for deployment
 
 prerequisites:
     - Cloud or bare-metal installation of an Redis file server 
