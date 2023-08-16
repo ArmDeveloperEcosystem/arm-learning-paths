@@ -32,6 +32,11 @@ maxclients 10000
 ############################## MEMORY MANAGEMENT ################################
 
 maxmemory <bytes>
+ 
+
+################################ THREADED I/O #################################
+
+io-threads 1
 ```
 
 * `save`:
@@ -45,3 +50,6 @@ maxmemory <bytes>
 * `maxmemory`:
   * In case maxmemory is not defined, Redis will continuously allocate memory based on its requirements, potentially consuming all available free memory over time. Therefore, it is generally recommended to configure this value to certain limits to prevent this from occurring. 
   * You can allocate 75-80% of your memory to Redis by changing maxmemory value in the configuration file. 
+* `io-thread`:
+  * Redis is mostly single threaded and usually threading reads doesn't help much. 
+  * Redis documentation advises to use default value because if you need more threads, sharding redis or using pipeline > 1 is a better way to add parallelism.
