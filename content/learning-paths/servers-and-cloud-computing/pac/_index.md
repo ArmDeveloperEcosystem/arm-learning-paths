@@ -1,17 +1,19 @@
 ---
-title: Understand Arm Pointer Authentication with Graviton3
+title: Understand Arm Pointer Authentication
 
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for software developers interested in understanding Arm Pointer Authentication.
 
 learning_objectives:
-    - Create a simple application on AWS Graviton3 server with Pointer Authentication
+    - Create a simple application on an Arm server with Pointer Authentication
     - Compile the application with and without Pointer Authentication to inspect the instructions generated
     - Exploit the applications with and without Pointer Authentication to demonstrate how Pointer Authentication instructions enhance security.
 
 prerequisites:
-    - An [AWS Graviton3 instance](/learning-paths/servers-and-cloud-computing/csp/aws) with instance type `C7g`.
+    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
+    - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
+    
 
 author_primary: Pareena Verma
 
