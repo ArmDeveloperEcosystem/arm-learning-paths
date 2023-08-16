@@ -53,4 +53,4 @@ io-threads 1
 * `io-thread`:
   * Redis is mostly single threaded and usually threading reads doesn't help much. 
   * Redis documentation advises to use default value because if you need more threads, sharding redis or using pipeline > 1 is a better way to add parallelism.
-  * Note that by default threading is disabled with the value of 4 which interpreted as setting io-threads to one.  
+  * The commented io-threads value in the conf file is 4, which means Redis will use the default value for io-threads which is actually 1.  
