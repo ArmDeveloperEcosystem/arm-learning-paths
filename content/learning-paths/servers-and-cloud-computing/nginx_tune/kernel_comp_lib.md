@@ -77,7 +77,7 @@ The version of OpenSSL Nginx is using can be verified by running the command `ng
 
 ##  Perl Compatible Regular Expressions (PCRE)
 
-Nginx relies on [PCRE](https://www.pcre.org/) for regular expression processing. One scenario where RegEx is used is for an API Gateway. Typically, using the Linux distribution default version of PCRE is sufficient. However, it is possible to use a newer version of PCRE to potentially gain performance. The Nginx [installation instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) explain how to build the latest version of PCRE if this is something you want to explore.
+Nginx relies on [PCRE](https://www.pcre.org/) for regular expression processing. One scenario where regular expressions are used is for an API Gateway. Typically, using the Linux distribution default version of PCRE is sufficient. However, it is possible to use a newer version of PCRE to potentially gain performance. The Nginx [installation instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) explain how to build the latest version of PCRE if this is something you want to explore.
 
 ##  zlib for HTTP response compression
 
