@@ -21,7 +21,7 @@ See [Code reuse attacks: the compiler story](https://community.arm.com/arm-commu
 
 ## Arm CPU Pointer Authentication Support Table
 
-Below is a table which lists which Arm CPUs support Pointer Authentication.
+Below is a table which lists which Arm processors support Pointer Authentication.
 
 | CPU         | Pointer Auth | Arm ISA version | Notes                               |
 |-------------|:------------:|:---------------:|:-----------------------------------:|
@@ -32,22 +32,24 @@ Below is a table which lists which Arm CPUs support Pointer Authentication.
 | Neoverse N1 | No           | Armv8.2-A       |                                     |
 | Neoverse E1 | No           | Armv8.2-A       |                                     |
 
+If you are looking for cloud instances with Pointer Authentication, AWS instances with Graviton3 processors are a good place to start (C7g, M7g, and R7g).
+
 ## Preparation for exercise the following sections
 
-Install [GCC](/install-guides/gcc/native/) and other build tools to proceed. Below is a sample command for installing the build tools using the `apt` package manager. Finding the equivalent packages to install using other package managers (like `yum`) is an exercise left to the reader.
+Install [GCC](/install-guides/gcc/native/) and other tools. The commands for using the `apt` package manager are below. Similar commands are possible with other package managers (such as `yum`).
 
 ```console
 sudo apt update
 sudo apt install gcc make gdb-multiarch -y
 ```
 
-## Disable/Enable Pointer Authentication in kernel for debug and experimentation
+## Configure Pointer Authentication in the Linux kernel
 
 {{% notice Note %}}
-The below is information on how to disable pointer authentication, not an endorsement that it's acceptable to turn it off. Only disable pointer authentication if you are willing to take the security risk. 
+The information below explains how to disable pointer authentication. This not recommended, but you may want to do it for experimentation purposes.
 {{% /notice %}}
 
-Pointer Authentication is a security feature that should be used. In fact, major Linux distributions enable it by default. That said, it is possible to turn off Pointer Authentication for debug or overhead investigations. It can be disabled with a kernel configuration parameter, or if the the kernel was compiled with Pointer Authentication enabled, then it can be disabled with a kernel boot parameter change.
+Pointer Authentication is a recommended security feature, and is enabled by default in Linux distributions. However, it is possible to turn off Pointer Authentication for debug or performance investigations. It can be disabled with a kernel configuration parameter, or if the the kernel was compiled with Pointer Authentication enabled, it can be disabled with a kernel boot parameter change.
 
 Kernel configuration:
 ```
