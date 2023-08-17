@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 ##  Redis deployment configurations
 
-Getting Redis up and running with the default out of box configuration file is straightforward and easy. However, this default configuration is most likely under optimized. For learning purposes, you can start with the default  [redis.conf](https://redis.io/docs/management/config-file/) file. Alternatively, you can configure Redis servers by [passing arguments via the command line](https://redis.io/docs/management/config/#passing-arguments-via-the-command-line) when fewer configuration variables need to be set. Once you have it working, we recommend to follow the [Learn how to Tune Redis](/learning-paths/servers-and-cloud-computing/redis_tune/) learning path to improve Redis performance.
+Getting Redis up and running with the default out of box configuration file is straightforward and easy. Once you have it working, we recommend to follow the [Learn how to Tune Redis](/learning-paths/servers-and-cloud-computing/redis_tune/) learning path to improve Redis performance.
 
 ### Single node configuration
 By default Redis runs on localhost (`127.0.0.1`) on port **6379**. As a result, port **6379** becomes unavailable for binding with the public IP of the remote server. You need to set the bind configuration option in the **redis.conf** file to `0.0.0.0`.

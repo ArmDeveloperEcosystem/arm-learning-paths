@@ -1,14 +1,13 @@
 ---
 title: Deploy Redis on Arm
 
-minutes_to_complete: 50
+minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who want to deploy Redis on Arm based virtual machines.
 
 learning_objectives: 
     - Understand Redis deployment configurations
-    - Install and run Redis in a single-node configuration 
-    - Install and run Redis in a multi-node configuration (sharding) 
+    - Install and run Redis in a single-node Arm based instance  
 
 prerequisites:
 
