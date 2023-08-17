@@ -95,11 +95,23 @@ Add the code below to `provider.tf` and save the file:
 
 ```console
 provider "oci" {
-  tenancy_ocid = "<tenancy-ocid>"
-  user_ocid = "<user-ocid>" 
-  private_key_path = "<rsa-private-key-path>"
-  fingerprint = "<fingerprint>"
-  region = "<region-identifier>"
+# Variables.
+variable "tenancy_ocid"         { type = string }
+variable "user_ocid"            { type = string }
+variable "private_key_path"     { type = string }
+variable "fingerprint"          { type = string }
+variable "region"               { type = string }
+variable "root_compartment_id"  { type = string }
+
+
+# Resources
+provider "oci" {
+  tenancy_ocid     = var.tenancy_ocid
+  user_ocid        = var.user_ocid
+  private_key_path = var.private_key_path
+  fingerprint      = var.fingerprint
+  region           = var.region
+}
 }
 ```
 
@@ -435,160 +447,212 @@ You have successfully created an OCI compartment using Terraform. You can see th
 
 ## Create a compute instance
 
-To create a compute instance, a virtual cloud network (VCN) is required. 
-
-### Create a Virtual Cloud Network (VCN)
-
-1. To create a VCN you must open your OCI console and click the Oracle Cloud Icon to go to the main landing page. 
-
-      Scroll down to Launch Resources.
-      Select set up a network with a wizard.
-
-2. In the Start VCN Wizard workflow, select VCN with Internet Connectivity and then click Start VCN Wizard .
-
-3. Fill in basic information:
-
-      VCN Name: your-vcn-name
-     
-      Compartment: your-compartment-name
-
-4. In the Configure VCN and Subnets section, keep the default values for the CIDR blocks:
-
-      VCN CIDR BLOCK: 10.0.0.0/16
-
-      PUBLIC SUBNET CIDR BLOCK: 10.0.0.0/24
-
-      PRIVATE SUBNET CIDR BLOCK: 10.0.1.0/24
-
-5. For DNS Resolution, uncheck Use DNS hostnames in this VCN.
-
-6. Click Next.
-
-      The Create a VCN with Internet Connectivity configuration dialog is displayed (not shown here) confirming all the values you just entered.
-
-7. Click Create to create your VCN.
-      The Creating Resources dialog is displayed (not shown here) showing all VCN components being created.
-    
-8. Click View Virtual Cloud Network to view your new VCN.
-
-
-### Required Information
-
-1. Compartment Name: your-compartment-name
-      Find your compartment name from the Create a Compartment tutorial you performed in the Before you Begin section.
-
-2. Collect the following information from the Oracle Cloud Infrastructure Console.
-
-      In the Console search bar, enter your-compartment-name.
-  
-      Click your-compartment-name in the search results.
-      
-      Copy the OCID.
-
-
-      Subnet ID: <subnet-ocid>
-      Open the navigation menu and click Networking, and then click Virtual Cloud Networks.
-
-      Click <your-vcn-name> from section 2.
-
-      Click the public subnet and copy OCID.
-
-    
-3. Find the source id for the image of the compute instance.
-      Source ID: source-ocid
-
-    In the Console's top navigation bar, find your region.
-
-    Go to [Image Release Notes]([guide](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm)).
-
-    Click Ubuntu 20.04 and click the latest image: Canonical-Ubuntu-20.04-aarch64-2023.06.30-0
-
-    Find the image for your region and copy OCID
-
-4. Choose the shape for the compute instance.
-  
-  Shape: VM.Standard.A1.Flex
-    To choose a different ARM shape, go to [VM Standard Shapes](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm#vmshapes__vm-standard).
-
-5. Collect the following information from your environment.
-
-    SSH Authorized Key (public key path): ssh-public-key-path
-
-    From section 1, get the path to the SSH public key on your environment.
-
-      You use this path when you set up the compute instance.
-
-
-    Private SSH Key Path: ssh-private-key-path
-
-      From the Create SSH Encryption Keys section, get the path to the SSH private key.
-        
-      You use this private key to connect to your compute instance.
-
-
-## Add Authentication
-
-First, set up a directory for your Terraform scripts. Then add a provider script so your Oracle Cloud Infrastructure account can authenticate the scripts running from this directory.
-
-In your $HOME directory, create a directory called tf-compute and change to that directory.
+Create a new directory titled oci_compute and copy over the files from tf-provider
 
 ```bash { target="ubuntu:latest" }
-mkdir tf-compute
-```
-```bash { target="ubuntu:latest" }
-cd tf-compute
+mkdir oci_compute
 ```
 
-
-Copy the provider.tf file from earlier, into the tf-compute directory.
-
-```bash { target="ubuntu:latest" }
-cp ../tf-provider/provider.tf .
-```
-
-Next fetch the name of an availability domain from your account. An availability domain is one of the required inputs to create a compute instance.
-
-Copy the availability-domains.tf file from before, into the tf-compute directory.
+Create a file called "oci_compute.tf" with the following contents. You may edit the [compute shape](https://docs.oracle.com/en-us/iaas/Content/Compute/References/computeshapes.htm) to the desired ARM processor
 
 ```bash { target="ubuntu:latest" }
-cp ../tf-provider/availability-domains.tf .
-```
+# Variables 
+variable "compartment_id"              { type = string }
+variable "compute_name"                { type = string }
+variable "compute_subnet_id"           { type = string }
+variable "compute_image_id"            { type = string }
+variable "compute_ssh_authorized_keys" { type = string }
 
-Example code:
+variable "compute_shape" {
+  type    = string
+  default = "VM.Standard.A1.Flex"
+}
 
-```bash { target="ubuntu:latest" }
-# Source from https://registry.terraform.io/providers/oracle/oci/latest/docs/data-sources/identity_availability_domains
+variable "compute_cpus" {
+  type    = string
+  default = "1"
+}
 
+variable "compute_memory_in_gbs" {
+  type    = string
+  default = "1"
+}
+
+
+# Resources
 data "oci_identity_availability_domains" "ads" {
-  compartment_id = "<tenancy-ocid>"
+  compartment_id = var.compartment_id
+}
+
+resource "oci_core_instance" "tf_compute" {
+  # Required
+  availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
+  compartment_id      = var.compartment_id
+  shape               = var.compute_shape
+
+  source_details {
+    source_id         = var.compute_image_id
+    source_type       = "image"
+  }
+
+  # Optional
+  display_name        = var.compute_name
+
+  shape_config {
+    ocpus         = var.compute_cpus
+    memory_in_gbs = var.compute_memory_in_gbs
+  }
+
+  create_vnic_details {
+    subnet_id         = var.compute_subnet_id
+    assign_public_ip  = true
+  }
+
+  metadata = {
+    ssh_authorized_keys = file(var.compute_ssh_authorized_keys)
+  } 
+
+  preserve_boot_volume = false
+}
+
+
+# Outputs
+output "compute_id" {
+  value = oci_core_instance.tf_compute.id
+}
+
+output "db_state" {
+  value = oci_core_instance.tf_compute.state
+}
+
+output "compute_public_ip" {
+  value = oci_core_instance.tf_compute.public_ip
 }
 ```
 
-
-In the tf-compute directory, create a file called outputs.tf.
-
-To output the name of the first availability domain in the list of oci_identity_availability_domains, add the following code to outputs.tf.
-
-```bash { target="ubuntu:latest" }
-
-# The "name" of the availability domain to be used for the compute instance.
-output "name-of-first-availability-domain" {
-  value = data.oci_identity_availability_domains.ads.availability_domains[0].name
-}
-```
-
-Run your scripts with Terraform:
-
+Next run the commands below to create your infrastructure:
 
 ```bash { target="ubuntu:latest" }
 terraform init
 ```
 
-
+Use the terraform plan command to test the execution plan.
 
 ```bash { target="ubuntu:latest" }
 terraform plan
 ```
+
+Example output:
+
+```output
+resource "oci_core_instance" "tf_compute" {
+      + availability_domain                 = "oVQK:UK-LONDON-1-AD-1"
+      + boot_volume_id                      = (known after apply)
+      + compartment_id                      = "ocid1.compartment.oc1..aaaaaaaa.."
+      + dedicated_vm_host_id                = (known after apply)
+      + defined_tags                        = (known after apply)
+      + display_name                        = "obvm2"
+      + fault_domain                        = (known after apply)
+      + freeform_tags                       = (known after apply)
+      + hostname_label                      = (known after apply)
+      + id                                  = (known after apply)
+      + image                               = (known after apply)
+      + ipxe_script                         = (known after apply)
+      + is_pv_encryption_in_transit_enabled = (known after apply)
+      + launch_mode                         = (known after apply)
+      + metadata                            = {
+          + "ssh_authorized_keys" = <<-EOT
+                ssh-rsa AAAAB3Nza...nElEbgK/ username@machine-name
+            EOT
+        }
+      + preserve_boot_volume                = false
+      + private_ip                          = (known after apply)
+      + public_ip                           = (known after apply)
+      + region                              = (known after apply)
+      + shape                               = "VM.Standard.E2.1.Micro"
+      + state                               = (known after apply)
+      + subnet_id                           = (known after apply)
+      + system_tags                         = (known after apply)
+      + time_created                        = (known after apply)
+      + time_maintenance_reboot_due         = (known after apply)
+
+      + agent_config {
+          + are_all_plugins_disabled = (known after apply)
+          + is_management_disabled   = (known after apply)
+          + is_monitoring_disabled   = (known after apply)
+
+          + plugins_config {
+              + desired_state = (known after apply)
+              + name          = (known after apply)
+            }
+        }
+
+      + availability_config {
+          + recovery_action = (known after apply)
+        }
+
+      + create_vnic_details {
+          + assign_public_ip       = "true"
+          + defined_tags           = (known after apply)
+          + display_name           = (known after apply)
+          + freeform_tags          = (known after apply)
+          + hostname_label         = (known after apply)
+          + private_ip             = (known after apply)
+          + skip_source_dest_check = (known after apply)
+          + subnet_id              = "ocid1.subnet.oc1.uk-london-1.aaaaaaaa..."
+          + vlan_id                = (known after apply)
+        }
+
+      + instance_options {
+          + are_legacy_imds_endpoints_disabled = (known after apply)
+        }
+
+      + launch_options {
+          + boot_volume_type                    = (known after apply)
+          + firmware                            = (known after apply)
+          + is_consistent_volume_naming_enabled = (known after apply)
+          + is_pv_encryption_in_transit_enabled = (known after apply)
+          + network_type                        = (known after apply)
+          + remote_data_volume_type             = (known after apply)
+        }
+
+      + platform_config {
+          + numa_nodes_per_socket = (known after apply)
+          + type                  = (known after apply)
+        }
+
+      + shape_config {
+          + gpu_description               = (known after apply)
+          + gpus                          = (known after apply)
+          + local_disk_description        = (known after apply)
+          + local_disks                   = (known after apply)
+          + local_disks_total_size_in_gbs = (known after apply)
+          + max_vnic_attachments          = (known after apply)
+          + memory_in_gbs                 = 1
+          + networking_bandwidth_in_gbps  = (known after apply)
+          + ocpus                         = 1
+          + processor_description         = (known after apply)
+        }
+
+      + source_details {
+          + boot_volume_size_in_gbs = (known after apply)
+          + kms_key_id              = (known after apply)
+          + source_id               = "ocid1.image.oc1.uk-london-1.aaaaaaaa..."
+          + source_type             = "image"
+        }
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + compute_id        = (known after apply)
+  + compute_public_ip = (known after apply)
+  + db_state          = (known after apply)
+```
+
+
+
+Use the terraform apply command to create the OCI compute instance.
 
 
 ```bash { target="ubuntu:latest" }
@@ -597,161 +661,138 @@ terraform apply
 
 Example output:
 
+```output
+esource "oci_core_instance" "tf_compute" {
+      + availability_domain                 = "oVQK:UK-LONDON-1-AD-1"
+      + boot_volume_id                      = (known after apply)
+      + compartment_id                      = "ocid1.compartment.oc1..aaaaaaaa..."
+      + dedicated_vm_host_id                = (known after apply)
+      + defined_tags                        = (known after apply)
+      + display_name                        = "obvm2"
+      + fault_domain                        = (known after apply)
+      + freeform_tags                       = (known after apply)
+      + hostname_label                      = (known after apply)
+      + id                                  = (known after apply)
+      + image                               = (known after apply)
+      + ipxe_script                         = (known after apply)
+      + is_pv_encryption_in_transit_enabled = (known after apply)
+      + launch_mode                         = (known after apply)
+      + metadata                            = {
+          + "ssh_authorized_keys" = <<-EOT
+                ssh-rsa AAAAB3Nza...nElEbgK/ username@machine-name
+            EOT
+        }
+      + preserve_boot_volume                = false
+      + private_ip                          = (known after apply)
+      + public_ip                           = (known after apply)
+      + region                              = (known after apply)
+      + shape                               = "VM.Standard.E2.1.Micro"
+      + state                               = (known after apply)
+      + subnet_id                           = (known after apply)
+      + system_tags                         = (known after apply)
+      + time_created                        = (known after apply)
+      + time_maintenance_reboot_due         = (known after apply)
 
-```bash { target="ubuntu:latest" }
-name-of-first-availability-domain = QnsC:US-ASHBURN-AD-1
-```
+      + agent_config {
+          + are_all_plugins_disabled = (known after apply)
+          + is_management_disabled   = (known after apply)
+          + is_monitoring_disabled   = (known after apply)
 
-Declare an Oracle Cloud Infrastructure compute resource, and then define the specifics for the instance.
+          + plugins_config {
+              + desired_state = (known after apply)
+              + name          = (known after apply)
+            }
+        }
 
-Create a file called compute.tf.
+      + availability_config {
+          + recovery_action = (known after apply)
+        }
 
-Add the following code to compute.tf
+      + create_vnic_details {
+          + assign_public_ip       = "true"
+          + defined_tags           = (known after apply)
+          + display_name           = (known after apply)
+          + freeform_tags          = (known after apply)
+          + hostname_label         = (known after apply)
+          + private_ip             = (known after apply)
+          + skip_source_dest_check = (known after apply)
+          + subnet_id              = "ocid1.subnet.oc1.uk-london-1.aaaaaaaa..."
+          + vlan_id                = (known after apply)
+        }
 
-```bash { target="ubuntu:latest" }
-resource "oci_core_instance" "ubuntu_instance" {
-    # Required
-    availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
-    compartment_id = "<compartment-ocid>"
-    shape = "VM.Standard2.1"
-    source_details {
-        source_id = "<source-ocid>"
-        source_type = "image"
+      + instance_options {
+          + are_legacy_imds_endpoints_disabled = (known after apply)
+        }
+
+      + launch_options {
+          + boot_volume_type                    = (known after apply)
+          + firmware                            = (known after apply)
+          + is_consistent_volume_naming_enabled = (known after apply)
+          + is_pv_encryption_in_transit_enabled = (known after apply)
+          + network_type                        = (known after apply)
+          + remote_data_volume_type             = (known after apply)
+        }
+
+      + platform_config {
+          + numa_nodes_per_socket = (known after apply)
+          + type                  = (known after apply)
+        }
+
+      + shape_config {
+          + gpu_description               = (known after apply)
+          + gpus                          = (known after apply)
+          + local_disk_description        = (known after apply)
+          + local_disks                   = (known after apply)
+          + local_disks_total_size_in_gbs = (known after apply)
+          + max_vnic_attachments          = (known after apply)
+          + memory_in_gbs                 = 1
+          + networking_bandwidth_in_gbps  = (known after apply)
+          + ocpus                         = 1
+          + processor_description         = (known after apply)
+        }
+
+      + source_details {
+          + boot_volume_size_in_gbs = (known after apply)
+          + kms_key_id              = (known after apply)
+          + source_id               = "ocid1.image.oc1.uk-london-1.aaaaaaaa..."
+          + source_type             = "image"
+        }
     }
 
-    # Optional
-    display_name = "<your-ubuntu-instance-name>"
-    create_vnic_details {
-        assign_public_ip = true
-        subnet_id = "<subnet-ocid>"
-    }
-    metadata = {
-        ssh_authorized_keys = file("<ssh-public-key-path>")
-    } 
-    preserve_boot_volume = false
-}
+Plan: 1 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + compute_id        = (known after apply)
+  + compute_public_ip = (known after apply)
+  + db_state          = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+oci_core_instance.tf_compute: Creating...
+oci_core_instance.tf_compute: Still creating... [10s elapsed]
+oci_core_instance.tf_compute: Still creating... [20s elapsed]
+oci_core_instance.tf_compute: Still creating... [30s elapsed]
+oci_core_instance.tf_compute: Still creating... [40s elapsed]
+oci_core_instance.tf_compute: Still creating... [50s elapsed]
+oci_core_instance.tf_compute: Still creating... [1m0s elapsed]
+oci_core_instance.tf_compute: Still creating... [1m10s elapsed]
+oci_core_instance.tf_compute: Still creating... [1m20s elapsed]
+oci_core_instance.tf_compute: Still creating... [1m30s elapsed]
+oci_core_instance.tf_compute: Creation complete after 1m37s [id=ocid1.instance.oc1.uk-london-1.anwgiljt...]
+
+Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+compute_id = "ocid1.instance.oc1.uk-london-1.anwgiljt..."
+compute_public_ip = "XXX.XXX.XX.XX"
+db_state = "RUNNING"
 ```
 
 
-## Add Outputs
-
-Add output blocks to your code to get information about your compute instance after Terraform creates it.
-
-Open the outputs.tf file.
-
-Create an output block for the public IP of the instance:
-
-The public IP is available after the instance is created.
-
-You use the public IP to connect to the instance.
-
-Add the following code to outputs.tf:
-
-```bash { target="ubuntu:latest" }
-
-# Outputs for compute instance
-
-output "public-ip-for-compute-instance" {
-  value = oci_core_instance.ubuntu_instance.public_ip
-}
-```
-
-Add a few more outputs to describe the compute instance:
-  
-  display_name
-  
-  id
-  
-  region
-  
-  shape
-  
-  state
-  
-  ocpus
-  
-  memory_in_gbs
-  
-  time_created
-
-  ```bash { target="ubuntu:latest" }
-
-output "instance-name" {
-  value = oci_core_instance.ubuntu_instance.display_name
-}
-
-output "instance-OCID" {
-  value = oci_core_instance.ubuntu_instance.id
-}
-
-output "instance-region" {
-  value = oci_core_instance.ubuntu_instance.region
-}
-
-output "instance-shape" {
-  value = oci_core_instance.ubuntu_instance.shape
-}
-
-output "instance-state" {
-  value = oci_core_instance.ubuntu_instance.state
-}
-
-output "instance-OCPUs" {
-  value = oci_core_instance.ubuntu_instance.shape_config[0].ocpus
-}
-
-output "instance-memory-in-GBs" {
-  value = oci_core_instance.ubuntu_instance.shape_config[0].memory_in_gbs
-}
-
-output "time-created" {
-  value = oci_core_instance.ubuntu_instance.time_created
-}
-```
-
-### Create an Instance 
-
-Run your Terraform scripts. After, your account authenticates the scripts, Terraform creates a compute instance in a compartment in your tenancy. Use your SSH keys to connect to the instance. When you no longer need your instance, destroy it with Terraform.
-
-```bash { target="ubuntu:latest" }
-terraform init
-```
-
-```bash { target="ubuntu:latest" }
-terraform plan
-```
 
 
-```bash { target="ubuntu:latest" }
-terraform apply
-```
-
-When prompted for confirmation, enter yes, for your resource to be created.
-
-After the instance is created, the outputs that you defined including your-public-ip-address are displayed in the output terminal.
-
-### Connect to the instance 
-
-From your terminal, enter the outputs for your compute instance:
-
-```bash { target="ubuntu:latest" }
-terraform output
-```
-
-Copy the public IP address from the outputs.
-
-From your Linux machine, connect to your VM with this ssh command:
-
-```bash { target="ubuntu:latest" }
-ssh -i <ssh-private-key-path> ubuntu@<your-public-ip-address>
-```
-
-### Destroy the Instance 
-
-After you no longer need your compute instance, you can terminate it with the following command:
-
-```bash { target="ubuntu:latest" }
-terraform destroy
-```
-
-When prompted for confirmation, enter yes, for your compute instance to be terminated.
