@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Transparent Huge Page are enabled by defualt for Redis process to avoid latency problems. 
+            Transparent Huge Page setting is enabled by default in Redis to avoid latency problems. 
         answers:
             - "True"
             - "False"
@@ -37,7 +37,7 @@ review:
         answers:
             - "-flto"
             - "-mcpu"
-            - "all two above"
+            - "all of the above"
         correct_answer: 3                    
         explanation: >
             The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag -mcpu and -flto can be used to potentially gain additional performance.
