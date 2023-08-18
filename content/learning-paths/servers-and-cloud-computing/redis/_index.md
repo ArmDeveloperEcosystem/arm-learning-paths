@@ -14,7 +14,7 @@ prerequisites:
     - An Arm based instance from a cloud service provider, or an on-premise Arm server.
     - If you do not have an Arm node, the next section discusses some options.
 
-author_primary: Jason Andrews
+author_primary: Elham Harirpoush
 ### Tags
 skilllevels: Introductory
 subjects: Databases
