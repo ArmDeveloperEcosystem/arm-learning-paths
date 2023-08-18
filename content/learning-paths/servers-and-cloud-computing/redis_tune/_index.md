@@ -12,9 +12,9 @@ learning_objectives:
 
 prerequisites:
     - Cloud or bare-metal installation of an Redis file server 
-    - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have an Redis setup
+    - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
 
-author_primary: Arm
+author_primary: Elham Harirpoush
 
 ### Tags
 skilllevels: Advanced
