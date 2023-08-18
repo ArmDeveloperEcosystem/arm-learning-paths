@@ -65,7 +65,7 @@ The instruction count is used here to illustrate relative performance to a high 
 
 ## Understand the example
 
-To make any function from the `CMSIS-DAP` library available to your code, simply include the `arm_math.h` header file in any relevant source:
+To make any function from the `CMSIS-DSP` library available to your code, simply include the `arm_math.h` header file in any relevant source:
 ```C
 #include "arm_math.h"
 ```
