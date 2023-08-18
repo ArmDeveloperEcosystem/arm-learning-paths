@@ -12,9 +12,9 @@ layout: "learningpathall"
 Getting Redis up and running with the default out of box configuration file is straightforward and easy. Once you have it working, we recommend to follow the [Learn how to Tune Redis](/learning-paths/servers-and-cloud-computing/redis_tune/) learning path to improve Redis performance.
 
 ### Single node configuration
-By default Redis runs on localhost (`127.0.0.1`) on port **6379**. As a result, port **6379** becomes unavailable for binding with the public IP of the remote server. You need to set the bind configuration option in the **redis.conf** file to `0.0.0.0`.
+By default Redis runs on localhost (`127.0.0.1`) on port **6379**. As a result, port **6379** becomes unavailable for binding with the public IP of the remote server. You need to set the bind configuration option in the `redis.conf` file to `0.0.0.0`.
 
-For a single-node Redis server, set the following configuration options as shown in the **redis.conf** file:
+For a single-node Redis server, set the following configuration options as shown in the `redis.conf` file:
 ```console
 bind 0.0.0.0
 port 6379
