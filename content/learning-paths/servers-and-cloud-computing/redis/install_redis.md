@@ -18,7 +18,7 @@ In this section you will learn about different options to install, configure and
 
 ### Arm deployment options
 
-There are numerous ways to deploy Redis on Arm. Bare metal, cloud VMs, or the various Redis services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
+There are numerous ways to deploy Redis on Arm: Bare metal, cloud VMs, or the various Redis services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
 
 * Arm Cloud VMs
   * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp) learning path
@@ -36,7 +36,7 @@ There are numerous ways to deploy Redis on Arm. Bare metal, cloud VMs, or the va
 
 ###  Redis documentation
 
-Redis has a variety of use cases in large enterprise applications. You can explore into the [Redis documentation](https://redis.io/docs/) to find more details about Redis.
+Redis has a variety of use cases in large enterprise applications. You can explore into the [Redis documentation](https://redis.io/docs/) for more details about Redis.
 
 ### Redis installation options
 
