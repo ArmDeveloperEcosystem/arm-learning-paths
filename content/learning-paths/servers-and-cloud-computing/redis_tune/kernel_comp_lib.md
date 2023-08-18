@@ -1,8 +1,10 @@
 ---
-title: "Kernel, compiler, and OpenSSL"
-weight: 3
+title: "Kernel, compiler, and OpenSSL settings"
+weight: 2
 layout: "learningpathall"
 ---
+
+In this section you can get an overview of the linux kernel, compiler and OpenSSL settings that impact the performance of Redis.
 
 ##  Kernel configuration
 
@@ -13,14 +15,12 @@ The profile of requests made by clients will differ based on the use case. This 
 The memory related kernel parameters can be changed either temporarily through the `/proc` file system or permanently using the `sysctl` command.
 To improve memory utilization on your system, use the following commands:
 
-
-
-```
+```console
 sudo echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf 
 sudo echo 'vm.swappiness=1' >> /etc/sysctl.conf 
-
-
 ```
+Understand the parameters:
+
 * `vm.overcommit_memory`:
   * Enabling overcommit_memory to avoid out of memory space issues. If the overcommit memory value is 0 then there is chance that Redis will get an OOM (out of memory) error.  
 * `vm.swappiness`:
@@ -29,8 +29,10 @@ sudo echo 'vm.swappiness=1' >> /etc/sysctl.conf
 ### Transparent Huge Page
 
 Redis by default will disable transparent huge page (THP) if it is enabled for Redis process to avoid latency problems. You should disable this parameter in case this config has no effect.
-  
-```
+
+The command to disable this setting is shown below:
+
+```console
 sudo echo never > /sys/kernel/mm/transparent_hugepage/enabled  
 ```
 
@@ -48,7 +50,7 @@ sudo sysctl -a
 
 Shown below are the network stack settings used for performance testing.
 
-```
+```console
 sudo sysctl -w net.core.somaxconn=65535
 sudo sysctl -w net.ipv4.tcp_max_syn_backlog=65535
 
