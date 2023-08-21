@@ -32,13 +32,13 @@ The [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-perfor
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring. 
 These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation. 
 
-[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries) are available for use on Windows 11, macOS (Apple Silicon), and Linux (AArch64) hosts. 
+Arm Performance Libraries are available for use on Windows 11, macOS (Apple Silicon), and Linux (AArch64) hosts. 
 
 ## Windows {#windows}
 
-Go to the [Download Windows](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadwindows) section of the Arm Performance Libraries download page. You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
+Go to the Download Windows section of the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
 
-![win_download](download-win-armpl.png)
+![win_download](/install-guides/_images/download-win-armpl.png)
  
 Open your Windows File Explorer and locate the downloaded `arm-performance-libraries_23.08.zip` file. 
 Extract the contents of this zip file using the "Extract all" button at the top of the Windows File Explorer.
@@ -48,22 +48,21 @@ Extract the contents of this zip file using the "Extract all" button at the top 
 Using Windows Search, open `Edit the System Variables` in the `Control Panel`.
 On the `Advanced Tab` of the `System Properties` window, click on the `Environment Variables` button. 
 
-![sys_prop](windows-sys-prop.png)
+![sys_prop](/install-guides/_images/windows-sys-prop.png)
 
 Add a New variable called `ARMPL_DIR` which should point to the location where you unpacked the Arm Performance Libraries.
 
-![add_var](windows-sys-env.png)
+![add_var](/install-guides/_images/windows-sys-env.png)
 
 Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing directories in your path.
 
-![edit_path](win-sys-path.png)
+![edit_path](/install-guides/_images/win-sys-path.png)
 
 You can now start linking your application to these libraries. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
 ## macOS {#macos}
 
-Go to the [Download MacOS](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadmacos) section of the Arm Performance Libraries download page. 
-
+Go to the Download MacOS section of the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries) and download the `dmg` file.
 Double-click on the icon of the downloaded package to mount the disk image. Alternatively, open a terminal and run the command below:
 
 ```console
@@ -83,7 +82,7 @@ To get started, compile and test the examples included in the `/opt/arm/<armpl_d
 
 Arm Performance Libaries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC.
 
-[Download](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadlinux) the appropriate package for your Linux distribution and version of GCC.
+[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution and version of GCCfrom the Download Linux section.
 
 The instructions shown below are for an Ubuntu 22.04 AArch64 Linux Host with GCC version 11.3 installed.
 
