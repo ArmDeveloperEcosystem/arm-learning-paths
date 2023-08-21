@@ -54,3 +54,12 @@ io-threads 1
   * Redis is mostly single threaded and usually threading reads doesn't help much. 
   * Redis documentation advises to use default value because if you need more threads, sharding redis or using pipeline > 1 is a better way to add parallelism.
   * The commented io-threads value in the conf file is 4, which means Redis will use the default value for io-threads which is actually 1.  
+
+  #### Client side pipelining
+
+Pipelining is a feature primarily implemented on the client side. When a client uses the Redis client library like [memtier](https://github.com/RedisLabs/memtier_benchmark) does then the client can choose to use pipelining, which is a more effective approach for achieving parallelism. You should use pipeline withing the range of 1 (default) and approximately 20 as a large pipeline value (> 20) will increase latency. 
+
+**Note**: It's up to the user to experiment and decide what pipeline value makes the most sense for their use case.
+
+
+
