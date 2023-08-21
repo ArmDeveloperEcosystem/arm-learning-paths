@@ -30,36 +30,39 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 The [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provide developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
 
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring. 
-These libraries are free to use and do not require a license. They can installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation. 
+These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation. 
 
-[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries) are available for native Windows 11, macOS (Apple Silicon), and Linux (AArch64) hosts. 
+[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries) are available for use on Windows 11, macOS (Apple Silicon), and Linux (AArch64) hosts. 
 
 ## Windows {#windows}
 
-Go to the [Download Windows](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadwindows) section of the Arm Performance Libraries. You will be prompted to review and accept the End User License Agreement before you can download the `zip` file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
+Go to the [Download Windows](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadwindows) section of the Arm Performance Libraries download page. You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
 
-![win_download]
+![win_download](download-win-armpl.png)
  
 Open your Windows File Explorer and locate the downloaded `arm-performance-libraries_23.08.zip` file. 
 Extract the contents of this zip file using the "Extract all" button at the top of the Windows File Explorer.
 
-# Update your system environment variables
+### Update your system environment variables
 
 Using Windows Search, open `Edit the System Variables` in the `Control Panel`.
 On the `Advanced Tab` of the `System Properties` window, click on the `Environment Variables` button. 
+
+![sys_prop](windows-sys-prop.png)
+
 Add a New variable called `ARMPL_DIR` which should point to the location where you unpacked the Arm Performance Libraries.
 
-![img2]
+![add_var](windows-sys-env.png)
 
 Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing directories in your path.
 
-![img3]
+![edit_path](win-sys-path.png)
 
 You can now start linking your application to these libraries. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
 ## macOS {#macos}
 
-Go to the [Download MacOS](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadmacos) section of the Arm Performance Libraries. 
+Go to the [Download MacOS](https://developer.arm.com/downloads/-/arm-performance-libraries#downloadmacos) section of the Arm Performance Libraries download page. 
 
 Double-click on the icon of the downloaded package to mount the disk image. Alternatively, open a terminal and run the command below:
 
@@ -84,7 +87,7 @@ Arm Performance Libaries are supported on most Linux Distributions like Ubuntu, 
 
 The instructions shown below are for an Ubuntu 22.04 AArch64 Linux Host with GCC version 11.3 installed.
 
-On a terminal and run the command shown below to download the appropriate package:
+On a terminal, run the command shown below to download the appropriate package:
 ```command
 wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/23-04-1/ubuntu-22/arm-performance-libraries_23.04.1_Ubuntu-22.04_gcc-11.3.tar
 ```
@@ -102,7 +105,7 @@ sudo ./arm-performance-libraries_23.04.1_Ubuntu-22.04.sh -a
 ```
 Using the `-a` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
-# Setup your environment
+### Setup your environment
 
 Install environment modules on your machine:
 
