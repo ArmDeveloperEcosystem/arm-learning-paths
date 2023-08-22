@@ -75,11 +75,6 @@ wget https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases/download/2.0.0/cm
 tar -xf cmsis-toolbox-linux-arm64.tar.gz
 ```
 
-Copy the `ninja` executable to the `bin` directory of your `cmsis-toolbox` install:
-```command
-cp usr/bin/ninja cmsis-toolbox-linux-arm64/bin
-```
-
 ## Install the appropriate compiler toolchain
 
 Projects can be built with Arm Compiler for Embedded, Arm GNU Toolchain, or IAR tools.
