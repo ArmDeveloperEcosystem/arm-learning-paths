@@ -29,7 +29,7 @@ review:
             - "No"
         correct_answer: 1                  
         explanation: >
-            The library is provides vectorized versions of most algorthms for Helium and of most f32 algorithms for Neon.
+            The library is provides vectorized versions of most algorithms for Helium and of most f32 algorithms for Neon.
               
 
 # ================================================================================

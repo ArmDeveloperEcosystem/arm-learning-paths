@@ -81,9 +81,9 @@ To get started, compile and test the examples included in the `/opt/arm/<armpl_d
 
 ## Linux {#linux}
 
-Arm Performance Libaries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC.
+Arm Performance Libraries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC.
 
-[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution and version of GCCfrom the Download Linux section.
+[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution and version of GCC from the Download Linux section.
 
 The instructions shown below are for an Ubuntu 22.04 AArch64 Linux Host with GCC version 11.3 installed.
 

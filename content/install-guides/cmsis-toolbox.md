@@ -92,7 +92,7 @@ Set environment variables as below. Note the exact name of the `TOOLCHAIN` varia
 | Variable                                   | Description                           | Notes                                         |
 | ------------------------------------------ | ------------------------------------- | --------------------------------------------- |
 | `<name>_TOOLCHAIN_<major>_<minor>_<patch>` | Path to toolchain binaries            | `<name>` = `AC6`, `GCC`, `IAR`, or `CLANG`    |
-| `CMSIS_PACK_ROOT`                          | Path to CMSIS-Pack root directory     | Use `cpackget init` to initialise             |
+| `CMSIS_PACK_ROOT`                          | Path to CMSIS-Pack root directory     | Use `cpackget init` to initialize             |
 | `CMSIS_COMPILER_ROOT`                      | Path to CMSIS-Toolbox `etc` directory |                                               |
 | `PATH`                                     | Add CMSIS-Toolbox `bin` to path       | Also path to `CMake` and `Ninja` if necessary |
 

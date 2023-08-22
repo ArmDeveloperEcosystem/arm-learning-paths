@@ -122,7 +122,7 @@ You have now successfully setup a hybrid cluster with both x86 and Arm64 archite
 
 ## Taints and Tolerations
 
-In a hybrid cluster setup with nodes from different architectures (x86 and Arm64), GKE adds a taint on the nodes to avoid the possibility of scheduling pods on wrong architecture. A node taint lets the kubernetes scheduler know that a particular node is desginated for one architecture only. A toleration lets you designate pods that can be used on tainted nodes. 
+In a hybrid cluster setup with nodes from different architectures (x86 and Arm64), GKE adds a taint on the nodes to avoid the possibility of scheduling pods on wrong architecture. A node taint lets the kubernetes scheduler know that a particular node is designated for one architecture only. A toleration lets you designate pods that can be used on tainted nodes. 
 
 In the github repository view the following yaml file:
 
