@@ -8,7 +8,7 @@ review:
             - "False"
         correct_answer: 1                    
         explanation: >
-            Taints and tolerations work together to make sure that application pods are not scheduled on inappropriate nodes
+            Taints and tolerations work together to make sure that application pods are not scheduled on inappropriate nodes.
 
     - questions:
         question: >
@@ -18,7 +18,7 @@ review:
             - "False"
         correct_answer: 2                   
         explanation: >
-            GKE supports hybrid clusters with both x86 and Arm-based nodes
+            GKE supports hybrid clusters with both x86 and Arm-based nodes.
 
 
 
