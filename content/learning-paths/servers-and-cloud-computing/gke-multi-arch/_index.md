@@ -1,22 +1,22 @@
 ---
-title: Learn how to make an x86-based application multi-arch on GKE
+title: Learn how to migrate an x86 application to multi-architecture with Arm on GKE
 
 minutes_to_complete: 30
 
-who_is_this_for: Developers who're looking to migrate their existing containerized applications and make them multi-arch
+who_is_this_for: This is an introductory topic for software developers who are looking to migrate their existing x86 containerized applications to Arm
 
 learning_objectives: 
     - Add Arm-based nodes to an existing x86-based GKE cluster
     - Rebuild x86-based application to make it multi-arch and run on Arm
-    - Understand how to add taints and tolerations to GKE cluster to schedule application pods on architecture specific nodes
-    - Run multi-arch application across multiple architectures in a single GKE cluster
+    - Understand how to add taints and tolerations to GKE clusters to schedule application pods on architecture specific nodes
+    - Run a multi-arch application across multiple architectures on a single GKE cluster
 
 prerequisites:
-    - A Google Cloud account
-    - Google Cloud CLI (glcoud) and kubectl cli installed on your local machine
-    - An existing GKE cluster with x86-based nodes
+    - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
+    - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
+    - An existing Google Kubernetes Engine (GKE) cluster with x86-based nodes
 
-author_primary: Arm
+author_primary: Pranay Bakre
 
 ### Tags
 skilllevels: Introductory
