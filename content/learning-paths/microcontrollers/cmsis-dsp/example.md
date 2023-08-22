@@ -69,15 +69,15 @@ To make any function from the `CMSIS-DSP` library available to your code, simply
 ```C
 #include "arm_math.h"
 ```
-This file resides in the `Include` folder of the library installation, and so you should add this to the Include path for your compiler.
+This file resides in the `Include` folder of the library installation, and so you should add this to the Include path (`-I`) for your compiler.
 
-For Keil MDK, this is done by selecting `CMSIS` > `DSP` in the `Manage Run-Time Environment` pane.
+For a Keil MDK project, this is done by selecting `CMSIS` > `DSP` in the `Manage Run-Time Environment` pane.
 
 ![Manage Run-Time Environment #center](images/rte.png)
 
 The [example project](https://www.keil.com/pack/doc/CMSIS/DSP/html/group__DotproductExample.html) makes use of two functions from the library:
 
-  * arm_mult_f32()
-  * arm_add_f32()
+  * `arm_mult_f32()`
+  * `arm_add_f32()`
 
 The appropriate implementation is selected at build time, based on the processor. Hence the Helium optimized implementations can greatly accelerate the algorithm.

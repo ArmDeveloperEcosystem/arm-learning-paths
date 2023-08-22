@@ -28,6 +28,14 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
+{{% notice Note %}}
+CMSIS-Build is a component of the CMSIS-Toolbox.
+
+For most users, it is recommended to install the complete toolbox package.
+
+See the [CMSIS-Toolbox Install Guide](../cmsis-toolbox).
+{{% /notice %}}
+
 [CMSIS-Build](https://open-cmsis-pack.github.io/devtools/buildmgr/latest/index.html) is a set of tools to enable IDEs and command-line tools to share the same projects. 
 
 Historically, IDEs have maintained project information in files which are unique to the IDE. Command line users often use tools such as make and cmake to capture project build information. 
