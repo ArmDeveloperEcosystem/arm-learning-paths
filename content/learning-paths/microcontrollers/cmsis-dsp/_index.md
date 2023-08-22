@@ -1,19 +1,19 @@
 ---
-title: Learn how to build and run CMSIS-DSP test framework on Corstone-300 FVP
+title: Get started with the CMSIS-DSP library
 
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers new to CMSIS-DSP.
 
 learning_objectives: 
-    - Build CMSIS-DSP tests for the Corstone-300 FVP
-    - Run CMSIS-DSP tests on the Corstone-300 FVP
+    - Build a simple application using CMSIS-DSP library
+    - Compare relative performance on different processors
+    - Build and CMSIS-DSP test suite on the Corstone-300 FVP
 
 prerequisites:
     - Some familiarity with embedded programming
-    - A Linux machine running Ubuntu
 
-author_primary: Pareena Verma
+author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
@@ -27,6 +27,9 @@ tools_software_languages:
     - Arm Virtual Hardware
     - CMSIS
     - Coding
+    - Keil
+    - MDK
+    - Arm Development Studio
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
