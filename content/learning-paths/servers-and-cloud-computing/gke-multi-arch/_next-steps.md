@@ -1,7 +1,7 @@
 ---
-next_step_guidance: We recommend you to continue learning about deploying applications on Arm.
+next_step_guidance: We recommend you to continue learning about migrating applications to Arm servers.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/migration"
 
 further_reading:
     - resource:
