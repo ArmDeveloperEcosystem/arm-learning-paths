@@ -27,7 +27,7 @@ There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Too
 
 However there are reasons you may wish to use earlier compiler versions, so older versions are also available.
 
-## Download toolchain
+## Download toolchain {#download}
 
 Arm GNU Toolchain releases consist of cross toolchains for the following host operating systems:
     
@@ -47,7 +47,18 @@ Download the correct toolchain variant for your development needs from the [Arm 
 
 ## Installing on Linux
 
-Unpack the downloaded file to the install directory. The exact file name will depend on the flavor selected.
+### Use package installer
+
+Many Linux distributions make the toolchain available with their package installers. However they may not be the latest versions or desired variant.
+```command
+sudo apt update
+sudo apt install gcc-arm-none-eabi
+```
+If the installed version does not meet your needs, install [manually](#manual).
+
+### Manual install {#manual}
+
+Unpack the [downloaded](#download) file to the install directory. The exact file name will depend on the flavor selected.
 
 ```console
 tar xJf arm-gnu-toolchain-<version>-<host-arch>-<TRIPLE>.tar.xz -C /path/to/install/dir
@@ -61,9 +72,9 @@ export PATH=/path/to/install/dir/bin:$PATH
 Here is a specific example for an Arm Linux host and the AArch32 bare-metal target.
 
 ```bash { target="ubuntu:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-aarch64-arm-none-eabi.tar.xz
-tar xJf arm-gnu-toolchain-12.2.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
-echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-12.2.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
+wget https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-aarch64-arm-none-eabi.tar.xz
+tar xJf arm-gnu-toolchain-12.3.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
+echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-12.3.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -87,7 +98,7 @@ Use a text editor to add the `bin` directory as a new line in `/etc/paths`.
 ```console
 sudo nano /etc/paths
 ```
-For example the path could be: `/Applications/ArmGNUToolchain/12.2.rel1/arm-none-eabi/bin`
+For example the path could be: `/Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/bin`
 
 The `/etc/paths` file is a list of paths to search.
 
@@ -98,15 +109,15 @@ The `/etc/paths` file is a list of paths to search.
 /bin
 /usr/sbin
 /sbin
-/Applications/ArmGNUToolchain/12.2.rel1/arm-none-eabi/bin
+/Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/bin
 ```
 ### Apple Silicon
 Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target. 
 
 ```console
-wget https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-darwin-arm64-arm-none-eabi.pkg
-sudo installer -pkg arm-gnu-toolchain-12.2.rel1-darwin-arm64-arm-none-eabi.pkg -target /
-echo '/Applications/ArmGNUToolchain/12.2.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
+wget https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-darwin-arm64-arm-none-eabi.pkg
+sudo installer -pkg arm-gnu-toolchain-12.3.rel1-darwin-arm64-arm-none-eabi.pkg -target /
+echo '/Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
 ```
 
 ## Installing on Windows
