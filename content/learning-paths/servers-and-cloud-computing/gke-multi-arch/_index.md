@@ -3,12 +3,12 @@ title: Learn how to migrate an x86 application to multi-architecture with Arm on
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers who are looking to migrate their existing x86 containerized applications to Arm
+who_is_this_for: This is an advanced topic for software developers who are looking to migrate their existing x86 containerized applications to Arm
 
 learning_objectives: 
     - Add Arm-based nodes to an existing x86-based GKE cluster
-    - Rebuild x86-based application to make it multi-arch and run on Arm
-    - Understand how to add taints and tolerations to GKE clusters to schedule application pods on architecture specific nodes
+    - Rebuild an x86-based application to make it multi-arch and run on Arm
+    - Learn how to add taints and tolerations to GKE clusters to schedule application pods on architecture specific nodes
     - Run a multi-arch application across multiple architectures on a single GKE cluster
 
 prerequisites:
@@ -19,7 +19,7 @@ prerequisites:
 author_primary: Pranay Bakre
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Containers and Virtualization
 armips:
     - Neoverse
