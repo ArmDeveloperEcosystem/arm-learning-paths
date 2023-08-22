@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Migrate your existing x86-based application to run on Arm-based nodes in a single GKE cluster 
+## Migrate an existing x86-based application to run on Arm-based nodes in a single GKE cluster 
 
 Google Kubernetes Engine (GKE) supports hybrid clusters with x86 and Arm based nodes. The Arm-based nodes can be deployed on the `Tau T2A` family of virtual machines. The `Tau T2A` virtual machines are powered by Ampere Altra Arm-based processors.
 
@@ -26,7 +26,7 @@ Three tools are required on your local machine. Follow the links to install the 
 
 This section assumes that you have a GKE cluster with 3 x86-based nodes running in your environment. If you do not have the cluster then follow the [official google docs](https://cloud.google.com/kubernetes-engine/docs/) to create one.
 
-Setup the following environment variables 
+Setup the following environment variables:
 
 ```console
 export PROJECT_ID=<your-project-id>
@@ -40,7 +40,7 @@ The github project repository listed below contains all the required files to fo
 git clone https://github.com/pbk8s/gke-arm
 ```
 
-Create a docker repository in Google Artifact Registry with the following command:
+Create a docker repository in the Google Artifact Registry with the following command:
 
 ```console
 gcloud artifacts repositories create docker-repo \
@@ -50,7 +50,7 @@ gcloud artifacts repositories create docker-repo \
 ```
 Replace `<your-region>` in the command above with the location where you want the create the repository storage.
 
-Configure the cli to authenticate the docker repository in Artifact Registry:
+Configure the cli to authenticate the docker repository in the Artifact Registry:
 
 ```console
 gcloud auth configure-docker us-central1-docker.pkg.dev
@@ -61,7 +61,7 @@ Build the docker image for the existing x86-based version of application:
 docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/docker-repo/x86-hello:v0.0.1 . 
 ```
 
-Push the docker image you created to docker repository:
+Push the docker image you created to the docker repository:
 
 ```console
 docker push us-central1-docker.pkg.dev/$PROJECT_ID/docker-repo/x86-hello:v0.0.1 
@@ -122,14 +122,14 @@ You have now successfully setup a hybrid cluster with both x86 and Arm64 archite
 
 ## Taints and Tolerations
 
-In a hybrid cluster setup with nodes from different architectures (x86 and Arm64), GKE adds a taint on the nodes to avoid the possibility of scheduling pods on wrong architecture. A node taint let's the kubernetes scheduler know that a particular node is desginated for one architecture only. While a toleration lets you designate pods that can be used on tainted nodes. 
+In a hybrid cluster setup with nodes from different architectures (x86 and Arm64), GKE adds a taint on the nodes to avoid the possibility of scheduling pods on wrong architecture. A node taint lets the kubernetes scheduler know that a particular node is desginated for one architecture only. A toleration lets you designate pods that can be used on tainted nodes. 
 
-In the github repo check the following yaml file:
+In the github repository view the following yaml file:
 
 ```console
 cat k8s/overlays/arm/add_arm_support.yaml
 ```
-In the file, refer to the section shown below:
+In this file, refer to the section shown below:
 
 ```console
 nodeSelector:
@@ -161,14 +161,14 @@ After the application gets deployed, check the status of pods with the following
 ```console
 kubectl get pods
 ```
-Open a web browser and hit the external IP URL or use curl command like shown below:
+Open a web browser and hit the external IP URL or use curl command as shown below:
 
 ```console
 curl -w '\n' http://$external_ip
 ```
 Refresh the browser a couple of times and you should see the output from both x86 and Arm compatible versions of the application. 
 
-The output will be similar to what is shown here:
+The output will be similar to what is shown below:
 
 ```output
 Hello from NODE:gke-multi-arch-cluster-default-pool-45537239-q83v, POD:x86-hello-deployment-9e7b823ed8-xutvf, CPU PLATFORM:linux/amd64
