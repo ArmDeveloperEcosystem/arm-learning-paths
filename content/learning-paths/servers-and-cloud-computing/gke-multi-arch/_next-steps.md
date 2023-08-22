@@ -10,7 +10,7 @@ further_reading:
         type: documentation
     - resource:
         title: Configure cluster access to use kubectl
-        link: https://cloud.google.com/kubernetes-engine/docs
+        link: https://cloud.google.com/kubernetes-engine/docs/how-to/cluster-access-for-kubectl
         type: documentation
     - resource:
         title: GKE documentation
