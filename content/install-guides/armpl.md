@@ -32,11 +32,12 @@ The [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-perfor
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring. 
 These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation. 
 
-Arm Performance Libraries are available for use on Windows 11, macOS (Apple Silicon), and Linux (AArch64) hosts. 
+Arm Performance Libraries are available for use on Windows 11 on Arm, macOS (Apple Silicon), and Linux (AArch64) hosts. 
+
 
 ## Windows {#windows}
 
-Go to the Download Windows section of the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
+On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
 
 ![win_download](/install-guides/_images/download-win-armpl.png)
  
@@ -58,7 +59,7 @@ Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing direct
 
 ![edit_path](/install-guides/_images/win-sys-path.png)
 
-You can now start linking your application to these libraries. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
+You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
 ## macOS {#macos}
 
