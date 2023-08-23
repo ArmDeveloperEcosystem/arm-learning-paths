@@ -7,7 +7,7 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Linux: 41
+- Linux: 44
 - macOS: 1
 - Windows: 2
 pinned_modules:
@@ -18,23 +18,23 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 2
-- Containers and Virtualization: 12
+- Containers and Virtualization: 14
 - Databases: 10
 - Libraries: 5
 - ML: 2
 - Performance and Architecture: 7
 - Storage: 1
-- Web: 3
+- Web: 4
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
 - 5G: 1
 - Alibaba: 2
-- Ansible: 4
+- Ansible: 3
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
-- AWS: 14
+- AWS: 13
 - AWS CodeBuild: 1
 - Azure: 9
 - Bastion: 3
@@ -50,12 +50,12 @@ tools_software_languages_filter:
 - gdb: 1
 - Geekbench: 1
 - Go: 2
-- Google Cloud: 8
+- Google Cloud: 9
 - HammerDB: 1
 - InnoDB: 1
 - Intrinsics: 1
 - Kafka: 1
-- Kubernetes: 3
+- Kubernetes: 4
 - Lambda: 1
 - Linaro Forge: 1
 - MariaDB: 1
@@ -64,7 +64,7 @@ tools_software_languages_filter:
 - mpi: 1
 - MySQL: 5
 - Neon: 3
-- Nginx: 1
+- Nginx: 2
 - Oracle: 2
 - PostgreSQL: 3
 - Redis: 2

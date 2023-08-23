@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Do taints and tolerations ensure that pods are scheduled on correct nodes?
+            Taints and tolerations ensure that pods are scheduled on correct nodes.
         answers:
             - "True"
             - "False"
@@ -12,15 +12,13 @@ review:
 
     - questions:
         question: >
-            You can't create a GKE cluster with both x86 and Arm-based nodes?
+            You can't create a GKE cluster with both x86 and Arm-based nodes.
         answers:
             - "True"
             - "False"
         correct_answer: 2                   
         explanation: >
             GKE supports hybrid clusters with both x86 and Arm-based nodes.
-
-
 
 
 # ================================================================================
