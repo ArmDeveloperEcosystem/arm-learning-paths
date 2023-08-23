@@ -13,24 +13,24 @@
 review:
     - questions:
         question: >
-            Can I run and build CMSIS-DSP Tests for F16 data type?
+            Which header file must you include in your sources to access the library functions?
+        answers:
+            - arm_dsp.h
+            - arm_math.h
+            - arm_cmsis.h
+        correct_answer: 2             
+        explanation: >
+            The library is released in source form. The functions are declared in arm_math.h, which resides in the Include folder of the repository.
+    - questions:
+        question: >
+            Does the CMSIS-DSP library provide vectorized implementations of algorithms?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1                  
         explanation: >
-            Yes tests for F16 data type are included in the CMSIS DSP Test suite.
-
-    - questions:
-        question: >
-            A post-processing script is included to transform the raw output from the tests into human readable output.
-        answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                     
-        explanation: >
-            Yes. Use the post-processing script to understand the results.
-               
+            The library is provides vectorized versions of most algorithms for Helium and of most f32 algorithms for Neon.
+              
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
