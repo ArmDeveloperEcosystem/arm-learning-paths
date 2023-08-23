@@ -26,6 +26,7 @@ operatingsystems:
 
 tools_software_languages:
     - Terraform
+    - Oracle
 
 
 ### FIXED, DO NOT MODIFY
