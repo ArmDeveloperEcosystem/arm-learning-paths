@@ -14,15 +14,15 @@ review:
         question: >
             If I accidentally delete my instance, I can retrieve it?
         answers:
-            - True
-            - False
+            - Yes
+            - No
         correct_answer: 2                  
         explanation: >
             Instances that have been deleted cannot be retrieved. However, if an instance is simply stopped, you can start it again.
             
     - questions:
         question: >
-            Is the Ampere (always Free) compute instance in OCI a static instance with only 2 OCPUs and 8GB of RAM ?
+            Is the Ampere (always Free) compute instance in OCI a static instance with only 2 OCPUs and 8GB of RAM?
         answers:
             - True
             - False
@@ -32,7 +32,7 @@ review:
             VM.Standard.A1.Flex shape. This is the equivalent of 4 OCPUs and 24GB of memory that can be shared between multiple instances. 
     - questions:
         question: >
-            If I forgot to print the some output such as the IP address of my compute instance, do I need to destroy it and deploy (apply) it again ?
+            If I forgot to print the some output such as the IP address of my compute instance, do I need to destroy it and deploy (apply) it again?
         answers:
             - No after having added the output code, just run -> terraform output
             - No after having added the output code, just run -> terraform refresh
