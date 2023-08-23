@@ -24,7 +24,7 @@ subtitle: Learn best practices for microcontroller development
 title: Microcontrollers
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 5
-- Arm Development Studio: 1
+- Arm Development Studio: 2
 - Arm Virtual Hardware: 11
 - AWS: 3
 - CMSIS: 2
@@ -33,8 +33,9 @@ tools_software_languages_filter:
 - Fixed Virtual Platform: 8
 - GCC: 4
 - GitHub: 2
-- Keil: 6
+- Keil: 7
 - Keil MDK: 2
+- MDK: 1
 - MPS3: 1
 - Paddle: 1
 - Raspberry Pi: 1
