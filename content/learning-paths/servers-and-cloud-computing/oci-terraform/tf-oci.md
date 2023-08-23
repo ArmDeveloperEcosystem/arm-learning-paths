@@ -7,7 +7,7 @@ weight: 2
 layout: learningpathall
 ---
 
-This Learning Path uses Terraform to automate creation of Arm virtual machine instances on the Oracle Cloud Infrastructure (OCI).
+This Learning Path uses Terraform to automate creation of Arm virtual machine instances on Oracle Cloud Infrastructure (OCI).
 
 ## Before you begin
 
@@ -15,58 +15,58 @@ You may want to review the Learning Path [Getting Started with Oracle OCI](/lear
 
 Any computer which has the required tools installed can be used. The computer can be your desktop, laptop, or a virtual machine with the required tools. The command format assumes you are working on a Linux machine.
 
-Refer to the [Terraform install guide](/install-guides/terraform/) for instructions to install Terraform.
+Refer to the [Terraform install guide](/install-guides/terraform/) for installation instructions.
 
-You will need an [Oracle OCI account](https://cloud.oracle.com/) to complete this Learning Path. [Create an account](https://signup.oraclecloud.com/) and use Oracle Cloud Free Tier if you don’t have an account yet.
+You will need an [Oracle OCI account](https://cloud.oracle.com/) to complete this Learning Path. [Create an account](https://signup.oraclecloud.com/) and use Oracle Cloud Free Tier if you don’t already have an account.
 
-## Acquire OCI Access Credentials
+## Acquire OCI access credentials
 
-To be able to deploy architectures, Terraform installed on your desktop or laptop needs to communicate with OCI. To to this, Terraform needs to be authenticated.
+To deploy architectures, Terraform on your desktop or laptop communicates with OCI. For this to work, Terraform needs to be authenticated.
 
-For authentication, you need to generate access keys (access key ID and secret access key). These access keys are used by Terraform for making programmatic calls to OCI via the OCI CLI.
+For authentication, you need to generate keys. These keys are used by Terraform to make programmatic calls to OCI.
 
-To generate and configure the Access key ID and Secret access key, follow the steps below:
+To generate and configure the keys, follow the steps below.
 
 Confirm Terraform is installed:
 
-```bash { target="ubuntu:latest" }
+```console
 terraform -v
 ```
 
 The output will be similar to: 
 
-```bash { target="ubuntu:latest" }
-Terraform v1.5.4
+```console
+Terraform v1.5.5
 on linux_arm64
 ```
 
-Start configuration by creating a new directory for OCI:
+Create a new directory to store the key files:
 
-```bash { target="ubuntu:latest" }
+```console
 mkdir $HOME/.oci
 ```
 
-Generate a private key in PEM format and adjust the permissions:
+Generate a private key and adjust the permissions:
 
-```bash { target="ubuntu:latest" }
+```console
 openssl genrsa -out $HOME/.oci/rsa_private.pem 2048
 chmod 600 $HOME/.oci/rsa_private.pem 
 ```
 
 Generate a public key:
 
-```bash { target="ubuntu:latest" }
+```console
 openssl rsa -pubout -in $HOME/.oci/rsa_private.pem -out $HOME/.oci/rsa_public.pem 
 ```
 
 Display the public key file:
 
-```bash { target="ubuntu:latest" }
+```console
 cd $HOME/.oci
 cat rsa_public.pem
 ```
 
-Copy the public key including the `----BEGIN PUBLIC KEY----` and `----END PUBLIC KEY---`
+Copy the public key including the first and last lines including `----BEGIN PUBLIC KEY----` and `----END PUBLIC KEY---`
 
 In the OCI web console, click on the Profile icon in the upper right corner and then click your profile on the drop down menu. 
 
@@ -76,27 +76,26 @@ Select `Paste a public key` as shown below and paste the contents of your public
 
 ![alt-text #center](https://user-images.githubusercontent.com/89662128/250157622-288f0781-7707-4e6a-8a15-a389e453307b.jpg "Click paste a public key")
 
-Now you have connected your RSA keys to your OCI account.
+You have connected your keys with your OCI account.
 
 ## Prepare your Infrastructure as Code
 
-The benefit of Terraform is to have the possibility to share your infrastructure's code
-(with colleagues but also publicly).
+Terraform provides the ability to share your code, with colleagues or publicly, without exposing any personal information. 
 
-You also have the possibility to deploy the same infrastructure on different region, compartment, ... For this reason, I'm in favor to create generic files to define the provider, the compartment, the domains and use a file containing the values of variables used in this generic files.
+With Terraform you also have the flexibility to deploy the same infrastructure in different regions, compartments, and more. For this reason, you should create generic files to define the provider, the compartment, the domains and use a file containing the variable values used in the generic files.
 
-This also allows to not share any confidential information but just a template of the variables files.
+You can share the template of the variables files, but be careful to share share your actual variable values. 
 
-The first step is to define a folder for our code:
+The first step is to create a directory for your code:
 
-```bash { target="ubuntu:latest" }
+```console
 mkdir ~/arm-on-oci
 cd ~/arm-on-oci
 ```
 
 ### Terraform Provider
 
-In this directory, we create a new file called `provider.tf` with the following content:
+In this directory, use a text editor to create a file called `provider.tf` with the following information:
 
 ```console
 provider "oci" {
@@ -108,18 +107,18 @@ provider "oci" {
 }
 ```
 
-You can notice that we don't insert any sensible data in that file. We will be able
-to share this file for all our Terraform code we want to deploy on Oracle Cloud Infrastructure.
+You will notice there isn't any real data in the file, just variables. You will be able
+to share this file when you want to deploy on Oracle Cloud Infrastructure.
 
 ### Terraform Variables
 
-We can now already create the file that will contain the value for all the variables.
+You can create the file that will contain the values for the variables.
 
-We start by creating the template file that will be shared with the code in case we want to publish our infrastructure or modules somewhere like GitHub.
+Start by creating the template file that will be shared with the code in case you want to publish your infrastructure or modules somewhere like GitHub.
 
 The template file is called `terraform.tfvars.template`.
 
-For the moment, the content of the file should be like this:
+Use a text editor to create `terraform.tfvars.template` with the contents: 
 
 ```console
 # Oracle Cloud Infrastructure Authentication
@@ -139,21 +138,21 @@ ssh_authorized_keys_path = "<REPLACE_ME>.pub"
 ssh_private_key_path = "<REPLACE_ME>"
 ```
 
-Again on that file, there is no confidential content.
+There is no confidential content in the file.
 
-We copy the file to the file that should not be shared and will contain all the real values for these variables. The file is `terraform.tfvars`.
+Copy the file to the file that should NOT be shared and will contain the values for the variables. The file is `terraform.tfvars`.
 
-```bash { target="ubuntu:latest" }
+```console
 cp terraform.tfvars.template terraform.tfvars
 ```
 
-Replace each field with the values for your account. You can find the Tenancy information OCID and the User information OCID in your account profile in the OCI console.
+Use a text editor to replace each field with the values for your OCI account. You can find the Tenancy information OCID and the User information OCID in your account profile in the OCI console.
 
-The private key is at `$HOME/.oci/rsa_private.pem`
+The private key is at `~/.oci/rsa_private.pem`
 
-To get the key finger print for your private key run the `openssl` command:
+To get the key fingerprint for your private key run the `openssl` command:
 
-```bash { target="ubuntu:latest" }
+```console
 openssl rsa -pubout -outform DER -in ~/.oci/rsa_private.pem | openssl md5 -c
 ```
 
@@ -161,20 +160,23 @@ openssl rsa -pubout -outform DER -in ~/.oci/rsa_private.pem | openssl md5 -c
 Find your region using the [OCI documentation](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm). For example, the region could be `us-ashburn-1`
 {{% /notice %}}
 
-The value for `ssh_authorized_keys_path` and `ssh_private_key_path` define the location of the ssh key you will use to connect to your instance.
+The value for `ssh_authorized_keys_path` and `ssh_private_key_path` define the location of the ssh key you will use to connect to your instance using SSH.
 
-On my system, this is how it looks like: 
+For the `ubuntu` user name, it is:
 
 ```console
-ssh_authorized_keys_path = "/home/fred/.ssh/id_rsa_oci.pub"
-ssh_private_key_path = "/home/fred/.ssh/id_rsa_oci"
+ssh_authorized_keys_path = "/home/ubuntu/.ssh/id_rsa.pub"
+ssh_private_key_path = "/home/ubuntu/.ssh/id_rsa"
 ```
 
 {{% notice Note %}}
-Use `ssh-keygen` to generate a new key if you don't have already a SSH key to use.
+If you don't have `id_rsa` and `id_rsa.pub` in your `~/.ssh` directory run 
+`ssh-keygen` to generate a new key. Accept the default values when prompted and the files will be created. 
 {{% /notice %}}
 
-Terraform also requires variables to be defined in a dedicated file. We create `variables.tf` with the following content:
+Terraform also requires variables to be defined in a dedicated file. 
+
+Use a text editor to create `variables.tf` with the following contents:
 
 ```console
 variable "tenancy_ocid" {
@@ -217,9 +219,9 @@ variable "ssh_private_key_path" {
 
 ## Initialize Terraform
 
-Use `terraform init` to run the scripts:
+Initialize the Terraform directory: 
 
-```bash { target="ubuntu:latest" }
+```console
 terraform init
 ```
 
@@ -257,17 +259,17 @@ rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.
 ```
 
-You now have a folder named `.terraform` that includes the plugins for the OCI provider.
+You now have a directory named `.terraform` that includes the plugins for the OCI provider.
 
 ## Testing the authentication
 
-To test that all information is correct, we need to ask Terraform to do something.
+To test the setup, you can ask Terraform to do something.
 
-We will ask to Terraform to just display all availability domains.
+To begin, ask Terraform to display all availability domains.
 
-In the same directory, we now create a file `availability-domains.tf` that as the following content:
+In the same directory, create a file `availability-domains.tf` with the following contents:
 
-```bash { target="ubuntu:latest" }
+```console
 
 # Source from https://registry.terraform.io/providers/oracle/oci/latest/docs/data-sources/identity_availability_domains
 
@@ -289,9 +291,9 @@ Make sure `provider.tf` and `availability-domains.tf` are in the same directory.
 
 ### Terraform Plan
 
-Run the Terraform `plan` command specifying the variables file:
+Run the `terraform plan` command to print the availability domains:
 
-```bash { target="ubuntu:latest" }
+```console
 terraform plan
 ```
 
@@ -322,9 +324,9 @@ You can apply this plan to save these new output values to the Terraform state, 
 
 ### Terraform Apply
 
-Run the Terraform `apply` command to generate the outputs:
+Run the Terraform `apply` command to save the output values to the Terraform state:
 
-```bash { target="ubuntu:latest" }
+```console
 terraform apply
 ```
 
@@ -361,12 +363,12 @@ all-availability-domains-in-your-tenancy = tolist([
 Your Oracle Cloud Infrastructure account is now authenticated using your Terraform provider scripts.
 
 {{% notice Note %}}
-If you use `apply` and you try to `plan` again, you won't see the output anymore. You could see it again if you `destroy` first.
+After you run `apply` and you try to `plan` again, you won't see the output anymore. You can see it again if you run `terraform destroy` first.
 {{% /notice %}}
 
 ## Create an Ampere compute instance
 
-To create your first ARM compute instance, several other resources are required such as:
+To create your first Arm compute instance, several other resources are required:
 
 - a virtual cloud network (VCN)
 - a subnet (public)
@@ -374,13 +376,13 @@ To create your first ARM compute instance, several other resources are required 
 - a routing table (public)
 - a security list (public)
 
-You can notice that we use _public_. This mean that those resource have the possibility to be accessed from a public network such Internet, they could have a public IP assigned to them.
+You will notice the use of _public_. This mean that the resources have the possibility to be accessed from the public internet (they could have a public IP address assigned to them).
 
-In OCI, some services are only available in a private subnet, those are not accessible directly from the Internet (for example MySQL HeatWave Database Service).
+In OCI, some services are only available in a private subnet, those are not accessible directly from the internet (for example MySQL HeatWave Database Service).
 
 ### Network Resources
 
-We will start by defining all the resources listed above in a dedicated Terraform file: `network.tf`:
+Start by defining all the resources listed above in a dedicated Terraform file named `network.tf`:
 
 ```console
 data "oci_identity_availability_domains" "ad" {
@@ -439,22 +441,28 @@ resource "oci_core_subnet" "arm_public_subnet" {
 }
 ```
 
-We can plan and apply those resources to OCI:
+Run Terraform `plan` and `apply` to create the resources in in OCI:
 
-```bash { target="ubuntu:latest" }
-$ terraform plan
-$ terraform apply
+```console
+terraform plan ; terraform apply
+```
+
+Answer `yes` when prompted. 
+
+The output confirms the added resources:
+
+```output
 ...
 Apply complete! Resources: 5 added, 0 changed, 0 destroyed.
 ```
 
-The list of availability zones are still in the output. We can remove that by deleting the file `availability-domains.tf`.
+The list of availability zones is printed as output. You can stop that from happening by deleting the file `availability-domains.tf`.
 
-### ARM Compute Instance (Ampere)
+### Create an Arm (Ampere) compute instance
 
-It's now time to deploy our first ARM Compute instance.
+It's time to deploy your first Arm-based A1 compute instance.
 
-We start by creating a new file `compute.tf`:
+Use a text editor to create a file named `compute.tf`:
 
 <!--```bash { line_numbers="true", data_line_highlight="42" } -->
 ```bash {line_numbers="true", data_start="4", data_line="4-5,7"}
@@ -509,57 +517,63 @@ resource "oci_core_instance" "Ampere" {
 }
 ```
 
-And we can now apply our code to deploy our first ARM compute instance in OCI:
+Run the `apply` command to deploy an Arm compute instance:
 
-```bash
-$ terraform apply
+```console
+terraform apply
+```
+
+The output shows 1 resource added:
+
+```output
 ...
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
 
-Before we connect to our new compute instance, let's have a more detailed look at the file `compute.tf`:
+Before connecting to your new compute instance, take a more detailed look at the file `compute.tf`:
 
-__Lines 1 to 3__: define the new local variables. In our example we only have one in which we add the content of our public ssh key by reading the file:
+__Lines 1 to 3__: define new local variables. In this section includes only one variable which holds the publish SSH key. 
 
-__Lines 5 to 12__: we specify an image compatible with our shape. 
+__Lines 5 to 12__: specify an image compatible with the shape. 
 
-To use an Always Free Ampere shape, we use __`VM.Standard.A1.Flex`__.
+To use an Always Free Ampere shape, use __`VM.Standard.A1.Flex`__.
 
-As you can see, these lines will list all the compatible shapes using Oracle Linux 9
-sorted by date descending. This mean that the first element of the list will be the
+As you can see, these lines list the compatible shapes using Oracle Linux 9
+sorted by date (descending). This means that the first element of the list will be the
 most recent image.
 
 __Lines 14 to 49__: this is the definition of the compute instance.
 
-__Lines 21 to 27__: here we define some specifications for our instance. As we use a __Flex__ shape, we need to specify the amount of memory and OCPUs.
+__Lines 21 to 27__: define some specifications for the instance. With the __Flex__ shape, you need to specify the amount of memory and OCPUs.
 
-__Lines 29 to 34__: we create a Virtual Network Interface Card to be connected to the public subnet we created.
+__Lines 29 to 34__: create a Virtual Network Interface card to be connected to the public subnet.
 
-__Lines 36 to 38__: we specify the metadata for the compute instance. Here we only specify our public ssh key we can use to later connect to it.
+__Lines 36 to 38__: specify the metadata for the compute instance, the public SSH key so you can connect using SSH. 
 
-__Lines 40 to 43__: we tell which image to use. As you can see we use the first one of the list (`[0]`).
+__Lines 40 to 43__: which image to use. Use the first one of the list (`[0]`).
 
-__Lines 45 to 47__: we just specify the timeout for the creation.
+__Lines 45 to 47__: specify the timeout for the instance creation.
 
 
-### Outputs
+### Output the IP address
 
-You may have noticed, that our compute instance has been deployed, but to know it's IP address, we need to use OCI Console.
+Instead of using the OCI console to find the IP address, it's more convenient to display it directly using Terraform.
 
-It's much more convenient to display the information direclty via Terraform when we deploy it.
+Use a text editor to create the file `outputs.tf`:
 
-Let's create the file `outputs.tf`:
-
-```bash
+```console
 output "public_ip" {
   value = oci_core_instance.Ampere.public_ip
 }
 ``` 
 
-We can now run `terraform refresh`:
+Run `terraform refresh` to print the IP address:
 
-```bash
-$ terraform refresh
+```console
+terraform refresh
+```
+
+```output
 [...]
 oci_core_instance.Ampere: Refreshing state... [id=ocid1.instance.oc1.iad.xxxxpgw2a]
 
@@ -568,12 +582,19 @@ Outputs:
 public_ip = "1xx.xxx.xxx.x8"
 ```
 
-## Connection
+## Connect using SSH
 
-Now it's time to finally connect to our new Ampere compute instance on OCI using SSH:
+You can now connect to your new Ampere compute instance using SSH:
 
-```bash
-$ ssh -i /home/fred/.ssh/id_rsa_oci opc@1xx.xxx.xxx.x8
+Substitute the printed IP address into the SSH command:
+
+```console
+ssh -i ~/.ssh/id_rsa opc@1xx.xxx.xxx.x8
+```
+
+You will log in as the user ocp as shown in the output below:
+
+```output
 The authenticity of host '1xx.xxx.xxx.x8 (1xx.xxx.xxx.x8)' can't be established.
 ED25XXX key fingerprint is SHA256:wkFGCurGe+5AJtVmPIKCAqUKhw+xxxxxxxxxxxxxxxx.
 This key is not known by any other names
@@ -582,16 +603,36 @@ Warning: Permanently added '1xx.xxx.xxx.x8' (ED25XXX) to the list of known hosts
 [opc@ampere1 ~]$
 ```
 
-We can verify the architecture:
+Verify the Arm architecture using the `lscpu` command:
 
-```bash
-[opc@ampere1 ~]$ lscpu 
+```console
+lscpu 
+```
+
+Some output is omitted, but you should see `aarch64` as the architecture and `Neoverse-N1` as the CPU Model name:
+
+```output
 Architecture:           aarch64
   CPU op-mode(s):       32-bit, 64-bit
   Byte Order:           Little Endian
 CPU(s):                 2
   On-line CPU(s) list:  0,1
-[...]  
+Vendor ID:              ARM
+  Model name:           Neoverse-N1
+    Model:              1
+    Thread(s) per core: 1
+    Core(s) per socket: 2
+    Socket(s):          1
+    Stepping:           r3p1
+    BogoMIPS:           50.00
+    Flags:              fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asim
+                        drdm lrcpc dcpop asimddp ssbs
 ```
 
-Done ! You have deployed your first Ampere Compute instance in OCI using Terraform, congrats !
+You have deployed your first Ampere Compute instance in OCI using Terraform.
+
+To delete the resources run:
+
+```console
+terraform destroy
+```
