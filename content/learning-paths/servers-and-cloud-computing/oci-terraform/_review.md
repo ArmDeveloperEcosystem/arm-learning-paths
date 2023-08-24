@@ -12,7 +12,7 @@ review:
 
     - questions:
         question: >
-            If you accidentally delete your instance, I you retrieve it?
+            If you accidentally delete your instance, can you retrieve it?
         answers:
             - "Yes"
             - "No"
