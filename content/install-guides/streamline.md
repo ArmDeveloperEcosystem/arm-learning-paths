@@ -52,21 +52,29 @@ Download the appropriate package from the [Product Download Hub](https://develop
  - [Arm Mobile Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
  - [Arm Development Studio](https://developer.arm.com/downloads/view/DS000B)
 
+Arm Mobile Studio supports Windows, Linux, and MacOS hosts.
+
+Arm Development Studio supports Windows and Linux hosts.
+
 ## Installation
 
-Install Arm Mobile Studio using these [instructions](https://developer.arm.com/documentation/102526).
+#### Arm Mobile Studio
 
-Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio). See also [this article](../armds/).
+Install instructions are given in the Mobile Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
-If using an Android target, you must install Android Debug Bridge (`adb`) available with [Android SDK platform tools](https://developer.android.com/studio/releases/platform-tools).
+You must also install Android Debug Bridge (`adb`) available with [Android SDK platform tools](https://developer.android.com/studio/releases/platform-tools). Add the Android SDK platform tools directory to your `PATH` environment variable.
 
-Add the path to the downloaded Android SDK platform tools directory to your `PATH` environment variable.
+#### Arm Development Studio
+
+Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
+
+See also the [Arm Development Studio Install Guide](../armds/).
 
 ## Setting up product license
 
 Arm Mobile Studio is free of charge and is not license managed (earlier versions of Mobile Studio Professional Edition required a license).
 
-Arm Development Studio is license managed. License setup instructions are available in the [Arm License install guide](../license/).
+Arm Development Studio is license managed. License setup instructions are available in the [Arm Software Licensing install guide](../license/).
 
 ## Get started
 
@@ -81,3 +89,5 @@ Depending on your type of application, choose the appropriate guide below to get
 - [Profile your Android Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Android-application)
 - [Profile your Linux Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Linux-application)
 - [Profile your bare-metal Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-bare-metal-application)
+
+For Android users, a [tutorial](https://developer.arm.com/documentation/102477) is also available.
