@@ -104,13 +104,13 @@ Use sudo or root as it is located in a read-only area.
  ```
 The commands below are for any Linux distribution using `systemd`.
 
-To start the SSH daemon:
+To start the VNC service:
 
 ```console
 sudo systemctl start vncserver@1.service
 ```
 
-To stop the SSH daemon:
+To stop the VNC service:
 
 ```console
 sudo systemctl stop vncserver@1.service
