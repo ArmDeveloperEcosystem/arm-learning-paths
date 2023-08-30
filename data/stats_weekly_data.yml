@@ -498,3 +498,40 @@
     avg_close_time_hrs: 0
     num_issues: 5
     percent_closed_vs_total: 0.0
+- a_date: '2023-08-28'
+  content:
+    cross-platform: 7
+    embedded-systems: 14
+    install-guides: 69
+    laptops-and-desktops: 9
+    microcontrollers: 21
+    servers-and-cloud-computing: 41
+    smartphones-and-mobile: 7
+    total: 168
+  contributions:
+    external: 2
+    internal: 165
+  github_engagement:
+    num_forks: 30
+    num_prs: 3
+  individual_authors:
+    brenda-strech: 1
+    christopher-seidl: 4
+    daniel-gubay: 1
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 1
+    gabriel-peterson: 3
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
+    kasper-mecklenburg: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 29
+    pranay-bakre: 1
+    ronan-synnott: 39
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 3
+    percent_closed_vs_total: 0.0

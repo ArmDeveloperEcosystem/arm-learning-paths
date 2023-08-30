@@ -65,7 +65,7 @@ tools_software_languages_filter:
 - MySQL: 5
 - Neon: 3
 - Nginx: 2
-- Oracle: 2
+- Oracle: 3
 - PostgreSQL: 3
 - Redis: 2
 - Remote.It: 1
