@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Linux Perf
+title: Perf on Arm Linux
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -29,7 +29,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Linux Perf is a command line performance analysis tool. The source code is part of the Linux kernel and Perf is connected to the `perf_events` kernel interface. Perf is used to count events from hardware and software and to identify hot spots.
 
-Perf can be used on a wide variety of Arm Linux systems including laptops, desktops, cloud virtual machines, Windows on Arm with WSL (Windows Subsystem for Linux), and ChromeOS with Linux enabled. Perf is best installed using a Linux package manager, but if a suitable package is not available you can build it from source code. Both situations are covered below.  
+Perf can be used on a wide variety of Arm Linux systems including laptops, desktops, cloud virtual machines, Windows on Arm with WSL (Windows Subsystem for Linux), and ChromeOS with Linux enabled.
+
+Perf is best installed using a Linux package manager, but if a suitable package is not available you can build it from source code. Both situations are covered below.  
 
 ## Before you begin
 
@@ -72,10 +74,10 @@ This indicates kernel version 5.15.
 The Perf source code is part of the Linux kernel source tree. 
 
 There are two ways to install Perf on Arm Linux machines: 
-- Use a Linux package manager
-- Build the source code
+- Use a [Linux package manager](#packman)
+- Build the [source code](#source)
 
-### Use a Linux package manager
+### Use a Linux package manager {#packman}
 
 If a package exists for your specific kernel version you can install Perf using the package manager.
 
@@ -93,15 +95,15 @@ sudo dnf install perf -y
   {{< /tab >}}
 {{< /tabpane >}}
 
-If the package manager completes successfully you can skip the next section and proceed to test Perf. 
+If the package manager completes successfully you can skip the next section and proceed to [test](#test) Perf. 
 
-If the package manager does not complete successfully, it usually means there was no package available for your specific kernel version as printed by `uname -r`. 
+If the package manager does not complete successfully, it usually means there was no package available for your specific kernel version as shown by `uname -r`. 
 
-There are hundreds of packages, and the package name must match `uname -r` exactly. This is most common on Arm single board computers (SBCs) where the Linux kernel has been customized.
+There are hundreds of packages, and the package name must match the output of `uname -r` exactly. This is most common on Arm single board computers (SBCs) where the Linux kernel has been customized.
 
-If there is no match, you can install Perf using the source code as described in the next section.
+If there is no match, you can install Perf using the source code as described in the next [section](#source).
 
-### Build the source code
+### Build the source code {#source}
 
 If there is no package available for your kernel version you can build Perf from source code. 
 
@@ -113,9 +115,9 @@ For Debian and Ubuntu run:
 sudo apt install gcc flex bison make git -y
 ```
 
-You need to get the Linux kernel source tree that is close to your kernel version. 
+Use `git` to get the source code. Use `--branch` to specify the Linux kernel source tree closest to your kernel version.
 
-If your kernel version is 5.15 use `git` to get the source code:
+For example, if your kernel version is 5.15, use:
 
 ```console
 git clone --depth=1 --branch v5.15  git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -138,7 +140,7 @@ To copy it use:
 sudo cp tools/perf/perf /usr/local/bin
 ```
 
-## Test Perf
+## Test Perf {#test}
 
 Regardless of how you installed Perf, try the `perf list` command:
 
@@ -179,7 +181,7 @@ branch:
 
 ```
 
-Perf is not working correctly if you see output similar to the messages below. To fix the errors you need to build Perf from source using the instructions in the previous section.
+Perf is not working correctly if you see output similar to the messages below. To fix the errors you need to [build Perf from source](#source).
 
 Error #1:
 
@@ -202,11 +204,39 @@ Error #2:
 E: linux-perf-5.15 is not installed.
 ```
 
-## Access permission
+### Generate a test Perf report
+
+Generate a simple Perf report. For example:
+```command
+perf stat -a pwd
+```
+The `pwd` command output will be shown as well as the report:
+```output
+Performance counter stats for 'system wide':
+
+              2.72 msec cpu-clock                 #    2.205 CPUs utilized
+                14      context-switches          #    5.147 K/sec
+                 2      cpu-migrations            #  735.277 /sec
+                76      page-faults               #   27.941 K/sec
+           2380757      cycles                    #    0.875 GHz
+           2651708      instructions              #    1.11  insn per cycle
+   <not supported>      branches
+             15058      branch-misses
+
+       0.001233481 seconds time elapsed
+```
+
+If you see an error similar to:
+```output
+Access to performance monitoring and observability operations is limited.
+```
+You will need to modify the [PMU access permissions](#access).
+
+### PMU access permission {#access}
 
 On some systems, using Perf to access hardware counters is restricted by the value of `/proc/sys/kernel/perf_event_paranoid`
 
-The value must be 2 or less to collect Perf metrics.
+Typically the value must be 2 or less to collect Perf metrics.
 
 
 |perf_event_paranoid |	Description  |
@@ -230,7 +260,7 @@ To permanently set the paranoid level, add the following line to the file `/etc/
 kernel.perf_event_paranoid=2
 ```
 
-## Arm PMU driver
+### Arm PMU driver
 
 Arm systems use a kernel driver to expose PMU hardware counters. The driver needs to be enabled in the Linux kernel in order to collect the hardware events.
 
@@ -252,7 +282,7 @@ If you see output similar to the message below, the Arm PMU driver is installed.
 
 The number of counters available could be between 1 and 7 depending on processor types and virtualization.
 
-If you see two instances of the PMU driver, it means the hardware is a big.LITTLE system with two types of processors, and each has it's own PMU. 
+If you see multiple instances of the PMU driver, it means the hardware is a [big.LITTLE](https://www.arm.com/en/technologies/big-little) system with different processors, each has it's own PMU. 
 
 If the message is not in the kernel message log, check both the PMU driver device tree entry and the kernel configuration parameters listed above. 
 
@@ -267,4 +297,3 @@ CONFIG_HW_PERF_EVENTS=y
 ```
 
 You are now ready to use Perf on your Arm Linux system. 
-
