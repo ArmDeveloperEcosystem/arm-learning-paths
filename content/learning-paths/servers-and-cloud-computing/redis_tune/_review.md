@@ -29,7 +29,7 @@ review:
             - "False"
         correct_answer: 2                  
         explanation: >
-            Redis by default will disable transparent huge page (THP) for the Redis process if it is enabled in order to avoid latency problems.
+            By default, Redis will disable transparent huge page (THP) for the Redis process in order to avoid latency problems.
                
     - questions:
         question: >
