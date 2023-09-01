@@ -38,7 +38,7 @@ io-threads 1
 ```
 
 * `save`:
-  * Redis by defualt tries to store data on the disk which creates forks that can result in overall system slowdown. You can prevent this by commenting out the lines that begin with "save".
+  * Redis by default tries to store data on the disk which creates forks that can result in overall system slowdown. You can prevent this by commenting out the lines that begin with "save".
   * To entirely disable snapshotting, you can provide a single empty string argument.
 * `stop-writes-on-bgsave-error`:
   *  If you have setup your proper monitoring of the Redis server and persistence, you may want to disable background saving so that Redis will continue to work as usual even if there are problems with disk, permissions, and so forth.

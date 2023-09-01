@@ -30,7 +30,7 @@ There are numerous ways to deploy Redis on Arm: Bare metal, cloud VMs, or the va
     * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp) learning path
   * [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
 * Redis services
-  * [AWS MemoryDB or ElasticCache](https://aws.amazon.com/redis/)
+  * [AWS MemoryDB or ElastiCache](https://aws.amazon.com/redis/)
     * Select an Arm based instance for deployment
 * Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) learning path
 
@@ -40,4 +40,4 @@ Redis has a variety of use cases in large enterprise applications. You can explo
 
 ### Redis installation options
 
-If you are using a cloud service like AWS MemoryDB or ElasticCache, then the installation of Redis is handled by that service. However, if you are working with a bare metal or cloud node, Redis is available to install on [Linux](https://redis.io/docs/getting-started/installation/install-redis-on-linux/), [macOS](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/), and [Windows](https://redis.io/docs/getting-started/installation/install-redis-on-windows/) through command line or you can download the latest Redis [binary](https://redis.io/download/) for your target platform and build it from [source](https://redis.io/docs/getting-started/installation/install-redis-from-source/).
+If you are using a cloud service like AWS MemoryDB or ElastiCache, then the installation of Redis is handled by that service. However, if you are working with a bare metal or cloud node, Redis is available to install on [Linux](https://redis.io/docs/getting-started/installation/install-redis-on-linux/), [macOS](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/), and [Windows](https://redis.io/docs/getting-started/installation/install-redis-on-windows/) through command line or you can download the latest Redis [binary](https://redis.io/download/) for your target platform and build it from [source](https://redis.io/docs/getting-started/installation/install-redis-from-source/).
