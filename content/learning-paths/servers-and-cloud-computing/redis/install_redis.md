@@ -36,7 +36,7 @@ There are numerous ways to deploy Redis on Arm: Bare metal, cloud VMs, or the va
 
 ###  Redis documentation
 
-Redis has a variety of use cases in large enterprise applications. You can explore into the [Redis documentation](https://redis.io/docs/) for more details about Redis.
+Redis has a variety of use cases in large enterprise applications. You can explore the [Redis documentation](https://redis.io/docs/) for more details.
 
 ### Redis installation options
 
