@@ -1530,3 +1530,15 @@ OCPUs
 ocp
 HashiCorp
 php
+Elham
+Harirpoush
+snapshotting
+maxclients
+maxmemory
+Pipelining
+pipelining
+OOM
+swappiness
+THP
+ElastiCache
+MemoryDB
