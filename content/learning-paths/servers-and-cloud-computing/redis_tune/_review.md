@@ -13,24 +13,37 @@
 review:
     - questions:
         question: >
-            Redis runs at port 6000 by default.
+            Linux kernel parameters can impact Redis performance.
         answers:
             - "True"
             - "False"
-        correct_answer: 2                     
-        explanation: >        
-            Redis runs at port 6379 by default.
+        correct_answer: 1
+        explanation: >
+            Kernel network stack can have a direct impact on Redis.
 
     - questions:
         question: >
-            Redis is written in Java.
+            Transparent Huge Page setting is enabled by default in Redis to avoid latency problems. 
         answers:
             - "True"
             - "False"
-        correct_answer: 2                     
+        correct_answer: 2                  
         explanation: >
-            Redis is written in ANSI C.
-                    
+            By default, Redis will disable transparent huge page (THP) for the Redis process in order to avoid latency problems.
+               
+    - questions:
+        question: >
+            Which compiler flags can be used to potentially gain additional performance on Arm?
+        answers:
+            - "-flto"
+            - "-mcpu"
+            - "all of the above"
+        correct_answer: 3                    
+        explanation: >
+            The easiest way to gain performance is to use the latest version of GCC. Aside from that, the flag -mcpu and -flto can be used to potentially gain additional performance.
+
+
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
@@ -39,4 +52,3 @@ title: "Review"                 # Always the same title
 weight: 20                      # Set to always be larger than the content in this path
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 ---
-
