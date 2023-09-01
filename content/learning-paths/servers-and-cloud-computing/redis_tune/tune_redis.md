@@ -1,6 +1,6 @@
 ---
 title: "Tune Redis"
-weight: 4
+weight: 3
 layout: "learningpathall"
 ---
 
