@@ -33,7 +33,7 @@ UBL license server software is supported on the following host operating systems
 The license server uses a number of standard Linux [utilities](https://developer.arm.com/documentation/107573/latest/Getting-started-with-user-based-licensing/Hardware-and-software-requirements), including Python and Java.
 ```console
 sudo apt update
-sudo apt install -y openjdk-11-jre-headless python
+sudo apt install -y openjdk-11-jre-headless python-is-python3
 ```
 
 ### Download and install server software
@@ -44,8 +44,8 @@ https://lm.arm.com/downloads
 ```
 Expand the tarball (named `flexnetls-armlmd-<version>.tar.gz`), and install the license server software.
 ```console
-tar -xf  flexnetls-armlmd-1.2022120.2.tar.gz
-sudo flexnetls-armlmd-1.2022120.2/install_license_server
+tar -xf flexnetls-armlmd-1.2023060.0.tar.gz
+sudo ./flexnetls-armlmd-1.2023060.0/install_license_server
 ```
 Additional options are described in the [License Server Administration Guide](https://developer.arm.com/documentation/107573/latest/Getting-started-with-user-based-licensing/Install-your-license-server).
 
