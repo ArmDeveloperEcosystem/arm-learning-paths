@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: WindowsPerf
+title: Perf for Windows on Arm (WindowsPerf)
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -18,7 +18,7 @@ additional_search_terms:
 minutes_to_complete: 15
 
 ### Link to official documentation
-official_docs: https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/blob/main/wperf/README.md 
+official_docs: https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/blob/main/wperf/README.md
 
 author_primary: Jason Andrews
 
@@ -56,11 +56,11 @@ https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
 ```
 To download directly from command prompt, use:
 ```console
-curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/2.4.0/windowsperf-bin-2.4.0.zip --output windowsperf-bin-2.4.0.zip
+curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/2.5.1/windowsperf-bin-2.5.1.zip --output windowsperf-bin-2.5.1.zip
 ```
 Unzip the package to your preferred location.
 ```console
-tar -xmf windowsperf-bin-2.4.0.zip
+tar -xmf windowsperf-bin-2.5.1.zip
 ```
 
 ## Install wperf driver
@@ -75,7 +75,7 @@ Open a `Windows Command Prompt` terminal with `Run as administrator` enabled.
 
 Navigate to the `windowsperf-bin-<version>` directory.
 ```command
-cd windowsperf-bin-2.4.0
+cd windowsperf-bin-2.5.1
 ```
 
 ### Install with devcon {#devcon}
@@ -111,7 +111,6 @@ Device installed successfully.
 Trying to install driver...
 Success installing driver.
 ```
-
 ## Verify install
 
 You can check everything is working by running the `wperf` executable.
@@ -129,6 +128,9 @@ You should see output similar to:
 ```output
 Component     Version
 =========     =======
-wperf         2.4.0
-wperf-driver  2.4.0
+wperf         2.5.1
+wperf-driver  2.5.1
 ```
+## Further reading
+
+[Announcing WindowsPerf: Open-source performance analysis tool for Windows on Arm](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf)
