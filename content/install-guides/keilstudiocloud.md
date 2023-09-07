@@ -40,4 +40,4 @@ Keil Studio Cloud does not require any installation. To run the browser-based ID
 
 ## Get started
 
-A simple [Blinky](https://developer.arm.com/documentation/102497/latest/Tutorials/Get-started-with-a-CMSIS-Blinky-example) example is a great way to start.
+[Get started with an Mbed OS Blinky example](https://developer.arm.com/documentation/102497/latest/Tutorials/Get-started-with-an-Mbed-OS-Blinky-example) is a great way to start.
