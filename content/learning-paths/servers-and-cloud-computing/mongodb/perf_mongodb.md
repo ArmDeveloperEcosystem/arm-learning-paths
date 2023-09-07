@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 To measure the performance of MongoDB, use the [MongoDB performance test tool](https://github.com/idealo/mongodb-performance-test).
 
-This is an open sourced java application that tests the MongoDB performance, such as latency and throughput, by running one or more threads executing either all the same or different database operations, such as Inserts, Updates, Deletes, Counts or Finds until a defined number of operations is executed or a defined maximum runtime is reached.
+This is an open source Java application that tests the MongoDB performance, such as latency and throughput, by running one or more threads executing either all the same or different database operations, such as Inserts, Updates, Deletes, Counts or Finds until a defined number of operations is executed or a defined maximum runtime is reached.
 
 ## Install OpenJDK packages
 
@@ -16,10 +16,10 @@ Install the appropriate run-time environment to be able to use the performance t
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" >}}
-sudo apt-get install -y openjdk-8-jre
+sudo apt-get install -y openjdk-18-jre
 {{< /tab >}}
 {{< tab header="RHE/Amazon" >}}
-su -c "yum install -y java-1.8.0-openjdk"
+su -c "yum install -y java-1.18.0-openjdk"
 {{< /tab >}}
 {{< /tabpane >}}
 
