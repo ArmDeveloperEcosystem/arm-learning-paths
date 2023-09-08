@@ -1,5 +1,5 @@
 ---
-title: Install WordPress and MySQL on an always free ARM tier on OCI 
+title: Install WordPress and MySQL on an OCI Arm server
 
 weight: 2
 
@@ -7,77 +7,99 @@ weight: 2
 layout: learningpathall
 ---
 
-This Learning Path shows how to install MySQL Community Server and WordPress on an Arm virtual machine instance in Oracle Cloud Infrastructure (OCI).
+This Learning Path explains how to install MySQL Community Server and WordPress on an Arm virtual machine instance in Oracle Cloud Infrastructure (OCI).
 
 ## Before you begin
 
-You may want to review the Learning Path [Getting Started with Oracle OCI](/learning-paths/servers-and-cloud-computing/csp/oci/) before you begin.
+You may want to review the Learning Path [Getting Started with Oracle OCI](/learning-paths/servers-and-cloud-computing/csp/oci/) before proceeding.
 
 You will need an [Oracle OCI account](https://cloud.oracle.com/) to complete this Learning Path. [Create an account](https://signup.oraclecloud.com/) and use Oracle Cloud Free Tier if you don’t already have an account.
 
-## Deploying a Compute Instance
+## Deploy a compute instance
 
-You can deploy manually an ARM (Ampere) compute instance in OCI via the console or use Terraform.
+You can deploy an Arm (Ampere) compute instance in OCI via the console or using Terraform.
 
-If you want to deploy a raw compute instance using Terraform, you can follow this learning path [Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/oci-terraform/).
+If you want to deploy a compute instance using Terraform, you can follow the Learning Path [Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/oci-terraform/).
 
-## Connecting to the Compute Instance
+The compute instance should be created with Oracle Linux 9 as the operating system. 
 
-To install WordPress and MySQL, we need first to connect in SSH to the compute instance.
+## Connect to the compute instance using SSH
+
+To install WordPress and MySQL, connect to the compute instance using SSH. For Oracle Linux the username is `opc`.
+Use the SSH key you setup when creating the instance and your public IP address. 
+
+Run `ssh` and substitute your SSH key and your public IP address:
 
 ```console
-$ ssh -i ~/.ssh/id_rsa_oci opc@1xx.xxx.xxx.xx0
-The authenticity of host '1xx.xxx.xxx.xx0 (1xx.xxx.xxx.xx0)' can't be established.
-ED2XXXX key fingerprint is SHA256:xxxxxxxxXXxxxxxxxxxxxXXxxxxxxxxxxXXxxxxXXxx.
-This key is not known by any other names
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-Warning: Permanently added '1xx.xxx.xxx.xx0' (ED2XXXX) to the list of known hosts.
-[opc@ampere1 ~]$
+ssh -i <your-ssh-key> opc@<your public IP>
 ```
 
-## Installing MySQL
+You are now connected to your OCI instance and ready to start installing WordPress.
 
-We start by installing MySQL 8.1, latest Innovation Release, using the Community repository.
+## Install MySQL
 
-We need to install the Yum repository for the OS version we have installed:
+Start by installing MySQL 8.1, the latest Innovation Release, using the Community repository.
+
+You need to install the Yum repository for the correct OS version, in this case Oracle Linux 9:
 
 ```console
 cat /etc/oracle-release 
+```
+
+The output should be similar to:
+
+```output
 Oracle Linux Server release 9.2
 ```
 
-We visit https://dev.mysql.com/downloads/repo/yum/ to get the latest repository's rpm:
+Visit https://dev.mysql.com/downloads/repo/yum/ to see the contents of the latest YUM repository.
+
+Run `rpm` to install the repository setup package:
 
 ```console
 sudo rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el9-4.noarch.rpm
 ```
 
-And we install MySQL and MySQL Shell:
+Next, install MySQL and MySQL Shell:
 
 ```console
 sudo dnf install -y mysql-community-server mysql-shell \
                  --enablerepo mysql-innovation-community --enablerepo mysql-tools-innovation-community
 ```
 
-## Preparing the Database
+## Prepare the database
 
-We need to start MySQL and change the `root` password:
+Start MySQL using `systemctl`:
 
 ```console
 sudo systemctl start mysqld
 ```
 
-By default, MySQL generates a password for the `root` user:
+By default, MySQL generates a password for the `root` user. Use the `grep` command to find the generated password:
 
 ```console
 sudo grep password /var/log/mysqld.log 
+```
+
+The password is shown in the output (your password will be different). 
+
+```output
 2023-09-06T08:47:37.029047Z 6 [Note] [MY-010454] [Server] A temporary password is generated for root@localhost: cMP,ycA01Yoq
 ```
 
-Let's connect to the MySQL instance using MySQL Shell:
+Make a note of the `root` password. 
+
+Connect to the MySQL instance using MySQL Shell:
 
 ```console
 mysqlsh --sql mysql://root@localhost
+```
+
+Proceed through the questions. Enter your saved `root` password and answer `No` that you don't want to save it. 
+
+You will end up at a MySQL prompt that includes ` SQL >` 
+
+```output
 Please provide the password for 'root@localhost': ************
 Save password for 'root@localhost'? [Y]es/[N]o/Ne[v]er (default No): no
 Error during auto-completion cache update: You must reset your password using ALTER USER statement before executing this statement.
@@ -94,42 +116,49 @@ No default schema selected; type \use <schema> to set one.
  MySQL  localhost  SQL > 
 ```
 
-And change the password:
+At the SQL prompt change the password:
 
 ```sql
-SQL > set password='MyPassw0rd!';
+set password='MyPassw0rd!';
+```
+
+The output will be similar to:
+```output
 Query OK, 0 rows affected (0.0247 sec)
 ```
 
-We can create a database for WordPress and a dedicated user:
+Next, create a database for WordPress and a dedicated user. Make sure you are entering these commands at the ` SQL >` prompt:
 
 ```sql
-SQL > create database wordpress;
-SQL > create user wordpress identified by 'WPpassw0rd!';
-SQL > grant all privileges on wordpress.* to wordpress;
+create database wordpress;
+create user wordpress identified by 'WPpassw0rd!';
+grant all privileges on wordpress.* to wordpress;
 ```
 
-## Installing the Webserver
+The database name `wordpress`, the user name `wordpress`, and the new password will be used later during WordPress installation. 
 
-We use Apache as webserver. We need to install httpd, PHP and several PHP modules:
+
+## Install the Apache server
+
+WordPress can use Apache as a web server. Install `httpd`, PHP, and several PHP modules:
 
 ```console
 sudo yum install -y httpd php php-mysqlnd php-zip php-gd php-mbstring php-xml php-json
 ```
 
-## Staring Apache
+## Start Apache 
 
-Now we need to start apache and configure the system to start it again in case of a reboot or a crash:
+You can now start Apache and configure the system to restart it after reboot:
 
 ```console
 sudo systemctl enable httpd --now
 ```
 
-## Security
+## Configure Security
 
-We need to open the firewall to let http (and eventually https) connections to reach our webserver.
+To reach the web server from your local machine, you need to modify the firewall to allow http and https connections to reach the web server.
 
-So we open the firewall:
+Open the firewall using the commands:
 
 ```console
 sudo firewall-cmd --permanent --add-port=80/tcp
@@ -137,69 +166,72 @@ sudo firewall-cmd --permanent --add-port=443/tcp
 sudo firewall-cmd --reload
 ```
 
-We also need to modify the Security List in OCI's console.
+You also need to modify the security list in the OCI console.
 
-We select the Compute Instance's subnet:
+Select the compute instance's subnet:
 
 ![img1](images/01.png)
 
-Then we click on the default security list:
+Click on the default security list.
 
 ![img1](images/02.png)
 
-And we add a new rule to allow http and https connections (TCP ports 80 and 443) for the world (0.0.0.0/0):
+Add a new rule to allow http and https connections (TCP ports 80 and 443) for the world (0.0.0.0/0):
 
 ![img1](images/03.png)
 
-When done, we can try to use the compute instance's public ip in a browser and we should see the following page:
+When you are done, enter the compute instance's public IP address in your browser and you should see the following page:
 
 ![img1](images/04.png)
 
-### SE Linux
+### Configure SE Linux
 
-We also need to make some modification to SE Linux to allow Apache to write data and to connect to MySQL:
+You also need to make modifications to SE Linux to allow Apache to connect and write data to MySQL:
+
+Run the commands:
 
 ```console
 sudo chcon -t httpd_sys_rw_content_t /var/www/html -R
 sudo setsebool -P httpd_can_network_connect_db 1
 ```
 
-## Installing WordPress
+## Install WordPress
 
-We can download the lastest WordPress release using the following command:
+You can download the latest WordPress release using the commands below.
+
+Download the latest release:
 
 ```console
 curl -O https://wordpress.org/latest.tar.gz
 ```
 
-And we extract the previous tarball in the web root directory:
+Extract the downloaded file in the web server root directory:
 
 ```console
 sudo tar zxf latest.tar.gz -C /var/www/html/ --strip 1
 ```
 
-We need to adjust the ownership of the newly extracted files:
+Adjust the ownership of the newly installed files:
 
 ```console
 sudo chown apache. -R /var/www/html/
 ```
 
-We also need to create a new folder for the eventual uploads and set the ownership correctly:
+Create a new folder for future content uploads and set the ownership:
 
 ```console
 sudo mkdir /var/www/html/wp-content/uploads
 sudo chown apache:apache /var/www/html/wp-content/uploads
 ```
 
-In the browser where we use the Compute Instance's public IP, we just need to refresh the page and
-we should now see the WordPress installation wizard:
+In the browser where you entered the public IP, refresh the page and you should now see the WordPress installation wizard:
 
 ![img1](images/05.png)
 
-Then we need to use the credentials we have created in MySQL for the WordPress user and use `127.0.0.1` as database host:
+Next, use the database name, user name, and password you created in MySQL and use `127.0.0.1` as database host:
 
 ![img1](images/06.png)
 
-Just follow the next steps in the Wizard and at the end of it, you should see your WordPress instance using MySQL on an ARM Shape (Ampere always Free) on OCI:
+Follow the next steps in the Wizard and at the end you should see your WordPress instance using MySQL running on an Arm Shape (Ampere always free) on OCI:
 
 ![img1](images/07.png)

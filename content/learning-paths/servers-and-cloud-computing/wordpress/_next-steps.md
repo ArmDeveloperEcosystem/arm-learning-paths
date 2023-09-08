@@ -8,6 +8,10 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
 
 further_reading:
     - resource:
+        title: Learn Faster to Grow Faster
+        link: https://wordpress.com/learn/
+        type: website
+    - resource:
         title: Deploy Wordpress on OCI with Terraform
         link: https://blogs.oracle.com/mysql/post/wordpress-with-mysql-on-oci-always-free
         type: blog
