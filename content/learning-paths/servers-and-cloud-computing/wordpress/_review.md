@@ -2,31 +2,31 @@
 review:
     - questions:
         question: >
-           To allow connections to the Webserver, it's only required to open the OCI firewall (security list) for http(s) ? 
+           To allow connections to the web server, all you need to do is open the OCI firewall (security list) for http(s) ? 
         answers:
             - "True"
             - "False"
         correct_answer: 2                    
         explanation: >
-            It's also required to allow connections in the local firewall of the compute instance.
+            You must also open connections in the local firewall of the compute instance.
 
     - questions:
         question: >
-            Is a Webserver required to use WordPress ?
+            Is a web server required to use WordPress?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1                  
         explanation: >
-           Indeed, a Webserver is required to interpret PHP scripts included in WordPress. In this
-           learning path, we used Apache, but any other webserver, ngix for example, could have
-           been used.
+           A web server is required to interpret PHP scripts included in WordPress. In this
+           Learning Path, you used Apache, but other web servers, such as Nginx, can be used.
+           
     - questions:
         question: >
-            Is a database required to use WordPress ?
+            Is a database required to use WordPress?
         answers:
-            - "True"
-            - "False"
+            - "Yes"
+            - "No"
         correct_answer: 1
         explanation: >
             Yes, WordPress requires a RDBMS. The preferred database to use with WordPress is MySQL.

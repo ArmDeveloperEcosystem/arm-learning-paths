@@ -1,7 +1,6 @@
 ---
 title: Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform
 
-description: Learn how to automate the creation of OCI Arm virtual machines using Terraform
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on Oracle Cloud Infrastructure (OCI) using Terraform.
