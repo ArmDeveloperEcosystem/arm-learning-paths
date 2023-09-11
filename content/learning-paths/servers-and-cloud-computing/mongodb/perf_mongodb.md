@@ -19,7 +19,7 @@ Install the appropriate run-time environment to be able to use the performance t
 sudo apt-get install -y openjdk-18-jre
 {{< /tab >}}
 {{< tab header="RHE/Amazon" >}}
-su -c "yum install -y java-1.18.0-openjdk"
+sudo yum install java-17-openjdk
 {{< /tab >}}
 {{< /tabpane >}}
 

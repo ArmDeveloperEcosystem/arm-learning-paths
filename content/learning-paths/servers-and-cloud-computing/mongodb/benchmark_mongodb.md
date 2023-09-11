@@ -37,7 +37,7 @@ sudo apt install python -y
 {{< /tab >}}
 {{< tab header="RHE/Amazon" >}}
 sudo yum check-update
-sudo yum install python
+sudo yum install python2
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -46,6 +46,11 @@ For Ubuntu 22.04 the `python` package may not be found. You can install Python 2
 ```console
 sudo apt install python2 -y
 sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+```
+
+For Red Hat you can configure `python2` to be the default `python` using:
+```console
+sudo alternatives --set python /usr/bin/python2
 ```
 {{% /notice %}}
 
