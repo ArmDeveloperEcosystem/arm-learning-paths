@@ -32,7 +32,7 @@ The [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-perfor
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring. 
 These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation. 
 
-Arm Performance Libraries are available for use on Windows 11 on Arm, macOS (Apple Silicon), and Linux (AArch64) hosts. 
+Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
 ## Windows {#windows}
 

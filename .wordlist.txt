@@ -1542,3 +1542,5 @@ swappiness
 THP
 ElastiCache
 MemoryDB
+AMBA
+LinuxPerf

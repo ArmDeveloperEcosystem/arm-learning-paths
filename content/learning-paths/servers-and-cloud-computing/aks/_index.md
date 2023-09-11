@@ -26,6 +26,8 @@ tools_software_languages:
     - Terraform
     - Kubernetes
     - Azure
+    - WordPress
+    - MySQL
 
 operatingsystems:
     - Linux

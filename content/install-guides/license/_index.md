@@ -29,3 +29,16 @@ The licenses can be set up as:
 * Cloud license server, a license server managed by Arm, accessible from anywhere.
 
 Legacy products do not support UBL licensing and use FlexLM licensing instead.
+
+
+| Arm Development Tool                | Earliest version supporting UBL | SSK | HSK |
+| :---------------------------------: | :-----------------------------: | :-: | :-: |
+| Arm Compiler for Embedded           | 6.18                            |  X  |  X  |
+| Arm Compiler for Embedded FuSa 6.16 | 6.16.2                          |  X  |  X  |
+| Arm Development Studio (Gold)       | 2022.0                          |  X  |  X  |
+| Arm Development Studio (Platinum)   | 2022.a                          |  X  |  X  |
+| Keil MDK                            | 5.37                            |  X  |  X  |
+| Arm Fast Models                     | 11.17.1                         |     |  X  |
+| Arm Socrates                        | 1.7.0                           |     |  X  |
+| Arm Performance Models Library      | 1.2                             |     |  X  |
+| AMBA Viz                            | 1.1.25                          |     |  X  |
