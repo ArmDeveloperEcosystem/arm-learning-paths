@@ -19,7 +19,7 @@ Apache Maven:
 
 ```bash
    cd ~
-   wget http://ftp.heanet.ie/mirrors/www.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
+   wget https://archive.apache.org/dist/maven/maven-3/3.1.1/binaries/apache-maven-3.1.1-bin.tar.gz
    sudo tar xzf apache-maven-*-bin.tar.gz -C /usr/local
    cd /usr/local
    sudo ln -s apache-maven-* maven
@@ -27,18 +27,32 @@ Apache Maven:
    export M2_HOME=/usr/local/maven
    export PATH="$M2_HOME/bin:$PATH"
 ```
+
 Python 2.7
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" >}}
 sudo apt-get update
-sudo apt install python
+sudo apt install python -y
 {{< /tab >}}
 {{< tab header="RHE/Amazon" >}}
 sudo yum check-update
-sudo yum install python
+sudo yum install python2
 {{< /tab >}}
 {{< /tabpane >}}
+
+{{% notice  Python Note%}}
+For Ubuntu 22.04 the `python` package may not be found. You can install Python 2.7 using:
+```console
+sudo apt install python2 -y
+sudo update-alternatives --install /usr/bin/python python /usr/bin/python2 1
+```
+
+For Red Hat you can configure `python2` to be the default `python` using:
+```console
+sudo alternatives --set python /usr/bin/python2
+```
+{{% /notice %}}
 
 ## Setup YCSB 
 
@@ -118,5 +132,5 @@ At the end of each test, statistics are printed to the console. Shown below is t
 ```
 ## Other tests
 
-For instructions on running any other tests or more details on the metrics reported, refer to the [github project for the YCSB](https://github.com/brianfrankcooper/YCSB/wiki/).
+For instructions on running any other tests or more details on the metrics reported, refer to the [GitHub project for the YCSB](https://github.com/brianfrankcooper/YCSB/wiki/).
 
