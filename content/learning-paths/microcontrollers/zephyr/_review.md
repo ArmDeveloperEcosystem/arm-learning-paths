@@ -13,15 +13,23 @@
 review:
     - questions:
         question: >
-            Zephyr RTOS is supported on Arm architecture?
+            Is the Zephyr RTOS open source?
         answers:
-            - "True"
-            - "False"
+            - "Yes"
+            - "No"
         correct_answer: 1                  
         explanation: >
-            Zephyr kernel and SDK are both fully supported on Arm architecture.
-
-
+            The source is freely available for use under the Apache License 2.0.
+    - questions:
+        question: >
+            Has Zephyr RTOS been ported to Corstone-300?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 1                  
+        explanation: >
+            This platform is supported (as MPS3 AN547). For a full list of supported Arm platforms, see https://docs.zephyrproject.org/latest/boards/arm/index.html
+        
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
