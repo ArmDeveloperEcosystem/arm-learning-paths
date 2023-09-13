@@ -13,11 +13,11 @@ The Zephyr RTOS is based on a small-footprint kernel designed for use on resourc
 
 You can get the Zephyr source, install the Zephyr SDK, build sample applications, and run them on the [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Fixed Virtual Platform (FVP).
 
-## Before you begin 
+## Host platform
 
-The instructions assume an Ubuntu Linux host machine or use of Arm Virtual Hardware (AVH).
+Zephyr SDK is available on Windows, Linux, and MacOS hosts. However the FVP is only available for Windows and Linux hosts.
 
-The Ubuntu version can be 20.04 or 22.04. The `x86_64` architecture must be used because the Corstone-300 FVP is not currently available for the Arm architecture. You will need a Linux desktop to run the FVP because it opens `xterm` windows to print output from the software applications. 
+These instructions assume an Ubuntu Linux host machine or use of Arm Virtual Hardware (AVH).
 
 ## Corstone-300 FVP {#fvp}
 
@@ -73,18 +73,13 @@ You need the Zephyr Software Development Kit (SDK) to build Zephyr applications.
 
 It contains the compiler, assembler, linker and other programs needed for building Zephyr applications. 
 
-{{% notice Note %}}
-The Zephyr SDK is supported on Arm-based hosts, but you must use the `x86_64` version to run applications on the FVP. 
-{{% /notice %}}
-
-Download, verify, extract and setup the Zephyr SDK bundle. The current latest version is `0.15.2`. You can check for newer versions in the [Zephyr project on GitHub](https://github.com/zephyrproject-rtos/sdk-ng/releases).
+Download, verify, extract and setup the Zephyr SDK bundle, downloadable from the [Zephyr project on GitHub](https://github.com/zephyrproject-rtos/sdk-ng/releases).
 
 ```bash { env_source="/shared/zephyrproject/.venv/bin/activate" }
 cd ~
-wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.15.2/zephyr-sdk-0.15.2_linux-x86_64.tar.gz
-wget -O - https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.15.2/sha256.sum | shasum --check --ignore-missing
-tar xf zephyr-sdk-0.15.2_linux-x86_64.tar.gz
-cd zephyr-sdk-0.15.2
+wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.16.0/zephyr-sdk-0.16.0_linux-x86_64.tar.xz
+tar -xf zephyr-sdk-0.16.0_linux-x86_64.tar.xz
+cd zephyr-sdk-0.16.0
 ./setup.sh -t all
 cd ~
 ```
@@ -100,38 +95,42 @@ cd zephyrproject/zephyr
 west build -p auto -b mps3_an547 samples/hello_world
 ```
 
+{{% notice Note %}}
+[MPS3](https://developer.arm.com/Tools%20and%20Software/MPS3%20FPGA%20Prototyping%20Board) [AN547](https://developer.arm.com/downloads/-/download-fpga-images) is the hardware twin of the Corstone-300 FVP.
+{{% /notice %}}
+
+
 The application binaries are placed in the `~/zephyrproject/zephyr/build/zephyr/` directory.
 
-## Run Zephyr application on Corstone-300 FVP
+## Run Zephyr application on Corstone-300 FVP {#runzephyr}
 
-Two options are provided to run the Zephyr application on the Corstone-300 FVP, your own Linux machine or Arm Virtual Hardware. 
-
-Select either option. 
-
-### Using your computer with the FVP installed 
-
-To run on your computer: 
+### Using local machine with the FVP installed 
 
 ```fvp { fvp_name="FVP_Corstone_SSE-300_Ethos-U55",cwd="/shared/zephyrproject/zephyr" }
-FVP_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf --simlimit 24
+FVP_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf -C mps3_board.visualisation.disable-visualisation=1 --simlimit 30
 ```
-
 ### Using Arm Virtual Hardware
 
 To run on AVH:
 
 ```console
-VHT_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf --simlimit 24
+VHT_Corstone_SSE-300_Ethos-U55 -a build/zephyr/zephyr.elf -C mps3_board.visualisation.disable-visualisation=1 --simlimit 30
 ```
+
+{{% notice Optional switches %}}
+`-C mps3_board.visualisation.disable-visualisation=1` disables the FVP visualization. This can speed up launch time for the FVP.
+
+`--simlimit 30` terminates the FVP after 30 seconds. Remove or extend if necessary. The FVP can also be manually terminated with `Ctrl+C`.
+{{% /notice %}}
 
 You will see telnet terminal windows pop up from the running simulation on the FVP with the output similar to:
 
 ```output
-*** Booting Zephyr OS build zephyr-v3.2.0-881-g35ec706d82a5  ***
+*** Booting Zephyr OS build zephyr-v3.4.0-3573-g79158a777b37  ***
 Hello World! mps3_an547
 ```
 
-You have successfully built a Zephyr application and run it on the Corstone-300. 
+You have successfully built a Zephyr application and run it on the Corstone-300.
 
 ## Additional applications
 
@@ -143,5 +142,4 @@ To build the [Dining Philosophers](https://docs.zephyrproject.org/latest/samples
 west build -p auto -b mps3_an547 samples/philosophers
 ```
 
-Run the new executable at `build/zephyr/zephyr.elf` on the FVP. 
-
+Run the new executable at `build/zephyr/zephyr.elf` on the FVP as [above](#runzephyr). The output will be seen in a terminal.
