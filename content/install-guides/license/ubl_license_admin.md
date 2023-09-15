@@ -1,5 +1,5 @@
 ---
-title: User-Based License (UBL) server setup
+title: UBL Local License Server (LLS) Setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author_primary: Ronan Synnott
@@ -11,20 +11,17 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-{{% notice License Administration%}}
-The below is for those who are setting up the UBL license server, not end users.
-{{% /notice %}}
 
-## License portal
+## Arm license portal
 
 To generate your licenses you need access to the Arm user-based licensing portal, with the account that the licenses were assigned to.
 
-Verify you can access the following before you begin.
+Verify you can access the following and see your assigned licenses before you begin.
 ```url
 https://developer.arm.com/support/licensing/user-based
 ```
 
-### License server set up
+## License server set up
 
 UBL license server software is supported on the following host operating systems:
 * Red Hat Enterprise Linux / CentOS 7 and 8
@@ -49,13 +46,14 @@ sudo ./flexnetls-armlmd-1.2023060.0/install_license_server
 ```
 Additional options are described in the [License Server Administration Guide](https://developer.arm.com/documentation/107573/latest/Getting-started-with-user-based-licensing/Install-your-license-server).
 
-The installer will automatically start the license server software. You will see the following output:
+The installer will automatically start the license server software. When complete, you will see output similar to:
 ```output
 License server service flexnetls-armlmd is starting, and will start automatically on system start-up.
 Waiting for license server... (up to 120 seconds, or press CTRL-C to stop waiting)
 
 License server running and ready to accept requests at http://<external server name or IP address>:7070
 ```
+
 ### Add install directory to PATH
 
 It is recommended to add the server install directory to the `PATH` so that license server commands can be easily called. For example the default location:
@@ -69,6 +67,12 @@ You must set an appropriate administrator password to be able to execute subsequ
 ```console
 armlm_change_admin_password
 ```
+{{% notice Note %}}
+The administrator password is only stored locally. If you forget the password, you must uninstall and reinstall the license server.
+
+See the [License Server Administrator Guide](https://developer.arm.com/documentation/107573/1-2023600/License-server-administration/Reset-the-administrator-password).
+{{% /notice %}}
+
 
 ### Verify server hostid
 
@@ -111,6 +115,7 @@ https://developer.arm.com/support/licensing/user-based
 ```
 Navigate to `Manage License Servers`, and click on `Register Local License Server`. Upload the identity file.
 
+
 ### Add licenses to server {#addlicenses}
 
 Click on `Add Products` and select the quantity of the available licenses to assign to that server. When satisfied, click on `Add Products` and a license file will be generated.
@@ -127,41 +132,6 @@ Licenses have been successfully updated. No confirmation is required.
 ```
 The licenses are now ready to use by the [end-users](../ubl_license_enduser).
 
-## Monitor license server status and usage
-
-### Status
-To check the status of the server application, use:
-```console
-armlm_check_server_status
-```
-A working server will output:
-```output
-License server running and ready to accept requests at http://<external server name or IP address>:7070
-```
-
-### License usage
-To list the number of licenses (total and used) use:
-```console
-armlm_list_products
-```
-Example output:
-```output
-1 product found on license server:
-
-Hardware Success Kit (Early Access), HWSKT-EAC0, 2 seats, 1 seat used
-    Order Id: 0000000000, valid until: 2023-Dec-31 23:59:59 UTC, 2 seats, 1 seat used
-```
-### Active users
-To list the current active users of the licenses use:
-```console
-armlm_list_users
-```
-Example output:
-```output
-User   Product Code   Product Name                          Last Access                Held Until
-----   ------------   ------------                          -----------                ----------
-usr1   HWSKT-EAC0     Hardware Success Kit (Early Access)   2023-Jun-13 12:40:30 UTC   2023-Jun-20 12:40:30 UTC
-```
 
 ## Changing installed licenses per server
 
@@ -189,3 +159,42 @@ You must delete all licenses from a server before decommissioning.
 
 If the license server is no longer in use, you can delete it from the portal by clicking `Obsolete server`.
 
+
+## Monitoring license server status and usage
+
+### Status
+
+To check the status of the server application, use:
+```console
+armlm_check_server_status
+```
+A working server will output:
+```output
+License server running and ready to accept requests at http://<external server name or IP address>:7070
+```
+
+### License usage
+
+To list the number of licenses (total and used) use:
+```console
+armlm_list_products
+```
+Example output:
+```output
+1 product found on license server:
+
+Hardware Success Kit (Early Access), HWSKT-EAC0, 2 seats, 1 seat used
+    Order Id: 0000000000, valid until: 2023-Dec-31 23:59:59 UTC, 2 seats, 1 seat used
+```
+### Active users
+
+To list the current active users of the licenses use:
+```console
+armlm_list_users
+```
+Example output:
+```output
+User   Product Code   Product Name                          Last Access                Held Until
+----   ------------   ------------                          -----------                ----------
+usr1   HWSKT-EAC0     Hardware Success Kit (Early Access)   2023-Jun-13 12:40:30 UTC   2023-Jun-20 12:40:30 UTC
+```
