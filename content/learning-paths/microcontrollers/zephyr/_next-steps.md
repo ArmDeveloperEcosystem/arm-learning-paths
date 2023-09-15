@@ -27,7 +27,7 @@ further_reading:
         type: documentation
     - resource:
         title: List of Arm boards and platforms supported by Zephyr
-        link: https://docs.zephyrproject.org/3.2.0/boards/arm/index.html
+        link: https://docs.zephyrproject.org/latest/boards/arm/index.html
         type: website
 
 # ================================================================================
