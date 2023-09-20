@@ -1,5 +1,5 @@
 ---
-title: Integrate Arm Virtual Hardware into CI/CD workflow (1 of 2)
+title: Integrate Arm Virtual Hardware into CI/CD workflow 1
 
 minutes_to_complete: 30
 
