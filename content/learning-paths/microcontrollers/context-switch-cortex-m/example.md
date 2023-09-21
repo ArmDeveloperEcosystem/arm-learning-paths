@@ -46,3 +46,17 @@ The executable is intended for running on an Armv8-M FVP model supplied with Arm
 3.	Click on Debug to start debugging. The executable image will be downloaded to the target and the program counter set to main.
 4.	Run the executable (press F8). Text output appears in the Target Console view.
 
+## Output in Target Console
+
+This is part of the output in the Target Console view shown when running this example:
+
+```
+Pentagonal number: 2262 
+Pentagonal number: 2380 
+Pentagonal number: 2501 
+...
+Fibonacci number: 0 
+Fibonacci number: 1 
+Fibonacci number: 2 
+Fibonacci number: 3 
+```

@@ -6,7 +6,6 @@ minutes_to_complete: 15
 who_is_this_for: This session is for software developers who would like to understand how context-switching operations are handled in  Cortex-M processors in a baremetal environment.
 
 learning_objectives: 
-Upon completion of this learning path, you will be able to:
     - Understand the basics of context switching operation
     - Learn how to program MPU (Memory Protection Unit)?
     - Comprehend the usage of SysTick exception with reference to context switching operations

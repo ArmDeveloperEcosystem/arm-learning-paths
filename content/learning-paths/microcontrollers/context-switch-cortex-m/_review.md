@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 2             
         explanation: >
-            False, SysTick timer is a 24-bit down counter in-built within Cortex-M processors.
+            SysTick timer is a 24-bit down counter in-built within Cortex-M processors.
     - questions:
         question: >
             The MPU regions of Cortex-M processors based of Armv8-M architecture can be programmed in:

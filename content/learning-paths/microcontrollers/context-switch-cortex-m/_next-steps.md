@@ -17,6 +17,15 @@ recommended_path: "/learning-paths/microcontrollers/tfm/"
     # Blog about related topics                 (type: blog)
     # General online references                 (type: website) 
 
+further_reading:
+- resource:
+    title: Learn the Architecture - M-profile
+    link: https://www.arm.com/architecture/learn-the-architecture/m-profile
+    type: documentation
+- resource:
+    title: Learn the Architecture - M-profile - Open source examples
+    link: https://github.com/ARM-software/m-profile-user-guide-examples
+    type: Open-source example projects
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
