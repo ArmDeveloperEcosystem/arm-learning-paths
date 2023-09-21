@@ -18,10 +18,6 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
 
 further_reading:
     - resource:
-        title: Arm Documentation
-        link: https://developer.arm.com/documentation/
-        type: documentation
-    - resource:
         title: Linux perf_events documentation
         link: https://www.man7.org/linux/man-pages/man2/perf_event_open.2.html
         type: documentation
