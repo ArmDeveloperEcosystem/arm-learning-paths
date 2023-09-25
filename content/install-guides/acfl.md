@@ -85,16 +85,16 @@ Fetch the `ACfL` installers:
 #### Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.04.1_Ubuntu-22.04_aarch64.tar
+wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
 ```
 #### Red Hat Linux:
 ```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.04.1_RHEL-8_aarch64.tar
+wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
 ```
 
 ### Install
 
-To install the `Arm Compiler for Linux` package on your 64-bit Linux Arm machine extract the package and run the installation script. 
+To install the `Arm Compiler for Linux` package on your 64-bit Linux Arm machine extract the package and run the installation script.
 
 Each command sequence includes accepting the license agreement to automate the installation and installing the `modules` software.
 
@@ -102,25 +102,25 @@ Each command sequence includes accepting the license agreement to automate the i
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
-tar -xvf arm-compiler-for-linux_23.04.1_Ubuntu-22.04_aarch64.tar
-cd ./arm-compiler-for-linux_23.04.1_Ubuntu-22.04
-sudo ./arm-compiler-for-linux_23.04.1_Ubuntu-22.04.sh --accept
+tar -xvf arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
+cd ./arm-compiler-for-linux_23.10_Ubuntu-22.04
+sudo ./arm-compiler-for-linux_23.10_Ubuntu-22.04.sh --accept
 ```
 
 #### Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
-tar -xvf arm-compiler-for-linux_23.04.1_RHEL-8_aarch64.tar
-cd arm-compiler-for-linux_23.04.1_RHEL-8
-sudo ./arm-compiler-for-linux_23.04.1_RHEL-8.sh --accept
+tar -xvf arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
+cd arm-compiler-for-linux_23.10_RHEL-8
+sudo ./arm-compiler-for-linux_23.10_RHEL-8.sh --accept
 ```
 
 ### Set up environment
 
 `Arm Compiler for Linux` uses environment modules to dynamically modify your user environment. Refer to the [Environment Modules documentation](https://lmod.readthedocs.io/en/latest/#id) for more information.
 
-Set up the environment, for example, in your `.bashrc` and add module files. 
+Set up the environment, for example, in your `.bashrc` and add module files.
 
 #### Ubuntu Linux:
 
@@ -147,13 +147,13 @@ module avail
 To configure Arm Compiler for Linux:
 
 ```bash { env_source="~/.bashrc" }
-module load acfl/23.04.1
+module load acfl/23.10
 ```
 
 To configure GCC:
 
 ```bash { env_source="~/.bashrc" }
-module load gnu/12.2.0
+module load gnu/12.3.0
 ```
 `ACfL` is now [ready to use](#armclang).
 
