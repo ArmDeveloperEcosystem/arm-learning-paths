@@ -8,7 +8,7 @@ weight: 4 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-You can run SVE instructions if you don't have SVE capable hardware using the Arm Instruction Emulator (ArmIE). 
+There are two ways to run SVE instructions if you don't have SVE capable hardware: QEMU and the Arm Instruction Emulator (ArmIE). Each of these is covered below. 
 
 The steps shown are for an Arm v8-A system with Ubuntu 22.04 and no SVE support. 
 
@@ -71,9 +71,27 @@ Illegal instruction (core dumped)
 
 An illegal instruction message confirms the host does not support SVE. 
 
+## QEMU 
+
+You can run applications containing SVE instructions without SVE capable hardware using [QEMU](https://www.qemu.org/), a generic and open source machine emulator and virtualizer.
+
+Install `qemu-user` to run the example on processors which do not support SVE:
+
+```bash {  command_line="user@localhost" }
+sudo apt install qemu-user -y
+```
+Run the example application with a vector length of 256 bits:
+
+```bash {  command_line="user@localhost | 2"  }
+qemu-aarch64 -cpu max,sve-default-vector-length=256 ./sve_add.exe 
+Done.
+```
+
+The application now runs and prints the expected message.
+
 ## Arm Instruction Emulator
 
-You can run the application containing SVE instructions using the the Arm Instruction Emulator.
+You can also run the application containing SVE instructions using the the Arm Instruction Emulator.
 
 Download and install the [Arm Instruction Emulator](https://developer.arm.com/downloads/-/arm-instruction-emulator) (see [installation instructions](/install-guides/armie) ) on any Arm v8-A system. The Arm Instruction Emulator intercepts and emulates unsupported SVE instructions. It also support plugins for application analysis.
 
