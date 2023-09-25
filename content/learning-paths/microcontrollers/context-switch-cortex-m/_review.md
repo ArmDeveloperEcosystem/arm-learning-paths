@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            A SysTick timer is a 32-bit down counter?
+            A SysTick timer is a 32-bit down counter.
         answers:
             - "True"
             - "False"
