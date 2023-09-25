@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Which of the following is not an option for accessing HW counters.
+            Which of the following is not an option for accessing HW counters
         answers:
             - "PAPI"
             - "Assembly"
@@ -41,7 +41,7 @@ review:
             - "False"
         correct_answer: 1                    
         explanation: >
-            Since counters take up area on a die, the number of counters supported is usually limited to 4-8.
+            Because counters take up area on a die, the number of counters supported is usually limited to 4-8.
 
 
 

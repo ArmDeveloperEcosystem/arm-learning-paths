@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Installing PAPI
 
-The [PAPI installation documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI) covers the installation of PAPI, so it will not be discussed here.
+The [PAPI installation documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI) covers the installation of PAPI so it will not be discussed here.
 
 ## Using PAPI to instrument counters
 
@@ -72,7 +72,7 @@ int main() {
 }
 ```
 
-At the top of the file, there is a function called `code_to_measure`. This is called in `main` and is the function that events will be counted through. At the top of `main`, there is a PAPI library initialization (`PAPI_library_init`). Under that initialization an EventSet is created (`PAPI_create_eventset`). The Event Set is a PAPI construct that allows for the grouping of a set of HW events that will be counted together. Once this Event Set is created, two events are added to the Event Set with a pair of calls to `PAPI_add_event`. The first call adds the PAPI preset event `PAPI_TOT_INS`. This preset event is mapped down to the Arm INST_RETIRED event (`0x08`). Preset events are included in PAPI as a convenience. It is also possible to add events using event codes. This is the case in the second call to `PAPI_add_event`. Here, the event code `0x40000007` is used. This is the PAPI event code for the Arm LD_SPEC event. However, the Arm event ID is actually `0x70`, not `0x40000007`. This is because the event code that needs to be passed into `PAPI_add_event` is a PAPI specific event code. The easiest way to get the PAPI event code is to use `papi_avail` utility as shown below.
+At the top of the file there is a function called `code_to_measure`. This is called in `main` and is the function that events will be counted through. At the top of `main`, there is a PAPI library initialization (`PAPI_library_init`). Under that initialization an EventSet is created (`PAPI_create_eventset`). The Event Set is a PAPI construct that allows for the grouping of a set of HW events that will be counted together. Once this Event Set is created, two events are added to the Event Set with a pair of calls to `PAPI_add_event`. The first call adds the PAPI preset event `PAPI_TOT_INS`. This preset event is mapped down to the Arm INST_RETIRED event (`0x08`). Preset events are included in PAPI as a convenience. It is also possible to add events using event codes. This is the case in the second call to `PAPI_add_event`. Here the event code `0x40000007` is used. This is the PAPI event code for the Arm LD_SPEC event. However, the Arm event ID is actually `0x70`, not `0x40000007`. This is because the event code that needs to be passed into `PAPI_add_event` is a PAPI specific event code. The easiest way to get the PAPI event code is to use `papi_avail` utility as shown below.
 
 
 ``` console
@@ -118,7 +118,7 @@ Unit Masks:
 --------------------------------------------------------------------------------
 ```
 
-As shown above, the PAPI event code for LD_SPEC is `0x40000007`. This code is mapped down to the Arm LD_SPEC event (`0x70`). After the events are added, `PAPI_start` is used to start the counters, and `PAPI_stop` is used to stop them. Any code that is executed in between these is the code that will be measured. In this example, it's the function `code_to_measre`. Finally, `PAPI_read` is called to read the counts for the events in the Event Set.
+As shown above, the PAPI event code for LD_SPEC is `0x40000007`. This code is mapped down to the Arm LD_SPEC event (`0x70`). After the events are added, `PAPI_start` is used to start the counters and `PAPI_stop` is used to stop them. Any code that is executed in between these actions is the code that will be measured. In this example, it's the function `code_to_measre`. Finally, `PAPI_read` is called to read the counts for the events in the Event Set.
 
 To compile `papi_example.c`, run the following command (also noted in the PAPI documentation).
 
