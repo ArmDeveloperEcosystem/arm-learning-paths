@@ -36,25 +36,25 @@ If you decide you need add counter instrumentation to your source code, there ar
 
 If all you need to do is count time, you can use a system timer instead of the PMU. This requires the least amount of code and is the quickest way to get started.
 
-This Learning Path contains a walkthrough of using the system counter in the assembly code section.
+This Learning Path contains an example of using a system counter in the assembly code section.
 
 ### Performance Application Programming Interface (PAPI)
 
 [The Performance Application Programming Interface (PAPI)](https://icl.utk.edu/papi/) is a tool for instrumenting hardware and software events in your code. It supports both C/C++ and Fortran. PAPI relies on a library called [libpfm4](https://sourceforge.net/p/perfmon2/libpfm4/ci/master/tree/) which uses the Linux perf_events infrastructure to configure and count events. If your platform is not listed as supported by libpfm4, it doesn't mean PAPI won't work. It is worth trying PAPI even if you do not see your specific Arm CPU implementation listed as supported. Another advantage of PAPI is that it is capable of managing event multiplexing for you.
 
-This Learning Path contains a walkthrough of a PAPI based instrumentation example.
+This Learning Path contains a PAPI based instrumentation example.
 
 ### Linux perf_event_open system call
 
 The Linux perf_events infrastructure is another way hardware and software events can be counted. In fact, libpfm4 and Linux Perf both use this infrastructure. The `perf_event_open` system call can be used to instrument counters in your code. However, if multiplexing of events is required, you will need to implement that yourself. The documentation on how to use this interface isn't as good as PAPI and it may require some trial and error.
 
-This Learning Path contains a walkthrough of a `perf_event_open` based instrumentation example.
+This Learning Path contains a `perf_event_open` based instrumentation example.
 
 ### Arm assembly
 
 Hardware counters can be enabled and configured using assembly code. Counting events this way requires knowledge of the specific PMU registers that are required to enable and configure the counters of interest. This method can be useful in an environment where there is no operating system, or if there is a system limitation or bug preventing the use of tools like PAPI or the Linux perf_events infrastructure. This method requires that you implement multiplexing if you need to count more events than the available CPU counters.
 
-This Learning Path contains a walkthrough of an assembly based instrumentation example.
+This Learning Path contains an assembly based instrumentation example.
 
 ### eBPF
 

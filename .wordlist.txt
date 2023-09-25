@@ -1580,3 +1580,17 @@ wzr
 Phrack
 ASLR
 DEP
+PAPI
+papi
+edu
+icl
+utk
+wikipedia
+EventSet
+IPC
+TRM
+ORing
+MSR
+libpfm
+eBPF
+JNI
