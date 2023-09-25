@@ -1,0 +1,74 @@
+diff --git a/content/learning-paths/servers-and-cloud-computing/csp/alibaba.md b/content/learning-paths/servers-and-cloud-computing/csp/alibaba.md
+index c5c2976..899977f 100644
+--- a/content/learning-paths/servers-and-cloud-computing/csp/alibaba.md
++++ b/content/learning-paths/servers-and-cloud-computing/csp/alibaba.md
+@@ -25,6 +25,7 @@ If using an organization's existing account, you will likely need to consult wit
+ 
+ Alibaba Cloud offers a wide range of [instance families](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/instance-family), covering all performance (and pricing) points. Select an appropriate Arm-based type for your needs. You may also wish to note in which [region](https://ecs-buy.aliyun.com/instanceTypes/#/instanceTypeByRegion) the instance family is available.
+ 
++
+ You then select an `instance size`, which will be one of a number of pre-defined configurations of a number of processors and available memory. If you are unsure what your compute needs are, don't worry, you can easily experiment with different configurations.
+ 
+ ## Create your ECS instance
+@@ -33,36 +34,61 @@ The easiest way to launch your instance is via the [ECS Console](https://ecs.con
+ 
+ Navigate to `Elastic Compute Service` by search or the menu.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/588897d0-6c77-ee64-c7aa-235cbf460426.png "Navigate to the ECS Dashboard")
++
+ Use the `Create ECS Instance` button to get started. Select `Custom Launch` configuration.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/bf7f23d0-2afb-6a84-60aa-78dc1c27be39.png "Create Instance")
++
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/2bd139ad-a28b-8e82-8dae-c0d7e54a4ebc.png "Custom Launch")
++
+ ### Select a Billing Method
+ 
+ `Subscription`, `Pay-as-you-go`, or `Preemptible Instance` options are available. If you are experimenting initially, select `Preemptible Instance` for the lowest cost. You will be prompted for pricing options later.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/99554b4b-5f15-2dce-4de4-c59e26a3a90e.png "Select a Billing Method")
++
+ ### Select Instance Type
+ 
+ Using the `Type-based Selection` tab, set `Architecture` as `ARM`, and `Category` as `General Purpose`, to see the available instance types. If you already know the desired instance type, you can enter this in the filter.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/6ccdd195-7020-b944-4eed-846edf808b2a.png "Select Instance Type")
++
+ ### Select OS image
+ 
+ There are many images available on the [Alibaba Cloud Marketplace](https://marketplace.alibabacloud.com/), providing pre-installed or pre-configured setups.
+ 
+ For now, select `Ubuntu` version (e.g. `20.04 64-bit for ARM`) from the pull-down menu.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/c0329674-b751-5aa5-09b8-f2786a338d8e.png "Select OS Image")
++
+ ### Other settings
+ 
+ Other settings, such as storage size are selectable. For now, use the default selection. Click `Next` to move to `Networking`. Proceed with the default selection for `Networking`. Click `Next` to move to `System Configurations`.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/08b7ccdd-003f-b23d-de99-471aa11eb285.png "Configure Storage Options")
++
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/ee8331cb-caec-a3a1-5ded-f7eb56f3e558.png "Configure Network Options")
++
+ ### Set a Key Pair and other security settings
+ 
+ To be able to access the instance (see later), you must use a [key pair](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/key-pairs). If this is your first time logging in, use the `Create Key Pair` dialog to create your key. The `public-key` will be downloaded to your local machine. When created, select from the pull-down.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/bf231337-39ba-5d61-6bbb-4c9d2c3f8d6c.png "Select or create a key pair")
++
+ Select `Logon Credentials` and set `Logon Username` to `ecs-user` and an appropriate  `password` if desired.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/8be6f704-0b04-1a19-e156-9f4b5e2f6d10.png "Set Username and Password for logon")
++
+ Other settings such as `Instance Name` and `Description` are free-form for appropriate personal input. Other settings can be left as default.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/fd90820b-5ac5-6fae-831c-1505028e4393.png "Advanced Settings(Optional)")
++
+ In the `Preview` stage, click `Create Instance`. After a few moments, the instance will be available for use.
+ 
++![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/e8e336c4-87e7-a8ae-d798-f5d755211270.png "The last step of creation instance")
++
++
+ ## Connect to your instance
+ 
+ There are a number of different [Connection methods](https://www.alibabacloud.com/help/en/elastic-compute-service/latest/connection-methods) supported.
