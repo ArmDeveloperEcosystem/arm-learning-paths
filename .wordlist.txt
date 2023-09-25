@@ -1594,3 +1594,4 @@ MSR
 libpfm
 eBPF
 JNI
+pmuserenr
