@@ -25,6 +25,10 @@ further_reading:
         title: PAPI documentation
         link: https://github.com/icl-utk-edu/papi/wiki
         type: documentation
+    - resource:
+        title: Perf
+        link: https://en.wikipedia.org/wiki/Perf_%28Linux%29
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

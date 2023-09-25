@@ -1,20 +1,18 @@
 ---
-title: "Using the System Counter"
+title: "Use a system counter"
 weight: 5
 layout: "learningpathall"
 ---
-## Using assembly for System Counter access
 
-### About Arm system register instructions
+There are two Arm instructions that allow access to system registers. These are [MSR](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/msr--arm-register-to-system-coprocessor-register-) to write a system register and [MRS](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/mrs--system-coprocessor-register-to-arm-register-) to read a system register. These are the only two instructions required for counting.
 
-There are two Arm instructions that allow access to system registers. These are [MSR](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/msr--arm-register-to-system-coprocessor-register-) to write a system register, and [MRS](https://developer.arm.com/documentation/dui0489/i/arm-and-thumb-instructions/mrs--system-coprocessor-register-to-arm-register-) to read a system register. These are the only two instructions required for counting.
-
-## Using assembly for System Counter access
+## Using assembly for system counter access
 
 If you only need to count time/cycles, then the [system counter](https://developer.arm.com/documentation/102379/0102/System-Counter?lang=en)] can be used. This can be done from user space. Below is an example of measuring system counter ticks across a function.
 
-syscnt.c
-``` c
+Use a text editor to create a file named `syscnt.c` with the code below:
+
+```C
 #include <stdio.h>
 #include <stdlib.h>
 #include <inttypes.h>
@@ -52,3 +50,24 @@ int main() {
 }
 ```
 This method only requires access to two registers, [`cntfrq_el0`](https://developer.arm.com/documentation/ddi0595/2020-12/AArch64-Registers/CNTFRQ-EL0--Counter-timer-Frequency-register?lang=en) and [`cntvct_el0`](https://developer.arm.com/documentation/ddi0595/2020-12/AArch64-Registers/CNTVCT-EL0--Counter-timer-Virtual-Count-register?lang=en). `cntfrq_el0` contains the frequency at which the system counter increments in Hz. `cntvct_el0` contains the counter value. These registers can be used to measure real time because they are not affected by power management mechanisms like frequency scaling and are always on, even when the cores are put to sleep.
+
+Compile the example using the GNU compiler:
+
+``` bash
+gcc syscnt.c -o syscnt
+```
+
+Run the application:
+
+``` console
+ ./syscnt
+ ```
+ 
+The output will be similar to:
+
+ ```output
+System counter ticks: 280201338
+System counter freq (Hz): 121875000
+```
+
+Your counter values may be different from the output above.

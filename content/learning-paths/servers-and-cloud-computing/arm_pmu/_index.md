@@ -1,18 +1,18 @@
 ---
-title: Learn how to access hardware counters via the Performance Monitoring Unit (PMU)
+title: Learn how to access hardware counters using the Performance Monitoring Unit (PMU)
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an advanced topic for software developers who want to instrument hardware event counters in their code.
+who_is_this_for: This is an advanced topic for software developers who want to instrument hardware event counters in software applications.
 
 learning_objectives:
-    - Learn about the different options for accessing event counters from user space
-    - Learn how to use Performance Application Programming Interface (PAPI) to instrument event counters in code
-    - Learn how to use the Linux perf_event_open system call to instrument event counters in code
-    - Learn how to use the System Counter instead of the Performance Monitoring Unit (PMU) if you just need to measure time/cycles
+    - Understand different options for accessing event counters from user space
+    - Use PAPI to instrument event counters in code
+    - Call the Linux perf_event_open system call to instrument event counters in code
+    - Write Arm assembly instructions to instrument event counters in code
 
 prerequisites:
-    - Before starting, you will need a bare-metal or cloud metal instance as they expose more counters. A VM based cloud instances will also work depending on the events of interest
+    - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. A virtual machine (VM) can be used, but fewer counters may be available. 
 
 author_primary: Julio Suarez
 
@@ -22,14 +22,12 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
-    - Performance Application Programming Interface (PAPI)
-    - Linux Perf
-    - perf_events
+    - PAPI
+    - perf
     - Assembly
-    - C/C++
+    - GCC
 operatingsystems:
     - Linux
-    - Bare-metal
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

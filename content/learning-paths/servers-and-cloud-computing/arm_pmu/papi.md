@@ -1,18 +1,37 @@
 ---
-title: "Using PAPI for counting"
+title: "Use PAPI for counting"
 weight: 3
 layout: "learningpathall"
 ---
 
-## Installing PAPI
+## Install PAPI
 
-The [PAPI installation documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI) covers the installation of PAPI so it will not be discussed here.
+Install PAPI by following the [documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI).
 
-## Using PAPI to instrument counters
+Set the environment variable `PAPI_DIR` to the location where PAPI is installed. 
 
-Below is an example of how to measure total instructions executed (INST_RETIRED: 0x08) and load instructions executed speculatively (LD_SPEC: 0x70) using PAPI. It is based on one of the examples within the [PAPI documentation]((https://github.com/icl-utk-edu/papi/wiki/)).
+For example, if you installed PAPI in `/usr/local` and are using bash then execute: 
 
-papi_example.c
+```console
+export PAPI_DIR=/usr/local
+```
+
+Depending on your system, you might need to set the environment variable `LD_LIBRARY_PATH` to include `$PAPI_DIR/lib` also.
+
+Enable user space access to the counters by running:
+
+```console
+sudo sh -c "echo 2 > /proc/sys/kernel/perf_event_paranoid"
+```
+
+If you don't run the above command you will need to run the `papi_example` program below using `sudo` or as `root`.
+
+## Use PAPI to instrument counters
+
+You can use PAPI to measure total instructions executed (INST_RETIRED: 0x08) and the load instructions executed speculatively (LD_SPEC: 0x70). 
+
+Use a text editor to create a file named `papi_example.c` and paste the code below into the file:
+
 ``` c
 #include <papi.h>
 #include <stdio.h>
@@ -72,11 +91,22 @@ int main() {
 }
 ```
 
-At the top of the file there is a function called `code_to_measure`. This is called in `main` and is the function that events will be counted through. At the top of `main`, there is a PAPI library initialization (`PAPI_library_init`). Under that initialization an EventSet is created (`PAPI_create_eventset`). The Event Set is a PAPI construct that allows for the grouping of a set of HW events that will be counted together. Once this Event Set is created, two events are added to the Event Set with a pair of calls to `PAPI_add_event`. The first call adds the PAPI preset event `PAPI_TOT_INS`. This preset event is mapped down to the Arm INST_RETIRED event (`0x08`). Preset events are included in PAPI as a convenience. It is also possible to add events using event codes. This is the case in the second call to `PAPI_add_event`. Here the event code `0x40000007` is used. This is the PAPI event code for the Arm LD_SPEC event. However, the Arm event ID is actually `0x70`, not `0x40000007`. This is because the event code that needs to be passed into `PAPI_add_event` is a PAPI specific event code. The easiest way to get the PAPI event code is to use `papi_avail` utility as shown below.
+At the top of the file there is a function called `code_to_measure`. This is called from `main` and is the function to analyze.
 
+At the top of `main`, there is a PAPI library initialization (`PAPI_library_init`). Under that initialization an EventSet is created (`PAPI_create_eventset`). The Event Set is a PAPI construct that allows for the grouping of a set of hardware events that will be counted together. Once this Event Set is created, two events are added to the Event Set with a pair of calls to `PAPI_add_event`. The first call adds the PAPI preset event `PAPI_TOT_INS`. This preset event is mapped to the Arm INST_RETIRED event (`0x08`). 
+
+Preset events are included in PAPI as a convenience. It is also possible to add events using event codes. This is the case in the second call to `PAPI_add_event`. Here the event code `0x40000007` is used. This is the PAPI event code for the Arm LD_SPEC event. However, the Arm event ID is actually `0x70`, not `0x40000007`. This is because the event code that needs to be passed into `PAPI_add_event` is a PAPI specific event code. The easiest way to get the PAPI event code is to use `papi_avail` utility as shown below.
+
+
+Run the `papi_avail` command to see the available events:
 
 ``` console
-# papi_avail -e LD_SPEC
+papi_avail -e LD_SPEC
+```
+
+The output will be similar to:
+
+```output
 Available PAPI preset and user defined events plus hardware information.
 --------------------------------------------------------------------------------
 PAPI version             : 7.0.1.0
@@ -118,20 +148,35 @@ Unit Masks:
 --------------------------------------------------------------------------------
 ```
 
-As shown above, the PAPI event code for LD_SPEC is `0x40000007`. This code is mapped down to the Arm LD_SPEC event (`0x70`). After the events are added, `PAPI_start` is used to start the counters and `PAPI_stop` is used to stop them. Any code that is executed in between these actions is the code that will be measured. In this example, it's the function `code_to_measre`. Finally, `PAPI_read` is called to read the counts for the events in the Event Set.
+As shown above, the PAPI event code for LD_SPEC is `0x40000007`. This code is mapped to the Arm LD_SPEC event (`0x70`). 
 
-To compile `papi_example.c`, run the following command (also noted in the PAPI documentation).
+After the events are added, `PAPI_start` is used to start the counters and `PAPI_stop` is used to stop them. 
+
+Any code that is executed in between these actions is the code that will be measured. In this example, it's the function `code_to_measure`. 
+
+After counting is stopped, `PAPI_read` is called to read the counts for the events in the Event Set.
+
+Compile `papi_example.c` using the GNU compiler:
 
 ``` bash
-gcc papi_example.c -I/${PAPI_DIR}/include -L/${PAPI_DIR}/lib -lpapi -o papi_example
+gcc papi_example.c -I ${PAPI_DIR}/include -L ${PAPI_DIR}/lib -lpapi -o papi_example
 ```
 
-Below is the output of running this application. You will need to run this as root.
+Run the application:
 
 ``` console
-# ./papi_example
+./papi_example
+```
+
+The two counters are printed:
+
+```output
 Instructions retired: 11000000451
 Loads executed speculatively: 3000014538
 ```
 
-The counter values may be different from what is shown above. This is because how and when events occur is intrinsic to the design of the CPU. The events are also dependent on the specific instructions emitted by the compiler which can change based on compiler options and the version of the compiler. Last, PAPI supports [multiplexing](https://github.com/icl-utk-edu/papi/wiki/PAPI-Multiplexing), so if you want to count more than the number of events the CPU supports, that is possible.
+Your counter values may be different from what is shown above. 
+
+The events are also dependent on the specific instructions emitted by the compiler. Instructions may change based on compiler options and the version of the compiler. 
+
+PAPI supports [multiplexing](https://github.com/icl-utk-edu/papi/wiki/PAPI-Multiplexing). It is possible to count more events than the CPU supports using PAPI.
