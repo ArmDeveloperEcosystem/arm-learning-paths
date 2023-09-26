@@ -63,4 +63,4 @@ Fibonacci number: 1
 Fibonacci number: 2 
 Fibonacci number: 3 
 ```
-You have now successfully run a baremetal context switching application on an Arm Cortex-M target.
+You have now successfully run a bare-metal context switching application on an Arm Cortex-M target.
