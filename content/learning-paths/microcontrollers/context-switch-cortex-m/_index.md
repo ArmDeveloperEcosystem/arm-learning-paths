@@ -3,7 +3,7 @@ title: Learn about context switching on Arm Cortex-M processors
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for software developers who would like to learn about context switching operations on Cortex-M processors in a baremetal environment.
+who_is_this_for: This is an introductory topic for software developers who would like to learn about context switching operations on Cortex-M processors in a bare-metal environment.
 
 learning_objectives: 
     - Understand the basics of context switching operation

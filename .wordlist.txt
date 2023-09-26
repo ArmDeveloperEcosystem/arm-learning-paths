@@ -1595,3 +1595,7 @@ libpfm
 eBPF
 JNI
 pmuserenr
+MPU
+Uma
+Ramalingam
+
