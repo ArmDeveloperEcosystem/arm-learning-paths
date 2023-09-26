@@ -5,7 +5,7 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Configuring the NPC _Ray Perseption Sensor 3D_ component
+## Configuring the NPC _Ray Perception Sensor 3D_ component
 1. Select _ML-NPC_ by going to the _Level-DevSummit2022->AgentS Settings->ML-NPC_, as per Figure 1.
 
 ![ML-NPC](agent-settings-ml-npc.png "Figure 1. ML-NPC")

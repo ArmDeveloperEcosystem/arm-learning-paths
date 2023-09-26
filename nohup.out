@@ -1,0 +1,1607 @@
+Start building sites … 
+hugo v0.111.2-4164f8fef9d71f50ef3962897e319ab6219a1dad linux/amd64 BuildDate=2023-03-05T12:32:20Z VendorInfo=gohugoio
+WARN 2023/09/26 15:50:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:50:42 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+
+                   |  EN   
+-------------------+-------
+  Pages            | 1129  
+  Paginator pages  |    0  
+  Non-page files   |  415  
+  Static files     |   58  
+  Processed images |    0  
+  Aliases          |    0  
+  Sitemaps         |    1  
+  Cleaned          |    0  
+
+Built in 18014 ms
+Watching for changes in /workspaces/arm-learning-paths/{archetypes,assets,content,data,themes}
+Watching for config changes in /workspaces/arm-learning-paths/config.toml
+Environment: "development"
+Serving pages from memory
+Running in Fast Render Mode. For full rebuilds on change: hugo server --disableFastRender
+Web Server is available at / (bind address 0.0.0.0)
+Press Ctrl+C to stop
+
+Change detected, rebuilding site.
+2023-09-26 15:51:34.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 15:51:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:51:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 597 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:51:37.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 15:51:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:51:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 646 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:51:42.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 15:51:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:51:43 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 606 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:52:58.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:52:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:52:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:52:59 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 367 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:06.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:06 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:07 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 406 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:10.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 522 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:13.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:13 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 366 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:19.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:19 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 496 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:20.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:21 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 407 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:25.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:26 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 570 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:55:29.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:55:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:55:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 498 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:56:08.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:56:08 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:56:08 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:56:09 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 412 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:56:13.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:56:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:56:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:56:14 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 541 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:57:09.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:57:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:09 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 408 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:57:22.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:57:23 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:23 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 463 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:57:27.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:57:27 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:28 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 706 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:57:29.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:57:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:30 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 497 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:57:31.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:57:31 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:31 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:32 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 432 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:57:57.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:57:57 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:57:57 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 384 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:10.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 423 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:23.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:24 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:24 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 412 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:33.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:34 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 401 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:37.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 447 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:40.421 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:40 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:40 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 474 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:50.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:50 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:51 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 494 ms
+
+Change detected, rebuilding site.
+2023-09-26 15:58:54.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 15:58:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 15:58:55 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 455 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:00:05.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:00:05 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:00:05 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 388 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:02:00.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:02:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:02:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:02:01 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 508 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:02:28.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:02:28 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:02:28 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 416 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:02:34.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:02:35 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:02:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 461 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:02:53.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:02:53 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:02:54 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 401 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:03:07.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:03:07 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:03:07 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 354 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:03:16.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:03:16 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:03:17 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 520 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:03:28.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:03:28 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:03:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 408 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:03:30.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:03:30 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:03:30 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 508 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:03:56.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:03:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:03:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 383 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:04:11.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:04:11 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:04:12 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 499 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:04:15.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:04:15 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:04:16 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 395 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:04:18.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:04:18 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:04:18 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:04:18 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 441 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:04:27.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:04:27 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:04:28 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 472 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:09:39.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:09:39 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:09:39 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 446 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:09:42.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:09:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:09:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:09:42 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 555 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:09:45.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:09:45 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:09:46 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 357 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:10:07.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:10:07 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:10:07 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:10:07 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 413 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:10:33.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:10:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:10:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 428 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:11:00.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:11:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:11:00 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 416 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:11:06.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:11:06 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:11:07 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 437 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:01.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:01 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:01 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 510 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:06.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:06 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:06 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:06 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 409 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:07.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:07 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:07 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 466 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:15.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:15 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:15 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 405 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:20.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:20 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 435 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:37.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 373 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:12:50.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:12:50 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:12:50 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 410 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:13:00.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:13:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:13:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:13:00 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 449 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:13:51.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:13:51 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:13:51 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:13:51 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 347 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:03.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 442 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:13.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:14 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 400 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:21.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:21 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:21 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:21 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 355 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:25.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:25 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:25 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 377 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:32.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:32 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 360 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:37.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:37 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 506 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:14:43.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:14:43 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:43 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:14:44 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 356 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:03.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:03 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:03 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 431 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:09.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:09 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 462 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:10.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 381 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:19.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:20 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 716 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:27.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:27 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:27 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 480 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:46.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:46 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:47 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 435 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:15:51.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:15:51 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:15:52 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 448 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:16:05.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:16:05 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:16:05 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 400 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:16:10.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:16:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:16:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:16:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 437 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:16:11.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:16:12 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:16:12 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 531 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:16:57.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:16:57 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:16:58 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 351 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:17:26.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:17:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:17:26 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 542 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:17:29.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:17:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:17:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 356 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:04.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:05 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 412 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:06.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:07 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:07 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 488 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:09.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 458 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:11.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:11 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:11 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:12 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 404 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:18.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:18 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:19 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 367 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:25.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:25 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:25 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:25 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 368 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:26.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:26 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 394 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:30.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:30 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:30 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:30 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 370 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:34.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 914 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:40.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:40 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:41 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 438 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:18:45.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:18:46 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:18:46 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 606 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:16.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:16 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:16 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:16 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 417 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:21.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:21 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:21 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 416 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:26.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:26 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 480 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:33.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 470 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:39.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:39 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:40 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 359 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:49.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:49 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 391 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:19:58.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:19:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:19:58 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 394 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:12.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:12 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:12 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 416 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:18.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:18 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:18 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 393 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:23.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:23 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:23 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 388 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:29.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 476 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:34.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:34 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 364 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:34.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 515 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:42.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:43 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 467 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:48.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:48 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 365 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:20:53.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:20:53 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:20:54 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 401 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:22:43.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:22:43 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:22:43 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:22:44 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 501 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:22:45.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:22:46 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:22:46 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 595 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:23:33.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:23:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:23:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:23:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 381 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:23:38.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:23:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:23:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 397 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:23:45.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:23:45 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:23:46 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 393 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:23:50.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:23:50 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:23:51 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 480 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:24:16.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:24:16 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:17 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 372 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:24:21.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:24:21 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:21 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:22 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 385 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:24:26.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:24:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:26 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 351 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:24:33.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:24:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 438 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:24:34.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:24:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:34 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 349 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:24:56.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:24:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:24:57 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 469 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:08.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:08 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:08 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 372 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:13.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:13 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:13 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 356 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:25.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:25 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:25 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 473 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:32.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:32 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 371 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:37.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 403 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:47.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:47 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:47 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:47 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 418 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:53.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:53 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:53 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 394 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:54.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:54 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 461 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:56.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:57 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:57 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 592 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:25:58.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:25:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:25:58 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 551 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:26:35.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:26:35 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:26:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 394 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:26:39.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:26:39 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:26:40 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 383 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:26:49.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:26:49 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:26:49 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:26:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 494 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:26:54.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:26:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:26:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:26:55 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 391 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:31:15.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/UnityHubInstalls.png"
+WARN 2023/09/26 16:31:15 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:31:15 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 465 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:31:55.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/unity-hub-add-modules.png"
+WARN 2023/09/26 16:31:55 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:31:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 503 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:32:42.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:32:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:32:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:32:43 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 423 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:32:44.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:32:45 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:32:45 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 516 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:32:54.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:32:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:32:54 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 386 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:03.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:03 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 379 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:04.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 429 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:09.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:09 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 454 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:29.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 382 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:33.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 526 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:38.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 366 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:42.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:43 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 444 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:47.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:48 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:48 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 462 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:33:56.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:33:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:33:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 430 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:34:02.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:34:02 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:34:02 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:34:03 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 396 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:34:09.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:34:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:34:09 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 361 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:34:14.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:34:14 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:34:15 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 512 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:34:17.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:34:17 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:34:18 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 380 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:35:09.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:35:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 404 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:35:43.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:35:43 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:44 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 360 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:35:48.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:35:48 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 481 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:35:49.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:35:49 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 539 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:35:54.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:35:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:54 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 425 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:35:58.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:35:58 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:35:58 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 464 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:36:03.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:36:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:04 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:04 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 387 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:36:32.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:36:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 442 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:36:37.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:36:37 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:37 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 423 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:36:38.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:36:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 426 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:36:42.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:36:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:42 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:36:42 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 370 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:37:26.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:37:26 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:37:27 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 356 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:37:29.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:37:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:37:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 431 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:37:32.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:37:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:37:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 449 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:39:09.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:39:09 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:39:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 414 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:41:18.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:41:18 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:41:18 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 414 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:41:20.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:41:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:41:21 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 446 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:41:23.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:41:24 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:41:24 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 464 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:41:56.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:41:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:41:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 473 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:00.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:01 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 461 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:05.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:05 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:05 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 403 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:14.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:15 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:15 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 426 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:17.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:17 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:17 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:17 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 404 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:20.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:21 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 434 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:23.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:24 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:24 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 427 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:31.923 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:31 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:32 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 495 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:34.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 371 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:37.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 449 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:40.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:40 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:40 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 452 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:42:41.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:42:41 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:42:42 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 383 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:43:30.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:43:30 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:43:30 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:43:31 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 410 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:43:32.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:43:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:43:33 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 446 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:43:34.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:43:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:43:35 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 516 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:43:36.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:43:36 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:43:36 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 367 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:43:41.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:43:41 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:43:41 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 379 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:44:15.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:44:15 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:44:15 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 378 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:44:19.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:44:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:44:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:44:19 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 437 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:44:20.919 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:44:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:44:21 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 375 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:45:39.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:45:39 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:45:39 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:45:40 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 439 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:45:44.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:45:44 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:45:45 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 470 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:45:47.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 16:45:47 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:45:47 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 482 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:50:54.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/setup.md"
+WARN 2023/09/26 16:50:54 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:50:55 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 401 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:55:59.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 16:55:59 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:55:59 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 561 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:56:01.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 16:56:02 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:56:02 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 464 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:56:05.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 16:56:05 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:56:06 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 448 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:56:12.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 16:56:12 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:56:12 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 442 ms
+
+Change detected, rebuilding site.
+2023-09-26 16:56:20.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 16:56:20 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 16:56:20 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 342 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:01:51.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:01:51 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:01:51 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 394 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:04:30.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/one-we-prepared-earlier copy.md"
+WARN 2023/09/26 17:04:30 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:04:30 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 390 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:04:48.920 +0000
+Source changed RENAME        "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/one-we-prepared-earlier copy.md"
+Source changed CREATE        "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/run-on-android.md"
+WARN 2023/09/26 17:04:48 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:04:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 469 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:05:08.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/run-on-android.md"
+WARN 2023/09/26 17:05:08 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:05:08 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:05:09 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 367 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:05:16.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/run-on-android.md"
+WARN 2023/09/26 17:05:16 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:05:17 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 395 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:05:38.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/run-on-android.md"
+WARN 2023/09/26 17:05:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:05:39 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 364 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:05:45.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/profiling.md"
+WARN 2023/09/26 17:05:45 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:05:45 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 455 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:05:51.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/summary.md"
+WARN 2023/09/26 17:05:51 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:05:51 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 380 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:06:19.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/run-on-android.md"
+WARN 2023/09/26 17:06:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:06:19 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:06:20 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 351 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:06:34.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/one-we-prepared-earlier.md"
+WARN 2023/09/26 17:06:34 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:06:34 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 562 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:08:38.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:08:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:08:38 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:08:38 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 419 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:08:49.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:08:49 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:08:49 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:08:49 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 491 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:08:55.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:08:55 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:08:55 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 361 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:08:56.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:08:56 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:08:56 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 468 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:00.420 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:09:00 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:09:00 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 367 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:03.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+ERROR 2023/09/26 17:09:03 Rebuild failed: "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md:13:1": failed to unmarshal YAML: yaml: line 13: did not find expected alphabetic or numeric character
+Total in 75 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:05.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:09:05 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:09:06 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:09:06 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 422 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:10.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:09:10 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:09:10 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:09:10 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 352 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:11.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:09:11 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:09:11 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:09:11 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 345 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:16.419 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:09:16 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:09:16 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:09:16 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 349 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:09:32.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/_index.md"
+WARN 2023/09/26 17:09:32 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:09:32 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:09:32 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 351 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:11:29.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 17:11:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:11:29 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:11:29 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:11:29 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 340 ms
+
+Change detected, rebuilding site.
+2023-09-26 17:11:33.920 +0000
+Source changed WRITE         "/workspaces/arm-learning-paths/content/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/getting-started.md"
+WARN 2023/09/26 17:11:33 .File.Dir on zero object. Wrap it in if or with: {{ with .File }}{{ .Dir }}{{ end }}
+WARN 2023/09/26 17:11:34 .File.Path on zero object. Wrap it in if or with: {{ with .File }}{{ .Path }}{{ end }}
+WARN 2023/09/26 17:11:34 .File.TranslationBaseName on zero object. Wrap it in if or with: {{ with .File }}{{ .TranslationBaseName }}{{ end }}
+Total in 400 ms

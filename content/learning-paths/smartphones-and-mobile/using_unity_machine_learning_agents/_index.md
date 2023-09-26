@@ -9,16 +9,9 @@ learning_objectives:
     - Get Unity's machine learning agent running in your game, on an Android device.
 
 prerequisites:
-- Unity Game Studio Installed
-- Setup Guide for ML Agents Workshop
-- ML Agents Workshop Supporting Files
-- Scene Loaded
-- Package Manager
-- Python Installed
-- PyTorch Installed
-- ML-Agents Installed
-- Android SDK/NDK Installed
-- Android Phone
+- A computer capable of running Unity - instructions are for Windows, but could be adapted
+- Android Phone and a USB cable to connect it to your computer
+    * This should be relatively recent, 64-bit and at least Android 8
 
 author_primary: Ben Clark, Ported to Learning Path by Dominique Louis of visualSilicon
 
