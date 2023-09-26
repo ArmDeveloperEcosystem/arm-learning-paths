@@ -611,3 +611,81 @@
     avg_close_time_hrs: 0
     num_issues: 6
     percent_closed_vs_total: 0.0
+- a_date: '2023-09-18'
+  content:
+    cross-platform: 7
+    embedded-systems: 14
+    install-guides: 70
+    laptops-and-desktops: 9
+    microcontrollers: 21
+    servers-and-cloud-computing: 45
+    smartphones-and-mobile: 6
+    total: 172
+  contributions:
+    external: 3
+    internal: 168
+  github_engagement:
+    num_forks: 30
+    num_prs: 3
+  individual_authors:
+    brenda-strech: 1
+    christopher-seidl: 4
+    daniel-gubay: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 3
+    jason-andrews: 72
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 29
+    pranay-bakre: 1
+    ronan-synnott: 39
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 3
+    percent_closed_vs_total: 0.0
+- a_date: '2023-09-25'
+  content:
+    cross-platform: 7
+    embedded-systems: 14
+    install-guides: 70
+    laptops-and-desktops: 9
+    microcontrollers: 21
+    servers-and-cloud-computing: 45
+    smartphones-and-mobile: 6
+    total: 172
+  contributions:
+    external: 3
+    internal: 168
+  github_engagement:
+    num_forks: 30
+    num_prs: 6
+  individual_authors:
+    brenda-strech: 1
+    christopher-seidl: 4
+    daniel-gubay: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 3
+    jason-andrews: 72
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 29
+    pranay-bakre: 1
+    ronan-synnott: 39
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 6
+    percent_closed_vs_total: 0.0

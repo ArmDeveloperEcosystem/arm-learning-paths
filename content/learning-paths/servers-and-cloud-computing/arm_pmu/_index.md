@@ -1,0 +1,37 @@
+---
+title: Learn how to access hardware counters using the Performance Monitoring Unit (PMU)
+
+minutes_to_complete: 90
+
+who_is_this_for: This is an advanced topic for software developers who want to instrument hardware event counters in software applications.
+
+learning_objectives:
+    - Understand different options for accessing event counters from user space
+    - Use PAPI to instrument event counters in code
+    - Call the Linux perf_event_open system call to instrument event counters in code
+    - Write Arm assembly instructions to instrument event counters in code
+
+prerequisites:
+    - An Arm computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. A virtual machine (VM) can be used, but fewer counters may be available. 
+
+author_primary: Julio Suarez
+
+### Tags
+skilllevels: Advanced
+subjects: Performance and Architecture
+armips:
+    - Neoverse
+tools_software_languages:
+    - PAPI
+    - perf
+    - Assembly
+    - GCC
+operatingsystems:
+    - Linux
+
+### FIXED, DO NOT MODIFY
+# ================================================================================
+weight: 1                       # _index.md always has weight of 1 to order correctly
+layout: "learningpathall"       # All files under learning paths have this same wrapper
+learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
+---

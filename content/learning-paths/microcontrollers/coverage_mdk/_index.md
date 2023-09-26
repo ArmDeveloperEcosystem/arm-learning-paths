@@ -1,5 +1,5 @@
 ---
-title: Code Coverage quick-start with Keil MDK
+title: Get started with Keil MDK Code Coverage
 
 minutes_to_complete: 15
 
@@ -10,7 +10,6 @@ learning_objectives:
     - Understand basics of the Code Coverage report
 
 prerequisites:
-    - A Windows machine
     - Basic familiarity with Keil MDK
 
 author_primary: Ronan Synnott
@@ -26,7 +25,9 @@ operatingsystems:
 tools_software_languages:
     - Coding
     - Keil
+    - MDK
     - Fixed Virtual Platform
+    - FVP
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

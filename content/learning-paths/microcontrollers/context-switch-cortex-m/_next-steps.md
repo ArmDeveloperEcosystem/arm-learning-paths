@@ -4,12 +4,13 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have successfully set up a basic CI/CD workflow based around Arm Virtual Hardware. Further automation is possible, as shown in the next learning path.
+    You can continue learning about other example projects available as a part of learn the architecture (M-Profile) user guides that will give more insights about Armv8-M architecture and its feature usage.
+
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/cross-platform/avh_cicd2/"
+recommended_path: "/learning-paths/microcontrollers/tfm/"
+# Link to the next learning path being recommended.
 
-# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
@@ -17,14 +18,14 @@ recommended_path: "/learning-paths/cross-platform/avh_cicd2/"
     # General online references                 (type: website) 
 
 further_reading:
-    - resource:
-        title: GitHub Actions
-        link: https://docs.github.com/en/actions
-        type: documentation
-    - resource:
-        title: Arm Virtual Hardware
-        link: https://arm-software.github.io/AVH/main/examples/html/GetStarted.html
-        type: documentation
+- resource:
+    title: Learn the Architecture - M-profile
+    link: https://www.arm.com/architecture/learn-the-architecture/m-profile
+    type: documentation
+- resource:
+    title: Learn the Architecture - M-profile - Open source examples
+    link: https://github.com/ARM-software/m-profile-user-guide-examples
+    type: Open-source example projects
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

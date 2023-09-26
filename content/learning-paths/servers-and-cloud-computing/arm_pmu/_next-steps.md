@@ -4,12 +4,12 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have successfully set up a basic CI/CD workflow based around Arm Virtual Hardware. Further automation is possible, as shown in the next learning path.
+    Learn about migrating applications to Arm
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/cross-platform/avh_cicd2/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
+# Link to the next learning path being recommended.
 
-# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
@@ -18,12 +18,16 @@ recommended_path: "/learning-paths/cross-platform/avh_cicd2/"
 
 further_reading:
     - resource:
-        title: GitHub Actions
-        link: https://docs.github.com/en/actions
+        title: Linux perf_events documentation
+        link: https://www.man7.org/linux/man-pages/man2/perf_event_open.2.html
         type: documentation
     - resource:
-        title: Arm Virtual Hardware
-        link: https://arm-software.github.io/AVH/main/examples/html/GetStarted.html
+        title: PAPI documentation
+        link: https://github.com/icl-utk-edu/papi/wiki
+        type: documentation
+    - resource:
+        title: Perf
+        link: https://en.wikipedia.org/wiki/Perf_%28Linux%29
         type: documentation
 
 # ================================================================================
