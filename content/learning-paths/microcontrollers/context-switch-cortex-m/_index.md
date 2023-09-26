@@ -3,10 +3,10 @@ title: Learn about context switching on Arm Cortex-M processors
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for software developers who would like to learn about context switching operations on Cortex-M processors in a baremetal environment.
+who_is_this_for: This is an introductory topic for software developers who would like to learn about context switching operations on Cortex-M processors in a bare-metal environment.
 
 learning_objectives: 
-    - Understand the basics of context switching operation
+    - Understand the basics of context switching 
     - Learn how to program the Memory Protection Unit (MPU)
     - Learn how to use the SysTick exception with context switching operations
     - Build and run an example project with Arm Development Studio (Arm DS)
