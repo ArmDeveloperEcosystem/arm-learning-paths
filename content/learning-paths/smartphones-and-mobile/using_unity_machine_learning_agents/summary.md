@@ -13,10 +13,10 @@ layout: learningpathall
     * Training them
     * Running your game with them
     * Deploying to Android
-    * Profiling your game, while the ML-Agents scrtips are running
+    * Profiling your game, while the ML-Agents are running
 
 # Things to Try
 * Deploy to Windows Arm
-* Multiple characters: 3 on 1? Train together
-* Co-operative characters: Work with the player
-* Non-battle characters: for different sorts of games
+* Multiple characters: For example 3 vs 1. Train together.
+* Co-operative characters: Work with the player.
+* Non-battle characters: For different sorts of games.

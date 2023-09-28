@@ -13,13 +13,13 @@ review:
 
     - questions:
         question: >
-            I can you specify separate brains for seperate characters within my game?
+            I can specify separate brains for separate characters within my game?
         answers:
             - Yes
             - No
         correct_answer: 1                    
         explanation: >
-            Yes we can. Refer to "Training the Model", where _BossBattle separation.yaml_ is mentioned, which shows how we might have separate braings for each character in our game. One for the Paladin and another for the Vampire.
+            Yes we can. Refer to "Training the Model", where _BossBattle separation.yaml_ is mentioned, which shows how we might have separate brains for each character in our game. One for the 'Paladin' and another for the 'Vampire'.
                
     - questions:
         question: >

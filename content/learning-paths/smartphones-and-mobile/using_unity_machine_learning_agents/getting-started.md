@@ -26,12 +26,14 @@ Note that Personal licenses are free, and if running on Windows you will need Wi
     * Press *Continue*, and then agree to the Android SDK and NDK License Terms to install everything
 
 ![Unity Hub Installs](UnityHubInstalls.png "Figure 1. Unity Hub Installs")
+
 ![Unity Hub Add Modules](unity-hub-add-modules.png "Figure 2. Unity Hub Add modules")
 
 ## Install Python
 In command or terminal prompt:
-1. Install python 3.7.9 (or a later 3.7), and pip 20.1.1 or later. The official python installer can be found on:
+1. Install Python 3.7.9 (or a later 3.7), and pip 20.1.1 or later. The official python installer can be found on:
 https://www.python.org/downloads/
+
 2. Ensure pip is installed by following the instructions for your operating system on this page: https://pip.pypa.io/en/stable/installation/
 
 # Without our pre-built assets
@@ -51,9 +53,9 @@ You need to:
 
 ## Install PyTorch and ML Agents
 1. Change directory to where you’ve unzipped the workshop scene. Then create a python virtual
-environment: (note that you may need to use `python3` instead of `python`, depending on your install)
+environment (note that you may need to use `python3` instead of `python`, depending on your install):
 
-`md python-envs`
+`md python-envs`   
 `python -m venv .\python-envs\mlagents-r18-env`
 
 2. Activate the virtual environment:
@@ -79,11 +81,19 @@ If this complains use the `-I` option to force it.
 
 ## Project Setup 
 1. Within Unity open the project directory
-2. Once the project is imported, navigate to the _Project_ tab, then to _Assets->#DevSummit2022->Scenes->Level_DevSummit2022_ and select it (See Figure 1.)
+
+2. Once the project is imported, navigate to the _Project_ tab, then to _Assets->#DevSummit2022->Scenes->Level_DevSummit2022_ and select it (See Figure 3.)
+
 ![Project Scene Assets](project-assets.png "Figure 3. Project->Assets->#DevSummit2022->Scenes->Level_DevSummit2022")
+
 3. Double click the aforementioned scene to load it.
-5. Right click on _ML-Player_ and select _Align View to Selected_
-6. The scene should now look like the one in Figure 2.
+
+4. Right click on _ML-Player_ and select _Align View to Selected_
+
+5. The scene should now look like the one in Figure 4.
+
 ![Align View to ML-Player](ml-player-aligned-view.png "Figure 4. Align View to ML-Player")
-7. Check that the Package Manger is updated and everthing is correctly installed by navigating to _Window->Package Manager_. The screen that appears should look similar to Figure 3.
+
+6. Check that the Package Manager is updated and everything is correctly installed by navigating to _Window->Package Manager_. The screen that appears should look similar to Figure 5.
+
 ![Unity Package Manager](package-manager.png "Figure 5. Unity Package Manager")

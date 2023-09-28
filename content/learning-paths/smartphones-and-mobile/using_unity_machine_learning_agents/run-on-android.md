@@ -11,20 +11,32 @@ layout: learningpathall
 
 2. Attach your Android device to your computer via USB cable.
 
-3. Within the Unity Editor got to _File->Build Settings_.
-![File Build Settings Menu](build-settings-menu.png "Figure 4. File Build Settings Menu")
+3. You will probably have pop-ups to accept on the phone: “Allow usb debugging” and “Allow access to phone data”. Accept them if so.
 
-4. Within the _Build Settings_ dialog select _Android_ from the _Platform_ list on the left.
+4. If you need to troubleshoot your connection to the Android phone, there is a utility `adb` you can run from the command-line. This gets installed with the Unity Android options, but you may need to add its path to your *System Path* in your *Environment Variables*. If you've installed Unity to the default location on Windows, the path to add will be `C:\Program Files\Unity\2021.3.11f1\Editor\Data\PlaybackEngines\AndroidPlayer\SDK\platform-tools`. The adb command to run to check connection will then be:
 
-5. In the bottom right of the dialog click the _Switch Platform_ button.
-![Build Settings Dialog](build-settings-dialog.png "Figure 5. Build Settings Dialog")
+`adb devices`
 
-6. Unity will take 1 minute or 2 to switch platforms and prepare the assets for the mobile device.
+And then your phone should be listed.
 
-7. Once switched the Unity icon will appear next to _Android_ and the _Build_ and _Build and Run_ buttons, on the bottom right, will not be enabled.
-![Platform Switched to Android](build-settings-platform-switched.png "Figure 6. Platform Switched to Android")
+5. Within the Unity Editor got to _File->Build Settings_.
 
-8. Now click _Build and Run_ to build and deploy the game to your Android device. It may take a few minutes, the 1st time, to go through the whole process. Subsequent Build and Runs should be much faster.
+![File Build Settings Menu](build-settings-menu.png "Figure 1. File Build Settings Menu")
 
-9. The game should now be running on your Android device.
-![ML Gameplay](ml-gameplay.png "Figure 7. ML Gameplay")
+6. Within the _Build Settings_ dialog select _Android_ from the _Platform_ list on the left.
+
+7. In the bottom right of the dialog click the _Switch Platform_ button.
+
+![Build Settings Dialog](build-settings-dialog.png "Figure 2. Build Settings Dialog")
+
+8. Unity will take 1 or 2 minutes to switch platforms and prepare the assets for the mobile device.
+
+9. Once switched the Unity icon will appear next to _Android_. On the bottom right the _Build_ button will be visible and the _Build and Run_ button will not be disabled.
+
+![Platform Switched to Android](build-settings-platform-switched.png "Figure 3. Platform Switched to Android")
+
+10. Now click _Build and Run_ to build and deploy the game to your Android device. It may take a few minutes the first time to go through the whole process. Subsequent Build and Runs should be much faster.
+
+11. The game should now be running on your Android device.
+
+![ML Gameplay](ml-gameplay.png "Figure 4. ML Gameplay")

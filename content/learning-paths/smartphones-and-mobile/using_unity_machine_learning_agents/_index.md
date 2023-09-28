@@ -9,9 +9,8 @@ learning_objectives:
     - Get Unity's machine learning agent running in your game, on an Android device.
 
 prerequisites:
-- A computer capable of running Unity - instructions are for Windows, but could be adapted
-- Android Phone and a USB cable to connect it to your computer
-    * This should be relatively recent, 64-bit and at least Android 8
+- A computer capable of running Unity. Instructions are for Windows, but could be adapted
+- Android Phone and a USB cable to connect it to your computer. The phone should be relatively recent, 64-bit and at least Android 8
 
 author_primary: Ben Clark, Ported to Learning Path by Dominique Louis of visualSilicon
 
