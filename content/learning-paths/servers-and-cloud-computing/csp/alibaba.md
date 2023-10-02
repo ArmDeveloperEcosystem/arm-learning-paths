@@ -86,7 +86,7 @@ Other settings such as `Instance Name` and `Description` are free-form for appro
 
 In the `Preview` stage, click `Create Instance`. After a few moments, the instance will be available for use.
 
-![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/e8e336c4-87e7-a8ae-d798-f5d755211270.png "The last step of creation instance")
+![alibaba #center](../../../ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/e8e336c4-87e7-a8ae-d798-f5d755211270.png "The last step of instance creation")
 
 
 ## Connect to your instance
