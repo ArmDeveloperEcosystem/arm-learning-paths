@@ -13,16 +13,26 @@ layout: "learningpathall"
 
 You need atleast 30 GB of free disk space on your machine to build the software stack.
 
-Install `git` and the packages required to run the FVP:
+Install the necessary packages:
 
 ```console
 sudo apt update && sudo apt install git telnet xterm net-tools
 ```
 
-Install [docker engine](/install-guides/docker/docker-engine) on your machine. You will build the software stack in a docker container which contains all the build dependencies for the software stack.
+## Overview
 
+The Arm Confidential Compute Architecture (Arm CCA) enables the construction of protected execution
+environments called Realms. Realms allow lower-privileged software, such as application or a virtual machine to
+protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources used by the Realm.
+
+The Arm Realm Management Extension (RME) architecture defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
+
+In this learning path, you will learn how to build and run the reference integration software stack for Arm CCA which demonstrates support for Arm's Realm Management Extension (RME) architecture feature. You will also learn how to create a realm that runs a guest linux kernel. 
 
 ## Build the docker container
+
+You will build the Arm CCA reference software stack in a docker container which contains all the build dependencies. 
+Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
 Clone the repository that contains the docker container file and utility scripts:
 
@@ -87,7 +97,7 @@ exit
 
 ## Run the software stack
 
-The binary executables built in the previous step can run on Arm Architecture Envelop Model (AEM) FVP with RME extensions. 
+The binary executables built in the previous step can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and  Armv9-A architectures with comprehensive system IP.  
 
 On your host machine, download and extract this FVP:
 
@@ -97,19 +107,27 @@ https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC
 tar -xvzf FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
 ```
 
-Set the `MODEL` variable to point to the FVP executable. Launch the `boot.sh` script to run the binaries on the FVP:
+Create an environment variable `MODEL` and set it to point to the FVP executable. Launch the `boot.sh` script to run the binaries on the FVP:
 
 ```console
 export MODEL=~/cca-stack/Base_RevC_AEMvA_pkg/models/Linux64_armv8l_GCC-9.3/FVP_Base_RevC-2xAEMvA
 ./model-scripts/aemfvp-a-rme/boot.sh -p aemfvp-a-rme shell
 ```
 
-You should see four terminal windows pop up. 
+{{% notice Note %}}
+A number of `Info` and `Warning` messages will be emitted by the FVP. These can safely be ignored.
 
-You should see the host linux kernel boot up on terminal_0. You will then be prompted to login to buildroot. Enter `root` as both the username and password.
+If you see an error of the form `xterm: Xt error: Can't open display:`, ensure that your terminal application (e.g. `PuTTY`) has `X11 forwarding` enabled.
+{{% /notice %}}
+
+The FVP boots up with four terminal windows. 
+
+You should see the host linux kernel boot on terminal_0. You will then be prompted to login to buildroot. Enter `root` as both the username and password.
 
 [img_1]
 
+
+`terminal_3` is connected to the Realm Management Monitor
 ## Create a virtual guest in a realm
 
 You can now run `kvmtool` from your host linux prompt to launch a realm which runs guest linux. The kernel and filesystem for the realm are packaged into the buildroot host file system.
