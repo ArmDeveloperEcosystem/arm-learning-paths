@@ -25,7 +25,7 @@ The Arm Confidential Compute Architecture (Arm CCA) enables the construction of 
 environments called Realms. Realms allow lower-privileged software, such as an application or a virtual machine to
 protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources used by the Realm.
 
-The Arm Realm Management Extension (RME) architecture defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
+The Arm Realm Management Extension (RME) is an Arm v9-A architecture extension and defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
 
 In this learning path, you will learn how to build and run the reference integration software stack for Arm CCA which demonstrates support for Arm's RME architecture feature. You will also learn how to create a realm that runs a guest linux kernel. 
 
@@ -109,6 +109,10 @@ Build the stack:
 cd ..
 ./build-scripts/aemfvp-a-rme/build-test-buildroot.sh -p aemfvp-a-rme all
 ```
+
+{{% notice Note %}}
+The build process can take a while to complete as it's building the entire collection of software components for the Arm CCA stack.
+{{% /notice %}}
 
 The binary executables are built in the `~/cca-stack/output/aemfvp-a-rme` directory.
 You can now exit the docker container.
