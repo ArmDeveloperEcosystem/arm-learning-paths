@@ -16,7 +16,7 @@ You need atleast 30 GB of free disk space on your machine to build the Arm CCA r
 Install the necessary packages:
 
 ```console
-sudo apt update && sudo apt install git telnet xterm net-tools
+sudo apt update && sudo apt install git gcc telnet xterm net-tools build-essential
 ```
 
 ## Overview
