@@ -67,6 +67,13 @@ mkdir ~/cca-stack
 ./container.sh -v ~/cca-stack run
 ```
 
+You should see the following output:
+
+```output
+Running docker image: aemfvp-builder ...
+ubuntu@ip-172-16-0-235:/$
+```
+
 You are now inside the root directory of the `aemfvp-builder` container and ready to build the software stack.
 
 ## Build the reference CCA software stack
@@ -82,9 +89,17 @@ repo init -u https://git.gitlab.arm.com/arm-reference-solutions/arm-reference-so
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
+Patch the linux kernel Kconfig file for arm64 targets. This patch enables extending the bootloader provided command line arguments. It is required to speed up execution of the software stack. Open up the Kconfig file in an editor of your choice and add the lines shown below:
+
+```console
+cd linux
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/rme-cca-basics/kconfig.patch
+git apply --ignore-space-change --whitespace=warn --inaccurate-eof -v kconfig.patch
+
 Build the stack:
 
 ```console
+cd ..
 ./build-scripts/aemfvp-a-rme/build-test-buildroot.sh -p aemfvp-a-rme all
 ```
 
@@ -122,18 +137,39 @@ If you see an error of the form `xterm: Xt error: Can't open display:`, ensure t
 
 The FVP boots up with four terminal windows. 
 
-You should see the host linux kernel boot on terminal_0. You will then be prompted to login to buildroot. Enter `root` as both the username and password.
+You should see the host linux kernel boot on `terminal_0`. You will be prompted to login to buildroot. Enter `root` as both the username and password.
 
-[img_1]
+![img_1 #center](./cca-img1.png)
 
 
-`terminal_3` is connected to the Realm Management Monitor
+`terminal_3` of the FVP is connected to the Realm Management Monitor(RMM). The RMM is the software component of Arm CCA that is responsible for the management of Realms.
+
+The output from the RMM should look like:
+
+![img_2 #center](./cca-img2.png)
+
+You have successfully booted three worlds (Root, Secure and Non-secure) on the FVP at this point.
+
 ## Create a virtual guest in a realm
 
-You can now run `kvmtool` from your host linux prompt to launch a realm which runs guest linux. The kernel and filesystem for the realm are packaged into the buildroot host file system.
+To launch a realm which runs guest linux, you can now run `kvmtool` from your host linux prompt. The kernel `Image` and filesystem `realm-fs.ext4` for the realm are packaged into the buildroot host file system.
 
-You should see the guest linux kernel boot up in a realm and you will be presented with a buildroot prompt. To log into the realm, use `root` again as boot the username and password.
+```console
+lkvm run --realm -c 2 -m 256 -k /realm/Image -d /realm/realm-fs.ext4 -p earlycon
+```
 
-[img_2]
+You should see the guest linux kernel starting to boot up in a realm. Guest linux in the realm can take over 10 minutes to boot.
+
+During this time, you should also see output messages on the RMM console `terminal_3` that indicate that the realm is being created and activated.
+
+```console
+SMC_RMM_REC_CREATE            88232d000 8817b2000 88231a000 > RMI_SUCCESS
+SMC_RMM_REALM_ACTIVATE        8817b2000 > RMI_SUCCESS
+```
+
+After boot up, you will be prompted to login at the guest linux buildroot prompt. Use `root` again as both the username and password.
+
+[img_3]
+
 
 You have successfully created a virtual guest in a realm using the Arm CCA reference software stack.
