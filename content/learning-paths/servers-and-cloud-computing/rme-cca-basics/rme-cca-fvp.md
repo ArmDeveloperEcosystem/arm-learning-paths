@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-You need atleast 30 GB of free disk space on your machine to build the software stack.
+You need atleast 30 GB of free disk space on your machine to build the Arm CCA reference software stack.
 
 Install the necessary packages:
 
@@ -22,16 +22,16 @@ sudo apt update && sudo apt install git telnet xterm net-tools
 ## Overview
 
 The Arm Confidential Compute Architecture (Arm CCA) enables the construction of protected execution
-environments called Realms. Realms allow lower-privileged software, such as application or a virtual machine to
+environments called Realms. Realms allow lower-privileged software, such as an application or a virtual machine to
 protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources used by the Realm.
 
 The Arm Realm Management Extension (RME) architecture defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
 
-In this learning path, you will learn how to build and run the reference integration software stack for Arm CCA which demonstrates support for Arm's Realm Management Extension (RME) architecture feature. You will also learn how to create a realm that runs a guest linux kernel. 
+In this learning path, you will learn how to build and run the reference integration software stack for Arm CCA which demonstrates support for Arm's RME architecture feature. You will also learn how to create a realm that runs a guest linux kernel. 
 
 ## Build the docker container
 
-You will build the Arm CCA reference software stack in a docker container which contains all the build dependencies. 
+You can build the Arm CCA reference software stack in a docker container which contains all the build dependencies. 
 Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
 Clone the repository that contains the docker container file and utility scripts:
@@ -76,9 +76,9 @@ ubuntu@ip-172-16-0-235:/$
 
 You are now inside the root directory of the `aemfvp-builder` container and ready to build the software stack.
 
-## Build the reference CCA software stack
+## Build the reference Arm CCA software stack
 
-You can build the Arm CCA software stack in your running container using a manifest file. The manifest file is a collection of all component repositories needed to build this reference stack. 
+You can build the Arm CCA software stack in your running container using a manifest file. Inspect the [manifest file](https://git.gitlab.arm.com/arm-reference-solutions/arm-reference-solutions-manifest/-/blob/AEMFVP-A-RME-2023.09.29/pinned-aemfvp-a-rme.xml) to view all the component repositories needed to build this reference stack. 
 
 Inside the running container, change directory into the mounted directory.
 Use the repo tool and the manifest file to download the software stack:
@@ -89,13 +89,20 @@ repo init -u https://git.gitlab.arm.com/arm-reference-solutions/arm-reference-so
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
-Patch the linux kernel Kconfig file for arm64 targets. This patch enables extending the bootloader provided command line arguments. It is required to speed up execution of the software stack. Open up the Kconfig file in an editor of your choice and add the lines shown below:
+Patch the linux kernel Kconfig file for arm64 targets. This patch enables extending the bootloader provided command line arguments. It is required to speed up execution of the software stack. 
 
 ```console
 cd linux
 wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/rme-cca-basics/kconfig.patch
 git apply --ignore-space-change --whitespace=warn --inaccurate-eof -v kconfig.patch
+```
+The output should be similar to:
 
+```output
+Checking patch arch/arm64/Kconfig...
+Hunk #1 succeeded at 2260 (offset 60 lines).
+Applied patch arch/arm64/Kconfig cleanly.
+```
 Build the stack:
 
 ```console
@@ -148,19 +155,19 @@ The output from the RMM should look like:
 
 ![img_2 #center](./cca-img2.png)
 
-You have successfully booted three worlds (Root, Secure and Non-secure) on the FVP at this point.
+You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, RMM in realm, host linux in non-secure and Hafnium in secure. 
 
 ## Create a virtual guest in a realm
 
-To launch a realm which runs guest linux, you can now run `kvmtool` from your host linux prompt. The kernel `Image` and filesystem `realm-fs.ext4` for the realm are packaged into the buildroot host file system.
+Guest VMs can be launched in a realm using `kvmtool` from your host linux prompt. The kernel `Image` and filesystem `realm-fs.ext4` for the realm are packaged into the buildroot host file system.
 
 ```console
 lkvm run --realm -c 2 -m 256 -k /realm/Image -d /realm/realm-fs.ext4 -p earlycon
 ```
 
-You should see the guest linux kernel starting to boot up in a realm. Guest linux in the realm can take over 10 minutes to boot.
+You should see the guest linux kernel starting to boot in a realm. This step can take several minutes.
 
-During this time, you should also see output messages on the RMM console `terminal_3` that indicate that the realm is being created and activated.
+During this time, you should see output messages on the RMM console `terminal_3` that indicate that the realm is being created and activated.
 
 ```console
 SMC_RMM_REC_CREATE            88232d000 8817b2000 88231a000 > RMI_SUCCESS
@@ -169,7 +176,7 @@ SMC_RMM_REALM_ACTIVATE        8817b2000 > RMI_SUCCESS
 
 After boot up, you will be prompted to login at the guest linux buildroot prompt. Use `root` again as both the username and password.
 
-[img_3]
+![img_3 #center](./cca-img3.png)
 
 
 You have successfully created a virtual guest in a realm using the Arm CCA reference software stack.
