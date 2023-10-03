@@ -26,6 +26,8 @@ operatingsystems:
 tools_software_languages:
     - GCC
     - FVP
+    - RME
+    - CCA
     
 ### FIXED, DO NOT MODIFY
 # ================================================================================
