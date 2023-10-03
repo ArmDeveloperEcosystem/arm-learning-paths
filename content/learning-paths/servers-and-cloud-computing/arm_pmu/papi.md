@@ -6,7 +6,9 @@ layout: "learningpathall"
 
 ## Install PAPI
 
-Install PAPI by following the [documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI).
+Use the [Performance Application Programming Interface (PAPI) install guide](/install-guides/papi/) to install PAPI on your computer. 
+
+More information is available in the [documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI).
 
 Set the environment variable `PAPI_DIR` to the location where PAPI is installed. 
 
