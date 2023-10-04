@@ -25,7 +25,7 @@ PAPI is available as source code on GitHub.
 
 ## Before you begin
 
-This article provides concise instructions to download, build, and install PAPI on Arm Linux distributions.
+This article provides concise instructions to download, build and install PAPI on Arm Linux distributions.
 
 Confirm you are using an Arm machine by running:
 
@@ -52,7 +52,7 @@ sudo apt update -y
 sudo apt install -y make gcc
 ```
 
-## Download, build, install, and test PAPI
+## Download, build, install and test PAPI
 
 1. Clone the PAPI repository:
 
@@ -103,6 +103,6 @@ The output will be similar to:
 PAPI version is 7.0
 ```
 
-Your version may be slightly different.
+Your version may be slightly different but that is fine.
 
 You are now ready to use PAPI in your own applications.
