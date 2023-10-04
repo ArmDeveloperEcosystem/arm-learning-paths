@@ -22,9 +22,9 @@ tool_install: true
 weight: 1
 ---
 
-The Amazon EKS CLI, `eksctl`, is a command line tool to create and manage Kubernetes clusters in Amazon Kubernetes Service (EKS). It simplifies cluster creation and saves time compared to using the AWS console. For additional information refer to the [official documentation](https://eksctl.io/)
+The Amazon EKS CLI, `eksctl`, is a command line tool to create and manage Kubernetes clusters in Amazon Kubernetes Service (EKS). It simplifies cluster creation and saves time compared to using the AWS console. For additional information refer to the [official documentation](https://eksctl.io/).
 
-The EKS CLI is available for a variety of operating systems and Linux distributions and has multiple ways to install it. It runs on both Arm Linux distributions and Windows on Arm.
+The EKS CLI is available for a variety of operating systems and Linux distributions and there are multiple ways to install it. It runs on both Arm Linux distributions and Windows on Arm.
 
 ## Before you begin
 
