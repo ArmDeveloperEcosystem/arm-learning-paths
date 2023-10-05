@@ -31,7 +31,7 @@ The Arm Telemetry Solution provides tools and data for performance analysis.
 
 The Arm Topdown Methodology specifies a set of metrics and steps to measure them using the Telemetry Solution. 
 
-Refer to [Arm Neoverse V1 Performance Analysis Methodology whitepaper](https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/neoverse-v1-core-performance-analysis.pdf) for an introduction to the Arm Topdown methodology. 
+Refer to the [Arm Neoverse V1 Performance Analysis Methodology whitepaper](https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/neoverse-v1-core-performance-analysis.pdf) for an introduction to the Arm Topdown methodology. 
 
 The Telemetry Solution requires Linux Perf to collect metrics. 
 
@@ -57,7 +57,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 2. Install Perf
 
-Install Perf using the [Perf for Linux on Arm](/install-guides/perf) install guide.
+Install Perf using the [Perf for Linux on Arm install guide](/install-guides/perf).
 
 3. Install Python 3 and pip 
 
