@@ -103,6 +103,6 @@ The output will be similar to:
 PAPI version is 7.0
 ```
 
-Your version may be slightly different.
+Your version may be slightly different but that is fine.
 
 You are now ready to use PAPI in your own applications.
