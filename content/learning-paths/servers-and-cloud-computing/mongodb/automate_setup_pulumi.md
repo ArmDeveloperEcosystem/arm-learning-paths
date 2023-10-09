@@ -8,18 +8,49 @@ weight: 4 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-## Setup environment variables
+You can automate the MongoDB performance benchmarking setup, along with YCSB framework and the required infrastructure in AWS using Pulumi.
 
-Export the following environment variables on your local compute to connect to AWS account
+[Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
+
+## Before you begin
+
+The following github repo contains all the scripts required for this automation. Clone the repo on your local linux system
+
+```bash
+git clone https://github.com/pbk8s/pulumi-ec2.git
+```
+You would also need the gatord binary for performance analysis. [gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
+
+```bash
+git clone https://github.com/ARM-software/gator.git
+cd gator
+sudo apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu zip pkg-config
+./build-linux.sh
+```
+Once the build is successful, you should see an output like below
+
+```console
+Build complete. Please find gatord binaries at:
+    /home/ubuntu/gator/build-native-gcc-rel/gatord
+```
+
+Copy the gatord binary to the Pulumi working directory
+
+```bash
+cp <gator-build-path>/gator/build-native-gcc-rel/gatord <path-to-pulumi-working-directory>/pulumi-ec2/
+```
+
+## Install awscli and set environment variables
+Use the [awscli](https://learn.arm.com/install-guides/aws-cli/) learning path to install the awscli. 
+
+Set the following environment variables on your local computer to connect to your AWS account
 ```console
 export AWS_ACCESS_KEY_ID=<access-key-id>
 export AWS_SECRET_ACCESS_KEY=<secret-access-key>
 export AWS_SESSION_TOKEN=<session-token>
 ```
-
-## Install awscli on Ubuntu 22.04
+Execute the following command to validate the credentials
 ```console
-sudo apt install awscli -y
 aws sts get-caller-identity
 ```
 
@@ -31,9 +62,10 @@ You should see an output as follows
     "Arn": "arn:aws:sts::123456789:assumed-role/myrole/xyz@email.com"
 }
 ```
-Execute the following script to set the private key parameters
+Navigate to 'pulumi-ec2' folder and set it as your working directory
+
 ```bash
-./get-key.sh
+cd pulumi-ec2
 ```
 
 ## Install python on Ubuntu 22.04
@@ -43,43 +75,17 @@ sudo apt install python3-pip -y
 sudo apt install python3.10-venv
 ```
 
-## Install gator on Ubuntu 22.04
-[gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
-
-```bash
-git clone https://github.com/ARM-software/gator.git
-pushd gator
-./build-linux.sh
-popd
-```
-
 ## Install Pulumi on Ubuntu 22.04
-[Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
 
-You can install Pulumi with the following command:
+You can install Pulumi with this [install guide](https://learn.arm.com/install-guides/pulumi/)
 
-```bash
-curl -fsSL https://get.pulumi.com | sh
-```
-Run the following command to add Pulumi to local environment
-```bash
-source $HOME/.bashrc
-```
-Check the version of Pulumi with the following:
+Check the version of Pulumi:
 
 ```bash
 pulumi version
-v3.78.0
 ```
-To learn more about Pulumi, check out the [install guide](https://learn.arm.com/install-guides/pulumi/).
 
 ## Setup configurations 
-
-Clone the following github repo on your local computer
-
-```bash
-git clone https://github.com/pbk8s/pulumi-ec2.git
-```
 
 Execute the following python script to install all dependencies
 
@@ -87,10 +93,9 @@ Execute the following python script to install all dependencies
 ./python-setup.sh
 ```
 
-Navigate to 'pulumi-ec2' folder and open the 'Pulumi.yaml' file
+Open the 'Pulumi.yaml' file with your choice of editor
 
 ```bash
-cd pulumi-ec2
 vi Pulumi.yaml
 ```
 
@@ -151,13 +156,13 @@ group = aws.ec2.SecurityGroup('p1-security-grouup',
     )
 ```
 
-Before executing the Pulumi commands, copy the gatord binary generated earlier to the Pulumi working directory
+## Pulumi commands 
+
+Log in to your local machine, a shortcut to use ~/.pulumi to store project data.
 
 ```bash
-cp <gator-build-path>/gator/build-native-gcc-rel/gatord <path-to-pulumi-working-directory>/pulumi-ec2/
+pulumi login --local
 ```
-
-## Pulumi commands 
 
 Execute the following command to set the AWS region where you'd like to deploy the resources:
 
@@ -168,7 +173,7 @@ Enter the name of the new stack you'd like to create.
 
 Now, deploy the Pulumi stack with the following command
 
-```console
+```bash
 pulumi up
 ```
 Select the name of the stack from previous step and hit enter. You should see the following output.
@@ -199,6 +204,15 @@ Outputs:
 Resources:
     + 13 to create
 ```
-Select yes to create the stack. Once successfully completed, you can ssh to the instance using the 'public_ip' or 'public_dns' property. Verify that you can see all of the following components installed: mongodb, ycsb test suite etc.
+Select yes to create the stack. Once successfully completed, you can ssh to the instance using the 'public_ip' or 'public_dns' property. 
 
-Run a few tests from previous pages to verify all of the components installed properly.
+Execute the following script to get the private key to SSH to the new instance
+```bash
+./get-key.sh
+```
+For passphrase, you can just hit 'Enter' key. You should see the following message on the console
+```console
+You can SSH now: ssh -i p1-key.pem ubuntu@
+```
+This will generate a .pem file 'p1-key.pem' in your current working directory. Use this key to SSH to the instance created by Pulumi.
+Verify that you can see all of the following components installed: mongodb, ycsb test suite, java etc.
