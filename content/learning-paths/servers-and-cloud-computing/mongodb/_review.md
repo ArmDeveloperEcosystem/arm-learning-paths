@@ -23,11 +23,11 @@ review:
 
     - questions:
         question: >
-            Can you test MongoDB performance by running multiple threads executing different operation types?
+            Can MongoDB performance be tested by running multiple threads executing different operation types?
         answers:
             - "Yes"
             - "No"
-        correct_answer: 1                  
+        correct_answer: 0                  
         explanation: >
             You can run multiple threads executing either all the same or different database operations.
                
@@ -39,9 +39,9 @@ review:
             - "Arm Assembly"
             - "Go"
             - "Java"
-        correct_answer: 4                    
+        correct_answer: 3                    
         explanation: >
-            You will need Java 1.8 or newer installed, which can be done with one bash command.
+            You will need to have Java 1.8 or newer installed, which can be done with a single bash command.
 
 
 
