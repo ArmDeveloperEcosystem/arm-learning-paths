@@ -24,12 +24,12 @@ You would also need the gatord binary for performance analysis. [gator](https://
 ```bash
 git clone https://github.com/ARM-software/gator.git
 cd gator
-sudo apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu zip pkg-config
+sudo apt update && sudo apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu zip pkg-config
 ./build-linux.sh
 ```
 Once the build is successful, you should see an output like below
 
-```console
+```output
 Build complete. Please find gatord binaries at:
     /home/ubuntu/gator/build-native-gcc-rel/gatord
 ```
@@ -37,7 +37,8 @@ Build complete. Please find gatord binaries at:
 Copy the gatord binary to the Pulumi working directory
 
 ```bash
-cp <gator-build-path>/gator/build-native-gcc-rel/gatord <path-to-pulumi-working-directory>/pulumi-ec2/
+cp build-native-gcc-rel/gatord ~/pulumi-ec2/
+cd ~/
 ```
 
 ## Install awscli and set environment variables
@@ -62,11 +63,6 @@ You should see an output as follows
     "Arn": "arn:aws:sts::123456789:assumed-role/myrole/xyz@email.com"
 }
 ```
-Navigate to 'pulumi-ec2' folder and set it as your working directory
-
-```bash
-cd pulumi-ec2
-```
 
 ## Install python on Ubuntu 22.04
 ```bash
@@ -86,6 +82,12 @@ pulumi version
 ```
 
 ## Setup configurations 
+
+Navigate to 'pulumi-ec2' folder and set it as your working directory
+
+```bash
+cd ~/pulumi-ec2
+```
 
 Execute the following python script to install all dependencies
 
@@ -115,7 +117,7 @@ template:
       default: us-east-1
 ```
 
-Edit the __main__.py file to change the availabilty zone of your network subnet
+Edit the `__main__.py` file to change the availabilty zone of your network subnet
 
 ```python
 subnet = aws.ec2.Subnet("p1-subnet",
@@ -204,7 +206,7 @@ Outputs:
 Resources:
     + 13 to create
 ```
-Select yes to create the stack. Once successfully completed, you can ssh to the instance using the 'public_ip' or 'public_dns' property. 
+You will be prompted to update the stack. Select yes to create the stack. Once successfully completed, you can ssh to the instance using the 'public_ip' or 'public_dns' property. 
 
 Execute the following script to get the private key to SSH to the new instance
 ```bash
