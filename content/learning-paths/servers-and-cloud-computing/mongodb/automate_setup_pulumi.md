@@ -14,17 +14,39 @@ You can automate the MongoDB performance benchmarking setup, along with YCSB fra
 
 ## Before you begin
 
-The following github repo contains all the scripts required for this automation. Clone the repo on your local linux system
+Install the python dependencies on your Ubuntu 22.04 machine:
+
+```bash
+sudo apt update
+sudo apt install python-is-python3 -y
+sudo apt install python3-pip -y
+sudo apt install python3.10-venv
+```
+
+## Install Pulumi 
+
+You can install Pulumi with this [install guide](https://learn.arm.com/install-guides/pulumi/)
+
+Check the version of Pulumi:
+
+```bash
+pulumi version
+```
+
+## Clone the Repository
+The following github repo contains all the scripts required for this automation. Clone the repo on your local linux system:
 
 ```bash
 git clone https://github.com/pbk8s/pulumi-ec2.git
 ```
+
+## Build gatord
 You would also need the gatord binary for performance analysis. [gator](https://github.com/ARM-software/gator) is a target agent (daemon), part of Arm Streamline, a set of performance analysis tools. Use the following commands to build it from source.
 
 ```bash
 git clone https://github.com/ARM-software/gator.git
 cd gator
-sudo apt update && sudo apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu zip pkg-config
+sudo apt-get install ninja-build cmake gcc g++ g++-aarch64-linux-gnu zip pkg-config
 ./build-linux.sh
 ```
 Once the build is successful, you should see an output like below
@@ -38,7 +60,6 @@ Copy the gatord binary to the Pulumi working directory
 
 ```bash
 cp build-native-gcc-rel/gatord ~/pulumi-ec2/
-cd ~/
 ```
 
 ## Install awscli and set environment variables
@@ -62,23 +83,6 @@ You should see an output as follows
     "Account": "123456789",
     "Arn": "arn:aws:sts::123456789:assumed-role/myrole/xyz@email.com"
 }
-```
-
-## Install python on Ubuntu 22.04
-```bash
-sudo apt install python-is-python3 -y
-sudo apt install python3-pip -y
-sudo apt install python3.10-venv
-```
-
-## Install Pulumi on Ubuntu 22.04
-
-You can install Pulumi with this [install guide](https://learn.arm.com/install-guides/pulumi/)
-
-Check the version of Pulumi:
-
-```bash
-pulumi version
 ```
 
 ## Setup configurations 
