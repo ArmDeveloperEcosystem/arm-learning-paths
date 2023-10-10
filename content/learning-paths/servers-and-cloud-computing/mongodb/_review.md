@@ -17,7 +17,7 @@ review:
         answers:
             - "Yes"
             - "No"
-        correct_answer: 1                    
+        correct_answer: 0                    
         explanation: >
             MongoDB is fully supported on 64-bit Arm servers running Linux.
 
