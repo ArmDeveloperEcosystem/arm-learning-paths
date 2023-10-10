@@ -80,6 +80,7 @@ import platform
 print("Python version", platform.python_version())
 print("Machine is", platform.uname().system, platform.uname().release, platform.uname().machine)
 ```
+
 Run the code.
 ```console
 py uname.py
@@ -94,12 +95,14 @@ Machine is Windows 11 ARM64
 
 Python `pip` can be used to install packages. 
 
-For example, to install `Flask`:
+For example, to install [Flask](https://palletsprojects.com/p/flask/):
 ```console
 pip install Flask
 ```
+
 Save the code below as `hello.py`:
 
+#### hello.py
 ```python
 import platform
 from flask import Flask
@@ -120,7 +123,6 @@ python hello.py
 
 The output will be similar to:
 ```output
-C:\Users\ronan>py hello.py
  * Serving Flask app 'hello'
  * Debug mode: off
 WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
