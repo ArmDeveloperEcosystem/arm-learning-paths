@@ -19,7 +19,7 @@ Refer to this [page](https://www.mongodb.com/docs/manual/administration/producti
 
 ## Install and Run MongoDB on Ubuntu
 
-Launch an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) running either Ubuntu versions 20.04 or 22.04.
+Launch an [Arm based instance](/content/learning-paths/servers-and-cloud-computing/csp/) running either Ubuntu versions 20.04 or 22.04.
 
 Follow [Install MongoDB Community Edition on Ubuntu](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) to install and run MongoDB on your instance.
 
