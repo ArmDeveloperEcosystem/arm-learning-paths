@@ -156,10 +156,11 @@ output options:
 4. Test `topdown-tool` 
 
 {{% notice Note %}}
-You may need to enable user space access to the counters.
+You may need to enable access to the counters. More information about the options is in the [Linux Perf install guide](/install-guides/perf/).
 
 ```console
 sudo sh -c "echo -1 > /proc/sys/kernel/perf_event_paranoid"
+sudo sh -c "echo 0 > /proc/sys/kernel/kptr_restrict"
 ```
 {{% /notice %}}
 
