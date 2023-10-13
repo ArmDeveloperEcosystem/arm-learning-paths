@@ -19,18 +19,18 @@ Refer to this [page](https://www.mongodb.com/docs/manual/administration/producti
 
 ## Install and Run MongoDB on Ubuntu
 
-Launch an [Arm based instance](/content/learning-paths/servers-and-cloud-computing/csp/) running either Ubuntu versions 20.04 or 22.04.
+Launch an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) running either Ubuntu versions 20.04 or 22.04.
 
 Follow [Install MongoDB Community Edition on Ubuntu](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-ubuntu/) to install and run MongoDB on your instance.
 
 ## Install and Run MongoDB on Red Hat
 
-Launch an [Arm based instance](/content/learning-paths/servers-and-cloud-computing/csp/) running RHEL8 or RHEL9.
+Launch an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) running RHEL8 or RHEL9.
 
 Follow [Install MongoDB Community Edition on Red Hat or CentOS](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-red-hat/) to install and run MongoDB on your instance.
 
 ## Install and Run MongoDB on Amazon Linux 2
 
-Launch an [Arm based instance](/content/learning-paths/servers-and-cloud-computing/csp/) running Amazon Linux 2 or Amazon Linux 2023.
+Launch an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) running Amazon Linux 2 or Amazon Linux 2023.
 
 Follow [Install MongoDB Community Edition on Amazon Linux](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-amazon/) to install and run MongoDB on your instance.
