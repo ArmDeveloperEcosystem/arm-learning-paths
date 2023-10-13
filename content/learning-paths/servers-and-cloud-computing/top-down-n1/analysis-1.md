@@ -12,7 +12,7 @@ You can also run this Learning Path on single board computers with the Cortex-A7
 The example output provided is from the Khadas Edge2, but yours will be different with different hardware.
 {{% /notice %}}
 
-The white paper explains the definitions of the metrics and the performance analysis results for the stride benchmark in more detail. The collection commands and interpretation of the metrics are provided below in the same order as the white paper. 
+The white paper explains the definitions of the metrics and the performance analysis results for the stride benchmark in more detail. The section below provides the collection commands and interpretation of the metrics in the same order as the white paper. 
 
 ## Workload characterization using counting
 
@@ -181,7 +181,7 @@ Crypto Operations Percentage........ 0.00% operations
 
 The instruction mix shows 60% integer operations, 20% load operations, and 20% branches. 
 
-This indicates the application is memory bound and would benefit from improved caching. 
+This suggests that the application is memory bound and would benefit from improved caching. 
 
 The workload is not front end bound, but it is still useful to check the branch effectiveness as the instruction mix shows 20% branches.
 
@@ -297,7 +297,7 @@ You will see the source code of the `main` function with the percent of samples 
 
 ![main #center](report-3.png)
 
-All the sample are on `subs` instruction which is right after the load instruction which reads the array and causes the high cache miss rate. 
+All the samples are on `subs` instruction which is right after the load instruction which reads the array and causes the high cache miss rate. 
 
 The next section demonstrates an optimization to increase performance.
 

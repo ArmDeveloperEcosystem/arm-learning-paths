@@ -10,7 +10,7 @@ The white paper presents a micro-benchmark from the DynamoRIO project. The strid
 
 The original source code is at https://github.com/DynamoRIO/dynamorio/blob/master/clients/drcachesim/tests/stride_benchmark.cpp
 
-The code below has been slightly modified to increase the number of iterations so that it runs longer for performance analysis. 
+The code below is slightly modified to increase the number of iterations so that it runs longer for performance analysis. 
 
 1. Use a text editor to copy the code below into a text file named `stride.cpp`:
 
@@ -105,7 +105,7 @@ main(int argc, const char *argv[])
 g++ -g -O3 stride.cpp -o stride
 ```
 
-Using `-g` will provide source code information later for `perf report`.
+Using `-g` provides source code information later for `perf report`.
 
 3. Run the application:
 
@@ -113,7 +113,7 @@ Using `-g` will provide source code information later for `perf report`.
 ./stride
 ```
 
-The program runs for about 10-20 seconds depending on your hardware, and the expected output is:
+The program runs for about 10-20 seconds, depending on your hardware, and the expected output is:
 
 ```output
 Value = 12779520

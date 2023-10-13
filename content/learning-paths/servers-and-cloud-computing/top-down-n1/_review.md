@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Lower IPC indicated a program will complete in less time.
+            Lower IPC indicates a program will complete in less time.
         answers:
             - "True"
             - "False"

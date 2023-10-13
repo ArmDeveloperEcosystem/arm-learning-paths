@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    To use performance counters in your source code proceed to:
+    To use performance counters in your source code, proceed to:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/arm_pmu/" 

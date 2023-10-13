@@ -12,7 +12,7 @@ learning_objectives:
     - Make an application code change and see improved performance
 
 prerequisites:
-    - An Arm Neoverse N1 computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. A virtual machine (VM) can be used, but fewer counters may be available and not all commands may succeed. 
+    - An Arm Neoverse N1 computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but it may offer fewer counters and some commands might not succeed. 
 
 author_primary: Jason Andrews
 

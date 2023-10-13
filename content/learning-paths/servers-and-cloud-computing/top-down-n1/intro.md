@@ -17,7 +17,7 @@ You will also need the GNU C++ compiler, `g++`. Refer to the [GNU Compiler insta
 
 Application performance analysis involves measuring hardware and software events, understanding their meaning, and making software changes to improve performance. Performance analysis is a challenging task that may or may not yield meaningful results, but learning how to measure software performance and knowing how to identify performance issues is an important skill. 
 
-The Linux Perf event system provides a way to collect events for performance analysis. The most common way to collect performance information is Linux Perf, but there are others. 
+The Linux Perf event system provides a way to collect events for performance analysis. Linux Perf is a common tool for collecting performance information, but other tools exist. 
 
 There are two types of events, software events and hardware events. Examples of software events are context switches and page faults. Examples of hardware events are instructions executed and cache accesses.
 
@@ -33,7 +33,7 @@ Performance analysis requires an understanding of the hardware events, and how t
 
 Arm Neoverse processors include more than 100 hardware counters, but not all are important to get started with performance analysis. 
 
-Some important event categories are:
+Important event categories include:
 - Cycle and instruction counting 
 - Branch prediction effectiveness
 - Translation Lookaside Buffer (TLB) effectiveness
@@ -41,13 +41,13 @@ Some important event categories are:
 - Memory traffic
 - Instruction mix
 
-The white paper covers these events in more detail. Each Neoverse CPU also has a complete PMU guide documenting all events. 
+The white paper covers these events in more detail. Each Neoverse CPU also has a complete PMU guide that documents all events. 
 
 ## Performance metrics
 
 To make performance analysis easier, combinations of events are used to compute frequently used metrics. For example, the L1 instruction cache miss rate is computed by dividing the L1 instruction cache refill count by the number of L1 instruction cache accesses. 
 
-The important performance metrics for the Neoverse N1 are outlined in the white paper and the calculations are provided. The metrics are built into the Telemetry Solution so you don't need to make the calculation or write scripts to compute the metrics. 
+The white paper outlines the important performance metrics for the Neoverse N1 and provides the calculations. The metrics are built into the Telemetry Solution so you don't need to make the calculation or write scripts to compute the metrics. 
 
 If the events and metrics are not familiar to you, you may want to learn more about common CPU architecture features so you are better able to connect software execution to hardware events. Additional resources are provided in the Next Steps section of this Learning Path.
 
