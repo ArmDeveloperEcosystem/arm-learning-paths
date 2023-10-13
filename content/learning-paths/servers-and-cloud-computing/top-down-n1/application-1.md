@@ -119,4 +119,4 @@ The program runs for about 10-20 seconds depending on your hardware, and the exp
 Value = 12779520
 ```
 
-The next section demonstrates how to collect metics for performance analysis. 
+The next section demonstrates how to collect metrics for performance analysis. 

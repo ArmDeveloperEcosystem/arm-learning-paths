@@ -181,7 +181,7 @@ Crypto Operations Percentage........ 0.00% operations
 
 The instruction mix shows 60% integer operations, 20% load operations, and 20% branches. 
 
-Thi indicates the application is memory bound and would benefit from improved caching. 
+This indicates the application is memory bound and would benefit from improved caching. 
 
 The workload is not front end bound, but it is still useful to check the branch effectiveness as the instruction mix shows 20% branches.
 
