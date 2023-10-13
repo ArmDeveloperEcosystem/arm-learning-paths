@@ -31,8 +31,6 @@ The Arm Telemetry Solution provides tools and data for performance analysis.
 
 The Arm Topdown Methodology specifies a set of metrics and steps to measure them using the Telemetry Solution. 
 
-Refer to the [Arm Neoverse V1 Performance Analysis Methodology whitepaper](https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/neoverse-v1-core-performance-analysis.pdf) for an introduction to the Arm Topdown methodology. 
-
 The Telemetry Solution requires Linux Perf to collect metrics. 
 
 The Telemetry Solution also includes data for defining PMU events, a test suite to stress CPU resources, and a tool to parse Statistical Profiling Extension (SPE) data for analysis. 
@@ -156,10 +154,11 @@ output options:
 4. Test `topdown-tool` 
 
 {{% notice Note %}}
-You may need to enable user space access to the counters.
+You may need to enable access to the counters. More information about the options is in the [Linux Perf install guide](/install-guides/perf/).
 
 ```console
 sudo sh -c "echo -1 > /proc/sys/kernel/perf_event_paranoid"
+sudo sh -c "echo 0 > /proc/sys/kernel/kptr_restrict"
 ```
 {{% /notice %}}
 
