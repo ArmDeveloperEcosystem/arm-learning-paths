@@ -25,7 +25,7 @@ sudo apt install python3.10-venv
 
 ## Install Pulumi 
 
-You can install Pulumi with this [installation guide](https://learn.arm.com/install-guides/pulumi/)
+You can install Pulumi with this [install guide](https://learn.arm.com/install-guides/pulumi/)
 
 Check the version of Pulumi:
 
