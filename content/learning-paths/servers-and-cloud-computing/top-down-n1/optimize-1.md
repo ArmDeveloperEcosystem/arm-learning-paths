@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ## Performance Optimization
 
-Software prefetching can be used as a way to improve performance. 
+You can use software prefetching to improve performance. 
 
 
 The code to enable prefetching is:
@@ -18,7 +18,7 @@ The code to enable prefetching is:
         #endif
 ```
 
-To enable data prefetching recompile the application with 2 defines. You can experiment with values of `DIST` to see how performance is impacted. 
+To enable data prefetching, recompile the application with 2 defines. You can experiment with values of `DIST` to see how performance is impacted. 
 
 The white paper shows a graph of various values of DIST and explains how the performance saturates at a `DIST` value of 40 on the N1SDP hardware. The example below uses 100 for `DIST`.
 
@@ -59,7 +59,7 @@ The table below shows the improvements in instructions, cycles, and IPC.
 | IPC          | 0.22 | 0.63 | 
 | Runtime      | 20.1 sec | 9.9 sec | 
 
-As outlined in the white paper the IPC is nearly tripled and the runtime is cut in half. 
+As outlined in the white paper, the IPC nearly triples and the runtime halves. 
 
 You can review how the other metrics change with prefetching enabled. 
 
