@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on Hyperscan is a great next step.
+    To use performance counters in your source code, proceed to:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/vectorscan/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/arm_pmu/" 
 # Link to the next learning path being recommended.
 
 
@@ -18,21 +18,21 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/vectorscan/"
 
 further_reading:
     - resource:
-        title: MongoDB Manual
-        link: https://www.mongodb.com/docs/manual/
+        title: "Arm Neoverse N1: Core Performance Analysis Methodology"
+        link: https://armkeil.blob.core.windows.net/developer/Files/pdf/white-paper/neoverse-n1-core-performance-v2.pdf
         type: documentation
     - resource:
-        title: MongoDB Performance Tool
-        link: https://github.com/idealo/mongodb-performance-test#readme
+        title: "Arm Neoverse N1 PMU Guide"
+        link: https://developer.arm.com/documentation/PJDOC-466751330-547673/r4p1/ 
         type: documentation
     - resource:
-        title: YCSB
-        link: https://github.com/brianfrankcooper/YCSB/wiki/
-        type: documentation
+        title: "Introduction to Computer Architecture"
+        link: https://www.arm.com/resources/education/education-kits/computer-architecture 
+        type: book
     - resource:
-        title: Compare performance of MongoDB on Arm vs Intel
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
-        type: blog
+        title: "Computer Architecture: A Quantitative Approach"
+        link: https://www.amazon.com/Computer-Architecture-Quantitative-John-Hennessy/dp/012383872X
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
