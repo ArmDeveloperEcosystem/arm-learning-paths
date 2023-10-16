@@ -129,7 +129,7 @@ On your host machine, download and extract this FVP:
 
 ```console
 cd ~/cca-stack
-https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
+wget https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
 tar -xvzf FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
 ```
 
