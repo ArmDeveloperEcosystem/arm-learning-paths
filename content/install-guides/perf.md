@@ -142,7 +142,19 @@ sudo cp tools/perf/perf /usr/local/bin
 
 ## Test Perf {#test}
 
-Regardless of how you installed Perf, try the `perf list` command:
+Regardless of how you installed Perf, run the `version` command:
+
+```console
+perf version
+```
+
+The output will be similar to:
+
+```output
+perf version 5.15.116
+```
+
+You can also try the `list` command to confirm `perf` is working as expected:
 
 ```console
 perf list
@@ -259,6 +271,18 @@ To permanently set the paranoid level, add the following line to the file `/etc/
 ```console
 kernel.perf_event_paranoid=2
 ```
+
+### Additional Perf commands
+
+There are five common commands used in performance analysis. 
+
+* **stat** provides performance counter statistics for the overall execution of a program
+
+* **record** samples the program and records the samples into a data file (perf.data by default)
+
+* **report** generates a report of where the samples occurred 
+
+* **annotate** displays the annotated code showing the source and assembly code for the samples
 
 ### Arm PMU driver
 

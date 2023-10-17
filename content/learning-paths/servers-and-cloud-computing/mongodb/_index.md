@@ -21,7 +21,7 @@ test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4
 test_maintenance: true
 test_status:
 - passed
-title: Learn about MongoDB on Arm servers
+title: Test the performance of MongoDB on Arm servers
 tools_software_languages:
 - MongoDB
 - AWS
