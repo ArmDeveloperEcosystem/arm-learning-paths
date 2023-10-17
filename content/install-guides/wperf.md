@@ -55,10 +55,15 @@ The latest release package `windowsperf-bin-<version>.zip` can be downloaded fro
 https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
 ```
 To download directly from command prompt, use:
+
 ```console
+mkdir windowsperf-bin-3.2.0
+cd windowsperf-bin-3.2.0
 curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.2.0/windowsperf-bin-3.2.0.zip --output windowsperf-bin-3.2.0.zip
 ```
-Unzip the package to your preferred location.
+
+Unzip the package:
+
 ```console
 tar -xmf windowsperf-bin-3.2.0.zip
 ```
@@ -81,16 +86,19 @@ cd windowsperf-bin-3.2.0
 ### Install with devcon {#devcon}
 
 Navigate into the `wperf-driver` folder, and use `devcon` to install the driver:
+
 ```command
 cd wperf-driver
 devcon install wperf-driver.inf Root\WPERFDRIVER
 ```
 You will see output similar to:
+
 ```output
 Device node created. Install is complete when drivers are installed...
 Updating drivers for Root\WPERFDRIVER from <path>\wperf-driver.inf.
 Drivers installed successfully.
 ```
+
 ### Install with wperf-devgen {#devgen}
 
 Copy the `wperf-devgen.exe` executable to the `wperf-driver` folder.
@@ -126,10 +134,10 @@ wperf -version
 ```
 You should see output similar to:
 ```output
-Component     Version
-=========     =======
-wperf         3.2.0
-wperf-driver  3.2.0
+Component     Version  GitVer
+=========     =======  ======
+wperf         3.2.0    a947eed8
+wperf-driver  3.2.0    a947eed8
 ```
 ## Further reading
 
