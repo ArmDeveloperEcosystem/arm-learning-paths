@@ -130,7 +130,7 @@ Once the above driver is installed, you can use `wperf` without `Administrator` 
 For example:
 ```command
 cd ..
-wperf -version
+wperf --version
 ```
 You should see output similar to:
 ```output
