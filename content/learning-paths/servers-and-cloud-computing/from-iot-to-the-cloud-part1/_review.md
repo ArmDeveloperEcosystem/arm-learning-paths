@@ -9,7 +9,7 @@ review:
             - Microsoft Firewall
         correct_answer: 1                    
         explanation: >
-            Network Security Group is the Azure resource you use to filter newtork traffic: https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview
+            [Network Security Group](https://learn.microsoft.com/en-us/azure/virtual-network/network-security-groups-overview) is the Azure resource you can use to filter newtork traffic. 
 
     - questions:
         question: >
@@ -22,7 +22,7 @@ review:
 
         correct_answer: 3
         explanation: >
-            .NET CLI is the command-line tool you use to build and run applications. The tool is accessed by dotnet command. To run the application you use run subcommand. See here to learn more: https://learn.microsoft.com/en-us/dotnet/core/tools/
+            .NET CLI is the command-line tool you use to build and run applications. The tool is accessed by dotnet command. To run the application you use run subcommand. See [this .NET CLI article](https://learn.microsoft.com/en-us/dotnet/core/tools) to learn more.
 
 
 
