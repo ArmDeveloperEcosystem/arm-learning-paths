@@ -1,7 +1,7 @@
 ---
 next_step_guidance: Part 2
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+
 
 # further_reading:
 #     - resource:
