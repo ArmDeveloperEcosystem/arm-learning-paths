@@ -38,7 +38,7 @@ export PATH="/home/arm/.dotnet/:$PATH"
 dotnet --list-sdsk
 ```
 
-*Note* that, in this tutorial, we installed .NET 7 because the application we will deploy was built using .NET 7. If you need to install another .NET version, modify the channel parameter of the installation script.
+{{% notice Note %}} In this tutorial, we installed .NET 7 because the application we will deploy was built using .NET 7. If you need to install another .NET version, modify the channel parameter of the installation script.{{% /notice %}}
 
 To install git, use the terminal of the virtual machine and type: 
 ```console
@@ -90,3 +90,6 @@ Then, click **Add** and wait for the security rule to be applied.
 
 Once this is done, open your web browser and type the public IP address of your VM followed by 8080 port: **52.149.156.228:8080**. You'll see that the application is up and running:
 ![Application#left](figures/17.png "Figure 17. An application deployed to Azure virtual machine")
+
+## Summary
+This tutorial has shown you how to create an arm64-powered Virtual Machine in Microsoft Azure, how to connect to that VM using SSH, and how to install the tools required to build and run the .NET web application. Finally, you have learned how to configure a network security group to enable inbound traffic on port 8080.

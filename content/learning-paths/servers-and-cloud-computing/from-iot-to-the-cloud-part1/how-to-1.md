@@ -13,4 +13,4 @@ As an IoT or Arm developer, you are already familiar with app development for yo
 
 Cloud providers including Microsoft Azure are now adopting this technology. Specifically, Azure provides arm64-powered virtual machines which you can use to deploy your apps to utilize arm64 power and reduce the carbon trace.
 
-This tutorial demonstrates how to create the arm64-powered virtual machine in Microsoft Azure and use it for hosting a .NET application. The idea is to show you how to leverage Microsoft Azure, .NET, and aarch64 to build and host a central unit for your IoT solutions.
+This tutorial demonstrates how to create the arm64-powered virtual machine in Microsoft Azure and use it for running a .NET application. The idea is to show you how to leverage Microsoft Azure, .NET, and aarch64 to build and host a central unit for your IoT solutions.

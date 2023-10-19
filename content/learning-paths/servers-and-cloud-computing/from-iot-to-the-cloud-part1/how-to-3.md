@@ -7,7 +7,8 @@ layout: learningpathall
 ---
 
 ## Objective
-You will now connect to the VM using the SSH protocol and the public IP address of the virtual machine. *Note* that in this tutorial we will be using the public IP **52.149.156.228**. Please make sure to use the public IP of your virtual machine instead. 
+You will now connect to the VM using the SSH protocol and the public IP address of the virtual machine. 
+{{% notice Note %}} In this tutorial we will use the public IP **52.149.156.228**. Please make sure to use the public IP of your virtual machine instead. {{% /notice %}}
 
 You can use a local terminal or the Azure Cloud Shell to connect to the VM. The latter is available directly from the Azure Portal and to avoid installing additional tools, we will use the Cloud Shell.
 

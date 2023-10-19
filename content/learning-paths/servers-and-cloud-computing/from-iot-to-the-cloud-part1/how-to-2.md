@@ -22,6 +22,8 @@ This takes you to the **Create a Virtual Machine** wizard as shown below:
 ![Creating Virtual Machine#left](figures/04.png "Figure 4. Virtual machine wizard")
 
 ### Virtual machine configuration
+Configure your VM with the following settings:
+
 1. Subscription: select your subscription.
 2. Resource group: click Create new link, then type **rg-arm64**, and click OK.
 3. Virtual machine name: **vm-arm64**.
@@ -33,7 +35,9 @@ This takes you to the **Create a Virtual Machine** wizard as shown below:
 9. Size:
     * Click **See all sizes**.
     * In the **Select a VM size** type **D2pds** in the search box
-    * Select **D2pds_v5**. *Note* that this size might not be available due to quota limits. If this happens, click **Request quota link** (which is located next to the **VM size** name). This will activate a New Quota Request. Type **2** under New limit and click Submit. Wait a few minutes for the quota limits to be updated.
+    * Select **D2pds_v5**. 
+
+{{% notice Note %}} This size might not be available due to quota limits. If this happens, click **Request quota link** (which is located next to the **VM size** name). This will activate a New Quota Request. Type **2** under New limit and click Submit. Wait a few minutes for the quota limits to be updated.{{% /notice %}}
 
 At this point, your configuration should look like this example:
 ![Creating Virtual Machine#left](figures/05.png "Figure 5. Virtual machine wizard (configured)")
