@@ -14,7 +14,7 @@ learning_objectives:
     - Configure the network security group of the VM to expose the application over the Internet.
 
 prerequisites:
-    - 'Subscription to Azure. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/'    
+    - 'A subscription to Azure. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/'    
 
 author_primary: Dawid Borycki
 
