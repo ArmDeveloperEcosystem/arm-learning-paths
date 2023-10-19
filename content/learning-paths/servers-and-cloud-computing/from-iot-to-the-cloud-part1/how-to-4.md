@@ -56,7 +56,7 @@ The application sources will be cloned to the People.WebApp folder. Change the w
 ```conolse 
 cd People.WebApp/
 ```
-Then, run the application so that it will listen on port 8080:
+Then, run the application so that it will listen for requests on port 8080:
 ```console
 dotnet run --urls "http://0.0.0.0:8080"
 ```
@@ -67,12 +67,12 @@ After completing this step, you will see the following output:
 The application is ready and listening for the requests on port 8080. However, the network traffic is blocked on all ports except 22. You will need to configure the Network Security Group to enable the traffic. 
 
 ### Configure Network Security Group 
-To allow the traffic on port 8080 for the Virtual Machine **vm-arm64**, proceed as follows:
-1.	In the search box of Azure Portal, type **vm-arm64** and select this resource
-2.	In the vm-arm64 screen, click the Networking tab on the left (it's under **Settings**). You will see the following screen:
+To allow traffic on port 8080 for the Virtual Machine **vm-arm64**, proceed as follows:
+1.	In the search box of the Azure Portal, type **vm-arm64** and select this resource
+2.	In the **vm-arm64** screen, click the **Networking** tab on the left (it's under **Settings**). You will see the following screen:
 ![Application#left](figures/15.png "Figure 15. Networking tab of the virtual machine")
 
-In the Networking tab of the Virtual Machine, click the **Add inbound port rule** button (it's on the right). This will open a new popup window **Add inbound security rule**:
+In the **Networking** tab of the Virtual Machine, click the **Add inbound port rule** button (it's on the right). This will open a new popup window **Add inbound security rule**:
 ![Application#left](figures/16.png "Figure 16. Adding inbound port rule")
 
 Ensure the rule is configured as follows:
@@ -88,5 +88,5 @@ Ensure the rule is configured as follows:
 
 Then, click **Add** and wait for the security rule to be applied.
 
-Once this is done, open your web browser and type the public IP address of your VM followed by 8080 port: **52.149.156.228:8080**. You'll see the application up and running:
+Once this is done, open your web browser and type the public IP address of your VM followed by 8080 port: **52.149.156.228:8080**. You'll see that the application is up and running:
 ![Application#left](figures/17.png "Figure 17. An application deployed to Azure virtual machine")
