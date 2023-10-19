@@ -15,7 +15,7 @@ To further measure the performance of MongoDB, you will run the [Yahoo Cloud Ser
 
 To run YCSB, additional software packages are required, [Apache Maven](https://maven.apache.org/), and [Python](https://www.python.org) 2.7.
 
-Apache Maven:
+Installing Apache Maven:
 
 ```bash
    cd ~
@@ -28,8 +28,8 @@ Apache Maven:
    export PATH="$M2_HOME/bin:$PATH"
 ```
 
-Python 2.7
-
+Installing Python 2.7:
+```
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" >}}
 sudo apt-get update
@@ -40,8 +40,8 @@ sudo yum check-update
 sudo yum install python2
 {{< /tab >}}
 {{< /tabpane >}}
-
 {{% notice  Python Note%}}
+```
 For Ubuntu 22.04 the `python` package may not be found. You can install Python 2.7 using:
 ```console
 sudo apt install python2 -y
@@ -56,7 +56,7 @@ sudo alternatives --set python /usr/bin/python2
 
 ## Setup YCSB 
 
-Download the latest released YCSB zip file and uncompress
+Download the latest released YCSB zip file and uncompress it.
 
 ```bash { pre_cmd="sudo apt install -y python" }
 mkdir ycsb && cd ycsb
