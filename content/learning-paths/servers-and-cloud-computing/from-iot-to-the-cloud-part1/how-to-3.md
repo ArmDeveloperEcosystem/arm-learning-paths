@@ -9,20 +9,20 @@ layout: learningpathall
 ## Objective
 You will now connect to the VM using the SSH protocol and the public IP address of the virtual machine. *Note* that in this tutorial we will be using the public IP **52.149.156.228**. Please make sure to use the public IP of your virtual machine instead. 
 
-You can use a local terminal or the Azure Cloud Shell to connect to the VM. The latter is available directly from the Azure Portal and so to avoid installing additional tools, we use Cloud Shell.
+You can use a local terminal or the Azure Cloud Shell to connect to the VM. The latter is available directly from the Azure Portal and to avoid installing additional tools, we will use the Cloud Shell.
 
 ### Azure Cloud Shell
 To open the Cloud Shell, click on the Cloud Shell icon located in the top right corner of Azure Portal:
 ![Azure Cloud Shell#left](figures/10.png "Figure 10. A top right corner of the Azure Portal")
 
-This will activate a new popup window which appears at the bottom of Azure Portal:
+This will activate a new popup window which appears at the bottom of the Azure Portal:
 ![Azure Cloud Shell#left](figures/11.png "Figure 11. Mounting a storage")
 
-Click **Create storage**, and wait until the storage account is created. A Cloud Shell terminal should be ready. If it asks you for the interpreter, select **Bash**. The Cloud Shell terminal will look as follows
+Click **Create storage**, and wait until the storage account is created. A Cloud Shell terminal should be ready. If it asks you for the interpreter, select **Bash**. The Cloud Shell terminal will look as follows:
 ![Azure Cloud Shell#left](figures/12.png "Figure 12. Cloud shell")
 
 ### Connecting to the Virtual Machine using Azure Cloud Shell
-You can now use the Cloud Shell to connect to the VM via SSH. To do so, type (remember to use the Public IP address of your virtual machine):
+You can now use the Cloud Shell to connect to the VM via SSH. To do so, type the Public IP address (remember to use the Public IP address of your virtual machine):
 
 ```console
 ssh arm@52.149.156.228
