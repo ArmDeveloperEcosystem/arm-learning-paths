@@ -47,7 +47,7 @@ Let's now configure other aspects of the Virtual Machine:
 
 ![Creating Virtual Machine#left](figures/06.png "Figure 6. Administrator account and inbound rules of the virtual machine")
 
-Click the **Review + create** button. Azure Portal will validate your configuration and, if all is correct, you will see a green box saying: Validation passed: 
+Click the **Review + create** button. The Azure Portal will validate your configuration and, if all is correct, you will see a green box saying: **Validation passed**: 
 
 ![Creating Virtual Machine#left](figures/07.png "Figure 7. A summary of the create virtual machine wizard")
 
