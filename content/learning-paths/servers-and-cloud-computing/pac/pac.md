@@ -19,23 +19,44 @@ Generation and use of `PAC` in applications requires compiler support, as functi
 
 See [Code reuse attacks: the compiler story](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/code-reuse-attacks-the-compiler-story) for a deeper discussion.
 
-## AWS Graviton3
+## Arm CPU Pointer Authentication Support Table
 
-The [AWS C7g EC2](https://aws.amazon.com/ec2/instance-types/c7g/) instances are powered by AWS Graviton3, which uses the [Arm Neoverse V1](https://www.arm.com/products/silicon-ip-cpu/neoverse/neoverse-v1) processor, and includes Pointer Authentication.
+Below is a table which lists which Arm processors support Pointer Authentication.
 
-For instructions on how to create an AWS instance, see [this article](/learning-paths/servers-and-cloud-computing/csp/aws).
+| CPU         | Pointer Auth | Arm ISA version | Notes                               |
+|-------------|:------------:|:---------------:|:-----------------------------------:|
+| Neoverse V2 | Yes          | Armv9.0-A       |                                     |
+| Neoverse N2 | Yes          | Armv9.0-A       |                                     |
+| Neoverse E2 | Yes          | Armv9.0-A       |                                     |
+| Neoverse V1 | Yes          | Armv8.4-A       | Does not support optional FEAT_EPAC |
+| Neoverse N1 | No           | Armv8.2-A       |                                     |
+| Neoverse E1 | No           | Armv8.2-A       |                                     |
 
-The instance type should start with `c7g`. This Learning Path assumes `Ubuntu` as the operating system.
+If you are looking for cloud instances with Pointer Authentication, AWS instances with Graviton3 processors are a good place to start (C7g, M7g, and R7g).
 
-{{% notice Note %}}
-Earlier Graviton platforms do NOT support Pointer Authentication.
-{{% /notice %}}
+## Preparation for exercise the following sections
 
-## Prepare your c7g instance
-
-Install [GCC](/install-guides/gcc/native/) and other build tools to proceed.
+Install [GCC](/install-guides/gcc/native/) and other tools. The commands for using the `apt` package manager are below. Similar commands are possible with other package managers (such as `yum`).
 
 ```console
 sudo apt update
 sudo apt install gcc make gdb-multiarch -y
+```
+
+## Configure Pointer Authentication in the Linux kernel
+
+{{% notice Note %}}
+The information below explains how to disable pointer authentication. This not recommended, but you may want to do it for experimentation purposes.
+{{% /notice %}}
+
+Pointer Authentication is a recommended security feature, and is enabled by default in Linux distributions. However, it is possible to turn off Pointer Authentication for debug or performance investigations. It can be disabled with a kernel configuration parameter, or if the the kernel was compiled with Pointer Authentication enabled, it can be disabled with a kernel boot parameter change.
+
+Kernel configuration:
+```
+CONFIG_ARM64_PTR_AUTH=n
+```
+
+Kernel boot parameter:
+```
+sysctl.abi.ptrauth_disabled=1
 ```

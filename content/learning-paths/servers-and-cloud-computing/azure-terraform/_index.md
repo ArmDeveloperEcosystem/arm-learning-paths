@@ -1,5 +1,5 @@
 ---
-title: Deploy Arm virtual machines on Azure with Terraform
+title: Deploy Arm virtual machines on Microsoft Azure with Terraform
 
 description: Learn how to automate the creation of Azure Arm virtual machines using Terraform
 
@@ -10,6 +10,7 @@ who_is_this_for: This is an introductory topic for software developers who are n
 learning_objectives: 
     - Automate Arm virtual machine creation using Terraform
     - Deploy Arm VMs on Azure and provide access via Jump Server
+    - Provide infrastructure basics, code knowledge and files that could help with future learning paths
 
 prerequisites:
     - An Azure account

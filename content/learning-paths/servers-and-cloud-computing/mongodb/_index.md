@@ -4,10 +4,9 @@ armips:
 author_primary: Pareena Verma
 layout: learningpathall
 learning_objectives:
-- Install and run MongoDB on your 64-bit Arm AWS EC2 instance
-- Test MongoDB performance on your 64-bit Arm AWS EC2 instance using open-source tooling
-- Measure and compare the performance of MongoDB on Arm versus other architectures
-  with Yahoo Cloud Serving Benchmark (YCSB)
+- Install and run MongoDB on an Arm server
+- Test MongoDB performance using open-source tooling
+- Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB)
 learning_path_main_page: 'yes'
 minutes_to_complete: 30
 operatingsystems:
@@ -22,7 +21,7 @@ test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4
 test_maintenance: true
 test_status:
 - passed
-title: Learn about MongoDB on Arm servers
+title: Test the performance of MongoDB on Arm servers
 tools_software_languages:
 - MongoDB
 - AWS

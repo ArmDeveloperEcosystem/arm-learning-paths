@@ -260,16 +260,16 @@
 - a_date: '2023-07-10'
   content:
     cross-platform: 7
-    embedded-systems: 13
+    embedded-systems: 14
     install-guides: 63
     laptops-and-desktops: 9
     microcontrollers: 19
     servers-and-cloud-computing: 36
     smartphones-and-mobile: 6
-    total: 153
+    total: 154
   contributions:
     external: 1
-    internal: 151
+    internal: 152
   github_engagement:
     num_forks: 30
     num_prs: 3
@@ -284,7 +284,7 @@
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 34
   issues:
@@ -294,31 +294,31 @@
 - a_date: '2023-07-17'
   content:
     cross-platform: 7
-    embedded-systems: 13
+    embedded-systems: 14
     install-guides: 63
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
+    microcontrollers: 20
+    servers-and-cloud-computing: 37
     smartphones-and-mobile: 6
-    total: 153
+    total: 156
   contributions:
     external: 1
-    internal: 151
+    internal: 154
   github_engagement:
     num_forks: 30
     num_prs: 3
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 3
     daniel-gubay: 1
     florent-lebeau: 5
     gabriel-peterson: 3
-    jason-andrews: 71
+    jason-andrews: 72
     julio-suarez: 2
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 34
   issues:
@@ -328,31 +328,31 @@
 - a_date: '2023-07-24'
   content:
     cross-platform: 7
-    embedded-systems: 13
+    embedded-systems: 14
     install-guides: 63
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
+    microcontrollers: 21
+    servers-and-cloud-computing: 38
     smartphones-and-mobile: 6
-    total: 153
+    total: 158
   contributions:
     external: 1
-    internal: 151
+    internal: 156
   github_engagement:
     num_forks: 30
     num_prs: 3
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
     florent-lebeau: 5
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 72
+    julio-suarez: 3
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
     ronan-synnott: 34
   issues:
@@ -362,33 +362,33 @@
 - a_date: '2023-07-31'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 64
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
+    microcontrollers: 21
+    servers-and-cloud-computing: 38
     smartphones-and-mobile: 6
-    total: 153
+    total: 159
   contributions:
     external: 1
-    internal: 151
+    internal: 157
   github_engagement:
     num_forks: 30
     num_prs: 2
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
     florent-lebeau: 5
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 72
+    julio-suarez: 3
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    ronan-synnott: 35
   issues:
     avg_close_time_hrs: 0
     num_issues: 2
@@ -396,33 +396,34 @@
 - a_date: '2023-08-07'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 64
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 21
+    servers-and-cloud-computing: 38
+    smartphones-and-mobile: 7
+    total: 160
   contributions:
     external: 1
-    internal: 151
+    internal: 158
   github_engagement:
     num_forks: 30
     num_prs: 4
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
     florent-lebeau: 5
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 72
+    julie-gaskin: 1
+    julio-suarez: 3
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    ronan-synnott: 35
   issues:
     avg_close_time_hrs: 0
     num_issues: 4
@@ -430,33 +431,34 @@
 - a_date: '2023-08-14'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 67
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 21
+    servers-and-cloud-computing: 39
+    smartphones-and-mobile: 7
+    total: 164
   contributions:
     external: 1
-    internal: 151
+    internal: 162
   github_engagement:
     num_forks: 30
     num_prs: 4
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
     florent-lebeau: 5
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    ronan-synnott: 37
   issues:
     avg_close_time_hrs: 0
     num_issues: 4
@@ -464,33 +466,34 @@
 - a_date: '2023-08-21'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 67
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 21
+    servers-and-cloud-computing: 39
+    smartphones-and-mobile: 7
+    total: 164
   contributions:
     external: 1
-    internal: 151
+    internal: 162
   github_engagement:
     num_forks: 30
     num_prs: 5
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
     florent-lebeau: 5
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
-    pareena-verma: 29
-    ronan-synnott: 34
+    michael-hall: 3
+    pareena-verma: 28
+    ronan-synnott: 38
   issues:
     avg_close_time_hrs: 0
     num_issues: 5
@@ -498,33 +501,36 @@
 - a_date: '2023-08-28'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 69
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 21
+    servers-and-cloud-computing: 41
+    smartphones-and-mobile: 7
+    total: 168
   contributions:
-    external: 1
-    internal: 151
+    external: 2
+    internal: 165
   github_engagement:
     num_forks: 30
     num_prs: 3
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 1
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
   issues:
     avg_close_time_hrs: 0
     num_issues: 3
@@ -532,33 +538,37 @@
 - a_date: '2023-09-04'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 70
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 21
+    servers-and-cloud-computing: 42
+    smartphones-and-mobile: 7
+    total: 170
   contributions:
-    external: 1
-    internal: 151
+    external: 2
+    internal: 167
   github_engagement:
     num_forks: 30
     num_prs: 4
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 1
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
   issues:
     avg_close_time_hrs: 0
     num_issues: 4
@@ -566,33 +576,37 @@
 - a_date: '2023-09-11'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 70
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 21
+    servers-and-cloud-computing: 43
+    smartphones-and-mobile: 7
+    total: 171
   contributions:
-    external: 1
-    internal: 151
+    external: 3
+    internal: 167
   github_engagement:
     num_forks: 30
     num_prs: 6
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 4
     kasper-mecklenburg: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
   issues:
     avg_close_time_hrs: 0
     num_issues: 6
@@ -600,33 +614,38 @@
 - a_date: '2023-09-18'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 70
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
+    microcontrollers: 21
+    servers-and-cloud-computing: 45
     smartphones-and-mobile: 6
-    total: 153
+    total: 172
   contributions:
-    external: 1
-    internal: 151
+    external: 3
+    internal: 168
   github_engagement:
     num_forks: 30
     num_prs: 3
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 72
+    julie-gaskin: 1
+    julio-suarez: 5
     kasper-mecklenburg: 1
+    kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
   issues:
     avg_close_time_hrs: 0
     num_issues: 3
@@ -634,33 +653,38 @@
 - a_date: '2023-09-25'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 70
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
+    microcontrollers: 21
+    servers-and-cloud-computing: 45
     smartphones-and-mobile: 6
-    total: 153
+    total: 172
   contributions:
-    external: 1
-    internal: 151
+    external: 3
+    internal: 168
   github_engagement:
     num_forks: 30
     num_prs: 6
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 72
+    julie-gaskin: 1
+    julio-suarez: 5
     kasper-mecklenburg: 1
+    kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
   issues:
     avg_close_time_hrs: 0
     num_issues: 6
@@ -668,33 +692,40 @@
 - a_date: '2023-10-02'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 70
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 22
+    servers-and-cloud-computing: 45
+    smartphones-and-mobile: 8
+    total: 175
   contributions:
-    external: 1
-    internal: 151
+    external: 3
+    internal: 170
   github_engagement:
     num_forks: 30
     num_prs: 5
   individual_authors:
+    ben-clark,-ported-to-learning-path-by-dominique-louis-of-visualsilicon: 1
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 73
+    julie-gaskin: 1
+    julio-suarez: 5
     kasper-mecklenburg: 1
+    kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
+    uma-ramalingam: 1
   issues:
     avg_close_time_hrs: 0
     num_issues: 5
@@ -702,33 +733,39 @@
 - a_date: '2023-10-09'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 73
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 22
+    servers-and-cloud-computing: 45
+    smartphones-and-mobile: 7
+    total: 177
   contributions:
-    external: 1
-    internal: 151
+    external: 3
+    internal: 173
   github_engagement:
     num_forks: 30
     num_prs: 7
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 76
+    julie-gaskin: 1
+    julio-suarez: 5
     kasper-mecklenburg: 1
+    kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
+    uma-ramalingam: 1
   issues:
     avg_close_time_hrs: 0
     num_issues: 8
@@ -736,33 +773,39 @@
 - a_date: '2023-10-16'
   content:
     cross-platform: 7
-    embedded-systems: 13
-    install-guides: 63
+    embedded-systems: 14
+    install-guides: 73
     laptops-and-desktops: 9
-    microcontrollers: 19
-    servers-and-cloud-computing: 36
-    smartphones-and-mobile: 6
-    total: 153
+    microcontrollers: 22
+    servers-and-cloud-computing: 46
+    smartphones-and-mobile: 7
+    total: 178
   contributions:
-    external: 1
-    internal: 151
+    external: 3
+    internal: 174
   github_engagement:
     num_forks: 30
     num_prs: 8
   individual_authors:
     brenda-strech: 1
-    christopher-seidl: 2
+    christopher-seidl: 4
     daniel-gubay: 1
+    elham-harirpoush: 2
     florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 3
-    jason-andrews: 71
-    julio-suarez: 2
+    jason-andrews: 77
+    julie-gaskin: 1
+    julio-suarez: 5
     kasper-mecklenburg: 1
+    kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
-    michael-hall: 2
+    michael-hall: 3
     pareena-verma: 29
-    ronan-synnott: 34
+    pranay-bakre: 1
+    ronan-synnott: 39
+    uma-ramalingam: 1
   issues:
     avg_close_time_hrs: 0
     num_issues: 8

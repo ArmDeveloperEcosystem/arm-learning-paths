@@ -1,8 +1,6 @@
 ---
 title: Deploy IoT apps using Balena Cloud and Arm Virtual Hardware
 
-description: Learn how to deploy applications from the Balena Hub onto Arm Virtual Hardware
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for embedded software developers interested in Balena OS.
@@ -22,18 +20,20 @@ author_primary: Michael Hall
 
 ### Tags
 skilllevels: Introductory
+
 subjects: Embedded Linux
+
 armips:
     - Cortex-A
 
 operatingsystems:
     - Linux
-    - Balena OS
 
 tools_software_languages:
     - Arm Virtual Hardware
     - Balena Cloud
     - Raspberry Pi
+    - Balena OS
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

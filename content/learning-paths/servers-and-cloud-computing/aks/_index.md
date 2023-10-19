@@ -1,5 +1,5 @@
 ---
-title: Create an Arm-based Kubernetes cluster on Azure Kubernetes Service 
+title: Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service 
 
 minutes_to_complete: 60   
 
@@ -26,6 +26,8 @@ tools_software_languages:
     - Terraform
     - Kubernetes
     - Azure
+    - WordPress
+    - MySQL
 
 operatingsystems:
     - Linux

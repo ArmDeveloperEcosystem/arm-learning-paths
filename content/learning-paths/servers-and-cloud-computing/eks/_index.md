@@ -29,6 +29,7 @@ tools_software_languages:
     - Kubernetes
     - SQL
     - MySQL
+    - WordPress
 
 #       FIXED, DO NOT MODIFY
 # ================================================================================

@@ -7,9 +7,17 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Infrastructure automation for other Learning Paths
+
+Some learning paths may require one or more server nodes to complete. The Terraform files shown here can be used as a platform to work on those learning paths. The intent is for you to modify these as needed to support other learning path activities.
+
 ## Introduction to Jump Server
 
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
+
+{{% notice Note %}}
+An alternative to setting up a Jump server like below is to use [Linux Bastion Hosts](https://aws.amazon.com/solutions/implementations/linux-bastion/) or [AWS Systems Manager service](https://aws.amazon.com/systems-manager/).
+{{% /notice %}}
 
 ## Deploying Arm instances on AWS and providing access via Jump Server
 
@@ -421,8 +429,8 @@ Go to **EC2 -> instances** you should see the following two instances running:
 
 Click on the **Instance ID**s to display the **Instance Summary** view which includes more details about your instances. 
 
-![alt-text #center](https://user-images.githubusercontent.com/71631645/203951115-5a8f8ac1-e415-4e82-bb3d-aae65c1f3c65.png "Locate your instances on the AWS Console")
-   
+![jumpserver #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/eb7569b7-ddfb-4c5a-b450-ab903cf4e8df "Locate your instances on the AWS Console")
+
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server from there. For example, if using a `ubuntu` AMI:
 

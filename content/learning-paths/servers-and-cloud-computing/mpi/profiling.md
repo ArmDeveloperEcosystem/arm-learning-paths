@@ -494,7 +494,7 @@ The output with Arm Performance Libraries will be similar to:
 
 The graphs below summarize the optimizations on the C version of the application, when using 1, 2 or 4 processes on AWS Graviton 2.
 
-![Graph](https://raw.githubusercontent.com/armflorentlebeau/arm_hpc_tools_trial/master/.github/data/graph.png)
+![Graph](opt_summary.png)
 
 You have learned some tools and techniques for optimizing the compute kernel of a small example. 
 

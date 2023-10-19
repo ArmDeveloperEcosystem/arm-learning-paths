@@ -30,26 +30,7 @@ review:
         correct_answer: 2                     
         explanation: >
             Redis is written in ANSI C.
-               
-    - questions:
-        question: >
-            There are 6000 hash slots in Redis Cluster.
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 2                     
-        explanation: >
-            There are 16384 hash slots in Redis Cluster.
-            
-    - questions:
-        question: >
-            Redis Cluster requires minimum 6 primary nodes to work properly. 
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 2                     
-        explanation: >
-            Redis Cluster requires minimum 3 primary nodes to work properly.
+                    
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

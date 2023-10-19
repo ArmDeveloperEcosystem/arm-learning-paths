@@ -93,11 +93,11 @@ gcloud auth application-default login
 
 The command outputs a uniquely generated URL and a prompt to enter an authorization code, as shown below:
 
-![image #center](https://user-images.githubusercontent.com/67620689/204504640-c49c0b0d-6a59-4915-ac3a-f03614783d98.PNG)
+![gcloud1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/1f6fbbe1-eb08-49b6-bfd5-2b6e54462dc3)
 
 Open the URL in your browser and copy the unique authentication code.
 
-![image #center](https://user-images.githubusercontent.com/97123064/247288608-abb5945a-d57e-40ad-9bf6-de8df9757ea2.png)
+![gcloud2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/71065844-9d98-40be-a746-c0bb498ae913)
 
 Now, paste the authentication code as shown below. The following output indicates a successful log in:
 

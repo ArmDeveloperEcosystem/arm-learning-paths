@@ -24,11 +24,11 @@ armips:
     - Neoverse
     - Cortex-A
 tools_software_languages:
+    - Remote.It
 operatingsystems:
     - Linux
     - Windows
     - macOS
-    - Remote.It
 
 ### Test
 test_images:

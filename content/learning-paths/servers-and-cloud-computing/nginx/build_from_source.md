@@ -6,113 +6,67 @@ layout: "learningpathall"
 
 ## Before you begin
 
-To build Nginx from source, first update the Ubuntu repository information:
-
-```bash
-sudo apt-get update
-```
-
-Next, install the needed tools and libraries:
-
-```bash
-sudo apt-get install wget unzip mercurial gcc libssl-dev make -y
-
-```
+Before building from source, it's helpful to look at the build configuration of a prebuilt version of Nginx. Refer to the previous section, [Install Nginx via a package manager](/learning-paths/servers-and-cloud-computing/nginx/install_from_package) for more information. 
 
 ## Build Nginx from source
 
-Refer to [the official documentation](http://nginx.org/en/docs/configure.html) for details on to build Nginx from the source or follow the quick start steps as shown below.
+The [nginx.com documentation](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source) and [nginx.org documentation](http://nginx.org/en/docs/configure.html) explain how to compile and install Nginx from source. However, they do not give guidance on configuration and compilation options. The good news is that Nginx doesn't need a significant amount of configuration. As long as you enable the features you need, it will work well. That said, this learning path will provide some supplemental information that will help you decide how to configure Nginx beyond what is noted in the documentation.
 
-### Quick start for building Nginx from source
+### Configuration and compile options
 
-Follow these steps to build Nginx from source.
+A good starting point for selecting build options is to use the same options that are used on a prebuilt version of Nginx. This was covered in the previous section. 
 
-Download and extract the latest source code of [PCRE](http://www.pcre.org/), the example shows version 10.40. 
-
-```bash { pre_cmd="sudo apt remove -y nginx" }
-wget https://github.com/PCRE2Project/pcre2/releases/download/pcre2-10.40/pcre2-10.40.zip
-unzip pcre2-10.40.zip
-```
-
-Download and extract the [zlib](https://zlib.net/fossils/) library distribution (version 1.1.3 - 1.2.11):
-
-```bash
-wget https://zlib.net/fossils/zlib-1.2.11.tar.gz
-tar -xvf zlib-1.2.11.tar.gz
-```
-
-Clone the Nginx source code:
-
-```bash
-hg clone http://hg.nginx.org/nginx
-cd nginx/
-```
-
-The build is configured using the `configure` command. It defines various aspects of the system, including the methods Nginx is allowed to use for connection processing. At the end, it creates a Makefile.
-
-```bash { cwd="./nginx" }
-./auto/configure --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --with-http_ssl_module --modules-path=/etc/nginx/modules --with-stream=dynamic --with-pcre=../pcre2-10.40 --with-zlib=../zlib-1.2.11
-```
-
-There are many configuration options available in Nginx. To find all the configuration options available in Nginx check the [documentation](http://nginx.org/en/docs/configure.html).
-
-After configuration, compile and install Nginx using make:
-
-```bash { cwd="./nginx" }
-make
-sudo make install
-```
-
-Check the version to verify installation by using the command:
-
-```bash
-nginx -v
-```
-
-The output will look like
+Below is an example output of the `nginx -V` command from a prebuilt package:
 
 ```output
-nginx version: nginx/1.23.4
+nginx version: nginx/1.18.0
+built with OpenSSL 3.0.2 15 Mar 2022
+TLS SNI support enabled
+configure arguments: --with-cc-opt='-g -O2 -ffile-prefix-map=/build/nginx-glNPkO/nginx-1.18.0=. -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --http-client-body-temp-path=/var/lib/nginx/body --http-fastcgi-temp-path=/var/lib/nginx/fastcgi --http-proxy-temp-path=/var/lib/nginx/proxy --http-scgi-temp-path=/var/lib/nginx/scgi --http-uwsgi-temp-path=/var/lib/nginx/uwsgi --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --add-dynamic-module=/build/nginx-glNPkO/nginx-1.18.0/debian/modules/http-geoip2 --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
 
-To enable the systemd service, use a file editor of your choice and create a file named `/lib/systemd/system/nginx.service` with the contents below:
+You may want to drop the options that have a random hash, appear directly related to a particular Linux distribution, or can be overridden using runtime configuration.
 
-```console
-[Unit]
-Description=The Nginx HTTP and reverse proxy server
-After=syslog.target network-online.target remote-fs.target nss-lookup.target
-Wants=network-online.target
+In the output above, there are two configuration switches that have a hash of `glNPko`. These are the GCC switch `-ffile-prefix-map` and the Nginx configuration option `--add-dynamic-module`. The `--add-dynamic-module` option also has a reference to the Debian Linux distribution this version is built for. 
 
-[Service]
-Type=forking
-PIDFile=/run/nginx.pid
-ExecStartPre=/usr/sbin/nginx -t
-ExecStart=/usr/sbin/nginx
-ExecReload=/usr/sbin/nginx -s reload
-ExecStop=/bin/kill -s QUIT $MAINPID
-PrivateTmp=true
+Before removing these two options, check the GCC and Nginx documentation to understand `-ffile-prefix-map` and `--add-dynamic-module` respectively. If it appears that removing these does not impact performance or functionality, you can remove them. You should search what these two switches do, and see if you agree with their removal.
 
-[Install]
-WantedBy=multi-user.target
+After removing these switches, the remaining options should be investigated to understand how they might impact functionality and performance. First, it's a good idea to understand what you are building. Second, it's good to simplify the configuration by shortening it. Upon further inspection of the example output above, there are various Nginx build options that end with `-temp-path` which can be overridden in the Nginx runtime configuration file. These can be removed as well. 
+
+The final build configuration is now reduced to:
+
+```output
+--with-cc-opt='-g -O2 -flto=auto -ffat-lto-objects -flto=auto -ffat-lto-objects -fstack-protector-strong -Wformat -Werror=format-security -fPIC -Wdate-time -D_FORTIFY_SOURCE=2' --with-ld-opt='-Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -Wl,-z,now -fPIC' --prefix=/usr/share/nginx --conf-path=/etc/nginx/nginx.conf --http-log-path=/var/log/nginx/access.log --error-log-path=/var/log/nginx/error.log --lock-path=/var/lock/nginx.lock --pid-path=/run/nginx.pid --modules-path=/usr/lib/nginx/modules --with-compat --with-debug --with-pcre-jit --with-http_ssl_module --with-http_stub_status_module --with-http_realip_module --with-http_auth_request_module --with-http_v2_module --with-http_dav_module --with-http_slice_module --with-threads --with-http_addition_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_sub_module
 ```
 
-Start Nginx using systemd:
+You will have to use your judgment to figure out which configuration options to use. In the advanced [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path, GCC options that can be used to improve performance will be explored.
+
+### Building Nginx and dependencies
+
+Once you know your configuration options, you can follow the build [instructions](https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-open-source/#compiling-and-installing-from-source). With respect to the three dependencies of PCRE, zlib, and OpenSSL; you can also install prebuilt versions of those libraries using a Linux package manager and skip building them from source as shown in the instructions. That said, it may be advantageous to build these as additional performance benefits could be gained. This point will be explored in the [Learn how to Tune Nginx](/learning-paths/servers-and-cloud-computing/nginx_tune) learning path.
+
+### Running Nginx as a service
+
+Create a service file to run Nginx as a service. A service file can be taken from a prebuilt version of Nginx, as discussed in the previous section, or you can create your own. 
+
+Use the `service` command to start Nginx: 
 
 ```console
-sudo systemctl start nginx
+sudo service nginx start
 ```
 
 To confirm Nginx is running, check the status:
 
 ```console
-sudo systemctl status nginx
+sudo service nginx status
 ```
 
-The output from this command will look like:
+The output from this command will look similar to:
 
 ```output
 ● nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
-     Active: active (running) since Tue 2023-04-11 14:36:35 UTC; 14min ago
+     Active: active (running) ...
 ```
-Nginx is successfully running as shown.
+
+Nginx is now running.

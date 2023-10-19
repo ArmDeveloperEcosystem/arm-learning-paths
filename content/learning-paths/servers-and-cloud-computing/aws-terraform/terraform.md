@@ -90,7 +90,7 @@ You will provision an AWS EC2 instance resource, which requires you to find and 
 
 1. Navigate to the **EC2 Dashboard**, either by searching (`Alt+S`) for `EC2`, or via **Services** > **Compute** > **EC2**.
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/246459829-1ecc75fd-a916-4018-87cf-2f804836aaee.png "Navigate to the EC2 Dashboard")
+![terraform1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/d5518bef-9cf7-45c9-b1b1-24a8ce5800e2 "Navigate to the EC2 Dashboard")
 
 2. On the left menu bar, you will find the **AMI Catalog** from the **Images** pull-down.
    
@@ -102,18 +102,18 @@ You will provision an AWS EC2 instance resource, which requires you to find and 
 
     Copy or make note of the **AMI ID** for 64-bit (Arm), as it will be used for your `ami` argument.
    
-![alt-text #center](https://user-images.githubusercontent.com/97123064/246468548-d4438768-127b-48ae-8a5d-167c386dd87e.png "Copy an Arm-based, Ubuntu AMI ID")
+![terraform3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/bea0807f-ebef-438d-8ade-276056bc3f54 "Copy an Arm-based, Ubuntu AMI ID")
 
 ### Find an Instance Type
 A list of all AWS instance types can be [viewed here](https://aws.amazon.com/ec2/instance-types/). As a general rule, instances with a `g` at the end of their name (e.g., `M7g`, `M6g`, `T4g`) are Arm-based [Graviton](https://aws.amazon.com/ec2/graviton/) instances.
 
 For now, select the **T4g** tab to view a list of Amazon EC2 T4g instance sizes.
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/245550408-0362bd27-b0e4-411b-87d9-09c572089243.png "Select 'T4g' under General Purpose instances")
+![terraform4 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/abe6a467-2a64-42bd-8730-6cdd0e2973a2 "Select 'T4g' under General Purpose instances")
 
 For now, use a small, non-production level instance size, such as **t4g.nano**. Copy or make note of this **Instance Size** name, as it will be used for your `instance_type` argument.
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/245565342-76176f11-6c9e-4f9e-af62-0b5da2798a5e.png "Make note of the instance type name under 'Instance Size`")
+![terraform5 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/62dc0eb1-0659-48d2-8570-114c3c6e1b08 "Make note of the instance type name under 'Instance Size`")
 
 ### Set your Resource Block Arguments
 
@@ -277,15 +277,15 @@ Go to **EC2 -> Instances** and you should see an instance with the same **Instan
 
 Click on the **Instance ID** to display the **Instance Summary** view which includes more details about your instance. 
    
-![alt-text #center](https://user-images.githubusercontent.com/67620689/226522634-3da95b61-5655-4c27-b5ab-913d3f731c2c.PNG "Locate your instance on the AWS Console")
-   
+![terraform7 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/8fc10dab-580c-4b30-aaa3-7d308fff4b7c "Locate your instance on the AWS Console")
+
 ### SSH into EC2 instance
 
 Connect to your EC2 Instance with your preferred SSH client. You will be using the private key created through [ssh-keygen](/install-guides/ssh#ssh-keys), located at `~/.ssh/id_rsa`.
 
 In the `Instance summary` view, click `Connect`, and select the `SSH client` tab to see the commands used to launch the native SSH client.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/226522564-67404d25-85ad-49e1-ba63-ca64725e6e51.PNG "Connect to the EC2 instance with an SSH client")
+![terraform7 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/eb2da76f-508e-49bb-87ce-f32c6fb9a155 "Connect to the EC2 instance with an SSH client")
 
 For example, if using a `ubuntu` AMI:
 

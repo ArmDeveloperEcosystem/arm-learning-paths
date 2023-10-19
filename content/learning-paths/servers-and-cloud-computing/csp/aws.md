@@ -33,15 +33,15 @@ The easiest way to launch your instance is via the [AWS Console](https://console
 
 Note the `region` you have logged into (for example `us-east-1`) is displayed in the upper right corner. You can select a different location from the pull-down menu if your default region does not offer Graviton servers.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235883425-70e3e428-1f31-4603-9893-0c4034166615.png "Select an appropriate region")
+![aws1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/39c984ec-76cd-4eca-8290-3cc03f2d36a1 "Select an appropriate region")
 
 Navigate to the `EC2 Dashboard`, either by searching (`Alt+S`) for `EC2`, or via `Services` > `Compute` > `EC2`.
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/246459829-1ecc75fd-a916-4018-87cf-2f804836aaee.png "Navigate to the EC2 Dashboard")
+![aws2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/d9ae1336-f3bd-4566-a1a9-bab7d28a1bf1 "Navigate to the EC2 Dashboard")
 
 Use the `Launch instance` pull-down menu and select `Launch instance`.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235869570-2a6e437f-e98f-4b1e-90b1-0abeb0c03b67.PNG "Launch an Amazon EC2 instance")
+![aws3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/68ed1a05-6111-44d1-91f6-3a65f02910d7 "Launch an Amazon EC2 instance")
 
 ### Name your instance {#name}
 
@@ -69,7 +69,7 @@ Select an appropriate `instance type` for your compute needs from the pull-down 
 
 Scrolling down, there is an option to also `configure storage` if necessary.
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/243395684-c6a3c52d-a9c1-4c35-a31b-8be13faa8246.png "Configure storage options")
+![aws8 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/95280cd5-13eb-469f-859a-3e2fdfde22ae "Configure storage options")
 
 ### Set a Key Pair
 
@@ -77,7 +77,7 @@ To be able to access the instance, you must use a [key pair](https://docs.aws.am
 
 If this is your first time logging in, you will need to select `Create new key pair`. If you have an existing key pair, select it from the pull-down menu.
 
-![alt-text #center](https://user-images.githubusercontent.com/97123064/243401518-d90737eb-9a19-438d-9f9d-24f6400512b1.png "Select or create a key pair")
+![aws9 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/ca45a15c-845b-4be5-b06a-4ca2a5705104 "Select or create a key pair")
 
 If creating a new key pair, name the key pair, then click `Create key pair`. This will initialize the key pair and save the private key to your local machine. Ensure that the private key is safe and accessible on your local machine. 
 
@@ -114,7 +114,7 @@ You can interact with your instance via the browser (EC2 Instance Connect) or vi
 
 In the `Instance summary` view, click `Connect`, and select the `EC2 Instance Connect` tab. Click the `Connect` button to open a terminal in the browser.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235869820-d1d697fc-934f-42e5-94ab-aa013a6d7588.PNG "Connect to the EC2 instance from the browser")
+![aws15 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/1fbe5742-6bba-4fbc-90ed-9ec5396b4ffa "Connect to the EC2 instance from the browser")
 
 Once connected, you are now ready to use your instance.
 
@@ -122,7 +122,7 @@ Once connected, you are now ready to use your instance.
 
 You can connect to the instance with your preferred SSH client. In the `Instance summary` view, click `Connect`, and select the `SSH client` tab to see the command used to launch the native SSH client.
 
-![alt-text #center](https://user-images.githubusercontent.com/67620689/235870001-20716b2b-8d95-468b-bccb-b44bba7a2303.PNG "Connect to the EC2 instance with an SSH client")
+![aws16 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/3af8196d-5059-458a-a6ec-48c87e65acca "Connect to the EC2 instance with an SSH client")
 
 For example if using `ubuntu` image:
 
@@ -183,3 +183,7 @@ The output is shown below:
 ```output
 hello world
 ```
+
+## Automating Arm Based Infrastructure Deployment
+
+Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [AWS Cloud Formation](https://aws.amazon.com/cloudformation/). However, there are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/). In fact, there is a [deploying Arm instances on AWS using Terraform learning path](/learning-paths/servers-and-cloud-computing/aws-terraform) that should be reviewed next.

@@ -26,7 +26,7 @@ Zookeeper is an open sourced project that provides a centralized service for mai
 
 In this Learning Path, you will deploy 3 of the Arm machines as Kafka nodes, 3 machines as Zookeeper nodes and one machine as a client node. A diagram of the setup is shown below. For a simpler single node setup, follow the Kafka [quick start guide](https://kafka.apache.org/quickstart).
 
-![KAFKA_image3 (3) center](https://user-images.githubusercontent.com/66300308/189855554-51b0c9d2-095b-4196-8a2d-e8a768880d72.png)
+![kafka #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/9dcd0bda-396d-4e97-becd-e95434b3ef64)
 
 # Install Java:
 
@@ -35,21 +35,3 @@ Install Java on all 7 nodes.
 ```console
 sudo apt install -y default-jdk
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

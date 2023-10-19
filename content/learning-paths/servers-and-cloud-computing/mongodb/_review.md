@@ -6,7 +6,7 @@
 # Always 3 questions. Should try to test the reader's knowledge, and reinforce the key points you want them to remember.
     # question:         A one sentence question
     # answers:          The correct answers (from 2-4 answer options only). Should be surrounded by quotes.
-    # correct_answer:   An integer indicating what answer is correct (index starts from 0)
+    # correct_answer:   An integer indicating what answer is correct (index starts from 1)
     # explanation:      A short (1-3 sentence) explanation of why the correct answer is correct. Can add additional context if desired
 
 
@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Can you test MongoDB performance by running multiple threads executing different operation types?
+            Can MongoDB performance be tested by running multiple threads executing different operation types?
         answers:
             - "Yes"
             - "No"
@@ -41,7 +41,7 @@ review:
             - "Java"
         correct_answer: 4                    
         explanation: >
-            You will need Java 1.8 or newer installed, which can be done with one bash command.
+            You will need to have Java 1.8 or newer installed, which can be done with a single bash command.
 
 
 

@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Arm Keil Studio (VS Code Extension)
+title: Arm Keil Studio for VS Code
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -22,7 +22,7 @@ minutes_to_complete: 15
 author_primary: Ronan Synnott
 
 ### Link to official documentation
-official_docs: https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-web/README.md
+official_docs: https://developer.arm.com/documentation/108029
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -31,37 +31,45 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-[Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. The desktop version is available as a set of [VS Code](https://code.visualstudio.com/) extensions that offer the same functionality as the cloud-native version.
+[Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. The desktop version is available as a set of [Visual Studio Code](https://code.visualstudio.com/) extensions.
 
-It supports more than 9,500 devices and is easy to learn and use.
+Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides the same functionality, but runs in a browser and requires no installation. 
 
 ## Before you begin
 
-- Install an appropriate compiler toolchain.
-    * [Install Arm Compiler for Embedded toolchain](/install-guides/armclang/)
-    * [Install Arm GNU toolchain](/install-guides/gcc/arm-gnu/)
-- Install [CMake](https://cmake.org/) and [Ninja](https://ninja-build.org/).
-- Install [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases).
-- Initialize or update the catalog of public CMSIS-Pack versions (using [cpackget](https://github.com/Open-CMSIS-Pack/cpackget)). 
+[Download](https://code.visualstudio.com/download), install, and start `Visual Studio Code` on your desktop.
 
-## Install the extensions
+Linux, macOS, and Windows are supported. 
 
-The [Keil Studio VS Code extensions](https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/extension-pack-web/README.md) are available for [Desktop](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) and [Web-based](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack-web) instances.
+## Install the Keil Studio extensions
 
-1. In VS Code, go to the `Extensions` view.
-2. Search for `Keil Studio Pack`.
-3. Click the `Install` button for the appropriate extension pack.
+The `Keil Studio Pack` extensions is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack).
 
-Visual Studio Code installs the extensions. All recommended extensions are now available in the `Extensions` view.
+Install the Keil Studio extensions: 
+
+1. Open the `Extensions` view in Visual Studio Code
+2. Search for `Keil Studio Pack`
+3. Click the `Install` button to install all extensions in the `Keil Studio Pack`
+
+Visual Studio Code installs the extensions. The extensions are now available in the `Activity Bar`.
+
+You will be prompted to enable an [MDK Community License](https://www.keil.arm.com/community/) for non-commercial use. Accept this option if you do not have a license and agree to non-commercial use.
+
+If you have a commercial license for `Keil MDK` installed, decline this option.
 
 ## Get started
 
-In the `Extensions` view, select the `Keil Studio Pack` extension and follow the supplied tutorial to verify everything is installed correctly.
+Follow the [Getting started with an example project](https://developer.arm.com/documentation/108029/latest/Get-started-with-an-example-project) tutorial to verify the extensions are installed correctly.
 
-For more information on the extensions, see the links below.
+## Extension information
+
+Use the table below to find additional information about the VS Code extensions.
 
 | Extension | Description |
 |-----------|-------------|
+| [Arm CMSIS csolution](https://github.com/ARM-software/vscode-cmsis-csolution/blob/main/README.md) | provides support for working with CMSIS solutions (csolution projects).|
 | [Arm Device Manager](https://github.com/ARM-software/vscode-device-manager/blob/main/README.md) | allows you to manage device connections for Arm Cortex-M based microcontrollers, development boards and debug probes.|
 | [Arm Embedded Debugger](https://github.com/ARM-software/vscode-embedded-debug/blob/main/README.md) | allows you to do flashing and debugging on Arm Cortex-M targets implementing the Microsoft Debug Adapter Protocol (DAP). |
-| [Arm Remote Build](https://github.com/ARM-software/vscode-cmsis-csolution/blob/main/README.md) | allows you to undertake remote builds of projects for Arm Cortex-M targets. |
+| [Arm Remote Build](https://github.com/ARM-software/vscode-remote-build/blob/main/README.md) | allows you to undertake remote builds of projects for Arm Cortex-M targets. |
+| [Arm Virtual Hardware](https://github.com/ARM-software/vscode-virtual-hardware/blob/main/README.md) | allows you to manage Arm Virtual Hardware and run embedded applications on them. |
+| [Keil Studio Pack](https://github.com/ARM-software/vscode-keil-studio-pack/blob/main/README.md) |  installs recommended extensions for embedded and IoT software development on Arm-based microcontroller (MCU) devices. |

@@ -7,11 +7,18 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
+## Infrastructure automation for other Learning Paths
+
+Some learning paths may require one or more server nodes to complete. The Terraform files shown here can be used as a platform to work on those learning paths. The intent is for you to modify these as needed to support other learning path activities.
 
 ## Deploy Arm instances on GCP and provide access via Jump Server
 
 ### Introduction to Jump Server
 A Jump Server (also known as a bastion host) is an intermediary device responsible for funneling traffic through firewalls using a supervised secure channel. By creating a barrier between networks, jump servers create an added layer of security against outsiders wanting to maliciously access sensitive company data. Only those with the right credentials can log into a jump server and obtain authorization to proceed to a different security zone.
+
+{{% notice Note %}}
+An alternative to setting up a Jump server like below is to use [IAP](https://cloud.google.com/compute/docs/connect/ssh-using-iap).
+{{% /notice %}}
 
 ### Generate an SSH key pair
 
@@ -461,7 +468,7 @@ To deploy the instances, you need to initialize Terraform, generate an execution
 ### Verify the Instance and Bastion Host setup
 In the Google Cloud console, go to the [VM instances page](https://console.cloud.google.com/compute/instances?_ga=2.159262650.1220602700.1668410849-523068185.1662463135). The instances you created through Terraform must be displayed on the screen.
 
-![image](https://user-images.githubusercontent.com/67620689/222353051-483be628-6466-44f5-85b5-d7a7039b7dad.PNG)
+![gcp_jump #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/47ebebb4-678d-464d-b85e-e6bcc3d8c0f1)
 
 ### Use Jump Host to access the Private Instance
 Connect to a target server via a Jump Host using the `-J` flag from the command line. This tells SSH to make a connection to the jump host and then establish a TCP forwarding to the target server, from there.

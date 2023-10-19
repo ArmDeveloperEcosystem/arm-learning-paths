@@ -62,18 +62,18 @@ To install on Linux hosts, `untar` the downloaded package and run the install sc
 ### x86_64
 ```console
 mkdir tmp
-mv ARMCompiler6.20_standalone_linux-x86_64.tar.gz tmp
+mv ARMCompiler6.20.1_standalone_linux-x86_64.tar.gz tmp
 cd tmp
-tar xvfz ARMCompiler6.20_standalone_linux-x86_64.tar.gz
-./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.20
+tar xvfz ARMCompiler6.20.1_standalone_linux-x86_64.tar.gz
+./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.20.1
 ```
 ### aarch64
 ```console
 mkdir tmp
-mv ARMCompiler6.20_standalone_linux-aarch64.tar.gz tmp
+mv ARMCompiler6.20.1_standalone_linux-aarch64.tar.gz tmp
 cd tmp
-tar xvfz ARMCompiler6.20_standalone_linux-aarch64.tar.gz
-./install_aarch64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.20
+tar xvfz ARMCompiler6.20.1_standalone_linux-aarch64.tar.gz
+./install_aarch64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.20.1
 ```
 Remove the install data when complete.
 ```console
@@ -83,20 +83,14 @@ rm -r tmp
 Add the `bin` directory of the installation to the `PATH` and confirm `armclang` can be invoked.
 ### bash
 ```console
-export PATH=/home/$USER/ArmCompilerforEmbedded6.20/bin:$PATH
+export PATH=/home/$USER/ArmCompilerforEmbedded6.20.1/bin:$PATH
 armclang --version
 ```
 ### csh/tcsh
 ```console
-set path=(/home/$USER/ArmCompilerforEmbedded6.20/bin $path)
+set path=(/home/$USER/ArmCompilerforEmbedded6.20.1/bin $path)
 armclang --version
 ```
-
-### Integrate with Arm Development Studio {#armds}
-
-To integrate this compiler with Arm Development Studio, [register](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain) the installation and [configure](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain/Configure-a-compiler-toolchain-for-the-Arm-DS-command-prompt) the environment to use that version.
-
-Full installation instructions are given in the [documentation](https://developer.arm.com/documentation/100748/latest/Getting-Started/Installing-Arm-Compiler-for-Embedded).
 
 ## Set up the product license
 
@@ -126,3 +120,9 @@ armclang --target=aarch64-arm-none-eabi hello.c
 If the the command completes with no errors, the compiler is working.
 
 More information about the example is available in the [Arm Compiler for Embedded User Guide](https://developer.arm.com/documentation/100748/latest/Getting-Started/Compiling-a-Hello-World-example).
+
+## Integrate with Arm Development Studio {#armds}
+
+To integrate this compiler with Arm Development Studio, [register](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain) the installation and [configure](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain/Configure-a-compiler-toolchain-for-the-Arm-DS-command-prompt) the environment to use that version.
+
+Full installation instructions are given in the [documentation](https://developer.arm.com/documentation/100748/latest/Getting-Started/Installing-Arm-Compiler-for-Embedded).

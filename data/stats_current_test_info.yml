@@ -1,7 +1,7 @@
 summary:
-  content_total: 153
-  content_with_all_tests_passing: 31
-  content_with_tests_enabled: 31
+  content_total: 178
+  content_with_all_tests_passing: 32
+  content_with_tests_enabled: 32
 sw_categories:
   cross-platform:
     intrinsics:
@@ -43,6 +43,10 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    eksctl:
+      readable_title: AWS EKS CLI (eksctl)
+      tests_and_status:
+      - ubuntu:latest: passed
     forge:
       readable_title: Linaro Forge
       tests_and_status:
@@ -110,7 +114,7 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
     mongodb:
-      readable_title: Learn about MongoDB on Arm servers
+      readable_title: Test the performance of MongoDB on Arm servers
       tests_and_status:
       - mongo:latest: passed
     mysql_tune:
@@ -118,7 +122,7 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
     nginx:
-      readable_title: Learn how to install, configure, and use Nginx
+      readable_title: Learn how to deploy Nginx
       tests_and_status:
       - ubuntu:latest: passed
     postgresql_tune:

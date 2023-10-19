@@ -25,6 +25,10 @@ further_reading:
         title: Optimize Your Nginx Plus Deployment with Arm-Based Amazon EC2 M6g Instances
         link: https://www.nginx.com/blog/optimize-nginx-plus-deployment-arm-based-amazon-ec2-m6g-instances/
         type: blog
+    - resource:
+        title: Deploying NGINX as an API Gateway
+        link: https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/
+        type: blog
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -11,7 +11,7 @@ layout: installtoolsall
 minutes_to_complete: 15
 multi_install: false
 multitool_install_part: false
-official_docs: https://developer.arm.com/documentation/102621
+official_docs: https://developer.arm.com/documentation/101458/latest
 test_images:
 - ubuntu:latest
 - fedora:latest
@@ -52,14 +52,20 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ## Install pre-requisites
 
-If any of the following are not already installed by your Linux distribution, you must install them before installing Arm Compiler for Linux:
+If any of the following tools are not already installed by your Linux
+distribution, you must install them before installing Arm Compiler for Linux.
+These packages can be installed with the appropriate package manager for your OS:
 
-* Python (version 2.7 or later)
-* C Libraries:
-  - SUSE and RHEL
-    - `glibc-devel`
-  - Ubuntu
-    - `libc6-dev`
+  - SLES: awk environment-modules glibc-devel gzip python3 tar
+  - RHEL: environment-modules glibc-devel procps python3
+  - Amazon Linux: environment-modules glibc-devel gzip procps python3 tar
+  - Ubuntu: environment-modules libc6-dev python3
+
+Note: The minimum supported version for Python is version 3.6.
+
+You must have at least 2 GB of free hard disk space to both download and unpack
+the Arm Compiler for Linux package. You must also have an additional 6 GB of
+free space to install the package.
 
 For example:
 ```command
@@ -85,16 +91,16 @@ Fetch the `ACfL` installers:
 #### Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.04.1_Ubuntu-22.04_aarch64.tar
+wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-10/arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
 ```
 #### Red Hat Linux:
 ```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.04.1_RHEL-8_aarch64.tar
+wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-10/arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
 ```
 
 ### Install
 
-To install the `Arm Compiler for Linux` package on your 64-bit Linux Arm machine extract the package and run the installation script. 
+To install the `Arm Compiler for Linux` package on your 64-bit Linux Arm machine extract the package and run the installation script.
 
 Each command sequence includes accepting the license agreement to automate the installation and installing the `modules` software.
 
@@ -102,25 +108,25 @@ Each command sequence includes accepting the license agreement to automate the i
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
-tar -xvf arm-compiler-for-linux_23.04.1_Ubuntu-22.04_aarch64.tar
-cd ./arm-compiler-for-linux_23.04.1_Ubuntu-22.04
-sudo ./arm-compiler-for-linux_23.04.1_Ubuntu-22.04.sh --accept
+tar -xvf arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
+cd ./arm-compiler-for-linux_23.10_Ubuntu-22.04
+sudo ./arm-compiler-for-linux_23.10_Ubuntu-22.04.sh --accept
 ```
 
 #### Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
-tar -xvf arm-compiler-for-linux_23.04.1_RHEL-8_aarch64.tar
-cd arm-compiler-for-linux_23.04.1_RHEL-8
-sudo ./arm-compiler-for-linux_23.04.1_RHEL-8.sh --accept
+tar -xvf arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
+cd arm-compiler-for-linux_23.10_RHEL-8
+sudo ./arm-compiler-for-linux_23.10_RHEL-8.sh --accept
 ```
 
 ### Set up environment
 
 `Arm Compiler for Linux` uses environment modules to dynamically modify your user environment. Refer to the [Environment Modules documentation](https://lmod.readthedocs.io/en/latest/#id) for more information.
 
-Set up the environment, for example, in your `.bashrc` and add module files. 
+Set up the environment, for example, in your `.bashrc` and add module files.
 
 #### Ubuntu Linux:
 
@@ -147,13 +153,13 @@ module avail
 To configure Arm Compiler for Linux:
 
 ```bash { env_source="~/.bashrc" }
-module load acfl/23.04.1
+module load acfl/23.10
 ```
 
 To configure GCC:
 
 ```bash { env_source="~/.bashrc" }
-module load gnu/12.2.0
+module load gnu/12.3.0
 ```
 `ACfL` is now [ready to use](#armclang).
 
@@ -197,7 +203,7 @@ spack compiler find
 
 ## Get started with Arm C/C++ compiler {#armclang}
 
-To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below. 
+To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
 ```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
@@ -235,7 +241,7 @@ Hello, C World!
 
 ## Get started with Arm Fortran compiler {#fortran}
 
-To get started with the Arm Fortran Compiler and compile a simple application follow the steps below. 
+To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
 ```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
@@ -268,4 +274,4 @@ Hello, Fortran World!
 
 ## Get started with Arm Performance Libraries {#armpl}
 
-To get started with the [Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) and learn how to select the optimal library for your system, follow the [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102574) guide.
+To get started with the [Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) and learn how to select the optimal library for your system, follow the [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/101004/latest) guide.
