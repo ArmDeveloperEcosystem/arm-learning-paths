@@ -1,7 +1,7 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: You should now be able to test the `restrict` keyword on your own or other open-source code and discover potential optimizations!
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/embedded-systems/
 
 further_reading:
     - resource:

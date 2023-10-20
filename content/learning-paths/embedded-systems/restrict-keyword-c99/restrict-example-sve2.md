@@ -55,7 +55,7 @@ process_data:
         ret
 ```
 
-We will not go into explaining the assembly, but we will note that gcc correctly uses the SVE2 `while*` instructions to do the loops, resulting in far smaller code than with Neon. But in order to illustrate our point, let's try adding `restrict` to pointer `in`:
+Do not worry about each instruction in the assembly here, but notice that gcc correctly uses the SVE2 `while*` instructions to do the loops, resulting in far smaller code than with Neon. But in order to illustrate our point, let's try adding `restrict` to pointer `in`:
 
 ```C
 void process_data (const char *restrict in, char *out, size_t size)

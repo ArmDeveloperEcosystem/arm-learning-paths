@@ -6,23 +6,23 @@ review:
         answers:
             - In the function declaration
             - As an enum value
-            - Between the pointer symbol (*) and the argument name
+            - Between the pointer symbol (*) and the parameter name
         correct_answer: 3
         explanation: >
-            `restrict` is placed in the arguments list of a function, between the * and the variable name, like this:
+            `restrict` is placed in the arguments list of a function, between the * and the parameter name, like this:
             `int func(char *restrict arg)`
     - questions:
         question: >
             What does `restrict` do?
         answers:
-            - It increases the performance of the CPU cores, making your program run faster
+            - It increases the frequency of the CPU cores, making your program run faster
             - It issues a command to clear the cache, leaving more room for your program
             - It restricts the standard of the C library used to C99
-            - It hints the compiler that the memory pointed to by the variable cannot be accessed through any other means apart from this variable, inside the particular function
+            - It hints to the compiler that the memory pointed to by the parameter, cannot be accessed through any other means inside the particular function except, using this pointer
         correct_answer: 4                   
         explanation: >
             In order for the compiler to better schedule the instructions of a function, it needs to know if there is any
-            dependency between the argument variables. If there is none, usually the compiler can group together instructions
+            dependency between the parameter variables. If there is no dependency, usually the compiler can group together instructions
             increasing performance and efficiency.
                
     - questions:
@@ -35,7 +35,7 @@ review:
             - Rust
         correct_answer: 3
         explanation: >
-            `restrict` is a C-only keyword, it does nothing on C++.
+            `restrict` is a C-only keyword, it does not exist on C++ (`__restrict__` does, but it is not exactly the same)
 
 
 

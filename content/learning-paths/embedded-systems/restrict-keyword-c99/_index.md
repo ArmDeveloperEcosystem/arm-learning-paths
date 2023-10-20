@@ -1,9 +1,9 @@
 ---
 title: restrict keyword in C99
 
-minutes_to_complete: 20
+minutes_to_complete: 30
 
-who_is_this_for: C developers who are interested in software optimization.
+who_is_this_for: C developers who are interested in software optimization
 
 learning_objectives: 
     - Learn the importance of using 'restrict' keyword in C correctly
@@ -21,7 +21,6 @@ armips:
     - Armv8-a
     - Armv9-a
 tools_software_languages:
-    - Linux
     - GCC
     - Clang
     - SVE2

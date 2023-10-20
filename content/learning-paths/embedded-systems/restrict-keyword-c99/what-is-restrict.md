@@ -10,7 +10,7 @@ layout: learningpathall
 
 Before we go into detail of the `restrict` keyword, let's first demonstrate the problem.
 
-Let's consider this C code, which is a variation of the one in [wikipedia](https://en.wikipedia.org/wiki/Restrict):
+Let's consider this C code:
 ```C
 #include <stdint.h>
 #include <stdio.h>
@@ -97,18 +97,18 @@ scaleVectors:                           // @scaleVectors
         ret
 ```
 
-This doesn't look optimal. `scaleVectors` seems to be doing each load,multiplication,store in sequence, surely it can be further optimized? This is because the memory pointers are overlapping, let's try different assignments of `a` and `b` in `main()` to make them explicitly independent, perhaps the compiler can detect that and better schedule the instructions.
+This doesn't look optimal. `scaleVectors` seems to be doing each load, multiplication, store in sequence, surely it can be further optimized? This is because the memory pointers are overlapping, let's try different assignments of `a` and `b` in `main()` to make them explicitly independent, perhaps the compiler can detect that and better schedule the instructions.
 
 ```
     int64_t a[] = { 1, 2, 3, 4 };
     int64_t b[] = { 5, 6, 7, 8 };
 ```
 
-Unsurprisingly, the disassembled output of `scaleVectors` is the same. The reason for this is that the compiler has no hint of the dependency between the two pointers used in the function so it has no choice than to assume that it has to process one element at a time. The function has no way of knowing with what arguments it is to be called.  We see 8 instances of `mul`, which is correct but the number of loads and stores in between indicates that the CPU spends its time waiting for data to arrive from/to the cache. We need a way to be able to hint the compiler that it can assume the buffers passed are independent.
+Unsurprisingly, the disassembled output of `scaleVectors` is the same. The reason for this is that the compiler has no hint of the dependency between the two pointers used in the function so it has no choice than to assume that it has to process one element at a time. The function has no way of knowing with what arguments it is to be called.  We see 8 instances of `mul`, which is correct but the number of loads and stores inbetween indicates that the CPU spends its time waiting for data to arrive from/to the cache. We need a way to be able to hint the compiler that it can assume the buffers passed are independent.
 
 ## The Solution: restrict
 
-This is what the C99 `restrict` keyword has come to solve. It instructs the compiler that the passed arguments are in no way dependant on each other and access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much better way. In essence it can group and schedule the loads and stores. `restrict` only works in C, not in C++.
+This is what the C99 `restrict` keyword has come to solve. It instructs the compiler that the passed arguments are in no way dependant on each other and access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much better way. In essence it can group and schedule the loads and stores. As a note, `restrict` only works in C, not in C++.
 
 Let's add `restrict` to `A` in the parameter list:
 ```C
