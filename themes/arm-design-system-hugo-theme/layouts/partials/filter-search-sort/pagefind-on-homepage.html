@@ -1,0 +1,102 @@
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-margin-left-2 u-margin-right-2">
+            <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+            <style>
+
+                /* Search Placeholder text style */
+                .pagefind-ui__search-input::placeholder {
+                    font-family: 'Lato', sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 20px;
+                    opacity: 1!important;
+                    /*color: rgba(51,62,72,0.9)!important;*/
+                    color: var(--arm-dark-grey)!important;
+                }
+
+                /* Search User input text style */
+                .pagefind-ui__search-input {
+                    font-weight: 400!important;
+                    font-size: 20px!important;
+
+                }
+                /* Search User input text style */
+                .pagefind-ui__search-input:focus {
+                    font-weight: 400!important;
+                    font-size: 20px!important;
+                    color: var(--arm-green)!important;
+                }
+
+
+                /* search border box & text color setting to green */
+                .pagefind-ui__search-input:hover {
+                    border-color: var(--arm-green)!important;   
+                    color: var(--arm-green)!important;
+                }
+                .pagefind-ui__search-input:focus {
+                    border-color: var(--arm-green)!important;    
+                    color: var(--arm-green)!important;
+                }
+
+                .pagefind-ui__search-input:hover::placeholder {
+                    color: rgba(149,214,0,0.7)!important;
+                }   
+                .pagefind-ui__search-input:focus::placeholder {
+                    color: rgba(149,214,0,0.7)!important;
+                }
+
+
+                /* results drawer position as absolute, not moving other content */
+                .pagefind-ui__drawer {
+                    position: absolute;  /* or 'fixed' if you want it to be fixed relative to the viewport */
+                    z-index: 10;         /* ensures it appears above other content */
+                    background-color: var(--arm-color-footing);
+                    padding-left: 16px;
+                    padding-right:16px;
+                    /*
+                    top: [position from top];    
+                    left: [position from left];  
+                    width: [desired width];      
+                    */
+                }
+
+                .pagefind-ui__result-link:hover {
+                    color: var(--arm-green)!important;
+                }
+                
+
+                
+                
+                :root {
+                    --pagefind-ui-primary: #eeeeee;
+                    --pagefind-ui-text: #eeeeee;
+                    --pagefind-ui-tag: #152028;
+
+                    --pagefind-ui-background: var(--arm-overlay-light);
+                    /* Border changes */
+                    --pagefind-ui-border: var(--arm-black);
+                    --pagefind-ui-border-width:1px;
+                    --pagefind-ui-border-radius:8px;
+                    --pagefind-ui-image-border-radius:8px;
+                }
+            </style>
+            <script src="/pagefind/pagefind-ui.js"></script>
+            
+            <div id="search" class="search" style="margin: 8px auto; position: relative; max-width: 900px">
+            <script>
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    new PagefindUI(
+                        {   element: "#search", 
+                            showImages: true,       // to define in metadata
+                            showSubResults: false,
+                            translations: {
+                                placeholder: "Search all content",
+                                zero_results: "Couldn't find [SEARCH_TERM]"
+                            }
+                        });
+                });
+            </script> 
+        </div>
+    </div>
+</div>
