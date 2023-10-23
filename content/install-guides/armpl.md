@@ -33,6 +33,13 @@ These libraries are free to use and do not require a license. They can be instal
 
 Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
+Below are the official documentation references:
+
+- Reference Guide: &nbsp;[Arm Performance Libraries Reference Guide](https://developer.arm.com/documentation/101004/latest)
+- Windows: &emsp;&emsp;&emsp;&nbsp;[Get started with Arm Performance Libraries (Windows version)](https://developer.arm.com/documentation/109361/2310/?lang=en)
+- MacOS: &emsp;&emsp;&emsp;&ensp;&nbsp;&nbsp;&nbsp;[Get started with Arm Performance Libraries (macOS version)](https://developer.arm.com/documentation/109362/2310/?lang=en)
+- Linux: &emsp;&emsp;&emsp;&ensp;&nbsp;&ensp;&ensp;&nbsp;[Get started with Arm Performance Libraries (stand-alone Linux version)](https://developer.arm.com/documentation/102620/2310/?lang=en)
+
 ## Windows {#windows}
 
 On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
