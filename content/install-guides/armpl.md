@@ -46,7 +46,7 @@ Below are the official documentation references:
 
 On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
 
-![win_download #center](/install-guides/_images/download-win-armpl.png)
+![win_download #center](/install-guides/_images/download-win-armpl_23.10.png)
 
 Open your Windows File Explorer and locate the downloaded `arm-performance-libraries_23.10.zip` file.
 Extract the contents of this zip file using the "Extract all" button at the top of the Windows File Explorer.
@@ -60,7 +60,7 @@ On the `Advanced Tab` of the `System Properties` window, click on the `Environme
 
 Add a New variable called `ARMPL_DIR` which should point to the location where you unpacked the Arm Performance Libraries.
 
-![add_var #center](/install-guides/_images/windows-sys-env.png)
+![add_var #center](/install-guides/_images/windows-sys-env_23.10.png)
 
 Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing directories in your path.
 
