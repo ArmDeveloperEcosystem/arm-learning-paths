@@ -91,11 +91,11 @@ Fetch the `ACfL` installers:
 #### Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
+wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-10/arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
 ```
 #### Red Hat Linux:
 ```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-04-1/arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
+wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-10/arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
 ```
 
 ### Install
