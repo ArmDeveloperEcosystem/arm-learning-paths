@@ -16,10 +16,6 @@ minutes_to_complete: 10
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/downloads/-/arm-performance-libraries#documentation
-reference_guide: https://developer.arm.com/documentation/101004/latest
-windows_gs: https://developer.arm.com/documentation/109361/2310/?lang=en
-macOS_gs: https://developer.arm.com/documentation/109362/2310/?lang=en
-linux_gs: https://developer.arm.com/documentation/102620/2310/?lang=en
 
 author_primary: Pareena Verma
 
