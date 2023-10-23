@@ -71,7 +71,7 @@ Called from:
             {{end}}
         {{ end }}
     {{end}}
-{{end}}  
+{{end}}
 
 <!-- Check if there are any matching learning paths to this tool (or the main tool) -->
 {{ if in $tools_software_languages (.Title | urlize)}}
@@ -121,7 +121,7 @@ Called from:
                         <td class="td-metadata-key">
                             Last updated:
                         </td>
-                        <td id="last-updated" class="td-metadata-value">                    
+                        <td id="last-updated" class="td-metadata-value">
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                         </td>
                     </tr>
@@ -135,8 +135,8 @@ Called from:
                         </td>
                     </tr>
                 {{end}}
-                </table>     
-            </div>     
+                </table>
+            </div>
             <!-- RIGHT TABLE, mobile -->
             <div class="md:u-hide u-display-block">
                 <table class="width-max-content">
@@ -168,7 +168,7 @@ Called from:
                         </td>
                     </tr>
                     <tr>
-                        <td id="last-updated" class="td-metadata-value margin-l-24">                    
+                        <td id="last-updated" class="td-metadata-value margin-l-24">
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                         </td>
                     </tr>
@@ -184,7 +184,7 @@ Called from:
                         </td>
                     </tr>
                 {{end}}
-                </table>   
+                </table>
             </div>
         </div>
         <!-- Second column table-->
@@ -204,7 +204,7 @@ Called from:
                                 {{- if $twitter_url -}}     <a href="{{$twitter_url}}"  target="_blank" aria-label="twitter"><i class="author-social-icon fab fa-twitter"></i></a>   {{- end -}}
                                 {{- if $website_url -}}     <a href='{{if in $website_url "http"}}{{$website_url | safeURL}}{{else}}https://{{$website_url | safeURL}}{{end}}'  target="_blank"  aria-label="author-social"><i class="author-social-icon fa  fa-blog"></i></a>      {{- end -}}
                             </span>
-                        </td>                        
+                        </td>
                     </tr>
                     <!-- Arm IP if learning path. Official Docs if tool -->
                     {{if $is_learning_path}}
@@ -213,7 +213,7 @@ Called from:
                                 Arm IP:
                             </td>
                             <td class="td-metadata-value">
-                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}    
+                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}
                             </td>
                         </tr>
                     {{else}}
@@ -244,7 +244,7 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{ .Params.subjects }}
-                                </ads-tag> 
+                                </ads-tag>
                                 {{end}}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
@@ -260,7 +260,7 @@ Called from:
                                         {{ . }}
                                     </ads-tag>
                                 {{ end }}
-                            </span>  
+                            </span>
                         </td>
                     </tr>
                     <!-- tool tags, if present in learning paths -->
@@ -275,14 +275,14 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{$active_tag}}
-                                </ads-tag></span>                             
+                                </ads-tag></span>
                             </td>
                         </tr>
                         {{end}}
                     {{end}}
-                </table>   
+                </table>
             </div>
-            <!-- Table mobile-sized windows only -->   
+            <!-- Table mobile-sized windows only -->
             <div class="md:u-hide u-display-block">
                 <table>
                     <tr>
@@ -313,7 +313,7 @@ Called from:
                             <td class="td-metadata-value margin-l-24">
                                 {{- range .Params.armips -}}
                                     <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
-                                {{- end -}}    
+                                {{- end -}}
                             </td>
                         </tr>
                     {{else}}
@@ -363,7 +363,7 @@ Called from:
                                         {{ . }}
                                     </ads-tag>
                                 {{ end }}
-                                </span>  
+                                </span>
                             </td>
                         </tr>
                     <!-- Tool tag, if present in learning paths -->
@@ -380,18 +380,18 @@ Called from:
                                     <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                     <span class="fa-solid fa-tag"></span>
                                     {{$active_tag}}
-                                </ads-tag></span>                             
+                                </ads-tag></span>
                             </td>
                         </tr>
                         {{end}}
                     {{end}}
 
-                </table>   
+                </table>
 
-            </div>                
+            </div>
         </div>
         {{if not $is_learning_path}}
             <p style="margin-top: 24px;">This guide is intended to get you up and running with this tool quickly with the most common settings. For a thorough review of all options, refer to the official documentation.</p>
         {{end}}
-    </div>            
+    </div>
 </div>
