@@ -34,7 +34,7 @@ Linux Perf is part of the Linux source code. (Under tools/perf) It is capable of
 
 ### Arm Telemetry Solution (Topdown Tool)
 
-Arm publishes [Telemetry Solution](https://gitlab.arm.com/telemetry-solution/telemetry-solution) - a tool that that does not require code to be written. In fact, it uses Linux perf. This tool is accompanied with a general performance analysis methodology. It allows you to separate performance bottlenecks between the front-end and the back-end of the CPU. Using this methodology, you can measure things like branch effectiveness, cache effectiveness, instruction mix, etc. This tool will continue to grow in capabilities over time. It's strongly recommended to try this tool before instrumenting your code.
+Arm publishes [Telemetry Solution](https://gitlab.arm.com/telemetry-solution/telemetry-solution) - a tool that does not require code to be written. In fact, it uses Linux perf. This tool is accompanied with a general performance analysis methodology. It allows you to separate performance bottlenecks between the front-end and the back-end of the CPU. Using this methodology, you can measure things like branch effectiveness, cache effectiveness, instruction mix, etc. This tool will continue to grow in capabilities over time. It's strongly recommended to try this tool before instrumenting your code.
 
 ## Options for instrumenting event counters from user space
 

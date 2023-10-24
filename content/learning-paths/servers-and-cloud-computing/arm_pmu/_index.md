@@ -1,5 +1,5 @@
 ---
-title: Use the Arm Performance Monitoring Unit and System Counter
+title: How to use the Arm Performance Monitoring Unit and System Counter
 
 minutes_to_complete: 90
 
