@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 Use the [Performance Application Programming Interface (PAPI) install guide](/install-guides/papi/) to install PAPI on your computer.
 
-More information is available in the [documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI).
+You can find more information in the [documentation](https://github.com/icl-utk-edu/papi/wiki/Downloading-and-Installing-PAPI).
 
 Set the environment variable `PAPI_DIR` to the location where PAPI is installed.
 
@@ -170,7 +170,7 @@ Run the application:
 ./papi_example
 ```
 
-The two counters are printed:
+The program prints the two counters:
 
 ```output
 Instructions retired: 11000000451
