@@ -1615,3 +1615,16 @@ drcachesim
 dynamorio
 mispredicted
 lookaside
+devel
+glibc
+procps
+PACBTI
+gatord
+awscli
+dns
+Borycki
+Dawid
+rg
+pds
+WebApp
+AllowAnyCustom
