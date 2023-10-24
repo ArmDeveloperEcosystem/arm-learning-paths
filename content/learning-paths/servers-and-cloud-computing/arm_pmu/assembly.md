@@ -1,6 +1,6 @@
 ---
 title: "Use a system counter"
-weight: 5
+weight: 3
 layout: "learningpathall"
 ---
 
@@ -62,7 +62,7 @@ Run the application:
 ``` console
  ./syscnt
  ```
- 
+
 The output will be similar to:
 
  ```output
