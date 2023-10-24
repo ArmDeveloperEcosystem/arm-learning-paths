@@ -77,7 +77,7 @@ The `EL2` translation table provides an `Intermediate Physical Address` (`IPA`),
 
 This table is located by the [Virtualization Translation Table Base Register (VTTBR-EL2)](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/VTTBR-EL2--Virtualization-Translation-Table-Base-Register).
 
-The example maps `0x5xxxxxxx` to the Physical Address `0x8xxxxxxx`.
+The example maps `0x5xxxxxxx` to the Physical Address `0xBxxxxxxx`.
 
 ![0x50000000 #center](_images/l2gpt.png)
 
