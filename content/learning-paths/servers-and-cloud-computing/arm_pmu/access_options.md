@@ -30,7 +30,7 @@ Before you instrument counters, you should consider using tools which do not req
 
 ### Linux Perf
 
-Linux Perf is part of the Linux source code. (Under tools/perf) It is capable of measuring software and hardware events. It is used for measuring events at the process or system level. Depending on what you are working on, Perf can save you the need to instrument counters directly in your code. Refer to the [Perf on Arm Linux ](/install-guides/perf/) install guide to learn how to install Perf. There is also a walk through on perf and its features [published by Brendan Gregg](https://www.brendangregg.com/perf.html).
+Linux Perf is part of the Linux source code (under tools/perf). It is capable of measuring software and hardware events. It is used for measuring events at the process or system level. Depending on what you are working on, Perf can save you the need to instrument counters directly in your code. Refer to the [Perf on Arm Linux ](/install-guides/perf/) install guide to learn how to install Perf. There is also a walk through on perf and its features [published by Brendan Gregg](https://www.brendangregg.com/perf.html).
 
 ### Arm Telemetry Solution (Topdown Tool)
 
