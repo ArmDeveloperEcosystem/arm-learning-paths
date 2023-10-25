@@ -97,7 +97,7 @@ scaleVectors:                           // @scaleVectors
         ret
 ```
 
-This doesn't look optimal. `scaleVectors` seems to be doing each load, multiplication, store in sequence, surely it can be further optimized? This is because the memory pointers are overlapping, let's try different assignments of `a` and `b` in `main()` to make them explicitly independent, perhaps the compiler can detect that and better schedule the instructions.
+This doesn't look optimal. `scaleVectors` seems to be doing each load, multiplication, store in sequence, surely it can be further optimized? This is because the memory pointers are overlapping, let's try different assignments of `a` and `b` in `main()` to make them explicitly independent, perhaps the compiler can detect that and generate faster instructions to do the same thing.
 
 ```
     int64_t a[] = { 1, 2, 3, 4 };
@@ -120,7 +120,7 @@ void scaleVectors(int64_t *restrict A, int64_t *B, int64_t *C) {
 }
 ```
 
-This is the assembly output with `clang-17` (gcc has a similar output):
+This is the assembly output with `clang-17 -O3` (gcc has a similar output):
 
 ```assembly
 scaleVectors:                           // @scaleVectors
@@ -161,7 +161,7 @@ void scaleVectors(int64_t *restrict A, int64_t *restrict B, int64_t *C) {
 }
 ```
 
-And the assembly output with `clang-17`:
+And the assembly output with `clang-17 -O3`:
 
 ```
 scaleVectors:                           // @scaleVectors

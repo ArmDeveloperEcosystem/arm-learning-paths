@@ -55,7 +55,7 @@ process_data:
         ret
 ```
 
-Do not worry about each instruction in the assembly here, but notice that gcc correctly uses the SVE2 `while*` instructions to do the loops, resulting in far smaller code than with Neon. But in order to illustrate our point, let's try adding `restrict` to pointer `in`:
+Do not worry about each instruction in the assembly here, but notice that gcc has added 2 loops, one that uses the SVE2 `while*` instructions to the processing (.L4) and one scalar loop (.L3). The latter is executed in case theis any pointer aliasing -if there is any overlap between the memory pointers basically. Let's try adding `restrict` to pointer `in`:
 
 ```C
 void process_data (const char *restrict in, char *out, size_t size)
@@ -85,7 +85,7 @@ process_data:
         ret
 ```
 
-This is a huge improvement! Code size reduction is down from 30 lines to 14, less than half the original size, and faster too. In both cases, you will note that the main loop `.L3` is exactly the same, but the entry and exit code of the function are very much simplified, because the compiler was able to distinguish that the memory pointed by `in` does not overlap with memory pointed by `out`, it was able to simplify the conditions for entering and exiting the main loop.
+This is a huge improvement! Code size reduction is down from 30 lines to 14, less than half the original size. In both cases, you will note that the main loop (`.L4` in the former case, `.L3` in the latter) is exactly the same, but the entry and exit code of the function are very much simplified, because the compiler was able to distinguish that the memory pointed by `in` does not overlap with memory pointed by `out`, it was able to simplify the code by eliminating the scalar loop.
 
 But I can almost hear the question: "Why is that important if the main loop is still the same?"
 And it is a right question. The answer is this: 
