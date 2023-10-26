@@ -25,7 +25,7 @@ sudo apt install python3.10-venv
 
 ## Install Pulumi 
 
-You can install Pulumi with this [install guide](https://learn.arm.com/install-guides/pulumi/)
+You can install Pulumi with this [install guide](/install-guides/pulumi/)
 
 Check the version of Pulumi:
 
@@ -121,7 +121,7 @@ template:
       default: us-east-1
 ```
 
-Edit the `__main__.py` file to change the availabilty zone of your network subnet
+Edit the `__main__.py` file to change the availability zone of your network subnet
 
 ```python
 subnet = aws.ec2.Subnet("p1-subnet",
@@ -134,7 +134,7 @@ subnet = aws.ec2.Subnet("p1-subnet",
     })
 ```
 
-Note: The security groups created by this script are lot less restrictive, to simplify the deployment process and to remove addtional complexities. Please modify the ingress/egress rules as per your organizations' policy.
+Note: The security groups created by this script are lot less restrictive, to simplify the deployment process and to remove additional complexities. Please modify the ingress/egress rules as per your organizations' policy.
 
 ```python
 group = aws.ec2.SecurityGroup('p1-security-grouup',
