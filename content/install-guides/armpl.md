@@ -124,6 +124,12 @@ Install environment modules on your machine:
 sudo apt install environment-modules
 ```
 
+Set your bash environment to use modules:
+
+```command
+source /usr/share/modules/init/bash
+```
+
 Set the `MODULEPATH` environment variable to point to the location of the installed modulefiles for Arm Performance Libraries:
 
 ```command
@@ -139,13 +145,13 @@ module avail
 The output should be similar to:
 
 ```output
-armpl/23.10_gcc-12.2
+armpl/23.10.0_gcc-12.2
 ```
 
 Load the appropriate module:
 
 ```command
-module load armpl/23.10_gcc-12.2
+module load armpl/23.10.0_gcc-12.2
 ```
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
