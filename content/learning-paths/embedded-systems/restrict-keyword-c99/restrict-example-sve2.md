@@ -85,7 +85,7 @@ process_data:
         ret
 ```
 
-This is a huge improvement! Code size reduction is down from 30 lines to 14, less than half the original size. In both cases, you will note that the main loop (`.L4` in the former case, `.L3` in the latter) is exactly the same, but the entry and exit code of the function are very much simplified, because the compiler was able to distinguish that the memory pointed by `in` does not overlap with memory pointed by `out`, it was able to simplify the code by eliminating the scalar loop.
+This is a huge improvement! Code size reduction is down from 30 lines to 14, less than half the original size. In both cases, you will note that the main loop (`.L4` in the former case, `.L3` in the latter) is exactly the same, but the entry and exit code of the function are very much simplified. The compiler was able to distinguish that the memory pointed by `in` does not overlap with memory pointed by `out`, it was able to simplify the code by eliminating the scalar loop and remove the associated code that checked if it needed to enter it.
 
 But I can almost hear the question: "Why is that important if the main loop is still the same?"
 And it is a right question. The answer is this: 
