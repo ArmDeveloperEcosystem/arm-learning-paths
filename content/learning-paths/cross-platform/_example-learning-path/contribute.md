@@ -55,7 +55,8 @@ After you have reviewed the new material using `hugo server` and there are no is
 You can now submit a GitHub pull request. 
 
 {{% notice Note%}}
-If you are new to GitHub, find a tutorial about how to create a pull request from a GitHub fork.
+If you are new to GitHub, please go to [GitHub's documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request)
+to learn how to create a pull request from a GitHub fork.
 {{% /notice %}}
 
 Optionally, if you would like to add your new Learning Path content to the automated testing framework, follow the guidelines in the [Appendix: How to test your code](/learning-paths/cross-platform/_example-learning-path/appendix-3-test).
