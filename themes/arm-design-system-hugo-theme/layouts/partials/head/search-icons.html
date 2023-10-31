@@ -1,0 +1,23 @@
+{{/*
+Inserts images into search results
+
+Where it is used:
+    - all, called from baseof
+*/}}
+
+
+<!-- Hugo processing -->
+{{ $relativeURL := .Page.RelPermalink | relURL }}
+{{ $urlParts := split $relativeURL "/" }}
+{{ $firstUrlElement := index $urlParts 1 }}
+
+
+{{ if ne $firstUrlElement "" }}
+    {{if eq $firstUrlElement "learning-paths" }}
+        <meta data-pagefind-default-meta="image[content]" content="/img/search-icons/learning_path_search_icon.jpg">
+    {{else if eq $firstUrlElement "install-guides" }}
+        <meta data-pagefind-default-meta="image[content]" content="/img/search-icons/install_guide_search_icon.jpg">
+    {{else if eq $firstUrlElement "tag"}}
+        <meta data-pagefind-default-meta="image[content]" content="/img/search-icons/list_search_icon.jpg">
+    {{end}}
+{{end}}
