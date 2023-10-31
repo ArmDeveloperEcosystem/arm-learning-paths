@@ -92,8 +92,8 @@ def check(json_file, start, stop):
             subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
             # Create user and configure
-            username="user"
             if  "arm-tools" in img:
+                # These images already have a user account set up.
                 username="ubuntu"
                 cmd = ["docker exec test_{} apt update".format(i)]
                 logging.debug(cmd)
@@ -157,6 +157,7 @@ def check(json_file, start, stop):
 
     # Run bash commands
     for i in range(0, data["ntests"]):
+        username = "ubuntu" if "arm-tools" in data["image"][0] else "user"
         t = data["{}".format(i)]
 
         # Check if file name is specified
