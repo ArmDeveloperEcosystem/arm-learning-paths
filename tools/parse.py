@@ -212,11 +212,15 @@ def save(article, cmd, learningpath=False, img=None):
         # for other types, we're assuming source code
         # check if a file name is specified
         else:
-            content[i_idx] = {"type": l[0]}
-            # check file name
+            # check for a file name
             if "file_name" in l[0]:
+                content[i_idx] = {"type": l[0]}
                 fn = l[0].split("file_name=\"")[1].split("\"")[0]
                 content[i_idx].update({"file_name": fn })
+            else:
+                # No file name means it is some unformatted text, rather than
+                # some executable script or code. Skip it.
+                continue
 
         for j_idx,j in enumerate(l[1:]):
             content[i_idx].update({j_idx: j})
