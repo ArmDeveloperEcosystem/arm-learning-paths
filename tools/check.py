@@ -93,8 +93,7 @@ def check(json_file, start, stop):
 
             # Create user and configure
             if  "arm-tools" in img:
-                # These images already have a user account set up.
-                username="ubuntu"
+                # These images already have a 'ubunutu' user account set up.
                 cmd = ["docker exec test_{} apt update".format(i)]
                 logging.debug(cmd)
                 subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
@@ -157,7 +156,6 @@ def check(json_file, start, stop):
 
     # Run bash commands
     for i in range(0, data["ntests"]):
-        username = "ubuntu" if "arm-tools" in data["image"][0] else "user"
         t = data["{}".format(i)]
 
         # Check if file name is specified
@@ -211,6 +209,7 @@ def check(json_file, start, stop):
         else:
             inst = range(0, len(data["image"]))
 
+        username = "ubuntu" if "arm-tools" in data["image"][0] else "user"
         for k in inst:
             # Copy over the file with commands
             cmd = ["docker cp {} test_{}:/home/{}/".format(fn, k, username)]
