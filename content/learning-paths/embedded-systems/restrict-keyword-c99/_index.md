@@ -1,15 +1,15 @@
 ---
-title: restrict keyword in C99
+title: Understand the `restrict` keyword in C99
 
 minutes_to_complete: 30
 
 who_is_this_for: C developers who are interested in software optimization
 
 learning_objectives: 
-    - Learn the importance of using 'restrict' keyword in C correctly
+    - Learn the importance of using the `restrict` keyword in C correctly
 
 prerequisites:
-    - An Arm based system with Linux OS and recent compiler (clang or gcc)
+    - An Arm based system with Linux OS and recent compiler (Clang or GCC)
 
 author_primary: Konstantinos Margaritis, VectorCamp
 
