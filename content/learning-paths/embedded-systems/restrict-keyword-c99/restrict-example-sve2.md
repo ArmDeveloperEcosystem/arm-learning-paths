@@ -18,7 +18,7 @@ void process_data (const char *in, char *out, size_t size)
 }
 ```
 
-This example will be easier to demonstrate with SVE2, and we found gcc 13 to have a better result than clang, this is the output of `gcc-13 -O3 -march=armv9-a`:
+This example will be easier to demonstrate with SVE2. We found gcc 13 to have a better result than clang; this is the output of `gcc-13 -O3 -march=armv9-a`:
 
 ```
 process_data:
@@ -55,7 +55,7 @@ process_data:
         ret
 ```
 
-Do not worry about each instruction in the assembly here, but notice that gcc has added 2 loops, one that uses the SVE2 `while*` instructions to the processing (.L4) and one scalar loop (.L3). The latter is executed in case theis any pointer aliasing -if there is any overlap between the memory pointers basically. Let's try adding `restrict` to pointer `in`:
+Do not worry about each instruction in the assembly here, but notice that gcc has added 2 loops, one that uses the SVE2 `while*` instructions to the processing (.L4) and one scalar loop (.L3). The latter is executed in case there is any pointer aliasing (basically, if there is any overlap between the memory pointers). Let's try adding `restrict` to pointer `in`:
 
 ```C
 void process_data (const char *restrict in, char *out, size_t size)
@@ -85,11 +85,10 @@ process_data:
         ret
 ```
 
-This is a huge improvement! Code size reduction is down from 30 lines to 14, less than half the original size. In both cases, you will note that the main loop (`.L4` in the former case, `.L3` in the latter) is exactly the same, but the entry and exit code of the function are very much simplified. The compiler was able to distinguish that the memory pointed by `in` does not overlap with memory pointed by `out`, it was able to simplify the code by eliminating the scalar loop and remove the associated code that checked if it needed to enter it.
+This is a huge improvement! The code size is down from 30 lines to 14, less than half of the original size. In both cases, note that the main loop (`.L4` in the former case, `.L3` in the latter) is exactly the same, but the entry and exit code of the function is very much simplified. The compiler was able to distinguish that the memory pointed by `in` does not overlap with memory pointed by `out`, it was able to simplify the code by eliminating the scalar loop, and also remove the associated code that checked if it needed to enter it.
 
-But I can almost hear the question: "Why is that important if the main loop is still the same?"
-And it is a right question. The answer is this: 
+Why is this important if the main loop is still the same?
 
 If your function is going to be called once and run over tens of billions of elements, then saving a few instructions before and after the main loop does not really matter.
 
-But if your function is called on smaller sizes millions or even *billions* of times, then saving a few instructions in this function means we are saving a few *billions* of instructions total, which means less time to spend running on the CPU and less energy wasted.
+But, if your function is going to be called on smaller sizes or even *billions* of times, then saving a few instructions in this function means we are saving a few *billions* of instructions in total, which means less time spent running on the CPU and less energy wasted.
