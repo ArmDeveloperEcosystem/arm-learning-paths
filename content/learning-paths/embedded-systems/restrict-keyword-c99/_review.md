@@ -13,7 +13,7 @@ review:
             In order for the compiler to better schedule the instructions of a function, it needs to know if there are any
             dependencies between the parameter variables. If there is no dependency, usually the compiler can group together instructions
             increasing performance and efficiency.
-    - questions:
+- questions:
         question: >
             Where is `restrict` placed in the code?
         answers:
@@ -24,7 +24,7 @@ review:
         explanation: >
             `restrict` is placed in the arguments list of a function, between the * and the parameter name, like this:
             `int func(char *restrict arg)`   
-    - questions:
+- questions:
         question: >
             Which language supports `restrict`
         answers:
