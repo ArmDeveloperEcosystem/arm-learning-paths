@@ -6,9 +6,9 @@ weight: 2
 layout: learningpathall
 ---
 
-## The problem: Overlapping memory regions as pointer arguments
+## The problem: overlapping memory regions as pointer arguments
 
-Before we go into detail of the `restrict` keyword, let's first demonstrate the problem.
+Before we go into the detail of the `restrict` keyword, let's first demonstrate the problem.
 
 Let's consider this C code:
 ```C
@@ -44,7 +44,7 @@ int main() {
 }
 ```
 
-So, there are 2 points to make here:
+There are 2 points to make here:
 1. `scaleVectors()` is the important function here, it scales two vectors by the same scalefactor `*C`
 2. vector `a` overlaps with vector `b`. (`b = &a[2]`). 
 
@@ -56,7 +56,7 @@ a(after) : 2 4 12 16
 b(after) : 12 16 10 12
 ```
 
-Notice that after the scaling the contents of `a` are also affected by the scaling of `b` as their elements overlap in memory.
+Notice that after the scaling, the contents of `a` are also affected by the scaling of `b` as their elements overlap in memory.
 
 We will include the assembly output of `scaleVectors` as produced by `clang-17 -O3`:
 
@@ -97,18 +97,18 @@ scaleVectors:                           // @scaleVectors
         ret
 ```
 
-This doesn't look optimal. `scaleVectors` seems to be doing each load, multiplication, store in sequence, surely it can be further optimized? This is because the memory pointers are overlapping, let's try different assignments of `a` and `b` in `main()` to make them explicitly independent, perhaps the compiler can detect that and generate faster instructions to do the same thing.
+This doesn't look optimal. `scaleVectors` seems to be doing each load, multiplication, and store in sequence. Surely it can be better optimized? Because the memory pointers are overlapping, let's try different assignments of `a` and `b` in `main()` to make them explicitly independent. Perhaps the compiler will detect that and generate faster instructions to do the same thing.
 
 ```
     int64_t a[] = { 1, 2, 3, 4 };
     int64_t b[] = { 5, 6, 7, 8 };
 ```
 
-Unsurprisingly, the disassembled output of `scaleVectors` is the same. The reason for this is that the compiler has no hint of the dependency between the two pointers used in the function so it has no choice than to assume that it has to process one element at a time. The function has no way of knowing with what arguments it is to be called.  We see 8 instances of `mul`, which is correct but the number of loads and stores inbetween indicates that the CPU spends its time waiting for data to arrive from/to the cache. We need a way to be able to hint the compiler that it can assume the buffers passed are independent.
+Unsurprisingly, the disassembled output of `scaleVectors` is the same. The reason for this is that the compiler has no hint about the dependency between the two pointers used in the function so it has no choice but to assume that it has to process one element at a time. The function has no way of knowing what arguments need to be called.  We see 8 instances of `mul`, which is correct but the number of loads and stores inbetween indicates that the CPU spends its time waiting for data to arrive from/to the cache. We need a way to be able to tell the compiler that it can assume the buffers passed are independent.
 
 ## The Solution: restrict
 
-This is what the C99 `restrict` keyword has come to solve. It instructs the compiler that the passed arguments are in no way dependant on each other and access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much better way. In essence it can group and schedule the loads and stores. As a note, `restrict` only works in C, not in C++.
+This is what the C99 `restrict` keyword resolves. It instructs the compiler that the passed arguments are not dependant on each other and that access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much more efficient way. Essentially it can group and schedule the loads and stores. **Note**, `restrict` only works in C, not in C++.
 
 Let's add `restrict` to `A` in the parameter list:
 ```C
@@ -149,7 +149,7 @@ scaleVectors:                           // @scaleVectors
         ret
 ```
 
-We see an obvious reduction in the number of instructions, from 32 instructions down to 22! That's 68% of the original count, which is impressive on its own. One can easily see that the loads are grouped, as well as the multiplications. Of course, still 8 multiplications, that cannot change, but far fewer loads and stores as the compiler found the opportunity to use `LDP`/`STP` which load/store in pairs for the pointer `A`.
+We see an obvious reduction in the number of instructions, from 32 instructions down to 22! That's 68% of the original count, which is impressive. One can easily see that the loads are grouped, as well as the multiplications. Of course, there are still 8 multiplications as that cannot change, but there are far fewer loads and stores as the compiler found the opportunity to use `LDP`/`STP` which load/store in pairs for the pointer `A`.
 
 Let's try adding `restrict` to `B` as well:
 ```C
@@ -185,14 +185,14 @@ scaleVectors:                           // @scaleVectors
         ret
 ```
 
-Another reduction in the number of instructions, down to 17, for a total reduction to 53% the original count. This time, only 5 loads and 4 stores. And as before, all the loads/stores are paired (because the `LDP`/`STP` instructions are used).
+There is another reduction in the number of instructions, this time down to 17 from the original 32. There are only 5 loads and 4 stores and, as before, all the loads/stores are paired (because the `LDP`/`STP` instructions are used).
 
-It is interesting to see that in such an example, adding just the `restrict` keyword reduced our code size to almost half. This will have an obvious impact in performance and efficiency.
+It is interesting to see that in such an example adding the `restrict` keyword reduced our code size to almost half. This will have an obvious impact in both performance and efficiency.
 
 ## What about SVE2?
 
 We have shown the obvious benefit of `restrict` in this function, on an armv8-a CPU, but we have new armv9-a CPUs out there with SVE2 as well as Neon/ASIMD. 
-Could the compiler generate better code in that case using `restrict`? To save time, the output without `restrict` is almost the same, however with `restrict` used, this is the result (we used `clang-17 -O3 -march=armv9-a`):
+Could the compiler generate better code in that case using `restrict`? The output without `restrict` is almost the same, but with `restrict` used, this is the result (we used `clang-17 -O3 -march=armv9-a`):
 
 ```
 scaleVectors:                           // @scaleVectors
@@ -208,6 +208,6 @@ scaleVectors:                           // @scaleVectors
         ret
 ```
 
-This is just 10 instructions, only 31% of the original code size! The compiler made a great use of SVE2 features, combining the multiplications and reducing them to 4, at the same time grouping loads and stores down to 2 each. We have optimized our code more than 3x by only adding a C99 keyword!
+There are just 10 instructions, 31% of the original code size! The compiler has made great use of the SVE2 features, combining the multiplications and reducing them to 4 and, at the same time, grouping loads and stores down to 2 each. We have optimized our code by more than 3x just by adding a C99 keyword.
 
-We are going to look at another example next.
+We are now going to look at another example.
