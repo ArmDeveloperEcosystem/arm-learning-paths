@@ -1,7 +1,7 @@
 ---
 next_step_guidance:
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/exploiting-stack-buffer-overflow-aarch64/ 
 
 further_reading:
     - resource:

@@ -1,41 +1,41 @@
 ---
-title: Designing a Dynamic Memory Allocator
+title: Design a dynamic memory allocator
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## High Level Design
+## High level design
 
 To begin with, decide which functions your memory allocator will provide. We
 have described `malloc` and `free`, there are more provided by the
 [C library](https://en.cppreference.com/w/c/memory).
 
-This will assume you just need `malloc` and `free`. Start with those and write
-out their behaviours, as the programmer using your allocator will see.
+This will assume you just need `malloc` and `free`. The new implementations will
+be called `simple_malloc` and `simple_free`. Start with just two functions and write
+out their behaviors.
 
-There will be a function, `malloc`. It will:
-* Take a size in bytes as a parameter.
-* Try to allocate some memory.
-* Return a pointer to that memory, NULL pointer otherwise.
+The first function is `simple_malloc` and it will: 
+* Take a size in bytes as a parameter
+* Try to allocate the requested memory
+* Return a pointer to that memory or return a NULL pointer if the memory cannot be allocated
 
-There will be a function `free`. It will:
-* Take a pointer to some previously allocated memory as a parameter.
-* Mark that memory as avaiable for future allocations.
+The second function is `simple_free` and it will: 
+* Take a pointer to some previously allocated memory as a parameter
+* Mark that memory as available for future allocations
 
 From this you can see that you will need:
 * Some large chunk of memory, the "backing storage".
-* A way to mark parts of that memory as allocated, or available for allocation.
+* A way to mark parts of that memory as allocated, or available for allocation
 
-## Backing Storage
+## Backing storage
 
 The memory can come from many sources. It can even change size throughout the
-program's execution if you wish. For your allocator you'll keep it as simple
-as possible.
+program's execution if you wish. For your allocator you can keep it simple.
 
 A single, statically allocated global array of bytes will be your backing
-storage. So you can do dynamic allocation of parts of a statically allocated
+storage. You can do dynamic allocation of parts of a statically allocated
 piece of memory.
 
 ```C
@@ -43,21 +43,20 @@ piece of memory.
 static char storage[STORAGE_SIZE];
 ```
 
-## Record Keeping
+## Record keeping
 
 This backing memory needs to be annotated somehow to record what has been
-allocated so far. There are many, many ways to do this. With the biggest choice
-here being whether to store these records in the heap itself, our outside of it.
+allocated so far. There are many ways to do this. Te biggest choice
+is whether to store these records in the heap itself or outside of it.
 
-We will not go into those tradeoffs here, and instead you will put the records
-in the heap, as this is relatively simple to do.
+The easiest way is to put the records in the heap.
 
-What should be in your records? Think about what question the software will ask
-us. Can you give me a pointer to an area of free memory of at least this size?
+What should be in the records? Think about the question the caller is asking.
+Can you give me a pointer to an area of memory of at least this size?
 
 For this you will need to know:
-* Which ranges of the backing storage have been allocated or not.
-* How large each of ranges sections is. This includes free areas.
+* The ranges of the backing storage that have already been allocated
+* The size of each section, both free and allocated
 
 Where a "range" a pointer to a location, a size in bytes and a boolean to say
 whether the range is free or allocated. So a range from 0x123 of 345 bytes,
@@ -67,7 +66,7 @@ that has been allocated would be:
 start: 0x123 size: 345 allocated: true
 ```
 
-For the intial state of a heap of size `N`, you will have one range of
+For the initial state of a heap of size `N`, you will have one range of
 unallocated memory.
 
 ```text
@@ -102,7 +101,7 @@ Pointer: 0x4 Size: N-4 Allocated: False
 range = 0x4 + (N-4) = 1 beyond the end of the heap, so the walk is finished.
 ```
 
-`free` uses the pointer given to it to find the range it needs to deallocate.
+`simple_free` uses the pointer given to it to find the range it needs to deallocate.
 Let's say the 4 byte allocation was freed:
 
 ```text
@@ -110,18 +109,18 @@ Pointer: 0x0 Size: 4   Allocated: False
 Pointer: 0x4 Size: N-4 Allocated: False
 ```
 
-Since `free` gets a pointer directly to the allocation you know exactly which
+Since `simple_free` gets a pointer directly to the allocation you know exactly which
 range to modify. The only change made is to the boolean which marks it as
 allocated or not. The location and size of the range stay the same.
 
 {{% notice Merging Free Ranges%}}
-The allocator presented here will not merge free ranges like the 2 above. This
+The allocator presented here does not merge free ranges like the 2 above. This
 is a deliberate limitation and addressing this is discussed later.
 {{% /notice %}}
 
-## Record Storage
+## Record storage
 
-You'll keep these records in heap which means using some of the allocated space
+You will keep these records in the heap which means using some of the allocated space
 for them on top of the allocation itself.
 
 The simplest way to do this is to prepend each allocation with the range
@@ -135,13 +134,13 @@ ease.
 <...and so on until the end of the heap...>
 ```
 
-Pointers returned by `malloc` are offset to just beyond the range information.
-When `free` receives a pointer, it can get to the range information by
+Pointers returned by `simple_malloc` are offset to just beyond the range information.
+When `simple_free` receives a pointer, it can get to the range information by
 subtracting the size of that information from the pointer. Using the example
 above:
 
 ```text
-free(my_ptr);
+simple_free(my_ptr);
 
 0x00: [ptr, size, allocated] <-- my_ptr - sizeof(range information)
 0x08: <...>                  <-- my_ptr
@@ -153,7 +152,7 @@ calculations above must be adjusted. The allocator presented here does not
 concern itself with alignment, which is why it can do a simple subtraction.
 {{% /notice %}}
 
-## Running Out Of Space
+## Running out of space
 
 The final thing an allocator must do is realise it has run out of space. This is
 simply achieved by knowing the bounds of the backing storage.

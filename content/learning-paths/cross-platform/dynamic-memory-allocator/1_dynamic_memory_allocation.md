@@ -1,20 +1,22 @@
 ---
-title: Dynamic Memory Allocation
+title: Dynamic memory allocation
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Dynamic vs. Static Allocation
+## Dynamic vs. static memory allocation
 
-In this learning path you will learn how to implement dynamic memory allocation.
-If you have used C's "heap" (`malloc`, `free`, etc.) before, that is one example
+In this Learning Path you will learn how to implement dynamic memory allocation.
+If you have used the C programming language "heap" (`malloc`, `free`, etc.) before, that is one example
 of dynamic memory allocation.
 
-It allows programs to allocate memory while they are running without knowing
-at build time what amount of memory they will need. In constrast to static
-memory allocation where the amount is known at build time.
+Dynamic memory allocation allows programs to allocate memory while they are running without knowing
+at build time how much memory they will need. In contrast, static
+memory allocation is used when the amount of memory is known at build time.
+
+The code sample below shows both dynamic and static memory allocation:
 
 ```C
 #include <stdlib.h>
@@ -27,10 +29,10 @@ void fn() {
 }
 ```
 
-The example above shows the difference. The size and location of `a` is known
+In the example above, the size and location of `a` is known
 when the program is built. The size of `b` is also known, but its location is not.
 
-It may even never be allocated, as this pseudocode example shows:
+Sometimes, memory may never be allocated, as in the pseudocode example below:
 
 ```C
 int main(...) {
@@ -40,37 +42,37 @@ int main(...) {
 }
 ```
 
-If the user passes no arguments to the program, there's no need to allocate space
-for `b`. If they do, `malloc` will find space for it.
+The arguments passed to the program determine if memory is allocated or not. 
 
-## malloc
+## The C library malloc function
 
 The C standard library provides a special function
 [`malloc`](https://en.cppreference.com/w/c/memory/malloc). `m` for "memory",
-`alloc` for "allocate". This can be used to ask for a suitably sized memory
-location while the program is running.
+`alloc` for "allocate". This is used to ask for a suitably sized memory
+location while a program is running.
 
 ```C
 void *malloc(size_t size);
 ```
 
-The C library will then look for a chunk of memory with size of at least `size`
+The C library looks for a chunk of memory with size of at least `size`
 bytes in a large chunk of memory that it has reserved. For instance on Ubuntu
-Linux, this will be done by GLIBC.
+Linux, this is done by GLIBC.
 
 The example at the top of the page is trivial of course. As it is we could just
 statically allocate both integers like this:
+
 ```C
 void fn() {
     int a, b = 0;
 }
 ```
 
-That's ok if this data is never be returned from this function. Or in other
-words, if the lifetime of this data is equal to that of the function.
+Variables `a` and `b` work fine if they are not needed outside of the function. Or in other
+words, if the lifetime of the data is equal to that of the function.
 
-A more complicated example will show you when that is not the case, and the value
-lives longer than the function that created it.
+A more complex example shows when this is not the case, and the values
+live longer than the creating function.
 
 ```C
 #include <stdlib.h>
@@ -93,7 +95,7 @@ void add_entry(Entry *entry, int data) {
 ```
 
 What you see above is a struct `Entry` that defines a singly-linked-list entry.
-Singly meaining that you can go forward via `next`, but you cannot go backwards
+Singly meaning that you can go forward via `next`, but you cannot go backwards
 in the list. There is some data `data`, and each entry points to the next entry,
 `next`, assuming there is one (it will be `NULL` for the end of the list).
 
@@ -111,8 +113,8 @@ Now you want to add another `Entry` to this list at runtime. So you do not know
 ahead of time what it will contain, or if we indeed will add it or not. Where
 would you put that entry?
 
-* If it is another global variable, we would have to declare many empty `Entry`s
-  and hope we never needed more than that amount.
+* If it is another global variable, we would have to declare many empty `Entry`
+values and hope 
 
 {{% notice Other Allocation Techniques%}}
 Although in this specific case global variables aren't a good solution, there are
@@ -120,7 +122,7 @@ cases where large sets of pre-allocated objects can be beneficial. For example,
 it provides a known upper bound of memory usage and makes the timing of each
 allocation predictable.
 
-However, we will not be covering these techniques in this learning path. It will
+However, these techniques are not covered in this Learning Path. It will
 however be useful to think about them after you have completed this learning
 path.
 {{% /notice %}}
@@ -128,38 +130,38 @@ path.
 * If it is in a function's stack frame, that stack frame will be reclaimed and
   modified by future functions, corrupting the new `Entry`.
 
-So you can see, we must use dynamic memory allocation. Which is why the `add_entry`
+So you can see, dynamic memory allocation is required. Which is why the `add_entry`
 shown above calls `malloc`. The resulting pointer points to somewhere not in
 the program's global data section or in any function's stack space, but in the
-heap memory. Where it can live until we `free` it.
+heap memory. It will stay in the heap until a call to `free` is made. 
 
-## free
+## The C library free function
 
-You cannot ask malloc for memory forever. Eventually that space behind the scenes
-will run out. So you should give up your dynamic memory once it is not needed,
+You cannot ask malloc for memory forever. Eventually the space behind the scenes
+will run out. You should give up your dynamic memory once it is not needed,
 using [`free`](https://en.cppreference.com/w/c/memory/free).
 
 ```C
 void free(void *ptr);
 ```
 
-You call `free` with a pointer previously given to you by `malloc`, and this tells
-the heap that we no longer need this memory.
+You call `free` with a pointer previously returned by `malloc`, and this tells
+the heap that the memory is no longer needed. 
 
-{{% notice Undefined Behaviour%}}
-You may wonder what happens if you don't pass the exact pointer to `free`, as
-`malloc` returned to you. The result varies as this is "undefined behaviour".
+{{% notice Undefined Behavior%}}
+You may wonder what happens if you don't pass the exact same pointer to `free` as
+`malloc` returned. The result varies as this is "undefined behavior".
 Which essentially means a large variety of unexpected things can happen.
 
 In practice, many allocators will tolerate this difference or reject it outright
-if it's not possible to do something sensbile with the pointer.
+if it's not possible to do something sensible with the pointer.
 
-Remember that just because one allocator handles this a certain way, does not
-mean all will. Indeed, that same allocator may handle it differently for
+Remember, just because one allocator handles this a certain way, does not
+mean all allocators will be the same. Indeed, that same allocator may handle it differently for
 different allocations within the same program.
 {{% /notice %}}
 
-So, you can use `free` to remove an item from your linked list.
+You can use `free` to remove an item from your linked list.
 
 ```C
 void remove_entry(Entry* previous, Entry* entry) {
@@ -183,5 +185,5 @@ to remove, so that the list skips over it. With `entry` now isolated we call
 [A]---------->[C] | [A]   [C]
 ```
 
-That covers the high level how and why of using `malloc` and `free`, next you'll
+That covers the high level how and why of using `malloc` and `free`, next you will
 see a possible implementation of a dynamic memory allocator.

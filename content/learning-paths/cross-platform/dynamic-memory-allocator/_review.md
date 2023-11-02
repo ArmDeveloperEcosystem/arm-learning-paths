@@ -16,7 +16,7 @@ review:
             complexity of the dynamic allocator may change.
 
             Dynamic allocation is done using runtime calls, so the program can
-            react to what's needed at the time. Static alloation is decided ahead
+            react to what's needed at the time. Static allocation is decided ahead
             of time instead.
 
             Both types of allocation have the same memory constraints as the
@@ -62,7 +62,7 @@ review:
             reduce the time taken to find a free range, and the overhead of
             recording the information about the ranges.
 
-            In our case, the performance of the heap would be ok to begin with.
+            In this case, the performance of the heap would be ok to begin with.
             As the program continues, more and more small ranges pile up. Leading
             to poorer performance later.
 
