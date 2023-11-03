@@ -2,38 +2,36 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            What is the size of the ZA storage?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-        correct_answer: 1                    
+            - SVL x SVL bits
+            - SVL x SVL bytes
+            - SVL x SVL floats
+        correct_answer: 1
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            The ZA storage is a two-dimensional array of SVL x SVL bits, where SVL (the Effective Streaming SVE Vector Length), is a power of two in the range 128 to 2048 bits.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            When is the ZA array activated at run-time?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - When the first FMOPA instruction is executed
+            - When an SMSTART instruction is executed
+            - When the processor is powered-up/reset (or the FVP model is started)
+        correct_answer: 2
         explanation: >
-            PLACEHOLDER EXPLANATION 2
-               
+            The ZA array is activated at run-time when an SMSTART instruction is executed.
+
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            How can the contents of the ZA tiles be viewed in the Arm Debugger?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
+            - The ZA array is memory mapped, so the tiles can be viewed by their address in the Memory view
+            - The tiles reside on the stack, so can be viewed as an offset from the Stack Pointer
+            - The Registers view can show the contents of the various tiles in a variety of formats
+        correct_answer: 3
         explanation: >
-            PLACEHOLDER EXPLANATION 3
-
+            The ZA tiles can be viewed in the Registers view in a variety of formats.  Their contents can also be viewed in the Commands view by using `output` commands.
 
 
 # ================================================================================
