@@ -1,26 +1,34 @@
 ---
-title: Implementing a Dynamic Memory Allocator
+title: Implement a dynamic memory allocator
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Project Structure
+The source code of the `simple_malloc` and `simple_free` memory allocation functions are below. 
+Everything required to build and run example allocations are also provided. 
 
-The file layout will be as follows:
-* `CMakeLists.txt` - To tell `cmake` how to configure the project.
+You will need a Linux machine to try the code and see how the allocation works. 
+
+## Project structure
+
+The files used are: 
+* `CMakeLists.txt` - Tells `cmake` how to configure and build the project.
 * `heap.c` - The dynamic memory allocator implementation.
 * `heap.h` - Function declarations including your new `simple_malloc` and
 	`simple_free` functions.
-* `main.c` - A program that makes use of `simple_malloc` and `simple_free`.
+* `main.c` - A test program that makes use of `simple_malloc` and `simple_free`.
 
-Building it will produce a single binary, `demo`, that you will run to see the
-results.
+Building it will produce a single binary, `demo`, that you can run and see the results.
 
-## Sources
+## Source code
 
-### CMakeLists.txt
+The files are listed below. 
+
+Use a text editor to copy and paste the contents of each file on a Linux machine.
+
+Contents of `CMakeLists.txt`:
 
 ``` {file_name="CMakeLists.txt"}
 cmake_minimum_required(VERSION 3.15)
@@ -30,7 +38,7 @@ project(MemoryAllocatorDemo C)
 add_executable(demo main.c heap.c)
 ```
 
-#### heap.h
+Contents of `heap.h`:
 
 ```C {file_name="heap.h"}
 #include <stddef.h>
@@ -45,20 +53,20 @@ void *simple_malloc(size_t size);
 void simple_free(void *ptr);
 ```
 
-## heap.c
+## Information about heap.c
 
 Please refer to the comments in the source code here for detailed explanations
-of each function. We will cover the key elements here up front.
+of each function. You can identify a few key elements before studying the code.
 
 First is `storage`, this is the backing storage which is a global char array.
 This is where the ranges, represented by `Header`, are stored.
 
 Each `Header` is written to the start of the allocated range. This means that
-`malloc` returns a pointer that points just beyond this location. `free` on the
+`simple_malloc` returns a pointer that points just beyond this location. `simle_free` on the
 other hand, deducts the size of `Header` from the pointer parameter to find the
 range information.
 
-When the heap is initialised with `simple_heap_init`, a single range is setup
+When the heap is initialized with `simple_heap_init`, a single range is setup
 that covers the whole heap and marks it as unallocated.
 
 To find a free range, `find_free_space` walks the heap using these `Header`
@@ -77,6 +85,8 @@ on systems where features like Address Space Layout Randomisation (ASLR) are
 enabled. Generally run to run, the output addresses may change. Focus on the
 relative values of pointers in relation to where the heap starts and ends.
 {{% /notice %}}
+
+Contents of `heap.c`:
 
 ```C {file_name="heap.c"}
 #include <assert.h>
@@ -243,7 +253,7 @@ void simple_free(void *ptr) {
 }
 ```
 
-### main.c
+Contents of `main.c`:
 
 ```C { file_name="main.c"}
 #include "heap.h"
@@ -263,38 +273,41 @@ int main() {
 }
 ```
 
-The code here does allocation and deallocation of memory. This tests the heap
+The main code does allocation and deallocation of memory. This tests the heap
 code but also highlights an interesting problem that you'll see more about later.
 
-## Building
+## Build the source code
 
-First install dependencies.
+Install the required tools using the command: 
 
 ```bash
 sudo apt install -y cmake ninja-build
 ```
 
-Then configure using CMake. We recomend a Debug build for the extra safety the
+Next, configure using CMake. You can use a Debug build for the extra safety the
 asserts bring.
 
 ```bash
 cmake . -DCMAKE_BUILD_TYPE=Debug -G Ninja
 ```
 
-Then build with `ninja`
+## Build and run a test
+
+Build the executable with `ninja`:
 
 ```bash
 ninja
 ```
 
-This should result in a `demo` executable in the same folder. Run this to see
-the allocator in action.
+You now have a `demo` executable in the same folder. 
+
+Run `demo` to see the allocator in action:
 
 ```bash
 ./demo
 ```
 
-## Output
+## Review the program output
 
 The output addresses will vary depending on where backing memory gets allocated
 by your system but this is the general form you should expect:
