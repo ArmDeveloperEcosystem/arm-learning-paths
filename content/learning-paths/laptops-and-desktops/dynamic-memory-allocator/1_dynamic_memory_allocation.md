@@ -13,7 +13,7 @@ If you have used C's "heap" (`malloc`, `free`, etc.) before, that is one example
 of dynamic memory allocation.
 
 It allows programs to allocate memory while they are running without knowing
-at build time what amount of memory they will need. In constrast to static
+at build time what amount of memory they will need. In contrast to static
 memory allocation where the amount is known at build time.
 
 ```C
@@ -93,7 +93,7 @@ void add_entry(Entry *entry, int data) {
 ```
 
 What you see above is a struct `Entry` that defines a singly-linked-list entry.
-Singly meaining that you can go forward via `next`, but you cannot go backwards
+Singly meaning that you can go forward via `next`, but you cannot go backwards
 in the list. There is some data `data`, and each entry points to the next entry,
 `next`, assuming there is one (it will be `NULL` for the end of the list).
 
@@ -152,7 +152,7 @@ You may wonder what happens if you don't pass the exact pointer to `free`, as
 Which essentially means a large variety of unexpected things can happen.
 
 In practice, many allocators will tolerate this difference or reject it outright
-if it's not possible to do something sensbile with the pointer.
+if it's not possible to do something sensible with the pointer.
 
 Remember that just because one allocator handles this a certain way, does not
 mean all will. Indeed, that same allocator may handle it differently for

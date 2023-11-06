@@ -274,7 +274,7 @@ First install dependencies.
 sudo apt install -y cmake ninja-build
 ```
 
-Then configure using CMake. We recomend a Debug build for the extra safety the
+Then configure using CMake. You should use a Debug build for the extra safety the
 asserts bring.
 
 ```bash

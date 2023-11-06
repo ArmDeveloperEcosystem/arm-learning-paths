@@ -13,7 +13,7 @@ have described `malloc` and `free`, there are more provided by the
 [C library](https://en.cppreference.com/w/c/memory).
 
 This will assume you just need `malloc` and `free`. Start with those and write
-out their behaviours, as the programmer using your allocator will see.
+out their behaviors, as the programmer using your allocator will see.
 
 There will be a function, `malloc`. It will:
 * Take a size in bytes as a parameter.
@@ -22,7 +22,7 @@ There will be a function, `malloc`. It will:
 
 There will be a function `free`. It will:
 * Take a pointer to some previously allocated memory as a parameter.
-* Mark that memory as avaiable for future allocations.
+* Mark that memory as available for future allocations.
 
 From this you can see that you will need:
 * Some large chunk of memory, the "backing storage".
@@ -67,7 +67,7 @@ that has been allocated would be:
 start: 0x123 size: 345 allocated: true
 ```
 
-For the intial state of a heap of size `N`, you will have one range of
+For the initial state of a heap of size `N`, you will have one range of
 unallocated memory.
 
 ```text
@@ -155,7 +155,7 @@ concern itself with alignment, which is why it can do a simple subtraction.
 
 ## Running Out Of Space
 
-The final thing an allocator must do is realise it has run out of space. This is
+The final thing an allocator must do is realize it has run out of space. This is
 simply achieved by knowing the bounds of the backing storage.
 
 ```C

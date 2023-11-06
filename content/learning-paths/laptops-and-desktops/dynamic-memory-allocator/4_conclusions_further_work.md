@@ -18,7 +18,7 @@ can mean many things. Sometimes it is all dynamic, sometimes it is a dynamic
 face with a static allocation behind it. This will change depending on the
 performance and complexity needs of the application.
 
-Fundementally it provides a way to get memory you did not know whether you would
+Fundamentally it provides a way to get memory you did not know whether you would
 need when the program was written. You knew you would need some non-zero amount
 and dynamic allocation lets you ask for it while the program is running.
 
@@ -63,7 +63,7 @@ structures you've used, they are not perfect either).
 ### Memory Safety (Or Lack Of)
 
 A big problem with memory in general is code accessing or changing memory that
-it should not. The allocator presented here is certainly vunerable to all the
+it should not. The allocator presented here is certainly vulnerable to all the
 classic memory exploits, which you can try out yourself.
 
 Replace the allocations in `main.c` with these to see what happens.
@@ -97,7 +97,7 @@ at the same place as `ptr`. When `ptr` is freed again, this would free the `ptr2
 allocation as well.
 
 Meaning that instead of being its own allocation, `ptr3` also ends up pointing
-to the same location as `ptr2`. So modiying one modifies the other.
+to the same location as `ptr2`. So modifying one modifies the other.
 
 Another possibility is that memory that was previously freed is used as part of
 a larger allocation. So the original range header is now in the middle of the
@@ -136,7 +136,7 @@ of ranges would be able to achieve that?
 If you think it wouldn't, you could look into
 [Region-Based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management).
 
-(whether it would or not depends enitrely on your application's requirements)
+(whether it would or not depends entirely on your application's requirements)
 
 This takes advantages of scenarios where you know the upper limit of objects you
 will need, along with their types and sizes.
@@ -173,7 +173,7 @@ prefix from the functions to do this.
 
 Note that if you only implement a subset of the memory management functions,
 the program being run will get the rest from the system C library. This will
-almost certianly lead to a crash when it tries to, for example, `realloc` a
+almost certainly lead to a crash when it tries to, for example, `realloc` a
 pointer that your heap produced, but instead asks the system heap to do it.
 
 Finally, you will likely need a lot more storage for the heap. Either increase
