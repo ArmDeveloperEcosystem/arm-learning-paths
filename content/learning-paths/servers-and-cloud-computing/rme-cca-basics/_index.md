@@ -11,8 +11,8 @@ learning_objectives:
     - Create a virtual machine in a realm running guest linux
 
 prerequisites:
-    - An Arm computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
-    - If you use a client application to access your Arm computer running Ubuntu, make sure that X11 forwarding is enabled.
+    - An aarch64 or x86_64 computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - If you use a client application to access your computer running Ubuntu, make sure that X11 forwarding is enabled.
 
 author_primary: Pareena Verma
 
