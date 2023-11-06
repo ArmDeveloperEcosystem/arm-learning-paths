@@ -8,7 +8,7 @@ review:
             - "False"
         correct_answer: 1                    
         explanation: >
-            Taints and tolerations work together to make sure that application pods are not scheduled on wrong architecture nodes.
+            Taints and tolerations work together to ensure that application pods are not scheduled on the wrong architecture nodes.
 
     - questions:
         question: >
