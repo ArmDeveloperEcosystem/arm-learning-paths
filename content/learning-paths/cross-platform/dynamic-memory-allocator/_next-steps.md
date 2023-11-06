@@ -9,7 +9,7 @@ further_reading:
         link: https://en.cppreference.com/w/c/memory
         type: documentation
     - resource:
-        title: LLSoftSecBook chapter on Memory Vunerabilities
+        title: LLSoftSecBook chapter on Memory Vulnerabilities
         link: https://llsoftsec.github.io/llsoftsecbook/#memory-vulnerability-based-attacks
         type: website
 
