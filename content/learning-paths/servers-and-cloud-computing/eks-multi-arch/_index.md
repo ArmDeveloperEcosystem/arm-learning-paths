@@ -3,7 +3,7 @@ title: Learn how to build and deploy a multi-architecture application on Amazon 
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for software developers who are looking to understand how to build and deploy a multi-architecture application with x86/amd64 and arm64 based container images on Amazon EKS
+who_is_this_for: This is an advanced topic for software developers who want to understand how to build and deploy a multi-architecture application with x86/amd64 and arm64-based container images on Amazon EKS
 
 learning_objectives: 
     - Build x86/amd64 and arm64 container images with docker buildx and docker manifest
