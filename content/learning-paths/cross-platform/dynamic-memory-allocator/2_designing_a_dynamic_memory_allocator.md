@@ -154,7 +154,7 @@ concern itself with alignment, which is why it can do a simple subtraction.
 
 ## Running out of space
 
-The final thing an allocator must do is realise it has run out of space. This is
+The final thing an allocator must do is realize it has run out of space. This is
 simply achieved by knowing the bounds of the backing storage.
 
 ```C
