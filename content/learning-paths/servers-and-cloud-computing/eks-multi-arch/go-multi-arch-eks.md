@@ -22,7 +22,7 @@ Three tools are required on your local machine. Follow the links to install the 
 
 ## Create a Multi-architecture Amazon EKS Cluster
 
-Use eksctl to create a multi-architecture Amazon EKS cluster. Create the following file with your choice of text editor
+Use `eksctl` to create a multi-architecture Amazon EKS cluster. Create a file named `cluster.yaml` with the contents below using a file editor of your choice.
 
 ```yaml
 apiVersion: eksctl.io/v1alpha5
@@ -43,17 +43,17 @@ nodeGroups:
     volumeSize: 80
 ```
 
-Run the eksctl command to create the EKS cluster
+Run the `eksctl` command to create the EKS cluster:
 
 ```console
 eksctl create cluster -f cluster.yaml
 ```
-This command will create a cluster that has 2 x86/amd64 nodes and 2 arm64 nodes. When the cluster is ready, use the following command to check the nodes
+This command will create a cluster that has 2 x86/amd64 nodes and 2 arm64 nodes. When the cluster is ready, use the following command to check the nodes:
 
 ```console
 kubectl get nodes
 ```
-You should see an output like below
+The output should look similar to:
 
 ```output
 NAME                                          STATUS   ROLES    AGE     VERSION
@@ -62,12 +62,12 @@ ip-172-31-16-133.eu-west-1.compute.internal   Ready    <none>   9m59s   v1.28.1-
 ip-172-31-19-140.eu-west-1.compute.internal   Ready    <none>   8m32s   v1.28.1-eks-43840fb
 ip-172-31-40-45.eu-west-1.compute.internal    Ready    <none>   8m32s   v1.28.1-eks-43840fb
 ```
-To check the architecture of the nodes, execute the following command
+To check the architecture of the nodes, execute the following command:
 
 ```console
 kubectl get node -o jsonpath='{.items[*].status.nodeInfo.architecture}'
 ```
-The output should show two architectures for four nodes
+The output should show two architectures for four nodes:
 
 ```output
 arm64 amd64 amd64 arm64
@@ -75,12 +75,12 @@ arm64 amd64 amd64 arm64
 
 ## Multi-architecture containers
 
-Multi-architecture container images are the easiest way to deploy applications, and hide the underlying hardware architecture. Building multi-architecture images is slightly more complex compared to building single-architecture images. 
+Multi-architecture container images are the easiest way to deploy applications and hide the underlying hardware architecture. Building multi-architecture images is slightly more complex compared to building single-architecture images. 
 Docker provides two ways to create multi-architecture images:
-  * docker buildx - builds both architectures at the same time
-  * docker manifest - builds each architecture separately and joins them together into a multi-architecture image
+  * docker buildx - builds both architectures at the same time.
+  * docker manifest - builds each architecture separately and joins them together into a multi-architecture image.
 
-Below is a simple Go application you can use to learn about multi-architecture Kubernetes clusters. Create a file named hello.go with the contents below:
+Shown below is a simple `Go` application you can use to learn about multi-architecture Kubernetes clusters. Create a file named `hello.go` with the contents below:
 
 ```console
 package main
@@ -103,14 +103,14 @@ func main() {
     log.Fatal(http.ListenAndServe(":8080", nil))
 }
 ```
-Create another file named go.mod with the following content
+Create another file named `go.mod` with the following content:
 
 ```console
 module example.com/arm
 go 1.21
 ```
 
-Create a Dockerfile with the following
+Create a Dockerfile with the following content:
 
 ```console
 ARG T
@@ -139,31 +139,35 @@ CMD [ "/hello" ]
 
 ## Build multi-architecture docker images with docker buildx
 
-With these files you can build your docker image. Login to Amazon ECR and create the following repository - multi-arch-app
+With these files you can build your docker image. Login to Amazon ECR and create a repository named `multi-arch-app`.
 
-Run the following command to build and push the docker image to the repository
+Run the following command to build and push the docker image to the repository:
 
 ```console
 docker buildx create --name multiarch --use --bootstrap
 docker buildx build -t <your-docker-repo-path>/multi-arch:latest --platform linux/amd64,linux/arm64 --push .
 ```
+Replace `<your-docker-repo-path>` in the command above to the location of your repository.
+
 You should now see the docker image in your repository.
 
 ## Build multi-architecture docker images with Docker manifest
 
 You can also use docker manifest to create a multi-architecture image from two single-architecture images. This is an alternative way to to build the multi-architecture image. 
-Create another repo in Amazon ECR with the name - multi-arch-demo. Use the following command to build an amd64 image
+Create another repository in Amazon ECR with the name `multi-arch-demo`. Use the following command to build an amd64 image:
 
 ```console
 docker build build -t <your-docker-repo-path>/multi-arch-demo:amd64 --build-arg TARCH=amd64 --build-arg T=amd64/ .
 docker push <your-docker-repo-path>/multi-arch-demo:amd64
 ```
+Replace `<your-docker-repo-path>` in the command above to the location of your repository.
 
-Build an arm64 image by executing the following commands on an arm64 machine
+Build an arm64 image by executing the following commands on an arm64 machine:
 ```console
 docker build build -t <your-docker-repo-path>/multi-arch-demo:arm64 --build-arg TARCH=amd64 --build-arg T=amd64v8/ .
 docker push <your-docker-repo-path>/multi-arch-demo:arm64
 ```
+Again, replace `<your-docker-repo-path>` in the commands above to the location of your repository.
 
 After building individual containers for each architecture, merge them into a single image by running the commands below on either architecture:
 
@@ -178,7 +182,7 @@ You should see three images in the ECR repository - one for each architecture (a
 
 ## Deploy Kubernetes service in EKS cluster
 
-We'll create a service to deploy the application. Create a file with the following contents
+You can now create a service to deploy the application. Create a file named `hello-service.yaml` with the following contents:
 
 ```yaml
 apiVersion: v1
@@ -198,7 +202,7 @@ spec:
     tier: web
 ```
 
-Deploy the service by running the following command
+Deploy the service. Run the following command:
 
 ```console
 kubectl apply -f hello-service.yaml
@@ -206,7 +210,7 @@ kubectl apply -f hello-service.yaml
 
 ## Deploy amd64 application
 
-Create a text file named amd64-deployment.yaml with the contents below. The amd64 image will only run on amd64 nodes. The nodeSelector is used to make sure the continer is only scheduled on amd64 nodes. 
+Create a text file named `amd64-deployment.yaml` with the contents below. The amd64 image will only run on amd64 nodes. The nodeSelector is used to make sure the container is only scheduled on amd64 nodes. 
 
 ```yaml
 apiVersion: apps/v1
@@ -250,24 +254,24 @@ spec:
 
 ```
 
-Use the following command to deploy the application.
+Use the following command to deploy the application:
 
 ```console
 kubectl apply -f amd64-deployment.yaml
 ```
 The output should show a single pod running.
 
-Get the external IP assigned to the service we deployed earlier, by executing the following command.
+Get the external IP assigned to the service you deployed earlier, by executing the following command:
 
 ```console
 kubectl get svc
 ```
-Use the external-ip from the command output and execute the following command. This IP belongs to the Load Balancer provisioned in your cluster
+Use the `external-ip` from the command output and execute the following command. This IP belongs to the Load Balancer provisioned in your cluster.
 
 ```console
 curl -w '\n' http://<external_ip>
 ```
-You should see an output similar to below, along with the architecture.
+You should see output similar to what is shown below:
 
 ```output
 Hello from image NODE:ip-192-168-32-244.ec2.internal, POD:amd-deployment-7d4d44889d-vzhpd, CPU PLATFORM:linux/amd64
@@ -275,7 +279,7 @@ Hello from image NODE:ip-192-168-32-244.ec2.internal, POD:amd-deployment-7d4d448
 
 ## Deploy arm64 application
 
-Create a text file named arm64-deployment.yaml with the contents below. Notice that the value of nodeSelector is now arm64
+Create a text file named `arm64-deployment.yaml` with the contents below. Notice that the value of `nodeSelector` is now arm64.
 
 ```yaml
 apiVersion: apps/v1
@@ -318,7 +322,7 @@ spec:
         kubernetes.io/arch: arm64
 ```
 
-Deploy the arm64 application by using the command below
+Deploy the arm64 application by using the command below:
 
 ```console
 kubectl apply -f arm64-deployment.yaml
@@ -331,7 +335,7 @@ kubectl get pods
 ```
 You should see two pods running in the cluster. One for amd64 and another one for arm64.
 
-Execute the curl command a few times to see output from both the pods. You'll see responses from arm64 and amd64 pods.
+Execute the curl command a few times to see output from both the pods. You should see responses from both the arm64 and amd64 pods.
 
 ```console
 curl -w '\n' http://<external_ip>
@@ -339,7 +343,7 @@ curl -w '\n' http://<external_ip>
 
 ## Deploy multi-architecture application in EKS cluster
 
-Now, we'll deploy the multi-architecture version of the application in our EKS cluster. Create a text file named multi-arch-deployment.yaml with the contents below. The image is the multi-architecture image created with docker buildx and 6 replicas are specified.
+You can now deploy the multi-architecture version of the application in our EKS cluster. Create a text file named `multi-arch-deployment.yaml` with the contents below. The image is the multi-architecture image created with docker buildx and 6 replicas are specified.
 
 ```yaml
 apiVersion: apps/v1
@@ -379,16 +383,17 @@ spec:
           requests:
             cpu: 300m
 ```
-Deploy the multi-architecture application by using the command below
+Deploy the multi-architecture application by using the command below:
 
 ```console
 kubectl apply -f multi-arch-deployment.yaml
 ```
-Execute the following command to check the running pods
+Execute the following command to check the running pods:
+
 ```console
 kubectl get pods
 ```
-Now the output should show all the pods from three deployments. To test the application, run the following command to check messages from all three versions of the application
+The output should show all the pods from three deployments. To test the application, run the following command to check messages from all three versions of the application:
 
 ```console
 for i in $(seq 1 10); do curl -w '\n' http://<external_ip>; done
