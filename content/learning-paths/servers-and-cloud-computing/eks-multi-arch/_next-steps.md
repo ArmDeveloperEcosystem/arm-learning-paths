@@ -1,5 +1,5 @@
 ---
-next_step_guidance: We recommend you to continue learning about deploying multi-architecture applications.
+next_step_guidance: We recommend you continue learning about deploying multi-architecture applications.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/migration"
 
