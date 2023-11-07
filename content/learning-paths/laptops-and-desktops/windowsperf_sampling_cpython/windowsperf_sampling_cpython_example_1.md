@@ -4,7 +4,7 @@ title: WindowsPerf sample example
 weight: 3
 ---
 
-## Example 1: Sampling of CPython calculating GooglePlex
+## Example 1: Sampling of CPython calculating Googolplex
 
 {{% notice Note %}}
 All step in this paragraph are done on native ARM64 Windows on Arm machine.
@@ -34,7 +34,7 @@ In the below example we will calculate a very large integer `10^10^100`.
 
 ### Executing computation intensive calculation with CPython
 
-Type in CPython interactive window [Googolplex](https://en.wikipedia.org/wiki/Googleplex) formula `10**10**100` and press enter.
+Type in CPython interactive window [Googolplex](https://en.wikipedia.org/wiki/Googolplex) formula `10**10**100` and press enter.
 
 ```command
 >>> 10**10**100
