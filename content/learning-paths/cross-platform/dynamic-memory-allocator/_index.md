@@ -1,6 +1,7 @@
 ---
 armips: null
 author_primary: David Spickett
+draft: true
 layout: learningpathall
 learning_objectives:
 - Explain how dynamic memory allocation and the C heap works
