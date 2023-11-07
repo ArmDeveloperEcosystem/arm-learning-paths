@@ -93,7 +93,7 @@ devcon install wperf-driver.inf Root\WPERFDRIVER
 ```
 You will see output similar to:
 
-```output
+```console
 Device node created. Install is complete when drivers are installed...
 Updating drivers for Root\WPERFDRIVER from <path>\wperf-driver.inf.
 Drivers installed successfully.
@@ -111,7 +111,7 @@ cd wperf-driver
 wperf-devgen install
 ```
 You will see output similar to:
-```output
+```console
 Executing command: install.
 Install requested.
 Waiting for device creation...
