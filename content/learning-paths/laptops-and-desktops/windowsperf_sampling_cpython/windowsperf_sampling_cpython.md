@@ -124,6 +124,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 ## Example 1: Sampling of CPython calculating GooglePlex
 
+{{% notice Note %}}
+All step in this paragraph are done on native ARM64 Windows on Arm machine.
+{{% /notice %}}
+
 ### Pin new CPython process to CPU core #1
 
 Use Windows `start` command to execute and pin `python_d.exe` (CPython interactive console) to CPU core number `1`.
@@ -218,6 +222,10 @@ Verbose mode in sampling: we've also added extra prints for verbose mode. Use `-
 {{% /notice %}}
 
 ## Example 2: Using the "record" command to simplify things
+
+{{% notice Note %}}
+All step in this paragraph are done on native ARM64 Windows on Arm machine.
+{{% /notice %}}
 
 The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use `--pe_file` to let `WindowsPerf` know which process to spawn or after all the options to `wperf` just type the command you would like to execute. 
 
