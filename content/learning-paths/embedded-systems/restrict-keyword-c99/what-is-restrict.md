@@ -48,8 +48,8 @@ There are 2 points to make here:
 1. `scaleVectors()` is the important function here, it scales two vectors by the same scale factor `*C`
 2. vector `a` overlaps with vector `b`. (`b = &a[2]`). 
 
-this rather simple program produces this output:
-```
+This simple program produces this output:
+```output
 a(before): 1 2 3 4 
 b(before): 3 4 5 6 
 a(after) : 2 4 12 16 
@@ -60,7 +60,7 @@ Notice that after the scaling, the contents of `a` are also affected by the scal
 
 We will include the assembly output of `scaleVectors` as produced by `clang-17 -O3`:
 
-```
+```output
 scaleVectors:                           // @scaleVectors
         ldr     x8, [x2]
         ldr     x9, [x0]
@@ -108,7 +108,11 @@ Unsurprisingly, the disassembled output of `scaleVectors` is the same. The reaso
 
 ## The Solution: restrict
 
-This is what the C99 `restrict` keyword resolves. It instructs the compiler that the passed arguments are not dependent on each other and that access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much more efficient way. Essentially it can group and schedule the loads and stores. **Note**, `restrict` only works in C, not in C++.
+This is what the C99 `restrict` keyword resolves. It instructs the compiler that the passed arguments are not dependent on each other and that access to the memory of each happens only through the respective pointer. This way the compiler can schedule the instructions in a much more efficient way. Essentially it can group and schedule the loads and stores. 
+
+{{% notice Note %}}
+The `restrict` keyword only works in C, not in C++.
+{{% /notice %}}
 
 Let's add `restrict` to `A` in the parameter list:
 ```C
@@ -191,10 +195,10 @@ It is interesting to see that in such an example adding the `restrict` keyword r
 
 ## What about SVE2?
 
-We have shown the obvious benefit of `restrict` in this function, on an armv8-a CPU, but we have new armv9-a CPUs out there with SVE2 as well as Neon/ASIMD. 
-Could the compiler generate better code in that case using `restrict`? The output without `restrict` is almost the same, but with `restrict` used, this is the result (we used `clang-17 -O3 -march=armv9-a`):
+You have now seen the benefit of `restrict` in this function, on an Armv8-A CPU. You can now try it on an Armv9-A CPU which supports SVE2 as well as Neon/ASIMD. 
+Could the compiler generate better code in that case using `restrict`? The output without `restrict` is almost the same, but with `restrict` used, this is the result (Compiler flags used: `clang-17 -O3 -march=armv9-a`):
 
-```
+```output
 scaleVectors:                           // @scaleVectors
         ldp     q1, q2, [x0]
         ldp     q3, q4, [x1]
@@ -210,4 +214,4 @@ scaleVectors:                           // @scaleVectors
 
 There are just 10 instructions, 31% of the original code size! The compiler has made great use of the SVE2 features, combining the multiplications and reducing them to 4 and, at the same time, grouping loads and stores down to 2 each. We have optimized our code by more than 3x just by adding a C99 keyword.
 
-We are now going to look at another example.
+Next, lets take a look at another example.

@@ -9,7 +9,7 @@ learning_objectives:
     - Learn the importance of using the `restrict` keyword in C correctly
 
 prerequisites:
-    - An Arm based system with Linux OS and recent compiler (Clang or GCC)
+    - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
 
 author_primary: Konstantinos Margaritis, VectorCamp
 
