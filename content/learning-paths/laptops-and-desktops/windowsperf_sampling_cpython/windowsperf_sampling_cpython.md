@@ -33,7 +33,7 @@ Please note that we will present you two ways of sampling with `WindowsPerf`: `s
 
 For this example you will need:
 * Windows on Arm (ARM64) native machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool).
-* `x64` build machine we will use to cross-build CPython for ARM64 target.
+* `x64` Windows build machine we will use to cross-build CPython for ARM64 target.
   * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/).
 * Basic knowledge of `git` and `Python`.
 
