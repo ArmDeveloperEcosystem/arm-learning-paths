@@ -57,15 +57,15 @@ https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
 To download directly from command prompt, use:
 
 ```console
-mkdir windowsperf-bin-3.2.0
-cd windowsperf-bin-3.2.0
-curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.2.0/windowsperf-bin-3.2.0.zip --output windowsperf-bin-3.2.0.zip
+mkdir windowsperf-bin-3.2.1
+cd windowsperf-bin-3.2.1
+curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.2.1/windowsperf-bin-3.2.1.zip --output windowsperf-bin-3.2.1.zip
 ```
 
 Unzip the package:
 
 ```console
-tar -xmf windowsperf-bin-3.2.0.zip
+tar -xmf windowsperf-bin-3.2.1.zip
 ```
 
 ## Install wperf driver
@@ -80,7 +80,7 @@ Open a `Windows Command Prompt` terminal with `Run as administrator` enabled.
 
 Navigate to the `windowsperf-bin-<version>` directory.
 ```command
-cd windowsperf-bin-3.2.0
+cd windowsperf-bin-3.2.1
 ```
 
 ### Install with devcon {#devcon}
@@ -133,11 +133,11 @@ cd ..
 wperf --version
 ```
 You should see output similar to:
-```output
+```console
 Component     Version  GitVer
 =========     =======  ======
-wperf         3.2.0    a947eed8
-wperf-driver  3.2.0    a947eed8
+wperf         3.2.1    c831cfc2
+wperf-driver  3.2.1    c831cfc2
 ```
 ## Further reading
 
