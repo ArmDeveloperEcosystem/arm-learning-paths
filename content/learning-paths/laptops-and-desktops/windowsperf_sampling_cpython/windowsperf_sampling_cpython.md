@@ -30,7 +30,7 @@ In short we will:
 ## Prerequisites
 
 For this example you will need:
-* Windows on Arm (ARM64) machine.
+* Windows on Arm (ARM64) machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool).
 * `x64` build machine we will use to cross-build CPython for ARM64 target.
 * Basic knowledge of `git` and `Python`.
 
@@ -128,7 +128,12 @@ Use Windows `start` command to execute and pin `python_d.exe` (CPython interacti
 ```command
 start /affinity 2 python_d.exe
 ```
-Newly created command window will open with:
+
+{{% notice Note %}}
+[start](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) command line switch `/affinity <hexaffinity>` applies the specified processor affinity mask (expressed as a hexadecimal number) to the new application. In our example decimal `2` is `0x02` or `0b0010`. This value denotes core no. 1 as 1 is a 1st bit in the mask, where the mask is indexed from 0 (zero).
+{{% /notice %}}
+
+Newly created command line window will open with:
 ```console
 Python 3.12.0a6+ (heads/main:1ff81c0cb6, Mar 14 2023, 16:26:50) [MSC v.1935 64 bit (ARM64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
@@ -137,11 +142,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 Check with Windows `Task Manager` if `python_d.exe` is running on CPU core #1. Newly created `CPython` interactive window will allow us to execute example workloads.
 In the below example we will calculate a very large integer `10^10^100`.
-
-{{% notice Note %}}
-[start](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) command line switch `/affinity <hexaffinity>` applies the specified processor affinity mask (expressed as a hexadecimal number) to the new application. In our example decimal `2` is `0x02` or `0b0010`. This value denotes core no. 1 as 1 is a 1st bit in the mask, where the mask is indexed from 0 (zero).
-{{% /notice %}}
-
 
 ### Executing computation intensive calculation with CPython
 
@@ -196,6 +196,16 @@ sampling ....e.e.e.e.e.eCtrl-C received, quit counting... done!
   0.13%         1  _PyLong_New:python312_d.dll
 ```
 
+In the above example we can see that the majority of code executed by CPython's `python_d.exe` executable resides inside the `python312_d.dll` DLL.
+
+Note that in `sampling ....e.e.e.e.e.` is a progressing printout where:
+* character '`.`' represents sample payload (of 128 samples) received from the WindowsPerf Kernel driver and
+* '`e`' represents an unsuccessful attempt to fetch whole sample payload.
+
 {{% notice  Note%}}
 You can also output `wperf sample` command in JSON format. Use `--json` command line option to enable JSON output.
+{{% /notice %}}
+
+{{% notice  Note%}}
+Verbose mode in sampling: we've also added extra prints for verbose mode. Use `-v` command line option to add more information about sampling.
 {{% /notice %}}
