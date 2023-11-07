@@ -9,7 +9,7 @@ learning_objectives:
     - Use WindowsPerf with native Windows on Arm workload
     - Grasp basics of sampling
     - Explore WindowsPerf command line
-    - Build CPython from sources
+    - Build CPython from sources for Windows on Arm ARM64 target
 
 prerequisites:
     - Windows on Arm desktop or development machine
@@ -25,7 +25,9 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - WindowsPerf
+    - Python
     - CPython
+    - perf
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
