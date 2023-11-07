@@ -46,6 +46,10 @@ List of supported metrics (to be used in -m)
 ...
 ```
 
+{{% notice  Note%}}
+You can extend `wperf list` command output with additional information like event and metrics description with `-v` command line option.
+{{% /notice %}}
+
 ## Obtain information about wperf configuration
 
 Command line option `test` prints on screen various `wperf` configuration settings:
