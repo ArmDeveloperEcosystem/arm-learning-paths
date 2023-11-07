@@ -6,6 +6,13 @@ weight: 3
 
 ## Example 1: Sampling of CPython calculating Googolplex
 
+In short we will:
+
+* Build [CPython](https://github.com/python/cpython) binaries targeting ARM64 from sources in debug mode.
+* Pin `python_d.exe` interactive console to arbitrary CPU core.
+* Try to calculate absurdly large integer number [Googolplex](https://en.wikipedia.org/wiki/Googolplex) to stress CPython application and get a simple workload.
+* Run counting and sampling to obtain some simple event information.
+
 {{% notice Note %}}
 All step in this paragraph are done on native ARM64 Windows on Arm machine.
 {{% /notice %}}

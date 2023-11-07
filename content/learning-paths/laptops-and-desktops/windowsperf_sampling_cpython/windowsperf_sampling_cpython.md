@@ -14,18 +14,11 @@ There are basically two models of using performance monitoring hardware:
 * the `counting model`, for obtaining aggregate counts of occurrences of special events and 
 * the `sampling model`, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
 
-In this example we will use `sampling` to determine CPython program "hot" locations determined by frequencies of PMU event specified by user.
+`WindowsPerf` support both. In this example we will use `sampling` to determine CPython program "hot" locations determined by frequencies of PMU event specified by user.
 
 {{% notice Note %}}
 This example do not include information about methodology used to determine PMU events used to guide this sampling example.
 {{% /notice %}}
-
-In short we will:
-
-* Build [CPython](https://github.com/python/cpython) binaries targeting ARM64 from sources in debug mode.
-* Pin `python_d.exe` interactive console to arbitrary CPU core.
-* Try to calculate absurdly large integer number [Googolplex](https://en.wikipedia.org/wiki/Googolplex) to stress CPython application and get a simple workload.
-* Run counting and sampling to obtain some simple event information.
 
 Please note that we will present you two ways of sampling with `WindowsPerf`: `sample` and `record` command.
 
