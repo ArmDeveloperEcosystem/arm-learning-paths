@@ -196,6 +196,10 @@ sampling ....e.e.e.e.e.eCtrl-C received, quit counting... done!
   0.13%         1  _PyLong_New:python312_d.dll
 ```
 
+{{% notice  Note%}}
+You can close command line window with `python_d.exe` running when you finish sampling. Sampling will also automatically end when sample process finishes.
+{{% /notice %}}
+
 In the above example we can see that the majority of code executed by CPython's `python_d.exe` executable resides inside the `python312_d.dll` DLL.
 
 Note that in `sampling ....e.e.e.e.e.` is a progressing printout where:
@@ -208,4 +212,21 @@ You can also output `wperf sample` command in JSON format. Use `--json` command 
 
 {{% notice  Note%}}
 Verbose mode in sampling: we've also added extra prints for verbose mode. Use `-v` command line option to add more information about sampling.
+{{% /notice %}}
+
+## Example 2: Using the "record" command to simplify things
+
+The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use `--pe_file` to let `WindowsPerf` know which process to spawn or after all the options to `wperf` just type the command you would like to execute. 
+
+This simplifies steps presented in example #1.
+
+If you want to pass command line arguments to your application you can just call it after all WindowsPerf options, all command line arguments are going to be passed
+verbatim to the program that is being spawned. If you want to execute the CPython example above using this approach you could just type:
+
+```command
+wperf record -e ld_spec:100000 -c 1 --timeout 30 python_d.exe -c 10**10**100
+```
+
+{{% notice  Note%}}
+Above command will automatically spawn process `python_d.exe -c 10**10**100` (and pass command line options to it), sample for 30 seconds with `--timeout 30` event `ld_spec` with sample frequency of `100000`.
 {{% /notice %}}
