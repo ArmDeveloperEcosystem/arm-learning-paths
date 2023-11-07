@@ -46,6 +46,47 @@ List of supported metrics (to be used in -m)
 ...
 ```
 
+## Obtain information about wperf configuration
+
+Command line option `test` prints on screen various `wperf` configuration settings:
+
+```command
+wperf test
+```
+
+```console
+        Test Name                                           Result
+        =========                                           ======
+        request.ioctl_events [EVT_CORE]                     False
+        request.ioctl_events [EVT_DSU]                      False
+        request.ioctl_events [EVT_DMC_CLK/EVT_DMC_CLKDIV2]  False
+        pmu_device.vendor_name                              Arm Limited
+        pmu_device.product_name                             neoverse-n1
+        pmu_device.product_name(extended)                   Neoverse N1 (neoverse-n1), armv8.1, pmu_v3
+        pmu_device.product []                               armv8-a,armv9-a,neoverse-n1,neoverse-n2,neoverse-n2-r0p0,neoverse-n2-r0p1,neoverse-n2-r0p3,neoverse-v1
+        pmu_device.m_product_alias                          (neoverse-n2-r0p0:neoverse-n2),(neoverse-n2-r0p1:neoverse-n2)
+        pmu_device.events_query(events) [EVT_CORE]          110
+        pmu_device.events_query(events) [EVT_DSU]           9
+        pmu_device.events_query(events) [EVT_DMC_CLK]       3
+        pmu_device.events_query(events) [EVT_DMC_CLKDIV2]   26
+        PMU_CTL_QUERY_HW_CFG [arch_id]                      0x000f
+        PMU_CTL_QUERY_HW_CFG [core_num]                     0x0050
+        PMU_CTL_QUERY_HW_CFG [fpc_num]                      0x0001
+        PMU_CTL_QUERY_HW_CFG [gpc_num]                      0x0006
+        PMU_CTL_QUERY_HW_CFG [total_gpc_num]                0x0006
+        PMU_CTL_QUERY_HW_CFG [part_id]                      0x0d0c
+        PMU_CTL_QUERY_HW_CFG [pmu_ver]                      0x0004
+        PMU_CTL_QUERY_HW_CFG [rev_id]                       0x0001
+        PMU_CTL_QUERY_HW_CFG [variant_id]                   0x0003
+        PMU_CTL_QUERY_HW_CFG [vendor_id]                    0x0041
+        PMU_CTL_QUERY_HW_CFG [midr_value]                   0x000000000000413fd0c1
+...
+```
+
+{{% notice  Note%}}
+You can output `wperf test` command in JSON format. Use `--json` command line option to enable JSON output.
+{{% /notice %}}
+
 ## Generate sample profile
 
 Specify the `event` to profile with `-e`. Groups of events, known as `metrics` can be specified with `-m`.
@@ -55,7 +96,7 @@ For example, generate a report for CPU core 0 (`-c 0`) for two seconds (`sleep 2
 wperf stat -e cpu_cycles -m icache -c 0 sleep 2
 ```
 This will output a report similar to:
-```output
+```console
 counting ... done
 
 Performance counter stats for core 0, no multiplexing, kernel mode excluded, on Arm Limited core implementation:
@@ -73,4 +114,10 @@ note: 'e' - normal event, 'gN' - grouped event with group number N, metric name 
 
                2.281 seconds time elapsed
 ```
+
+{{% notice  Note%}}
+You can output `wperf stat` command in JSON format. Use `--json` command line option to enable JSON output.
+{{% /notice %}}
+
+
 Example use cases are provided in the WindowsPerf [documentation](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/blob/main/wperf/README.md#counting-model).
