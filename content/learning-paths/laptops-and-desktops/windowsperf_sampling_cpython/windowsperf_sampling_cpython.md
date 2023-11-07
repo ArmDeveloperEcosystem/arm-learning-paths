@@ -27,11 +27,14 @@ In short we will:
 * Try to calculate absurdly large integer number [Googolplex](https://en.wikipedia.org/wiki/Googolplex) to stress CPython application and get a simple workload.
 * Run counting and sampling to obtain some simple event information.
 
+Please note that we will present you two ways of sampling with `WindowsPerf`: `sample` and `record` command.
+
 ## Prerequisites
 
 For this example you will need:
-* Windows on Arm (ARM64) machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool).
+* Windows on Arm (ARM64) native machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool).
 * `x64` build machine we will use to cross-build CPython for ARM64 target.
+  * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/).
 * Basic knowledge of `git` and `Python`.
 
 ### CPython cross-build on x64 machine targeting ARM64
