@@ -8,7 +8,6 @@ who_is_this_for: This is an advanced topic for software developers who want to u
 learning_objectives: 
     - Build x86/amd64 and arm64 container images with docker buildx and docker manifest
     - Understand the nuances of building a multi-architecture container image
-    - Learn how to add taints and tolerations to Amazon EKS clusters to schedule application pods on architecture specific nodes
     - Deploy a multi-arch container application across multiple architectures in a single Amazon EKS cluster
 
 prerequisites:
