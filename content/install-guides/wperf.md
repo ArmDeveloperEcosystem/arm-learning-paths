@@ -139,6 +139,43 @@ Component     Version  GitVer
 wperf         3.2.1    c831cfc2
 wperf-driver  3.2.1    c831cfc2
 ```
+
+## Uninstall wperf driver
+
+You can uninstall (aka "remove") the kernel driver using either the Visual Studio [devcon](#devcon) utility or the supplied [installer](#devgen).
+
+{{% notice  Note%}}
+You must uninstall the driver as `Administrator`.
+{{% /notice %}}
+
+### Uninstall with devcon {#devcon}
+
+Below command removes the device from the device tree and deletes the device stack for the device. As a result of these actions, child devices are removed from the device tree and the drivers that support the device are unloaded. See [DevCon Remove](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon-remove) article for more details.
+
+```command
+devcon remove wperf-driver.inf Root\WPERFDRIVER
+```
+You should see output similar to:
+```console
+ROOT\SYSTEM\0001                                            : Removed
+1 device(s) were removed.
+```
+
+### Uninstall with wperf-devgen {#devgen}
+
+```command
+wperf-devgen uninstall
+```
+You should see output similar to:
+```console
+Executing command: uninstall.
+Uninstall requested.
+Waiting for device creation...
+Device uninstalled successfully.
+Trying to remove driver <path>\wperf-driver.inf.
+Driver removed successfully.
+```
+
 ## Further reading
 
 [Announcing WindowsPerf: Open-source performance analysis tool for Windows on Arm](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf)
