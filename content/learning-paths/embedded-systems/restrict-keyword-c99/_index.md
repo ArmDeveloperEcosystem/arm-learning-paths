@@ -3,7 +3,7 @@ title: Understand the `restrict` keyword in C99
 
 minutes_to_complete: 30
 
-who_is_this_for: C developers who are interested in software optimization
+who_is_this_for: This is an introductory topic for C developers who are interested in software optimization
 
 learning_objectives: 
     - Learn the importance of using the `restrict` keyword in C correctly
