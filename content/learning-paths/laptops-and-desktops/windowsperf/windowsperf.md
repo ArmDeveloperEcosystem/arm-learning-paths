@@ -27,7 +27,7 @@ wperf list
 
 The output should be similar to:
 
-```output
+```console
 List of pre-defined events (to be used in -e)
 
         Alias Name              Raw Index  Event Type
