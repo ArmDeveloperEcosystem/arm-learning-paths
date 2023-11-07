@@ -93,7 +93,7 @@ devcon install wperf-driver.inf Root\WPERFDRIVER
 ```
 You will see output similar to:
 
-```console
+```output
 Device node created. Install is complete when drivers are installed...
 Updating drivers for Root\WPERFDRIVER from <path>\wperf-driver.inf.
 Drivers installed successfully.
@@ -111,7 +111,7 @@ cd wperf-driver
 wperf-devgen install
 ```
 You will see output similar to:
-```console
+```output
 Executing command: install.
 Install requested.
 Waiting for device creation...
@@ -133,7 +133,7 @@ cd ..
 wperf --version
 ```
 You should see output similar to:
-```console
+```output
 Component     Version  GitVer
 =========     =======  ======
 wperf         3.2.1    c831cfc2
@@ -156,7 +156,7 @@ Below command removes the device from the device tree and deletes the device sta
 devcon remove wperf-driver.inf Root\WPERFDRIVER
 ```
 You should see output similar to:
-```console
+```output
 ROOT\SYSTEM\0001                                            : Removed
 1 device(s) were removed.
 ```
