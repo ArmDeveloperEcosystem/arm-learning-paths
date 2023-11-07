@@ -50,20 +50,27 @@ List of supported metrics (to be used in -m)
 
 Specify the `event` to profile with `-e`. Groups of events, known as `metrics` can be specified with `-m`.
 
-For example, generate a report for Core 0 (`-c 0`) for two seconds (`-d 2`) with:
+For example, generate a report for CPU core 0 (`-c 0`) for two seconds (`sleep 2`) with:
 ```command
-wperf stat -e cpu_cycles -m icache -c 0 -d 2
+wperf stat -e cpu_cycles -m icache -c 0 sleep 2
 ```
 This will output a report similar to:
 ```output
+counting ... done
+
+Performance counter stats for core 0, no multiplexing, kernel mode excluded, on Arm Limited core implementation:
+note: 'e' - normal event, 'gN' - grouped event with group number N, metric name will be appended if 'e' or 'g' comes from it
+
         counter value  event name        event idx  event note
         =============  ==========        =========  ==========
-          649,973,325  cycle             fixed      e
-          277,788,076  l1i_cache         0x14       g0,icache
-            7,415,699  l1i_cache_refill  0x01       g0,icache
+            7,408,075  cycle             fixed      e
+            2,271,166  l1i_cache         0x14       g0,icache
+              126,875  l1i_cache_refill  0x01       g0,icache
                     0  l2i_cache         0x27       g0,icache
                     0  l2i_cache_refill  0x28       g0,icache
-          813,129,394  inst_retired      0x08       g0,icache
-          649,973,325  cpu_cycles        0x11       e
+            6,247,674  inst_retired      0x08       g0,icache
+            7,408,075  cpu_cycles        0x11       e
+
+               2.281 seconds time elapsed
 ```
 Example use cases are provided in the WindowsPerf [documentation](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/blob/main/wperf/README.md#counting-model).
