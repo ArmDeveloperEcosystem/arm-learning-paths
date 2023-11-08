@@ -31,6 +31,17 @@ review:
         explanation: >
             Use `-c` to specify the processor(s) in the system you wish to profile.
 
+    - questions:
+        question: >
+            WindowsPerf can output data in JSON format with `--json` command line option.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Some `wperf` commands such as `list`, `test` or `stat` can output data in JSON format.
+
+
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
