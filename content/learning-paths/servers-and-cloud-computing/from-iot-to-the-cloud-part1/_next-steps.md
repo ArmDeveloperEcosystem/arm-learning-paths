@@ -4,11 +4,11 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on Hyperscan is a great next step.
+    You can continue learning about migrating applications to Arm. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/vectorscan/"
-# Link to the next learning path being recommended.
+recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:
@@ -18,21 +18,18 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/vectorscan/"
 
 further_reading:
     - resource:
-        title: MongoDB Manual
-        link: https://www.mongodb.com/docs/manual/
-        type: documentation
+        title: Terraform on Azure
+        link: https://www.udemy.com/course/terraform-on-azure-basic-tutorial
+        type: Tutorial
     - resource:
-        title: MongoDB Performance Tool
-        link: https://github.com/idealo/mongodb-performance-test#readme
-        type: documentation
+        title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
+        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
+        type: Blog
     - resource:
-        title: YCSB
-        link: https://github.com/brianfrankcooper/YCSB/wiki/
-        type: documentation
-    - resource:
-        title: Compare performance of MongoDB on Arm vs Intel
-        link: https://community.arm.com/arm-community-blogs/b/operating-systems-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2
-        type: blog
+        title: About Azure bastion
+        link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
+        type: Documentation
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

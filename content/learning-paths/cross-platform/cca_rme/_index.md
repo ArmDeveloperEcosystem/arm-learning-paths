@@ -1,16 +1,16 @@
 ---
-title: Get started with Arm Confidential Compute Architecture (CCA)
+title: Get started with the Realms Management Extension (RME)
 
-minutes_to_complete: 15
+minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers interested in learning the concepts of CCA.
+who_is_this_for: This is an introductory topic for developers interested in learning the concepts of the Realms Management Extension and Arm Confidential Compute Architecture.
 
 learning_objectives: 
     - Understand the Arm Confidential Compute Architecture
     - Understand simple bare-metal example as provided with Arm Development Studio
 
 prerequisites:
-    - Some understanding of Arm architecture
+    - Some understanding of the Arm architecture
     - Arm Development Studio installation
 
 author_primary: Ronan Synnott

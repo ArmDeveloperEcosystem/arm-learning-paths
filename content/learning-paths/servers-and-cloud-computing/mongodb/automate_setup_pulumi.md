@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Automate infrastructure setup for MongoDB performance benchmarking with Pulumi"
+title: "Automate MongoDB Performance Benchmarking Infrastructure Setup with Pulumi"
 
 weight: 5 # (intro is 1), 2 is first, 3 is second, etc.
 
@@ -8,9 +8,9 @@ weight: 5 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-You can automate the MongoDB performance benchmarking setup, along with YCSB framework and the required infrastructure in AWS using Pulumi.
+You can automate the MongoDB performance benchmarking setup, along with the YCSB framework and the required infrastructure in AWS using Pulumi.
 
-[Pulumi](https://www.pulumi.com/) is a multi-language infrastructure as code tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
+[Pulumi](https://www.pulumi.com/) is a multi-language 'Infrastructure as Code' tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
 
 ## Before you begin
 
@@ -99,13 +99,13 @@ Execute the following python script to install all dependencies
 ./python-setup.sh
 ```
 
-Open the 'Pulumi.yaml' file with your choice of editor
+Open the 'Pulumi.yaml' file in your preferred editor:
 
 ```bash
 vi Pulumi.yaml
 ```
 
-Edit the default aws region to your region of choice
+Edit the default AWS region to your preferred region:
 
 ```yaml
 name: p1-py
@@ -210,7 +210,7 @@ Outputs:
 Resources:
     + 13 to create
 ```
-You will be prompted to update the stack. Select yes to create the stack. Once successfully completed, you can ssh to the instance using the 'public_ip' or 'public_dns' property. 
+You will be prompted to update the stack. Select 'yes' to create the stack. Once successfully completed, you can ssh to the instance using the 'public_ip' or 'public_dns' property. 
 
 Execute the following script to get the private key to SSH to the new instance
 ```bash
