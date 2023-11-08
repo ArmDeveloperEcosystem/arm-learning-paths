@@ -3,9 +3,24 @@ layout: learningpathall
 title: WindowsPerf
 weight: 2
 ---
-[WindowsPerf](https://gitlab.com/Linaro/WindowsPerf/windowsperf) is a port of the popular Linux [perf](https://perf.wiki.kernel.org) tool for performance analysis.
+
+# Overview
+
+[WindowsPerf](https://gitlab.com/Linaro/WindowsPerf/windowsperf) is (Linux [perf]([perf](https://perf.wiki.kernel.org)) inspired) Windows on Arm performance profiling tool. Profiling is based on ARM64 PMU and its hardware counters. WindowsPerf already supports the counting model for obtaining aggregate counts of occurrences of special events, and sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
 
 Learn more in this [blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf) announcing the first release.
+
+## WindowsPerf architecture
+
+`WindowsPerf` is composed of two main components:
+- [wperf](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf) a command line interface (CLI) sometimes refereed as "user-space app" and
+- [wperf-driver](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf-driver). `wperf-driver` is a (signed) Kernel-Mode Driver Framework (KMDF) driver.
+
+## WindowsPerf releases
+
+You can find all binary releases of `WindowsPerf` [here](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases).
+
+# Installation
 
 For installation instructions see the [install guide](/install-guides/wperf).
 
