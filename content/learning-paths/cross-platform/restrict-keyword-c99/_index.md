@@ -27,7 +27,12 @@ tools_software_languages:
     - Coding
 operatingsystems:
     - Linux
-
+shared_path: true
+shared_between:
+    - laptops-and-desktops
+    - servers-and-cloud-computing
+    - smartphones-and-mobile
+   
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

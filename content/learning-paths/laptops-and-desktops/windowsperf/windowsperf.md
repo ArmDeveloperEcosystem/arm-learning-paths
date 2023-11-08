@@ -14,7 +14,7 @@ Learn more in this [blog](https://community.arm.com/arm-community-blogs/b/infras
 
 `WindowsPerf` is composed of two main components:
 - [wperf](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf) a command line interface (CLI) sometimes referred as "user-space app" and
-- [wperf-driver](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf-driver). `wperf-driver` is a (signed) Kernel-Mode Driver Framework (KMDF) driver.
+- [wperf-driver](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf-driver) a (signed) Kernel-Mode Driver Framework (KMDF) driver.
 
 ## WindowsPerf releases
 
