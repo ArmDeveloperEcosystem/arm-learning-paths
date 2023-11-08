@@ -3,6 +3,7 @@ title: 'Docker on Arm64'
 
 minutes_to_complete: 60
 
+who_is_this_for: This learning path is dedicated to IoT developers interested in learning how to create and run a Docker container under Windows on Arm (WoA). Also, we will demonstrate how to push a local Docker image to a container registry in the Azure Container Registry.
 
 This learning path is the second part of the series: From IoT to the Cloud.
 
