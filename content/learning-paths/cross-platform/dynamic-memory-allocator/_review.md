@@ -42,7 +42,7 @@ review:
 
     - questions:
         question: >
-            If the allocator presented here was used mainly for very small
+            If the allocator was used mainly for very small
             allocations (less than 8 bytes), what concern would you have?
         answers:
             - That memory was being wasted because the details of each allocation
@@ -62,12 +62,11 @@ review:
             reduce the time taken to find a free range, and the overhead of
             recording the information about the ranges.
 
-            In this case, the performance of the heap would be ok to begin with.
-            As the program continues, more and more small ranges pile up. Leading
+            In this case, the performance of the heap would be ok to begin with but, as the program continues, more and more small ranges pile up, leading
             to poorer performance later.
 
-            This is sometimes not a problem, but for real time applications like
-            video game, unpredictable heap performance is a problem.
+            Unpredictable heap performance is a problem for real time applications, such as
+            video games.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
