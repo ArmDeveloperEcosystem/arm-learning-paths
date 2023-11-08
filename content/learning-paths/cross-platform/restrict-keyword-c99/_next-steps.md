@@ -1,7 +1,7 @@
 ---
-next_step_guidance: You should now be able to test the `restrict` keyword in your own code. Why not explore these other embedded software learning paths.
+next_step_guidance: You should now be able to test the `restrict` keyword in your own code. We recommend exploring the learning path on porting your code to Arm Scalable Vector Extensions as a next step.
 
-recommended_path: /learning-paths/embedded-systems/
+recommended_path: /learning-paths/servers-and-cloud-computing/sve/
 
 further_reading:
     - resource:

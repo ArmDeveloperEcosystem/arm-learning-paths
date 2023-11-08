@@ -11,7 +11,9 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-Older Arm products do not support UBL licenses. These will be enabled with FlexNet Publisher floating licenses. You will be supplied with license key(s) to generate your license(s).
+Older Arm products do not support user-based licenses. These will be enabled with FlexNet Publisher floating licenses.
+
+You will be supplied with license key(s) to generate such license(s).
 
 ## License server set up
 
@@ -55,11 +57,42 @@ export ARMLMD_LICENSE_FILE=port@server
 
 The license can also be activated in the various Arm tool IDEs.
 
-For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager`. You will need to specify the appropriate Development Studio Edition as the `Active Product`.
+For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager`.
+
+If `ARMLMD_LICENSE_FILE` is not set, use `Add` > `Add product license`, and specify `port` and `server` information for your license server.
+
+Arm Development Studio will also ask to specify the appropriate [Edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) as the `Active Product`.
 
 ### Verify setup
 
-To verify that the license is set up correctly, execute an Arm tool that does not support user-based licensing, for example:
-```command
-armcc --vsn
+To verify that the license is set up correctly, set the following environment variable:
+
+#### Windows
+```console
+set FLEXLM_DIAGNOSTICS=3
 ```
+#### Linux
+```console
+export FLEXLM_DIAGNOSTICS=3
+```
+
+and execute an appropriate Arm tool, for example `Arm Compiler for Embedded`:
+```command
+armclang --version
+```
+
+Observe the output, which will be similar to:
+```output
+Checkout succeeded: ds_suite_rowan/04C6 0E2A CDA4 6344
+        License file: port@server
+        License Server: port@server
+Checkout succeeded: ds_compiler_rowan/141D C968 2E7F 4187
+        License file: port@server
+        License Server: port@server
+Product: Arm Development Studio Gold Edition 2023.0
+Component: Arm Compiler for Embedded 6.20
+```
+
+{{% notice Note %}}
+Unset the `FLEXLM_DIAGNOSTICS` environment variable afterwards, as this will impact the tools performance.
+{{% /notice %}}
