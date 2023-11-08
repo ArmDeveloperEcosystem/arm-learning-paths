@@ -20,6 +20,8 @@ The ZA array can be accessed as vectors of 8-bit, 16-bit, 32-bit, 64-bit, or 128
 The ZA array can also be accessed as tiles.  A tile is a square, two-dimensional sub-array of elements within the ZA array.  
 A ZA tile can be accessed as vectors of 8-bit, 16-bit, 32-bit, 64-bit, or 128-bit elements, or as horizontal or vertical slices of SVL bits.
 
+![example image alt-text#center](ZA.png "Figure 1. The ZA storage, shown for SVL=256 bits, organised as 32-bit floats, and the mapping of horizontal and vertical slices to ZA0-3 tiles")
+
 The Scalable Matrix Extension version 2 (SME2) extends the SME architecture to increase the number of applications that can benefit from the computational efficiency of SME, beyond its initial focus on outer products and matrix-matrix multiplication.  SME2 adds:
 * Data processing instructions with multi-vector operands and a multi-vector predication mechanism.
 * A Range Prefetch hint instruction.
