@@ -6,7 +6,7 @@ layout: learningpathall
 learning_objectives:
 - Explain how dynamic memory allocation and the C heap works
 - Write a simple dynamic memory allocator
-- Explain some of the flaws and risks of heap allocation in general
+- Explain some of the risks of heap allocation in general
 learning_path_main_page: 'yes'
 minutes_to_complete: 120
 operatingsystems:
