@@ -39,7 +39,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            Some `wperf` commands such as `list`, `test` or `stat` (and few more!) can output data in JSON format.
+            Some `wperf` commands such as `list`, `test` or `stat` can output data in JSON format.
 
 
 # ================================================================================
