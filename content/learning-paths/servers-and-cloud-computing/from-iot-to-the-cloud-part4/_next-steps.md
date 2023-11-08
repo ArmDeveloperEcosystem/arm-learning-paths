@@ -18,16 +18,16 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/"
 
 further_reading:
     - resource:
-        title: Docker
-        link: https://www.docker.com
+        title: Kubernetes
+        link: https://kubernetes.io
         type: Documentation
     - resource:
-        title: Azure Container Registry
-        link: https://learn.microsoft.com/en-GB/azure/container-registry/container-registry-concepts
+        title: Azure Kubernetes Service
+        link: https://azure.microsoft.com/en-us/products/kubernetes-service#overview
         type: Documentation
     - resource:
-        title: Azure Container Instances
-        link: https://learn.microsoft.com/en-us/azure/container-instances/
+        title: kubectl Cheat Sheet
+        link: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
         type: Documentation
 
 

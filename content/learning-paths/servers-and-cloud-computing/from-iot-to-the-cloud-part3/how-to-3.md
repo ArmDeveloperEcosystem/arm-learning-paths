@@ -55,7 +55,7 @@ The container will be created. However, it will not run as the Azure Container i
 
 ![Azure#left](figures/13.png)
 
-Compare this status with **aspnet-sample** container instance, which you created before.
+Compare this status with the **aspnet-sample** container instance, which you created before.
 
 ## Summary
 This tutorial taught you how to deploy containerized applications using the Azure Container Instance. You deployed a Docker container from the public (Microsoft Container Registry) and a private registry (created with Azure Container Registry). Along the way, you also learned how to configure Azure Container Registry to enable such deployments.
