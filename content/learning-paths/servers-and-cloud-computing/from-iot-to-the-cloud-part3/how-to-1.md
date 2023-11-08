@@ -43,13 +43,13 @@ You should end up with the following configuration:
 
 ![Azure#left](figures/03.png)
 
-Now you will need to configure port mapping. Let’s click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Afterward, you add 8080 port for the TCP protocol: 
+Now you will need to configure port mapping. Let’s click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Afterward, you add an 8080 port for the TCP protocol: 
 
 ![Azure#left](figures/04.png)
 
 This setting corresponds to the **-p** flag we used in part 2 of this learning path series. Specifically, the port configuration enables us to create the port mapping, which will map port 8080 of the container instance to the corresponding point inside the running container.
 
-{{% notice Note %}}Here, we use 8080 port because the sample ASP.NET application listens on this port by default. {{% /notice %}}
+{{% notice Note %}}Here, we use the 8080 port because the sample ASP.NET application listens on this port by default. {{% /notice %}}
 
 Finally, you click the **Review + create** button. This will run the final validation of your configuration, and you will see the following screen:
 

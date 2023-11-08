@@ -6,13 +6,11 @@ weight: 2
 layout: learningpathall
 ---
 
-## Why do you need Kubernetes?
-Containerization offers an excellent way to package your applications with all required dependencies. Such an approach makes your applications portable. However, you still need to run, manage, and monitor running containers. In practice, the containers can become unresponsive or fail. In such cases, you will need to restart them manually. Also, you often use containers to spin up several instances of the same application or service to balance the load. Running many containers in parallel would require you to schedule containers on several physical or virtual machines. Moreover, you would also need to distribute the incoming traffic onto underlying containers.
+## Why do you need Infrastructure as Code?
+Infrastructure as Code (IaC) provides a declarative approach for provisioning cloud resources. The idea is that instead of creating cloud resources using the Azure Portal or the Azure CLI, you declare the cloud environment using a text file of the specific format. This enables you to keep declarations in the source control system and deploy, update, and destroy all cloud resources using a single command.
 
-Here is where the Kubernetes comes into play. Specifically, Kubernetes was created to help you automate many tasks you would otherwise need to perform manually, like restarting failed containers, scheduling them on different machines, and load balancing.
+Azure natively provides the Azure Resource Manager (ARM) as the IaC tool. However, using it might be difficult. Also, in many practical scenarios, you use multi-cloud environments. So, you would need a provider-specific IaC tool for automation. 
 
-Kubernetes was initially created at Google based on their experience running distributed, containerized workloads on many machines. Kubernetes has been quickly recognized as a handy tool. Since it is open-source, cloud providers also provide managed Kubernetes services, which help you use this technology relatively easily to manage your containerized workloads.
+To solve this problem and accelerate IaC adoption, Pulumi offers the cross-platform IaC approach, in which you can use one of the most popular scripting or programming languages, including TypeScript, Python, Go, C#, and Java. With Pulumi, you declare and configure your cloud resources like you would create an application. So, Pulumi-based IaC can be quickly adopted.
 
-At the top level, the Kubernetes cluster comprises the control plane and compute nodes. The control plane makes global decisions about the cluster (like scheduling containers), while the compute nodes are physical or virtual machines. These machines are equipped with container runtime (like Docker), which is necessary to run containers.
-
-In this learning path, you will learn how to create a Kubernetes cluster in Azure. This cluster will use arm64-powered Virtual Machines as compute nodes. Then, you deploy the containerized People.WebApp to this cluster. 
+In this learning path, you will see how to use Pulumi to create the Azure Container Instance, which will host the sample ASP.NET .NET Core application. By doing so, you will learn how such IaC-based automation can accelerate and simplify the deployment of cloud resources.

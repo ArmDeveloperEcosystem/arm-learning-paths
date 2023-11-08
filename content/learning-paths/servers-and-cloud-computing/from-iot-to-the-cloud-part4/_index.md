@@ -1,20 +1,25 @@
 ---
-title: 'Deploy an application to Azure Kubernetes Service'
+title: 'Infrastructure as code'
 
-minutes_to_complete: 45
+minutes_to_complete: 30
 
-who_is_this_for: This learning path is dedicated to developers interested in learning how to create Kubernetes Cluster backed by arm64-powered Virtual Machines in Azure. Furthermore, this learning path explains how to deploy applications to Azure Kubernetes Cluster
+who_is_this_for: 'This learning path is dedicated developers interested in learning how to automate their cloud deployments using the Infrastructure as Code (IaC). 
 
-This learning path is the fourth part of the series: From IoT to the Cloud.
+This learning path explains how to use IaC and Pulumi to automate the deployment of all Azure resources required to deploy a containerized application to Azure Container Instance.
+
+This learning path is the fifth part of the series: From IoT to the Cloud.'
 
 learning_objectives: 
-    - Create Kubernetes cluster using Azure Kubernetes Service.
-    - Deploy a containerized application to Azure Kubernetes Service.
+    - Set up Pulumi for IaC.
+    - Automate the provisioning of the Azure resources.
 
 prerequisites:
-    - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
-    - 'Ideally you should have completed previous learning paths of this series.'
-  
+    - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/'
+    - 'Visual Studio Code'
+    - 'A free Pulumi account and Pulumi CLI'
+    - 'Node.js'
+    - 'Azure CLI'
+
 author_primary: Dawid Borycki
 
 ### Tags
@@ -25,13 +30,12 @@ armips:
     - Neoverse
     
 tools_software_languages:
-    - ASP.NET Core    
+    - TypeScript  
     - Azure
-    - Docker
-    - Kubernetes
+    - Docker    
 
 operatingsystems:
-    - Linux
+    - Windows
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
