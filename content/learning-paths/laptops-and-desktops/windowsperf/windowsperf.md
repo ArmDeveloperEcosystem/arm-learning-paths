@@ -58,7 +58,7 @@ Command line option `test` prints on screen various `wperf` configuration settin
 wperf test
 ```
 
-```console
+```output
         Test Name                                           Result
         =========                                           ======
         request.ioctl_events [EVT_CORE]                     False
@@ -100,7 +100,7 @@ For example, generate a report for CPU core 0 (`-c 0`) for two seconds (`sleep 2
 wperf stat -e cpu_cycles -m icache -c 0 sleep 2
 ```
 This will output a report similar to:
-```console
+```output
 counting ... done
 
 Performance counter stats for core 0, no multiplexing, kernel mode excluded, on Arm Limited core implementation:
