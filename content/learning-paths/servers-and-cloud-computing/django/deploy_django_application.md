@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Configuring the database
-Open the file `myproject.settings.py` and scroll to `DATABASES` and replace the
+Open the file `myproject/settings.py` and scroll to `DATABASES` and replace the
 code with the following one:
 
 ```python
@@ -22,6 +22,7 @@ DATABASES = {
     }
 }
 ```
+Replace the HOST IP address with the IP address of your machine in the section above.
 
 Now you need to create the database and its user with the above data.
 Type the following command to enter the PostgreSQL prompt
