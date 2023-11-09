@@ -43,7 +43,7 @@ int main(...) {
 
 The arguments passed to the program determine if memory is allocated or not. 
 
-## The C library malloc function
+## The C library `malloc` function
 
 The C standard library provides a special function
 [`malloc`](https://en.cppreference.com/w/c/memory/malloc) (`m` for "memory",
@@ -54,7 +54,7 @@ location while a program is running.
 void *malloc(size_t size);
 ```
 
-The C library looks for a chunk of memory with a size of at least X bytes within the memory that it has reserved. Where X is the value of the `size`
+The C library looks for a chunk of memory with a size of at least X bytes within the memory that it has reserved, where X is the value of the `size`
 parameter passed to `malloc`. For instance, on Ubuntu Linux, this is done by GLIBC.
 
 The example at the top of the page is trivial, of course. As it is we could just
