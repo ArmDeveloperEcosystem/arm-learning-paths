@@ -49,6 +49,13 @@ To install PostgreSQL using a package managet on Ubuntu, you can follow the [pos
 
 You can also use a different web server and database you have experience with. If you do, you will have to change the appropriate configuration files in the later sections.
 
+## Install tree package
+You will use the `tree` command in later sections to inspect your directory file tree structure, make sure you have the package installed:
+
+```bash
+sudo apt install tree
+```
+
 ## Create the virtual environment
 A good practice is always to use a virtual environment when dealing with python
 code. This because it allows you to run multiple applications with different
