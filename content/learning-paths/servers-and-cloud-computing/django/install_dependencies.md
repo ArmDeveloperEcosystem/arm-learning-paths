@@ -22,39 +22,32 @@ A quick way to install the most recent version of Python is via
 Add the Deadsnakes repository:
 
 ```bash
-~$ sudo add-apt-repository ppa:deadsnakes/ppa
-~$ sudo apt update
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt update
 ```
 
 Install Python 3.12.
 
 ```bash
-~$ sudo apt install python3.12 python3.12-venv
+sudo apt install python3.12 python3.12-venv
 ```
 
-Finally, check that Python 3.12 works as expected.
+Check that Python 3.12 works as expected, shown in the output below:
 
-```bash
+```output
 ~$ python3.12
 Python 3.12.0 (main, Oct 21 2023, 17:42:12) [GCC 11.4.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
->>>
+>>> exit()
 ```
 
 ## Install the web server and the database
-This learning path uses Nginx as web server and PostgreSQL as database for our
-Django application.
-There are already learning paths that cover the installation and the tuning of
-the above software on Arm platforms:
-* Nginx
-    * [Learn how to deploy Nginx](../../nginx)
-    * [Learn how to tune Nginx](../../nginx_tune)
-* PostgreSQL
-    * [Learn how to deploy PostgreSQL](postgresql)
-    * [Learn how to Tune PostgreSQL](postgresql_tune)
+This learning path uses Nginx as the web server and PostgreSQL as the database for the Django application.
 
-You are free to use whatever web server and database you have experience with.
-Make sure to change the appropriate configuration files in the later sections.
+To install Nginx using a package manager on Ubuntu, you can follow the [nginx.org install instructions](https://nginx.org/en/linux_packages.html#Ubuntu)
+To install PostgreSQL using a package managet on Ubuntu, you can follow the [postgresql.org install instructions](https://www.postgresql.org/download/linux/ubuntu/)
+
+You can also use a different web server and database you have experience with. If you do, you will have to change the appropriate configuration files in the later sections.
 
 ## Create the virtual environment
 A good practice is always to use a virtual environment when dealing with python
@@ -64,26 +57,29 @@ dependencies in the same OS without conflicting each other.
 Create and activate the virtual environment:
 
 ```bash
-~$ python3.12 -m venv venv
-~$ source venv/bin/activate
+python3.12 -m venv venv
+source venv/bin/activate
 ```
 
 The prompt of your terminal has `(venv)` as prefix and this means the virtual
-environment is now active.
+environment is now active. From this point on, you will run all the commands inside your virtual environment.
 
 ## Install python dependencies
 With the active virtual environment, you now install the Python dependencies
 for running your Django application.
 
 ```bash
-(venv) ~$ pip install django gunicorn psycopg[binary]
+pip install django gunicorn psycopg[binary]
 ```
 
-After the installation, verify that you have the right packages installed. You
-should see something like that (versions might change)
+After the installation, verify that you have the right packages installed:
 
 ```bash
-(venv) ~$ pip list
+pip list
+```
+The output should look similar to (versions might change):
+
+```output
 Package           Version
 ----------------- -------
 asgiref           3.7.2
@@ -97,8 +93,8 @@ sqlparse          0.4.4
 typing_extensions 4.8.0
 ```
 
-Just to be sure you are able to run Django and gunicorn, try importing them
-with Python.
+To verify you are able to run Django and gunicorn, try importing them
+with Python as shown below:
 
 ```python
 (venv) ~$ python
