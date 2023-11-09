@@ -12,14 +12,18 @@ From the terminal where the virtual environment is activated, you need to
 create a Django project
 
 ```bash
-(venv) ~$ django-admin startproject myproject
+django-admin startproject myproject
 ```
 
 The above command creates a directory called `myproject` that contains the basic
-structure of a Django application.
+structure of a Django application. Inspect the project files:
 
 ```bash
-(venv) ~$ tree myproject/
+tree myproject/
+```
+The output should look like:
+
+```output
 myproject/
     manage.py
     myproject
@@ -36,8 +40,12 @@ Feel free to explore the content of these files.
 Now you can test the application by starting the development server.
 
 ```bash
-(venv) ~$ cd myproject
-(venv) ~/myproject$ python manage.py runserver 0.0.0.0:8000
+cd myproject
+python manage.py runserver 0.0.0.0:8000
+```
+You will see messages similar to:
+
+```output
 Watching for file changes with StatReloader
 Performing system checks...
 
@@ -55,7 +63,7 @@ Quit the server with CONTROL-C.
 {{% notice Note %}}
 In the above command you speficied 0.0.0.0:8000. This means
 that the web server is listening to all available ports. You need to specify
-this value if you developing on a remote machine because by defaul the
+this value if you developing on a remote machine because by default the
 development server listens only on localhost
 {{% /notice %}}
 
@@ -68,9 +76,14 @@ by `:8000`. You should see something like that:
 Now that you have a Django project, it's now time to create a Django
 application within the project. Type:
 
+```bash
+python manage.py startapp aarch64app
+tree aarch64app
 ```
-(venv) ~/myproject$ python manage.py startapp aarch64_app
-(venv) ~/myproject$ tree aarch64_app
+
+The output should look similar to:
+
+```output
 aarch64app/
     admin.py
     apps.py
@@ -87,7 +100,7 @@ Again, feel free to explore the content of these files.
 It's now time to write some code that will be executed by the Django
 application.
 With your favourite editor, open `aarch64app/views.py` and replace the content
-with the following one
+with the following:
 
 ```python
 import platform
@@ -100,7 +113,7 @@ def index(request):
 ```
 
 Next you need to map a URL to this view. Create a new file `aarch64app/urls.py`
-with the following content
+with the following content:
 
 ```python
 from django.urls import path
@@ -120,7 +133,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path("aarch64app/", include("aarch64app.urls")),
+    path('', include("aarch64app.urls")),
     path('admin/', admin.site.urls),
 ]
 ```
@@ -129,7 +142,7 @@ You have now connected the index view with the URL `/aarch64app`. Run the
 development web server again with
 
 ```bash
-(venv) ~/myproject$ python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8000
 ```
 
 Open [http://your_IP:8000/aarch64app/](http://your_IP:8000/aarch64app/) with
