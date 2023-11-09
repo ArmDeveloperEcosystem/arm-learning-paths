@@ -99,7 +99,7 @@ Pointer: 0x4 Size: N-4 Allocated: False
 range = 0x4 + (N-4) = 1 beyond the end of the heap, so the walk is finished.
 ```
 
-`simple_free` uses the pointer given to it to find the range it needs to deallocate.
+`simple_free` uses the pointer given to it to find the range it needs to de-allocate.
 Let's say the 4 byte allocation was freed:
 
 ```text
