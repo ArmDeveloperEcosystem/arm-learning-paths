@@ -22,7 +22,7 @@ DATABASES = {
     }
 }
 ```
-Replace the HOST IP address with the IP address of your machine in the section above.
+Replace the HOST IP address with the IP address of your machine or `localhost` in the section above.
 
 Now you need to create the database and its user with the above data.
 Type the following command to enter the PostgreSQL prompt
@@ -42,6 +42,7 @@ ALTER ROLE usr SET client_encoding TO 'utf8';
 ALTER ROLE usr SET default_transaction_isolation TO 'read committed';
 ALTER ROLE usr SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE myprojectdb TO usr;
+GRANT postgres TO usr;
 ```
 Quit the `psql` prompt by typing `\q`.
 
