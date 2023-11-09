@@ -133,19 +133,19 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    path('', include("aarch64app.urls")),
+    path("aarch64app/", include("aarch64app.urls")),
     path('admin/', admin.site.urls),
 ]
 ```
 
 You have now connected the index view with the URL `/aarch64app`. Run the
-development web server again with
+development web server again with:
 
 ```bash
 python manage.py runserver 0.0.0.0:8000
 ```
 
-Open [http://your_IP:8000/aarch64app/](http://your_IP:8000/aarch64app/) with
+Open http://your_IP:8000/aarch64app/ with
 your browser. You should see the hello world message.
 
 
