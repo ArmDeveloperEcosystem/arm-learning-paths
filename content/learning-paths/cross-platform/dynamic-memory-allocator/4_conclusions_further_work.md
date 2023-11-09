@@ -122,7 +122,7 @@ This will corrupt the header attached to the `ptr2` allocation. In the case
 of your allocator, it would likely change the size of the allocation to just 1
 byte.
 
-This has been a selection of the many, many possible attacks on the heap.
+This is just a selection of the many, many possible attacks on the heap.
 
 You could consider how they might be mitigated, or even try applying some of
 them to the heap you have just written.
@@ -134,9 +134,7 @@ predictable performance. Do you think a heap that has to walk a variable number
 of ranges would be able to achieve that?
 
 If you think it wouldn't, you can look into
-[Region-Based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management).
-
-(whether it would or not depends entirely on your application's requirements)
+[Region-Based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management) (whether it would or not depends entirely on your application's requirements).
 
 This takes advantage of scenarios where you know the upper limit of objects you
 will need, along with their types and sizes.
@@ -166,8 +164,8 @@ Set the environment variable to point to your allocator instead of the one provi
 LD_PRELOAD=<path to your shared object> <program>
 ```
 
-Any shared object in `LD_PRELOAD` gets to provide the symbols a program needs
-before what it would usually load. So in this case you will provide `malloc`
+Any shared object in `LD_PRELOAD` provides the symbols a program needs
+before it would usually load. So in this case you will provide `malloc`
 and the other memory management functions.
 
 You will have to rebuild the code as a shared object, and remove the `simple_`
@@ -180,7 +178,7 @@ pointer that your heap produced, but instead asks the system heap to do it.
 
 Finally, you will likely need a lot more storage for the heap. Either increase
 the size of the static allocation, or consider using `mmap` to ask the kernel
-for memory, as C libraries tend to do instead.
+for memory (as C libraries tend to do).
 
 There are many things to learn about dynamic memory allocation, but it helps
 to have a good understanding of the basics. 
