@@ -25,7 +25,7 @@ review:
 
     - questions:
         question: >
-            Do C's memory management functions like malloc and free validate the
+            Do C's memory management functions like `malloc` and `free` validate the
             addresses passed to them?
         answers:
             - Never
@@ -34,7 +34,7 @@ review:
         correct_answer: 3
         explanation: >
             An allocator may choose to be strict about the parameters it accepts
-            but the C specification at least does not require it to be. Generally
+            but the C specification does not require it to be. Generally
             this strictness can be controlled with debugging or hardening options.
 
             When writing your own allocators, you get to decide how to handle
