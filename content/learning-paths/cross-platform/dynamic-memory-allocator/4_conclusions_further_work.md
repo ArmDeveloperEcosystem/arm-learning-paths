@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Conclusions
 
-You have a glimpse into the world of dynamic memory allocation, and
+You have glimpsed into the world of dynamic memory allocation, and
 probably have more questions than answers. You may have noticed some oversights
 in the implementation presented, and you are almost certainly right. 
 
@@ -18,8 +18,8 @@ face with a static allocation behind it. This will change depending on the
 performance and complexity needs of the application.
 
 Fundamentally, dynamic memory allocation provides a way to get memory you 
-did not know whether you would
-need when the program was written. You likely know you need some amount
+did not know if you would
+need when the program was written. You likely know that you need some amount
 of memory and dynamic allocation lets you ask for it while the program is running.
 
 The implementation shown here is a "classic" heap, and a very simple one at that
@@ -52,11 +52,11 @@ the 2 free ranges are separated, the requested memory doesn't fit.
   [0x55e68c41f1a4 -> 0x55e68c41f2ac) : 0x0000000000000108 (free, size = 264 bytes)
 ```
 
-To solve this, you would need a cleanup step after a free. Where
+To solve this, you would need a clean-up step after a free, where
 free ranges next to each other are merged into one free range.
 
 Then again, this does add some overhead. Perhaps it shouldn't be called on every
-free. Think about the tradeoff (and don't be afraid to change the data
+free. Think about the trade-off (and don't be afraid to change the data
 structures you've used, they are not perfect either).
 
 ### Memory safety 
@@ -77,7 +77,7 @@ Here is a use after free:
   *ptr = 345;
 ```
 
-There's a good chance `ptr2` will point to the same place as `ptr`. Meaning that
+There's a good chance `ptr2` will point to the same place as `ptr`, meaning that
 someone could use `ptr` to modify the data now at `ptr2`. This can be even worse
 if the type of that data has changed in the meantime.
 
@@ -95,9 +95,7 @@ Here is a double free:
 
 Here you see the allocation `ptr` is freed once, then `ptr2` is allocated, likely
 at the same place as `ptr`. When `ptr` is freed again, this would free the `ptr2`
-allocation as well.
-
-Meaning that instead of being its own allocation, `ptr3` also ends up pointing
+allocation as well, meaning that instead of being its own allocation, `ptr3` also ends up pointing
 to the same location as `ptr2`. So modifying one modifies the other.
 
 Another possibility is that memory that was previously freed is used as part of
@@ -124,7 +122,7 @@ This will corrupt the header attached to the `ptr2` allocation. In the case
 of your allocator, it would likely change the size of the allocation to just 1
 byte.
 
-That's a selection of the many, many, possible attacks on the heap.
+This has been a selection of the many, many possible attacks on the heap.
 
 You could consider how they might be mitigated, or even try applying some of
 them to the heap you have just written.
@@ -152,7 +150,7 @@ Maximum memory use is known and there is no variable time taken to walk the heap
 
 You can also mix this approach into a traditional heap, using areas of memory
 only for certain types or sizes of data. For example, could it reduce the metadata
-overhead for small allocations (e.g. a 4 byte allocation that may require > 4 bytes of
+overhead for small allocations (e.g., a 4 byte allocation that may require > 4 bytes of
 metadata)?
 
 ### The LD_PRELOAD environment variable
