@@ -17,18 +17,21 @@ DATABASES = {
         "NAME": "myprojectdb",
         "USER": "usr",
         "PASSWORD": "mypassword",
-        "HOST": "127.0.0.1",
+        "HOST": "localhost",
         "PORT": "5432",
     }
 }
 ```
-Replace the HOST IP address with the IP address of your machine or `localhost` in the section above.
+Replace the HOST IP address with the IP address of your machine or use `localhost` in the section above.
 
 Now you need to create the database and its user with the above data.
-Type the following command to enter the PostgreSQL prompt
+Type the following command:
 
 ```bash
-~$ sudo -u postgres psql
+sudo -u postgres psql
+```
+You should see the PostgreSQL prompt:
+```output
 postgres=#
 ```
 
@@ -46,10 +49,14 @@ GRANT postgres TO usr;
 ```
 Quit the `psql` prompt by typing `\q`.
 
-You are ready now to test the connection to the database by typing
+You are ready now to test the connection to the database:
 
 ```bash
-(venv) ~/myproject$ python manage.py migrate
+python manage.py migrate
+```
+The output should look similar to:
+
+```output
 Operations to perform:
   Apply all migrations: admin, auth, contenttypes, sessions
 Running migrations:
@@ -73,8 +80,7 @@ Running migrations:
   Applying sessions.0001_initial... OK
 ```
 
-If you see the above output, it means that Django was able to apply migrations
-to the database.
+If you see the above output, it means that Django was able to apply migrations to the database.
 
 ## Configuring the web server
 Now it's time to configure the web server that will serve the http requests to
@@ -84,9 +90,9 @@ the user. You are going to set up Gunicorn and then Nginx.
 Set up Gunicorn with systemd
 
 Create the file `/etc/systemd/system/gunicorn.socket` with the following
-content
+content:
 
-```
+```console
 [Unit]
 Description=gunicorn socket
 
@@ -98,9 +104,9 @@ WantedBy=sockets.target
 ```
 
 Create the file `/etc/systemd/system/gunicorn.service` with the following
-content
+content:
 
-```
+```console
 [Unit]
 Description=gunicorn daemon
 Requires=gunicorn.socket
@@ -116,15 +122,17 @@ ExecStart=/home/USER/venv/bin/gunicorn --access-logfile - --workers 10 --bind un
 WantedBy=multi-user.target
 ```
 
-Replace `USER` in the above configuration file with the real user of your
-machine.
+Replace `USER` in the above configuration file with the real user of your machine.
 
-Startand check the status of gunicorn.socket
+Start and check the status of gunicorn.socket:
 
 ```bash
-~$ sudo systemctl start gunicorn.socket
-~$ systemctl status gunicorn.socket
-$ systemctl status gunicorn.socket
+sudo systemctl start gunicorn.socket
+systemctl status gunicorn.socket
+```
+The output should look similar to:
+
+```output
 gunicorn.socket - gunicorn socket
      Loaded: loaded (/etc/systemd/system/gunicorn.socket; disabled; vendor preset: enabled)
      Active: active (listening) since Wed 2023-11-08 15:26:25 UTC; 8s ago
@@ -133,22 +141,23 @@ gunicorn.socket - gunicorn socket
      CGroup: /system.slice/gunicorn.socket
 ```
 
-You can briefly testing the correct configuration by querying the gunicorn
-using `curl`.
+Testing the configuration by querying the gunicorn using `curl`:
 
 ```bash
-~$ curl --unix-socket /run/gunicorn.sock localhost/aarch64app/
-Hello world from an aarch64 machine.
+curl --unix-socket /run/gunicorn.sock localhost/aarch64app/
 ```
 
 You should see the hello world message you saw earlier in the browser.
 
+```output
+Hello world from an aarch64 machine.
+```
 ### Configure Nginx
 
 The last step is to configure Nginx by pointing to the gunicorn service.
-Create the file /etc/nginx/sites-available/myproject with the following content
+Create a file named `/etc/nginx/sites-available/myproject` with the following content:
 
-```
+```console
 upstream app_server_myproject {
     server localhost:8000 fail_timeout=0;
 }
@@ -175,14 +184,18 @@ server {
 }
 ```
 
-Create a symbolic link to enable the Nginx configuration, restart and check the
-status of Nginx.
+Create a symbolic link to enable the Nginx configuration, restart and check the status of Nginx.
 
 
 ```bash
-~$ sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled/
-~$ sudo systemctl restart nginx
-~$ systemctl status nginx
+sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled/
+sudo systemctl restart nginx
+systemctl status nginx
+```
+
+The output should look similar to:
+
+```output
 nginx.service - A high performance web server and a reverse proxy server
      Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
      Active: active (running) since Wed 2023-11-08 15:46:43 UTC; 4min 18s ago
@@ -203,8 +216,7 @@ nginx.service - A high performance web server and a reverse proxy server
              7844 "nginx: worker process" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "">
 ```
 
-If you open your browser and point it to [http://127.0.0.1/aarch64app](http://127.0.0.1/aarch64app)
-you should see the hello world message.
+If you open your browser and point it to http://localhost/aarch64app you should see the hello world message.
 
 {{% notice Note %}}
 In theory should should point your browser to the right domain name and/or IP
