@@ -273,7 +273,7 @@ int main() {
 }
 ```
 
-The main code does allocation and deallocation of memory. This tests the heap
+The main code does allocation and de-allocation of memory. This tests the heap
 code but also highlights an interesting problem that you'll see more about later.
 
 ## Build the source code
@@ -322,7 +322,7 @@ Storage [0x559871a24040 -> 0x559871a25040) (4096 bytes)
 The addresses on the left usually refer to an action. In this case we've set
 a `Header` value at `0x559871a24040`.
 
-The list in the last lines is the set of ranges you would see if you walked the
+The list in the last few lines is the set of ranges you would see if you walked the
 heap, which is exactly what the allocator is seeing. The use of `[` followed by `)`
 means that the start address is included in the range, but the end address is
 not. This is the initial heap state where everything is free.
