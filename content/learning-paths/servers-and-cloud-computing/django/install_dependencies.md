@@ -44,7 +44,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 ## Install the web server and the database
 This learning path uses Nginx as the web server and PostgreSQL as the database for the Django application.
 
-To install Nginx using a package manager on Ubuntu, you can follow the [nginx.org install instructions](https://nginx.org/en/linux_packages.html#Ubuntu)
+To install Nginx using a package manager on Ubuntu:
+
+```bash
+sudo apt install nginx
+```
+
 To install PostgreSQL using a package managet on Ubuntu, you can follow the [postgresql.org install instructions](https://www.postgresql.org/download/linux/ubuntu/)
 
 You can also use a different web server and database you have experience with. If you do, you will have to change the appropriate configuration files in the later sections.
