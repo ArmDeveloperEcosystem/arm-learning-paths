@@ -184,11 +184,13 @@ server {
 }
 ```
 
-Create a symbolic link to enable the Nginx configuration, restart and check the status of Nginx.
+Create a symbolic link to enable the Nginx configuration, remove the default configuation and then restart and check the status of Nginx.
 
 
 ```bash
 sudo ln -s /etc/nginx/sites-available/myproject /etc/nginx/sites-enabled/
+sudo rm /etc/nginx/sites-enabled/default
+sudo touch /etc/nginx/sites-enabled/default
 sudo systemctl restart nginx
 systemctl status nginx
 ```
