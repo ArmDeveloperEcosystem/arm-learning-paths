@@ -14,13 +14,13 @@ You will need a Linux machine to try the code and see how the allocation works.
 ## Project structure
 
 The files used are: 
-* `CMakeLists.txt` - Tells `cmake` how to configure and build the project.
-* `heap.c` - The dynamic memory allocator implementation.
+* `CMakeLists.txt` - Tells `cmake` how to configure and build the project
+* `heap.c` - The dynamic memory allocator implementation
 * `heap.h` - Function declarations including your new `simple_malloc` and
-	`simple_free` functions.
-* `main.c` - A test program that makes use of `simple_malloc` and `simple_free`.
+	`simple_free` functions
+* `main.c` - A test program that makes use of `simple_malloc` and `simple_free`
 
-Building it will produce a single binary, `demo`, that you can run and see the results.
+Building it will produce a single binary `demo` that you can run and see the results.
 
 ## Source code
 
@@ -62,8 +62,8 @@ First is `storage`, this is the backing storage which is a global char array.
 This is where the ranges, represented by `Header`, are stored.
 
 Each `Header` is written to the start of the allocated range. This means that
-`simple_malloc` returns a pointer that points just beyond this location. `simle_free` on the
-other hand, deducts the size of `Header` from the pointer parameter to find the
+`simple_malloc` returns a pointer that points just beyond this location. `simple_free`, on the
+other hand, deducts the size of the `Header` from the pointer parameter to find the
 range information.
 
 When the heap is initialized with `simple_heap_init`, a single range is setup
@@ -73,7 +73,7 @@ To find a free range, `find_free_space` walks the heap using these `Header`
 values until it finds a large enough free range, or gets beyond the end of the
 heap.
 
-For the first allocation the job is straightforward. There's one range and it's
+For the first allocation the job is straightforward; there's one range and it's
 all free. Split that into 2 ranges, using the first for the allocation.
 
 On subsequent allocations there will be more header values to read, but the
@@ -273,7 +273,7 @@ int main() {
 }
 ```
 
-The main code does allocation and deallocation of memory. This tests the heap
+The main code does allocation and de-allocation of memory. This tests the heap
 code but also highlights an interesting problem that you'll see more about later.
 
 ## Build the source code
@@ -309,7 +309,7 @@ Run `demo` to see the allocator in action:
 
 ## Review the program output
 
-The output addresses will vary depending on where backing memory gets allocated
+The output addresses will vary depending on where the backing memory gets allocated
 by your system but this is the general form you should expect:
 
 ```text
@@ -322,8 +322,8 @@ Storage [0x559871a24040 -> 0x559871a25040) (4096 bytes)
 The addresses on the left usually refer to an action. In this case we've set
 a `Header` value at `0x559871a24040`.
 
-The list in the last lines is the set of ranges you would see if you walked the
-heap. Exactly what the allocator is seeing. The use of `[` followed by `)`
+The list in the last few lines is the set of ranges you would see if you walked the
+heap, which is exactly what the allocator is seeing. The use of `[` followed by `)`
 means that the start address is included in the range, but the end address is
 not. This is the initial heap state where everything is free.
 
@@ -338,7 +338,7 @@ Trying to allocate 100 bytes
   [0x55e68c41f0ac -> 0x55e68c420040) : 0x0000000000000f94 (free, size = 3988 bytes)
 ```
 
-You see that a request was made for 100 bytes and the allocator decided to split
+You can see that a request was made for 100 bytes and the allocator decided to split
 the 1 range into 2. It updated both the new ranges' header information.
 
 Note that although it says `[0x559871a24048] Memory was allocated`, you do not
@@ -347,10 +347,10 @@ returned to the user. Take the size of `Header` from this address and you get th
 start of the range which is `0x559871a24040` as shown in the first range in the
 list.
 
-You'll also notice that the allocated range is 8 bytes bigger than what the user
+You'll also notice that the allocated range is 8 bytes bigger than the user
 asked for. This is because it includes that `Header` at the start of it.
 
-If you skip ahead to after the `free` calls have been made you will see:
+If you skip ahead to after the `free` calls have been made, you will see:
 
 ```text
 [0x55e68c41f1ac] Freeing allocation
@@ -367,4 +367,4 @@ Which shows you that the second and third allocations were freed, and there is
 still a large range of free memory on the end.
 
 Try to understand what the final allocation result is. Is the choice of location
-expected or would you expect it to fit elsewhere in the heap?
+expected or would you have expected it to fit elsewhere in the heap?

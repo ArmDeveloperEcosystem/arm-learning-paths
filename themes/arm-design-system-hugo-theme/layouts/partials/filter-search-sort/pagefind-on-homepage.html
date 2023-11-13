@@ -1,0 +1,144 @@
+<div class="c-row">
+    <div class="c-col">
+        <div class="u-margin-left-2 u-margin-right-2">
+            <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+            <style>
+
+                /* Search Placeholder text style */
+                .pagefind-ui__search-input::placeholder,
+                .pagefind-ui__button {
+                    font-family: 'Lato', sans-serif;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 20px;
+                    opacity: 1!important;
+                    /*color: rgba(51,62,72,0.9)!important;*/
+                    color: var(--arm-dark-grey)!important;
+                }
+
+                /* Search User input text style */
+                .pagefind-ui__search-input,
+                .pagefind-ui__button {
+                    font-weight: 400!important;
+                    font-size: 20px!important;
+
+                }
+                /* Search User input text style */
+                .pagefind-ui__search-input:focus,
+                .pagefind-ui__button:focus {
+                    font-weight: 400!important;
+                    font-size: 20px!important;
+                    color: var(--arm-green)!important;
+                }
+
+
+                /* search component & loadmore button
+                     border box & text color setting to green */
+                .pagefind-ui__search-input:hover,
+                .pagefind-ui__search-input:focus,
+                .pagefind-ui__button:hover,
+                .pagefind-ui__button:focus
+                {
+                    border-color: var(--arm-green)!important;   
+                    color: var(--arm-green)!important;
+                }
+
+                .pagefind-ui__search-input:hover::placeholder,
+                .pagefind-ui__search-input:focus::placeholder {
+                    color: rgba(149,214,0,0.7)!important;
+                }   
+
+
+
+                /* results drawer position as absolute, not moving other content */
+                .pagefind-ui__drawer {
+                    position: absolute;  /* or 'fixed' if you want it to be fixed relative to the viewport */
+                    z-index: 10;         /* ensures it appears above other content */
+                    background-color: var(--arm-color-footing);
+                    padding-left: 16px;
+                    padding-right:16px;
+                    /*
+                    top: [position from top];    
+                    left: [position from left];  
+                    width: [desired width];      
+                    */
+                }
+
+                .pagefind-ui__result-link:hover {
+                    color: var(--arm-green)!important;
+                }
+                
+                .pagefind-ui__search-clear {
+                    /* center x icon in the clear button container */
+                    padding-left: 8px!important;
+                    padding-right: 8px!important;
+
+                    /* match font */
+                    font-size: 20px!important;
+                }
+                .pagefind-ui__search-clear:hover svg path {
+                    fill: var(--arm-green); 
+                }
+                .pagefind-ui__search-clear:hover, 
+                .pagefind-ui__search-clear:focus {
+                    box-shadow: none !important;
+                }
+                .pagefind-ui__button:hover,
+                .pagefind-ui__button:focus {
+                    border: 1px solid var(--arm-green) !important;
+                    box-shadow: none !important;
+                }
+                
+                /* Modify marked string highlighting */
+                .pagefind-ui__result-excerpt mark {
+                    background-color: var(--arm-yellow);
+                    color: black;
+                    font-weight: bold;
+                    padding-left:2px;
+                    padding-right:2px;
+                }
+                
+                
+                :root {
+                    --pagefind-ui-primary: #eeeeee;
+                    --pagefind-ui-text: #eeeeee;
+                    --pagefind-ui-tag: #152028;
+
+                    --pagefind-ui-background: var(--arm-overlay-light);
+                    /* Border changes */
+                    --pagefind-ui-border: var(--arm-black);
+                    --pagefind-ui-border-width:1px;
+                    --pagefind-ui-border-radius:8px;
+                    --pagefind-ui-image-border-radius:8px;
+		    --pagefind-ui-image-box-ratio: 5 / 4;
+                }
+            </style>
+            <script src="/pagefind/pagefind-ui.js"></script>
+            
+            <div id="search" class="search" style="margin: 8px auto; position: relative; max-width: 900px">
+            <script>
+                window.addEventListener('DOMContentLoaded', (event) => {
+                    new PagefindUI(
+                        {   element: "#search", 
+                            showImages: true,       // to define in metadata
+                            showSubResults: false,
+                            translations: {
+                                placeholder: "Search all content",
+                                zero_results: "Couldn't find [SEARCH_TERM]"
+                            }
+                        });
+
+                    // Replace 'clear' text with SVG after initializing
+                    let clearBtn = document.querySelector('.pagefind-ui__search-clear');
+                    if (clearBtn) {
+                        clearBtn.innerHTML = `
+                            <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                <path d="M180.7 180.7C186.9 174.4 197.1 174.4 203.3 180.7L256 233.4L308.7 180.7C314.9 174.4 325.1 174.4 331.3 180.7C337.6 186.9 337.6 197.1 331.3 203.3L278.6 256L331.3 308.7C337.6 314.9 337.6 325.1 331.3 331.3C325.1 337.6 314.9 337.6 308.7 331.3L256 278.6L203.3 331.3C197.1 337.6 186.9 337.6 180.7 331.3C174.4 325.1 174.4 314.9 180.7 308.7L233.4 256L180.7 203.3C174.4 197.1 174.4 186.9 180.7 180.7zM512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256zM256 32C132.3 32 32 132.3 32 256C32 379.7 132.3 480 256 480C379.7 480 480 379.7 480 256C480 132.3 379.7 32 256 32z"></path>
+                            </svg>
+                        `;
+                    }                        
+                });
+            </script> 
+        </div>
+    </div>
+</div>

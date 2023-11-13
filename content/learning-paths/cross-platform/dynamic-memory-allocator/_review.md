@@ -25,7 +25,7 @@ review:
 
     - questions:
         question: >
-            Do C's memory management functions like malloc and free validate the
+            Do C's memory management functions like `malloc` and `free` validate the
             addresses passed to them?
         answers:
             - Never
@@ -34,7 +34,7 @@ review:
         correct_answer: 3
         explanation: >
             An allocator may choose to be strict about the parameters it accepts
-            but the C specification at least does not require it to be. Generally
+            but the C specification does not require it to be. Generally
             this strictness can be controlled with debugging or hardening options.
 
             When writing your own allocators, you get to decide how to handle
@@ -42,7 +42,7 @@ review:
 
     - questions:
         question: >
-            If the allocator presented here was used mainly for very small
+            If the allocator was used mainly for very small
             allocations (less than 8 bytes), what concern would you have?
         answers:
             - That memory was being wasted because the details of each allocation
@@ -62,12 +62,11 @@ review:
             reduce the time taken to find a free range, and the overhead of
             recording the information about the ranges.
 
-            In this case, the performance of the heap would be ok to begin with.
-            As the program continues, more and more small ranges pile up. Leading
+            In this case, the performance of the heap would be ok to begin with but, as the program continues, more and more small ranges pile up, leading
             to poorer performance later.
 
-            This is sometimes not a problem, but for real time applications like
-            video game, unpredictable heap performance is a problem.
+            Unpredictable heap performance is a problem for real time applications, such as
+            video games.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
