@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-You need atleast 30 GB of free disk space on your machine to build the Arm CCA reference software stack.
+You will need at least 30 GB of free disk space on your machine to build the Arm CCA reference software stack.
 
 Install the necessary packages:
 
@@ -123,7 +123,7 @@ exit
 
 ## Run the software stack
 
-The binary executables built in the previous step can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and  Armv9-A architectures with comprehensive system IP. You can download and run the FVP on either x64_64 or aarch64 host machines.
+The binary executables built in the previous step can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and  Armv9-A architectures with comprehensive system IP. You can download and run the FVP on either x86_64 or aarch64 host machines.
 
 Dependent on the architecture of your host machine, run the steps below to download and extract this FVP. Create an environment variable `MODEL` and set it to point to the FVP executable.
 
@@ -162,7 +162,7 @@ You should see the host linux kernel boot on `terminal_0`. You will be prompted 
 ![img_1 #center](./cca-img1.png)
 
 
-`terminal_3` of the FVP is connected to the Realm Management Monitor(RMM). The RMM is the software component of Arm CCA that is responsible for the management of Realms.
+`terminal_3` of the FVP is connected to the Realm Management Monitor (RMM). The RMM is the software component of Arm CCA that is responsible for the management of Realms.
 
 The output from the RMM should look like:
 
