@@ -31,10 +31,27 @@ For this example you will need:
     * Go to `Visual Studio 2022 Community` installer under `Modify` -> `Individual Components` -> search `"clang"`.
     * install `"C++ Clang Compiler..."` and `"MSBuild support for LLVM..."`.
 * Basic knowledge of `git` and `Python`.
+  * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
 
 ### CPython cross-build on x64 machine targeting ARM64
 
 CPython is an open-source project. Let's build [CPython](https://github.com/python/cpython) locally from sources in debug mode. We will in this example cross-compile CPython to the `ARM64` target. IN below example build machine is `x64`.
+
+We will use Visual Studio `Developer Command Prompt for VS 2022` command line prompt with already set up VS environment. Go to `Start` and search for `"Developer Command Prompt for VS 2022"`.
+When you execute prompt you should see:
+
+```console
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.7.6
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+
+C:\Program Files\Microsoft Visual Studio\2022\Community>
+```
+
+{{% notice Note %}}
+Please use `Developer Command Prompt for VS 2022` with all below steps.
+{{% /notice %}}
 
 #### Clone locally CPython source code
 
@@ -75,6 +92,10 @@ This step is optional, but please remember that you may encounter build issues u
 #### Build CPython from sources
 
 Folder `cpython\PCBuild` contains `build.bat` build script we will use to build CPython from sources. We will build CPython with debug symbols by invoking `-d` command line option and select `ARM64` target with `-p ARM64`.
+
+{{% notice Note %}}
+Make sure you are using `Developer Command Prompt for VS 2022`.
+{{% /notice %}}
 
 ```command
 cd PCBuild
