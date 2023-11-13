@@ -1,9 +1,13 @@
 summary:
-  content_total: 181
+  content_total: 182
   content_with_all_tests_passing: 33
   content_with_tests_enabled: 33
 sw_categories:
   cross-platform:
+    dynamic-memory-allocator:
+      readable_title: Write a Dynamic Memory Allocator
+      tests_and_status:
+      - ubuntu:latest: passed
     intrinsics:
       readable_title: Porting architecture specific intrinsics
       tests_and_status:
@@ -77,11 +81,7 @@ sw_categories:
       readable_title: Terraform
       tests_and_status:
       - ubuntu:latest: passed
-  laptops-and-desktops:
-    dynamic-memory-allocator:
-      readable_title: Writing a Dynamic Memory Allocator
-      tests_and_status:
-      - ubuntu:latest: passed
+  laptops-and-desktops: {}
   microcontrollers:
     tfm:
       readable_title: Get started with Trusted Firmware-M
