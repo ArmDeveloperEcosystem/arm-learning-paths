@@ -11,7 +11,7 @@ In this example we will build CPython from sources and execute simple instructio
 ## Introduction
 
 There are basically two models of using performance monitoring hardware:
-* the `counting model`, for obtaining aggregate counts of occurrences of special events and 
+* the `counting model`, for obtaining aggregate counts of occurrences of special events and
 * the `sampling model`, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
 
 `WindowsPerf` support both. In this example we will use `sampling` to determine CPython program "hot" locations determined by frequencies of PMU event specified by user.
@@ -32,6 +32,7 @@ For this example you will need:
     * install `"C++ Clang Compiler..."` and `"MSBuild support for LLVM..."`.
 * Basic knowledge of `git` and `Python`.
   * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
+* Basic knowledge of Windows Remote Desktop use. Please read [How to use Remote Desktop](https://support.microsoft.com/en-us/windows/how-to-use-remote-desktop-5fe128d5-8fb1-7a23-3b8a-41e636865e8c) for more details.
 
 ### CPython cross-build on x64 machine targeting ARM64
 
@@ -128,8 +129,47 @@ Folder `cpython\PCbuild\arm64` should contain all executables build in this proc
 
 #### Setting up ARM64 environment
 
+{{% notice Note %}}
+All step in this paragraph are done on native ARM64 Windows on Arm machine.
+{{% /notice %}}
+
+We will now move our focus to Windows on Arm (ARM64) native machine. We want to:
+* Copy there built CPython executables and libraries and
+* execute CPython interactive console to make sure all is set up.
+
+##### Copy prebuilt CPython to ARM64 machine
+
+1. Create new example directory on `ARM64` machine:
+
+    ```command
+    mkdir LearningPath
+    ```
+
+2. Copy from your `x64` build machine directory `PCBuild\arm64` (about `192MB`) to `LearningPath` on `ARM64` machine.
+
+{{% notice Note %}}
+You can use `Remote Desktop` to copy whole directory between two Windows machines with simple `Ctrl+C` / `Ctrl+V`.
+{{% /notice %}}
+
+3. Copy from your `x64` build machine directory `Lib` (about `42MB` to `LearningPath` on `ARM64` machine.
+
+4. Your directory structure on `ARM64` machine should look like this:
+
+    ```
+    LearningPath
+    |
+    ├───Lib
+    └───PCBuild
+        └───arm64
+    ```
+
+##### Execute interactive mode to make sure all CPython dependencies and libraries are loaded
+
+Still on `ARM64` machine:
+
 ```command
-arm64>python_d.exe
+cd LearningPath\PCPuild\arm64
+python_d.exe
 ```
 
 ```console
@@ -137,3 +177,7 @@ Python 3.12.0a6+ (heads/main:1ff81c0cb6, Mar 14 2023, 16:26:50) [MSC v.1935 64 b
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
+
+{{% notice Note %}}
+You should now be fully set up and ready to move to following this step sampling examples.
+{{% /notice %}}
