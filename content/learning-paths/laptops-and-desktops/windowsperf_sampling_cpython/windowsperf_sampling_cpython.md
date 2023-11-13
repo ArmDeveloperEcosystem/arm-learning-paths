@@ -25,9 +25,11 @@ Please note that we will present you two ways of sampling with `WindowsPerf`: `s
 ## Prerequisites
 
 For this example you will need:
-* Windows on Arm (ARM64) native machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool).
+* Windows on Arm (ARM64) native machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
 * `x64` Windows build machine we will use to cross-build CPython for ARM64 target.
-  * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/).
+  * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) with LLVM support:
+    * Go to `Visual Studio 2022 Community` installer under `Modify` -> `Individual Components` -> search `"clang"`.
+    * install `"C++ Clang Compiler..."` and `"MSBuild support for LLVM..."`.
 * Basic knowledge of `git` and `Python`.
 
 ### CPython cross-build on x64 machine targeting ARM64
