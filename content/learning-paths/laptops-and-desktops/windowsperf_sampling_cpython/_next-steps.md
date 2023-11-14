@@ -7,7 +7,7 @@ next_step_guidance: >
    Now that you have WindowsPerf running, why not learn how to build a native Windows on Arm application?
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/laptops-and-desktops/windowsperf/"
+recommended_path: "/learning-paths/laptops-and-desktops/win_net/"
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
