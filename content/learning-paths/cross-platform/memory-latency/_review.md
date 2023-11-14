@@ -17,14 +17,14 @@ review:
             How can we help fix memory latency problems?
         answers:
             - We replace our RAM with faster RAM
-            - We use a combination of methods, restrict data transfers in critical loops to a minimum, align data with L1 Cache line size, use Cache Prefetching
+            - We use a combination of methods, restrict data transfers in critical loops to a minimum, align data with L1 cache line size, use cache prefetching
             - We use padding bytes of size equal to the CPU's cache line in all our structs
             - We increase the cache size of our CPU
         correct_answer: 2
         explanation: >
             Although sometimes we can indeed remedy the problem with faster RAM, we will still hit the upper limit of maximum RAM frequency supported by our CPU/motherboard.
             The proper solution is to minimize and group memory access in our algorithm so that our CPU is not stalled waiting from data to arrive from memory.
-            Proper alignment and Cache Prefetching also help greatly.
+            Proper alignment and cache prefetching also help greatly.
                
     - questions:
         question: >

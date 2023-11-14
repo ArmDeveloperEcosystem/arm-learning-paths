@@ -6,10 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## How latency impacts software - part 2
+You can modify the original application to create a new version which runs faster. 
 
+Copy the original `memory-latency1.c` file to a new file named `memory-latency2.c`.
 
-Let's copy the original `memory-latency1.c` to `memory-latency2.c` and add the following code after the first `#define`:
+```bash
+cp memory-latency1.c memory-latency2.c
+```
+
+Add the following code after the first `#define`:
 
 ```C
 ...
@@ -48,7 +53,8 @@ static void* simple_alloc(size_t size) {
 }
 ```
 
-and let's replace the `malloc()` with the new function `simple_alloc()` in `new_node()`:
+Replace the `malloc()` with the new function `simple_alloc()` in `new_node()`:
+
 ```C
 node_t *new_node(node_t *prev, const char *payload, size_t size) {
     node_t *n = (node_t *) simple_alloc(sizeof(node_t));
@@ -57,7 +63,9 @@ node_t *new_node(node_t *prev, const char *payload, size_t size) {
 }
 ```
 
-Function `free_node()` is not needed right now, we can remove it, and add the `init_alloc()` in the start of `main()` and `free(start_)` at the end to free the buffer allocated by our simple allocator:
+Function `free_nodes()` call at the bottom of `main()` is not needed, you can remove it. 
+
+Add the `init_alloc()` in the start of `main()` and `free(start_)` at the end to free the buffer allocated by our simple allocator:
 
 ```C
 int main() {
@@ -68,17 +76,39 @@ int main() {
 }
 ```
 
-Now let's compile this new file again with `gcc -O3 -o memory-latency2 memory-latency2.c -Wall` and run it. On an SVE2 system this will give us the following output. This is actually totally portable code so you can test it on any architecture.
-
+Compile the new file:
 
 ```bash
-$ ./memory-latency2
+gcc -O3 -o memory-latency2 memory-latency2.c -Wall
+```
+
+Run the application:
+
+```bash
+./memory-latency2
+```
+
+The output will print the time taken to run the application:
+
+```output
 1000000 Nodes creation took 5374 us
 ```
 
-Let's do the profiling trick again with `./memory-latency2`, the output of the `perf report` will be:
+Run the application again with `perf` using:
 
+```bash
+perf record ./memory-latency2
 ```
+
+When the application completes, generate the report using:
+
+```bash
+perf report
+```
+
+The new report will be similar to:
+
+```output
 # Overhead  Command          Shared Object          Symbol                    
 # ........  ...............  .....................  ..........................
 #
@@ -94,4 +124,10 @@ Let's do the profiling trick again with `./memory-latency2`, the output of the `
      1.07%  memory-latency2  ld-linux-aarch64.so.1  [.] __tunable_get_val
 ```
 
-Just replacing the memory allocator for a simpler allocator gives us a very significant speed gain of at least 5x! This method of using custom allocators is very popular in performance-critical applications and libraries where the default system allocators are too generic or slow for the needs of the particular usecase. A Linear Allocator like the one we used here, is one of the simplest form of memory allocators and it's quite popular in systems with known fixed size objects or known constrained size limits. Of course there are many more allocators for different sizes and quite a few of them are much faster than the default `malloc()`.
+Replacing the memory allocator for a simpler allocator gives a significant speed gain, more than 5x in this case. 
+
+This method of using a custom allocator is popular in performance-critical applications and libraries where the default system allocator is too generic or slow for the needs of the application. 
+
+A linear allocator like the one used here is one of the simplest memory allocators, and is popular in systems with known fixed size objects or known constrained size limits. 
+
+There are many more memory allocators for different sizes and quite a few of them are much faster than the default `malloc()`.

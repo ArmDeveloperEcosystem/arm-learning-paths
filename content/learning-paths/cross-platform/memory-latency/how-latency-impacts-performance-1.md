@@ -6,15 +6,28 @@ weight: 3
 layout: learningpathall
 ---
 
-## How latency impacts software - part 1
+{{% notice Note %}}
+The results you see will likely be different than those in the sample output. The processor and system you use impact the results, but the learning is useful for any Arm processor.
+{{% /notice %}}
 
 We have the explanation of latency, we have the numbers, we know we have to "reduce the latencies" in our code, but that is still too vague, how can we do that exactly?
+You can learn more about how to reduce latency in applications by studying example software. 
 
-For you as a user, latency can impact your software in multiple ways. From UI aspects: mouse clicks/movements in software have a time lag, to CPU processing: an image processing filter takes way too long to complete, to loading/saving times: the word processor takes too long to load/store the changes from/to disk, even games: multi-player games have a lag with too many players online at the same time.
+Latency impacts software in multiple ways. In user interface, mouse clicks and movements may have a time lag. In CPU processing, an image processing filter may too long to complete. In applications, a word processor make take too long to save or load files from disk. In games, multi-player games may have a lag when many players are online at the same time.
 
-Now, some of these problems are too difficult to solve without a substantial rethinking and restructuring of the problem or even replacing the hardware. But some are due to software and algorithmic decisions, these can usually be fixed without the cost of replacing hardware. These are the ones we will tackle in this article.
+Some of these latency problems are difficult to solve without a substantial restructuring of the application or even replacing the hardware. However, some latency issues are caused software and algorithmic decisions. These problems can often be fixed without replacing hardware. 
 
-Let's take an actual example of C code that demonstrates the general problem of latency, for example a program that creates a large number of C linked list nodes in a loop for use later. These might be graph objects used in ML/DL application, or texture element objects in a 3D environment for a game. Let's assume that these objects are created on the fly, so memory has to be allocated for them at runtime using a function like `malloc()`. We will measure the time to create a number of those objects in a loop as measuring time for a single one happens too fast and has a large statistical error margin.
+Below is an example of a software application which can be improved by changes to the software algorithm. 
+
+Below is an example C program that demonstrates the general problem of latency. 
+
+The program creates a large number of C linked list nodes in a loop for later use. These might be graph objects in an ML application or texture element objects in a 3D game. 
+
+Assume these objects are created on the fly, so memory has to be allocated for them at runtime using a `malloc()` function. 
+
+You can measure the time it takes to loop and create the objects. Because the loop count is large, you can get a good idea of the average time to allocate nodes. 
+
+Use a text editor to copy the code below into a file named `memory-latency1.c`
 
 ```C
 #include <stdint.h>
@@ -75,16 +88,49 @@ int main() {
 }
 ```
 
-Compiling this with `gcc -O3 -o memory-latency1 memory-latency1.c -Wall` and running it on an SVE2 system, will give us the following output. This is actually totally portable code so you can test it on any architecture.
+You need a C compiler to build the code examples, GCC or Clang can be used. The examples show `gcc` but `clang` can be substituted in any of the commands. 
+
+Compile the code using GCC:
 
 ```bash
-$ ./memory-latency1
+gcc -O3 -o memory-latency1 memory-latency1.c -Wall 
+```
+
+Run the application:
+
+```bash
+./memory-latency1
+```
+
+The output prints the time taken to run the application:
+
+```output
 1000000 Nodes creation took 29473 us
 ```
 
-Out of curiosity, let's run our code through linux `perf` command, to do some simple profiling and see where those 30ms (30000us) are spent. We first run `sudo perf record ./memory-latency1` to gather the profiling information. It's a simple program so the output will be small. Afterwards we get the profiling output with `sudo perf report`:
+Your results will differ based on the type of machine and the compiler you use. 
 
+You can use `perf` to understand where the time is spend. 
+
+If you don't have `perf` installed or need help to configure your computer to run `perf` refer to the [Perf for Linux on Arm install guide](/install-guides/perf/).
+
+We first run `sudo perf record ./memory-latency1` to gather the profiling information. It's a simple program so the output is small. Afterwards we get the profiling output with `sudo perf report`:
+
+Run the application again with `perf` using:
+
+```bash
+perf record ./memory-latency1
 ```
+
+When the application completes, generate the report using:
+
+```bash
+perf report
+```
+
+The output will be similar to:
+
+```output
 # Overhead  Command          Shared Object          Symbol                                
 # ........  ...............  .....................  ......................................
 #
@@ -98,7 +144,8 @@ Out of curiosity, let's run our code through linux `perf` command, to do some si
      ...
 ```
 
-Surprisingly -or not for knowledgeable people- our `main()` is not even in the 5% of the time spent by the CPU on our program, the majority is spent on `malloc()` and kernel related functions!
-This means that all the time was spent on routines that had almost nothing to do with the core of our program! Imagine this being at the heart of a 3D rendering pipeline!
+Surprisingly, the `main()` function is less than 5% of the run time. The majority of time is spent in `malloc()` and kernel related functions.
 
-Surely there is a way to improve this? Thankfully, there are, many!
+This means that most of the time is spent on routines that have almost nothing to do with the behavior of the program.
+
+The next section presents ways to improve performance. 
