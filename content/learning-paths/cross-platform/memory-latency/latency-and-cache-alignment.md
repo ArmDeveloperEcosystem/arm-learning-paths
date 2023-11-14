@@ -1,5 +1,5 @@
 ---
-title: What about cache alignment?
+title: Cache alignment
 weight: 5
 
 ### FIXED, DO NOT MODIFY
