@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 Consider a bare-metal example that illustrates the `Realm Management Extension` (`RME`) architectural feature of an Arm processor necessary to implement a CCA system.
 
-The full example is provided with Arm Development Studio, 2023.0 and later. It executes on the `Arm Architecture Envelope Model (AEM)` Fixed Virtual Platform (FVP), supplied with Development Studio.
+The full example is provided with Arm Development Studio, 2023.0 or later. It executes on the `Arm Architecture Envelope Model (AEM)` Fixed Virtual Platform (FVP), supplied with Development Studio.
 
 The example also illustrates features of the Arm Debugger to enable you to debug such a system.
 
@@ -17,7 +17,7 @@ The example also illustrates features of the Arm Debugger to enable you to debug
 
 Open the Arm Development Studio IDE. Navigate to `File` > `Import...` > `Arm Development Studio` > `Examples & Programming Libraries` > `Examples` > `Armv9 Bare-Metal`, and select the `RME` example. Using the text filter at the top of the pane can help locate the example. Click `Finish` to import.
 
-Alternatively extract the example on the command line from the `<install_dir>\examples\Bare-metal_examples_Armv9.zip` archive. For interactive debug (see later) using the IDE is recommended.
+Alternatively, extract the example on the command line from the `<install_dir>\examples\Bare-metal_examples_Armv9.zip` archive. For interactive debug (see later) using the IDE is recommended.
 
 Though the project is provided pre-compiled, you can also rebuild with the `Build` icon, or the `make` command from the command line.
 
@@ -25,7 +25,7 @@ See the supplied `readme.html` for more information.
 
 ## Load the example
 
-There is a supplied `gpc_el10_rl_FVP.launch` debug connection which has all necessary settings configured.
+There is a supplied `gpc_el10_rl_FVP.launch` debug connection which has all the necessary settings configured.
 
 Double-click on the `.launch` file to open.
 
@@ -38,7 +38,7 @@ The model is launched with appropriate settings to implement full RME support, i
 
 Click `Debug` to launch the FVP and load the image.
 
-Execution can be controlled by the `Debug Control` pane icon bar (eg `Step Instruction` ), the command line (`stepi`), or short-cut keys (`F5`).
+Execution can be controlled by the `Debug Control` view icon bar, e.g., `Step Instruction`, the command line (`stepi`), or short-cut keys (`F5`).
 
 ## Understand the example
 
@@ -124,7 +124,7 @@ Realm EL1&0 Stage 2 (AArch64):
   RLP:0x0000000060000100 -> RLP:0x00000000A0000100
 ```
 
-## Demonstrate protection that RME provides
+## Demonstrate the protection that RME provides
 
 The reference example successfully completes. We can make changes to the translation tables to see the effect of the protection that RME provides.
 
@@ -144,11 +144,11 @@ Set a breakpoint on the `STR` instruction that writes to `0xFFFFFFFF00000100`, w
     MOV32 X0, 0x22222222
 *   STR X0, [X1]
 ```
-And run (`F8`) to there. Observe that physical address (`0xA0000100`) requires secure access permissions:
+And run (`F8`) to there. Observe that the physical address (`0xA0000100`) requires secure access permissions:
 
 ![0xA0000000 #center](_images/l1gpt_change.png)
 
-However the Realm (`0xFFFFFFFF00000100`) MMU is unchanged.
+However, the Realm (`0xFFFFFFFF00000100`) MMU is unchanged.
 
 ![0xFFFFFFFF0000000 #center](_images/el1.png)
 
