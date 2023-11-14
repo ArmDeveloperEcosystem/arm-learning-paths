@@ -21,7 +21,7 @@ sudo apt update && sudo apt install git gcc telnet xterm net-tools build-essenti
 
 ## Overview
 
-The Arm Confidential Compute Architecture (Arm CCA) enables the construction of protected execution
+The Arm Confidential Compute Architecture (CCA) enables the construction of protected execution
 environments called Realms. Realms allow lower-privileged software, such as an application or a virtual machine to
 protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources used by the Realm.
 
