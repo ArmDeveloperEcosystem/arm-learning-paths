@@ -1,5 +1,5 @@
 ---
-title: Learn how to create a virtual machine in a realm using Arm CCA
+title: Learn how to create a virtual machine in a realm using Arm Confidential Compute Architecture (CCA)
 
 minutes_to_complete: 120
 
