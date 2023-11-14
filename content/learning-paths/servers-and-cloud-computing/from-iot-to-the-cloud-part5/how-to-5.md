@@ -7,12 +7,19 @@ layout: learningpathall
 ---
 
 ## Clean up
-To remove all the cloud resources, we deployed for this tutorial, open the Cloud Shell, and type the following command:
+We have just deployed Azure resources using the Infrastructure as Code. The advantage of this approach is that we can now update the cloud infrastructure by modifying the index.ts and re-running the pulumi up command. It will compare the new declaration with the current state of the cloud deployment and update if needed. Also, you can use a single Pulumi command to de-provision all resources declared in the index.ts. To do so, you type:
 
 ```console
-az group delete -n rg-arm64 --yes --no-wait
+pulumi down
 ```
 
-## Summary
+Pulumi will ask you to confirm your choice (select yes and press enter):
 
-This tutorial taught you how to create the Azure Kubernetes cluster with the arm64-powered virtual machines. Then, you learned how to deploy a containerized application to this cluster. Finally, you exposed the application over the Internet using the LoadBalancer service. Along the way, you saw how to use the Cloud Shell built-in code editor to modify the Kubernetes workload declaration file.
+![Pulumi#left](figures/06.png)
+
+After a few moments, you will see the delete confirmation message:
+
+![Pulumi#left](figures/07.png)
+
+## Summary
+You learned how to use infrastructure as code using Pulumi in this learning path. This approach is particularly beneficial as you can code cloud infrastructure as an application. Therefore, you can keep the declarations of the cloud infrastructure in the git repository and apply typical workflows you use for the application code development and deployment, like pull requests.

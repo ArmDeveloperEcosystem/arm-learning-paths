@@ -1,52 +1,65 @@
 ---
-title: Pulumi
+title: Create the Kubernetes cluster with Azure Container Registry
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Setting up the Pulumi
-You will now set up Pulumi on Windows for Azure. Follow these steps to install the required tools:
-1.	Install Node.js for Arm64 by downloading and running the following installer: https://nodejs.org/dist/v20.9.0/node-v20.9.0-arm64.msi. 
-2.	Install Pulumi CLI. Here is the link to the installer: https://github.com/pulumi/pulumi-winget/releases/download/v3.92.0/pulumi-3.92.0-windows-x64.msi. 
-3.	Install Azure CLI for Windows using this installer: https://aka.ms/installazurecliwindowsx64 
-4.	Go to the Pulumi website (pulumi.com) and create a new account.
+## Objective
+You will create the managed Kubernetes cluster in Azure, which is integrated with the Azure Container Registry. The cluster will use arm64 VMs as the nodes. This tutorial shows how to manually create the cluster. Optionally you can use Terraform-based deployment as described here: https://learn.arm.com/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/.
 
-Now, you will create the Pulumi project for Azure:
-1.	Open the Windows Command Prompt, and then type
-```console
-az login
-```
+## Create the Kubernetes cluster
+login to Azure Portal and type **Kubernetes** in the search box. Afterward, look for the Kubernetes services:
 
-A command will open the web browser and let you login to your Azure subscription.
-2.	Using the Command Prompt, create a new folder for your project by typing 
-```console
-mkdir azure-aci
-```
+![AKS#left](figures/01.png)
 
-3.	Then, change the working directory to azure-aci:
-```console
-cd azure-aci
-```
+This will open Kubernetes services, where you click **+ Create** and then select Create a Kubernetes cluster:
 
-4.	Create the new Pulumi project for Azure using the following command:
-```console
-pulumi new azure-typescript
-```
+![AKS#left](figures/02.png)
 
-The last command starts the wizard, in which you first need to log in to Pulumi (see below).
+The previous step will activate the Create Kubernetes cluster wizard, which you use to configure your cluster as follows:
+1.	Subscription: **select your subscription**.
+2.	Resource group: **rg-arm64**.
+3.	Cluster preset configuration: **Dev/Test**.
+4.	Kubernetes cluster name: **aks-people**.
+5.	Region: **US East** (or any other region)
+6.	Availability Zones: **Select all (if available)**. Otherwise, keep the default setting.
+7.	AKS pricing tier: **Free**
+8.	Kubernetes version: **default** (here that is 1.26.6)
+9.	Automatic upgrade: **Enabled with patch (recommended)**
+10.	Authentication and Authentication: **Local accounts with Kubernetes RBAC**
 
-![Pulumi#left](figures/01.png)
+At this point, your configuration should look as follows:
 
-You can use the access token or press ENTER to log in using a web browser.
+![AKS#left](figures/03.png)
 
-After you log in to Pulumi, configure the project as follows:
-1.	Project name (azure-aci): **press enter to keep the default**.
-2.	Project description: **press enter to keep the default**.
-3.	Stack name: **dev**.
-4.	azure-native-location: **EastUS**.
+Click **Next: Node pools >**. This will open the Node pools tab. Under the Node pools tab, click the hyperlink **Standard DS2_v2 (change)** under the Node size column of the agent pool:
 
-The wizard will save this configuration and proceed to install the npm packages required by Pulumi: 
+![AKS#left](figures/04.png)
 
-![Pulumi#left](figures/02.png)
+You will see the Update node pool wizard, in which you do the following:
+1.	Under the Scale method, select **Manual**.
+2.	Set Node count to **1**.
+3.	Click **Choose a size** under the Node size.
+4.	This will open Select a VM size screen, where you look for **D2pds_v5 VM** (the arm64-based VM you used in the first part of this learning series).
+5.	Click the **Select** button.
+
+![AKS#left](figures/05.png)
+
+Your Update node pool wizard should look as follows:
+
+![AKS#left](figures/06.png)
+
+Click the **Update** button. This will take you back to the Create Kubernetes cluster wizard, where you click the **Next: Networking >** button. Under the **Networking** tab, scroll down to Network policy and select **None**. Then click the **Next: Integrations >** button.
+
+Under integrations, look for the Container registry and select **people** (or your Azure Container Registry, if you used a different name):
+
+![AKS#left](figures/07.png)
+
+Finally, click the **Review + create** button and wait for the validation to complete. Afterward, click the **Create** button:
+
+![AKS#left](figures/08.png)
+
+Wait a few moments for the cluster to be deployed, and in the confirmation screen, click the **Go to resource** button.
+

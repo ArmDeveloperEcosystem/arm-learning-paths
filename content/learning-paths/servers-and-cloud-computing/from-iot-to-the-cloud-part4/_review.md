@@ -2,28 +2,29 @@
 review:
     - questions:
         question: >
-            1.	What is the Infrastructure as Code?
+            1.	What is the Kubernetes cluster composed of?
         answers:
-            - An approach to automate cloud resource provisioning using a declarative approach
-            - The cloud provider exposes an API to deploy the source code to the cloud
-            - An online code editor, which does not require any local infrastructure
+            - Control plane and container instances
+            - Control plane and nodes
+            - API server and container registry
+            - API server and container applications
 
-        correct_answer: 1     
+        correct_answer: 2        
         explanation: >
-            Infrastructure as Code provides a declarative approach for provisioning cloud resources.
+            At the high level the Kubernetes cluster comprises the control plane and nodes.
 
     - questions:
         question: >
-            2.	Which command do you use to deploy resources using Pulumi?
+            2.	Which command line tool do you use to deploy applications to the Kubernetes cluster?
         answers:
-            - pulumi deploy
-            - pulumi create
-            - pulumi up
-            - pulumi cloud deploy
+            - kube deploy
+            - k8s deploy
+            - kubectl
+            - kubernetes deploy
 
         correct_answer: 3
         explanation: >
-            pulumi up is the command, which you use to deploy cloud resources.
+            kubectl is the command line tool, which you use to interact with the Kubernetes API. In particular, to deploy applications.
 
 
 
