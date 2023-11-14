@@ -6,11 +6,11 @@ weight: 2
 layout: learningpathall
 ---
 ## Recap
-In the previous part of this learning path series, you learned how to containerize an application. Specifically, you created a container image. Then you used this container image to run the container in your local environment. However, the same container image can be used to launch the application in the cloud using various services. Here, I will show you how you can use Azure Container Instance to deploy a containerized application.
+In the previous part of this learning path series, you pushed a container image to Azure Container Registry. This container image can be now used to launch the application in the cloud using various services. Here, I will show you how you can use Azure Container Instances for this purpose.
 
-At this time, Azure Container Instance was not yet compatible with arm64 Docker containers. So, I will use a sample ASP.NET application from the Microsoft Container Registry: mcr.microsoft.com/dotnet/samples:aspnetapp. 
+At this time, Azure Container Instances service was not yet compatible with arm64 Docker containers. So, I will use a sample ASP.NET application from the Microsoft Container Registry: mcr.microsoft.com/dotnet/samples:aspnetapp. 
 
-Then, we will see what happens if we try to deploy our arm64 Docker container image to Azure Container Instance.
+Then, we will see what happens if we try to deploy our Arm64 Docker container image to Azure Container Instances.
 
 ## Create an Azure Container Instance
 In this section, you will create the Azure Container Instance using Azure Portal and deploy the sample ASP.NET application from the Microsoft Container Registry. 
@@ -19,7 +19,7 @@ To start, we login to Azure Portal. Then, in the search box, we type **Container
 
 ![Azure#left](figures/01.png)
 
-The above procedure will open the Container instances, in which you click the +Create button. This will activate the wizard, which you use to configure your Azure Container Instance:
+The above procedure will open the Container instances, in which you click the **+Create** button. This will activate the wizard, which you use to configure your Azure Container Instance:
 1.	Subscription: **Select your subscription**.
 2.	Resource group: **rg-arm64** (create a new group, if needed).
 3.	Container name: **aspnet-sample**.
@@ -47,7 +47,7 @@ Now you will need to configure port mapping. Let’s click the **Next: Networkin
 
 ![Azure#left](figures/04.png)
 
-This setting corresponds to the **-p** flag we used in part 2 of this learning path series. Specifically, the port configuration enables us to create the port mapping, which will map port 8080 of the container instance to the corresponding point inside the running container.
+This setting enables us to create the port mapping, which will map port 8080 of the container instance to the corresponding point inside the running container.
 
 {{% notice Note %}}Here, we use the 8080 port because the sample ASP.NET application listens on this port by default. {{% /notice %}}
 

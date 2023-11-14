@@ -63,12 +63,12 @@ pulumi up
 
 The Pulumi will analyze your index.ts file to get the list of resources to be deployed. Then, it will display the list of resources to be deployed:
 
-![Azure#left](figures/03.png)
+![Pulumi#left](figures/03.png)
 
 Confirm the deployment by selecting yes and pressing enter. Then, wait a few moments for the resources to be deployed. Once the deployment is done, you will see the public IP address of your Azure Container Instance. Here, that is **4.236.196.236**.
 
-![Azure#left](figures/04.png)
+![Pulumi#left](figures/04.png)
 
 Copy the IP address and supplement it by 8080. Then, type it in the address bar of your web browser. You will see the application up and running. Compare this result to what we get in part 2 of this series.
 
-![Azure#left](figures/05.png)
+![Pulumi#left](figures/05.png)

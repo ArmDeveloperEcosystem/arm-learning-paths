@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Objective
-In this section, you will deploy the Docker container from the Azure Container Registry to the Azure Container Instance. First, you must configure the Azure Container Registry to enable an Admin account. The Azure Container Instance requires the latter. 
+In this section, you will deploy the Docker container from the Azure Container Registry to the Azure Container Instances. First, you must configure the Azure Container Registry to enable an Admin account. The Azure Container Instance requires the latter. 
 
 ### Deployment
 Under the Azure Portal, open the Cloud Shell. To do so, click a Cloud Shell icon located in the top right corner of the Azure Portal (refer to the first part of this learning series for detailed instruction):
@@ -58,4 +58,4 @@ The container will be created. However, it will not run as the Azure Container i
 Compare this status with the **aspnet-sample** container instance, which you created before.
 
 ## Summary
-This tutorial taught you how to deploy containerized applications using the Azure Container Instance. You deployed a Docker container from the public (Microsoft Container Registry) and a private registry (created with Azure Container Registry). Along the way, you also learned how to configure Azure Container Registry to enable such deployments.
+This tutorial taught you how to deploy containerized applications using the Azure Container Instances. You deployed a Docker container from the public (Microsoft Container Registry) and a private registry (created with Azure Container Registry). Along the way, you also learned how to configure Azure Container Registry to enable such deployments.

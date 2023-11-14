@@ -1,42 +1,63 @@
 ---
-title: Building a Docker image
-weight: 5
+title: Pushing the local image to Azure Container Registry
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Objective
-In this step, you will adjust the Dockerfile, and then build the Docker image.
+You will now push the local Docker image to the registry, you created in Azure.
 
-### Modify a Dockerfile
-We need to modify the following line in the Dockerfile (in Visual Studio Code) 
+### Pushing the local image to Azure
+Start by opening the WSL console, where you type
 
-```
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-```
-
-to 
-
-```
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-```
-
-To ensure the Docker image will be built for the current platform, which is arm64. Alternatively, you could set the BUILDPLATFORM environment variable.
-
-Then, you save the file and go back to the WSL console, where you type:
 ```console
-cd People.WebApp/
+sudo docker images
 ```
 
-You can now build the Docker image using the docker build command:
+This command will display the list of local Docker images (we display this to have all the necessary information, like the image name and tag available). Then, we need to tag the local image with the fully qualified name of the container registry (login server) we created in Azure. To display the fully qualified name of the registry, we type:
+
 ```console
-sudo docker build -t people.webapp:v1 .
+az acr list -o table
 ```
 
-Then, type your password, and you will see the Docker build progress:
-![command prompt#left](figures/05.png)
+Subsequently, we tag the image using the login server:
+```console
+sudo docker tag people.webapp:v1 people.azurecr.io/people.webapp:v1
+```
 
-{{% notice Note %}} In the above example, we used the -t flag to tag the image (people.webapp:v1). Also, we used . to set the build context to the working directory. 
+The last command does not provide any output. To ensure the local image was correctly tagged, we type:
+```console
+sudo docker images
+```
 
-If you see errors during the build double check you invoke the build command from the People.WebApp folder as shown in the figure above.{{% /notice %}}
+A summary of all the above commands is shown in the figure below:
+
+![command prompt#left](figures/10.png)
+
+Finally, we push the image to the remote registry. We proceed as follows:
+1.	In the WSL terminal, we type:
+```console
+sudo az login
+```
+2.	Then open https://microsoft.com/devicelogin and use the code provided by the above command.
+3.	Login to Azure Container Registry:
+```console
+sudo az acr login -n people
+```
+4.	Push the image:
+```console
+sudo docker push people.azurecr.io/people.webapp:v1
+```
+
+To confirm the image was pushed, type:
+```console
+az acr repository show -n people --repository people.webapp -o table
+```
+
+The above commands are summarized in the figure below:
+![command prompt#left](figures/11.png)
+
+## Summary
+This tutorial taught you how to create the container registry in Microsoft Azure and push the local Docker image to the remote repository. Along the way, you learned how to work with Azure Command Line Interface (Azure CLI) to create and manage resources in Azure. 

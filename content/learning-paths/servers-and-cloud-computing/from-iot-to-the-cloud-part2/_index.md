@@ -1,15 +1,13 @@
 ---
-title: 'Docker on Arm64'
+title: 'Preparing and pushing Arm64 Docker containers to Azure Container Registry'
 
 minutes_to_complete: 60
 
-who_is_this_for: This learning path is dedicated to IoT developers interested in learning how to create and run a Docker container under Windows on Arm (WoA). Also, we will demonstrate how to push a local Docker image to a container registry in the Azure Container Registry.
+who_is_this_for: This learning path is dedicated to IoT developers interested in learning how to create and push a local Arm64 Docker image to a container registry in the Azure Container Registry.
 
 This learning path is the second part of the series: From IoT to the Cloud.
 
-learning_objectives: 
-    - Create a Docker container image on Windows on Arm (WoA).
-    - Run a Docker container on WoA.
+learning_objectives:     
     - Provision of an Azure Container Registry.
     - Push a local Docker image to Azure Container Registry.
 
@@ -18,6 +16,7 @@ prerequisites:
     - 'Visual Studio Code: https://code.visualstudio.com/download' 
     - 'Docker Extension for Visual Studio Code: https://code.visualstudio.com/docs/containers/overview'
     - 'C# Extension for Visual Studio Code: https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp'
+    - 'Install Docker on Arm64: https://learn.arm.com/install-guides/docker/docker-woa/'
 
 author_primary: Dawid Borycki
 

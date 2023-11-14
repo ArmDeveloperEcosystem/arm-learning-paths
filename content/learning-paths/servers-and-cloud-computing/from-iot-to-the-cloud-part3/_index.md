@@ -1,21 +1,20 @@
 ---
-title: 'Deploy a containerized application using Azure Container Instance'
+title: 'Deploy a containerized application using Azure Container Instances'
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is dedicated developers interested in learning how to create and run a Docker container in Microsoft Azure using Azure Container Instance.
+who_is_this_for: This learning path is dedicated developers interested in learning how to create and run a Docker container in Microsoft Azure using Azure Container Instances.
 
 This learning path is the third part of the series: From IoT to the Cloud.
 
 learning_objectives: 
-    - Create Azure Container Instance.
-    - Run a Docker container in Azure Container Instance.
+    - Create Azure Container Instances.
+    - Run a Docker container in Azure Container Instances.
     - Enable Admin in Azure Container Registry, which is required when you are deploying Docker containers from the Azure Container Registry.
 
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
-    - 'Ideally you should have completed previous learning paths of this series.'
-  
+    - 'Ideally you should have completed previous learning paths of this series.'  
 
 author_primary: Dawid Borycki
 

@@ -3,7 +3,7 @@ title: 'Deploy an application to Azure Kubernetes Service'
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is dedicated to developers interested in learning how to create Kubernetes Cluster backed by arm64-powered Virtual Machines in Azure. Furthermore, this learning path explains how to deploy applications to Azure Kubernetes Cluster
+who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy applications to Azure Kubernetes Cluster powered by arm64-based virtual machines.
 
 This learning path is the fourth part of the series: From IoT to the Cloud.
 

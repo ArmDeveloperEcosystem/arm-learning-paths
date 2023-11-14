@@ -59,5 +59,3 @@ This will display the list of services as shown below:
 Note the IP address under the **EXTERNAL-IP** column of **people-web-appsvc**. That is the Public IP where you can find your application. In my case, that is **4.156.88.80**. By typing this IP in the web browser, you will see an application up and running:
 
 ![Azure#left](figures/13.png)
-
-{{% notice Note %}} The application looks identical to the one we deployed locally in part 2 of this learning series. {{% /notice %}}
