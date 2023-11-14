@@ -6,7 +6,7 @@ weight: 2
 
 # CPython Sampling Example
 
-In this example we will build CPython from sources and execute simple instructions in Python interactive mode to obtain WindowsPerf sampling results from CPython runtime image.
+In this example you will build a debug build of CPython from sources and execute simple instructions in Python interactive mode to obtain WindowsPerf sampling results from CPython runtime image.
 
 ## Introduction
 
@@ -14,17 +14,17 @@ There are basically two models of using performance monitoring hardware:
 * the `counting model`, for obtaining aggregate counts of occurrences of special events and
 * the `sampling model`, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
 
-`WindowsPerf` support both. In this example we will use `sampling` to determine CPython program "hot" locations determined by frequencies of PMU event specified by user.
+`WindowsPerf` support both. In this learning path you will use `sampling` to determine CPython program "hot" locations determined by frequencies of PMU event specified by user.
 
 {{% notice Note %}}
 This example do not include information about methodology used to determine PMU events used to guide this sampling example.
 {{% /notice %}}
 
-Please note that we will present you two ways of sampling with `WindowsPerf`: `sample` and `record` command.
+You will try two ways of sampling with `WindowsPerf`: `sample` and `record` command.
 
-## Prerequisites
+## Before you begin
 
-For this example you will need:
+For this learning path you will need:
 * Windows on Arm (ARM64) native machine with preinstalled `WindowsPerf` (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
 * `x64` Windows build machine we will use to cross-build CPython for ARM64 target.
   * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) with LLVM support:
@@ -36,10 +36,10 @@ For this example you will need:
 
 ### CPython cross-build on x64 machine targeting ARM64
 
-CPython is an open-source project. Let's build [CPython](https://github.com/python/cpython) locally from sources in debug mode. We will in this example cross-compile CPython to the `ARM64` target. IN below example build machine is `x64`.
+CPython is an open-source project. There is native support in CPython for Windows on Arm starting with version 3.11. But in this learning path you will use a debug build of CPython. For this, you will build [CPython](https://github.com/python/cpython) locally from sources in debug mode on an `x86_64` machine and cross-compile it for a `ARM64` target. 
 
-We will use Visual Studio `Developer Command Prompt for VS 2022` command line prompt with already set up VS environment. Go to `Start` and search for `"Developer Command Prompt for VS 2022"`.
-When you execute prompt you should see:
+Use Visual Studio `Developer Command Prompt for VS 2022` command line prompt which is already set up VS environment. Go to `Start` and search for `"Developer Command Prompt for VS 2022"`.
+You should see a prompt as shown below:
 
 ```console
 **********************************************************************
@@ -54,13 +54,15 @@ C:\Program Files\Microsoft Visual Studio\2022\Community>
 Please use `Developer Command Prompt for VS 2022` with all below steps.
 {{% /notice %}}
 
-#### Clone locally CPython source code
+#### Clone CPython source code
 
 ```command
 git clone git@github.com:python/cpython.git
 ```
 
-```console
+The output from this command will be similar to:
+
+```output
 Cloning into 'cpython'...
 remote: Enumerating objects: 990145, done.
 remote: Counting objects: 100% (43119/43119), done.
@@ -73,36 +75,37 @@ Updating files: 100% (4647/4647), done.
 
 #### Checkout CPython at specific SHA
 
-For this example we want you to use same CPython commit we are using so that your sampling example output matches this example.
+Use a specific CPython commit to match the sampling output in this example:
 
-```
+```console
 cd cpython
 git checkout 1ff81c0cb67215694f084e51c4d35ae53b9f5cf9
 ```
+The output will be similar to:
 
-```console
+```output
 Updating files: 100% (2774/2774), done.
 Note: switching to '1ff81c0cb67215694f084e51c4d35ae53b9f5cf9'.
 ...
 ```
 
 {{% notice Note %}}
-This step is optional, but please remember that you may encounter build issues unrelated to this example. For example CPython bleeding edge source code you've just checked out is not stable. We recommend you checkout above SHA to avoid unexpected issues.
+This step is optional, but please remember that you may encounter build issues unrelated to this example. For example CPython mainline source code you've just checked out is not stable. We recommend you checkout above SHA to avoid unexpected issues.
 {{% /notice %}}
 
 #### Build CPython from sources
 
-Folder `cpython\PCBuild` contains `build.bat` build script we will use to build CPython from sources. We will build CPython with debug symbols by invoking `-d` command line option and select `ARM64` target with `-p ARM64`.
+Folder `cpython\PCBuild` contains `build.bat` build script you will use to build CPython from sources. Build CPython with debug symbols by invoking `-d` command line option and select `ARM64` target with `-p ARM64`.
 
 {{% notice Note %}}
 Make sure you are using `Developer Command Prompt for VS 2022`.
 {{% /notice %}}
 
-```command
+```console
 cd PCBuild
 build.bat -d -p ARM64
 ```
-
+The output will be similar to:
 
 ```console
 Downloading nuget...
@@ -124,34 +127,34 @@ Time Elapsed 00:00:59.50
 ```
 
 {{% notice Note %}}
-Folder `cpython\PCbuild\arm64` should contain all executables build in this process. We will focus on `python_d.exe` application in our example.
+Folder `cpython\PCbuild\arm64` should contain all executables build in this process. You will use `python_d.exe` in this example.
 {{% /notice %}}
 
 #### Setting up ARM64 environment
 
 {{% notice Note %}}
-All step in this paragraph are done on native ARM64 Windows on Arm machine.
+All steps going forward are done on native ARM64 Windows on Arm machine.
 {{% /notice %}}
 
-We will now move our focus to Windows on Arm (ARM64) native machine. We want to:
+You will now move to a Windows on Arm (ARM64) native machine and perform the following steps:
 * Copy there built CPython executables and libraries and
-* execute CPython interactive console to make sure all is set up.
+* Execute CPython interactive console to make sure all is set up.
 
 ##### Copy prebuilt CPython to ARM64 machine
 
-1. Create new example directory on `ARM64` machine:
+1. Create a new example directory on `ARM64` machine:
 
-    ```command
+    ```console
     mkdir LearningPath
     ```
 
-2. Copy from your `x64` build machine directory `PCBuild\arm64` (about `192MB`) to `LearningPath` on `ARM64` machine.
+2. Copy the `PCBuild\arm64` directory from your `x86_64` build machine to the `LearningPath` directory on your `ARM64` machine.
 
 {{% notice Note %}}
 You can use `Remote Desktop` to copy whole directory between two Windows machines with simple `Ctrl+C` / `Ctrl+V`.
 {{% /notice %}}
 
-3. Copy from your `x64` build machine directory `Lib` (about `42MB` to `LearningPath` on `ARM64` machine.
+3. Copy the `Lib` directory from your `x86_64` build machine to the `LearningPath` directory on you `ARM64` machine.
 
 4. Your directory structure on `ARM64` machine should look like this:
 
@@ -165,19 +168,20 @@ You can use `Remote Desktop` to copy whole directory between two Windows machine
 
 ##### Execute interactive mode to make sure all CPython dependencies and libraries are loaded
 
-Still on `ARM64` machine:
+On your Windows `ARM64` machine, open a command prompt and run:
 
-```command
+```console
 cd LearningPath\PCPuild\arm64
 python_d.exe
 ```
+You should see CPython being invoked interactive mode:
 
-```console
+```output
 Python 3.12.0a6+ (heads/main:1ff81c0cb6, Mar 14 2023, 16:26:50) [MSC v.1935 64 bit (ARM64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
 {{% notice Note %}}
-You should now be fully set up and ready to move to following this step sampling examples.
+Your environment should now be fully set up and you are ready to move to the next step.
 {{% /notice %}}
