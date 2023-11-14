@@ -12,8 +12,8 @@ learning_objectives:
     - Build CPython from sources for Windows on Arm ARM64 target
 
 prerequisites:
-    - Windows on Arm desktop or development machine with preinstalled `WindowsPerf`
-    - Windows `x64` desktop machine with preinstalled Visual Studio 2022 Community Edition
+    - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf)
+    - Windows `x86_64` desktop machine with Visual Studio 2022 Community Edition installed.
 
 author_primary: Przemyslaw Wirkus
 
