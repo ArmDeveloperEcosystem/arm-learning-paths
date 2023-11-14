@@ -7,12 +7,12 @@ weight: 3
 ## Example 1: Sampling of CPython calculating Googolplex
 
 {{% notice Note %}}
-All step in this paragraph are done on native ARM64 Windows on Arm machine.
+All steps in this sections are done on a native ARM64 Windows on Arm machine.
 {{% /notice %}}
 
-We will use pre-built in last step [CPython](https://github.com/python/cpython) binaries targeting `ARM64` from sources in debug mode and:
-* Pin `python_d.exe` interactive console to arbitrary CPU core.
-* Try to calculate absurdly large integer number [Googolplex](https://en.wikipedia.org/wiki/Googolplex) to stress CPython application and get a simple workload.
+You will use the pre-built [CPython](https://github.com/python/cpython) binaries targeting `ARM64` from sources in debug mode from the previous step and:
+* Pin `python_d.exe` interactive console to an arbitrary CPU core.
+* Calculate a large integer number [Googolplex](https://en.wikipedia.org/wiki/Googolplex) to stress the CPython application and get a simple workload.
 * Run counting and sampling to obtain some simple event information.
 
 ### Pin new CPython process to CPU core #1
@@ -27,43 +27,42 @@ start /affinity 2 python_d.exe
 [start](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) command line switch `/affinity <hexaffinity>` applies the specified processor affinity mask (expressed as a hexadecimal number) to the new application. In our example decimal `2` is `0x02` or `0b0010`. This value denotes core no. 1 as 1 is a 1st bit in the mask, where the mask is indexed from 0 (zero).
 {{% /notice %}}
 
-Newly created command line window will open with:
-```console
+This command will bring up CPython in interactive mode:
+
+```output
 Python 3.12.0a6+ (heads/main:1ff81c0cb6, Mar 14 2023, 16:26:50) [MSC v.1935 64 bit (ARM64)] on win32
 Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-Check with Windows `Task Manager` if `python_d.exe` is running on CPU core #1. Newly created `CPython` interactive window will allow us to execute example workloads.
-In the below example we will calculate a very large integer `10^10^100`.
+You can use the Windows `Task Manager` to confirm that `python_d.exe` is running on CPU core #1. Newly created `CPython` interactive window will allow us to execute example workloads.
+
+In the example below, you will calculate a very large integer `10^10^100`.
 
 ### Executing computation intensive calculation with CPython
 
-Type in CPython interactive window [Googolplex](https://en.wikipedia.org/wiki/Googolplex) formula `10**10**100` and press enter.
+In the CPython interactive window, type in the [Googolplex](https://en.wikipedia.org/wiki/Googolplex) number `10**10**100` and press enter.
 
-```command
->>> 10**10**100
+```console
+10**10**100
 ```
 
 {{% notice Note %}}
-Above calculation will not terminate before the heat death of the universe. So we have plenty of time to execute WindowsPerf sampling.
+This calculation will not terminate as it will take forever. So we have plenty of time to execute WindowsPerf sampling.
 {{% /notice %}}
 
 ### Sampling CPython application running Googolplex calculation on CPU core 1
 
-Let's sample the `ld_spec` event. Please note that you can specify the process image name and PDB file name with `--pdb_file python_d.pdb` and `--image_name python_d.exe`. In our case `wperf` is able to deduce image name (same as PE file name) and PDB file from PR file name.
+You can now sample the Arm PMU event `ld_spec` which corresponds to the speculatively executed load operation. Please note that you can specify the process image name and PDB file name with `--pdb_file python_d.pdb` and `--image_name python_d.exe`. In our case `wperf` is able to deduce image name (same as PE file name) and PDB file from PR file name.
 
-{{% notice Note %}}
-Arm PMU event `ls_spec` corresponds to operation speculatively executed, `load`.
-{{% /notice %}}
-
-We can stop sampling by pressing `Ctrl-C` in the `wperf` console or we can end the process we are sampling.
+You can stop sampling by pressing `Ctrl-C` in the `wperf` console or you can end the process you are sampling.
 
 ```command
 wperf sample -e ld_spec:100000 --pe_file python_d.exe -c 1
 ```
 Please wait few seconds for samples to arrive from Kernel driver and press `Ctrl+C` to stop sampling. You should see:
-```console
+
+```output
 base address of 'python_d.exe': 0x7ff6e0a41270, runtime delta: 0x7ff5a0a40000
 sampling ....e.e.e.e.e.eCtrl-C received, quit counting... done!
 ======================== sample source: ld_spec, top 50 hot functions ========================
@@ -94,7 +93,7 @@ sampling ....e.e.e.e.e.eCtrl-C received, quit counting... done!
 You can close command line window with `python_d.exe` running when you finish sampling. Sampling will also automatically end when sample process finishes.
 {{% /notice %}}
 
-In the above example we can see that the majority of code executed by CPython's `python_d.exe` executable resides inside the `python312_d.dll` DLL.
+In the above example you can see that the majority of code executed by CPython's `python_d.exe` executable resides inside the `python312_d.dll` DLL.
 
 Note that in `sampling ....e.e.e.e.e.` is a progressing printout where:
 * character '`.`' represents sample payload (of 128 samples) received from the WindowsPerf Kernel driver and
@@ -102,8 +101,6 @@ Note that in `sampling ....e.e.e.e.e.` is a progressing printout where:
 
 {{% notice  Note%}}
 You can also output `wperf sample` command in JSON format. Use `--json` command line option to enable JSON output.
+Use `-v` command line option `verbose` to add more information about sampling
 {{% /notice %}}
 
-{{% notice  Note%}}
-Verbose mode in sampling: we've also added extra prints for verbose mode. Use `-v` command line option to add more information about sampling.
-{{% /notice %}}
