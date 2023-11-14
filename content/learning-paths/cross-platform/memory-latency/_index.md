@@ -1,35 +1,38 @@
 ---
-title: Memory Latency
+title: Memory latency for application software developers
 
 minutes_to_complete: 40
 
-who_is_this_for: This is an introductory topic for Arm developers who are interested in optimal dealing with memory latency and cache usage in their code
+who_is_this_for: This is an introductory topic for Arm developers who want learn about memory latency and cache usage in application programming. 
 
 learning_objectives: 
-    - Understand the importance of memory latency and how to reduce its impact
-    - Learn about cache alignment and how it can help
+    - Explain the importance of memory latency and how to reduce its impact
+    - Identify how cache alignment impacts performance
     - Use cache prefetching to improve performance
 
 prerequisites:
-    - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
+    - An Arm computer running Linux with recent version of Clang or GCC installed.
 
-author_primary: Konstantinos Margaritis, VectorCamp
+author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
-subjects: Programming
+subjects: Performance and Architecture
 armips:
-    - Aarch64
-    - Armv8-a
-    - Armv9-a
+    - Cortex-A
+    - Neoverse
 tools_software_languages:
     - GCC
     - Clang
-    - SVE2
     - Coding
 operatingsystems:
     - Linux
 
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - embedded-systems
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -6,11 +6,13 @@ weight: 5
 layout: learningpathall
 ---
 
-## What about cache alignment?
+In the previous example, a node is represented by a simple struct of only 20 bytes for the `buffer`, plus 8 more bytes for the 64-bit pointer `next`. 
 
-In our previous example, we used a simple struct of only 20 bytes for the `buffer`, plus 8 more bytes for the 64-bit pointer `next`. Now typically the compiler will try to enforce 64-bit (8-byte) or 16-byte alignment on allocating objects. Perhaps we could enforce some kind of larger alignment and see if it has any effect?
+Typically, the compiler will try to enforce 64-bit (8-byte) or 16-byte alignment when allocating objects. 
 
-Let's try the following changes in the `node` struct and `init_alloc`:
+To learn about cache alignment, you can enforce larger alignment and see if it has any impact on performance. 
+
+Make the following changesi to the `node` struct and `init_alloc` in the `memory-latency2.c` file:
 
 ```C
 typedef struct __attribute__((packed)) node {
@@ -31,24 +33,40 @@ static void init_alloc() {
 }
 ```
 
-Basically, what we have done can be summarized in these steps:
-* Align our allocator to start from a 64-byte address using `posix_memalign`. This is because in most CPUs a cache line is 64 bytes long.
+Here is a summary of the changes:
+* Align the allocator to start from a 64-byte address using `posix_memalign`. This is because most CPUs have a 64 byte cache line size.
 * Use `__attribute__((packed))` in the struct definition so that it takes the smallest possible space in memory.
-* Reorder the buffer and pointer elements of the struct, this is to help `memcpy()` later in `new_node` to copy to an aligned buffer.
+* Reorder the buffer and pointer elements of the struct. This helps `memcpy()` later in `new_node` to copy to an aligned buffer.
 * Increase the `buffer` size to 24 so that the node struct is exactly 32 bytes long.
 
-Again, compile with `gcc -O3 -o memory-latency2 memory-latency2.c -Wall` and the output is:
+As before, compile the new file:
 
 ```bash
-$ ./memory-latency2
+gcc -O3 -o memory-latency2 memory-latency2.c -Wall
+```
+
+Run the application:
+
+```bash
+./memory-latency2
+```
+
+The output will print the time taken to run the application:
+
+```output
 1000000 Nodes creation took 4092 us
 ```
 
-This is a 31% performance increase mainly because of better alignment of the buffer we allocated for our simple allocator and subsequently the alignment of the objects that `simple_alloc()` will return. Furthermore, the fact that `memcpy()` will operate on aligned buffers also helped.
+Your results may be slightly different, but this is a 31% performance increase. The increase is due to better alignment of the allocated buffer and the alignment of the objects that `simple_alloc()` returns. 
+
+Furthermore, `memcpy()` operating on aligned buffers also improves performance.
+
 
 ## When is memory alignment important?
 
-For algorithms that are memory-bound and not CPU-bound, i.e. when the CPU is found waiting for data to arrive from memory most of the time rather than processing that data. We will show it with a slight modification to our previous example, where bad alignment hurts performance.
+Memory alignment is important for algorithms that are memory-bound (when the CPU is mostly waiting for data to arrive from memory rather than processing data).
+
+To demonstrate decreased performance, make a change to `node` structure as shown below:
 
 ```C
 typedef struct __attribute__((packed)) node {
@@ -59,13 +77,27 @@ typedef struct __attribute__((packed)) node {
 } node_t;
 ```
 
-The same elements exist in the struct, with the same sizes. However, we have added a single byte as padding to both `next` and `buffer`. Because of the `packed` attribute, the compiler will try to honour exactly this restriction and will be forced to use these elements with an offset of 1 and 10 bytes respectively. Compiling and running this example will give these numbers:
+The same elements exist in the struct, with the same sizes. However, a single byte of padding is added to both `next` and `buffer`. 
+
+Because of the `packed` attribute, the compiler honors this restriction and is forced to use these elements with an offset of 1 and 10 bytes respectively. 
+
+Compile and run again:
 
 ```bash
-$ ./memory-latency2
+gcc -O3 -o memory-latency2 memory-latency2.c -Wall
+./memory-latency2
+```
+
+The output shows the program takes long than the previous version. 
+
+```output
 1000000 Nodes creation took 5575 us
 ```
 
-We see that the wrong memory alignment has a very bad effect on performance, our code is now 36% slower than our previous fastest example. This was an easy example, but rest assured there are plenty of opportunities in code out there that can be better optimized in terms of memory alignment!
+Poor memory alignment has a negative impact on performance. The code is now 36% slower than the previous version. 
 
-Next we will show another trick to reduce latency.
+This was an easy example, but there are plenty of opportunities to optimize code using memory alignment.
+
+The next section shows another way to reduce memory latency, cache prefetching. 
+
+To prepare, remove the padding fields from the `node` structure so it is back to the best performance. 

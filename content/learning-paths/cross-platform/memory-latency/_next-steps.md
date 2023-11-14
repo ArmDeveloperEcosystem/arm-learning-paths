@@ -1,20 +1,12 @@
 ---
-next_step_guidance: You should now a good understanding of the impact memory latency can have your code. We recommend experimenting on your own code to find ways to eliminate some memory transfers in critical loops and/or adding cache prefetching and see what works best in your use cases.
+next_step_guidance: You now have a good understanding of the impact memory latency in your code. You can start experimenting on your own code to find ways to eliminate some memory transfers in critical loops and try out cache prefetching. 
 
-recommended_path: /learning-paths/servers-and-cloud-computing/
+recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/ 
 
 further_reading:
     - resource:
         title: Memory Latency
         link: https://en.algorithmica.org/hpc/cpu-cache/latency/
-        type: website
-    - resource:
-        title: How to speed your code using CPU caches
-        link: https://www.infoworld.com/article/3217388/how-to-speed-your-code-using-cpu-caches.html
-        type: blog
-    - resource:
-        title: Memory latency
-        link: https://en.wikipedia.org/wiki/Memory_latency
         type: website
     - resource:
         title: Latency Numbers Every Programmer Should Know
