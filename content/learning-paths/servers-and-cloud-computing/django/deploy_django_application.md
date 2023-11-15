@@ -221,10 +221,8 @@ nginx.service - A high performance web server and a reverse proxy server
 If you open your browser and point it to http://localhost/aarch64app you should see the hello world message.
 
 {{% notice Note %}}
-In theory, it should point your browser to the right domain name and/or IP
-of the machine. Please refer to the [full documentation](https://docs.djangoproject.com/en/4.2/howto/deployment/)
-in order to properly deploy Django.
+For more detailed installation information refer to [the Django documentation](https://docs.djangoproject.com/en/4.2/howto/deployment/).
 {{% /notice %}}
 
-Congratulations!! The Django application is now served via Nginx and connected
+Congratulations! The Django application is now served via Nginx and connected
 to PostgreSQL.
