@@ -18,7 +18,7 @@ review:
             - "No"
         correct_answer: 2
         explanation: >
-            The learning path doesn't contains steps specific for Arm as all the software stack used is fully supporte on 64-bit Arm servers running Linux.
+            The learning path doesn't contain steps specific for Arm as all the software stack used is fully supported on 64-bit Arm servers running Linux.
 
 
 # ================================================================================
