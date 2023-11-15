@@ -120,11 +120,11 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 In order to have a production-like installation, you need `gunicorn` which is a
-Python WSGI (Web Server Gateway Interface) HTTP server for UNIX and it is
+Python WSGI (Web Server Gateway Interface) HTTP server for UNIX and is
 compatible with Django.
 
 {{% notice Note %}}
-Whenever you are in the virtual environment, it is enough just to type
-`python` (without appending any version) as it points to the python binary used
+Whenever you are in the virtual environment, just type
+`python` (without appending any version) as it will point to the python binary used
 to create the virtual environment.
 {{% /notice %}}
