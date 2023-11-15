@@ -11,7 +11,7 @@ learning_objectives:
 prerequisites:
     - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
 
-author_primary: Konstantinos Margaritis, VectorCamp
+author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
