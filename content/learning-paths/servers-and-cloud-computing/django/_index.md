@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - At least either an [Arm based instance](../csp/) from a cloud service provider, on-premises Arm server, or a Linux virtual machine on your Arm device.
-    - sudo access to install dependencies and to modify system configuration files.
+    - Sudo access to install dependencies and to modify system configuration files.
     - Be comfortable with SSH/Linux terminal and basic system administration tasks.
     - To install both [Nginx](../nginx/) and [PostgreSQL](../postgresql/)
 
