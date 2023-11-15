@@ -63,7 +63,7 @@ Quit the server with CONTROL-C.
 {{% notice Note %}}
 In the above command you specified 0.0.0.0:8000. This means
 that the web server is listening to all available ports. You need to specify
-this value if you developing on a remote machine because by default the
+this value if you developing on a remote machine because, by default, the
 development server listens only to the localhost.
 {{% /notice %}}
 
