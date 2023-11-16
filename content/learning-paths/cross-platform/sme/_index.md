@@ -23,7 +23,6 @@ armips:
 
 tools_software_languages:
     - Coding
-    - Trusted Firmware
     - Arm Development Studio
 
 operatingsystems:
