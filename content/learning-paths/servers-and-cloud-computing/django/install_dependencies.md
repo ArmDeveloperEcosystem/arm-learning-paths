@@ -49,7 +49,7 @@ To install Nginx using a package manager on Ubuntu:
 sudo apt install nginx
 ```
 
-To install PostgreSQL using a package manager on Ubuntu, you can follow the [postgresql.org install instructions](https://www.postgresql.org/download/linux/ubuntu/).
+To install PostgreSQL using a package manager on Ubuntu, follow the [postgresql.org install instructions](https://www.postgresql.org/download/linux/ubuntu/).
 
 You can also use a different web server and database. If you do, you will have to change the appropriate configuration files in the later sections.
 
@@ -61,8 +61,8 @@ sudo apt install tree
 ```
 
 ## Create the virtual environment
-A good practice is always to use a virtual environment when dealing with python
-code. This is because it allows you to run multiple applications with different
+Using a virtual environment when dealing with python
+code is always good practice. This is because it allows you to run multiple applications with different
 dependencies in the same OS without conflicts.
 
 Create and activate the virtual environment:
@@ -104,7 +104,11 @@ sqlparse          0.4.4
 typing_extensions 4.8.0
 ```
 
-To verify you are able to run Django and gunicorn, try importing them
+In order to have a production-like installation, you need `gunicorn` which is a
+Python WSGI (Web Server Gateway Interface) HTTP server for UNIX and is
+compatible with Django.
+
+To verify you are able to run Django and Gunicorn, try importing them
 with Python as shown below:
 
 ```python
@@ -118,10 +122,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> gunicorn.version_info
 (21, 2, 0)
 ```
-
-In order to have a production-like installation, you need `gunicorn` which is a
-Python WSGI (Web Server Gateway Interface) HTTP server for UNIX and is
-compatible with Django.
 
 {{% notice Note %}}
 Whenever you are in the virtual environment, just type
