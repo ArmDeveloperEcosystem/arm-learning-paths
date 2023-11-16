@@ -56,7 +56,7 @@ The high level configuration is defined in the [Granule Protection Check Control
 Notable fields in this register are:
 
 * Granule Protection Check Enable (GPC) bit
-* Level 0 GPT Size (L0GPTSZ) field, defining the size of the level 0 entries in this table, 1GB in this example. This will further be separated in the L1 table.
+* Level 0 GPT Size (L0GPTSZ) field, defining the size of the level 0 entries in this table, which is 1GB in this example. This will further be separated in the L1 table.
 * Physical Granule Size (PGS) field, which in this example defines the granule size as 16KB (note that this matches the AEM configuration).
 * Protected Physical Address Size (PPS) field, which defines the size of the Realms in your system (4GB in this example).
 
