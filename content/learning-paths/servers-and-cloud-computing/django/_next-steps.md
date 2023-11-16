@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Thank you for learning how to deploy a Django application on Arm machines.
+next_step_guidance: 
 
 recommended_path: /learning-paths/servers-and-cloud-computing/memcached_cache/ 
 
