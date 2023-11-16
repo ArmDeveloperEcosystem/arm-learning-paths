@@ -1,9 +1,9 @@
 ---
-title: Get started with the Realms Management Extension (RME)
+title: Get started with the Realm Management Extension (RME)
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers interested in learning the concepts of the Realms Management Extension and the Arm Confidential Compute Architecture (CCA).
+who_is_this_for: This is an introductory topic for developers interested in learning the concepts of Realm Management Extension and the Arm Confidential Compute Architecture (CCA).
 
 learning_objectives: 
     - Understand the Arm Confidential Compute Architecture (CCA)
