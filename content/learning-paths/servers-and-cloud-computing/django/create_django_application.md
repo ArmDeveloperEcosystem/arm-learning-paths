@@ -8,8 +8,7 @@ layout: learningpathall
 
 ## Create the Django project
 
-From the terminal where the virtual environment is activated, you need to
-create a Django project:
+You create a Django project from the terminal where the virtual environment is activated:
 
 ```bash
 django-admin startproject myproject
@@ -61,7 +60,7 @@ Quit the server with CONTROL-C.
 ```
 
 {{% notice Note %}}
-In the above command you specified 0.0.0.0:8000. This means
+In the above command, you specified 0.0.0.0:8000. This means
 that the web server is listening to all available ports. You need to specify
 this value if you developing on a remote machine because, by default, the
 development server listens only to the localhost.
