@@ -22,7 +22,7 @@ DATABASES = {
     }
 }
 ```
-Replace the HOST IP address with the IP address of your machine or use `localhost` in the section above.
+Replace the HOST IP address with the IP address of your machine or use `localhost` as per the example above.
 
 Now you need to create the database and its user with the above data.
 Type the following command:
@@ -221,8 +221,8 @@ nginx.service - A high performance web server and a reverse proxy server
 If you open your browser and point it to http://localhost/aarch64app you should see the hello world message.
 
 {{% notice Note %}}
-For more detailed installation information refer to [the Django documentation](https://docs.djangoproject.com/en/4.2/howto/deployment/).
+For more detailed installation information, refer to [the Django documentation](https://docs.djangoproject.com/en/4.2/howto/deployment/).
 {{% /notice %}}
 
-Congratulations! The Django application is now served via Nginx and connected
+The Django application is now served via Nginx and connected
 to PostgreSQL.
