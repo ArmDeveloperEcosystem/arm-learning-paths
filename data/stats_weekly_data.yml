@@ -935,3 +935,90 @@
     avg_close_time_hrs: 0
     num_issues: 10
     percent_closed_vs_total: 0.0
+- a_date: '2023-11-13'
+  content:
+    cross-platform: 9
+    embedded-systems: 14
+    install-guides: 73
+    laptops-and-desktops: 9
+    microcontrollers: 22
+    servers-and-cloud-computing: 48
+    smartphones-and-mobile: 7
+    total: 182
+  contributions:
+    external: 3
+    internal: 176
+  github_engagement:
+    num_forks: 30
+    num_prs: 9
+  individual_authors:
+    brenda-strech: 1
+    christopher-seidl: 4
+    daniel-gubay: 1
+    david-spickett: 1
+    dawid-borycki: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 3
+    jason-andrews: 77
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis,-vectorcamp: 1
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 29
+    pranay-bakre: 2
+    ronan-synnott: 39
+    uma-ramalingam: 1
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 10
+    percent_closed_vs_total: 0.0
+- a_date: '2023-11-20'
+  content:
+    cross-platform: 11
+    embedded-systems: 14
+    install-guides: 73
+    laptops-and-desktops: 9
+    microcontrollers: 22
+    servers-and-cloud-computing: 50
+    smartphones-and-mobile: 7
+    total: 186
+  contributions:
+    external: 5
+    internal: 179
+  github_engagement:
+    num_forks: 30
+    num_prs: 8
+  individual_authors:
+    brenda-strech: 1
+    christopher-seidl: 4
+    daniel-gubay: 1
+    david-spickett: 1
+    dawid-borycki: 1
+    diego-russo: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 3
+    jason-andrews: 77
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 2
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 30
+    pranay-bakre: 2
+    ronan-synnott: 40
+    uma-ramalingam: 1
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 9
+    percent_closed_vs_total: 0.0

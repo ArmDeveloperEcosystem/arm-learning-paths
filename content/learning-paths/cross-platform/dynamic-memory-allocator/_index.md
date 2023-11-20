@@ -1,13 +1,11 @@
 ---
 armips: null
 author_primary: David Spickett
-draft: true
 layout: learningpathall
 learning_objectives:
 - Explain how dynamic memory allocation and the C heap works
 - Write a simple dynamic memory allocator
-- Explain some of the flaws and risks of heap allocation in general, and the specific
-  implementation you have studied
+- Explain some of the risks of heap allocation in general
 learning_path_main_page: 'yes'
 minutes_to_complete: 120
 operatingsystems:
@@ -32,7 +30,7 @@ tools_software_languages:
 - Coding
 weight: 1
 who_is_this_for: This is an introductory topic for software developers learning about dynamic memory allocation for the first time,
-  and may have used malloc and free in C programming. It also provides a starting point to explore advanced memory allocation topics.
+  and who may have used malloc and free in C programming. It also provides a starting point to explore more advanced memory allocation topics.
 shared_path: true
 shared_between:
     - laptops-and-desktops
