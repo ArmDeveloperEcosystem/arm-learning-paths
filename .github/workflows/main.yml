@@ -39,7 +39,9 @@ jobs:
 
       # Builds arm-software-developer repo
       - name: Build
-        run: hugo --minify
+        run: |
+          bin/pagefind --site "public"
+          hugo --minify
 
       # Deploys website to AWS S3
       - name: Deploy to S3
