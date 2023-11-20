@@ -36,7 +36,7 @@ The model is launched with appropriate settings to implement full RME support, i
 -C cluster0.has_arm_v9-0=1 -C cluster0.rme_support_level=2 -C cluster0.has_16k_granule=1
 ```
 
-Click `Debug` to launch the FVP and load the image.
+Click Debug to launch the FVP and load the image.
 
 Execution can be controlled by the Debug Control view icon bar, e.g., Step Instruction, the command line (`stepi`), or short-cut keys (F5).
 
