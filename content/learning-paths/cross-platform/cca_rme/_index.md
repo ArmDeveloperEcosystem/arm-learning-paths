@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - Some understanding of the Arm architecture
-    - Arm Development Studio installation
+    - Arm Development Studio 2023.0 or later
 
 author_primary: Ronan Synnott
 
