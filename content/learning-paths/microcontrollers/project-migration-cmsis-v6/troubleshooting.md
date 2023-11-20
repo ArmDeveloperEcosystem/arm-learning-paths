@@ -51,6 +51,28 @@ As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, 
    ![Event Recorder migration](./EventRecorder_migration.png)
 1. Compiler:I/O migration
 
-   Deselect any component of `Compiler:I/O` and select the corresponding `CMSIS-View:I/O` component:
+   Deselect any component of `Compiler:I/O` and select the corresponding `CMSIS-Compiler` component:
 
    ![I/O migration](./IO_migration.png)
+
+   This table helps you to identify the correct components:
+
+   | Compiler:I/O:     | CMSIS-Compiler:            |
+   |-------------------|----------------------------|
+   | STDERR@Breakpoint | STDERR (API):Breakpoint    |
+   | STDERR@ITM        | STDERR (API):ITM           |
+   | STDERR@User       | STDERR (API):Custom        |
+   | STDIN@Breakpoint  | STDIN (API):Breakpoint     |
+   | STDIN@ITM         | STDIN (API):ITM            |
+   | STDIN@User        | STDIN (API):Custom         |
+   | STDOUT@Breakpoint | STDOUT (API):Breakpoint    |
+   | STDOUT@EVR        | STDOUT (API):EventRecorder |
+   | STDOUT@ITM        | STDOUT (API):ITM           |
+   | STDOUT@User       | STDOUT (API):Custom        |
+   | TTY@Breakpoint    | TTY (API):Breakpoint       |
+   | TTY@ITM           | TTY (API):ITM              |
+   | TTY@User          | TTY (API):Custom           |
+
+   {{% notice Note %}}
+   All CMSIS-Compiler components require CMSIS-Compiler:Core to be present.
+   {{% /notice %}}
