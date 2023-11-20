@@ -27,7 +27,7 @@ protect its content and execution from attacks by higher-privileged software, su
 
 The Arm Realm Management Extension (RME) is an Arm v9-A architecture extension and defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
 
-In this learning path, you will learn how to build and run the reference integration software stack for Arm CCA which demonstrates support for Arm's RME architecture feature. You will also learn how to create a realm that runs a guest linux kernel. 
+In this learning path, you will learn how to build and run the reference integration software stack for Arm CCA which demonstrates support for Arm's RME architecture feature. You will also learn how to create a Realm that runs a guest Linux kernel. 
 
 ## Build the docker container
 
@@ -89,7 +89,7 @@ repo init -u https://git.gitlab.arm.com/arm-reference-solutions/arm-reference-so
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ```
 
-Patch the linux kernel Kconfig file for arm64 targets. This patch enables extending the bootloader provided command line arguments. It is required to speed up execution of the software stack. 
+Patch the Linux kernel Kconfig file for arm64 targets. This patch enables extending the bootloader provided command line arguments. It is required to speed up execution of the software stack. 
 
 ```console
 cd linux
@@ -157,7 +157,7 @@ If you see an error of the form `xterm: Xt error: Can't open display:`, ensure t
 
 The FVP boots up with four terminal windows. 
 
-You should see the host linux kernel boot on `terminal_0`. You will be prompted to login to buildroot. Enter `root` as both the username and password.
+You should see the host Linux kernel boot on `terminal_0`. You will be prompted to login to buildroot. Enter `root` as both the username and password.
 
 ![img_1 #center](./cca-img1.png)
 
@@ -168,28 +168,28 @@ The output from the RMM should look like:
 
 ![img_2 #center](./cca-img2.png)
 
-You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, RMM in realm, host linux in non-secure and Hafnium in secure. 
+You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, RMM in Realm, host Linux in non-secure and Hafnium in secure. 
 
-## Create a virtual guest in a realm
+## Create a virtual guest in a Realm
 
-Guest VMs can be launched in a realm using `kvmtool` from your host linux prompt. The kernel `Image` and filesystem `realm-fs.ext4` for the realm are packaged into the buildroot host file system.
+Guest VMs can be launched in a Realm using `kvmtool` from your host Linux prompt. The kernel `Image` and filesystem `realm-fs.ext4` for the Realm are packaged into the buildroot host file system.
 
 ```console
 lkvm run --realm -c 2 -m 256 -k /realm/Image -d /realm/realm-fs.ext4 -p earlycon
 ```
 
-You should see the guest linux kernel starting to boot in a realm. This step can take several minutes.
+You should see the guest Linux kernel starting to boot in a Realm. This step can take several minutes.
 
-During this time, you should see output messages on the RMM console `terminal_3` that indicate that the realm is being created and activated.
+During this time, you should see output messages on the RMM console `terminal_3` that indicate that the Realm is being created and activated.
 
 ```console
 SMC_RMM_REC_CREATE            88232d000 8817b2000 88231a000 > RMI_SUCCESS
 SMC_RMM_REALM_ACTIVATE        8817b2000 > RMI_SUCCESS
 ```
 
-After boot up, you will be prompted to login at the guest linux buildroot prompt. Use `root` again as both the username and password.
+After boot up, you will be prompted to login at the guest Linux buildroot prompt. Use `root` again as both the username and password.
 
 ![img_3 #center](./cca-img3.png)
 
 
-You have successfully created a virtual guest in a realm using the Arm CCA reference software stack.
+You have successfully created a virtual guest in a Realm using the Arm CCA reference software stack.
