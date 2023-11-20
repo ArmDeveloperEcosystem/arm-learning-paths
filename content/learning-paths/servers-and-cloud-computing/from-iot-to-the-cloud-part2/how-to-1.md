@@ -1,82 +1,60 @@
 ---
-title: Create a Dockerfile using Visual Studio Code
-weight: 4
+title: Azure Container Instance
+weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Recap
+In the previous part of this learning path series, you pushed a container image to Azure Container Registry. This container image can be now used to launch the application in the cloud using various services. Here, I will show you how you can use Azure Container Instances for this purpose.
 
-## Objective
-In this learning path, you will learn how to create and push a Docker image to the Azure Container Registry. So, later, it can be deployed to various cloud services. You will now use the Docker to containerize the People.WebApp (the same application you used in part I of this learning path series). In the first step, you will create the Dockerfile and build the image.
+At this time, Azure Container Instances service was not yet compatible with arm64 Docker containers. So, I will use a sample ASP.NET application from the Microsoft Container Registry: mcr.microsoft.com/dotnet/samples:aspnetapp. 
 
-### Application source code
-Start by opening a new Command Prompt window, and then type:
-```console
-wsl
-```
+Then, we will see what happens if we try to deploy our Arm64 Docker container image to Azure Container Instances.
 
-In the wsl terminal type:
-```console
-git clone https://github.com/dawidborycki/People.WebApp.git
-```
+## Create an Azure Container Instance
+In this section, you will create the Azure Container Instance using Azure Portal and deploy the sample ASP.NET application from the Microsoft Container Registry. 
 
-This will clone the source code to the local folder (here it is C:\Users\d\People.WebApp):
-![command prompt#left](figures/01.png)
+To start, we login to Azure Portal. Then, in the search box, we type **Container instances**, and select the first item on the list:
 
-### Creating a Dockerfile
-You will now create the Dockerfile using Visual Studio Code. To do so, proceed as follows:
-1.	In Visual Studio Code, click File/Open Folder, and then select People.WebApp folder.
-2.	Click the View menu and select Command Palette...
-3.	In the Command Palette type Dockerfile and select Docker: Add Docker Files to Workspace...:
-![command prompt#left](figures/02.png)
+![Azure#left](figures/01.png)
 
-This will activate the Add Docker Files wizard, in which you select the following:
-1.	Application: **.NET: ASP.NET Core**
-2.	Select Operating Windows: **Linux**,
-3.	Port: **5000**,
-4.	Include optional Docker Compose Files: **No**.
+The above procedure will open the Container instances, in which you click the **+Create** button. This will activate the wizard, which you use to configure your Azure Container Instance:
+1.	Subscription: **Select your subscription**.
+2.	Resource group: **rg-arm64** (create a new group, if needed).
+3.	Container name: **aspnet-sample**.
+4.	Region: **East US** (or select the region close to your location).
+5.	Availability zones: **None** or default.
 
-After a short while, the application folder will be supplemented by two files: .dockerignore and Dockerfile. The first one is like. gitignore and includes file and folder files, which will be excluded from the image build. The second one is more important and specifies the exact operations to containerize an application. In other words, it instructs Docker how to build the Docker image.
+At this point, the Create container instance wizard will look as shown below:
 
-The actual Dockerfile depends on the programming tools you use to create your application. In our specific case, the Dockerfile looks as follows:
-```
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
-WORKDIR /app
-EXPOSE 5000
+![Azure#left](figures/02.png)
 
-ENV ASPNETCORE_URLS=http://+:5000
+Then, continue with other settings:
+1.	SKU: **Standard**.
+2.	Image source: **Other registry**.
+3.	Run with Azure Spot Discount: **Unchecked**.
+4.	Image type: **Public**.
+5.	Image: **mcr.microsoft.com/dotnet/samples:aspnetapp**.
+6.	OS type: **Linux**
+7.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size if this specific size is unavailable in the Azure region you used)
 
-# Creates a non-root user with an explicit UID and adds permission to access the /app folder
-# For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
-USER appuser
+You should end up with the following configuration:
 
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-ARG configuration=Release
-WORKDIR /src
-COPY ["People.WebApp.csproj", "./"]
-RUN dotnet restore "People.WebApp.csproj"
-COPY . .
-WORKDIR "/src/."
-RUN dotnet build "People.WebApp.csproj" -c $configuration -o /app/build
+![Azure#left](figures/03.png)
 
-FROM build AS publish
-ARG configuration=Release
-RUN dotnet publish "People.WebApp.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+Now you will need to configure port mapping. Let’s click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Afterward, you add an 8080 port for the TCP protocol: 
 
-FROM base AS final
-WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "People.WebApp.dll"]
-```
+![Azure#left](figures/04.png)
 
-The Dockerfiles start with the **FROM** instruction, which indicates the base image. Usually, base images contain a slim operating system with code build tools. The above Dockerfile uses a multi-stage build, in which two different base images are used. Both base images come from the dotnet repository under the Microsoft container registry (mcr.microsoft.com/dotnet) and are tagged aspnet:7.0 or sdk:7.0. The first image contains only the .NET runtime, which is required to run the application from binaries. On the contrary, the second image includes the SDK needed to build the application. The runtime-only base image is used in the final Docker image to reduce its size.
+This setting enables us to create the port mapping, which will map port 8080 of the container instance to the corresponding point inside the running container.
 
-The Dockerfile includes several other instructions: 
-1. **ARG** to specify the Dockerfile variables,
-2. **WORKDIR** to change the directory inside the building image,
-3. **COPY** to copy files between the build context (typically a working directory, where you invoke the docker build command) and the building image,
-4. **RUN** to execute commands inside the building image,
-5. **ENTRYPOINT** to indicate the container entry point, which is the command to perform when the container is created and run.
+{{% notice Note %}}Here, we use the 8080 port because the sample ASP.NET application listens on this port by default. {{% /notice %}}
 
-In the above example, the Dockerfile will use **dotnet build** and **dotnet publish** commands from the .NET SDK to build an application from the source code and prepare the binaries. Note that the last command, dotnet People.WebApp.dll, is equivalent to dotnet run, which we used in the first part of this series.
+Finally, you click the **Review + create** button. This will run the final validation of your configuration, and you will see the following screen:
+
+![Azure#left](figures/05.png)
+
+Click the **Create** button, and wait a few moments for the resource to be created. You will then see the confirmation screen, where you click the **Go to resource** button.
+
+![Azure#left](figures/06.png)

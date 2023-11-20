@@ -1,6 +1,6 @@
 ---
 title: Pushing the local image to Azure Container Registry
-weight: 8
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -27,14 +27,12 @@ Subsequently, we tag the image using the login server:
 sudo docker tag people.webapp:v1 people.azurecr.io/people.webapp:v1
 ```
 
-The last command does not provide any output. To ensure the local image was correctly tagged, we type:
+The last command does not provide any output. To ensure the local image was correctly tagged, we type (Figure 22):
 ```console
 sudo docker images
 ```
 
-A summary of all the above commands is shown in the figure below:
-
-![command prompt#left](figures/10.png)
+![command prompt#left](figures/22.png "Figure 22. Tagging a local Docker image")
 
 Finally, we push the image to the remote registry. We proceed as follows:
 1.	In the WSL terminal, we type:
@@ -57,7 +55,7 @@ az acr repository show -n people --repository people.webapp -o table
 ```
 
 The above commands are summarized in the figure below:
-![command prompt#left](figures/11.png)
+![command prompt#left](figures/23.png "Figure 23. Pushing a Docker image to the Azure Container Registry")
 
 ## Summary
-This tutorial taught you how to create the container registry in Microsoft Azure and push the local Docker image to the remote repository. Along the way, you learned how to work with Azure Command Line Interface (Azure CLI) to create and manage resources in Azure. 
+This part of the tutorial taught you how to create the container registry in Microsoft Azure and push the local Docker image to the remote repository. Along the way, you learned how to work with Azure Command Line Interface (Azure CLI) to create and manage resources in Azure. 

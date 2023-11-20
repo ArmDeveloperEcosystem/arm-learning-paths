@@ -2,29 +2,29 @@
 review:
     - questions:
         question: >
-            1.	Which tab do you use to configure port mapping in the Azure Container Instance?
+            1.	What is the Kubernetes cluster composed of?
         answers:
-            - networking
-            - port configuration
-            - port mapping
-            - network configuration
+            - Control plane and container instances
+            - Control plane and nodes
+            - API server and container registry
+            - API server and container applications
 
-        correct_answer: 1                    
+        correct_answer: 2        
         explanation: >
-            To configure port mapping you use the Networking tab of the wizard, which you use to provision the Azure Container Instance.
+            At the high level the Kubernetes cluster comprises the control plane and nodes.
 
     - questions:
         question: >
-            2.	What do you need to deploy a container from the Azure Container Registry to the Azure Container instance?
+            2.	Which command line tool do you use to deploy applications to the Kubernetes cluster?
         answers:
-            - provide Docker credentials
-            - enable Admin account (correct) in Azure Container Registry
-            - use dotnet run command
-            - use the docker run command
+            - kube deploy
+            - k8s deploy
+            - kubectl
+            - kubernetes deploy
 
-        correct_answer: 2
+        correct_answer: 3
         explanation: >
-            Azure Container Instance requires Admin account to be enabled, when deploying images from the Azure Container Registry
+            kubectl is the command line tool, which you use to interact with the Kubernetes API. In particular, to deploy applications.
 
 
 

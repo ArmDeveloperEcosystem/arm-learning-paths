@@ -1,5 +1,5 @@
 ---
-title: Connecting to the cluster
+title: Pulumi project
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,33 +7,46 @@ layout: learningpathall
 ---
 
 ## Objective
-You’ve just created the Kubernetes cluster in Microsoft Azure. This cluster uses arm64-powered Virtual Machines as the compute nodes. You will now connect to this cluster using Azure Cloud Shell. 
+You'll now learn about the project structure of the Pulumi application you've just created.
 
-## Connecting to the cluster
-To connect to the cluster, proceed as follows:
-1.	Open Cloud Shell (refer to part 2 of this learning path for detailed instruction)
-2.	In the Cloud Shell, type:
-
+## Pulumi project structure
+To open the application, go to the azure-aci folder, and type:
 ```console
-az aks get-credentials -g rg-arm64 -n aks-people
+code . 
 ```
 
-The command responds with the following message
+This will open Visual Studio Code, and you will see the folder, which resembles a typical structure of the Node.js application with node_modules and the package.json. On top of that, the Pulumi project contains the following files:
 
-![AKS#left](figures/09.png)
+1.	Pulumi.yaml contains a global configuration of your project, including name, runtime, and description, which you provided on project creation with Pulumi CLI.
+2.	Pulumi.dev.yaml contains additional, stack-specific configuration values. Here this includes the Azure region you configured with Pulumi CLI.
+3.	index.ts is the main application file, which programmatically defines all the Azure resources to be deployed.
 
-From now on, you can manage the cluster using the **kubectl**. This tool provides the command line interface for controlling the Kubernetes control plane. This communication happens over the REST API. So, under the hood, kubectl needs to know the API server address of the control plane. Fortunately, we do not need to explicitly use this address. The **az aks get-credentials** command we used previously has configured this for us automatically. Therefore, the kubectl commands will be communicating with the cluster we created. 
+The generated index.ts looks as follows:
 
-{{% notice Note %}} From this point, you can use any kubectl command, and follow many Kubernetes tutorials. {{% /notice %}}
+```typescript
+import * as pulumi from "@pulumi/pulumi";
+import * as resources from "@pulumi/azure-native/resources";
+import * as storage from "@pulumi/azure-native/storage";
 
-For instance, let’s display the list of nodes by typing the following command: 
+// Create an Azure Resource Group
+const resourceGroup = new resources.ResourceGroup("resourceGroup");
 
-```console
-kubectl get nodes
+// Create an Azure resource (Storage Account)
+const storageAccount = new storage.StorageAccount("sa", {
+    resourceGroupName: resourceGroup.name,
+    sku: {
+        name: storage.SkuName.Standard_LRS,
+    },
+    kind: storage.Kind.StorageV2,
+});
+
+// Export the primary key of the Storage Account
+const storageAccountKeys = storage.listStorageAccountKeysOutput({
+    resourceGroupName: resourceGroup.name,
+    accountName: storageAccount.name
+});
+
+export const primaryStorageKey = storageAccountKeys.keys[0].value;
 ```
 
-The output of this command will look as shown below:
-
-![AKS#left](figures/10.png)
-
-We have one node, which we will now use to deploy the application.
+The above listing gives us an idea of how the Pulumi works. It maps the Azure resources (like resource groups, Virtual Machines, and so on) to functions and objects. The form of them depends on the programming language you use with Pulumi. Here, we use TypeScript. So, we create the Azure resources like we would create TypeScript objects. For example, to create a resource group, you use resources.ResourceGroup. 

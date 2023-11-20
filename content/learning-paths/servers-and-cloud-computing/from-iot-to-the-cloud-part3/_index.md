@@ -1,21 +1,20 @@
 ---
-title: 'Deploy a containerized application using Azure Container Instances'
+title: 'Deploy an application to Azure Kubernetes Service'
 
-minutes_to_complete: 30
+minutes_to_complete: 45
 
-who_is_this_for: This learning path is dedicated developers interested in learning how to create and run a Docker container in Microsoft Azure using Azure Container Instances.
+who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy applications to Azure Kubernetes Cluster powered by arm64-based virtual machines.
 
-This learning path is the third part of the series: From IoT to the Cloud.
+This learning path is the fourth part of the series: From IoT to the Cloud.
 
 learning_objectives: 
-    - Create Azure Container Instances.
-    - Run a Docker container in Azure Container Instances.
-    - Enable Admin in Azure Container Registry, which is required when you are deploying Docker containers from the Azure Container Registry.
+    - Create Kubernetes cluster using Azure Kubernetes Service.
+    - Deploy a containerized application to Azure Kubernetes Service.
 
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
-    - 'Ideally you should have completed previous learning paths of this series.'  
-
+    - 'Ideally you should have completed previous learning path of this series.'
+  
 author_primary: Dawid Borycki
 
 ### Tags
@@ -29,8 +28,10 @@ tools_software_languages:
     - ASP.NET Core    
     - Azure
     - Docker
+    - Kubernetes
+
 operatingsystems:
-    - Linux, Windows
+    - Linux
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

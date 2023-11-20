@@ -1,42 +1,21 @@
 ---
-title: Building a Docker image
-weight: 5
+title: Access the application
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Objective
-In this step, you will adjust the Dockerfile, and then build the Docker image.
+You will now see that the containerized application is up and running. To do so, you will use the public IP address that Azure assigned during the provisioning of the Azure Container Instance.
 
-### Modify a Dockerfile
-We need to modify the following line in the Dockerfile (in Visual Studio Code) 
+### Public IP
+To get the public IP address, use an Overview tab of the aspnet-sample container instance (see below). The IP is displayed under the IP address (Public). In my case, that is **20.75.152.37**.
 
-```
-FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-```
+![Azure#left](figures/07.png)
 
-to 
+Copy the IP address to the clipboard, and then open the web browser and paste this IP address followed by the 8080 port to the web browser address bar, e.g., **20.75.152.37:8080**:
 
-```
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
-```
+![Azure#left](figures/08.png)
 
-To ensure the Docker image will be built for the current platform, which is arm64. Alternatively, you could set the BUILDPLATFORM environment variable.
-
-Then, you save the file and go back to the WSL console, where you type:
-```console
-cd People.WebApp/
-```
-
-You can now build the Docker image using the docker build command:
-```console
-sudo docker build -t people.webapp:v1 .
-```
-
-Then, type your password, and you will see the Docker build progress:
-![command prompt#left](figures/03.png)
-
-{{% notice Note %}} In the above example, we used the -t flag to tag the image (people.webapp:v1). Also, we used . to set the build context to the working directory. 
-
-If you see errors during the build double check you invoke the build command from the People.WebApp folder as shown in the figure above.{{% /notice %}}
+This result shows that Azure Container Instance uses x64 processor architecture. 

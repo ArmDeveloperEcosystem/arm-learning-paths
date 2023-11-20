@@ -1,5 +1,5 @@
 ---
-title: Deploying a Docker container from the Azure Container Registry
+title: Connecting to the cluster
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -7,55 +7,33 @@ layout: learningpathall
 ---
 
 ## Objective
-In this section, you will deploy the Docker container from the Azure Container Registry to the Azure Container Instances. First, you must configure the Azure Container Registry to enable an Admin account. The Azure Container Instance requires the latter. 
+You’ve just created the Kubernetes cluster in Microsoft Azure. This cluster uses arm64-powered Virtual Machines as the compute nodes. You will now connect to this cluster using Azure Cloud Shell. 
 
-### Deployment
-Under the Azure Portal, open the Cloud Shell. To do so, click a Cloud Shell icon located in the top right corner of the Azure Portal (refer to the first part of this learning series for detailed instruction):
-
-![Azure#left](figures/09.png)
-
-In the Cloud Shell, type:
-```console
-az acr list -o table
-```
-
-This command will display the list of container registries. Look for the **ADMIN ENABLED** column to ensure that the people registry has an Admin account disabled:
-
-![Azure#left](figures/10.png)
-
-Now, you enable the Admin account:
+## Connecting to the cluster
+To connect to the cluster, proceed as follows:
+1.	Open Cloud Shell (refer to part 2 of this learning path for detailed instruction)
+2.	In the Cloud Shell, type:
 
 ```console
-az acr update -n people --admin-enabled true
+az aks get-credentials -g rg-arm64 -n aks-people
 ```
 
-The command will generate the following output:
-![Azure#left](figures/11.png)
+The command responds with the following message
 
-You can now create another Azure Container Instance. To do so, go to Azure Container instances and click the **+ Create** button. Then configure an instance as follows:
-1.	Subscription: **Select your subscription**.
-2.	Resource group: **rg-arm64** (create a new group, if needed).
-3.	Container name: **people**.
-4.	Region: **East US** (or select the region close to your location).
-5.	Availability zones: **None**.
-6.	SKU: **Standard**.
-7.	Image source: **Azure Container Registry**.
-8.	Run with Azure Spot Discount: **Unchecked**.
-9.	Registry: **people**
-10.	Image: **people.webapp**
-11.	Image tag: **v1**.
-12.	OS type: **Linux**.
-13.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size, if this specific size is unavailable in the Azure region you used).
+![AKS#left](figures/09.png)
 
-![Azure#left](figures/12.png)
+From now on, you can manage the cluster using the **kubectl**. This tool provides the command line interface for controlling the Kubernetes control plane. This communication happens over the REST API. So, under the hood, kubectl needs to know the API server address of the control plane. Fortunately, we do not need to explicitly use this address. The **az aks get-credentials** command we used previously has configured this for us automatically. Therefore, the kubectl commands will be communicating with the cluster we created. 
 
-Click the **Review + create** button. Wait for the validation to complete, and click the **Create** button.
+{{% notice Note %}} From this point, you can use any kubectl command, and follow many Kubernetes tutorials. {{% /notice %}}
 
-The container will be created. However, it will not run as the Azure Container instance is not yet compatible with arm64 containers. To verify the container status, open the **Containers** tab of the newly created Azure Container instance:
+For instance, let’s display the list of nodes by typing the following command: 
 
-![Azure#left](figures/13.png)
+```console
+kubectl get nodes
+```
 
-Compare this status with the **aspnet-sample** container instance, which you created before.
+The output of this command will look as shown below:
 
-## Summary
-This tutorial taught you how to deploy containerized applications using the Azure Container Instances. You deployed a Docker container from the public (Microsoft Container Registry) and a private registry (created with Azure Container Registry). Along the way, you also learned how to configure Azure Container Registry to enable such deployments.
+![AKS#left](figures/10.png)
+
+We have one node, which we will now use to deploy the application.

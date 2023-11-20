@@ -1,60 +1,18 @@
 ---
-title: Azure Container Instance
+title: Motivation
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Recap
-In the previous part of this learning path series, you pushed a container image to Azure Container Registry. This container image can be now used to launch the application in the cloud using various services. Here, I will show you how you can use Azure Container Instances for this purpose.
 
-At this time, Azure Container Instances service was not yet compatible with arm64 Docker containers. So, I will use a sample ASP.NET application from the Microsoft Container Registry: mcr.microsoft.com/dotnet/samples:aspnetapp. 
+## Why do you need Kubernetes?
+Containerization offers an excellent way to package your applications with all required dependencies. Such an approach makes your applications portable. However, you still need to run, manage, and monitor running containers. In practice, the containers can become unresponsive or fail. In such cases, you will need to restart them manually. Also, you often use containers to spin up several instances of the same application or service to balance the load. Running many containers in parallel would require you to schedule containers on several physical or virtual machines. Moreover, you would also need to distribute the incoming traffic onto underlying containers.
 
-Then, we will see what happens if we try to deploy our Arm64 Docker container image to Azure Container Instances.
+Here is where the Kubernetes comes into play. Specifically, Kubernetes was created to help you automate many tasks you would otherwise need to perform manually, like restarting failed containers, scheduling them on different machines, and load balancing.
 
-## Create an Azure Container Instance
-In this section, you will create the Azure Container Instance using Azure Portal and deploy the sample ASP.NET application from the Microsoft Container Registry. 
+Kubernetes was initially created at Google based on their experience running distributed, containerized workloads on many machines. Kubernetes has been quickly recognized as a handy tool. Since it is open-source, cloud providers also provide managed Kubernetes services, which help you use this technology relatively easily to manage your containerized workloads.
 
-To start, we login to Azure Portal. Then, in the search box, we type **Container instances**, and select the first item on the list:
+At the top level, the Kubernetes cluster comprises the control plane and compute nodes. The control plane makes global decisions about the cluster (like scheduling containers), while the compute nodes are physical or virtual machines. These machines are equipped with container runtime (like Docker), which is necessary to run containers.
 
-![Azure#left](figures/01.png)
-
-The above procedure will open the Container instances, in which you click the **+Create** button. This will activate the wizard, which you use to configure your Azure Container Instance:
-1.	Subscription: **Select your subscription**.
-2.	Resource group: **rg-arm64** (create a new group, if needed).
-3.	Container name: **aspnet-sample**.
-4.	Region: **East US** (or select the region close to your location).
-5.	Availability zones: **None** or default.
-
-At this point, the Create container instance wizard will look as shown below:
-
-![Azure#left](figures/02.png)
-
-Then, continue with other settings:
-1.	SKU: **Standard**.
-2.	Image source: **Other registry**.
-3.	Run with Azure Spot Discount: **Unchecked**.
-4.	Image type: **Public**.
-5.	Image: **mcr.microsoft.com/dotnet/samples:aspnetapp**.
-6.	OS type: **Linux**
-7.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size if this specific size is unavailable in the Azure region you used)
-
-You should end up with the following configuration:
-
-![Azure#left](figures/03.png)
-
-Now you will need to configure port mapping. Let’s click the **Next: Networking >** button, and under the Networking tab scroll down to Ports. Afterward, you add an 8080 port for the TCP protocol: 
-
-![Azure#left](figures/04.png)
-
-This setting enables us to create the port mapping, which will map port 8080 of the container instance to the corresponding point inside the running container.
-
-{{% notice Note %}}Here, we use the 8080 port because the sample ASP.NET application listens on this port by default. {{% /notice %}}
-
-Finally, you click the **Review + create** button. This will run the final validation of your configuration, and you will see the following screen:
-
-![Azure#left](figures/05.png)
-
-Click the **Create** button, and wait a few moments for the resource to be created. You will then see the confirmation screen, where you click the **Go to resource** button.
-
-![Azure#left](figures/06.png)
+In this learning path, you will learn how to create a Kubernetes cluster in Azure. This cluster will use arm64-powered Virtual Machines as compute nodes. Then, you deploy the containerized People.WebApp to this cluster. 

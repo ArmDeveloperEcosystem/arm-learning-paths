@@ -1,49 +1,61 @@
 ---
-title: Azure Container Registry
-weight: 7
+title: Deploying a Docker container from the Azure Container Registry
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Objective
-We’ve learned how to containerize the application. In the next step, we will push the Docker image to Azure Container Registry. Before we can push the image, we need to create the container registry in Azure.
+In this section, you will deploy the Docker container from the Azure Container Registry to the Azure Container Instances. First, you must configure the Azure Container Registry to enable an Admin account. The Azure Container Instance requires the latter. 
 
-### Creating the container registry in Azure
-To create the Azure Container Registry we will uze the Azure Command Line Interface (Azure CLI):
-1. In the WSL console, type the following command and wait for the installation to complete:
+### Deployment
+Under the Azure Portal, open the Cloud Shell. To do so, click a Cloud Shell icon located in the top right corner of the Azure Portal (refer to the first part of this learning series for detailed instruction):
 
+![Azure#left](figures/09.png)
+
+In the Cloud Shell, type:
 ```console
-curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+az acr list -o table
 ```
 
-2.	Login to your Azure subscription:
+This command will display the list of container registries. Look for the **ADMIN ENABLED** column to ensure that the people registry has an Admin account disabled:
+
+![Azure#left](figures/10.png)
+
+Now, you enable the Admin account:
+
 ```console
-az login
-```
-3.	The command will open the web browser and redirect to the Azure login page. Use this page to provide your credentials.
-4.	Afterward, create the resource group name rg-arm64 with a default location set to EastUS:
-```console
-az group create -n rg-arm64 -l eastus
-```
-5.	Create the Azure Container Registry of name people in the rg-arm64 group using the Basic pricing tier:
-```console
-az acr create -n people -g rg-arm64 --sku Basic
+az acr update -n people --admin-enabled true
 ```
 
-The output of the above commands will look as shown below:
-![command prompt#left](figures/08.png)
+The command will generate the following output:
+![Azure#left](figures/11.png)
 
-In the next step, we must configure the role assignment so the current Azure user can push Docker images to the Azure Container Registry. To do so, we use the WSL terminal, in which we type
-```console
-USER_ID=$(az ad user show --id "<YOUR_USER_ID>" –query "id" -o tsv)
+You can now create another Azure Container Instance. To do so, go to Azure Container instances and click the **+ Create** button. Then configure an instance as follows:
+1.	Subscription: **Select your subscription**.
+2.	Resource group: **rg-arm64** (create a new group, if needed).
+3.	Container name: **people**.
+4.	Region: **East US** (or select the region close to your location).
+5.	Availability zones: **None**.
+6.	SKU: **Standard**.
+7.	Image source: **Azure Container Registry**.
+8.	Run with Azure Spot Discount: **Unchecked**.
+9.	Registry: **people**
+10.	Image: **people.webapp**
+11.	Image tag: **v1**.
+12.	OS type: **Linux**.
+13.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size, if this specific size is unavailable in the Azure region you used).
 
-ACR_ID = $(az acr list --query "[?contains(name, 'people')].id" -o tsv)
+![Azure#left](figures/12.png)
 
-az role assignment create --assignee $USER_ID --role AcrPush --scope $ACR_ID
-```
+Click the **Review + create** button. Wait for the validation to complete, and click the **Create** button.
 
-{{% notice Note %}} You’ll need to replace <YOUR_USER_ID> with the username you used (in my case, that was dawid@borycki.com.pl).  {{% /notice %}}
+The container will be created. However, it will not run as the Azure Container instance is not yet compatible with arm64 containers. To verify the container status, open the **Containers** tab of the newly created Azure Container instance:
 
-The last command’s output will look as follows:
-![command prompt#left](figures/05.png)
+![Azure#left](figures/13.png)
+
+Compare this status with the **aspnet-sample** container instance, which you created before.
+
+## Summary
+This tutorial taught you how to deploy containerized applications using the Azure Container Instances. You deployed a Docker container from the public (Microsoft Container Registry) and a private registry (created with Azure Container Registry). Along the way, you also learned how to configure Azure Container Registry to enable such deployments.

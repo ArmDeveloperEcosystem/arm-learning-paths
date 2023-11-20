@@ -26,9 +26,9 @@ further_reading:
         link: https://learn.microsoft.com/en-GB/azure/container-registry/container-registry-concepts
         type: Documentation
     - resource:
-        title: Containerize a .NET app
-        link: https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows&pivots=dotnet-7-0
-        type: Tutorial
+        title: Azure Container Instances
+        link: https://learn.microsoft.com/en-us/azure/container-instances/
+        type: Documentation
 
 
 # ================================================================================

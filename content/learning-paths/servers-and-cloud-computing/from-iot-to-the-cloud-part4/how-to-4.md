@@ -1,5 +1,5 @@
 ---
-title: Deploying an application
+title: Resources declaration and deployment
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -7,55 +7,86 @@ layout: learningpathall
 ---
 
 ## Objective
-You will now deploy a containerized application to the Kubernetes cluster running in Azure.
+You will now modify the index.ts to deploy the Azure Container Instance.
 
-## Deploying an application
+## Modify index.ts
+Open the index.ts and replace its original content by the following code:
 
-To deploy an application to the Kubernetes cluster, you typically use the YAML files containing a workload declaration. To deploy an application, we will use a declaration containing two objects: deployment and a service. A deployment will create a specific number of Kubernetes pods. These are the smallest deployable units in Kubernetes. A single pod includes one or more containers sharing the volumes and network capabilities. Thus, the declaration of the deployment consists of elements such as:
-1. The container image to be used to spin up containers,
-2. The number of container instances (container replicas),
-3. Ports on which containers will listen to incoming requests.
+```typescript
+import * as resources from "@pulumi/azure-native/resources";
+import * as containerinstance from "@pulumi/azure-native/containerinstance";
 
-To expose the pod to other services and the Internet, we will use a Service of the type Load Balancer. Under the hood, Kubernetes will request a public IP from Azure. We will use this IP to access our application.
+// Create an Azure Resource Group named rg-arm64-iac
+const resourceGroup = new resources.ResourceGroup("rg-arm64-iac");
 
-Let’s now use this declaration to deploy our People.WebApp to Azure Kubernetes Cluster. To do so, we proceed as follows:
-1.	Open the Cloud Shell.
-2.	Download the declaration file by typing
-```console
-wget https://raw.githubusercontent.com/dawidborycki/People.WebApp.Declarations/main/Kubernetes/people_aks.yml
+// Use sample ASP.NET Docker image
+const imageName = "mcr.microsoft.com/dotnet/samples:aspnetapp";
+
+// Create Azure Container Instance
+const containerGroup = new containerinstance.ContainerGroup("aspnet-sample-container-instance", {
+    resourceGroupName: resourceGroup.name,
+    osType: "Linux",
+    containers: [{
+        name: "aspnet-sample-app",
+        image: imageName,
+            ports: [{ port: 8080 }],
+            resources: {
+                requests: {
+                    cpu: 1.0,
+                    memoryInGB: 1.5,
+                },
+            },
+    }],
+    ipAddress: {
+        ports: [{
+            port: 8080,
+            protocol: "Tcp",
+        }],
+        type: "Public",
+    },
+    restartPolicy: "always",
+});
+
+export const containerIPv4Address = containerGroup.ipAddress.apply(ip => ip?.ip);
 ```
 
-3.	To edit the file, you type: 
-```console
-code people_aks.yaml
-```
+The above code will create two resources: a resource group and the Azure Container Instance. The declaration of the resource group is straightforward and doesn’t require any additional comments. A declaration of the Azure Container Instance is structured as follows. First, we define the name of the container instance as the first parameter of the ContainerGroup function. Then, we pass an anonymous object with five properties corresponding to the parameters we used when manually provisioning the Azure Container Instance in part 3 of this series. So, these properties include the name of the resource group, the type of the operating system, a specification of the container, network configuration, and restart policy. We configure those similarly as before. In particular, we use the following Docker image: mcr.microsoft.com/dotnet/samples:aspnetapp and configure the container port to 8080.
 
-4.	This will open the code/text editor in Azure:
+The last statement of the index.ts will instruct Pulumi to display the public IP address of the created Azure Container Instance. 
 
-![AKS#left](figures/11.png)
-
-5.	Check line number 17. In our case, it points to the fully qualified container image name, **image: people.azurecr.io/people.webapp:v1**. This includes the container registry login server, image name, and image tag. The login server is the same one we created in part 2 of this learning series. So, if you use a different name for either the container registry or the container name, update line 17 correspondingly. Then save changes to the same file, people_aks.yml (CTRL+S), and close the editor (CTRL+Q).
-
-6.	To deploy the workload, type the following command in the Cloud Shell:
+## Resource deployment
+Let’s now deploy the Azure resource using this declaration. To do so, you open the Command Prompt, go to the azure-aci folder, and then type 
 
 ```console
-kubectl apply -f people_aks.yml
+pulumi up
 ```
 
-It will take a few moments to deploy the workload. Afterward, use the following command to display the list of pods
+The Pulumi will analyze your index.ts file to get the list of resources to be deployed. Then, it will display the list of resources to be deployed:
+
+![Pulumi#left](figures/03.png)
+
+Confirm the deployment by selecting yes and pressing enter. Then, wait a few moments for the resources to be deployed. Once the deployment is done, you will see the public IP address of your Azure Container Instance. Here, that is **4.236.196.236**.
+
+![Pulumi#left](figures/04.png)
+
+Copy the IP address and supplement it by 8080. Then, type it in the address bar of your web browser. You will see the application up and running. Compare this result to what we get in part 2 of this series.
+
+![Pulumi#left](figures/05.png)
+
+## Clean up
+We have just deployed Azure resources using the Infrastructure as Code. The advantage of this approach is that we can now update the cloud infrastructure by modifying the index.ts and re-running the pulumi up command. It will compare the new declaration with the current state of the cloud deployment and update if needed. Also, you can use a single Pulumi command to de-provision all resources declared in the index.ts. To do so, you type:
+
 ```console
-kubectl get pods
+pulumi down
 ```
 
-Ensure the status of each pod is running. Then type
-```console
-kubectl get svc
-```
+Pulumi will ask you to confirm your choice (select yes and press enter):
 
-This will display the list of services as shown below:
+![Pulumi#left](figures/06.png)
 
-![AKS#left](figures/12.png)
+After a few moments, you will see the delete confirmation message:
 
-Note the IP address under the **EXTERNAL-IP** column of **people-web-appsvc**. That is the Public IP where you can find your application. In my case, that is **4.156.88.80**. By typing this IP in the web browser, you will see an application up and running:
+![Pulumi#left](figures/07.png)
 
-![AKS#left](figures/13.png)
+## Summary
+You learned how to use infrastructure as code using Pulumi in this learning path. This approach is particularly beneficial as you can code cloud infrastructure as an application. Therefore, you can keep the declarations of the cloud infrastructure in the git repository and apply typical workflows you use for the application code development and deployment, like pull requests.

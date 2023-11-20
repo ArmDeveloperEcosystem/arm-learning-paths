@@ -2,29 +2,29 @@
 review:
     - questions:
         question: >
-            1.	Which command do you use to create a Docker image?
+            1.	Which tab do you use to configure port mapping in the Azure Container Instance?
         answers:
-            - docker create 
-            - docker build
-            - docker image create
-            - docker image build
+            - networking
+            - port configuration
+            - port mapping
+            - network configuration
 
-        correct_answer: 2                    
+        correct_answer: 1                    
         explanation: >
-            The docker build command enables you to build the Docker image, e.g. docker build -t people.webapp:v1 .
+            To configure port mapping you use the Networking tab of the wizard, which you use to provision the Azure Container Instance.
 
     - questions:
         question: >
-            2.	What do you need to push the image to the remote registry?
+            2.	What do you need to deploy a container from the Azure Container Registry to the Azure Container instance?
         answers:
-            - tag the image with the fully qualified registry name
-            - tag the image with the subscription identifier
-            - dotnet run (correct)
-            - dotnet start
+            - provide Docker credentials
+            - enable Admin account (correct) in Azure Container Registry
+            - use dotnet run command
+            - use the docker run command
 
-        correct_answer: 1
+        correct_answer: 2
         explanation: >
-            Docker uses tags for routing. So, the tag needs to include the fully qualified registry name (login server)
+            Azure Container Instance requires Admin account to be enabled, when deploying images from the Azure Container Registry
 
 
 

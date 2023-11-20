@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about Docker. 
+    You can continue learning about Infrastructure as Code. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/"
@@ -18,16 +18,16 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/"
 
 further_reading:
     - resource:
-        title: Kubernetes
-        link: https://kubernetes.io
+        title: Infrastructure as code
+        link: https://learn.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code
         type: Documentation
     - resource:
-        title: Azure Kubernetes Service
-        link: https://azure.microsoft.com/en-us/products/kubernetes-service#overview
+        title: Pulumi
+        link: https://www.pulumi.com
         type: Documentation
     - resource:
-        title: kubectl Cheat Sheet
-        link: https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+        title: Terraform
+        link: https://www.terraform.io
         type: Documentation
 
 
