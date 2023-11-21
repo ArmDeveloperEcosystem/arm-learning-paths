@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 {{% notice Note %}}
-The results you will see are likely be different than those in the sample output. The processor and system you use impact the results, but the learning is useful for any Arm processor.
+The results you will see are likely to be different than those in the sample output. The processor and system you use impact the results, but the learning is useful for any Arm processor.
 {{% /notice %}}
 
 We have the explanation about latency, we have the numbers and we know we have to "reduce the latencies" in our code, but how can we do that exactly?
-You can learn more about how to reduce latency in applications by studying the below example software. 
+You can learn more about how to reduce latency in applications by studying the example software below. 
 
 Latency impacts software in multiple ways. In user interfaces, mouse clicks and movements may have a time lag. In CPU processing, an image processing filter may take too long to complete. In applications, a word processor make take too long to save or load files from disk. In games, multi-player games may have a lag when many players are online at the same time.
 
@@ -112,7 +112,7 @@ You can use `perf` to understand where the time is spend.
 
 If you don't have `perf` installed or need help to configure your computer to run `perf` refer to the [Perf for Linux on Arm install guide](/install-guides/perf/).
 
-We first run `sudo perf record ./memory-latency1` to gather the profiling information. It's a simple program so the output is small. Afterwards we get the profiling output with `sudo perf report`:
+We first run `sudo perf record ./memory-latency1` to gather the profiling information. It's a simple program so the output is small. Afterwards we get the profiling output with `sudo perf report`.
 
 Run the application again with `perf` using:
 
