@@ -9,37 +9,49 @@ layout: learningpathall
 ## Before you begin
 Independently the kind of Arm machine you use, the instructions of this
 learning paths are going to be the same.
-You need to login via SSH into your remote server or open a terminal on your
-local VM or physical machine.
+You need to login via SSH to your remote server or open a terminal on your
+local machine.
 The instructions of this learning path are for Ubuntu 22.04 LTS.
 
 ## Install a different version of Python (optional)
-Ubuntu 22.04 offers pre-installed Python 3.10 binaries. You can just use this
-version or alternatively you can install the latest version of Python.
+Ubuntu 22.04 offers pre-installed Python 3.10 binaries. You can use the default
+version or you can install the latest version of Python. If you use the default version 
+you will still need to install the `python3-pip` and `python3-venv` packages and substitute 
+`python3` where `python3.11` is used below.
+
 A quick way to install the most recent version of Python is via
 [Deadsnakes PPA](https://launchpad.net/~deadsnakes/+archive/ubuntu/ppa).
 
 Add the Deadsnakes repository:
 
 ```bash
-sudo add-apt-repository ppa:deadsnakes/ppa
+sudo add-apt-repository -y ppa:deadsnakes/ppa
 sudo apt update
 ```
 
-Install Python 3.11.
+Install Python 3.11:
 
 ```bash
-sudo apt install python3.11 python3.11-venv
+sudo apt install python3.11 python3.11-venv -y
 ```
 
-Check that Python 3.11 works as expected, shown in the output below:
+Check that Python 3.11 works as expected. 
+
+Run Python:
+
+```bash
+python3.11
+```
+
+The output will be similar to:
 
 ```output
-~$ python3.11
 Python 3.11.6 (main, Oct 23 2023, 22:48:54) [GCC 11.4.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
->>> exit()
 ```
+
+Use Control-D or type `exit()` to exit Python. 
+
 {{% notice Note %}}
 At the time of writing the latest version of Python is 3.12. Before using the
 latest version of Python, please check if the dependencies that you need are
@@ -49,9 +61,9 @@ Python 3.12 yet.
 
 
 ## Create the virtual environment
-A good practice is always to use a virtual environment when dealing with python
-code. This because it allows you to run multiple applications with different
-dependencies in the same OS without conflicting each other.
+It is good practice to use a virtual environment when dealing with Python
+code. Virtual environments allow you to run multiple applications with different
+dependencies on the same machine without conflicts.
 
 Create and activate the virtual environment:
 
@@ -63,9 +75,8 @@ source venv/bin/activate
 The prompt of your terminal has `(venv)` as prefix and this means the virtual
 environment is now active. From this point on, you will run all the commands inside your virtual environment.
 
-## Install python dependencies
-With the active virtual environment, you now install the Python dependencies
-for running your Django application.
+## Install Python dependencies
+With the active virtual environment, you now install the Python dependencies:
 
 ```bash
 pip install keras-core tensorflow torch jax[cpu]
@@ -84,7 +95,7 @@ After the installation, verify that you have the right packages installed:
 ```bash
 pip list
 ```
-The output should look similar to (versions might change, other dependencies
+The output should look similar to (versions might change, some dependencies
 omitted):
 
 ```output
@@ -115,6 +126,6 @@ wrapt                        1.14.1
 
 {{% notice Note %}}
 Whenever you are in the virtual environment, it is enough just to type
-`python` (without appending any version) as it points to the python binary used
+`python` (without appending any version) as it points to the Python binary used
 to create the virtual environment.
 {{% /notice %}}

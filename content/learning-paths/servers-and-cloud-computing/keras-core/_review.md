@@ -2,26 +2,25 @@
 review:
     - questions:
         question: >
-            Do TensorFlow, PyTorch and JAX runt on Arm servers?
+            Do TensorFlow, PyTorch and JAX run on Arm servers?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
             Even though these dependencies aren't pure Python, the respective
-            authors compile these software and make them available for aarch64.
-            For the end user it just works.
+            authors compile the software packages and make them available for the Arm architecture.
 
     - questions:
         question: >
-            Do you need to perform Arm specific steps during the learning path? 
+            Do you need to perform Arm specific steps when using Keras? 
         answers:
             - "Yes"
             - "No"
         correct_answer: 2
         explanation: >
-            The learning path doesn't contain steps specific for Arm as all the
-            software stack used is fully supporte on 64-bit Arm servers running Linux.
+            Using Keras doesn't require anything specific for Arm. The 
+            software stack used is fully supported on 64-bit Arm Linux.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -8,9 +8,10 @@ layout: learningpathall
 
 ## Create the script
 
-Now that you have an overview of every single step of the ML pipeline and you
+Now that you have an overview of every single step in the ML pipeline and you
 have all the dependencies installed, you are ready to run the full script.
-Copy the following python code and save it in a Python file (e.g.: `ml.py`)
+
+Copy the following python code and save it in a text file named `ml.py`
 
 ```python
 import keras_core as keras
@@ -57,10 +58,15 @@ print(prediction[0])
 
 ## Run the script
 
-To run the script type `python ml.py` and the output should look like:
+Run the script:
+
+```bash
+python ml.py
+```
+
+The output should be similar to:
 
 ```output
-~$ python ml.py
 Using TensorFlow backend
 Epoch 1/2
 2023-11-15 16:22:34.193264: W external/local_tsl/tsl/framework/cpu_allocator_impl.cc:83] Allocation of 150528000 exceeds 10% of free system memory.
@@ -81,10 +87,16 @@ Test accuracy: 0.9528999924659729
 
 The first thing the script prints is which backend it uses: by default it uses
 TensorFlow.
-Try changing the backend to PyTorch:
+
+Change the backend to PyTorch:
+
+```bash
+KERAS_BACKEND="torch" python ml.py
+```
+
+The output now prints PyTorch as the backend:
 
 ```output
-~$ KERAS_BACKEND="torch" python ml.py
 Using PyTorch backend.
 Epoch 1/2
 750/750 --------------- 18s 24ms/step - accuracy: 0.8389 - loss: 0.5871 - val_accuracy: 0.9373 - val_loss: 0.2230
@@ -98,10 +110,15 @@ Test accuracy: 0.9516000151634216
  -11.41562     9.539099   -2.5394506  -1.046052 ]
 ```
 
-And lastly to JAX:
+Finally, try the JAX backend:
+
+```bash
+KERAS_BACKEND="jax" python ml.py
+```
+
+You will see JAX as the backend:
 
 ```ouput
-~$ KERAS_BACKEND="jax" python ml.py
 Using JAX backend.
 Epoch 1/2
 750/750 --------------- 1s 1ms/step - accuracy: 0.8374 - loss: 0.6037 - val_accuracy: 0.9411 - val_loss: 0.2104
@@ -115,6 +132,8 @@ Test accuracy: 0.95169997215271
   -1.23106    -17.222641    10.103312    -3.3881965   -0.13131982]
 ```
 
-You can notice that even if the backends change, the accuracy that you have is
-~0.95 and the predictions are consistent. When you run it with different
-backends you might notice a difference in speed of execution.
+Even if the backend changes, the accuracy is always about 
+~0.95 and the predictions are consistent. 
+
+When you run it with different backends you might notice a difference in execution speed.
+
