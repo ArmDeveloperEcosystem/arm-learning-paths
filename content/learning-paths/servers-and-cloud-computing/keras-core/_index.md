@@ -1,22 +1,22 @@
 ---
 title: Use Keras Core with TensorFlow, PyTorch, and JAX backends
 
-minutes_to_complete: 15
+minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for engineers who want to create a neural network model on Arm machines.
 
 learning_objectives: 
     - Create a simple neural network model using Keras Core
     - Train and evaluate your neural network model with different backends
-    - Generate prediction with the generated trained model
+    - Generate predictions with the trained model
 
 prerequisites:
-    - Basic knowledge of Machine Learning
-    - At least either an [Arm based instance](../csp/) from a cloud service provider, on-premises Arm server, or a Linux virtual machine on your Arm device.
-    - Be comfortable with SSH/Linux terminal and basic system administration tasks.
-    - To install [TensorFlow](https://www.tensorflow.org/), [PyTorch](https://pytorch.org) and [JAX](https://jax.readthedocs.io/en/latest/index.html)
+    - Basic Machine Learning knowledge.
+    - An [Arm based instance](/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device. 
+    - Familiarity with SSH, the Linux command line, and basic system administration tasks.
 
-author_primary: Diego Russo, Leandro Nunes
+author_primary: Diego Russo
+# Leandro Nunes
 
 ### Tags
 skilllevels: Introductory

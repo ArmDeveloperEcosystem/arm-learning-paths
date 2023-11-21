@@ -1,7 +1,8 @@
 ---
-next_step_guidance: Thank you for learning how to run Keras Core with TensorFlow, PyTorch, and JAX backends.
+next_step_guidance: >
+    Thank you for learning how to run Keras Core with TensorFlow, PyTorch, and JAX backends.
 
-recommended_path: /learning-paths/servers-and-cloud-computing/ml-perf/
+recommended_path: "/learning-paths/servers-and-cloud-computing/ml-perf/"
 
 further_reading:
     - resource:
