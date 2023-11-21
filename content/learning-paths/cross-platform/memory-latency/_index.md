@@ -1,6 +1,5 @@
 ---
 title: Memory latency for application software developers
-draft: true
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for Arm developers who want learn about memory latency and cache usage in application programming. 
