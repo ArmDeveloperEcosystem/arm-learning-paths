@@ -12,7 +12,7 @@ Typically, the compiler will try to enforce 64-bit (8-byte) or 16-byte alignment
 
 To learn about cache alignment, you can enforce larger alignment and see if it has any impact on performance. 
 
-Make the following changesi to the `node` struct and `init_alloc` in the `memory-latency2.c` file:
+Make the following changes to the `node` struct and `init_alloc` in the `memory-latency2.c` file:
 
 ```C
 typedef struct __attribute__((packed)) node {
@@ -36,7 +36,7 @@ static void init_alloc() {
 Here is a summary of the changes:
 * Align the allocator to start from a 64-byte address using `posix_memalign`. This is because most CPUs have a 64 byte cache line size.
 * Use `__attribute__((packed))` in the struct definition so that it takes the smallest possible space in memory.
-* Reorder the buffer and pointer elements of the struct. This helps `memcpy()` later in `new_node` to copy to an aligned buffer.
+* Re-order the buffer and pointer elements of the struct. This helps `memcpy()` later in `new_node` to copy to an aligned buffer.
 * Increase the `buffer` size to 24 so that the node struct is exactly 32 bytes long.
 
 As before, compile the new file:
@@ -57,7 +57,7 @@ The output will print the time taken to run the application:
 1000000 Nodes creation took 4092 us
 ```
 
-Your results may be slightly different, but this is a 31% performance increase. The increase is due to better alignment of the allocated buffer and the alignment of the objects that `simple_alloc()` returns. 
+Your results may be slightly different, but this example shows a 31% performance increase. The increase is due to better alignment of the allocated buffer and the alignment of the objects that `simple_alloc()` returns. 
 
 Furthermore, `memcpy()` operating on aligned buffers also improves performance.
 
@@ -88,7 +88,7 @@ gcc -O3 -o memory-latency2 memory-latency2.c -Wall
 ./memory-latency2
 ```
 
-The output shows the program takes long than the previous version. 
+The output shows that the program takes longer than the previous version. 
 
 ```output
 1000000 Nodes creation took 5575 us
@@ -100,4 +100,4 @@ This was an easy example, but there are plenty of opportunities to optimize code
 
 The next section shows another way to reduce memory latency, cache prefetching. 
 
-To prepare, remove the padding fields from the `node` structure so it is back to the best performance. 
+To get ready, remove the padding fields from the `node` structure so it reverts back to the best performance. 
