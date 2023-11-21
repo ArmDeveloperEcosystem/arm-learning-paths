@@ -11,7 +11,7 @@ learning_objectives:
     - Use cache prefetching to improve performance
 
 prerequisites:
-    - An Arm computer running Linux with recent version of Clang or GCC installed.
+    - An Arm computer running Linux with recent versions of Clang or GCC installed.
 
 author_primary: Konstantinos Margaritis
 
