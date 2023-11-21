@@ -63,7 +63,7 @@ node_t *new_node(node_t *prev, const char *payload, size_t size) {
 }
 ```
 
-Function `free_nodes()` call at the bottom of `main()` is not needed, you can remove it. 
+The function `free_nodes()` call at the bottom of `main()` is not needed, you can remove it. 
 
 Add the `init_alloc()` in the start of `main()` and `free(start_)` at the end to free the buffer allocated by our simple allocator:
 
