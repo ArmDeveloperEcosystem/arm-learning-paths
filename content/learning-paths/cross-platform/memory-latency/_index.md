@@ -3,7 +3,7 @@ title: Memory latency for application software developers
 draft: true
 minutes_to_complete: 40
 
-who_is_this_for: This is an introductory topic for Arm developers who want learn about memory latency and cache usage in application programming. 
+who_is_this_for: This is an introductory topic for Arm developers who want to learn about memory latency and cache usage in application programming. 
 
 learning_objectives: 
     - Explain the importance of memory latency and how to reduce its impact
