@@ -10,7 +10,7 @@ review:
             - When your computer uses latent RAM DIMMs
         correct_answer: 3
         explanation: >
-            Memory latency problems are mostly apparent in algorithms that are memory-bound, or in other words, the CPU spends most of the time waiting for data to transfer from/to RAM.
+            Memory latency problems are mostly apparent in algorithms that are memory-bound, or in other words, when the CPU spends most of the time waiting for data to transfer from/to the RAM.
 
     - questions:
         question: >
@@ -23,8 +23,8 @@ review:
         correct_answer: 2
         explanation: >
             Although sometimes we can remedy the problem with faster RAM, we will still hit the upper limit of maximum RAM frequency supported by our CPU/motherboard.
-            The proper solution is to minimize and group memory access in the algorithm so that the CPU is not stalled waiting from data to arrive from memory.
-            Proper alignment and cache prefetching also help greatly.
+            The proper solution is to minimize and group memory access in the algorithm so that the CPU is not stalled waiting from data to arrive from the memory.
+            Proper alignment and cache prefetching also greatly help.
                
     - questions:
         question: >
@@ -32,7 +32,7 @@ review:
         answers:
             - 256 bytes
             - 1MB
-            - It depends on our algorithm, but data that will take at least 100ns to arrive in the cache from RAM
+            - It depends on our algorithm, but data that will take at least 100ns to arrive in the cache from the RAM
             - We have to fill the L1/L2 caches completely
         correct_answer: 3
         explanation: >
