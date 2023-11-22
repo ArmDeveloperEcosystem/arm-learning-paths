@@ -20,7 +20,7 @@ curl -LO https://aka.ms/vcpkg-init.cmd && .\vcpkg-init.cmd
 iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
   {{< /tab >}}
   {{< tab header="Linux/macOS" language="shell">}}
-. < (curl https://aka.ms/vcpkg-init.sh -L)
+. <(curl https://aka.ms/vcpkg-init.sh -L)
   {{< /tab >}}
 {{< /tabpane >}}
 
