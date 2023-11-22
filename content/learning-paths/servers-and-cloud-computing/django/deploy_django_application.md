@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Configuring the database
 Open the file `myproject/settings.py` and scroll to `DATABASES` and replace the
-code with the following one:
+code with the following:
 
 ```python
 DATABASES = {
@@ -22,7 +22,7 @@ DATABASES = {
     }
 }
 ```
-Replace the HOST IP address with the IP address of your machine or use `localhost` in the section above.
+Replace the HOST IP address with the IP address of your machine or use `localhost` as per the example above.
 
 Now you need to create the database and its user with the above data.
 Type the following command:
@@ -36,7 +36,7 @@ postgres=#
 ```
 
 Now type the following command into the `psql` prompt to create the database,
-the user and to give the right permission to the user.
+the user and to give the right permissions to the user:
 
 ```SQL
 CREATE DATABASE myprojectdb;
@@ -221,10 +221,8 @@ nginx.service - A high performance web server and a reverse proxy server
 If you open your browser and point it to http://localhost/aarch64app you should see the hello world message.
 
 {{% notice Note %}}
-In theory should should point your browser to the right domain name and/or IP
-of the machine. Please refer to the [full documentation](https://docs.djangoproject.com/en/4.2/howto/deployment/)
-in order to properly deploy Django.
+For more detailed installation information, refer to [the Django documentation](https://docs.djangoproject.com/en/4.2/howto/deployment/).
 {{% /notice %}}
 
-Congratulations!! The Django application is now served via Nginx and connected
+The Django application is now served via Nginx and connected
 to PostgreSQL.

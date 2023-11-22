@@ -1,20 +1,25 @@
 ---
-next_step_guidance: 
+next_step_guidance: >
+    Thank you for learning how to run Keras Core with TensorFlow, PyTorch, and JAX backends.
 
-recommended_path: /learning-paths/servers-and-cloud-computing/memcached_cache/ 
+recommended_path: "/learning-paths/servers-and-cloud-computing/ml-perf/"
 
 further_reading:
     - resource:
-        title: PostgreSQL Documentation
-        link: https://www.postgresql.org/docs/
+        title: Keras Documentation
+        link: https://keras.io/guides/
         type: documentation
     - resource:
-        title: Nginx Documentation
-        link: https://nginx.org/en/docs/
+        title: TensorFlow Documentation
+        link: https://www.tensorflow.org/api_docs
         type: documentation
     - resource:
-        title: Django Documentation
-        link: https://docs.djangoproject.com/
+        title: PyTorch Documentation
+        link: https://pytorch.org/docs/stable/index.html
+        type: documentation
+    - resource:
+        title: JAX Documentation
+        link: https://jax.readthedocs.io/en/latest/index.html
         type: documentation
 
 

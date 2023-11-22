@@ -2,24 +2,25 @@
 review:
     - questions:
         question: >
-            Does Django run on Arm servers?
+            Do TensorFlow, PyTorch and JAX run on Arm servers?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            Django is a pure Python application so it is fully supported on 64-bit Arm servers running Linux.
+            Even though these dependencies aren't pure Python, the respective
+            authors compile the software packages and make them available for the Arm architecture.
 
     - questions:
         question: >
-            Do you need to perform Arm specific steps during the learning path?
+            Do you need to perform Arm specific steps when using Keras? 
         answers:
             - "Yes"
             - "No"
         correct_answer: 2
         explanation: >
-            The learning path doesn't contain steps specific for Arm as all the software stack used is fully supported on 64-bit Arm servers running Linux.
-
+            Using Keras doesn't require anything specific for Arm. The 
+            software stack used is fully supported on 64-bit Arm Linux.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

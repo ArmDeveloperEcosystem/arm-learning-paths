@@ -8,8 +8,7 @@ layout: learningpathall
 
 ## Create the Django project
 
-From the terminal where the virtual environment is activated, you need to
-create a Django project
+You create a Django project from the terminal where the virtual environment is activated:
 
 ```bash
 django-admin startproject myproject
@@ -61,19 +60,19 @@ Quit the server with CONTROL-C.
 ```
 
 {{% notice Note %}}
-In the above command you speficied 0.0.0.0:8000. This means
+In the above command, you specified 0.0.0.0:8000. This means
 that the web server is listening to all available ports. You need to specify
-this value if you developing on a remote machine because by default the
-development server listens only on localhost
+this value if you developing on a remote machine because, by default, the
+development server listens only to the localhost.
 {{% /notice %}}
 
 Now open a web browser and point it to the IP address of your machine followed
-by `:8000`. You should see something like that:
+by `:8000`. You should see something like this:
 
 ![alt-text #center](django-install.png "Successful installation of a Django project")
 
 ## Create the Django application
-Now that you have a Django project, it's now time to create a Django
+Now that you have a Django project, it's time to create a Django
 application within the project. Type:
 
 ```bash
@@ -99,7 +98,7 @@ Again, feel free to explore the content of these files.
 
 It's now time to write some code that will be executed by the Django
 application.
-With your favourite editor, open `aarch64app/views.py` and replace the content
+With your preferred editor, open `aarch64app/views.py` and replace the content
 with the following:
 
 ```python
@@ -126,7 +125,7 @@ urlpatterns = [
 ```
 
 Now you need to make it visible at the project level. Edit `myproject/urls.py`
-and add the following code
+and add the following code:
 
 ```python
 from django.contrib import admin

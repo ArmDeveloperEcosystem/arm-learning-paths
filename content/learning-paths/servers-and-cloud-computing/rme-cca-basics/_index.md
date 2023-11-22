@@ -1,14 +1,14 @@
 ---
-title: Learn how to create a virtual machine in a realm using Arm CCA
+title: Learn how to create a virtual machine in a Realm using Arm Confidential Compute Architecture (CCA)
 
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for software developers who want to learn about Arm Confidential Compute Architecture (CCA).
 
 learning_objectives:
-    - Learn about the reference software stack used in Arm CCA
+    - Understand the reference software stack used in Arm CCA
     - Build and run the software stack on an Armv-A AEM Base FVP platform with support for RME extensions
-    - Create a virtual machine in a realm running guest linux
+    - Create a virtual machine in a Realm running guest Linux
 
 prerequisites:
     - An aarch64 or x86_64 computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).

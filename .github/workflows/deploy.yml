@@ -38,7 +38,9 @@ jobs:
 
       # Builds arm-learning-paths repo
       - name: Build
-        run: hugo --minify
+        run: |
+          hugo --minify
+          bin/pagefind --site "public"
         
       #  Copy SSH Key
       - name: copy key
