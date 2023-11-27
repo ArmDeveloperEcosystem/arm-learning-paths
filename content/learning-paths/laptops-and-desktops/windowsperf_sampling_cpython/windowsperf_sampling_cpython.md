@@ -13,8 +13,8 @@ In this example, you will build a debug build of CPython from sources and then e
 In this learning path, you will use sampling to determine CPython program "hot" locations provided by frequencies of PMU events specified by the user.
 
 There are basically two models for using performance monitoring hardware:
-* the counting model, for obtaining aggregate counts of occurrences of special events, and
-* the sampling model, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
+* the counting model, for obtaining aggregate counts of occurrences of special events
+* the sampling model, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels
 
 WindowsPerf support both. 
 
@@ -30,7 +30,7 @@ For this learning path you will need:
 * A Windows on Arm (ARM64) native machine with preinstalled WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
 * x64 Windows build machine which we will use to cross-build CPython for ARM64 target.
   * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) with LLVM support:
-    * Go to the Visual Studio 2022 Community installer. Under Modify -> Individual Components -> search "clang".
+    * Go to the Visual Studio 2022 Community installer. Under Modify > Individual Components > search "clang".
     * install "C++ Clang Compiler..." and "MSBuild support for LLVM...".
 * Basic knowledge of git and Python.
   * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
@@ -38,7 +38,7 @@ For this learning path you will need:
 
 ### CPython cross-build on x64 machine targeting ARM64
 
-CPython is an open-source project. There is native support in CPython for Windows on Arm starting with version 3.11. In this learning path you will use a debug build of CPython. For this, you will build [CPython](https://github.com/python/cpython) locally from sources in debug mode on an x86_64 machine and cross-compile it for a ARM64 target. 
+CPython is an open-source project. There is native support in CPython for Windows on Arm starting with version 3.11. In this learning path you will use a debug build of CPython. For this, you will build [CPython](https://github.com/python/cpython) locally from sources in debug mode on an x86_64 machine and cross-compile it for an ARM64 target. 
 
 Use the Visual Studio `Developer Command Prompt for VS 2022` which is already set up in the VS environment. Go to Start and search for "Developer Command Prompt for VS 2022".
 You should see a prompt as shown below:
@@ -78,7 +78,7 @@ Updating files: 100% (4647/4647), done.
 #### Checkout CPython at specific SHA
 
 {{% notice Note %}}
-This step is optional, but please remember that you may encounter build issues unrelated to this example. For example, the CPython mainline source code that you've just checked out is not stable. We, therefore, recommend that you checkout SHA to avoid any unexpected issues.
+This step is optional, but please remember that you may encounter build issues unrelated to this example. For example, the CPython mainline source code that you've just checked out is not stable. Therefore, we recommend that you checkout SHA to avoid any unexpected issues.
 {{% /notice %}}
 
 Use a specific CPython commit to match the sampling output in this example:
@@ -97,7 +97,7 @@ Note: switching to '1ff81c0cb67215694f084e51c4d35ae53b9f5cf9'.
 
 #### Build CPython from sources
 
-The folder cpython\PCBuild contains `build.bat` build script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select `ARM64` target with `-p ARM64`.
+The folder cpython\PCBuild contains `build.bat` build script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
 
 {{% notice Note %}}
 Make sure you are using `Developer Command Prompt for VS 2022`.
@@ -140,7 +140,7 @@ All the following steps are done on a native ARM64 Windows on Arm machine.
 
 You will now move to a Windows on Arm (ARM64) native machine and perform the following steps:
 * Copy the built CPython executables and libraries
-* Execute the CPython interactive console to make sure all is set up.
+* Execute the CPython interactive console to make sure all is set up
 
 ##### Copy the prebuilt CPython to an ARM64 machine
 
@@ -153,7 +153,7 @@ You will now move to a Windows on Arm (ARM64) native machine and perform the fol
 2. Copy the PCBuild\arm64 directory from your x86_64 build machine to the LearningPath directory on your ARM64 machine.
 
 {{% notice Note %}}
-You can use Remote Desktop to copy a whole directory between two Windows machines with simple Ctrl+C / Ctrl+V.
+You can use the Remote Desktop to copy a whole directory between two Windows machines with simple Ctrl+C / Ctrl+V.
 {{% /notice %}}
 
 3. Copy the Lib directory from your x86_64 build machine to the LearningPath directory on your ARM64 machine.
