@@ -28,10 +28,8 @@ You will try two ways of sampling with WindowsPerf via the `sample` and `record`
 
 For this learning path you will need:
 * A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
-* x64 Windows build machine which we will use to cross-build CPython for ARM64 target.
-  * With pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) with LLVM support:
-    * Go to the Visual Studio 2022 Community installer. Under Modify > Individual Components > search "clang".
-    * install "C++ Clang Compiler..." and "MSBuild support for LLVM...".
+* x64 Windows build machine with pre-installed [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/).
+  *  You will need to install the LLVM extension
 * Basic knowledge of git and Python.
   * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
 * Basic knowledge of Windows Remote Desktop use. Please read [How to use Remote Desktop](https://support.microsoft.com/en-us/windows/how-to-use-remote-desktop-5fe128d5-8fb1-7a23-3b8a-41e636865e8c) for more details.
