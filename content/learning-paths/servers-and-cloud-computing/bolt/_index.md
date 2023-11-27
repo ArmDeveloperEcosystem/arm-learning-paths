@@ -16,7 +16,7 @@ prerequisites:
     - An Arm based machine running Linux. Preferably the Linux Kernel needs to be 4.20 or later for all the perf options to work. Earlier versions can be used but you will be limited to what you record.
     - An install of [BOLT](/install-guides/bolt/)
     - Install [Perf](/install-guides/perf/) preferably 4.20 or later
-    - (Optional) A more powerful build machine, Arm or x86 architecture
+    - (Optional) A more powerful Linux build machine either Arm or x86
 
 author_primary: Jonathan Davies
 
