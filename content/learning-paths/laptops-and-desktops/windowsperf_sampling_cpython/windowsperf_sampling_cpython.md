@@ -27,9 +27,9 @@ You will try two ways of sampling with WindowsPerf via the `sample` and `record`
 ## Before you begin
 
 For this learning path you will need:
-* A Windows on Arm (ARM64) native machine with preinstalled WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
+* A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
 * x64 Windows build machine which we will use to cross-build CPython for ARM64 target.
-  * Pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) with LLVM support:
+  * With pre-installed  [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) with LLVM support:
     * Go to the Visual Studio 2022 Community installer. Under Modify > Individual Components > search "clang".
     * install "C++ Clang Compiler..." and "MSBuild support for LLVM...".
 * Basic knowledge of git and Python.
@@ -97,7 +97,7 @@ Note: switching to '1ff81c0cb67215694f084e51c4d35ae53b9f5cf9'.
 
 #### Build CPython from sources
 
-The folder cpython\PCBuild contains `build.bat` build script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
+The folder cpython\PCBuild contains the `build.bat` build script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
 
 {{% notice Note %}}
 Make sure you are using `Developer Command Prompt for VS 2022`.
