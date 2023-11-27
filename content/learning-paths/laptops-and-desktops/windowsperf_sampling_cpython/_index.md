@@ -25,7 +25,7 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - WindowsPerf (for Windows in Arm platforms only)
+    - WindowsPerf (for Windows on Arm platforms only)
     - Python
     - CPython
     - perf
