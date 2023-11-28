@@ -29,7 +29,7 @@ This example does not include information about the methodology used to determin
 For this learning path you will need:
 * A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
 * x86_64 Windows machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
-  *  You will also need to install the LLVM extension
+  *  You will also need to install the LLVM package.
 * Basic knowledge of git and Python.
   * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
 * Basic knowledge of Windows Remote Desktop use. Please read [How to use Remote Desktop](https://support.microsoft.com/en-us/windows/how-to-use-remote-desktop-5fe128d5-8fb1-7a23-3b8a-41e636865e8c) for more details.
