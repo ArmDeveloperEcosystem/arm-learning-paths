@@ -55,10 +55,10 @@ static_resources:
               '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 ```
 
-One sample command to run Envoy service:
+To run Envoy service, execute the following command:
 
 ```console
-nohup bin/envoy-static.stripped -c configs/config-http.yaml --concurrency 16 > /dev/null &
+sudo bazel-bin/source/exe/envoy-static.stripped -c configs/config-http.yaml --concurrency 16 &
 
 Where:
 -c <string>,  --config-path <string>
@@ -66,9 +66,10 @@ Where:
 --concurrency <uint32_t>
         # of worker threads to run
 ```
+Now run curl on localhost:
 
 ```console
-curl  localhost
+curl localhost
 ```
 
 The output from this command will look similar to:
@@ -77,5 +78,5 @@ The output from this command will look similar to:
 [arm] hello world
 ```
 
-Envoy is now running.
+This demonstrates that Envoy is now successfully running.
 
