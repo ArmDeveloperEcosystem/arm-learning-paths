@@ -6,13 +6,9 @@ weight: 4
 
 ## Example 2: Using the `record` command to simplify things
 
-{{% notice Note %}}
-All the steps in this section are done on a native ARM64 Windows on Arm machine.
-{{% /notice %}}
-
 The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use --pe_file to let WindowsPerf know which process to spawn or after all the options to `wperf`, just type the command you would like to execute. 
 
-This simplifies the steps presented in example #1.
+This simplifies the steps presented in the previous example.
 
 If you want to pass command line arguments to your application, you can call them after all of the WindowsPerf options. All command line arguments are going to be passed
 verbatim to the program that is being spawned. If you want to execute the CPython example above using this approach, you could just type:
