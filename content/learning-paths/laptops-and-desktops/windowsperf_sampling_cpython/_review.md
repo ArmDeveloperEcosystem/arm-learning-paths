@@ -32,16 +32,6 @@ review:
 
     - questions:
         question: >
-            The purpose of using the PMU is for performance analysis and debugging.
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 1
-        explanation: >
-            Yes, the purpose of using the PMU is for performance analysis and debugging. The PMU provides a range of events, such as cache miss, TLB miss, CPU cycles, executed instructions, and for performance profiling and debugging. The PMU can be used by performance analysis tools.
-
-    - questions:
-        question: >
             WindowsPerf can be used and executed only on native ARM64 WOA hardware, and not in a virtual environment.
         answers:
             - "True"
