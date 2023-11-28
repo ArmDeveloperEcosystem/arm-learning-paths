@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Install, configure and run Envoy"
+title: "Build and install Envoy"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -31,85 +31,58 @@ There are numerous ways to deploy Envoy on Arm: Bare metal, cloud VMs, or the va
   * [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
 * Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) learning path
 
-###  Envoy documentation
-
-Envoy has a variety of use cases in large enterprise applications. You can explore the [Envoy documentation](https://www.envoyproxy.io/docs/envoy/latest/) for more details.
-
 ### Envoy installation options
 
-Though [Installing Envoy](https://www.envoyproxy.io/docs/envoy/latest/start/install) provide scripts to install envoy, but the binaries are too old or cannot work, we recommend you to download the latest Envoy [binary](https://github.com/envoyproxy/envoy/releases) for your target platform or build it from [source](/learning-paths/servers-and-cloud-computing/envoy/build_from_source).
+You can install envoy in a few different ways. The recommended ways are to download the latest Envoy [binary](https://github.com/envoyproxy/envoy/releases) for your target Arm platform or build it from [source](/learning-paths/servers-and-cloud-computing/envoy/build_from_source). You can follow the steps in this section to build envoy from source.
 
-### Running Envoy as a service
+## Install Bazel
 
-Create a config file to run Envoy as a service, as discussed in the next sections, or you can create your own.
+To build envoy from source you will use bazel.
 
-Below is a sample config file config-http.yaml:
-```console
-static_resources:
-  listeners:
-  - address:
-      socket_address:
-        address: 0.0.0.0
-        port_value: 80
-    filter_chains:
-    - filters:
-      - name: envoy.filters.network.http_connection_manager
-        typed_config:
-          '@type': type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
-          codec_type: AUTO
-          stat_prefix: ingress_http
-          route_config:
-            name: test
-            virtual_hosts:
-            - name: direct_response_service
-              domains:
-              - "*"
-              routes:
-              - match:
-                  prefix: "/"
-                direct_response:
-                  status: 200
-                  body:
-                    inline_string: "[arm] hello world\n"
-          http_filters:
-          - name: envoy.filters.http.cors
-            typed_config:
-              '@type': type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
-          - name: envoy.filters.http.rbac
-            typed_config:
-              '@type': type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
-          - name: envoy.filters.http.local_ratelimit
-            typed_config:
-              '@type': type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
-              stat_prefix: http_local_rate_limiter
-          - name: envoy.filters.http.fault
-            typed_config:
-              '@type': type.googleapis.com/envoy.extensions.filters.http.fault.v3.HTTPFault
-          - name: envoy.filters.http.router
-            typed_config:
-              '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
-```
-
-One sample command to run Envoy service:
+On your Ubuntu Linux Arm machine, run the following commands to install bazel:
 
 ```console
-nohup bin/envoy-static.stripped -c configs/config-http.yaml --concurrency 16 > /dev/null &
-
-Where:
--c <string>,  --config-path <string>
-        Path to configuration file
---concurrency <uint32_t>
-        # of worker threads to run
+sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-$([ $(uname -m) = "aarch64" ] && echo "arm64" || echo "amd64")
+sudo chmod +x /usr/local/bin/bazel
 ```
+
+## Install external dependencies
+
+On your Ubuntu Linux Arm machine, install the external dependencies as shown below:
 
 ```console
-curl  localhost
+sudo apt update \
+sudo apt-get install \
+   autoconf \
+   curl \
+   libtool \
+   patch \
+   python3-pip \
+   unzip \
+   git \
+   virtualenv
 ```
 
-The output from this command will look similar to:
+### Build envoy from the source code
 
-```output
-[arm] hello world
+You will need to download and extract the prebuilt Clang+LLVM package from [LLVM official site](http://releases.llvm.org/download.html) as shown:
+
+```console
+cd ~/
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.1/clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
+tar -xvf clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
 ```
 
-Envoy is now running...
+You can now build envoy from the source as shown:
+
+```console
+git clone https://github.com/envoyproxy/envoy.git
+cd envoy
+bazel/setup_clang.sh ~/clang+llvm-17.0.1-aarch64-linux-gnu
+echo "build --config=clang" >> user.bazelrc
+bazel build -c opt envoy.stripped --jobs=$(nproc)
+```
+
+With envoy now installed your Arm machine running Ubuntu, you can follow the steps in the next section to run envoy as a service.
+
+
