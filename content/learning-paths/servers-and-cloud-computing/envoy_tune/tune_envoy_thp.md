@@ -11,6 +11,11 @@ Transparent Huge Pages (THP) in Linux is a feature that automatically utilizes l
 Use the information below as general guidance to tune Envoy by THP.
 
 ##  Kernel configuration
+To check your kernel configuration on your Ubuntu machine, run:
+
+```console
+cat /boot/config-$(uname -r)
+```
 
 Make sure the following configurations are enabled in your kernel config:
 ```console
