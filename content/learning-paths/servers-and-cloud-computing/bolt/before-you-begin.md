@@ -1,6 +1,6 @@
 ---
 title: Before You Begin
-weight: 2
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,20 +8,33 @@ layout: learningpathall
 
 ## Before You Begin
 
-### Linux Machine(s)
+### Linux Computers
 
-You will need 1 machine running Linux on Arm architecture to collect a profile. Optimising the executable can be run on this machine or another Linux machine that is more powerful.
+Collecting a performance profile needs to be performed on an Arm Linux computer. BOLT can be run on the same computer or it can be installed and run on a different Linux computer which has more resources.
 
-If you are going to use a 2nd machine to run BOLT these are some extra resources you might need.
+#### Single Computer
 
-- If you are not compiling your executable on AArch64 you will need to cross compile and then copy the executable to the Arm machine for profiling. See this guide on [Cross Compiling](/install-guides/gcc/cross/).
-- Once you have profiled the executable copy the `perf.data` back to the 2nd machine to complete the next steps.
-- BOLT should be build for the native architecture of the 2nd machine. It will still be able to optimise an AArch64 executable the same if the native architecture is not AArch64.
-- The optimised executable will be AArch64 and will need to be copied back the machine that did the profiling to test it.
+An Arm Linux computer can build executable, collect performance profile and run BOLT optimisation steps.
+
+#### Multiple Computers
+
+An Arm Linux computer is needed to collect performance profile but the other steps can be run on a different Linux computer.
+
+##### Build Executable
+
+If your second computer is also Arm you can compile the executable and copy it to collect the  performance profile.
+
+If you are not compiling your executable on Arm you will need to cross compile and then copy the executable to the Arm computer for profiling. See this guide on [Cross Compiling](/install-guides/gcc/cross/)
+
+##### Build & Run BOLT
+
+BOLT should be build for the native architecture of the 2nd computer. It will still be able to optimise an Arm executable even if the native architecture is not AArch64.
+
+Once you have a profile it can be copied to the computer with BOLT and the BOLT conversion & optimisation steps run.
 
 ### Verify Perf Collects a Profile
 
-This guide describes 3 different methods of collecting a profile that can be used with BOLT. Below are sections on how to verify you can collect each of these methods on you Linux Arm machine. If you can't collect a profile update your Linux kernel to 4.20 or later and update Perf using the [Perf](/install-guides/perf/) guide to 4.20.
+This guide describes 3 different methods of collecting a profile that can be used with BOLT. Below are sections on how to verify you can collect each of these methods on your Linux Arm computer. If you can't collect a profile update your Linux kernel to 4.20 or later and update Perf using the [Perf](/install-guides/perf/) guide to 4.20.
 
 #### Cycle Samples
 
