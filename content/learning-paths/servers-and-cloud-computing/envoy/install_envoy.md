@@ -83,6 +83,14 @@ echo "build --config=clang" >> user.bazelrc
 bazel build -c opt envoy.stripped --jobs=$(nproc)
 ```
 
+After a successful build, the output should look similar to:
+
+```output
+INFO: Elapsed time: 13960.122s, Critical Path: 157.25s
+INFO: 14755 processes: 6000 internal, 8753 linux-sandbox, 1 local, 1 worker.
+INFO: Build completed successfully, 14755 total actions
+```
+
 With envoy now installed your Arm machine running Ubuntu, you can follow the steps in the next section to run envoy as a service.
 
 
