@@ -1,6 +1,6 @@
 ---
 title: "Tune Envoy by THP"
-weight: 3
+weight: 2
 layout: "learningpathall"
 ---
 
