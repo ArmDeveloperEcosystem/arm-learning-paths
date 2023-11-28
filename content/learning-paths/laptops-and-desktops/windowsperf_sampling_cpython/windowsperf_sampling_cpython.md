@@ -28,7 +28,7 @@ This example does not include information about the methodology used to determin
 
 For this learning path you will need:
 * A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
-* x64 Windows build machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
+* x86_64 Windows machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
   *  You will also need to install the LLVM extension
 * Basic knowledge of git and Python.
   * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
@@ -76,7 +76,7 @@ Updating files: 100% (4647/4647), done.
 #### Checkout CPython at specific SHA
 
 {{% notice Note %}}
-This step is optional, but please remember that you may encounter build issues unrelated to this example. For example, the CPython mainline source code that you've just checked out is not stable. Therefore, we recommend that you checkout SHA to avoid any unexpected issues.
+This step is optional, but please remember that you may encounter build issues unrelated to this example as the CPython mainline source code that you've just checked out is not stable. Therefore, we recommend that you check out SHA to avoid any unexpected issues and to ensure you are working off the same code base.
 {{% /notice %}}
 
 Use a specific CPython commit to match the sampling output in this example:
