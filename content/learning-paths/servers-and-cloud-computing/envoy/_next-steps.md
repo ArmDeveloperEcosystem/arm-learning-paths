@@ -21,6 +21,10 @@ further_reading:
         title: Envoy documentation
         link: https://www.envoyproxy.io/docs/envoy/latest/
         type: documentation
+    - resource:
+        title: Envoy build documentation
+        link: https://www.envoyproxy.io/docs/envoy/latest/start/building
+        type: documentation
 
 
 # ================================================================================
