@@ -42,7 +42,7 @@ review:
 
     - questions:
         question: >
-            WindowsPerf can by used and executed only on native ARM64 WOA hardware, and not in a virtual environment.
+            WindowsPerf can be used and executed only on native ARM64 WOA hardware, and not in a virtual environment.
         answers:
             - "True"
             - "False"
