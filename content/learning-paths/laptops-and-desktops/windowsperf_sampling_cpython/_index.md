@@ -3,17 +3,17 @@ title: Sampling CPython with WindowsPerf
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers working on laptops and desktops and new to the Arm architecture.
+who_is_this_for: This is an introductory topic for developers keen to understand sampling and who are new to the Arm architecture.
 
 learning_objectives:
     - Use WindowsPerf with native Windows on Arm workload
-    - Grasp basics of sampling
-    - Explore WindowsPerf command line
+    - Understand the basics of sampling
+    - Explore the WindowsPerf command line
     - Build CPython from sources for Windows on Arm ARM64 target
 
 prerequisites:
     - Windows on Arm desktop or development machine with [WindowsPerf installed](/install-guides/wperf)
-    - Windows `x86_64` desktop machine with Visual Studio 2022 Community Edition installed.
+    - Windows x86_64 desktop machine with [Visual Studio 2022 Community Edition](https://visualstudio.microsoft.com/vs/) installed.
 
 author_primary: Przemyslaw Wirkus
 
@@ -27,7 +27,6 @@ operatingsystems:
 tools_software_languages:
     - WindowsPerf
     - Python
-    - CPython
     - perf
 
 ### FIXED, DO NOT MODIFY
