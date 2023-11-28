@@ -6,7 +6,7 @@ weight: 4
 
 ## Example 2: Using the `record` command to simplify things
 
-The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use --pe_file to let WindowsPerf know which process to spawn or after all the options to `wperf`, just type the command you would like to execute. 
+The `record` command spawns the process and pins it to the core specified by the `-c` option. You can either use --pe_file to let WindowsPerf know which process to spawn or simply add the process to spawn at the very end of the `wperf` command. 
 
 This simplifies the steps presented in the previous example.
 
