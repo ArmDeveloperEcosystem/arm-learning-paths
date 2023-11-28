@@ -18,6 +18,7 @@ sudo chmod +x /usr/local/bin/bazel
 On Ubuntu, run the following:
 
 ```console
+sudo apt update \
 sudo apt-get install \
    autoconf \
    curl \
@@ -25,6 +26,7 @@ sudo apt-get install \
    patch \
    python3-pip \
    unzip \
+   git \
    virtualenv
 ```
 
@@ -39,6 +41,7 @@ dnf install \
     libtool \
     lld \
     patch \
+    git \
     python3-pip
 ```
 
@@ -47,20 +50,22 @@ dnf install \
 For Alibaba Cloud Linux OS:
 
 ```console
-sudo yum install git llvm clang llvm-devel
+sudo yum install llvm clang llvm-devel
 git clone https://github.com/envoyproxy/envoy.git
 bazel/setup_clang.sh /usr/
 echo "build --config=clang" >> user.bazelrc
 bazel build -c opt envoy.stripped --jobs=$(nproc)
 ```
 
-On Ubuntu, we recommend using the prebuilt Clang+LLVM package from [LLVM official site](http://releases.llvm.org/download.html) . Extract the tar.xz and run the following:
+On Ubuntu, download and extract the prebuilt Clang+LLVM package from [LLVM official site](http://releases.llvm.org/download.html). Then build envoy from source as shown:
 
 ```console
-sudo apt update
-sudo apt install git 
+cd ~/
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.1/clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
+tar -xvf clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
 git clone https://github.com/envoyproxy/envoy.git
-bazel/setup_clang.sh <PATH_TO_EXTRACTED_CLANG_LLVM>
+cd envoy
+bazel/setup_clang.sh ~/clang+llvm-17.0.1-aarch64-linux-gnu
 echo "build --config=clang" >> user.bazelrc
 bazel build -c opt envoy.stripped --jobs=$(nproc)
 ```
