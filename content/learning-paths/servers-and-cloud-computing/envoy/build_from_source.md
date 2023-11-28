@@ -1,75 +1,81 @@
 ---
-title: "Build Envoy from source"
+title: "Run Envoy as a service"
 weight: 3
 layout: "learningpathall"
 ---
 
-## Building Envoy with Bazel
+### Run Envoy as a service
 
-On Linux, run the following commands:
+You will need to either create a config file or use a sample config to run Envoy as a service. 
 
+Shown here are the contents of a sample config file `config-http.yaml`:
 ```console
-sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-$([ $(uname -m) = "aarch64" ] && echo "arm64" || echo "amd64")
-sudo chmod +x /usr/local/bin/bazel
+static_resources:
+  listeners:
+  - address:
+      socket_address:
+        address: 0.0.0.0
+        port_value: 80
+    filter_chains:
+    - filters:
+      - name: envoy.filters.network.http_connection_manager
+        typed_config:
+          '@type': type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+          codec_type: AUTO
+          stat_prefix: ingress_http
+          route_config:
+            name: test
+            virtual_hosts:
+            - name: direct_response_service
+              domains:
+              - "*"
+              routes:
+              - match:
+                  prefix: "/"
+                direct_response:
+                  status: 200
+                  body:
+                    inline_string: "[arm] hello world\n"
+          http_filters:
+          - name: envoy.filters.http.cors
+            typed_config:
+              '@type': type.googleapis.com/envoy.extensions.filters.http.cors.v3.Cors
+          - name: envoy.filters.http.rbac
+            typed_config:
+              '@type': type.googleapis.com/envoy.extensions.filters.http.rbac.v3.RBAC
+          - name: envoy.filters.http.local_ratelimit
+            typed_config:
+              '@type': type.googleapis.com/envoy.extensions.filters.http.local_ratelimit.v3.LocalRateLimit
+              stat_prefix: http_local_rate_limiter
+          - name: envoy.filters.http.fault
+            typed_config:
+              '@type': type.googleapis.com/envoy.extensions.filters.http.fault.v3.HTTPFault
+          - name: envoy.filters.http.router
+            typed_config:
+              '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 ```
 
-## Install external dependencies
-
-On Ubuntu, run the following:
+One sample command to run Envoy service:
 
 ```console
-sudo apt update \
-sudo apt-get install \
-   autoconf \
-   curl \
-   libtool \
-   patch \
-   python3-pip \
-   unzip \
-   git \
-   virtualenv
-```
+nohup bin/envoy-static.stripped -c configs/config-http.yaml --concurrency 16 > /dev/null &
 
-On Fedora (maybe also other red hat distros), run the following:
+Where:
+-c <string>,  --config-path <string>
+        Path to configuration file
+--concurrency <uint32_t>
+        # of worker threads to run
+```
 
 ```console
-dnf install \
-    aspell-en \
-    libatomic \
-    libstdc++ \
-    libstdc++-static \
-    libtool \
-    lld \
-    patch \
-    git \
-    python3-pip
+curl  localhost
 ```
 
-### Build envoy from the source code
+The output from this command will look similar to:
 
-For Alibaba Cloud Linux OS:
-
-```console
-sudo yum install llvm clang llvm-devel
-git clone https://github.com/envoyproxy/envoy.git
-bazel/setup_clang.sh /usr/
-echo "build --config=clang" >> user.bazelrc
-bazel build -c opt envoy.stripped --jobs=$(nproc)
+```output
+[arm] hello world
 ```
 
-On Ubuntu, download and extract the prebuilt Clang+LLVM package from [LLVM official site](http://releases.llvm.org/download.html). Then build envoy from source as shown:
+Envoy is now running.
 
-```console
-cd ~/
-wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.1/clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
-tar -xvf clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
-git clone https://github.com/envoyproxy/envoy.git
-cd envoy
-bazel/setup_clang.sh ~/clang+llvm-17.0.1-aarch64-linux-gnu
-echo "build --config=clang" >> user.bazelrc
-bazel build -c opt envoy.stripped --jobs=$(nproc)
-```
-
-### Envoy Documentation
-
-For more Envoy build documentations, you can refer to [Building Envoy with Bazel](https://github.com/envoyproxy/envoy/blob/main/bazel/README.md) and [Envoy Building](https://www.envoyproxy.io/docs/envoy/latest/start/building)
