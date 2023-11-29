@@ -184,7 +184,7 @@ server {
 }
 ```
 
-Create a symbolic link to enable the Nginx configuration, remove the default configuation and then restart and check the status of Nginx.
+Create a symbolic link to enable the Nginx configuration, remove the default configuration and then restart and check the status of Nginx.
 
 
 ```bash

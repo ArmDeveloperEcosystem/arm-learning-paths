@@ -35,7 +35,7 @@ Follow and run the steps below:
 bazel build -c opt --copt="-fprofile-generate=/path/to/stage2/profiles" --cxxopt="-fprofile-generate=/path/to/stage2/profiles" --linkopt="-fprofile-generate=/path/to/stage2/profiles"  envoy --jobs=$(nproc)
 ```
 2. Generate profiles:
-Run the envoy built by the step 1 with your target test cases. When the test fininshed, run the following command to kill the envoy services:
+Run the envoy built by the step 1 with your target test cases. When the test finished, run the following command to kill the envoy services:
 
 ```console
 sudo pkill -2 envoy
