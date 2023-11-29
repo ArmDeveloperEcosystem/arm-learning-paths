@@ -23,7 +23,7 @@ The default architecture is `amd64`. The `copilot` command builds the container 
 
 You can also specify an existing container image using `--image` instead of `--dockerfile`. Make sure the image is a multi-architecture image supporting both `arm64` and `amd64`.
 
-While you are waiting for the command to complete you can look in your AWS account and see the resources created in AWS S3, CloudFormation, and ECS.
+While you are waiting for the command to complete, you can look in your AWS account and see the resources created in AWS S3, CloudFormation, and ECS.
 
 When the `copilot` command completes, the URL of the load balancer is printed.
 

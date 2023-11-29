@@ -9,19 +9,16 @@ layout: "learningpathall"
 
 You can use Copilot to run containers on Fargate’s serverless compute with Graviton2 processors and benefit from improved price performance. 
 
-Graviton is not the default for Copilot, but read on to find out how to set the architecture to Arm.
+Graviton2 is not the default for Copilot, but read on to find out how to set the architecture to Arm.
 
 # Before you begin
 
-You will need Docker and Copilot on your local computer to try the steps in this Learning Path.
+This guide is applicable to both Linux and macOS users.
 
-Your local computer can be Linux or macOS.
+Before starting, ensure you have Docker and Copilot installed on your computer.
+For Docker installation, refer to the [Docker install guide](https://learn.arm.com/install-guides/docker/).
 
-There are plenty of places to find Docker installation instructions. One option is the [Docker install guide](https://learn.arm.com/install-guides/docker/).
-
-You will also need an AWS account. 
-
-To create an account, go to https://aws.amazon.com and click on **Create an AWS Account** in the top right corner. Follow the instructions to register. See the [Creating an AWS account documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.
+You will also need an AWS account, which you can create at https://aws.amazon.com. (Click on **Create an AWS Account** in the top right corner. Follow the instructions to register. See the [Creating an AWS account documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.)
 
 Make sure to configure your access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. Refer to [AWS Credentials](https://learn.arm.com/install-guides/aws_access_keys/) for a quick summary of how to run `aws configure`. The install guide also covers how to install the AWS CLI. Make a note of the AWS region you set with `aws configure` so you can see the resources created by Copilot in the AWS console.
 
