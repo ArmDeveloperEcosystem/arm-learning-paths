@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 You will need to either create a config file or use a sample config to run Envoy as a service. 
 
-Using a file editor of your choce,  copy the contents below into a sample config file `configs/config-http.yaml`:
+Using a file editor of your choice,  copy the contents below into a sample config file `configs/config-http.yaml`:
 ```console
 static_resources:
   listeners:
