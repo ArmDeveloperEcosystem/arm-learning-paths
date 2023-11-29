@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 ## Before you begin
-Independently the kind of Arm machine you use, the instructions of this
+Independent of the kind of Arm machine you use, the instructions for this
 learning paths are going to be the same.
 You need to login via SSH to your remote server or open a terminal on your
 local machine.
-The instructions of this learning path are for Ubuntu 22.04 LTS.
+The instructions for this learning path are for Ubuntu 22.04 LTS.
 
 ## Install a different version of Python (optional)
 Ubuntu 22.04 offers pre-installed Python 3.10 binaries. You can use the default
@@ -55,7 +55,7 @@ Use Control-D or type `exit()` to exit Python.
 {{% notice Note %}}
 At the time of writing the latest version of Python is 3.12. Before using the
 latest version of Python, please check if the dependencies that you need are
-supported. In this case TensorFlow and PyTorch don't provide packages for
+supported. For example, TensorFlow and PyTorch don't provide packages for
 Python 3.12 yet.
 {{% /notice %}}
 
@@ -72,22 +72,22 @@ python3.11 -m venv venv
 source venv/bin/activate
 ```
 
-The prompt of your terminal has `(venv)` as prefix and this means the virtual
+The prompt of your terminal has `(venv)` as a prefix and this means that the virtual
 environment is now active. From this point on, you will run all the commands inside your virtual environment.
 
 ## Install Python dependencies
-With the active virtual environment, you now install the Python dependencies:
+With the active virtual environment, you can now install the Python dependencies:
 
 ```bash
 pip install keras-core tensorflow torch jax[cpu]
 ```
 
 {{% notice Note %}}
-When installing you notice that pip is downloading aarch64 packages like
+When installing you will see that pip is downloading aarch64 packages like
 `torch-2.1.0-cp311-cp311-manylinux2014_aarch64.whl` or
 `jaxlib-0.4.20-cp311-cp311-manylinux2014_aarch64.whl`. This means that there is
-no need for a compilation as their providers do it for you. This is where you
-see what version of Python they support: `cp311` means CPython 3.11.
+no need for any compilation as their providers will do it for you. This is also where you
+can see what version of Python they support: `cp311` means CPython 3.11.
 {{% /notice %}}
 
 After the installation, verify that you have the right packages installed:
@@ -95,7 +95,7 @@ After the installation, verify that you have the right packages installed:
 ```bash
 pip list
 ```
-The output should look similar to (versions might change, some dependencies
+The output should look similar to (versions might change, some dependencies may be
 omitted):
 
 ```output
@@ -125,7 +125,7 @@ wrapt                        1.14.1
 ```
 
 {{% notice Note %}}
-Whenever you are in the virtual environment, it is enough just to type
-`python` (without appending any version) as it points to the Python binary used
+Whenever you are in the virtual environment, it is ok to just type
+`python` (without appending any version) as it always points to the Python binary used
 to create the virtual environment.
 {{% /notice %}}
