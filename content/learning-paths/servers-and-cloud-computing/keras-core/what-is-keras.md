@@ -141,7 +141,7 @@ model.compile(
 )
 ```
 
-The compile step is the same for both the functional and the sequential API.
+The compile step is the same for both the functional and the sequential APIs.
 
 ### Datasets
 
