@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Create the script
+## Creating the script
 
 Now that you have an overview of every single step in the ML pipeline and you
 have all the dependencies installed, you are ready to run the full script.
@@ -56,7 +56,7 @@ prediction = model.predict(x_test)
 print(prediction[0])
 ```
 
-## Run the script
+## Running the script
 
 Run the script:
 
@@ -116,7 +116,7 @@ Finally, try the JAX backend:
 KERAS_BACKEND="jax" python ml.py
 ```
 
-You will see JAX as the backend:
+You will now see JAX as the backend:
 
 ```ouput
 Using JAX backend.
@@ -135,5 +135,5 @@ Test accuracy: 0.95169997215271
 Even if the backend changes, the accuracy is always about 
 ~0.95 and the predictions are consistent. 
 
-When you run it with different backends you might notice a difference in execution speed.
+When you run it with different backends, you might notice a difference in execution speeds.
 
