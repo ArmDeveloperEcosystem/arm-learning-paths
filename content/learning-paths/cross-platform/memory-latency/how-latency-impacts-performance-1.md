@@ -7,25 +7,23 @@ layout: learningpathall
 ---
 
 {{% notice Note %}}
-The results you see will likely be different than those in the sample output. The processor and system you use impact the results, but the learning is useful for any Arm processor.
+The results you will see are likely to be different than those in the sample output. The processor and system you use impact the results, but the learning is useful for any Arm processor.
 {{% /notice %}}
 
-We have the explanation of latency, we have the numbers, we know we have to "reduce the latencies" in our code, but that is still too vague, how can we do that exactly?
-You can learn more about how to reduce latency in applications by studying example software. 
+We have the explanation about latency, we have the numbers and we know we have to "reduce the latencies" in our code, but how can we do that exactly?
+You can learn more about how to reduce latency in applications by studying the example software below. 
 
-Latency impacts software in multiple ways. In user interface, mouse clicks and movements may have a time lag. In CPU processing, an image processing filter may too long to complete. In applications, a word processor make take too long to save or load files from disk. In games, multi-player games may have a lag when many players are online at the same time.
+Latency impacts software in multiple ways. In user interfaces, mouse clicks and movements may have a time lag. In CPU processing, an image processing filter may take too long to complete. In applications, a word processor make take too long to save or load files from disk. In games, multi-player games may have a lag when many players are online at the same time.
 
-Some of these latency problems are difficult to solve without a substantial restructuring of the application or even replacing the hardware. However, some latency issues are caused software and algorithmic decisions. These problems can often be fixed without replacing hardware. 
+Some of these latency problems are difficult to solve without a substantial restructuring of the application or even replacing the hardware. However, some latency issues are caused by software and algorithmic decisions. These problems can often be fixed without replacing the hardware. 
 
-Below is an example of a software application which can be improved by changes to the software algorithm. 
-
-Below is an example C program that demonstrates the general problem of latency. 
+Below is an example of a software application which can be improved by changes to the software algorithm and where the example C program demonstrates the general problem of latency. 
 
 The program creates a large number of C linked list nodes in a loop for later use. These might be graph objects in an ML application or texture element objects in a 3D game. 
 
-Assume these objects are created on the fly, so memory has to be allocated for them at runtime using a `malloc()` function. 
+Assume these objects are created on the fly, so memory has to be allocated for them at runtime using the `malloc()` function. 
 
-You can measure the time it takes to loop and create the objects. Because the loop count is large, you can get a good idea of the average time to allocate nodes. 
+You can measure the time it takes to loop and create the objects. Because the loop count is large, you get a good idea of the average time to allocate nodes. 
 
 Use a text editor to copy the code below into a file named `memory-latency1.c`
 
@@ -88,7 +86,7 @@ int main() {
 }
 ```
 
-You need a C compiler to build the code examples, GCC or Clang can be used. The examples show `gcc` but `clang` can be substituted in any of the commands. 
+You need a C compiler to build the code examples (GCC or Clang can be used). The examples below were built with `gcc` but `clang` can be substituted in any of the commands. 
 
 Compile the code using GCC:
 
@@ -114,7 +112,7 @@ You can use `perf` to understand where the time is spend.
 
 If you don't have `perf` installed or need help to configure your computer to run `perf` refer to the [Perf for Linux on Arm install guide](/install-guides/perf/).
 
-We first run `sudo perf record ./memory-latency1` to gather the profiling information. It's a simple program so the output is small. Afterwards we get the profiling output with `sudo perf report`:
+We first run `sudo perf record ./memory-latency1` to gather the profiling information. It's a simple program so the output is small. Afterwards we get the profiling output with `sudo perf report`.
 
 Run the application again with `perf` using:
 
