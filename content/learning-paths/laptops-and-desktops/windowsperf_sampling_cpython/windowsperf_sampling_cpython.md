@@ -95,14 +95,14 @@ Note: switching to '1ff81c0cb67215694f084e51c4d35ae53b9f5cf9'.
 
 #### Build CPython from sources
 
-The folder cpython\PCBuild contains the build.bat script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
+The folder cpython\PCbuild contains the build.bat script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
 
 {{% notice Note %}}
 Make sure you are using `Developer Command Prompt for VS 2022`.
 {{% /notice %}}
 
 ```console
-cd PCBuild
+cd PCbuild
 build.bat -d -p ARM64
 ```
 The output will be similar to:
@@ -148,7 +148,7 @@ You will now move to a Windows on Arm (ARM64) native machine and perform the fol
     mkdir LearningPath
     ```
 
-2. Copy the PCBuild\arm64 directory from your x86_64 build machine to the LearningPath directory on your ARM64 machine.
+2. Copy the PCbuild\arm64 directory from your x86_64 build machine to the LearningPath directory on your ARM64 machine.
 
 {{% notice Note %}}
 You can use the Remote Desktop to copy a whole directory between two Windows machines with Ctrl+C / Ctrl+V.
@@ -162,7 +162,7 @@ You can use the Remote Desktop to copy a whole directory between two Windows mac
     LearningPath
     |
     ├───Lib
-    └───PCBuild
+    └───PCbuild
         └───arm64
     ```
 
@@ -171,7 +171,7 @@ You can use the Remote Desktop to copy a whole directory between two Windows mac
 On your Windows ARM64 machine, open a command prompt and run:
 
 ```console
-cd LearningPath\PCPuild\arm64
+cd LearningPath\PCbuild\arm64
 python_d.exe
 ```
 You should see CPython being invoked in interactive mode:
