@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    Developers looking to learn more about containers on AWS may be interested in Amazon Elastic Kubernetes Service (EKS) 
+    For developers interested in deepening their knowledge of container orchestration on AWS, exploring Amazon Elastic Kubernetes Service (EKS) is a logical next step. EKS offers a more robust environment for managing complex containerized applications, supporting multi-architecture setups including Graviton processors. This knowledge will be beneficial in scaling and managing larger, more complex containerized systems.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/eks-multi-arch/"

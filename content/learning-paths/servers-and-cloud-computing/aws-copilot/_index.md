@@ -1,5 +1,5 @@
 ---
-title: Use AWS Graviton processors on AWS Fargate with Copilot
+title: How to use AWS Graviton processors on AWS Fargate with Copilot
 
 minutes_to_complete: 45
 
