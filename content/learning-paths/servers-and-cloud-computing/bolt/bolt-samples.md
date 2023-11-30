@@ -32,7 +32,7 @@ Perf outputs total samples taken and the size of the `perf.data` file
 `perf2bolt` converts the profile into a BOLT data format. For sample data `perf2bolt` finds all instruction pointers in the profile, maps them back to the executable assembly and keeps outputs a count of how many times each assembly instruction was sampled.
 
 ```bash { target="ubuntu:latest" }
-perf2bolt -p perf.data -o perf.fdata ./executable -nl
+perf2bolt -p perf.data -o perf.fdata -nl ./executable
 ```
 
 Output from `perf2bolt`, it has read all 9957 samples and created `perf.fdata`.

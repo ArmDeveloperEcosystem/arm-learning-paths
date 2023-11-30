@@ -10,6 +10,8 @@ layout: learningpathall
 
 Steps to optimise executable with BOLT using Perf ETM
 
+### Collect Perf Samples
+
 Run your executable in the normal use case and collect a ETM performance profile. This will output a `perf.data` file containing the profile and will be used to optimise the executable.
 
 Record ETM while running executable
@@ -24,6 +26,8 @@ Perf writes records to `perf.data`
 [ perf record: Woken up 10 times to write data ]
 [ perf record: Captured and wrote 1.254 MB perf.data ]
 ```
+
+### Convert Profile into BOLT format
 
 `perf2bolt` converts the profile into a BOLT data format. For ETM data `perf2bolt` finds all branches pointers in the profile, maps them back to the executable assembly and keeps outputs a count of how many times each assembly branch was taken.
 
@@ -67,6 +71,8 @@ PERF2BOLT: parsing memory events...
 PERF2BOLT: processing branch events...
 PERF2BOLT: wrote 401 objects and 0 memory objects to perf.fdata
 ```
+
+### Generate Optimised Executable
 
 The final step is to generate a new executable using the `perf.fdata`.
 

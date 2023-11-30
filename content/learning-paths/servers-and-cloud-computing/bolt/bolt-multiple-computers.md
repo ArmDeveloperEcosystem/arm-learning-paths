@@ -45,7 +45,7 @@ drwxrwxr-x 14 username username    4096 Nov 28 11:09 ../
 ```
 
 ```bash { target="ubuntu:latest" }
-perf2bolt -p perf.data -o perf.fdata ./executable -nl
+perf2bolt -p perf.data -o perf.fdata -nl ./executable
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 

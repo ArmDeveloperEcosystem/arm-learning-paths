@@ -39,9 +39,9 @@ perf record -e cycles:u -o perf3.data -- ./executable ghi
 Convert to `.fdata` format
 
 ```bash { target="ubuntu:latest" }
-perf2bolt -p perf1.data -o perf1.fdata ./executable -nl
-perf2bolt -p perf2.data -o perf2.fdata ./executable -nl
-perf2bolt -p perf3.data -o perf3.fdata ./executable -nl
+perf2bolt -p perf1.data -o perf1.fdata -nl ./executable
+perf2bolt -p perf2.data -o perf2.fdata -nl ./executable
+perf2bolt -p perf3.data -o perf3.fdata -nl ./executable
 ```
 
 Combine `.fdata`
