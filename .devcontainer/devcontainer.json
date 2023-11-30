@@ -1,9 +1,7 @@
 {
     "name": "Arm Learning Paths",
 
-    "build": {
-        "dockerfile": "Dockerfile"
-    },
+    "image": "armswdev/learn-dev-container"
 
     "forwardPorts": [1313],
 
