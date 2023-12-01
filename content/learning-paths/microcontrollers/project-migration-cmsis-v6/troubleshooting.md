@@ -73,6 +73,21 @@ As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, 
    | TTY@ITM           | TTY (API):ITM              |
    | TTY@User          | TTY (API):Custom           |
 
-   {{% notice Note %}}
-   All CMSIS-Compiler components require CMSIS-Compiler:Core to be present.
-   {{% /notice %}}
+{{% notice Note %}}
+All CMSIS-Compiler components require CMSIS-Compiler:Core to be present.
+{{% /notice %}}
+
+### Linker errors using the RTX5 library
+
+In CMSIS v5, the RTX5 libraries were built using the compiler options `-fshort-enums` and `-fshort-wchar`. In CMSIS v6, the default compiler options are different. If you are using the new libraries with old build settings, you will encounter the linker error `L6242W`:
+
+```
+.\Blinky.axf: Error: L6242E: Cannot link object Itx timer.o as its attributes are incompatible with the image attributes.
+   ... wchart-16 clashes with wchart-32.
+   ... packed-enum clashes with enum_is_int
+```
+
+{{% notice Resolution %}}
+In µVision, go to **Project - Options for Target** and click on the **C/C++ (AC6)** tab. Unselect **Short enums/wchar** and rebuild the project:  
+![Unselect short enums/wchar](./compiler_settings.png)
+{{% /notice %}}
