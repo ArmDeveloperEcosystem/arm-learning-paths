@@ -150,3 +150,25 @@ BOLT-INFO: patched build-id (flipped last bit)
 ```
 
 This outputs the new optimised executable `new_executable`.
+
+### Using ETM AutoFDO
+
+ETM AutoFDO is an perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files. 
+
+```bash { target="ubuntu:latest" }
+perf record -e cs_etm/@tmc_etr0,autofdo/u -o perf.data -- ./executable
+```
+
+```output
+[ perf record: Woken up 1 times to write data ]
+[ perf record: Captured and wrote 0.021 MB perf.data ]
+```
+
+The output shows that much less data was written to `perf.data` for the same executable
+
+The BOLT steps are the same as ETM above.
+
+```bash { target="ubuntu:latest" }
+perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
+llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
+```
