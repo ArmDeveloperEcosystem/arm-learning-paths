@@ -17,7 +17,7 @@ Run your executable in the normal use case and collect a ETM performance profile
 Record ETM while running executable
 
 ```bash { target="ubuntu:latest" }
-perf record -e cs_etm/@tmc_etr0/u -o perf.data -- ./executable
+perf record -e cs_etm//u -o perf.data -- ./executable
 ```
 
 Perf writes records to `perf.data`
@@ -156,7 +156,7 @@ This outputs the new optimised executable `new_executable`.
 ETM AutoFDO is an perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files. 
 
 ```bash { target="ubuntu:latest" }
-perf record -e cs_etm/@tmc_etr0,autofdo/u -o perf.data -- ./executable
+perf record -e cs_etm/autofdo/u -o perf.data -- ./executable
 ```
 
 ```output

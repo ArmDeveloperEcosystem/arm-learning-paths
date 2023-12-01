@@ -38,7 +38,7 @@ See this [guide](/install-guides/bolt) for installing BOLT.
 
 ### Verify Perf Record
 
-This guide describes 3 different methods of collecting a profile that can be used with BOLT. Below are sections on how to verify you can collect each of these methods on your Linux Arm target system. If you can't collect a profile update your Linux kernel to 4.20 or later and update Perf using the [Perf](/install-guides/perf/) guide to 4.20.
+This guide describes 3 different methods of collecting a profile that can be used with BOLT. Below are sections on how to verify you can collect each of these methods on your Linux Arm target system. If you can't collect a profile update your Linux kernel to 5.15 or later and update Perf using the [Perf](/install-guides/perf/) guide to 5.15.
 
 The sections below help you verify you can collect a performance profile for each method.
 
@@ -80,10 +80,10 @@ cs_etm/autofdo/    [Kernel PMU event]
 
 If ETM is not found you will need to build a version of perf with Arm Coresight enabled. See https://docs.kernel.org/trace/coresight/coresight-perf.html
 
-If `cs_etm/autofdo/` isn't found you will need to update the Linux Kernel and perf to 4.20 or later.
+If `cs_etm/autofdo/` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
 
 ```bash { target="ubuntu:latest" }
-perf record -e cs_etm/@tmc_etr0,autofdo/u -- echo "Hello World"
+perf record -e cs_etm/autofdo/u -- echo "Hello World"
 perf report -D | grep "CoreSight ETM"
 ```
 
@@ -105,7 +105,7 @@ $ perf list | grep arm_spe
 arm_spe_0//        [Kernel PMU event]
 ```
 
-If `arm_spe` isn't found you will need to update the Linux Kernel and perf to 4.20 or later.
+If `arm_spe` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
 
 ```bash { target="ubuntu:latest" }
 perf record -e arm_spe/branch_filter=1/u -- echo "Hello World"

@@ -13,9 +13,9 @@ learning_objectives:
     - Create an optimised executable using BOLT
 
 prerequisites:
-    - An Arm based system running Linux. Preferably the Linux Kernel needs to be 4.20 or later for all the perf options to work. Earlier versions can be used but you will be limited to what you record.
+    - An Arm based system running Linux. Preferably the Linux Kernel needs to be 5.15 or later for all the perf options to work. Earlier versions can be used but you will be limited to what you record.
     - An install of [BOLT](/install-guides/bolt/)
-    - An install of [Perf](/install-guides/perf/) preferably 4.20 or later
+    - An install of [Perf](/install-guides/perf/) preferably 5.15 or later
     - (Optional) A more powerful Linux build system
 
 author_primary: Jonathan Davies
