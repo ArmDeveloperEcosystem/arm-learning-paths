@@ -3,6 +3,9 @@
 ### Include vendor name where appropriate
 title: CMSIS-Build
 
+# cbuild is now part of CMSIS Toolbox making this obsolete
+draft: true 
+
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - cbuild

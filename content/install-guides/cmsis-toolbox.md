@@ -57,13 +57,13 @@ If `cmake` is earlier than 3.25.2, or `ninja` is earlier than 1.10.2, you will n
 #### cmake
 ```command
 sudo apt remove -y cmake
-sudo snap install cmake
+sudo snap install cmake --classic
 ```
 #### ninja
 ```command
 sudo apt remove -y ninja-build
 wget http://mirror.archlinuxarm.org/aarch64/extra/ninja-1.11.1-3-aarch64.pkg.tar.xz
-tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz
+sudo tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz -C /
 ```
 
 ## Download 
@@ -71,7 +71,7 @@ tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz
 Download and unpack the latest install file from GitHub. Downloads are provided in the [Releases area](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) of the repository.
 
 ```console
-wget https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases/download/2.0.0/cmsis-toolbox-linux-arm64.tar.gz
+wget https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases/download/2.2.0/cmsis-toolbox-linux-arm64.tar.gz
 tar -xf cmsis-toolbox-linux-arm64.tar.gz
 ```
 
@@ -141,7 +141,7 @@ cbuild Hello.Release+AVH.cprj
 ```
 The build will proceed and generate an executable image:
 ```output
-info cbuild: Build Invocation 2.0.0 (C) 2023 Arm Ltd. and Contributors
+info cbuild: Build Invocation 2.2.0 (C) 2023 Arm Ltd. and Contributors
 
 M650: Command completed successfully.
 
