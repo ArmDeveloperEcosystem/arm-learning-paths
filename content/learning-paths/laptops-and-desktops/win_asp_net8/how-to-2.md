@@ -62,9 +62,9 @@ To access Swagger, type http://localhost:<port>/swagger in the web browser’s a
 
 Now, expand the **POST** section and click the **Try it out** button. The caption of this button will change to **Cancel**, and the **isActive** drop-down list becomes active. Set **isActive** to false, and then click **Execute**:
 
-![fig2](figures/04.png)
+![fig4](figures/04.png)
 
-This action sends the **POST** request to **IoTController** and disables the emulator. So, all subsequent **GET** calls to **IoTController** return the last known sensor reading (which is the final reading generated before disabling the emulator). When you set isActive back to true and send the GET request to the web server, you will see the temperature setting update.
+This action sends the **POST** request to **IoTController** and disables the emulator. So, all subsequent **GET** calls to **IoTController** return the last known sensor reading (which is the final reading generated before disabling the emulator). When you set **isActive** back to true and send the **GET** request to the web server, you will see the temperature setting update.
 
 ## Summary
 This learning path demonstrated using ASP.NET Core to implement a web API server for headless IoT apps running on Windows 11 on Arm. It visualized how the web server can retrieve simulated sensor readings from a temperature sensor emulator. It also showed how to control the emulator through a web server. Finally, it demonstrated using dependency injection in ASP.NET Core and Swagger to test a web API. ASP.NET Core is cross-platform, allowing you to use a similar approach to run web servers on non-Windows platforms.
