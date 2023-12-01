@@ -10,9 +10,9 @@ layout: learningpathall
 
 ### Which record method should I use?
 
-If you can record ETM on your Arm Computer you should use that. It will generate branch samples that can't be recorded with Samples or SPE and will get maximum performance gains. If ETM is unavailable use SPE and then Samples.
+If you can record ETM on your Arm Linux system you should use that. It will generate branch samples that can't be recorded with Samples or SPE and will get maximum performance gains. If ETM is unavailable use SPE and then Samples.
 
-### What can I do about the larged perf.data files ETM generates?
+### What can I do about the large perf.data files ETM generates?
 
 You can use ETM AutoFDO that records small slices of ETM trace and will output much smaller files compared to ETM over the same time. Otherwise you can use SPE or Samples although SPE also generates large files.
 

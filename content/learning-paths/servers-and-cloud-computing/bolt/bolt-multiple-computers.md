@@ -1,18 +1,18 @@
 ---
-title: BOLT with Multiple Computers
+title: BOLT with Multiple Systems
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## BOLT with Multiple Computers
+## BOLT with Multiple Systems
 
-Steps to optimise executable with BOLT using multeple computers. In this example we are using 2 computers, Arm Computer is a Arm Linux computer and BOLT Computer is a Linux Computer.
+Steps to optimise executable with BOLT using multiple systems. In this example we are using 2 systems, an Arm Linux target system and a Linux build system for running BOLT.
 
 ### Collect Perf Samples
 
-This is performed on the Arm Computer.
+This is performed on the Arm target system.
 
 Record samples while running executable
 
@@ -20,16 +20,16 @@ Record samples while running executable
 perf record -e cycles:u -o perf.data -- ./executable
 ```
 
-Copy `perf.data` amd `executable` to the BOLT Computer using `scp`. You will need to replace `BOLT-COMPUTER` & `/path/to/bolt/work-area` with BOLT Computer hostname & work area path respectively.
+Copy `perf.data` amd `executable` to the build system using `scp`. You will need to replace `BUILD-SYSTEM` & `/path/to/bolt/work-area` with the build system hostname & work area path respectively.
 
 ```bash { target="ubuntu:latest" }
-scp perf.data BOLT-COMPUTER:/path/to/bolt/work-area
-scp executable BOLT-COMPUTER:/path/to/bolt/work-area
+scp perf.data BUILD-SYSTEM:/path/to/bolt/work-area
+scp executable BUILD-SYSTEM:/path/to/bolt/work-area
 ```
 
 ### Convert Profile and Generate Optimised Executable
 
-This is performed on the BOLT Computer.
+This is performed on the build system.
 
 Verify that `perf.data` and `executable` have been copied.
 
@@ -49,16 +49,16 @@ perf2bolt -p perf.data -o perf.fdata -nl ./executable
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
-This will generate the new executable and it will need to be copied back to the Arm Computer so it can be run.
+This will generate the new executable and it will need to be copied back to the target system so it can be run.
 
 ### Run New Executable
 
-This is run from the Arm Computer
+This is run from the target system
 
-Copy `new_executable` to the Arm Computer. You will need to replace `BOLT-COMPUTER` & `/path/to/bolt/work-area/new_executable` with BOLT Computer hostname & path to new_executable respectively.
+Copy `new_executable` to the target system. You will need to replace `BUILD-SYSTEM` & `/path/to/bolt/work-area/new_executable` with the build system hostname & path to new_executable respectively.
 
 ```bash { target="ubuntu:latest" }
-scp BOLT-COMPUTER:/path/to/bolt/work-area/new_executable .
+scp BUILD-SYSTEM:/path/to/bolt/work-area/new_executable .
 ```
 
 Verify that `new_executable` has been copied.
