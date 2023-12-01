@@ -85,9 +85,12 @@ Check Hugo is installed correctly and check the version by running this command:
 ```bash
 hugo version
 ```
-Run hugo to launch a development version of website on your machine.
+
+Navigate into the `arm-learning-paths` folder and run hugo to launch a
+development version of website on your machine.
 
 ```bash
+cd arm-learning-paths
 hugo server
 ```
 
@@ -158,9 +161,11 @@ There are a number of good options for text editors if you don't have a full Lin
 
 To use Visual Studio Code in the browser on your remote Linux server check the install information for [OpenVSCode Server](/install-guides/openvscode-server/) and [VS Code Tunnels](/install-guides/vscode-tunnels/)
 
-Run hugo to launch a development version of website on your machine.
+Navigate into the `arm-learning-paths` folder and run hugo to launch a
+development version of website on your machine.
 
 ```bash
+cd arm-learning-paths
 hugo server
 ```
 

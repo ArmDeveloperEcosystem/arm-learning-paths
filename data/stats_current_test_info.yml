@@ -1,9 +1,13 @@
 summary:
-  content_total: 178
-  content_with_all_tests_passing: 32
-  content_with_tests_enabled: 32
+  content_total: 189
+  content_with_all_tests_passing: 33
+  content_with_tests_enabled: 33
 sw_categories:
   cross-platform:
+    dynamic-memory-allocator:
+      readable_title: Write a Dynamic Memory Allocator
+      tests_and_status:
+      - ubuntu:latest: passed
     intrinsics:
       readable_title: Porting architecture specific intrinsics
       tests_and_status:

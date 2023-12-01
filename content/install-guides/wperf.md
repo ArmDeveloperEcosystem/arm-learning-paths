@@ -57,15 +57,15 @@ https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
 To download directly from command prompt, use:
 
 ```console
-mkdir windowsperf-bin-3.2.0
-cd windowsperf-bin-3.2.0
-curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.2.0/windowsperf-bin-3.2.0.zip --output windowsperf-bin-3.2.0.zip
+mkdir windowsperf-bin-3.2.1
+cd windowsperf-bin-3.2.1
+curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.2.1/windowsperf-bin-3.2.1.zip --output windowsperf-bin-3.2.1.zip
 ```
 
 Unzip the package:
 
 ```console
-tar -xmf windowsperf-bin-3.2.0.zip
+tar -xmf windowsperf-bin-3.2.1.zip
 ```
 
 ## Install wperf driver
@@ -80,7 +80,7 @@ Open a `Windows Command Prompt` terminal with `Run as administrator` enabled.
 
 Navigate to the `windowsperf-bin-<version>` directory.
 ```command
-cd windowsperf-bin-3.2.0
+cd windowsperf-bin-3.2.1
 ```
 
 ### Install with devcon {#devcon}
@@ -130,15 +130,52 @@ Once the above driver is installed, you can use `wperf` without `Administrator` 
 For example:
 ```command
 cd ..
-wperf -version
+wperf --version
 ```
 You should see output similar to:
 ```output
 Component     Version  GitVer
 =========     =======  ======
-wperf         3.2.0    a947eed8
-wperf-driver  3.2.0    a947eed8
+wperf         3.2.1    c831cfc2
+wperf-driver  3.2.1    c831cfc2
 ```
+
+## Uninstall wperf driver
+
+You can uninstall (aka "remove") the kernel driver using either the Visual Studio [devcon](#devcon) utility or the supplied [installer](#devgen).
+
+{{% notice  Note%}}
+You must uninstall the driver as `Administrator`.
+{{% /notice %}}
+
+### Uninstall with devcon {#devcon}
+
+Below command removes the device from the device tree and deletes the device stack for the device. As a result of these actions, child devices are removed from the device tree and the drivers that support the device are unloaded. See [DevCon Remove](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon-remove) article for more details.
+
+```command
+devcon remove wperf-driver.inf Root\WPERFDRIVER
+```
+You should see output similar to:
+```output
+ROOT\SYSTEM\0001                                            : Removed
+1 device(s) were removed.
+```
+
+### Uninstall with wperf-devgen {#devgen}
+
+```command
+wperf-devgen uninstall
+```
+You should see output similar to:
+```console
+Executing command: uninstall.
+Uninstall requested.
+Waiting for device creation...
+Device uninstalled successfully.
+Trying to remove driver <path>\wperf-driver.inf.
+Driver removed successfully.
+```
+
 ## Further reading
 
 [Announcing WindowsPerf: Open-source performance analysis tool for Windows on Arm](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf)

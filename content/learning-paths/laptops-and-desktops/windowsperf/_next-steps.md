@@ -20,6 +20,18 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf
         type: blog
     - resource:
+        title: WindowsPerf release 2.4.0 introduces the first stable version of sampling model support
+        link: https://www.linaro.org/blog/windowsperf-release-2-4-0-introduces-the-first-stable-version-of-sampling-model-support/
+        type: blog
+    - resource:
+        title: WindowsPerf Release 2.5.1
+        link: https://www.linaro.org/blog/windowsperf-release-2-5-1/
+        type: blog
+    - resource:
+        title: WindowsPerf Release 3.0.0
+        link: https://www.linaro.org/blog/windowsperf-release-3-0-0/
+        type: blog
+    - resource:
         title: Windows on Arm overview
         link: https://learn.microsoft.com/en-us/windows/arm/overview
         type: website
