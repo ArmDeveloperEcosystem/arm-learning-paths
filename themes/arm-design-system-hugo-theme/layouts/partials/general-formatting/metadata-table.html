@@ -122,7 +122,7 @@ Called from:
                             Last updated:
                         </td>
                         <td id="last-updated" class="td-metadata-value">                    
-                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{partial "server-side-processing/update-update-time.html" .}}
+                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }} {{/* No need to use this, only singe page: {{partial "server-side-processing/update-update-time.html" .}}  */}}
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}
