@@ -10,7 +10,7 @@ layout: learningpathall
 In this section, you will deploy the Docker container from the Azure Container Registry to the Azure Container Instances. First, you must configure the Azure Container Registry to enable an Admin account. The Azure Container Instance requires the latter. 
 
 ### Deployment
-Under the Azure Portal, open the Cloud Shell. To do so, click a Cloud Shell icon located in the top right corner of the Azure Portal (refer to the first part of this learning series for detailed instruction):
+Under the Azure Portal, open the Cloud Shell. To do so, click a Cloud Shell icon located in the top right corner of the Azure Portal:
 
 ![Azure#left](figures/09.png)
 
