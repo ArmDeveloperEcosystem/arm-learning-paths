@@ -1,8 +1,6 @@
 ---
 title: Learn how to optimise an executable with BOLT
 
-draft: false
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to use BOLT on an Arm executable
