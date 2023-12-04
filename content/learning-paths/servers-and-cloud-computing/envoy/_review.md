@@ -21,15 +21,7 @@ review:
         explanation: >        
             Envoy can be installed from the package manager or built from source.
 
-    - questions:
-        question: >
-            Envoy is written in Java.
-        answers:
-            - "True"
-            - "False"
-        correct_answer: 2                     
-        explanation: >
-            Envoy is primarily written in C++ programming language.
+
                     
 
 # ================================================================================
