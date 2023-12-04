@@ -5,15 +5,13 @@ minutes_to_complete: 45
 
 who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy applications to Azure Kubernetes Cluster powered by arm64-based virtual machines.
 
-This learning path is the fourth part of the series: From IoT to the Cloud.
-
 learning_objectives: 
     - Create Kubernetes cluster using Azure Kubernetes Service.
     - Deploy a containerized application to Azure Kubernetes Service.
 
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
-    - 'Ideally you should have completed previous learning path of this series.'
+    - 'Complete the [first](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) and [second](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part2) learning paths of this series.'
   
 author_primary: Dawid Borycki
 
