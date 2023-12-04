@@ -3,9 +3,7 @@ title: 'Deploy a containerized application using Azure Container Instances'
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is dedicated developers interested in learning how to create and run a Docker container in Microsoft Azure using Azure Container Instances.
-
-This learning path is the third part of the series: From IoT to the Cloud.
+who_is_this_for: This is an introductory topic for developers interested in learning how to create and run a Docker container in Microsoft Azure using Azure Container Instances.
 
 learning_objectives: 
     - Create Azure Container Instances.
@@ -14,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'
-    - 'Ideally you should have completed previous learning paths of this series.'  
+    - 'Complete the [first learning path](/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part1) of this series.'  
 
 author_primary: Dawid Borycki
 
