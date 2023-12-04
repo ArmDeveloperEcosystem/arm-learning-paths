@@ -6,8 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Objective
-In this step, you will adjust the Dockerfile, and then build the Docker image.
+In this section you will modify the Dockerfile and then build the Docker image.
 
 ### Modify a Dockerfile
 We need to modify the following line in the Dockerfile (in Visual Studio Code) 
