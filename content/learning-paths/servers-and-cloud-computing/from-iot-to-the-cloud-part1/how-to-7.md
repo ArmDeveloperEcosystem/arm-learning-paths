@@ -6,8 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-## Objective
-We’ve learned how to containerize the application. In the next step, we will push the Docker image to Azure Container Registry. Before we can push the image, we need to create the container registry in Azure.
+You have learned how to containerize the application. In this next step, you will push the Docker image to Azure Container Registry. Before you can push the image, you need to create the container registry in Azure.
 
 ### Creating the container registry in Azure
 To create the Azure Container Registry we will uze the Azure Command Line Interface (Azure CLI):
