@@ -3,11 +3,9 @@ title: 'Use infrastructure as code and Pulumi to provision Azure resources'
 
 minutes_to_complete: 30
 
-who_is_this_for: 'This learning path is dedicated developers interested in learning how to automate their cloud deployments using the Infrastructure as Code (IaC). 
+who_is_this_for: 'This is an introductory topic for developers interested in learning how to automate their cloud deployments using the Infrastructure as Code (IaC). 
 
 This learning path explains how to use IaC and Pulumi to automate the deployment of all Azure resources required to deploy a containerized application to Azure Container Instance.
-
-This learning path is the fifth part of the series: From IoT to the Cloud.'
 
 learning_objectives: 
     - Set up Pulumi for IaC.
