@@ -56,7 +56,30 @@ Optimise executable with `combined.fdata`
 llvm-bolt ./executable -o ./new_executable -data combined.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
-### How do I verify BOLT has optimised my executable?
+### How do I verify BOLT optimised my executable?
+
+The easiest way to check is look at the names of the sections in the new executable because BOLT adds a few new sections with bolt in the name.
+
+```bash { target="ubuntu:latest" }
+objdump -h ./new_executable | grep bolt
+```
+
+```output
+ 12 .bolt.org.text 0000243c  0000000000000a80  0000000000000a80  00000a80  2**3
+ 15 .bolt.org.eh_frame_hdr 00000184  00000000000034c8  00000000000034c8  000034c8  2**2
+ 16 .bolt.org.eh_frame 0000056c  0000000000003650  0000000000003650  00003650  2**3
+ 30 .note.bolt_info 000000b0  0000000000000000  0000000000000000  00404bfc  2**0
+```
+
+These new sections show that BOLT has changed the new executable.
+
+Check the original executable to see that these sections didn't exist there before.
+
+```bash { target="ubuntu:latest" }
+objdump -h ./executable | grep bolt
+```
+
+### How do I check if the new BOLT executable has improved performance?
 
 You can check if it takes less time to run. This is fine for applications which run for some time, performing some operations and then exit but if it is a service and is just waiting for new input there are other methods check it has been improved.
 
