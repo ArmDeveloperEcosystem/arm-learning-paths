@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to benchmark .NET applications. You might be interested in learning how to use .NET for the cross-platform development. Also, you might be interested in learning how to natively compile Windows on Arm applications using the LLVM toolchain.
+   You have learned how to benchmark .NET applications. You might be interested in learning how to build a Windows on Arm native application with the .NET framework
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/laptops-and-desktops/llvm_putty"
+recommended_path: "/learning-paths/laptops-and-desktops/win_net"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
