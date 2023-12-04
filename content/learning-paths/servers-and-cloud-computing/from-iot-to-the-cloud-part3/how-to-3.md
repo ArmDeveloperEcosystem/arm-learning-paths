@@ -18,7 +18,7 @@ To connect to the cluster, proceed as follows:
 az aks get-credentials -g rg-arm64 -n aks-people
 ```
 
-The command responds with the following message
+You should see the following output from this command:
 
 ![AKS#left](figures/09.png)
 
