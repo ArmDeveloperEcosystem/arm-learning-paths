@@ -6,7 +6,7 @@ layout: "learningpathall"
 
 ###  Envoy Deployment Tuning by THP
 
-Transparent Huge Pages (THP) in Linux is a feature that automatically utilizes larger memory pages (typically 2 MB) to improve memory management efficiency for large-scale applications. It reduces the overhead associated with managing numerous small pages, enhancing TLB efficiency. Applying THP to envoy can result in a 18% enhancement in performance.
+Transparent Huge Pages (THP) in Linux is a feature that automatically utilizes larger memory pages (typically 2 MB) to improve memory management efficiency for large-scale applications. It reduces the overhead associated with managing numerous small pages, enhancing TLB efficiency. Applying THP to Envoy can result in an 18% enhancement in performance.
 
 Use the information below as general guidance to tune Envoy by THP.
 
@@ -32,7 +32,7 @@ sudo apt-get update
 sudo apt-get install libhugetlbfs-dev libhugetlbfs-bin
 ```
 
-### Enable hugetlbfs and THP
+### Enable `hugetlbfs` and THP
 
 Use the commands shown to enable `hugetlbfs` and THP:
 
@@ -54,7 +54,7 @@ LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libhugetlbfs.so HUGETLB_MORECORE=thp  nohu
 
 ### Enable THP on Alibaba Cloud Linux
 
-For Alibaba Cloud Linux, the above scripts are unnecessary; instead, execute the following command:
+For Alibaba Cloud Linux, the above scripts are unnecessary. Instead, execute the following command:
 
 ```console
 echo 3 > /sys/kernel/mm/transparent_hugepage/hugetext_enabled
