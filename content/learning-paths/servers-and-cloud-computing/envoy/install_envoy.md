@@ -18,7 +18,7 @@ In this section you will learn about different options to install, configure and
 
 ### Arm deployment options
 
-There are numerous ways to deploy Envoy on Arm: bare metal, cloud VMs, or the various Envoy services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
+There are numerous ways to deploy Envoy on Arm: bare metal, cloud VMs, or the various Envoy services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue with installation options.
 
 * Arm Cloud VMs
   * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp) learning path
@@ -33,7 +33,7 @@ There are numerous ways to deploy Envoy on Arm: bare metal, cloud VMs, or the va
 
 ### Envoy installation options
 
-You can install Envoy in a few different ways. The recommended ways are to download the latest Envoy [binary](https://github.com/envoyproxy/envoy/releases) for your target Arm platform or build it from [source](/learning-paths/servers-and-cloud-computing/envoy/build_from_source). You can follow the steps in this section to build envoy from source.
+You can install Envoy in a few different ways. The recommended ways are to download the latest Envoy [binary](https://github.com/envoyproxy/envoy/releases) for your target Arm platform or build it from source. You can follow the steps in this section to build envoy from source.
 
 ## Install Bazel
 
