@@ -100,6 +100,10 @@ sw_categories:
       readable_title: Run x265 (H.265 codec) on Arm servers
       tests_and_status:
       - ubuntu:latest: passed
+    flink:
+      readable_title: Test the performance of Flink on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
     geekbench:
       readable_title: Get started with Geekbench on Arm
       tests_and_status:
