@@ -6,8 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Objective
-In this part, you will learn how to create a Docker image for the People.WebApp. Then, you will learn how to push this image to the Azure Container Registry. So, later, it can be deployed to various cloud services. To complete this part we will use the Windows on Arm device. Alternatively you can use the VM you created in previous steps.
+In this section, you will learn how to create a Docker image for the People.WebApp. Then, you will learn how to push this image to the Azure Container Registry. This image can then be deployed to various cloud services. To complete this part we will use the Windows on Arm device. Alternatively you can use the VM you created in previous steps.
 
 ### Application source code
 Start by opening a new Command Prompt window, and then type:
