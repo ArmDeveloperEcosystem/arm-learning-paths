@@ -63,7 +63,7 @@ perf report -D | grep PERF_RECORD_SAMPLE
 193348947030600 0x538 [0x28]: PERF_RECORD_SAMPLE(IP, 0x2): 10871/10871: 0xffffb173d2bc period: 127212 addr: 0
 ```
 
-#### Embedded Trace Macrocell (ETM)
+#### Embedded Trace Macrocell (ETM) {#etm} 
 
 ETM is an Arm real-time trace module providing instruction and data tracing.
 
@@ -91,7 +91,7 @@ perf report -D | grep "CoreSight ETM"
 . ... CoreSight ETMV4I Trace data: size 0x30 bytes
 ```
 
-#### Statistical Profiling Extension (SPE)
+#### Statistical Profiling Extension (SPE) {#spe}
 
 The Statistical Profiling Extension provides a statistical view of the performance characteristics of executed instructions.
 

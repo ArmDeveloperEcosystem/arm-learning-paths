@@ -10,6 +10,25 @@ layout: learningpathall
 
 Steps to optimise executable with BOLT using Perf ETM
 
+### Introduction
+
+ETM is an Arm real-time trace module providing instruction and data tracing. 
+
+```bash { target="ubuntu:latest" }
+$ perf list | grep cs_etm
+```
+
+```output
+cs_etm//           [Kernel PMU event]
+cs_etm/autofdo/    [Kernel PMU event]
+```
+
+If ETM is not found you will need to build a version of perf with Arm Coresight enabled. See https://docs.kernel.org/trace/coresight/coresight-perf.html
+
+If `cs_etm/autofdo/` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
+
+See [Embedded Trace Macrocell](../before-you-begin/#etm) section for more details.
+
 ### Collect Perf Samples
 
 Run your executable in the normal use case and collect a ETM performance profile. This will output a `perf.data` file containing the profile and will be used to optimise the executable.

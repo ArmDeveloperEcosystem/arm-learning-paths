@@ -10,6 +10,24 @@ layout: learningpathall
 
 Steps to optimise executable with BOLT using Perf SPE
 
+### Introduction
+
+The Statistical Profiling Extension provides a statistical view of the performance characteristics of executed instructions.
+
+Verify SPE is in the list of perf events
+
+```bash { target="ubuntu:latest" }
+$ perf list | grep arm_spe
+```
+
+```output
+arm_spe_0//        [Kernel PMU event]
+```
+
+If `arm_spe` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
+
+See [Statistical Profiling Extension](../before-you-begin/#spe) section for more details.
+
 ### Collect Perf Samples
 
 Run your executable in the normal use case and collect a SPE performance profile. This will output a `perf.data` file containing the profile and will be used to optimise the executable.
