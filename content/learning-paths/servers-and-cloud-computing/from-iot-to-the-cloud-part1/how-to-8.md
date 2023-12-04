@@ -6,8 +6,7 @@ weight: 9
 layout: learningpathall
 ---
 
-## Objective
-You will now push the local Docker image to the registry, you created in Azure.
+You will now push the local Docker image to the registry you created in Azure.
 
 ### Pushing the local image to Azure
 Start by opening the WSL console, where you type
@@ -54,7 +53,7 @@ To confirm the image was pushed, type:
 az acr repository show -n people --repository people.webapp -o table
 ```
 
-The above commands are summarized in the figure below:
+The output from the commands above is shown here:
 ![command prompt#left](figures/23.png "Figure 23. Pushing a Docker image to the Azure Container Registry")
 
 ## Summary
