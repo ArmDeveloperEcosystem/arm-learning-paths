@@ -88,4 +88,4 @@ The Dockerfile includes several other instructions:
 4. **RUN** to execute commands inside the building image,
 5. **ENTRYPOINT** to indicate the container entry point, which is the command to perform when the container is created and run.
 
-In the above example, the Dockerfile will use **dotnet build** and **dotnet publish** commands from the .NET SDK to build an application from the source code and prepare the binaries. Note that the last command, dotnet People.WebApp.dll, is equivalent to dotnet run, which we used in the first part of this series.
+In the above example, the Dockerfile will use **dotnet build** and **dotnet publish** commands from the .NET SDK to build an application from the source code and prepare the binaries. Note that the last command, dotnet People.WebApp.dll, is equivalent to dotnet run, which we used in the first section of this learning path.
