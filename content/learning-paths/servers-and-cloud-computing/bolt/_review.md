@@ -4,12 +4,12 @@ review:
         question: >
             Why do you need to compile your executable with additional flags?
         answers:
-            - BOLT needs the compiler to do no optimisation itself
+            - BOLT needs the compiler to do no optimization itself
             - BOLT prefers to be linked with relocations
             - Speed up compile time
         correct_answer: 2
         explanation: >
-            An executable containing helps it get maximum performance gains.
+            An executable containing relocations helps it get maximum performance gains.
 
     - questions:
         question: >

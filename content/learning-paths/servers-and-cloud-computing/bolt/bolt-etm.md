@@ -1,5 +1,5 @@
 ---
-title: BOLT with ETM
+title: Use BOLT with ETM
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,53 +8,36 @@ layout: learningpathall
 
 ## BOLT with ETM
 
-Steps to optimise executable with BOLT using Perf ETM
+The steps to optimize an executable with BOLT using Perf ETM are below.
 
-### Introduction
+### Collect Perf data with ETM 
 
-ETM is an Arm real-time trace module providing instruction and data tracing. 
+Run your executable in the normal use case and collect an ETM performance profile. This will output a `perf.data` file containing the profile and will be used to optimize the executable.
 
-```bash { target="ubuntu:latest" }
-$ perf list | grep cs_etm
-```
-
-```output
-cs_etm//           [Kernel PMU event]
-cs_etm/autofdo/    [Kernel PMU event]
-```
-
-If ETM is not found you will need to build a version of perf with Arm Coresight enabled. See https://docs.kernel.org/trace/coresight/coresight-perf.html
-
-If `cs_etm/autofdo/` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
-
-See [Embedded Trace Macrocell](../before-you-begin/#etm) section for more details.
-
-### Collect Perf Samples
-
-Run your executable in the normal use case and collect a ETM performance profile. This will output a `perf.data` file containing the profile and will be used to optimise the executable.
-
-Record ETM while running executable
+Record ETM while running your application. Substitute the actual name of your application for `executable`:
 
 ```bash { target="ubuntu:latest" }
 perf record -e cs_etm//u -o perf.data -- ./executable
 ```
 
-Perf writes records to `perf.data`
+Perf prints the total number of samples and the size of the `perf.data` file:
 
 ```output
 [ perf record: Woken up 10 times to write data ]
 [ perf record: Captured and wrote 1.254 MB perf.data ]
 ```
 
-### Convert Profile into BOLT format
+### Convert the Profile into BOLT format
 
-`perf2bolt` converts the profile into a BOLT data format. For ETM data `perf2bolt` finds all branches pointers in the profile, maps them back to the executable assembly and keeps outputs a count of how many times each assembly branch was taken.
+`perf2bolt` converts the profile into a BOLT data format. For the given sample data, `perf2bolt` finds all instruction pointers in the profile, maps them back to the assembly instructions, and outputs a count of how many times each assembly instruction was sampled.
+
+If you application is named `executable`, run the command below to convert the profile data:
 
 ```bash { target="ubuntu:latest" }
 perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
 ```
 
-Output from `perf2bolt`, it has read 2366 samples and 151118 Last Branch Records and created `perf.fdata`.
+Below is example output from `perf2bolt`, it has read all samples and created the file `perf.fdata`.
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
@@ -91,15 +74,17 @@ PERF2BOLT: processing branch events...
 PERF2BOLT: wrote 401 objects and 0 memory objects to perf.fdata
 ```
 
-### Generate Optimised Executable
+### Run BOLT to generate the optimized executable
 
 The final step is to generate a new executable using the `perf.fdata`.
+
+To run BOLT use the command below and substitute the name of your application:
 
 ```bash { target="ubuntu:latest" }
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
-Output from `llvm-bolt`, it describes the executable stats before & after optimisation.
+The output from `llvm-bolt` describes the executable stats before and after optimization:
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
@@ -168,15 +153,19 @@ BOLT-INFO: setting __hot_end to 0x4014b0
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-This outputs the new optimised executable `new_executable`.
+The optimized executable is now available as `new_executable`. 
 
 ### Using ETM AutoFDO
 
-ETM AutoFDO is an perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files. 
+ETM AutoFDO is a Linux perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files. 
+
+Record with AutoFDO while running your application. Substitute the actual name of your application for `executable`:
 
 ```bash { target="ubuntu:latest" }
 perf record -e cs_etm/autofdo/u -o perf.data -- ./executable
 ```
+
+Perf prints the total number of samples and the size of the `perf.data` file:
 
 ```output
 [ perf record: Woken up 1 times to write data ]
@@ -185,9 +174,11 @@ perf record -e cs_etm/autofdo/u -o perf.data -- ./executable
 
 The output shows that much less data was written to `perf.data` for the same executable
 
-The BOLT steps are the same as ETM above.
+The BOLT steps are the same as ETM case shown above.
 
 ```bash { target="ubuntu:latest" }
 perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
+
+The optimized executable is now available as `new_executable`. 
