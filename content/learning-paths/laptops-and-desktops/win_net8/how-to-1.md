@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-When you think about .NET, you will typically consider Windows applications. However, .NET is a cross-platform development framework so you can use it on Windows, Linux, and Mac. Therefore, Arm64 combined with this cross-platform capability enables you to rapidly implement efficient apps for a variety of scenarios.
+When you think about .NET, you typically consider Windows applications. However, .NET is a cross-platform development framework so you can use it on Windows, Linux, and Macs. Therefore, Arm64 combined with this cross-platform capability enables you to rapidly implement efficient apps for a variety of scenarios.
 
 Here, we show you how to set up your development environment for .NET as well as how much performance boost you get by using Arm64.
 
