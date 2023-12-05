@@ -1,57 +1,80 @@
 ---
-title: Before You Begin
+title: Prepare your BOLT environment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Before You Begin
+## Before You begin
+
+Before you begin you will need to:
+- Decide if you want to do everything on a single Linux system or use two systems
+- Investigate the options available to collect performance information
+- Review your compiler flags 
 
 ### Linux Systems
 
 Collecting a performance profile needs to be performed on an Arm Linux system. BOLT can be run on the same system or it can be installed and run on a different Linux system which has more resources.
 
+The system used to run the application and profile performance is called the target system. The system used to build the application and run BOLT is called the build system. 
+
 #### Single System
 
-An Arm Linux system can build executable, collect performance profile and run BOLT optimisation steps.
+A single Arm Linux system can build your executable, collect the performance profile, and run the BOLT optimization steps. The same system can be the build and the target system.
+
+This is a good option if the Arm Linux system is a server or cloud instance with good performance and adequate memory. 
 
 #### Multiple Systems
 
-2 Systems are required
-- An Arm Linux target system to collect performance profile
-- A Linux build system to build the executable and run the BOLT tool
+If the target system has limited performance, you can use different build and target systems.
+
+In this case, you will need two systems: 
+- An Arm Linux system to collect performance profiles (target system)
+- Another Linux system to build the executable and run BOLT optimization (build system)
 
 ##### Build Executable
 
-If your build system is also Arm you can compile the executable and copy to the target system to collect the performance profile.
+If your build system uses the Arm architecture, you can compile the executable and copy it to the target system to collect the performance profile.
 
-If you are not compiling your executable on Arm you will need to cross compile and then copy the executable to the target system for profiling. See this guide on [Cross Compiling](/install-guides/gcc/cross/)
+If your build system uses a a different architecture, you will need to cross compile and copy the executable to the target system. 
 
-##### Build & Run BOLT
+##### Build and run BOLT
 
-BOLT should be build for the native architecture of the build system. It will still be able to optimise an Arm executable even if the native architecture is not AArch64.
+BOLT should be installed for the native architecture of the build system. BOLT can optimize an Arm executable even if the architecture of the build machine is not Arm.
 
-Once you have a profile it can be copied to the build system with BOLT and the BOLT conversion & optimisation steps run.
+Once you have a profile, it can be copied to the build system with BOLT and you can run the BOLT conversion and optimization steps.
 
-See this [guide](/install-guides/bolt) for installing BOLT.
+See the [BOLT install guide](/install-guides/bolt) for information about installing BOLT.
 
-### Verify Perf Record
+### Verify Perf record
 
-This guide describes 3 different methods of collecting a profile that can be used with BOLT. Below are sections on how to verify you can collect each of these methods on your Linux Arm target system. If you can't collect a profile update your Linux kernel to 5.15 or later and update Perf using the [Perf](/install-guides/perf/) guide to 5.15.
+There are three different methods of collecting a profile that can be used with BOLT. 
 
-The sections below help you verify you can collect a performance profile for each method.
+You need to determine which methods are available on your Arm Linux target system. 
+
+If some of the methods don't work, you can try to update your Linux kernel to 5.15 or later and update Linux Perf using the [Perf install guide](/install-guides/perf/) to 5.15.
+
+{{% notice Note %}}
+Linux kernel configuration and hypervisor settings may impact your ability to collect performance profiles.
+{{% /notice %}}
+
+Use the information below to verify which methods work on your target system. 
 
 #### Cycle Samples
 
-Collects a sample record every CPU cycle. 
+This method collects a sample record every CPU cycle. 
 
-Verify you can record samples and check the `perf.data` contains `PERF_RECORD_SAMPLE` sections.
+Verify you can record samples and check the `perf.data` file contains `PERF_RECORD_SAMPLE` sections.
+
+To confirm this method works run:
 
 ```bash { target="ubuntu:latest" }
 perf record -e cycles:u -- echo "Hello World"
 perf report -D | grep PERF_RECORD_SAMPLE
 ```
+
+If you see similar output, it means you can collect cycle samples.
 
 ```output
 193348946860440 0x3c8 [0x28]: PERF_RECORD_SAMPLE(IP, 0x1): 10871/10871: 0xffff8000813b4f34 period: 1 addr: 0
@@ -67,11 +90,13 @@ perf report -D | grep PERF_RECORD_SAMPLE
 
 ETM is an Arm real-time trace module providing instruction and data tracing.
 
-Verify ETM is in the list of perf events
+To check if ETM is available on your target system run: 
 
 ```bash { target="ubuntu:latest" }
-$ perf list | grep cs_etm
+perf list | grep cs_etm
 ```
+
+If you see similar output, it means ETM is available. 
 
 ```output
 cs_etm//           [Kernel PMU event]
@@ -80,12 +105,18 @@ cs_etm/autofdo/    [Kernel PMU event]
 
 If ETM is not found you will need to build a version of perf with Arm Coresight enabled. See https://docs.kernel.org/trace/coresight/coresight-perf.html
 
+AutoFDO is an alternative way to collect ETM data with small data sizes. 
+
 If `cs_etm/autofdo/` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
+
+To confirm AutoFDO is working run:
 
 ```bash { target="ubuntu:latest" }
 perf record -e cs_etm/autofdo/u -- echo "Hello World"
 perf report -D | grep "CoreSight ETM"
 ```
+
+The output should contain text similar to:
 
 ```output
 . ... CoreSight ETMV4I Trace data: size 0x30 bytes
@@ -95,11 +126,13 @@ perf report -D | grep "CoreSight ETM"
 
 The Statistical Profiling Extension provides a statistical view of the performance characteristics of executed instructions.
 
-Verify SPE is in the list of perf events
+Verify SPE is in the list of perf events by running:
 
 ```bash { target="ubuntu:latest" }
-$ perf list | grep arm_spe
+perf list | grep arm_spe
 ```
+
+If you see similar output, it means SPE is available. 
 
 ```output
 arm_spe_0//        [Kernel PMU event]
@@ -107,32 +140,38 @@ arm_spe_0//        [Kernel PMU event]
 
 If `arm_spe` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
 
+To confirm SPE is working run:
+
 ```bash { target="ubuntu:latest" }
 perf record -e arm_spe/branch_filter=1/u -- echo "Hello World"
 perf report -D | grep "ARM SPE"
 ```
 
+The output should contain text similar to:
+
 ```output
 . ... ARM SPE data: size 0xc80 bytes
 ```
 
-### Build Executable
+### Check the compiler flags to get ready for BOLT
 
 BOLT works by rearranging both functions and code within functions to move hot code closer together and reduce memory overhead.
 
-To do this the binary needs atleast an unstripped symbol table and prefers being linked with relocations which can be enabled with the linker flag `--emit-relocs`. This flag should be used to get maximum performance gains.
+To do this, the binary needs at least an unstripped symbol table and prefers being linked with relocations which can be enabled with the linker flag `--emit-relocs`. This flag should be used to get maximum performance gains.
 
-BOLT is also incompatiable with the GCC flag `-freorder-blocks-and-partition` which is enabled by default in GCC version 8. This can be avoided by adding the flag `-fno-reorder-blocks-and-partition`.
+BOLT is incompatible with the GCC flag `-freorder-blocks-and-partition` which is enabled by default in GCC version 8. This can be avoided by adding the flag `-fno-reorder-blocks-and-partition`.
 
-The executable will be used when collecting profile information and passed into BOLT to optimise it.
+The executable will be used when collecting profile information and passed into BOLT to optimize it.
 
-GCC
+Below is a summary of the flags to use for both GCC and Clang.
+
+For GCC:
 
 ```bash
 gcc <args> -Wl,--emit-relocs -fno-reorder-blocks-and-partition
 ```
 
-Clang
+For Clang:
 
 ```bash
 clang <args> -Wl,--emit-relocs

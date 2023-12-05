@@ -1,41 +1,43 @@
 ---
-title: BOLT with Samples
+title: Use BOLT with Samples
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## BOLT with Samples
+## BOLT with Perf samples
 
-Steps to optimise executable with BOLT using Perf Samples
+The steps to optimize an executable with BOLT using Perf samples is below.
 
-### Collect Perf Samples
+### Collect Perf samples
 
-Run your executable in the normal use case and collect a samples performance profile. This will output a `perf.data` file containing the profile and will be used to optimise the executable.
+Run your executable in the normal use case and collect a samples performance profile. This will output a `perf.data` file containing the profile which will be used to optimize the executable.
 
-Record samples while running executable
+Record samples while running your application. Substitute the actual name of your application for `executable`:
 
 ```bash { target="ubuntu:latest" }
 perf record -e cycles:u -o perf.data -- ./executable
 ```
 
-Perf outputs total samples taken and the size of the `perf.data` file
+Perf prints the total number of samples and the size of the `perf.data` file:
 
 ```output
 [ perf record: Woken up 2 times to write data ]
 [ perf record: Captured and wrote 0.381 MB perf.data (9957 samples) ]
 ```
 
-### Convert Profile into BOLT format
+### Convert the profile into BOLT format
 
-`perf2bolt` converts the profile into a BOLT data format. For sample data `perf2bolt` finds all instruction pointers in the profile, maps them back to the executable assembly and keeps outputs a count of how many times each assembly instruction was sampled.
+`perf2bolt` converts the profile into a BOLT data format. For the given sample data, `perf2bolt` finds all instruction pointers in the profile, maps them back to the assembly instructions, and outputs a count of how many times each assembly instruction was sampled.
+
+If you application is named `executable`, run the command below to convert the profile data:
 
 ```bash { target="ubuntu:latest" }
 perf2bolt -p perf.data -o perf.fdata -nl ./executable
 ```
 
-Output from `perf2bolt`, it has read all 9957 samples and created `perf.fdata`.
+Below is example output from `perf2bolt`, it has read all samples and created the file `perf.fdata`.
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
@@ -69,15 +71,17 @@ PERF2BOLT: out of range samples recorded in unknown regions: 7 (0.1%)
 PERF2BOLT: wrote 321 objects and 0 memory objects to perf.fdata
 ```
 
-### Generate Optimised Executable
+### Run BOLT to generate the optimized executable
 
-The final step is to generate a new executable using the `perf.fdata`.
+The final step is to generate a new executable using `perf.fdata`.
+
+To run BOLT use the command below and substitute the name of your application:
 
 ```bash { target="ubuntu:latest" }
 llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
 ```
 
-Output from `llvm-bolt`, it describes the executable stats before & after optimisation.
+The output from `llvm-bolt` describes the executable stats before and after optimization:
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
@@ -146,4 +150,4 @@ BOLT-INFO: setting __hot_end to 0x400d88
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-This outputs the new optimised executable `new_executable`.
+The optimized executable is now available as `new_executable`. 

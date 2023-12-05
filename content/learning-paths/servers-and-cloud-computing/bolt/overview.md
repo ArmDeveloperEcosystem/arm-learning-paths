@@ -1,20 +1,22 @@
 ---
-title: Overview
+title: Overview of the BOLT optimization process
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+[BOLT](https://github.com/llvm/llvm-project/blob/main/bolt/README.md) is an optimization tool that uses Linux Perf data to re-order the executable code layout to reduce memory overhead and improve performance.
 
-BOLT is an optimisation tool that uses an executable performance profile to re-order the executable code layout to reduce memory overhead and improve performance.
+The BOLT optimization process is performed in three steps:
+1. Collect performance data by running the executable on an Arm Linux target system
+2. Convert the performance profile data into a new format used by BOLT
+3. Run BOLT using the converted performance profile data to optimize the target executable and save a new, optimized executable
 
-The BOLT optmisiation process is performed over a number of steps:
-1. A performanance profile is collected of the executable on an Arm Linux target system
-2. A BOLT conversion is performed on the performance profile
-3. BOLT optimises target executable using the converted performance profile and outputs an optmised executable
+After these steps are run, the optimized executable should have improved performance compared to the original executable. 
 
-After these steps have been run the optmised executable should have improved performance compared to the original executable. 
+There are different ways to collect performance profiles and different ways to convert the data for BOLT. 
 
-There are different ways of collecting a performance profile with different BOLT conversions and these steps can be run on 1 or more system. All these different ways of using BOLT are described in more detail in this guide.
+You can run everything on a single Linux computer, or you can use two Linux computers and separate the software build and running BOLT from the collection of the performance data. 
+
+The different ways of using BOLT are described in more detail in this Learning Path.
