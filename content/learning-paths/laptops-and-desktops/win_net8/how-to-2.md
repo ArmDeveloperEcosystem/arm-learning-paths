@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ### Objective
-In this section you will learn how to implement and use custom benchmarks using the **System.Diagnostics.Stopwatch** class. This is useful, if you want to measure the performance of your custom code.
+In this section you will learn how to implement and use custom benchmarks using the **System.Diagnostics.Stopwatch** class. This is useful if you want to measure the performance of your custom code.
 
 ### Application
 Start by cloning the sample [application](https://github.com/dawidborycki/Arm64.Performance.DotNet/):
@@ -18,9 +18,10 @@ git clone https://github.com/dawidborycki/Arm64.Performance.DotNet.git
 ```
 
 The application was created using **dotnet new console -o Arm64.Performance.DotNet**. Then, I added the following elements:
-1. PerformanceHelper static class, which provides reusable methods for measuring the code execution time.
-2. PerformanceTests static class, which includes the actual code for performance measurements. In this tutorial we will measure the performance of the matrix multiplication (PerformanceTests.SquareMatrixMultiplication), operations on strings like split, replace, substring (PerformanceTests.StringOperations), and list sorting (PerformanceTests.ListSorting).
-3. Program.cs file, which implements the entry point of the application. In this file you have one constant, **trialCount**, which you can use to specify how often the performance test sets execute. By default the trialCount is set to **5**. Then, the application will run ListSorting 500 times,  SquareMatrixMultiplication 10 times and StringOperations 500,000 times. This achieves comparable execution times for the test batches. A single matrix multiplication is slower than a single-string operation. So, there must be more executions of the latter.
+
+1. PerformanceHelper static class which provides reusable methods for measuring the code execution time.
+2. PerformanceTests static class which includes the actual code for performance measurements. In this tutorial we will measure the performance of the matrix multiplication (PerformanceTests.SquareMatrixMultiplication), operations on strings like split, replace, substring (PerformanceTests.StringOperations), and list sorting (PerformanceTests.ListSorting).
+3. Program.cs file which implements the entry point of the application. In this file you have one constant, `trialCount`, which you can use to specify how often the performance test sets execute. By default the trialCount is set to **5**. Then, the application will run ListSorting 500 times,  SquareMatrixMultiplication 10 times and StringOperations 500,000 times. This achieves comparable execution times for the test batches. A single matrix multiplication is slower than a single-string operation. So, there must be more executions of the latter.
 
 ### Running the application
 To run the application navigate to the **Arm64.Performance.DotNet** folder (which you cloned above), and then type:
@@ -33,7 +34,7 @@ Wait a few moments for the application to execute all the benchmarks, and you wi
 
 ![fig3](Figures/03.png)
 
-You will now compare execution times to x64 architecture (emulator on arm64) by typing
+You will now compare execution times to x64 architecture (emulator on arm64) by typing:
 
 ```
 dotnet run -c Release -a x64
