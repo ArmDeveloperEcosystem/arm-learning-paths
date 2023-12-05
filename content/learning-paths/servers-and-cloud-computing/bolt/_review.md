@@ -15,7 +15,7 @@ review:
         question: >
             Which of these perf record commands would you use to record ETM?
         answers:
-            - perf record -e cs_etm/@tmc_etr0/u
+            - perf record -e cs_etm//u
             - perf record -e cycles:u
             - perf record -e arm_spe/branch_filter=1/u
         correct_answer: 1
@@ -24,14 +24,14 @@ review:
                
     - questions:
         question: >
-            Which aggregation method should you prefer?
+            Which tool converts the performance profile to BOLT format?
         answers:
-            - Basic Aggregation
-            - Branch Aggregation
-            - Neither both perform the same
-        correct_answer: 2
+            - perf2bolt
+            - llvm-bolt
+            - perf convert
+        correct_answer: 1
         explanation: >
-            Branch Aggregation outputs more information into the .fdata file and that can improve performance gains.
+            perf2bolt converts the performance profile to BOLT format.
 
 
 # ================================================================================
