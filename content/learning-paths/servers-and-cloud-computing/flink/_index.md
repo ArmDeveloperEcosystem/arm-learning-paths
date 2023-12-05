@@ -5,7 +5,7 @@ author_primary: Ying Yu
 layout: learningpathall
 learning_objectives:
 - Install and run Flink on an Arm server
-- Benchmark Flink performance using open-source tooling
+- Benchmark the performance of Flink 
 learning_path_main_page: 'yes'
 minutes_to_complete: 30
 operatingsystems:
@@ -13,7 +13,7 @@ operatingsystems:
 prerequisites:
 - An Arm based instance from a cloud service provider.
 skilllevels: Introductory
-subjects: DataStream
+subjects: Databases
 test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
