@@ -9,11 +9,8 @@ layout: "learningpathall"
 ---
 
 
-## Preparation
+## Before you begin
 Apache Flink requires Java to run. Flink is implemented in Java and runs on the Java Virtual Machine (JVM). It leverages the Java programming language and its runtime environment to execute data processing tasks and manage distributed computations:
-
-### JAVA 11
-
 
 #### Install a Java Development Kit (JDK) 11 on your system.  
 You can download the JDK from the [official Oracle website](https://www.oracle.com/java/technologies/downloads/archive/).  
@@ -23,11 +20,13 @@ sudo apt update
 sudo apt install -y openjdk-11-jdk
 ```
 
-<!-- #### Set Java Environment Variable
+#### Set Java Environment Variable
+```bash
+export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-arm64/
+ubuntu@ip-172-16-0-174:~$ export PATH=$JAVA_HOME/bin:$PATH
 ```
-``` -->
 
-## Flink Install
+## Install Flink
 
 You can find all the versions and components on the [official Flink website](https://flink.apache.org/downloads/)
 
@@ -39,7 +38,7 @@ tar xzvf flink-1.17.2-bin-scala_2.12.tgz
 ```
 
 ### Flink Configuration
-First, you should know 2 important key words: JobManager and TaskManager  
+Before you configure Flink, you should learn about two important key words: JobManager and TaskManager  
 1. JobManager: The JobManager is responsible for coordinating and managing the execution of Flink jobs. It receives job submissions, schedules and assigns tasks to TaskManagers, coordinates checkpoints, and monitors job execution. There is typically one active JobManager in a Flink cluster, although there can be multiple standby JobManagers for high availability setups.  
 2. TaskManager: The TaskManager is responsible for executing the tasks assigned by the JobManager. Each TaskManager runs one or more task slots, which are units of resource allocation for executing individual tasks. The TaskManager manages the execution of tasks, including data ingestion, transformation, and output. Multiple TaskManagers work together to form the Flink cluster, with each TaskManager capable of running multiple tasks concurrently.
 
