@@ -8,8 +8,8 @@ weight: 3 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-What is [Nexmark](https://github.com/nexmark/nexmark)  
-Nexmark is a benchmark suite for queries over continuous data streams. This project is inspired by the [NEXMark research paper](https://web.archive.org/web/20100620010601/http://datalab.cs.pdx.edu/niagaraST/NEXMark/) and [Apache Beam Nexmark](https://beam.apache.org/documentation/sdks/java/testing/nexmark/).
+## Overview
+[Nexmark](https://github.com/nexmark/nexmark) is a benchmark suite for queries over continuous data streams. This project is inspired by the [NEXMark research paper](https://web.archive.org/web/20100620010601/http://datalab.cs.pdx.edu/niagaraST/NEXMark/) and [Apache Beam Nexmark](https://beam.apache.org/documentation/sdks/java/testing/nexmark/).
 
 ## Requirements
 The Nexmark benchmark framework runs Flink queries on [standalone cluster](https://nightlies.apache.org/flink/flink-docs-release-1.13/docs/deployment/resource-providers/standalone/overview/), see the Flink documentation for more detailed requirements and how to setup it.
@@ -17,7 +17,11 @@ The Nexmark benchmark framework runs Flink queries on [standalone cluster](https
 
 ### Software Requirements:
 - JDK 1.8.x or higher (Nexmark scripts uses some tools of JDK)
-- ssh (sshd must be running to use the Flink and Nexmark scripts that manage remote components)  
+- ssh (sshd must be running to use the Flink and Nexmark scripts that manage remote components)
+- Install Maven:
+  ```console
+  sudo apt install maven
+  ```
 
 ### Environment Variables:
 The following environment variable should be set on every node for the Flink and Nexmark scripts.
@@ -36,7 +40,6 @@ export FLINK_HOME=~/flink-benchmark/flink-1.17.2
 
 - Step-1: Git clone the latest nexmark and build it on your master node.
 ```
-mkdir ~/flink-benchmark
 cd ~/flink-benchmark
 git clone https://github.com/nexmark/nexmark.git
 mv nexmark nexmark-src
@@ -53,9 +56,9 @@ cp ~/flink-benchmark/nexmark-flink/lib/*.jar ~/flink-benchmark/flink-1.17.2/lib
 ```
 
 - Step-3: Configure Flink.
-    - Edit flink/conf/workers of the master node and enter the IP address of each worker node. Recommand to set 8 entries.
-    - Replace flink/conf/sql-client-defaults.yaml by nexmark/conf/sql-client-defaults.yaml
-    - Replace flink/conf/flink-conf.yaml by nexmark/conf/flink-conf.yaml. Remember to update the following configurations:
+    - Edit flink-1.17.2/conf/workers of the master node and enter the IP address of each worker node. Recommend to set 8 entries.
+    - Replace flink-1.17.2/conf/sql-client-defaults.yaml with nexmark-flink/conf/sql-client-defaults.yaml
+    - Copy nexmark-flink/conf/flink-conf.yaml to flink-1.17.2/conf/flink-conf.yaml. Remember to update the following configurations:
         - Set jobmanager.rpc.address to you master IP address
         - Set state.checkpoints.dir to your local file path (recommend to use SSD), e.g. file:///home/username/checkpoint.
         - Set state.backend.rocksdb.localdir to your local file path (recommend to use SSD), e.g. /home/username/rocksdb.
@@ -77,9 +80,8 @@ cp ~/flink-benchmark/nexmark-flink/conf/flink-conf.yaml ~/flink-benchmark/flink-
 ```
 
 - Step-4: Configure Nexmark benchmark.  
-  - Edit nexmark/conf/nexmark.yaml and set nexmark.metric.reporter.host to your master IP address.
+  - Edit nexmark-flink/conf/nexmark.yaml and set nexmark.metric.reporter.host to your master IP address.
 ```
-vim ~/flink-benchmark/nexmark-flink/conf/nexmark.yaml
 #set nexmark.metric.reporter.host: {JobManager_IP}
 ```
 
