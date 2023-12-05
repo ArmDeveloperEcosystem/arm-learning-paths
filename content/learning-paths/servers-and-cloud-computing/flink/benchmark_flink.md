@@ -7,18 +7,26 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
+You are now ready to benchmark Flink with Nexmark on your Arm server
+
 ## Nexmark run
-```
+To run nexmark run the following command:
+
+```console
 bash ~/flink-benchmark/nexmark-flink/bin/run_query.sh
-#or
+```
+You can also run the benchmark with additional queries:
+
+```console
 bash ~/flink-benchmark/nexmark-flink/bin/run_query.sh q1,q2
 ```
 
 
 ## View the results
 
-``` 
-root@yitian05:~/flink-benchmark/nexmark-flink/bin# ./run_query.sh q0
+The sample output from running the benchmark is shown below:
+
+```output
 Benchmark Queries: [q0]
 ==================================================================
 Start to run query q0 with workload [tps=10 M, eventsNum=100 M, percentage=bid:46,auction:3,person:1,kafkaServers:null]
