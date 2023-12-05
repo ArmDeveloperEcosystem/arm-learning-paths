@@ -21,7 +21,15 @@ review:
         explanation: >        
             Envoy can be installed from the package manager or built from source.
 
-
+    - questions:
+        question: >
+            To build Envoy from source, you'll require the Bazel build tool.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1                     
+        explanation: >        
+            Bazel is the build tool used for constructing Envoy.
                     
 
 # ================================================================================
