@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about porting cloud applications to the Arm architecture for increased performance and cost savings. The Learning Path on Hyperscan is a great next step.
+    You can continue learning about porting other cloud applications to the Arm architecture for increased performance and cost savings. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/envoy/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/"
 # Link to the next learning path being recommended.
 
 
