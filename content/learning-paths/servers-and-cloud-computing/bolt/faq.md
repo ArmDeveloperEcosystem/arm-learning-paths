@@ -24,7 +24,7 @@ You should run the executable in the way that it is usually used. If it is run i
 
 You can either find an input that covers all possible input cases. If this is not possible there are 2 other solutions. 
 
-If you know which inputs go down which path you can record profiles for multiple cases and then create an optimized executable for each case. Then when you get input you need to pick with executable to run.
+If you know which inputs go down which path you can record profiles for multiple cases and then create an optimized executable for each case. Then when you get input you need to pick which executable to run.
 
 Another solution is to collect profiles for a range of inputs, generate a `.fdata` file for each one using `perf2bolt` and then combine these `.fdata` files into one file and that can used to by BOLT.
 

@@ -20,7 +20,7 @@ Record ETM while running your application. Substitute the actual name of your ap
 perf record -e cs_etm//u -o perf.data -- ./executable
 ```
 
-Perf prints the total number of samples and the size of the `perf.data` file:
+Perf prints the size of the `perf.data` file:
 
 ```output
 [ perf record: Woken up 10 times to write data ]
@@ -29,7 +29,7 @@ Perf prints the total number of samples and the size of the `perf.data` file:
 
 ### Convert the Profile into BOLT format
 
-`perf2bolt` converts the profile into a BOLT data format. For the given sample data, `perf2bolt` finds all instruction pointers in the profile, maps them back to the assembly instructions, and outputs a count of how many times each assembly instruction was sampled.
+`perf2bolt` converts the profile into a BOLT data format. For the given sample data, `perf2bolt` finds all branch events in the profile, maps them back to the assembly instructions, and outputs a count of how many times each assembly branch was sampled.
 
 If you application is named `executable`, run the command below to convert the profile data:
 
@@ -165,7 +165,7 @@ Record with AutoFDO while running your application. Substitute the actual name o
 perf record -e cs_etm/autofdo/u -o perf.data -- ./executable
 ```
 
-Perf prints the total number of samples and the size of the `perf.data` file:
+Perf prints the size of the `perf.data` file:
 
 ```output
 [ perf record: Woken up 1 times to write data ]
