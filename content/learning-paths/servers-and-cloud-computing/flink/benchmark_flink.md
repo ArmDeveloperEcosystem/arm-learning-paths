@@ -1,7 +1,7 @@
 ---
 # User change
 title: "Benchmark Flink with nexmark-flink on Arm"
-weight: 6 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
