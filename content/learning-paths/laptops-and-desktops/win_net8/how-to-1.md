@@ -101,4 +101,4 @@ The output lists all available benchmarks. You can type * to run all benchmarks 
 
 ![fig2](Figures/02.png)
 
-By default, the table summarizes the performance test results. You can see each performance test's execution time and statistics (mean, median, minimum, maximum, and standard deviation) which gives you a comprehensive overview about code performance.
+By default, the table summarizes the performance test results. You can see each performance test's execution time and statistics (mean, median, minimum, maximum, and standard deviation) which gives you a comprehensive overview of code performance.
