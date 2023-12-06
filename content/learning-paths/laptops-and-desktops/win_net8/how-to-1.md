@@ -8,9 +8,9 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-When you think about .NET, you typically consider Windows applications. However, .NET is a cross-platform development framework so you can use it on Windows, Linux, and Macs. Therefore, Arm64 combined with this cross-platform capability enables you to rapidly implement efficient apps for a variety of scenarios.
+When you think about .NET, you typically consider Windows applications. However, .NET is a cross-platform development framework so you can use it on Windows, Linux, and macOS. Therefore, Arm64 combined with this cross-platform capability enables you to rapidly implement efficient apps for a variety of scenarios.
 
-Here, we show you how to set up your development environment for .NET as well as how much performance boost you get by using Arm64.
+In this learning path, we show you how to set up your development environment for .NET as well as how much performance boost you get by using Arm64.
 
 ## Before you begin
 Before going any further, let's make sure the .NET was correctly installed. To do this, open the command prompt, and type:
@@ -70,7 +70,7 @@ Download .NET:
   https://aka.ms/dotnet/download
 ```
 
-By default, the `dotnet` command uses the Arm64 architecture when running on an Arm64 device. However, it also recognizes that the x64 architecture is available in the **Other architectures** found list. You can use the output of the `dotnet --info` command to retrieve the list of installed .NET runtimes. Here, we have three runtimes: Microsoft.AspNetCore.App, Microsoft.NETCore.App 8.0.0, and Microsoft.WindowsDesktop.App 8.0.0.
+By default, the `dotnet` command uses the Arm64 architecture when running on an Arm64 device. However, it also recognizes that the x64 architecture is available in the **Other architectures** found list. You can use the output of the `dotnet --info` command to retrieve the list of installed .NET runtimes. In this output, we have three runtimes: Microsoft.AspNetCore.App, Microsoft.NETCore.App 8.0.0, and Microsoft.WindowsDesktop.App 8.0.0.
 
 {{% notice Note %}} The list of .NET SDKs and runtimes can differ. For example, if you have previously installed other .NET SDKs.{{% /notice %}}
 
@@ -87,7 +87,7 @@ You will now use the benchmark tests. Proceed as follows:
 git clone https://github.com/dotnet/performance.git
 ```
 
-2. Change the working directory to **performance\src\benchmarks\micro**. Then, enter the following command:
+2. Change the working directory to performance\src\benchmarks\micro. Then, enter the following command:
 
 ```
 dotnet run -c Release -f net8.0
@@ -97,7 +97,7 @@ The command will build and run the performance benchmarks. The output will look 
 
 ![fig1](Figures/01.png)
 
-The output lists all available benchmarks. You can type the * to run all benchmarks or type a number to select individual performance tests. In this example, let's type **483** to execute the Perf_Doubles benchmark. After a while you will see a summary of the performance test. A portion of this output is shown in the figure below:
+The output lists all available benchmarks. You can type * to run all benchmarks or type a number to select individual performance tests. In this example, let's type **483** to execute the Perf_Doubles benchmark. After a while you will see a summary of the performance test. A portion of this output is shown in the figure below:
 
 ![fig2](Figures/02.png)
 
