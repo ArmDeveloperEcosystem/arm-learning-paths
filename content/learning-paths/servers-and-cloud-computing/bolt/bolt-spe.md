@@ -20,7 +20,7 @@ Record samples while running your application. Substitute the actual name of you
 perf record -e arm_spe/branch_filter=1/u -o perf.data-- ./executable
 ```
 
-Perf prints the total number of samples and the size of the `perf.data` file:
+Perf prints the size of the `perf.data` file:
 
 ```output
 [ perf record: Woken up 79 times to write data ]
