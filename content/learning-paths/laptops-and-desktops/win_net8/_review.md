@@ -21,7 +21,7 @@ review:
             - "-processor"
         correct_answer: 1               
         explanation: >
-            -a is the flag you use to specify the processor architecture, e.g. dotnet run -a x64.
+            -a is the flag you use to specify the processor architecture, e.g., dotnet run -a x64.
 
     - questions:
         question: >
