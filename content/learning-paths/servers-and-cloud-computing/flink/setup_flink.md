@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Setup and Config Flink"
+title: "Setup and Configure Flink"
 
 weight: 2 # (intro is 1), 2 is first, 3 is second, etc.
 
@@ -48,6 +48,6 @@ sudo echo {TaskManager_1_IP} >> flink/conf/workers
 sudo echo {TaskManager_2_IP} >> flink/conf/workers   
 sudo echo {TaskManager_3_IP} >> flink/conf/workers   
 ```
-Replace JobManager_IP in the command above with the IP address of the JobManager in your setup. You can also use the default setting of "locahost:8081".
+Replace JobManager_IP in the command above with the IP address of the JobManager in your setup. You can also use the default setting of "localhost:8081".
 Replace TaskManager_1_IP, TaskManager_2_IP and TaskManager_3_IP in the command above with the IP addresses of the TaskManagers in your setup. You can also use localhost in place of the IP addresses.
 
