@@ -3,7 +3,7 @@ title: CMSIS-Pack Migration Guide
 
 minutes_to_complete: 10
 
-who_is_this_for: Maintainers of CMSIS-Packs with device support.
+who_is_this_for: This is an advanced topic for maintainers of CMSIS-Packs with device support.
 
 learning_objectives: 
     - Migrate a CMSIS v5-based CMSIS-Pack with device support to CMSIS v6.
@@ -13,7 +13,7 @@ prerequisites:
     - A good understanding of [CMSIS-Packs](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html).
     - A CMSIS-Pack that contains device support and was created for CMSIS v5.
 
-author_primary: Christopher Seidl, Arm
+author_primary: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
