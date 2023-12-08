@@ -1,5 +1,5 @@
 ---
-next_step_guidance: These resources help you to migrate code to Arm Compiler v6 and understand how to create a device family pack.
+next_step_guidance: A great next step is the learning path that helps you migrate your code to Arm Compiler v6 and understand how to create a device family pack.
 
 recommended_path: /learning-paths/microcontrollers/project-migration-cmsis-v6
 
