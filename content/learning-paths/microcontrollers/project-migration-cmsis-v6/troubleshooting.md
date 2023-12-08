@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Troubleshooting
 
-This section shows the most common errors and shows possible resolutions.
+This section provides an overview of the most common errors you could encounter along with possible resolutions.
 
 ### Missing device
 
