@@ -15,13 +15,13 @@ CMSIS v6 supports the following toolchains.
 - [LLVM Toolchain (v16 and above)](https://developer.arm.com/Tools%20and%20Software/LLVM%20Toolchain)
 - [IAR Embedded Workbench for Arm (v9.30 and above)](https://www.iar.com/ewarm)
 
-Before migrating your project, please make sure to use one of these toolchains. This learning path will use Arm Compiler for Embedded v6 going forward.
+Before migrating your project, please make sure to use one of these toolchains. In this learning path you will use the Arm Compiler for Embedded v6 toolchain.
 
 ## Update device support
 
-In a first step, you need to update the device support:
+To update the device support, you will need to follow the steps outlined below:
 
-- Switch from assembly based to [C-based startup files](#create-c-based-startup-code).
+- Switch from assembly based code to [C-based startup files](#create-c-based-startup-code).
 - [Create scatter files](#scatter-file-creation) to [place the stack and heap](https://developer.arm.com/documentation/101754/latest/armlink-Reference/Scatter-loading-Features/The-scatter-loading-mechanism/Placing-the-stack-and-heap-with-a-scatter-file).
 - [Update the pack](#cmsis-pack-update) with the new contents.
 
@@ -29,8 +29,8 @@ In a first step, you need to update the device support:
 
 In CMSIS v6, assembly-based startup code is deprecated. You must move your `startup_device.s` files to `startup_device.c`. This section explains the necessary steps.
 
-1. Copy the exemplary `startup_ARMCMx.c` file from the [CMSIS-DFP repo](https://github.com/ARM-software/CMSIS-DFP) into your device support repo. In this hands-on example, a Cortex-M4-based device is used (thus, the [startup_ARMCM4.c](https://github.com/ARM-software/CMSIS-DFP/blob/main/Device/ARMCM4/Source/startup_ARMCM4.c) is taken from CMSIS-DFP/Device/ARMCM4/source).
-1. Copy all the interrupt handler names and wrap them into `void handler_name (void) __attribute__ ((weak, alias("Default_Handler")));`. Place them around line 58 of the template file.
+1. Copy the `startup_ARMCMx.c` file from the [CMSIS-DFP repo](https://github.com/ARM-software/CMSIS-DFP) into your device support repo. In this example, a Cortex-M4-based device is used (thus, the [startup_ARMCM4.c](https://github.com/ARM-software/CMSIS-DFP/blob/main/Device/ARMCM4/Source/startup_ARMCM4.c) is taken from CMSIS-DFP/Device/ARMCM4/source).
+2. Copy all the interrupt handler names and wrap them into `void handler_name (void) __attribute__ ((weak, alias("Default_Handler")));`. Place them around line 58 of the template file.
 
    **Code Example**
    ```asm
@@ -137,11 +137,11 @@ In CMSIS v6, assembly-based startup code is deprecated. You must move your `star
    0,
    #endif
    ```
-6. Save your new startup_device.c file. If you have entries for stack and heap size in the assembly startup file, save these and add them in the next step to the now mandatory scatter file.
+6. Save your new `startup_device.c` file. If you have entries for stack and heap size in the assembly startup file, save these and add them in the next step to the now mandatory scatter file.
 
 ### Scatter file creation
 
-1. Copy the scatter file template from the CMSIS-DFP into your device support repo. The scatter file template for the Cortex-M4 is called [ARMCM4_ac6.sct](https://github.com/ARM-software/CMSIS_5/blob/develop/Device/ARM/ARMCM4/Source/ARM/ARMCM4_ac6.sct).
+1. Copy the scatter file template from the CMSIS-DFP repo into your device support repo. The scatter file template for the Cortex-M4 is called [ARMCM4_ac6.sct](https://github.com/ARM-software/Cortex_DFP/blob/main/Device/ARMCM4/Config/ARMCM4_ac6.sct).
 
 2. Edit the template according to your device settings. These values need to be set:
 
@@ -158,7 +158,7 @@ In CMSIS v6, assembly-based startup code is deprecated. You must move your `star
 
 ### CMSIS-Pack update
 
-1. Make the necessary changes to your PDSC file. Replace the startup_device.s file with the new startup_device.c file and add the device's scatter file as follows:
+1. Make the necessary changes to your PDSC file. Replace the `startup_device.s` file with the new `startup_device.c` file and add the device's scatter file as follows:
 
 ```xml
           <!-- startup / system / scatter files -->
