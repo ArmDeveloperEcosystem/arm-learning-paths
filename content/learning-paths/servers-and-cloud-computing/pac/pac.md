@@ -58,5 +58,5 @@ CONFIG_ARM64_PTR_AUTH=n
 
 Kernel boot parameter:
 ```
-sysctl.abi.ptrauth_disabled=1
+abi.ptrauth_disabled=1
 ```

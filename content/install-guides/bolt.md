@@ -96,9 +96,11 @@ Thread model: posix
 InstalledDir: /usr/bin
 ```
 
-You can install BOLT by building the source code or by downloading a binary release from GitHub. 
+## Install BOLT
 
-## Option 1: Download, build, and install BOLT from source code
+You can install BOLT in 2 different ways, by building the source code or by downloading a binary release from GitHub. 
+
+### Option 1: Download, build, and install BOLT from source code
 
 1. Clone the repository
 
@@ -128,7 +130,7 @@ source ~/.bashrc
 
 You are now ready to [verify BOLT is installed](#verify). 
 
-## Option 2: Download and install BOLT using a binary release
+### Option 2: Download and install BOLT using a binary release
 
 1. Download a binary release
 

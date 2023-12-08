@@ -26,4 +26,4 @@ iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
 
 When done, your user profile directory should contain a `.vcpkg` folder with all necessary files and scripts.
 
-Continue by initializing vcpkg.
+Continue by initializing `vcpkg`.
