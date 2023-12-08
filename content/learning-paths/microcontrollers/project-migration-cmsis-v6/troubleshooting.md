@@ -17,7 +17,7 @@ The following error occurs when you try to migrate a project to CMSIS v6, but yo
 ![Requested device not found for target](./Device_missing.png)
 
 {{% notice Resolution %}}
-Install [ARM.CMSIS_DFP.1.0.0.pack](https://www.keil.com/pack/ARM.CMSIS_DFP_.1.0.0.pack) or above.
+Install [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.com/pack/ARM.Cortex_DFP_.1.0.0.pack) or above.
 {{% /notice %}}
 
 ### Error instantiating RTE components
@@ -27,7 +27,7 @@ The following error occurs when you try to migrate a Keil RTX-based project, but
 ![Keil RTX5 component not available for target](./CMSIS-RTX_missing.png)
 
 {{% notice Resolution %}}
-Install [ARM.CMSIS-RTX.1.0.0.pack](https://www.keil.com/pack/ARM.CMSIS-RTX.1.0.0.pack) or above.
+Install [ARM.CMSIS-RTX.5.8.0.pack](https://www.keil.com/pack/ARM.CMSIS-RTX.5.8.0.pack) or above.
 {{% /notice %}}
 
 ### Missing software components
@@ -40,9 +40,19 @@ The following warning is shown in the Validation Output window when you try to m
 Use the **Resolve** button to select the missing component automatically.
 {{% /notice %}}
 
+### Updating configuration files
+
+Moving a component from one pack to another, has an additional implication. The Event Recorder component for example comes with a configuration file (`EventRecorderConf.h`). This configuration file is stored in the project under the RTE/*Cclass* folder. When you switch from one pack to the other, the Cclass name changes and a fresh copy of the original configuration file is copied to your project.
+
+![New configuration files](./configuration_files.png)
+
+{{% notice Resolution %}}
+Copy any edits that you made in the old configuration file into the new one.
+{{% /notice %}}
+
 ### Manual migration from Keil.ARM_Compiler pack
 
-As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, you need to deselect the old components and select the replacements from the two new packs (ARM.Compiler and ARM.CMSIS-View).
+As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, you need to deselect the old components and select the replacements from the two new packs (ARM.CMSIS-Compiler and ARM.CMSIS-View).
 
 1. Compiler:EventRecorder migration
 
@@ -91,3 +101,4 @@ In CMSIS v5, the RTX5 libraries were built using the compiler options `-fshort-e
 In µVision, go to **Project - Options for Target** and click on the **C/C++ (AC6)** tab. Unselect **Short enums/wchar** and rebuild the project:  
 ![Unselect short enums/wchar](./compiler_settings.png)
 {{% /notice %}}
+
