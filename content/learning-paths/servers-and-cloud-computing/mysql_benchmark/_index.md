@@ -1,16 +1,15 @@
 ---
-title: Learn how to benchmark MySQL with sysbench 
+title: Benchmark MySQL with Sysbench 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for performance engineers who want to benchmark MySQL with sysbench on Arm.
+who_is_this_for: This is an introductory topic for performance engineers who want to benchmark MySQL using Sysbench on Arm Linux systems.
 
 learning_objectives:
-    - run sysbench to benchmark MySQL server
+    - Run Sysbench to benchmark a MySQL database server
 
 prerequisites:
-    - two Arm servers, one for MySQL server and another one for sysbench client
-    - Ubuntu 22.04 OS installed on Arm servers
+    - Two Arm servers running Ubuntu 22.04, one for the MySQL server and another for the Sysbench client
 
 author_primary: Bolt Liu
 
@@ -22,12 +21,12 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - MySQL
-    - c/c++
+    - Sysbench
 
 test_images:
     - ubuntu:22.04
 test_link: null
-test_maintenance: true
+test_maintenance: false
 test_status:
     - passed
 

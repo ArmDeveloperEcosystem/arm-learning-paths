@@ -1,51 +1,72 @@
 ---
-title: "Setup MySQL server"
+title: "Setup, configure, and run MySQL server"
 weight: 2
 layout: "learningpathall"
 ---
 
-## About the page
-This page illustrates the steps to build, install, setup and run MySQL server. Please note the steps should be
-performed in the server side.
+You can run MySQL server on the first Arm Linux system. Ubuntu 22.04 is used, but other Linux distributions and Ubuntu versions may also work. 
 
-## Install prerequisite packages
+
+Follow the instructions below to build, install, configure, and run MySQL server. 
+
+This system is called the server.
+
+You will need at least 100 Gb of disk space on the server system.
+
+## Install the required packages
 
 In order to build MySQL server, install the following packages:
-```
-$ sudo apt install git cmake g++ openssl libssl-dev libncurses5-dev libtirpc-dev rpcsvc-proto bison pkg-config -y
+
+```console
+sudo apt install git make automake libtool bison pkg-config cmake g++ openssl libssl-dev libncurses5-dev libtirpc-dev rpcsvc-proto libaio-dev libssl-dev -y
 ```
 
-## Setup mysql user
+## Create a mysql user
 
-MySQL server can't be run as root, so we could create a mysql user:
+MySQL server can't be run as root. 
+
+You can create a mysql user, use your own password instead of `mysql*pw`:
+
+```console
+sudo useradd -s /bin/bash -m mysql && sudo adduser mysql sudo && echo "mysql:mysql*pw" | sudo chpasswd
 ```
-$ sudo useradd -m -s /bin/bash mysql
+
+Change to the `mysql` user, enter the password when prompted:
+
+```console
+su - mysql
 ```
 
 ## Download boost
 
-boost is needed for building MySQL server, for building MySQL server 8.0.33, boost_1_77_0 is needed:
-```
-$ su - mysql
-$ wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz && tar xzvf boost_1_77_0.tar.gz
+Boost is needed to build MySQL server. To build MySQL server 8.0.33, boost_1_77_0 is needed.
+
+Download Boost:
+
+```console
+wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz && tar xzvf boost_1_77_0.tar.gz
 ```
 
 ## Build and install MySQL server
-Please following the steps to build and install MySQL server:
+
+Run the commands below to build and install MySQL server:
+
 ```
-$ su - mysql
-$ git clone https://github.com/mysql/mysql-server && cd mysql-server
-$ git checkout mysql-8.0.33
-$ git submodule update --recursive
-$ mkdir build
-$ cmake -DCMAKE_C_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_CXX_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_INSTALL_PREFIX=/home/mysql/mysql_install_8.0.33 -DWITH_BOOST=/home/mysql/boost_1_77_0/ ..
-$ make -j $(nproc)
-$ make -j $(nproc) install
+git clone https://github.com/mysql/mysql-server && cd mysql-server
+git checkout mysql-8.0.33
+git submodule update --recursive
+mkdir build ; cd build
+cmake -DCMAKE_C_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_CXX_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_INSTALL_PREFIX=/home/mysql/mysql_install_8.0.33 -DWITH_BOOST=/home/mysql/boost_1_77_0/ ..
+make -j $(nproc)
+make -j $(nproc) install
 ```
 
-## MySQL configuration file
+## Create a MySQL configuration file
 
-To run MySQL server, we'll need to specify the my.cnf config file, create my.cnf under /home/mysql/mysql_install_8.0.33:
+To configure MySQL server, you need to create the `my.cnf` config file.
+
+Use a text editor to create a file named `/home/mysql/mysql_install_8.0.33/my.cnf` with the contents:
+
 ```
 [mysqld]
 character_set_server = utf8
@@ -118,16 +139,18 @@ loose_innodb_undo_retention = 0
 ```
 
 ## Start MySQL server
-Please use the following steps to start MySQL server:
+
+Run the commands below to start MySQL server:
+
 ```
-$ export MYSQL_HOME=/home/mysql/mysql_install_8.0.33
-$ export MYSQL_BIN=$MYSQL_HOME/bin
-$ export MYSQL_PLUGIN=$MYSQL_HOME/lib/plugin
-$ export MYSQL_DATA=$MYSQL_HOME/data
-$ export MYSQL_PORT=3003
-$ rm -rf $MYSQL_DATA && mkdir $MYSQL_DATA
-$ $MYSQL_BIN/mysqld  --initialize-insecure --basedir=$MYSQL_HOME --datadir=$MYSQL_DATA --default_authentication_plugin=mysql_native_password --log-error-verbosity=3
-$ $MYSQL_BIN/mysqld \
+export MYSQL_HOME=/home/mysql/mysql_install_8.0.33
+export MYSQL_BIN=$MYSQL_HOME/bin
+export MYSQL_PLUGIN=$MYSQL_HOME/lib/plugin
+export MYSQL_DATA=$MYSQL_HOME/data
+export MYSQL_PORT=3003
+rm -rf $MYSQL_DATA && mkdir $MYSQL_DATA
+$MYSQL_BIN/mysqld  --initialize-insecure --basedir=$MYSQL_HOME --datadir=$MYSQL_DATA --default_authentication_plugin=mysql_native_password --log-error-verbosity=3
+$MYSQL_BIN/mysqld \
                         --defaults-file=$MYSQL_HOME/my.cnf \
                         --basedir=$MYSQL_HOME \
                         --datadir=$MYSQL_DATA \
@@ -139,8 +162,8 @@ $ $MYSQL_BIN/mysqld \
                         --plugin-dir=$MYSQL_PLUGIN \
                         --user=mysql \
                         2>&1 &
-$ sleep 10 # make sure $MYSQL_HOME/mysql.sock is created
-$ $MYSQL_BIN/mysql \
+sleep 10 # make sure $MYSQL_HOME/mysql.sock is created
+$MYSQL_BIN/mysql \
                 -S $MYSQL_HOME/mysql.sock \
                 -uroot \
                 -e "use mysql; \
@@ -154,8 +177,9 @@ $ $MYSQL_BIN/mysql \
 
 ## Stop MySQL server
 
-If you want to stop MySQL server after benchmark is done:
+If you want to stop MySQL server after benchmarking is done, you can use the commands:
+
 ```
-$ $MYSQL_BIN/mysql -S $MYSQL_HOME/mysql.sock -uroot -e "DROP DATABASE sysdb;"
-$ $MYSQL_BIN/mysqladmin -S $MYSQL_HOME/mysql.sock -uroot shutdown
+$MYSQL_BIN/mysql -S $MYSQL_HOME/mysql.sock -uroot -e "DROP DATABASE sysdb;"
+$MYSQL_BIN/mysqladmin -S $MYSQL_HOME/mysql.sock -uroot shutdown
 ```
