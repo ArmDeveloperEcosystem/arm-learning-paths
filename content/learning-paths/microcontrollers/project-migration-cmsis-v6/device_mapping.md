@@ -27,5 +27,5 @@ If you are using an Arm device from the CMSIS v5 pack, you need to switch the de
 | ARMSC300                                                   | ARMSC300 (NO_FPU, NO_MPU) |
 
 {{% notice %}}
-To reduce the functionality of the new superset devices, use respective compiler flags. Please consult the manual of your toolchain how to do so.
+To reduce the functionality of the new device mappings, use the appropriate compiler flags. Please consult the your toolchain manual for the compiler flags.
 {{% /notice %}}
