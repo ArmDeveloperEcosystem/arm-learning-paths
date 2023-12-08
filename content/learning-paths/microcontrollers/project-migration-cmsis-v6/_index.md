@@ -3,18 +3,18 @@ title: Project Migration to CMSIS v6
 
 minutes_to_complete: 10
 
-who_is_this_for: Embedded developers who want to migrate their projects to CMSIS v6.
+who_is_this_for: This is an advanced topic for embedded developers who want to migrate their projects to CMSIS v6.
 
 learning_objectives: 
     - Identify the supported toolchains.
     - Install the required CMSIS-Packs.
-    - Select the software components to migrate your projects.
+    - Select the software components to migrate your projects to CMSIS v6.
 
 prerequisites:
-    - A CMSIS v5-based project.
+    - A CMSIS v5 based project.
     - A basic understanding of the CMSIS-Pack system.
 
-author_primary: Christopher Seidl, Arm
+author_primary: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
