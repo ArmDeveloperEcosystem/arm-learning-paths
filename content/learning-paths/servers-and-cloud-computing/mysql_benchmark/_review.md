@@ -19,28 +19,28 @@ review:
             - "No"
         correct_answer: 2                     
         explanation: >
-            MySQL server can't be run as root, you will need to create an user to run MySQL server.
+            MySQL server can't be run as root, you will need to create a new user to run MySQL server.
 
     - questions:
         question: >
-            After start mysqld, should we wait few seconds before creating database?
+            After starting mysqld, should you wait few seconds before creating database?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            You'll need to wait few seconds so that mysql.sock could be created after starting MySQL.
+            You'll need to wait few seconds so that mysql.sock is created.
                
     - questions:
         question: >
-            which directories under MySQL server installation path need to be specified when building sysbench?
+            Which directories in MySQL server installation path need to be specified when building sysbench?
         answers:
             - "include"
             - "lib"
             - "both of the above"
         correct_answer: 3
         explanation: >
-            In order to run sysbench against MySQL server, both include and lib directories under MySQL server installation need to be specified when building sysbench.
+            In order to run Sysbench against MySQL server, both the include and the lib directories under the MySQL server installation need to be specified when building Sysbench.
 
 
 
