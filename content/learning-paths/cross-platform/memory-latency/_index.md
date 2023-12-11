@@ -32,6 +32,7 @@ shared_between:
     - servers-and-cloud-computing
     - laptops-and-desktops
     - embedded-systems
+    - smartphones-and-mobile
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
