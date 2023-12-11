@@ -1,15 +1,20 @@
 ---
-next_step_guidance: 
-recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
+next_step_guidance: Learn how to convert your uvprojx files to csolution
+
+recommended_path: /learning-paths/microcontrollers/uvprojx-conversion
 
 further_reading:
     - resource:
-        title: BOLT README
-        link: https://github.com/llvm/llvm-project/tree/main/bolt
+        title: PLACEHOLDER MANUAL 
+        link: PLACEHOLDER MANUAL LINK
         type: documentation
     - resource:
-        title: BOLT - A Practical Binary Optimizer for Data Centers and Beyond
-        link: https://research.facebook.com/publications/bolt-a-practical-binary-optimizer-for-data-centers-and-beyond/
+        title: PLACEHOLDER BLOG 
+        link: PLACEHOLDER BLOG LINK
+        type: blog
+    - resource:
+        title: PLACEHOLDER GENERAL WEBSITE 
+        link: PLACEHOLDER GENERAL WEBSITE LINK
         type: website
 
 

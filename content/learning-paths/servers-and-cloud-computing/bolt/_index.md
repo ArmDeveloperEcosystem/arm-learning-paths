@@ -1,36 +1,32 @@
 ---
-title: Learn how to optimise an executable with BOLT
-
-draft: true
+title: Learn how to optimize an application with BOLT
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to use BOLT on an Arm executable
+who_is_this_for: This is an introductory topic for software developers who want to learn how to use BOLT on an Arm executable.
 
 learning_objectives: 
-    - Build executable in a way that BOLT can optimise
-    - How to collect profiling information of target executable
-    - Optimise an executable using BOLT and the profile information
+    - Build an application which is ready to be optimized by BOLT 
+    - Profile an application and collect performance information
+    - Run BOLT to create an optimized executable 
 
 prerequisites:
-    - An Arm based machine running Linux. Preferably the Linux Kernel needs to be 4.20 or later for all the perf options to work. Earlier versions can be used but you will be limited to what you record.
-    - An install of [BOLT](/install-guides/bolt/)
-    - Install [Perf](/install-guides/perf/) preferably 4.20 or later
-    - (Optional) A more powerful build machine, Arm or x86 architecture
+    - An Arm based system running Linux with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed. The Linux kernel should be version 5.15 or later. Earlier kernel versions can be used, but some Linux Perf features may be limited or not available. 
+    - (Optional) A second, more powerful Linux system to build the software executable and run BOLT.
 
 author_primary: Jonathan Davies
 
 ### Tags
 skilllevels: Introductory
-subjects: Optimisation
+subjects: Performance and Architecture
 armips:
-    - Aarch64
+    - Neoverse
+    - Cortex-A
 tools_software_languages:
     - BOLT
     - perf
 operatingsystems:
     - Linux
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
