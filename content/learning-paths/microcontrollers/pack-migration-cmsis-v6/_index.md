@@ -1,5 +1,5 @@
 ---
-title: CMSIS-Pack Migration Guide
+title: Understanding the CMSIS-Pack Migration Guide
 
 minutes_to_complete: 10
 
