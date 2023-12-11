@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Device mapping
 
-If you are using an Arm device from the CMSIS v5 pack, you need to switch the device selection to one of the supported devices in the new Cortex_DFP pack. The following table shows the available mappings.
+If you are using an Arm device from the CMSIS v5 pack, you need to switch the device selection to one of the supported devices in the new Cortex_DFP pack. The following table shows the available mappings:
 
 | CMSIS v5                                                   | CMSIS-DFP |
 |------------------------------------------------------------|-----------|
@@ -27,5 +27,5 @@ If you are using an Arm device from the CMSIS v5 pack, you need to switch the de
 | ARMSC300                                                   | ARMSC300 (NO_FPU, NO_MPU) |
 
 {{% notice %}}
-To reduce the functionality of the new device mappings, use the appropriate compiler flags. Please consult the your toolchain manual for the compiler flags.
+To reduce the functionality of the new device mappings, use the appropriate compiler flags. Please consult the toolchain manual for the compiler flags.
 {{% /notice %}}
