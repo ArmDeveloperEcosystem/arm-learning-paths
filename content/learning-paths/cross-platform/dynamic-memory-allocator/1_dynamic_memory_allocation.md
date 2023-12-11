@@ -43,7 +43,7 @@ int main(...) {
 
 The arguments passed to the program determine if memory is allocated or not. 
 
-## The C library `malloc` function
+## The C library malloc function
 
 The C standard library provides a special function
 [`malloc`](https://en.cppreference.com/w/c/memory/malloc) (`m` for "memory",

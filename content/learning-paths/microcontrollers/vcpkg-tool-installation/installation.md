@@ -20,10 +20,10 @@ curl -LO https://aka.ms/vcpkg-init.cmd && .\vcpkg-init.cmd
 iex (iwr -useb https://aka.ms/vcpkg-init.ps1)
   {{< /tab >}}
   {{< tab header="Linux/macOS" language="shell">}}
-. < (curl https://aka.ms/vcpkg-init.sh -L)
+. <(curl https://aka.ms/vcpkg-init.sh -L)
   {{< /tab >}}
 {{< /tabpane >}}
 
 When done, your user profile directory should contain a `.vcpkg` folder with all necessary files and scripts.
 
-Continue by initializing vcpkg.
+Continue by initializing `vcpkg`.

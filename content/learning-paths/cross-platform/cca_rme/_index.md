@@ -1,5 +1,5 @@
 ---
-title: Get started with the Realm Management Extension (RME)
+title: Get started with Realm Management Extension (RME)
 
 minutes_to_complete: 30
 

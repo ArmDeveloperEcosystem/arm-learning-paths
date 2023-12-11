@@ -1,5 +1,5 @@
 ---
-next_step_guidance: You now have a good understanding of the impact memory latency in your code. You can start experimenting on your own code to find ways to eliminate some memory transfers in critical loops and try out cache prefetching. 
+next_step_guidance: You now have a good understanding of the impact memory latency has in your code. You can start experimenting on your own code to find ways to eliminate some memory transfers in critical loops and try out cache prefetching. 
 
 recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/ 
 

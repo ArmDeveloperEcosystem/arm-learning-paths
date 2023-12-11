@@ -6,13 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-Memory latency is one of the key factors impacting application performance. Developers benefit from having a good understanding of memory latency, how to measure it, and knowing when it can be improved.
+Memory latency is one of the key factors impacting application performance. Developers will benefit from having a good understanding of memory latency, how to measure it, and knowing when it can be improved.
 
-Latency is the time between a request and the response. In the context of computer architecture, memory latency refers to the communication from the CPU to memory devices. A request is either a load (read) or a store (write) and the response is the loaded data or an acknowledgement that the store took place. The faster this communication happens the better the performance.
+Latency is the time between a request and the response. In the context of computer architecture, memory latency refers to the communication from the CPU to the memory devices. A request is either a load (read) or a store (write) and the response is the loaded data or an acknowledgement that the store took place. The faster this communication happens, the better the performance.
 
-Computer hardware is constructed using multiple types of storage. In the area of memory latency, "memory devices" can be caches, external RAM, and storage devices such as solid state drives (SDD) or hard disk drives (HDD). 
+Computer hardware is constructed using multiple types of storage. In the area of memory latency, "memory devices" can be caches, external RAM, storage devices such as solid state drives (SDD) or hard disk drives (HDD). 
 
-In computer architecture, a CPU executes instructions, and some instructions use registers to transfer data to and from memory. The memory system is designed with caches which are close to the CPU and faster to access. Instructions are also placed in caches to improve performance by eliminating the need to fetch the same instructions from memory multiple times. 
+In computer architecture, a CPU executes instructions, and some instructions use registers to transfer data to and from the memory. The memory system is designed with caches which are close to the CPU and faster to access. Instructions are also placed in caches which improve performance by eliminating the need to fetch the same instructions from the memory multiple times. 
 
 In theory, a CPU can operate without any caches at all, but it would be much slower. 
 
@@ -30,10 +30,10 @@ You can look at the list from [Latency Numbers Every Programmer Should Know](htt
 | Mutex lock/unlock                  |          25 ns  |            |        |                             |
 | Main memory reference              |         100 ns  |            |        | 20x L2 cache, 200x L1 cache |
 | Send 1K bytes over 1 Gbps network  |      10,000 ns  |      10 µs |        |                             |		
-| Read 4K randomly from SSD*         |     150,000 ns  |     150 µs |        | ~1GB/sec SSD                |
+| Read 4K randomly from SSD          |     150,000 ns  |     150 µs |        | ~1GB/sec SSD                |
 | Read 1 MB sequentially from memory |     250,000 ns  |     250 µs |        |                             |
 | Round trip within same datacenter  |     500,000 ns  |     500 µs |        |                             |
-| Read 1 MB sequentially from SSD* 	 |   1,000,000 ns  |   1,000 µs |   1 ms | ~1GB/sec SSD, 4X memory     |
+| Read 1 MB sequentially from SSD 	 |   1,000,000 ns  |   1,000 µs |   1 ms | ~1GB/sec SSD, 4X memory     |
 | Disk seek (HDD)                    |  10,000,000 ns  |  10,000 µs |  10 ms | 20x datacenter roundtrip    |
 | Read 1 MB sequentially from disk   |  20,000,000 ns  |  20,000 µs |  20 ms | 80x memory, 20X SSD         |
 | Send packet CA -> Netherlands -> CA| 150,000,000 ns  | 150,000 µs | 150 ms |                             |
