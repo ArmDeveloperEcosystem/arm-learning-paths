@@ -1,7 +1,7 @@
 summary:
-  content_total: 189
-  content_with_all_tests_passing: 33
-  content_with_tests_enabled: 33
+  content_total: 198
+  content_with_all_tests_passing: 34
+  content_with_tests_enabled: 34
 sw_categories:
   cross-platform:
     dynamic-memory-allocator:
@@ -98,6 +98,10 @@ sw_categories:
       - ubuntu:latest: passed
     codec:
       readable_title: Run x265 (H.265 codec) on Arm servers
+      tests_and_status:
+      - ubuntu:latest: passed
+    flink:
+      readable_title: Benchmark the performance of Flink on Arm servers
       tests_and_status:
       - ubuntu:latest: passed
     geekbench:
