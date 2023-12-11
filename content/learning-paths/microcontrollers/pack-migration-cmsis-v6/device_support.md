@@ -8,16 +8,16 @@ layout: learningpathall
 
 ## Supported toolchains
 
-CMSIS v6 supports the following toolchains.
+CMSIS v6 supports the following toolchains:
 
 - [Arm Compiler for Embedded (v6 and above)](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded)
 - [Arm GNU Toolchain (v12 and above)](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain)
 - [LLVM Toolchain (v16 and above)](https://developer.arm.com/Tools%20and%20Software/LLVM%20Toolchain)
 - [IAR Embedded Workbench for Arm (v9.30 and above)](https://www.iar.com/ewarm)
 
-Before migrating your project, please make sure to use one of these toolchains. In this learning path you will use the Arm Compiler for Embedded v6 toolchain.
+Before migrating your project, please make sure that you use one of these toolchains. In this learning path, you will use the Arm Compiler for Embedded v6 toolchain.
 
-## Update device support
+## Update the device support
 
 To update the device support, you will need to follow the steps outlined below:
 
@@ -29,7 +29,7 @@ To update the device support, you will need to follow the steps outlined below:
 
 In CMSIS v6, assembly-based startup code is deprecated. You must move your `startup_device.s` files to `startup_device.c`. This section explains the necessary steps.
 
-1. Copy the `startup_ARMCMx.c` file from the [CMSIS-DFP repo](https://github.com/ARM-software/CMSIS-DFP) into your device support repo. In this example, a Cortex-M4-based device is used (thus, the [startup_ARMCM4.c](https://github.com/ARM-software/CMSIS-DFP/blob/main/Device/ARMCM4/Source/startup_ARMCM4.c) is taken from CMSIS-DFP/Device/ARMCM4/source).
+1. Copy the `startup_ARMCMx.c` file from the [CMSIS-DFP repo](https://github.com/ARM-software/CMSIS-DFP) into your device support repo. In this example, a Cortex-M4-based device is used (and therefore, the [startup_ARMCM4.c](https://github.com/ARM-software/CMSIS-DFP/blob/main/Device/ARMCM4/Source/startup_ARMCM4.c) is taken from CMSIS-DFP/Device/ARMCM4/source).
 2. Copy all the interrupt handler names and wrap them into `void handler_name (void) __attribute__ ((weak, alias("Default_Handler")));`. Place them around line 58 of the template file.
 
    **Code Example**
@@ -116,7 +116,7 @@ In CMSIS v6, assembly-based startup code is deprecated. You must move your `star
      /* Further interrupts are left out */
    };
    ```
-4. Make sure that additional functions (boot code, for example) are implemented in C.
+4. Make sure that additional functions (`boot code`, for example) are implemented in C.
 5. If you have conditional assembly, replace it with conditional compilation:
 
    **Code Example**
