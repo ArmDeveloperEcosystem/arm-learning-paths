@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Troubleshooting
 
-This section provides an overview of the most common errors you could encounter along with possible resolutions.
+This section provides an overview of the most common errors you might encounter along with possible resolutions.
 
 ### Missing device
 
-The following error occurs when you try to migrate a project to CMSIS v6, but you have not installed the CMSIS_DFP pack:
+The following error occurs when you try to migrate a project to CMSIS v6 but you have not installed the CMSIS_DFP pack:
 
 ![Requested device not found for target](./Device_missing.png)
 
@@ -22,7 +22,7 @@ Install [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.com/pack/ARM.Cortex_DFP_.1.
 
 ### Error instantiating RTE components
 
-The following error occurs when you try to migrate a Keil RTX-based project, but you have not installed the CMSIS-RTX pack:
+The following error occurs when you try to migrate a Keil RTX-based project but you have not installed the CMSIS-RTX pack:
 
 ![Keil RTX5 component not available for target](./CMSIS-RTX_missing.png)
 
@@ -42,7 +42,7 @@ Use the **Resolve** button to select the missing component automatically.
 
 ### Updating configuration files
 
-Moving a component from one pack to another, has an additional implication. The Event Recorder component for example comes with a configuration file (`EventRecorderConf.h`). This configuration file is stored in the project under the RTE/*Cclass* folder. When you switch from one pack to the other, the Cclass name changes and a fresh copy of the original configuration file is copied to your project.
+Moving a component from one pack to another has an additional implication. The Event Recorder component, for example, comes with a configuration file (`EventRecorderConf.h`). This configuration file is stored in the project under the RTE/*Cclass* folder. When you switch from one pack to the other, the Cclass name changes and a fresh copy of the original configuration file is copied to your project.
 
 ![New configuration files](./configuration_files.png)
 
@@ -52,14 +52,14 @@ Copy any edits that you made in the old configuration file into the new one.
 
 ### Manual migration from Keil.ARM_Compiler pack
 
-As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, you need to deselect the old components and select the replacements from the two new packs (ARM.CMSIS-Compiler and ARM.CMSIS-View).
+As the components from the Keil.ARM_Compiler pack do not have 1:1 replacements, you need to deselect the old components and select the replacements from the two new packs (ARM.CMSIS-Compiler and ARM.CMSIS-View):
 
 1. Compiler:EventRecorder migration
 
    Deselect the `Compiler:Event Recorder` component and select the `CMSIS-View:Event Recorder` component:
 
    ![Event Recorder migration](./EventRecorder_migration.png)
-1. Compiler:I/O migration
+2. Compiler:I/O migration
 
    Deselect any component of `Compiler:I/O` and select the corresponding `CMSIS-Compiler` component:
 
@@ -98,7 +98,8 @@ In CMSIS v5, the RTX5 libraries were built using the compiler options `-fshort-e
 ```
 
 {{% notice Resolution %}}
-In µVision, go to **Project - Options for Target** and click on the **C/C++ (AC6)** tab. Unselect **Short enums/wchar** and rebuild the project:  
+In µVision, go to **Project - Options for Target** and click on the **C/C++ (AC6)** tab. Unselect **Short enums/wchar** and rebuild the project:
+
 ![Unselect short enums/wchar](./compiler_settings.png)
 {{% /notice %}}
 
