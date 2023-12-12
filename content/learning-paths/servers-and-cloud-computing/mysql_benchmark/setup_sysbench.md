@@ -32,7 +32,7 @@ Configure, build, and install Sysbench using:
 
 ```console
 ./autogen.sh
-./configure --with-mysql-includes=[path-to-mysql-server-install]/include --with-mysql-libs=$HOME/mysql_install_8.0.33/lib
+./configure --with-mysql-includes=$HOME/mysql_install_8.0.33/include  --with-mysql-libs=$HOME/mysql_install_8.0.33/lib
 make -j $(nproc)
 sudo make install
 ```
@@ -46,6 +46,7 @@ Make sure that port 3003 is open on the server system so that the Sysbench clien
 To make it easier to run Sysbench, a script is provided below. 
 
 Using a text editor, copy the contents below into a file named `run_sysbench.sh`
+
 
 ```
 #!/bin/bash
@@ -120,7 +121,13 @@ echo "===> finish run"
 sleep 1
 ```
 
-You can start Sysbench by running the script. 
+Make the script executable:
+
+```console
+chmod +x run_sysbench.sh
+```
+
+You can now start Sysbench by running the script. 
 
 Provide the IP address of the server system as the first argument and the mode as the second argument.
 
