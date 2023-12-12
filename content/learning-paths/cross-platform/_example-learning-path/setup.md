@@ -85,9 +85,12 @@ Check Hugo is installed correctly and check the version by running this command:
 ```bash
 hugo version
 ```
-Run hugo to launch a development version of website on your machine.
+
+Navigate into the `arm-learning-paths` folder and run hugo to launch a
+development version of website on your machine.
 
 ```bash
+cd arm-learning-paths
 hugo server
 ```
 
@@ -158,9 +161,11 @@ There are a number of good options for text editors if you don't have a full Lin
 
 To use Visual Studio Code in the browser on your remote Linux server check the install information for [OpenVSCode Server](/install-guides/openvscode-server/) and [VS Code Tunnels](/install-guides/vscode-tunnels/)
 
-Run hugo to launch a development version of website on your machine.
+Navigate into the `arm-learning-paths` folder and run hugo to launch a
+development version of website on your machine.
 
 ```bash
+cd arm-learning-paths
 hugo server
 ```
 
@@ -173,5 +178,40 @@ Web Server is available at //localhost:1313/ (bind address 127.0.0.1)
 Open a browser and go to [http://localhost:1313](http://localhost:1313)
 
 You are now ready to edit markdown files and view the results on the Hugo server. 
+
+## Enable the search box on the home page {#search}
+
+When you run `hugo server` you will not see the search box on the home page. You don't need to do anything for the search feature to find your content, but you may want to enable the search box and test it during your development.
+
+The search feature requires search index data to be created. If the data is available, the search box will appear on the home page. 
+
+To see the search box run the following commands before you run `hugo server` as described above:
+
+```console
+hugo
+pagefind --site "public" --output-subdir ../static/pagefind
+```
+
+Refer to the script `hugo-server.sh` at the top of the repository. If you have `pagefind` installed on your computer you can run the script to create the search index and start the server. 
+
+There are also executables for Pagefind in the `bin/` directory. 
+
+| Pagefind executable                        | OS                      |
+| ------------------------------------------ | ------------------------|
+| `bin/pagefind`                             | Linux   (x86)           |
+| `bin/pagefind.aarch64`                     | Linux   (aarch64)       |
+| `bin/pagefind.arm64`                       | macOS   (Apple Silicon) |
+| `bin/pagefind.exe`                         | Windows (x86)           |
+
+
+For example, if you are working on Arm Linux you generate the search index using: 
+
+```console
+bin/pagefind.aarch64 --site "public" --output-subdir ../static/pagefind
+```
+
+{{% notice Note %}}
+The search index does not automatically update as you enter content. You can run `hugo` and `pagefind` again and restart `hugo server` to update the search index with your current content.
+{{% /notice %}}
 
 The next section will cover how to create and format Learning Paths. 

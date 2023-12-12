@@ -122,7 +122,13 @@ Called from:
                             Last updated:
                         </td>
                         <td id="last-updated" class="td-metadata-value">                    
-                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
+                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
+                            {{ if $is_learning_path}}
+                                {{partial "server-side-processing/update-update-time.html" .}}
+                            {{else}}
+                                {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                            {{end}} 
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}
@@ -169,7 +175,13 @@ Called from:
                     </tr>
                     <tr>
                         <td id="last-updated" class="td-metadata-value margin-l-24">                    
-                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp; {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                            <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
+                            {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
+                            {{ if $is_learning_path}}
+                                {{partial "server-side-processing/update-update-time.html" .}}
+                            {{else}}
+                                {{ .Lastmod.UTC.Format "2 Jan 2006" }}
+                            {{end}} 
                         </td>
                     </tr>
                 {{ if .Params.test_maintenance}}

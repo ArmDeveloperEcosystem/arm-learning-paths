@@ -29,7 +29,7 @@ Called from:
         <!-- Date updated & time to complete -->
         <p class="card-date u-margin-bottom-0" style="margin-top: auto">
             <span><i class="fa-light fa-calendar-days"></i></span>
-            &nbsp;{{ .Lastmod.UTC.Format "2 Jan 2006" }}
+            &nbsp; {{partial "server-side-processing/update-update-time.html" .}}
 
             &nbsp;&nbsp;&nbsp;&nbsp;
             

@@ -117,6 +117,57 @@ function trackHeaderInteraction(type,name){
 }
 
 
+function doneTyping(search_str) {
+    //console.log('send',search_str);
+
+    // Send tracking data   
+    _satellite.track('lp_search', {   
+        'lp_search_query' : search_str
+    }); 
+}
+
+function attachPageFindSearchTracker() {
+    let main_search_bar = document.getElementById('search');
+    let search_input = main_search_bar.querySelector('input[type="text"]')
+
+    var typingTimer;
+    var doneTypingInterval = 2000; // Time in ms (2 seconds)
+    
+    // Add timer-based listener on main search bar
+    main_search_bar.addEventListener('input', function() {
+        clearTimeout(typingTimer); // Clear the previous timer
+        typingTimer = setTimeout(() => doneTyping(search_input.value), doneTypingInterval);
+    });
+
+
+    // Add click-based listener on results using event deligation 
+    main_search_bar.addEventListener('click', function(event) {
+        if (event.target.classList.contains('pagefind-ui__result-link')) {
+            //console.log('send',search_input.value,event.target.href)
+            
+            // Send tracking data                
+            _satellite.track('lp_search_result_click', 
+                {
+                    lp_search_query : search_input.value,       // search string value
+                    lp_search_result_name: event.target.href    // URL of page we are going to
+                }
+            );
+        }
+    });
+
+    /* document.getElementById('search').addEventListener('hover', function(event) {
+        if (event.target.classList.contains('pagefind-ui__result-link')) {
+            // Get the search input value
+            console.log('Result clicked for search value: ', search_input.value);
+    
+            // Perform your desired actions
+        }
+    });
+    */
+
+}
+
+
     // Go page by page, and assign the analytics tracker event component to appropriate ares.
 
 
@@ -146,8 +197,7 @@ function trackHeaderInteraction(type,name){
             /* Assign to the following components:
                     0. Contribute button
                     1. Each main LP category card
-                    2. Tool install search box
-                    3. Tool install 'see all' link         
+                    2. Search bar
             */
 
             // 0) Contribute button 
@@ -173,6 +223,10 @@ function trackHeaderInteraction(type,name){
                     });
                 });
             }
+
+            // 2) Search bar
+            // This takes place in the attachPageFindSearchTracker function, as it must 
+            //   be called after the pagefind UI component is created dynamically.
         }
 
 
