@@ -33,7 +33,7 @@ review:
                
     - questions:
         question: >
-            Which directories in MySQL server installation path need to be specified when building sysbench?
+            Which directories in MySQL server installation path need to be specified when building Sysbench?
         answers:
             - "include"
             - "lib"
@@ -42,6 +42,25 @@ review:
         explanation: >
             In order to run Sysbench against MySQL server, both the include and the lib directories under the MySQL server installation need to be specified when building Sysbench.
 
+    - questions:
+        question: >
+            Can PGO be enabled with a single build?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 2
+        explanation: >
+            To enable PGO, you will need to build, profile, and then rebuild with profile data.
+
+    - questions:
+        question: >
+            Is GCC the only compiler which supports PGO?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 2
+        explanation: >
+            Both GCC and Clang support PGO.
 
 
 # ================================================================================
