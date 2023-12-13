@@ -1,5 +1,5 @@
 ---
-next_step_guidance: This is the first in a planned series of learning paths on using the Jetson Orin Nano and training your own models for various ML tasks
+next_step_guidance: This is the first in a series of Learning Paths on using the Jetson Orin Nano and training your own models for various ML tasks.
 
 recommended_path: /learning-paths/cross-platform/docker
 
