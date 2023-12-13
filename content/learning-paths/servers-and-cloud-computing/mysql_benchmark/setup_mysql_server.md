@@ -11,7 +11,7 @@ Follow the instructions below to build, install, configure, and run MySQL server
 
 This system is called the server.
 
-You will need at least 100 Gb of disk space on the server system.
+You will need at least 200 Gb of disk space on the server system.
 
 ## Install the required packages
 
@@ -56,7 +56,7 @@ git clone https://github.com/mysql/mysql-server && cd mysql-server
 git checkout mysql-8.0.33
 git submodule update --recursive
 mkdir build ; cd build
-cmake -DCMAKE_C_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_CXX_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_INSTALL_PREFIX=/home/mysql/mysql_install_8.0.33 -DWITH_BOOST=/home/mysql/boost_1_77_0/ ..
+cmake -DCMAKE_C_FLAGS="-g -O3 -march=native -mcpu=native -flto" -DCMAKE_CXX_FLAGS="-g -O3 -mcpu=native -flto" -DCMAKE_INSTALL_PREFIX=/home/mysql/mysql_install_8.0.33 -DWITH_BOOST=/home/mysql/boost_1_77_0/ ..
 make -j $(nproc)
 make -j $(nproc) install
 ```
@@ -179,7 +179,7 @@ $MYSQL_BIN/mysql \
 
 If you want to stop MySQL server after benchmarking is done, you can use the commands:
 
-```
+```console
 $MYSQL_BIN/mysql -S $MYSQL_HOME/mysql.sock -uroot -e "DROP DATABASE sysdb;"
 $MYSQL_BIN/mysqladmin -S $MYSQL_HOME/mysql.sock -uroot shutdown
 ```
