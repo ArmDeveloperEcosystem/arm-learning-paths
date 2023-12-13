@@ -1887,3 +1887,6 @@ vcpu
 visualSilicon
 wchar
 winget
+nightlies
+dawid
+programmatically
