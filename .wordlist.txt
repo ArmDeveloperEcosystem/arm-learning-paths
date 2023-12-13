@@ -1890,3 +1890,4 @@ winget
 nightlies
 dawid
 programmatically
+checkmark
