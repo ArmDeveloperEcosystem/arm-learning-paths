@@ -3,15 +3,15 @@ title: Benchmarking .NET 8 applications on Windows on Arm
 
 minutes_to_complete: 20
 
-who_is_this_for: This learning path is for developers, who want to benchmark the performance of the .NET 8 applications on Windows on Arm (WoA).
+who_is_this_for: This learning path is for developers who want to benchmark the performance of the .NET 8 applications on Windows on Arm (WoA).
 
 learning_objectives:
-    - Build and run .NET 8 Console Application
+    - Build and run .NET 8 Console Applications
     - Benchmark .NET applications
     - Implement custom performance benchmarks
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
     - .NET 8 SDK for [x64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-x64-installer) and [arm64](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-8.0.100-windows-arm64-installer).
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
