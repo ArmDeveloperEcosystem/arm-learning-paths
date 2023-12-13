@@ -1,5 +1,5 @@
 ---
-title: Enable profile-guided optimizaton for MySQL
+title: Enable profile-guided optimization for MySQL
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -87,7 +87,7 @@ Run Sysbench on the client system again with the IP address of the server system
 ./run_sysbench.sh [MySQL-server-ip] [oltp_write_only | oltp_read_only]
 ```
 
-When Sysbench completes, uou will see a number of files with the `.gcda` extension which were created in the directory `mysql-server/build-profile-data`.
+When Sysbench completes, you will see a number of files with the `.gcda` extension which were created in the directory `mysql-server/build-profile-data`.
 
 The profile data for PGO is now available.
 
@@ -321,4 +321,4 @@ Throughput:
     total number of events:              1319479
 ```
 
-You have now installed and run MysQL server compiled with PGO for improved performance.
+You have now installed and run MySQL server compiled with PGO for improved performance.

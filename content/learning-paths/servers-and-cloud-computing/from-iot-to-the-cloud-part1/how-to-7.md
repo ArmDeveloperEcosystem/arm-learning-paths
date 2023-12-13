@@ -9,7 +9,7 @@ layout: learningpathall
 You have learned how to containerize the application. In this next step, you will push the Docker image to Azure Container Registry. Before you can push the image, you need to create the container registry in Azure.
 
 ### Creating the container registry in Azure
-To create the Azure Container Registry we will uze the Azure Command Line Interface (Azure CLI):
+To create the Azure Container Registry we will use the Azure Command Line Interface (Azure CLI):
 1. In the WSL console, type the following command and wait for the installation to complete:
 
 ```console

@@ -18,7 +18,7 @@ You can use ETM AutoFDO which uses trace strobing to record small slices and wil
 
 ### What should I run when collecting performance profile?
 
-You should run the executable in the way that it is usually used. If it is run in a different way then BOLTs optimizations may hurt instead of help.
+You should run the executable in the way that it is usually used. If it is run in a different way then BOLT's optimizations may hurt instead of help.
 
 ### What should I do if my executable is input dependent?
 

@@ -3,7 +3,7 @@ title: Benchmark MySQL with Sysbench
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for performance engineers who want to benchmark MySQL using Sysbench and optimize performnce on Arm Linux systems.
+who_is_this_for: This is an introductory topic for performance engineers who want to benchmark MySQL using Sysbench and optimize performance on Arm Linux systems.
 
 learning_objectives:
     - Run Sysbench to benchmark a MySQL database server
