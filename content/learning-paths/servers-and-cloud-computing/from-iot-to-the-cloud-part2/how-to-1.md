@@ -20,23 +20,23 @@ To begin, we log into the Azure Portal. Then, in the search box, we type **Conta
 ![Azure#left](figures/01.png)
 
 The above procedure will open the Container instances, in which you click the **+Create** button. This will activate the wizard, which you use to configure your Azure Container Instance:
-1.	Subscription: **Select your subscription**.
-2.	Resource group: **rg-arm64** (create a new group, if needed).
-3.	Container name: **aspnet-sample**.
-4.	Region: **East US** (or select the region closest to your location).
-5.	Availability zones: **None** or default.
+1.	Subscription: **Select your subscription**
+2.	Resource group: **rg-arm64** (create a new group, if needed)
+3.	Container name: **aspnet-sample**
+4.	Region: **East US** (or select the region closest to your location)
+5.	Availability zones: **None** or default
 
 At this point, the Create container instance wizard will look as shown below:
 
 ![Azure#left](figures/02.png)
 
 Then, continue with the other settings:
-1.	SKU: **Standard**.
-2.	Image source: **Other registry**.
-3.	Run with Azure Spot Discount: **Unchecked**.
-4.	Image type: **Public**.
-5.	Image: **mcr.microsoft.com/dotnet/samples:aspnetapp**.
-6.	OS type: **Linux**.
+1.	SKU: **Standard**
+2.	Image source: **Other registry**
+3.	Run with Azure Spot Discount: **Unchecked**
+4.	Image type: **Public**
+5.	Image: **mcr.microsoft.com/dotnet/samples:aspnetapp**
+6.	OS type: **Linux**
 7.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size if this specific size is unavailable in the Azure region you used)
 
 You should end up with the following configuration:
