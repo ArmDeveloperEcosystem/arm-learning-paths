@@ -70,7 +70,7 @@ edmgr releases -e <ProductID>
 ```
 From this table, an `ID` will be shown for each available version. This ID is referred to as the `ReleaseID`.
 
-For example, you can return the `ReleaseID` of `Arm Development Studio 2023.0` of the form `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
+For example, you can return the `ReleaseID` of `Arm Development Studio 2023.1` of the form `xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx`.
 
 ## Determine the Artifact ID
 
@@ -82,7 +82,7 @@ edmgr artifacts -e <ProductID> -r <ReleaseID>
 ```
 The `ID` given in the output are the available `ArtifactID`s for this item.
 
-To continue the example, the `Arm Development Studio 2023.0 Linux installer` `ArtifactID` is of the form `yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy`.
+To continue the example, the `Arm Development Studio 2023.1 Linux installer` `ArtifactID` is of the form `yyyyyyyy-yyyy-yyyy-yyyy-yyyyyyyyyyyy`.
 
 ## Download the artifact
 

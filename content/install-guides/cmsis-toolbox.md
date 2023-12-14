@@ -98,7 +98,7 @@ Set environment variables as below. Note the exact name of the `TOOLCHAIN` varia
 
 For example:
 ```command
-export AC6_TOOLCHAIN_6_20_1=$HOME/ArmCompilerforEmbedded6.20.1/bin
+export AC6_TOOLCHAIN_6_21=$HOME/ArmCompilerforEmbedded6.21/bin
 export CMSIS_PACK_ROOT=$HOME/packs
 export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
 export PATH=$HOME/cmsis-toolbox-linux-arm64/bin:$PATH
@@ -147,11 +147,11 @@ M650: Command completed successfully.
 
 M652: Generated file for project build: '/home/ubuntu/csolution-examples/Hello/tmp/Hello/AVH/Release/CMakeLists.txt'
 -- The ASM compiler identification is ARMClang
--- Found assembler: /home/ubuntu/ArmCompilerforEmbedded6.20.1/bin/armclang
--- The C compiler identification is ARMClang 6.20.1
+-- Found assembler: /home/ubuntu/ArmCompilerforEmbedded6.21/bin/armclang
+-- The C compiler identification is ARMClang 6.21
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: /home/ubuntu/ArmCompilerforEmbedded6.20.1/bin/armclang - skipped
+-- Check for working C compiler: /home/ubuntu/ArmCompilerforEmbedded6.21/bin/armclang - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Configuring done (0.6s)
