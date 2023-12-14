@@ -7,7 +7,7 @@ next_step_guidance: >
     You can continue learning about automating your cloud deployment using the Infrastructure as Code
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part4/", "/learn.arm.com/learning-paths/servers-and-cloud-computing/aks/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part4/"
 # Link to the next learning path being recommended (For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
