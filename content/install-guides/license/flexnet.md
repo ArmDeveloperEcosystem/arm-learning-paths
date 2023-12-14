@@ -89,8 +89,8 @@ Checkout succeeded: ds_suite_rowan/04C6 0E2A CDA4 6344
 Checkout succeeded: ds_compiler_rowan/141D C968 2E7F 4187
         License file: port@server
         License Server: port@server
-Product: Arm Development Studio Gold Edition 2023.0
-Component: Arm Compiler for Embedded 6.20
+Product: Arm Development Studio Gold Edition 2023.1
+Component: Arm Compiler for Embedded 6.21
 ```
 
 {{% notice Note %}}
