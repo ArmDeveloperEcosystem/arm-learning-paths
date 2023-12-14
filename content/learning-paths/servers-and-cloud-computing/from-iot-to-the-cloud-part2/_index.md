@@ -28,7 +28,8 @@ tools_software_languages:
     - Azure
     - Docker
 operatingsystems:
-    - Linux, Windows
+    - Linux
+    - Windows
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
