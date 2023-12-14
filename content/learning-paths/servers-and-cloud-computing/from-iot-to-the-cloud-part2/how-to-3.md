@@ -33,19 +33,19 @@ The command will generate the following output:
 ![Azure#left](figures/11.png)
 
 You can now create another Azure Container Instance. To do this, go to the Azure Container Instances and click the **+ Create** button. Then configure an instance as follows:
-1.	Subscription: **Select your subscription**.
-2.	Resource group: **rg-arm64** (create a new group, if needed).
-3.	Container name: **people**.
-4.	Region: **East US** (or select the region close to your location).
-5.	Availability zones: **None**.
-6.	SKU: **Standard**.
-7.	Image source: **Azure Container Registry**.
-8.	Run with Azure Spot Discount: **Unchecked**.
-9.	Registry: **people**.
-10.	Image: **people.webapp**.
-11.	Image tag: **v1**.
-12.	OS type: **Linux**.
-13.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size, if this specific size is unavailable in the Azure region you used).
+1.	Subscription: **Select your subscription**
+2.	Resource group: **rg-arm64** (create a new group, if needed)
+3.	Container name: **people**
+4.	Region: **East US** (or select the region close to your location)
+5.	Availability zones: **None**
+6.	SKU: **Standard**
+7.	Image source: **Azure Container Registry**
+8.	Run with Azure Spot Discount: **Unchecked**
+9.	Registry: **people**
+10.	Image: **people.webapp**
+11.	Image tag: **v1**
+12.	OS type: **Linux**
+13.	Size: **1 vcpu, 1.5 GiB memory, 0 gpus** (or choose any other size, if this specific size is unavailable in the Azure region you used)
 
 ![Azure#left](figures/12.png)
 
