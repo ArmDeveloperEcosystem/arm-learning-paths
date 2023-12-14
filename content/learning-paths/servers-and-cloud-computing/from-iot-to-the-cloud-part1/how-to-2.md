@@ -24,18 +24,18 @@ This takes you to the **Create a Virtual Machine** wizard as shown below:
 ### Virtual machine configuration
 Configure your VM with the following settings:
 
-1. Subscription: select your subscription.
-2. Resource group: click Create new link, then type **rg-arm64**, and click OK.
-3. Virtual machine name: **vm-arm64**.
-4. Region: select depending on your physical location.
-5. Availability options: select **No infrastructure redundancy required**.
-6. Security type: **Standard**.
-7. VM architecture: **arm64**.
-8. Image: **Ubuntu Server 20.04 LTS – ARM64 Gen 2**.
+1. Subscription: select your subscription
+2. Resource group: click Create new link, then type **rg-arm64**, and click OK
+3. Virtual machine name: **vm-arm64**
+4. Region: select depending on your physical location
+5. Availability options: select **No infrastructure redundancy required**
+6. Security type: **Standard**
+7. VM architecture: **arm64**
+8. Image: **Ubuntu Server 20.04 LTS – ARM64 Gen 2**
 9. Size:
-    * Click **See all sizes**.
+    * Click **See all sizes**
     * In the **Select a VM size**, type **D2pds** in the search box
-    * Select **D2pds_v5**. 
+    * Select **D2pds_v5**
 
 {{% notice Note %}} This size might not be available due to quota limits. If this happens, click **Request quota link** (which is located next to the **VM size** name). This will activate a New Quota Request. Type **2** under New limit and click Submit. Wait a few minutes for the quota limits to be updated.{{% /notice %}}
 
@@ -47,7 +47,7 @@ Let's now configure other aspects of the Virtual Machine:
     * Username: **arm**
     * Password: type your password (make a note of this password as you'll need it to connect to VM)
     * Confirm password: re-type your password
-2.	Inbound port rules. Keep them default: **SSH(22)**.
+2.	Inbound port rules. Keep them default: **SSH(22)**
 
 ![Creating Virtual Machine#left](figures/06.png "Figure 6. Administrator account and inbound rules of the virtual machine")
 
