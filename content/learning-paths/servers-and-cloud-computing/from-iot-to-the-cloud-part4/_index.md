@@ -13,9 +13,9 @@ learning_objectives:
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/'
     - 'Visual Studio Code'
-    - 'A free Pulumi account and Pulumi CLI'
-    - 'Node.js'
-    - 'Azure CLI'
+    - 'A free Pulumi account and Pulumi CLI (details provided in this learning path)'
+    - 'Node.js (details provided in this learning path)'
+    - 'Azure CLI (details provided in this learning path)'
 
 author_primary: Dawid Borycki
 
