@@ -34,7 +34,7 @@ Configure your VM with the following settings:
 8. Image: **Ubuntu Server 20.04 LTS – ARM64 Gen 2**.
 9. Size:
     * Click **See all sizes**.
-    * In the **Select a VM size** type **D2pds** in the search box
+    * In the **Select a VM size**, type **D2pds** in the search box
     * Select **D2pds_v5**. 
 
 {{% notice Note %}} This size might not be available due to quota limits. If this happens, click **Request quota link** (which is located next to the **VM size** name). This will activate a New Quota Request. Type **2** under New limit and click Submit. Wait a few minutes for the quota limits to be updated.{{% /notice %}}
@@ -55,7 +55,7 @@ Click the **Review + create** button. The Azure Portal will validate your config
 
 ![Creating Virtual Machine#left](figures/07.png "Figure 7. A summary of the create virtual machine wizard")
 
-Click the Create button. The portal will now start the process of creating your VM. You will notice that apart from the VM itself, the portal creates additional resources for you: 
+Click the Create button. The portal will now start the process of creating your VM. You will notice that, apart from the VM itself, the portal creates additional resources for you: 
 * Public IP address (you'll need to use it to connect to the VM and then to see your application running)
 * Network Security Group
 * Virtual network
