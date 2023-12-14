@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about how to deploy this application to Azure Kubernetes Service
+    You can continue learning about how to deploy this application to Azure Kubernetes Service - /learn.arm.com/learning-paths/servers-and-cloud-computing/aks/
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/from-iot-to-the-cloud-part3/"
