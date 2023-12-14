@@ -3,7 +3,7 @@ title: 'Deploy .NET applications to Arm Virtual Machines and Container Registry 
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for software developers interested in learning how to deploy .NET applications to Microsoft Azure using Arm64-powered Virtual Machines. Also, you will learn how to containerize .NET applications, and push Docker images to Azure Container Registry.
+who_is_this_for: This learning path is for software developers interested in learning how to deploy .NET applications to Microsoft Azure using Arm64-powered Virtual Machines. You will also learn how to containerize .NET applications, and push Docker images to the Azure Container Registry.
 
 learning_objectives: 
     - Create a Virtual Machine (VM) in Microsoft Azure.
