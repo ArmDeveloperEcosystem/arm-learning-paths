@@ -81,10 +81,10 @@ ENTRYPOINT ["dotnet", "People.WebApp.dll"]
 The Dockerfiles start with the `FROM` instruction, which indicates the base image. Usually, base images contain a slim operating system with code build tools. The above Dockerfile uses a multi-stage build, in which two different base images are used. Both base images come from the dotnet repository under the Microsoft container registry (mcr.microsoft.com/dotnet) and are tagged aspnet:7.0 or sdk:7.0. The first image contains only the .NET runtime, which is required to run the application from binaries. The second image includes the SDK needed to build the application. The runtime-only base image is used in the final Docker image to reduce its size.
 
 The Dockerfile includes several other instructions: 
-1. `ARG` to specify the Dockerfile variables,
-2. `WORKDIR` to change the directory inside the building image,
-3. `COPY` to copy files between the build context (typically a working directory, where you invoke the docker build command) and the building image,
-4. `RUN` to execute commands inside the building image,
-5. `ENTRYPOINT` to indicate the container entry point, which is the command to perform when the container is created and run.
+1. `ARG` to specify the Dockerfile variables
+2. `WORKDIR` to change the directory inside the building image
+3. `COPY` to copy files between the build context (typically a working directory, where you invoke the docker build command) and the building image
+4. `RUN` to execute commands inside the building image
+5. `ENTRYPOINT` to indicate the container entry point, which is the command to perform when the container is created and run
 
 In the above example, the Dockerfile will use `dotnet build` and `dotnet publish` commands from the .NET SDK to build an application from the source code and prepare the binaries. Note that the last command, `dotnet People.WebApp.dll`, is equivalent to `dotnet run`, which we used in the first section of this learning path.
