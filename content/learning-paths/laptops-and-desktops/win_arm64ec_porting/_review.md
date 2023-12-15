@@ -13,17 +13,17 @@
 review:
     - questions:
         question: >
-            Is it possible to import C/C++ library to a Python application
+            Is it possible to import a C/C++ library to a Python application?
         answers:
-            - "True"
-            - "False"            
+            - "Yes"
+            - "No"            
         correct_answer: 1
         explanation: >
             Yes, you can import C/C++ DLLs to a Python application using ctypes.
 
     - questions:
         question: >
-            How do you port C/C++ code to ARM64 using ARM64EC and MSBuild
+            How do you port C/C++ code to ARM64 using ARM64EC and MSBuild?
         answers:
             - "Using a command line tool port-to-arm64"
             - "Using a command line tool port-to-arm64-msbuild"
