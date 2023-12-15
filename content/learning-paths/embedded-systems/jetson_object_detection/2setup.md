@@ -14,7 +14,7 @@ Download and install [balenaEtcher](https://etcher.balena.io/) in order to write
 
 Navigate to the [NVIDIA developer website](https://developer.nvidia.com/embedded/jetpack). 
 
-Click on the box titled "JETSON XAVIER NX DEVELOPER KIT & ORIN NANO DEVELOPER KIT" to expand, and click on "JETSON Orin Nano DEVELOPER KIT" to download the latest image.
+Click on the box titled "JETSON XAVIER NX DEVELOPER KIT & ORIN NANO DEVELOPER KIT" to expand, and then click on "JETSON Orin Nano DEVELOPER KIT" to download the latest image.
 
 ![sdCard Image](./sdcardimage.png)
 
@@ -23,9 +23,9 @@ Click on the box titled "JETSON XAVIER NX DEVELOPER KIT & ORIN NANO DEVELOPER KI
 1. Open balenaEtcher
 2. Click "Flash from file"
 ![balenaEtcher interface](./balenaEtcher1.png)
-3. Select the zip file of the image you just downloaded. You don't need to unzip the file.
+3. Select the zip file of the image you just downloaded (you don't need to unzip the file).
 4. Click "Select target" and choose your microSD card
-5. Click "Flash" and wait for the process to complete. You may be prompted to enter a username and password before it will start, and it will take around ten minutes.
+5. Click "Flash" and wait for the process to complete which will take around 10 minutes. You may be prompted to enter a username and password before it will start.
 6. Eject the microSD card from your computer, and insert it into the Jetson Orin Nano. **Don't power on the device yet.**
 
 ### Connect the camera to the Jetson Orin Nano
@@ -44,6 +44,7 @@ You can use a USB camera instead for object detection, but the instructions belo
 The initial startup process will take some time, respond to the prompts as required. 
 
 When you reach the desktop with NVIDIA wallpaper, run the following commands in a terminal to update the software:
+
 ```console
 sudo apt update
 sudo apt upgrade -y
