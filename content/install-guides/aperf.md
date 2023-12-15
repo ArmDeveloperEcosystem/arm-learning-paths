@@ -114,6 +114,8 @@ There are a number of tabs on the left side showing the collected data.
 
 You can browse the data and see what has been collected. 
 
+![APerf #center](/install-guides/_images/aperf0.png)
+
 {{% notice Note %}}
 The Kernel Config and Sysctl Data tabs are blank unless you click No.
 {{% /notice %}}
@@ -144,15 +146,15 @@ A screenshot is shown below:
 
 ### Use an HTTP server
 
-If you are doing performance analysis on remote system or cloud instance without a remote desktop, you can view the APerf reports from your local browser by running a simple web server on the remote machine.
+If you are doing performance analysis on a remote system or cloud instance without a remote desktop, you can view the APerf reports from your local browser by running a simple web server on the remote machine.
 
-From the directory with the port data and the `index.html` file run a simple web server:
+In the directory with the report data and the `index.html` file run a simple web server:
 
 ```console
 python -m http.server 3000
 ```
 
-Make sure port 3000 is open on the remote system and enter the IP address of the remote system followed by `:3000` 
+Make sure port 3000 is open on the remote system and enter the IP address of the remote system followed by `:3000` in your browser address bar.
 
 You will see the same APerf report, and avoid the need to copy files to your local machine from the remote system for viewing.
 
