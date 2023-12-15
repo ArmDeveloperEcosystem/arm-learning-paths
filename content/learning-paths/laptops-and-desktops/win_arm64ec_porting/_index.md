@@ -3,7 +3,7 @@ title: Port Your Applications to Arm64 Using Arm64EC
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an introductory topic for developers who want to learn how to port their solutions to Arm64 using Arm64EC. 
+who_is_this_for: This is an introductory topic for developers who want to learn how to port their applications to Arm64 using Arm64EC. 
 
 learning_objectives:
     - Build a Qt-based Python desktop application
