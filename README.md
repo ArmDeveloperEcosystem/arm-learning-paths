@@ -1,4 +1,4 @@
-The Arm Learning Paths website is available at https://learn.arm.com/
+The Arm Learning Paths website is available at https://learn.arm.com/ 
 
 # Arm Learning Paths 
 
