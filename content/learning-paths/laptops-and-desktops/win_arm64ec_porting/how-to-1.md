@@ -15,15 +15,15 @@ Using Arm64EC helps migrate large and complex applications with their own ecosys
 This learning path demonstrates how to employ Arm64EC to port a complete application consisting of the main application and dependencies, including separate dynamic link libraries (DLLs). Namely, you will build a Qt-based Python application with two C/C++-based DLL dependencies. This architecture mimics a typical scenario of using Python and Qt for rapid UI prototyping and DLLs for computation-intense work. The Python application demonstrates an alternative way of building a UI for C/C++ based DLL dependencies since native C/C++ dependencies are typical in the Python ecosystem and may not offer native builds yet. However, you could still use Qt-based C/C++ UI.
 
 ## Before you begin
-To follow this learning path, ensure you have the following:
+To follow this learning path:
 
-1. Visual Studio 2022 with Arm64 build tools. Install these as explained in this [installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio)
-2. Python installed on your machine. This demonstration uses Python version 3.11.3.
+1. Install [Visual Studio 2022 or higher](/install-guides/vs-woa) with Arm64 build tools.
+2. Install [Python](/install-guides/py-woa) on your machine. In this learning path, Python version 3.11.3 was used.
 
-For a detailed view of the tutorial, review the complete project code [here](https://github.com/dawidborycki/ARM64EC.Porting).
+The complete project code used in this learning path is hsoted [here](https://github.com/dawidborycki/ARM64EC.Porting).
 
 ## Project Setup
-To set up the project, start by creating the dependencies (the DLLs). This demonstration uses CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, click click Create a new project, and look for CMake Project in the window that appears.
+To set up the project, start by creating the dependencies (the DLLs). TIn this example you will use CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, click click Create a new project, and look for CMake Project in the window that appears.
 
 ![fig1](figures/01.png)
 
@@ -38,10 +38,10 @@ Finally, click **Create**.
 
 ## Implementation
 
-Once the project is ready, you create two folders: Vectors and Filters. Each vector is for implementing a separate DLL. 
+Once the project is ready, create two folders: Vectors and Filters. Each folder is for implementing a separate DLL. 
 
 ### First DLL
-Start by implementing the first DLL. To do so, in the Vectors folder, create two files: Vectors.h and Vectors.cpp. Here is the declaration of the Vectors.h:
+Start by implementing the first DLL. To do so, in the Vectors folder, create two files: `Vectors.h` and `Vectors.cpp`. Copy the code below into `Vectors.h`:
 
 ```cpp
 #pragma once
@@ -56,7 +56,7 @@ extern "C" __declspec(dllexport) double performCalculations();
 
 After the pragma precompiler declaration, the above declaration imports two headers: iostream and chrono. Then, you add the std namespace and export one function, performCalculations. Later, you will call this function from the main Python app.
 
-Now, modify Vectors.cpp by including Vectors.h and defining three functions:
+Now, create `Vectors.cpp` with the code shown below:
 
 ```cpp
 #include "Vectors.h"
@@ -88,9 +88,9 @@ double msElapsedTime(chrono::system_clock::time_point start) {
 }
 ```
 
-In the above code, the first function — generateRamp — creates the synthetic vector of a given length. You set the vector values using the startValue and len functions’ parameters. Then, you defined the dotProduct function, which multiplies two input vectors element-wise. Finally, you added a helper function msElapsedTime, which uses the C++ chrono library to measure the code execution time.
+In the above code, the first function — generateRamp — creates the synthetic vector of a given length. You set the vector values using the startValue and len functions’ parameters. Then, you define the dotProduct function, which multiplies two input vectors element-wise. Finally, you add a helper function msElapsedTime, which uses the C++ chrono library to measure the code execution time.
 
-Next, prepare another helper function below to generate two vectors, calculate their dot product, and measure the code execution time. You can use this function later to measure the code performance.
+Next, prepare another helper function to generate two vectors, calculate their dot product, and measure the code execution time. You can use this function later to measure the code performance, Add this function to `Vectors.cpp`:
 
 ```cpp
 double performCalculations() {
@@ -115,7 +115,7 @@ double performCalculations() {
 }
 ```
 
-Now, create the CMakeLists.txt file below in the Vectors directory. You will use this file for building.
+Now, create the `CMakeLists.txt` file below in the Vectors directory. You will use this file for building:
 
 ```cmake
 add_library (Vectors SHARED "Vectors.cpp" "Vectors.h")
@@ -129,7 +129,7 @@ The above file sets the build target to a DLL using the SHARED flag in the add_l
 
 ### Second DLL
 
-Now you can implement a second DLL similarly. Again, you use CMake (see Filters/CMakeLists.txt). First, create the Filters.h header file in the Filters folder:
+Now you can implement a second DLL similarly. Again, you use CMake (see Filters/CMakeLists.txt). First, create the `Filters.h` header file in the Filters folder with the code shown below:
 
 ```cpp
 #pragma once
@@ -167,7 +167,7 @@ The above file declares five exported functions:
 4. getInputSignal — Returns the generated signal (stored in the inputSignal variable)
 5. getInputSignalAfterFilter — Returns the filtered signal (stored in the inputSignalAfterFilter variable)
 
-Define these functions under Filters.cpp using the code below:
+Define these functions in `Filters.cpp` using the code below:
 
 ```cpp
 #include "Filters.h"
@@ -206,7 +206,7 @@ The first three functions do not require additional description. They simply ret
 
 The last function, truncate analyzes the inputSignal and replaces all the values larger than the THRESHOLD with that value. Other values are unmodified. For example, if the value is 100, it will be replaced by 70. On the other hand, the value of 50 will not change.
 
-### Compilation
+### Compile
 To compile both DLLs, in Visual Studio click the Build/Build All menu item, and DLL files will be available in the out/build/x64-release folder (Vectors/Vectors.dll and Filters/Filters.dll). 
 
 ### Main application
@@ -300,7 +300,7 @@ def runVectorCalculations(self):
 
 The method loads the DLL using ctypes. Then, it sets the return type of the performCalculations function, which comes from the Vectors.dll library, to double. Finally, the runVectorCalculations method invokes the function from the library, and the label displays the resulting computation time.
 
-Next, define the runTruncation method in the main.py file under MainWindowWidget class:
+Next, define the runTruncation method in the `main.py` file under MainWindowWidget class:
 
 ```python
 @QtCore.Slot()
@@ -333,7 +333,7 @@ def runTruncation(self):
     seriesSignalAfterFilter.attachAxis(self.axisY)
 ```
 
-As before, you first load the DLL. Then, you remove all series from the chart. This way, the chart clears whenever the user clicks the Filters button before plotting new data.
+As before, you first load the DLL. Then, remove all series from the chart. This way, the chart clears whenever the user clicks the Filters button before plotting new data.
 
 You should retrieve the inputSignal and add it to the chart using a helper method, prepareSeries, which copies data from the underlying pointer to the Python array. You should also invoke the truncate method, retrieve the filtered signal, and add it to the plot. To do all this, add the following method to the main.py file:
 
@@ -380,7 +380,7 @@ First, click the button labeled Vectors. The application will run dot product ca
 
 ![fig3](figures/03.png)
 
-You have now confirmed that the Python Qt-based application can load both dependencies. You can use this approach to implement computation-intense calculations in C++ DLLs and rapidly build the UI using Python bindings for Qt.
+You have now confirmed that the Python Qt-based application can load both dependencies. You can use this approach to implement compute-intensive calculations in C++ DLLs and rapidly build the UI using Python bindings for Qt.
 
 ## Next steps
 Now, you can use Arm64EC to port selected dependencies to Arm64 by simply switching the build target from x64 to Arm64EC. 
