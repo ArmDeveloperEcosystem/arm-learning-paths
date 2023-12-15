@@ -1891,3 +1891,14 @@ nightlies
 dawid
 programmatically
 checkmark
+jpg
+peds
+MIPI
+UHS
+TensorRT
+Jetson
+nv 
+orin
+sdCard 
+DetectNet
+balenaEtcher
