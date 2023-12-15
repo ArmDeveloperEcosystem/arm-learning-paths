@@ -32,7 +32,7 @@ If you want to increase or decrease the sensitivity, add a threshold parameter. 
 ./detectnet csi://0 --threshold=0.25
 ```
 
-![showing object labels in realtime](./videodetection.png)
+![showing object labels in real time](./videodetection.png)
 
 ### DetectNet for object detection on image files
 

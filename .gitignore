@@ -1,5 +1,6 @@
 /public
 /static/
+__pycache__/
 resources/
 node_modules/
 package-lock.json

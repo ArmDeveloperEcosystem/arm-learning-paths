@@ -18,7 +18,7 @@ author_primary: Christopher Seidl
 
 ### Tags
 skilllevels: Advanced
-subjects: Library
+subjects: Libraries
 armips:
     - Cortex-M
 tools_software_languages:
