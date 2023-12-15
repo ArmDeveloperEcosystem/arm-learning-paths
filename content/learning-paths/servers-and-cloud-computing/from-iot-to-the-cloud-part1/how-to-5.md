@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-In this section, you will learn how to create a Docker image for the People.WebApp. Then, you will learn how to push this image to the Azure Container Registry. This image can then be deployed to various cloud services. To complete this part we will use the Windows on Arm device. Alternatively you can use the VM you created in previous steps.
+In this section, you will learn how to create a Docker image for the People.WebApp. Then, you will learn how to push this image to the Azure Container Registry. This image can then be deployed to various cloud services. To complete this part we will use the Windows on Arm device. Alternatively, you can use the VM you created in the previous steps.
 
 ### Application source code
 Start by opening a new Command Prompt window, and then type:
@@ -19,7 +19,7 @@ In the wsl terminal type:
 git clone https://github.com/dawidborycki/People.WebApp.git
 ```
 
-This will clone the source code to the local folder (here it is C:\Users\d\People.WebApp):
+This will clone the source code to the local folder (C:\Users\d\People.WebApp):
 ```output
 Cloning into 'People.WebApp'...
 remote: Enumerating objects: 148, done.
@@ -44,9 +44,9 @@ This will activate the Add Docker Files wizard, in which you select the followin
 3.	Port: **5000**,
 4.	Include optional Docker Compose Files: **No**.
 
-After a short while, the application folder will be supplemented by two files: .dockerignore and Dockerfile. The first one is like. gitignore and includes file and folder files, which will be excluded from the image build. The second one is more important and specifies the exact operations to containerize an application. In other words, it instructs Docker how to build the Docker image.
+After a short while, the application folder will be supplemented by two additional files: .dockerignore and Dockerfile. The first one is like. gitignore and includes file and folder files, which will be excluded from the image build. The second one is more important and specifies the exact operations to containerize an application. In other words, it instructs Docker on how to build the Docker image.
 
-The actual Dockerfile depends on the programming tools you use to create your application. In our specific case, the Dockerfile looks as follows:
+The actual Dockerfile depends on the programming tools you used to create your application. In this specific case, the Dockerfile looks as follows:
 ```
 FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
 WORKDIR /app
@@ -78,13 +78,13 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "People.WebApp.dll"]
 ```
 
-The Dockerfiles start with the **FROM** instruction, which indicates the base image. Usually, base images contain a slim operating system with code build tools. The above Dockerfile uses a multi-stage build, in which two different base images are used. Both base images come from the dotnet repository under the Microsoft container registry (mcr.microsoft.com/dotnet) and are tagged aspnet:7.0 or sdk:7.0. The first image contains only the .NET runtime, which is required to run the application from binaries. On the contrary, the second image includes the SDK needed to build the application. The runtime-only base image is used in the final Docker image to reduce its size.
+The Dockerfiles start with the `FROM` instruction, which indicates the base image. Usually, base images contain a slim operating system with code build tools. The above Dockerfile uses a multi-stage build, in which two different base images are used. Both base images come from the dotnet repository under the Microsoft container registry (mcr.microsoft.com/dotnet) and are tagged aspnet:7.0 or sdk:7.0. The first image contains only the .NET runtime, which is required to run the application from binaries. The second image includes the SDK needed to build the application. The runtime-only base image is used in the final Docker image to reduce its size.
 
 The Dockerfile includes several other instructions: 
-1. **ARG** to specify the Dockerfile variables,
-2. **WORKDIR** to change the directory inside the building image,
-3. **COPY** to copy files between the build context (typically a working directory, where you invoke the docker build command) and the building image,
-4. **RUN** to execute commands inside the building image,
-5. **ENTRYPOINT** to indicate the container entry point, which is the command to perform when the container is created and run.
+1. `ARG` to specify the Dockerfile variables
+2. `WORKDIR` to change the directory inside the building image
+3. `COPY` to copy files between the build context (typically a working directory, where you invoke the docker build command) and the building image
+4. `RUN` to execute commands inside the building image
+5. `ENTRYPOINT` to indicate the container entry point, which is the command to perform when the container is created and run
 
-In the above example, the Dockerfile will use **dotnet build** and **dotnet publish** commands from the .NET SDK to build an application from the source code and prepare the binaries. Note that the last command, dotnet People.WebApp.dll, is equivalent to dotnet run, which we used in the first section of this learning path.
+In the above example, the Dockerfile will use `dotnet build` and `dotnet publish` commands from the .NET SDK to build an application from the source code and prepare the binaries. Note that the last command, `dotnet People.WebApp.dll`, is equivalent to `dotnet run`, which we used in the first section of this learning path.

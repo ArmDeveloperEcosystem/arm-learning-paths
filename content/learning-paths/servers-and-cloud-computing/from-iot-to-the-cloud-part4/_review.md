@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            1.	What is the Infrastructure as Code?
+            1.	What is the Infrastructure as Code (IaC)?
         answers:
             - An approach to automate cloud resource provisioning using a declarative approach
             - The cloud provider exposes an API to deploy the source code to the cloud
@@ -23,7 +23,7 @@ review:
 
         correct_answer: 3
         explanation: >
-            pulumi up is the command, which you use to deploy cloud resources.
+            `pulumi up` is the command you use to deploy cloud resources.
 
 
 

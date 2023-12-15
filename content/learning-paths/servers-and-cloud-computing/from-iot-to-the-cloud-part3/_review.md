@@ -11,7 +11,7 @@ review:
 
         correct_answer: 2        
         explanation: >
-            At the high level the Kubernetes cluster comprises the control plane and nodes.
+            At a high level the Kubernetes cluster is comprised of the control plane and nodes.
 
     - questions:
         question: >
@@ -24,7 +24,7 @@ review:
 
         correct_answer: 3
         explanation: >
-            kubectl is the command line tool, which you use to interact with the Kubernetes API. In particular, to deploy applications.
+            kubectl is the command line tool you use to interact with the Kubernetes API and, in particular, to deploy applications.
 
 
 
