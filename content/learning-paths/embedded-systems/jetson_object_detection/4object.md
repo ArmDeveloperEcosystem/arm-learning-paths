@@ -12,7 +12,7 @@ layout: learningpathall
 The first time you run a new model it will take some time to start up. Subsequent launches will be faster.
 {{% /notice %}}
 
-Change directory to the prepare for image detection:
+Change directory to prepare for image detection:
 
 ```console
 cd build/aarch64/bin
