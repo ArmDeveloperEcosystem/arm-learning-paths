@@ -1,9 +1,9 @@
 ---
-title: Native Support for Qt Framework on Windows on Arm
+title: Build and run a native Windows on Arm Qt application 
 
 minutes_to_complete: 20
 
-who_is_this_for: This learning path is for developers, who want to use native performance of the Qt framework for building desktop applications on Windows on Arm (WoA).
+who_is_this_for: This is an introductory topic for software developers who want to use native performance of the Qt framework for building desktop applications on Windows on Arm (WoA).
 
 learning_objectives:
     - Build and run Qt-based desktop application
