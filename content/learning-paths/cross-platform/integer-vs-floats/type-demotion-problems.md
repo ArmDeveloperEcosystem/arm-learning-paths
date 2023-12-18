@@ -10,7 +10,7 @@ layout: learningpathall
 
 You previously saw that demotions are not detected in C and only in a few cases in C++, let's explain that in more detail, consider the small C++ program:
 
-```
+```C
 #include <cmath>
 #include <cstdio>
 #include <cstdint>
@@ -43,13 +43,13 @@ int main() {
 
 Save this file under `demotiontest.c` and compile it:
 
-```
+```bash
 $ g++ demotiontest.cpp -o demotiontest
 ```
 
 You will most likely get the following warnings, but the program will compile successfully:
 
-```
+```bash
 demotiontest.cpp: In function ‘int main()’:
 demotiontest.cpp:15:17: warning: narrowing conversion of ‘w’ from ‘double’ to ‘float’ [-Wnarrowing]
    15 |         float z{w};
@@ -63,7 +63,7 @@ demotiontest.cpp:28:20: warning: narrowing conversion of ‘w’ from ‘double�
 
 Now let's run it:
 
-```
+```bash
 $ ./demotiontest 
 w = 100000000000000007629769841091887003294964970946560.000000
 y = inf
