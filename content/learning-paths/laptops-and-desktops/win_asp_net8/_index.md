@@ -1,12 +1,12 @@
 ---
-title: Running ASP.NET Core Web Server on Arm64
+title: Run ASP.NET Core Web Server on Arm64
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for developers, who are interested in building a web server for a headless IoT applications.
+who_is_this_for: This is an advanced topic for developers who are interested in building a web server for a headless IoT applications.
 
 learning_objectives:
-   - Build and run ASP.NET Core 8 application
+   - Build and run an ASP.NET Core 8 application
    - Create a Web API
    - Create and use services using the dependency injection
 
@@ -18,7 +18,7 @@ prerequisites:
 author_primary: Dawid Borycki
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Migration to Arm
 armips:
     - Cortex-A
