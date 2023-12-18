@@ -207,18 +207,18 @@ void XFormView::runAnimation()
 }
 ```
 
-The method works like the original event handler for the **Animate** button. It translates (**QTransform.translate**), rotates (**QTransform.rotate**), scales (**QTransform.scale**), and shears (**QTransform.shear**) the image. It implements all these actions using the statements under the for loop. **QTransform** uses the transformation matrix to perform the affine transformation. So, you can also manually set elements of that matrix using the **QTransform.setMatrix** method.
+The method works like the original event handler for the **Animate** button. It translates (**QTransform.translate**), rotates (**QTransform.rotate**), scales (**QTransform.scale**), and shears (**QTransform.shear**) the image. It implements all these actions using the statements under the for loop. **QTransform** uses the transformation matrix to perform the affine transformation. You can also manually set elements of that matrix using the **QTransform.setMatrix** method.
 
-Note that the user interface is updated using signals (via the emit keyword). This update performs the scale and shear changes.
+The user interface is updated using signals (via the emit keyword). This update performs the scale and shear changes.
 
-Then, you only added three things:
+To summarize, you only made three changes:
 1. **elapsedTimer.restart** method to restart an instance of the **QElapsedTimer**.
 2. Embedded transformations within a for loop
-3. **qDebug** to print information about the code execution time in the Debugger console
+3. **qDebug** to print information about the code execution time in the debugger console
 
-All of the above was independent on the architecture. This means that you can use the same features when developing for AArch64 as you would for x64, including debugging. You can also use the provided CMakeLists.txt to configure CMake and add unit tests to the project.
+All of the above changes are architecture independent. This means that you can use the same features when developing for AArch64 as you would for x64, including debugging. You can also use the provided `CMakeLists.txt` to configure CMake and add unit tests to the project.
 
-## Running the Application
+## Run the Application
 
 Now it's time to run the application using the AArch64 build. To do so, use the icons in the bottom left corner of the QtCreator. Select **Desktop Qt 6.4.2 MSVC2019 ARM64**:
 
@@ -228,7 +228,7 @@ Start debugging by clicking the green play icon. The application will launch:
 
 ![fig5](figures/05.png)
 
-Click **Run** to trigger the animation. The Tux image is transformed 10,000 times. The time needed for the transformations appears in the Application Output window at the bottom of the Qt Creator window. Note that you must click Application Output or press Alt + 3 to view it:
+Click **Run** to trigger the animation. The Tux image is transformed 10,000 times. The time needed for the transformations appears in the Application Output window at the bottom of the Qt Creator window. You must click Application Output or press Alt + 3 to view it:
 
 ![fig6](figures/06.png)
 
