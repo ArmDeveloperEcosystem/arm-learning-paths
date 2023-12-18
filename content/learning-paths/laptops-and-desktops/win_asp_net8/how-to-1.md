@@ -41,10 +41,9 @@ SDK Version: 8.0.100
 
 Telemetry
 ---------
-The .NET tools collect usage data in order to help improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true'.
+The .NET tools collect usage data in order to help improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
 
-Refer to [.NET CLI Tools telemetry](https://aka.ms/dotnet-cli-telemetry) for more information on it.
-
+Read more about .NET CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
 ----------------
 Installed an ASP.NET Core HTTPS development certificate.
 To trust the certificate, run 'dotnet dev-certs https --trust'
