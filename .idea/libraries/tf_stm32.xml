@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tf_stm32">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/public/learning-paths/microcontrollers/tflow_nn_stcube/Project_Files/tf_stm32.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -9,21 +9,8 @@ layout: "learningpathall"
 
 You are now ready to benchmark Flink with Nexmark on your Arm server
 
-
-## Flink Start
-Start the Flink Cluster by running `flink/bin/start-cluster.sh` on the master node:
-```console
-bash ~/flink-benchmark/flink-1.17.2/bin/start-cluster.sh
-```
-
-## Benchmark Setup
-Setup the benchmark cluster by running `nexmark/bin/setup_cluster.sh` on the master node:
-```console
-bash ~/flink-benchmark/nexmark-flink/bin/setup_cluster.sh
-```
-
 ## Nexmark run
-To run nexmark, type the following command:
+To run nexmark run the following command:
 
 ```console
 bash ~/flink-benchmark/nexmark-flink/bin/run_query.sh
@@ -35,7 +22,7 @@ bash ~/flink-benchmark/nexmark-flink/bin/run_query.sh q1,q2
 ```
 
 
-#### View the results
+## View the results
 
 The sample output from running the benchmark is shown below:
 
