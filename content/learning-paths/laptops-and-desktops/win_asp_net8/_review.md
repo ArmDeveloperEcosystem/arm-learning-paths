@@ -25,10 +25,10 @@ review:
 
     - questions:
         question: >
-            Is the Swagger a part of a default ASP.NET Core project template?
+            Is Swagger a part of a default ASP.NET Core project template?
         answers:
-            - "False"
-            - "True"
+            - "No"
+            - "Yes"
         correct_answer: 2                     
         explanation: >
             Swagger is automatically included in the ASP.NET Core project (starting from version 6)
