@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Which statement will add the runAnimation method to handle the clicked event of the QPushButton
+            Which statement will add the runAnimation method to handle the clicked event of the QPushButton?
         answers:
             - "handle(runAnimationButton, &QPushButton::clicked, view, &XFormView::runAnimation)"
             - "addHandler(runAnimationButton, &QPushButton::clicked, view, &XFormView::runAnimation)"
@@ -21,7 +21,7 @@ review:
             - "addSignal(runAnimationButton, &QPushButton::clicked, view, &XFormView::runAnimation)"            
         correct_answer: 3
         explanation: >
-            In Qt you use connect method to define signals (event handlers)
+            In Qt you use the connect method to define signals (event handlers)
 
     - questions:
         question: >
