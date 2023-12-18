@@ -48,7 +48,7 @@ the result might not be the same real number you assigned.
 
 This might sound confusing, let's give a few examples to clarify, consider the following C program:
 
-```
+```C
 #include <math.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -64,7 +64,7 @@ int main() {
 }
 ```
 
-```
+```bash
 $ gcc -o floattest floattest.c
 $ ./floattest
 x = 0.99999982118607, 0x3f7ffffd
@@ -75,7 +75,7 @@ x = 0.99999994039536, 0x3f7fffff
 What this small program does is to demonstrate how the binary 32-bit values correspond to floating point numbers. First, notice that the initial value of `x` is not `0.9999998` that you assigned but the closest float `0.99999982118607` with hex value `0x3f7ffffd`. Second, even though it prints 14 decimal digits, the resolution of the float datatype is definitely not 14 digits!
 A difference of the last bit corresponds to a difference in the 8th decimal digit. Let's see what happens if you try a different scale, by changing the value of `x`:
 
-```
+```C
 ...
 		float x = 0.9999998e5;
 ...
@@ -85,7 +85,7 @@ A difference of the last bit corresponds to a difference in the 8th decimal digi
 
 Recompile and run again:
 
-```
+```bash
 $ gcc -o floattest floattest.c
 $ ./floattest
 x = 99999.97656250000000, 0x47c34ffd
