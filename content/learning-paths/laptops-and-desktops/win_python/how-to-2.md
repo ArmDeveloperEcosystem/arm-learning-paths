@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Creating the application"
+title: "Build the application"
 
 weight: 3
 
@@ -13,7 +13,7 @@ In this section you will use the NumPy package you installed before to create a 
 You can find the complete code [here](https://github.com/dawidborycki/PythonOnWoA)
 
 ## Creating the application
-Start by creating the new file, sample.py, in the PythonOnWoa directory.
+Start by creating a new file, `sample.py`:
 
 Then, import the NumPy and time packages:
 
@@ -42,7 +42,7 @@ def perform_sin_fft(signal_length, frequency, trial_count):
     return computation_time
 ```
 
-The above function returns the total time (in seconds) needed for calculating the FFT. We repeat the FFT multiple times (trial_count) to have a stable estimate of the computation time.
+The above function returns the total time (in seconds) needed for calculating the FFT. Repeat the FFT multiple times (trial_count) to have a stable estimate of the computation time.
 
 To measure the performance, invoke the **perform_sin_fft** function for various signal lengths.
 
@@ -56,7 +56,7 @@ for signal_length in signal_lengths:
     print("Signal length {}, Computation time {:.3f} s".format(signal_length, computation_time))
 ```
 
-The final form of the sample.py file will look as follows:
+The final form of the `sample.py` file will look as follows:
 
 ```python
 import numpy as np
@@ -88,7 +88,7 @@ for signal_length in signal_lenghts:
 
 ```
 
-## Measuring the performance of Python packages
+## Measure the performance of Python packages
 You will now run the application using non-Arm64 and Arm64 Python 3.12 to measure the performance difference. First, run the application using non-Arm64 Python interpreter. To do so, in the command prompt type the following command (make sure to invoke the commands from the same directory, where your sample.py is):
 
 ```console
@@ -107,13 +107,13 @@ Signal length 16384, Computation time 6.859 s
 
 The computation times depend on the signal length. Specifically, for 16,384 points, the computation time is 6.86 seconds. 
 
-Now, you use the Arm64 Python 3.12 interpreter. In the command prompt you type
+Now, use the Arm64 Python 3.12 interpreter. In the command prompt type:
 
-```
+```console
 py -3.12-arm64 sample.py
 ```
 
-The above command uses Arm64 Python, producing much shorter computation times: 
+The above command uses Arm64 Python and has much shorter computation times as shown from the output: 
 
 ```output
 Signal length 1024, Computation time 0.172 s
@@ -132,7 +132,6 @@ This graph illustrates the computation times and the corresponding performance b
 ## Summary
 This learning path walked you through installing native Arm64 Python 3.12 on Windows 11.
 
-You wrote a simple module that applied a fast Fourier transformation to a signal and saw the performance improvements Arm64 Python unlocked. This performance improvement accelerates support for Windows on Arm (WoA). Many companies are jumping on board to port libraries and the toolset, so they can employ Arm64 to accelerate Python workloads.
-
-One example is [this](https://www.linaro.org/blog/setting-up-tensorflow-for-windows-on-arm/) Linaro demonstration of porting TensorFlow to Arm64, which displays impressive speed improvements and offers tremendous possibilities for AI, data scientists, and researchers reliant on the ease and power of Python
+You wrote a simple module that applied a fast Fourier transformation to a signal and saw the performance improvements Arm64 Python unlocked. This performance improvement accelerates support for Windows on Arm (WoA). 
+One example is [Linaro's demonstration of porting TensorFlow to Arm64](https://www.linaro.org/blog/setting-up-tensorflow-for-windows-on-arm/), which displays impressive speed improvements and offers tremendous possibilities for AI, data scientists, and researchers reliant on the ease and power of Python
 
