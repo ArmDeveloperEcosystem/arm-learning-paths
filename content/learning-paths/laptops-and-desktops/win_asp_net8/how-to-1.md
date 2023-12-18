@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Creating the ASP.NET Core Web API project"
+title: "Create a ASP.NET Core Web API project"
 
 weight: 2
 
@@ -65,17 +65,17 @@ Restoring C:\Arm64.HeadlessIoT\Arm64.HeadlessIoT.csproj:
 Restore succeeded.
 ```
 
-The command creates a project containing a web API controller implemented in the Controllers/WeatherForecastController.cs file. This controller returns a collection of simulated weather forecasts. Since you do not need this controller, remove it by deleting the entire WeatherForecastController.cs file. The project is now ready, and you can proceed with implementation.
+The command creates a project containing a web API controller implemented in the `Controllers/WeatherForecastController.cs` file. This controller returns a collection of simulated weather forecasts. You do not need this controller. You can remove it by deleting the entire `WeatherForecastController.cs` file. The project is now ready, and you can proceed with implementation.
 
 ## Implementation
 In this section you will learn how to implement the temperature sensor emulator, sensor service registration, and web API controller.
 
-{{% notice Note %}} You can find the complete code under [this repository](https://github.com/dawidborycki/Arm64.HeadlessIoT). {{% /notice %}}
+{{% notice Note %}} You can find the complete code in [this repository](https://github.com/dawidborycki/Arm64.HeadlessIoT). {{% /notice %}}
 
 ### Temperature Sensor Emulator
-You start by implementing the temperature sensor emulator, which simulates readings from a temperature sensor connected to an IoT device running a web service.
+Start by implementing the temperature sensor emulator, which simulates readings from a temperature sensor connected to an IoT device running a web service.
 
-To represent sensor readings, you use the SensorReading class, defined in the code snippet below. To implement this class, create a Sensors folder in the Arm64.HeadlessIoT solution folder, then make a new file called SensorReading.cs, where you place the following code:
+To represent sensor readings, you use the SensorReading class, defined in the code snippet below. To implement this class, create a Sensors folder in the Arm64.HeadlessIoT solution folder, then make a new file called `SensorReading.cs`, where you place the following code:
 
 ```cs
 namespace Arm64.HeadlessIoT.Sensors;
@@ -193,7 +193,7 @@ app.Run();
 
 This approach ensures that a single instance of the TemperatureSensor class is available to the entire application. Any web API controller requiring access to that sensor can simply use constructor injection.
 
-You will also use the Swagger toolset. As shown above, the default ASP.NET Core Web API project template also registers two services: EndpointsApiExplorer and SwaggerGen:
+You will also use the Swagger toolset. As shown above, the default ASP.NET Core Web API project template also registers two services, EndpointsApiExplorer and SwaggerGen:
 
 ```cs
 builder.Services.AddEndpointsApiExplorer();
@@ -211,7 +211,7 @@ if (app.Environment.IsDevelopment())
 ```
 
 ### Web API Controller for the Headless IoT Device
-Now you are ready to implement the web API controller. Create a new file, IoTController.cs, in the Controllers folder. Then, in the IoTController.cs file, add two using statements and define the namespace:
+Now you are ready to implement the web API controller. Create a new file, `IoTController.cs`, in the Controllers folder. Then, in the `IoTController.cs` file, add two using statements and define the namespace as shown:
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
@@ -273,7 +273,7 @@ public IActionResult SetSensorStatus(bool isActive)
 }
 ```
 
-The final form of the IoTController.cs file is given below:
+The final form of the `IoTController.cs` file is shown below:
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
@@ -309,4 +309,4 @@ public class IoTController : ControllerBase
 }
 ```
 
-Now, the implementation is ready and we can build, run, and test the web server.
+Now, the implementation is ready and you can build, run, and test the web server.
