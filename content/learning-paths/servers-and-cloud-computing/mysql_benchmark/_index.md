@@ -1,5 +1,5 @@
 ---
-title: Benchmark MySQL with Sysbench 
+title: Benchmarking MySQL with Sysbench
 
 minutes_to_complete: 30
 
@@ -10,6 +10,7 @@ learning_objectives:
     - Enable profile-guided optimization (PGO) for MySQL and examine the performance improvements
 
 prerequisites:
+    - Basic knowledge about MySQL database
     - Two Arm servers running Ubuntu 22.04, one for the MySQL server and another for the Sysbench client
 
 author_primary: Bolt Liu

@@ -4,7 +4,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-You can run MySQL server on the first Arm Linux system. Ubuntu 22.04 is used, but other Linux distributions and Ubuntu versions may also work. 
+You can run MySQL server on an Arm Server with Ubuntu 22.04 installed, but other Linux distributions and Ubuntu versions may also work.
 
 
 Follow the instructions below to build, install, configure, and run MySQL server. 
