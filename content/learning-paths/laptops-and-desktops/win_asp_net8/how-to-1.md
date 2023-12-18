@@ -8,14 +8,14 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-ASP.NET Core is a cross-platform framework for building web applications that lets you develop web services as back ends for various scenarios. It also supports containerization, which you can use for building cloud-native apps. These characteristics and its cross-platform design make ASP.NET Core an ideal tool for building Internet of Things (IoT) web servers.
+ASP.NET Core is a cross-platform framework for building web applications that lets you develop web services as back ends for various scenarios. It also supports containerization, which you can use for building cloud-native applications. These characteristics and its cross-platform design make ASP.NET Core an ideal tool for building Internet of Things (IoT) web servers.
 
 Windows 11 can run directly on Arm64-powered devices, so you can use it similarly to Windows 10 IoT Core to develop IoT apps. For example, you can use ASP.NET Core to build a web API that your headless IoT device exposes to communicate with users or other devices.
 
 This learning path demonstrates how you can use ASP.NET Core with Windows 11 to build a web server for a headless IoT application. This learning path uses Windows Dev Kit 2023 as a development PC. The kit does not contain any real sensors, so you will implement a temperature sensor emulator.
 
 ## Before you begin
-Before going further, let's make sure the .NET was correctly installed. To do so, open the command prompt, and type:
+Make sure that .NET is correctly installed on your machine. To do so, open the command prompt, and type:
 
 ```console
 dotnet --info
@@ -23,10 +23,10 @@ dotnet --info
 
 The output will show the list of installed SDKs. Make sure you have at least one SDK (ideally version 8 or above). 
 
-{{% notice Note %}} Refer to this [learning path](/learning-paths/laptops-and-desktops/win_net8/) for a more detailed output of the dotnet --info command.{{% /notice %}}
+{{% notice Note %}} Refer to this [learning path](/learning-paths/laptops-and-desktops/win_net8/) for a more details on the output of the dotnet --info command.{{% /notice %}}
 
-## Creating the project
-Now, you will create a new ASP.NET Core Web API project. Open a command prompt window and type the following command:
+## Create the project
+You can now create a new ASP.NET Core Web API project. Open a command prompt window and type the following command:
 
 ```console
 dotnet new webapi -o Arm64.HeadlessIoT
@@ -41,9 +41,9 @@ SDK Version: 8.0.100
 
 Telemetry
 ---------
-The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+The .NET tools collect usage data in order to help improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true'.
 
-Read more about .NET CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
+Refer to [.NET CLI Tools telemetry](https://aka.ms/dotnet-cli-telemetry) for more information on it.
 
 ----------------
 Installed an ASP.NET Core HTTPS development certificate.
