@@ -12,7 +12,7 @@ Explicit conversions are done on purpose, because you -the developer- know the a
 
 Let's see an example taken from [libvpx project](https://github.com/webmproject/libvpx/blob/main/vpx_dsp/add_noise.c#L41), a function to generate an image using auto generated noise from a gaussian distribution function:
 
-```
+```C
 static double gaussian(double sigma, double mu, double x) {
   return 1 / (sigma * sqrt(2.0 * 3.14159265)) *
          (exp(-(x - mu) * (x - mu) / (2 * sigma * sigma)));
@@ -39,13 +39,13 @@ int vpx_setup_noise(double sigma, int8_t *noise, int size) {
 
 The `gaussian` function is undoubtably `double` only, no conversion involved here. However, the next function `vpx_setup_noise`, uses that function and does an explicit conversion from `double` to `int`:
 
-```
+```C
     const int a_i = (int)(0.5 + 256 * gaussian(sigma, 0, i));
 ```
 
 Actually there is also an implicit conversion here with the number `256`, but we'll cover implicit conversions in more detail later. What the compiler will do in this case is generate first the code that calculates the expressions using double arithmetic and then explicitly convert the results to integer, using the relevant instruction (eg `fcvtzs`). For completeness, the assembly output of this code snippet is the following:
 
-```
+```as
 gaussian:
         stp     x29, x30, [sp, -32]!
         mov     x29, sp
@@ -100,12 +100,12 @@ You can see the full code and its dissassembly in the [godbolt full link](https:
 
 Notice that before and after the call to `gaussian`: `bl gaussian`, two conversion instructions are called: 
 
-```
+```as
 scvtf   d2, w20
 ```
 and
 
-```
+```as
 fcvtzs w1, d0
 ```
 
@@ -117,7 +117,7 @@ But the situation at least is clear with explicit conversions, implicit ones are
 ## Implicit Conversions
 
 When a conversion is not explicitly stated by the user, then it's an implicit one. In general it's a conversion that the compiler issues when there is an operation involving two (or more) elements of different datatypes.
-In that case, the compiler has to convert one of the values to the same datatype as the other, as most of the operations involve elements of the same size -with some exceptions, like for example the `SADDW`/`UADDW` Neon instructions which add elements of different widths. Such instructions do not require any kind of conversion. But let's consider the generic operation:
+In that case, the compiler has to convert one of the values to the same datatype as the other, as most of the operations involve elements of the same size -with some exceptions, like for example the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. But let's consider the generic operation:
 
 ```
 C = A OP B
@@ -175,7 +175,74 @@ Again unsigned integers are demoted to similar types.
 
 ### Type conversions
 
-Some might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's really not. A promotion or demotion can be achieved in the CPU just by copying and either narrowing or widening the elements between registers, no conversion instruction involved. However when an integer is converted to a floating point number, or vice-versa, there is **always** a conversion instruction involved. And it's almost always more costly than a mere copy.
+Some might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not as simple as that. While a demotion does not need any instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However this can be achieved using other ways also, when the compiler can detect a specific pattern it can skip those zero/sign-extend instructions and solve the problem by mere shuffling/rearrangements on the bytes. For example, this example demonstrates it:
+
+```C
+void promotetest1 (unsigned long *a, unsigned int *b)
+{
+  for (int i = 0; i < 4; i++)
+    a[i] = b[i];
+}
+
+void promotetest2 (long *a, int *b)
+{
+  for (int i = 0; i < 4; i++)
+    a[i] = b[i];
+}
+```
+
+The assembly output for this would be:
+
+```as
+promotetest1:
+        ldr     q31, [x1]
+        movi    v30.4s, 0
+        zip1    v29.4s, v31.4s, v30.4s
+        zip2    v30.4s, v31.4s, v30.4s
+        stp     q29, q30, [x0]
+        ret
+
+promotetest2:
+        ldr     q31, [x1]
+        sxtl    v30.2d, v31.2s
+        sxtl2   v31.2d, v31.4s
+        stp     q30, q31, [x0]
+        ret
+```
+
+The promotion here for function `promotetest1` is achieved by a clever use of `zip1`/`zip2` instructions. No sign-extend instruction involved. However, the instructions `stxl`/`stxl2` are used in the second example. 
+Similarly, consider the equivalent demotion tests:
+
+```C
+void demotetest1 (long *a, int *b)
+{
+  for (int i = 0; i < 4; i++)
+    b[i] = a[i];
+}
+
+void demotetest2 (unsigned long *a, unsigned int *b)
+{
+  for (int i = 0; i < 4; i++)
+    b[i] = a[i];
+}
+```
+
+Both are compiled to the following assembly:
+
+```as
+demotetest1:
+        ldp     q31, q30, [x0]
+        uzp1    v30.4s, v31.4s, v30.4s
+        str     q30, [x1]
+        ret
+demotetest2:
+        ldp     q31, q30, [x0]
+        uzp1    v30.4s, v31.4s, v30.4s
+        str     q30, [x1]
+        ret
+```
+
+However when an integer is converted to a floating point number, or vice-versa, there is **always** a conversion instruction involved. And it's almost always more costly than a mere copy.
 
 Here is a list of the possible conversions:
 
@@ -193,4 +260,4 @@ Here is a list of the possible conversions:
 (`*`) Target range is limited and there might be truncation involved
 (`**`) depends on hardware support
 
-It is time to take a close look at the potential issues in those conversions.
+It is time to take a close look at the potential issues in those floating-point conversions.
