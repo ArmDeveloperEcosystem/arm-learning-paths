@@ -10,18 +10,18 @@ layout: "learningpathall"
 ## Introduction
 The Qt Framework (Qt) provides modularized C++ library classes and application programming interfaces (APIs) to accelerate cross-platform application development. Qt enables you to develop maintainable, highly performant, and reusable code. Thanks to its widget toolkit, all apps created with Qt have a native-looking user interface (UI). Qt also provides development tools, including Qt Creator, a cross-platform integrated development environment (IDE).
 
-Qt v6.2 now supports native development for Windows on Arm (WoA). To demonstrate the advantages of native development, this learning path shows you how to perform affine transformations on graphic images. The transformations demonstrate the performance boost the AArch64 architecture provides. They include image rotation, scaling, and shearing, which are commonly used by AI-powered machine vision systems. Then, this learning path shows you how to reduce the computation time of the x64 architecture by 40 percent by making simple changes.
+Qt v6.2 supports native development for Windows on Arm (WoA). To demonstrate the advantages of native development, you will learn how to perform affine transformations on graphic images. The transformations demonstrate the performance boost the AArch64 architecture provides. They include image rotation, scaling, and shearing, which are commonly used by AI-powered machine vision systems. You will then learn how to reduce the computation time of the x64 architecture by 40 percent by making simple changes.
 
 Starting from v6.2, Qt provides a native development support for WoA. As a result, you can fully leverage device hardware to accelerate your graphical user interface (GUI)-based applications.
 
 ## Before you begin
-Before going further, let's install Qt. Go to the Qt Group [download page](https://www.qt.io/download), register for the Qt trial, and download Qt. Or if you do not want to register, go to the [Qt for Open Source Development](https://www.qt.io/download-open-source) page and download from there.
+You will need to install Qt on your Windows on Arm machine. Go to the Qt Group [download page](https://www.qt.io/download), register for the Qt trial, and download Qt. Alternatively, go to the [Qt for Open Source Development](https://www.qt.io/download-open-source) page and download the package from there.
 
 In the Qt Setup window, select at least Qt version 6.2. Here we use 6.4.
 
 ![fig1](figures/01.png)
 
-## Creating the project
+## Create the project
 After installation, open Qt Creator, click Examples, select Qt6, and type “affine” in the search box. The list of examples should include one project: Affine Transformations. Click it to make the source code available in Qt Creator. 
 
 ![fig2](figures/02.png)
@@ -37,10 +37,10 @@ The app continuously transforms the image of Tux (Linux’s penguin character) b
 
 Now you can modify this default behavior.
 
-## Developing the application
+## Develop the application
 To modify the Affine Transformations app, you will add one more button with a Run label. When you click this button, it invokes the custom runAnimation method. This method will be responsible for executing affine transformations several times. This allows you to measure the performance of these operations when you build the app for x64 and AArch64 architectures.
 
-As with any other C++ app, the application’s entry point is the main function, as defined in main.cpp. The main function initializes and displays XFormWidget, in xform.h and xform.cpp.
+As with any other C++ app, the application’s entry point is the main function, as defined in `main.cpp`. The main function initializes and displays XFormWidget, in `xform.h` and `xform.cpp`.
 
 Start by changing the xform.h file (located inside the Header folder in the project tree on the left side). First, add one include directive to import the QElapsedTimer class, which you use to measure the code’s execution time:
 
@@ -79,7 +79,7 @@ public slots:
     // ...
 ```
 
-Finally, declare an instance of the QElapsedTimer object in the private section of the xform.h header file:
+Finally, declare an instance of the QElapsedTimer object in the private section of the `xform.h` header file:
 
 ```cpp
 private:
@@ -98,9 +98,9 @@ private:
     //
 ```
 
-Now, you need to modify the source file (xform.cpp). Do this by adding a Run button, binding the **runAnimation** method with the click signal of that button, and disabling the invocation of the **animateClick** method of animateButton prevents the default animation from running when you launch the app.
+Now, you need to modify the source file `xform.cpp`. Do this by adding a Run button, binding the **runAnimation** method with the click signal of that button, and disabling the invocation of the **animateClick** method. Disabling the invocation prevents the default animation from running when you launch the app.
 
-Then, modify the **XFormWidget** constructor (the declaration of this class is after **XFormView**) with the highlighted statements in the following code:
+Then, modify the **XFormWidget** constructor (the declaration of this class is after **XFormView**) with the following code:
 
 ```cpp
 XFormWidget::XFormWidget(QWidget *parent)
@@ -173,7 +173,7 @@ XFormWidget::XFormWidget(QWidget *parent)
 }
 ```
 
-Next, implement the **runAnimation** method (xform.cpp):
+Next, implement the **runAnimation** method in `xform.cpp` as shown:
 
 ```cpp
 void XFormView::runAnimation()
@@ -207,7 +207,7 @@ void XFormView::runAnimation()
 }
 ```
 
-The method works like the original event handler for the **Animate** button. It translates (**QTransform.translate**), rotates (**QTransform.rotate**), scales (**QTransform.scale**), and shears (**QTransform.shear**) the image. It implements all these actions using the statements under the for loop. Under the hood, **QTransform** uses the transformation matrix to perform the affine transformation. So, you can also manually set elements of that matrix using the **QTransform.setMatrix** method.
+The method works like the original event handler for the **Animate** button. It translates (**QTransform.translate**), rotates (**QTransform.rotate**), scales (**QTransform.scale**), and shears (**QTransform.shear**) the image. It implements all these actions using the statements under the for loop. **QTransform** uses the transformation matrix to perform the affine transformation. So, you can also manually set elements of that matrix using the **QTransform.setMatrix** method.
 
 Note that the user interface is updated using signals (via the emit keyword). This update performs the scale and shear changes.
 
