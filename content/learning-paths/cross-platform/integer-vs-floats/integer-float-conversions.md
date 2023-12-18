@@ -175,7 +175,7 @@ Again unsigned integers are demoted to similar types.
 
 ### Type conversions
 
-Some might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not as simple as that. While a demotion does not need any instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However this can be achieved using other ways also, when the compiler can detect a specific pattern it can skip those zero/sign-extend instructions and solve the problem by mere shuffling/rearrangements on the bytes. For example, this example demonstrates it:
+Some might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not as simple as that. While a demotion does not always need any instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However this can be achieved using other ways also, when the compiler can detect a specific pattern it can skip those zero/sign-extend instructions and solve the problem by mere shuffling/rearrangements on the bytes. For example, this example demonstrates it:
 
 ```C
 void promotetest1 (unsigned long *a, unsigned int *b)
