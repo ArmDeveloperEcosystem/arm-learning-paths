@@ -13,12 +13,14 @@ review:
 
     - questions:
         question: >
-            If you are trying to solve a problem that requires a large range of numbers but is not too demanding on precision, and space is tight which datatype should you choose?
+            Which datatype stores the most floating point numbers using the largest range in the same storage, when precision is not the most important requirement?
         answers:
-            - uint32_t
+            - double
             - uint16_t
             - float
             - bf16
+            - fp16
+            - fp8
         correct_answer: 4
         explanation: >
             bf16 is probably the best solution for such a problem, it takes only 16-bits, but has the same range as float (-3.4e+38, 3.4e+38).
