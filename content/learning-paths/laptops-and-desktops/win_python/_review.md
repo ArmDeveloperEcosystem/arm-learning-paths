@@ -25,7 +25,7 @@ review:
 
     - questions:
         question: >
-            When pip builds the package from the source code?
+            When does pip build a package from the source code?
         answers:
             - "Always"
             - "When the NuGet package is unavailable"
@@ -33,7 +33,7 @@ review:
             - "Never"
         correct_answer: 3
         explanation: >
-            By default, pip builds the Python package from sources, when there is no a platform-specific wheel available
+            By default, pip builds a Python package from sources, when there is no platform-specific wheel available
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
