@@ -4,15 +4,15 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You can build and run Sysbench on the second Arm Linux system to benchmark MySQL server.
+You can build and run Sysbench on the second Arm Linux system to benchmark the MySQL server.
 
 This system is called the client.
 
-You will need at least 30 Gb of disk space on the client system.
+You will need at least 30 GB of disk space on the client system.
 
-## Build and install MySQL server
+## Build and install the MySQL server
 
-Because MySQL libraries are need by Sysbench, you need to build and install MySQL server on the client system also. 
+Because MySQL libraries are needed by Sysbench, you will need to build and install the MySQL server on the client system as well. 
 
 You do not need to configure and run MySQL, just the build and install steps.
 
@@ -39,13 +39,13 @@ sudo make install
 
 ## Open MySQL port on the server system
 
-Make sure that port 3003 is open on the server system so that the Sysbench client can connect. If the machines are on the same local network, no action is needed. If you are using cloud instances you will need to adjust the security group settings to open port 3003 for traffic originating from the client system.
+Make sure that port 3003 is open on the server system so that the Sysbench client can connect. If the machines are on the same local network, no action is needed. If you are using cloud instances, you will need to adjust the security group settings to open port 3003 for traffic originating from the client system.
 
 ## Run benchmarks with Sysbench
 
 To make it easier to run Sysbench, a script is provided below. 
 
-Using a text editor, copy the contents below into a file named `run_sysbench.sh`
+Using a text editor, copy the contents below into a file named `run_sysbench.sh`:
 
 
 ```
@@ -129,7 +129,7 @@ chmod +x run_sysbench.sh
 
 You can now start Sysbench by running the script. 
 
-Provide the IP address of the server system as the first argument and the mode as the second argument.
+Provide the IP address of the server system as the first argument and the mode as the second argument:
 
 ```
 ./run_sysbench.sh [MySQL-server-ip] [oltp_write_only | oltp_read_only]
