@@ -1,15 +1,16 @@
 ---
-title: An introduction to Integer and Floating-point data types
+title: An introduction to integer and floating-point data types
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-These data types are supported by all modern computer architectures, so most concepts mentioned here are applicable whether you are programming for Arm or x86 CPUs. 
-Furthermore, keep in mind that even though every programming language uses them in a different way, the principles remain the same, the operations and the range limits of each datatype remain the same.
+Integer and floating-point data types are supported by all modern computer architectures, so most of the concepts covered are applicable whether you are programming for Arm or another architecture.
 
-We will briefly mention the data types and their ranges together with the C StdInt aliases, before we explain the peculiarities in converting between these types.
+Every programming language uses data types in a different way, but the operations and the range limits of each data type remain the same.
+
+Below is a summary of the data types and their ranges together with the C standard integer aliases. You should review them before learning the peculiarities involved in converting between types.
 
 ## Integer types
 
@@ -24,29 +25,32 @@ We will briefly mention the data types and their ranges together with the C StdI
 |            int64_t   |       8      | -9223372036854775808 |  +9223372036854775807 |     2^64     |
 |           uint64_t   |       8      |                    0 | +18446744073709551615 |     2^64     |
 
-There also exist 128-bit integer types, but hardware support for them exists only in few systems in limited operations. Most compilers support 128-bit arithmetic emulation using 64-bit integers (gcc has `__int128_t`). That will probably change in the future as big integer arithmetic is particularly useful in cryptography.
+There also 128-bit integer types, but hardware support exists only in a few systems with limited operations. Most compilers support 128-bit arithmetic emulation using 64-bit integers (gcc has `__int128_t`). Types may change in the future as big integer arithmetic is particularly useful in cryptography.
 
 ## Floating-point types
 
 ### Representation in IEEE-754
 
-[Wikipedia](https://en.wikipedia.org/wiki/Single-precision_floating-point_format) gives an excellent overview of the 32-bit floating point number representation, but let's give a short summary.
+[Wikipedia](https://en.wikipedia.org/wiki/Single-precision_floating-point_format) provides an excellent overview of the 32-bit floating point number representation. A short summary is provided below. 
 
 Every real number is represented **in approximation** by the closest 32-bit floating point number:
 
 `(-1)^s * 2^(E-127) * (1 + Sum_i b_i 2^(-i)))`
 
-A similar expression exists for the 64-bit floating-point number, a.k.a. `double`. Here are the characteristics for both `float`/`double`:
+A similar expression exists for the 64-bit floating-point number (`double` data type). 
+
+Here are the characteristics for `float` and `double`:
 
 | Data type (cstdint)  | size (bytes) |  sign  | exponent(bits) | mantissa (bits)   |    lowest value   |   minimum value   |   maximum value   |
 | -------------------- | ------------ | ------ | -------------- | ----------------- | ----------------- | ----------------- | ----------------- |
 |             float    |       4      |    1   |        8       |        23         |      -3.40282e+38 |       1.17549e-38 |       3.40282e+38 |
 |            double    |       8      |    1   |       11       |        52         |     -1.79769e+308 |      2.22507e-308 |      1.79769e+308 |
 
-In practice this means that real numbers that are very close could be represented by the same floating-point number, and in the same manner, if you assign a real number value to a float data type and print it back,
-the result might not be the same real number you assigned.
+In practice, this means that real numbers that are very close could be represented by the same floating-point number. If you assign a real number value to a float data type and immediately print it, the result might not be the same real number you assigned.
 
-This might sound confusing, let's give a few examples to clarify, consider the following C program:
+An example is provided below to clarify exactly what this means. 
+
+Use a text editor to save the C program below in a file named `floattest.c`:
 
 ```C
 #include <math.h>
@@ -64,16 +68,32 @@ int main() {
 }
 ```
 
+Compile and run the program:
+
 ```bash
-$ gcc -o floattest floattest.c
-$ ./floattest
+gcc -o floattest floattest.c
+./floattest
+```
+
+The output is:
+
+```output
 x = 0.99999982118607, 0x3f7ffffd
 x = 0.99999988079071, 0x3f7ffffe
 x = 0.99999994039536, 0x3f7fffff
 ```
 
-What this small program does is to demonstrate how the binary 32-bit values correspond to floating point numbers. First, notice that the initial value of `x` is not `0.9999998` that you assigned but the closest float `0.99999982118607` with hex value `0x3f7ffffd`. Second, even though it prints 14 decimal digits, the resolution of the float datatype is definitely not 14 digits!
-A difference of the last bit corresponds to a difference in the 8th decimal digit. Let's see what happens if you try a different scale, by changing the value of `x`:
+This small program demonstrates how the binary 32-bit values correspond to floating point numbers. 
+
+First, notice that the initial value of `x` is not `0.9999998` that was assigned. It is the closest float `0.99999982118607` with a hex value of `0x3f7ffffd`. 
+
+Second, even though the program prints 14 decimal digits, the resolution of the float datatype is definitely not 14 digits.
+
+A difference of the last hex digit corresponds to a difference in the 8th decimal digit. 
+
+You can try a different scale and see what happens. 
+
+Change the value of `x` and the `while` statement as shown below:
 
 ```C
 ...
@@ -83,30 +103,45 @@ A difference of the last bit corresponds to a difference in the 8th decimal digi
 ...
 ```
 
-Recompile and run again:
+Compile and run again:
 
 ```bash
-$ gcc -o floattest floattest.c
-$ ./floattest
+gcc -o floattest floattest.c
+./floattest
+```
+
+The output is now:
+
+```output
 x = 99999.97656250000000, 0x47c34ffd
 x = 99999.98437500000000, 0x47c34ffe
 x = 99999.99218750000000, 0x47c34fff
 ```
 
-Notice that again the initial value of `x` is not the one that you assigned but closest float value, `0x47c34ffd` that corresponds to `99999.9765625`. So, exactly what was mentioned before, *if you assign a real number value to a float data type, the result might not be the same real number you assigned*.
+Notice that the initial value of `x` is not the one that you assigned, but closest float value. The hex value `0x47c34ffd` corresponds to `99999.9765625`. 
 
-Here, the difference appears in the 2nd decimal digit. And you see that after the 7th decimal digit, all the rest are zeroes! That is because 32-bit floating point numbers offer up to 7 decimal digits of precision only.
 
-A similar point can be made for double, but because the precision is double that of 32-bit floats, you can get 14 decimal digits of precision.
+Here, the difference is in the 2nd decimal digit. After the 7th decimal digit, all the rest are zeroes! That is because 32-bit floating point numbers offer up to 7 decimal digits of precision only.
 
-As a general rule, you have to remember: for calculations that require precision, you are not dealing with real numbers, but approximate representations of real numbers using limited precision data types. If your calculations require full precision, then you should probably be looking at arbitrary precision libraries like `gmp`.
+A similar point can be made for double, but because the precision is twice that of 32-bit floats, you can get 14 decimal digits of precision.
 
-### FP16 vs BF16 vs FP8
+{{% notice Summary %}}
+You are not dealing with real numbers, but approximate representations of real numbers using limited precision data types. 
 
-With the recent popularity in Machine Learning/Deep Learning (ML/DL) models that are so important for AI research, smaller data types have emerged, these have far smaller range than 32-bit float and 64-bit doubles, but
-offer twice or 4 times the number of elements in the same number of bytes. For example, you can fit 2 x `fp16`/`bf16` elements and 4 x `fp8` elements in the same space a 32-bit `float` number takes.
+If you assign a real number value to a float data type, the result might not be the same real number you assigned.
+{{% /notice %}}
 
-Here is a list the basic traits of the fp8 (2 most important variants) and fp16/bf16.
+If your calculations require full precision, then you should be looking at arbitrary precision libraries such as [The GNU Multiple Precision Arithmetic Library](https://gmplib.org/). 
+
+### Other floating-point data types: FP16, BF16, and FP8
+
+The recent popularity in Machine Learning/Deep Learning (ML/DL) models have created the need for smaller data types. 
+
+These data types have far smaller range than 32-bit float and 64-bit doubles, but offer twice or 4 times the number of elements in the same number of bytes. 
+
+For example, you can fit 2 `fp16`/`bf16` elements and 4 `fp8` elements in the same space as a 32-bit `float` number.
+
+Here is a list of the basic traits of the `fp8` (2 most important variants), `fp16` and `bf16`.
 
 | Data type (cstdint)  | size (bytes) |  sign  | exponent(bits) | mantissa (bits)   |    lowest value   |   minimum value   |   maximum value   |
 | -------------------- | ------------ | ------ | -------------- | ----------------- | ----------------- | ----------------- | ----------------- |
@@ -115,10 +150,10 @@ Here is a list the basic traits of the fp8 (2 most important variants) and fp16/
 |              fp16    |       2      |    1   |        5       |        10         |          -65504.0 |           5.96e−8 |           65504.0 |
 |              bf16    |       2      |    1   |        8       |         7         |          -3.4e+38 |          1.17e-38 |           3.4e+38 |
 
-Why are there two 16-bit floating point data types? Well, there are historical reasons for that, but suffice to say that bf16 has an added bonus of being easily assignable to and from a normal 32-bit float -as they have the same number of exponent bits, so the same range, just less precision. This is very important for performance reasons, as you will not need to actually use a separate instruction to convert between the types.
+You may be wondering why there are two 16-bit floating point data types. The primary reason is `bf16` can be easily assigned to and from a normal 32-bit float because they have the same number of exponent bits and the same range, just less precision. This is important for performance reasons because you do not need to use a separate instruction to convert between the types.
 
-We will leave the `fp8` variants out of this learning path, as there is actually no compiler support in C or C++ for either variant on current CPUs. At the time of writing, support for these types exists strictly for GPUs using special languages and tools (eg CUDA). 
+The `fp8` variants are not covered in this Learning Path, as there is no compiler support in C or C++ for either variant on current CPUs. At of today, support for these types exists strictly for GPUs using special languages and tools.
 
-On the other hand, modern Arm CPUs with SVE/SVE2 do support BF16 in hardware, so these are very relevant.
+Recent Arm CPUs with SVE and SVE2 do support BF16 in hardware, so these are very relevant.
 
-Now that you have a basic understanding of floating-point numbers and their bit representations, let's move on to the actual topic, integer-float conversions.
+Now that you have a basic understanding of floating-point numbers and their bit representations, you can learn more about integer-float conversions.

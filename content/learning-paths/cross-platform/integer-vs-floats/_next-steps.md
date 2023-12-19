@@ -13,8 +13,8 @@ further_reading:
         link: https://developer.arm.com/documentation/PJDOC-466751330-18256/0003/?lang=en
         type: documentation
     - resource:
-        title: Wikipedia Floating-point arithmetic
-        link: https://en.wikipedia.org/wiki/Floating-point_arithmetic
+        title: Data Types in C - Integer, Floating Point, and Void Explained
+        link: https://www.freecodecamp.org/news/data-types-in-c-integer-floating-point-and-void-explained/
         type: website
     - resource:
         title: Wikipedia Half-precision floating-point format
