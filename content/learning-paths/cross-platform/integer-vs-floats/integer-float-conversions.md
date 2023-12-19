@@ -1,16 +1,26 @@
 ---
-title: Integer <-> Floats Conversions
+title: Integer and floating-point conversions
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+There are two types of data type conversions, explicit and implicit. 
+
 ## Explicit Conversions
 
-Explicit conversions are done on purpose, because you -the developer- know the algorithm and your expectations of the results. You typically would use explicit conversions when, for example, for performance reasons you would want an algorithm to be processed using integer but you need an accurate calculation done with floats or doubles. This is typically the case with video/audio codecs, where most calculations are done using integer arithmetic, but in some places where extra precision is needed, the calculations are evaluated using floats/doubles and then **explicitly** converted back to int. 
+Explicit conversions are done on purpose, because you, the developer, understand the algorithm and your expectations of the results. Explicit conversions can be used to balance performance and accuracy. 
 
-Let's see an example taken from [libvpx project](https://github.com/webmproject/libvpx/blob/main/vpx_dsp/add_noise.c#L41), a function to generate an image using auto generated noise from a gaussian distribution function:
+You would use explicit conversions when you want an algorithm to be processed using integer types, but you need an accurate calculation to be done with floats or doubles. 
+
+This is typically the case with video and audio codecs, where most calculations are done using integer arithmetic, but extra precision is needed in some places. To gain precision, calculations are evaluated using floats or doubles and then **explicitly** converted back to integers. 
+
+Below is an example taken from the [libvpx project](https://github.com/webmproject/libvpx/blob/main/vpx_dsp/add_noise.c#L41). 
+
+It shows a function to generate an image using auto generated noise from a gaussian distribution function.
+
+The code is shown for illustration only, do not try to build or run it. 
 
 ```C
 static double gaussian(double sigma, double mu, double x) {
@@ -37,13 +47,19 @@ int vpx_setup_noise(double sigma, int8_t *noise, int size) {
 }
 ```
 
-The `gaussian` function is undoubtably `double` only, no conversion involved here. However, the next function `vpx_setup_noise`, uses that function and does an explicit conversion from `double` to `int`:
+The `gaussian()` function uses only `double` and there are no conversions involved. 
+
+However, the next function `vpx_setup_noise()`, uses the `gaussian()` function and does an explicit conversion from `double` to `int`:
 
 ```C
     const int a_i = (int)(0.5 + 256 * gaussian(sigma, 0, i));
 ```
 
-Actually there is also an implicit conversion here with the number `256`, but we'll cover implicit conversions in more detail later. What the compiler will do in this case is generate first the code that calculates the expressions using double arithmetic and then explicitly convert the results to integer, using the relevant instruction (eg `fcvtzs`). For completeness, the assembly output of this code snippet is the following:
+There is also an implicit conversion here on the constant 256, but implicit conversions are covered in a future section. 
+
+The compiler generates the code that calculates the expressions using double arithmetic and then explicitly converts the results to integers, using conversion instructions. 
+
+The assembly output of the code is below:
 
 ```as
 gaussian:
@@ -96,7 +112,7 @@ vpx_setup_noise:
 ...
 ```
 
-You can see the full code and its dissassembly in the [godbolt full link](https://godbolt.org/z/cTM8d3dq5))
+You can see the source code and its disassembly from GCC and Clang using [Compiler Explorer (also called godbolt)](https://godbolt.org/z/cTM8d3dq5)
 
 Notice that before and after the call to `gaussian`: `bl gaussian`, two conversion instructions are called: 
 
@@ -109,28 +125,37 @@ and
 fcvtzs w1, d0
 ```
 
-which do exactly that, convert the value between register `d0` (a double register) from/to an integer value in registers `w1`, `w20`.
+These instructions convert the value between a double register (`d0` and `d2`) from/to an integer value in registers (`w1` and `w20`).
 
-Now, in this particular case this conversion is done on purpose and controlled but when dealing with performance critical software, such conversions can be costly and should be avoided unless there is no other alternative.
-But the situation at least is clear with explicit conversions, implicit ones are a bit harder to track.
+Conversion is done on purpose and is controlled, but when dealing with performance critical software, such conversions can be costly and should be avoided unless there is no alternative.
+
+The second type of conversions are called implicit and are harder to track.
 
 ## Implicit Conversions
 
-When a conversion is not explicitly stated by the user, then it's an implicit one. In general it's a conversion that the compiler issues when there is an operation involving two (or more) elements of different datatypes.
-In that case, the compiler has to convert one of the values to the same datatype as the other, as most of the operations involve elements of the same size -with some exceptions, like for example the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. But let's consider the generic operation:
+When a conversion is not explicitly stated it is called implicit. In general, it's a conversion that the compiler issues when there is an operation involving two (or more) elements of different data types.
+
+In that case, the compiler has to convert one of the values to the same datatype as the other, as most operations require elements of the same size. 
+
+{{% notice Note %}}
+There are some conversion exceptions, like for example the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. 
+{{% /notice %}}
+
+Here is a generic operation:
 
 ```
 C = A OP B
 ```
 
-where `OP` can be any operation that the compiler will translate into one or more assembly instructions, addition, subtraction, multiplication, division, etc.
-Depending on the datatypes the conversion can be either a promotion, a demotion, or a conversion between types of different nature (eg float to integer or integer to float).
+where `OP` can be any operation that will translate to one or more assembly instructions, addition, subtraction, multiplication, or division.
+
+Depending on the data types the conversion can be either a promotion, a demotion, or a conversion between types of a different nature (float to integer or integer to float).
 
 ### Promotions
 
-When one of the datatype involved in the operation changes to a larger size datatype of the same nature, it is called a promotion. For example, when `A` is `int8_t` and `B` is `int32_t` and `C` is also `int32_t` we have a promotion of `A` to `int32_t`.
+When one of the data types involved in the operation changes to a larger size data type of the same nature, it is called a promotion. For example, when `A` is `int8_t` and `B` is `int32_t` and `C` is also `int32_t` we have a promotion of `A` to `int32_t`.
 
-This is a list of possible datatype promotions:
+Here is a list of possible data type promotions:
 
 | Data type (stdint.h)  | Promoted to                                            |
 | -------------------- | ----------- | ----------- | ----------- | ------------- |
@@ -150,13 +175,17 @@ Similar promotions take place for unsigned integers.
 
 ### Demotions
 
-Respectively, if `A` is `float` and `B` is `double` but `C` is `float` then we have a demotion.
-This is actually a very risky conversion, as bits are lost and it is discouraged and should be avoided unless in specific circumstances when you know exactly what you are doing.
-Unfortunately, this is where the programming language matters. In some cases, C++ will catch such a demotion (called a *narrowing conversion* in C++) and will issue a relevant warning,
-C does not allow for such a warning. The C compiler will not issue a warning and it's easy for a conversion bug to creep in your code, and sometimes these can be very hard to detect bugs.
-Even on C++ there is a catch however, the compiler will only issue such a warning when using bracket initialization, not assignment between values. You will have a chance to see this in detail in the next section.
+If `A` is `float` and `B` is `double` but `C` is `float` then it is called a demotion.
 
-Here is a similar list for possible demotions:
+This is a risky conversion, as bits are lost and it should be avoided unless you understand exactly what is happening.
+
+Unfortunately, this is where the programming language matters. In some cases, C++ will catch such a demotion (called a *narrowing conversion* in C++) and will issue a relevant warning,
+
+The C language does not provide for such a warning. The C compiler will not issue a warning and it's easy for a conversion bug to creep in your code. Sometimes conversion errors can be very hard to detect.
+
+Even with C++ there is a catch, the compiler will only issue such a warning when using bracket initialization, not assignment between values. You will see this in detail in the next section.
+
+Here is a list for possible demotions:
 
 | Data type (stdint.h)  | Demoted to                                             |
 | -------------------- | ----------- | ----------- | ----------- | ------------- |
@@ -175,7 +204,11 @@ Again unsigned integers are demoted to similar types.
 
 ### Type conversions
 
-Some might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not as simple as that. While a demotion does not always need any instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However this can be achieved using other ways also, when the compiler can detect a specific pattern it can skip those zero/sign-extend instructions and solve the problem by mere shuffling/rearrangements on the bytes. For example, this example demonstrates it:
+You might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not that simple.
+
+While a demotion does not always need an instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However, this can be achieved using other ways also. When the compiler can detect a specific pattern it can skip the zero/sign-extend instructions and solve the problem by mere shuffling/rearranging the bytes. 
+
+An example of skipping an instruction is shown below:
 
 ```C
 void promotetest1 (unsigned long *a, unsigned int *b)
@@ -210,7 +243,8 @@ promotetest2:
         ret
 ```
 
-The promotion here for function `promotetest1` is achieved by a clever use of `zip1`/`zip2` instructions. No sign-extend instruction involved. However, the instructions `stxl`/`stxl2` are used in the second example. 
+The promotion here for function `promotetest1()` is achieved by a clever use of `zip1` and `zip2` instructions. No sign-extend instructions are used. However, the instructions `stxl` and `stxl2` are used in the `prootetest2()` example to sign-extend. 
+
 Similarly, consider the equivalent demotion tests:
 
 ```C
@@ -242,7 +276,7 @@ demotetest2:
         ret
 ```
 
-However when an integer is converted to a floating point number, or vice-versa, there is **always** a conversion instruction involved. And it's almost always more costly than a mere copy.
+When an integer is converted to a floating point number, or vice-versa, there is **always** a conversion instruction involved. And it's almost always more costly than a mere copy.
 
 Here is a list of the possible conversions:
 
@@ -260,4 +294,4 @@ Here is a list of the possible conversions:
 (`*`) Target range is limited and there might be truncation involved
 (`**`) depends on hardware support
 
-It is time to take a close look at the potential issues in those floating-point conversions.
+In the next section you will learn more about the potential issues in floating-point conversions.

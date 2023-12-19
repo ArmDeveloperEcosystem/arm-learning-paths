@@ -1,21 +1,21 @@
 ---
-title: Integer vs Floats Conversions and Risks
+title: Integer and floating-point conversions
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for C/C++ developers who are interested in learning the intricacies of conversions between floating point numbers and integers
+who_is_this_for: This is an advanced topic for C/C++ developers who are interested in learning the intricacies of conversions between floating-point numbers and integers.
 
 learning_objectives: 
     - Learn how to identify and fix potential problems in integer/float conversions in C/C++ on Arm
 
 prerequisites:
-    - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
+    - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
 
 author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
-subjects: Programming
+subjects: Performance and Architecture
 armips:
     - Aarch64
     - Armv8-a
