@@ -13,7 +13,7 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/keil-mdk-version-6
         type: blog
     - resource:
-        title: keil.arm.com 
+        title: keil.arm.com
         link: https://keil.arm.com
         type: website
 # ================================================================================

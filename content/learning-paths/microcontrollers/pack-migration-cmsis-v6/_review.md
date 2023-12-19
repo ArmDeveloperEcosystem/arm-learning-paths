@@ -8,7 +8,7 @@ review:
             - No
         correct_answer: 2                    
         explanation: >
-            CMSIS v6 only support C startup files for better code portability and less issues when switching between compilers.
+            CMSIS v6 only supports C startup files for better code portability and fewer issues when switching between compilers.
 
     - questions:
         question: >
