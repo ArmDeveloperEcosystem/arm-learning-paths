@@ -17,7 +17,7 @@ author_primary: Ying Yu
 
 ### Tags
 skilllevels: Introductory
-subjects: BigData
+subjects: Databases
 
 armips:
 - Neoverse
