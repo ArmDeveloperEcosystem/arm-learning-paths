@@ -4,42 +4,41 @@ weight: 2
 layout: "learningpathall"
 ---
 
-You can run MySQL server on an Arm Server with Ubuntu 22.04 installed, but other Linux distributions and Ubuntu versions may also work.
+You can run a MySQL server on an Arm Server with Ubuntu 22.04 installed, but other Linux distributions and Ubuntu versions may also work.
 
-
-Follow the instructions below to build, install, configure, and run MySQL server. 
+Follow the instructions below to build, install, configure, and run a MySQL server. 
 
 This system is called the server.
 
-You will need at least 200 Gb of disk space on the server system.
+You will need at least 200 GB of disk space on the server system.
 
 ## Install the required packages
 
-In order to build MySQL server, install the following packages:
+In order to build a MySQL server, install the following packages:
 
 ```console
 sudo apt install git make automake libtool bison pkg-config cmake g++ openssl libssl-dev libncurses5-dev libtirpc-dev rpcsvc-proto libaio-dev libssl-dev -y
 ```
 
-## Create a mysql user
+## Create a MySQL user
 
-MySQL server can't be run as root. 
+MySQL server cannot be run as root. 
 
-You can create a mysql user, use your own password instead of `mysql*pw`:
+You can create a MySQL user by using your own password instead of `mysql*pw`:
 
 ```console
 sudo useradd -s /bin/bash -m mysql && sudo adduser mysql sudo && echo "mysql:mysql*pw" | sudo chpasswd
 ```
 
-Change to the `mysql` user, enter the password when prompted:
+Change to the `mysql` user and enter the password when prompted:
 
 ```console
 su - mysql
 ```
 
-## Download boost
+## Download Boost
 
-Boost is needed to build MySQL server. To build MySQL server 8.0.33, boost_1_77_0 is needed.
+Boost is needed to build a MySQL server and to build MySQL server 8.0.33, we need boost_1_77_0.
 
 Download Boost:
 
@@ -47,9 +46,9 @@ Download Boost:
 wget https://boostorg.jfrog.io/artifactory/main/release/1.77.0/source/boost_1_77_0.tar.gz && tar xzvf boost_1_77_0.tar.gz
 ```
 
-## Build and install MySQL server
+## Build and install a MySQL server
 
-Run the commands below to build and install MySQL server:
+Run the commands below to build and install a MySQL server:
 
 ```
 git clone https://github.com/mysql/mysql-server && cd mysql-server
@@ -63,9 +62,9 @@ make -j $(nproc) install
 
 ## Create a MySQL configuration file
 
-To configure MySQL server, you need to create the `my.cnf` config file.
+To configure the MySQL server, you need to create a `my.cnf` config file.
 
-Use a text editor to create a file named `/home/mysql/mysql_install_8.0.33/my.cnf` with the contents:
+Use a text editor to create a file named `/home/mysql/mysql_install_8.0.33/my.cnf` with the following contents:
 
 ```
 [mysqld]
@@ -138,9 +137,9 @@ loose_innodb_undo_retention = 0
 
 ```
 
-## Start MySQL server
+## Start the MySQL server
 
-Run the commands below to start MySQL server:
+Run the commands below to start the MySQL server:
 
 ```
 export MYSQL_HOME=/home/mysql/mysql_install_8.0.33
@@ -175,9 +174,9 @@ $MYSQL_BIN/mysql \
 ```
 
 
-## Stop MySQL server
+## Stop the MySQL server
 
-If you want to stop MySQL server after benchmarking is done, you can use the commands:
+If you want to stop the MySQL server after benchmarking is done, you can use the following commands:
 
 ```console
 $MYSQL_BIN/mysql -S $MYSQL_HOME/mysql.sock -uroot -e "DROP DATABASE sysdb;"
