@@ -5,19 +5,17 @@ recommended_path: /learning-paths/microcontrollers/uvprojx-conversion
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Keil Studio User's Guide
+        link: https://developer.arm.com/documentation/108029/latest/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: Introducing Keil MDK Version 6
+        link: https://community.arm.com/arm-community-blogs/b/internet-of-things-blog/posts/keil-mdk-version-6
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: keil.arm.com 
+        link: https://keil.arm.com
         type: website
-
-
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================

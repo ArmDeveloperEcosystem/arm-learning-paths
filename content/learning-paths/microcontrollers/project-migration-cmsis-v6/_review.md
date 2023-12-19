@@ -8,7 +8,7 @@ review:
             - No
         correct_answer: 2                    
         explanation: >
-            Some CMSIS components have been removed from the v6 repository, thus you need to install three packs to replace the old version.
+            Some CMSIS components have been removed from the v6 repository and you now need to install three packs to replace the old version.
 
     - questions:
         question: >
