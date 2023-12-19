@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Required CMSIS-Packs
 
-For successful migration to CMSIS v6, you will need to install the following packs on your system.
+For a successful migration to CMSIS v6, you will need to install the following packs on your system.
 
 ### Migrating from CMSIS v5 to v6
 
-The ARM.CMSIS.5.x.x pack has been broken up into three different packs that need to be installed to migrate to CMSIS v6:
+The ARM.CMSIS.5.x.x pack has been broken up into three different packs that need to be installed to enable migration to CMSIS v6:
 
 - [ARM.CMSIS.6.0.0.pack](https://www.keil.com/pack/ARM.CMSIS.6.0.0.pack)
 - [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.com/pack/ARM.Cortex_DFP.1.0.0.pack)

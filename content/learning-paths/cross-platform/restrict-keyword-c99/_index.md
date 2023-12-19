@@ -15,7 +15,7 @@ author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
-subjects: Programming
+subjects: Libraries
 armips:
     - Aarch64
     - Armv8-a

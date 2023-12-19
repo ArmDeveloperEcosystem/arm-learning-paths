@@ -150,7 +150,7 @@ If the input file creation also needs to be automated use the command below and 
 cat <<EOF >>cmsis.input
 ./ctools
 $HOME/packs
-$HOME/ArmCompilerforEmbedded6.19
+$HOME/ArmCompilerforEmbedded6.21
 
 
 

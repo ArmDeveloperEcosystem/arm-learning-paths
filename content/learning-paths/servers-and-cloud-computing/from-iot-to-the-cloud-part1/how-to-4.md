@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Objective
-In this step, you will install in the virtual machine the following tools:
+In this step, you will install the following tools in the virtual machine:
 - .NET 7 SDK – to build and run the application
 - git – to clone application sources
 
@@ -44,7 +44,6 @@ To install git, use the terminal of the virtual machine and type:
 ```console
 sudo apt-get install -y git-all
 ```
-
 Wait for the installation to be completed. It will take a while.
 
 ### Clone and run the application

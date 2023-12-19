@@ -47,8 +47,8 @@ You will need to edit the licensing portion of the file to match your internal l
 FROM ubuntu:20.04 as base
 
 # Install packages: update filenames if necessary
-ARG ACfE=ARMCompiler6.19_standalone_linux-x86_64.tar.gz
-ARG FVP=FVP_ARM_Std_Library_11.20_15_Linux64.tgz
+ARG ACfE=ARMCompiler6.21_standalone_linux-x86_64.tar.gz
+ARG FVP=FVP_ARM_Std_Library_11.24_11_Linux64.tgz
 ARG ARCH=x86_64
 
 ENV USER=ubuntu
@@ -105,7 +105,7 @@ to build a docker image named `arm-environment`. This name is arbitrary, and can
 
 To change `Dockerfile` arguments from the command line, use the `--build-arg` option. For example to build an Arm-hosted docker image:
 ```console
-docker build --build-arg ARCH=aarch64 --build-arg ACfE=ARMCompiler6.19_standalone_linux-aarch64.tar.gz --build-arg FVP=FVP_ARM_Std_Library_11.20_15_Linux64_armv8l.tgz -t arm-environment:aarch64 .
+docker build --build-arg ARCH=aarch64 --build-arg ACfE=ARMCompiler6.21_standalone_linux-aarch64.tar.gz --build-arg FVP=FVP_ARM_Std_Library_11.24_11_Linux64_armv8l.tgz -t arm-environment:aarch64 .
 ```
 After a few minutes the docker image will be built and be ready for use. You can see all available images with the command:
 ```console
