@@ -162,7 +162,7 @@ golden_ratio:
         ret
 ```
 
-You now see that `scvtf` instruction is executed twice, which converts from integer to floating point, so that the quantities can be divided using floating point with the `fdiv` instruction. The `scvtf` instruction has up to 6 CPU cycles latency on the Neoverse N1 processor and 3 cycles on the Neoverse N2. Imagine a complicated expression many similar implicit conversions, executed millions or billions of times, it would definitely under perform.
+You now see that `scvtf` instruction is executed twice, which converts from integer to floating point, so that the quantities can be divided using floating point with the `fdiv` instruction. The `scvtf` instruction has up to 6 CPU cycles latency on the Neoverse N1 processor and 3 cycles on the Neoverse N2. Imagine a complicated expression many similar implicit conversions, executed millions or billions of times, it would definitely underperform.
 
 This example is easy to fix, if you just convert the `fibonacci` array to `float` or `double`:
 
