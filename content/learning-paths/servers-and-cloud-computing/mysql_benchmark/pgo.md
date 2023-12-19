@@ -8,19 +8,19 @@ layout: learningpathall
 
 Profile-guided optimization (PGO) is a compiler optimization technique which uses profile data to improve performance. It is available in popular compilers, including GCC and Clang. 
 
-This section shows how to use PGO on MySQL server with GCC.
+This section shows you how to use PGO on the MySQL server with GCC.
 
-In the previous step, you installed MySQL server in `/home/mysql/mysql_install_8.0.33`
+In the previous step, you installed the MySQL server in `/home/mysql/mysql_install_8.0.33`.
 
-This section creates two more installations of MySQL server, one to collect profile information, and another to use the profile data to achieve increased performance. 
+This section creates two more installations of the MySQL server, one to collect profile information, and one to use the profile data to achieve increased performance. 
 
-## Rebuild MySQL server with profile generate enabled
+## Rebuild the MySQL server with profile generate enabled
 
 Reconfigure the same source directory, but use a new installation directory for the build. 
 
-This configuration adds `-DFPROFILE_GENERATE=ON` telling the compiler to capture a profile.
+This configuration adds `-DFPROFILE_GENERATE=ON` which tells the compiler to capture a profile.
 
-This results in a second installation of MySQL at `mysql_install_8.0.33_profile`
+This results in a second installation of MySQL at `mysql_install_8.0.33_profile`.
 
 Do the build and install:
 
@@ -32,7 +32,7 @@ make -j $(nproc)
 make install
 ```
 
-## Run Sysbench (to collect PGO profile data)
+## Run Sysbench to collect the PGO profile data
 
 Stop the first build (if it is still running on your machine):
 
@@ -81,21 +81,21 @@ $MYSQL_BIN/mysql \
                 grant all privileges on sysdb.* to sysbench@'%';"
 ```
 
-Run Sysbench on the client system again with the IP address of the server system.
+Run Sysbench on the client system again with the IP address of the server system:
 
 ```
 ./run_sysbench.sh [MySQL-server-ip] [oltp_write_only | oltp_read_only]
 ```
 
-When Sysbench completes, you will see a number of files with the `.gcda` extension which were created in the directory `mysql-server/build-profile-data`.
+When Sysbench completes, you will see a number of files with the `.gcda` extension which have been created in the directory `mysql-server/build-profile-data`.
 
 The profile data for PGO is now available.
 
-## Rebuild MySQL server with profile use enabled
+## Rebuild the MySQL server with profile use enabled
 
 Reconfigure the same source directory again. 
 
-This creates a new installation directory at `mysql_8.0.33_gcc_11.3.0_pgo`. This configuration adds `-DFPROFILE_USE=ON` telling the compiler to use the profile data from the previous run.
+This creates a new installation directory at `mysql_8.0.33_gcc_11.3.0_pgo`. This configuration adds `-DFPROFILE_USE=ON` which tells the compiler to use the profile data from the previous run.
 
 Do the build and install:
 
@@ -107,7 +107,7 @@ make -j $(nproc)
 make install
 ```
 
-## Run Sysbench (with the PGO installation)
+## Run Sysbench with the PGO installation
 
 Stop the second build:
 
@@ -156,7 +156,7 @@ $MYSQL_BIN/mysql \
                 grant all privileges on sysdb.* to sysbench@'%';"
 ```
 
-Run Sysbench on the client system again with the IP address of the server system.
+Run Sysbench on the client system again with the IP address of the server system:
 
 ```
 ./run_sysbench.sh [MySQL-server-ip] [oltp_write_only | oltp_read_only]
@@ -176,24 +176,24 @@ The test environment setup from Alibaba ECS is shown below:
 | Client |  Alibaba Cloud Linux | 5.10.134-14.al8.aarch64 | N/A    | 32     | 128G  |
 
 
-You can run your own testing on Arm servers. Your results may be different, depending on the hardware configuration and the software version details.
+You can run your own tests on Arm servers. Note that your results may be different depending on the hardware configuration and the software version details.
 
 ## Test Results
 
-Here is the the sequence used to run the testing:
+Here is the sequence used to run the test:
 
-1. reboot server
-2. start MySQL server which doesn't enable PGO
-3. run write test
-4. run read test
-5. repeat step 1-4 for another 2 times
-6. reboot server
-7. start MySQL server which enables PGO
-8. run write test
-9. run read test
-10. repeat step 6-9 for another 2 times
+1. Reboot the server
+2. Start the MySQL server (which doesn't enable PGO)
+3. Run write test
+4. Run read test
+5. Repeat steps 1-4 another 2 times
+6. Reboot the server
+7. Start the MySQL server which does enable PGO
+8. Run write test
+9. Run read test
+10. Repeat steps 6-9 another 2 times
 
-### Write test results without PGO
+### Write the test results without PGO
 
 Here are the results for 3 rounds of the write test without PGO:
 
@@ -225,7 +225,7 @@ Throughput:
 
 ```
 
-### Read test results without PGO
+### Read the test results without PGO
 
 Here are the results for 3 rounds of the read test without PGO:
 
@@ -256,11 +256,11 @@ Throughput:
     total number of events:              1133042
 ```
 
-### Write test results (+13.4%, +16.7%, +11.8%) with PGO
+### Write the test results with PGO
 
-Below are the results for 3 rounds of the write test with PGO. 
+Below are the results for the 3 rounds of the write test with PGO. 
 
-The performance improved 13.4%, 16.7%, 11.8% for each round compared to non-PGO test.
+The performance improved by 13.4%, 16.7% and 11.8% for each round compared to the non-PGO test.
 
 ```output
 
@@ -289,11 +289,11 @@ Throughput:
     total number of events:              2650088
 ```
 
-### Read test results (+25.9%, +20.9%, +16.4%) with PGO
+### Read the test results with PGO
 
-Below are the results for 3 rounds of the read test with PGO. 
+Below are the results for the 3 rounds of the read test with PGO. 
 
-The performance improved 25.9%, 20.9%, 16.4% for each round compared to non-PGO test.
+The performance improved by 25.9%, 20.9% and 16.4% for each round compared to non-PGO test.
 
 ```output
 Throughput:
@@ -321,4 +321,4 @@ Throughput:
     total number of events:              1319479
 ```
 
-You have now installed and run MySQL server compiled with PGO for improved performance.
+You have now installed and run the MySQL server compiled with PGO for improved performance.

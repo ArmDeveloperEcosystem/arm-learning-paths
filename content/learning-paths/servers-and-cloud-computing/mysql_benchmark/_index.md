@@ -10,8 +10,8 @@ learning_objectives:
     - Enable profile-guided optimization (PGO) for MySQL and examine the performance improvements
 
 prerequisites:
-    - Basic knowledge about MySQL database
-    - Two Arm servers running Ubuntu 22.04, one for the MySQL server and another for the Sysbench client
+    - Basic knowledge of [MySQL databases](https://www.mysql.com/)
+    - Two Arm servers running Ubuntu 22.04, one for the MySQL server and the other for the Sysbench client
 
 author_primary: Bolt Liu
 
