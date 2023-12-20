@@ -71,8 +71,8 @@ From this drop-down menu, select Arm64EC Release and build the application.
 
 Since you are using the single CMake file for both DLLs, you will find both compiled DLLs under the out/build/arm64EC-release folder. Each DLL is located in the corresponding folder: Filters or Vectors. Copy those DLLs and create a new folder called Main-app/Dependencies/Arm64EC-release in the Main-app, as follows:
 
-1. ARM64EC.Porting/out/build/arm64EC-release/Vectors/Vectors.dll to ARM64EC.Porting/Main-app/Dependencies/Arm64EC-release/Vectors.dll
-2. ARM64EC.Porting/out/build/arm64EC-release/Filters/Filters.dll to ARM64EC.Porting/Main-app/Dependencies/Arm64EC-release/Filters.dll
+1. Copy ARM64EC.Porting/out/build/arm64EC-release/Vectors/Vectors.dll to ARM64EC.Porting/Main-app/Dependencies/Arm64EC-release/Vectors.dll
+2. Copy ARM64EC.Porting/out/build/arm64EC-release/Filters/Filters.dll to ARM64EC.Porting/Main-app/Dependencies/Arm64EC-release/Filters.dll
 
 To use those DLLs in the main application, update the following two variables in the Main-app/main.py file:
 

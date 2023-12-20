@@ -25,13 +25,13 @@ Then, configure the project template as follows:
 3. Solution name: **Arm64EC.Porting.MSBuild**
 4. Remember to uncheck Place solution and project in the same directory.
 
-The configuration should look like in a figure below
+The configuration should look this:
 
 ![fig7](figures/07.png)
 
 Click the Create button. After creating the project, you will have a single source file called Arm64EC.Porting.Vectors.cpp. Rename this file as Vectors.cpp.
 
-Replace the default content of Vectors.cpp with the content of the file with the following:
+Replace the default content of Vectors.cpp with the content shown below:
 
 ```cpp
 #include "Vectors.h"
@@ -88,7 +88,7 @@ Then, open Solution Explorer, right-click Headers, and choose Add/New Item….
 
 In the window that appears, type "Vectors.h" and click Add.
 
-Replace the default contents of the Vectors.h file with the following:
+Replace the default contents of the Vectors.h file with the following code:
 
 ```cpp
 #pragma once
@@ -121,7 +121,7 @@ Then, right-click on the Arm64EC.Porting.Vectors file and open the Properties wi
 
 The compiled DLL will be available under the ARM64EC subfolder. You can then use it in the Main-app in the same way as DLLs built using CMake.
 
-To use MSBuild for the second DLL, you proceed the same way. For your convenience the full source code is added to this [git repository](https://github.com/dawidborycki/Arm64EC.Porting.MSBuild/).
+To use MSBuild for the second DLL, proceed the same way. For your convenience, you can refer to the full source code in this [git repository](https://github.com/dawidborycki/Arm64EC.Porting.MSBuild/).
 
 ## Summary
 This learning path demonstrated how to port C/C++ DLLs to Arm64 using Arm64EC. It showed you how to use CMake and MSBuild projects. You also learned how to use DLLs in the Python app with ctypes. This information can help you rapidly build UIs and keep computation-intensive work in a separate DLL. You can then build those DLLs for Arm64 and mix them with your existing x64 dependencies.

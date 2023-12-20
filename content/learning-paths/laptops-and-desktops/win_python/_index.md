@@ -1,9 +1,9 @@
 ---
-title: Building Native Windows on Arm Apps with Python
+title: Build native Windows on Arm applications with Python
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for developers, who are interested in building Python applications that leverage native performance of the Arm chips.
+who_is_this_for: This is an introductory topic for developers who are interested in building Python applications on Arm.
 
 learning_objectives:
    - Understand the platform-dependency of Python packages

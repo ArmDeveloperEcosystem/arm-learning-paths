@@ -12,7 +12,7 @@ Arm-native build tools are provided to enable the developers to create Arm64 app
 
 The official Python implementation and its standard library is provided by CPython. It compiles code into bytecode before interpretation, enabling it to contain platform-specific code.
 
-Starting from Python v3.11 a native support for Arm devices running Windows 11 is available. To use this feature, you just install a dedicated Arm64 Python package. There is no change to your scripts. However, as described below, there can be some build or porting requirements for the dependent pip packages, especially when you rely on the platform-specific dependencies.
+Starting from Python v3.11, native support for Arm devices running Windows 11 is available. To use this feature, you just install a dedicated Arm64 Python package. There is no change to your scripts. However, as described below, there can be some build or porting requirements for the dependent pip packages, especially when you rely on the platform-specific dependencies.
 
 In this learning path you will see how this works for the popular NumPy package on Python 3.12.
 
@@ -46,7 +46,7 @@ Similarly, you use the Python interpreter for Arm64:
 py -3.12-arm64
 ```
 
-The above command generatesd the following output
+The above command generatesthe following output:
 
 ```output
 Python 3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:15:47) [MSC v.1935 64 bit (ARM64)] on win32
@@ -56,15 +56,15 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 Again, you close it using the CTRL+Z or the **exit()** command.
 
-{{% notice Note %}} By comparing the output of the two Python interpreters, we can see that both interpreters use the MSC v.1935 compiler for either x64 (labeled as AMD64) or Arm64 (labeled ARM64).{{% /notice %}}
+{{% notice Note %}} By comparing the output of the two Python interpreters, we can see that both interpreters use the MSC v.1935 compiler for both x64 (labeled as AMD64) or Arm64 (labeled ARM64).{{% /notice %}}
 
 ## Python packages
 
 Because x64 and Arm64-based Python use different underlying C compilers, the Python packages can have compatibility and porting issues. Traditionally, you install Python packages using pip, which automatically installs the dependencies. First, pip tries to find the platform-independent package (called the wheel). Then, it looks for the platform-specific package and eventually builds it from the source code.
 
-If you are writing Python packages to take advantage of Arm64, you must ensure you compile your packages for Arm64, not x64. This problem is not present for pure (platform-independent) Python packages.
+If you are writing Python packages to take advantage of Arm64, you must ensure you compile your packages for Arm64, not x64. This is not a problem for pure (platform-independent) Python packages.
 
-You will now see what does it mean in practice by installing the NumPy using pip.
+You will now see what this means in practice by installing the NumPy package using pip.
 
 Open the command prompt, and then type the following command to ensure you use the latest pip version:
 
@@ -74,7 +74,7 @@ py -3.12-arm64 -m pip install --upgrade pip
 
 The output will look as follows:
 
-```
+```output
 Requirement already satisfied: pip in c:\users\db\appdata\local\programs\python\python312-arm64\lib\site-packages (23.2.1)
 Collecting pip
   Obtaining dependency information for pip from https://files.pythonhosted.org/packages/47/6a/453160888fab7c6a432a6e25f8afe6256d0d9f2cbd25971021da6491d899/pip-23.3.1-py3-none-any.whl.metadata
@@ -149,7 +149,7 @@ note: This is an issue with the package mentioned above, not pip.
 hint: See above for details.
 ```
 
-As we see the installation failed. For Arm64, there is no a platform-specific wheel. So, pip downloads and tries to build the package from the source code to create the local Arm64 package wheel. However, as we do not have the build tools yet, the installation was not yet successful.
+As we see the installation failed. For Arm64, there is no a platform-specific wheel. So, pip downloads and tries to build the package from the source code to create the local Arm64 package wheel. However, as you do not have the build tools yet, the installation was not yet successful.
 
 Before going further, try to install NumPy for x64 by invoking the following command:
 
@@ -170,7 +170,7 @@ Successfully installed numpy-1.26.2
 ```
 
 ## Arm build tools
-To install the NumPy package, we will need to provide the Arm build tools. So, we need to install Visual Studio 2022 Community with the **Desktop development with C++** workload and **Arm build tools** as explained in this [installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio). 
+To install the NumPy package, we will need to provide the Arm build tools. So, you need to install Visual Studio 2022 Community with the **Desktop development with C++** workload and **Arm build tools** as explained in this [installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio). 
 
 After installing the build tools, restart your machine, and install NumPy package with the following command:
 
@@ -195,4 +195,4 @@ Successfully installed numpy-1.26.2
 ```
 
 ## Summary
-You have just learned how the pip can build the package from the source code, when the platform-independent package (called the wheel) is unavailable. In the next step you will use the NumPy package to build the application.
+You have just learned how pip can build the package from the source code, when the platform-independent package (called the wheel) is unavailable. In the next section you will use the NumPy package to build the application.

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Creating the ASP.NET Core Web API project"
+title: "Create a ASP.NET Core Web API project"
 
 weight: 2
 
@@ -8,14 +8,14 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-ASP.NET Core is a cross-platform framework for building web applications that lets you develop web services as back ends for various scenarios. It also supports containerization, which you can use for building cloud-native apps. These characteristics and its cross-platform design make ASP.NET Core an ideal tool for building Internet of Things (IoT) web servers.
+ASP.NET Core is a cross-platform framework for building web applications that lets you develop web services as back ends for various scenarios. It also supports containerization, which you can use for building cloud-native applications. These characteristics and its cross-platform design make ASP.NET Core an ideal tool for building Internet of Things (IoT) web servers.
 
 Windows 11 can run directly on Arm64-powered devices, so you can use it similarly to Windows 10 IoT Core to develop IoT apps. For example, you can use ASP.NET Core to build a web API that your headless IoT device exposes to communicate with users or other devices.
 
 This learning path demonstrates how you can use ASP.NET Core with Windows 11 to build a web server for a headless IoT application. This learning path uses Windows Dev Kit 2023 as a development PC. The kit does not contain any real sensors, so you will implement a temperature sensor emulator.
 
 ## Before you begin
-Before going further, let's make sure the .NET was correctly installed. To do so, open the command prompt, and type:
+Make sure that .NET is correctly installed on your machine. To do so, open the command prompt, and type:
 
 ```console
 dotnet --info
@@ -23,10 +23,10 @@ dotnet --info
 
 The output will show the list of installed SDKs. Make sure you have at least one SDK (ideally version 8 or above). 
 
-{{% notice Note %}} Refer to this [learning path](/learning-paths/laptops-and-desktops/win_net8/) for a more detailed output of the dotnet --info command.{{% /notice %}}
+{{% notice Note %}} Refer to this [learning path](/learning-paths/laptops-and-desktops/win_net8/) for a more details on the output of the dotnet --info command.{{% /notice %}}
 
-## Creating the project
-Now, you will create a new ASP.NET Core Web API project. Open a command prompt window and type the following command:
+## Create the project
+You can now create a new ASP.NET Core Web API project. Open a command prompt window and type the following command:
 
 ```console
 dotnet new webapi -o Arm64.HeadlessIoT
@@ -41,10 +41,9 @@ SDK Version: 8.0.100
 
 Telemetry
 ---------
-The .NET tools collect usage data in order to help us improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+The .NET tools collect usage data in order to help improve your experience. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
 
 Read more about .NET CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
-
 ----------------
 Installed an ASP.NET Core HTTPS development certificate.
 To trust the certificate, run 'dotnet dev-certs https --trust'
@@ -66,17 +65,17 @@ Restoring C:\Arm64.HeadlessIoT\Arm64.HeadlessIoT.csproj:
 Restore succeeded.
 ```
 
-The command creates a project containing a web API controller implemented in the Controllers/WeatherForecastController.cs file. This controller returns a collection of simulated weather forecasts. Since you do not need this controller, remove it by deleting the entire WeatherForecastController.cs file. The project is now ready, and you can proceed with implementation.
+The command creates a project containing a web API controller implemented in the `Controllers/WeatherForecastController.cs` file. This controller returns a collection of simulated weather forecasts. You do not need this controller. You can remove it by deleting the entire `WeatherForecastController.cs` file. The project is now ready, and you can proceed with implementation.
 
 ## Implementation
 In this section you will learn how to implement the temperature sensor emulator, sensor service registration, and web API controller.
 
-{{% notice Note %}} You can find the complete code under [this repository](https://github.com/dawidborycki/Arm64.HeadlessIoT). {{% /notice %}}
+{{% notice Note %}} You can find the complete code in [this repository](https://github.com/dawidborycki/Arm64.HeadlessIoT). {{% /notice %}}
 
 ### Temperature Sensor Emulator
-You start by implementing the temperature sensor emulator, which simulates readings from a temperature sensor connected to an IoT device running a web service.
+Start by implementing the temperature sensor emulator, which simulates readings from a temperature sensor connected to an IoT device running a web service.
 
-To represent sensor readings, you use the SensorReading class, defined in the code snippet below. To implement this class, create a Sensors folder in the Arm64.HeadlessIoT solution folder, then make a new file called SensorReading.cs, where you place the following code:
+To represent sensor readings, you use the SensorReading class, defined in the code snippet below. To implement this class, create a Sensors folder in the Arm64.HeadlessIoT solution folder, then make a new file called `SensorReading.cs`, where you place the following code:
 
 ```cs
 namespace Arm64.HeadlessIoT.Sensors;
@@ -194,7 +193,7 @@ app.Run();
 
 This approach ensures that a single instance of the TemperatureSensor class is available to the entire application. Any web API controller requiring access to that sensor can simply use constructor injection.
 
-You will also use the Swagger toolset. As shown above, the default ASP.NET Core Web API project template also registers two services: EndpointsApiExplorer and SwaggerGen:
+You will also use the Swagger toolset. As shown above, the default ASP.NET Core Web API project template also registers two services, EndpointsApiExplorer and SwaggerGen:
 
 ```cs
 builder.Services.AddEndpointsApiExplorer();
@@ -212,7 +211,7 @@ if (app.Environment.IsDevelopment())
 ```
 
 ### Web API Controller for the Headless IoT Device
-Now you are ready to implement the web API controller. Create a new file, IoTController.cs, in the Controllers folder. Then, in the IoTController.cs file, add two using statements and define the namespace:
+Now you are ready to implement the web API controller. Create a new file, `IoTController.cs`, in the Controllers folder. Then, in the `IoTController.cs` file, add two using statements and define the namespace as shown:
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
@@ -274,7 +273,7 @@ public IActionResult SetSensorStatus(bool isActive)
 }
 ```
 
-The final form of the IoTController.cs file is given below:
+The final form of the `IoTController.cs` file is shown below:
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
@@ -310,4 +309,4 @@ public class IoTController : ControllerBase
 }
 ```
 
-Now, the implementation is ready and we can build, run, and test the web server.
+Now, the implementation is ready and you can build, run, and test the web server.

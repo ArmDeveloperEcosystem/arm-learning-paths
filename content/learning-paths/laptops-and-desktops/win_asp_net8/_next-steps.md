@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how create web servers for your headless IoT applications running on Windows 11 on Arm. You can now apply this knowledge to implement the application to control the device, equipped with the real sensors.
+   You have learned how to create web servers for your headless IoT applications running on Windows 11 on Arm. You can now apply this knowledge to implement the application to control the device, equipped with the real sensors.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_net8"
