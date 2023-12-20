@@ -18,25 +18,13 @@ recommended_path: "/learning-paths/laptops-and-desktops/win_net"
 
 further_reading:
     - resource:
-        title: Announcing .NET 8
-        link: https://devblogs.microsoft.com/dotnet/announcing-dotnet-8/
+        title: Qt for Windows on ARM
+        link: https://www.qt.io/blog/qt-for-windows-on-arm
         type: blog
     - resource:
-        title: Deploy .NET apps on Arm single-board computers
-        link: https://learn.microsoft.com/en-us/dotnet/iot/deployment
-        type: documentation
-    - resource:
-        title: .NET CLI
-        link: https://learn.microsoft.com/en-us/dotnet/core/tools/
-        type: documentation
-    - resource:
-        title: Performance improvements in .NET 8
-        link: https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-8/
-        type: blog
-    - resource:
-        title: .NET Performance on arm64
-        link: https://www.codeproject.com/Articles/5367981/NET-Performance-on-Arm64
-        type: article
+        title: Qt Examples And Tutorials
+        link: https://doc.qt.io/qt-6/qtexamplesandtutorials.html
+        type: documentation    
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
