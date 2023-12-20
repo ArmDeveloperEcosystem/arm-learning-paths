@@ -19,8 +19,8 @@ Nexmark is a benchmark suite specifically designed for evaluating and comparing 
   ```console
   sudo apt install maven
   ```
-- Environment Variables:  
-  (The following environment variable should be set on every node for the Flink and Nexmark scripts)
+- Environment Variables - the following environment variable should be set on every node for the Flink and Nexmark scripts:
+  
   ```console
   # JAVA_HOME: points to the directory of your JDK installation.
   export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-arm64
@@ -47,7 +47,7 @@ Nexmark is a benchmark suite specifically designed for evaluating and comparing 
   tar xzf nexmark-flink.tgz
   ```
 
-- Copy the jars under nexmark/lib to flink/lib which contains the Nexmark source generator:
+- Copy the jars under `nexmark/lib` to `flink/lib` which contains the Nexmark source generator:
   
   ```console
   cp ~/flink-benchmark/nexmark-flink/lib/*.jar ~/flink-benchmark/flink-1.17.2/lib
@@ -70,12 +70,12 @@ Nexmark is a benchmark suite specifically designed for evaluating and comparing 
     cp ~/flink-benchmark/nexmark-flink/conf/sql-client-defaults.yaml ~/flink-benchmark/flink-1.17.2/conf
     ```
 
-  - Edit nexmark-flink/conf/nexmark.yaml and set `nexmark.metric.reporter.host`.
+  - Edit `nexmark-flink/conf/nexmark.yaml` and set `nexmark.metric.reporter.host`.
     ```console
     #set nexmark.metric.reporter.host: {JobManager_IP}
     ```
 
-## Scp Flink and Nexmark to your worker nodes:
+  - `scp` Flink and Nexmark to your worker nodes:
   ```console
   scp -r ~/flink-benchmark user@{TaskManager_IP}:~/
   ```
