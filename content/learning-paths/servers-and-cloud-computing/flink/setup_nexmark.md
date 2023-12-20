@@ -55,7 +55,7 @@ Nexmark is a benchmark suite specifically designed for evaluating and comparing 
 
 - Nexmark and Flink Config:  
 
-  - Edit and replace the file `nexmark-flink/conf/flink-conf.yaml`
+  - Edit and replace the file `nexmark-flink/conf/flink-conf.yaml`:
     ```console
     #Set jobmanager.rpc.address: {JobManager_IP}
     #Set state.checkpoints.dir: file:///home/username/checkpoint (SSD Recommended)
@@ -65,12 +65,12 @@ Nexmark is a benchmark suite specifically designed for evaluating and comparing 
     cp ~/flink-benchmark/nexmark-flink/conf/flink-conf.yaml ~/flink-benchmark/flink-1.17.2/conf
     ```
 
-  - Replace `flink-1.17.2/conf/sql-client-defaults.yaml` with `nexmark-flink/conf/sql-client-defaults.yaml`
+  - Replace `flink-1.17.2/conf/sql-client-defaults.yaml` with `nexmark-flink/conf/sql-client-defaults.yaml`:
     ```console
     cp ~/flink-benchmark/nexmark-flink/conf/sql-client-defaults.yaml ~/flink-benchmark/flink-1.17.2/conf
     ```
 
-  - Edit `nexmark-flink/conf/nexmark.yaml` and set `nexmark.metric.reporter.host`.
+  - Edit `nexmark-flink/conf/nexmark.yaml` and set `nexmark.metric.reporter.host`:
     ```console
     #set nexmark.metric.reporter.host: {JobManager_IP}
     ```
