@@ -10,7 +10,7 @@ official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
 - ubuntu:latest
 - fedora:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: null
 test_maintenance: true
 test_status:
 - passed
@@ -88,7 +88,7 @@ To confirm the installation is successful, enter:
 arm-none-eabi-gcc --version
 ```
 
-To compile an example program, create a text file named hello-world.c with the contents below.
+To compile an example program, create a text file named `hello-world-embedded.c` with the contents below.
 
 ```C { file_name="hello-world-embedded.c" }
 #include <stdio.h>
@@ -102,7 +102,7 @@ int main()
 
 To compile hello-world as a bare-metal application:
 
-```bash
+```bash { target="ubuntu:latest" }
 arm-none-eabi-gcc --specs=rdimon.specs hello-world-embedded.c -o hello-world.elf
 ```
 

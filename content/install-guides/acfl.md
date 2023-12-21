@@ -5,7 +5,6 @@ additional_search_terms:
 - hpc
 - linux
 - allinea
-
 author_primary: Florent Lebeau
 layout: installtoolsall
 minutes_to_complete: 15
@@ -18,8 +17,8 @@ test_images:
 test_link: null
 test_maintenance: true
 test_status:
-- passed
-- passed
+- failed
+- failed
 title: Arm Compiler for Linux
 tool_install: true
 weight: 1
@@ -68,10 +67,12 @@ the Arm Compiler for Linux package. You must also have an additional 6 GB of
 free space to install the package.
 
 For example:
-```command
+
+```console
 sudo apt update
 sudo apt install -y python-is-python3 libc6-dev
 ```
+
 You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 
 ## Download and install manually {#manual}
@@ -79,7 +80,8 @@ You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 ### Download with wget
 
 Download releases from the command line using `wget`. Install `wget` if not present.
-```command
+
+```console
 sudo apt install wget
 ```
 
@@ -159,7 +161,7 @@ module load acfl/23.10
 To configure GCC:
 
 ```bash { env_source="~/.bashrc" }
-module load gnu/12.3.0
+module load gnu/12.2.0
 ```
 `ACfL` is now [ready to use](#armclang).
 
@@ -172,32 +174,42 @@ See the [Arm Compiler for Linux and Arm PL now available in Spack](https://commu
 ### Setup Spack
 
 Clone the `Spack` repostitory and add `bin` directory to the path:
-```command
+
+```console
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git
 export PATH=/home/ubuntu/spack/bin:$PATH
 ```
+
 Set up shell support:
-```command
+
+```console
 . /home/ubuntu/spack/share/spack/setup-env.sh
 ```
+
 `Spack` is now ready to use.
 
 ### Install ACfL
 
 Download and install `Arm Compiler for Linux` with:
-```command
+
+```console
 spack install acfl
 ```
+
 If you wish to install just the `Arm Performance Libraries`, use:
-```command
+
+```console
 spack install armpl-gcc
 ```
+
 ### Setup environment
 Use the commands below to set up the environment:
-```command
+
+```console
 spack load acfl
 spack compiler find
 ```
+
 `ACfL` is now [ready to use](#armclang).
 
 
@@ -206,7 +218,7 @@ spack compiler find
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
 armclang --version
 ```
 
@@ -224,13 +236,13 @@ int main()
 
 Build the application with:
 
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
 armclang hello.c -o hello
 ```
 
 Run the application with:
 
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
 ./hello
 ```
 
@@ -244,7 +256,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
 armflang --version
 ```
 
@@ -258,12 +270,12 @@ end program hello
 ```
 
 Build the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
 armflang hello.f90 -o hello
 ```
 
 Run the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/22.1" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
 ./hello
 ```
 
