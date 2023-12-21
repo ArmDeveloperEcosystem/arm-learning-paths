@@ -13,7 +13,7 @@ multitool_install_part: false
 official_docs: https://docs.anaconda.com/
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: null
 test_maintenance: true
 test_status:
 - passed
@@ -50,7 +50,7 @@ The installer requires some desktop related libraries. The dependencies can be m
 
 For Ubuntu/Debian run the command:
 
-```bash
+```console
 sudo apt install xfce4 -y
 ```
 
@@ -65,7 +65,7 @@ sudo amazon-linux-extras install mate-desktop1.x
 Download the latest Anaconda Distribution.
 
 ```bash
-wget -O - https://www.anaconda.com/distribution/ 2>/dev/null | sed -ne 's@.*\(https:\/\/repo\.anaconda\.com\/archive\/Anaconda3-.*-Linux-aarch64\.sh\)\">64-Bit (AWS Graviton2 / ARM64) Installer.*@\1@p' | xargs wget
+curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
 ```
 
 Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-x86_64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
@@ -79,7 +79,7 @@ The default installation directory is `$HOME/anaconda3`. Change the installation
 If you wish to review the license terms before accepting, remove `-b`.
 
 ```bash
-sh ./Anaconda3-2022.10-Linux-aarch64.sh -b
+sh ./Anaconda3-2023.09-0-Linux-aarch64.sh -b
 ```
 
 The install will take a couple of minutes to complete.
@@ -136,7 +136,7 @@ python ./tf.py
 The expected output format is below. Your version may be slightly different. 
 
 ```output
-2.10.0
+2.12.0
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
 
