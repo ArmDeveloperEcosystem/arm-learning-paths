@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Objective
-In this step, you will install in the virtual machine the following tools:
+In this step, you will install the following tools in the virtual machine:
 - .NET 7 SDK – to build and run the application
 - git – to clone application sources
 
@@ -44,7 +44,6 @@ To install git, use the terminal of the virtual machine and type:
 ```console
 sudo apt-get install -y git-all
 ```
-
 Wait for the installation to be completed. It will take a while.
 
 ### Clone and run the application
@@ -92,4 +91,4 @@ Once this is done, open your web browser and type the public IP address of your 
 ![Application#left](figures/17.png "Figure 17. An application deployed to Azure virtual machine")
 
 ## Summary
-This tutorial has shown you how to create an arm64-powered Virtual Machine in Microsoft Azure, how to connect to that VM using SSH, and how to install the tools required to build and run the .NET web application. Finally, you have learned how to configure a network security group to enable inbound traffic on port 8080.
+This part of the tutorial has shown you how to create an arm64-powered Virtual Machine in Microsoft Azure, how to connect to that VM using SSH, and how to install the tools required to build and run the .NET web application. Finally, you have learned how to configure a network security group to enable inbound traffic on port 8080.

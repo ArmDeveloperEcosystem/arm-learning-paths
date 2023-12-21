@@ -42,8 +42,8 @@ Both IDEs contain `Arm Compiler for Embedded` to build applications, and can con
 A number of other tools are common in ML applications.
 - Python
 - pip
-- cmake
-- [CMSIS-Build](/install-guides/cmsis-build/)
+- [CMake](/install-guides/cmake/)
+- [CMSIS-Toolbox](/install-guides/cmsis-toolbox/)
 
 ## Using Docker
 

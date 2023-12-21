@@ -18,7 +18,7 @@ author_primary: Elham Harirpoush
 
 ### Tags
 skilllevels: Advanced
-subjects: Database
+subjects: Databases
 armips:
     - Neoverse
 tools_software_languages:

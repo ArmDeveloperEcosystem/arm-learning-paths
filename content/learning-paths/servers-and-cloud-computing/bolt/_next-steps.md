@@ -1,6 +1,6 @@
 ---
 next_step_guidance: 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
 
 further_reading:
     - resource:
@@ -8,7 +8,7 @@ further_reading:
         link: https://github.com/llvm/llvm-project/tree/main/bolt
         type: documentation
     - resource:
-        title: BOLT Paper
+        title: BOLT - A Practical Binary Optimizer for Data Centers and Beyond
         link: https://research.facebook.com/publications/bolt-a-practical-binary-optimizer-for-data-centers-and-beyond/
         type: website
 
