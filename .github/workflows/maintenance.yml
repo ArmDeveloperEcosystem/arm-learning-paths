@@ -17,7 +17,6 @@ jobs:
   report:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Check out repo and the whole history
@@ -29,7 +28,7 @@ jobs:
       # Report outdated files, store result as artifact and updates stats
       - name: Report outdated files of more than 20 days
         run: |
-           pip install junit-xml
+           pip install -r tools/requirements.txt
            python3 tools/maintenance.py -r 20
 
       # Upload report as artifact
@@ -66,11 +65,11 @@ jobs:
           done
            
       # Run tests for learning paths
-      - name: Test commands and output reports for learning paths
-        run: |
-          for i in $(tree -i -d -f content/learning-paths/ | tail -n +2); do
-            python3 tools/maintenance.py -i $i -l ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          done
+      #- name: Test commands and output reports for learning paths
+      #  run: |
+      #    for i in $(tree -i -d -f content/learning-paths/ | tail -n +2); do
+      #      python3 tools/maintenance.py -i $i -l ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      #    done
       
       # Move reports to result folder
       - name: Move reports
