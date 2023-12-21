@@ -56,7 +56,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 Native CMake support for Windows on Arm is available starting with version 3.24. Installers are available now from the [CMake download](https://cmake.org/download/) page. Emulated CMake can be used but is no longer needed unless an older version of CMake must be used.
 
-Download the [Windows ARM64 Installer](https://github.com/Kitware/CMake/releases/download/v3.26.4/cmake-3.26.4-windows-arm64.msi) and run it. 
+Download the [Windows ARM64 Installer](https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-windows-arm64.msi) and run it. 
 
 The welcome screen will appear:
 
@@ -115,14 +115,14 @@ Substitute the release number you want to install in the commands below..
 
 ```console
 cd $HOME
-wget -N https://github.com/Kitware/CMake/releases/download/v3.23.5/cmake-3.23.5-Linux-aarch64.sh
+wget -N https://github.com/Kitware/CMake/releases/download/v3.28.1/cmake-3.28.1-Linux-aarch64.sh
 ```
 
 2. Run the install script and set the search path using:
 
 ```console
 mkdir cmake
-bash /home/$USER/cmake-3.23.5-Linux-aarch64.sh --skip-license --exclude-subdir --prefix=$HOME/cmake
+bash /home/$USER/cmake-3.28.1-Linux-aarch64.sh --skip-license --exclude-subdir --prefix=$HOME/cmake
 export PATH=$PATH:$HOME/cmake/bin
 ```
 
@@ -163,7 +163,7 @@ cmake --version
 The output is similar to:
 
 ```output
-cmake version 3.22.1
+cmake version 3.28.1
 
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
