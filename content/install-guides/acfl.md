@@ -17,8 +17,8 @@ test_images:
 test_link: null
 test_maintenance: true
 test_status:
-- failed
-- failed
+- passed
+- passed
 title: Arm Compiler for Linux
 tool_install: true
 weight: 1
