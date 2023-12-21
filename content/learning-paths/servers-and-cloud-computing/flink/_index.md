@@ -11,7 +11,7 @@ learning_objectives:
 - Benchmark the performance of Flink
 
 prerequisites:
-- An Arm based instance from a cloud service provider.
+- An Arm based instance server from a cloud service provider.
 
 author_primary: Ying Yu
 
