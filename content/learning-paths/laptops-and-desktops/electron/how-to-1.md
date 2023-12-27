@@ -15,6 +15,8 @@ JSONPlaceholder is a free online REST API service that serves as a mock server f
 
 Here, we will use the posts endpoint of the JSONPlaceholder. This endpoint enables you to retrieve the list of hypothetical posts.
 
+You can find the companion code [here](https://github.com/dawidborycki/electron-sample-app.git)
+
 ## Before you begin
 Before you begin make sure to install Node.JS for ARM64. You can find the installer [here](https://nodejs.org/en/download). At the time of this writing we used the version 20.10.0. The installation process is automatic. However, make sure to automatically install the build tools for NPM packages by checking the "Automatically install the necessary tools" checkbox:
 
@@ -182,7 +184,7 @@ The above file will send the request to the API to retrieve the list of posts. T
 ## Package.json
 Finally, update the package.json as follows:
 
-```
+```JSON
 {
   "name": "electron-sample-app",
   "version": "1.0.0",

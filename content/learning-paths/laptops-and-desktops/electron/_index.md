@@ -15,7 +15,6 @@ prerequisites:
     - Node.js for ARM64. You can find the installer [here](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi)
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
-
 author_primary: Dawid Borycki
 
 ### Tags
