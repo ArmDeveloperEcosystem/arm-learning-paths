@@ -30,6 +30,7 @@ review:
             - "It is a class to download CEF"
         correct_answer: 1
         explanation: >
+            CefBrowserProcessHandler is an interface exclusive to the browser process, invoked only within that context.
             
 
 # ================================================================================
