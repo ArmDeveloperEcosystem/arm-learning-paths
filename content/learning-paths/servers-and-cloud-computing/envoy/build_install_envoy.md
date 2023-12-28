@@ -8,8 +8,6 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-
-##  Introduction to Envoy
 Envoy is an open-source, high-performance proxy service initially developed by Lyft and now maintained by the Cloud Native Computing Foundation (CNCF). It is designed to be a scalable, flexible, and low-latency service proxy, particularly well-suited for microservices architectures and containerized applications.
 
 ### Before you begin
