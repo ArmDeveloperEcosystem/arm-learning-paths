@@ -2,36 +2,35 @@
 review:
     - questions:
         question: >
-            What platform did we deploy to in this learning path?
+            What machine learning paradigm did we use in this learning path?
         answers:
-            - macOS
-            - Android
-            - Windows
-        correct_answer: 2                    
+            - Imitation Learning
+            - Unity ML Agents
+            - Reinforcement Learning
+        correct_answer: 3                    
         explanation: >
-            We covered how to Build and Run our ML-Agents onto an Android device.
+            We used reinforcement learning (one of the paradigms supported by Unity ML Agents toolkit).
 
     - questions:
         question: >
-            I can you specify separate brains for seperate characters within my game?
+            We could specify a separate brain for each character within the game.
         answers:
-            - Yes
-            - No
+            - True
+            - False
         correct_answer: 1                    
         explanation: >
-            Yes we can. Refer to "Training the Model", where _BossBattle separation.yaml_ is mentioned, which shows how we might have separate braings for each character in our game. One for the Paladin and another for the Vampire.
+            Refer to "The Training Configurations", where we show an alternative yaml file which defines two separate brains; one for the "Paladin" and another for the "Vampire".
                
     - questions:
         question: >
-            Using the training model in this learning path, how many hours can it take to train the models to a competent enough level for our game?
+            Using the training model in this learning path, how long can it take to train the model to a competent level for our game?
         answers:
-            - 1-2 hours
-            - 2-4 hours
-            - 4-6 hours
-            - 6-8 hours
-        correct_answer: 4          
+            - Minutes
+            - About an hour
+            - Several hours
+        correct_answer: 3          
         explanation: >
-            It can take 6-8 hours for the training model to reach near 3,000,000 learning iterations.
+            Depending on the host machine, at time of writing it can take 6+ hours for the training model to reach 3,000,000 learning iterations.
 
 
 
