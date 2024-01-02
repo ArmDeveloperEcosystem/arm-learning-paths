@@ -8,8 +8,6 @@ layout: learningpathall
 
 ## Enabling Memory Tagging Extension on Pixel 8 
 
-[ YOUR CONTENT GOES HERE ]: #
-
 Google Pixel 8 is the first smartphone supporting MTE out-of-the-box.
 To enable MTE on your Pixel 8 you first need to enable Developer options.
 
