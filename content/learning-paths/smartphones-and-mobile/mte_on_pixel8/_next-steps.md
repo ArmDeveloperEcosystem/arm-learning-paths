@@ -1,6 +1,6 @@
 ---
 next_step_guidance: >
-    Check the Further Reading links below for more information about MTE on Android. 
+    If you are interested in learning more about MTE, follow this learning path: 
 
 recommended_path: "/learning-paths/smartphones-and-mobile/mte/"
 
