@@ -7,7 +7,7 @@ who_is_this_for: This is an introductory topic for developers interested in lear
 
 learning_objectives: 
     - Enable MTE on your Google Pixel 8 smartphone
-    - Understand how MTE works and makes crashing an application when it encounters a memory bug
+    - Understand how MTE works and learn how to make an application crash when it encounters a memory bug
     - Access the memory bug report
     - Interpret the memory bug report
 
