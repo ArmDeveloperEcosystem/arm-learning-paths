@@ -4,8 +4,8 @@ review:
         question: >
             Can MTE be enabled on my Google Pixel 8?
         answers:
-            - Yes
-            - No
+            - "Yes"
+            - "No"
         correct_answer: 1                    
         explanation: >
             MTE option is part of Developer options. Developer options need to be enabled first on your Google Pixel 8 phone to access MTE.
