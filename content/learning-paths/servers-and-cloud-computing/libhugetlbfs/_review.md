@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            In which build stage libhugetlbfs will take effect?
+            To which build stage does information about libhugetlbfs need to be added?
         answers:
             - preprocessing
             - compilation
@@ -21,28 +21,28 @@ review:
             - linking
         correct_answer: 4                     
         explanation: >
-            libhugetlbfs takes effect during linking stage to place program sections into hugepage.
+            libhugetlbfs is a library which is added during the linking stage.
 
     - questions:
         question: >
-            libhugetlbfs could only eanble code section of a program, is it true?
+            True or False: libhugetlbfs can only be used on read-only sections of code.
         answers:
-            - Yes
-            - No
+            - "True"
+            - "False"
         correct_answer: 2
         explanation: >
-            Though code sectition is the typical section to be placed in hugepage, other sections like data can also be placed in hugepage.
+            The code section is a typical section to be placed in hugepages, but other sections like data can also be placed in hugepages.
                
     - questions:
         question: >
-            After enabling libhugetlbfs on MySQL, which perf event would be decresed dramatically?
+            After enabling libhugetlbfs on MySQL, which perf event will be decrease dramatically?
         answers:
             - l1d_tlb_refill
             - l1i_tlb_refill
             - l2d_tlb_refill
         correct_answer: 2
         explanation: >
-            After enabling libhugetlbfs on MySQL, we could see l1i_tlb_refill decreases dramatically from 490,265,467 to 70,741,621.
+            After enabling libhugetlbfs on MySQL, l1i_tlb_refill decreases dramatically from 490,265,467 to 70,741,621.
 
 
 
