@@ -20,6 +20,10 @@ further_reading:
         title: libhugetlbfs manpage
         link: https://linux.die.net/man/7/libhugetlbfs
         type: documentation
+    - resource:
+        title: libhugetlbfs HOWTO
+        link: https://github.com/libhugetlbfs/libhugetlbfs/blob/master/HOWTO
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

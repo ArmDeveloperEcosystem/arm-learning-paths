@@ -1,18 +1,17 @@
 ---
-title: Learn how to enable libhugetlbfs to increase performance on Arm Server
+title: Increase application performance with libhugetlbfs 
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for performance engineers who wants to tune performance in arm server.
+who_is_this_for: This is an advanced topic for performance engineers looking for ways to increase performance on Arm servers.
 
 learning_objectives:
-    - enable libhugetlbfs to increase performance
-    - see how much performance improved on workloads like MySQL, Redis.
+    - Enable libhugetlbfs on an Arm server running Linux
+    - Evaluate performance improvements for workloads such as MySQL.
 
 prerequisites:
-    - system with ubuntu 20 installed
-    - knowledge to build MySQL server, and run sysbench benchmark test
-    - knowledge to build Redis server, and run memtier benchmark test
+    - An Arm server or virtual machine instance from a cloud service provider with Ubuntu installed
+    - Knowledge to build MySQL server and run the sysbench benchmark test
 
 author_primary: Bolt Liu
 
@@ -23,15 +22,13 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - C
-    - C++
+    - MySQL
+    - GCC
 
 test_images:
     - ubuntu:latest
 test_link: null
-test_maintenance: true
-test_status:
-    - passed
+test_maintenance: false
 
 weight: 1
 layout: learningpathall
