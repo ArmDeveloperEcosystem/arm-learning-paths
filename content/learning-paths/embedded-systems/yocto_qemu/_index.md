@@ -3,7 +3,7 @@ title: Get started with Yocto Linux on Qemu
 
 description: Introduction to building a minimal Yocto Linux image and running it on 64-bit Qemu Arm target
 
-minutes_to_complete: 20
+minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers interested in learning the basics of building Yocto Linux for embedded Arm targets.
 
