@@ -29,20 +29,22 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 {{% notice Note %}}
-A computer running macOS with Apple Silicon is required to complete the steps below.
+A computer running macOS with Apple Silicon or an Arm Linux computer with KVM enabled is required to complete the installation.
 {{% /notice %}}
 
-[Multipass](https://multipass.run/) provides cloud style virtual machines (VMs). Multipass is popular among developers for efficient, local testing. When run on macOS with Apple Silicon, Multipass provides a similar experience to cloud instances. A local, software compatible equivalent of an Arm cloud instance on your desk with good performance, and no cost, is an important option for developers. 
+[Multipass](https://multipass.run/) provides cloud style virtual machines (VMs). Multipass is popular among developers for efficient, local testing. When run on macOS with Apple Silicon or on Linux with a Raspberry Pi 5, Multipass provides a similar experience to cloud instances. A local, software compatible equivalent of an Arm cloud instance on your desk with good performance is an important option for developers. 
 
 Multipass provides a clear CLI to easily start virtual machine instances, do development tasks, and clean the VMs from your computer.
 
 ## Before you begin
 
-Multipass runs on a variety of platforms and host operating systems. The information below covers running Multipass on macOS with Apple Silicon with the goal of creating a compatible Ubuntu Linux environment for developers working on cloud instances. 
+Multipass runs on a variety of platforms and host operating systems. The information below covers running Multipass on macOS with Apple Silicon and Arm Linux with the goal of creating a compatible Ubuntu Linux environment for developers working on cloud instances. 
 
 Multipass uses the terms virtual machine and instance synonymously. 
 
-## Download  {#download}
+## Installation on macOS
+
+### Download  {#download}
 
 Download Multipass for macOS.
 
@@ -50,7 +52,7 @@ Download Multipass for macOS.
 wget https://github.com/canonical/multipass/releases/download/v1.12.0/multipass-1.12.0+mac-Darwin.pkg
 ```
 
-## Installation
+### Install
 
 Install the download using the package command.
 
@@ -62,12 +64,97 @@ The getting started instructions below use the command line interface. Multipass
 
 ![Connect #center](/install-guides/_images/multipass-tray.png)
 
-## Get started with Multipass
+Multipass is now installed. Proceed to [Get Started with Multipass](#getstarted).
+
+## Installation on Arm Linux 
+
+Multipass can be used on Arm Linux computers such as the Raspberry Pi 5. 
+
+Running Multipass on Linux requires the KVM hypervisor. KVM does not typically work on virtual machines, it requires bare metal.
+
+The instructions have been tested on a Raspberry Pi 5 running Raspberry Pi OS and Ubuntu.
+
+### Check KVM
+
+Install and run the `kvm-ok` command to confirm KVM is available.
+
+Install `kvm-ok` on Debian based Linux distributions using:
+
+```console
+sudo apt install cpu-checker -y
+```
+
+To check if KVM is available run:
+
+```console
+kvm-ok
+```
+
+If KVM is available the output will be similar to:
+
+```output
+INFO: /dev/kvm exists
+KVM acceleration can be used
+```
+
+If KVM is not available the output will be similar to:
+
+```output
+INFO: /dev/kvm does not exist
+HINT:   sudo modprobe kvm
+INFO: For more detailed results, you should run this as root
+HINT:   sudo /usr/sbin/kvm-ok
+```
+
+If KVM is available, proceed with the install. 
+
+### Install 
+
+You may need to install the Snap daemon, `snapd`, before installing Multipass. 
+
+If you are not sure if it is running, execute the command:
+
+```console
+snap version
+```
+
+If the command is found and version information is printed, then `snapd` is running. 
+
+If you need to install `snapd` run:
+
+```console
+sudo apt install snapd -y
+```
+
+LXD is also required for Multipass.
+
+```console
+sudo snap install lxd
+```
+
+{{% notice Note %}}
+You can select from three Multipass releases: stable, beta, or edge. The default version is stable. 
+Add `--beta` or `--edge` to the install command below to select these more recent versions.
+{{% /notice %}}
+
+```console
+sudo snap install multipass
+```
+
+Multipass is now installed.
+
+## Get started with Multipass {#getstarted}
 
 To confirm multipass is installed run the `version` command.
 
 ```console
 multipass version
+```
+
+If the `multipass` command is not found, you can add `/snap/bin` to the Bash search path using:
+
+```console
+export PATH=$PATH:/snap/bin
 ```
 
 Multipass runs Ubuntu images. The last three LTS (long-term support) versions are available. A Docker environment with Portainer is also available as well as a few other images.
@@ -81,9 +168,10 @@ The output from `find` will be similar to the below.
 
 ```output
 Image                       Aliases           Version          Description
-20.04                       focal             20230616         Ubuntu 20.04 LTS
-22.04                       jammy,lts         20230616         Ubuntu 22.04 LTS
-23.04                       lunar             20230621         Ubuntu 23.04
+20.04                       focal             20231011         Ubuntu 20.04 LTS
+22.04                       jammy,lts         20231026         Ubuntu 22.04 LTS
+23.04                       lunar             20231025         Ubuntu 23.04
+23.10                       mantic,devel      20231011         Ubuntu 23.10
 
 Blueprint                   Aliases           Version          Description
 anbox-cloud-appliance                         latest           Anbox Cloud Appliance

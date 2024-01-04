@@ -7,16 +7,16 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 19
+- Baremetal: 22
 - Linux: 3
 - macOS: 2
-- RTOS: 7
+- RTOS: 9
 - Windows: 2
 subjects_filter:
 - CI-CD: 3
-- Libraries: 1
+- Libraries: 3
 - ML: 6
-- Performance and Architecture: 7
+- Performance and Architecture: 8
 - RTOS Fundamentals: 2
 - Security: 3
 - Virtual Hardware: 2
@@ -24,18 +24,19 @@ subtitle: Learn best practices for microcontroller development
 title: Microcontrollers
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 5
-- Arm Development Studio: 2
+- Arm Development Studio: 3
 - Arm Virtual Hardware: 11
 - AWS: 3
-- CMSIS: 2
-- CMSIS-Toolbox: 1
-- Coding: 18
+- CMSIS: 5
+- CMSIS-Toolbox: 3
+- Coding: 19
 - Fixed Virtual Platform: 8
+- FVP: 1
 - GCC: 4
 - GitHub: 2
 - Keil: 7
 - Keil MDK: 2
-- MDK: 1
+- MDK: 2
 - MPS3: 1
 - Paddle: 1
 - Raspberry Pi: 1

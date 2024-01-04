@@ -3,6 +3,9 @@
 ### Include vendor name where appropriate
 title: CMSIS-Build
 
+# cbuild is now part of CMSIS Toolbox making this obsolete
+draft: true 
+
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - cbuild
@@ -147,7 +150,7 @@ If the input file creation also needs to be automated use the command below and 
 cat <<EOF >>cmsis.input
 ./ctools
 $HOME/packs
-$HOME/ArmCompilerforEmbedded6.19
+$HOME/ArmCompilerforEmbedded6.21
 
 
 

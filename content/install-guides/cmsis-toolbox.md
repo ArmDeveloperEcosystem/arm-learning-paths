@@ -57,13 +57,13 @@ If `cmake` is earlier than 3.25.2, or `ninja` is earlier than 1.10.2, you will n
 #### cmake
 ```command
 sudo apt remove -y cmake
-sudo snap install cmake
+sudo snap install cmake --classic
 ```
 #### ninja
 ```command
 sudo apt remove -y ninja-build
 wget http://mirror.archlinuxarm.org/aarch64/extra/ninja-1.11.1-3-aarch64.pkg.tar.xz
-tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz
+sudo tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz -C /
 ```
 
 ## Download 
@@ -71,7 +71,7 @@ tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz
 Download and unpack the latest install file from GitHub. Downloads are provided in the [Releases area](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) of the repository.
 
 ```console
-wget https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases/download/2.0.0/cmsis-toolbox-linux-arm64.tar.gz
+wget https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases/download/2.2.0/cmsis-toolbox-linux-arm64.tar.gz
 tar -xf cmsis-toolbox-linux-arm64.tar.gz
 ```
 
@@ -98,7 +98,7 @@ Set environment variables as below. Note the exact name of the `TOOLCHAIN` varia
 
 For example:
 ```command
-export AC6_TOOLCHAIN_6_20_1=$HOME/ArmCompilerforEmbedded6.20.1/bin
+export AC6_TOOLCHAIN_6_21=$HOME/ArmCompilerforEmbedded6.21/bin
 export CMSIS_PACK_ROOT=$HOME/packs
 export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
 export PATH=$HOME/cmsis-toolbox-linux-arm64/bin:$PATH
@@ -141,17 +141,17 @@ cbuild Hello.Release+AVH.cprj
 ```
 The build will proceed and generate an executable image:
 ```output
-info cbuild: Build Invocation 2.0.0 (C) 2023 Arm Ltd. and Contributors
+info cbuild: Build Invocation 2.2.0 (C) 2023 Arm Ltd. and Contributors
 
 M650: Command completed successfully.
 
 M652: Generated file for project build: '/home/ubuntu/csolution-examples/Hello/tmp/Hello/AVH/Release/CMakeLists.txt'
 -- The ASM compiler identification is ARMClang
--- Found assembler: /home/ubuntu/ArmCompilerforEmbedded6.20.1/bin/armclang
--- The C compiler identification is ARMClang 6.20.1
+-- Found assembler: /home/ubuntu/ArmCompilerforEmbedded6.21/bin/armclang
+-- The C compiler identification is ARMClang 6.21
 -- Detecting C compiler ABI info
 -- Detecting C compiler ABI info - done
--- Check for working C compiler: /home/ubuntu/ArmCompilerforEmbedded6.20.1/bin/armclang - skipped
+-- Check for working C compiler: /home/ubuntu/ArmCompilerforEmbedded6.21/bin/armclang - skipped
 -- Detecting C compile features
 -- Detecting C compile features - done
 -- Configuring done (0.6s)
