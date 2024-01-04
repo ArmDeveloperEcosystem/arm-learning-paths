@@ -17,9 +17,9 @@ code .
 
 This will open Visual Studio Code, and you will see the folder, which resembles a typical structure of the Node.js application with node_modules and the package.json. On top of that, the Pulumi project contains the following files:
 
-1.	Pulumi.yaml contains a global configuration of your project, including name, runtime, and description, which you provided on project creation with Pulumi CLI.
+1.	Pulumi.yaml contains a global configuration of your project, including name, runtime, and description, which you provided on project creation with Pulumi CLI
 2.	Pulumi.dev.yaml contains additional, stack-specific configuration values. Here this includes the Azure region you configured with Pulumi CLI.
-3.	index.ts is the main application file, which programmatically defines all the Azure resources to be deployed.
+3.	index.ts is the main application file, which programmatically defines all of the Azure resources to be deployed
 
 The generated index.ts looks as follows:
 
@@ -49,4 +49,4 @@ const storageAccountKeys = storage.listStorageAccountKeysOutput({
 export const primaryStorageKey = storageAccountKeys.keys[0].value;
 ```
 
-The above listing gives us an idea of how the Pulumi works. It maps the Azure resources (like resource groups, Virtual Machines, and so on) to functions and objects. The form of them depends on the programming language you use with Pulumi. Here, we use TypeScript. So, we create the Azure resources like we would create TypeScript objects. For example, to create a resource group, you use resources.ResourceGroup. 
+The above listing gives us an idea of how Pulumi works. It maps the Azure resources (like resource groups, Virtual Machines, and so on) to functions and objects. The form of them depends on the programming language you use with Pulumi. Here, we've used TypeScript and have created the Azure resources as we would create TypeScript objects. For example, to create a resource group, you use resources.ResourceGroup. 

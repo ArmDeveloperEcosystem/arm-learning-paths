@@ -78,7 +78,7 @@ info: downloading installer
 info: profile set to 'default'
 info: default host triple is aarch64-unknown-linux-gnu
 info: syncing channel updates for 'stable-aarch64-unknown-linux-gnu'
-info: latest update on 2023-06-01, rust version 1.70.0 (90c541806 2023-05-31)
+info: latest update on 2023-12-07, rust version 1.74.1 (a28077b28 2023-12-04)
 info: downloading component 'cargo'
 info: downloading component 'clippy'
 info: downloading component 'rust-docs'
@@ -126,7 +126,7 @@ cargo version
 The command will print the version:
 
 ```output
-cargo 1.70.0 (ec8a8a0ca 2023-04-25)
+cargo 1.74.1 (ecb9851af 2023-10-18)
 ```
 
 You are ready to use the Rust programming language on your Arm Linux machine.

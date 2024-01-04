@@ -3,11 +3,11 @@ title: 'Deploy an application to Azure Kubernetes Service'
 
 minutes_to_complete: 45
 
-who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy applications to Azure Kubernetes Cluster powered by arm64-based virtual machines.
+who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy applications to the Azure Kubernetes Cluster powered by arm64-based virtual machines.
 
 learning_objectives: 
-    - Create Kubernetes cluster using Azure Kubernetes Service.
-    - Deploy a containerized application to Azure Kubernetes Service.
+    - Create a Kubernetes cluster using the Azure Kubernetes Service.
+    - Deploy a containerized application to the Azure Kubernetes Service.
 
 prerequisites:
     - 'Azure subscription. Use this link to sign up for a free account: https://azure.microsoft.com/en-us/free/.'

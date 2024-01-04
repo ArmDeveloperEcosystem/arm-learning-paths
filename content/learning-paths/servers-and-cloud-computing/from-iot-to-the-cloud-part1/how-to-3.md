@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Objective
 You will now connect to the VM using the SSH protocol and the public IP address of the virtual machine. 
-{{% notice Note %}} In this tutorial we will use the public IP **52.149.156.228**. Please make sure to use the public IP of your virtual machine instead. {{% /notice %}}
+{{% notice Note %}} In this tutorial, we will use the public IP address, **52.149.156.228**. Please make sure that you use the public IP of your virtual machine instead. {{% /notice %}}
 
 You can use a local terminal or the Azure Cloud Shell to connect to the VM. The latter is available directly from the Azure Portal and to avoid installing additional tools, we will use the Cloud Shell.
 
@@ -29,7 +29,7 @@ You can now use the Cloud Shell to connect to the VM via SSH. To do so, type the
 ssh arm@52.149.156.228
 ```
 
-This will initiate the connection with the VM. The ssh will display the following message: Are you sure you want to continue connecting (yes/no/[fingerprint])? Type **yes**. Then provide your password to authenticate:
+This will initiate the connection with the VM. The SSH will display the following message: Are you sure you want to continue connecting (yes/no/[fingerprint])? Type **yes**. Then provide your password to authenticate:
 ![Azure Cloud Shell#left](figures/13.png "Figure 13. Authentication")
 
 You now have terminal access to the VM. You can use it in the next step to install application dependencies (.NET SDK).

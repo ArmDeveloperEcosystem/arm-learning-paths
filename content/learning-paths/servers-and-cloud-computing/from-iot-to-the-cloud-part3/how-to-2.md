@@ -10,19 +10,19 @@ layout: learningpathall
 You will create the managed Kubernetes cluster in Azure, which is integrated with the Azure Container Registry. The cluster will use arm64 VMs as the nodes. This tutorial shows how to manually create the cluster. Optionally you can use Terraform-based deployment as described here: https://learn.arm.com/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/.
 
 ## Create the Kubernetes cluster
-login to Azure Portal and type **Kubernetes** in the search box. Afterward, look for the Kubernetes services:
+Login to the Azure Portal and type **Kubernetes** in the search box. Then, look for the Kubernetes services:
 
 ![AKS#left](figures/01.png)
 
-This will open Kubernetes services, where you click **+ Create** and then select Create a Kubernetes cluster:
+This will open Kubernetes services, click **+ Create** and then select Create a Kubernetes cluster:
 
 ![AKS#left](figures/02.png)
 
 The previous step will activate the Create Kubernetes cluster wizard, which you use to configure your cluster as follows:
-1.	Subscription: **select your subscription**.
-2.	Resource group: **rg-arm64**.
-3.	Cluster preset configuration: **Dev/Test**.
-4.	Kubernetes cluster name: **aks-people**.
+1.	Subscription: **select your subscription**
+2.	Resource group: **rg-arm64**
+3.	Cluster preset configuration: **Dev/Test**
+4.	Kubernetes cluster name: **aks-people**
 5.	Region: **US East** (or any other region)
 6.	Availability Zones: **Select all (if available)**. Otherwise, keep the default setting.
 7.	AKS pricing tier: **Free**
@@ -39,11 +39,11 @@ Click **Next: Node pools >**. This will open the Node pools tab. Under the Node 
 ![AKS#left](figures/04.png)
 
 You will see the Update node pool wizard, in which you do the following:
-1.	Under the Scale method, select **Manual**.
-2.	Set Node count to **1**.
-3.	Click **Choose a size** under the Node size.
+1.	Under the Scale method, select **Manual**
+2.	Set Node count to **1**
+3.	Click **Choose a size** under the Node size
 4.	This will open Select a VM size screen, where you look for **D2pds_v5 VM** (the arm64-based VM you used in the first part of this learning series).
-5.	Click the **Select** button.
+5.	Click the **Select** button
 
 ![AKS#left](figures/05.png)
 
@@ -57,7 +57,7 @@ Under integrations, look for the Container registry and select **people** (or yo
 
 ![AKS#left](figures/07.png)
 
-Finally, click the **Review + create** button and wait for the validation to complete. Afterward, click the **Create** button:
+Finally, click the **Review + create** button and wait for the validation to complete. Then, click the **Create** button:
 
 ![AKS#left](figures/08.png)
 

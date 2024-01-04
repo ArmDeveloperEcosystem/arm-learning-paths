@@ -155,8 +155,11 @@ def check(json_file, start, stop):
         return results
 
     # Run bash commands
+    print(data["ntests"])
     for i in range(0, data["ntests"]):
+        print(i)
         t = data["{}".format(i)]
+        print(t)
 
         # Check if file name is specified
         if "file_name" in t:

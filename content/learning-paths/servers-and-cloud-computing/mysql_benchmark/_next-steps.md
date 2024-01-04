@@ -24,6 +24,10 @@ further_reading:
         title: Running MySQL on ARM
         link: https://mysqlonarm.github.io/Running-MySQL-on-ARM/
         type: documentation
+    - resource:
+        title: Learn how to deploy MySQL
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/mysql/
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

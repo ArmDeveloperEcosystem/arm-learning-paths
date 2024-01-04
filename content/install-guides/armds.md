@@ -38,7 +38,7 @@ Full host platform requirements are given in the [Getting Started Guide](https:/
 
 The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to. 
 
-Gold, Silver, and Bronze editions are one installer, with available features defined by the license. The version is denoted by `year.index`, where `index` is a number (for example `2023.0`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the Gold Edition.
+Gold, Silver, and Bronze editions are one installer, with available features defined by the license. The version is denoted by `year.index`, where `index` is a number (for example `2023.1`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the Gold Edition.
 
 You can download the Development Studio installer from the [Product Download Hub](https://developer.arm.com/downloads/view/DS000B).
 
@@ -56,7 +56,7 @@ It is easiest to simply double-click the installation wizard (`armds-<version>.e
 
 To install silently from the command line, use similar to the following:
 ```command
-msiexec /i DS000-BN-00000-r23p0-00rel0\data\armds-2023.0.msi EULA=1 SKIP_DRIVERS=1 /qn
+msiexec /i DS000-BN-00000-r23p1-00rel0\data\armds-2023.1.msi EULA=1 SKIP_DRIVERS=1 /qn
 ```
 {{% notice  Drivers%}}
 This command does not install the debug probe USB drivers. If these are needed, remove `SKIP_DRIVERS=1` from the above. This requires manual interaction. They can also be installed manually later (`<install_dir>\sw\driver_files\driver_install.bat`) if necessary.
@@ -68,12 +68,12 @@ Full installation instructions are provided in the Windows section of the [Arm D
 
 Extract the downloaded package:
 ```command
-tar -xf DS000-BN-00001-r23p0-00rel0.tgz
-cd DS000-BN-00001-r23p0-00rel0
+tar -xf DS000-BN-00001-r23p1-00rel0.tgz
+cd DS000-BN-00001-r23p1-00rel0
 ```
 To install silently from the command line, use similar to the following.
 ```command
-sudo ./armds-2023.0.sh --i-agree-to-the-contained-eula --no-interactive -f -q
+sudo ./armds-2023.1.sh --i-agree-to-the-contained-eula --no-interactive -f -q
 ```
 {{% notice Libraries%}}
 The install may report that additional [libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) are needed to be installed.
@@ -94,14 +94,14 @@ or set a default version with:
 select_default_toolchain
 ```
 {{% notice  Toolchains%}}
-By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/2023-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
 ### Linux
 
 Navigate to `bin` directory of your install, for example:
 ```command
-cd /opt/arm/developmentstudio-2023.0/bin
+cd /opt/arm/developmentstudio-2023.1/bin
 ```
 Use `suite_exec` to start an appropriate command prompt, for example:
 ```command
@@ -116,7 +116,7 @@ and select the desired toolchain. You can then configure with simply:
 ./suite_exec bash
 ```
 {{% notice  Toolchains%}}
-By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/2023-0/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
 ## Arm Development Studio IDE

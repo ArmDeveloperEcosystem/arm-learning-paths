@@ -35,7 +35,7 @@ review:
 
         correct_answer: 2                    
         explanation: >
-            The docker build command enables you to build the Docker image, e.g. docker build -t people.webapp:v1 .
+            The docker build command enables you to build the Docker image, e.g., docker build -t people.webapp:v1 .
 
     - questions:
         question: >
@@ -48,7 +48,7 @@ review:
 
         correct_answer: 1
         explanation: >
-            Docker uses tags for routing. So, the tag needs to include the fully qualified registry name (login server)
+            Docker uses tags for routing. The tag needs to include the fully qualified registry name (login server).
 
 
 # ================================================================================

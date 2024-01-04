@@ -25,7 +25,6 @@ armips:
     - Armv9-A
     
 operatingsystems:
-    - Bare-metal
     - Linux
     - Android
 
