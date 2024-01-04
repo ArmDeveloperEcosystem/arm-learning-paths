@@ -28,7 +28,7 @@ microsoft:tools/ninja-build/ninja       1.10.2  installed            Ninja is a 
 #### Activate tools using a vcpkg-configuration.json file elsewhere
 
 ```bash
- vcpkg activate --project ../my-config.json
+ vcpkg activate --json=../my-config.json
 ```
 
 #### Deactivate artifacts specified by vcpkg-configuration.json
