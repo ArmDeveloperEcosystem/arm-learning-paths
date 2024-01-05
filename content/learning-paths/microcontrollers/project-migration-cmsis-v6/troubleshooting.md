@@ -101,5 +101,9 @@ In CMSIS v5, the RTX5 libraries were built using the compiler options `-fshort-e
 In µVision, go to **Project - Options for Target** and click on the **C/C++ (AC6)** tab. Unselect **Short enums/wchar** and rebuild the project:
 
 ![Unselect short enums/wchar](./compiler_settings.png)
+
 {{% /notice %}}
 
+{{% notice Note %}}
+If you are using libraries in your project that have been built with short enums/wchars (for example the MDK-Middleware), you need to use the RTX5 source code variant in your project as otherwise the linker will fail, even when unselecting the "Short enums/wchar" option.
+{{% /notice %}}
