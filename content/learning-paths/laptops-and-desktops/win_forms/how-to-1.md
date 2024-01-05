@@ -13,6 +13,7 @@ In addition to being a part of the Microsoft .NET Framework, Windows Forms (WinF
 
 In this learning path, we will learn how to use WinForms to create a desktop application. The application will perform computation-intensive operations, such as matrix multiplication. Then, we will explore how Windows on Arm can be used to accelerate the application by comparing the computation time with that on x64 systems.
 
+You can find the companion code in [this repository](https://github.com/dawidborycki/Arm64.DesktopApp.WindowsForms.git).
 ## Before you begin
 Before you begin make sure to install Visual Studio 2022 with .NET Desktop Development workload.
 

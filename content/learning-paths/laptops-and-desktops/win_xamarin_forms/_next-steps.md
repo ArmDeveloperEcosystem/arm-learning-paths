@@ -18,13 +18,13 @@ recommended_path: "/learning-paths/laptops-and-desktops/electron"
 
 further_reading:
     - resource:
-        title: Windows Forms on .NET 8
-        link: https://learn.microsoft.com/en-us/dotnet/desktop/winforms/?view=netdesktop-8.0
-        type: documentation
+        title: Xamarin Forms
+        link: https://dotnet.microsoft.com/en-us/apps/xamarin/xamarin-forms
+        type: website
     - resource:
-        title: Arm64 Performance Improvements in .NET 8
-        link: https://devblogs.microsoft.com/dotnet/this-arm64-performance-in-dotnet-8/
-        type: blog
+        title: The Model-View-ViewModel Pattern
+        link: https://learn.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm
+        type: documentation   
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
