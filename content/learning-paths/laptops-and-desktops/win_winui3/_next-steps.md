@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to implement mobile application with Xamarin Forms. You might be interested in learning how to use web technologies for creating cross-platform desktop apps.
+   You have learned how to implement desktop applications with WinUI 3. You might be interested in learning how to use web technologies for creating cross-platform desktop apps.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/electron"
@@ -18,13 +18,17 @@ recommended_path: "/learning-paths/laptops-and-desktops/electron"
 
 further_reading:
     - resource:
-        title: Xamarin Forms
-        link: https://dotnet.microsoft.com/en-us/apps/xamarin/xamarin-forms
-        type: website
+        title: Microsoft's Official Documentation
+        link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
+        type: documentation
     - resource:
-        title: The Model-View-ViewModel Pattern
-        link: https://learn.microsoft.com/en-us/xamarin/xamarin-forms/enterprise-application-patterns/mvvm
+        title: WinUI Resources Page
+        link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
         type: documentation   
+    - resource:
+        title: Example Applications and Code
+        link: https://github.com/Microsoft/WinUI-Gallery
+        type: GitHub repository
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

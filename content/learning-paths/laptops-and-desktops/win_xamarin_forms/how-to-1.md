@@ -11,6 +11,8 @@ Xamarin Forms is a cross-platform UI toolkit that allows developers to create na
 
 In this learning path, we will learn how to use Xamarin Forms to create a cross-platform application. Then, we will launch this application on Windows on Arm using x64 and Arm64 build configurations. By doing so, we will be able to see how Arm64 can accelerate Xamarin Forms applications. In practice, you can use this feature to further optimize your cross-platform applications running on Arm64 platform.
 
+You can find the companion code [here](https://github.com/dawidborycki/Arm64.MobileApp.XamarinForms.git).
+
 ## Before you begin
 Before you begin the implementation, it is essential to install Visual Studio 2022 with the following workloads:
 1. .NET Multi-platform App UI development,

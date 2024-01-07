@@ -24,7 +24,7 @@ This will open the 'New Solution Platform' window, where you should select ARM64
 Then, click the OK button. Similarly, create the x64 solution platform
 
 ## Comparing the performance
-You will now compare the computation performance on x64 and Arm64 platforms. You will now compare the computation performance on x64 and Arm64 platforms. First, start the application in Release mode, and architecture set to x64:
+You will now compare the computation performance on x64 and Arm64 platforms. First, start the application in Release mode, and architecture set to x64:
 
 ![fig11](Figures/11.png)
 
