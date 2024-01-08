@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Python on Arm
-Arm-native build tools are provided to enable the developers to create Arm64 apps using different technologies, including C/C++, .NET or even Python. More specifically, Python can be useful to rapidly prototype complex solutions that can be used for many purposes, including scientific/numerical computing, signal and image processing, training and optimising machine learning models. As many of those tasks require extensive computations, having the Arm support enables us to boost the application performance with an optimised power consumption.
+Arm-native build tools are provided to enable the developers to create Arm64 apps using different technologies, including C/C++, .NET or even Python. More specifically, Python can be useful to rapidly prototype complex solutions that can be used for many purposes, including scientific/numerical computing, signal and image processing, training and optimizing machine learning models. As many of those tasks require extensive computations, having the Arm support enables us to boost the application performance with an optimized power consumption.
 
 The official Python implementation and its standard library is provided by CPython. It compiles code into bytecode before interpretation, enabling it to contain platform-specific code.
 
@@ -46,7 +46,7 @@ Similarly, you use the Python interpreter for Arm64:
 py -3.12-arm64
 ```
 
-The above command generatesthe following output:
+The above command generates the following output:
 
 ```output
 Python 3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:15:47) [MSC v.1935 64 bit (ARM64)] on win32
@@ -157,7 +157,7 @@ Before going further, try to install NumPy for x64 by invoking the following com
 py -3.12-64 -m pip install numpy
 ```
 
-For x64 there is a platform-specific wheel available. So, the installation is sucessful, which is confirmed by the command output:
+For x64 there is a platform-specific wheel available. So, the installation is successful, which is confirmed by the command output:
 
 ```output
 Collecting numpy

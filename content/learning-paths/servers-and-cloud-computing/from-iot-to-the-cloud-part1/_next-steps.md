@@ -19,7 +19,7 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
 further_reading:
     - resource:
         title: Terraform on Azure
-        link: (https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-terraform/)
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-terraform/
         type: Tutorial
     - resource:
         title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
