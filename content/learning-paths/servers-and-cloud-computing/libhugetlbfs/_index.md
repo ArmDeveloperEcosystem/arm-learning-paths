@@ -3,7 +3,7 @@ title: Increase application performance with libhugetlbfs
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for performance engineers looking for ways to increase performance on Arm servers.
+who_is_this_for: This is an advanced topic for engineers looking for ways to increase performance on Arm servers.
 
 learning_objectives:
     - Enable libhugetlbfs on an Arm server running Linux
@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - An Arm server or virtual machine instance from a cloud service provider with Ubuntu installed
-    - Knowledge to build MySQL server and run the sysbench benchmark test
+    - Knowledge of how to build a MySQL server and run the sysbench benchmark test
 
 author_primary: Bolt Liu
 
