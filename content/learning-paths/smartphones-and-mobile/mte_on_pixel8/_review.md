@@ -8,13 +8,13 @@ review:
             - "No"
         correct_answer: 1                    
         explanation: >
-            MTE option is part of Developer options. Developer options need to be enabled first on your Google Pixel 8 phone to access MTE.
+            MTE option is part of the Developer options. Developer options need to be enabled first on your Google Pixel 8 phone to access MTE.
 
     - questions:
         question: >
             Which of the statements below is false?
         answers:
-            - MTE working principle is based on a Lock and Key model.
+            - MTE's working principle is based on a Lock and Key model.
             - Tagging memory implements the lock.
             - Pointers are modified to contain the key.
             - At runtime the CPU checks that the pointer and the metadata tags match. If so, the application crashes in any device.
