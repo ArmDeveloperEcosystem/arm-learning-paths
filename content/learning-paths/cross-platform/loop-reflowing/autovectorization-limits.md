@@ -1,0 +1,109 @@
+---
+title: Autovectorization limits
+weight: 4
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Autovectorization limits
+
+Unfortunately, autovectorization is not as easy as adding a flag like `restrict` in the arguments list. There are some requirements for autovectorization to be enabled, namely:
+
+* The loops have to be countable
+
+This means that the following can be vectorized:
+
+```C
+    for (size_t i=0; i < N; i++) {
+        C[i] = A[i] + B[i];
+    }
+```
+
+but this one cannot be vectorized:
+
+```C
+    i = 0;
+    while(true) {
+        C[i] = A[i] + B[i];
+        i++;
+        if (condition) break;
+    }
+```
+
+Having said that, if condition is such that the `while` loop is actually a countable loop in disguise, then the loop might be vectorizable. For example, this loop will *actually be vectorized*:
+
+```C
+    i = 0;
+    while(1) {
+        C[i] = A[i] + B[i];
+        i++;
+        if (i > N) break;
+    }
+```
+but this one will not:
+
+```C
+    i = 0;
+    while(1) {
+        C[i] = A[i] + B[i];
+        i++;
+        if (C[i] > 0) break;
+    }
+```
+
+* No function calls inside the loop
+
+For example if, `f()`, `g()` are functions that take `float` arguments, this loop cannot be autovectorized:
+
+```C
+    for (size_t i=0; i < N; i++) {
+        C[i] = f(A[i]) + g(B[i]);
+    }
+```
+
+There is a special case of the math library trigonometry and transcendental functions (like `sin`, `cos`, `exp`, etc). There is progress underway to enable these functions to be autovectorized, as the compiler will be able to use their vectorized counterparts in `mathvec` library (`libmvec`).
+
+So for example, something like the following *will be autovectorized* in the future for Arm.
+
+```C
+void addmatweight(float *restrict C, float *A, float *B, size_t N) {
+    for (size_t i=0; i < N; i++) {
+        C[i] = expf(A[i]) + sinf(B[i]);
+    }
+}
+```
+
+Currently however, it is not the case and developers will have to manually vectorize such code for performance.
+
+We will expand on autovectorization of conditionals in the next section.
+
+* In general, no branches in the loop, no if/else/switch
+
+This is not universally true, there are cases where branches can actually be vectorized, we will expand this in the next section.
+
+* Only inner-most loops will be vectorized.
+
+To clarify, consider the following nested loop:
+
+```C
+    for (size_t i=0; i < N; i++) {
+        for (size_t j=0; j < M; j++) {
+           C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+```
+
+In such a case, only the inner loop will be vectorized, again provided all the other conditions also apply (no branches and the inner loop is countable).
+
+* No data inter-dependency between iterations
+
+This means that each iteration depends on the result of the previous iteration. Such a problem is difficult -but not impossible- to autovectorize. Consider the following example:
+
+```C
+    for (size_t i=1; i < N; i++) {
+        C[i] = A[i] + B[i] + C[i-1];
+    }
+```
+
+This example cannot be autovectorized as it is. 
