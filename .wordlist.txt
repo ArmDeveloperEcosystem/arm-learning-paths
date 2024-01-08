@@ -1978,6 +1978,7 @@ TimeStamp
 ISensor
 HOWTO
 libhugetlbfs
+hugepages
 manpage
 sysbench
 meminfo
@@ -1991,3 +1992,18 @@ logcat
 MTESERR
 SEGV
 SIGSEGV
+GetCurrentReading
+TemperatureSensor
+lastKnownReading
+AddSingleton
+EndpointsApiExplorer
+SwaggerGen
+ControllerBase
+temperatureSensor
+webapi
+webapiproject
+FFTs
+fft
+Linaro's
+bytecode
+MSC
