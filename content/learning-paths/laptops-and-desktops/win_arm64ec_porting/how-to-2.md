@@ -81,7 +81,7 @@ vectorsLibName = os.path.join(rootPath, "Dependencies\\Arm64EC-release\\Vectors.
 filtersLibName = os.path.join(rootPath, "Dependencies\\Arm64EC-release\\Filters.dll")
 ```
 
-Then, you can launch the Python app. Go to the Main-app folder and type 
+Then, you can launch the Python app. Go to the Main-app folder and type: 
 ```console
 python main.py
 ``` 
@@ -97,15 +97,15 @@ To load them as Arm64, you would need to use Python for Arm64. However, at the t
 Here are the detailed steps for launching the Python app under the Arm64 virtual environment on Windows:
 
 1. Download [Python for Arm64](https://www.python.org/ftp/python/3.11.4/python-3.11.4-arm64.exe).
-2. Configure a virtual environment by running 
+2. Configure a virtual environment by running: 
 ```console 
 py -3.11-arm64 -m venv venv-arm64
 ```
-3. Activate a virtual environment by running 
+3. Activate a virtual environment by running:
 ```console
 venv-arm64\Scripts\activate.bat
 ```
-4. Install dependencies by running 
+4. Install dependencies by running: 
 ```console 
 py -3.11-arm64 -m pip install -r requirements.txt
 ```
@@ -116,4 +116,4 @@ py -3.11-arm64 main.py
 ```
 
 ## Next steps
-You learned how to use CMake for porting DLLs to Arm64 with ARM64EC. In the next step you will see how to achieve the same using MSBuild.
+You have just learned how to use CMake for porting DLLs to Arm64 with ARM64EC. In the next step, you will see how to achieve the same using MSBuild.
