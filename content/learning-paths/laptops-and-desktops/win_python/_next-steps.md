@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how prepare your development environment for building Python applications that use Arm64. You can now use this knowledge to see how to implement the UI-based Python applications, and combine them with C++ libraries.
+   You have learned how to prepare your development environment for building Python applications that use Arm64. You can now use this knowledge to see how to implement the UI-based Python applications and combine them with C++ libraries.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_arm64ec_porting"
