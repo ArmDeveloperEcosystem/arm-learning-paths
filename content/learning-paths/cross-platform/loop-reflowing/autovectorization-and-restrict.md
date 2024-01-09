@@ -6,22 +6,22 @@ weight: 3
 layout: learningpathall
 ---
 
-## Autovectorization and `restrict`
+## Autovectorization and restrict keyword
 
 You have already experienced some form of autovectorization by learning about the [`restrict` keyword in a previous Learning Path](https://learn.arm.com/learning-paths/cross-platform/restrict-keyword-c99/).
 Our example is a classic textbook example that the compiler will autovectorize simply by using `restrict`:
 
-Let's try the files we saved previously, compile them both and we will compare the assembly output:
+Try the previously saved files, compile them both and compare the assembly output:
 
 ```bash
-gcc -O2 addmat.c -o addmat
-gcc -O2 addmat_neon.c -o addmat_neon
+gcc -O2 addvec.c -o addvec
+gcc -O2 addvec_neon.c -o addvec_neon
 ```
 
-Let's look at the assembly output of `addmat`:
+Let's look at the assembly output of `addvec`:
 
 ```as
-addmat:
+addvec:
         mov     x3, 0
 .L2:
         ldr     s0, [x1, x3, lsl 2]
@@ -34,10 +34,10 @@ addmat:
         ret
 ```
 
-Similarly, for the `addmat_neon` executable:
+Similarly, for the `addvec_neon` executable:
 
 ```as
-addmat:
+addvec:
         mov     x3, 0
 .L6:
         ldr     q0, [x1, x3]
@@ -50,12 +50,12 @@ addmat:
         ret
  ```
 
-It is obvious that the latter uses Advanced SIMD/Neon instructions to perform calculations in quads of 4 32-bit floating-point elements.
+The latter uses Advanced SIMD/Neon instructions `fadd` with operands `v0.4s`, `v1.4s` to perform calculations in 4 x 32-bit floating-point elements.
 
-Let's try to add `restrict` to the output argument `C` in the first `addmat` function:
+Let's try to add `restrict` to the output argument `C` in the first `addvec` function:
 
 ```C
-void addmat(float *restrict C, float *A, float *B) {
+void addvec(float *restrict C, float *A, float *B) {
     for (size_t i=0; i < N; i++) {
     	C[i] = A[i] + B[i];
     }
@@ -65,7 +65,7 @@ void addmat(float *restrict C, float *A, float *B) {
 Recompile and check the assembly output again:
 
 ```as
-addmat:
+addvec:
         mov     x3, 0
 .L2:
         ldr     q0, [x1, x3]
@@ -82,4 +82,4 @@ As you can see, the compiler has enabled autovectorization for this algorithm an
 
 This is just a trivial example though and not all loops can be autovectorized that easily by the compiler. 
 
-You will see some more advanced examples in the next section.
+You will see some more advanced examples in the next sections.

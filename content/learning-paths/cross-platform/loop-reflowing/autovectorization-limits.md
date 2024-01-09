@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Autovectorization limits
 
-Unfortunately, autovectorization is not as easy as adding a flag like `restrict` in the arguments list. There are some requirements for autovectorization to be enabled, namely:
+Autovectorization is not as easy as adding a flag like `restrict` in the arguments list. There are some requirements for autovectorization to be enabled, namely:
 
 * The loops have to be countable
 
@@ -38,10 +38,10 @@ Having said that, if condition is such that the `while` loop is actually a count
     while(1) {
         C[i] = A[i] + B[i];
         i++;
-        if (i > N) break;
+        if (i >= N) break;
     }
 ```
-but this one will not:
+but this one will not be vectorizable:
 
 ```C
     i = 0;
@@ -67,14 +67,14 @@ There is a special case of the math library trigonometry and transcendental func
 So for example, something like the following *will be autovectorized* in the future for Arm.
 
 ```C
-void addmatweight(float *restrict C, float *A, float *B, size_t N) {
+void addfunc(float *restrict C, float *A, float *B, size_t N) {
     for (size_t i=0; i < N; i++) {
-        C[i] = expf(A[i]) + sinf(B[i]);
+        C[i] = cosf(A[i]) + sinf(B[i]);
     }
 }
 ```
 
-Currently however, it is not the case and developers will have to manually vectorize such code for performance.
+However at the time of writing, this is not the case and developers will have to manually vectorize such code for performance.
 
 We will expand on autovectorization of conditionals in the next section.
 

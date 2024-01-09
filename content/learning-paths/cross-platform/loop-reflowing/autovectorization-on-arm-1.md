@@ -6,10 +6,10 @@ weight: 6
 layout: learningpathall
 ---
 
-## Autovectorization on Arm.
+## Autovectorization on Arm
 
-Let's look at another example, but this time you will see how you can take advantage of specific Arm instructions.
-The following code will calculate the dot product of variable size two integer arrays.
+This time you will see how you can take advantage of specific Arm instructions.
+The following code will calculate the dot product of two integer arrays.
 
 ```C
 #include <stdint.h>
@@ -57,7 +57,9 @@ dotprod:
         ret
 ```
 
-You can see that it's a pretty standard implementation, doing one element at a time. The option `-fno-inline` is necessary to avoid inlining any code from the function `dot-prod()` into `main()` for performance reasons. In general this is a good thing, but in this case we want to demonstrate the autovectorization process and it will be harder if there is no easy way to distinguish the caller from the callee. Now, increase the optimization level to `-O3`, recompile and observe the assembly output again:
+You can see that it's a pretty standard implementation, doing one element at a time. The option `-fno-inline` is necessary to avoid inlining any code from the function `dot-prod()` into `main()` for performance reasons. In general this is a good thing, but in this case we want to demonstrate the autovectorization process and it will be harder if there is no easy way to distinguish the caller from the callee.
+
+Now, increase the optimization level to `-O3`, recompile and observe the assembly output again:
 
 ```as
 dotprod:
@@ -112,11 +114,13 @@ dotprod:
         b       .L3
 ```
 
-Quite larger in quantity but the autovectorization is obvious. The label `.L4` includes the main loop and we can see that the instruction `MLA` is used to multiply and accumulate the dot products, 4 elements at a time. At the end of this loop, the instruction `ADDV` does a horizontal addition of the 4 elements in the final vector and includes the final sum. The main loop is executed while the number of the remaining elements is a multiple of 4. The rest of the elements are processed one at a time in the `.L3` part of the code.
+Quite larger in quantity but you can confirm that some sort of autovectorization has taken place.
 
-This is quite nice and we can expect a performance gain of about 4x faster in general.
+The label `.L4` includes the main loop and you can see that the instruction `MLA` is used to multiply and accumulate the dot products, 4 elements at a time. At the end of this loop, the instruction `ADDV` does a horizontal addition of the 4 elements in the final vector and returns the final sum. The main loop is executed while the number of the remaining elements is a multiple of 4. The rest of the elements are processed one at a time in the `.L3` part of the code.
 
-You might be wondering if there is a way to hint to the compiler that the sizes are always going to be multiples of 4 and avoid the last part of the code and the answer is yes, but it depends on the compiler. In the case of gcc, it is enough to add an instruction that ensures the size is only multiples of 4:
+This is quite nice and you can expect a performance gain of about 4x faster in general.
+
+You might be wondering if there is a way to hint to the compiler that the sizes are always going to be multiples of 4 and avoid the last part of the code and the answer is *yes*, but it depends on the compiler. In the case of gcc, it is enough to add an instruction that ensures the size is only multiples of 4:
 
 ```C
 int32_t dotprod(int32_t *A, int32_t *B, size_t N) {
@@ -154,8 +158,8 @@ dotprod:
         ret
 ```
 
-But is that all that the compiler can do? Thankfully not, modern compilers are very proficient in generating code that utilizes all available instructions, provided they have the right information.
-For example, our `dotprod()` function operates on `int32_t` elements, what if we could limit the range to 8-bit? Something like that is not untypical, and we know there is an Armv8 ISA extension that [provides a pair of new `SDOT`/`UDOT` instructions to perform a dotprot across 8-bit elements of 2 vectors and store the results in the 32-bit elements of the resulting vector](https://developer.arm.com/documentation/102651/a/What-are-dot-product-intructions-). Could the compiler make use of that automatically? Or Should we resort to a hand-written version that uses the respective intrinsics?
+But is that all that the compiler can do? Thankfully not. Modern compilers are very proficient in generating code that utilizes all available instructions, provided they have the right information.
+For example, the `dotprod()` function that you wrote operates on `int32_t` elements, what if you could limit the range to 8-bit? Something like that is not untypical, and we know there is an Armv8 ISA extension that [provides a pair of new `SDOT`/`UDOT` instructions to perform a dotprot across 8-bit elements of 2 vectors and store the results in the 32-bit elements of the resulting vector](https://developer.arm.com/documentation/102651/a/What-are-dot-product-intructions-). Could the compiler make use of that automatically? Or should you resort to a hand-written version that uses the respective intrinsics?
 
 It turns out that some compilers can, and will detect that the number or the iterations is a multiple of the number of elements in a SIMD vector. Convert the code to use `int8_t` types for `A` and `B` arrays:
 
@@ -182,7 +186,7 @@ int main() {
 You need to recompile the code with `gcc -O3 -Wall -g -fno-inline -march=armv8-a+dotprod` in order to hint to the compiler that it has the new instructions at its disposal.
 
 The assembly output will be quite larger as the use of `SDOT` can only work in the main loop where the size is a multiple of 16. Then the compiler will unroll the loop to use ASIMD instructions if the size is greater than 8, and byte-handling instructions if the size is smaller.
-We could eliminate those extra tail instructions by converting `N -= N % 4` to 8 or even 16:
+You could eliminate those extra tail instructions by converting `N -= N % 4` to 8 or even 16:
 
 ```C
 int32_t dotprod(int8_t *A, int8_t *B, size_t N) {
@@ -195,7 +199,7 @@ int32_t dotprod(int8_t *A, int8_t *B, size_t N) {
 }
 ```
 
-The resulting assembly output where we only handle sizes multiple of 16 is the following:
+The resulting assembly output only handles sizes that are multiple of 16:
 
 ```as
 dotprod:
@@ -219,4 +223,5 @@ dotprod:
         ret
 ```
 
-Again we see that at the end of the loop `ADDV` is used to perform a horizontal addition of the 32-bit integer elements and produce the final dot product sum.
+As before, at the end of the loop `ADDV` is used to perform a horizontal addition of the 32-bit integer elements and produce the final dot product sum.
+This particular implementation can be up to 4x faster than the previous version using `MLA`.

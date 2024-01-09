@@ -37,9 +37,9 @@ int main() {
 ```
 
 This is a very simple loop, calculating what is known as a Sum of Absolute Differences (SAD). Again, such code is very common in video codecs and used in calculating differences between video frames, etc.
-We have added the hint to the compiler that the size is a multiple of 16 to avoid generating cases for smaller lengths. This is only for demonstration purposes.
+A hint to the compiler was added that the size is a multiple of 16 to avoid generating cases for smaller lengths. *This is only for demonstration purposes*.
 
-As it is, if you would save the code as `sadtest.c` and compile it like this:
+Save the code as `sadtest.c` and compile it like this:
 
 ```bash
 gcc -O3 -fno-inline sadtest.c -o sadtest
@@ -73,9 +73,13 @@ sad8:
 
  You can see that the compiler generates code that uses 3 specialized instructions that exist only on Arm: [`SABDL2`](https://developer.arm.com/documentation/ddi0596/2021-03/SIMD-FP-Instructions/SABDL--SABDL2--Signed-Absolute-Difference-Long-?lang=en), [`SABAL`](https://developer.arm.com/documentation/ddi0596/2021-03/SIMD-FP-Instructions/SABAL--SABAL2--Signed-Absolute-difference-and-Accumulate-Long-?lang=en) and [`SADALP`](https://developer.arm.com/documentation/ddi0596/2021-03/SIMD-FP-Instructions/SADALP--Signed-Add-and-Accumulate-Long-Pairwise-?lang=en).
 
- Because the accumulator variable is not 8-bit but 32-bit, the typical SIMD implementation that would involve 16 8-bit Subtractions, absolute values and additions would not do, and a widening conversion to 32-bit would have to take place before the accumulation. This would mean that 4x items at a time would be accumulated, but with the use of these instructions, the performance gain can be up to 16x faster than the original scalar code, or ~4x faster than the typical SIMD implementation.
+ The accumulator variable is not 8-bit but 32-bit, so the typical SIMD implementation that would involve 16 x 8-bit subtractions, then 16 x absolute values and 16 x additions would not do, and a widening conversion to 32-bit would have to take place before the accumulation.
 
-For completeness we will also include the SVE2 code, which does not depend on size being a multiple of 16. This is the output without the `N -= N % 16` before the loop:
+ This would mean that 4x items at a time would be accumulated, but with the use of these instructions, the performance gain can be up to 16x faster than the original scalar code, or ~4x faster than the typical SIMD implementation.
+
+For completeness the SVE2 version will be provided, which does not depend on size being a multiple of 16.
+
+This is the output without the `N -= N % 16` before the loop.
 You could compile it on any Arm system -even without support for SVE2- just by adding the appropriate `-march` flag:
 
 ```bash
@@ -117,6 +121,6 @@ sad8:
 
 ## Conclusion
 
-You might wonder if there is a point in autovectorization, if you have to have such specialized knowledge of instructions like `SDOT`/`SADAL` etc in order to use it. The answer is that autovectorization is a tool, the goal is to minimize the effort taken by the developers and maximize the performance, while at the same time requiring low maintainance in terms of the code size. It is far easier to maintain a hundreds or thousands of functions that are known to generate the fastest code using autovectorization, for all platforms, than it is to maintain the same functions in multiple versions for each supported architecture and SIMD engine. Autovectorization is a tool, the better you know how to use it the better results you can expect.
+You might wonder if there is a point in autovectorization, if you have to have such specialized knowledge of instructions like `SDOT`/`SADAL` etc in order to use it. The answer is that autovectorization is a tool, the goal is to minimize the effort taken by the developers and maximize the performance, while at the same time requiring low maintainance in terms of the code size. It is far easier to maintain hundreds or thousands of functions that are known to generate the fastest code using autovectorization, for all platforms, than it is to maintain the same number of functions in multiple versions for each supported architecture and SIMD engine. As with most tools, the better you know how to use it the better results you can expect.
 
 

@@ -1,12 +1,12 @@
 ---
-title: Loop Reflowing, Autovectorization
+title: Loop Reflowing/Autovectorization
 
-minutes_to_complete: 30
+minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for C/C++ developers who are interested in taking advangage of autovectorization in compilers
+who_is_this_for: This is an advanced topic for C/C++ developers who are interested in taking advantage of autovectorization in compilers
 
 learning_objectives: 
-    - Learn how to modify for loops in order to take advantage of autovectorization in compilers
+    - Learn how to modify loops in order to take advantage of autovectorization in compilers
 
 prerequisites:
     - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
