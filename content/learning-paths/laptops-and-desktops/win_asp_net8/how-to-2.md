@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Objective
-In this section you will build and run the Arm64.HeadlessIoT project you just created.
+In this section, you will build and run the Arm64.HeadlessIoT project you just created.
 
 ## Building and running the application
 To build and run the application proceed as follows. 
@@ -43,15 +43,15 @@ Here the architecture is **ARM64**.
 
 ```console
 dotnet run -a x64
-```{{% /notice %}}
+```
 
 ## Test the GET request
 
-Now, open the web browser (or use wget) and navigate to http://localhost:<port>/iot, where <port> should match the port value shown after Now listening on in the output of the dotnet run command (here the port is **5203**). Doing this invokes the GET method of IoTController, and you see the sensor reading rendered as a JSON-formatted string:
+Now, open the web browser (or use wget) and navigate to http://localhost:<port>/iot, where <port> should match the port value shown after Now listening in on the output of the dotnet run command (here the port is **5203**). Doing this invokes the GET method of IoTController and you can see the sensor reading rendered as a JSON-formatted string:
 
 ![fig2](figures/02.png)
 
-The web server outputs an emulated sensor reading, which in this case reported a temperature value of 17.
+The web server outputs an emulated sensor reading which in this case reported a temperature value of 17.
 
 ## Test the POST request
 
@@ -68,6 +68,6 @@ Now, expand the **POST** section and click the **Try it out** button. The captio
 This action sends the **POST** request to **IoTController** and disables the emulator. So, all subsequent **GET** calls to **IoTController** return the last known sensor reading (which is the final reading generated before disabling the emulator). When you set **isActive** back to true and send the **GET** request to the web server, you will see the temperature setting update.
 
 ## Summary
-This learning path demonstrated how to use ASP.NET Core to implement a web API server for headless IoT apps running on Windows 11 on Arm. It showed how the web server can retrieve simulated sensor readings from a temperature sensor emulator. It also showed how to control the emulator through a web server. Finally, it demonstrated the use of dependency injection in ASP.NET Core and Swagger to test a web API. ASP.NET Core is cross-platform, allowing you to use a similar approach to run web servers on non-Windows platforms.
+This learning path has demonstrated how to use ASP.NET Core to implement a web API server for headless IoT apps running on Windows 11 on Arm. It showed how the web server can retrieve simulated sensor readings from a temperature sensor emulator. It also showed how to control the emulator through a web server. Finally, it demonstrated the use of the dependency injection in ASP.NET Core and Swagger to test a web API. ASP.NET Core is cross-platform, allowing you to use a similar approach to run web servers on non-Windows platforms.
 
 By combining ASP.NET Core with Arm64, you can implement high-performance, low-power consumption web servers for all your applications. 
