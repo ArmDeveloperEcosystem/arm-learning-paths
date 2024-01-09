@@ -6,12 +6,12 @@ minutes_to_complete: 20
 who_is_this_for: This is an introductory topic for software developers who want to use native performance of the Qt framework for building desktop applications on Windows on Arm (WoA).
 
 learning_objectives:
-    - Build and run Qt-based desktop application
+    - Build and run a Qt-based desktop application
     - Investigate performance improvements gained by running on Arm64
 
 prerequisites:
-    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
-    - '[Qt framework](https://www.qt.io/) or [Qt for Open Source Development](https://www.qt.io/download-open-source).'
+    - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - [Qt framework](https://www.qt.io/) or [Qt for Open Source Development](https://www.qt.io/download-open-source).
 
 author_primary: Dawid Borycki
 
