@@ -15,7 +15,7 @@ In the previous section we mentioned that compilers cannot autovectorize loops w
 Consider the following function, a modified form of the previous function that uses weighted coefficients for `A[i]`.
 
 ```C
-void addmatweight(float *restrict C, float *A, float *B,
+void addvecweight(float *restrict C, float *A, float *B,
                     size_t N, float weight) {
     for (size_t i=0; i < N; i++) {
         if (weight < 0.5f)
@@ -29,7 +29,7 @@ void addmatweight(float *restrict C, float *A, float *B,
 You would tempted to think that this loop cannot be vectorized. Such loops are not that uncommon and compilers have a difficult time understanding the pattern and transforming them to vectorizeable forms, when it is possible. However, this is actually a vectorizable loop, as the conditional can actually be moved out of the loop, as this is a loop-invariant conditional. Essentially the compiler would transform -internally- the loop in something like the following:
 
 ```C
-void addmatweight(float *restrict C, float *A, float *B, size_t N) {
+void addvecweight(float *restrict C, float *A, float *B, size_t N) {
     if (weight < 0.5f) {
         for (size_t i=0; i < N; i++) {
             C[i] = A[i] + B[i];
@@ -47,7 +47,7 @@ which is in essence, two different loops and we know that the compiler can vecto
 However, something like the following is not yet autovectorized by all compilers (llvm/clang autovectorizes this loop, but not gcc):
 
 ```C
-void addmatweight2(float *restrict C, float *A, float *B,
+void addvecweight2(float *restrict C, float *A, float *B,
                     size_t N, float weight) {
     for (size_t i=0; i < N; i++) {
         if (A[i] < 0.5f)
@@ -62,7 +62,7 @@ Similarly with `switch` statements, if the condition expression in loop-invarian
 For this reason we know that this loop is actually autovectorized:
 
 ```C
-void addmatweight(float *restrict C, float *A, float *B,
+void addvecweight(float *restrict C, float *A, float *B,
                     size_t N, int w) {
     for (size_t i=0; i < N; i++) {
         switch (w) {
@@ -84,7 +84,7 @@ But this one is not:
 ```C
 #define sign(x) (x > 0) ? 1 : ((x < 0) ? -1 : 0)
 
-void addmatweight(float *restrict C, float *A, float *B,
+void addvecweight(float *restrict C, float *A, float *B,
                     size_t N, int w) {
     for (size_t i=0; i < N; i++) {
         switch (sign(A[i])) {

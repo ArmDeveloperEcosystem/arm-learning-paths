@@ -22,7 +22,7 @@ Consider the following simple loop:
 
 #define N 100
 
-void addmat(float *C, float *A, float *B) {
+void addvec(float *C, float *A, float *B) {
     for (size_t i=0; i < N; i++) {
     	C[i] = A[i] + B[i];
     }
@@ -31,11 +31,11 @@ void addmat(float *C, float *A, float *B) {
 int main() {
     float A[N], B[N], C[N];
 
-    addmat(C, A, B);
+    addvec(C, A, B);
 }
 ```
 
-Save this file as `addmat.c`.
+Save this file as `addvec.c`.
 
 This is practically the most referred-to example with regards to vectorization, because it is easy to explain. For Advanced SIMD/Neon the vectorized form is the following:
 
@@ -46,7 +46,7 @@ This is practically the most referred-to example with regards to vectorization, 
 
 #define N 100
 
-void addmat(float *C, float *A, float *B) {
+void addvec(float *C, float *A, float *B) {
     for (size_t i=0; i < N; i+= 4) {
     	float32x4_t va = vld1q_f32(&A[i]);
 		float32x4_t vb = vld1q_f32(&B[i]);
@@ -58,11 +58,11 @@ void addmat(float *C, float *A, float *B) {
 int main() {
     float A[N], B[N], C[N];
 
-    addmat(C, A, B);
+    addvec(C, A, B);
 }
 ``` 
 
-Save this file as `addmat_neon.c`.
+Save this file as `addvec_neon.c`.
 
 As you understand, vectorizing a loop can be quite a difficult task that takes time and very specialized knowledge, not only particular to a specific architecture but to the specific SIMD engine and revision. For many developers it is such a daunting task that automating this process became the holy grail for many developers. Enabling the compiler to perform automatic adaptation of the loop in order to be vectorizable and use SIMD instructions is called *Autovectorization*. 
 
