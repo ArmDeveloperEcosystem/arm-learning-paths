@@ -10,23 +10,23 @@ layout: "learningpathall"
 ## Introduction
 The Qt Framework (Qt) provides modularized C++ library classes and application programming interfaces (APIs) to accelerate cross-platform application development. Qt enables you to develop maintainable, highly performant, and reusable code. Thanks to its widget toolkit, all apps created with Qt have a native-looking user interface (UI). Qt also provides development tools, including Qt Creator, a cross-platform integrated development environment (IDE).
 
-Qt v6.2 supports native development for Windows on Arm (WoA). To demonstrate the advantages of native development, you will learn how to perform affine transformations on graphic images. The transformations demonstrate the performance boost the AArch64 architecture provides. They include image rotation, scaling, and shearing, which are commonly used by AI-powered machine vision systems. You will then learn how to reduce the computation time of the x64 architecture by 40 percent by making simple changes.
+Qt v6.2 supports native development for Windows on Arm (WoA). To demonstrate the advantages of native development, you will learn how to perform affine transformations on graphic images. The transformations demonstrate the performance boost the AArch64 architecture provides. They include image rotation, scaling, and shearing which are commonly used by AI-powered machine vision systems. You will then learn how to reduce the computation time of the x64 architecture by 40% by making simple changes.
 
 Starting from v6.2, Qt provides a native development support for WoA. As a result, you can fully leverage device hardware to accelerate your graphical user interface (GUI)-based applications.
 
 ## Before you begin
 You will need to install Qt on your Windows on Arm machine. Go to the Qt Group [download page](https://www.qt.io/download), register for the Qt trial, and download Qt. Alternatively, go to the [Qt for Open Source Development](https://www.qt.io/download-open-source) page and download the package from there.
 
-In the Qt Setup window, select at least Qt version 6.2. Here we use 6.4.
+In the Qt Setup window, select at least Qt version 6.2. In this example, we use version 6.4.
 
 ![fig1](figures/01.png)
 
 ## Create the project
-After installation, open Qt Creator, click Examples, select Qt6, and type “affine” in the search box. The list of examples should include one project: Affine Transformations. Click it to make the source code available in Qt Creator. 
+After installation, open the Qt Creator, click Examples, select Qt6, and type “affine” in the search box. The list of examples should include one project: Affine Transformations. Click on it to make the source code available in Qt Creator. 
 
 ![fig2](figures/02.png)
 
-{{% notice Note %}} If you are new to Qt Creator, consult the documentation for a quick introduction. Project files are on the left side, and double-clicking them opens them in the editor. The Run and Debug buttons are on the bottom left. Or you can press F5 to run and debug your project and Ctrl + R to run it without the debugger.
+{{% notice Note %}} If you are new to Qt Creator, consult the documentation for a quick introduction. Project files are on the left side, and double-clicking them opens them in the editor. The Run and Debug buttons are on the bottom left, or you can press F5 to run and debug your project and Ctrl + R to run it without the debugger.
  {{% /notice %}}
 
 Now build and run the app using default settings (F5 or Ctrl + R). After execution, the app should look like this:
@@ -38,7 +38,7 @@ The app continuously transforms the image of Tux (Linux’s penguin character) b
 Now you can modify this default behavior.
 
 ## Develop the application
-To modify the Affine Transformations app, you will add one more button with a Run label. When you click this button, it invokes the custom runAnimation method. This method will be responsible for executing affine transformations several times. This allows you to measure the performance of these operations when you build the app for x64 and AArch64 architectures.
+To modify the Affine Transformations app, you will add one more button with a Run label. When you click this button, it invokes the custom `runAnimation` method. This method will be responsible for executing affine transformations several times. This allows you to measure the performance of these operations when you build the app for x64 and AArch64 architectures.
 
 As with any other C++ app, the application’s entry point is the main function, as defined in `main.cpp`. The main function initializes and displays XFormWidget, in `xform.h` and `xform.cpp`.
 
@@ -58,7 +58,7 @@ Start by changing the xform.h file (located inside the Header folder in the proj
 //
 ```
 
-Then, modify the declaration of the XFormView class by declaring the runAnimation method in the public slots section. You will associate this method with the click signal of the Run button:
+Then, modify the declaration of the XFormView class by declaring the `runAnimation` method in the public slots section. You will associate this method with the click signal of the Run button:
 
 ```cpp
 class XFormView : public ArthurFrame
@@ -98,9 +98,9 @@ private:
     //
 ```
 
-Now, you need to modify the source file `xform.cpp`. Do this by adding a Run button, binding the **runAnimation** method with the click signal of that button, and disabling the invocation of the **animateClick** method. Disabling the invocation prevents the default animation from running when you launch the app.
+Now, you need to modify the source file `xform.cpp`. Do this by adding a Run button, binding the `runAnimation` method with the click signal of that button, and disabling the invocation of the `animateClick` method. Disabling the invocation prevents the default animation from running when you launch the app.
 
-Then, modify the **XFormWidget** constructor (the declaration of this class is after **XFormView**) with the following code:
+Then, modify the `XFormWidget` constructor (the declaration of this class is after `XFormView`) with the following code:
 
 ```cpp
 XFormWidget::XFormWidget(QWidget *parent)
@@ -173,7 +173,7 @@ XFormWidget::XFormWidget(QWidget *parent)
 }
 ```
 
-Next, implement the **runAnimation** method in `xform.cpp` as shown:
+Next, implement the `runAnimation` method in `xform.cpp` as shown:
 
 ```cpp
 void XFormView::runAnimation()
@@ -207,24 +207,24 @@ void XFormView::runAnimation()
 }
 ```
 
-The method works like the original event handler for the **Animate** button. It translates (**QTransform.translate**), rotates (**QTransform.rotate**), scales (**QTransform.scale**), and shears (**QTransform.shear**) the image. It implements all these actions using the statements under the for loop. **QTransform** uses the transformation matrix to perform the affine transformation. You can also manually set elements of that matrix using the **QTransform.setMatrix** method.
+The method works like the original event handler for the **Animate** button. It translates (`QTransform.translate`), rotates (`QTransform.rotate`), scales (`QTransform.scale`), and shears (`QTransform.shear`) the image. It implements all of these actions using the statements under the *for loop*. `QTransform` uses the transformation matrix to perform the affine transformation. You can also manually set elements of that matrix using the `QTransform.setMatrix` method.
 
 The user interface is updated using signals (via the emit keyword). This update performs the scale and shear changes.
 
-To summarize, you only made three changes:
-1. **elapsedTimer.restart** method to restart an instance of the **QElapsedTimer**.
-2. Embedded transformations within a for loop
-3. **qDebug** to print information about the code execution time in the debugger console
+To summarize, you have made only three changes:
+1. `elapsedTimer.restart` method to restart an instance of the **QElapsedTimer**.
+2. Embedded transformations within a *for loop*
+3. `qDebug` to print information about the code execution time in the debugger console
 
 All of the above changes are architecture independent. This means that you can use the same features when developing for AArch64 as you would for x64, including debugging. You can also use the provided `CMakeLists.txt` to configure CMake and add unit tests to the project.
 
 ## Run the Application
 
-Now it's time to run the application using the AArch64 build. To do so, use the icons in the bottom left corner of the QtCreator. Select **Desktop Qt 6.4.2 MSVC2019 ARM64**:
+Now it's time to run the application using the AArch64 build. To do this, use the icons in the bottom left corner of the QtCreator. Select **Desktop Qt 6.4.2 MSVC2019 ARM64**:
 
 ![fig4](figures/04.png)
 
-Start debugging by clicking the green play icon. The application will launch:
+Start debugging by clicking on the green play icon. The application will launch:
 
 ![fig5](figures/05.png)
 
@@ -234,7 +234,7 @@ Click **Run** to trigger the animation. The Tux image is transformed 10,000 time
 
 On average, the computation time is approximately 270 milliseconds when the app uses AArch64 architecture.
 
-Now, switch to x64, rebuild, and launch the app. Click **Run**, and you will see the computation time for the x64 architecture:
+Now, switch to x64, rebuild, and launch the app. Click **Run** and you will see the computation time for the x64 architecture:
 
 ![fig7](figures/07.png)
 
