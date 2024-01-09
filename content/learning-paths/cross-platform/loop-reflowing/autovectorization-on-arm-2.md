@@ -75,14 +75,14 @@ sad8:
 
  Because the accumulator variable is not 8-bit but 32-bit, the typical SIMD implementation that would involve 16 8-bit Subtractions, absolute values and additions would not do, and a widening conversion to 32-bit would have to take place before the accumulation. This would mean that 4x items at a time would be accumulated, but with the use of these instructions, the performance gain can be up to 16x faster than the original scalar code, or ~4x faster than the typical SIMD implementation.
 
-For completeness we will also include the SVE2 code, which is even cleaner and does not even require a special multiple of 16 size. This is the output without the `N -= N % 16` before the loop:
+For completeness we will also include the SVE2 code, which does not depend on size being a multiple of 16. This is the output without the `N -= N % 16` before the loop:
 You could compile it on any Arm system -even without support for SVE2- just by adding the appropriate `-march` flag:
 
 ```bash
 gcc -O3 -fno-inline -march=armv9-a sadtest.c -o sadtest
 ```
 
-(depending on the compiler tested `-march=armv9-a` might not be available, in that case you could use `-march=march8-a+sve2`)
+(depending on the compiler version tested `-march=armv9-a` might not be available, in that case you could use `-march=march8-a+sve2`)
 
 The SVE2 assembly output for `sad8()` in this case will be:
 
@@ -115,6 +115,8 @@ sad8:
         ret
 ```
 
+## Conclusion
 
+You might wonder if there is a point in autovectorization, if you have to have such specialized knowledge of instructions like `SDOT`/`SADAL` etc in order to use it. The answer is that autovectorization is a tool, the goal is to minimize the effort taken by the developers and maximize the performance, while at the same time requiring low maintainance in terms of the code size. It is far easier to maintain a hundreds or thousands of functions that are known to generate the fastest code using autovectorization, for all platforms, than it is to maintain the same functions in multiple versions for each supported architecture and SIMD engine. Autovectorization is a tool, the better you know how to use it the better results you can expect.
 
 
