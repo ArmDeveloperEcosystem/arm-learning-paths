@@ -14,7 +14,7 @@ To use Arm64EC, you only need to configure the build target appropriately. As a 
 
 ## Creating the project
 
-Open the Visual Studio 2022, click Create a new project, and look for Console Application Project in the window that appears
+Open Visual Studio 2022, click Create a new project, and look for Console Application Project in the window that appears
 
 ![fig6](figures/06.png)
 
@@ -29,9 +29,9 @@ The configuration should look this:
 
 ![fig7](figures/07.png)
 
-Click the Create button. After creating the project, you will have a single source file called Arm64EC.Porting.Vectors.cpp. Rename this file as Vectors.cpp.
+Click the Create button. After creating the project, you will have a single source file called `Arm64EC.Porting.Vectors.cpp`. Rename this file as `Vectors.cpp`.
 
-Replace the default content of Vectors.cpp with the content shown below:
+Replace the default content of `Vectors.cpp` with the content shown below:
 
 ```cpp
 #include "Vectors.h"
@@ -88,7 +88,7 @@ Then, open Solution Explorer, right-click Headers, and choose Add/New Item….
 
 In the window that appears, type "Vectors.h" and click Add.
 
-Replace the default contents of the Vectors.h file with the following code:
+Replace the default contents of the `Vectors.h` file with the following code:
 
 ```cpp
 #pragma once
@@ -109,7 +109,7 @@ Click OK to close the Property Pages window.
 
 Now, build the DLL by clicking Build/Build solution. The DLL should be located in the <platform (x64 or arm64>\<configuration (Debug or Release)> folder, which may appear as Arm64EC.Porting.MSBuild\x64\Debug.
 
-To port this library to Arm64EC, you need to configure the target platform. To do this, click Configuration Manager... from the drop-down menu:
+To port this library to Arm64EC, you need to configure the target platform. To do this, click Configuration Manager from the drop-down menu:
 
 ![fig9](figures/09.png)
 
@@ -119,7 +119,7 @@ In the Configuration Manager, create the new solution platform for Arm64EC:
 
 Then, right-click on the Arm64EC.Porting.Vectors file and open the Properties window. Change the configuration type to DLL (as you did earlier for the x64 configuration). Once you have configured the solution platform, select it from the build target drop-down menu and build the solution.
 
-The compiled DLL will be available under the ARM64EC subfolder. You can then use it in the Main-app in the same way as DLLs built using CMake.
+The compiled DLL will be available under the ARM64EC subfolder. You can then use it in the **Main-app** in the same way as the DLLs built using CMake.
 
 To use MSBuild for the second DLL, proceed in the same way. For your convenience, you can refer to the full source code in this [git repository](https://github.com/dawidborycki/Arm64EC.Porting.MSBuild/).
 
