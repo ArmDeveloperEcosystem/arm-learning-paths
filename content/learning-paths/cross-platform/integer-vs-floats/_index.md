@@ -1,6 +1,8 @@
 ---
 title: Integer and floating-point conversions
 
+draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for C/C++ developers who are interested in learning the intricacies of conversions between floating-point numbers and integers.
