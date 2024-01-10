@@ -12,12 +12,12 @@ The Qt Framework (Qt) provides modularized C++ library classes and application p
 
 Qt v6.2 supports native development for Windows on Arm (WoA). To demonstrate the advantages of native development, you will learn how to perform affine transformations on graphic images. The transformations demonstrate the performance boost the AArch64 architecture provides. They include image rotation, scaling, and shearing which are commonly used by AI-powered machine vision systems. You will then learn how to reduce the computation time of the x64 architecture by 40% by making simple changes.
 
-Starting from v6.2, Qt provides a native development support for WoA. As a result, you can fully leverage device hardware to accelerate your graphical user interface (GUI)-based applications.
+Starting from v6.2, Qt provides native development support for WoA. As a result, you can fully leverage device hardware to accelerate your graphical user interface (GUI)-based applications.
 
 ## Before you begin
 You will need to install Qt on your Windows on Arm machine. Go to the Qt Group [download page](https://www.qt.io/download), register for the Qt trial, and download Qt. Alternatively, go to the [Qt for Open Source Development](https://www.qt.io/download-open-source) page and download the package from there.
 
-In the Qt Setup window, select at least Qt version 6.2. In this example, we use version 6.4.
+In the Qt Setup window select, as a minimum, Qt version 6.2. In this example, we use version 6.4.
 
 ![fig1](figures/01.png)
 
@@ -42,7 +42,7 @@ To modify the Affine Transformations app, you will add one more button with a Ru
 
 As with any other C++ app, the application’s entry point is the main function, as defined in `main.cpp`. The main function initializes and displays XFormWidget, in `xform.h` and `xform.cpp`.
 
-Start by changing the xform.h file (located inside the Header folder in the project tree on the left side). First, add one include directive to import the QElapsedTimer class, which you use to measure the code’s execution time:
+Start by changing the xform.h file (located inside the Header folder in the project tree on the left side). First, add one `include` directive to import the QElapsedTimer class, which you use to measure the code’s execution time:
 
 ```Cpp
 #ifndef XFORM_H
@@ -100,7 +100,7 @@ private:
 
 Now, you need to modify the source file `xform.cpp`. Do this by adding a Run button, binding the `runAnimation` method with the click signal of that button, and disabling the invocation of the `animateClick` method. Disabling the invocation prevents the default animation from running when you launch the app.
 
-Then, modify the `XFormWidget` constructor (the declaration of this class is after `XFormView`) with the following code:
+Then, modify the XFormWidget constructor (the declaration of this class is after `XFormView`) with the following code:
 
 ```cpp
 XFormWidget::XFormWidget(QWidget *parent)
@@ -173,7 +173,7 @@ XFormWidget::XFormWidget(QWidget *parent)
 }
 ```
 
-Next, implement the `runAnimation` method in `xform.cpp` as shown:
+Next, implement the `runAnimation` method in `xform.cpp` as shown below:
 
 ```cpp
 void XFormView::runAnimation()
@@ -207,11 +207,11 @@ void XFormView::runAnimation()
 }
 ```
 
-The method works like the original event handler for the **Animate** button. It translates (`QTransform.translate`), rotates (`QTransform.rotate`), scales (`QTransform.scale`), and shears (`QTransform.shear`) the image. It implements all of these actions using the statements under the *for loop*. `QTransform` uses the transformation matrix to perform the affine transformation. You can also manually set elements of that matrix using the `QTransform.setMatrix` method.
+The method works the same as the original event handler for the **Animate** button. It translates (`QTransform.translate`), rotates (`QTransform.rotate`), scales (`QTransform.scale`), and shears (`QTransform.shear`) the image. It implements all of these actions using the statements under the *for loop*. `QTransform` uses the transformation matrix to perform the affine transformation. You can also manually set elements of that matrix using the `QTransform.setMatrix` method.
 
 The user interface is updated using signals (via the emit keyword). This update performs the scale and shear changes.
 
-To summarize, you have made only three changes:
+To summarize, you have made three changes:
 1. `elapsedTimer.restart` method to restart an instance of the **QElapsedTimer**.
 2. Embedded transformations within a *for loop*
 3. `qDebug` to print information about the code execution time in the debugger console
@@ -242,6 +242,6 @@ The computations are slower and take about 438 milliseconds on average. This mea
 
 ## Summary
 
-The Qt Framework, beginning with version 6.2, supports native WoA development. This tutorial demonstrates the benefits of using Qt when building for AArch64 processors. Qt enables you to develop maintainable, highly performant, and reusable code, and its support for WoA allows your apps to perform much better. In this learning path, the build on AArch64 was 1.6 times faster than x64.
+The Qt Framework, starting from version 6.2, supports native Windows on Arm (WoA) development. This tutorial demonstrates the benefits of using Qt when building for AArch64 processors. Qt enables you to develop maintainable, highly performant, and reusable code, and its support for WoA allows your apps to perform much better. In this learning path, the build on AArch64 was 1.6 times faster than x64.
 
 You can take advantage of this performance boost by switching the build configuration in the Qt interface. Everything else stays the same. You can quickly accelerate your existing Qt applications and process application commands almost twice as fast. 
