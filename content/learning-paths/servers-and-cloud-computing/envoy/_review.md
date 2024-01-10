@@ -30,6 +30,16 @@ review:
         correct_answer: 1                     
         explanation: >        
             Bazel is the build tool used for constructing Envoy.
+
+    - questions:
+        question: >
+            To run Envoy as a service, you'll need a config file.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            You will need to either create a config file or use a sample config to run Envoy as a service.
                     
 
 # ================================================================================
