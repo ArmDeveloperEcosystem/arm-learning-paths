@@ -15,7 +15,7 @@ Windows 11 can run directly on Arm64-powered devices, so you can use it similarl
 This learning path demonstrates how you can use ASP.NET Core with Windows 11 to build a web server for a headless IoT application. This learning path uses Windows Dev Kit 2023 as a development PC. The kit does not contain any real sensors, so you will implement a temperature sensor emulator.
 
 ## Before you begin
-Make sure that .NET is correctly installed on your machine. To do this, open the command prompt, and type:
+Make sure that .NET is correctly installed on your machine. To do this, open the command prompt and type:
 
 ```console
 dotnet --info
@@ -23,7 +23,7 @@ dotnet --info
 
 The output will show the list of installed SDKs. Make sure you have at least one SDK (ideally version 8 or above). 
 
-{{% notice Note %}} Refer to this [learning path](/learning-paths/laptops-and-desktops/win_net8/) for more details on the output of the dotnet --info command.{{% /notice %}}
+{{% notice Note %}} Refer to this [learning path on .NET 8 applications on Windows on Arm](/learning-paths/laptops-and-desktops/win_net8/) for more details on the output of the dotnet --info command.{{% /notice %}}
 
 ## Create the project
 You can now create a new ASP.NET Core Web API project. Open a command prompt window and type the following command:
@@ -75,7 +75,7 @@ In this section, you will learn how to implement the temperature sensor emulator
 ### Temperature Sensor Emulator
 Start by implementing the temperature sensor emulator, which simulates readings from a temperature sensor connected to an IoT device running a web service.
 
-To represent sensor readings, you use the SensorReading class as defined in the code snippet below. To implement this class, create a Sensors folder in the Arm64.HeadlessIoT solution folder, then make a new file called `SensorReading.cs`, where you place the following code:
+To represent sensor readings, you can use the `SensorReading` class as defined in the code snippet below. To implement this class, create a Sensors folder in the Arm64.HeadlessIoT solution folder, then make a new file called **SensorReading.cs** where you place the following code:
 
 ```cs
 namespace Arm64.HeadlessIoT.Sensors;
@@ -150,9 +150,9 @@ public class TemperatureSensor : ISensor
 }
 ```
 
-The **TemperatureSensor** class implements the **ISensor** interface, the `IsActive` property, and the `GetCurrentReading` method. The `IsActive` property is a Boolean value, which is initially **true**, indicating that the temperature sensor emulator is active.
+The `TemperatureSensor` class implements the **ISensor** interface, the `IsActive` property, and the `GetCurrentReading` method. The `IsActive` property is a Boolean value, which is initially **true**, indicating that the temperature sensor emulator is active.
 
-The second method, `GetCurrentReading`, checks if the `IsActive` property is **true**. If so, the `GetCurrentReading` method simulates a temperature reading using a pseudo-random number generator (the **System.Random** class instance). Specifically, it uses the **Next** method of this generator to pick an integer value from a range of values stored in the min and max fields of the **TemperatureSensor** class. The **lastKnownReading** field stores the sensor reading. Finally, the `GetCurrentReading` method will return the temperature reading to the caller.
+The second method, `GetCurrentReading`, checks if the `IsActive` property is **true**. If so, the `GetCurrentReading` method simulates a temperature reading using a pseudo-random number generator (the `System.Random` class instance). Specifically, it uses the **Next** method of this generator to pick an integer value from a range of values stored in the min and max fields of the **TemperatureSensor** class. The `lastKnownReading` field stores the sensor reading. Finally, the `GetCurrentReading` method will return the temperature reading to the caller.
 
 Alternatively, if the `IsActive` property is **false**, the `GetCurrentReading` method will return the last known sensor reading.
 
@@ -211,7 +211,7 @@ if (app.Environment.IsDevelopment())
 ```
 
 ### Web API Controller for the Headless IoT Device
-Now you are ready to implement the web API controller. Create a new file, `IoTController.cs`, in the Controllers folder. Then, in the `IoTController.cs` file, add two using statements and define the namespace as shown:
+Now you are ready to implement the web API controller. Create a new file **IoTController.cs** in the Controllers folder and add into it two using statements, defining the namespace as shown:
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
@@ -220,7 +220,7 @@ using Arm64.HeadlessIoT.Sensors;
 namespace Arm64.HeadlessIoT.Controllers;
 ```
 
-Next, define the **IoTController** class, which derives from the **ControllerBase** and contains the required controller attributes:
+Next, define the `IoTController` class, which derives from the `ControllerBase` and contains the required controller attributes:
 
 ```cs
 [ApiController]
@@ -231,13 +231,13 @@ public class IoTController : ControllerBase
 }
 ```
 
-Then, in the **IoTController** class, define the read-only field, **temperatureSensor**, which stores the reference to the **TemperatureSensor** class instance registered in the dependency container in the Program.cs file:
+Then, in the `IoTController` class, define the read-only field, `temperatureSensor`, which stores the reference to the `TemperatureSensor` class instance registered in the dependency container in the Program.cs file:
 
 ```cs
 private readonly ISensor temperatureSensor;
 ```
 
-You can now define the **IoTController** class constructor:
+You can now define the `IoTController` class constructor:
 
 ```cs
 public IoTController(ISensor sensor)
@@ -246,9 +246,9 @@ public IoTController(ISensor sensor)
 }
 ```
 
-This code uses constructor dependency injection to obtain a reference to the **TemperatureSensor** class instance. The temperatureSensor field stores the reference to the **TemperatureSensor** class as defined in the Program.cs file.
+This code uses constructor dependency injection to obtain a reference to the `TemperatureSensor` class instance. The temperatureSensor field stores the reference to the `TemperatureSensor` class as defined in the Program.cs file.
 
-Now, you can implement the **IoTController** method, which handles GET requests:
+Now, you can implement the `IoTController` method which handles GET requests:
 
 ```cs
 [HttpGet]
@@ -273,7 +273,7 @@ public IActionResult SetSensorStatus(bool isActive)
 }
 ```
 
-The final form of the `IoTController.cs` file is shown below:
+The final form of the **IoTController.cs** file is shown below:
 
 ```cs
 using Microsoft.AspNetCore.Mvc;
@@ -309,4 +309,4 @@ public class IoTController : ControllerBase
 }
 ```
 
-The implementation is now ready and you can build, run, and test the web server.
+The implementation is ready and you can now build, run, and test the web server.
