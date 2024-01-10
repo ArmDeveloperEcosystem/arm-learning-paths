@@ -12,7 +12,7 @@ Arm64EC is a Windows 11 Application Binary Interface (ABI) that helps you transi
 
 Using Arm64EC helps migrate large and complex applications with their own ecosystem. The app vendor may not know about the dependencies the app customer requires. For example, professionals may use plugins from many independent vendors in an image processing application. When that image processing application is compatible with Arm64EC, the users can use all the plugins, irrespective of whether the makers have ported them to Arm64. Arm64EC enables shipping applications that link legacy binary dependencies, even if they have missing source code or an unsupported toolchain.
 
-This learning path demonstrates how to employ Arm64EC to port a complete application consisting of the main application and dependencies, including separate dynamic link libraries (DLLs). Namely, you will build a Qt-based Python application with two C/C++-based DLL dependencies. This architecture mimics a typical scenario of using Python and Qt for rapid UI prototyping and DLLs for computation-intense work. The Python application demonstrates an alternative way of building a UI for C/C++ based DLL dependencies since native C/C++ dependencies are typical in the Python ecosystem and may not offer native builds yet. However, you could still use Qt-based C/C++ UI.
+This learning path demonstrates how to employ Arm64EC to port a complete application consisting of the main application and dependencies, including separate dynamic link libraries (DLLs). Namely, you will build a Qt-based Python application with two C/C++-based DLL dependencies. This architecture mimics a typical scenario of using Python and Qt for rapid UI prototyping and DLLs for computation-intense work. The Python application demonstrates an alternative way of building a UI for C/C++ based DLL dependencies since native C/C++ dependencies are typical in the Python ecosystem and may not yet offer native builds. That said, you could still use Qt-based C/C++ UI.
 
 ## Before you begin
 To follow this learning path:
@@ -23,7 +23,7 @@ To follow this learning path:
 The complete project code used in this learning path is hosted [here](https://github.com/dawidborycki/ARM64EC.Porting).
 
 ## Project Setup
-To set up the project, start by creating the dependencies (the DLLs). In this example you will use CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, open the Visual Studio 2022 and click Create a new project and look for CMake Project in the window that appears.
+To set up the project, start by creating the dependencies (the DLLs). In this example you will use CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, open Visual Studio 2022 and click Create a new project and look for CMake Project in the window that appears.
 
 ![fig1](figures/01.png)
 
@@ -38,10 +38,10 @@ Finally, click **Create**.
 
 ## Implementation
 
-Once the project is ready, create two folders: Vectors and Filters. Each folder is for implementing a separate DLL. 
+Once the project is ready, create two folders: **Vectors** and **Filters**. Each folder is for implementing a separate DLL. 
 
-### First DLL
-Start by implementing the first DLL. To do so, in the Vectors folder, create two files: `Vectors.h` and `Vectors.cpp`. Copy the code below into `Vectors.h`:
+### The First DLL
+Start by implementing the first DLL. To do this, create two files in the **Vectors** folder: `Vectors.h` and `Vectors.cpp`. Copy the code below into `Vectors.h`:
 
 ```cpp
 #pragma once
@@ -54,7 +54,7 @@ using namespace std;
 extern "C" __declspec(dllexport) double performCalculations();
 ```
 
-After the pragma precompiler declaration, the above declaration imports two headers: iostream and chrono. Then, add the std namespace and export one function, `performCalculations`. Later on you will call this function from the main Python app.
+After the pragma precompiler declaration, the above declaration imports two headers: iostream and chrono. Then, add the `std` namespace and export one function, `performCalculations`. Later on you will call this function from the main Python app.
 
 Now, create `Vectors.cpp` with the code shown below:
 
@@ -127,7 +127,7 @@ endif()
 
 The above file sets the build target to a DLL using the SHARED flag in the add_library statement.
 
-### Second DLL
+### The Second DLL
 
 Now you can implement a second DLL in the same way. Again, use CMake (see Filters/CMakeLists.txt). First, create the `Filters.h` header file in the Filters folder with the code shown below:
 
@@ -161,11 +161,11 @@ extern "C" __declspec(dllexport) double* getInputSignalAfterFilter();
 ```
 
 The above file declares five exported functions:
-1. `getSignalLength` — Returns the length of the synthetic signal defined under SIGNAL_LENGTH
-2. `generateSignal` — Creates the synthetic signal and stores it in the inputSignal global variable
-3. `truncate` — Filters the signal by truncating all values above a THRESHOLD
-4. `getInputSignal` — Returns the generated signal (stored in the inputSignal variable)
-5. `getInputSignalAfterFilter` — Returns the filtered signal (stored in the inputSignalAfterFilter variable)
+1. `getSignalLength` - Returns the length of the synthetic signal defined under SIGNAL_LENGTH
+2. `generateSignal` - Creates the synthetic signal and stores it in the inputSignal global variable
+3. `truncate` - Filters the signal by truncating all values above a THRESHOLD
+4. `getInputSignal` - Returns the generated signal (stored in the inputSignal variable)
+5. `getInputSignalAfterFilter` - Returns the filtered signal (stored in the inputSignalAfterFilter variable)
 
 Define these functions in `Filters.cpp` using the code below:
 
@@ -202,17 +202,17 @@ void truncate() {
 }
 ```
 
-The first three functions do not require additional description. They simply return the internal DLL values. The third function `generateSignal` creates the sine wave with a random additive noise. These results are stored in the inputSignal variable. 
+The first three functions do not require additional descriptions. They simply return the internal DLL values. The third function `generateSignal` creates the sine wave with a random additive noise. These results are stored in the inputSignal variable. 
 
-The last function, truncate analyzes the inputSignal and replaces all the values larger than the THRESHOLD with that value. Other values are unmodified. For example, if the value is 100, it will be replaced by 70. On the other hand, the value of 50 will not change.
+The last function, `truncate` analyzes the inputSignal and replaces all the values larger than the THRESHOLD with that value. Other values are unmodified. For example, if the value is 100, it will be replaced by 70. On the other hand, the value of 50 will not change.
 
 ### Compile
-To compile both DLLs, in Visual Studio click the Build/Build All menu item, and DLL files will be available in the out/build/x64-release folder (Vectors/Vectors.dll and Filters/Filters.dll). 
+To compile both DLLs, in Visual Studio click the Build/Build All menu item, the DLL files will be available in the **out/build/x64-release** folder (Vectors/Vectors.dll and Filters/Filters.dll). 
 
 ### Main application
-Once you generate the DLLs. Create the Main-app folder (under Arm64EC.Porting, next to Vectors and Filters). Then, under Main-app folder create the Dependencies subfolder. Finally, copy DLLs to Main-app/Dependencies folder.
+Once you have generated the DLLs, create a **Main-app** folder (under Arm64EC.Porting, next to **Vectors** and **Filters**). Then, create a subfolder called **Dependencies**. Finally, copy the DLLs to the **Main-app/Dependencies** folder.
 
-Now, you will invoke the functions exported from the two DLLs. To do so, create a new file, main.py under the Arm64EC.Porting.
+Now, you will invoke the functions exported from the two DLLs. To do this, create a new file, `main.py` under the Arm64EC.Porting.
 
 Next, you need to install several dependencies. The first is PySide, which provides Python bindings for Qt. You can install PySide via pip. To do this, open the terminal and type:
 
@@ -223,7 +223,7 @@ pip install pyside6
 {{% notice Note %}} Alternatively, you can install PySide using a virtual environment by running python -m venv path_to_virtual_environment. Then, activate the environment by running path_to_virtual_environment/Scripts/activate.bat and install the dependencies by running pip install -r requirements.txt. Note that for this method, you must first download the [requirements.txt](https://raw.githubusercontent.com/dawidborycki/ARM64EC.Porting/main/Main-app/requirements.txt) file from the companion code.
  {{% /notice %}}
 
-In the main.py file, import the ctypes, sys, os, and Qt packages:
+In the `main.py` file, import the ctypes, sys, os, and Qt packages:
 
 ```python
 import ctypes, sys, os
@@ -283,7 +283,7 @@ class MainWindowWidget(QtWidgets.QWidget):
 
 The initializer here defines the UI. Specifically, the code above adds two buttons: Vectors and Filters. It also creates a label to display the computation time. Then, it generates the chart.
 
-The code also adds all UI components to the vertical layout. It specifies the y-axis for plotting and associate two methods, `runVectorCalculation`s and `runTruncation`, with the buttons. The user invokes those methods by pressing the corresponding buttons.
+The code also adds all UI components to the vertical layout. It specifies the y-axis for plotting and associates two methods, `runVectorCalculation`s and `runTruncation`, with the buttons. The user invokes those methods by pressing the corresponding buttons.
 
 Next, define `runVectorCalculations` as follows:
 
@@ -333,9 +333,9 @@ def runTruncation(self):
     seriesSignalAfterFilter.attachAxis(self.axisY)
 ```
 
-As before, you first load the DLL. Then, remove all series from the chart. This way, the chart clears whenever the user clicks the Filters button before plotting new data.
+As before, first load the DLL. Then, remove all series from the chart. This way, the chart clears whenever the user clicks the Filters button before plotting new data.
 
-You should retrieve the inputSignal and add it to the chart using a helper method `prepareSeries` which copies data from the underlying pointer to the Python array. You should also invoke the truncate method, retrieve the filtered signal, and add it to the plot. To do all this, add the following method to the main.py file:
+Retrieve the inputSignal and add it to the chart using a helper method `prepareSeries` which copies data from the underlying pointer to the Python array. You should also invoke the `truncate` method, retrieve the filtered signal, and add it to the plot. To do all this, add the following method to the `main.py` file:
 
 ```python
 def prepareSeries(self, inputData, length):
