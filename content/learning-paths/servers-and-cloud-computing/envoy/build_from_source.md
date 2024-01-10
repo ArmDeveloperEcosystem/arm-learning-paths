@@ -55,7 +55,7 @@ static_resources:
               '@type': type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
 ```
 
-To run Envoy service, execute the following command:
+To run Envoy as a service, execute the following command:
 
 ```console
 sudo bazel-bin/source/exe/envoy-static.stripped -c configs/config-http.yaml --concurrency 16 &

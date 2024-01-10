@@ -23,13 +23,13 @@ review:
 
     - questions:
         question: >
-            Envoy is written in Java.
+            To build Envoy from source, you'll require the Bazel build tool.
         answers:
             - "True"
             - "False"
-        correct_answer: 2                     
-        explanation: >
-            Envoy is primarily written in C++ programming language.
+        correct_answer: 1                     
+        explanation: >        
+            Bazel is the build tool used for constructing Envoy.
                     
 
 # ================================================================================
