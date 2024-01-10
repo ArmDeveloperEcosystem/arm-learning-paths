@@ -1,5 +1,5 @@
 ---
-title: Port Your Applications to Arm64 Using Arm64EC
+title: Port Applications to Arm64 using Arm64EC
 
 minutes_to_complete: 90
 
@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for developers who want to learn 
 learning_objectives:
     - Build a Qt-based Python desktop application
     - Create C/C++ dependencies and use them in the Qt-based Python app
-    - Learn how to port the C/C++ based dependencies to Arm64 using Arm64EC.
+    - Learn how to port the C/C++ based dependencies to Arm64 using Arm64EC
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
