@@ -101,7 +101,7 @@ Now, try to install the NumPy package, which you will use later on to implement 
 py -3.12-arm64 -m pip install numpy
 ```
 
-The command will generate the following output
+The command will generate the following output:
 
 ```output
 Collecting numpy
@@ -149,9 +149,9 @@ note: This is an issue with the package mentioned above, not pip.
 hint: See above for details.
 ```
 
-We can see that the installation has failed. For Arm64, there is no a platform-specific wheel. So, pip downloads and tries to build the package from the source code to create the local Arm64 package wheel. However, as you do not have the build tools yet, the installation was not successful.
+We can see that the installation has failed. For Arm64, there is no platform-specific wheel. So, pip downloads and tries to build the package from the source code to create the local Arm64 package wheel. However, as you do not have the build tools yet, the installation was not successful.
 
-Before going further, try to install NumPy for x64 by invoking the following command:
+Before going any further, try to install NumPy for x64 by invoking the following command:
 
 ```console
 py -3.12-64 -m pip install numpy
