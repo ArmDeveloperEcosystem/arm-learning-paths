@@ -1,14 +1,14 @@
 ---
-title: The glibc with LSE helps improve workloads performance on Arm servers
+title: Use glibc with LSE to improve the performance of workloads on Arm servers
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for helping improve workloads performance on or porting from x86 to Arm servers.
+who_is_this_for: This is an advanced topic for software developers interested in learning how to improve the performance of their workloads on Arm servers.
 
 learning_objectives:
 - Build and install glibc with LSE on an Arm server
-- Benchmark workloads performance using glibc with LSE optimizations
-- Simply benchmark MongoDB
+- Benchmark workload performance using glibc with LSE optimizations
+- Benchmark MongoDB using glibc with LSE optimizations
 
 prerequisites:
 - An Arm based instance from a cloud service provider.
