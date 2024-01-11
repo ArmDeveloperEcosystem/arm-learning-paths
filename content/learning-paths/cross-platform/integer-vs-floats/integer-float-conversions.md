@@ -10,17 +10,17 @@ There are two types of data type conversions, explicit and implicit.
 
 ## Explicit Conversions
 
-Explicit conversions are done on purpose, because you, the developer, understand the algorithm and your expectations of the results. Explicit conversions can be used to balance performance and accuracy. 
+Explicit conversions are done on purpose because you, the developer, understand the algorithm and your expectations of the results. Explicit conversions can be used to balance performance and accuracy. 
 
-You would use explicit conversions when you want an algorithm to be processed using integer types, but you need an accurate calculation to be done with floats or doubles. 
+You would use explicit conversions when you want an algorithm to be processed using integer types but you need an accurate calculation to be done with floats or doubles. 
 
-This is typically the case with video and audio codecs, where most calculations are done using integer arithmetic, but extra precision is needed in some places. To gain precision, calculations are evaluated using floats or doubles and then **explicitly** converted back to integers. 
+This is typically the case with video and audio codecs (where most calculations are done using integer arithmetic) but extra precision is needed in some places. To gain precision, calculations are evaluated using floats or doubles and then **explicitly** converted back to integers. 
 
 Below is an example taken from the [libvpx project](https://github.com/webmproject/libvpx/blob/main/vpx_dsp/add_noise.c#L41). 
 
-It shows a function to generate an image using auto generated noise from a gaussian distribution function.
+It shows a function to generate an image using auto-generated noise from a gaussian distribution function.
 
-The code is shown for illustration only, do not try to build or run it. The relevant BSD license of the libvpx library is appended at the end of this page.
+The code is shown for illustration only, do not try to build or run it. The relevant BSD license of the libvpx library is appended at the end of this section.
 
 ```C
 /*
@@ -137,7 +137,7 @@ fcvtzs w1, d0
 
 These instructions convert the value between a double register (`d0` and `d2`) from/to an integer value in registers (`w1` and `w20`).
 
-Conversion is done on purpose and is controlled, but when dealing with performance critical software, such conversions can be costly and should be avoided unless there is no alternative.
+Conversion is done on purpose and is controlled but, when dealing with performance critical software, such conversions can be costly and should be avoided unless there is no alternative.
 
 The second type of conversions are called implicit and are harder to track.
 
@@ -148,7 +148,7 @@ When a conversion is not explicitly stated it is called implicit. In general, it
 In that case, the compiler has to convert one of the values to the same datatype as the other, as most operations require elements of the same size. 
 
 {{% notice Note %}}
-There are some conversion exceptions, like for example the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. 
+There are some conversion exceptions, for example, the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. 
 {{% /notice %}}
 
 Here is a generic operation:
@@ -159,7 +159,7 @@ C = A OP B
 
 where `OP` can be any operation that will translate to one or more assembly instructions, addition, subtraction, multiplication, or division.
 
-Depending on the data types the conversion can be either a promotion, a demotion, or a conversion between types of a different nature (float to integer or integer to float).
+Depending on the data types the conversion can be either a promotion, a demotion or a conversion between types of a different nature (float to integer or integer to float).
 
 ### Promotions
 
@@ -191,9 +191,9 @@ This is a risky conversion, as bits are lost and it should be avoided unless you
 
 Unfortunately, this is where the programming language matters. In some cases, C++ will catch such a demotion (called a *narrowing conversion* in C++) and will issue a relevant warning,
 
-The C language does not provide for such a warning. The C compiler will not issue a warning and it's easy for a conversion bug to creep in your code. Sometimes conversion errors can be very hard to detect.
+The C language does not provide such a warning. The C compiler will not issue a warning and it's easy for a conversion bug to creep into your code. Sometimes conversion errors can be very hard to detect.
 
-Even with C++ there is a catch, the compiler will only issue such a warning when using bracket initialization, not assignment between values. You will see this in detail in the next section.
+Even with C++ there is a catch as the compiler will only issue such a warning when using bracket initialization, not assignment between values. You will see this in detail in the next section.
 
 Here is a list for possible demotions:
 
@@ -214,9 +214,9 @@ Again unsigned integers are demoted to similar types.
 
 ### Type conversions
 
-You might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not that simple.
+You might argue that conversion of an `int16_t` to `float` or `double` is a promotion but it's not that simple.
 
-While a demotion does not always need an instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However, this can be achieved using other ways also. When the compiler can detect a specific pattern it can skip the zero/sign-extend instructions and solve the problem by mere shuffling/rearranging the bytes. 
+While a demotion does not always need an instruction to take place, a promotion usually requires an instruction to zero or sign-extend the contents of a register. However, this can be achieved using other ways as well. When the compiler detects a specific pattern, it can skip the zero/sign-extend instructions and solve the problem by mere shuffling/rearranging the bytes. 
 
 An example of skipping an instruction is shown below:
 
