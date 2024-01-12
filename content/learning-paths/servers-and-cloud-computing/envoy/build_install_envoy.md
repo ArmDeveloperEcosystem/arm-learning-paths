@@ -8,8 +8,6 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-
-##  Introduction to Envoy
 Envoy is an open-source, high-performance proxy service initially developed by Lyft and now maintained by the Cloud Native Computing Foundation (CNCF). It is designed to be a scalable, flexible, and low-latency service proxy, particularly well-suited for microservices architectures and containerized applications.
 
 ### Before you begin
@@ -18,7 +16,7 @@ In this section you will learn about different options to install, configure and
 
 ### Arm deployment options
 
-There are numerous ways to deploy Envoy on Arm: Bare metal, cloud VMs, or the various Envoy services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
+There are numerous ways to deploy Envoy on Arm: bare metal, cloud VMs, or the various Envoy services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue with installation options.
 
 * Arm Cloud VMs
   * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp) learning path
@@ -33,13 +31,13 @@ There are numerous ways to deploy Envoy on Arm: Bare metal, cloud VMs, or the va
 
 ### Envoy installation options
 
-You can install envoy in a few different ways. The recommended ways are to download the latest Envoy [binary](https://github.com/envoyproxy/envoy/releases) for your target Arm platform or build it from [source](/learning-paths/servers-and-cloud-computing/envoy/build_from_source). You can follow the steps in this section to build envoy from source.
+You can install Envoy in a few different ways. The recommended ways are to download the latest Envoy [binary](https://github.com/envoyproxy/envoy/releases) for your target Arm platform or build it from source. You can follow the steps in this section to build envoy from source.
 
 ## Install Bazel
 
-To build envoy from source you will use bazel.
+To build Envoy from source you will use Bazel.
 
-On your Ubuntu Linux Arm machine, run the following commands to install bazel:
+On your Ubuntu Linux Arm machine, run the following commands to install Bazel:
 
 ```console
 sudo wget -O /usr/local/bin/bazel https://github.com/bazelbuild/bazelisk/releases/latest/download/bazelisk-linux-$([ $(uname -m) = "aarch64" ] && echo "arm64" || echo "amd64")
@@ -63,7 +61,7 @@ sudo apt-get install \
    virtualenv
 ```
 
-### Build envoy from the source code
+### Build Envoy from the source code
 
 You will need to download and extract the prebuilt Clang+LLVM package from [LLVM official site](http://releases.llvm.org/download.html) as shown:
 
@@ -73,7 +71,7 @@ wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.1/clang
 tar -xvf clang+llvm-17.0.1-aarch64-linux-gnu.tar.xz
 ```
 
-You can now build envoy from the source as shown:
+You can now build Envoy from the source as shown below:
 
 ```console
 git clone https://github.com/envoyproxy/envoy.git
@@ -91,6 +89,6 @@ INFO: 14755 processes: 6000 internal, 8753 linux-sandbox, 1 local, 1 worker.
 INFO: Build completed successfully, 14755 total actions
 ```
 
-With envoy now installed your Arm machine running Ubuntu, you can follow the steps in the next section to run envoy as a service.
+With Envoy now installed on your Arm machine running Ubuntu, you can follow the steps in the next section to run Envoy as a service.
 
 

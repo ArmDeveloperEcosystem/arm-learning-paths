@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Bug Report Content
-The bug report is a zip file. Once you have it on your desktop machine, you need to decompress it to access the content. After unzipping the file, you will see the folder structure below and the bug report txt file. Husky is the code name for Gooogle Pixel 8 Pro and it is used when generating the name of the bug report file.
+The bug report is a zip file. Once you have it on your desktop machine, you need to decompress it to access the content. After unzipping the file, you will see the folder structure below and the bug report txt file. Husky is the code name for Google Pixel 8 Pro and it is used when generating the name of the bug report file.
 
 ![alt-text-2](pictures/10_unzipped_bug_report.png "Unzipped bug report file.")
 
@@ -23,7 +23,7 @@ When a tag mismatch is encountered, the processor aborts execution immediately a
 
 ![alt-text-2](pictures/12_header_of_tombstone_file.png "Header of tombstone file.")
 
-The line comencing with "signal 11 (SIGSEGV)" shows that an abort signal was received, with code SEGV_MTESERR, caused by an access to memory address `0x0b000073c323d595`.
+The line commencing with "signal 11 (SIGSEGV)" shows that an abort signal was received, with code SEGV_MTESERR, caused by an access to memory address `0x0b000073c323d595`.
 
 More detailed information is written to the tombstone file. It contains detailed data about the crashed process, including the following:
 * Stack traces for all the threads in the crashed process, including the thread that caught the signal
