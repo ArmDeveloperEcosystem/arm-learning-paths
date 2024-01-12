@@ -29,15 +29,17 @@ build=~/glibc-2.32_build_install/build
 mkdir -p $build
 cd $build
 ```
-Before execute the command "./glibc/configure", bison should be installed  
-___Glibc-2.32 matches gcc-10!!!___
+Before execute the command "./glibc/configure", gawk and bison should be installed.  
+Glibc-2.32 matches gcc-10 perfect, and the version of ld(GNU linker) should not be higher than 2.35.  
+__So Ubuntu 20.04 is strongly recommended!__
 ```
-sudo apt install -y bison
+sudo apt update
+sudo apt install -y gcc-10 g++-10 gawk bison
 ```
 
 - __Without installing__
     ```bash
-    sudo bash ~/glibc/configure --prefix=/usr
+    sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
     sudo make -C $build -j$(expr $(nproc) - 1)
     sudo make -C $build -j$(expr $(nproc) - 1) check
     ```
@@ -58,13 +60,13 @@ sudo apt install -y bison
 If you want to build glibc with LSE, you should add `CFLAGS` and `CXXFLAGS` to configure implicitly or explicitly.
 
 ```bash
-sudo bash ~/glibc/configure --prefix=/usr CFLAGS="-mcpu=native -O3" CXXFLAGS="-mcpu=native -O3"
+sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=native -O3" CXXFLAGS="-mcpu=native -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
 sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
 OR
 ```bash
-sudo bash ~/glibc/configure --prefix=/usr CFLAGS="-mcpu=neoverse-n2+lse -O3" CXXFLAGS="-mcpu=neoverse-n2+lse -O3"
+sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=neoverse-n2+lse -O3" CXXFLAGS="-mcpu=neoverse-n2+lse -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
 sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
@@ -74,13 +76,13 @@ sudo make -C $build -j$(expr $(nproc) - 1) check
 ## With NO-LSE
 
 ```bash
-sudo bash ~/glibc/configure --prefix=/usr
+sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
 sudo make -C $build -j$(expr $(nproc) - 1)
 sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
 OR
 ```bash
-sudo bash ~/glibc/configure --prefix=/usr CFLAGS="-mcpu=neoverse-n2+nolse -O3" CXXFLAGS="-mcpu=neoverse-n2+nolse -O3"
+sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=neoverse-n2+nolse -O3" CXXFLAGS="-mcpu=neoverse-n2+nolse -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
 sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
