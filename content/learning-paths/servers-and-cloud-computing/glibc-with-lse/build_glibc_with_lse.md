@@ -41,7 +41,6 @@ sudo apt install -y gcc-10 g++-10 gawk bison
     ```bash
     sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
     sudo make -C $build -j$(expr $(nproc) - 1)
-    sudo make -C $build -j$(expr $(nproc) - 1) check
     ```
 
 - __OR__
@@ -62,13 +61,11 @@ If you want to build glibc with LSE, you should add `CFLAGS` and `CXXFLAGS` to c
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=native -O3" CXXFLAGS="-mcpu=native -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
-sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
 OR
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=neoverse-n2+lse -O3" CXXFLAGS="-mcpu=neoverse-n2+lse -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
-sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
 
 ##
@@ -78,11 +75,9 @@ sudo make -C $build -j$(expr $(nproc) - 1) check
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
 sudo make -C $build -j$(expr $(nproc) - 1)
-sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
 OR
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=neoverse-n2+nolse -O3" CXXFLAGS="-mcpu=neoverse-n2+nolse -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
-sudo make -C $build -j$(expr $(nproc) - 1) check
 ```
