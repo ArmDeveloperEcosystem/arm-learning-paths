@@ -26,7 +26,7 @@ Create a new file called `vcpkg-configuration.json`. The following template give
     },
     {
       "kind": "artifact",
-      "location": "https://artifacts.keil.arm.com/vcpkg-ce-registry/registry.zip",
+      "location": "https://artifacts.tools.arm.com/vcpkg-ce-registry/registry.zip",
       "name": "arm"
     }
   ],
