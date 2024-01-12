@@ -34,7 +34,7 @@ Glibc-2.32 matches gcc-10 perfect, and the version of ld(GNU linker) should not 
 __So Ubuntu 20.04 is strongly recommended!__
 ```
 sudo apt update
-sudo apt install -y gcc-10 g++-10 gawk bison
+sudo apt install -y gcc-10 g++-10 gawk bison make
 ```
 
 - __Without installing__
