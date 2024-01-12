@@ -23,13 +23,23 @@ review:
 
     - questions:
         question: >
-            Envoy is written in Java.
+            To build Envoy from source, you'll require the Bazel build tool.
         answers:
             - "True"
             - "False"
-        correct_answer: 2                     
+        correct_answer: 1                     
+        explanation: >        
+            Bazel is the build tool used for constructing Envoy.
+
+    - questions:
+        question: >
+            To run Envoy as a service, you'll need a config file.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
         explanation: >
-            Envoy is primarily written in C++ programming language.
+            You will need to either create a config file or use a sample config to run Envoy as a service.
                     
 
 # ================================================================================

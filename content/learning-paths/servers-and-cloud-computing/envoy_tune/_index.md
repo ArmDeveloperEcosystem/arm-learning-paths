@@ -8,10 +8,10 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for software developers who want to use Envoy on Arm.
 
 learning_objectives:
-    - Learn about kernel parameters that can impact Envoy performance
-    - Learn about compiler and libraries that can impact Envoy performance
     - Tune Envoy by THP
     - Tune Envoy with PGO
+    - Learn about kernel parameters that can impact Envoy performance
+    - Learn about compiler and libraries that can impact Envoy performance
 
 prerequisites:
     - Cloud or bare-metal installation of an Envoy service

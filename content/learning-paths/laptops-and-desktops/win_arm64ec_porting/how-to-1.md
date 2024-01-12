@@ -20,10 +20,10 @@ To follow this learning path:
 1. Install [Visual Studio 2022 or higher](/install-guides/vs-woa) with Arm64 build tools.
 2. Install [Python](/install-guides/py-woa) on your machine. In this learning path, Python version 3.11.3 was used.
 
-The complete project code used in this learning path is hsoted [here](https://github.com/dawidborycki/ARM64EC.Porting).
+The complete project code used in this learning path is hosted [here](https://github.com/dawidborycki/ARM64EC.Porting).
 
 ## Project Setup
-To set up the project, start by creating the dependencies (the DLLs). TIn this example you will use CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, click click Create a new project, and look for CMake Project in the window that appears.
+To set up the project, start by creating the dependencies (the DLLs). In this example you will use CMake in Visual Studio 2022 to create the base project for your dependencies. You can also use MS Build/Visual C++ project templates to compile to Arm64EC by adding the architecture to your build configuration. To access CMake, click click Create a new project, and look for CMake Project in the window that appears.
 
 ![fig1](figures/01.png)
 

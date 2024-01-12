@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    We recommend you to continue learning about how to tune Envoy as a next step.
+    We recommend you continue learning about how to tune Envoy as a next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/envoy_tune/"
