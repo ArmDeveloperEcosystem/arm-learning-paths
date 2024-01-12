@@ -129,7 +129,7 @@ You are not dealing with real numbers, but approximate representations of real n
 If you assign a real number value to a float data type, the result might not be the same real number you assigned.
 {{% /notice %}}
 
-If your calculations require complete precision, then you should be looking at arbitrary precision libraries such as [The GNU Multiple Precision Arithmetic Library](https://gmplib.org/). 
+If your calculations require full precision, then you should be looking at arbitrary precision libraries such as [The GNU Multiple Precision Arithmetic Library](https://gmplib.org/). 
 
 ### Other floating-point data types: FP16, BF16, and FP8
 
