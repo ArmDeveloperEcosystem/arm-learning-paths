@@ -52,9 +52,9 @@ In the Build Output window you might see:
 
 ![Validate Run Time Environment warnings/errors detected](./build_output.png)
 
-Anyway, the build operation should work normally and the resulting binary will work fine on hardware. If you want to get rid of the error, check one of the following options.
+Despite this warning, the build operation should work normally and the resulting binary will work fine on hardware. If you want to get rid of the error, check one of the following options.
 
-A similar error can come up for any software component. Here's an example using MDK-Middleware:
+A similar error can come up for any software component. Here is an example using MDK-Middleware:
 
 ![Additional software components required](./middleware.png)
 
