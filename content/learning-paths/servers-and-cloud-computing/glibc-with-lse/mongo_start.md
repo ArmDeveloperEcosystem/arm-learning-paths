@@ -16,11 +16,9 @@ Build and install MongoDB version `5.3.2`:
 #for Fedora/RHEL
 sudo yum install -y git gcc g++ python3-devel openssl-devel libcurl-devel 
 #for Ubuntu/Debian
-sudo apt install -y git gcc g++ python-dev-is-python3 python3-pip libssl-dev libcurl4-openssl-dev libcurl4-nss-dev libcurl4-gnutls-dev liblzma-dev
+sudo apt install -y git gcc g++ python-dev-is-python3 libssl-dev libcurl4-openssl-dev liblzma-dev
 
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
-sudo python3 -m pip install 'poetry==1.5.1'
-sudo python3 -m poetry install --no-root --sync
 
 cd ~
 sudo git clone https://github.com/mongodb/mongo.git 
@@ -38,7 +36,7 @@ vi /mongodb-5.3.2/mongodb.conf
 
 dbpath=/mongodb-5.3.2/data
 logpath=/mongodb-5.3.2/mongodb.log
-pidfilepath=~/mongodb-5.3.2/data/mongo.pid
+pidfilepath=/mongodb-5.3.2/data/mongo.pid
 fork=true
 logappend=true
 bind_ip=0.0.0.0
@@ -47,6 +45,9 @@ port=27017
 #if necessary
 #rm -rf /mongodb-5.3.2/data/*
 ~/glibc-2.32_build_install/build/testrun.sh ~/mongo/build/install/bin/mongod -f /mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
+
+#If you encounter an error related to libcrypt.so and need to execute the following command before running again:
+#cp /usr/lib/aarch64-linux-gnu/libcrypt.so ~/glibc-2.32_build_install/build/crypt/
 ```
 
 Confirm if the workload mongodb runs with the newly built glibc with LSE:  

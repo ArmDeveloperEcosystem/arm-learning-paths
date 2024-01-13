@@ -85,6 +85,7 @@ requestdistribution=zipfian
     ```
     ~/ycsb-0.17.0/bin/ycsb.sh run mongodb -s -P ~/ycsb-0.17.0/workloads/iworkload -p operationcount=5000000 -threads 256 -p mongodb.url="mongodb://${mongo_ip}:${mongo_port}/mymongodb"
     ```
+    __Attention: Please ensure that you have sufficient disk space available!__
 
     You can see the performance data after the `run` command execution is finished.
     ```output
