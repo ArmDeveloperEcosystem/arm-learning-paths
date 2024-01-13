@@ -1,5 +1,5 @@
 ---
-title: Understanding the CMSIS-Pack Migration Guide
+title: Migrating CMSIS-Packs to CMSIS v6
 
 minutes_to_complete: 10
 
