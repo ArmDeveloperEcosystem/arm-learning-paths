@@ -78,7 +78,7 @@ addvec:
         ret
  ```
 
-As you can see, the compiler has enabled autovectorization for this algorithm and the output is identical to the hand-written function!
+As you can see, the compiler has enabled autovectorization for this algorithm and the output is identical to the hand-written function! Strictly speaking, you don't even need `restrict` in such a trivial loop as it will be autovectorized anyway when certain optimization levels are added to the compilation flags (`-O2` for clang, `-O3` for gcc). However, the use of restrict simplifies the code and generates SIMD code similar to the hand written version in `addvec_neon.c`.
 
 This is just a trivial example though and not all loops can be autovectorized that easily by the compiler. 
 

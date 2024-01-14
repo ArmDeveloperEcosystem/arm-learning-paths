@@ -183,7 +183,11 @@ int main() {
 }
 ```
 
-You need to recompile the code with `gcc -O3 -Wall -g -fno-inline -march=armv8-a+dotprod` in order to hint to the compiler that it has the new instructions at its disposal.
+You need to add `-march=armv8-a+dotprod` to the compilation flags in order to hint to the compiler that it has the new instructions at its disposal, that is:
+
+```bash
+gcc -O3 -Wall -g -fno-inline -march=armv8-a+dotprod
+```
 
 The assembly output will be quite larger as the use of `SDOT` can only work in the main loop where the size is a multiple of 16. Then the compiler will unroll the loop to use ASIMD instructions if the size is greater than 8, and byte-handling instructions if the size is smaller.
 You could eliminate those extra tail instructions by converting `N -= N % 4` to 8 or even 16:

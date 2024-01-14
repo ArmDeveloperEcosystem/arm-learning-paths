@@ -32,7 +32,7 @@ review:
             - To evaluate a sum of products of 4 x 8-bit signed/unsigned integers in each 32-bit element in the input vectors.
         correct_answer: 3
         explanation: >
-            For each 32-bit element in the input vectors A[i], B[i], `SDOT`/`UDOT` evaluate the sum of the products between the 4 x 8-bit signed/unsigned integers that comprise the A[i], B[i] elements. The corresponding 32-bit element in the output vector holds the resulting sums.
+            For each 32-bit element in the input vectors A[i], B[i], `SDOT`/`UDOT` evaluate the sum of the products between the 4 x 8-bit signed/unsigned integers that comprise the A[i], B[i] elements. The corresponding 32-bit element in the output vector holds the resulting sums. For SVE, `SDOT`/`UDOT` instruction also works on 16-bit signed/unsigned integers.
 
 
 # ================================================================================
