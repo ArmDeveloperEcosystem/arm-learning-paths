@@ -3,23 +3,22 @@ title: Loop Reflowing/Autovectorization
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for C/C++ developers who are interested in taking advantage of autovectorization in compilers
+who_is_this_for: This is an advanced topic for C/C++ developers who are interested in taking advantage of autovectorization in compilers.
 
 learning_objectives: 
-    - Learn how to modify loops in order to take advantage of autovectorization in compilers
+    - Modify loops to take advantage of autovectorization in compilers
 
 prerequisites:
-    - An Arm computer running Linux OS and a recent version of compiler (Clang or GCC) installed
+    - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
 author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
-subjects: Programming
+subjects: Performance and Architecture
 armips:
-    - Aarch64
-    - Armv8-a
-    - Armv9-a
+    - Neoverse
+    - Cortex-A
 tools_software_languages:
     - GCC
     - Clang
@@ -28,8 +27,8 @@ operatingsystems:
     - Linux
 shared_path: true
 shared_between:
-    - laptops-and-desktops
     - servers-and-cloud-computing
+    - laptops-and-desktops
     - smartphones-and-mobile
 
 
