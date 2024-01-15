@@ -74,7 +74,7 @@ void addfunc(float *restrict C, float *A, float *B, size_t N) {
 }
 ```
 
-However at the time of writing, this is not the case and developers will have to manually vectorize such code for performance.
+This will be in gcc 14 and require a new glibc as well (2.39). Until these are released, if you are using a released compiler as part of a distribution (gcc 13.2 at the time of writing), you will have to manually vectorize such code for performance.
 
 We will expand on autovectorization of conditionals in the next section.
 
