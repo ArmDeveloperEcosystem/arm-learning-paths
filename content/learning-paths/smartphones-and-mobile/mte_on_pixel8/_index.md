@@ -3,7 +3,7 @@ title: Memory Tagging Extension on Google Pixel 8
 
 minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for developers interested in learning how to enable Arm Memory Tagging Extension (MTE) on Google Pixel 8 smartphone and how to access a memory bug report.
+who_is_this_for: This is an introductory topic for developers interested in learning how to enable Arm's Memory Tagging Extension (MTE) on Google's Pixel 8 smartphone and also how to access a memory bug report.
 
 learning_objectives: 
     - Enable MTE on your Google Pixel 8 smartphone
