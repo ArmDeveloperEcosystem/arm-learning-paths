@@ -34,7 +34,7 @@ sudo apt-get install libhugetlbfs-dev libhugetlbfs-bin
 
 ### Enable `hugetlbfs` and THP
 
-Use the commands shown to enable `hugetlbfs` and THP:
+Use the commands shown below to enable `hugetlbfs` and THP:
 
 ```console
 mkdir -p  /mnt/hugetlbfs
