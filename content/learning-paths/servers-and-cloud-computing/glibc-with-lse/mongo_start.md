@@ -16,7 +16,7 @@ Build and install MongoDB version `5.3.2`:
 #for Fedora/RHEL
 sudo yum install -y git gcc g++ python3-devel openssl-devel libcurl-devel 
 #for Ubuntu/Debian
-sudo apt install -y git gcc g++ python-dev-is-python3 libssl-dev libcurl4-openssl-dev liblzma-dev
+sudo apt install -y git gcc g++ python-dev-is-python3 python3-pip libssl-dev libcurl4-openssl-dev liblzma-dev
 
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
