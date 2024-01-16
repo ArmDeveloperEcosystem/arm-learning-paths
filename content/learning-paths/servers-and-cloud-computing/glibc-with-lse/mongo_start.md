@@ -31,12 +31,12 @@ sudo python3 buildscripts/scons.py install-mongod -j$(expr $(nproc) - 1) --disab
 ## MongoDB Starts utilizing the newly built Glibc with LSE
 ```console
 cd ~
-mkdir -p /mongodb-5.3.2/data
-vi /mongodb-5.3.2/mongodb.conf
+mkdir -p ~/mongodb-5.3.2/data
+vi ~/mongodb-5.3.2/mongodb.conf
 
-dbpath=/mongodb-5.3.2/data
-logpath=/mongodb-5.3.2/mongodb.log
-pidfilepath=/mongodb-5.3.2/data/mongo.pid
+dbpath=mongodb-5.3.2/data
+logpath=mongodb-5.3.2/mongodb.log
+pidfilepath=mongodb-5.3.2/data/mongo.pid
 fork=true
 logappend=true
 bind_ip=0.0.0.0
@@ -44,7 +44,7 @@ port=27017
 
 #if necessary
 #rm -rf /mongodb-5.3.2/data/*
-~/glibc-2.32_build_install/build/testrun.sh ~/mongo/build/install/bin/mongod -f /mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
+~/glibc-2.32_build_install/build/testrun.sh ~/mongo/build/install/bin/mongod -f ~/mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
 
 #If you encounter an error related to libcrypt.so and need to execute the following command before running again:
 #cp /usr/lib/aarch64-linux-gnu/libcrypt.so ~/glibc-2.32_build_install/build/crypt/
