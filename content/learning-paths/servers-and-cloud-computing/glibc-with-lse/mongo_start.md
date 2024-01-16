@@ -37,7 +37,6 @@ vi ~/mongodb-5.3.2/mongodb.conf
 dbpath=mongodb-5.3.2/data
 logpath=mongodb-5.3.2/mongodb.log
 pidfilepath=mongodb-5.3.2/data/mongo.pid
-fork=true
 logappend=true
 bind_ip=0.0.0.0
 port=27017
