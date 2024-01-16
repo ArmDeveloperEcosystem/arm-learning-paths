@@ -1,26 +1,31 @@
 ---
-title: Autovectorization and restrict
+title: Autovectorization using the restrict keyword
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Autovectorization and restrict keyword
+You may have already experienced some form of autovectorization by reading [Understand the restrict keyword in C99](/learning-paths/cross-platform/restrict-keyword-c99/).
 
-You have already experienced some form of autovectorization by learning about the [`restrict` keyword in a previous Learning Path](https://learn.arm.com/learning-paths/cross-platform/restrict-keyword-c99/).
-Our example is a classic textbook example that the compiler will autovectorize simply by using `restrict`:
+The example in the previous section is a classic textbook example that the compiler will autovectorize by using `restrict`.
 
-Try the previously saved files, compile them both and compare the assembly output:
+Compile the previously saved files:
 
 ```bash
 gcc -O2 addvec.c -o addvec
 gcc -O2 addvec_neon.c -o addvec_neon
 ```
 
-Let's look at the assembly output of `addvec`:
+Generate the assembly output using:
 
-```as
+```bash
+objdump -D addvec 
+```
+
+The assembly output of the `addvec()` function is shown below:
+
+```output
 addvec:
         mov     x3, 0
 .L2:
@@ -34,9 +39,15 @@ addvec:
         ret
 ```
 
-Similarly, for the `addvec_neon` executable:
+Generate the assembly output for `addvec_neon` using:
 
-```as
+```bash
+objdump -D addvec_neon
+```
+
+The assembly output for the `addvec()` function from the `addvec_neon` executable is shown below:
+
+```output
 addvec:
         mov     x3, 0
 .L6:
@@ -50,9 +61,9 @@ addvec:
         ret
  ```
 
-The latter uses Advanced SIMD/Neon instructions `fadd` with operands `v0.4s`, `v1.4s` to perform calculations in 4 x 32-bit floating-point elements.
+The second example uses the Advanced SIMD/Neon instruction `fadd` with operands `v0.4s`, `v1.4s` to perform calculations in 4 x 32-bit floating-point elements.
 
-Let's try to add `restrict` to the output argument `C` in the first `addvec` function:
+Add the `restrict` keyword to the output argument `C` in the `addvec()` function in `addvec.c`:
 
 ```C
 void addvec(float *restrict C, float *A, float *B) {
@@ -63,8 +74,14 @@ void addvec(float *restrict C, float *A, float *B) {
 ```
 
 Recompile and check the assembly output again:
+```bash
+gcc -O2 addvec.c -o addvec
+objdump -D addvec
+```
 
-```as
+The assembly output for the `addvec` function is now: 
+
+```output
 addvec:
         mov     x3, 0
 .L2:
@@ -78,10 +95,16 @@ addvec:
         ret
  ```
 
-As you can see, the compiler has enabled autovectorization for this algorithm and the output is identical to the hand-written function! Strictly speaking, you don't even need `restrict` in such a trivial loop as it will be autovectorized anyway when certain optimization levels are added to the compilation flags (`-O2` for clang, `-O3` for gcc). However, the use of restrict simplifies the code and generates SIMD code similar to the hand written version in `addvec_neon.c`.
+As you can see, the compiler has enabled autovectorization for this algorithm and the output is identical to the hand-written function.
 
-The reason for this is because of the way each compiler decides whether to use autovectorization or not. For each candidate loop the compiler will estimate the possible performance gains against a cost model, which is affected by many parameters and of course the optimization level in the compilation flags. This cost model will estimate whether the autovectorized code grows in size and if the performance gains are enough to outweigh this increase in code size. Based on this estimation, the compiler will decide to use this vectorized code or fall back to a more 'safe' scalar implementation. This decision however is something that is not set in stone and is constantly reevaluated during compiler development.
+Strictly speaking, you don't even need `restrict` in such a trivial loop as it will be autovectorized anyway when certain optimization levels are added to the compilation flags (`-O2` for clang, `-O3` for gcc). However, the use of restrict simplifies the code and generates SIMD code similar to the hand written version in `addvec_neon.c`.
 
-This analysis goes beyond the scope of this LP, this was just one trivial example to demonstrate how the autovectorization can be triggered by a flag.
+The reason for this is related to how each compiler decides whether to use autovectorization or not. 
+
+For each candidate loop the compiler will estimate the possible performance gains against a cost model, which is affected by many parameters and of course the optimization level in the compilation flags. 
+
+The cost model estimates whether the autovectorized code grows in size and if the performance gains are enough to outweigh the increase in code size. Based on this estimation, the compiler will decide to use vectorized code or fall back to a more 'safe' scalar implementation. This decision however is fluid and is constantly reevaluated during compiler development.
+
+Compiler cost model analysis is beyond the scope of this Learning Path, but the example demonstrates how autovectorization can be triggered by a flag.
 
 You will see some more advanced examples in the next sections.

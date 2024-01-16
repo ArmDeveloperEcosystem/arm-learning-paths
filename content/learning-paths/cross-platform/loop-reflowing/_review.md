@@ -4,7 +4,7 @@ review:
         question: >
             Autovectorization is:
         answers:
-            - The automatic generation of 3D vectors so that 3D applications/games run faster.
+            - The automatic generation of 3D vectors so that 3D games run faster.
             - Converting an array of numbers in C to an STL C++ vector object.
             - The process where an algorithm is automatically vectorized by the compiler to use SIMD instructions.
         correct_answer: 3

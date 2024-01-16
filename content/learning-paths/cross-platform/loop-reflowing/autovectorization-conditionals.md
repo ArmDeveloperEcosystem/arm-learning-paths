@@ -6,11 +6,13 @@ weight: 5
 layout: learningpathall
 ---
 
-## Autovectorization and conditionals 
+In the previous section, you learned that compilers cannot autovectorize loops with branches. 
 
-Previously we mentioned that compilers cannot autovectorize loops with branches. In this section, you will see that in more detail, when it is possible to enable the vectorizer in the compiler by adapting the loop and when it is required to modify the algorithm or write manually optimized code.
+In this section, you will see more examples of loops with branches.
 
-### If/else/switch in loops
+You will learn when it is possible to enable the vectorizer in the compiler by adapting the loop, and when you are required to modify the algorithm or write manually optimized code.
+
+### Loops with if/else/switch statements
 
 Consider the following function, a modified form of the previous function that uses weighted coefficients for `A[i]`.
 
@@ -26,7 +28,9 @@ void addvecweight(float *restrict C, float *A, float *B,
 }
 ```
 
-You might be tempted to think that this loop cannot be vectorized. Such loops are not that uncommon and compilers have a difficult time understanding the pattern and transforming them to vectorizeable forms, when it is possible. However, this is actually a vectorizable loop, as the conditional can actually be moved out of the loop, as this is a loop-invariant conditional. Essentially the compiler would transform -internally- the loop in something like the following:
+You might think that this loop cannot be vectorized. Such loops are not uncommon and compilers have a difficult time understanding the pattern and transforming them to vectorizable forms. However, this is actually a vectorizable loop, as the conditional can be moved out of the loop, as this is a loop-invariant conditional. 
+
+The compiler will internally transform the loop into something similar to the code below: 
 
 ```C
 void addvecweight(float *restrict C, float *A, float *B, size_t N) {
@@ -42,9 +46,11 @@ void addvecweight(float *restrict C, float *A, float *B, size_t N) {
 }
 ```
 
-which is in essence, two different loops and we know that the compiler can vectorize them. Both gcc and llvm can actually autovectorize this loop, but the output is slightly different, performance may actually vary depending on the flags used and the exact nature of the loop.
+These are two different loops that the compiler can vectorize. 
 
-However, the following loop is not yet autovectorized by all compilers (llvm/clang autovectorizes this loop, but not gcc):
+Both GCC and Clang can autovectorize this loop, but the output is slightly different, performance may vary depending on the flags used and the exact nature of the loop.
+
+However, the loop below is autovectorized by Clang but it is not autovectorized by GCC. 
 
 ```C
 void addvecweight2(float *restrict C, float *A, float *B,
@@ -58,8 +64,9 @@ void addvecweight2(float *restrict C, float *A, float *B,
 }
 ```
 
-Similarly with `switch` statements, if the condition expression in loop-invariant, that is if it does not depend on the loop variable or the elements involved in each iteration.
-For this reason we know that this loop is actually autovectorized:
+The situation is similar with `switch` statements. If the condition expression is loop-invariant, that is if it does not depend on the loop variable or the elements involved in each iteration, it can be autovectorized.
+
+This example is autovectorized:
 
 ```C
 void addvecweight(float *restrict C, float *A, float *B,
@@ -79,7 +86,7 @@ void addvecweight(float *restrict C, float *A, float *B,
 }
 ```
 
-But this one is not:
+This example is not autovectorized: 
 
 ```C
 #define sign(x) (x > 0) ? 1 : ((x < 0) ? -1 : 0)
@@ -102,4 +109,6 @@ void addvecweight(float *restrict C, float *A, float *B,
 }
 ```
 
-The cases you have seen so far are generic, they will work in other architectures besides Arm. In the next section, you will see Arm-specific usecases for autovectorization.
+The cases you have seen so far are generic, they work the same for any architecture. 
+
+In the next section, you will see Arm-specific cases for autovectorization.
