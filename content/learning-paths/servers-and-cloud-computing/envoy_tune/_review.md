@@ -32,7 +32,16 @@ review:
         explanation: >
             Both THP and PGO can be used to potentially gain additional performance.
 
-
+    - questions:
+        question: >
+            At the end of 'Generate profiles,' which command should we run to terminate the envoy services?
+        answers:
+            - "sudo pkill -2 envoy"
+            - "sudo pkill -9 envoy"
+            - "sudo kill -9 envoy"
+        correct_answer: 1
+        explanation: >
+            At the end of 'Generate profiles,' run 'sudo pkill -2 envoy.' This will generate *.profraw files in /path/to/stage2/profiles.
 
 
 # ================================================================================

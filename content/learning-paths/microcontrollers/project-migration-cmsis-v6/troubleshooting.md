@@ -12,7 +12,7 @@ This section provides an overview of the most common errors you might encounter 
 
 ### Missing device
 
-The following error occurs when you try to migrate a project to CMSIS v6 but you have not installed the CMSIS_DFP pack:
+The following error occurs when you try to migrate a project to CMSIS v6 but you have not installed the Cortex_DFP pack:
 
 ![Requested device not found for target](./Device_missing.png)
 
@@ -32,12 +32,42 @@ Install [ARM.CMSIS-RTX.5.8.0.pack](https://www.keil.com/pack/ARM.CMSIS-RTX.5.8.0
 
 ### Missing software components
 
+#### Migrating Keil RTX5-based projects
+
 The following warning is shown in the Validation Output window when you try to migrate a Keil RTX-based project:
 
 ![Additional software components required](./OS_Tick_missing.png)
 
 {{% notice Resolution %}}
 Use the **Resolve** button to select the missing component automatically.
+{{% /notice %}}
+
+#### Migrating projects
+
+The following error comes up if the `Device:Startup` component requires a CMSIS-CORE component with a specific v5.x.x version.
+
+![Additional software components required](./install_missing_component.png)
+
+In the Build Output window you might see:
+
+![Validate Run Time Environment warnings/errors detected](./build_output.png)
+
+Despite this warning, the build operation should work normally and the resulting binary will work fine on hardware. If you want to get rid of the error, check one of the following options.
+
+A similar error can come up for any software component. Here is an example using MDK-Middleware:
+
+![Additional software components required](./middleware.png)
+
+{{% notice Resolution %}}
+1. Contact the CMSIS-Pack vendor for your device/software component and ask for an updated version without the CMSIS-CORE version requirement. Alterntively, do the following:
+2. Edit the device's PDSC file and change for example:
+```xml
+<require Cclass="CMSIS" Cgroup="CORE" Cversion="5.6.0"/>
+```
+to
+```xml
+<require Cclass="CMSIS" Cgroup="CORE"/>
+```
 {{% /notice %}}
 
 ### Updating configuration files
@@ -101,5 +131,9 @@ In CMSIS v5, the RTX5 libraries were built using the compiler options `-fshort-e
 In µVision, go to **Project - Options for Target** and click on the **C/C++ (AC6)** tab. Unselect **Short enums/wchar** and rebuild the project:
 
 ![Unselect short enums/wchar](./compiler_settings.png)
+
 {{% /notice %}}
 
+{{% notice Note %}}
+If you are using libraries in your project that have been built with short enums/wchars (for example the MDK-Middleware), you need to use the RTX5 source code variant in your project as otherwise the linker will fail, even when unselecting the "Short enums/wchar" option.
+{{% /notice %}}

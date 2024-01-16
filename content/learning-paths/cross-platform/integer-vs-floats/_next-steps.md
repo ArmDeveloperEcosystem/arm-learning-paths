@@ -1,11 +1,11 @@
 ---
-next_step_guidance: You now have a good understanding of the floating point numbers and conversions, implicit and explicit.
+next_step_guidance: You now have a good understanding of floating point numbers and the conversions, implicit and explicit. To learn more, please look at the learning path on Arm Neoverse as well as the links provided under further reading.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
 
 further_reading:
     - resource:
-        title: Arm® Neoverse™ N1 Software Optimization Guide
+        title: Arm Neoverse™ N1 Software Optimization Guide
         link: https://developer.arm.com/documentation/PJDOC-466751330-9707/r4p1/?lang=en
         type: documentation
     - resource:
@@ -17,11 +17,11 @@ further_reading:
         link: https://www.freecodecamp.org/news/data-types-in-c-integer-floating-point-and-void-explained/
         type: website
     - resource:
-        title: Wikipedia Half-precision floating-point format
+        title: Half-precision floating-point format
         link: https://en.wikipedia.org/wiki/Half-precision_floating-point_format
         type: website
     - resource:
-        title: Wikipedia bfloat16 floating-point format
+        title: bfloat16 floating-point format
         link: https://en.wikipedia.org/wiki/Bfloat16_floating-point_format
         type: website
 
