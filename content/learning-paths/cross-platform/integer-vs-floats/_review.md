@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Finish the statement: Mixing integer and and floating-point types in arithmetic expressions in C 
+            Finish the statement: Mixing integer and floating-point types in arithmetic expressions in C 
         answers:
             - is free because the CPU does automatic conversion on the fly.
             - can imply conversion instructions which can be costly for performance.
@@ -23,7 +23,7 @@ review:
             - "fp8"
         correct_answer: 4
         explanation: >
-            bf16 is probably the best solution for such a problem, it takes only 16-bits, but has the same range as float (-3.4e+38, 3.4e+38).
+            bf16 is probably the best solution for such a problem as it takes only 16-bits but has the same range as float (-3.4e+38, 3.4e+38).
                
     - questions:
         question: >

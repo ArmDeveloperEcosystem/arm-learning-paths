@@ -12,7 +12,7 @@ You previously saw that demotions are not detected in C and only in a few cases 
 
 To learn more about demotions, consider the small C++ program below.
 
-Use a text editor to copy the code to a text file named `demotiontest.cpp`
+Use a text editor to copy the code to a text file named `demotiontest.cpp`:
 
 ```C++
 #include <cmath>
@@ -47,7 +47,7 @@ Compile the example:
 g++ demotiontest.cpp -o demotiontest
 ```
 
-You will most likely get the following warnings, but the program will compile successfully:
+You will most likely get the following warnings but the program will compile successfully:
 
 ```bash
 demotiontest.cpp: In function ‘int main()’:
@@ -78,12 +78,12 @@ a = -16380, b = -16380000, c = 799869184, d1 = 4608, d2 = 4608
 e1 = 2147483647, e2 = 2147483647
 ```
 
-Obviously `w` is a huge value and it does not fit in a `float` (remember largest positive float is `3.4e+38`), but the compiler only complains about `z` which uses bracket initialization and not `y` which uses assignment. 
+Obviously `w` is a huge value and it does not fit in a `float` (remember that the largest positive float is `3.4e+38`), but the compiler only complains about `z` which uses bracket initialization and not `y` which uses assignment. 
 
-Similarly, `d1` an `int16_t` uses assignment and does not generate a warning, but `d2`, also an `int16_t`, uses bracket initialization and trigger a compiler warning.
+Similarly, `d1` an `int16_t` uses assignment and does not generate a warning but `d2`, also an `int16_t`, uses bracket initialization and triggers a compiler warning.
 
-The same happens with the demotion/conversion of the the `double w` to the `int32_t` variables `e1`, `e2`.
+The same happens with the demotion/conversion of the `double w` to the `int32_t` variables `e1`, `e2`.
 
 This means that some demotions/conversions that happen through assignment can pass the compiler without a warning, leading to wrong values and difficult to track bugs.
 
-In general, demotions are risky, and you should always take a second look when a demotion takes place. When using C++, try to use bracket initialization to trigger compiler warnings.
+In general, demotions are risky and you should always take a second look when a demotion takes place. When using C++, try to use bracket initialization to trigger compiler warnings.
