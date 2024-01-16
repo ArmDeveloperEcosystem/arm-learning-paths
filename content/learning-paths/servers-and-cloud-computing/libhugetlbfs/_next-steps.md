@@ -5,10 +5,8 @@
 
 next_step_guidance: >
     You can continue learning about migrating applications to Arm. 
-# 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/mysql_tune/"
-# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
@@ -17,11 +15,11 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/mysql_tune/"
 
 further_reading:
     - resource:
-        title: libhugetlbfs manpage
+        title: libhugetlbfs manual page
         link: https://linux.die.net/man/7/libhugetlbfs
         type: documentation
     - resource:
-        title: libhugetlbfs HOWTO
+        title: libhugetlbfs HOW TO
         link: https://github.com/libhugetlbfs/libhugetlbfs/blob/master/HOWTO
         type: documentation
 
