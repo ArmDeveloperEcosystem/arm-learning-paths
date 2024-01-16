@@ -35,7 +35,7 @@ Next source the script as shown below to initialize your build environment for y
 ```bash
 source oe-init-build-env build-qemu-arm64
 ```
-The output from running this is shown below:
+The output is shown below:
 
 ```output
 You had no conf/local.conf file. This configuration file has therefore been
@@ -85,12 +85,14 @@ With the right machine now selected, proceed to building the minimal core image 
 ```bash { cwd="poky",env_source="poky/oe-init-build-env build-qemu-arm64" }
 bitbake core-image-minimal
 ```
-Depending on your machine, this build step can take a while to complete. On my machine, it took about an hour.
-After the build is complete, the images are output in the build-qemu-arm64/tmp/deploy/images/qemuarm64 directory.
+
+Depending on your machine, this build step can take an hour or more to complete.
+
+After the build is complete, the images are in the `build-qemu-arm64/tmp/deploy/images/qemuarm64` directory.
 
 ## Run the image on the 64-bit Arm QEMU target
 
-QEMU is installed on your machine as part of cloning the Poky repository and sourcing the environment script as in the previous steps. 
+QEMU is installed on your machine as part of cloning the Poky repository and sourcing the environment script. 
 
 You can now run the command below to launch run the image you built on the 64-bit Arm Qemu target
 
@@ -98,11 +100,21 @@ You can now run the command below to launch run the image you built on the 64-bi
 runqemu qemuarm64 nographic
 ```
 
-You should see linux booting on your console. Enter `root` when presented with the login prompt.
-Run `uname -a` to check the linux distribution running and the target hardware architecture.
-You should the output below
+You will see Linux booting on your console. 
+
+Enter `root` when presented with the login prompt.
+
+Run `uname` to check the Linux distribution and the target hardware architecture:
+
+```console
+uname -a
+```
+You will see the output below:
 
 ```output
 Linux qemuarm64 5.15.78-yocto-standard #1 SMP PREEMPT Wed Nov 16 14:17:41 UTC 2022 aarch64 GNU/Linux
 ```
+
+To exit QEMU enter `Control-a` followed by `x` and you will return to the shell prompt. 
+
 Congratulations! You have successfully built and run a minimal Yocto Linux image on an example 64-bit Arm machine running in QEMU.

@@ -10,19 +10,29 @@ There are two types of data type conversions, explicit and implicit.
 
 ## Explicit Conversions
 
-Explicit conversions are done on purpose, because you, the developer, understand the algorithm and your expectations of the results. Explicit conversions can be used to balance performance and accuracy. 
+Explicit conversions are done on purpose because you, the developer, understand the algorithm and your expectations of the results. Explicit conversions can be used to balance performance and accuracy. 
 
-You would use explicit conversions when you want an algorithm to be processed using integer types, but you need an accurate calculation to be done with floats or doubles. 
+You would use explicit conversions when you want an algorithm to be processed using integer types but you need an accurate calculation to be done with floats or doubles. 
 
-This is typically the case with video and audio codecs, where most calculations are done using integer arithmetic, but extra precision is needed in some places. To gain precision, calculations are evaluated using floats or doubles and then **explicitly** converted back to integers. 
+This is typically the case with video and audio codecs (where most calculations are done using integer arithmetic) but extra precision is needed in some places. To gain precision, calculations are evaluated using floats or doubles and then **explicitly** converted back to integers. 
 
 Below is an example taken from the [libvpx project](https://github.com/webmproject/libvpx/blob/main/vpx_dsp/add_noise.c#L41). 
 
-It shows a function to generate an image using auto generated noise from a gaussian distribution function.
+It shows a function to generate an image using auto-generated noise from a gaussian distribution function.
 
-The code is shown for illustration only, do not try to build or run it. 
+The code is shown for illustration only, do not try to build or run it. The relevant BSD license of the libvpx library is appended at the end of this section.
 
 ```C
+/*
+ *  Copyright (c) 2015 The WebM project authors. All Rights Reserved.
+ *
+ *  Use of this source code is governed by a BSD-style license
+ *  that can be found in the LICENSE file in the root of the source
+ *  tree. An additional intellectual property rights grant can be found
+ *  in the file PATENTS.  All contributing project authors may
+ *  be found in the AUTHORS file in the root of the source tree.
+ */
+
 static double gaussian(double sigma, double mu, double x) {
   return 1 / (sigma * sqrt(2.0 * 3.14159265)) *
          (exp(-(x - mu) * (x - mu) / (2 * sigma * sigma)));
@@ -127,7 +137,7 @@ fcvtzs w1, d0
 
 These instructions convert the value between a double register (`d0` and `d2`) from/to an integer value in registers (`w1` and `w20`).
 
-Conversion is done on purpose and is controlled, but when dealing with performance critical software, such conversions can be costly and should be avoided unless there is no alternative.
+Conversion is done on purpose and is controlled but, when dealing with performance critical software, such conversions can be costly and should be avoided unless there is no alternative.
 
 The second type of conversions are called implicit and are harder to track.
 
@@ -138,7 +148,7 @@ When a conversion is not explicitly stated it is called implicit. In general, it
 In that case, the compiler has to convert one of the values to the same datatype as the other, as most operations require elements of the same size. 
 
 {{% notice Note %}}
-There are some conversion exceptions, like for example the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. 
+There are some conversion exceptions, for example, the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. 
 {{% /notice %}}
 
 Here is a generic operation:
@@ -149,7 +159,7 @@ C = A OP B
 
 where `OP` can be any operation that will translate to one or more assembly instructions, addition, subtraction, multiplication, or division.
 
-Depending on the data types the conversion can be either a promotion, a demotion, or a conversion between types of a different nature (float to integer or integer to float).
+Depending on the data types the conversion can be either a promotion, a demotion or a conversion between types of a different nature (float to integer or integer to float).
 
 ### Promotions
 
@@ -181,9 +191,9 @@ This is a risky conversion, as bits are lost and it should be avoided unless you
 
 Unfortunately, this is where the programming language matters. In some cases, C++ will catch such a demotion (called a *narrowing conversion* in C++) and will issue a relevant warning,
 
-The C language does not provide for such a warning. The C compiler will not issue a warning and it's easy for a conversion bug to creep in your code. Sometimes conversion errors can be very hard to detect.
+The C language does not provide such a warning. The C compiler will not issue a warning and it's easy for a conversion bug to creep into your code. Sometimes conversion errors can be very hard to detect.
 
-Even with C++ there is a catch, the compiler will only issue such a warning when using bracket initialization, not assignment between values. You will see this in detail in the next section.
+Even with C++ there is a catch as the compiler will only issue such a warning when using bracket initialization, not assignment between values. You will see this in detail in the next section.
 
 Here is a list for possible demotions:
 
@@ -204,9 +214,9 @@ Again unsigned integers are demoted to similar types.
 
 ### Type conversions
 
-You might argue that conversion of an `int16_t` to `float` or `double` is a promotion, but it's not that simple.
+You might argue that conversion of an `int16_t` to `float` or `double` is a promotion but it's not that simple.
 
-While a demotion does not always need an instruction to take place, usually a promotion requires an instruction to zero or sign-extend the contents of a register. However, this can be achieved using other ways also. When the compiler can detect a specific pattern it can skip the zero/sign-extend instructions and solve the problem by mere shuffling/rearranging the bytes. 
+While a demotion does not always need an instruction to take place, a promotion usually requires an instruction to zero or sign-extend the contents of a register. However, this can be achieved using other ways as well. When the compiler detects a specific pattern, it can skip the zero/sign-extend instructions and solve the problem by mere shuffling/rearranging the bytes. 
 
 An example of skipping an instruction is shown below:
 
@@ -295,3 +305,38 @@ Here is a list of the possible conversions:
 (`**`) depends on hardware support
 
 In the next section you will learn more about the potential issues in floating-point conversions.
+
+## libvpx LICENSE
+
+```
+Copyright (c) 2010, The WebM Project authors. All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  * Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+
+  * Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the
+    distribution.
+
+  * Neither the name of Google, nor the WebM Project, nor the names
+    of its contributors may be used to endorse or promote products
+    derived from this software without specific prior written
+    permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
