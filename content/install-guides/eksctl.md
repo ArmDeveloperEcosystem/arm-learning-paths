@@ -2,18 +2,17 @@
 additional_search_terms:
 - kubernetes
 - EKS
-- AWS 
+- AWS
 - infrastructure
-
+author_primary: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 5
-author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html
 test_images:
 - ubuntu:latest
-
+test_link: null
 test_maintenance: true
 test_status:
 - passed
@@ -34,7 +33,7 @@ This install guide provides a quick solution to install `eksctl` on Arm Linux an
 
 For Linux, confirm you are using an Arm machine by running:
 
-```bash
+```bash { target="ubuntu:latest" }
 uname -m
 ```
 

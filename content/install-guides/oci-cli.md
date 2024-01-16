@@ -13,7 +13,6 @@ multitool_install_part: false
 official_docs: https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm
 test_images:
 - ubuntu:latest
-
 test_maintenance: true
 test_status:
 - passed

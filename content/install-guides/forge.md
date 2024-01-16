@@ -1,39 +1,25 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
-title: Linaro Forge
-
-### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
-  - forge
-  - ddt
-  - map
-  - performance reports
-  - allinea
-
-### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 15
-
+- forge
+- ddt
+- map
+- performance reports
+- allinea
 author_primary: Florent Lebeau
-
-### Link to official documentation
+layout: installtoolsall
+minutes_to_complete: 15
+multi_install: false
+multitool_install_part: false
 official_docs: https://www.linaroforge.com/documentation/
-
-### test_automation
 test_images:
 - ubuntu:latest
 test_link: null
 test_maintenance: true
 test_status:
 - passed
-
-
-### PAGE SETUP
-weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
-tool_install: true              # Set to true to be listed in main selection page, else false
-multi_install: false            # Set to true if first page of multi-page article, else false
-multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
-layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
+title: Linaro Forge
+tool_install: true
+weight: 1
 ---
 
 [Linaro Forge](https://www.linaroforge.com/) is a server and HPC development tool suite for C, C++, Fortran, and Python high performance code on Linux.
@@ -57,7 +43,6 @@ Download and extract the appropriate installation package from [Linaro Forge Dow
 sudo apt install wget
 wget https://downloads.linaroforge.com/23.0/linaro-forge-23.0-linux-aarch64.tar
 tar -xf linaro-forge-23.0-linux-aarch64.tar
-cd linaro-forge-23.0-linux-aarch64
 ```
 
 ## Installation
@@ -65,14 +50,17 @@ cd linaro-forge-23.0-linux-aarch64
 ### Linux host
 
 Run the installer from the command line with:
-```
+
+```console
 ./textinstall.sh [--accept-license] [install_dir]
 ```
+
 If no install directory is specified, you will be prompted to specify this while the installer runs.
 
 To install to the default directory, non-interactively:
+
 ```bash { target="ubuntu:latest" }
-./textinstall.sh --accept-license /home/ubuntu/linaro/forge/23.0
+linaro-forge-23.0-linux-aarch64/textinstall.sh --accept-license /home/ubuntu/linaro/forge/23.0
 ```
 
 ### Install on MacOS (remote client only)
@@ -103,25 +91,27 @@ You should turn off compiler optimizations as they can produce unexpected result
 
 Linaro Forge's debugging tool, Linaro DDT, can be launched with the `ddt` command. For MPI applications, you can prefix the mpirun/mpiexec command normally used to run in parallel:
 
-```bash
+```console
 ddt mpirun -n 128 myapp
 ```
 
 This startup method is called *Express Launch* and is the simplest way to get started. If your MPI is not supported by *Express Launch*, you can run the following instead:
 
-```bash
+```console
 ddt -n 128 myapp
 ```
 
 These commands will launch Linaro DDT GUI. When running on a HPC cluster, you may need to debug on compute nodes where this may not be possible. In this case, you can start the GUI on the frontend node with the `ddt` command and when running or submitting a job to the compute nodes use `ddt --connect` :
 
 With *Express Launch*:
-```bash
+
+```console
 ddt --connect mpirun -n 128 myapp
 ```
 
 Without *Express Launch*:
-```bash
+
+```console
 ddt --connect -n 128 myapp
 ```
 
@@ -136,17 +126,20 @@ Typically you should keep optimization flags enabled when profiling (rather than
 Linaro Forge's profiling tool, Linaro MAP, can be launched with the `map` command to launch the GUI. When running on a HPC cluster with MPI, you should use `map --profile` when running or submitting a job to the compute nodes:
 
 With *Express Launch*:
-```bash
+
+```console
 map --profile mpirun -n 128 myapp
 ```
 
 Without *Express Launch*:
-```bash
+
+```console
 map --profile -n 128 myapp
 ```
 
 A *.map file will be created in the current directory with profiling results when the application terminates. This file can be then open from the GUI launched on the frontend node or with the following command:
-```bash
+
+```console
 map myapp_128p_<timestamp>.map
 ```
 
@@ -157,12 +150,14 @@ Linaro Forge's reporting tool Linaro Performance Reports is designed to run on u
 Linaro Performance Reports does not use a GUI. Instead, it produces HTML and TXT files when the application terminates to summarize the application behavior. Here is how to use the tool on MPI applications
 
 With *Express Launch*:
-```bash
+
+```console
 perf-report mpirun -n 128 myapp
 ```
 
 Without *Express Launch*:
-```bash
+
+```console
 perf-report -n 128 myapp
 ```
 Two files `myapp_128p_<timestamp>.html` and `myapp_128p_<timestamp>.txt` will be created in the current directory.

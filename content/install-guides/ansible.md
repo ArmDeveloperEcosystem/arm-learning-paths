@@ -2,19 +2,17 @@
 additional_search_terms:
 - linux
 - deploy
-
-
+author_primary: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 10
-author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://docs.ansible.com/ansible/latest/index.html
 test_images:
 - ubuntu:latest
+test_link: null
 test_maintenance: false
 title: Ansible
-author_primary: Jason Andrews
 tool_install: true
 weight: 1
 ---
@@ -49,7 +47,7 @@ The easiest way to install the latest version of Ansible for Ubuntu on Arm is to
 
 To enable the PPA and install Ansible run the commands:
 
-```bash { target="ubuntu:latest" }
+```bash
 sudo apt update
 sudo apt install software-properties-common -y
 sudo add-apt-repository --yes --update ppa:ansible/ansible
@@ -58,7 +56,7 @@ sudo apt install ansible -y
 
 Confirm the Ansible command line tools are installed by running: 
 
-```bash { target="ubuntu:latest" }
+```bash
 ansible-playbook --version
 ```
 
