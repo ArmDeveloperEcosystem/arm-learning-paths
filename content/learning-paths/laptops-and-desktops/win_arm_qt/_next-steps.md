@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to use Qt to develop desktop apps that leverage arm64 performance. You might be interested in learning how to use .NET framework to develop native Windows on Arm applications.
+   You might be now interested in learning how to use .NET framework to develop native Windows on Arm applications.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_net"
