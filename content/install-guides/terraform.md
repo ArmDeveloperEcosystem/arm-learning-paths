@@ -14,7 +14,7 @@ multitool_install_part: false
 official_docs: https://developer.hashicorp.com/terraform/docs
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: false
 test_maintenance: true
 test_status:
 - passed

@@ -2,16 +2,15 @@
 additional_search_terms:
 - cloud
 - azure
-- 
+author_primary: Jason Andrews
 layout: installtoolsall
 minutes_to_complete: 15
-author_primary: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://learn.microsoft.com/en-us/cli/azure
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: null
 test_maintenance: true
 test_status:
 - passed
@@ -34,7 +33,7 @@ This article provides a quick solution to install Azure CLI for Ubuntu on Arm.
 
 Confirm you are using an Arm machine by running:
 
-```bash
+```bash { target="ubuntu:latest" }
 uname -m
 ```
 

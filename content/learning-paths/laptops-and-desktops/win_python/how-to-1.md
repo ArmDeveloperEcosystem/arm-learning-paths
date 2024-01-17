@@ -17,14 +17,14 @@ Starting from Python v3.11, native support for Arm devices running Windows 11 is
 In this learning path you will see how this works for the popular NumPy package on Python 3.12.
 
 ## Before you begin
-Before going further, let's make sure you installed Python v3.12 using the following installation packages: 
+Before going further, let's make sure you have installed Python v3.12 using the following installation packages: 
 
 1. [x64](https://www.python.org/ftp/python/3.12.0/python-3.12.0-amd64.exe)
 2. [Arm64](https://www.python.org/ftp/python/3.12.0/python-3.12.0-arm64.exe)
 
-Here, you install Python v3.12 for Arm64 and x64. The installation process is the same as described [here](/install-guides/py-woa/).
+Install Python v3.12 for Arm64 and x64. The installation process is the same as described [here](/install-guides/py-woa/).
 
-To run the Python interpreter for x64 you open the command prompt, where you type the following command:
+To run the Python interpreter for x64, open the command prompt and type the following command:
 
 ```console
 py -3.12-64
@@ -40,7 +40,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 
 Press CTRL+Z or type **exit()** to leave the interpreter.
 
-Similarly, you use the Python interpreter for Arm64:
+Similarly, you can use the Python interpreter for Arm64:
 
 ```console
 py -3.12-arm64
@@ -54,7 +54,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-Again, you close it using the CTRL+Z or the **exit()** command.
+Again, close it using the CTRL+Z or the **exit()** command.
 
 {{% notice Note %}} By comparing the output of the two Python interpreters, we can see that both interpreters use the MSC v.1935 compiler for both x64 (labeled as AMD64) or Arm64 (labeled ARM64).{{% /notice %}}
 
@@ -66,7 +66,7 @@ If you are writing Python packages to take advantage of Arm64, you must ensure y
 
 You will now see what this means in practice by installing the NumPy package using pip.
 
-Open the command prompt, and then type the following command to ensure you use the latest pip version:
+Open the command prompt and type the following command to ensure you use the latest pip version:
 
 ```console
 py -3.12-arm64 -m pip install --upgrade pip
@@ -95,13 +95,13 @@ Repeat the same for x64:
 py -3.12-64 -m pip install --upgrade pip
 ```
 
-Now, try to install the NumPy package, which you will use later to implement the sample application. To install NumPy, type:
+Now, try to install the NumPy package, which you will use later on to implement the sample application. To install NumPy, type:
 
 ```console
 py -3.12-arm64 -m pip install numpy
 ```
 
-The command will generate the following output
+The command will generate the following output:
 
 ```output
 Collecting numpy
@@ -149,15 +149,15 @@ note: This is an issue with the package mentioned above, not pip.
 hint: See above for details.
 ```
 
-As we see the installation failed. For Arm64, there is no a platform-specific wheel. So, pip downloads and tries to build the package from the source code to create the local Arm64 package wheel. However, as you do not have the build tools yet, the installation was not yet successful.
+We can see that the installation has failed. For Arm64, there is no platform-specific wheel. So, pip downloads and tries to build the package from the source code to create the local Arm64 package wheel. However, as you do not have the build tools yet, the installation was not successful.
 
-Before going further, try to install NumPy for x64 by invoking the following command:
+Before going any further, try to install NumPy for x64 by invoking the following command:
 
 ```console
 py -3.12-64 -m pip install numpy
 ```
 
-For x64 there is a platform-specific wheel available. So, the installation is successful, which is confirmed by the command output:
+For x64 there is a platform-specific wheel available so the installation is successful, which is confirmed by the command output:
 
 ```output
 Collecting numpy
@@ -170,15 +170,15 @@ Successfully installed numpy-1.26.2
 ```
 
 ## Arm build tools
-To install the NumPy package, we will need to provide the Arm build tools. So, you need to install Visual Studio 2022 Community with the **Desktop development with C++** workload and **Arm build tools** as explained in this [installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio). 
+To install the NumPy package, we will need to provide the Arm build tools. Install Visual Studio 2022 Community with the **Desktop development with C++** workload and **Arm build tools** as explained in this [installation guide](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio). 
 
-After installing the build tools, restart your machine, and install NumPy package with the following command:
+After installing the build tools, restart your machine and install NumPy package with the following command:
 
 ```
 py -3.12-arm64 -m pip install numpy 
 ```
 
-Now, the installation will be successful, and you will see the following output:
+Now, the installation will be successful and you will see the following output:
 
 ```output
 Collecting numpy                                                                                                          Using cached numpy-1.26.2.tar.gz (15.7 MB)                                                                              Installing build dependencies ... done
@@ -195,4 +195,4 @@ Successfully installed numpy-1.26.2
 ```
 
 ## Summary
-You have just learned how pip can build the package from the source code, when the platform-independent package (called the wheel) is unavailable. In the next section you will use the NumPy package to build the application.
+You have just learned how pip can build the package from the source code and when the platform-independent package (called the wheel) is unavailable. In the next section, you will use the NumPy package to build the application.

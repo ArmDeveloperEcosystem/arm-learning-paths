@@ -87,7 +87,7 @@ Golden ratio using N: 45 Fibonacci numbers: 1.000000
 ...
 ```
 
-You will immediately notice the results are unexpected because the `golden_ratio()` function is incorrect.
+You will immediately notice that the results are unexpected because the `golden_ratio()` function is incorrect.
 
 ```C
 static int fibonacci[MAX];
@@ -100,7 +100,7 @@ float golden_ratio(int N) {
 
 All results will be either 1.0 or 2.0. This is because the division is done between the integers and then converted to floating-point. This is a frequent problem which is usually easy to find and fix. However, there are cases where it's part of complex arithmetic expressions and easy to miss. Unfortunately, the compiler does not generate a warning.
 
-You can fix the problem and demonstrate a different problem. Split the calculation to avoid the previous integer division:
+You can fix the problem and demonstrate a different problem by splitting the calculation to avoid the previous integer division:
 
 ```C
 float golden_ratio(int N) {
@@ -139,7 +139,7 @@ Golden ratio using N: 48 Fibonacci numbers: -0.38720214366913
 Golden ratio using N: 49 Fibonacci numbers: -1.58263039588928
 ```
 
-You will notice two things. 
+You will notice two things: 
 
 First, the 32-bit int is not large enough to hold Fibonacci numbers for N >= 47. This is easily fixed by changing to `int64_t`. 
 
@@ -162,9 +162,9 @@ golden_ratio:
         ret
 ```
 
-You now see that `scvtf` instruction is executed twice, which converts from integer to floating point, so that the quantities can be divided using floating point with the `fdiv` instruction. The `scvtf` instruction has up to 6 CPU cycles latency on the Neoverse N1 processor and 3 cycles on the Neoverse N2. Imagine a complicated expression many similar implicit conversions, executed millions or billions of times, it would definitely underperform.
+You can see that the `scvtf` instruction is executed twice, which converts from integer to floating point, so that the quantities can be divided using floating point with the `fdiv` instruction. The `scvtf` instruction has up to 6 CPU cycles latency on the Neoverse N1 processor and 3 cycles on the Neoverse N2. Imagine a complicated expression involving many similar implicit conversions, executed millions or billions of times. It would definitely underperform.
 
-This example is easy to fix, if you just convert the `fibonacci` array to `float` or `double`:
+This example is easy to fix if you just convert the `fibonacci` array to `float` or `double`:
 
 ```C
 static float fibonacci[MAX];
@@ -222,7 +222,7 @@ Golden ratio using N: 48 Fibonacci numbers: 1.61803400516510
 Golden ratio using N: 49 Fibonacci numbers: 1.61803400516510
 ```
 
-Not all problems are as easy to fix. If your use case involves numbers too big to fit in `int64_t` or even in `double` incorrect results will occur. 
+Not all problems are as easy to fix. If your use case involves numbers that are too big to fit in `int64_t` or even in `double`, incorrect results will occur. 
 
 You can change `MAX` to 100 and see incorrect results as the loop approaches 100. 
 

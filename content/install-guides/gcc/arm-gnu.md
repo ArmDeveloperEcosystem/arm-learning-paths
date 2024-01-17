@@ -10,7 +10,7 @@ official_docs: https://gcc.gnu.org/onlinedocs/
 test_images:
 - ubuntu:latest
 - fedora:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: null
 test_maintenance: true
 test_status:
 - passed

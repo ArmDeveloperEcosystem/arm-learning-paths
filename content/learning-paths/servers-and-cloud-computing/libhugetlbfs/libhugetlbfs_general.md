@@ -5,10 +5,9 @@ layout: "learningpathall"
 ---
 
 ##  Introduction to libhugetlbfs
+In Linux, hugepages provide larger memory blocks compared to the default page size. You can use libhugetlbfs to provide memory for application text, data, `malloc()`, and shared memory with hugepages. 
 
-You can use libhugetlbfs to provide memory for application text, data, `malloc()`, and shared memory with hugepages. In Linux, hugepages provide larger memory blocks compared to the default page size. 
-
-Larger memory pages benefit applications that use large amounts of memory which may cause lower performance due to a high number of TLB misses. By enabling libhugetlbfs, workloads with large code, data, or heap sections may see significant performance improvement.
+Larger memory pages benefit applications that use considerable amounts of memory which, in turn, may cause reduced performance due to a high number of TLB misses. By enabling libhugetlbfs, workloads with sizeable amounts of code, data, or heap sections may see significant performance improvement.
 
 ## Install Linux packages
 
@@ -21,9 +20,9 @@ sudo ln -s /usr/bin/ld.hugetlbfs /usr/share/libhugetlbfs/ld
 
 ## Enable hugepages
 
-These commands must be run as the root user. Use `sudo su` if needed to become root.
+These commands must be run as the root user (use `sudo su` if needed to become the root).
 
-For example, to enable 1000 hugepages where the hugepages size is 2 Mb (total of 2 Gb of memory) use:
+For example, to enable 1000 hugepages where the hugepages size is 2 Mb (total 2 Gb of memory) use:
 
 ```console
  echo 1000 > /proc/sys/vm/nr_hugepages
@@ -44,19 +43,19 @@ HugePages_Rsvd:        0
 HugePages_Surp:        0
 ```
 
-This confirms 1000 hugepages are available.
+This confirms that 1000 hugepages are available.
 
 ## Add compile options to enable libhugetlbfs
 
-When you build an application, add the following options to the compiler flags (gcc options) and rebuild the application. The options are used in the linking stage. 
+When you build an application, add the following options to the compiler flags (gcc options) and rebuild the application. The options are used in the linking stage: 
 
 ```
 -B /usr/share/libhugetlbfs -Wl,--hugetlbfs-align -no-pie -Wl,--no-as-needed
 ```
 
-You can use the example application below to confirm hugepages work on your system.
+You can use the example application below to confirm that hugepages work on your system.
 
-Copy the code into a file named `memory.c` and save the file.
+Copy the code into a file named `memory.c` and save the file:
 
 ```C
 #include <stdio.h>
@@ -132,7 +131,7 @@ Without the extra compiler flags regular pages will be used, but with the extra 
 ## Specify hugepages when starting the application
 
 When an application is compiled with the extra flags, you still need to add
-`HUGETLB_ELFMAP=RW` before starting the application. This specifies to place both READ (such as code) and WRITE (such as data) memory in hugepages.
+`HUGETLB_ELFMAP=RW` before starting the application. This specifies that both READ (such as code) and WRITE (such as data) memory will be placed in hugepages.
 
 Make sure to run the application as root. 
 
@@ -142,7 +141,7 @@ The general format to run any application is:
 HUGETLB_ELFMAP=RW [application]
 ```
 
-Run the example above:
+Run the example:
 
 ```console
 HUGETLB_ELFMAP=RW ./memory
@@ -158,7 +157,7 @@ Process ID: 3812
 
 The application will wait for you to press Control-C.
 
-Leave it running and open another terminal on your system to check if hugepages are used.
+Leave it running and open another terminal on your system to check if hugepages are being used.
 
 Confirm hugepages are used by checking meminfo:
 
@@ -175,7 +174,7 @@ HugePages_Rsvd:        1
 HugePages_Surp:        0
 ```
 
-This confirms 4 hugepages are in use.
+This confirms that 4 hugepages are in use.
 
 You can also confirm hugepages using the process ID of the application which is printed when run.
 

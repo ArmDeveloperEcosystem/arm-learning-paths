@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Which statement will add the runAnimation method to handle the clicked event of the QPushButton?
+            Which statement will add the `runAnimation` method to handle the clicked event of the QPushButton?
         answers:
             - "handle(runAnimationButton, &QPushButton::clicked, view, &XFormView::runAnimation)"
             - "addHandler(runAnimationButton, &QPushButton::clicked, view, &XFormView::runAnimation)"
@@ -32,7 +32,7 @@ review:
             - "QTransfer"
         correct_answer: 2                     
         explanation: >
-            QTransform provides methods that enables you to rotate (QTransform.rotate), scale (QTransform.scale), and shear (QTransform.shear) the image
+            QTransform provides methods that enable you to rotate (`QTransform.rotate`), scale (`QTransform.scale`), and shear (`QTransform.shear`) the image
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

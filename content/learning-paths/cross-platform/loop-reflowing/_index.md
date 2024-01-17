@@ -1,15 +1,17 @@
 ---
-title: Learn about Integer and floating-point conversions
+title: Loop Reflowing/Autovectorization
 
-minutes_to_complete: 30
+draft: true
 
-who_is_this_for: This is an advanced topic for C/C++ developers who are interested in learning about the intricacies of conversions between floating-point numbers and integers.
+minutes_to_complete: 45
+
+who_is_this_for: This is an advanced topic for C/C++ developers who are interested in taking advantage of autovectorization in compilers.
 
 learning_objectives: 
-    - Learn how to identify and fix potential problems in integer/float conversions in C/C++ on Arm
+    - Modify loops to take advantage of autovectorization in compilers
 
 prerequisites:
-    - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
+    - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.
 
 author_primary: Konstantinos Margaritis
 
@@ -17,9 +19,8 @@ author_primary: Konstantinos Margaritis
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Aarch64
-    - Armv8-a
-    - Armv9-a
+    - Neoverse
+    - Cortex-A
 tools_software_languages:
     - GCC
     - Clang
@@ -28,8 +29,8 @@ operatingsystems:
     - Linux
 shared_path: true
 shared_between:
-    - laptops-and-desktops
     - servers-and-cloud-computing
+    - laptops-and-desktops
     - smartphones-and-mobile
 
 

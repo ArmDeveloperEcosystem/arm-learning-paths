@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >   
-   You have learned how to to port C/C++ DLLs to Arm64 using Arm64EC using CMake and MSBuild projects. You also learned how to use DLLs in the Python app with ctypes. You might be interested in learning how to build a native Windows on Arm application using the .NET framework.
+   You might be now interested in learning how to build a native Windows on Arm application using the .NET framework.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_net"

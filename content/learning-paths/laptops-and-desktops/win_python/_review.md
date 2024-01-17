@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Which command do you use to run Python interpreter for Arm64?
+            Which command do you use to run the Python interpreter for Arm64?
         answers:
             - "py -3.12-arm64"
             - "python -3.12-arm64"
@@ -33,7 +33,7 @@ review:
             - "Never"
         correct_answer: 3
         explanation: >
-            By default, pip builds a Python package from sources, when there is no platform-specific wheel available
+            By default, pip builds a Python package from sources when there is no platform-specific wheel available
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
