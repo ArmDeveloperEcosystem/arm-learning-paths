@@ -24,6 +24,7 @@ You are now ready to benchmark MongoDB with YCSB on your Arm server!
 ## YCSB Setup
 Setup the YCSB on a benchmark machine with __JAVA__:
 ```console
+sudo apt-get install -y openjdk-11-jdk
 cd ~
 wget -c https://github.com/brianfrankcooper/YCSB/releases/download/0.17.0/ycsb-0.17.0.tar.gz
 tar xfvz ycsb-0.17.0.tar.gz
