@@ -13,7 +13,7 @@ This is an open source Java application that tests the MongoDB performance, such
 ## Install OpenJDK packages
 
 Install the appropriate run-time environment to be able to use the performance test tool.
-```
+
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" >}}
 sudo apt-get install -y openjdk-18-jre
@@ -22,7 +22,7 @@ sudo apt-get install -y openjdk-18-jre
 sudo yum install java-17-openjdk
 {{< /tab >}}
 {{< /tabpane >}}
-```
+
 For more information see the [OpenJDK](https://openjdk.org/install/) website.
 
 ## Setup the MongoDB performance test tool

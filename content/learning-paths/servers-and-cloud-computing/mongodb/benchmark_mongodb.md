@@ -29,7 +29,7 @@ Installing Apache Maven:
 ```
 
 Installing Python 2.7:
-```
+
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" >}}
 sudo apt-get update
@@ -41,7 +41,7 @@ sudo yum install python2
 {{< /tab >}}
 {{< /tabpane >}}
 {{% notice  Python Note%}}
-```
+
 For Ubuntu 22.04 the `python` package may not be found. You can install Python 2.7 using:
 ```console
 sudo apt install python2 -y
