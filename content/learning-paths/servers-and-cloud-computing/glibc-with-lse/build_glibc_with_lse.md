@@ -9,16 +9,26 @@ layout: "learningpathall"
 ---
 
 
-## Before you begin
+## Overview
 "Glibc with LSE" refers to the version of [the GNU C Library (glibc)](https://www.gnu.org/software/libc/) that includes support for [LSE (Large Systems Extensions)](https://learn.arm.com/learning-paths/servers-and-cloud-computing/lse/). LSE is an extension to the ARMv8-A architecture that provides enhanced atomic operations and memory model features.
 
 LSE introduces additional atomic instructions and operations, such as Load-Acquire, Store-Release, and Atomic Compare-and-Swap (CAS). These operations allow for more efficient synchronization and concurrent access to shared memory in multi-threaded applications running on ARMv8-A processors.
 
 When glibc is compiled with LSE support, it can take advantage of these enhanced atomic operations provided by the LSE extension. This can potentially improve the performance of multi-threaded applications that heavily rely on atomic operations and synchronization primitives.
 
+## Before you begin
+
+Launch an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu version 20.04.
+
+On your machine, install the dependencies required to build glibc:
+
+```bash
+sudo apt update
+sudo apt install -y gcc-10 g++-10 gawk bison make
+```
 
 ## Build and Install Glibc
-You can build glibc without installing, or with installing to a specific directory.
+You can now checkout the glibc source package and create a build directory:
 
 ```bash
 cd ~
@@ -29,55 +39,33 @@ build=~/glibc-2.32_build_install/build
 mkdir -p $build
 cd $build
 ```
-Before execute the command "./glibc/configure", gawk and bison should be installed.  
-Glibc-2.32 matches gcc-10 perfect, and the version of ld(GNU linker) should not be higher than 2.35.  
-__So Ubuntu 20.04 is strongly recommended!__
+
+Configure glibc and run make to build it:
+
+```bash
+sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
+sudo make -C $build -j$(expr $(nproc) - 1)
 ```
-sudo apt update
-sudo apt install -y gcc-10 g++-10 gawk bison make
-```
+You have now successfully built glibc from source without LSE. 
 
-- __Without installing__
-    ```bash
-    sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
-    sudo make -C $build -j$(expr $(nproc) - 1)
-    ```
+Now lets look at how you can build it with LSE support.
 
-- __OR__
+## Build glibc With LSE
+To build glibc with LSE, you should add `CFLAGS` and `CXXFLAGS` to the configure command.
 
-- __With installing to a specific directory__
-    ```bash
-    install=~/glibc-2.32_build_install/install
-    mkdir -p ${install}
-    sudo make -C $build -j$(expr $(nproc) - 1) install DESTDIR=${install}
-    sudo make -C $build -j$(expr $(nproc) - 1) localedata/install-locales DESTDIR=${install}
-    sudo make -C $build -j$(expr $(nproc) - 1) localedata/install-locale-files DESTDIR=${install}
-    ```
+You can do this one of two ways. One way is to use "-mcpu=native" which tells the compiler to detect the architecture/micro-architecture of your machine. The other way is to pass the exact architecture option of your machine to the compiler using "-mcpu=neoverse-n2+lse"
 
-
-## With LSE
-If you want to build glibc with LSE, you should add `CFLAGS` and `CXXFLAGS` to configure implicitly or explicitly.
+Both ways to configure are shown below:
 
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=native -O3" CXXFLAGS="-mcpu=native -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
 ```
 OR
+
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=neoverse-n2+lse -O3" CXXFLAGS="-mcpu=neoverse-n2+lse -O3"
 sudo make -C $build -j$(expr $(nproc) - 1)
 ```
 
-##
-
-## With NO-LSE
-
-```bash
-sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10
-sudo make -C $build -j$(expr $(nproc) - 1)
-```
-OR
-```bash
-sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=neoverse-n2+nolse -O3" CXXFLAGS="-mcpu=neoverse-n2+nolse -O3"
-sudo make -C $build -j$(expr $(nproc) - 1)
-```
+After running make, you should see glibc (libc.so.6) with LSE support in your build directory. 

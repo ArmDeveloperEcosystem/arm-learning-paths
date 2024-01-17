@@ -1,5 +1,5 @@
 ---
-title: Use glibc with LSE to improve the performance of workloads on Arm servers
+title: Use glibc with Large System Extensions (LSE) to improve the performance of workloads on Arm servers
 
 minutes_to_complete: 60
 

@@ -7,17 +7,15 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-You are now ready to start MongoDB utilizing the newly built glibc with LSE on your Arm server.
+In this section you will learn how to start using MongoDB with the newly built glibc with LSE on your Arm machine.
 
 
-## MongoDB Setups
-Build and install MongoDB version `5.3.2`:
+## MongoDB Setup
+
+Build and install MongoDB version `5.3.2` from source using the commands shown:
+
 ```console
-#for Fedora/RHEL
-sudo yum install -y git gcc g++ python3-devel openssl-devel libcurl-devel 
-#for Ubuntu/Debian
 sudo apt install -y git gcc g++ python-dev-is-python3 python3-pip libssl-dev libcurl4-openssl-dev liblzma-dev
-
 export PYTHON_KEYRING_BACKEND=keyring.backends.null.Keyring
 
 cd ~
@@ -28,37 +26,54 @@ sudo python3 -m pip install -r etc/pip/compile-requirements.txt
 sudo python3 buildscripts/scons.py install-mongod -j$(expr $(nproc) - 1) --disable-warnings-as-errors
 ```
 
-## MongoDB Starts utilizing the newly built Glibc with LSE
+## Configure and run MongoDB utilizing the newly built Glibc with LSE
+
+Create a directory for MongoDB to store its data files:
+
 ```console
 cd ~
 mkdir -p ~/mongodb-5.3.2/data
-vi ~/mongodb-5.3.2/mongodb.conf
+```
 
+Create a file named `mongodb.conf` in the ~/mongodb-5.3.2 directory using a file editor of your choice.
+Copy and save the contents shown below into this configuration file:
+
+```console
 dbpath=mongodb-5.3.2/data
 logpath=mongodb-5.3.2/mongodb.log
 pidfilepath=mongodb-5.3.2/data/mongo.pid
 logappend=true
 bind_ip=0.0.0.0
 port=27017
+```
+You can now run MongoDB as shown:
 
-#if necessary
-#rm -rf /mongodb-5.3.2/data/*
+```console
+cp /usr/lib/aarch64-linux-gnu/libcrypt.so ~/glibc-2.32_build_install/build/crypt/
 ~/glibc-2.32_build_install/build/testrun.sh ~/mongo/build/install/bin/mongod -f ~/mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
-
-#If you encounter an error related to libcrypt.so and need to execute the following command before running again:
-#cp /usr/lib/aarch64-linux-gnu/libcrypt.so ~/glibc-2.32_build_install/build/crypt/
 ```
 
-Confirm if the workload mongodb runs with the newly built glibc with LSE:  
- - First, get the pid with the following command.
-    ```console
-    ps -ef | grep mongo
-    root       19852       1  1 16:33 ?        00:00:01 /root/glibc-2.32_build_install/build/elf/ld-linux-aarch64.so.1 --library-path /root/glibc-2.32_build_install/build:/root/glibc-2.32_build_install/build/math:/root/glibc-2.32_build_install/build/elf:/root/glibc-2.32_build_install/build/dlfcn:/root/glibc-2.32_build_install/build/nss:/root/glibc-2.32_build_install/build/nis:/root/glibc-2.32_build_install/build/rt:/root/glibc-2.32_build_install/build/resolv:/root/glibc-2.32_build_install/build/mathvec:/root/glibc-2.32_build_install/build/support:/root/glibc-2.32_build_install/build/crypt:/root/glibc-2.32_build_install/build/nptl /root/mongo/build/install/bin/mongod -f /mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
-    ```
+Confirm that the workload mongodb runs is with the newly built glibc with LSE:
+  
+First, get the pid with the following command.
+```console
+ps -ef | grep mongo
+```
 
- - Then execute the following command to check.
-    ```
-    cat /proc/19852/smaps | grep glibc 
+The output will look similar to:
+
+```output
+    root       19852       1  1 16:33 ?        00:00:01 /root/glibc-2.32_build_install/build/elf/ld-linux-aarch64.so.1 --library-path /root/glibc-2.32_build_install/build:/root/glibc-2.32_build_install/build/math:/root/glibc-2.32_build_install/build/elf:/root/glibc-2.32_build_install/build/dlfcn:/root/glibc-2.32_build_install/build/nss:/root/glibc-2.32_build_install/build/nis:/root/glibc-2.32_build_install/build/rt:/root/glibc-2.32_build_install/build/resolv:/root/glibc-2.32_build_install/build/mathvec:/root/glibc-2.32_build_install/build/support:/root/glibc-2.32_build_install/build/crypt:/root/glibc-2.32_build_install/build/nptl /root/mongo/build/install/bin/mongod -f /mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
+```
+
+Next, execute the following command using the correct `pid`:
+
+ ```console
+ cat /proc/19852/smaps | grep glibc 
+```
+The output should look similar to:
+
+```output
     ffff898c5000-ffff898cd000 r-xp 00000000 103:02 953511    /root/glibc-2.32_build_install/build/crypt/libcrypt.so
     ffff898cd000-ffff898e4000 ---p 00008000 103:02 953511    /root/glibc-2.32_build_install/build/crypt/libcrypt.so
     ffff898e4000-ffff898e5000 r--p 0000f000 103:02 953511    /root/glibc-2.32_build_install/build/crypt/libcrypt.so
@@ -90,5 +105,6 @@ Confirm if the workload mongodb runs with the newly built glibc with LSE:
     ffff90333000-ffff90355000 r-xp 00000000 103:02 943577    /root/glibc-2.32_build_install/build/elf/ld.so
     ffff90372000-ffff90373000 r--p 0002f000 103:02 943577    /root/glibc-2.32_build_install/build/elf/ld.so
     ffff90373000-ffff90375000 rw-p 00030000 103:02 943577    /root/glibc-2.32_build_install/build/elf/ld.so
-
     ```
+
+This output shows that the newly built glibc with LSE is being utilized.
