@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about porting other cloud applications to the Arm architecture for increased performance and cost savings. 
+    You can continue learning about Large System Extensions and how to use them in your applications. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/lse"
@@ -18,13 +18,13 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/lse"
 
 further_reading:
     - resource:
-        title: Arm Architecture Reference Manual
-        link: https://developer.arm.com/documentation/ddi0487/latest
-        type: documentation
+        title: Arm's LSE for atomics and MySQL
+        link: https://mysqlonarm.github.io/ARM-LSE-and-MySQL/
+        type: blog
     - resource:
-        title: Projects releated with MongoDB
-        link: https://github.com/mongodb
-        type: website
+        title: MongoDB documentation
+        link: https://www.mongodb.com/docs/
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -22,38 +22,45 @@ Overall, YCSB has become a standard benchmarking tool in the cloud and distribut
 You are now ready to benchmark MongoDB with YCSB on your Arm server!
 
 ## YCSB Setup
-Setup the YCSB on a benchmark machine with __JAVA__:
+Install Java on your machine:
+
 ```console
 sudo apt-get install -y openjdk-11-jdk
+```
+Download the uncompress the YCSB Benchmark source:
+
+```console
 cd ~
 wget -c https://github.com/brianfrankcooper/YCSB/releases/download/0.17.0/ycsb-0.17.0.tar.gz
 tar xfvz ycsb-0.17.0.tar.gz
 ```
 
-Create a workload file with the following content:  
-```
-vi ~/ycsb-0.17.0/workloads/iworkload
-
-recordcount=1000  
-operationcount=1000  
-workload=site.ycsb.workloads.CoreWorkload  
-readallfields=true  
-readproportion=0.2  
-updateproportion=0.3  
-scanproportion=0.3  
-insertproportion=0  
-readmodifywriteproportion=0.2  
-requestdistribution=zipfian  
+Using a file editor of your choice, create a workload file `~/ycsb-0.17.0/workloads/iworkload`. Copy and save the following content into this file:
 
 ```
+recordcount=1000
+operationcount=1000
+workload=site.ycsb.workloads.CoreWorkload
+readallfields=true
+readproportion=0.2
+updateproportion=0.3
+scanproportion=0.3
+insertproportion=0
+readmodifywriteproportion=0.2
+requestdistribution=zipfian
 
-## YCSB Run
- 1. To run YCSB, you need following the `load` command first: 
-    ```console
-    ~/ycsb-0.17.0/bin/ycsb.sh load mongodb -s -P ~/ycsb-0.17.0/workloads/iworkload -p recordcount=10000000 -threads 256 -p mongodb.url="mongodb://${mongo_ip}:${mongo_port}/mymongodb"
-    ```
-    You can see the result after the `load` command finishes:
-    ```out
+```
+
+## Run YCSB 
+To run YCSB, you need following the `load` command first: 
+```console
+~/ycsb-0.17.0/bin/ycsb.sh load mongodb -s -P ~/ycsb-0.17.0/workloads/iworkload -p recordcount=10000000 -threads 256 -p mongodb.url="mongodb://${mongo_ip}:${mongo_port}/mymongodb"
+ ```
+
+Replace `mongo_ip` and `mongo_port` in the command above with the IP address and port number of the machine you are running MongoDB on.
+
+You should see the result from the benchmark after the `load` command finishes:
+```output
     /usr/bin/java  -classpath /root/workload/tools/ycsb-0.17.0/conf:/root/workload/tools/ycsb-0.17.0/lib/core-0.17.0.jar:/root/workload/tools/ycsb-0.17.0/lib/HdrHistogram-2.1.4.jar:/root/workload/tools/ycsb-0.17.0/lib/htrace-core4-4.1.0-incubating.jar:/root/workload/tools/ycsb-0.17.0/lib/jackson-core-asl-1.9.4.jar:/root/workload/tools/ycsb-0.17.0/lib/jackson-mapper-asl-1.9.4.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/logback-classic-1.1.2.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/logback-core-1.1.2.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/mongodb-async-driver-2.0.1.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/mongodb-binding-0.17.0.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/mongo-java-driver-3.8.0.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/slf4j-api-1.7.25.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/snappy-java-1.1.7.1.jar site.ycsb.Client -load -db site.ycsb.db.MongoDbClient -s -P /root/workload/tools/ycsb-0.17.0/workloads/iworkloadf -p recordcount=10000000 -threads 256 -p mongodb.url=mongodb://172.26.202.189:27017/mymongodb
     mongo client connection created with mongodb://172.26.202.189:27017/mymongodb
     [OVERALL], RunTime(ms), 241978
@@ -80,16 +87,20 @@ requestdistribution=zipfian
     [INSERT], 95thPercentileLatency(us), 7563
     [INSERT], 99thPercentileLatency(us), 14991
     [INSERT], Return=OK, 10000000
-    ```
+ ```
 
- 2. Then you can benchmark the performance of MongoDB following the `run` command:
-    ```
-    ~/ycsb-0.17.0/bin/ycsb.sh run mongodb -s -P ~/ycsb-0.17.0/workloads/iworkload -p operationcount=5000000 -threads 256 -p mongodb.url="mongodb://${mongo_ip}:${mongo_port}/mymongodb"
-    ```
-    __Attention: Please ensure that you have sufficient disk space available!__
+You can now benchmark the performance of MongoDB following the `run` command:
+```console
+~/ycsb-0.17.0/bin/ycsb.sh run mongodb -s -P ~/ycsb-0.17.0/workloads/iworkload -p operationcount=5000000 -threads 256 -p mongodb.url="mongodb://${mongo_ip}:${mongo_port}/mymongodb"
+```
+Replace `mongo_ip` and `mongo_port` in the command above with the IP address and port number of the machine you are running MongoDB on.
 
-    You can see the performance data after the `run` command execution is finished.
-    ```output
+{{% notice Note %}}
+Please ensure that you have sufficient disk space available! 
+{{% /notice %}}
+
+You can see the performance data after the `run` command execution is finished.
+```output
     /usr/bin/java  -classpath /root/workload/tools/ycsb-0.17.0/conf:/root/workload/tools/ycsb-0.17.0/lib/core-0.17.0.jar:/root/workload/tools/ycsb-0.17.0/lib/HdrHistogram-2.1.4.jar:/root/workload/tools/ycsb-0.17.0/lib/htrace-core4-4.1.0-incubating.jar:/root/workload/tools/ycsb-0.17.0/lib/jackson-core-asl-1.9.4.jar:/root/workload/tools/ycsb-0.17.0/lib/jackson-mapper-asl-1.9.4.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/logback-classic-1.1.2.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/logback-core-1.1.2.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/mongodb-async-driver-2.0.1.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/mongodb-binding-0.17.0.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/mongo-java-driver-3.8.0.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/slf4j-api-1.7.25.jar:/root/workload/tools/ycsb-0.17.0/mongodb-binding/lib/snappy-java-1.1.7.1.jar site.ycsb.Client -t -db site.ycsb.db.MongoDbClient -s -P /root/workload/tools/ycsb-0.17.0/workloads/iworkloadf -p operationcount=5000000 -threads 256 -p mongodb.url=mongodb://172.26.202.189:27017/mymongodb
     mongo client connection created with mongodb://172.26.202.189:27017/mymongodb
     [OVERALL], RunTime(ms), 774685
@@ -136,6 +147,5 @@ requestdistribution=zipfian
     [SCAN], 95thPercentileLatency(us), 101183
     [SCAN], 99thPercentileLatency(us), 125375
     [SCAN], Return=OK, 1499379
-
-    ```
+```
 

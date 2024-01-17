@@ -7,12 +7,13 @@ weight: 6 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Now you can run the mongodb benchmark using Glibc with LSE and NoLSE and compare the results.
+You can run the mongodb benchmark using Glibc with LSE and NoLSE and compare the results. This will give you an idea of the performance gained by using Glibc with LSE.
 
 ## Result with No-LSE
 Launch MongoDB with Glibc without LSE and obtain benchmark result.  
-The overall TPS is __6662.1275371047195__ with No-LSE Glibc.
-```console
+The output will look similar to:
+
+```output
 [OVERALL], RunTime(ms), 750511
 [OVERALL], Throughput(ops/sec), 6662.1275371047195
 [TOTAL_GCS_G1_Young_Generation], Count, 3527
@@ -58,11 +59,13 @@ The overall TPS is __6662.1275371047195__ with No-LSE Glibc.
 [SCAN], 99thPercentileLatency(us), 70143
 [SCAN], Return=OK, 1499804
 ```
+The overall throughtput (operations/sec) is 6662.1275371047195 with No-LSE Glibc.
 
 ## Result with LSE
-Launch MongoDB with Glibc with LSE and obtain benchmark result.  
-The overall TPS is __6871.605426919102__ with LSE Glibc.  
-___So you can get around 3.14% extra benefit through Glibc with LSE!___
+Launch MongoDB again, this time with Glibc with LSE and obtain benchmark result.
+
+The output will look similar to:
+  
 ```console
 [OVERALL], RunTime(ms), 727632
 [OVERALL], Throughput(ops/sec), 6871.605426919102
@@ -109,4 +112,7 @@ ___So you can get around 3.14% extra benefit through Glibc with LSE!___
 [SCAN], 99thPercentileLatency(us), 67455
 [SCAN], Return=OK, 1499682
 ```
+The overall throughput (operations/sec) is 6871.605426919102 when using Glibc with LSE.
+In this case you can get around 3.14% performance uplift by using Glibc with LSE.
+
 
