@@ -25,12 +25,6 @@ microsoft:tools/kitware/cmake           3.25.2  installed            Kitware's c
 microsoft:tools/ninja-build/ninja       1.10.2  installed            Ninja is a small build system with a focus on speed.
 ```
 
-#### Activate tools using a vcpkg-configuration.json file elsewhere
-
-```bash
- vcpkg activate --json=../my-config.json
-```
-
 #### Deactivate artifacts specified by vcpkg-configuration.json
 
 ```bash { output_lines = "2-4" }
