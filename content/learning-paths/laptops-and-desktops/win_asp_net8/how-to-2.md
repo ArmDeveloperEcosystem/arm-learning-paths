@@ -44,6 +44,7 @@ Here the architecture is **ARM64**.
 ```console
 dotnet run -a x64
 ```
+{{% /notice %}}
 
 ## Test the GET request
 

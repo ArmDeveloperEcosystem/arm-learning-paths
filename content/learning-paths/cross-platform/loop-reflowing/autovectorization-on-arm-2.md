@@ -1,15 +1,16 @@
 ---
-title: Autovectorization on Arm, continued
+title: More autovectorization on Arm
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## More autovectorization on Arm
+The previous example using the `SDOT`/`UDOT` instructions is only one of the Arm-specific optimizations possible.
 
-The previous example using the `SDOT`/`UDOT` instructions was only one of the Arm-specific optimizations possible.
-While it is not possible to exhaust all the specialized instructions offered on Arm CPUs in a single LP, it's worth looking at another example:
+While it is not possible to demonstrate all of the specialized instructions offered by the Arm architecture, it's worth looking at another example:
+
+Below is a very simple loop, calculating what is known as a Sum of Absolute Differences (SAD). Such code is very common in video codecs and used in calculating differences between video frames.
 
 ```C
 #include <stdint.h>
@@ -36,10 +37,9 @@ int main() {
 }
 ```
 
-This is a very simple loop, calculating what is known as a Sum of Absolute Differences (SAD). Again, such code is very common in video codecs and used in calculating differences between video frames, etc.
 A hint to the compiler was added that the size is a multiple of 16 to avoid generating cases for smaller lengths. *This is only for demonstration purposes*.
 
-Save the code as `sadtest.c` and compile it like this:
+Save the code above to a file named `sadtest.c` and compile it:
 
 ```bash
 gcc -O3 -fno-inline sadtest.c -o sadtest
@@ -73,22 +73,23 @@ sad8:
 
  You can see that the compiler generates code that uses 3 specialized instructions that exist only on Arm: [`SABDL2`](https://developer.arm.com/documentation/ddi0596/2021-03/SIMD-FP-Instructions/SABDL--SABDL2--Signed-Absolute-Difference-Long-?lang=en), [`SABAL`](https://developer.arm.com/documentation/ddi0596/2021-03/SIMD-FP-Instructions/SABAL--SABAL2--Signed-Absolute-difference-and-Accumulate-Long-?lang=en) and [`SADALP`](https://developer.arm.com/documentation/ddi0596/2021-03/SIMD-FP-Instructions/SADALP--Signed-Add-and-Accumulate-Long-Pairwise-?lang=en).
 
- The accumulator variable is not 8-bit but 32-bit, so the typical SIMD implementation that would involve 16 x 8-bit subtractions, then 16 x absolute values and 16 x additions would not do, and a widening conversion to 32-bit would have to take place before the accumulation.
+The accumulator variable is not 8-bit but 32-bit, so the typical SIMD implementation that would involve 16 x 8-bit subtractions, then 16 x absolute values and 16 x additions would not do, and a widening conversion to 32-bit would have to take place before the accumulation.
 
- This would mean that 4x items at a time would be accumulated, but with the use of these instructions, the performance gain can be up to 16x faster than the original scalar code, or ~4x faster than the typical SIMD implementation.
+This would mean that 4x items at a time would be accumulated, but with the use of these instructions, the performance gain can be up to 16x faster than the original scalar code, or about 4x faster than the typical SIMD implementation.
 
 For completeness the SVE2 version will be provided, which does not depend on size being a multiple of 16.
 
-This is the output without the `N -= N % 16` before the loop.
-You could compile it on any Arm system -even without support for SVE2- just by adding the appropriate `-march` flag:
+This version is without the `N -= N % 16` before the loop.
+
+You can compile it on any Arm system (even one without support for SVE2) just by adding the appropriate `-march` flag:
 
 ```bash
 gcc -O3 -fno-inline -march=armv9-a sadtest.c -o sadtest
 ```
 
-(depending on the compiler version tested `-march=armv9-a` might not be available, in that case you could use `-march=march8-a+sve2`)
+Depending on your compiler version `-march=armv9-a` might not be available. If this is the case, you can use `-march=march8-a+sve2` instead.
 
-The SVE2 assembly output for `sad8()` in this case will be:
+The SVE2 assembly output for `sad8()` is:
 
 ```as
 sad8:
@@ -121,6 +122,11 @@ sad8:
 
 ## Conclusion
 
-You might wonder if there is a point in autovectorization, if you have to have such specialized knowledge of instructions like `SDOT`/`SADAL` etc in order to use it. The answer is that autovectorization is a tool, the goal is to minimize the effort taken by the developers and maximize the performance, while at the same time requiring low maintainance in terms of the code size. It is far easier to maintain hundreds or thousands of functions that are known to generate the fastest code using autovectorization, for all platforms, than it is to maintain the same number of functions in multiple versions for each supported architecture and SIMD engine. As with most tools, the better you know how to use it the better results you can expect.
+You might ask why you should learn about autovectorization if you need to have specialized knowledge of instructions like `SDOT`/`SADAL` in order to benefit.
 
+Autovectorization is a tool. The goal is to minimize the effort required by developers and maximize the performance, while at the same time requiring low maintenance in terms of code size. 
+
+It is far easier to maintain hundreds or thousands of functions that are known to generate the fastest code using autovectorization, for all platforms, than it is to maintain the same number of functions in multiple versions for each supported architecture and SIMD engine. 
+
+As with most tools, the better you know how to use it, the better the results will be.
 

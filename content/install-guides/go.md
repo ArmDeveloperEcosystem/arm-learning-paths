@@ -12,7 +12,7 @@ multitool_install_part: false
 official_docs: https://go.dev/doc/
 test_images:
 - ubuntu:latest
-test_maintenance: false
+test_maintenance: true
 title: Go
 tool_install: true
 weight: 1

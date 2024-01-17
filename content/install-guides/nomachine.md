@@ -13,9 +13,7 @@ official_docs: https://www.nomachine.com/all-documents
 test_images:
 - ubuntu:latest
 test_link: null
-test_maintenance: true
-test_status:
-- passed
+test_maintenance: false
 title: NoMachine
 tool_install: true
 weight: 1
