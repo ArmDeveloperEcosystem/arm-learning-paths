@@ -2,14 +2,14 @@
 review:
     - questions:
         question: >
-            What are the supported sizes for the ZA storage in SME?
+            How large is the ZA storage?
         answers:
-            - 16x16, 32x32, 64x64, 128x128, and 256x256 bits
-            - 16x16, 32x32, 64x64, 128x128, and 256x256 bytes
-            - 16x16, 32x32, 64x64, 128x128, and 256x256 floats
+            - (SVL/8) x (SVL/8) bits
+            - (SVL/8) x (SVL/8) bytes
+            - (SVL/8) x (SVL/8) floats
         correct_answer: 2
         explanation: >
-            The ZA storage is two-dimensional array of 8-bit elements, a power of two in the range 16 to 256 bytes.
+            The ZA storage is a two-dimensional array of (SVL/8) x (SVL/8) bytes. Since SVL is a power of two in the range 128 to 2048 bits, (SVL/8) will be a power of two in the range 16 to 256 bytes.
 
     - questions:
         question: >
