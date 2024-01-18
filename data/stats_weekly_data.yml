@@ -1310,3 +1310,105 @@
     avg_close_time_hrs: 0
     num_issues: 15
     percent_closed_vs_total: 0.0
+- a_date: '2024-01-08'
+  content:
+    cross-platform: 12
+    embedded-systems: 15
+    install-guides: 74
+    laptops-and-desktops: 15
+    microcontrollers: 24
+    servers-and-cloud-computing: 59
+    smartphones-and-mobile: 8
+    total: 207
+  contributions:
+    external: 14
+    internal: 189
+  github_engagement:
+    num_forks: 30
+    num_prs: 11
+  individual_authors:
+    bolt-liu: 2
+    brenda-strech: 1
+    christopher-seidl: 6
+    daniel-gubay: 1
+    david-spickett: 1
+    dawid-borycki: 9
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 4
+    jason-andrews: 78
+    jonathan-davies: 2
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 2
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 30
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    roberto-lopez-mendez: 1
+    ronan-synnott: 40
+    stephen-theobald: 1
+    uma-ramalingam: 1
+    ying-yu: 1
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 15
+    percent_closed_vs_total: 0.0
+- a_date: '2024-01-15'
+  content:
+    cross-platform: 12
+    embedded-systems: 15
+    install-guides: 74
+    laptops-and-desktops: 15
+    microcontrollers: 24
+    servers-and-cloud-computing: 59
+    smartphones-and-mobile: 8
+    total: 207
+  contributions:
+    external: 14
+    internal: 189
+  github_engagement:
+    num_forks: 30
+    num_prs: 12
+  individual_authors:
+    bolt-liu: 2
+    brenda-strech: 1
+    christopher-seidl: 6
+    daniel-gubay: 1
+    david-spickett: 1
+    dawid-borycki: 9
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 4
+    jason-andrews: 78
+    jonathan-davies: 2
+    julie-gaskin: 1
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 2
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 3
+    pareena-verma: 30
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    roberto-lopez-mendez: 1
+    ronan-synnott: 40
+    stephen-theobald: 1
+    uma-ramalingam: 1
+    ying-yu: 1
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 17
+    percent_closed_vs_total: 0.0
