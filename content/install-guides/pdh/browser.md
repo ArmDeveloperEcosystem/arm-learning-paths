@@ -31,6 +31,16 @@ The portal uses [IBM Aspera](https://www.ibm.com/products/aspera) to enable high
 
 It is also possible to download without the use of Aspera if you prefer, but this will be slower, especially for large download sizes.
 
+## Firewall issues
+
+If you are unable to download your products, it may be due to firewall issues.
+
+If the EULA fails to appear, check with your internal IT teams that you can access:
+```url
+na3.docusign.net
+```
+It may also be necessary to delete cookies from your browser.
+
 ## Updates
 
 You will automatically be notified by the system when updates become available for any products that you have downloaded.
