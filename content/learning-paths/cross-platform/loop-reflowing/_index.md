@@ -1,5 +1,5 @@
 ---
-title: Learn about Loop Reflowing and Autovectorization
+title: Learn about Autovectorization
 
 draft: true
 
