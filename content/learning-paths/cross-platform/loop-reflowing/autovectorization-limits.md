@@ -67,7 +67,7 @@ for (size_t i=0; i < N; i++) {
 }
 ```
 
-There is a special case of the math library trigonometry and transcendental functions (like `sin`, `cos`, `exp`, etc). There is work underway to enable these functions to be autovectorized, as the compiler will use their vectorized counterparts in the `mathvec` library (`libmvec`).
+There is a special case with the math library trigonometry and transcendental functions (like `sin`, `cos`, `exp`, etc). There is work underway to enable these functions to be autovectorized, as the compiler will use their vectorized counterparts in the `mathvec` library (`libmvec`).
 
 The loop below is *already autovectorized* in current gcc trunk for Arm (note you have to add `-Ofast` to the compilation flags to enable autovectorization):
 
@@ -79,7 +79,7 @@ void addfunc(float *restrict C, float *A, float *B, size_t N) {
 }
 ```
 
-This feature will be in gcc 14 and require a new glibc version 2.39 as well. Until then, if you are using a released compiler as part of a Linux distribution (such as gcc 13.2), you will need to manually vectorize such code for performance.
+This feature will be in gcc 14 and requires a new glibc version 2.39 as well. Until then, if you are using a released compiler as part of a Linux distribution (such as gcc 13.2), you will need to manually vectorize such code for performance.
 
 There is more about autovectorization of conditionals in the next section.
 
@@ -105,11 +105,11 @@ for (size_t i=0; i < N; i++) {
 
 In this case, only the inner loop will be vectorized, again provided all the other conditions also apply (no branches and the inner loop is countable).
 
-There are some cases where outer loop types are autovectorized, but these are not covered in this Learning Path.
+There are some cases where outer loop types are autovectorized but these are not covered in this Learning Path.
 
 #### No data inter-dependency between iterations
 
-This means that each iteration depends on the result of the previous iteration. This example is difficult, but not impossible to autovectorize. 
+This means that each iteration depends on the result of the previous iteration. This example is difficult but not impossible to autovectorize. 
 
 The loop below cannot be autovectorized as it is. 
 
