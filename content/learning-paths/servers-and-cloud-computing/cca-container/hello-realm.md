@@ -52,3 +52,28 @@ Copy this initramfs into a directory that you will mount inside the host linux k
 mkdir -p ~/FM-share
 cp -r test.cpio-gz ~/FM-share
 ```
+## Run 
+
+```console
+./run-cca-fvp.sh
+```
+
+Mount a 9p drive on your host linux kernel using /etc/fstab
+```console
+vi /etc/fstab
+```
+With the /etc/fstab file open now add the following line to it:
+
+```console
+FM	/mnt	9p	trans=virtio,version=9p2000.L,aname=/mnt	0 	0"
+```
+Save and close the file. Now run the mount command:
+
+```console
+mount -a
+```
+
+
+
+
+
