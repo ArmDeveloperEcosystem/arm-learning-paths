@@ -50,12 +50,12 @@ You have now successfully built glibc from source without LSE.
 
 Now lets look at how you can build it with LSE support.
 
-## Build glibc With LSE
+## Build glibc with LSE
 To build glibc with LSE, you should add `CFLAGS` and `CXXFLAGS` to the configure command.
 
-You can do this one of two ways. One way is to use "-mcpu=native" which tells the compiler to detect the architecture/micro-architecture of your machine. The other way is to pass the exact architecture option of your machine to the compiler using "-mcpu=neoverse-n2+lse"
+You can do this one of two ways. One way is to use "-mcpu=native" which tells the compiler to detect the architecture/micro-architecture of your machine. The other way is to pass the exact architecture option of your machine to the compiler using "-mcpu=neoverse-n2+lse".
 
-Both ways to configure are shown below:
+Both ways are shown below:
 
 ```bash
 sudo bash ~/glibc/configure --prefix=/usr --disable-werror CC=gcc-10 CXX=g++-10 CFLAGS="-mcpu=native -O3" CXXFLAGS="-mcpu=native -O3"
