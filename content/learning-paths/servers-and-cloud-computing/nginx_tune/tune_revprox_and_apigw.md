@@ -45,7 +45,7 @@ server {
   }
   location /api_new {
     internal;
-    proxy_pass http://file_server_com;
+    proxy_pass https://ssl_file_server_com;
     proxy_http_version 1.1;
     proxy_set_header Connection "";
   }
@@ -55,7 +55,7 @@ server {
     limit_except GET {
       deny all;
     }
-    proxy_pass http://file_server_com;
+    proxy_pass https://ssl_file_server_com;
     proxy_http_version 1.1;
     proxy_set_header Connection "";
   }
