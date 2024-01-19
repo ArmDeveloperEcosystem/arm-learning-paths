@@ -22,7 +22,7 @@ for (size_t i=0; i < N; i++) {
 }
 ```
 
-This loop is not countable and cannot be vectorized:
+But this loop is not countable and cannot be vectorized:
 
 ```C
 i = 0;
@@ -46,7 +46,7 @@ while(1) {
 }
 ```
 
-This loop is not vectorizable:
+But this loop is not vectorizable:
 
 ```C
 i = 0;
@@ -59,7 +59,7 @@ while(1) {
 
 #### No function calls inside the loop
 
-If `f()` and `g()` are functions that take `float` arguments this loop cannot be autovectorized:
+If `f()` and `g()` are functions that take `float` arguments, the loop cannot be autovectorized:
 
 ```C
 for (size_t i=0; i < N; i++) {
@@ -69,7 +69,7 @@ for (size_t i=0; i < N; i++) {
 
 There is a special case with the math library trigonometry and transcendental functions (like `sin`, `cos`, `exp`, etc). There is work underway to enable these functions to be autovectorized, as the compiler will use their vectorized counterparts in the `mathvec` library (`libmvec`).
 
-The loop below is *already autovectorized* in current gcc trunk for Arm (note you have to add `-Ofast` to the compilation flags to enable autovectorization):
+The loop below is *already autovectorized* in current gcc trunk for Arm (note, you have to add `-Ofast` to the compilation flags to enable autovectorization):
 
 ```C
 void addfunc(float *restrict C, float *A, float *B, size_t N) {
