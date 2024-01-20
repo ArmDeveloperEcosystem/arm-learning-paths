@@ -25,15 +25,21 @@ In this learning path, you will learn how to run the reference integration softw
 
 ## Download the docker image
 
-For your convenience, the pre-built Arm CCA reference software stack and the Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions are made available in a docker container. 
+The pre-built binaries for the Arm CCA reference software stack and the Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions are made available in a docker container. 
 
 Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
-Pull the docker image from DockerHub:
+Dependent on the architecture of your host machine, pull the docker image from DockerHub:
 
-```console
-docker pull armswdev/aemfvp-cca-image
-```
+{{< tabpane code=true >}}
+  {{< tab header="Arm" >}}
+docker pull armswdev/aemfvp-cca-image:arm64
+{{< /tab >}}
+{{< tab header="x86-64" >}}
+docker pull armswdev/aemfvp-cca-image:x86
+{{< /tab >}}
+{{< /tabpane >}}
+
 Confirm that the docker container image was dowloaded successfully:
 
 ```
@@ -48,9 +54,14 @@ aemfvp-builder    latest    2fa7ce18f57a   7 mins ago    1.83GB
 ```
 You can now run the docker container:
 
-```console
-docker run -it armswdev/aemfvp-cca-image /bin/bash
-```
+{{< tabpane code=true >}}
+  {{< tab header="Arm" >}}
+docker run -it armswdev/aemfvp-cca-image:arm64 /bin/bash
+{{< /tab >}}
+{{< tab header="x86-64" >}} 
+docker run -it armswdev/aemfvp-cca-image:x86 /bin/bash
+{{< /tab >}}
+{{< /tabpane >}}
 
 You should see the following output:
 
