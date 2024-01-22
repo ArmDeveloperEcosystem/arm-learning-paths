@@ -96,7 +96,7 @@ You can now benchmark the performance of MongoDB following the `run` command:
 Replace `mongo_ip` and `mongo_port` in the command above with the IP address and port number of the machine you are running MongoDB on.
 
 {{% notice Note %}}
-Please ensure that you have sufficient disk space available! 
+Please ensure that you have sufficient disk space available (60GB as a minimum requirement).  
 {{% /notice %}}
 
 You can see the performance data after the `run` command execution is finished.
