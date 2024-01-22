@@ -1,5 +1,5 @@
 ---
-title: Use glibc with Large System Extensions (LSE) to improve the performance of workloads on Arm servers
+title: Learn about glibc with Large System Extensions (LSE) for performance improvement
 
 minutes_to_complete: 60
 
@@ -12,6 +12,7 @@ learning_objectives:
 
 prerequisites:
 - An Arm based instance from a cloud service provider.
+- Review the learning path on [LSE](/learning-paths/servers-and-cloud-computing/lse/)
 
 author_primary: Ying Yu, Arm
 
