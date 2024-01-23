@@ -1,15 +1,14 @@
 ---
-title: Use a ready-made docker container image to create a virtual machine in a Realm using Arm Confidential Compute Architecture (CCA)
+title: Run an application in a Realm using Arm Confidential Compute Architecture (CCA)
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an introductory topic for software developers who want to learn about Arm Confidential Compute Architecture (CCA).
+who_is_this_for: This is an introductory topic for software developers who want to learn how to run their applications in a Realm using Arm Confidential Compute Architecture (CCA).
 
 learning_objectives:
-    - Understand the reference software stack used in Arm CCA
     - Run the Arm reference CCA software stack on an Armv-A AEM Base FVP platform with support for RME extensions
-    - Create a virtual machine in a Realm running guest Linux using the ready-made docker container image
-    - Run a hello world application in a Realm running guest Linux
+    - Create a virtual machine in a Realm running guest Linux using a pre-built docker container
+    - Run a simple hello world application in a Realm running guest Linux
 
 prerequisites:
     - An aarch64 or x86_64 computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
