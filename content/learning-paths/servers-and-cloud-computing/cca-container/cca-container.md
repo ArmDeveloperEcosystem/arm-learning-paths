@@ -28,17 +28,11 @@ Start by downloading the docker container image. This docker image contains the 
 
 Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
-Dependent on the architecture of your host machine, pull the appropriate docker image from DockerHub:
+Pull the docker image from DockerHub:
 
-{{< tabpane code=true >}}
-  {{< tab header="Arm" >}}
-docker pull armswdev/aemfvp-cca-image:arm64
-{{< /tab >}}
-{{< tab header="x86" >}}
-docker pull armswdev/aemfvp-cca-image:x86
-{{< /tab >}}
-{{< /tabpane >}}
-
+```console
+docker pull armswdev/aemfvp-cca-image
+```
 Confirm that the docker container image was dowloaded successfully:
 
 ```console
@@ -53,15 +47,9 @@ armswdev/aemfvp-cca-image   	arm64     cf2cfc5c6391   3 days ago     26.2GB
 ```
 Run the docker container:
 
-{{< tabpane code=true >}}
-  {{< tab header="Arm" >}}
-docker run -it armswdev/aemfvp-cca-image:arm64 /bin/bash
-{{< /tab >}}
-{{< tab header="x86" >}} 
-docker run -it armswdev/aemfvp-cca-image:x86 /bin/bash
-{{< /tab >}}
-{{< /tabpane >}}
-
+```console
+docker run -it armswdev/aemfvp-cca-image /bin/bash
+```
 You are now inside the `/tmp/cca-stack` directory of the running `armswdev/aemfvp-cca-image` container.
 
 ```output
@@ -144,6 +132,7 @@ You have successfully created a virtual guest in a Realm using the Arm CCA refer
 To shutdown the guest, use the `poweroff` command.
 
 You should see the following output from the guest:
+
 ```output
 Stopping dropbear sshd: OK
 Stopping network: OK

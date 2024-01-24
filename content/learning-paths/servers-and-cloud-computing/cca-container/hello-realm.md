@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Make sure you have downloaded the `armswdev/aemfvp-cca-image` docker container.
+Make sure you have downloaded the [`armswdev/aemfvp-cca-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-image) docker container.
 
-Install [GCC](/install-guides/gcc/) on your machine. You will need this to compile your application.
+Install [GCC](/install-guides/gcc/) on your machine. Dependent on the architecture of your machine, you will need to install either the native compiler or cross-compiler.
 
 ## Overview
 
@@ -55,15 +55,9 @@ echo init | cpio -o -H newc | gzip > test.cpio.gz
 
 Start the docker container with the `FM-share` directory mounted:
 
-{{< tabpane code=true >}}
-  {{< tab header="Arm" >}}
-docker run -v ~/FM-share:/home/ubuntu/FM-share -it armswdev/aemfvp-cca-image:arm64 /bin/bash
-{{< /tab >}}
-{{< tab header="x86" >}}
-docker run -v ~/FM-share:/home/ubuntu/FM-share -it armswdev/aemfvp-cca-image:x86 /bin/bash
-{{< /tab >}}
-{{< /tabpane >}}
-
+```console
+docker run -v ~/FM-share:/home/ubuntu/FM-share -it armswdev/aemfvp-cca-image /bin/bash
+```
 Run the Arm CCA reference stack pre-built binaries on the FVP:
 
 ```console

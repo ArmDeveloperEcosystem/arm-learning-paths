@@ -8,10 +8,10 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives:
     - Run the Arm reference CCA software stack on an Armv-A AEM Base FVP platform with support for RME extensions
     - Create a virtual machine in a Realm running guest Linux using a pre-built docker container
-    - Run a simple hello world application in a Realm running guest Linux
+    - Run a simple application in a Realm running guest Linux
 
 prerequisites:
-    - An aarch64 or x86_64 computer running Ubuntu 22.04. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - An aarch64 or x86_64 computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author_primary: Pareena Verma
 
