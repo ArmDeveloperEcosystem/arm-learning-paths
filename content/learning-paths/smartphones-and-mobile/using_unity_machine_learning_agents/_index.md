@@ -1,5 +1,5 @@
 ---
-title: Using Unity Machine Language Agents toolkit
+title: Using Unity Machine Learning Agents toolkit
 
 minutes_to_complete: 60
 
@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
 - A computer capable of running Unity. Instructions are for Windows, but could be adapted to other platforms
-- If deploying to an Android device, you will need an Android mobile device and a USB cable to connect it to your computer. The device must support at least Android 8 and include a 64-bit processor
+- For deploying to an Android device, you will need an Android mobile device and a USB cable to connect it to your computer. The device must support at least Android 8 and include a 64-bit processor
 
 author_primary: Arm
 
