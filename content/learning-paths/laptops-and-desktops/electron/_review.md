@@ -27,7 +27,7 @@ review:
             What is the JSONPlaceholder?
         answers:
             - "A library for JSON serialization"
-            - "A fake API for testing web apps"
+            - "A mock API for testing web apps"
         correct_answer: 2
         explanation: >
             JSONPlaceholder is a free online REST API service that serves as a mock server for testing and prototyping web applications
