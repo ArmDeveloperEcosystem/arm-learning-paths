@@ -24,7 +24,7 @@ further_reading:
     - resource:
         title: Chromium Embedded Framework
         link: https://en.wikipedia.org/wiki/Chromium_Embedded_Framework
-        type: overview   
+        type: website   
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
