@@ -1,18 +1,17 @@
 ---
-title: Developing cross-platform desktop applications with Electron on Windows on Arm
+title: Develop cross-platform desktop applications with Electron on Windows on Arm
 
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to develop cross-platform desktop applications using Electron Framework on Windows on Arm (WoA).
 
 learning_objectives:
-    - Implement the sample application
-    - Add support for WoA
-    - Style the application
+    - Implement a sample application using the electron framework on a Windows on Arm machine
+    - Learn how to create a multi platform build of the application
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
-    - Node.js for ARM64. You can find the installer [here](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi)
+    - Node.js for Arm64. You can find the installer [here](https://nodejs.org/dist/v20.10.0/node-v20.10.0-arm64.msi)
     - Any code editor, we recommend using [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user).
 
 author_primary: Dawid Borycki
