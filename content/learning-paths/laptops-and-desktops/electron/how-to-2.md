@@ -1,5 +1,5 @@
 ---
-title: "Building the application for Arm64"
+title: "Build the cross-platform application"
 
 weight: 3
 
@@ -7,7 +7,7 @@ layout: "learningpathall"
 ---
 
 ## Objective 
-In this section you will prepare distributions of your application for Arm64 and x64.
+In this section you will build your application to run on both Arm64 and x64.
 
 ## Electron Builder
 Start by installing the Electron Builder:
@@ -16,7 +16,7 @@ Start by installing the Electron Builder:
 npm install electron-builder --save-dev
 ```
 
-The output will look as follows:
+The output will look similar to:
 ```output
 added 191 packages, removed 12 packages, changed 18 packages, and audited 265 packages in 23s
 
@@ -31,7 +31,7 @@ To address all issues (including breaking changes), run:
 Run `npm audit` for details.
 ```
 
-Then, you need to modify the package.json as follows:
+Modify the `package.json` file in your project folder with the content shown below:
 
 ```JSON
 {
@@ -69,7 +69,7 @@ Then, you need to modify the package.json as follows:
 }
 ```
 
-## Building the application
+## Build the application
 Finally, you can build the application using the following command:
 
 ```console
@@ -99,7 +99,7 @@ The above command generates the following output:
   * x64: <project folder>\dist\win-unpacked
   * Arm64: <project folder>\dist\win-arm64-unpacked
 
-  Each folder contains the executable, Electron Sample Application.exe. Launch this executable from both folders. Then, open the Task Manager to check that both executables run as either x64 or Arm64 processes.
+  Each folder contains the executable, `Electron Sample Application.exe`. Launch this executable from both folders. Then, open the Task Manager to check that both executables run as either x64 or Arm64 processes.
 
 ## Summary
 In this learning path, you created the Electron application designed to retrieve and display data from a mock API in a user-friendly table format. Developed using web technologies such as HTML, CSS, and JavaScript, this application leverages the Electron framework to seamlessly run on Windows. With added support for both x64 and Arm64 architectures on Windows, this application demonstrates the flexibility and adaptability of Electron in building robust desktop solutions for a wide range of use cases.
