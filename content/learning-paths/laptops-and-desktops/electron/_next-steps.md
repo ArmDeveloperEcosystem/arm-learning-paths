@@ -24,7 +24,7 @@ further_reading:
     - resource:
         title: Awesome Electron
         link: https://github.com/sindresorhus/awesome-electron
-        type: examples
+        type: website
     - resource:
         title: Electron support for Windows on Arm
         link: https://www.electronjs.org/docs/latest/tutorial/windows-arm
