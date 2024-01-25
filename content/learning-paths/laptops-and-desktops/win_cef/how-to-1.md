@@ -1,5 +1,5 @@
 ---
-title: "Project"
+title: "Create a Chromium Embedded Framework Project"
 
 weight: 2
 
@@ -9,7 +9,7 @@ layout: "learningpathall"
 ## Introduction
 The Chromium Embedded Framework (CEF) is a robust and versatile open-source framework that simplifies the embedding of Chromium-based web browsers into other applications. Primarily written in C++, CEF enables developers to seamlessly integrate web functionalities into desktop programs. It leverages modern web technologies, enriching user interfaces with dynamic web content and utilizing a familiar web development stack in desktop application development. CEF's widespread adoption is attributed to its high performance, extensive features, and ability to deliver consistent, cross-platform web experiences in native applications.
 
-In this learning path, you'll learn how to create a desktop application for Windows on Arm64, a platform supporting the 64-bit ARM architecture. This application will fetch and display data from JSONPlaceholder, a mock REST API for demonstration purposes. Fetching and displaying data from an API is a standard functionality in web applications, and through this process, you'll learn how to effectively utilize web technologies in a desktop app.
+In this learning path, you will learn how to create a desktop application for Windows on Arm64. This application will fetch and display data from `JSONPlaceholder`, a mock REST API for demonstration purposes. Fetching and displaying data from an API is a standard functionality in web applications, and through this process, you will learn how to effectively utilize web technologies in a desktop app.
 
 ## Before you begin
 Before you begin make sure to install the following:
@@ -20,14 +20,14 @@ Before you begin make sure to install the following:
 2. Visual Studio 2022 with Desktop development with C++ workload.
 
 ## Prepare the project
-Start by downloading the Standard Distribution of the CEF binary for [Windows on Arm64](https://cef-builds.spotifycdn.com/index.html#windowsarm64). At the time of this writing, we used the following CEF version: 
+Start by downloading the Standard Distribution of the CEF binary for [Windows on Arm64](https://cef-builds.spotifycdn.com/index.html#windowsarm64). In this learning path, you will use the following CEF version: 
 120.1.10+g3ce3184+chromium-120.0.6099.129 / Chromium 120.0.6099.129.
 
 Then, extract the downloaded file to a folder. Right-click the downloaded file, select 'Extract all...', and name the folder 'cef-binary'. Once the extraction process completes, you will find a folder named 'cef_binary_120.1.10+g3ce3184+chromium-120.0.6099.129_windowsarm64' within 'cef-binary'. Note that the exact name might differ if you download a different CEF version.
 
-Next, rename the folder cef_binary_120.1.10+g3ce3184+chromium-120.0.6099.129_windowsarm64 to windowsarm64 for simplicity.
+Next, rename the folder `cef_binary_120.1.10+g3ce3184+chromium-120.0.6099.129_windowsarm64` to `windowsarm64` for simplicity.
 
-Now, you'll use CMake to prepare the build files for Visual Studio 2022 and the Arm64 architecture. Open the Command Prompt or a Terminal, and proceed with the following steps:
+Now, use CMake to prepare the build files for Visual Studio 2022 and the Arm64 architecture. Open the Command Prompt or a Terminal, and proceed with the following steps:
 
 ```console
 cd <PATH_TO_CEF_BINARY>
@@ -35,8 +35,9 @@ cd windowsarm64
 
 cmake -G "Visual Studio 17" -A arm64 -B build
 ```
+Replace <PATH_TO_CEF_BINARY> in the command above to the directory path on your machine where you downloaded the CEF binary.
 
-The output of the last command will look like:
+The output of this command will look like:
 
 ```output
 C:\cef_binary\windowsarm64>cmake -G "Visual Studio 17" -A arm64 -B build
@@ -95,19 +96,19 @@ The previous command has generated the build files in the 'build' subfolder with
 cmake --build build
 ```
 
-This command compiles the project, including sample applications such as cefsimple. This particular application creates a browser window and renders an HTML website. It is composed of several components, including the SimpleApp class, which is crucial for managing process-level callbacks in a CEF-based application. SimpleApp offers a variety of interfaces and methods crucial for multiple processes, along with some that are specific to certain process types. For example, the CefBrowserProcessHandler interface is unique to the browser process. Notably, the GetBrowserProcessHandler() method in SimpleApp must return a reference to SimpleApp itself since it implements both CefApp and CefBrowserProcessHandler. This ensures that appropriate handlers are accessible in the correct process context. For more detailed information about this application, visit the CEF project's [website](https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-sample-application).
+This command compiles the project, including sample applications such as `cefsimple`. This particular application creates a browser window and renders an HTML website. It is composed of several components, including the `SimpleApp` class, which is crucial for managing process-level callbacks in a CEF-based application. `SimpleApp` offers a variety of interfaces and methods crucial for multiple processes, along with some that are specific to certain process types. For example, the `CefBrowserProcessHandler interface` is unique to the browser process. The `GetBrowserProcessHandler()` method in `SimpleApp` must return a reference to `SimpleApp` itself since it implements both `CefApp` and `CefBrowserProcessHandler`. This ensures that appropriate handlers are accessible in the correct process context. For more detailed information about this application, visit the CEF project's [website](https://bitbucket.org/chromiumembedded/cef/wiki/GeneralUsage.md#markdown-header-sample-application).
 
 ## Launching the application
-Let's run the cefsimple application. The binaries can be found under the build\tests\cefsimple\Debug folder. For example, the path might be something like C:\cef_binary\windowsarm64\build\tests\cefsimple\Debug, but this could vary based on your specific setup.
+Let's run the `cefsimple` application. The binaries can be found under the `build\tests\cefsimple\Debug` folder. For example, the path might be something like `C:\cef_binary\windowsarm64\build\tests\cefsimple\Debug`, but this could vary based on your specific setup.
 
 By default, the application renders the Google homepage:
 
 ![fig2](Figures/02.png)
 
 ## Modify the application
-You will now modify the cefsimple application to render a custom page. This page will fetch data from JSONPlaceholder (posts endpoint) and display it in a table.
+You will now modify the `cefsimple` application to render a custom page. This page will fetch data from `JSONPlaceholder` and display it in a table.
 
-First, close the cefsimple application if it's running. Then, locate and open the simple_app.cc file, which you can find under the cef_binary\windowsarm64\tests\cefsimple folder. Scroll down to the definition of the SimpleApp class, and modify the OnContextInitialized method. Change the URL from http://www.google.com to file://c:\web\index.html. (Note: Replace this path with the actual location of your custom HTML file.):
+First, close the `cefsimple` application if it's running. Then, locate and open the `simple_app.cc` file, under the `cef_binary\windowsarm64\tests\cefsimple` folder. Scroll down to the definition of the `SimpleApp` class, and modify the `OnContextInitialized` method. Change the URL from http://www.google.com to `file://c:\web\index.html`. (Note: Replace this path with the actual location of your custom HTML file.):
 
 ```cpp
 void SimpleApp::OnContextInitialized() {
@@ -167,18 +168,18 @@ CefRefPtr<CefClient> SimpleApp::GetDefaultClient() {
 }
 ```
 
-Make sure to save the simple_app.cc file after making your changes. Then, to rebuild the project, open your Command Prompt or Terminal, navigate to your build directory, and type the following command:
+Make sure to save the `simple_app.cc` file after making your changes. Then, to rebuild the project, open your Command Prompt or Terminal, navigate to your build directory, and type the following command:
 
 ```console
 cmake --build build
 ```
 
-This command will compile the updated code and rebuild the cefsimple application with your modifications. Remember, it's important to be in the directory where your CMake build files are located when executing this command.
+This command will compile the updated code and rebuild the `cefsimple` application with your modifications. Remember, it's important to be in the directory where your CMake build files are located when executing this command.
 
 ### Custom webpage
 You will now create a custom index.html file to fetch data from the JSONPlaceholder:
-1. Create the new folder c:\web. Of course, you can use any other folder. If so, you 
-2. Under c:\web create a new file index.html and modify it as follows:
+1. Create the new folder `C:\web`.  
+2. Under `C:\web` create a new file `index.html` and modify it as follows:
 
 ```HTML
 <!DOCTYPE html>
@@ -224,11 +225,11 @@ Re-run the application, and you will see the following:
 
 This example demonstrates the versatility and power of CEF applications. One of their key strengths is the ability to modify the rendered content dynamically. This means you can change what's displayed in the application, like updating the HTML or CSS, without having to rebuild the entire application each time. This feature significantly streamlines the development process, making it quicker and more efficient.
 
-Let's leverage this capability to enhance our application. We'll focus on styling the application by updating the HTML and CSS, providing a more engaging and visually appealing user interface. This step will show how easily you can improve the look and feel of your CEF application with just a few modifications to the web content.
+Let's leverage this capability to enhance our application. You will focus on styling the application by updating the HTML and CSS, providing a more engaging and visually appealing user interface. This step will show how easily you can improve the look and feel of your CEF application with just a few modifications to the web content.
 
-### Styling the application
-You will now add styles.css file to modify the appearance of the application:
-1. In the c:\web\ create a new file styles.css:
+### Style the application
+Add `styles.css` file to modify the appearance of the application:
+1. In the `C:\web\` folder create a new file `styles.css` with the content below:
 
 ```CSS
 body {
@@ -281,7 +282,7 @@ button:hover {
 }
 ```
 
-2. Reference styles.css in the index.html:
+2. Modify `index.html` to reference `styles.css` as shown:
 
 ```HTML
 <!DOCTYPE html>
@@ -298,4 +299,4 @@ After re-running the application you will see the following:
 ![fig4](Figures/04.png)
 
 ## Summary
-We learned that CEF is a powerful tool for integrating web browser functionalities into desktop applications, utilizing modern web technologies. We also covered the setup process, including downloading CEF builds, creating basic applications, and using CMake for CEF projects. Additionally, we explored more advanced features like fetching and displaying data from JSONPlaceholder, adding and styling HTML elements like tables and buttons through separate CSS files.
+CEF is a powerful tool for integrating web browser functionalities into desktop applications, utilizing modern web technologies. You have learnt how to setup a project, create a basic application, and using CMake for CEF projects. Additionally, you explored more advanced features like fetching and displaying data from JSONPlaceholder, adding and styling HTML elements like tables and buttons through separate CSS files all on your Windows on Arm machine.
