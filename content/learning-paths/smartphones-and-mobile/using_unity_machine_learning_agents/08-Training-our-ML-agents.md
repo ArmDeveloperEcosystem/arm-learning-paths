@@ -97,10 +97,16 @@ _Note 2._ In Windows you may need to enable [LongPath support](https://pip.pypa.
 
     If activated successfully, your prompt will be prefixed by "(mlagents-r18-env)"
 
-1. Check your active python version:
+1. Check your active python version is the one you installed:
 
     ```
     python --version
+    ```
+
+    If you installed 3.7.9, it should show:
+
+    ```
+    Python 3.7.9
     ```
 
 1. Install PyTorch:

@@ -30,11 +30,7 @@ We will assume you still have the project open. From here onwards, you can ignor
 
     The ML-NPC object is our AI enemy character.
 
-1. Right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of our player character at ground level.
-
-1. If you click on the arrow next to the object called UI, you will see several canvas objects. In Unity we use canvas objects to display the various parts of the user interface from the main menu (GamePlay_Canvas) to the touchscreen controls for mobile (MobileUI_Canvas).
-
-1. The scene should now look something like figure 2:
+1. To get a better look of the scene from the player's perspective, right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of our player character at ground level. You will see the inside of the arena and the enemy character off in the distance.
 
     ![Align View to ML-Player](images/ml-player-aligned-view.png "Figure 2. Align View to ML-Player")
 

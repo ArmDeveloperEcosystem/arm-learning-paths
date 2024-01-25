@@ -13,6 +13,10 @@ In this learning path, we showed how ML Agents run well on Arm devices and give 
 * Implement game AI using machine learning
 * Train machine learning agents to provide varying skill levels
 
+## Next steps
+
+In later learning paths we will take a look at deploying to an Arm-based Android device and how to use the Unity Profiler tool to analyse performance.
+
 ## Things to try
 
 If you would like to take this learning path further, why not try the following:
