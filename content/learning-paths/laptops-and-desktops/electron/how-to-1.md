@@ -1,5 +1,5 @@
 ---
-title: "Setting up the project"
+title: "Create the application using the electron framework"
 
 weight: 2
 
@@ -9,21 +9,21 @@ layout: "learningpathall"
 ## Introduction
 Electron is an open-source framework to develop cross-platform desktop applications using web technologies such as HTML, CSS, and JavaScript. Developed and maintained by GitHub, Electron provides a seamless way to build native-like applications for Windows, macOS, and Linux, all from a single codebase. This capability has made Electron a popular choice to develop cross-platform desktop applications.
 
-In this learning path you will learn how to create a Desktop application for Windows on Arm64. The application will implement a common functionality of fetching and displaying the data from the REST API. As an API you will use JSONPlaceholder. 
+In this learning path you will learn how to create a Desktop application for Windows on Arm64. The application will implement a common functionality of fetching and displaying the data from the REST API. You will use `JSONPlaceholder` as the API.
 
-JSONPlaceholder is a free online REST API service that serves as a mock server for testing and prototyping web applications. Created and maintained by Typicode, JSONPlaceholder provides a set of HTTP endpoints that mimic the behavior of a typical backend server, allowing developers to simulate interactions with a RESTful API without the need for a real backend. 
+`JSONPlaceholder` is a free online REST API service that serves as a mock server for testing and prototyping web applications. Created and maintained by Typicode, `JSONPlaceholder` provides a set of HTTP endpoints that mimic the behavior of a typical backend server, allowing developers to simulate interactions with a RESTful API without the need for a real backend. 
 
-Here, we will use the posts endpoint of the JSONPlaceholder. This endpoint enables you to retrieve the list of hypothetical posts.
+Here, you will use the posts endpoint of the JSONPlaceholder. This endpoint enables you to retrieve the list of hypothetical posts.
 
-You can find the companion code [here](https://github.com/dawidborycki/electron-sample-app.git)
+You can find the the complete code used in the learning path [here](https://github.com/dawidborycki/electron-sample-app.git)
 
 ## Before you begin
-Before you begin make sure to install Node.JS for ARM64. You can find the installer [here](https://nodejs.org/en/download). At the time of this writing we used the version 20.10.0. The installation process is automatic. However, make sure to automatically install the build tools for NPM packages by checking the "Automatically install the necessary tools" checkbox:
+Before you begin make sure to install Node.JS for Arm64. You can find the installer [here](https://nodejs.org/en/download). In this learning path, you will use version 20.10.0. The installation process is automatic. However, make sure to automatically install the build tools for NPM packages by checking the "Automatically install the necessary tools" checkbox:
 
 ![fig1](Figures/01.png)
 
 ## Initialize the project
-We start by initializing the project. To do so, open the command prompt or terminal and type the following commands:
+Start by initializing the project. To do so, open the command prompt or terminal and type the following commands:
 
 ```console
 mkdir electron-sample-app
@@ -31,7 +31,7 @@ cd electron-sample-app
 npm init -y
 ```
 
-The output will be similar to the following one
+The output will be similar to:
 
 ```output
 Wrote to C:\Users\db\electron-sample-app\package.json:
@@ -50,7 +50,7 @@ Wrote to C:\Users\db\electron-sample-app\package.json:
 }
 ```
 
-In the next step we install the dependencies: Electron framework, axios for making API requests, and jQuery for DOM manipulation:
+Next, install the dependencies: Electron framework, axios for making API requests, and jQuery for DOM manipulation:
 
 ```console
 npm install electron axios jquery --save
@@ -73,7 +73,7 @@ npm notice
 ```
 
 ## View
-You will now create the index.html file, which will act as the application view. Inside the project folder (here that is electron-sample-app) create a new file, index.html. Then, modify the file as follows:
+You will now create the `index.html` file, which will act as the application view. Inside the `electron-sample-app` project folder create a new file, `index.html` with the contents below:
 
 ```html
 <!DOCTYPE html>
@@ -99,12 +99,12 @@ You will now create the index.html file, which will act as the application view.
 </html>
 ```
 
-The above view will render the table comprised of three columns. Each column will display the ID, Title and Body parts of the post, which we retrieve from the rest API.
+This coe will render the table comprised of three columns. Each column will display the ID, Title and Body parts of the post, which you will retrieve from the rest API.
 
 ## Logic
 You will now implement the logic, responsible for creating the application window and retrieving a collection of posts from the posts API of the [jsonplaceholder](https://jsonplaceholder.typicode.com/posts).
 
-Under the project folder create a new file, main.js:
+Under the `electron-sample-app` project folder create a new file, `main.js` with the contents below:
 
 ```JavaScript
 const { app, BrowserWindow } = require('electron');
@@ -141,7 +141,7 @@ app.on('activate', () => {
 });
 ```
 
-In the same directory, create a renderer.js file:
+In the same directory, create a file named `renderer.js` with the contents below:
 
 ```JavaScript
 const axios = require('axios');
@@ -179,10 +179,10 @@ $('#fetch-button').click(() => {
 });
 ```
 
-The above file will send the request to the API to retrieve the list of posts. Then, this list will be rendered in the view.
+This file sends the request to the API to retrieve the list of posts. Then, this list will be rendered in the view.
 
 ## Package.json
-Finally, update the package.json as follows:
+Finally, update the `package.json` in your project folder with the code shown below:
 
 ```JSON
 {
@@ -203,14 +203,14 @@ Finally, update the package.json as follows:
 }
 ```
 
-The above declaration does several things:
-1. Sets the application entry point to main.js.
+This code does the following:
+1. Sets the application entry point to `main.js`.
 2. Adds a start script, which will invoke the **electron .** command to launch the electron app in a current directory.
 3. Specifies the license and dependencies.
 4. Configures the application name, description, and author.
 
-## Running the application
-To launch the application type the following command
+## Run the application
+To launch the application type the following command:
 
 ```console
 npm start
@@ -222,7 +222,7 @@ The application window appears. Then click the Fetch data button, and you will s
 
 ## Styling an application
 The application works fine. However, it uses default styles and does not look very pretty. To change this you can use cascade style sheets (CSS) as in web applications. To style the application proceed as follows:
-1. In the application project folder, add styles.css file:
+1. In the application project folder, create a file named `styles.css` with the contents below:
 ```css
 body {
     font-family: Arial, sans-serif;
@@ -270,7 +270,7 @@ body {
   }
 ```
 
-2. Reference the styles.css file in the index.html:
+2. Update your `index.html` file to use `styles.css` as shown below:
 
 ```html
 <!DOCTYPE html>
@@ -304,7 +304,7 @@ After the application launches, click the **Fetch data** button, and you will se
 ![fig3](Figures/03.png)
 
 ## Checkpoint
-You now have the application up and running. By default it runs using the Arm64 architecture because we used Node.js for Arm64. To confirm this, open the Task Manager, click the Details tab and look for **electron.exe** processes:
+You now have the application up and running. By default, it runs using the Arm64 architecture because we used Node.js for Arm64. To confirm this, open the Task Manager, click the Details tab and look for **electron.exe** processes:
 
 ![fig4](Figures/04.png)
 
