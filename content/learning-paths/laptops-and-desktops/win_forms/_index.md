@@ -1,5 +1,5 @@
 ---
-title: Developing desktop applications with Windows Forms on Windows on Arm
+title: Develop desktop applications with Windows Forms on Windows on Arm
 
 minutes_to_complete: 30
 
@@ -7,8 +7,7 @@ who_is_this_for: This learning path is for developers who want to learn how to c
 
 learning_objectives:
     - Create and build Windows Forms application
-    - Measure code execution performance
-    - Demonstrate advantages of Arm64
+    - Measure code execution performance on Arm64
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
