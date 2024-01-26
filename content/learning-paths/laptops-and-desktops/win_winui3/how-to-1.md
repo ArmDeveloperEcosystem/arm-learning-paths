@@ -13,30 +13,26 @@ WinUI 3 incorporates Microsoft's Fluent Design System, which emphasizes intuitiv
 
 It supports the development of both Desktop and UWP (Universal Windows Platform) applications, enabling developers to create versatile apps that can run across a wide range of Windows devices, from IoT devices to PCs. Built with performance and reliability in mind, WinUI 3 apps are optimized for smooth and efficient operation, ensuring a responsive user experience.
 
-WinUI 3 offers backward compatibility with existing UWP and Windows Forms applications, allowing developers to gradually migrate and modernize their applications. Additionally, WinUI 3 is extensible, supporting custom controls and third-party libraries.
+WinUI 3 is an open-source project, offers backward compatibility with existing UWP and Windows Forms applications, allowing developers to gradually migrate and modernize their applications. Additionally, WinUI 3 is extensible, supporting custom controls and third-party libraries.
 
-Windows UI Library 3 is an open-source project, encouraging community contributions and feedback. This approach ensures continuous improvement and alignment with the needs of developers and users. 
+In this learning path you will implement a Win UI 3 application, which will perform square matrix multiplication. The idea is to reproduce the same functionality used in [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). You will also be able to measure performance improvements on Arm64 architecture.
 
-Finally, WinUI 3 is suitable for a broad range of applications, from enterprise software to interactive media. It stands as a testament to Microsoft's commitment to providing robust, forward-looking tools for Windows application development.
-
-In this learning path you will implement the Win UI 3 application, which will perform square matrix multiplication. The idea is to reproduce the same functionality as we used in [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). Similarly, as before, we will demonstrate performance improvements of Arm64 architecture.
-
-You can find the companion code [here](https://github.com/dawidborycki/Arm64.WinUIApp.git).
+You can find the complete code used in this learning path [here](https://github.com/dawidborycki/Arm64.WinUIApp.git).
 
 ## Before you begin
-Before you begin the implementation, it is essential to install Visual Studio 2022 with the following workloads:
+Before you begin the implementation, you will need to install Visual Studio 2022 with the following workloads:
 1. .NET desktop development
 2. Universal Windows Platform development
 3. After selecting these workloads, expand the .NET desktop development group under the Installation details and ensure that the 'Windows App SDK C# Templates' option is selected.
 
 ![fig1](Figures/01.png)
 
-Then, click the 'Individual components' tab and check the '.NET 6.0 Runtime (Long Term Support)'.
+Then, click the 'Individual components' tab and check '.NET 6.0 Runtime (Long Term Support)'.
 
 ![fig2](Figures/02.png)
 
 ## Create the project
-To start creating your project, open Visual Studio and click 'Create a new project'.
+Open Visual Studio and click 'Create a new project'.
 
 ![fig3](Figures/03.png)
 
@@ -58,7 +54,7 @@ Your project should now be ready. Next, you will design the view using XAML decl
 ## User Interface
 First, you will create four anonymous styles. These styles will control the margins, font size, and font weights of texts displayed in the following controls: TextBlock, NumberBox, Button, and ListBox.
 
-In a WinUI 3 application, you define the styles in the App.xaml file. So, open this file and modify it as shown in the following code snippet:
+In a WinUI 3 application, you define the styles in the `App.xaml` file. Open this file and modify it as shown in the following code snippet:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -113,16 +109,16 @@ In a WinUI 3 application, you define the styles in the App.xaml file. So, open t
 </Application>
 ```
 
-There are four style declarations, which differ by the 'TargetType' attribute. This attribute indicates the controls to which the style will be applied. For the TextBlock controls, which represent labels, we modify three properties:
-* Margin: We use a uniform margin of 10, meaning that the control will have the same margin on all four sides (left, top, right, bottom).
-* FontSize: We change the font size to 16.
-* FontWeight: We set the fonts displayed in the TextBlock to be semi-bold.
+There are four style declarations, which differ by the 'TargetType' attribute. This attribute indicates the controls to which the style will be applied. For the TextBlock controls, which represent labels, modify three properties:
+* Margin: You will use a uniform margin of 10, meaning that the control will have the same margin on all four sides (left, top, right, bottom).
+* FontSize: Change the font size to 16.
+* FontWeight: Set the fonts displayed in the TextBlock to be semi-bold.
 
 Next, you will declare the following user interface:
 
 ![fig6](Figures/06.png)
 
-This view uses a tabular layout, comprising five rows and two columns. To create such a layout using XAML, you can use the Grid control. Go ahead and open the MainWindow.xaml file and modify it as follows:
+This view uses a tabular layout, comprising five rows and two columns. To create such a layout using XAML, you can use the Grid control. Open the `MainWindow.xaml` file and modify it as follows:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -200,7 +196,7 @@ This view uses a tabular layout, comprising five rows and two columns. To create
 </Window>
 ```
 
-The declaration above is quite lengthy, so let's break it down. First, we configure the Grid's appearance:
+The declaration above is quite lengthy, so let's break it down. First, you configure the Grid's appearance:
 
 ```XML
 <Grid.ColumnDefinitions>
@@ -217,9 +213,9 @@ The declaration above is quite lengthy, so let's break it down. First, we config
 </Grid.RowDefinitions>
 ```
 
-These declarations will create a Grid composed of two columns, each spanning half of the available window's width. Then, we create five rows. The height of the first four rows will be adjusted automatically based on the height of the controls placed in those rows. The last row will occupy the remaining space in the window.
+These declarations will create a Grid composed of two columns, each spanning half of the available window's width. Then, you create five rows. The height of the first four rows will be adjusted automatically based on the height of the controls placed in those rows. The last row will occupy the remaining space in the window.
 
-In the first row of the Grid, we put two TextBlock controls:
+In the first row of the Grid, put two TextBlock controls:
 
 ```XML
 <TextBlock Text="Processor architecture" />
@@ -229,7 +225,7 @@ In the first row of the Grid, we put two TextBlock controls:
 
 The first control will display the fixed text 'Processor architecture'. The second one will be programmatically modified to display the architecture of the processor, for example, AMD64 or ARM64.
 
-The next two controls:
+The next two controls define a fixed label ('Matrix size') and a NumberBox. The NumberBox is configured to allow the user to select a matrix size between 100-500 in steps of 100, with a default value of 100.:
 
 ```XML
 <TextBlock Grid.Row="1"
@@ -246,9 +242,7 @@ The next two controls:
            SpinButtonPlacementMode="Inline" />
 ```
 
-define a fixed label ('Matrix size') and a NumberBox. The NumberBox is configured to allow the user to select a matrix size between 100-500 in steps of 100, with a default value of 100.
-
-Subsequently, we have the following declarations:
+Subsequently, you have the following declarations:
 
 ```XML
 <TextBlock Grid.Row="2"
@@ -265,7 +259,7 @@ Subsequently, we have the following declarations:
            SpinButtonPlacementMode="Inline" />
 ```
 
-Again, the first control is used to display the fixed string 'Execution count'. The second one allows the user to specify the number of executions for the matrix multiplications. Here, we enable the user to select an execution count between 10-100 in steps of 10.
+The first control is used to display the fixed string 'Execution count'. The second one allows the user to specify the number of executions for the matrix multiplications. Here, you enable the user to select an execution count between 10-100 in steps of 10.
 
 Finally, the view declares two buttons and one ListBox:
 
@@ -290,13 +284,13 @@ Finally, the view declares two buttons and one ListBox:
 * The second button will clear the ListBox.
 * The ListBox will display the time it takes to perform matrix multiplication.
 
-## Logic
+## Application Logic
 In this section, you will implement the application's logic. First, create two helper classes:
 
 1. **MatrixHelper**: This class implements matrix multiplication following the mathematical formula detailed on [Wikipedia](https://en.wikipedia.org/wiki/Matrix_multiplication).
 2. **PerformanceHelper**: This class provides functionality to measure code execution time.
 
-They will serve the same purpose as in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms),  so their detailed description is omitted here.
+They will serve the same purpose as in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms).
 
 Next, you will implement event handlers for the two buttons and additional code to programmatically control the window's appearance.
 
