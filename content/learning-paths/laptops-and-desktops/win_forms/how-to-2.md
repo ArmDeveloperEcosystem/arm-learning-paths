@@ -1,5 +1,5 @@
 ---
-title: "Comparing the performance on various platforms"
+title: "Compare the performance results"
 
 weight: 3
 
@@ -32,21 +32,15 @@ Once the application has started, run calculations for the following matrix size
 
 ![fig12](Figures/12.png)
 
-Afterwards, launch the application for the Arm64 platform. Run the matrix multiplication for the same matrix sizes as above and observe the computation times:
+Next, launch the application for the Arm64 platform. Run the matrix multiplication for the same matrix sizes as above and observe the computation times:
 
 ![fig13](Figures/13.png)
 
 By comparing the execution times, we observe that, on average, Arm64 provides almost a 30% performance improvement over x64.
 
 ## Summary
-In this learning path, we focused on developing and optimizing a desktop application using Windows Forms in .NET on Arm64, particularly for matrix multiplication operations. 
+In this learning path, you learnt how to develop and optimize a desktop application using Windows Forms in .NET on Arm64, particularly for matrix multiplication operations. 
 
-We began by understanding the basics of Windows Forms, a GUI class library in .NET, and its role in developing desktop applications. Then, we discussed the steps to create a new Windows Forms project in Visual Studio, including setting up the project environment and selecting the appropriate .NET Framework version.
+You started with an overview of Windows Forms, a GUI class library in .NET, and its role in developing desktop applications. Then, you created a new Windows Forms project in Visual Studio, including setting up the project environment and selecting the appropriate .NET Framework version. You created both the user interface for this application and implemented the application logic.
 
-Afterwards, we created the user interface of the application. This involved using the Visual Studio Toolbox to add and configure various controls like labels, NumericUpDown controls, buttons, and a ListBox.
-
-Subsequently, we implemented application logic. This included creating and modifying specific classes and methods, such as `MatrixHelper` for matrix operations and `PerformanceHelper` for measuring execution performance. Detailed steps were given on setting up an event handler for the application's Start button, which was crucial for triggering matrix multiplication computations.
-
-The application was configured and run in different modes (x64 and Arm64) to compare the performance in matrix multiplication tasks. This comparison was essential to understand the efficiency and speed of execution in different architectural settings. It was noted that the Arm64 platform showed a significant improvement in computation times compared to the x64 platform, highlighting the effectiveness of the application's design and optimization.
-
-In summary, this learning path provided a comprehensive guide on developing a Windows Forms application, from its initial setup and UI design to implementing logic, handling events, and analyzing performance across different system architectures.
+The application was configured and run in different modes (x64 and Arm64) to compare the performance in matrix multiplication tasks. This comparison is essential to understand the efficiency and speed of execution in different architectural settings. Arm64 platform showed a significant improvement in computation times compared to the x64 platform, highlighting the effectiveness of the application's design and optimization.
