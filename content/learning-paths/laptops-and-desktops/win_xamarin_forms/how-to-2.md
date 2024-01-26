@@ -1,5 +1,5 @@
 ---
-title: "Implementing logic with Model View ViewModel"
+title: "Implement logic with Model View ViewModel"
 
 weight: 3
 
@@ -10,14 +10,14 @@ layout: "learningpathall"
 In this section, you will learn how to use Model View ViewModel (MVVM) architectural pattern.
 
 ## Model
-Begin by creating a model class named DataPoint2d, which will represent XY points on a plot. Follow these steps to create the model:
+Begin by creating a model class named `DataPoint2d`, which will represent XY points on a plot. Follow these steps to create the model:
 
 1. Open the Solution Explorer in Visual Studio.
-2. Right-click on the Arm64.MobileApp.XamarinForms project and choose Add -> New Folder from the context menu.
+2. Right-click on the `Arm64.MobileApp.XamarinForms` project and choose Add -> New Folder from the context menu.
 3. Name the new folder 'Models'.
 4. Right-click on the 'Models' folder and select Add -> Class. In the dialog that appears, enter 'DataPoint2d.cs' as the file name and click the Add button.
 
-Next, modify the newly created DataPoint2d.cs file with the following code:
+Next, modify the newly created `DataPoint2d.cs` file with the following code:
 
 ```CS 
 namespace Arm64.MobileApp.XamarinForms.Models
@@ -34,7 +34,7 @@ namespace Arm64.MobileApp.XamarinForms.Models
 ## View model
 In this section you will implement view models for the application. Begin by implementing the BaseViewModel, which will contain the re-usable common functionality for other view models. To implement the BaseViewModel you proceed as follows:
 1. Open the Solution Explorer in Visual Studio.
-2. Right-click on the Arm64.MobileApp.XamarinForms project and choose Add -> New Folder from the context menu.
+2. Right-click on the `Arm64.MobileApp.XamarinForms` project and choose Add -> New Folder from the context menu.
 3. Name the new folder 'ViewModels'.
 4. Right-click on the 'ViewModels' folder and select Add -> Class. In the dialog that appears, enter 'BaseViewModel.cs' as the file name and click the Add button.
 
@@ -67,11 +67,11 @@ namespace Arm64.MobileApp.XamarinForms.ViewModels
 }
 ```
 
-The BaseViewModel class uses the INotifyPropertyChanged interface for data binding, enabling associated views to be notified of changes in underlying properties. This ensures the views can update the content displayed to the user.
+The `BaseViewModel` class uses the INotifyPropertyChanged interface for data binding, enabling associated views to be notified of changes in underlying properties. This ensures the views can update the content displayed to the user.
 
-To implement the INotifyPropertyChanged interface, the class must define the PropertyChanged event. Views associated with view models automatically subscribe to this event to update their controls accordingly.
+To implement the `INotifyPropertyChanged` interface, the class must define the PropertyChanged event. Views associated with view models automatically subscribe to this event to update their controls accordingly.
 
-Additionally, we've implemented two protected methods accessible in derived classes:
+Additionally, you have implemented two protected methods accessible in derived classes:
 * OnPropertyChanged: This method raises the PropertyChanged event, informing the view which property of the view model has changed.
 * SetProperty: A helper method that updates the property value and then invokes OnPropertyChanged to propagate property changes to the view.
 
@@ -80,7 +80,7 @@ The next step involves implementing commands, which act as event handlers for co
 * CanExecute: A method that specifies whether the command can be invoked, often used to ensure the application state or user input is valid for command execution.
 * CanExecuteChanged: An event raised whenever the state affecting CanExecute changes.
 
-Below is a simple implementation of the ICommand interface in a new file, SimpleCommand.cs, saved under the ViewModels folder:
+Below is a simple implementation of the ICommand interface in a new file, `SimpleCommand.cs`, saved under the ViewModels folder:
 
 ```CS
 using System;
@@ -117,7 +117,7 @@ namespace Arm64.MobileApp.XamarinForms.ViewModels
 
 The SimpleCommand class includes the CanExecuteChanged event and implements the CanExecute and Execute methods from the ICommand interface. The Execute method first calls CanExecute. If it returns true, Execute invokes a method encapsulated in the action field of the SimpleCommand class. The action field, which implements the actual command logic, is set in the class constructor.
 
-To illustrate this in practice, we implement the actual view model. Under the ViewModels folder, create a new file, MainViewModel.cs, and implement it as follows:
+To illustrate this in practice, we implement the actual view model. Under the ViewModels folder, create a new file, `MainViewModel.cs`, and implement it as follows:
 
 ```CS
 using Arm64.MobileApp.XamarinForms.Helpers;
@@ -209,18 +209,18 @@ namespace Arm64.MobileApp.XamarinForms.ViewModels
 }
 ```
 
-In MainViewModel, which derives from BaseViewModel, we have created a private field computationTime and its associated property ComputationTime. Notice how SetProperty from BaseViewModel is used to raise the PropertyChanged event, notifying the view of changes in the ComputationTime property.
+In MainViewModel, which derives from BaseViewModel, you have created a private field computationTime and its associated property ComputationTime. Notice how SetProperty from BaseViewModel is used to raise the PropertyChanged event, notifying the view of changes in the ComputationTime property.
 
 This approach eliminates the need to manually rewrite values from the ComputationTime property to a specific property of a visual control (e.g., Label.Text). Instead, data binding is used, allowing the view to automatically receive notifications about source property changes. The ComputationTime in the view model is set using a command (RunCalculationsCommand), thereby decoupling the logic from the view without any explicit view references.
 
-RunCalculationsCommand is created using the constructor of the SimpleCommand class, defining the action inline. The action involves calling PerformanceHelper.MeasurePerformance to measure the execution time of ten invocations of the MatrixHelper.SquareMatrixMultiplication method. The computation time is stored in a local variable and formatted into a string displaying the processor architecture (obtained using the PROCESSOR_ARCHITECTURE environment variable) and the computation time with a “ms” suffix. This string is then assigned to the ComputationTime property of the MainViewModel.
+`RunCalculationsCommand` is created using the constructor of the `SimpleCommand class`, defining the action inline. The action involves calling `PerformanceHelper.MeasurePerformance` to measure the execution time of ten invocations of the `MatrixHelper.SquareMatrixMultiplication` method. The computation time is stored in a local variable and formatted into a string displaying the processor architecture (obtained using the PROCESSOR_ARCHITECTURE environment variable) and the computation time with a “ms” suffix. This string is then assigned to the ComputationTime property of the MainViewModel.
 
 Additionally, RunCalculationsCommand stores the computation time in the computationTimeHistory field, a list of DataPoint2d instances. Each instance represents an XY point, with X being the sequential number of the computation and Y being the computation time.
 
-To plot the computation times, PlotResultsCommand is used. This command does not involve any direct chart-related logic; instead, it transfers each element from computationTimeHistory to the DataPoints property, an ObservableCollection. As ObservableCollection implements INotifyPropertyChanged, it automatically notifies when items are added, updated, or removed, making it unnecessary to use BaseViewModel.SetProperty in this context.
+To plot the computation times, PlotResultsCommand is used. This command does not involve any direct chart-related logic; instead, it transfers each element from `computationTimeHistory` to the DataPoints property, an `ObservableCollection`. As `ObservableCollection` implements `INotifyPropertyChanged`, it automatically notifies when items are added, updated, or removed, making it unnecessary to use BaseViewModel.SetProperty in this context.
 
 ## Attaching the ViewModel to the View
-In the final step, we need to connect the MainViewModel to the MainPage view. To do this, open MainPage.xaml and add the following declarations
+In the final step, you need to connect the MainViewModel to the MainPage view. To do this, open `MainPage.xaml` and add the following declarations
 
 ```XML
 <?xml version="1.0" encoding="utf-8" ?>
@@ -289,8 +289,8 @@ Finally, modify the chart declarations so that the values displayed in the chart
 
 With these modifications, the MainPage view will be fully connected to MainViewModel, enabling dynamic updates through data binding.
 
-## Testing the application
-We can now run the application to demonstrate the performance differences between Arm64 and x64 architectures. First, we need to configure the application for both Arm64 and x64 platforms in Visual Studio. To do this, follow these steps:
+## Test the application
+You can now run the application to demonstrate the performance differences between Arm64 and x64 architectures. First, you need to configure the application for both Arm64 and x64 platforms in Visual Studio. To do this, follow these steps:
 
 1. Click on the platform dropdown in Visual Studio and select 'Configuration Manager...'.
 
@@ -323,6 +323,4 @@ You should notice shorter computation times on the ARM64 platform, demonstrating
 ![fig13](Figures/13.png)
 
 ## Summary
-In this learning path, we demonstrated the performance differences between Arm64 and x64 architectures within a Xamarin.Forms application. We developed an application using Xamarin.Forms, allowing it to run on multiple platforms while sharing the same codebase. The application included functionality to measure and compare computation times, specifically focusing on matrix multiplication performance. We configured the application to run on both Arm64 and x64 platforms, demonstrating the process of setting up multiple architectures in Visual Studio. By running the application on both x64 and Arm64 platforms, we were able to observe and compare the performance. The results showed a noticeable performance advantage on the Arm64 architecture, highlighting its efficiency in handling computation-intensive tasks.
-
-This project not only showcased the steps to configure and test an application on different architectures but also provided insights into the practical performance implications of these architectures in a real-world application scenario.
+In this learning path, you developed an application using Xamarin.Forms, allowing it to run on multiple platforms while sharing the same codebase. The application included functionality to measure and compare computation times, specifically focusing on matrix multiplication performance. By running the application on both x64 and Arm64 platforms, you were able to observe and compare the performance. The results showed a noticeable performance advantage on the Arm64 architecture, highlighting its efficiency in handling computation-intensive tasks.
