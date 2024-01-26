@@ -1,5 +1,5 @@
 ---
-title: "Creating a project"
+title: "Create an application using Windows Forms"
 
 weight: 2
 
@@ -11,9 +11,9 @@ Windows Forms, often referred to as WinForms, is a graphical (GUI) class library
 
 In addition to being a part of the Microsoft .NET Framework, Windows Forms (WinForms) is also available in .NET, which is the open-source, cross-platform successor to the .NET Framework. This inclusion ensures that developers can utilize WinForms not only in the traditional .NET Framework environment but also in the modern, more flexible .NET ecosystem. This availability broadens the scope for building desktop applications for Windows, allowing developers to leverage the rich GUI capabilities of WinForms along with the advanced features and improvements found in the .NET platform.
 
-In this learning path, we will learn how to use WinForms to create a desktop application. The application will perform computation-intensive operations, such as matrix multiplication. Then, we will explore how Windows on Arm can be used to accelerate the application by comparing the computation time with that on x64 systems.
+In this learning path, you will learn how to use WinForms to create a desktop application. The application will perform computation-intensive operations, such as matrix multiplication. Then, you will explore how Windows on Arm can be used to accelerate the application by comparing the computation time with that on x64 systems.
 
-You can find the companion code in [this repository](https://github.com/dawidborycki/Arm64.DesktopApp.WindowsForms.git).
+You can find the complete code used in this learning path in [this repository](https://github.com/dawidborycki/Arm64.DesktopApp.WindowsForms.git).
 ## Before you begin
 Before you begin make sure to install Visual Studio 2022 with .NET Desktop Development workload.
 
@@ -82,8 +82,8 @@ You will now implement the application logic.
 1. Start by opening the Solution Explorer (click View > Solution Explorer). 
 2. In Solution Explorer window, right-click Arm64.DesktopApp.WindowsForms, and select Add -> New Folder from the context menu. 
 3. Rename the new folder to Helpers.
-4. Right-click the Helpers folder, and select Add -> Class. This will open Add New Item window. Type MatrixHelper.cs in the Name text box and then click the **Add** button.. 
-5. A file named MatrixHelper.cs will be added to the solution. Modify this file as follows:
+4. Right-click the Helpers folder, and select Add -> Class. This will open Add New Item window. Type `MatrixHelper.cs` in the Name text box and then click the **Add** button.
+5. A file named `MatrixHelper.cs` will be added to the solution. Modify this file as follows:
 
 ```cs
 namespace Arm64.DesktopApp.WindowsForms.Helpers
@@ -150,7 +150,7 @@ namespace Arm64.DesktopApp.WindowsForms.Helpers
 }
 ```
 
-6. Similarly, under the 'Helpers' folder, create a file named PerformanceHelper.cs:
+6. Similarly, under the 'Helpers' folder, create a file named `PerformanceHelper.cs`:
 
 ```cs
 using System.Diagnostics;
@@ -178,9 +178,9 @@ namespace Arm64.DesktopApp.WindowsForms.Helpers
 }
 ```
 
-The above code implements two classes: MatrixHelper and PerformanceHelper. The MatrixHelper class implements two private methods: MatrixMultiplication and GenerateRandomMatrix. The MatrixMultiplication method takes two square matrices as input and calculates their product using the mathematical formula explained [here](https://en.wikipedia.org/wiki/Matrix_multiplication). We use three 'for' loops, and the result of the matrix multiplication is stored in the variable result, which is returned by the MatrixMultiplication method. The GenerateRandomMatrix method is used to generate a square matrix with elements pseudo-randomly generated using the NextDouble method of the Random class. Finally, the MatrixHelper class also implements the SquareMatrixMultiplication method, which generates two matrices of a given size and then calculates their product.
+The above code implements two classes: `MatrixHelper` and `PerformanceHelper`. The `MatrixHelper` class implements two private methods: `MatrixMultiplication` and `GenerateRandomMatrix`. The `MatrixMultiplication` method takes two square matrices as input and calculates their product using the mathematical formula explained [here](https://en.wikipedia.org/wiki/Matrix_multiplication). Three 'for' loops are used, and the result of the matrix multiplication is stored in the variable result, which is returned by the `MatrixMultiplication` method. The `GenerateRandomMatrix` method is used to generate a square matrix with elements pseudo-randomly generated using the `NextDouble` method of the Random class. Finally, the `MatrixHelper` class also implements the `SquareMatrixMultiplication` method, which generates two matrices of a given size and then calculates their product.
 
-The PerformanceHelper class has one method, MeasurePerformance. This method works by invoking a function using the Action delegate, passed as the first parameter of the MeasurePerformance method. The function will be invoked several times (as specified by the second parameter, executionCount). After that, the MeasurePerformance method returns the time taken to execute the specific code. To measure the execution time, we use the System.Diagnostics.Stopwatch class. Specifically, an instance of this class has two useful methods: Restart and Stop. Restart resets and starts the stopwatch, while Stop halts the stopwatch, allowing us to read the time elapsed since the last restart.
+The `PerformanceHelper` class has one method, MeasurePerformance. This method works by invoking a function using the Action delegate, passed as the first parameter of the MeasurePerformance method. The function is invoked several times (as specified by the second parameter, executionCount). After that, the MeasurePerformance method returns the time taken to execute the specific code. To measure the execution time, you will use the System.Diagnostics.Stopwatch class. Specifically, an instance of this class has two useful methods: Restart and Stop. Restart resets and starts the stopwatch, while Stop halts the stopwatch, allowing us to read the time elapsed since the last restart.
 
 You will now use the previously implemented classes to create the event handler for the button. Proceed as follows:
 1. Open 'Form1.cs' in Visual Studio, and then double-click the Start button. Visual Studio will automatically generate the buttonStart_Click method, which you will need to modify as follows:
@@ -213,13 +213,13 @@ public Form1()
 }
 ```
 
-The above changes will do the following: First, when the application starts, the first label will display the processor architecture. To obtain the processor architecture, we use the PROCESSOR_ARCHITECTURE environment variable, which is set by the .NET runtime. Then, we update the caption of the window to 'ARM'.
+The above changes will do the following: First, when the application starts, the first label will display the processor architecture. To obtain the processor architecture, use the PROCESSOR_ARCHITECTURE environment variable, which is set by the .NET runtime. Then, update the caption of the window to 'ARM'.
 
-When the application is running and the user clicks the Start button, the application will read the values from the NumericUpDown controls. These values will be used to set the matrix size and the execution count. Given these values, the application will invoke the MeasurePerformance static method of the PerformanceHelper class to measure the time needed to perform matrix multiplication for the given matrix size and execution time. The computation time will then be added to the list box.
+When the application is running and the user clicks the Start button, the application will read the values from the `NumericUpDown` controls. These values will be used to set the matrix size and the execution count. Given these values, the application will invoke the MeasurePerformance static method of the PerformanceHelper class to measure the time needed to perform matrix multiplication for the given matrix size and execution time. The computation time will then be added to the list box.
 
-## Running the application
+## Run the application
 The application is now ready to run. To do so, click 'Debug' > 'Start Debugging'. Visual Studio will build and launch the application. Afterward, click 'Start'. Then, change the matrix size to 200 and click the 'Start' button again. Repeat this process for matrix sizes of 300, 400, and 500. The results should appear as shown in the following figure:
 
 ![fig7](Figures/07.png)
 
-By default, the application uses the Arm64 configuration. For each matrix size, you will observe the computation time. In the next step, we will learn how to change the build configuration to x64. This will allow us to compare the aforementioned results with those obtained using x64.
+By default, the application uses the Arm64 configuration. For each matrix size, you will observe the computation time. In the next step, you will learn how to change the build configuration to x64. This will allow you to compare the results with those obtained using x64.
