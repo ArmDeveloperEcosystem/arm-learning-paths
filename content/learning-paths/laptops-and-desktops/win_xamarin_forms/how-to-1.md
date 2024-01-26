@@ -1,5 +1,5 @@
 ---
-title: "Creating a project"
+title: "Create an application using Xamarin Forms"
 
 weight: 2
 
@@ -7,19 +7,19 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-Xamarin Forms is a cross-platform UI toolkit that allows developers to create native user interfaces for iOS, Android, and Windows apps using a single, shared codebase. Developed by Xamarin, a Microsoft-owned company, Xamarin Forms extends the .NET platform with tools and libraries specifically for building mobile apps. It enables developers to use C# for cross-platform development, sharing code, logic, and UI across platforms. This approach significantly reduces the time and resources required to develop and maintain apps for multiple platforms. Xamarin Forms also integrates with popular .NET features like LINQ and async/await, making it a powerful tool for modern mobile development. The toolkit includes a rich set of controls and an (Model-View-ViewModel) MVVM framework, making it easier to separate logic from the UI and make the code portable.
+Xamarin Forms is a cross-platform UI toolkit that allows developers to create native user interfaces for iOS, Android, and Windows apps using a single, shared codebase. Developed by Xamarin, a Microsoft-owned company, Xamarin Forms extends the .NET platform with tools and libraries specifically for building mobile apps. It enables developers to use C# for cross-platform development, sharing code, logic, and UI across platforms. Xamarin Forms also integrates with popular .NET features like LINQ and async/await, making it a powerful tool for modern mobile development. The toolkit includes a rich set of controls and an (Model-View-ViewModel) MVVM framework, making it easier to separate logic from the UI and make the code portable.
 
-In this learning path, we will learn how to use Xamarin Forms to create a cross-platform application. Then, we will launch this application on Windows on Arm using x64 and Arm64 build configurations. By doing so, we will be able to see how Arm64 can accelerate Xamarin Forms applications. In practice, you can use this feature to further optimize your cross-platform applications running on Arm64 platform.
+In this learning path, you will learn how to use Xamarin Forms to create a cross-platform application. Then, you will launch this application on Windows on Arm using x64 and Arm64 build configurations and compare the performance. By doing so, we will be able to see how Arm64 can accelerate Xamarin Forms applications. 
 
-You can find the companion code [here](https://github.com/dawidborycki/Arm64.MobileApp.XamarinForms.git).
+You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.MobileApp.XamarinForms.git).
 
 ## Before you begin
-Before you begin the implementation, it is essential to install Visual Studio 2022 with the following workloads:
+Before you begin the implementation, install Visual Studio 2022 with the following workloads:
 1. .NET Multi-platform App UI development,
 2. Universal Windows Platform development.
 
 ## Create the project
-Start by creating the project. Open Visual Studio, and then click 'Create a new project'. 
+Open Visual Studio, and then click 'Create a new project'. 
 
 ![fig1](Figures/01.png)
 
@@ -56,14 +56,14 @@ There are four projects:
 3. Arm64.MobileApp.XamarinForms.iOS - this is an iOS-specific project, which generates executables for iOS.
 4. Arm64.MobileApp.XamarinForms.UWP - this is an Universal Windows App (UWP) project, which generates executables for Windows.
 
-Now that your project is set up, you're ready to begin development. All subsequent modifications will be implemented in the shared project, Arm64.MobileApp.XamarinForms. The application is designed to perform intense computational task. Here, we will re-use the square matrix multiplication, which we implemented in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). The time required for the computations will be displayed on a label. Additionally, it will be rendered in a chart for visual representation. To create a chart, we will use the Syncfusion.SfChart.WPF library, a popular tool for graphical data representation, which we will install as a NuGet package.
+Now that your project is set up, you are ready to begin development. All subsequent modifications will be implemented in the shared project, `Arm64.MobileApp.XamarinForms`. The application is designed to perform intense computational task. You will use the square matrix multiplication, implemented in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). The time required for the computations will be displayed on a label. Additionally, it will be rendered in a chart for visual representation. To create a chart, you will use the `Syncfusion.SfChart.WPF` library, a popular tool for graphical data representation, which you will install as a NuGet package.
 
-We will adopt the Model-View-ViewModel (MVVM) design pattern, which separates the UI from the business logic, for implementing the application's logic. 
+You will adopt the Model-View-ViewModel (MVVM) design pattern, which separates the UI from the business logic, for implementing the application's logic. 
 
-Finally, we will compile the application for UWP for both x64 and Arm64 platforms to compare performance across different hardware architectures.
+Finally, you will compile the application for UWP for both x64 and Arm64 platforms to compare performance across different hardware architectures.
 
 ## User Interface
-Before starting the UI design, we need to install the Syncfusion.SfChart.WPF NuGet package in Visual Studio 2022. Follow these steps to complete the installation:
+Before starting the UI design, install the `Syncfusion.SfChart.WPF` NuGet package in Visual Studio 2022. Follow these steps to complete the installation:
 
 1. Open Visual Studio 2022 and access the Solution Explorer by navigating to View -> Solution Explorer.
 2. In Solution Explorer, right-click on 'Dependencies' under the Arm64.MobileApp.XamarinForms project. From the context menu, select 'Manage NuGet Packages...' to open the NuGet Package Manager.
@@ -71,12 +71,12 @@ Before starting the UI design, we need to install the Syncfusion.SfChart.WPF NuG
 
 ![fig7](Figures/07.png)
 
-4. A 'Preview Changes' window will appear. Click the 'Apply' button to confirm and proceed with the changes to the solution. The installation of the NuGet package will commence and complete shortly.
+4. A 'Preview Changes' window will appear. Click the 'Apply' button to confirm and proceed with the changes to the solution. The installation of the NuGet package will complete.
 5. Finally, in the 'License Acceptance' window that appears, click the 'I Accept' button to agree to the terms and complete the installation process.
 
-After installing the NuGet package, we proceed to modify the application view. The views of the Xamarin Forms applications are designed with the help of the XAML declarative markup language. Still, you can create the UI by manually putting controls on the window in the design mode. However, the approach based on XAML significantly accelerates the UI design and is much more efficient in practice. So, we use this approach here and start by opening MainWindow.xaml (to do so double-click MainWindow.xaml under the Arm64.MobileApp.XamarinForms in the Solution Explorer).
+After installing the NuGet package, proceed to modify the application view. The views of the Xamarin Forms applications are designed with the help of the XAML declarative markup language. Still, you can create the UI by manually putting controls on the window in the design mode. However, the approach based on XAML significantly accelerates the UI design and is much more efficient in practice. So, you will use this approach here and start by opening `MainWindow.xaml` (to do so double-click MainWindow.xaml under the Arm64.MobileApp.XamarinForms in the Solution Explorer).
 
-Next, modify MainWindow.xaml as follows:
+Next, modify `MainWindow.xaml` as follows:
 
 ```XML
 <?xml version="1.0" encoding="utf-8" ?>
@@ -156,11 +156,11 @@ Next, modify MainWindow.xaml as follows:
 </ContentPage>
 ```
 
-In the XAML declaration, we start by importing the XAML namespace for Syncfusion controls, as indicated in the last parameter of the ContentPage attribute. We then define three anonymous styles that will be implicitly applied to all buttons, labels, and Syncfusion Charts within the current window. These styles are utilized to configure margins and font attributes.
+In the XAML declaration, start by importing the XAML namespace for Syncfusion controls, as indicated in the last parameter of the ContentPage attribute. Then define three anonymous styles that will be implicitly applied to all buttons, labels, and Syncfusion Charts within the current window. These styles are utilized to configure margins and font attributes.
 
-Following this, we set up a Grid layout with two rows and two columns. The first row is configured to automatically adjust its height to fit all the controls, while the second row expands to fill the remaining window space. Both columns are designed to have equal widths. This arrangement effectively creates a 2x2 resizable table layout.
+Following this, you set up a Grid layout with two rows and two columns. The first row is configured to automatically adjust its height to fit all the controls, while the second row expands to fill the remaining window space. Both columns are designed to have equal widths. This arrangement effectively creates a 2x2 resizable table layout.
 
-Using this layout, we position two buttons in the left cell of the first row. The label is then placed in the right cell of the first row. Finally, the chart, spanning across both cells, is added to the second row.
+Using this layout, you have positioned two buttons in the left cell of the first row. The label is then placed in the right cell of the first row. Finally, the chart, spanning across both cells, is added to the second row.
 
 The chart is configured with two numerical axes. The horizontal (primary) axis displays the trial number, and the vertical (secondary) axis shows the calculation time for each trial. This setup allows users to generate a graph representing the calculation time across successive trials by running the calculation multiple times.
 
@@ -168,9 +168,9 @@ The complete XAML declaration results in the following view
  
 ![fig8](Figures/08.png)
 
-To use the chart control on UWP we also need to make one more modification:
-1. In Solution Explorer go to Arm64.MobileApp.XamarinForms.UWP project.
-2. Open App.xaml.cs, and modify the OnLaunched method as follows:
+To use the chart control on UWP you will also need to make one more modification:
+1. In Solution Explorer go to `Arm64.MobileApp.XamarinForms.UWP` project.
+2. Open `App.xaml.cs`, and modify the OnLaunched method as follows:
 
 ```CS
 protected override void OnLaunched(LaunchActivatedEventArgs e)
@@ -236,10 +236,10 @@ You will now supplement the shared project with two helper classes:
 To implement these classes, follow these steps:
 
 1. Open the Solution Explorer in Visual Studio 2022 by clicking View > Solution Explorer.
-2. In the Solution Explorer window, right-click on the Arm64.MobileApp.XamarinForms project, and choose Add -> New Folder from the context menu.
+2. In the Solution Explorer window, right-click on the `Arm64.MobileApp.XamarinForms` project, and choose Add -> New Folder from the context menu.
 3. Name the new folder 'Helpers'.
 4. Right-click on the Helpers folder, select Add -> Class to open the 'Add New Item' window. Enter 'MatrixHelper.cs' in the Name field and click the Add button.
-5. Modify the newly added MatrixHelper.cs file as outlined below.
+5. Modify the newly added `MatrixHelper.cs` file as outlined below.
 ```cs
 using System;
 
@@ -309,7 +309,7 @@ namespace Arm64.MobileApp.XamarinForms.Helpers
 }
 ```
 
-6. Similarly, within the 'Helpers' folder, create another file named PerformanceHelper.cs. Modify the file using the following code:
+6. Similarly, within the 'Helpers' folder, create another file named `PerformanceHelper.cs`. Modify the file using the following code:
 ```cs
 namespace Arm64.MobileApp.XamarinForms.Helpers
 {
@@ -336,6 +336,6 @@ namespace Arm64.MobileApp.XamarinForms.Helpers
 
 The MatrixMultiplication method in the MatrixHelper class accepts two square matrices and calculates their product using three 'for' loops. The result is stored in the 'result' variable and returned. The GenerateRandomMatrix method creates a square matrix with pseudo-randomly generated elements using the Random.NextDouble method. The class also includes the SquareMatrixMultiplication method for generating and multiplying two matrices of a given size. Here, we fix the matrix size to 250.
 
-The PerformanceHelper class contains a MeasurePerformance method. This method executes a function (passed as the first parameter via the Action delegate) multiple times (specified by the 'executionCount' parameter) and returns the execution time. Execution time is measured using the System.Diagnostics.Stopwatch class, which has methods Restart (to reset and start the stopwatch) and Stop (to halt the stopwatch and record the time elapsed).
+The PerformanceHelper class contains a MeasurePerformance method. This method executes a function (passed as the first parameter via the Action delegate) multiple times (specified by the 'executionCount' parameter) and returns the execution time. Execution time is measured using the `System.Diagnostics.Stopwatch` class, which has methods Restart (to reset and start the stopwatch) and Stop (to halt the stopwatch and record the time elapsed).
 
 With the UI and helper classes set up, you are now ready to implement the application logic using the Model View ViewModel (MVVM) architectural pattern.
