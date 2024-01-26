@@ -1,5 +1,5 @@
 ---
-title: Machine Leaning in games
+title: Machine Learning in games
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -14,7 +14,7 @@ Creating rich, realistic AI for games is challenging, especially as project comp
 
 ### What are we going to create?
 
-We will be using a Unity game template that we have prepared for this learning path to implement AI for a fighting game with two characters. The characters in this game will be battling in a 3D arena. One fighter will be controlled by the human player, while the other will be controlled by the "AI brain."
+We will be using a Unity game template that we have prepared for this learning path to implement AI for a fighting game with two characters. The characters in this game will be battling in a 3D arena. One fighter will be controlled by the human player, while the other will be controlled by the AI brain we create.
 
 ![ML Gameplay](images/ml-gameplay.png "Figure 1. Our fighting game with AI opponent")
 
@@ -22,15 +22,15 @@ We will be using a Unity game template that we have prepared for this learning p
 
 Machine learning applications are built in two stages:
 
-First, a "model" is trained in the "training" stage.
+First, a _model_ (neural network) is trained in the appropriately-named _training_ stage.
 
-Next, this pre-trained model is used at runtime of the final application (the game) to make smart decisions and actions. This is the "inference" stage.
+Next, this trained model is used at runtime in the final application (the game) to make smart decisions and actions. This is the _inference_ stage.
 
 Inference usually runs on a different platform than the one used for training the model. The system and hardware requirements for these stages are very different.
 
-The Unity game template we prepared uses the Unity Machine Learning (ML) Agents toolkit. This toolkit provides tools for both training and inference. It also supports two types of machine learning: "Imitation Learning" and "Reinforcement Learning."
+The Unity game template we prepared uses the Unity Machine Learning (ML) Agents toolkit. This toolkit provides tools for both training and inference. It also supports two types of machine learning: _Imitation Learning_ and _Reinforcement Learning_.
 
-Imitation Learning uses an "expert" for the AI to learn from while Reinforcement Learning uses "rewards and punishments".
+Imitation Learning uses an "expert" for the AI to learn from while Reinforcement Learning uses rewards and punishments.
 
 We will focus on Reinforcement Learning.
 

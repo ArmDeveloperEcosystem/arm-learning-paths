@@ -7,7 +7,7 @@ who_is_this_for: Developers interested in leveraging the Unity Machine Learning 
 
 learning_objectives:
     - Get the Unity Machine Learning (ML) Agents toolkit running in a game that is deployable to Arm-powered Android devices.
-    - Instructions showing how to deploy Unity games to an Arm-powered Android device and how to profile them are included in separate Learning Paths.
+    - Note - Instructions on how to deploy Unity games to an Arm-powered Android device and how to profile them are included in separate Learning Paths.
 
 prerequisites:
 - A computer capable of running Unity. Instructions are for Windows, but could be adapted to other platforms

@@ -12,7 +12,7 @@ Before we move on to run the training, we will go through some of the key object
 
 ## Overview of the project
 
-We will assume you still have the project open. From here onwards, you can ignore the "Ready to Play" version of the scene. We will use an incomplete scene to demonstrate some of the steps for using ML in Unity.
+From here onwards, you can ignore the "Ready to Play" version of the scene. We will instead use an incomplete scene to demonstrate some of the steps for using ML in Unity.
 
 1. Inside the _Project_ tab, navigate to _Assets->#DevSummit2022->Scenes_ (See Figure 1).
 
@@ -30,7 +30,7 @@ We will assume you still have the project open. From here onwards, you can ignor
 
     The ML-NPC object is our AI enemy character.
 
-1. To get a better look of the scene from the player's perspective, right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of our player character at ground level. You will see the inside of the arena and the enemy character off in the distance.
+1. To get a better look at the scene from the player's perspective, right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of our player character at ground level. You will see the inside of the arena and the enemy character off in the distance.
 
     ![Align View to ML-Player](images/ml-player-aligned-view.png "Figure 2. Align View to ML-Player")
 
@@ -104,7 +104,7 @@ The character objects both contain many scripts, but of most interest for now ar
 
 #### MlPlayerManager Component
 
-This component provides high level gameplay management for each player. Alongside some third person camera information, this manager stores weapon slots, player statistics such as health, team identity (human player or opponent), and damage and animation handling.
+This component provides high level game-play management for each player. Alongside some third person camera information, this manager stores weapon slots, player statistics such as health, team identity (human player or opponent), and damage and animation handling.
 
 ![MLPlayerManagerComponent](images/ml-player-manager-component.png "Figure 5. The MLPlayerManager component on the ML-NPC game object.")
 
@@ -128,7 +128,7 @@ This component is derived from the Agent behavior provided by ML Agents Toolkit.
 
 ![AgentDrArmComponent](images/agent-dr-arm-component.png "Figure 7. The AgentDrArm component on the ML-NPC game object.")
 
-_Max Step_ is a property from _Agent_. It determines the maximum number of steps taken by an _Agent_ before being done; in our case this is effectively the maximum number of frames we want our battles to last (when training).
+_Max Step_ is a property from _Agent_. It determines the maximum number of steps taken in training an _Agent_ before the episode is finished; in our case this is the maximum number of frames we want our battles to last.
 
 The ML subsystem will call on AgentDrArm implementations of functions such as _CollateObservations(..)_ and _OnActionReceived(..)_. We'll learn more about these later.
 
@@ -138,17 +138,17 @@ The behavior parameters dictate the size of our neural network.
 
 ![BehaviorParametersComponent](images/behavior-parameters-component.png "Figure 8. The BehaviorParameters component on the ML-NPC game object.")
 
-We set a limit to the maximum number of inputs (_Space Size_ of _Vector Observations_); these are pieces of state information about a character's environment and feed into the reinforcement learning. _Stacked Vectors_ is effectively giving us frames of historical data to feed in. The _Actions_ are the output that we use to determine which action a character should take (move, roll, attack etc). We have only used 13 out of the 19 limit set here; you can ignore the related warning on the Unity console.
+We set the number of inputs (_Space Size_ of _Vector Observations_); these are pieces of state information about a character's environment and feed into the reinforcement learning. _Stacked Vectors_ is giving us how many frames of historical data to feed in. The _Actions_ are the output that we use to determine which action a character should take (move, roll, attack etc). We have only set up 13 out of the 19 inputs; later we will set the other 6, but for now you can ignore the related warning on the Unity console.
 
 _Inference Device_ is set to _Default_ and determines which compute device is used to run the machine learning. Regarding runtime performance, we have found for this project that ML Agents run better on the CPU. Although strictly speaking the GPU is faster, the overhead for sending and receiving the data negates the performance gain.
 
-There shouldn't be much difference between Burst and CPU though typically Unity is moving more and more to the Burst compiler.
+There shouldn't be much difference between Burst and CPU in this case though Unity is moving more and more to the Burst compiler.
 
 The _Behaviour Name_ is important as we'll use it again later in the training sections. You will see that "BossBattle" is used in several places.
 
 #### RayPerceptionSensor3D Component
 
-Each character needs to know what is around it. We do this by casting rays from the character out into the scene. We track nearby characters and obstacles and feed this back to the characters so they can avoid obstacles and fight opponents. We use the RayPerceptionSensor3D component to do this.
+AI characters need to know what is around them. We can do this by casting rays from the character out into the scene. We track nearby characters and obstacles and feed this back to the characters so they can avoid obstacles and fight opponents. We use the RayPerceptionSensor3D component to do this.
 
 ![RayPerceptionSensor3DComponent](images/ray-perception-sensor3d-component.png "Figure 9. The RayPerceptionSensor3D component on the ML-NPC game object.")
 
@@ -165,7 +165,7 @@ Later we'll look at finishing the setup of the NPC character by modifying some o
 ML-Core contains various managers and controllers common to many apps and games. There are no AI-specific objects or scripts here. You shouldn't need to modify any of these objects or components. However, if you would like to explore them anyway, the most interesting options are:
 
 - ML-Core contains behavior _DontDestroyOnLoad_. This is useful for when you want an object to persist between scene loads
-- SettingsController (on child AppManager) contains an option for setting the target framerate (Unity will attempt to run the game at this framerate if possible)
+- SettingsController (on child AppManager) contains an option for setting the target frame-rate (Unity will attempt to run the game at this frame-rate if possible)
 - VfxService controls which particle systems to use for which effects
 
 ![ML-Core](images/ml-core.png "Figure 11. Hierarchy view showing ML-Core object and children.")

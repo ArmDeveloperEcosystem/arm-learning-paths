@@ -66,7 +66,7 @@ The fully configured component, with the correct properties updated, should look
 
 ### Edit AgentDrArm.cs
 
-Both characters have the _AgentDrArm_ script component. The script behaves slightly differently depending on whether the character is currently player-controlled. During training, both characters are controlled by the AI. _AgentDrArm_ is derived from the Unity ML _Agent_ class - the machine learning "brain".
+Both characters have the _AgentDrArm_ script component. The script behaves slightly differently depending on whether the character is currently player-controlled. During training, both characters are controlled by the AI. _AgentDrArm_ is derived from the Unity ML Agents _Agent_ class - the machine learning "brain".
 
 We need to add some code to make the character aware of some health statistics for itself and the other character. These statistics are observations that are passed into each character's ML Agent. The observations are fed into the neural network. The number of observations must fit within the limit set in the _BehaviourParameters_ component. We also need to implement our reward system (described earlier).
 
@@ -150,7 +150,7 @@ We need to add some code to make the character aware of some health statistics f
     //AddReward(-m_Existential);
     ```
 
-    In addition the applying the reward value, we need to actually perform an action. _OnActionReceived_ is given the results of the neural network which are the action buffers. The action buffers are mapped directly to the character controls for moving (forward/back and left/right), rolling and attack actions. These are applied in the function _ApplyMlMovement_ (called via _ActAgent_). The AI character is able to perform the same actions as the human player.
+    In addition to applying the reward value, we need to actually perform an action. _OnActionReceived_ is given the results of the neural network which are the action buffers. The action buffers are mapped directly to the character controls for moving (forward/back and left/right), rolling and attack actions. These are applied in the function _ApplyMlMovement_ (called via _ActAgent_). The AI character is able to perform the same actions as the human player.
 
     * Remember to save the changes
 

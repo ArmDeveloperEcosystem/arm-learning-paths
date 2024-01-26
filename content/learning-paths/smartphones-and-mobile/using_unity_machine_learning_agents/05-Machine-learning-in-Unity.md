@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview of machine learning
 
-One way to implement a machine learning system is using "Neural Networks". This is the method enabled by Unity ML Agents.
+One way to implement a machine learning system is using _Neural Networks_. This is the method enabled by Unity ML Agents.
 
 In this method, we train a neural network model (a "brain") that takes inputs (observations), processes them, and produces outputs (decisions). These outputs drive the actions of the AI characters in our game.
 
@@ -32,28 +32,28 @@ As you can imagine, training the model becomes a separate new build step before 
 
 The Unity ML Agents toolkit is an open source machine learning framework created and released by Unity Software Inc.
 
-Written in C# and Python, it contains APIs and tools for training AI "Agents". On the Unity side, we have _Agents_ we train that provide observations and actions. The _Agents_ connect to the Python framework (_mlagents-learn_ program) which provides algorithms for "Reinforcement Learning".
+Written in C# and Python, it contains APIs and tools for training AI "Agents". On the Unity side, we have _Agents_ we train that provide observations and actions. The _Agents_ connect to the Python framework (_mlagents-learn_ program) which provides algorithms for _Reinforcement Learning_.
 
 The training step produces a data file which would be our pre-trained model. This model is then embedded into our game and used at runtime to act as "the brain" of our AI character (the _Agent_).
 
 ## Dr Arm and Reinforcement Learning
 
-Reinforcement learning is an the type of machine learning where an "agent" is trained with the goal of maximizing some reward and/or minimizing some punishment.
+Reinforcement learning is a type of machine learning where an "agent" is trained with the goal of maximizing some reward and/or minimizing some punishment.
 
-Rewards and punishments are scores (floating point numbers). Inputs are "observations" of the environment and opponent (also as floating point numbers).
+Rewards and punishments are scores (floating point numbers). Inputs are "observations" of the environment and opponent (also turned into floating point numbers).
 
 ### Our reward function
 
 The reward tells the character if actions succeeded (positive) or failed (negative). This allows characters to learn to do the right thing - in our case, quick victories.
 
-We reward 1 for winning and -1 for losing. A small negative reward over time reduces the reward for slower wins. This will incentivize quick wins during training iterations.
+We reward with a value of 1 for winning and -1 for losing. A small negative reward accumulates over time and reduces the reward for slower wins. This will incentivize quick wins during training iterations.
 
 ### The inputs
 
 There are a number of inputs that we will use - each input is in the form of a floating point number. Our inputs include:
 
 * Health, stamina and mana level of both characters
-* Is character rolling?
+* Is the character rolling?
 * Is the enemy rolling?
 * Is the enemy facing the character?
 
@@ -61,9 +61,9 @@ There are a number of inputs that we will use - each input is in the form of a f
 
 The outputs from the neural network model directly translate to actions the character can perform. There are 3 outputs in total:
 
-* Floating point (-1, 1) used as joystick input X
-* Floating point (-1, 1) used as joystick input Y
-* Integer that will decide whether character should attack, roll or use fire attack.
+* A floating point value between -1 and 1, used as joystick input X
+* A floating point value between -1 and 1, used as joystick input Y
+* An integer value that will decide whether the character should attack, roll or use fireball (or none of them).
 
 ### Unity training scene
 
@@ -75,7 +75,7 @@ First off, projects need to implement all the necessary hooks for Unity ML Agent
 
 1. Setup training limits such as maximum simulation steps (so we don't allow a battle to go on forever)
 1. Send observations (inputs) to the agent
-1. Receive outputs from the agent (in the form of buffers of numbers)
+1. Receive outputs from the agent (as described above)
 1. Character performs actions based on the output from the agent
 1. Send reward (positive or negative) to the agent
 

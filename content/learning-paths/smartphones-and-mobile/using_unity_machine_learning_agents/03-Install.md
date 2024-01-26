@@ -10,7 +10,7 @@ layout: learningpathall
 
 The Unity ML Agents toolkit provides a C# API for use in your project and Python scripts to run outside of Unity. We'll need Python itself and a few extra libraries.
 
-We need the Python tools before we can run our "training stage", but to get going quickly we'll just install Unity for now.
+We need the Python tools before we can run our training stage, but to get going quickly we'll just install Unity for now.
 
 ## The tools we will need
 
@@ -20,7 +20,7 @@ We will install Unity via the Unity Hub. The Unity Hub provides an easy way to m
 * Unity
 * Visual Studio Community Edition (Unity support module)
 * Dr Arm Unity project files (the accompanying zip file)
-* [_only if deploying to an Android device_] Android build support (Unity support module)
+* [_only for deploying to an Android device_] Android build support (Unity support module)
 
 The installation instructions in the next section will take us through the above steps one by one, starting with the Unity Hub.
 
@@ -58,7 +58,7 @@ Assuming you don't already have Unity installed:
 
 ## Download and open the Dr Arm Unity project
 
-1. Download and extract the accopmanying Unity project from the [supporting zip file](../files/MLAgentsWorkshopSupportingFiles.zip).
+1. Download and extract the accompanying Unity project from the [supporting zip file](../files/MLAgentsWorkshopSupportingFiles.zip).
 
 1. Open Unity Hub
 

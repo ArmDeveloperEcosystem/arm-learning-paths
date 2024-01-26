@@ -15,7 +15,7 @@ Unity ML Agents Python package can be installed using the popular Python package
 
 Note our Unity project already contains the ML Agents package, but you still need to have the Python and the ML Agents Pip packages installed.
 
-Before running the training phase, we need to install some additional tools. We will install everything via Python and Pip, but if you would like more information on each package, we have provided links below:
+Before running the training phase, we need to install some additional tools as well. We will install everything via Python and Pip, but if you would like more information on each package, we have provided links below:
 
 * Python - the ML Agents framework has been written in Python. [https://www.python.org](https://www.python.org/)
 
@@ -37,7 +37,7 @@ In the next section we'll go through the steps to get all of the above installed
 
 We recommend using Python 3.7.9 as future versions produced errors on some platforms when installing PyTorch.
 
-In a command or terminal prompt (such as Power Shell):
+In a command or terminal prompt (such as PowerShell):
 
 1. Install Python 3.7.9 (or a later 3.7), and pip 20.1.1 or later. The official python installer can be found on:
 https://www.python.org/downloads/
@@ -46,7 +46,7 @@ https://www.python.org/downloads/
 
 ### Installing PyTorch and ML Agents
 
-_Note 1._ If you are using a command prompt or power shell you may need to run with administrator permissons.
+_Note 1._ If you are using a command prompt or PowerShell you may need to run with administrator permissons.
 
 _Note 2._ In Windows you may need to enable [LongPath support](https://pip.pypa.io/warnings/enable-long-paths).
 
@@ -83,7 +83,7 @@ _Note 2._ In Windows you may need to enable [LongPath support](https://pip.pypa.
     python -m venv .\python-envs\mlagents-r18-env
     ```
 
-    If you have problems installing PyTorch (step 4 below), try deleting "mlagents-r18-env" directory and retry with the py tool:
+    If you have problems installing PyTorch (step 7 below), try deleting "mlagents-r18-env" directory and retry with the py tool:
 
     ```
     py -3.7 -m venv .\python-envs\mlagents-r18-env
@@ -162,11 +162,11 @@ There are a few Python-related issues that can arise when trying to run _mlagent
 
 ## Run the training
 
-The longer the training runs (as in the more iterations), the better the AI opponent. Training to a reasonably difficult level can take several hours or more. We'll show how to run training but then stop and use pre-made data.
+The longer the training runs (as in the more iterations), the better the AI opponent. Training to a reasonably difficult level can take several hours or more. We'll show how to run training but also provide pre-made data if you do not want to wait.
 
 ### Loading the training scene
 
-Go to the _Project_ tab (normally bottom left) and navigate to _Assets->#DevSummit2022->Scenes_ and this time double click the _Level_DevSummit2022_Training_ scene to open it.
+Go to the _Project_ tab (normally bottom left) and navigate to _Assets->#DevSummit2022->Scenes_ and this time double click the _Level_DevSummit2022_Training_ scene to open it. Make sure you save the gameplay scene before closing it if you haven't already.
 
 ![Training Scene selection](images/project-assets-scenes-training.png "Figure 1. Training Scene selection")
 
@@ -176,7 +176,7 @@ Once the training scene is loaded, it should look similar to this:
 
 ### Start the training
 
-Because the training can take a long time we recommend using a CUDA GPU. However, it is possible to run the training on the CPU.
+The training takes a long time, so we recommend using a CUDA GPU to be faster. However, it is possible to run the training on the CPU.
 
 _Note._ If you do not have an NVidia GPU that supports CUDA, you may see the following warning.
 
@@ -316,7 +316,7 @@ Please check that you have an NVIDIA GPU and installed a driver from http://www.
 
 1. Here's a run down of some of the more interesting parameters:
 
-    * _Boss Battle_ : The name of the behavior that is training within our script that we are running. This matches the name we used earlier in the script component _BehaviourParamters_ property _BehaviourName_.
+    * _Boss Battle_ : The name of the behavior that is training within our script that we are running. This matches the name we used earlier in the script component _BehaviourParameters_ property _BehaviourName_.
 
     * _Step_: How many steps/iteration have happened so far.
 
@@ -338,7 +338,7 @@ Please check that you have an NVIDIA GPU and installed a driver from http://www.
     
     Training to a competent level can take several hours; our setup typically took 6-8 hours.
 
-    **NOTE** So you don't have to let the training run for hours, see section _Use pre-made training data_ below - we'll show how to plug in some brains we've already generated.
+    **NOTE**: If you don't want to wait to let the training run for hours, see section _Use pre-made training data_ below - we'll show how to plug in some brains we've already generated.
 
 ## TensorBoard
 
@@ -370,9 +370,9 @@ In this section we look at how TensorBoard can be used to monitor the training p
 
 1. Some cards to take a note of:
 
-    * _Episode Length_: Initially when no one is winning the episode length is maximum, until someone wins. Then the average slowly comes down. Once they start winning regularly it should come down a lot.
+    * _Episode Length_: Initially when no one is winning the episode length is maximum steps, until someone wins. Then the average slowly comes down. Once they start winning regularly it should come down a lot.
 
-    * _Cumulative Reward_: Starts off being -1, because both sides is losing, but once they start regularly having a winner it will go up rapidly and will eventually settle around zero, as that is where average will tend towards that over time.
+    * _Cumulative Reward_: Starts off being -1, because both sides is losing, but once they start regularly having a winner it will go up rapidly and will eventually settle around zero, as each (evenly-matched) player will lose as often as they win.
 
     * _ELO_: As mentioned previously this is the score over time, as characters win, giving you an idea of how well your training is going.
 
@@ -428,7 +428,7 @@ Some of the key behavior properties are:
 
 * _hyperparameters_ : Normal machine learning hyperparameters
 
-* _network settings_ : Sets up the actual size of the neural network. Notice it has _num layer: 2_ and _hidden units:128_ . In a more complex scenario you might have 3 layers and 256 hidden units. Have another look at the MultilayerPerceptron (MLP) in Figure 5.
+* _network settings_ : Sets up the actual size of the neural network. Notice it has _num layer: 2_ and _hidden units:128_ - this is 2 hidden layers of 128 units each. In a more complex scenario you might have 3 layers and 256 hidden units per layer. Have another look at the Multilayer Perceptron (MLP) in Figure 5.
 
     * The 1st layer is all of our observations. Note that we have 3 stacked vectors (for the last 3 frames), as input into the _neural network_.
 
@@ -520,9 +520,9 @@ Within this yaml we have the ability to set-up 2 separate brains. One named _Pal
 
 ## Use pre-made training data
 
-We have already prepared 3 data files; one for each difficulty level. Let's plug them in:
+We have already prepared 3 data files; one for each difficulty level. If you haven't generated your own, let's plug these ones in:
 
-1. In the Project tab (normally at the bottom left), if not open already, open the _Level_DevSummit2022_ scene by double-clicking it:
+1. In the Project tab (normally at the bottom left), if not open already, re-open the _Level_DevSummit2022_ scene by double-clicking it:
 
     `Assets->#DevSummit2022->Scenes->Level_DevSummit2022`
 
