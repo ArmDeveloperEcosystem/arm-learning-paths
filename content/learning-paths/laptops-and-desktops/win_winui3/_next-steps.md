@@ -18,7 +18,7 @@ recommended_path: "/learning-paths/laptops-and-desktops/electron"
 
 further_reading:
     - resource:
-        title: Microsoft's Official Documentation
+        title: Microsoft's Official WinUI 3 Documentation
         link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
         type: documentation
     - resource:
@@ -26,9 +26,9 @@ further_reading:
         link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
         type: documentation   
     - resource:
-        title: Example Applications and Code
+        title: Example Applications and Code for WinUI
         link: https://github.com/Microsoft/WinUI-Gallery
-        type: GitHub repository
+        type: website
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
