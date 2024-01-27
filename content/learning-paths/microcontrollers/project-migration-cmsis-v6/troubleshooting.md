@@ -59,7 +59,7 @@ A similar error can come up for any software component. Here is an example using
 ![Additional software components required](./middleware.png)
 
 {{% notice Resolution %}}
-1. Contact the CMSIS-Pack vendor for your device/software component and ask for an updated version without the CMSIS-CORE version requirement. Alterntively, do the following:
+1. Contact the CMSIS-Pack vendor for your device/software component and ask for an updated version without the CMSIS-CORE version requirement. Alternatively, do the following:
 2. Edit the device's PDSC file and change for example:
 ```xml
 <require Cclass="CMSIS" Cgroup="CORE" Cversion="5.6.0"/>

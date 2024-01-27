@@ -160,7 +160,7 @@ int32_t dotprod(int32_t *A, int32_t *B, size_t N) {
 }
 ```
 
-Compile again ith `-O3`:
+Compile again with `-O3`:
 
 ```bash
 gcc -O3 -fno-inline dotprod.c -o dotprod
