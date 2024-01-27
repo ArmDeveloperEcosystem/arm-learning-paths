@@ -59,7 +59,7 @@ The output will look similar to:
 [SCAN], 99thPercentileLatency(us), 70143
 [SCAN], Return=OK, 1499804
 ```
-The overall throughtput (operations/sec) is 6662.1275371047195 with No-LSE Glibc.
+The overall throughput (operations/sec) is 6662.1275371047195 with No-LSE Glibc.
 
 ## Result with LSE
 Launch MongoDB again, this time with Glibc with LSE and obtain benchmark result.

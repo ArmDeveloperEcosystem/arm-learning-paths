@@ -7,7 +7,7 @@ layout: "learningpathall"
 ##  Introduction to libhugetlbfs
 In Linux, hugepages provide larger memory blocks compared to the default page size. You can use libhugetlbfs to provide memory for application text, data, `malloc()`, and shared memory with hugepages. 
 
-Larger memory pages benefit applications that use considerable amounts of memory which, in turn, may cause reduced performance due to a high number of TLB misses. By enabling libhugetlbfs, workloads with sizeable amounts of code, data, or heap sections may see significant performance improvement.
+Larger memory pages benefit applications that use considerable amounts of memory which, in turn, may cause reduced performance due to a high number of TLB misses. By enabling libhugetlbfs, workloads with sizable amounts of code, data, or heap sections may see significant performance improvement.
 
 ## Install Linux packages
 
