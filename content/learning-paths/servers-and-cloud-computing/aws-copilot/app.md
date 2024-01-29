@@ -16,33 +16,15 @@ Graviton2 is not the default for Copilot, but read on to find out how to set the
 This guide is applicable to both Linux and macOS users.
 
 Before starting, ensure you have Docker and Copilot installed on your computer.
+
 For Docker installation, refer to the [Docker install guide](https://learn.arm.com/install-guides/docker/).
+
+For Copilot installation, refer to the [AWS Copilot CLI install guide](/install-guides/aws-copilot).
 
 You will also need an AWS account, which you can create at https://aws.amazon.com. (Click on **Create an AWS Account** in the top right corner. Follow the instructions to register. See the [Creating an AWS account documentation](https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-creating.html) for full instructions.)
 
-Make sure to configure your access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. Refer to [AWS Credentials](https://learn.arm.com/install-guides/aws_access_keys/) for a quick summary of how to run `aws configure`. The install guide also covers how to install the AWS CLI. Make a note of the AWS region you set with `aws configure` so you can see the resources created by Copilot in the AWS console.
+Make sure to configure your access key ID and secret access key, which are used to sign programmatic requests that you make to AWS. Refer to [AWS Credentials](/install-guides/aws_access_keys/) for a quick summary of how to run `aws configure`. The install guide also covers how to install the AWS CLI. Make a note of the AWS region you set with `aws configure` so you can see the resources created by Copilot in the AWS console.
 
-If you are using Docker on Linux you will need to install QEMU to build container images for both the `arm64` and the `amd64` architectures.
-
-```console
-sudo apt-get install qemu-user-static
-```
-
-Docker Desktop for macOS includes the ability to build for multiple architectures, so you don't need to do anything extra.
-
-To install Copilot on Arm Linux:
-
-```console
-sudo curl -Lo /usr/local/bin/copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-linux-arm64 \
-   && sudo chmod +x /usr/local/bin/copilot \
-   && copilot --help
-```
-
-To install Copilot on macOS:
-
-```console
-curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-darwin && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot && copilot --help
-```
 
 # Create an example application
 
