@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            You can use LSE on Non-Arm servers?
+            Can you use LSE on Non-Arm servers?
         answers:
             - "Yes"
             - "No"

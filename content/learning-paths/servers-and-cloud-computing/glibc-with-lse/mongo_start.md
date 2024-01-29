@@ -46,16 +46,16 @@ logappend=true
 bind_ip=0.0.0.0
 port=27017
 ```
-You can now run MongoDB as shown:
+You can now run MongoDB as shown below:
 
 ```console
 cp /usr/lib/aarch64-linux-gnu/libcrypt.so ~/glibc-2.32_build_install/build/crypt/
 ~/glibc-2.32_build_install/build/testrun.sh ~/mongo/build/install/bin/mongod -f ~/mongodb-5.3.2/mongodb.conf --wiredTigerCacheSizeGB=20
 ```
 
-Confirm that the workload mongodb runs is with the newly built glibc with LSE:
+Confirm that the workload mongodb runs with the newly built glibc with LSE:
   
-First, get the pid with the following command.
+First, get the pid with the following command:
 ```console
 ps -ef | grep mongo
 ```
