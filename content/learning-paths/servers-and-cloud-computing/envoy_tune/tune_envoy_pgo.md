@@ -18,12 +18,12 @@ When you build Envoy using Bazel and LLVM/Clang, you should use the latest compi
 
 Here is an overview of the steps that you will need to take to build Envoy with PGO:
 
-* Make sure you have LLVM, Clang, and compiler-rt installed locally.
-* Build Envoy using the Clang, but with instrumentation.
+* Make sure you have LLVM, Clang, and compiler-rt installed locally
+* Build Envoy using Clang, but with instrumentation
 * Use the instrumented Envoy to generate profiles, which consists of two steps:
-	* Running the instrumented Envoy on tasks that represent how users will use it.
-	* Using a tool to convert the raw profiles generated from the previous step into a single, final PGO profile.
-* Build a final release Envoy using the profile collected from your benchmark.
+	* Running the instrumented Envoy on tasks that represent how users will use it
+	* Using a tool to convert the raw profiles generated from the previous step into a single, final PGO profile
+* Build a final release Envoy using the profile collected from your benchmark
  
 ### Detailed steps on how to build Envoy with PGO
 
@@ -36,7 +36,7 @@ bazel build -c opt --copt="-fprofile-generate=/path/to/stage2/profiles" --cxxopt
 ```
 2. Generate the profiles:
    
-Run the Envoy built by step 1 with your target test cases. When the test has finished, run the following command to kill the Envoy services:
+Run the Envoy built in step 1 with your target test cases. When the test has finished, run the following command to kill the Envoy services:
 
 ```console
 sudo pkill -2 envoy

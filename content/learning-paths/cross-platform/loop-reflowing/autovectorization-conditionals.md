@@ -10,7 +10,7 @@ In the previous section, you learned that compilers cannot autovectorize loops w
 
 In this section, you will see more examples of loops with branches.
 
-You will learn when it is possible to enable the vectorizer in the compiler by adapting the loop, and when you are required to modify the algorithm or write manually optimized code.
+You will learn when it is possible to enable the vectorizer in the compiler by adapting the loop and when you are required to modify the algorithm or write manually optimized code.
 
 ### Loops with if/else/switch statements
 
@@ -48,9 +48,9 @@ void addvecweight(float *restrict C, float *A, float *B, size_t N) {
 
 These are two different loops that the compiler can vectorize. 
 
-Both GCC and Clang can autovectorize this loop, but the output is slightly different, performance may vary depending on the flags used and the exact nature of the loop.
+Both GCC and Clang can autovectorize this loop but the output is slightly different, and performance may vary depending on the flags used and the exact nature of the loop.
 
-However, the loop below is autovectorized by Clang but it is not autovectorized by GCC. 
+The loop below is autovectorized by Clang but it is not autovectorized by GCC. 
 
 ```C
 void addvecweight2(float *restrict C, float *A, float *B,

@@ -68,7 +68,7 @@ void free_nodes(node_t *n) {
 }
 
 int main() {
-    const char text[] = "This is a sample text";
+    const char text[] = "This is a text";
     node_t *node0 = new_node(NULL, text, strlen(text));
 
     node_t * node = node0;

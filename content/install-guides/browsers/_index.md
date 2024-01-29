@@ -36,14 +36,15 @@ The information below helps you:
 
 Here is a quick summary to get you started:
 
-| Browser     | Windows on Arm | Arm Linux support |
-| ----------- | -------------- | --------- |
-| Firefox     | native         | yes       |
-| Chromium    | native         | yes       |
-| Brave       | native         | yes       |
-| Edge        | native         | no        |
-| Vivaldi     | emulation      | yes       |
-| Chrome      | emulation      | no        |
+| Browser       | Windows on Arm | Arm Linux support |
+| -----------   | -------------- | ---------         |
+| Firefox       | native         | yes               |
+| Chromium      | native         | yes               |
+| Brave         | native         | yes               |
+| Edge          | native         | no                |
+| Chrome Canary | native         | no                |
+| Chrome Stable | emulation      | no                |
+| Vivaldi       | emulation      | yes               |
 
 Windows on Arm runs native ARM64 applications, but can also emulate 32-bit x86 and 64-bit x64 applications. Emulation is slower than native and shortens battery life, but may provide functionality you need.
 

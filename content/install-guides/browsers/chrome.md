@@ -25,7 +25,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Installing Chrome
 
-The Chrome browser runs on Windows on Arm using emulation. Chrome is not available for Arm Linux. 
+The Chrome browser runs on Windows on Arm natively on the Canary release channel, and using emulation on the Stable release channel. Chrome is not available for Arm Linux. 
 
 ### Linux
 
@@ -33,11 +33,25 @@ Chrome is not available for Arm Linux.
 
 ### Windows 
 
-Chrome runs on Windows on Arm using emulation. 
+#### Native 
 
-Emulation is slower than native and shortens battery life, but may provide required functionality.
+To install Chrome on Windows on Arm:
 
-Chrome supports Google account sign-in, bookmark synchronization, and password manager so if you need these features emulated Chrome is useful. 
+1. Go to the [download page](https://www.google.com/chrome/canary/?platform=win_arm64) and click the Download Chrome Canary button.
+
+2. Run the downloaded `ChromeSetup.exe` file 
+
+3. Find and start Chrome from the applications menu
+
+{{% notice Note %}}
+The native Windows on Arm version of Chrome is currently on the Canary channel. This is an experimental version which is updated daily, but is faster than emulation.
+{{% /notice %}}
+
+#### Emulation
+
+If you prefer to use a Stable version, you can run using emulation. 
+
+Emulation is slower than native and shortens battery life.
 
 1. Download the Windows installer from [Google Chrome](https://www.google.com/chrome/)
 
@@ -48,5 +62,4 @@ Chrome supports Google account sign-in, bookmark synchronization, and password m
 {{% notice Note %}}
 The Chrome setup program installs the 32-bit x86 version of Chrome.
 {{% /notice %}}
-
 
