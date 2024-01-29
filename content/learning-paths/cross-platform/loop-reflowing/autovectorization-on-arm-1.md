@@ -72,7 +72,7 @@ dotprod:
         ret
 ```
 
-You can see that it's a pretty standard implementation, doing one element at a time. The option `-fno-inline` is necessary to avoid inlining any code from the function `dot-prod()` into `main()` for performance reasons. In general, this is a good thing, but demonstrating the autovectorization process is more difficult if there is no easy way to distinguish the caller from the callee.
+You can see that it's a pretty standard implementation, doing one element at a time. The option `-fno-inline` is necessary to avoid inlining any code from the function `dot-prod()` into `main()` for performance reasons. In general, this is a good thing but demonstrating the autovectorization process is more difficult if there is no easy way to distinguish the caller from the callee.
 
 Next, increase the optimization level to `-O3`, recompile, and observe the assembly output again:
 
@@ -135,7 +135,7 @@ dotprod:
         b       .L3
 ```
 
-The code is larger, but you can see that some autovectorization has taken place.
+The code is larger but you can see that some autovectorization has taken place.
 
 The label `.L4` includes the main loop and you can see that the `mla` instruction is used to multiply and accumulate the dot products, 4 elements at a time. 
 
@@ -145,7 +145,7 @@ With the new code, you can expect a performance gain of about 4x.
 
 You might be wondering if there is a way to hint to the compiler that the sizes are always going to be multiples of 4 and avoid the last part of the code. 
 
-The answer is *yes*, but it depends on the compiler. In the case of gcc, it is enough to add an instruction that ensures the sizes are multiples of 4.
+The answer is *yes* but it depends on the compiler. In the case of gcc, it is enough to add an instruction that ensures the sizes are multiples of 4.
 
 Modify the `dotprod()` function to add the multiples of 4 hint as shown below:
 
@@ -195,7 +195,7 @@ Is there anything else the compiler can do?
 
 Modern compilers are very proficient at generating code that utilizes all available instructions, provided they have the right information.
 
-For example, the `dotprod()` function operates on `int32_t` elements, what if you could limit the range to 8-bit? 
+For example, the `dotprod()` function operates on `int32_t` elements. What if you could limit the range to 8-bit? 
 
 There is an Armv8 ISA extension that [provides signed and unsigned dot product instructions](https://developer.arm.com/documentation/102651/a/What-are-dot-product-intructions-) to perform a dot product across 8-bit elements of 2 vectors and store the results in the 32-bit elements of the resulting vector. 
 
@@ -237,7 +237,7 @@ gcc -O3 -fno-inline -march=armv8-a+dotprod dotprod.c -o dotprod
 
 You need to compile with the architecture flag to use the dot product instructions. 
 
-The assembly output will be quite larger as the use of `SDOT` can only work in the main loop where the size is a multiple of 16. The compiler will unroll the loop to use Advanced SIMD instructions if the size is greater than 8, and byte-handling instructions if the size is smaller.
+The assembly output will be quite large as the use of `SDOT` can only work in the main loop where the size is a multiple of 16. The compiler will unroll the loop to use Advanced SIMD instructions if the size is greater than 8 and byte-handling instructions if the size is smaller.
 
 You can eliminate the extra tail instructions by converting `N -= N % 4` to 8 or even 16 as shown below: 
 
