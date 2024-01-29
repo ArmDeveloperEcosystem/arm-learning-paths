@@ -1,8 +1,6 @@
 ---
 title: Learn about Autovectorization
 
-draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for C/C++ developers who are interested in taking advantage of autovectorization in compilers.

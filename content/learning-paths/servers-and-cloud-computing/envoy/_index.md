@@ -1,8 +1,6 @@
 ---
 title: Learn how to deploy Envoy
 
-draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for engineers who want to use Envoy on Arm.
