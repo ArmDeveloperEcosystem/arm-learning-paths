@@ -299,4 +299,4 @@ After re-running the application you will see the following:
 ![fig4](Figures/04.png)
 
 ## Summary
-CEF is a powerful tool for integrating web browser functionalities into desktop applications, utilizing modern web technologies. You have learnt how to setup a project, create a basic application, and using CMake for CEF projects. Additionally, you explored more advanced features like fetching and displaying data from JSONPlaceholder, adding and styling HTML elements like tables and buttons through separate CSS files all on your Windows on Arm machine.
+CEF is a powerful tool for integrating web browser functionalities into desktop applications, utilizing modern web technologies. You have learned how to setup a project, create a basic application, and using CMake for CEF projects. Additionally, you explored more advanced features like fetching and displaying data from JSONPlaceholder, adding and styling HTML elements like tables and buttons through separate CSS files all on your Windows on Arm machine.

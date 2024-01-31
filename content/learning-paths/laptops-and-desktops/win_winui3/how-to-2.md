@@ -27,4 +27,4 @@ Next, launch the application for the ARM64 platform. Execute matrix multiplicati
 Upon comparing the execution times, it is observed that ARM64, on average, provides almost a 50% performance improvement over x64.
 
 ## Summary
-In this learning path, you learnt how to develop a WinUI 3 application, run it in different modes (x64 and Arm64) to compare the performance in matrix multiplication tasks. This comparison was essential to understand the efficiency and speed of execution in different architectural settings. 
+In this learning path, you learned how to develop a WinUI 3 application, run it in different modes (x64 and Arm64) to compare the performance in matrix multiplication tasks. This comparison was essential to understand the efficiency and speed of execution in different architectural settings. 

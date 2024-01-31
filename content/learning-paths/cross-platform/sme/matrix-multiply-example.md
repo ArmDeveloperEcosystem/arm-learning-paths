@@ -56,7 +56,7 @@ Execution can be controlled by the `Debug Control` pane icon bar (eg `Step Instr
 1. In the Registers view, expand AArch64 > System > ID > ID_AA64PFR1_EL1. Notice the SME bits are set to 2, meaning the SME2 architectural state and programmers model are implemented on this target.
 2. This bit can also be inspected in the Commands view, by entering `output $AArch64::$System::$ID::$ID_AA64PFR1_EL1.SME`. Other bits in other registers may be inspected similarly.
 3. In the Registers view, expand AArch64 > System > PSTATE > SVCR. Notice the ZA bit is currently 0, meaning the ZA array storage is invalid and not accessible. This will change to 1 later, when an SMSTART instruction is executed.
-4. In `main.c`, observe that `main()` initialises the sizes (M, N, K) of the matrices, prints a welcome banner, then disables SVE and SIMD traps.
+4. In `main.c`, observe that `main()` initializes the sizes (M, N, K) of the matrices, prints a welcome banner, then disables SVE and SIMD traps.
 5. Set a breakpoint on the `disable_sve_traps` function with `break disable_sve_traps` and run to it (press F8). It is written in assembler.
 6. In the Registers view, expand AArch64 > System > Secure > CPTR_EL3. To avoid SME, SVE, or SIMD instructions being trapped, the ESM and EZ bits must be set to 1 and the TFP bit must be cleared to 0, respectively, in CPTR_EL3. These bits reset to an architecturally unknown value on startup.
 7. In the Debug Control view, select Stepping By Instruction (press F10) to switch stepping mode to instruction level.

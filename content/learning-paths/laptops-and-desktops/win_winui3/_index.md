@@ -11,7 +11,7 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm[virtual machine](/learning-paths/cross-platform/woa_azure/).
-    - "Visual Studio 2022 with two workloads: .NET desktop developmentt, and Universal Windows Platform development."
+    - "Visual Studio 2022 with two workloads: .NET desktop development, and Universal Windows Platform development."
 
 author_primary: Dawid Borycki
 

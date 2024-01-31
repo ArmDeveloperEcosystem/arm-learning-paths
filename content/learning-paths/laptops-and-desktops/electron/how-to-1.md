@@ -308,4 +308,4 @@ You now have the application up and running. By default, it runs using the Arm64
 
 ![fig4](Figures/04.png)
 
-In the next step, you will configure your application such that you can explcitly build it for x64 and Arm64 platforms.
+In the next step, you will configure your application such that you can explicitly build it for x64 and Arm64 platforms.
