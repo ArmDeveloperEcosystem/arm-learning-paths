@@ -2066,7 +2066,6 @@ DontDestroyOnLoad
 ESM
 EZ
 FMADD
-Fargate’s
 FontSize
 FontWeight
 GEMV

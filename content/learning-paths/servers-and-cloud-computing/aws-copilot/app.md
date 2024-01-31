@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 [AWS Copilot CLI](https://aws.github.io/copilot-cli/) is an open source command line interface for running containers on AWS App Runner, Amazon Elastic Container Service (ECS), and AWS Fargate. 
 
-You can use Copilot to run containers on Fargate’s serverless compute with Graviton2 processors and benefit from improved price performance. 
+You can use Copilot to run containers on Fargate serverless compute with Graviton2 processors and benefit from improved price performance. 
 
 Graviton2 is not the default for Copilot, but read on to find out how to set the architecture to Arm.
 
