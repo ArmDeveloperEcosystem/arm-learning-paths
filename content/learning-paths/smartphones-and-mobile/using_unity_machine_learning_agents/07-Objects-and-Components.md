@@ -107,7 +107,7 @@ We need to add some code to make the character aware of some health statistics f
     }
     ```
 
-1. In the script, scroll down to the _CollectObservations()_ method. This method collates information that is key to the reinforcment learning process to help the ML Agent make good decisions. Various bits of state information are returned as a list of observations, such as:
+1. In the script, scroll down to the _CollectObservations()_ method. This method collates information that is key to the reinforcement learning process to help the ML Agent make good decisions. Various bits of state information are returned as a list of observations, such as:
 
     * Roll/dodge flag (is the character currently rolling/dodging)
 
@@ -156,7 +156,7 @@ We need to add some code to make the character aware of some health statistics f
 
 ### Edit BattleEnvController.cs
 
-1. Now select the _AgentsSettings_ object, in the _Hierachy_ tab, on the left.
+1. Now select the _AgentsSettings_ object, in the _Hierarchy_ tab, on the left.
 
 ![Agent Settings](images/heirachy-agent-settings.png "Figure 7. Agent Settings")
 

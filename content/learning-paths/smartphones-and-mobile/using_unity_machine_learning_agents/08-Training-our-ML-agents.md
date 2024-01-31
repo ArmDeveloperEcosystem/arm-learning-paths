@@ -46,7 +46,7 @@ https://www.python.org/downloads/
 
 ### Installing PyTorch and ML Agents
 
-_Note 1._ If you are using a command prompt or PowerShell you may need to run with administrator permissons.
+_Note 1._ If you are using a command prompt or PowerShell you may need to run with administrator permissions.
 
 _Note 2._ In Windows you may need to enable [LongPath support](https://pip.pypa.io/warnings/enable-long-paths).
 
@@ -178,7 +178,7 @@ Once the training scene is loaded, it should look similar to this:
 
 The training takes a long time, so we recommend using a CUDA GPU to be faster. However, it is possible to run the training on the CPU.
 
-_Note._ If you do not have an NVidia GPU that supports CUDA, you may see the following warning.
+_Note._ If you do not have an NVIDIA GPU that supports CUDA, you may see the following warning.
 
 ```
 UserWarning: CUDA initialization: Found no NVIDIA driver on your system.
@@ -526,7 +526,7 @@ We have already prepared 3 data files; one for each difficulty level. If you hav
 
     `Assets->#DevSummit2022->Scenes->Level_DevSummit2022`
 
-1. Now select the _AgentsSettings_ object, in the _Hierachy_ tab (normally on the left).
+1. Now select the _AgentsSettings_ object, in the _Hierarchy_ tab (normally on the left).
 
     ![Agent Settings](images/heirachy-agent-settings.png "Figure 1. Agents Settings")
 

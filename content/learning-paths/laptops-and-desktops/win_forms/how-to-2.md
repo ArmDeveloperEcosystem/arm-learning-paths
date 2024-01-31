@@ -39,7 +39,7 @@ Next, launch the application for the Arm64 platform. Run the matrix multiplicati
 By comparing the execution times, we observe that, on average, Arm64 provides almost a 30% performance improvement over x64.
 
 ## Summary
-In this learning path, you learnt how to develop and optimize a desktop application using Windows Forms in .NET on Arm64, particularly for matrix multiplication operations. 
+In this learning path, you learned how to develop and optimize a desktop application using Windows Forms in .NET on Arm64, particularly for matrix multiplication operations. 
 
 You started with an overview of Windows Forms, a GUI class library in .NET, and its role in developing desktop applications. Then, you created a new Windows Forms project in Visual Studio, including setting up the project environment and selecting the appropriate .NET Framework version. You created both the user interface for this application and implemented the application logic.
 
