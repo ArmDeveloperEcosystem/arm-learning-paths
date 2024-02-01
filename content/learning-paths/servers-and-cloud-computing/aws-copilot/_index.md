@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An Amazon Web Services (AWS) account
-    - A local computer with Docker installed
+    - A local computer with Docker, AWS CLI, and AWS Copilot CLI installed
 
 author_primary: Jason Andrews
 
