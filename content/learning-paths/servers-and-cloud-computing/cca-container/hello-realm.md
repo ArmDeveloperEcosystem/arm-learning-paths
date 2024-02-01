@@ -132,4 +132,5 @@ Hello from the Realm!
 ```
 You have successfully run an application inside the Realm!
 
+The Realm will exit after the application runs, because it has been packaged as the guest kernel's "init" process.
 
