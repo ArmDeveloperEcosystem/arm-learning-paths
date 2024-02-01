@@ -15,8 +15,9 @@ Make sure you have downloaded the [`armswdev/aemfvp-cca-image`](https://hub.dock
 Install [GCC](/install-guides/gcc/) on your machine. Dependent on the architecture of your machine, you will need to install either the native compiler or cross-compiler.
 
 ## Overview
+In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run an application within that Realm. The application inherits the confidential protection of the guest virtual machine.
 
-To run an application inside a Realm, you will package it as the "init" process for the guest linux kernel. 
+A convenient way to run an application inside a Realm within the context of this example, is to package the application as the "init" process for the guest linux kernel. 
 
 Linux kernels contain a gzipped cpio format archive. When the kernel boots up, this archive is extracted into the root filesystem. The kernel then checks whether the root filesystem contains a file named "init" and tries to run it. At this point the kernel is done booting, and the "init" application executes the system the rest of the way. 
 
