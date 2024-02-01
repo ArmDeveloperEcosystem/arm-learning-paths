@@ -83,7 +83,7 @@ A number of `Info` and `Warning` messages will be emitted by the FVP. These can 
 
 The `run-cca-fvp.sh` script uses the `screen` command to connect to the different UARTs in the FVP.  
 
-You should see the host Linux kernel boot on your terminal. You will be prompted to login to buildroot. Enter `root` as both the username and password.
+You should see the host Linux kernel boot on your terminal:
 
 ```output
 udhcpc: started, v1.31.1
@@ -98,6 +98,8 @@ Starting dropbear sshd: OK
 Welcome to Buildroot
 buildroot login:
 ```
+
+You will be prompted to login to buildroot. Enter `root` as both the username and password.
 
 You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, Realm Management Monitor (RMM) in Realm, host Linux in non-secure and Hafnium in secure. 
 
