@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Before you begin
 
-You should have an Arm Linux system with gcc installed. Refer to the [GNU compiler](/install-guides/gcc/native/) install guide for instructions. The examples use gcc as the compiler, but you can also use Clang. 
+You should have an Arm Linux system with gcc installed. Refer to the [GNU compiler](/install-guides/gcc/native/) install guide for instructions. The examples use gcc as the compiler but you can also use Clang. 
 
 ## Introduction to autovectorization
 
@@ -16,7 +16,7 @@ CPU time is often spent executing code inside loops. Software that performs time
 
 With the advent of single instruction, multiple data (SIMD) processing and vector engines in modern CPUs (like Neon and SVE), specialized instructions are available to improve the performance and efficiency of loops. However, the loops themselves need to be adapted to use SIMD instructions. The adaptation process is called *__vectorization__* and is synonymous with SIMD optimization.
 
-Depending on the actual loop and the operations involved, vectorization is possible or impossible and the loop is labeled as vectorizable or non-vectorizable.
+Depending on the actual loop and the operations involved, vectorization is either possible or not and the loop is labeled as vectorizable or non-vectorizable.
 
 Consider the following simple loop which adds 2 vectors:
 
@@ -41,7 +41,7 @@ int main() {
 
 Use a text editor to copy the code above and save it as `addvec.c`.
 
-This is the most referred-to example with regards to vectorization, because it is easy to explain. 
+This is the most referred-to example with regards to vectorization because it is easy to explain. 
 
 For Advanced SIMD/Neon, the vectorized form is the following:
 
@@ -76,7 +76,7 @@ For many developers, vectorizing is a daunting task. Automating the process is o
 
 Autovectorization in compilers has been in development for the past 20 years. However, recent advances in both major compilers (Clang and GCC) have started to render autovectorization a viable alternative to hand-written SIMD code for more than just the basic loops. Some loop types are still not detected as autovectorizable, and it is not directly obvious which kinds of loops are autovectorizable and which are not.
 
-As a constantly advancing field, it is not easy to keep track of compiler support for autovectorization. It is an advanced Computer Science topic that involves the subjects of graph theory, compilers, and deep understanding of each architecture and the respective SIMD engines. The number of experts in the field is extremely small.
+As a constantly advancing field, it is not easy to keep track of compiler support for autovectorization. It is an advanced Computer Science topic that involves the subjects of graph theory, compilers, and a deep understanding of each architecture and the respective SIMD engines. The number of experts in the field is extremely small.
 
 In this Learning Path, you will learn about autovectorization through examples and identify how to adapt some loops to enable autovectorization.
 

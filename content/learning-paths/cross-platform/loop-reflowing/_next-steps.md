@@ -9,7 +9,7 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/update-on-gnu-performance
         type: blog
     - resource:
-        title: Auto-Vectorization in LLVM¶
+        title: Auto-Vectorization in LLVM
         link: https://llvm.org/docs/Vectorizers.html
         type: website
     - resource:

@@ -1,8 +1,6 @@
 ---
 title: Learn how to deploy Envoy
 
-draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for engineers who want to use Envoy on Arm.
@@ -13,7 +11,7 @@ learning_objectives:
     - Verify Envoy is working correctly
 
 prerequisites:
-    - To run envoy as a web server, you will need at least one [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premises Arm server.
+    - To run Envoy as a web server, you will need at least one [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premises Arm server.
     - Network settings (firewalls and security groups) which allow communication on port 22 (SSH) and port 80 (HTTP).
 
 author_primary: Zhengjun Xing

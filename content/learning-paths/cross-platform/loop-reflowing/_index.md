@@ -1,7 +1,5 @@
 ---
-title: Loop Reflowing/Autovectorization
-
-draft: true
+title: Learn about Autovectorization
 
 minutes_to_complete: 45
 

@@ -103,8 +103,8 @@ The reason for this is related to how each compiler decides whether to use autov
 
 For each candidate loop the compiler will estimate the possible performance gains against a cost model, which is affected by many parameters and of course the optimization level in the compilation flags. 
 
-The cost model estimates whether the autovectorized code grows in size and if the performance gains are enough to outweigh the increase in code size. Based on this estimation, the compiler will decide to use vectorized code or fall back to a more 'safe' scalar implementation. This decision however is fluid and is constantly reevaluated during compiler development.
+The cost model estimates whether the autovectorized code grows in size and if the performance gains are enough to outweigh the increase in code size. Based on this estimation, the compiler will decide to use vectorized code or fall back to a more 'safe' scalar implementation. This decision, however, is fluid and is constantly reevaluated during compiler development.
 
-Compiler cost model analysis is beyond the scope of this Learning Path, but the example demonstrates how autovectorization can be triggered by a flag.
+Compiler cost model analysis is beyond the scope of this Learning Path but the above example demonstrates how autovectorization can be triggered by a flag.
 
 You will see some more advanced examples in the next sections.

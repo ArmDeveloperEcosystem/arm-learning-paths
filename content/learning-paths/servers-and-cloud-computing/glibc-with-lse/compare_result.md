@@ -10,7 +10,7 @@ layout: "learningpathall"
 You can run the mongodb benchmark using Glibc with LSE and NoLSE and compare the results. This will give you an idea of the performance gained by using Glibc with LSE.
 
 ## Result with No-LSE
-Launch MongoDB with Glibc without LSE and obtain benchmark result.  
+Launch MongoDB with Glibc but without LSE and obtain a benchmark result.  
 The output will look similar to:
 
 ```output
@@ -59,10 +59,10 @@ The output will look similar to:
 [SCAN], 99thPercentileLatency(us), 70143
 [SCAN], Return=OK, 1499804
 ```
-The overall throughtput (operations/sec) is 6662.1275371047195 with No-LSE Glibc.
+The overall throughput (operations/sec) is 6662.1275371047195 with No-LSE Glibc.
 
 ## Result with LSE
-Launch MongoDB again, this time with Glibc with LSE and obtain benchmark result.
+Launch MongoDB again, this time with Glibc with LSE and obtain a benchmark result.
 
 The output will look similar to:
   
@@ -113,6 +113,6 @@ The output will look similar to:
 [SCAN], Return=OK, 1499682
 ```
 The overall throughput (operations/sec) is 6871.605426919102 when using Glibc with LSE.
-In this case you can get around 3.14% performance uplift by using Glibc with LSE.
+In this case, you get around 3.14% performance uplift by using Glibc with LSE.
 
 
