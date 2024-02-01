@@ -20,7 +20,7 @@ protect its content and execution from attacks by higher-privileged software, su
 
 The Arm Realm Management Extension (RME) is an Arm v9-A architecture extension and defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
 
-In this learning path, you will learn how to run the reference integration software stack for Arm CCA in a pre-built docker container. Within this container, you will also learn how to create a Realm that runs a guest Linux kernel and run a simple application within the Realm. 
+In this learning path, you will learn how to run the reference integration software stack for Arm CCA in a pre-built docker container. Within this container, you will also learn how to create a Realm that runs a guest Linux kernel and run a simple application within the Realm. This learning path focuses on the common pattern of using a Realm to protect an entire virtual machine.
 
 ## Download the docker image
 
