@@ -21,6 +21,8 @@ A convenient way to run an application inside a Realm within the context of this
 
 Linux kernels contain a gzipped cpio format archive. When the kernel boots up, this archive is extracted into the root filesystem. The kernel then checks whether the root filesystem contains a file named "init" and tries to run it. At this point the kernel is done booting, and the "init" application executes the system the rest of the way. 
 
+The use of the "init" process to run the application also means that you will not see a shell prompt when you boot the guest virtual machine. The guest kernel will boot, run the application and then exit.
+
 In this section, you will package a simple hello world application into the initramfs for the guest linux kernel. 
 
 ## Create a simple initramfs for the guest linux kernel
