@@ -16,7 +16,7 @@ The compiler, FVP model, and debugger are all provided in Arm Development Studio
 
 ## Import the example
 
-Open the [Arm Development Studio IDE](https://learn.arm.com/install-guides/armds/). 
+Open the [Arm Development Studio IDE](/install-guides/armds/). 
 
 Navigate to File > Import... > Arm Development Studio > Examples & Programming Libraries > Examples > Armv9 Bare-Metal, and select the `sme2_matmul_fp32` example. Using the text filter at the top of the pane can help locate the example. Click Finish to import.
 
