@@ -16,7 +16,9 @@ The compiler, FVP model, and debugger are all provided in Arm Development Studio
 
 ## Import the example
 
-Open the Arm Development Studio IDE. Navigate to `File` > `Import...` > `Arm Development Studio` > `Examples & Programming Libraries` > `Examples` > `Armv9 Bare-Metal`, and select the `sme2_matmul_fp32` example. Using the text filter at the top of the pane can help locate the example. Click `Finish` to import.
+Open the [Arm Development Studio IDE](https://learn.arm.com/install-guides/armds/). 
+
+Navigate to File > Import... > Arm Development Studio > Examples & Programming Libraries > Examples > Armv9 Bare-Metal, and select the `sme2_matmul_fp32` example. Using the text filter at the top of the pane can help locate the example. Click Finish to import.
 
 Alternatively extract the example on the command line from the `<install_dir>\examples\Bare-metal_examples_Armv9.zip` archive. For interactive debug (see later) using the IDE is recommended.
 
@@ -24,13 +26,13 @@ Though the project is provided pre-compiled, you can also rebuild with the `Buil
 
 The example is compiled with `-march=armv9-a+sme2`, as set in the `makefile`.
 
-See the supplied `readme.html` for more information.
+See the supplied readme.html for more information.
 
 ## Load the example
 
 There is a supplied `sme2_matmul_fp32.launch` debug connection which has all necessary settings configured.
 
-Double-click on the `.launch` file to open.
+Double-click on the .launch file to open.
 
 The AEMvA FVP model is a generic Arm implementation, which can be configured appropriately to enable Arm architectural features.
 
@@ -47,7 +49,7 @@ For more information on the model parameters, launch the model with `FVP_Base_AE
 
 Click `Debug` to launch the FVP and load the image.
 
-Execution can be controlled by the `Debug Control` pane icon bar (eg `Step Instruction` ), the command line (`stepi`), or short-cut keys (`F5`).
+Execution can be controlled by the `Debug Control` pane icon bar (e.g., `Step Instruction` ), the command line (`stepi`), or short-cut keys (`F5`).
 
 ## Understand the example
 
@@ -79,17 +81,18 @@ Execution can be controlled by the `Debug Control` pane icon bar (eg `Step Instr
 24. To see a full description of this instruction, or any other instruction in this example, simply hover the mouse over the instruction, in either the Editor or Disassembly views.
 25. In the Registers view, expand AArch64 > SME > Tiles > ZA2H_S > F32 > [0]. This shows the contents of the zeroth row ('H') of tile ZA2 as floats, initially all zero.
 26. In the Registers view, expand AArch64 > SME > Tiles > ZA2V_S > F32 > [0]. This shows the contents of the zeroth column ('V') of tile ZA2 as floats, also initially all zero.
-27. Double-click on ZA2H_S.F32[0][0], and change its value to e.g. 99. Notice that ZA2V_S.F32[0][0] changes to the same value, because the zeroth element of the zeroth column is the same as the zeroth element of the zeroth row (the top-left element of the matrix).
-28. In the Commands view, notice that the equivalent command is also shown, e.g. `set var $AARCH64::$SME::$Tiles::$ZA2H_S.F32[0][0] = 99`. This may be abbreviated to `set $ZA2H_S.F32[0][0] = 99`.
-29. Single-step (press F5) to execute the `fmopa` instruction. Notice the values in ZA2H_S.F32[0] and ZA2V_S.F32[0] have updated.
+27. Double-click on ZA2H_S.F32[0][0], and change its value to e.g., 99. Notice that ZA2V_S.F32[0][0] changes to the same value, because the zeroth element of the zeroth column is the same as the zeroth element of the zeroth row (the top-left element of the matrix).
+28. In the Commands view, notice that the equivalent command is also shown, e.g., `set var $AARCH64::$SME::$Tiles::$ZA2H_S.F32[0][0] = 99`. This may be abbreviated to `set $ZA2H_S.F32[0][0] = 99`.
+29. Single-step (press F5) to execute the `fmopa` instruction. Notice that the values in ZA2H_S.F32[0] and ZA2V_S.F32[0] have updated.
 30. Run again and again to see the values changing. You can do the same for ZA0, ZA1, etc.
 31. The contents of the tile may also be viewed in the Commands view using the CLI, for example:
-    To view the zeroth element of the zeroth row, enter `output $ZA2H_S.F32[0][0]`.
-    To view all elements of the zeroth row, enter `output $ZA2H_S.F32[0]`.
-    To view all elements of the zeroth column, enter `output $ZA2V_S.F32[0]`.
-    To view the whole tile (as rows), enter `output $ZA2H_S.F32`.
-    To view the whole tile (as columns), enter `output $ZA2V_S.F32`.
-    Sequences of commands such as these may be easily scripted to construct groups of automated tests.
+    - To view the zeroth element of the zeroth row, enter `output $ZA2H_S.F32[0][0]`
+    - To view all elements of the zeroth row, enter `output $ZA2H_S.F32[0]`
+    - To view all elements of the zeroth column, enter `output $ZA2V_S.F32[0]`
+    - To view the whole tile (as rows), enter `output $ZA2H_S.F32`
+    - To view the whole tile (as columns), enter `output $ZA2V_S.F32`
+    
+    Sequences of commands, such as these, may be easily scripted to construct groups of automated tests
 32. Delete all breakpoints, then set a breakpoint on the first instruction (`st1w {za0h.s[w13, #0]}, p4, [x10]`) in `.Ktail_end` at line 176 and run to it (press F8). This instruction stores words from ZA0, from the row in w13 to memory at the address in x10.
 33. In the Commands view, enter `output /x $ZA0H_S.F32[$w13]` to show the w13th row of ZA0 in hexadecimal.
 34. In the Commands view, enter `x /16 $x10` to show the memory at x10, or open a Memory view and enter x10 in the starting address field.
