@@ -3,11 +3,11 @@ title: Get started with the Scalable Matrix Extension (SME)
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to learn about Scalable Matrix Extension (SME2) to optimize the processing of matrices.
+who_is_this_for: This is an introductory topic for software developers who want to learn about the Scalable Matrix Extension (SME) to optimize the processing of matrices.
 
 learning_objectives:
     - Understand the SME architecture
-    - Build, run, and debug an SME2 single-precision floating-point matrix multiply example
+    - Build, run, and debug an SME single-precision floating-point matrix multiply example
 
 prerequisites:
     - A computer with Arm DS installed
