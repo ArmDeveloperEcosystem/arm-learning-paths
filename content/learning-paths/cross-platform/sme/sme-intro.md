@@ -37,5 +37,6 @@ The Scalable Matrix Extension version 2 (SME2) extends the SME architecture to i
 
 The new instructions enable SME2 to accelerate more workloads than SME version 1, including GEMV, Non-Linear Solvers, Small and Sparse Matrices, and Feature Extraction or tracking.
 
-SME version 1 is represented by the architectural feature FEAT_SME.  FEAT_SME is an optional extension from Armv9.2-A.
-SME version 2 is represented by the architectural feature FEAT_SME2.  FEAT_SME2 is an optional extension from Armv9.2-A.  FEAT_SME2 requires FEAT_SME.
+SME version 1 (SME) is represented by the architectural feature FEAT_SME.  FEAT_SME is an optional extension from Armv9.2-A.
+
+SME version 2 (SME2) is represented by the architectural feature FEAT_SME2.  FEAT_SME2 is an optional extension from Armv9.2-A.  FEAT_SME2 requires FEAT_SME.
