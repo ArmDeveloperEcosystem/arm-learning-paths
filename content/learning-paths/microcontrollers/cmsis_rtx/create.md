@@ -7,19 +7,29 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-You will primarily use Keil MDK through this Learning Path. If you are using Arm Development Studio refer to the appropriate comments.
+This learning path will introduce the staps to create a basic RTX based RTOS application, making use of the latest features of [CMSIS](https://www.keil.arm.com/cmsis).
 
-## Install appropriate device CMSIS-Pack
+For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
-This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 9000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+You will primarily use [Keil MDK](/install-guides/mdk) through this Learning Path. If you are using [Arm Development Studio](/install-guides/armds) refer to the appropriate comments.
 
-If you are using the FVP, there is no need to install an additional CMSIS-Pack.
+## Install (update) to latest CMSIS Packs
 
-If using a different platform, click on `Pack Installer` icon, browse for your device, and install any suggested Device Specific pack.
+Open the 'Pack installer' and install the latest CMSIS packs. At a minimum the following should be installed for this learning path:
+
+* `ARM::CMSIS`
+* `ARM::CMSIS-RTX`
+* 'ARM::CMSIS-View
 
 {{% notice  Arm Development Studio%}}
 Add required `CMSIS-Packs` via the `CMSIS Pack Manager` perspective.
 {{% /notice %}}
+
+## Install appropriate device CMSIS-Pack
+
+This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 10000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
+
+In `Pack Installer` browse for your device, and install any suggested `Device Specific` pack.
 
 ## Create project in Keil MDK
 
@@ -35,13 +45,13 @@ Then select `CMSIS C/C++ Project`, using `Arm Compiler for Embedded 6`.
 
 You will then be prompted to `Select Device` for your project. A list of all devices with their CMSIS-Packs installed will be shown.
 
-For this example, select `Arm` > `Arm Cortex-M4` > `ARMCM4`.
+For this example, select `Arm` > `Arm Cortex-M4` > `ARMCM4`. Click `OK`.
 
 ## Manage Run-Time Environment
 
 You will first be presented with the `Manage Run-Time Environment` dialog, which allows you to specify the CMSIS software components that will be used in the project.
 
-Under `CMSIS`, select `CORE`, as well as `RTOS2 (API)` > `Keil RTX5`, in `Library` form.
+Under `CMSIS`, select `CORE`, as well as `RTOS2 (API)` > `Keil RTX5`, in `Source` form. You will also need to select `CMSIS` > `OS Tick (API)` > `SysTick`.
 
 Under `Device`, select `Startup` (`C Startup`).
 
@@ -55,6 +65,8 @@ Run-time environment is managed by the `.rteconfig` file within the project.
 
 A project can contain many targets, which refer to the platform that a particular build will run on. The default name is `Target 1`. To give a meaningful name, click `Manage Project Items`, and rename the target (for example, to `FVP`), as well as optionally the `Source Group 1` (to `Source`) that will contain the source code. Arranging code in these folders allows for easy sharing across different target builds.
 
+Click `OK` to save.
+
 {{% notice  Arm Development Studio%}}
 Default `Configuration` names are `Debug` and `Release`.
 
@@ -67,7 +79,9 @@ Click `Options for Target`, to open that dialog. This is where build and other s
 
 ### Set FVP as debug target
 
-Navigate to the `Debug` tab, and select `Models Cortex-M Debugger` from the `Use` pull-down list. Click `Settings`, then the `Command` browse (`...`) button, to locate the `Cortex-M4 FVP` within your Keil MDK installation (`ARM\FVP\MPS2_Cortex-M` folder). Click `OK`.
+Navigate to the `Debug` tab, and select `Models Cortex-M Debugger` from the `Use` pull-down list.
+
+Click `Settings`, then the `Command` browse (`...`) button, to locate `VHT_MPS2_Cortex-M4.exe` within your Keil MDK installation (`ARM\VHT\` folder). Click `OK`.
 
 {{% notice  Arm Development Studio%}}
 Ignore this step for now. Debug configuration will be set up later.
@@ -86,7 +100,9 @@ The memory map for the FVP is given in the [documentation](https://developer.arm
 
 Navigate to the `Linker` tab, and de-select `Use Memory Layout from Target Dialog` (as you shall create your own).
 
-Click the browse (`...`) button and create a text file in the same folder as the project. Click `Edit` to open the file in the IDE. The following is a typical scatter file for the FVP.
+Click the browse (`...`) button and create a text file in the same folder as the project.
+
+Click `Edit` to open the file in the IDE. The following is a typical scatter file for the FVP.
 ```text
 LOAD 0x0 0x400000 {
 	ROOT 0x0 0x400000 {

@@ -22,9 +22,12 @@ Next you will populate it with some code.
 
 ## The main() function
 
-First create the `main()` C function. This function defines two variables (`a` and `b`) with character arrays.
+First create the `main()` C function. This function defines two variables (`a` and `b`) with character arrays. We will also define the function prototypes of the assembler functions (see later).
 
 ```C
+void my_strcpy(const char *, char *);
+void my_capitalize(char *);
+
 int main(void)
 {
     const char a[] = "Hello world!";
@@ -36,6 +39,34 @@ int main(void)
     while(1);
 }
 ```
+
+## Place the stack and heap
+
+CMSIS6 requires that the location of the stack and heap are defined.
+
+Open the `Options` pane, and navigate to the `Linker` tab.
+
+Deselect `Use Memory Layout from Target Debug`, and a scatter file should be defined. Click the `Edit` button, and then `OK` to close the `Options` pane.
+
+Edit the scatter file appropriately to place stack (`ARM_LIB_STACK`) and heap (`ARM_LIB_HEAP`) in SRAM areas of the target.
+
+For example, if using the `Cortex-M3 VHT`, edit as follows.
+``` text
+LR_IROM1 0x00000000 0x00400000  {    ; load region size_region
+  ER_IROM1 0x00000000 0x00400000  {  ; load address = execution address
+   *.o (RESET, +First)
+   *(InRoot$$Sections)
+   .ANY (+RO)
+   .ANY (+XO)
+  }
+  RW_IRAM1 0x20000000 0x00300000  {  ; RW data
+   .ANY (+RW +ZI)
+  }
+  ARM_LIB_STACK	0x20300000 EMPTY 0x00001000 {}
+  ARM_LIB_HEAP	0x20301000 EMPTY 0x00001000 {}
+}
+```
+
 
 ## Mixing Assembly Language and C Code
 

@@ -1,5 +1,5 @@
 ---
-title: Build an RTOS in 4 easy steps
+title: Build an RTX5 RTOS application
 
 minutes_to_complete: 30
 

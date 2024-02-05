@@ -19,7 +19,7 @@ Click `Debug` (`Ctrl+F5`) to launch the FVP, and put the IDE into debug mode.
 * Use the menu (`View` > `Watch Windows` > `RTX RTOS`) to observe the RTOS features.
 * Use the menu (`View` > `Serial Windows` > `Debug (printf)`) to observe the printf output.
 
-Click `Run` (`F5`) to start the application.
+Click `Run` (`F5`) to start the application, and after a short time, click `Stop`.
 
 Observe in the `RTX RTOS` view that the threads have been created. Two other threads, `osRtxIdleThread` and `osRtxTimerThread` will also be created.
 
@@ -27,6 +27,7 @@ Observe in the `RTX RTOS` view that the threads have been created. Two other thr
 
 However no output is seen in the `printf viewer`. This is because semihosting is not supported. You will learn how to address this in the next section.
 
+Exit the debug session (`Ctrl+F5`).
 
 ## Build and run the example (Arm Development Studio) {#armds}
 

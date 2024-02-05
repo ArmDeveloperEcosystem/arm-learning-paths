@@ -1,6 +1,6 @@
 ---
 title: Arm Fast Models and FVPs
-author_primary: Jason Andrews
+author_primary: Ronan Synnott
 
 additional_search_terms:
     - virtual platform
@@ -19,4 +19,4 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Arm Fixed Virtual Platforms (FVPs)](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) are a library of such virtual platforms, built with Fast Model technology.
 
-Arm also provides a range of free-of-charge [Ecosystem Fixed Virtual Platforms (FVPs)](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) targeting different market segments and applications.
+Arm also provides free-of-charge [Ecosystem Fixed Virtual Platforms (FVPs)](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) targeting different market segments and applications, as well as `Arm Architecture Envelope Models`.
