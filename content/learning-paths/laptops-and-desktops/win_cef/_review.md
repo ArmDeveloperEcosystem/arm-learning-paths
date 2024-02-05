@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Do you need to rebuild CEF application, if you modify the page to be rendered?
+            Do you need to rebuild the CEF application if you modify the page to be rendered?
         answers:
             - "Yes"
             - "No"            
@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            What is the CefBrowserProcessHandler? 
+            What is the `CefBrowserProcessHandler`? 
         answers:
             - "It is an interface exclusive to the browser process"
             - "It is an interface for downloading Chrome Web Browser"
