@@ -214,7 +214,7 @@ public Form1()
 }
 ```
 
-The above changes will do the following: Firstly, when the application starts, the first label will display the processor architecture. To obtain the processor architecture, use the PROCESSOR_ARCHITECTURE environment variable, which is set by the .NET runtime. Then, update the caption of the window to 'ARM'.
+The above changes will do the following: When the application starts, the first label will display the processor architecture. To obtain the processor architecture, use the PROCESSOR_ARCHITECTURE environment variable, which is set by the .NET runtime. Then, update the caption of the window to 'ARM'.
 
 When the application is running and the user clicks the Start button, the application will read the values from the `NumericUpDown` controls. These values will be used to set the matrix size and the execution count. Given these values, the application will invoke the MeasurePerformance static method of the PerformanceHelper class to measure the time needed to perform matrix multiplication for the given matrix size and execution time. The computation time will then be added to the list box.
 
