@@ -29,6 +29,16 @@ review:
         correct_answer: 1
         explanation: >
             kvmtool supports the creation of realm guests that conform with the Arm RME specification.
+    - questions:
+        question: >
+            An application running in the realm, inherits its confidential protection.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            The guest VM is the realm and an application running in it inherits the confidential protection of the guest VM.
+                  
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
