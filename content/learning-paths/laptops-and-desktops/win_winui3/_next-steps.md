@@ -20,11 +20,7 @@ further_reading:
     - resource:
         title: Microsoft's Official WinUI 3 Documentation
         link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
-        type: documentation
-    - resource:
-        title: WinUI Resources Page
-        link: https://learn.microsoft.com/en-us/windows/apps/winui/winui3/
-        type: documentation   
+        type: documentation  
     - resource:
         title: Example Applications and Code for WinUI
         link: https://github.com/Microsoft/WinUI-Gallery
