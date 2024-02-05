@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Make sure you have downloaded the [`armswdev/aemfvp-cca-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-image) docker container.
+Download the [`armswdev/aemfvp-cca-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-image) docker container.
 
-Install [GCC](/install-guides/gcc/) on your machine. Dependent on the architecture of your machine, you will need to install either the native compiler or cross-compiler.
+Install [GCC](/install-guides/gcc/) on your machine. Dependent on the architecture of your machine, `aarch64` or `x86_64`, you will need to install either the native compiler or cross-compiler.
 
 ## Overview
 In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run an application within that Realm. The application inherits the confidential protection of the guest virtual machine.
