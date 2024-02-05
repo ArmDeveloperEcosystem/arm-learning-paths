@@ -6,7 +6,7 @@ minutes_to_complete: 30
 who_is_this_for: This learning path is for developers who want to learn how to create cross-platform applications and leverage performance improvements on Arm64.
 
 learning_objectives:
-    - Create and build a WinUI application
+    - Create and build a Windows UI Library (WinUI) application
     - Measure code execution performance on Arm64    
 
 prerequisites:
