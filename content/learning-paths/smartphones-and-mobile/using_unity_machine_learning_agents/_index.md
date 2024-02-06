@@ -10,8 +10,9 @@ learning_objectives:
     - Note - Instructions on how to deploy Unity games to an Arm-powered Android device and how to profile them are included in separate Learning Paths.
 
 prerequisites:
-- A computer capable of running Unity. Instructions are for Windows, but could be adapted to other platforms
-- For deploying to an Android device, you will need an Android mobile device and a USB cable to connect it to your computer. The device must support at least Android 8 and include a 64-bit processor
+- A computer capable of running Unity. (Instructions are for Windows, but could be adapted to other platforms.)
+- An Android mobile device that has a 64-bit processor and supports at least Android 8.
+- A USB cable to connect the mobile device to your computer.
 
 author_primary: Arm
 
