@@ -19,15 +19,15 @@ In the previous section, you were able to boot a guest virtual machine as the Re
 
 A convenient way to run an application inside a Realm, within the context of this example, is to package the application as the "init" process for the guest linux kernel. 
 
-Linux kernels contain a gzipped cpio format archive. When the kernel boots up, this archive is extracted into the root filesystem. The kernel then checks whether the root filesystem contains a file named "init" and tries to run it. At this point the kernel is done booting, and the "init" application executes the system the rest of the way. 
+Linux kernels contain a gzipped cpio format archive. When the kernel boots up, this archive is extracted into the root filesystem. The kernel then checks whether the root filesystem contains a file named "init" and tries to run it. At this point the kernel has booted, and the "init" application executes the system the rest of the way. 
 
 The use of the "init" process to run the application also means that you will not see a shell prompt when you boot the guest virtual machine. The guest kernel will boot, run the application and then exit.
 
-In this section, you will package a simple **hello world** application into the initramfs for the guest linux kernel. 
+In this section, you will package a simple **hello world** application into the `initramfs` for the guest linux kernel. 
 
-## Create a simple initramfs for the guest linux kernel
+## Create a simple `initramfs` for the guest linux kernel
 
-Create a directory in which you will build the simple initramfs:
+Create a directory in which you will build the simple `initramfs`:
 
 ```console
 mkdir ~/FM-share
@@ -52,7 +52,7 @@ Now compile the application as the init executable and package it into the `init
 aarch64-linux-gnu-gcc -static hello.c -o init
 echo init | cpio -o -H newc | gzip > test.cpio.gz
 ```
-`test.cpio.gz` is the compressed archive you will use as the initramfs for the guest linux kernel.
+`test.cpio.gz` is the compressed archive you will use as the `initramfs` for the guest linux kernel.
 
 ## Run the application inside the Realm 
 
@@ -66,7 +66,7 @@ Run the Arm CCA reference stack pre-built binaries on the FVP:
 ```console
 ./run-cca-fvp.sh
 ```
-After the host linux kernel has booted up, you will prompted to login. Use `root` for both the login and password:
+After the host linux kernel has booted up, you will prompted to log in. Use `root` for both the login and password:
 
 ```output
 [    3.879183] VFS: Mounted root (ext4 filesystem) readonly on device 254:0.
@@ -93,7 +93,7 @@ buildroot login: root
 Password:
 #
 ```
-With the host linux kernel running, you can now enable sharing of files between your host machine and the running simulation. Mount a `9p` drive on the host linux kernel using `/etc/fstab`:
+With the host linux kernel running, you can now enable the sharing of files between your host machine and the running simulation. Mount a `9p` drive on the host linux kernel using `/etc/fstab`:
 
 ```console
 vi /etc/fstab
@@ -103,7 +103,7 @@ In the `/etc/fstab` file, add the following line to it:
 ```console
 FM	/mnt		9p	trans=virtio,version=9p2000.L,aname=/mnt	0 	0"
 ```
-Save and close the file. Now run the mount command:
+Save and close the file. Now run the `mount` command:
 
 ```console
 mount -a
