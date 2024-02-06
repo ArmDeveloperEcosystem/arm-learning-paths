@@ -67,7 +67,7 @@ The pre-built binaries for the Arm CCA reference software stack are present in t
 ```console
 ls output/aemfvp-a-rme/
 ```
-This includes the Trusted Firmware binaries, the host root filesystem and host linux kernel image:
+This includes the Trusted Firmware binaries, the host root filesystem and the host linux kernel image:
 
 ```output
 bl1.bin  fip.bin  fip-std-tests.bin  host-fs.ext4  Image
