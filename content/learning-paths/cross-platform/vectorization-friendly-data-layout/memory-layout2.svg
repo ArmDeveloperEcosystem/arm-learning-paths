@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="160" width="496" viewBox="0 0 496 160" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px">
+<rect class="backdrop" x="0" y="0" width="496" height="160" rx="3px" ry="3px" fill="white" opacity="0.9"/>
+<path d="M 8,16 L 8,144" fill="none" stroke="black"/>
+<path d="M 64,48 L 64,144" fill="none" stroke="black"/>
+<path d="M 104,80 L 104,144" fill="none" stroke="black"/>
+<path d="M 144,80 L 144,144" fill="none" stroke="black"/>
+<path d="M 184,80 L 184,144" fill="none" stroke="black"/>
+<path d="M 224,48 L 224,144" fill="none" stroke="black"/>
+<path d="M 264,80 L 264,144" fill="none" stroke="black"/>
+<path d="M 304,80 L 304,144" fill="none" stroke="black"/>
+<path d="M 344,80 L 344,144" fill="none" stroke="black"/>
+<path d="M 384,48 L 384,144" fill="none" stroke="black"/>
+<path d="M 488,16 L 488,144" fill="none" stroke="black"/>
+<path d="M 8,16 L 488,16" fill="none" stroke="black"/>
+<path d="M 8,48 L 488,48" fill="none" stroke="black"/>
+<path d="M 8,80 L 488,80" fill="none" stroke="black"/>
+<path d="M 8,112 L 488,112" fill="none" stroke="black"/>
+<path d="M 8,144 L 488,144" fill="none" stroke="black"/>
+<g class="text">
+<text x="72" y="36">struct object</text>
+<text x="36" y="68">id</text>
+<text x="148" y="68">position</text>
+<text x="308" y="68">velocity</text>
+<text x="436" y="68">model_data</text>
+<text x="88" y="100">x</text>
+<text x="128" y="100">y</text>
+<text x="168" y="100">z</text>
+<text x="208" y="100">t</text>
+<text x="248" y="100">x</text>
+<text x="288" y="100">y</text>
+<text x="328" y="100">z</text>
+<text x="368" y="100">t</text>
+<text x="36" y="132">4B</text>
+<text x="84" y="132">4B</text>
+<text x="124" y="132">4B</text>
+<text x="164" y="132">4B</text>
+<text x="204" y="132">4B</text>
+<text x="244" y="132">4B</text>
+<text x="284" y="132">4B</text>
+<text x="324" y="132">4B</text>
+<text x="364" y="132">4B</text>
+<text x="428" y="132">8B</text>
+</g>
+</svg>
