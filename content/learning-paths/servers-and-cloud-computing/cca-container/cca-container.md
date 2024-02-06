@@ -73,7 +73,7 @@ This includes the Trusted Firmware binaries, the host root filesystem and the ho
 bl1.bin  fip.bin  fip-std-tests.bin  host-fs.ext4  Image
 ```
 
-These binaries can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and  Armv9-A architectures with comprehensive system IP. The FVP is also contained within this docker container.
+These binaries can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and Armv9-A architectures with comprehensive system IP. The FVP is also contained within this docker container.
 
 Launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
 
@@ -103,7 +103,7 @@ Welcome to Buildroot
 buildroot login:
 ```
 
-You will be prompted to login to buildroot. Enter `root` as both the username and password.
+You will be prompted to log in to buildroot. Enter `root` as both the username and password.
 
 You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, Realm Management Monitor (RMM) in Realm, host Linux in non-secure and Hafnium in secure. 
 
@@ -118,7 +118,7 @@ lkvm run --realm -c 2 -m 256 -k /realm/Image -d /realm/realm-fs.ext4 -p earlycon
 ```
 You should see the guest Linux kernel starting to boot in a Realm. This step can take several minutes.
 
-After boot up, you will be prompted to login at the guest Linux buildroot prompt. Use `root` again as both the username and password.
+After boot up, you will be prompted to log in at the guest Linux buildroot prompt. Use `root` again as both the username and password.
 
 ```output
 Starting network: udhcpc: started, v1.31.1
