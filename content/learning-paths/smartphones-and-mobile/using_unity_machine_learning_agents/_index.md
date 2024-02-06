@@ -1,5 +1,5 @@
 ---
-title: Using Unity Machine Learning Agents toolkit
+title: Using Unity's Machine Learning Agents on Arm
 
 minutes_to_complete: 60
 
