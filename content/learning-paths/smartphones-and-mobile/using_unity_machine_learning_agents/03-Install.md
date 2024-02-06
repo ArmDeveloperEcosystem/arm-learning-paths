@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Getting started
 
-The Unity ML Agents toolkit provides a C# API for use in your project and Python scripts to run outside of Unity. We'll need Python itself and a few extra libraries.
+The Unity ML Agents toolkit provides a C# API for use in your project and Python scripts to run outside of Unity. You will need Python itself and a few extra libraries.
 
-We need the Python tools before we can run our training stage, but to get going quickly we'll just install Unity for now.
+You will need the Python tools before the training stage, but to get started quickly just install Unity to begin.
 
-## The tools we will need
+## Tools
 
-We will install Unity via the Unity Hub. The Unity Hub provides an easy way to manage multiple installations of Unity. It also provides a straightforward way of adding the extra support modules we'll need. Here is what we'll end up with:
+Install Unity via the Unity Hub. The Unity Hub provides an easy way to manage multiple installations of Unity. It also provides a straightforward way of adding the required support modules. You will need the following:
 
 * Unity Hub
 * Unity
@@ -22,23 +22,21 @@ We will install Unity via the Unity Hub. The Unity Hub provides an easy way to m
 * Dr Arm Unity project files (the accompanying zip file)
 * [_only for deploying to an Android device_] Android build support (Unity support module)
 
-The installation instructions in the next section will take us through the above steps one by one, starting with the Unity Hub.
+The installation instructions in the next section go through the steps shown above, starting with the Unity Hub.
 
 ## Installing Unity Hub, Unity and support modules
-
-Assuming you don't already have Unity installed:
 
 1. Download and install the [Unity Hub](https://unity3d.com/get-unity/download?ref=personal)
 
     Note that Personal licenses are free, and if running on Windows you will need Windows 10 or 11 and a GPU with DirectX 10 capabilities. If running Unity on a Mac or Linux, please follow the instructions for your platform.
 
-1. In your Unity Hub download and install Unity. The latest LTS (Long Term Support) release should work but this project has been tested on 2022.3.12f1.
+1. In Unity Hub, download and install Unity. The latest LTS (Long Term Support) release should work but this project has been tested on 2022.3.12f1.
 
     1. In Unity Hub go to **Installs** and click **Install Editor**
 
     1. Go to the _Archive_ page and find version 2022.3.12f1. Select the "Unity Hub" download button rather than downloading the Unity Editor directly
 
-    1. The install will require several gigabytes (including Android deployment options) so please check your available disk space first
+    1. The install will require several gigabytes (including Android deployment options) so check your available disk space first
 
 1. Add Android Build support
 
@@ -72,7 +70,7 @@ Assuming you don't already have Unity installed:
 
 ## Check active script editor in Unity
 
-Depending on your setup, it is possible that the default script editor is not set to your preferred editor:
+Depending on your setup, it's possible that the default script editor is not set to your preferred editor:
 
 1. In Unity select _Edit_ menu and then _Preferences_
 
