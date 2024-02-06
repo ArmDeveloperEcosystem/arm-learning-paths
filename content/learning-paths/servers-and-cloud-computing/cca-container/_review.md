@@ -22,7 +22,7 @@ review:
             CCA requires the Realm Management Extension (RME) of Armv9-A architecture, as well as support within the software stack running on the device.
     - questions:
         question: >
-            kvmtool supports the creation of realm guests.
+            kvmtool supports the creation of Realm guests.
         answers:
             - "True"
             - "False"
@@ -31,7 +31,7 @@ review:
             kvmtool supports the creation of realm guests that conform with the Arm RME specification.
     - questions:
         question: >
-            An application running in the realm inherits its confidential protection.
+            An application running in the Realm inherits its confidential protection.
         answers:
             - "True"
             - "False"
