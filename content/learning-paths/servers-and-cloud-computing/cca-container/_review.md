@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Arm Confidential Compute Architecture (CCA) is available on all Arm devices
+            The Arm Confidential Compute Architecture (CCA) is available on all Arm devices
         answers:
             - "True"
             - "False"
@@ -31,7 +31,7 @@ review:
             kvmtool supports the creation of realm guests that conform with the Arm RME specification.
     - questions:
         question: >
-            An application running in the realm, inherits its confidential protection.
+            An application running in the realm inherits its confidential protection.
         answers:
             - "True"
             - "False"
