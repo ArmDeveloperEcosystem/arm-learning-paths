@@ -12,18 +12,18 @@ layout: "learningpathall"
 
 Download the [`armswdev/aemfvp-cca-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-image) docker container.
 
-Install [GCC](/install-guides/gcc/) on your machine. Dependent on the architecture of your machine, `aarch64` or `x86_64`, you will need to install either the native compiler or cross-compiler.
+Install [GCC](/install-guides/gcc/) on your machine. Depending on the architecture of your machine, `aarch64` or `x86_64`, you will need to install either the native compiler or the cross-compiler.
 
 ## Overview
 In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run an application within that Realm. The application inherits the confidential protection of the guest virtual machine.
 
-A convenient way to run an application inside a Realm within the context of this example, is to package the application as the "init" process for the guest linux kernel. 
+A convenient way to run an application inside a Realm, within the context of this example, is to package the application as the "init" process for the guest linux kernel. 
 
 Linux kernels contain a gzipped cpio format archive. When the kernel boots up, this archive is extracted into the root filesystem. The kernel then checks whether the root filesystem contains a file named "init" and tries to run it. At this point the kernel is done booting, and the "init" application executes the system the rest of the way. 
 
 The use of the "init" process to run the application also means that you will not see a shell prompt when you boot the guest virtual machine. The guest kernel will boot, run the application and then exit.
 
-In this section, you will package a simple hello world application into the initramfs for the guest linux kernel. 
+In this section, you will package a simple **hello world** application into the initramfs for the guest linux kernel. 
 
 ## Create a simple initramfs for the guest linux kernel
 
@@ -132,5 +132,5 @@ Hello from the Realm!
 ```
 You have successfully run an application inside the Realm!
 
-The Realm will exit after the application runs, because it has been packaged as the guest kernel's "init" process.
+The Realm will exit after the application runs because it has been packaged as the guest kernel's "init" process.
 
