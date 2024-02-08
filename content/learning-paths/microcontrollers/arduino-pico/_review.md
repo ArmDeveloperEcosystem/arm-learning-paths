@@ -2,14 +2,14 @@
 review:
     - questions:
         question: >
-            What make embedded programming different from application programming?
+            What makes embedded programming different from application programming?
         answers:
-            - Embedded programming requires using assembly language
-            - Embedded programming doesn't use language contructs like classes and functions
-            - Embedded programming just runs on more resource-limited hardware
+            - Embedded software requires the use of assembly language
+            - Embedded software doesn't use language constructs like classes and functions
+            - Embedded software typically runs on resource-limited hardware
         correct_answer: 3                    
         explanation: >
-            Fundamentally there is no difference between embedded programming and application programming. The biggest difference is in what resources are available to your program on your target hardware.
+            Fundamentally, there is no difference between embedded programming and application programming. The biggest difference is the hardware resources available to your program.
 
     - questions:
         question: >
@@ -19,11 +19,11 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            The Arduino Core software works with board packages that cover a number of boards, not all of this are Arduino branded. For example, this Learning Path uses the Raspberry Pi branded Pico board.
+            The Arduino core software works with board support packages that cover a number of boards, not all of these are Arduino branded. For example, the Raspberry Pi branded Pico board is not from Arduino.
                
     - questions:
         question: >
-            Which function of your Sketch does the Arduino Core software call when your board first starts up?
+            Which function of your sketch does Arduino core call when your board first starts up?
         answers:
             - main()
             - setup()
@@ -31,11 +31,11 @@ review:
             - delay()
         correct_answer: 2          
         explanation: >
-            Arduino Sketches don't have a main() function, instead the Arduino Core software calls the setup() function at start.
+            Arduino sketches don't have a main() function, instead Arduino core calls the setup() function at start.
 
     - questions:
         question: >
-            Which function of your Sketch does the Arduino Core software call continuously after it has started?
+            Which function of your sketch does Arduino core call continuously after it has started?
         answers:
             - main()
             - setup()
@@ -43,7 +43,7 @@ review:
             - delay()
         correct_answer: 3          
         explanation: >
-            Arduino Sketches don't have a main() function, instead the Arduino Core software calls the setup() function at start.
+            After startup, Arduino core calls loop() continuously.
 
     - questions:
         question: >
@@ -55,7 +55,7 @@ review:
             - Your board will turn off
         correct_answer: 2          
         explanation: >
-            Arduino Core will continuously call the loop() function until you make a call to exit() or the board loses power.
+            Arduino core continuously calls loop() until you call exit() or the board loses power.
 
 
 # ================================================================================
