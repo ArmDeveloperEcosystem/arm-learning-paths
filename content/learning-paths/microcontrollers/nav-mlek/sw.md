@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 You should use an `x86_64` development machine running Windows or Linux for the best experience. 
 
-The Arm ML Evaluation Kit (MLEK) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
+The [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) is not fully supported on Windows. Some of the required tools work only on Linux. Linux is recommended if you plan to use MLEK extensively. 
 
 There are some ML examples which can be developed using Windows tools. 
 
@@ -33,7 +33,7 @@ Use the [Arm Development Studio install guide](/install-guides/armds/) to set up
 
 [Keil MDK](/install-guides/mdk/) is a popular microcontroller development toolkit on Windows.
 
-Both IDEs contain `Arm Compiler for Embedded` to build applications, and can connect to the `Ecosystem Corstone-300 FVP` for software debug and test.
+Both IDEs contain `Arm Compiler for Embedded` to build applications, and can connect to the Ecosystem FVPs for software debug and test.
 
 [Arm Keil Studio Cloud](/install-guides/keilstudiocloud/) also offers the ability to run software on the `Corstone-300 FVP`. A [list of software projects](https://www.keil.arm.com/boards/arm-v2m-mps3-sse-300-fvp-610bb98/projects/) is available for you to browse.
 
