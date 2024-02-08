@@ -20,9 +20,9 @@ This Learning Path provides a complete sketch you can upload onto your Raspberry
 
 First, open the sketch in the Arduino IDE.
 
-1. Download the [pir_sensor.ino](./pir_sensor_1.ino) sketch to your computer
-2. In the Arduino IDE, go to File -> Open
-3. Find and select the `pir_sensor.ino` file you downloaded to your computer and click "Open"
+1. Right click and select `Save Link As` to save [pir_sensor.ino](../pir_sensor_1.ino) sketch to your computer
+2. In the Arduino IDE, go to `File -> Open`
+3. Find and select the `pir_sensor.ino` file you downloaded to your computer and click `Open`
 
 ## Code walk-through
 
