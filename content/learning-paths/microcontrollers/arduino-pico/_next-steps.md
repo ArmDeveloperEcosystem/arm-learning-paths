@@ -1,8 +1,17 @@
 ---
-next_step_guidance: Now that you've gotten started with microcontrollers, check out other microcontroller Learning Paths.
+next_step_guidance: Now that you have some microcontroller experience, check out another programming environment for the Raspberry Pi Pico.
 
-recommended_path: /learning-paths/microcontrollers/
+recommended_path: /learning-paths/microcontrollers/rpi_pico/ 
 
+further_reading:
+    - resource:
+        title: Arduino-Pico
+        link: https://arduino-pico.readthedocs.io/en/latest/index.html
+        type: documentation
+    - resource:
+        title: Raspberry Pi Pico documentation
+        link: https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -1,22 +1,24 @@
 ---
 # User change
-title: "Building a Smart Device Prototype"
+title: "Build a smart device prototype"
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-## Building Your First Device
-To get started on your first embedded project, we're going to use a cheap and widely available device: the [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/).
+## Build your first device
+
+To get started on your first embedded project, you can use a cheap and widely available device: the [Raspberry Pi Pico](https://www.raspberrypi.com/products/raspberry-pi-pico/).
 
 ![RaspberryPi Pico](_images/raspberry_pi_pico.jpg)
 
-You were probably expecting an Arduino board, rather than a Raspberry Pi board, but it turns out that the Arduino Core package that supports the Arduino Nano RP2040 will also support the Rasperry Pi Pico, because they use the exact same RP2040 microprocessor. Plus the Pico is less expensive, currently retailing for less than $5 USD.
+You were probably expecting an Arduino board, rather than a Raspberry Pi board, but it turns out that the Arduino core package that supports the Arduino Nano RP2040 will also support the Raspberry Pi Pico, because they use the exact same RP2040 microprocessor. Plus the Pico is less expensive, currently retailing for less than $5 USD. As you learn, you can also use the Raspberry Pi Pico with other programming environments, such as MicroPython.
 
 ## Accessories
-For interacting with the physical world we're going to use a couple of cheap commodity components. 
+
+For interacting with the physical world you can use two cheap commodity components. 
 
 ![PIR Sensor](_images/PIR-Sensor-Pinout.png)
 
@@ -25,19 +27,21 @@ First a PIR motion sensor. This sensor reacts to infrared photons emitted by a w
 
 ![Electric Buzzer](_images/buzzer-pin-diagram.png.webp)
 
-Second, a very simple electric buzzer. You can get fancy with one of these and make it play different sounds with something called Pulse Width Modulation (PWM), but for simplicity we're just going to give it a constant voltage which will result in a high-pitched beeping noise.
+Second, a very simple electric buzzer. You can get fancy with one of these and make it play different sounds with something called Pulse Width Modulation (PWM), but for simplicity you can give it a constant voltage which will result in a high-pitched beeping noise.
 
 ![Breadboard](_images/Breadboard.jpeg)
-And finally we're going to use a breadboard to let us connect all of these components together without having to do any soldering.
+
+Finally, you can use a breadboard to connect the components together without having to do any soldering.
+
 If you're not familiar with a breadboard, the image above shows you how all of the little holes are connected together. When you plug a wire into a hole, it connects it to every other hole on the same connected line. This configuration lets you connect multiple components to the same pin on your development board.
 
-## Putting it all together
+## Assemble your system
 
 ### Step 1: Seat your Raspberry Pi
 
 ![RaspberryPi Pico](_images/pico_on_breadboard.png)
 
-You want to seat your Raspberry Pi Pico onto your breadboard so that its rows of pins sit on either side of the center divider. Make sure that it's firmly pressed all the way down, but be careful not to bend any of the pins.
+Seat your Raspberry Pi Pico on the breadboard so that its rows of pins sit on either side of the center divider. Make sure that it's firmly pressed all the way down, but be careful not to bend any of the pins.
 
 ### Step 2: PIR ground
 
@@ -57,13 +61,13 @@ Using a red wire, connect the input voltage pin of your PIR sensor to pin #36 on
 
 The last step to connecting the PIR sensor is to connect the middle data pin to pin #34 on your Pico. This is a GPIO pin that you can use to either read or write data. 
 
-Note that this is GPIO #28, even though it's physical pin #34. Physical pin number and GPIO numbers don't match up.
+Note that this is GPIO #28, even though it's physical pin #34. Physical pin number and GPIO numbers are not the same.
 
 ### Step 5: Buzzer ground
 
 ![Buzzer ground](_images/piezo_1.png)
 
-Next it's time to connect the buzzer. Start by connecting the buzzer's ground pin to pin #23 on your Pico. This is another ground voltage pin that is build into your board.
+Next, it's time to connect the buzzer. Start by connecting the buzzer's ground pin to pin #23 on your Pico. This is another ground pin that is build into your board.
 
 ### Step 6: Buzzer input
 
@@ -73,10 +77,12 @@ Then, connect the buzzer's input pin to pin #25 on your Pico. This is another GP
 
 ### Review
 
-You're now down assembling your physical device! Let's go back over what we did:
+Your physical device is now assembled and ready. 
 
-Our motion sensor is connected to power, ground, and GPIO #28, which is where we will read the motion state from.
+Here is a review:
 
-Our buzzer is connected to ground and GPIO #24, which is what we will use to turn it on and off.
+The motion sensor is connected to power, ground, and GPIO #28, which is where you will read the motion state from.
 
-Now it's time to start programming it!
+The buzzer is connected to ground and GPIO #24, which is what you will use to turn it on and off.
+
+Now it's time to start programming!
