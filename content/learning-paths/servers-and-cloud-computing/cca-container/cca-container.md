@@ -37,7 +37,7 @@ Pull the docker image from DockerHub:
 ```console
 docker pull armswdev/aemfvp-cca-image
 ```
-Confirm that the docker container image was dowloaded successfully:
+Confirm that the docker container image was downloaded successfully:
 
 ```console
 docker image list
