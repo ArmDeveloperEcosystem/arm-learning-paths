@@ -129,13 +129,13 @@ All CMSIS-Compiler components require CMSIS-Compiler:Core to be present.
 
 ### Linker warning L6314W
 
-With CMSIS v6, a linker warning:
+With CMSIS v6, a linker warning as shown below may get reported:
 
 ```txt
 L6314W: No section matches pattern *(.bss.noinit)
 ```
 
-now may get reported. This is due to the following entry in the Arm Compiler for Embedded scatter files:
+ This is due to the following entry in the Arm Compiler for Embedded scatter files:
 
 ```txt
 RW_NOINIT __RW_BASE UNINIT __RW_SIZE {
@@ -178,7 +178,7 @@ With the new Keil RTX5 v5.8.0, the default processor mode for thread execution h
 define OS_PRIVILEGE_MODE 1
 ```
 
-which gave enabled the privileged mode for threads by default.
+This enabled the privileged mode for threads by default.
 
 The new default is:
 
@@ -186,7 +186,7 @@ The new default is:
 define OS_PRIVILEGE_MODE 0
 ```
 
-which ends up in exceptions at run-time when threads use privileged operations.
+This results in exceptions at run-time when threads use privileged operations.
 
 {{% notice Resolution %}}
 If an exception occurs at run-time, check the "Default Processor Mode for Thread execution" setting and adapt to "Privileged" if necessary.
