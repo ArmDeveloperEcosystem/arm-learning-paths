@@ -3,7 +3,7 @@ title: Convert uvprojx-based projects to csolution
 
 minutes_to_complete: 10
 
-who_is_this_for: Users of µVision who want to migrate to the new project format (csolution) mandated by CMSIS-Toolbox.
+who_is_this_for: This is a topic for users of µVision who want to migrate to the new project format (csolution) required by CMSIS-Toolbox.
 
 learning_objectives: 
     - Import, convert, and build uvprojx-based projects in Keil Studio.
