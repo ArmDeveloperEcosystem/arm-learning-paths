@@ -46,6 +46,8 @@ In addition to having Docker installed, You will also need a Docker Hub account.
 
 {{% notice Note %}}
 You will need a credit card to use Docker Build Cloud. You don't need to pay anything to try it, but you need to enter your credit card.
+
+You will need a Docker subscription for Docker Team or Docker Business to build multi-architecture images. Visit [Docker Build Cloud pricing](https://www.docker.com/products/build-cloud/#pricing) for more information.
 {{% /notice %}}
 
 It may help to review the first two sections of [Learn how to use Docker](/learning-paths/cross-platform/docker/) so you are familiar with the basics before trying Docker Build Cloud.
@@ -252,5 +254,14 @@ To build for different architectures you can change the list specified with `--p
 ```console 
 docker buildx build --platform linux/arm64,linux/amd64 --builder cloud-username-cloud-builder1 --tag username/cloud-build-test --push .
 ```
+
+{{% notice Note %}}
+The above command will fail if you do not have a Docker Team or Docker Business subscription. 
+
+If you have Docker Personal or Docker Pro the error is:
+```console
+ERROR: failed to solve: FailedPrecondition: build cannot proceed concurrent build limit of 1 reached
+```
+{{% /notice %}}
 
 Using a cloud service simplifies multi-architecture builds and shortens build time for complex images.
