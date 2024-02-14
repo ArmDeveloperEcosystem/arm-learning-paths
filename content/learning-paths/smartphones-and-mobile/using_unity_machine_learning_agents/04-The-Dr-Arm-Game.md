@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## The Dr Arm Game
 
-This learning path is based on the video workshop [Using Unity's Machine Learning Agents on Arm](https://on-demand.arm.com/flow/arm/devhub/sessionCatalog/page/pubSessCatalog/session/1681291098539001B22U). We will go through all the key points from the video and use the same Dr Arm game project files (provided in the supporting zip file you extracted earlier).
+This learning path is based on the video workshop [Using Unity's Machine Learning Agents on Arm](https://on-demand.arm.com/flow/arm/devhub/sessionCatalog/page/pubSessCatalog/session/1681291098539001B22U) and uses the same Dr Arm game project files (provided in the supporting zip file you extracted earlier).
 
 In the game, you control a fighting character (a Paladin) in battle against an AI opponent (a Vampire).
 
@@ -23,13 +23,13 @@ Use the on-screen touch controls to control your character on mobile. The AI opp
 
 ## Open and test the game
 
-Before diving into machine learning in Unity, let's first look at the game. We have a ready-to-play version in the Unity scene called _Level_DevSummit2022_ReadyToPlay_.
+Before diving into machine learning in Unity, look at the game. There is a ready-to-play version in the Unity scene called _Level_DevSummit2022_ReadyToPlay_.
 
-How a model was trained and how this pre-trained model was plugged into and used within the game are all explained in detail in later sections of this learning path.
+Later sections of this learning path explain how the model was pre-trained and plugged into the game.
 
-Dr Arm is intended for mobile play but we can test it within the Unity editor first to ensure everything is present and correct. To do this, we'll run the game in demo mode, which shows two AI characters battling each other.
+Dr Arm is intended for mobile play but you can test it within the Unity editor first to ensure everything is present and correct. To do this, run the game in demo mode, which shows two AI characters battling each other.
 
-Assuming you are using the default editor layout:
+In the default editor layout:
 
 1. Navigate to the _Assets/#DevSummit2022/Scenes_ directory in the Project panel
 
@@ -49,4 +49,6 @@ Assuming you are using the default editor layout:
 
 ![Dr Arm Demo Mode](/images/game-demo-mode.jpg "Figure 2. Demo mode running two AT characters against each other")
 
-The screenshots above show a working version. If you see something similar, you know everything is working as expected. In the next section, we'll dive into machine learning and how we leverage ML in Dr Arm.
+The screenshots above show a working version. If you see something similar, you know everything is working as expected.
+
+The next section dives into machine learning and how ML is leveraged in Dr Arm.

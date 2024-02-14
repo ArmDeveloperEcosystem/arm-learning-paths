@@ -7,15 +7,15 @@ layout: learningpathall
 ---
 ## A shortcut
 
-Training can take several hours. If you would prefer to skip training, you can jump to the final section, _Use pre-made training data_. This section will guide you through reusing training data we have already generated and included in the supporting zip file.
+Training can take several hours. If you would prefer to skip training, you can jump to the final section, _Use pre-made training data_. This section will guide you through reusing training data that has already been generated and included in the supporting zip file.
 
 ## Python and machine learning packages
 
-Unity ML Agents Python package can be installed using the popular Python package manager Pip. And the toolkit's Unity package can be installed via the Unity Package Manager.
+Unity ML Agents Python package can be installed using the popular Python package manager Pip. The toolkit's Unity package can be installed via the Unity Package Manager.
 
-Note our Unity project already contains the ML Agents package, but you still need to have the Python and the ML Agents Pip packages installed.
+Note: the Unity project already contains the ML Agents package, but you still need to have the Python and the ML Agents Pip packages installed.
 
-Before running the training phase, we need to install some additional tools as well. We will install everything via Python and Pip, but if you would like more information on each package, we have provided links below:
+Before running the training phase, you need to install some additional tools. These can be installed via Python and Pip, but if you would like more information on each package, please refer to the links below. (The next section describes the steps to get all of these installed.)
 
 * Python - the ML Agents framework has been written in Python. [https://www.python.org](https://www.python.org/)
 
@@ -29,13 +29,13 @@ Before running the training phase, we need to install some additional tools as w
 
 * ML Agents - part of the ML Agents Toolkit from Unity which provides imitation and reinforcement learning [https://pypi.org/project/mlagents](https://pypi.org/project/mlagents/). The Unity ML Agents toolkit github is [https://github.com/Unity-Technologies/ml-agents](https://github.com/Unity-Technologies/ml-agents)
 
-In the next section we'll go through the steps to get all of the above installed.
+
 
 ## Installing Python, Pip and the required packages
 
 ### Installing Python
 
-We recommend using Python 3.7.9 as future versions produced errors on some platforms when installing PyTorch.
+Use Python 3.7.9, as future versions produced errors on some platforms when installing PyTorch.
 
 In a command or terminal prompt (such as PowerShell):
 
@@ -162,7 +162,7 @@ There are a few Python-related issues that can arise when trying to run _mlagent
 
 ## Run the training
 
-The longer the training runs (as in the more iterations), the better the AI opponent. Training to a reasonably difficult level can take several hours or more. We'll show how to run training but also provide pre-made data if you do not want to wait.
+The longer the training runs (as in the more iterations), the better the AI opponent. Training to a reasonably difficult level can take several hours or more.
 
 ### Loading the training scene
 
@@ -243,15 +243,15 @@ Please check that you have an NVIDIA GPU and installed a driver from http://www.
 
     ![Python-Unity Startup](images/python-mlagent-unity-startup.png "Figure 1. Python-Unity Startup")
 
-1. Notice at the bottom it tells you to _Start training by pressing the Play button in the Unity Editor_. So switch to the Unity Editor and do just that.
+1. Notice at the bottom it tells you to _Start training by pressing the Play button in the Unity Editor_. Switch to the Unity Editor and do that.
 
-1. Once the Unity Editor starts and the learning begins it will usually switch to the _Game_ tab, which can be a little disorientating as the camera is attached to a character running at high speed. Switch to the _Scene_ tab to be able to see all 6 agents going through the learning process. It should look similar to this:
+1. Once the Unity Editor starts and the learning begins it will usually switch to the _Game_ tab, which can be disorientating as the camera is attached to a character running at high speed. Switch to the _Scene_ tab to see all 6 agents going through the learning process. It should look similar to this:
 
     ![Unity Agents Learning](images/unity-agents-learning.png "Figure 2. Unity Agents Learning")
 
 1. It's possible for the connection to time-out if you take too long to play the Unity scene. If this happens, simply start these steps again.
 
-1. If we switch back to our console/terminal window, you should see the connection to the brains has been made and the parameter summary
+1. If you switch back to the console/terminal window, you should see the connection to the brains has been made and the parameter summary
 
     ```
     [INFO] Connected to Unity environment with package version 2.3.0-exp.3 and communication version 1.5.0
@@ -307,7 +307,7 @@ Please check that you have an NVIDIA GPU and installed a driver from http://www.
             behavioral_cloning:     None
     ```
 
-1. Every 5000 steps it will output the state of our learning, similar to this:
+1. Every 5000 steps it will output the state of learning, similar to this:
 
     ```
     [INFO] BossBattle. Step: 5000. Time Elapsed: 89.481 s. Mean Reward: -1.000. Std of Reward: 0.000. Training.
@@ -338,11 +338,11 @@ Please check that you have an NVIDIA GPU and installed a driver from http://www.
     
     Training to a competent level can take several hours; our setup typically took 6-8 hours.
 
-    **NOTE**: If you don't want to wait to let the training run for hours, see section _Use pre-made training data_ below - we'll show how to plug in some brains we've already generated.
+    **NOTE**: If you don't want to wait to let the training run for hours, see section _Use pre-made training data_ below - which shows how to plug in pre-generated brains.
 
 ## TensorBoard
 
-In this section we look at how TensorBoard can be used to monitor the training progress.
+This section describes how TensorBoard can be used to monitor the training progress.
 
 1. Open up a console or terminal window and navigate to the directory where you unzipped the project, then:
 
@@ -362,9 +362,9 @@ In this section we look at how TensorBoard can be used to monitor the training p
     tensorboard --logDir results\firstrun --port 6006 --reload_multiple True
     ```
 
-1. This monitors our Neural Network and calculates how our learning is progressing.
+1. This monitors the Neural Network and calculates how learning is progressing.
 
-1. Now open up your browser to http://localhost:6006 (the port we passed to the launch command), which should look similar to this:
+1. Now open up your browser to http://localhost:6006 (the port that was passed to the launch command), which should look similar to this:
 
     ![TensorBoard UI](images/tensorboard-ui.png "Figure 7. TensorBoard UI")
 
@@ -378,7 +378,7 @@ In this section we look at how TensorBoard can be used to monitor the training p
 
 ## The training configurations
 
-We can control the training using a _yaml_ configuration file.
+You can control the training using a _yaml_ configuration file.
 
 Within Visual Studio (or your code editor) open the _BossBattle.yaml_ and _BossBattle_separation.yaml_ files. You'll find both in the _Assets->Scripts->MlAgents->config_ subdirectory. _BossBattle.yaml_ looks like this:
 
@@ -420,25 +420,25 @@ behaviors:
 
 You can see that _BossBattle.yaml_ contains a single definition of a _behavior_ object called _BossBattle_. This essentially gives both the Player and the NPC the same brain, although each with their own instance of it.
 
-However, in the _BossBattle separation.yaml_ you will see two behaviors; a 'brain' for each character type, each with its own parameters. For now though, we will use the same 'brain' (_BossBattle_) for both characters.
+However, in the _BossBattle separation.yaml_ you will see two behaviors; a 'brain' for each character type, each with its own parameters. For now, use the same 'brain' (_BossBattle_) for both characters.
 
 Some of the key behavior properties are:
 
-* _trainer type:ppo_ : PPO is an ML-Agent algorithm. The name stands for Proximal Policy Optimization. There are quite a number of different algorithms and if you go onto their GitHub you can learn about all the different ones they have. This one works very well for our scenario.
+* _trainer type:ppo_ : PPO is an ML-Agent algorithm. The name stands for Proximal Policy Optimization. There are quite a number of different algorithms and if you go onto their GitHub you can learn about all the different ones they have. This one works very well for this scenario.
 
 * _hyperparameters_ : Normal machine learning hyperparameters
 
 * _network settings_ : Sets up the actual size of the neural network. Notice it has _num layer: 2_ and _hidden units:128_ - this is 2 hidden layers of 128 units each. In a more complex scenario you might have 3 layers and 256 hidden units per layer. Have another look at the Multilayer Perceptron (MLP) in Figure 5.
 
-    * The 1st layer is all of our observations. Note that we have 3 stacked vectors (for the last 3 frames), as input into the _neural network_.
+    * The 1st layer is all of our observations. Note that there are 3 stacked vectors (for the last 3 frames), as input into the _neural network_.
 
-    * Then in the _neural network_ we have 2 hidden layers, each with 128 units.
+    * Then in the _neural network_ there are 2 hidden layers, each with 128 units.
 
     * The NN output layer maps to _Actions_, which in this case is the joystick movements and the ability to dodge-roll, use sword or fireball attack.
 
         ![MLP Network](images/mlp-network.png "Figure 5. Another look at the neural network diagram")
 
-* On line 23 is _keep_checkpoints_ : This is how many checkpoints it should keep saved. If we have more than this it will delete the oldest ones.
+* On line 23 is _keep_checkpoints_ : This is how many checkpoints it should keep saved. If there are more than this it will delete the oldest ones.
 * On line 24 is _checkpoint_interval_ : This is the number of battles between checkpoints.
 * _max steps_ : Tells the learning to stop after 3,000,000 battles.
 * _self play_ (line 28): This is how often it switches between characters and brains
@@ -516,11 +516,11 @@ behaviors:
       window: 10
 ```
 
-Within this yaml we have the ability to set-up 2 separate brains. One named _Paladin_ (for the knight) and another named _Vampire_ (for the NPC). Currently they have identical properties, but you could customize each to have slightly different behaviors.
+Within this yaml you have the ability to set-up 2 separate brains. One named _Paladin_ (for the knight) and another named _Vampire_ (for the NPC). Currently they have identical properties, but you could customize each to have slightly different behaviors.
 
 ## Use pre-made training data
 
-We have already prepared 3 data files; one for each difficulty level. If you haven't generated your own, let's plug these ones in:
+3 data files have already been prepared; one for each difficulty level. If you haven't generated your own, plug these in:
 
 1. In the Project tab (normally at the bottom left), if not open already, re-open the _Level_DevSummit2022_ scene by double-clicking it:
 
@@ -543,4 +543,4 @@ We have already prepared 3 data files; one for each difficulty level. If you hav
 
 1. Once the brains are set we can launch the game in the Unity Editor, to make sure everything is working and wired up correctly. If you select "Demo" mode you can see the two ML Agents battle it out.
 
-In the next section (_Optimizations_), we'll discuss optimizations to help reduce training time.
+The next section (_Optimizations_) discusses optimizations to help reduce training time.

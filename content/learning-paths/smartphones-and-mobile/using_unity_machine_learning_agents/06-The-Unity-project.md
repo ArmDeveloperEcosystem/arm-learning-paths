@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Prepare the project for training
 
-Before we move on to run the training, we will go through some of the key objects and scripts in Dr Arm. We will modify some of them to prepare for the training based on what we covered in the previous machine learning sections.
+Before running the training, you will modify some of the key objects and scripts in Dr Arm, based on what was covered in the previous machine learning sections.
 
 ## Overview of the project
 
-From here onwards, you can ignore the "Ready to Play" version of the scene. We will instead use an incomplete scene to demonstrate some of the steps for using ML in Unity.
+From here onwards, you can ignore the "Ready to Play" version of the scene. Instead, use an incomplete scene to demonstrate some of the steps for using ML in Unity.
 
 1. Inside the _Project_ tab, navigate to _Assets->#DevSummit2022->Scenes_ (See Figure 1).
 
@@ -30,7 +30,7 @@ From here onwards, you can ignore the "Ready to Play" version of the scene. We w
 
     The ML-NPC object is our AI enemy character.
 
-1. To get a better look at the scene from the player's perspective, right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of our player character at ground level. You will see the inside of the arena and the enemy character off in the distance.
+1. To get a better look at the scene from the player's perspective, right click on _ML-Player_ and select _Align View to Selected_. This will change the scene view to the viewpoint of your player character at ground level. You will see the inside of the arena and the enemy character in the distance.
 
     ![Align View to ML-Player](images/ml-player-aligned-view.png "Figure 2. Align View to ML-Player")
 
@@ -42,15 +42,15 @@ From here onwards, you can ignore the "Ready to Play" version of the scene. We w
 
 ## Walkthrough of the Unity scene and relevant objects
 
-_Level_DevSummit2022_ is the main gameplay scene - it is the one we use when playing the game. We use a different Unity scene when running training because we do a few things to make the training run quicker (we'll cover this later).
+_Level_DevSummit2022_ is the main gameplay scene - it is the one that is used when playing the game. You use a different Unity scene when running training because it does a few things to make the training run faster. (More on this later.)
 
 Let's look at the various parts of the gameplay scene and examine some key game objects and script components.
 
-The Hierarchy view shows all of the objects in our scene, and we can view more information (in the Inspector panel) by clicking on them or by clicking on the arrows to unfold the hierarchy to view their child objects.
+The Hierarchy view shows all of the objects in your scene, and you can view more information in the Inspector panel by clicking on them or by clicking on the arrows to unfold the hierarchy to view their child objects.
 
-At the top of the hierarchy are 4 objects. These parent objects help us group related objects together, making the scene more readable and easier to navigate.
+At the top of the hierarchy are 4 objects. These parent objects group related objects together, making the scene easier to read and navigate.
 
-Parent objects don't necessarily need script components themselves, but often contain manager (or controller) scripts that perform some form of management of their child objects. Sometimes game objects are left empty and act purely as an organizational tool to make the scene easier to understand and navigate.
+Parent objects don't necessarily need script components themselves, but often contain manager (or controller) scripts that perform some form of management of their child objects. Sometimes, game objects are left empty and act purely as an organizational tool to make the scene easier to understand and navigate.
 
 - UI
 
@@ -58,7 +58,7 @@ Parent objects don't necessarily need script components themselves, but often co
 
 - AgentsSettings
 
-    The object itself contains a script for controlling the flow of a battle. Under this object we have the main protagonists of our game - the characters. Both characters take part in the AI training, but when playing the game, the player will take over control of "ML-Player".
+    The object itself contains a script for controlling the flow of a battle. Under this object are the characters. Both characters take part in the AI training, but when playing the game, the player will take over control of "ML-Player".
 
 - ML-Core
 
@@ -70,13 +70,13 @@ Parent objects don't necessarily need script components themselves, but often co
 
 ### UI
 
-The UI object contains script components that manage the user interfaces. We have various 2D interfaces that need to be shown and hidden at specific times during the game. When the game is run on a device or played in the editor, the first thing you will see is a main menu. You can choose what level of AI to play against. When you select Easy, Medium or Hard, the main menu will disappear and the in-game display (with player health etc.) will be shown. On mobile you will also see touchscreen controls such as a virtual joystick and action buttons.
+The UI object contains script components that manage the user interfaces. There are various 2D interfaces that need to be shown and hidden at specific times during the game. When the game is run on a device or played in the editor, the first thing you will see is a main menu. You can choose what level of AI to play against. When you select Easy, Medium or Hard, the main menu will disappear and the in-game display (with player health etc.) will be shown. On mobile you will also see touchscreen controls such as a virtual joystick and action buttons.
 
 ![UI](images/ui-canvases.png "Figure 4. Hierarchy view showing UI Canvases")
 
 ### Agents Settings
 
-This component of the scene will be our focus, as it contains our AI characters. AgentsSettings contains:
+This component of the scene will be your focus, as it contains your AI characters. AgentsSettings contains:
 
 - A Battle Environment Controller script
 
@@ -87,7 +87,7 @@ This component of the scene will be our focus, as it contains our AI characters.
 
 - A Camera object
 
-    * The ThirdPersonCameraMovement leverages the Unity Cinemachine package to implement a third-person camera that follows our player character. Under the Camera object is a traditional Unity camera called "Main Camera". This is the viewpoint of the rendered scene and controls which render settings to use.
+    * The ThirdPersonCameraMovement leverages the Unity Cinemachine package to implement a third-person camera that follows your player character. Under the Camera object is a traditional Unity camera called "Main Camera". This is the viewpoint of the rendered scene and controls which render settings to use.
 
 - 2 character objects (who will be fighting each other)
 
@@ -96,11 +96,11 @@ This component of the scene will be our focus, as it contains our AI characters.
     * Both are setup with ML
     * Both have models and abilities (like fireball and to lock on target)
 
-    The character objects contain some key scripts that we'll go through in more detail next.
+    The character objects contain some key scripts that are detailed below.
 
 ### The character objects (ML-Player and ML-NPC)
 
-The character objects both contain many scripts, but of most interest for now are the ML components.
+The character objects both contain many scripts, but the ML components are of most interest for now.
 
 #### MlPlayerManager Component
 
@@ -120,43 +120,43 @@ _MonoBehaviour_ provides a variety of functions that game objects can use to per
 
 You shouldn't need to modify this value but it is important to be aware that _FixedUpdate_ can be called multiple times per frame depending on the interval.
 
-On each character, the _DecisionRequester_ component tells the system how often the machine learning algorithms should be updated. We have used a "decision period" value of 5. This means that a decision will be made every 5th physics frame. This provides the characters with a perfectly acceptable update rate while keeping performance high. _Take Actions Between Decisions_ is ticked so the ML Agent won't just take actions every 5th frame.
+On each character, the _DecisionRequester_ component tells the system how often the machine learning algorithms should be updated. The "decision period" value is 5. This means that a decision will be made every 5th physics frame. This provides the characters with a perfectly acceptable update rate while keeping performance high. _Take Actions Between Decisions_ is ticked so the ML Agent won't just take actions every 5th frame.
 
 #### AgentDrArm Component
 
-This component is derived from the Agent behavior provided by ML Agents Toolkit. All game objects to have AI (such as our characters) require an Agent component. The Agent component contains the "brain" of our characters. Inputs and actions are fed to and from the Agent. In training mode, this data will pass to and fro between the game and the Python training framework.
+This component is derived from the Agent behavior provided by ML Agents Toolkit. All game objects to have AI (such as our characters) require an Agent component. The Agent component contains the "brain" of your characters. Inputs and actions are fed to and from the Agent. In training mode, this data will pass back and forth between the game and the Python training framework.
 
 ![AgentDrArmComponent](images/agent-dr-arm-component.png "Figure 7. The AgentDrArm component on the ML-NPC game object.")
 
-_Max Step_ is a property from _Agent_. It determines the maximum number of steps taken in training an _Agent_ before the episode is finished; in our case this is the maximum number of frames we want our battles to last.
+_Max Step_ is a property from _Agent_. It determines the maximum number of steps taken in training an _Agent_ before the episode is finished; in this case it is the maximum number of frames that battles last for.
 
-The ML subsystem will call on AgentDrArm implementations of functions such as _CollateObservations(..)_ and _OnActionReceived(..)_. We'll learn more about these later.
+The ML subsystem calls on AgentDrArm implementations of functions such as _CollateObservations(..)_ and _OnActionReceived(..)_. (More on this later.)
 
 #### BehaviourParameters Component
 
-The behavior parameters dictate the size of our neural network.
+The behavior parameters dictate the size of the neural network.
 
 ![BehaviorParametersComponent](images/behavior-parameters-component.png "Figure 8. The BehaviorParameters component on the ML-NPC game object.")
 
-We set the number of inputs (_Space Size_ of _Vector Observations_); these are pieces of state information about a character's environment and feed into the reinforcement learning. _Stacked Vectors_ is giving us how many frames of historical data to feed in. The _Actions_ are the output that we use to determine which action a character should take (move, roll, attack etc). We have only set up 13 out of the 19 inputs; later we will set the other 6, but for now you can ignore the related warning on the Unity console.
+The number of inputs is set (_Space Size_ of _Vector Observations_); these are pieces of state information about a character's environment and feed into the reinforcement learning. _Stacked Vectors_ defines how many frames of historical data to feed in. The _Actions_ are the output used to determine which action a character should take (move, roll, attack etc). Only 13 out of the 19 inputs have been set up; ignore the related warning on the Unity console. (You will set the other 6 later.)
 
-_Inference Device_ is set to _Default_ and determines which compute device is used to run the machine learning. Regarding runtime performance, we have found for this project that ML Agents run better on the CPU. Although strictly speaking the GPU is faster, the overhead for sending and receiving the data negates the performance gain.
+_Inference Device_ is set to _Default_ and determines which compute device is used to run the machine learning. Regarding runtime performance, ML Agents run better on the CPU for this project. (Although strictly speaking the GPU is faster, the overhead for sending and receiving the data negates the performance gain.)
 
-There shouldn't be much difference between Burst and CPU in this case though Unity is moving more and more to the Burst compiler.
+There shouldn't be much difference between Burst and CPU in this case, though Unity is moving more and more to the Burst compiler.
 
-The _Behaviour Name_ is important as we'll use it again later in the training sections. You will see that "BossBattle" is used in several places.
+The _Behaviour Name_ is important as you will use it again later in the training sections. You will see that "BossBattle" is used in several places.
 
 #### RayPerceptionSensor3D Component
 
-AI characters need to know what is around them. We can do this by casting rays from the character out into the scene. We track nearby characters and obstacles and feed this back to the characters so they can avoid obstacles and fight opponents. We use the RayPerceptionSensor3D component to do this.
+AI characters need to know what is around them. This can be done by casting rays from the character out into the scene. Nearby characters and obstacles are tracked and fed back to the characters so they can avoid obstacles and fight opponents. The RayPerceptionSensor3D component is used for this.
 
 ![RayPerceptionSensor3DComponent](images/ray-perception-sensor3d-component.png "Figure 9. The RayPerceptionSensor3D component on the ML-NPC game object.")
 
-We will setup values so that rays are cast out in a circle around the character at an interval that isn't too large, so we don't miss a nearby object, but not so close that we cast too many rays (which could hurt performance). Our rays also have a radius because strictly speaking the component performs "sphere casting" rather than just "ray casting".
+You will setup values so that rays are cast out in a circle around the character at an interval that isn't too large (so we don't miss a nearby object) but not so close that we cast too many rays (which could hurt performance). The rays also have a radius because strictly speaking the component performs "sphere casting" rather than just "ray casting".
 
-Sphere casting effectively gives our ray volume so we can make up for the gap between the rays. Note in _Figure 10_, that we can see a visualization of the sphere at the end of each ray being cast.
+Sphere casting effectively gives the ray volume to make up for the gap between the rays. Note in _Figure 10_, that there is a visualization of the sphere at the end of each ray being cast.
 
-Later we'll look at finishing the setup of the NPC character by modifying some of the components above, examine some properties for tweaking the AI, and go through how to setup and run the training.
+(You will finish the setup of the NPC character later by modifying some of the components above, examine some properties for tweaking the AI, and go through how to setup and run the training.)
 
 ![Agents Settings](images/agents-settings.png "Figure 10. Hierarchy view with object AgentsSettings selected. The scene view shows our 3D environment, characters and sphere-casts.")
 
@@ -164,16 +164,16 @@ Later we'll look at finishing the setup of the NPC character by modifying some o
 
 ML-Core contains various managers and controllers common to many apps and games. There are no AI-specific objects or scripts here. You shouldn't need to modify any of these objects or components. However, if you would like to explore them anyway, the most interesting options are:
 
-- ML-Core contains behavior _DontDestroyOnLoad_. This is useful for when you want an object to persist between scene loads
-- SettingsController (on child AppManager) contains an option for setting the target frame-rate (Unity will attempt to run the game at this frame-rate if possible)
-- VfxService controls which particle systems to use for which effects
+- ML-Core contains behavior _DontDestroyOnLoad_, which is useful when you want an object to persist between scene loads.
+- SettingsController (on child AppManager) contains an option for setting the target frame-rate. (Unity will attempt to run the game at this frame-rate if possible.)
+- VfxService controls which particle systems to use for which effects.
 
 ![ML-Core](images/ml-core.png "Figure 11. Hierarchy view showing ML-Core object and children.")
 
 ### Environment
 
-The entire scene is lit from a single light called "Directional Light". The light is marked as "Realtime" so it doesn't include any baked lighting. You could try adding baked lighting or more realtime lights to make the lighting more interesting, but this is outside the scope of this learning path.
+The entire scene is lit from a single light called "Directional Light". The light is marked as "Realtime" so it doesn't include any baked lighting.
 
 ![Environment](images/environment-mesh-light.png "Figure 12. Our world consists of a single light and a single mesh for the whole battle arena.")
 
-If you experiment with the lighting, remember that adding extra lights and changing some options can affect performance.
+(You could add baked lighting or more realtime lights to make the lighting more interesting, but this is outside the scope of this learning path. If you do experiment with the lighting, remember that adding extra lights and changing some options can affect performance.)
