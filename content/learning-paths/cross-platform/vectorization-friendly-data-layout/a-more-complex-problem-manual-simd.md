@@ -72,7 +72,7 @@ void simulate_objects(object_t *objects, float duration, float timestep) {
   while (current_time < duration) {
     // Move the object in msec steps
     for (size_t i=0; i < N; i++) {
-      objects[i].position = vmlaq_f32(objects[i].position, objects[i].velocity, dt);
+      objects[i].position = vfmaq_f32(objects[i].position, objects[i].velocity, dt);
 
       uint32x4_t gt_mask = vcgtq_f32(objects[i].position, box_hi_v);
       uint32x4_t lt_mask = vcltq_f32(objects[i].position, box_lo_v);
@@ -95,10 +95,26 @@ void simulate_objects(object_t *objects, float duration, float timestep) {
 Save this program as `simulate3.c`. Before running it, let's first explain the main loop of `simulate_objects()`, starting from the first statement:
 
 ```C
-      objects[i].position = vmlaq_f32(objects[i].position, objects[i].velocity, dt);
+      objects[i].position = vfmaq_f32(objects[i].position, objects[i].velocity, dt);
 ```
 
-This calculates the next position of the particle using the formula: `x = vx * dt` and similarly for the other axes. A single instruction can be used for that, the `FMLA`.
+This calculates the next position of the particle using the formula: `x += vx * dt` and similarly for the other axes. A single instruction can be used for that, the `FMLA`.
+
+{{% notice Note %}}
+Confusingly, there are 2 Multiply-Add instructions on Arm.
+
+In the original AAarch32 and Neon SIMD units, only the unfused instuction exists, which used the `vmlaq_f32`.
+
+AArch64 also provides a fused instruction which is used by the `vfmaq_f32` intrinsic.
+
+The difference is the way the operation `a <- a + b x c` is done:
+
+In an unfused  multiply–add the product `b × c` is computed first, rounded to `N` significant bits, and the result is added back to `a` and rounded again to `N` significant bits.
+
+A fused multiply–add however would compute the entire expression `a + (b × c)` to its full precision before rounding the final result down to `N` significant bits. 
+
+So, if you used `vmlaq_f32` you would get the unfused instruction? Not quite, as even more confusingly compilers do not agree on how to do that. Clang uses the fused instruction, while GCC retains the unfused instruction.
+{{% /notice %}}
 
 Next let's look at the comparisons:
 
@@ -127,7 +143,7 @@ position(pre) : 0.000000 9.999886 -9.360616 1.039884
 velocity(pre) : 0.000000 0.210884 0.251256 -0.733221 
 ```
 
-After the `vmlaq_f32()` instruction, the position will be the following:
+After the `vfmaq_f32()` instruction, the position will be the following:
 ```
 position(post): 0.000000 10.000096 -9.360365 1.039151 
 ```

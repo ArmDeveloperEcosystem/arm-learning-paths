@@ -31,7 +31,7 @@ review:
             - 0%, every element is used
         correct_answer: 1      
         explanation: >
-            If we store (x, y, z) in a 128-bit SIMD vector, using 32-bit float elements, we would have a representation like `| x | y | z | (unused) |`. This would mean that we would be wasting 25% of the vector's storage.
+            If we store (x, y, z) in a 128-bit SIMD vector, using 32-bit float elements, we would have a representation like `| x | y | z | (unused) |`. This would mean that we would be wasting 25% of the vector's storage. Having said that, Aarch64 does not have an alignment requirement so the lack of aligned data in a packed scenario does not necessarily constitute a performance hit on Arm. That is not the case however with other ISAs.
 
     - questions:
         question: >

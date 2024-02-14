@@ -143,7 +143,26 @@ void simulate_objects(struct object_list *objects, float duration, float step) {
   collisions[2] = vaddvq_u32(ctr_z);
   printf("Total border collisions: x: %d, y: %d, z: %d\n", collisions[0], collisions[1], collisions[2]);
 }
-...
+
+int main() {
+  object_t objects[N];
+
+  init_objects(objects);
+
+  const float duration = SECONDS;
+  const float step = 1.0f/STEPSPERSEC;
+  struct timeval th_time_start, th_time_end;
+
+  gettimeofday(&th_time_start, NULL);
+  simulate_objects(objects, duration, step);
+  gettimeofday(&th_time_end, NULL);
+
+  double elapsed;
+  elapsed = (th_time_end.tv_sec - th_time_start.tv_sec); // sec
+  elapsed += (th_time_end.tv_usec - th_time_start.tv_usec) / 1000000.0; // us to sec
+
+  printf("elapsed time: %f\n", elapsed);
+}
 ```
 
 Save this file under `simulation4.c` and compile it like before:
@@ -199,4 +218,6 @@ These are essentially the rules for optimal performance with SIMD/vectorized cod
 * Prefer fewer iterations with more calculations per iteration (keep the pipeline full with fewer branches)
 * Data should be consecutive, eg prefer struct of arrays instead of arrays of structs
 * Try to keep the data as packed as possible, no wasted elements in the vectors
+
+You've seen the Neon/ASIMD approach, but what about SVE/SVE2? What benefit would you have from rewriting your code for the new Arm extensions?
 
