@@ -13,17 +13,17 @@ In this learning path you will learn how to create a Desktop application for Win
 
 `JSONPlaceholder` is a free online REST API service that serves as a mock server for testing and prototyping web applications. Created and maintained by Typicode, `JSONPlaceholder` provides a set of HTTP endpoints that mimic the behavior of a typical backend server, allowing developers to simulate interactions with a RESTful API without the need for a real backend. 
 
-Here, you will use the posts endpoint of the JSONPlaceholder. This endpoint enables you to retrieve the list of hypothetical posts.
+Here, you will use the posts endpoint of the `JSONPlaceholder`. This endpoint enables you to retrieve the list of hypothetical posts.
 
 You can find the the complete code used in the learning path [here](https://github.com/dawidborycki/electron-sample-app.git)
 
 ## Before you begin
-Before you begin make sure to install Node.JS for Arm64. You can find the installer [here](https://nodejs.org/en/download). In this learning path, you will use version 20.10.0. The installation process is automatic. However, make sure to automatically install the build tools for NPM packages by checking the "Automatically install the necessary tools" checkbox:
+Before you begin, install Node.JS for Arm64. You can find the installer [here](https://nodejs.org/en/download). In this learning path, you will use version 20.10.0. The installation process is automatic. However, make sure to check the "Automatically install the necessary tools" checkbox so that it automatically installs the build tools for the NPM packages:
 
 ![fig1](Figures/01.png)
 
 ## Initialize the project
-Start by initializing the project. To do so, open the command prompt or terminal and type the following commands:
+Start by initializing the project. To do this, open the command prompt or terminal and type the following commands:
 
 ```console
 mkdir electron-sample-app
@@ -99,10 +99,10 @@ You will now create the `index.html` file, which will act as the application vie
 </html>
 ```
 
-This coe will render the table comprised of three columns. Each column will display the ID, Title and Body parts of the post, which you will retrieve from the rest API.
+This code will render the table comprised of three columns. Each column will display the ID, Title and Body parts of the post, which you will retrieve from the rest API.
 
 ## Logic
-You will now implement the logic, responsible for creating the application window and retrieving a collection of posts from the posts API of the [jsonplaceholder](https://jsonplaceholder.typicode.com/posts).
+You will now implement the logic, which is responsible for creating the application window and retrieving a collection of posts from the posts API of the [jsonplaceholder](https://jsonplaceholder.typicode.com/posts).
 
 Under the `electron-sample-app` project folder create a new file, `main.js` with the contents below:
 
@@ -179,7 +179,7 @@ $('#fetch-button').click(() => {
 });
 ```
 
-This file sends the request to the API to retrieve the list of posts. Then, this list will be rendered in the view.
+This file sends the request to the API to retrieve the list of posts. This list will be rendered in the view.
 
 ## Package.json
 Finally, update the `package.json` in your project folder with the code shown below:
@@ -204,10 +204,10 @@ Finally, update the `package.json` in your project folder with the code shown be
 ```
 
 This code does the following:
-1. Sets the application entry point to `main.js`.
-2. Adds a start script, which will invoke the **electron .** command to launch the electron app in a current directory.
-3. Specifies the license and dependencies.
-4. Configures the application name, description, and author.
+1. Sets the application entry point to `main.js`
+2. Adds a start script which will invoke the **electron .** command to launch the electron app in a current directory
+3. Specifies the license and dependencies
+4. Configures the application name, description, and author
 
 ## Run the application
 To launch the application type the following command:
@@ -216,12 +216,13 @@ To launch the application type the following command:
 npm start
 ```
 
-The application window appears. Then click the Fetch data button, and you will see the list of posts:
+The application window appears. Then click the Fetch data button and you will see the list of posts:
 
 ![fig2](Figures/02.png)
 
 ## Styling an application
-The application works fine. However, it uses default styles and does not look very pretty. To change this you can use cascade style sheets (CSS) as in web applications. To style the application proceed as follows:
+The application works fine. However, it uses default styles and does not look very pretty. To change this you can use cascading style sheets (CSS) as per web applications. To style the application, proceed as follows:
+
 1. In the application project folder, create a file named `styles.css` with the contents below:
 ```css
 body {
@@ -299,7 +300,7 @@ body {
 
 3. Run the application **npm start**
 
-After the application launches, click the **Fetch data** button, and you will see the following result:
+After the application launches, click the **Fetch data** button and you will see the following result:
 
 ![fig3](Figures/03.png)
 

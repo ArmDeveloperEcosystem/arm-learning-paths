@@ -17,7 +17,7 @@ review:
         answers:
             - "To build a single page applications"
             - "To accelerate applications"
-            - "To separate concerns, e.g. separate the logic from the view"
+            - "To separate concerns, e.g., separate the logic from the view"
         correct_answer: 3
         explanation: >
             The Model-View-ViewModel (MVVM) architectural pattern is designed to separate an application's business and presentation logic from its user interface

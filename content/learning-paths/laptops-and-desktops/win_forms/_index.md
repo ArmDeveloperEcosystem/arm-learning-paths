@@ -6,7 +6,7 @@ minutes_to_complete: 30
 who_is_this_for: This learning path is for developers who want to learn how to create Windows Forms applications on Windows on Arm (WoA).
 
 learning_objectives:
-    - Create and build Windows Forms application
+    - Create and build a Windows Forms application
     - Measure code execution performance on Arm64
 
 prerequisites:

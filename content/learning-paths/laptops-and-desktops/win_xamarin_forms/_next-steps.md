@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to implement mobile application with Xamarin Forms. You might be interested in learning how to use web technologies for creating cross-platform desktop apps.
+   You have learned how to implement mobile applications with Xamarin Forms. You might be interested in learning how to use web technologies for creating cross-platform desktop apps.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/electron"
