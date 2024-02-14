@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You now have an understanding of how to run an application inside a Realm using Arm Confidential Compute Architecture. You can also build the complete Arm CCA software stack yourself and validate your applications on an Arm FVP ahead of silicon availability.
+   You now have an understanding of how to run an application inside a Realm using the Arm Confidential Compute Architecture. You can also build the complete Arm CCA software stack yourself and validate your applications on an Arm FVP ahead of silicon availability.
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
