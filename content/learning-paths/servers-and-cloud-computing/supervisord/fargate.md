@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 You can use the same technique to access a container running in AWS, without opening any port for SSH access.
 
-There are many ways to run containers using cloud services which demonstrate this, but AWS ECS with a Fargate launch type is shown below. You can adapt the example for any container runtime environment. 
+There are many ways to run containers using cloud services which demonstrate this but AWS ECS with a Fargate launch type is shown below. You can adapt the example for any container runtime environment. 
 
 The instructions below are similar to [How to use AWS Graviton processors on AWS Fargate with Copilot](/learning-paths/servers-and-cloud-computing/aws-copilot/). You can use the AWS Copilot CLI to launch a container and then SSH to it using Remote.It.
 
@@ -43,9 +43,9 @@ There are 2 issues with this container:
 
 # Update the container
 
-To fix the 2 issues edit the file `copilot/debug/manifest.yml` and add a Remote.It registration code and change the platform to `linux/arm64`.
+To fix the 2 issues, edit the file `copilot/debug/manifest.yml` and add a Remote.It registration code and change the platform to `linux/arm64`.
 
-Make sure you substitute your registration code for the one shown below.
+Make sure you substitute your registration code for the one shown below:
 
 ```console
 platform: linux/arm64
