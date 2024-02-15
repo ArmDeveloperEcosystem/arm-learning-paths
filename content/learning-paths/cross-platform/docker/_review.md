@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Can docker manifest be used to create a multi-architecdture image?
+            Can docker manifest be used to create a multi-architecture image?
         answers:
             - "Yes"
             - "No"

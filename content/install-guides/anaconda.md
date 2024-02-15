@@ -2,7 +2,7 @@
 additional_search_terms:
 - Python
 - TensorFlow
-- Pytorch
+- PyTorch
 - linux
 
 layout: installtoolsall
@@ -94,7 +94,7 @@ eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 
 ## Get started
 
-Test Anaconda Distribution by running simple TensorFlow and Pytorch examples.
+Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
 
 ### TensorFlow
 
@@ -140,7 +140,7 @@ The expected output format is below. Your version may be slightly different.
 tf.Tensor(342.34387, shape=(), dtype=float32)
 ```
 
-### Pytorch
+### PyTorch
 
 Create a new conda environment named torch, install PyTorch, and activate the new environment.
 
@@ -156,6 +156,7 @@ Using a text editor copy and paste the code below into a text file named `pytorc
 
 ```console
 import torch
+print(torch.__version__)
 x = torch.rand(5,3)
 print(x)
 exit()
@@ -170,14 +171,15 @@ python ./pytorch.py
 The expected output is similar to:
 
 ```output
-tensor([[0.9825, 0.4797, 0.0978],
-        [0.2175, 0.8025, 0.9663],
-        [0.6342, 0.5408, 0.4781],
-        [0.0655, 0.7505, 0.9290],
-        [0.7643, 0.6878, 0.0993]])
+2.1.0
+tensor([[0.9287, 0.5931, 0.0239],
+        [0.3402, 0.9447, 0.8897],
+        [0.3161, 0.3749, 0.6848],
+        [0.8091, 0.6998, 0.7517],
+        [0.2873, 0.0549, 0.2914]])
 ```
 
 
 You are ready to use Anaconda Distribution. 
 
-Explore the many machine learning articles and examples using TensorFlow and Pytorch.
+Explore the many machine learning articles and examples using TensorFlow and PyTorch.

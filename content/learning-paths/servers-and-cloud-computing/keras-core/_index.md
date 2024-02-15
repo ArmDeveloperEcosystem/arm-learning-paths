@@ -26,7 +26,7 @@ tools_software_languages:
     - Python
     - Keras
     - TensorFlow
-    - Pytorch
+    - PyTorch
     - JAX
 operatingsystems:
     - Linux

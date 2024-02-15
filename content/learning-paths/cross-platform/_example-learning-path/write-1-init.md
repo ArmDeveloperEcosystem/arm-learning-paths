@@ -42,6 +42,12 @@ Result: The following markdown files are added to the `my-new-learning-path` dir
 | _review.md            | This file contains simple questions and answers to reinforce knowledge gained from your Learning Path.    |
 | _next_steps.md        | This file contains the next recommended steps and related resources for the reader to use on completion of this Learning Path.   |
 
+### Order the content within the Learning Path
+
+Each markdown file has a field called `weight`. Use this field to order the way your content is displayed. The content with the lowest weight is displayed first.
+ 
+The _index.md is first with `weight: 1`. You should start with `weight: 2` for your next page (`how-to-1.md`) and `weight: 3` for the page you want displayed after that. 
+
 ### Create a new install guide
 
 Create a new install guide by copying an existing file in the `content/install-guides` directory and modifying the contents.
