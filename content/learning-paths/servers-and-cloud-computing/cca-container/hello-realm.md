@@ -25,7 +25,7 @@ The use of the "init" process to run the application also means that you will no
 
 In this section, you will package a simple **hello world** application into the `initramfs` for the guest Linux kernel. 
 
-## Create a simple `initramfs` for the guest Linux kernel
+## Create a simple initramfs for the guest Linux kernel
 
 Create a directory in which you will build the simple `initramfs`:
 
