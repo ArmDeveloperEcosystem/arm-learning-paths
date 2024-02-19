@@ -1,16 +1,24 @@
 ---
-title: A more complex problem
+title: Increase complexity
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-What if you have some more complicated calculations to perform?
+What if you have more complex calculations to perform?
 
-For example, let's say you want to add a bounding box to your simulation so the particles bounce on the borders.
+For example, you want to add a bounding box to your simulation so the particles bounce on the borders.
 
-Let's modify the previous code to look like this and save the resulting file as `simulation2.c`:
+You can modify the previous code to check the boundaries.
+
+Copy your `simulation1.c` to a new file named `simulation2.c` so you can continue modifications and save the original.
+
+```console
+cp simulation1.c simulation2.c
+```
+
+Edit `simulation2.c` and replace the `simulate_objects()` function with the one below. Also add the new `ctr4` struct and `box` constant below.
 
 ```C
 typedef struct ctr4 {
@@ -22,7 +30,6 @@ const vec4_t box = { 10.0f, 10.0f, 10.0f, 10.0f };
 void simulate_objects(object_t *objects, float duration, float step) {
 
   float current_time = 0;
-  size_t iterations = 0;
   ctr4_t collisions = { 0, 0, 0, 0 };
 
   while (current_time < duration) {
@@ -56,41 +63,51 @@ void simulate_objects(object_t *objects, float duration, float step) {
 }
 ```
 
-This is a scalar approach, but the code still uses the `vec4` struct and even the boundaries checking is done on the fourth element, isn't this a waste of cycles? Not really, because the compiler can find an opportunity to autovectorize this, but you should be able to verify this for yourself.
+This is a scalar approach, but the code still uses the `vec4` struct and the boundary checking is even done on the fourth element. Is this a waste of cycles? No, because the compiler can find an opportunity to autovectorize this, but you should be able to verify this for yourself.
 
-Compile this file first with `-O2`:
+First, compile the code with `-O2`:
 
-```bash
+```console
 gcc -O2 -Wall simulation2.c -o simulation2
 ```
 
-Running this should give the following:
+Run the new executable:
 
-```bash
-$ ./simulation2
+```console
+ ./simulation2
+```
+
+The resulting output is:
+
+```output
 Total border collisions: x: 250123, y: 249711, z: 249844
 elapsed time: 36.700929
 ```
 
-And now with `-O3`:
+Next, compile with `-O3`:
 
-```bash
+```console
 gcc -O3 -Wall simulation2.c -o simulation2
 ```
 
-And similarly you should get the following result:
+Run agin:
 
-```bash
-$ ./simulation2
+```console
+./simulation2
+```
+
+Similar to last time, the output is:
+
+```output
 Total border collisions: x: 250123, y: 249711, z: 249844
 elapsed time: 28.926221
 ```
 
-So a reduction in execution time of ~21%. This is decent, but you might probably be expecting more. Checking the assembly output will tell you that it's not as good as you expected. 
+Using `-O3` reduces the execution time by about 21%. This is good, but you might be expecting more. Checking the assembly output will tell you that it's not as good as you expected. 
 
-Check the [output of `objdump -S` for `-O2`](../simulate_objects_O2.s). It doesn't show any SIMD instructions, which is expected with `-O2`.
+Check the [assembly output of objdump -O2](../simulate_objects_O2.s). It doesn't show any SIMD instructions, which is expected with `-O2`.
 
-Now observe the [assembly output for `-O3`](../simulate_objects_O3.s) and in particular these lines:
+Now observe the [assembly output for -O3](../simulate_objects_O3.s) and in particular these lines:
 
 ```simulate2_objects_O3.s
      c48:       6ea0e4ea        fcmgt   v10.4s, v7.4s, v0.4s
@@ -106,6 +123,10 @@ Now observe the [assembly output for `-O3`](../simulate_objects_O3.s) and in par
      c70:       6ea6e4ef        fcmgt   v15.4s, v7.4s, v6.4s
 ```
 
-Even without looking the rest of the code, this tells us that there is something amiss with this optimization. Unfortunately you have just found one of the cases that the compilers cannot -yet- autovectorize. Neither GCC nor Clang can autovectorize this code to the quality that hand-written SIMD code can reach. But you should not blame the compilers for failing to autovectorize a piece of code, this is an ongoing process and already the compilers are quite proficient at autovectorizing many loops. It's always worth the effort investigating what the compiler can do for you and only revert to hand-written code when you are not satisfied with the result.
+Even without looking at the rest of the code, this indicates something is wrong with this optimization. 
 
-In the next section you will see the manual optimization approach.
+This code is one of the cases that the compilers cannot yet autovectorize. Neither GCC nor Clang can autovectorize this code to the quality that hand-written SIMD code can reach. 
+
+But you should not blame the compilers for failing to autovectorize a piece of code, this is an ongoing process and already the compilers are quite proficient at autovectorizing many loops. It's always worth the effort investigating what the compiler can do for you and only revert to hand-written code when you are not satisfied with the result.
+
+In the next section you will see a manual optimization approach.

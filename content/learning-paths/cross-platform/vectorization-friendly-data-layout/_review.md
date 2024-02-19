@@ -20,7 +20,7 @@ review:
             - Array of Pointers (AoP)
         correct_answer: 2
         explanation: >
-            Struct of Arrays (SoA) is a better fit, because the for loops are more efficient to iterate through the data in the loop, fewer jump instructions are required.
+            Struct of Arrays (SoA) is a better because the for loops are more efficient to iterate through the data in the loop  and fewer jump instructions are required.
                
     - questions:
         question: >
@@ -35,11 +35,11 @@ review:
 
     - questions:
         question: >
-            Similarly to the previous question, what would the percentage be if we used 64-bit floats to store that information in a 256-bit vector?
+            Similarly to the previous question, what would the percentage be if we used 64-bit floats to store the information in a 256-bit vector?
         answers:
             - 0%, every element is used
             - 50%, 2 elements are unused
-            - Again 25%, 1 x 64-bit element is unused
+            - 25%, 1 x 64-bit element is unused
         correct_answer: 3          
         explanation: >
             Similarly, we have doubled the size of the vector and the element, but we are still having one element unused, so 25% is wasted.

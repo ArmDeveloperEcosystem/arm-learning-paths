@@ -1,20 +1,22 @@
 ---
-title: A simple solution
+title: Improve data alignment
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Before you optimize the code, you have to properly understand the way the data is represented and accessed in memory. The compiler cannot easily circumvent that and cannot issue SIMD instructions for the operations, because the operations are done in triplets (x,y,z) and SIMD operations -for 32-bit floats that are used- require 4 elements.
+Before trying any optimization, it's important to understand the way the data is represented and accessed in memory. In this case, the compiler cannot issue SIMD instructions because the operations are done in triplets (x,y,z) and SIMD operations for 32-bit floating point values require 4 elements.
 
-In order to fix this and help the compiler you need to go back and look at the `object` struct in more detail. The memory layout of `object` is the following:
+In order to improve the data layout and help the compiler you need to go back and look at the `object` struct in more detail. The memory layout of `object` is the following:
 
 ![Memory layout #center](memory-layout1.svg "Figure 1. struct object memory layout with vec3")
 
-Because the `vec3` types are triplets, their alignment `is 3 x 4 bytes = 12 bytes`. That makes usage of SIMD instructions difficult as they usually operate on data multiples of 16 bytes and alignment to 16 bytes is also important. You can usually solve this by adding extra bytes in such structures as padding. This results in wasted bytes but sometimes these can be used for extra information. In any case the performance benefit outweighs the loss in memory.
+Because the `vec3` types are triplets, their alignment `is 3 x 4 bytes = 12 bytes`. That makes usage of SIMD instructions difficult as they usually operate on data multiples of 16 bytes. Alignment to 16 bytes is also important. You can usually solve this by adding extra bytes in such structures as padding. This results in wasted bytes but sometimes these can be used for extra information. Even if the extra bytes cannot be used, the performance benefit outweighs the loss in memory.
 
-So, how to add padding to the struct in this case? You only have to convert `vec3` helper struct to a `vec4` to include an extra 'dimension', say `t`. Make the following changes to the code:
+How should padding be added to the struct? You can convert the `vec3` helper struct to a `vec4` to include an extra 'dimension', such as `t`. 
+
+Make the following change to the code to add the padding:
 
 ```C
 // Helper struct of a 3D vector with x, y, z, coordinates
@@ -24,6 +26,7 @@ typedef struct vec4 {
 ```
 
 You also need to change the object struct:
+
 ```C
 // The object struct
 typedef struct object {
@@ -34,7 +37,7 @@ typedef struct object {
 } object_t;
 ```
 
-and the function `init_objects()` to initialize the `t` member:
+Also change the function `init_objects()` to initialize the new `t` member:
 
 ```C
 void init_objects(object_t *objects) {
@@ -50,7 +53,7 @@ void init_objects(object_t *objects) {
 }
 ```
 
-and finally `simulate_objects()`:
+Finally, update the `simulate_objects()` function:
 
 ```C
 void simulate_objects(object_t *objects, float duration, float step) {
@@ -67,26 +70,37 @@ void simulate_objects(object_t *objects, float duration, float step) {
 }
 ```
 
-Now the memory layout is changed to this:
+The memory layout now looks like this:
 
 ![Memory layout #center](memory-layout2.svg "Figure 2. struct object memory layout with vec4")
 
-Now save this and compile it again:
+After making the changes, compile the code again: 
 
 ```bash
 gcc -O3 simulation1.c -o simulation1
 ```
 
-Running it will show an immediate improvement:
+Running the new program shows immediate improvement:
 
+```console
+./simulation1
 ```
-$ ./simulation1
+
+The new `elapsed time` is less than before:
+
+```output
 elapsed time: 12.993359
 ```
 
-And the usage of SIMD instructions is obvious now, viewing again with `objdump -S` you can see that loading is done in quads `ldp q0, q3, [x0]`, then `fmla` is used to do the step multiply-accumulate instruction and it stores the vector directly with `str`:
+Use `objdump` again to view the new assembly code for the`simulate_objects()` function:
 
+```console
+objdump -S simulation1 | less
 ```
+
+The usage of SIMD instructions is obvious now. You can see that loading is done in quads `ldp q0, q3, [x0]`, then `fmla` is used to do the step multiply-accumulate instruction and it stores the vector directly with `str`:
+
+```output
 0000000000000b20 <simulate_objects>:
  b20:   1e202018        fcmpe   s0, #0.0
  b24:   1e204004        fmov    s4, s0
@@ -117,4 +131,4 @@ And the usage of SIMD instructions is obvious now, viewing again with `objdump -
  b88:   d65f03c0        ret
  ```
 
- That was an easy one to fix, see the next section for a more complex problem.
+Sometimes it's easy to make data layout improvements, continue to the next section for a more complex problem.

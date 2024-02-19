@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Data layout basics
 
-When refering to data layout in the context of programming, we usually mean the memory representation of the variables that belong to a data structure or an object, which means the way these variables are mapped as bytes in the memory of the computer.
+Data layout refers to the memory representation of the variables that belong to a data structure or an object. It describes the way the variables are stored in memory. 
 
-For example, let's assume you are creating a 3D simulation program or a game where you want to model the movement of thousands of particles and you have the following data structures for the 3D objects:
+For example, assume you are creating a 3D simulation program or a game where you want to model the movement of thousands of particles and you have the following data structures for the 3D objects:
 
 ```C
 // Helper struct of a 3D vector with x, y, z, coordinates
@@ -28,11 +28,13 @@ typedef struct object {
 } object_t;
 ```
 
-This is an example struct, of course actual simulations will add more information per object, for example: other identifiers, volume information, a pointer to a 3D model for display purposes, boundary information, or even quantum wavefunctions representation. That is beyond the scope of this LP, but most such software uses the same principle, regardless if it's a game or a molecular dynamics simulation.
+These are example data structures. Actual simulations have more information per object. Extra information may be additional identifiers, volume information, a pointer to a 3D model for display purposes, boundary information, or even representations of quantum wavefunctions. The details are beyond the scope of this Learning Path, but most software uses the same principle, regardless if it's a game or a molecular dynamics simulation.
 
-The core of such a program is the main `for` loop which changes the positions and velocities of the objects in tiny amounts and updates them multiple times per second, thereby giving the notion of movement.
+The core of the program is the main `for` loop which changes the positions and velocities of the objects in tiny amounts and updates them multiple times per second, thereby giving the notion of movement.
 
-For the purpose of this LP, you will be able to test and run such a loop yourself and also measure the performance of this loop. Consider this program:
+In this Learning Path, you will be able to compile and run loops and measure performance. 
+
+Use a text editor to copy the code below and save it in a file named `simulation1.c`
 
 ```C
 #include <stdint.h>
@@ -73,12 +75,10 @@ void init_objects(object_t *objects) {
     // initial positions in box [-10, 10], velocity in [-1, 1]
     objects[i].position.x = randf(20.0) - 10.0f;
     objects[i].position.y = randf(20.0) - 10.0f;
-    objects[i].position.y = randf(20.0) - 10.0f;
-    objects[i].position.t = 0.0f;
+    objects[i].position.z = randf(20.0) - 10.0f;
     objects[i].velocity.x = randf(2.0) - 1.0f;
     objects[i].velocity.y = randf(2.0) - 1.0f;
-    objects[i].velocity.y = randf(2.0) - 1.0f;
-    objects[i].velocity.t = 0.0f;
+    objects[i].velocity.z = randf(2.0) - 1.0f;
 
   }
 }
@@ -118,24 +118,41 @@ int main() {
 }
 ```
 
-Save this file as `simulation1.c` and compile it (we used gcc 12 in this case):
+Compile the code with GCC:
 
-```bash
+```console
 gcc -O3 simulation1.c -o simulation1
 ```
 
-Running it should produce the following output, the `elapsed time` number may be different, depending on your hardware.
+{{% notice Note %}}
+Unless stated, the examples are compiled with gcc version 12. Your results may vary based on your exact compiler version.
+{{% /notice %}}
 
-```bash
-$ ./simulation1 
+Run the program: 
+
+```console
+./simulation1 
+```
+
+The `elapsed time` is printed. Depending on your hardware, the printed value may may be different.
+
+```output
 elapsed time: 14.605558
 ```
 
-This is not a realistic simulation as there is no collision detection, no bounds checking, no gravity or other forces between the particles, etc. But once you have finished reading it, you will have a very good understanding of how changing the data layout can help the compiler perform auto vectorization and increase the performance of such a loop. For a good introduction to autovectorization, check the [Loop Reflowing and autovectorization LP](https://learn.arm.com/learning-paths/cross-platform/loop-reflowing/).
+This is not a realistic simulation as there is no collision detection, no bounds checking, no gravity or other forces between the particles. But once you have finished reading it, you will be able to start learning how to change the data layout to help the compiler perform auto vectorization and increase the performance of a loop. 
 
-You can see that assembly output of this program, in particular the `simulate_objects()` function, by running `objdump -S simulation1|less`:
+Refer to [Learn about Autovectorization](/learning-paths/cross-platform/loop-reflowing/) for a good introduction to autovectorization.
 
+Use `objdump` to view the assembly code for the program, look for the`simulate_objects()`
+
+```console
+objdump -S simulation1 | less
 ```
+
+The disassembly for `simulate_objects()` is:
+
+```output
 0000000000000b54 <simulate_objects>:
  b54:   1e202018        fcmpe   s0, #0.0
  b58:   1e204006        fmov    s6, s0
@@ -165,4 +182,6 @@ You can see that assembly output of this program, in particular the `simulate_ob
  bb8:   d65f03c0        ret
 ```
 
-You may have already spotted a few SIMD instruction used (especially `fmla v1.2s, v4.2s, v2.2s`). Which is better than nothing, but it looks like this code is not optimal in performance yet. You will see a solution in the next section.
+You may have spotted a few SIMD instructions (especially `fmla v1.2s, v4.2s, v2.2s`). This is better than no SIMD instructions, but it looks like the performance is not optimal. 
+
+Continue to the next section to learn how to optimize the code. 
