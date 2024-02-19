@@ -105,7 +105,7 @@ elapsed time: 28.926221
 
 Using `-O3` reduces the execution time by about 21%. This is good, but you might be expecting more. Checking the assembly output will tell you that it's not as good as you expected. 
 
-Check the [assembly output of objdump -O2](../simulate_objects_O2.s). It doesn't show any SIMD instructions, which is expected with `-O2`.
+Check the [assembly output for -O2](../simulate_objects_O2.s). It doesn't show any SIMD instructions, which is expected with `-O2`.
 
 Now observe the [assembly output for -O3](../simulate_objects_O3.s) and in particular these lines:
 

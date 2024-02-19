@@ -20,7 +20,7 @@ review:
             - Array of Pointers (AoP)
         correct_answer: 2
         explanation: >
-            Struct of Arrays (SoA) is a better because the for loops are more efficient to iterate through the data in the loop  and fewer jump instructions are required.
+            Struct of Arrays (SoA) is a better fit, because the for loops are more efficient to iterate through the data in the loop, fewer jump instructions are required.
                
     - questions:
         question: >
