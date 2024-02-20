@@ -1,12 +1,12 @@
 ---
-title: A more complex problem, revisited in SVE2
+title: Migrate to the Scalable Vector Extension (SVE)
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-You now know the logic behind the vectorization, so you should be confident that you can understand the SVE code:
+You now know the logic behind the vectorization, so you should be confident that you can understand the SVE code shown below:
 
 ```C
 #include <stdint.h>
@@ -67,7 +67,7 @@ void simulate_objects(struct object_list *objects, float duration, float step) {
   float current_time = 0.0f;
   //size_t iterations = 0;
 
-  printf("SVE size (bytes)= %d\n", svcntb());
+  printf("SVE size (bytes)= %ld\n", svcntb());
 
   // Set up the relevant SVE variables and constants
   svfloat32_t s = svdup_n_f32(step);
@@ -146,20 +146,20 @@ void simulate_objects(struct object_list *objects, float duration, float step) {
   collisions[0] = svaddv_u32(svptrue_b32(), ctr_x);
   collisions[1] = svaddv_u32(svptrue_b32(), ctr_y);
   collisions[2] = svaddv_u32(svptrue_b32(), ctr_z);
-  printf("Total border collisions: x: %d, y: %d, z: %d\n", collisions[0], collisions[1], collisions[2]);
+  printf("Total border collisions: x: %ld, y: %ld, z: %ld\n", collisions[0], collisions[1], collisions[2]);
 }
 
 int main() {
-  object_t objects[N];
+  struct object_list objects;
 
-  init_objects(objects);
+  init_objects(&objects);
 
   const float duration = SECONDS;
   const float step = 1.0f/STEPSPERSEC;
   struct timeval th_time_start, th_time_end;
 
   gettimeofday(&th_time_start, NULL);
-  simulate_objects(objects, duration, step);
+  simulate_objects(&objects, duration, step);
   gettimeofday(&th_time_end, NULL);
 
   double elapsed;
@@ -170,26 +170,45 @@ int main() {
 }
 ```
 
-Save this file under `simulation4_sve.c` and compile it like before:
+To run the SVE application you will need a computer with SVE support. To determine if SVE is available on your processor run:
+
+```console
+lscpu | grep sve
+```
+
+If SVE is available the Flags will be printed: 
+
+```output
+Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs paca pacg dcpodp svei8mm svebf16 i8mm bf16 dgh rng
+```
+
+If no SVE is present, there will be no output. 
+
+Save the new code in a file named `simulation4_sve.c` and compile it with `-march=armv8-a+sve` to target SVE:
 
 ```bash
 gcc -O3 -Wall simulation4_sve.c -o simulation4_sve -march=armv8-a+sve
 ```
 
-And run it:
+Run the SVE application:
 
 ```bash
-$ ./simulation4_sve
+./simulation4_sve
+```
+
+The output is:
+
+```output
 Total border collisions: x: 250123, y: 249711, z: 249844
 elapsed time: 11.682421
 ```
 
-Recompiling with clang yields similar results.
+Recompiling with Clang yields similar results.
 
-So, a performance increase of ~45% between compilers or 15% if you take the better result from clang previously. But just by rewriting the algorithm for SVE!
+Rewriting the algorithm using SVE provides a performance increase of about 45% between compilers or 15% if you take the better result from Clang. 
 
-A few notes about this SVE implementation:
+A few notes about the SVE implementation:
 
-* The most important note is that the number of loops changes, depending on the vector size of SVE. Since the type in the vector here is a 32-bit value (float), we can use the intrinsic `svcntw()` (similarly there exist for other types `svcntb()`, `svcnth()`, `svcntd()`). This can sometimes be a problem when you need to know such a quantity at compile time, but there are ways around this, which we should cover in a different LP.
-* Predicates are extremely powerful concepts, they can simplify some loops by avoiding special handling for the edges of the loop. Especially since they are passed as arguments in all SVE intrinsics, they allow for some serious reduction of code.
+* The most important note is that the number of loops changes based on the SVE vector size. Since the type in the vector here is a 32-bit value (float), we can use the intrinsic `svcntw()` (similarly there exist for other types `svcntb()`, `svcnth()`, `svcntd()`). This can sometimes be a problem when you need to know such a quantity at compile time, but there are ways around this, which can be explained in another Learning Path. 
+* Predicates are extremely powerful concepts, they can simplify some loops by avoiding special handling for the edges of the loop. Especially since they are passed as arguments in all SVE intrinsics, they can provide significant reduction of code.
 * Some intrinsics have suffixes `_z`, `_m`, `_x`. These denote the values that the uninitialized values in the predicate masks will have after the operation. `_z` will zero these values, `_m` will merge from the first operand, `_x` will leave undefined -on purpose. The last one might have undesirable effects like leaking data, so should be used with care.

@@ -1,12 +1,12 @@
 ---
-title: Vectorization-friendly Data Layout
+title: Vectorization-friendly data Layout
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for C/C++ developers who are interested in improving the performance of SIMD code
+who_is_this_for: This is an advanced topic for C/C++ developers who are interested in improving the performance of SIMD code.
 
 learning_objectives: 
-    - Learn the importance of data layout when writing SIMD code
+    - Comprehend the importance of data layout when writing SIMD code
 
 prerequisites:
     - An Arm computer running Linux and a recent version of Clang or the GNU compiler (gcc) installed.

@@ -1,16 +1,16 @@
 ---
-title: A more complex problem, revisited
+title: Structure of arrays
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-You've seen it mentioned already many times, that changing the data layout can improve performance.
+As you have learned, changing data layout can improve performance.
 
-But how you would actually perform such a change and why would it matter?
+The challenge is knowing what to change and understanding why it would matter. Below is another version of the program you can study to learn about data layout.
 
-Consider this modified version of the program:
+Use a text editor to copy the code below and save it as `simulation4.c`:
 
 ```C
 #include <stdint.h>
@@ -145,16 +145,16 @@ void simulate_objects(struct object_list *objects, float duration, float step) {
 }
 
 int main() {
-  object_t objects[N];
+  struct object_list objects;
 
-  init_objects(objects);
+  init_objects(&objects);
 
   const float duration = SECONDS;
   const float step = 1.0f/STEPSPERSEC;
   struct timeval th_time_start, th_time_end;
 
   gettimeofday(&th_time_start, NULL);
-  simulate_objects(objects, duration, step);
+  simulate_objects(&objects, duration, step);
   gettimeofday(&th_time_end, NULL);
 
   double elapsed;
@@ -165,59 +165,60 @@ int main() {
 }
 ```
 
-Save this file under `simulation4.c` and compile it like before:
+Compile and run the new program as before:
 
-```bash
+```console
 gcc -O3 -Wall simulation4.c -o simulation4
+./simulation4
 ```
 
-And run it:
+The output printed is:
 
-```bash
-$ ./simulation4
+```output
 Total border collisions: x: 250123, y: 249711, z: 249844
 elapsed time: 16.655471
 ```
 
-Just for comparison, `clang-15` produces this output:
+For comparison, `clang-15` produces this output:
 
-```bash
- ./simulation4
+```output
 Total border collisions: x: 250123, y: 249711, z: 249844
 elapsed time: 13.530677
 ```
 
-So, the first observation is that the number of collisions reported is the same, which is a good thing, performance optimization is useless is you get the wrong results!
+The first observation is that the number of collisions reported is the same, which is a good thing, performance optimization is useless if you get the wrong results!
 
-You also see a very significant speed gain: the new version can be up to 2.25x faster than the original version and ~1.43x faster (for GCC 12) as the previous SIMD -even the hand-written version.
+You also see a significant speed gain: the new version is up to 2.25x faster than the original version and about 1.43x faster (for GCC 12) as the previous version, even the hand-written version in the previous section.
 
-Apart from the small differences between the compilers, the important difference is due to the change in the data layout.
+Apart from small differences between the compilers, the important difference is due to the change in the data layout.
 
-What was changed here? 
+Review what has been changed.
 
-First, you will notice that the coordinates `x`,`y`,`z` are not anymore part of the original `object` structure, similarly for the velocity `vx`,`vy`,`vz`.
+First, you will notice that the coordinates `x`,`y`,`z` are not part of the original `object` structure anymore, similarly for the velocity values `vx`,`vy`, `vz`.
 
-Instead there is now an array of `N` elements for each of those variables.
+Instead, there is now an array of `N` elements for each of those variables.
 
-This will mean that you can now process 4 consecutive `x` elements in each iteration, 4 `y` elements, 4 `z` elements, etc, so 4 objects per iteration, thereby reducing the iterations to `N/4`.
+This means that you can now process 4 consecutive `x` elements in each iteration, 4 `y` elements, 4 `z` elements. This results in processing 4 objects per iteration, thereby reducing the iterations to `N/4`.
 
 There is no single `| x | y | z | (unused) |` vector that wastes 25% of storage per instruction.
 
-What you have seen here is a demonstration of two paradigms used in data layout, the first one we used was an Array of Structs (AoS), while the second is called a Struct of Arrays (SoA).
+This example demonstrates two paradigms used in data layout. The previous sections use Array of Structs (AoS). This sections switches to Struct of Arrays (SoA).
 
-The second one is more performant in SIMD operations in general.
+The second one is generally more performant in SIMD operations.
 
-A few points should be made here:
+A few points to consider:
 
-* There is no waste of storage compared to the previous implementation (only 3 of the 4 float elements were used for the 3D coordinates x, y, z)
+* There is no waste of storage compared to the previous implementations (only 3 of the 4 float elements were used for the 3D coordinates x, y, z)
 * About 1/4 of the original `N` iterations are executed, which means 1/4 of the branches
 * Many more calculations are done per iteration, which is good as it keeps the CPU pipeline full
 
-These are essentially the rules for optimal performance with SIMD/vectorized code:
+Here are some rules for optimal performance with SIMD/vectorized code:
 
 * Prefer fewer iterations with more calculations per iteration (keep the pipeline full with fewer branches)
-* Data should be consecutive, eg prefer struct of arrays instead of arrays of structs
+* Data should be consecutive, prefer struct of arrays instead of arrays of structs
 * Try to keep the data as packed as possible, no wasted elements in the vectors
 
-You've seen the Neon/ASIMD approach, but what about SVE/SVE2? What benefit would you have from rewriting your code for the new Arm extensions?
+So far you have been using Neon/ASIMD instructions, but newer Arm processors also offer the Scalable Vector Extension (SVE). 
+
+Proceed to the next section to find out how to use SVE and compare the performance with NEON.
 
