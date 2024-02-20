@@ -22,7 +22,7 @@ tool_install: true
 weight: 1
 ---
 
-[PyTorch](https://pytorch.org/) is a popular end-to-end machine learning framework for Python used to build and deploy neural networks. It is used for tasks such as computer vision and natural language processing (NLP).
+[PyTorch](https://pytorch.org/) is a popular end-to-end machine learning framework for Python. It's used to build and deploy neural networks, especially around tasks such as computer vision and natural language processing (NLP).
 
 Follow the instructions below to install and use PyTorch on Arm Linux.
 
@@ -121,19 +121,19 @@ PyTorch built with:
 
 ```
 
-The configuration output is an advanced option to check the tools and configuration used to build PyTorch. 
+The configuration output is an advanced option to check the tools and structure used to build PyTorch. 
 
 # BFloat16 floating-point number format
 
 Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For example, AWS Graviton3 processors support BFloat16. 
 
-To check if your system includes BFloat16 use the `lscpu` command:
+To check if your system includes BFloat16, use the `lscpu` command:
 
 ```console
 lscpu | grep bf16
 ```
 
-If the `Flags` are printed, then you have a processor with BFloat16.
+If the `Flags` are printed, you have a processor with BFloat16.
 
 ```output
 Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs paca pacg dcpodp svei8mm svebf16 i8mm bf16 dgh rng
@@ -141,7 +141,7 @@ Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asi
 
 If the result is blank, you do not have a processor with BFloat16.
 
-BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You may want to experiment with BFloat16 when trading off accuracy with performance.
+BFloat16 provides improved performance and a smaller memory footprint with the same dynamic range. You may want to experiment with BFloat16 when trading off accuracy with performance.
 
 You can use an environment variable to enable BFloat16:
 
@@ -153,7 +153,7 @@ export DNNL_DEFAULT_FPMATH_MODE=BF16
 
 Transparent huge pages (TLP) provide an alternative method of utilizing huge pages for virtual memory. Enabling TLP may result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
 
-To check if TLP is available on your system run:
+To check if TLP is available on your system, run:
 
 ```console
 cat /sys/kernel/mm/transparent_hugepage/enabled
@@ -167,7 +167,7 @@ The most common output, `madvise`, is shown below:
 always [madvise] never
 ```
 
-If the setting is `never` you can change to `madvise` by running:
+If the setting is `never`, you can change to `madvise` by running:
 
 ```console
 echo madvise | sudo tee /sys/kernel/mm/transparent_hugepage/enabled
