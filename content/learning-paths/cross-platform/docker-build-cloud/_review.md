@@ -31,6 +31,15 @@ review:
         explanation: >
             Docker Build Cloud works on any computer with Docker installed, but you may need to update buildx to be aware of cloud builders. 
                
+    - questions:
+        question: >
+            Can Docker Build Cloud replace a self-hosted GitHub runner on an Arm server?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 1                  
+        explanation: >
+            You can use Docker Build Cloud instead of an Arm server with a GitHub self-hosted runner installed.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

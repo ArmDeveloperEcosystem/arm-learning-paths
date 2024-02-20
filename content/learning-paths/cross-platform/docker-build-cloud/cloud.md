@@ -1,36 +1,34 @@
 ---
-# User change
 title: "Setup and build images with Docker Build Cloud"
 
 weight: 2
 
 layout: "learningpathall"
-
 ---
 
-## Building multi-architecture container images
+## Methods to build multi-architecture container images
 
 Building multi-architecture container images is challenging for complex projects. 
 
-There are 2 common ways to build multi-architecture images, and both are explained in [Learn how to use Docker](/learning-paths/cross-platform/docker/).
+There are two common ways to build multi-architecture images, and both are explained in [Learn how to use Docker](/learning-paths/cross-platform/docker/).
 
 The first method is to use instruction emulation. You can learn about this method in [Build multi-architecture images with Docker buildx](/learning-paths/cross-platform/docker/buildx/). The drawback of emulation is slow performance, especially for complex builds which involve tasks such as compiling large C++ applications. 
 
-The second method is to use multiple machines, 1 for each architecture, and join the container images to make a multi-architecture image using Docker manifest. You can learn about this method in [Use Docker manifest to create multi-architecture images](/learning-paths/cross-platform/docker/manifest/). The drawback of using manifest is complexity, multiple machines are required to execute a multi-step process. 
+The second method is to use multiple machines, one for each architecture, and join the images to make a multi-architecture image using Docker manifest. You can learn about this method in [Use Docker manifest to create multi-architecture images](/learning-paths/cross-platform/docker/manifest/). The drawback of using a manifest is complexity, multiple machines are required to execute a multi-step process. 
 
-Docker Build Cloud provides a way to build multi-architecture images with higher performance and lower complexity compared to the two methods listed above. With Docker Build Cloud you don't need to worry about build hardware, instruction emulation, or joining images together manually. Docker Build Cloud is a cloud service that takes care of everything, transparently. 
+Docker Build Cloud provides a way to create multi-architecture images with higher performance and lower complexity compared to the two methods listed above. With Docker Build Cloud you don't need to worry about extra hardware, instruction emulation, or joining images together manually. Docker Build Cloud is a cloud service that takes care of everything, transparently. 
 
 ## Before you begin
 
 You can use any computer running Docker to complete this Learning Path.
 
-To confirm that Docker is installed correctly run the following command:
+To confirm that Docker is installed run the following command:
 
 ```console
 docker run hello-world
 ```
 
-If Docker is installed and working correctly you see the following message:
+If Docker is installed and working you will see the following message:
 
 ```output
 Hello from Docker!
@@ -48,6 +46,8 @@ In addition to having Docker installed, You will also need a Docker Hub account.
 You will need a credit card to use Docker Build Cloud. You don't need to pay anything to try it, but you need to enter your credit card.
 
 You will need a Docker subscription for Docker Team or Docker Business to build multi-architecture images. Visit [Docker Build Cloud pricing](https://www.docker.com/products/build-cloud/#pricing) for more information.
+
+You can build single architecture images for free using a Docker Personal account and the included monthly minutes.
 {{% /notice %}}
 
 It may help to review the first two sections of [Learn how to use Docker](/learning-paths/cross-platform/docker/) so you are familiar with the basics before trying Docker Build Cloud.
@@ -60,7 +60,7 @@ Click on `Create new cloud builder`. The button is shown on the screen shot bell
 
 Enter a name for the builder. For example, `cloud-builder1`.
 
-It will take a few minutes to create the new builder, but it will appear on your dashboard with a green check mark saying enabled as shown below:
+It will take a few minutes to create the new builder, but it will appear on your dashboard with a green check mark next to `Enabled` as shown below:
 
 ![Cloud Builder #center](_images/cloud-builder.png)
 
@@ -72,7 +72,7 @@ Open a terminal on your local computer and log in with your Docker ID and passwo
 docker login
 ```
 
-Create the connection to the cloud builder on your local machine. Replace `username` with your Docker ID.
+Create the connection to the cloud builder on your local machine. Replace `username` with your Docker ID or the Organization for your Docker subscription.
 
 ```console
 docker buildx create --use --driver cloud username/cloud-builder1
@@ -86,15 +86,21 @@ ERROR: failed to find driver "cloud"
 
 If you see this error follow the steps in the next section. 
 
-If you don't see the error you are likely using Docker Desktop and you can continue to the next section [Display the new cloud builder](#display-the-new-cloud-builder)
+If you don't see the error you are likely using Docker Desktop and you can continue to [Display the new cloud builder](#display-the-new-cloud-builder).
 
 ### Additional steps for Docker Engine (Linux) 
 
-To fix the error install a version of `buildx` that includes cloud builder support. 
+To use Docker Build Cloud you need a version of `buildx` that includes cloud builder support. 
+
+Updating `buildx` requires the `jq` command. Install it using your package manager.
+
+```console
+sudo apt-get install jq -y
+```
 
 Use a text editor to copy the code below into a file named `update-buildx.sh`.
 
-The architecture is set to `arm64`, but you can change to match your system as needed.
+The architecture is set to `arm64`, but you can change it to match your system as needed.
 
 ```console
 #!/bin/bash
@@ -111,19 +117,13 @@ chmod a+x ~/.docker/cli-plugins/docker-buildx
 
 The script comes from the Docker documentation on using Docker Build Cloud for CI. Refer to [Use Docker Build Cloud in CI](https://docs.docker.com/build/cloud/ci/) for more details. 
 
-The script also requires the `jq` command. Install it using your package manager.
-
-```console
-sudo apt-get install jq -y
-```
-
 Run the script:
 
 ```console
 bash -x ./update-buildx.sh
 ```
 
-Try again to create the cloud builder. Replace `username` with your Docker ID.
+Try again to create the cloud builder. Replace `username` with your Docker ID or Organization.
 
 ```console
 docker buildx create --use --driver cloud username/cloud-builder1
@@ -157,7 +157,7 @@ FROM ubuntu:latest
 CMD echo -n "Architecture is " && uname -m
 ```
 
-Build the image with the new cloud builder (substitute your Docker ID for `username`). 
+Build the image with the new cloud builder (substitute your Docker ID or Organization for `username`). 
 
 ```console 
 docker buildx build --builder cloud-username-cloud-builder1 --tag cloud-build-test .
@@ -181,7 +181,7 @@ hello-world        latest    ee301c921b8a   9 months ago   9.14kB
 The commands below are for the Arm architecture. If you have another architecture, you can change the `--platform` argument to match your architecture. 
 {{% /notice %}}
 
-Run the new image it will print the architecture of your local machine.
+Run the new image and it will print the architecture of your local machine.
 
 ```console
 docker run --rm cloud-build-test
@@ -197,7 +197,7 @@ The image created is for the architecture of your computer.
 
 You can build an image for a different architecture using the cloud builder.
 
-Replace `username` with your Docker ID in the commands as needed.
+Replace `username` with your Docker ID or Organization in the commands as needed.
 
 For example:
 
@@ -219,7 +219,7 @@ The output is now:
 Architecture is x86_64
 ```
 
-If you are using Docker Engine on Linux you may need to enable instruction emulation.
+If you get an error and you are using Docker Engine on Linux you may need to enable instruction emulation.
 
 ```console
 sudo apt-get install qemu-user-static -y
@@ -227,7 +227,7 @@ sudo apt-get install qemu-user-static -y
 
 ## Multi-architecture build
 
-To build a multi-architecture image with a single command, you need to specify the list of architectures you want the image to support.
+To build a multi-architecture image with a single command, you need to specify a list of architectures you want the image to support.
 
 For example:
 
@@ -247,7 +247,7 @@ To build the multi-architecture image use `--push` to save it to your Docker Hub
 docker buildx build --platform linux/arm64,linux/arm/v7 --builder cloud-username-cloud-builder1 --tag username/cloud-build-test --push .
 ```
 
-You now have a multi-architecture image in your Docker Hub account which can be pulled and run on any computer which is one of the architectures specified during the build. 
+You now have a multi-architecture image (two different Arm architectures) in your Docker Hub account which can be pulled and run on any computer which is one of the architectures specified during the build. 
 
 To build for different architectures you can change the list specified with `--platform`:
 
@@ -259,9 +259,12 @@ docker buildx build --platform linux/arm64,linux/amd64 --builder cloud-username-
 The above command will fail if you do not have a Docker Team or Docker Business subscription. 
 
 If you have Docker Personal or Docker Pro the error is:
+
 ```console
 ERROR: failed to solve: FailedPrecondition: build cannot proceed concurrent build limit of 1 reached
 ```
+
+If you are part of an Organization with a Docker subscription, the command will succeed.
 {{% /notice %}}
 
 Using a cloud service simplifies multi-architecture builds and shortens build time for complex images.
