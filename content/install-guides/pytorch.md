@@ -252,4 +252,4 @@ You can set each variable and run the test again and observe the new profile dat
 
 You are ready to use PyTorch on Arm Linux.
 
-Explore the many machine learning articles and examples using PyTorch.
+Now explore the many [machine learning articles and examples using PyTorch](https://pytorch.org/tutorials/).
