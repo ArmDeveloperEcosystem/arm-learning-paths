@@ -2,7 +2,7 @@
 title: Arm Fast Models
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107572
-author_primary: Jason Andrews
+author_primary: Ronan Synnott
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -23,15 +23,17 @@ Arm Fast Models are a library of components that are used to build a virtual pla
 
 Therefore to build such an executable, you must ensure that the appropriate host toolchain is installed.
 
-For Linux hosts, use `gcc` versions `7.3.0` or `9.3.0` depending on OS version.
+For Windows hosts, [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/) 16.11 (or later). Express or Community editions can NOT be used.
 
-For Windows hosts use [Visual Studio 2019](https://visualstudio.microsoft.com/vs/older-downloads/) 16.7.3 (or later). Express or Community editions can NOT be used.
+For Linux hosts, the supported `gcc` version depends on the Host OS.
 
-More information is provided in the [Fast Models User Guide](https://developer.arm.com/documentation/100965/latest/Installing-Fast-Models/Requirements-for-Fast-Models).
+The [Fast Models User Guide](https://developer.arm.com/documentation/100965/latest/Installing-Fast-Models/Requirements-for-Fast-Models) provides full details.
 
 ## Download installer packages
 
-You can download the Fast Models installer from the [Product Download Hub](https://developer.arm.com/downloads/view/FM000A). Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
+You can download the Fast Models installation package from the [Product Download Hub](https://developer.arm.com/downloads/view/FM000A).
+
+Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
 
 For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](/install-guides/pdh).
 
@@ -43,7 +45,9 @@ Unzip the downloaded installation archive.
 
 It is easiest to run the installation wizard (`setup.exe`), and follow on-screen instructions.
 
-Once installed, open the `System Canvas` IDE, and select `File` > `Preferences` > `Applications` from the menu. Set the `Path to Microsoft Viaual C++ application devenv.com` to your Visual Studio installation (`<install_dir>\Common7\IDE`). Click `OK` to save.
+Once installed, open the `System Canvas` IDE, and select `File` > `Preferences` > `Applications` from the menu.
+
+Set the `Path to Microsoft Viaual C++ application devenv.com` to your Visual Studio installation (`<install_dir>\Common7\IDE`). Click `OK` to save.
 
 ### Linux
 
@@ -67,6 +71,7 @@ Full instructions are provided in the [Fast Models User Guide](https://developer
 
 Arm Fast Models are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license).
 
+
 ## Verify installation
 
 To verify everything is working OK, you can build one of the many example projects provided.
@@ -74,7 +79,7 @@ To verify everything is working OK, you can build one of the many example projec
  ```command
  sgcanvas &
  ```
-  - From the menu, select `File` > `Load Project`, and browse to the `FastModelsPortfolio_<version>\examples` folder.
+ - From the menu, select `File` > `Load Project`, and browse to the `FastModelsPortfolio_<version>\examples` folder.
  - Select any example (such as `\LISA\FVP_MPS2\Build_Cortex-M3\FVP_MPS2_Cortex-M3.sgproj`).
  - Ensure an appropriate Project Configuration is selected from the pulldown in the upper toolbar (such as `Win64_Release-VC19`).
  - Click `Build` in the upper toolbar to build the virtual platform.

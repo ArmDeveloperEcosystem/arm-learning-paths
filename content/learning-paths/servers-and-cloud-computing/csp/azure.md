@@ -219,4 +219,6 @@ Open `Control Panel` > `System` and verify that `Device` > `System Type` identif
 
 ## Automating Arm Based Infrastructure Deployment
 
-Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) and the open source tool [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview). However, there are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/). In fact, there is a [deploying Arm instances on Azure using Terraform learning path](/learning-paths/servers-and-cloud-computing/azure-terraform) that should be reviewed next.
+Cloud infrastructure deployment is typically done via Infrastructure as code (IaC) automation tools. There are Cloud Service Provider specific tools like [Azure Resource Manager](https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview) and the open source tool [Bicep](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview).
+
+There are also Cloud Service Provider agnostic tools like [Terraform](https://www.terraform.io/). There is a [deploying Arm instances on Azure using Terraform learning path](/learning-paths/servers-and-cloud-computing/azure-terraform) that should be reviewed next.
