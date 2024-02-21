@@ -51,6 +51,7 @@ sudo dnf install chromium -y
   {{< /tab >}}
 {{< /tabpane >}}
 
+Depending on your version of Ubuntu, Chromium may be installed as a snap from the [Canonical Snap Store](https://snapcraft.io/). 
 
 ### Windows 
 

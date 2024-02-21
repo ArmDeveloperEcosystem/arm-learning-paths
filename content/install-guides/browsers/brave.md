@@ -51,7 +51,9 @@ For more ways to install Brave on Linux refer to [Installing Brave on Linux](htt
 
 ### Windows 
 
-Brave releases for Windows on Arm are available on [GitHub](https://github.com/brave/brave-browser) 
+Brave is a native ARM64 application. If you visit [brave.com](https://www.brave.com) and download from a Windows on Arm computer you will install the native version. 
+
+Additional Brave releases for Windows on Arm are available on [GitHub](https://github.com/brave/brave-browser) 
 
 To download the offline installer, use the files with `Standalone` in the name. 
 
