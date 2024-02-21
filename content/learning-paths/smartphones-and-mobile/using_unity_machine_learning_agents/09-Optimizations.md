@@ -19,7 +19,7 @@ A few things were done to reduce the time it takes to train the ML agents to a r
 
 To speed things up even more, the game is run at a much higher speed when training. Rendering still runs at normal speed but everything else should update at a much higher frequency. The Unity value _Time.timeScale_ is normally 1.0 which runs the game at real-time. _Time.timeScale_ is set to a higher value in order to speed up the training.
 
-When you speed it up, be careful to make sure it speeds up for everything equally so that the models learn the correct behaviours.
+When you speed it up, be careful to make sure it speeds up for everything equally so that the models learn the correct behaviors.
 
 ### Some minor optimizations
 

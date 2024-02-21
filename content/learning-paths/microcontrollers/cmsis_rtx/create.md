@@ -7,7 +7,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-This learning path will introduce the staps to create a basic RTX based RTOS application, making use of the latest features of [CMSIS](https://www.keil.arm.com/cmsis).
+This learning path will introduce the steps to create a basic RTX based RTOS application, making use of the latest features of [CMSIS](https://www.keil.arm.com/cmsis).
 
 For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
