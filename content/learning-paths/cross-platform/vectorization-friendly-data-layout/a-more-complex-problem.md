@@ -90,7 +90,7 @@ Next, compile with `-O3`:
 gcc -O3 -Wall simulation2.c -o simulation2
 ```
 
-Run agin:
+Run again:
 
 ```console
 ./simulation2
