@@ -20,6 +20,21 @@ You will need a [GitHub](https://github.com) account to try out Docker Build Clo
 
 To get started, create a new GitHub repository in your GitHub account. There are numerous tutorials on how to create a repository or refer to the [GitHub documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)
 
+## Setup secrets
+
+To run GitHub Actions you will need secrets for your Docker Hub username and Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. 
+
+You also need a secret for the Docker Organization. If you don't have an organization use your Docker ID for this secret.
+
+Access the secrets from the `Settings` tab on your repository. Expand the `Secrets and variables` on the left side and click `Actions`.
+
+Add three secrets using the `New repository secret` button:
+- `DOCKER_USER` with your Docker ID
+- `DOCKER_PAT` with your Personal Access Token 
+- `DOCKER_ORG` with your Docker Organization, this can be your Docker ID if you are not in an Organization
+
+![GitHub Actions Secrets #center](_images/secrets.png)
+
 ## Add files to the repository
 
 To try GitHub Actions with Docker Build Cloud, you need to add two files to your repository.
@@ -67,21 +82,6 @@ jobs:
         env:
            USER: ${{ secrets.DOCKER_USER }}
 ```
-
-## Setup secrets
-
-To run GitHub Actions you will need secrets for your Docker Hub username and Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. 
-
-You also need a secret for the Docker Organization. If you don't have an organization use your Docker ID for this secret.
-
-Access the secrets from the `Settings` tab on your repository. Expand the `Secrets and variables` on the left side and click `Actions`.
-
-Add three secrets using the `New repository secret` button:
-- `DOCKER_USER` with your Docker ID
-- `DOCKER_PAT` with your Personal Access Token 
-- `DOCKER_ORG` with your Docker Organization, this can be your Docker ID if you are not in an Organization
-
-![GitHub Actions Secrets #center](_images/secrets.png)
 
 ## Test the GitHub Action
 
