@@ -36,5 +36,5 @@ systemctl list-unit-files --type=service
 Individual services can also be queried to confirm they are running:
 
 ```bash
-systemctl status ssh
+systemctl status cron
 ```
