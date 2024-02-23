@@ -107,6 +107,16 @@ If it succeeds the new image will be in your Docker Hub account.
 
 You can use the `Actions` tab in your repository to see the workflow runs and click into each one to review the commands and check errors.
 
+## Build stats
+
+If you have Docker Desktop you can look at the build stats from your cloud builder. 
+
+From the Docker Desktop dashboard, click `Builds` on the left side and then click the name of a completed build. The builds initiated from GitHub have the URL for hte GitHub repository. There are stats about the build time including the time spent pulling images, transferring files, accessing the build cache, and the number of steps run in parallel.
+
+You can click on the info symbol tooltip for explanations of the data presented. Here is the data for this example:
+
+![Build stats  #center](_images/build-stats.png)
+
 ## Automate the build
 
 Instead of manually triggering the build, you can modify the `build.yml` to automatically run the action when changes are made to the `Dockerfile`. Add the the `push:` line as shown below to automatically run the action when a push is made to any branch in the repository.
