@@ -9,7 +9,7 @@ additional_search_terms:
 - edge
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 1
+minutes_to_complete: 5
 
 author_primary: Jason Andrews
 

@@ -10,21 +10,21 @@ layout: learningpathall
 
 One way to implement a machine learning system is using _Neural Networks_. This is the method enabled by Unity ML Agents.
 
-In this method, we train a neural network model (a "brain") that takes inputs (observations), processes them, and produces outputs (decisions). These outputs drive the actions of the AI characters in our game.
+This method involves training a neural network model (a "brain") that takes inputs (observations), processes them, and produces outputs (decisions). These outputs drive the actions of the AI characters in the game.
 
 Neural networks are a vast and complex subject. To simplify, they contain inputs (input nodes), outputs (output nodes), and internal nodes that process the input values. Input values get modified as they pass through the internal nodes to reach the output nodes.
 
-Internal nodes have "weights" which are numerical parameters that affect a node's output to subsequent nodes. We train a neural network model by feeding sample input values, inspecting the output values, and comparing the output to expected values over many iterations. We change these node weights until satisfied with the results.
+Internal nodes have "weights" which are numerical parameters that affect a node's output to subsequent nodes. You train a neural network model by feeding sample input values, inspecting the output values, and comparing the output to expected values over many iterations. You change these node weights until satisfied with the results.
 
 Neural networks with more than one layer of internal nodes are called _Multilayer Perceptrons_ (MLPs).
 
-In a game, the outputs of such a model directly control an AI character's actions, which affect the data for each training iteration. It can take thousands of iterations before results are satisfactory and usable in a real game.
+In a game, the outputs of such a model directly control the AI character's actions, which affect the data for each training iteration. It can take thousands of iterations before results are satisfactory and usable in a real game.
 
-This computationally intensive process runs during the training stage only. We prepare the data (the model) before building and deploying the game. The training produces the model in the form of a data file that we embed in the game, loaded at runtime into our game's ML subsystem.
+This computationally intensive process runs during the training stage only. You prepare the data (the model) before building and deploying the game. The training produces the model in the form of a data file that you embed in the game, loaded at runtime into your game's ML subsystem.
 
 The goal of training is a network that produces desirable outputs (sensible decisions leading to sensible actions) from sensible inputs (observations).
 
-As you can imagine, training the model becomes a separate new build step before bundling and deploying the game. Carefully choosing observations and actions is key to AI quality.
+Training the model becomes a separate new build step before bundling and deploying the game. Carefully choosing observations and actions is key to AI quality.
 
 ![Neural network](images/mlp-network.png "Figure 1. Neural network diagram")
 
@@ -42,15 +42,15 @@ Reinforcement learning is a type of machine learning where an "agent" is trained
 
 Rewards and punishments are scores (floating point numbers). Inputs are "observations" of the environment and opponent (also turned into floating point numbers).
 
-### Our reward function
+### The reward function
 
-The reward tells the character if actions succeeded (positive) or failed (negative). This allows characters to learn to do the right thing - in our case, quick victories.
+The reward tells the character if actions succeeded (positive) or failed (negative). This allows characters to learn to do the right thing - in this case, quick victories.
 
-We reward with a value of 1 for winning and -1 for losing. A small negative reward accumulates over time and reduces the reward for slower wins. This will incentivize quick wins during training iterations.
+The model is rewarded with a value of 1 for winning and -1 for losing. A small negative reward accumulates over time and reduces the reward for slower wins. This will incentivize quick wins during training iterations.
 
 ### The inputs
 
-There are a number of inputs that we will use - each input is in the form of a floating point number. Our inputs include:
+There are a number of inputs that you will use - each input is in the form of a floating point number. The inputs include:
 
 * Health, stamina and mana level of both characters
 * Is the character rolling?
@@ -67,11 +67,11 @@ The outputs from the neural network model directly translate to actions the char
 
 ### Unity training scene
 
-We have a dedicated scene that runs 6 battles simultaneously. Both characters are AI. This reduces training time.
+There is a dedicated scene that runs 6 battles simultaneously. Both characters are AI. This reduces training time.
 
 ## How does the training work?
 
-First off, projects need to implement all the necessary hooks for Unity ML Agents to function. We have scripts for our "intelligent" characters that derive from the _Agent_ class and call the necessary ML-related functions at the correct times:
+Projects need to implement all the necessary hooks for Unity ML Agents to function. There are scripts for our "intelligent" characters that derive from the _Agent_ class and call the necessary ML-related functions at the correct times:
 
 1. Setup training limits such as maximum simulation steps (so we don't allow a battle to go on forever)
 1. Send observations (inputs) to the agent
@@ -89,6 +89,6 @@ Training with Unity ML Agents toolkit leverages the Unity project itself in the 
 
 Training neural networks is computationally intensive and can take a long time (hours to potentially days), but can leverage GPU computing to reduce the time it takes.
 
-It is worth mentioning that the time it takes to train a neural network is different to the runtime performance of using a pre-trained ML model. Runtime performance is crucial for end users who will be playing the game. We have found Unity ML Agents runs very well on Arm devices.
+It is worth mentioning that the time it takes to train a neural network is different to the runtime performance of using a pre-trained ML model. Runtime performance is crucial for end users who will be playing the game. Unity ML Agents runs very well on Arm devices.
 
-In the next section we'll go through the main Dr Arm scene and some of the key objects and ML components.
+The next section goes through the main Dr Arm scene and some of the key objects and ML components.

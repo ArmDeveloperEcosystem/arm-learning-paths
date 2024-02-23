@@ -27,7 +27,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 The Vivaldi browser runs on Windows using emulation, but Vivaldi is available for Arm Linux. 
 
-Visit the [download area](https://vivaldi.com/download/) to obtain packages for various operating systems. 
+Visit [Download Vivaldi](https://vivaldi.com/download/) to obtain packages for various operating systems. 
 
 ### Linux
 
@@ -68,7 +68,7 @@ Vivaldi runs on Windows on Arm using emulation.
 
 Emulation is slower than native and shortens battery life, but may provide required functionality.
 
-1. Download the 32-bit Windows version from the [download area](https://vivaldi.com/download/).
+1. Download the 32-bit Windows version from [Download Vivaldi](https://vivaldi.com/download/).
 
 2. Run the downloaded `.exe` file
 

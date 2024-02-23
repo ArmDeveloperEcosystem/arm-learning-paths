@@ -8,9 +8,11 @@ Evaluation boards (also known as starter kits) are available from various Arm pa
 
 Other boards, often referred to as edge computing boards or modules, or as single board computers (SBCs), can be directly used in a final product. These boards typically have a small form-factor so as to be easily designed into commercial products. Debug interfaces, and other features beneficial for early software may not be available.
 
-Microcontrollers based on Arm Cortex-M processors are available from various Arm partners. The selection is very broad. The [Keil MDK device database](https://www.keil.com/dd2/) lists 9000+ such devices that are supported by this toolchain.
+Microcontrollers based on Arm Cortex-M processors are available from various Arm partners. The selection is very broad.
 
-Arm Keil also provides a [database of Cortex-M boards and devices](https://www.keil.arm.com/boards/) along with example software projects.
+The [Keil MDK device database](https://www.keil.arm.com/devices/) lists 10000+ such devices that are supported by this toolchain.
+
+Arm Keil also provides a [database of development boards](https://www.keil.arm.com/boards/) along with example software projects.
 
 ## Purchase development boards
 
@@ -30,7 +32,7 @@ Other vendors providing such boards include:
 
 Please add your favorite vendors and distributors to the lists.
 
-## Boards used in Learning Paths
+## Boards used within Learning Paths
 
 * STM [B-L475E-IOT01A Discovery Board](https://www.st.com/en/evaluation-tools/b-l475e-iot01a.html)
 * NXP [LPCXpresso55S69 Development Board](https://www.nxp.com/design/development-boards/lpcxpresso-boards/lpcxpresso55s69-development-board:LPC55S69-EVK)

@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            Can you use Windows Forms on .NET or you need .NET Framework?
+            Can you use Windows Forms on .NET or do you need .NET Framework?
         answers:
             - "Yes, Windows Forms is available on .NET"
             - "No, Windows Forms is available in .NET Framework only"            

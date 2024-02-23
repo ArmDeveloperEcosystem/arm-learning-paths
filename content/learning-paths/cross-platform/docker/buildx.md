@@ -31,7 +31,7 @@ Docker Desktop provides the ability to build and run multi-architecture images u
 For Ubuntu, install emulation support using the command below.
 
 ```console
-sudo apt-get install qemu-user-static
+sudo apt-get install qemu-user-static -y
 ```
 
 If emulation support is not installed on a Linux machine running Docker Engine, an error message similar to this one will occur:

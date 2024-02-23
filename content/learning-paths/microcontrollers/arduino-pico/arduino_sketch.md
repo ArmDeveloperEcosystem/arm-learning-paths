@@ -240,7 +240,7 @@ Finally, write a message to the USB output indicating that the device is once ag
 
 ## Run your code
 
-Now that you have a good understanding of the code, run it on your device. With your Raspberry Pi Pico board plugged in to your computer, and the [correct board and port selected in the Arduino IDE](/content/install-guides/arduino-pico.md), click the `Upload` button on the IDE to build and install it on your device.
+Now that you have a good understanding of the code, run it on your device. With your Raspberry Pi Pico board plugged in to your computer, and the [correct board and port selected in the Arduino IDE](/install-guides/arduino-pico), click the `Upload` button on the IDE to build and install it on your device.
 
 If successful, you should see the LED on your board light up. If you wave your hand in front of the sensor, you should also hear a double beep and see the LED turn off for a few seconds.
 

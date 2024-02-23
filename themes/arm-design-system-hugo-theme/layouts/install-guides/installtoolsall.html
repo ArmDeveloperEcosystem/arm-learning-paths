@@ -42,9 +42,11 @@ Calls to:
     <!-- get all subpages in a multi-tool install -->
     {{if or (.Params.multi_install) (.Params.multitool_install_part)}}
         {{ range .Site.Pages.ByWeight }}
-            {{ if (eq .File.Dir $thisdir)}}
-                {{ $toolfiles = $toolfiles | append . }}
-            {{ end }}
+            {{if .File}}
+                {{ if (eq .File.Dir $thisdir)}}
+                    {{ $toolfiles = $toolfiles | append . }}
+                {{ end }}
+            {{end}}
         {{end}} 
     {{end}}
 

@@ -99,7 +99,7 @@ The above command generates the following output:
   * x64: <project folder>\dist\win-unpacked
   * Arm64: <project folder>\dist\win-arm64-unpacked
 
-  Each folder contains the executable, `Electron Sample Application.exe`. Launch this executable from both folders. Then, open the Task Manager to check that both executables run as either x64 or Arm64 processes.
+  Each folder contains the executable `Electron Sample Application.exe`. Launch this executable from both folders. Then, open the Task Manager to check that both executables run as either x64 or Arm64 processes.
 
 ## Summary
 In this learning path, you created the Electron application designed to retrieve and display data from a mock API in a user-friendly table format. Developed using web technologies such as HTML, CSS, and JavaScript, this application leverages the Electron framework to seamlessly run on Windows. With added support for both x64 and Arm64 architectures on Windows, this application demonstrates the flexibility and adaptability of Electron in building robust desktop solutions for a wide range of use cases.

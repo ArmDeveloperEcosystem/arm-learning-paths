@@ -43,13 +43,15 @@ Calls to:
             <!-- Dynamic, content ordered by weight-->
             {{ $counter := 0 }}       <!-- Counter to track index-->
             {{ range .Site.Pages.ByWeight }}
-                {{ if (eq .File.Dir $thisdir)}}
-                    {{ $learningpathfiles = $learningpathfiles | append . }}
+                {{ if .File}}
+                    {{ if (eq .File.Dir $thisdir)}}
+                        {{ $learningpathfiles = $learningpathfiles | append . }}
 
-                    <!-- Call partial to fill out navigation tabs -->
-                    {{partial "navigation/content-navigation.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
-                    {{ $counter = add $counter 1 }}
-                {{ end }}
+                        <!-- Call partial to fill out navigation tabs -->
+                        {{partial "navigation/content-navigation.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
+                        {{ $counter = add $counter 1 }}
+                    {{ end }}
+                {{end}}
             {{end}} 
 
             <!-- GitHub links to edit / log an issue -->
@@ -65,15 +67,17 @@ Calls to:
 
 
         <!-- Custom content layout depending on type -->
-        {{ if eq .File.TranslationBaseName "_index" }}
-            {{partial "learning-paths/introduction" .  }}
-        {{else if eq .File.TranslationBaseName "_review"}}
-            {{partial "learning-paths/review" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-        {{else if eq .File.TranslationBaseName "_next-steps"}}
-            {{partial "learning-paths/next-steps" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-        {{ else }}
-            {{partial "learning-paths/content" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-        {{ end }}
+        {{if .File}}
+            {{ if eq .File.TranslationBaseName "_index" }}
+                {{partial "learning-paths/introduction" .  }}
+            {{else if eq .File.TranslationBaseName "_review"}}
+                {{partial "learning-paths/review" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+            {{else if eq .File.TranslationBaseName "_next-steps"}}
+                {{partial "learning-paths/next-steps" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+            {{ else }}
+                {{partial "learning-paths/content" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+            {{ end }}
+        {{end}}
 
         <!-- Next steps for buttons -->
         {{partial "navigation/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}

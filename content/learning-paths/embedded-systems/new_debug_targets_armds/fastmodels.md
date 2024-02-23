@@ -18,11 +18,11 @@ It is assumed that `Arm Fast Models` and `Arm Development Studio` are installed,
 If necessary refer to the appropriate `Install Guide`:
 * [Arm Fast Models](/install-guides/fm_fvp/fm/)
 * [Arm Development Studio](/install-guides/armds/)
-* [Arm Licensing](/install-guides/license/)
+* [Arm Software Licensing](/install-guides/license/)
 
 If you are unfamiliar with the Development Studio IDE, first see the [Get started with Arm Development Studio](/learning-paths/embedded-systems/armds/) learning path.
 
-{{% notice %}}
+{{% notice Note%}}
 If you do not have access to Arm Fast Models, you can still learn how to connect to a custom virtual platform, using an FVP as supplied with Development Studio instead.
 {{% /notice %}}
 
@@ -57,13 +57,13 @@ You are then prompted to either launch the model, or browse for an already runni
 
 Browse for the Fast Model executable. The debugger will append necessary command options to enable debug. This is the most straight forward option, and recommended for first time users.
 
-A `.mdf` file will be created. Specify an appropriate manufacturer and platform name, and click `Import`.
+A `.mdf` file will be created. Specify an appropriate manufacturer and platform name for identification, and click `Import`.
 
 ## Import software example
 
 If not previously imported, use `File` > `Import...` > `Arm Development Studio` > `Examples and Programming Libraries`, and browse for `startup_Cortex-M3_AC6` (use the text filter box to easily locate this).
 
-Although this project is pre-configured to be debugged with the FVP supplied with Arm Development Studio, you shall instead debug on the newly built FVP.
+Although this project is pre-configured to be debugged with the FVP supplied with Arm Development Studio, a new debug session will be configured for the newly built FVP.
 
 
 ## Create a new Debug Connection for your Virtual Platform
@@ -74,7 +74,7 @@ Select the model configuration you created above (the text filter can assist if 
 
 You can again select to launch a new instance of the model or connect to an already running model. Select `Launch a new model`.
 
-## Load image
+### Load image
 
 Navigate to the `Files` tab, and browse (within Workspace) to the `startup_Cortex-M3_AC6.axf` pre-built image. Then, in the `Debugger` tab, select `Debug from entry point`.
 
@@ -82,17 +82,23 @@ If connecting to an already running model with a loaded image (`-a <image>`), se
 
 Click `Debug` to connect to the virtual platform, and commence your debug session.
 
-## Addendum: If connecting to already running models
 
-When creating the `model configuration`, you can select to browse for a model running on local or remote hosts.
+
+## Connecting to an already running model
+
+When creating the `model configuration`, you can select to browse for a model running on local or remote hosts. As these models are not being launched by the debugger, additional command options are needed.
 
 ### Browse for model running on local host
 
-If this is selected, you must previously have launched the model with `-I` option to start the Iris server in the model. If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used.
+If this is selected, you must previously have launched the model with `-I` option to start the Iris server in the model.
+
+If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used.
 
 ### Browse for model running on remote host
 
-If this is selected (where the virtual platform is running on a different machine on the network), you must previously have launched the model with `-I -A` options to start the Iris server in the model and allow remote access. If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used. You will be prompted for the server address (the machine running the virtual platform) and port number.
+If this is selected (where the virtual platform is running on a different machine on the network), you must previously have launched the model with `-I -A` options to start the Iris server in the model and allow remote access.
+
+If no port number (`--port-number`) is specified, recommend adding `-p` to output the port number used. You will be prompted for the server address (the machine running the virtual platform) and port number.
 
 ### Debug Connection
 

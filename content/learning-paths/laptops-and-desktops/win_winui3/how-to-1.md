@@ -7,20 +7,20 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-Windows UI Library 3 (WinUI 3), is a modern, native UI platform available as part of the Windows App SDK. It represents the latest evolution in the Windows user interface development, offering a comprehensive set of tools and APIs for building Windows apps.
+Windows UI Library 3 (WinUI 3) is a modern, native UI platform available as part of the Windows App SDK. It represents the latest evolution in the Windows user interface development, offering a comprehensive set of tools and APIs for building Windows apps.
 
 WinUI 3 incorporates Microsoft's Fluent Design System, which emphasizes intuitive, visually appealing interfaces. It provides a wide range of controls, styles, and input features that enable developers to create both elegant and functional user experiences.
 
 It supports the development of both Desktop and UWP (Universal Windows Platform) applications, enabling developers to create versatile apps that can run across a wide range of Windows devices, from IoT devices to PCs. Built with performance and reliability in mind, WinUI 3 apps are optimized for smooth and efficient operation, ensuring a responsive user experience.
 
-WinUI 3 is an open-source project, offers backward compatibility with existing UWP and Windows Forms applications, allowing developers to gradually migrate and modernize their applications. Additionally, WinUI 3 is extensible, supporting custom controls and third-party libraries.
+WinUI 3 is an open-source project, offering backwards compatibility with existing UWP and Windows Forms applications and allowing developers to gradually migrate and modernize their applications. Additionally, WinUI 3 is extensible, supporting custom controls and third-party libraries.
 
 In this learning path you will implement a Win UI 3 application, which will perform square matrix multiplication. The idea is to reproduce the same functionality used in [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms). You will also be able to measure performance improvements on Arm64 architecture.
 
 You can find the complete code used in this learning path [here](https://github.com/dawidborycki/Arm64.WinUIApp.git).
 
 ## Before you begin
-Before you begin the implementation, you will need to install Visual Studio 2022 with the following workloads:
+Before you begin the implementation, install Visual Studio 2022 with the following workloads:
 1. .NET desktop development
 2. Universal Windows Platform development
 3. After selecting these workloads, expand the .NET desktop development group under the Installation details and ensure that the 'Windows App SDK C# Templates' option is selected.
@@ -42,10 +42,10 @@ In the next window, search for the 'Blank App, Packaged (WinUI 3 in Desktop)' te
 
 This action opens the 'Configure your new project' window. Here, you should:
 
-1. Change the project name to 'Arm64.WinUIApp'.
-2. Select the location for your project, e.g., 'C:\Users\db\source\repos'.
-3. Ensure the 'Place solution and project in the same directory' option is checked.
-4. Click the 'Create' button.
+1. Change the project name to 'Arm64.WinUIApp'
+2. Select the location for your project, e.g., 'C:\Users\db\source\repos'
+3. Ensure the 'Place solution and project in the same directory' option is checked
+4. Click the 'Create' button
 
 ![fig5](Figures/05.png)
 
@@ -109,10 +109,10 @@ In a WinUI 3 application, you define the styles in the `App.xaml` file. Open thi
 </Application>
 ```
 
-There are four style declarations, which differ by the 'TargetType' attribute. This attribute indicates the controls to which the style will be applied. For the TextBlock controls, which represent labels, modify three properties:
-* Margin: You will use a uniform margin of 10, meaning that the control will have the same margin on all four sides (left, top, right, bottom).
-* FontSize: Change the font size to 16.
-* FontWeight: Set the fonts displayed in the TextBlock to be semi-bold.
+There are four style declarations, which differ by the 'TargetType' attribute. This attribute indicates the controls to which the style will be applied. For the TextBlock controls, which represents labels, modify three properties:
+* Margin: you will use a uniform margin of 10, meaning that the control will have the same margin on all four sides (left, top, right, bottom)
+* FontSize: change the font size to 16
+* FontWeight: set the fonts displayed in the TextBlock to be semi-bold
 
 Next, you will declare the following user interface:
 
@@ -242,7 +242,7 @@ The next two controls define a fixed label ('Matrix size') and a NumberBox. The 
            SpinButtonPlacementMode="Inline" />
 ```
 
-Subsequently, you have the following declarations:
+Next, you have the following declarations:
 
 ```XML
 <TextBlock Grid.Row="2"
@@ -280,15 +280,15 @@ Finally, the view declares two buttons and one ListBox:
          Grid.ColumnSpan="2" />
 ```
 
-* The first button will be used to start calculations.
-* The second button will clear the ListBox.
-* The ListBox will display the time it takes to perform matrix multiplication.
+* the first button will be used to start calculations
+* the second button will clear the ListBox
+* the ListBox will display the time it takes to perform matrix multiplication
 
 ## Application Logic
 In this section, you will implement the application's logic. First, create two helper classes:
 
-1. **MatrixHelper**: This class implements matrix multiplication following the mathematical formula detailed on [Wikipedia](https://en.wikipedia.org/wiki/Matrix_multiplication).
-2. **PerformanceHelper**: This class provides functionality to measure code execution time.
+1. **MatrixHelper**: this class implements matrix multiplication following the mathematical formula detailed in [Wikipedia](https://en.wikipedia.org/wiki/Matrix_multiplication)
+2. **PerformanceHelper**: this class provides functionality to measure code execution time
 
 They will serve the same purpose as in the [Windows Forms learning path](/learning-paths/laptops-and-desktops/win_forms).
 
@@ -297,11 +297,12 @@ Next, you will implement event handlers for the two buttons and additional code 
 ### Helpers
 To implement the helper classes, proceed as follows:
 
-1. In the 'Solution Explorer', right-click on 'Arm64.WinUIApp' and select 'Add' -> 'New Folder'.
-2. Rename the new folder to 'Helpers'.
-3. Right-click on the 'Helpers' folder, and select 'Add' -> 'Class...'.
-4. In the 'Add New Item' dialog, type 'MatrixHelper.cs' for the file name, and click the 'Add' button.
-5. Modify the 'MatrixHelper.cs' file as shown below.
+1. In the 'Solution Explorer', right-click on 'Arm64.WinUIApp' and select 'Add' -> 'New Folder'
+2. Rename the new folder to 'Helpers'
+3. Right-click on the 'Helpers' folder and select 'Add' -> 'Class...'
+4. In the 'Add New Item' dialog, type 'MatrixHelper.cs' for the file name and click the 'Add' button
+5. Modify the 'MatrixHelper.cs' file as shown below:
+   
 ```CS
 using System;
 
@@ -369,8 +370,9 @@ namespace Arm64.WinUIApp.Helpers
     }
 }
 ```
-6. Similarly, create the 'PerformanceHelper.cs' file under the 'Helpers' folder.
-7. Modify the file as indicated below.
+6. Similarly, create the 'PerformanceHelper.cs' file under the 'Helpers' folder
+7. Modify the file as indicated below:
+   
 ```CS
 using System;
 using System.Diagnostics;
@@ -399,10 +401,10 @@ namespace Arm64.WinUIApp.Helpers
 ```
 
 ### Event handlers
-You will now use the previously implemented classes to create event handlers for the buttons. Additionally, you will modify the constructor of the MainWindow class to dynamically read the processor architecture, which will then be displayed in the associated TextBlock. Furthermore, you will resize the application window.
+You will now use the previously implemented classes to create event handlers for the buttons. Additionally, you will modify the constructor of the MainWindow class to dynamically read the processor architecture, which will then be displayed in the associated TextBlock. You will also resize the application window.
 
 Proceed as follows:
-1. Open the MainWindow.xaml.cs.
+1. Open the MainWindow.xaml.cs
 2. Modify the MainWindow constructor as shown below:
 
 ```CS

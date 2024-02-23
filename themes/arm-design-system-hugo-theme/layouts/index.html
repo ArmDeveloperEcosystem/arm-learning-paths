@@ -50,7 +50,10 @@ Website homepage.
                             <{{- delimit .Params.key_ip ", " -}}>
                         </p>
                         <p class="u-margin-bottom-0 u-margin-top-0">
-                            {{- delimit .Params.differentiating_info ".&nbsp;&nbsp;&nbsp;&nbsp;"  -}}
+                            {{ range $i, $info := .Params.differentiating_info }}
+                                <span style="margin-right: 8px;">{{ $info }}.</span>
+                            {{ end }}
+
                         </p>   
                     </ads-card-content>   
                 </ads-card>

@@ -15,12 +15,12 @@ You will need at least 30 GB of free disk space on your machine to run the docke
 ## Overview
 
 The Arm Confidential Compute Architecture (CCA) enables the construction of protected execution
-environments called Realms. Realms allow lower-privileged software, such as an application or a virtual machine to
+environments called Realms. Realms allow lower-privileged software, such as an application or a virtual machine, to
 protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources used by the Realm.
 
-The Arm Realm Management Extension (RME) is an Arm v9-A architecture extension and defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-Secure states.
+The Arm Realm Management Extension (RME) is an Arm v9-A architecture extension. It defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-secure states.
 
-In this learning path, you will learn how to run the reference integration software stack for Arm CCA in a pre-built docker container. Shown below is graphical depiction of the software stack you will run on your development machine:
+In this learning path, you will learn how to run the reference integration software stack for Arm CCA in a pre-built docker container. Shown below is a graphical depiction of the software stack you will run on your development machine:
 
 ![img #center](cca-stack-overview.png)
 
@@ -37,7 +37,7 @@ Pull the docker image from DockerHub:
 ```console
 docker pull armswdev/aemfvp-cca-image
 ```
-Confirm that the docker container image was dowloaded successfully:
+Confirm that the docker container image was downloaded successfully:
 
 ```console
 docker image list
@@ -67,13 +67,13 @@ The pre-built binaries for the Arm CCA reference software stack are present in t
 ```console
 ls output/aemfvp-a-rme/
 ```
-This includes the Trusted Firmware binaries, the host root filesystem and host linux kernel image:
+This includes the Trusted Firmware binaries, the host root filesystem and the host Linux kernel image:
 
 ```output
 bl1.bin  fip.bin  fip-std-tests.bin  host-fs.ext4  Image
 ```
 
-These binaries can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and  Armv9-A architectures with comprehensive system IP. The FVP is also contained within this docker container.
+These binaries can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and Armv9-A architectures with comprehensive system IP. The FVP is also contained within this docker container.
 
 Launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
 
@@ -103,22 +103,22 @@ Welcome to Buildroot
 buildroot login:
 ```
 
-You will be prompted to login to buildroot. Enter `root` as both the username and password.
+You will be prompted to log in to buildroot. Enter `root` as both the username and password.
 
-You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, Realm Management Monitor (RMM) in Realm, host Linux in non-secure and Hafnium in secure. 
+You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, Realm Management Monitor (RMM) in Realm, host Linux in Non-secure and Hafnium in Secure. 
 
 ## Create a virtual guest in a Realm
 
 Guest VMs can be launched in a Realm using `kvmtool` from your host Linux prompt. The kernel `Image` and filesystem `realm-fs.ext4` for the Realm are packaged into the buildroot host file system.
 
-Use `kvmtool` to launch guest linux in a Realm:
+Use `kvmtool` to launch guest Linux in a Realm:
 
 ```console
 lkvm run --realm -c 2 -m 256 -k /realm/Image -d /realm/realm-fs.ext4 -p earlycon
 ```
 You should see the guest Linux kernel starting to boot in a Realm. This step can take several minutes.
 
-After boot up, you will be prompted to login at the guest Linux buildroot prompt. Use `root` again as both the username and password.
+After boot up, you will be prompted to log in at the guest Linux buildroot prompt. Use `root` again as both the username and password.
 
 ```output
 Starting network: udhcpc: started, v1.31.1
@@ -155,7 +155,7 @@ Requesting system poweroff
 [   44.697156] reboot: Power down
   Info: KVM session ended normally.
 ```
-The guest has shut down and you are back at the host linux kernel prompt.
+The guest has shut down and you are back at the host Linux kernel prompt.
 
 To exit the simulation, use `Ctrl-a + d`. You will be placed back into the running docker container. 
 

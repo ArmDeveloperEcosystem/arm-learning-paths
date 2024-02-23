@@ -59,7 +59,7 @@ To install Firefox on Windows on Arm:
 
 1. Go to the [download page](https://www.mozilla.org/en-US/firefox/all/#product-desktop-release) and select the `Windows ARM64/AArch64` installer. 
 
-2.  Click **Download Now** 
+2. Click **Download Now** 
 
 3. Run the downloaded `.exe` file 
 

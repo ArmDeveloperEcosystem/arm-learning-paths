@@ -1,6 +1,8 @@
 ---
 title: Get started with the Scalable Matrix Extension (SME)
 
+draft: true
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to learn about Scalable Matrix Extension (SME2) to optimize the processing of matrices.

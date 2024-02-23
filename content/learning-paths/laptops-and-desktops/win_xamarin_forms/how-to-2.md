@@ -7,14 +7,14 @@ layout: "learningpathall"
 ---
 
 ## Objective
-In this section, you will learn how to use Model View ViewModel (MVVM) architectural pattern.
+In this section, you will learn how to use the Model-View-ViewModel (MVVM) architectural pattern.
 
 ## Model
 Begin by creating a model class named `DataPoint2d`, which will represent XY points on a plot. Follow these steps to create the model:
 
-1. Open the Solution Explorer in Visual Studio.
-2. Right-click on the `Arm64.MobileApp.XamarinForms` project and choose Add -> New Folder from the context menu.
-3. Name the new folder 'Models'.
+1. Open the Solution Explorer in Visual Studio
+2. Right-click on the `Arm64.MobileApp.XamarinForms` project and choose Add -> New Folder from the context menu
+3. Name the new folder 'Models'
 4. Right-click on the 'Models' folder and select Add -> Class. In the dialog that appears, enter 'DataPoint2d.cs' as the file name and click the Add button.
 
 Next, modify the newly created `DataPoint2d.cs` file with the following code:
@@ -72,13 +72,13 @@ The `BaseViewModel` class uses the INotifyPropertyChanged interface for data bin
 To implement the `INotifyPropertyChanged` interface, the class must define the PropertyChanged event. Views associated with view models automatically subscribe to this event to update their controls accordingly.
 
 Additionally, you have implemented two protected methods accessible in derived classes:
-* OnPropertyChanged: This method raises the PropertyChanged event, informing the view which property of the view model has changed.
-* SetProperty: A helper method that updates the property value and then invokes OnPropertyChanged to propagate property changes to the view.
+* OnPropertyChanged: this method raises the PropertyChanged event, informing the view which property of the view model has changed.
+* SetProperty: a helper method that updates the property value and then invokes OnPropertyChanged to propagate property changes to the view.
 
-The next step involves implementing commands, which act as event handlers for controls. Unlike event handlers that are framework-dependent, commands are independent and can be implemented directly in the view model. This allows the same command to be used in WPF, Xamarin, or .NET MAUI apps. To implement a command, create a class that implements the System.Windows.Input.ICommand interface, which comprises:
-* Execute: A method called when the command is invoked, such as through a button click.
-* CanExecute: A method that specifies whether the command can be invoked, often used to ensure the application state or user input is valid for command execution.
-* CanExecuteChanged: An event raised whenever the state affecting CanExecute changes.
+The next step involves implementing commands which act as event handlers for controls. Unlike event handlers that are framework-dependent, commands are independent and can be implemented directly in the view model. This allows the same command to be used in WPF, Xamarin, or .NET MAUI apps. To implement a command, create a class that implements the System.Windows.Input.ICommand interface, which comprises:
+* Execute: a method called when the command is invoked, such as through a button click.
+* CanExecute: a method that specifies whether the command can be invoked, often used to ensure the application state or user input is valid for command execution.
+* CanExecuteChanged: an event raised whenever the state affecting CanExecute changes.
 
 Below is a simple implementation of the ICommand interface in a new file, `SimpleCommand.cs`, saved under the ViewModels folder:
 
@@ -215,12 +215,12 @@ This approach eliminates the need to manually rewrite values from the Computatio
 
 `RunCalculationsCommand` is created using the constructor of the `SimpleCommand class`, defining the action inline. The action involves calling `PerformanceHelper.MeasurePerformance` to measure the execution time of ten invocations of the `MatrixHelper.SquareMatrixMultiplication` method. The computation time is stored in a local variable and formatted into a string displaying the processor architecture (obtained using the PROCESSOR_ARCHITECTURE environment variable) and the computation time with a “ms” suffix. This string is then assigned to the ComputationTime property of the MainViewModel.
 
-Additionally, RunCalculationsCommand stores the computation time in the computationTimeHistory field, a list of DataPoint2d instances. Each instance represents an XY point, with X being the sequential number of the computation and Y being the computation time.
+Additionally, `RunCalculationsCommand` stores the computation time in the computationTimeHistory field, a list of DataPoint2d instances. Each instance represents an XY point, with X being the sequential number of the computation and Y being the computation time.
 
-To plot the computation times, PlotResultsCommand is used. This command does not involve any direct chart-related logic; instead, it transfers each element from `computationTimeHistory` to the DataPoints property, an `ObservableCollection`. As `ObservableCollection` implements `INotifyPropertyChanged`, it automatically notifies when items are added, updated, or removed, making it unnecessary to use BaseViewModel.SetProperty in this context.
+To plot the computation times, `PlotResultsCommand` is used. This command does not involve any direct chart-related logic; instead, it transfers each element from `computationTimeHistory` to the DataPoints property, an `ObservableCollection`. As `ObservableCollection` implements `INotifyPropertyChanged`, it automatically notifies when items are added, updated, or removed, making it unnecessary to use BaseViewModel.SetProperty in this context.
 
 ## Attaching the ViewModel to the View
-In the final step, you need to connect the MainViewModel to the MainPage view. To do this, open `MainPage.xaml` and add the following declarations
+In the final step, you need to connect the MainViewModel to the MainPage view. To do this, open `MainPage.xaml` and add the following declarations:
 
 ```XML
 <?xml version="1.0" encoding="utf-8" ?>
@@ -254,7 +254,7 @@ adds the C# namespace to the XAML, enabling the use of C# types as XAML tags. Co
 
 creates an instance of the MainViewModel class and assigns it to the ContentPage.BindingContext property, which is utilized by the view for data binding.
 
-Next, modify the Buttons section by adding bindings to RunCalculationsCommand and PlotResultsCommand:
+Next, modify the Buttons section by adding bindings to `RunCalculationsCommand` and `PlotResultsCommand`:
 
 ```XML
  <!--Buttons-->
@@ -268,7 +268,7 @@ Next, modify the Buttons section by adding bindings to RunCalculationsCommand an
  </StackLayout>
 ```
 
-Then, update the Label declaration to bind to the ComputationTime property of the MainViewModel:
+Then, update the Label declaration to bind to the `ComputationTime` property of the MainViewModel:
 
 ```XML
 <!--Label-->
@@ -292,7 +292,7 @@ With these modifications, the MainPage view will be fully connected to MainViewM
 ## Test the application
 You can now run the application to demonstrate the performance differences between Arm64 and x64 architectures. First, you need to configure the application for both Arm64 and x64 platforms in Visual Studio. To do this, follow these steps:
 
-1. Click on the platform dropdown in Visual Studio and select 'Configuration Manager...'.
+1. Click on the platform dropdown in Visual Studio and select 'Configuration Manager...'
 
 ![fig9](Figures/09.png)
 
@@ -300,13 +300,13 @@ You can now run the application to demonstrate the performance differences betwe
 
 ![fig10](Figures/10.png)
 
-3. In the 'New Solution Platform' dialog, choose 'ARM64' from the list and click the 'OK' button.
+3. In the 'New Solution Platform' dialog, choose 'ARM64' from the list and click the 'OK' button
 
 ![fig11](Figures/11.png)
 
 After setting up both platforms, start by running the application using the x64 platform:
 
-1. Launch the application in x64 mode.
+1. Launch the application in x64 mode
 2. Click the 'Run calculations' button several times, then click 'Plot results'. Observe the computation times displayed.
 
 Now, launch the application using x64 platform. Click the Run calculations button several times, and then click the Plot results button. You should get the following:
@@ -315,8 +315,8 @@ Now, launch the application using x64 platform. Click the Run calculations butto
 
 Next, switch to the ARM64 platform and repeat the process:
 
-1. Change the platform to ARM64 in Visual Studio.
-2. Launch the application, perform several calculations again, and plot the results.
+1. Change the platform to ARM64 in Visual Studio
+2. Launch the application, perform several calculations again, and plot the results
 
 You should notice shorter computation times on the ARM64 platform, demonstrating its performance advantage:
 
