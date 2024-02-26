@@ -1,7 +1,7 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Now that you have some microcontroller experience on Arduino, check out another programming environment for the Raspberry Pi Pico.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/microcontrollers/rpi_pico/
 
 further_reading:
     - resource:

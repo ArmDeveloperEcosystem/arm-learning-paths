@@ -1,5 +1,7 @@
 ---
-title: "Embedded 102: Working with Interrupts"
+title: "External interrupts with Arduino on the Raspberry Pi Pico"
+
+draft: false
 
 minutes_to_complete: 10
 
@@ -10,7 +12,7 @@ learning_objectives:
     - Implement interrupt handlers in an Arduino sketch
 
 prerequisites:
-    - Completed the [Embedded programming with the Raspberry Pi Pico]() learning path
+    - Completed the [Embedded programming with the Raspberry Pi Pico](../arduino-pico) learning path
 
 author_primary: Michael Hall
 

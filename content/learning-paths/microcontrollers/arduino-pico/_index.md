@@ -1,5 +1,5 @@
 ---
-title: "Embedded programming with the Raspberry Pi Pico"
+title: "Embedded programming with Arduino on the Raspberry Pi Pico"
 
 draft: true
 
