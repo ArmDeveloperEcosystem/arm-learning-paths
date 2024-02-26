@@ -2,7 +2,7 @@
 # User change
 title: "Mali Offline Compiler"
 
-weight: 8 # 1 is first, 2 is second, etc.
+weight: 10 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -59,10 +59,11 @@ Compile the shader for [Mali-G76](https://developer.arm.com/Processors/Mali-G76)
  malioc --core Mali-G76 shader.frag
 ```
 
-The full list of available options are documented in the [User Guide](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler), else can be seen with:
+The full list of available options can be seen with:
 ```console
 malioc --help
 ```
+For more information, refer to [Compiling OpenGL ES shaders](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler/Compiling-OpenGL-ES-shaders) and [Compiling Vulkan shaders](https://developer.arm.com/documentation/101863/latest/Using-Mali-Offline-Compiler/Compiling-Vulkan-shaders) in the Mali Offline Compiler User Guide.
 
 ## Analyze the report
 
@@ -77,7 +78,7 @@ Longest path cycles:         4.53    0.00    0.25    2.50        A
 A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
 
-An example optimization is explained in the [documentation](https://developer.arm.com/documentation/102468/0100/Optimize-your-shader).
+An example optimization is explained in the [documentation](https://developer.arm.com/documentation/102468/latest/Optimize-your-shader).
 ```C
 #version 310 es
 #define WINDOW_SIZE 5
@@ -116,4 +117,4 @@ A = Arithmetic, LS = Load/Store, V = Varying, T = Texture
 ```
 Observe that the number of `Arithmetic` cycles has been significantly reduced.
 
-Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. This brief [video tutorial](https://www.youtube.com/watch?v=zEybNlwd7SI) is an excellent starter.
+Understanding the output of the report is key to the usefulness of the Mali Offline Compiler. This brief [video tutorial](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/Arm%20Mali%20GPU%20Training%20-%20EP3-5) is an excellent starter.
