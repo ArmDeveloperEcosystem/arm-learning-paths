@@ -10,13 +10,13 @@ layout: learningpathall
 The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS.
 
 Before you begin, you will need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
-PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy a Natural Language Processing (NLP) model on the Arm AArch64 CPU on your server.
+PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy a Natural Language Processing (NLP) model on the Arm AArch64 CPU on your machine.
 
 ## Overview
 
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like Natural language processing, audio and computer vision. Hugging face has a huge collection of NLP models for tasks like translation, sentiment analysis, summarization and text generation.
 
-In this learning path, you will download and run a popular [RoBERTa sentiment analysis](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest) NLP model from Hugging Face and deploy it using PyTorch on your Arm server. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. This model has been trained with over 124 million tweets. You will deploy it on the Arm AArch64 CPU on your server and classify the emotion of the input text.
+In this learning path, you will download a popular [RoBERTa sentiment analysis](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest) NLP model from Hugging Face and deploy it using PyTorch on your Arm machine. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. This model has been trained with over 124 million tweets. 
 
 ## Install dependencies
 
@@ -75,12 +75,12 @@ for i in range(scores.shape[0]):
 ```
 This example does the following:
 
-	* Downloads and creates an instance of the RoBERTa sentiment analysis model. 
-	* Creates a `tokenizer` which prepares the inputs as tensors for the model. 
-	* Pre-processes the input text to the model.
-	* Encodes the input text to the model.
-	* Passes the encoded input text to the model and performs the sentiment analysis
-	* Obtains the output classification score
+* Downloads and creates an instance of the RoBERTa sentiment analysis model. 
+* Creates a `tokenizer` which prepares the inputs as tensors for the model. 
+* Pre-processes the input text to the model.
+* Encodes the input text to the model.
+* Passes the encoded input text to the model and performs the sentiment analysis
+* Obtains the output classification score
 
 Run this script:
 
@@ -177,9 +177,11 @@ Self CPU time total: 51.903ms
 2) neutral 0.2287
 3) positive 0.0477
 ```
+In addition to the classification output from the model, you can now see the execution time for the different operators. 
 
 You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch.md#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch.md#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
 
+You have successfully run an profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
 
 
 
