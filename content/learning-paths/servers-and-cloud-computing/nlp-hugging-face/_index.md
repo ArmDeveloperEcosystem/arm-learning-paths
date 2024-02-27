@@ -10,8 +10,7 @@ learning_objectives:
     - Use the PyTorch profiler to analyze the execution time of the model
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-prem
-ises Arm server
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author_primary: Pareena Verma
 
