@@ -10,7 +10,7 @@ layout: learningpathall
 The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS.
 
 Before you begin, you will need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
-PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy a Natural Language Processing (NLP) model on the Arm AArch64 CPU on your machine.
+PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy a Natural Language Processing (NLP) model on your Arm machine.
 
 ## Overview
 
@@ -181,7 +181,7 @@ In addition to the classification output from the model, you can now see the exe
 
 You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch.md#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch.md#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
 
-You have successfully run an profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
+You have successfully run and profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
 
 
 
