@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-You now know the logic behind the vectorization and should threfore be confident that you can understand the SVE code shown below:
+You now know the logic behind the vectorization and should therefore be confident that you can understand the SVE code shown below:
 
 ```C
 #include <stdint.h>
