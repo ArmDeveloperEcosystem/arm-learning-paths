@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-You now know the logic behind the vectorization, so you should be confident that you can understand the SVE code shown below:
+You now know the logic behind the vectorization and should threfore be confident that you can understand the SVE code shown below:
 
 ```C
 #include <stdint.h>
@@ -170,13 +170,13 @@ int main() {
 }
 ```
 
-To run the SVE application you will need a computer with SVE support. To determine if SVE is available on your processor run:
+To run the SVE application, you will need a computer with SVE support. To determine if SVE is available on your processor, run:
 
 ```console
 lscpu | grep sve
 ```
 
-If SVE is available the Flags will be printed: 
+If SVE is available, the Flags will be printed: 
 
 ```output
 Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs paca pacg dcpodp svei8mm svebf16 i8mm bf16 dgh rng
