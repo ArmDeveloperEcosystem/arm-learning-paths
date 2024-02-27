@@ -8,7 +8,7 @@ layout: learningpathall
 
 As you have learned, changing data layout can improve performance.
 
-The challenge is knowing what to change and understanding why it would matter. Below is another version of the program you can study to learn about data layout.
+The challenge is knowing what to change and understanding why it would matter. Another version of the program is shown below. You can study this version to learn about data layout.
 
 Use a text editor to copy the code below and save it as `simulation4.c`:
 
@@ -186,7 +186,7 @@ Total border collisions: x: 250123, y: 249711, z: 249844
 elapsed time: 13.530677
 ```
 
-The first observation is that the number of collisions reported is the same, which is a good thing, performance optimization is useless if you get the wrong results!
+The first observation is that the number of collisions reported is the same (which is a good thing, performance optimization is useless if you get the wrong results)!
 
 You also see a significant speed gain: the new version is up to 2.25x faster than the original version and about 1.43x faster (for GCC 12) as the previous version, even the hand-written version in the previous section.
 
