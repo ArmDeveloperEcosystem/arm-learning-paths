@@ -86,6 +86,14 @@ input,
 label {
     font-size: 16px!important;
 }
+/* Overwrite paragraph / heading colors immediatly 
+:root {
+    --ads-font-family:Lato, sans-serif; 
+    --ads-color: hsla(0,0%,100%,.9);
+    --ads-heading-color: hsla(0,0%,100%,.9);
+}
+*/
+
 /* Fix Search Height and pdding*/
 ads-search#search-box {
     min-height: 45px;
