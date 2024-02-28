@@ -44,7 +44,7 @@ More information is available in the Learning Path [Get started with Windows Sub
 
 ### Install and test Docker Engine
 
-From within `WSL2` running a Linux distribution on a Windows on Arm laptop, the general Linux install instructions can be used. 
+You can use the general Linux install instructions to install Docker in WSL 2 for Windows on Arm. 
 
 ```console
 curl -fsSL test.docker.com -o get-docker.sh && sh get-docker.sh
