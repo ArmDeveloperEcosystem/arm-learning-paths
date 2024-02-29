@@ -1,18 +1,18 @@
 ---
 title: "External interrupts with Arduino on the Raspberry Pi Pico"
 
-draft: false
+draft: true
 
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for software developers interested in embedded programming.
 
 learning_objectives: 
-    - Learn how hardware interrupts are used in embedded systems to respond to changes in the real world
+    - Understand how hardware interrupts are used in embedded systems to respond to changes in the real world
     - Implement interrupt handlers in an Arduino sketch
 
 prerequisites:
-    - Completed the [Embedded programming with the Raspberry Pi Pico](../arduino-pico) learning path
+    - Complete [Embedded programming with the Raspberry Pi Pico](../arduino-pico).
 
 author_primary: Michael Hall
 

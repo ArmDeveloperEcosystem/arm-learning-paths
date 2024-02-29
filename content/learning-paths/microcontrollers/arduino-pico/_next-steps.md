@@ -1,7 +1,7 @@
 ---
-next_step_guidance: Now that you have a working microcontroller application, learn how to improve on it by using external interrupts
+next_step_guidance: Now that you have a working microcontroller application, learn how to improve on it by using external interrupts.
 
-recommended_path: /learning-paths/microcontrollers/arduino-interrupt/ 
+recommended_path: /learning-paths/microcontrollers/arduino-interrupts/ 
 
 further_reading:
     - resource:
