@@ -65,14 +65,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  Serial.print("motionDetected: "); Serial.println(motionDetected);
-  Serial.print("counter: "); Serial.println(counter);
   
   if (motionDetected) {
+    // First we write to the USB console that motion was detected
     Serial.println("Motion Detected!");
   
-    // First we write to the USB console that motion was detected
-    Serial.println("Motion detected");
     // Next we turn the LED off, indicating that we're not longer in the waiting state
     ledOff();
     // Then we trigger the beep
