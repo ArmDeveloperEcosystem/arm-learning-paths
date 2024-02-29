@@ -175,7 +175,7 @@ table tbody td {
 /* Fix Nav Masthead Breadcrumb container */
 /*************************************/
 #nav-masthead-breadcrumbs {
-    background-image: url("/img/masthead-background.png"); /* The image used */
+    background-image: url("/img/masthead-background.webp"); /* The image used */
     background-color: var(--arm-color-footing);            /* Used if the image is unavailable */
     background-size: cover;
 }
@@ -390,7 +390,7 @@ html[theme='light'] body {
 /* Mobile background */
 @media (max-width: 768px) {
     html[theme='dark'] body {
-        background-image: url("/img/bg-img-736x800.png"); 
+        background-image: url("/img/bg-img-736x800.webp"); 
         background-color: var(--arm-color-footing);      
         background-position: 0% 100%;
         background-attachment: fixed;
@@ -400,7 +400,7 @@ html[theme='light'] body {
 /* Laptop background */
 @media (min-width: 768px) {
     html[theme='dark'] body {
-        background-image: url("/img/bg-img-1920x1600.png");
+        background-image: url("/img/bg-img-1920x1600.webp");
         background-color: var(--arm-color-footing);      
         background-position: 0% 100%;
         background-attachment: fixed;
@@ -411,7 +411,7 @@ html[theme='light'] body {
 /* Large Monitor background */
 @media (min-width: 1400px) {
     html[theme='dark'] body {
-        background-image: url("/img/bg-img-2500x1700.png");
+        background-image: url("/img/bg-img-2500x1700.webp");
         background-color: var(--arm-color-footing);      
         background-position: 0% 100%;
         background-attachment: fixed;
