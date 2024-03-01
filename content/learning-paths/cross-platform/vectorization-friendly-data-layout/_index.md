@@ -1,5 +1,5 @@
 ---
-title: Vectorization-friendly data Layout
+title: Optimize SIMD code with vectorization-friendly data layout
 
 minutes_to_complete: 45
 
