@@ -84,7 +84,7 @@ See the [Get started with Performance Advisor Tutorial](https://developer.arm.co
     ```console
     streamline-cli -pa <options> my_capture.apc
     ```
-    The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command), else can be seen with:
+    The available options are documented in the [Performance Advisor User Guide](https://developer.arm.com/documentation/102009/latest/Command-line-options/The-pa-command). Alternatively, they can be displayed with:
     ```console
     streamline-cli -pa -h
     ```
