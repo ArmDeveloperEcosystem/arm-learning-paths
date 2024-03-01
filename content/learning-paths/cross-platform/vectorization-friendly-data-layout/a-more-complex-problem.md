@@ -63,7 +63,7 @@ void simulate_objects(object_t *objects, float duration, float step) {
 }
 ```
 
-This is a scalar approach, but the code still uses the `vec4` struct and the boundary checking is even done on the fourth element. Is this a waste of cycles? No, because the compiler can find an opportunity to autovectorize this, but you should be able to verify this for yourself.
+This is a scalar approach, but the code still uses the `vec4` struct and the boundary checking is even done on the fourth element. This is not a waste of cycles as the compiler can find an opportunity to autovectorize this, but you should be able to verify this for yourself.
 
 First, compile the code with `-O2`:
 
@@ -127,6 +127,6 @@ Even without looking at the rest of the code, this indicates something is wrong 
 
 This code is one of the cases that the compilers cannot yet autovectorize. Neither GCC nor Clang can autovectorize this code to the quality that hand-written SIMD code can reach. 
 
-But you should not blame the compilers for failing to autovectorize a piece of code, this is an ongoing process and already the compilers are quite proficient at autovectorizing many loops. It's always worth the effort investigating what the compiler can do for you and only revert to hand-written code when you are not satisfied with the result.
+You should not blame the compilers for failing to autovectorize a piece of code. This is an ongoing process and the compilers are already quite proficient at autovectorizing many loops. It's always worth the effort investigating what the compiler can do for you and only revert to hand-written code when you are not satisfied with the result.
 
 In the next section you will see a manual optimization approach.
