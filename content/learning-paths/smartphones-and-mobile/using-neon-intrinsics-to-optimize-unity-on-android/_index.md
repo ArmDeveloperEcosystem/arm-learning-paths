@@ -1,33 +1,33 @@
 ---
-title: Profiling Unity apps on Android
+title: Using Neon intrinsics to optimize Unity on Android
 
 minutes_to_complete: 120
 
-who_is_this_for: Unity developers wanting to analyze performance of their apps on Android devices
+who_is_this_for: Unity developers wanting to optimize their Unity apps on Android
 
 learning_objectives: 
-    - Deploy to Android
-    - Profile code running on an Android device
-    - Analyze performance data
+    - Use Arm Neon intrinsics in your Unity C# scripts
+    - Optimize your code
+    - Collect and compare performance data using the Unity Profiler and Analyzer tools
 
 prerequisites:
-    - Learning path Get started with Unity on Android
-    - Basic knowledge of Unity and programming concepts
-    - Recent Android device such as mobile phone or tablet
+    - Basic knowledge of Unity and C#
+    - Recent Android device such as mobile phone or tablet featuring an Arm microprocessor
     - Desktop computer capable of running Unity
+    - Unity must be compatible with Unity Burst compiler 1.5 or later
 
 author_primary: Arm
 
 ### Tags
 skilllevels: Intermediate
-subjects: Performance analysis
+subjects: Neon intrinsics, Unity, optimization
 armips:
     - Cortex-A
     - armv8
-    - aarch32
     - aarch64
     - arm64
     - arm architecture
+    - Neon
 tools_software_languages:
     - Unity
     - Mobile

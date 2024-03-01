@@ -15,7 +15,7 @@ prerequisites:
     - Recent Android device such as mobile phone or tablet
     - Desktop computer capable of running Unity
 
-author_primary: visualSilicon
+author_primary: Arm
 
 ### Tags
 skilllevels: Beginner
