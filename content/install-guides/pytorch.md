@@ -151,9 +151,9 @@ export DNNL_DEFAULT_FPMATH_MODE=BF16
 
 ## Transparent huge pages
 
-Transparent huge pages (TLP) provide an alternative method of utilizing huge pages for virtual memory. Enabling TLP may result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
+Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP may result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
 
-To check if TLP is available on your system, run:
+To check if THP is available on your system, run:
 
 ```console
 cat /sys/kernel/mm/transparent_hugepage/enabled
