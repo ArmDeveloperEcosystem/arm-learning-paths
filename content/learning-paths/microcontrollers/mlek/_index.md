@@ -15,6 +15,9 @@ prerequisites:
 
 author_primary: Ronan Synnott
 
+### RS: Learning Path hidden until AWS instance updated
+draft: true
+
 ### Tags
 skilllevels: Introductory
 subjects: ML

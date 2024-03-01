@@ -15,7 +15,7 @@ From there, the `RTX5` initialization code is always essentially the same, setti
 
 ## Create main()
 
-Right click on the `Source` folder under the `FVP` target, and `Add a new item`.
+Right click on the `Source` folder under the `FVP` target, and `Add new item`.
 
 Select `C file (.c)`, and create the `main.c`file with the contents below:
 
@@ -46,7 +46,7 @@ Right-click on the project, and select `New` > `Source File` from the pop-up men
 
 ## Understanding the code
 
-The function [osKernelStart()](https://www.keil.com/pack/doc/CMSIS/RTOS2/html/group__CMSIS__RTOS__KernelCtrl.html#ga9ae2cc00f0d89d7b6a307bba942b5221) should never return.
+The function [osKernelStart()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__KernelCtrl.html#ga9ae2cc00f0d89d7b6a307bba942b5221) should never return.
 
 If your code gets to the infinite `while()` loop, something has gone wrong - most likely with the platform initialization code.
 
@@ -54,6 +54,6 @@ All threads use a prototype of the form:
 ```C
 void thread(void *);
 ```
-where the argument is passed as the second parameter of the [osThreadNew()](https://www.keil.com/pack/doc/CMSIS/RTOS2/html/group__CMSIS__RTOS__ThreadMgmt.html#ga48d68b8666d99d28fa646ee1d2182b8f) function. Use `NULL` if no argument to pass.
+where the argument is passed as the second parameter of the [osThreadNew()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html#ga48d68b8666d99d28fa646ee1d2182b8f) function. Use `NULL` if no argument to pass.
 
 In the above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, you shall spawn all other threads of the RTOS.

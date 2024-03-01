@@ -22,9 +22,19 @@ MPS3 is the recommended solution for evaluating performance, but boards are in s
 
 Virtual implementations of the Corstone-300 and Corstone-310 are also available for software development. These can be accessed locally or in the cloud.
 
+### Ecosystem FVPs
+
+Ecosystem FVPs are free-of-charge and target a variety of applications. They run on Linux and Windows.
+
+The Corstone-300 and Corstone-310 FVPs are available on the [Arm Ecosystem FVP page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps/). General ecosystem FVP setup instructions are provided in the [install guide](/install-guides/fm_fvp/eco_fvp/).
+
+The Ecosystem FVP can be used in conjunction with [Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
+
+Keil MDK Professional Edition also provides these virtual platforms.
+
 ### Arm Virtual Hardware 
 
-[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone-300 and Corstone-310 platforms.
+[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone-300 and Corstone-310 platforms. These are intended for use as software test and validation environments suitable for CI/CD integration.
 
 Both versions of AVH offer FVPs. Choose the one which best matches your preferences. You can use your AWS account and pay for the compute you use or pay for the hardware-as-a-service directly using your Arm account. Both methods offer free trials.
 
@@ -32,22 +42,22 @@ The marketing information provides more details about the similarities and diffe
 
 - [Arm Virtual Hardware Corstone and CPUs](#aws) AWS AMI (Amazon Machine Image) provides Virtual Hardware Targets (`VHT`) in a cloud instance (virtual machine). The AMI is available in the [AWS marketplace](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g/). 
 
-- [Arm Virtual Hardware Third-Party Hardware](#haas) is a hardware-as-a-service offering using hypervisor technology to model real hardware provided by Arm’s partners. It also offers FVPs as part of the cloud service.
+- [Arm Virtual Hardware Third-Party Hardware](#3rdparty) uses hypervisor technology to model real hardware provided by Arm’s partners. It also offers FVPs as part of the cloud service.
 
 #### Arm Virtual Hardware Corstone and CPUs (AWS AMI) {#aws}
 
 Follow the [Arm Virtual Hardware Corstone install guide](/install-guides/avh/#corstone) to get started with AVH on AWS.
 
-Setup the VNC connection to access the Linux desktop for ML application development. 
+The following executables are provided:
+* `VHT_Corstone_SSE-300_Ethos-U55`
+* `VHT_Corstone_SSE-300_Ethos-U65`
+* `VHT_Corstone_SSE-310_Ethos-U65`
 
-Once you are connected with the VNC connection setup, you can run the Corstone-300 FVP:
-
+When you launch a model:
 ```console
 VHT_Corstone_SSE-300_Ethos-U55
 ```
-
-The FVP will start executing and display output similar to:
-
+It will display output similar to:
 ```output
 telnetterminal0: Listening for serial connection on port 5000
 telnetterminal1: Listening for serial connection on port 5001
@@ -57,16 +67,22 @@ telnetterminal5: Listening for serial connection on port 5003
     Ethos-U rev 136b7d75 --- Feb 16 2022 15:47:15
     (C) COPYRIGHT 2019-2022
 ```
+{{% notice Visualization %}}
 
 A visualization of the FVP will also be displayed on the Linux desktop.
 
+To disable this, which should allow the FVP to startup more quickly, add:
+
+`-C mps3_board.visualisation.disable-visualisation=1`
+
+to the command line.
+{{% /notice %}}
+
 Terminate the FVP with `Ctrl+C`.
 
-There are also executables for `VHT_Corstone_SSE-300_Ethos-U65` and `VHT_Corstone_SSE-310_Ethos-U65` you can use. 
+If you can start the FVPs you are ready for ML application development.
 
-If you can start the FVPs you are ready for ML application development. 
-
-#### Arm Virtual Hardware Third-Party Hardware (hardware-as-a-service) {#haas}
+#### Arm Virtual Hardware Third-Party Hardware {#3rdparty}
 
 Arm Virtual Hardware Third-Party Hardware is currently in public beta. 
 
@@ -78,29 +94,16 @@ You can use the AVH console to upload software and control FVP execution.
 
 There is also documentation available in the console you can read to continue learning about AVH.
 
-If you are in the console and can see the FVPs, you are ready for ML application development. 
+If you are in the console and can see the FVPs, you are ready for ML application development.
 
-### Ecosystem FVPs
 
-Ecosystem FVPs are free-of-charge and target a variety of applications. They run on Linux and Windows.
+## FVP configuration options
 
-The Corstone-300 MPS3 FVP is available on the [Arm Ecosystem FVP page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps/). General ecosystem FVP setup instructions are provided in the [install guide](/install-guides/fm_fvp/eco_fvp/).
+These virtual platforms have some options to help you evaluate different configurations.
 
-You can use the Corstone-300 on any computer and no license is required. This is the best option if you want to run on your local computer. 
+The [AVH simulation model documentation](https://arm-software.github.io/AVH/main/simulation/html/Using.html) has many good tips.
 
-{{% notice Note %}}
-There is no Ecosystem FVP for the Corstone-310 available for download. 
-{{% /notice %}}
-
-The Ecosystem FVP can be used in conjunction with [Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
-
-### FVP configuration options
-
-FVPs are functional simulations of Cortex-M processors and don't including micro-architecture details and timing. They are good for software testing, but not recommended for performance evaluation.
-
-There are additional features which can be configured on these virtual platforms. The [AVH simulation model documentation](https://arm-software.github.io/AVH/main/simulation/html/Using.html) has many good tips.
-
-#### Number of MACs
+### Number of MACs
 
 Ethos-U55 and Ethos-U65 offer a configurable number of MACs (multiply-accumulate units). During IP evaluation and performance analysis you need to understand the numbers of MACs available in the hardware and create your software to use the same configuration.
 
@@ -113,7 +116,7 @@ FVP and VHT platforms can be configured with:
 ```console
 -C ethosu.num_macs=128
 ```
-#### Fast mode
+### Fast mode
 
 The Ethos-U model used in FVPs can run at a faster speed with less simulation detail. 
 
@@ -123,13 +126,13 @@ Use this configuration parameter to enable fast mode:
 -C ethosu.extra_args="--fast"
 ```
 
-#### Hardware memory maps
-
-Each Corstone design has a programmer's view of memory. 
+### Hardware memory maps
 
 A memory map is available for each configuration of Corstone-300 and Corstone-310. For example, the Corstone-300 with Cortex-M55 and Ethos-U55 [memory map](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/Memory-map-overview-for-Corstone-SSE-300/) describes the address ranges for memory and peripherals.
 
 Refer to the [Corstone-300 Reference Guide](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/) and [Corstone-310 Reference Guide](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-310-FVP/) for details about the hardware models.
+
+The memory map of FVPs is NOT configurable.
 
 ## Arm IP Explorer
 

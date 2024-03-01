@@ -1,19 +1,21 @@
 ---
-title: Get started with Arm Mobile Studio
+title: Get started with Arm Performance Studio for mobile
 
-description: Get started with the various components of Arm Mobile Studio
+description: Learn how to use each of the tools supplied with Arm Performance Studio, formerly known as Arm Mobile Studio.
 
 minutes_to_complete: 60
 
-who_is_this_for: Android application and games developers new to Arm Mobile Studio.
+who_is_this_for: Android application and games developers new to Arm Performance Studio.
 
 learning_objectives:
-    - Learn the basic features of each component of Arm Mobile Studio. 
+    - Learn the basic features of each component of Arm Performance Studio. 
     - Get started profiling and optimizing your application.
 
 prerequisites:
-    - An appropriate Android device. These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm, and confirmed to work with Arm Mobile Studio.
-    - Download and install Arm Mobile Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
+    - An appropriate Android device. These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm, and confirmed to work with Arm Performance Studio.
+    - Arm Performance Studio supports applications built with OpenGL ES versions 2.0 to 3.2, or Vulkan versions 1.0 to 1.2. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later.
+    - A debuggable build of your application. 
+    - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
 author_primary: Ronan Synnott
@@ -28,6 +30,7 @@ armips:
 operatingsystems:
     - Android
 tools_software_languages:
+    - Arm Performance Studio
     - Arm Mobile Studio
     - Coding
 

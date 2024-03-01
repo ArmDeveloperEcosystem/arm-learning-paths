@@ -16,11 +16,13 @@ Called from:
 
 {{- $most_recent := "0001-01-01" }} {{/* YYYY-MM-DD for chronological comparison */}}
 {{- range  site.Pages }}
-    {{- if hasPrefix .File.Dir $index_file_path }}
-        {{ $page_date := .Lastmod.UTC.Format "2006-01-02" }}
-        {{- if gt $page_date $most_recent }}
-            {{- $most_recent = $page_date }}
-        {{- end }}
+    {{- if .File -}}
+        {{- if hasPrefix .File.Dir $index_file_path }}
+            {{ $page_date := .Lastmod.UTC.Format "2006-01-02" }}
+            {{- if gt $page_date $most_recent }}
+                {{- $most_recent = $page_date }}
+            {{- end }}
+        {{end}}
     {{end}}
 {{end}}
 

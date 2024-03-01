@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Now that you have an understanding of Arm hardware, try out the Windows Subsystem for Linux (WSL2) on Arm. 
+   Now that you have an understanding of Arm hardware, try out the Windows Subsystem for Linux (WSL 2) on Arm. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/wsl2/" 

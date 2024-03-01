@@ -1,7 +1,7 @@
 ---
 title: Processing Text in Mixed C/Assembly Language
 
-minutes_to_complete: 60
+minutes_to_complete: 20
 
 author_primary: Ronan Synnott
 
@@ -11,13 +11,12 @@ learning_objectives:
     - Write a mixed C program and assembly language subroutines for the microcontroller. 
     - Call the subroutines written in assembly in a C function.  
     - Use Arm register calling conventions when writing subroutines in assembly language.  
-    - Use a suitable debugging tool to view and analyse the processor state.  
+    - Use the debugger to view and analyse the processor state.  
 
 prerequisites:
-    - A Windows machine
+    - Keil MDK IDE
     - Some familiarity with C/Assembly
-    - Installed Keil MDK IDE
-    - Have an STM32 Nucleo F401RE development board 
+
 
 ### Tags
 skilllevels: Introductory

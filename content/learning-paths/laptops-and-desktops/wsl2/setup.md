@@ -25,9 +25,9 @@ WSL 2 replaces the system call translation layer provided in WSL 1 with the late
 WSL 2 can run containers for application development. WSL 2 provides much faster file I/O compared to WSL 1.
 
 ## Install WSL 2
-Installing WSL 2 requires Windows 11. It is also possible to install WSL 2 on certain Windows 10 versions, but these instructions were tested on Windows 11. Windows 11 is recommended to complete all of the examples in this Learning Path. All of the examples have been tested using WSL2. If only WSL is specified it means WSL2.
+Installing WSL 2 requires Windows 11. It is also possible to install WSL 2 on certain Windows 10 versions, but these instructions were tested on Windows 11. Windows 11 is recommended to complete all of the examples in this Learning Path. All of the examples have been tested using WSL 2. If only WSL is specified it means WSL 2.
 
-Here is the short version on how to install WSL2. Microsoft documentation provides a [quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
+Here is the short version on how to install WSL 2. Microsoft documentation provides a [quickstart](https://docs.microsoft.com/en-us/windows/wsl/install-win10) with full details on how to install WSL 2. There are also numerous tutorials available (for non-Arm architectures).
 
 There are three steps to setup WSL 2.
 
@@ -103,12 +103,18 @@ Windows Terminal supports multiple command lines: PowerShell, Command Prompt, an
 
 ## Run bash.exe
 
-From Windows, `bash.exe` (or just bash) can be used to run commands in WSL. 
+From Windows, Bash can be used to run commands in WSL.
 
 You can enter the default WSL distribution by running bash from a Windows Command Prompt:
 
 ```cmd
 bash.exe
+```
+
+You can exit Bash and return back to the Windows Command Prompt with:
+
+```cmd
+exit
 ```
 
 Use the `-c` option to `bash.exe` to run a command in WSL and collect the result. 

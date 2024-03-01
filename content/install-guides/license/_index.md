@@ -16,7 +16,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Most Arm commercial tools are license managed. Arm is migrating to user-based licensing (UBL) which greatly simplifies license configuration. It is available for [Arm Success Kits](../successkits/).
+Most Arm commercial tools are license managed. Arm is migrating to user-based licensing (UBL) which greatly simplifies license configuration. It is available for [Arm Success Kits](../successkits/) as well as [Arm Development Studio](../armds).
 
 Success kits are available as `Hardware Success Kits` (`HSK`) or `Software Success Kits` (`SSK`). See the table below for tooling provided. SSK is a subset of HSK.
 
@@ -37,14 +37,25 @@ Legacy product versions do not support UBL licensing and use FlexLM [floating li
 | :-----------------------------------------: | :-----------------------------: | :---: | :-: |
 | Arm Compiler for Embedded                   | 6.18                            |  X    |  X  |
 | Arm Compiler for Embedded FuSa 6.16         | 6.16.2                          |  X    |  X  |
-| Arm Development Studio (Gold Edition)       | 2022.0                          |  X    |  X  |
-| Arm Development Studio (Platinum Edition)   | 2022.a                          |  X    |  X  |
+| Arm Development Studio [`1`]                | 2022.0, 2022.a                  |  X    |  X  |
 | Keil MDK                                    | 5.37                            |  X    |  X  |
-| Arm Fast Models                             | 11.17.1                         | [`1`] |  X  |
-| Arm Socrates [`2`]                          | 1.7.0                           |       |  X  |
+| Arm Fast Models                             | 11.17.1                         | [`2`] |  X  |
+| Arm Socrates [`3`]                          | 1.7.0                           |       |  X  |
 | Arm Performance Models Library              | 1.2                             |       |  X  |
 | AMBA Viz                                    | 1.1.25                          |       |  X  |
 
-[`1`] A license to run pre-built platforms, including Fixed Virtual Platforms, is provided with SSK. HSK license is necessary to build virtual platforms.
+[`1`] Arm Development Studio versions indexed with letters after the period are for those users with access to non-publicly announced IP.
 
-[`2`] Some functionality of Arm Socrates requires an appropriate [Arm IP license](https://developer.arm.com/documentation/101400/010710/Setting-up-licensing/Required-licenses), which may also require a [floating license](./flexnet) to be setup.
+[`2`] A license to run pre-built platforms, including Fixed Virtual Platforms, is provided with SSK. HSK license is necessary to build virtual platforms.
+
+[`3`] Some functionality of Arm Socrates requires an appropriate [Arm IP license](https://developer.arm.com/documentation/101400/010710/Setting-up-licensing/Required-licenses), which may also require a [floating license](./flexnet) to be setup.
+
+## User-based Licensing Video Tutorials
+
+In addition to the set up and install instructions below, a collection of video tutorials are available on the Arm Developer website:
+
+* [Accessing the Arm License Portal](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20Accessing%20the%20Arm%20License%20Portal)
+* [Cloud-based Licenses and Activation Codes](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20Cloud-based%20Licenses%20and%20Activation%20Codes)
+* [Local License Server Setup](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20Local%20License%20Server%20Setup)
+* [End-user Setup](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20End%20User%20Setup)
+* [Removal of Licenses and Decommissioning Server](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20License%20Removal%20and%20Decommissioning%20Server)
