@@ -17,13 +17,13 @@ layout: "learningpathall"
 
 The application must be compiled with debug enabled, as well as additional options to facilitate call stack unwinding by Streamline.
 
-* To set [Unity](https://unity.com/) applications to be debuggable, enable [Development Build](https://docs.unity3d.com/2021.1/Documentation/Manual/android-BuildProcess.html) in `Build settings`.
+* Set [Unity](https://unity.com/) applications to be debuggable by enabling [Development Build](https://docs.unity3d.com/2021.1/Documentation/Manual/android-BuildProcess.html) in `Build settings`.
 * In Android Studio, use a build variant that includes `debuggable true` (`isDebuggable = true` in Kotlin scripts) in the build configuration.
 * In Unreal Engine, open `Project Settings > Project > Packaging > Project`, and ensure that the `For Distribution` checkbox is not set.
 * For C++ or Java applications, refer to the [Target setup guide for Android](https://developer.arm.com/documentation/101813/latest/Target-Setup/Compile-your-application) for instructions on how to compile your application with the right options.
 
 {{% notice Tip %}}
-To assist with readability and add context, you can optionally include [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) in your code which are then displayed in Streamline.
+To assist with readability and add context, you can optionally include [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) in your code, which are then displayed in Streamline.
 {{% /notice %}}
 
 ## Set up the Android device
