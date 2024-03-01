@@ -19,7 +19,7 @@ Now that you have seen an [Arm Streamline example capture](../streamline_example
     ![Connect to device #center](images/start.png "Connect to the device")
 
 {{% notice Tip %}}
-Optionally, you can set a preferred location to store your captures using `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
+Optionally, you can set a preferred location to store your captures. To do so, go to `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
 {{% /notice %}}
 
 
