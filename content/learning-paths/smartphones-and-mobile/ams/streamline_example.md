@@ -13,7 +13,7 @@ This learning path explores Streamline for Android application profiling on a mo
 
 To help you understand the capabilities of Streamline, an example Streamline profile is provided with Arm Performance Studio.
 
-1. To open the example profile, in Streamline, select `File` > `Import`.
+1. Open the example profile in Streamline by selecting `File` > `Import`.
 1. Select `Import Streamline Sample Captures` and click `Next`.
     ![Import #center](images/import.png "Import Streamline Sample Captures")
 
