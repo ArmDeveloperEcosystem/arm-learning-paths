@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Prerequisites
 
-Build your application and setup the Android device as described in the [Streamline](../streamline) instructions.
+Build your application, and setup the Android device as described in the [Streamline](../streamline) instructions.
 
 ## Connect to the device
 
