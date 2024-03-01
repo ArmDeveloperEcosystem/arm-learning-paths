@@ -8,13 +8,13 @@ layout: learningpathall
 
 Before trying any optimization, it's important to understand the way the data is represented and accessed in memory. In this case, the compiler cannot issue SIMD instructions because the operations are done in triplets (x,y,z) and SIMD operations for 32-bit floating point values require 4 elements.
 
-In order to improve the data layout and help the compiler you need to go back and look at the `object` struct in more detail. The memory layout of `object` is the following:
+In order to improve the data layout and help the compiler, you need to go back and look at the `object` struct in more detail. The memory layout of `object` is the following:
 
 ![Memory layout #center](memory-layout1.svg "Figure 1. struct object memory layout with vec3")
 
-Because the `vec3` types are triplets, their alignment `is 3 x 4 bytes = 12 bytes`. That makes usage of SIMD instructions difficult as they usually operate on data multiples of 16 bytes. Alignment to 16 bytes is also important. You can usually solve this by adding extra bytes in such structures as padding. This results in wasted bytes but sometimes these can be used for extra information. Even if the extra bytes cannot be used, the performance benefit outweighs the loss in memory.
+As the `vec3` types are triplets, their alignment `is 3 x 4 bytes = 12 bytes`. This makes usage of SIMD instructions difficult as they usually operate on data multiples of 16 bytes. Alignment to 16 bytes is also important. You can usually solve this by adding extra bytes in such structures as padding. This results in wasted bytes, but sometimes these can be used for extra information. Even if the extra bytes cannot be used, the performance benefit outweighs the loss in memory.
 
-How should padding be added to the struct? You can convert the `vec3` helper struct to a `vec4` to include an extra 'dimension', such as `t`. 
+You may be wondering how padding should be added to the struct. You can convert the `vec3` helper struct to a `vec4` to include an extra 'dimension', such as `t`. 
 
 Make the following change to the code to add the padding:
 
@@ -131,4 +131,4 @@ The usage of SIMD instructions is obvious now. You can see that loading is done 
  b88:   d65f03c0        ret
  ```
 
-Sometimes it's easy to make data layout improvements, continue to the next section for a more complex problem.
+Sometimes it's easy to make data layout improvements. Continue to the next section for a more complex problem.
