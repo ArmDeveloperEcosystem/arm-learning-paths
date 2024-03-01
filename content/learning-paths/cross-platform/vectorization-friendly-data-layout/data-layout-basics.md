@@ -28,11 +28,11 @@ typedef struct object {
 } object_t;
 ```
 
-These are example data structures. Actual simulations have more information per object. Extra information may be additional identifiers, volume information, a pointer to a 3D model for display purposes, boundary information, or even representations of quantum wavefunctions. The details are beyond the scope of this Learning Path, but most software uses the same principle, regardless if it's a game or a molecular dynamics simulation.
+These are example data structures. Actual simulations have more information per object. Extra information may include additional identifiers, volume information, a pointer to a 3D model for display purposes, boundary information, or even representations of quantum wavefunctions. The details are beyond the scope of this Learning Path, but most software uses the same principle, regardless of whether it's a game or a molecular dynamics simulation.
 
-The core of the program is the main `for` loop which changes the positions and velocities of the objects in tiny amounts and updates them multiple times per second, thereby giving the notion of movement.
+The core of the program is the main `for` loop, which changes the positions and velocities of the objects in tiny amounts and updates them multiple times per second, thereby giving the notion of movement.
 
-In this Learning Path, you will be able to compile and run loops and measure performance. 
+In this Learning Path, you will compile and run loops and measure performance. 
 
 Use a text editor to copy the code below and save it in a file named `simulation1.c`
 
