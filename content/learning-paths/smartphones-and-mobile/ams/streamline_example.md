@@ -1,38 +1,27 @@
 ---
 # User change
-title: "Streamline with your application"
+title: "Arm Streamline example capture"
 
-weight: 5 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Now that you have seen an [Arm Streamline example capture](../streamline_example), you can use it to capture data from your own application.
+This learning path explores Streamline for Android application profiling on a mobile device. For other use cases, refer to the supporting materials for [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
-## Select the device and application in Streamline
+## Example Streamline report
 
-1. In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices. This installs the `gatord` daemon and connects to the device.
+To help you understand the capabilities of Streamline, an example Streamline profile is provided with Arm Performance Studio.
 
-1. Wait for the list of available packages to populate, then select the one you wish to profile.
-1. With `Capture Arm GPU profile` selected, Streamline will detect the Arm GPU in the device, and select an appropriate counter template for it. Alternatively, to choose a different template or to build your own configuration, select `Use advanced mode` and click `Configure counters`.
+1. To open the example profile, in Streamline, select `File` > `Import`.
+1. Select `Import Streamline Sample Captures` and click `Next`.
+    ![Import #center](images/import.png "Import Streamline Sample Captures")
 
-    ![Connect to device #center](images/start.png "Connect to the device")
+1. Select the Android example and click `Finish`.
+    ![Samples #center](images/samples.png "Select sample captures")
 
-{{% notice Tip %}}
-Optionally, you can set a preferred location to store your captures using `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
-{{% /notice %}}
-
-
-## Capture data
-
-1. Click `Start capture` to start capturing profile data from the device. Enter a name and location for the capture file.
-
-1. The application starts automatically on the device. Interact with the application as desired for the profiling run you wish to do.
-
-1. When you have collected enough data, click `Stop capture`.
-![Stop capture #center](images/stop_capture.png "Stop Capture")
-
-Streamline will stop capturing data, remove the daemon, and process the captured data.
+1. Double-click on the report in `Streamline Data`, then click `Analyze` when prompted. The report will be processed, and an interactive timeline will be shown.
+![Timeline #center](images/timeline.png "Streamline Timeline")
 
 ## Analyze the results
 
