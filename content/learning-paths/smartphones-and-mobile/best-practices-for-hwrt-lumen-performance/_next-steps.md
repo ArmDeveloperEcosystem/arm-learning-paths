@@ -1,7 +1,8 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+next_step_guidance: Try the Arm Performance Studio for mobile Learning Path for an introduction to profiling and optimizing your applications.
+
+recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
 
 further_reading:
     - resource:

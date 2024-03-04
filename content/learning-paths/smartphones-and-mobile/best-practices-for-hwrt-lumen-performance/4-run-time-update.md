@@ -1,17 +1,20 @@
 ---
-title: Reduce Acceleration Structure Run-time Update Cost
+title: Reduce acceleration structure runtime cost
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Reduce Acceleration Structure Run-time Update Cost
-The acceleration structure of static meshes is built offline and wouldn't be updated at run-time. But The acceleration structure of skinned mesh needs to be updated at run-time so it will have some updating cost. To redduce the updating cost, you can use higher LOD level of skinned mesh for ray tracing.
+The acceleration structure of static meshes is built offline and is not updated at runtime. But the acceleration structure of skinned mesh needs to be updated at runtime and incurs update cost. 
 
-![](images/skin-lod.png)
+To reduce the update cost, you can use a higher Level of Detail (LOD) of a skinned mesh for ray tracing.
 
-One thing need to be mentioned is that there may be some artifacts if you turn on ray tracing shadow when using higher LOD level of skinned mesh for ray tracing. The artifact is caused by the difference between the rendering mesh and ray tracing mesh.
+![Skin load #center](images/skin-lod.png)
 
-![](images/skin-lod-error.png)
+There may be some artifacts if you turn on ray tracing shadow when using higher LOD values for skinned mesh ray tracing. 
+
+The artifact is caused by the difference between the rendering mesh and the ray tracing mesh.
+
+![Skin error #center](images/skin-lod-error.png)
 

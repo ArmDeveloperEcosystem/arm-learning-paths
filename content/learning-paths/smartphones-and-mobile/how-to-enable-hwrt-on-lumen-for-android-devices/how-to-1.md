@@ -6,36 +6,51 @@ weight: 2
 layout: learningpathall
 ---
 
-## Unreal Engine Setup 
-You will need to set up a few options to enable hardware ray tracing support on Lumen for Android devices. This article will show you how to set up all options before using Unreal Engine to build your application.
+Lumen is Unreal Engine’s fully dynamic global illumination and reflections system. Lumen allows lighting to be changed on the fly during game play.
 
-### Enable SM5 Shader Format
-Lumen is enabled only when the SM5 shader format is enabled. In the project setting, under Platforms – Android page, enable `Support Vulkan Desktop [Experimented]` option to enable SM5 shader format support.
+## Unreal Engine setup 
 
+You need to set up a few options to enable hardware ray tracing support on Lumen for Android devices. This article explains how to set up the options before using Unreal Engine to build your application.
 
-![](images/sm5.png)
+### Enable Shader Model 5 (SM5)
 
+Lumen is enabled only when the SM5 shader format is enabled. 
 
-###  Select Deferred Shading Mode
-Currently, Lumen only supports deferred shading mode. So in the project setting, under Engine – Rendering page, select `Deferred Shading` for Mobile Shading option.
+In the project settings, under `Platforms – Android` enable `Support Vulkan Desktop [Experimental]` to enable SM5 shader format support.
 
-![](images/deferred.png)
+![Shader Model 5 #center](images/sm5.png)
 
-###  Enable Support Hardware Ray Tracing
-To enable hardware ray tracing for lumen, first you need to enable it for engine. In the project setting, under Engine - Rendering page, enable `Support Hardware Ray Tracing` option.
+### Select Deferred Shading Mode
 
-![](images/hwrt.png)
- 
+Currently, Lumen only supports deferred shading mode. In the project settings, under `Engine – Rendering` select `Deferred Shading` for the `Mobile Shading` option.
 
-###  Enable Use Hardware Ray Tracing when available
-Lumen supports both software and hardware ray tracing. To enable hardware ray tracing for lumen then, in the project setting, under Engine - Rendering page, enable `Use Hardware Ray Tracing when available` option. This setting will tell the application to use hardware ray tracing first, then use software ray tracing if hardware ray tracing is not supported on the device. 
- 
+![Deferred Shading #center](images/deferred.png)
 
-![](images/hwrt_lumen.png)
+### Enable Support Hardware Ray Tracing
 
-###  Set Up Console Variables
-Finally, you will also need to set up 2 console variables in your engine configuration file. `r.Android.DisableVulkanSM5Support=0` can remove the restriction of using SM5 shader format. `r.RayTracing.AllowInline=1` enables the Ray Query shader support for Vulkan.
+To enable hardware ray tracing for Lumen, you need to enable it for engine. In the project settings, under `Engine - Rendering` enable `Support Hardware Ray Tracing`.
+
+![Hardware Ray Tracing #center](images/hwrt.png)
+
+### Enable Use Hardware Ray Tracing when available
+
+Lumen supports both software and hardware ray tracing. To enable hardware ray tracing the project settings, under `Engine - Rendering` enable `Use Hardware Ray Tracing when available`. 
+
+This setting tells the application to use hardware ray tracing first, then use software ray tracing if hardware ray tracing is not supported on the device. 
+
+![Hardware when available #center](images/hwrt_lumen.png)
+
+### Set Up Console Variables
+
+Finally, you will need to set up 2 console variables in your engine configuration file. 
+
+Setting `r.Android.DisableVulkanSM5Support=0` allows the use of SM5 shader format. 
+
+Setting `r.RayTracing.AllowInline=1` enables the Ray Query shader support for Vulkan.
+
 ```C 
 r.Android.DisableVulkanSM5Support=0
 r.RayTracing.AllowInline=1
 ```
+
+Rebuild your project and install it on your Android device which has a Mali GPU with hardware ray tracing support.

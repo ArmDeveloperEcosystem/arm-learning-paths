@@ -1,7 +1,7 @@
 ---
-next_step_guidance: Try the Arm Mobile Studio learning path for an introduction to profiling and optimizing your applications.
+next_step_guidance: Try the Arm Performance Studio for mobile Learning Path for an introduction to profiling and optimizing your applications.
 
-recommended_path: /learning-paths/smartphones-and-mobile/ams/
+recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
 
 further_reading:
     - resource:
@@ -12,10 +12,6 @@ further_reading:
         title: Success in mobile games with ray tracing
         link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/mobile-gaming-success-with-ray-tracing
         type: blog
-    - resource:
-        title: Arm Mobile Studio 
-        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
-        type: website
 
 
 # ================================================================================
