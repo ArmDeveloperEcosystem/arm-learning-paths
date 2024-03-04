@@ -179,7 +179,7 @@ Self CPU time total: 51.903ms
 ```
 In addition to the classification output from the model, you can now see the execution time for the different operators. 
 
-You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch.md#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch.md#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
+You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
 
 You have successfully run and profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
 
