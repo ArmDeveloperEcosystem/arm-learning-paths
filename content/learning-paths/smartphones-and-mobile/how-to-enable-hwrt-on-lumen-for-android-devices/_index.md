@@ -1,19 +1,19 @@
 ---
-title: How to Enable Hardware Ray Tracing on Lumen for Android Devices
+title: Enable Hardware Ray Tracing with Lumen for Android Devices
 
 minutes_to_complete: 10
 
 who_is_this_for: Unreal developers interested in using hardware ray tracing with Lumen on Arm devices.
 
 learning_objectives:
-    - Instructions on how to enable hardware ray tracing on Lumen for Arm devices.
+    - Enable hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:
-- A computer capable of running Unreal Engine 5.3 or later version.
-- An Android mobile device that has a Mali GPU with hardware ray tracing support.
-- A USB cable to connect the mobile device to your computer.
+- A computer capable of running Unreal Engine version 5.3 or later 
+- An Android mobile device with a Mali GPU which supports hardware ray tracing
+- A USB cable to connect the mobile device to your computer
 
-author_primary: Arm
+author_primary: Jason Andrews
 
 ### Tags
 skilllevels: Introductory
