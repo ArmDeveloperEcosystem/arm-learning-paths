@@ -22,16 +22,16 @@ To get started, create a new GitHub repository in your GitHub account. There are
 
 ## Setup secrets
 
-To run GitHub Actions you will need secrets for your Docker Hub username and Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. 
+To run GitHub Actions, you will need secrets for your Docker Hub username and Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. 
 
-You also need a secret for the Docker Organization. If you don't have an organization use your Docker ID for this secret.
+You will also need a secret for the Docker Organization. If you don't have an organization, use your Docker ID for this secret.
 
 Access the secrets from the `Settings` tab on your repository. Expand the `Secrets and variables` on the left side and click `Actions`.
 
 Add three secrets using the `New repository secret` button:
 - `DOCKER_USER` with your Docker ID
 - `DOCKER_PAT` with your Personal Access Token 
-- `DOCKER_ORG` with your Docker Organization, this can be your Docker ID if you are not in an Organization
+- `DOCKER_ORG` with your Docker Organization (this can be your Docker ID if you are not in an organization)
 
 ![GitHub Actions Secrets #center](_images/secrets.png)
 
@@ -39,7 +39,7 @@ Add three secrets using the `New repository secret` button:
 
 To try GitHub Actions with Docker Build Cloud, you need to add two files to your repository.
 
-First, add the Dockerfile from the previous section to top of the repository.
+First, add the Dockerfile from the previous section to the top of the repository.
 
 As a reminder, here is the file contents:
 
@@ -50,7 +50,7 @@ CMD echo -n "Architecture is " && uname -m
 
 You can do this in the browser using the `Add file` button to create a new file or upload the file from your computer. You can also use `git` from the command line.
 
-Next, add the `build.yml` file below to the `.github/workflows` directory in your repository. 
+Next, add the `build.yml` file below to the `.github/workflows` directory in your repository: 
 
 ```yml
 name: image-build
@@ -91,27 +91,27 @@ When the two files and the three secrets are added to the repository, you are re
 If you are using Docker Personal or Docker Pro you can remove one of the platform values. For example, remove `linux/amd64` from the `--platform` list and build the `linux/arm64` image only. 
 {{% /notice %}}
 
-To run the action navigate to the `Actions` tab in your repository. 
+To run the action, navigate to the `Actions` tab in your repository. 
 
 Select the `image-build` on the left side. 
 
-Use the `Run workflow` drop down on the right side to click `Run workflow`. 
+Use the `Run workflow` drop down on the right-hand side to click `Run workflow`. 
 
-This trigger the `build.yml` file to manually start the following steps:
+This triggers the `build.yml` file to manually start the following steps:
 - Checkout the repository
 - Log in to Docker Hub
 - Setup a builder on Docker Build Cloud
 - Run the `docker buildx build` command to build an image from the `Dockerfile` and push the image to your Docker Hub account.
 
-If it succeeds the new image will be in your Docker Hub account. 
+If it succeeds, the new image will be in your Docker Hub account. 
 
 You can use the `Actions` tab in your repository to see the workflow runs and click into each one to review the commands and check errors.
 
 ## Build stats
 
-If you have Docker Desktop you can look at the build stats from your cloud builder. 
+If you have Docker Desktop, you can look at the build stats from your cloud builder. 
 
-From the Docker Desktop dashboard, click `Builds` on the left side and then click the name of a completed build. The builds initiated from GitHub have the URL for the GitHub repository. There are stats about the build time including the time spent pulling images, transferring files, accessing the build cache, and the number of steps run in parallel.
+From the Docker Desktop dashboard, click `Builds` on the left-hand side and then click the name of a completed build. The builds initiated from GitHub have the URL for the GitHub repository. There are stats about the build time including the time spent pulling images, transferring files, accessing the build cache, and the number of steps run in parallel.
 
 You can click on the info symbol next to `Build timing` for explanations of the data presented. Here is the data for this example:
 
@@ -119,7 +119,7 @@ You can click on the info symbol next to `Build timing` for explanations of the 
 
 ## Automate the build
 
-Instead of manually triggering the build, you can modify the `build.yml` to automatically run the action when changes are made to the `Dockerfile`. Add the the `push:` line as shown below to automatically run the action when a push is made to any branch in the repository.
+Instead of manually triggering the build, you can modify the `build.yml` to automatically run the action when changes are made to the `Dockerfile`. Add the `push:` line as shown below to automatically run the action when a push is made to any branch in the repository.
 
 ```yml
 name: image-build
@@ -129,6 +129,6 @@ on:
   push:
 ```
 
-If you make a change to your `Dockerfile` and push it to the repository the action will automatically run.
+If you make a change to your `Dockerfile` and push it to the repository, the action will automatically run.
 
 You can now use GitHub Actions to build Arm images or multi-architecture images using Docker Build Cloud. You don't need to provide your own Arm self-hosted runner and you don't need to use emulation.
