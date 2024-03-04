@@ -22,7 +22,7 @@ further_reading:
         link: https://docs.docker.com/build/cloud/
         type: documentation
     - resource:
-        title: Introducing Docker Build Cloud A New Solution to Speed Up Build Times and Improve Developer Productivity
+        title: Introducing Docker Build Cloud: A New Solution to Speed Up Build Times and Improve Developer Productivity
         link: https://www.docker.com/blog/introducing-docker-build-cloud/
         type: blog
 
