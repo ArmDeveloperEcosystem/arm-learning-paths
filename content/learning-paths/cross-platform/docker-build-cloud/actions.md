@@ -88,7 +88,7 @@ jobs:
 When the two files and the three secrets are added to the repository, you are ready to try to run the action.
 
 {{% notice Note %}}
-If you are using Docker Personal or Docker Pro you can remove one of the platform values. For example, remove `linux/amd64` from the `--platform` list and build the `linux/arm64` image only. 
+If you are using Docker Personal or Docker Pro, remove one of the platform values because these subscriptions do not support multiple architectures. For example, remove `linux/amd64` from the `--platform` list and build the `linux/arm64` image only. 
 {{% /notice %}}
 
 To run the action, navigate to the `Actions` tab in your repository. 
