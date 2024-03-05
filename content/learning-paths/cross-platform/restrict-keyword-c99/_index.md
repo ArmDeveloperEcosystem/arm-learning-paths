@@ -15,7 +15,7 @@ author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
-subjects: Libraries
+subjects: Performance and Architecture
 armips:
     - Aarch64
     - Armv8-a

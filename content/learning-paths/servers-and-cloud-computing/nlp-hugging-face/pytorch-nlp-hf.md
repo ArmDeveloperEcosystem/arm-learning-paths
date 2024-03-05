@@ -20,7 +20,7 @@ In this learning path, you will download a popular [RoBERTa sentiment analysis](
 
 ## Install dependencies
 
-Hugging Face Transformers library provides APIs and tools that let you easily download and train pre-trained models. Huggging Face Transformers support multiple machine learning frameworks like PyTorch, TensorFlow and JAX. You will use transformers with PyTorch to download the model from Hugging Face.
+Hugging Face Transformers library provides APIs and tools that let you easily download and train pre-trained models. Hugging Face Transformers support multiple machine learning frameworks like PyTorch, TensorFlow and JAX. You will use transformers with PyTorch to download the model from Hugging Face.
 
 To install the Transformers library for PyTorch, run the following command:
 
@@ -179,7 +179,7 @@ Self CPU time total: 51.903ms
 ```
 In addition to the classification output from the model, you can now see the execution time for the different operators. 
 
-You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch.md#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch.md#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
+You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
 
 You have successfully run and profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
 
