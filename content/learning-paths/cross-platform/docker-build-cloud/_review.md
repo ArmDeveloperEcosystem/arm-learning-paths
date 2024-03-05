@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 1                 
         explanation: >
-            Cloud services make it easer to work with multiple architectures by offering speed and simplicity.
+            Cloud services make it easier to work with multiple architectures by offering speed and simplicity.
 
     - questions:
         question: >
