@@ -21,7 +21,7 @@ This section requires two machines, each with a different architecture. One mach
 
 ## Build a simple Dockerfile to print the machine architecture
 
-Create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous sections.
+Create a new directory and use a text editor to copy the two lines below into a file named `Dockerfile`, or reuse the same file from the previous section.
 
 ```dockerfile
 FROM ubuntu:latest
