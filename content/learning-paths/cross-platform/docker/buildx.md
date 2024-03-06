@@ -43,7 +43,7 @@ The next section explains how to use `docker buildx` to create multi-architectur
 
 ## Build a multi-architecture Docker image from a Dockerfile
 
-Create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous section.
+Create a new directory and use a text editor to copy the two lines below into a file named `Dockerfile`, or reuse the same file from the previous section.
 
 ```dockerfile
 FROM ubuntu:latest
