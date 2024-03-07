@@ -27,7 +27,7 @@ When you are ready to submit your Learning Path for review, proceed to the next 
 Before submitting a pull request, make sure `hugo` runs without errors on the command line. Run this from the top level directory of the repository. 
 
 ```console
-hugo
+hugo --config hugo.toml
 ```
 
 The output should be a table similar to the one below with no other error messages.

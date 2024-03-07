@@ -29,7 +29,7 @@ This section creates a new Learning Path. Refer to the next section to create a 
 
 Start creating your Learning Path from the template provided using a straightforward one-line command. For example, to create a new Learning Path with the directory name `my-new-learning-path` under the `microcontrollers` category, run the following command from the root directory of this project:
 ```bash
-hugo new --kind learning-path learning-paths/microcontrollers/my-new-learning-path
+hugo new --kind learning-path learning-paths/microcontrollers/my-new-learning-path --config hugo.toml
 ```
 Result: The following markdown files are added to the `my-new-learning-path` directory:
 
@@ -71,7 +71,7 @@ You can verify you have correctly copied the template by viewing the new Learnin
 If Hugo is not already running start it. 
 
 ```console
-hugo server
+hugo server --config hugo.toml
 ```
 
 2. View the Learning Path you just created in your browser by opening [http://localhost:1313/learning-paths/servers-and-cloud-computing/my-new-learning-path](http://localhost:1313/learning-paths/servers-and-cloud-computing/my-new-learning-path)

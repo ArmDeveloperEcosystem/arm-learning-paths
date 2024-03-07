@@ -91,7 +91,7 @@ development version of website on your machine.
 
 ```bash
 cd arm-learning-paths
-hugo server
+hugo server --config hugo.toml
 ```
 
 Hugo server will print a message to connect to port 1313
@@ -166,7 +166,7 @@ development version of website on your machine.
 
 ```bash
 cd arm-learning-paths
-hugo server
+hugo server --config hugo.toml
 ```
 
 Hugo server will print a message to connect to port 1313
@@ -179,6 +179,10 @@ Open a browser and go to [http://localhost:1313](http://localhost:1313)
 
 You are now ready to edit markdown files and view the results on the Hugo server. 
 
+## A note on hugo configuration file
+
+Hugo v0.109.0 and earlier were using `config` as the basename for the site configuration file, and this changed to `hugo` after. In order to support older and newer versions of hugo at the same time, the configuration file is passed explicitly when invoking hugo. If you know your hugo version is recent enough (> v0.109.0), then you can omit `--config hugo.toml` from all your hugo invocations. 
+
 ## Enable the search box on the home page {#search}
 
 When you run `hugo server` you will not see the search box on the home page. You don't need to do anything for the search feature to find your content, but you may want to enable the search box and test it during your development.
@@ -188,7 +192,7 @@ The search feature requires search index data to be created. If the data is avai
 To see the search box run the following commands before you run `hugo server` as described above:
 
 ```console
-hugo
+hugo --config hugo.toml
 pagefind --site "public" --output-subdir ../static/pagefind
 ```
 
