@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /*?
 
 Sitemap: https://learn.arm.com/sitemap.xml

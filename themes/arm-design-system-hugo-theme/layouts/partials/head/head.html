@@ -22,6 +22,8 @@ Where it is used:
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Set the viewport appropriatly -->
     <!-- verify site ownership for Google -->
 <meta name="google-site-verification" content="BTfVb1OscFD-pN_bYZaTGmfx2_K3S1EbzvdKPepntvk" />
+    <!-- add cannonical link to reinforce this page's validity for search engines, with a trailing / on the URL name-->
+<link rel="canonical" href="{{ .Permalink }}" />
 <title>{{ $title }}</title>
 
 <!-- Include the Arm standard Lato font for machines that don't have by default (Mac) -->
@@ -35,8 +37,9 @@ Where it is used:
 <link rel="stylesheet" href="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system.css" integrity="sha384-TIxVkbw6g/OlN2t0XSUGTik6Kc0pkpNEcm1bOAGO02jsHholeZipXigdXRDYqCGr" crossorigin="anonymous">
 <script type="module" src="https://cdn.designsystem.arm.com/rel/4.9.0/arm-design-system/arm-design-system.esm.js" integrity="sha384-K+IGYCWaqyh5adrYnimAXzUamdfAwRYJGwwrybHfAhmsehOIcexAPoEoEyLRJwkC" crossorigin="anonymous"></script>
 
-    <!-- Arm Imports -->
-<script type="text/javascript" src="/js/app.bd387a82cd4c10836229.devhub.js"></script>
+    <!-- Arm Header & Footer loading -->
+<script  type="text/javascript"  src="https://www.arm.com/arm-global-web-components/devhub/app.js" ></script>      
+
 
     
     <!-- Custom CSS minified -->
