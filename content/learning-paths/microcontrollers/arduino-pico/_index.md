@@ -1,5 +1,5 @@
 ---
-title: Understand Embedded programming with the Raspberry Pi Pico
+title: Getting Started with embedded programming with the Raspberry Pi Pico
 
 draft: true
 
