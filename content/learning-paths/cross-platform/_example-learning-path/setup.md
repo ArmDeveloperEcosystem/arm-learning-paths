@@ -192,7 +192,7 @@ hugo
 pagefind --site "public" --output-subdir ../static/pagefind
 ```
 
-If you have `pagefind` installed on your computer, or if your computer is supported by one of the `pagefind` in the `bin/` directory, then you can run the `hugo-server.sh` script, located at the top of the repository, to create the search index and start the server. If no suitable `pagefind` is available for your computer, the server will still be launched, without the search index though.
+If you have `pagefind` installed on your computer, or if your computer is supported by one of the `pagefind` in the `bin/` directory, then you can run the `hugo-server.sh` script, located at the top of the repository, to create the search index and start the server. If no suitable `pagefind` is available for your computer, the server will still be launched, but without the search index.
 
 | Pagefind executable                        | OS                      |
 | ------------------------------------------ | ------------------------|
