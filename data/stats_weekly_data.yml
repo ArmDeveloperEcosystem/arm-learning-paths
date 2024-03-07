@@ -1730,15 +1730,15 @@
   content:
     cross-platform: 14
     embedded-systems: 15
-    install-guides: 76
+    install-guides: 77
     laptops-and-desktops: 20
     microcontrollers: 23
     servers-and-cloud-computing: 64
     smartphones-and-mobile: 9
-    total: 221
+    total: 222
   contributions:
     external: 22
-    internal: 219
+    internal: 220
   github_engagement:
     num_forks: 30
     num_prs: 12
@@ -1756,7 +1756,7 @@
     florent-lebeau: 5
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 4
-    jason-andrews: 77
+    jason-andrews: 78
     jonathan-davies: 2
     julie-gaskin: 1
     julio-suarez: 5
