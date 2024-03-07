@@ -7,65 +7,35 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Now that you have seen an example Streamline capture, you can use it with your own application.
+Now that you have seen an [Arm Streamline example capture](../streamline_example), you can use it to capture data from your own application.
 
-## Build your application
+## Select the device and application in Streamline
 
-The application must be compiled with debug enabled, as well as additional options to facilitate call stack unwinding by Streamline.
+1. In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices. This installs the `gatord` daemon and connects to the device.
 
-The [Target setup guide for Android](https://developer.arm.com/documentation/101813/latest/Target-Setup/Compile-your-application) provides appropriate instructions for C++ or Java applications.
+1. Wait for the list of available packages to populate, then select the one you wish to profile.
+1. With `Capture Arm GPU profile` selected, Streamline will detect the Arm GPU in the device, and select an appropriate counter template for it. Alternatively, to choose a different template or to build your own configuration, select `Use advanced mode` and click `Configure counters`.
 
-These settings are enabled as default within [Unity](https://unity.com/) when [Development Build](https://docs.unity3d.com/2021.1/Documentation/Manual/UnityCloudBuildDevelopmentBuilds.html) is selected in `Build settings`.
+    ![Connect to device #center](images/start.png "Connect to the device")
 
-You can optionally provide [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) to your code which will be displayed in the Streamline report, to assist readability of the report.
+{{% notice Tip %}}
+Optionally, you can set a preferred location to store your captures using `Window` > `Preferences` > `Data Locations`. New reports will be created in the topmost folder specified.
+{{% /notice %}}
 
-### Open-source projects
 
-Arm provides open-source projects that can be used by application developers as part of their development.
+## Capture data
 
-* [Unity Integration](https://github.com/ARM-software/mobile-studio-integration-for-unity/)
-* [Arm ASTC Encoder texture compressor](https://github.com/ARM-software/astc-encoder)
-* [libGPUInfo library](https://github.com/ARM-software/libGPUInfo)
+1. Click `Start capture` to start capturing profile data from the device. Enter a name and location for the capture file.
 
-## Set up Android device
+1. The application starts automatically on the device. Interact with the application as desired for the profiling run you wish to do.
 
-Ensure that [Developer Mode](https://developer.android.com/studio/debug/dev-options) is enabled, then enable `USB Debugging` under `Settings > Developer options`.
-
-Connect the device to the host through USB and approve the debug connection when prompted.
-
-If the connection is successful, running the `adb devices` command on the host returns the ID of your device, and you can run `adb shell`.
-
-Install the [debuggable](https://developer.android.com/studio/debug) application.
-
-### Unity applications
-
-To set `Unity` applications to be debuggable, enable `Development Build` in `Build Settings`.
-![Build Settings #center](images/build_settings.png "Unity Build Settings")
-
-## Connect to the device
-
-In the Streamline `Start` view, select `Android (adb)` as your device type, then select your device from the list of detected devices.
-![Connect to device #center](images/start.png "Connect to the device")
-
-This will install the `gatord` daemon and connect to the device.
-
-Wait for the list of available packages to populate, then select the one you wish to profile from the list of available packages on the selected device.
-
-Select an appropriate [counter template](https://developer.arm.com/documentation/101813/latest/Debuggable-application-profiling/Profile-your-application/Choose-a-counter-template) for the GPU present in your device.
-
-## Set location to store data (optional)
-
-Navigate to `Window` > `Preferences` > `Data Locations`, and configure location to store data. New reports will be created in the topmost folder specified.
-
-## Profile application
-
-Click on `Start capture` to start capturing profile data from the target.
-
-Start the application on the device, and interact as desired for the profiling run you wish to do.
-
-When satisfied, simply click on `Stop capture` in upper-right of screen.
+1. When you have collected enough data, click `Stop capture`.
 ![Stop capture #center](images/stop_capture.png "Stop Capture")
 
 Streamline will stop capturing data, remove the daemon, and process the captured data.
 
-Double-click on the capture to display in the timeline.
+## Analyze the results
+
+The charts in the `Timeline` view show the performance counter activity captured from the device. Hover over the charts to see the values at that point in time. Use the Calipers to focus on particular windows of activity. Refer to the [Streamline User Guide](https://developer.arm.com/documentation/101816/latest/Analyze-your-capture) for full instructions on how to use the features in the `Timeline` view.
+
+Understanding the output of Streamline is key to the usefulness of Streamline. [Android performance triage with Streamline](https://developer.arm.com/documentation/102540/latest/) describes how to understand the capture from a number of points of view, depending on what information you are trying to extract from it.

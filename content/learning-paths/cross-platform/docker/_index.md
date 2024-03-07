@@ -14,8 +14,8 @@ learning_objectives:
     -  Use Docker manifest for multi-architecture builds
 
 prerequisites:
-    - A computer with Docker installed. This can be Windows, macOS, or Linux. Any architecture can be used. 
-    - An Arm server running Linux with Docker installed. For information about installation refer to [Installing Docker](/install-guides/docker/).
+    - A Windows, macOS, or Linux computer with Docker installed, any architecture can be used
+    - An Arm Linux server with Docker installed 
 
 author_primary: Jason Andrews
 
@@ -24,6 +24,7 @@ skilllevels: Introductory
 subjects: Containers and Virtualization
 armips:
     - Neoverse
+    - Cortex-A
 operatingsystems:
     - Linux
 tools_software_languages:

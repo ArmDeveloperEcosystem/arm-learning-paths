@@ -17,7 +17,7 @@ This learning path showed how ML Agents run well on Arm devices and give us grea
 
 Later learning paths will address deploying to an Arm-based Android device and how to use the Unity Profiler tool to analyse performance.
 
-## Strecth tasks
+## Stretch tasks
 
 If you would like to take this learning path further, try the following:
 

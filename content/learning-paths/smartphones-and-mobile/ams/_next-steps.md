@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Now that you are familiar with the features of Arm Mobile Studio you are ready to optimize your Android applications.
+   Now that you are familiar with the features of Arm Performance Studio you are ready to optimize your Android applications.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "Enter learning path relative link here"
@@ -50,7 +50,7 @@ further_reading:
         link: https://developer.arm.com/documentation/101897
         type: documentation
     - resource:
-        title: Integrate Arm Mobile Studio into a CI workflow
+        title: Integrate Arm Performance Studio into a CI workflow
         link: https://developer.arm.com/documentation/102543
         type: documentation
 

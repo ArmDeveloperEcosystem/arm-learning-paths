@@ -9,21 +9,21 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 7
-- Linux: 15
+- Linux: 16
 - macOS: 1
 - Windows: 1
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 3
+- Containers and Virtualization: 4
 - Embedded Linux: 5
 - ML: 1
-- Performance and Architecture: 8
+- Performance and Architecture: 9
 subtitle: Build secure, connected, smart IoT devices
 title: Embedded Systems
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 3
 - Arm Compiler for Linux: 1
-- Arm Development Studio: 4
+- Arm Development Studio: 5
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 5
 - AWS: 2
@@ -32,9 +32,9 @@ tools_software_languages_filter:
 - Balena OS: 1
 - C: 1
 - Clang: 1
-- Coding: 7
+- Coding: 8
 - DetectNet: 1
-- Docker: 5
+- Docker: 6
 - DSTREAM: 2
 - Fixed Virtual Platform: 1
 - FPGA: 1

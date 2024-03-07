@@ -31,8 +31,7 @@ All of the download files are available on the
 |-------|
 | [Windows](https://docs.docker.com/desktop/install/windows-install/) |
 | [Linux](https://docs.docker.com/desktop/install/linux-install/) |
-| [Mac OS](https://docs.docker.com/desktop/install/mac-install) |
-| [Apple Silicon](https://docs.docker.com/desktop/mac/apple-silicon/) |
+| [macOS](https://docs.docker.com/desktop/install/mac-install) |
 
 All of the Docker Desktop products use the `x86_64` / `amd64` architecture except macOS on Apple Silicon.
 
@@ -72,5 +71,4 @@ Apple Silicon is reported as `arm64`.
 
 Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
 
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
+You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.

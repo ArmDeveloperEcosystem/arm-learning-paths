@@ -1,7 +1,7 @@
 summary:
-  content_total: 221
-  content_with_all_tests_passing: 30
-  content_with_tests_enabled: 31
+  content_total: 222
+  content_with_all_tests_passing: 31
+  content_with_tests_enabled: 32
 sw_categories:
   cross-platform:
     dynamic-memory-allocator:
@@ -64,6 +64,10 @@ sw_categories:
       - fedora:latest: passed
     oci-cli:
       readable_title: Oracle Cloud Infrastructure (OCI) CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    pytorch:
+      readable_title: PyTorch
       tests_and_status:
       - ubuntu:latest: passed
     terraform:
