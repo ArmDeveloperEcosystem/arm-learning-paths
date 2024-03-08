@@ -1,5 +1,5 @@
 ---
-title: Run a 
+title: Run a Natural Language Processing (NLP) model from Hugging Face on Arm servers
 weight: 2
 
 ### FIXED, DO NOT MODIFY
