@@ -1,7 +1,7 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Try the Arm Mobile Studio learning path for an introduction to profiling and optimizing your applications.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/smartphones-and-mobile/ams/
 
 further_reading:
     - resource:

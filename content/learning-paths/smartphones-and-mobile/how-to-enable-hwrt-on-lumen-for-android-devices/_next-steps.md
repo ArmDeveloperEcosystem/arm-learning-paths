@@ -1,7 +1,7 @@
 ---
-next_step_guidance: Try the Arm Mobile Studio learning path for an introduction to profiling and optimizing your applications.
+next_step_guidance: Learn more about how to optimize hardware ray tracing Lumen performance on Android devices.
 
-recommended_path: /learning-paths/smartphones-and-mobile/ams/
+recommended_path: /learning-paths/smartphones-and-mobile/best-practices-for-hwrt-lumen-performance/
 
 further_reading:
     - resource:
