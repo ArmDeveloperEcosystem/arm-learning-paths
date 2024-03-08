@@ -42,11 +42,9 @@ The process of creating and configuring this project is similar to that used for
 
 ![img4](Figures/04.png)
 
-You have just created the Android application project, which comprises a MainActivity. The MainActivity contains a single TextView control, which displays the Hello from C++ string as shown in the figure below. 
+You have just created the Android application project, which comprises a MainActivity. The MainActivity contains a single TextView control, which displays the Hello from C++ string as shown in the figure below. This string is retrieved by invoking a stringFromJNI function from the C++ library, implemented under the app/cpp/native-lib.cpp file and built using the NDK and CMakeLists.txt.
 
 ![img5](Figures/05.png)
-
-You have just created the Android application project, which comprises a MainActivity. The MainActivity contains a single TextView control, displaying the "Hello from C++" string as shown in the figure below. This string is retrieved by invoking a stringFromJNI function from the C++ library, implemented under the app/cpp/native-lib.cpp file and built using the NDK and CMakeLists.txt.
 
 SVE2 support is not enabled by default. To enable it, open the CMakeLists.txt (under app/cpp), and modify it by adding the following target_compile_options:
 
