@@ -23,7 +23,7 @@ The application must be compiled with debug enabled, as well as additional optio
 * For C++ or Java applications, refer to the [Target setup guide for Android](https://developer.arm.com/documentation/101813/latest/Target-Setup/Compile-your-application) for instructions on how to compile your application with the right options.
 
 {{% notice Tip %}}
-To assist with readability and add context, you can optionally include [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) in your code which are then displayed in Streamline.
+To assist with readability and add context, you can optionally include [annotations](https://developer.arm.com/documentation/101816/latest/Annotate-your-code/Add-annotations-to-your-code) in your code, which are then displayed in Streamline.
 {{% /notice %}}
 
 ## Set up the Android device
