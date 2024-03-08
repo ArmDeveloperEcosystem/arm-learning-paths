@@ -13,7 +13,7 @@ This Learning Path assumes you are familiar with the Vulkan API and have an appl
 Otherwise, you may use a test application like those provided by the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples).
 
 {{% notice Note %}}
-You do not need to create a new Vulkan Sample to complete this Learning Path, you may famliarise yourself with the code examples and save them as a reference.
+You do not need to create a new Vulkan Sample to complete this Learning Path, you may familiarize yourself with the code examples and save them as a reference.
 There is already a Vulkan Sample that allows you to experiment with AFRC without any coding required, see the [Image Compression Control](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc) performance sample.
 {{% /notice %}}
 
