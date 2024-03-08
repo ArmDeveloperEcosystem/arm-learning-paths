@@ -29,22 +29,28 @@ For any Linux machine, the commands below will install Docker.
 
 These commands are the (almost) universal install instructions for Docker on Linux.
 
-The architecture can be `x86_64` or `Arm`, from a cloud server to a `Raspberry Pi`.
+The commands work on any architecture, and on any system running Linux, from a cloud server to a Raspberry Pi.
 
-The commands can also be used in the `Windows Subsystem for Linux (WSL)` and on a `Chromebook`.
+The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and on a Chromebook.
 
 For information about starting the docker daemon on WSL refer to [Installing Docker on Windows on Arm](../docker-woa).
 
 ### Run installer
+
 ```console
 curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 ```
+
 ### Add user
+
 Add the user to the docker group. The `newgrp` command avoids the need to logout and back in.
+
 ```console
 sudo usermod -aG docker $USER ; newgrp docker
 ```
+
 ### Confirm installation
+
 To confirm the installation is successful run:
 
 ```console
@@ -78,9 +84,11 @@ For more examples and ideas, visit:
 ```
 
 Use the `uname` command to identify the architecture:
+
 ```console
 uname -m
 ```
+
 Output values can be `aarch64` (Arm 64-bit), `armv7l` (Arm 32-bit) or `x86_64`.
 
 ### Docker Engine versions
@@ -150,5 +158,5 @@ sudo systemctl stop docker.socket
 
 Docker Engine is now ready to use. You can explore [Docker related Learning Paths](/tag/docker/).
 
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
+You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.
+

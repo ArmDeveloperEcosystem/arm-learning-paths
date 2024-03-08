@@ -24,12 +24,13 @@ author_primary: Michael Hall
 
 ### Tags
 skilllevels: Introductory
-subjects: RTOS
+subjects: RTOS Fundamentals
 armips:
     - Cortex-M
+operatingsystems:
+    - Baremetal
 tools_software_languages:
     - Arduino
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

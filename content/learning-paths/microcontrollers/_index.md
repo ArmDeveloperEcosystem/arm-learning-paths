@@ -7,7 +7,7 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 22
+- Baremetal: 23
 - Linux: 3
 - macOS: 2
 - RTOS: 9
@@ -17,12 +17,13 @@ subjects_filter:
 - Libraries: 3
 - ML: 6
 - Performance and Architecture: 8
-- RTOS Fundamentals: 2
+- RTOS Fundamentals: 3
 - Security: 3
 - Virtual Hardware: 2
 subtitle: Learn best practices for microcontroller development
 title: Microcontrollers
 tools_software_languages_filter:
+- Arduino: 1
 - Arm Compiler for Embedded: 5
 - Arm Development Studio: 3
 - Arm Virtual Hardware: 11

@@ -29,9 +29,9 @@ sudo apt install -y wget
 2. Download, extract the archive, and navigate to the directory:
 
 ```bash
-wget https://cdn.geekbench.com/Geekbench-6.0.2-LinuxARMPreview.tar.gz
-tar -xf Geekbench-6.0.2-LinuxARMPreview.tar.gz
-cd Geekbench-6.0.2-LinuxARMPreview
+wget https://cdn.geekbench.com/Geekbench-6.2.2-LinuxARMPreview.tar.gz
+tar -xf Geekbench-6.2.2-LinuxARMPreview.tar.gz
+cd Geekbench-6.2.2-LinuxARMPreview
 ```
 
 ## Run 

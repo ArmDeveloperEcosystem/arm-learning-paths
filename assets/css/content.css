@@ -45,12 +45,6 @@ div.markdown-content-div > p {
     margin-bottom: 0px;
 }
 
-div.markdown-content-div > p.content-image-caption {
-    font-style: italic;
-    font-weight: 500;
-    margin-top: 0px;
-}
-
 div.markdown-content-div > ul,
 div.markdown-content-div > ol {
     margin-top: 16px;
@@ -154,11 +148,16 @@ img.content-uploaded-image.centered {
     margin-left: auto;
 }
 
-p.content-image-caption {
+.content-image-caption {
+    /* have to style the span like a paragraph, required for nesting caption in default markdown configruation */
+    display: block; /* or block, depending on the desired layout */
+    font-style: italic;
+    font-weight: 500;
+    margin-top: 0px;
     font-size: 1rem;
 }
 
-p.content-image-caption.centered {
+.content-image-caption.centered {
     text-align: center;
 }
 

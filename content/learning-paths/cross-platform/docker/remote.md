@@ -19,13 +19,13 @@ Docker should also be installed on a remote Arm machine which can be reached via
 
 For more information about SSH configuration refer to [SSH](/install-guides/ssh/).
 
-To learn how to create an Arm virtual machine using a cloud service provider refer to [Get started with Arm-based cloud service csp](/learning-paths/servers-and-cloud-computing/csp/).
+To learn how to create an Arm virtual machine using a cloud service provider refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
 ## Build a Docker image from a Dockerfile
 
 This section contrasts a local build for the x86_64 architecture and a remote build for the Arm architecture. 
 
-On your local computer, create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous section.
+On your local computer, create a new directory and use a text editor to copy the two lines below into a file named `Dockerfile`, or reuse the same file from the previous section.
 
 ```dockerfile
 FROM ubuntu:latest
