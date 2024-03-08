@@ -1,6 +1,6 @@
 ---
 title: Enable Hardware Ray Tracing with Lumen for Android Devices
-
+draft: true
 minutes_to_complete: 10
 
 who_is_this_for: Unreal developers interested in using hardware ray tracing with Lumen on Arm devices.
