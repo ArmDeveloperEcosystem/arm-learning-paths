@@ -10,7 +10,7 @@ learning_objectives:
 - Use Geekbench to help determine the appropriate hardware configuration for your workload
 
 prerequisites:
-- An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+- An Arm computer running Linux. You can use a cloud instance, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
 
 author_primary: Ronan Synnott
 

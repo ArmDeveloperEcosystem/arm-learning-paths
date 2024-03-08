@@ -108,6 +108,4 @@ The output is `aarch64` (Arm 64-bit).
 
 Docker Engine is now ready to use for Windows on Arm. You can explore [Docker related Learning Paths](/tag/docker/) or learn more about [WSL for Windows on Arm](/learning-paths/laptops-and-desktops/wsl2/).
 
-Share images, automate workflows, and more with a free Docker ID:
- https://hub.docker.com/
-
+You may want to create an account on [Docker Hub](https://hub.docker.com) to share images and automate workflows.

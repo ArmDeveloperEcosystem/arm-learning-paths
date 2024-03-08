@@ -29,17 +29,17 @@ This message shows that your installation appears to be working correctly.
          
 Note: If you do not see the message above, go to [Installing Docker](/install-guides/docker/) and follow the instructions to complete the installation.
 
-The sections describe how you:
-- [Build a Docker image](#build-a-docker-image-from-a-dockerfile)
-- [Run a Docker container](#create-a-container-from-a-docker-image)
-- [Display local Docker images](#display-local-docker-images)
-- [Save and share the created Docker image](#save-and-share-a-docker-image)
+The sections describe how to:
+- Build a Docker image
+- Run a Docker container
+- Display local Docker images
+- Save and share a Docker image
 
 ## Build a Docker image from a Dockerfile
 
 To build a Docker image:
 
-1. Navigate to an empty directory and save the two lines below in a file named `Dockerfile`:
+1. Navigate to an empty directory and use a text editor to copy the two lines below into a file named `Dockerfile`:
 
 ```dockerfile
 FROM ubuntu:latest
@@ -140,7 +140,7 @@ You do not need to rebuild the Docker image on the second computer.
 
 In this section you learned how to build, run, and share a Docker image. 
 
-You used computers with the same instruction set to build and share the Docker image.
+You used computers with the same instruction set architecture to build and share the Docker image.
 
 To support multiple computer architectures, you can use a single Docker image that supports multi-architectures. 
 

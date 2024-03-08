@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Now that you are familiar with the features of Arm Performance Studio you are ready to optimize your Android applications.
+   Now that you are familiar with the features of Arm Performance Studio, you are ready to optimize your Android applications.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "Enter learning path relative link here"

@@ -10,7 +10,7 @@ learning_objectives:
     - Find desktop and laptop hardware to use for software development
 
 prerequisites:
-    - None
+    - Nothing
 
 author_primary: Jason Andrews
 

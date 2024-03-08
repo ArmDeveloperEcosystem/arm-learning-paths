@@ -13,7 +13,7 @@ Any Windows on Arm computer which has the required tools installed can be used f
 
 Follow the links to install the required tools. 
 
-* [Visual Studio 2022 or higher](/install-guides/vs-woa). 
+* [Visual Studio 2022 or higher](/install-guides/vs-woa) 
 
 Install the .NET desktop development workload component with Visual Studio. You can do this either during the initial installation or modify your existing installation. 
 
