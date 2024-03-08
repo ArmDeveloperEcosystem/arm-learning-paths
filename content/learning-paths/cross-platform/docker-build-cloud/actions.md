@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 You can use GitHub Actions to build multi-architecture images with Docker Build Cloud as your builder. You can also use GitHub Actions to build Arm images. 
 
-Currently, GitHub Actions do not offer Arm systems for running actions. You can use Docker Build Cloud to build Arm images and multi-architecture images.
+As of March 2024, GitHub Actions do not offer Arm systems for running actions. You can use Docker Build Cloud to build Arm images and multi-architecture images. 
 
 ## Before you begin
 
