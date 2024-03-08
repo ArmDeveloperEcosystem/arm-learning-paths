@@ -17,7 +17,7 @@ prerequisites:
 author_primary: Jose-Emilio Munoz-Lopez, Arm
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Intermediate
 subjects: Graphics
 armips:
     - Mali

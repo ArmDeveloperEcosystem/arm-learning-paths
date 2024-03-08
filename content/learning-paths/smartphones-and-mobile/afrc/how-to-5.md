@@ -43,3 +43,5 @@ compression_control.pFixedRateFlags              = &fixed_rate_flags_array[0];
 
 image_format_info.pNext = &compression_control;
 ```
+
+This example requests a fixed rate of 2 bits per component.

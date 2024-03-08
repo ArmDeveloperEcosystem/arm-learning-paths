@@ -69,7 +69,7 @@ LOGI("Image supports {}", compression_to_string(supported_compression_properties
 LOGI("Image supports {}", fixed_rate_flags_to_string(supported_compression_properties.imageCompressionFixedRateFlags));
 ```
 
-The output may look like this:
+The logcat output may look like this:
 
 ```output
 I/VulkanSamples: [info] Image supports VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT
@@ -164,7 +164,7 @@ Possible reasons are discussed in [Arm GPU Best Practices Developer Guide](https
 Depending on the device, image properties like `image_create_info.format` and `image_create_info.usage` (e.g. storage images) may be incompatible with fixed-rate compression.
 
 Try using different values for these in case you find a suitable combination for your application, that supports fixed-rate compression.
-Otherwise, for best performance, try to find one that supports AFBC if possible, following the guidance found in [the guide](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en), so that the output ideally looks like this:
+Otherwise, for better performance, try to find one that at least supports AFBC if possible, following the guidance found in [the guide](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en), so that the output ideally looks like this:
 
 ```output
 I/VulkanSamples: [info] IMAGE SUPPORTS VK_IMAGE_COMPRESSION_DEFAULT_EXT

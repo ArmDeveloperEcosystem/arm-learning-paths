@@ -8,7 +8,8 @@ layout: learningpathall
 
 ## Verify that compression is applied
 
-To query which compression was applied compression, if any, once a `VkImage` has been created, add a [VkImageCompressionPropertiesEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionPropertiesEXT.html) structure to the `pNext` chain of [VkImageSubresource2EXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageSubresource2EXT.html), and call [vkGetImageSubresourceLayout2EXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetImageSubresourceLayout2EXT.html):
+To query which compression was applied, if any, once a `VkImage` has been created, use a [VkImageCompressionPropertiesEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionPropertiesEXT.html) structure.
+Add `VkImageCompressionPropertiesEXT` to the `pNext` chain of [VkImageSubresource2EXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageSubresource2EXT.html), and then call [vkGetImageSubresourceLayout2EXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetImageSubresourceLayout2EXT.html):
 
 ```C
 VkImageCompressionPropertiesEXT applied_compression_properties{VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT};
@@ -24,7 +25,7 @@ image_subresource.imageSubresource.arrayLayer = 0;
 vkGetImageSubresourceLayout2EXT(get_device().get_handle(), image_handle, &image_subresource, &subresource_layout);
 ```
 
-Then inspect the values written to the `imageCompressionFlags` and  `imageCompressionFixedRateFlags` components of `VkImageCompressionPropertiesEXT`.
+Inspect the values written to the `imageCompressionFlags` and  `imageCompressionFixedRateFlags` components of `VkImageCompressionPropertiesEXT`.
 You may print like you did when checking for compression support:
 
 ```C
@@ -38,3 +39,5 @@ The output may then look like this:
 I/VulkanSamples: [info] Created image reports VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT
 I/VulkanSamples: [info] Created image reports VK_IMAGE_COMPRESSION_FIXED_RATE_5BPC_BIT_EXT
 ```
+
+You have now successfully added fixed-rate compression to your image, saving memory and bandwidth.

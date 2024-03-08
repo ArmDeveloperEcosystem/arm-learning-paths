@@ -35,6 +35,7 @@ You may use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob
 
 ### Create a test sample
 
+If you are coding an example, rather than following along with the existing [Image Compression Control](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc) sample, we need to first create a test sample.
 We can use the default [API sample template](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) to write and run the code snippets presented in this Learning Path.
 
 To create a new sample:
@@ -45,7 +46,7 @@ python ./scripts/generate.py sample_api --name afrc --category extensions
 
 The necessary files will have been created in `samples/extensions/afrc/`.
 
-### Visualize the sample logs
+### View the sample logs
 
 The screen output will not be relevant for the code we will write in this Learning Path.
 Instead, we will be focusing on the output of Android's logcat, which can be printed using the [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb) included in the [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html):

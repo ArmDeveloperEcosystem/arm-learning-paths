@@ -27,4 +27,4 @@ afrc::afrc()
 If a device supports the extension, it does not mean that it also supports fixed-rate compression of images.
 The extension may still be used to verify if the images use default (lossless) compression.
 
-Before compressing a `VkImage`, you need to use the extension to query if such an image (given its format and usage properties) supports fixed-rate compression, as shown in the next step.
+Before compressing a `VkImage`, you need to use the extension to query if any given image - with its particular format and usage properties - supports fixed-rate compression, as shown in the next step.
