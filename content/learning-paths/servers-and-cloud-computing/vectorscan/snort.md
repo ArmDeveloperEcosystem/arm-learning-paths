@@ -29,7 +29,7 @@ libmnl-dev ethtool libjemalloc-dev ragel
 
 ## Download and install other required software
 
-Create a directory where you can download and build the other required software:
+Create a directory where you can download and build the other required software dependencies:
 
 ```bash
 mkdir ~/snort_src

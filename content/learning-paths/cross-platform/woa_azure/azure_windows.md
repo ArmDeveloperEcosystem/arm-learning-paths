@@ -31,7 +31,9 @@ You will be presented with all the VM images that are available for Arm. Select 
 
 ![img2](Images/azure2.png)
 
-You will then be returned to the `Create a virtual machine` dialog screen with your selections. Under the `Administrator account` section enter a `Username` and `Password` in the fields provided. You will use these credentials to access your Windows virtual machine.
+You will then be returned to the `Create a virtual machine` dialog screen with your selections. Change the `Security type` setting to `Standard`. 
+
+Under the `Administrator account` section enter a `Username` and `Password` in the fields provided. You will use these credentials to access your Windows virtual machine.
 
 In the `Inbound port rules` section of the dialog, select `Allow selected ports` and choose `RDP (3389)` from the drop-down menu.
 

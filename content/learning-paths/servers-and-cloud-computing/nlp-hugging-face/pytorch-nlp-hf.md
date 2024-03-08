@@ -20,7 +20,7 @@ In this learning path, you will download a popular [RoBERTa sentiment analysis](
 
 ## Install dependencies
 
-The Hugging Face Transformers library provides APIs and tools that let you easily download and train pre-trained models. Huggging Face Transformers support multiple machine learning frameworks like PyTorch, TensorFlow and JAX. You will use Transformers with PyTorch to download the model from Hugging Face.
+The Hugging Face Transformers library provides APIs and tools that let you easily download and train pre-trained models. Hugging Face Transformers support multiple machine learning frameworks like PyTorch, TensorFlow and JAX. You will use Transformers with PyTorch to download the model from Hugging Face.
 
 To install the Transformers library for PyTorch, run the following command:
 
