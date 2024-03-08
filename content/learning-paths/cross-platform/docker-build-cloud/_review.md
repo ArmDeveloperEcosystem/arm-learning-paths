@@ -29,7 +29,7 @@ review:
             - "False"
         correct_answer: 2                  
         explanation: >
-            Docker Build Cloud works on any computer with Docker installed, but you may need to update buildx to be aware of cloud builders. 
+            Docker Build Cloud works on any computer with Docker installed, but you may need to update `buildx` to be aware of cloud builders. 
                
     - questions:
         question: >
