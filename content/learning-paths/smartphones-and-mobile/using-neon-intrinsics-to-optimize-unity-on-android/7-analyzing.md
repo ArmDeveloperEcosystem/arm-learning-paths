@@ -33,15 +33,13 @@ To compare the results you will use the Analyzer to import all three datasets bu
 
 You now have two datasets loaded; one from the unoptimized mode and one from the Burst mode. This is what the data looks like collected from a Samsung S8.
 
+![Plain vs Burst#center](images/analyzer-plain-vs-burst.PNG)
+
 Focus on the collision-related markers by searching for _collisioncalc_ in the _Name Filter_. Select a representative frame by clicking on a later frame where both seem relatively settled (no odd spikes).
 
 We will ignore _CollisionMovement_ because that has not been optimized and the times will vary depending on exactly how many collisions are occurring in any one frame.
 
 The functions that have been optimized are the collision detection calculations. All characters are compared against all characters and walls. The character-wall collision detection times are collected under the sample name _StaticCollisionCalculations_ while the character-character collisions are collected under the name _DynamicCollisionCalculations_.
-
-Here’s a screenshot of the Analyzer with data from a Samsung S8:
-
-![Plain vs Burst#center](images/analyzer-plain-vs-burst.PNG)
 
 In the top 10 markers, the unoptimized data is in blue. The Burst data is in orange. _StaticCollisionCalculations_ is showing the biggest improvement. The data shown above is based on all frames selected. You can see individual frames if you click on the graph.
 

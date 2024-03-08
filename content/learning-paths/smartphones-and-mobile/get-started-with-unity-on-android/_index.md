@@ -1,7 +1,7 @@
 ---
 title: Get started with Unity on Android
 
-minutes_to_complete: 45
+minutes_to_complete: 30
 
 who_is_this_for: Unity beginners wanting to target Android devices
 
@@ -15,7 +15,7 @@ prerequisites:
     - Recent Android device such as mobile phone or tablet
     - Desktop computer capable of running Unity
 
-author_primary: Arm
+author_primary: visualSilicon
 
 ### Tags
 skilllevels: Beginner

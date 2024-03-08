@@ -8,7 +8,7 @@ layout: learningpathall
 In 2021 Unity released version 1.5 of the Burst compiler. The headline feature of which was new support for Neon intrinsics. Since then there have been various improvements in both Burst and Neon support. This learning path was written using Unity 2022.3 and [Burst 1.8.12](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html).
 
 ## Unity Burst compiler
-Burst is an advanced compiler that compiles specific parts of your code. It translates [.NET byte code](https://en.wikipedia.org/wiki/Bytecode) into CPU native instructions. It is part of [DOTS (Data Oriented Technology Stack)](https://unity.com/dots). Your project and code need some minimal setup in order to use the Burst compiler.
+Burst is an advanced compiler that compiles specific parts of your code. It translates [.NET byte code](https://en.wikipedia.org/wiki/Bytecode) into CPU native instructions. It is part of Unity's [DOTS (Data Oriented Technology Stack](https://unity.com/dots). Your project and code need some minimal setup in order to use the Burst compiler.
 
 ## Arm Neon SIMD
 
@@ -50,17 +50,18 @@ Developers can use Arm Neon in multiple ways.
 You can also use a mixture of these methods should you need to.
 
 ### Using Neon by importing libraries
-If you’d like to try using a Neon-supported library, an easy start would be the [Unity.Mathematics](https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html) package from Unity.
-
-We will first look at auto-vectorization by the Burst compiler and then look at optimizing further by hand-writing Neon intrinsics. In both cases you can provide hints to the compiler to help it auto-vectorize. You can follow [best practice](#best-practice) to organize your code and data to make them optimal for Neon.
+If you’d like to try using a Neon-supported library, an easy start would be the [Unity.Mathematics](https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html) package from Unity. Neon-supported libraries will give you the speed-up Neon gives on the library functions you call, without you having to write any Neon code.
 
 ### Using Neon through Burst auto-vectorization
 In order to take advantage of the burst compiler, you must write your Neon code in Burst-compatible static functions or jobs.
 
-Neon intrinsics are available in the C# namespace [Unity.Burst.Intrinsics.Arm.Neon](https://docs.unity3d.com/Packages/com.unity.burst@1.8/api/Unity.Burst.Intrinsics.Arm.Neon.html)
-
 ### Hand-written Neon code
+While the Burst compiler can do a great job of using Neon, if your app needs to squeeze every ounce of performance from devices it can be well worth the investment to learn and hand-write Neon code. We will look at doing this using Neon intrinsics.
 
-While the Burst compiler can do a great job of using Neon, if your app needs to squeeze every ounce of performance from devices it can be well worth the investment to learn and hand-write Neon code.
+In Unity, Neon intrinsics are available in the C# namespace [Unity.Burst.Intrinsics.Arm.Neon](https://docs.unity3d.com/Packages/com.unity.burst@1.8/api/Unity.Burst.Intrinsics.Arm.Neon.html)
 
-We will look at an example of doing this. However, keep in mind that vectorizing your code better than the compiler is able to do is not an easy task. Therefore, remember to profile your application before and after Neon optimizations. If your app is showing no improvement, then the Burst compiler is likely producing more optimized code than your own.
+Keep in mind that it is not easy to vectorize your code better than what the Burst compiler does automatically. Therefore, remember to profile your application before and after Neon optimizations. If your app is showing no improvement, then the Burst compiler is likely producing more optimized code than your own.
+
+## Next step
+
+We will first look at auto-vectorization by the Burst compiler and then look at optimizing further by hand-writing Neon intrinsics. In both cases you can provide hints to the compiler to help it auto-vectorize. You can follow [best practice](/learning-paths/smartphones-and-mobile/using-neon-intrinsics-to-optimize-unity-on-android/5-the-optimizations#best-practice) to organize your code and data to make them optimal for Neon.

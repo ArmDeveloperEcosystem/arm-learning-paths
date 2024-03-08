@@ -28,4 +28,4 @@ We haven't made any modifications to the camera or the directional light but if 
 
 As you can see, the _Spin_ component looks very basic; it simply applies a rotation to the _Cube_ every frame. The speed of which can be changed using the _Rotation_ parameter.
 
-In the next section you will build the project and deploy it to your Android device. In a real-life case it's good practice to confirm which devices are being affected by which issues.
+In the next section you will build the project and deploy it to your Android device. In a real-life case its good practice to confirm which devices are being affected by which issues.

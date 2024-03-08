@@ -5,13 +5,14 @@ weight: 7
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Measure and compare
 As with any typical software development, once you have reached an optimization cycle we want to measure existing performance, make modifications to code, structures or data and then measure again and compare the results.
 
 To keep this learning path a reasonable length, we will just measure and compare the final optimized versions against the original; so we’ll collect data for plain, Burst and neon modes. This section will cover this using the Profiler and Analyzer tools in Unity.
 
 For more detail regarding the Profiler and Analyzer, please read the previous learning path in this series, [Profiling Unity apps on Android](/learning-paths/smartphones-and-mobile/profiling-unity-apps-on-android).
 
-## Create consistent scenario
+## Create a consistent scenario
 First, you will need a consistent scenario in which we can reliably compare the three modes. We need to compare the data when all versions are processing the same amount of data. It’s important to note that the randomness of the scene can make it harder to pick representative frames but we can wait until the number of characters is the same in each run.
 
 The sample generates new characters every frame up to a maximum of 2401. This maximum is reached in a couple of minutes or so.
@@ -55,11 +56,11 @@ public const Mode codeMode = Mode.Plain;
 
 1. Ensure the following options:
 
-    1. Development build is ticked
+    1. _Development build_ is ticked
 
-    1. Autoconnect Profiler is ticked
+    1. _Autoconnect Profiler_ is ticked
 
-    1. Run Device is set to your Android device
+    1. _Run Device_ is set to your Android device
 
 1. Select _Build and Run_
 
@@ -69,7 +70,7 @@ public const Mode codeMode = Mode.Plain;
 
 1. The Profiler will start collecting data automatically
 
-1. Wait until the character count hits 2401 and then make sure to record for another 300 frames. If you prefer, you could clear the results as soon as the character count hits 2401 (or not tick Autoconnect Profiler and start recording manually).
+1. Wait until the character count hits 2401 and then make sure to record for another 300 frames. If you prefer, you could clear the results as soon as the character count hits 2401, or not tick _Autoconnect Profiler_ and start recording manually.
 
 1. Select the disk icon in the top-right and save the data as _plain.data_
 

@@ -13,15 +13,15 @@ In order to leverage Neon intrinsics in code, you first have to ensure that your
 
 ### Enable Burst package
 
-1. In the Window menu, select Package Manager
+1. In the Window menu, select _Package Manager_
 
-1. Ensure Packages option in top left is set to “Unity Registry”
+1. Ensure Packages option in top left is set to _Unity Registry_
 
-1. Search for “burst”
+1. Search for _burst_
 
-1. Select Burst from the list on the left
+1. Select _Burst_ from the list on the left
 
-1. If Burst is already installed it will be ticked. If not, select install
+1. If Burst is already installed it will be ticked. If not, select _Install_
 
 ### Turn off ARMv7 architecture support
 Neon intrinsics in Unity require ARMv8.
@@ -34,7 +34,7 @@ Neon intrinsics in Unity require ARMv8.
 
 1. Ensure ARMv7 is _not_ ticked
 
-1. Ensure ARMv8 is _ticked_
+1. Ensure ARMv8 _is_ ticked
 
 ### Allow unsafe code
 We need to make use of memory pointers. 
@@ -87,7 +87,7 @@ At time of writing, the limitations included (but not limited to) the following:
 Some limitations may be removed over time as the Burst compiler is updated.
 
 ### Why use the Burst compiler?
-With minimal effort from the programmer, the Burst compiler is able to produce highly optimized native code. Part of this optimization is the ability to produce Neon native instructions. Neon instructions are great at processing multiple data items at once; i.e. processing multiple data items in parallel rather than one at a time (or scalar operations).
+With minimal effort from the programmer, the Burst compiler is able to produce highly optimized native code that runs much faster. Part of this optimization is the ability to produce Neon native instructions. Neon instructions are great at processing multiple data items at once; i.e. processing multiple data items in parallel rather than one at a time (or scalar operations).
 
 ## Auto-vectorization
 Producing vector-based instructions from code is called vectorization. The Burst compiler is capable of auto-vectorizing code; i.e. the programmer doesn’t have to write Neon instructions. And it can do an even better job if we follow a few simple rules (or best practice).
@@ -109,11 +109,11 @@ The way data and code are structured are very important factors that will influe
 
 - Function calls in loops should be inlined where possible
 
-- Use simple indexing as indirect addressing can be more difficulty for the compiler to vectorise
+- Use simple indexing as indirect addressing can be more difficult for the compiler to vectorize
 
-- Large data passed to a function will be passed using pointers. Those functions should be tagged with [NoAlias]. This tells the compiler that no overlaps occur in the pointers and the code is fine to be vectorized.
+- Large data passed to a function will be passed using pointers. Those functions should be tagged with **[NoAlias]**. This tells the compiler that no overlaps occur in the pointers and the code is fine to be vectorized.
 
-- Don’t try to optimize every line and every function
+- Don’t try to optimize every line and every function. Focus on the parts of the code that will get the biggest performance gains.
 
 - Measure, optimize and check; iteratively make changes, measuring performance before and after to ensure each change is an improvement
 
@@ -133,21 +133,21 @@ The following changes were made from the plain code (unoptimized) version:
 ## Writing Neon intrinsics
 Before diving into the modifications made to optimize for Neon, here are some points to consider when investigating Neon for your own projects:
 
-1. The Burst compiler does a great job on it’s own but Neon intrinsics can help get a little bit more performance
+1. The Burst compiler does a great job on its own but Neon intrinsics can help get a little bit more performance
 
 1. Neon intrinsics let you use a high level language while still accessing the low level native instructions you need.
 
-1. The compiler won’t always recognise code that is vectorizable so it’s worth checking what is and isn’t getting vectorized. The [Unity Burst Inspector](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html) can help you identify which areas of your code are using Burst..
+1. The compiler won’t always recognise code that is vectorizable so it’s worth checking what is and isn’t getting vectorized. The [Unity Burst Inspector](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html) can help you identify which areas of your code are using Burst.
 
 1. Writing Neon code can be complex.
 
-1. Must use static Burst function or jobs. There is an overhead to using jobs. In the collision sample, simply activating Burst and converting the code to the job system did not provide an improvement; other optimizations had to be made.
+1. You must use static Burst function or jobs. In the sample code, static functions made it easier to measure timings but in a real-world application you may find jobs provide even better performance, depending on your situation. The sample project provides a job-based solution which you can experiment with.
 
 1. You can use _if (IsNeonSupported)_ to fall back to non-Neon code. _IsNeonSupported_ has no runtime overhead
 
 1. Not all Neon intrinsics are supported. Check the [Burst documentation](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html).
 
-Neon intrinsics can be used within Burst static functions or Burst jobs. To use Neon within a static function you simply tag it with the same [BurstCompile] tag we used previously. You will also want to use best practice such as [NoAlias] and unsafe with pointer parameters.
+Neon intrinsics can be used within Burst static functions or Burst Jobs. To use Neon within a static function you simply tag it with the same [BurstCompile] tag we used previously. You will also want to use best practice such as [NoAlias] and unsafe with pointer parameters.
 
 ```
 [BurstCompile]
@@ -158,7 +158,7 @@ static unsafe void DoSomething([NoAlias] in float* inputs, [NoAlias] float* outp
 ```
 
 ### Modifications made to implement Neon intrinsics in collision sample
-Because the Burst compiler did such a good job, further structural changes were required to really get the most from the Neon intrinsics implementation.
+Because the Burst compiler did such a good job, further structural changes were required to really get the most from the Neon intrinsics implementation and get a significant improvement over the Burst compiler's auto-vectorization.
 
 - In radius collision detection we increase simultaneous comparisons to 8
 
@@ -196,7 +196,8 @@ For all characters
 }
 ```
 
-The actual AABB-intersection function is also slightly modified to be more vectorizable. The sign of some AABB data is flipped so that all of the comparisons use _greater than_. The algorithm for an individual character-wall collision check then becomes:
+#### The AABB intersection function
+This function is also slightly modified to be more vectorizable. The sign of some AABB data is flipped so that all of the comparisons use _greater than_. The algorithm for an individual character-wall collision check then becomes:
 
 ```
 bool Intersects(AABB wall, AABB character) {
@@ -211,65 +212,23 @@ bool Intersects(AABB wall, AABB character) {
 
 NOTE. _Intersects_ and _AABB_ do not exist in the code and are only here for illustrative purposes only.
 
-Here is a breakdown of some of the Neon intrinsics that were used to optimize the collision sample. Line numbers have been provided as you may want to follow along in _CollisionCalclationScript.cs_.
-
-```
-Line 721: var tblindex1 = new Unity.Burst.Intrinsics.v64((byte)0, 4, 8, 12, 255, 255, 255, 255)
-```
-Create a 64-bit vector with 8 8-bit elements with values (0, 4, 8, 12, 255, 255, 255, 255). This is used as a lookup table on _line 741_.
-
-```
-Line 728: charMaxXs = vdupq_n_f32(*(characters + c))
-```
-Duplicate floating point value into all 4 lanes of the 128-bit returned vector. The returned vector will contain 4 copies of a single _Max X_ value (of character bounds).
-
-```
-Line 736: wallMinXs = vld1q_f32(walls + w)
-```
-Load multiple floating point values from memory into a single vector register. The returned vector will contain _Min X_ values from 4 different walls.
-
-```
-Line 741: vcgeq_f32(wallMinXs, charMaxXs)
-```
-Floating point comparison (greater-than or equal). Compares 4 walls at once with a character’s _Max X_. Each of the four results will either be all ones (true) or all zeros (false).
-
-```
-Line 741: vorrq_u32(vcgeq_f32(wallMinXs, charMaxXs), vcgeq_f32(wallMinYs, charMaxYs))
-```
-Bitwise inclusive OR. The nested calls to _vcgeq\_f32_ are comparing the walls (Min X and Min Y) against the character’s Max X and Max Y. The four comparison results are combined with a bitwise OR. 
-
-```
-Line 741: results = vqtbl1_u8(_result of ORs_, tblindex1)
-```
-Table lookup function that selects elements from an array based on the indices provided. The result of the OR operations will be treated as an array of 8-bit values. The values from _tblindex1_ (0, 4, 8 and 12) ensure that we select the most significant bytes from each u32 OR result. So 4 character-wall comparisons are being merged into one 128-bit vector along with 4 dummy (because of the _out of range_ values in tblindex1) that will be replaced later with the 64-bit value of the next 4 wall comparisons (from _wmvn_u8_).
-
-```
-Line 751: vqtbx1_u8(results, …)
-```
-Table lookup function except that when an index is out of range, it leaves the existing data alone. This has the effect of selecting 4 bytes (using indices from _tblindex2_) from the results of the last 4 comparisons and combines it with the previous 4 results. _results_ will now contain the results of 8 wall-character comparisons.
-
-```
-Line 751: results = vmvn_u8(...)
-```
-Bitwise NOT operation. This negates each of the 8 character-wall comparisons. It is effectively the _!_ (NOT) in our intersect function; except that it is working on 8 results instead of 1.
-
-```
-Line 755: *(Unity.Burst.Intrinsics.v64*)(collisions + (c * numWalls + w - 4)) = results;
-```
-This is a vectorized form of writing out the 8 results to memory all at once. At time of writing, Burst doesn’t include the _VSTR_ Neon intrinsic.
-
 ### Character-character collision detection
 This is left as an exercise for the reader. You may wish to explore the _NeonRadiusObjCollisionDetectionUnrolled_ function starting on line 561 of _CollisionCalculationScript.cs_.
 
 ## Additional notes
-The sample project increases the character count over time. Because of this it was better to profile using later frames. In early frames there aren’t enough characters so the overhead of vectorization counters any gains.
+Here are some general points that you will find useful when you review the sample code and try the concepts in your own projects:
 
-An early implementation used Burst Jobs. The jobs got in the way of performance timing because they are not guaranteed to execute immediately.
+- For Burst, and especially for Neon, a lot of the optimization effort will be around the organization of your data. Using [structures of arrays over arrays of structures](https://en.wikipedia.org/wiki/AoS_and_SoA), storing, retrieving and processing data as vectors (grouping similar data that requires the same data operation), and knowing what data is used with what and what data can be stored next to each other.
 
-[NoAlias] had a big impact on the performance gains (without it some optimizations produced little to no gain).
+- The sample project increases the character count over time. Because of this it was better to profile using later frames. In early frames there aren’t enough characters so the overhead of vectorization counters any gains.
 
-The job implementations have been left in the code for you to experiment with. Leveraging jobs in your own projects can lead to important performance gains when used appropriately.
+- An early implementation used Burst Jobs. The jobs got in the way of performance timing because they are not guaranteed to execute immediately. The job implementations have been left in the code for you to experiment with. Leveraging jobs in your own projects can lead to important performance gains when used appropriately.
 
-The sample code displays some timing data on screen. It used _System.Diagnostics.Stopwatch_ to get accurate timings.
+- **[NoAlias]** (explained in [best practice](#best-practice)) had a big impact on the performance gains (without it some optimizations produced little to no gain).
 
-It may sound obvious but don’t use the optimizations when they are slower! For the collision sample, the best gain is when there are lots of characters but early on, there aren’t that many. So when there aren’t many characters in the scene, the code could switch to whichever is the fastest version.
+- The sample code displays some timing data on screen. It used _System.Diagnostics.Stopwatch_ to get accurate timings.
+
+- It may sound obvious but don’t use the optimizations when they are slower! For the collision sample, the best gain is when there are lots of characters but early on, there aren’t that many. So when there aren’t many characters in the scene, the code could switch to whichever is the fastest version.
+
+## The Neon intrinsics we used
+For a brief description of some of the Neon intrinsics we used in the collision detection functions please read the [Appendix](/learning-paths/smartphones-and-mobile/using-neon-intrinsics-to-optimize-unity-on-android/10-appendix).

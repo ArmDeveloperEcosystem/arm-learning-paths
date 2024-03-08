@@ -12,9 +12,9 @@ Each of the three modes represent the different levels of optimizations that are
 
 - Plain mode runs the unoptimized code
 
-- Burst mode uses code that has been tagged for use with [https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html](the Burst compiler). The code has been modified with Burst in mind to make full use of auto-vectorization
+- Burst mode uses code that has been tagged for use with [the Burst compiler](https://docs.unity3d.com/Manual/com.unity.burst.html). The code has been modified with Burst in mind to make full use of auto-vectorization
 
-- Neon mode is the most optimized mode. This uses code that contains hand-written [https://www.arm.com/technologies/neon](Arm Neon intrinsics) to get even more performance in addition to the Burst compiler.
+- Neon mode is the most optimized mode. This uses code that contains hand-written [Arm Neon intrinsics](https://www.arm.com/technologies/neon) to get even more performance in addition to the Burst compiler.
 
 Our aim here is to measure and see the difference between these different modes.
 

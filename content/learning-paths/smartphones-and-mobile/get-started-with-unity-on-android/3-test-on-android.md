@@ -16,23 +16,23 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
 1. Select _File->Build Settings_ to show the Build Settings window:
 
-![Build Settings window#center](images/build-settings.png "Figure 1. Build Settings window")
+    ![Build Settings window#center](images/build-settings.png "Figure 1. Build Settings window")
 
 1. Notice how the project is currently in "Windows, Mac, Linux" mode. We need to switch to Android.
 
-1. Select _Android_ on the left and then click on _Switch Platform_. This will take a few moments as it re-builds the assets for Android mode. This step can take a little longer the first time it's done for any project.
+1. Select _Android_ on the left and then click on _Switch Platform_. This will take a few moments as it re-builds the assets for Android mode. This step can take a little longer the first time its done for any project.
 
-![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
+    ![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
 
 1. We must now tell Unity which scene to open when the app runs. This affects all platforms. Click on _Add Open Scenes_ to add the opened sample scene to the _Scenes in Build_ list. We will only need to do this once.
 
 ![Scenes in Build#center](images/build-settings-scenes-in-build.png "Figure 3. Scenes in Build list")
 
-That's all we need to simply run the app - there are a couple more we will need when we profile the app but for now proceed with deployment in the next section.
+That's all we need to simply run the app. There are a couple more steps required to run the profiler but we'll cover those later.
 
 ## Prepare your Android device for development
 
-To deploy to your Android device we will need to enable the Android Developer Options and USB Debugging.
+To deploy to your Android device we will need to enable the _Android Developer Options_ and _USB Debugging_ on your device.
 
 1. Go to your Android settings app
 
@@ -44,9 +44,15 @@ To deploy to your Android device we will need to enable the Android Developer Op
 
 ## Deploy to your Android device
 
-1. Connect your Android device to your computer using a USB cable
+1. Connect your Android device to your computer using a USB cable. Unity may take a few moments to recognize it.
 
-1. In the _Build Settings_ window, select _Build and Run_. Choose a location to save your build.
+1. Android may ask for confirmation before enabling the connection.
+
+1. In the _Build Settings_ window
+
+1. Ensure your device appears in the _Run Device_ menu and select it
+
+1. Select _Build and Run_. Choose a location to save your build.
 
 1. The project will now build for Android and deploy to your device.
 

@@ -1,7 +1,7 @@
 ---
 title: Profiling Unity apps on Android
 
-minutes_to_complete: 120
+minutes_to_complete: 40
 
 who_is_this_for: Unity developers wanting to analyze performance of their apps on Android devices
 
@@ -11,10 +11,10 @@ learning_objectives:
     - Analyze performance data
 
 prerequisites:
-    - Learning path Get started with Unity on Android
-    - Basic knowledge of Unity and programming concepts
     - Recent Android device such as mobile phone or tablet
     - Desktop computer capable of running Unity
+    - Basic knowledge of Unity and programming concepts
+    - Learning path [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android)
 
 author_primary: Arm
 
@@ -22,7 +22,6 @@ author_primary: Arm
 skilllevels: Intermediate
 subjects: Performance analysis
 armips:
-    - Cortex-A
     - armv8
     - aarch32
     - aarch64

@@ -25,7 +25,7 @@ The Profiler will be able to help you in various ways.
 
 ## Launch the Profiler
 
-The Profiler can be used in the editor and with your connected Android device. It is always recommended to measure your actual target as your development environment may be very different. Using the Profiler when running your app in the editor can be useful, especially when your performance issues are general or simple to identify (or maybe you’re writing an editor-based tool!) but, generally speaking, profiling on an actual target device will always provide more accurate results.
+The Profiler can be used in the editor and with your connected Android device. It is always recommended to measure your actual target as your development environment may be very different. Using the Profiler when running your app in the editor can be useful, especially if your performance issues are general or simple to identify (or maybe you’re writing an editor-based tool!) but, generally speaking, profiling on an actual target device will always provide more accurate results.
 
 You can connect the Profiler to your device manually while the app is running, or select auto-connect in the build settings. Choose whichever is most convenient for you.
 
@@ -35,27 +35,27 @@ On the other hand, if the performance issues happen later in your app’s lifeti
 
 In our sample, the performance issues will be apparent soon after launch. To profile directly on an Android device:
 
-1. Open the Build Settings
+1. Open the _Build Settings_
 
-1. Ensure Autoconnect Profiler is ticked
+1. Ensure _Autoconnect Profiler_ is ticked
 
     ![Build settings to autoconnect profiler#center](images/android-build-settings-autoconnect-profiler.PNG "Figure 1. Build settings with connected Android device and Autoconnect Profiler enabled.")
 
-1. Select Build and Run. 
+1. Select _Build and Run_.
 
 1. Choose your save path and name
 
 1. Wait for Unity to launch the collision sample and auto-connect the Profiler
 
-1. Once the Profiler is connected, the Profiler window will open and the CPU Usage graph will start to fill
+1. Once the Profiler is connected, the Profiler window will open and the _CPU Usage_ graph will start to fill
 
 If you forget to tick the auto-connect option, or you want to wait before you connect the Profiler, you can connect the Profiler while the app is running:
 
-1. Select Window menu, then Analysis, then Profiler
+1. Select _Window_ menu, then _Analysis_, then _Profiler_
 
 1. A round record button is present in the top-left
 
-1. To the left of the record button is a drop-down menu identifying the connection mode and device. To profile the app running in the editor, you would set this to Play Mode.
+1. To the left of the record button is a drop-down menu identifying the connection mode and device. To profile the app running in the editor, you would set this to _Play Mode_.
 
 1. Your Android device should appear in the list. Select it to connect the Profiler.
 
@@ -85,7 +85,7 @@ The peaks on the CPU Usage graph tell us where there are particularly high loads
 
 The lower panel will show activity from the selected frame. The rows show main thread, render thread, job worker threads (expand Job entry to see the workers and what tasks they performed) and several other areas and job types. The colors of the boxes match those of the categories listed in the CPU Usage panel.
 
-You can expand or shrink the Timeline panel using the scroll-wheel. To pan around, click the scroll-wheel. Do this until you can see the Timeline rows more clearly. Each frame is being shown one after the other, left to right. Your selected frame is slightly brighter than the surrounding frames. You will see in the panel header the amount of time taken by that frame (e.g. CPU 56.79ms). The time axis below the header runs from 0ms (start of frame) to 
+You can expand or shrink the Timeline panel using the scroll-wheel. To pan around, click the scroll-wheel. Do this until you can see the Timeline rows more clearly. Each frame is being shown one after the other, left to right. Your selected frame is brighter than the surrounding frames. You will see in the panel header the amount of time taken by selected frame (e.g. in Figure 3, CPU 56.79ms). The time axis below the header runs from 0ms (start of frame) to the duration of the frame.
 
 For now, we are interested in the main thread because it seems to be very busy - the top row says that the PlayerLoop entry is taking 56.75ms; even if nothing else was running, we would be limited to approximately 17 frames per second (1000 / 56.75 = 17.6). Our bottleneck seems to be CPU related.
 
@@ -103,16 +103,19 @@ Under BehaviourUpdate, you will see the custom script CollisionCalculationScript
 
 ### Supporting features
 
+There are a number of options available in the Profiling window. Lets explore some of them:
+
 To clearly delineate captured data you can toggle on Clear on Play to clear the data whenever you start playing your app.
 
-The Deep Profile option tells the Profiler to collect much more performance data about your code. The extra information comes at the cost of additional start-up time of your app and an additional cost to data collection during runtime. Data collection can be much slower with Deep Profile turned on (depending on the complexity of your app). Your app must be built with support for deep profiling; activate this by turning on Deep Profiling Support in Build Settings (before you select Build and Run).
+The Deep Profile option tells the Profiler to collect much more performance data about your code. The extra information comes at the cost of additional start-up time of your app and an additional cost to data collection during runtime so it is usually easier without it, unless needed. Data collection can be much slower with Deep Profile turned on (depending on the complexity of your app). Your app must be built with support for deep profiling; activate this by turning on Deep Profiling Support in Build Settings (before you select Build and Run).
 
-The Call Stacks option enables recording of scripting memory allocations. It is accompanied by a pull-down menu with three options; GC.Alloc, UnsafeUtility.Malloc (Persistent) and JobHandle.Complete. GC.Alloc is the default. It allows you to profile your code that results in a memory allocation. Click on the GC.Alloc block (in magenta) to see the call stack in the popup window.
+In addition to performance timings, we can also see how often memory allocations are made. The Call Stacks option enables recording of such memory allocations. It is accompanied by a pull-down menu with three options, _GC.Alloc_ is the default. You can see when your code triggers a memory allocation. Click on the GC.Alloc block (in magenta) to see the call stack in the popup window.
 
 ![Call Stacks#center](images/profiler-analyse-selected-frame-call-stacks-enabled.PNG "Figure 5. Call stack leading to a memory allocation using GC.Alloc mode of Call Stacks option.")
 
 ### Mark your own code for profiling
-You can profile your own code by tagging it using functions from the UnityEngine.Profiling namespace. See below for how to mark your code such that it appears in the Timeline and Hierarchy using the label of your choice:
+
+To mark specific areas of code you want to measure, you can add your own profiling tags by calling functions from the UnityEngine.Profiling namespace. See below for how to mark your code such that it appears in the Timeline and Hierarchy using the label of your choice:
 
 ```
 using UnityEngine.Profiling;
@@ -124,98 +127,4 @@ using UnityEngine.Profiling;
 	Profiler.EndSample();
 ```
 
-You may also nest samples inside other samples in order to organize your profile data into a Hierarchy (as we have seen shown in the Timeline and Hierarchy views).
-
-## Collect data for the Analyzer
-In this section we will explore the Unity Analyzer. You will collect data from the Profiler first. You will record data from two different versions of the collision sample; unoptimized (or plain) and optimized (using Neon). Later you will load the data into the Analyzer to visualize and compare the datasets.
-
-Our sample app works best on Android when in landscape orientation. So turn your device to landscape orientation. Information will be displayed in the bottom right.
-
-### Collect data from unoptimized version
-You will now collect some data from the unoptimized version of the code. To do this you will save the data from the two builds first, and then later load the data into the Analyzer to visualize and compare the two data sets.
-
-1. Open the script _Assets/BurstNeonCollisions/Scripts/CollisionCalculationScript.cs
-
-    1. Find line 66. It should look like this:
-
-        1. public const Mode codeMode = Mode.Plain;
-
-1. Build and deploy to your Android device
-
-    1. Open File/Build Settings
-
-    1. Ensure the following options are ticked
-
-        1. Development Build
-
-        1. Autoconnect Profiler
-
-    1. Ensure your device is selected in Run Device drop-down menu
-
-    1. Select Build and Run
-
-    1. Enter and path and file for your Android package (e.g. plain.apk)
-
-    1. When the app starts on your device, ensure it says Standard Mode in the bottom right. If not, start again from step 1.
-
-1. Ensure the record button is enabled (it will be red)
-
-1. Let the Profiler record - a few hundred frames or so will be enough for this tutorial
-
-1. Record data using the Profiler
-
-    1. Select the disk icon in the top right of the Profiler window
-
-    1. Enter plain.data
-
-    1. Save to disk
-
-### Collect data for the optimized version
-
-Let’s repeat the above process but this time build and deploy the optimized version of the code.
-
-1. Open the script _Assets/BurstNeonCollisions/Scripts/CollisionCalculationScript.cs
-
-    1. Find line 66. Change it should look like this:
-
-        1. public const Mode codeMode = Mode.Neon;
-
-    1. Build and deploy to your Android device
-
-        1. Open File/Build Settings
-
-        1. Ensure the following options are ticked
-
-        1. Development Build
-
-        1. Autoconnect Profiler
-
-    1. Ensure your device is selected in Run Device drop-down menu
-
-    1. Select Build and Run
-
-    1. Enter and path and file for your Android package (e.g. neon.apk)
-
-    1. When the app starts on your device, ensure it says Neon Mode in the bottom right. If not, start again from step 1.
-
-1. Ensure the record button is enabled (it will be red)
-
-1. Let the Profiler record - again, a few hundred frames or so will be enough for this comparison
-
-1. Record data using the Profiler
-
-1. Select the disk icon in the top right of the Profiler window
-
-1. Enter neon.data
-
-1. Save to disk
-
-### Profiler summary
-
-You have now collected performance data for two versions of our build; essentially “pre” and “post” optimization. The optimizations (Burst and Neon) made in this sample will be covered in the next learning path in this series.
-
-plain.data contains performance data from the unoptimized version. Neon.data contains data from our optimized version.
-
-You now know how to use the Profiler tool to analyze specific frames of performance data and save data for later.
-
-In the next section we will use the Analyzer tool to visualize and compare the data you have collected.
+You may also nest tagged samples inside other samples in order to organize your profile data into a Hierarchy (as we have seen shown in the Timeline and Hierarchy views).

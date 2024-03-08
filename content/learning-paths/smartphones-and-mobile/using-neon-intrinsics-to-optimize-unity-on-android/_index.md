@@ -1,7 +1,7 @@
 ---
 title: Using Neon intrinsics to optimize Unity on Android
 
-minutes_to_complete: 120
+minutes_to_complete: 90
 
 who_is_this_for: Unity developers wanting to optimize their Unity apps on Android
 
@@ -14,7 +14,7 @@ prerequisites:
     - Basic knowledge of Unity and C#
     - Recent Android device such as mobile phone or tablet featuring an Arm microprocessor
     - Desktop computer capable of running Unity
-    - Unity must be compatible with Unity Burst compiler 1.5 or later
+    - Unity version compatible with Unity Burst compiler 1.5 or later
 
 author_primary: Arm
 
@@ -22,7 +22,6 @@ author_primary: Arm
 skilllevels: Intermediate
 subjects: Neon intrinsics, Unity, optimization
 armips:
-    - Cortex-A
     - armv8
     - aarch64
     - arm64

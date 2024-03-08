@@ -37,7 +37,7 @@ Remembering that we're trying to find out why the spinning cube isn't running sm
 
 - In the main timeline at the top, the different areas of the app are coloured. The graph is filled with a lot of blue. On the left under _CPU Usage_ we can see that blue is for _Scripts_.
 
-- Unity has provided convenient figures for us to compare against (on the left we see tags showing 60FPS, 30FPS and 15FPS). It's telling us that in order to hit 60 frames per second, we would want our frame to take no more than 16 milliseconds. To hit 30 frames per second, we would want our frame to take less than 33ms, and less than 66ms if we targeted a frame rate of 15FPS.
+- Unity has provided convenient figures for us to compare against (on the left we see tags showing 60FPS, 30FPS and 15FPS). Its telling us that in order to hit 60 frames per second, we would want our frame to take no more than 16 milliseconds. To hit 30 frames per second, we would want our frame to take less than 33ms, and less than 66ms if we targeted a frame rate of 15FPS.
 
 - Looking at the _Main Thread_ for the selected frame, we can see that the _PlayerLoop_ is taking _117.7ms_ (milliseconds). That is awfully high - way above our targeted frame time of 16ms.
 
@@ -50,3 +50,5 @@ So by using the Profiler window, we now know where to look in the next step of o
 Try fixing the performance issue yourself.
 
 Hint: To solve the problem, try looking for a very unnecessary function call in Spin.Update(). Remove the call and then re-deploy to your Android device. The cube will now be spinning smoothly.
+
+For more on using the Profiler to find performance issues, see [Profiling Unity Apps on Android](/learning-paths/smartphones-and-mobile/profiling-unity-apps-on-android).

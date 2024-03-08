@@ -5,7 +5,7 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-Each version of the code has two main functions - one for character-collision detection and one for character-character collision detection.
+Each version of the code has two main functions - one for character-wall collision detection and one for character-character collision detection.
 
 ## Unoptimized character-wall collision detection
 The unoptimized character-wall collision implementation is in function DoWallsPlain(). It is a simple nested loop through all of the characters and all of the walls.
@@ -41,7 +41,7 @@ public bool Intersects(StaticCollisionObject other)
 ## Unoptimized character-character collision detection
 After the update calls _DoWallsPlain_ to perform the character-wall collision detection, the equivalent for character-character collision is called. This is done in the function called _DoCharactersPlain_.
 
-_DoCharactersPlain_ contains another simple nested loop. For all characters, it checks if a character hits another character. Again, a boolean value is stored, true noting that a collision has occurred.
+_DoCharactersPlain_ contains another simple nested loop. For all characters, it checks if a character hits another character. Again, a boolean value is stored, **true** indicating that a collision has occurred.
 ```
 private void DoCharactersPlain(int numChar)
 {
