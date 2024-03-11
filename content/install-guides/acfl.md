@@ -1,10 +1,10 @@
 ---
 additional_search_terms:
-- armclang
-- compiler
-- hpc
-- linux
-- allinea
+  - armclang
+  - compiler
+  - hpc
+  - linux
+  - allinea
 author_primary: Florent Lebeau
 layout: installtoolsall
 minutes_to_complete: 15
@@ -12,17 +12,18 @@ multi_install: false
 multitool_install_part: false
 official_docs: https://developer.arm.com/documentation/101458/latest
 test_images:
-- ubuntu:latest
-- fedora:latest
+  - ubuntu:latest
+  - fedora:latest
 test_link: null
 test_maintenance: true
 test_status:
-- passed
-- passed
+  - passed
+  - passed
 title: Arm Compiler for Linux
 tool_install: true
 weight: 1
 ---
+
 [Arm Compiler for Linux (ACfL)](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux) is a suite of tools containing Arm C/C++ Compiler (`armclang`), Arm Fortran Compiler (`armflang`), and Arm Performance Libraries (`ArmPL`). It is tailored to the development of High Performance Computing (HPC) applications.
 
 `Arm Compiler for Linux` runs on 64-bit Arm machines, it is not a cross-compiler.
@@ -55,10 +56,10 @@ If any of the following tools are not already installed by your Linux
 distribution, you must install them before installing Arm Compiler for Linux.
 These packages can be installed with the appropriate package manager for your OS:
 
-  - SLES: awk environment-modules glibc-devel gzip python3 tar
-  - RHEL: environment-modules glibc-devel procps python3
-  - Amazon Linux: environment-modules glibc-devel gzip procps python3 tar
-  - Ubuntu: environment-modules libc6-dev python3
+- SLES: awk environment-modules glibc-devel gzip python3 tar
+- RHEL: environment-modules glibc-devel procps python3
+- Amazon Linux: environment-modules glibc-devel gzip procps python3 tar
+- Ubuntu: environment-modules libc6-dev python3
 
 Note: The minimum supported version for Python is version 3.6.
 
@@ -75,6 +76,14 @@ sudo apt install -y python-is-python3 libc6-dev
 
 You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 
+## Download and install using install script
+
+Use an Arm provided script to select, download, and install your preferred `ACfL` package.
+
+```console
+bash <(curl -L https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/download.sh)
+```
+
 ## Download and install manually {#manual}
 
 ### Download with wget
@@ -90,14 +99,17 @@ sudo apt install wget
 `ACfL` installation packages are available to download from [Arm Developer](https://developer.arm.com/downloads/-/arm-compiler-for-linux). Individual `Arm Performance Libraries (ArmPL)` packages are also available.
 
 Fetch the `ACfL` installers:
+
 #### Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-10/arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
+wget  https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/24-04/arm-compiler-for-linux_24.04_Ubuntu-22.04_aarch64.tar
 ```
+
 #### Red Hat Linux:
+
 ```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/23-10/arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
+wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/24-04/arm-compiler-for-linux_24.04_RHEL-8_aarch64.tar
 ```
 
 ### Install
@@ -110,18 +122,18 @@ Each command sequence includes accepting the license agreement to automate the i
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
-tar -xvf arm-compiler-for-linux_23.10_Ubuntu-22.04_aarch64.tar
-cd ./arm-compiler-for-linux_23.10_Ubuntu-22.04
-sudo ./arm-compiler-for-linux_23.10_Ubuntu-22.04.sh --accept
+tar -xvf arm-compiler-for-linux_24.04_Ubuntu-22.04_aarch64.tar
+cd ./arm-compiler-for-linux_24.04_Ubuntu-22.04
+sudo ./arm-compiler-for-linux_24.04_Ubuntu-22.04.sh --accept
 ```
 
 #### Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
-tar -xvf arm-compiler-for-linux_23.10_RHEL-8_aarch64.tar
-cd arm-compiler-for-linux_23.10_RHEL-8
-sudo ./arm-compiler-for-linux_23.10_RHEL-8.sh --accept
+tar -xvf arm-compiler-for-linux_24.04_RHEL-8_aarch64.tar
+cd arm-compiler-for-linux_24.04_RHEL-8
+sudo ./arm-compiler-for-linux_24.04_RHEL-8.sh --accept
 ```
 
 ### Set up environment
@@ -155,14 +167,15 @@ module avail
 To configure Arm Compiler for Linux:
 
 ```bash { env_source="~/.bashrc" }
-module load acfl/23.10
+module load acfl/24.04
 ```
 
 To configure GCC:
 
 ```bash { env_source="~/.bashrc" }
-module load gnu/12.2.0
+module load gnu/13.2.0
 ```
+
 `ACfL` is now [ready to use](#armclang).
 
 ## Download and install with Spack {#spack}
@@ -203,6 +216,7 @@ spack install armpl-gcc
 ```
 
 ### Setup environment
+
 Use the commands below to set up the environment:
 
 ```console
@@ -212,13 +226,13 @@ spack compiler find
 
 `ACfL` is now [ready to use](#armclang).
 
-
 ## Get started with Arm C/C++ compiler {#armclang}
 
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
+
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
 armclang --version
 ```
 
@@ -236,17 +250,18 @@ int main()
 
 Build the application with:
 
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
 armclang hello.c -o hello
 ```
 
 Run the application with:
 
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
 ./hello
 ```
 
 The program will output the string specified.
+
 ```output
 Hello, C World!
 ```
@@ -256,7 +271,8 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
+
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
 armflang --version
 ```
 
@@ -270,16 +286,19 @@ end program hello
 ```
 
 Build the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
+
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
 armflang hello.f90 -o hello
 ```
 
 Run the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/23.10" }
+
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
 ./hello
 ```
 
 The program will output the string specified.
+
 ```output
 Hello, Fortran World!
 ```
