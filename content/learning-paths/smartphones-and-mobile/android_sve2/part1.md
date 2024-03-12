@@ -14,7 +14,7 @@ The key feature of SVE and SVE2 is their scalability: unlike traditional SIMD (S
 
 SVE2 extends the original SVE capabilities by adding new instructions and features to improve the handling of complex data patterns and to enhance support for operations commonly used in newer computing paradigms. It's part of Arm's approach to address the increasing demand for high-performance computing across various sectors.
 
-In this learning path, you will explore how to use SVE2 on Android running ARM-based processors that include this feature. Specifically, you will see how to achieve 5x faster computation, when calculating the following a*b + c, where a, b, and c are the floating-point vectors. This operation, defined formerly as the floating-point addition of product, is commonly used in many high-performance computing, including artificial neural networks.
+In this learning path, you will explore how to use SVE2 on Android running ARM-based processors that include this feature. Specifically, you will see how to achieve 5x faster computation, when calculating the following a * b + c, where a, b, and c are the floating-point vectors. This operation, defined as fused multiply-add, is commonly used in many high-performance computing, including artificial neural networks.
 
 ## Before you begin
 You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (we have used Android Studio Hedgehog | 2023.1.1 Patch 2). 
