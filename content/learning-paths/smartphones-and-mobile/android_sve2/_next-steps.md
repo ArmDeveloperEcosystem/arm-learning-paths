@@ -19,7 +19,7 @@ recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
     # General online references                 (type: website) 
 
 further_reading:
-- resource:
+    - resource:
         title: Learn the architecture - Introducing SVE2 guide 
         link: https://developer.arm.com/documentation/102340/0100
         type: documentation
