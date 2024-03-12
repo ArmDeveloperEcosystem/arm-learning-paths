@@ -73,7 +73,7 @@ Next, it's time to connect the buzzer. Start by connecting the buzzer's ground p
 
 ![Buzzer input](_images/piezo_2.png)
 
-Then, connect the buzzer's input pin to pin #25 on your Pico. This is another GPIO pin, this time GPIO #25.
+Then, connect the buzzer's input pin to pin #25 on your Pico. This is another GPIO pin, this time GPIO #19.
 
 ### Review
 
