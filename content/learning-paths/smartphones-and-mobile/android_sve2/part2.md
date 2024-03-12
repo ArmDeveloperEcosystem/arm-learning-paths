@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-In this section you will implement the floating-point addition of product of vectors (a * b + c) using C++. The vectors will be pseudo-randomly generated using the `<random>` library introduced in C++11. To measure the code execution time, you will also create the `measureExecutionTime` template function. The latter will return the execution time of N invocations of functions that calculate addition of product of vectors with and without SVE2.
+In this section you will implement the fused multiply-add (FMA) of vectors (a * b + c) using C++. The vectors will be pseudo-randomly generated using the `<random>` library introduced in C++11. To measure the code execution time, you will also create the `measureExecutionTime` template function. The latter will return the execution time of N invocations of functions that calculate the FMA with and without SVE2.
 
 ## Implement helper functions
 To implement helper functions, we start by modifying `native-lib.cpp` (located under app/cpp/). First, we add the following:
@@ -76,8 +76,8 @@ long long measureExecutionTime(Func func, int trialCount, Args... args) {
 
 This function takes a callable (`func`), the number of invocations (`trialCount`), and a variadic list of arguments (`args`) to pass to `func`. The `measureExecutionTime` function measures and returns the total execution time of specified invocations of `func`. The result is given in milliseconds.
 
-## Implement addition of product without SVE2
-With the above code, you can now implement the addition of product of vectors without SVE2. To do so, supplement the `native-lib.cpp` with the following function:
+## Implement FMA without SVE2
+With the above code, you can now implement FMA without SVE2. To do so, supplement the `native-lib.cpp` with the following function:
 
 ```cpp
 void additionOfProduct(const std::vector<float>& a,
@@ -98,7 +98,7 @@ void additionOfProduct(const std::vector<float>& a,
 
 The `additionOfProduct` takes four vectors as input. The first three denote a, b, and c vectors, and the forth is the vector which stores the result. Given these parameters, the function ensures that all vectors have the same size. Then, the function uses a `for` loop to calculate the result as a * b + c.
 
-## Implement addition of product with SVE2 intrinsics
+## Implement FMA with SVE2 intrinsics
 The SVE2 intrinsics are defined in the `arm_sve.h` header file, which we have already included in `native-lib.cpp`. Writing code with these intrinsics closely resembles writing standard C code. The compiler undertakes numerous optimizations to enhance performance. These include the efficient utilization of registers for variable storage, ensuring that function calls adhere to the conventions of the C language to facilitate optimized code generation, and automatically converting parts of loops that do not use intrinsics into vectorized instructions to improve execution speed. Moreover, in scenarios where a direct intrinsic is not available, the compiler selects the most optimal instructions to use.
 
 However, programmers bear responsibility for several critical aspects:
