@@ -11,9 +11,9 @@ layout: learningpathall
 Image compression is the process of encoding images so that they can be stored and transmitted using fewer bits than in their original representation.
 This generally results in reduced memory footprint and bandwidth, which helps applications perform better.
 
-Lossless compression schemes, such as [Arm Frame Buffer Compression (AFBC)](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en) achieve this without compromising quality as they are able to preserve all the original data after decompression, at the expense of certain trade-offs, for example, reserving memory for compression metadata.
+Lossless compression schemes, such as [Arm Frame Buffer Compression (AFBC)](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en), achieve this without compromising quality as they are able to preserve all the original data after decompression but at the expense of certain trade-offs, for example, reserving memory for compression metadata.
 
-[Arm Fixed Rate Compression (AFRC)](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFRC?lang=en) uses the same bitrate for all compression blocks, so that the encoder and decoder can be better optimized.
+[Arm Fixed Rate Compression (AFRC)](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFRC?lang=en), however, uses the same bitrate for all compression blocks, so that the encoder and decoder can be better optimized.
 It guarantees a reduced memory footprint and often reduced bandwidth.
 For example, for the Sponza scene shown below, on a Google Pixel 8:
 
@@ -31,7 +31,7 @@ So much so that, to the naked eye, the compressed and uncompressed images look t
 | ----------- | ----------- |
 | ![Uncompressed](images/sponza_default.png) | ![AFRC 2BPC](images/sponza_afrc.png) |
 
-More information can be found in [this blog](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-immortalis-g715-developer-overview) and in [this Vulkan sample](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc).
+More information can be found in [this blog on Arm® Immortalis™](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-immortalis-g715-developer-overview) and in [this Vulkan sample](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc).
 
 Whereas default lossless compression can be transparently handled by the driver to improve performance, it is up to developers to explicitly enable fixed-rate compression for those images that will benefit the most from it.
 
