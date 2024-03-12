@@ -9,7 +9,7 @@ layout: learningpathall
 ## Request fixed-rate compression
 
 This happens at image creation time.
-To request fixed-rate compression, provide a [VkImageCompressionControlEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionControlEXT.html) structure to the `pNext` chain of [VkImageCreateInfo](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html):
+To request fixed-rate compression, provide a `VkImageCompressionControlEXT` structure to the `pNext` chain of `VkImageCreateInfo`:
 
 ```C
 VkImageCompressionControlEXT compression_control{VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT};
@@ -28,8 +28,8 @@ VkImage image_handle;
 vkCreateImage(get_device().get_handle(), &image_create_info, nullptr, &image_handle);
 ```
 
-This requests default fixed-rate compression, which depends on the device.
-On Arm GPUs, it is the highest supported bitrate, that is the highest possible quality.
+This requests default fixed-rate compression (which depends on the device).
+On Arm GPUs, it is the highest supported bitrate that is the highest possible quality.
 
 To request a specific bitrate (after confirming that it is supported, as shown in the previous step), you may instead use `VK_IMAGE_COMPRESSION_FIXED_RATE_EXPLICIT_EXT` like this:
 
