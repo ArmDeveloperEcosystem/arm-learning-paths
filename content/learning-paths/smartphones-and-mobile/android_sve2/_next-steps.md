@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Proceed to Get Started with Arm Mobile Studio to continue learning about Android performance analysis.
+   Proceed to Get Started with Arm Performance Studio for mobile to continue learning about Android performance analysis.
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
