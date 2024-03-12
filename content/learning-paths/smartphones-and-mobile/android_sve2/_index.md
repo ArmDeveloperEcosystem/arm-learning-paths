@@ -14,7 +14,7 @@ prerequisites:
     - A x86_64 or Apple development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
     - Knowledge of Single instruction Multi Data (SIMD)
-    - Knowledge of Neon
+    - Knowledge of [Neon](https://developer.arm.com/documentation/102474/latest)
     - Knowledge of [Scalable Vector Extension (SVE)](https://developer.arm.com/documentation/101726/4-0)
 
 author_primary: Dawid Borycki
