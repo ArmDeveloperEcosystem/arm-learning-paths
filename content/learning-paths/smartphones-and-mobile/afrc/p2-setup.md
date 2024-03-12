@@ -13,7 +13,7 @@ This Learning Path assumes you are familiar with the Vulkan API and have an appl
 Otherwise, you may use a test application like those provided by the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples).
 
 {{% notice Note %}}
-You do not need to create a new Vulkan Sample to complete this Learning Path, you may familiarize yourself with the code examples and save them as a reference.
+You do not need to create a new Vulkan Sample to complete this Learning Path but you can familiarize yourself with the code examples and save them as a reference.
 There is already a Vulkan Sample that allows you to experiment with AFRC without any coding required, see the [Image Compression Control](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc) performance sample.
 {{% /notice %}}
 
@@ -30,7 +30,7 @@ python ./scripts/generate.py android
 Follow the [build instructions](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#android) to run the example applications on an Android device.
 
 {{% notice  %}}
-You may use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#build-with-android-studio) to more easily build and run the samples, the build instructions explain how.
+You can use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#build-with-android-studio) to build and run the samples (the build instructions explain how to do this).
 {{% /notice %}}
 
 ### Create a test sample
@@ -87,7 +87,7 @@ void afrc::prepare_pipelines()
 }
 ```
 
-Will result in the following line being added to logcat:
+This will result in the following line being added to logcat:
 
 ```output
 I VulkanSamples: [info] Hello world!
