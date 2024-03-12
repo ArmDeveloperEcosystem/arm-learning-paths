@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Vulkan Extensions
 
-The Vulkan extension [VK_EXT_image_compression_control](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control) may be used to verify if default compression (such as [AFBC](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en)) was applied, and to request fixed-rate compression.
+The Vulkan extension [VK_EXT_image_compression_control](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control) may be used to verify if default compression (such as AFBC) was applied, and to request fixed-rate compression.
 
 Swapchain images are a special case, and also require the [VK_EXT_image_compression_control_swapchain](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control_swapchain) extension.
 
