@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >        
-            What do you need to consider, when using Arm intrinsics
+            What do you need to consider when using Arm intrinsics?
         answers:
             - "Ensuring that function calls adhere to the conventions of the C language to facilitate optimized code generation"
             - "Automatically convert parts of loops that do not use intrinsics into vectorized instructions to improve execution speed" 
