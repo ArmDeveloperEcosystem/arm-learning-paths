@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Query for compression support
 
-To create a [VkImage](https://docs.vulkan.org/spec/latest/chapters/resources.html#resources-images), you need a [VkImageCreateInfo](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html) structure defining the image's properties.
+To create a VkImage, you need a [VkImageCreateInfo](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html) structure defining the image's properties.
 Before creating the image, you can use these properties to query if the image supports fixed-rate compression on your platform.
 For instance, the structure may look like this:
 
