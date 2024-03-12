@@ -6,8 +6,8 @@ minutes_to_complete: 40
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use the Scalable Vector Extension 2 (SVE2) on Arm powered mobile devices running Android. 
 
 learning_objectives:
-    - Enable SVE2 support in Android Studio.
-    - Implement an Android application that uses the Android Native Development Kit (NDK) to calculate the fused floating-point addition of product of vectors.
+    - Enable Scalable Vector Extension 2 (SVE2) support in Android Studio.
+    - Implement an Android application that uses the Android Native Development Kit (NDK) to calculate the fused multiply-add (FMA).
     - Measure the performance uplift by using SVE2 intrinsics.
 
 prerequisites:
