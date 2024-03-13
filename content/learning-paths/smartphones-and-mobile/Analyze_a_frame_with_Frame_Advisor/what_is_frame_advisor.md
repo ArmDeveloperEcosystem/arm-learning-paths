@@ -22,4 +22,4 @@ To see Frame Advisor in action, [watch this video](https://developer.arm.com/Add
 
 1. You’ll need to put your device into developer mode, and enable USB Debugging.
 
-1. Ensure your device is connected via USB and accessible through adb. To test the connection, open a command prompt, and enter the `adb devices` command.
+1. Ensure your device is connected via USB and accessible through ADB. To test the connection, open a command prompt, and enter the `adb devices` command.
