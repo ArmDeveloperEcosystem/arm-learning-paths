@@ -12,9 +12,9 @@ The sample project has been written in Unity and is freely available on the Unit
 
 We have covered building and deploying Unity applications for profiling on Android devices in the learning path [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android)
 
-You will then use the Profiler and Analyzer tools to collect and analyze performance data. While the Profiler is focused more on examining specific frames, the Analyzer allows developers to compare frames over time or between two different captures (for example, before and after a change to the code).
+You will use the Profiler and Analyzer tools to collect and analyze performance data. While the Profiler is focused more on examining specific frames, the Analyzer allows developers to compare frames over time or between two different captures (for example, before and after a change to the code).
 
-The sample application you will use is from the Unity Asset Store. It is a complete project and is freely available. You will need to log in to your Unity account to download and import it.
+You will need to log in to your Unity account in order to download and import the sample project.
 
 ## The sample code
 
@@ -24,8 +24,8 @@ An increasing number of characters (actually just simple capsules) are spawned o
 
 The walls are visually represented by simple boxes. The bounds of the walls are stored as [Axis-Aligned Bounding Boxes (AABB)](https://en.wikipedia.org/wiki/Bounding_volume).
 
-The characters are presented as simple capsules and their bounds are stored as a radius value.
+The characters are presented as simple capsules and their bounds are stored as a radius value in a static array, and as AABBs that are updated every frame.
 
-Character-to-wall collisions are detected using radius-AABB checks. Character-to-character collisions are detected using radius checks.
+Character-to-wall collisions are detected by checking for overlapping AABBs. Character-to-character collisions are detected by checking overlapping circles where each circle is made from the position and radius of a character.
 
-![Collision detection diagram#center](images/collision-detection.png "Figure 1. Collision detection uses functions for checking intersection between radius-AABB (left) and radius-radius (right).")
+![Collision detection diagram#center](images/collision-detection.png "Figure 1. Character-wall collision detection using AABBs (left) and character-character collision detection (right) using position and radius (R).")

@@ -85,7 +85,7 @@ The peaks on the CPU Usage graph tell us where there are particularly high loads
 
 The lower panel will show activity from the selected frame. The rows show main thread, render thread, job worker threads (expand Job entry to see the workers and what tasks they performed) and several other areas and job types. The colors of the boxes match those of the categories listed in the CPU Usage panel.
 
-You can expand or shrink the Timeline panel using the scroll-wheel. To pan around, click the scroll-wheel. Do this until you can see the Timeline rows more clearly. Each frame is being shown one after the other, left to right. Your selected frame is brighter than the surrounding frames. You will see in the panel header the amount of time taken by selected frame (e.g. in Figure 3, CPU 56.79ms). The time axis below the header runs from 0ms (start of frame) to the duration of the frame.
+You can expand or shrink the Timeline panel using the scroll-wheel. To pan around, click the scroll-wheel. Do this until you can see the Timeline rows more clearly. Each frame is being shown one after the other, left to right. Your selected frame is brighter than the surrounding frames. You will see in the panel header the amount of time taken by the selected frame (e.g. in Figure 3, CPU 56.79ms). The time axis below the header runs from 0ms (start of frame) to the duration of the frame.
 
 For now, we are interested in the main thread because it seems to be very busy - the top row says that the PlayerLoop entry is taking 56.75ms; even if nothing else was running, we would be limited to approximately 17 frames per second (1000 / 56.75 = 17.6). Our bottleneck seems to be CPU related.
 

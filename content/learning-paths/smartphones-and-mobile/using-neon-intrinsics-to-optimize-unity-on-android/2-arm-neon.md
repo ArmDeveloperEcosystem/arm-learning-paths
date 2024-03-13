@@ -53,7 +53,7 @@ You can also use a mixture of these methods should you need to.
 If you’d like to try using a Neon-supported library, an easy start would be the [Unity.Mathematics](https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html) package from Unity. Neon-supported libraries will give you the speed-up Neon gives on the library functions you call, without you having to write any Neon code.
 
 ### Using Neon through Burst auto-vectorization
-In order to take advantage of the burst compiler, you must write your Neon code in Burst-compatible static functions or jobs.
+In order to take advantage of the burst compiler, you must write your Neon code in Burst-compatible static functions or Jobs.
 
 ### Hand-written Neon code
 While the Burst compiler can do a great job of using Neon, if your app needs to squeeze every ounce of performance from devices it can be well worth the investment to learn and hand-write Neon code. We will look at doing this using Neon intrinsics.

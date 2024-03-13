@@ -49,7 +49,7 @@ We need to make use of memory pointers.
 As you’ve already learned, the Burst compiler translates .NET bytecode to optimized native code. It is not applied across the whole of your project and there are some limitations as it doesn’t support all features of C#.
 
 ### How is the Burst compiler used?
-The Burst compiler can be used with the job system or with static functions. The following is an example of a Burst job:
+The Burst compiler can be used with the Job system or with static functions. The following is an example of a Burst Job:
 
 ```
 using Unity.Burst;
@@ -65,7 +65,7 @@ struct MyJob : IJob
 }
 ```
 
-Create your job struct based on IJob and write your code inside the _Execute()_ function. The attribute [BurstCompile] tells Unity to use the Burst compiler.
+Create your Burst Job based on IJob and write your code inside the _Execute()_ function. The attribute [BurstCompile] tells Unity to use the Burst compiler.
 
 Alternatively you can use Burst static functions; that is, static functions tagged with the [BurstCompile] tag.
 
@@ -90,7 +90,7 @@ Some limitations may be removed over time as the Burst compiler is updated.
 With minimal effort from the programmer, the Burst compiler is able to produce highly optimized native code that runs much faster. Part of this optimization is the ability to produce Neon native instructions. Neon instructions are great at processing multiple data items at once; i.e. processing multiple data items in parallel rather than one at a time (or scalar operations).
 
 ## Auto-vectorization
-Producing vector-based instructions from code is called vectorization. The Burst compiler is capable of auto-vectorizing code; i.e. the programmer doesn’t have to write Neon instructions. And it can do an even better job if we follow a few simple rules (or best practice).
+Producing vector-based instructions from code is called vectorization. The Burst compiler is capable of auto-vectorizing code; i.e. the programmer doesn’t have to write Neon instructions. The compiler can do even better if we follow a few simple rules (or best practice).
 
 ### Best practice
 The way data and code are structured are very important factors that will influence the compiler’s ability to auto-vectorize.
@@ -133,7 +133,7 @@ The following changes were made from the plain code (unoptimized) version:
 ## Writing Neon intrinsics
 Before diving into the modifications made to optimize for Neon, here are some points to consider when investigating Neon for your own projects:
 
-1. The Burst compiler does a great job on its own but Neon intrinsics can help get a little bit more performance
+1. The Burst compiler optimizes really well on its own but Neon intrinsics can help get a little bit more performance
 
 1. Neon intrinsics let you use a high level language while still accessing the low level native instructions you need.
 
@@ -141,7 +141,7 @@ Before diving into the modifications made to optimize for Neon, here are some po
 
 1. Writing Neon code can be complex.
 
-1. You must use static Burst function or jobs. In the sample code, static functions made it easier to measure timings but in a real-world application you may find jobs provide even better performance, depending on your situation. The sample project provides a job-based solution which you can experiment with.
+1. You must use static Burst functions or Jobs. In the sample code, static functions made it easier to measure timings but in a real-world application you may find Jobs provide even better performance, depending on your situation. The sample project provides a Job-based solution which you can experiment with.
 
 1. You can use _if (IsNeonSupported)_ to fall back to non-Neon code. _IsNeonSupported_ has no runtime overhead
 
@@ -222,7 +222,7 @@ Here are some general points that you will find useful when you review the sampl
 
 - The sample project increases the character count over time. Because of this it was better to profile using later frames. In early frames there aren’t enough characters so the overhead of vectorization counters any gains.
 
-- An early implementation used Burst Jobs. The jobs got in the way of performance timing because they are not guaranteed to execute immediately. The job implementations have been left in the code for you to experiment with. Leveraging jobs in your own projects can lead to important performance gains when used appropriately.
+- An early implementation used Burst Jobs. The Jobs got in the way of performance timing because they are not guaranteed to execute immediately. The Job implementations have been left in the code for you to experiment with. Leveraging Jobs in your own projects can lead to important performance gains when used appropriately.
 
 - **[NoAlias]** (explained in [best practice](#best-practice)) had a big impact on the performance gains (without it some optimizations produced little to no gain).
 
