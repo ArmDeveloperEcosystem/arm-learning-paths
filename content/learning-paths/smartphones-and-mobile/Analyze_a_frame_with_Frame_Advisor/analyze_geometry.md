@@ -11,11 +11,11 @@ Use the Content Metrics view in Frame Advisor to find geometry-related problems 
 
     ![Sorting Content Metrics view by primitives alt-text#center](fa_content_metrics.png "Figure 1. Sorting Content Metrics view by primitives")
     
-1. Right-click the draw call at the top of the list and choose `Navigate to call`. This complex object is now selected in the `Frame Hierarchy` view and you can see it in the `Framebuffers` view. This object is the Sphinx model, and it is built using almost 23,000 primitives. This is a high number for a game object on mobile, so the first step is to see whether this model can be simplified. Fewer primitives reduces GPU processing cost and memory bandwidth.
+1. Right-click the draw call at the top of the list and choose `Navigate to call`. This complex object is now selected in the `Frame Hierarchy` view and you can see it in the `Framebuffers` view. This object is the Sphinx model and it is built using almost 23,000 primitives. This is a high number for a game object on mobile, so the first step is to see whether this model can be simplified. Fewer primitives reduces GPU processing cost and memory bandwidth.
 
     ![The Sphinx model shown in the Framebuffers view alt-text#center](FA_Sphinx.png "Figure 2. The Sphinx model shown in the Framebuffers view")
 
-    In cases where the model can not be simplified any further, there are other options to consider.
+    In cases where the model cannot be simplified any further, there are other options to consider.
     
 1. Look at the `Detailed Metrics` view, where you can see a range of metrics about the mesh. Here, the Sphinx mesh uses almost 46,000 indices, and each index is used by 2 primitives, so there is some index reuse going on here, which is good.
 
@@ -27,7 +27,7 @@ Use the Content Metrics view in Frame Advisor to find geometry-related problems 
     To see full descriptions of all the metrics in the Detailed Metrics view, use the i button.
     {{% /notice %}}
 
-1. Next, sort the `Content Metrics` table by lowest VSE (vertex shading efficiency). This helps us to find objects that shade more indices than they are using. This can be caused by gaps in the index stream, which cause unused indices to be shaded, or poor reuse locality, which causes indices to be shaded multiple times.
+1. Next, sort the `Content Metrics` table by lowest VSE (vertex shading efficiency). This helps us find objects that shade more indices than they are using. This can be caused by gaps in the index stream, which cause unused indices to be shaded, or poor reuse locality which causes indices to be shaded multiple times.
 
     ![Content Metrics sorted by VSE alt-text#center](fa_sort_vse.png "Figure 4. Content Metrics sorted by VSE")
 
