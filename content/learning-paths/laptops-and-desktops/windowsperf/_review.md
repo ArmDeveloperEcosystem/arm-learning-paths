@@ -23,7 +23,7 @@ review:
 
     - questions:
         question: >
-            Performance metrics are per processor.
+            Performance metrics are generated per processor.
         answers:
             - "True"
             - "False"
