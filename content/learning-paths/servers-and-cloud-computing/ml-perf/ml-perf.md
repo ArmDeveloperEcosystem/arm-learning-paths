@@ -12,13 +12,13 @@ layout: "learningpathall"
 
 ## Prerequisites
 
-* An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running `Ubuntu Linux 20.04`.
+* An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running `Ubuntu 20.04` or `Ubuntu 22.04`.
 
 This Learning Path has been tested on AWS and Oracle platforms.
 
 ## Install necessary software and packages required by MLPerf Inference Suite
 
-Launch an Arm-based instance running `Ubuntu 20.04`.
+Launch an Arm-based instance running `Ubuntu 20.04` or `Ubuntu 22.04`.
 
 Install build-essential and Python3 package dependencies
 
