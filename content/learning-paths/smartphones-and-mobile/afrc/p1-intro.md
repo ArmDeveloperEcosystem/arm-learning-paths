@@ -34,4 +34,4 @@ More information can be found in [this blog on Arm® Immortalis™](https://comm
 
 Whereas default lossless compression can be transparently handled by the driver to improve performance, it is up to developers to explicitly enable fixed-rate compression for those images that will benefit the most from it.
 
-For this, Vulkan provides the extensions [VK_EXT_image_compression_control](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control) and [VK_EXT_image_compression_control_swapchain](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control_swapchain).
+For this, Vulkan provides the following extensions: [VK_EXT_image_compression_control](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control) and [VK_EXT_image_compression_control_swapchain](https://docs.vulkan.org/spec/latest/appendices/extensions.html#VK_EXT_image_compression_control_swapchain).
