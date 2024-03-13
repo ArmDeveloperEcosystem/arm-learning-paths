@@ -92,7 +92,8 @@ Your scene view will look something like this:
 ![Scene view#center](images/sample-project-default-scene-view.PNG "Figure 3. Default scene view of sample project.")
 
 ## Run the project inside the editor
-It’s worth checking that everything is imported and built correctly.
+
+It is worth checking that everything is imported and built correctly.
 
 1. Close the _Build Settings_ window
 

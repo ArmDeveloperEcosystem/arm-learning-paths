@@ -20,7 +20,7 @@ We're going to build the sample for Android. To do so takes just a few steps and
 
 1. Notice how the project is currently in "Windows, Mac, Linux" mode. We need to switch to Android.
 
-1. Select _Android_ on the left and then click on _Switch Platform_. This will take a few moments as it re-builds the assets for Android mode. This step can take a little longer the first time its done for any project.
+1. Select _Android_ on the left and then click on _Switch Platform_. This will take a few moments as it re-builds the assets for Android mode. This step can take a little longer the first time it is done for any project.
 
     ![Switch platform to Android#center](images/build-settings-switch-platform.png "Figure 2. Switch platform to Android")
 
@@ -48,9 +48,9 @@ To deploy to your Android device we will need to enable the _Android Developer O
 
 1. Android may ask for confirmation before enabling the connection.
 
-1. In the _Build Settings_ window
+1. In the _Build Settings_ window:
 
-1. Ensure your device appears in the _Run Device_ menu and select it
+1. Ensure your device appears in the _Run Device_ menu and select it.
 
 1. Select _Build and Run_. Choose a location to save your build.
 

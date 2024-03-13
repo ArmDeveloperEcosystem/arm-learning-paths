@@ -249,7 +249,7 @@ Please check that you have an NVIDIA GPU and installed a driver from http://www.
 
     ![Unity Agents Learning](images/unity-agents-learning.png "Figure 2. Unity Agents Learning")
 
-1. It's possible for the connection to time-out if you take too long to play the Unity scene. If this happens, simply start these steps again.
+1. It is possible for the connection to time-out if you take too long to play the Unity scene. If this happens, simply start these steps again.
 
 1. If you switch back to the console/terminal window, you should see the connection to the brains has been made and the parameter summary
 
@@ -530,9 +530,9 @@ Within this yaml you have the ability to set-up 2 separate brains. One named _Pa
 
     ![Agent Settings](images/heirachy-agent-settings.png "Figure 1. Agents Settings")
 
-1. Now in the _Inspector_ (normally on the right) scroll to the _Battle Env Controller (Script)_ and you should see properties for _Easy Battle Brain_, _Normal Battle Brain_ and _Hard Battle Brain_.
+1. Now in the _Inspector_ (normally on the right) scroll to the _Battle Env Controller (Script)_, and you should see properties for _Easy Battle Brain_, _Normal Battle Brain_ and _Hard Battle Brain_.
 
-1. Next to the _Easy Battle Brain_ there is a circle. Click it to pop-up the _Select NN Model_ menu, as per Figure 2. 
+1. Next to the _Easy Battle Brain_ there is a circle. Click it to pop-up the _Select NN Model_ menu, as per Figure 2.
 
     !["NN Model Pop-up"](images/battle-enviroment-controller-battle-brain.png "Figure 2. Select an NN Model asset for each difficulty")
     Note that you can use the slider in the pop-up to change the icon size. Drag fully to the left to reduce to list detail view if needed.

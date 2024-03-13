@@ -22,7 +22,7 @@ First off, if you haven't already got Unity, we recommend following their steps 
 
 Download Unity Hub now by following the instructions at [unity.com/download](https://unity.com/download)
 
-Run the hub once it has downloaded. If you are not already logged in you will be prompted to either log in or create an account.
+Run the hub once it has downloaded. If you are not already logged in, you will be prompted to either log in or create an account.
 
 Once logged in, if you don't already have any editor versions installed, Unity may recommend the latest Long-Term Support version.
 
@@ -74,7 +74,7 @@ We have provided a simple project to accompany this learning path. To open it in
 
 You will see your project listed in the _Projects_ tab in Unity Hub.
 
-1. You can now click on the project to open it. We used Unity 2022.3.18f1 to create the sample; if you use a different version you will get a warning. The project is very simple and should be safe to convert but if in doubt we recommend installing 2022.3.18f1 via the Unity Hub as we showed above.
+1. You can now click on the project to open it. We used Unity 2022.3.18f1 to create the sample; if you use a different version you will get a warning. The project is very simple and should be safe to convert. However, if in doubt, we recommend installing 2022.3.18f1 via the Unity Hub as we showed above.
 
 The project will now open in Unity. Once loaded (the first time can take a while), click on the _Play_ button to run the sample. This will run the project inside the editor. You will see a spinning cube.
 
@@ -82,4 +82,4 @@ The project will now open in Unity. Once loaded (the first time can take a while
 
 In the top right of the _Game_ window, click on _Stats_ to show the _Statistics_ popup. You will notice the framerate is much lower than you might expect. For such a simple example we could reasonably expect to hit the maximum rate of the display (e.g. 60fps or better).
 
-Later we'll use the Profiler to investigate but before that we'll deploy to Android to check if the behaviour is the same.
+Later we'll use the Profiler to investigate, but before that we'll deploy to Android to check if the behaviour is the same.

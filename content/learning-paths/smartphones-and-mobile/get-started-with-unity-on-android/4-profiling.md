@@ -14,7 +14,7 @@ We can activate the profiler both in the editor and when we're running on a conn
 
 We can also insert statements into our code to gather custom data about the app. More about this later.
 
-Although we won't get accurate data for our target device, its useful to run the Profiler in the editor so we can quickly get an overview of how it works.
+Although we won't get accurate data for our target device, it is useful to run the Profiler in the editor so we can quickly get an overview of how it works.
 
 After this learning path, we recommend you read the [Profiler overview](https://docs.unity3d.com/Manual/Profiler.html) on the Unity web site.
 
@@ -34,4 +34,4 @@ The CPU Usage graph at the top-right shows the CPU activity of the app. The Prof
 
 The various types of activity recorded can be seen in more detail if you scroll down the CPU Usage panel. The areas measured include rendering (CPU-side calls), scripts, physics, animation and UI etc. You can also see details regarding memory usage, audio, video and others.
 
-You may not need all of the areas at once but its worth knowing what's available should you ever need it.
+You may not need all of the areas at once but it is worth knowing what's available should you ever need it.
