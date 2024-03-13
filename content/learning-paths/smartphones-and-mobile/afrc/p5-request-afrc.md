@@ -8,8 +8,7 @@ layout: learningpathall
 
 ## Request fixed-rate compression
 
-This happens at image creation time.
-To request fixed-rate compression, provide a `VkImageCompressionControlEXT` structure to the `pNext` chain of `VkImageCreateInfo`:
+Compression is specified at image creation time. To request fixed-rate compression, provide a `VkImageCompressionControlEXT` structure to the `pNext` chain of `VkImageCreateInfo`:
 
 ```C
 VkImageCompressionControlEXT compression_control{VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT};
