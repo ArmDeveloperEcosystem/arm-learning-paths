@@ -39,17 +39,17 @@ Full installation and application launch instructions are given in the Arm Perfo
 
 ### Windows
 
-Run the supplied `Arm_Mobile_Studio_<version>.exe` installer, and follow on-screen instructions.
+Run the supplied `Arm_Performance_Studio_<version>.exe` installer, and follow on-screen instructions.
 
 ### Linux
 
-Unpack the supplied `Arm_Mobile_Studio_<version>_linux.tgz` installation package.
+Unpack the supplied `Arm_Performance_Studio_<version>_linux.tgz` installation package.
 ```command
-tar -xf Arm_Mobile_Studio_2023.5_linux_x86-64.tgz
+tar -xf Arm_Performance_Studio_<version>_linux_x86-64.tgz
 ```
 ### macOS
 
-Run the supplied `Arm_Mobile_Studio_<version>_macos.dmg` installer, and follow on-screen instructions.
+Run the supplied `Arm_Performance_Studio_<version>_macos.dmg` installer, and follow on-screen instructions.
 
 ## Licensing
 
