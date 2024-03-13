@@ -7,7 +7,7 @@ weight: 8 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) is a developer tool that provides detailed frame-based analysis for mobile graphics on Android applications. Capture the API calls and rendering for a problem frame to discover what might be slowing down your application.
+[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) is a developer tool designed to offer in-depth frame-based analysis for mobile graphics in Android applications. By capturing the API calls and rendering processes of a specific frame, you can identify potential performance bottlenecks that may be causing slowdowns in your application.
 
 ## Prerequisites
 
@@ -53,7 +53,7 @@ Explore each frame to evaluate how efficiently they were rendered on the device.
 
 1. Look at the Render Graph to see how the frame was constructed.
 
-    ![Render Graph](images/fa_render_graph.png)
+    ![Render Graph](images/FA_render_graph_1.1.gif)
 
     Evaluate the render graph to look for render passes or input or output attachments that aren’t used in the final output, and could be removed, saving processing power and bandwidth.
 

@@ -1,7 +1,7 @@
 ---
 title: Get started with Arm Performance Studio for mobile
 
-description: Learn how to use each of the tools supplied with Arm Performance Studio, formerly known as Arm Mobile Studio.
+description: Learn how to use each of the tools supplied with Arm Performance Studio (formerly known as Arm Mobile Studio).
 
 minutes_to_complete: 60
 

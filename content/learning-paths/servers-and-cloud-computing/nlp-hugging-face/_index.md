@@ -3,10 +3,10 @@ title: Run a Natural Language Processing (NLP) model from Hugging Face on Arm se
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to run a NLP model from Hugging Face using PyTorch on Arm based servers. 
+who_is_this_for: This is an introductory topic for software developers who want to learn how to run a Natural Language Processing (NLP) model from Hugging Face using PyTorch on Arm based servers. 
 
 learning_objectives:
-    - Deploy a PyTorch NLP model from Hugging face on an Arm AArch64 CPU
+    - Deploy a PyTorch NLP model from Hugging Face on an Arm AArch64 CPU
     - Use the PyTorch profiler to analyze the execution time of the model
 
 prerequisites:
