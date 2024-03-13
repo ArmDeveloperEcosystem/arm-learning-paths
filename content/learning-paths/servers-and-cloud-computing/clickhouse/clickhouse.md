@@ -77,7 +77,7 @@ Importing the data takes more than 5 minutes.
 clickhouse-client --time --query "INSERT INTO hits FORMAT TSV" < hits.tsv
 ```
 
-The data is the [Anonymized Web Analytics dataset](https://clickhouse.com/docs/en/getting-started/example-datasets/metrica/).
+The data used is the [Anonymized Web Analytics dataset](https://clickhouse.com/docs/en/getting-started/example-datasets/metrica/).
 
 5. Execute the benchmark 
 
