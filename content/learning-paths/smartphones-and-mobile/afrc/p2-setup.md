@@ -14,7 +14,7 @@ Otherwise, you may use a test application like those provided by the [Khronos Vu
 
 {{% notice Note %}}
 You do not need to create a new Vulkan Sample to complete this Learning Path but you can familiarize yourself with the code examples and save them as a reference.
-The Vulkan Sample in the previous step allows you to experiment with AFRC without any coding required.
+The Vulkan Sample provided in the previous step allows you to experiment with AFRC without any coding required.
 {{% /notice %}}
 
 ### Build Khronos' Vulkan Samples
