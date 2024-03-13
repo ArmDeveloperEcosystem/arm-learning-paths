@@ -17,7 +17,7 @@ Render passes flow from left to right. The render pass that outputs to the swapc
 
     You should clear or invalidate input and output attachments that are not used to avoid unnecessary memory accesses. If clear or invalidate calls are present within a render pass, they are shown in the `Frame Hierarchy` view.  
 
-1. In this example, we can see that some render passes have no consumers at all, they do not contribute to the final rendered output.
+1. In this example, we can see that some render passes have no consumers at all and that they do not contribute to the final rendered output.
 
     ![Redundant render passes in Frame Advisor's Render Graph alt-text#center](Render_graph_egypt_redundant_rps.png "Figure 4. Redundant render passes")
 
