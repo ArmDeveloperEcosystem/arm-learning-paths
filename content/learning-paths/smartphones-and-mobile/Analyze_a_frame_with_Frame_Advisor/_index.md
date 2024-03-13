@@ -20,13 +20,14 @@ author_primary: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
-subjects: Mobile application profiling
+subjects: Performance and Architecture
 armips:
     - Mali GPUs
     - Immortalis GPUs
 tools_software_languages:
-    - Android
+    - Frame Advisor
 operatingsystems:
+    - Android
    
 
 
