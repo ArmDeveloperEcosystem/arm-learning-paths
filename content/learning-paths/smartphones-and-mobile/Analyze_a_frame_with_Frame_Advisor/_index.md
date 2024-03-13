@@ -19,7 +19,7 @@ prerequisites:
 author_primary: Julie Gaskin
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: Mobile application profiling
 armips:
     - Mali GPUs
