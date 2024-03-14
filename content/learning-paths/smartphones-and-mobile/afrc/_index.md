@@ -3,7 +3,7 @@ title: Learn about Arm Fixed Rate Compression (AFRC)
 
 minutes_to_complete: 25
 
-who_is_this_for: Developers of Android applications and mobile games, interested in learning how to enable Arm Fixed Rate Compression (AFRC) to improve performance.
+who_is_this_for: Software developers of Android applications and mobile games who are interested in learning how to enable Arm Fixed Rate Compression (AFRC) to improve performance.
 
 learning_objectives: 
     - Query for fixed-rate compression support.
@@ -11,7 +11,8 @@ learning_objectives:
     - Verify that compression is applied.
 
 prerequisites:
-    - An appropriate Android device (e.g. Google Pixel 8) supporting the required Vulkan extensions.
+    - An appropriate Android device (e.g., Google Pixel 8) supporting the required Vulkan extensions.
+    - Knowledge of the Vulkan API
     - A Vulkan application that creates and uses images. This Learning Path shows how to use an API Sample in the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) as an example.
 
 author_primary: Jose-Emilio Munoz-Lopez, Arm

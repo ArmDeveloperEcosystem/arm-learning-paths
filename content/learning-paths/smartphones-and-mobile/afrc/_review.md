@@ -24,7 +24,7 @@ review:
                
     - questions:
         question: >
-            What is the VK_EXT_image_compression_control extension used for?
+            What is the `VK_EXT_image_compression_control` extension used for?
         answers:
             - Checking if AFBC was applied
             - Requesting AFRC
@@ -32,7 +32,7 @@ review:
             - All of the above
         correct_answer: 4
         explanation: >
-            The extension allows to control the type and level of compression applied to images.
+            The extension controls the type and level of compression applied to images.
             Additionally, it may also be used to check if a given image (e.g. the swapchain) is being automatically compressed with AFBC.
 
 

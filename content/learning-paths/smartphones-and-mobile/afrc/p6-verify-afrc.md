@@ -25,8 +25,7 @@ image_subresource.imageSubresource.arrayLayer = 0;
 vkGetImageSubresourceLayout2EXT(get_device().get_handle(), image_handle, &image_subresource, &subresource_layout);
 ```
 
-Inspect the values written to the `imageCompressionFlags` and  `imageCompressionFixedRateFlags` components of `VkImageCompressionPropertiesEXT`.
-You may print like you did when checking for compression support:
+Inspect the values written to the `imageCompressionFlags` and  `imageCompressionFixedRateFlags` components of `VkImageCompressionPropertiesEXT`:
 
 ```C
 LOGI("Created image reports {}", compression_to_string(applied_compression_properties.imageCompressionFlags));
@@ -40,4 +39,4 @@ I/VulkanSamples: [info] Created image reports VK_IMAGE_COMPRESSION_FIXED_RATE_EX
 I/VulkanSamples: [info] Created image reports VK_IMAGE_COMPRESSION_FIXED_RATE_5BPC_BIT_EXT
 ```
 
-You have now successfully added fixed-rate compression to your image, saving memory and bandwidth.
+You have now successfully added fixed-rate compression to your image, saving both memory and bandwidth.

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Query for compression support
 
-To create a [VkImage](https://docs.vulkan.org/spec/latest/chapters/resources.html#resources-images), you need a [VkImageCreateInfo](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html) structure defining the image's properties.
+To create a VkImage, you need a [VkImageCreateInfo](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateInfo.html) structure defining the image's properties.
 Before creating the image, you can use these properties to query if the image supports fixed-rate compression on your platform.
 For instance, the structure may look like this:
 
@@ -36,7 +36,7 @@ image_format_info.tiling = image_create_info.tiling;
 image_format_info.usage  = image_create_info.usage;
 ```
 
-And, additionally, add a [VkImageCompressionControlEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionControlEXT.html) to its  `pNext` chain:
+Additionally, add a [VkImageCompressionControlEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionControlEXT.html) to its `pNext` chain:
 
 ```C
 VkImageCompressionControlEXT compression_control{VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_CONTROL_EXT};
@@ -45,7 +45,7 @@ compression_control.flags = VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT;
 image_format_info.pNext  = &compression_control;
 ```
 
-You may then prepare a [VkImageFormatProperties2](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageFormatProperties2.html) structure, with a [VkImageCompressionPropertiesEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionPropertiesEXT.html) in its `pNext` chain:
+You may then prepare a `VkImageFormatProperties2` structure, with a [VkImageCompressionPropertiesEXT](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCompressionPropertiesEXT.html) in its `pNext` chain:
 
 ```C
 VkImageCompressionPropertiesEXT supported_compression_properties{VK_STRUCTURE_TYPE_IMAGE_COMPRESSION_PROPERTIES_EXT};
@@ -54,14 +54,14 @@ VkImageFormatProperties2 image_format_properties{VK_STRUCTURE_TYPE_IMAGE_FORMAT_
 image_format_properties.pNext = &supported_compression_properties;
 ```
 
-Finally, put these two together in a call to [vkGetPhysicalDeviceImageFormatProperties2KHR](https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/vkGetPhysicalDeviceImageFormatProperties2KHR.html):
+Finally, put these two together in a call to `vkGetPhysicalDeviceImageFormatProperties2KHR`:
 
 ```C
 vkGetPhysicalDeviceImageFormatProperties2KHR(get_device().get_gpu().get_handle(), &image_format_info, &image_format_properties);
 ```
 
 You can then inspect the values written to `VkImageCompressionPropertiesEXT` to determine if the image supports fixed-rate compression.
-For instance you may use the print function helper provided below to inspect the logs when running your sample:
+For instance, you may use the print function helper provided below to inspect the logs when running your sample:
 
 ```C
 LOGI("Image supports {}", compression_to_string(supported_compression_properties.imageCompressionFlags));
@@ -161,10 +161,10 @@ I/VulkanSamples: [info] Image supports VK_IMAGE_COMPRESSION_FIXED_RATE_NONE_EXT
 
 This means that the image does not support any sort of compression.
 Possible reasons are discussed in [Arm GPU Best Practices Developer Guide](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFRC?lang=en).
-Depending on the device, image properties like `image_create_info.format` and `image_create_info.usage` (e.g. storage images) may be incompatible with fixed-rate compression.
+Depending on the device, image properties like `image_create_info.format` and `image_create_info.usage` (e.g., storage images) may be incompatible with fixed-rate compression.
 
-Try using different values for these in case you find a suitable combination for your application, that supports fixed-rate compression.
-Otherwise, for better performance, try to find one that at least supports AFBC if possible, following the guidance found in [the guide](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en), so that the output ideally looks like this:
+Try using different values for these in case you find a suitable combination for your application that supports fixed-rate compression.
+Otherwise, for better performance, try to find one that at least supports AFBC if possible, following the guidance found in [the AFBC guide](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures-for-Vulkan?lang=en), so that the output ideally looks like this:
 
 ```output
 I/VulkanSamples: [info] IMAGE SUPPORTS VK_IMAGE_COMPRESSION_DEFAULT_EXT
