@@ -13,7 +13,7 @@ A few things were done to reduce the time it takes to train the ML agents to a r
 
 ### Multiple simultaneous battles
 
-6 "arenas" are employed in the training scene (you may have to adjust your view in Unity to be able to see all of them). Running multiple battles simultaneously speeds up the training. If you have more CPU power, you could use more.
+Six "arenas" are employed in the training scene (you may have to adjust your view in Unity to be able to see all of them). Running multiple battles simultaneously speeds up the training. If you have more CPU power, you could use more.
 
 ### Fast forward time
 
