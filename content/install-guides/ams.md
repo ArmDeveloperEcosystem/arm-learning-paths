@@ -36,7 +36,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 It comprises of a suite of easy-to-use tools that show you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery.
 
-[Frame Advisor](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/arm-mobile-studio-2023-5) is available in `2023.5` and later.
+[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) is available in `2023.5` and later.
 
 [RenderDoc for Arm GPUs](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/beyond-mobile-arm-mobile-studio-is-now-arm-performance-studio) is available in `2024.0` and later.
 
@@ -46,7 +46,7 @@ All features of Arm Performance Studio are available free of charge without any 
 
 Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0).
 
-Full installation and application launch instructions are given in the Arm Mobile Studio [Release Notes](https://developer.arm.com/documentation/107649).
+Full installation and application launch instructions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
 ### Windows
 
@@ -64,4 +64,4 @@ Run the supplied `Arm_Performance_Studio_<version>_macos_x86-64.dmg` installer, 
 
 ## Get started
 
-See the [Get started with Arm Performance Studio for mobile](/learning-paths/smartphones-and-mobile/ams/) learning path for a collection of tutorials for each component of Performance Studio.
+See the [Get started with Arm Performance Studio for Mobile](/learning-paths/smartphones-and-mobile/ams/) learning path for a collection of tutorials for each component of Performance Studio.
