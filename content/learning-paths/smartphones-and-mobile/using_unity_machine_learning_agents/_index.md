@@ -17,15 +17,10 @@ prerequisites:
 author_primary: Arm
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Gaming
 armips:
     - Cortex-A
-    - armv8
-    - aarch32
-    - aarch64
-    - arm64
-    - arm architecture
 operatingsystems:
     - Android
 tools_software_languages:
