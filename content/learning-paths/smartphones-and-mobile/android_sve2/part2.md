@@ -98,7 +98,7 @@ void additionOfProduct(const std::vector<float>& a,
 
 The additionOfProduct takes four vectors as input. The first three denote a, b, and c vectors, and the forth is the vector, which will store the result. Given these parameters, the function ensures that all vectors have the same size. Then, the function uses a `for` loop to calculate the result as a * b + c.
 
-## Implement addition of product with SVE2 intrincs
+## Implement addition of product with SVE2 intrinsics
 The SVE2 intrinsics are defined in the arm_sve.h header file, which we have already included in native-lib.cpp. Writing code with these intrinsics closely resembles writing standard C code. The compiler undertakes numerous optimizations to enhance performance. These include the efficient utilization of registers for variable storage, ensuring that function calls adhere to the conventions of the C language to facilitate optimized code generation, and automatically converting parts of loops that do not use intrinsics into vectorized instructions to improve execution speed. Moreover, in scenarios where a direct intrinsic is not available, the compiler selects the most optimal instructions to use.
 
 However, programmers bear responsibility for several critical aspects:
