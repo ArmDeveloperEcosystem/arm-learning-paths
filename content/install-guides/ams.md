@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Arm Performance Studio for Mobile
+title: Arm Performance Studio
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -29,28 +29,39 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-[Arm Performance Studio for Mobile](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio) is a performance analysis tool suite for developers to performance test their Android apps on Mali-based GPUs. It comprises of 4 easy-to-use tools that show you how well your game or app performs on off-the-shelf devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery. 
+[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile) (formally known as `Arm Mobile Studio`) is a performance analysis tool suite for various application developers:
+
+* Android application developers
+* Linux application developers in Embedded and Cloud segments
+
+It comprises of a suite of easy-to-use tools that show you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery.
+
+[Frame Advisor](https://developer.arm.com/Tools%20and%20Software/Frame%20Advisor) is available in `2023.5` and later.
+
+[RenderDoc for Arm GPUs](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/beyond-mobile-arm-mobile-studio-is-now-arm-performance-studio) is available in `2024.0` and later.
+
+All features of Arm Performance Studio are available free of charge without any additional license as of the `2022.4` release.
 
 ## Installation
 
-Arm Performance Studio for Mobile is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0).
+Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0).
 
-Full installation and application launch instructions are given in the Arm Performance Studio for Mobile [Release Notes](https://developer.arm.com/documentation/107649).
+Full installation and application launch instructions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
 ### Windows
 
-Run the supplied `Arm_Performance_Studio_<version>.exe` installer, and follow on-screen instructions.
+Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer, and follow on-screen instructions.
 
 ### Linux
 
-Unpack the supplied `Arm_Performance_Studio_<version>_linux.tgz` installation package.
+Unpack the supplied `Arm Performance Studio` bundle to the desired location. For example:
 ```command
-tar -xf Arm_Performance_Studio_<version>_linux_x86-64.tgz
+tar -xf Arm_Performance_Studio_2024.0_linux_x86-64.tgz
 ```
 ### macOS
 
-Run the supplied `Arm_Performance_Studio_<version>_macos.dmg` installer, and follow on-screen instructions.
+Run the supplied `Arm_Performance_Studio_<version>_macos_x86-64.dmg` installer, and follow on-screen instructions.
 
-## Licensing
+## Get started
 
-As of the 2022.4 release, all features of Arm Performance Studio for Mobile are available for use free of charge without any additional license.
+See the [Get started with Arm Performance Studio for Mobile](/learning-paths/smartphones-and-mobile/ams/) learning path for a collection of tutorials for each component of Performance Studio.
