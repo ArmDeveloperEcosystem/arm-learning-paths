@@ -19,7 +19,8 @@ This script does the following:
 
 Performance Advisor uses a Python script to connect to your device. You will need `Python 3.6` or later installed on your host machine.
 
-Build your application, and setup the Android device as described in [Setup tasks](./setup_tasks.md).
+Build your application, and setup the Android device as described in [Setup tasks](../setup_tasks).
+
 
 ## Connect to the device
 
