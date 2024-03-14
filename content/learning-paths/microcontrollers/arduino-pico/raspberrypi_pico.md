@@ -14,7 +14,7 @@ To get started on your first embedded project, you can use a cheap and widely av
 
 ![RaspberryPi Pico](_images/raspberry_pi_pico.jpg)
 
-You were probably expecting an Arduino board, rather than a Raspberry Pi board, but it turns out that the Arduino core package that supports the Arduino Nano RP2040 will also support the Raspberry Pi Pico, because they use the exact same RP2040 microprocessor. Plus the Pico is less expensive, currently retailing for less than $5 USD. As you learn, you can also use the Raspberry Pi Pico with other programming environments, such as MicroPython.
+You were probably expecting an Arduino board, rather than a Raspberry Pi board but it turns out that the Arduino core package that supports the Arduino Nano RP2040 will also support the Raspberry Pi Pico, because they use the exact same RP2040 microprocessor. Plus the Pico is less expensive, currently retailing for less than $5 USD (you can also use the Raspberry Pi Pico with other programming environments, such as MicroPython).
 
 ## Accessories
 
@@ -27,7 +27,7 @@ First a PIR motion sensor. This sensor reacts to infrared photons emitted by a w
 
 ![Electric Buzzer](_images/buzzer-pin-diagram.png.webp)
 
-Second, a very simple electric buzzer. You can get fancy with one of these and make it play different sounds with something called Pulse Width Modulation (PWM), but for simplicity you can give it a constant voltage which will result in a high-pitched beeping noise.
+Second, a very simple electric buzzer. You could get fancy with one of these and make it play different sounds with something called Pulse Width Modulation (PWM) but, for simplicity, you can give it a constant voltage which will result in a high-pitched beeping noise.
 
 ![Breadboard](_images/Breadboard.jpeg)
 
@@ -41,7 +41,7 @@ If you're not familiar with a breadboard, the image above shows you how all of t
 
 ![RaspberryPi Pico](_images/pico_on_breadboard.png)
 
-Seat your Raspberry Pi Pico on the breadboard so that its rows of pins sit on either side of the center divider. Make sure that it's firmly pressed all the way down, but be careful not to bend any of the pins.
+Seat your Raspberry Pi Pico on the breadboard so that its rows of pins sit on either side of the center divider. Make sure that it's firmly pressed all the way down but be careful not to bend any of the pins.
 
 ### Step 2: PIR ground
 
@@ -53,7 +53,7 @@ Using a black jumper wire, connect the ground pin of your PIR sensor to pin #38 
 
 ![PIR voltage](_images/pir_sensor_2.png)
 
-Using a red wire, connect the input voltage pin of your PIR sensor to pin #36 on your Pico. This pin is a 3.3 volt pin on the Pico, and will supply power to your PIR sensor.
+Using a red wire, connect the input voltage pin of your PIR sensor to pin #36 on your Pico. This pin is a 3.3 volt pin on the Pico and will supply power to your PIR sensor.
 
 ### Step 4: PIR data
 
@@ -73,7 +73,7 @@ Next, it's time to connect the buzzer. Start by connecting the buzzer's ground p
 
 ![Buzzer input](_images/piezo_2.png)
 
-Then, connect the buzzer's input pin to pin #25 on your Pico. This is another GPIO pin, this time GPIO #25.
+Then, connect the buzzer's input pin to pin #25 on your Pico. This is another GPIO pin, this time GPIO #19.
 
 ### Review
 
