@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   Proceed to Get Started with Arm Mobile Studio to continue learning about Android performance analysis.
+   Proceed to Get Started with Arm Performance Studio for mobile to continue learning about Android performance analysis.
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
@@ -19,6 +19,10 @@ recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
     # General online references                 (type: website) 
 
 further_reading:
+    - resource:
+        title: Learn the architecture - Introducing SVE2 guide 
+        link: https://developer.arm.com/documentation/102340/0100
+        type: documentation
     - resource:
         title: Exploring the SVE intrinsics
         link: https://developer.arm.com/documentation/102699/0100/Optimizing-with-intrinsics
