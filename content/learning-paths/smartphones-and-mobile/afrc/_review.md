@@ -9,7 +9,7 @@ review:
         correct_answer: 2
         explanation: >
             AFRC guarantees the lowest memory footprint, but bandwidth reduction depends on the image being compressed.
-            AFBC uses variable bitrates which require slightly more memory than uncompressed images, but can compress some blocks (e.g. solid color) better than AFRC.
+            AFBC uses variable bit rates which require slightly more memory than uncompressed images, but can compress some blocks (e.g. solid color) better than AFRC.
 
     - questions:
         question: >
