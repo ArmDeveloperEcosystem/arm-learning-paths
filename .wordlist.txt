@@ -2353,4 +2353,50 @@ RandomMovement
 BurstCompile
 IJob
 dynamicCollisions
-
+ScriptHolder
+AOT
+AggressiveInlining
+Bitwise
+BurstNeonCalculationScript
+Compiling Dictionary...
+DoCharactersPlain
+DoSetup
+DoWallsBurst
+DoWallsNeon
+DoWallsPlain
+DynamicCollisionCalculations
+DynamicCollisionObject
+IsNeonSupported
+MethodImpl
+MethodImplOptions
+Misspelled words:
+Monobehaviour
+NeonAABBObjCollisionDetectionUnrolled
+NeonRadiusObjCollisionDetectionUnrolled
+NoAlias
+Running Task: Markdown...
+ScriptHolder
+SpawningScript
+StaticCollisionCalculations
+StaticCollisionObject
+StaticCollisionObjects
+Using aspell to spellcheck Markdown
+VSTR
+bitwise
+collisioncalc
+detections
+foreach
+inlined
+iteratively
+occured
+spawner
+staticObjects
+tblindex
+vcgeq
+vdupq
+vld
+vmvn
+vorrq
+vqtbl
+vqtbx
+wmvn
