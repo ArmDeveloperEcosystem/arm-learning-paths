@@ -3,7 +3,7 @@ title: Get started with WindowsPerf
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for developers working on laptops and desktops and new to the Arm architecture.
+who_is_this_for: This is an introductory topic for software developers working on laptops and desktops and new to the Arm architecture.
 
 learning_objectives:
     - Install WindowsPerf on Windows on Arm machine

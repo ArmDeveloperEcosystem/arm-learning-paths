@@ -22,7 +22,7 @@ Later learning paths will address deploying to an Arm-based Android device and h
 If you would like to take this learning path further, try the following:
 
 * Deploy to a Windows Arm device using the build option for UWP (Universal Windows Platform)
-* Teams (multiple enemies and/or co-operative with the player) - you'll need to train them to work together. Hint: look at adding team rewards and possibly self-sacrifice (so one character may sacrifice itself for the betterment of the team; the team reward would have to make such an action worthwhile). Also look at training the team characters together.
+* Teams (multiple enemies and/or co-operative with the player) - you'll need to train them to work together. Hint: look at adding team rewards and possibly self-sacrifice (so one character may sacrifice itself for the betterment of the team. The team reward would have to make such an action worthwhile). Also look at training the team characters together.
 * Non-battle characters for different sorts of characters, games and different conditions for winning and losing.
 
 ## Further reading

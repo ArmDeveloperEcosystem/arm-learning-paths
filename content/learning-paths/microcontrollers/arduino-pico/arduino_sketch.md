@@ -16,13 +16,13 @@ Follow the [Arduino core for the Raspberry Pi Pico](/install-guides/arduino-pico
 
 ## Load the PIR sensor sketch
 
-This Learning Path provides a complete sketch you can upload onto your Raspberry Pi Pico. A step-by-step walk-through what it does is provided below. 
+This Learning Path provides a complete sketch that you can upload onto your Raspberry Pi Pico. A step-by-step guide is provided below. 
 
-First, open the sketch in the Arduino IDE.
+First, open the sketch in the Arduino IDE:
 
-1. Right click and select `Save Link As` to save [pir_sensor.ino](../pir_sensor_1.ino) sketch to your computer
+1. Right click and select `Save Link As` to save the [pir_sensor.ino](../pir_sensor_1.ino) sketch to your computer
 2. In the Arduino IDE, go to `File -> Open`
-3. Find and select the `pir_sensor.ino` file you downloaded to your computer and click `Open`
+3. Find and select the `pir_sensor.ino` file that you just downloaded to your computer and click `Open`
 
 ## Code walk-through
 
@@ -30,7 +30,7 @@ You should review the code and learn about what it does.
 
 ### Define which pins your components are connected to
 
-The first few lines define new variables that will store the number of the pins that are connected to your physical components.
+The first few lines of the code define new variables that will store the number of the pins that are connected to your physical components:
 
 
 ```arduino {linenos=table,linenostart=2}
@@ -52,7 +52,7 @@ The last variable, `ledPin`, holds the pin number for the LED that is built into
 
 ### Define runtime variables
 
-The next few lines define the variables that the program uses to store its internal state.
+The next few lines define the variables that the program uses to store its internal state:
 
 ```arduino {linenos=table,linenostart=12}
 // This variable will hold the current value of the motion detection pin's charge
@@ -74,7 +74,7 @@ Finally, the `counter` variable holds the number of times motion was detected si
 
 ### Helper functions
 
-To make the code easier to read and maintain there are a few helper functions called from the main code.
+To make the code easier to read and maintain there are a few helper functions called from the main code:
 
 ```arduino {linenos=table,linenostart=23}
 // Beep the buzzer twice in quick succession
@@ -101,7 +101,7 @@ void ledOff() {
 
 The first is `doBeep()` which turns on and off power to the buzzer in a way that makes it play two short beeps.
 
-The next two, `ledOn()` and `ledOff()` set the LED pin's voltage to either `HIGH` or `LOW`, respectively, turning it either on or off.
+The next two, `ledOn()` and `ledOff()`, set the LED pin's voltage to either `HIGH` or `LOW`, respectively, turning it either on or off.
 
 Note that these functions use the pin variables defined at the start of the sketch.
 
@@ -109,7 +109,7 @@ Note that these functions use the pin variables defined at the start of the sket
 
 Now it's time to get into the actual program. 
 
-The Arduino Core software expects your sketch to provide two functions, `setup()` and `loop()`.  The first of these, `setup()`, is called once and only once when your device is powered on. This is where you put code to initialize your environment and hardware. 
+The Arduino Core software expects your sketch to provide two functions, `setup()` and `loop()`.  The first of these, `setup()`, is called once and only once when your device is powered on. This is where you put code to initialize your environment and hardware: 
 
 ```arduino {linenos=table,linenostart=45}
 void setup() {
@@ -133,15 +133,15 @@ void setup() {
 }
 ```
 
-First, initialize the `Serial` interface so that you can write output over our USB connection. `Serial.begin(9600)` turns on the device's onboard serial interface with a baud rate of 9600 (which is low, but more than enough for writing output messages).
+First, initialize the `Serial` interface so that you can write output over the USB connection. `Serial.begin(9600)` turns on the device's onboard serial interface with a baud rate of 9600 (which is low but more than enough for writing output messages).
 
-Next, the sketch tells Arduino core how each of the pins will be used, either as `INPUT` for reading voltage, or `OUTPUT` for setting voltage. The motion sensor is the only pin we will be getting input from, the others we will be setting it.
+Next, the sketch tells Arduino core how each of the pins will be used, either as `INPUT` for reading voltage or `OUTPUT` for setting voltage. The motion sensor is the only pin we will be getting input from, for the others we will be setting it.
 
-Once setup is done, call the `ledOn()` helper function to turn on the board's LED, indicating it's setup and ready to start detecting motion. Additionally, write a message to the USB serial connection with `Serial.println()` to indicate the setup is complete.
+Once setup is done, call the `ledOn()` helper function to turn on the board's LED, indicating that it's setup and ready to start detecting motion. Additionally, write a message to the USB serial connection with `Serial.println()` to indicate the setup is complete.
 
 ### Loop
 
-Once the `setup()` function finishes, the Arduino core software calls the `loop()` function, and it keeps calling it over and over again, as fast as it can, which means many times per second. Not only is this unnecessary most of the time, it'll also result in a much higher energy use which will drain a battery very quickly.
+Once the `setup()` function finishes, the Arduino core software calls the `loop()` function and keeps on calling it over and over again, as fast as it can, which means many times per second. Not only is this unnecessary most of the time, it'll also result in a much higher energy use which will drain the battery very quickly.
 
 ```arduino {linenos=table,linenostart=66}
 void loop() {
@@ -165,7 +165,7 @@ Next, review the logic of the motion detector. The first thing to do is read the
   if (val == HIGH) {
 ```
 
-Now, because of the nature of the passive infrared sensor, and also because the code is running twice per second, it's possible that you will read a `HIGH` value multiple times for the same motion event, but you really only want to respond once per event.
+Note that because of the nature of the passive infrared sensor and the fact that the code is running twice per second, it's possible that you will read a `HIGH` value multiple times for the same motion event. But you really only want to respond once per event.
 
 So, in order to determine if this is a new motion event or not, you need to check the `motionState` variable that stores the detection value between calls to `loop()`.
 
@@ -188,17 +188,17 @@ So, in order to determine if this is a new motion event or not, you need to chec
       motionState = HIGH;
 ```
 
-If the value of `motionState` is `LOW`, that means there wasn't motion detected on the previous iteration of our loop, so this is a new motion event, and generates a response.
+If the value of `motionState` is `LOW`, it means there wasn't any motion detected in the previous iteration of our loop, so this is a new motion event and it generates a response.
 
-The first thing the code does print a message to the USB output, using the same `Serial.println()` used in `setup()`, to indicate that a new motion event has happened.
+The first thing the code does is print a message to the USB output, using the same `Serial.println()` used in `setup()`, to indicate that a new motion event has happened.
 
-Next, call the `ledOff()` and `doBeep()` helper functions for visual and audible indication of motion being detected. Also, increase the number in our `counter` variable, and print the new value to the USB output.
+Next, call the `ledOff()` and `doBeep()` helper functions for visual and audible indications of motion being detected. Also, increase the number in the `counter` variable and print the new value to the USB output.
 
-Lastly, set `motionState` to `HIGH`, so that on the next iteration of `loop()` the motion event has been responded to. 
+Lastly, set `motionState` to `HIGH`, so that in the next iteration of `loop()` the motion event has been responded to. 
 
 ##### Previous motion
 
-If, however, `motionState` was not `LOW`, then the `HIGH` value from the sensor isn't a new event, and there is no need to respond to it. 
+If, however, `motionState` was not `LOW`, then the `HIGH` value from the sensor isn't a new event, and there is therefore no need to respond to it: 
 
 ```arduino {linenos=table,linenostart=93}
     // If we had previously been in a HIGH state (motion detected) then we're seeing the same motion event we've already handled
@@ -210,11 +210,11 @@ If, however, `motionState` was not `LOW`, then the `HIGH` value from the sensor 
     }
 ```
 
-Instead, simply print a message to the USB output indicating waiting for the next event, and add a further 5 second delay to the `loop()` so that the sensor has a chance to revert back to the no-motion state (this takes 3-5 seconds for these sensors).
+Instead, simply print a message to the USB output indicating it wait for the next event and add a further 5 second delay to the `loop()` so that the sensor has a chance to revert back to the no-motion state (this takes 3-5 seconds for these sensors).
 
 #### No Motion Detected
 
-If the sensor returns a `LOW` value, that means it's not currently detecting motion. When this happens, only respond if the previous call to `loop()` was detecting motion, indicating a change in state. 
+If the sensor returns a `LOW` value, it means it's not currently detecting motion. When this happens, only respond if the previous call to `loop()` was detecting motion, indicating a change in state: 
 
 ```arduino {linenos=table,linenostart=101}
   // A LOW value means the sensor isn't detecting motion, so we enter a waiting state
@@ -234,22 +234,22 @@ If the sensor returns a `LOW` value, that means it's not currently detecting mot
   }
 ```
 
-All that needs to be done is to set `motionState` back to `LOW` so that a future motion detection will trigger a response, and turn the board's LED back on to give a physical indication that it's in a ready state.
+All that needs to be done is to set `motionState` back to `LOW` so that any future motion detection will trigger a response. Also turn the board's LED back on to give a physical indication that it's in a ready state.
 
 Finally, write a message to the USB output indicating that the device is once again ready to detect a motion event.
 
 ## Run your code
 
-Now that you have a good understanding of the code, run it on your device. With your Raspberry Pi Pico board plugged in to your computer, and the [correct board and port selected in the Arduino IDE](/install-guides/arduino-pico), click the `Upload` button on the IDE to build and install it on your device.
+Now that you have a good understanding of the code, you should run it on your device. With your Raspberry Pi Pico board plugged in to your computer, and the [correct board and port selected in the Arduino IDE](/install-guides/arduino-pico), click the `Upload` button on the IDE to build and install it on your device.
 
 If successful, you should see the LED on your board light up. If you wave your hand in front of the sensor, you should also hear a double beep and see the LED turn off for a few seconds.
 
-You can further check that your code is running properly by opening the `Serial Monitor` from the `Tools` menu of the Arduino IDE. There you should see all of the output message, including count of detected motion events, coming from your sketch.
+You can further check that your code is running properly by opening the `Serial Monitor` from the `Tools` menu of the Arduino IDE. There you should see all of the output messages, including count of detected motion events, coming from your sketch.
 
 ![Debug output](_images/output.png)
 
 ## Conclusion
 
-Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. In this Learning Path you have learned the basics of embedded programming, the Arduino software stack, and some basic electronics as well as how to connect them together using a breadboard.
+Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. In this Learning Path, you have learned the basics of embedded programming, the Arduino software stack, and some basic electronics as well as how to connect them together using a breadboard.
 
-This example only scratches the surface of embedded programming. There is much more to learn, like how the Arduino core stack gets called in the first place, how it calls your `setup()` and `loop()` functions, how the `delay()` function can pause execution, and so much more.
+This example only scratches the surface of embedded programming. There is so much more to learn, like how the Arduino core stack gets called in the first place, how it calls your `setup()` and `loop()` functions, how the `delay()` function can pause execution, etc.

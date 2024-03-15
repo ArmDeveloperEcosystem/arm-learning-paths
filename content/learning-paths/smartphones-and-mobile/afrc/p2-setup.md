@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## How to run the code examples
 
-This Learning Path assumes you are familiar with the Vulkan API and have an application that uses it to create and render images on Android. If that is the case, you may skip this step.
+This Learning Path assumes you are already familiar with the Vulkan API and have an application that uses it to create and render images on Android. If that is the case, you may skip this step.
 
 Otherwise, you may use a test application like those provided by the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples).
 
 {{% notice Note %}}
-You do not need to create a new Vulkan Sample to complete this Learning Path, you may familiarize yourself with the code examples and save them as a reference.
-There is already a Vulkan Sample that allows you to experiment with AFRC without any coding required, see the [Image Compression Control](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/samples/performance/image_compression_control/README.adoc) performance sample.
+You do not need to create a new Vulkan Sample to complete this Learning Path but you can familiarize yourself with the code examples and save them as a reference.
+The Vulkan Sample provided in the previous step allows you to experiment with AFRC without any coding required.
 {{% /notice %}}
 
 ### Build Khronos' Vulkan Samples
 
-[Download](https://github.com/KhronosGroup/Vulkan-Samples?tab=readme-ov-file#setup) the repository:
+[Download](https://github.com/KhronosGroup/Vulkan-Samples?tab=readme-ov-file#setup) the Android repository:
 
 ```bash
 git clone --recurse-submodules https://github.com/KhronosGroup/Vulkan-Samples.git
@@ -27,10 +27,10 @@ cd vulkan-samples
 python ./scripts/generate.py android
 ```
 
-Follow the [build instructions](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#android) to run the example applications on an Android device.
+And follow the build instructions to run the example applications on an Android device.
 
 {{% notice  %}}
-You may use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#build-with-android-studio) to more easily build and run the samples, the build instructions explain how.
+You can use [Android Studio](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/docs/build.adoc#build-with-android-studio) to build and run the samples (the build instructions explain how to do this).
 {{% /notice %}}
 
 ### Create a test sample
@@ -74,7 +74,7 @@ I VulkanSamples: [info] Initializing Vulkan sample
 
 ### Modify the sample
 
-The code snippets in this Learning Path may be added anywhere within the `afrc::prepare_pipelines()` function in the `afrc.cpp` file.
+The code snippets shown so far can be added anywhere within the `afrc::prepare_pipelines()` function in the `afrc.cpp` file.
 
 To add a log, use the `LOGI`, `LOGW` and `LOGE` functions, for example:
 
@@ -87,7 +87,7 @@ void afrc::prepare_pipelines()
 }
 ```
 
-Will result in the following line being added to logcat:
+This will result in the following line being added to logcat:
 
 ```output
 I VulkanSamples: [info] Hello world!

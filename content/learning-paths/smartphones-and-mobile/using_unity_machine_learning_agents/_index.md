@@ -17,7 +17,7 @@ prerequisites:
 author_primary: Arm
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Gaming
 armips:
     - Cortex-A

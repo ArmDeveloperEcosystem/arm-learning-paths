@@ -1,9 +1,5 @@
 ---
-title: "Embedded programming with the Raspberry Pi Pico"
-
-draft: true
-
-minutes_to_complete: 10
+title: Getting Started with embedded programming with the Raspberry Pi Pico
 
 who_is_this_for: This is an introductory topic for software developers interested in embedded programming.
 minutes_to_complete: 60
