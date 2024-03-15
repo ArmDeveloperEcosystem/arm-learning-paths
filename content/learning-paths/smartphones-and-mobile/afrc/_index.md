@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An appropriate Android device (e.g., Google Pixel 8) supporting the required Vulkan extensions.
-    - Knowledge of the Vulkan API
+    - Knowledge of the Vulkan API.
     - A Vulkan application that creates and uses images. This Learning Path shows how to use an API Sample in the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) as an example.
 
 author_primary: Jose-Emilio Munoz-Lopez, Arm
