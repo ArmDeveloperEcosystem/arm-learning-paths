@@ -122,7 +122,7 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Plug your Android device into your computer
 
-1. Once recognised, your device will be listed in the drop-down menu next to _Run Device_
+1. Once recognized, your device will be listed in the drop-down menu next to _Run Device_
 
 1. The screenshot below shows the settings with a _Samsung S8_ selected as the _Run Device_
 

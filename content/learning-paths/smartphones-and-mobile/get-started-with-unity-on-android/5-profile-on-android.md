@@ -35,7 +35,7 @@ The Profiler window below shows a timeline of a capture made using a Samsung S8 
 
 Remembering that we're trying to find out why the spinning cube isn't running smoothly, there are a few things that stand out in the timeline:
 
-- In the main timeline at the top, the different areas of the app are coloured. The graph is filled with a lot of blue. On the left under _CPU Usage_ we can see that blue is for _Scripts_.
+- In the main timeline at the top, the different areas of the app are colored. The graph is filled with a lot of blue. On the left under _CPU Usage_ we can see that blue is for _Scripts_.
 
 - Unity has provided convenient figures for us to compare against (on the left we see tags showing 60FPS, 30FPS and 15FPS). It is telling us that in order to hit 60 frames per second, we would want our frame to take no more than 16 milliseconds. To hit 30 frames per second, we would want our frame to take less than 33ms, and less than 66ms if we targeted a frame rate of 15FPS.
 

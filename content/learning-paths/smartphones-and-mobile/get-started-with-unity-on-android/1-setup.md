@@ -80,6 +80,6 @@ The project will now open in Unity. Once loaded (the first time can take a while
 
 ![Spinning cube sample#center](images/app-running-slowly.png "Figure 8. The spinning cube sample running in the editor")
 
-In the top right of the _Game_ window, click on _Stats_ to show the _Statistics_ popup. You will notice the framerate is much lower than you might expect. For such a simple example we could reasonably expect to hit the maximum rate of the display (e.g. 60fps or better).
+In the top right of the _Game_ window, click on _Stats_ to show the _Statistics_ popup. You will notice the frame rate is much lower than you might expect. For such a simple example we could reasonably expect to hit the maximum rate of the display (e.g. 60fps or better).
 
-Later we'll use the Profiler to investigate, but before that we'll deploy to Android to check if the behaviour is the same.
+Later we'll use the Profiler to investigate, but before that we'll deploy to Android to check if the behavior is the same.

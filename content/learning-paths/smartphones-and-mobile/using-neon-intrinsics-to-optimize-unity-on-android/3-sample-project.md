@@ -24,7 +24,7 @@ To recap from [Profiling Unity apps on Android](/learning-paths/smartphones-and-
 ### Collision detection
 Walls are modeled as axis-aligned bounding boxes and simple box meshes. Collisions between characters (capsules) and walls are calculated using Axis-Aligned Bounding Box (AABB) collision detection functions (both the characters and the walls are treated as AABBs). Collisions between characters are calculated using radius-radius functions.
 
-![Collision deteection#center](images/collision-detection.png)
+![Collision detection#center](images/collision-detection.png)
 
 ### Runtime modes
 The sample runs in one of three modes; Plain, Burst and Neon. Plain mode uses a simple unoptimized implementation. Burst mode makes use of the auto-vectorization provided by the Burst compiler. The code and data are structured sensibly to give Burst the best chance of producing high performance code. Finally, in Neon mode, the code uses dedicated functions that contain hand-written code and calls to Neon intrinsics.
