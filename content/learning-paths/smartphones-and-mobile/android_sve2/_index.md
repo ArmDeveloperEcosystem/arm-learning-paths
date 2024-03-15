@@ -1,6 +1,5 @@
 ---
 title: Get started with Scalable Vector Extension 2 (SVE2) on Android
-draft: true
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use the Scalable Vector Extension 2 (SVE2) on Arm powered mobile devices running Android. 
