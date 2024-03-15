@@ -34,7 +34,9 @@ It also includes a simulation feature used by software developers for benchmarki
 
 ## Before you begin
 
-An Arm account is required to access Arm IP Explorer. To create an Arm account, enter your e-mail on the [registration form](https://www.arm.com/register) and follow the instructions.
+An Arm account is required to access Arm IP Explorer.
+
+To create an Arm account, enter your e-mail on the [registration form](https://www.arm.com/register) and follow the instructions.
 
 ## Installation
 
@@ -42,10 +44,44 @@ Arm IP Explorer is a cloud application and does not require any installation.
 
 You can access Arm IP Explorer using a browser by visiting [ipexplorer.arm.com](https://ipexplorer.arm.com/)
 
-If your Arm account is not setup for access you are presented with a request access form. Fill out the form and someone will review your request and grant access.
+If your Arm account is not setup for access you are presented with a request access form.
 
-## Get started
+Fill out the form and Arm will review your request and grant access if appropriate.
 
-Once you log in, there are several tutorials available to help you get started quickly. Click on Support in the upper right corner. 
+## Explore Arm IP
 
-IP Explorer is currently in beta. Additional Learning Paths will be available at the end of the beta period. 
+Use the `Explore` buttons to learn about the features of various Arm IP, and compare them against each other.
+
+They are broken down into different sections:
+* Explore Processors
+* Explore Interconnect
+* Explore System IPs
+* Explore Subsystems
+
+You can configure IP blocks to your needs to be able to make comparisons in terms of performance, power efficiency, silicon area, and other parameters.
+
+You can save your configured IP for later use, as well as render the RTL for your configuration (requires an appropriate license from Arm).
+
+## Simulate Processors
+
+To help evaluate the performance of the processors, Arm IP Explorer provides a number of RTL based simulation systems that allow you to run benchmark code on them.
+
+See the [Custom software for simulation with IP Explorer](/learning-paths/cross-platform/ipexplorer/) learning path for more information.
+
+## Create SoC Concept
+
+An `SoC Concept` is the first step towards the architectural design of your device.
+
+You can select any of the Arm IPs that you wish to use, including those configured previously, and define how they can be connected.
+
+![SoC Concept #center](../_images/soc_concept.png "SoC Concept")
+
+You can invite other users to help review your design. These could be others from your organization, contacts within Arm that you are engaged with, or from a different organization that you are working with on the project.
+
+{{% notice Arm Approved Design Partners %}}
+Use the `Design Partners` link within `Arm IP Explorer` for information on Arm Approved Design Partners.
+{{% /notice %}}
+
+The design can then be exported to a `json` format suitable for importing to [Arm Socrates](https://www.arm.com/products/development-tools/system-ip/system-ip-tools/socrates) for further configuration.
+
+See also the [Arm Socrates Install Guide](/install-guides/socrates/).
