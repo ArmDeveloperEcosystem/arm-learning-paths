@@ -8,7 +8,7 @@ Adoption of the Arm architecture in servers and cloud computing is increasing. Y
 
 Server vendors and cloud service providers use Arm Neoverse processors to create predictable performance, high scalability, and power efficiency for data center and on-premises deployments.
 
-[Arm Neoverse processors](https://www.arm.com/markets/computing-infrastructure/cloud-computing) perform a wide range of complex computing tasks and are designed for server and cloud workloads. Neoverse outperforms traditional processors across a broad range of workloads. Web serving, video encode, caching, data analytics and streaming, ML and more, all run better on Arm.
+[Arm Neoverse processors](https://www.arm.com/markets/computing-infrastructure/cloud-computing) perform a wide range of complex computing tasks and are designed for server and cloud workloads. Neoverse outperforms traditional processors across a broad range of workloads. Web serving, video encode, caching, data analytics and streaming, and ML all run on Arm.
 
 Arm Neoverse also plays a leading role in smart NICs and DPUs for offloading networking, security, and storage as well as in 5G networking.
 

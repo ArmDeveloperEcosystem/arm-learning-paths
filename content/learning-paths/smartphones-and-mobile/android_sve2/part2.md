@@ -7,10 +7,10 @@ weight: 3
 layout: "learningpathall"
 ---
 
-In this section you will implement the floating-point addition of product of vectors (a * b + c) using C++. The vectors will be pseudo randomly generated using the `<random>` library introduced in C++11. To measure the code execution time you will also create the measureExecutionTime template function. The latter will return the execution time of N invocations of functions that calculate addition of product of vectors with and without SVE2.
+In this section you will implement the fused multiply-add (FMA) of vectors (a * b + c) using C++. The vectors will be pseudo-randomly generated using the `<random>` library introduced in C++11. To measure the code execution time, you will also create the `measureExecutionTime` template function. The latter will return the execution time of N invocations of functions that calculate the FMA with and without SVE2.
 
 ## Implement helper functions
-To implement helper functions, we start by modifying native-lib.cpp (located under app/cpp/). First, we add the following includes:
+To implement helper functions, we start by modifying `native-lib.cpp` (located under app/cpp/). First, we add the following:
 
 ```cpp
 #include <jni.h>
@@ -21,7 +21,7 @@ To implement helper functions, we start by modifying native-lib.cpp (located und
 #include <chrono>
 ```
 
-Note the usage of chrono, vector, and arm_sve.h.
+Note the usage of `vector`, `arm_sve.h` and `chrono`.
 
 Then, we remove the `stringFromJNI` method:
 
@@ -37,7 +37,7 @@ Java_com_example_armsve2_MainActivity_stringFromJNI(
 }
 ```
 
-Afterward, we add a method that generates a random vector of size `n`, whose elements are pseudo-randomly generated:
+Now, we add a method that generates a random vector of size `n`, whose elements are pseudo-randomly generated:
 
 ```cpp
 std::vector<float> generateRandomVector(size_t n, float low=0.0, float high=1.0) {
@@ -54,9 +54,9 @@ std::vector<float> generateRandomVector(size_t n, float low=0.0, float high=1.0)
 }
 ```
 
-The above function uses `std::random_device` to generate a truly random seed for the random number generator, `std::mt19937`. The generateRandomVector function accepts the size of the vector n, and the low and high bounds of the random values as arguments. It returns a `std::vector<float>` filled with random floats within the specified range. By default, the range is set to 0-1.
+The above function uses `std::random_device` to generate a truly random seed for the random number generator, `std::mt19937`. The `generateRandomVector` function accepts the size of the vector `n`, and the low and high bounds of the random values as arguments. It returns a `std::vector<float>` filled with random floats within the specified range. By default, the range is set to 0-1.
 
-Subsequently, we implement the `measureExecutionTime` function:
+Next, we implement the `measureExecutionTime` function:
 
 ```cpp
 template<typename Func, typename... Args>
@@ -74,10 +74,10 @@ long long measureExecutionTime(Func func, int trialCount, Args... args) {
 }
 ```
 
-This function takes a callable (`func`), the number of invocations (`trialCount`), and a variadic list of arguments (`args`) to pass to func. The `measureExecutionTime` function measures and returns the total execution time of specified invocations of func. The result is given in milliseconds.
+This function takes a callable (`func`), the number of invocations (`trialCount`), and a variadic list of arguments (`args`) to pass to `func`. The `measureExecutionTime` function measures and returns the total execution time of specified invocations of `func`. The result is given in milliseconds.
 
-## Implement addition of product without SVE2
-With the above code you can now implement the addition of product of vectors without SVE2. To do so, supplement the native-lib.cpp by the following function
+## Implement FMA without SVE2
+With the above code, you can now implement FMA without SVE2. To do so, supplement the `native-lib.cpp` with the following function:
 
 ```cpp
 void additionOfProduct(const std::vector<float>& a,
@@ -96,10 +96,10 @@ void additionOfProduct(const std::vector<float>& a,
 }
 ```
 
-The additionOfProduct takes four vectors as input. The first three denote a, b, and c vectors, and the forth is the vector, which will store the result. Given these parameters, the function ensures that all vectors have the same size. Then, the function uses a `for` loop to calculate the result as a * b + c.
+The `additionOfProduct` takes four vectors as input. The first three denote a, b, and c vectors, and the forth is the vector which stores the result. Given these parameters, the function ensures that all vectors have the same size. Then, the function uses a `for` loop to calculate the result as a * b + c.
 
-## Implement addition of product with SVE2 intrincs
-The SVE2 intrinsics are defined in the arm_sve.h header file, which we have already included in native-lib.cpp. Writing code with these intrinsics closely resembles writing standard C code. The compiler undertakes numerous optimizations to enhance performance. These include the efficient utilization of registers for variable storage, ensuring that function calls adhere to the conventions of the C language to facilitate optimized code generation, and automatically converting parts of loops that do not use intrinsics into vectorized instructions to improve execution speed. Moreover, in scenarios where a direct intrinsic is not available, the compiler selects the most optimal instructions to use.
+## Implement FMA with SVE2 intrinsics
+The SVE2 intrinsics are defined in the `arm_sve.h` header file, which we have already included in `native-lib.cpp`. Writing code with these intrinsics closely resembles writing standard C code. The compiler undertakes numerous optimizations to enhance performance. These include the efficient utilization of registers for variable storage, ensuring that function calls adhere to the conventions of the C language to facilitate optimized code generation, and automatically converting parts of loops that do not use intrinsics into vectorized instructions to improve execution speed. Moreover, in scenarios where a direct intrinsic is not available, the compiler selects the most optimal instructions to use.
 
 However, programmers bear responsibility for several critical aspects:
 
@@ -118,10 +118,10 @@ To select the appropriate intrinsic, it's essential to understand their naming c
 
 where:
 
-* sv<base> refers to the name of the instruction. For example, svld1 loads a segment of data.
-* <_disambiguator> denotes any special behavior of the function.
-* <_type0>, <_type1>, ... indicate the types of values the function operates on.
-* <_predication> controls which lanes in a vector are active and which are inactive. Zeroing (z) operations set inactive elements to zero in an operation, while merging (m) operations leave the existing inactive elements unchanged.
+* `sv<base>` refers to the name of the instruction. For example, svld1 loads a segment of data.
+* `<_disambiguator>` denotes any special behavior of the function.
+* `<_type0>, <_type1>, ...` indicate the types of values the function operates on.
+* `<_predication>` controls which lanes in a vector are active and which are inactive. Zeroing (z) operations set inactive elements to zero in an operation, while merging (m) operations leave the existing inactive elements unchanged.
 
 To denote arithmetic types, SVE2 intrinsics use the pattern: `sv<type>_t`, where `<type>` can be `int16`, `bool`, `float32`, etc.
 
@@ -159,11 +159,11 @@ void additionOfProductSVE2(const float* a,
 }
 ```
 
-The function utilizes `svcntw` to determine the length of SVE vector registers for floats (note that this is not the length of the vectors on which operations are being performed). Based on this information, the function constructs a for loop that increments accordingly. At each iteration of the loop, it's necessary to load segments of each vector (a, b, c). To accomplish this, we use the `svld1` functions, which return variables of type svfloat32_t. With these variables, we then call `svmla_f32_z` with zeroing predication to compute `a * b + c`. The result of this operation is subsequently stored in the output vector using the svst1 intrinsic.
+The function utilizes `svcntw` to determine the length of SVE vector registers for floats (note that this is not the length of the vectors on which operations are being performed). Based on this information, the function constructs a for loop that increments accordingly. At each iteration of the loop, it's necessary to load segments of each vector (a, b, c). To accomplish this, we use the `svld1` functions, which return variables of type `svfloat32_t`. With these variables, we then call `svmla_f32_z` with zeroing predication to compute `a * b + c`. The result of this operation is subsequently stored in the output vector using the `svst1` intrinsic.
 
 ## Measure the performance uplift by using SVE2
 
-You will finally implement the `Java_com_example_armsve2_MainActivity_runCalculations` method to `app/cpp/native-lib.cpp` file. Modify the method accordingly:
+You will finally implement the `Java_com_example_armsve2_MainActivity_runCalculations` method to `app/cpp/native-lib.cpp` file. Modify the method accordingly with:
 
 ```cpp
 extern "C"
@@ -199,19 +199,17 @@ Java_com_example_armsve2_MainActivity_runCalculations(JNIEnv *env, jobject thiz,
 This method generates three pseudo-random vectors of floats and a fourth vector to store the results. The size of each vector is determined by the `vector_length` argument, which is passed to the function from `MainActivity`. Then, depending on whether the "Use SVE2?" checkbox is selected, the method will either measure the execution time of `additionOfProductSVE2` (if the checkbox is on) or `additionOfProduct` (if the checkbox is off). Here, we set the number of invocations at `1000`. However, you have the option to add additional controls to the view, allowing the `trialCount` to be changed dynamically. Once the execution time is measured, it is converted to a `std::string` and returned to the view to display the value to the user.
 
 ## Build and Run the code
-To test the code described above, you will need an Armv8-powered device (for this example, we used a Samsung Galaxy S22). Follow [these steps](https://developer.android.com/studio/run/device) to prepare your device for development. Once your phone is configured, it will appear in the drop-down list at the top of Android Studio:
-
-To test the above code you will need Armv8-powered device (here we used Samsung Galaxy S22). Follow  to prepare the device for development. After your phone is configured, it will appear in the drop-down list at the top of Android Studio:
+To test the code described above, you will need an Armv8-powered device (for this example, we used a Samsung Galaxy S22). Follow [these steps](https://developer.android.com/studio/run/device) to prepare your device for development. Once your phone is configured, it will appear in the drop-down list at the top of Android Studio.
 
 ![img7](Figures/07.png)
 
-Select your phone and then click the play icon. This action will build and deploy the application to your device. Next, enter the vector length, for example, 10,000, and click the "Run calculations" button. Repeat the process after selecting the "Use SVE2?" checkbox. You should observe the following results:
+Select your phone and then click the play icon. This action will build and deploy the application to your device. Next, enter the vector length, for example, 10,000, and click the **Run calculations** button. Repeat the process after selecting the "Use SVE2?" checkbox. You should observe the following results:
 
 ![img8](Figures/08.png)
 
 ![img9](Figures/09.png)
 
-As demonstrated, using SVE2 intrinsics can achieve computation times that are 3-4 times shorter, depending on the vector length.
+As has just been demonstrated, using SVE2 intrinsics can achieve computation times that are 3-4 times shorter, depending on the vector length.
 
 ## Summary
-In this learning path, we explored how to enhance the performance of vector operations in Android applications using Arm's Scalable Vector Extension 2 (SVE2) on compatible Armv8-powered devices, exemplified by testing on a Samsung Galaxy S22. The process involved creating a method to generate pseudo-random vectors and measure the execution times of vector operations both with and without SVE2 intrinsics. By incorporating conditional logic based on user input (selecting the "Use SVE2?" checkbox), we demonstrated the significant impact of SVE2 optimizations on computation speed. Specifically, we observed that utilizing SVE2 intrinsics can lead to computation times that are 3-4 times shorter compared to traditional methods, showcasing the potential for SVE2 to enhance application performance significantly.
+In this learning path, we have explored how to enhance the performance of vector operations in Android applications using Arm's Scalable Vector Extension 2 (SVE2) on compatible Armv8-powered devices, testing on a Samsung Galaxy S22. The process involved creating a method to generate pseudo-random vectors and measure the execution times of vector operations both with and without SVE2 intrinsics. By incorporating conditional logic based on user input (selecting the "Use SVE2?" checkbox), we demonstrated the significant impact of SVE2 optimizations on computation speed. Specifically, we observed that utilizing SVE2 intrinsics can lead to computation times that are 3-4 times shorter compared to traditional methods, illustrating the potential for SVE2 to enhance application performance significantly.

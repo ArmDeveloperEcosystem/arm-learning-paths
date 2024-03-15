@@ -65,7 +65,7 @@ alias python=python3
 To install PyTorch run:
 
 ```bash
-sudo pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+sudo pip install torch torchvision torchaudio 
 ```
 
 ## Get started
@@ -122,7 +122,7 @@ PyTorch built with:
 
 The configuration output is an advanced option to check the tools and structure used to build PyTorch. 
 
-# BFloat16 floating-point number format
+## BFloat16 floating-point number format
 
 Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For example, AWS Graviton3 processors support BFloat16. 
 
@@ -140,12 +140,26 @@ Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asi
 
 If the result is blank, you do not have a processor with BFloat16.
 
-BFloat16 provides improved performance and a smaller memory footprint with the same dynamic range. You may want to experiment with BFloat16 when trading off accuracy with performance.
+BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You may see a slight drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications. 
 
 You can use an environment variable to enable BFloat16:
 
 ```console
 export DNNL_DEFAULT_FPMATH_MODE=BF16
+```
+
+## LRU cache capacity
+
+LRU cache capacity is used to avoid redundant primitive creation latency overhead.
+
+This caching feature increases memory usage. If needed, you can lower the value to reduce memory usage. 
+
+You should tune the capacity to an optimal value for your use case.
+
+Use an environment variable to set the value. The recommended starting value is: 
+
+```console
+export LRU_CACHE_CAPACITY=1024
 ```
 
 ## Transparent huge pages

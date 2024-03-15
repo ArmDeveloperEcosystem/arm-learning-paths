@@ -42,7 +42,7 @@ Select the implementation you would like to use: C, Fortran, or Python.
 For example, for C:
 
 ```bash
-cd  C
+cd C
 make clean && make
 ```
 
@@ -161,7 +161,7 @@ The `perf` output will show the program is much faster:
 
 ## Investigate cache misses
 
-You can lso specify different hardware counter events to collect. 
+You can also specify different hardware counter events to collect. 
 
 For example, you can investigate memory access issues by collecting cache statistics with:
 
