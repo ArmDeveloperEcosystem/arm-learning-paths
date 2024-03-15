@@ -45,7 +45,7 @@ Arm Socrates requires a Linux machine running Red Hat Enterprise Linux.
 
 Full specifications are given in the [Installation Guide](https://developer.arm.com/documentation/101400/latest/Setting-up-your-environment/Installation-requirements).
 
-Untar the package and run the installer. For example:
+Extract the downloaded software and run the installer. For example:
 
 ```command
 tar -xf socrates.tar.gz
