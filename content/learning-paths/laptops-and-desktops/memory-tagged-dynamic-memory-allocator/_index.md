@@ -1,24 +1,22 @@
 ---
 armips:
-- PLACEHOLDER IP A
-- PLACEHOLDER IP B
+- Cortex-A
+- Neoverse
 author_primary: David Spickett
 layout: learningpathall
 learning_objectives:
-- Explain how to apply MTE to an existing memory allocator.
-- Explain how MTE can prevent common memory use errors.
+- How to apply MTE to an existing memory allocator.
+- How MTE can prevent common memory use errors.
 learning_path_main_page: 'yes'
 minutes_to_complete: 120
 operatingsystems:
 - Linux
 prerequisites:
 - A Linux computer.
-- Basic knowledge of how MTE works (for example by completing the "Learn about the
-  Arm Memory Tagging Extension" Learning Path).
-- Knowledge of how a dynamic memory allocator may be implemented (for example by completing
-  the "Write a Dynamic Memory Allocator" Learning Path).
-skilllevels: PLACEHOLDER SKILLLEVEL
-subjects: PLACEHOLDER SUBJECT
+- Basic knowledge of how MTE works. Refer to the [Learn about Memory Tagging Extention Learning Path](/learning-paths/smartphones-and-mobile/mte/)
+- Knowledge of how a dynamic memory allocator may be implemented. Refer to [Write a Dynamic Memory Allocator Learning Path](/learning-paths/cross-platform/dynamic-memory-allocator/).
+skilllevels: Advanced
+subjects: Performance and Architecture
 test_images:
 - ubuntu:latest
 test_link: null
@@ -27,9 +25,10 @@ test_status:
 - passed
 title: Adding Memory Tagging to a Dynamic Memory Allocator
 tools_software_languages:
-- PLACEHOLDER TOOL OR SOFTWARE C
-- PLACEHOLDER TOOL OR SOFTWARE D
+- MTE
+- Linux
+- C
+- Coding
 weight: 1
-who_is_this_for: Those who understand the Memory Tagging Extension (MTE) and want
-  to learn how to use it to protect dynamic memory allocations.
+who_is_this_for: This is an advanced topic for software developers who want to learn how to use Memory Tagging Extension (MTE) to protect dynamic memory allocations.
 ---
