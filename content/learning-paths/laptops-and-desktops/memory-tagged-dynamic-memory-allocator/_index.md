@@ -1,7 +1,6 @@
 ---
 armips:
 - Cortex-A
-- Neoverse
 author_primary: David Spickett
 layout: learningpathall
 learning_objectives:
