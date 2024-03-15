@@ -37,7 +37,7 @@ only catch the common cases and may misdiagnose others.
 
 ## Buffer Overflow Example
 
-To try this exploit call `buffer_overflow()` from `main`.
+To try this exploit call `buffer_overflow()` from `main`. You can do that by uncommenting the call to the function in `main.c` and rebuilding `demo`.
 
 ```text
 Program caused an asynchronous memory tag fault.
@@ -105,7 +105,7 @@ immediately surrounding the new allocation.
 
 ## Use After Free Example
 
-To try this exploit, call `use_after_free` from `main`.
+To try this exploit, call `use_after_free` from `main`. You can do that by uncommenting the call to the function in `main.c` and rebuilding `demo`.
 
 ```
 Program caused an asynchronous memory tag fault.
