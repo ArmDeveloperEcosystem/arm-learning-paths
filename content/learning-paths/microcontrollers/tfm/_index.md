@@ -5,14 +5,14 @@ armips:
 author_primary: Pareena Verma
 layout: learningpathall
 learning_objectives:
-- Build and run the reference TF-M tests.
+- Build and run the reference TF-M tests and example application.
 learning_path_main_page: 'yes'
 minutes_to_complete: 15
 operatingsystems:
 - Baremetal
 prerequisites:
 - Some familiarity with embedded C programming
-- A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
+- A machine running Ubuntu Linux
 skilllevels: Introductory
 subjects: Security
 test_images:
