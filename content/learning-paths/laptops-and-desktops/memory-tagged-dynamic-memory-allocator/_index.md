@@ -5,8 +5,8 @@ armips:
 author_primary: David Spickett
 layout: learningpathall
 learning_objectives:
-- How to apply MTE to an existing memory allocator.
-- How MTE can prevent common memory use errors.
+- Learn how to apply MTE to an existing memory allocator.
+- Understand how MTE can prevent common memory use errors.
 learning_path_main_page: 'yes'
 minutes_to_complete: 120
 operatingsystems:
