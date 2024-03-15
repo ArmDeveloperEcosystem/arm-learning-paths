@@ -6,8 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-The following source code is the complete project you will need to build to
-follow along with the examples later.
+The source code for the complete project is included in this learning path. 
 
 Aside from the comments in the source, this page will not explain the source code.
 Instead, the following pages will go into detail of memory tagging specific changes
@@ -32,7 +31,8 @@ sudo apt install -y cmake ninja-build gcc-aarch64-linux-gnu qemu-user
 
 ## Source Code
 
-Contents of `CMakeLists.txt`:
+Using a file editor of your choice, create a file named `CMakeLists.txt` and copy the contents below into it:
+
 ``` {file_name="CMakeLists.txt"}
 cmake_minimum_required(VERSION 3.15)
 
@@ -41,7 +41,7 @@ project(TaggedMemoryAllocatorDemo C)
 add_executable(demo main.c heap.c mte_utils.c)
 ```
 
-Contents of `heap.c`:
+Create a file named `heap.c` with the contents shown below:
 ```C {file_name="heap.c"}
 #include <arm_acle.h>
 #include <assert.h>
@@ -346,7 +346,7 @@ void simple_free(void *ptr) {
 
 ```
 
-Contents of `heap.h`:
+Create a file named `heap.h` with the content shown below:
 ```C {file_name="heap.h"}
 #ifndef HEAP_H
 #define HEAP_H
@@ -366,7 +366,7 @@ void simple_free(void *ptr);
 
 ```
 
-Contents of `mte_utils.c`:
+Create a file named `mte_utils.c` with the contents shown below:
 ```C {file_name="mte_utils.c"}
 #include "mte_utils.h"
 
@@ -401,7 +401,7 @@ void print_pointer_tags(const void *ptr) {
 
 ```
 
-Contents of `mte_utils.h`:
+Create a file named `mte_utils.h` with the contents shown below:
 ```C {file_name="mte_utils.h"}
 #ifndef MTE_UTILS_H
 #define MTE_UTILS_H
@@ -426,7 +426,7 @@ void print_pointer_tags(const void *ptr);
 
 ```
 
-Contents of `main.c`:
+Create a file named `main.c` with the contents shown below:
 ```C {file_name="main.c"}
 #include "heap.h"
 #include "mte_utils.h"
@@ -565,7 +565,9 @@ int main() {
 
 ## Build the source code
 
-First use `cmake` to configure the project:
+You are now ready to build the source code.
+
+First, use `cmake` to configure the project:
 ```bash
 cmake . -G Ninja -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_C_FLAGS="-static -march=armv8.5-a+memtag" -DCMAKE_BUILD_TYPE=Debug
 ```
