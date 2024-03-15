@@ -19,7 +19,7 @@ The Vulkan Sample provided in the previous step allows you to experiment with AF
 
 ### Build Khronos' Vulkan Samples
 
-[Download](https://github.com/KhronosGroup/Vulkan-Samples?tab=readme-ov-file#setup) the Android repository:
+[Download](https://github.com/KhronosGroup/Vulkan-Samples?tab=readme-ov-file#setup) the repository:
 
 ```bash
 git clone --recurse-submodules https://github.com/KhronosGroup/Vulkan-Samples.git
