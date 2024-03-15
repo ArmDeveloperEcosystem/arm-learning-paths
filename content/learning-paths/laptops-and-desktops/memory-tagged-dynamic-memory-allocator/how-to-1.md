@@ -29,7 +29,7 @@ as it must manage the memory tags.
 ## Memory Tagging For a Dynamic Memory Allocator
 
 The source code shown in this path is based on the allocator from the
-"Write a Dynamic Memory Allocator" learning path. Modifications have been
+[Write a Dynamic Memory Allocator](/learning-paths/cross-platform/dynamic-memory-allocator/) learning path. Modifications have been
 made to support MTE and you will not need any source code from that previous learning
 path to build the memory tagged allocator.
 
