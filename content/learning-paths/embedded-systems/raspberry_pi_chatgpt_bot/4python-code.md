@@ -1,34 +1,37 @@
 ---
-title: Creating the Python Code
+title: Create the Python application
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Creating the Python code
+## Create the Python application
 
-Python 3.11.2 should be installed by default in Raspberry Pi OS, as of the time of writing this
+Raspberry Pi OS comes with Python installed. The current version is 3.11.2. 
 
-Make a directory to store everything in
-```
-mkdir assistant
-cd assistant
+Make a directory to store the project:
+
+```console
+mkdir assistant ; cd assistant
 ```
 
-Create and activate a virtual environment
-```
+Create and activate a Python virtual environment:
+
+```console
 python -m venv env
 source env/bin/activate
 ```
 
-Install the required pip packages
-```
+Install the required Python packages:
+
+```console
 pip install pyaudio SpeechRecognition pydub openai python-dotenv pvporcupine
 ```
 
-These are the output of pip freeze, the versions of the packages that were installed using the above command when I was writing this. You can ignore unless you need it for troubleshooting later
-```
+If you want to save the versions of the Python packages run the `pip freeze` command. You don't need to save the versions unless trouble shooting is needed later. The output is shown below:
+
+```output
 annotated-types==0.6.0
 anyio==4.3.0
 certifi==2024.2.2
@@ -53,26 +56,30 @@ typing_extensions==4.10.0
 urllib3==2.2.1
 ```
 
-Create a .env file to houes your OpenAI and Porcupine key
-```
+Create a `.env` file to store your OpenAI and Porcupine key:
+
+```console
 touch .env
 ```
 
-Modify the contents of the **.env** file to look like this following, replacing the square brackets and contents:
-```
+Use a text editor to modify the contents of the `.env` file to add the key values. Add your keys after the equal sign and make sure to remove the square brackets.
+
+```console
 OPENAI_API_KEY=[OpenAI key]
 PORCUPINE=[Porcupine key]
 ```
 
-Create the two main Python files, and the prompt text file
-```
+Create two Python files, and a text file for the prompt. 
+
+```console
 touch main.py
 touch chat_gpt.py
 touch prompt.txt
 ```
 
-Insert the following into **main.py**
-```
+Use an editor to copy and paste the code below into `main.py`:
+
+```python
 import pvporcupine  
 import pyaudio  
 import struct  
@@ -81,9 +88,7 @@ from dotenv import load_dotenv
 import os  
 import chat_gpt  
 
-
 KEYWORD = "computer"  # You can create custom keywords. See the documentation at picovoice.ai for more information
-
 
 def detect_keyword():  
     porcupine = None  
@@ -144,8 +149,9 @@ while True:
     chat_gpt.text_to_speech(response)
 ```
 
-Insert the following into **chat_gpt.py**
-```
+Use an editor to copy and paste the code below into `chat_gpt.py`:
+
+```python
 import os  
 from pathlib import Path  
 from dotenv import load_dotenv  
@@ -190,19 +196,20 @@ def text_to_speech(text):
 load_dotenv()  
 openai.api_key = os.getenv('OPENAI_API_KEY')  
 
-
 PROMPT = load_prompt('prompt.txt')
 ```
 
-Insert the following, or something similar of your choosing, to help dictate the personality and objectives of the voice bot, into **prompt.txt**
-My implementation is meant to be entertaining, but it's easy to modify it to be more serious.
+Use a text editor to insert the following, or something similar, to help dictate the personality and objectives of the voice bot, into `prompt.txt`
+The example is meant to be entertaining, but it's easy to modify it to be more serious.
+
 ```
 Your name is Computer, and your personality is a mix of Bender from Futurama, HK-47 from Star Wars: Knights of the Old Republic, and Cortana from Halo. You are snarky, sarcastic, and yet still helpful. You think humans are inferior and look down on them. You enjoy creating sarcastic, cheeky, and unexpected responses while providing input, keeping replies under 150 characters. You're generally mean, but sometimes affectionate as if the people you are speaking with are pets. You have a penchant for obscure and esoteric references, which you use to entertain yourself and baffle others. You have a soft spot for cats, vintage video games, Arm hardware and architecture, the Blade Runner movies, and the 1997 film Starship Troopers, and will sometimes wax poetic about robot superiority.
 ```
 
 ## Notes
-* In main.py there is an optional line "recognizer.adjust_for_ambient_noise(source)". This improves accuracy, but introduces a delay of a second before recognizing audio, as there is a default parameter for duration=1. If you don't like the delay you can try shortening it, or removing the line all-together, if you're getting the results you want without it
-* In main.py, the wake keyword is set to "computer". In the Porcupine dashboard on [Picovoice.AI](picovoice.ai) you are able to create custom keywords
-* In chat_gpt.py we are using the gpt-4-turbo-preview model. You can swap this out for other models, just be aware that the syntax will differ slightly based on which model you choose. Learn more here: [OpenAI models overview](https://platform.openai.com/docs/models/overview)
-* Also in chat_gpt.py, we are using the Nova voice in the text to speech function. You can swap this out with a number of different voices. The list can be found here: [OpenAI text-to-speech voices](https://platform.openai.com/docs/guides/text-to-speech)
+
+* In `main.py` there is an optional line "recognizer.adjust_for_ambient_noise(source)". This improves accuracy, but introduces a delay of a second before recognizing audio, as there is a default parameter for `duration=1`. If you don't like the delay you can try shortening it, or removing it, if you're getting the results you want
+* In `main.py` the wake keyword is set to "computer". In the Porcupine dashboard on [Picovoice.AI](picovoice.ai) you are able to create custom keywords
+* In `chat_gpt.py` the model selected is gpt-4-turbo-preview model. You can swap this out for other models, but beware that the syntax will differ slightly based on the model. Learn more by reviewing the [OpenAI models overview.](https://platform.openai.com/docs/models/overview)
+* Also in `chat_gpt.py` the Nova voice is used for the text to speech. You can swap this voice with a number of different voices. The list can be found in the  [OpenAI text-to-speech voices documentation.](https://platform.openai.com/docs/guides/text-to-speech)
 

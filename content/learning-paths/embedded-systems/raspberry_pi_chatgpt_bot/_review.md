@@ -2,17 +2,17 @@
 review:
     - questions:
         question: >
-            True or False? There is only one voice option available using OpenAI's text-to-speech
+            True or False? There is only one voice option available using OpenAI's text-to-speech.
         answers:
             - "True"
             - "False"
         correct_answer: 2                
         explanation: >
-            OpenAI offers a number of different of voices
+            OpenAI offers a number of different of voices.
 
     - questions:
         question: >
-            What ChatGPT model does the example implementation use?
+            Which ChatGPT model does the example implementation use?
         answers:
             - gpt-4-turbo-preview
             - gpt-3.5-turbo
@@ -20,7 +20,7 @@ review:
             - dall-e-3
         correct_answer: 1                   
         explanation: >
-            The example uses gpt-4-turbo-preview, though it can be swapped out fairly easily for those who have specific needs
+            The example uses gpt-4-turbo-preview, though it can be swapped out fairly easily for those who have specific needs.
                
     - questions:
         question: >
@@ -32,7 +32,7 @@ review:
             - python-dotenv
         correct_answer: 3          
         explanation: >
-            pvporcupine is Picovoice's Porcupine library, meant to provide a offline wake word solution
+            pvporcupine is Picovoice's Porcupine library, meant to provide an offline wake word solution.
 
 
 

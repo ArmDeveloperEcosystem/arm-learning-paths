@@ -3,28 +3,27 @@ title: Create a ChatGPT voice bot on a Raspberry Pi
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory project for developers interested in integrating ChatGPT into Raspberry Pi projects
+who_is_this_for: This is an introductory project for developers interested in integrating ChatGPT into Raspberry Pi projects.
 
 learning_objectives:
-    - You will create a bot running on a Raspberry Pi that will listen to what you say, and then speak back to you
-    - Learn how to listen using a mic and wake the program using a keyword with the Porcupine library
-    - Convert speech picked up from the microphone to text using Google Speech Recognition
-    - Send the text created from speech to ChatGPT's gpt-4-turbo-preview model via API and receive a text reply
+    - Run a bot on a Raspberry Pi that will listen to you and respond to what you say
+    - Learn how to listen for a keyword and wake a program when the keyword is heard
+    - Convert speech from the microphone to text using Google Speech Recognition
+    - Send text created from speech to ChatGPT's gpt-4-turbo-preview model via API and receive a text reply
     - Convert the text reply to speech using ChatGPT's text-to-speech model via API 
-    - Play the received speech file on speakers
+    - Play the received speech file 
 
 prerequisites:
-    - A Raspberry Pi 5 (a 4 or 3 will probably work fine, but I haven't tested this so your results may vary)
-    - A microSD card with at least 16GB of storage (per Raspberry Pi's recommendation)
-    - Either a Linux compatible USB microphone and USB speakers OR
-    - A Linux compatible USB audio device with a microphone and speakers plugged in
+    - A Raspberry Pi 4 or 5 (earlier models may also work)
+    - A microSD card with at least 16GB of storage
+    - A Linux compatible USB microphone and USB speakers or a USB audio device with a microphone and speakers
 
 author_primary: Gabriel Peterson
 
 ### Tags
 skilllevels: Introductory
 
-subjects: AI
+subjects: ML
 
 armips:
     - Cortex-A

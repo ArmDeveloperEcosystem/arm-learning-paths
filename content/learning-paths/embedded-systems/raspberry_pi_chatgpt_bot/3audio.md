@@ -1,37 +1,44 @@
 ---
-title: Setting Up Audio
+title: Configure and test audio
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Setting Up Audio - Speakers and Microphone
-First, with your speakers and microphone plugged in, we'll verify if they're working automatically. If they are you'll be able to skip ahead to the next session. If not we'll have to manually configure the audio.
+## Test Raspberry Pi speakers and microphone
+
+Plug in your speakers and microphone to test if they are working. If both are working you can skip ahead to the next section. If not, you will need to manually configure the audio.
 
 Right click on the speaker icon and select your speakers
 
 ![Raspberry Pi audio output](audio.png)
 
-Open up the terminal, run the following command, and speak into the microphone for five seconds.
-```
+In a terminal, run the following command, and speak into the microphone for about five seconds.
+
+```console
 arecord -d 5 test.wav
 ```
 
-This will try to record a five second clip using the default microphone and then output the test.wav file to the current directory. 
+This will try to record a five second audio clip using the default microphone and save a file named `test.wav` in the current directory. 
 
-Use the following command to attempt to play back test.wav using your default speakers
-```
+Next, run the following command to attempt to play back `test.wav` using your default speakers:
+
+```console
 aplay test.wav
 ```
 
-**If everything worked correctly and you are hearing what your recorded, congrats, you can skip ahead to the next section. If not, we'll do some manual setup.**
+If the record and playback worked correctly and you are hearing what you recorded you can scroll down to the bottom of the page and use the `Next` button to continue. If the test did not work you can manually configure the audio settings.
 
 ## Manual audio setup
 
+Try the steps below to manually configure audio.
+
 ### Find the audio devices for speakers and microphone
+
 Use the following commands to find the card and device for your microphone and your speakers
-```
+
+```console
 arecord -l
 aplay -l
 ```
@@ -40,44 +47,49 @@ The output should look like the following:
 
 ![arecord aplay output](arecord-aplay-output.png)
 
-In the example above, you can see my USB microphone is card 3, device 0. So 3,0
-And the USB speakers are card 2, device 0. So 2,0.
+In the example above, you can see a USB microphone is card 3, device 0 (3,0)
 
-Let's find out if the devices are running correctly by once again running arecord and aplay, but this time specifying the card and device using the above information.
+USB speakers are card 2, device 0 (2,0)
 
-Change your card and device numbers in plughw to match your output, and try recording a five second clip by speaking into your microphone again
-```
+To find out if the devices are running correctly you can run `arecord` and `aplay` again, but this time with the card and device information.
+
+Change your card and device numbers in plughw to match your configuration, and try recording a five second clip by speaking into your microphone again.
+
+To record:
+
+```console
 arecord -D plughw:3,0 -d 5 test.wav
 ```
 
-And to play back that recording
-```
+To play back:
+
+```console
 aplay -D plughw:2,0 test.wav
 ```
 
-If you can now hear what you recorded we'll go ahead and create a config file.
+If you can hear what you recorded you can create a configuration file.
 
 #### Troubleshooting the above
-If the above doesn't work you'll have to dive deeper. Some steps you can take
-1. Verify that the speakers and microphone are properly connect. Maybe something is loose
-2. Use 'alsamixer' or 'amixer' to check that your devices aren't muted and that the volume levels are high enough
-3. Make sure you are completely up to date with 
-	1. 'sudo apt update'
-	2. 'sudo apt upgrade'
-4. Check online and see if your microphone and / or speakers are linux compatible
-5. Try other speakers / microphones
 
-### Create an asound.conf file using the above information to set the defaults
+If the above doesn't work you'll have to dive deeper. 
 
-Using your text editor of choice, create an /etc/asound.conf file and fill it with the appropriate information found in using aplay -l and arecord -l
+Here are some steps you can take:
 
-Create an asound.conf file inside /etc/
-```
-sudo vim /etc/asound.conf
-```
+1. Verify the speakers and microphone are properly connected, check for loose connections
 
-Paste in the following, changing the pcm.!default playback and ctl.!default to match the aplay -l results. And change the pcm.!default capture section to the arecord -l results.
-```
+2. Use `alsamixer` or `amixer` to check that your devices aren't muted and that the volume levels are high enough
+
+3. Check online and see if your microphone and / or speakers are Linux compatible
+
+4. Try other speakers and microphones
+
+### Create a configuration file to set the defaults
+
+Use a text editor to create the file `/etc/asound.conf` and add the appropriate information from `aplay -l` and `arecord -l`
+
+Copy and paste the information below into the file. Changing the pcm.!default playback and ctl.!default to match the `aplay -l` output. Cchange the pcm.!default capture section to the `arecord -l` output.
+
+```console
 pcm.!default {
     type asym
     playback.pcm {
@@ -94,16 +106,19 @@ ctl.!default {
     type hw
     card 2
 }
-
 ```
 
-Save, exit, then reboot
-```
-reboot
+Save the file, exit your text editor, and reboot the Raspberry Pi. 
+
+```console
+sudo reboot
 ```
 
-After rebooting, try the following commands again to verify everything is now working:
+After rebooting, try the commands again to verify everything is now working:
+
 ```
 arecord -d 5 test.wav
 aplay test.wav
 ```
+
+Your speakers and microphone are now ready to use. 
