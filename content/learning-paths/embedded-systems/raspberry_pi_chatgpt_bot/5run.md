@@ -1,31 +1,40 @@
 ---
-title: Running the Bot
+title: Run and test the bot
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Running the bot
+You should still be in the Python virtual environment, but if you are not or if you open a new terminal, make sure to activity the virtual environment using: 
 
-Activate the virtual environment if you're not still in it
-```
+```console
+cd $HOME/assistant
 source env/bin/activate
 ```
 
-Then just run main.py
-```
+Run the application:
+
+```console
 python main.py
 ```
 
-Say "computer", wait a second, then ask your question. Give it a couple seconds and it will audibly reply to you.
+Say the wake work, "computer", wait a second, then ask a question. 
 
-It should continue to run indefinitely until you manually stop it
+Wait a couple seconds and it will audibly reply to you.
 
-Normal output while it's sitting there waiting to hear the keyword:
+The application will run indefinitely until you manually stop it (use Ctrl+C). 
+
+The normal output while the application is waiting for the keyword is shown below: 
+
 ![the terminal, waiting for keyword](./terminal1.png)
 
-And waiting for you to speak after hearing the keyword:
+After the keyword is heard, you will see the `Please speak...` message indicating it is ready for your question: 
+
 ![the terminal, listening for you to speak after hearing the keyword](./terminal2.png)
 
-**Note**: The errors you see are normal and do not effect the operation of the bot. I spent some time trying to get rid of them but wasn't able to find a solution, but as everything works as it's supposed to I just let it go
+{{% notice Note %}}
+The errors are normal and do not effect the operation of the bot. 
+{{% /notice %}}
+
+You have constructed a bot on your Raspberry Pi which wakes up on a keyword and answers your questions. 

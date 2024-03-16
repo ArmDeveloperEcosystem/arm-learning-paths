@@ -1,5 +1,5 @@
 ---
-title: Initial Setup
+title: Initial setup
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,52 +8,84 @@ layout: learningpathall
 
 ## Install Raspberry Pi OS
 
-Install Raspberry Pi Imager from [RaspberryPi.com](https://www.raspberrypi.com/software/) and start it up
+Download, install, and use Raspberry Pi Imager to create a microSD card with [Raspberry Pi OS](https://www.raspberrypi.com/software/).
 
-1. Select your Raspberry Pi device, in my case Raspberry Pi 5
+If you are new to Raspberry Pi or would like more information the [Raspberry Pi getting started](https://www.raspberrypi.com/documentation/computers/getting-started.html) is excellent. 
+
+The steps to install using Imager are:
+
+1. Select your Raspberry Pi device, such as Raspberry Pi 5
 2. Under Operating System, choose Raspberry Pi OS (64-bit)
 3. Under Storage, select your microSD card
 4. Click Next
-5. When it asks you "Would you like to apply OS customization settings?" select Edit Settings
-6. Check Set username and password, Configure wireless LAN, and Set locale settings, and enter the appropriate settings
-7. After clicking Save, click Yes
-8. Click yes to tell it to erase the card
+5. When it asks you "Would you like to apply OS customization settings?" select `EDIT SETTINGS`
+6. Check Set username and password, Configure wireless LAN, and Set locale settings, and enter the settings and click `SAVE`
+7. Click `YES` to apply the settings 
+8. Click `YES` to erase the card and start writing the data
 
-## Insert the microSD card into the Raspberry Pi and power it on
+When Imager is done writing and verifying the microSD card you can remove it from your computer. 
 
-*Even though I set the Wireless LAN when writing to the SD card it typically needs to be manually connected in the desktop settings when first logged on. This may not happen to you, but it's just something to be aware of.*
+## Power on the Raspberry Pi 
 
-**Open the terminal and update the device.**
+Insert the microSD card into the Raspberry Pi, power it on, and boot to the Raspberry Pi OS desktop.
 
-*Note: I've had an issue with this Raspberry Pi OS release, where sometimes when I first run 'sudo apt update' I get a few errors and it doesn't work. I just rerun the command until it works properly and without errors:*
-```
+{{% notice Note %}}
+Make sure the Raspberry Pi is connected to your network before proceeding. If it is not connected, make any needed adjustments to the network settings.
+{{% /notice %}}
+
+## Install the required software
+
+Open the terminal application by opening the menu on the top left corner and selecting `Accessories` and `Terminal`. 
+
+Copy and paste the commands below at the terminal prompt: 
+
+```console
 sudo apt update
-sudo apt upgrade
+sudo apt upgrade -y
 ```
 
-Install the dependencies we'll require
-```
+Install the required software for the project: 
+
+```console
 sudo apt install portaudio19-dev python3-pyaudio mpg321 flac vim -y
 ```
 
-Reboot
-```
-reboot
+Restart the Raspberry Pi:
+
+```console
+sudo reboot
 ```
 
-## Get the necessary access keys
+## Setup the required services and access keys
 
 ### Porcupine
-Create a Forever-Free account on picovoice.ai for use with personal projects
-1. Go to [Picovoice's Porcupine](https://picovoice.ai/platform/porcupine/)
-2. Click "Start Free"
-3. Click "Sign Up" at the bottom left in order to sign up for a Forever-Free account
-4. ![Picovoice account creation](./picovoice-account-creation.png)
-5. On the right, under Get Start, sign up using a GitHub, Google, or LinkedIn account
-6. Get your access key for Porcupine wake word, save it somewhere safe, and don't share it with anyone
 
-### OpenAI's API
-1. OpenAI's API isn't free, and their pricing model is based on usage. You can find out more here: [OpenAI pricing](https://openai.com/pricing)
-2. Create an OpenAI account at [OpenAI account signup](https://platform.openai.com/signup), or if you already have one log in at [OpenAI account login](https://platform.openai.com/login). 
-3. Navigate to the [API key page](https://platform.openai.com/account/api-keys) and "Create new secret key"
-4. Save it somewhere safe, and don't share it with anyone
+Porcupine, from [Picovoice](https://picovoice.ai/), is a wake word detection engine which can be accessed as a cloud service. 
+
+Create a Forever-Free account to use for personal projects by following the steps below:
+
+1. Use a browser and navigate to [Picovoice's Porcupine](https://picovoice.ai/platform/porcupine/)
+
+2. Click `Start Free`
+
+3. Click `Sign Up` to create a Forever-Free account as shown below:
+
+![Picovoice account creation](./picovoice-account-creation.png)
+
+4. On the right, under Get started, sign in using your GitHub, Google, or LinkedIn account
+
+5. Get your access key for Porcupine wake word, save it somewhere safe, and don't share it with anyone
+
+### OpenAI 
+
+The OpenAI API provides a bridge to machine learning models so you can integrate AI features in applications. 
+
+1. The OpenAI API is not free, and the pricing is based on usage. You can find out more by reviewing the [OpenAI pricing](https://openai.com/pricing).
+
+2. Create an OpenAI account at [OpenAI account sign up](https://platform.openai.com/signup), or if you already have an account log in at [OpenAI account login](https://platform.openai.com/login). 
+
+3. Navigate to the [API key page](https://platform.openai.com/account/api-keys) and select `Create new secret key`
+
+4. Save the key somewhere safe, and don't share it with anyone
+
+You now have your Raspberry Pi running and the required API keys. You are ready to start the project.
