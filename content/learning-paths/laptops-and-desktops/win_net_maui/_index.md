@@ -24,7 +24,8 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - .NET    
-    - Visual Studio Code
+    - C#
+    - Visual Studio
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
