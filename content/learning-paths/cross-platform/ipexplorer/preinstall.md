@@ -23,10 +23,10 @@ First ensure you can access [IP Explorer](https://ipexplorer.arm.com/) and login
 On the welcome screen, select 'Simulate Processors` to see a list of processors with simulations available.
 
 {{% notice Processor choice %}}
-In this learning path we will compare `Cortex-M0` and `Cortex-M7`, but you could use any set of appropriate processors.
+In this learning path you will compare `Cortex-M0` and `Cortex-M7`, but you could use any set of appropriate processors.
 {{% /notice %}}
 
-### Run on Cortex-M0 simulation {#M0simulation}
+### Run an Arm Cortex-M0 simulation {#M0simulation}
 
 Select `Cortex-M0` from the list. If necessary use the filter options on-screen or the search box to locate. This will open the `Cortex-M0 Configuration` view.
 
@@ -42,7 +42,7 @@ Click `Run`.
 
 The example code will be built by the chosen toolchain, loaded to the RTL simulation, and executed. This process will take a few minutes to complete. You will receive an email notification when done.
 
-### Run on Cortex-M7 simulation
+### Run an Arm Cortex-M7 simulation
 
 Return to the welcome screen and repeat the [same steps](#M0simulation) for the supplied Cortex-M7 system. Though more configuration options are available, leave these as default.
 
@@ -65,6 +65,6 @@ The exact cycle count may vary depending on compiler version used.
 ![Cortex-M7 Simulation results #center](images/m7_matrix-add.png)
 
 
-You can click `Show details` to get a deeper understanding of the data. We will return to this when custom software is used.
+You can click `Show details` to get a deeper understanding of the data. You will return to this when custom software is used.
 
 You have successfully run an example application on simulated systems and compared results. The next step is to create your own example.
