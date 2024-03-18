@@ -1,5 +1,5 @@
 ---
-title: Getting Started with embedded programming with the Raspberry Pi Pico
+title: Embedded programming with Arduino on the Raspberry Pi Pico
 
 who_is_this_for: This is an introductory topic for software developers interested in embedded programming.
 minutes_to_complete: 60
@@ -9,6 +9,9 @@ learning_objectives:
     - Know the differences between embedded and application development
     - Write a simple embedded application
     - Run your embedded application on a Raspberry Pi Pico
+    - Understand how hardware interrupts are used in embedded systems to respond to external changes
+    - Add interrupt handlers to an embedded application
+
 
 prerequisites:
     - The [Arduino IDE with the RP2040 board support package](/install-guides/arduino-pico/) installed on your computer
