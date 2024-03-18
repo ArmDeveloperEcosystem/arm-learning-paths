@@ -11,6 +11,18 @@ layout: "learningpathall"
 
 After successfully setting up a 3 node Kafka cluster, verify it works by creating a topic and storing the events. Follow the steps below to create a topic, write some events into the topic, and then read the events.
 
+## Install Kafka
+
+Run the commands shown to download and setup Kafka on client machine:
+
+```console
+mkdir kafka_node3
+cd kafka_node3
+wget https://dlcdn.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+tar -xzf kafka_2.13-3.7.0.tgz
+cd  kafka_2.13-3.7.0
+```
+
 ## Create a topic
 
 Open a terminal on the client machine and run the command shown below. Replace `kf_1_ip`, `kf_2_ip` and `kf_3_ip` with the IP addresses of the 3 nodes running the Kafka server.
