@@ -3,7 +3,7 @@ title: Custom software for simulation with IP Explorer
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic IP Explorer users using the software sumulation platforms available.
+who_is_this_for: This is an introductory topic for IP Explorer users using the software simulation platforms available.
 
 learning_objectives: 
     - Run a pre-installed example on IP Explorer simulation platform
