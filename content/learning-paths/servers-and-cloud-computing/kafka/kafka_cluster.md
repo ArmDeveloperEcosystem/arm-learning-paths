@@ -20,9 +20,9 @@ Run the commands shown to download and setup Kafka on node 1:
 ```console
 mkdir kafka_node1
 cd kafka_node1
-wget https://dlcdn.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz
-tar -xzf kafka_2.13-3.5.0.tgz
-cd  kafka_2.13-3.5.0
+wget https://dlcdn.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+tar -xzf kafka_2.13-3.7.0.tgz
+cd  kafka_2.13-3.7.0
 ```
 Use a file editor of your choice and replace the contents in `config/server.properties` with the contents below:.
 Replace `zk_1_ip`,`zk_2_ip` and `zk_3_ip` with the IP addresses of the 3 Zookeeper nodes you setup.
@@ -43,7 +43,7 @@ Create a directory for the log files:
 mkdir /tmp/kafka-logs
 ```
 
-Start Kafka server on node 3:
+Start Kafka server on node 1:
 
 ```console
 bin/kafka-server-start.sh config/server.properties
@@ -56,9 +56,9 @@ Run the commands shown to download and setup Kafka on node 2:
 ```console
 mkdir kafka_node2
 cd kafka_node2
-wget https://dlcdn.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz
-tar -xzf kafka_2.13-3.5.0.tgz
-cd  kafka_2.13-3.5.0
+wget https://dlcdn.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+tar -xzf kafka_2.13-3.7.0.tgz
+cd  kafka_2.13-3.7.0
 ```
 Use a file editor of your choice and replace the contents in `config/server.properties` with the contents below:.
 Replace `zk_1_ip`,`zk_2_ip` and `zk_3_ip` with the IP addresses of the 3 Zookeeper nodes you setup.
@@ -92,9 +92,9 @@ Run the commands shown to download and setup Kafka on node 3:
 ```console
 mkdir kafka_node3
 cd kafka_node3
-wget https://dlcdn.apache.org/kafka/3.5.0/kafka_2.13-3.5.0.tgz
-tar -xzf kafka_2.13-3.5.0.tgz
-cd  kafka_2.13-3.5.0
+wget https://dlcdn.apache.org/kafka/3.7.0/kafka_2.13-3.7.0.tgz
+tar -xzf kafka_2.13-3.7.0.tgz
+cd  kafka_2.13-3.7.0
 ```
 Use a file editor of your choice and replace the contents in `config/server.properties` with the contents below:.
 Replace `zk_1_ip`,`zk_2_ip` and `zk_3_ip` with the IP addresses of the 3 Zookeeper nodes you setup.
