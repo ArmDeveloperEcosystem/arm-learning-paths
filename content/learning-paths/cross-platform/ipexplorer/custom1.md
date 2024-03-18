@@ -45,7 +45,7 @@ The source is a C `main()` function, with two (optional, but recommended) functi
 
 These functions define the `marked` code from the cycle count reports, and can be used to isolate the key part of your code that you wish to benchmark, while allowing set up code, or `printf()` like statements to output results to not be considered in the benchmark.
 
-Modify the source as appropriate for your code and save. We use the example code from the documentation here:
+Modify the source as appropriate for your code and save. You can use the example code from the documentation here:
 
 ```C
 int main()
@@ -68,7 +68,7 @@ int main()
 
 Return to the `benchmark-package` directory of the software package.
 
-Note the folder names within `Systems` directory, which define the known simulations that the code can be run on.
+Note the folder names within the `Systems` directory, which define the known simulations that the code can be run on.
 
 ```output
 $ ls Systems/
@@ -115,7 +115,7 @@ You are now ready to upload your example to IP Explorer.
 
 ## (Optional) Test build your application
 
-To ensure the project will build correctly you can test it on your local machine.
+To ensure the project will build correctly you can test it on your local machine before uploading it:
 
 ```command
 bash ./build_app.sh my_example m0x1_nocache AC6
