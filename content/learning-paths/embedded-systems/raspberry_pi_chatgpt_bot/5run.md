@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-You should still be in the Python virtual environment, but if you are not or if you open a new terminal, make sure to activity the virtual environment using: 
+You should still be in the Python virtual environment but, if you are not or if you open a new terminal, make sure to activate the virtual environment using: 
 
 ```console
 cd $HOME/assistant
