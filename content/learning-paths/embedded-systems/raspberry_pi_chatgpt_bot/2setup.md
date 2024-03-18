@@ -10,7 +10,7 @@ layout: learningpathall
 
 Download, install, and use Raspberry Pi Imager to create a microSD card with [Raspberry Pi OS](https://www.raspberrypi.com/software/).
 
-If you are new to Raspberry Pi or would like more information the [Raspberry Pi getting started](https://www.raspberrypi.com/documentation/computers/getting-started.html) is excellent. 
+If you are new to Raspberry Pi or would like more information the [Raspberry Pi getting started documentation](https://www.raspberrypi.com/documentation/computers/getting-started.html) is excellent. 
 
 The steps to install using Imager are:
 
@@ -18,24 +18,24 @@ The steps to install using Imager are:
 2. Under Operating System, choose Raspberry Pi OS (64-bit)
 3. Under Storage, select your microSD card
 4. Click Next
-5. When it asks you "Would you like to apply OS customization settings?" select `EDIT SETTINGS`
-6. Check Set username and password, Configure wireless LAN, and Set locale settings, and enter the settings and click `SAVE`
+5. When it asks you "Would you like to apply OS customization settings?", select `EDIT SETTINGS`
+6. Check Set username and password, Configure wireless LAN, Set locale settings, enter the settings, and click `SAVE`
 7. Click `YES` to apply the settings 
 8. Click `YES` to erase the card and start writing the data
 
-When Imager is done writing and verifying the microSD card you can remove it from your computer. 
+When Imager is finished writing and verifying the microSD card, you can remove it from your computer. 
 
 ## Power on the Raspberry Pi 
 
 Insert the microSD card into the Raspberry Pi, power it on, and boot to the Raspberry Pi OS desktop.
 
 {{% notice Note %}}
-Make sure the Raspberry Pi is connected to your network before proceeding. If it is not connected, make any needed adjustments to the network settings.
+Make sure the Raspberry Pi is connected to your network before proceeding.
 {{% /notice %}}
 
 ## Install the required software
 
-Open the terminal application by opening the menu on the top left corner and selecting `Accessories` and `Terminal`. 
+Open the terminal application by opening the menu on the top left corner and select `Accessories` and `Terminal`. 
 
 Copy and paste the commands below at the terminal prompt: 
 
@@ -80,12 +80,12 @@ Create a Forever-Free account to use for personal projects by following the step
 
 The OpenAI API provides a bridge to machine learning models so you can integrate AI features in applications. 
 
-1. The OpenAI API is not free, and the pricing is based on usage. You can find out more by reviewing the [OpenAI pricing](https://openai.com/pricing).
+1. The OpenAI API is not free with pricing based on usage. You can find out more by reviewing the [OpenAI pricing](https://openai.com/pricing).
 
-2. Create an OpenAI account at [OpenAI account sign up](https://platform.openai.com/signup), or if you already have an account log in at [OpenAI account login](https://platform.openai.com/login). 
+2. Create an OpenAI account at [OpenAI account sign up](https://platform.openai.com/signup) or, if you already have an account, log in at [OpenAI account login](https://platform.openai.com/login). 
 
 3. Navigate to the [API key page](https://platform.openai.com/account/api-keys) and select `Create new secret key`
 
-4. Save the key somewhere safe, and don't share it with anyone
+4. Save the key somewhere safe (don't share it with anyone)
 
-You now have your Raspberry Pi running and the required API keys. You are ready to start the project.
+You have now set up your Raspberry Pi as well as the required API keys. You are ready to start the project.
