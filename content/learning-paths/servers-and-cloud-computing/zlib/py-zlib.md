@@ -18,7 +18,7 @@ The previous section explained how to build the Cloudflare `zlib` which includes
 
 Use a Python example and measure the performance difference with `zlib-cloudflare`.
 
-Copy and save the file below as `zip.py`
+Use a text editor to copy and save the code below in a file named `zip.py`
 
 ```python { file_name="zip.py" }
 import gzip
