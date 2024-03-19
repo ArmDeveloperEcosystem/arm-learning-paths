@@ -14,7 +14,7 @@ With .NET MAUI, developers can leverage the full power of .NET to build interact
 
 Similar to Windows Presentation Foundation (WPF) and Xamarin.Forms, .NET MAUI utilizes a mix of declarative UI (using XAML) and imperative code, allowing for flexible and expressive UI construction. Moreover, .NET MAUI incorporates platform-specific capabilities and access to native APIs, ensuring that applications can fully utilize the features of the underlying operating system.
 
-In this learning path, you will explore how to create a .NET MAUI application and utilize the MVVM architectural pattern. Additionally, you will discover how .NET MAUI application performance is enhanced on Arm64 devices, particularly through the computationally intensive task of performing the multiply-add operation on two vectors. This operation, commonly used in many artificial neural network architectures, serves as an excellent example of Arm64's capabilities in handling performance-demanding tasks. 
+In this learning path, you will explore how to create a .NET MAUI application and discover how .NET MAUI application performance is enhanced on Arm64 devices, particularly through the computationally intensive task of performing the multiply-add operation on two vectors. This operation, commonly used in many artificial neural network architectures, serves as an excellent example of Arm64's capabilities in handling performance-demanding tasks. 
 
 You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.MobileApp.MAUI.git).
 
