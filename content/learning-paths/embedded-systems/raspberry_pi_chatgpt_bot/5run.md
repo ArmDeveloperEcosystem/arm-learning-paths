@@ -38,3 +38,5 @@ The errors are normal and do not effect the operation of the bot.
 {{% /notice %}}
 
 You have constructed a bot on your Raspberry Pi which wakes up on a keyword and answers your questions. 
+
+**Note** - Arm is committed to making the language we use inclusive, meaningful, and respectful. Our goal is to remove and replace non-inclusive language from our vocabulary to reflect our values and represent our global ecosystem. Arm is working actively with our partners, standards bodies, and the wider ecosystem to adopt a consistent approach to the use of inclusive language and to eradicate and replace offensive terms. We recognise that this will take time. We also recognise that part of the ALSA (Advanced Linux Sound Architecture) configuration syntax shown here as screen shots still contains references to non-inclusive language; it will be updated with newer terms as those terms are agreed and ratified with the wider community.
