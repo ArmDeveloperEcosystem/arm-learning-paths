@@ -7,12 +7,12 @@ layout: learningpathall
 ---
 
 ## Collect data from the Profiler
-In this section we will collect data from the Profiler that can be used later in the Profile Analyzer. You will record data from two different versions of the collision sample; unoptimized (or plain) and optimized (using Neon). Later you will load the data into the Analyzer to visualize and compare the datasets.
+In this section, we will collect data from the Profiler that can be used later in the Profile Analyzer. You will record data from two different versions of the collision sample; unoptimized (or plain) and optimized (using Neon). Later on you will load the data into the Analyzer to visualize and compare the datasets.
 
-Our sample app works best on Android when in landscape orientation. So turn your device to landscape orientation. Information will be displayed in the bottom right.
+Our sample app works best on Android when in landscape orientation. Information will be displayed in the bottom right.
 
 ### Collect data from unoptimized version
-You will now collect some data from the unoptimized version of the code. To do this you will save the data from the two builds first, and then later load the data into the Analyzer to visualize and compare the two data sets.
+You will now collect some data from the unoptimized version of the code. To do this, save the data from the two builds first and then later load the data into the Analyzer to visualize, and compare the two data sets.
 
 1. Open the script _Assets/BurstNeonCollisions/Scripts/CollisionCalculationScript.cs_.
 
@@ -22,7 +22,7 @@ You will now collect some data from the unoptimized version of the code. To do t
     public const Mode codeMode = Mode.Plain;
     ```
 
-1. Build and deploy to your Android device
+1. Build and deploy to your Android device:
 
     1. Open _File/Build Settings_
 
@@ -36,7 +36,7 @@ You will now collect some data from the unoptimized version of the code. To do t
 
     1. Select _Build and Run_
 
-    1. Enter a path and filename for your Android package (e.g. plain.apk)
+    1. Enter a path and filename for your Android package (e.g., plain.apk)
 
     1. When the app starts on your device, ensure it says Standard Mode in the bottom right. If not, start again from step 1.
 
@@ -70,21 +70,21 @@ Let’s repeat the above process but this time build and deploy the optimized ve
         public const Mode codeMode = Mode.Neon;
         ```
 
-    1. Build and deploy to your Android device
+    1. Build and deploy to your Android device:
 
         1. Open _File/Build Settings_
 
-        1. Ensure the following options are ticked
+        1. Ensure the following options are ticked:
 
-        1. _Development Build_
+           - _Development Build_
 
-        1. _Autoconnect Profiler_
+           - _Autoconnect Profiler_
 
     1. Ensure your device is selected in _Run Device_ drop-down menu
 
     1. Select Build and Run
 
-    1. Enter a path and filename for your Android package (e.g. neon.apk)
+    1. Enter a path and filename for your Android package (e.g., neon.apk)
 
     1. When the app starts on your device, ensure it says Neon Mode in the bottom right. If not, start again from step 1.
 
@@ -110,8 +110,8 @@ Let’s repeat the above process but this time build and deploy the optimized ve
 
 You have now collected performance data for two versions of our build; essentially “pre” and “post” optimization. The optimizations (Burst and Neon) made in this sample will be covered in the next learning path in this series.
 
-plain.data contains performance data from the unoptimized version. Neon.data contains data from our optimized version.
+Plain.data contains performance data from the unoptimized version. Neon.data contains data from our optimized version.
 
 You now know how to use the Profiler tool to analyze specific frames of performance data and save data for later.
 
-In the next section we will use the Analyzer tool to visualize and compare the data you have collected.
+In the next section, we will use the Analyzer tool to visualize and compare the data you have collected.
