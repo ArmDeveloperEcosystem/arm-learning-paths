@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Setup the Analyzer
-Before you can use the Analyzer tool, we need to install the related package it comes in. Follow these steps with the Package Manager:
+Before you can use the Analyzer tool, you need to install the related package it comes in. Follow these steps with the Package Manager:
 
 1. Select menu option _Window/Package Manager_
 
@@ -19,11 +19,11 @@ Before you can use the Analyzer tool, we need to install the related package it 
 
 1. Select _Install_
 
-1. After installation has completed you will have a new menu option _Window/Analysis/Profile Analyzer_
+1. After the installation has completed, you will have a new menu option _Window/Analysis/Profile Analyzer_
 
 ## Pulling data into the Analyzer
 
-Because we have already collected data from both sessions, you will need to repeat some steps. This is because the Analyzer cannot actually use the saved data directly so we will need to use the Profiler again. Once you are familiar with the tools you can streamline the steps to better suit your preferred workflow.
+Because we have already collected data from both sessions, you will need to repeat some steps. This is because the Analyzer cannot actually use the saved data directly so we will need to use the Profiler again. Once you are familiar with the tools, you can streamline the steps to better suit your preferred workflow.
 
 For now, open the Analyzer we have just installed:
 
@@ -49,19 +49,19 @@ The Analyzer will now import the unoptimized recording and you will see several 
 
 - A graph of the first 300 frames of activity
 
-- Filters that let you search the data, e.g. by marker name or thread
+- Filters that let you search the data, e.g., by marker name or thread:
 
-- _Top 10 markers on the median frame_ (i.e. a quick indication of which areas are taking the most time on the median frame)
+      - _Top 10 markers on the median frame_ (i.e., a quick indication of which areas are taking the most time on the median frame)
 
-- Table of Marker Details for selected range
+      - Table of Marker Details for selected range
 
-- Frame summary (for frame range and timing ranges for those frames)
+      - Frame summary (for frame range and timing ranges for those frames)
 
-- Thread summary details
+      - Thread summary details
 
-- Marker summary
+      - Marker summary
 
-Markers relate to the profiling data markers as named in calls such as BeginSample.
+Markers relate to the profiling data markers as named in calls such as `BeginSample`.
 
 ## Analyzing the unoptimized code
 
