@@ -12,13 +12,12 @@ minutes_to_complete: 30
 operatingsystems:
 - Linux
 prerequisites:
-- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
-  cloud service provider running `Ubuntu 20.04` or `Ubuntu 22.04`.
+- An Arm Linux computer or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider running Ubuntu 20.04 or Ubuntu 22.04.
 skilllevels: Introductory
 subjects: Libraries
 test_images:
 - ubuntu:latest
-test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
+test_link: 
 test_maintenance: true
 test_status:
 - passed

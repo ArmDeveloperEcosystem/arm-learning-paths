@@ -24,7 +24,9 @@ If the machine is confirmed to include `crc32` it may benefit from `zlib-cloudfl
 
 ## Check if the default zlib includes crc32 instructions
 
+{{% notice Note %}}
 Some Linux system may already make use of `crc32` with the default library. If the default `zlib` is already optimized, then using `zlib-cloudflare` may not have any impact on performance. 
+{{% /notice %}}
 
 If `zlib` is not installed, you can install it with the following command on Ubuntu, as well as additional packages for this Learning Path. 
 
@@ -40,11 +42,11 @@ To check if there are any CRC instructions in a library use `objdump` to disasse
 objdump -d /usr/lib/aarch64-linux-gnu/libz.so.1 | awk -F" " '{print $3}' | grep crc32 | wc -l
 ```
 
-If the result is 0 then there is no `crc32` instructions used in the library. 
+If the result is 0 then there are no `crc32` instructions used in the library. 
 
 ## Install Cloudflare zlib
 
-If there are no `crc32` instructions in `zlib` then `zlib-cloudflare` may help application performance. 
+If there are no `crc32` instructions in `zlib` then `zlib-cloudflare` may increase application performance. 
 
 To build and install `zlib-cloudflare` navigate to an empty directory and use these commands.
 
@@ -71,6 +73,8 @@ Since `zlib` is a shared library there are different ways to configure its usage
 
 Below is a simple C program to demonstrate `zlib` configuration.
 
+Use a text editor to save the code below in a file named `test.c`
+
 ```C { file_name="test.c" }
 #include <stdio.h>
 #include <stdlib.h>
@@ -93,7 +97,7 @@ int main()
 }
 ```
 
-Save the text above as a file `test.c` and compile the example.
+Compile the example program:
 
 ```bash
 gcc test.c -o test -lz
@@ -123,7 +127,7 @@ libc.so.6 => /lib/aarch64-linux-gnu/libc.so.6 (0x0000ffffab8df000)
 /lib/ld-linux-aarch64.so.1 (0x0000ffffaba8e000)
 ```
 
-## Set LD_PRELOAD to use zlib-cloudflare
+## Use zlib-cloudflare
 
 To run `test` with `zlib-cloudflare` instead of the default.
 
