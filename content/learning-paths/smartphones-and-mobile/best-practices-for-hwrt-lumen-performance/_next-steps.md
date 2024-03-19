@@ -1,8 +1,7 @@
 ---
+next_step_guidance: Try the Arm Mobile Studio learning path for an introduction to profiling and optimizing your applications.
 
-next_step_guidance: Try the Arm Performance Studio for mobile Learning Path for an introduction to profiling and optimizing your applications.
-
-recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
+recommended_path: /learning-paths/smartphones-and-mobile/ams/
 
 further_reading:
     - resource:

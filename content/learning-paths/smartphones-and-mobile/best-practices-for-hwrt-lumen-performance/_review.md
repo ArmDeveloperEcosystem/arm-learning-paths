@@ -2,14 +2,14 @@
 review:
     - questions:
         question: >
-            How many levels does a acceleration structure have?
+            How many levels does a accelration structure have?
         answers:
             - 1
             - 2
             - 4
         correct_answer: 2                    
         explanation: >
-            Acceleration structure has 2 levels, TLAS and BLAS.
+            Accelration structure has 2 levels, TLAS and BLAS.
 
     - questions:
         question: >
