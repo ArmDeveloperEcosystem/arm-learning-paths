@@ -6,17 +6,21 @@ weight: 4
 
 ## Install necessary software packages
 
-* Linux `perf` must be installed
+Install Linux `perf`:
 
 ```bash
 sudo apt install linux-tools-common linux-tools-generic linux-tools-`uname -r` -y
 ```
 
-* Allow user access to PMU (Performance Monitoring Unit) registers ([more information](https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#perf-event-paranoid)) :
+For more information about installing `perf` review [Perf for Linux on Arm](/install-guides/perf/).
+
+Allow user access to PMU (Performance Monitoring Unit) registers:
 
 ```console
 sudo sh -c "echo '1' > /proc/sys/kernel/perf_event_paranoid"
 ```
+
+For more information refer to the [Linux kernel documentation](https://www.kernel.org/doc/html/latest/admin-guide/sysctl/kernel.html#perf-event-paranoid).
 
 ## Detailed Steps
 
