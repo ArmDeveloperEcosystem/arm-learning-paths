@@ -42,7 +42,7 @@ Here is a quick summary to get you started:
 | Chromium      | native         | yes               |
 | Brave         | native         | yes               |
 | Edge          | native         | no                |
-| Chrome Canary | native         | no                |
+| Chrome Beta   | native         | no                |
 | Chrome Stable | emulation      | no                |
 | Vivaldi       | emulation      | yes               |
 
