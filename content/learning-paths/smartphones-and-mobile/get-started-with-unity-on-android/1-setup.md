@@ -44,7 +44,7 @@ You now have Unity and Android support. If you forgot to tick Android Build Supp
 
 ### Install Android build support on pre-existing versions of Unity
 
-Follow these steps if you already have a version of Unity and just need the Android build support. Unity Hub lets you install modules on top of existing installations. Each editor version you install can have different modules installed on top.
+Follow these steps if you already have a version of Unity and just need to add the Android build support. Unity Hub lets you install modules on top of existing installations. Each editor version you install can have different modules installed on top.
 
 Click on the _Installs_ tab on the left to see your list of editor installations. Then click on the _cog_ button and select _Add Modules_:
 
@@ -52,7 +52,7 @@ Click on the _Installs_ tab on the left to see your list of editor installations
 
 You will be presented with the module list. Select _Android Build Support_ and any other modules you wish to install. Then click _Continue_.
 
-Once you have installed Android Build Support you have everything you need for this learning path.
+Once you have installed Android Build Support, you have everything you need for this learning path.
 
 ### Android SDK and NDK
 
@@ -70,16 +70,16 @@ We have provided a simple project to accompany this learning path. To open it in
 
 ![Add project from disk#center](images/unity-add-project-from-disk.png "Figure 7. Add the sample project to Unity Hub")
 
-1. Navigate to your unzipped project directory and click "Add project".
+1. Navigate to your unzipped project directory and click "Add project"
 
 You will see your project listed in the _Projects_ tab in Unity Hub.
 
-1. You can now click on the project to open it. We used Unity 2022.3.18f1 to create the sample; if you use a different version you will get a warning. The project is very simple and should be safe to convert. However, if in doubt, we recommend installing 2022.3.18f1 via the Unity Hub as we showed above.
+1. You can now click on the project to open it. We used Unity 2022.3.18f1 to create the sample; if you use a different version, you will get a warning. The project is very simple and should be safe to convert. However, if in doubt, we recommend installing 2022.3.18f1 via the Unity Hub as we have already showed.
 
 The project will now open in Unity. Once loaded (the first time can take a while), click on the _Play_ button to run the sample. This will run the project inside the editor. You will see a spinning cube.
 
 ![Spinning cube sample#center](images/app-running-slowly.png "Figure 8. The spinning cube sample running in the editor")
 
-In the top right of the _Game_ window, click on _Stats_ to show the _Statistics_ popup. You will notice the frame rate is much lower than you might expect. For such a simple example we could reasonably expect to hit the maximum rate of the display (e.g. 60fps or better).
+In the top right of the _Game_ window, click on _Stats_ to show the _Statistics_ popup. You will notice the frame rate is much lower than you might expect. For such a simple example we could reasonably expect to hit the maximum rate of the display, e.g., 60fps or better.
 
-Later we'll use the Profiler to investigate, but before that we'll deploy to Android to check if the behavior is the same.
+Later we'll use the Profiler to investigate but, before that, we'll deploy to Android to check if the behavior is the same.
