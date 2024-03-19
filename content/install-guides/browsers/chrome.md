@@ -25,7 +25,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Installing Chrome
 
-The Chrome browser runs on Windows on Arm natively on the Canary release channel, and using emulation on the Stable release channel. Chrome is not available for Arm Linux. 
+The Chrome browser runs on Windows on Arm natively on the Beta release channel, and using emulation on the Stable release channel. Chrome is not available for Arm Linux. 
 
 ### Linux
 
@@ -37,14 +37,14 @@ Chrome is not available for Arm Linux.
 
 To install Chrome on Windows on Arm:
 
-1. Go to the [download page](https://www.google.com/chrome/canary/?platform=win_arm64) and click the Download Chrome Canary button.
+1. Go to the [download page](https://www.google.com/chrome/beta/?platform=win_arm64) and click the Download Chrome Beta button.
 
 2. Run the downloaded `ChromeSetup.exe` file 
 
 3. Find and start Chrome from the applications menu
 
 {{% notice Note %}}
-The native Windows on Arm version of Chrome is currently on the Canary channel. This is an experimental version which is updated daily, but is faster than emulation.
+The native Windows on Arm version of Chrome is currently on the Beta channel. This is a preview version of new features in development and is updated weekly, but is faster than emulation.
 {{% /notice %}}
 
 #### Emulation
