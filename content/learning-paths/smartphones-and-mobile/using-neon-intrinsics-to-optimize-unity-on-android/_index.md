@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - Basic knowledge of Unity and C#
-    - Recent Android device, such as mobile phone or tablet
+    - Recent Android device, such as a mobile phone or tablet
     - Desktop computer capable of running Unity
     - Unity version compatible with Unity Burst compiler 1.5 or later
 
