@@ -10,17 +10,17 @@ layout: learningpathall
 
 We have Unity installed with Android build support, and we have a spinning cube running too slowly! We can now start to investigate what's wrong.
 
-- Open the project in Unity (if you haven't already).
+1. Open the project in Unity (if you haven't already).
 
-- Open the _SampleScene_ scene by double-clicking the scene file from the _Project_ tab:
+1. Open the _SampleScene_ scene by double-clicking the scene file from the _Project_ tab:
 
 ![Open the sample scene#center](images/open-sample-scene.png "Figure 1. Double-click the scene file to open the scene")
 
 We will see a really simple scene with just a few objects:
 
-1. Main Camera
-1. Directional Light
-1. Cube
+- Main Camera
+- Directional Light
+- Cube
 
 We haven't made any modifications to the camera or the directional light but if you click on the Cube object, you will see that we have added a custom script called _Spin.cs_.
 
