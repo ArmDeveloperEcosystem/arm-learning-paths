@@ -16,7 +16,7 @@ We will prepare three things before we can get going:
 2. Add Android Build Support
 3. Extract the sample project from this learning path
 
-## Install Unity with Android build support
+## 1. Install Unity with Android build support
 
 First off, if you haven't already got Unity, we recommend following their steps to get the latest version. The simplest way to get Unity is via their installation manager called Unity Hub. Unity Hub will let you manage multiple installations of Unity and also provide quick access to your projects.
 
@@ -42,7 +42,7 @@ You should see a list of optional features to install with your editor. You can 
 
 You now have Unity and Android support. If you forgot to tick Android Build Support or you already had a version of Unity without it, follow the next section to download Android support separately.
 
-### Install Android build support on pre-existing versions of Unity
+### 2. Install Android build support on pre-existing versions of Unity
 
 Follow these steps if you already have a version of Unity and just need to add the Android build support. Unity Hub lets you install modules on top of existing installations. Each editor version you install can have different modules installed on top.
 
@@ -60,7 +60,7 @@ Android Build Support installs and manages the Android SDK and Android NDK for y
 
 ![Android settings in preferences#center](images/unity-prefs-external-tools.png "Figure 6. Android settings in Preferences")
 
-## Extract and open the Unity project
+## 3. Extract and open the Unity project
 
 We have provided a simple project to accompany this learning path. To open it in Unity, please follow these instructions:
 
