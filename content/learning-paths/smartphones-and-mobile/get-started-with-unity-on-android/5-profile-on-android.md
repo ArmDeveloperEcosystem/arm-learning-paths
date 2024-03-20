@@ -17,13 +17,13 @@ You should always check the performance of your app on a device comparable to th
 
 ![Enable profiling options](images/build-settings-enable-profiling.png "Figure 1. Enable options for profiling")
 
-1. You should already have the Android platform selected, so connect your device and click on _Build and Run_.
+3. You should already have the Android platform selected, so connect your device and click on _Build and Run_.
 
-1. Choose a filename for your build.
+4. Choose a filename for your build.
 
-1. As before in the editor, the Profiler will automatically start collecting data and your timeline will start to fill.
+5. As before in the editor, the Profiler will automatically start collecting data and your timeline will start to fill.
 
-1. Allow the app to run for a few seconds. Once you have a few seconds of timeline, you can stop the app.
+6. Allow the app to run for a few seconds. Once you have a few seconds of timeline, you can stop the app.
 
 You have confirmed that the app's performance is poor on Android as well as in the Unity editor.
 
