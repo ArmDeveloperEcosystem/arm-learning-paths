@@ -64,4 +64,4 @@ Keep in mind that it is not easy to vectorize your code better than the Burst co
 
 ## Next step
 
-We will first look at auto-vectorization by the Burst compiler and then look at optimizing further by hand-writing Neon intrinsics. In both cases you can provide hints to the compiler to help it auto-vectorize. You can follow [best practice](/learning-paths/smartphones-and-mobile/using-neon-intrinsics-to-optimize-unity-on-android/5-the-optimizations#best-practice) to organize your code and data to make them optimal for Neon.
+We will first look at auto-vectorization by the Burst compiler and then look at optimizing further by hand-writing Neon intrinsics. In both cases you can provide hints to the compiler to help it auto-vectorize. You can follow [best practices](/learning-paths/smartphones-and-mobile/using-neon-intrinsics-to-optimize-unity-on-android/5-the-optimizations#best-practices) to organize your code and data to make them optimal for Neon.
