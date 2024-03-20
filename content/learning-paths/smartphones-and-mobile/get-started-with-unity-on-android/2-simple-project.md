@@ -10,9 +10,9 @@ layout: learningpathall
 
 We have Unity installed with Android build support, and we have a spinning cube running too slowly! We can now start to investigate what's wrong.
 
-Open the project in Unity (if you haven't already).
+- Open the project in Unity (if you haven't already).
 
-Open the _SampleScene_ scene by double-clicking the scene file from the _Project_ tab:
+- Open the _SampleScene_ scene by double-clicking the scene file from the _Project_ tab:
 
 ![Open the sample scene#center](images/open-sample-scene.png "Figure 1. Double-click the scene file to open the scene")
 
