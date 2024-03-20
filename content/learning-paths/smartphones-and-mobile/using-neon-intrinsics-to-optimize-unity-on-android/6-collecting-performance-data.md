@@ -44,17 +44,17 @@ You will need to ensure plain (unoptimized) mode is active:
 
 1. Open _Assets/BurstNeonCollisions/Scripts/CollisionCalculationScript.cs_
 
-1. Go to line 66
+2. Go to line 66
 
-1. Edit the line to match the following:
+3. Edit the line to match the following:
 
 ```
 public const Mode codeMode = Mode.Plain;
 ```
 
-1. Open _Build Settings_ from the _File_ menu
+4. Open _Build Settings_ from the _File_ menu
 
-1. Ensure the following options:
+5. Ensure the following options:
 
     1. _Development build_ is ticked
 
@@ -62,17 +62,17 @@ public const Mode codeMode = Mode.Plain;
 
     1. _Run Device_ is set to your Android device
 
-1. Select _Build and Run_
+6. Select _Build and Run_
 
-1. Choose a filename, e.g., _plain.apk_
+7. Choose a filename, e.g., _plain.apk_
 
-1. The application will build and deploy to your Android device
+8. The application will build and deploy to your Android device
 
-1. The Profiler will start collecting data automatically
+9. The Profiler will start collecting data automatically
 
-1. Wait until the character count hits 2401 and then make sure to record for another 300 frames. If you prefer, you could clear the results as soon as the character count hits 2401, or not tick _Autoconnect Profiler_ and start recording manually.
+10. Wait until the character count hits 2401 and then make sure to record for another 300 frames. If you prefer, you could clear the results as soon as the character count hits 2401, or not tick _Autoconnect Profiler_ and start recording manually.
 
-1. Select the disk icon in the top-right and save the data as _plain.data_
+11. Select the disk icon in the top-right and save the data as _plain.data_
 
 ## Record performance data for Burst mode
 Repeat the above process to record performance data for Burst mode. All of the steps are the same except that we set the mode in _CollisionCalculationScript.cs_ as follows:
