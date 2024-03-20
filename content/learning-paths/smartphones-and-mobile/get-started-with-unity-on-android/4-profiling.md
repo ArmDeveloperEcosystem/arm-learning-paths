@@ -20,17 +20,17 @@ After this learning path, we recommend you read the [Profiler overview](https://
 
 ## Profiling in the editor
 
-As always, open the _SampleScene_ (if you haven't already) and click the _Play_ button to run the app.
+1. As always, open the _SampleScene_ (if you haven't already) and click the _Play_ button to run the app.
 
-While the app is running, we can open the Profiler. Select menu option _Window->Analysis->Profiler_.
+1. While the app is running, we can open the Profiler. Select menu option _Window->Analysis->Profiler_.
 
-Allow the app to run for a few seconds so the Profiler can gather a reasonable amount of data.
+1. Allow the app to run for a few seconds so the Profiler can gather a reasonable amount of data.
 
-Once the timeline has been filled, click on the _Pause_ button to pause the app. Now click anywhere in the timeline at the top. It will look something like this:
+1. Once the timeline has been filled, click on the _Pause_ button to pause the app. Now click anywhere in the timeline at the top. It will look something like this:
 
 ![Profiler window](images/profiler-main-timeline.png "Figure 1. Profiler window")
 
-The CPU Usage graph at the top-right shows the CPU activity of the app. The Profiler presents several different types of activity using different colors. You can click on the labels to hide or show them on the graph.
+5. The CPU Usage graph at the top-right shows the CPU activity of the app. The Profiler presents several different types of activity using different colors. You can click on the labels to hide or show them on the graph.
 
 The various types of activity recorded can be seen in more detail if you scroll down the CPU Usage panel. The areas measured include rendering (CPU-side calls), scripts, physics, animation, and UI etc. You can also see details regarding memory usage, audio, video, and others.
 
