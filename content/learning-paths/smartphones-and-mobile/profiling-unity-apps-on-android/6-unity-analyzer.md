@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-## Setup the Analyzer
+## Set up the Analyzer
 Before you can use the Analyzer tool, you need to install the related package it comes in. Follow these steps with the Package Manager:
 
 1. Select menu option _Window/Package Manager_
@@ -39,7 +39,7 @@ For now, open the Analyzer we have just installed:
 
 1. Click into the Analyzer window and select Pull Data in the top left
 
-The Analyzer will now import the unoptimized recording and you will see several panels summarizing the data.
+The Analyzer will now import the unoptimized recording and you will see several panels summarizing the data:
 
 ![Analyzer panels#center](images/analyzer-panels-after-pull-data.PNG "Figure 2. Profiler Analyzer panels; Mode and Export (top left), activity graph (top), filters (middle left), profile markers (bottom) and summaries (right).")
 
@@ -51,15 +51,15 @@ The Analyzer will now import the unoptimized recording and you will see several 
 
 - Filters that let you search the data, e.g., by marker name or thread:
 
-       _Top 10 markers on the median frame_ (i.e., a quick indication of which areas are taking the most time on the median frame)
+      - _Top 10 markers on the median frame_ (i.e., a quick indication of which areas are taking the most time on the median frame)
 
-       Table of Marker Details for selected range
+      - Table of Marker Details for selected range
 
-       Frame summary (for frame range and timing ranges for those frames)
+      - Frame summary (for frame range and timing ranges for those frames)
 
-       Thread summary details
+      - Thread summary details
 
-       Marker summary
+      - Marker summary
 
 Markers relate to the profiling data markers as named in calls such as `BeginSample`.
 
@@ -81,21 +81,21 @@ You can also reorder the data by frame duration:
 
 1. Right-click on the Analyzer graph to show a context menu
 
-1. Select _Order by Frame Duration_ to toggle it on
+2. Select _Order by Frame Duration_ to toggle it on
 
 This may help you find a representative frame. Alternatively, you could ask the Analyzer to find the median frame for you:
 
-1. Right-click on the graph again to show the context menu
+3. Right-click on the graph again to show the context menu
 
-1. Select context menu option _Select Median Frame_
+4. Select context menu option _Select Median Frame_
 
 The Analyzer will jump to the median frame. Notice that the Marker Details table automatically updates with the relevant data.
 
 You can also reduce the data analysis to a specific range of frames.
 
-1. On the graph, left-click and drag to highlight the frames you want to analyze
+5. On the graph, left-click and drag to highlight the frames you want to analyze
 
-1. Hover your mouse over the selected frames in the graph to see a pop-up summary. The pop-up will tell you the frame duration of the exact frame you are hovering over and also the total time of the selected frames.
+6. Hover your mouse over the selected frames in the graph to see a pop-up summary. The pop-up will tell you the frame duration of the exact frame you are hovering over and also the total time of the selected frames.
 
 ![Analyzer frame selection#center](images/analyzer-select-similar-frames.PNG "Figure 3. Selected range of similar frames from the unoptimized version.")
 
