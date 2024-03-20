@@ -44,7 +44,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
 1. A pop-up window will ask to open the asset in Unity. You can do this by selecting the _Open Unity Editor_ button
 
-1. If Unity fails to open the asset or no pop-up appears, select _My Assets_ button in the top-right of the page
+1. If Unity fails to open the asset or no pop-up appears, select _My Assets_ button in the top-right of the page:
 
     a. Your assets should appear in a list
 
@@ -74,7 +74,7 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
     ![Overwrite project settings#center](images/import-window-step-2.png "Figure 2. Overwrite project settings with the settings from the imported sample project.")
 
-## Setup the project
+## Set up the project
 Once the sample project has been imported, you will see some errors and warnings.
 
 1. Open _File_ menu and select _Build Settings_
@@ -112,7 +112,7 @@ The game will launch and you will see an empty environment begin to fill with mo
 ![Screenshot at runtime#center](images/game-view.PNG "Figure 4. Sample running in Game view.")
 
 ## Deploy to Android
-You will now deploy the sample to your Android device. Your device must already be setup for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android).
+You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android).
 
 1. Open _Build Settings_ from the File menu
 
