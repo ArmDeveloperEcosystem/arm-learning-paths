@@ -248,6 +248,6 @@ You can further check that your code is running properly by opening the `Serial 
 
 ![Debug output](_images/output.png)
 
-Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. In this Learning Path, you have learned the basics of embedded programming, the Arduino software stack, and some basic electronics as well as how to connect them together using a breadboard.
+Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. 
 
 Continue on to see how to improve the application by replacing the `loop()` and `delay()` calls with interrupts. 
