@@ -243,16 +243,16 @@ You will now build and run the application for x64 and Arm64 configurations. Pro
 ```XML
 <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
 ```
-6. Now, select x64 from the solution platform drop-down, and then click the Windows Machine button:
+6. First, select ARM64 from the solution platform drop-down, and then click the Windows Machine button:
 
 ![fig10](figures/10.png)
 
 7. The application will start after a while. Run vector calculations for various execution counts: 10, 100, 1000, and 10000.
-8. Repeat the same for ARM64. Your results should look similar to the following figures:
+8. Repeat the same for x64. Your results from the two runs should look similar to the following figures:
 
-![fig11](figures/11.png)
+![fig11](figures/12.png)
 
-![fig12](figures/12.png)
+![fig12](figures/11.png)
 
 By comparing the execution times, we observe that Arm64 enables about a 30% performance improvement.
 
