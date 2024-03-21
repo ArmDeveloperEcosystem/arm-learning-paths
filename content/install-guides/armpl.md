@@ -15,7 +15,7 @@ additional_search_terms:
 minutes_to_complete: 10
 
 ### Link to official documentation
-official_docs: https://developer.arm.com/documentation/101004/latest
+official_docs: https://developer.arm.com/documentation/101004
 author_primary: Pareena Verma
 
 ### PAGE SETUP
@@ -35,14 +35,17 @@ Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows)
 
 Below are the official documentation references:
 
-- Reference Guide: &nbsp;[Arm Performance Libraries Reference Guide](https://developer.arm.com/documentation/101004/latest)
-- Windows: &emsp;&emsp;&emsp;&nbsp;[Get started with Arm Performance Libraries (Windows version)](https://developer.arm.com/documentation/109361/2310/?lang=en)
-- MacOS: &emsp;&emsp;&emsp;&ensp;&nbsp;&nbsp;&nbsp;[Get started with Arm Performance Libraries (macOS version)](https://developer.arm.com/documentation/109362/2310/?lang=en)
-- Linux: &emsp;&emsp;&emsp;&ensp;&nbsp;&ensp;&ensp;&nbsp;[Get started with Arm Performance Libraries (stand-alone Linux version)](https://developer.arm.com/documentation/102620/2310/?lang=en)
+- [Arm Performance Libraries Reference Guide](https://developer.arm.com/documentation/101004)
+- Get started with Arm Performance Libraries
+    - [Windows](https://developer.arm.com/documentation/109361)
+    - [MacOS](https://developer.arm.com/documentation/109362)
+    - [Linux](https://developer.arm.com/documentation/102620)
 
 ## Windows {#windows}
 
-On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file. Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
+On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file.
+
+Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
 
 ![win_download #center](/install-guides/_images/download-win-armpl_23.10.png)
 
@@ -66,13 +69,15 @@ Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing direct
 
 You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
-For more information refer to [Get started with Arm Performance Libraries (Windows version)
-Version 23.10](https://developer.arm.com/documentation/109361/2310/?lang=en)
+For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109361).
+
 
 ## macOS {#macos}
 
 Go to the Download MacOS section of the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries) and download the `dmg` file.
-Double-click on the icon of the downloaded package to mount the disk image. Alternatively, open a terminal and run the command below:
+Double-click on the icon of the downloaded package to mount the disk image.
+
+Alternatively, open a terminal and run the command below:
 
 ```console
 hdiutil attach arm-performance-libraries_23.10_macOS.dmg
@@ -87,8 +92,8 @@ Using this command you automatically accept the End User License Agreement and t
 
 To get started, compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
-For more information refer to [Get started with Arm Performance Libraries (macOS version)
-Version 23.10](https://developer.arm.com/documentation/109362/2310/?lang=en)
+For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).
+
 
 ## Linux {#linux}
 
@@ -114,7 +119,9 @@ Run the installation script as a super user:
 ```command
 sudo ./arm-performance-libraries_23.10_Ubuntu-22.04.sh -a
 ```
-Using the `-a` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
+Using the `-a` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
+
+If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
 ### Setup your environment
 
@@ -155,6 +162,5 @@ module load armpl/23.10.0_gcc-12.2
 ```
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
-For more information refer to [Get started with Arm Performance Libraries (stand-alone Linux version)
-Version 23.10](https://developer.arm.com/documentation/102620/2310/?lang=en)
+For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102620).
 

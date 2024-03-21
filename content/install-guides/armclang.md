@@ -62,18 +62,18 @@ To install on Linux hosts, `untar` the downloaded package and run the install sc
 ### x86_64
 ```console
 mkdir tmp
-mv ARMCompiler6.21_standalone_linux-x86_64.tar.gz tmp
+mv ARMCompiler6.22_standalone_linux-x86_64.tar.gz tmp
 cd tmp
-tar xvfz ARMCompiler6.21_standalone_linux-x86_64.tar.gz
-./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.21
+tar xvfz ARMCompiler6.22_standalone_linux-x86_64.tar.gz
+./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.22
 ```
 ### aarch64
 ```console
 mkdir tmp
-mv ARMCompiler6.21_standalone_linux-aarch64.tar.gz tmp
+mv ARMCompiler6.22_standalone_linux-aarch64.tar.gz tmp
 cd tmp
-tar xvfz ARMCompiler6.21_standalone_linux-aarch64.tar.gz
-./install_aarch64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.21
+tar xvfz ARMCompiler6.22_standalone_linux-aarch64.tar.gz
+./install_aarch64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.22
 ```
 Remove the install data when complete.
 ```console
@@ -83,12 +83,12 @@ rm -r tmp
 Add the `bin` directory of the installation to the `PATH` and confirm `armclang` can be invoked.
 ### bash
 ```console
-export PATH=/home/$USER/ArmCompilerforEmbedded6.21/bin:$PATH
+export PATH=/home/$USER/ArmCompilerforEmbedded6.22/bin:$PATH
 armclang --version
 ```
 ### csh/tcsh
 ```console
-set path=(/home/$USER/ArmCompilerforEmbedded6.21/bin $path)
+set path=(/home/$USER/ArmCompilerforEmbedded6.22/bin $path)
 armclang --version
 ```
 
