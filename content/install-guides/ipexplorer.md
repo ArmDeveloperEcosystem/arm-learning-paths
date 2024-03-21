@@ -44,13 +44,13 @@ Arm IP Explorer is a cloud application and does not require any installation.
 
 You can access Arm IP Explorer using a browser by visiting [ipexplorer.arm.com](https://ipexplorer.arm.com/)
 
-If your Arm account is not setup for access you are presented with a request access form.
+If your Arm account is not setup for access, you will be presented with a request access form.
 
-Fill out the form and Arm will review your request and grant access if appropriate.
+Fill out the form, Arm will review your request, and grant access, if appropriate.
 
 ## Explore Arm IP
 
-Use the `Explore` buttons to learn about the features of various Arm IP, and compare them against each other.
+Use the `Explore` buttons to learn about the features of various Arm IP and compare them against each other.
 
 They are broken down into different sections:
 * Explore Processors
@@ -60,11 +60,11 @@ They are broken down into different sections:
 
 You can configure IP blocks to your needs to be able to make comparisons in terms of performance, power efficiency, silicon area, and other parameters.
 
-You can save your configured IP for later use, as well as render the RTL for your configuration (requires an appropriate license from Arm).
+You can save your configured IP for later use, as well as render the RTL for your configuration (**Note** that this requires an appropriate license from Arm).
 
 ## Simulate Processors
 
-To help evaluate the performance of the processors, Arm IP Explorer provides a number of RTL based simulation systems that allow you to run benchmark code on them.
+To help evaluate the performance of the processors, Arm IP Explorer provides a number of RTL-based simulation systems that allow you to run benchmark code on them.
 
 See the [Custom software for simulation with IP Explorer](/learning-paths/cross-platform/ipexplorer/) learning path for more information.
 
