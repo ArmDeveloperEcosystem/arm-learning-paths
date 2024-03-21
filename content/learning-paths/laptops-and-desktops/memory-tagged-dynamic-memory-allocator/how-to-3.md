@@ -103,7 +103,7 @@ different tags to each allocation (and assign tag `0` to free space).
 
 ### Accessing Range Headers
 
-The ranges have headers that are stored in tagged memory. This means we cannot simply inplement a pointer that pointed to one
+The ranges have headers that are stored in tagged memory. This means we cannot simply implement a pointer that pointed to one
 range and expect it to be able to read from a subsequent range.
 
 For example, if we have done one allocation, the ranges might be:
