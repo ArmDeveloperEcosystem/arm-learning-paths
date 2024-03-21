@@ -40,7 +40,7 @@ To create an Arm account, enter your e-mail on the [registration form](https://w
 
 ## Installation
 
-Arm IP Explorer is a cloud application and does not require any installation.
+As Arm IP Explorer is a cloud application, it does not require any installation.
 
 You can access Arm IP Explorer using a browser by visiting [ipexplorer.arm.com](https://ipexplorer.arm.com/)
 
@@ -66,11 +66,9 @@ You can save your configured IP for later use, as well as render the RTL for you
 
 To help evaluate the performance of the processors, Arm IP Explorer provides a number of RTL-based simulation systems that allow you to run benchmark code on them.
 
-See the [Custom software for simulation with IP Explorer](/learning-paths/cross-platform/ipexplorer/) learning path for more information.
-
 ## Create SoC Concept
 
-An `SoC Concept` is the first step towards the architectural design of your device.
+A `SoC Concept` is the first step towards the architectural design of your device.
 
 You can select any of the Arm IPs that you wish to use, including those configured previously, and define how they can be connected.
 
