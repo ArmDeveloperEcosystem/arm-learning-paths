@@ -77,7 +77,7 @@ review:
             - Serial.println("Hello world")
         correct_answer: 2                   
         explanation: >
-            Variables can be changed during an interrupt, but both delay() and Serial.println() depend on background timing updates that won't happen until after the interrupt handling has finished and returned execution back to normal.
+            Variables can be changed during an interrupt but both delay() and Serial.println() depend on background timing updates that won't happen until after the interrupt handling has finished and returned execution back to normal.
                
     - questions:
         question: >
