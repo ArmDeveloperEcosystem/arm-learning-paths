@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-At this point you have a working memory allocator that tags the memory it manages.
+At this point, you have a working memory allocator that tags the memory it manages.
 In this section we will show you a few classic memory allocaton mistakes that
 this alloctor can prevent because it uses memory tagging.
 
