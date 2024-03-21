@@ -16,7 +16,7 @@ prerequisites:
 author_primary: Dawid Borycki
 
 ### Tags
-skilllevels: Introduction
+skilllevels: Introductory
 subjects: Migration to Arm
 armips:
     - Cortex-A
