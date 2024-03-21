@@ -6,7 +6,7 @@ minutes_to_complete: 30
 who_is_this_for: This learning path is for developers who want to learn how to create cross-platform applications with .NET MAUI and leverage performance improvements on Arm64.
 
 learning_objectives:
-   - Create and build an .NET MAUI application
+   - Create and build a .NET MAUI application
    - Measure code execution performance uplift on Arm64   
 
 prerequisites:
