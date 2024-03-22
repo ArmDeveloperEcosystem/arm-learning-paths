@@ -16,9 +16,9 @@ After running Sysreport, a summary is generated and displayed on screen. Informa
 
 Example use cases for Sysreport include:
 
-* As a developer, you want to know if a cloud instance supports a particular performance feature, so that you can debug a performance problem
-* As a developer, you want a quick, single-page summary of a system's performance configuration, so that you don't need to run multiple commands manually to gather what you need
-* As a developer, you would like to know suggested configuration changes you can make to a system, so that you can improve your ability to collect performance information
+* As a developer, you want to know if a cloud instance supports a particular performance feature so that you can debug a performance problem
+* As a developer, you want a quick, single-page summary of a system's performance configuration so that you don't need to run multiple commands manually to gather what you need
+* As a developer, you would like to know suggested configuration changes you can make to a system so that you can improve your ability to collect performance information
 
 ## Run Sysreport
 
