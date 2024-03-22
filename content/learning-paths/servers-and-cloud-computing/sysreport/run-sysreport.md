@@ -6,31 +6,29 @@ weight: 3
 layout: learningpathall
 ---
 
-## Using the tool
+## About Sysreport
 
-Sysreport is a system capability reporting tool that gives application developers a quick summary of what performance features are available on the system. It aims to report the system configuration in a way that is focused on performance analysis.
+Sysreport is a system capability reporting tool that gives application developers a quick summary of the performance features available on a Linux system. It reports the system configuration in a way that is focused on performance analysis.
 
-This tool is aimed at anyone trying to profile performance on Arm-based systems; this includes cloud instances, bare metal servers, and small devices such as developer boards and Raspberry Pi devices.
+The tool is aimed at anyone trying to profile performance on Arm Linux systems; this includes cloud instances, bare metal servers, small developer boards, and Raspberry Pi devices.
 
-After running the tool, a summary report is generated and displayed on screen. Information reported by the tool includes hardware configuration, operating system configuration (build time), and other configuration settings that can be changed. By default, the tool displays advice about possible configuration changes that can be made in order to improve its ability to collect performance information from the system; to disable this, use the '--no-advice' option.
+After running Sysreport, a summary is generated and displayed on screen. Information reported includes hardware configuration, operating system configuration (build time), and other configuration settings that can be changed. By default, the tool displays advice about possible configuration changes you can make in order to improve the ability to collect performance information. You can disable the advice using the `--no-advice` option.
 
-Example use cases for this tool include:
-* As a developer, I want to know if my cloud instance supports a particular performance feature I require, so that I am able to debug a performance problem
-* As a developer, I want a quick single page summary of my system's performance configuration, so that I don't have to run lots of different commands manually to gather what I need
-* As a developer, I would like to know suggested configuration changes I can make to my system, so that I can improve my ability to collect performance information
+Example use cases for Sysreport include:
 
-## Running the tool
+* As a developer, you want to know if a cloud instance supports a particular performance feature, so that you can debug a performance problem
+* As a developer, you want a quick, single-page summary of a system's performance configuration, so that you don't need to run multiple commands manually to gather what you need
+* As a developer, you would like to know suggested configuration changes you can make to a system, so that you can improve your ability to collect performance information
 
-* Run the tool on an example system and mention what the system config is:
+## Run Sysreport
 
-To run Sysreport, use the following command:
+Run Sysreport with the following command:
+
 ```console
 python sysreport.py
 ```
 
-In this example we're using an Arm Neoverse N1 System Development Platform (N1SDP), an enterprise class reference board based on the Neoverse N1 core, running Ubuntu 20.04.6 LTS.
-
-Example output is shown below:
+Below is the output from an Arm Neoverse N1 System Development Platform (N1SDP), a reference board based on the Neoverse N1 core, running Ubuntu 20.04.6 LTS:
 
 ```output
 System feature report:
@@ -89,7 +87,7 @@ Actions that can be taken to improve performance tools experience:
     build with CORESIGHT=1
 ```
 
-Here's another example using an AWS EC2 cloud instance, running Ubuntu 22.04.3 LTS:
+Here is the output from an AWS EC2 cloud instance, running Ubuntu 22.04.3 LTS:
 
 ```output
 System feature report:
@@ -154,5 +152,5 @@ Actions that can be taken to improve performance tools experience:
     kernel module arm_spe_pmu.ko must be built
   hardware trace not enabled
     rebuild kernel with CONFIG_CORESIGHT
-    ensure ACPI desribes CoreSight trace fabric
+    ensure ACPI describes CoreSight trace fabric
 ```

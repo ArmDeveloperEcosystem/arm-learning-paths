@@ -3,15 +3,15 @@ title: Get ready for performance analysis with Sysreport
 
 minutes_to_complete: 10
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to use the system capability reporting tool, to understand the configuration and availability of performance features on their Arm-based system.
+who_is_this_for: This is an introductory topic for software developers who want to use the system capability reporting tool, Sysreport, to understand and configure the performance features of their Arm Linux system.
 
 learning_objectives: 
-    - Run the Sysreport tool to get a quick report of the system configuration
-    - Discover which performance analysis features are available and correctly enabled on the system
-    - Understand what configuration changes can be made to the system to improve the ability to collect performance information 
+    - Run Sysreport to get a quick report of the system configuration
+    - Discover which performance analysis features are available and enabled 
+    - Make configuration changes to improve performance information collection
 
 prerequisites:
-    - An Arm-based system (bare metal server, cloud instance, developer board) running Linux OS with a version of Python installed
+    - An Arm-based system (bare metal server, cloud instance, developer board) running Linux 
 
 author_primary: James Whitaker, Arm
 
@@ -19,7 +19,8 @@ author_primary: James Whitaker, Arm
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - Aarch64
+    - Cortex-A 
+    - Neoverse
 tools_software_languages:
     - Python
 operatingsystems:

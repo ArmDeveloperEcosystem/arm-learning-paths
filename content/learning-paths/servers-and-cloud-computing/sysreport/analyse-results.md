@@ -1,20 +1,20 @@
 ---
-title: Analyse the results
+title: Analyze the results
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Analysing the results
+Sysreport displays an overview of the hardware configuration of the system. It quickly identifies whether or not a hardware feature is available, so that you can switch to a different system if necessary. For example, you might expect a certain hardware feature to be available on a given cloud instance, but it isn't available due to the system configuration.
 
-Sysreport will display an overview of the hardware configuration of the system. It is useful to know at quick glance whether or not a hardware feature is available, so that you can switch to a different system if necessary. For example, it might be expected for a certain hardware feature to be available on a given cloud instance but it isn't due to misconfiguration.
-
-After running the tool, the report should be closely examined to ensure that the configuration is suitable for your needs. Some configuration changes may be required in order to get the system into the desired state for performance analysis; these could be as simple as modifying kernel parameters at run-time, or more involved changes such as recompiling the kernel with different kernel configuration options.
+After running Sysreport, you can examine the output to determine if the configuration is suitable for your needs. Some configuration changes may be required in order to get the system into the desired state for performance analysis. The changes could be as simple as modifying kernel parameters at run-time, or more involved such as recompiling the kernel with different kernel configuration options.
 
 ## Modifying the system configuration
 
-In our AWS example from the previous page, the Sysreport tool indicated that the global kernel parameter `perf_event_paranoid` was too strict meaning that system-level events could not be monitored by non-privileged users:
+For the AWS EC2 instance on the previous page, Sysreport indicates the global kernel parameter `perf_event_paranoid` is too strict, meaning that system-level events cannot be monitored by non-privileged users.
+
+Here is the important output:
 
 ```output
 Actions that can be taken to improve performance tools experience:
@@ -26,14 +26,19 @@ Actions that can be taken to improve performance tools experience:
   ...
 ```
 
-By listing all of the kernel parameters, we're able to see that `kernel.perf_event_paranoid` is set to 4:
+List the kernel parameters and print `kernel.perf_event_paranoid` by running:
+
+```console
+sudo sysctl -a | grep kernel.perf_event_paranoid
+```
+
+The output is:
 
 ```output
-sudo sysctl -a | grep kernel.perf_event_paranoid
 kernel.perf_event_paranoid = 4
 ```
 
-According to the Linux kernel documentation:
+The Linux kernel documentation explains the possible values:
 
 ```output
 perf_event_paranoid:
@@ -49,19 +54,23 @@ users (without CAP_SYS_ADMIN).  The default value is 2.
 >=2: Disallow kernel profiling by users without CAP_SYS_ADMIN
 ```
 
-Setting this kernel parameter to 0 will allow the [perf](https://learn.arm.com/install-guides/perf) tool to access to CPU events, kernel profiling, ftrace function tracepoint, and raw tracepoints:
+Setting this kernel parameter to 0 allows [Linux Perf](/install-guides/perf/) to access to CPU events, kernel profiling, ftrace function tracepoint, and raw tracepoints.
 
-```output
+To set the value to 0 until the next reboot run:
+
+```console
 sudo sysctl kernel.perf_event_paranoid=0
-kernel.perf_event_paranoid = 0
-
-sudo sysctl -a | grep kernel.perf_event_paranoid
-kernel.perf_event_paranoid = 0
 ```
 
-Running the Sysreport tool again shows that the problem has been resolved:
+To permanently set the value, use a text editor to add the following line to the file `/etc/sysctl.conf`
 
-```bash
+```console
+kernel.perf_event_paranoid=0
+```
+
+Running Sysreport again displays the new configuration: 
+
+```output
 System feature report:
   Collected:           2024-03-21 14:12:53.529899
   Script version:      2024-03-21 11:50:23.254919
@@ -118,5 +127,5 @@ Actions that can be taken to improve performance tools experience:
     kernel module arm_spe_pmu.ko must be built
   hardware trace not enabled
     rebuild kernel with CONFIG_CORESIGHT
-    ensure ACPI desribes CoreSight trace fabric
+    ensure ACPI describes CoreSight trace fabric
 ```
