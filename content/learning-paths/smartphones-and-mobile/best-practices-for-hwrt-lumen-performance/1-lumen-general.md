@@ -5,6 +5,7 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+Before you start, you need to have enabled Hardware Ray Tracing on Lumen on your device. Please follow the [How to enable Hardware Ray Tracing on Lumen for Android devices](/learning-paths/smartphones-and-mobile/how-to-enable-hwrt-on-lumen-for-android-devices/) learning path which will take you through the necessary steps.
 
 ## Lumen General Setting Optimizations
 To use Lumen in your game scene, you need to add a _PostProcessVolume_ actor to your scene. Under _PostProcessVolume_ actor, there are a few options you can tweak. During the period of making our Lumen content, "Steel Arms", we found a few recommended values for those options which are suited for Android devices. The following two images show all option values we used in "Steel Arms".
