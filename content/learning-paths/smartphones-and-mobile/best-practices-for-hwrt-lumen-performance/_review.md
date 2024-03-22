@@ -2,34 +2,34 @@
 review:
     - questions:
         question: >
-            How many levels does a accelration structure have?
+            How many levels does an acceleration structure have?
         answers:
             - 1
             - 2
             - 4
         correct_answer: 2                    
         explanation: >
-            Accelration structure has 2 levels, TLAS and BLAS.
+            The acceleration structure has 2 levels, TLAS and BLAS.
 
     - questions:
         question: >
-            Can acceleration structure be updated at run-time?
+            Can the acceleration structure be updated at run-time?
         answers:
             - Yes
             - No
         correct_answer: 1                    
         explanation: >
-            Acceleration structure can be updated at run-time but remember that it has performance cost.
+            The acceleration structure can be updated at run-time but remember that it has performance cost.
                
     - questions:
         question: >
-            Can the developers exclude scene objects from ray tracing in Unreal editor?
+            Can developers exclude scene objects from ray tracing in the Unreal editor?
         answers:
             - Yes
             - No
         correct_answer: 1          
         explanation: >
-            The developers can exclude objects from ray tracing in Unreal editor. Excluding smaller/unimportant objects from ray tracing can improve ray traversal performance without hurting the final rendering quality.
+            Developers can exclude objects from ray tracing in the Unreal editor. Excluding smaller/unimportant objects from ray tracing can improve ray traversal performance without hurting the final rendering quality.
 
 
 
