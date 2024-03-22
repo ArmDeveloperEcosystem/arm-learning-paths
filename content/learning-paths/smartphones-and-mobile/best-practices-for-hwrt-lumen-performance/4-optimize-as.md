@@ -1,25 +1,24 @@
 ---
-title: Optimize acceleration structure
-weight: 3
+title: Optimize Acceleration Structure
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-To get the best ray transversal performance, you need to reduce the overlap of meshes as much as possible. The overlap increases the cost of ray traversal because the hardware needs to check more meshes which may never have a hit.
+## Optimize Acceleration Structure
 
-You can use the `Instance Overlap` view under `Ray Tracing Debug` to check the overlap of your level. 
+To get the best performance of ray traversal, you need to reduce the overlap of meshes as much as possible. The overlap will increase the cost of ray traversal because the hardware needs to check more meshes which may never has a hit with the ray. So we need to make sure the bounding box of each actor covers the least empty space.
 
-![Instance Overlap #center](images/instance-overlap.png)
+You can use `Instance Overlap` view under ray tracing debug of Unreal editor to check the overlap of your level. 
 
-The color of the view represents the degree of overlap. The more yellow the color, the more overlap there is. 
+![](images/instance-overlap.png)
 
-You can see there is a big yellow area in the middle of the screen which indicates significant overlap. This is caused by the mesh which combines all 4 pillars of the boxing ring and covers the empty area within the ropes.
 
-![Overlap #center](images/before_opt.png)
+The color of the view presents the degree of overlap. The closer to yellow the color is, the more overlap there is. You can see there is a big yellow area in the middle of the screen which means a lot of overlap there. That's caused by the mesh which combines all 4 pillars of the boxing ring and cover the empty area over the stage. 
+![](images/before_opt.png "Figure 1. Before acceleration structure optimization.")
 
-To reorganize the scene objects, split the pillars to 4 meshes. 
+After reorganizing the scene objects, we split the pillars to 4 meshes. As you can see from the next image, the yellow area has been eliminated and now we have less overlap in the same scene.
 
-As you can see from the new image, the yellow area has been eliminated and there is less overlap in the scene.
 
-![New overlap #center](images/after_opt.png)
+![](images/after_opt.png "Figure 2. After acceleration structure optimization.")

@@ -1,17 +1,17 @@
 ---
-title: Add important objects only into ray tracing
-weight: 2
+title: Only Add Important Objects into Ray Tracing
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-For best performance exclude actors which are not contributing to lighting from ray tracing. 
+## Only Add Important Objects into Ray Tracing
 
-Exclude small actors from ray tracing since they contribute very little to the final lighting and may also cause noise for indirect lighting. 
+Acceleration structure stores all geometry data for ray traversal. It means that you can get faster ray traversal if there are few geometry data in the acceleration structure. The first optimization is removing unnecessary geometry data from acceleration structure.
 
-In the Actor detail panel, uncheck `Visible in Ray Tracing` to exclude an actor from ray tracing.
+Exclude the actors which are not contributing to lighting from ray tracing. Exclude the small actors from ray tracing since they can only contribute very little to the final lighting and may also cause noise for indirect lighting. In actor detail panel, uncheck `Visible in Ray Tracing` to exclude the actor from ray tracing.
 
-![Visible #center](images/add_object.png)
+![](images/add_object.png)
 
 

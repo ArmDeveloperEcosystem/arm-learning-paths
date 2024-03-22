@@ -1,19 +1,19 @@
 ---
-title: Maximize Performance with Hardware Ray Tracing and Lumen
+title: Best Practices for Hardware Ray Tracing Lumen Performance on Android Devices
 draft: true
 minutes_to_complete: 30
 
 who_is_this_for: Unreal developers interested in optimizing hardware ray tracing with Lumen on Arm devices.
 
 learning_objectives:
-    - Use best practices to get the maximum performance of hardware ray tracing on Lumen for Arm devices.
+    - Best practices for getting the maximum performance of hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:
-- A computer capable of running Unreal Engine version 5.3 or later 
-- An Android mobile device with a Mali GPU which supports hardware ray tracing
-- A USB cable to connect the mobile device to your computer
+- A computer capable of running Unreal Engine 5.3 or later version.
+- An Android mobile device that has a Mali GPU with hardware ray tracing support.
+- A USB cable to connect the mobile device to your computer.
 
-author_primary: Jason Andrews
+author_primary: Arm
 
 ### Tags
 skilllevels: Introductory

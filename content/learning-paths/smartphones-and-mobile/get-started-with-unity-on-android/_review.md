@@ -26,9 +26,9 @@ review:
         question: >
             What is the purpose of the Unity Profiler?
         answers:
-            - Check that your code compiles successfully
-            - Measure the performance of your application and help identify performance issues
-            - Check that your application adheres to platform guidelines
+            - Checks that your code compiles successfully
+            - Measures the performance of your application and helps identify performance issues
+            - Checks that your application adheres to platform guidelines
         correct_answer: 2
         explanation: >
             While the Unity Editor is a convenient way to develop your game and make sure everything is working, it is a good idea to run your project regularly on a real target device. Bottlenecks, if any, will not necessarily be the same across all devices and development platforms.

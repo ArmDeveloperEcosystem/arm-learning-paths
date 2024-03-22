@@ -10,7 +10,7 @@ layout: learningpathall
 
 Arm tools are license managed. The [Arm Compiler for Embedded (ACfE)](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) comes with the necessary executables to manage licenses. Before you can compile with ACfE, you need to install a license.
 
-[Keil MDK v6](htpps::/www.keil.arm.com) comes with a free-to-use, non-commercial license that is easy to activate.
+[Keil MDK v6](https://www.keil.arm.com) comes with a free-to-use, non-commercial license that is easy to activate.
 
 ### Activate an MDK-Community license
 

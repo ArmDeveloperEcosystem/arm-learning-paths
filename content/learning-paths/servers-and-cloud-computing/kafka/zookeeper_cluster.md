@@ -22,9 +22,9 @@ Run the commands shown to download and install Zookeeper on node 1:
 ```console
 mkdir Zookeeper_node1
 cd Zookeeper_node1
-wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-tar -xzf apache-zookeeper-3.8.0-bin.tar.gz
-cd apache-zookeeper-3.8.0-bin
+wget https://dlcdn.apache.org/zookeeper/zookeeper-3.9.2/apache-zookeeper-3.9.2-bin.tar.gz
+tar -xzf apache-zookeeper-3.9.2-bin.tar.gz
+cd apache-zookeeper-3.9.2-bin
 ```
 Use a file editor of you choice and create a file named `conf/zoo.cfg` with the content shown below:
 Replace `zk_2_ip` and `zk_3_ip` with the IP addresses of the node 2 and node 3 respectively.
@@ -76,9 +76,9 @@ Run the following commands to download and install Zookeeper node 2:
 ```console
 mkdir Zookeeper_node2
 cd Zookeeper_node2
-wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-tar -xzf apache-zookeeper-3.8.0-bin.tar.gz
-cd apache-zookeeper-3.8.0-bin
+wget https://dlcdn.apache.org/zookeeper/zookeeper-3.9.2/apache-zookeeper-3.9.2-bin.tar.gz
+tar -xzf apache-zookeeper-3.9.2-bin.tar.gz
+cd apache-zookeeper-3.9.2-bin
 ```
 Use a file editor of you choice and create a file named `conf/zoo.cfg` with the content shown below:
 Replace `zk_1_ip` and `zk_3_ip` with the IP addresses of the node 1 and node 3 respectively.
@@ -129,9 +129,9 @@ Run the following commands to download and install Zookeeper node 3:
 ```console
 mkdir Zookeeper_node3
 cd Zookeeper_node3
-wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.0/apache-zookeeper-3.8.0-bin.tar.gz
-tar -xzf apache-zookeeper-3.8.0-bin.tar.gz
-cd apache-zookeeper-3.8.0-bin
+wget https://dlcdn.apache.org/zookeeper/zookeeper-3.9.2/apache-zookeeper-3.9.2-bin.tar.gz
+tar -xzf apache-zookeeper-3.9.2-bin.tar.gz
+cd apache-zookeeper-3.9.2-bin
 ```
 Use a file editor of you choice and create a file named `conf/zoo.cfg` with the content shown below:
 Replace `zk_1_ip` and `zk_2_ip` with the IP addresses of the node 1 and node 2 respectively.

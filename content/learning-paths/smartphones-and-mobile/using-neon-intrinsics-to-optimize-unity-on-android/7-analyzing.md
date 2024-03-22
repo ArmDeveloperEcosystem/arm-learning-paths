@@ -31,13 +31,13 @@ To compare the results you will use the Analyzer to import all three datasets bu
 
 1. Click back to the Analyzer and select the second _Pull Data_.
 
-You now have two datasets loaded; one from the unoptimized mode and one from the Burst mode. This is what the data looks like collected from a Samsung S8.
+You now have two datasets loaded, one from the unoptimized mode and one from the Burst mode. This is what the data looks like collected from a Samsung S8.
 
 ![Plain vs Burst#center](images/analyzer-plain-vs-burst.PNG)
 
-Focus on the collision-related markers by searching for _collisioncalc_ in the _Name Filter_. Select a representative frame by clicking on a later frame where both seem relatively settled (no odd spikes).
+Focus on the collision-related markers by searching for _collisioncalc_ in the _Name Filter_. Select a representative frame by clicking on a later frame where both seem relatively settled (and with no odd spikes).
 
-We will ignore _CollisionMovement_ because that has not been optimized and the times will vary depending on exactly how many collisions are occurring in any one frame.
+We will ignore _CollisionMovement_ because it has not been optimized and the times will vary depending on exactly how many collisions are occurring in any one frame.
 
 The functions that have been optimized are the collision detection calculations. All characters are compared against all characters and walls. The character-wall collision detection times are collected under the sample name _StaticCollisionCalculations_ while the character-character collisions are collected under the name _DynamicCollisionCalculations_.
 
@@ -47,4 +47,4 @@ Follow the same process again but this time we will compare Burst against Neon.
 
 ![Burst vs Neon#center](images/analyzer-burst-vs-neon.PNG)
 
-Again we can see an improvement; mostly with the dynamic (character-character) collision detection but together still make a meaningful improvement.
+Again, we can see an improvement, mostly with the dynamic (character-character) collision detection but together it still makes a meaningful improvement.

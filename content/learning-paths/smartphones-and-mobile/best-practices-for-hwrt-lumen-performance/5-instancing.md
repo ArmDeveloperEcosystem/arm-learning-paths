@@ -17,5 +17,5 @@ You can also use Picker view under ray tracing debug of Unreal editor to check t
 1. Select `Picker` view under Ray Tracing Debug on viewport of Unreal editor.
 ![](images/picker-view.png)
 
-1. Use the mouse cursor to select the instance you want to check then there will be acceleration structure information of this instance on the screen. Use the detail information under [BLAS] to check if two instance share the same BLAS data.
+1. Use mouse cursor to select the instance which you want to check then there will be acceleration structure information of this instance on the screen. Use the detail information under [BLAS] to check if two instance share the same BLAS data.
 ![](images/blas.png)

@@ -10,8 +10,8 @@ layout: learningpathall
 
 A configuration file ensures a consistent installation of tools across all platforms. It installs the correct binaries depending on the platform (host OS and architecture). Thus, the first step is to create such a configuration file.
 
-{{% notice Note %}}
-If you are using the [conversion flow for MDK v5 uvprojx files](../../uvprojx-conversion/), a configuration file is automatically created.
+{{% notice Notice of Product License Terms %}}
+Your use of an Arm tool is subject to your acceptance of the End User License Agreement for Arm Software Development Tools, located within the `license_terms` folder of the downloaded archive. By installing and using the Arm tool, you agree to be bound by the terms and conditions of the End User License Agreement.
 {{% /notice %}}
 
 Create a new file called `vcpkg-configuration.json`. The following template gives a good starting point for your own configuration file:
@@ -39,6 +39,10 @@ Create a new file called `vcpkg-configuration.json`. The following template give
   }
 }
 ```
+
+{{% notice Note %}}
+If you are using the [conversion flow for MDK v5 uvprojx files](../../uvprojx-conversion/), a configuration file is automatically created.
+{{% /notice %}}
 
 ### Anatomy of the JSON file
 

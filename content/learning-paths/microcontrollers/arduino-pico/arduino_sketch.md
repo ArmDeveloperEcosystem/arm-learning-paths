@@ -248,8 +248,6 @@ You can further check that your code is running properly by opening the `Serial 
 
 ![Debug output](_images/output.png)
 
-## Conclusion
+Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. 
 
-Congratulations! You have successfully programmed your microcontroller and built a working, if simple, smart device. In this Learning Path, you have learned the basics of embedded programming, the Arduino software stack, and some basic electronics as well as how to connect them together using a breadboard.
-
-This example only scratches the surface of embedded programming. There is so much more to learn, like how the Arduino core stack gets called in the first place, how it calls your `setup()` and `loop()` functions, how the `delay()` function can pause execution, etc.
+Continue on to see how to improve the application by replacing the `loop()` and `delay()` calls with interrupts. 

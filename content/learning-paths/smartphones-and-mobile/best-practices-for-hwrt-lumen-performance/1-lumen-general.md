@@ -1,81 +1,70 @@
 ---
-title: Optimize Lumen general settings
-weight: 6
+title: Lumen General Setting Optimizations
+weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Below is more information about how to optimize the Lumen general settings.
+## Lumen General Setting Optimizations
+
+![](images/Garage.png)
+
+![](images/Garage2.png)
+
+To use Lumen in your game scene, you need to add a PostProcessVolume actor to your scene. Under PostProcessVolume actor, there are few options you can tweak. During the period of making our Lumen content - "Steel Arms", we found few recommended values for those options which are suit for Android devices. Figure 1 and 2 shows all option values we were using in "Steel Arms".
 
 ## Global Illumination Settings
-
-The global illumination parameters used in the example Lumen content "Steel Arms", a demonstration used to test the developer experience for Arm products, are provided below. 
-
-For more information refer to [Arm GPUs built on new 5th Generation GPU architecture to redefine visual computing](https://community.arm.com/arm-community-blogs/b/announcements/posts/arm-gpus-built-on-new-fifth-gen-architecture).
-
-![Global settings #center](images/gl-setting.png)
+![](images/gl-setting.png "Figure1. These global illumination parameters are used in our Lumen content - Steel Arms.")
 
 ### Lumen Scene Detail
-
-- Higher values ensure that smaller objects contribute to Lumen lighting, but also increase GPU cost
+•	Higher value can make sure smaller objects can also contribute to Lumen lighting but will also increase GPU cost
 
 ### Final Gather Quality
+•	Control the density of the screen probes, higher value increase GPU cost 
 
-- Final Gather Quality controls the density of the screen probes, higher values increase GPU cost 
-
-- A value of **1.0** provides a good balance between performance and quality for mobile games
+•	<font color=#00FF00>**1.0**</font> should reach a good balance between performance and quality for mobile game
 
 ### Max Trace Distance
+•	Control how far the ray tracing will go, keep it small can decrease GPU cost
 
-- Max Trace Distance controls how far the ray tracing will go, keep it small to decrease GPU cost
+•	Don’t set it bigger than the size of the scene
 
-- Don’t set it larger than the size of the scene
-
-- Smaller values can also reduce some ray incoherence
+•	Smaller value can also reduce some ray incoherence
 
 ### Scene Capture Cache Resolution Scale
-
-- Scene Capture Cache Resolution Scale controls the surface cache resolution, smaller values save memory
+•	Control the surface cache resolution, smaller value can save memory
 
 ### Lumen Scene Lighting Update Speed
+•	Can keep it low if the lighting changes are slow to save GPU cost
 
-- Keep Lumen Scene Lighting Update Speed low if the lighting changes are slow and this saves GPU cost
-
-- A value in the range of **0.5 - 1.0** should provide a good balance between performance and quality for mobile games
+•	<font color=#00FF00>**0.5 ~ 1.0**</font> should reach a good balance between performance and quality for mobile game
 
 ### Final Gather Lighting Update Speed
+•	Can keep it low if slow lighting propagation is acceptable
 
-- Keep Final Gather Lighting Update Speed low if slow lighting propagation is acceptable
+•	<font color=#00FF00>**0.5 ~ 1.0**</font> should reach a good balance between performance and quality for mobile game
 
-- A value in the range of **0.5 - 1.0** should reach a good balance between performance and quality for mobile games
  
-## Lumen Reflection Settings
-
-The reflection parameters below are used in "Steel Arms".
-
-![Reflection #center](images/reflection-setting.png)
+ ## Lumen Reflection Settings
+![](images/reflection-setting.png "Figure 2. These reflection parameters are used in our Lumen content - Steel Arms.")
 
 ### Reflection Quality
-
-- Reflection Quality controls the reflection tracing quality, it is the resolution of the reflection
+•	Control the reflection tracing quality, basically the resolution of the reflection
 
 ### Ray Lighting Mode
+•	The default mode is `Surface Cache` mode which reuses the surface cache data for reflection 
 
-- The Lighting Mode default is `Surface Cache` which reuses the surface cache data for reflection 
+•	`Hit Lighting` mode is available when using hardware ray tracing, it evaluates direct lighting instead of using surface cache
 
-- `Hit Lighting` mode is available when using hardware ray tracing, it evaluates direct lighting instead of using the surface cache
+•	Hit Lighting mode has higher quality with higher GPU cost
 
-- `Hit Lighting` mode has higher quality with higher GPU cost
+•	Hit Lighting mode can reflect direct lighting of skinned mesh which surface cache mode can't
 
-- `Hit Lighting` mode can reflect direct lighting of skinned meshes which `Surface cache` mode cannot
-
-- `Surface Cache` mode is recommended for mobile games
+•	Surface cache mode is recommended for mobile game
 
 ### Max Reflection Bounces
+•	Control the amount of reflection bounces, higher value has higher GPU cost
 
-- Max Reflection Bounces controls the amount of reflection bounces, a higher value has higher GPU cost
+•	<font color=#00FF00>**1**</font> is recommended for mobile game
 
-- A value of **1** is recommended for mobile games
-
-After considering the various options to get the best performance, you can build your project and install it on your Android device which has a Mali GPU with hardware ray tracing support and check the results.

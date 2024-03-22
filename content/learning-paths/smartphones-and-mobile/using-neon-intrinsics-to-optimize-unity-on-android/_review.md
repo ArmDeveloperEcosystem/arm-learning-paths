@@ -20,18 +20,18 @@ review:
             - Avoid inline functions
         correct_answer: 2
         explanation: >
-            Programmers should design their code and data to be SIMD friendly and follow best practice (highlighted in this learning path) to help the compiler perform auto-vectorization.
+            Programmers should design their code and data to be SIMD friendly and follow best practices (highlighted in this learning path) to help the compiler perform auto-vectorization.
 
     - questions:
         question: >
-            IsNeonSupported returns true when Neon intrinsics are supported. Which namespace contains IsNeonSupported?
+            `IsNeonSupported` returns true when Neon intrinsics are supported. Which namespace contains `IsNeonSupported`?
         answers:
             - Unity.Burst.Intrinsics.Arm.Neon
             - UnityEngine
             - UnityEngine.Intrinsics
         correct_answer: 1
         explanation: >
-            If IsNeonSupported is false, you may wish to fall back to a non-Neon implementation. IsNeonSupported is actually evaluated at compile time so won’t add any overhead to your code.
+            If `IsNeonSupported` is false, you may wish to fall back to a non-Neon implementation. `IsNeonSupported` is actually evaluated at compile time so it won’t add any overhead to your code.
 
 
 
