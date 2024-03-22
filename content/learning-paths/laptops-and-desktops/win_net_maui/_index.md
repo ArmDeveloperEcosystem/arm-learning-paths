@@ -12,7 +12,6 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Visual Studio 2022 with .NET Multi-platform App UI development and Universal Windows Platform development installed.
-    - /learning-paths/laptops-and-desktops/win_xamarin_forms/ learning path.
 
 author_primary: Dawid Borycki
 
