@@ -5,12 +5,12 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-Each version of the code has two main functions - one for character-wall collision detection and one for character-character collision detection.
+Each version of the code has two main functions, one for character-wall collision detection and one for character-character collision detection.
 
 ## Unoptimized character-wall collision detection
-The unoptimized character-wall collision implementation is in function DoWallsPlain(). It is a simple nested loop through all of the characters and all of the walls.
+The unoptimized character-wall collision implementation is in the function `DoWallsPlain()`. It is a simple nested loop through all of the characters and all of the walls.
 
-For all characters we want a boolean result which is true when they have hit a wall. Note that elsewhere in the code is the assumption that a character can only hit up to two walls at once.
+For all characters we want a boolean result which is **true** when they have hit a wall. Note that in the code there is the assumption that a character can only hit up to two walls at once.
 
 ```
 private void DoWallsPlain(int numChar)
@@ -26,7 +26,7 @@ private void DoWallsPlain(int numChar)
 }
 ```
 
-The _Intersects_ function is a simple check for overlapping axis-aligned bounding boxes.
+The `Intersects` function is a simple check for overlapping axis-aligned bounding boxes.
 
 ```
 public bool Intersects(StaticCollisionObject other)
@@ -39,9 +39,9 @@ public bool Intersects(StaticCollisionObject other)
 ```
 
 ## Unoptimized character-character collision detection
-After the update calls _DoWallsPlain_ to perform the character-wall collision detection, the equivalent for character-character collision is called. This is done in the function called _DoCharactersPlain_.
+After the update calls `DoWallsPlain` to perform the character-wall collision detection, the equivalent for character-character collision is called. This is done in the function called `DoCharactersPlain`.
 
-_DoCharactersPlain_ contains another simple nested loop. For all characters, it checks if a character hits another character. Again, a boolean value is stored, **true** indicating that a collision has occurred.
+`DoCharactersPlain` contains another simple nested loop. For all characters, it checks if a character hits another character. Again, a boolean value is stored, **true** indicating that a collision has occurred.
 ```
 private void DoCharactersPlain(int numChar)
 {
@@ -55,13 +55,13 @@ private void DoCharactersPlain(int numChar)
 }
 ```
 
-Note the inner loop only ever starts at the character index beyond the index of the outer loop (d = c +1). dynamicCollisions has size enough for all collision pairs.
+Note, the inner loop only ever starts at the character index beyond the index of the outer loop (d = c +1). `dynamicCollisions` has size enough for all collision pairs.
 
-You could think of this structure as a two-dimensional array; one triangular half contains boolean values for [c][d] and the other [d][c].
+You could think of this structure as a two-dimensional array: one triangular half contains boolean values for [c][d] and the other for [d][c].
 
-There is no need to check collisions of the reverse (e.g. [d][c]) or a character against itself (i.e. the cases where d equals c).
+There is no need to check collisions of the reverse (e.g., [d][c]) or a character against itself (i.e., the cases where d equals c).
 
-The _Intersects_ function is a simple radii check; characters have collided if the distance between their centers is less than the sum of their radii.
+The `Intersects` function is a simple radii check; characters have collided if the distance between their centers is less than the sum of their radii.
 
 ```
 public bool Intersects(DynamicCollisionObject other)

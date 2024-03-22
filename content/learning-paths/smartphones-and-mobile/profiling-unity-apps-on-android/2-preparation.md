@@ -7,13 +7,13 @@ layout: learningpathall
 ---
 
 ## Create a blank project
-You'll need Unity installed with Android build support. Read [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android) for help installing Unity and building, deploying to an Android device.
+You'll need Unity installed with Android build support. Read [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android) for help installing Unity as well as building and deploying to an Android device.
 
 Although the sample application is a project, you will still need to create a blank project to import it into.
 
 1. Open the Unity Hub
 
-1. Log in if you are not logged in already
+1. Log in (if you are not already)
 
 1. Select _New Project_
 
@@ -36,23 +36,23 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
 1. Open the  [sample project page](https://assetstore.unity.com/packages/essentials/tutorial-projects/optimizing-collisions-with-burst-and-neon-intrinsics-196303)
 
-1. You will need to log in if you haven’t already
+1. You will need to log in (if you haven’t already)
 
-1. On the asset (Optimizing Collisions with Burst and Neon Intrinsics) page select Add to my assets button
+1. On the asset (Optimizing Collisions with Burst and Neon Intrinsics) page select _Add to my assets_ button
 
 1. The button will change to _Open in Unity_. Select it.
 
-1. A popup window will ask to open the asset in Unity - you may do this by selecting the _Open Unity Editor_ button
+1. A pop-up window will ask to open the asset in Unity. You can do this by selecting the _Open Unity Editor_ button
 
-1. If Unity fails to open the asset or no popup appears, select _My Assets_ button in the top-right of the page
+1. If Unity fails to open the asset or no pop-up appears, select _My Assets_ button in the top-right of the page:
 
-    a. The assets you own should appear in a list
+    a. Your assets should appear in a list
 
     b. Find the entry for _Optimizing Collisions with Burst and Neon Intrinsics_
 
     c. Select _Open in Unity_ button
 
-    d. A popup will appear as in step
+    d. A pop-up will appear as in step 6 above
     
     e. Select _Open Unity Editor_
 
@@ -74,8 +74,8 @@ Once Unity has loaded, you will be presented with a template project. You can ig
 
     ![Overwrite project settings#center](images/import-window-step-2.png "Figure 2. Overwrite project settings with the settings from the imported sample project.")
 
-## Setup the project
-Once the sample project has been imported you will see some errors and warnings.
+## Set up the project
+Once the sample project has been imported, you will see some errors and warnings.
 
 1. Open _File_ menu and select _Build Settings_
 
@@ -93,7 +93,7 @@ Your scene view will look something like this:
 
 ## Run the project inside the editor
 
-It is worth checking that everything is imported and built correctly.
+It is worth checking that everything has imported and been built correctly.
 
 1. Close the _Build Settings_ window
 
@@ -107,18 +107,18 @@ It is worth checking that everything is imported and built correctly.
 
 1. Select the _Play_ (triangle) button to launch the program.
 
-The game will launch and you will see any empty environment begin to fill with more and more characters (capsules) over time. It will look something like this:
+The game will launch and you will see an empty environment begin to fill with more and more characters (capsules) over time. It will look something like this:
 
 ![Screenshot at runtime#center](images/game-view.PNG "Figure 4. Sample running in Game view.")
 
 ## Deploy to Android
-You will now deploy the sample to your Android device. Your device must already be setup for development. For detailed instructions read the learning path [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android).
+You will now deploy the sample to your Android device. Your device must already be set up for development. For detailed instructions, read the learning path [Get started with Unity on Android](/learning-paths/smartphones-and-mobile/get-started-with-unity-on-android).
 
 1. Open _Build Settings_ from the File menu
 
 1. Tick the _Development Build_ option
 
-1. Select _Add Open Scenes to add the demo scene to your _Scenes in Build_ list
+1. Select _Add Open Scenes_ to add the demo scene to your _Scenes in Build_ list
 
 1. Plug your Android device into your computer
 
@@ -132,6 +132,6 @@ You will now deploy the sample to your Android device. Your device must already 
 
 1. Enter a name for the APK (the Android package) and select _Save_
 
-Unity will take a moment to build the Android version and then automatically deploy it to your connected Android device. Depending on your setup, the build and deployment can take several minutes.
+Unity will take a moment to build the Android version and then automatically deploy it to your connected Android device. Depending on your setup, the build and deployment might take several minutes.
 
 ![Running on Android#center](images/android-plain-mode.jpg "Figure 6. Sample application running on Android.")
