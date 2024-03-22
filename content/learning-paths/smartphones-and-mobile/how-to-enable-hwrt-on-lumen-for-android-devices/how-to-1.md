@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Unreal Engine Setup
-Lumen is the latest dynamic global illumination solution of Unreal engine which also supports hardware ray tracing. When lighting the indoor scene, only direct lighting can't generate high quality rendering result. To generate the best lighting result, you will also need indirect lighting. Lumen provides a new ray tracing based solution which allows the developers to render both dynamic direct lighting and indirrct lighting at run-time.
+Lumen is the latest dynamic global illumination solution of Unreal engine which also supports hardware ray tracing. When lighting the indoor scene, only direct lighting can't generate high quality rendering result. To generate the best lighting result, you will also need indirect lighting. Lumen provides a new ray tracing based solution which allows the developers to render both dynamic direct lighting and indirect lighting at run-time.
 
 ![](images/no_lumen.png "Figure 1. The scene without Lumen has only dirct lighting.")
 
