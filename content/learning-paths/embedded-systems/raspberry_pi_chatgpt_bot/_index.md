@@ -3,7 +3,7 @@ title: Create a ChatGPT voice bot on a Raspberry Pi
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory project for developers interested in integrating ChatGPT into Raspberry Pi projects.
+who_is_this_for: This is an introductory project for developers interested in integrating a Chatbot (namely ChatGPT) into Raspberry Pi projects.
 
 learning_objectives:
     - Run a bot on a Raspberry Pi that will listen to you and respond to what you say
