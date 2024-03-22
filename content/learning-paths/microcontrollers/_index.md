@@ -7,7 +7,7 @@ key_ip:
 - Ethos-U
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 23
+- Baremetal: 24
 - Linux: 3
 - macOS: 2
 - RTOS: 9
@@ -16,7 +16,7 @@ subjects_filter:
 - CI-CD: 3
 - Libraries: 3
 - ML: 6
-- Performance and Architecture: 8
+- Performance and Architecture: 9
 - RTOS Fundamentals: 3
 - Security: 3
 - Virtual Hardware: 2
@@ -30,11 +30,12 @@ tools_software_languages_filter:
 - AWS: 3
 - CMSIS: 5
 - CMSIS-Toolbox: 3
-- Coding: 19
+- Coding: 20
 - Fixed Virtual Platform: 8
 - FVP: 1
 - GCC: 4
 - GitHub: 2
+- IP Explorer: 1
 - Keil: 7
 - Keil MDK: 2
 - MDK: 2

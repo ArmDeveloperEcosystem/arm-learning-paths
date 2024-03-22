@@ -20,7 +20,7 @@ author_primary: Arm
 
 ### Tags
 skilllevels: Intermediate
-subjects: Performance analysis
+subjects: Performance and Architecture
 armips:
     - armv8
     - aarch32
