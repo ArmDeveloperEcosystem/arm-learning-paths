@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-Sysreport displays an overview of the hardware configuration of the system. It quickly identifies whether or not a hardware feature is available, so that you can switch to a different system if necessary. For example, you might expect a certain hardware feature to be available on a given cloud instance, but it isn't available due to the system configuration.
+Sysreport displays an overview of the hardware configuration of the system. It quickly identifies whether or not a hardware feature is available so that you can switch to a different system, if necessary. For example, you might expect a certain hardware feature to be available on a given cloud instance but it isn't available due to the system configuration.
 
-After running Sysreport, you can examine the output to determine if the configuration is suitable for your needs. Some configuration changes may be required in order to get the system into the desired state for performance analysis. The changes could be as simple as modifying kernel parameters at run-time, or more involved such as recompiling the kernel with different kernel configuration options.
+After running Sysreport, you can examine the output to determine if the configuration is suitable for your needs. Some configuration changes may be required in order to get the system into the desired state for performance analysis. The changes could be as simple as modifying kernel parameters at run-time or more involved, such as recompiling the kernel with different kernel configuration options.
 
 ## Modifying the system configuration
 
@@ -54,7 +54,7 @@ users (without CAP_SYS_ADMIN).  The default value is 2.
 >=2: Disallow kernel profiling by users without CAP_SYS_ADMIN
 ```
 
-Setting this kernel parameter to 0 allows [Linux Perf](/install-guides/perf/) to access to CPU events, kernel profiling, ftrace function tracepoint, and raw tracepoints.
+Setting this kernel parameter to 0 allows [Linux Perf](/install-guides/perf/) access to CPU events, kernel profiling, ftrace function tracepoint, and raw tracepoints.
 
 To set the value to 0 until the next reboot run:
 

@@ -4,8 +4,8 @@ review:
         question: >
             Which of the following statements is true about Sysreport?
         answers:
-            - Sysreport displays a report of the system hardware and operating system configuration, but not performance features available.
-            - Sysreport displays a report of the operating system configuration and performance features available, but not the system hardware.
+            - Sysreport displays a report of the system hardware and operating system configuration but not performance features available.
+            - Sysreport displays a report of the operating system configuration and performance features available but not the system hardware.
             - Sysreport displays a report of the system hardware, operating system configuration, and performance features available.
         correct_answer: 3
         explanation: >
@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            Sysreport displays possible configuration issues on the system and suggestions to fix them, but does not automatically resolve them.
+            Sysreport displays possible configuration issues on the system and suggestions to fix them but does not automatically resolve them.
                
     - questions:
         question: >
