@@ -7,15 +7,18 @@ layout: learningpathall
 ---
 
 ## Take Good Advantage of Instancing
-Instanced actor can share the same geometry data in BLAS of acceleration structure hence save the memory usage and increase the cache hit. So you should try to use object instancing as many as possible when using hardware ray tracing to get the best performance and memory usage. 
+Instanced actors can share the same geometry data in BLAS as the acceleration structure hence saving memory usage and increasing the cache hit. Therefore, to get the best performance and memory usage when using hardware ray tracing, you should try to use object instancing as much as possible. 
 
-You can also use Picker view under ray tracing debug of Unreal editor to check the instancing status of acceleration structure. Here are the steps for checking the instancing status in Unreal editor:
+You can also use the Picker view under _Ray Tracing Debug_ of the Unreal editor to check the instancing status of the acceleration structure. Here are the steps for checking the instancing status in the Unreal editor:
 
-1. Use command “r.RayTracing.Debug.PickerDomain 1” to select instance mode for picker.
+1. Use the command `r.RayTracing.Debug.PickerDomain 1` to select the instance mode for the Picker:
+
 ![](images/picker-command.png)
 
-1. Select `Picker` view under Ray Tracing Debug on viewport of Unreal editor.
+2. Select `Picker` view under _Ray Tracing Debug_ on viewport of the Unreal editor:
+
 ![](images/picker-view.png)
 
-1. Use mouse cusor to select the instance which you want to check then there will be acceleration structure infomation of this instance on the screen. Use the detail information under [BLAS] to check if two instance share the same BLAS data.
+3. Use the mouse cursor to select the instance which you want to check. Then there will be shown the acceleration structure infomation of this instance on the screen. Use the detail information under [BLAS] to check if two instances share the same BLAS data:
+
 ![](images/blas.png)
