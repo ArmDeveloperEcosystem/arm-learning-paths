@@ -31,6 +31,18 @@ review:
         explanation: >
             MauiProgram.cs contains the entry point for .NET MAUI application. It's where you configure and set up the app, including services, dependencies, and the main app configuration. It typically contains the CreateMauiApp method, which builds and returns an instance of MauiApp class
 
+    - questions:
+        question: >
+            What is the MVVM pattern for?
+        answers:
+            - "To build a single page applications"
+            - "To accelerate applications"
+            - "To separate concerns, e.g., separate the logic from the view"
+        correct_answer: 3
+        explanation: >
+            The Model-View-ViewModel (MVVM) architectural pattern is designed to separate an application's business and presentation logic from its user interface
+            
+
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================

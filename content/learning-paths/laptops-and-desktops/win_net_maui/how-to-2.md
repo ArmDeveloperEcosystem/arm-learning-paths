@@ -12,15 +12,14 @@ In this section, you will modify your newly created project by adding code for m
 
 ## Helper classes
 We begin by implementing two helper classes:
-1. **PerformanceHelper** - This class is designed to measure the code execution time.
-2. **VectorHelper** - This class will implement the AdditionOfProduct method, which calculates the expression **a*b+c**, where **a**, **b**, and **c** are pseudo-randomly generated vectors of double precision.
-To create these classes, proceed as follows:
+1. **PerformanceHelper** - this class is designed to measure the code execution time.
+2. **VectorHelper** - this class will implement the AdditionOfProduct method, which calculates the expression **a*b+c**, where **a**, **b**, and **c** are pseudo-randomly generated vectors of double precision.
 
 To create those classes proceed as follows:
 1. In the Solution Explorer, right-click the **Arm64.MobileApp.MAUI** project and choose Add -> New Folder. Name the folder Helpers.
-2. Right-click the Helpers folder, and select Add -> Class.... This action opens the Add New Item window.
-3. In the Add New Item window, enter PerformanceHelper.cs in the Name text box, and click the Add button.
-4. Insert the following statements into the PerformanceHelper.cs file:
+2. Right-click the Helpers folder, and select Add -> Class.... This action opens the _Add New Item_ window.
+3. In the _Add New Item_ window, enter **PerformanceHelper.cs** in the Name text box, and click the Add button.
+4. Insert the following statements into the **PerformanceHelper.cs** file:
 
 ```cs
 using System.Diagnostics;
@@ -82,7 +81,7 @@ namespace Arm64.MobileApp.MAUI.Helpers
 ```
 
 ## User interface
-We can now modify the user interface. Start by opening the AppShell.xaml file. Then, change the Title attribute of the ShellContent to "Arm Learning Paths":
+We can now modify the user interface. Start by opening the AppShell.xaml file. Then, change the title attribute of the ShellContent to "Arm Learning Paths":
 
 ```XML
 <ShellContent
@@ -224,30 +223,30 @@ namespace Arm64.MobileApp.MAUI
 }
 ```
  
-The logic implemented above functions as follows. When the application is running and the user clicks the Run calculations button, the application reads the values from the Entry controls (EntryVectorSize and EntryExecutionCount). These values determine the vector size and the execution count. With these parameters, the application invokes the MeasurePerformance static method of the PerformanceHelper class to measure the time required for performing vector operations, given the specified vector size and execution count. The computed time is then displayed in the ListView. At any point, the user can clear the ListView contents by clicking the Clear button.
+The logic implemented above functions as follows. When the application is running and the user clicks the Run calculations button, the application reads the values from the Entry controls (`EntryVectorSize` and `EntryExecutionCount`). These values determine the vector size and the execution count. With these parameters, the application invokes the MeasurePerformance static method of the **PerformanceHelper** class to measure the time required for performing vector operations, given the specified vector size and execution count. The computed time is then displayed in the ListView. At any point, the user can clear the ListView contents by clicking the Clear button.
 
 ## Building and running the application
 You will now build and run the application for x64 and Arm64 configurations. Proceed as follows:
 
-1. Start by creating the Arm64 configuration. To do this, click the Debug drop-down, and select Configuration Manager... as shown in the figure below
+1. Start by creating the Arm64 configuration. To do this, click the Debug drop-down, and select Configuration Manager... as shown in the figure below:
 
 ![fig8](figures/08.png)
 
-2. In the Configuration Manager, select <New...> from the Active solution platform drop-down.
+2. In the Configuration Manager, select <New...> from the Active solution platform drop-down:
 
 ![fig9](figures/09.png)
 
-3. In the New Solution Platform dialog, select ARM64, and click the OK button.
-4. Similarly, create the x64 solution platform.
+3. In the New Solution Platform dialog, select ARM64, and click the OK button
+4. Similarly, create the x64 solution platform
 5. In the Solution Explorer, left-click on the Arm64.MobileApp.MAUI project. This action will open the .csproj file in the editor. Add the following line below the second <TargetFrameworks> tag:
 ```XML
 <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
 ```
-6. First, select ARM64 from the solution platform drop-down, and then click the Windows Machine button:
+6. Next, select ARM64 from the solution platform drop-down, and then click the Windows Machine button:
 
 ![fig10](figures/10.png)
 
-7. The application will start after a while. Run vector calculations for various execution counts: 10, 100, 1000, and 10000.
+7. The application will start after a while. Run vector calculations for various execution counts: 10, 100, 1000, and 10000
 8. Repeat the same for x64. Your results from the two runs should look similar to the following figures:
 
 ![fig11](figures/12.png)
@@ -257,8 +256,8 @@ You will now build and run the application for x64 and Arm64 configurations. Pro
 By comparing the execution times, we observe that Arm64 enables about a 30% performance improvement.
 
 ## Summary
-In this learning path, we created a .NET MAUI application. The primary objective was to assess and compare the performance of vector calculations across different execution counts and x64 and Arm64 configurations. To facilitate this, we introduced two helper classes: PerformanceHelper for timing the code execution and VectorHelper to perform the actual multiply-add operations on pseudo-randomly generated vectors.
+In this learning path, we created a .NET MAUI application. The primary objective was to assess and compare the performance of vector calculations across different execution counts and x64 and Arm64 configurations. To facilitate this, we introduced two helper classes: **PerformanceHelper** for timing the code execution and **VectorHelper** to perform the actual multiply-add operations on pseudo-randomly generated vectors.
 
-Following the setup of the application to run under both x64 and Arm64 architectures, we modified the project's configuration settings and the .csproj file to include the necessary runtime identifiers. This preparation ensured that our application could be executed on platforms supporting these architectures, enabling performance comparison.
+Following the setup of the application to run under both x64 and Arm64 architectures, we modified the project's configuration settings and the .csproj file to include the necessary runtime identifiers. This preparation ensured that our application could be executed on platforms supporting these architectures, enabling performance comparisons.
 
-By conducting runs for various execution counts, we gathered data on the computation times under each configuration. The outcome demonstrated that the application, when running on an Arm64 architecture, exhibited a significant performance improvement—approximately 30% faster compared to the x64 configuration. This benchmark highlights the efficiency and potential of optimizing applications for specific hardware architectures, underscoring the Arm64 architecture's capability to enhance computational tasks in .NET MAUI applications.
+By conducting runs for various execution counts, we gathered data on the computation times under each configuration. The outcome demonstrated that the application, when running on an Arm64 architecture, exhibited a significant performance improvement, approximately 30% faster compared to the x64 configuration. This benchmark highlights the efficiency and potential of optimizing applications for specific hardware architectures, underscoring the Arm64 architecture's capability to enhance computational tasks in .NET MAUI applications.
