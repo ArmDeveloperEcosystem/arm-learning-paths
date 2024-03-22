@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
-- Linux: 74
+- Linux: 75
 - macOS: 1
 - Windows: 4
 pinned_modules:
@@ -23,7 +23,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 5
 - ML: 4
-- Performance and Architecture: 22
+- Performance and Architecture: 23
 - Storage: 1
 - Web: 7
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -90,7 +90,7 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
-- Python: 3
+- Python: 4
 - PyTorch: 2
 - Redis: 3
 - Remote.It: 2
@@ -103,8 +103,8 @@ tools_software_languages_filter:
 - SVE2: 1
 - Sysbench: 1
 - Telemetry: 1
-- TensorFlow: 1
 - Tensorflow: 1
+- TensorFlow: 1
 - Terraform: 12
 - Trusted Firmware: 1
 - TypeScript: 1

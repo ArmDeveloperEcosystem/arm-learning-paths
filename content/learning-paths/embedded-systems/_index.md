@@ -8,16 +8,16 @@ key_ip:
 - Cortex-R
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 7
-- Linux: 16
+- Baremetal: 8
+- Linux: 17
 - macOS: 1
 - Windows: 1
 subjects_filter:
 - CI-CD: 4
 - Containers and Virtualization: 4
 - Embedded Linux: 5
-- ML: 1
-- Performance and Architecture: 9
+- ML: 2
+- Performance and Architecture: 10
 subtitle: Build secure, connected, smart IoT devices
 title: Embedded Systems
 tools_software_languages_filter:
@@ -31,8 +31,9 @@ tools_software_languages_filter:
 - Balena Cloud: 1
 - Balena OS: 1
 - C: 1
+- ChatGPT: 1
 - Clang: 1
-- Coding: 8
+- Coding: 9
 - DetectNet: 1
 - Docker: 6
 - DSTREAM: 2
@@ -41,9 +42,12 @@ tools_software_languages_filter:
 - Fusion 360: 1
 - GCC: 3
 - GitHub: 3
+- IP Explorer: 1
 - Matter: 1
 - MXNet: 1
 - Neon: 1
+- Porcupine: 1
+- Python: 1
 - QEMU: 1
 - Raspberry Pi: 4
 - Remote.It: 1

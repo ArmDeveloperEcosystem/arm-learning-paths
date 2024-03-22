@@ -20,7 +20,7 @@ author_primary: Arm
 
 ### Tags
 skilllevels: Intermediate
-subjects: Neon intrinsics, Unity, optimization
+subjects: Gaming
 armips:
     - armv8
     - aarch64
