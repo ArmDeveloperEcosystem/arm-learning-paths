@@ -6,41 +6,57 @@ weight: 2
 layout: learningpathall
 ---
 
-## Login to the target system
+Sysreport is a command-line tool, so make sure you can log in to the target system using [Secure Shell (SSH)](/install-guides/ssh/) or have a local console and are comfortable working on the Linux command line.
 
-First, ensure that you have logged into the target system (e.g. via Secure Shell) on which the Sysreport tool should run.
+## Confirm Python and Git are installed
 
-The Sysreport tool is a command-line tool only, so make sure you have access to a terminal program.
-
-## Check Python is installed
-
-Open a terminal and run the following command:
+To confirm Python is installed, run the following command:
 
 ```console
 python --version
 ```
 
-If Python is installed correctly, a version number will be displayed:
+If Python is installed, a version number will be displayed:
+
 ```output
 Python 3.9.5
 ```
 
+If Python is not installed, use the package manager for your Linux distribution to install it. 
+
+To confirm Git is installed, run the following command:
+
+```console
+git --version
+```
+
+If Git is installed, a version number will be displayed:
+
+```output
+git version 2.34.1
+```
+
+If Git is not installed, use the package manager for your Linux distribution to install it. 
+
 ## Install Sysreport
 
-You can download a copy of the Sysreport tool by cloning the following GitHub repository:
+You can download Sysreport by cloning the GitHub repository:
+
 ```console
 git clone https://github.com/ArmDeveloperEcosystem/sysreport.git
 ```
 
 ## Test Sysreport
 
-Confirm that Sysreport has been cloned correctly by changing into the correct directory and running the tool:
+Confirm Sysreport works correctly by changing into the `sysreport/src` directory and running the command: 
+
 ```console
 cd sysreport/src
 python sysreport.py --help
 ```
 
-If the tool is working correctly, the tool usage should be displayed:
+If Sysreport is working correctly, the usage message is displayed:
+
 ```output
 usage: sysreport.py [-h] [--config] [--advice] [--no-advice] [--color]
                     [--no-color] [--vulnerabilities] [-v]

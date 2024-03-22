@@ -15,8 +15,8 @@ review:
         question: >
             True or False: Sysreport automatically resolves any configuration issues it finds on the system.
         answers:
-            - True
-            - False
+            - "True"
+            - "False"
         correct_answer: 2
         explanation: >
             Sysreport displays possible configuration issues on the system and suggestions to fix them, but does not automatically resolve them.
@@ -25,8 +25,8 @@ review:
         question: >
             True or False: Sysreport is able to display security vulnerabilities that the system is exposed to.
         answers:
-            - True
-            - False
+            - "True"
+            - "False"
         correct_answer: 1
         explanation: >
             Sysreport displays security vulnerabilities when the '--vulnerabilities'' option is specified.

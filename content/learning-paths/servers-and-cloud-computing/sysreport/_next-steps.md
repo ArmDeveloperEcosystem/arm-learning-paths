@@ -1,7 +1,7 @@
 ---
 next_step_guidance: Now you know how to use the Sysreport tool to configure your system for performance analysis.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
 
 further_reading:
     - resource:
