@@ -12,6 +12,7 @@ prerequisites:
 - A computer capable of running Unreal Engine, version 5.3 or later.
 - An Android mobile device that has a Mali GPU with hardware ray tracing support.
 - A USB cable to connect the mobile device to your computer.
+- recommended_path: /learning-paths/smartphones-and-mobile/how-to-enable-hwrt-on-lumen-for-android-devices/
 
 author_primary: Owen Wu, Arm
 
