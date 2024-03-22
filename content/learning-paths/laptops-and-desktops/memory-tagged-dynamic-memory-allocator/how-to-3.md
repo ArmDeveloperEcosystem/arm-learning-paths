@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 In this section, you will learn how the allocator was modified compared to the one used
-in the [Write a Dynamic Memory Allocator](learning-paths/cross-platform/dynamic-memory-allocator/) learning path.
+in the [Write a Dynamic Memory Allocator](/learning-paths/cross-platform/dynamic-memory-allocator/) learning path.
 
 All the code snippets shown here are from the sources shown in the previous section.
 
-## Memory Initialisation
+## Memory Initialization
 
 Memory with tag storage is not allocated by the kernel by default. Therefore, the application
 (the heap in this case) must ask for it specifically.
@@ -122,7 +122,7 @@ allocation tag of the header that we're about to read from. That function calls 
 function from the Arm C Language Extensions (ACLE) called `__arm_mte_get_tag`.
 
 `__arm_mte_get_tag` takes a pointer to an address. This pointer can have any
-logical tag. From the location it's pointed to, it reads the allocaton tag, stores
+logical tag. From the location it's pointed to, it reads the allocation tag, stores
 it back into the pointer value you gave to it and overwrites the existing logical tag.
 
 This corrects the pointer so that it always has the correct logical tag
@@ -137,12 +137,12 @@ space. It must be one of the other 15 values.
 Remember that we passed `(0xfffe << PR_MTE_TAG_SHIFT)` to `prctl` earlier. This
 mask means "generate any tag value apart from 0".
 
-In a production scenario, this random generation is prefereable as it prevents
+In a production scenario, this random generation is preferable as it prevents
 attacks where someone with knowledge of the program execution predicts
 what the tags will be.
 
 However, this does mean that the output of the program is different every time and due to the
-probabalistic nature of MTE, some issues may not always be caught because of this.
+probabilistic nature of MTE, some issues may not always be caught because of this.
 
 For demo purposes we have added a `randomise_memory_tags` option in `heap.c`.
 If you set this to `false`, tag values are generated from a loop of values 1-15.
@@ -159,7 +159,7 @@ always have different tags.
 This is good for testing. However, an attacker who knows this could predict that
 the next allocation would have tag 3 and forge pointers to it.
 
-Randomising the tags mitigates against that but also means that subsequent (and possibly
+Randomizing the tags mitigates against that but also means that subsequent (and possibly
 neighbouring) allocations may have the same tag, thereby reducing the protection MTE
 can give.
 
@@ -167,7 +167,7 @@ The memory allocator can mitigate against this too, by excluding neighbouring ta
 when generating the new tag. The allocator shown here does not do that but
 the idea is discussed further at the end of this learning path.
 
-## Setting Allocaton Tags
+## Setting Allocation Tags
 
 Once we've chosen a range to use and what tag it should have, we have to set
 the allocation tag of all granules (16 byte chunks) in the range.

@@ -58,7 +58,7 @@ To start, select `File` > `New` > `Hardware Connection`, and give it a meaningfu
 
 Select the `Platform Configuration` you created (the text filter can assist if many targets defined), and click Finish.
 
-Ensure `DSTREAM family` is selected from the Target Connection pulldown, and Browse for your DSTREAM unit. The debugger will recognise the type of DSTREAM unit connected. Use the `DTSL Options` Edit button to specify additional settings (such as which processor(s) to trace).
+Ensure `DSTREAM family` is selected from the Target Connection pulldown, and Browse for your DSTREAM unit. The debugger will recognize the type of DSTREAM unit connected. Use the `DTSL Options` Edit button to specify additional settings (such as which processor(s) to trace).
 
 To load an image, navigate to the `Files` tab, and browse to the appropriate ELF image. Then, in the `Debugger` tab, select `Debug from entry point`.
 

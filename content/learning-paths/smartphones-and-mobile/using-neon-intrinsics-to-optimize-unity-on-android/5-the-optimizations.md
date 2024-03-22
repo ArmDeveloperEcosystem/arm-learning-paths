@@ -137,7 +137,7 @@ Before diving into the modifications made to optimize for Neon, here are some po
 
 1. Neon intrinsics let you use a high level language while still accessing the low level native instructions you need
 
-1. The compiler won’t always recognise code that is vectorizable so it’s worth checking what is and isn’t getting vectorized. The [Unity Burst Inspector](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html) can help you identify which areas of your code are using Burst.
+1. The compiler won’t always recognize code that is vectorizable so it’s worth checking what is and isn’t getting vectorized. The [Unity Burst Inspector](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/editor-burst-inspector.html) can help you identify which areas of your code are using Burst.
 
 1. Writing Neon code can be complex
 

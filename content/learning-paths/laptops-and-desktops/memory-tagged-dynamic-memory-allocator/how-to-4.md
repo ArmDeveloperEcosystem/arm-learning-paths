@@ -7,8 +7,8 @@ layout: learningpathall
 ---
 
 At this point, you have a working memory allocator that tags the memory it manages.
-In this section we will show you a few classic memory allocaton mistakes that
-this alloctor can prevent because it uses memory tagging.
+In this section we will show you a few classic memory allocation mistakes that
+this allocator can prevent because it uses memory tagging.
 
 **Note:** the allocator used here is a demo and, therefore, does not make optimal
 use of memory tagging from either a security or performance point of view. Any
@@ -100,7 +100,7 @@ Ranges:
 ```
 
 Now we will not detect the buffer overflow because the tags still match.
-A smarter allocator could avoid this by randomising tags and excluding the tags
+A smarter allocator could avoid this by randomizing tags and excluding the tags
 immediately surrounding the new allocation.
 
 ## Use After Free Example
@@ -163,7 +163,7 @@ Points to: 0x0000400000802018 Allocation tag: 3
 A double free occurs when memory is allocated, freed and then freed again.
 This should not happen as a single allocation should only allocated once, and freed once.
 
-This may not look like a problem but rememeber that many allocators (including the
+This may not look like a problem but remember that many allocators (including the
 one here) store metadata inside the heap. The second free can trick the allocator
 into updating what it thinks is metadata for the allocation. This metadata may
 now be tracking a different allocation or even be user data inside of a newer

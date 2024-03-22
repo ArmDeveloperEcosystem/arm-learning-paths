@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-By following this learning path, you have seen how the Memory Taggging Extension (MTE)
+By following this learning path, you have seen how the Memory Tagging Extension (MTE)
 can be used by a dynamic memory allocator to prevent common types of memory misuse.
 
 Remember that due to MTE's limited granularity and number of tag values, the quality
@@ -23,7 +23,7 @@ If you're keen to learn more about using the allocator we have shown, here are a
 
 We have only shown the most common memory issues here. There are plenty of other types and variants of those types, that MTE may or may not be able to stop.
 
-Find some example code and see if the allocator detects the issue. Perhaps it does but diagnoising the issue is very difficult.
+Find some example code and see if the allocator detects the issue. Perhaps it does but diagnosing the issue is very difficult.
 
 Often the ability to find the source of a problem is just as important as knowing it exists. A double free diagnosed as a buffer overflow could waste a significant amount of engineering time.
 
@@ -53,7 +53,7 @@ Consider this heap:
 ```
 
 If you had a pointer `p1` that was meant to be used with `allocation 1`, you could
-incremement that to point beyond `allocation 2`, all the way into `allocation 3`.
+increment that to point beyond `allocation 2`, all the way into `allocation 3`.
 You could still "buffer overflow" as long as the amount you overflow
 by is larger than `allocation 2`. If the amount is less than that, `p1` would point
 into `allocation 2` and the problem would be caught as we would expect.
