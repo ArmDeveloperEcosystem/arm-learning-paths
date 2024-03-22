@@ -41,7 +41,7 @@ This will open the 'Configure your new project' view, in which you should config
 
 ![fig3](figures/03.png)
 
-In the next window select **.NET 8.0 (Long Term Support)** and click the **Create** button:
+In the next window, select **.NET 8.0 (Long Term Support)** and click the **Create** button:
 
 ![fig4](figures/04.png)
 
@@ -49,7 +49,7 @@ The project creation process may take a few moments. During this process, you mi
 
 ![fig5](figures/05.png)
 
-Then, accept any other license terms that appear, including Android SDK - License Agreement. 
+Then, accept any other license terms that appear, including the Android SDK - License Agreement. 
 
 Your project should be now ready. Next, open the Solution Explorer (View -> Solution Explorer) to view the created projects:
 
@@ -59,11 +59,11 @@ Your project should be now ready. Next, open the Solution Explorer (View -> Solu
 The .NET MAUI project template is structured to enable the development of cross-platform applications using a single codebase, targeting Android, iOS, macOS, and Windows. Therefore, the project we have just created contains the following elements:
 1. **MauiProgram.cs** - contains the entry point for .NET MAUI application. It's where you configure and set up the app, including services, dependencies, and the main app configuration. It typically contains the CreateMauiApp method, which builds and returns an instance of MauiApp class.
 2. **App.xaml** and **App.xaml.cs** - these files define the application-level resources and the App class, which is derived from Application. This class serves as the central point for managing the app's lifecycle and its main interface.
-3. **Platforms Folder** - this folder contains platform-specific code and resources. It is organized into subfolders for each target platform. Here we have: Android, iOS, MacCatalyst, Tizen, and Windows. These folders can contain platform-specific initialization code, icons, splash screens, and other resources. For example, the Android subfolder contains MainActivity.cs file, which represents the main activity class that runs when your the application starts on an Android device.
+3. **Platforms Folder** - this folder contains platform-specific code and resources. It is organized into subfolders for each target platform. Here we have: Android, iOS, MacCatalyst, Tizen, and Windows. These folders can contain platform-specific initialization code, icons, splash screens, and other resources. For example, the Android subfolder contains the MainActivity.cs file, which represents the main activity class that runs when the application starts on an Android device.
 4. **MainPage.xaml** and **MainPage.xaml.cs** - these files declare the main page of the app, which serves as the starting UI. The XAML file contains the declarative UI markup, while the .cs file contains the code-behind, handling events and binding data to the UI.
-5. **Resources** folder, which contains the application's resources, such as fonts, images, and styles. It is divided into several subfolders, like Fonts, Images, Splash and Styles.
+5. **Resources** folder - this contains the application's resources, such as fonts, images, and styles. It is divided into several subfolders, such as Fonts, Images, Splash and Styles.
 6. **AppShell.xaml** - this file serves as a fundamental component for defining the navigation structure and the overall architecture of the app's UI. It is a new concept introduced with MAUI, building upon and enhancing the navigation capabilities previously available in Xamarin.Forms. AppShell provides a simplified way to create complex, hierarchical navigation in your app with an emphasis on improving the user experience across all platforms.
 
-You can now run the created application. To do so click Debug/Start Debugging. The running application will look like in the figure below:
+You can now run the created application. To do so, click _Debug/Start Debugging_. The running application will look like the figure below:
 
 ![fig7](figures/07.png)
