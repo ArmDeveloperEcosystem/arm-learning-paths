@@ -276,7 +276,7 @@ After installing the NuGet package, proceed to modify the application view. Name
 </Window>
 ```
 
-In the above XAML declaration, we imported the XAML namespace for Syncfusion controls (xmlns:syncfusion="http://schemas.syncfusion.com/wpf"). Then, we defined three anonymous styles that will be implicitly applied to all labels, text boxes, and buttons. These styles are utilized to configure margins and font attributes.
+In the above XAML declaration, we imported the XAML namespace for Syncfusion controls. Then, we defined three anonymous styles that will be implicitly applied to all labels, text boxes, and buttons. These styles are utilized to configure margins and font attributes.
 
 Following this, we now set up a Grid layout with two columns and five rows. The first four rows are configured to automatically adjust their height to fit all the controls, while the last row expands to fill the remaining window space. The columns are designed such that the first column occupies 1/3 of the window's width, while the second column takes the remaining 2/3 of the window's width.
 
