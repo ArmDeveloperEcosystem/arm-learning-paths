@@ -19,9 +19,6 @@ In this learning path, you will create a WPF application from scratch. The appli
 
 You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
 
-## Before you begin
-Before you begin, install Visual Studio 2022 with .NET desktop development package.
-
 ## Create the project
 You will now create the WPF project. Open Visual Studio and click Create a new project. 
 
