@@ -15,12 +15,12 @@ WPF also supports a wide range of multimedia functionalities, including 2D and 3
 
 Through its comprehensive feature set and the support for modern application development patterns, such as the Model-View-ViewModel (MVVM) pattern, WPF remains a powerful tool for building desktop applications on the Windows platform, even as newer technologies like .NET MAUI emerge.
 
-In this learning path, you will create a WPF application from scratch. The application will perform the computationally intensive task of the multiply-add operation on two vectors. By comparing execution times of these operations, you will see the enhancements provided by ARM64 architecture-based devices. Along the way, you will learn how to use Syncfusion's chart library, a third-party tool, to create a column series chart demonstrating the computation times.
+In this learning path, you will create a WPF application from scratch. The application will perform the computationally intensive task of the multiply-add operation on two vectors. By measuring execution times of these operations, you will see the enhancements provided by Arm64 architecture-based devices. Along the way, you will learn how to use Syncfusion's chart library, a third-party tool, to create a column series chart demonstrating the computation times.
 
 You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
 
 ## Before you begin
-Before you begin the implementation, install Visual Studio 2022 with .NET desktop development installed.
+Before you begin, install Visual Studio 2022 with .NET desktop development package.
 
 ## Create the project
 You will now create the WPF project. Open Visual Studio and click Create a new project. 
@@ -31,7 +31,7 @@ In the next window, search for the WPF template.
 
 ![fig2](Figures/02.png)
 
-This will open the 'Configure your new project' view, in which you should configure the project as follows (refer to the figure below):
+This will open the 'Configure your new project' view, in which you should configure the project as follows:
 
 1. Project name: **Arm64.DesktopApp.WPF**
 2. Location: Select the project location on your drive (example: **C:\Users\db\source\repos**)
@@ -48,7 +48,7 @@ Your project should be now ready. Next, open the Solution Explorer (View -> Solu
 1. App.xaml and App.xaml.cs. These files represent the entry point of the WPF application. App.xaml is used to define application-wide resources, such as styles, control templates, and other XAML resources. App.xaml.cs is the code-behind file for App.xaml and contains the application's startup logic, event handling for application-level events (like Startup, Exit, and DispatcherUnhandledException), and any other application-wide code.
 2. MainWindow.xaml and MainWindow.xaml.cs. These files implement a main window that serves as the primary UI for the application. MainWindow.xaml is used to define the layout and elements of the main window, including controls like buttons, text boxes, and data grids. MainWindow.xaml.cs is the code-behind file that contains the logic to handle events and interactions within the main window.
 
-Now that your project is set up, you are ready to begin development. As mentioned earlier the application will perform intense computational tasks. You will use the multilpy add vector operations, implemented in the [.NET MAUI learning path](/learning-paths/laptops-and-desktops/win_net_maui). However, contrary to that learning path, the time required for the computation will be displayed in a chart instead of the list box. 
+Now that your project is set up, you are ready to begin development. As mentioned earlier the application will perform intense computational tasks. You will use the multiply add vector operations, implemented in the [.NET MAUI learning path](/learning-paths/laptops-and-desktops/win_net_maui). 
 
 ## Helpers
 Start by creating two new helper classes: PerformanceHelper and VectorHelper. The first class will be used to measure code execution times, while the second class will implement vector operations.
