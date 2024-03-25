@@ -74,7 +74,6 @@ def patch(article, results, lk):
             f.write(i)
         f.close()
 
-
 '''
 Read json file and run commands in Docker
 '''
@@ -91,50 +90,33 @@ def check(json_file, start, stop):
             logging.debug(cmd)
             subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
+            # Docker exec a command in the container named test_{i}
+            def exec(cmd):
+                docker_cmd = ["docker exec test_{} {}".format(i, cmd)]
+                logging.debug(docker_cmd)
+                subprocess.run(docker_cmd, shell=True, stdout=subprocess.DEVNULL,
+                stderr=subprocess.STDOUT)
+
             # Create user and configure
             if  "arm-tools" in img:
                 # These images already have a 'ubunutu' user account set up.
-                cmd = ["docker exec test_{} apt update".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                exec("apt update")
             elif "ubuntu" in img or "mongo" in img:
-                cmd = ["docker exec test_{} apt update".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} apt install -y sudo wget curl git".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} useradd user -m -G sudo".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                exec("apt update")
+                exec("apt install -y sudo wget curl git")
+                exec("useradd user -m -G sudo")
+                exec("bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"")
                 # The default .bashrc on Ubuntu returns when not interactive so removing it
-                cmd = ["docker exec test_{} rm /home/user/.bashrc".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                exec("rm /home/user/.bashrc")
                 # Allow write permissions on shared folder
-                cmd = ["docker exec test_{} chmod ugo+rw /shared".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                exec("chmod ugo+rw /shared")
             elif "fedora" in img:
-                cmd = ["docker exec test_{} yum update".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} yum install -y sudo wget curl git".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} useradd user -m -G wheel".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                exec("yum update")
+                exec("yum install -y sudo wget curl git")
+                exec("useradd user -m -G wheel")
+                exec("bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"")
                 # Allow write permissions on shared folder
-                cmd = ["docker exec test_{} chmod ugo+rw /shared".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+                exec("chmod ugo+rw /shared")
 
         logging.info("Container(s) initialization completed")
     else:
