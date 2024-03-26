@@ -9,6 +9,8 @@ layout: learningpathall
 ## Create a Debug Connection
 {{% notice %}}
 In this example, we will be working with the RD-N2 platform.
+
+Screenshots in this guide will be from Arm Development Studio 2023.a
 {{% /notice %}}
 
 1. Modify the rdinfra/model-scripts/rdinfra/platforms/rdn2/run_model.sh.
