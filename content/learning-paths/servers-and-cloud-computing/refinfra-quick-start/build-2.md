@@ -9,11 +9,11 @@ layout: learningpathall
 ## Build
 Now that we have the environment and the source, let us perform a build of the firmware stack. We will follow the [instructions](https://neoverse-reference-design.docs.arm.com/en/latest/platform-boot/busybox-boot.html) to build a busy-box root. This will get us an incredibly lightweight kernel with shell so our test on emulation is fast. In principle, we want to test that our firmware implementation builds and boots, so we need TF-A, UEFI, SCP and something very lightweight in terms of an OS loader, to make sure we exercise the UEFI ExitBootServices transition. The busy-box boot is perfect for this.
 
-```bash
-ubuntu@ip-10-0-0-164:~/rd-infra/container-scripts$ ./container.sh -v /home/ubuntu/rd-infra/ run
+Running container wrapper script and building the software:
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 3-14" }
+./container-scrits/container.sh -v /home/ubuntu/rd-infra/ run
+./build-scripts/rdinfra/build-test-busybox.sh -p rdn2 build
 Running docker image: rdinfra-builder ...
-ubuntu@ip-10-0-0-164:/$ cd home/ubuntu/rd-infra/
-ubuntu@ip-10-0-0-164:~/rd-infra$ ./build-scripts/rdinfra/build-test-busybox.sh -p rdn2 build
 ~/rd-infra ~/rd-infra
 ~/rd-infra
 Parsing variant
@@ -28,7 +28,7 @@ Execute build for build-kvmtool.sh on rdn2[rdn2][busybox]
 ```
 
 This results in a X MB (!!) of plaintext (available to download) with the build log. During the build we can see that TF-A, UEFI and SCP firmware are built using their own build systems. The log finishes with the following:
-```bash
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 1-14" }
 ...
 ...
 output/bin/grub-mkimage: info: kernel_img=0x7f366cf65010, kernel_size=0x1a000.
@@ -43,14 +43,16 @@ Execute build for build-target-bins.sh on rdn2[rdn2][busybox]
 Build
 Execute build for build-target-bins.sh on rdn2[rdn2][busybox] done.
 -----------------------------------
-ubuntu@ip-10-0-0-164:~/rd-infra$ 
 ```
 
 Because our rd-infra workspace is mounted into the container from outside, we should be able to find the output of the build normally in our host filesystem, we don't have to extract it from the container.
-```bash
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 4-21" }
 ubuntu@ip-10-0-0-164:~/rd-infra$ ls tf-a/build/rdn2/debug/
-bl1  bl1.bin  bl2  bl2.bin  bl31  bl31.bin  fdts  lib  libc  libfdt  libmbedtls  libwrapper  romlib
 ubuntu@ip-10-0-0-164:~/rd-infra$ ls scp/output/rdn2/0/*/bin
+ubuntu@ip-10-0-0-164:~/rd-infra$ ls uefi/edk2/Build/RdN2/DEBUG_GCC5/FV/
+tf-a/build/rdn2/debug:
+bl1  bl1.bin  bl2  bl2.bin  bl31  bl31.bin  fdts  lib  libc  libfdt  libmbedtls  libwrapper  romlib
+
 scp/output/rdn2/0/mcp_ramfw/bin:
 mcp_ramfw.bin  rdn2-mcp-bl2.elf  rdn2-mcp-bl2.map
 
@@ -62,15 +64,16 @@ rdn2-bl2.elf  rdn2-bl2.map  scp_ramfw.bin
 
 scp/output/rdn2/0/scp_romfw/bin:
 rdn2-bl1.elf  rdn2-bl1.map  scp_romfw.bin
-ubuntu@ip-10-0-0-164:~/rd-infra$ ls uefi/edk2/Build/RdN2/DEBUG_GCC5/FV/
+
+uefi/edk2/Build/RdN2/DEBUG_GCC5/FV:
 BL33_AP_UEFI.fd  FVMAIN.Fv.map  FVMAIN.ext  FVMAIN_COMPACT.Fv      FVMAIN_COMPACT.Fv.txt  Ffs        GuidedSectionTools.txt
 FVMAIN.Fv        FVMAIN.Fv.txt  FVMAIN.inf  FVMAIN_COMPACT.Fv.map  FVMAIN_COMPACT.inf     Guid.xref
 ```
-The build system gives us neat scripts to package the build products into image files that can be consumed by the FVP. Let's run the packaging script, it will know where to find the firmware build products.
-```bash
-ubuntu@ip-10-0-0-164:~/rd-infra/container-scripts$ ./container.sh -v /home/ubuntu/rd-infra/ run
+The build system gives us scripts to package the build products into image files that can be consumed by the FVP. Let's run the packaging script, it will know where to find the firmware build products.
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 3-222" }
+./container-scripts/container.sh -v /home/ubuntu/rd-infra/ run
+./build-scripts/rdinfra/build-test-busybox.sh -p rdn2 package
 Running docker image: rdinfra-builder ...
-ubuntu@ip-10-0-0-164:~/rd-infra$ ./build-scripts/rdinfra/build-test-busybox.sh -p rdn2 package
 ~/rd-infra ~/rd-infra
 ~/rd-infra
 Parsing variant
@@ -286,14 +289,17 @@ run partprobe(8) or kpartx(8)
 The operation has completed successfully.
 Completed preparation of disk image for busybox boot
 ----------------------------------------------------
-ubuntu@ip-10-0-0-164:~/rd-infra$ 
 ```
 
 The script first confirmed that the firmware was already built, firmware was marshalled, signing keys generated and firmware signed, firmware image files created and finally a busy-box ramdisk created. Let's examine the package:
-```bash
-ubuntu@ip-10-0-0-164:~/rd-infra$ ls output/rdn2/
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 2" }
+ls output/rdn2/
 components  grub-busybox.img  ramdisk-busybox.img  rdn2
-ubuntu@ip-10-0-0-164:~/rd-infra$ ls output/rdn2/rdn2/ -l
+```
+
+Examining the full build directory with:
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 2-14" }
+ls output/rdn2/rdn2/ -l
 total 4948
 -rw-r--r-- 1 ubuntu ubuntu 5064017 Jan 12 15:35 fip-uefi.bin
 lrwxrwxrwx 1 ubuntu ubuntu      25 Jan 12 15:35 Image -> ../components/linux/Image
