@@ -1,5 +1,5 @@
 ---
-title: Reference Design Debugging Guide
+title: Debug the Neoverse Reference Design software stack
 
 minutes_to_complete: 20
 
@@ -11,8 +11,8 @@ learning_objectives:
     - Debug TF-A
 
 prerequisites:
-    - A computer running Linux. Any architecture can be used.
-    - Can boot reference design software stack on an FVP.
+    - An Arm Development Studio license
+    - The Neoverse Reference Design software stack should be set up
 
 author_primary: Daniel Nguyen
 
