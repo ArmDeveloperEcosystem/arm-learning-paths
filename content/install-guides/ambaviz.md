@@ -64,13 +64,12 @@ sourceMe.csh
 
 Full installation instructions are provided in the AMBA Viz Release Notes, located in the extracted directory at:
 ```command
-\\docs\public\assets\pdfs\ambaviz-release-note.pdf
+docs/public/assets/pdfs/ambaviz-release-note.pdf
 ```
 
 ## Set up the product license
 
 AMBA Viz is license managed. License setup instructions are available in the [Arm License install guide](../license/).
-
 
 ## Get started
 
@@ -87,5 +86,5 @@ wave2avdb -d cmn600 -f waves.vcd -o waves.avdb
 ```
 Full usage instructions are given in the User Guide, located in the extracted directory at:
 ```command
-\\docs\public\assets\pdfs\ambaviz-user-guide.pdf
+docs/public/assets/pdfs/ambaviz-user-guide.pdf
 ```
