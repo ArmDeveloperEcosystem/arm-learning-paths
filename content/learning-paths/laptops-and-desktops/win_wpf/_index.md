@@ -1,6 +1,6 @@
 ---
 title: Develop applications with Windows Presentation Foundation (WPF) on Windows on Arm
-
+draft: true
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is for developers who want to learn how to create desktop applications and leverage performance improvements on Arm64.
