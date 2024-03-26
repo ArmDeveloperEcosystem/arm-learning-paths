@@ -1,6 +1,6 @@
 ---
 title: Reference Design Quick Start
-
+draft: true
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers interested in testing the reference firmware stack.
