@@ -1,5 +1,5 @@
 ---
-next_step_guidance: The getting started guides to learn how to use Arm Mobile Studio tools to profile mobile games is a good next step.
+next_step_guidance: The getting started guides to learn how to use Arm Performance Studio tools to profile mobile games is a good next step.
 
 recommended_path: /learning-paths/smartphones-and-mobile/ams/
 
@@ -21,7 +21,7 @@ further_reading:
         link: https://blog.unity.com/games/tackling-profiling-for-mobile-games-with-unity-and-arm
         type: blog
     - resource:
-        title: Arm Mobile Studio 
+        title: Arm Performance Studio 
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
         type: website
 
