@@ -28,7 +28,7 @@ review:
             - "__declspec can be used to control symbol visibility (exporting and importing functions or classes in DLLs)"
             - "__declspec specifies the platform"
             - "__declspec specifies the build configuration"
-        correct_answer: 3                     
+        correct_answer: 1                
         explanation: >
             You typically use __declspec along with dllexport and dllimport to control symbol visibility
 
