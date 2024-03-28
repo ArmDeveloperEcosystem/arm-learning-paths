@@ -1,6 +1,6 @@
 ---
 title: Get ready for performance analysis with Sysreport
-draft: true
+
 minutes_to_complete: 10
 
 who_is_this_for: This is an introductory topic for software developers who want to use the system capability reporting tool, Sysreport, to understand and configure the performance features of their Arm Linux system.
