@@ -55,7 +55,7 @@ provider "aws" {
 }
 resource "aws_instance" "MYSQL_TEST" {
   count           = "2"
-  ami             = "ami-0ca2eafa23bc3dd01"
+  ami             = "ami-0000456e99b2b6a9d"
   instance_type   = "t4g.small"
   security_groups = [aws_security_group.Terraformsecurity1.name]
   key_name        = aws_key_pair.deployer.key_name
@@ -122,7 +122,7 @@ Make the changes listed below in `main.tf` to match your account settings.
 
 1. In the `provider` section, update value to use your preferred AWS region.
 
-2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. No change is needed if you want to use Ubuntu AMI. 
+2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0000456e99b2b6a9d`. No change is needed if you want to use Ubuntu AMI. 
 
 {{% notice Note %}}
 The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
