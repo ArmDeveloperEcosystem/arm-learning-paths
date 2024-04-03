@@ -13,17 +13,17 @@
 review:
     - questions:
         question: >
-            What is the ObservableCollection?
+            What is the **ObservableCollection**?
         answers:
             - "A dynamic data collection that provides notifications when items are added, removed, or when the whole list is refreshed"
-            - "A dynamic data collection that can be used to observe hardware signals (i.e. when the USB stick is inserted or removed)"            
+            - "A dynamic data collection that can be used to observe hardware signals (i.e., when the USB stick is inserted or removed)"            
         correct_answer: 1
         explanation: >
-            ObservableCollection is a dynamic data collection that provides notifications when items are added, removed, or when the whole list is refreshed
+            **ObservableCollection** is a dynamic data collection that provides notifications when items are added, removed or when the whole list is refreshed
 
     - questions:
         question: >
-            Can you use Windows Presentation Foundation on .NET 8?
+            Can you use Windows Presentation Foundation (WPF) on .NET 8?
         answers:
             - "Yes"
             - "No"            
