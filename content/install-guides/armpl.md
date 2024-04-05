@@ -43,29 +43,31 @@ Below are the official documentation references:
 
 ## Windows {#windows}
 
-On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file.
+On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries).
+Click on the Download Windows section and download the Windows Installer:
+`arm-performance-libraries_<version>_Windows.msi`
 
-Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
+Double click to open this file and start the Arm Performance Libraries Setup Wizard.
 
-![win_download #center](/install-guides/_images/download-win-armpl_23.10.png)
+![win_wizard00 #left](/install-guides/_images/armpl_wizard00.png)
 
-Open your Windows File Explorer and locate the downloaded `arm-performance-libraries_23.10.zip` file.
-Extract the contents of this zip file using the "Extract all" button at the top of the Windows File Explorer.
 
-### Update your system environment variables
+Read and accept the End-User License Agreement by clicking the checkbox 'I accept the terms of this License Agreement'.
 
-Using Windows Search, open `Edit the System Variables` in the `Control Panel`.
-On the `Advanced Tab` of the `System Properties` window, click on the `Environment Variables` button.
+![win_wizard01 #left](/install-guides/_images/armpl_wizard01.png)
 
-![sys_prop #center](/install-guides/_images/windows-sys-prop.png)
 
-Add a New variable called `ARMPL_DIR` which should point to the location where you unpacked the Arm Performance Libraries.
+Select a location for the installation on your system. The default is:
 
-![add_var #center](/install-guides/_images/windows-sys-env_23.10.png)
+`C:\Program Files\Arm Performance Libraries`
 
-Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing directories in your path.
+![win_wizard02 #left](/install-guides/_images/armpl_wizard02.png)
 
-![edit_path #center](/install-guides/_images/win-sys-path.png)
+Click 'Install' and then 'Finish' to complete the installation.
+
+![win_wizard03 #left](/install-guides/_images/armpl_wizard03.png)
+
+![win_wizard04 #left](/install-guides/_images/armpl_wizard04.png)
 
 You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
