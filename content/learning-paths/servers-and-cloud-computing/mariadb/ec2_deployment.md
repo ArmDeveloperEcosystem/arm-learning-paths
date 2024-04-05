@@ -54,7 +54,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "Mariadb_TEST" {
-  ami             = "ami-0ca2eafa23bc3dd01"
+  ami             = "ami-0a55ba1c20b74fc30"
   instance_type   = "t4g.small"
   security_groups = [aws_security_group.Terraformsecurity.name]
   key_name        = aws_key_pair.deployer.key_name
@@ -119,7 +119,7 @@ There are 2 optional changes you can make to the `main.tf` file.
 
 1. (optional) In the `provider` section, change the region to be your preferred AWS region.
 
-2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0ca2eafa23bc3dd01`. 
+2. (optional) In the `aws_instance` section, change the ami value to your preferred Linux distribution. The AMI ID for Ubuntu 22.04 on Arm is `ami-0a55ba1c20b74fc30`. 
 
 {{% notice Note %}}
 The instance type is t4g.small. This is an Arm-based instance and requires an Arm Linux distribution.
