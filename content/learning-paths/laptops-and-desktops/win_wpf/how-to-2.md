@@ -10,7 +10,7 @@ layout: "learningpathall"
 In this section, you will change the build configuration of the application and then launch it using various settings to compare the computation times.
 
 ## Building and running an application
-To prepare an application for ARM64 and x64 builds, proceed as follows:
+To prepare an application for ARM64 and x86_64 builds, proceed as follows:
 
 1. Click the **Any CPU** drop-down menu and select Configuration Manager...:
 
@@ -24,9 +24,9 @@ To prepare an application for ARM64 and x64 builds, proceed as follows:
 
 ![fig10](Figures/10.png)
 
-4. Repeat these steps to create the x64 solution platform.
+4. Repeat these steps to create the x86_64 solution platform.
 
-To build and run the application, select the **solution platform** (for example, x64) and then click the **Arm64.Desktop.WPF button**:
+To build and run the application, select the **solution platform** (for example, x86_64) and then click the **Arm64.Desktop.WPF button**:
 
 ![fig11](Figures/11.png)
 
@@ -41,6 +41,6 @@ Now, relaunch the application for the ARM64 solution platform and observe the co
 On average, we have achieved about a 30% reduction in computation times.
 
 ## Summary
-In this learning path, we created the Windows Presentation Foundation (WPF). The application was performing a computationally intensive operation: the multiply-add operation of two vectors. This operation served as a benchmark to measure and compare the performance between the two architectures: x64 and Arm64. 
+In this learning path, we created the Windows Presentation Foundation (WPF). The application was performing a computationally intensive operation: the multiply-add operation of two vectors. This operation served as a benchmark to measure and compare the performance between the two architectures: x86_64 and Arm64. 
 
-On running the application with various execution counts on both configurations, we systematically recorded the computation times. This exercise showed a 30% reduction in computation times when the application ran on the Arm64 architecture compared to the x64 architecture. This significant improvement highlights the benefit of tailoring applications to specific hardware architectures, in this case, demonstrating the enhanced performance capabilities of Arm64 architecture-based devices for demanding computational tasks.
+On running the application with various execution counts on both configurations, we systematically recorded the computation times. This exercise showed a 30% reduction in computation times when the application ran on the Arm64 architecture compared to the x86_64 architecture. This significant improvement highlights the benefit of tailoring applications to specific hardware architectures, in this case, demonstrating the enhanced performance capabilities of Arm64 architecture-based devices for demanding computational tasks.
