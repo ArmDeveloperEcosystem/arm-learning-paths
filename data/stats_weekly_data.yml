@@ -1949,16 +1949,16 @@
     laptops-and-desktops: 22
     microcontrollers: 24
     servers-and-cloud-computing: 65
-    smartphones-and-mobile: 12
-    total: 231
+    smartphones-and-mobile: 15
+    total: 234
   contributions:
     external: 24
-    internal: 227
+    internal: 279
   github_engagement:
     num_forks: 30
     num_prs: 10
   individual_authors:
-    arm: 1
+    arm: 3
     bolt-liu: 2
     brenda-strech: 1
     christopher-seidl: 6
@@ -1989,6 +1989,7 @@
     roberto-lopez-mendez: 1
     ronan-synnott: 42
     uma-ramalingam: 1
+    visualsilicon: 1
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2
@@ -2000,20 +2001,20 @@
   content:
     cross-platform: 15
     embedded-systems: 16
-    install-guides: 77
+    install-guides: 78
     laptops-and-desktops: 22
     microcontrollers: 24
     servers-and-cloud-computing: 65
-    smartphones-and-mobile: 12
-    total: 231
+    smartphones-and-mobile: 15
+    total: 235
   contributions:
     external: 24
-    internal: 227
+    internal: 280
   github_engagement:
     num_forks: 30
     num_prs: 10
   individual_authors:
-    arm: 1
+    arm: 3
     bolt-liu: 2
     brenda-strech: 1
     christopher-seidl: 6
@@ -2042,8 +2043,9 @@
     pranay-bakre: 2
     przemyslaw-wirkus: 1
     roberto-lopez-mendez: 1
-    ronan-synnott: 42
+    ronan-synnott: 43
     uma-ramalingam: 1
+    visualsilicon: 1
     ying-yu: 1
     ying-yu,-arm: 1
     zhengjun-xing: 2

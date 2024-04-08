@@ -29,7 +29,13 @@ Note that UEFI runs in EL2, so we must modify the end of the line to be ``EL2:<a
 
 ![uefi symbol files alt-text#center](images/uefi_symbol_files.png "Figure 3. Add uefi symbol files")
 
-ArmDS currently has [BETA] support for DWARF 5 formats. EDK2 builds the debug files in DWARF 5
+{{% notice %}}
+If you are running Arm Development Studio 2023.1 or greater, LLVM Dwarf parser is enabled by default
+
+You do not have to do the following steps.
+{{% /notice %}}
+
+ArmDS versions 2023.a or 2023.0 and previous have [BETA] support for DWARF 5 formats. EDK2 builds the debug files in DWARF 5
 format. In order to properly load the debug files, follow the
 instructions [here](https://developer.arm.com/documentation/101470/2023-0/Reference/Standards-compliance-in-Arm-Debugger)
 

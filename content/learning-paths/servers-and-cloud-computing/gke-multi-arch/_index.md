@@ -1,5 +1,5 @@
 ---
-title: Learn how to migrate an x86 application to multi-architecture with Arm on GKE
+title: Learn how to migrate an x86 application to multi-architecture with Arm on Google Kubernetes Engine (GKE)
 
 minutes_to_complete: 30
 

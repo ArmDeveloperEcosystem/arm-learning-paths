@@ -26,46 +26,38 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-The [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provide developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
+[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provides developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
 
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring.
 These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation.
 
 Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
 
-Below are the official documentation references:
-
-- [Arm Performance Libraries Reference Guide](https://developer.arm.com/documentation/101004)
-- Get started with Arm Performance Libraries
-    - [Windows](https://developer.arm.com/documentation/109361)
-    - [MacOS](https://developer.arm.com/documentation/109362)
-    - [Linux](https://developer.arm.com/documentation/102620)
-
 ## Windows {#windows}
 
-On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries). Click on the Download Windows section. You will be prompted to review and accept the End User License Agreement before you can download the zip file.
+On your Windows 11 Arm machine, go to the [Arm Performance Libraries download page](https://developer.arm.com/downloads/-/arm-performance-libraries).
+Click on the Download Windows section and download the Windows Installer:
+`arm-performance-libraries_<version>_Windows.msi`
 
-Click on the `I accept the terms of this License Agreement` checkbox and proceed to `Download` as shown below.
+Double click to open this file and start the Arm Performance Libraries Setup Wizard.
 
-![win_download #center](/install-guides/_images/download-win-armpl_23.10.png)
+![win_wizard00 #left](/install-guides/_images/armpl_wizard00.png)
 
-Open your Windows File Explorer and locate the downloaded `arm-performance-libraries_23.10.zip` file.
-Extract the contents of this zip file using the "Extract all" button at the top of the Windows File Explorer.
+Read and accept the End-User License Agreement by clicking the checkbox 'I accept the terms of this License Agreement'.
 
-### Update your system environment variables
+![win_wizard01 #left](/install-guides/_images/armpl_wizard01.png)
 
-Using Windows Search, open `Edit the System Variables` in the `Control Panel`.
-On the `Advanced Tab` of the `System Properties` window, click on the `Environment Variables` button.
+Select a location for the installation on your system. The default is:
 
-![sys_prop #center](/install-guides/_images/windows-sys-prop.png)
+`C:\Program Files\Arm Performance Libraries`
 
-Add a New variable called `ARMPL_DIR` which should point to the location where you unpacked the Arm Performance Libraries.
+![win_wizard02 #left](/install-guides/_images/armpl_wizard02.png)
 
-![add_var #center](/install-guides/_images/windows-sys-env_23.10.png)
+Click 'Install' and then 'Finish' to complete the installation.
 
-Edit the `Path` variable to add `%ARMPL_DIR%\bin` to the list of existing directories in your path.
+![win_wizard03 #left](/install-guides/_images/armpl_wizard03.png)
 
-![edit_path #center](/install-guides/_images/win-sys-path.png)
+![win_wizard04 #left](/install-guides/_images/armpl_wizard04.png)
 
 You can now start linking your application to the Arm Performance libraries on your Windows on Arm device. Follow the examples in the included `RELEASE_NOTES` file of your extracted installation directory to get started.
 
@@ -88,6 +80,7 @@ Now run the installation script as a superuser:
 ```console
 /Volumes/arm-performance-libraries_23.10_macOS/arm-performance-libraries_23.10_macOS_install.sh -y
 ```
+
 Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir` option with the script and provide the desired directory location.
 
 To get started, compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
@@ -103,22 +96,25 @@ Arm Performance Libraries are supported on most Linux Distributions like Ubuntu,
 
 The instructions shown below are for an Ubuntu 22.04 AArch64 Linux Host with GCC version 12.2 installed.
 
-On a terminal, run the command shown below to download the appropriate package:
-```command
+In a terminal, run the command shown below to download the appropriate package:
+
+```console
 wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/23-10/ubuntu-22/arm-performance-libraries_23.10_Ubuntu-22.04_gcc-12.2.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
-```command
+```console
 tar -xf arm-performance-libraries_23.10_Ubuntu-22.04_gcc-12.2.tar
 cd arm-performance-libraries_23.10_Ubuntu-22.04/
 ```
+
 Run the installation script as a super user:
 
-```command
+```console
 sudo ./arm-performance-libraries_23.10_Ubuntu-22.04.sh -a
 ```
+
 Using the `-a` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
@@ -127,25 +123,25 @@ If you want to change the installation directory location use the `--install-to`
 
 Install environment modules on your machine:
 
-```command
+```console
 sudo apt install environment-modules
 ```
 
 Set your bash environment to use modules:
 
-```command
+```console
 source /usr/share/modules/init/bash
 ```
 
 Set the `MODULEPATH` environment variable to point to the location of the installed modulefiles for Arm Performance Libraries:
 
-```command
+```console
 export MODULEPATH=$MODULEPATH:/opt/arm/modulefiles
 ```
 
 List the available modules:
 
-```command
+```console
 module avail
 ```
 
@@ -157,9 +153,10 @@ armpl/23.10.0_gcc-12.2
 
 Load the appropriate module:
 
-```command
+```console
 module load armpl/23.10.0_gcc-12.2
 ```
+
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102620).

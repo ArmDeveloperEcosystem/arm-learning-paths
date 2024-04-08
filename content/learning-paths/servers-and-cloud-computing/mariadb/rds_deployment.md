@@ -78,9 +78,12 @@ variable "username" {
 }
 
 variable "password" {
-  default = "Armtest" #we_can_choose_any_password, except special_characters.
+  default = "Armtest1" #we_can_choose_any_password, except special_characters.
 }
 ```
+{{% notice Note %}}
+The password length should be atleast 8 characters.
+{{% /notice %}}
 
 This file is used for configuring your password.  
 

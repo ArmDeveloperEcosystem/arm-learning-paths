@@ -1,6 +1,6 @@
 ---
 title: Using Neon intrinsics to optimize Unity on Android
-draft: true
+
 minutes_to_complete: 90
 
 who_is_this_for: Developers who want to optimize their Unity apps on Android

@@ -11,10 +11,8 @@ We can test the firmware build using the fixed virtual platform model of RD-N2 t
 
 ### Setup the FVP
 We want the RD-N2 for linux. Checking the [platform readme](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/rdn2/readme.html#release-tags) we determine that we need version `11.24.12` of the FVP model. We unpack the tarball and run the install script.
-```bash
-ubuntu@ip-10-0-0-164:~$ ls FVP_RD_N2_11.24_12_Linux64.tgz 
-FVP_RD_N2_11.24_12_Linux64.tgz
-ubuntu@ip-10-0-0-164:~$ ./FVP_RD_N2.sh --i-agree-to-the-contained-eula --no-interactive
+```bash { command_line="ubuntu@ip-10-0-0-164:~ | 2-14" }
+./FVP_RD_N2.sh --i-agree-to-the-contained-eula --no-interactive
 =======================================================
 Welcome to the Installer for ARM Fast Models FVP RD-N2
 =======================================================
@@ -28,7 +26,10 @@ Installation completed successfully
 -----------------------------------
 
 =======================================================
-ubuntu@ip-10-0-0-164:~$ ls FVP_RD_N2/models/Linux64_GCC-9.3/
+```
+Here we can see the built binaries:
+```bash { command_line="ubuntu@ip-10-0-0-164:~ | 2-5" }
+ls FVP_RD_N2/models/Linux64_GCC-9.3/
 FVP_RD_N2          arm_singleton_registry.so  cmn700_rd_n2_css1.yml                libSDL2-2.0.so.0.10.0  libsystemc-2.3.4.so
 FVP_RD_N2.so       armlm-ipc                  cmn700_rd_n2_css2.yml                libarmctmodel.so       newt.so
 FVP_RD_N2_Cfg2     cmn700_rd_n2.yml           cmn700_rd_n2_css3.yml                libarmlm.so            ni700_io_main.yml
@@ -36,16 +37,18 @@ FVP_RD_N2_Cfg2.so  cmn700_rd_n2_css0.yml      libMAXCOREInitSimulationEngine.3.s
 ```
 
 Now we should export the path to the `FVP_RD_N2` model binary as the `MODEL` environment variable.
-```bash
-ubuntu@ip-10-0-0-164:~$ realpath FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
+```bash { command_line="ubuntu@ip-10-0-0-164:~ | 2" }
+realpath FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
 /home/ubuntu/FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
-ubuntu@ip-10-0-0-164:~$ export MODEL=/home/ubuntu/FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
-ubuntu@ip-10-0-0-164:~$ 
+```
+Set the `MODEL` environment variable:
+```bash { command_line="ubuntu@ip-10-0-0-164:~ " }
+export MODEL=/home/ubuntu/FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
 ```
 
 We can do a quick test of the model now, giving it no parameters to see what it does.
-```bash
-ubuntu@ip-10-0-0-164:~$ $MODEL
+```bash { command_line="ubuntu@ip-10-0-0-164:~ | 2-39" }
+$MODEL
 terminal_uart_scp: Listening for serial connection on port 5000
 terminal_uart_mcp: Listening for serial connection on port 5001
 INFO: RD_N2.css.cmn700: Using 'CFGM_PERIPHBASE_PARAM' for periphbase address.
@@ -90,8 +93,8 @@ The model proceeds with additional failures so we abort it using Ctrl+C. It is i
 
 ### Screen configuration for UARTs
 If we do not have X11 forwarding and we are executing on a remote server, we can use screen to spawn persistent terminals that will listen on those ports and we get the information out that way. Let's set up the UART. terminals now. We need to make sure we have the `screen` tool installed.
-```bash
-ubuntu@ip-10-0-0-164:~$ sudo apt-get install screen
+```bash { command_line="ubuntu@ip-10-0-0-164:~ | 2-40" }
+sudo apt-get install screen
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -131,12 +134,11 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-ubuntu@ip-10-0-0-164:~$ 
 ```
 
 Then we should open a new terminal where we will start a `screen` session and connect to it. We could do it in our terminal and add another `screen` window for running the model in as well, but for now we will use two logins. Running the help command tells us that we can use `-c rdn2-fvp.cfg` to run a session with pre-configured windows and commands.
-```bash
-ubuntu@ip-10-0-0-164:~$ screen --help
+```bash { command_line="ubuntu@ip-10-0-0-164:~ | 2-39" }
+screen --help
 Use: screen [-opts] [cmd [args]]
  or: screen -r [host.tty]
 
@@ -175,10 +177,9 @@ Options:
 -wipe [match] Do nothing, just clean up SockDir [on possible matches].
 -x            Attach to a not detached screen. (Multi display mode).
 -X            Execute <cmd> as a screen command in the specified session.
-ubuntu@ip-10-0-0-164:~$ 
 ```
 
-Let us craft such a config file so that when we start a session with it, we get ten windows and each will periodically try to connect to one of the local ports where a UART is running. We might as well change the titles of the windows so we know which terminal is which. The resulting `screen-uart.cfg` file will look like this:
+Let us create such a config file so that when we start a session with it, we get ten windows and each will periodically try to connect to one of the local ports where a UART is running. We might as well change the titles of the windows so we know which terminal is which. The resulting `screen-uart.cfg` file will look like this:
 ```bash
 # Split horizontally into two
 split -v
@@ -247,21 +248,18 @@ When we start the screen session using `screen -c rd-infra/model-scripts/rdinfra
 ![screen terminals alt-text#center](images/terminal.png "Figure 1. Screen Terminals")
 
 The errors are expected as there is nothing talking to those ports yet. We can quit from within the screen by the getting a prompt using `Ctrl+A :` key combo, followed by the `quit` command. Alternatively `Ctrl+A D` will detach the screen session and send it to background. Unfortunately, reattaching the session wipes our neat window arrangement so that's not very useful. We can check if we have any screen sessions running on the system:
-```bash
-ubuntu@ip-10-0-0-164:~/rd-infra/model-scripts/rdinfra$ screen -list
-There is a screen on:
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/model-scripts/rdinfra | 2-40" }
+screen -list
 	2408179.pts-2.ip-10-0-0-164	(01/12/24 17:32:33)	(Attached)
 1 Socket in /run/screen/S-ubuntu.
-ubuntu@ip-10-0-0-164:~/rd-infra/model-scripts/rdinfra$ 
 ```
 And this allows us to detach, reattach, purge or kill stuff as needed.
 
 ### Running the FVP
 
 Running the FVP at this point is a matter of executing the appropriate model script:
-```bash
-ubuntu@ip-10-0-0-164:~$ cd rd-infra/model-scripts/rdinfra/
-ubuntu@ip-10-0-0-164:~/rd-infra/model-scripts/rdinfra$ ./uefi.sh -p rdn2
+```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/model-scripts/rdinfra | 2-72" }
+./uefi.sh -p rdn2
  Continue with <network_enabled> as false !!! 
  Continue with <BL1_IMAGE> as tf-bl1.bin !!! 
  Continue with <FIP_IMAGE> as fip-uefi.bin !!! 
@@ -335,7 +333,7 @@ In file: (unknown):0
 In process: RD_N2.thread_p_130 @ 75431622660 ps
 ```
 
-And we can observe the platform running on our shiny terminals:
+And we can observe the platform running on our terminals:
 ![fvp terminals alt-text#center](images/uefi.png "Figure 2. FVP Terminals")
 
 We can also use the `./boot.sh -p rdn2` command line to boot to busy-box.
