@@ -340,4 +340,4 @@ The **ButtonRunCalculations_Click** method is an event handler for a button's Cl
 
 Lastly, the **ButtonClearResults_Click** method clears the Items collection, which removes all data points from the UI.
 
-You have an application ready. In the next step, you will launch it using Arm64 and x64 configurations to compare the computation times.
+You have an application ready. In the next step, you will launch it using Arm64 and x86_64 configurations to compare the computation times.
