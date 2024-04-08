@@ -1,7 +1,5 @@
 ---
-title: Debug the Neoverse Reference Design software stack
-
-draft: true
+title: Debug the RD-N2 Reference design with Arm Development Studio
 
 minutes_to_complete: 20
 
@@ -13,8 +11,8 @@ learning_objectives:
     - Debug TF-A
 
 prerequisites:
-    - An Arm Development Studio license
-    - The Neoverse Reference Design software stack should be set up
+    - A computer running Linux. Any architecture can be used.
+    - Can boot reference design software stack on an FVP.
 
 author_primary: Daniel Nguyen
 

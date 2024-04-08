@@ -1,7 +1,5 @@
 ---
-title: Get started with the Neoverse Reference Design software stack
-
-draft: true
+title: Reference Design Quick Start
 
 minutes_to_complete: 30
 
@@ -13,9 +11,9 @@ learning_objectives:
     - Test the reference firmware stack
 
 prerequisites:
-    - Some understanding of the software stack architecture
+    - A computer running Linux. Any architecture can be used.
 
-author_primary: Tomas Pilar
+author_primary: Tom Pilar
 
 ### Tags
 skilllevels: Introductory
@@ -24,7 +22,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Docker
-    - FVP
+    - Arm Development Studio
 operatingsystems:
     - Linux
 
