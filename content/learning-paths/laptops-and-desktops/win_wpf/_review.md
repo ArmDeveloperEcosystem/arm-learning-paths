@@ -41,7 +41,6 @@ review:
         correct_answer: 2
         explanation: > 
             There is on average a 30% reduction in computation times when the application ran on the Arm64 architecture compared to the x86_64 architecture
-            Yes, WPF is available on .NET 8
             
 
 # ================================================================================
