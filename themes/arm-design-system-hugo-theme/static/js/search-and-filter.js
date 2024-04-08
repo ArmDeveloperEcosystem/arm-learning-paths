@@ -75,13 +75,8 @@ function removeFacet(tag) {
         const checkbox_element = document.querySelectorAll('ads-checkbox.'+tag)[0]
         checkbox_element.value().then((value) => { 
             if (value === true) {
-                // uncheck it. NOT WORKING
-                //>>>>????????????????????????????????????????????????????? ADS issue
-                //checkbox_element.setAttribute('checked',true); // when setting and unsetting it freezes the checkbox element.
-            
-
-                //checkbox_element.removeAttribute('checked');
                 checkbox_element.checked = false;
+                checkbox_element.checked = undefined;  // Fix came from ADS team, resolving this issue. Not sure why it works, but it does!
             }
         });
 
