@@ -26,20 +26,12 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-The [Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provide developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
+[Arm Performance Libraries](https://developer.arm.com/downloads/-/arm-performance-libraries#documentation) provides developers with optimized math libraries for high performance computing applications on Arm Neoverse based hardware.
 
 These libraries include highly optimized functions for BLAS, LAPACK, FFT, sparse linear algebra, libamath and libastring.
 These libraries are free to use and do not require a license. They can be installed either standalone or with your installation of [Arm Compiler for Linux](/install-guides/acfl). This install guide covers the standalone installation.
 
 Arm Performance Libraries are available for use on [Windows 11 on Arm](#windows), [macOS](#macos) (Apple Silicon), and [Linux](#linux) (AArch64) hosts.
-
-Below are the official documentation references:
-
-- [Arm Performance Libraries Reference Guide](https://developer.arm.com/documentation/101004)
-- Get started with Arm Performance Libraries
-    - [Windows](https://developer.arm.com/documentation/109361)
-    - [MacOS](https://developer.arm.com/documentation/109362)
-    - [Linux](https://developer.arm.com/documentation/102620)
 
 ## Windows {#windows}
 
@@ -51,11 +43,9 @@ Double click to open this file and start the Arm Performance Libraries Setup Wiz
 
 ![win_wizard00 #left](/install-guides/_images/armpl_wizard00.png)
 
-
 Read and accept the End-User License Agreement by clicking the checkbox 'I accept the terms of this License Agreement'.
 
 ![win_wizard01 #left](/install-guides/_images/armpl_wizard01.png)
-
 
 Select a location for the installation on your system. The default is:
 
@@ -90,6 +80,7 @@ Now run the installation script as a superuser:
 ```console
 /Volumes/arm-performance-libraries_23.10_macOS/arm-performance-libraries_23.10_macOS_install.sh -y
 ```
+
 Using this command you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory. If you want to change the installation directory location use the `--install_dir` option with the script and provide the desired directory location.
 
 To get started, compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
@@ -105,22 +96,25 @@ Arm Performance Libraries are supported on most Linux Distributions like Ubuntu,
 
 The instructions shown below are for an Ubuntu 22.04 AArch64 Linux Host with GCC version 12.2 installed.
 
-On a terminal, run the command shown below to download the appropriate package:
-```command
+In a terminal, run the command shown below to download the appropriate package:
+
+```console
 wget https://developer.arm.com/-/media/Files/downloads/hpc/arm-performance-libraries/23-10/ubuntu-22/arm-performance-libraries_23.10_Ubuntu-22.04_gcc-12.2.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
-```command
+```console
 tar -xf arm-performance-libraries_23.10_Ubuntu-22.04_gcc-12.2.tar
 cd arm-performance-libraries_23.10_Ubuntu-22.04/
 ```
+
 Run the installation script as a super user:
 
-```command
+```console
 sudo ./arm-performance-libraries_23.10_Ubuntu-22.04.sh -a
 ```
+
 Using the `-a` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
@@ -129,25 +123,25 @@ If you want to change the installation directory location use the `--install-to`
 
 Install environment modules on your machine:
 
-```command
+```console
 sudo apt install environment-modules
 ```
 
 Set your bash environment to use modules:
 
-```command
+```console
 source /usr/share/modules/init/bash
 ```
 
 Set the `MODULEPATH` environment variable to point to the location of the installed modulefiles for Arm Performance Libraries:
 
-```command
+```console
 export MODULEPATH=$MODULEPATH:/opt/arm/modulefiles
 ```
 
 List the available modules:
 
-```command
+```console
 module avail
 ```
 
@@ -159,9 +153,10 @@ armpl/23.10.0_gcc-12.2
 
 Load the appropriate module:
 
-```command
+```console
 module load armpl/23.10.0_gcc-12.2
 ```
+
 You can now compile and test the examples included in the `/opt/arm/<armpl_dir>/examples/`, or `<install_dir>/<armpl_dir>/examples/` directory, if you have installed to a different location than the default.
 
 For more information refer to [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102620).
