@@ -30,6 +30,18 @@ review:
         correct_answer: 1
         explanation: >
             Yes, WPF is available on .NET 8
+
+    - questions:
+        question: >
+            What is the average percentage performance uplift on Arm64 compared to x86_64?
+        answers:
+            - "10%"
+            - "30%"
+            - "25%"
+        correct_answer: 2
+        explanation: > 
+            There is on average a 30% reduction in computation times when the application ran on the Arm64 architecture compared to the x86_64 architecture
+            Yes, WPF is available on .NET 8
             
 
 # ================================================================================
