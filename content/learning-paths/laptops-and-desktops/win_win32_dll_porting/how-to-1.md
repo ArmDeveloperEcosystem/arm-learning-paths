@@ -42,7 +42,7 @@ Finally, click **Create**.
 
 ## Implementation
 
-Once the project is ready, open the VectorOperations.h file and modify it as follows:
+Once the project is ready, open the `VectorOperations.h` file and modify it as follows:
 
 ```cpp
 #ifdef VECTOROPERATIONS_EXPORTS
@@ -80,7 +80,7 @@ This function generates a vector of size n, filled with random floating-point nu
 
 The second function, additionOfProduct takes three parameters, each of which is type of std::vector<float>, and represent the input vectors: a, b, and c. A function will return another vector, which stores the result of operation (a * b) + c element-wise across the vectors a, b, and c.
 
-To implement those functions open the VectorOperations.cpp file and modify it as follows:
+To implement those functions open the `VectorOperations.cpp` file and modify it as follows:
 ```cpp
 #include "pch.h"
 #include "framework.h"
@@ -134,7 +134,7 @@ You will now create the main application, which will use the above DLL. To do so
 
 ![fig4](figures/04.png)
 
-Once the project is ready, open the MainApplication.cpp file and modify it as follows:
+Once the project is ready, open the `MainApplication.cpp` file and modify it as follows:
 
 ```cpp
 #include <iostream>
@@ -187,9 +187,9 @@ The main function defines a number of trials (trialCount) and the length of vect
 The function outputs the detected platform architecture (Arm64, x64, or defaults to x86 if neither is detected) and the measured execution time in milliseconds to the console. This setup enables performance testing and optimization, especially in applications where vector operations are critical for efficiency and where understanding execution time on different hardware architectures (like Arm64 vs x64) is important.
 
 ## Configuring the project for porting
-Before we can run the application, we need to configure it so that the MainApplication will be built before the DLL, and that the MainApplication can access the DLL. Additionally, the proper project configuration will enable us to switch between various platforms to execute the application on x64 and Arm64.
+Before we can run the application, we need to configure it so that the `MainApplication` will be built before the DLL, and that the `MainApplication` can access the DLL. Additionally, the proper project configuration will enable us to switch between various platforms to execute the application on x64 and Arm64.
 
-First, we'll configure the project dependencies. In the Solution Explorer, right-click on 'Win32.Porting', and then select Properties. This will open the Solution 'Win32.Porting' window, where you should do the following:
+First, configure the project dependencies. In the Solution Explorer, right-click on 'Win32.Porting', and then select Properties. This will open the Solution 'Win32.Porting' window, where you should do the following:
 1. Under Common Properties, click on Startup Project, select Single startup project, and choose MainApplication from the dropdown list:
 
 ![fig5](figures/05.png)
