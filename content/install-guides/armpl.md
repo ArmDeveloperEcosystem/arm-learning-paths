@@ -103,13 +103,15 @@ For more information refer to [Get started with Arm Performance Libraries](https
 
 ## Linux {#linux}
 
-Arm Performance Libraries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC. The GCC compatible releases are built with GCC 13 and tested with GCC versions 7 to 13.
+Arm Performance Libraries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC and NVHPC. The GCC compatible releases are built with GCC 13 and tested with GCC versions 7 to 13. The NVHPC compatible releases are built and tested with NVHPC 24.1.
 
-[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. Provided packages are:
-- DEB and RPM based installers for GCC users.
-- DEB and RPM based installers for NVHPC users.
+[Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. The deb based installers can be used on Ubuntu 20 and Ubuntu 22. The RPM based installers can be used on the following supported distributions:
 
-The instructions shown below are for DEB based installers for GCC users.
+- Amazon Linux 2, Amazon Linux 2023
+- RHEL-7, RHEL-8, RHEL-9
+- SLES-15
+
+The instructions shown below are for deb based installers for GCC users.
 
 In a terminal, run the command shown below to download the debian package:
 
@@ -131,10 +133,6 @@ sudo ./arm-performance-libraries_24.04_deb.sh --accept
 ```
 
 Using the `-a` or `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
-
-Above steps can be followed, to download:
-- RPM based installers for GCC.
-- DEB and RPM based installers for NVHPC
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
