@@ -106,10 +106,10 @@ For more information refer to [Get started with Arm Performance Libraries](https
 Arm Performance Libraries are supported on most Linux Distributions like Ubuntu, RHEL, SLES and Amazon Linux on an `AArch64` host and compatible with various versions of GCC. The GCC compatible releases are built with GCC 13 and tested with GCC versions 7 to 13.
 
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your Linux distribution. Provided packages are:
-- .rpm and .deb based installers for GCC users.
-- .rpm and .deb based installers for NVHPC users.
+- DEB and RPM based installers for GCC users.
+- DEB and RPM based installers for NVHPC users.
 
-The instructions shown below are for .deb based installers for GCC users.
+The instructions shown below are for DEB based installers for GCC users.
 
 In a terminal, run the command shown below to download the debian package:
 

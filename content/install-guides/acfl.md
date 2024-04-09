@@ -77,10 +77,10 @@ You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
 
 ## Download and install using install script
 
-Use an Arm provided script to select, download, and install your preferred `ACfL` package.
+Use an Arm recommended script to select, download, and install your preferred `ACfL` package.
 
 ```console
-bash <(curl -L https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/download.sh)
+bash <(curl -L https://developer.arm.com/-/media/Files/downloads/hpc/arm-compiler-for-linux/install.sh)
 ```
 
 ## Download and install manually {#manual}
