@@ -6,21 +6,21 @@ layout: learningpathall
 
 ## Before you begin
 
-You will need a computer with the [EKS CLI](/install-guides/eksctl/), [AWS CLI](/install-guides/aws-cli), and the [Kubernetes CLI](/install-guides/kubectl) installed. 
+You will need a computer with the following tools installed: [EKS CLI](/install-guides/eksctl/), [AWS CLI](/install-guides/aws-cli), and [Kubernetes CLI](/install-guides/kubectl). 
 
 Install each of these tools and confirm you can run the `aws`, `ekscli`, and `kubectl` commands. 
 
-Any computer which has the required tools installed can be used for this Learning Path. It can be your desktop or laptop computer or a virtual machine with the required tools.
+Any computer (desktop, laptop computer or virtual machine) which has the required tools installed can be used for this Learning Path.
 
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) for this Learning Path. Create an account if you don't have one.
+You will also need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) for this Learning Path. Create an account if you don't already have one.
 
 Make sure to configure your access key ID and secret access key, which are used to sign programmatic requests you make to AWS. Refer to [AWS Credentials](/install-guides/aws_access_keys/) for a quick summary of how to run `aws configure`.
 
-With the required tools installed and your AWS account configured for CLI access you are ready to begin.
+With the required tools installed and your AWS account configured for CLI access, you are now ready to begin.
 
-## Create an EKS cluster 
+## Create an Elastic Kubernetes Service (EKS) cluster 
 
-You can create an Elastic Kubernetes Service (EKS) cluster with the EKS command line tool `eksctl`. 
+You can create an EKS cluster with the EKS command line tool `eksctl`. 
 
 Navigate to an empty directory and use a text editor to save the information below in a file named `eks-cluster.yaml`.
 
@@ -52,7 +52,7 @@ Run the command below to create the cluster:
 eksctl create cluster -f eks-cluster.yaml
 ```
 
-It will take about 15 minutes to crate the cluster. Example output is shown below:
+It will take about 15 minutes to create the cluster. The example output is shown below:
 
 ```output
 2024-04-08 18:56:57 [ℹ]  eksctl version 0.175.0
@@ -119,6 +119,6 @@ ip-192-168-12-242.ec2.internal   Ready    <none>   4m21s   v1.29.0-eks-5e0fdde
 ip-192-168-42-64.ec2.internal    Ready    <none>   4m2s    v1.29.0-eks-5e0fdde
 ```
 
-You are ready to deploy WordPress.
+You are now ready to deploy WordPress.
 
 
