@@ -132,7 +132,7 @@ Run the installation script as a super user:
 sudo ./arm-performance-libraries_24.04_deb.sh --accept
 ```
 
-Using the `-a` or `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
+Using the `--accept` switch you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
 
 If you want to change the installation directory location use the `--install-to` option with the script and provide the desired directory location.
 
