@@ -18,6 +18,8 @@ author_primary: Johanna Skinnider
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+operatingsystems:
+    - Linux
 armips:
     - Neoverse
 tools_software_languages:

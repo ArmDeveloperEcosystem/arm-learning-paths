@@ -33,7 +33,7 @@ The following groups are described below:
 - Backend inefficiency: execution unit, D-Cache misses, translation delays caused by D-TLB walks
 - Frontend inefficiency: branch prediction unit, fetch latency due to I-Cache misses, translation delays caused by I-TLB walks
 - Bad speculation: branch mispredictions
-- Retiring: underutilization of micro-architectural capabilities such as scalar execution instead of vector operations
+- Retiring: under utilization of micro-architectural capabilities such as scalar execution instead of vector operations
 
 ## Backend inefficiency
 

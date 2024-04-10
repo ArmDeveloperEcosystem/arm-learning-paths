@@ -277,7 +277,7 @@ Available commands are:
   run    runs the container in interactive mode;
 ```
 
-We can see that the build system gives a few options how to customise the container. For now, let's just build a standard one.
+We can see that the build system gives a few options how to customize the container. For now, let's just build a standard one.
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/container-scripts | 2-25" }
 ./container.sh build
 Building docker image: rdinfra-builder ...
