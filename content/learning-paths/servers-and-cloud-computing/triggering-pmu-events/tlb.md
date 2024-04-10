@@ -181,7 +181,7 @@ void stores()
 }
 ```
 
-Since these 8 stores are accessing new memory transaltions, there are 8 counts of `L1D_TLB_REFILL`, `L2D_TLB_REFILL`, and `DTLB_WALK`.
+Since these 8 stores are accessing new memory translations, there are 8 counts of `L1D_TLB_REFILL`, `L2D_TLB_REFILL`, and `DTLB_WALK`.
 
 ```output
 L1D_TLB is 731

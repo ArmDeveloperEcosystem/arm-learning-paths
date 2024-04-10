@@ -36,7 +36,7 @@ the TF-A and press run. In this debug panel, you will find common debugging func
 
 ![debug options alt-text#center](images/debug_options.png "Figure 3. Debug options")
 
-Observe the SCP console output. After SCP de-asserts reset for the NeoverseN2 Core 0, it stops on the breakpoint.
+Observe the SCP console output. After SCP de-asserts reset for the Neoverse N2 Core 0, it stops on the breakpoint.
 
 ![scp terminal alt-text#center](images/scp_terminal.png "Figure 4. SCP terminal")
 

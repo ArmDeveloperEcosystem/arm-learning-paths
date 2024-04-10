@@ -29,7 +29,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool used to vizualize AMBA events to accelerate SoC verification.
+[Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool used to visualize AMBA events to accelerate SoC verification.
 
 ## Download installer packages
 
