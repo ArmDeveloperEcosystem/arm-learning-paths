@@ -18,7 +18,7 @@ author_primary: Daniel Nguyen
 
 ### Tags
 skilllevels: Introductory
-subjects: Reference Design
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:

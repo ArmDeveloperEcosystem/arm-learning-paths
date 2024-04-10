@@ -17,7 +17,7 @@ author_primary: Tom Pilar
 
 ### Tags
 skilllevels: Introductory
-subjects: Reference Design
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
