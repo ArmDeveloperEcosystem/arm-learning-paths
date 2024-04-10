@@ -64,7 +64,7 @@ extern VECTOROPERATIONS_API std::vector<float> additionOfProduct(
 
 This file defines the conditional compilation and declaration of a set of functions within a DLL concerning vector operations, specifically those geared towards Windows platforms due to the use of `__declspec`. 
 
-The `#ifdef`, `#else`, and `#endif` directives manage conditional compilation based on whether the VECTOROPERATIONS_EXPORTS macro is defined. This approach is a common pattern for handling symbols in DLL projects.
+The `#ifdef`, `#else`, and `#endif` directives manage the conditional compilation based on whether the VECTOROPERATIONS_EXPORTS macro is defined. This approach is a common pattern for handling symbols in DLL projects.
 
 If VECTOROPERATIONS_EXPORTS is defined, VECTOROPERATIONS_API is defined as `__declspec(dllexport)`, which marks the specified functions or objects to be exported from the DLL. This is typically defined in the project settings or source code of the DLL being compiled.
 
