@@ -2,13 +2,13 @@
 review:
     - questions:
         question: >
-            Some PMU events will not count on the Neoverse CPUs if they are not connected to a system.
+            Some PMU events will not occur on the Neoverse CPUs if they are not provided by a system component.
         answers:
             - True
             - False
         correct_answer: 1                    
         explanation: >
-            Events like LL_CACHE_RD count transactions returned from outside of the N2. 
+            Events like LL_CACHE_RD count transactions returned from outside of the Neoverse N2 CPU. 
 
     - questions:
         question: >
@@ -64,7 +64,7 @@ review:
             - Speculatively executed PMU event counts and retired PMU event counts can be higher, lower or equal to each other
         correct_answer: 1
         explanation: > 
-            Speculatively executed instructions/opertations will count instructions that were architecturally executed as well as instructions that were not architecturally executed. Architecturally executed instructions/operations are also refered to as "retired" or "committed." 
+            Speculatively executed instructions/operations will count instructions that were architecturally executed as well as instructions that were not architecturally executed. Architecturally executed instructions/operations are also referred to as "retired" or "committed." 
 
     - questions:
         question: >

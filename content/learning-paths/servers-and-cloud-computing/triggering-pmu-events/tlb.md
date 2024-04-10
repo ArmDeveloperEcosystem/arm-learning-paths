@@ -9,6 +9,7 @@ layout: learningpathall
 ### ITLB Events
 
 The events below can be used to reveal ITLB effectiveness:
+
 ```C
 //ITLB Effectiveness Metrics
 PMU_EVENT_L1I_TLB,
@@ -20,6 +21,7 @@ PMU_EVENT_INST_RETIRED,
 ```
 
 To trigger an ITLB walk, there must be a miss in the ITLB. The following self-modifying code places a new instruction into memory that has not been accessed before:
+
 ```C
     .global itlb_test
     .type itlb_test, "function"
@@ -42,6 +44,8 @@ ret_opcode:
     .cfi_endproc
 ```
 
+The resulting event counts for the code are:
+
 ```output
 L1I_TLB is 57
 L1I_TLB_REFILL is 1
@@ -54,6 +58,7 @@ INST_RETIRED is 15
 In this case, there are 57 accesses into the ITLB but only 1 refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` is not counting because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time, which did not occur. Branch prediction or speculation may lead to the data already being in the L2 TLB.
 
 To trigger an L2_TLB miss, the following assembly function will clear the TLB to remove any branch predictions or speculation:
+
 ```C
     .global clear_tlb
     .type clear_tlb, "function"
@@ -78,7 +83,9 @@ INST_RETIRED is 17
 ```
 
 ## Instruction side TLB access
+
 This section describes what happens in the ITLB during a TLB access, which can be triggered using store instructions.  
+
 ```C  
 void stores()
 {
@@ -116,6 +123,7 @@ Additional events that occur with an L2 TLB miss:
 `ITLB_WALK` and `L2D_TLB_REFILL`
 
 To trigger TLB Refills and an ITLB walk, clear the TLB with the following code:
+
 ```C
     .global clear_tlb
     .type clear_tlb, "function"
@@ -128,6 +136,8 @@ clear_tlb:
     .cfi_endproc
 ```
 
+The resulting event counts for the code are:
+
 ```output
 L1I_TLB is 73
 L1I_TLB_REFILL is 3
@@ -139,7 +149,9 @@ ITLB_WALK is 3
 After clearing the ITLB, we force new memory accesses translations, resulting in ITLB walks and L1 I-TLB refills. Note that ITLB_WALK does not count walks triggered by TLB maintenance operations. Instead, these walks may be the result of the barrier instructions. 
 
 ### D-TLB Events
+
 The following PMU events highlight D-TLB effectiveness:
+
 ```C
 //DTLB Effectiveness Metrics
 PMU_EVENT_L1D_TLB,
@@ -149,7 +161,9 @@ PMU_EVENT_L2D_TLB_REFILL,
 PMU_EVENT_INST_RETIRED,
 PMU_EVENT_DTLB_WALK,
 ```
+
 A lot of stores will cause D-TLB accesses, refills, and walks.
+
 ```C
 void stores()
 {
@@ -179,7 +193,9 @@ INST_RETIRED is 976
 ```
 
 ## Data side TLB access for a load instruction
+
 This section describes what happens in the D-TLB during a load instruction. The following code reads from many different addresses, which will force a D-TLB access.    
+
 ```C
 void loads()
 {
@@ -242,7 +258,7 @@ L1D_TLB_REFILL is 3
 L1D_TLB_REFILL_RD is 1
 ```
 
-Now, there are refills in the L1 D-TLB caused by the TLB miss. There are also D-side TLB accesses caused by a memory read operation, counted by `L2D_TLB_RD`. `L2_TLB_REFILL_RD` counts any allocation into the L2 TLB caused by an I-side or D-side memory read operation. 
+Now there are refills in the L1 D-TLB caused by the TLB miss. There are also D-side TLB accesses caused by a memory read operation, counted by `L2D_TLB_RD`. `L2_TLB_REFILL_RD` counts any allocation into the L2 TLB caused by an I-side or D-side memory read operation. 
 
 Additional events that occur with an L2 TLB miss are:
 `DTLB WALK`, `L2D_TLB_REFILL`, and `L2D_TLB_REFILL_RD`
@@ -256,7 +272,9 @@ L2D_TLB_REFILL_RD is 3
 Since the TLB has been cleared, `DTLB_WALK` and `L2_TLB_REFILL` are triggered to get the translations from main memory and refill it into the L2 D-TLB.
 
 ## Data side TLB access for a store instruction
+
 This section describes what happens in the D-TLB during a store instruction. The following code writes to many different Normal Cacheable memory addresses, which will force a D-TLB access.  
+
 ```C 
 void stores()
 {

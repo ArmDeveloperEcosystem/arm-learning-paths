@@ -1,17 +1,17 @@
 ---
-title: Triggering common PMU events for Neoverse CPUs using C and Assembly 
+title: Understand Neoverse PMU events using C and assembly language
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why and how common PMU events are triggered.
+who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why common PMU events occur.
 
 learning_objectives: 
     - Understand common PMU events
-    - Understand why some code triggers certain PMU events on the Neoverse N2 Core
+    - Understand why some code triggers certain PMU events on the Neoverse N2 core
     - Understand which events are triggered during common scenarios
 
 prerequisites:
-    - This learning path includes CPU architecture and Arm assembly language that is found in more detail on [Learn the Architecture - A-profile – Arm®](https://www.arm.com/architecture/learn-the-architecture/a-profile). The following sections may be helpful - AArch64 Instruction Set Architecture (ISA); AArch64 Memory Management; AArch64 Memory Attributes and Properties; and Memory Systems, Ordering, and Barriers.
+    - A general understanding of computer architecture, performance analysis, and the ability read Arm assembly code.
 
 author_primary: Johanna Skinnider
 
