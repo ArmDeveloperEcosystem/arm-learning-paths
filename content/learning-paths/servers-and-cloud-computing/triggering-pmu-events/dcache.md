@@ -6,14 +6,17 @@ weight: 4
 layout: learningpathall
 ---
 
-The following PMU events can be used to measure the effectiveness of the L1 Data Cache. 
+The following PMU events can be used to measure the effectiveness of the L1 Data Cache: 
+
 ```C
     //L1 D-Cache Effectiveness Metrics
     PMU_EVENT_L1D_CACHE_REFILL,
     PMU_EVENT_L1D_CACHE,
     PMU_EVENT_INST_RETIRED,
 ```
-To trigger these events, run code that issues stores to Normal Cacheable memory.
+
+To trigger these events, run code that issues stores to Normal Cacheable memory such as the code below:
+
 ```C
 void stores()
 {
@@ -24,6 +27,8 @@ void stores()
 }
 ```
 
+The resulting event counts for the code are:
+
 ```output
 L1D_CACHE_REFILL is 11
 L1D_CACHE is 65
@@ -33,7 +38,9 @@ INST_RETIRED is 100
 These stores will trigger 65 accesses into the L1 D-cache, counted by `L1D_CACHE`. Event `L1D_CACHE_REFILL` counts 11 refills in the L1 D-cache because these stores were not present in the cache prior, so the CPU will allocate these cache lines for future access. 
 
 ### L1 Data cache read access
+
 This section describes what happens in the L1 D-cache during a read, which can be triggered by the code below:    
+
 ```C
 void read_access()
 {
@@ -74,11 +81,13 @@ L1D_CACHE_WB is 0
 L1D_CACHE_WB_VICTIM is 0
 ```
 
-The same code produces the above simulation results, showing the L1 D-cache is refilled once from a read, and from outside of the cluster. This refill did not cause a dirty cache line eviction, counted by `L1D_CACHE_WB_VICTIM`. `L1D_CACHE_WB` counts any cache line evictions of dirty data, whereas `L1D_CACHE_WB_VICTM` counts any cache line evictions of dirty data due to a new cache line allocation.
+The same code produces the above results, showing the L1 D-cache is refilled once from a read, and from outside of the cluster. This refill did not cause a dirty cache line eviction, counted by `L1D_CACHE_WB_VICTIM`. `L1D_CACHE_WB` counts any cache line evictions of dirty data, whereas `L1D_CACHE_WB_VICTM` counts any cache line evictions of dirty data due to a new cache line allocation.
 
 
 ### L1 Data cache write access 
+
 This section describes what happens in the L1 D-cache during a read, which can be triggered by using store instructions to Normal Cacheable memory.  
+
 ```C  
 void write_access()
 {
@@ -120,6 +129,7 @@ L1D_CACHE_WB_VICTIM is 0
 ```
 
 Add a few more stores to Normal Cacheable memory to trigger `L1D_CACHE_WB`:
+
 ```C
 void write_access()
 {
@@ -137,6 +147,8 @@ void write_access()
 }
 ```
 
+The resulting event counts for the code are:
+
 ```output
 L1D_CACHE_REFILL is 235
 L1D_CACHE_REFILL_WR is 234
@@ -146,6 +158,3 @@ L1D_CACHE_WB_VICTIM is 118
 ```
 
 `L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or Software-based Cache Maintenance Operations (CMOs).  `L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. Since they are equal, all writebacks were caused by a cache line allocation.
-
-
-

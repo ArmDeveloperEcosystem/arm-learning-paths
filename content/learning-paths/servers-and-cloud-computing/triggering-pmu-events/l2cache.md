@@ -6,7 +6,8 @@ weight: 6
 layout: learningpathall
 ---
 
-The following PMU events can be used to highlight effectiveness of the L2 cache. 
+The following PMU events can be used to highlight effectiveness of the L2 cache: 
+
 ```C
         // L2 Cache Effectiveness Metrics
         PMU_EVENT_L2D_CACHE_REFILL,
@@ -16,7 +17,9 @@ The following PMU events can be used to highlight effectiveness of the L2 cache.
         PMU_EVENT_L1D_CACHE_WR,
         PMU_EVENT_INST_RETIRED,
 ```
+
 To trigger these events, the L1 D-cache must be full. We can run code to issue many stores to Normal Cacheable memory to do so.
+
 ```C
 void stores()
 {
@@ -27,7 +30,8 @@ void stores()
 }
 ```
 
-As a result, we get the output below:
+The resulting event counts for the code are:
+
 ```output
 L2D_CACHE is 32
 L2D_CACHE_REFILL is 5
@@ -36,9 +40,11 @@ L2D_CACHE_RD is 32
 L1D_CACHE_WR is 70
 INST_RETIRED is 280
 ```
+
 The stores created 32 L2 D-cache accesses and 5 refills. `L2D_CACHE_WR` is 0 because no memory write operation was looked up in the L2 cache, counting any writebacks from the L1 data cache that allocate into the L2 cache. However, we are seeing L2 cache accesses due to reads, in `L2D_CACHE_RD`. This event counts whether there is a hit or a miss in the L2 cache. As a result, all of the data written was stored in the L1 D-cache and the L2 D-cache refills were triggered by read operations only.
 
 Writing to more addresses will trigger L2 cache accesses due to write operations:
+
 ```C
 void stores()
 {
@@ -51,7 +57,8 @@ void stores()
 }
 ```
 
-The results are shown below:
+The resulting event counts for the code are:
+
 ```output
 L2D_CACHE is 95
 L2D_CACHE_REFILL is 14
@@ -62,6 +69,7 @@ INST_RETIRED is 491
 ```
 
 There is 1 L2 D-cache access due to a write operation, counted by `L2D_CACHE_WR`. To trigger even more, there must be more stores to Normal Cacheable memory issued.
+
 ```C
 void stores()
 {
@@ -80,6 +88,8 @@ void stores()
 }
 ```
 
+The resulting event counts for the code are:
+
 ```output
 L2D_CACHE is 350
 L2D_CACHE_REFILL is 38
@@ -88,10 +98,13 @@ L2D_CACHE_RD is 239
 L1D_CACHE_WR is 301
 INST_RETIRED is 976
 ```
-Now, there are 111 L2 D-cache accesses due to write operations. 
+
+Now there are 111 L2 D-cache accesses due to write operations. 
 
 ## L2 cache read access
-This code highlights what occurs during an L2 cache read access, simulated by a series of loads.
+
+This code highlights what occurs during an L2 cache read access, caused by a series of loads.
+
 ```C
 void loads()
 {
@@ -119,12 +132,15 @@ L2D_CACHE_RD is 1
 Additional events that occur when there is an L2 cache miss are:
 `L2D_CACHE_REFILL`, `L2D_CACHE_REFILL_RD`, `BUS_ACCESS`, and `BUS_ACCESS_RD`
 
+The resulting event counts for the code are:
+
 ```
 L2D_CACHE_REFILL is 1
 L2D_CACHE_REFILL_RD
 BUS_ACCESS is 2
 BUS_ACCESS_RD is 2
 ```
+
 `BUS_ACCESS` counts any memory accesses issued by the LSU from the CPU to the DSU. Since the DSU is always implemented with the direct connect configuration for Neoverse cores and has no L3 cache, the transaction will go to the system interconnect, counting D-side and I-side accesses. In the RD-N2 system, the Coherent Mesh Network (CMN) is the system interconnect. `BUS_ACCESS_RD` will work similarly and counts the memory read transactions issued by the LSU from the CPU to the system interconnect.  Since there was a miss in the `L2D_CACHE`, an access to the system interconnect must be made to check for the missed data. The missed data was found outside of the L2 cache, resulting in a `L2D_CACHE_REFILL`. 
 
 Additional events that occur if the cache line was fetched outside of the CMN mesh:
@@ -145,6 +161,7 @@ Additional events that occur if the L2 cache is full:
 `L2D_CACHE_WB` and `L2D_CACHE_WB_VICTIM`
 
 Reads don’t typically cause writebacks. We can use a store instruction to trigger the above events plus a writeback:
+
 ```C
 void stores()
 {
@@ -162,6 +179,8 @@ void stores()
 } 
 ```
 
+The resulting event counts for the code are:
+
 ```output
 REMOTE_ACCESS is 0
 L2D_CACHE_REFILL is 74
@@ -174,7 +193,9 @@ Due to the stores, there are 63 cache line writebacks, meaning any data that is 
 
 
 ## L2 cache write access
-This code highlights what occurs during an L2 cache write access. In order to simulate this, a series of stores to Normal Cacheable memory to fill up the L1 D-cache will cause an overflow into the L2 cache. 
+
+This code highlights what occurs during an L2 cache write access. In order to trigger this, a series of stores to Normal Cacheable memory to fill up the L1 D-cache will cause an overflow into the L2 cache. 
+
 ```C
 void stores()
 {

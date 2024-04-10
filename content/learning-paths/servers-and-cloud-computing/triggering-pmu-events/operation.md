@@ -6,10 +6,19 @@ weight: 9
 layout: learningpathall
 ---
 
-The following groups make up the Operation Mix: SIMD percentage, scalar floating point percentage, integer percentage, branch percentage, load percentage, and store percentage.
+The following groups make up the operation mix: 
 
-### SIMD Percentage:
+- SIMD percentage
+- scalar floating point percentage
+- integer percentage
+- branch percentage
+- load percentage
+- store percentage
+
+### SIMD percentage
+
 To trigger `ASE_SPEC` and `ASE_INST_SPEC`,  create a function using NEON instructions:
+
 ```C
     .global simd
     .type simd, "function"
@@ -26,16 +35,20 @@ simd:
 array: .word 10, 20, 30, 40, 50, 60
 ```
 
+The resulting event counts for the code are:
+
 ```output
 INST_SPEC is 12
 ASE_SPEC is 1
 ASE_INST_SPEC is 3
 ```
 
-The simulation results show `ASE_SPEC` is 1 and `ASE_INST_SPEC` is 3. `ASE_INST_SPEC` counts speculatively executed Advanced SIMD operations. Meanwhile, `ASE_SPEC` counts speculatively executed Advanced SIMD operations, excluding load, store, and move micro-operations that move data to or from the SIMD registers. `ASE_INST_SPEC` counts 1 from LD2 and 2 from ADD – adding then storing. `ASE_SPEC` only counts 1 from the actual NEON add operation.
+The results show `ASE_SPEC` is 1 and `ASE_INST_SPEC` is 3. `ASE_INST_SPEC` counts speculatively executed Advanced SIMD operations. Meanwhile, `ASE_SPEC` counts speculatively executed Advanced SIMD operations, excluding load, store, and move micro-operations that move data to or from the SIMD registers. `ASE_INST_SPEC` counts 1 from LD2 and 2 from ADD – adding then storing. `ASE_SPEC` only counts 1 from the actual NEON add operation.
   
-## Scalar floating point percentage:
+## Scalar floating point percentage
+
 To trigger `VFP_SPEC`, a scalar adding function has been made:
+
 ```C
     .global scalar_fp
     .type scalar_fp, "function"
@@ -49,15 +62,19 @@ scalar_fp:
     .cfi_endproc
 ```
 
+The resulting event counts for the code are:
+
 ```output
 INST_SPEC is 11
 VFP_SPEC is 2
 ```
 
-Since `VFP_SPEC` does not count instructions that move data to or from floating point registers, it only counts the ADD operation. The simulation results show that `VFP_SPEC` is 2. Although there is one ADD operation, the floating point instruction could be split up into two micro-operations.
+Since `VFP_SPEC` does not count instructions that move data to or from floating point registers, it only counts the ADD operation. The results show that `VFP_SPEC` is 2. Although there is one ADD operation, the floating point instruction could be split up into two micro-operations.
  
-## Integer & Branch Percentage:
+## Integer and branch percentage
+
 The following code uses a GCD function to trigger `DP_SPEC`, `BR_IMMED_SPEC`, and `BR_INDIRECT_SPEC`.
+
 ```C
     .section  GCD,"ax"
     .align 3
@@ -96,6 +113,8 @@ void branch_test()
     }
 }
 ```
+
+The resulting event counts for the code are:
 
 ```output
 INST_SPEC is 326

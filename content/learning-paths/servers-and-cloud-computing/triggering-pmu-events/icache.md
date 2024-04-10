@@ -6,7 +6,8 @@ weight: 5
 layout: learningpathall
 ---
 
-The PMU events below can be used to measure L1 Instruction Cache effectiveness.
+The PMU events below can be used to measure L1 Instruction Cache effectiveness:
+
 ```C
 //L1 I-cache Effectiveness Metrics
 PMU_EVENT_L1I_CACHE_REFILL,
@@ -16,6 +17,7 @@ PMU_EVENT_INST_SPEC,
 ```
 
 A series of stores to Normal Cacheable memory will lead to allocations into the L1 I-cache. 
+
 ```C
 void stores()
 {
@@ -44,12 +46,11 @@ INST_SPEC is 1893
 ``` 
 
 ## Instruction side cache access
-Using the above code and simulation results, this section will describe the events that occur during an I-side cache access, and an I-side cache miss.
+
+Using the above code and results, this section lists the events that occur during an I-side cache access, and an I-side cache miss.
 
 Events that always occur:
 `L1I_CACHE`
 
 Additional events that occur when there is an L1 cache miss: 
-`L1I_CACHE_REFILL` and `L2 cache read access events`
-
-
+`L1I_CACHE_REFILL` and L2 cache read access events
