@@ -12,15 +12,15 @@ layout: "learningpathall"
 
 Modern CPUs have vector units that operate in a SIMD fashion. This greatly improves application performance, depending on the vector width.
 
-The Arm v7 Instruction Set Architecture (ISA) introduced Advanced SIMD or Arm NEON instructions. These instructions are supported on the latest Arm v8 and Arm v9 ISA. NEON registers are composed of 32 128-bit registers V0-V31 and support multiple data types: integer, single-precision (SP) floating-point and double-precision (DP) floating-point.
+The Armv7-A Instruction Set Architecture (ISA) introduced Advanced SIMD or Arm NEON instructions. These instructions are supported on the latest Armv8-A and Armv9-A architectures. NEON registers are composed of 32 128-bit registers V0-V31 and support multiple data types: integer, single-precision (SP) floating-point and double-precision (DP) floating-point.
 
 ## Arm SVE
 
-In order to reduce restrictions regarding fixed-length vector sizes, Arm has designed the Scalable Vector Extension (SVE).
+In order to reduce restrictions regarding fixed-length vector sizes, Arm introduced the Scalable Vector Extension (SVE).
 Arm SVE is vector-length agnostic, allowing vector width from 128 up to 2048 bits. This enables software to scale dynamically to any SVE capable Arm hardware. 
 
 SVE is not an extension of NEON but a separate, optional extension of Arm v8-A with a new set of instruction encodings.
-Initial focus is HPC and general-purpose server. SVE2 extends capabilities to enable more data-processing domains.
+SVE is used in HPC and general-purpose server software. SVE2 adds capabilities to enable more data-processing domains.
 
 ## SVE Vector Length
 
@@ -54,7 +54,7 @@ Run the program:
 ./sve
 ```
 
-On AWS Graviton3 processors the output will look like:
+On AWS Graviton3 processors, based on the Neoverse V2, the output is:
 
 ```output
 SVE vector length is: 32 bytes
@@ -84,18 +84,18 @@ Take a look at the example code compiled for SVE (left) and for NEON (right):
 
 Notice how small the SVE assembly is in comparison to NEON. This is due to the predicate behaviour which avoids generating assembly for remainder loops (scalar operations performed when the iteration domain is not a multiple of the vector length. 
 
-Observer what the SVE assembly instructions are doing:
+Observe what the SVE assembly instructions are doing:
 
 The first 4 lines initialize the registers R2, R3, R4. R2 corresponds to the array size, R3 to the loop index, and R4 to the vector length.
 
-The instruction _whilelo_ initializes the predicate register as follows:
+The instruction `whilelo` initializes the predicate register as follows:
 
 - Increment a counter for each predicate lane in P0, starting from 0 (the loop index),
 - Set the corresponding lane as “active” (or true) if the index is less than R2.
 
-The _ld1d_ instructions perform memory loads: these are predicated instructions. Starting from the index stored in R3 and if the corresponding predicate lanes in P0 are active, load elements from the the array A (R0) in Z0 and B (R1) in Z1. 
+The `ld1d` instructions perform memory loads: these are predicated instructions. Starting from the index stored in R3 and if the corresponding predicate lanes in P0 are active, load elements from the the array A (R0) in Z0 and B (R1) in Z1. 
 
-The next instruction _fadd_ is not predicated: values in Z0 and Z1 are added and the result is stored in Z0. However, only the predicated values are stored in array B (R1) in memory with _st1w_.
+The next instruction `fadd` is not predicated: values in Z0 and Z1 are added and the result is stored in Z0. However, only the predicated values are stored in array B (R1) in memory with `st1w`.
 
 Finally, the value of the loop index R3 is incremented by the vector length R4 and the value of the loop index is updated:
 
