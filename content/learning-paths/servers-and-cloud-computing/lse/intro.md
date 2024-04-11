@@ -30,10 +30,10 @@ Additional architecture improvements were made in Armv8.4-A and made optional in
 
 In architecture versions prior to LSE, read-modify-write sequences use load exclusive and store exclusive instructions. Incrementing a shared variable uses a sequence such as:
 
-**LDXR** to read current count (load exclusive)   
-**ADD** to add one to the shared variable    
-**STXR** to attempt to store to memory (store exclusive)     
-**CMP** to check if the operation succeeded
+- **LDXR** to read current count (load exclusive)   
+- **ADD** to add one to the shared variable    
+- **STXR** to attempt to store to memory (store exclusive)     
+- **CMP** to check if the operation succeeded
 
 Because atomic accesses use multiple instructions each processor is required to implement an exclusive monitor. The exclusive monitor is a hardware state machine to track the read-modify-write sequences and match up the loads and stores. You can read about the exclusive monitor in the technical reference manual of a processor such as the [Cortex-A53](https://developer.arm.com/documentation/ddi0500/j/Level-1-Memory-System/L1-Data-memory-system/Internal-exclusive-monitor?lang=en).
 
@@ -43,19 +43,27 @@ With LSE, atomic instructions provide a non-interruptible read-modify-write sequ
 
 Atomic instructions work better in situations such as networking software where many counters are atomically updated from many processors. The atomic instructions result in faster performance and less variability. 
 
-With this introduction, let’s see how this applies to Arm Neoverse processors. 
+With this introduction, you can look at how this applies to Arm Cortex and Neoverse processors. 
 
 ## LSE in Neoverse Processors
 
-AWS currently offers three generations of Graviton processors. The first instance type is A1, and was announced in 2018. Announced in 2019, Graviton2 processors provide a significant performance uplift from A1. The Graviton2 instance types are M6g, T4g, C6g, and R6g. C7g instances, powered by the AWS Graviton3 processors, were announced in 2021.
+AWS currently offers four generations of Graviton processors. 
 
-AWS A1 instances are based on the Cortex-A72 processor. The Cortex-A72 implements the Armv8.0-A architecture and does not include the atomic instructions. All of the AWS EC2 instances based on the Neoverse-N1 and Neoverse-V1 processors include the atomic instructions. 
+The first generation instance type is A1, and was announced at re:Invent 2018. A1 instances provide up to 16 vCPUs. As the first Graviton instance type, A1 paved the way for the software ecosystem needed for the next generation, Graviton2.
 
-Other cloud service providers such as Oracle Cloud, Microsoft Azure, and Google Cloud offer instances based on the Neoverse-N1 processor, and support the atomic instructions.
+Announced at re:Invent 2019, Graviton2 processors provide a significant performance uplift from A1. The Graviton2 instance types include M6g, C6g, R6g, and T4g. AWS advertises 40% better price performance over the same generation of x86 instances. Graviton2 instances include up to 64 vCPUs. Graviton2 uses Arm Neoverse N1 cores.
+
+Graviton3 was announced at re:Invent 2021 and instance types include M7g, C7g, R7g. Graviton3 offers up to 2x better floating-point performance, up to 2x faster crypto performance, and up to 3x better ML performance compared to Graviton2. Graviton3 uses Arm Neoverse V1 cores.
+
+Announced at re:Invent 2023, Graviton4 is based on Neoverse V2 cores. Graviton4 increases core count to 96 and is first available in the R8g instance type. Graviton4 provides 30% better compute performance, 50% more cores, and 75% more memory bandwidth than Graviton3.
+
+AWS A1 instances are based on the Cortex-A72 processor. The Cortex-A72 implements the Armv8.0-A architecture and does NOT include the atomic instructions. All of the AWS EC2 instances based on the Neoverse N1, Neoverse V1, and Neoverse V2 processors include the atomic instructions. 
+
+Other cloud service providers such as Oracle Cloud, Microsoft Azure, and Google Cloud offer instances based on Neoverse processors, and support the atomic instructions.
 
 One of the common performance issues when migrating to Neoverse is running software that does not utilize LSE. Software built with load exclusives and store exclusives usually runs slower on Neoverse instances. 
 
-Let’s look at how to make sure you get the best performance on Neoverse.
+It's important to make sure you get the best performance on Neoverse processors.
 
 **How do I know if my Linux kernel supports atomics?**
 
@@ -64,17 +72,19 @@ There are a couple of ways to check. First, look in the kernel ring buffer messa
 ```bash
 sudo dmesg | grep LSE
 ```
+
 If LSE is present, the output from the command will look like:
 
 ```output
 [    0.001296] CPU features: detected: LSE atomic instructions
 ```
 
-Another way is to use the lscpu command to print the processor information:
+Another check is to use the lscpu command to print the processor information:
 
 ```bash
 lscpu
 ```
+
 Here is the output from running `lscpu` an AWS A1 instance:
 
 ```output
@@ -107,7 +117,7 @@ Vulnerability Srbds:             Not affected
 Vulnerability Tsx async abort:   Not affected
 Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid
 ```
-Look specifically at the flags information printed at the end.
+Look specifically at the flags printed at the end.
 
 Here is the output from running `lscpu` on an AWS T4g instance:
 
@@ -144,11 +154,11 @@ Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 atom
                                  id asimdrdm lrcpc dcpop asimddp ssbs
 ```
 
-For Neoverse-N1 the “atomics” flag is listed indicating LSE support.
+For Neoverse N1 the “atomics” flag is listed indicating LSE support.
 
 **Which versions of the GCC compiler support LSE?**
 
-LSE support started in GCC 6, but currently GCC 10 and GCC 11 are good to use.
+LSE support started in GCC 6, but GCC 10 and GCC 11 are good to use.
 
 **What are out-of-line atomics?**
 
@@ -162,9 +172,7 @@ With GCC 10.1 and higher, out-of-line atomics are enabled by default. Refer to [
 
 **Which CPU or architecture version should I specify with gcc?**
 
-In the [Graviton getting started](https://github.com/aws/aws-graviton-getting-started/blob/main/c-c++.md) on GitHub AWS recommends using
--march=armv8.2-a+fp16+rcpc+dotprod+crypto 
-for GCC targeting Graviton2.
+Refer to the [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started/blob/main/c-c++.md) on GitHub AWS for recommendations on GCC flags for Graviton processors. 
 
 It’s generally a good idea to use the latest compiler available on the operating system being used.
 

@@ -1,7 +1,7 @@
 ---
 title: Learn about Large System Extensions (LSE)
 
-minutes_to_complete: 45
+minutes_to_complete: 30 
 
 who_is_this_for: This is an introductory topic for software developers who want to learn about Large System Extensions and use them in an application.
 
@@ -10,7 +10,7 @@ learning_objectives:
     - Find out if an application uses Large System Extensions
 
 prerequisites:
-    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) to access different AWS Graviton instance types. Other Arm Linux machines can be substituted as needed.
+    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) to access instance types with different AWS Graviton processors. If you don't have an AWS account, you can substitute other Arm Linux computers.
 
 author_primary: Jason Andrews
 
