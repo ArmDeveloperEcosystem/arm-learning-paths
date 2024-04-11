@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-Arm64, also known as ARMv8-A, represents a significant evolution in the ARM architecture that powers a vast array of computing devices, from smartphones and tablets to laptops and servers. This 64-bit architecture is known for its exceptional power efficiency and performance, which stems from a design philosophy that emphasizes simplicity and energy efficiency without sacrificing computational power.
+ARMv8-A introduced a significant evolution in the ARM architecture with the addition of Arm64, the 64-bit instruction set. This 64-bit architecture is known for its exceptional power efficiency and performance, which stems from a design philosophy that emphasizes simplicity and energy efficiency without sacrificing computational power. It powers a vast array of computing devices, from smartphones and tablets to laptops and servers.
 
 Arm64 introduces several performance improvements over its predecessors, including a larger number of general-purpose registers, advanced SIMD (Single Instruction, Multiple Data) capabilities for better handling of multimedia tasks and enhanced cryptography features. These improvements contribute to faster data processing and an overall boost in application performance, making Arm64 an attractive option for a wide range of applications, including those demanding high computational power.
 
