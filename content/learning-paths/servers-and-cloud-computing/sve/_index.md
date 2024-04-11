@@ -1,7 +1,7 @@
 ---
 title: Port Code to Arm Scalable Vector Extension (SVE)
 
-minutes_to_complete: 40   
+minutes_to_complete: 30   
 
 who_is_this_for: This is an introductory topic for software developers using SIMD instructions for High-Performance Computing, Machine Learning, Digital Signal Processing, Audio and Video Codec applications.
 
@@ -21,8 +21,7 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Neoverse
-    - Cortex-A75
-    - Cortex-A55
+    - Cortex-A
 operatingsystems:
     - Linux
 tools_software_languages:
