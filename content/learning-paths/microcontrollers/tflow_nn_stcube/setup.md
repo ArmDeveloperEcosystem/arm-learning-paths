@@ -44,9 +44,9 @@ conda install jupyter pandas pyserial scikit-learn tensorflow matplotlib
 
 Next, you need to program the STM32 `B-L475E-IOT01A2` board to acquire accelerometer data for your neural network model.
 
-The data collection code for this Learning Path is provided, so you can just import the project and program the board using [STM Code IDE](https://www.st.com/en/development-tools/stm32cubeide.html).
+The data collection code for this Learning Path is provided, so you can just import the project and program the board using [STM32CubeIDE](https://www.st.com/en/development-tools/stm32cubeide.html).
 
-Download the [zip file](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontrollers/tflow_nn_stcube/Project_Files/tf_stm32.zip) and expand it into a `tf_stm32` folder.
+Download the [zip file](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/microcontrollers/tflow_nn_stcube/Project_Files/tf_stm32.zip) and extract it into a `tf_stm32` folder.
 
 ### Install STM32CubeIDE
 
