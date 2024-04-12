@@ -51,6 +51,8 @@ Bundles are provided for Windows, Linux, or Mac OS. Not all components are suppo
 
 ## Component installation and setup
 
+[User license setup](../license/)
+
 [Install Arm Development Studio](../armds/)
 
 [Install Arm Compiler for Embedded](../armclang/)
@@ -59,4 +61,5 @@ Bundles are provided for Windows, Linux, or Mac OS. Not all components are suppo
 
 [Install Arm Socrates](../socrates/)
 
-[User license setup](../license/)
+[Install Arm AMBA Viz](../ambaviz/)
+

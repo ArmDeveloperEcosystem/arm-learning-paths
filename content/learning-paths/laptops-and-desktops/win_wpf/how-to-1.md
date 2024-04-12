@@ -1,5 +1,5 @@
 ---
-title: "Create an application using Windows Presentation Foundation"
+title: "Create an application using Windows Presentation Foundation (WPF)"
 
 weight: 2
 
@@ -7,11 +7,11 @@ layout: "learningpathall"
 ---
 
 ## Introduction
-Windows Presentation Foundation (WPF) is a comprehensive framework for building modern desktop applications. WPF is designed to enable developers to create applications with rich user interfaces, integrating documents, media, two-dimensional and three-dimensional graphics. WPF uses Extensible Application Markup Language (XAML), a declarative XML-based language, to define and link various UI elements.
+Windows Presentation Foundation (WPF) is a comprehensive framework for building modern desktop applications. WPF is designed to enable developers to create applications with rich user interfaces by integrating documents, media, two-dimensional and three-dimensional graphics. WPF uses Extensible Application Markup Language (XAML), a declarative XML-based language, to define and link various UI elements.
 
 One of the key features of WPF is its separation of business logic from the UI, enabling designers and developers to work simultaneously on the same project with minimal overlap. This separation is facilitated by the use of data binding, templates, and styles, making WPF applications highly customizable and easy to maintain.
 
-WPF also supports a wide range of multimedia functionalities, including 2D and 3D graphics, animation, and audio and video playback, providing a robust framework for developing visually appealing applications. Additionally, it offers advanced features like hardware acceleration for graphical display and the integration of Direct3D elements, enhancing the performance and visual fidelity of applications.
+WPF also supports a wide range of multimedia functionalities, including 2D and 3D graphics, animation, and audio and video playback, which provides a robust framework for developing visually appealing applications. Additionally, it offers advanced features, such as hardware acceleration for graphical display and the integration of Direct3D elements, which enhances the performance and visual fidelity of applications.
 
 Through its comprehensive feature set and the support for modern application development patterns, such as the Model-View-ViewModel (MVVM) pattern, WPF remains a powerful tool for building desktop applications on the Windows platform, even as newer technologies like .NET MAUI emerge.
 
@@ -20,11 +20,11 @@ In this learning path, you will create a WPF application from scratch. The appli
 You can find the complete project code used in this learning path [here](https://github.com/dawidborycki/Arm64.DesktopApp.WPF).
 
 ## Create the project
-You will now create the WPF project. Open Visual Studio and click Create a new project. 
+You will now create the WPF project. Open Visual Studio and click **Create a new project**: 
 
 ![fig1](Figures/01.png)
 
-In the next window, search for the WPF template. 
+In the next window, search for the WPF Application template: 
 
 ![fig2](Figures/02.png)
 
@@ -37,18 +37,20 @@ This will open the 'Configure your new project' view, in which you should config
 
 ![fig3](Figures/03.png)
 
-In the last step, Additional Information, choose the **.NET 8.0 (Long Term Support)** option. Finally, click the **Create** button. 
+In the last step, under Additional Information, choose the **.NET 8.0 (Long Term Support)** option. Finally, click the **Create** button. 
 
 ![fig4](Figures/04.png)
 
-Your project should be now ready. Next, open the Solution Explorer (View -> Solution Explorer) to view the created project. It consists of the following elements:
-1. App.xaml and App.xaml.cs. These files represent the entry point of the WPF application. App.xaml is used to define application-wide resources, such as styles, control templates, and other XAML resources. App.xaml.cs is the code-behind file for App.xaml and contains the application's startup logic, event handling for application-level events (like Startup, Exit, and DispatcherUnhandledException), and any other application-wide code.
-2. MainWindow.xaml and MainWindow.xaml.cs. These files implement a main window that serves as the primary UI for the application. MainWindow.xaml is used to define the layout and elements of the main window, including controls like buttons, text boxes, and data grids. MainWindow.xaml.cs is the code-behind file that contains the logic to handle events and interactions within the main window.
+Your project should be now ready. 
 
-Now that your project is set up, you are ready to begin development. As mentioned earlier the application will perform intense computational tasks. You will use the multiply add vector operations, implemented in the [.NET MAUI learning path](/learning-paths/laptops-and-desktops/win_net_maui). 
+Next, open the Solution Explorer (View -> Solution Explorer) to view the created project. It consists of the following elements:
+1. App.xaml and App.xaml.cs. These files represent the entry point of the WPF application. App.xaml is used to define application-wide resources, such as styles, control templates, and other XAML resources. App.xaml.cs is the code-behind file for App.xaml and contains the application's startup logic, event handling for application-level events (like Startup, Exit, and DispatcherUnhandledException), and any other application-wide code.
+2. MainWindow.xaml and MainWindow.xaml.cs. These files implement a main window that serves as the primary UI for the application. MainWindow.xaml is used to define the layout and elements of the main window, including control-like buttons, text boxes, and data grids. MainWindow.xaml.cs is the code-behind file that contains the logic to handle events and interactions within the main window.
+
+Now that your project is set up, you are ready to begin development. As mentioned earlier, the application will perform intense computational tasks. You will use the multiply-add vector operations, implemented in the [.NET MAUI learning path](/learning-paths/laptops-and-desktops/win_net_maui). 
 
 ## Helpers
-Start by creating two new helper classes: PerformanceHelper and VectorHelper. The first class will be used to measure code execution times, while the second class will implement vector operations.
+Start by creating two new helper classes: **PerformanceHelper** and **VectorHelper**. The first class will be used to measure code execution times, while the second class will implement vector operations.
 
 Proceed as follows:
 1. Open the Solution Explorer in Visual Studio, right-click on the Arm64.DesktopApp.WPF project, and then select Add -> New Folder. Rename the folder to Helpers.
@@ -56,7 +58,7 @@ Proceed as follows:
 
 ![fig5](Figures/05.png)
 
-3. Modify 'PerformanceHelper.cs' as follows:
+3. Modify **PerformanceHelper.cs** as follows:
 ```cs
 using System.Diagnostics;
 
@@ -82,7 +84,7 @@ namespace Arm64.DesktopApp.WPF.Helpers
     }
 }
 ```
-4. Similarly, add the VectorHelper.cs. Then, modify the file as follows:
+4. Repeat step 2 and add **VectorHelper.cs**. Then, modify the file as follows:
 ```cs
 namespace Arm64.DesktopApp.WPF.Helpers
 {
@@ -117,10 +119,10 @@ namespace Arm64.DesktopApp.WPF.Helpers
 ```
 
 ## Data Model
-Now, you will create the data model class, ChartData, to represent points in the chart. Proceed as follows:
+Now, you will create the data model class, **ChartData**, to represent points in the chart. Proceed as follows:
 1. Open Solution Explorer and right-click on the Arm64.DesktopApp.WPF project.
 2. Select Add -> New Folder. Rename the folder to Data.
-3. Right-click the Data subfolder, and select Add -> New Item. This action opens the Add New Item window, in which you should set the file name to ChartData.cs.
+3. Right-click the Data subfolder and select Add -> New Item. This action opens the Add New Item window, in which you should set the file name to ChartData.cs.
 4. Modify ChartData.cs as follows:
 ```cs
 namespace Arm64.DesktopApp.WPF.Data
@@ -278,18 +280,18 @@ After installing the NuGet package, proceed to modify the application view. Name
 
 In the above XAML declaration, we imported the XAML namespace for Syncfusion controls. Then, we defined three anonymous styles that will be implicitly applied to all labels, text boxes, and buttons. These styles are utilized to configure margins and font attributes.
 
-Following this, we now set up a Grid layout with two columns and five rows. The first four rows are configured to automatically adjust their height to fit all the controls, while the last row expands to fill the remaining window space. The columns are designed such that the first column occupies 1/3 of the window's width, while the second column takes the remaining 2/3 of the window's width.
+Following this, we now set up a grid layout with two columns and five rows. The first four rows are configured to automatically adjust their height to fit all the controls, while the last row expands to fill the remaining window space. The columns are designed such that the first column occupies a 1/3 of the window's width, while the second column takes the remaining 2/3s of the window's width.
 
 The first row contains a label, which displays the processor architecture. The second row contains a label and a text box for entering the vector size. The third row contains a label and a text box for controlling the execution count. The fourth row contains two buttons. Finally, the chart (spanning across both columns) is added to the fifth row.
 
-The chart is configured with two numerical axes. The horizontal (primary) axis displays the execution count, and the vertical (secondary) axis shows the calculation time. This setup allows users to generate a graph representing the calculation time across a number of executions.
+The chart is configured with two numerical axes. The horizontal (primary) axis displays the execution count and the vertical (secondary) axis shows the calculation time. This setup allows users to generate a graph representing the calculation time across a number of executions.
 
 The complete XAML declaration results in the following view:
  
 ![fig7](Figures/07.png)
 
 ## Application Logic
-You will now implement the application logic. So that the computations will be launched when the user clicks Run calculations button. Follow these steps:
+You will now implement the application logic so that the computations will be launched when the user clicks the **Run calculations** button. Follow these steps:
 
 1. Open the Solution Explorer in Visual Studio 2022 by clicking View > Solution Explorer
 2. In the Solution Explorer window, left-click on the MainWindow.xaml.cs file and modify it as outlined below:
@@ -330,12 +332,12 @@ public partial class MainWindow : Window
     }
 ```
 
-This code is designed to measure and display the performance (execution time) of a vector addition of product over a specified number of executions. The results are dynamically displayed in the UI through a chart that is bound to the Items collection. This collection is implemented using ObservableCollection<ChartData> for the Items property. ObservableCollection is a dynamic data collection that provides notifications when items are added, removed, or when the whole list is refreshed. Thus, the chart will be refreshed whenever items are added to the ObservableCollection.
+This code is designed to measure and display the performance (execution time) of a vector addition of a product over a specified number of executions. The results are dynamically displayed in the UI through a chart that is bound to the Items collection. This collection is implemented using **ObservableCollection<ChartData>** for the Items property. ObservableCollection is a dynamic data collection that provides notifications when items are added, removed or when the whole list is refreshed. Therefore, the chart will be refreshed whenever items are added to the ObservableCollection.
 
 Next, in the constructor, the InitializeComponent method is called to initialize the window components defined in XAML. The DataContext of the window is set to itself (this), enabling data binding between the window's controls and its properties. It also initializes a label with the system's processor architecture, fetched from environment variables.
 
-The ButtonRunCalculations_Click method is an event handler for a button's Click event. It reads the vector size and execution count from two text boxes (TextBoxVectorSize and TextBoxExecutionCount), converts them into integers, and then uses these values to call the MeasurePerformance method on the PerformanceHelper class. This method measures the execution time of a computation (performed by the VectorHelper.AdditionOfProduct method) repeated a specified number of times (executionCount). The resulting execution time is then added to the Items collection as a new ChartData object, which triggers an update in the UI to reflect the new data.
+The **ButtonRunCalculations_Click** method is an event handler for a button's Click event. It reads the vector size and execution count from two text boxes (TextBoxVectorSize and TextBoxExecutionCount), converts them into integers, and then uses these values to call the MeasurePerformance method on the PerformanceHelper class. This method measures the execution time of a computation (performed by the VectorHelper.AdditionOfProduct method) repeated a specified number of times (executionCount). The resulting execution time is then added to the Items collection as a new ChartData object, which triggers an update in the UI to reflect the new data.
 
-Lastly, the ButtonClearResults_Click method clears the Items collection, which removes all data points from the UI.
+Lastly, the **ButtonClearResults_Click** method clears the Items collection, which removes all data points from the UI.
 
-You have an application ready. In the next step, you will launch it using Arm64 and x64 configurations to compare the computation times.
+You have an application ready. In the next step, you will launch it using Arm64 and x86_64 configurations to compare the computation times.

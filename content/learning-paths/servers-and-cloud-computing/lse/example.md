@@ -7,11 +7,13 @@ layout: "learningpathall"
 
 ---
 
-## Try out Large System Extensions (LSE) using an example C program
+## Try Large System Extensions (LSE) using an example C program
 
-Let’s take a look at an example to learn more and find out if the compiler is generating LSE instructions. 
+You can build and run an example to learn more and find out if the compiler is generating LSE instructions. 
 
-Shown below is an [example program from cppreference.com](https://en.cppreference.com/w/c/language/atomic). Using a file editor of your choice, save this content into a file called `atomic.c` on your running instance:
+Below is an [example program from cppreference.com](https://en.cppreference.com/w/c/language/atomic). 
+
+Use a text editor of your choice to save the example program in a file called `atomic.c` on your Arm Linux computer. 
 
 ```cpp
 #include <stdio.h>
@@ -44,9 +46,11 @@ int main(void)
 ```
 The atomic_int C data type is used to indicate that accesses to the acnt variable must be atomic.
 
-Let’s start on an AWS A1 instance. This is Cortex-A72, without LSE. This can also be done on any Cortex-A53 or Cortex-A72 system. 
+The results on different AWS instance types are shown below. You can also try this on any Arm Linux computer. 
 
-#### **A1 Instance**
+### A1 Instance
+
+The AWS A1 instance uses Cortex-A72, without LSE. This can also be done on any Cortex-A53 or Cortex-A72 system. 
 
 On Ubuntu 20.04 the default gcc version is 9.4.0. Check this by running:
 
@@ -88,11 +92,12 @@ Here is a snippet of the disassembly performing this sequence:
 9a4:   35ffffa3        cbnz    w3, 998 <f+0x5c>
 ```
 
-Now let’s move to a T4g instance with Graviton2.
 
-#### **T4g Instance**
+### T4g Instance
 
-Compile the same application on a T4g instance. This instance uses Neoverse-N1 with LSE. Similar machines with Neoverse-N1 can also be used.
+The AWS T4g instance with Graviton2 uses Neoverse N1 with LSE. You can also use similar machines with Neoverse N1.
+
+Compile the same application on a T4g instance:
  
 ```bash
 gcc -g atomic.c -o t4g -march=armv8.2-a -lpthread
@@ -111,7 +116,7 @@ Here is a snippet of the disassembly performing this sequence:
 998:   b8e10002        ldaddal w1, w2, [x0]
 ```
 
-Staying on the T4g instance, let’s compile the application with outline-atomics:
+Staying on the T4g instance, compile the application with outline-atomics:
 
 ```console
 gcc -g atomic.c -o t4g.outline  -moutline-atomics -lpthread
@@ -155,7 +160,7 @@ The result is:
 Illegal instruction (core dumped)
 ```
 
-#### **How can I find out if my application has atomic instructions?**
+## How can I find out if my application has atomic instructions?
 
 To check for atomic instructions in applications run objdump on the T4g executable:
 
