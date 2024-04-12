@@ -1,9 +1,9 @@
 ---
-title: Port Win32 library to Arm64
+title: How to port the Win32 library to Arm64
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an introductory topic for developers who want to learn how to port their applications to Arm64 
+who_is_this_for: This is an introductory topic for developers who want to learn how to port their Win32 applications to Arm64 
 
 learning_objectives:
     - Create C/C++ Win32 DLL
@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), Lenovo Thinkpad X13s running Windows 11 or Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).    
-    - Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio).
+    - Refer to [Visual Studio 2022 with Arm build tools](/install-guides/vs-woa).
     
 author_primary: Dawid Borycki
 
