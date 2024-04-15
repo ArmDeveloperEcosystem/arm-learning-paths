@@ -117,11 +117,10 @@ spec:
 
 The `mysql-deployment.yaml` file deploys a pod with a MySQL container. 
 
-There are three objects defined. The first object is a service object. It creates a service called wordpress-mysql. The service is assigned to be the front end to the MySQL pod through the use of a selector. When a pod within the cluster wants to communicate with the MySQL pod, it communicates using the wordpress-mysql service name.
-
-The next object is a Persistent Volume Claim (PVC). This object mounts storage inside the MySQL pod. A key point to understand is that the PVC object is not what creates the storage. It is a declaration of a type of storage that you want available to the cluster. 
-
-The last object created is a deployment. Inside the deployment spec there are selector labels. These labels match the labels in the service object. This match assigns the wordpress-mysql service to the MySQL pod. Within the deployment spec, there is also a pod spec which configures the MySQL container to deploy. 
+There are three objects defined:
+- the first object is a service object. It creates a service called wordpress-mysql. The service is assigned to be the front end to the MySQL pod through the use of a selector. When a pod within the cluster wants to communicate with the MySQL pod, it communicates using the wordpress-mysql service name.
+- the next object is a Persistent Volume Claim (PVC). This object mounts storage inside the MySQL pod. A key point to understand is that the PVC object is not what creates the storage. It is a declaration of a type of storage that you want available to the cluster.
+- the last object created is a deployment. Inside the deployment spec there are selector labels. These labels match the labels in the service object. This match assigns the wordpress-mysql service to the MySQL pod. Within the deployment spec, there is also a pod spec which configures the MySQL container to deploy. 
 
 Copy the information below into the last file, `wordpress-deployment.yaml`:
 
@@ -220,13 +219,10 @@ spec:
             claimName: wp-pv-claim
 ```
 
-Similar to the MySQL yaml, this file creates three objects. 
-
-First, there is a service object named wordpress. This service exposes port 80 and is a load balancer.
-
-The second object is a PVC, similar to the MySQL yaml.
-
-The last object is a deployment. In the pod spec, set the MySQL user and password to match the MySQL non-root user and password in the MySQL yaml file. This password provides WordPress permission to read/write to the MySQL database pod.
+Similar to the MySQL yaml, this file also creates three objects: 
+- first, there is a service object named wordpress. This service exposes port 80 and is a load balancer.
+- the second object is a PVC, similar to the MySQL yaml.
+- the last object is a deployment. In the pod spec, set the MySQL user and password to match the MySQL non-root user and password in the MySQL yaml file. This password provides WordPress permission to read/write to the MySQL database pod.
 
 ## Deploy WordPress 
 
@@ -236,7 +232,7 @@ Run the following command to apply the above configuration:
 kubectl apply -k .
 ```
 
-After applying the configuration, check the volume claims by running the following command.
+After applying the configuration, check the volume claims by running the following command:
 
 ```console
 kubectl get pvc
@@ -279,11 +275,11 @@ wordpress         LoadBalancer   10.100.166.194   ad53d835cdf0343378594f1188fe95
 wordpress-mysql   ClusterIP      10.100.54.182    <none>                                                                   3306/TCP       2m57s
 ```
 
-Use a browser to visit the external IP, `ad53d835cdf0343378594f1188fe957d-136333022.us-east-1.elb.amazonaws.com` for the output above, and see the WordPress welcome screen as shown below.
+Use a browser to visit the external IP, `ad53d835cdf0343378594f1188fe957d-136333022.us-east-1.elb.amazonaws.com` for the output above, and see the WordPress welcome screen as shown below:
 
 ![eks #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/7202e08e-b403-4360-81bd-0331f3df0d03)
 
-Click Continue and set the site parameters and set up the administrator password. Make sure to save the password you enter.
+Click Continue, set the site parameters and set up the administrator password (make sure to save the password you enter).
 
 Click Install WordPress to finish the setup. 
 
@@ -293,7 +289,7 @@ You have created a Kubernetes cluster and installed an application using the EKS
 
 ## Delete the AWS resources
 
-If you don't want to keep the application running make sure to clean up the resources you created. 
+If you don't want to keep the application running, make sure to clean up the resources you created. 
 
 Everything can be deleted by running: 
 

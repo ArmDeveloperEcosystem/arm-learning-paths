@@ -1,6 +1,6 @@
 ---
 title: Debug the RD-N2 Reference design with Arm Development Studio
-
+draft: true
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers interested in testing the reference firmware stack.

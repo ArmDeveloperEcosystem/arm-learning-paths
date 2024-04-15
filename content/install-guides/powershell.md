@@ -22,9 +22,9 @@ PowerShell is a cross-platform task automation solution made up of a command-lin
 
 ## Before you begin
 
-PowerShell is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
+PowerShell is available for a variety of operating systems and Linux distributions and there are multiple ways to install it.
 
-This article provides a quick solution to install PowerShell on an Arm Linux computer.
+This guide provides a quick solution to install PowerShell on an Arm Linux computer.
 
 Confirm you are using an Arm machine by running:
 
@@ -46,9 +46,9 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 The PowerShell installation documentation for Linux package managers does not work for the Arm architecture because there is no Arm support in the repositories. This may change for future versions of PowerShell.
 {{% /notice %}}
 
-You can download a release file for the Arm architecture from GitHub and install it using the steps below.
+You can download a release file for the Arm architecture from GitHub and install it using the steps below:
 
-Copy and paste the commands below to your Linux shell prompt:
+1. Copy and paste the commands below to your Linux shell prompt:
 
 ```bash { target="ubuntu:latest" }
 # Download the powershell '.tar.gz' archive
@@ -67,7 +67,7 @@ sudo chmod +x /opt/microsoft/powershell/7/pwsh
 sudo ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 ```
 
-Confirm the `pwsh` executable is in the search path:
+2. Confirm the `pwsh` executable is in the search path:
 
 ```bash { target="ubuntu:latest" }
 which pwsh
@@ -79,7 +79,7 @@ The path is printed:
 /usr/bin/pwsh
 ```
 
-To verify the installed version run: 
+3. To verify the installed version run: 
 
 ```bash { target="ubuntu:latest" }
 pwsh --version
@@ -91,7 +91,7 @@ The version is printed:
 PowerShell 7.4.1
 ```
 
-You are ready to use PowerShell on your Arm Linux computer.
+You are now ready to use PowerShell on your Arm Linux computer.
 
 ## Get started
 

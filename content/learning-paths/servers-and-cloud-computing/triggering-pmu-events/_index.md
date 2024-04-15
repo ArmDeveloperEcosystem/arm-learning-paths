@@ -1,6 +1,6 @@
 ---
 title: Understand Neoverse PMU events using C and assembly language
-
+draft: true
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why common PMU events occur.

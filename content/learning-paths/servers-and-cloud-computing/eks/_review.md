@@ -39,7 +39,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            Amazon EKS performs managed, in-place cluster upgrades for both Kubernetes and Amazon EKS platform software.
+            Amazon EKS performs managed and in-place cluster upgrades for both Kubernetes and Amazon EKS platform software.
 
 
 # ================================================================================
