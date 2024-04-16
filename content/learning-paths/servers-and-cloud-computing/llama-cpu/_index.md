@@ -11,22 +11,17 @@ learning_objectives:
     - Run a pre-quantized LLM model on your Arm CPU    
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-pr
-emise Arm server.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server. 
 
 author_primary: Pareena Verma
 
 ### Tags
 skilllevels: Introductory
-
 subjects: ML
-
 armips:
     - Neoverse
-
 operatingsystems:
     - Linux
-
 tools_software_languages:
     - LLM
     - GenAI

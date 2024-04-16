@@ -1,5 +1,5 @@
 ---
-title: Run a Large Language model(LLM) on Arm servers
+title: Run a Large Language model(LLM) chatbot on Arm servers
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -14,13 +14,25 @@ PyTorch is a widely used machine learning framework for Python. You will use PyT
 
 ## Overview
 
+Arm CPUs have been widely used in traditional ML and AI use cases. In this learning path, you will learn how to run generative AI inference based use cases like a LLM chatbot on Arm based CPUs. You will do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm based CPU using `llama.cpp`. 
+
+[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enabl
+es efficient LLM inference on a variety of hardware both locally and in the cloud. 
+
+## About the Llama 2 model
+The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta is from the `Llama 2` model family and is free to use for research and commercial use.
+
+Llama 2 models can perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this learning path you will run the specialized chat model. 
+
+Traditionally, the training and inference of LLMs has been done on GPUs using full precision 32-bit (FP32) or half precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
+ 
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, sentiment analysis, summarization and text generation.
 
 In this learning path, you will download a popular [RoBERTa sentiment analysis](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest) NLP model from Hugging Face and deploy it using PyTorch on your Arm machine. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. This model has been trained with over 124 million tweets. 
 
 ## Install dependencies 
 
-Before you download and build llama.cpp on your Arm server, install the following packages:
+Before you download and build `llama.cpp` on your Arm server instance, install the following packages:
 
 ```bash
 sudo apt update
@@ -36,26 +48,47 @@ sudo apt install build-essential -y
 
 ## Download and build llama.cpp
 
+You are now ready to start building `llama.cpp`. 
+
 Clone the source repository for llama.cpp:
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-Run make to build:
+Run make to build it:
 
 ```bash
 cd llama.cpp
 make
 ```
 
-Check that llama.cpp has built correctly
+Check that `llama.cpp` has built correctly by running the help command:
 
 ```bash
 ./main -h
 ```
 
-You should see the help options from llama.cpp
+If `llama.cpp` has built correctly on your machine, you should see the help options being displayed. A snippet of the output is shown below:
+
+```output
+usage: ./main [options]
+
+options:
+  -h, --help            show this help message and exit
+  --version             show version and build info
+  -i, --interactive     run in interactive mode
+  --interactive-first   run in interactive mode and wait for input right away
+  -ins, --instruct      run in instruction mode (use with Alpaca models)
+  -cml, --chatml        run in chatml mode (use with ChatML-compatible models)
+  --multiline-input     allows you to write or paste multiple lines without ending each in '\'
+  -r PROMPT, --reverse-prompt PROMPT
+                        halt generation at PROMPT, return control in interactive mode
+                        (can be specified more than once for multiple prompts).
+  --color               colorise output to distinguish prompt and user input from generations
+  -s SEED, --seed SEED  RNG seed (default: -1, use random seed for < 0)
+  -t N, --threads N     number of threads to use during generation (default: 4)
+```
 
 
 ## Install Hugging Face Hub
