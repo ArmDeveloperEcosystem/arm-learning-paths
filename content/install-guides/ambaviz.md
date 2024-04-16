@@ -8,7 +8,7 @@ additional_search_terms:
 - architecture
 - soc
 - ip
-- coresight
+- CoreSight
 - corelink
 - success kits
 - hsk
@@ -51,7 +51,7 @@ Extract the software from the bundle to the desired install location. For exampl
 tar -xf ambaviz.tar.gz
 ```
 
-Navigate into the newly created `ambaviz-<version>` folder, and run the following script to set up environment variables.
+Navigate to the newly created `ambaviz-<version>` folder, and run the following script to set up environment variables.
 
 #### sh/bash
 ```command
