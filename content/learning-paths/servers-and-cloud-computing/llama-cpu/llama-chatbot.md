@@ -13,12 +13,11 @@ The instructions in this learning path are for any Arm server running Ubuntu 22.
 
 Arm CPUs have been widely used in traditional ML and AI use cases. In this learning path, you will learn how to run generative AI inference based use cases like a LLM chatbot on Arm based CPUs. You will do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm based CPU using `llama.cpp`. 
 
-[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enabl
-es efficient LLM inference on a variety of hardware both locally and in the cloud. 
+[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware both locally and in the cloud. 
 
 ## About the Llama 2 model and GGUF model format
 
-The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta is from the `Llama 2` model family and is free to use for research and commercial use. 
+The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta is from the Llama 2 model family and is free to use for research and commercial use. Before you use the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form.
 
 Llama 2 collection of models can perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this learning path you will run the specialized chat model.
 
@@ -93,6 +92,8 @@ options:
 
 There are a few different ways you can download the Llama-2-7B Chat model. In the learning path, you will download the model from Hugging Face.
 
+{{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
+
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision.
 
 The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF).
@@ -109,7 +110,7 @@ You can now download the model using the huggingface cli:
 ```bash
 huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_K_M.gguf --local-dir . --local-dir-use-symlinks False
 ```
-Before you proceed with running this model, lets take a quick look at what `Q4_K_M` in the model name denotes.
+Before you proceed and run this model, lets take a quick look at what `Q4_K_M` in the model name denotes.
 
 ## Quantization format
 `Q4_K_M` in the model name refers to the quantization method used in the model. The goal of quantization is to make the model smaller (to fit in less memory) and faster (to reduce memory bandwidth bottlenecks transfering large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality/accuracy. Ideally a model is quantized to meet size and speed requirements while retaining as much accuracy as possible. 
@@ -120,9 +121,9 @@ This model is `llama-2-7b-chat.Q4_K_M.gguf`, so what does each component mean in
 
 Here is a quick lookup to the rest of the quantization parts for the Llama-2 model family as it exists today:
 
-| --------| quantization-method | # of bits per parameter | quantization format (does not apply to quantization method 'IQ') | quantization method specifics |
-|-------  | ------------------- | ----------------------- | ---------------------------------------------------------------- | ------------------ |
-| Options | Q, IQ, F, FP        | 2,3,4,5,6,7,8,16,32     | _0, _1, _K                                                       | _XXS, _XS, _S, _M, _L    |
+| quantization-method | # of bits per parameter | quantization format (does not apply to quantization method 'IQ') | quantization method specifics |
+| ------------------- | ----------------------- | ---------------------------------------------------------------- | ------------------ |
+| Q, IQ, F, FP        | 2,3,4,5,6,7,8,16,32     | _0, _1, _K                                                       | _XXS, _XS, _S, _M, _L    |
 
 Some examples:
 
@@ -131,7 +132,7 @@ Some examples:
 * IQ2_XXS --> I-quant method (indicated with _IQ), with the _XXS quantization mix type used.
 * F16  --> Using a 16 bit floating point number per parameter (no other quantization method used, only rounding a number if starting from a 32 bit floating point number).
 
-Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies is outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter. Once your process is set up, you can try switching out different quantization levels of the same model and observe how the model size, response speed and quality change.
+Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies is outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter. You can try switching out different quantization levels of the same model and observe how the model size, response speed and quality change.
 
 
 ## Run the Llama-2-7B-Chat LLM model 
@@ -201,9 +202,9 @@ llama_print_timings:        eval time =   43196.33 ms /   366 runs   (  118.02 m
 llama_print_timings:       total time =   70607.67 ms /   422 tokens
 ```
 
-load time refers to the time taken to load the model.
-Prompt eval time refers to the time taken to process the prompt before generating the new text. In this example, it shows that it evaluated 56 tokens in 12220.83 ms. 
-Eval time refers to the time taken to generate the output. Generally anything above 10 tokens per second is faster than what humans can read. 
+* load time refers to the time taken to load the model.
+* prompt eval time refers to the time taken to process the prompt before generating the new text. In this example, it shows that it evaluated 56 tokens in 12220.83 ms. 
+* eval time refers to the time taken to generate the output. Generally anything above 10 tokens per second is faster than what humans can read. 
 
 You have successfully run a LLM chatbot, all running on your Arm AArch64 CPU on your server. You can continue experimenting and trying out the model with different prompts.
 
