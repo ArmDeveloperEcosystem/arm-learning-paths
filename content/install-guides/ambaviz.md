@@ -35,11 +35,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+It is available to download from the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
 
-You can download AMBA Viz as an individual standalone component, or you can download the complete Success Kits.
+You can download AMBA Viz as a standalone component, or you can download the complete Success Kits.
 
-For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
+For more information on the Download Hub, see the [Arm Product Download Hub install guide](../pdh).
 
 ## Installation
 
