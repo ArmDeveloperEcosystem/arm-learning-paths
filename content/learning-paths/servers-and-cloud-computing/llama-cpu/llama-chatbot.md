@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. The instructions have been tested on AWS Graviton2 and AWS Graviton3 instances. 
+The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. The instructions have been tested on AWS Graviton3 (c7g) instances. 
 
 ## Overview
 
@@ -31,7 +31,7 @@ Install the following packages on your Arm based server instance:
 
 ```bash
 sudo apt update
-sudo apt install make cmake
+sudo apt install make cmake -y
 ```
 
 You will also need to install `gcc` on your machine:
