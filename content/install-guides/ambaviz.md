@@ -51,7 +51,7 @@ Extract the software from the bundle to the desired install location. For exampl
 tar -xf ambaviz.tar.gz
 ```
 
-Navigate to the newly created `ambaviz-<version>` folder, and run the following script to set up environment variables.
+Navigate to the newly-created `ambaviz-<version>` folder, and run the following script to set up environment variables:
 
 #### sh/bash
 ```command
@@ -62,14 +62,14 @@ source sourceMe.sh
 sourceMe.csh
 ```
 
-Full installation instructions are provided in the AMBA Viz Release Notes, located in the extracted directory at:
+The AMBA Viz Release Notes provide full installation instructions, located in the extracted directory at:
 ```command
 docs/public/assets/pdfs/ambaviz-release-note.pdf
 ```
 
 ## Set up the product license
 
-AMBA Viz is license managed. License setup instructions are available in the [Arm License install guide](../license/).
+AMBA Viz is license-managed. License setup instructions are available in the [Arm License install guide](../license/).
 
 ## Get started
 
