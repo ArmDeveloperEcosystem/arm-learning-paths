@@ -6,12 +6,12 @@ draft: true
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - architecture
-- soc
-- ip
+- SoC
+- IP
 - CoreSight
-- corelink
-- success kits
-- hsk
+- CoreLink
+- Success Kits
+- HSK
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
@@ -37,7 +37,7 @@ AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/produ
 
 It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
 
-You can download AMBA Viz as an individual standalone component, or you can download the complete success kits.
+You can download AMBA Viz as an individual standalone component, or you can download the complete Success Kits.
 
 For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
 
