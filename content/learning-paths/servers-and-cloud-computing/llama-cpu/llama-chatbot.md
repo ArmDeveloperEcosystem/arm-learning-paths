@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. The instructions have been tested on AWS Graviton3 (c7g) instances. 
+The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with atleast 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
 
 ## Overview
 
@@ -57,7 +57,7 @@ Run `make` to build it:
 
 ```bash
 cd llama.cpp
-make
+make -j$(nproc)
 ```
 
 Check that `llama.cpp` has built correctly by running the help command:
@@ -101,9 +101,9 @@ The `huggingface_hub` library provides APIs and tools that let you easily downlo
 Install the `huggingface_hub` python library using `pip` and add it to your `PATH`:
 
 ```bash
-sudo apt install python3-pip
+sudo apt install python3-pip -y
 pip3 install huggingface-hub>=0.17.1
-export PATH=${PATH}:/home/ubuntu/.local/bin/
+export PATH=${PATH}:/home/$USER/.local/bin/
 ```
 You can now download the model using the huggingface cli:
 
@@ -189,6 +189,13 @@ Would you like to know the forecast for the next 5 days?
 
 >
 ```
+
+The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton3 instance, you should see:
+
+  * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions
+  * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions 
+  * MATMUL_INT8 = 1 This flag indicates support for Arm int8 matrix multiplication instructions
+
 
 To exit and stop using the model, use Ctrl+C. At exit, a few timing parameters are printed by llama.cpp from the execution of the model on your Arm CPU. 
 

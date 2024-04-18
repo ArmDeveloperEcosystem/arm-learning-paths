@@ -1,5 +1,5 @@
 ---
-title: Deploy a Large Language Model(LLM) chatbot on Arm servers
+title: Deploy a Large Language Model (LLM) chatbot on Arm servers
 
 minutes_to_complete: 30
 
