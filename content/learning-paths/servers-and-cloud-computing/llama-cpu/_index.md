@@ -3,7 +3,7 @@ title: Deploy a Large Language Model (LLM) chatbot on Arm servers
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers interested in running LLMs on Arm based servers 
+who_is_this_for: This is an introductory topic for developers interested in running LLMs on Arm based servers. 
 
 learning_objectives:
     - Download and build llama.cpp on your Arm server
