@@ -225,7 +225,7 @@ project:
     -  <known_location>       #directory of any files you would like to include. 
 ```
 
-1. In the `*.cproject.yml` file of your project, under the `misc:` keyword, add the pre-include command for the compiler you are using. Example:
+3. In the `*.cproject.yml` file of your project, under the `misc:` keyword, add the pre-include command for the compiler you are using. Example:
 
 ```yml
 project:
@@ -238,4 +238,14 @@ project:
 ```
 
 For more information on how to configure your *.cproject.yml file, please refer to [YML-Input-Format.md](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/YML-Input-Format.md#project). It has a comprehensive explanation of how to write your own *.cproject.yml along with some examples.
+{{% /notice %}}
+
+{{% notice Resolution for µVision projects%}}
+1. Please download this [header file](https://armkeil.blob.core.windows.net/developer/Files/downloads/cmsis/cmsis_5_to_6_patch.h) to a `<known_location>`. A good place would be the project directory.
+
+1. Go to **Project - Options for Target** and switch to the **C/C++ (AC6)** tab. Add `-include <known_location>\cmsis_5_to_6_patch.h` to the **Misc Controls**:
+
+   ![Add patch file](./CoreDebug_uvision.png)
+
+1. Rebuild the project.
 {{% /notice %}}
