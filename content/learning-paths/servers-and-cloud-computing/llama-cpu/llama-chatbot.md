@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with atleast 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
+The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
 
 ## Overview
 
