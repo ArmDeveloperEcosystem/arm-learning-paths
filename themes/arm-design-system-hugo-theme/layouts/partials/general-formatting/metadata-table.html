@@ -13,6 +13,7 @@ Called from:
 
 <!-- Hugo processing -->
 {{$author := .Params.author_primary}}
+{{$authors_multiple := slice}}
 {{$author_company := ""}}
 {{$github_url := ""}}
 {{$linkedin_url := ""}}
@@ -28,6 +29,13 @@ Called from:
 {{ $main_tool_title := .Params.Title }}
 
 
+<!-- Split authors by ';' if multiple -->
+{{$authors_multiple := slice}}
+{{ if in $author ";" }}
+    {{ $authors_multiple = split $author ";" }}
+{{end}}
+
+
 <!-- Differentiate between learning paths and install guide formatting -->
 {{if eq .Section "learning-paths"}}
     {{$is_learning_path = true}}
@@ -38,10 +46,14 @@ Called from:
 
 <!-- Get metadata of author from CSV file -->
 {{ range $i, $row := getCSV "," "contributors.csv" }}
-    {{if eq $author (index $row 0)}}
-        {{ if or (eq $author "Pareena Verma") (eq $author "Jason Andrews")  (eq $author "Ronan Synnott") (eq $author "Florent Lebeau") }}
-            {{$author = "Arm"}}
-        {{else}}
+
+{{/*  
+    {{ if gt (len $authors_multiple) 0 }}
+            <!-- Multiple authors! -->        
+
+    {{else}}*/}}
+        {{if eq $author (index $row 0)}}
+            <!-- Fill out one author info -->        
             {{$author_company = index $row 1}}
             {{if (index $row 2)}}
                 {{$github_url = printf "https://github.com/%s" (index $row 2)}}
@@ -56,7 +68,7 @@ Called from:
                 {{$website_url = index $row 5}}
             {{end}}
         {{end}}
-    {{end}}
+    
 {{ end }}
 
 
