@@ -17,7 +17,7 @@ Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Pa
 
 ## About the Llama 2 model and GGUF model format
 
-The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta belongs to the Llama 2 model family and is free to use for research and commercial use. Before you use the model, visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form.
+The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta belongs to the Llama 2 model family and is free to use for research and commercial use. Before you use the model, visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
 Llama 2 collection of models perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this Learning Path you will run the specialized chat model.
 
