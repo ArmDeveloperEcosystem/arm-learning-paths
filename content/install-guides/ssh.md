@@ -35,13 +35,13 @@ Feel free to seek out additional SSH tutorials or add more information to this p
 
 SSH is a client server application.
 
-An SSH server, also called the SSH deamon, runs on a remote machine. 
+An SSH server, also called the SSH daemon, runs on a remote machine. 
 
 An SSH client runs on the local machine (the one you are typing on) and connects to the remote daemon. 
 
 ### Decide if the SSH daemon is already running
 
-For SSH to work, the SSH deamon must be running on the remote machine. Many Linux distributions install and run the SSH daemon automatically.
+For SSH to work, the SSH daemon must be running on the remote machine. Many Linux distributions install and run the SSH daemon automatically.
 
 To find out if the SSH daemon is already running running use the `ps` command.
 ```console
