@@ -1,5 +1,5 @@
 ---
-title: Run a Large Language model(LLM) chatbot on Arm servers
+title: Run a Large Language model (LLM) chatbot on Arm servers
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
 
 ## Overview
 
-Arm CPUs have been widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm-based CPU using `llama.cpp`. 
+Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm-based CPU using `llama.cpp`. 
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
