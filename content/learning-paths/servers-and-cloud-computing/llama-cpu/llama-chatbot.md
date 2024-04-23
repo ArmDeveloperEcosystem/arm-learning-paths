@@ -7,23 +7,23 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
 
 ## Overview
 
-Arm CPUs have been widely used in traditional ML and AI use cases. In this learning path, you will learn how to run generative AI inference based use cases like a LLM chatbot on Arm based CPUs. You will do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm based CPU using `llama.cpp`. 
+Arm CPUs have been widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm-based CPU using `llama.cpp`. 
 
-[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware both locally and in the cloud. 
+[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
 ## About the Llama 2 model and GGUF model format
 
-The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta is from the Llama 2 model family and is free to use for research and commercial use. Before you use the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form.
+The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta belongs to the Llama 2 model family and is free to use for research and commercial use. Before you use the model, visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form.
 
-Llama 2 collection of models can perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this learning path you will run the specialized chat model.
+Llama 2 collection of models perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this Learning Path you will run the specialized chat model.
 
-The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The more parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm based CPU. 
+The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The greater the parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
 
-Traditionally, the training and inference of LLMs has been done on GPUs using full precision 32-bit (FP32) or half precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
+Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
  
 ## Install dependencies 
 
@@ -34,7 +34,7 @@ sudo apt update
 sudo apt install make cmake -y
 ```
 
-You will also need to install `gcc` on your machine:
+You also need to install `gcc` on your machine:
 
 ```bash
 sudo apt install gcc g++ -y
@@ -51,7 +51,7 @@ Clone the source repository for llama.cpp:
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-By default, `llama.cpp` builds for CPU only on Linux and Windows. So you don't need to provide any extra switches to build it for the Arm CPU you will run it on.
+By default, `llama.cpp` builds for CPU only on Linux and Windows. So you don't need to provide any extra switches to build it for the Arm CPU you run it on.
 
 Run `make` to build it:
 
@@ -90,7 +90,7 @@ options:
 
 ## Install Hugging Face Hub
 
-There are a few different ways you can download the Llama-2-7B Chat model. In the learning path, you will download the model from Hugging Face.
+There are a few different ways you can download the Llama-2-7B Chat model. In the Learning Path, you will download the model from Hugging Face.
 
 {{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
 
