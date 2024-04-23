@@ -35,7 +35,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-It is available to download at [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+It is available to download at the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
 
 You can download AMBA Viz as an individual standalone component, or you can download the complete Success Kits.
 
@@ -84,7 +84,7 @@ To convert `VCD` or `FSDB` files to this format, use the `wave2avdb` script, for
 ```command
 wave2avdb -d cmn600 -f waves.vcd -o waves.avdb
 ```
-Full usage instructions are given in the User Guide, located in the extracted directory at:
+The User Guide provides full usage instructions, located in the extracted directory at:
 ```command
 docs/public/assets/pdfs/ambaviz-user-guide.pdf
 ```
