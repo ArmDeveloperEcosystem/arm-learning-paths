@@ -7,27 +7,27 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with at least four cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances. 
 
 ## Overview
 
-Arm CPUs have been widely used in traditional ML and AI use cases. In this learning path, you will learn how to run generative AI inference based use cases like a LLM chatbot on Arm based CPUs. You will do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm based CPU using `llama.cpp`. 
+Arm CPUs have been widely used in traditional ML and AI use cases. In this Learning Path, you will learn how to run generative AI inference based use cases like a LLM chatbot on Arm-based CPUs. You will do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm based CPU using `llama.cpp`. 
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware both locally and in the cloud. 
 
 ## About the Llama 2 model and GGUF model format
 
-The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta is from the Llama 2 model family and is free to use for research and commercial use. Before you use the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form.
+The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta belongs to the Llama 2 model family and is free to use for research and commercial use. Before you use the model, visit the Meta Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
-Llama 2 collection of models can perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this learning path you will run the specialized chat model.
+Llama 2 collection of models perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this Learning Path, you will run the specialized chat model.
 
-The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The more parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm based CPU. 
+The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The greater the number of parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
 
-Traditionally, the training and inference of LLMs has been done on GPUs using full precision 32-bit (FP32) or half precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
+Traditionally, the training and inference of LLMs is done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, the `llama.cpp` team introduced a new binary model format called GGUF. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types make Arm CPUs a great fit for running LLM inferences.   
  
 ## Install dependencies 
 
-Install the following packages on your Arm based server instance:
+Install the following packages on your Arm-based server instance:
 
 ```bash
 sudo apt update
@@ -51,7 +51,7 @@ Clone the source repository for llama.cpp:
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-By default, `llama.cpp` builds for CPU only on Linux and Windows. So you don't need to provide any extra switches to build it for the Arm CPU you will run it on.
+By default, `llama.cpp` builds for CPU only on Linux and Windows. You don't need to provide any extra switches to build it for the Arm CPU you will run it on.
 
 Run `make` to build it:
 
@@ -66,7 +66,7 @@ Check that `llama.cpp` has built correctly by running the help command:
 ./main -h
 ```
 
-If `llama.cpp` has built correctly on your machine, you should see the help options being displayed. A snippet of the output is shown below:
+If `llama.cpp` has built correctly on your machine, you will see the help options being displayed. A snippet of the output is shown below:
 
 ```output
 usage: ./main [options]
@@ -90,11 +90,11 @@ options:
 
 ## Install Hugging Face Hub
 
-There are a few different ways you can download the Llama-2-7B Chat model. In the learning path, you will download the model from Hugging Face.
+There are a few different ways you can download the Llama-2-7B Chat model. In the Learning Path, you will download the model from Hugging Face.
 
-{{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
+{{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
 
-[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision.
+[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them, and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio, and computer vision.
 
 The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF).
 
@@ -110,12 +110,12 @@ You can now download the model using the huggingface cli:
 ```bash
 huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_K_M.gguf --local-dir . --local-dir-use-symlinks False
 ```
-Before you proceed and run this model, lets take a quick look at what `Q4_K_M` in the model name denotes.
+Before you proceed and run this model, take a quick look at what `Q4_K_M` in the model name denotes.
 
 ## Quantization format
-`Q4_K_M` in the model name refers to the quantization method used in the model. The goal of quantization is to make the model smaller (to fit in less memory) and faster (to reduce memory bandwidth bottlenecks transfering large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality/accuracy. Ideally a model is quantized to meet size and speed requirements while retaining as much accuracy as possible. 
+`Q4_K_M` in the model name refers to the quantization method used in the model. The goal of quantization is to reduce the size of the model (to occupy less memory) and faster (to reduce memory bandwidth bottlenecks transfering large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality and accuracy. Ideally, a model is quantized to meet size and speed requirements while maintaining as much accuracy as possible. 
 
-Llama 2 is originally trained and published using the bfloat16 data type, meaning each of the 7 billion model parameters takes up 16 bits of memory to store. Putting that into real terms, multiplying 16 bits per parameter by 7 billion parameters, the base foundation llama-2-7b model is just over 13Gb in size. 
+Llama 2 is originally trained and published using the bfloat16 data type, meaning that each of the 7 billion model parameters takes up 16 bits of memory to store. Putting that into real terms, multiplying 16 bits per parameter by 7 billion parameters, the base foundation llama-2-7b model is just over 13Gb in size. 
 
 This model is `llama-2-7b-chat.Q4_K_M.gguf`, so what does each component mean in relation to the quantization level? The main thing to note is the number of bits per parameter, which is denoted by 'Q4' in this case or 4-bit integer. As a result, by only using 4 bits per parameter for 7 billion parameters, the model drops to be 3.6Gb in size.
 
@@ -127,23 +127,23 @@ Here is a quick lookup to the rest of the quantization parts for the Llama-2 mod
 
 Some examples:
 
-* Q8_0 --> Straight-forward quantization method (indicated with _0 or _1), with an 8 bit integer per parameter.
+* Q8_0 --> Straightforward quantization method (indicated with _0 or _1), with an 8 bit integer per parameter.
 * Q4_K_M --> K-quant method (indicated with _K), with a 4 bit integer per parameter, with the _M quantization mix type used.
 * IQ2_XXS --> I-quant method (indicated with _IQ), with the _XXS quantization mix type used.
-* F16  --> Using a 16 bit floating point number per parameter (no other quantization method used, only rounding a number if starting from a 32 bit floating point number).
+* F16  --> Using a 16-bit floating point number per parameter (no other quantization method used, only rounding a number if starting from a 32 bit floating point number).
 
-Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies is outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter. You can try switching out different quantization levels of the same model and observe how the model size, response speed and quality change.
+Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies is outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter. You can try switching out different quantization levels of the same model and observe how the model size, response speed, and quality change.
 
 
 ## Run the Llama-2-7B-Chat LLM model 
 
-Now lets run the llama-2-7b-chat model in interactive mode:
+Now run the llama-2-7b-chat model in interactive mode:
 
 ```bash
 ./main  -m llama-2-7b-chat.Q4_K_M.gguf --color -c 4096 --temp 0.7 --repeat_penalty 1.1 -n -1 -i -ins
 ```
 
-You should lots of interesting statistics being printed from llama.cpp about the model and the system, followed by a prompt where you can start your chat style dialogue with the model. A snippet of the output from running this model on an AWS Graviton3 c7g.xlarge instance is shown below:
+You will see lots of interesting statistics being printed from llama.cpp about the model and the system, followed by a prompt where you can start your chat style dialogue with the model. A snippet of the output from running this model on an AWS Graviton3 c7g.xlarge instance is shown below:
 
 ```output
 llm_load_print_meta: LF token         = 13 '<0x0A>'
@@ -190,7 +190,7 @@ Would you like to know the forecast for the next 5 days?
 >
 ```
 
-The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton3 instance, you should see:
+The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton3 instance, you will see:
 
   * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions
   * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions 
