@@ -3,3 +3,4 @@ Allow: /
 Disallow: /*?
 
 Sitemap: https://learn.arm.com/sitemap.xml
+Image Sitemap: https://learn.arm.com/learn-image-sitemap.xml

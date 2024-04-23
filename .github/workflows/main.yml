@@ -41,6 +41,7 @@ jobs:
       - name: Build
         run: |
           hugo --minify
+          cp learn-image-sitemap.xml public/learn-image-sitemap.xml
           bin/pagefind --site "public"
 
       # Deploys website to AWS S3
