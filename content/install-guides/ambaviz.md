@@ -29,7 +29,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool used to visualize AMBA events to accelerate SoC verification.
+[Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool to visualize AMBA events to accelerate SoC verification. This guide is for SoC verification and validation engineers to efficiently analyze hardware signals in their designs.
 
 ## Download installer packages
 
@@ -51,7 +51,7 @@ Extract the software from the bundle to the desired install location. For exampl
 tar -xf ambaviz.tar.gz
 ```
 
-Navigate into the newly-created `ambaviz-<version>` folder, and run the following script to set up environment variables:
+Navigate to the newly-created `ambaviz-<version>` folder, and run the following script to set up environment variables:
 
 #### sh/bash
 ```command
