@@ -19,7 +19,7 @@ Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Pa
 
 The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta belongs to the Llama 2 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
-Llama 2 collection of models perform general natural language processing (NLP) tasks such as text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this Learning Path, you run the specialized chat model.
+Llama 2 collection of models perform general natural language processing (NLP) tasks such as text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already optimized for back-and-forth dialogue. In this Learning Path, you run the specialized chat model.
 
 The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The greater the number of parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
 
