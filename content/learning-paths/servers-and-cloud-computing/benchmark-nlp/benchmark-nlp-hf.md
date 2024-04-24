@@ -169,35 +169,47 @@ models = ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]
 The output from the running all three models on an AWS Graviton3 c7g.xlarge instance without enabling bfloat16 fast math kernels is shown below:
 
 ```output
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 distilbert-base-uncased short sentence: ('31', '32.2')
 distilbert-base-uncased long sentence: ('81.7', '84.1')
 distilbert-base-uncased short sentence batched: ('252.8', '261.4')
 distilbert-base-uncased long sentence batched: ('655.2', '667.7')
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 bert-base-uncased short sentence: ('61', '63.3')
 bert-base-uncased long sentence: ('161.7', '165.2')
 bert-base-uncased short sentence batched: ('493', '504.4')
 bert-base-uncased long sentence batched: ('1301.5', '1321.6')
-roberta-base-uncased short sentence: ('58.9', '61.2')
-roberta-base-uncased long sentence: ('163.3', '168.4')
-roberta-base-uncased short sentence batched: ('474.8', '490.4')
-roberta-base-uncased long sentence batched: ('1309.7', '1329.4')
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at roberta-base and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+roberta-base short sentence: ('58.9', '61.2')
+roberta-base long sentence: ('163.3', '168.4')
+roberta-base short sentence batched: ('474.8', '490.4')
+roberta-base long sentence batched: ('1309.7', '1329.4')
 ```
 
 The output from running the same three models on an AWS Graviton3 c7g.xlarge instance with bfloat16 fast math kernels support enabled is shown below:
 
 ```output
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 distilbert-base-uncased short sentence: ('25.7', '26.8')
 distilbert-base-uncased long sentence: ('43.5', '45.5')
 distilbert-base-uncased short sentence batched: ('207.6', '214.1')
 distilbert-base-uncased long sentence batched: ('349.4', '360.9')
+Some weights of BertForSequenceClassification were not initialized from the model checkpoint at bert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
 bert-base-uncased short sentence: ('49.8', '51.7')
 bert-base-uncased long sentence: ('85.2', '88.6')
 bert-base-uncased short sentence batched: ('398.8', '419')
 bert-base-uncased long sentence batched: ('687.2', '729.6')
-roberta-base-uncased short sentence: ('50', '52.2')
-roberta-base-uncased long sentence: ('85.6', '89')
-roberta-base-uncased short sentence batched: ('401.7', '410.8')
-roberta-base-uncased long sentence batched: ('691', '709.8')
+Some weights of RobertaForSequenceClassification were not initialized from the model checkpoint at roberta-base and are newly initialized: ['classifier.dense.bias', 'classifier.dense.weight', 'classifier.out_proj.bias', 'classifier.out_proj.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+roberta-base short sentence: ('50', '52.2')
+roberta-base long sentence: ('85.6', '89')
+roberta-base short sentence batched: ('401.7', '410.8')
+roberta-base long sentence batched: ('691', '709.8')
 ```
 With all three models, you should see a similar boost in performance by using the bfloat16 fast math kernels.
 
