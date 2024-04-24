@@ -1,7 +1,7 @@
 ---
 next_step_guidance: Learn how to instrument PMU events using hardware event counters or system counters
 
-recommended_path: /learning-paths/servers-and-cloud-computing/arm_pmu/
+recommended_path: /learning-paths/servers-and-cloud-computing/triggering-cache-pmu-events/
 
 further_reading:
     - resource:
