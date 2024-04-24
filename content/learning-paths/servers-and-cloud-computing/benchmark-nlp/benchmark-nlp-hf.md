@@ -16,11 +16,11 @@ PyTorch is a widely used machine learning framework for Python. You will use PyT
 
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, sentiment analysis, summarization and text generation.
 
-In this learning path, you will download three popular [RoBERTa sentiment analysis](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment-latest) NLP models from Hugging Face and deploy it using PyTorch on your Arm machine. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. This model has been trained with over 124 million tweets. 
+In this learning path, you will run a sentiment analysis pipeline from Hugging Face and deploy it on your Arm based server. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You will then proceed to benchmark and accelerate the execution time of different NLP sentiment analysis models on your Arm machine.
 
 ## Install Hugging Face Transformers library
 
-The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use Hugging Face Transformer Sentiment Analysis pipeline to run the three models. 
+The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to create a build and run a sentiment analysis pipeline on different models. 
 
 To install the Transformers library, run the following command:
 
@@ -45,10 +45,10 @@ print(result)
 
 This example does the following:
 
-* Imports `pipeline` tool from the transformers library
+* Imports the `pipeline` tool from the transformers library
 * Loads the `sentiment-analysis` pipeline
-* Passes text to the pipeline 
-* Runs sentiment analysis and prints both the label and the sentiment score
+* Passes some input text to the pipeline 
+* Runs sentiment analysis on that input text and prints both the label and the sentiment score
 
 Run this script:
 
@@ -100,46 +100,106 @@ for model in models:
     pipe = pipeline("sentiment-analysis", model=model)
     result = benchmark(pipe, short_review)
     print(f"{model} short sentence: {result}")
-
+    result = benchmark(pipe, long_review)
+    print(f"{model} long sentence: {result}")
+    result = benchmark(pipe, [short_review] * 8)
+    print(f"{model} short sentence batched: {result}")
+    result = benchmark(pipe, [long_review] * 8)
+    print(f"{model} long sentence batched: {result}")
 ```
+In addition to what the simple script did, this new script does the following:
 
-Run this python script:
+* Runs the [distilbert-base-uncased](https://huggingface.co/distilbert/distilbert-base-uncased) model using the sentiment-analysis pipeline
+* Passes two inputs to the model, a short review and a long review. The short review consists of 32 tokens and the long review consists of 128 tokens when tokenized with [BertTokenizer](https://huggingface.co/docs/transformers/en/model_doc/bert#transformers.BertTokenizer).
+* Measures the execution time for both the inputs as well as the batched form of the two inputs
+
+The execution time is measured using the `benchmark` function. In this function, the pipeline is run 100 times as part of the warm-up phase to ensure consistent results. The mean and 99th percentile values are then measured for each execution run.
+
+Run the benchmarking script:
 
 ```bash
 python benchmark-sentiment-analysis.py
 ```
 
-The output should look similar to:
+The results from running this script on an AWS Graviton3 `c7g.xlarge` instance with Arm Neoverse V1 CPUs is shown below. Your output should look similar:
 
 ```output
-STAGE:2024-02-27 17:26:22 18170:18170 ActivityProfilerController.cpp:314] Completed Stage: Warm Up
-STAGE:2024-02-27 17:26:22 18170:18170 ActivityProfilerController.cpp:320] Completed Stage: Collection
-STAGE:2024-02-27 17:26:22 18170:18170 ActivityProfilerController.cpp:324] Completed Stage: Post Processing
----------------------------  ------------  ------------  ------------  ------------  ------------  ------------
-                       Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls
----------------------------  ------------  ------------  ------------  ------------  ------------  ------------
-                aten::addmm        56.56%      29.355ms        57.96%      30.085ms     406.554us            74
-            model_inference        15.24%       7.910ms       100.00%      51.903ms      51.903ms             1
-                  aten::bmm         4.86%       2.521ms         7.37%       3.823ms     159.292us            24
-               aten::select         2.55%       1.323ms         2.58%       1.337ms       1.535us           871
-                 aten::view         1.98%       1.030ms         1.98%       1.030ms       3.962us           260
-               aten::linear         1.97%       1.022ms        62.89%      32.640ms     441.081us            74
-    aten::native_layer_norm         1.87%     968.000us         2.07%       1.072ms      42.880us            25
-                 aten::gelu         1.76%     912.000us         1.76%     912.000us      76.000us            12
-                aten::copy_         1.36%     706.000us         1.36%     706.000us       6.660us           106
-               aten::expand         0.95%     492.000us         0.98%     509.000us       4.138us           123
----------------------------  ------------  ------------  ------------  ------------  ------------  ------------
-Self CPU time total: 51.903ms
-
-1) negative 0.7236
-2) neutral 0.2287
-3) positive 0.0477
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+distilbert-base-uncased short sentence: ('31', '32.2')
+distilbert-base-uncased long sentence: ('81.7', '84.1')
+distilbert-base-uncased short sentence batched: ('252.8', '261.4')
+distilbert-base-uncased long sentence batched: ('655.2', '667.7')
 ```
-In addition to the classification output from the model, you can now see the execution time for the different operators. 
+You should see the mean and 99th percentile execution time printed for the four cases of execution. All times are in milliseconds.  
 
-You can experiment with the [BFloat16 floating-point number format](/install-guides/pytorch#bfloat16-floating-point-number-format) and [Transparent huge pages](/install-guides/pytorch#transparent-huge-pages) settings with PyTorch and see how that impacts the performance of your model.
+You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) setting with PyTorch and check how that impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for bfloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels, an algorithm widely used in machine learning models, to use bfloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
 
-You have successfully run and profiled a sentiment analysis NLP model from Hugging Face on your Arm machine. You can explore running other models and use cases just as easily.
+Set the environment variable:
 
+```bash
+export DNNL_DEFAULT_FPMATH_MODE=BF16
+```
+
+Run the same script again:
+
+```bash
+python benchmark-sentiment-analysis.py
+```
+
+The output from this run should now look like:
+
+```output
+Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+distilbert-base-uncased short sentence: ('25.7', '26.8')
+distilbert-base-uncased long sentence: ('43.5', '45.5')
+distilbert-base-uncased short sentence batched: ('207.6', '214.1')
+distilbert-base-uncased long sentence batched: ('349.4', '360.9')
+```
+The execution time for all 4 cases should now be lower. By enabling bfloat16 fast math kernels you should see up to 1.9x boost in performance on your AWS Graviton3 instances. 
+
+You can explore running other models like `bert-base-uncased` and `roberta-base` and benchmarking their performance. The only thing you will need to change in your script are the values being passed to the models list:
+
+For example:
+
+```python
+models = ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]
+```
+
+The output from the running all three models on an AWS Graviton3 c7g.xlarge instance without enabling bfloat16 fast math kernels is shown below:
+
+```output
+distilbert-base-uncased short sentence: ('31', '32.2')
+distilbert-base-uncased long sentence: ('81.7', '84.1')
+distilbert-base-uncased short sentence batched: ('252.8', '261.4')
+distilbert-base-uncased long sentence batched: ('655.2', '667.7')
+bert-base-uncased short sentence: ('61', '63.3')
+bert-base-uncased long sentence: ('161.7', '165.2')
+bert-base-uncased short sentence batched: ('493', '504.4')
+bert-base-uncased long sentence batched: ('1301.5', '1321.6')
+roberta-base-uncased short sentence: ('58.9', '61.2')
+roberta-base-uncased long sentence: ('163.3', '168.4')
+roberta-base-uncased short sentence batched: ('474.8', '490.4')
+roberta-base-uncased long sentence batched: ('1309.7', '1329.4')
+```
+
+The output from running the same three models on an AWS Graviton3 c7g.xlarge instance with bfloat16 fast math kernels support enabled is shown below:
+
+```output
+distilbert-base-uncased short sentence: ('25.7', '26.8')
+distilbert-base-uncased long sentence: ('43.5', '45.5')
+distilbert-base-uncased short sentence batched: ('207.6', '214.1')
+distilbert-base-uncased long sentence batched: ('349.4', '360.9')
+bert-base-uncased short sentence: ('49.8', '51.7')
+bert-base-uncased long sentence: ('85.2', '88.6')
+bert-base-uncased short sentence batched: ('398.8', '419')
+bert-base-uncased long sentence batched: ('687.2', '729.6')
+roberta-base-uncased short sentence: ('50', '52.2')
+roberta-base-uncased long sentence: ('85.6', '89')
+roberta-base-uncased short sentence batched: ('401.7', '410.8')
+roberta-base-uncased long sentence batched: ('691', '709.8')
+```
+With all three models, you should see a similar boost in performance by using the bfloat16 fast math kernels.
 
 
