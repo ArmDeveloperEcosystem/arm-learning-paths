@@ -7,8 +7,8 @@ title: AVH FVPs on MacOS
 additional_search_terms:
 - avh
 - keil
-- fvp
-- mac
+- FVP
+- Mac
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
@@ -31,17 +31,17 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/).
 
-For commercial use you might require a paid subscription.
+If this is for commercial use, you might require a paid subscription.
 
 ## Clone the repo
 
-Open a terminal and set the working directory where to store the Fast Model wrapper to. Then run:
+Open a terminal and set the working directory to the location in which you would like to store the Fast Model. Then run:
 
 ```sh
 git clone https://github.com/Arm-Examples/FVPs-on-Mac.git
 ```
 
-This will create the subdirectory `FVPs-on-Mac` in the current working directory.
+This creates the subdirectory `FVPs-on-Mac` in the current working directory.
 
 ## Build the Docker wrapper
 
@@ -51,7 +51,7 @@ Run the build script to create the Docker image and populate the `bin` folder wi
 ./build.sh
 ```
 
-Once this succeeds inspect the created `bin` folder containing a bunch of symlinks to `fvp.sh`.
+When this completes, inspect the created `bin` folder containing symlinks to `fvp.sh`.
 These wrappers can be used exactly like any native model executable:
 
 ```sh
