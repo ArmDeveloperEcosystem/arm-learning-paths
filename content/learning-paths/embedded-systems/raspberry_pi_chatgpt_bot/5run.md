@@ -34,7 +34,7 @@ After the keyword is heard, you will see the `Please speak...` message indicatin
 ![the terminal, listening for you to speak after hearing the keyword](./terminal2.png)
 
 {{% notice Note %}}
-The errors are normal and do not effect the operation of the bot. 
+The errors are normal and do not affect the operation of the bot. 
 {{% /notice %}}
 
 You have constructed a bot on your Raspberry Pi which wakes up on a keyword and answers your questions. 
