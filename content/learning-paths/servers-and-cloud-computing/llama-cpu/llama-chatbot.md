@@ -13,7 +13,7 @@ The instructions in this Learning Path are for any Arm server running Ubuntu 22.
 
 Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm-based CPU using `llama.cpp`. 
 
-[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
+[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
 ## About the Llama 2 model and GGUF model format
 
@@ -90,9 +90,9 @@ options:
 
 ## Install Hugging Face Hub
 
-There are a few different ways you can download the Llama-2-7B Chat model. In this Learning Path, you will download the model from Hugging Face.
+There are a few different ways you can download the Llama-2-7B Chat model. In this Learning Path, you download the model from Hugging Face.
 
-{{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
+{{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, please visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
 
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio, and computer vision.
 
@@ -113,9 +113,9 @@ huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_K_M.gg
 Before you proceed and run this model, take a quick look at what `Q4_K_M` in the model name denotes.
 
 ## Quantization format
-`Q4_K_M` in the model name refers to the quantization method used in the model. The goal of quantization is to make the model smaller (to fit in less memory) and faster (to reduce memory bandwidth bottlenecks transfering large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality of performance. Ideally, a model is quantized to meet size and speed requirements while retaining as much accuracy as possible. 
+`Q4_K_M` in the model name refers to the quantization method the model uses. The goal of quantization is to reduce the size of the model (to reduce the memory space required) and faster (to reduce memory bandwidth bottlenecks transfering large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance. 
 
-Llama 2 is originally trained and published using the bfloat16 data type, meaning each of the 7 billion model parameters takes up 16 bits of memory to store. Putting that into real terms, multiplying 16 bits per parameter by 7 billion parameters, the base foundation llama-2-7b model is just over 13Gb in size. 
+Llama 2 was originally trained and published using the bfloat16 data type, meaning that each of the 7 billion model parameters takes up 16 bits of memory to store. Putting that into real terms, multiplying 16 bits per parameter by 7 billion parameters, the base foundation llama-2-7b model is just over 13Gb in size. 
 
 This model is `llama-2-7b-chat.Q4_K_M.gguf`, so what does each component mean in relation to the quantization level? The main thing to note is the number of bits per parameter, which is denoted by 'Q4' in this case or 4-bit integer. As a result, by only using 4 bits per parameter for 7 billion parameters, the model drops to be 3.6Gb in size.
 
@@ -127,12 +127,12 @@ Here is a quick lookup to the rest of the quantization parts for the Llama-2 mod
 
 Some examples:
 
-* Q8_0 --> Straight-forward quantization method (indicated with _0 or _1), with an 8 bit integer per parameter.
+* Q8_0 --> Straightforward quantization method (indicated with _0 or _1), with an 8 bit integer per parameter.
 * Q4_K_M --> K-quant method (indicated with _K), with a 4 bit integer per parameter, with the _M quantization mix type used.
 * IQ2_XXS --> I-quant method (indicated with _IQ), with the _XXS quantization mix type used.
 * F16  --> Using a 16 bit floating point number per parameter (no other quantization method used, only rounding a number if starting from a 32 bit floating point number).
 
-Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies is outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter. You can try switching out different quantization levels of the same model and observe how the model size, response speed and quality change.
+Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies are outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter. You can try switching out different quantization levels of the same model and observe how the model size, response speed, and quality change.
 
 
 ## Run the Llama-2-7B-Chat LLM model 
@@ -190,7 +190,7 @@ Would you like to know the forecast for the next 5 days?
 >
 ```
 
-The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton3 instance, you should see:
+The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton3 instance, you will see:
 
   * NEON = 1 This flag indicates support for Arm's Neon technology which is an implementation of the Advanced SIMD instructions
   * ARM_FMA = 1 This flag indicates support for Arm Floating-point Multiply and Accumulate instructions 
@@ -199,7 +199,7 @@ The `system_info` printed from llama.cpp highlights important architectural feat
 
 To exit and stop using the model, use Ctrl+C. At exit, a few timing parameters are printed by llama.cpp from the execution of the model on your Arm CPU. 
 
-For example, you should see something similar to below:
+For example, you might see something similar to below:
 
 ```output
 llama_print_timings:        load time =     854.62 ms
