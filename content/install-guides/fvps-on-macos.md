@@ -51,7 +51,7 @@ Run the build script to create the Docker image and populate the `bin` folder wi
 ./build.sh
 ```
 
-Once this succeeds inspect the created `bin` folder containing a bunch of symlinks to `fvp.sh`.
+Once this succeeds inspect the created `bin` folder containing a bunch of symbolic links to `fvp.sh`.
 These wrappers can be used exactly like any native model executable:
 
 ```sh
