@@ -48,7 +48,7 @@ Information about launching an AWS instance is available in the [Getting Started
 
 On your local machine, run the following command to connect to the instance (with user name `ubuntu`) with SSH Key `your_key.pem`.
 ```console
-ssh  -i <path_to>/your_key.pem ubuntu@<Instance_IP_address>
+ssh  -i <path_to>/your_key.pem ubuntu@<AMI_IP_address>
 ```
 ### Verify instance has launched successfully
 
@@ -92,8 +92,25 @@ Connect your VNC client to port `5901`. You will be prompted for the VNC passwor
 
 A number of [example](https://arm-software.github.io/AVH/main/examples/html/index.html) projects are available to further help you get started.
 
+### Use of FVP_Corstone-1000
+
+When using the supplied `FVP_Corstone-1000`,  you must disable the Cryptocell component therein, else you will see a licensing error.
+
+To do this, add the parameter `se.cryptocell.DISABLE_DEVICE=1` to your launch command:
+
+```console
+FVP_Corstone-1000 -C se.cryptocell.DISABLE_DEVICE=1  ...
+```
+
 ## Arm Virtual Hardware 3rd Party {#thirdparty}
 
 A valid [Arm AVH account](https://www.arm.com/resources/contact-us/virtual-hardware-boards) is required.
 
-When you login to the [AVH Dashboard](https://app.avh.arm.com) you can create virtual devices based on a growing library of real boards from Arm partners. To get started, a selection of [Quickstart Guides](https://intercom.help/arm-avh/en/collections/3380338-getting-started#quickstart) are provided to launch the particular platforms with ready made example images.
+When you login to the [AVH Dashboard](https://app.avh.arm.com) you can create virtual devices based on a growing library of real devices and boards from Arm partners. Supported targets include:
+
+* STMU5 IoT Discovery Kit
+* Raspberry Pi 4
+* i.MX 8M Plus
+* i.MX 93
+
+A selection of [Quickstart Guides](https://developer.arm.com/documentation/107660/latest/Getting-Started) are provided to launch the platforms with ready made example images.
