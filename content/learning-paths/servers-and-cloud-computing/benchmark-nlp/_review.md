@@ -2,33 +2,33 @@
 review:
     - questions:
         question: >
-            Does PyTorch run on Arm servers?
+            Do all Arm Neoverse CPUs include support for bfloat16 instructions?
         answers:
             - "Yes"
             - "No"
-        correct_answer: 1
+        correct_answer: 2
         explanation: >
-            PyTorch is an open-source machine learning framework. It can be installed and used on Arm servers to build and deploy various neural networks.
+            Recent Arm CPUs like Arm Neoverse V1 and Neoverse N2 include support for bfloat16 instructions.
 
     - questions:
         question: >
-            Can you run a Hugging Face model through PyTorch on an Arm AArch64 CPU?
+            Can you run Hugging Face PyTorch models on an Arm AArch64 CPU?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            You can run and deploy models from Hugging Face on Arm CPUs using PyTorch.
+            You can easily run and deploy models from Hugging Face on Arm CPUs using the Transformers library.
 
     - questions:
         question: >
-            Can you profile the execution time of the different operators in the model running on the CPU?
+            Does enabling support for BFloat16 fast math kernels in PyTorch improve the performance of NLP models?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            You can use the PyTorch profiler to measure a variety of activities, one of which is the execution time on the CPU.
+            Yes a performance boost of upto 1.9x is observed on Arm Neoverse based AWS Graviton3 instances by enabling support for BFloat16 fast math kernels in PyTorch.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

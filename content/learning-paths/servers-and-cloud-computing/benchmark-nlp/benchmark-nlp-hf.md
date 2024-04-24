@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS.
+The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances.
 
 To start, you will need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
-PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy a Natural Language Processing (NLP) model on your Arm machine.
+PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
 
 ## Overview
 
@@ -20,7 +20,7 @@ In this learning path, you will run a sentiment analysis pipeline from Hugging F
 
 ## Install Hugging Face Transformers library
 
-The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to create a build and run a sentiment analysis pipeline on different models. 
+The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to build and run a sentiment analysis pipeline with different NLP models. 
 
 To install the Transformers library, run the following command:
 
@@ -64,7 +64,7 @@ Using a pipeline without specifying a model name and revision in production is n
 [{'label': 'POSITIVE', 'score': 0.9997499585151672}, {'label': 'NEGATIVE', 'score': 0.9996662139892578}]
 ```
 
-You have successfully performed sentiment analysis on the two strings of input text, all running on your Arm Neoverse CPU. You can change the input text in your example and re-run the classification example. As the output indicates in this simple example, no particular model was supplied to the sentiment-analysis pipeline, so a default model is chosen. 
+You have successfully performed sentiment analysis on the two strings of input text, all running on your Arm Neoverse CPU. The sentiment classification (positive, negative) is printed along with the sentiment score. As the output indicates in this simple example, no particular model was supplied to the sentiment-analysis pipeline, so a [default DistilBERT model](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) is chosen. You can change the input text in your example and re-run the classification example.
 
 Now that you have run this simple sentiment analysis example, let's add the ability to pass a particular model to the pipeline and benchmark the model execution. Copy the contents shown below into a file named `benchmark-sentiment-analysis.py`:
 
@@ -112,8 +112,7 @@ In addition to what the simple script did, this new script does the following:
 * Runs the [distilbert-base-uncased](https://huggingface.co/distilbert/distilbert-base-uncased) model using the sentiment-analysis pipeline
 * Passes two inputs to the model, a short review and a long review. The short review consists of 32 tokens and the long review consists of 128 tokens when tokenized with [BertTokenizer](https://huggingface.co/docs/transformers/en/model_doc/bert#transformers.BertTokenizer).
 * Measures the execution time for both the inputs as well as the batched form of the two inputs
-
-The execution time is measured using the `benchmark` function. In this function, the pipeline is run 100 times as part of the warm-up phase to ensure consistent results. The mean and 99th percentile values are then measured for each execution run.
+* The execution time is measured using the `benchmark` function. In this function, the pipeline is run 100 times as part of the warm-up phase to ensure consistent results. The mean and 99th percentile values are then measured for each execution run.
 
 Run the benchmarking script:
 
@@ -133,7 +132,7 @@ distilbert-base-uncased long sentence batched: ('655.2', '667.7')
 ```
 You should see the mean and 99th percentile execution time printed for the four cases of execution. All times are in milliseconds.  
 
-You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) setting with PyTorch and check how that impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for bfloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels, an algorithm widely used in machine learning models, to use bfloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
+You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for bfloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels, an algorithm widely used in machine learning models, to use bfloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
 
 Set the environment variable:
 
@@ -159,9 +158,9 @@ distilbert-base-uncased long sentence batched: ('349.4', '360.9')
 ```
 The execution time for all 4 cases should now be lower. By enabling bfloat16 fast math kernels you should see up to 1.9x boost in performance on your AWS Graviton3 instances. 
 
-You can explore running other models like `bert-base-uncased` and `roberta-base` and benchmarking their performance. The only thing you will need to change in your script are the values being passed to the models list:
+You can explore running other NLP models like BERT and RoBERTa and benchmarking their performance. The only thing you will need to change in your script are the values being passed to the models list:
 
-For example:
+Change the line shown below in `benchmark-sentiment-analysis.py`:
 
 ```python
 models = ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]
