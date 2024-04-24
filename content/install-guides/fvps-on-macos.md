@@ -5,8 +5,8 @@ title: AVH FVPs on MacOS
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
-- avh
-- keil
+- AVH
+- Keil
 - FVP
 - Mac
 
