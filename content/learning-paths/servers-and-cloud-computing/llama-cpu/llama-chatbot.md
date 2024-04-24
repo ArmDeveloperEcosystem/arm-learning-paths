@@ -19,7 +19,7 @@ Arm CPUs have been widely used in traditional ML and AI use cases. In this learn
 
 The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta is from the Llama 2 model family and is free to use for research and commercial use. Before you use the model, please visit the [website](https://llama.meta.com/llama-downloads/) and fill in the form.
 
-Llama 2 collection of models can perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specalised chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this learning path you will run the specialized chat model.
+Llama 2 collection of models can perform general natural language processing (NLP) tasks like text generation. You can access the base foundation Llama 2 model or select the specialized chat Llama 2 version that is already fine-tuned for back-and-forth dialogue. In this learning path you will run the specialized chat model.
 
 The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The more parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm based CPU. 
 
@@ -113,7 +113,7 @@ huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_K_M.gg
 Before you proceed and run this model, lets take a quick look at what `Q4_K_M` in the model name denotes.
 
 ## Quantization format
-`Q4_K_M` in the model name refers to the quantization method used in the model. The goal of quantization is to make the model smaller (to fit in less memory) and faster (to reduce memory bandwidth bottlenecks transfering large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality/accuracy. Ideally a model is quantized to meet size and speed requirements while retaining as much accuracy as possible. 
+`Q4_K_M` in the model name refers to the quantization method used in the model. The goal of quantization is to make the model smaller (to fit in less memory) and faster (to reduce memory bandwidth bottlenecks transferring large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality/accuracy. Ideally a model is quantized to meet size and speed requirements while retaining as much accuracy as possible. 
 
 Llama 2 is originally trained and published using the bfloat16 data type, meaning each of the 7 billion model parameters takes up 16 bits of memory to store. Putting that into real terms, multiplying 16 bits per parameter by 7 billion parameters, the base foundation llama-2-7b model is just over 13Gb in size. 
 
