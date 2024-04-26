@@ -32,6 +32,16 @@ review:
         explanation: >
             Use jobs.<job_id>.needs to identify any jobs that must complete successfully before this job will run.
 
+    - questions:
+        question: >
+            How do you store Docker credentials?
+        answers:
+            - "Directly in the YAML file"
+            - "In GitHub secrets"            
+        correct_answer: 2
+        explanation: >
+            You use GitHub secrets to securely store sensitive information like credentials
+
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
