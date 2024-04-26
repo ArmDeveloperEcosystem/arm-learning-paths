@@ -16,13 +16,11 @@ Utilizing self-hosted runners with GitHub Actions offers flexibility and control
 
 In this learning path, you will discover how to configure and use an Arm64 runner that will build a .NET application for Arm64. Additionally, the CI/CD pipeline we will create is designed to generate an Arm64 Docker image of the application and then push the image to a Docker Hub repository.
 
-Before completing this learning path you can complete the Hello World [example](learning-paths/laptops-and-desktops/windows_cicd_github/)
-
-The existing WoA runner example primarily provides a basic "hello world" scenario that doesn't extend to actual application builds. In contrast, my learning path is tailored specifically for a Linux-based ARM environment and covers a comprehensive set of operations critical for real-world application deployment:
-Environment Setup: It includes detailed steps on preparing the self-hosted runner with necessary tools like the required .NET SDK and Docker, which are essential for building real applications, not just running simple scripts.
-Complex Workflow Configuration: My LP demonstrates how to use GitHub Actions to manage complex workflows involving multiple jobs and steps, along with job dependencies, which are crucial for sophisticated CI/CD pipelines.
-Building and Deployment: It goes beyond basic demonstrations to show how to build an ASP.NET application, create a Docker image of the application, and then push this image to a Docker repository on DockerHub.
-Security Practices: Furthermore, I’ve incorporated best practices for security by using GitHub secrets to securely store and retrieve credentials necessary for DockerHub, ensuring sensitive information is handled securely.
+Before completing this learning path you can complete the Hello World [example](learning-paths/laptops-and-desktops/windows_cicd_github/), which provides a basic "hello world" scenario. You will be able to extend that knowledge here with a comprehensive set of operations critical for real-world application deployment:
+1. Environment Setup: It includes detailed steps on preparing the self-hosted runner with necessary tools like the required .NET SDK and Docker, which are essential for building real applications, not just running simple scripts.
+2. Complex Workflow Configuration: this learning path demonstrates how to use GitHub Actions to manage complex workflows involving multiple jobs and steps, along with job dependencies, which are crucial for sophisticated CI/CD pipelines.
+3. Building and Deployment: this learning path shows how to build an ASP.NET application, create a Docker image of the application, and then push this image to a Docker repository on DockerHub.
+4. Security Practices: we’ve incorporated best practices for security by using GitHub secrets to securely store and retrieve credentials necessary for DockerHub, ensuring sensitive information is handled securely.
 
 ## Before you start
 To complete this learning path, you will need the following:
