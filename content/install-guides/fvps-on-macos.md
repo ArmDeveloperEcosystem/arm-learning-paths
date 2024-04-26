@@ -66,6 +66,6 @@ Add `$(pwd)/FVPs-on-Mac/bin` to `PATH` environment:
 export PATH=$PATH:$(pwd)/FVPs-on-Mac/bin
 ```
 
-Put this to our `~/.zshrc` to make it permanent.
+Put this to your `~/.zshrc` to make it permanent.
 
 For further information, refer to the [repository's README.md file](https://github.com/Arm-Examples/FVPs-on-Mac).
