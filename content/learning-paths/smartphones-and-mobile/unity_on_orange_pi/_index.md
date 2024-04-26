@@ -3,7 +3,7 @@ title: Install a Unity Game on a single board computer (Orange Pi 5)
 
 minutes_to_complete: 40
 
-who_is_this_for: This is for introductory topic for software developers who want to build and run a Unity game on an Arm-based single board computer. 
+who_is_this_for: This is an introductory topic for software developers who want to build and run a Unity game on an Arm-based single board computer. 
 
 learning_objectives:
     - Install Droid OS on an Orange Pi 5

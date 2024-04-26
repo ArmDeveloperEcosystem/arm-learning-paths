@@ -1,5 +1,5 @@
 ---
-title: Build a Windows on Arm native application with .NET framework
+title: Build a Windows on Arm native application with .NET
 
 minutes_to_complete: 20
 
