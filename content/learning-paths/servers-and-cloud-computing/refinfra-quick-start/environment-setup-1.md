@@ -10,17 +10,16 @@ Arm has developed a suite of [Neoverse Reference Designs](https://developer.arm.
 They are supported by free-of-charge [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps), and complete [software stacks](https://gitlab.arm.com/infra-solutions) to illustrate how these systems boot to Linux.
 This learning path is based on the `Neoverse N2` Reference Design (`RD-N2`).
 
-## Environment Setup
+## Before you begin
 
-Full instructions to setup the environment is given in [Setup the Neoverse Reference Design software stack workspace](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html).
+You can use either a AArch64 or x86_64 host machine running Ubuntu Linux 22.04. 64GB of free disk space and 32GB of RAM is minimum requirement to sync and build the platform software stack. 48GB of RAM is recommended.
+Follow the instructions to setup your environment with the detailed steps in [Setup the Neoverse Reference Design software stack workspace](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html).
 
-## Host Platform
 
-The host machine can be AArch64 or x86-64 with Ubuntu Linux 22.04. 64GB of free disk space and 32GB of RAM is minimum requirement to sync and build the platform software stack. 48GB of RAM is recommended.
 
-### Install repo
+### Install repository
 
-We will start by obtaining the repo tool to simplify the checkout of source code that spans multiple repositories. Additional instructions are available [here](https://source.android.com/docs/setup/download#installing-repo).
+You will start by obtaining the repo tool to simplify the checkout of source code that spans multiple repositories. Additional instructions are available [here](https://source.android.com/docs/setup/download#installing-repo).
 
 ### Repo tool
 
