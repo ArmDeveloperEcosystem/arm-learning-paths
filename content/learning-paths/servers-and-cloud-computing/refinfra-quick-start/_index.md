@@ -3,7 +3,7 @@ title: Get started with the Neoverse Reference Design software stack
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers interested in testing the reference firmware stack.
+who_is_this_for: This is an introductory topic for software developers interested in testing the Neoverse Reference Design firmware stack.
 
 learning_objectives: 
     - Setup your environment
@@ -16,7 +16,7 @@ prerequisites:
 author_primary: Tom Pilar
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Neoverse
