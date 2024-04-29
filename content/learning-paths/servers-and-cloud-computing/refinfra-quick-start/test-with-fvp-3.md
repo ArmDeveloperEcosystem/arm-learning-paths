@@ -13,12 +13,13 @@ The firmware build can be executed on the Neoverse N2 Reference Design FVP that 
 
 ### Setup the FVP
 
-Download from the above page, or directly with:
+Download the FVP from the page above, or directly with:
 ```bash
 wget https://developer.arm.com/-/media/Arm%20Developer%20Community/Downloads/OSS/FVP/Neoverse-N2/Neoverse-N2-11-24-12/FVP_RD_N2_11.24_12_Linux64.tgz
 ```
 
-Unpack the tarball and run the install script.
+Unpack the tarball and run the install script:
+
 ```bash
 tar -xf FVP_RD_N2_11.24_12_Linux64.tgz 
 ./FVP_RD_N2.sh --i-agree-to-the-contained-eula --no-interactive
@@ -29,21 +30,21 @@ Export the path to the `FVP_RD_N2` model binary as the `MODEL` environment varia
 export MODEL=/home/ubuntu/FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
 ```
 ### Screen configuration for UARTs
-The model will output UARTs to local ports 5000..5010. If we were running the model on a local machine, or we had X11 forwarding setup, the model would open a number of xterm terminals with the UART output piped to them, one per port. 
+The model will output UARTs to local ports 5000..5010. If you were running the model on a local machine, or had X11 forwarding setup, the model will open a number of xterm terminals with the UART output piped to them, one per port. 
 
-If we do not have X11 forwarding and we are executing on a remote server, we can use `screen` to spawn persistent terminals that will listen on those ports and we get the information out that way.
+If you do not have X11 forwarding and you are executing on a remote server, you can use `screen` to spawn persistent terminals that will listen on those ports and you get the information out that way.
 
-Open a new terminal where we will start a `screen` session and connect to it.
+Open a new terminal where you will start a `screen` session and connect to it.
 
 To install `screen` use:
-```bash { command_line="ubuntu@ip-10-0-0-164:~" }
+```bash 
 sudo apt-get install screen
 ```
 
-Use a text editor to create the below configuration file, which will set up `screen` windows for each UART.
+Use a text editor to create the configuration file below, which will set up `screen` windows for each UART.
 
-#### screen-uart.cfg
-Let us create such a config file so that when we start a session with it, we get ten windows and each will periodically try to connect to one of the local ports where a UART is running. We might as well change the titles of the windows so we know which terminal is which. The resulting `screen-uart.cfg` file will look like this:
+#### Create screen-uart.cfg
+Create a config file so that when you start a session with it, you get ten windows and each will periodically try to connect to one of the local ports where a UART is running. You can change the titles of the windows so you know which terminal is which. The resulting `screen-uart.cfg` file will look like this:
 ```bash
 # Split horizontally into two
 split -v
@@ -115,13 +116,7 @@ screen -c screen-uart.cfg
 The result should be similar to:
 ![screen terminals alt-text#center](images/terminal.png)
 
-The errors are expected as there is nothing talking to those ports yet. We can quit from within the screen by the getting a prompt using `Ctrl+A :` key combo, followed by the `quit` command. Alternatively `Ctrl+A D` will detach the screen session and send it to background. Unfortunately, reattaching the session wipes our neat window arrangement so that's not very useful. We can check if we have any screen sessions running on the system:
-```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/model-scripts/rdinfra | 2-40" }
-screen -list
-	2408179.pts-2.ip-10-0-0-164	(01/12/24 17:32:33)	(Attached)
-1 Socket in /run/screen/S-ubuntu.
-```
-And this allows us to detach, reattach, purge or kill stuff as needed.
+The errors are expected as there is nothing talking to those ports yet. You can quit from within the screen by the getting a prompt using `Ctrl+A :` key combo, followed by the `quit` command. Alternatively `Ctrl+A D` will detach the screen session and send it to background. 
 
 ### Running the FVP
 
@@ -132,8 +127,10 @@ In your original terminal, launch the FVP using the supplied script:
 Observe the platform is running successfully.
 ![fvp terminals alt-text#center](images/uefi.png "Figure 2. FVP Terminals")
 
-To boot to `busy-box`, use:
+To boot into `busy-box`, use:
 ```bash
 ./boot.sh -p rdn2
 ```
 ![docker terminal alt-text#center](images/docker-run.png "Figure 3. Docker Terminal")
+
+You have successfully booted the reference software stack you built in the previous step onto the FVP.
