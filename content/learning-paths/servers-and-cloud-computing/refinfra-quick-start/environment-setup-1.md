@@ -6,13 +6,23 @@ weight: 2
 layout: learningpathall
 ---
 
+Arm has developed a suite of [Neoverse Reference Designs](https://developer.arm.com/Tools%20and%20Software/Neoverse%20Reference%20Design) compute sub-systems.
+They are supported by free-of-charge [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps), and complete [software stacks](https://gitlab.arm.com/infra-solutions) to illustrate how these systems boot to Linux.
+This learning path is based on the `Neoverse N2` Reference Design (`RD-N2`).
+
 ## Environment Setup
 
-We will follow the instructions to setup the environment from [this document](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html)
+Full instructions to setup the environment is given in [Setup the Neoverse Reference Design software stack workspace](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html).
 
-### Repo Tool
+## Host Platform
 
-We will start by obtaining the repo tool to simplify the checkout of source code that spans multiple repositories. We will follow [these instructions](https://source.android.com/docs/setup/download#installing-repo)
+The host machine can be AArch64 or x86-64 with Ubuntu Linux 22.04. 64GB of free disk space and 32GB of RAM is minimum requirement to sync and build the platform software stack. 48GB of RAM is recommended.
+
+### Install repo
+
+We will start by obtaining the repo tool to simplify the checkout of source code that spans multiple repositories. Additional instructions are available [here](https://source.android.com/docs/setup/download#installing-repo).
+
+### Repo tool
 
 First, let's refresh the list of available packages and install repo.
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/src | 3-49" }
@@ -66,7 +76,7 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 ```
-We can check to see if repo has successfully installed by using the version command:
+Verify installation with:
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/src | 2-9" }
 repo version
 <repo not installed>
@@ -79,13 +89,13 @@ CPU x86_64 (x86_64)
 Bug reports: https://bugs.chromium.org/p/gerrit/issues/entry?template=Repo+tool+issue
 ```
 
-### Source Code
+### Fetch source code
 
-Create a new directory and switch to it. Then obtain the manifest. We will need to choose a tag of the platform reference firmware. Let's look at the [release notes](https://neoverse-reference-design.docs.arm.com/en/latest/releases/index.html). We can use tag [RD-INFRA-2023.09.29](https://neoverse-reference-design.docs.arm.com/en/latest/releases/RD-INFRA-2023.09.29/release_note.html) since that one updated the RD-N2 platform.
+Create a new directory into which you will download the source code and build the stack. Then obtain the manifest.
 
-We can also make sure that this tag exists in the [manifest repository](https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests/-/tags)
+To obtain the manifest, choose a tag of the platform reference firmware. [RD-INFRA-2023.09.29](https://neoverse-reference-design.docs.arm.com/en/latest/releases/RD-INFRA-2023.09.29/release_note.html) is used here. See the [release notes](https://neoverse-reference-design.docs.arm.com/en/latest/releases/index.html) for more information.
 
-We need to choose which platform we want a manifest for. Let's go with basic RD-N2 (no cfg or rather cfg 0). In the [manifest repo](https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests) we see a lot of available platforms, based on [instructions](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html#platform-manifest-names) we want `pinned-rdn2.xml`
+Specify the platform you want the manifest for. In the [manifest repo](https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests) there are a number of available platforms. As per these [instructions](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html#platform-manifest-names) select `pinned-rdn2.xml`
 
 ```bash { command_line="ubuntu@ip-10-0-0-164:~ | 4-17" }
 mkdir rd-infra
@@ -156,9 +166,10 @@ cat .repo/manifests/pinned-rdn2.xml
   <project remote="kernel" name="pub/scm/linux/kernel/git/will/kvmtool" path="kvmtool" revision="e17d182ad3f797f01947fc234d95c96c050c534b"/>
 </manifest>
 ```
-We can see this looks like the manifest defines a bunch of repositories, then defines the firmware sources, build and model scripts, and linux along with some tooling.
 
-Let us get all the source by running the `repo sync` command that will check out sources in all the repositories defined in the manifest.
+The manifest defines repositories of firmware sources, build and model scripts, and linux along with some tooling.
+
+Fetch the sources with the `repo sync` command. This will take a few minutes to complete.
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 2-14" }
 repo sync -c -j $(nproc) --fetch-submodules --force-sync --no-clone-bundle
 ... A new version of repo (2.40) is available.
@@ -175,11 +186,12 @@ Updating files: 100% (79368/79368), done.testsUpdating files:  26% (21084/79368)
 Checking out: 100% (42/42), done in 13.164s
 repo sync has finished successfully.
 ```
-Well, that took a couple of minutes. Now we should have all the code.
-### Docker Setup
+Now we should have all the code.
+### Docker setup
 
-We will use docker environment for the build to improve reliability and reduce dependency on the host OS setup. The reference firmware build system can function in host OS without a container, but this way we don't have to worry about host OS incompatibility in this workbook.
+Use a `docker` container for the build to improve reliability and reduce dependency on the host OS setup. The reference firmware build system can function in host OS without a container, but this way we don't have to worry about host OS incompatibility in this workbook.
 
+Install docker:
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 2-54" }
 sudo apt-get install docker.io
 Reading package lists... Done
@@ -236,8 +248,7 @@ No user sessions are running outdated binaries.
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 
 ```
-
-Remember that you must add your user to the _docker_ group and re-login to be able to talk to the docker daemon. Instructions [here](https://docs.docker.com/engine/install/linux-postinstall/)
+You must add your username to the docker group and re-login to be able to talk to the docker daemon. Instructions [here](https://docs.docker.com/engine/install/linux-postinstall/).
 
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/src | 3" }
 sudo groupadd docker
@@ -245,7 +256,7 @@ sudo usermod -aG docker $USER
 logout
 ```
 
-You might need to restart the docker service as well
+You may need to restart the docker service as well
 `**ubuntu@ip-10-0-0-164**:**~**$ sudo service docker restart`
 
 Then you can test your access
@@ -253,10 +264,8 @@ Then you can test your access
 docker image list
 REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
 ```
-### Container Setup
-Since we will be using dockerised builds, let us set up a container to build in. Looking at how pre-requisites are installed will hopefully show why it's better to not do this on the host directly.
-
-Let us examine the general container execution script
+### Container setup
+Set up a container to perform the build in. A container execution script is provided. See the help for more information.
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra | 3-17" }
 cd container-scripts/
 ./container.sh -h
@@ -277,7 +286,7 @@ Available commands are:
   run    runs the container in interactive mode;
 ```
 
-We can see that the build system gives a few options how to customize the container. For now, let's just build a standard one.
+Build the default configuration:
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/container-scripts | 2-25" }
 ./container.sh build
 Building docker image: rdinfra-builder ...
@@ -324,7 +333,7 @@ Successfully built 8729adb0b96c
 Successfully tagged rdinfra-builder:latest
 ```
 
-We can examine was built here:
+Verify the container was built:
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/container-scripts | 2-4" }
 docker image list
 REPOSITORY        TAG              IMAGE ID       CREATED         SIZE
@@ -345,7 +354,7 @@ We exit the container like any login shell. We can also use the container script
 Running docker image: rdinfra-builder ...
 ```
 
-Much more convenient. One thing we need to do however, is mount the source checkout into the container so we can do a build without having to copy the source in and build targets out.
+Mount the source checkout into the container so we can do a build without having to copy the source in and build the targets out:
 ```bash { command_line="ubuntu@ip-10-0-0-164:~/rd-infra/container-scripts | 3-4" }
 ./container.sh -v /home/ubuntu/rd-infra/ run
 ls /home/ubuntu/rd-infra/
@@ -353,10 +362,10 @@ Running docker image: rdinfra-builder ...
 buildroot  build-scripts  busybox  container-scripts  grub  kvmtool  linux  mbedtls  model-scripts  scp  tf-a  tools  uefi  validation
 ```
 
-{{% notice Note on Host based build%}}
-In this example, we will be working with the RD-N2 platform.
-If you do choose to build this on the host, you need to get all the pre-requisites that would otherwise be installed in the container during the container creation. The build system provides a handy script for this that you have to run as root:
+{{% notice Host based builds %}}
+If you do choose to build this on the host, you need to get all the pre-requisites that would otherwise be installed in the container during its creation.
 
+The build system provides a script for this that you must run as `root`:
 ```bash
 sudo ./build-scripts/rdinfra/install_prerequisites.sh
 ```
