@@ -3,7 +3,7 @@ title: Debug the RD-N2 Reference design with Arm Development Studio
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers interested in testing the reference firmware stack.
+who_is_this_for: This is an advanced topic for software developers interested in debugging the reference firmware stack.
 
 learning_objectives: 
     - Create a debug connection
@@ -18,7 +18,7 @@ prerequisites:
 author_primary: Daniel Nguyen
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
