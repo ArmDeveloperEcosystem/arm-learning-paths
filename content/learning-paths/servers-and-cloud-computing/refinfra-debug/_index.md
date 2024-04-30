@@ -7,8 +7,8 @@ who_is_this_for: This is an advanced topic for software developers interested in
 
 learning_objectives: 
     - Create a debug connection
-    - Debug SCP
-    - Debug TF-A
+    - Debug SCP (System Control Processor)
+    - Debug TF-A (Trusted Firmware-A)
 
 prerequisites:
     - An Arm Development Studio license
