@@ -34,10 +34,10 @@ the TF-A and press run. In this debug panel, you will find common debugging func
 
 ![debug options alt-text#center](images/debug_options.png "Figure 3. Debug options")
 
-Observe the SCP console output. After SCP de-asserts reset for the Neoverse N2 Core 0, it stops on the breakpoint.
+Observe the SCP console output. After the SCP deasserts, reset for the Neoverse N2 Core 0, it stops on the breakpoint.
 
 ![scp terminal alt-text#center](images/scp_terminal.png "Figure 4. SCP terminal")
 
-Finally, set a breakpoint in the function you wish to debug. In this example, we'll set a breakpoint at ``bl1_main()`` and continue. 
+Finally, set a breakpoint in the function you would like to debug. In this example, we'll set a breakpoint at ``bl1_main()`` and continue. 
 
 ![bl1 breakpoint alt-text#center](images/bl1_breakpoint.png "Figure 5. BL1 breakpoint")
