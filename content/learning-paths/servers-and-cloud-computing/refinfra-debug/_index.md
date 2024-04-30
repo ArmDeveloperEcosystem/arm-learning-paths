@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An Arm Development Studio license
-    - The Neoverse Reference Design software stack should be set up
+    - The Neoverse Reference Design software stack 
     - A basic understanding of Neoverse Reference Design platform boot
 
 author_primary: Daniel Nguyen
