@@ -28,9 +28,9 @@ It includes access to a repository with over 8,000 open-source data science and 
 
 The `conda` command can be used to quickly install and use Python packages. 
 
-Follow the instructions below to install and use Anaconda Distribution on an Arm server.
+Follow the instructions below to complete an Anaconda Distribution download and install it on an Arm server.
 
-## Before you begin
+## What to consider before starting the Anaconda installation?
 
 Confirm you are using an Arm machine by running:
 
@@ -60,7 +60,7 @@ For Amazon Linux run the command:
 sudo amazon-linux-extras install mate-desktop1.x
 ```
 
-## Download 
+## How can I download the latest Anaconda Distribution? 
 
 Download the latest Anaconda Distribution.
 
@@ -70,7 +70,7 @@ curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
 
 Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-x86_64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
 
-## Install
+## What are the steps to install the downloaded Anaconda Distribution?
 
 Run the downloaded install script.
 
@@ -92,7 +92,7 @@ To setup the shell run.
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 ```
 
-## Get started
+## How do I get started with Anaconda after installation?
 
 Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
 

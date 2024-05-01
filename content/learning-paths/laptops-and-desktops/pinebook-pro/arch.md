@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Installing Arch"
+title: How to install Arch Linux?
 
 weight: 2
 
@@ -26,7 +26,7 @@ vimtutor
 ```
 It takes about 15-30 minutes to complete to complete the tutorial. 
 
-## Installing Arch Linux ARM
+## How to install Arch Linux ARM on a microSD card?
 
 Install Arch Linux using the instructions on GitHub. 
 
@@ -52,7 +52,7 @@ Refer to the [Frequently asked questions](https://github.com/SvenKiljan/archlinu
 
 Continue with the steps below to create a new user and update the Arch Linux software. 
 
-## Initial configuration
+## How to initially configure Arch Linux correctly?
 
 1. Create a user, replace `username` with your desired user name
 
