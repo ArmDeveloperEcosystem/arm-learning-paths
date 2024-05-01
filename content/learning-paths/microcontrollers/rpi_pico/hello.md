@@ -14,7 +14,7 @@ The print statements are directed to USB.
 
 ## How to build "hello" for the RPi Pico?
 
-Save the C code bellow to a file named hello.c
+Save the C code below to a file named hello.c
 
 ```c
 #include <stdio.h>
@@ -69,7 +69,7 @@ pico_enable_stdio_uart(${PROJECT_NAME} 0)
 pico_add_extra_outputs(${PROJECT_NAME})
 ```
 
-Crate a new directory for the build output and navigate to it.
+Create a new directory for the build output and navigate to it.
 
 ```bash
 mkdir build ; cd build
@@ -86,7 +86,7 @@ The hello application is now ready to run.
 
 ## How to run "hello" for the RPi Pico?
 
-To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plugin the USB cable between the Pico and your development computer. 
+To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plug in the USB cable between the Pico and your development computer. 
 
 The Pico will appear as a USB storage device on your computer. 
 

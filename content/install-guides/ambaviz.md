@@ -2,16 +2,16 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm AMBA Viz
-draft: true
+
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
 - architecture
-- soc
-- ip
-- coresight
-- corelink
-- success kits
-- hsk
+- SoC
+- IP
+- CoreSight
+- CoreLink
+- Success Kits
+- HSK
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
@@ -29,15 +29,15 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool used to visualize AMBA events to accelerate SoC verification.
+[Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool to visualize AMBA events to accelerate SoC verification. This guide is for SoC verification and validation engineers to efficiently analyze hardware signals in their designs.
 
 ## Download installer packages
 
 AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+It is available to download at the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
 
-You can download AMBA Viz as an individual standalone component, or you can download the complete success kits.
+You can download AMBA Viz as an individual standalone component, or you can download the complete Success Kits.
 
 For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
 
@@ -51,7 +51,7 @@ Extract the software from the bundle to the desired install location. For exampl
 tar -xf ambaviz.tar.gz
 ```
 
-Navigate into the newly created `ambaviz-<version>` folder, and run the following script to set up environment variables.
+Navigate to the newly-created `ambaviz-<version>` folder, and run the following script to set up environment variables:
 
 #### sh/bash
 ```command
@@ -62,18 +62,18 @@ source sourceMe.sh
 sourceMe.csh
 ```
 
-Full installation instructions are provided in the AMBA Viz Release Notes, located in the extracted directory at:
+The AMBA Viz Release Notes provide full installation instructions, located in the extracted directory at:
 ```command
 docs/public/assets/pdfs/ambaviz-release-note.pdf
 ```
 
 ## Set up the product license
 
-AMBA Viz is license managed. License setup instructions are available in the [Arm License install guide](../license/).
+AMBA Viz is license-managed. License set up instructions are available in the [Arm License install guide](../license/).
 
 ## Get started
 
-Typically AMBA Viz is launched with a waveform file:
+Typically, AMBA Viz is launched with a waveform file:
 ```command
 ambaviz -f <waveform_file>
 ```
@@ -84,7 +84,7 @@ To convert `VCD` or `FSDB` files to this format, use the `wave2avdb` script, for
 ```command
 wave2avdb -d cmn600 -f waves.vcd -o waves.avdb
 ```
-Full usage instructions are given in the User Guide, located in the extracted directory at:
+The User Guide provides full usage instructions, located in the extracted directory at:
 ```command
 docs/public/assets/pdfs/ambaviz-user-guide.pdf
 ```

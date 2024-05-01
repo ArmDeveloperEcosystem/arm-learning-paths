@@ -6,9 +6,9 @@ weight: 2
 layout: learningpathall
 ---
 
-This learning path assumes you have a Arm Development Studio installed and an appropriate license set up. See the [install guide](//install-guides/armds) for instructions. Screenshots shown are from the 2023.0 version.
+This learning path assumes you have a Arm Development Studio installed and an appropriate license set up. See the [install guide](/install-guides/armds) for instructions. Screenshots shown are from the 2023.0 version.
 
-The learning path also assumes you have set up the Neoverse Reference Design software stack and associated FVP. See this [learning path](//learning-paths/servers-and-cloud-computing/refinfra-quick-start/) for instructions. The Neoverse N2 (`RD-N2`) stack is used.
+The learning path also assumes you have set up the Neoverse Reference Design software stack and associated FVP. See this [learning path](/learning-paths/servers-and-cloud-computing/refinfra-quick-start/) for instructions. The Neoverse N2 (`RD-N2`) stack is used.
 
 ## Modify the run script
 

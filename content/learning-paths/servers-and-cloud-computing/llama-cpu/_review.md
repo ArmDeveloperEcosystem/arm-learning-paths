@@ -22,7 +22,7 @@ review:
 
     - questions:
         question: >
-            Can you profile the time taken by the model to generate the output till the end of text?
+            Can you profile the time taken by the model to generate the output until the end of text?
         answers:
             - "Yes"
             - "No"

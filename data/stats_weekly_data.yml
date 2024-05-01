@@ -2109,3 +2109,117 @@
     avg_close_time_hrs: 0
     num_issues: 9
     percent_closed_vs_total: 0.0
+- a_date: '2024-04-22'
+  content:
+    cross-platform: 15
+    embedded-systems: 16
+    install-guides: 78
+    laptops-and-desktops: 24
+    microcontrollers: 24
+    servers-and-cloud-computing: 67
+    smartphones-and-mobile: 15
+    total: 239
+  contributions:
+    external: 26
+    internal: 284
+  github_engagement:
+    num_forks: 30
+    num_prs: 9
+  individual_authors:
+    arm: 3
+    bolt-liu: 2
+    brenda-strech: 1
+    christopher-seidl: 6
+    daniel-gubay: 1
+    david-spickett: 2
+    dawid-borycki: 18
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 5
+    james-whitaker,-arm: 1
+    jason-andrews: 80
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez,-arm: 1
+    julie-gaskin: 2
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 5
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 5
+    pareena-verma: 32
+    pareena-verma-and-zach-lasiuk: 1
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    roberto-lopez-mendez: 1
+    ronan-synnott: 42
+    uma-ramalingam: 1
+    visualsilicon: 1
+    ying-yu: 1
+    ying-yu,-arm: 1
+    zhengjun-xing: 2
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 12
+    percent_closed_vs_total: 0.0
+- a_date: '2024-04-29'
+  content:
+    cross-platform: 15
+    embedded-systems: 16
+    install-guides: 80
+    laptops-and-desktops: 24
+    microcontrollers: 24
+    servers-and-cloud-computing: 67
+    smartphones-and-mobile: 15
+    total: 241
+  contributions:
+    external: 26
+    internal: 286
+  github_engagement:
+    num_forks: 30
+    num_prs: 9
+  individual_authors:
+    arm: 3
+    bolt-liu: 2
+    brenda-strech: 1
+    christopher-seidl: 7
+    daniel-gubay: 1
+    david-spickett: 2
+    dawid-borycki: 18
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 5
+    james-whitaker,-arm: 1
+    jason-andrews: 80
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez,-arm: 1
+    julie-gaskin: 2
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 5
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 5
+    pareena-verma: 32
+    pareena-verma-and-zach-lasiuk: 1
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    roberto-lopez-mendez: 1
+    ronan-synnott: 43
+    uma-ramalingam: 1
+    visualsilicon: 1
+    ying-yu: 1
+    ying-yu,-arm: 1
+    zhengjun-xing: 2
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 13
+    percent_closed_vs_total: 0.0

@@ -5,17 +5,17 @@ minutes_to_complete: 60
 
 author_primary: Ronan Synnott
 
-who_is_this_for: This is an introductory topic for software developers interested programming microcontrollers with C/Assembly.
+who_is_this_for: This is an introductory topic for software developers who are interested in programming microcontrollers with C/Assembly.
 
 learning_objectives: 
     - Write a mixed C program and assembly language subroutines for the microcontroller. 
     - Call the subroutines written in assembly in a C function.  
     - Use Arm register calling conventions when writing subroutines in assembly language.  
-    - Step through the code to understand operation
+    - Step through the code to understand operation.
 
 prerequisites:
-    - Some familiarity with C/Assembly
-    - A Windows computer to run Keil MDK
+    - Some familiarity with C/Assembly.
+    - A Windows computer to run Keil MDK.
 
 ### Tags
 skilllevels: Introductory
