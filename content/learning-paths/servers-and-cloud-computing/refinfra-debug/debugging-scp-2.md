@@ -26,7 +26,7 @@ After starting the model, click **New Debug Connection...** from the **Debug Con
 
 ![new debug connection alt-text#center](images/new_debug_connection.png "Figure 1. New debug connection")
 
-Create a connection name. You can choose any name you prefer.
+Create a connection name. This can be whatever you prefer.
 
 ![debug connection name alt-text#center](images/debug_connection_name.png "Figure 2. Debug connection name")
 
@@ -38,7 +38,7 @@ Select the appropriate Model Interface, for example **CADI**.
 
 Click **Browse for model running on local host**.
 
-Select the correct model, and click finish.
+Select the correct model, and click **Finish**.
 
 ![connect model alt-text#center](images/connect_model.png "Figure 4. Connect model")
 
