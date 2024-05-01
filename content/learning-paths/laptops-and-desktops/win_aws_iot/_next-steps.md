@@ -18,13 +18,13 @@ recommended_path: "/learning-paths/laptops-and-desktops/electron"
 
 further_reading:
     - resource:
-        title: Windows Presentation Foundation
-        link: https://learn.microsoft.com/en-us/dotnet/desktop/wpf/?view=netdesktop-8.0
+        title: AWS IoT Core Developer Guide
+        link: https://docs.aws.amazon.com/iot/latest/developerguide
         type: documentation
     - resource:
-        title: Syncfusion UI controls
-        link: https://www.syncfusion.com
-        type: website
+        title: Connecting a device to AWS IoT Core by using the AWS IoT Device SDK
+        link: https://docs.aws.amazon.com/iot/latest/developerguide/sdk-tutorials.html
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
