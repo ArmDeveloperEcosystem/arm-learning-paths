@@ -11,8 +11,8 @@ learning_objectives:
     - Debug Arm TF-A (Trusted Firmware-A).
 
 prerequisites:
-    - An Arm Development Studio, and a license to use it.
-    - A Neoverse Reference Design (RD) Software Stack.
+    - Arm Development Studio, and a license to use it.
+    - An Arm Neoverse Reference Design (RD) Software Stack.
     - A Fixed Virtual Platform (FVP).
     - A basic understanding of Neoverse Reference Design (RD) platform boot.
 
