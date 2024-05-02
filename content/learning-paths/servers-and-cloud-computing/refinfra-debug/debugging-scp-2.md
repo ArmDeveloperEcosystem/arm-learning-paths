@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Debugging SCP
 {{% notice %}}
-At the time of writing this guide, SCP firmware debug uses the `-Og` argument. This optimizes some variables that make debugging difficult. To replace `-Og` with `-O0`, do the following:
+SCP firmware debug uses the `-Og` argument. This optimizes some variables that make debugging difficult. To replace `-Og` with `-O0`, do the following:
 
 * Navigate to `rd-infra/scp/cmake/Toolchain`.
 * Modify the appropriate `<compiler>-Baremetal.cmake` file for your toolchain.

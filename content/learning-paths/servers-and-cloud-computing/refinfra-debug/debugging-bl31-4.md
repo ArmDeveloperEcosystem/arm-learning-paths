@@ -9,7 +9,7 @@ layout: learningpathall
 ## Debugging BL31 
 Setting a breakpoint for BL1 is simple, but how do we set a breakpoint for BL31?
 
-In the tabs panel at the bottom, click the plus **(`+`)** and **add other views**. Here there are multiple views available such as Register View and Memory View.
+In the tabs panel at the bottom, click the plus **(`+`)** and **add other views**. Here there are multiple views available such as **Register View** and **Memory View**.
 
 For this example, we are only interested in the **Functions** view.
 
