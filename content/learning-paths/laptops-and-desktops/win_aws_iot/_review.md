@@ -19,17 +19,17 @@ review:
             - "Yes"
         correct_answer: 2
         explanation: >
-            Yes, AWS IoT Core use MQTT protocol for secure data transmission
+            Yes, AWS IoT Core uses MQTT protocol for secure data transmission.
 
     - questions:
         question: >
-            Can you use device's certificate to manage device permissions in AWS IoT Core?
+            Can you use the device's certificate to manage device permissions in AWS IoT Core?
         answers:
             - "Yes"
             - "No"            
         correct_answer: 1
         explanation: >
-            Yes, you attach policy to the certificate in order to control device permissions
+            Yes, you attach the policy to the certificate in order to control device permissions.
 
     - questions:
         question: >
@@ -40,7 +40,7 @@ review:
             - "AWS Core SDK"
         correct_answer: 1
         explanation: > 
-            You use AWS Device SDK to implement applications that connect to the AWS cloud
+            You use AWS Device SDK to implement applications that connect to the AWS cloud.
             
 
 # ================================================================================
