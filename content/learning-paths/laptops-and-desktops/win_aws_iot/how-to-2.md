@@ -7,28 +7,30 @@ layout: "learningpathall"
 ---
 
 ## Objective
-In this section, you will connect the emulator to AWS IoT Core.
+In this section, you connect the emulator to AWS IoT Core.
 
 ## Connecting the emulator
-Log in to the AWS Console at console.aws.amazon.com, and then search for IoT. From the list that appears, select IoT Core:
+Log in to the AWS Console at https://www.console.aws.amazon.com, and then search for IoT. From the list that appears, select **IoT Core**:
 
 ![fig1](Figures/01.png)
 
-In the AWS IoT console, click 'Connect one device':
+In the AWS IoT console, click **Connect one device**:
 
 ![fig2](Figures/02.png)
 
-This will open the 'Connect one device' wizard:
+This will open the **Connect one device** wizard:
 
 ![fig3](Figures/03.png)
 
-In the first step of this wizard ('Register and secure your device'), you will see the ping command, which you can use to ensure you can connect to AWS services. The command looks like this:
+In the first step of this wizard, **Register and secure your device**, you can see the ping command, which you can use to ensure you can connect to AWS services. 
+
+The command looks like this:
 
 ```console
 ping a6t44uzbanvsz-ats.iot.eu-central-1.amazonaws.com
 ```
 
-The actual domain will depend on the AWS region you use. Open the terminal or command prompt and invoke this command. The command's output should look like this:
+The actual domain depends on the AWS region you use. Open the terminal or command prompt and invoke this command. The command's output looks like this:
 
 ```console
 ping a6t44uzbanvsz-ats.iot.eu-central-1.amazonaws.com
@@ -38,25 +40,25 @@ PING a6t44uzbanvsz-ats.iot.eu-central-1.amazonaws.com (3.73.237.68): 56 data byt
 64 bytes from 3.73.237.68: icmp_seq=2 ttl=240 time=21.945 ms
 ```
 
-Note that the a6t44uzbanvsz-ats.iot.eu-central-1.amazonaws.com is your endpoint. This is where your emulator will send data to. Note this value, as you will need it later to update the application settings.
+Note that the **a6t44uzbanvsz-ats.iot.eu-central-1.amazonaws.com** is your endpoint. This is where your emulator sends data to. Note this value, as you will need it later to update the application settings.
 
-Click the Next button. This will take you to the Register and secure your device step, in which you type WeatherEmulator under the Thing name:
+Click the **Next** button. This takes you to the **Register and secure your device** step, in which you type **WeatherEmulator** under the **Thing** name:
 
 ![fig4](Figures/04.png)
 
-Then, click the 'Next' button, which will open the 'Choose platform and SDK' window, in which you select:
-* 'Windows' from the 'Device platform operating system'
-* 'Node.js' from the 'AWS IoT Device SDK'
+Then, click the **Next** button, which opens the **Choose platform and SDK** window, in which you select:
+* **Windows** from the **Device platform operating system**.
+* **Node.js** from the **AWS IoT Device SDK**.
 
 ![fig5](Figures/05.png)
 
-Afterward, click the 'Next' button, which takes you to the 'Download connection kit' step, in which you click the 'Download connection kit' button to get the zip with certificates and the sample code, which sends data to the AWS cloud:
+Afterwards, click the **Next** button, which takes you to the **Download connection kit** step, in which you click the **Download connection kit** button to get the zip with certificates and the sample code, which sends data to the AWS cloud:
 
 ![fig6](Figures/06.png)
 
-After downloading the kit, click the 'Next' button. This will take you to the 'Run connection kit', in which you click the 'Continue' button. This will take you back to the AWS IoT screen.
+After downloading the kit, click the **Next** button. This takes you to the **Run connection kit**, in which you click the **Continue** button. This takes you back to the AWS IoT screen.
 
-Now, unzip the downloaded file. Save it to the folder 'certificates'. Then navigate to the 'certificates' folder, and type the following command to download the Amazon Root CA certificate:
+Now, unzip the downloaded file. Save it to the folder **certificates**. Then navigate to the **certificates** folder, and type the following command to download the Amazon Root CA certificate:
 
 ```console
 Invoke-WebRequest -Uri https://www.amazontrust.com/repository/AmazonRootCA1.pem -OutFile AmazonRootCA1.pem
@@ -74,20 +76,22 @@ const awsConnectionInfo = {
 };
 ```
 
-Make sure to save the file.
+Make sure you save the file.
 
 ## Configure the connection policy
-Before you can connect the device to the AWS IoT Core, you need to configure the security policy, which was attached to the certificate you created along the device in AWS IoT Core. The default policy, however, was only allowing connections from the device with the clientId containint either 'sdk-java', 'basicPubSub', or 'sdk-nodejs-*'. In our case, however, the device identifier was set to WeatherStationEmulator (see common.js). Moreover, the default policy was configured such that it enables the device to publish and subscribe to the following topics: 'sdk/test/java', 'sdk/test/python', and 'sdk/test/js'. Again, the application was configured to use different topics: 'Emulators/Weather/SensorReadings' to stream the sensor readings, and 'Emulators/Weather/Control' to control the device. So, we need to appropriately configure the security policy.
+Before you can connect the device to the AWS IoT Core, you need to configure the security policy, which was attached to the certificate you created along the device in AWS IoT Core. The default policy, however, only allows connections from the device with the clientId containint either 'sdk-java', 'basicPubSub', or 'sdk-nodejs-*'. In our case, however, the device identifier was set to WeatherStationEmulator (see common.js). Moreover, the default policy was configured such that it enables the device to publish and subscribe to the following topics: 'sdk/test/java', 'sdk/test/python', and 'sdk/test/js'. Again, the application was configured to use different topics: 'Emulators/Weather/SensorReadings' to stream the sensor readings, and 'Emulators/Weather/Control' to control the device. So, we need to appropriately configure the security policy.
 
-To update the policy, under the AWS IoT console, click Security->Policies:
+To update the policy, under the AWS IoT console, click **Security** -> **Policies**:
 
 ![fig7](Figures/07.png)
 
-There should be one policy, WeatherEmulator-Policy. Click that policy. This will open another view, in which you can see the policy details. In that view, click Edit active version button, which open the Edit policy view:
+There should be one policy, **WeatherEmulator-Policy**. Click that policy. This opens another view, in which you can see the policy details. In that view, click **Edit active version** button, which opens the Edit policy view:
 
 ![fig7](Figures/08.png)
 
-Modify the first entry ('iot:Publish,iot:Receive,iot:PublishRetain') such that you replace the 'topic/sdk/test/js' with 'topic/*'. This will enable the application to publish and receive messages from any topic. Similarly, modify the second entry, and replace 'topicfilter/sdk/test/js' with 'topicfilter/*'. Last, modify the third entry, in which you replace 'client/sdk-nodejs-*' with 'client/*'. Then, check "Set the edited version as the active version for this policy", and click the Save as new version button.
+Modify the first entry ('iot:Publish,iot:Receive,iot:PublishRetain') such that you replace the 'topic/sdk/test/js' with 'topic/*'. This will enable the application to publish and receive messages from any topic. Similarly, modify the second entry, and replace 'topicfilter/sdk/test/js' with 'topicfilter/*'. 
+
+Finally, modify the third entry, in which you replace 'client/sdk-nodejs-*' with 'client/*'. Then, check **Set the edited version as the active version for this policy**, and click the **Save as new version** button.
 
 ## Running the application
 You can now run the application. To do so, open the terminal or the command prompt, change the working directory to AWS.WeatherStation, and then type:
@@ -96,13 +100,13 @@ You can now run the application. To do so, open the terminal or the command prom
 npm install
 ```
 
-This will install dependencies. Then you launch the application by typing:
+This installs the dependencies. Then you launch the application by typing:
 
 ```console
 npm start
 ```
 
-The output of the application will look as follows:
+The output of the application looks as follows:
 ```output
 PS C:\Users\db\AWS.WeatherStation> npm start  
 Debugger attached.
@@ -120,4 +124,4 @@ Connected to AWS IoT
 The device is sending data to the AWS IoT Core.
 
 ## Summary
-You have successfully connected the weather station emulator to AWS IoT Core. In the next step, you will ensure that the data is successfully retrieved on the AWS side
+You have successfully connected the weather station emulator to AWS IoT Core. In the next step, you ensure that the data is successfully retrieved on the AWS side.
