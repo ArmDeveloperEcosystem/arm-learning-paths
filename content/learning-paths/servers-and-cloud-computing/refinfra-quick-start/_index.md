@@ -6,12 +6,12 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers interested in testing the Neoverse Reference Design firmware stack.
 
 learning_objectives: 
-    - Setup your environment
-    - Build the reference firmware stack
-    - Test the reference firmware stack
+    - Set up your environment.
+    - Build the reference firmware stack.
+    - Test the reference firmware stack.
 
 prerequisites:
-    - Some understanding of the Reference Design software stack architecture
+    - Some understanding of the Reference Design software stack architecture.
 
 author_primary: Tom Pilar
 
