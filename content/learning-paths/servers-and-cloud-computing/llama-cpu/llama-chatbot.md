@@ -98,13 +98,27 @@ There are a few different ways you can download the Llama-2-7B Chat model. In th
 
 The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF).
 
+Install the required Python packages:
+
+```bash
+sudo apt install python-is-python3 python3-pip python3-venv -y
+```
+
+Create and activate a Python virtual environment:
+
+```bash
+python -m venv venv
+source venv/bin/activate
+```
+
+Your terminal prompt now has the `(venv)` prefix indicating the virtual environment is active. Use this virtual environment for the remaining commands.
+
 Install the `huggingface_hub` python library using `pip` and add it to your `PATH`:
 
 ```bash
-sudo apt install python3-pip -y
-pip3 install huggingface-hub>=0.17.1
-export PATH=${PATH}:/home/$USER/.local/bin/
+pip install huggingface-hub>=0.17.1
 ```
+
 You can now download the model using the huggingface cli:
 
 ```bash
