@@ -11,7 +11,7 @@ layout: learningpathall
 The firmware build can be executed on the Neoverse N2 Reference Design FVP that you can download from [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps).
 
 
-### Setup the FVP
+### Set up the FVP
 
 Download the FVP from the previous page, or directly with:
 ```bash
@@ -30,9 +30,9 @@ Export the path to the `FVP_RD_N2` model binary as the `MODEL` environment varia
 export MODEL=/home/ubuntu/FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
 ```
 ### Screen configuration for UARTs
-The model will output UARTs to local ports 5000..5010. If you were running the model on a local machine, or had X11 forwarding setup, the model opens a number of xterm terminals with the UART output piped to them, one per port. 
+The model will output UARTs to local ports 5000..5010. If you were running the model on a local machine, or had X11 forwarding set up, the model opens a number of xterm terminals with the UART output piped to them, one per port. 
 
-If you do not have X11 forwarding and you are executing on a remote server, you can use `screen` to spawn persistent terminals that listen on those ports and obtain the information that way.
+If you do not have X11 forwarding and you are executing on a remote server, you can use `screen` to spawn persistent terminals that listen on the ports and obtain the information that way.
 
 Open a new terminal where you start a `screen` session and connect to it.
 
@@ -116,7 +116,7 @@ screen -c screen-uart.cfg
 The result should be similar to:
 ![screen terminals alt-text#center](images/terminal.png)
 
-The errors are expected as there is nothing talking to the ports. You can quit from within the screen by the getting a prompt using `Ctrl+A :` key combination, followed by the `quit` command. Alternatively, `Ctrl+A D` will detach the screen session and send it to background. 
+These errors are expected as there is nothing talking to the ports. You can quit from within the screen by the getting a prompt using `Ctrl+A:` key combination, followed by the `quit` command. Alternatively, `Ctrl+A D` will detach the screen session and send it to background. 
 
 ### Running the FVP
 
