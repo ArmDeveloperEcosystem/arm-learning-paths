@@ -13,7 +13,7 @@ The firmware build can be executed on the Neoverse N2 Reference Design FVP that 
 
 ### Setup the FVP
 
-Download the FVP from the page above, or directly with:
+Download the FVP from the previous page, or directly with:
 ```bash
 wget https://developer.arm.com/-/media/Arm%20Developer%20Community/Downloads/OSS/FVP/Neoverse-N2/Neoverse-N2-11-24-12/FVP_RD_N2_11.24_12_Linux64.tgz
 ```
@@ -30,11 +30,11 @@ Export the path to the `FVP_RD_N2` model binary as the `MODEL` environment varia
 export MODEL=/home/ubuntu/FVP_RD_N2/models/Linux64_GCC-9.3/FVP_RD_N2
 ```
 ### Screen configuration for UARTs
-The model will output UARTs to local ports 5000..5010. If you were running the model on a local machine, or had X11 forwarding setup, the model will open a number of xterm terminals with the UART output piped to them, one per port. 
+The model will output UARTs to local ports 5000..5010. If you were running the model on a local machine, or had X11 forwarding setup, the model opens a number of xterm terminals with the UART output piped to them, one per port. 
 
-If you do not have X11 forwarding and you are executing on a remote server, you can use `screen` to spawn persistent terminals that will listen on those ports and you get the information out that way.
+If you do not have X11 forwarding and you are executing on a remote server, you can use `screen` to spawn persistent terminals that listen on those ports and obtain the information that way.
 
-Open a new terminal where you will start a `screen` session and connect to it.
+Open a new terminal where you start a `screen` session and connect to it.
 
 To install `screen` use:
 ```bash 
@@ -44,7 +44,7 @@ sudo apt-get install screen
 Use a text editor to create the configuration file below, which will set up `screen` windows for each UART.
 
 #### Create screen-uart.cfg
-Create a config file so that when you start a session with it, you get ten windows and each will periodically try to connect to one of the local ports where a UART is running. You can change the titles of the windows so you know which terminal is which. The resulting `screen-uart.cfg` file will look like this:
+Create a config file so that when you start a session, there are ten windows and each periodically tries to connect to one of the local ports where a UART is running. You can change the titles of the windows so that you can identify each terminal. The resulting `screen-uart.cfg` file looks like this:
 ```bash
 # Split horizontally into two
 split -v
@@ -116,7 +116,7 @@ screen -c screen-uart.cfg
 The result should be similar to:
 ![screen terminals alt-text#center](images/terminal.png)
 
-The errors are expected as there is nothing talking to those ports yet. You can quit from within the screen by the getting a prompt using `Ctrl+A :` key combo, followed by the `quit` command. Alternatively `Ctrl+A D` will detach the screen session and send it to background. 
+The errors are expected as there is nothing talking to the ports. You can quit from within the screen by the getting a prompt using `Ctrl+A :` key combination, followed by the `quit` command. Alternatively, `Ctrl+A D` will detach the screen session and send it to background. 
 
 ### Running the FVP
 
@@ -124,7 +124,7 @@ In your original terminal, launch the FVP using the supplied script:
 ```bash
 ./uefi.sh -p rdn2
 ```
-Observe the platform is running successfully.
+Observe the platform is running successfully:
 ![fvp terminals alt-text#center](images/uefi.png "Figure 2. FVP Terminals")
 
 To boot into `busy-box`, use:
