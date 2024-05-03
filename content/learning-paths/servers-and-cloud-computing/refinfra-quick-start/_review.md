@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Why do we use the repo tool?
+            Why do we use the Repo tool?
         answers:
             - Repo allows for the initialization of multiple repositories with specific revisions for the multiple components (such as scp-firmware, tfa, and edk2).
             - Repo enables the use of a manifest file, which can simplify the management of multiple repositories.

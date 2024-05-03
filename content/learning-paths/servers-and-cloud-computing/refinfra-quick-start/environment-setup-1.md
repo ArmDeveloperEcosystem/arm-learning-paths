@@ -12,9 +12,9 @@ This learning path is based on the `Neoverse N2` Reference Design (`RD-N2`).
 
 ## Before you begin
 
-You can use either a AArch64 or x86_64 host machine running Ubuntu Linux 22.04. 64GB of free disk space and 32GB of RAM is minimum requirement to sync and build the platform software stack. 48GB of RAM is recommended.
+You can use either an AArch64 or x86_64 host machine running Ubuntu Linux 22.04. 64GB of free disk space and 32GB of RAM is minimum requirement to sync and build the platform software stack. 48GB of RAM is recommended.
 
-Follow the instructions to set up your environment with the detailed steps in [Setup the Neoverse Reference Design software stack workspace](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html).
+Follow the instructions to set up your environment using the information found at the [Neoverse RD-N2 documentation site](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/rdn2.html).
 
 Install [docker](/install-guides/docker/docker-engine/) on your machine.
 
@@ -53,9 +53,9 @@ Bug reports: https://bugs.chromium.org/p/gerrit/issues/entry?template=Repo+tool+
 
 Create a new directory in to which you can download the source code, build the stack, and then obtain the manifest file.
 
-To obtain the manifest, choose a tag of the platform reference firmware. [RD-INFRA-2023.09.29](https://neoverse-reference-design.docs.arm.com/en/latest/releases/RD-INFRA-2023.09.29/release_note.html) is used here. See the [release notes](https://neoverse-reference-design.docs.arm.com/en/latest/releases/index.html) for more information.
+To obtain the manifest, choose a tag of the platform reference firmware. [RD-INFRA-2023.09.29](https://neoverse-reference-design.docs.arm.com/en/latest/releases/RD-INFRA-2023.09.29/release_note.html) is used here. See the [release notes](https://neoverse-reference-design.docs.arm.com/en/latest/) for more information.
 
-Specify the platform you would like with the manifest. In the [manifest repo](https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests) there are a number of available platforms. As detailed in these [instructions](https://neoverse-reference-design.docs.arm.com/en/latest/platforms/common/setup-workspace.html#platform-manifest-names) select `pinned-rdn2.xml`.
+Specify the platform you would like with the manifest. In the [manifest repo](https://git.gitlab.arm.com/infra-solutions/reference-design/infra-refdesign-manifests) there are a number of available platforms. In this case, select `pinned-rdn2.xml`.
 
 ```bash 
 mkdir rd-infra

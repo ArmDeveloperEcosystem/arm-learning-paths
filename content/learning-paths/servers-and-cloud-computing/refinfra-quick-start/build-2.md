@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Build
-Now that you have the environment and the source set up, you can build the firmware stack. You follow the [instructions](https://neoverse-reference-design.docs.arm.com/en/latest/platform-boot/busybox-boot.html) to build a busybox root filesystem. This builds a lightweight kernel with shell.
+Now that you have the environment and the source set up, you can build the firmware stack. You follow the [instructions](https://neoverse-reference-design.docs.arm.com/en/latest/features/boot/busybox_boot.html#busybox-boot-label) to build a busybox root filesystem. This builds a lightweight kernel with shell.
 You will test that the firmware implementation builds and boots on a FVP. The firmware stack requires `TF-A`, `UEFI`, `SCP` and a lightweight OS loader, to make sure you exercise the UEFI `ExitBootServices` transition. The `busy-box` boot is perfect for this.
 
 Launch the container:
