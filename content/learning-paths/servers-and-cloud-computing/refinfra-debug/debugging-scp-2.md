@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## Debugging SCP
 {{% notice %}}
-At the time of writing this guide, SCP firmware debug uses `-Og` argument. This optimizes some variables that makes debugging difficult. To replace `-Og` with `-O0`, do the following:
+SCP firmware debug uses the `-Og` argument. This optimizes some variables that make debugging difficult. To replace `-Og` with `-O0`, do the following:
 
-* Navigate to `rd-infra/scp/cmake/Toolchain`
-* Modify the appropriate `<compiler>-Baremetal.cmake` file for your toolchain
+* Navigate to `rd-infra/scp/cmake/Toolchain`.
+* Modify the appropriate `<compiler>-Baremetal.cmake` file for your toolchain.
 
-For example, modify `GNU-Baremetal.cmake`:
+For example, change `GNU-Baremetal.cmake`:
 
 `string(APPEND CMAKE_${language}_FLAGS_DEBUG_INIT "-Og")`
 
@@ -22,11 +22,11 @@ to
 `string(APPEND CMAKE_${language}_FLAGS_DEBUG_INIT "-O0")`
 {{% /notice %}}
 
-After starting the model, click **Create a new debug connection...** from the **Debug Control** panel.
+After starting the model, click **New Debug Connection...** from the **Debug Control** panel.
 
 ![new debug connection alt-text#center](images/new_debug_connection.png "Figure 1. New debug connection")
 
-Create a connection name. You may choose any name you prefer.
+Create a connection name. This can be whatever you prefer.
 
 ![debug connection name alt-text#center](images/debug_connection_name.png "Figure 2. Debug connection name")
 
@@ -38,7 +38,7 @@ Select the appropriate Model Interface, for example **CADI**.
 
 Click **Browse for model running on local host**.
 
-Select the correct model and click finish.
+Select the correct model, and click **Finish**.
 
 ![connect model alt-text#center](images/connect_model.png "Figure 4. Connect model")
 
@@ -54,11 +54,11 @@ In the **Files** panel, select **Load Symbols from file**, **File System**, and 
 
 ![scp symbols alt-text#center](images/scp_symbols.png "Figure 6. Load SCP symbols")
 
-Select **Apply** then **Debug**. The debugger will now connect to the model.
+Select **Apply** then **Debug**. The debugger now connects to the model.
 
-Once connected, you can set breakpoints in the source code. This can be done by searching for the function in the **Functions** tab, double clicking next to the line number, or in the **Command** view.
+Once connected, you can set breakpoints in the source code. This can be done by searching for the function in the **Functions** tab, double-clicking next to the line number, or in the **Command** view.
 
-Set a breakpoint at ``cmn700_discovery()``. Continue execution and the code will stop at that breakpoint.
+Set a breakpoint at ``cmn700_discovery()``. Continue execution and the code stops at the breakpoint you specify.
 ```command
 break cmn700_discovery
 continue
