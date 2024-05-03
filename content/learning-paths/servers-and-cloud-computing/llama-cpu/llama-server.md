@@ -20,7 +20,7 @@ The server executable was already compiled when you ran `make` in the previous s
 Start the server from the command line, it listens on port 8080:
 
 ```bash
-./server  -m llama-2-7b-chat.Q4_K_M.gguf --port 8080
+./server -m llama-2-7b-chat.Q4_K_M.gguf --port 8080
 ```
 
 ## Use curl
@@ -133,7 +133,6 @@ int main() {
 }
 
 This program will print "Hello, World!" to the console when run. Let me know if you have any questions or if you would like to learn more about C++!
-<|im_end|>
 ```
 
 You can continue to experiment with different large language models and write scripts to try them.
