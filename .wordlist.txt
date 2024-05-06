@@ -2657,7 +2657,7 @@ Guid
 CoreLink
 Kinesis
 MQQT
-PublishRetain 
+PublishRetain
 SensorReadings
 WeatherEmulator
 WeatherStation
