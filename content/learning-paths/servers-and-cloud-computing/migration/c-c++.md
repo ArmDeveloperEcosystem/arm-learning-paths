@@ -18,12 +18,14 @@ The table below shows GCC and LLVM compiler versions available in Linux distribu
 
 Linux Distribution      | GCC                  | Clang/LLVM
 ------------------------|----------------------|-------------
-Amazon Linux 2          | 7*, 10               | 7, 11*
 Amazon Linux 2023       | 11*                  | 15*
+Amazon Linux 2          | 7*, 10               | 7, 11*
 Ubuntu 22.04            | 9, 10, 11*, 12       | 11, 12, 13, 14*
 Ubuntu 20.04            | 7, 8, 9*, 10         | 6, 7, 8, 9, 10, 11, 12
 Ubuntu 18.04            | 4.8, 5, 6, 7*, 8     | 3.9, 4, 5, 6, 7, 8, 9, 10
-Debian10                | 7, 8*                | 6, 7, 8
+Debian 12               | 11, 12*              | 13, 14*, 15, 16
+Debian 10               | 7, 8*                | 6, 7, 8
+Red Hat EL9             | 11                   | 13
 Red Hat EL8             | 8*, 9, 10            | 10
 SUSE Linux ES15         | 7*, 9, 10            | 7
 
