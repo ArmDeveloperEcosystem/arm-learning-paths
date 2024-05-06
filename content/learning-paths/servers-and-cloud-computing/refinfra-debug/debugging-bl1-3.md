@@ -30,7 +30,7 @@ These commands load the symbol files and specify the memory address location, up
 The `EL` (Exception Level) and number at the end of each command, for example, `EL3:0`, ensure the symbols are loaded into the correct virtual address space and at the correct memory offset. ATF uses absolute addresses for its symbols so we use an offset of 0.
 
 After connecting to the running model, check that it has stopped. Set a breakpoint on the next instruction of
-the TF-A and press **run**. In this debug panel, you can find common debugging functions like stepping and skipping, amongst others.
+the TF-A and press **run**. In this debug panel, you can find common debugging functions like stepping and skipping.
 
 ![debug options alt-text#center](images/debug_options.png "Figure 3. Debug options")
 
