@@ -3,7 +3,7 @@ title: Use Amazon DynamoDB for your IoT applications running on Arm64
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who are interested in using DynamoDB as the database for storing the data
+who_is_this_for: This is an advanced topic for developers who are interested in using DynamoDB as the database for storing the data
 
 learning_objectives:
    - Learn about DynamoDB
