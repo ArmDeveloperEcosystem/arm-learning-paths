@@ -21,21 +21,16 @@ Create a new file called `vcpkg-configuration.json`. The following template give
   "registries": [
     {
       "kind": "artifact",
-      "location": "https://aka.ms/vcpkg-ce-default",
-      "name": "microsoft"
-    },
-    {
-      "kind": "artifact",
       "location": "https://artifacts.tools.arm.com/vcpkg-ce-registry/registry.zip",
       "name": "arm"
     }
   ],
   "requires": {
+    "arm:tools/kitware/cmake": "^3.25.2",
+    "arm:tools/ninja-build/ninja": "^1.10.2",
     "arm:tools/open-cmsis-pack/cmsis-toolbox": "^2.0.0-0",
     "arm:compilers/arm/armclang": "^6.20.0",
-    "arm:compilers/arm/arm-none-eabi-gcc": "^12.2.1-0",
-    "microsoft:tools/kitware/cmake": "^3.25.2",
-    "microsoft:tools/ninja-build/ninja": "^1.10.2"
+    "arm:compilers/arm/arm-none-eabi-gcc": "^12.2.1-0"
   }
 }
 ```
