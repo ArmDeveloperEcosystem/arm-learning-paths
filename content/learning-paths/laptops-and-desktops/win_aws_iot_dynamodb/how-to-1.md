@@ -52,7 +52,7 @@ SELECT * FROM 'Emulators/Weather/SensorReadings'
 
 ![fig5](Figures/05.png)
 
-6. Click the *Create DynamoDB* table. This will open another tab, where you type *SensorReadings* for the Table name and *timestamp* for the partition key. Ensure to check Default settings, scroll down, and click the *Create table* button. Wait a few moments for the table to be created. Then, return to the *Create rule* view.
+6. Click the *Create DynamoDB* table. This will open another tab, where you type *SensorReadings* for the Table name and *timestamp* for the partition key. Ensure to check *Default settings*, scroll down, and click the *Create table* button. Wait a few moments for the table to be created. Then, return to the *Create rule* view.
 
 ![fig6](Figures/06.png)
 
