@@ -15,22 +15,22 @@ review:
         question: >
             What is the Rules Engine?
         answers:
-            - "A part of the AWS IoT Core to process and route data between IoT devices and other AWS services"
-            - "An engine to create security rules"
-            - "An engine for accelerating database access"            
+            - "A part of the AWS IoT Core to process and route data between IoT devices and other AWS services."
+            - "An engine to create security rules."
+            - "An engine for accelerating database access."            
         correct_answer: 1               
         explanation: >
-            The Rules Engine in AWS IoT Core is a powerful feature designed to process and route data between IoT devices and other AWS services or external endpoints
+            The Rules Engine in AWS IoT Core is a powerful feature designed to process and route data between IoT devices and other AWS services or external endpoints.
 
     - questions:
         question: >
-            Does Amazon DynamoDB require to set up the database server?
+            Does Amazon DynamoDB require you to set up the database server?
         answers:
             - "No"
             - "Yes"
         correct_answer: 1
         explanation: >
-            Amazon DynamoDB is a fully managed NoSQL database service, so you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling
+            Amazon DynamoDB is a fully-managed NoSQL database service, so you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

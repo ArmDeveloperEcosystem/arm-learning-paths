@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have now learned how to use DynamoDB for IoT solution. You can now learn how to develop IoT applications with .NET 8 on Windows on Arm.
+   You have learned how to use DynamoDB for IoT solution. You can now learn how to develop IoT applications with .NET 8 on Windows on Arm.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_net8"
