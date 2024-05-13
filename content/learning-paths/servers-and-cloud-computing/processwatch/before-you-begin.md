@@ -6,9 +6,9 @@ weight: 2
 layout: learningpathall
 ---
 
-## Install prerequisits
-To compile Process Watch there are a few common packages that you'll need to install on your system:
-```console
+## Install prerequisites
+To compile Process Watch there are some common packages that you'll need to install on your system:
+```output
 CMake
 Clang
 LLVM
@@ -21,26 +21,29 @@ sudo apt-get update
 sudo apt-get install libelf-dev cmake clang llvm llvm-dev
 ```
 
-## Clonining Process Watch
+## Cloning Process Watch
 To clone Process Watch run the following:
 ```console
 git clone --recursive https://github.com/grahamwoodward/processwatch
 ```
 
-If you've already cloned without --recursive, go into the repository directory and issue:
+Note that the --recursive option will ensure all submodules are also cloned. If you've already cloned without --recursive, change into the top-level directory of the repository and issue:
 ```console
+cd processwatch
 git submodule init
 git submodule update
 ```
 
 Note this needs to also be done inside the following subdirectory - this is to ensure libbpf is also cloned with the bpftool submodule
 ```console
-deps/bpftool
+cd deps/bpftool
+git submodule init
+git submodule update
 ```
 
 ## Process Watch dependencies
-For the ARM build, Process Watch is dependent on two submodules. These are
-* bpftool - For building and installing the eBPF program, this is dependant on libbpf
+For the Arm build, Process Watch is dependent on two submodules. These are
+* bpftool - For building and installing the eBPF program, this is dependent on libbpf
 * Capstone - For instruction decoding, this is dependent on LLVM
 
 ## Building Process Watch
@@ -49,7 +52,7 @@ The code comes with a build.sh shell script. For building Process Watch on arm, 
 ./build -b -a
 ```
 
-This ensures the dependencies are built first and we're building for the arm architecture. You should see the following output
+This ensures the dependencies are built first and we're building for the Arm architecture. You should see the following output
 ```bash
 Compiling dependencies...
   No system bpftool found! Compiling libbpf and bpftool...

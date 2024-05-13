@@ -8,12 +8,7 @@ layout: learningpathall
 
 ## Running Process Watch
 The Process Watch tool accepts a number of CLI arguments. These can be seen by running
-```console
-sudo processwatch -h
-```
-
-The following lists all the CLI arguments:
-```console
+```output
 sudo ./processwatch -h
 usage: processwatch [options]
 
@@ -44,7 +39,7 @@ By default, Process Watch will:
 ## Default Process Watch output
 Running Process Watch with no arguments results in the following output:
 
-```console
+```output
 sudo ./processwatch
 
 PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL

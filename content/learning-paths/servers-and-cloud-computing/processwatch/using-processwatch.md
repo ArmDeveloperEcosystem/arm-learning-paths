@@ -26,7 +26,7 @@ void main() {
 
 With no optimisation applied, I can see that the workload is not making use of NEON of SVE instructions.
 
-```console
+```output
 aarch64-linux-gnu-gcc workload.c -o workload_none -O0
 ./workload_none &
 [1] 126958
@@ -45,7 +45,7 @@ ALL      ALL              0.00     0.00     100.00   26006
 
 However, recompiling to make use of NEON instructions, I can now see my workload is retiring NEON instructions
 
-```console
+```output
 aarch64-linux-gnu-gcc workload.c -o workload_neon  -O2 -ftree-vectorize -march=armv8.6-a
 ./workload_neon &
 [1] 126987
@@ -61,9 +61,9 @@ ALL      ALL              32.45    0.00     100.00   26143
 126987   workload_neon    32.45    0.00     100.00   26143
 ^C
 ```
-And by objdumping the binary, I can see those instructions
+And by running objdump on the binary, I can see those instructions
 
-```console
+```output
  788:   4ee18400        add     v0.2d, v0.2d, v1.2d
  78c:   3ca06860        str     q0, [x3, x0]
  790:   91004000        add     x0, x0, #0x10
@@ -73,7 +73,7 @@ And by objdumping the binary, I can see those instructions
 
  Similarly by recompiling for SVE, I can now see my workload is retiring SVE instructions
 
-```console
+```output
 aarch64-linux-gnu-gcc workload.c -o workload_sve  -O2 -ftree-vectorize -march=armv8.5-a+sve
 ./workload_sve &
 [1] 126997
@@ -90,8 +90,8 @@ ALL      ALL              0.00     96.74    100.00   26137
 ^C
 ```
 
-again, by objdumping the binary I see 
-```console
+Again, by objdumping the binary I see 
+```output
  7c4:   25e20fe0        whilelo p0.d, wzr, w2
  7c8:   a5e04080        ld1d    {z0.d}, p0/z, [x4, x0, lsl #3]
  7cc:   a5e04061        ld1d    {z1.d}, p0/z, [x3, x0, lsl #3]

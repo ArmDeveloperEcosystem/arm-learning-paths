@@ -2,17 +2,17 @@
 review:
     - questions:
         question: >
-            The Process Watch github repo depends on other github repos
+            The Process Watch github repo depends on other GitHub repos
         answers:
             - True
             - False
         correct_answer: 1                    
         explanation: >
-            The Process Watch repo is dependant on the bpftool repo and the Capstone repo. Follow the correct instructions to clone 
+            The Process Watch repo is dependent on the bpftool repo and the Capstone repo. Follow the correct instructions to clone, including to specify the --recursive argument.
 
     - questions:
         question: >
-            Process Watch uses the Linux perf_events interface to sampling branch predictions
+            Process Watch uses the Linux perf_events interface to sample branch predictions
         answers:
             - True
             - False

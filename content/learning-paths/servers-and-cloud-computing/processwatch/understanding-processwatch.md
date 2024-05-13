@@ -14,7 +14,7 @@ At a high level the Process Watch tool works like so
 
 The output of Process Watch looks like
 
-```console
+```output
 sudo ./processwatch
 
 PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL
@@ -33,16 +33,16 @@ The two columns on the far right show the total number of retired instructions f
 
 As can be seen, the totals per process/row add up to the overall total.
 
-## Mnemoics / Group columns
+## Mnemonics / Group columns
 By default, Process Watch will output counts of retired instructions for the groups
-```console
+```output
 FPARMv8, NEON, SVE, SVE2
 ```
 
-These can be override on the CLI and it's also possible to specify mnemoics instead. The allowed group names and allowed mnemonics are derived from LLVM, with the Capstone decoder providing an API to retrieve them.
+These can be overridden on the CLI and it's also possible to specify mnemonics instead. The allowed group names and allowed mnemonics are derived from LLVM, with the Capstone decoder providing an API to retrieve them.
 
 An example can be see by
-```console
+```output
  sudo ./processwatch -l
 Listing all available categories:
 jump
@@ -74,9 +74,9 @@ HasNEONorSME
 ...
 ```
 
-Adding -m to the above, like so will list the available mnemonics
+Adding -m to the above, like so, will list the available mnemonics
 
-```console
+```output
  sudo ./processwatch -l -m
 Listing all available mnemonics:
 invalid
@@ -92,11 +92,11 @@ bfi
 bfxil
 ```
 
-There is ~110 groups (processwatch -l) and ~1700 mnemonics (processwatch -l -m)
+There are ~110 groups (processwatch -l) and ~1700 mnemonics (processwatch -l -m)
 
 To override the default groups, you can use the -f argument and specify the group or mnemonic name. You can specify multiple -f arguments. However you can't have mnemonics and groups together.
 
-```console
+```output
  sudo ./processwatch -f HasSVE2BitPerm -f HasNEONorSME
 
 PID      NAME             SVE2BitP NEONorSM %TOTAL   TOTAL
@@ -113,7 +113,7 @@ ALL      ALL              0.00     0.00     100.00   70
 
 and 
 
-```console
+```output
  sudo ./processwatch -m -f adcs -f bfxil
 
 PID      NAME             adcs     bfxil    %TOTAL   TOTAL
