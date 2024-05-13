@@ -10,7 +10,7 @@ layout: "learningpathall"
 ## Background
 
 
-###### Advantages of using Amazon DynamoDB 
+##### Advantages of using Amazon DynamoDB 
 
 Amazon Web Services (AWS) provides a fully-managed NoSQL database service called Amazon DynamoDB, which is designed to deliver fast and predictable performance with seamless scalability. DynamoDB allows users to offload the administrative burdens of operating and scaling a distributed database, so they don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling. It offers built-in security, backup and restore, and in-memory caching for internet-scale applications. DynamoDB supports key-value and document data structures, making it an ideal choice for IoT, and many other applications that require low-latency data access at any scale.
 
@@ -28,4 +28,4 @@ The Rules Engine evaluates incoming MQTT messages published to AWS IoT Core base
 
 The AWS IoT Core Rules Engine dramatically simplifies the development of IoT solutions by efficiently managing data flow and enabling complex, condition-based actions directly within the IoT infrastructure. This leads to more responsive, dynamic, and efficient IoT systems.
 
-In this learning path, you will learn how to use the Rules Engine from AWS IoT Core to capture data sent from the IoT emulator running on an Arm64-powered device. The data is automatically written to the DynamoDB database.
+In this Learning Path, you learn how to use the Rules Engine from AWS IoT Core to capture data sent from the IoT emulator running on an Arm64-powered device. The data is automatically written to the DynamoDB database.
