@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for software developers new to CM
 learning_objectives: 
     - Build a simple application using CMSIS-DSP library
     - Compare relative performance on different processors
-    - Build and CMSIS-DSP test suite on the Corstone-300 FVP
+    - Build a CMSIS-DSP test suite on the Corstone-300 FVP
 
 prerequisites:
     - Some familiarity with embedded programming
