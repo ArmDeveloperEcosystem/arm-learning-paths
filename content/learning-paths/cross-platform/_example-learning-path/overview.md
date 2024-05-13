@@ -8,13 +8,13 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-Learning Paths are community created how-to articles about software development for the Arm architecture.
+Learning Paths are community-created how-to articles about software development for the Arm architecture.
 
 All content is covered by the [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## What is a Learning Path?
 
-A Learning Path is a concise tutorial with detailed steps to learn how to complete a specific task.
+A Learning Path is a concise tutorial with detailed steps to enable you to learn how to complete a specific task.
 
 A Learning Path is not:
 - product documentation
@@ -40,7 +40,7 @@ Arm has a number of content channels where you can access Arm technical content 
 
 Learning Paths are maintained in [GitHub](https://github.com/ArmDeveloperEcosystem/arm-learning-paths). The content is written in markdown. [Hugo](https://gohugo.io/) is used to generate a static website from the markdown files.
 
-The next section explains how you can setup a computer to create a new Learning Path or modify existing content.
+The next section explains how you can set up a computer to create a new Learning Path, or modify existing content.
 
 ## Who can write a Learning Path?
 
@@ -52,25 +52,25 @@ This Learning Path provides the information you need to create your own Learning
 
 ## What topics are appropriate for Learning Paths?
 
-Learning Paths are about software development on Arm. Content is segmented into 5 categories and each Learning Path is related to the category. Each category covers different kinds of computer hardware, and each Learning Path is about software development on Arm hardware. All types of software are welcome.
+Learning Paths are about software development on Arm. Content is segmented into 5 categories and each Learning Path is related to the category. Each category covers different kinds of computer hardware, and each Learning Path is about software development on Arm hardware. Content about all types of software is welcome.
 
 ## Are there things which are not suitable for Learning Paths?
 
 Learning Paths include only public information. Do not include confidential information, trade secrets, unannounced products, or any other information which should not be on a public website. 
 
-No AI tool can be used to generate either content or code when creating a learning path or install guide.
+Do not use an AI tool to generate either content or code when creating a Learning Path or install guide.
 
 ## Is there a way to ask about my Learning Path idea?
 
-You can use [GitHub Discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) to ask questions about your Learning Path idea. You may want to do this if you are unsure about the usefulness of your concept or think it might already be covered by other content. You can also use it to determine the best category for your Learning Path. It is possible to have a Learning Path appear in multiple categories, so use GitHub discussions to ask. 
+You can use [GitHub Discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) to ask questions about your Learning Path idea. You may want to do this if you are unsure about the usefulness of your concept or think it might already be covered by other content. You can also use it to determine the best category for your Learning Path. It is possible that a Learning Path belongs to multiple categories, so use GitHub discussions to ask. 
 
 ## What is an install guide?
 
-Install guides provide a concise summary of how to install tools and software or do a common task. Install guides make it easy to reference repeated actions from multiple Learning Paths. Use [GitHub discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) to ask if your content idea should be a Learning Path or an install guide.
+Install guides provide a concise summary of how to install tools and software or perform a common task. Install guides make it easy to reference repeated actions from multiple Learning Paths. Use [GitHub discussions](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions) to ask if your content idea should be a Learning Path or an install guide.
 
 ## What if I have an idea for a Learning Path but cannot write it?
 
-Use the [GitHub Ideas](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions/categories/ideas) to share topics you think would make a good Learning Path or install guide. Even if you cannot write the content it's possible somebody else can do it.
+Use the [GitHub Ideas](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/discussions/categories/ideas) to share topics you think would make a good Learning Path or install guide. Even if you cannot write the content, it's possible somebody else can do it.
 
 ## When are Learning Paths reviewed and published?
 
