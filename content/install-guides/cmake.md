@@ -28,15 +28,15 @@ weight: 1
 
 It is available for a variety of operating systems and there are multiple ways to install it. 
 
-## Before you begin
+## What should I do before installing CMake for Arm Linux distributions or CMake for Windows on Arm?
 
 This article provides quick instructions to install CMake for Arm Linux distributions and for Windows on Arm.
 
-### Windows on Arm
+### How do I download and install CMake for Windows on Arm?
 
 Confirm you are using a Windows on Arm device such as Windows Dev Kit 2023 or a laptop such as Lenovo ThinkPad X13s or Surface Pro 9 with 5G.
 
-### Arm Linux
+### How do I download and install CMake for Arm Linux distributions?
 
 Confirm you are using an Arm computer with 64-bit Linux by running:
 
@@ -52,7 +52,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and install on Windows
+## How do I download and install on Windows on Arm?
 
 Native CMake support for Windows on Arm is available starting with version 3.24. Installers are available now from the [CMake download](https://cmake.org/download/) page. Emulated CMake can be used but is no longer needed unless an older version of CMake must be used.
 
@@ -74,7 +74,7 @@ Wait for the installer to complete and click `Finish`:
 
 ![Install #center](/install-guides/_images/cmake-finish.png)
 
-## Download and install on Linux
+## How do I download and install on Linux?
 
 There are multiple ways to install CMake on Linux. 
 
@@ -126,7 +126,7 @@ bash /home/$USER/cmake-3.28.1-Linux-aarch64.sh --skip-license --exclude-subdir -
 export PATH=$PATH:$HOME/cmake/bin
 ```
 
-### Verify CMake is installed
+### How do I verify that CMake is installed?
 
 1. Confirm CMake is installed on Linux or Windows. 
 
