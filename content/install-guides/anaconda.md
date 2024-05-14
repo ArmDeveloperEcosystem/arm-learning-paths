@@ -30,7 +30,7 @@ The `conda` command can be used to quickly install and use Python packages.
 
 Follow the instructions below to install and use Anaconda Distribution on an Arm server.
 
-## What should I consider before starting an Anaconda installation?
+## What should I do before starting an Anaconda installation?
 
 Confirm you are using an Arm machine by running:
 
