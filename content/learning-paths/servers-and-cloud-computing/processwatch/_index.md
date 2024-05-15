@@ -3,7 +3,7 @@ title: Processwatch
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to build and run the Process Watch tool on their aarch64 machine. This tool can be used to see whether the system, or an individual workload, is making use of specific arm instructions/features.
+who_is_this_for: This is an introductory topic for software developers who want to build and run the Process Watch tool on their aarch64 machine. This tool can be used to see whether the system, or an individual workload, is making use of specific Arm instructions/features.
 
 learning_objectives: 
     - To be able to clone, build and run the Process Watch tool

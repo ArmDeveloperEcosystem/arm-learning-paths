@@ -102,3 +102,4 @@ Again, by objdumping the binary I see
  7e0:   54ffff41        b.ne    7c8 <doLoop+0x28>  // b.any
  ```
 
+As you can see, the Process Watch tool gives a good indication of what instructions or groups/features of the Arm architecture your workload is compiled for.

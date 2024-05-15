@@ -7,10 +7,10 @@ layout: learningpathall
 ---
 
 ## Understanding Process Watch
-At a high level the Process Watch tool works like so
-* It uses the Linux perf_events interface to sample retired instructions
-* It uses a BPF program to retrieve certain things, for example the Program Counter, the PID of the currently executing process and the process name
-* The instruction at the PC is decoded and internally Process Watch maintains counts for each instruction sampled
+Internally Process Watch works like so
+* Uses the Linux perf_events interface to sample retired instructions
+* Uses a BPF program to retrieve the Program Counter (PC), the PID of the currently executing process and the process name
+* Decodes the instruction at the PC and internally maintains counts for each instruction sampled
 
 The output of Process Watch looks like
 
@@ -29,7 +29,7 @@ ALL      ALL              0.00     0.29     0.00     0.00     100.00   346
 
 The two columns on the far left show the process ID and name of all running processes that were sampled during that sampling period.
 
-The two columns on the far right show the total number of retired instructions for each process - and what % of the overall system-wide retired instruction count this processes count relates to. For example, in the 2 second sample period above, there were 346 retired instructions. Of those, 279 instructions were when the processwatch (PID 17400) was running, and 279 is 80.64% of the total 346.
+The two columns on the far right show the total number of retired instructions for each process - and what percentage of the overall system-wide retired instruction count this processes count relates to. For example, in the 2 second sample period above, there were 346 retired instructions. Of those, 279 instructions were when the processwatch (PID 17400) was running, and 279 is 80.64% of the total 346.
 
 As can be seen, the totals per process/row add up to the overall total.
 

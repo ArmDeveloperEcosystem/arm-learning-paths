@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Running Process Watch
-The Process Watch tool accepts a number of CLI arguments. These can be seen by running
+The Process Watch tool accepts a number of CLI arguments; These can be seen by running
 ```output
 sudo ./processwatch -h
 usage: processwatch [options]
