@@ -6,6 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
+
+{{% notice Note %}}
+To run the code in this Learning Path and collect the output, your software or debug environment needs a way to print message to a console. The code was run on an Arm internal simulation environment but could be run on any simulation environment with printf() support, or on actual hardware with printf() support. 
+
+This code was run in a bare-metal environment in EL3 with minimal software overhead. If you are running this code on an operating system, such as Linux, you may see slight variations in the PMU event counts due to the overhead of the OS.
+{{% /notice %}}
+
 The first step in topdown performance analysis is to investigate the CPU pipeline efficiency and look at the distribution of how CPU cycles are spent. 
 
 The results from the first phase guide where to look next to find areas for performance improvement.

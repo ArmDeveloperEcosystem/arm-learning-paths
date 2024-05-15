@@ -1,6 +1,6 @@
 ---
 title: Operation Mix Events
-weight: 9
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

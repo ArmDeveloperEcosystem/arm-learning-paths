@@ -10,7 +10,13 @@ The Neoverse core PMU measures hardware events that occur during software execut
 
 This Learning Path explains how to trigger common PMU events in specific metric groups and why certain events are triggered. 
 
-As a way to learn, you can review example code fragments and see the triggered PMU events.
+You may want to review CPU architecture and Arm assembly language. More detail on [Learn the Architecture - A-profile – Arm®](https://www.arm.com/architecture/learn-the-architecture/a-profile). 
+
+The following sections may be helpful:
+ - AArch64 Instruction Set Architecture (ISA)
+ - AArch64 Memory Management
+ - AArch64 Memory Attributes and Properties
+ - Memory Systems, Ordering, and Barriers
 
 ## PMU Events 
 
@@ -18,9 +24,16 @@ This Learning Path uses the Neoverse N2 core to count PMU events. The following 
 
 The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. This Learning Path describes common microarchitectural events, some of which may be cache or TLB accesses and executed instructions.
 
-The event groups covered are:
-- Cache Events
-    - Level 1 Data Cache
-    - Level 1 Instruction Cache
-    - Level 2 Unified Cache
-    - Last Level Cache
+The event groups covered in this learning path are:
+- Topdown L1 Events
+- TLB Events
+    - Instruction TLB
+    - Data TLB
+- Branch Events
+- Operation Events
+    - SIMD
+    - Scalar Floating-Point
+    - Integer & Branch
+
+
+
