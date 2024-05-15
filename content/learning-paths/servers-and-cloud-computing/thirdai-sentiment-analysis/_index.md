@@ -18,7 +18,7 @@ author_primary: ThirdAI
 skilllevels: Introductory
 subjects: Machine Learning
 armips:
-    - TODO WHAT IS THIS
+    - Neoverse
 tools_software_languages:
     - Python
     - ThirdAI
