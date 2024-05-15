@@ -52,7 +52,7 @@ Download the appropriate package from the [Product Download Hub](https://develop
  - [Arm Performance Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
  - [Arm Development Studio](https://developer.arm.com/downloads/view/DEVST-GLD0)
 
-Arm Performance Studio supports Windows, Linux, and MacOS hosts.
+Arm Performance Studio supports Windows, Linux, and macOS hosts.
 
 Arm Development Studio supports Windows and Linux hosts.
 

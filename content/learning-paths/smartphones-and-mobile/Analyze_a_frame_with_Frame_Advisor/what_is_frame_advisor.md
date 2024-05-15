@@ -14,7 +14,7 @@ To see Frame Advisor in action, [watch this video](https://developer.arm.com/Add
 
 1. [Download the Arm Performance Studio package](https://developer.arm.com/downloads/view/MOBST-PRO0) from the Arm Developer website. You’ll need to log in with an Arm account to access the downloads. If you don’t already have one, you can create one easily for free.
 
-    Arm Performance Studio is available for Windows, Linux, and MacOS platforms. See this [Install Guide](/install-guides/ams) for installation instructions.
+    Arm Performance Studio is available for Windows, Linux, and macOS platforms. See this [Install Guide](/install-guides/ams) for installation instructions.
 
 1. Frame Advisor uses [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb) to capture data from your device, so you’ll need to install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html), and add the path to ADB to your `PATH` environment variable.
 

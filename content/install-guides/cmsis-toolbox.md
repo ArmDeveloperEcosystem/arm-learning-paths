@@ -36,7 +36,7 @@ It is also used for the creation and maintenance of such packs.
 
 `CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://www.open-cmsis-pack.org).
 
-Windows, Linux, and MacOS host platforms are supported.
+Windows, Linux, and macOS host platforms are supported.
 
 The below assumes Ubuntu Linux on an Arm based host. Instructions are similar for other platforms.
 

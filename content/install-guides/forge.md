@@ -63,7 +63,7 @@ To install to the default directory, non-interactively:
 linaro-forge-23.0-linux-aarch64/textinstall.sh --accept-license /home/ubuntu/linaro/forge/23.0
 ```
 
-### Install on MacOS (remote client only)
+### Install on macOS (remote client only)
 
 Drag and drop the client application bundle icon into the Applications directory.
 
