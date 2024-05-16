@@ -26,48 +26,77 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Windows Sandbox is a lightweight desktop environment from Microsoft that lets you safely run your applications in isolation. Software that is installed in the Windows Sandbox environment is completed isolated from the host machine. You can install Windows Sandbox on an Arm machine running Windows 11, version 22H2 and later. 
+Windows Sandbox is a lightweight desktop environment from Microsoft that enables you to safely run and test applications in isolation. Software installed in Windows Sandbox is completely isolated from the host machine. When the sandbox is closed your installed software is deleted. You can create a new sandbox and start your testing again.
 
-A number of developer ready Windows on Arm [devices](../../learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
+You can install Windows Sandbox on an Arm device running Windows 11, version 22H2 and later. 
 
-Windows on Arm instances are available with Microsoft Azure. For more information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](../../learning-paths/cross-platform/woa_azure/).
+A number of developer-ready [Windows on Arm devices](../../learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
 ## Enable Virtualization
-To run Windows Sandbox, you need to ensure that virtualization is enabled on your machine.
 
-Ensure that Arm machine is running Windows 11, version 22H2 or later.
- 
-On a physical machine, virtualization is enabled in the BIOS. To verify, go through the following steps:
+To run Windows Sandbox, you need to make sure that virtualization is enabled on your device.
+
+On a physical machine, virtualization is enabled in the BIOS. 
+
+Use the following steps to check the virtualization settings:
 
 * Right click on the Windows Start Menu and select Terminal(Admin)
 
-* Run `systeminfo.exe` on your Windows Terminal and press Enter
+* Enter `systeminfo.exe` and press Enter
 
-Details about your system will be printed on the terminal. Check the `Hyper-V requirements` section at the bottom of the Window. Verify that that the Virtualization Enabled in Firmware option says Yes.
+Details about your system will be printed on the terminal. 
 
-![Install #center](/install-guides/_images/sandbox_virt_0.png)
+Check the `Hyper-V requirements` section at the bottom of the Window. 
 
-If the Hyper-V requirements section displays the following message "A hypervisor has been detected. Features required for Hyper-V will not be displayed.", it means that some virtualization technology is installed and you can proceed with enabling Windows Sandbox.
+If you see:
 
-![Install #center](/install-guides/_images/sandbox_virt_1.png)
+`Virtualization Enabled in Firmware: Yes` 
 
-{{% notice Note %}} If this message is not displayed or the Virtualization Enabled in Firmware option says No, you will have to enable virtualization in your BIOS. The BIOS settings for Virtualization can vary depending on your physical device but is generally found under Advanced settings. {{% /notice %}}
+as shown in the picture below, then you are ready to use Windows Sandbox.
 
-With virtualization now enabled, you can proceed to installing Windows Sandbox on your machine.
+![Virtualization 1](/install-guides/_images/sandbox_virt_0.png)
+
+If you see:
+
+`A hypervisor has been detected. Features required for Hyper-V will not be displayed.` 
+
+as shown in the picture below, it also means you are ready to use Windows Sandbox.
+
+![Virtualization 2 #center](/install-guides/_images/sandbox_virt_1.png)
+
+{{% notice Note %}} If you don't see any messages about Hyper-V Requirements or you see 
+
+`Virtualization Enabled in Firmware: No` 
+
+then you need to enable virtualization in your BIOS. 
+
+The BIOS settings for Virtualization can vary depending on your device but are generally found under Advanced settings. 
+{{% /notice %}}
+
+With virtualization now enabled, you can install Windows Sandbox.
 
 ## Install Windows Sandbox
 
 {{% notice Note %}}
-You must enable Windows Sandbox on a physical Windows on Arm machine. It cannot be enabled on a virtual machine such as an Azure Arm instance running Windows 11. 
+You must enable Windows Sandbox on a physical Windows on Arm device. It cannot be enabled on a virtual machine such as an Azure Arm instance running Windows 11. 
 {{% /notice %}}
 
-On the Windows search bar type "Turn Windows Features on or off". 
-From the Windows Features list, select Windows Sandbox and then click OK. Restart your computer if you are prompted.
+On the Windows search bar type "turn windows features on or off" and open the Control panel. 
+
+From the Windows Features list, select Windows Sandbox and then click OK. 
 
 ![Install #center](/install-guides/_images/sandbox_1.png)
 
-After your machine restarts, click on the Start menu and select Windows Sandbox. 
+If prompted, Restart your computer.
+
+After your computer restarts, click on the Start menu and select Windows Sandbox. 
 
 It will take a few minutes for Windows Sandbox to launch. 
 
-You are now ready to use Windows Sandbox on your Windows on Arm machine. 
+You are now ready to use Windows Sandbox on your computer.
+
+You can install software and perform any other testing activities in the temporary sandbox.
+
+When you exit Windows Sandbox the software you installed and any changes you made in the sandbox will be gone. 
+
+More information is available about the [Windows Sandbox architecture](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-architecture)
