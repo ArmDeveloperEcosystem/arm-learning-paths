@@ -35,7 +35,7 @@ Windows on Arm instances are available with Microsoft Azure. For more informatio
 ## Enable Virtualization
 To run Windows Sandbox, you need to ensure that virtualization is enabled on your machine.
 
-Ensure that your Windows on Arm physical or cloud instance is running Windows 11, version 22H2 or later.
+Ensure that Arm machine is running Windows 11, version 22H2 or later.
  
 On a physical machine, virtualization is enabled in the BIOS. To verify, go through the following steps:
 
@@ -52,13 +52,6 @@ If the Hyper-V requirements section displays the following message "A hypervisor
 ![Install #center](/install-guides/_images/sandbox_virt_1.png)
 
 {{% notice Note %}} If this message is not displayed or the Virtualization Enabled in Firmware option says No, you will have to enable virtualization in your BIOS. The BIOS settings for Virtualization can vary depending on your physical device but is generally found under Advanced settings. {{% /notice %}}
-
-On a virtual cloud machine, you need to enable nested virtualization. On your virtual machine, bring up `Powershell` and run the following commands:
-
-```command
-Set-VMProcessor -VMName <VMName> -ExposeVirtualizationExtensions $true
-Update-VMVersion -VMName <VMName>
-```
 
 With virtualization now enabled, you can proceed to installing Windows Sandbox on your machine.
 
