@@ -12,7 +12,7 @@ layout: "learningpathall"
 Now, you will prepare your GitHub repository as follows:
 
 1. Go to GitHub and log in with your account credentials.
-2. In the top right corner, click the + dropdown and select Import repository
+2. In the top right corner, click the + dropdown and select Import repository.
 
 ![img5](Figures/05.png)
 
