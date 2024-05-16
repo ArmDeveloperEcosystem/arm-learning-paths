@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 ## Prepare the Runner
-When using self-hosted runners, you are responsible for patching the operating system and installing all the software required to build the application. In this learning path, we use the .NET SDK and Docker. Therefore, you need to install these components.
+When using self-hosted runners, you are responsible for patching the operating system and installing all the software required to build the application. In this learning path, you use the .NET SDK and Docker. Therefore, you need to install these components.
 
 For Ubuntu 22.04, the Docker installation process is as follows:
 
