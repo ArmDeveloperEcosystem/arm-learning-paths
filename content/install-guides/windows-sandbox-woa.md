@@ -57,6 +57,10 @@ With virtualization now enabled, you can proceed to installing Windows Sandbox o
 
 ## Install Windows Sandbox
 
+{{% notice Note %}}
+You must enable Windows Sandbox on a physical Windows on Arm machine. It cannot be enabled on a virtual machine such as an Azure Arm instance running Windows 11. 
+{{% /notice %}}
+
 On the Windows search bar type "Turn Windows Features on or off". 
 From the Windows Features list, select Windows Sandbox and then click OK. Restart your computer if you are prompted.
 
