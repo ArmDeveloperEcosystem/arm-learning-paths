@@ -15,7 +15,7 @@ You can get the Zephyr source, install the Zephyr SDK, build sample applications
 
 ## Host platform
 
-Zephyr SDK is available on Windows, Linux, and MacOS hosts. However the FVP is only available for Windows and Linux hosts.
+Zephyr SDK is available on Windows, Linux, and macOS hosts. However the FVP is only available for Windows and Linux hosts.
 
 These instructions assume an Ubuntu Linux host machine or use of Arm Virtual Hardware (AVH).
 

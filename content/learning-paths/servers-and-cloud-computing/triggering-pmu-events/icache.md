@@ -1,6 +1,6 @@
 ---
 title: L1 Instruction Cache Events
-weight: 5
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
