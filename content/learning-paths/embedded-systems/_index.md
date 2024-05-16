@@ -1,6 +1,6 @@
 ---
 differentiating_info:
-- Linux IoT
+- Linux and Windows IoT
 - Automotive
 - Storage
 key_ip:
