@@ -2,57 +2,18 @@
 # User change
 title: "Use Self-Hosted Arm64-Based Runners in GitHub Actions"
 
-weight: 2
+weight: 3
 
 layout: "learningpathall"
 ---
+In this Learning Path, you discover how to configure and use an Arm64 runner that builds a .NET application for Arm64. Additionally, the CI/CD pipeline you create generates an Arm64 Docker image of the application and then pushes the image to a Docker Hub repository.
 
-## Introduction
-GitHub Actions is a continuous integration and continuous deployment (CI/CD) platform that enables developers to automate their workflow directly within their GitHub repository. It facilitates the creation of workflows for building, testing, and deploying code based on various events, such as a push to a repository or a pull request. This automation streamlines the process of integrating changes and deploying them to production, fostering a more efficient and consistent development cycle.
+Before completing this Learning Path you can complete the Hello World [example](learning-paths/laptops-and-desktops/windows_cicd_github/), which provides a basic "hello world" scenario. You will be able to extend that knowledge here with a comprehensive set of operations critical for real-world application deployment:
 
-A powerful feature of GitHub Actions is its support for self-hosted runners. Unlike the default runners hosted by GitHub, self-hosted runners allow developers to execute their CI/CD pipelines on their own hardware. This capability is particularly vital when custom hardware configurations are necessary. For example, developers can use Arm64-based runners to build software specifically for Arm64 architectures, ensuring compatibility and optimizing performance for software intended to run on devices and servers powered by Arm64 processors.
-
-Utilizing self-hosted runners with GitHub Actions offers flexibility and control, enabling teams to tailor the CI/CD process to meet their specific hardware and network requirements. Advantages include the use of custom hardware configurations not available in the hosted environment, the ability to run jobs in a private network environment, and reduced build and deployment times by leveraging high-performance or specialized hardware. Integrating self-hosted runners into their development workflow allows teams to align their development, testing, and deployment processes more closely with their operational environment, thereby enhancing the efficiency and reliability of their software delivery pipeline.
-
-In this learning path, you will discover how to configure and use an Arm64 runner that will build a .NET application for Arm64. Additionally, the CI/CD pipeline we will create is designed to generate an Arm64 Docker image of the application and then push the image to a Docker Hub repository.
-
-Before completing this learning path you can complete the Hello World [example](learning-paths/laptops-and-desktops/windows_cicd_github/), which provides a basic "hello world" scenario. You will be able to extend that knowledge here with a comprehensive set of operations critical for real-world application deployment:
 1. Environment Setup: It includes detailed steps on preparing the self-hosted runner with necessary tools like the required .NET SDK and Docker, which are essential for building real applications, not just running simple scripts.
 2. Complex Workflow Configuration: this learning path demonstrates how to use GitHub Actions to manage complex workflows involving multiple jobs and steps, along with job dependencies, which are crucial for sophisticated CI/CD pipelines.
 3. Building and Deployment: this learning path shows how to build an ASP.NET application, create a Docker image of the application, and then push this image to a Docker repository on DockerHub.
 4. Security Practices: we’ve incorporated best practices for security by using GitHub secrets to securely store and retrieve credentials necessary for DockerHub, ensuring sensitive information is handled securely.
-
-## Before you start
-To complete this learning path, you will need the following:
-1. A DockerHub account. You can set up a free account [here](https://hub.docker.com/signup)
-2. A GitHub account. You can sign up [here](https://github.com/signup)
-3. An Arm64-powered machine, either virtual or physical. For this learning path, we will be using an Arm64-powered VM with Ubuntu 22.04.
-
-## Setting up the DockerHub repository
-First, create a repository on DockerHub by following these steps:
-1. Log in to DockerHub, then click on Repositories at the top.
-2. Under Repositories, click the Create repository button:
-
-![img1](Figures/01.png)
-
-3. In the Create repository window, set the repository name to sampleapp and change the repository visibility to Private. 
-
-![img2](Figures/02.png)
-
-4. Click the Create button. This will create the repository and redirect you back to the repositories list. Note the Docker push command. It should look like: docker push <YOUR_ACCOUNT_NAME>/sampleapp:tagname
-
-![img3](Figures/03.png)
-
-Now you will need to generate the access token to enable the workflow to authenticate to DockerHub. To create the access token: 
-1. Click on your username in the top-right corner of the Docker Hub site.
-2. From the dropdown menu, select My Account, and then click the Security tab on the left:
-
-![img4](Figures/04.png)
-
-3. Click the New Access Token button. This opens the New Access Token window, in which:
-* Type ci-cd for the token name
-* Select Read,Write,Delete permissions and then click the Generate button
-4. A Copy Access Token window appears.  Ensure you copy and safely store the generated access token.. 
 
 ## Prepare GitHub repository 
 Now, you will prepare your GitHub repository as follows:

@@ -2,7 +2,7 @@
 # User change
 title: "Running CI/CD pipeline"
 
-weight: 3
+weight: 4
 
 layout: "learningpathall"
 ---
