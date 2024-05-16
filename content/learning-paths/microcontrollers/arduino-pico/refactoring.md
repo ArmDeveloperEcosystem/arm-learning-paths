@@ -45,7 +45,7 @@ void loop() {
 }
 ```
 
-As you can see, the nested if/else blocks have been replaced by a single check: `if (motionDetected)`. If it's true then call the helper functions `ledOff()`, `doBeep()`, and `ledOn()`, increment the counter, and write the new value to the serial console. 
+As you can see, the nested if/else blocks have been replaced by a single check, `if (motionDetected)`. If it's true, call the helper functions `ledOff()`, `doBeep()`, and `ledOn()`, increment the counter, and write the new value to the serial console. 
 
 You'll notice that you don't need the "cooling off" code anymore. That's because the `RISING` interrupt won't happen again until the PIR sensor has cooled off, returning `motionPin` to a `LOW` state.
 
@@ -55,6 +55,6 @@ Finally, you do have to set `motionDetected = false` because the event has been 
 
 That's it! You have learned how to use interrupts. You can see how much smaller and simpler the use of interrupts makes things, even for an example that was small and simple to begin with.
 
-Not only that, but using interrupts makes other improvements possible. For example, you could stop the `loop()` and put the device into a very low-power state while no motion is detected, and let the interrupt power it back up to respond.
+Not only that but using interrupts makes other improvements possible. For example, you could stop the `loop()` and put the device into a very low-power state while no motion is detected, and let the interrupt power it back up to respond.
 
 You can download the complete [pir_sensor.ino](../pir_sensor_2.ino) and try it out yourself.

@@ -20,7 +20,7 @@ In this learning path, you will download a popular [RoBERTa sentiment analysis](
 
 ## Install dependencies
 
-The Hugging Face Transformers library provides APIs and tools that let you easily download and train pre-trained models. Hugging Face Transformers support multiple machine learning frameworks like PyTorch, TensorFlow and JAX. You will use Transformers with PyTorch to download the model from Hugging Face.
+The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers support multiple machine learning frameworks like PyTorch, TensorFlow and JAX. You will use Transformers with PyTorch to download the model from Hugging Face.
 
 To install the Transformers library for PyTorch, run the following command:
 
@@ -28,7 +28,7 @@ To install the Transformers library for PyTorch, run the following command:
 pip install 'transformers[torch]'
 ```
 
-The RoBERTa sentiment analysis NLP model uses SciPy, an open source Python library used to solve scientific and mathematical problems. To install SciPy, run the following command:
+The full classification example script used in this learning path uses SciPy, an open source Python library to process the inference output from the NLP model. To install SciPy, run the following command:
 
 ```bash 
 pip install scipy
@@ -43,7 +43,7 @@ from transformers import AutoModelForSequenceClassification
 from transformers import TFAutoModelForSequenceClassification
 from transformers import AutoTokenizer, AutoConfig
 import numpy as np
-ifrom scipy.special import softmax
+from scipy.special import softmax
 import transformers
 transformers.logging.set_verbosity_error()
 # Preprocess text (username and link placeholders)

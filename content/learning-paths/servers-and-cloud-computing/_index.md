@@ -8,7 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
-- Linux: 74
+- Linux: 78
 - macOS: 1
 - Windows: 4
 pinned_modules:
@@ -23,7 +23,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 5
 - ML: 4
-- Performance and Architecture: 22
+- Performance and Architecture: 26
 - Storage: 1
 - Web: 7
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -33,18 +33,18 @@ tools_software_languages_filter:
 - 5G: 1
 - Alibaba: 2
 - Ansible: 2
-- Arm Development Studio: 2
+- Arm Development Studio: 4
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
 - ASP.NET Core: 2
-- Assembly: 2
+- Assembly: 3
 - AWS: 14
 - AWS CodeBuild: 1
 - Azure: 12
 - Bastion: 3
 - BOLT: 1
-- C: 1
+- C: 2
 - C#: 1
 - CCA: 2
 - Clair: 1
@@ -54,8 +54,9 @@ tools_software_languages_filter:
 - ClickHouse: 1
 - Coding: 13
 - Django: 1
-- Docker: 11
+- Docker: 12
 - ECS: 1
+- EKS: 1
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
@@ -90,7 +91,7 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
-- Python: 3
+- Python: 4
 - PyTorch: 2
 - Redis: 3
 - Remote.It: 2
@@ -105,7 +106,7 @@ tools_software_languages_filter:
 - Telemetry: 1
 - TensorFlow: 1
 - Tensorflow: 1
-- Terraform: 12
+- Terraform: 11
 - Trusted Firmware: 1
 - TypeScript: 1
 - Vectorscan: 1

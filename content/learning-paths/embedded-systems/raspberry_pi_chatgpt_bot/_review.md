@@ -8,7 +8,7 @@ review:
             - "False"
         correct_answer: 2                
         explanation: >
-            OpenAI offers a number of different of voices.
+            OpenAI offers a number of different voices.
 
     - questions:
         question: >

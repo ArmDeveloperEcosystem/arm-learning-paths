@@ -1,0 +1,4 @@
+{{- $format := ( .Get 0 ) -}}
+{{- $file := ( .Get 1 ) -}}
+
+{{- ( print "```" $format "\n" ( readFile $file ) "\n" "```" ) | markdownify -}}

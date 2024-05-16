@@ -33,7 +33,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Download installer packages
 
-Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits). It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+Socrates is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
+
+It is available to download via the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
 
 You can download Socrates as an individual standalone component, or you can download the complete success kits.
 
@@ -59,9 +61,18 @@ See also the output of:
 ./ARM-Socrates-1.8.0.1-Linux-x86-64-Install --help
 ```
 
+## Set up the product license
+
+Arm Socrates is license managed. License setup instructions are available in the [Arm License install guide](../license/).
+
+Configuration of some Arm IP products require a corresponding license for that IP.
+
+Full details are provided in the [Installation Guide](https://developer.arm.com/documentation/101400/latest/Setting-up-licensing), as well as the Release Notes provided within the downloaded tarball.
+
+
 ## Update IP Catalog
 
-You will first need to update the `IP Catalog` within the IDE.
+You will need to update the `IP Catalog` within the IDE for the first usage.
 
 A short-cut should pop-up, else navigate the menu to `Window` > `Preferences` > `IP Catalog` > `Updates`, and click `Check for updates`.
 
@@ -69,13 +80,6 @@ Click `Install IP Catalog Updates` if needed.
 
 Click `Apply and Close` when complete.
 
-## Set up the product license
-
-Arm Socrates Tool is license managed. License setup instructions are available in the [Arm License install guide](../license/).
-
-Configuration of some Arm IP products require a corresponding license for that IP.
-
-Full details are provided in the [Installation Guide](https://developer.arm.com/documentation/101400/latest/Setting-up-licensing).
 
 ## Get started
 

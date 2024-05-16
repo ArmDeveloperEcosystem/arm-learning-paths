@@ -7,11 +7,10 @@ weight: 5
 layout: "learningpathall"
 ---
 
-The AWS Graviton Technical Guide includes a [a list of Independent Software Vendor (ISV) products](https://github.com/aws/aws-graviton-getting-started/blob/main/isv.md) which support Arm. 
+The [Software Ecosystem Dashboard for Arm](https://www.arm.com/developer-hub/ecosystem-dashboard/servers-and-cloud-computing) is a list of software with information to help you migrate to Arm. The data is maintained on GitHub and is open for community contribution. 
 
-Thank you to the AWS Graviton team for creating it. 
+The AWS Graviton Technical Guide is another resource which includes a [a list of Independent Software Vendor (ISV) products](https://github.com/aws/aws-graviton-getting-started/blob/main/isv.md) which support Arm. Thank you to the AWS Graviton team for creating it. 
 
-If you notice anything missing or want to give feedback you can open an issue in this GitHub repository. 
+If you discover anything missing or want to give feedback you can open an issue in the GitHub repository of the Ecosystem Dashboard for Arm or the AWS Graviton Technical Guide. 
 
-You can also submit an issue or a pull request on the [AWS repository](https://github.com/aws/aws-graviton-getting-started)
 

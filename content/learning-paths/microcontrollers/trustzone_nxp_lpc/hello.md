@@ -8,7 +8,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you start
+## Before you begin
 
 Install [Keil MDK](/install-guides/mdk) and [Arm Compiler for Embedded](/install-guides/armclang) on a Windows machine and connect the NXP LPCXpresso55S69 board to it.
 

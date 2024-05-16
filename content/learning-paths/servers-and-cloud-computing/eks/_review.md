@@ -12,33 +12,34 @@
 review:
     - questions:
         question: >
-            Amazon EKS work with AWS Fargate.
+            You can use Amazon EKS to create a Kubernetes cluster with Arm-based Graviton processors.
         answers:
             - "True"
             - "False"
         correct_answer: 1
         explanation: >
-            You can run Kubernetes applications as serverless containers using AWS Fargate and Amazon EKS.
+            You can run Kubernetes applications in EKS using Graviton processors.
 
     - questions:
         question: >
-            Terraform is an Infrastructure as Code (IaC) solution created by AWS.
+            What is the name of the command line tool for working with Kubernetes clusters?
         answers:
-            - "True"
-            - "False"
-        correct_answer: 2
+            - "helm"
+            - "eksctl"
+            - "kubectl"
+        correct_answer: 3
         explanation: >
-            Terraform is not specific to AWS and was created by HashiCorp.
+            kubectl is the command line tool you can use to communicate with a Kubernetes API server. It can be used for any implementation of Kubernetes. 
 
     -  questions:
         question: >
-            Kubernetes cluster can be updated to a new version.
+            EKS clusters can be updated to a new version of Kubernetes software without stopping the cluster.
         answers:
             - "True"
             - "False"
         correct_answer: 1
         explanation: >
-            Amazon EKS performs managed, in-place cluster upgrades for both Kubernetes and Amazon EKS platform versions.
+            Amazon EKS performs managed and in-place cluster upgrades for both Kubernetes and Amazon EKS platform software.
 
 
 # ================================================================================

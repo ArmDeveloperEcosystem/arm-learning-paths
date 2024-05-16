@@ -1,7 +1,7 @@
 ---
 title: Migrating applications to Arm servers
 
-minutes_to_complete: 30
+minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers looking to migrate applications to Arm servers.
 

@@ -6,12 +6,12 @@ weight: 5
 layout: learningpathall
 ---
 
-At this point you have a working memory allocator that tags the memory it manages.
-In this section we will show you a few classic memory allocaton mistakes that
-this alloctor can prevent because it uses memory tagging.
+At this point, you have a working memory allocator that tags the memory it manages.
+In this section we will show you a few classic memory allocation mistakes that
+this allocator can prevent because it uses memory tagging.
 
-**Note:** The allocator used here is a demo and therefore does not make optimal
-use of memory tagging. From both a security and performance point of view. Any
+**Note:** the allocator used here is a demo and, therefore, does not make optimal
+use of memory tagging from either a security or performance point of view. Any
 production code should be rigorously tested.
 
 ## How to Use These Examples
@@ -27,17 +27,17 @@ and send it to the program. To explain the memory tag faults, `main.c`
 includes a signal handler that is aware of memory tagging.
 
 `handle_segv` is called whenever there is a segmentation fault, which we assume
-in our case to always be memory tagging related. When the signal is recieved,
+in our case to always be memory tagging related. When the signal is received,
 `handle_segv` will print output to tell you that an exception
 has happened along with the pointer that was used and the allocation tag of the
 memory it points to.
 
-In addition the handler attempts to diagnose the problem. This detection will
+In addition, the handler attempts to diagnose the problem. This detection will
 only catch the common cases and may misdiagnose others.
 
 ## Buffer Overflow Example
 
-To try this exploit call `buffer_overflow()` from `main`. You can do that by uncommenting the call to the function in `main.c` and rebuilding `demo`.
+To try this exploit call `buffer_overflow()` from `main`. You can do this by uncommenting the call to the function in `main.c` and rebuilding `demo`:
 
 ```text
 Program caused an asynchronous memory tag fault.
@@ -56,7 +56,7 @@ char *ptr = simple_malloc(12);
 char *ptr2 = simple_malloc(12);
 ```
 
-As our allocator is very predictable we know these will be sequential (minus
+As our allocator is very predictable, we know these will be sequential (minus
 padding, more on that later) in memory.
 
 ```text
@@ -78,13 +78,13 @@ to use `ptr1` (tag 1) to access the allocation at `ptr2` (which expects tag 2).
 This generates the exception.
 
 Note that even though the program allocated only 4 bytes, this got padded to 16.
-So in fact, the program can overflow into the padding space before it would
-get to `ptr2`'s allocation. This could be considered a flaw, but in terms of
-data integrity it's not an issue because the contents of the `ptr2` allocation
-are not at risk. Though if you can fix issues like this, you should do so.
+So, in fact, the program can overflow into the padding space before it would
+get to `ptr2`'s allocation. This could be considered a flaw but in terms of
+data integrity, it's not an issue because the contents of the `ptr2` allocation
+are not at risk. That said, if you can fix issues like this, you should do so.
 
 The use of `0` to tag free memory means that if this overflow were from `ptr2`
-into the free memory, it would also be detected. As we know that a pointer
+into the free memory, it would also be detected as we know that a pointer
 to allocated memory will never have a `0` tag.
 
 The final detail here is that when using random tag values, a buffer
@@ -100,12 +100,12 @@ Ranges:
 ```
 
 Now we will not detect the buffer overflow because the tags still match.
-A smarter allocator could avoid this by randomising tags, but excluding the tags
+A smarter allocator could avoid this by randomizing tags and excluding the tags
 immediately surrounding the new allocation.
 
 ## Use After Free Example
 
-To try this exploit, call `use_after_free` from `main`. You can do that by uncommenting the call to the function in `main.c` and rebuilding `demo`.
+To try this exploit, call `use_after_free` from `main`. You can do this by uncommenting the call to the function in `main.c` and rebuilding `demo`:
 
 ```
 Program caused an asynchronous memory tag fault.
@@ -116,7 +116,7 @@ Program tried to access unallocated memory, or use after free.
 ```
 
 A use after free happens when you allocate memory, free that memory, then
-attempt to access the memory again. You should not do this, but without memory
+attempt to access the memory again. Note that you should not do this but, without memory
 tagging or other sanitizers, nothing prevents you from doing so.
 
 We can see that this has happened here because the pointer used to access memory
@@ -137,22 +137,22 @@ Ranges:
   [0x0000400000802070 -> 0x0000400000803000) : [memory tag: 0x0] [     free, size = 3984 bytes]
 ```
 
-When the allocation was freed, the allocation tags were set to 0. So that
-access to that memory with a non-zero tag would raise an exception. Which is
+When the allocation was freed, the allocation tags were set to 0 so that
+access to that memory with a non-zero tag would raise an exception, which is
 what has happened here.
 
 If not caught, issues like this can lead to memory corruption as the
 memory used for the original allocation may have been reused for a different
-allocation. It may now contain secret data, or data that can alter control flow
+allocation. It may now contain secret data or data that can alter control flow
 in a significant way.
 
 For an allocator that stores its own metadata in the heap (as this allocator does),
-a use after free can also corrupt that metadata. Potentially damaging many
+a use after free can also corrupt that metadata potentially damaging many
 allocations.
 
 ## Double Free Example
 
-To use this example, call `double_free` from `main`.
+To use this example, call `double_free` from `main`:
 
 ```text
 Program attempted an invalid free
@@ -163,10 +163,10 @@ Points to: 0x0000400000802018 Allocation tag: 3
 A double free occurs when memory is allocated, freed and then freed again.
 This should not happen as a single allocation should only allocated once, and freed once.
 
-This may not look like a problem but rememeber that many allocators (including the
+This may not look like a problem but remember that many allocators (including the
 one here) store metadata inside the heap. The second free can trick the allocator
 into updating what it thinks is metadata for the allocation. This metadata may
-now be tracking a different allocation, or even be user data inside of a newer
+now be tracking a different allocation or even be user data inside of a newer
 allocation. Either way, without some kind of protection, the heap would become
 corrupted.
 
@@ -188,7 +188,7 @@ Ranges:
 `ptr2` is the second allocation which, being the same size allocation, is put
 where `ptr` used to be.
 
-`ptr` had tag `1`, `ptr2` will have tag `2`.
+`ptr` has tag `1`, `ptr2` will have tag `2`.
 
 ```text
 Ranges:
@@ -196,11 +196,11 @@ Ranges:
   [0x0000400000802010 -> 0x0000400000803000) : [memory tag: 0x0] [     free, size = 4080 bytes]
 ```
 
-Now when the program calls `simple_free(ptr)` its using a pointer that points
-to the `ptr2` allocation, but does not have logical tag 2.
+Now when the program calls `simple_free(ptr)`, its using a pointer that points
+to the `ptr2` allocation but it does not have logical tag 2.
 
 We could let this fault while `simple_free` attempts to access the
-range's header, but the problem becomes hard to diagnose from there. Instead
+range's header but the problem becomes hard to diagnose from there. Instead,
 `simple_free` has an early check for this specific issue.
 
 ```C
@@ -215,14 +215,14 @@ range's header, but the problem becomes hard to diagnose from there. Instead
 ```
 
 If you are attempting to free memory using an incorrectly tagged pointer,
-this is invalid. This applies whether it actually points to an allocated range,
+this is invalid. This applies whether it actually points to an allocated range
 or to free space. Letting either happen could corrupt the internal structures of the heap.
 
 ## Undefined Malloc And Free Behaviour
 
 The C standard library defines `free` as expecting to be given a pointer that
-is exactly the same as that which was produced by `malloc`. Therefore it is
-undefined behaviour to pass a modified pointer to free. Such as a pointer to
+is exactly the same as that which was produced by `malloc`. Therefore, it is
+undefined behaviour to pass a modified pointer to free, for example, as a pointer to
 the middle of an allocation rather than the start.
 
 This doesn't mean that an implementation can't accept a modified pointer. It
@@ -230,7 +230,7 @@ means that when software passes a modified pointer, it cannot make assumptions
 about what will happen based purely on the C standard.
 
 Some implementations choose to allow differences in the pointer as long as it
-points to the same allocation. Our memory tagging allocator is more strict than
+points to the same allocation. Our memory tagging allocator is stricter than
 that. Despite the pointer's logical tag not changing where it points to, the allocator
 will not allow you to use a pointer with an incorrect tag.
 
@@ -240,12 +240,10 @@ the standard (or rather, left undefined) can be useful for different use cases.
 If you wanted to make our allocator less strict, you could disable tag checking.
 If you want to experiment with that, replacing `PR_MTE_TCF_SYNC` with `PR_MTE_TCF_NONE` is the first step.
 
-An allocator that can vary the strictness of its checks like this can be useful
-for porting existing software that has memory problems.
+An allocator that can vary the strictness of its checks like this can be useful for porting existing software that has memory problems.
 
-* Run the program with strict checks.
-* Find a memory fault.
-* Fix that fault.
-* Run the program without strict checks to confirm the fix did not break any
-  functionality.
-* Repeat the steps until your program is free of memory faults.
+* Run the program with strict checks
+* Find a memory fault
+* Fix that fault
+* Run the program without strict checks to confirm the fix did not break any functionality
+* Repeat the steps until your program is free of memory faults

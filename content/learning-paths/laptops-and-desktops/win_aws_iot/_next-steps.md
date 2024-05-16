@@ -4,7 +4,9 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have now learned how to connect device to AWS IoT Core using Node.js. You can continue learning on how to use web technologies to create desktop applications.
+
+   You have now learned how to create IoT applications with Windows on Arm and AWS IoT Core. You might be interested in learning how to use web technologies for creating cross-platform desktop apps.
+# 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/electron"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
@@ -17,13 +19,13 @@ recommended_path: "/learning-paths/laptops-and-desktops/electron"
 
 further_reading:
     - resource:
-        title: AWS IoT Core
-        link: https://aws.amazon.com/iot-core/
+        title: AWS IoT Core Developer Guide
+        link: https://docs.aws.amazon.com/iot/latest/developerguide
         type: documentation
     - resource:
-        title: Internet of Things
-        link: https://en.wikipedia.org/wiki/Internet_of_things
-        type: website
+        title: Connecting a device to AWS IoT Core by using the AWS IoT Device SDK
+        link: https://docs.aws.amazon.com/iot/latest/developerguide/sdk-tutorials.html
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

@@ -12,7 +12,7 @@ layout: learningpathall
 
 ![](images/Garage2.png)
 
-To use Lumen in your game scene, you need to add a PostProcessVolume actor to your scene. Under PostProcessVolume actor, there are few options you can tweak. During the period of making our Lumen content - "Steel Arms", we found few recommended values for those options wich are suit for Android devices. Figure 1 and 2 shows all option values we were using in "Steel Arms".
+To use Lumen in your game scene, you need to add a PostProcessVolume actor to your scene. Under PostProcessVolume actor, there are few options you can tweak. During the period of making our Lumen content - "Steel Arms", we found few recommended values for those options which are suit for Android devices. Figure 1 and 2 shows all option values we were using in "Steel Arms".
 
 ## Global Illumination Settings
 ![](images/gl-setting.png "Figure1. These global illumination parameters are used in our Lumen content - Steel Arms.")

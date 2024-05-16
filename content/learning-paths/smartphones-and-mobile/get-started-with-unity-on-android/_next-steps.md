@@ -1,5 +1,5 @@
 ---
-next_step_guidance: In future learning paths we will delve into profiling and optimizing more complex cases.
+next_step_guidance: In future learning paths, we will delve into profiling and optimizing more complex cases.
 
 recommended_path: /learning-paths/smartphones-and-mobile/profiling-unity-apps-on-android/
 

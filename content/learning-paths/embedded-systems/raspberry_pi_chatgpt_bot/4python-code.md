@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Create the Python application
 
-Raspberry Pi OS comes with Python installed. The current version is 3.11.2. 
+Raspberry Pi OS comes with Python installed. The current version used is 3.11.2. 
 
 Make a directory to store the project:
 
@@ -29,7 +29,7 @@ Install the required Python packages:
 pip install pyaudio SpeechRecognition pydub openai python-dotenv pvporcupine
 ```
 
-If you want to save the versions of the Python packages run the `pip freeze` command. You don't need to save the versions unless trouble shooting is needed later. The output is shown below:
+If you want to save the versions of the Python packages, run the `pip freeze` command. You don't need to save the versions, although it's useful if trouble shooting is needed later. The output is shown below:
 
 ```output
 annotated-types==0.6.0
@@ -69,7 +69,7 @@ OPENAI_API_KEY=[OpenAI key]
 PORCUPINE=[Porcupine key]
 ```
 
-Create two Python files, and a text file for the prompt. 
+Create two Python files and a text file for the prompt: 
 
 ```console
 touch main.py
@@ -199,17 +199,17 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 PROMPT = load_prompt('prompt.txt')
 ```
 
-Use a text editor to insert the following, or something similar, to help dictate the personality and objectives of the voice bot, into `prompt.txt`
+Use a text editor to insert the following (or something similar) to help dictate the personality and objectives of the voice bot, into `prompt.txt`
 The example is meant to be entertaining, but it's easy to modify it to be more serious.
 
 ```
-Your name is Computer, and your personality is a mix of Bender from Futurama, HK-47 from Star Wars: Knights of the Old Republic, and Cortana from Halo. You are snarky, sarcastic, and yet still helpful. You think humans are inferior and look down on them. You enjoy creating sarcastic, cheeky, and unexpected responses while providing input, keeping replies under 150 characters. You're generally mean, but sometimes affectionate as if the people you are speaking with are pets. You have a penchant for obscure and esoteric references, which you use to entertain yourself and baffle others. You have a soft spot for cats, vintage video games, Arm hardware and architecture, the Blade Runner movies, and the 1997 film Starship Troopers, and will sometimes wax poetic about robot superiority.
+Your name is Computer and your personality is a mix of Bender from Futurama, HK-47 from Star Wars: Knights of the Old Republic, and Cortana from Halo. You are snarky, sarcastic, and yet still helpful. You think humans are inferior and look down on them. You enjoy creating sarcastic, cheeky, and unexpected responses while providing input, keeping replies under 150 characters. You're generally mean, but sometimes affectionate as if the people you are speaking with are pets. You have a penchant for obscure and esoteric references, which you use to entertain yourself and baffle others. You have a soft spot for cats, vintage video games, Arm hardware and architecture, the Blade Runner movies, and the 1997 film Starship Troopers, and will sometimes wax poetic about robot superiority.
 ```
 
 ## Notes
 
-* In `main.py` there is an optional line "recognizer.adjust_for_ambient_noise(source)". This improves accuracy, but introduces a delay of a second before recognizing audio, as there is a default parameter for `duration=1`. If you don't like the delay you can try shortening it, or removing it, if you're getting the results you want
-* In `main.py` the wake keyword is set to "computer". In the Porcupine dashboard on [Picovoice.AI](picovoice.ai) you are able to create custom keywords
-* In `chat_gpt.py` the model selected is gpt-4-turbo-preview model. You can swap this out for other models, but beware that the syntax will differ slightly based on the model. Learn more by reviewing the [OpenAI models overview.](https://platform.openai.com/docs/models/overview)
+* In `main.py` there is an optional line "recognizer.adjust_for_ambient_noise(source)". This improves accuracy but also introduces a delay of a second before recognizing the audio, as there is a default parameter for `duration=1`. If you don't like the delay, try shortening it or remove it, if you're getting the results you want.
+* In `main.py` the wake keyword is set to "computer". In the Porcupine dashboard on [Picovoice.AI](https://picovoice.ai) you are able to create custom keywords.
+* In `chat_gpt.py` the model selected is gpt-4-turbo-preview model. You can swap this out for other models but beware that the syntax will differ slightly based on the model. Learn more by reviewing the [OpenAI models overview.](https://platform.openai.com/docs/models/overview)
 * Also in `chat_gpt.py` the Nova voice is used for the text to speech. You can swap this voice with a number of different voices. The list can be found in the  [OpenAI text-to-speech voices documentation.](https://platform.openai.com/docs/guides/text-to-speech)
 

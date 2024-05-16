@@ -8,12 +8,12 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, the application is broken down to understand some basic concepts of Trustzone which include
+In this section, the application is broken down to understand some basic concepts of Trustzone which include:
 
 * Switching security states
 * Calling secure functions from the non-secure world
 
-## How to switch between security states 
+## Switching security states
 
 Start another debug session with the application. This time, instead of hitting "Run" and viewing the complete output you will walk through some key Trustzone concepts used in this application.
 At the start of execution, the program counter is at the start of `main()` in `hello_world_s.c`. The secure mode copy of the startup code has already been executed right at reset time. 

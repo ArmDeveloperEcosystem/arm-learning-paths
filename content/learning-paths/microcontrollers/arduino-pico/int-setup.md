@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Remove state
 
-Previously you used two variables to keep track of the current value and the previous value of the PIR sensor. 
+Previously, you used two variables to keep track of the current value and the previous value of the PIR sensor. 
 
 The variables were used to identify a change in state that needs a response: 
 
@@ -21,7 +21,7 @@ int motionState = LOW;
 int val = 0;
 ```
 
-The new code does not need to keep track of state, only if state changes.
+The new code does not need to keep track of the state, only if the state changes.
 
 You can replace the two variables with just one:
 
@@ -34,7 +34,7 @@ bool motionDetected = false;
 
 The next thing to do is write the interrupt handling code. 
 
-An interrupt handler is just a function in Arduino. Importantly, this function does not take any arguments, and it doesn't return a value.
+An interrupt handler is just a function in Arduino. Importantly, this function does not take any arguments and it doesn't return a value.
 
 ```arduino
 void motion_detected() {
@@ -52,19 +52,27 @@ Now that the handler function is in place, you need to tell the device when to c
 attachInterrupt(digitalPinToInterrupt(motionPin), motion_detected, RISING);
 ```
 
-The `attachInterrupt` function takes three arguments: the interrupt number, the interrupt handler function, and the interrupt condition. The arguments are described in the next three sections.
+The `attachInterrupt` function takes three arguments: 
+- the interrupt number
+- the interrupt handler function
+- the interrupt condition
+
+The arguments are described in the next three sections.
 
 ### Interrupt number
 
-Depending on the CPU, there can be a number of things that can trigger an interrupt. The CPU gives each of these a number, and you need to look at the documentation for your specific device to know which number corresponds to which trigger. In this Arduino sketch you can use the `digitalPinToInterrupt()` function to lookup the interrupt number for a given pin, such as the `motionPin` variable.
+Depending on the CPU, there can be a number of things that can trigger an interrupt. The CPU gives each of these a number and you need to look at the documentation for your specific device to know which number corresponds to which trigger. In this Arduino sketch, you can use the `digitalPinToInterrupt()` function to look up the interrupt number for a given pin, such as the `motionPin` variable.
 
 ### Interrupt handler
 
-This is a reference to your function. Be sure to use the function name and don't put parenthesis after it or else it will execute the function and pass the return value to `attachInterrupt`, which isn't what you want.
+This is a reference to your function. Be sure to use the function name and don't put parentheses after it or else it will execute the function and pass the return value to `attachInterrupt`, which isn't what you want.
 
 ### Interrupt condition
 
-Depending on your hardware there may be different conditions that can be used to trigger an interrupt. Arduino typically supports `CHANGE`, `FALLING` and `RISING` to trigger based on changes to the pin's input voltage: `FALLING` for a change from `HIGH` to `LOW`, `RISING` for a change from `LOW` to `HIGH`, and `CHANGE` for a change in either direction. 
+Depending on your hardware there may be different conditions that can be used to trigger an interrupt. Arduino typically supports `CHANGE`, `FALLING` and `RISING` to trigger interrupts based on changes to the pin's input voltage: 
+- `FALLING` for a change from `HIGH` to `LOW`
+- `RISING` for a change from `LOW` to `HIGH`
+- `CHANGE` for a change in either direction
 
 Use the `RISING` condition because you only want to do something when the PIR sensor changes from  `LOW` to `HIGH`. 
 

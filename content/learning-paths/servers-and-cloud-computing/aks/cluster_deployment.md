@@ -17,10 +17,10 @@ You should have the prerequisite tools installed before starting the Learning Pa
 
 Any computer which has the required tools installed can be used for this section. The computer can be your desktop or laptop computer or a virtual machine with the required tools.
 
-You will need an [AWS account](https://portal.aws.amazon.com/billing/signup?nc2=h_ct&src=default&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start) to complete this Learning Path. Create an account if you don't have one.
+You will need an [Azure portal account](https://azure.microsoft.com/en-in/get-started/azure-portal) to complete this Learning Path. Create an account if you don't have one.
 
 Before you begin, you will also need:
-- An AWS access key ID and secret access key.
+- Login to the Azure CLI
 - An SSH key pair
 
 The instructions to create the keys are below.

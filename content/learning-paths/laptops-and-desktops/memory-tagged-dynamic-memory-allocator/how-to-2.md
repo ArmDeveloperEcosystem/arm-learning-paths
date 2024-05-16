@@ -6,24 +6,20 @@ weight: 3
 layout: learningpathall
 ---
 
-The source code for the complete project is included in this learning path. 
-
-Aside from the comments in the source, this page will not explain the source code.
-Instead, the following pages will go into detail of memory tagging specific changes
+The source code for the complete project is included in this learning path. We will not explain the source code but, instead, the following sections will go into detail about the memory tagging specific changes
 that were made.
 
 ## Project Structure
 
 The project consists of the following files:
-* `CMakeLists.txt` - Tells `cmake` how to configure the project.
-* `heap.c` and `heap.h` - The dynamic memory allocator.
-* `mte_utils.c` and `mte_utils.h` - Helper functions for handling memory tags.
-  These are used by the heap and the demo application.
-* `main.c` - The program that uses the memory allocator.
+* `CMakeLists.txt` - tells `cmake` how to configure the project
+* `heap.c` and `heap.h` - the dynamic memory allocator
+* `mte_utils.c` and `mte_utils.h` - helper functions for handling memory tags (these are used by the heap and the demo application)
+* `main.c` - the program that uses the memory allocator
 
 ## Software Requirements
 
-Install the required tools using the command:
+Install the required tools using the following command:
 
 ```bash
 sudo apt install -y cmake ninja-build gcc-aarch64-linux-gnu qemu-user
@@ -572,10 +568,9 @@ First, use `cmake` to configure the project:
 cmake . -G Ninja -DCMAKE_C_COMPILER=aarch64-linux-gnu-gcc -DCMAKE_C_FLAGS="-static -march=armv8.5-a+memtag" -DCMAKE_BUILD_TYPE=Debug
 ```
 
-`-march=armv8.5-a+memtag` tells the compiler we want to use the memory tagging extension.
+`-march=armv8.5-a+memtag` tells the compiler that we want to use the memory tagging extension (MTE).
 
-`-static` tells the compiler to build a statically linked binary which is
-standalone. We'll be using QEMU to emulate the binary and having a statically
+`-static` tells the compiler to build a statically linked binary which is standalone. We'll be using QEMU to emulate the binary and having a statically
 linked binary makes this simpler.
 
 Next build the project with `ninja`:
@@ -596,19 +591,18 @@ qemu-aarch64 demo
 
 The exit codes used by the program are:
 
-0. No memory misuse detected.
-1. Memory misuse detected.
-2. Memory Tagging Extension not supported (because your version of QEMU is too
-   old, or your native hardware does not have MTE).
+- 0 - no memory misuse detected
+- 1 - memory misuse detected
+- 2 - MTE not supported (because your version of QEMU is too old or your native hardware does not have MTE).
 
-The command above will return an exit code of 1, this is expected as it is set up
+The command above will return an exit code of 1. This is expected as it is set up
 to run the `double_free` function which causes an MTE exception.
 
 ## Review the program output
 
 The allocator has logging built in to show you what is happening at each step.
 Due to technologies like Address Space Layout Randomisation (ASLR), the output
-may not be exactly the same each time. However the actions of the allocator will
+may not be exactly the same each time. However, the actions of the allocator will
 be the same each time.
 
 This is the typical output:
@@ -621,7 +615,7 @@ Ranges:
 ```
 
 The output above shows the start up of the heap. It has allocated a large amount
-of memory that it has tagged with tag 0, and it has recorded it as a single
+of memory that it has tagged with tag `0` and it has recorded it as a single
 range of free memory.
 
 ```text
@@ -638,19 +632,19 @@ When the program makes a request to the allocator, you will see that in the logs
 In this case the program tries to allocate 4 bytes of memory.
 
 To do this, the allocator had to write to 2 range headers. The first to change
-its size to 16 bytes (due to overhead that you will understand later). The second to
+its size to 16 bytes (due to overhead that will be explained later). The second to
 create a new header to mark the other 4080 bytes of the heap as free.
 
-One thing to note here is that memory addresses for example `0x0100400000802000`
+One thing to note here is that memory addresses, for example `0x0100400000802000`
 include the memory tag value of `1` as you see in the top byte `0x01`.
 
 When the ranges are shown, the pointers include the memory tag but the tag is
-also printed seperately to make it easier to read.
+also printed separately to make it easier to read.
 
-In these cases the logical tag (the tag in the pointer) and the allocation tag
+In these cases, the logical tag (the tag in the pointer) and the allocation tag
 (the tag in the memory) will always be the same. We expect this because we are
 assuming that our allocator has set both correctly.
 
-When we look at memory may be misuse, you will see situations where the logical
+When we look at memory misuse, you will see situations where the logical
 tags from the program do not match the allocation tags set by the allocator.
 This difference is what allows MTE to prevent these problems.

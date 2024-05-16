@@ -39,42 +39,46 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Streamline Performance Analyzer](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) is an application profiler for Android, Linux and bare-metal applications.
 
-Streamline is available as a component of [Arm Mobile Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
+Streamline is available as a component of [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
-The version of Streamline provided with Arm Mobile Studio supports [certain Android targets](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) only.
+The version of Streamline provided with Performance Studio supports [certain Android targets](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices), as well as Linux user-space code.
 
-For other use cases, use the version of Streamline provided with Arm Development Studio.
+For other use cases, use Arm Streamline as provided with Arm Development Studio.
 
 ## Download installer packages
 
 Download the appropriate package from the [Product Download Hub](https://developer.arm.com/downloads).
 
- - [Arm Mobile Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
- - [Arm Development Studio](https://developer.arm.com/downloads/view/DS000B)
+ - [Arm Performance Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
+ - [Arm Development Studio](https://developer.arm.com/downloads/view/DEVST-GLD0)
 
-Arm Mobile Studio supports Windows, Linux, and MacOS hosts.
+Arm Performance Studio supports Windows, Linux, and macOS hosts.
 
 Arm Development Studio supports Windows and Linux hosts.
 
 ## Installation
 
-#### Arm Mobile Studio
+### Arm Performance Studio
 
-Install instructions are given in the Mobile Studio [Release Notes](https://developer.arm.com/documentation/107649).
+Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
-You must also install Android Debug Bridge (`adb`) available with [Android SDK platform tools](https://developer.android.com/studio/releases/platform-tools). Add the Android SDK platform tools directory to your `PATH` environment variable.
+See also the Arm Performance Studio [install guide](../ams/).
 
-#### Arm Development Studio
+If working with an Android target, you must also install Android Debug Bridge (`adb`) available with [Android SDK platform tools](https://developer.android.com/studio/releases/platform-tools).
+
+Add the Android SDK platform tools directory to your `PATH` environment variable.
+
+### Arm Development Studio
 
 Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 
-See also the [Arm Development Studio Install Guide](../armds/).
+See also the Arm Development Studio [install guide](../armds/).
 
 ## Setting up product license
 
-Arm Mobile Studio is free of charge and is not license managed (earlier versions of Mobile Studio Professional Edition required a license).
+Arm Development Studio is license managed. License setup instructions are available in the Arm Software Licensing [install guide](../license/).
 
-Arm Development Studio is license managed. License setup instructions are available in the [Arm Software Licensing install guide](../license/).
+Arm Performance Studio is free of charge and is not license managed.
 
 ## Get started
 
@@ -90,4 +94,6 @@ Depending on your type of application, choose the appropriate guide below to get
 - [Profile your Linux Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Linux-application)
 - [Profile your bare-metal Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-bare-metal-application)
 
-For Android users, a [tutorial](https://developer.arm.com/documentation/102477) is also available.
+For Android users, a thorough [tutorial](https://developer.arm.com/documentation/102477) is also available.
+
+See also the [Get started with Arm Performance Studio](../../learning-paths/smartphones-and-mobile/ams/) learning path.

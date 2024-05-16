@@ -9,8 +9,7 @@ review:
             - Both, a combination of software and hardware
         correct_answer: 3
         explanation: >
-            Memory tag checks are done by the CPU, but software must set those tags
-            and choose their values appropriately.
+            Memory tag checks are done by the CPU but software must set those tags and choose their values appropriately.
 
     - questions:
         question: >
@@ -22,8 +21,7 @@ review:
         correct_answer: 2
         explanation: >
             Software may set an allocation tag to any value in the range 0-15.
-            It is convention that the tag 0 is used for newly initialised memory,
-            therefore software may choose to use it only for that purpose.
+            It is convention that the tag 0 is used for newly initialised memory. Therefore, software may choose to use it only for that purpose.
 
     - questions:
         question: >
@@ -34,8 +32,7 @@ review:
             - A variable amount of memory.
         correct_answer: 1
         explanation: >
-            Each allocation tag applies to a "granule". This granule is 16 bytes
-            in size and is at a 16 byte aligned address.
+            Each allocation tag applies to a "granule". This granule is 16 bytes in size and is at a 16 byte aligned address.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
