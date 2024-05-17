@@ -26,9 +26,9 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Windows Sandbox is a lightweight desktop environment from Microsoft that enables you to safely run and test applications in isolation. Software installed in Windows Sandbox is completely isolated from the host machine. When the sandbox is closed your installed software is deleted. You can create a new sandbox and start your testing again.
+Windows Sandbox is a lightweight, desktop environment from Microsoft that enables you to safely run and test applications in isolation. Software installed in Windows Sandbox is completely isolated from the host machine. When the sandbox is closed, your installed software is deleted. You can create a new sandbox and start your testing again.
 
-You can install Windows Sandbox on an Arm device running Windows 11, version 22H2 and later. 
+You can install Windows Sandbox on an Arm device running Windows 11, version 22H2, and later. 
 
 A number of developer-ready [Windows on Arm devices](../../learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
@@ -40,11 +40,11 @@ On a physical machine, virtualization is enabled in the BIOS.
 
 Use the following steps to check the virtualization settings:
 
-* Right click on the Windows Start Menu and select Terminal(Admin)
+* Right-click on the Windows Start Menu and select Terminal(Admin)
 
 * Enter `systeminfo.exe` and press Enter
 
-Details about your system will be printed on the terminal. 
+Details about your system are printed on the terminal. 
 
 Check the `Hyper-V requirements` section at the bottom of the Window. 
 
@@ -64,13 +64,13 @@ as shown in the picture below, it also means you are ready to use Windows Sandbo
 
 ![Virtualization 2 #center](/install-guides/_images/sandbox_virt_1.png)
 
-{{% notice Note %}} If you don't see any messages about Hyper-V Requirements or you see 
+{{% notice Note %}} If you don't see any messages about Hyper-V Requirements or you see: 
 
 `Virtualization Enabled in Firmware: No` 
 
 then you need to enable virtualization in your BIOS. 
 
-The BIOS settings for Virtualization can vary depending on your device but are generally found under Advanced settings. 
+The BIOS settings for Virtualization vary depending on your device, but are generally found under Advanced settings. 
 {{% /notice %}}
 
 With virtualization now enabled, you can install Windows Sandbox.
@@ -97,6 +97,6 @@ You are now ready to use Windows Sandbox on your computer.
 
 You can install software and perform any other testing activities in the temporary sandbox.
 
-When you exit Windows Sandbox the software you installed and any changes you made in the sandbox will be gone. 
+When you exit Windows Sandbox, the software you installed and any changes you made in the sandbox are gone. 
 
-More information is available about the [Windows Sandbox architecture](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-architecture)
+More information is available about the [Windows Sandbox architecture](https://learn.microsoft.com/en-us/windows/security/application-security/application-isolation/windows-sandbox/windows-sandbox-architecture).
