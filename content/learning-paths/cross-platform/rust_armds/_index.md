@@ -1,18 +1,17 @@
 ---
-title: Custom software for simulation with IP Explorer
-draft: false
+title: Build an Embedded Application with Rust and Debug with Arm Development Studio
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for IP Explorer users using the software simulation platforms available.
+who_is_this_for: This is an introductory topic embedded application developers to get started with Rust.
 
 learning_objectives: 
-    - Run a pre-installed example on IP Explorer simulation platform
-    - Create your own example benchmark
-    - Upload and run your benchmark 
+    - Build an embedded application in Rust
+    - Run application on Fixed Virtual Platform
+    - Debug application with Arm Development Studio
 
 prerequisites:
-    - An Arm account that can access IP Explorer
-    - (Optional) A Linux machine with the desired compilers installed
+    - An installation of Arm Development Studio (a 30-day evaluation license is available)
+    - A basic understanding of Rust programming is useful
 
 author_primary: Ronan Synnott
 
