@@ -1,7 +1,7 @@
 ---
-next_step_guidance: You can also learn more about non-cache PMU events. 
+next_step_guidance: You can also learn more about cache PMU events.
 
-recommended_path:  /learning-paths/servers-and-cloud-computing/triggering-pmu-events-2/
+recommended_path:  /learning-paths/servers-and-cloud-computing/triggering-pmu-events/
 
 further_reading:
     - resource:

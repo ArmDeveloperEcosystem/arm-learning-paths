@@ -94,7 +94,6 @@ MPT
 MSBuild
 MSVC
 MVAPICH
-MacOS
 Manjaro
 Multipass
 NIC
