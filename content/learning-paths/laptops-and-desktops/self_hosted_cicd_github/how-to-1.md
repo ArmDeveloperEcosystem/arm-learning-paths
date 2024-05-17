@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 In this Learning Path, you discover how to configure and use an Arm64 runner that builds a .NET application for Arm64. Additionally, the CI/CD pipeline you create generates an Arm64 Docker image of the application and then pushes the image to a Docker Hub repository.
 
-Before completing this Learning Path you can complete the Hello World [example](learning-paths/laptops-and-desktops/windows_cicd_github/), which provides a basic "hello world" scenario. 
+Before completing this Learning Path you can complete the Hello World [example](https://learn.arm.com/learning-paths/laptops-and-desktops/windows_cicd_github/), which provides a basic "hello world" scenario. 
 
-You can extend that knowledge here with a comprehensive set of operations critical for real-world application deployment:
+You will extend that knowledge here with a comprehensive set of operations critical for real-world application deployment:
 
 1. *Environment Set up*: There are detailed steps on preparing the self-hosted runner with the necessary tools such as .NET SDK and Docker, which are essential for building real applications, not just running simple scripts.
  
