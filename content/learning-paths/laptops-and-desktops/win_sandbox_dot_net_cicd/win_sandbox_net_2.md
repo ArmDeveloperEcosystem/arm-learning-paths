@@ -32,8 +32,8 @@ jobs:
 The job includes the following steps:
 1. Checking out the code using actions/checkout@v4.
 2. Setting up .NET using actions/setup-dotnet@v4.
-3. Building the project in Release configuration using the dotnet build -c Release command
-4. Publishing the project in Release configuration using the dotnet publish -c Release command
+3. Building the project in **Release configuration** using the dotnet build -c Release command.
+4. Publishing the project in **Release configuration** using the dotnet publish -c Release command.
 
 ```XML
 steps:
@@ -60,9 +60,9 @@ To run the above pipeline, you can either make modifications to the source code 
 
 Follow the steps below to trigger the pipeline manually:
 
-* Click on the Actions Tab of your repository.
+* Click on the **Actions** tab of your repository.
 * Your workflow named "Deploy TSP Application" appears.
-* Click on the "Run workflow" drop-down and select the "Run workflow" button.
+* Click on the **Run workflow** drop-down and select the **Run workflow** button.
 
 ![img4](win_sandbox_4.png)
 

@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## Overview
 
-In this learning path you will deploy a CI/CD GitHub Actions workflow to build and publish a sample Windows Presentation Foundation (WPF) application that solves a well-known algorithmic problem, the *[Traveling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)*. 
+In this Learning Path, you will deploy a CI/CD GitHub Actions workflow to build and publish a sample Windows Presentation Foundation (WPF) application that solves a well-known algorithmic problem, the *[Traveling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem)*. 
 
 You will learn how to configure and use Windows Sandbox as a self-hosted Arm64 runner to build this sample .NET WPF application. Runners are machines that execute the jobs in the GitHub Actions workflow. A self-hosted runner is a machine that you deploy and manage to execute jobs from GitHub Actions.
 
@@ -22,28 +22,28 @@ All the code you will need to follow this learning path is provided in [this rep
 Start by preparing your GitHub repository:
 
 * Log in to [GitHub](https://github.com) using your account credentials.
-* On the top right corner, click the + dropdown and select `Import repository`.
-* In the Import your project to GitHub section, enter https://github.com/pareenaverma/win-sandbox-dotnet-app in the "The URL for your source repository" field. 
+* On the top right corner, click the + dropdown and select **Import repository**.
+* In the **Import your project to GitHub** section, enter https://github.com/pareenaverma/win-sandbox-dotnet-app in the **The URL for your source repository** field. 
 
 ![img1](win_sandbox_1.png)
 
 * Set the repository name, for example, sandbox-ci-cd-net.
-* Click the "Begin import" button.
+* Click the **Begin import** button.
 
-In a few minutes, the contents of the source repository will be imported into the new repository.
+In a few minutes, the contents of the source repository are imported into the new repository.
  
 ## Configure Windows Sandbox as the self-hosted runner
 
 You are now ready to register Windows Sandbox as your self-hosted Arm64 runner. 
 
-In your imported GitHub repository, go to the Actions tab, and under Management, click on Runners. If you do not see the Actions tab, navigate to Settings > Actions and select Allow all actions and reusable workflows. This will display the following window:
+In your imported GitHub repository, go to the **Actions** tab, and under **Management**, click on **Runners**. If you do not see the **Actions** tab, navigate to **Settings > Actions** and select **Allow all actions** and **reusable workflows**. This will display the following window:
 
 ![img2](win_sandbox_2.png)
 
-Then, click on the "New runner" button, followed by "New self-hosted runner". In the `Add new self-hosted runner` section, proceed as follows:
+Then, click on the **New runner** button, followed by **New self-hosted runner**. In the **Add new self-hosted runner** section, proceed as follows:
 
-* For Runner Image, select "Windows".
-* For Architecture, select "ARM64".
+* For **Runner Image**, select **Windows**.
+* For **Architecture**, select **ARM64**.
 
 
 You will see instructions displayed on this page. These are commands you now need to run in Windows Sandbox to configure it as your self-hosted Arm64 Windows runner.
