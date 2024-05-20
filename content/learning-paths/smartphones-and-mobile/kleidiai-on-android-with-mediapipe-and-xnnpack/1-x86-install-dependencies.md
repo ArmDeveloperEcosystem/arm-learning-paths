@@ -107,33 +107,19 @@ Note: You need the bazel flag 'MEDIAPIPE_DISABLE_GPU=1' since desktop GPU is not
 The output from this test run will be ```Hello World!``` printed ten times, like this:
 
 ```output
-
 INFO: Build completed successfully, 371 total actions
-
 INFO: Running command line: bazel-bin/mediapipe/examples/desktop/hello_world/hello_world
-
 WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-
 I0000 00:00:1715712039.171598 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171651 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171667 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171679 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171719 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171754 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171773 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171804 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171829 59236 hello_world.cc:58] Hello World!
-
 I0000 00:00:1715712039.171859 59236 hello_world.cc:58] Hello World!
-
 ```
 
 

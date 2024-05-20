@@ -1,5 +1,5 @@
 ---
-title: Speeding up Gemma AI execution on Android with KleidiAI, MediaPipe, and XNNPACK
+title: LLM CPU inference on an Android device with KleidiAI, MediaPipe, and XNNPACK
 
 minutes_to_complete: 10
 
