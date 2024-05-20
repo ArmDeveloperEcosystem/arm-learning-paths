@@ -1,6 +1,6 @@
 ---
 title: LL Cache Events
-weight: 7
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

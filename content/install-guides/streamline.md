@@ -49,26 +49,26 @@ For other use cases, use Arm Streamline as provided with Arm Development Studio.
 
 Download the appropriate package from the [Product Download Hub](https://developer.arm.com/downloads).
 
- - [Arm Mobile Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
+ - [Arm Performance Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
  - [Arm Development Studio](https://developer.arm.com/downloads/view/DEVST-GLD0)
 
-Arm Performance Studio supports Windows, Linux, and MacOS hosts.
+Arm Performance Studio supports Windows, Linux, and macOS hosts.
 
 Arm Development Studio supports Windows and Linux hosts.
 
 ## Installation
 
-#### Arm Performance Studio
+### Arm Performance Studio
 
-Install instructions are given in the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
+Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
+
+See also the Arm Performance Studio [install guide](../ams/).
 
 If working with an Android target, you must also install Android Debug Bridge (`adb`) available with [Android SDK platform tools](https://developer.android.com/studio/releases/platform-tools).
 
 Add the Android SDK platform tools directory to your `PATH` environment variable.
 
-See also the Arm Performance Studio [install guide](../ams/).
-
-#### Arm Development Studio
+### Arm Development Studio
 
 Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 

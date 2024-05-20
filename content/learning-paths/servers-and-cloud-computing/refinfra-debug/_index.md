@@ -1,23 +1,25 @@
 ---
-title: Debug the RD-N2 Reference design with Arm Development Studio
-draft: true
+title: Debug Neoverse N2 Reference Design with Arm Development Studio
+
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers interested in testing the reference firmware stack.
+who_is_this_for: This is an advanced topic for software developers who are interested in debugging the Arm Neoverse N2 Reference Firmware Stack.
 
 learning_objectives: 
-    - Create a debug connection
-    - Debug SCP
-    - Debug TF-A
+    - Create a debug connection.
+    - Debug a System Control Processor (SCP).
+    - Debug Arm TF-A (Trusted Firmware-A).
 
 prerequisites:
-    - A computer running Linux. Any architecture can be used.
-    - Can boot reference design software stack on an FVP.
+    - Arm Development Studio, and a license to use it.
+    - An Arm Neoverse Reference Design (RD) Software Stack.
+    - A Fixed Virtual Platform (FVP).
+    - A basic understanding of Neoverse Reference Design (RD) platform boot.
 
 author_primary: Daniel Nguyen
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
