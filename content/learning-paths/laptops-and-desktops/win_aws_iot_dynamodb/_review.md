@@ -31,6 +31,19 @@ review:
         correct_answer: 1
         explanation: >
             Amazon DynamoDB is a fully-managed NoSQL database service, so you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.
+            
+    - questions:
+        question: >
+            What is partitioning used for?
+        answers:
+        answers:
+            - "To format database elements."
+            - "To filter database elements."            
+            - "To allow the database to scale horizontally."
+            - "To allow the database to scale vertically."            
+        correct_answer: 3
+        explanation: >
+            Amazon DynamoDB uses partitioning, which is a mechanism that allows the database to scale horizontally, and distribute large amounts of data across multiple servers while ensuring quick data access and high availability.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
