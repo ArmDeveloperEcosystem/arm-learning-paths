@@ -28,7 +28,7 @@ To install the Transformers library, run the following command:
 pip3 install transformers
 ```
 
-## Build and run a sentiment analyzer using Hugging Face Transformers libary 
+## Build and run a sentiment analyzer using Hugging Face Transformers library  
 
 You are now ready to use python and the Hugging Face transformers library to build a simple sentiment analyzer on your Arm machine. Using a file editor of your choice, create a file named `basic-sentiment-analysis.py` with the code shown below:
 ```python
