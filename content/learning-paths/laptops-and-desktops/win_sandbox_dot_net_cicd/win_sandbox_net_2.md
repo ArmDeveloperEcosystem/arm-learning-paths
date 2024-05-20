@@ -56,13 +56,13 @@ steps:
 This pipeline automates the process of building the .NET application and publishing it on your self-hosted runner.
 
 ## Run the pipeline
-To run the above pipeline, you can either make modifications to the source code and commit these changes to the main branch or you can trigger the pipeline manually. 
+To run the above pipeline, you can either make modifications to the source code and commit these changes to the main branch, or you can trigger the pipeline manually. 
 
 Follow the steps below to trigger the pipeline manually:
 
-* Click on the Actions Tab of your repository
-* Your workflow named "Deploy TSP Application" will appear.
-* Click on the "Run workflow" drop-down and select the "Run workflow" button
+* Click on the Actions Tab of your repository.
+* Your workflow named "Deploy TSP Application" appears.
+* Click on the "Run workflow" drop-down and select the "Run workflow" button.
 
 ![img4](win_sandbox_4.png)
 
