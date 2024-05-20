@@ -13,7 +13,7 @@ In this Learning Path, you will deploy a CI/CD GitHub Actions workflow to build 
 
 You will learn how to configure and use Windows Sandbox as a self-hosted Arm64 runner to build this sample .NET WPF application. Runners are machines that execute the jobs in the GitHub Actions workflow. A self-hosted runner is a machine that you deploy and manage to execute jobs from GitHub Actions.
 
-Self-hosted runners offer more control and flexbility of hardware, software tools, and operating systems than GitHub-hosted runners provide.
+Self-hosted runners offer more control and flexibility of hardware, software tools, and operating systems than GitHub-hosted runners provide.
 
 ## Prepare GitHub repository
 

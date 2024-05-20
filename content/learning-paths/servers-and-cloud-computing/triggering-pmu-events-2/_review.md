@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            ITB_WALK counts page table walks due to TLB maintenance operations.
+            ILTB_WALK counts page table walks due to TLB maintenance operations.
         answers:
             - True
             - False

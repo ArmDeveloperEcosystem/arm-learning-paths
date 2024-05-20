@@ -48,7 +48,7 @@ SELECT * FROM 'Emulators/Weather/SensorReadings'
 9. Scroll down and click the *Next* button. This displays the summary screen, where you click the *Create* button.
 
 ## Test the rule
-Now, everything is set up. The messages sent from the device are automatically inserted as new rows into the SensorReadings table. To check this, run the application from [Create IoT applications with Windows on Arm and AWS IoT Core](laptops-and-desktops/win_aws_iot/). Namely, open the command prompt, change the working directory to AWS.WeatherStation, and then type:
+Now, everything is set up. The messages sent from the device are automatically inserted as new rows into the SensorReadings table. To check this, run the application from [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot). Namely, open the command prompt, change the working directory to AWS.WeatherStation, and then type:
 
 ```console
 npm start
