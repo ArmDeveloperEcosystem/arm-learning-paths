@@ -32,8 +32,8 @@ jobs:
 The job includes the following steps:
 1. Checking out the code using actions/checkout@v4.
 2. Setting up .NET using actions/setup-dotnet@v4.
-3. Building the project in Release configuration using the dotnet build -c Release command
-4. Publishing the project in Release configuration using the dotnet publish -c Release command
+3. Building the project in **Release configuration** using the dotnet build -c Release command.
+4. Publishing the project in **Release configuration** using the dotnet publish -c Release command.
 
 ```XML
 steps:
@@ -56,13 +56,13 @@ steps:
 This pipeline automates the process of building the .NET application and publishing it on your self-hosted runner.
 
 ## Run the pipeline
-To run the above pipeline, you can either make modifications to the source code and commit these changes to the main branch or you can trigger the pipeline manually. 
+To run the above pipeline, you can either make modifications to the source code and commit these changes to the main branch, or you can trigger the pipeline manually. 
 
 Follow the steps below to trigger the pipeline manually:
 
-* Click on the Actions Tab of your repository
-* Your workflow named "Deploy TSP Application" will appear.
-* Click on the "Run workflow" drop-down and select the "Run workflow" button
+* Click on the **Actions** tab of your repository.
+* Your workflow named "Deploy TSP Application" appears.
+* Click on the **Run workflow** drop-down and select the **Run workflow** button.
 
 ![img4](win_sandbox_4.png)
 
@@ -72,7 +72,7 @@ This triggers the CI/CD pipeline. You can monitor the progress of this pipeline 
 
 To check that your application has been published correctly in the last step, you can go to the location of the application inside Windows Sandbox and run it.
 
-The application should be published in your runner folder under "actions-runner\_work\sandbox-ci-cd-net\sandbox-ci-cd-net\TSP.WPF\bin\Release\net8.0-windows7.0\win-arm64\publish\"
+The application should be published in your runner folder under "actions-runner\_work\sandbox-ci-cd-net\sandbox-ci-cd-net\TSP.WPF\bin\Release\net8.0-windows7.0\win-arm64\publish\".
 
 Double-click TSP.WPF to run the application. The application starts as shown:
 ![img6](../win_net/net12.png)
