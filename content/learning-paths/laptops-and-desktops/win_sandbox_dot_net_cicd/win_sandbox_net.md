@@ -76,7 +76,7 @@ Finally, start the runner by executing:
 ./run.sh
 ```
 
-You have sucessfully configured Windows Sandbox as your self-hosted runner and and it is ready to receive jobs. The output should look similar to:
+You have successfully configured Windows Sandbox as your self-hosted runner and and it is ready to receive jobs. The output should look similar to:
 
 ```output
 √ Connected to GitHub

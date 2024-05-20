@@ -72,7 +72,7 @@ This triggers the CI/CD pipeline. You can monitor the progress of this pipeline 
 
 To check that your application has been published correctly in the last step, you can go to the location of the application inside Windows Sandbox and run it.
 
-The application should be published in your runner folder under "actions-runner\_work\sandbox-ci-cd-net\sandbox-ci-cd-net\TSP.WPF\bin\Release\net8.0-windows7.0\win-arm64\publish\"
+The application should be published in your runner folder under "actions-runner\_work\sandbox-ci-cd-net\sandbox-ci-cd-net\TSP.WPF\bin\Release\net8.0-windows7.0\win-arm64\publish\".
 
 Double-click TSP.WPF to run the application. The application starts as shown:
 ![img6](../win_net/net12.png)
