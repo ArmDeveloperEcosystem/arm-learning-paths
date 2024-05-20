@@ -6,13 +6,13 @@ minutes_to_complete: 10
 who_is_this_for: Android developers who want to efficiently run LLMs on-device.
 
 learning_objectives:
-    - Install prerequisites to cross-compiling new inference engines for Android.
+    - Install prerequisites for cross-compiling new inference engines for Android.
     - Run (and benchmark) the Gemma 2B model using the Google MediaPipe ML framework, with XNNPACK as the primative provider.
-    - Add KleidiAI's int4 kernels to XNNPACK, and benchmark the results.
+    - Improve inference efficiency with KleidiAI's int4 kernels via XNNPACK, and benchmark the results.
 
 prerequisites:
     - You will need an x86_64 Linux machine running Ubuntu. This is the host machine to build the binaries on.
-    - You will need an Android Phone with support for i8mm (tested on Pixel 8 Pro)
+    - You will need an Android phone with support for i8mm (tested on Pixel 8 Pro)
 
 author_primary: Pareena Verma, Joe Stech
 
@@ -20,13 +20,17 @@ author_primary: Pareena Verma, Joe Stech
 skilllevels: Advanced
 subjects: ML
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Cortex-A
+    - Cortex-X
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - Java
+    - MediaPipe
+    - Android SDK
+    - Android NDK
+    - Bazel
+    - XNNPACK
 operatingsystems:
-    - Linux, MacOS
+    - Linux
 
 
 ### FIXED, DO NOT MODIFY

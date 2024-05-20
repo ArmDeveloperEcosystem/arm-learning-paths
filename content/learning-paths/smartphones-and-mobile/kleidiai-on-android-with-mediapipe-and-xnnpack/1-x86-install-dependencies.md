@@ -6,8 +6,6 @@ weight: 2
 layout: learningpathall
 ---
 
-## Install dependencies on an x86_64 Linux machine running Ubuntu
-
 ## Dependencies to install
 
 In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local development environment:
@@ -21,13 +19,13 @@ In order to cross-compile your inference engine, you'll need the following insta
 * Android SDK
 * OpenCV
 
-### Install pip3
+#### Install pip3
 
 ```bash
 sudo apt install unzip python3-pip -y
 ```
 
-### Install Java
+#### Install Java
 
 ```bash
 sudo apt-get install openjdk-11-jdk -y
@@ -39,48 +37,45 @@ export PATH=$PATH:$JAVA_HOME
 If you want these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file or similar.
 {{% /notice %}}
 
-### Install Bazel
+#### Install Bazel
 
 To build mediapipe, you will use Bazel version 6.1.1.
 
 ```bash
 wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-6.1.1-installer-linux-x86_64.sh
-
-$ sudo bash bazel-6.1.1-installer-linux-x86_64.sh
+sudo bash bazel-6.1.1-installer-linux-x86_64.sh
 ```
 
-### Clone the Mediapipe repo
+#### Clone the Mediapipe repo
 
 
 ```bash
 git clone --depth 1 https://github.com/google/mediapipe.git
-
 cd mediapipe
 ```
 
-### Install MediaPipe python packages
+#### Install MediaPipe python packages
 
 ```bash
 pip3 install -r requirements.txt
 ```
 
-### Install Android NDK and SDK
+#### Install and configure the Android NDK and SDK
 
-Bazel does not natively support newer versions of NDK, it supports up to r21. Use the script included in mediapipe to install Android NDK and SDK.
+Bazel only natively supports the Android NDK up to version 21. Use the script included in mediapipe to install the Android NDK and SDK:
 
 ```bash
 bash setup_android_sdk_and_ndk.sh
 ```
 
-### Add android_ndk_repository() and android_sdk_repository() rules into the WORKSPACE file:
+Add android_ndk_repository() and android_sdk_repository() rules into the WORKSPACE file:
 
 ```bash
 echo "android_sdk_repository(name = \"/home/ubuntu/Android/Sdk\")" >> WORKSPACE
-
 echo "android_ndk_repository(name = \"/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r21\", api_level=21)" >> WORKSPACE
 ```
 
-### Add NDK bin folder to your PATH variable
+Add the NDK bin folder to your PATH variable:
 
 ```bash
 
@@ -88,17 +83,20 @@ export PATH=$PATH:/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains
 
 ```
 
-### Install OpenCV and its dependencies:
+#### Install OpenCV and its dependencies
 
 In the setup_opencv.sh script change libc1394-22-dev to libc1394-dev due to [libc1394-dev replacing libc1394-22-dev in Ubuntu 21.10.](https://github.com/ros/rosdistro/issues/34921)
 
-Run ```bash setup_opencv.sh```
+```
+bash setup_opencv.sh
+```
+
+### Test your setup
 
 Verify your setup by running a simple hello world example in MediaPipe:
 
 ```bash
 export GLOG_logtostderr=1
-
 bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
 ```
 
