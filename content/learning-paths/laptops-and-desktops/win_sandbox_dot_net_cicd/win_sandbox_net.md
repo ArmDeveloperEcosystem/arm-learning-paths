@@ -7,12 +7,6 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Before you begin
-
-Any Arm computer running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa) can be used for this Learning Path.
-
-You will need a valid [GitHub account](https://github.com/) to complete this Learning Path.
-
 ## Overview
 
 In this learning path you will deploy a CI/CD GitHub Actions workflow to build and publish a sample Windows Presentation Foundation (WPF) application that solves a well-known algorithmic problem: the [Traveling Salesman Problem](https://simple.wikipedia.org/wiki/Travelling_salesman_problem). 
