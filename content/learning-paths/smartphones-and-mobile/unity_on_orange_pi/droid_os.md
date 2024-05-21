@@ -7,7 +7,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## What should I consider before installing Droid OS on the Orange Pi 5?
+## What should I do before installing Droid OS on the Orange Pi 5?
 
 You will need to do these steps on a Windows PC in order to run the required imaging software.
 Currently, all files and documentation are found on a Google Drive belonging to Orange Pi.
