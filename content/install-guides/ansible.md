@@ -23,7 +23,7 @@ Ansible command-line tools can be installed on a variety of Linux distributions.
 
 [General installation information](https://docs.ansible.com/ansible/latest/installation_guide/installation_distros.html) is available which covers all supported operating systems, but it doesn't talk about Arm-based hosts.
 
-## What do I need to do before I start installing the Ansible command line tools?
+## What should I do before I start installing the Ansible command line tools?
 
 This article provides a quick solution to install the Ansible command line tools, such as `ansible-playbook` for Ubuntu on Arm.
 
