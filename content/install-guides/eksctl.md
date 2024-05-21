@@ -25,7 +25,7 @@ The Amazon EKS CLI, `eksctl`, is a command line tool to create and manage Kubern
 
 The EKS CLI is available for a variety of operating systems and Linux distributions and there are multiple ways to install it. It runs on both Arm Linux distributions and Windows on Arm.
 
-## What should I do before installing `eksctl` on Arm Linux and Windows on Arm?
+## What should I do before installing eksctl on Arm Linux and Windows on Arm?
 
 This install guide provides a quick solution to install `eksctl` on Arm Linux and Windows on Arm. 
 
