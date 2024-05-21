@@ -15,9 +15,9 @@ PMU_EVENT_LL_CACHE_MISS_RD,
 PMU_EVENT_INST_RETIRED,
 ```
 
-Excess stores to Normal Cacheable memory will cause allocations into the LL cache if a writeback is issued to the LL cache or if there is a shared cache line. 
+Excess stores to Normal Cacheable memory cause allocations into the LL cache if a writeback is issued to the LL cache or if there is a shared cache line. 
 
-The LL cache is used to describe levels of caches outside of the core. LL caches can be an system level cache (SLC) inside an interconnect such as a mesh, caches in a core in another cluster or in a remote devices. 
+The LL cache is used to describe levels of caches outside of the core. LL caches can be a System Level Cache (SLC) inside an interconnect such as a mesh, caches in a core in another cluster, or in a remote devices. 
 
 In the Neoverse N2 reference system, the SLC is the Last Level cache. A cache line is looked up in the SLC if it is not present in the L1 D-cache or L2 cache in a CPU.
 
@@ -46,6 +46,6 @@ LL_CACHE_MISS_RD is 326
 INST_RETIRED is 976
 ```
 
-`LL_CACHE_RD` counts transactions returned from outside of the N2 (including the SLC). In this scenario, we are only simulating one N2 core in a standalone system, meaning we have no levels of cache after the L2. Thus, `LL_CACHE_RD` will not count. Systems like the reference design RD-N2 have an SLC inside the CMN-700 interconnect, which acts as the LL_CACHE. `LL_CACHE_MISS_RD` is not 0 since it counts read transactions that are returned from outside the N2, excluding the SLC. So, it is likely counting bus read transactions from external system memory or a remote device.
+`LL_CACHE_RD` counts transactions returned from outside of the N2, including the SLC. In this scenario, you are simulating only one N2 core in a standalone system, meaning that there are no levels of cache after the L2. For these reasons, `LL_CACHE_RD` does not count. Systems such as the reference design RD-N2 have an SLC inside the CMN-700 interconnect, which acts as the LL_CACHE. `LL_CACHE_MISS_RD` is not 0 since it counts read transactions that are returned from outside the N2, excluding the SLC. So it is likely counting bus read transactions from external system memory or a remote device.
 
 

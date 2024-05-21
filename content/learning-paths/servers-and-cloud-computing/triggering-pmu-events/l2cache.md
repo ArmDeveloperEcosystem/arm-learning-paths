@@ -102,7 +102,7 @@ INST_RETIRED is 976
 
 Now there are 111 L2 D-cache accesses due to write operations. 
 
-## L2 cache read access
+## L2 Cache Read Access
 
 This code highlights what occurs during an L2 cache read access, caused by a series of loads.
 
@@ -193,7 +193,7 @@ L2D_CACHE_WB_VICTIM is 63
 Due to the stores, there are 63 cache line writebacks, meaning any data that is written from the L2 cache to outside the CPU. All of these writebacks were caused by a new allocation into the L2 cache, counted by `L2D_CACHE_WB_VICTIM`, forcing an eviction chosen by the victim counter.
 
 
-## L2 cache write access
+## L2 Cache Write Access
 
 This code highlights what occurs during an L2 cache write access. In order to trigger this, a series of stores to Normal Cacheable memory to fill up the L1 D-cache will cause an overflow into the L2 cache. 
 

@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Some PMU events will not occur on the Neoverse CPUs if they are not provided by a system component.
+            Some PMU events do not occur on the Neoverse CPUs if they are not provided by a system component.
         answers:
             - True
             - False
@@ -12,7 +12,7 @@ review:
 
     - questions:
         question: >
-            Which of the following events always occurs during an L2 D-cache access from a load instruction?
+            Which of the following events always occur during an L2 D-cache access from a load instruction?
         answers:
             - L2D_CACHE_REFILL
             - L2D_CACHE_RD
@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            What scenario will not trigger L1D_CACHE_WB in a Neoverse N2 core?
+            What scenario does not trigger L1D_CACHE_WB in a Neoverse N2 core?
         answers:
             - A writeback from the L1-D cache as a result of a Cache Maintenance Operation.
             - A full line write to the L2, without writing to the L1 D-cache. 

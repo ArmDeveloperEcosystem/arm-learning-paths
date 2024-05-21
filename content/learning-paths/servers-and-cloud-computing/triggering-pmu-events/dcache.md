@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## L1 Data Cache Events
 
-The following PMU events can be used to measure the effectiveness of the L1 Data Cache: 
+Use these PMU events to measure the effectiveness of the L1 Data Cache: 
 
 ```C
     //L1 D-Cache Effectiveness Metrics
@@ -39,7 +39,7 @@ INST_RETIRED is 100
 
 These stores trigger 65 accesses into the L1 D-cache, counted by `L1D_CACHE`. Event `L1D_CACHE_REFILL` counts 11 refills in the L1 D-cache as these stores were not previously present in the cache, so the CPU allocates these cache lines for future access. 
 
-### L1 Data cache read access
+### L1 Data Cache Read Access
 
 This section describes what happens in the L1 D-cache during a read, which can be triggered by this code:    
 
@@ -68,10 +68,10 @@ MEM_ACCESS_RD is 93
 Additional events that occur with an L1 cache miss:
 `L1D_CACHE_REFILL`, `L1D_CACHE_REFILL_RD`, and `L2 cache read access events`
 
-If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above
+If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above.
 
 If the L1 D-cache was full and the evicted line was dirty: 
-`L1D_CACHE_WB`, `L1D_CACHE_WB_VICTIM`, and the events above 
+`L1D_CACHE_WB`, `L1D_CACHE_WB_VICTIM`, and the events above. 
 
 Note: `L1D_CACHE_REFILL_OUTER` is only counted when cache line allocations into the L1 D-cache are obtained from outside of the cluster. 
 
@@ -115,10 +115,10 @@ MEM_ACCESS_WR is 71
 Additional events that occur with an L1 Cache miss:
 `L1D_CACHE_REFILL`, `L1D_CACHE_REFILL_WR` and `L2 cache read access events`
 
-If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above
+If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above.
 
 If the L1 D-cache was full and the evicted line was dirty: 
-`L1D_CACHE_WB`, `L1D_CACHE_WB_VICTIM`, and the events above 
+`L1D_CACHE_WB`, `L1D_CACHE_WB_VICTIM`, and the events above. 
 
 Note: `L1D_CACHE_REFILL_OUTER` is only counted when cache line allocations into the L1 D-cache are obtained from outside of the cluster. 
 

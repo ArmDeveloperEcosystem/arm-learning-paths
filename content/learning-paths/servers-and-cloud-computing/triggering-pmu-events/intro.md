@@ -5,7 +5,7 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
+## Introduction to the PMU
 The Neoverse core PMU measures hardware events that occur during software execution. 
 
 PMU events:
