@@ -11,7 +11,8 @@ learning_objectives:
     - Describe the events triggered during common scenarios.
 
 prerequisites:
-    - A general understanding of computer architecture, performance analysis, and the ability to read Arm assembly code.
+    - Knowledge of performance analysis. 
+    - The ability to read Arm assembly code.
 
 author_primary: Johanna Skinnider
 
