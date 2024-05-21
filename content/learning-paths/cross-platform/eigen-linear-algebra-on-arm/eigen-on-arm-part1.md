@@ -38,7 +38,7 @@ Save this program as `eigen-test2.cpp` and compile it. But before you try the ac
 To do that, you need to pass a definition to the compiler to instruct Eigen to disable vectorization, `-DEIGEN_DONT_VECTORIZE`:
 
 ```bash
-$ g++ -O3 -DEIGEN_DONT_VECTORIZE eigen-test2.cpp -o eigen-test2 -Ieigen
+$ g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test2.cpp -o eigen-test2 -Ieigen
 ```
 
 and run the test with `time` (your results may vary depending on your CPU):
@@ -57,7 +57,7 @@ sys     0m0.000s
 To compare with the SIMD (ASIMD/NEON in the case of Arm), just remove that define from compilation and run the same way:
 
 ```bash
-$ g++ -O3 eigen-test2.cpp -o eigen-test2 -Ieigen
+$ g++ -O3 -DNDEBUG eigen-test2.cpp -o eigen-test2 -Ieigen
 $ time ./eigen-test2
 Final matrix sum: -1.13038e+12
 
@@ -74,7 +74,7 @@ Those tests were run on the same SVE-capable system so you should be able to mak
 Eigen currently needs a few extra options passed to the compiler:
 
 ```bash
-$ g++ -O3 -march=armv8-a+sve -msve-vector-bits=<SVESIZE>> -DEIGEN_ARM64_USE_SVE eigen-test2.cpp -o eigen-test2 -Ieigen
+$ g++ -O3 -DNDEBUG -march=armv8-a+sve -msve-vector-bits=<SVESIZE>> -DEIGEN_ARM64_USE_SVE eigen-test2.cpp -o eigen-test2 -Ieigen
 ```
 
 Eigen needs `-DEIGEN_ARM64_USE_SVE` to be passed to enable the code that is specific for SVE.

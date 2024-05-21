@@ -153,13 +153,13 @@ $ git clone https://gitlab.com/libeigen/eigen
 This will clone the project in a folder called `eigen` in your current directory. Assuming you will use this directory to save your test programs, you can compile the above program like this:
 
 ```bash
-$ g++ -O3 eigen-test1.cpp -o eigen-test1 -I/usr/include/eigen3
+$ g++ -O3 -DNDEBUG eigen-test1.cpp -o eigen-test1 -I/usr/include/eigen3
 ```
 
 if you are using a packaged installation, as Eigen is installed in the `/usr/include/eigen3`. In case you are using a git clone you need to replace that with `-Ieigen` in the compiler options above like this:
 
 ```bash
-$ g++ -O3 eigen-test1.cpp -o eigen-test1 -Ieigen
+$ g++ -O3 -DNDEBUG eigen-test1.cpp -o eigen-test1 -Ieigen
 ```
 
 And then you can run the example:

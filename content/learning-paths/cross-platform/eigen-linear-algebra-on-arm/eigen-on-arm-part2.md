@@ -36,7 +36,7 @@ This example does `N` Matrix multiplications and additions -so that it will util
 Save this file as `eigen-test3.cpp`. Again, let's first compile and run with vectorization disabled to establish a reference level for performance.
 
 ```bash
-$ g++ -O3 -DEIGEN_DONT_VECTORIZE eigen-test3.cpp -o eigen-test3 -Ieigen
+$ g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test3.cpp -o eigen-test3 -Ieigen
 $ time ./eigen-test3
 C.norm(): 384919
 
@@ -50,7 +50,7 @@ sys     0m0.012s
 Now, let's build with ASIMD backend, as before, just remove the `-DEIGEN_DONT_VECTORIZE` option from the compiler invocation.
 
 ```bash
-$ g++ -O3 eigen-test3.cpp -o eigen-test3 -Ieigen
+$ g++ -O3 -DNDEBUG eigen-test3.cpp -o eigen-test3 -Ieigen
 $ time ./eigen-test3
 C.norm(): 384919
 
@@ -68,7 +68,7 @@ On this SVE2 platform we got 2.17x improvement in performance, on an Ampere Altr
 You will now compile and run with SVE enabled:
 
 ```bash
-$ g++ -O3 -march=armv8-a+sve -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test3.cpp -o eigen-test3 -Ieigen
+$ g++ -O3 -DNDEBUG -march=armv8-a+sve -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test3.cpp -o eigen-test3 -Ieigen
 $ time ./eigen-test3
 C.norm(): 384919
 
@@ -117,7 +117,7 @@ Finally it prints the sum of all the dot products.
 Now, save this file as `eigen-test4.cpp`. Similarly, we built first without vectorization and run the binary:
 
 ```bash
-$ g++ -O3 -DEIGEN_DONT_VECTORIZE eigen-test4.cpp -o eigen-test4 -Ieigen
+$ g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test4.cpp -o eigen-test4 -Ieigen
 $ time ./eigen-test4
 Vector v1:
  -0.664879
@@ -135,7 +135,7 @@ sys     0m0.000s
 As before, just remove the `-DEIGEN_DONT_VECTORIZE` from the command line.
 
 ```bash
-$ g++ -O3 eigen-test4.cpp -o eigen-test4 -I../eigen
+$ g++ -O3 -DNDEBUG eigen-test4.cpp -o eigen-test4 -I../eigen
 $ time ./eigen-test4
 Vector v1:
  -0.664879
@@ -157,7 +157,7 @@ One thing that should be also mentioned is that with `-O3` flag, autovectorizati
 ### Testing on SVE
 
 ```bash
-$ g++ -O3 -march=armv9-a -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test4.cpp -o eigen-test4 -Ieigen
+$ g++ -O3 -DNDEBUG -march=armv9-a -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test4.cpp -o eigen-test4 -Ieigen
 $ time ./eigen-test4
 Vector v1:
  -0.664879
