@@ -1,37 +1,39 @@
 ---
-title: Code now !
+title: Start coding
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-With the proper infrastructure setup to build and test the Matrix library, it's
-now time to actually code the Matrix library ! In this chapter, you will add the
+With the infrastructure setup to build and test the Matrix library, it's
+now time to actually code the library. 
+
+In this section, you will add the
 core functionality of the library as well as unit tests to ensure functional
 correctness.
 
 ## About error handling
 
-Error handling is a critical aspect of software programming, where one has to
-balance safety and security with performances. Depending on the context, the
+Error handling is a critical aspect of programming, 
+balancing safety and security with performance. Depending on the context, the
 correct balance point may vary. For example, in the case of high performance
 computing for weather forecast, the dataset is extremely large (and ever
 increasing), but can be considered secure and curated. On the other hand, if the
-data used in the computations can be adversely computed (or altered), it is
-preferable to have all kinds of checks enabled (out of bound access, ...).
+data used in the computations can be adversely computed or altered, it is
+preferable to have checks, such as out of bound access, enabled.
 
-In this Matrix processing library case, you will implement 2 main types of
+In the Matrix processing library, you will implement 2 types of
 checks:
 
-- checks that affect performances (e.g. checking for out-of bound access at each
+- checks that impact performance (such as checking for out-of bound access at each
 access). Those checks are only enabled in the `Debug` builds and the program
-will exit with an assertion failure if the check failed.
-- checks with minor performance impact (e.g. checking the matrices have the
+will exit with an assertion failure if a check fails.
+- checks with minor performance impact (such as checking the matrices have the
 correct dimensions in a matrix multiplication). Those checks are always enabled
 and the program will exit with a message.
 
-The principle here is to make the program fail in a noticeable way. Of course,
+The idea here is to make the program fail in a noticeable way. Of course,
 in a real world application, the error should be caught and dealt with by the
 application (if it can). Error handling, and especially recovering from errors,
 can be a very complex topic.
@@ -39,7 +41,7 @@ can be a very complex topic.
 At the top of file `include/Matrix/Matrix.h`, include `<cassert>` to get the
 C-style assertions declarations for checks in `Debug` mode only.
 
-We then add a `die` function that we can call whenever the library needs to
+Next, add a `die` function to call whenever the library needs to
 exit. Paste the code below right under get `getVersion` declaration in
 `include/Matrix/Matrix.h`.
 
@@ -54,25 +56,26 @@ exit. Paste the code below right under get `getVersion` declaration in
 
 ```
 
-You can note that `die` has been annotated with the `noreturn` attribute. This
-is a new feature of modern C++ that allows the compiler to take advantage of the
+Note that `die` has been annotated with the `noreturn` attribute. This
+is a new feature of C++ that allows the compiler to take advantage of the
 fact that `die` will *not* return, so no code will be executed after it has been
-called. This type of information used to be passed thru compiler specific
-annotations, but modern C++ provides a generic way to pass such information to
+called. This information was previously passed thru compiler specific
+annotations, but now C++ provides a generic way to pass such information to
 the different compilers.
 
-You need now to give a body to the `die` function. Open `lib/Matrix/Matrix.cpp`
-and include at the top of the file:
+You also need to provide a body for the `die` function. 
+
+Open `lib/Matrix/Matrix.cpp` and include at the top of the file:
+
 - `<cstlib>` : to get the declaration of `exit` and `EXIT_FAILURE`
 - `<iostream>` : to get support for input/output, in order to emit useful
   information about the reason for exiting the program.
 
-Add `die`'s body has shown below:
+Add `die`'s body as shown below:
 
 {{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-3/lib/Matrix/Matrix.cpp" >}}
 
-At this stage, the project should still build and compile --- check this for
-yourself with:
+At this stage, the project should still build and compile, try it to confirm:
 
 ```BASH
 cd build
@@ -82,22 +85,24 @@ ninja
 ## The Matrix data structure
 
 The Matrix library will be able to deal with 1x1 matrices (i.e. scalar numbers),
-1xN matrices (i.e. row-vector), Nx1 matrices (i.e. column vectors) and NxM
-matrices. The matrix array will be a single memory region, where the matrix
+1xN matrices (row-vector), Nx1 matrices (column vectors) and NxM
+matrices. 
+
+The matrix array will be a single memory region, where the matrix
 elements are stored in [row major
 order](https://en.wikipedia.org/wiki/Row-_and_column-major_order).
 
 Matrices store elements. The Matrix library will support all *arithmetic*
 element types, that is to say integer types (signed and unsigned) as well as
-floating point type.
+floating point types.
 
 The Matrix data structure will have the following private data members:
-- `numRows`: the number of rows in a matrix,
-- `numColumns`: the number of columns in a matrix,
+- `numRows`: the number of rows in a matrix
+- `numColumns`: the number of columns in a matrix
 -  `data`: the actual array of elements in a matrix. Modern C++ offers
 constructs in the language to deal safely with memory; you will use
-`std::unique_ptr` which garanties that the Matrix class will be safe from a
-whole range of memory management errors.
+`std::unique_ptr` which guaranties that the Matrix class will be safe from a
+whole range of memory management errors
 
 Add the following includes at the top of `include/Matrix/Matrix.h`:
 
@@ -106,9 +111,9 @@ Add the following includes at the top of `include/Matrix/Matrix.h`:
 #include <type_traits>
 ```
 
-`<memory>` gives access to the `unique_ptr`, and `type_traits` will allow to
+`<memory>` gives access to the `unique_ptr` and `type_traits` allow you to
 query information on the Matrix element types, either to check that a type is
-allowed for example, or to select an optimized implementation at compile time.
+allowed or to select an optimized implementation at compile time.
 
 Add the following lines to `include/Matrix/Matrix.h` in the MatComp namespace
 under the `die` function declaration:
@@ -135,19 +140,18 @@ template <typename Ty> class Matrix {
 
 This `Matrix` declaration deserves some comments:
 - it makes use of `template`, a C++ language feature which allows to support all
-element types with a single and simple code base.
+element types with a single and simple code base
 - it checks at compile time with the `static_assert` that the `Matrix` class was
 instantiated with an arithmetic data type, so that compilation can fail early
-with a simple and descriptive error message.
+with a simple and descriptive error message
 - the query about `Ty` being an arithmetic type is achieved thru the use of the
 `std::is_arithmetic` type traits. Modern C++ provides many standard type traits
-to analyze types.
+to analyze types
 - The `Matrix` data is declared as a `std::unique_ptr<Ty[]>`. This means each
 `Matrix` instance owns its memory array, and that it is in charge of freeing it
 whenever a matrix is destructed.
 
-At this stage, the project should still build and compile --- check this for
-yourself with:
+At this stage, the project should still build and compile, try it to confirm:
 
 ```BASH
 cd build
@@ -156,10 +160,10 @@ ninja
 
 ## Construct matrices
 
-You have added a bare `Matrix` class which is not so useful as it is because
-there is no useful way to create a `Matrix` just yet.
+You have added a bare `Matrix` class which is not very useful because
+there is no way to create a `Matrix` just yet.
 
-You will first add a helper function `allocate` private function that the Matrix
+First, add a private helper function `allocate`  that the Matrix
 constructors will use. Add the following in the private section of the `Matrix`
 class (in `include/Matrix/Matrix.h`):
 
@@ -175,21 +179,27 @@ class (in `include/Matrix/Matrix.h`):
     }
 ```
 
-You will use that method to allocate memory for the element array. `new` will
+You will use the method to allocate memory for the element array. `new` will
 get enough memory to store `numElements` of type `Ty`. This is stored in the
-`data` `unique_ptr` with the `reset` function which enforce freeing memory
-previously referred to by `data`. If allocation failed, which is signaled with a
-`nullptr` (a zero pointer), `data` will not be valid and we should just
-terminate the program. This helper method is made private because it is only
-intended to be used by other methods from the `Matrix` class --- users of the
+`data` `unique_ptr` with the `reset` function which enforces freeing memory
+previously referred to by `data`. 
+
+If allocation fails, which is signaled with a
+`nullptr` (a zero pointer), `data` will not be valid and the program should be 
+terminated. This helper method is made private because it is only
+intended to be used by other methods from the `Matrix` class.  Users of the
 `Matrix` objects have no reason for directly invoking this method.
 
-With this in place, you will now add some constructors, in the public section of
-the `Matrix` class ! The very first `Matrix` you should be able to construct is
-... an invalid `Matrix`. While this might sound strange, this is actually very
-useful in practice, to signal some errors for example. In our case, an invalid
-`Matrix` is a matrix with 0 rows and 0 columns, and we can use the default
-constructor (a constructor with no parameters) for this. Add the following code
+With this in place, you can add some constructors in the public section of
+the `Matrix` class. 
+
+The very first `Matrix` you should be able to construct is
+an invalid `Matrix`. While this might sound strange, this is actually very
+useful in practice, to signal some errors. In this case, an invalid
+`Matrix` is a matrix with 0 rows and 0 columns. You can use the default
+constructor (a constructor with no parameters) for this. 
+
+Add the following code
 in the public section of class `Matrix` in `include/Matrix/Matrix.h`:
 
 ```CPP
@@ -199,13 +209,15 @@ in the public section of class `Matrix` in `include/Matrix/Matrix.h`:
 
 This constructor has been marked as `constexpr` which instructs the compiler
 that it can optimize this case at compile time because we are essentially
-constructing a matrix that has no run time dependency: it has zero rows, zero
-columns and no memory allocated to it ; this is known at compile time and can be
+constructing a matrix that has no run time dependency. It has zero rows, zero
+columns, and no memory allocated to it. This is known at compile time and can be
 propagated for optimizations.
 
 You can now add a boolean conversion, using the conversion operator, that will
 allow to check whether a `Matrix` instance is valid or not. It will return
-`false` if the `Matrix` object is invalid, `true` otherwise. Add the following
+`false` if the `Matrix` object is invalid, `true` otherwise. 
+
+Add the following
 method in the public section of `Matrix`:
 
 ```CPP
@@ -215,8 +227,9 @@ method in the public section of `Matrix`:
     }
 ```
 
-With those 2 methods in place, it's now high time you add some tests ! Create
-file `tests/Matrix.cpp` and add the following code to it:
+With those 2 methods in place, it's now high time to add some tests.
+
+Create file `tests/Matrix.cpp` and add the following code to it:
 
 ```CPP
 #include "Matrix/Matrix.h"
@@ -236,7 +249,7 @@ TEST(Matrix, defaultConstruct) {
 }
 ```
 
-and add `tests/Matrix.cpp` to the list of files used for the `Matrix` unit
+Next, add `tests/Matrix.cpp` to the list of files used for the `Matrix` unit
 testing in the top-level `CMakeLists.txt` (by adding file to the list of source
 files used by `matrix-test` target):
 
@@ -250,7 +263,7 @@ The `defaultConstruct` test does not do much, it construct two matrices, one wit
 8-bit signed integers, the other one with floating point numbers with the
 default constructor. In both cases, these matrices are expected to be invalid.
 
-You should now check the tests do pass:
+You should now check if tests pass:
 
 ```BASH { output_lines = "4-16" }
 cd build
@@ -271,9 +284,11 @@ ninja check
 [  PASSED  ] 2 tests.
 ```
 
-Constructing an invalid `Matrix` although very useful (yes it is !), does not
-really make the `Matrix` class very helpful. Let's add some getters, i.e.
-methods that allows to query some information about a `Matrix` object:
+Constructing an invalid `Matrix` is very useful, but does not
+really make the `Matrix` class very helpful. 
+
+You can add some getters,
+methods that allow you to query some information about a `Matrix` object:
 - `getNumRows`: get the number of rows this matrix has
 - `getNumColumns`: get the number of rows this matrix has
 - `getNumElements`: get the number of elements this matrix has (i.e. rows x
@@ -295,7 +310,7 @@ Add those methods in the public section of `Matrix` in
     size_t getSizeInBytes() const { return numRows * numColumns * sizeof(Ty); }
 ```
 
-and modify the `defaultConstruct` test that you previously added so that it now
+Next, modify the `defaultConstruct` test that you previously added so that it now
 looks like:
 
 ```CPP
@@ -316,10 +331,9 @@ TEST(Matrix, defaultConstruct) {
 }
 ```
 
-The tests should still passes, but don't trust me on that one, check it for
-yourself !
+The tests should still pass, check for yourself.
 
-The next step is to be able to construct useful valid matrices, so add this
+The next step is to be able to construct valid matrices, so add this
 constructor to the public section of class `Matrix` in
 `include/Matrix/Matrix.h`:
 
@@ -331,7 +345,7 @@ constructor to the public section of class `Matrix` in
     }
 ```
 
-and add this test to `tests/Matrix.cpp`:
+Next, add this test to `tests/Matrix.cpp`:
 
 ```CPP
 TEST(Matrix, uninitializedConstruct) {
@@ -355,7 +369,7 @@ This constructs a valid `Matrix` (if it contains elements), and the
 `uninitializedConstruct` test checks that 2 valid matrices of different types
 and dimensions can be constructed.
 
-Compile and test, all should pass !
+Compile and test again, all should pass:
 
 ```BASH { output_lines = "4-18" }
 cd build
@@ -378,9 +392,9 @@ ninja check
 [  PASSED  ] 3 tests.
 ```
 
-The `Matrix` class is missing 2 important method though:
-- a *getter*, to read the matrix element at (row,col)
-- a *setter*, to modify the matrix element at (row,col)
+The `Matrix` class is missing 2 important methods:
+- a *getter*, to read the matrix element at (row, col)
+- a *setter*, to modify the matrix element at (row, col)
 
 Add them now in the public section of `Matrix` in `include/Matrix/Matrix.h`:
 
@@ -415,8 +429,9 @@ matrices to a known value. Let's add it to `Matrix` in
     }
 ```
 
-and as should feel usual by now, add tests for those 3 methods in
-`tests/Matrix.cpp`:
+You should be getting the pattern now. 
+
+Add tests for those 3 methods in `tests/Matrix.cpp`:
 
 ```CPP
 TEST(Matrix, fillConstruct) {
@@ -468,7 +483,7 @@ TEST(Matrix, setElement) {
 Those 3 tests and methods need to be added all together as they make use of each
 others.
 
-Compile and check --- it's important to ensure that the project works at each
+Compile and check again. It's important to ensure that the project works at each
 step and did not regress any of the previous steps.
 
 ```BASH { output_lines = "4-24" }
@@ -498,11 +513,15 @@ ninja check
 [  PASSED  ] 6 tests.
 ```
 
-Congratulations --- you are almost done with constructors !
+Congratulations, you are almost done with constructors!
 
-The last needed constructor is one that will allow to build matrices with
-arbitrary values. Add the constructor below to the public part of `Matrix` in
-`include/Matrix/Matrix.h`. The modern C++ `std::initializer_list`  enables users
+The last needed constructor is one that will allow you to build matrices with
+arbitrary values. 
+
+Add the constructor below to the public part of `Matrix` in
+`include/Matrix/Matrix.h`. 
+
+The C++ `std::initializer_list`  enables users
 to provide a list of literal values (in row major order) to use to initialize
 the matrix with:
 
@@ -522,7 +541,7 @@ the matrix with:
     }
 ```
 
-Of course, you should add the corresponding test in `tests/Matrix.cpp`:
+Again, you should add the corresponding test in `tests/Matrix.cpp`:
 
 ```CPP
  TEST(Matrix, initializerListConstruct) {
@@ -550,8 +569,8 @@ Of course, you should add the corresponding test in `tests/Matrix.cpp`:
 }
 ```
 
-One can construct a `Matrix` using arbitrary values with the above constructor,
-but the `Matrix` users will want to assign an existing object with new content
+You can now construct a `Matrix` using arbitrary values with the above constructor,
+but `Matrix` users will want to assign an existing object with new content
 (without affecting its shape). This is done with the C++ copy-assignment
 operator that you will add now in the public part of `Matrix` in
 `include/Matrix/Matrix.h`:
@@ -570,7 +589,7 @@ operator that you will add now in the public part of `Matrix` in
     }
 ```
 
-and a test in `tests/Matrix.cpp`:
+Add a test in `tests/Matrix.cpp`:
 
 ```CPP
 TEST(Matrix, initializerListAssign) {
@@ -600,28 +619,28 @@ TEST(Matrix, initializerListAssign) {
 }
 ```
 
-Make sure that the project builds just fine and pass the tests !
+Make sure that the project builds and the tests pass. 
 
 ## Constructors with memory management
 
 So far, the `Matrix` constructors have dealt with `Matrix` objects in isolation.
 
-But in real life, matrices do not live isolated ! Users will want to copy them
+But in real life, matrices are not isolated. Users will want to copy them
 or to assign to them for example, which raises the important question of memory
 management.
 
-Modern C++ allows to easily express and control the `copy` and the `move`
+Modern C++ allows you to easily express and control the `copy` and the `move`
 semantics. In the `copy` semantic, the content of an object is copied to
 another object, and both object instances do not share memory. But in
-some cases, it is important (performance wise) to avoid unnecessary
+some cases, it is important (for performance) to avoid unnecessary
 memory allocation and data copying, and this can be expressed with
 the `move` semantic, where a destination object steals the content
-from the source object --- making the source object invalid (I told
-you invalid matrices are important !)
+from the source object, making the source object invalid.
 
 One important time in an object life is to use the `copy` or the `move` semantic
-is at construction time, when an object is built from another object. Add now a
-copy constructor and a move constructor in the public part of `Matrix` in
+is at construction time, when an object is built from another object. 
+
+Add a copy constructor and a move constructor in the public part of `Matrix` in
 `include/Matrix/Matrix.h`:
 
 ```CPP
@@ -643,7 +662,7 @@ copy constructor and a move constructor in the public part of `Matrix` in
     }
 ```
 
-You can test by adding the following lines to `tests/Matrix.cpp` :
+You can test by adding the following lines to `tests/Matrix.cpp`:
 
 ```CPP
 TEST(Matrix, copyConstruct) {
@@ -699,7 +718,7 @@ part of `Matrix` in `include/Matrix/Matrix.h` :
     }
 ```
 
-The copy assignment is making use of the `reallocate` helper routine which you
+The copy assignment is making use of the `reallocate` helper routine, which you
 should add in the private section of class `Matrix` in
 `include/Matrix/Matrix.h`:
 
@@ -761,18 +780,18 @@ TEST(Matrix, moveAssign) {
 }
 ```
 
-It's now high time to build and check the code base: all tests should pass.
+It's now time to build and check the code base: all tests should pass.
 
 ## Convenience constructors
 
-For users' convenience, they should be provided with some useful methods
+For convenience, users should be provided with some useful methods
 to get specific types of matrices:
 - `zeros` to get a zero initialized `Matrix`
 - `ones` to get a `Matrix` initialized with 1
 - `identity` to get the identity `Matrix` (a square matrix, with 1 on the
 diagonal and 0 elsewhere)
 
-Users with Python / `numpy` experience are used to those shortcuts, and they
+Users with Python with `numpy` experience are used to those shortcuts, and they
 make the user code much more readable, this is often referred to as syntactic
 sugar, so let's add these to `Matrix`'s public section in
 `include/Matrix/Matrix.h`:
@@ -796,10 +815,11 @@ sugar, so let's add these to `Matrix`'s public section in
         return id;
     }
 ```
- They have been marked as `static`, which means these methods are not instance
- specific --- they are class methods.
 
- Of course, you should have tests for these methods added in `tests/Matrix.cpp`:
+ They have been marked as `static`, which means these methods are not instance
+ specific, they are class methods.
+
+ Of course, you should have tests for these methods in `tests/Matrix.cpp`:
 
  ```CPP
  TEST(Matrix, zeros) {
@@ -842,7 +862,7 @@ TEST(Matrix, identity) {
 }
  ```
 
-Compile and check: all should pass !
+Compile and check again, all test should pass:
 
 ```BASH { output_lines = "4-41" }
 cd build
@@ -891,7 +911,9 @@ ninja check
 ## Display matrices
 
 At some point, one will want to *see* the content of a `Matrix`, so add
-a simple output operator to dump the matrix content to a stream. Add this code
+a simple output operator to dump the matrix content to a stream. 
+
+Add this code
 at the very end of `include/Matrix/Matrix.h`, outside of the `MatComp` namespace.
 
 ```CPP
@@ -934,19 +956,16 @@ TEST(Matrix, dump) {
 }
 ```
 
-This test makes uses of string streams, which enable to capture and check the
-output without actually writing to the standard output. You'll need to add
+This test makes uses of string streams, which enable you to capture and check the
+output without actually writing to the standard output. You'll need to add an include file at the top of `tests/Matrix.cpp` for the above test to compile:
 
 ```CPP
 #include <sstream>
 ```
 
-at the top of `tests/Matrix.cpp` for the above test to compile.
-
 ## Compare matrices
 
-The last mundane operations you need to add are `Matrix` equality and inequality
-operators.
+The last mundane operations you need are `Matrix` equality and inequality operators.
 
 Add these to the public section of `Matrix` in `include/Matrix/Matrix.h`:
 
@@ -972,7 +991,7 @@ Add these to the public section of `Matrix` in `include/Matrix/Matrix.h`:
     bool operator!=(const Matrix &rhs) const { return !(*this == rhs); }
 ```
 
-And add tests for these 2 operators in `tests/Matrix.cpp`:
+Add tests for these two operators in `tests/Matrix.cpp`:
 
 ```CPP
 TEST(Matrix, equal) {
@@ -1006,7 +1025,7 @@ TEST(Matrix, notEqual) {
 }
 ```
 
-Of course, this should build and pass the tests:
+Check again if the tests build and pass: 
 
 ```BASH { output_lines = "4-47" }
 cd build
@@ -1058,11 +1077,11 @@ ninja check
 [  PASSED  ] 18 tests.
 ```
 
-Congratulations, your matrix library works !
+Congratulations, you now have a working library!
 
 ## What have you achieved so far ?
 
-At this stage, the code base is looking like:
+At this stage, the code looks like this:
 
 ```TXT
 Matrix/
@@ -1089,10 +1108,12 @@ Matrix/
 You can download the [archive](/artifacts/matrix/chapter-3.tar.xz) of the
 project in its current state to experiment locally on your machine.
 
-After this rather long chapter, there is now a minimalistic yet fully functional
-core for the matrix processing library, with some level of regression testing,
-that can be easily built and used. Modern C++ enabled to express move and copy
-semantics, and the use of smart pointers has made memory management easy. The
-compiler will also catch a large number of type or misuse errors. With this core
+After this rather long exercise, you have a minimalistic, yet fully functional
+core for the matrix processing library, with some level of regression testing.
+
+Modern C++ enabled you to express move and copy
+semantics, and to use smart pointers to make memory management easy. 
+
+The compiler will also catch a large number of type or misuse errors. With this core
 functionality in place, you have all you need to actually implement matrix
-operations in the next chapter.
+operations in the next section.

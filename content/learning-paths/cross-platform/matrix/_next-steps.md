@@ -1,13 +1,17 @@
 ---
 next_step_guidance: You now have a good understanding of how to get started on modern C++ library development.
 
-recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
+recommended_path: /learning-paths/cross-platform/integer-vs-floats/
 
 further_reading:
     - resource:
-        title: Learn about Integer and floating-point conversions
-        link: https://learn.arm.com/learning-paths/cross-platform/integer-vs-floats/
-        type: website
+        title: CMake Tutorial
+        link: https://cmake.org/cmake/help/latest/guide/tutorial/index.html
+        type: documentation
+    - resource:
+        title: Quickstart Building with CMake
+        link: https://google.github.io/googletest/quickstart-cmake.html
+        type: documentation
 
 
 # ================================================================================

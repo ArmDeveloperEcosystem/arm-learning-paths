@@ -1,39 +1,41 @@
 ---
-title: Add, multiply, substract ...
+title: Implement matrix operations
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In the previous chapter, you have put in place the core (or the boiler plate)
+In the previous section, you created the core (or the boiler plate)
 needed for `Matrix` objects. They can now be constructed, assigned to/from,
-dumped to the screen, ... but the library is still missing actual matrix
-operations: add , substract, multiply, ... In this chapter, you will add those
-missing operations.
+and dumped to the screen, but the library is still missing actual matrix
+operations: add, subtract, and multiply.
+
+In this section, you will add the missing operations.
 
 ## Operations architecture
 
 When designing matrix processing, it's desirable to separate 2 concerns:
-- the traversal of the matrix (for unary operation) / of the matrices (for
-  binary operations)
-- the actual data processing, viewed as a scalar operation
+- the traversal of the matrices 
+- the actual data processing
 
-This allows to develop independent parts and then compose them, allowing in turn
+This allows you to develop the independent parts and then compose them, allowing for
 easy testing and extension of the library.
 
 ## Unary scalar operations
 
 Unary operations are operations that take a single `Matrix` as argument.
-The very first unary operations that one may want to use when processing a `Matrix`
+The very first unary operations to consider when processing a `Matrix`
 are:
-- `Neg` to negate a value,
-- `Abs` to get the absolute value,
-- `Sqrt` to get the square root of a value,
-- `Log` to get the natural logarithm of a value.
+- `Neg` to negate a value
+- `Abs` to get the absolute value
+- `Sqrt` to get the square root of a value
+- `Log` to get the natural logarithm of a value
 
 You will add these unary scalar operations, in the `MatComp` namespace, but in a
-separate file `include/Matrix/Operators.h`:
+separate file.
+
+Add the code below to a new file `include/Matrix/Operators.h`:
 
 ```CPP
 #pragma once
@@ -86,20 +88,20 @@ which enable code bases to type / group those operations. This essentially
 *tags* these operations. They are all implemented as templates, in order for
 them to be type generic. Although none of them carries a state, they have been
 implemented as classes with the function operator (`operator()`) defined. This
-makes them suitable for using in bigger algorithm and is a common pattern used
+makes them suitable for using in bigger algorithms and is a common pattern used
 for example in the C++ standard library.
 
-One point worth mentioning is about the `Abs` class: depending on the type used
+One point worth mentioning is related to the `Abs` class: depending on the type used
 at instantiation, the compiler will select an optimized implementation for
-unsigned types --- there is no need to compute the absolute value of an always
-positive value. This optimization is transparent to the users.
+unsigned types, and there is no need to compute the absolute value of an always
+positive value. This optimization is transparent to users.
 
 Those operators are marked as `constexpr` so that the compiler can optimize the
 computation by performing them at compile time rather than runtime if the actual
 values are known at compile time. They are marked `const`, because the operator
-will not modify the object state (as these objects dont even have a state).
+will not modify the object state (as these objects don't have a state).
 
-Of course, those operations must have test, so please add those into
+The new operations must have tests, so add those into
 a separate `tests/Operators.cpp` file:
 
 ```CPP
@@ -197,7 +199,7 @@ TEST(unaryOperator, Log) {
 
 ```
 
-The tests do not attempt to check all corner cases. Please note again the use of
+The tests do not attempt to check all corner cases. Please note the use of
 type traits (from `<numeric_limit>`) such as `max` to get the maximum value
 representable for a given type.
 
@@ -265,10 +267,10 @@ ninja check
 [  PASSED  ] 23 tests.
 ```
 
-## Whole matrix operations: neg, abs, sqrt, log, ...
+## Whole matrix operations: neg, abs, sqrt, log
 
 With the unary scalar operations in place, you can now add some matrix
-processing !
+processing.
 
 All the whole matrix operations have the same pattern of operation: each element
 in the matrix needs to be transformed with the unary scalar operation, the order
@@ -278,7 +280,7 @@ one simple big loop will give it the most optimization opportunities.
 
 First, create a `applyEltWiseUnaryOp` helper routine in the public section of
  `Matrix` in `include/Matrix/Matrix.h` which is templated on the desired scalar
- operation as follow:
+ operation as follows:
 
 ```CPP
     /// Apply element wise unary scalar operator \p uOp to each element.
@@ -292,10 +294,10 @@ First, create a `applyEltWiseUnaryOp` helper routine in the public section of
     }
 ```
 
-Although strictly speaking `applyEltWiseUnaryOp` does not need to be a public
-member, it allows our users to add their own operations should they lack one
+Although `applyEltWiseUnaryOp` does not need to be a public
+member, it allows users to add their own operations should they lack one
 specific to their usage. In other words, this provides easy extendability for
-our library. `applyEltWiseUnaryOp` also checks at compile time, with the
+the library. `applyEltWiseUnaryOp` also checks at compile time, with the
 `static_assert` statement, that the operation that it has to perform is a unary
 operation.
 
@@ -316,8 +318,8 @@ You can eventually add, still in the `Matrix` public section in
     Matrix &log() { return applyEltWiseUnaryOp(Log<Ty>()); }
 ```
 
-Those members operations are modifying the object in place, which might not be
-always desirable, so you will also provide a functional version of these
+Those member operations are modifying the object in place, which might not be
+desirable, so you can also provide a functional version of these
 operators, that is to say a version that will modify a copy of the object
 instead. This is achieved by providing functions outside of the `Matrix` class
 (but still in the `MatComp` namespace). Add these after the `Matrix` class
@@ -345,13 +347,15 @@ template <typename Ty> Matrix<Ty> log(const Matrix<Ty> &m) {
 }
 ```
 
-Users can now either write:
+Users can now write either:
  - `m.abs()` which will modify matrix `m` *in-place* so that it contains the
  absolute value of each of its elements
  - `abs(m)` which will return a copy of `m` with the absolute value of each of
  `m` elements, leaving `m` untouched.
 
-And of course, each of these function needs to have tests... Add the following
+Of course, each of these function needs to have tests. 
+
+Add the following
 tests in `tests/Matrix.cpp`:
 
 ```CPP
@@ -498,8 +502,8 @@ ninja check
 
 ## Binary scalar operations
 
-With hardly any surprise, users also need to have binary operations, that is
-operations that have 2 inputs: addition, substraction and multiplication are the
+Users also need to have binary operations, that is
+operations that have 2 inputs: addition, subtraction, and multiplication are the
 most popular representatives of binary operations. Using the same pattern than
 for unary operations, add those binary operations to
 `include/Matrix/Operators.h`:
@@ -532,8 +536,8 @@ template <typename Ty> class Mul : public binaryOperation {
 };
 ```
 
-Of course, these operations must have tests, so add them to
-`tests/Operators.cpp`:
+Add the tests to `tests/Operators.cpp`:
+
 
 ```CPP
 TEST(binaryOperator, Add) {
@@ -583,7 +587,7 @@ TEST(binaryOperator, Mul) {
 
 ```
 
-Check the code base compile and pass the checks:
+Check the code compiles and passes the checks:
 
 ```BASH { output_lines = "4-78" }
 cd build
@@ -666,12 +670,12 @@ ninja check
 [  PASSED  ] 30 tests.
 ```
 
-## Element wise Matrix operations: add, substract, multiply, ...
+## Element wise Matrix operations: add, subtract, multiply
 
-Now that scalar binary operators are implemented, you will add `Matrix` level
+Now that scalar binary operators are implemented, you can add `Matrix` level
 binary operators. The pattern is very similar to the one used for unary
 operators: you will add a helper routine that will traverse the matrices and
-apply the scalar operator, with an extra step though. Although the element wise
+apply the scalar operator, but with an extra step. Although the element wise
 processing of matrices does not require a specific order for the rows or
 columns, the matrices must have the same dimensions; if not, this is an error
 and the program should be terminated.
@@ -695,7 +699,7 @@ in `include/Matrix/Matrix.h`:
     }
 ```
 
-And add to the public section of `Matrix` in `include/Matrix/Matrix.h` the
+Add to the public section of `Matrix` in `include/Matrix/Matrix.h` the
 `add`, `sub` and `mul` operators, composing the matrices traversal
 `applyEltWiseBinaryOp` with the scalar operators you've just added:
 
@@ -726,7 +730,7 @@ Matrix<Ty> operator+(const Matrix<Ty> &lhs, const Matrix<Ty> &rhs) {
     return Matrix(lhs) += rhs;
 }
 
-/// Substract Matrix \p rhs from Matrix \p lhs.
+/// Subtract Matrix \p rhs from Matrix \p lhs.
 template <typename Ty>
 Matrix<Ty> operator-(const Matrix<Ty> &lhs, const Matrix<Ty> &rhs) {
     return Matrix(lhs) -= rhs;
@@ -739,7 +743,7 @@ Matrix<Ty> operator*(const Matrix<Ty> &lhs, const Matrix<Ty> &rhs) {
 }
 ```
 
-You can note that those operation first make a copy of the `lhs` object with
+You can see that those operation first make a copy of the `lhs` object with
 `Matrix(lhs)`, then modify the copy in place with `rhs` and then return the
 result without modifying `lhs` or `rhs`.
 
@@ -930,10 +934,10 @@ ninja check
 
 ### Matrix x Matrix multiplication
 
-Last but not least, the `Matrix` class still miss the king of matrices
-operations: the multiplication.
+Last, but not least, the `Matrix` class still needs the most important operation:
+matrix multiplication.
 
-Please add the `multiply` function, outside of the `Matrix` class, but in the
+Add the `multiply` function, outside of the `Matrix` class, but in the
 `MatComp` namespace in `include/Matrix/Operators.h`. `multiply` will check that
 the arguments have compatible dimensions, then create an uninitialized
 matrix that will hold the multiplication result and eventually perform the
@@ -956,7 +960,8 @@ Matrix<Ty> multiply(const Matrix<Ty> &lhs, const Matrix<Ty> &rhs) {
     return result;
 }
 ```
-You should add some tests as well in `tests/Matrix.cpp`:
+
+Add some tests in `tests/Matrix.cpp`:
 
 ```CPP
 TEST(Matrix, multiplication) {
@@ -1085,7 +1090,7 @@ ninja check
 
 ### Other useful operations
 
-A full-fledge matrix processing library would need a bunch of other important
+A  complete matrix processing library would need some other important
 operations:
 - type conversion: the library only supports operations with the same type for
 now, and this is enforced by the compiler. Avoiding silent conversions is
@@ -1102,11 +1107,10 @@ play with how the elements are accessed rather than duplicating the matrix
 content.
 - resize: to be able to dynamically change a matrix dimensions
 - extract: to be able to extract part of a matrix
-- ...
 
-## What have you achieved so far ?
+## What have you achieved so far?
 
-At this stage, the code base is looking like:
+At this stage, the code structure looks like: 
 
 ```TXT
 Matrix/
@@ -1139,7 +1143,7 @@ Congratulations, you now have a minimalistic yet fully functional matrix
 processing library, with some level of regression testing, that can be easily
 built and used.
 
-Of course, the testing could (and should go) much deeper, as a number of
-corner cases have not been covered in the interest of space in this
-learning path. The interested reader is encouraged to experiment, add more
-functions ... and tests ;-)
+The testing could (and should) go much deeper, as a number of
+corner cases have not been covered.
+
+You can continue to add more functions (and more tests).
