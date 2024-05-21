@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Dependencies to install
 
-In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local development environment:
+In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local Ubuntu development environment:
 
 * Package Installer for Python (pip)
 * JDK
@@ -18,6 +18,8 @@ In order to cross-compile your inference engine, you'll need the following insta
 * Android NDK v25, with configurations
 * Android SDK
 * OpenCV
+
+You will also need to enable usb debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable usb debugging.
 
 #### Install pip3
 

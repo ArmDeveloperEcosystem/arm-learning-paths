@@ -10,9 +10,18 @@ layout: learningpathall
 
 In this section, you'll modify MediaPipe build files in order to compile the llm benchmarking executable with support for i8mm, Arm's 8-bit matrix multiply extensions.
 
-This executable will not yet include the KleidiAI optimizations, which you will add in the next section.
+#### Ensure that your device has the i8mm feature
+
+To test whether your phone chipset contains the i8mm feature, ensure that your phone has [usb debugging enabled](https://developer.android.com/studio/debug/dev-options), plug your phone in to your local development environment, and run
+
+```
+adb shell cat /proc/cpuinfo | grep i8mm
+```
+
+If any lines are returned, then your phone has the i8mm capability.
 
 
+#### Setting up the build
 
 Modify the xnn_utils BUILD file to generate a static target; simply add linkstatic = True to mediapipe/tasks/cc/genai/inference/utils/xnn_utils/BUILD. Instead of this:
 
@@ -136,7 +145,7 @@ Modify the benchmarking tool llm_test (mediapipe/tasks/cc/genai/inference/utils/
 ABSL_FLAG( std::string, benchmark_method, "encode", // change to encode to run the encoder "The method to benchmark the latency, can be either 'decode', 'encode'.");
 ```
 
-Build llm_test:
+#### Build and run llm_test
 
 ```bash
 
