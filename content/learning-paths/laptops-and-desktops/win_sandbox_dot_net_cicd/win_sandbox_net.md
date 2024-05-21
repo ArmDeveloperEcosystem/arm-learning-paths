@@ -22,12 +22,12 @@ All the code you will need to follow this learning path is provided in [this rep
 Start by preparing your GitHub repository:
 
 * Log in to [GitHub](https://github.com) using your account credentials.
-* On the top right corner, click the + dropdown and select **Import repository**.
+* On the top right corner, click the **+** dropdown and select **Import repository**.
 * In the **Import your project to GitHub** section, enter https://github.com/pareenaverma/win-sandbox-dotnet-app in the **The URL for your source repository** field. 
 
 ![img1](win_sandbox_1.png)
 
-* Set the repository name, for example, sandbox-ci-cd-net.
+* Set the repository name, for example, **sandbox-ci-cd-net**.
 * Click the **Begin import** button.
 
 In a few minutes, the contents of the source repository are imported into the new repository.
@@ -48,7 +48,7 @@ Then, click on the **New runner** button, followed by **New self-hosted runner**
 
 You will see instructions displayed on this page. These are commands you now need to run in Windows Sandbox to configure it as your self-hosted Arm64 Windows runner.
 
-On your host machine, click on the Search bar and enter "Windows Sandbox".
+On your host machine, click on the Search bar and enter **Windows Sandbox**.
 
 In your running Windows Sandbox, open up Powershell. You will now copy and paste all the commands into Powershell.
 
@@ -68,7 +68,7 @@ Next, configure it with the following command:
 ```
 ./config.sh --url https://github.com/pareenaverma/sandbox-ci-cd-net --token <TYPE_YOUR_TOKEN>
 ```
-You will be prompted to provide the runner group, the name of the runner, and the work folder name. You can accept the defaults by pressing Enter at each step or you can choose to override the Defaults. In this example, the name of the runner is "windows-sandbox".
+You will be prompted to provide the runner group, the name of the runner, and the work folder name. You can accept the defaults by pressing Enter at each step or you can choose to override the Defaults. In this example, the name of the runner is **windows-sandbox**.
 
 Finally, start the runner by executing:
 
