@@ -3,15 +3,15 @@ title: Learn about modern C++ library development
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an intermediate topic for developers who are interested in understanding how developing a library in modern C++ would look like on Arm (as well as other platforms), using simple matrix processing as an example.
+who_is_this_for: This is an advanced topic for developers who want to learn how to develop a library in modern C++ on Arm using matrix processing as an example.
 
 learning_objectives:
-    - Develop a library
-    - Test it, ensuring it does not regress functionally
+    - Develop a new C++ library
+    - Test the library, ensuring it does not regress functionally
 
 prerequisites:
-    - An Arm based computer (Linux, MacOS or Windows based)
-    - A basic understanding of C++ programming
+    - An Arm based computer running Linux, macOS, or Windows
+    - An intermediate understanding of C++ programming
 
 author_primary: Arnaud de Grandmaison
 
@@ -19,16 +19,17 @@ author_primary: Arnaud de Grandmaison
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-
+    - Neoverse
+    - Cortex-A
 tools_software_languages:
     - C++
     - GCC
     - Clang
     - CMake
-    - googletest
+    - GoogleTest
 operatingsystems:
     - Linux
-    - MacOS
+    - macOS
     - Windows
 shared_path: true
 shared_between:

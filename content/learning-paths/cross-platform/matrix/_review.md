@@ -18,10 +18,10 @@ review:
         answers:
             - Once the project is finished, to ensure it works
             - Right from the start so tests can be added along the development and ensure it works bottom up.
-            - Testing ? What for ? My code is always first time right, and I never introduce bugs !
+            - Testing?  My code is always first time right, and I never introduce bugs!
         correct_answer: 2
         explanation: >
-            While the first answer is not fully wrong --- it's not that bad if a program has tests, the second approach is the best as it's much easier to add test along the way at the time the functionality is developed ; it even helps development by catching corner case and regression).
+            While the first answer is not fully wrong, it's not that bad if a program has tests, the second approach is the best as it's much easier to add test along the way at the time the functionality is developed.
 
 
 # ================================================================================
