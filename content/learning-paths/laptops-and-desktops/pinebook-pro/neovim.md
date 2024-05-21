@@ -1,5 +1,5 @@
 ---
-title: How do I install and Configure Neovim?
+title: How do I install and configure Neovim?
 
 weight: 4
 layout: learningpathall
