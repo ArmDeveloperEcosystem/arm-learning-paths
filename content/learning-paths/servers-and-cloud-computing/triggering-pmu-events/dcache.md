@@ -71,12 +71,15 @@ Additional events that occur with an L1 cache miss:
 
 * `L1D_CACHE_REFILL`, 
 * `L1D_CACHE_REFILL_RD`, 
-* `L2 cache read access events`
+* `L2 cache read access events`.
 
 If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above.
 
 If the L1 D-cache was full and the evicted line was dirty: 
-`L1D_CACHE_WB`, `L1D_CACHE_WB_VICTIM`, and the events above. 
+
+* `L1D_CACHE_WB`
+* `L1D_CACHE_WB_VICTIM`
+*...and the events above. 
 
 Note: `L1D_CACHE_REFILL_OUTER` is only counted when cache line allocations into the L1 D-cache are obtained from outside of the cluster. 
 
