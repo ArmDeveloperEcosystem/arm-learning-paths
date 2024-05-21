@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Install the Raspberry Pi Pico SDK"
+title: "How do I install the Raspberry Pi Pico SDK?"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -16,7 +16,7 @@ The [Pico SDK](https://github.com/raspberrypi/pico-sdk) uses the GCC compiler an
 
 [Getting started with Raspberry Pi Pico C/C++ development](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf) contains more details of C/C++ programming on the Pico.
 
-## Use the Pico SDK installation script
+## How do I use the Pico SDK installation script?
 
 The Pico SDK installation script is managed in GitHub and is named pico_setup.sh 
 
@@ -66,7 +66,7 @@ bash ./pico_setup.sh
 {{< /tabpane >}}
 
 
-## Check the development tools
+## How do I verify that the Pico SDK development tools work?
 
 Before continuing, confirm the required tools are operational. 
 
@@ -109,7 +109,7 @@ cmake --version
 openocd --version
 ```
 
-## Other operating systems 
+## How do I install the Pico SDK on other operating systems? 
 
 If you are not using Linux there are instructions included in the Getting Started guide referenced above. Instructions are available for Microsoft Windows and Apple macOS.
 

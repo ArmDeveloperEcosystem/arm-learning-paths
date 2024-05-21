@@ -22,7 +22,7 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-## Install and test Docker Desktop
+## How do I install and test Docker Desktop?
 
 All of the download files are available on the 
 [Docker Desktop product page](https://www.docker.com/products/docker-desktop/).
