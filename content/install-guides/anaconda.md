@@ -62,7 +62,7 @@ sudo amazon-linux-extras install mate-desktop1.x
 
 ## How do I download the latest Anaconda distribution? 
 
-To download the latest Anaconda distribution, run the following:
+To download the latest Anaconda distribution, run:
 
 ```bash
 curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
