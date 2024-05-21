@@ -1,5 +1,5 @@
 ---
-title: Where to use KleidiAI, and why
+title: KleidiAI basics
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,20 +12,20 @@ layout: learningpathall
 This tutorial overviews KleidiAI from Arm. KleidiAI is a set of micro-kernels that integrates into various machine learning frameworks with one goal: Accellerating your AI inference on Arm-based platforms. KleidiAI's micro-kernels are hand-optimized in Arm assembly code to leverage modern architecture instructions that greatly speed up AI inference on Arm CPUs. 
 
 Best of all is you don't need to do anything to get the benefits of KleidiAI; it will automatically apply if two conditions are met:
+1. Your ML Framework integrates KleidiAI, and
+2. Your hardware platform supports *i8mm* Arm instructions.
 
+At launch, KleidiAI is being leveraged by Google's MediaPipe framework and XNNPack backend, with more support upcoming. For a tutorial of using KleidiAI to accelerate ?????? whatever Mediapipe/XNNPack tutorial is doing ?????? view [this learning path](https://google.com). To find out if your platform supports KleidiAI, view a list of supported platforms [further down on this page](#what-arm-cpus-support-kleidiai).
 
-|  Conditions    | Framework support     | Hardware support |
-| ---------      | ----------- | ----------- |
-| Key Question   | Does your ML Framework integrate KlediAI?   | Does your hardware platform support i8mm instructions? |
-| Today's Answer | XNNPack, MediaPipe support KlediAI today   | Find out in a lower section  |
+![KleidiAI#center](Arm_KleidiAI_square_color.png "Optimized micro-kernels for AI workloads on Arm CPUs")
 
-
-For a tutorial of using KleidiAI in a real-world application, visit ====this learning path====. It overviews how MediaPipe integrates with XNNPack and KlediAI for accelleration.
 
 ### Why is KleidiAI valuable?
-The proof is in the comparisons. Detailed in the example learning path linked above, there is a ========30x====== speedup compared to existing XNNPack kernels! This speedup will bring more AI use-cases to CPUs in servers and at the edge. And again, as an AI developer you don't need to do anything to see these improvements; simply use an ML Framework that integrates KleidiAI.
+KleidiAI speeds up Generative AI performance with no end-developer work required. The first integrations of KleidiAI have provided ?????? 30x ?????? speedup in ????? MediaPipe LLM performance ???. You can read more about this speedup in [this blog ?????????](https://google.com). This drastic speedup will bring more AI use-cases to CPUs in servers and at the edge. 
 
-The rest of this tutorial will explain how KlediAI works through a C++ example. To understand how KleidiAI accelerates workloads so effectively, an overview of how AI works is needed. 
+This value comes at no cost to developers - the range of GenAI applications possible to run on Arm CPUs is now larger.
+
+The rest of this tutorial will explain how KlediAI works. To understand how KleidiAI accelerates workloads so effectively, an overview of how AI works is needed. 
 
 ## Generative AI = Lots of Matrix Multiplication
 
@@ -33,18 +33,18 @@ The rest of this tutorial will explain how KlediAI works through a C++ example. 
 “Any sufficiently advanced technology is indistinguishable from magic” - Arthur C. Clarke
 {{% /notice %}}
 
-In the case of Generative AI models today, the magic is ultimately powered by **matrix multiplication**. To understand this core fact, and better understand KleidiAI itself, this section offers a high-level explination of neural network architecture.
+In the case of Generative AI models today, the math behind the precieved magic is **matrix multiplication**. To understand this, and better understand KleidiAI itself, this section offers a high-level explination of neural network architecture.
 
 Neural networks consist of layers of neurons. Each neuron in a layer is connected to all neurons in the previous layer. Each of these connections has a unique connection strength, learned through training. This is called a connection's *weight*. 
 
 During inference (such as trying to generate the next token/word with a given input), each neuron performs a weighted sum of inputs and then decides its value via an activation function. The weighted sum is the dot product of each connected neruon's input (*x*) and its connection weight (*w*). A layer of neuron's calculations can be efficiently calculated via matrix multiplication, where the input matrix is multiplied by the weight matrix. 
 
-For example, in the image below *z1* is calculated as a dot product of connected *x*'s and *w*'s from the previous layer. All *z* values in Layer 0 can therefore be effeciently calculated with a matrix multiplication operation.
+For example, in the image below, *z1* is calculated as a dot product of connected *x*'s and *w*'s from the previous layer. All *z* values in Layer 0 can therefore be effeciently calculated with a matrix multiplication operation.
 
 ![Neural Network example#center](neural-node-pic.jpg "Figure 1. Zoomed in on neural network node")
 
 
-Sidebar: In addition to *weights*, each neuron also learns if it should be firing more or less often through training and is assigned a *bias*. The combination of these *weights* and *biases* define how many *parameters* a model has. So in the Llama 3 model with 8 billion parameters, that means that model has around 8 billion individual weights and biases that embody what it learned during training. The more parameters a model has, the more information a model can retain during its training in weights & biases, which is what leads to more capable models. 
+Sidebar:  In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training and make up a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what it learned during training. Generally speaking, the more parameters a model has, the more information it can retain from its training, leading to more capable models.
 
 ### Matrix Multiplication speedup is critical
 What does this all mean? An 8 billion parameter model generating one token requires billions of dot product calculations, with at least hundreds of millions of matrix multiplication operations. Therefore speeding up matrix multiplication is a critical piece to accelerating AI workloads. 
@@ -72,6 +72,6 @@ To view a range of devices and what Arm instructinos they support (including thi
 
 ## What's next?
 The remaineder of this Learning Path will answer the following questions while stepping through a C++ example:
-* How does KleidAI 'just work' with my ML Framework?
+* How does KleidAI 'just work' with ML Frameworks?
 * What do the micro-kernels in KleidiAI functionally do?
 * How are the KleidiAI micro-kernels actually speeding up matrix multiplication?

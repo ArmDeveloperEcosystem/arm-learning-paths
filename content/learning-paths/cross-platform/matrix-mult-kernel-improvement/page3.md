@@ -1,5 +1,5 @@
 ---
-title: Deep-dive - Quantizing and packing kernels
+title: Quantizing and packing micro-kernels
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,12 +8,10 @@ layout: learningpathall
 
 This section will probe into the intricate details of what KlediAI is doing and how it is beneficial to AI performance optimization. 
 
-## KleidiAI example file
-To unpack what specifically KlediAI does, and how it does it, you will review the example released alongside KleidiAI. Navigate to the KlediAI GitLab repository [here](google.com) and view the provided example file located under `/examples`. The [example file is here](google.com).
+## KleidiAI C++ example file
+To unpack what specifically KlediAI does, and how it does it, you will review the example released alongside KleidiAI. Navigate to the KlediAI GitLab repository and view the example file [here](https://gitlab.arm.com/kleidi/kleidiai).
 
-{{% notice Note %}}
-This example is intended to illustrite KleidiAI microkernel performance. In practice you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically if supported. 
-{{% /notice %}}
+Note that this example is intended to illustrite KleidiAI microkernel performance. In practice you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically if supported. 
 
 
 The example code is structured to take in two matricies and compare KleidiAI's micro-kernel results to a reference implementation. This reference code is functionally identical to KleidiAI's micro-kernels, and is present for two reasons:
@@ -22,9 +20,9 @@ The example code is structured to take in two matricies and compare KleidiAI's m
 
 
 
-### Run the example KleidiAI script
+### Build and run the KleidiAI example
 
-To actually run the KleidiAI micro-kernels, follow these steps to build and run the example script:
+Follow these steps to build and run the KleidiAI library and example script:
 
 1. Create an Ubuntu 24 Arm Linux machine on an AWS EC2 instance. Use an M7g-medium, which uses the Graviton 3 SoC supporting the *i8mm* Arm architecture feature. The 1 CPU and 4 GB of RAM in the M7g-medium are sufficient for this basic example run.
 
@@ -70,9 +68,9 @@ fill_uniform_random(m, k, (float*)lhs_native_mtx_f32, seed_lhs);
 fill_uniform_random(n, k, (float*)rhs_native_mtx_f32, seed_rhs);
 ```
 
-The two input matricies are labeled 'LHS' and 'RHS', standing for Left-Hand Side and Right-Hand Side respectively. As the name implies, the LHS is on the 'left' hand of the matrix multiplication operation, with the RHS being on the 'right'. This is a common way to label input matricies for neural network operations.
+The two input matricies are labeled 'LHS' and 'RHS', standing for Left-Hand Side and Right-Hand Side respectively. This is a common way to label input matricies for neural network operations. In KleidiAI, LHS matricies represent the input activations from the previous network layer, and RHS matricies represent the connecting weights.
 
-To perform a valid matrix multiplication, the number of row in LHS must match the number of columns in RHS. That is why the same variable `k` is used as a dimension for both matricies. The comments specify that `n` must be a multiple of 8, which is ideal but not required. This is becaues =========I don't know why?===========. The comments also note that `k` must be a multiple of 64; this is because =====I don't know why=====?
+To perform a valid matrix multiplication, the number of row in LHS must match the number of columns in RHS. That is why the same variable `k` is used as a dimension for both matricies.
 
 So in the example, the 17x64 LHS matrix and 32x64 RHS matrix are initalized with random 32-bit floating point numbers between [-1,1]. Note that at the time of matrix multiplication the RHS matrix is transposed to switch its row and column dimensions, ensuring valid matrix multiplication. 
 
@@ -94,16 +92,18 @@ quant_qs4cx_f32(n, k, (const float*)rhs_native_mtx_f32, (uint8_t*)rhs_native_mtx
 ```
 
 
-The `lhs_native_size_f32` allocates space in memory for the full LHS matrix to store 1088 FP32 numbers in a 1D space in memory (1088=17*32). Same goes for `rhs_native_size_f32`, for its nxk dimensions. The use of 'native' here is intentional, marking these sizes and matricies as the original input matricies without modification.
+The `lhs_native_size_f32` allocates space in memory for the full LHS matrix to store 1088 FP32 numbers in a 1D space in memory (1088=17*32). Same goes for `rhs_native_size_f32`, for its nxk dimensions. The use of 'native' here is intentional, marking these sizes and matricies as the original input matricies without quantization.
 
 The RHS matrix is quantized first. The number `rhs_native_size_qs4cx` is calculated to properly size the `rhs_native_mtx_qs4cx`, the 1D matrix storing INT4 numbers. 
 
 {{% notice Naming - qs4cx %}}
-    You can tell the target is of the INT4 type based on the naming, `qs4cx`, which translates to quantized (q), symmetric (s), 4-bit integres (4) per channel (cx). Each 'channel' refers to ??????????not sure, validate with ML team...what is simplest explination that contrasts with future 'per dimension' framing in the LHS matrix????????????????
+You can tell the target is of the INT4 type based on the naming, `qs4cx`, which translates to quantized (q), symmetric (s), 4-bit integres (4) per channel (cx). 
+
+Each 'channel' in this matrix refers to all the weights feeding into a given channel (ie. a given neuron). Because the weights feeding into different neurons may vary significantly, quantizing by channel offers improved percision and flexibility.
 {{% /notice %}}
 
 
-You may be asking: "Why does the `rhs_native_size_qs4cx` calculation use `sizeof(uint8_t)` as the data-type instead of `sizeof(uint4_t)`?" As mentioned in the overview section, this is where the packing concept comes in, fitting two INT4 numbers into a single INT8 memory location. This is done to fully leverage the i8mm Arm instructions that perform matrix multiplication across INT8 numbers. KleidiAI intelligently packs INT4 numbers into INT8 memory and percicely manages the matrix multiplication to ensure maximum performance gains. This packing of two INT4 numbers into one INT8 memory space explains why `rhs_native_size_qs4cx` is calculated by multiplying the space of an INT8 number and also dividing the matrix dimensions by 2.
+You may be asking: "Why does the `rhs_native_size_qs4cx` calculation use `sizeof(uint8_t)` as the data-type instead of `sizeof(uint4_t)`?" As mentioned in the overview section, this is where the packing concept comes in, fitting two INT4 numbers into a single INT8 memory location. This is done to fully leverage the i8mm Arm instructions that perform matrix multiplication across INT8 numbers. This packing of two INT4 numbers into one INT8 memory space explains why `rhs_native_size_qs4cx` is calculated by multiplying the space of an INT8 number and also dividing the matrix dimensions by 2.
 
 ### RHS Quantizing/Packing micro-kernel
 The code snippets below are taken from the reference RHS quantizing/packing function, `quant_qs4cx_f32`. As mentioned previously, this reference function code is functionally representative of what KleidiAI's packing/quantizing micro-kernels are doing.
@@ -197,7 +197,9 @@ Instead of quantizing to INT4, this LHS micro-kernel quantizes to INT8 format. A
 Like the RHS matrix, the code snippets below are taken from the reference LHS quantizing/packing function, `ref_quant_qa8dx_f32`. Again note that this function is representative of KleidiAI's' LHS packing/quantizing micro-kernel functionality.
 
 {{% notice Naming - qa8dx %}}
-    You can tell the target is of the INT8 type based on the naming, `qa8dx`, which translates to quantized (q), asymmetric (a), 8-bit integres (8) per dimension (dx). Each 'dimension' refers to a matrix's row, indicating that each matrix's row is quantized indepentently.
+You can tell the target is of the INT8 type based on the naming, `qa8dx`, which translates to quantized (q), asymmetric (a), 8-bit integres (8) per dimension (dx). 
+
+Each 'dimension' in this matrix refers to a different feature in the input data (ie. in image processing, input dimensions being RGB - red, green, and blue). Because each input dimension can have a different distribution of values, quantizing by dimension offers improved percision and consistency.
 {{% /notice %}}
 
 The function takes in the LHS matrix dimentions (`m` columns and `k` rows), the pointer to the native LHS matrix (`lhs_f32`), and the pointer to where the quantized and packed LHS matrix will be stored (`lhs_qa8dx`).
@@ -212,7 +214,7 @@ The next few steps in this LHS micro-kernel are functionally equal to the RHS mi
 * The `scale0` and its reciprical are calculated
 
 
-Before the quantization takes place, the LHS matrix calculates where the appropriate zero point should be to handle a wider range of input values with more flexibility. This is refered to as 'Asymmetric' quantization, allowing for different scale and zero points for each matrix row.
+Before the quantization takes place, the LHS matrix calculates where the appropriate zero point should be to handle a wider range of input values not centred around zero with more flexibility. This is refered to as 'asymmetric' quantization, allowing for different scale and zero points for each matrix row.
 
 ```C
     const float zero_point_from_min_error0 = qmin + descaled_min0;

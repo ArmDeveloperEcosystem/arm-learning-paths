@@ -1,5 +1,5 @@
 ---
-title: Deep-dive - Matrix Multiplication kernels
+title: Matrix Multiplication micro-kernels
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -16,9 +16,9 @@ This section will cover the following:
 The actual matrix multiplication takes place in the function `ref_matmul_f32_qa8dx_qs4cx`.
 
 {{% notice Naming - ref_matmul_f32_qa8dx_qs4cx %}}
-    The function's name describes what it does and its input/output formats. It is the reference (ref) matrix multiplication (matmul), outputing in floating-point 32-bit format (f32), taking in two matricies of the following formats:
-    * `qa8dx` = quantized (q), asymmetric (a), 8-bit integers (8) per dimension, ie per row (dx).
-    * `qs4cx` = quantized (q), symmetric (s), 4-bit integers (8) per channel (cx).
+The function's name describes what it does and its input/output formats. It is the reference (ref) matrix multiplication (matmul), outputing in floating-point 32-bit format (f32), taking in two matricies of the following formats (as a reminder):
+* `qa8dx` = quantized (q), asymmetric (a), 8-bit integers (8) per dimension (dx).
+* `qs4cx` = quantized (q), symmetric (s), 4-bit integers (8) per channel (cx).
 {{% /notice %}}
 
 
@@ -92,10 +92,10 @@ Next is the loop where matrix multiplication actually takes place. The loop iter
 
 
 {{% notice KleidiAI i8mm acceleration step %}}
-    These dot product calculations, `iacc += lhs_v0 * rhs_v0;  iacc += lhs_v1 * rhs_v1;`, is the operation that the `i8mm` architecture feature substantially accelerates. These calculations are performed using `SMMLA` instructions that you will observe near the end of this walk-through.
+These dot product calculations, `iacc += lhs_v0 * rhs_v0;  iacc += lhs_v1 * rhs_v1;`, is the operation that the *i8mm* architecture feature substantially accelerates. These calculations are performed using *SMMLA* instructions that you will observe near the end of this walk-through.
 {{% /notice %}}
 
-The last step is to convert the result back into the native number format, before the KleidiAI quantizing/packing operations. This involves the offsets and scales from both matricies (`lhs_offset` / `rhs_scales_f32[col_idx]` and `rhs_scale` / `lhs_scale`) and clamping the output to ensure it fits in the FP32 range.
+The last step is to convert the result back into the native number format, before the KleidiAI quantizing/packing operations. This involves the offsets and scales from both matricies (`lhs_offset`, `rhs_scales_f32[col_idx]` and `rhs_scale`, `lhs_scale`) and clamping the output to ensure it fits in the FP32 range.
 
 ```C
         iacc += lhs_offset * rhs_v0;
@@ -141,14 +141,10 @@ As stated earlier in this tutorial, only one matrix multiply micro-kernel will b
 * `8x4x32` = represents the output matrix dimensions (8x4) and the block size being processed at once (x32). The 'block size' indicates operations are batched to compute 32 elements at once, parallizing computation.
 * `neon_i8mm` = indicates the Arm technology (NEON) and architecture feature (i8mm) being leveraged in this micro-kernel.
 
-The key difference between the different KleidiAI matrix multiplication micro-kernel varients are in the in/out matrix dimensions and processing block size. Different ML workloads and models will perform better/worse across the KleidiAI matmul varients, and the correct micro-kernel should be selected to maximize performance. ==========????????? Do ML Frameworks make this decision automatically, or are we expecting users to specify this? ===========??????????????
+The key difference between the different KleidiAI matrix multiplication micro-kernel varients are in the in/out matrix dimensions and processing block size. Different ML workloads and models will perform better/worse across the KleidiAI matmul varients, and the correct micro-kernel will be selected by your ML framework to maximize workload performance.
 
-{{% notice Matrix dimension clarification %}}
-    KleidiAI processes the incoming matrcies into smaller chunks to perform more efficient matrix multiplication operations, represented by the `4x8` input matrix dimensions noted above. KleidiAI can handel a wide range of input matrix dimensions, set by the `m`, `n`, and `k` parameters at the start of the example C++ file's main function.
-
-    The suggested restriction on `n` to be a multiple of 8 is because =========I don't know why, fill in answer when recieved on page 3========.
-
-    The hard requirement on `k` to be a multiple of 64 is because =========I don't know why but almost certainly related to block size, fill in answer when recieved on page 3========.
+{{% notice Clarifying matrix dimension parameters %}}
+KleidiAI processes the incoming matrcies into smaller chunks to perform more efficient matrix multiplication operations. Both input matricies in this micro-kernel have `4x8` dimensions. KleidiAI can handel a wide range of input matrix dimensions, set by the `m`, `n`, and `k` parameters at the start of the example C++ file's main function.
 {{% /notice %}}
 
 
