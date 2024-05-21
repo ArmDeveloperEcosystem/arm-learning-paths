@@ -86,7 +86,7 @@ The install takes a couple of minutes to complete.
 
 The batch installation will not set up the shell. 
 
-To set up the shell run:
+To set up the shell, run:
 
 ```bash
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
