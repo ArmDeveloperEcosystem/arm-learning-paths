@@ -1,9 +1,9 @@
 ---
-title: Understand Neoverse cache PMU events using C and assembly language
+title: Learn about Neoverse cache PMU events using C and assembly language
 draft: true
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why common cache PMU events occur.
+who_is_this_for: This is an advanced topic for software and hardware engineers who want to learn about the causes of common Neoverse cache PMU events.
 
 learning_objectives: 
     - Understand common cache PMU events
