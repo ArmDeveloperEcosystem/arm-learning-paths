@@ -6,6 +6,8 @@ weight: 3
 layout: learningpathall
 ---
 
+## L1 Data Cache Events
+
 The following PMU events can be used to measure the effectiveness of the L1 Data Cache: 
 
 ```C
@@ -15,7 +17,7 @@ The following PMU events can be used to measure the effectiveness of the L1 Data
     PMU_EVENT_INST_RETIRED,
 ```
 
-To trigger these events, run code that issues stores to Normal Cacheable memory such as the code below:
+To trigger these events, run code that issues stores to Normal Cacheable memory such as:
 
 ```C
 void stores()
@@ -27,7 +29,7 @@ void stores()
 }
 ```
 
-The resulting event counts for the code are:
+The resulting event counts are:
 
 ```output
 L1D_CACHE_REFILL is 11
@@ -35,11 +37,11 @@ L1D_CACHE is 65
 INST_RETIRED is 100
 ```
 
-These stores will trigger 65 accesses into the L1 D-cache, counted by `L1D_CACHE`. Event `L1D_CACHE_REFILL` counts 11 refills in the L1 D-cache because these stores were not present in the cache prior, so the CPU will allocate these cache lines for future access. 
+These stores trigger 65 accesses into the L1 D-cache, counted by `L1D_CACHE`. Event `L1D_CACHE_REFILL` counts 11 refills in the L1 D-cache as these stores were not previously present in the cache, so the CPU allocates these cache lines for future access. 
 
 ### L1 Data cache read access
 
-This section describes what happens in the L1 D-cache during a read, which can be triggered by the code below:    
+This section describes what happens in the L1 D-cache during a read, which can be triggered by this code:    
 
 ```C
 void read_access()
@@ -51,8 +53,8 @@ void read_access()
 }
 ```
 
-Events that always occur: 
-`L1D_CACHE`, `L1D_CACHE_RD`, `MEM_ACCESS`, `MEM_ACCESS_RD`
+Events that always occur are: 
+`L1D_CACHE`, `L1D_CACHE_RD`, `MEM_ACCESS`, `MEM_ACCESS_RD`.
 
 ```output
 L1D_CACHE is 135
@@ -157,4 +159,4 @@ L1D_CACHE_WB is 118
 L1D_CACHE_WB_VICTIM is 118
 ```
 
-`L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or software-based Cache Maintenance Operations (CMOs).  `L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. Since they are equal, all writebacks were caused by a cache line allocation.
+`L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or software-based Cache Maintenance Operations (CMOs).  `L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. As they are equal, all writebacks were caused by a cache line allocation.

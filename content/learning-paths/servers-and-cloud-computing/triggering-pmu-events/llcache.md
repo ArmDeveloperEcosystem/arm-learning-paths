@@ -5,7 +5,7 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
+## LL Cache Events
 The following events highlight Last Level cache effectiveness:
 
 ```C

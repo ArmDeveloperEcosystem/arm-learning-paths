@@ -5,6 +5,7 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## L2 Unified Cache Events
 
 The following PMU events can be used to highlight effectiveness of the L2 cache: 
 
