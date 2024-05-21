@@ -6,12 +6,12 @@ minutes_to_complete: 30
 who_is_this_for: This is an advanced topic for software and hardware engineers who want to learn about the causes of common Neoverse cache PMU events.
 
 learning_objectives: 
-    - Understand common cache PMU events
-    - Understand why some code triggers certain PMU events on the Neoverse N2 core
-    - Understand the events triggered during common scenarios
+    - Describe common cache PMU events.
+    - Describe why some code triggers PMU events on the Neoverse N2 core.
+    - Describe the events triggered during common scenarios.
 
 prerequisites:
-    - A general understanding of computer architecture, performance analysis, and the ability read Arm assembly code.
+    - A general understanding of computer architecture, performance analysis, and the ability to read Arm assembly code.
 
 author_primary: Johanna Skinnider
 

@@ -157,4 +157,4 @@ L1D_CACHE_WB is 118
 L1D_CACHE_WB_VICTIM is 118
 ```
 
-`L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or Software-based Cache Maintenance Operations (CMOs).  `L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. Since they are equal, all writebacks were caused by a cache line allocation.
+`L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or software-based Cache Maintenance Operations (CMOs).  `L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. Since they are equal, all writebacks were caused by a cache line allocation.

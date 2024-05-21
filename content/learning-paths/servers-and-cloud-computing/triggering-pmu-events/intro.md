@@ -6,21 +6,29 @@ weight: 2
 layout: learningpathall
 ---
 
-The Neoverse core PMU measures hardware events that occur during software execution. PMU events are used to measure performance, monitor workload efficiency, and track resource utilization and requirements. The [Arm Neoverse N2 PMU guide](https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en) describes the architectural background and PMU event definitions. You can find other Neoverse core PMU guides on https://developer.arm.com/. 
+The Neoverse core PMU measures hardware events that occur during software execution. 
 
-This Learning Path explains how to trigger common PMU events in specific metric groups and why certain events are triggered. 
+PMU events:
 
-As a way to learn, you can review example code fragments and see the triggered PMU events.
+* measure performance
+* monitor workload efficiency
+* track resource utilization and requirements. 
+
+The [Arm Neoverse N2 PMU guide](https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en) describes the architecture and details PMU event definitions. You can find other Neoverse core PMU guides on https://developer.arm.com/. 
+
+This Learning Path explains how to trigger common PMU events in specific metric groups and explains why certain events are triggered. 
+
+You can review example code fragments and see the resultant triggered PMU events.
 
 ## PMU Events 
 
-This Learning Path uses the Neoverse N2 core to count PMU events. The following code and analysis of events can be applied to other Neoverse cores. However, check your Neoverse core's Technical Reference Manual to ensure your core supports the event. 
+This Learning Path uses the Neoverse N2 core to count PMU events, however the code and analysis of events can be applied to other Neoverse cores. Check your Neoverse core's Technical Reference Manual to ensure compatibility. 
 
-The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. This Learning Path describes common microarchitectural events, some of which may be cache or TLB accesses and executed instructions.
+The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. Some common microarchitectural events that might be tracked are cache or TLB accesses, and executed instructions.
 
-The event groups covered are:
-- Cache Events
-    - Level 1 Data Cache
-    - Level 1 Instruction Cache
-    - Level 2 Unified Cache
-    - Last Level Cache
+This Learning Path covers cache events, specifically:
+
+* Level 1 Data Cache.
+* Level 1 Instruction Cache.
+* Level 2 Unified Cache.
+* Last Level Cache.
