@@ -46,6 +46,10 @@ LL_CACHE_MISS_RD is 326
 INST_RETIRED is 976
 ```
 
-`LL_CACHE_RD` counts transactions returned from outside of the N2, including the SLC. In this scenario, you are simulating only one N2 core in a standalone system, meaning that there are no levels of cache after the L2. For these reasons, `LL_CACHE_RD` does not count. Systems such as the reference design RD-N2 have an SLC inside the CMN-700 interconnect, which acts as the LL_CACHE. `LL_CACHE_MISS_RD` is not 0 since it counts read transactions that are returned from outside the N2, excluding the SLC. So it is likely counting bus read transactions from external system memory or a remote device.
+`LL_CACHE_RD` counts transactions returned from outside of the N2, including the SLC. In this scenario, you are simulating only one N2 core in a standalone system, meaning that there are no levels of cache after the L2. For these reasons, `LL_CACHE_RD` does not count. 
+
+Systems such as the reference design RD-N2 have an SLC inside the CMN-700 interconnect, which acts as the LL_CACHE. 
+
+`LL_CACHE_MISS_RD` is not 0 since it counts read transactions that are returned from outside the N2, excluding the SLC. So it is likely counting bus read transactions from external system memory or a remote device.
 
 

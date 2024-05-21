@@ -37,7 +37,9 @@ L1D_CACHE is 65
 INST_RETIRED is 100
 ```
 
-These stores trigger 65 accesses into the L1 D-cache, counted by `L1D_CACHE`. Event `L1D_CACHE_REFILL` counts 11 refills in the L1 D-cache as these stores were not previously present in the cache, so the CPU allocates these cache lines for future access. 
+These stores trigger 65 accesses into the L1 D-cache, counted by `L1D_CACHE`. 
+
+Event `L1D_CACHE_REFILL` counts 11 refills in the L1 D-cache as these stores were not previously there in the cache, so the CPU allocates these cache lines for future access. 
 
 ### L1 Data Cache Read Access
 
@@ -66,7 +68,10 @@ MEM_ACCESS_RD is 93
 `MEM_ACCESS` counts memory accesses issued by the Load Store Unit (LSU) inside your core, which is equal to `L1D_CACHE` in this instance. `MEM_ACCESS_RD` counts the number of memory accesses issued by the LSU due to load operations, which is equal to `L1D_CACHE_RD` in this instance. `L1D_CACHE_RD` counts L1 D-cache accesses caused by a load operation.
 
 Additional events that occur with an L1 cache miss:
-`L1D_CACHE_REFILL`, `L1D_CACHE_REFILL_RD`, and `L2 cache read access events`
+
+* `L1D_CACHE_REFILL`, 
+* `L1D_CACHE_REFILL_RD`, 
+* `L2 cache read access events`
 
 If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above.
 
@@ -100,8 +105,12 @@ void write_access()
 }
 ```
 
-Events that always occur: 
-`L1D_CACHE`, `L1D_CACHE_WR`, `MEM_ACCESS`, `MEM_ACCESS_WR`
+Events that always occur:
+
+* `L1D_CACHE`
+* `L1D_CACHE_WR`
+* `MEM_ACCESS`
+* `MEM_ACCESS_WR`
 
 ```output
 L1D_CACHE is 164
@@ -113,12 +122,18 @@ MEM_ACCESS_WR is 71
 `MEM_ACCESS` counts memory accesses issued by the Load Store Unit, which is equal to `L1D_CACHE` in this instance. `MEM_ACCESS_WR` counts the number of memory accesses issued by the LSU due to store operations, which is equal to `L1D_CACHE_WR` in this instance. `L1D_CACHE_WR` counts L1 D-cache accesses caused by store operations.
 
 Additional events that occur with an L1 Cache miss:
-`L1D_CACHE_REFILL`, `L1D_CACHE_REFILL_WR` and `L2 cache read access events`
+
+* `L1D_CACHE_REFILL`
+* `L1D_CACHE_REFILL_WR` 
+* `L2 cache read access events`
 
 If the cache line refill is from an outside cluster: `L1D_CACHE_REFILL_OUTER`, and the events above.
 
 If the L1 D-cache was full and the evicted line was dirty: 
-`L1D_CACHE_WB`, `L1D_CACHE_WB_VICTIM`, and the events above. 
+
+* `L1D_CACHE_WB`
+* `L1D_CACHE_WB_VICTIM`
+*...and the events above. 
 
 Note: `L1D_CACHE_REFILL_OUTER` is only counted when cache line allocations into the L1 D-cache are obtained from outside of the cluster. 
 
@@ -159,4 +174,6 @@ L1D_CACHE_WB is 118
 L1D_CACHE_WB_VICTIM is 118
 ```
 
-`L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or software-based Cache Maintenance Operations (CMOs).  `L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. As they are equal, all writebacks were caused by a cache line allocation.
+`L1D_CACHE_WB` counts both victim cache line evictions and cache writebacks from snoops or software-based Cache Maintenance Operations (CMOs).  
+
+`L1D_CACHE_WB_VICTIM` is a subset of `L1D_CACHE_WB`, only counting writebacks that are a result of a cache line allocation. As they are equal, all writebacks were caused by a cache line allocation.

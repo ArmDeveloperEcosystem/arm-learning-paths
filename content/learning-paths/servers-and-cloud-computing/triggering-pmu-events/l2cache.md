@@ -19,7 +19,7 @@ The following PMU events can be used to highlight effectiveness of the L2 cache:
         PMU_EVENT_INST_RETIRED,
 ```
 
-To trigger these events, the L1 D-cache must be full. We can run code to issue many stores to Normal Cacheable memory to do so.
+To trigger these events, the L1 D-cache must be full. You can run code to issue many stores to Normal Cacheable memory to do so.
 
 ```C
 void stores()
@@ -42,7 +42,7 @@ L1D_CACHE_WR is 70
 INST_RETIRED is 280
 ```
 
-The stores created 32 L2 D-cache accesses and 5 refills. `L2D_CACHE_WR` is 0 because no memory write operation was looked up in the L2 cache, counting any writebacks from the L1 data cache that allocate into the L2 cache. However, we are seeing L2 cache accesses due to reads, in `L2D_CACHE_RD`. This event counts whether there is a hit or a miss in the L2 cache. As a result, all of the data written was stored in the L1 D-cache and the L2 D-cache refills were triggered by read operations only.
+The stores created 32 L2 D-cache accesses and 5 refills. `L2D_CACHE_WR` is 0 because no memory write operation was looked up in the L2 cache, counting any writebacks from the L1 data cache that allocate into the L2 cache. However, you can see L2 cache accesses due to reads, in `L2D_CACHE_RD`. This event counts whether there is a hit or a miss in the L2 cache. As a result, all of the data written was stored in the L1 D-cache and the L2 D-cache refills were triggered by read operations only.
 
 Writing to more addresses will trigger L2 cache accesses due to write operations:
 
@@ -156,12 +156,12 @@ L2D_CACHE_REFILL_RD is 1
 L2D_CACHE_WB is 0
 ```
 
-`REMOTE_ACCESS` is 0 because we are not simulating a multi socket system so another socket is never accessed. 
+`REMOTE_ACCESS` is 0 because you are not simulating a multi-socket system, so another socket is never accessed. 
 
 Additional events that occur if the L2 cache is full: 
 `L2D_CACHE_WB` and `L2D_CACHE_WB_VICTIM`
 
-Reads don’t typically cause writebacks. We can use a store instruction to trigger the above events plus a writeback:
+Reads don’t typically cause writebacks. You can use a store instruction to trigger the above events plus a writeback:
 
 ```C
 void stores()
@@ -246,7 +246,7 @@ L2D_CACHE_REFILL is 49
 L2D_CACHE_REFILL_WR is 49
 ```
 
-`REMOTE_ACCESS` is 0 because we are not simulating a multi socket system so another socket is never accessed. However, the missed data was found outside of the L2 cache, resulting in a `L2D_CACHE_REFILL`.
+`REMOTE_ACCESS` is 0 because you are not simulating a multi socket system so another socket is never accessed. However, the missed data was found outside of the L2 cache, resulting in a `L2D_CACHE_REFILL`.
 
 Events that occur if the L2 cache is full: 
 `L2D_CACHE_WB`, `L2D_CACHE_WB_VICTIM`, and the events listed above (`REMOTE_ACCESS` may not count)

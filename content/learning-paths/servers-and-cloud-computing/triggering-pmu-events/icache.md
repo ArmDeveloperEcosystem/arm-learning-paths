@@ -51,7 +51,7 @@ INST_SPEC is 1893
 Using the above code and results, this section lists the events that occur during an I-side cache access, and an I-side cache miss.
 
 Events that always occur:
-`L1I_CACHE`
+`L1I_CACHE`.
 
 Additional events that occur when there is an L1 cache miss: 
-`L1I_CACHE_REFILL` and L2 cache read access events
+`L1I_CACHE_REFILL` and L2 cache read access events.
