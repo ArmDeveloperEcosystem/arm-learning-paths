@@ -4,6 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
+
    You have now learned how to create IoT applications with Windows on Arm and AWS IoT Core. You might be interested in learning how to use web technologies for creating cross-platform desktop apps.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 

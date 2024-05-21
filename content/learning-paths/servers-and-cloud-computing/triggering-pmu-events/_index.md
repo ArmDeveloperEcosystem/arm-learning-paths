@@ -1,14 +1,14 @@
 ---
-title: Understand Neoverse PMU events using C and assembly language
+title: Understand Neoverse cache PMU events using C and assembly language
 draft: true
-minutes_to_complete: 60
+minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why common PMU events occur.
+who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why common cache PMU events occur.
 
 learning_objectives: 
-    - Understand common PMU events
+    - Understand common cache PMU events
     - Understand why some code triggers certain PMU events on the Neoverse N2 core
-    - Understand which events are triggered during common scenarios
+    - Understand the events triggered during common scenarios
 
 prerequisites:
     - A general understanding of computer architecture, performance analysis, and the ability read Arm assembly code.
