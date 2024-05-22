@@ -1,5 +1,5 @@
 ---
-title: Learn about Neoverse cache PMU events using C and assembly language
+title: Learn about Neoverse Cache PMU Events using C and Assembly Language
 
 minutes_to_complete: 30
 

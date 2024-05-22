@@ -236,7 +236,7 @@ BUS_ACCESS_WR is 24
 
 
 Events that occur if the cache line was fetched outside of the CMN mesh:
-`REMOTE_ACCESS`,  and the events listed above
+`REMOTE_ACCESS`,  and the events listed above.
 
 Otherwise, if the cache line was not fetched outside of the mesh, `REMOTE_ACCESS` will not count but `L2D_CACHE_REFILL` and `L2D_CACHE_REFILL_RD` will – as seen below:
 
@@ -249,7 +249,7 @@ L2D_CACHE_REFILL_WR is 49
 `REMOTE_ACCESS` is 0 because you are not simulating a multi socket system so another socket is never accessed. However, the missed data was found outside of the L2 cache, resulting in a `L2D_CACHE_REFILL`.
 
 Events that occur if the L2 cache is full: 
-`L2D_CACHE_WB`, `L2D_CACHE_WB_VICTIM`, and the events listed above (`REMOTE_ACCESS` may not count)
+`L2D_CACHE_WB`, `L2D_CACHE_WB_VICTIM`, and the events listed above (`REMOTE_ACCESS` may not count).
 
 ```output
 L2D_CACHE_WB is 14
