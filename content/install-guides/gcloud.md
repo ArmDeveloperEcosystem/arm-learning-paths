@@ -24,7 +24,7 @@ The Google Cloud CLI, `gcloud`, allows you to run commands in your Google Cloud 
 
 `gcloud` is available for Windows, macOS, Linux and supports the Arm architecture. 
 
-## Before you begin
+## What should I consider before installing gcloud?
 
 Use the documentation link to find alternative installation options. 
 
@@ -44,7 +44,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and Install
+## How do I download and install for Ubuntu on Arm?
 
 The easiest way to install `gcloud` for Ubuntu on Arm is to use the package manager.
 
@@ -81,7 +81,7 @@ gcloud-crc32c 1.0.0
 gsutil 5.20
 ```
 
-## Acquire user credentials
+## How do I acquire user access credentials for Google Cloud?
 
 You can use `gcloud` to obtain user access credentials for Google Cloud using a web flow. You will put the credentials in a well-known location for Application Default Credentials (`ADC`).
 

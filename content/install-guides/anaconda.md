@@ -30,7 +30,7 @@ The `conda` command can be used to quickly install and use Python packages.
 
 Follow the instructions below to install and use Anaconda Distribution on an Arm server.
 
-## Before you begin
+## What should I do before installing Anaconda?
 
 Confirm you are using an Arm machine by running:
 
@@ -48,21 +48,21 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment. 
 
-For Ubuntu/Debian run the command:
+For Ubuntu/Debian, run the command:
 
 ```console
 sudo apt install xfce4 -y
 ```
 
-For Amazon Linux run the command:
+For Amazon Linux, run the command:
 
 ```console
 sudo amazon-linux-extras install mate-desktop1.x
 ```
 
-## Download 
+## How do I download the latest Anaconda distribution? 
 
-Download the latest Anaconda Distribution.
+To download the latest Anaconda distribution, run:
 
 ```bash
 curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
@@ -70,7 +70,7 @@ curl -O https://repo.anaconda.com/archive/Anaconda3-2023.09-0-Linux-aarch64.sh
 
 Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-x86_64.sh` where the `XX` and `YY` values represent the year and month of the latest release.
 
-## Install
+## What are the steps to install the downloaded Anaconda distribution?
 
 Run the downloaded install script.
 
@@ -82,17 +82,17 @@ If you wish to review the license terms before accepting, remove `-b`.
 sh ./Anaconda3-2023.09-0-Linux-aarch64.sh -b
 ```
 
-The install will take a couple of minutes to complete.
+The install takes a couple of minutes to complete.
 
-The batch installation will not setup the shell. 
+The batch installation will not set up the shell. 
 
-To setup the shell run.
+To set up the shell, run:
 
 ```bash
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 ```
 
-## Get started
+## How do I get started with Anaconda after installation?
 
 Test Anaconda Distribution by running simple TensorFlow and PyTorch examples.
 
