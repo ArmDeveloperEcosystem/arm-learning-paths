@@ -5,15 +5,16 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Operation Mix
 
-The following groups make up the operation mix: 
+The operation mix comprises these groups: 
 
-- SIMD percentage
-- scalar floating point percentage
-- integer percentage
-- branch percentage
-- load percentage
-- store percentage
+- SIMD percentage.
+- Scalar floating point percentage.
+- Integer percentage.
+- Branch percentage.
+- Load percentage.
+- Store percentage.
 
 ### SIMD percentage
 
@@ -43,11 +44,11 @@ ASE_SPEC is 1
 ASE_INST_SPEC is 3
 ```
 
-The results show `ASE_SPEC` is 1 and `ASE_INST_SPEC` is 3. `ASE_INST_SPEC` counts speculatively executed Advanced SIMD operations. Meanwhile, `ASE_SPEC` counts speculatively executed Advanced SIMD operations, excluding load, store, and move micro-operations that move data to or from the SIMD registers. `ASE_INST_SPEC` counts 1 from LD2 and 2 from ADD – adding then storing. `ASE_SPEC` only counts 1 from the actual NEON add operation.
+The results show `ASE_SPEC` is 1 and `ASE_INST_SPEC` is 3. `ASE_INST_SPEC` counts speculatively-executed Advanced SIMD operations. Meanwhile, `ASE_SPEC` counts speculatively-executed Advanced SIMD operations, excluding load, store, and move micro-operations that move data to or from the SIMD registers. `ASE_INST_SPEC` counts 1 from LD2 and 2 from ADD, adding then storing. `ASE_SPEC` only counts 1 from the actual NEON add operation.
   
 ## Scalar floating point percentage
 
-To trigger `VFP_SPEC`, a scalar adding function has been made:
+To trigger `VFP_SPEC`, a scalar adding function is made:
 
 ```C
     .global scalar_fp
@@ -69,7 +70,7 @@ INST_SPEC is 11
 VFP_SPEC is 2
 ```
 
-Since `VFP_SPEC` does not count instructions that move data to or from floating point registers, it only counts the ADD operation. The results show that `VFP_SPEC` is 2. Although there is one ADD operation, the floating point instruction could be split up into two micro-operations.
+Since `VFP_SPEC` does not count instructions that move data to or from floating point registers, it only counts the ADD operation. The results show that `VFP_SPEC` is 2. Although there is one ADD operation, the floating point instruction can be split up into two micro-operations.
  
 ## Integer and branch percentage
 
@@ -123,5 +124,5 @@ BR_INDIRECT_SPEC is 6
 BR_IMMED_SPEC is 113
 ```
 
-`DP_SPEC` is triggered by speculatively executed logical or arithmetic instructions. `BR_IMMED_SPEC` is triggered by immediate branch instructions, including B <> and B.cond <>. Lastly, `BR_INDIRECT_SPEC` is triggered by any instructions that force a software change of the program counter that are speculatively executed, including RET. 
+`DP_SPEC` is triggered by speculatively-executed logical or arithmetic instructions. `BR_IMMED_SPEC` is triggered by immediate branch instructions, including B <> and B.cond <>. Lastly, `BR_INDIRECT_SPEC` is triggered by any instructions that force a software change of the program counter that are speculatively-executed, including RET. 
 
