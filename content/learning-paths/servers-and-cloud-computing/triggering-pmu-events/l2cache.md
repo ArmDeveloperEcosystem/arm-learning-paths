@@ -19,7 +19,7 @@ The following PMU events can be used to highlight effectiveness of the L2 cache:
         PMU_EVENT_INST_RETIRED,
 ```
 
-To trigger these events, the L1 D-cache must be full. You can run code to issue many stores to Normal Cacheable memory to do so.
+To trigger these events, the L1 D-cache must be full. To acheieve this, you can run code to issue many stores to Normal Cacheable memory.
 
 ```C
 void stores()
@@ -69,7 +69,7 @@ L1D_CACHE_WR is 142
 INST_RETIRED is 491
 ```
 
-There is 1 L2 D-cache access due to a write operation, counted by `L2D_CACHE_WR`. To trigger even more, there must be more stores to Normal Cacheable memory issued.
+There is 1 L2 D-cache access due to a write operation, counted by `L2D_CACHE_WR`. To trigger even more, there must be more stores issued to Normal Cacheable memory.
 
 ```C
 void stores()

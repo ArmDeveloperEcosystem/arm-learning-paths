@@ -17,7 +17,7 @@ PMU_EVENT_INST_RETIRED,
 
 Excess stores to Normal Cacheable memory cause allocations into the LL cache if a writeback is issued to the LL cache or if there is a shared cache line. 
 
-The LL cache is used to describe levels of caches outside of the core. LL caches can be a System Level Cache (SLC) inside an interconnect such as a mesh, caches in a core in another cluster, or in a remote devices. 
+The LL cache is used to describe levels of caches outside of the core. LL caches can be a System Level Cache (SLC) inside an interconnect such as a mesh, caches in a core in another cluster, or in a remote device. 
 
 In the Neoverse N2 reference system, the SLC is the Last Level cache. A cache line is looked up in the SLC if it is not present in the L1 D-cache or L2 cache in a CPU.
 

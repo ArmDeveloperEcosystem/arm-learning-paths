@@ -136,7 +136,7 @@ If the L1 D-cache was full and the evicted line was dirty:
 
 * `L1D_CACHE_WB`
 * `L1D_CACHE_WB_VICTIM`
-*...and the events above. 
+* ..and the events above. 
 
 Note: `L1D_CACHE_REFILL_OUTER` is only counted when cache line allocations into the L1 D-cache are obtained from outside of the cluster. 
 
