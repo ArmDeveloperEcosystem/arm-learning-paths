@@ -36,19 +36,19 @@ export PATH=$PATH:$JAVA_HOME
 ```
 
 {{% notice Note %}}
-If you want these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file or similar.
+If you want these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file.
 {{% /notice %}}
 
 #### Install Bazel
 
-To build mediapipe, you will use Bazel version 6.1.1.
+To build MediaPipe, you will use Bazel version 6.1.1.
 
 ```bash
 wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-6.1.1-installer-linux-x86_64.sh
 sudo bash bazel-6.1.1-installer-linux-x86_64.sh
 ```
 
-#### Clone the Mediapipe repo
+#### Clone the MediaPipe repo
 
 
 ```bash
@@ -64,30 +64,29 @@ pip3 install -r requirements.txt
 
 #### Install and configure the Android NDK and SDK
 
-Bazel only natively supports the Android NDK up to version 21. Use the script included in mediapipe to install the Android NDK and SDK:
+Bazel only natively supports the Android NDK up to version 21. Use the script included in MediaPipe to install the Android NDK and SDK:
 
 ```bash
-bash setup_android_sdk_and_ndk.sh
-```
-
-Add android_ndk_repository() and android_sdk_repository() rules into the WORKSPACE file:
-
-```bash
-echo "android_sdk_repository(name = \"/home/ubuntu/Android/Sdk\")" >> WORKSPACE
-echo "android_ndk_repository(name = \"/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r21\", api_level=21)" >> WORKSPACE
+bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bundle r21 --accept-licenses
 ```
 
 Add the NDK bin folder to your PATH variable:
 
 ```bash
 
-export PATH=$PATH:/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/
+export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/
 
 ```
 
 #### Install OpenCV and its dependencies
 
-In the setup_opencv.sh script change libc1394-22-dev to libc1394-dev due to [libc1394-dev replacing libc1394-22-dev in Ubuntu 21.10.](https://github.com/ros/rosdistro/issues/34921)
+{{% notice Note %}}
+In Ubuntu 21.10, [libc1394-dev replaced libc1394-22-dev.](https://github.com/ros/rosdistro/issues/34921)
+
+Check your Ubuntu version using `lsb_release -a`, and if you're running 21.10 or later, change libc1394-22-dev to libc1394-dev in the setup_opencv.sh script.
+{{% /notice %}}
+
+To install opencv, run:
 
 ```
 bash setup_opencv.sh

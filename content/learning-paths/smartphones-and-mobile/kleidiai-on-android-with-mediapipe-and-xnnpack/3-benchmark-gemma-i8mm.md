@@ -50,7 +50,7 @@ Download NDK r25. Bazel only supports up to NDK r21, which does not have support
 
 ```bash
 
-cd /home/ubuntu/Android/Sdk/ndk-bundle/
+cd $HOME/Android/Sdk/ndk-bundle/
 
 wget https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
 
@@ -62,7 +62,7 @@ Add NDK bin folder to your PATH variable:
 
 ```bash
 
-export PATH=$PATH:/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/
+export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/
 
 ```
 
@@ -70,9 +70,9 @@ Modify the WORKSPACE file to add the path to Andoird NDK r25:
 
 ```bash
 
-android_ndk_repository(name = "androidndk", api_level=30, path="/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r25c")
+android_ndk_repository(name = "androidndk", api_level=30, path="$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c")
 
-android_sdk_repository(name = "androidsdk", path = "/home/ubuntu/Android/Sdk")
+android_sdk_repository(name = "androidsdk", path = "$HOME/Android/Sdk")
 
 ```
 

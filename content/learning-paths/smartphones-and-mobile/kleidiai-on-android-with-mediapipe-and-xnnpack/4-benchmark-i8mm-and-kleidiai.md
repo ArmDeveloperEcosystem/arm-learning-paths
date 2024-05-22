@@ -30,7 +30,7 @@ git apply kleidiai_prototype.patch -v
 
 ```
 
-Apply Mediapipe patch:
+Apply MediaPipe patch:
 
 ```bash
 
@@ -59,7 +59,7 @@ With:
 ```bash
 local_repository(
     name = "XNNPACK",
-    path = "/home/ubuntu/XNNPACK",
+    path = "$HOME/XNNPACK",
     repo_mapping = {"@com_google_benchmark": "@google_benchmark"}
 )
 ```
