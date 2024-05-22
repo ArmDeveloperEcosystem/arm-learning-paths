@@ -1,6 +1,6 @@
 ---
 # User change
-title: Run example on FVP and debug with Arm Debugger
+title: Run the example on FVP and debug with Arm Debugger
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,21 +8,24 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Run application on FVP standalone
+## Run the application on an FVP
 
-The application can be run directly on the Arm Development Studio supplied FVP.
+The application can be run directly on an FVP included in Arm Development Studio.
+
 ```command
 FVP_MPS2_Cortex-M3.exe -a target/thumbv7m-none-eabi/debug/examples/armds
 ```
+
 {{% notice Optional %}}
-To disable visualisation of the FVP, which can reduce the time it takes to start, add the command option:
+To disable FVP visualization (which can reduce the start time) add the command option:
 
 `-C fvp_mps2.mps2_visualisation.disable-visualisation=1`
 
-This option has no other effect on the behaviour of the FVP.
+This option has no other effect on the behavior of the FVP.
 {{% /notice %}}
 
 The application will run to completion on the FVP, and you will see output similar to:
+
 ```output
 Total sum to 1 is 1
 Calculated sum is 1
@@ -32,15 +35,15 @@ Calculated sum is 3
 ...
 ```
 
-## Run application on FVP within Arm Debugger
+## Run the application on FVP within Arm Debugger
 
-Though Rust applications are not officially supported by the debugger, the `DWARF5` debug format has been the default since the `6.0` (`Arm Development Studio 2023.1`) release. 
+Though Rust applications are not officially supported by the debugger, the DWARF5 debug format has been the default since the 6.0 (Arm Development Studio 2023.1) release. 
 
 This means that Rust applications can generally be debugged.
 
-### Configure IDE for Rust source files
+### Configure the IDE for Rust source files
 
-By default, the Arm Development Studio is not aware of Rust (`.rs`) source files.
+By default, Arm Development Studio is not aware of Rust (`.rs`) source files.
 
 Navigate the menu to `Window` > `Preferences`, and then `General` > `Editors` > `File Associations`.
 
@@ -48,7 +51,7 @@ Click `Add`, and enter `.rs` file type.
 
 Highlight the `.rs` file type from the list, and add the `C/C++ Editor` as the `Associated editor`. Click `Apply and Close`.
 
-### Create Debug Connection
+### Create a Debug Connection
 
 Launch the Arm Debugger, and create a `New` > `Model Connection` from the `File` menu.
 

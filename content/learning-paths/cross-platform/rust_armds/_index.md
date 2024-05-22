@@ -6,8 +6,8 @@ who_is_this_for: This is an introductory topic embedded application developers t
 
 learning_objectives: 
     - Build an embedded application in Rust
-    - Run application on Fixed Virtual Platform
-    - Debug application with Arm Development Studio
+    - Run the application on Fixed Virtual Platform
+    - Debug the application with Arm Development Studio
 
 prerequisites:
     - An installation of Arm Development Studio (a 30-day evaluation license is available)

@@ -1,7 +1,7 @@
 ---
 title: Rust for Embedded Applications
 minutes_to_complete: 10
-official_docs: https://docs.rust-embedded.org/book/
+official_docs: https://docs.rust-embedded.org/
 author_primary: Ronan Synnott
 additional_search_terms:
 - compiler
@@ -15,11 +15,15 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Rust](https://www.rust-lang.org/) is an open source programming language. This install guide is for embedded developers wishing to use Rust for their applications. If you wish to use Rust to build Linux applications on an Arm Linux platform, see this [Install Guide](../rust) instead.
+[Rust](https://www.rust-lang.org/) is an open source programming language. 
+
+This install guide is for embedded developers wishing to use Rust for their applications. 
+
+If you wish to use Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](../rust) instead.
 
 This install guide assumes an Ubuntu Linux host.
 
-For further information, see [The Embedded Rust Book(https://docs.rust-embedded.org/book/)].
+For further information, see [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
 
 ## Installation {#install}
 
