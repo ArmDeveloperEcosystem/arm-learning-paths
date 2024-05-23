@@ -1,5 +1,5 @@
 ---
-title: Rust
+title: Rust for Linux Applications
 minutes_to_complete: 10
 official_docs: https://www.rust-lang.org/tools/install
 author_primary: Mathias Brossard
@@ -19,7 +19,11 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Rust](https://www.rust-lang.org/) is an open source programming language.
+[Rust](https://www.rust-lang.org/) is an open source programming language. 
+
+This install guide is for Linux application developers wishing to use Rust. 
+
+If you wish to use Rust to build embedded applications for Arm, refer to [Rust for Embedded Applications](../rust_embedded) instead.
 
 ## Before you begin
 
