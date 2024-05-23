@@ -7,7 +7,7 @@ who_is_this_for: This is an advanced topic for software and hardware engineers w
 
 learning_objectives: 
     - Describe common non-cache PMU events.
-    - Understand why particular code triggers specific PMU events on the Neoverse N2 Core.
+    - Understand why specific code triggers specific PMU events on the Neoverse N2 Core.
    
 prerequisites:
     - Some familiarity with performance analysis.

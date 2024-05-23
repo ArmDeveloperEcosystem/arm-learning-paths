@@ -7,15 +7,16 @@ layout: learningpathall
 ---
 ## Neoverse Core PMU
 
-The Neoverse core PMU measures hardware events that occur during software execution. PMU events are used to measure performance, monitor workload efficiency, and track resource utilization and requirements. 
+The Neoverse Core PMU measures hardware events that occur during software execution. You can use PMU events to measure performance, monitor workload efficiency, and track resource utilization and requirements. 
 
-The [Arm Neoverse N2 PMU guide](https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en) describes the architectural background and PMU event definitions. You can find other Neoverse core PMU guides on https://developer.arm.com/. 
+The [Arm Neoverse N2 PMU guide](https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en)  describes the behavior of the different Performance Monitor Unit (PMU) events 
+implemented in the Neoverse N2. You can find other Neoverse core PMU guides on https://developer.arm.com/. 
 
-This Learning Path explains how to trigger common PMU events in specific metric groups and explains why certain events are triggered. 
+This Learning Path explains how to trigger common PMU events in specific metric groups and explains the reasons why certain events are triggered. 
 
-You can learn more about the Arm CPU architecture and Arm assembly language, by reading [Learn the Architecture - A-profile – Arm®](https://www.arm.com/architecture/learn-the-architecture/a-profile). 
+You can learn more about the Arm CPU architecture and Arm assembly language by visiting the resources at [Learn the Architecture - A-profile – Arm®](https://www.arm.com/architecture/learn-the-architecture/a-profile). 
 
-The following sections are particularly helpful:
+The following guides are helpful:
 
  - AArch64 Instruction Set Architecture (ISA).
  - AArch64 Memory Management.
@@ -24,7 +25,7 @@ The following sections are particularly helpful:
 
 ## PMU Events 
 
-This Learning Path uses the Neoverse N2 core to count PMU events, however the code and analysis of events can be applied to other Neoverse cores. Check your Neoverse core's Technical Reference Manual to ensure compatibility. 
+This Learning Path uses the Neoverse N2 core to count PMU events, however you can apply the code and analysis of events to other Neoverse cores. Check your Neoverse core's Technical Reference Manual to ensure compatibility. 
 
 The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. Some common microarchitectural events that might be tracked are cache or TLB accesses, and executed instructions.
 
