@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. For this example, you need an Arm server instance with at least 4 cores and 8GB of RAM. The instructions have been tested on AWS Graviton3 (c7g) instances.
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. For this example, you need an Arm server instance with at least four cores and 8GB of RAM. The instructions have been tested on AWS Graviton3 (c7g) instances.
 
 To start, you need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
 PyTorch is a widely-used Machine Learning framework for Python. You will use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
