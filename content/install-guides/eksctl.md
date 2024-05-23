@@ -25,7 +25,7 @@ The Amazon EKS CLI, `eksctl`, is a command line tool to create and manage Kubern
 
 The EKS CLI is available for a variety of operating systems and Linux distributions and there are multiple ways to install it. It runs on both Arm Linux distributions and Windows on Arm.
 
-## Before you begin
+## What should I do before installing eksctl on Arm Linux and Windows on Arm?
 
 This install guide provides a quick solution to install `eksctl` on Arm Linux and Windows on Arm. 
 
@@ -55,7 +55,7 @@ In the Device specifications section look for "ARM-based processor" in the Syste
 
 Install the Kubernetes command-line tool, `kubectl`, using the [Kubectl install guide](/install-guides/kubectl/).
 
-## Download and install on Linux
+## How do I download and install eksctl on Arm Linux?
 
 1. Download the `eksctl` package using `curl`: 
 
@@ -82,7 +82,7 @@ The output will be similar to:
 0.160.0
 ```
 
-## Download and install on Windows
+## How do I download and install eksctl on Windows?
 
 1. Use a browser to download the [EKS CLI latest release](https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_Windows_arm64.zip).
 
@@ -100,13 +100,13 @@ The output will be similar to:
 0.160.0
 ```
 
-## Configure the AWS CLI
+## How do I configure the AWS CLI?
 
 `eksctl` relies on the AWS CLI being installed and configured. Use the [AWS CLI install guide](/install-guides/aws-cli/) to install the AWS CLI. The CLI provides the `aws` command.
 
 You will also need to configure the AWS CLI using the `aws configure` or the `aws configure sso` command. There are multiple ways to configure the CLI, including environment variables, command-line options, and credentials files. Refer to the [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) for more details. 
 
-## Create a simple EKS cluster
+## How do I use eksctl to create a simple EKS cluster?
 
 With your AWS account configured, run `eksctl` to create a cluster with 2 nodes with AWS Graviton processors: 
 
@@ -135,9 +135,9 @@ ip-192-168-38-144.ec2.internal   Ready    <none>   2m31s   v1.25.13-eks-43840fb 
 ip-192-168-4-142.ec2.internal    Ready    <none>   2m31s   v1.25.13-eks-43840fb   192.168.4.142    54.175.254.219   Amazon Linux 2   5.10.192-183.736.amzn2.aarch64   containerd://1.6.19
 ```
 
-## Delete the cluster
+## How do I use eksctl to delete the cluster?
 
-To delete the resources associated with the cluster run:
+To delete the resources associated with the cluster, run:
 
 ```console
 eksctl delete cluster --region=us-east-1 --name=cluster-1

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Install, configure and check PostgreSQL"
+title: "How do I install, configure, and check PostgreSQL?"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,11 +8,11 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
+## What should I consider before installing PostgreSQL?
 
 In this section you will learn about different options to install, configure and check your PostgreSQL database. If you already know how to deploy a PostgreSQL database, you can skip this learning path, and instead explore the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path. 
 
-## Arm deployment options
+## What are the PostgreSQL Arm deployment options?
 
 There are numerous ways to deploy PostgreSQL on Arm. Bare metal, cloud VMs, or the various SQL services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
 
@@ -30,7 +30,7 @@ There are numerous ways to deploy PostgreSQL on Arm. Bare metal, cloud VMs, or t
     * Simply select an Arm based instance for deployment
 * Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro) learning path
 
-##  PostgreSQL Documentation
+##  How do I learn about PostgreSQL?
 
 PostgreSQL is a large project with many features. It is recommended that the [PostgreSQL documentation](https://www.postgresql.org/docs/current/index.html) be explored.
 
@@ -38,11 +38,11 @@ PostgreSQL is a large project with many features. It is recommended that the [Po
 
 If you are using a cloud service like AWS RDS, then the installation of PostgreSQL is handled by those services. However, if you are working with a bare metal or cloud node, there are a few different [installation options](https://www.postgresql.org/docs/current/install-binaries.html). You should decide what approach you want to take for installing PostgreSQL after reviewing the documentation.
 
-## PostgreSQL Server Configuration
+## What is the best way of configuring the PostgreSQL Server?
 
 Getting PostgreSQL up and running is easy. This is because the default out of box configuration will work. However, this default configuration is most likely under optimized. A graph of the performance difference between an out of box PostgreSQL database and a tuned database is shown in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path. For the purpose of learning, it’s ok to start with the default configuration. Once you have that working, you should read the [PostgreSQL server configuration documentation](https://www.postgresql.org/docs/current/index.html) , and follow the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/) learning path.
 
-## Get PostgreSQL Build Configuration
+## How do I get the PostgreSQL Build Configuration?
 
 It can be helpful to know the build configuration of an installation of PostgreSQL. Run `pg_config` to get this information. Shown below is an example output:
 
@@ -74,7 +74,7 @@ VERSION = PostgreSQL 14.8
 
 The switches CFLAGS, CXXFLAGS, and LDFLAGS listed in the `CONFIGURE` line can be very helpful if you plan to build PostgreSQL from source. Tuning compilation options is discussed in the [Learn how to Tune PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql_tune/tuning) learning path.
 
-## Connect to the database 
+## How do I connect to the PostgreSQL database? 
 
 Installations of PostgreSQL will also install a CLI client application called [`psql`](https://www.postgresql.org/docs/current/app-psql.html). Once a database is up and running, this tool can be used to connect to the database and make sure it is working. Review the [instructions](https://www.postgresql.org/docs/15/tutorial-accessdb.html) on how to use the `psql` CLI tool.
 
@@ -86,7 +86,7 @@ Type "help" for help.
 postgres=# 
 ```
 
-## Sample PostgreSQL Commands
+## What are some sample PostgreSQL Commands?
 
 Create a new database using the command shown:
 

@@ -2,13 +2,13 @@
 review:
     - questions:
         question: >
-            Do all Arm Neoverse CPUs include support for bfloat16 instructions?
+            Do all Arm Neoverse CPUs include support for BFloat16 instructions?
         answers:
             - "Yes"
             - "No"
         correct_answer: 2
         explanation: >
-            Recent Arm CPUs like Arm Neoverse V1 and Neoverse N2 include support for bfloat16 instructions.
+            Recent Arm CPUs such as Arm Neoverse V1 and Neoverse N2 include support for BFloat16 instructions.
 
     - questions:
         question: >
@@ -28,7 +28,7 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Yes a performance boost of upto 1.9x is observed on Arm Neoverse based AWS Graviton3 instances by enabling support for BFloat16 fast math kernels in PyTorch.
+            Yes. A performance boost of up to 1.9x is observed on Arm Neoverse-based AWS Graviton3 instances by enabling support for BFloat16 fast math kernels in PyTorch.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

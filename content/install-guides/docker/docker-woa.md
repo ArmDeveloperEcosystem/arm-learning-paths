@@ -23,26 +23,26 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Install Docker for Windows on Arm {#docker-woa}
+## How do I install Docker for Windows on Arm {#docker-woa}?
 
 Docker can be run on Windows on Arm machines using the Windows Subsystem for Linux 2 (WSL2).
 
 There is no Docker Desktop for Windows on Arm, [please show your support by asking for it](https://github.com/docker/roadmap/issues/91)
 
-### Before you begin
+### What should I do before installing Docker for Windows on Arm?
 
 - Install WSL 2 on the Windows on Arm laptop
 - Install a Linux distribution such as Ubuntu 22.04 Linux distribution in WSL 2 from the Microsoft Store
 
 More information is available in the Learning Path [Get started with Windows Subsystem for Linux (WSL) on Arm](/learning-paths/laptops-and-desktops/wsl2/).
 
-### Example Windows on Arm computers
+### Which Windows on Arm computers are supported?
+Below are three examples of Windows on Arm computers today:
+- Lenovo Thinkpad X13s.
+- Microsoft Surface Pro X.
+- Samsung Galaxy Book S.
 
-- Lenovo Thinkpad X13s
-- Microsoft Surface Pro X
-- Samsung Galaxy Book S
-
-### Install and test Docker Engine
+### How do I install and test Docker Engine?
 
 You can use the general Linux install instructions to install Docker in WSL 2 for Windows on Arm. 
 

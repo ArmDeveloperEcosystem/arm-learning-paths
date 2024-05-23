@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Some PMU events will not occur on the Neoverse CPUs if they are not provided by a system component.
+            Some PMU events do not occur on the Neoverse CPUs if they are not provided by a system component.
         answers:
             - True
             - False
@@ -12,7 +12,7 @@ review:
 
     - questions:
         question: >
-            Which of the following events always occurs during an L2 D-cache access from a load instruction?
+            Which of the following events always occur during an L2 D-cache access from a load instruction?
         answers:
             - L2D_CACHE_REFILL
             - L2D_CACHE_RD
@@ -24,12 +24,12 @@ review:
 
     - questions:
         question: >
-            What scenario will not trigger L1D_CACHE_WB in a Neoverse N2 core?
+            What scenario does not trigger L1D_CACHE_WB in a Neoverse N2 core?
         answers:
-            - A writeback from the L1-D cache as a result of a Cache Maintenance Operation
-            - A full line write to the L2, without writing to the L1 D-cache 
-            - A cache line writeback to the L2 cache as a result of a snoop 
-            - A victim cache line eviction from the L1 D-cache
+            - A writeback from the L1-D cache as a result of a Cache Maintenance Operation.
+            - A full line write to the L2, without writing to the L1 D-cache. 
+            - A cache line writeback to the L2 cache as a result of a snoop. 
+            - A victim cache line eviction from the L1 D-cache.
         correct_answer: 2
         explanation: >
             L1D_CACHE_WB counts any writeback of dirty data from the L1 D-cache to the L2 cache, including writebacks from snoops, CMOs or evictions. Writing directly to the L2 cache, such as in write-streaming mode, will not result in a writeback from the L1 D-cache to the L2. L1D_CACHE_WB is Implementation Defined whether the event counts for 
@@ -38,9 +38,9 @@ review:
         question: >
             Why do I-side cache refills typically count less than D-side cache refills?
         answers:
-            - There will always be fewer instructions
-            - I-side cache accesses can result in a snoop to the D-side cache
-            - Instructions use up less memory than data
+            - There are fewer instructions.
+            - I-side cache accesses can result in a snoop to the D-side cache.
+            - Instructions use up less memory than data.
         correct_answer: 2
         explanation: >
             In the Neoverse N2, instruction fetches that miss in the I-cache will look in the D-cache and the L2 cache.

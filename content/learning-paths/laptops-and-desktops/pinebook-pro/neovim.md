@@ -1,5 +1,5 @@
 ---
-title: Installing and Configuring Neovim
+title: How do I install and configure Neovim?
 
 weight: 4
 layout: learningpathall
@@ -11,7 +11,7 @@ Neovim is lightweight and keeps the best parts of vim and improves it. Neovim ha
 
 If you have been curious about Neovim but never used it, this is a good way to try.
 
-## Example configurations
+## How do I configure Neovim for enhanced functionality?
 
 When opening Neovim for the first time it will look almost exactly like vim, but it is more customizable.  
 
@@ -23,7 +23,7 @@ Here are some configuration and customization examples demonstrating what is pos
 * https://github.com/ecosse3/nvim
 * https://neovim.io/screenshots/
 
-## Installation and setup of Neovim
+## How do I install and set up Neovim?
 
 In addition to Neovim, you should install Python and Node so that plugins to work correctly. Without these you may see errors each time Neovim is opened.
 
@@ -31,7 +31,7 @@ In addition to Neovim, you should install Python and Node so that plugins to wor
 Neovim is launched with the `nvim` command.
 {{% /notice %}}
 
-### Installation
+### How do I install Neovim?
 
 1. Install Neovim
 
@@ -78,7 +78,7 @@ sudo pacman -Sy python python-pip
 pip3 install pynvim
 ```
 
-### Configuration and customization
+### How do I configure and customize Neovim?
 
 Use `nvim` to create the configuration file `init.vim`
 

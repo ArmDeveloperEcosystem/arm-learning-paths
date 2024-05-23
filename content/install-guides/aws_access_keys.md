@@ -26,11 +26,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 In this section you will learn how to generate and configure Access keys. Access keys consist of an access key ID and secret access key, which are used to sign programmatic requests that you make to AWS.
 
-## Before you begin
+## What should I do before generating AWS Access keys?
 
 Install the AWS CLI on your machine using the [install guide](/install-guides/aws-cli/).
 
-## Generate Access keys (access key ID and secret access key)
+## How do I generate AWS Access keys (access key ID and secret access key)?
 
 Go to My Security Credentials
 

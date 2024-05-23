@@ -25,7 +25,7 @@ Example use cases for Sysreport include:
 Run Sysreport with the following command:
 
 ```console
-python sysreport.py
+python3 sysreport.py
 ```
 
 Below is the output from an Arm Neoverse N1 System Development Platform (N1SDP), a reference board based on the Neoverse N1 core, running Ubuntu 20.04.6 LTS:
