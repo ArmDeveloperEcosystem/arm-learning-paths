@@ -12,7 +12,7 @@ In this section, you'll modify MediaPipe build files in order to compile the llm
 
 #### Ensure that your device has the i8mm feature
 
-To test whether your phone chipset contains the i8mm feature, ensure that your phone has [usb debugging enabled](https://developer.android.com/studio/debug/dev-options), plug your phone in to your local development environment, and run
+To test whether your phone chipset contains the i8mm feature, run
 
 ```
 adb shell cat /proc/cpuinfo | grep i8mm

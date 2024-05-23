@@ -19,7 +19,17 @@ In order to cross-compile your inference engine, you'll need the following insta
 * Android SDK
 * OpenCV
 
+#### Set up your Android device
+
 You will also need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
+
+Once you have enabled USB debugging and connected via USB, run
+
+```
+adb devices
+```
+
+From your local environment to ensure that the Android device is properly connected.
 
 #### Install pip3
 
