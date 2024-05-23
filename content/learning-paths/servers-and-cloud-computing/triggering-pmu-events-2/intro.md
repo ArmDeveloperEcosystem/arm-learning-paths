@@ -27,7 +27,7 @@ The following guides are helpful:
 
 This Learning Path uses the Neoverse N2 core to count PMU events, however you can apply the code and analysis of events to other Neoverse cores. Check your Neoverse core's Technical Reference Manual to ensure compatibility. 
 
-The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. Some common microarchitectural events that might be tracked are cache or TLB accesses, and executed instructions.
+The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. Some common microarchitectural events that can be tracked are cache or TLB accesses, and executed instructions.
 
 This Learning Path covers these event groups:
 
@@ -37,9 +37,7 @@ This Learning Path covers these event groups:
    - Instruction TLB.
    - Data TLB.
 
-- Branch Events.
-
-- Operation Events:
+ - Operation Events:
     - SIMD.
     - Scalar Floating-Point.
     - Integer and Branch.
