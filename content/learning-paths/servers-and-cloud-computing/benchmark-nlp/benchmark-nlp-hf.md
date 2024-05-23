@@ -14,13 +14,13 @@ PyTorch is a widely-used Machine Learning framework for Python. You will use PyT
 
 ## Overview
 
-[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them, and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, sentiment analysis, summarization, and text generation.
+[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them, and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, Sentiment Analysis, summarization, and text generation.
 
-In this Learning Path, you run a sentiment analysis pipeline from Hugging Face and deploy it on your Arm-based server. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You then proceed to benchmark and accelerate the execution time of different NLP sentiment analysis models on your Arm machine.
+In this Learning Path, you run a Sentiment Analysis pipeline from Hugging Face and deploy it on your Arm-based server. Sentiment Analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You then proceed to benchmark and accelerate the execution time of different NLP Sentiment Analysis models on your Arm machine.
 
 ## Install Hugging Face Transformers library
 
-The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to build and run a sentiment analysis pipeline with different NLP models. 
+The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to build and run a Sentiment Analysis pipeline with different NLP models. 
 
 To install the Transformers library, run the following command:
 
@@ -64,9 +64,9 @@ Using a pipeline without specifying a model name and revision in production is n
 [{'label': 'POSITIVE', 'score': 0.9997499585151672}, {'label': 'NEGATIVE', 'score': 0.9996662139892578}]
 ```
 
-You have successfully performed sentiment analysis on the two strings of input text, all running on your Arm Neoverse CPU. The sentiment classification (positive or negative) is printed along with the sentiment score. As the output indicates in this simple example, no particular model was supplied to the sentiment-analysis pipeline, so a [default DistilBERT model](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) is chosen. You can change the input text in your example and re-run the classification example.
+You have successfully performed Sentiment Analysis on the two strings of input text, all running on your Arm Neoverse CPU. The sentiment classification (positive or negative) is printed along with the sentiment score. As the output indicates in this simple example, no particular model was supplied to the sentiment-analysis pipeline, so a [default DistilBERT model](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) is chosen. You can change the input text in your example and re-run the classification example.
 
-Now that you have run this simple sentiment analysis example, let's add the ability to pass a particular model to the pipeline and benchmark the model execution. Copy the contents shown below into a file named `benchmark-sentiment-analysis.py`:
+Now that you have run this simple Sentiment Analysis example, let's add the ability to pass a particular model to the pipeline and benchmark the model execution. Copy the contents shown below into a file named `benchmark-sentiment-analysis.py`:
 
 ```python
 import time
