@@ -22,7 +22,7 @@ review:
 
     - questions:
         question: >
-            Which of the following is true regarding the difference between PMU events that count speculatively executed instructions/operations and PMU events that count retired instructions/operations (Example: OP_SPEC vs OP_RETIRED)?
+            Which of the following is true?
         answers:
             - Speculatively executed PMU event counts are always greater than or equal to retired PMU event counts.
             - Speculatively executed PMU events count architecturally executed operations or instructions.
