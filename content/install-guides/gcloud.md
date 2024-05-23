@@ -81,7 +81,7 @@ gcloud-crc32c 1.0.0
 gsutil 5.20
 ```
 
-## How do I acquire user access credentials for Google Cloud?
+## How do I acquire user access credentials for Google Cloud? {#acquire-user-credentials}
 
 You can use `gcloud` to obtain user access credentials for Google Cloud using a web flow. You will put the credentials in a well-known location for Application Default Credentials (`ADC`).
 
