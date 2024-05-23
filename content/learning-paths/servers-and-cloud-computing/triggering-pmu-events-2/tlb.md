@@ -303,7 +303,7 @@ L1D_TLB is 702
 L1D_TLB_WR is 301
 ```
 
-`MEM_ACCESS` counts memory accesses issued by the Load Store Unit, both load and store operations. `MEM_ACCESS_WR` is a subset of `MEM_ACCESS`, only counting store operations that result in memory accesses. In this case, `MEM_ACCESS` is equal to `L1D_TLB` because each memory access had an associated D-TLB lookup. Similarly, each `MEM_ACCESS_RD` had an associated D-TLB lookup.
+`MEM_ACCESS` counts memory accesses that the Load Store Unit issues, both load and store operations. `MEM_ACCESS_WR` is a subset of `MEM_ACCESS`, only counting store operations that result in memory accesses. In this case, `MEM_ACCESS` is equal to `L1D_TLB` because each memory access has an associated D-TLB lookup. Similarly, each `MEM_ACCESS_RD` has an associated D-TLB lookup.
 
 Additional events that occur with a L1 D-TLB miss:
 `L2D_TLB`, `L2D_TLB_WR`, `L1D_TLB_REFILL`, and `L1D_TLB_REFILL_WR`.
@@ -323,4 +323,4 @@ DTLB_WALK is 9
 L2D_TLB_REFILL is 9
 L2D_TLB_REFILL_WR is 9
 ```
-These results show that each TLB access was caused by a write operation and missed in each TLB level, causing a D-TLB walk. Each TLB miss also caused a refill into the L1 D-TLB first, and then a refill into the L2 D-TLB.
+These results show that each TLB access is caused by a write operation and missed in each TLB level, causing a D-TLB walk. Each TLB miss also causes a refill into the L1 D-TLB first, and then secondly, a refill into the L2 D-TLB.
