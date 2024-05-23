@@ -10,11 +10,19 @@ layout: learningpathall
 
 Now that you have your environment set up correctly, it's time to build the inference engine. This executable can run an LLM model on an Android device, it will produce an output, given an initial prompt.
 
-Before building, add the model path in `mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main.cc` in the default value of that argument as shown:
+Before building, add the model path in `mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main.cc` as the default value of the model_path argument. Search for:
 
 ```
-ABSL_FLAG(std::optional<std::string>, model_path, "./gemma-2b-it-cpu-int4.bin", "Path to the tflite model file.");
+ABSL_FLAG(std::optional<std::string>, model_path, std::nullopt,
 ```
+ 
+and replace with
+
+```
+ABSL_FLAG(std::optional<std::string>, model_path, "./gemma-2b-it-cpu-int4.bin",
+```
+ 
+This adds the gemma model file (that you will download in a moment) to the default model path.
 
 {{% notice Note %}}
 This modification is necessary due to an argument parsing bug in the inference executable.

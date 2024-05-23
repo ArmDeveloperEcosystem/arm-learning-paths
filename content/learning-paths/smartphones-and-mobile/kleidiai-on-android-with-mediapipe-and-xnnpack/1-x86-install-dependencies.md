@@ -19,7 +19,7 @@ In order to cross-compile your inference engine, you'll need the following insta
 * Android SDK
 * OpenCV
 
-You will also need to enable usb debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable usb debugging.
+You will also need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
 
 #### Install pip3
 
@@ -101,7 +101,7 @@ export GLOG_logtostderr=1
 bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
 ```
 
-Note: You need the bazel flag 'MEDIAPIPE_DISABLE_GPU=1' since desktop GPU is not currently supported.
+The bazel flag `MEDIAPIPE_DISABLE_GPU=1` disables the desktop GPU since it's not required.
 
 The output from this test run will be ```Hello World!``` printed ten times, like this:
 
