@@ -6,8 +6,8 @@ minutes_to_complete: 20
 who_is_this_for: This is an introductory topic for software developers who want to learn how to run and accelerate the performance of Natural Language Processing (NLP) models on Arm-based servers. 
 
 learning_objectives:
-    - Deploy PyTorch NLP sentiment analysis models from Hugging Face on Arm servers. 
-    - Evaluate the performance of three NLP models using the sentiment analysis pipeline.
+    - Deploy PyTorch NLP Sentiment Analysis models from Hugging Face on Arm servers. 
+    - Evaluate the performance of three NLP models using the Sentiment Analysis pipeline.
     - Measure the performance uplift of these models by enabling support for BFloat16 fast math kernels on Arm Neoverse-based AWS Graviton3 Processors.
 
 prerequisites:
