@@ -10,13 +10,13 @@ layout: learningpathall
 The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. For this example, you need an Arm server instance with at least four cores and 8GB of RAM. The instructions have been tested on AWS Graviton3 (c7g) instances.
 
 To start, you need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
-PyTorch is a widely-used Machine Learning framework for Python. You will use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
+PyTorch is a widely-used Machine Learning framework for Python. You use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
 
 ## Overview
 
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them, and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, Sentiment Analysis, summarization, and text generation.
 
-In this Learning Path, you run a Sentiment Analysis pipeline from Hugging Face and deploy it on your Arm-based server. Sentiment Analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You then proceed to benchmark and accelerate the execution time of different NLP Sentiment Analysis models on your Arm machine.
+In this Learning Path, you will run a Sentiment Analysis pipeline from Hugging Face and deploy it on your Arm-based server. Sentiment Analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You will then proceed to benchmark and accelerate the execution time of different NLP Sentiment Analysis models on your Arm machine.
 
 ## Install Hugging Face Transformers library
 
@@ -30,7 +30,7 @@ pip3 install transformers
 
 ## Build and run a sentiment analyzer using Hugging Face Transformers library  
 
-You are now ready to use python and the Hugging Face transformers library to build a simple sentiment analyzer on your Arm machine. Using a file editor of your choice, create a file named `basic-sentiment-analysis.py` with the code shown below:
+You are now ready to use Python and the Hugging Face transformers library to build a simple sentiment analyzer on your Arm machine. Using a file editor of your choice, create a file named `basic-sentiment-analysis.py` with the code shown below:
 ```python
 import time
 import numpy as np
@@ -132,7 +132,7 @@ distilbert-base-uncased long sentence batched: ('655.2', '667.7')
 ```
 You should see the mean and 99th percentile execution time printed for the four cases of execution. All times are in milliseconds.  
 
-You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for bfloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels, an algorithm widely-used in Machine Learning models, to use BFloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
+You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for BFloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels - a type of algorithm widely-used in Machine Learning models, to use BFloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
 
 Set the environment variable:
 
@@ -166,7 +166,7 @@ Change the line shown below in `benchmark-sentiment-analysis.py`:
 models = ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]
 ```
 
-The output from the running all three models on an AWS Graviton3 c7g.xlarge instance without enabling bfloat16 fast math kernels is shown below:
+The output from the running all three models on an AWS Graviton3 c7g.xlarge instance without enabling BFloat16 fast math kernels is shown below:
 
 ```output
 Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
@@ -189,7 +189,7 @@ roberta-base short sentence batched: ('474.8', '490.4')
 roberta-base long sentence batched: ('1309.7', '1329.4')
 ```
 
-The output from running the same three models on an AWS Graviton3 c7g.xlarge instance with bfloat16 fast math kernels support enabled is shown below:
+The output from running the same three models on an AWS Graviton3 c7g.xlarge instance with BFloat16 fast math kernels support enabled is shown below:
 
 ```output
 Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
