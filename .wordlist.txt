@@ -2701,3 +2701,7 @@ abetlen
 ee
 pkgx
 mprof
+rustc
+binutils
+RPi
+GoogleTest
