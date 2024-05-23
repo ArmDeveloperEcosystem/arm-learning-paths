@@ -25,7 +25,7 @@ The following guides are helpful:
 
 ## PMU Events 
 
-This Learning Path uses the Neoverse N2 core to count PMU events, however you can apply the code and analysis of events to other Neoverse cores. Check your Neoverse core's Technical Reference Manual to ensure compatibility. 
+This Learning Path focuses on the Neoverse N2 core counting PMU events, however you can apply the code and analysis of events to other Neoverse cores. Check your Neoverse core's Technical Reference Manual to ensure compatibility. 
 
 The Neoverse N2 has six counters that can be programmed to count any PMU event supported by the CPU. Some common microarchitectural events that can be tracked are cache or TLB accesses, and executed instructions.
 
