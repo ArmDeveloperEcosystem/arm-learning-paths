@@ -36,7 +36,7 @@ simd:
 array: .word 10, 20, 30, 40, 50, 60
 ```
 
-The resulting event counts for the code are:
+The resulting event counts for this code are:
 
 ```output
 INST_SPEC is 12
