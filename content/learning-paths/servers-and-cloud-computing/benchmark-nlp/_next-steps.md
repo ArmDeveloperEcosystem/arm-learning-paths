@@ -1,6 +1,6 @@
 ---
 next_step_guidance: >
-    Thank you for completing this learning path on how to run and accelerate NLP sentiment analysis on Arm based servers. You might be interested in learning how to use the Keras Core with TensorFlow, PyTorch, and JAX backends.
+    Thank you for completing this Learning Path on how to run and accelerate NLP sentiment analysis on Arm-based servers. You might be interested in learning how to use the Keras Core with TensorFlow, PyTorch, and JAX backends.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/keras-core/"
 
