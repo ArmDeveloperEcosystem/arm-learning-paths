@@ -7,6 +7,8 @@ additional_search_terms:
 - compiler
 - rust
 
+draft: true 
+
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
