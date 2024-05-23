@@ -124,5 +124,5 @@ BR_INDIRECT_SPEC is 6
 BR_IMMED_SPEC is 113
 ```
 
-`DP_SPEC` is triggered by speculatively-executed logical or arithmetic instructions. `BR_IMMED_SPEC` is triggered by immediate branch instructions, including B <> and B.cond <>. Lastly, `BR_INDIRECT_SPEC` is triggered by any instructions that force a software change of the program counter that are speculatively executed, including RET. 
+`DP_SPEC` is triggered by speculatively executed logical or arithmetic instructions. `BR_IMMED_SPEC` is triggered by immediate branch instructions, including B <> and B.cond <>. Lastly, `BR_INDIRECT_SPEC` is triggered by any instructions that force a software change of the program counter that are speculatively executed, including RET. 
 
