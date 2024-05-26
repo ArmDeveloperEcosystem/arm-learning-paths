@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to use DynamoDB for an IoT solution. You can now learn how to develop IoT applications with .NET 8 on Windows on Arm.
+   You have learned how to use Lambda for an IoT solution. You can now learn how to develop IoT applications with .NET 8 on Windows on Arm.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_net8"
@@ -18,16 +18,16 @@ recommended_path: "/learning-paths/laptops-and-desktops/win_net8"
 
 further_reading:
     - resource:
-        title: DynamoDB
-        link: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html
-        type: documentation
+        title: AWS Lambda
+        link: https://aws.amazon.com/lambda/
+        type: website
     - resource:
-        title: Using DynamoDB with other AWS services
-        link: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/OtherServices.html
-        type: documentation
+        title: Amazon SNS
+        link: https://aws.amazon.com/sns/
+        type: website
     - resource:
-        title: Rules for AWS IoT 
-        link: https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html
+        title: Overview of AWS
+        link: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html
         type: documentation
 
 # ================================================================================

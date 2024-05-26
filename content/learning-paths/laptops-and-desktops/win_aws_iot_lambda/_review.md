@@ -13,37 +13,37 @@
 review:
     - questions:
         question: >
-            What is the Rules Engine?
+            What is AWS Lambda?
         answers:
             - "A part of the AWS IoT Core to process and route data between IoT devices and other AWS services."
-            - "An engine to create security rules."
-            - "An engine for accelerating database access."            
-        correct_answer: 1               
+            - "A software design architecture."
+            - "A serverless compute service provided by AWS"            
+        correct_answer: 3              
         explanation: >
-            The Rules Engine in AWS IoT Core is a powerful feature designed to process and route data between IoT devices and other AWS services or external endpoints.
+             AWS Lambda is a serverless compute service provided by AWSthat allows you to run code without provisioning or managing servers
 
     - questions:
         question: >
-            Does Amazon DynamoDB require you to set up the database server?
+            Does Amazon SNS require you to set up the notification server?
         answers:
             - "No"
             - "Yes"
         correct_answer: 1
         explanation: >
-            Amazon DynamoDB is a fully-managed NoSQL database service, so you don't have to worry about hardware provisioning, setup and configuration, replication, software patching, or cluster scaling.
+            Amazon SNS uses a publish/subscribe (pub/sub) messaging model, and does not require you to set up the notification server. Instead, you create topics, to which you push messages. Interested subscribers read messages from those topics.
             
     - questions:
         question: >
-            What is partitioning used for?
+            What are policies for?
         answers:
         answers:
             - "To format database elements."
-            - "To filter database elements."            
-            - "To allow the database to scale horizontally."
-            - "To allow the database to scale vertically."            
-        correct_answer: 3
+            - "To filter IoT messaages."            
+            - "To define who should receive a notification."
+            - "To define permissions."            
+        correct_answer: 4
         explanation: >
-            Amazon DynamoDB uses partitioning, which is a mechanism that allows the database to scale horizontally, and distribute large amounts of data across multiple servers while ensuring quick data access and high availability.
+            Policies are JSON documents that define permissions. They specify who can access which resources and what actions they can perform. Policies can be attached to users, groups, or roles.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

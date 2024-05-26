@@ -32,31 +32,30 @@ This query ensures that only temperature readings will be sent to the AWS Lambda
 
 5. This opens the *Attach rule actions*, where under *Action 1*, select *Lambda*. This activates additional controls (see figure below):
 
-![fig5](Figures/04.png)
+![fig3](Figures/03.png)
 
 6. Click the *Create a Lambda function* button. This will open another tab. Select *Author from scratch*, type **SendNotification** for the function name, select *Node.js 20.x* for the runtime, and *arm64* for the architecture:
 
-![fig6](Figures/05.png)
+![fig4](Figures/04.png)
 
 7. Scroll down, and under the Execution role select *Create a new role from AWS policy templates*. This activates additional controls, where you type **sns-email-role** for the *Role name*. Then, click the drop-down list *Policy templates*, and select *Amazon SNS publish policy*:
 
-![fig7](Figures/06.png)
+![fig5](Figures/05.png)
 
 8. Click the **Create function** button. This will take you to the AWS Lambda Console, which looks as shown below:
 
-![fig8](Figures/07.png)
+![fig6](Figures/06.png)
 
 9. Keep the AWS Lambda Console open in a separate tab, and go back to the *Create rule* wizard. Select *SendNotification* from the Lambda function dropdown, and ensure that the Lambda function version points to $LATEST:
 
-![fig9](Figures/08.png)
+![fig7](Figures/07.png)
 
 10. Click the *Next* button, and then the *Create* button.
 
 11. Go back to AWS Lambda Console, and refresh the page. You will now see that your function accepts the AWS IoT trigger:
 
-![fig9](Figures/09.png)
+![fig8](Figures/08.png)
 
 This means that the AWS Lambda function you have just created has an input trigger set to AWS IoT. Specifically, the AWS Lambda function will be invoked whenever a new message is sent to the 'Emulators/Weather/SensorReadings' topic.
 
 You are now ready to implement and test the Lambda function.
-
