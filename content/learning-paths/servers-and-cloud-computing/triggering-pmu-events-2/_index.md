@@ -1,9 +1,9 @@
 ---
-title: Understand Neoverse Non-cache PMU events using C and assembly language 
+title: Learn about Neoverse Non-cache PMU events using C and Assembly Language 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software and hardware engineers who want to understand why common non-cache PMU events occur.
+who_is_this_for: This is an advanced topic for software and hardware engineers to learn about why common non-cache PMU events occur.
 
 learning_objectives: 
     - Describe common non-cache PMU events.
