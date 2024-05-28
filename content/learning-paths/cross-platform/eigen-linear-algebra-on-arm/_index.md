@@ -1,43 +1,37 @@
 ---
-title: Learn about modern C++ library development
+title: Use the Eigen Linear Algebra Library on Arm
 
-minutes_to_complete: 120
+minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for developers who want to learn how to develop a library in modern C++ on Arm using matrix processing as an example.
+who_is_this_for: This is an advanced topic for C/C++ developers who want to create high performance applications using the Eigen linear algebra library.
 
-learning_objectives:
-    - Develop a new C++ library
-    - Test the library, ensuring it does not regress functionally
+learning_objectives: 
+    - Learn how to use Eigen on Arm systems
+    - Build Tensorflow with SVE on Arm systems
 
 prerequisites:
-    - An Arm based computer running Linux, macOS, or Windows
-    - An intermediate understanding of C++ programming
+    - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
 
-author_primary: Arnaud de Grandmaison
-
-draft: true 
+author_primary: Konstantinos Margaritis
 
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Neoverse
     - Cortex-A
+    - Neoverse
 tools_software_languages:
-    - C++
     - GCC
     - Clang
-    - CMake
-    - GoogleTest
+    - Coding
 operatingsystems:
     - Linux
-    - macOS
-    - Windows
 shared_path: true
 shared_between:
-    - servers-and-cloud-computing
     - laptops-and-desktops
+    - servers-and-cloud-computing
     - smartphones-and-mobile
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

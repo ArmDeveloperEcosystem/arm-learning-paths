@@ -20,7 +20,7 @@ if ! command $PAGEFIND --version &> /dev/null; then
             PAGEFIND=bin/pagefind.arm64
             ;;
         Linux*)
-            if [ "$(uname -m)" == "aarch64"]; then
+            if [ "$(uname -m)" == "aarch64" ]; then
                 PAGEFIND=bin/pagefind.aarch64
             else
                 PAGEFIND=bin/pagefind
