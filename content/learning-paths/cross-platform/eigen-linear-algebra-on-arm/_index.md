@@ -1,13 +1,13 @@
 ---
-title: Using Eigen Linear Algebra Library on Arm
+title: Use the Eigen Linear Algebra Library on Arm
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for C/C++ developers who want to achieve high performance using Eigen linear algebra library
+who_is_this_for: This is an advanced topic for C/C++ developers who want to create high performance applications using the Eigen linear algebra library.
 
 learning_objectives: 
-    - Learn how to use Eigen library on Arm systems
-    - Build Tensorflow on Arm systems with SVE
+    - Learn how to use Eigen on Arm systems
+    - Build Tensorflow with SVE on Arm systems
 
 prerequisites:
     - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
@@ -18,9 +18,8 @@ author_primary: Konstantinos Margaritis
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Aarch64
-    - Armv8-a
-    - Armv9-a
+    - Cortex-A
+    - Neoverse
 tools_software_languages:
     - GCC
     - Clang

@@ -6,30 +6,31 @@ weight: 5
 layout: learningpathall
 ---
 
-## Build Tensorflow with SVE enabled!
+## Build Tensorflow with SVE enabled
 
-Now that you have seen that you can use Eigen with SVE enabled, it's time to build your own SVE-enabled Tensorflow!
+Now that you have seen that you can use Eigen with SVE enabled, it's time to build your own SVE-enabled Tensorflow.
 
-Tensorflow is a very complicated software and even building it requires some effort. However, following the next instructions here should get you up and running with relative ease.
+Tensorflow is a complex application and building it requires significant effort. However, following the instructions below you should be able to build and run it. 
 
 ### Install Build Requirements for Tensorflow
 
-You are going to follow the [Tensorflow Instructions to build from source](https://www.tensorflow.org/install/source), slightly modified.
+You are going to follow the [Tensorflow Instructions to build from source](https://www.tensorflow.org/install/source) with some slight modifications.
 
 Before you attempt to build Tensorflow, you need to install the build dependencies first.
 
-The following packages are needed in a recent Debian/Ubuntu distribution, though you may have to change to the relevant packages if you're using a different distribution:
+The following packages are needed in a recent Debian/Ubuntu distribution. You may have to change to the packages if you're using a different Linux distribution:
 
 ```bash
-# apt -u install clang-17 python3-pip golang python3-virtualenv default-jdk-headless patchelf libhdf5-dev
+sudo apt -u install clang-17 python3-pip golang python3-virtualenv default-jdk-headless patchelf libhdf5-dev -y
 ```
 
-Afterwards you will need to download `bazelisk`: a Go-based tool which you can use instead of `bazel` which is a bit trickier to install. You need to download the Linux arm64 version and rename that as `bazel` in your `$HOME/bin` directory and you will also need to add this directory to your `$PATH`.
+You also need to download `bazelisk`: a Go-based tool which you can use instead of `bazel`. You need to download the Linux arm64 version and rename it as `bazel` and add it to your search path. One way is to put the file in your `$HOME/bin` directory add this directory to your `$PATH`.
 
 ```bash
-$ mkdir ~/bin
-$ wget https://github.com/bazelbuild/bazelisk/releases/download/v1.20.0/bazelisk-linux-arm64 -O ~/bin/bazel
-$ chmod +x ~/bin/bazel
+mkdir ~/bin
+wget https://github.com/bazelbuild/bazelisk/releases/download/v1.20.0/bazelisk-linux-arm64 -O ~/bin/bazel
+chmod +x ~/bin/bazel
+export PATH=$PATH:$HOME/bin
 ```
 
 Some python packages need to be installed using `pip` and it's best that we do that in a virtual environment, using the `virtualenv` Python package.
@@ -37,23 +38,31 @@ Some python packages need to be installed using `pip` and it's best that we do t
 After you create the environment, you will need to activate it.
 
 ```bash
-$ virtualenv ~/python-venv
-$ . ~/python-venv/bin/activate
+virtualenv ~/python-venv
+. ~/python-venv/bin/activate
 ```
 
-Next, clone Tensorflow from its git repository to your system:
+Your shell prompt now shows the virtual environment, it should look like this: 
 
-```bash
-$ git clone https://github.com/tensorflow/tensorflow.git
-$ cd tensorflow
+```output
+(python-venv) $
 ```
 
-Now you can configure Tensorflow, but in order to do that you will need to give answers to some questions, but in this case you can probably just select the defaults.
-
-However, especially in the case of CPU flags, you need to pass the relevant SVE flags as you did before to make sure that Eigen selects the SVE backend.
+Next, clone Tensorflow from its Git repository to your system:
 
 ```bash
-(python-venv) $ python3 ./configure.py
+git clone https://github.com/tensorflow/tensorflow.git
+cd tensorflow
+```
+
+Now you can configure Tensorflow. Configuration requires you to answer some questions, but you can select the defaults.
+
+However, you need to pass the relevant SVE flags as you did before to make sure that Eigen selects the SVE backend.
+
+Here is the configuration transcript, only the first line is a command you can copy and run:
+
+```bash { output_lines = "2-33" }
+python3 ./configure.py
 You have bazel 6.5.0 installed.
 Please specify the location of python. [Default is /home/markos/python-venv/bin/python3]:
 
@@ -86,32 +95,36 @@ Not configuring the WORKSPACE for Android builds.
 Preconfigured Bazel build configs to DISABLE default on features:                                                                                                                                                                     --config=nogcp          # Disable GCP support.                                                                                                                                                                                --config=nonccl         # Disable NVIDIA NCCL support.
 ```
 
-And start the build, at which point you might want to take a walk or bake a cake as this is going to take quite a long while, even on fast systems.
+Run `bazel` to start the build. 
+
+{{% notice Note %}}
+You might want to take a break and return later as this takes quite a long while, even on fast systems.
+{{% /notice %}}
 
 ```bash
-$ bazel build //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu
+bazel build //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu
 ```
 
-When the build is over, you should have `tensorflow` `pip` package in this directory `bazel-bin/tensorflow/tools/pip_package/wheel_house` with a filename similar to this:
+When the build is complete, you should have `tensorflow` `pip` package in this directory `bazel-bin/tensorflow/tools/pip_package/wheel_house` with a filename similar to this:
 
-```bash
+```output
 tensorflow_cpu-2.17.0-cp311-cp311-linux_aarch64.whl
 ```
 
 You are finally able to install your custom Tensorflow build to your system, using `pip install`
 
 ```bash
-$ pip install
+pip install
 ```
 
-Installing it will take a while as it will install all dependencies but when it finishes you should have Tensorflow ready to use! Time to test if it actually works!
+Installing it will take a while as it will install all dependencies but when it finishes you should have Tensorflow ready to use! 
 
-```bash
-$ python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))
+You can test it to see if it works by running:
+
+```bash { output_lines = "2" }
+python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))
 tf.Tensor(492.89847, shape=(), dtype=float32)
 ```
 
-If you get the above response then your Tensorflow installation was successful! Happy AI training!
+If you get the above response then your Tensorflow installation was successful! 
 
-
-```bash

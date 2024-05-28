@@ -6,13 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-## What is Eigen
+## What is Eigen?
 
-Eigen is a very popular open source C++ template Linear Algebra library. It is designed to provide high-performance implementations of common mathematical operations that involve vectors, matrices and tensors.
+Eigen is a popular open-source C++ template linear algebra library. It is designed to provide high-performance implementations of common mathematical operations that involve vectors, matrices, and tensors.
 
-It also provides a way to add custom implementations for related algorithms. It tries to be generic enough to cover almost every use case, but at the same time it also offers optimal performance on all the supported architectures.
+It also provides a way to add custom implementations for related algorithms. It tries to be generic enough to cover almost every use case, but at the same time it also offers optimal performance on all supported architectures.
 
-Historically, [Eigen started off as a sub project of KDE by Benoît Jacob and Gael Guennebaud to help with common linear algebra operations for some KDE and KOffice projects](https://macresearch.org/interview-eigen-matrix-library/).
+Eigen started off as a sub project of KDE by Benoît Jacob and Gael Guennebaud to help with common linear algebra operations for some KDE and KOffice projects. You can read [Interview: Eigen Matrix Library](https://macresearch.org/interview-eigen-matrix-library/) to learn more. 
 
 Because of a clever use of templates and partial template specialization in C++, Eigen has been able to provide almost the same high level algorithms on all architectures, by including implementations of basic primitive operations for all major SIMD engines.
 
@@ -25,37 +25,38 @@ Current implementations include:
 
 It has also been ported to SYCL and CUDA backends and more ports are in progress.
 
-## Where is it used
+## Where is Eigen used?
 
-Eigen is a very useful library and its usefulness is proven by the number of projects that are using it. 
-[The list of projects that are using Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page#Projects_using_Eigen) is rich but here are a few high profile ones:
+Eigen is a useful library and its success is proven by the number of projects that use it. 
+[The list of projects using Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page#Projects_using_Eigen) is rich, but here are a few high profile projects:
 
-* [Tensorflow](https://www.tensorflow.org/) - An open source software library for Machine Intelligence
+* [Tensorflow](https://www.tensorflow.org/) - An open-source software library for Machine Intelligence
 * [Celestia](https://celestiaproject.space/) - The 3D astronomical visualization application Celestia (all orbital and geometric calculations are done with Eigen)
 * [ATLAS](https://home.cern/science/experiments/atlas) - The ATLAS experiment at the LHC (Large Hadron Collider) at CERN
 * [Quantum++](https://github.com/softwareQinc/qpp) - A modern C++ general purpose quantum computing library
 
 * [Robotic OS](https://www.ros.org/) - Robotic Operating System
-* [MeshLab](https://www.meshlab.net/) - an opensource software for the processing and editing of unstructured 3D triangular meshes and point cloud
-* [Topology Toolkit (TTK)](https://topology-tool-kit.github.io/) - an open-source library and software collection for topological data analysis in scientific visualization
+* [MeshLab](https://www.meshlab.net/) - An open-source software project for processing and editing unstructured 3D triangular meshes and point cloud
+* [Topology Toolkit (TTK)](https://topology-tool-kit.github.io/) - An open-source library and software collection for topological data analysis in scientific visualization
 
 KOffice:
-* [Calligra](https://calligra.org/) - the spreadsheet module
-* [Krita](https://krita.org/en/) - a professional free and open-source painting program
+* [Calligra](https://calligra.org/) - The spreadsheet module
+* [Krita](https://krita.org/en/) - A professional free and open-source painting program
 
-## Eigen Features
+## What are some Eigen features?
 
-As mentioned, Eigen provides the fundamentals for almost all linear algebra operations, vectors and matrices to begin with, but also tensors, for usage in your C++ programs.
+Eigen provides the fundamentals for almost all linear algebra operations, vectors, and matrices, but also tensors, for use in your C++ programs.
+
 Eigen defines relevant classes and all the primitive operations that are possible with these objects, which you can use as building blocks for more complicated mathematical expressions.
 
 Here are some basic classes:
 
 ### Matrix
 
-First of all, the fundamental block of Linear Algebra is the Matrix.
+The fundamental block of linear algebra is the Matrix.
 
 Almost all operations involve at least one matrix and these matrices can be of 1D or 2D and of variable types.
-The types in Eigen can be one of `int`, `float`, `double` or even `complex` numbers. Recently 16-bit integers support was also added if the hardware allows it.
+The types in Eigen can be `int`, `float`, `double`, or `complex` numbers. Recently 16-bit integer support was added if the hardware allows it.
 
 The generic type is `Matrix`:
 
@@ -72,14 +73,13 @@ typedef Matrix<float, 2, 2> Matrix2f;
 typedef Matrix<int, 3, 3> Matrix3i;
 typedef Matrix<double, 4, 4> Matrix4d;
 typedef Matrix<std::complex<double>, 4, 4> Matrix4cd;
-...
 ```
 
-For a complete list check [here](https://libeigen.gitlab.io/docs/group__matrixtypedefs.html).
+For a complete list refer to [Global matrix typedefs](https://libeigen.gitlab.io/docs/group__matrixtypedefs.html).
 
 ### Vector
 
-As you might remember from your Math classes, a Vector can be defined as a one-dimensional matrix and in Eigen it is defined exactly as that:
+As you might remember from your math classes, a vector can be defined as a one-dimensional matrix and in Eigen it is defined as exactly that:
 
 ```C++
 typedef Matrix<float, 2, 1> Vector2f;
@@ -99,19 +99,23 @@ typedef Matrix<std::complex<float>, 1, 4> RowVector4cf;
 
 All basic mathematical operations and major known functions are defined on top of those classes.
 
-There are more specialized classes for both storage types, like the `Tensor` class and operations, like FFT, Solvers, etc. in the `unsupported` folder.
+There are more specialized classes for both storage types, like the `Tensor` class and operations, like FFT and Solvers, in the `unsupported` folder.
 
-In this Learning Path you are are going to test Eigen with a few examples with emphasis on Arm CPUs, but for full documentation and a list of all supported types and operations on them, you should read the [Eigen documentation](https://libeigen.gitlab.io/docs/).
+In this Learning Path you are are going to test Eigen with a few examples with emphasis on Arm CPUs. For full documentation and a list of all supported types and operations on them, you should read the [Eigen documentation](https://libeigen.gitlab.io/docs/).
 
 ## Numerical Solvers
 
 Apart from basic vector and matrix types, Eigen also provides built-in methods for numerical solving on those matrices.
 
-This Learning Path will not go into depth as to what exactly those solvers do, as that is beyond its scope, but rest assured that numerical solvers are actually very useful not only for a standpoint of Mathematics, but also actual applications that you are probably using in one way or the other, possibly without knowing it. Things like 3D, Video, Audio, Machine Learning/Deep Learning heavily use Linear Algebra and tools like Eigen are *extremely useful* because they provide the necessary fundamentals and with the necessary performance optimizations that would otherwise be too difficult to implement from the start.
+This Learning Path does not go into depth as to what exactly the solvers do, but rest assured that numerical solvers are actually very useful not only for a standpoint of Mathematics, but also actual applications that you are probably using in one way or the other, possibly without knowing it. 
 
-Eigen provides many solvers, like LLT, LDLT, Partial and Full Pivot LU decompositions, etc. Check the [full list](https://libeigen.gitlab.io/docs/group__TopicLinearAlgebraDecompositions.html).
+Things like 3D, Video, Audio, Machine Learning/Deep Learning heavily use linear algebra and tools like Eigen are *extremely useful* because they provide the necessary fundamentals with the necessary performance optimizations that would otherwise be too difficult to implement from the start.
 
-For example, doing LU decomposition of a 2D matrix, in Eigen it is as simple as
+Eigen provides many solvers such as LLT, LDLT, Partial and Full Pivot LU decompositions. Check [Catalogue of dense decompositions](https://libeigen.gitlab.io/docs/group__TopicLinearAlgebraDecompositions.html) for the complete list.
+
+For example, LU decomposition of a 2D matrix can be done with Eigen. 
+
+Use a text editor to save the code below in a file named `eigen-test1.cpp`
 
 ```C++
 #include <iostream>
@@ -132,40 +136,45 @@ int main()
 }
 ```
 
-You will now compile and run the above file to see what it actually does.
+You can now compile and run the above code to see what it does.
 
-Save the above file as `eigen-test1.cpp`.
+Before you can compile it, you need to install `Eigen` using either a Linux package manager or clone the source code from the Git repository.
 
-Before you can compile it though, you need to either install `Eigen` using a package in your Linux distribution or clone it from a git repository.
-Installing it from a distribution can be as simple as doing
+For Debian based distributions, you can install Eigen by running:
 
 ```bash
-$ apt install libeigen3-dev
+sudo apt install libeigen3-dev -y
 ```
 
-on Debian based distributions, which will install the latest stable version in your distribution.
-However, if you want to use the latest version you will probably have to use git:
+Package managers install the latest stable version for your Linux distribution, but if you want to use the absolute latest version you can use Git:.
 
 ```bash
-$ git clone https://gitlab.com/libeigen/eigen
+git clone https://gitlab.com/libeigen/eigen
 ```
 
-This will clone the project in a folder called `eigen` in your current directory. Assuming you will use this directory to save your test programs, you can compile the above program like this:
+This will clone the project in a folder called `eigen` in your current directory. 
+
+If you installed Eigen with a package manager, you can compile the above program like this:
 
 ```bash
-$ g++ -O3 -DNDEBUG eigen-test1.cpp -o eigen-test1 -I/usr/include/eigen3
+g++ -O3 -DNDEBUG eigen-test1.cpp -o eigen-test1 -I/usr/include/eigen3
 ```
 
-if you are using a packaged installation, as Eigen is installed in the `/usr/include/eigen3`. In case you are using a git clone you need to replace that with `-Ieigen` in the compiler options above like this:
+If you installed Eigen using Git, you can compile the above program like this:
 
 ```bash
-$ g++ -O3 -DNDEBUG eigen-test1.cpp -o eigen-test1 -Ieigen
+g++ -O3 -DNDEBUG eigen-test1.cpp -o eigen-test1 -Ieigen
 ```
 
-And then you can run the example:
+Regardless of how you installed Eigen, you can run the example: 
 
 ```bash
-$ ./eigen-test1
+./eigen-test1
+```
+
+The expected output is:
+
+```output
 A:
    0.696235    0.927654    0.432106   -0.498144   -0.216464
    0.205189    0.445064   -0.046008   -0.727247    0.852317
@@ -186,7 +195,8 @@ X:
  0.116448 -0.634634  0.580386
  ```
 
-This essentially solves the equation `A⋅X = B`.
+This solves the equation `A⋅X = B`.
 
-Eigen is a powerful library but this is not a tutorial on Eigen, rather it's a very small introduction and demonstration of the performance gains you can get on Arm.
+Eigen is a powerful library, but this is not a tutorial on Eigen, rather it's a very small introduction and demonstration of the performance gains you can get on Arm.
+
 In the next section you will see more Eigen examples and in particular how they perform on Arm.
