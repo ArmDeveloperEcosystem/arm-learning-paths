@@ -2,20 +2,19 @@
 title: Build an Embedded Application with Rust and Debug with Arm Development Studio
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic embedded application developers to get started with Rust.
+who_is_this_for: This is an introductory topic for embedded application developers to get started with Rust.
 
 learning_objectives: 
-    - Build an embedded application in Rust
-    - Run the application on Fixed Virtual Platform
-    - Debug the application with Arm Development Studio
+    - Build an embedded application in Rust.
+    - Run the application on a Fixed Virtual Platform (FVP).
+    - Debug the application with Arm Development Studio.
 
 prerequisites:
-    - An installation of Arm Development Studio (a 30-day evaluation license is available)
-    - A basic understanding of Rust programming is useful
+    - An installation of Arm Development Studio.
+    - A basic understanding of Rust programming.
 
 author_primary: Ronan Synnott
 
-draft: true 
 
 ### Tags
 skilllevels: Introductory
