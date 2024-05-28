@@ -44,7 +44,7 @@ ASE_SPEC is 1
 ASE_INST_SPEC is 3
 ```
 
-The results show `ASE_SPEC` is 1 and `ASE_INST_SPEC` is 3. `ASE_INST_SPEC` counts speculatively executed Advanced SIMD operations. Meanwhile, `ASE_SPEC` counts speculatively executed Advanced SIMD operations, excluding load, store, and move micro-operations that move data to or from the SIMD registers. `ASE_INST_SPEC` counts 1 from LD2 and 2 from ADD, adding then storing. `ASE_SPEC` only counts 1 from the actual NEON add operation.
+The results show `ASE_SPEC` is 1 and `ASE_INST_SPEC` is 3. `ASE_INST_SPEC` counts speculatively executed Advanced SIMD operations. Meanwhile, `ASE_SPEC` counts speculatively executed Advanced SIMD operations, excluding load, store, and move micro-operations that move data to or from the SIMD registers. `ASE_INST_SPEC` counts 1 from LD2 and 2 from ADD: adding, then storing. `ASE_SPEC` only counts 1 from the actual NEON add operation.
   
 ## Scalar floating point percentage
 
