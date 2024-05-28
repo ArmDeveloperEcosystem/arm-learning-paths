@@ -10,13 +10,13 @@ layout: learningpathall
 The Neoverse Core PMU measures hardware events that occur during software execution. You can use PMU events to measure performance, monitor workload efficiency, and track resource utilization and requirements. 
 
 The [Arm Neoverse N2 PMU guide](https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en)  describes the behavior of the different Performance Monitor Unit (PMU) events 
-implemented in the Neoverse N2. You can find other Neoverse core PMU guides on https://developer.arm.com/. 
+implemented in the Neoverse N2. You can find other Neoverse core PMU guides at https://developer.arm.com/. 
 
-This Learning Path explains how to trigger common PMU events in specific metric groups and explains the reasons why certain events are triggered. 
+This Learning Path explains how you can trigger common PMU events in specific metric groups. 
 
-You can learn more about the Arm CPU architecture and Arm assembly language by visiting the resources at [Learn the Architecture - A-profile – Arm®](https://www.arm.com/architecture/learn-the-architecture/a-profile). 
+You can find further introductory information on Arm CPU architecture and Arm assembly language by visiting the resources at [Learn the Architecture - A-profile – Arm®](https://www.arm.com/architecture/learn-the-architecture/a-profile). 
 
-The following guides are helpful:
+On that website, the following guides are helpful:
 
  - AArch64 Instruction Set Architecture (ISA).
  - AArch64 Memory Management.
