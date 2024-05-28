@@ -14,8 +14,8 @@ Lambda supports a variety of programming languages, including Python, Java, Node
 
 By leveraging AWS Lambda, developers can focus on writing business logic without worrying about the underlying infrastructure. This makes it an ideal solution for building microservices, automating operational tasks, and creating back-end services for web and mobile applications. Additionally, AWS Lambda can be seamlessly integrated with AWS IoT Core through the Rules Engine, enabling you to process and respond to data from IoT devices in real-time, enhancing the capabilities of IoT applications.
 
-In this learning path, I will demonstrate how to use AWS Lambda to process data from an IoT device. Specifically, I will show you how to set up AWS Lambda to send an email notification whenever the temperature from a sensor exceeds a predefined threshold. This setup involves several steps:
-1. Set Up the IoT Device and AWS IoT Core: Connect your IoT device to AWS IoT Core and configure it to send temperature data. Here we will use the same IoT emulator as in previous learning path: [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/).
+In this learning path, you will learn how to use AWS Lambda to process data from an IoT device. Specifically, you will learn how to set up AWS Lambda to send an email notification whenever the temperature from a sensor exceeds a predefined threshold. This setup involves several steps:
+1. Set Up the IoT Device and AWS IoT Core: Connect your IoT device to AWS IoT Core and configure it to send temperature data. Here you will use the same IoT emulator as in [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/) learning path.
 
 2. Create an AWS Lambda Function: Develop a Lambda function that will process the incoming temperature data and check if it exceeds the defined threshold. 
 
@@ -23,4 +23,4 @@ In this learning path, I will demonstrate how to use AWS Lambda to process data 
 
 4. Configure Email Notifications: Set up Amazon Simple Notification Service (SNS) to send email notifications when the Lambda function detects a temperature reading above the threshold.
 
-By following these steps, you'll be able to automatically monitor temperature readings from your IoT device and receive email alerts when critical temperature levels are detected. This process leverages the power of AWS services to create a responsive and scalable solution for IoT data processing and alerting.
+By following these steps, you will be able to automatically monitor temperature readings from your IoT device and receive email alerts when critical temperature levels are detected. This process leverages the power of AWS services to create a responsive and scalable solution for IoT data processing and alerting.
