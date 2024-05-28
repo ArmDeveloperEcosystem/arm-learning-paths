@@ -55,9 +55,9 @@ ITLB_WALK is 0
 INST_RETIRED is 15
 ```
  
-In this case, there are 57 accesses into the ITLB, but only one refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` does not count in this scenario, because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time. Branch prediction or speculation may lead to the data already being in the L2 TLB.
+In this case, there are 57 accesses into the ITLB, but only one refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` does not count in this scenario, because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time. Through branch prediction or speculation, the data might already exist in the L2 TLB.
 
-To trigger an L2_TLB miss, the following assembly function clears the TLB to remove any branch predictions or speculation:
+To trigger an L2_TLB miss, the following assembly function clears the TLB to remove any branch prediction or speculation:
 
 ```C
     .global clear_tlb
@@ -71,7 +71,7 @@ clear_tlb:
     .cfi_endproc
 ```
 
-TLBI ALLE3 clears the entire ITLB, for only EL3 translations, and removes any “predicted” translations to force a miss. Then, new memory will be accessed. 
+`TLBI ALLE3` clears the entire ITLB, for only EL3 translations, and removes any *predicted* translations to force a miss. Then, new memory will be accessed. 
 
 ```output
 L1I_TLB is 73
@@ -104,6 +104,7 @@ void stores()
 ``` 
 
 Events that always occur:
+
 `L1I_TLB`
 
 ```output
@@ -114,7 +115,7 @@ L2D_TLB_REFILL is 9
 ITLB_WALK is 0
 ```
  
-No ITLB walks are triggered since there might be speculation or branch prediction happening in the ITLB. Likewise, there are no L1 I-TLB refills, since there are no misses that result in allocations. 
+No ITLB walks are triggered since there might be speculation or branch prediction happening in the ITLB. Similarly, there are no L1 I-TLB refills, since there are no misses that result in allocations. 
 
 Additional events that occur with an L1 I-TLB miss:
 `L2D_TLB` and `L1I_TLB_REFILL`.
@@ -146,7 +147,7 @@ L2D_TLB_REFILL is 4
 ITLB_WALK is 3
 ```
 
-After clearing the ITLB, you can force new memory accesses translations, resulting in ITLB walks and L1 I-TLB refills. Note that ITLB_WALK does not count walks triggered by TLB maintenance operations. Instead, these walks might be the result of the barrier instructions. 
+After clearing the ITLB, you can force new memory accesses translations, resulting in ITLB walks and L1 I-TLB refills. Note that `ITLB_WALK` does not count walks triggered by TLB maintenance operations. Instead, these walks might be the result of the barrier instructions. 
 
 ### D-TLB Events
 
