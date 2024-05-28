@@ -21,6 +21,7 @@ Performance Advisor uses a Python script to connect to your device. You will nee
 
 Build your application, and setup the Android device as described in [Setup tasks](../setup_tasks).
 
+
 ## Connect to the device
 
 1. Open a terminal or command prompt, navigate to the `Arm Performance Studio` install directory and locate the `streamline_me.py` script:

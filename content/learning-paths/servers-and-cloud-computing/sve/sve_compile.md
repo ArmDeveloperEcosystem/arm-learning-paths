@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## Compiling for SVE with GNU
 
-Shown below are example commands to compile an application with support for SVE instructions using the GNU Toolchain:
+Below are example commands to compile an application with support for SVE instructions using the GNU Toolchain:
 
 ### C 
 
@@ -35,7 +35,7 @@ Compare the disassembly of a simple program shown below with and without the use
 
 {{< godbolt width="100%" height="400px" mode="diff" lopt="-O3 -march=armv8-a -fno-tree-vectorize" ropt="-O3 -march=armv8-a+sve" src="int fun(double * restrict a, double * restrict b, int size)\n{\n  for (int i=0; i < size; ++i)\n  {\n    b[i] += a[i];\n  }\n}" >}}
 
-Note the use of double-word register _d0_, _d1_ instead of SVE registers _z0.d_ and _z1_ when you disable vectorization.
+Note the use of double-word register `d0`, `d1` instead of SVE registers `z0.d` and `z1` when you disable vectorization.
 
 ### Compiler insights
 
@@ -48,6 +48,8 @@ In this example, the compiler reports the vectorization of loop line 3.
 ### Use Arm Performance Libraries
 
 The Arm Performance Libraries include generic and target-specific SVE optimizations of common math operations used in HPC. To link your application with these libraries and GCC, use the predefined environment variables `ARMPL_INCLUDES` and `ARMPL_LIBRARIES`. The environment variables are set by the Arm Performance Libraries module files.
+
+Refer to the [Arm Performance Libraries install guide](/install-guides/armpl/) for more information.
 
 ```bash
 gcc -O3 -march=armv8-a+sve -I $ARMPL_INCLUDES dgemm.c -o dgemm.out -L $ARMPL_LIBRARIES -larmpl

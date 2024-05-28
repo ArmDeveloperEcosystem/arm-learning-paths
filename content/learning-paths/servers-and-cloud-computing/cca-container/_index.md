@@ -1,9 +1,9 @@
 ---
-title: Run an application in a Realm using Arm Confidential Compute Architecture (CCA)
+title: Run an application in a Realm using the Arm Confidential Compute Architecture (CCA)
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to run their applications in a Realm using Arm Confidential Compute Architecture (CCA).
+who_is_this_for: This is an introductory topic for software developers who want to learn how to run their applications in a Realm using the Arm Confidential Compute Architecture (CCA).
 
 learning_objectives:
     - Run the Arm reference CCA software stack on an Armv-A AEM Base FVP platform with support for RME extensions

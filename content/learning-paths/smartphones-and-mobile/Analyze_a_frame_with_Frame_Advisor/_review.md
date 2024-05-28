@@ -13,7 +13,7 @@ review:
 
     - questions:
         question: >
-            Which Frame Advisor views can I use to step through draw calls to see how the frame is built?
+            Which Frame Advisor views can you use to step through draw calls to see how the frame is built?
         answers:
             - Render Graph and Framebuffers views
             - Frame Hierarchy and Framebuffers views
@@ -36,7 +36,7 @@ review:
 
     - questions:
         question: >
-            How can I reduce processing cost and memory bandwidth?
+            How can you reduce processing cost and memory bandwidth?
         answers:
             - Reduce the number of primitives used by complex objects
             - Use software culling techniques to remove draw calls that don’t render visible changes to the framebuffer

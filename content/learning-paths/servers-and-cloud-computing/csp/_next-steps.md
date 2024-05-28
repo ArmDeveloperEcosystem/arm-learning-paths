@@ -18,6 +18,10 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/aws-terraform/"
 
 further_reading:
     - resource:
+        title: Cloud computing (arm.com)
+        link: https://www.arm.com/campaigns/cloud-computing
+        type: website
+    - resource:
         title: Alibaba ECS Learning Path
         link: https://www.alibabacloud.com/getting-started/learningpath/ecs
         type: website

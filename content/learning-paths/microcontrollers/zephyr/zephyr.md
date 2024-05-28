@@ -15,7 +15,7 @@ You can get the Zephyr source, install the Zephyr SDK, build sample applications
 
 ## Host platform
 
-Zephyr SDK is available on Windows, Linux, and MacOS hosts. However the FVP is only available for Windows and Linux hosts.
+Zephyr SDK is available on Windows, Linux, and macOS hosts. However the FVP is only available for Windows and Linux hosts.
 
 These instructions assume an Ubuntu Linux host machine or use of Arm Virtual Hardware (AVH).
 
@@ -73,7 +73,7 @@ You need the Zephyr Software Development Kit (SDK) to build Zephyr applications.
 
 It contains the compiler, assembler, linker and other programs needed for building Zephyr applications. 
 
-Download, verify, extract and setup the Zephyr SDK bundle, downloadable from the [Zephyr project on GitHub](https://github.com/zephyrproject-rtos/sdk-ng/releases).
+Download, verify, extract and setup the Zephyr SDK bundle, downloadable from the [Zephyr project on GitHub](https://github.com/zephyrproject-rtos/sdk-ng/releases). The instructions shown in this learning path are with version v0.16.0 of the SDK. 
 
 ```bash { env_source="/shared/zephyrproject/.venv/bin/activate" }
 cd ~

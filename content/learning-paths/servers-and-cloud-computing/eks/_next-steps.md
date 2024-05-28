@@ -20,7 +20,7 @@ further_reading:
         link: https://aws.amazon.com/eks/
         type: documentation
     - resource:
-        title: Wordpress deployment Documentation
+        title: Wordpress deployment documentation
         link: https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/
         type: Blog
 

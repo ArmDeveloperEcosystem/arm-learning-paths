@@ -60,7 +60,7 @@ For added flexibility, you can split the databases in combined mode so each comp
 
 Since Clair is a set of micro-services, its processes do not share database tables even when combined into the same OS process.
 
-![clair #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/4a484dd2-dd78-42f5-a8b9-c6abb0ede6cb)
+![Clair combined deployment multiple databases #center](clair_combo_multi_db.png)
 
 ### Distributed Deployment
 
@@ -70,6 +70,7 @@ In a distributed deployment, each Clair component runs in its own OS process. Ty
 
 A load balancer must be setup for this deployment model. The load balancer routes traffic to the correct components and routes traffic between the Clair nodes.
 
-![clair2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/1edd1e57-2704-4554-9308-3c8c6d2675b7)
+
+![Clair distributed deployment multiple databases #center](clair_distributed_multi_db.png)
 
 To learn more refer to the [Clair documentation](https://quay.github.io/clair/whatis.html#what-is-clair).

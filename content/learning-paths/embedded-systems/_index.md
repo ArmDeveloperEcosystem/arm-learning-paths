@@ -1,6 +1,6 @@
 ---
 differentiating_info:
-- Linux IoT
+- Linux and Windows IoT
 - Automotive
 - Storage
 key_ip:
@@ -8,22 +8,22 @@ key_ip:
 - Cortex-R
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 7
-- Linux: 15
+- Baremetal: 8
+- Linux: 17
 - macOS: 1
 - Windows: 1
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 3
+- Containers and Virtualization: 4
 - Embedded Linux: 5
-- ML: 1
-- Performance and Architecture: 8
+- ML: 2
+- Performance and Architecture: 10
 subtitle: Build secure, connected, smart IoT devices
 title: Embedded Systems
 tools_software_languages_filter:
 - Arm Compiler for Embedded: 3
 - Arm Compiler for Linux: 1
-- Arm Development Studio: 4
+- Arm Development Studio: 5
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 5
 - AWS: 2
@@ -31,19 +31,23 @@ tools_software_languages_filter:
 - Balena Cloud: 1
 - Balena OS: 1
 - C: 1
+- ChatGPT: 1
 - Clang: 1
-- Coding: 7
+- Coding: 9
 - DetectNet: 1
-- Docker: 5
+- Docker: 6
 - DSTREAM: 2
 - Fixed Virtual Platform: 1
 - FPGA: 1
 - Fusion 360: 1
 - GCC: 3
 - GitHub: 3
+- IP Explorer: 1
 - Matter: 1
 - MXNet: 1
 - Neon: 1
+- Porcupine: 1
+- Python: 1
 - QEMU: 1
 - Raspberry Pi: 4
 - Remote.It: 1

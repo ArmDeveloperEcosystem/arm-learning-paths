@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You should now be familiar with the basic features of Arm Development Studio. Do you know about Keil Studio Cloud?
+   You should now be familiar with some features of Arm Development Studio. Do you know about Keil Studio Cloud?
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/microcontrollers/keilstudiocloud/"

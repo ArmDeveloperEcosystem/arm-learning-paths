@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Run Hello World"
+title: "How do I run Hello World for Raspberry Pi Pico?"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -12,9 +12,9 @@ The first program to run on the Pico both prints "Hello" and blinks an LED.
 
 The print statements are directed to USB.
 
-## Build hello
+## How do I build "hello" for Raspberry Pi Pico?
 
-Save the C code bellow to a file named hello.c
+Save the C code below to a file named hello.c
 
 ```c
 #include <stdio.h>
@@ -69,7 +69,7 @@ pico_enable_stdio_uart(${PROJECT_NAME} 0)
 pico_add_extra_outputs(${PROJECT_NAME})
 ```
 
-Crate a new directory for the build output and navigate to it.
+Create a new directory for the build output and navigate to it.
 
 ```bash
 mkdir build ; cd build
@@ -84,9 +84,9 @@ make
 
 The hello application is now ready to run.
 
-## Run hello
+## How do I run "hello" for Raspberry Pi Pico?
 
-To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plugin the USB cable between the Pico and your development computer. 
+To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plug in the USB cable between the Pico and your development computer. 
 
 The Pico will appear as a USB storage device on your computer. 
 

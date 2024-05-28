@@ -10,11 +10,11 @@ layout: "learningpathall"
 
 ## Accessing containers
 
-As a developer you may need to access a running container to debug problems or manually test changes. You might think you can SSH to the container and do some work at a shell prompt. Opening a port for SSH is a security risk and may not be allowed in your environment.
+As a developer, you may need to access a running container to debug problems or manually test changes. You might think you can SSH to the container and do some work at a shell prompt but opening a port for SSH is a security risk and may not be allowed in your environment.
 
 In addition to security concerns, containers typically run the `ENTRYPOINT` or `CMD` as the last line of a Dockerfile. It's best to separate concerns and put one service in each container. This restriction makes it difficult to add another service like the SSH daemon during debug and test. 
 
-You might be able to wrap multiple processes in a script to create a single `CMD` for your Dockerfile, but that also may be hard to do. 
+You might be able to wrap multiple processes in a script to create a single `CMD` for your Dockerfile but that also may be hard to do. 
 
 Another solution is to use a process manager.
 
@@ -30,11 +30,11 @@ You can try it first on your local machine and then try it in a cloud service, A
 
 ## Before you begin
 
-You will need an Arm Linux computer with Docker installed and a free Remote.It account. You will also need an AWS account to try the solution in AWS Fargate. If you need an AWS account you can sign up at https://aws.amazon.com
+You will need an Arm Linux computer with Docker installed and a free Remote.It account. You will also need an AWS account to try the solution in AWS Fargate. If you need an AWS account, you can sign up at https://aws.amazon.com.
 
-To install Docker refer to the [Docker install guide](/install-guides/docker/). [Learn how to use Docker](/learning-paths/cross-platform/docker) may also be useful if you would like more background on Docker. 
+To install Docker, refer to the [Docker install guide](/install-guides/docker/). [Learn how to use Docker](/learning-paths/cross-platform/docker) may also be useful if you would like more background on Docker. 
 
-You will also use Remote.It for container access. Refer to [Access remote devices with Remote.It](/learning-paths/cross-platform/remoteit/) if you need more background information.
+You will also use Remote.It for container access. For more background information, refer to [Access remote devices with Remote.It](/learning-paths/cross-platform/remoteit/).
 
 ## An example project
 

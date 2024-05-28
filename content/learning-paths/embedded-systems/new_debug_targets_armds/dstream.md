@@ -25,15 +25,16 @@ DSTREAM-ST provides full debug capability over JTAG and SWD interfaces, as well 
 
 You should have Arm Development Studio installed and your license configured. Refer to the [Arm Development Studio install guide](/install-guides/armds/) for more information.
 
-It is assumed you have access to a DSTREAM unit, and an appropriate development board. For this example, you shall use an [MPS2+](https://developer.arm.com/Tools%20and%20Software/MPS2%20Plus%20FPGA%20Prototyping%20Board) programmed for Cortex-M3 (`AN385`), which is the same hardware as modeled by the FVPs used previously.
+It is assumed you have access to a DSTREAM unit, and an appropriate development board. For this example, you shall use an [MPS2+](https://developer.arm.com/Tools%20and%20Software/MPS2%20Plus%20FPGA%20Prototyping%20Board) programmed for Cortex-M3 (`AN385`), which is the same hardware as modeled by the FVPs in the previous section.
 
-## Updating IP Address
+### Updating IP Address
 
-By default, DSTREAM units are provided with DHCP enabled, allowing the network to specify the IP address. If you wish to set to a fixed IP address, in the Development Studio IDE open the `Debug Hardware Configure IP` view (`Windows > Open View`), Browse for your DSTREAM unit, and set as appropriate. Note if your network does not support DHCP you should use USB to connect to the unit for this.
+By default, DSTREAM units are provided with DHCP enabled, allowing the network to specify the IP address. If you wish to set to a fixed IP address, in the Development Studio IDE open the `Debug Hardware Configure IP` view (`Windows > Open View`), Browse for your DSTREAM unit, and set as appropriate. Note if your network does not support DHCP you should use USB to connect to the unit for this step.
 
-## Updating firmware
+### Updating firmware
 
 Firmware for the DSTREAM family is provided with Arm Development Studio, and generally needs to be updated when a new version of Development Studio is released. To manually update the firmware, open the `Debug Hardware Firmware Installer`. Browse for your DSTREAM, and install. The unit will reboot when complete.
+
 
 ## Create a Platform Configuration for your Hardware
 
@@ -57,7 +58,7 @@ To start, select `File` > `New` > `Hardware Connection`, and give it a meaningfu
 
 Select the `Platform Configuration` you created (the text filter can assist if many targets defined), and click Finish.
 
-Ensure `DSTREAM family` is selected from the Target Connection pulldown, and Browse for your DSTREAM unit. The debugger will recognise the type of DSTREAM unit connected. Use the `DTSL Options` Edit button to specify additional settings (such as which processor(s) to trace).
+Ensure `DSTREAM family` is selected from the Target Connection pulldown, and Browse for your DSTREAM unit. The debugger will recognize the type of DSTREAM unit connected. Use the `DTSL Options` Edit button to specify additional settings (such as which processor(s) to trace).
 
 To load an image, navigate to the `Files` tab, and browse to the appropriate ELF image. Then, in the `Debugger` tab, select `Debug from entry point`.
 
@@ -67,7 +68,7 @@ Click `Debug` to connect to the platform, and commence your debug session.
 
 ## Troubleshooting
 
-Arm platforms can be very complex, with multiple heterogeneous processors, on-chip power islands, and very high-speed interfaces. All of these can cause a myriad of issues when trying to connect to your target the first time. The below resources may be helpful if you are experiencing issues.
+Arm platforms can be very complex, with multiple heterogeneous processors, on-chip power islands, and very high-speed interfaces. The below resources may be helpful if you are experiencing issues configuring for your hardware.
 
 - [Troubleshooting DSTREAM-ST connections](https://developer.arm.com/tools-and-software/embedded/debug-probes/dstream-family/dstream-st/troubleshooting-your-dstream-st-unit)
 - [Troubleshooting DSTREAM-PT connections](https://developer.arm.com/documentation/102637)

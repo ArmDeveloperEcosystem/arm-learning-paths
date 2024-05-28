@@ -2,7 +2,7 @@
 title: Fixed Virtual Platforms (FVP)
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966/
-author_primary: Jason Andrews
+author_primary: Ronan Synnott
 weight: 3    
 
 ### FIXED, DO NOT MODIFY
@@ -19,7 +19,9 @@ An appropriate subset of the FVP library is installed with [Arm Development Stud
 
 ## Download installer packages
 
-You can download the FVP library installer from the [Product Download Hub](https://developer.arm.com/downloads/view/FM000A). Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
+You can download the FVP library installer from the [Product Download Hub](https://developer.arm.com/downloads/view/FM000A).
+
+Linux (AArch64 and x86) and Windows (x86 only) hosts are supported.
 
 For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](/install-guides/pdh).
 

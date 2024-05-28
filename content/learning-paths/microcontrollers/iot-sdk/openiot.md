@@ -9,7 +9,8 @@ layout: "learningpathall"
 ---
 [Arm Total Solutions for IoT](https://www.arm.com/markets/iot/total-solutions-iot) provide reference software stacks, integrating various Arm technologies, such as [Arm Trusted Firmware-M](https://developer.arm.com/Tools%20and%20Software/Trusted%20Firmware-M) and the [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit).
 
-The Open-IoT-SDK is designed to be used with [Arm Virtual Hardware (AVH)](https://www.arm.com/products/development-tools/simulation/virtual-hardware), which provides [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Virtual Hardware.
+The [Open-IoT-SDK](https://github.com/ARM-software/open-iot-sdk) is designed to be used with [Arm Virtual Hardware (AVH)](https://www.arm.com/products/development-tools/simulation/virtual-hardware), which provides [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Virtual Hardware.
+
 
 ## Arm Virtual Hardware
 
@@ -71,7 +72,7 @@ Build `blinky` example by running:
 ./ats.sh build blinky
 ```
 
-Ignore any warnings from the build. 
+Ignore any warnings from the build. The build takes a few minutes to complete.
 
 ## Run the example on Arm Virtual Hardware
 
@@ -110,4 +111,4 @@ LED off
 ...
 ```
 
-Press Control-C to stop the simulation.
+Use `Ctrl+C` to stop the simulation.

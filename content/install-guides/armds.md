@@ -38,13 +38,13 @@ Full host platform requirements are given in the [Getting Started Guide](https:/
 
 The installer will depend on the [edition](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio#Editions) of Development Studio that you are entitled to. 
 
-Gold, Silver, and Bronze editions are one installer, with available features defined by the license. The version is denoted by `year.index`, where `index` is a number (for example `2023.1`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the Gold Edition.
+The version is denoted by `year.index`, where `index` is a number (for example `2023.1`). You can also generate an Evaluation license from this installation (`Help` > `Arm License Manager`), with capabilities broadly similar to the UBL Gold Edition.
 
 You can download the Development Studio installer from the [Product Download Hub](https://developer.arm.com/downloads/view/DS000B).
 
-Development Studio Platinum Edition has its own installation package. The version is denoted by `year.index`, where `index` is a letter (for example `2023.a`). Platinum Edition is only available to certain Arm licensees.
+Versions of Arm Development Studio denoted by `year.index`, where `index` is a letter (for example `2023.a`) are only available to certain Arm licensees, as they contain support for non publicly announced IP (at time of release).
 
-For more information about the Product Download Hub, refer to the [Product Download Hub installation guide](../pdh).
+For more information about the Product Download Hub, refer to the [Product Download Hub guide](../pdh).
 
 ## Install Arm Development Studio
 
@@ -56,24 +56,26 @@ It is easiest to simply double-click the installation wizard (`armds-<version>.e
 
 To install silently from the command line, use similar to the following:
 ```command
-msiexec /i DS000-BN-00000-r23p1-00rel0\data\armds-2023.1.msi EULA=1 SKIP_DRIVERS=1 /qn
+msiexec /i DS000-BN-00000-r23p1-00rel0\data\armds-2024.0.msi EULA=1 SKIP_DRIVERS=1 /qn
 ```
 {{% notice  Drivers%}}
 This command does not install the debug probe USB drivers. If these are needed, remove `SKIP_DRIVERS=1` from the above. This requires manual interaction. They can also be installed manually later (`<install_dir>\sw\driver_files\driver_install.bat`) if necessary.
 {{% /notice %}}
 
-Full installation instructions are provided in the Windows section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Windows).
+Full installation instructions are provided in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/).
+* [Install Arm Development Studio on Windows using the command line](https://developer.arm.com/documentation/101469/2024-0/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-command-line)
+* [Install Arm Development Studio on Windows using the installation wizard](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-installation-wizard)
 
 ### Linux
 
 Extract the downloaded package:
 ```command
-tar -xf DS000-BN-00001-r23p1-00rel0.tgz
-cd DS000-BN-00001-r23p1-00rel0
+tar -xf DS000-BN-00001-r24p0-00rel0.tgz
+cd DS000-BN-00001-r24p0-00rel0
 ```
 To install silently from the command line, use similar to the following.
 ```command
-sudo ./armds-2023.1.sh --i-agree-to-the-contained-eula --no-interactive -f -q
+sudo ./armds-2024.0.sh --i-agree-to-the-contained-eula --no-interactive -f -q
 ```
 {{% notice Libraries%}}
 The install may report that additional [libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) are needed to be installed.
@@ -101,7 +103,7 @@ By default, only the supplied `Arm Compiler for Embedded 6` is installed with Ar
 
 Navigate to `bin` directory of your install, for example:
 ```command
-cd /opt/arm/developmentstudio-2023.1/bin
+cd /opt/arm/developmentstudio-2024.0/bin
 ```
 Use `suite_exec` to start an appropriate command prompt, for example:
 ```command
@@ -130,11 +132,11 @@ Launch the IDE from your desktop, or from the above prompt using:
 
 ## Set up the product license
 
-Arm Development Studio is license managed. When you launch the IDE for the first time, you should be prompted to set up your license and select the Edition. You can return to this view from `Help` > `Arm License Manager`.
+Arm Development Studio is license managed. When you launch the IDE for the first time, you should be prompted to set up your license if necessary. You can return to this view from `Help` > `Arm License Manager`.
 
 A free 30 day evaluation license for Arm Development Studio is also available. You can generate this in `Arm License Manager`. Click on `Add`, and follow instructions therein to obtain the evaluation license (requires Arm login).
 
-Alternative license setup instructions are available in the [Arm Licensing install guide](../license/).
+Full license setup instructions are available in the [Arm Software Licensing install guide](../license/).
 
 ## Get started
 

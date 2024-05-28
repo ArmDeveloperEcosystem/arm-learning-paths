@@ -6,8 +6,8 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Development Studio.
 
 learning_objectives: 
-    - Create a debug configuration for a new Virtual Platform
-    - Create a debug configuration for a new target hardware
+    - Create a debug configuration for a virtual platform
+    - Create a debug configuration for a development board
 
 prerequisites:
     - Some familiarity with embedded debug

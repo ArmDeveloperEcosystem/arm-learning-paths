@@ -31,7 +31,7 @@ Docker Desktop provides the ability to build and run multi-architecture images u
 For Ubuntu, install emulation support using the command below.
 
 ```console
-sudo apt-get install qemu-user-static
+sudo apt-get install qemu-user-static -y
 ```
 
 If emulation support is not installed on a Linux machine running Docker Engine, an error message similar to this one will occur:
@@ -43,7 +43,7 @@ The next section explains how to use `docker buildx` to create multi-architectur
 
 ## Build a multi-architecture Docker image from a Dockerfile
 
-Create a new directory and save the two lines below into a file named Dockerfile, or reuse the same file from the previous section.
+Create a new directory and use a text editor to copy the two lines below into a file named `Dockerfile`, or reuse the same file from the previous section.
 
 ```dockerfile
 FROM ubuntu:latest

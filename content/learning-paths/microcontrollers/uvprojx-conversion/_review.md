@@ -4,12 +4,13 @@ review:
         question: >
             Which tools can you use to convert a uvprojx file to csolution format?
         answers:
-            - Command line
-            - GUI
-            - Both
-        correct_answer: 3
+            - Keil Studio
+            - µVision
+            - vcpkg
+            - All of the above
+        correct_answer: 4
         explanation: >
-            You can use the command line or the VS Code-based GUI to convert projects.
+            You can use vcpkg on the command line or Keil Studio or µVision to convert projects.
 
 
 

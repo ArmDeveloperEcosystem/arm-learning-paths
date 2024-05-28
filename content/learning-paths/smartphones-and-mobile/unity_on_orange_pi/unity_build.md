@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build your game in Unity to run on the Orange Pi 5"
+title: "How do I build my game in Unity to run on the Orange Pi 5"
 
 weight: 3
 
@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 In this section you will create a build of your Unity game that can be installed and run on an Orange Pi 5 running Droid OS
 
-## Adjust Your Unity Build Settings
+## How do I adjust my Unity Build Settings?
 
 Open up your game in Unity
 

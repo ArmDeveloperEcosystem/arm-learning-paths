@@ -13,6 +13,7 @@ Called from:
 
 <!-- Hugo processing -->
 {{$author := .Params.author_primary}}
+{{$authors_multiple := slice}}
 {{$author_company := ""}}
 {{$github_url := ""}}
 {{$linkedin_url := ""}}
@@ -22,10 +23,19 @@ Called from:
 {{$is_learning_path := false}}
 {{$table_name := "Install Guide"}}
 
+<!-- Trial new IG title structure for SEO optimization -->
+{{$seo_pages := slice "AWS CLI" "Anaconda" "Chromium" "CMake" "Docker Desktop" "Docker for Windows on Arm" "AWS EKS CLI (eksctl)" "Google Cloud Platform (GCP) CLI" "Hyper-V on Arm" "Kubectl" "NoMachine" "Ansible" "AWS Credentials"}}
 
 {{ $active_tag := "" }}
 {{ $tools_software_languages := slice}}
 {{ $main_tool_title := .Params.Title }}
+
+
+<!-- Split authors by ';' if multiple -->
+{{$authors_multiple := slice}}
+{{ if in $author ";" }}
+    {{ $authors_multiple = split $author ";" }}
+{{end}}
 
 
 <!-- Differentiate between learning paths and install guide formatting -->
@@ -38,10 +48,14 @@ Called from:
 
 <!-- Get metadata of author from CSV file -->
 {{ range $i, $row := getCSV "," "contributors.csv" }}
-    {{if eq $author (index $row 0)}}
-        {{ if or (eq $author "Pareena Verma") (eq $author "Jason Andrews")  (eq $author "Ronan Synnott") (eq $author "Florent Lebeau") }}
-            {{$author = "Arm"}}
-        {{else}}
+
+{{/*  
+    {{ if gt (len $authors_multiple) 0 }}
+            <!-- Multiple authors! -->        
+
+    {{else}}*/}}
+        {{if eq $author (index $row 0)}}
+            <!-- Fill out one author info -->        
             {{$author_company = index $row 1}}
             {{if (index $row 2)}}
                 {{$github_url = printf "https://github.com/%s" (index $row 2)}}
@@ -56,7 +70,7 @@ Called from:
                 {{$website_url = index $row 5}}
             {{end}}
         {{end}}
-    {{end}}
+    
 {{ end }}
 
 
@@ -93,7 +107,14 @@ Called from:
 
  <!-- Markdown metadata table -->
  <div class="content-box">
-    <h2 id="about-marker">About this {{$table_name}}</h2>
+    {{- $page_h2 := printf "About this %s" $table_name -}}
+    {{- $p_title := .Title -}}
+    {{- range $seo_pages -}}
+        {{- if eq $p_title . -}}
+            {{- $page_h2 = printf "How do I install %s?" . -}}
+        {{- end -}}
+    {{- end -}}
+    <h2 id="about-marker">{{$page_h2}}</h2>
     <div class="c-row">
         <div class="c-col xs:c-col-12 sm:c-col-12 md:c-col-12 lg:c-col-6 xl:c-col-4">
             <!-- RIGHT TABLE, non mobile-->

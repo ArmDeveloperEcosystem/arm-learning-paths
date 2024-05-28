@@ -15,7 +15,7 @@ The latest released version of [Snappy](http://google.github.io/snappy/) and [Zs
 
 * Amazon Linux 2
 * RHEL/CentOS 8
-* Ubuntu Versions - 20.04, 18.04
+* Ubuntu Versions - 22.04, 20.04, 18.04
 
 The detailed steps below have been tested on `AWS EC2` and `Oracle OCI` Arm-based servers running `Ubuntu 20.04`.
 
@@ -62,12 +62,56 @@ To benchmark the stand-alone performance of `snappy` with `lzbench`, using one o
 ./lzbench -esnappy ../silesia/dickens
 ```
 
+The output will look similar to:
+
+```output
+lzbench 1.8 (64-bit Linux)  (null)
+Assembled by P.Skibinski
+
+Compressor name         Compress. Decompress. Compr. size  Ratio Filename
+memcpy                  16435 MB/s 16275 MB/s    10192446 100.00 ../silesia/dickens
+snappy 2020-07-11         234 MB/s   625 MB/s     6340267  62.21 ../silesia/dickens
+done... (cIters=1 dIters=1 cTime=1.0 dTime=2.0 chunkSize=1706MB cSpeed=0MB)
+```
+
 To benchmark the stand-alone performance of `zstd` with `lzbench`, using one of the files(`dickens`) from the Silesia corpus data set you installed run the following command:
 
 ```bash { cwd="lzbench" }
 ./lzbench -ezstd ../silesia/dickens
 ```
 
+The output will look similar to:
+
+```output
+lzbench 1.8 (64-bit Linux)  (null)
+Assembled by P.Skibinski
+
+Compressor name         Compress. Decompress. Compr. size  Ratio Filename
+memcpy                  17434 MB/s 16647 MB/s    10192446 100.00 ../silesia/dickens
+zstd 1.5.5 -1             194 MB/s   774 MB/s     4261734  41.81 ../silesia/dickens
+zstd 1.5.5 -2             138 MB/s   638 MB/s     3864999  37.92 ../silesia/dickens
+zstd 1.5.5 -3            97.2 MB/s   584 MB/s     3667667  35.98 ../silesia/dickens
+zstd 1.5.5 -4            83.6 MB/s   532 MB/s     3587632  35.20 ../silesia/dickens
+zstd 1.5.5 -5            53.6 MB/s   563 MB/s     3529639  34.63 ../silesia/dickens
+zstd 1.5.5 -6            37.4 MB/s   603 MB/s     3418515  33.54 ../silesia/dickens
+zstd 1.5.5 -7            29.7 MB/s   579 MB/s     3345600  32.82 ../silesia/dickens
+zstd 1.5.5 -8            23.0 MB/s   603 MB/s     3308676  32.46 ../silesia/dickens
+zstd 1.5.5 -9            20.8 MB/s   560 MB/s     3282524  32.21 ../silesia/dickens
+zstd 1.5.5 -10           13.7 MB/s   538 MB/s     3217624  31.57 ../silesia/dickens
+zstd 1.5.5 -11           8.40 MB/s   518 MB/s     3175497  31.16 ../silesia/dickens
+zstd 1.5.5 -12           8.02 MB/s   495 MB/s     3168791  31.09 ../silesia/dickens
+zstd 1.5.5 -13           2.91 MB/s   503 MB/s     3122251  30.63 ../silesia/dickens
+zstd 1.5.5 -14           2.21 MB/s   499 MB/s     3084587  30.26 ../silesia/dickens
+zstd 1.5.5 -15           1.85 MB/s   481 MB/s     3057963  30.00 ../silesia/dickens
+zstd 1.5.5 -16           1.91 MB/s   545 MB/s     2924845  28.70 ../silesia/dickens
+zstd 1.5.5 -17           1.54 MB/s   519 MB/s     2895574  28.41 ../silesia/dickens
+zstd 1.5.5 -18           1.34 MB/s   496 MB/s     2864587  28.11 ../silesia/dickens
+zstd 1.5.5 -19           1.28 MB/s   479 MB/s     2850277  27.96 ../silesia/dickens
+zstd 1.5.5 -20           1.26 MB/s   456 MB/s     2849447  27.96 ../silesia/dickens
+zstd 1.5.5 -21           1.24 MB/s   454 MB/s     2849413  27.96 ../silesia/dickens
+zstd 1.5.5 -22           1.19 MB/s   474 MB/s     2849384  27.96 ../silesia/dickens
+done... (cIters=1 dIters=1 cTime=1.0 dTime=2.0 chunkSize=1706MB cSpeed=0MB)
+```
 The value passed to `-e` in the command above is the compression algorithm.
 
 For full usage and viewing all the arguments you can pass to `lzbench` run the command below:

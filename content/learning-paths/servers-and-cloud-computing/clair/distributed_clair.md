@@ -29,7 +29,7 @@ If you completed the combined deployment in the previous section, you have Docke
 In distributed deployment, each Clair component (indexer, matcher and notifier) runs in a separate OS process. 
 
 Unlike the combined deployment, all three components run inside containers. 
-There is no need to expose postgres port 5432, as all three services of are on same container network with postgres.
+There is no need to expose postgres port 5432, as all three services of clair are on same container network with postgres.
 
 {{% notice Note %}}
 If you completed the combined deployment in the previous section, you can delete the Clair directory and start again for the distributed deployment.

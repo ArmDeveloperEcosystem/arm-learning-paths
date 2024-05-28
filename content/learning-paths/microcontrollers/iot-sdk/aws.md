@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 A key requirement for IoT devices is connectivity. The `keyword` and `speech` examples implement AWS cloud connectivity.
 
-You can create an AWS thing (a representation of a device) to send data from a simulated Corstone-300 device to AWS IoT cloud services.
+You can create an [AWS thing](https://docs.aws.amazon.com/iot/latest/developerguide/iot-thing-management.html) (a representation of a device) to send data from a simulated Corstone-300 device to AWS IoT cloud services.
 
 ## Default build
 
@@ -18,26 +18,33 @@ Build and run the `keyword` example:
 ```console
 ./ats.sh build-n-run keyword
 ```
+The build will take a few minutes to complete.
 
 The results are output (alongside other data) in the terminal:
 
 ```output
+*** ML interface initialised
+INFO - For timestamp: 0.000000 (inference #: 0); label: on, score: 0.996127; threshold: 0.700000
 ML_HEARD_ON
+INFO - For timestamp: 0.500000 (inference #: 1); label: on, score: 0.962542; threshold: 0.700000
+INFO - For timestamp: 1.000000 (inference #: 2); label: <none>; threshold: 0.000000
+ML UNKNOWN
+INFO - For timestamp: 1.500000 (inference #: 3); label: off, score: 0.999030; threshold: 0.700000
 ML_HEARD_OFF
 ...
 ```
 
-Press Control-C to stop the simulation.
+Use `Ctrl+C` to stop the simulation.
 
-This confirms your environment is setup correctly to build and run the `keyword` and `speech` example applications.
+This confirms your environment is setup correctly to build and run the `keyword` (and `speech`) example applications.
 
 ## Set up an AWS thing
 
-You can send the output data to an [AWS thing](https://docs.aws.amazon.com/iot/latest/developerguide/iot-thing-management.html) using [MQTT](https://mqtt.org/).
+You can send the output data to an `AWS thing` using [MQTT](https://mqtt.org/).
 
 Open the AWS console in your browser.
 
-In the same AWS region where you created your Arm Virtual Hardware instance, navigate to `IoT Core`.
+In the same AWS region where you launched your Arm Virtual Hardware instance, navigate to `IoT Core`.
 
 ### Create IoT policy {#policy}
 
@@ -59,6 +66,10 @@ An AWS IoT policy defines how your `thing` can be accessed.
 
 `Policy resource` will be unique to you, of the form:
 * `arn:aws:iot:<region>:<account-id>:*`
+
+For example, if you are in region `us-east-1`, and your account number is `1111-2222-3333`, use:
+
+* `arn:aws:iot:us-east-1:111122223333:*`
 
 4. Click `Create` to define the policy.
 

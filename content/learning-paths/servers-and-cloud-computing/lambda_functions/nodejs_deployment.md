@@ -12,9 +12,9 @@ layout: "learningpathall"
 
 Lambda runs your code on high-availability compute infrastructure and frees you from spending time administering servers.
 
-You can configure Lambda functions to run on Graviton2 processors. 
+You can configure Lambda functions to run on Graviton processors. 
 
-This Learning Path shows you how to deploy AWS Lambda functions using Terraform and select Graviton2 as the architecture.
+This Learning Path shows you how to deploy AWS Lambda functions using Terraform and select "arm64" as the architecture.
 
 ## Before you begin
 

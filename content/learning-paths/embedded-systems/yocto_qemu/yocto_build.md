@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build and Run 64-bit Arm Yocto Linux image on Qemu" 
+title: "How do I get started with Yocto Linux on Qemu?" 
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -8,16 +8,16 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
+## What is the Yocto Project?
 
-The [Yocto Project](https://www.yoctoproject.org/) is an open-source project with a build system that allows software developers create custom embedded Linux OS distributions regardless of the hardware architecture. 
+The [Yocto Project](https://www.yoctoproject.org/) is an open-source project with a build system that allows software developers to create custom embedded Linux OS distributions regardless of the hardware architecture. 
 Developers can configure their custom builds of Yocto using a set of recipes. In this Learning Path you will learn the steps to build a minimal Yocto Linux image for a 64-bit Arm target and run it on [QEMU](https://www.qemu.org/). 
 
-## Build minimal Yocto Linux image for 64-bit Arm target
+## How do I build a minimal Yocto Linux image for a 64-bit Arm target?
 
-Poky is a reference distribution of the Yocto Project. It is a great starting point to build your own custom distribution as it contains both the build system and the the baseline functional distribution. Along with containing recipes for real target boards, it also contains the recipes for building the image for example 64-bit Arm machines supported in QEMU. The example 64-bit machine emulated by QEMU does not emulate any particular board but is a great starting point to learn and try the basics of running this distribution.
+Poky is a reference distribution of the Yocto Project. It is a great starting point to build your own custom distribution as it contains both the build system and the the baseline functional distribution. Along with containing recipes for real target boards, it also contains the recipes for building the image, for example 64-bit Arm machines supported in QEMU. The example 64-bit machine emulated by QEMU does not emulate any particular board but is a great starting point to learn and try the basics of running this distribution.
 
-The first step is to install the packages required to build and run Yocto
+The first step is to install the packages required to build and run Yocto:
 
 ```bash
 sudo apt update
@@ -30,7 +30,7 @@ git clone git://git.yoctoproject.org/poky
 cd poky
 git checkout tags/yocto-4.0.6 -b yocto-4.0.6-local
 ```
-Next source the script as shown below to initialize your build environment for your 64-bit Arm example machine QEMU target
+Next source the script as shown below to initialize your build environment for your 64-bit Arm example machine QEMU target:
 
 ```bash
 source oe-init-build-env build-qemu-arm64
@@ -90,7 +90,7 @@ Depending on your machine, this build step can take an hour or more to complete.
 
 After the build is complete, the images are in the `build-qemu-arm64/tmp/deploy/images/qemuarm64` directory.
 
-## Run the image on the 64-bit Arm QEMU target
+## How do I run the image on the 64-bit Arm QEMU target?
 
 QEMU is installed on your machine as part of cloning the Poky repository and sourcing the environment script. 
 

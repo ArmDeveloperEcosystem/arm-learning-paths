@@ -28,7 +28,7 @@ The Kubernetes command-line tool, [kubectl](https://kubernetes.io/docs/reference
 
 `kubectl` is available for Windows, macOS, Linux and supports the Arm architecture.
 
-## Before you begin
+## What should I consider before installing kubectl for Ubuntu on Arm?
 
 [General installation information](https://kubernetes.io/docs/tasks/tools/) is available which covers all supported operating systems, but it doesn't talk about Arm. 
 
@@ -46,7 +46,7 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and Install
+## How do I download and Install kubectl for Ubuntu on Arm?
 
 The easiest way to install `kubectl` for Ubuntu on Arm is to use curl and copy the executable to a common location. 
 

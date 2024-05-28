@@ -3,14 +3,16 @@ title: Convert uvprojx-based projects to csolution
 
 minutes_to_complete: 10
 
-who_is_this_for: Users of MDK v5 who want to migrate to MDK v6.
+who_is_this_for: This is a topic for users of µVision who want to migrate to the new project format (csolution) required by CMSIS-Toolbox.
 
 learning_objectives: 
-    - Import, convert, and build uvprojx-based projects in Keil Studio Desktop.
+    - Import, convert, and build uvprojx-based projects in Keil Studio.
+    - Convert uvprojx-based projects in µVision.
     - Convert and build uvprojx-based projects on the command line.
 
 prerequisites:
-    - Install [Keil Studio Desktop](../../../install-guides/keilstudio_vs/) on your machine.
+    - Install [Keil Studio](../../../install-guides/keilstudio_vs/) on your machine.
+    - Install [µVision](../../../install-guides/mdk/) on your machine.
     - Install [vcpkg](https://vcpkg.io/en/getting-started.html) for the command line flow.
     - The &micro;Vision project must use Arm Compiler 6 as the default toolchain. Arm Compiler 5 is not supported.
 

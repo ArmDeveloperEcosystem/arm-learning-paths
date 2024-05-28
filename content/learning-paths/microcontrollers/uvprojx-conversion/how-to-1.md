@@ -1,27 +1,29 @@
 ---
-title: Using Keil Studio Desktop
+title: Using Keil Studio
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Project conversion with a GUI 
+## Project conversion in Keil Studio
 
 1. In VS Code, go to **File - Open Folder** and select the folder containing the uvprojx file (here `Blinky.uvprojx`).
 
-1. Once the folder is open in VS Code, a pop up appears in the bottom left corner asking if the uvprojx file should be converted:
+1. Once the folder is open in VS Code, right-click the uvprojx file and select **Convert µVision project to csolution**:
 
-   ![Convert project](./convert_project.png)
-
-1. Click the **Convert** button.
+   ![Convert project](./blinky_convert.png)
 
 1. The following files (and more) are generated:
    - `Blinky.csolution.yaml`
    - `Blinky.cproject.yaml`
    - `vcpkg-configuration.json`
 
-1. The vcpkg configuration file is automatically activated. You notice an active configuration in the **Status Bar** at the bottom:
+1. The **Output** window shows a successful conversion:
+
+   ![Successful conversion](./output_conversion.png)
+
+1. The vcpkg configuration file is automatically activated. You notice an active "Environment" configuration in the **Status Bar** at the bottom:
 
    ![vcpkg activated](./vcpkg-activated.png)
 

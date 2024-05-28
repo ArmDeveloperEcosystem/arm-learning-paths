@@ -29,7 +29,7 @@ review:
             - "False"
         correct_answer: 2                    
         explanation: >
-            You can reach a local container using docker exec and a remote container using Remote.It. There are other services to each containers, but Remote.It is a good example of how to do it. 
+            You can reach a local container using docker exec and a remote container using Remote.It. There are other services to each containers but Remote.It is a good example of how to do it. 
                
 
 # ================================================================================

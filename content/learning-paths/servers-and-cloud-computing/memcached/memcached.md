@@ -31,6 +31,11 @@ You can install a pre-built memcached with:
 ```bash
 sudo apt install memcached -y
 ```
+Start the memcached service with:
+```bash
+sudo systemctl start memcached
+```
+
 ### Install memcached from source on Arm servers
 
 If you prefer to build from source code, use:

@@ -49,7 +49,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 Download Multipass for macOS.
 
 ```console
-wget https://github.com/canonical/multipass/releases/download/v1.12.0/multipass-1.12.0+mac-Darwin.pkg
+wget https://github.com/canonical/multipass/releases/download/v1.13.1/multipass-1.13.1+mac-Darwin.pkg
 ```
 
 ### Install
@@ -57,7 +57,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.12.0/multipass-
 Install the download using the package command.
 
 ```console
-sudo installer -pkg  multipass-1.12.0+mac-Darwin.pkg -target /
+sudo installer -pkg  multipass-1.13.1+mac-Darwin.pkg -target /
 ```
 
 The getting started instructions below use the command line interface. Multipass installs a tray icon for those who want to access basic features from the user interface.

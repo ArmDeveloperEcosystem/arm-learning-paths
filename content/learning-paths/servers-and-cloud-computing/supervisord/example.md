@@ -46,7 +46,7 @@ CMD ["/usr/bin/supervisord"]
 
 You will also need a configuration file for Supervisor. 
 
-Use a text editor to create a file named `supervisord.conf` with the contents:
+Use a text editor to create a file named `supervisord.conf` with the following contents:
 
 ```console
 [supervisord]
@@ -71,9 +71,9 @@ Build the container using:
 docker build -t supervisord-dev  .
 ```
 
-Before running the container you need a registration code from Remote.It. 
+Before running the container, you need a registration code from Remote.It. 
 
-Log in to your account at https://app.remote.it
+Log in to your account at https://app.remote.it.
 
 From the dashboard click the + icon and select the Linux icon to add a new device.
 
@@ -81,13 +81,13 @@ Copy the generated registration code by clicking the bar code symbol under COPY 
 
 ![Registration code #center](remoteit-code.png)
 
-With this code you can launch the container. Substitute your registration code instead of the one shown:
+With this code you can launch the container. Substitute your registration code instead of the one shown below:
 
 ```console
 docker run -d -e R3_REGISTRATION_CODE=416ED829-D9D8-532C-B1FE-13548929B2A1 -p 80:80 supervisord-dev
 ```
 
-Once the container starts on your local machine you can open your browser to [https://localhost](http://localhost) and see the Apache welcome screen.
+Once the container starts on your local machine, you can open your browser to [https://localhost](http://localhost) and see the Apache welcome screen.
 
 You will also see the device in your Remote.It dashboard. 
 
@@ -95,7 +95,7 @@ In the dashboard, start the SSH connection by clicking the CONNECT bar as shown 
 
 ![Connect #center](connect.png)
 
-Once connected, get the values for the PUBLIC ENDPOINT
+Once connected, get the values for the PUBLIC ENDPOINT:
 
 ![Public endpoint #center](endpoint.png)
 
@@ -109,7 +109,7 @@ ssh ssh://ubuntu@proxy18.rt3.io:32443
 
 You are now inside the container as the `ubuntu` user.
 
-Notice the SSH port was not shared by the container. 
+Notice that the SSH port was not shared by the container. 
 
 
 

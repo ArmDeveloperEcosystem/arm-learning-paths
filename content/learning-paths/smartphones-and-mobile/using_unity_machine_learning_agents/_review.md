@@ -2,14 +2,14 @@
 review:
     - questions:
         question: >
-            What machine learning paradigm did we use in this learning path?
+            Which machine learning paradigm did we use in this learning path?
         answers:
             - Imitation Learning
             - Unity ML Agents
             - Reinforcement Learning
         correct_answer: 3                    
         explanation: >
-            We used reinforcement learning (one of the paradigms supported by Unity ML Agents toolkit).
+            We used reinforcement learning. (One of the paradigms supported by Unity ML Agents toolkit.)
 
     - questions:
         question: >

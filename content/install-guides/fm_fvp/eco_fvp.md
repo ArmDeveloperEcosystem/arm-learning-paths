@@ -1,8 +1,8 @@
 ---
-title: Arm Ecosystem FVPs
+title: Arm Ecosystem FVPs and Architecture Envelope Models
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966
-author_primary: Jason Andrews
+author_primary: Ronan Synnott
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -11,18 +11,26 @@ multi_install: false             # Set to true if first page of multi-page artic
 multitool_install_part: true    # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-Arm Ecosystem FVPs are available free-of-charge. They are supported by relevant Open Source Software projects.
+Arm provides various Fixed Virtual Platforms (FVPs) free of charge.
 
-## Download Ecosystem FVPs
+* Architecture Envelope Models (AEMs) are generic FVPs suitable for early Arm Architecture exploration.
+
+* Arm Ecosystem FVPs model Arm hardware subsystems, and are supported by relevant Open Source Software projects.
+
+Host platform support will vary by FVP.
+
+## Download
+
+### Architecture Envelope Models
+
+AEM FVPs can be downloaded directly from [Fixed Virtual Platforms](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms) on the `Arm Developer` website.
+
+### Ecosystem FVPs
 
 Arm Ecosystem FVPs can be download from [Arm Ecosystem FVPs](https://developer.arm.com/downloads/-/arm-ecosystem-fvps) on the `Arm Developer` website.
 
+
 ## Installation
-
-### Windows
-Unzip the downloaded installation archive.
-
-Run the installer (`<FVP_name>.msi`), and follow on-screen instructions.
 
 ### Linux
 Unpack the downloaded package, and install the FVP library with the supplied script. For example:
@@ -33,15 +41,22 @@ For full list of available options, use `--help`:
 ```command
 ./FVP_Corstone_1000.sh --help
 ```
+
+### Windows
+
+Unzip the downloaded installation archive.
+
+Run the installer (`<FVP_name>.msi`), and follow on-screen instructions.
+
 ## Verify installation
 
-Arm Ecosystem FVPs are not license managed.
+Arm Ecosystem FVPs and AEMs are not license managed.
 
-To verify everything is working OK, run the installed FVP executable, located in the `models/<build_environment>` folder of the installed directory. No additional command options are needed.
+To verify everything is working OK, run the installed FVP executable, located in the `models/<build_environment>` folder of the installed directory. No additional command options are needed for this step.
 
 For example:
 ```command
-./models/Linux64_GCC-9.3/FVP_Corstone-1000
+./FVP_Corstone-1000
 ```
 The FVP will launch, and output text in a terminal similar to:
 ```output
@@ -56,4 +71,6 @@ Terminate the FVP with `Ctrl+C`.
 
 ## Integration with Arm Toolchains
 
-Arm Ecosystem FVPs can be used in conjunction with [Arm Development Studio](/install-guides/armds) or [Keil MDK](/install-guides/mdk) (Cortex-M FVPs only) to provide a debug target without the need for real hardware.
+These FVPs can be used in conjunction with [Arm Development Studio](/install-guides/armds) or [Keil MDK](/install-guides/mdk) (Cortex-M FVPs only) to provide a debug target without the need for real hardware.
+
+Some of these FVPs are also directly supplied with these toolchains.

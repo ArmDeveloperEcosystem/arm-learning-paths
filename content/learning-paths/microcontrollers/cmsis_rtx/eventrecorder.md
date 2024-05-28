@@ -9,9 +9,7 @@ layout: "learningpathall"
 ---
 We saw in the last section that Keil MDK does not support semihosting.
 
-[Event Recorder](https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html) can be used instead for the printf functionality. It is supported for both FVPs and real hardware.
-
-Event recorder functionality can be further extended by the Keil MDK [Component Viewer](https://www.keil.com/pack/doc/compiler/EventRecorder/html/cv_use.html). Annotations can be made in the application code or software component libraries. These annotations are stored in an `event buffer`.
+[CMSIS-View](https://arm-software.github.io/CMSIS_6/latest/View/index.html) provides [Event Recorder](https://arm-software.github.io/CMSIS-View/latest/evr.html) which can be used instead for the printf functionality. It is supported for both FVPs and real hardware.
 
 {{% notice  Arm Development Studio%}}
 Event Recorder and Component Viewer are not supported. This section can be ignored.
@@ -19,9 +17,9 @@ Event Recorder and Component Viewer are not supported. This section can be ignor
 
 ## Manage run-time environment
 
-Open the `Manage run-time environment` dialog, and enable `Compiler` > `Event Recorder` (`DAP` variant).
+Open the `Manage run-time environment` dialog, and enable `CMSIS-View` > `Event Recorder` (`DAP` variant).
 
-Enable `Compiler` > `I/O` > `STDOUT`, and set to `EVR` (Event recorder) mode.
+Enable `CMSIS-Compiler` > `STDOUT (API)`, and set to `Event recorder`. You will also need to enable `CMSIS-Compiler` > `Core`.
 
 Click `OK` to save.
 
@@ -37,9 +35,24 @@ Add this function call to `main()`, before `osKernelInitialize()`:
 ```C
 	EventRecorderInitialize (EventRecordAll, 1);	// initialize and start Event Recorder
 ```
-## Set the event buffer
 
-The event buffer must be located in an uninitialized region of writable memory.
+## Set the Event Recorder timing source
+
+Navigate the project tree to locate `CMSIS-View` > `EventRecorderConf.h`, and open this file.
+
+Click the `Configuration Wizard` tab.
+
+Set `Event Recorder` > `Time Stamp Source` to `CMSIS-RTOS2 System Timer`, and save the file.
+
+This change will be reflected in the source code as:
+
+``` C
+#define EVENT_TIMESTAMP_SOURCE  2
+```
+
+## Define the Event Recorder buffer
+
+`EventRecorder.o` will use a buffer to store the generated data. This must be located in an uninitialized region of writable memory.
 
 Edit the scatter file, creating a new execution region (after `ARM_LIB_STACK`):
 ```text
@@ -70,11 +83,18 @@ hello from thread 2
 
 Use the menu (`View` > `Analysis Windows` > `Event Recorder`) to open the viewer.
 
+Note that the RTX source contains many Event Recorder annotations.
+
+For ease of readability, click the `Filter` icon to hide these events. Ensure `STDIO` events are enabled.
+
+![Event Viewer filter #center](ev_filter.png)
+
 Observe that printf output is in the form of the ASCII codes of the text output.
 
 ![Event Viewer #center](ev_raw.png)
 
 For this view it is better to use [EventRecorder Data](https://www.keil.com/pack/doc/compiler/EventRecorder/html/group__EventRecorder__Data.html) rather than printf statements.
+
 
 ## EventRecorder Data
 
@@ -82,7 +102,10 @@ Edit the `threads.c` file, and include the header file:
 ```C
 #include "EventRecorder.h"
 ```
-Add call in each thread to `EventRecord2()` with the thread number as the second parameter, for example:
+
+Add a call in each thread to `EventRecord2()` with the thread number as the second parameter.
+
+For example, to output a `2` for `thread2`, use:
 ```C
 void __attribute__((noreturn)) thread2(void *argument){
 	for(;;){
@@ -96,7 +119,9 @@ Save all files, and `rebuild` (`F7`) the example.
 
 Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 
-Observe the events in the Event Recorder viewer. Use the filter to hide `STDIO` events, which shall remove the printf strings.
+Observe the events in the Event Recorder viewer.
+
+Use the filter to hide `STDIO` events, which shall remove the printf strings. Ensure `Unspecified Events` > `0x0` is enabled.
 
 The thread number is output as the first `Value`:
 
@@ -106,7 +131,7 @@ The thread number is output as the first `Value`:
 
 To make these events more meaningful in the Event Recorder viewer, use the Component Viewer functionality.
 
-Create a [Component Viewer Description File](https://www.keil.com/pack/doc/compiler/EventRecorder/html/SCVD_Format.html) (e.g. `rtos.scvd`) with the following:
+In a text editor, create a [Component Viewer Description File](https://www.keil.com/pack/doc/compiler/EventRecorder/html/SCVD_Format.html) (e.g. `rtos.scvd`) with the following:
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
  
@@ -129,20 +154,10 @@ Click `Add Component Viewer Description File`, and browse for the above. Save th
 
 Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
 
-Observe these events in the Event Recorder viewer, optionally filtering out `STDIO`.
+This file has now defined event `0x0`, and this is reflected in the filter view:
+
+![Event Viewer filter #center](ev_component.png)
+
+These events are now processed into meaningful messages in the Event Recorder viewer:
 
 ![Event Viewer #center](ev_cv.png)
-
-## Observe RTX events in the Event Viewer
-
-The RTX source contains many Event Recorder annotations. To see these events in the viewer, return to the IDE, and open the `Manage run-time environment` dialog.
-
-Enable `CMSIS` > `RTOS2 (API)` > `Keil RTX5`, but now select `Source` variant. Click `OK` to save. Rebuild the application.
-
-Click `Debug` (`Ctrl+F5`), then `Run` (`F5`) to start the application.
-
-Observe the events in the viewer, filtering as appropriate.
-
-If no RTOS events are visible, verify that they are enabled in `Target Options` > `Debug` > `Manage Component Viewer Description Files`.
-
-![Event Viewer #center](ev_rtos.png)

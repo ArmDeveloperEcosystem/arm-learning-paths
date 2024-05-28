@@ -86,7 +86,7 @@ Specifies the operating systems this Learning Path can run on. Select from this 
 |---------------|
 | Linux         |
 | Windows       |
-| MacOS         |
+| macOS         |
 | ChromeOS      |
 | iOS           |
 | Android       |

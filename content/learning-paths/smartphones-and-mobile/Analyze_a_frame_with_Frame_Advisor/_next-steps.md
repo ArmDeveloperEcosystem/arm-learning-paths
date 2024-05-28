@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Learn more about Frame Advisor and the Arm Perforance Studio profiling tools for Android.
+next_step_guidance: Learn more about Frame Advisor and the Arm Performance Studio profiling tools for Android.
 
 recommended_path: /learning-paths/smartphones-and-mobile/ams/
 
