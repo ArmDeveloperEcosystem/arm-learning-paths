@@ -21,7 +21,7 @@ The results from the first phase guide where to look next to find areas for perf
 The white paper [Arm CPU Telemetry Solution Topdown Methodology Specification](https://developer.arm.com/documentation/109542/0100/?lang=en) describes the Topdown Methodology referenced below. 
 {{% /notice %}}
 
-The first level metrics to look at are:
+The first-level metrics to look at are:
 
 ```C
 //Top Down L1 Metrics
@@ -37,10 +37,11 @@ PMU_EVENT_OP_SPEC,
 These PMU events highlight backend inefficiency, frontend inefficiency, bad speculation, and instruction retiring. 
 
 The following groups are described below:
-- Backend inefficiency: execution unit, D-Cache misses, translation delays caused by D-TLB walks
-- Frontend inefficiency: branch prediction unit, fetch latency due to I-Cache misses, translation delays caused by I-TLB walks
-- Bad speculation: branch mispredictions
-- Retiring: under utilization of micro-architectural capabilities such as scalar execution instead of vector operations
+
+- Backend inefficiency: execution unit, D-Cache misses, and translation delays caused by D-TLB walks.
+- Frontend inefficiency: branch prediction unit, fetch latency due to I-Cache misses, and translation delays caused by I-TLB walks.
+- Bad speculation: branch mispredictions.
+- Retiring: under-utilization of micro-architectural capabilities such as scalar execution instead of vector operations.
 
 ## Backend inefficiency
 
