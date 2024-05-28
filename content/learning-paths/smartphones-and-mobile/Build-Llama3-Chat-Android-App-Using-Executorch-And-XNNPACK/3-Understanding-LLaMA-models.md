@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## What are LLaMA 2 and 3
+## What are Llama 2 and Llama 3?
 
 Llama is a family of large language models that uses publicly available data for training. Llama models have shown to perform well on a variety of natural language processing tasks, including language translation, question answering, and text summarization and are also capable of generating human-like text, making Llama models a useful tool for creative writing and other applications where natural language generation is important.
 
@@ -16,17 +16,25 @@ Please note that the models are subject to the [acceptable use policy](https://g
 
 ## Results
 
-Since Llama2/3 models need at least 4-bit quantization to fit even within some of the highend phones, results presented here correspond to 4-bit groupwise post-training quantized model.
+Since Llama2 and Llama 3 models need at least 4-bit quantization to fit within the available memory of some of the premium smartphones, the results presented here correspond to 4-bit groupwise post-training quantized models.
 
 ## Quantization
 
-We employed 4-bit groupwise per token dynamic quantization of all the linear layers of the model. Dynamic quantization refers to quantizating activations dynamically, such that quantization parameters for activations are calculated, from min/max range, at runtime. Here we quantized activations with 8bits (signed integer). Furthermore, weights are statically quantized. In our case weights were per-channel groupwise quantized with 4bit signed integer. For more information refer to this [page](https://github.com/pytorch-labs/ao/).
+One way to crate models which fit in smartphone memory is to employ 4-bit groupwise per token dynamic quantization of all the linear layers of the model. Dynamic quantization refers to quantizing activations dynamically, such that quantization parameters for activations are calculated, from the min/max range, at runtime. Furthermore, weights are statically quantized. In this case weights are per-channel groupwise quantized with 4-bit signed integers. 
 
-We evaluated WikiText perplexity using [LM Eval](https://github.com/EleutherAI/lm-evaluation-harness). Below are the results for two different groupsizes, with max_seq_len 2048, and 1000 samples.
+For more information refer to [torchao: PyTorch Architecture Optimization](https://github.com/pytorch-labs/ao/).
+
+The table below evaluates WikiText perplexity using [LM Eval](https://github.com/EleutherAI/lm-evaluation-harness). 
+
+The results for two different groupsizes, with max_seq_len 2048, and 1000 samples.
 
 |Model | Baseline (FP32) | Groupwise 4-bit (128) | Groupwise 4-bit (256)
 |--------|-----------------| ---------------------- | ---------------
 |Llama 2 7B | 9.2 | 10.2 | 10.7
 |Llama 3 8B | 7.9 | 9.4 | 9.7
 
-Note that groupsize less than 128 was not enabled, since such model were still too large. This is because our current efforts have focused on enabling FP32 and support for FP16 is under way. What this implies for model size is that 1) embedding table is in FP32 and 2) quantized weights scales are FP32.
+Note that groupsize less than 128 was not enabled, since such model were still too large. This is because our current efforts have focused on enabling FP32 and support for FP16 is under way. 
+
+What this implies for model size is:
+1. Embedding table is in FP32 
+2. Quantized weights scales are FP32

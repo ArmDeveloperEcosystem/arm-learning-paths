@@ -1,5 +1,5 @@
 ---
-title: Development Environment Set Up
+title: Create a development environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,56 +8,72 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this learning path we will look at building and deploying a simple LLM based chat app to an Android device using ExecuTorch and XNNPACK. We will learn how to build ExecuTorch runtime for LLaMA models, build JNI libraries for our Android application and finally using the libraries in the application.
+In this Learning Path you will learn how to build and deploy a simple LLM based chat app to an Android device using ExecuTorch and XNNPACK. You will learn how to build the ExecuTorch runtime for LLaMA models, build JNI libraries for the Android application, and use the libraries in the application.
 
-We need to prepare development environment with these things before we can get going:
+The first step is to prepare a development environment with the required software:
 
-1. Install Android Studio (latest version recommended)
-2. Install Android NDK
-3. Install Java 17 JDK
-4. Install Git
-5. Install Python 3.10
+- Android Studio (latest version recommended)
+- Android NDK
+- Java 17 JDK
+- Git
+- Python 3.10
 
-## 1. Install Android Studio and Android NDK
+The instructions assume macOS with Apple Silicon or an x86 Debian or Ubuntu Linux machine with at least 16GB of RAM.
 
-First off, if you haven't already installed, we recommend following steps to install Android Studio and Android NDK
+## Install Android Studio and Android NDK
 
-- Download Android Studio by following the instructions at [Android SDK API Level 34](https://developer.android.com/about/versions/14/setup-sdk).
-- Download and Install Android NDK using:
-  - Android Studio Tools -> SDK Manager -> Android SDK -> SDK Tools -> NDK (Side by side) -> Check v25.0.8775105
+Follow the steps to install and configure Android Studio:
 
-## 2. Install Java 17 JDK
+1. Download and install the latest version of [Android Studio](https://developer.android.com/studio/) 
 
-- Download and install MacOS or Linux installation of [Java 17 JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html)
+2. Start Android Studio and open the `Settings` dialog
 
-## 3. Install Git
+3. Navigate to `Languages & Frameworks -> Android SDK`
 
-- MacOS
-  - Install [Homebrew](https://brew.sh/), if you haven't already
+4. In the `SDK Platforms` tab, check `Android 14.0 ("UpsideDownCake")`
+
+5. Switch to the `SDK Tools` tab, check `NDK (Side by side)` and click `Apply`
+
+6. When the installation is complete, the SDK and NDK for API level 34 will be installed.
+
+
+## Install Java 17 JDK
+
+Open the [Java SE 17 Archive Downloads](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) page in your browser.
+
+Select an appropriate download for your development machine operating system. 
+
+Downloads are available for macOS as well as Linux.
+
+## Install Git
+
+For macOS use [Homebrew](https://brew.sh/)
   
-  ``` bash
-  brew install git
-  ```
+``` bash
+brew install git
+```
 
-- Linux
+For Linux use the package manager for your distribution:
   
-  ``` bash
-  sudo apt install git-all
-  ```
+``` bash
+sudo apt install git-all
+```
 
-## 3. Install Python 3.10
+## Install Python 3.10
 
-- MacOS
+For macOS:
   
-  ``` bash
-  brew install python@3.10
-  ```
+``` bash
+brew install python@3.10
+```
 
-- Linux
+For Linux:
   
-  ``` bash
-  sudo apt update
-  udo apt install software-properties-common -y
-  sudo add-apt-repository ppa:deadsnakes/ppa
-  sudo apt install Python3.10
-  ```
+``` bash
+sudo apt update
+udo apt install software-properties-common -y
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt install Python3.10
+```
+
+You now have the required development tools installed.
