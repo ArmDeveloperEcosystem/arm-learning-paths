@@ -7,12 +7,12 @@ who_is_this_for: This is an introductory topic for Unity developers who are targ
 
 learning_objectives: 
     - Install the packages in Unity
-    - View Mali metrics in the Unity Profiler
-    - Annotate your Unity game with markers that give context to a profile in Arm Mobile Studio tools
+    - View Arm GPU metrics in the Unity Profiler
+    - Annotate your Unity game with markers that give context to a profile in Arm Performance Studio tools
 
 prerequisites:
     - Familiarity with Unity and the Unity Profiler
-    - Familiarity with Arm Mobile Studio tools
+    - Familiarity with Arm Performance Studio tools
 
 author_primary: Julie Gaskin
 
@@ -24,7 +24,7 @@ armips:
     - Mali
 tools_software_languages:
     - Unity
-    - Arm Mobile Studio
+    - Arm Performance Studio
 operatingsystems:
     - Windows
     - macOS

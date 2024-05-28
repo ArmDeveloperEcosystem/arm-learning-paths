@@ -1,24 +1,24 @@
 ---
-title: Arm Mobile Studio Unity integrations
+title: Arm Performance Studio Unity integrations
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Arm Mobile Studio Unity integrations
+## Arm Performance Studio Unity integrations
 
-[Arm Mobile Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio) is a free suite of analysis tools to help you profile game performance on mobile devices with Arm CPUs and GPUs. Arm provides a Unity package to make data from Unity games visible in the Arm Mobile Studio tools, [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) and [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor).
+[Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a free suite of analysis tools to help you profile game performance on mobile devices with Arm CPUs and GPUs. Arm provides a Unity package to make data from Unity games visible in the Arm Performance Studio tools, [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) and [Performance Advisor](https://developer.arm.com/Tools%20and%20Software/Performance%20Advisor).
 
 This package provides a simple way to incorporate annotations into your Unity project. These annotations enable you to mark the timeline with events or custom counters which provides valuable context alongside the performance data in Streamline, so you can see what was happening in the game when bottlenecks occur. For example, here we can see markers that highlight where a wave of enemies is spawning:
 
 ![Marker annotations in Streamline](sl_annotation.png "Figure 1. Marker annotations in Streamline")
 
 {{% notice Note %}}
-The Mobile Studio package is supported with the Unity Editor version 2018.4 LTS and later.
+The Performance Studio package is supported with the Unity Editor version 2018.4 LTS and later.
 {{% /notice %}}
 
-### How to install the Unity Mobile Studio package
+### How to install the Unity Performance Studio package
 
 1. In Unity, go to **Window > Package Manager**.
 
@@ -26,13 +26,17 @@ The Mobile Studio package is supported with the Unity Editor version 2018.4 LTS 
 
 ![Adding a package from a Git URL](unity_add_package_from_git_url.png "Figure 2. Adding a package from a Git URL")
 
-3. Enter the git URL `https://github.com/ARM-software/mobile-studio-integration-for-unity.git` and click **Add**. When the install completes, you should then see Mobile Studio in your list of installed packages.
+3. Enter the git URL `https://github.com/ARM-software/mobile-studio-integration-for-unity.git` and click **Add**. When the install completes, you should then see **Mobile Studio** in your list of installed packages.
 
     {{% notice Note %}}
     You must use the exact Git Repository URL including the extension “.git”.
     {{% /notice %}}
 
-    ![Mobile Studio package installed in Unity](unity_mobile_studio_package.png "Figure 3. Mobile Studio package installed in Unity")
+    ![Performance Studio package installed in Unity](unity_mobile_studio_package.png "Figure 3. Performance Studio package installed in Unity")
+
+    {{% notice Note %}}
+    From 2024.0, Performance Studio is the new name for Mobile Studio. This package still uses the old name, but all functionality is supported in the latest versions.
+    {{% /notice %}}
 
 ### Adding single markers to a Unity project
 
@@ -59,7 +63,7 @@ MobileStudio.Annotations.marker("Region Start Times Square");
 MobileStudio.Annotations.marker("Region End Times Square");
 ```
 
-These regions are shown on the frame rate analysis chart in the Performance Advisor report. 
+These regions are shown on the frame rate analysis chart in the Performance Advisor report.
 
 ![Regions in Performance Advisor](pa_frame_rate_regions.png "Figure 5. Regions in Performance Advisor")
 
