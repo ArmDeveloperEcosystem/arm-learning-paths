@@ -21,7 +21,7 @@ Before you attempt to build Tensorflow, you need to install the build dependenci
 The following packages are needed in a recent Debian/Ubuntu distribution. You may have to change to the packages if you're using a different Linux distribution:
 
 ```bash
-sudo apt -u install clang-17 python3-pip golang python3-virtualenv default-jdk-headless patchelf libhdf5-dev -y
+sudo apt -u install gcc g++ python3-pip golang python3-virtualenv default-jdk-headless patchelf libhdf5-dev -y
 ```
 
 You also need to download `bazelisk`: a Go-based tool which you can use instead of `bazel`. You need to download the Linux arm64 version and rename it as `bazel` and add it to your search path. One way is to put the file in your `$HOME/bin` directory add this directory to your `$PATH`.
