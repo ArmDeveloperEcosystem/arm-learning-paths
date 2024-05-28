@@ -1,20 +1,20 @@
 ---
 next_step_guidance: In future learning paths, we will delve into accomodating more LLMs.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/smartphones-and-mobile/mte_on_pixel8/ 
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: ExecuTorch Overview
+        link: https://pytorch.org/executorch-overview
+        type: website
+    - resource:
+        title: ExecuTorch Documentation
+        link: https://pytorch.org/executorch/stable/index.html
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: ExecuTorch Examples
+        link: https://github.com/pytorch/executorch/blob/main/examples/README.md
         type: website
 
 

@@ -6,21 +6,25 @@ weight: 6
 layout: learningpathall
 ---
 
-## Build llama runner binary for Android
+## Build Llama runner binary for Android
 
-We need to cross compile llama runner to run on Android using following steps
+Cross-compile Llama runner to run on Android using the steps below.
 
 ### 1. Set Android NDK
+
+Set the environment variable to point to the Android NDK. 
 
 ``` bash
 export ANDROID_NDK=<path-to-android-ndk>
 ```
 
 {{% notice Note %}}
-<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. We use <path_to_android_ndk>/build/cmake/android.toolchain.cmake for CMake to cross-compile.
+<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-### 2. Build executorch and associated libraries for android
+### 2. Build ExecuTorch and associated libraries for Android
+
+Use `cmake` to cross-compile ExecuTorch:
 
 ``` bash
 cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
@@ -41,7 +45,9 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
 cmake --build cmake-out-android -j16 --target install --config Release
 ```
 
-### 3. Build llama runner for android
+### 3. Build Llama runner for android
+
+Use `cmake` to cross-compile Llama runner:
 
 ``` bash
 cmake  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
@@ -61,16 +67,28 @@ cmake --build cmake-out-android/examples/models/llama2 -j16 --config Release
 ```
 
 {{% notice Note %}}
-For Llama3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option when building the llama runner.
+For Llama 3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option when building the Llama runner.
 {{% /notice %}}
+
+You should now have `llama_main` available for Android.
 
 ## Run on Android via adb shell
 
-*Pre-requisite*: Make sure you enable USB debugging via developer options on your phone.
-
 ### 1. Connect your android phone
 
-### 2. Upload model, tokenizer and llama runner binary to phone
+Connect your phone to your computer using a USB cable. 
+
+You will need to enable USB debugging on your Android device. Please follow [Configure on-device developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
+
+Once you have enabled USB debugging and connected via USB, run:
+
+```
+adb devices
+```
+
+You should see your device listed to confirm it is connected. 
+
+### 2. Copy the model, tokenizer, and Llama runner binary to the phone
 
 ``` bash
 adb shell mkdir -p /data/local/tmp/llama
@@ -80,11 +98,15 @@ adb push cmake-out-android/examples/models/llama2/llama_main /data/local/tmp/lla
 ```
 
 {{% notice Note %}}
-For Llama3, you can pass the original `tokenizer.model` (without converting to `.bin` file).
+For Llama 3, you can pass the original `tokenizer.model` (without converting to `.bin` file).
 {{% /notice %}}
 
-### 3. Run model
+### 3. Run the model
+
+Use the Llama runner to execute the model on the phone with the `adb` command:
 
 ``` bash
 adb shell "cd /data/local/tmp/llama && ./llama_main --model_path <model.pte> --tokenizer_path <tokenizer.bin> --prompt \"Once upon a time\" --seq_len 120"
 ```
+
+You have successfully run a model on your Android smartphone.

@@ -6,11 +6,12 @@ weight: 7
 layout: learningpathall
 ---
 
-We will use the demo Android application in ExecuTorch repository [LlamaDema](https://github.com/pytorch/executorch/tree/main/examples/demo-apps/android/LlamaDemo).
+You can use the Android demo application included in ExecuTorch repository [LlamaDemo](https://github.com/pytorch/executorch/tree/main/examples/demo-apps/android/LlamaDemo) to demonstrate local inference with ExecuTorch.
 
-## Build JNI library
+## Build the JNI library
 
-1. Open a terminal window and navigate to the root directory of the `executorch`
+1. Open a terminal window and navigate to the root directory of the `executorch` repository.
+
 2. Set the following environment variables:
 
     ``` bash
@@ -19,16 +20,16 @@ We will use the demo Android application in ExecuTorch repository [LlamaDema](ht
     ```
 
 {{% notice Note %}}
-<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. We use <path_to_android_ndk>/build/cmake/android.toolchain.cmake for CMake to cross-compile.
+<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA3), set `EXECUTORCH_USE_TIKTOKEN=ON` and later CMake will use it as the tokenizer. If you need to run other models like LLaMA2, skip this skip.
+3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake will use it as the tokenizer. If you run other models like LLaMA 2, skip this skip.
 
     ``` bash
     export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLaMA3
     ```
 
-4. Run the following command set up the required JNI library:
+4. Run the following commands to set up the required JNI library:
 
     ``` bash
     pushd examples/demo-apps/android/LlamaDemo
@@ -37,12 +38,12 @@ We will use the demo Android application in ExecuTorch repository [LlamaDema](ht
     ```
 
 {{% notice Note %}}
-This is running the shell script setup.sh which configures the required core ExecuTorch, LLAMA2, and Android libraries, builds them, and copy to jniLibs.
+This is running the shell script setup.sh which configures and builds the required core ExecuTorch, Llama 2, and Android libraries. 
 {{% /notice %}}
 
 ## Getting models
 
-Make sure the exported model and tokenizer are copied to the Android phone
+Make sure the exported model and tokenizer are copied to the Android phone:
 
 ### Option 1: using adb
 
@@ -60,26 +61,31 @@ adb push <model.pte> /data/local/tmp/llama/
 adb push <tokenizer.bin> /data/local/tmp/llama/
 ```
 
-### option 2: Using Android Studio
+### Option 2: Using Android Studio
 
 1. Use Android Studio's device explorer
 
 ![Device Explorer](device-explorer.png "Figure 1. Android Studio Device Explorer")
 
+Use the device explorer to look for the model files.
+
 2. Upload the files
+
+If the files are not on the device, use the device explorer to copy them. 
 
 ![Files Upload](device-explorer-upload.png "Figure 2. Android Studio upload files using Device Explorer")
 
-## Build APK
+## Build the APK (Android Package Kit)
 
 ### Option 1: Using Android Studio (Recommended)
 
-1. Open Android Studio and select “Open an existing Android Studio project” to open examples/demo-apps/android/LlamaDemo
+1. Open Android Studio and select “Open an existing Android Studio project” and navigate to open `examples/demo-apps/android/LlamaDemo`
+
 2. Run the app (^R). This builds and launches the app on the phone.
 
 ### Option 2: Command line
 
-Without Android Studio UI, we can run gradle directly to build the app. We need to set up the Android SDK path and invoke gradle.
+Without Android Studio UI, you can run gradle directly to build the app. You need to set up the Android SDK path and invoke gradle.
 
 ``` bash
 export ANDROID_HOME=<path_to_android_sdk_home>
@@ -88,8 +94,4 @@ pushd examples/demo-apps/android/LlamaDemo
 popd
 ```
 
-After successful build, you can try running the app on phone or emulator:
-
-![Example prompt 1](example-prompt-1.png "Figure 3. Loading model and prompt response")
-
-![Example prompt 2](example-prompt-2.png "Figure 4. Example prompt and response")
+//TODO : Add image of app running on Pixel 8 pro

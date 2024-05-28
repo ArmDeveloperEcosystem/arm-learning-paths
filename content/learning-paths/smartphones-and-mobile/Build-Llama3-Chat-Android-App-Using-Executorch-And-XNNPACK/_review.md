@@ -24,7 +24,7 @@ review:
                
     - questions:
         question: >
-            Which quantization scheme do we employ?
+            Which quantization scheme did you use for an Android app?
         answers:
             - 8-bit groupwise per token dynamic quantization of all the linear layers
             - 4-bit groupwise per token dynamic quantization of all the linear layers
