@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is Eigen?
 
-Eigen is a popular open-source C++ template linear algebra library. It is designed to provide high-performance implementations of common mathematical operations that involve vectors, matrices, and tensors.
+Eigen is a popular open source C++ template linear algebra library. It is designed to provide high-performance implementations of common mathematical operations that involve vectors, matrices, and tensors.
 
 It also provides a way to add custom implementations for related algorithms. It tries to be generic enough to cover almost every use case, but at the same time it also offers optimal performance on all supported architectures.
 
@@ -30,18 +30,18 @@ It has also been ported to SYCL and CUDA backends and more ports are in progress
 Eigen is a useful library and its success is proven by the number of projects that use it. 
 [The list of projects using Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page#Projects_using_Eigen) is rich, but here are a few high profile projects:
 
-* [Tensorflow](https://www.tensorflow.org/) - An open-source software library for Machine Intelligence
+* [Tensorflow](https://www.tensorflow.org/) - An open source software library for Machine Intelligence
 * [Celestia](https://celestiaproject.space/) - The 3D astronomical visualization application Celestia (all orbital and geometric calculations are done with Eigen)
 * [ATLAS](https://home.cern/science/experiments/atlas) - The ATLAS experiment at the LHC (Large Hadron Collider) at CERN
 * [Quantum++](https://github.com/softwareQinc/qpp) - A modern C++ general purpose quantum computing library
 
 * [Robotic OS](https://www.ros.org/) - Robotic Operating System
-* [MeshLab](https://www.meshlab.net/) - An open-source software project for processing and editing unstructured 3D triangular meshes and point cloud
-* [Topology Toolkit (TTK)](https://topology-tool-kit.github.io/) - An open-source library and software collection for topological data analysis in scientific visualization
+* [MeshLab](https://www.meshlab.net/) - An open source software project for processing and editing unstructured 3D triangular meshes and point cloud
+* [Topology Toolkit (TTK)](https://topology-tool-kit.github.io/) - An open source library and software collection for topological data analysis in scientific visualization
 
 KOffice:
 * [Calligra](https://calligra.org/) - The spreadsheet module
-* [Krita](https://krita.org/en/) - A professional free and open-source painting program
+* [Krita](https://krita.org/en/) - A professional free and open source painting program
 
 ## What are some Eigen features?
 
