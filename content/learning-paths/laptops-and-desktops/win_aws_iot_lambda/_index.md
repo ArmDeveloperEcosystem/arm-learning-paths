@@ -8,7 +8,7 @@ who_is_this_for: This is an advanced topic for developers who are interested in 
 learning_objectives:
    - Gain familiarity with AWS Lambda.
    - Be able to process data from IoT devices.
-   - Learn about the serveless compute services in AWS.
+   - Learn about the serverless compute services in AWS.
    - Learn about the notification services in AWS.
 
 prerequisites:
