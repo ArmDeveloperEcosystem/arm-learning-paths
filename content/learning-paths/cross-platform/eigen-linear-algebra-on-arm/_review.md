@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Eigen uses SIMD code all the time for best performance
+            Does Eigen use SIMD code all the time for best performance?
         answers:
             - Yes, always
             - No, it can be disabled with -DEIGEN_DONT_VECTORIZE
@@ -13,11 +13,11 @@ review:
 
     - questions:
         question: >
-            Eigen offers the following types by default?
+            Eigen offers the following types by default:
         answers:
-            - Vector and Matrix. Tensor is an unsupported module at the moment
-            - Vector only. Matrix and Tensor are unsupported
-            - Vector, Matrix and Tensor
+            - Vector and Matrix, Tensor is an unsupported module at the moment
+            - Vector only, Matrix and Tensor are unsupported
+            - Vector, Matrix, and Tensor
             - Tensor, all the others are subclasses
         correct_answer: 1
         explanation: >
@@ -25,14 +25,14 @@ review:
                
     - questions:
         question: >
-            Linear Algebra code benefit from large SVE vectors
+            Does linear algebra code benefit from large SVE vectors?
         answers:
-            - Yes,
-            - No, makes no difference
-            - Depends on the implementation
+            - Yes, linear algebra benefits from large vectors
+            - No, it makes no difference
+            - Maybe, it depends on the implementation
         correct_answer: 1
         explanation: >
-            Yes, in general code that involved calculations that involve vectors, matrices and tensors benefit from larger vectors, this was why the A64FX SVE CPU uses 512-bit SVE vectors.
+            Yes, in general code that involves calculations with vectors, matrices, and tensors benefits from larger vectors, this was why the A64FX SVE CPU uses 512-bit vectors.
 
 
 

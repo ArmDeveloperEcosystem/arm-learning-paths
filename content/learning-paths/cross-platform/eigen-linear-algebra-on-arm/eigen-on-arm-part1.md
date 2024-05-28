@@ -1,16 +1,18 @@
 ---
-title: Eigen on Arm, part1
+title: Eigen examples
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-You have already read that Eigen has been ported to Neon/ASIMD in the past and recently to SVE. We are going to investigate how we can use Eigen to get best performance on Arm systems with those SIMD engines.
+You have learned that Eigen has been ported to Neon/ASIMD in the past and recently to SVE. We are going to investigate how to use Eigen to get best performance on Arm systems with SIMD engines.
 
-## Example 1, Arbitrary-size Matrix sum of all elements
+## Example 1: arbitrary-size matrix sum of all elements
 
-This is a small example, in order to demonstrate the benefits of Eigen's vectorization with some simple expressions on matrices. It will first construct a large random matrix of 100 x 100 `float` elements and it will perform some simple operation for `N` iterations on it. In the end it will return the sum of all the elements of the final matrix as a `double`.
+This is a small example to demonstrate the benefits of Eigen's vectorization with some simple expressions on matrices. It will first construct a large random matrix of 100 x 100 `float` elements and it will perform some simple operation for `N` iterations on it. In the end it will return the sum of all the elements of the final matrix as a `double`.
+
+Use a text editor to save the program below in a file named `eigen-test2.cpp`
 
 ```C++
 #include <iostream>
@@ -33,18 +35,25 @@ int main()
 }
 ```
 
-Save this program as `eigen-test2.cpp` and compile it. But before you try the actual performance with SIMD enabled, let's first try without it.
 
-To do that, you need to pass a definition to the compiler to instruct Eigen to disable vectorization, `-DEIGEN_DONT_VECTORIZE`:
+Before you try it with SIMD enabled, first try without SIMD.
+
+To do that, you need to pass a define to the compiler to instruct Eigen to disable vectorization, `-DEIGEN_DONT_VECTORIZE`.
+
+Compile the program using:
 
 ```bash
-$ g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test2.cpp -o eigen-test2 -Ieigen
+g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test2.cpp -o eigen-test2 -Ieigen
 ```
 
-and run the test with `time` (your results may vary depending on your CPU):
+Run the test with `time` (your results may vary depending on your CPU and system):
 
-```bash
-$ time ./eigen-test2
+{{% notice Note %}}
+Only the commands are copied from the box below if you use the Copy button. The remainder is the output and is not copied.
+{{% /notice %}}
+
+```bash  { output_lines = "2-6" }
+time ./eigen-test2
 Final matrix sum: -1.13038e+12
 
 real    0m22.872s
@@ -54,11 +63,12 @@ sys     0m0.000s
 
 ### Testing on ASIMD
 
-To compare with the SIMD (ASIMD/NEON in the case of Arm), just remove that define from compilation and run the same way:
+To compare with the SIMD (ASIMD/NEON in the case of Arm), remove the define from compilation and run the same way:
 
-```bash
-$ g++ -O3 -DNDEBUG eigen-test2.cpp -o eigen-test2 -Ieigen
-$ time ./eigen-test2
+
+```bash  { output_lines = "3-7" }
+g++ -O3 -DNDEBUG eigen-test2.cpp -o eigen-test2 -Ieigen
+time ./eigen-test2
 Final matrix sum: -1.13038e+12
 
 real    0m4.933s
@@ -66,7 +76,7 @@ user    0m4.933s
 sys     0m0.000s
 ```
 
-That is a speed up of 4.63x, which is quite impressive! Let's try with SVE enabled to see if there is any difference.
+That is a speed up of 4.63x, which is quite impressive! Next, try with SVE enabled to see if there is any difference.
 
 ### Testing on SVE
 
@@ -74,7 +84,7 @@ Those tests were run on the same SVE-capable system so you should be able to mak
 Eigen currently needs a few extra options passed to the compiler:
 
 ```bash
-$ g++ -O3 -DNDEBUG -march=armv8-a+sve -msve-vector-bits=<SVESIZE>> -DEIGEN_ARM64_USE_SVE eigen-test2.cpp -o eigen-test2 -Ieigen
+g++ -O3 -DNDEBUG -march=armv8-a+sve -msve-vector-bits=<SVESIZE>> -DEIGEN_ARM64_USE_SVE eigen-test2.cpp -o eigen-test2 -Ieigen
 ```
 
 Eigen needs `-DEIGEN_ARM64_USE_SVE` to be passed to enable the code that is specific for SVE.
@@ -83,12 +93,12 @@ The compiler needs `-march=armv8-a+sve` to produce assembly code for SVE-capable
 
 Finally, Eigen currently does not support runtime detection of SVE vector widths, which depends on the particular CPU, so you need to pass the option `-msve-vector-bits=<SVESIZE>` to force the compiler to assume a particular SVE hardware vector size.
 
-Now run the test:
-
 This particular CPU has 128-bits SVE vector size, so replacing `SVESIZE` above with 128 and compiling you should be able to run the test:
 
-```bash
- time ./eigen-test2
+Now run the test:
+
+```bash  { output_lines = "2-6" }
+time ./eigen-test2
 Final matrix sum: -1.13038e+12
 
 real    0m5.366s
@@ -98,10 +108,10 @@ sys     0m0.004s
 
 It's not as good as ASIMD but it's quite close. You have to remember that SVE optimizations in many projects are quite early and there is a reason that Eigen does not have the SVE backend enabled by default on such CPUs. You should expect the performance to improve drastically, especially when used in conjunction with existing ASIMD instructions.
 
-Before you see the next example, let's check what would happen if we test a different SVE vector width, eg 256, would the program crash? If you recompile the test with `SVESIZE=256` and rerun on the same 128-bit SVE system, this is what you will get:
+Before you move to the next example, you can check what happens if you try a different SVE vector width, 256. Would the program crash? If you recompile the test with `SVESIZE=256` and rerun on the same 128-bit SVE system, this is the result:
 
-```bash
-$ time ./eigen-test2
+```bash  { output_lines = "2-6" }
+time ./eigen-test2
 Final matrix sum: 0
 
 real    0m11.647s
@@ -109,10 +119,10 @@ user    0m11.647s
 sys     0m0.000s
 ```
 
-This is interesting. First, you will obviously note that the result is wrong (zero), and it takes almost double the time to calculate. This is something to keep in mind in general when forcing the SVE vector width at compile time. The instructions are the same, so you will not get an Illegal Instruction exception (`SIGILL`) but there is going to be UB (Undefined Behaviour) if the program is not designed to cope for such cases -which our little test does not.
+This is interesting. First, you will obviously note that the result is wrong (zero), and it takes almost double the time to calculate. This is something to keep in mind in general when forcing the SVE vector width at compile time. The instructions are the same, so you will not get an Illegal Instruction exception (`SIGILL`), but there is going to be UB (Undefined Behavior) if the program is not designed to cope for such cases. 
 
 In general, you should avoid forcing a vector size for SVE, unless there is no alternative.
 
-You should note here, that such mathematical operations totally benefit from actual larger SVE vector sizes, eg. 256, 512-bits or even more, such as the ones on the Fujitsu A64FX super computers, which have SVE vectors of 512-bits.
+Mathematical operations benefit from processors with larger SVE vector sizes, such as 256 bits, 512 bits or even more. The Fujitsu A64FX super computer has SVE vectors of 512-bits, and will be much faster for these calculations.
 
-Let's try another example.
+In the next section you can try another example.

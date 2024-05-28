@@ -1,14 +1,14 @@
 ---
-title: Eigen on Arm, part2
+title: Eigen on Arm
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Example 2, matrix multiplication
+## Example 2: matrix multiplication
 
-Consider this program:
+Use a text editor to save the program below in a file named `eigen-test3.cpp`
 
 ```C++
 #include <iostream>
@@ -31,13 +31,13 @@ int main()
 }
 ```
 
-This example does `N` Matrix multiplications and additions -so that it will utilize the `FMA` instructions in most CPUs. It will perform this operations on large 512 x 512 matrices and it will print the `norm()` of the final matrix -which should be the same on both ASIMD and SVE versions.
+This example does `N` Matrix multiplications and additions. It uses the `FMA` instructions in most CPUs. It will perform this operations on large 512 x 512 matrices and it will print the `norm()` of the final matrix, which should be the same on both ASIMD and SVE versions.
 
-Save this file as `eigen-test3.cpp`. Again, let's first compile and run with vectorization disabled to establish a reference level for performance.
+As before, you can first compile and run with vectorization disabled to establish a reference level for performance.
 
-```bash
-$ g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test3.cpp -o eigen-test3 -Ieigen
-$ time ./eigen-test3
+```bash  { output_lines = "3-7" }
+g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test3.cpp -o eigen-test3 -Ieigen
+time ./eigen-test3
 C.norm(): 384919
 
 real    0m2.806s
@@ -47,11 +47,11 @@ sys     0m0.012s
 
 ### Testing on ASIMD
 
-Now, let's build with ASIMD backend, as before, just remove the `-DEIGEN_DONT_VECTORIZE` option from the compiler invocation.
+Now, build with ASIMD backend, by removing the `-DEIGEN_DONT_VECTORIZE` option from the compiler invocation.
 
-```bash
-$ g++ -O3 -DNDEBUG eigen-test3.cpp -o eigen-test3 -Ieigen
-$ time ./eigen-test3
+```bash  { output_lines = "3-7" }
+g++ -O3 -DNDEBUG eigen-test3.cpp -o eigen-test3 -Ieigen
+time ./eigen-test3
 C.norm(): 384919
 
 real    0m1.288s
@@ -59,17 +59,17 @@ user    0m1.280s
 sys     0m0.008s
 ```
 
-The result depends largely on the platform tested.
+The results vary depending on the CPU and system you are using. 
 
-On this SVE2 platform we got 2.17x improvement in performance, on an Ampere Altra CPU we got 3.55x performance improvement and 3.14x on an Apple M3 CPU. It depends on the size of the caches, the level of parallelism in the Vector Units (how many units in the CPU and how many SIMD instructions can be executed in parallel).
+The output above is from an SVE2 platform and shows 2.17x improvement in performance. An Ampere Altra CPU shows 3.55x performance improvement and 3.14x on Apple Silicon with an M3 CPU. There are many variables including the size of the caches, the level of parallelism in the vector units (how many units in the CPU and how many SIMD instructions can be executed in parallel).
 
 ### Testing on SVE
 
-You will now compile and run with SVE enabled:
+You can also compile and run with SVE enabled:
 
-```bash
-$ g++ -O3 -DNDEBUG -march=armv8-a+sve -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test3.cpp -o eigen-test3 -Ieigen
-$ time ./eigen-test3
+```bash  { output_lines = "3-7" }
+g++ -O3 -DNDEBUG -march=armv8-a+sve -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test3.cpp -o eigen-test3 -Ieigen
+ time ./eigen-test3
 C.norm(): 384919
 
 real    0m1.751s
@@ -79,9 +79,17 @@ sys     0m0.004s
 
 You again see that the SVE build is slower than the ASIMD.
 
-We will note that SVE implementation is still experimental and this is expected to change.
+The SVE implementation is still experimental and this is expected to change.
 
-## Example 3, Vector 3D Rotation
+## Example 3: Vector 3D Rotation
+
+This example creates an initial random normalized vector `v1`.
+
+Then it creates `N` random normalized vectors, rotates them `π/4` around the `z` axis, adds them to the initial vector and takes the dot product of the initial and the resulting vector.
+
+Finally, it prints the sum of all the dot products.
+
+Use a text editor to save the program below in a file named `eigen-test4.cpp`
 
 ```C++
 #include <iostream>
@@ -108,17 +116,11 @@ int main()
 }
 ```
 
-This example creates an initial random normalized vector `v1`.
+Use the same process to build and run without vectorization:
 
-Then it creates `N` random normalized vectors, rotates them `π/4` around the `z` axis, adds them to the initial vector and takes the dot product of the initial and the resulting vector.
-
-Finally it prints the sum of all the dot products.
-
-Now, save this file as `eigen-test4.cpp`. Similarly, we built first without vectorization and run the binary:
-
-```bash
-$ g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test4.cpp -o eigen-test4 -Ieigen
-$ time ./eigen-test4
+```bash  { output_lines = "3-11" }
+g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test4.cpp -o eigen-test4 -Ieigen
+time ./eigen-test4
 Vector v1:
  -0.664879
   0.745716
@@ -132,11 +134,11 @@ sys     0m0.000s
 
 ### Testing on ASIMD
 
-As before, just remove the `-DEIGEN_DONT_VECTORIZE` from the command line.
+As before, remove the `-DEIGEN_DONT_VECTORIZE` from the compile command:
 
-```bash
-$ g++ -O3 -DNDEBUG eigen-test4.cpp -o eigen-test4 -I../eigen
-$ time ./eigen-test4
+```bash  { output_lines = "3-11" }
+g++ -O3 -DNDEBUG eigen-test4.cpp -o eigen-test4 -I../eigen
+time ./eigen-test4
 Vector v1:
  -0.664879
   0.745716
@@ -148,17 +150,21 @@ user    0m5.636s
 sys     0m0.000s
 ```
 
-This is interesting, enabling vectorization doesn't give us actually that much better performance as we expected, which can be due to multiple reasons.
+This is interesting, enabling vectorization doesn't give that much better performance, which can be due to multiple reasons.
 
-In the [Vectorization-Friendly Data Layout Learning Path](https://learn.arm.com/learning-paths/cross-platform/vectorization-friendly-data-layout/a-more-complex-problem-revisited/) it was explained that performance on operations involving data like 3D coordinates may be benefitted from changing the way this data is structured.
+[Optimize SIMD code with vectorization-friendly data layout](/learning-paths/cross-platform/vectorization-friendly-data-layout/a-more-complex-problem-revisited/) explains that performance on operations involving data like 3D coordinates may benefit from changing the way data is structured.
 
-One thing that should be also mentioned is that with `-O3` flag, autovectorization is enabled by default in recent GCC and Clang compilers, so even if you disable explicit vectorization in Eigen, the compiler will still try to attempt to vectorize the code. In the period that Eigen was developed, that was completely out of the question and autovectorization was almost unreachable in all but the most trivial cases. However, the recent compilers are much more advanced and they can prove to be even better in some cases like this one where the type of object is not optimally designed for vectorization, as you have already seen in the *Vectorization-Friendly Data Layout Learning Path*.
+One thing to mention is that with `-O3` flag, autovectorization is enabled by default in recent GCC and Clang compilers, so even if you disable explicit vectorization in Eigen, the compiler will still try to attempt to vectorize the code. 
+
+In the time period that Eigen was developed, autovectorization was completely out of the question and was almost unreachable in all but the most trivial cases. However, the recent compilers are much more advanced and they can prove to be even better in some cases (like this one) where the type of object is not optimally designed for vectorization.
 
 ### Testing on SVE
 
-```bash
-$ g++ -O3 -DNDEBUG -march=armv9-a -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test4.cpp -o eigen-test4 -Ieigen
-$ time ./eigen-test4
+Compile and run the example with SVE:
+
+```bash  { output_lines = "3-11" }
+g++ -O3 -DNDEBUG -march=armv9-a -msve-vector-bits=128 -DEIGEN_ARM64_USE_SVE eigen-test4.cpp -o eigen-test4 -Ieigen
+ time ./eigen-test4
 Vector v1:
  -0.664879
   0.745716
@@ -172,6 +178,4 @@ sys     0m0.000s
 
 Interestingly, SVE performs very similarly to the other versions.
 
-You are now ready to build one of the high profile applications that use Eigen with SVE enabled. This application will be Tensorflow!
-
-Proceed to the next section to learn how to do this.
+You are now ready to build one of the high profile applications that use Eigen with SVE enabled. This application is Tensorflow!
