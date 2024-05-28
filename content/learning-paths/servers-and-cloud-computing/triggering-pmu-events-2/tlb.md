@@ -55,7 +55,7 @@ ITLB_WALK is 0
 INST_RETIRED is 15
 ```
  
-In this case, there are 57 accesses into the ITLB but only 1 refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` is not counting because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time, which did not happen. Branch prediction or speculation might lead to the data already being in the L2 TLB.
+In this case, there are 57 accesses into the ITLB, but only one refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` does not count in this scenario, because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time. Branch prediction or speculation may lead to the data already being in the L2 TLB.
 
 To trigger an L2_TLB miss, the following assembly function clears the TLB to remove any branch predictions or speculation:
 
