@@ -8,7 +8,9 @@ layout: learningpathall
 
 ## Cross-compile the inference engine for CPU again, but this time use the KleidiAI optimizations
 
-Clone XNNPACK and checkout a compatible commit:
+Recently Arm has created a set of micro-kernels called "KleidiAI" that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. These improvements will increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
+
+To build the KleidiAI optimizations into your applications, first clone XNNPACK and checkout a compatible commit:
 
 ```bash
 
@@ -21,6 +23,8 @@ cd XNNPACK
 git checkout 5ecf0769c54cd224bd0026fe2c8d2ad6f3c4368a
 
 ```
+
+TODO: REMOVE THESE PATCH INSTRUCTIONS WHEN KLEIDIAI HAS BEEN MERGED
 
 Apply kleidiAI patch:
 
@@ -59,7 +63,7 @@ With:
 ```bash
 local_repository(
     name = "XNNPACK",
-    path = "$HOME/XNNPACK",
+    path = "../XNNPACK",
     repo_mapping = {"@com_google_benchmark": "@google_benchmark"}
 )
 ```
@@ -91,17 +95,28 @@ Witness the performance improvements!
 
 ```bash
 husky:/data/local/tmp/gen_ai $ ./llm_test
-2024-05-15T03:41:31-05:00
-Running ./llm_test_kai
+2024-05-28T10:27:27-05:00
+Running ./llm_test
 Run on (9 X 1704 MHz CPU s)
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
-----------------------------------------------------------------------------------
-Benchmark                        Time             CPU   Iterations UserCounters...
-----------------------------------------------------------------------------------
-BM_Llm_QCINT8/64        1871857667 ns   1859813962 ns            1 items_per_second=34.412/s
-BM_Llm_QCINT8/512       11721255825 ns   11672066751 ns            1 items_per_second=43.8654/s
-BM_Llm_QCINT8/1024      24350844942 ns   24253818321 ns            1 items_per_second=42.2202/s
-BM_Llm_Mixed_INT48/64    766656373 ns    760775259 ns            1 items_per_second=84.1247/s
-BM_Llm_Mixed_INT48/512  6898854740 ns   6859660724 ns            1 items_per_second=74.6393/s
-BM_Llm_Mixed_INT48/1024 16913387133 ns   16810476974 ns            1 items_per_second=60.9144/s
+--------------------------------------------------------------------------------------------
+Benchmark                                  Time             CPU   Iterations UserCounters...
+--------------------------------------------------------------------------------------------
+BM_Llm_QCINT8/64/real_time         435261231 ns    431100073 ns            2 items_per_second=147.038/s
+BM_Llm_QCINT8/512/real_time       4351431155 ns   4311715132 ns            1 items_per_second=117.662/s
+BM_Llm_QCINT8/1024/real_time      9629629440 ns   9532388833 ns            1 items_per_second=106.338/s
+BM_Llm_Mixed_INT48/64/real_time    350508464 ns    346436742 ns            2 items_per_second=182.592/s
+BM_Llm_Mixed_INT48/512/real_time  3184487632 ns   3155323312 ns            1 items_per_second=160.779/s
+BM_Llm_Mixed_INT48/1024/real_time 6848890710 ns   6748597814 ns            1 items_per_second=149.513/s
 ```
+
+And as in the previous section, if you want to run multiple times and get a coefficient of variation you can run it like this:
+
+```bash
+```bash
+./llm_test --benchmark_repetitions=10
+```
+
+As you can see by comparing this output to the output in the previous section, these performance improvements are only noticeable in the mixed int4/int8 benchmarks. These improvements are due to more efficient use of the Arm i8mm instructions when using int4 quantization, by packing two int4 weights into a single 8-bit memory space. This allows KleidiAI to get more performance out of the i8mm processor feature.
+
+If you'd like to learn more about how KleidiAI works, please check out the (GenAI LLM Matrix Multiplication acceleration on Linux)[https://learn.arm.com/learning-paths/cross-platform/matrix-mult-kernel-improvement] Learning Path.

@@ -1,7 +1,7 @@
 ---
 title: LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
 
-minutes_to_complete: 10
+minutes_to_complete: 60
 
 who_is_this_for: Android developers who want to efficiently run LLMs on-device.
 

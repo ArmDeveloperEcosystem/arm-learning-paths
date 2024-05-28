@@ -23,7 +23,9 @@ If any lines are returned, then your phone has the i8mm capability.
 
 #### Setting up the build
 
-Modify the xnn_utils BUILD file to generate a static target; simply add linkstatic = True to mediapipe/tasks/cc/genai/inference/utils/xnn_utils/BUILD. Instead of this:
+Modify the xnn_utils BUILD file to generate a static target; simply add linkstatic = True to mediapipe/tasks/cc/genai/inference/utils/xnn_utils/BUILD.
+
+First search for these lines:
 
 ```
 cc_test(
@@ -31,10 +33,9 @@ cc_test(
     srcs = [
         "llm_test.cc",
     ],
-    deps = [
 ```
 
-replace with this:
+Add `linkstatic = True` right after that section like this:
 
 ```
 cc_test(
@@ -43,7 +44,6 @@ cc_test(
         "llm_test.cc",
     ],
     linkstatic = True,
-    deps = [
 ```
 
 Download NDK r25. Bazel only supports up to NDK r21, which does not have support for i8mm instructions. Google has released a workaround that lets us build the binary with NDK r25 (with support for i8mm instructions) by modifying the WORKSPACE file at the root of the MediaPipe repo to use `rules_android_ndk`.
@@ -66,38 +66,35 @@ export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c/toolchains/llvm/
 
 ```
 
-Modify the WORKSPACE file to add the path to Andoird NDK r25:
+Modify the WORKSPACE file to add the path to Android NDK r25:
 
 ```bash
 
-android_ndk_repository(name = "androidndk", api_level=30, path="$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c")
+android_ndk_repository(name = "androidndk", api_level=30, path="/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r25c")
 
-android_sdk_repository(name = "androidsdk", path = "$HOME/Android/Sdk")
-
-```
-
-Modify the WORKSPACE file to modify the path to Android NDK r25 add the Starlark rules for integrating Bazel with the Android NDK. Instead of this snippet:
+android_sdk_repository(name = "androidsdk", path = "/home/ubuntu/Android/Sdk")
 
 ```
-workspace(name = "mediapipe")
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+{{% notice Note %}}
+The functions above require absolute paths, so if your `$HOME` directory is not `/home/ubuntu`, change `/home/ubuntu` to your home directory instead.
+{{% /notice %}}
 
-# Protobuf expects an //external:python_headers target
+Modify the WORKSPACE file to add the Starlark rules for integrating Bazel with the Android NDK.
+
+First search for:
+
+```
 bind(
     name = "python_headers",
     actual = "@local_config_python//:python_headers",
 )
 ```
 
-Replace with this:
+Replace the lines above with this expanded version:
 
 ```
-workspace(name = "mediapipe")
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-# Protobuf expects an //external:python_headers target
 bind(
     name = "python_headers",
     actual = "@local_config_python//:python_headers",
@@ -139,10 +136,18 @@ To these lines:
 build:android --define=xnn_enable_arm_i8mm=true
 ```
 
-Modify the benchmarking tool llm_test (mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc) to specify `encode` as the benchmark method:
+Modify the benchmarking tool llm_test (mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc) to specify `encode` as the benchmark method.
+
+Search for this line:
 
 ```
-ABSL_FLAG( std::string, benchmark_method, "encode", // change to encode to run the encoder "The method to benchmark the latency, can be either 'decode', 'encode'.");
+std::string, benchmark_method, "decode",
+```
+
+And replace with this line:
+
+```
+std::string, benchmark_method, "encode",
 ```
 
 #### Build and run llm_test
@@ -171,19 +176,26 @@ The output should look like this:
 
 ```bash
 husky:/data/local/tmp/gen_ai $ ./llm_test
-2024-05-15T04:03:11-05:00
+2024-05-28T10:34:30-05:00
 Running ./llm_test
 Run on (9 X 1704 MHz CPU s)
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
-----------------------------------------------------------------------------------
-Benchmark                        Time             CPU   Iterations UserCounters...
-----------------------------------------------------------------------------------
-BM_Llm_QCINT8/64        1413595825 ns   1405839235 ns            1 items_per_second=45.5244/s
-BM_Llm_QCINT8/512       11338469203 ns   11291735706 ns            1 items_per_second=45.3429/s
-BM_Llm_QCINT8/1024      30558027236 ns   30407135781 ns            1 items_per_second=33.6763/s
-BM_Llm_Mixed_INT48/64   2314495607 ns   2291420478 ns            1 items_per_second=27.9303/s
-BM_Llm_Mixed_INT48/512  10863001429 ns   10799244374 ns            1 items_per_second=47.4107/s
-BM_Llm_Mixed_INT48/1024 22200514578 ns   22074653562 ns            1 items_per_second=46.388/s
+--------------------------------------------------------------------------------------------
+Benchmark                                  Time             CPU   Iterations UserCounters...
+--------------------------------------------------------------------------------------------
+BM_Llm_QCINT8/64/real_time         411403402 ns    407854860 ns            2 items_per_second=155.565/s
+BM_Llm_QCINT8/512/real_time       3809387860 ns   3777971777 ns            1 items_per_second=134.405/s
+BM_Llm_QCINT8/1024/real_time      9701028244 ns   9591731686 ns            1 items_per_second=105.556/s
+BM_Llm_Mixed_INT48/64/real_time    485577962 ns    479829162 ns            2 items_per_second=131.802/s
+BM_Llm_Mixed_INT48/512/real_time  3931756309 ns   3877452842 ns            1 items_per_second=130.222/s
+BM_Llm_Mixed_INT48/1024/real_time 8480229904 ns   8363190776 ns            1 items_per_second=120.751/s
 ```
 
+There is a bit of throughput variation that can happen in each iteration of this benchmark, if you want to run multiple times and get a coefficient of variation you can run it like this:
 
+```bash
+```bash
+./llm_test --benchmark_repetitions=10
+```
+
+As you might expect, this will take ten times as long to run, but will give you some nice statistics about the aggregated iterations.
