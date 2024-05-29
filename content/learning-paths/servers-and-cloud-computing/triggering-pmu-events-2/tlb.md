@@ -8,7 +8,7 @@ layout: learningpathall
 
 ### ITLB Events
 
-The events below can be used to reveal ITLB effectiveness:
+You can use the events described below to demonstrate ITLB effectiveness:
 
 ```C
 //ITLB Effectiveness Metrics
@@ -55,9 +55,9 @@ ITLB_WALK is 0
 INST_RETIRED is 15
 ```
  
-In this case, there are 57 accesses into the ITLB but only 1 refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` is not counting because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time, which did not occur. Branch prediction or speculation may lead to the data already being in the L2 TLB.
+In this case, there are 57 accesses into the ITLB, but only one refill into both the L1 I-TLB and the L2 D-TLB. So, only one translation was not cached in the L1 I-TLB. `ITLB_WALK` does not count in this scenario, because for it to count, a miss in the L1 I-TLB and L2 TLB must be driven at the same time. Through branch prediction or speculation, the data might already exist in the L2 TLB.
 
-To trigger an L2_TLB miss, the following assembly function will clear the TLB to remove any branch predictions or speculation:
+To trigger an L2_TLB miss, the following assembly function clears the TLB to remove any branch prediction or speculation:
 
 ```C
     .global clear_tlb
@@ -71,7 +71,7 @@ clear_tlb:
     .cfi_endproc
 ```
 
-TLBI ALLE3 clears the entire ITLB, for only EL3 translations, and removes any “predicted” translations to force a miss. Then, new memory will be accessed. 
+`TLBI ALLE3` clears the entire ITLB, for only EL3 translations, and removes any *predicted* translations to force a miss. Then, new memory will be accessed. 
 
 ```output
 L1I_TLB is 73
@@ -104,6 +104,7 @@ void stores()
 ``` 
 
 Events that always occur:
+
 `L1I_TLB`
 
 ```output
@@ -114,13 +115,13 @@ L2D_TLB_REFILL is 9
 ITLB_WALK is 0
 ```
  
-No ITLB walks are triggered since there may be speculation or branch prediction occurring in the ITLB. Likewise, there are not L1 I-TLB refills, since there are no misses that result in allocations. 
+No ITLB walks are triggered since there might be speculation or branch prediction happening in the ITLB. Similarly, there are no L1 I-TLB refills, since there are no misses that result in allocations. 
 
 Additional events that occur with an L1 I-TLB miss:
-`L2D_TLB` and `L1I_TLB_REFILL`
+`L2D_TLB` and `L1I_TLB_REFILL`.
 
 Additional events that occur with an L2 TLB miss:
-`ITLB_WALK` and `L2D_TLB_REFILL`
+`ITLB_WALK` and `L2D_TLB_REFILL`.
 
 To trigger TLB Refills and an ITLB walk, clear the TLB with the following code:
 
@@ -146,11 +147,11 @@ L2D_TLB_REFILL is 4
 ITLB_WALK is 3
 ```
 
-After clearing the ITLB, we force new memory accesses translations, resulting in ITLB walks and L1 I-TLB refills. Note that ITLB_WALK does not count walks triggered by TLB maintenance operations. Instead, these walks may be the result of the barrier instructions. 
+After clearing the ITLB, you can force new memory accesses translations, resulting in ITLB walks and L1 I-TLB refills. Note that `ITLB_WALK` does not count walks triggered by TLB maintenance operations. Instead, these walks might be the result of the barrier instructions. 
 
 ### D-TLB Events
 
-The following PMU events highlight D-TLB effectiveness:
+The following PMU events provide metrics on D-TLB effectiveness:
 
 ```C
 //DTLB Effectiveness Metrics
@@ -162,7 +163,7 @@ PMU_EVENT_INST_RETIRED,
 PMU_EVENT_DTLB_WALK,
 ```
 
-A lot of stores will cause D-TLB accesses, refills, and walks.
+A lot of stores cause D-TLB accesses, refills, and walks.
 
 ```C
 void stores()
@@ -181,7 +182,7 @@ void stores()
 }
 ```
 
-Since these 8 stores are accessing new memory translations, there are 8 counts of `L1D_TLB_REFILL`, `L2D_TLB_REFILL`, and `DTLB_WALK`.
+Since these 8 stores access new memory translations, there are 8 counts of `L1D_TLB_REFILL`, `L2D_TLB_REFILL`, and `DTLB_WALK`.
 
 ```output
 L1D_TLB is 731
@@ -194,7 +195,7 @@ INST_RETIRED is 976
 
 ## Data side TLB access for a load instruction
 
-This section describes what happens in the D-TLB during a load instruction. The following code reads from many different addresses, which will force a D-TLB access.    
+This section describes what happens in the D-TLB during a load instruction. The following code reads from many different addresses, which forces a D-TLB access.    
 
 ```C
 void loads()
@@ -213,7 +214,7 @@ void loads()
 ```
 
 Events that always occur during a D-TLB access are:
-`LD_SPEC`, `MEM_ACCESS`, `MEM_ACCESS_RD`, `L1D_TLB`, and `L1D_TLB_RD`
+`LD_SPEC`, `MEM_ACCESS`, `MEM_ACCESS_RD`, `L1D_TLB`, and `L1D_TLB_RD`.
 
 ```output
 LD_SPEC is 363
@@ -223,10 +224,10 @@ L1D_TLB is 317
 L1D_TLB_REFILL is 278 
 ```
 
-`MEM_ACCESS` counts memory accesses issued by the Load Store Unit, both load and store operations. `MEM_ACCESS_RD` is a subset of `MEM_ACCESS`, only counting load operations that result in memory accesses. In this case, `MEM_ACCESS` is equal to `L1D_TLB` because each memory access had an associated D-TLB lookup. Similarly, each `MEM_ACCESS_RD` had an associated D-TLB lookup.
+`MEM_ACCESS` counts memory accesses issued by the Load Store Unit, both load and store operations. `MEM_ACCESS_RD` is a subset of `MEM_ACCESS`, only counting load operations that result in memory accesses. In this case, `MEM_ACCESS` is equal to `L1D_TLB` because each memory access has an associated D-TLB lookup. Similarly, each `MEM_ACCESS_RD` has an associated D-TLB lookup.
 
 Additional events that occur with a L1 D-TLB miss are:
-`L2D_TLB`, `L2D_TLB_RD`, `L1D_TLB_REFILL`, and `L1D_TLB_REFILL_RD`
+`L2D_TLB`, `L2D_TLB_RD`, `L1D_TLB_REFILL`, and `L1D_TLB_REFILL_RD`.
 
 ```output
 L2D_TLB is 0
@@ -235,7 +236,7 @@ L1D_TLB_REFILL is 0
 L1D_TLB_REFILL_RD is 0
 ```
 
-There may be some branch prediction or speculation occurring in the TLB, resulting in no misses. The code below clears the TLB to force a miss.
+There might be some branch prediction or speculation occurring in the TLB, resulting in no misses. The code below clears the TLB to force a miss.
 
 ```C 
     .global clear_tlb
@@ -249,7 +250,7 @@ clear_tlb:
     .cfi_endproc
 ```
 
-Calling this function before the loads will produce these results:
+Calling this function before the loads produces these results:
 
 ```output
 L2D_TLB is 7
@@ -260,8 +261,8 @@ L1D_TLB_REFILL_RD is 1
 
 Now there are refills in the L1 D-TLB caused by the TLB miss. There are also D-side TLB accesses caused by a memory read operation, counted by `L2D_TLB_RD`. `L2_TLB_REFILL_RD` counts any allocation into the L2 TLB caused by an I-side or D-side memory read operation. 
 
-Additional events that occur with an L2 TLB miss are:
-`DTLB WALK`, `L2D_TLB_REFILL`, and `L2D_TLB_REFILL_RD`
+Additional events that occur with a L2 TLB miss are:
+`DTLB WALK`, `L2D_TLB_REFILL`, and `L2D_TLB_REFILL_RD`.
 
 ```output
 DTLB_ALK is 2
@@ -273,7 +274,7 @@ Since the TLB has been cleared, `DTLB_WALK` and `L2_TLB_REFILL` are triggered to
 
 ## Data side TLB access for a store instruction
 
-This section describes what happens in the D-TLB during a store instruction. The following code writes to many different Normal Cacheable memory addresses, which will force a D-TLB access.  
+This section describes what happens in the D-TLB during a store instruction. The following code writes to many different Normal Cacheable memory addresses, which forces a D-TLB access.  
 
 ```C 
 void stores()
@@ -293,7 +294,7 @@ void stores()
 ```
 
 Events that always occur:
-`ST_SPEC`, `MEM_ACCESS`, `MEM_ACCESS_WR`, `L1D_TLB`, and `L1D_TLB_WR`
+`ST_SPEC`, `MEM_ACCESS`, `MEM_ACCESS_WR`, `L1D_TLB`, and `L1D_TLB_WR`.
 
 ```output
 ST_SPEC is 468
@@ -303,10 +304,10 @@ L1D_TLB is 702
 L1D_TLB_WR is 301
 ```
 
-`MEM_ACCESS` counts memory accesses issued by the Load Store Unit, both load and store operations. `MEM_ACCESS_WR` is a subset of `MEM_ACCESS`, only counting store operations that result in memory accesses. In this case, `MEM_ACCESS` is equal to `L1D_TLB` because each memory access had an associated D-TLB lookup. Similarly, each `MEM_ACCESS_RD` had an associated D-TLB lookup.
+`MEM_ACCESS` counts memory accesses that the Load Store Unit issues, both load and store operations. `MEM_ACCESS_WR` is a subset of `MEM_ACCESS`, only counting store operations that result in memory accesses. In this case, `MEM_ACCESS` is equal to `L1D_TLB` because each memory access has an associated D-TLB lookup. Similarly, each `MEM_ACCESS_RD` has an associated D-TLB lookup.
 
 Additional events that occur with a L1 D-TLB miss:
-`L2D_TLB`, `L2D_TLB_WR`, `L1D_TLB_REFILL`, and `L1D_TLB_REFILL_WR`
+`L2D_TLB`, `L2D_TLB_WR`, `L1D_TLB_REFILL`, and `L1D_TLB_REFILL_WR`.
 
 ```output
 L2D_TLB is 9
@@ -316,11 +317,11 @@ L1D_TLB_REFILL_WR is 9
 ```
 
 Additional events that occur with an L2 TLB miss:
-`DTLB_WALK`, `L2D_TLB_REFILL`, and `L2D_TLB_REFILL_WR`
+`DTLB_WALK`, `L2D_TLB_REFILL`, and `L2D_TLB_REFILL_WR`.
 
 ```output
 DTLB_WALK is 9
 L2D_TLB_REFILL is 9
 L2D_TLB_REFILL_WR is 9
 ```
-The above results reveal that the each TLB access was caused by a write operation and missed in each TLB level, causing a D-TLB walk. Each TLB miss also caused a refill into the L1 D-TLB first and then a refill into the L2 D-TLB.
+These results show that each TLB access is caused by a write operation and missed in each TLB level, causing a D-TLB walk. Each TLB miss also causes a refill into the L1 D-TLB first, and then secondly, a refill into the L2 D-TLB.
