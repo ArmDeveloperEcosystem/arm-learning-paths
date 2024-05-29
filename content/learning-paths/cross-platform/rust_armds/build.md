@@ -30,7 +30,7 @@ rustup target add thumbv7m-none-eabi
 
 Before you can begin, you need to create a rust project known as a `crate`.
 
-An example template that can be used to generate a crate is available in [The Embedded Rust Book](https://docs.rust-embedded.org/book/start/qemu.html).
+An example template that you can use to generate a crate is available in [The Embedded Rust Book](https://docs.rust-embedded.org/book/start/qemu.html).
 
 ```command
 cargo generate --git https://github.com/rust-embedded/cortex-m-quickstart
