@@ -2,37 +2,39 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            The KleidiAI performance improvements are noticeable in which type of benchmarks?
+a) Pure int8 benchmarks
+b) Pure int4 benchmarks
+c) Mixed int4/int8
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-        correct_answer: 1                    
+            - int8 benchmarks
+            - float32 benchmarks
+            - mixed int4/int8 benchmarks
+        correct_answer: 3                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            Performance improvements are only noticeable in the mixed int4/int8 benchmarks. These improvements are due to more efficient use of the Arm i8mm instructions when using int4 quantization.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            How does KleidiAI achieve better performance with int4 quantization?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - By using the i4mm processor feature
+            - By packing two int4 weights into a single 8-bit memory space
+            - By using float32 instead of int4
+        correct_answer: 2                   
         explanation: >
-            PLACEHOLDER EXPLANATION 2
+            KleidiAI packs int4 weights into a single 8-bit memory space in order to better use the Arm int8 matrix multiply instructions.
                
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            What is MediaPipe?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
+            - A cross-platform framework from Google used for building multimodal applied ML pipelines
+            - A library for efficient matrix multiplication on Arm processors
+            - A tool for quantizing machine learning models
+        correct_answer: 1          
         explanation: >
-            PLACEHOLDER EXPLANATION 3
+            MediaPipe abstracts away low-level details when building ML pipelines, allowing developers to quickly build and iterate on multimodal AI applications.
 
 
 

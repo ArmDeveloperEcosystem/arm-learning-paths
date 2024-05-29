@@ -1,21 +1,17 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Now that you are familiar with building LLM applications with MediaPipe and KleidiAI, you are ready to incorporate LLMs into your Android applications.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: learning-paths/smartphones-and-mobile/ams/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: MediaPipe Solutions Guide 
+        link: https://ai.google.dev/edge/mediapipe/solutions/guide
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: Faster Dynamically Quantized Inference with XNNPack 
+        link: https://blog.tensorflow.org/2024/04/faster-dynamically-quantized-inference-with-xnnpack.html
         type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
 
 
 # ================================================================================
