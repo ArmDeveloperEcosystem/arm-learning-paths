@@ -259,7 +259,7 @@ Now, you can start the weather station emulator you created in this [Learning Pa
 ## Environment Variables
 In the above code, you hardcoded an email, SNS topic, and temperature threshold. This means that every time those values change, you need to modify the function code and redeploy it. In practice, it is better to use environment variables.
 
-I will now show you how to modify the function code to use environment variables. First, you need to create two environment variables: EMAIL and TEMPERATURE_THRESHOLD.
+You can modify the function code to use environment variables. First, you need to create two environment variables: EMAIL and TEMPERATURE_THRESHOLD.
 
 Proceed as shown:
 1. In the Lambda function dashboard, click the *Configuration* tab, and select *Environment variables*:
