@@ -194,7 +194,7 @@ This will open the *Configure test event* window, where you select *Create new e
 }
 ```
 
-The *Configure test event* window should looks as follows:
+The *Configure test event* window should looks as shown:
 
 ![fig12](Figures/12.png)
 
@@ -218,7 +218,7 @@ Here, you will modify the role, which was created along with Lambda function. IA
 
 Specifically, you will attach the policy giving the Lambda a full access to the SNS. Policies are JSON documents that define permissions. They specify who can access which resources and what actions they can perform. Policies can be attached to users, groups, or roles.
 
-To modify the role, proceed as follows:
+To modify the role, proceed as shown:
 1. Go the AWS console, and type **IAM** in the search box. Then, select IAM from the list:
 
 ![fig15](Figures/15.png)
@@ -227,7 +227,7 @@ To modify the role, proceed as follows:
 
 ![fig16](Figures/16.png)
 
-3. Click the *sns-email-role*. This will open another screen, which look as follows:
+3. Click the *sns-email-role*. This will open another screen, which should look like shown below:
 
 ![fig17](Figures/17.png)
 
@@ -248,7 +248,7 @@ Go to your mailbox and look for an email from AWS Notification. The first email 
 
 ![fig20](Figures/20.png)
 
-Click the *Confirm subscription* link. Then, invoke the *temperature-high-level* event one more time to see that you received an alert email. It will look as follows::
+Click the *Confirm subscription* link. Then, invoke the *temperature-high-level* event one more time to see that you received an alert email. It will look as shown:
 
 ![fig21](Figures/21.png)
 
@@ -261,7 +261,7 @@ In the above code, you hardcoded an email, SNS topic, and temperature threshold.
 
 I will now show you how to modify the function code to use environment variables. First, you need to create two environment variables: EMAIL and TEMPERATURE_THRESHOLD.
 
-Proceed as follows:
+Proceed as shown:
 1. In the Lambda function dashboard, click the *Configuration* tab, and select *Environment variables*:
 
 ![fig23](Figures/23.png)
