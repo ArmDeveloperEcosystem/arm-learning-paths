@@ -9,6 +9,10 @@ further_reading:
         link: https://ai.google.dev/edge/mediapipe/solutions/guide
         type: documentation
     - resource:
+        title: Accelerating AI Developer Innovation Everywhere with New Arm Kleidi
+        link: https://newsroom.arm.com/blog/arm-kleidi
+        type: blog
+    - resource:
         title: Faster Dynamically Quantized Inference with XNNPack 
         link: https://blog.tensorflow.org/2024/04/faster-dynamically-quantized-inference-with-xnnpack.html
         type: blog
