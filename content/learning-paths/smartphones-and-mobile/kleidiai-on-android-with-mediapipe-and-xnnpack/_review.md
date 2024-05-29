@@ -3,9 +3,6 @@ review:
     - questions:
         question: >
             The KleidiAI performance improvements are noticeable in which type of benchmarks?
-a) Pure int8 benchmarks
-b) Pure int4 benchmarks
-c) Mixed int4/int8
         answers:
             - int8 benchmarks
             - float32 benchmarks
