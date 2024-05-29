@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Run the application on an FVP
 
-You can run the application directly on an FVP that the Arm Development Studio includes.
+You can run the application directly on an FVP that the Arm Development Studio includes:
 
 ```command
 FVP_MPS2_Cortex-M3.exe -a target/thumbv7m-none-eabi/debug/examples/armds
@@ -84,7 +84,7 @@ The `Functions` view lists all function symbols. Many of the library functions h
 
 ### Disassembly
 
-The `Disassembly` view shows the low-level code, along with (mangled) symbol names where possible.
+The `Disassembly` view shows the low-level code, along with mangled symbol names where possible.
 
 ### Target Console
 
