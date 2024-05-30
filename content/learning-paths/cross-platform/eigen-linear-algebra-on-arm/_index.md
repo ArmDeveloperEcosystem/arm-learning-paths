@@ -6,8 +6,8 @@ minutes_to_complete: 45
 who_is_this_for: This is an advanced topic for C/C++ developers who want to create high performance applications using the Eigen linear algebra library.
 
 learning_objectives: 
-    - Learn how to use Eigen on Arm systems
-    - Build Tensorflow with SVE on Arm systems
+    - Describe how to use Eigen on Arm systems.
+    - Build Tensorflow with SVE on Arm systems.
 
 prerequisites:
     - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
