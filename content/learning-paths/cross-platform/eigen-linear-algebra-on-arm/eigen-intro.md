@@ -10,9 +10,9 @@ layout: learningpathall
 
 Eigen is a popular, open source C++ template linear algebra library. It provides high-performance implementations of common mathematical operations that involve vectors, matrices, and tensors.
 
-It also provides a way to add custom implementations for related algorithms. It is generic enough to cover almost every use case, but at the same time also offers optimal performance on all supported architectures.
+It also provides a way to add custom implementations for related algorithms. It is generic enough to cover almost every use case, but at the same time offers optimal performance on all supported architectures.
 
-Eigen began as a sub-project of KDE by Benoît Jacob and Gael Guennebaud to help with common linear algebra operations for some KDE and KOffice projects. To learn more about this, you can read [Interview: Eigen Matrix Library](https://macresearch.org/interview-eigen-matrix-library/). 
+Eigen began as a sub-project of KDE by Benoît Jacob and Gael Guennebaud, to help with common linear algebra operations for some KDE and KOffice projects. To learn more about this, you can read [Interview: Eigen Matrix Library](https://macresearch.org/interview-eigen-matrix-library/). 
 
 Through a clever application of templates and partial template specialization in C++, Eigen has been able to provide almost the same high level algorithms on all architectures, by including implementations of basic primitive operations for all major SIMD engines.
 
@@ -31,18 +31,18 @@ It has also been ported to SYCL and CUDA backends and further ports are in progr
 Eigen is a useful library and its success is proven by the number of projects that use it. 
 [The list of projects using Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page#Projects_using_Eigen) is rich, but here are a few high profile projects:
 
-* [Tensorflow](https://www.tensorflow.org/) - An open source software library for Machine Intelligence.
-* [Celestia](https://celestiaproject.space/) - The 3D astronomical visualization application Celestia (all orbital and geometric calculations are done with Eigen).
-* [ATLAS](https://home.cern/science/experiments/atlas) - The ATLAS experiment at the LHC (Large Hadron Collider) at CERN.
-* [Quantum++](https://github.com/softwareQinc/qpp) - A modern C++ general purpose quantum computing library.
+* [Tensorflow](https://www.tensorflow.org/) - an open source software library for Machine Intelligence.
+* [Celestia](https://celestiaproject.space/) - the 3D astronomical visualization application Celestia (all orbital and geometric calculations are done with Eigen).
+* [ATLAS](https://home.cern/science/experiments/atlas) - the ATLAS experiment at the LHC (Large Hadron Collider) at CERN.
+* [Quantum++](https://github.com/softwareQinc/qpp) - a modern C++ general purpose quantum computing library.
 
 * [Robotic OS](https://www.ros.org/) - Robotic Operating System.
-* [MeshLab](https://www.meshlab.net/) - An open source software project for processing and editing unstructured 3D triangular meshes and point cloud.
-* [Topology Toolkit (TTK)](https://topology-tool-kit.github.io/) - An open source library and software collection for topological data analysis in scientific visualization.
+* [MeshLab](https://www.meshlab.net/) - an open source software project for processing and editing unstructured 3D triangular meshes and point cloud.
+* [Topology Toolkit (TTK)](https://topology-tool-kit.github.io/) - an open source library and software collection for topological data analysis in scientific visualization.
 
 KOffice:
-* [Calligra](https://calligra.org/) - The spreadsheet module.
-* [Krita](https://krita.org/en/) - A professional free and open source painting program.
+* [Calligra](https://calligra.org/) - the spreadsheet module.
+* [Krita](https://krita.org/en/) - a professional free and open source painting program.
 
 ## What are the features of Eigen?
 
@@ -67,7 +67,7 @@ Matrix<typename Scalar, int RowsAtCompileTime, int ColsAtCompileTime>
 
 Note the `AtCompileTime` suffix in the type definition. This type is for matrices with known dimensions at compile time. For dynamic-size matrices there is a different type: `MatrixX`.
 
-There are aliases that you can use for common cases, here are some examples:
+There are aliases that you can use for common cases. Here are some examples:
 
 ```C++
 typedef Matrix<float, 2, 2> Matrix2f;
@@ -108,7 +108,7 @@ In this Learning Path, you will test Eigen using a few examples with emphasis on
 
 Besides basic vector and matrix types, Eigen also provides built-in methods for numerical solving on the matrices.
 
-This Learning Path does not go into depth as to what the solvers do, but the numerical solvers are useful not only as a standpoint of Mathematics, but also as applications that you are liekly using in one way or the other, possibly without knowing. 
+This Learning Path does not go into depth on what the solvers do, but the numerical solvers are useful not only as a standpoint of Mathematics, but also as applications that you are likely using in one way or the other, possibly without knowing. 
 
 Areas such as 3D, Video, Audio, and Machine Learning/Deep Learning heavily use linear algebra and tools like Eigen are *extremely useful* because they provide the necessary fundamentals with the necessary performance optimizations that would otherwise be too difficult to implement.
 
