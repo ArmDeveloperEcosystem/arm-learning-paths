@@ -108,7 +108,7 @@ In this Learning Path, you will test Eigen using a few examples with emphasis on
 
 Besides basic vector and matrix types, Eigen also provides built-in methods for numerical solving on the matrices.
 
-This Learning Path does not go into depth on what the solvers do, but the numerical solvers are useful not only as a standpoint of Mathematics, but also as applications that you are likely using in one way or the other, possibly without knowing. 
+This Learning Path does not go into depth on what the solvers do, but the numerical solvers are useful not only from the standpoint of Mathematics, but also as applications that you are likely using in one way or the other, possibly without knowing. 
 
 Areas such as 3D, Video, Audio, and Machine Learning/Deep Learning heavily use linear algebra and tools like Eigen are *extremely useful* because they provide the necessary fundamentals with the necessary performance optimizations that would otherwise be too difficult to implement.
 
