@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Example 2: matrix multiplication
 
-Use a text editor to save the program below in a file named `eigen-test3.cpp`
+Use a text editor to save the program below in a file named `eigen-test3.cpp`:
 
 ```C++
 #include <iostream>
@@ -31,7 +31,7 @@ int main()
 }
 ```
 
-This example does `N` Matrix multiplications and additions. It uses the `FMA` instructions in most CPUs. It will perform this operations on large 512 x 512 matrices and it will print the `norm()` of the final matrix, which should be the same on both ASIMD and SVE versions.
+This example performs `N` Matrix multiplications and additions. It uses the `FMA` instructions in most CPUs. It performs this operation on large 512 x 512 matrices and prints the `norm()` of the final matrix, which should be the same on both ASIMD and SVE versions.
 
 As before, you can first compile and run with vectorization disabled to establish a reference level for performance.
 
@@ -61,7 +61,7 @@ sys     0m0.008s
 
 The results vary depending on the CPU and system you are using. 
 
-The output above is from an SVE2 platform and shows 2.17x improvement in performance. An Ampere Altra CPU shows 3.55x performance improvement and 3.14x on Apple Silicon with an M3 CPU. There are many variables including the size of the caches, the level of parallelism in the vector units (how many units in the CPU and how many SIMD instructions can be executed in parallel).
+The output above is from an SVE2 platform and shows 2.17x improvement in performance. An Ampere Altra CPU shows 3.55x performance improvement and 3.14x on Apple Silicon with an M3 CPU. There are many variables including the size of the caches, and the level of parallelism in the vector units - which equates to how many units are in the CPU and how many SIMD instructions can be executed in parallel.
 
 ### Testing on SVE
 
@@ -85,11 +85,11 @@ The SVE implementation is still experimental and this is expected to change.
 
 This example creates an initial random normalized vector `v1`.
 
-Then it creates `N` random normalized vectors, rotates them `π/4` around the `z` axis, adds them to the initial vector and takes the dot product of the initial and the resulting vector.
+Then it creates `N` random normalized vectors, rotates them `π/4` around the `z` axis, adds them to the initial vector, and takes the dot product of the initial and the resulting vector.
 
 Finally, it prints the sum of all the dot products.
 
-Use a text editor to save the program below in a file named `eigen-test4.cpp`
+Use a text editor to save the program below in a file named `eigen-test4.cpp`:
 
 ```C++
 #include <iostream>
@@ -150,13 +150,13 @@ user    0m5.636s
 sys     0m0.000s
 ```
 
-This is interesting, enabling vectorization doesn't give that much better performance, which can be due to multiple reasons.
+This is interesting, enabling vectorization doesn't improve performance, which can be due to multiple reasons.
 
-[Optimize SIMD code with vectorization-friendly data layout](/learning-paths/cross-platform/vectorization-friendly-data-layout/a-more-complex-problem-revisited/) explains that performance on operations involving data like 3D coordinates may benefit from changing the way data is structured.
+[Optimize SIMD code with vectorization-friendly data layout](/learning-paths/cross-platform/vectorization-friendly-data-layout/a-more-complex-problem-revisited/) explains that performance on operations involving data like 3D coordinates might benefit from changing the way data is structured.
 
-One thing to mention is that with `-O3` flag, autovectorization is enabled by default in recent GCC and Clang compilers, so even if you disable explicit vectorization in Eigen, the compiler will still try to attempt to vectorize the code. 
+One thing to mention is that with the `-O3` flag, autovectorization is enabled by default in recent GCC and Clang compilers, so even if you disable explicit vectorization in Eigen, the compiler still tries to attempt to vectorize the code. 
 
-In the time period that Eigen was developed, autovectorization was completely out of the question and was almost unreachable in all but the most trivial cases. However, the recent compilers are much more advanced and they can prove to be even better in some cases (like this one) where the type of object is not optimally designed for vectorization.
+In the time period that Eigen was developed, autovectorization was completely out of the question and was almost unreachable in all but the most trivial cases. However, the recent compilers are more advanced and prove to be even better in some cases, such as this one, where the type of object is not optimally designed for vectorization.
 
 ### Testing on SVE
 
