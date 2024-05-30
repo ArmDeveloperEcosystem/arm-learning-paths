@@ -25,7 +25,7 @@ If you are using Rust to build Linux applications on an Arm Linux platform, refe
 
 This install guide describes a setup using an Ubuntu Linux host.
 
-For further information, see [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
+For a thorough review of all options, refer to the official documentation. See [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
 
 ## Installation {#install}
 
