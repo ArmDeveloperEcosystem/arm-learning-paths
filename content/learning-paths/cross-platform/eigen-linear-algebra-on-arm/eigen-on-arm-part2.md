@@ -150,7 +150,7 @@ user    0m5.636s
 sys     0m0.000s
 ```
 
-This is interesting, enabling vectorization doesn't improve performance, which can be due to multiple reasons.
+This is interesting; enabling vectorization doesn't improve performance, which can be due to multiple reasons.
 
 [Optimize SIMD code with vectorization-friendly data layout](/learning-paths/cross-platform/vectorization-friendly-data-layout/a-more-complex-problem-revisited/) explains that performance on operations involving data like 3D coordinates might benefit from changing the way data is structured.
 
