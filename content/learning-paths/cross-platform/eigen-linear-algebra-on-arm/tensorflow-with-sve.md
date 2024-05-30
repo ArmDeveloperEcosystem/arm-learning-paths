@@ -10,21 +10,21 @@ layout: learningpathall
 
 Now that you have seen that you can use Eigen with SVE enabled, it's time to build your own SVE-enabled Tensorflow.
 
-Tensorflow is a complex application and building it requires significant effort. However, following the instructions below you should be able to build and run it. 
+Tensorflow is a complex application, and building it requires significant effort. However, following the instructions below, you should be able to build and run it. 
 
 ### Install Build Requirements for Tensorflow
 
 You are going to follow the [Tensorflow Instructions to build from source](https://www.tensorflow.org/install/source) with some slight modifications.
 
-Before you attempt to build Tensorflow, you need to install the build dependencies first.
+Before you build Tensorflow, you need to install the build dependencies first.
 
-The following packages are needed in a recent Debian/Ubuntu distribution. You may have to change to the packages if you're using a different Linux distribution:
+The following packages are required for the recent Debian/Ubuntu distribution used here. You might have to change the packages if you're using a different Linux distribution:
 
 ```bash
 sudo apt -u install gcc g++ python3-pip golang python3-virtualenv default-jdk-headless patchelf libhdf5-dev -y
 ```
 
-You also need to download `bazelisk`: a Go-based tool which you can use instead of `bazel`. You need to download the Linux arm64 version and rename it as `bazel` and add it to your search path. One way is to put the file in your `$HOME/bin` directory add this directory to your `$PATH`.
+You also need to download `bazelisk`: a Go-based tool which you can use instead of `bazel`. You need to download the Linux arm64 version and rename it as `bazel`, and add it to your search path. One way is to put the file in your `$HOME/bin` directory, and add this directory to your `$PATH`:
 
 ```bash
 mkdir ~/bin
@@ -33,16 +33,16 @@ chmod +x ~/bin/bazel
 export PATH=$PATH:$HOME/bin
 ```
 
-Some python packages need to be installed using `pip` and it's best that we do that in a virtual environment, using the `virtualenv` Python package.
+Some python packages need to be installed using `pip` and it's best that you do that in a virtual environment, using the `virtualenv` Python package:
 
-After you create the environment, you will need to activate it.
+After you create the environment, you need to activate it:
 
 ```bash
 virtualenv ~/python-venv
 . ~/python-venv/bin/activate
 ```
 
-Your shell prompt now shows the virtual environment, it should look like this: 
+Your shell prompt now shows the virtual environment, which should look like this: 
 
 ```output
 (python-venv) $
@@ -57,7 +57,7 @@ cd tensorflow
 
 Now you can configure Tensorflow. Configuration requires you to answer some questions, but you can select the defaults.
 
-However, you need to pass the relevant SVE flags as you did before to make sure that Eigen selects the SVE backend.
+You need to pass the relevant SVE flags as you did before to make sure that Eigen selects the SVE backend.
 
 Here is the configuration transcript, only the first line is a command you can copy and run:
 
@@ -111,7 +111,7 @@ When the build is complete, you should have `tensorflow` `pip` package in this d
 tensorflow_cpu-2.17.0-cp311-cp311-linux_aarch64.whl
 ```
 
-You are finally able to install your custom Tensorflow build to your system, using `pip install`
+You are finally able to install your custom Tensorflow build to your system, using `pip install`:
 
 ```bash
 pip install
@@ -126,5 +126,5 @@ python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000,
 tf.Tensor(492.89847, shape=(), dtype=float32)
 ```
 
-If you get the above response then your Tensorflow installation was successful! 
+If you get the above response then your Tensorflow installation was successful.
 

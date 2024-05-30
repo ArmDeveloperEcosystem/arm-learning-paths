@@ -6,13 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-You have learned that Eigen has been ported to Neon/ASIMD in the past and recently to SVE. We are going to investigate how to use Eigen to get best performance on Arm systems with SIMD engines.
+You have learned that Eigen has been ported to Neon/ASIMD in the past and recently to SVE. Now you are going to investigate how to use Eigen to get best performance on Arm systems with SIMD engines.
 
-## Example 1: arbitrary-size matrix sum of all elements
+## Example 1: Arbitrary-Size Matrix Sum of all Elements
 
-This is a small example to demonstrate the benefits of Eigen's vectorization with some simple expressions on matrices. It will first construct a large random matrix of 100 x 100 `float` elements and it will perform some simple operation for `N` iterations on it. In the end it will return the sum of all the elements of the final matrix as a `double`.
+This example demonstrates the benefits of Eigen's vectorization with some simple expressions on matrices. It first constructs a large random matrix of 100 x 100 `float` elements, and performs some simple operation for `N` iterations on it. Finally, it returns the sum of all the elements of the final matrix as a `double`.
 
-Use a text editor to save the program below in a file named `eigen-test2.cpp`
+Use a text editor to save the program below in a file named `eigen-test2.cpp`:
 
 ```C++
 #include <iostream>
@@ -36,9 +36,9 @@ int main()
 ```
 
 
-Before you try it with SIMD enabled, first try without SIMD.
+Before you try it with SIMD enabled, first try it without.
 
-To do that, you need to pass a define to the compiler to instruct Eigen to disable vectorization, `-DEIGEN_DONT_VECTORIZE`.
+To do that, you need to pass a define to the compiler to instruct Eigen to disable vectorization: `-DEIGEN_DONT_VECTORIZE`.
 
 Compile the program using:
 
@@ -46,7 +46,7 @@ Compile the program using:
 g++ -O3 -DNDEBUG -DEIGEN_DONT_VECTORIZE eigen-test2.cpp -o eigen-test2 -Ieigen
 ```
 
-Run the test with `time` (your results may vary depending on your CPU and system):
+Run the test with `time`. Your results might vary depending on your CPU and system:
 
 {{% notice Note %}}
 Only the commands are copied from the box below if you use the Copy button. The remainder is the output and is not copied.
@@ -76,7 +76,7 @@ user    0m4.933s
 sys     0m0.000s
 ```
 
-That is a speed up of 4.63x, which is quite impressive! Next, try with SVE enabled to see if there is any difference.
+This is a speed up of 4.63x, which is impressive! Next, try with SVE enabled to see if there is any difference.
 
 ### Testing on SVE
 
@@ -119,7 +119,7 @@ user    0m11.647s
 sys     0m0.000s
 ```
 
-This is interesting. First, you will obviously note that the result is wrong (zero), and it takes almost double the time to calculate. This is something to keep in mind in general when forcing the SVE vector width at compile time. The instructions are the same, so you will not get an Illegal Instruction exception (`SIGILL`), but there is going to be UB (Undefined Behavior) if the program is not designed to cope for such cases. 
+This is interesting. First, you will note that the result is wrong (zero), and it takes almost double the time to calculate. This is something to keep in mind in general when forcing the SVE vector width at compile time. The instructions are the same, so you will not get an Illegal Instruction exception (`SIGILL`), but there is going to be UB (Undefined Behavior) if the program is not designed to cope for such cases. 
 
 In general, you should avoid forcing a vector size for SVE, unless there is no alternative.
 
