@@ -10,7 +10,7 @@ learning_objectives:
     - Build Tensorflow with SVE on Arm systems
 
 prerequisites:
-    - An Arm computer running Linux and a recent version of a C++ compiler (Clang or GCC) installed
+    - An Arm-based computer running Linux and a recent version of a C++ compiler (Clang or GCC).
 
 author_primary: Konstantinos Margaritis
 
