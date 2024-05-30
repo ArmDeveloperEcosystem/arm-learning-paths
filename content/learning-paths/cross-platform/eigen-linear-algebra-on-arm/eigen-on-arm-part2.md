@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Example 2: matrix multiplication
+## Example 2: Matrix Multiplication
 
 Use a text editor to save the program below in a file named `eigen-test3.cpp`:
 
