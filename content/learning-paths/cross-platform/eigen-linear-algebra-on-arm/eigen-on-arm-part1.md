@@ -38,7 +38,7 @@ int main()
 
 Before you try it with SIMD enabled, first try it without.
 
-To do that, you need to pass a define to the compiler to instruct Eigen to disable vectorization, `-DEIGEN_DONT_VECTORIZE`.
+To do that, you need to pass a define to the compiler to instruct Eigen to disable vectorization: `-DEIGEN_DONT_VECTORIZE`.
 
 Compile the program using:
 
