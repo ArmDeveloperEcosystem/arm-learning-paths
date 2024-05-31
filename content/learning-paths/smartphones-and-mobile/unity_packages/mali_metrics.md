@@ -6,11 +6,11 @@ weight: 2
 layout: learningpathall
 ---
 
-## View Mali GPU metrics in the Unity Profiler 
+## View Arm GPU metrics in the Unity Profiler
 
-Arm provides a Unity package that enables the [Unity profiler](https://unity.com/features/profiling) to read and display the GPU hardware counters from Mali GPUs. It is supported in Unity versions 2021.2 and later.
+Arm provides a Unity package that enables the [Unity profiler](https://unity.com/features/profiling) to read and display the GPU hardware counters from Arm GPUs. It is supported in Unity versions 2021.2 and later.
 
-### Install the System Metrics Mali Package 
+### Install the System Metrics Mali Package
 
 Follow these steps to install the package in Unity.
 
@@ -20,7 +20,7 @@ Follow these steps to install the package in Unity.
     ![Adding a Unity package by name](unity_add_package_by_name.png "Figure 1. Add a package by name")
 3. In the search field, type **com.unity.profiling.systemmetrics.mali** and click **Add**.
 
-    When the install completes, you should then see System Metrics Mali in your list of installed packages.
+    When the install completes, you should then see **System Metrics Mali** in your list of installed packages.
 
     ![Mali System Metrics in the Package Manager](unity_package_manager.png "Figure 2. Mali System Metrics package in the Package Manager")
 

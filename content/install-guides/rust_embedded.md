@@ -7,8 +7,6 @@ additional_search_terms:
 - compiler
 - rust
 
-draft: true 
-
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -19,13 +17,13 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Rust](https://www.rust-lang.org/) is an open source programming language. 
 
-This install guide is for embedded developers wishing to use Rust for their applications. 
+This install guide is for developers using Rust for their embedded applications. 
 
-If you wish to use Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](../rust) instead.
+If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](../rust) instead.
 
-This install guide assumes an Ubuntu Linux host.
+This install guide describes a setup using an Ubuntu Linux host.
 
-For further information, see [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
+For a thorough review of all options, refer to the official documentation. See [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
 
 ## Installation {#install}
 
@@ -49,14 +47,14 @@ rustc --version
 cargo version
 ```
 
-The output will be similar to:
+The output is similar to:
 ```output
 rustc 1.78.0 (9b00956e5 2024-04-29)
 cargo 1.78.0 (54d8815d0 2024-03-26)
 ```
 ### Add Arm cross-compilation support
 
-Add cross compilation support for the Arm Architectures needed. For example, to add support for Armv7-M architecture use:
+Add cross compilation support for the required Arm Architectures. For example, to add support for Armv7-M architecture, you can use:
 ```command
 rustup target add thumbv7m-none-eabi
 ```
@@ -67,7 +65,7 @@ rustup target list
 
 ### Install cargo-generate
 
-To generate a project from a template you will need `cargo-generate`. To install and rebuild use:
+To generate a project from a template, you need `cargo-generate`. To install and rebuild use:
 
 ```command
 sudo apt install -y libssl-dev pkg-config
@@ -77,7 +75,7 @@ cargo install cargo-generate
 
 ### Install cargo-binutils (optional)
 
-Other utilities are also available. For completeness they can be installed with:
+Other utilities are also available. For completeness, they can be installed with:
 ```command
 cargo install cargo-binutils
 rustup component add llvm-tools-preview

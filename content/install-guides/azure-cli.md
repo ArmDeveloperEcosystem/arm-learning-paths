@@ -25,11 +25,13 @@ It is available for a variety of operating systems and Linux distributions and h
 
 ## Before you begin
 
-[General installation information](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt) is available which covers all supported Linux distributions. The instructions state that Azure CLI doesn't support Linux on Arm. 
+[General installation information](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-linux?pivots=apt) is available which covers all supported Linux distributions. Starting with version 2.46.0, Azure CLI supports Arm64 Linux distributions. The 'apt' package manager contains both x86_64 and Arm64 packages for the following linux distributions
 
-It's likely Arm support will come soon, monitor the [GitHub issue](https://github.com/Azure/azure-cli/issues/7368) for new details. 
+```output
+Ubuntu 20.04, Ubuntu 22.04, Ubuntu 24.04
+```
 
-This article provides a quick solution to install Azure CLI for Ubuntu on Arm.
+## Install via Azure CLI script
 
 Confirm you are using an Arm machine by running:
 
@@ -45,9 +47,34 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-## Download and Install
+You can install Azure CLI using the following script. This script pulls required Arm64 packages and installs those on the system
 
-The easiest way to install Azure CLI for Ubuntu on Arm is to use Python pip. 
+```bash { target="ubuntu:latest" }
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+```
+
+Execute the following command to verify the Azure CLI is installed correctly
+
+```bash { target="ubuntu:latest" }
+az version
+```
+
+You should see an output similar to below
+
+```output
+{
+  "azure-cli": "2.61.0",
+  "azure-cli-core": "2.61.0",
+  "azure-cli-telemetry": "1.1.0",
+  "extensions": {}
+}
+```
+
+If you prefer installing the Azure CLI using Python3, follow the instructions below.
+
+## Download and Install using pip
+
+Another way to install Azure CLI for Ubuntu on Arm is to use Python pip. 
 
 Install Python pip. 
 
@@ -66,6 +93,16 @@ The pip install updates $HOME/.profile with the path the `az` executable. Check 
 ```bash { target="ubuntu:latest" }
 source $HOME/.profile
 az version
+```
+You should see an output similar to below
+
+```output
+{
+  "azure-cli": "2.61.0",
+  "azure-cli-core": "2.61.0",
+  "azure-cli-telemetry": "1.1.0",
+  "extensions": {}
+}
 ```
 
 After a successful log in, you can use the [Azure CLI](../azure-cli) and automation tools like [Terraform](../terraform) from the terminal.

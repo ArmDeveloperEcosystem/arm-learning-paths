@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            ITLB_WALK counts page table walks due to TLB maintenance operations.
+            ITLB_WALK counts page table walks as a result of TLB maintenance operations.
         answers:
             - True
             - False
@@ -22,24 +22,24 @@ review:
 
     - questions:
         question: >
-            Which of the following is true regarding the difference between PMU events that count speculatively executed instructions/operations and PMU events that count retired instructions/operations (Example: OP_SPEC vs OP_RETIRED)?
+            Which of the following is true?
         answers:
-            - Speculatively executed PMU event counts are always greater than or equal to retired PMU event counts
-            - Speculatively executed PMU events count architecturally executed operations or instructions
-            - Speculatively executed PMU event counts are always less than retired PMU event counts
-            - Speculatively executed PMU event counts and retired PMU event counts can be higher, lower or equal to each other
+            - Speculatively executed PMU event counts are always greater than or equal to retired PMU event counts.
+            - Speculatively executed PMU events count architecturally executed operations or instructions.
+            - Speculatively executed PMU event counts are always less than retired PMU event counts.
+            - Speculatively executed PMU event counts and retired PMU event counts can be higher, lower or equal to each other.
         correct_answer: 1
         explanation: > 
-            Speculatively executed instructions/opertations will count instructions that were architecturally executed as well as instructions that were not architecturally executed. Architecturally executed instructions/operations are also refered to as "retired" or "committed." 
+            Speculatively executed instructions/operations count instructions that were architecturally executed as well as instructions that were not architecturally executed. Architecturally executed instructions/operations are also refered to as "retired" or "committed." 
 
     - questions:
         question: >
-            What scenario triggers an ITLB walk? 
+            Which of these scenarios trigger an ITLB walk? 
         answers:
-            - A memory access driven by an instruction
-            - An instruction Cache Maintenance Operation
-            - A translation fault
-            - An instruction-side memory translation that has not been accessed before
+            - A memory access driven by an instruction.
+            - An instruction Cache Maintenance Operation.
+            - A translation fault.
+            - An instruction-side memory translation that has not been accessed before.
         correct_answer: 4
         explanation: >
             An I-TLB walk occurs when there is a translation miss in the L1 I-TLB and the L2 TLB driven by an I-side memory access. 

@@ -32,6 +32,16 @@ review:
             At the time of writing (up to the 2024.0 release of Arm Development Studio), Rust applications are not officially supported.
             However as the DWARF5 debug format is supported, the applications can be loaded and have reasonable debug visibility.
             
+    - questions:
+        question: >
+            Variables in Rust are immutable by default.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Rust variables are immutable by default, meaning that once they are set to a value, they cannot be changed.
+            Use the "mut" keyword to define a variable as mutable.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

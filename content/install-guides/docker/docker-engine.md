@@ -9,7 +9,7 @@ additional_search_terms:
 - virtual machines
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 30
+minutes_to_complete: 15
 
 author_primary: Jason Andrews
 
