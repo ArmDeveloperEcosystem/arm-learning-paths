@@ -1,6 +1,6 @@
 ---
 title: Use AWS Lambda for your IoT applications running on Arm64
-
+draft: true
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers who are interested in using AWS Lambda for processing data streamed by IoT applications and devices.
