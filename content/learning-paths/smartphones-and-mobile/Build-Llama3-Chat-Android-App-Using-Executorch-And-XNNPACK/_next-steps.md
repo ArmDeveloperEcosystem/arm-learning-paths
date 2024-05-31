@@ -1,5 +1,5 @@
 ---
-next_step_guidance: In future learning paths, we will delve into accomodating more LLMs.
+next_step_guidance: In future learning paths, we will delve into accommodating more LLMs.
 
 recommended_path: /learning-paths/smartphones-and-mobile/mte_on_pixel8/ 
 
