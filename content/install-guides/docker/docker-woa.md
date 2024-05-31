@@ -23,7 +23,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## How do I install Docker for Windows on Arm {#docker-woa}?
+## How do I install Docker for Windows on Arm? 
 
 Docker Desktop on Windows requires WSL 2 or Hyper-V. Both are available for Windows on Arm. 
 
