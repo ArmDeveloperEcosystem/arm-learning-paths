@@ -1,6 +1,6 @@
 ---
 title: Build an Android chat app with LLaMA, ExecuTorch, and XNNPACK 
-
+draft: true
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to build an Android chat app with LLaMA and ExecuTorch.
