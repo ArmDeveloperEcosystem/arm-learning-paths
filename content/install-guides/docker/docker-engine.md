@@ -33,8 +33,6 @@ The commands work on any architecture, and on any system running Linux, from a c
 
 The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and on a Chromebook.
 
-For information about starting the docker daemon on WSL refer to [Installing Docker on Windows on Arm](../docker-woa).
-
 ### Run installer
 
 ```console
