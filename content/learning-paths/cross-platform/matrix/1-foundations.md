@@ -22,7 +22,7 @@ You will need the following tools, make sure they are available on your developm
 - A documentation generator: [Doxygen](https://www.doxygen.nl/)
 - An IDE ([Visual Studio Code](https://code.visualstudio.com/) is a popular
   choice) or a text editor ([Vim](https://www.vim.org/), [GNU
-  EMacs](https://www.gnu.org/software/emacs/), [Sublime
+  Emacs](https://www.gnu.org/software/emacs/), [Sublime
   Text](https://www.sublimetext.com/) are popular choices).
 
 ## About configuring vs. building
