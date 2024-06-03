@@ -15,11 +15,11 @@ Cross-compile Llama runner to run on Android using the steps below.
 Set the environment variable to point to the Android NDK. 
 
 ``` bash
-export ANDROID_NDK=<path-to-android-ndk>
+export ANDROID_NDK=~/Library/Android/sdk/ndk/25.0.8775105
 ```
 
 {{% notice Note %}}
-<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
+Make sure you can confirm $ANDROID_NDK/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
 ### 2. Build ExecuTorch and associated libraries for Android

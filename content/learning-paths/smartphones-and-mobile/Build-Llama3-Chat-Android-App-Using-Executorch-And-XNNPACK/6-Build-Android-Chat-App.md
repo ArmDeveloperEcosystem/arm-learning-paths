@@ -15,7 +15,7 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 2. Set the following environment variables:
 
     ``` bash
-    export ANDROID_NDK=<path_to_android_ndk>
+    export ANDROID_NDK=~/Library/Android/sdk/ndk/25.0.8775105
     export ANDROID_ABI=arm64-v8a
     ```
 
@@ -94,4 +94,7 @@ pushd examples/demo-apps/android/LlamaDemo
 popd
 ```
 
-//TODO : Add image of app running on Pixel 8 pro
+You should now see a running app on your phone that looks like this:
+
+![First example prompt](example-prompt-1.png)
+![Second example prompt](example-prompt-2.png)

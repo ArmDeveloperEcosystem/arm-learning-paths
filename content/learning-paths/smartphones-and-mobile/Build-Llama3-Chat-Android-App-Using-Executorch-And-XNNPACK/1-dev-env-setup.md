@@ -13,7 +13,7 @@ In this Learning Path you will learn how to build and deploy a simple LLM based 
 The first step is to prepare a development environment with the required software:
 
 - Android Studio (latest version recommended)
-- Android NDK
+- Android NDK version 25.0.8775105
 - Java 17 JDK
 - Git
 - Python 3.10
@@ -32,10 +32,32 @@ Follow the steps to install and configure Android Studio:
 
 4. In the `SDK Platforms` tab, check `Android 14.0 ("UpsideDownCake")`
 
-5. Switch to the `SDK Tools` tab, check `NDK (Side by side)` and click `Apply`
+Next, install the specific version of the Android NDK that you'll need by first installing the Android command line tools:
 
-6. When the installation is complete, the SDK and NDK for API level 34 will be installed.
+Linux:
 
+```
+curl https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o commandlinetools.zip
+```
+
+macOS:
+
+```
+curl https://dl.google.com/android/repository/commandlinetools-mac-11076708_latest.zip -o commandlinetools.zip
+```
+
+Unzip:
+
+```
+unzip commandlinetools.zip
+```
+
+Install the NDK in the directory that Android Studio installed the SDK. This is generally `~/Library/Android/sdk` by default:
+
+```
+export ANDROID_HOME="$(realpath ~/Library/Android/sdk)"
+./cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_HOME}" --install "ndk;25.0.8775105"
+```
 
 ## Install Java 17 JDK
 
