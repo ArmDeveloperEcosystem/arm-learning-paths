@@ -23,7 +23,7 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Installing Chromium
+## How do I install Chromium?
 
 The Chromium browser runs on Windows on Arm as a native ARM64 application, and is available on Arm Linux distributions.
 
@@ -33,7 +33,7 @@ The Chromium browser runs on Windows on Arm as a native ARM64 application, and i
 Google API keys are missing from Chromium so you will not be able to sync information with your Google account.
 {{% /notice %}}
 
-### Linux
+### How do I install Chromium on Arm Linux?
 
 The best way to install Chromium on Arm Linux is to use the package manager for your distribution. 
 
@@ -53,7 +53,7 @@ sudo dnf install chromium -y
 
 Depending on your version of Ubuntu, Chromium may be installed as a snap from the [Canonical Snap Store](https://snapcraft.io/). 
 
-### Windows 
+### How do I install Chromium on Windows on Arm? 
 
 Chromium is available as a native ARM64 application for Windows on Arm. 
 

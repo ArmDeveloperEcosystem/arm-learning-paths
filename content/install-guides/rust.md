@@ -1,5 +1,5 @@
 ---
-title: Rust
+title: Rust for Linux Applications
 minutes_to_complete: 10
 official_docs: https://www.rust-lang.org/tools/install
 author_primary: Mathias Brossard
@@ -19,13 +19,17 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Rust](https://www.rust-lang.org/) is an open source programming language.
+[Rust](https://www.rust-lang.org/) is an open source programming language. 
+
+This install guide is for Linux application developers wishing to use Rust. 
+
+If you wish to use Rust to build embedded applications for Arm, refer to [Rust for Embedded Applications](../rust_embedded) instead.
 
 ## Before you begin
 
-Rust is available for a variety of operating systems and Linux distributions and has multiple ways to install it.
+Rust is available for a variety of operating systems and Linux distributions, and there are multiple ways to install it.
 
-This article provides a quick solution to install Rust on an Arm Linux distribution.
+This install guide provides a quick solution to install Rust on an Arm Linux distribution.
 
 Confirm you are using an Arm machine by running:
 
@@ -45,7 +49,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ### Installing dependencies on Debian based distributions such as Ubuntu
 
-Use the `apt` command to install the required software packages on any Debian based Linux distribution, including Ubuntu.
+Use the `apt` command to install the required software packages on any Debian-based Linux distribution, including Ubuntu.
 
 ```bash { target="ubuntu:latest" }
 sudo apt update -y
@@ -101,8 +105,8 @@ info: default toolchain set to 'stable-aarch64-unknown-linux-gnu'
 
 Rust is installed now. Great!
 
-To get started you may need to restart your current shell.
-This would reload your PATH environment variable to include
+To get started, you may need to restart your current shell.
+This reloads your PATH environment variable to include
 Cargo's bin directory ($HOME/.cargo/bin).
 
 To configure your current shell, run:
@@ -111,7 +115,7 @@ source "$HOME/.cargo/env"
 
 The latest version of Rust is now installed. 
 
-The installer updates `$HOME/.bashrc` and `SHOME/.profile` to setup the environment. Start a new shell or run the following command to continue:
+The installer updates `$HOME/.bashrc` and `SHOME/.profile` to set up the environment. Start a new shell or run the following command to continue:
 
 ```bash
 source "$HOME/.cargo/env"
@@ -123,7 +127,7 @@ To confirm the installation is complete run `cargo version` (`cargo` is the Rust
 cargo version
 ```
 
-The command will print the version:
+This command will print the version:
 
 ```output
 cargo 1.74.1 (ecb9851af 2023-10-18)
@@ -141,7 +145,7 @@ cd hello
 cargo run
 ```
 
-The `cargo run` command will output:
+The `cargo run` command outputs:
 
 ```output
    Compiling hello v0.1.0 (/hello)

@@ -5,6 +5,7 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## L2 Unified Cache Events
 
 The following PMU events can be used to highlight effectiveness of the L2 cache: 
 
@@ -18,7 +19,7 @@ The following PMU events can be used to highlight effectiveness of the L2 cache:
         PMU_EVENT_INST_RETIRED,
 ```
 
-To trigger these events, the L1 D-cache must be full. We can run code to issue many stores to Normal Cacheable memory to do so.
+To trigger these events, the L1 D-cache must be full. To achieve this, you can run code to issue many stores to Normal Cacheable memory.
 
 ```C
 void stores()
@@ -41,7 +42,7 @@ L1D_CACHE_WR is 70
 INST_RETIRED is 280
 ```
 
-The stores created 32 L2 D-cache accesses and 5 refills. `L2D_CACHE_WR` is 0 because no memory write operation was looked up in the L2 cache, counting any writebacks from the L1 data cache that allocate into the L2 cache. However, we are seeing L2 cache accesses due to reads, in `L2D_CACHE_RD`. This event counts whether there is a hit or a miss in the L2 cache. As a result, all of the data written was stored in the L1 D-cache and the L2 D-cache refills were triggered by read operations only.
+The stores created 32 L2 D-cache accesses and 5 refills. `L2D_CACHE_WR` is 0 because no memory write operation was looked up in the L2 cache, counting any writebacks from the L1 data cache that allocate into the L2 cache. However, you can see L2 cache accesses due to reads, in `L2D_CACHE_RD`. This event counts whether there is a hit or a miss in the L2 cache. As a result, all of the data written was stored in the L1 D-cache and the L2 D-cache refills were triggered by read operations only.
 
 Writing to more addresses will trigger L2 cache accesses due to write operations:
 
@@ -68,7 +69,7 @@ L1D_CACHE_WR is 142
 INST_RETIRED is 491
 ```
 
-There is 1 L2 D-cache access due to a write operation, counted by `L2D_CACHE_WR`. To trigger even more, there must be more stores to Normal Cacheable memory issued.
+There is 1 L2 D-cache access due to a write operation, counted by `L2D_CACHE_WR`. To trigger even more, there must be more stores issued to Normal Cacheable memory.
 
 ```C
 void stores()
@@ -101,7 +102,7 @@ INST_RETIRED is 976
 
 Now there are 111 L2 D-cache accesses due to write operations. 
 
-## L2 cache read access
+## L2 Cache Read Access
 
 This code highlights what occurs during an L2 cache read access, caused by a series of loads.
 
@@ -155,12 +156,12 @@ L2D_CACHE_REFILL_RD is 1
 L2D_CACHE_WB is 0
 ```
 
-`REMOTE_ACCESS` is 0 because we are not simulating a multi socket system so another socket is never accessed. 
+`REMOTE_ACCESS` is 0 because you are not simulating a multi-socket system, so another socket is never accessed. 
 
 Additional events that occur if the L2 cache is full: 
 `L2D_CACHE_WB` and `L2D_CACHE_WB_VICTIM`
 
-Reads don’t typically cause writebacks. We can use a store instruction to trigger the above events plus a writeback:
+Reads don’t typically cause writebacks. You can use a store instruction to trigger the above events plus a writeback:
 
 ```C
 void stores()
@@ -192,7 +193,7 @@ L2D_CACHE_WB_VICTIM is 63
 Due to the stores, there are 63 cache line writebacks, meaning any data that is written from the L2 cache to outside the CPU. All of these writebacks were caused by a new allocation into the L2 cache, counted by `L2D_CACHE_WB_VICTIM`, forcing an eviction chosen by the victim counter.
 
 
-## L2 cache write access
+## L2 Cache Write Access
 
 This code highlights what occurs during an L2 cache write access. In order to trigger this, a series of stores to Normal Cacheable memory to fill up the L1 D-cache will cause an overflow into the L2 cache. 
 
@@ -235,7 +236,7 @@ BUS_ACCESS_WR is 24
 
 
 Events that occur if the cache line was fetched outside of the CMN mesh:
-`REMOTE_ACCESS`,  and the events listed above
+`REMOTE_ACCESS`,  and the events listed above.
 
 Otherwise, if the cache line was not fetched outside of the mesh, `REMOTE_ACCESS` will not count but `L2D_CACHE_REFILL` and `L2D_CACHE_REFILL_RD` will – as seen below:
 
@@ -245,10 +246,10 @@ L2D_CACHE_REFILL is 49
 L2D_CACHE_REFILL_WR is 49
 ```
 
-`REMOTE_ACCESS` is 0 because we are not simulating a multi socket system so another socket is never accessed. However, the missed data was found outside of the L2 cache, resulting in a `L2D_CACHE_REFILL`.
+`REMOTE_ACCESS` is 0 because you are not simulating a multi socket system so another socket is never accessed. However, the missed data was found outside of the L2 cache, resulting in a `L2D_CACHE_REFILL`.
 
 Events that occur if the L2 cache is full: 
-`L2D_CACHE_WB`, `L2D_CACHE_WB_VICTIM`, and the events listed above (`REMOTE_ACCESS` may not count)
+`L2D_CACHE_WB`, `L2D_CACHE_WB_VICTIM`, and the events listed above (`REMOTE_ACCESS` may not count).
 
 ```output
 L2D_CACHE_WB is 14

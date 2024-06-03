@@ -5,8 +5,9 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## L1 Instruction Cache Events
 
-The PMU events below can be used to measure L1 Instruction Cache effectiveness:
+You can use the PMU events below to measure L1 Instruction Cache effectiveness:
 
 ```C
 //L1 I-cache Effectiveness Metrics
@@ -16,7 +17,7 @@ PMU_EVENT_INST_RETIRED,
 PMU_EVENT_INST_SPEC,
 ```
 
-A series of stores to Normal Cacheable memory will lead to allocations into the L1 I-cache. 
+A series of stores to Normal Cacheable memory leads to allocations into the L1 I-cache. 
 
 ```C
 void stores()
@@ -36,7 +37,7 @@ void stores()
 }
 ```
 
-These stores trigger 455 accesses in the L1 I-cache, causing 5 refills of cache lines that were not present in the cache prior. More stores would result in fewer refills to the L1 I-cache, but would result in more refills to the L1 D-cache, since the L1 I-cache only stores instructions and can snoop in the L1 D-cache. Similarly, a single instruction fetch to the L1 I-cache can access multiple instructions.
+These stores trigger 455 accesses in the L1 I-cache, causing 5 refills of cache lines that were not in the cache before. More stores results in fewer refills to the L1 I-cache, but also results in more refills to the L1 D-cache, since the L1 I-cache only stores instructions and can snoop in the L1 D-cache. Similarly, a single instruction fetch to the L1 I-cache can access multiple instructions.
 
 ```output
 L1I_CACHE is 455
@@ -53,4 +54,4 @@ Events that always occur:
 `L1I_CACHE`
 
 Additional events that occur when there is an L1 cache miss: 
-`L1I_CACHE_REFILL` and L2 cache read access events
+`L1I_CACHE_REFILL` and L2 cache read access events.

@@ -15,7 +15,7 @@ review:
             Which Arm tools can show annotations from Unity?
         answers:
             - Streamline and Performance Advisor
-            - Graphics Analyzer
+            - Frame Advisor
             - Mali Offline Compiler
         correct_answer: 1                   
         explanation: >

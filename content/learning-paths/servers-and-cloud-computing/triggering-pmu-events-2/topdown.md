@@ -8,7 +8,7 @@ layout: learningpathall
 
 
 {{% notice Note %}}
-To run the code in this Learning Path and collect the output, your software or debug environment needs a way to print message to a console. The code was run on an Arm internal simulation environment but could be run on any simulation environment with printf() support, or on actual hardware with printf() support. 
+To run the code in this Learning Path and collect the output, your software or debug environment needs a way to print a message to a console. The code used here was run on an Arm internal simulation environment, but you can run it on any simulation environment with printf() support, or on hardware with printf() support. 
 
 This code was run in a bare-metal environment in EL3 with minimal software overhead. If you are running this code on an operating system, such as Linux, you may see slight variations in the PMU event counts due to the overhead of the OS.
 {{% /notice %}}
@@ -21,7 +21,7 @@ The results from the first phase guide where to look next to find areas for perf
 The white paper [Arm CPU Telemetry Solution Topdown Methodology Specification](https://developer.arm.com/documentation/109542/0100/?lang=en) describes the Topdown Methodology referenced below. 
 {{% /notice %}}
 
-The first level metrics to look at are:
+The first-level metrics to look at are:
 
 ```C
 //Top Down L1 Metrics
@@ -37,10 +37,11 @@ PMU_EVENT_OP_SPEC,
 These PMU events highlight backend inefficiency, frontend inefficiency, bad speculation, and instruction retiring. 
 
 The following groups are described below:
-- Backend inefficiency: execution unit, D-Cache misses, translation delays caused by D-TLB walks
-- Frontend inefficiency: branch prediction unit, fetch latency due to I-Cache misses, translation delays caused by I-TLB walks
-- Bad speculation: branch mispredictions
-- Retiring: under utilization of micro-architectural capabilities such as scalar execution instead of vector operations
+
+- Backend inefficiency: execution unit, D-Cache misses, and translation delays caused by D-TLB walks.
+- Frontend inefficiency: branch prediction unit, fetch latency due to I-Cache misses, and translation delays caused by I-TLB walks.
+- Bad speculation: branch mispredictions.
+- Retiring: under-utilization of micro-architectural capabilities such as scalar execution instead of vector operations.
 
 ## Backend inefficiency
 

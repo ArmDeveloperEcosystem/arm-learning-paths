@@ -9,7 +9,7 @@ additional_search_terms:
 - virtual machines
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 30
+minutes_to_complete: 15
 
 author_primary: Jason Andrews
 
@@ -32,8 +32,6 @@ These commands are the (almost) universal install instructions for Docker on Lin
 The commands work on any architecture, and on any system running Linux, from a cloud server to a Raspberry Pi.
 
 The commands can also be used in the Windows Subsystem for Linux 2 (WSL 2) and on a Chromebook.
-
-For information about starting the docker daemon on WSL refer to [Installing Docker on Windows on Arm](../docker-woa).
 
 ### Run installer
 
