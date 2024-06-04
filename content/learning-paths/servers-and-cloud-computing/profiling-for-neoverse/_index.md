@@ -3,7 +3,7 @@ title: Profiling for Neoverse with Streamline CLI Tools
 
 minutes_to_complete: 15
 
-who_is_this_for: This is a get started guide for developers who want to measure the performance of applications running on Arm Neoverse™-based servers, and discover ways to optimize them. The Streamline CLI tools are native command-line tools that are designed to run directly on an Arm server running Linux. The tools provide a software profiling methodology that gives you clear and actionable performance data. You can use this data to guide the optimization of the heavily used functions in your software.
+who_is_this_for: This is an introductory guide for developers who want to measure the performance of applications running on Arm Neoverse™-based servers, and discover ways to optimize them.
 
 learning_objectives: 
     - Understand Arm's top-down profiling methodology.
@@ -17,7 +17,7 @@ prerequisites:
 author_primary: Julie Gaskin
 
 ### Tags
-skilllevels: Beginner, Intermediate
+skilllevels: Introductory
 subjects: Performance profiling and optimization
 armips:
     - Neoverse
