@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## What are Llama 2 and Llama 3?
+## What is Llama?
 
 Llama is a family of large language models that uses publicly available data for training. Llama models have shown to perform well on a variety of natural language processing tasks, including language translation, question answering, and text summarization and are also capable of generating human-like text, making Llama models a useful tool for creative writing and other applications where natural language generation is important.
 
@@ -16,7 +16,7 @@ Please note that the models are subject to the [acceptable use policy](https://g
 
 ## Results
 
-Since Llama2 and Llama 3 models need at least 4-bit quantization to fit within the available memory of some of the premium smartphones, the results presented here correspond to 4-bit groupwise post-training quantized models.
+Since Llama 2 and Llama 3 models need at least 4-bit quantization to fit within the available memory of some of the premium smartphones, the results presented here correspond to 4-bit groupwise post-training quantized models.
 
 ## Quantization
 
