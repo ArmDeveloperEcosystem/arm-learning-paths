@@ -97,7 +97,7 @@ Profiling with the Streamline CLI tools is a three-step process:
 
   ![An example functions report](images/v1-spe-report-full.png)
 
-  See our [example report](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/example to learn more about how to interpret the results.
+  See our [example report](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/example) to learn more about how to interpret the results.
 
 ## Minimizing profiling application impact
 
