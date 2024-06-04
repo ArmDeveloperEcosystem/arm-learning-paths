@@ -105,7 +105,7 @@ Follow the steps below to build ExecuTorch and the Llama runner to run models.
         -Bcmake-out .
 
     cmake --build cmake-out -j16 --target install --config Release
-```
+    ```
 
     The CMake build options are available on [GitHub](https://github.com/pytorch/executorch/blob/main/CMakeLists.txt#L59).
 
