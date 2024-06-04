@@ -23,7 +23,7 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 <path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake will use it as the tokenizer. If you run other models like LLaMA 2, skip this skip.
+3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake will use it as the tokenizer. If you run other models like LLaMA 2, skip this step.
 
     ``` bash
     export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLaMA3
