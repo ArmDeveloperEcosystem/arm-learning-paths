@@ -40,9 +40,9 @@ There are multiple model options available to use with executorch. Here we'll be
 
     Due to the larger vocabulary size of Llama 3, you should quantize the embeddings with `--embedding-quantize 4,32` to further reduce the model size.
 
-### Option B: download and export stories110M model
+### Download and export stories110M model
 
-If you want to deploy and run a smaller model for educational purposes instead of the full Llama 3 8B model.
+Follow the steps in this section, if you want to deploy and run a smaller model for educational purposes instead of the full Llama 3 8B model.
 
 From the `executorch` root directory follow these steps:
 
