@@ -12,10 +12,10 @@ The processing core of a modern Arm CPU is represented in this methodology as an
 
 ![An abstract CPU block diagram](images/abstract-cpu-pipeline.svg)
 
-We define the available performance of the core using the maximum number of micro-operations (micro-ops) that can be issued to the backend each clock
+You can define the available performance of the core using the maximum number of micro-operations (micro-ops) that can be issued to the backend each clock
 cycle. This execution width is known as the issue slot count of the processor.
 
-The main goal of our performance analysis methodology is to attribute unused or unneeded slot issues to specific causes, to give you feedback about what is causing your software to run slowly.
+The main goal of this performance analysis methodology is to attribute unused or not needed slot issues to specific causes, to give you feedback about what is causing your software to run slowly.
 
 ### Frontend
 
