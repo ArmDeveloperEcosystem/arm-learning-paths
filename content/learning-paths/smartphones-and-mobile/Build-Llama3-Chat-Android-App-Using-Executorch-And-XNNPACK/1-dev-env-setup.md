@@ -46,7 +46,7 @@ macOS:
 curl https://dl.google.com/android/repository/commandlinetools-mac-11076708_latest.zip -o commandlinetools.zip
 ```
 
-Unzip:
+Unzip the Android command line tools:
 
 ```
 unzip commandlinetools.zip
