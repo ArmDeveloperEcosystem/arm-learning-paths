@@ -16,7 +16,7 @@ Start by creating the rule:
 
 ![fig1](Figures/01.png)
 
-2. Click the *Create rule* button. This will opens *Create rule* view, in which you configure the rule:
+2. Click the *Create rule* button. This opens the *Create rule* view, in which you configure the rule:
 
 ![fig2](Figures/02.png)
 
@@ -38,11 +38,11 @@ This query ensures that only temperature readings are sent to the AWS Lambda fun
 
 ![fig4](Figures/04.png)
 
-7. Scroll down, and under the Execution role select *Create a new role from AWS policy templates*. This activates additional controls, where you type **sns-email-role** for the *Role name*. Then, click the drop-down list *Policy templates*, and select *Amazon SNS publish policy*:
+7. Scroll down, and under the *Execution role*, select *Create a new role from AWS policy templates*. This activates additional controls, where you type **sns-email-role** for the *Role name*. Then, click the drop-down list *Policy templates*, and select *Amazon SNS publish policy*:
 
 ![fig5](Figures/05.png)
 
-8. Click the **Create function** button. This will take you to the AWS Lambda Console, which looks as shown below:
+8. Click the *Create function* button. This takes you to the AWS Lambda Console, which looks as shown below:
 
 ![fig6](Figures/06.png)
 

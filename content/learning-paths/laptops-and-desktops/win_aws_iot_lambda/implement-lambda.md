@@ -169,7 +169,7 @@ try {
 
 In summary, this Lambda function creates an SNS topic and subscribes an email address to it. It then checks the temperature data from the event, and if the temperature exceeds the threshold, it sends an email notification via SNS.
 
-After making these changes, the Lambda code editor will look as shown below:
+After making these changes, the Lambda code editor looks as shown below:
 
 ![fig9](Figures/09.png)
 
@@ -178,7 +178,7 @@ Now, click the Deploy button to apply code changes.
 ## Testing the Function
 
 ### Test Events
-You will now create two test events to manually invoke the Lambda function. Click the Test button. This will open the Configure test event window:
+You will now create two test events to manually invoke the Lambda function. Click the Test button. This opens the Configure test event window:
 
 ![fig10](Figures/10.png)
 
@@ -190,13 +190,13 @@ In this window, type **temperature-normal-level** for the Event name, and then u
 }
 ```
 
-Finally, click the *Save* button. This will take you back to the Lambda function console.
+Finally, click the *Save* button. This takes you back to the Lambda function console.
 
 Click the triangle icon, in the Test button. This expands the menu, from which you select *Configure test event*:
 
 ![fig11](Figures/11.png)
 
-This will open the *Configure test event* window, where you select *Create new event*, change the event name to **temperature-high-level**, and paste the following payload for the Event JSON:
+This opens the *Configure test event* window, where you select *Create new event*, change the event name to **temperature-high-level**, and paste the following payload for the Event JSON:
 
 ```JSON
 {
@@ -208,14 +208,14 @@ The *Configure test event* window should looks as shown:
 
 ![fig12](Figures/12.png)
 
-Click the *Save* button to add a new test event. This will take you back to the Lambda function console. 
+Click the *Save* button to add a new test event. This takes you back to the Lambda function console. 
 
 ### Testing the function
 In the Lambda function console, click the triangle icon next to the Test button, and select *temperature-normal-level* event:
 
 ![fig13](Figures/13.png)
 
-Then, click the *Test* button. Lambda function will be invoked, and you will see the following execution result:
+Then, click the *Test* button. The Lambda function is invoked, and you will see the following execution result:
 
 ![fig14](Figures/14.png)
 
@@ -237,13 +237,13 @@ To modify the role, proceed as shown:
 
 ![fig16](Figures/16.png)
 
-3. Click the *sns-email-role*. This will open another screen, which should look like shown below:
+3. Click the *sns-email-role*. This opens another screen, which should look like shown below:
 
 ![fig17](Figures/17.png)
 
 4. Click the *Add permissions* button. This activates the drop-down list, from which you select *Attach policies*.
 
-5. In the *Attach policy to sns-email-role* view, type *SNSFull* in the search box. This will filter the list of policies to display one item: *AmazonSNSFullAccess*. Check the check-box on the left of the policy name, and then click the *Add permissions* button:
+5. In the *Attach policy to sns-email-role* view, type *SNSFull* in the search box. This filters the list of policies to display one item: *AmazonSNSFullAccess*. Check the check-box on the left of the policy name, and then click the *Add permissions* button:
 
 ![fig18](Figures/18.png)
 
