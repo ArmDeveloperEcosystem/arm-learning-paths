@@ -125,7 +125,9 @@ endif()
 ```
 {{% /notice %}}
 
-    ``` bash
+Run cmake with the options below to build the runner:
+
+    ```bash
     cmake -DPYTHON_EXECUTABLE=python \
         -DCMAKE_INSTALL_PREFIX=cmake-out \
         -DCMAKE_BUILD_TYPE=Release \
