@@ -2,7 +2,7 @@
 # User change
 title: "Implement Lambda Function"
 
-weight: 4
+weight: 5
 
 layout: "learningpathall"
 ---
@@ -10,18 +10,22 @@ layout: "learningpathall"
 You will now implement the Lambda function to send an email notification whenever the received temperature exceeds a predefined threshold. 
 
 ## Amazon Simple Notification Service
-To send emails, you will use Amazon Simple Notification Service (SNS). SNS is a fully managed messaging service provided by AWS that enables you to decouple and scale microservices, distributed systems, and serverless applications. SNS supports the delivery of messages to a variety of endpoints, allowing for seamless communication between different parts of an application or across multiple applications.
+To send emails, you will use Amazon Simple Notification Service (SNS). 
 
-SNS uses a publish/subscribe (pub/sub) messaging model, where messages are sent to a topic and then delivered to all subscribers of that topic. This makes it easy to broadcast messages to multiple recipients simultaneously.
+SNS is a fully-managed messaging service provided by AWS that enables you to decouple and scale microservices, distributed systems, and serverless applications. SNS supports the delivery of messages to a variety of endpoints, allowing for seamless communication between different parts of an application or across multiple applications.
 
-To send emails using SNS, you will first create a topic. Topics are communication channels to which messages are sent. You create a topic for each category of messages you want to send.
+SNS uses a publish/subscribe (pub/sub) messaging model, where messages are sent to a topic and then distibuted to all the subscribers of the topic. This makes it easy to broadcast messages to multiple recipients simultaneously.
 
-To receive a notification, you will need to subscribe to a topic. Subscribers express interest in receiving messages published to a topic by subscribing to it. Each subscriber specifies an endpoint and a protocol (e.g., email, SMS, HTTP).
+To send emails using SNS, you first create a topic. Topics are communication channels to which messages are sent. You create a topic for each category of message that you would like to send.
 
-To actually send an email, you will publish a message in SNS. When a message is published to a topic, SNS delivers it to all subscribed endpoints. The message can include attributes and filtering criteria to control which subscribers receive the message.
+To receive a notification, you need to subscribe to a topic. Subscribers express interest in receiving messages published to a topic by subscribing. Each subscriber specifies an endpoint and a protocol; for example, email, SMS, or HTTP.
+
+To send an email, you will publish a message in SNS. When a message is published to a topic, SNS delivers it to all subscribed endpoints. The message can include attributes and filtering criteria to determine which subscribers receive the message.
 
 ## Implementation
-To implement the above mechanism using a Lambda function, go back to the AWS Lambda console. Then, scroll down to the Code source section and paste the following code under index.mjs (the .mjs extension in AWS Lambda indicates that the file is an ECMAScript (ES) module).
+To implement the above mechanism using a Lambda function, go back to the AWS Lambda console. 
+
+Then, scroll down to the Code source section and paste the following code under index.mjs. The *.mjs* extension in AWS Lambda indicates that the file is an ECMAScript (ES) module.
 
 ```JavaScript
 import { SNSClient, CreateTopicCommand, SubscribeCommand, PublishCommand } from "@aws-sdk/client-sns";
@@ -82,7 +86,9 @@ export const handler = async (event) => {
 };
 ```
 
-In the above code, you will first import the AWS SDK for SNS. Specifically, the following code imports the necessary classes from the AWS SDK for JavaScript (v3) for working with Amazon SNS (Simple Notification Service). Then, an instance of SNSClient is created, specifying the AWS region (eu-central-1 in this case):
+In the code above, you first import the AWS SDK for SNS. Specifically, the following code imports the necessary classes from the AWS SDK for JavaScript (v3) for working with Amazon SNS (Simple Notification Service). 
+
+Then, an instance of SNSClient is created, specifying the AWS region (eu-central-1 in this case):
 
 ```JavaScript
 import { SNSClient, CreateTopicCommand, SubscribeCommand, PublishCommand } from "@aws-sdk/client-sns";
@@ -90,7 +96,9 @@ import { SNSClient, CreateTopicCommand, SubscribeCommand, PublishCommand } from 
 const snsClient = new SNSClient({ region: "eu-central-1" }); // Update your region
 ```
 
-Next, you have the handler function, which is the entry point for the Lambda function. The handler receives an event object containing temperature data. It declares the temperature threshold, the email address for notifications, and the SNS topic name:
+Next, you have the handler function, which is the entry point for the Lambda function. The handler receives an event object containing temperature data. 
+
+It declares the temperature threshold, the email address for notifications, and the SNS topic name:
 
 ```JavaScript
 export const handler = async (event) => {
@@ -101,7 +109,9 @@ export const handler = async (event) => {
     const receivedTemperature = event.temperature;
 ```
 
-The Lambda function then creates the SNS topic using the createSnsTopic function, which is an asynchronous function that creates an SNS topic if it doesn't already exist and returns the Topic ARN (Amazon Resource Name). The ARN is the unique resource identifier within the AWS cloud.
+The Lambda function then creates the SNS topic using the createSnsTopic function, which is an asynchronous function that creates an SNS topic if it doesn't already exist, and returns the Topic ARN (Amazon Resource Name). 
+
+The ARN is the unique resource identifier within the AWS cloud.
 
 ```JavaScript
 async function subscribeEmailToTopic(topicArn) {
@@ -127,7 +137,7 @@ async function subscribeEmailToTopic(topicArn) {
 }
 ```
 
-Then, the code uses the above functions, and checks if the received temperature exceeds the predefined threshold. If the temperature exceeds the threshold, a message is published to the SNS topic, triggering an email notification. If the temperature is within safe limits, it logs that information. If any error occurs during the process, it logs the error and throws it.
+Then, the code uses the above functions, and checks if the received temperature exceeds the predefined threshold. If the temperature exceeds the threshold, a message is published to the SNS topic, triggering an email notification. If the temperature is within safe limits, it logs the information. If any error occurs during the process, it logs the error and throws it.
 
 ```JavaScript
 try {
@@ -351,6 +361,6 @@ Here, you learned how to create a Lambda function that is triggered by a message
 By following these steps, you have built a complete solution that:
 1. Processes IoT data in real-time using AWS Lambda.
 2. Sends alerts via email when specific conditions are met.
-3. Utilizes best practices for configuration management through the use of environment variables.
+3. Utilizes best practices for configuration management using environment variables.
 
 This setup can be further expanded and customized to fit various IoT applications, providing a robust foundation for building event-driven architectures with AWS services.
