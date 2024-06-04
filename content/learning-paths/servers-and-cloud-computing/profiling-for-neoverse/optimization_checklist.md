@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Optimization checklist
 
-There is no right way to profile and optimize, but the top-down data presentation gives you a systematic way to find optimization opportunities.
+There is no single way to profile and optimize, but the top-down data presentation gives you a systematic way to find optimization opportunities.
 
 Here is a suggested optimization checklist:
 
