@@ -1,20 +1,20 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Here are some further resources to help you learn more.
 
 recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Streamline CLI Tools User Guide 
+        link: https://developer.arm.com/documentation/109847/latest/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: Introducing Arm Streamline CLI tools 
+        link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: About Streamline CLI Tools
+        link: https://www.arm.com/products/development-tools/performance/streamline-cli
         type: website
 
 

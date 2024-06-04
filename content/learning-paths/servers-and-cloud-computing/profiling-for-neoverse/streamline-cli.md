@@ -57,9 +57,9 @@ Profiling with the Streamline CLI tools is a three-step process:
 
     * Optionally, to enable SPE, add the `-X workflow_spe` option. Enabling SPE significantly increases the amount of data captured and the `sl-analyze` processing time, so only use this option if you need this data.
 
-      :::Tip
-      Captures are highly customizable, with many different options that allow you to choose how to profile your application. Use the `--help` option to see the full list of options for customizing your captures.
-      :::
+    {{% notice %}}
+    Captures are highly customizable, with many different options that allow you to choose how to profile your application. Use the `--help` option to see the full list of options for customizing your captures.
+    {{% /notice %}}
 
 1. Use `sl-analyze` to process the raw profile of your application and save the analysis output as several CSV files on the filesystem.
 
@@ -91,9 +91,13 @@ Profiling with the Streamline CLI tools is a three-step process:
     * The `-o` option provides the output file path to save the XLSX file to.
     * The positional argument is the `functions-*.csv` file created by `sl-analyze`.
 
-{{% notice %}}
-Refer to [Custom Formats](https://developer.arm.com/documentation/109847/latest) in the user guide to learn how you can create and specify custom format definitions that are used to change the pretty-printed data visualization.
-{{% /notice %}}
+    Refer to the [Streamline CLI Tools user guide](https://developer.arm.com/documentation/109847/latest) to learn how you can create and specify custom format definitions that are used to change the pretty-printed data visualization.
+
+1. View your report in Excel or other compatible application. In functions reports, problem areas are indicated in red, to help you focus on the main problems.
+
+  ![An example functions report](images/v1-spe-report-full.png)
+
+  See our [example report](example.md) to learn more about how to interpret the results.
 
 ## Minimizing profiling application impact
 

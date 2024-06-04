@@ -8,21 +8,6 @@ layout: learningpathall
 
 ## Understanding performance
 
-A simple formula for understanding the performance of a software application is:
-
-Delivered performance = Utilization × Efficiency × Effectiveness
-
-_Utilization_ measures the proportion of the total processor execution capacity that is spent processing instructions. This is a measure of the hardware
-performance.
-
-_Efficiency_ measures the proportion of the used processor execution capacity that is spent processing useful instructions, and not instructions that are speculatively executed and then discarded. This is a measure of the hardware performance.
-
-_Effectiveness_ measures the implementation efficiency of the software algorithm, compared to a hypothetical optimal implementation. This is a measure of the software performance.
-
-To get the best performance you must implement an effective software algorithm, and then achieve high processor utilization and execution efficiency when running it.
-
-## Abstract CPU model
-
 The processing core of a modern Arm CPU is represented in this methodology as an abstract model consisting of 3 major phases, Frontend, Backend and Retire.
 
 ![An abstract CPU block diagram](images/abstract-cpu-pipeline.svg)
@@ -34,29 +19,22 @@ The main goal of our performance analysis methodology is to attribute unused or 
 
 ### Frontend
 
-The frontend phase represents instruction fetch, decode, and dispatch. This phase handles fetching instructions from the instruction cache, decoding those
-instructions, and adding the resulting micro-ops to the backend execution queues.
+The frontend phase represents instruction fetch, decode, and dispatch. This phase handles fetching instructions from the instruction cache, decoding those instructions, and adding the resulting micro-ops to the backend execution queues.
 
-Each CPU frontend microarchitecture exposes a fixed number of decode slots that can decode instructions into micro-ops each cycle. The main goal of the
-frontend is to keep these decode slots busy decoding instructions, unless there is back-pressure from the backend queues because the backend is unable
+Each CPU frontend microarchitecture exposes a fixed number of decode slots that can decode instructions into micro-ops each cycle. The main goal of the frontend is to keep these decode slots busy decoding instructions, unless there is back-pressure from the backend queues because the backend is unable
 to accept new micro-ops.
 
-The frontend also implements support for branch prediction and speculative execution. Predicting where program control flow goes next allows the frontend
-to keep the backend queues filled with work when execution is uncertain. However, incorrect predictions cause the cancellation of issued micro-ops on
-the wrong path, and the pipeline might take time to refill with new micro-ops.
+The frontend also implements support for branch prediction and speculative execution. Predicting where program control flow goes next allows the frontend to keep the backend queues filled with work when execution is uncertain. However, incorrect predictions cause the cancellation of issued micro-ops on the wrong path, and the pipeline might take time to refill with new micro-ops.
 
 ### Backend
 
-The backend phase represents the execution of micro-ops by the processing pipelines inside the core. There are multiple pipeline types, each of which can
-process a subset of the instruction set, and be fed by their own issue queues.
+The backend phase represents the execution of micro-ops by the processing pipelines inside the core. There are multiple pipeline types, each of which can process a subset of the instruction set, and be fed by their own issue queues.
 
-An application will have uneven loading on the backend queues. Queue load depends on the instruction mix in the part of the code that is currently
-running. When optimizing your application, try to prioritize changes that will relieve pressure on the most heavily loaded queue.
+An application will have uneven loading on the backend queues. Queue load depends on the instruction mix in the part of the code that is currently running. When optimizing your application, try to prioritize changes that will relieve pressure on the most heavily loaded queue.
 
 ### Retire
 
-The retire phase represents the resolution of micro-ops that are architecturally complete. Measuring the number of retired instructions gives a
-metric showing the amount of useful work completed by the processor.
+The retire phase represents the resolution of micro-ops that are architecturally complete. Measuring the number of retired instructions gives a metric showing the amount of useful work completed by the processor.
 
 Not all issued instructions will retire. Speculatively issued micro-ops will be cancelled if they are shown to be on the wrong code path and are therefore not required.
 

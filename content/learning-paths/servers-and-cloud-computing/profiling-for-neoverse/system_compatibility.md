@@ -8,17 +8,11 @@ layout: learningpathall
 
 ## System compatibility check
 
-Before you begin, you can use the the Arm Sysreport utility to determine
-whether your system configuration supports hardware-assisted profiling.
-
-Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
+Before you begin, you can use the the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
 
 [1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
 
-The `perf counters` entry in the generated report will indicate how many CPU counters are available. The `perf sampling` entry will indicate if SPE is available.
-
-You will achieve the best profiles in systems with at least 6 available CPU
-counters and SPE.
+The `perf counters` entry in the generated report will indicate how many CPU counters are available. The `perf sampling` entry will indicate if SPE is available. You will achieve the best profiles in systems with at least 6 available CPU counters and SPE.
 
 The Streamline CLI tools can be used in systems with no CPU counters, but can only return a basic hot-spot profile based on time-based sampling.
 No top-down methodology metrics will be available.
