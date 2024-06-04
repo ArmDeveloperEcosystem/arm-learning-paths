@@ -12,8 +12,6 @@ learning_objectives:
 prerequisites:
     - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. The following host operating systems are supported - Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, Ubuntu 20.04 or newer.
 
-    - Before you begin, you can use the the [Arm Sysreport utility](https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/) to determine whether your system configuration supports hardware-assisted profiling. The `perf counters` entry in the generated report will indicate how many CPU counters are available. The `perf sampling` entry will indicate if SPE is available. You will achieve the best profiles in systems with at least 6 available CPU counters and SPE.
-
 author_primary: Julie Gaskin
 
 ### Tags
