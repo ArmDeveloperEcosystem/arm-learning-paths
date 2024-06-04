@@ -116,7 +116,7 @@ For Llama 3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option.
 {{% /notice %}}
 
 {{% notice Note %}}
-If you are building on a mac, there is currently an (open bug)[https://github.com/pytorch/executorch/issues/3600] that adds a `--gc-sections` flag to ld options. You'll want to remove this flag for mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
+If you are building on a Mac, there is currently an [open bug](https://github.com/pytorch/executorch/issues/3600) that adds a `--gc-sections` flag to ld options. You'll want to remove this flag for Mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
 
 ```
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -125,9 +125,9 @@ endif()
 ```
 {{% /notice %}}
 
-Run cmake with the options below to build the runner:
+Run cmake:
 
-    ```bash
+``` bash
     cmake -DPYTHON_EXECUTABLE=python \
         -DCMAKE_INSTALL_PREFIX=cmake-out \
         -DCMAKE_BUILD_TYPE=Release \
