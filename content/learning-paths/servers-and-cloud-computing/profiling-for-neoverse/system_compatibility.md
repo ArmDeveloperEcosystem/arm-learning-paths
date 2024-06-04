@@ -6,6 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
+The Streamline CLI tools are native command-line tools that are designed to run directly on an Arm server running Linux. The tools provide a software profiling methodology that gives you clear and actionable performance data. You can use this data to guide the optimization of the heavily used functions in your software.
+
 ## System compatibility check
 
 Before you begin, you can use the the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
