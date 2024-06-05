@@ -8,9 +8,7 @@ layout: "learningpathall"
 
 ## Use GitHub Actions
 
-You can use GitHub Actions to build multi-architecture images with Docker Build Cloud as your builder. You can also use GitHub Actions to build Arm images. 
-
-As of March 2024, GitHub Actions do not offer Arm systems for running actions. You can use Docker Build Cloud to build Arm images and multi-architecture images. 
+You can use GitHub Actions to build multi-architecture images and automate the process with Docker Build Cloud as your builder. 
 
 ## Before you begin
 
@@ -20,7 +18,7 @@ You will need a [GitHub](https://github.com) account to try out Docker Build Clo
 
 To get started, create a new GitHub repository in your GitHub account. There are numerous tutorials on how to create a repository or refer to the [GitHub documentation](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository)
 
-## Setup secrets
+## Set up secrets
 
 To run GitHub Actions, you will need secrets for your Docker Hub username and Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. 
 
@@ -100,7 +98,7 @@ Use the `Run workflow` drop down on the right-hand side to click `Run workflow`.
 This triggers the `build.yml` file to manually start the following steps:
 - Checkout the repository
 - Log in to Docker Hub
-- Setup a builder on Docker Build Cloud
+- Set up a builder on Docker Build Cloud
 - Run the `docker buildx build` command to build an image from the `Dockerfile` and push the image to your Docker Hub account.
 
 If it succeeds, the new image will be in your Docker Hub account. 
