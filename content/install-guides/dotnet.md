@@ -107,38 +107,66 @@ You can also add the search path to your `$HOME/.bashrc` so it is set for all ne
 To check that the installation was successful, type: 
 
 ```bash 
-dotnet --list-sdsk
+dotnet --list-sdks
 ```
 
 The output is printed:
 
 ```output
-Welcome to .NET 8.0!
----------------------
-SDK Version: 8.0.104
-
-----------------
-Installed an ASP.NET Core HTTPS development certificate.
-To trust the certificate, view the instructions: https://aka.ms/dotnet-https-linux
-
-----------------
-Write your first app: https://aka.ms/dotnet-hello-world
-Find out what's new: https://aka.ms/dotnet-whats-new
-Explore documentation: https://aka.ms/dotnet-docs
-Report issues and find source on GitHub: https://github.com/dotnet/core
-Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+8.0.105 [/usr/lib/dotnet/sdk]
 ```
 
-To print just the version, run the following command:
+To print more information, run the following command:
 
 ```bash
-dotnet --version
+dotnet --info
 ```
 
-The version of your installation is printed:
+More details about your installation are printed:
 
 ```output
-8.0.104
+.NET SDK:
+ Version:           8.0.105
+ Commit:            eae90abaaf
+ Workload version:  8.0.100-manifests.796a77f8
+
+Runtime Environment:
+ OS Name:     ubuntu
+ OS Version:  24.04
+ OS Platform: Linux
+ RID:         ubuntu.24.04-arm64
+ Base Path:   /usr/lib/dotnet/sdk/8.0.105/
+
+.NET workloads installed:
+ Workload version: 8.0.100-manifests.796a77f8
+There are no installed workloads to display.
+
+Host:
+  Version:      8.0.5
+  Architecture: arm64
+  Commit:       087e15321b
+
+.NET SDKs installed:
+  8.0.105 [/usr/lib/dotnet/sdk]
+
+.NET runtimes installed:
+  Microsoft.AspNetCore.App 8.0.5 [/usr/lib/dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.5 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]
+
+Other architectures found:
+  None
+
+Environment variables:
+  Not set
+
+global.json file:
+  Not found
+
+Learn more:
+  https://aka.ms/dotnet/info
+
+Download .NET:
+  https://aka.ms/dotnet/download
 ```
 
 ## How can I run a simple example to confirm the .NET SDK is working?
