@@ -46,6 +46,8 @@ import pandas as pd
 from datasets import load_dataset
 from thirdai.demos import to_udt_input_batch
 from thirdai import bolt
+import thirdai
+thirdai.licensing.activate("KVN9-JVRJ-FAAN-4UPE-KVXT-KV4F-LMWK-CM9E")
 
 def load_data(output_filename, split, return_inference_batch=False):
     data = load_dataset('amazon_polarity')
@@ -67,11 +69,10 @@ inference_batch = load_data(test_filename, split='test', return_inference_batch=
 model = bolt.UniversalDeepTransformer(
     data_types={
         "title": bolt.types.text(),
-        "label": bolt.types.categorical()
+        "label": bolt.types.categorical(n_classes=2)
     },
     target="label",
-    n_target_classes=2,
-    delimiter='\t',
+    delimiter='\t'
 )
 
 model.train(train_filename, epochs=5, learning_rate=0.01, metrics=["categorical_accuracy"])
@@ -108,15 +109,23 @@ Copy the contents below into a file called `evaluate.py`
 
 ```python
 from thirdai import bolt
+import numpy as np
 import thirdai
 thirdai.licensing.activate("KVN9-JVRJ-FAAN-4UPE-KVXT-KV4F-LMWK-CM9E")
 
 save_location = "sentiment_analysis.model"
 model = bolt.UniversalDeepTransformer.load(save_location)
 
+test_filename = "amazon_polarity_test.csv"
 model.evaluate(test_filename, metrics=["categorical_accuracy"])
 
-print(model.predict({"title": "sample query"}))
+activations = model.predict({"title": "I love this product"})
+predicted_class = model.class_name(np.argmax(activations))
+print(predicted_class)
+
+activations = model.predict({"title": "I hate this product"})
+predicted_class = model.class_name(np.argmax(activations))
+print(predicted_class)
 ```
 
 This example does this following:
