@@ -45,11 +45,48 @@ ls bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main
 
 ## Running the inference engine on your Android device
 
+First, you will also need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
+
+Once you have enabled USB debugging and connected via USB, run
+
+```
+adb devices
+```
+
+From your local environment to ensure that the Android device is properly connected. If you get the following output (with a unique device ID in place of XXXXXXXXXXXXXX), then your device is ready:
+
+```
+List of devices attached
+XXXXXXXXXXXXXX	device
+```
+
 Push the binary to the phone using ADB:
 
 ```bash
 adb push bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main /data/local/tmp/gen_ai
 ```
+
+{{% notice Note %}}
+If you are building from a Docker container, you must first copy the inference engine executable from your docker container to your local disk. First find the container ID of your running container by running:
+
+```
+docker ps
+```
+
+And then replace `[container ID]` in this command with your running container ID:
+
+```
+docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main .
+```
+
+You can then run
+
+```
+adb push llm_inference_engine_cpu_main /data/local/tmp/gen_ai
+```
+
+To push the binary to your phone.
+{{% /notice %}}
 
 Download the Gemma 4-bit model from [Kaggle](https://www.kaggle.com/models/google/gemma/frameworks/tfLite/variations/gemma-2b-it-cpu-int4). This step cannot be done from the command line, since Google requires a sign-off on its consent form before releasing model weights.
 

@@ -164,6 +164,28 @@ Push the resulting binary to the phone:
 adb push bazel-bin/mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test /data/local/tmp/gen_ai
 ```
 
+{{% notice Note %}}
+As before, if you are building from a Docker container, you must first copy the executable from your docker container to your local disk. First find the container ID of your running container by running:
+
+```
+docker ps
+```
+
+And then replace `[container ID]` in this command with your running container ID:
+
+```
+docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_test .
+```
+
+You can then run
+
+```
+adb push llm_test /data/local/tmp/gen_ai
+```
+
+To push the binary to your phone.
+{{% /notice %}}
+
 Run the binary on the phone:
 
 ```bash

@@ -11,7 +11,7 @@ learning_objectives:
     - Improve inference efficiency with KleidiAI's int4 kernels via XNNPACK, and benchmark the results.
 
 prerequisites:
-    - You will need an x86_64 Linux machine running Ubuntu with approximately 500 MB of free space. This is the host machine you'll build the binaries on.
+    - You will need an x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can run a provided x86_64 image.
     - You will need an Android phone with support for i8mm (tested on Pixel 8 Pro)
 
 author_primary: Pareena Verma, Joe Stech
