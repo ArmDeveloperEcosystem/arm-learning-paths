@@ -1,19 +1,18 @@
 ---
-title: Build multi-architecture container images with Docker Build Cloud
+title: Build container images with GitHub Arm-hosted runners
 
 draft: false 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to use Docker Build Cloud.
+who_is_this_for: This is an introductory topic for software developers who want to learn how to use Arm-hosted runners for GitHub Actions jobs. 
 
 learning_objectives:
-    - Build Arm images and multi-architecture images with Docker Build Cloud
+    - Build Arm images and multi-architecture images with Arm-hosted runners
     - Use GitHub Actions to automate image builds
 
 prerequisites:
-    - A computer with Docker installed. This can be Windows, macOS, or Linux. Any architecture can be used. 
-    - A GitHub account
+    - A GitHub account with a Team or Enterprise Cloud plan.
     - A Docker Hub account
 
 author_primary: Jason Andrews
@@ -26,6 +25,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
+    - GitHub
     - Docker
 
 ### Cross-platform metadata only
