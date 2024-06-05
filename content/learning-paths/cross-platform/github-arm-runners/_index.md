@@ -1,5 +1,5 @@
 ---
-title: Build container images with GitHub Arm-hosted runners
+title: Build multi-architecture container images with GitHub Arm-hosted runners
 
 draft: false 
 
