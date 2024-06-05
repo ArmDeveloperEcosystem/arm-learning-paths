@@ -40,12 +40,12 @@ Arm-hosted runners are created at the organization level.
 
 Navigate to your organization and select the `Settings` tab. On the left pane, select `Actions->Runners`.
 
-On the `Runners` page, select the `New runner` dropdown on the top right, and then select `New GitHub-hosted runner`.
+On the `Runners` page, select the `New runner` drop-down on the top right, and then select `New GitHub-hosted runner`.
 
 ![new-runner #center](_images/new-runner.png)
 
 
-Specify a name for the runner, this is the `runs-on` field in your workflows so make the name clear for others who will use it.
+Specify a name for the runner, this is the `runs-on` field in your workflows so make the name clear for others who use it.
 
 Choose Linux ARM64 for the platform and click `Save`.
 
@@ -61,7 +61,7 @@ Select the size of the runner, choose the 2-core option for this Learning Path, 
 
 The `Capacity` section includes the maximum concurrency, which is the number of jobs to run at the same time. Specify at least two for this Learning Path.
 
-You can also set the runner group for this runner. The runner group will control the settings for this runner. Pay attention to the runner group as you may need to return to the runner group settings if any configuration changes are needed.
+You can also set the runner group for this runner. The runner group controls the settings for this runner. Pay attention to the runner group as you may need to return to the runner group settings if any configuration changes are needed.
 
 ![capacity #center](_images/capacity.png)
 
