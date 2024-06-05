@@ -54,7 +54,7 @@ If you already have a text editor installed go to the next step.
 
 3. Clone the project repository
 
-Clone your fork of the repository to your local machine (substitute your github account name in the command below). You can copy the path by visiting your fork in GitHub and clicking the Code button.
+Clone your fork of the repository to your local machine (substitute `<your-github-account-name>` in the command below). You can copy the path by visiting your fork in GitHub and clicking the Code button.
 
 ```bash
 git clone https://github.com/<your-github-account-name>/arm-learning-paths
@@ -194,12 +194,12 @@ pagefind --site "public" --output-subdir ../static/pagefind
 
 If you have `pagefind` installed on your computer, or if your computer is supported by one of the `pagefind` in the `bin/` directory, then you can run the `hugo-server.sh` script, located at the top of the repository, to create the search index and start the server. If no suitable `pagefind` is available for your computer, the server will still be launched, but without the search index.
 
-| Pagefind executable                        | OS                      |
-| ------------------------------------------ | ------------------------|
-| `bin/pagefind`                             | Linux   (x86)           |
-| `bin/pagefind.aarch64`                     | Linux   (aarch64)       |
-| `bin/pagefind.arm64`                       | macOS   (Apple Silicon) |
-| `bin/pagefind.exe`                         | Windows (x86)           |
+| Pagefind executable    | OS                      |
+| ---------------------- | ----------------------- |
+| `bin/pagefind`         | Linux   (x86)           |
+| `bin/pagefind.aarch64` | Linux   (aarch64)       |
+| `bin/pagefind.arm64`   | macOS   (Apple Silicon) |
+| `bin/pagefind.exe`     | Windows (x86)           |
 
 
 For example, if you are working on Arm Linux you generate the search index using: 
