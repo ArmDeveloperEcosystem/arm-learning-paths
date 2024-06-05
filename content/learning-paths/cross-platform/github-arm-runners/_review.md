@@ -15,8 +15,8 @@ review:
         question: >
             Which solution provides higher performance for building containers?
         answers:
-            - "QEMU virtualization"
-            - "Arm-hosted runners"
+            - "QEMU virtualization."
+            - "Arm-hosted runners."
         correct_answer: 2                 
         explanation: >
             Arm-hosted runners are faster than QEMU because there is no instruction translation. QEMU may be suitable for very small builds but is too slow for large projects. 
@@ -25,9 +25,9 @@ review:
         question: >
             What is the benefit of Arm-hosted runners compared to self-hosted runners?
         answers:
-            - "Self-hosted runners are slower than the Arm-hosted runners provided by GitHub"
-            - "Arm-hosted runners don't require you to manage servers"
-            - "GitHub provided Arm-hosted runners are free and self-hosted runners are not"
+            - "Self-hosted runners are slower than the Arm-hosted runners that GitHub provides."
+            - "Arm-hosted runners don't require you to manage servers."
+            - "GitHub-provided Arm-hosted runners are free, and self-hosted runners are not."
         correct_answer: 2                  
         explanation: >
             Arm-hosted runners are managed by GitHub so you don't need to manage hardware yourself. The cost and performance of self-hosted runners depends on the hardware you choose to use for a self-hosted runner.
