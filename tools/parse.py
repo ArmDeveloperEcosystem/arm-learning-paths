@@ -1,8 +1,6 @@
 #/usr/bin/env python3
 
-import argparse
 import logging
-import subprocess
 import json
 import yaml
 import os
@@ -164,7 +162,9 @@ def save(article, cmd, learningpath=False, img=None):
     for i_idx,i  in enumerate(cmd):
         l = list(filter(None, i.split("\n")))
         # if fvp type, check for arguments
-        if "fvp" in l[0]:
+        if not l:
+            continue
+        elif "fvp" in l[0]:
             content[i_idx] = {"type": "fvp"}
             # check if current directory is specified
             if "cwd" in l[0]:
