@@ -26,8 +26,8 @@ Lambda supports a variety of programming languages, including:
 * C#.
 * Go.
 
-This gives developers flexibility in their choice of technology stack. It is cost-effective - you are only billed for the compute time your code consumes, measured in milliseconds, rather than for idle server time.
+This gives developers flexibility in their choice of technology stack. It is cost-effective as you are only billed for the compute time your code consumes, measured in milliseconds, rather than for idle server time.
 
 By leveraging AWS Lambda, developers can focus on other tasks without being concerned about the infrastructure. This makes it an ideal solution for building microservices, automating operational tasks, and creating backend services for web and mobile applications. 
 
-Additionally, AWS Lambda can be seamlessly integrated with AWS IoT Core through the Rules Engine, enabling you to process and respond to data from IoT devices in real-time, enhancing the capabilities of IoT applications.
+Additionally, AWS Lambda can be seamlessly integrated with AWS IoT Core through the Rules Engine, enabling you to process and respond to data from IoT devices in real time, enhancing the capabilities of IoT applications.
