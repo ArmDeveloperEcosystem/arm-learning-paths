@@ -6,6 +6,14 @@ weight: 3
 layout: learningpathall
 ---
 
+## Root or not root
+Process Watch can be ran by a non-root user, however to do so requires root to modify your system to be non-standard and less secure. It is recommended that Process Watch is instead ran by root.
+
+To enable non-root users to run Process Watch. You'll need to run the following as root
+* setcap CAP_PERFMON,CAP_BPF=+ep ./processwatch
+* sysctl -w kernel.perf_event_paranoid=-1
+* sysctl kernel.unprivileged_bpf_disabled=0 (this is only needed on later Ubuntu versions from 21.10 onwards)
+
 ## Running Process Watch
 The Process Watch tool accepts a number of CLI arguments; These can be seen by running
 ```output

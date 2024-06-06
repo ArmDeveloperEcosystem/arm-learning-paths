@@ -47,12 +47,12 @@ For the Arm build, Process Watch is dependent on two submodules. These are
 * Capstone - For instruction decoding, this is dependent on LLVM
 
 ## Building Process Watch
-The code comes with a build.sh shell script. For building Process Watch on arm, you need to run the script like so
+The code comes with a build.sh shell script. For building Process Watch you need to run the script like so
 ```console
-./build -b -a
+./build -b
 ```
 
-This ensures the dependencies are built first and we're building for the Arm architecture. You should see the following output
+This ensures the dependencies are built first. You should see the following output
 ```bash
 Compiling dependencies...
   No system bpftool found! Compiling libbpf and bpftool...
