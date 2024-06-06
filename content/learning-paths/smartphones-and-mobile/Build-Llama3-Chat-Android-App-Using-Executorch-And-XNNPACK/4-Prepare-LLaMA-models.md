@@ -8,19 +8,19 @@ layout: learningpathall
 
 ## Download and export the Llama 3 8B model
 
-There are multiple model options available to use with executorch. Here we'll be focusing on llama 3 8B, but you can select the model that works best for you.
+There are multiple model options available to use with ExecuTorch. Here you will focus on Llama 3 8B, but you can select the model that works best for you.
 
 1. Download the Llama 3 pretrained parameters from [Meta's official llama3 repository](https://github.com/meta-llama/llama3/).
 
-2. Clone the Llama 3 Git repository
+2. Clone the Llama 3 Git repository:
 
     ```bash
     git clone https://github.com/meta-llama/llama3.git
      ```
 
-3. Navigate to [llama-downloads](https://llama.meta.com/llama-downloads/), enter your e-mail address and accept the license to receive the URL for Llama 3 model downloads.
+3. Navigate to [llama-downloads](https://llama.meta.com/llama-downloads/), enter your email address and accept the license to receive the URL for Llama 3 model downloads.
 
-4. Download required models
+4. Download required models:
 
     ```bash
     cd llama3
@@ -28,7 +28,7 @@ There are multiple model options available to use with executorch. Here we'll be
     # Enter the URL and desired model
     ```
 
-5. Export model and generate `.pte` file
+5. Export model and generate `.pte` file:
 
     Run the Python command to export the model:
 

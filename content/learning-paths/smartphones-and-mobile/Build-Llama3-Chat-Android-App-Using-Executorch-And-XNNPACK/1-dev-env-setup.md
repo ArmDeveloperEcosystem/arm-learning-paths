@@ -69,13 +69,13 @@ Downloads are available for macOS as well as Linux.
 
 ## Install Git
 
-For macOS use [Homebrew](https://brew.sh/)
+For macOS use [Homebrew](https://brew.sh/):
   
 ``` bash
 brew install git
 ```
 
-For Linux use the package manager for your distribution:
+For Linux, use the package manager for your distribution:
   
 ``` bash
 sudo apt install git-all
