@@ -1,6 +1,5 @@
 #/usr/bin/env python3
 
-import argparse
 import logging
 import os
 import subprocess
@@ -157,6 +156,8 @@ def check(json_file, start, stop):
     # Run bash commands
     print(data["ntests"])
     for i in range(0, data["ntests"]):
+        if not data.get("{}".format(i)):
+            continue
         print(i)
         t = data["{}".format(i)]
         print(t)
@@ -194,14 +195,15 @@ def check(json_file, start, stop):
             c = "cd " + t["cwd"]
             logging.debug("Copying command to file {}: {}".format(fn, c))
             f.write("{}\n".format(c))
-        for j in range(0, t["ncmd"]):
-            if "expected" in t.keys():
-                # Do not run output commands
-                if j == int(t["expected"])-1:
-                    break
-            c = t["{}".format(j)]
-            logging.debug("Copying command to file {}: {}".format(fn, c))
-            f.write("{}\n".format(c))
+        if t.get("ncmd"):
+            for j in range(0, t["ncmd"]):
+                if "expected" in t.keys():
+                    # Do not run output commands
+                    if j == (int(eval(t["expected"]))-1):
+                        break
+                c = t["{}".format(j)]
+                logging.debug("Copying command to file {}: {}".format(fn, c))
+                f.write("{}\n".format(c))
         f.close()
 
         # Check if a target is specified
@@ -247,14 +249,16 @@ def check(json_file, start, stop):
                 if p.returncode == ret_code:
                     # check with expected result if any
                     if "expected" in t.keys():
-                        exp = t["{}".format(int(t["expected"])-1)]
-                        # strip out '\n' and decode byte to string
-                        if exp == p.stdout.rstrip().decode("utf-8"):
-                            msg = "Test passed"
-                        else:
-                            msg = "ERROR (unexpected output. Expected {} but got {})".format(exp, p.stdout.rstrip().decode("utf-8"))
-                            test_cases[k][-1].add_failure_info(msg)
-                            results[data["image"][k]] = results[data["image"][k]]+1
+                        t_expected = t.get("{}".format(int(eval(t["expected"]))-1))
+                        if t_expected:
+                            exp = t[t_expected]
+                            # strip out '\n' and decode byte to string
+                            if exp == p.stdout.rstrip().decode("utf-8"):
+                                msg = "Test passed"
+                            else:
+                                msg = "ERROR (unexpected output. Expected {} but got {})".format(exp, p.stdout.rstrip().decode("utf-8"))
+                                test_cases[k][-1].add_failure_info(msg)
+                                results[data["image"][k]] = results[data["image"][k]]+1
                     else:
                         msg = "Test passed"
                 else:

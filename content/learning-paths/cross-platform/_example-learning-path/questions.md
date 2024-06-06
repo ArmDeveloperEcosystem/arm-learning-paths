@@ -26,3 +26,7 @@ The weight values determine the page order.
 If you see multiple buttons on a single page, it means you have 2 markdown files with the same weight. 
 
 Modify the weight values to be unique and the extra buttons will disappear.
+
+### Why aren't my changes showing up under Learning Paths? 
+
+There are various reasons this can happen. One being that the top links on the page will take you to the external site. Make sure that you are still viewing the Hugo server on `localhost`.

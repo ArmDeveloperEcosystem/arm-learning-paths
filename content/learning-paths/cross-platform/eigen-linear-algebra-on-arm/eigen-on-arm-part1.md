@@ -106,7 +106,7 @@ user    0m5.362s
 sys     0m0.004s
 ```
 
-It's not as good as ASIMD but it's quite close. You have to remember that SVE optimizations in many projects are quite early and there is a reason that Eigen does not have the SVE backend enabled by default on such CPUs. You should expect the performance to improve drastically, especially when used in conjunction with existing ASIMD instructions.
+It's not as good as ASIMD but it's close. You have to remember that SVE optimizations in many projects are still early and performance will continue to improve over time. This is why Eigen does not have the SVE backend enabled by default. You should expect the performance to improve in the future, especially when used in conjunction with existing ASIMD instructions.
 
 Before you move to the next example, you can check what happens if you try a different SVE vector width, 256. Would the program crash? If you recompile the test with `SVESIZE=256` and rerun on the same 128-bit SVE system, this is the result:
 

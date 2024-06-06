@@ -79,7 +79,7 @@ sys     0m0.004s
 
 You again see that the SVE build is slower than the ASIMD.
 
-The SVE implementation is still experimental and this is expected to change.
+The SVE implementation is still experimental and performance is expected to improve in the future.
 
 ## Example 3: Vector 3D Rotation
 
@@ -176,6 +176,6 @@ user    0m5.718s
 sys     0m0.000s
 ```
 
-Interestingly, SVE performs very similarly to the other versions.
+Interestingly, SVE performs about the same as the other versions.
 
 You are now ready to build one of the high profile applications that use Eigen with SVE enabled. This application is Tensorflow!
