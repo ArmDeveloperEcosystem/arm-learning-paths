@@ -1,22 +1,22 @@
 ---
 title: Build an Android chat app with LLaMA, ExecuTorch, and XNNPACK 
-draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to build an Android chat app with LLaMA and ExecuTorch.
 
 learning_objectives: 
-    - Setup an ExecuTorch development environment
-    - Understand how ExecuTorch uses XNNPACK kernels to accelerate performance on Arm based platforms
-    - Understand how 4-bit groupwise PTQ quantization reduces model size without significantly sacrificing model accuracy
-    - Build and run various LLaMA models using ExecuTorch on your development machine
-    - Build and run an Android Chat app with different LLaMA models using ExecuTorch on an Arm based smartphone
+    - Set up an ExecuTorch development environment.
+    - Understand how ExecuTorch uses XNNPACK kernels to accelerate performance on Arm-based platforms.
+    - Understand how 4-bit groupwise PTQ quantization reduces model size without significantly sacrificing model accuracy.
+    - Build and run various LLaMA models using ExecuTorch on your development machine.
+    - Build and run an Android Chat app with different LLaMA models using ExecuTorch on an Arm-based smartphone.
     
 
 prerequisites:
-    - Apple M1/M2 development machine with Android Studio installed or a Linux machine with at least 16GB of RAM
-    - An Arm powered smartphone running Android with 16GB of RAM
-    - A USB cable to connect your smartphone to your development machine
+    - An Apple M1/M2 development machine with Android Studio installed or a Linux machine with at least 16GB of RAM.
+    - An Arm-powered smartphone running Android with 16GB of RAM.
+    - A USB cable to connect your smartphone to your development machine.
     - Android Debug Bridge (adb) installed on your device. Follow the steps in [adb](https://developer.android.com/tools/adb)  to install Android SDK Platform Tools. The adb tool is included in this package.
     - Java 17 JDK. Follow the steps in [Java 17 JDK](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) to download and install JDK for host.
     - Python 3.10.
