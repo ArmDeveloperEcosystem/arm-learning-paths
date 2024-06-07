@@ -16,7 +16,7 @@ review:
             What is Llama?
         answers:
             - A domesticated South American camelid.
-            - A propietary Large Language Model.
+            - A proprietary Large Language Model.
             - Llama is a family of large language models that uses publicly-available data for training.
         correct_answer: 3                   
         explanation: >
@@ -32,7 +32,7 @@ review:
             - No quantization.
         correct_answer: 2          
         explanation: >
-            Dynamic quantization refers to quantizating activations dynamically, such that quantization parameters for activations are calculated, from min/max range, at runtime.
+            Dynamic quantization refers to quantizing activations dynamically, such that quantization parameters for activations are calculated, from min/max range, at runtime.
 
 
 # ================================================================================
