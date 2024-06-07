@@ -1,5 +1,5 @@
 ---
-title: Understanding LLaMA models
+title: Understanding Llama models
 weight: 4
 
 ### FIXED, DO NOT MODIFY
