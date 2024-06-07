@@ -1,6 +1,5 @@
 ---
 layout: installtoolsall
-draft: true
 minutes_to_complete: 10
 author_primary: Jason Andrews
 multi_install: false
@@ -19,7 +18,7 @@ tool_install: true
 weight: 1
 ---
 
-The [.NET SDK](https://dotnet.microsoft.com/en-us/) is a free, open-source, and cross-platform development environment that provides a broad set of tools and libraries for building applications. It is used to create a variety of applications including web apps, mobile apps, desktop apps, and cloud services.
+The [.NET SDK](https://dotnet.microsoft.com/en-us/) is a free, open-source, and cross-platform development environment that provides a broad set of tools and libraries for building applications. You can use it to create a variety of applications including web apps, mobile apps, desktop apps, and cloud services.
 
 The .NET SDK is available for Linux distributions on Arm-based systems. 
 
@@ -42,8 +41,8 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 ## How do I install the .NET SDK on my Arm Linux system?
 
 There are two ways to install the .NET SDK on your computer:
-- Using the Linux package manager
-- Using the install script
+- Using the Linux package manager.
+- Using the install script.
 
 Select the one that works best for you. 
 
@@ -65,7 +64,7 @@ If the .NET SDK is not found in your package manager, you can install it using a
 
 ### How can I install .NET SDK using a script?
 
-To install the .NET SDK using a script follow the instructions below:
+To install the .NET SDK using a script, follow the instructions below:
 
 1.	Download the install script:
 
@@ -75,21 +74,21 @@ wget https://dot.net/v1/dotnet-install.sh
 
 2.	Run the script (it will install .NET SDK 8 under the folder .dotnet): 
 
-You have some options to specify the version you want to to install.
+You have some options to specify the version you want to install.
 
-To install the latest long term support (LTS) version run:
+To install the latest long term support (LTS) version, run:
 
 ```bash
 bash ./dotnet-install.sh
 ```
 
-To install the latest version run:
+To install the latest version, run:
 
 ```bash
 bash ./dotnet-install.sh --version latest
 ```
 
-To install a specific version run:
+To install a specific version, run:
 
 ```bash
 bash ./dotnet-install.sh --channel 8.0
