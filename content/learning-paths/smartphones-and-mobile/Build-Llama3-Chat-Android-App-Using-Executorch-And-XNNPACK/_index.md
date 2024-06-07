@@ -1,16 +1,16 @@
 ---
-title: Build an Android chat app with LLaMA, ExecuTorch, and XNNPACK 
+title: Build an Android chat app with Llama, ExecuTorch, and XNNPACK 
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers interested in learning how to build an Android chat app with LLaMA and ExecuTorch.
+who_is_this_for: This is an introductory topic for software developers interested in learning how to build an Android chat app with Llama and ExecuTorch.
 
 learning_objectives: 
     - Set up an ExecuTorch development environment.
     - Understand how ExecuTorch uses XNNPACK kernels to accelerate performance on Arm-based platforms.
     - Understand how 4-bit groupwise PTQ quantization reduces model size without significantly sacrificing model accuracy.
-    - Build and run various LLaMA models using ExecuTorch on your development machine.
-    - Build and run an Android Chat app with different LLaMA models using ExecuTorch on an Arm-based smartphone.
+    - Build and run various Llama models using ExecuTorch on your development machine.
+    - Build and run an Android Chat app with different Llama models using ExecuTorch on an Arm-based smartphone.
     
 
 prerequisites:
