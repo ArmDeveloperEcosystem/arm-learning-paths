@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Set up ExecuTorch
 
-ExecuTorch is an end-to-end solution for enabling on-device inference capabilities across mobile and edge devices including wearables, embedded devices and microcontrollers. It is part of the PyTorch Edge ecosystem and enables efficient deployment of PyTorch models to edge devices. You can learn more by reading the [ExecuTorch Overview](https://pytorch.org/executorch/stable/intro-overview.html)
+ExecuTorch is an end-to-end solution for enabling on-device inference capabilities across mobile and edge devices; including wearables, embedded devices, and microcontrollers. It is part of the PyTorch Edge ecosystem and enables efficient deployment of PyTorch models to edge devices. You can learn more by reading the [ExecuTorch Overview](https://pytorch.org/executorch/stable/intro-overview.html).
 
-Best practice is to generate an isolated Python environment in which to install your executorch dependencies. We provide instructions for both a Python virtual environment and a Conda virtual environment, but you only need one.
+The best practice is to generate an isolated Python environment in which to install your ExecuTorch dependencies. We provide instructions for both a Python virtual environment and a Conda virtual environment, but you only need one.
 
 ### Option 1: Create a Python virtual environment
 
@@ -34,7 +34,7 @@ conda activate executorch
 
 ### Clone ExecuTorch and install the required dependencies
 
-From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages. 
+From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages: 
 
 ``` bash
 # Clone the ExecuTorch repo from GitHub

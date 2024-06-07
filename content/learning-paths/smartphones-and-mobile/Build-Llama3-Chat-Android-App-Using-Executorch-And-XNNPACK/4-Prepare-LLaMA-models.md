@@ -8,19 +8,19 @@ layout: learningpathall
 
 ## Download and export the Llama 3 8B model
 
-There are multiple model options available to use with executorch. Here we'll be focusing on llama 3 8B, but you can select the model that works best for you.
+There are multiple model options available to use with ExecuTorch. Here you will focus on Llama 3 8B, but you can select the model that works best for you.
 
 1. Download the Llama 3 pretrained parameters from [Meta's official llama3 repository](https://github.com/meta-llama/llama3/).
 
-2. Clone the Llama 3 Git repository
+2. Clone the Llama 3 Git repository:
 
     ```bash
     git clone https://github.com/meta-llama/llama3.git
      ```
 
-3. Navigate to [llama-downloads](https://llama.meta.com/llama-downloads/), enter your e-mail address and accept the license to receive the URL for Llama 3 model downloads.
+3. Navigate to [llama-downloads](https://llama.meta.com/llama-downloads/), enter your email address and accept the license to receive the URL for Llama 3 model downloads.
 
-4. Download required models
+4. Download required models:
 
     ```bash
     cd llama3
@@ -28,7 +28,7 @@ There are multiple model options available to use with executorch. Here we'll be
     # Enter the URL and desired model
     ```
 
-5. Export model and generate `.pte` file
+5. Export model and generate `.pte` file:
 
     Run the Python command to export the model:
 
@@ -73,7 +73,7 @@ From the `executorch` root directory follow these steps:
 
 ## Optional: Evaluate Llama 3 model accuracy
 
-You can evaluate model accuracy using the same arguments from above:
+You can evaluate model accuracy using the same arguments as above:
 
 ``` bash
 python -m examples.models.llama2.eval_llama -c <consolidated.00.pth> -p <params.json> -t <tokenizer.model> -d fp32 --max_seq_len 2048 --limit 1000
@@ -116,7 +116,7 @@ For Llama 3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option.
 {{% /notice %}}
 
 {{% notice Note %}}
-If you are building on a Mac, there is currently an [open bug](https://github.com/pytorch/executorch/issues/3600) that adds a `--gc-sections` flag to ld options. You'll want to remove this flag for Mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
+If you are building on a Mac, there is currently an [open bug](https://github.com/pytorch/executorch/issues/3600) that adds a `--gc-sections` flag to ld options. You need to remove this flag for Mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
 
 ```
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
