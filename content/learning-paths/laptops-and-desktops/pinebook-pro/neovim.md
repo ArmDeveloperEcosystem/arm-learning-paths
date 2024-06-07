@@ -205,7 +205,7 @@ require("nvim-tree").setup({
 EOF
 ```
 
-Feel free to tweak any settings to your preferences. These were adapted from [Neovim configuration for beginners](https://medium.com/geekculture/neovim-configuration-for-beginners-b2116dbbde84)
+Feel free to tweak any settings to your preferences. These were adapted from [Neovim configuration for beginners](https://medium.com/geekculture/neovim-configuration-for-beginners-part-two-fb3834da91b8)
 
 4. Run the following command inside Neovim to install the plugins
 
