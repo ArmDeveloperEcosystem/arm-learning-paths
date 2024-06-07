@@ -34,7 +34,7 @@ conda activate executorch
 
 ### Clone ExecuTorch and install the required dependencies
 
-From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages. 
+From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages: 
 
 ``` bash
 # Clone the ExecuTorch repo from GitHub

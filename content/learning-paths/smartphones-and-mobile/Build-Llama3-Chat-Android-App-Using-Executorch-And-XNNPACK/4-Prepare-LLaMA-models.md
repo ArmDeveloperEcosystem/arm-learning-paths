@@ -73,7 +73,7 @@ From the `executorch` root directory follow these steps:
 
 ## Optional: Evaluate Llama 3 model accuracy
 
-You can evaluate model accuracy using the same arguments from above:
+You can evaluate model accuracy using the same arguments as above:
 
 ``` bash
 python -m examples.models.llama2.eval_llama -c <consolidated.00.pth> -p <params.json> -t <tokenizer.model> -d fp32 --max_seq_len 2048 --limit 1000
@@ -116,7 +116,7 @@ For Llama 3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option.
 {{% /notice %}}
 
 {{% notice Note %}}
-If you are building on a Mac, there is currently an [open bug](https://github.com/pytorch/executorch/issues/3600) that adds a `--gc-sections` flag to ld options. You'll want to remove this flag for Mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
+If you are building on a Mac, there is currently an [open bug](https://github.com/pytorch/executorch/issues/3600) that adds a `--gc-sections` flag to ld options. You need to remove this flag for Mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
 
 ```
 if(CMAKE_BUILD_TYPE STREQUAL "Release")

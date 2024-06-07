@@ -78,7 +78,7 @@ You should now have `llama_main` available for Android.
 
 Connect your phone to your computer using a USB cable. 
 
-You will need to enable USB debugging on your Android device. Please follow [Configure on-device developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
+You need to enable USB debugging on your Android device. You can follow [Configure on-device developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
 
 Once you have enabled USB debugging and connected via USB, run:
 
