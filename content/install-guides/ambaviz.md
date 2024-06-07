@@ -31,6 +31,8 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 [Arm AMBA Viz](https://www.arm.com/products/development-tools/embedded-and-software/amba-viz) is a tool to visualize AMBA events to accelerate SoC verification. This guide is for SoC verification and validation engineers to efficiently analyze hardware signals in their designs.
 
+A detailed overview of functionality is described in [Introduction to AMBA Viz](https://community.arm.com/arm-community-blogs/b/soc-design-and-simulation-blog/posts/introduction-to-amba-viz).
+
 ## Download installer packages
 
 AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
@@ -69,7 +71,9 @@ docs/public/assets/pdfs/ambaviz-release-note.pdf
 
 ## Set up the product license
 
-AMBA Viz is license-managed. License set up instructions are available in the [Arm License install guide](../license/).
+AMBA Viz is license-managed. A Hardware Success Kit license is necessary.
+
+License set up instructions are available in the [Arm License install guide](../license/).
 
 ## Get started
 
