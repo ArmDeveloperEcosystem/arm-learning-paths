@@ -1,15 +1,15 @@
 ---
-title: Use AWS Lambda for your IoT applications running on Arm64
-draft: true
+title: Use AWS Lambda for IoT applications running on Arm64
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an advanced topic for developers who are interested in using AWS Lambda for processing data streamed by IoT applications and devices.
 
 learning_objectives:
-   - Gain familiarity with AWS Lambda.
-   - Be able to process data from IoT devices.
-   - Learn about the serverless compute services in AWS.
-   - Learn about the notification services in AWS.
+   - Describe how to use AWS Lambda for IoT applications running on Arm64.
+   - Process data from IoT devices.
+   - Describe the serverless compute services in AWS.
+   - Describe the notification services in AWS.
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), a Lenovo Thinkpad X13s running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
