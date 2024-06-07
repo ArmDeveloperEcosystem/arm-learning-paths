@@ -25,9 +25,9 @@ weight: 1
 [Linaro Forge](https://www.linaroforge.com/) is a server and HPC development tool suite for C, C++, Fortran, and Python high performance code on Linux.
 
 Linaro Forge consists of
-* [Linaro DDT](https://www.linaroforge.com/linaroDdt/) for parallel high-performance application debugging
-* [Linaro MAP](https://www.linaroforge.com/linaroMap/) for performance profiling and optimization advice, and
-* [Linaro Performance Reports](https://www.linaroforge.com/linaroPerformanceReports/) for summarizing and characterizing both scalar and MPI application performance.
+* [Linaro DDT](https://www.linaroforge.com/linaro-ddt/) for parallel high-performance application debugging
+* [Linaro MAP](https://www.linaroforge.com/linaro-map/) for performance profiling and optimization advice, and
+* [Linaro Performance Reports](https://www.linaroforge.com/linaro-performance-reports/) for summarizing and characterizing both scalar and MPI application performance.
 
 ## Supported platforms
 
