@@ -22,7 +22,7 @@ further_reading:
         type: documentation
     - resource:
         title: Windows on Arm now supported in Python 3.11
-        link: https://www.linaro.org/blog/windows-on-arm-now-supported-in-python-3-11-release/
+        link: https://old.linaro.org/blog/windows-on-arm-now-supported-in-python-3-11-release/
         type: blog    
 
 # ================================================================================

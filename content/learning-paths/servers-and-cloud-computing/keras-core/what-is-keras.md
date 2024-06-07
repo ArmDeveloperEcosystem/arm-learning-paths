@@ -30,8 +30,6 @@ The Keras API was integrated in TensorFlow (under `tf.keras`) and Keras Core
 API compatibility was maintained. This means that if you have a model that uses
 Keras in TensorFlow, you can also use the model with PyTorch and JAX.
 
-For more information, [read this article](https://keras.io/keras_core/announcement/).
-
 ## Keras model life-cycle overview
 
 The life-cycle of a Keras model has the following steps:
@@ -127,9 +125,9 @@ The default backend is tensorflow.
 The compilation step in Keras configures the model for the training step.
 
 During the compilation step you define:
-* The optimizer: possible values are `SGD` (Gradient Descend), `Adam`, and `RMSProp`. Available optimizers: https://keras.io/keras_core/api/optimizers/
-* The loss function: possible values are `Categorical Cross-entropy` and `Mean Squared Error`. Available loss functions: https://keras.io/keras_core/api/losses/
-* The metrics to guide training: possible values are `Accuracy` and `Crossentropy`. Available metrics: https://keras.io/keras_core/api/metrics/
+* The optimizer: possible values are `SGD` (Gradient Descend), `Adam`, and `RMSProp`. Available optimizers: https://keras.io/api/optimizers/
+* The loss function: possible values are `Categorical Cross-entropy` and `Mean Squared Error`. Available loss functions: https://keras.io/api/losses/
+* The metrics to guide training: possible values are `Accuracy` and `Crossentropy`. Available metrics: https://keras.io/api/metrics/
 
 Below is an example of compiling a model:
 
@@ -151,7 +149,7 @@ A dataset consists of data needed for training, evaluation, and testing of the m
 {{% notice Note %}}
 Datasets are very specific to a model or an application. You need to have full
 knowledge of the model input layout as it needs to be compatible with the
-dataset structure. Keras provides some common datasets for experimentation, e.g., MNIST, CIFAR10, CIFAR100, and IMDB. The full list of datasets provided by Keras is available here - https://keras.io/keras_core/api/datasets/ 
+dataset structure. Keras provides some common datasets for experimentation, e.g., MNIST, CIFAR10, CIFAR100, and IMDB. The full list of datasets provided by Keras is available here - https://keras.io/api/datasets/ 
 {{% /notice %}}
 
 As part of the Machine Learning development workflow, it is common to partition the dataset

@@ -7,7 +7,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-You can install Arch Linux on the [Pinebook Pro laptop](https://www.pine64.org/pinebook-pro/) and use it for Linux development on Arm. 
+You can install Arch Linux on the [Pinebook Pro laptop](https://pine64.org/devices/pinebook_pro/) and use it for Linux development on Arm. 
 
 ## What should I consider before installing Arch Linux?
 
