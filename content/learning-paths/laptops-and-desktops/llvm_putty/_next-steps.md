@@ -19,11 +19,11 @@ recommended_path: "/learning-paths/laptops-and-desktops/wsl2"
 further_reading:
     - resource:
         title: How to setup Windows on Arm for LLVM development
-        link: https://www.linaro.org/blog/how-to-set-up-windows-on-arm-for-llvm-development/
+        link: https://old.linaro.org/blog/how-to-set-up-windows-on-arm-for-llvm-development/
         type: blog
     - resource:
         title: LLVM - Windows on Arm
-        link: https://www.linaro.org/windows-on-arm/llvm/
+        link: https://linaro.atlassian.net/wiki/spaces/LLVM/overview/
         type: website
 
 # ================================================================================

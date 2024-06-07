@@ -17,10 +17,10 @@ review:
         answers:
             - "A part of the AWS IoT Core to process and route data between IoT devices and other AWS services."
             - "A software design architecture."
-            - "A serverless compute service provided by AWS"            
+            - "A serverless compute service provided by AWS."            
         correct_answer: 3              
         explanation: >
-             AWS Lambda is a serverless compute service provided by AWSthat allows you to run code without provisioning or managing servers
+             AWS Lambda is a serverless compute service that AWS provides that allows you to run code without provisioning or managing servers.
 
     - questions:
         question: >
@@ -30,7 +30,7 @@ review:
             - "Yes"
         correct_answer: 1
         explanation: >
-            Amazon SNS uses a publish/subscribe (pub/sub) messaging model, and does not require you to set up the notification server. Instead, you create topics, to which you push messages. Interested subscribers read messages from those topics.
+            Amazon SNS uses a publish/subscribe (pub/sub) messaging model, and does not require you to set up the notification server. Instead, you create topics, to which you push messages. Interested subscribers read messages from these topics.
             
     - questions:
         question: >
@@ -43,7 +43,7 @@ review:
             - "To define permissions."            
         correct_answer: 4
         explanation: >
-            Policies are JSON documents that define permissions. They specify who can access which resources and what actions they can perform. Policies can be attached to users, groups, or roles.
+            Policies are JSON documents that define permissions. They specify who can access resources and the actions that they can perform. Policies can be attached to users, groups, or roles.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

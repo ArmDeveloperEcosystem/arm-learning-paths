@@ -4,11 +4,11 @@
 # ================================================================================
 
 next_step_guidance: >
-   Further learning regarding Trusted Firmware-M can be found at the [project website](https://www.trustedfirmware.org/projects/tf-m/). Also check out the learning path on building Corstone-1000 examples.
+    You can continue learning about different ways to create container images on Arm servers. The Learning Path covering Docker Build Cloud is a great next step.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontrollers/mlek"
-# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
+recommended_path: "/learning-paths/cross-platform/docker-build-cloud/"
+# Link to the next learning path being recommended.
 
 
 # further_reading links to references related to this path. Can be:
@@ -18,21 +18,17 @@ recommended_path: "/learning-paths/microcontrollers/mlek"
 
 further_reading:
     - resource:
-        title: Trusted Firmware-M First Long Term Support (LTS)
-        link: https://www.trustedfirmware.org/blog/tf-m-v2-1-0_lts
-        type: blog
-    - resource:
-        title: Trusted Firmware-M
-        link: https://www.trustedfirmware.org/projects/tf-m/
-        type: website
-    - resource:
-        title: TF-M documentation
-        link: https://tf-m-user-guide.trustedfirmware.org
+        title: Using GitHub-hosted runners
+        link: https://docs.github.com/en/actions/using-github-hosted-runners
         type: documentation
     - resource:
-        title: PSA Certified
-        link: https://www.psacertified.org/
-        type: website
+        title: Supercharge your CI/CD with Arm Runners in GitHub Actions
+        link: https://www.youtube.com/watch?v=vrr_OgMk458
+        type: video
+    - resource:
+        title: Arm64 on GitHub Actions Powering faster, more efficient build systems
+        link: https://github.blog/2024-06-03-arm64-on-github-actions-powering-faster-more-efficient-build-systems/
+        type: blog
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

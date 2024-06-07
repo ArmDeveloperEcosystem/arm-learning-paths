@@ -70,6 +70,6 @@ Click `Debug` to connect to the platform, and commence your debug session.
 
 Arm platforms can be very complex, with multiple heterogeneous processors, on-chip power islands, and very high-speed interfaces. The below resources may be helpful if you are experiencing issues configuring for your hardware.
 
-- [Troubleshooting DSTREAM-ST connections](https://developer.arm.com/tools-and-software/embedded/debug-probes/dstream-family/dstream-st/troubleshooting-your-dstream-st-unit)
+- [Troubleshooting DSTREAM-ST connections](https://developer.arm.com/documentation/100892/1-0/Troubleshooting/Troubleshoot-target-connections)
 - [Troubleshooting DSTREAM-PT connections](https://developer.arm.com/documentation/102637)
 - [Help with debugging and tracing targets](https://developer.arm.com/documentation/107551)

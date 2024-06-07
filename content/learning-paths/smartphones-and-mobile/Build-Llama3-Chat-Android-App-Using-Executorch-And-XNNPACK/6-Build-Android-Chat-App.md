@@ -6,16 +6,17 @@ weight: 7
 layout: learningpathall
 ---
 
-You can use the Android demo application included in ExecuTorch repository [LlamaDemo](https://github.com/pytorch/executorch/tree/main/examples/demo-apps/android/LlamaDemo) to demonstrate local inference with ExecuTorch.
-
 ## Build the JNI library
+{{% notice Note %}}
+You can use the Android demo application included in ExecuTorch repository [LlamaDemo](https://github.com/pytorch/executorch/tree/main/examples/demo-apps/android/LlamaDemo) to demonstrate local inference with ExecuTorch.
+{{% /notice %}}
 
 1. Open a terminal window and navigate to the root directory of the `executorch` repository.
 
 2. Set the following environment variables:
 
     ``` bash
-    export ANDROID_NDK=<path_to_android_ndk>
+    export ANDROID_NDK=~/Library/Android/sdk/ndk/25.0.8775105
     export ANDROID_ABI=arm64-v8a
     ```
 
@@ -23,7 +24,7 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 <path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake will use it as the tokenizer. If you run other models like LLaMA 2, skip this skip.
+3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake uses it as the tokenizer. If you run other models like LLaMA 2, skip this step.
 
     ``` bash
     export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLaMA3
@@ -47,13 +48,13 @@ Make sure the exported model and tokenizer are copied to the Android phone:
 
 ### Option 1: using adb
 
-1. Check if the files are available on the phone
+1. Check if the files are available on the phone:
 
 ``` bash
 adb shell "ls -la /data/local/tmp/llama/"
 ```
 
-2. If not, copy them
+2. If not, copy them:
 
 ``` bash
 adb shell mkdir -p /data/local/tmp/llama
@@ -63,23 +64,23 @@ adb push <tokenizer.bin> /data/local/tmp/llama/
 
 ### Option 2: Using Android Studio
 
-1. Use Android Studio's device explorer
+1. Use Android Studio's device explorer to look for the model files.
 
 ![Device Explorer](device-explorer.png "Figure 1. Android Studio Device Explorer")
 
-Use the device explorer to look for the model files.
-
-2. Upload the files
+2. Upload the files.
 
 If the files are not on the device, use the device explorer to copy them. 
 
 ![Files Upload](device-explorer-upload.png "Figure 2. Android Studio upload files using Device Explorer")
 
-## Build the APK (Android Package Kit)
+## Build the Android Package Kit
 
-### Option 1: Using Android Studio (Recommended)
+### Option 1: Using Android Studio
 
-1. Open Android Studio and select “Open an existing Android Studio project” and navigate to open `examples/demo-apps/android/LlamaDemo`
+This is the recommended option.
+
+1. Open Android Studio and select “Open an existing Android Studio project” and navigate to open `examples/demo-apps/android/LlamaDemo`.
 
 2. Run the app (^R). This builds and launches the app on the phone.
 
@@ -94,4 +95,7 @@ pushd examples/demo-apps/android/LlamaDemo
 popd
 ```
 
-//TODO : Add image of app running on Pixel 8 pro
+You should now see a running app on your phone that looks like this:
+
+![First example prompt](example-prompt-1.png)
+![Second example prompt](example-prompt-2.png)

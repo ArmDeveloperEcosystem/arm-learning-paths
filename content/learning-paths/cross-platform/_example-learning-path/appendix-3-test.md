@@ -252,7 +252,7 @@ Test results are stored in XML Junit files. One XML file is created by Learning 
 
 It is possible to visualize the results in a web browser. The XML files can be converted with [xunit-viewer](https://www.npmjs.com/package/xunit-viewer). 
 
-If not already installed, install nodejs and:
+If not already installed, install [Node.js](https://nodejs.org/en/) and run:
 
 ```
 npm i -g xunit-viewer

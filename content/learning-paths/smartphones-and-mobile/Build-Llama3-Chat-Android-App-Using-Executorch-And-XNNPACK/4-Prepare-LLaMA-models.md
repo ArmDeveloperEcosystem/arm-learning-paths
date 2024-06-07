@@ -1,38 +1,48 @@
 ---
-title: Prepare LLaMA models for ExecuTorch
+title: Prepare Llama models for ExecuTorch
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Download and Export LLaMA models
+## Download and export the Llama 3 8B model
 
-There are multiple options available to download models. Select the one that works best for you.
+There are multiple model options available to use with ExecuTorch. Here you will focus on Llama 3 8B, but you can select the model that works best for you.
 
-### Option A: download and export Llama 2 7B model
+1. Download the Llama 3 pretrained parameters from [Meta's official llama3 repository](https://github.com/meta-llama/llama3/).
 
-For Llama 2 7B, your device may require at least 32GB RAM.
+2. Clone the Llama 3 Git repository:
 
-1. Llama2 pretrained parameters can be downloaded from [Meta's official website](https://ai.meta.com/resources/models-and-libraries/llama-downloads/) or from [Hugging Face](https://huggingface.co/meta-llama/Llama-2-7b).
+    ```bash
+    git clone https://github.com/meta-llama/llama3.git
+     ```
 
-2. Edit `params.json` file. Replace `"vocab_size": -1` with `"vocab_size": 32000`. This is a short-term workaround.
+3. Navigate to [llama-downloads](https://llama.meta.com/llama-downloads/), enter your email address and accept the license to receive the URL for Llama 3 model downloads.
 
-3. Export the model and generate a `.pte` file:
+4. Download required models:
 
-    ``` bash
-    python -m examples.models.llama2.export_llama --checkpoint <checkpoint.pth> --params <params.json> -kv --use_sdpa_with_kv_cache -X -qmode 8da4w --group_size 128 -d fp32
+    ```bash
+    cd llama3
+    ./download.sh
+    # Enter the URL and desired model
     ```
 
-4. Create a `tokenizer.bin` file:
+5. Export model and generate `.pte` file:
 
-    ``` bash
-     python -m examples.models.llama2.tokenizer.tokenizer -t tokenizer.model -o tokenizer.bin
+    Run the Python command to export the model:
+
+    ```bash
+    python -m examples.models.llama2.export_llama --checkpoint <consolidated.00.pth> -p <params.json> -kv --use_sdpa_with_kv_cache -X -qmode 8da4w  --group_size 128 -d fp32 --metadata '{"get_bos_id":128000, "get_eos_id":128001}' --embedding-quantize 4,32 --output_name="llama3_kv_sdpa_xnn_qe_4_32.pte"
     ```
 
-### Option B: download and export stories110M model
+    Where `<consolidated.00.pth>` and `<params.json>` are the paths to the downloaded model files, found in llama3/Meta-Llama-3-8B by default.
 
-If you want to deploy and run a smaller model for educational purposes. 
+    Due to the larger vocabulary size of Llama 3, you should quantize the embeddings with `--embedding-quantize 4,32` to further reduce the model size.
+
+### Download and export stories110M model
+
+Follow the steps in this section, if you want to deploy and run a smaller model for educational purposes instead of the full Llama 3 8B model.
 
 From the `executorch` root directory follow these steps:
 
@@ -61,50 +71,16 @@ From the `executorch` root directory follow these steps:
     python -m examples.models.llama2.tokenizer.tokenizer -t tokenizer.model -o tokenizer.bin
     ```
 
-### Option C: download and export Llama 3 8B model
+## Optional: Evaluate Llama 3 model accuracy
 
-You can export and run the original Llama 3 8B model.
-
-1. Download Llama3 pretrained parameters from [Meta's official llama3 repository](https://github.com/meta-llama/llama3/).
-
-2. Clone the Llama 3 Git repository
-
-    ```bash
-    git clone https://github.com/meta-llama/llama3.git
-     ```
-
-3. Navigate to [llama-downloads](https://llama.meta.com/llama-downloads/), enter your e-mail address and accept the license to receive the URL for Llama 3 model downloads.
-
-4. Download required models
-
-    ```bash
-    cd llama3
-    ./download.sh
-    # Enter the URL and desired model
-    ```
-
-5. Export model and generate `.pte` file
-
-    Run the Python command to export the model:
-
-    ```bash
-    python -m examples.models.llama2.export_llama --checkpoint <consolidated.00.pth> -p <params.json> -kv --use_sdpa_with_kv_cache -X -qmode 8da4w  --group_size 128 -d fp32 --metadata '{"get_bos_id":128000, "get_eos_id":128001}' --embedding-quantize 4,32 --output_name="llama3_kv_sdpa_xnn_qe_4_32.pte"
-    ```
-
-    Due to the larger vocabulary size of Llama 3, you should quantize the embeddings with `--embedding-quantize 4,32` to further reduce the model size.
-
-## Evaluate model accuracy
-
-You can evaluate model accuracy using the same arguments from above:
+You can evaluate model accuracy using the same arguments as above:
 
 ``` bash
-python -m examples.models.llama2.eval_llama -c <checkpoint.pth> -p <params.json> -t <tokenizer.model> -d fp32 --max_seq_len <max sequence length> --limit <number of samples>
+python -m examples.models.llama2.eval_llama -c <consolidated.00.pth> -p <params.json> -t <tokenizer.model> -d fp32 --max_seq_len 2048 --limit 1000
 ```
 
-The Wikitext results generated above used: `{max_seq_len: 2048, limit: 1000}`
-
 {{% notice Warning %}}
-Model evaluation without a GPU may take a long time, especially on larger models.
+Model evaluation without a GPU will take a long time. On an M3 macbook with 18GB RAM this took 10+ hours.
 {{% /notice %}}
 
 ## Validate models on the development machine
@@ -133,9 +109,25 @@ Follow the steps below to build ExecuTorch and the Llama runner to run models.
 
     The CMake build options are available on [GitHub](https://github.com/pytorch/executorch/blob/main/CMakeLists.txt#L59).
 
-2. Build Llama runner:
+2. Build the Llama runner:
 
-    ``` bash
+{{% notice Note %}}
+For Llama 3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option.
+{{% /notice %}}
+
+{{% notice Note %}}
+If you are building on a Mac, there is currently an [open bug](https://github.com/pytorch/executorch/issues/3600) that adds a `--gc-sections` flag to ld options. You need to remove this flag for Mac by opening `examples/models/llama2/CMakeLists.txt` and removing these lines:
+
+```
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+  target_link_options(llama_main PRIVATE "LINKER:--gc-sections,-s")
+endif()
+```
+{{% /notice %}}
+
+Run cmake:
+
+``` bash
     cmake -DPYTHON_EXECUTABLE=python \
         -DCMAKE_INSTALL_PREFIX=cmake-out \
         -DCMAKE_BUILD_TYPE=Release \
@@ -147,11 +139,7 @@ Follow the steps below to build ExecuTorch and the Llama runner to run models.
         examples/models/llama2
 
     cmake --build cmake-out/examples/models/llama2 -j16 --config Release
-    ```
-
-{{% notice Note %}}
-For Llama3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option when building the Llama runner.
-{{% /notice %}}
+```
 
 3. Run the model: 
 
@@ -161,4 +149,4 @@ For Llama3, add `-DEXECUTORCH_USE_TIKTOKEN=ON` option when building the Llama ru
 
     The run options are available on [GitHub](https://github.com/pytorch/executorch/blob/main/examples/models/llama2/main.cpp#L18-L40).
 
-    For Llama3, you can pass the original `tokenizer.model` (without converting to `.bin` file).
+    For Llama 3, you can pass the original `tokenizer.model` (without converting to `.bin` file).
