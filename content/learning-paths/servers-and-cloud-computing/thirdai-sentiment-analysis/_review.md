@@ -12,13 +12,23 @@ review:
 
     - questions:
         question: >
+            ThirdAI requires a GPU for model training.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 2                  
+        explanation: >
+            ThirdAI does not require a GPU for training models.
+
+    - questions:
+        question: >
             Can you run text classification tasks with ThirdAI?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1                  
         explanation: >
-            Yes, you can run a variety of machine learning tasks with ThirdAI, including text classification.
+            You can run a variety of machine learning tasks with ThirdAI, including text classification.
 
 
 
