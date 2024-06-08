@@ -1,5 +1,5 @@
 ---
-title: Text Classification with ThirdAI on Arm Servers.
+title: Train a model for text classification 
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ![alt-text #center](thirdai_logo.png)
 
-## Background
+## What is ThirdAI?
 
 ThirdAI is a multi-purpose library that provides a high-level API to build machine learning models.
 
@@ -19,26 +19,52 @@ It provides APIs to support common machine learning problems, such as:
 - Tabular Classification 
 - Graph Classification
 
-In the following sections you will see how you can use ThirdAI's library for Text Classification tasks on your Arm servers.
+The following steps show you how to use ThirdAI's library for Text Classification tasks on your Arm servers.
 
 ## Install dependencies
 
-To start, you will need to install the ThirdAI package. 
+You need to install Python and pip to use ThirdAI. The instructions below are for Ubuntu, but other Linux distributions can be used.
+
+```bash { target="ubuntu:latest" }
+sudo apt install python3-pip python3-venv -y
+```
+
+Create a virtual environment to avoid dependency conflicts. 
+
+```bash
+python3 -m venv thirdai
+source thirdai/bin/activate
+```
+
+The prompt of your terminal now has (thirdai) as a prefix to indicate the virtual environment is active.
+
+To start, you will need to install the ThirdAI package: 
 
 ```bash
 pip3 install thirdai
 ```
 
-The full classification example script used in this learning path uses the datasets package to download the data initially. To install datasets, run the following command:
+The full classification example below uses the Hugging Face datasets package to download data. 
+
+To install datasets, run the following command:
 
 ```bash
 pip3 install datasets
 ```
 
+The data used is from the Amazon Polarity Sentiment dataset, a large-scale sentiment analysis dataset for product reviews. 
+
+In the Amazon Polarity Sentiment dataset, each review is turned into a simple binary sentiment classification task, where a positive review has a label of 1 and a negative review has a label of 0. 
+
+The dataset is called "polarity" because it focuses on binary sentiment classification, which is often referred to as "sentiment polarity". 
+
+This dataset is often used in natural language processing tasks related to sentiment analysis, where the goal is to determine the sentiment expressed in a piece of text.
 
 ## Train the model 
 
-You are now ready to download the text classification dataset and train a classification model with ThirdAI. Using a file editor of your choice, create a file called `train.py`:
+You are now ready to download the text classification dataset and train a classification model with ThirdAI. 
+
+Using a file editor of your choice, create a file called `train.py` with the contents:
 
 
 ```python
@@ -86,51 +112,50 @@ model.evaluate(test_filename, metrics=["categorical_accuracy"])
 
 ```
 
-This example does the following:
-- Downloads a sentiment classification dataset using the huggingface `datasets` library
-- Formats the data for the model to understand
-- Creates a UniversalDeepTransformer and configures it for text classification
-- Trains the model and logs training metrics
-- Saves the model to `sentiment_analysis.model` for futher deployment
+This example performs the following tasks:
+- Download a sentiment classification dataset using the Hugging Face `datasets` library
+- Format the data for the model to understand
+- Create a UniversalDeepTransformer and configure it for text classification
+- Train the model and print the training metrics
+- Save the model to `sentiment_analysis.model` for further deployment
 
-Run this script:
+To train the model run the script:
 
 ```bash
 python3 train.py
 ```
 
-You should see a progress bar which should go for 5 epochs. If so, you have successfully performed sentiment analysis on a real-world dataset with ThirdAI.
+You see a progress bar which shows 5 epochs. 
 
-## Evaluate the model
+The output is:
 
-Now that you have the model, let's see how well it performs on the test set.
+```output
+Downloading readme: 100%|████████████████████████████████████████████| 6.81k/6.81k [00:00<00:00, 25.5MB/s]
+Downloading data: 100%|████████████████████████████████████████████████| 260M/260M [00:04<00:00, 52.1MB/s]
+Downloading data: 100%|████████████████████████████████████████████████| 258M/258M [00:05<00:00, 50.1MB/s]
+Downloading data: 100%|████████████████████████████████████████████████| 255M/255M [00:04<00:00, 53.4MB/s]
+Downloading data: 100%|████████████████████████████████████████████████| 254M/254M [00:04<00:00, 58.3MB/s]
+Downloading data: 100%|████████████████████████████████████████████████| 117M/117M [00:02<00:00, 43.3MB/s]
+Generating train split: 100%|████████████████████████| 3600000/3600000 [00:10<00:00, 348213.25 examples/s]
+Generating test split: 100%|████████████████████████████| 400000/400000 [00:06<00:00, 60559.24 examples/s]
+train | epoch 0 | train_steps 1758 | train_categorical_accuracy=0.853649  | train_batches 1758 | time 11.421s
 
-Copy the contents below into a file called `evaluate.py`
+train | epoch 1 | train_steps 3516 | train_categorical_accuracy=0.909235  | train_batches 1758 | time 10.719s
 
-```python
-from thirdai import bolt
-import numpy as np
-import thirdai
-thirdai.licensing.activate("KVN9-JVRJ-FAAN-4UPE-KVXT-KV4F-LMWK-CM9E")
+train | epoch 2 | train_steps 5274 | train_categorical_accuracy=0.943465  | train_batches 1758 | time 10.626s
 
-save_location = "sentiment_analysis.model"
-model = bolt.UniversalDeepTransformer.load(save_location)
+train | epoch 3 | train_steps 7032 | train_categorical_accuracy=0.958409  | train_batches 1758 | time 10.565s
 
-test_filename = "amazon_polarity_test.csv"
-model.evaluate(test_filename, metrics=["categorical_accuracy"])
+train | epoch 4 | train_steps 8790 | train_categorical_accuracy=0.965971  | train_batches 1758 | time 10.550s
 
-activations = model.predict({"title": "I love this product"})
-predicted_class = model.class_name(np.argmax(activations))
-print(predicted_class)
+validate | epoch 0 | train_steps 8790 | val_categorical_accuracy=0.843548  | val_batches 196 | time 0.261s
 
-activations = model.predict({"title": "I hate this product"})
-predicted_class = model.class_name(np.argmax(activations))
-print(predicted_class)
 ```
 
-This example does this following:
-- Loads the trained model from the save location
-- Runs the evaluation on the test dataset and reports accuracy metrics
-- Gives an example of how to handle a prediction in areal time inference setting
+With each epoch, the model refines its understanding of the training data, leading to an increase in accuracy. This means it's getting better at making correct predictions.
 
-You have successfully trained, evaluated, and deployed a text classification model for sentiment analysis using ThirdAI. You can explore running other models and use cases just as easily. 
+To examine the training data, open the `amazon_polarity_train.csv` file. Each line contains a phrase and is followed by either a 1, signifying a positive review, or a 0, representing a negative review.
+
+The model file, named `sentiment_analysis.model`, is now ready and can be integrated into your applications.
+
+You have successfully trained a text classification models for sentiment analysis on a real-world dataset with ThirdAI.
