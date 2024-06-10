@@ -14,7 +14,7 @@ minutes_to_complete: 15
 author_primary: Jason Andrews
 
 ### Link to official documentation
-official_docs: https://docs.docker.com/engine/
+official_docs: https://docs.docker.com/desktop/
 
 weight: 4                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
