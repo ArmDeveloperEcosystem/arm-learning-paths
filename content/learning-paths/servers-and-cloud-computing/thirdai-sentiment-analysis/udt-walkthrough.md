@@ -13,11 +13,11 @@ layout: learningpathall
 ThirdAI is a multi-purpose library that provides a high-level API to build machine learning models.
 
 It provides APIs to support common machine learning problems, such as:
-- Text Classification and NLP (Natural Language Processing)
-- Search and Recommendation
-- Time-series Forecasting and Predictions
-- Tabular Classification 
-- Graph Classification
+- Text Classification and NLP (Natural Language Processing).
+- Search and Recommendation.
+- Time-series Forecasting and Predictions.
+- Tabular Classification. 
+- Graph Classification.
 
 The following steps show you how to use ThirdAI's library for Text Classification tasks on your Arm servers.
 
@@ -29,7 +29,7 @@ You need to install Python and pip to use ThirdAI. The instructions below are fo
 sudo apt install python3-pip python3-venv -y
 ```
 
-Create a virtual environment to avoid dependency conflicts. 
+Create a virtual environment to avoid dependency conflicts: 
 
 ```bash
 python3 -m venv thirdai
