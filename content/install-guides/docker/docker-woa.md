@@ -44,7 +44,10 @@ Additional models of Windows on Arm computers are expected to be available in mi
 
 ### How do I install and test Docker Desktop for Windows on Arm?
 
-Download [Docker Desktop for Windows on Arm](https://desktop.docker.com/win/main/arm64/149282/Docker%20Desktop%20Installer.exe) and run the installer.
+The current version is 4.31.0 and you can
+download [Docker Desktop for Windows on Arm](https://desktop.docker.com/win/main/arm64/153195/Docker%20Desktop%20Installer.exe) and run the installer.
+
+Check the [Docker Desktop release notes](https://docs.docker.com/desktop/release-notes/) for the latest release information.
 
 Once the installation is complete, you can test it by running `docker` in a Windows Command Prompt or PowerShell Prompt:
 
