@@ -1,5 +1,5 @@
 ---
-title: UBL Local License Server (LLS) Setup
+title: UBL Local License Server (LLS) setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author_primary: Ronan Synnott
