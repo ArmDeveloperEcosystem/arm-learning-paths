@@ -101,6 +101,25 @@ Profiling with the Streamline CLI tools is a three-step process:
 
   See our [example report](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/example) to learn more about how to interpret the results.
 
+## Capturing a system-wide profile
+
+To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A ...` application-specific option and following arguments.
+
+In systems without the kernel patches, system-wide profiles can capture the top-down metrics. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
+
+## Capturing top-down metrics without the kernel patches
+
+To capture top-down metrics in a system without the kernel patches there are three options available.
+
+To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A ...` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes
+
+To reliably capture single-threaded application profile, add the `--inherit no` option to the command line. However, in this mode metrics are only captured for the first thread in the application process and any child threads or processes are ignored.
+
+For multi-threaded applications, the tool provides an experimental option, `--inherit poll`, which uses polling to spot new child threads and inject the instrumentation. This allows metrics to be captured for a multi-threaded application, but has some limitations:
+
+* Short-lived threads may not be detected by the polling.
+* Attaching perf to new threads without inherit support requires many new file descriptors to be created per thread. This can result the application failing to open files due to the process hitting its inode limit.
+
 ## Minimizing profiling application impact
 
 The `sl-record` application requires some portion of the available processor time to capture the data and prepare it for storage. When profiling a system with a high number of CPU cores, Arm recommends that you leave a small number of cores free so that the profiler can run in parallel without impacting the application. You can achieve this in two different ways:
