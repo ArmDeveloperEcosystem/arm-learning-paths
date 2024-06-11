@@ -1,6 +1,6 @@
 ---
 title: Evaluate the model 
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -54,9 +54,9 @@ validate | epoch 0 | train_steps 8790 | val_categorical_accuracy=0.843548  | val
 ```
 
 This example performs the following tasks:
-- Load the trained model from the saved file
-- Run the evaluation on the test dataset and report accuracy metrics
-- Give an example of how to handle a prediction in a real time inference setting
+- Load the trained model from the saved file.
+- Run the evaluation on the test dataset and report accuracy metrics.
+- Give an example of how to handle a prediction in a real time inference setting.
 
 The first output line provides the accuracy results and run time for the 40,000 text strings of test data. 
 
