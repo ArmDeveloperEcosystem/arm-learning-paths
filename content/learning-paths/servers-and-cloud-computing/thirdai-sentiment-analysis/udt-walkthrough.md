@@ -1,29 +1,14 @@
 ---
 title: Train a model for text classification 
-weight: 2
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-![alt-text #center](thirdai_logo.png)
-
-## What is ThirdAI?
-
-ThirdAI is a multi-purpose library that provides a high-level API to build machine learning models.
-
-It provides APIs to support common machine learning problems, such as:
-- Text Classification and NLP (Natural Language Processing).
-- Search and Recommendation.
-- Time-series Forecasting and Predictions.
-- Tabular Classification. 
-- Graph Classification.
-
-The following steps show you how to use ThirdAI's library for Text Classification tasks on your Arm servers.
-
 ## Install dependencies
 
-You need to install Python and pip to use ThirdAI. The instructions below are for Ubuntu, but other Linux distributions can be used.
+You will need to install Python and pip to use ThirdAI. The instructions below are for Ubuntu, but you can use other Linux distributions.
 
 ```bash { target="ubuntu:latest" }
 sudo apt install python3-pip python3-venv -y
@@ -38,7 +23,7 @@ source thirdai/bin/activate
 
 The prompt of your terminal now has (thirdai) as a prefix to indicate the virtual environment is active.
 
-To start, you will need to install the ThirdAI package: 
+To start, you need to install the ThirdAI package: 
 
 ```bash
 pip3 install thirdai
@@ -60,7 +45,7 @@ The dataset is called "polarity" because it focuses on binary sentiment classifi
 
 This dataset is often used in natural language processing tasks related to sentiment analysis, where the goal is to determine the sentiment expressed in a piece of text.
 
-## Train the model 
+## Download dataset and train the model 
 
 You are now ready to download the text classification dataset and train a classification model with ThirdAI. 
 
@@ -111,14 +96,6 @@ model = bolt.UniversalDeepTransformer.load(save_location)
 model.evaluate(test_filename, metrics=["categorical_accuracy"])
 
 ```
-
-This example performs the following tasks:
-- Download a sentiment classification dataset using the Hugging Face `datasets` library
-- Format the data for the model to understand
-- Create a UniversalDeepTransformer and configure it for text classification
-- Train the model and print the training metrics
-- Save the model to `sentiment_analysis.model` for further deployment
-
 To train the model run the script:
 
 ```bash
@@ -152,7 +129,7 @@ validate | epoch 0 | train_steps 8790 | val_categorical_accuracy=0.843548  | val
 
 ```
 
-With each epoch, the model refines its understanding of the training data, leading to an increase in accuracy. This means it's getting better at making correct predictions.
+With each epoch, the model refines its understanding of the training data, leading to increased accuracy. This means it is getting better at making correct predictions.
 
 To examine the training data, open the `amazon_polarity_train.csv` file. Each line contains a phrase and is followed by either a 1, signifying a positive review, or a 0, representing a negative review.
 
