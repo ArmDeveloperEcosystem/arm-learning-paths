@@ -16,7 +16,7 @@ Content that deviates significantly from these guidelines will need to be revise
 
 Voice or tone describes the way something is expressed. This is different from describing the facts that you are writing about. The same idea can be described in a variety of voices, for example, formal or informal. 
 
-Learning Paths should be written in a clear, simple, and informal voice. You should write in a voice that anticipates the needs of your reader and is not pedantic or formal. However, do not write like you are speaking, because that is too informal.  
+Learning Paths should be written in a clear, simple, and informal voice. You should write in a voice that anticipates the needs of your reader and is not pedantic or formal. However, do not write in a verbal style, as that is too informal.  
 
 If you write in a clear, simple, and informal voice, your content will be easy to understand.
 
