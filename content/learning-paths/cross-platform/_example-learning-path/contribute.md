@@ -75,11 +75,11 @@ If there are large factual or reproducibility errors in your contribution, we wi
 
 ## Updating Learning Paths
 
-Learning Paths should be always up to date and high quality. Over time software may change and instructions may be out of date.
+Learning Paths should be always up to date and high quality. Over time software may change and instructions may become outdated.
 
-Learning Path content is automatically monitored for out of date material. We may contact you to confirm a Learning Path is still up to date or to request some modifications to a Learning Path that has become out of date. 
+Learning Path content is automatically monitored for out of date material. We may contact you to confirm a Learning Path is still current, or requires revision. 
 
-Community members may also submit feedback on Learning Paths so we appreciate any help on keeping content current.
+Community members can also submit feedback on Learning Paths and highlight information that has become outdated. We appreciate feedback.
 
 Keep an eye out for requests and please respond as needed.
 
