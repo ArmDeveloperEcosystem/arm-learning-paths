@@ -24,7 +24,7 @@ sudo apt-get install libelf-dev cmake clang llvm llvm-dev
 ## Cloning Process Watch
 To clone Process Watch run the following:
 ```console
-git clone --recursive https://github.com/grahamwoodward/processwatch
+git clone --recursive https://github.com/intel/processwatch.git
 ```
 
 Note that the --recursive option will ensure all submodules are also cloned. If you've already cloned without --recursive, change into the top-level directory of the repository and issue:
