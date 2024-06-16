@@ -34,3 +34,5 @@ The learning path is divided into three major how-to sections:
 1. Creating and configuring the project to use OpenCV.
 2. Extending the project to access the device’s camera and retrieve camera frames with OpenCV.
 3. Processing camera images using OpenCV.
+
+You can find the companion code [here](https://github.com/dawidborycki/Arm64OpenCVCamera.git)

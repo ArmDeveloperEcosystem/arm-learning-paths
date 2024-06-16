@@ -40,7 +40,7 @@ The project will be ready in a few moments, and Android Studio should look as sh
 To add OpenCV for arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
 
 ```JSON
-implementation("org.opencv:opencv:4.9.0")
+implementation("org.opencv:opencv:4.10.0")
 ```
 
 Then, click the **Sync Now** link in the top pane that appears:

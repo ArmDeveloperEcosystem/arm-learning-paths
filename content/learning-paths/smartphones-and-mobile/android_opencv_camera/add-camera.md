@@ -373,29 +373,22 @@ After re-launching the application and pressing the Start button you will see th
 ![img10](Figures/10.png)
 
 ## Display images
-To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. Along the way, we will declare Mat objects to store the image from the camera. Additionally, we will need to rotate the camera frame before display. When using OpenCV with the Android camera, the camera image might appear rotated due to differences in the coordinate systems used by the camera sensor and the display. This discrepancy arises because:
-1. Camera Sensor Orientation: The physical orientation of the camera sensor may differ from the orientation of the display.
-2. Device Orientation: The device’s orientation (portrait or landscape) affects how the image should be displayed.
-3. Camera API: The Android camera API may not automatically handle the orientation differences between the sensor and the display.
-
-To handle this rotation, you need to detect the current orientation and apply the necessary transformations to the camera frames.
+To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. Along the way, we will declare Mat objects to store the image from the camera. 
 
 Follow these steps (all changes to be made in the MainActivity.kt):
-1. Declare the Mat objects:
+1. Declare the Mat object:
 
 ```java
 private lateinit var inputMat: Mat
-private lateinit var rotatedMat: Mat
 ```
 
-2. Initialize the above members within the onCameraViewStarted method:
+2. Initialize the above member within the onCameraViewStarted method:
 
 ```java
 override fun onCameraViewStarted(width: Int, height: Int) {
     isPreviewActive = true
 
-    inputMat = Mat(height, width, CvType.CV_8UC4)
-    rotatedMat = Mat(height, width, CvType.CV_8UC4)
+    inputMat = Mat(height, width, CvType.CV_8UC4)    
 
     updateControls()
 }
@@ -407,8 +400,7 @@ override fun onCameraViewStarted(width: Int, height: Int) {
 override fun onCameraViewStopped() {
     isPreviewActive = false
 
-    inputMat.release()
-    rotatedMat.release()
+    inputMat.release()    
 
     updateControls()
 }
@@ -420,19 +412,8 @@ override fun onCameraViewStopped() {
 override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?): Mat {
     inputFrame!!.rgba().copyTo(inputMat)
 
-    // Get the current rotation of the display
-    val displayRotation = (getSystemService(WINDOW_SERVICE) as WindowManager).defaultDisplay.rotation
-
-    // Rotate the frame based on the display rotation
-    when (displayRotation) {
-        Surface.ROTATION_0 -> Core.rotate(inputMat, rotatedMat, Core.ROTATE_90_CLOCKWISE)
-        Surface.ROTATION_90 -> inputMat.copyTo(rotatedMat)
-        Surface.ROTATION_180 -> Core.rotate(inputMat, rotatedMat, Core.ROTATE_90_COUNTERCLOCKWISE)
-        Surface.ROTATION_270 -> Core.rotate(inputMat, rotatedMat, Core.ROTATE_180)
-    }
-
-    val bitmapToDisplay = Bitmap.createBitmap(rotatedMat.cols(), rotatedMat.rows(), Bitmap.Config.ARGB_8888)
-    Utils.matToBitmap(rotatedMat, bitmapToDisplay)
+    val bitmapToDisplay = Bitmap.createBitmap(inputMat.cols(), inputMat.rows(), Bitmap.Config.ARGB_8888)
+    Utils.matToBitmap(inputMat, bitmapToDisplay)
 
     // Display it on UI Thread
     runOnUiThread {
@@ -442,8 +423,6 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
     return inputMat
 }
 ```
-
-This code adjusts the rotation of the camera frames based on the device’s current display rotation. This ensures that the camera preview appears correctly oriented on the screen.
 
 To test the code, you will need to run the application on an actual device. Follow [these steps](https://developer.android.com/studio/run/device).
 
@@ -466,8 +445,7 @@ private lateinit var processedMat: Mat
 override fun onCameraViewStarted(width: Int, height: Int) {
     isPreviewActive = true
 
-    inputMat = Mat(height, width, CvType.CV_8UC4)
-    rotatedMat = Mat(height, width, CvType.CV_8UC4)
+    inputMat = Mat(height, width, CvType.CV_8UC4)    
     processedMat = Mat(height, width, CvType.CV_8UC1)
 
     updateControls()
@@ -476,8 +454,7 @@ override fun onCameraViewStarted(width: Int, height: Int) {
 override fun onCameraViewStopped() {
     isPreviewActive = false
 
-    inputMat.release()
-    rotatedMat.release()
+    inputMat.release()    
     processedMat.release()
 
     updateControls()
@@ -490,20 +467,9 @@ override fun onCameraViewStopped() {
 override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?): Mat {
     inputFrame!!.rgba().copyTo(inputMat)
 
-    // Get the current rotation of the display
-    val displayRotation = (getSystemService(WINDOW_SERVICE) as WindowManager).defaultDisplay.rotation
-
-    // Rotate the frame based on the display rotation
-    when (displayRotation) {
-        Surface.ROTATION_0 -> Core.rotate(inputMat, rotatedMat, Core.ROTATE_90_CLOCKWISE)
-        Surface.ROTATION_90 -> inputMat.copyTo(rotatedMat)
-        Surface.ROTATION_180 -> Core.rotate(inputMat, rotatedMat, Core.ROTATE_90_COUNTERCLOCKWISE)
-        Surface.ROTATION_270 -> Core.rotate(inputMat, rotatedMat, Core.ROTATE_180)
-    }
-
-    var matToDisplay = rotatedMat
+    var matToDisplay = inputMat
     if(checkBoxProcessing.isChecked) {
-        Imgproc.cvtColor(rotatedMat, processedMat, Imgproc.COLOR_RGBA2GRAY)
+        Imgproc.cvtColor(inputMat, processedMat, Imgproc.COLOR_RGBA2GRAY)
         Imgproc.adaptiveThreshold(
             processedMat, processedMat, 255.0,
             Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
@@ -526,7 +492,7 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-The major modification we added here is the following: If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. matToDisplay is set to the processed frame if processing is enabled; otherwise, it remains as the rotated frame.
+The major modification we added here is the following: If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. matToDisplay is set to the processed frame if processing is enabled; otherwise, it remains as the input frame.
 
 To process the image, we use the Imgproc.adaptiveThreshold, which is an OpenCV function that applies adaptive thresholding to a grayscale image. Before we can apply thresholding, we convert the color image to grayscale using the Imgproc.cvtColor OpenCV function.
 
@@ -539,6 +505,6 @@ After re-running the application, starting the preview, and enabling the process
 ![img12](Figures/12.jpg)
 
 ## Summary
-In this learning path, we enhanced an Android application to capture and process camera images using OpenCV. First, we integrated the OpenCV library into our Android project. Then, we requested and handled camera permissions to ensure the app could access the device’s camera. Afterward, we set up the JavaCameraView to capture real-time frames from the camera. We declared and initialized Mat objects to store and process camera frames. Also, we detected the device’s current orientation and applied the necessary rotation to ensure the camera preview appears correctly oriented. Finally, we implemented adaptive thresholding using OpenCV’s Imgproc.adaptiveThreshold to process the camera frames when a CheckBox is checked.
+In this learning path, we enhanced an Android application to capture and process camera images using OpenCV. First, we integrated the OpenCV library into our Android project. Then, we requested and handled camera permissions to ensure the app could access the device’s camera. Afterward, we set up the JavaCameraView to capture real-time frames from the camera. We declared and initialized Mat objects to store and process camera frames. Finally, we implemented adaptive thresholding using OpenCV’s Imgproc.adaptiveThreshold to process the camera frames when a CheckBox is checked.
 
-By following these steps, we successfully created an Android application that captures real-time images from the camera, processes them using OpenCV, and displays the processed images, demonstrating both image rotation handling and adaptive thresholding.
+By following these steps, we successfully created an Android application that captures real-time images from the camera, processes them using OpenCV, and displays the processed images, demonstrating adaptive thresholding.
