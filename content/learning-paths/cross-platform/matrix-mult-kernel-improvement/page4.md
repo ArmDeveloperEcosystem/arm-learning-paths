@@ -117,7 +117,6 @@ The last step is to convert the result back into the native number format, befor
     dst_f32 += 1;
 ```
 
-
 The final result is `dst_ref_mtx_f32`, the output matrix in the native number format. This matrix is represented in 1D, and is the ultimate output of the KleidiAI micro-kernels.
 
 The above code is functionally representative of KleidiAI's matrix multiplication micro-kernels, but there are two last questions to address:
