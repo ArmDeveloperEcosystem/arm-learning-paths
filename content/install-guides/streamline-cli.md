@@ -120,56 +120,79 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
 
 1. Remove any existing `rpmbuild` directory (rename as appropriate):
 
-    `rm -fr rpmbuild`
+    ```sh
+   rm -fr rpmbuild
+    ```
 
 1. Fetch the kernel sources:
 
-    `yum download --source kernel`
-
+```sh
+yum download --source kernel
+```
 1. Install the sources binary:
 
-    `rpm -i kernel-<VERSION>.src.rpm`
+    ```sh
+   rpm -i kernel-<VERSION>.src.rpm
+    ```
 
 1. Enter the `rpmbuild` directory that is created:
-
-    `cd rpmbuild`
+    ```sh
+    cd rpmbuild
+    ```
 
 1. Copy the patch into the correct location. Replace the 9999 patch number with the next available patch number in the sequence:
-
-    `cp vX.Y-combined.patch SOURCES/9999-strobing-patch.patch`
+    ```sh
+    cp vX.Y-combined.patch SOURCES/9999-strobing-patch.patch
+    ```
 
 1. Open the specs file in your preferred editor:
 
-    `nano SPECS/kernel.spec`
+    ```sh
+   nano SPECS/kernel.spec
+    ```
 
 1. Search for the list of patches starting with `Patch0001` and append the line for the new patch to the end of the list. Replace 9999 with the patch number used earlier:
 
-    `Patch9999: 9999-strobing-patch.patch`
+    ```sh
+   Patch9999: 9999-strobing-patch.patch
+    ```
 
 1. Search for the list of patch apply steps starting with `ApplyPatch` and append the line for the new patch to the end of the list. Replace 9999 with the patch number used earlier:
 
-    `ApplyPatch 9999-strobing-patch.patch`
+    ```sh
+   ApplyPatch 9999-strobing-patch.patch
+    ```
 
 1. Save the changes and exit the editor.
 
 1. Build the kernel and other rpms:
 
-    `rpmbuild -ba SPECS/kernel.spec`
+    ```sh
+   rpmbuild -ba SPECS/kernel.spec
+    ```
 
 1. Install the built packages:
 
-    `sudo rpm -ivh --force RPMS/aarch64/*.rpm`
+    ```sh
+   sudo rpm -ivh --force RPMS/aarch64/*.rpm
+    ```
 
 1. Reboot the system:
 
-    `sudo reboot`
+    ```sh
+   sudo reboot
+    ```
 
 1. Validate that the patch applied correctly:
 
-    `ls -l /sys/bus/event_source/devices/*/format/strobe_period`
+    ```sh
+   ls -l /sys/bus/event_source/devices/*/format/strobe_period
+    ```
 
     This should list at least one CPU PMU device supporting the strobing  features, for example:
 
-    `/sys/bus/event_source/devices/armv8_pmuv3_0/format/strobe_period`.
+    ```output
+   /sys/bus/event_source/devices/armv8_pmuv3_0/format/strobe_period
+    ```
 
 You are now ready to use Streamline CLI Tools. [Refer to the learning path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/profiling-for-neoverse) to get started.
