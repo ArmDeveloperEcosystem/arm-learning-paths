@@ -136,7 +136,7 @@ You have successfully created a virtual guest in a Realm using the Arm CCA refer
 
 Attestation tokens are small reports that are produced by a device upon request. Those tokens are composed of key/value pairs called claims. A CCA attestation token is a collection of claims about the state of a Realm and the CCA platform on which the Realm is running. 
 
-Refer to [section A7.2 of the Realm Management Monitor Specification](https://developer.arm.com/documentation/den0137/latest/) to learn about the details of the CCA attestion token.
+Refer to [section A7.2 of the Realm Management Monitor Specification](https://developer.arm.com/documentation/den0137/latest/) to learn about the details of the CCA attestation token.
 
 To retrieve a CCA attestation token from the running guest, mount the `configfs` filesystem:
 ```console
