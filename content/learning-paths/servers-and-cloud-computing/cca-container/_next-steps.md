@@ -30,6 +30,10 @@ further_reading:
         title: Learn the architecture - Realm Management Extension
         link: https://developer.arm.com/documentation/den0126
         type: documentation
+    - resource:
+        title: Realm Management Monitor specification
+        link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

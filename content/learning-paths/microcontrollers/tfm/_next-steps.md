@@ -18,6 +18,10 @@ recommended_path: "/learning-paths/microcontrollers/mlek"
 
 further_reading:
     - resource:
+        title: Trusted Firmware-M First Long Term Support (LTS)
+        link: https://www.trustedfirmware.org/blog/tf-m-v2-1-0_lts
+        type: blog
+    - resource:
         title: Trusted Firmware-M
         link: https://www.trustedfirmware.org/projects/tf-m/
         type: website

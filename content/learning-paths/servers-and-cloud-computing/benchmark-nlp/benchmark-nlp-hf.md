@@ -7,20 +7,20 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this learning path are for any Arm server running Ubuntu 22.04 LTS. You will need an Arm server instance with at least 4 cores and 8GB of RAM to run this example. The instructions have been tested on AWS Graviton3 (c7g) instances.
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. For this example, you need an Arm server instance with at least four cores and 8GB of RAM. The instructions have been tested on AWS Graviton3 (c7g) instances.
 
-To start, you will need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
-PyTorch is a widely used machine learning framework for Python. You will use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
+To start, you need to install [PyTorch](/install-guides/pytorch) on your Arm machine. 
+PyTorch is a widely-used Machine Learning framework for Python. You use PyTorch to deploy Natural Language Processing (NLP) models on your Arm machine.
 
 ## Overview
 
-[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, sentiment analysis, summarization and text generation.
+[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them, and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio and computer vision. Hugging Face also has a huge collection of NLP models for tasks like translation, Sentiment Analysis, summarization, and text generation.
 
-In this learning path, you will run a sentiment analysis pipeline from Hugging Face and deploy it on your Arm based server. Sentiment analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You will then proceed to benchmark and accelerate the execution time of different NLP sentiment analysis models on your Arm machine.
+In this Learning Path, you will run a Sentiment Analysis pipeline from Hugging Face and deploy it on your Arm-based server. Sentiment Analysis is a type of NLP algorithm used to identify and classify the emotional tone of a piece of text. You will then proceed to benchmark and accelerate the execution time of different NLP Sentiment Analysis models on your Arm machine.
 
 ## Install Hugging Face Transformers library
 
-The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to build and run a sentiment analysis pipeline with different NLP models. 
+The Hugging Face Transformers library provides APIs and tools that let you easily download and fine-tune pre-trained models. Hugging Face Transformers provide a powerful tool called pipelines which greatly simplify the use of these fine-tuned pre-trained models. You will use the Hugging Face Transformer library to build and run a Sentiment Analysis pipeline with different NLP models. 
 
 To install the Transformers library, run the following command:
 
@@ -28,9 +28,9 @@ To install the Transformers library, run the following command:
 pip3 install transformers
 ```
 
-## Build and run a sentiment analyzer using Hugging Face Transformers libary 
+## Build and run a sentiment analyzer using Hugging Face Transformers library  
 
-You are now ready to use python and the Hugging Face transformers library to build a simple sentiment analyzer on your Arm machine. Using a file editor of your choice, create a file named `basic-sentiment-analysis.py` with the code shown below:
+You are now ready to use Python and the Hugging Face transformers library to build a simple sentiment analyzer on your Arm machine. Using a file editor of your choice, create a file named `basic-sentiment-analysis.py` with the code shown below:
 ```python
 import time
 import numpy as np
@@ -45,10 +45,10 @@ print(result)
 
 This example does the following:
 
-* Imports the `pipeline` tool from the transformers library
-* Loads the `sentiment-analysis` pipeline
-* Passes some input text to the pipeline 
-* Runs sentiment analysis on that input text and prints both the label and the sentiment score
+* Imports the `pipeline` tool from the transformers library.
+* Loads the `sentiment-analysis` pipeline.
+* Passes some input text to the pipeline. 
+* Runs sentiment analysis on that input text and prints both the label and the sentiment score.
 
 Run this script:
 
@@ -64,9 +64,9 @@ Using a pipeline without specifying a model name and revision in production is n
 [{'label': 'POSITIVE', 'score': 0.9997499585151672}, {'label': 'NEGATIVE', 'score': 0.9996662139892578}]
 ```
 
-You have successfully performed sentiment analysis on the two strings of input text, all running on your Arm Neoverse CPU. The sentiment classification (positive, negative) is printed along with the sentiment score. As the output indicates in this simple example, no particular model was supplied to the sentiment-analysis pipeline, so a [default DistilBERT model](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) is chosen. You can change the input text in your example and re-run the classification example.
+You have successfully performed Sentiment Analysis on the two strings of input text, all running on your Arm Neoverse CPU. The sentiment classification (positive or negative) is printed along with the sentiment score. As the output indicates in this simple example, no particular model was supplied to the sentiment-analysis pipeline, so a [default DistilBERT model](https://huggingface.co/distilbert/distilbert-base-uncased-finetuned-sst-2-english) is chosen. You can change the input text in your example and re-run the classification example.
 
-Now that you have run this simple sentiment analysis example, let's add the ability to pass a particular model to the pipeline and benchmark the model execution. Copy the contents shown below into a file named `benchmark-sentiment-analysis.py`:
+Now that you have run this simple Sentiment Analysis example, let's add the ability to pass a particular model to the pipeline and benchmark the model execution. Copy the contents shown below into a file named `benchmark-sentiment-analysis.py`:
 
 ```python
 import time
@@ -93,7 +93,7 @@ def benchmark(pipe, input, runs=1000):
 
 short_review = "I'm extremely satisfied with my new Ikea Kallax; It's an excellent storage solution for our kids. A definite must have."
 
-long_review = "We were in search of a storage solution for our kids, and their desire to personalize their storage units led us to explore various options. After careful consideration, we decided on the Ikea Kallax system. It has proven to be an ideal choice for our needs. The flexibility of the Kallax design allows for extensive customization. Whether it's choosing vibrant colors, adding inserts for specific items, or selecting different finishes, the possibilities are endless. We appreciate that it caters to our kids preferences and encourages their creativity. Overall, the boys are thrilled wit the outcome. A great value for money."
+long_review = "We were in search of a storage solution for our kids, and their desire to personalize their storage units led us to explore various options. After careful consideration, we decided on the Ikea Kallax system. It has proven to be an ideal choice for our needs. The flexibility of the Kallax design allows for extensive customization. Whether it's choosing vibrant colors, adding inserts for specific items, or selecting different finishes, the possibilities are endless. We appreciate that it caters to our kids preferences and encourages their creativity. Overall, the boys are thrilled with the outcome. A great value for money."
 
 models = ["distilbert-base-uncased"]
 for model in models:
@@ -109,9 +109,9 @@ for model in models:
 ```
 In addition to what the simple script did, this new script does the following:
 
-* Runs the [distilbert-base-uncased](https://huggingface.co/distilbert/distilbert-base-uncased) model using the sentiment-analysis pipeline
+* Runs the [distilbert-base-uncased](https://huggingface.co/distilbert/distilbert-base-uncased) model using the sentiment-analysis pipeline.
 * Passes two inputs to the model, a short review and a long review. The short review consists of 32 tokens and the long review consists of 128 tokens when tokenized with [BertTokenizer](https://huggingface.co/docs/transformers/en/model_doc/bert#transformers.BertTokenizer).
-* Measures the execution time for both the inputs as well as the batched form of the two inputs
+* Measures the execution time for both the inputs as well as the batched form of the two inputs.
 * The execution time is measured using the `benchmark` function. In this function, the pipeline is run 100 times as part of the warm-up phase to ensure consistent results. The mean and 99th percentile values are then measured for each execution run.
 
 Run the benchmarking script:
@@ -132,7 +132,7 @@ distilbert-base-uncased long sentence batched: ('655.2', '667.7')
 ```
 You should see the mean and 99th percentile execution time printed for the four cases of execution. All times are in milliseconds.  
 
-You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for bfloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels, an algorithm widely used in machine learning models, to use bfloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
+You can now run the same model and script but this time enable the use of [BFloat16 floating-point fast math kernels](/install-guides/pytorch#bfloat16-floating-point-number-format) with PyTorch and check how it impacts the performance of your model. Recent Arm CPUs like Arm Neoverse V1 and Arm Neoverse N2 include support for BFloat16 instructions. This setting enables General Matrix Multiplication (GEMM) kernels - a type of algorithm widely-used in Machine Learning models, to use BFloat16 Matrix Multiply Accumulate (MMLA) instructions when available on the CPU.
 
 Set the environment variable:
 
@@ -156,7 +156,7 @@ distilbert-base-uncased long sentence: ('43.5', '45.5')
 distilbert-base-uncased short sentence batched: ('207.6', '214.1')
 distilbert-base-uncased long sentence batched: ('349.4', '360.9')
 ```
-The execution time for all 4 cases should now be lower. By enabling bfloat16 fast math kernels you should see up to 1.9x boost in performance on your AWS Graviton3 instances. 
+The execution time for all 4 cases should now be lower. By enabling BFloat16 fast math kernels, you should see up to 1.9x boost in performance on your AWS Graviton3 instances. 
 
 You can explore running other NLP models like BERT and RoBERTa and benchmarking their performance. The only thing you will need to change in your script are the values being passed to the models list:
 
@@ -166,7 +166,7 @@ Change the line shown below in `benchmark-sentiment-analysis.py`:
 models = ["distilbert-base-uncased", "bert-base-uncased", "roberta-base"]
 ```
 
-The output from the running all three models on an AWS Graviton3 c7g.xlarge instance without enabling bfloat16 fast math kernels is shown below:
+The output from the running all three models on an AWS Graviton3 c7g.xlarge instance without enabling BFloat16 fast math kernels is shown below:
 
 ```output
 Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
@@ -189,7 +189,7 @@ roberta-base short sentence batched: ('474.8', '490.4')
 roberta-base long sentence batched: ('1309.7', '1329.4')
 ```
 
-The output from running the same three models on an AWS Graviton3 c7g.xlarge instance with bfloat16 fast math kernels support enabled is shown below:
+The output from running the same three models on an AWS Graviton3 c7g.xlarge instance with BFloat16 fast math kernels support enabled is shown below:
 
 ```output
 Some weights of DistilBertForSequenceClassification were not initialized from the model checkpoint at distilbert-base-uncased and are newly initialized: ['classifier.bias', 'classifier.weight', 'pre_classifier.bias', 'pre_classifier.weight']
@@ -211,6 +211,6 @@ roberta-base long sentence: ('85.6', '89')
 roberta-base short sentence batched: ('401.7', '410.8')
 roberta-base long sentence batched: ('691', '709.8')
 ```
-With all three models, you should see a similar boost in performance by using the bfloat16 fast math kernels.
+With all three models, you should see a similar boost in performance by using the BFloat16 fast math kernels.
 
 

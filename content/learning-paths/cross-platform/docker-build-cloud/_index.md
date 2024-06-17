@@ -14,6 +14,7 @@ learning_objectives:
 prerequisites:
     - A computer with Docker installed. This can be Windows, macOS, or Linux. Any architecture can be used. 
     - A GitHub account
+    - A Docker Hub account
 
 author_primary: Jason Andrews
 

@@ -1,7 +1,7 @@
 summary:
-  content_total: 245
-  content_with_all_tests_passing: 31
-  content_with_tests_enabled: 32
+  content_total: 261
+  content_with_all_tests_passing: 32
+  content_with_tests_enabled: 33
 sw_categories:
   cross-platform:
     dynamic-memory-allocator:
@@ -38,6 +38,10 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    dotnet:
+      readable_title: .NET SDK
+      tests_and_status:
+      - ubuntu:latest: passed
     eksctl:
       readable_title: AWS EKS CLI (eksctl)
       tests_and_status:

@@ -1,15 +1,15 @@
 ---
 # User change
-title: How to install Arch Linux?
+title: "How do I install Arch Linux?"
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-You can install Arch Linux on the [Pinebook Pro laptop](https://www.pine64.org/pinebook-pro/) and use it for Linux development on Arm. 
+You can install Arch Linux on the [Pinebook Pro laptop](https://pine64.org/devices/pinebook_pro/) and use it for Linux development on Arm. 
 
-## Before you begin
+## What should I consider before installing Arch Linux?
 
 You will need a Pinebook Pro laptop and a microSD card of at least 8GB and class 10 or faster. 
 
@@ -26,7 +26,7 @@ vimtutor
 ```
 It takes about 15-30 minutes to complete to complete the tutorial. 
 
-## How to install Arch Linux ARM on a microSD card?
+## How do I Install Arch Linux ARM on a microSD card?
 
 Install Arch Linux using the instructions on GitHub. 
 
@@ -52,7 +52,7 @@ Refer to the [Frequently asked questions](https://github.com/SvenKiljan/archlinu
 
 Continue with the steps below to create a new user and update the Arch Linux software. 
 
-## How to initially configure Arch Linux correctly?
+## How do I configure Arch Linux correctly? 
 
 1. Create a user, replace `username` with your desired user name
 

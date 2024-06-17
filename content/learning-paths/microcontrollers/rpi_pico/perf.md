@@ -1,6 +1,6 @@
 ---
 # User change
-title: How to measure RPi Pico app performance?
+title: "How do I measure RPi Pico Application Performance?"
 
 weight: 4 # 1 is first, 2 is second, etc.
 
@@ -16,7 +16,7 @@ The application below shows how to use SysTick to count cycles.
 
 The code computes the Fibonacci series in two different ways and counts the number of cycles required to make the computation.
 
-## How to build the RPi Pico app?
+## How do I build the RPi Pico application?
 
 Save the C code bellow to a file named fib.c
 
@@ -192,7 +192,7 @@ make
 
 The fib application is now ready to run.
 
-## How to run fib?
+## How do I run fib?
 
 To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plugin the USB cable between the Pico and your development computer. 
 

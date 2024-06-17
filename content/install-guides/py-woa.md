@@ -15,7 +15,7 @@ additional_search_terms:
 minutes_to_complete: 15
 
 ### Link to official documentation
-official_docs: https://www.linaro.org/windows-on-arm/python/
+official_docs: https://www.python.org/doc/
 
 author_primary: Jason Andrews
 

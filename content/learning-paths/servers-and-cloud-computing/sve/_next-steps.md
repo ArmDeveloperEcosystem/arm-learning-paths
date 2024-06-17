@@ -6,9 +6,9 @@
 next_step_guidance: >
     As a next step, you may be interested in learning how to use development tools for SVE:
 
-    - For debug tools refer to: [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) or [Linaro DDT, part of Linaro Forge](https://www.linaroforge.com/linaroDdt)
+    - For debug tools refer to: [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio) or [Linaro DDT, part of Linaro Forge](https://www.linaroforge.com/linaro-ddt)
 
-    - For profiling tools refer to: [Arm Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) or [Linaro MAP, part of Linaro Forge](https://www.linaroforge.com/linaroMap)
+    - For profiling tools refer to: [Arm Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) or [Linaro MAP, part of Linaro Forge](https://www.linaroforge.com/linaro-map)
 
 If you are interested in migrating applications to Arm servers, follow:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.

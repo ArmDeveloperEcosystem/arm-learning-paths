@@ -111,7 +111,7 @@ Called from:
     {{- $p_title := .Title -}}
     {{- range $seo_pages -}}
         {{- if eq $p_title . -}}
-            {{- $page_h2 = printf "What is covered in the %s install guide?" . -}}
+            {{- $page_h2 = printf "How do I install %s?" . -}}
         {{- end -}}
     {{- end -}}
     <h2 id="about-marker">{{$page_h2}}</h2>

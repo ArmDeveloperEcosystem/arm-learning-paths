@@ -27,7 +27,7 @@ The following error occurs when you try to migrate a project to CMSIS v6 but you
 ![Requested device not found for target](./Device_missing.png)
 
 {{% notice Resolution %}}
-Install [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.com/pack/ARM.Cortex_DFP_.1.0.0.pack) or above.
+Install [ARM.Cortex_DFP.1.0.0.pack](https://www.keil.arm.com/packs/cortex_dfp-arm) or above.
 {{% /notice %}}
 
 ### Error instantiating RTE components
@@ -37,7 +37,7 @@ The following error occurs when you try to migrate a Keil RTX-based project but 
 ![Keil RTX5 component not available for target](./CMSIS-RTX_missing.png)
 
 {{% notice Resolution %}}
-Install [ARM.CMSIS-RTX.5.8.0.pack](https://www.keil.com/pack/ARM.CMSIS-RTX.5.8.0.pack) or above.
+Install [ARM.CMSIS-RTX.5.8.0.pack](https://www.keil.arm.com/packs/cmsis-rtx-arm) or above.
 {{% /notice %}}
 
 ### Missing software components
@@ -193,7 +193,7 @@ If an exception occurs at run-time, check the "Default Processor Mode for Thread
 {{% /notice %}}
 
 {{% notice Note %}}
-Please note that you can also set the processor mode for threads individually (by setting the [osThreadPrivileged](https://arm-software.github.io/CMSIS_6/v6.0.0/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html#ga7c2b7db42d23e4f56132e0ed739d02e5) define in the [osThread_Attr_t](https://arm-software.github.io/CMSIS_6/v6.0.0/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html))
+Please note that you can also set the processor mode for threads individually, by setting the [osThreadPrivileged](https://arm-software.github.io/CMSIS_6/v6.0.0/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html#ga7c2b7db42d23e4f56132e0ed739d02e5) define in [osThread_Attr_t](https://arm-software.github.io/CMSIS_6/v6.0.0/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html).
 {{% /notice %}}
 
 ### Use of undeclared identifier CoreDebug error

@@ -10,10 +10,12 @@ Sysreport is a command-line tool, so make sure you can log in to the target syst
 
 ## Confirm Python and Git are installed
 
+Depending on how Python versions are managed on your system, the Python command below may vary. In this Learning Path, we'll assume that Python is invoked using the `python3` command.
+
 To confirm Python is installed, run the following command:
 
 ```console
-python --version
+python3 --version
 ```
 
 If Python is installed, a version number will be displayed:
@@ -52,7 +54,7 @@ Confirm Sysreport works correctly by changing into the `sysreport/src` directory
 
 ```console
 cd sysreport/src
-python sysreport.py --help
+python3 sysreport.py --help
 ```
 
 If Sysreport is working correctly, the usage message is displayed:

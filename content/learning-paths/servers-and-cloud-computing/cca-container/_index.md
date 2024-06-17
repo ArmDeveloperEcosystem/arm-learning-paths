@@ -9,6 +9,7 @@ learning_objectives:
     - Run the Arm reference CCA software stack on an Armv-A AEM Base FVP platform with support for RME extensions
     - Create a virtual machine in a Realm running guest Linux using a pre-built docker container
     - Run a simple application in a Realm running guest Linux
+    - Obtain a CCA attestation token from the virtual guest in a Realm
 
 prerequisites:
     - An aarch64 or x86_64 computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).

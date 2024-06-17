@@ -29,7 +29,7 @@ This section provides info about how to setup NoMachine on a remote Arm Linux ma
 
 NoMachine is a client server application. The NoMachine server runs on the remote machine. The client runs on the local machine and connects to the remote server.
 
-### How to install the xfce4 desktop?
+### How do I install the xfce4 desktop?
 
 To connect to a remote desktop, desktop software must be installed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance. 
 
@@ -43,7 +43,7 @@ sudo apt update; sudo apt upgrade -y
 sudo apt-get install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils xfce4-terminal -y
 ```
 
-### How to install NoMachine on a remote server?
+### How do I install NoMachine on a remote server?
 
 Create two files on the server in the home directory `$HOME`. The contents of the files is below.
 
@@ -91,7 +91,7 @@ On the remote machine, run the install script.
 ./install-nomachine.sh
 ```
 
-### How to set a user password for a NoMachine connection?
+### How do I set a user password for a NoMachine connection?
 
 For NoMachine to work, it's best to have a user account on the remote machine with a password. Many cloud instances have accounts without passwords and use only ssh keys to connect. 
 
@@ -122,11 +122,11 @@ Enter a new password.
 Remember the password for later when the client is connected. 
 
 
-### How to open the NoMachine port 
+### How do I open the NoMachine port? 
 
 The default port for NoMachine is `4000`. If needed, open this port in the security group. Make sure to open ports only from your IP address, not from anywhere. 
 
-### How to install the NoMachine client?
+### How do I install the NoMachine client?
 
 [Download](https://downloads.nomachine.com/) and install NoMachine on the client you want to connect from. There are options for most operating systems including Android and iOS. 
 

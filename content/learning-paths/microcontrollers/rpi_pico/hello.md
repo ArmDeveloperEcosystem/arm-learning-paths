@@ -1,6 +1,6 @@
 ---
 # User change
-title: How to run Hello World?
+title: "How do I run Hello World for Raspberry Pi Pico?"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -12,7 +12,7 @@ The first program to run on the Pico both prints "Hello" and blinks an LED.
 
 The print statements are directed to USB.
 
-## How to build "hello" for the RPi Pico?
+## How do I build "hello" for Raspberry Pi Pico?
 
 Save the C code below to a file named hello.c
 
@@ -84,7 +84,7 @@ make
 
 The hello application is now ready to run.
 
-## How to run "hello" for the RPi Pico?
+## How do I run "hello" for Raspberry Pi Pico?
 
 To run, hold down the BOOTSEL button on the Raspberry Pi Pico and plug in the USB cable between the Pico and your development computer. 
 

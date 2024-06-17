@@ -1,6 +1,6 @@
 ---
 # User change
-title: "How to install your Unity game onto the Orange Pi 5?"
+title: "How do I install my Unity game onto the Orange Pi 5?"
 
 weight: 4
 
@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 In this section you will install the APK of your Unity game onto the Orange Pi 5 running Droid OS.
 
-## How to load your Unity game APK to the Orange Pi?
+## How do I load my Unity game APK to the Orange Pi?
 
 You need a way to load the APK file onto the Orange Pi, and there are several options on how you can do so. You could load it onto a USB thumb drive as long as the file systems are compatible and plug it directly into the Pi, but none of mine were so I didn't go this route. You could load the file directly onto the microSD card, again, as long as the formats are compatible.
 
