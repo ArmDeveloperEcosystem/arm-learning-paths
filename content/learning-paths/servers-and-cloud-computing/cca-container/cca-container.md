@@ -8,10 +8,6 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Before you begin
-
-You will need at least 30 GB of free disk space on your machine to run the docker container with the Arm CCA reference software stack.
-
 ## Overview
 
 The Arm Confidential Compute Architecture (CCA) enables the construction of protected execution
