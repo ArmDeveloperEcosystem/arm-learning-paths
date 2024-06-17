@@ -107,7 +107,7 @@ Profiling with the Streamline CLI tools is a three-step process:
 
 ## Capturing a system-wide profile
 
-To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A ...` application-specific option and following arguments.
+To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A ` application-specific option and following arguments.
 
 In systems without the kernel patches, system-wide profiles can capture the top-down metrics. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
