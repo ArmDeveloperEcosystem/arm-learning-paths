@@ -126,9 +126,9 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
 
 1. Fetch the kernel sources:
 
-```sh
-yum download --source kernel
-```
+    ```sh
+    yum download --source kernel
+    ```
 1. Install the sources binary:
 
     ```sh
