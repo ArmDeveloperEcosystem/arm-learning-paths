@@ -36,13 +36,25 @@ cd ~/FM-share
 Using a file editor of your choice, create a file named `hello.c` in this directory. Copy the contents below into the file:
 
 ```console
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 
+#include <linux/reboot.h>
+#include <sys/reboot.h>
+
 int main(int argc, char *argv[])
 {
-  printf("Hello from the Realm!\n");
-  sleep(99);
+  printf("\n\n");
+  printf("******* Hello from the Realm ! *******\n");
+  printf("\n\n");
+
+  sleep(30);
+
+  printf("Shutting down the realm (this may take a while)...\n");
+  reboot(LINUX_REBOOT_CMD_POWER_OFF);
+
+  while(1);
 }
 ```
 
