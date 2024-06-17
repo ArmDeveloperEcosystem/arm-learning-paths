@@ -57,6 +57,10 @@ Profiling with the Streamline CLI tools is a three-step process:
   
     * The `-A` option provides the command-line for the user application. This option must be the last option provided to `sl-record` because all subsequent arguments are passed to the user application.
 
+      * Your application should be a release build, but needs to include symbol information. Build your application with the `-g` option to include symbol information. Arm recommends that you disable link-time-optimization to make the profile easier to understand.
+
+      * If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
+
     * Optionally, to enable SPE, add the `-X workflow_spe` option. Enabling SPE significantly increases the amount of data captured and the `sl-analyze` processing time, so only use this option if you need this data.
 
     {{% notice %}}

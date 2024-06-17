@@ -14,7 +14,7 @@ Let's look at an example functions report generated on a system with Arm Neovers
 
     ![Boundness](images/v1-spe-report-boundness.png)
 
-    In this example, you can see that for the first function the retiring metric is quite low, only 11%, and is colored red to indicate a problem. A low retiring metric means that the software is not making efficient use of the available processing resources. You must look  depper at the other metrics to discover why.
+    In this example, you can see that for the first function the retiring metric is quite low, only 11%, and is colored red to indicate a problem. A low retiring metric means that the software is not making efficient use of the available processing resources. You must look  deeper at the other metrics to discover why.
 
     You can see that bad speculation is responsible for 33% of the slot capacity used by this function. This means that some of the available issue capacity is wasted on cycles that are used either recovering from mispredicted branches, or executing speculative micro-ops that were subsequently cancelled.
 
