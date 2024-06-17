@@ -28,7 +28,7 @@ Profiling with the Streamline CLI tools is a three-step process:
     tar -xzf Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
     ```
     
-    Follow the instructions in the [Install Guide](https://learn.arm.com/install-guides/streamline-cli/) to ensure you have everything set up correctly.
+    Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly.
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
 
