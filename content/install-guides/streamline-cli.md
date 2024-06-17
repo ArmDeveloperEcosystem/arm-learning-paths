@@ -45,6 +45,12 @@ The Streamline CLI tools can give top-down metrics in systems with as few as 3 a
 The Streamline CLI tools can be used without SPE. Load operation data source metrics will not be available, and branch mispredict metrics may be less
 accurate.
 
+## Building your application
+
+Your application should be a release build, but needs to include symbol information. Build your application with the `-g` option to include symbol information. Arm recommends that you disable link-time-optimization to make the profile easier to understand.
+
+If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
+
 ## Install Streamline CLI Tools
 
 1. Download and extract the Streamline CLI tools on your Arm server:
