@@ -126,9 +126,13 @@ lkvm run --realm --restricted_mem --irqchip=gicv3-its -p earlycon --network mode
 The Realm guest takes some time to boot up. At the end of the boot, you should see your **hello world** application running in the Realm:
 
 ```output
-[    9.721618] Freeing unused kernel memory: 9024K
-[    9.740198] Run /init as init process
-Hello from the Realm!
+[   11.907066] Run /init as init process
+
+******* Hello from the Realm ! *******
+
+Shutting down the realm (this may take a while)...
+[   22.010458] reboot: Power down
+  Info: KVM session ended normally.
 ```
 You have successfully run an application inside the Realm!
 
