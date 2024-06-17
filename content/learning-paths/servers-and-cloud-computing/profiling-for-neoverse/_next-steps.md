@@ -1,5 +1,5 @@
 ---
-next_step_guidance: To learn more about performance analysis methodology for Linux applications running on Arm Neoverse, proceed to:
+next_step_guidance: To learn more about performance analysis methodology for Linux applications running on Arm Neoverse, proceed to
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/top-down-n1/"
 
