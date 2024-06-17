@@ -1,6 +1,6 @@
 ---
 title: GenAI LLM Matrix Multiplication acceleration on Linux
-
+draft: true
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers deploying LLMs on a Linux machine who want to speed up their application.
