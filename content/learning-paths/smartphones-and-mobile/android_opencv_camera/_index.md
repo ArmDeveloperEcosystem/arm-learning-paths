@@ -11,7 +11,7 @@ learning_objectives:
    - Process camera images using OpenCV.
 
 prerequisites:
-    - No prior knowledge is required
+    - An development machine with [Android Studio](https://developer.android.com/studio) installed. 
 
 author_primary: Dawid Borycki
 
