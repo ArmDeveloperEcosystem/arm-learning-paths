@@ -31,7 +31,7 @@ The Streamline CLI tools are native command-line tools that are designed to run 
 
 ## Before you begin
 
-Use the the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
+Use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
 
 [1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
 
