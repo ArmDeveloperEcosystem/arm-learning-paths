@@ -12,6 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An development machine with [Android Studio](https://developer.android.com/studio) installed. 
+    - An Arm-powered smartphone running Android. 
 
 author_primary: Dawid Borycki
 
