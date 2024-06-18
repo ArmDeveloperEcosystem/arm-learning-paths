@@ -10,7 +10,7 @@ learning_objectives:
     - Use Streamline CLI tools to capture and analyze performance data from an application.
 
 prerequisites:
-    - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. These host operating systems are supported: Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, Ubuntu 20.04 or newer.
+    - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. For a host OS, you can use Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, or Ubuntu 20.04 or newer.
 
 author_primary: Julie Gaskin
 
