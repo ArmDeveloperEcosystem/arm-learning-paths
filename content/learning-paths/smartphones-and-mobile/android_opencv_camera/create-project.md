@@ -47,16 +47,16 @@ Then, click the **Sync Now** link in the top pane that appears:
 
 ![img5](Figures/05.png)
 
-From now on, you can use OpenCV in your application. In the next step, we will initialize OpenCV. To do so, we will slightly modify the application view to display the OpenCV initialization status in the TextView.
+From here on, you can use OpenCV in your application. In the next step, you will initialize OpenCV. To do so, you will slightly modify the application view to display the OpenCV initialization status in the TextView.
 
 ## OpenCV initialization
 To initialize OpenCV and check the initialization status, follow these steps:
-1. Under the Project (left window) double-click *app/res/layout/activity_main.xml*. This opens the view designer. 
+1. Under the Project (left window) double-click `app/res/layout/activity_main.xml`. This opens the view designer. 
 2. Click the highglighted icon in the top right corner to switch to the XML view.
 
 ![img6](Figures/06.png)
 
-3. Modify the *activity_main.xml* as shown below:
+3. Modify the `activity_main.xml` file as shown below:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -79,7 +79,7 @@ To initialize OpenCV and check the initialization status, follow these steps:
 </LinearLayout>
 ```
 
-4. Open *MainActivity.kt* (*app/kotlin+java/com.example.arm64opencvcamera*), and replace the file contents with the following code:
+4. Open `MainActivity.kt` (*app/kotlin+java/com.example.arm64opencvcamera*), and replace the file contents with the following code:
 
 ```java
 package com.example.arm64opencvcamera
@@ -118,13 +118,13 @@ class MainActivity : AppCompatActivity() {
 
 The above Kotlin code first imports necessary Android and OpenCV classes. OpenCVLoader is used to load the OpenCV library, enableEdgeToEdge for edge-to-edge design, and TextView.
 
-The MainActivity class declares a TextView to display the status of OpenCV initialization. This class also declares the Boolean variable isOpenCvInitialized, which is used to track if OpenCV has been successfully initialized.
+The `MainActivity` class declares a TextView to display the status of OpenCV initialization. This class also declares the Boolean variable `isOpenCvInitialized`, which is used to track if OpenCV has been successfully initialized.
 
-The onCreate method is a lifecycle method called when the activity is created. We use it to enable edge-to-edge design for the activity (enableEdgeToEdge), set the layout for the activity using activity_main.xml (setContentView), and bind the TextView with the textViewStatus declared in the XML layout (findViewById). Afterward, we use the OpenCVLoader.initLocal() method, which attempts to initialize OpenCV and sets isOpenCvInitialized based on the success or failure of the initialization.
+The onCreate method is a lifecycle method called when the activity is created. YOu will use it to enable edge-to-edge design for the activity (enableEdgeToEdge), set the layout for the activity using `activity_main.xml` (setContentView), and bind the TextView with the textViewStatus declared in the XML layout (findViewById). After, you will use the OpenCVLoader.initLocal() method, which attempts to initialize OpenCV and sets `isOpenCvInitialized` based on the success or failure of the initialization.
 
-Finally, we call updateControls(), which updates the UI based on whether OpenCV was initialized successfully. Specifically, if isOpenCvInitialized is false, it sets the TextView’s text to “OpenCV initialization error”. Otherwise, the text is set to “OpenCV initialized”.
+Finally, you call updateControls(), which updates the UI based on whether OpenCV was initialized successfully. Specifically, if `isOpenCvInitialized` is false, it sets the TextView’s text to “OpenCV initialization error”. Otherwise, the text is set to “OpenCV initialized”.
 
-## Launching the application
+## Launch the application
 You can now launch the application in the simulator. To do so, use the top menu, where you click Run -> Run ‘app’. The application should start, and you should see the “OpenCV initialized” text as shown below:
 
 ![img7](Figures/07.png)
