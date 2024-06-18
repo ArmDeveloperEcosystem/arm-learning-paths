@@ -67,7 +67,7 @@ This hierarchical approach, with clear causal metrics, provides an intuitive way
 One of the major usability benefits of the top-down methodology for software developers is that the first few levels of the top-down tree do not require any knowledge of the specific CPU you are running on. You can profile on any of the Neoverse CPUs and get the same metrics, despite differences in the underlying hardware design. This lets you focus on your software and improving performance, instead of worrying about which event to capture on a specific
 CPU.
 
-The deeper levels of the tree become increasingly hardware-specific, which is useful for developers who want to optimize very deeply for a specific microarchitecture. For most common software optimizations these levels are not necessary.
+The deeper levels of the tree become increasingly hardware-specific, which is useful for developers who want to optimize very deeply for a specific microarchitecture. For most common software optimizations, these levels are not necessary.
 
 ## Arm Statistical Profiling Extension
 

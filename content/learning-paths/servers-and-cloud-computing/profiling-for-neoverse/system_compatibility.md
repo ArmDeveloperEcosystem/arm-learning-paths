@@ -11,7 +11,7 @@ Before you begin, you can use the Arm Sysreport utility to determine whether you
 
 [1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
 
-The `perf counters` entry in the generated report indicates how many CPU counters are available. The `perf sampling` entry indicates if SPE is available. You will achieve the best profiles in systems with at least 6 available CPU counters and SPE.
+The `perf counters` entry in the generated report indicates how many CPU counters are available. The `perf sampling` entry indicates if SPE is available. You can achieve the best profiles in systems with at least 6 available CPU counters and SPE.
 
 You can use the Streamline CLI tools in systems without any CPU counters, but can only return a basic hot-spot profile based on time-based sampling.
 No top-down methodology metrics are available.
