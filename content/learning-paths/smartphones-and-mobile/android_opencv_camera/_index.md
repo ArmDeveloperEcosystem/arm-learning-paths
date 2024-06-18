@@ -7,8 +7,8 @@ who_is_this_for: This is an intermediate topic for developers who are interested
 
 learning_objectives:
    - Gain familiarity with OpenCV.
-   - Be able to create the project and add OpenCV support.
-   - Acquire images from the camera.
+   - Create and configure a project to add OpenCV support.
+   - Process camera images using OpenCV.
 
 prerequisites:
     - No prior knowledge is required
