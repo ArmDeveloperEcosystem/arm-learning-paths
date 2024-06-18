@@ -113,16 +113,16 @@ In systems without the kernel patches, system-wide profiles can capture the top-
 
 ## Capturing top-down metrics without the kernel patches
 
-To capture top-down metrics in a system without the kernel patches there are three options available.
+To capture top-down metrics in a system without the kernel patches, there are three options available:
 
-To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A ` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes
+* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A ` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes
 
-To reliably capture single-threaded application profile, add the `--inherit no` option to the command line. However, in this mode metrics are only captured for the first thread in the application process and any child threads or processes are ignored.
+* To reliably capture single-threaded application profile, add the `--inherit no` option to the command line. However, in this mode metrics are only captured for the first thread in the application process and any child threads or processes are ignored.
 
-For multi-threaded applications, the tool provides an experimental option, `--inherit poll`, which uses polling to spot new child threads and inject the instrumentation. This allows metrics to be captured for a multi-threaded application, but has some limitations:
+* For multi-threaded applications, the tool provides an experimental option, `--inherit poll`, which uses polling to spot new child threads and inject the instrumentation. This allows metrics to be captured for a multi-threaded application, but has some limitations:
 
 * Short-lived threads may not be detected by the polling.
-* Attaching perf to new threads without inherit support requires many new file descriptors to be created per thread. This can result the application failing to open files due to the process hitting its inode limit.
+* Attaching perf to new threads without inherit support requires many new file descriptors to be created per thread. This can result in the application failing to open files due to the process hitting its inode limit.
 
 ## Minimizing profiling application impact
 
