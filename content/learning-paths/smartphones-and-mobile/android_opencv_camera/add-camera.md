@@ -9,7 +9,7 @@ layout: "learningpathall"
 You will now extend the application by adding camera support using OpenCV. Start by adding additional controls that will be used to start and stop the camera preview, and to display images from the camera. Additionally, you will add a CheckBox control that will enable or disable real-time processing. For the real-time processing, you will use [adaptive thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) from OpenCV.
 
 ## Modify the application view
-To modify the application view, open activity_main.xml and replace the file contents with the following code:
+To modify the application view, open `activity_main.xml` and replace the file contents with the following code:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -88,9 +88,9 @@ The above declarations will render the following:
 
 ![img8](Figures/08.png)
 
-The view now contains two buttons: Start and Stop. They will be used to start and stop the camera preview. Below the buttons, there is a CheckBox that will enable or disable real-time image processing. Though not visible, below the CheckBox there is a JavaCameraView.
+The view now contains two buttons: Start and Stop. They will be used to start and stop the camera preview. Below the buttons, there is a CheckBox that will enable or disable real-time image processing. Though not visible, below the CheckBox there is a `JavaCameraView`.
 
-JavaCameraView is a class provided by the OpenCV library for Android, which serves as a bridge between the Android camera and the OpenCV library. It allows developers to capture frames from the camera and process them using OpenCV functions. JavaCameraView integrates the Android camera seamlessly with the OpenCV library, providing a way to capture video frames directly. JavaCameraView implements the CameraBridgeViewBase.CvCameraViewListener2 interface, which includes methods for handling camera events and frame processing. JavaCameraView handles the lifecycle of the camera, including starting and stopping the camera preview, and releasing the camera when not in use.
+`JavaCameraView` is a class provided by the OpenCV library for Android, which serves as a bridge between the Android camera and the OpenCV library. It allows developers to capture frames from the camera and process them using OpenCV functions. JavaCameraView integrates the Android camera seamlessly with the OpenCV library, providing a way to capture video frames directly. `JavaCameraView` implements the `CameraBridgeViewBase.CvCameraViewListener2` interface, which includes methods for handling camera events and frame processing. `JavaCameraView` handles the lifecycle of the camera, including starting and stopping the camera preview, and releasing the camera when not in use.
 
 Finally, in the view above, we have an ImageView which will be used to display images from the camera.
 
@@ -103,7 +103,7 @@ To be able to record images with the device’s camera, you will first need to r
 <uses-feature android:name="android.hardware.camera"/>
 ```
 
-2. Open MainActivity.kt and modify the onCreate method as follows:
+2. Open `MainActivity.kt` and modify the `onCreate` method as follows:
 
 ```java
 private val cameraPermissionRequestCode = 100
@@ -132,7 +132,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
-The above code checks if the app has the CAMERA permission. If the permission is not granted, it requests the permission using ActivityCompat.requestPermissions, passing the Manifest.permission.CAMERA and the cameraPermissionRequestCode (100). When you re-run the application, you should see the following screen:
+The above code checks if the app has the CAMERA permission. If the permission is not granted, it requests the permission using `ActivityCompat.requestPermissions`, passing the `Manifest.permission.CAMERA` and the cameraPermissionRequestCode (100). When you re-run the application, you should see the following screen:
 
 ![img9](Figures/09.png)
 
