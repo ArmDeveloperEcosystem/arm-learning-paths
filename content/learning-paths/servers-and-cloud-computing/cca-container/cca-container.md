@@ -143,7 +143,7 @@ To retrieve a CCA attestation token from the running guest, mount the `configfs`
 mount -t configfs none /sys/kernel/config
 ```
 
-You can now generate at attestation token by running the following commands:
+You can now generate an attestation token by running the following commands:
 
 ```console
 report=/sys/kernel/config/tsm/report/report0
