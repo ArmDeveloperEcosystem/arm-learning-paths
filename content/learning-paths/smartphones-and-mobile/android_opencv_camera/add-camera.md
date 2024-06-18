@@ -373,16 +373,16 @@ After re-launching the application and pressing the Start button you will see th
 ![img10](Figures/10.png)
 
 ## Display images
-To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. Along the way, we will declare Mat objects to store the image from the camera. 
+To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
 
-Follow these steps (all changes to be made in the MainActivity.kt):
+Follow these steps (all changes to be made in `MainActivity.kt`):
 1. Declare the Mat object:
 
 ```java
 private lateinit var inputMat: Mat
 ```
 
-2. Initialize the above member within the onCameraViewStarted method:
+2. Initialize the above member within the `onCameraViewStarted` method:
 
 ```java
 override fun onCameraViewStarted(width: Int, height: Int) {
@@ -394,7 +394,7 @@ override fun onCameraViewStarted(width: Int, height: Int) {
 }
 ```
 
-3. Modify the onCameraViewStopped method:
+3. Modify the `onCameraViewStopped` method:
 
 ```java
 override fun onCameraViewStopped() {
@@ -406,7 +406,7 @@ override fun onCameraViewStopped() {
 }
 ```
 
-4. Update the onCameraFrame method:
+4. Update the `onCameraFrame` method:
 
 ```java
 override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?): Mat {
@@ -492,19 +492,19 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-The major modification we added here is the following: If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. matToDisplay is set to the processed frame if processing is enabled; otherwise, it remains as the input frame.
+The major modification you made is following: If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. `matToDisplay` is set to the processed frame if processing is enabled; otherwise, the input frame is used.
 
-To process the image, we use the Imgproc.adaptiveThreshold, which is an OpenCV function that applies adaptive thresholding to a grayscale image. Before we can apply thresholding, we convert the color image to grayscale using the Imgproc.cvtColor OpenCV function.
+To process the image, you will use the `Imgproc.adaptiveThreshold` openCV function which applies adaptive thresholding to a grayscale image. Before you can apply thresholding, you will convert the color image to grayscale using the `Imgproc.cvtColor` OpenCV function.
 
-The adaptive thresholding implemented in OpenCV has two versions. They differ in how the threshold value is calculated within the block. Here, we used Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C, which uses the mean of a Gaussian window to calculate the threshold for each pixel. Then, we specified the thresholding type as Imgproc.THRESH_BINARY. It converts pixels above the threshold to the maximum value (255) and below the threshold to 0.
+The adaptive thresholding implemented in OpenCV has two versions. They differ in how the threshold value is calculated within the block. Here, you used `Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C`, which uses the mean of a Gaussian window to calculate the threshold for each pixel. Then, you specified the thresholding type as `Imgproc.THRESH_BINARY`. It converts pixels above the threshold to the maximum value (255) and below the threshold to 0.
 
-We used 21 as the size of the block to use for calculating the threshold for each pixel and 0 as a constant subtracted from the mean or weighted mean calculated.
+You used 21 as the size of the block to use for calculating the threshold for each pixel and 0 as a constant subtracted from the mean or weighted mean calculated.
 
 After re-running the application, starting the preview, and enabling the processing, you should see the following result:
 
 ![img12](Figures/12.jpg)
 
 ## Summary
-In this learning path, we enhanced an Android application to capture and process camera images using OpenCV. First, we integrated the OpenCV library into our Android project. Then, we requested and handled camera permissions to ensure the app could access the device’s camera. Afterward, we set up the JavaCameraView to capture real-time frames from the camera. We declared and initialized Mat objects to store and process camera frames. Finally, we implemented adaptive thresholding using OpenCV’s Imgproc.adaptiveThreshold to process the camera frames when a CheckBox is checked.
+In this learning path, you created an Android application to capture and process camera images using OpenCV. First, you integrated the OpenCV library into your Android project. Then, you enabled camera permissions to ensure the application can access the device’s camera. Next, you set up `JavaCameraView` to capture real-time frames from the camera. You declared and initialized Mat objects to store and process camera frames. Finally, you implemented adaptive thresholding using OpenCV’s `Imgproc.adaptiveThreshold` to process the camera frames when a CheckBox is checked.
 
-By following these steps, we successfully created an Android application that captures real-time images from the camera, processes them using OpenCV, and displays the processed images, demonstrating adaptive thresholding.
+By following these steps, you successfully created an Android application that captures real-time images from the camera, processes them using OpenCV, and displays the processed images, demonstrating adaptive thresholding.
