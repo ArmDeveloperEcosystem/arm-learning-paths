@@ -118,18 +118,20 @@ the '<cassert>' include:
 
 ```CPP
 #include <cassert>
+#include <cstring>
 #include <initializer_list>
 #include <iostream>
 #include <memory>
 #include <type_traits>
 ```
 
-`<ìnitializer_list>`, introduced with C++11, provides the declaration of the
-`initializer_list` type, which is a lightweight abstraction that allows creating
-an array of constant objects. `<memory>` gives access to the `unique_ptr` and
-`type_traits` allows to query information on the Matrix element types, either to
-check that a type is allowed or to select an optimized implementation at compile
-time.
+`<cstring>` provides useful declarations like `memcpy` that will be used to copy
+matrices' content around. `<ìnitializer_list>`, introduced with C++11, provides
+the declaration of the `initializer_list` type, which is a lightweight
+abstraction that allows creating an array of constant objects. `<memory>` gives
+access to the `unique_ptr` and `type_traits` allows to query information on the
+Matrix element types, either to check that a type is allowed or to select an
+optimized implementation at compile time.
 
 Add the following lines to `include/Matrix/Matrix.h` in the MatComp namespace
 under the `die` function declaration:
@@ -233,8 +235,7 @@ You can now add a boolean conversion, using the conversion operator, that will
 allow to check whether a `Matrix` instance is valid or not. It will return
 `false` if the `Matrix` object is invalid, `true` otherwise.
 
-Add the following
-method in the public section of `Matrix`:
+Add the following method in the public section of `Matrix`:
 
 ```CPP
     /// Returns true if this matrix is valid.
@@ -263,6 +264,17 @@ TEST(Matrix, defaultConstruct) {
     Matrix<float> m1;
     EXPECT_FALSE(m1);
 }
+
+TEST(Matrix, booleanConversion) {
+    EXPECT_FALSE(Matrix<int8_t>());
+    EXPECT_FALSE(Matrix<double>());
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1));
+
+    EXPECT_TRUE(Matrix<int8_t>(1, 1, 1));
+    EXPECT_TRUE(Matrix<double>(1, 1, 2.0));
+}
 ```
 
 Next, add `tests/Matrix.cpp` to the list of files used for the `Matrix` unit
@@ -281,23 +293,25 @@ default constructor. In both cases, these matrices are expected to be invalid.
 
 You should now check if tests pass:
 
-```BASH { output_lines = "4-16" }
+```BASH { output_lines = "4-18" }
 cd build
 ninja
 ninja check
 ...
-[==========] Running 2 tests from 1 test suites.
+[==========] Running 3 tests from 1 test suites.
 [----------] Global test environment set-up.
-[----------] 2 tests from Matrix
+[----------] 3 tests from Matrix
 [ RUN      ] Matrix.defaultConstruct
 [       OK ] Matrix.defaultConstruct (0 ms)
+[ RUN      ] Matrix.booleanConversion
+[       OK ] Matrix.booleanConversion (0 ms)
 [ RUN      ] Matrix.getVersion
 [       OK ] Matrix.getVersion (0 ms)
-[----------] 2 tests from Matrix (0 ms total)
+[----------] 3 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 2 tests from 1 test suites ran. (0 ms total)
-[  PASSED  ] 2 tests.
+[==========] 3 tests from 1 test suites ran. (0 ms total)
+[  PASSED  ] 3 tests.
 ```
 
 Constructing an invalid `Matrix` is very useful, but does not
@@ -387,25 +401,27 @@ and dimensions can be constructed.
 
 Compile and test again, all should pass:
 
-```BASH { output_lines = "4-18" }
+```BASH { output_lines = "4-20" }
 cd build
 ninja
 ninja check
 ...
-[==========] Running 3 tests from 1 test suites.
+[==========] Running 4 tests from 1 test suites.
 [----------] Global test environment set-up.
-[----------] 3 tests from Matrix
+[----------] 4 tests from Matrix
 [ RUN      ] Matrix.defaultConstruct
 [       OK ] Matrix.defaultConstruct (0 ms)
 [ RUN      ] Matrix.uninitializedConstruct
 [       OK ] Matrix.uninitializedConstruct (0 ms)
+[ RUN      ] Matrix.booleanConversion
+[       OK ] Matrix.booleanConversion (0 ms)
 [ RUN      ] Matrix.getVersion
 [       OK ] Matrix.getVersion (0 ms)
-[----------] 3 tests from Matrix (0 ms total)
+[----------] 4 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 3 tests from 1 test suites ran. (0 ms total)
-[  PASSED  ] 3 tests.
+[==========] 4 tests from 1 test suites ran. (0 ms total)
+[  PASSED  ] 4 tests.
 ```
 
 The `Matrix` class is missing 2 important methods:
@@ -502,14 +518,14 @@ others.
 Compile and check again. It's important to ensure that the project works at each
 step and did not regress any of the previous steps.
 
-```BASH { output_lines = "4-24" }
+```BASH { output_lines = "4-26" }
 cd build
 ninja
 ninja check
 ...
-[==========] Running 6 tests from 1 test suites.
+[==========] Running 7 tests from 1 test suites.
 [----------] Global test environment set-up.
-[----------] 6 tests from Matrix
+[----------] 7 tests from Matrix
 [ RUN      ] Matrix.defaultConstruct
 [       OK ] Matrix.defaultConstruct (0 ms)
 [ RUN      ] Matrix.uninitializedConstruct
@@ -520,13 +536,15 @@ ninja check
 [       OK ] Matrix.getElement (0 ms)
 [ RUN      ] Matrix.setElement
 [       OK ] Matrix.setElement (0 ms)
+[ RUN      ] Matrix.booleanConversion
+[       OK ] Matrix.booleanConversion (0 ms)
 [ RUN      ] Matrix.getVersion
 [       OK ] Matrix.getVersion (0 ms)
-[----------] 6 tests from Matrix (0 ms total)
+[----------] 7 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 6 tests from 1 test suites ran. (0 ms total)
-[  PASSED  ] 6 tests.
+[==========] 7 tests from 1 test suites ran. (0 ms total)
+[  PASSED  ] 7 tests.
 ```
 
 Congratulations, you are almost done with constructors!
@@ -537,9 +555,8 @@ arbitrary values.
 Add the constructor below to the public part of `Matrix` in
 `include/Matrix/Matrix.h`.
 
-The C++ `std::initializer_list`  enables users
-to provide a list of literal values (in row major order) to use to initialize
-the matrix with:
+The C++ `std::initializer_list`  enables users to provide a list of literal
+values (in row major order) to use to initialize the matrix with:
 
 ```CPP
 ```
@@ -883,13 +900,13 @@ TEST(Matrix, identity) {
 
 Compile and check again, all test should pass:
 
-```BASH { output_lines = "4-41" }
+```BASH { output_lines = "4-43" }
 cd build
 ninja
 ninja check
-[==========] Running 15 tests from 1 test suites.
+[==========] Running 16 tests from 1 test suites.
 [----------] Global test environment set-up.
-[----------] 15 tests from Matrix
+[----------] 16 tests from Matrix
 [ RUN      ] Matrix.defaultConstruct
 [       OK ] Matrix.defaultConstruct (0 ms)
 [ RUN      ] Matrix.uninitializedConstruct
@@ -918,13 +935,15 @@ ninja check
 [       OK ] Matrix.ones (0 ms)
 [ RUN      ] Matrix.identity
 [       OK ] Matrix.identity (0 ms)
+[ RUN      ] Matrix.booleanConversion
+[       OK ] Matrix.booleanConversion (0 ms)
 [ RUN      ] Matrix.getVersion
 [       OK ] Matrix.getVersion (0 ms)
-[----------] 15 tests from Matrix (0 ms total)
+[----------] 16 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 15 tests from 3 test suites ran. (0 ms total)
-[  PASSED  ] 15 tests.
+[==========] 16 tests from 3 test suites ran. (0 ms total)
+[  PASSED  ] 16 tests.
 ```
 
 ## Display matrices
@@ -1007,7 +1026,7 @@ Add these to the public section of `Matrix` in `include/Matrix/Matrix.h`:
                 return false;
         return true;
     }
-    /// Returns tur iff matrices do not compare equal.
+    /// Returns true iff matrices do not compare equal.
     bool operator!=(const Matrix &rhs) const { return !(*this == rhs); }
 ```
 
@@ -1047,13 +1066,13 @@ TEST(Matrix, notEqual) {
 
 Check again if the tests build and pass:
 
-```BASH { output_lines = "4-47" }
+```BASH { output_lines = "4-49" }
 cd build
 ninja
 ninja check
-[==========] Running 18 tests from 1 test suites.
+[==========] Running 19 tests from 1 test suites.
 [----------] Global test environment set-up.
-[----------] 18 tests from Matrix
+[----------] 19 tests from Matrix
 [ RUN      ] Matrix.defaultConstruct
 [       OK ] Matrix.defaultConstruct (0 ms)
 [ RUN      ] Matrix.uninitializedConstruct
@@ -1082,6 +1101,8 @@ ninja check
 [       OK ] Matrix.ones (0 ms)
 [ RUN      ] Matrix.identity
 [       OK ] Matrix.identity (0 ms)
+[ RUN      ] Matrix.booleanConversion
+[       OK ] Matrix.booleanConversion (0 ms)
 [ RUN      ] Matrix.equal
 [       OK ] Matrix.equal (0 ms)
 [ RUN      ] Matrix.notEqual
@@ -1090,11 +1111,11 @@ ninja check
 [       OK ] Matrix.dump (0 ms)
 [ RUN      ] Matrix.getVersion
 [       OK ] Matrix.getVersion (0 ms)
-[----------] 18 tests from Matrix (0 ms total)
+[----------] 19 tests from Matrix (0 ms total)
 
 [----------] Global test environment tear-down
-[==========] 18 tests from 1 test suites ran. (0 ms total)
-[  PASSED  ] 18 tests.
+[==========] 19 tests from 1 test suites ran. (0 ms total)
+[  PASSED  ] 19 tests.
 ```
 
 Congratulations, you now have a working library!

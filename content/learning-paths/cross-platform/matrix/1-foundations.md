@@ -31,7 +31,7 @@ On top of those tools, you will also need an IDE (Integrated Development
 Environment). [Visual Studio Code](https://code.visualstudio.com/) is a popular
 choice, and you can install it by following the
 [instructions](https://code.visualstudio.com/docs/setup/linux). Alternatively,
-you can use a text editor like ([Vim](https://www.vim.org/), [GNU
+you can use a text editor like [Vim](https://www.vim.org/), [GNU
 Emacs](https://www.gnu.org/software/emacs/) or [Sublime
 Text](https://www.sublimetext.com/) which are also popular choices and all
 support extensions that make C++ development easy.
