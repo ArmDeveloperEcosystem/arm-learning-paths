@@ -31,7 +31,7 @@ The Streamline CLI tools are native command-line tools that are designed to run 
 
 ## Before you begin
 
-Use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
+Use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in [Get ready for performance analysis with Sysreport][1] to discover how to download and run this utility.
 
 [1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
 
@@ -57,7 +57,6 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
     ```sh
     wget https://artifacts.tools.arm.com/arm-performance-studio/2024.2/Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
-
     tar -xzf Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
     ```
 
@@ -69,7 +68,7 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
     source ./sl-venv/bin/activate
 
     # From inside the virtual environment
-    python3 -m pip install -r ./<install>/bin/requirements.txt
+    python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
     ```
 
    {{% notice Note%}}
@@ -195,4 +194,4 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
    /sys/bus/event_source/devices/armv8_pmuv3_0/format/strobe_period
     ```
 
-You are now ready to use Streamline CLI Tools. [Refer to the learning path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/profiling-for-neoverse) to get started.
+You are now ready to use Streamline CLI Tools. Refer to [Profiling for Neoverse with Streamline CLI Tools](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/) to get started.
