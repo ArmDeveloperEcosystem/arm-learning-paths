@@ -2,30 +2,16 @@
 # User change
 title: "Run the Arm CCA stack using a pre-built docker container"
 
-weight: 2 # 1 is first, 2 is second, etc.
+weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-
-## Overview
-
-The Arm Confidential Compute Architecture (CCA) enables the construction of protected execution
-environments called Realms. Realms allow lower-privileged software, such as an application or a virtual machine, to
-protect its content and execution from attacks by higher-privileged software, such as an OS or a hypervisor. Realms provide an environment for confidential computing, without requiring the Realm owner to trust the software components that manage the resources used by the Realm.
-
-The Arm Realm Management Extension (RME) is an Arm v9-A architecture extension. It defines the set of hardware features and properties that are required to comply with the Arm CCA architecture. RME introduces a new security state "Realm world", in addition to the traditional Secure and Non-secure states.
-
-In this learning path, you will learn how to run the reference integration software stack for Arm CCA in a pre-built docker container. Shown below is a graphical depiction of the software stack you will run on your development machine:
-
-![img #center](cca-stack-overview.png)
-
-Within the pre-built docker container, you will learn how to create a Realm that runs a guest Linux kernel and run a simple application within the Realm. You will also learn how to obtain a CCA attestation token from the running guest in the Realm. This learning path focuses on the common pattern of using a Realm to protect an entire virtual machine.
-
-
 ## Download the docker image
 
-Start by downloading the docker container image. This docker image contains the pre-built binaries for the Arm CCA reference software stack and the Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. 
+Start by downloading the docker container image. 
+
+This docker image contains the pre-built binaries for the Arm CCA reference software stack and the Armv-A Base Architecture Envelope Model (AEM) FVP with support for RME extensions. 
 
 Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
@@ -70,7 +56,7 @@ This includes the Trusted Firmware binaries, the host root filesystem and the ho
 Image  KVMTOOL_EFI.fd  bl1-uefi.bin  bl1.bin  fip-std-tests.bin  fip-uefi.bin  fip.bin  host-fs.ext4
 ```
 
-These binaries can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and Armv9-A architectures with comprehensive system IP. The FVP is also contained within this docker container.
+These binaries can run on an Armv-A Base Architecture Envelope Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and Armv9-A architectures with comprehensive system IP. The FVP is also contained within this docker container.
 
 Launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
 
@@ -102,7 +88,12 @@ buildroot login:
 
 You will be prompted to log in to buildroot. Enter `root` as both the username and password.
 
-You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point. Trusted Firmware-A is running in root, Realm Management Monitor (RMM) in Realm, host Linux in Non-secure and Hafnium in Secure. 
+You have successfully booted four worlds (Root, Secure, Non-secure and Realm) on the FVP at this point:
+
+* Trusted Firmware-A is running in Root.
+* Realm Management Monitor (RMM) in Realm.
+* Host Linux in Non-secure.
+* Hafnium in Secure. 
 
 ## Create a virtual guest in a Realm
 
