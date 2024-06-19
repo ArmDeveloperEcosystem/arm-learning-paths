@@ -3,14 +3,14 @@ title: Profiling for Neoverse with Streamline CLI Tools
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory guide for developers who want to measure the performance of applications running on Arm Neoverse™-based servers, and discover ways to optimize them.
+who_is_this_for: This is an introductory guide for developers who want to measure and optimize the performance of applications running on Arm Neoverse™-based servers.
 
 learning_objectives: 
-    - Understand Arm's top-down profiling methodology.
+    - Describe Arm's top-down profiling methodology.
     - Use Streamline CLI tools to capture and analyze performance data from an application.
 
 prerequisites:
-    - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. The following host operating systems are supported - Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, Ubuntu 20.04 or newer.
+    - An Arm Neoverse-based (N1, N2 or V1) computer running Linux. For your host OS, you can use Amazon Linux 2023 or newer, Debian 10 or newer, RHEL 8 or newer, or Ubuntu 20.04 or newer.
 
 author_primary: Julie Gaskin
 

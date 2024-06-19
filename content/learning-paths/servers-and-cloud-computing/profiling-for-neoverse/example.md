@@ -26,7 +26,7 @@ Let's look at an example functions report generated on a system with Arm Neovers
 
     This is significant enough to mean that improving branches is worth considering.
 
-    In some cases even though branches are not predicting well, you must decide whether optimizing will bring significant improvements because branches might only be a small proportion of the instruction mix.
+    In some cases, even though branches are not predicting well, you must decide whether optimizing will bring significant improvements because branches might only be a small proportion of the instruction mix.
 
 {{% notice %}}
 To reduce the effect of bad speculation, aim to improve the predictability of branches, or convert unpredictable branches into conditional select instructions.
