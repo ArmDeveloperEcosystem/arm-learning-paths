@@ -24,7 +24,6 @@ Profiling with the Streamline CLI tools is a three-step process:
 
     ```sh
     wget https://artifacts.tools.arm.com/arm-performance-studio/2024.2/Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
-
     tar -xzf Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
     ```
     
@@ -38,7 +37,7 @@ Profiling with the Streamline CLI tools is a three-step process:
     source ./sl-venv/bin/activate
 
     # From inside the virtual environment
-    python3 -m pip install -r ./<install>/bin/requirements.txt
+    python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
     ```
 
    {{% notice Note%}}
