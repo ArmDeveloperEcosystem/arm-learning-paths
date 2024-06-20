@@ -16,7 +16,7 @@ author_primary: ThirdAI
 
 ### Tags
 skilllevels: Introductory
-subjects: Machine Learning
+subjects: ML
 armips:
     - Neoverse
 tools_software_languages:
