@@ -6,12 +6,13 @@ minutes_to_complete: 120
 who_is_this_for: This is an introductory topic for software developers who want to learn how to run their applications in a Realm using the Arm Confidential Compute Architecture (CCA).
 
 learning_objectives:
-    - Run the Arm reference CCA software stack on an Armv-A AEM Base FVP platform with support for RME extensions
-    - Create a virtual machine in a Realm running guest Linux using a pre-built docker container
-    - Run a simple application in a Realm running guest Linux
+    - Run the Arm reference CCA software stack on an Armv-A AEM Base FVP (Fixed Virtual Platform) with support for RME extensions.
+    - Create a virtual machine in a Realm running guest Linux using a pre-built docker container.
+    - Run a simple application in a Realm running guest Linux.
+    - Obtain a CCA attestation token from the virtual guest in a Realm.
 
 prerequisites:
-    - An aarch64 or x86_64 computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - An AArch64 or x86_64 computer running Linux. You can use cloud instances, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 author_primary: Pareena Verma
 

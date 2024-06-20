@@ -80,7 +80,7 @@ python -m examples.models.llama2.eval_llama -c <consolidated.00.pth> -p <params.
 ```
 
 {{% notice Warning %}}
-Model evaluation without a GPU will take a long time. On an M3 macbook with 18GB RAM this took 10+ hours.
+Model evaluation without a GPU will take a long time. On a MacBook with an M3 chip and 18GB RAM this took 10+ hours.
 {{% /notice %}}
 
 ## Validate models on the development machine

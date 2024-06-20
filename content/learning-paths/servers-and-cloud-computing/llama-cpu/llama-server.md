@@ -20,7 +20,7 @@ The server executable was already compiled when you ran `make` in the previous s
 Start the server from the command line, it listens on port 8080:
 
 ```bash
-./server -m llama-2-7b-chat.Q4_K_M.gguf --port 8080
+./llama-server -m llama-2-7b-chat.Q4_K_M.gguf --port 8080
 ```
 
 ## Use curl

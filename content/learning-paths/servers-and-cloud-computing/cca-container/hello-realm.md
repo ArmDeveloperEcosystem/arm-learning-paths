@@ -2,7 +2,7 @@
 # User change
 title: "Run an application in a Realm"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -10,11 +10,11 @@ layout: "learningpathall"
 
 ## Before you begin
 
-Download the [`armswdev/aemfvp-cca-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-image) docker container.
+Download the [`armswdev/aemfvp-cca-v2-image`](https://hub.docker.com/r/armswdev/aemfvp-cca-v2-image) docker container.
 
 Install [GCC](/install-guides/gcc/) on your machine. Depending on the architecture of your machine, `aarch64` or `x86_64`, you will need to install either the native compiler or the cross-compiler.
 
-## Overview
+## Running an application in a Realm
 In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run an application within that Realm. The application inherits the confidential protection of the guest virtual machine.
 
 A convenient way to run an application inside a Realm, within the context of this example, is to package the application as the "init" process for the guest Linux kernel. 
@@ -36,20 +36,32 @@ cd ~/FM-share
 Using a file editor of your choice, create a file named `hello.c` in this directory. Copy the contents below into the file:
 
 ```console
+#include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>
 
+#include <linux/reboot.h>
+#include <sys/reboot.h>
+
 int main(int argc, char *argv[])
 {
-  printf("Hello from the Realm!\n");
-  sleep(99);
+  printf("\n\n");
+  printf("******* Hello from the Realm ! *******\n");
+  printf("\n\n");
+
+  sleep(30);
+
+  printf("Shutting down the realm (this may take a while)...\n");
+  reboot(LINUX_REBOOT_CMD_POWER_OFF);
+
+  while(1);
 }
 ```
 
 Now compile the application as the init executable and package it into the `initramfs`:
 
 ```console
-aarch64-Linux-gnu-gcc -static hello.c -o init
+aarch64-linux-gnu-gcc -static hello.c -o init
 echo init | cpio -o -H newc | gzip > test.cpio.gz
 ```
 `test.cpio.gz` is the compressed archive you will use as the `initramfs` for the guest Linux kernel.
@@ -59,9 +71,9 @@ echo init | cpio -o -H newc | gzip > test.cpio.gz
 Start the docker container with the `FM-share` directory mounted:
 
 ```console
-docker run -v ~/FM-share:/home/ubuntu/FM-share -it armswdev/aemfvp-cca-image /bin/bash
+docker run -v ~/FM-share:/home/ubuntu/FM-share -it armswdev/aemfvp-cca-v2-image /bin/bash
 ```
-Run the Arm CCA reference stack pre-built binaries on the FVP:
+Inside the running container, run the Arm CCA reference stack pre-built binaries on the FVP:
 
 ```console
 ./run-cca-fvp.sh
@@ -101,7 +113,7 @@ vi /etc/fstab
 In the `/etc/fstab` file, add the following line to it:
 
 ```console
-FM	/mnt		9p	trans=virtio,version=9p2000.L,aname=/mnt	0 	0"
+FM	/mnt		9p	trans=virtio,version=9p2000.L,aname=/mnt	0 	0
 ```
 Save and close the file. Now run the `mount` command:
 
@@ -121,14 +133,18 @@ hello.c  init  test.cpio.gz
 You can now use `kvmtool` which is a virtualization utility to launch Linux guest images. It supports the creation of Realm guests. Use the `-i` switch to point to the `initramfs` root filesystem you created in the previous step.
 
 ```console
-lkvm run --realm --irqchip=gicv3-its -p earlycon --network mode=none -c 1 -m 128 -k /realm/Image -i /mnt/test.cpio.gz
+lkvm run --realm --restricted_mem --irqchip=gicv3-its -p earlycon --network mode=none -c 1 -m 128 -k /realm/Image -i /mnt/test.cpio.gz
 ```
 The Realm guest takes some time to boot up. At the end of the boot, you should see your **hello world** application running in the Realm:
 
 ```output
-[    9.721618] Freeing unused kernel memory: 9024K
-[    9.740198] Run /init as init process
-Hello from the Realm!
+[   11.907066] Run /init as init process
+
+******* Hello from the Realm ! *******
+
+Shutting down the realm (this may take a while)...
+[   22.010458] reboot: Power down
+  Info: KVM session ended normally.
 ```
 You have successfully run an application inside the Realm!
 
