@@ -8,12 +8,12 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for software developers interested in learning the basics of building Yocto Linux for embedded Arm targets.
 
 learning_objectives: 
-    - Build a minimal Yocto Linux image for generic 64-bit Arm target
-    - Run the built Yocto image on Qemu
+    - Build a minimal Yocto Linux image for generic 64-bit Arm target.
+    - Run the built Yocto image on Qemu.
 
 prerequisites:
-    - Some familiarity with embedded Linux is assumed
-    - A linux machine running Ubuntu 22.04 with at least 60 GB of disk space
+    - Some familiarity with embedded Linux.
+    - A linux machine running Ubuntu 22.04 with at least 60 GB of disk space.
 
 author_primary: Pareena Verma
 
