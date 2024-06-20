@@ -205,7 +205,7 @@ The expected output is:
 MTE is not supported
 ```
 
-This occurs because `getauxval()`, the function to query hardware features from applications, does not report the field `HWCAP2_MTE` set. This means MTE is not implemented in the processor. For more information about how to identify hardware features refer to [ARM64 ELF hwcaps](https://docs.kernel.org/arm64/elf_hwcaps.html).
+This occurs because `getauxval()`, the function to query hardware features from applications, does not report the field `HWCAP2_MTE` set. This means MTE is not implemented in the processor. For more information about how to identify hardware features refer to [ARM64 ELF hwcaps](https://docs.kernel.org/arch/arm64/elf_hwcaps.html).
 
 2. Run the application again using `qemu-aarch64`, the userspace program which includes support for MTE:
 
