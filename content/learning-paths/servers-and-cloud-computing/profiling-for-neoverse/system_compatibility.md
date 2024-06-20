@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## System compatibility check
 
-Before you begin, you can use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
+Before you begin, you can use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in [Get ready for performance analysis with Sysreport][1] to discover how to download and run this utility.
 
 [1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
 
