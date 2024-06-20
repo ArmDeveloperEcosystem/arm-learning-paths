@@ -1,13 +1,13 @@
 ---
 title: LLM inference on Android with KleidiAI, MediaPipe, and XNNPACK
-
+draft: true
 minutes_to_complete: 60
 
 who_is_this_for: Android developers who want to efficiently run LLMs on-device.
 
 learning_objectives:
     - Install prerequisites for cross-compiling new inference engines for Android.
-    - Run (and benchmark) the Gemma 2B model using the Google MediaPipe ML framework, with XNNPACK as the primative provider.
+    - Run (and benchmark) the Gemma 2B model using the Google MediaPipe ML framework, with XNNPACK as the primitive provider.
     - Improve inference efficiency with KleidiAI's int4 kernels via XNNPACK, and benchmark the results.
 
 prerequisites:

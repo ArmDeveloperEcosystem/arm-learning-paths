@@ -1,5 +1,5 @@
 ---
-title: Learn about modern C++ library development
+title: Develop a native C++ library on an Arm based machine
 
 minutes_to_complete: 120
 
@@ -12,10 +12,11 @@ learning_objectives:
 prerequisites:
     - An Arm based computer running Linux, macOS, or Windows
     - An intermediate understanding of C++ programming
+    - A decent IDE
 
 author_primary: Arnaud de Grandmaison
 
-draft: true 
+draft: true
 
 ### Tags
 skilllevels: Advanced

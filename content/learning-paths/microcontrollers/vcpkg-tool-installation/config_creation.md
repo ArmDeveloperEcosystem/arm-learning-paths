@@ -42,7 +42,7 @@ If you are using the [conversion flow for MDK v5 uvprojx files](../../uvprojx-co
 ### Anatomy of the JSON file
 
 - The `registries` section starting at line 2 specifies the locations containing the tools you want to install.
-- The `requires` section starting at line 14 contains the tools you want to install. You can select specific versions of the tools in case you do not want to update automatically once a newer version is available. The entry `^6.20.0` specifies that the minimal version is 6.20.0 but all other version above are accepted as well.
+- The `requires` section starting at line 9 contains the tools you want to install. You can select specific versions of the tools in case you do not want to update automatically once a newer version is available. The entry `^6.20.0` specifies that the minimal version is 6.20.0 but all other version above are accepted as well.
 - The [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox) requires at least one `compiler` (Arm Compiler for Embedded or GCC) to be installed, as well as `cmake` and `ninja`.
 
 {{% notice Tip %}}

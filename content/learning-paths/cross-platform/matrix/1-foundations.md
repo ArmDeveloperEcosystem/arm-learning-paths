@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-In this section you will setup the structure for the Matrix processing library. 
+In this section you will setup the structure for the Matrix processing library.
 At the end, you will be able to build the library and an application that uses the library on
 all supported platforms: macOS, Linux, and Windows.
 
@@ -20,30 +20,42 @@ You will need the following tools, make sure they are available on your developm
 - A build system: [GNU Make](https://www.gnu.org/software/make/) or
   [Ninja](https://ninja-build.org/)
 - A documentation generator: [Doxygen](https://www.doxygen.nl/)
-- An IDE ([Visual Studio Code](https://code.visualstudio.com/) is a popular
-  choice) or a text editor ([Vim](https://www.vim.org/), [GNU
-  Emacs](https://www.gnu.org/software/emacs/), [Sublime
-  Text](https://www.sublimetext.com/) are popular choices).
+
+On a Ubuntu machine, they can be installed with:
+
+```BASH
+sudo apt-get install build-essential clang ninja-build cmake doxygen -y
+```
+
+On top of those tools, you will also need an IDE (Integrated Development
+Environment). [Visual Studio Code](https://code.visualstudio.com/) is a popular
+choice, and you can install it by following the
+[instructions](https://code.visualstudio.com/docs/setup/linux). Alternatively,
+you can use a text editor like [Vim](https://www.vim.org/), [GNU
+Emacs](https://www.gnu.org/software/emacs/) or [Sublime
+Text](https://www.sublimetext.com/) which are also popular choices and all
+support extensions that make C++ development easy.
+
 
 ## About configuring vs. building
 
 When developing software, two separate but linked aspects must be
-considered: 
-- How to configure the project 
+considered:
+- How to configure the project
 - How to build the source code
 
 The first aspect is about configuring the project, which covers:
 - The platform itself (Windows, macOS, Linux): each platform has specific
   requirements and usage.
-- Discovering what is available on the platform. For example, `libpng` might
-  be required by the project to process images in the PNG format, and it may or may not
-  be available on the platform. Alternatively, it might be available, but not with a
-  suitable configuration for the project needs. You may need to 
-  maintain a custom version of required dependencies. 
+- Discovering what is available on the platform. For example, `libpng` might be
+  required by the project to process images in the PNG format, and it may or may
+  not be available on the platform. Alternatively, it might be available, but
+  not with a suitable configuration for the project needs. You may need to
+  maintain a custom version of required dependencies.
 - Selecting project features: in some cases, projects might offer some degree of
   configuration, for example to disable support for PNG format images when a
-  user knows that a feature will never be used. This is done to avoid bloating the
-  application with never used code and functionality.
+  user knows that a feature will never be used. This is done to avoid bloating
+  the application with never used code and functionality.
 
 The second aspect is about building the project, which covers:
 - Compiling the human readable source code to produce binaries (executables and
@@ -56,9 +68,9 @@ The second aspect is about building the project, which covers:
   they spend most of their time in an edit-compile-run loop.
 
 These two aspects are so common that tools are available to ease development and
-cover all situations and platforms. The tool used for this project is 
+cover all situations and platforms. The tool used for this project is
 CMake. CMake is available on all platforms and used by
-numerous projects, from very small projects to large 
+numerous projects, from very small projects to large
 projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
 ## Directory structure
@@ -117,7 +129,7 @@ applications' source code will be located in `src/`.
 
 ## Add a demo application
 
-There is nothing like creating the canonical `Hello, World!` application. 
+There is nothing like creating the canonical `Hello, World!` application.
 
 Use your favorite text editor or IDE to
 create the file `src/howdy.cpp` and add the following content to it:
@@ -187,7 +199,8 @@ CXX=clang++ cmake -G Ninja -B build -S .
 -- Build files have been written to: .../chapter-1/build
 ```
 
-To use the default build system, Unix Makefiles, you can just the `-G Ninja` above.
+To use the default build system, Unix Makefiles, you can just omit the `-G Ninja`
+from the command line.
 
 Now that your project is configured, build it with:
 
@@ -243,27 +256,33 @@ Now, you can create a program that will make use of the
 
 {{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/getVersion.cpp" >}}
 
-Finally, add the instructions below in the top-level `CMakeLists.txt`
-to build the Matrix library, with `add_library`, and instruct CMake where the
-Matrix library header files can be found with `target_include_directories` (and
-specify along the way that C++17 is to be used for the Matrix library with
-`target_compile_features`), and eventually compile our `src/getVersion.cpp` file
-and link it to the Matrix library with `add_executable` and
-`target_link_library` to produce the `matrix-getVersion` executable:
+Finally, add the instructions below in the top-level `CMakeLists.txt`:
 
 {{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-1/CMakeLists.txt" >}}
 
-Now build and run the program with:
+The `add_library` instructs CMake how to build the Matrix library. The
+`target_include_directories` specifies where the Matrix library header are
+located, and the `target_compile_features` specifies that C++17 is the version
+of the C++ language that is used by the Matrix library. The `matrix-getVersion`
+executable is compiled from the `src/getVersion.cpp` source file with the
+`add_executable` command and has to be linked with our Matrix library with the
+`target_link_library` command.
 
-```BASH { output_lines = "2-3,5" }
+Now build the program with:
+
+```BASH { output_lines = "2" }
 ninja
 [6/6] Linking CXX executable matrix-getVersion
+```
 
+and run it with:
+
+```BASH { output_lines = "2" }
 ./matrix-getVersion
 Using Matrix version: 0.1.0
 ```
 
-Congratulations, you have constructed a library and a program to test it. 
+Congratulations, you have constructed a library and a program to test it.
 
 ## What have you achieved so far ?
 
@@ -301,7 +320,7 @@ to invoke the compiler, build libraries, and link with those libraries on each o
 those platforms.
 
 On top of hiding the platform specific details, CMake also does not force a
-development environment onto project developers as you can use your favorite editor or IDE. 
+development environment onto project developers as you can use your favorite editor or IDE.
 For example, Visual Studio Code can work seamlessly with CMake thanks to some plugins, and CMake can
 generate project files for several popular IDEs, such as Xcode, Sublime Text, Eclipse,
 CodeBlocks, and CodeLite. You can run `cmake --help` to get a

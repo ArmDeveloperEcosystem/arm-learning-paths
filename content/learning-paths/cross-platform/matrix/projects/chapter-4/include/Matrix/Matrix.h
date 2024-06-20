@@ -3,6 +3,7 @@
 #include "Matrix/Operators.h"
 
 #include <cassert>
+#include <cstring>
 #include <initializer_list>
 #include <iostream>
 #include <memory>
@@ -160,7 +161,7 @@ template <typename Ty> class Matrix {
                 return false;
         return true;
     }
-    /// Returns tur iff matrices do not compare equal.
+    /// Returns true iff matrices do not compare equal.
     bool operator!=(const Matrix &rhs) const { return !(*this == rhs); }
 
     /// Access Matrix element at (\p row, \p col) by reference.

@@ -13,13 +13,13 @@
 review:
     - questions:
         question: >
-            The Arm Confidential Compute Architecture (CCA) is available on all Arm devices
+            The Arm Confidential Compute Architecture (CCA) is available on all Arm devices.
         answers:
             - "True"
             - "False"
         correct_answer: 2
         explanation: >
-            CCA requires the Realm Management Extension (RME) of Armv9-A architecture, as well as support within the software stack running on the device.
+            CCA requires the Realm Management Extension (RME) to the Armv9-A architecture, as well as support within the software stack running on the device.
     - questions:
         question: >
             kvmtool supports the creation of Realm guests.

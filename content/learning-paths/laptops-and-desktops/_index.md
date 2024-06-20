@@ -10,33 +10,34 @@ maintopic: true
 operatingsystems_filter:
 - Android: 1
 - ChromeOS: 1
-- Linux: 16
-- macOS: 1
-- Windows: 24
+- Linux: 20
+- macOS: 2
+- Windows: 29
 subjects_filter:
-- CI-CD: 2
-- Containers and Virtualization: 3
-- Migration to Arm: 19
-- Performance and Architecture: 13
+- CI-CD: 3
+- Containers and Virtualization: 4
+- Migration to Arm: 23
+- Performance and Architecture: 15
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
 tools_software_languages_filter:
-- .NET: 8
+- .NET: 12
 - Alacritty: 1
 - Arm Development Studio: 2
 - Arm64EC: 1
 - Azure: 2
 - C: 2
 - C#: 5
-- C++: 1
+- C++: 2
 - C/C++: 3
-- Clang: 5
-- CMake: 1
-- Coding: 13
+- Clang: 7
+- CMake: 2
+- Coding: 14
 - CSS: 1
-- Docker: 2
-- GCC: 5
-- GitHub: 1
+- Docker: 3
+- GCC: 7
+- GitHub: 2
+- GoogleTest: 1
 - HTML: 2
 - Hyper-V: 1
 - i3: 1
@@ -47,6 +48,7 @@ tools_software_languages_filter:
 - MTE: 1
 - Neon: 1
 - Neovim: 1
+- Node.js: 1
 - perf: 1
 - Python: 2
 - Qt: 2
@@ -54,11 +56,12 @@ tools_software_languages_filter:
 - SVE: 1
 - SVE2: 1
 - Trusted Firmware: 1
-- Visual Studio: 7
-- Visual Studio Code: 4
+- Visual Studio: 9
+- Visual Studio Code: 7
 - VS Code: 2
 - Windows Forms: 1
 - Windows Presentation Foundation: 1
+- Windows Sandbox: 1
 - WindowsPerf: 2
 - WinUI 3: 1
 - WSL: 1
