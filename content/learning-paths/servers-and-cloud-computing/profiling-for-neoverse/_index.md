@@ -16,7 +16,7 @@ author_primary: Julie Gaskin
 
 ### Tags
 skilllevels: Introductory
-subjects: Performance profiling and optimization
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:
