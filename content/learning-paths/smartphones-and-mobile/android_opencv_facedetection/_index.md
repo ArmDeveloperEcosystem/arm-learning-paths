@@ -11,13 +11,13 @@ learning_objectives:
    - Use Haar cascade classifier for face detection.
 
 prerequisites:
-    - [OpenCV getting started](/content/learning-paths/smartphones-and-mobile/android_opencv_camera)
+    - Review [OpenCV getting started](/content/learning-paths/smartphones-and-mobile/android_opencv_camera) before you begin.
 
 author_primary: Dawid Borycki
 
 ### Tags
 skilllevels: Advanced
-subjects: Migration to Arm
+subjects: ML
 armips:
     - Cortex-A
 operatingsystems:
