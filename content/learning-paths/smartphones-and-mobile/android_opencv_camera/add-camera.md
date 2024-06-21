@@ -84,7 +84,7 @@ To modify the application view, open `activity_main.xml` and replace the file co
 </LinearLayout>
 ```
 
-The above declarations will render the following:
+After adding this code, re-run the 'app'. The above declarations will render the following:
 
 ![img8](Figures/08.png)
 
@@ -103,7 +103,16 @@ To be able to record images with the device’s camera, you will first need to r
 <uses-feature android:name="android.hardware.camera"/>
 ```
 
-2. Open `MainActivity.kt` and modify the `onCreate` method as follows:
+2. Open `MainActivity.kt` and add these additional imports:
+
+```java
+import android.Manifest
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+```
+
+3. In the same file, modify the `onCreate` method as follows:
 
 ```java
 private val cameraPermissionRequestCode = 100
@@ -145,25 +154,34 @@ You will now extend the MainActivity.kt by an additional logic that enables to s
 3. onCameraFrame - This method is called for each frame captured by the camera. You use this method to process each frame. In this learning path you will use this method to process camera image using adaptive thresholding.
 
 Proceed as follows (all changes are to be made in the MainActivity.kt file):
-1. Modify the class declaration to add CameraBridgeViewBase.CvCameraViewListener2:
+
+1. Add the following import statements:
+
+```java
+import org.opencv.android.CameraBridgeViewBase
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageView
+import org.opencv.core.CvType
+import org.opencv.core.Mat
+```
+2. Modify the class declaration to add CameraBridgeViewBase.CvCameraViewListener2:
 ```java
 class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {
 ```
-2. In the MainActivity class declare the following (right below class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {)
+3. In the MainActivity class declare the following additional variables (right below class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {)
 
 ```
-private lateinit var textViewStatus: TextView
 private lateinit var buttonStartPreview: Button
 private lateinit var buttonStopPreview: Button
 private lateinit var checkBoxProcessing: CheckBox
 private lateinit var imageView: ImageView
 private lateinit var openCvCameraView: CameraBridgeViewBase
 
-private var isOpenCvInitialized = false
 private var isPreviewActive = false
 
 ```
-3. Modify the onCreate method as follows:
+4. Modify the onCreate method as follows:
 
 ```java
 override fun onCreate(savedInstanceState: Bundle?) {
@@ -211,7 +229,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 }
 ```
 
-4. Update the updateControls method:
+5. Update the updateControls method:
 
 ```java
 private fun updateControls() {
@@ -229,7 +247,7 @@ private fun updateControls() {
 }
 ```
 
-5. Add onCameraViewStarted, onCameraViewStopped and onCameraFrame:
+6. Add onCameraViewStarted, onCameraViewStopped and onCameraFrame:
 
 ```java
 override fun onCameraViewStarted(width: Int, height: Int) {
@@ -376,13 +394,21 @@ After re-launching the application and pressing the Start button you will see th
 To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
 
 Follow these steps (all changes to be made in `MainActivity.kt`):
-1. Declare the Mat object:
+
+1. Import `Bitmap` and `Utils` packages for use in `OnCameraFrame`:
+
+```java
+import android.graphics.Bitmap
+import org.opencv.android.Utils
+```
+
+2. Declare the Mat object:
 
 ```java
 private lateinit var inputMat: Mat
 ```
 
-2. Initialize the above member within the `onCameraViewStarted` method:
+3. Initialize the above member within the `onCameraViewStarted` method:
 
 ```java
 override fun onCameraViewStarted(width: Int, height: Int) {
@@ -394,7 +420,7 @@ override fun onCameraViewStarted(width: Int, height: Int) {
 }
 ```
 
-3. Modify the `onCameraViewStopped` method:
+4. Modify the `onCameraViewStopped` method:
 
 ```java
 override fun onCameraViewStopped() {
@@ -406,7 +432,7 @@ override fun onCameraViewStopped() {
 }
 ```
 
-4. Update the `onCameraFrame` method:
+5. Update the `onCameraFrame` method:
 
 ```java
 override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?): Mat {
@@ -435,12 +461,18 @@ In the final step, you will process the camera image with OpenCV. To do so, you 
 
 Proceed as follows (all changes to be made in MainActivity.kt):
 
-1. Declare another Mat object:
+1. Import the `Imgproc` package from OpenCV in order to add adaptive thresholding:
+
+```java
+import org.opencv.imgproc.Imgproc
+```
+
+2. Declare another Mat object:
 ```java
 private lateinit var processedMat: Mat
 ```
 
-2. Add Mat initialization and release:
+3. Add Mat initialization and release:
 ```java
 override fun onCameraViewStarted(width: Int, height: Int) {
     isPreviewActive = true
@@ -461,7 +493,7 @@ override fun onCameraViewStopped() {
 }
 ```
 
-3. Process the image within the onCameraFrame:
+4. Process the image within the onCameraFrame:
 
 ```java
 override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?): Mat {
