@@ -1,0 +1,20 @@
+{{define "main"}}
+
+<!-- Define variables for easier distribution into partials -->
+{{ $thisdir := .File.Dir }}
+{{ $thisfile:= .File.TranslationBaseName}}
+
+
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
+
+
+        <!-- Main content display-->
+        <div class="content-box markdown-content-div" style="width:100%;min-height:500px;">
+            <!-- Content -->
+            {{partial "general-formatting/markdown-content-formatting.html" .Content}}
+        </div>
+ 
+</div>
+
+
+{{end}}
