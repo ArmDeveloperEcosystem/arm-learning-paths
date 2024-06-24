@@ -7,7 +7,9 @@ weight: 5
 layout: "learningpathall"
 ---
 ## Process images
-In the final step, you will process the camera image with OpenCV. To do so, you will declare another Mat for storing the processed image. Then, depending on whether the CheckBox is checked, you will apply the adaptive thresholding algorithm to the input image.
+In this final step, you will process the camera image with OpenCV. 
+
+To do so, you will declare another Mat for storing the processed image. Then, depending on whether the CheckBox is checked, you will apply the adaptive thresholding algorithm to the input image.
 
 Proceed as follows (all changes to be made in MainActivity.kt):
 
@@ -74,13 +76,15 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-The major modification you made is following: If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. `matToDisplay` is set to the processed frame if processing is enabled; otherwise, the input frame is used.
+The major modification you made is following: 
+
+If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. `matToDisplay` is set to the processed frame if processing is enabled; otherwise, the input frame is used.
 
 To process the image, you will use the `Imgproc.adaptiveThreshold` openCV function which applies adaptive thresholding to a grayscale image. Before you can apply thresholding, you will convert the color image to grayscale using the `Imgproc.cvtColor` OpenCV function.
 
-The adaptive thresholding implemented in OpenCV has two versions. They differ in how the threshold value is calculated within the block. Here, you used `Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C`, which uses the mean of a Gaussian window to calculate the threshold for each pixel. Then, you specified the thresholding type as `Imgproc.THRESH_BINARY`. It converts pixels above the threshold to the maximum value (255) and below the threshold to 0.
+The adaptive thresholding implemented in OpenCV has two versions. They differ in how the threshold value is calculated within the block. Here, you use `Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C`, which uses the mean of a Gaussian window to calculate the threshold for each pixel. Then, you specify the thresholding type as `Imgproc.THRESH_BINARY`. It converts pixels above the threshold to the maximum value (255) and below the threshold to 0.
 
-You used 21 as the size of the block to use for calculating the threshold for each pixel and 0 as a constant subtracted from the mean or weighted mean calculated.
+You use 21 as the size of the block to use for calculating the threshold for each pixel and 0 as a constant subtracted from the mean or weighted mean calculated.
 
 After re-running the application, starting the preview, and enabling the processing, you should see the following result:
 
