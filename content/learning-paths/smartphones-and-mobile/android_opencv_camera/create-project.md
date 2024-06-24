@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 ## Before you begin
-You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (we have used Android Studio Jellyfish | 2023.3.1 Patch 1). 
+You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (this examples uses Android Studio Jellyfish | 2023.3.1 Patch 1). 
 
 ## Create a project
 Follow these steps to create a project and add OpenCV:
@@ -23,7 +23,7 @@ Follow these steps to create a project and add OpenCV:
 3. Configure the project as follows (see figure below):
 - Name: **Arm64.OpenCV.Camera**
 - Package name: **com.example.arm64opencvcamera**
-- Save location: **select location**
+- Save location: *Select relevant file location*
 - Language: **Kotlin**
 - Minimum SDK: **API 24**
 - Build configuration language: **Kotlin DSL**
