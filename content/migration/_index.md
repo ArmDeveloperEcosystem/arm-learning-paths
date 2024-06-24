@@ -74,6 +74,7 @@ If your code uses intrinsics from another architecture, you can use the librarie
 There are additional resources which may help you find answers to your migration questions:
 
 - [Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) 
+- [Infrastructure Solutions blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/)
 - [Arm software install guides](https://learn.arm.com/install-guides)
 - [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started) contains a wealth of information. 
 
@@ -122,6 +123,8 @@ This may involve a variety of steps:
 - Creating a complete version of your application in a dev environment for additional testing
 
 Make sure to research the details needed for these tasks by checking any places you use infrastructure as code or other places you store details about virtual machine types and sizes, as well as parameters for managed services.
+
+You can also check [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) for the latest cloud and CI/CD initiatives for developers.
 
 ## Summary
 
