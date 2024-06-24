@@ -86,7 +86,7 @@ To modify the application view, open `activity_main.xml` and replace the file co
 </LinearLayout>
 ```
 
-After adding this code, re-run the 'app'. The above declarations render the following:
+After adding this code, re-run the application. The above declarations render the following:
 
 ![img8](Figures/08.png)
 
@@ -152,7 +152,9 @@ Click the **While using the app** button to enable camera access. You are now re
 ## Control the camera
 You will now extend the MainActivity.kt by an additional logic that enables to start and stop the camera preview, when user clicks corresponding buttons. Also, you will extend the MainActivity class by implementing the CameraBridgeViewBase.CvCameraViewListener2 interface to access the JavaCameraView events associated with the camera lifecycle: 
 1. onCameraViewStarted - This method is called when the camera preview starts. You typically use this method to initialize resources needed for processing frames, such as creating OpenCV's Mat objects that will hold the image data.
+
 2. onCameraViewStopped - This method is called when the camera preview stops. You use this method to release or clean up resources that were allocated in onCameraViewStarted, such as releasing Mat objects or stopping background processing tasks
+
 3. onCameraFrame - This method is called for each frame captured by the camera. You use this method to process each frame. In this learning path you will use this method to process camera image using adaptive thresholding.
 
 Proceed as follows (all changes are to be made in the MainActivity.kt file):
@@ -171,7 +173,7 @@ import org.opencv.core.Mat
 ```java
 class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {
 ```
-3. In the MainActivity class declare the following additional variables (right below class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {)
+3. In the MainActivity class declare the following additional variables (right below class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {):
 
 ```
 private lateinit var buttonStartPreview: Button
@@ -269,11 +271,11 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-We started by declaring TextView, Button, CheckBox, and ImageView elements, along with the OpenCV camera view. We also added an additional variable, isPreviewActive, which tracks the camera preview status. Then, we modified the onCreate method to bind UI elements to the variables. After checking if the camera permission is granted, we set the camera index to 0 to access the rear camera. If you want to record images from the front camera, you will need to change the camera index to 1. Afterward, we set the activity as the listener for camera events.
+You began by declaring TextView, Button, CheckBox, and ImageView elements, along with the OpenCV camera view. You also added an additional variable, isPreviewActive, which tracks the camera preview status. Then, you modified the onCreate method to bind UI elements to the variables. After checking if the camera permission is granted, you set the camera index to 0 to access the rear camera. If you want to record images from the front camera, you will need to change the camera index to 1. Afterwards, you set the activity as the listener for camera events.
 
-Next, we implemented click event handlers for the buttons. Specifically, when the user clicks the Start button, we set the camera permission as granted (openCvCameraView.setCameraPermissionGranted()) and enable the camera view (openCvCameraView.enableView()). Then, we modified the updateControls method to change the UI elements based on the current state. We disable the Start button when the camera preview is active. Conversely, when the camera preview is inactive, the Stop button is disabled.
+Next, you implemented click event handlers for the buttons. Specifically, when the user clicks the Start button, you set the camera permission as granted (openCvCameraView.setCameraPermissionGranted()) and enable the camera view (openCvCameraView.enableView()). Then, you modified the updateControls method to change the UI elements based on the current state. You disable the Start button when the camera preview is active. Conversely, when the camera preview is inactive, the Stop button is disabled.
 
-Finally, we implemented onCameraViewStarted, onCameraViewStopped, and onCameraFrame as follows:
+Finally, you implemented onCameraViewStarted, onCameraViewStopped, and onCameraFrame as follows:
 - onCameraViewStarted - sets isPreviewActive to true and updates the controls.
 - onCameraViewStopped - sets isPreviewActive to false and updates the controls.
 - onCameraFrame - returns the frame in RGBA format for processing.
@@ -393,7 +395,7 @@ After re-launching the application and pressing the Start button you will see th
 ![img10](Figures/10.png)
 
 ## Display images
-To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
+To display images, you need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
 
 Follow these steps (all changes to be made in `MainActivity.kt`):
 
