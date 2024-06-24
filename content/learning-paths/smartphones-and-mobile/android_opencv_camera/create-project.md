@@ -6,10 +6,9 @@ weight: 3
 
 layout: "learningpathall"
 ---
-## Before you begin
-You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (this examples uses Android Studio Jellyfish | 2023.3.1 Patch 1). 
-
 ## Create a project
+You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (this examples uses Android Studio Jellyfish | 2023.3.1 Patch 1).
+
 Follow these steps to create a project and add OpenCV:
 
 1. Open Android Studio on your development machine and then click the **+ New Project** icon:

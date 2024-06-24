@@ -3,10 +3,10 @@ title: Create Computer Vision Applications with OpenCV on Arm64-powered Android 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an intermediate topic for developers who are interested in creating Computer Vision Applications with OpenCV on Arm64-powered Android Devices
+who_is_this_for: This is an intermediate topic for developers who are interested in creating Computer Vision Applications with OpenCV on Arm64-powered Android Devices.
 
 learning_objectives:
-   - Describe OpenCV.
+   - Describe what OpenCV is, and what it can offer.
    - Create and configure a project to add OpenCV support.
    - Process camera images using OpenCV.
 
