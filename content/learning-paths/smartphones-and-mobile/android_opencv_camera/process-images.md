@@ -9,7 +9,7 @@ layout: "learningpathall"
 ## Process images
 In this final step, you will process the camera image with OpenCV. 
 
-To do so, you will declare another Mat for storing the processed image. Then, depending on whether the CheckBox is checked, you will apply the adaptive thresholding algorithm to the input image.
+To do so, you will declare another Mat for storing the processed image. Then, depending on whether the checkbox is checked, you will apply the adaptive thresholding algorithm to the input image.
 
 Proceed as follows (all changes to be made in MainActivity.kt):
 
@@ -78,7 +78,7 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 
 The major modification you made is following: 
 
-If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. `matToDisplay` is set to the processed frame if processing is enabled; otherwise, the input frame is used.
+If the checkbox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. `matToDisplay` is set to the processed frame if processing is enabled; otherwise, the input frame is used.
 
 To process the image, you will use the `Imgproc.adaptiveThreshold` openCV function which applies adaptive thresholding to a grayscale image. Before you can apply thresholding, you will convert the color image to grayscale using the `Imgproc.cvtColor` OpenCV function.
 
