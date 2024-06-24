@@ -2,7 +2,7 @@
 # User change
 title: "Run an application in a Realm"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -14,7 +14,7 @@ Download the [`armswdev/aemfvp-cca-v2-image`](https://hub.docker.com/r/armswdev/
 
 Install [GCC](/install-guides/gcc/) on your machine. Depending on the architecture of your machine, `aarch64` or `x86_64`, you will need to install either the native compiler or the cross-compiler.
 
-## Overview
+## Running an application in a Realm
 In the previous section, you were able to boot a guest virtual machine as the Realm. In this section, you will learn how to run an application within that Realm. The application inherits the confidential protection of the guest virtual machine.
 
 A convenient way to run an application inside a Realm, within the context of this example, is to package the application as the "init" process for the guest Linux kernel. 

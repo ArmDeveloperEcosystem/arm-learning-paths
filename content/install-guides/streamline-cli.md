@@ -31,18 +31,18 @@ The Streamline CLI tools are native command-line tools that are designed to run 
 
 ## Before you begin
 
-Use the the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in this [Learning Path tutorial][1] to discover how to download and run this utility.
+Use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in [Get ready for performance analysis with Sysreport][1] to discover how to download and run this utility.
 
 [1]: https://learn.arm.com/learning-paths/servers-and-cloud-computing/sysreport/
 
-The `perf counters` entry in the generated report will indicate how many CPU counters are available. The `perf sampling` entry will indicate if SPE is available. You will achieve the best profiles in systems with at least 6 available CPU counters and SPE.
+The `perf counters` entry in the generated report indicates how many CPU counters are available. The `perf sampling` entry indicates if SPE is available. You will achieve the best profiles in systems with at least 6 available CPU counters and SPE.
 
-The Streamline CLI tools can be used in systems with no CPU counters, but can only return a basic hot-spot profile based on time-based sampling.
+The Streamline CLI tools can be used in systems without any CPU counters, but can only return a basic hot-spot profile based on time-based sampling.
 No top-down methodology metrics will be available.
 
-The Streamline CLI tools can give top-down metrics in systems with as few as 3 available CPU counters. The effective sample rate for each metrics will be lower, because we will need to time-slice the counters to capture all of the requested metrics, so you will need to run your application for longer to get the same number of samples for each metric. Metrics that require more input counters than are available cannot be captured.
+The Streamline CLI tools can give top-down metrics in systems with as few as 3 available CPU counters. The effective sample rate for each metric will be lower, because you need to time-slice the counters to capture all of the requested metrics. This means that you need to run your application for longer to get the same number of samples for each metric. Metrics that require more input counters than are available cannot be captured.
 
-The Streamline CLI tools can be used without SPE. Load operation data source metrics will not be available, and branch mispredict metrics may be less
+The Streamline CLI tools can be used without SPE. Load operation data source metrics will not be available, and branch mispredict metrics might be less
 accurate.
 
 ## Building your application
@@ -57,7 +57,6 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
     ```sh
     wget https://artifacts.tools.arm.com/arm-performance-studio/2024.2/Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
-
     tar -xzf Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
     ```
 
@@ -69,7 +68,7 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
     source ./sl-venv/bin/activate
 
     # From inside the virtual environment
-    python3 -m pip install -r ./<install>/bin/requirements.txt
+    python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
     ```
 
    {{% notice Note%}}
@@ -78,7 +77,7 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ## Applying the kernel patch
 
-For best results we provide a Linux kernel patch that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down
+For best results, we provide a Linux kernel patch that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down
 metrics on Arm systems. This patch provides two new capabilities:
 
 * It allows a new thread to inherit the perf counter group configuration of its parent.
@@ -89,16 +88,16 @@ frequency sampling. The following options are available:
 
 * System-wide profile with top-down metrics.
 * Single threaded application profile with top-down metrics.
-* Multi-process\thread application profile **without** top-down metrics.
+* Multi-process/thread application profile **without** top-down metrics.
 
-With the patch applied it is possible to collect the following profiles:
+With the patch applied, it is possible to collect the following profiles:
 
 * System-wide profile with top-down metrics.
 * Single threaded application profile with top-down metrics.
-* Multi-process\thread application profile **with** top-down metrics.
+* Multi-process/thread application profile **with** top-down metrics.
 
-The following instructions show how to install the patch on Amazon Linux 2023.
-You may need to adapt slightly to other Linux distributions.
+The following instructions show you how to install the patch on Amazon Linux 2023.
+You might need to adapt them slightly to other Linux distributions.
 
 ### Manual application to the source tree
 
@@ -118,7 +117,7 @@ patch -p 1 -i v6.7-combined.patch
 
 Follow these steps to integrate these patches into an RPM-based distribution's kernel:
 
-1. Remove any existing `rpmbuild` directory (rename as appropriate):
+1. Remove any existing `rpmbuild` directory, renaming as appropriate:
 
     ```sh
    rm -fr rpmbuild
@@ -151,13 +150,13 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
    nano SPECS/kernel.spec
     ```
 
-1. Search for the list of patches starting with `Patch0001` and append the line for the new patch to the end of the list. Replace 9999 with the patch number used earlier:
+1. Search for the list of patches starting with `Patch0001`, and append the line for the new patch to the end of the list. Replace 9999 with the patch number used earlier:
 
     ```sh
    Patch9999: 9999-strobing-patch.patch
     ```
 
-1. Search for the list of patch apply steps starting with `ApplyPatch` and append the line for the new patch to the end of the list. Replace 9999 with the patch number used earlier:
+1. Search for the list of patch apply steps starting with `ApplyPatch`, and append the line for the new patch to the end of the list. Replace 9999 with the patch number used earlier:
 
     ```sh
    ApplyPatch 9999-strobing-patch.patch
@@ -183,7 +182,7 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
    sudo reboot
     ```
 
-1. Validate that the patch applied correctly:
+1. Validate that the patch has been applied correctly:
 
     ```sh
    ls -l /sys/bus/event_source/devices/*/format/strobe_period
@@ -195,4 +194,4 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
    /sys/bus/event_source/devices/armv8_pmuv3_0/format/strobe_period
     ```
 
-You are now ready to use Streamline CLI Tools. [Refer to the learning path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/profiling-for-neoverse) to get started.
+You are now ready to use Streamline CLI Tools. Refer to [Profiling for Neoverse with Streamline CLI Tools](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/) to get started.

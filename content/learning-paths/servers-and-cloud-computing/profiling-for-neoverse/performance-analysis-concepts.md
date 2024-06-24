@@ -8,14 +8,18 @@ layout: learningpathall
 
 ## Understanding performance
 
-The processing core of a modern Arm CPU is represented in this methodology as an abstract model consisting of 3 major phases, Frontend, Backend and Retire.
+The processing core of a modern Arm CPU is represented in this methodology as an abstract model consisting of three major phases:
+
+* Frontend.
+* Backend. 
+* Retire.
 
 ![An abstract CPU block diagram](images/abstract-cpu-pipeline.svg)
 
-You can define the available performance of the core using the maximum number of micro-operations (micro-ops) that can be issued to the backend each clock
+You can define the available performance of the core using the maximum number of micro-operations (micro-ops) that can be issued to the backend of each clock
 cycle. This execution width is known as the issue slot count of the processor.
 
-The main goal of this performance analysis methodology is to attribute unused or not needed slot issues to specific causes, to give you feedback about what is causing your software to run slowly.
+The main goal of this performance analysis methodology is to attribute unused or redundant slot issues to specific causes - giving you feedback about what is causing your software to run slowly.
 
 ### Frontend
 
@@ -30,13 +34,13 @@ The frontend also implements support for branch prediction and speculative execu
 
 The backend phase represents the execution of micro-ops by the processing pipelines inside the core. There are multiple pipeline types, each of which can process a subset of the instruction set, and be fed by their own issue queues.
 
-An application will have uneven loading on the backend queues. Queue load depends on the instruction mix in the part of the code that is currently running. When optimizing your application, try to prioritize changes that will relieve pressure on the most heavily loaded queue.
+An application has uneven loading on the backend queues. Queue load depends on the instruction mix in the part of the code that is currently running. When optimizing your application, try to prioritize changes that will relieve pressure on the most heavily-loaded queue.
 
 ### Retire
 
-The retire phase represents the resolution of micro-ops that are architecturally complete. Measuring the number of retired instructions gives a metric showing the amount of useful work completed by the processor.
+The retire phase represents the resolution of micro-ops that are architecturally complete. Measuring the number of retired instructions generates a metric showing the amount of useful work completed by the processor.
 
-Not all issued instructions will retire. Speculatively issued micro-ops will be cancelled if they are shown to be on the wrong code path and are therefore not required.
+Not all issued instructions retire. Speculatively-issued micro-ops are cancelled if they are shown to be on the wrong code path and are therefore not required.
 
 ## Performance counters
 
@@ -58,12 +62,12 @@ The methodology describes performance using a simple hierarchical tree of perfor
 
 ![The major top-down metrics](images/topdown-tree.svg)
 
-This hierarchical approach, with clear causal metrics, provides an intuitive way to find and understand the microarchitecture-sensitive performance issues that your software is triggering. Using this information, you can target the problem with specific corrective actions to improve performance.
+This hierarchical approach, with clear causal metrics, provides an intuitive way to find and understand the microarchitecture-sensitive performance issues that your software triggers. Using this information, you can target the problem with specific corrective actions to improve performance.
 
 One of the major usability benefits of the top-down methodology for software developers is that the first few levels of the top-down tree do not require any knowledge of the specific CPU you are running on. You can profile on any of the Neoverse CPUs and get the same metrics, despite differences in the underlying hardware design. This lets you focus on your software and improving performance, instead of worrying about which event to capture on a specific
 CPU.
 
-The deeper levels of the tree become increasingly hardware specific, which is useful for developers who want to optimize very deeply for a specific microarchitecture. For most common software optimizations these levels are not necessary.
+The deeper levels of the tree become increasingly hardware-specific, which is useful for developers who want to optimize very deeply for a specific microarchitecture. For most common software optimizations, these levels are not necessary.
 
 ## Arm Statistical Profiling Extension
 

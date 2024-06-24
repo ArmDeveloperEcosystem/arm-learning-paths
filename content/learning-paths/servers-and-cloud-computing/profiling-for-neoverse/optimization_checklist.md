@@ -16,6 +16,7 @@ Here is a suggested optimization checklist:
 1. Check the compiler did a good job. Disassemble your most significant functions and verify that the generated code looks efficient.
 
 1. Check the functions that are the most frontend bound:
+    
     * If you see high instruction cache miss rate, apply profile-guided optimization to reduce the code size of less important functions. This frees up more instruction cache space for the important hot-functions.
     * If you see high instruction TLB misses, apply code layout optimization, using tools such as [Bolt](https://learn.arm.com/learning-paths/servers-and-cloud-computing/bolt/overview/). This improves locality of code accesses, reducing the number of TLB misses.
 
