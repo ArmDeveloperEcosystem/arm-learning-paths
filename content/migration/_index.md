@@ -61,7 +61,7 @@ Migration typically falls into 3 categories:
 2. Software installed using scripts or binary downloads requires minor changes to strings, such as changing “x86_64” and “amd64” to “arm64” or “aarch64”.
 3. A few software projects still don't support Arm Linux, some are well known projects like the Edge browser, and the others are smaller projects that haven't added Arm support, yet. Some could be blockers and others may be easy to compile yourself.
 
-The [Software Ecosystem Dashboard for Arm](https://learn.arm.com/learning-paths/cross-platform/intrinsics/) is a resource to identify if your software dependencies are available for Arm. 
+The [Software Ecosystem Dashboard for Arm](https://www.arm.com/developer-hub/ecosystem-dashboard/) is a resource to identify if your software dependencies are available for Arm. 
 
 Use the Ecosystem Dashboard to find software and understand if everything you need runs on Arm. If you don't find software listed, please raise an issue in the [GitHub project](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm/) or submit a pull request. 
 
