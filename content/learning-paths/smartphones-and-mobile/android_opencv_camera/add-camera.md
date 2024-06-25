@@ -454,7 +454,7 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-To test the code, you will need to run the application on an actual device. Follow [these steps](https://developer.android.com/studio/run/device).
+To test the code, you will need to run the application on an actual device. Follow the steps in [Run apps on a hardware device](https://developer.android.com/studio/run/device) to test the app.
 
 After running the app, remember to grant permissions to the camera. Then, click the Start button, and the application will display images from the camera:
 
