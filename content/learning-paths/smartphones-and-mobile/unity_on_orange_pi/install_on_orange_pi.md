@@ -17,7 +17,7 @@ You can load it onto a cloud drive (Dropbox in my case) and just download it usi
 
 1. Upload the APK to a cloud drive and make the folder viewable to anyone with the link.
 
-2. Paste the link into a [URL shortener](https://www.shorturl.at/shortener.php), and then manually type the shortened URL into Chrome on the Orange Pi.
+2. Paste the link into a [URL shortener](https://www.shorturl.at/), and then manually type the shortened URL into Chrome on the Orange Pi.
 
 3. Download the APK (the location doesn't matter, the default Download folder is fine).
 
