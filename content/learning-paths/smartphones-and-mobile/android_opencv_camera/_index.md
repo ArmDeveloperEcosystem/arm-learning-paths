@@ -26,7 +26,8 @@ operatingsystems:
 tools_software_languages:
     - Android
     - Android Studio
-    - Kotlin / Java
+    - Kotlin
+    - Java
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
