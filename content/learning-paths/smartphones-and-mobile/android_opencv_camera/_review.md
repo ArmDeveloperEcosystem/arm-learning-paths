@@ -23,18 +23,18 @@ review:
 
     - questions:
         question: >
-            What do you use to prepare the image acquired with OpenCV before display?
+            What do you do to prepare the image acquired with OpenCV before display?
         answers:
-            - "Detected the device’s current orientation and apply the necessary rotation to ensure the camera preview appears correctly oriented"
-            - "Configure app manifest"
-            - "Configure the device"
+            - "Detect the device’s current orientation and apply the necessary rotation to ensure the camera preview appears correctly oriented."
+            - "Configure the app manifest."
+            - "Configure the device."
         correct_answer: 1
         explanation: >
-            To properly display the image from the camera you need to detect the device’s current orientation and apply the necessary rotation to ensure the camera preview appears correctly oriented.
+            To properly display the image from the camera, you need to detect the device’s current orientation and apply the necessary rotation to ensure the camera preview appears correctly oriented.
             
     - questions:
         question: >
-            Does the thresholing of OpenCV can be applied to RGB images?
+            Can the thresholding of OpenCV be applied to RGB images?
         answers:
         answers:
             - "Yes."
