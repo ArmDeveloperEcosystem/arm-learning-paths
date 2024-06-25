@@ -133,14 +133,19 @@ The output will be similar to:
 
 ```output
 ...
-56/56 Test #56: tail_biting_convolutional_decoding ...***Exception: Illegal  0.05 sec
 
-2% tests passed, 55 tests failed out of 56
+61/64 Test #61: ldpc_awgn ............................   Passed  255.05 sec
+      Start 62: modulation_awgn
+62/64 Test #62: modulation_awgn ......................   Passed   28.39 sec
+      Start 63: polar_awgn
+63/64 Test #63: polar_awgn ...........................   Passed  390.17 sec
+      Start 64: turbo_awgn
+64/64 Test #64: turbo_awgn ...........................   Passed  190.39 sec
 
-Total Test time (real) =   2.80 sec
+100% tests passed, 0 tests failed out of 64
 
-The following tests FAILED:
-	  1 - fft_cf32 (ILLEGAL)
+Total Test time (real) = 1095.82 sec
+[100%] Built target check
 
 ...
 ```
