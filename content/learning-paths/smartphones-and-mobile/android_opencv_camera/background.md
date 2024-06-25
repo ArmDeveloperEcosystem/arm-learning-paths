@@ -32,7 +32,7 @@ OpenCV simplifies the process of capturing and processing images and videos from
 - Capturing frames in real-time.
 - Applying computer vision algorithms directly to the camera feed.
 
-Recently, OpenCV became available for Arm64 through the Maven repository, enabling developers to further improve the performance of their applications. In this Learning Path, you will learn how to use this to create and configure an Android project that uses OpenCV to retrieve images from the camera and process them.
+Recently, OpenCV became available for Arm through the Maven repository, enabling developers to further improve the performance of their applications. In this Learning Path, you will learn how to use this to create and configure an Android project that uses OpenCV to retrieve images from the camera and process them.
 
 ### Learning Path Structure ###
 
@@ -41,4 +41,4 @@ The Learning Path comprises three steps:
 2. Extend the project to access the device’s camera and retrieve camera frames with OpenCV.
 3. Process camera images using OpenCV.
 
-You can find all the code used in this learning path [here](https://github.com/dawidborycki/Arm64OpenCVCamera.git).
+You can find all the code used in this learning path in a [GitHub repository](https://github.com/dawidborycki/Arm64OpenCVCamera.git).

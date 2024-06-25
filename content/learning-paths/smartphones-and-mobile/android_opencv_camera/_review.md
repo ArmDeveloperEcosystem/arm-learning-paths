@@ -41,7 +41,7 @@ review:
             - "No."                        
         correct_answer: 2
         explanation: >
-            Before we can apply thresholding, we need to convert the color image to grayscale using the Imgproc.cvtColor OpenCV function.
+            Before you can apply thresholding, you need to convert the color image to grayscale using the Imgproc.cvtColor OpenCV function.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
