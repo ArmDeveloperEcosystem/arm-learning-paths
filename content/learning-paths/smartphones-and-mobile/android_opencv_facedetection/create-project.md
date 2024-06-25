@@ -52,13 +52,7 @@ Start by creating the
 
 ![img4](Figures/04.png)
 
-3. Open the *AndroidManifest.xml* and add the following declarations (make sure to add them above the application tag):
-```XML
-<uses-permission android:name="android.permission.CAMERA"/>
-<uses-feature android:name="android.hardware.camera"/>
-```
-
-4. Modify the *activity_main.xml* as shown below:
+3. Modify the *activity_main.xml* as shown below:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -105,7 +99,13 @@ Start by creating the
 </LinearLayout>
 ```
 
-5. Open *MainActivity.kt* (*app/kotlin+java/com.example.arm64opencvcamera*), and replace the file contents with the following code:
+4. Open the *AndroidManifest.xml* file (*app/manifests/AndroidManifest.xml*) and add the following declarations (make sure to add them above the application tag):
+```XML
+<uses-permission android:name="android.permission.CAMERA"/>
+<uses-feature android:name="android.hardware.camera"/>
+```
+
+5. Open *MainActivity.kt* (*app/kotlin+java/com.example.arm64opencvfacedetection*), and replace the file contents with the following code:
 
 ```kotlin
 package com.example.arm64opencvfacedetection
@@ -212,6 +212,14 @@ The onCreate method initializes the buttons and camera view. Checks and requests
 
 Finally, we call updateControls(), which updates the enabled state of the start and stop preview buttons based on whether OpenCV is initialized and if the preview is active.
 
-The above code also declares CameraBridgeViewBase.CvCameraViewListener2 methods: onCameraViewStarted, onCameraViewStopped, and onCameraFrame. The first two will be called when the camera view starts or stops. Here, we use these methods to set the isPreviewActive variable. The last method will be called for each frame from the camera. Here, we just pass the camera frame as OpenCV's Mat object. In the next step we will extend this implementation to detect faces.
+The above code also declares CameraBridgeViewBase.CvCameraViewListener2 methods: onCameraViewStarted, onCameraViewStopped, and onCameraFrame. The first two will be called when the camera view starts or stops. Here, we use these methods to set the isPreviewActive variable. The last method will be called for each frame from the camera. Here, we just pass the camera frame as OpenCV's Mat object.
 
-We have just prepared the application to stream camera frames. You can run the application as in this [learning path](/content/learning-paths/smartphones-and-mobile/android_opencv_camera). After running the application, give it an access to the camera, and click the Start button. You will see the images from the front device's camera.
+## Launch the application
+You have just prepared the application to stream camera frames. You can now launch the application in the emulator. To do so, click the green 'run' button as shown here:
+
+![click run](Figures/05.png)
+
+The application should start, and you should see the app running in an emulator (it will ask you for camera permissions).
+
+In the next step we will extend the application to detect faces.
+
