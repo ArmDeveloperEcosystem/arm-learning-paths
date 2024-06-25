@@ -6,13 +6,13 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for embedded software developers interested in AWS IoT Greengrass.
 
 learning_objectives: 
-    - Start a Raspberry Pi Arm Virtual Hardware instance
-    - Deploy pre-built AWS IoT Greengrass components on Arm Virtual Hardware
+    - Start a Raspberry Pi Arm Virtual Hardware instance.
+    - Deploy pre-built AWS IoT Greengrass components on Arm Virtual Hardware.
 
 prerequisites:
-    - An Amazon AWS account
-    - An Arm Virtual Hardware account
-    - Some familiarity with embedded Linux
+    - An Amazon AWS account.
+    - An Arm Virtual Hardware account.
+    - Some familiarity with embedded Linux.
 
 author_primary: Michael Hall
 
