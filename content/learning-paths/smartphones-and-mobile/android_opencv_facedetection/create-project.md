@@ -221,5 +221,7 @@ You have just prepared the application to stream camera frames. You can now laun
 
 The application should start, and you should see the app running in an emulator (it will ask you for camera permissions).
 
-In the next step we will extend the application to detect faces.
+After ensuring that the application starts, you will next need to set up the application to run on an actual device in order to complete the face detection section. Follow [these steps](https://developer.android.com/studio/run/device).
+
+Once you have the application running on your device, you can move on to the next section.
 
