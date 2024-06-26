@@ -49,7 +49,7 @@ From now on, you can use OpenCV in your application. In the next step, you will 
 You will now initialize OpenCV and prepare the application to stream frames from the front camera. In the next step you will process the frames to detect faces in the video stream.
 
 1. Under the Project in the left window, double-click *app/res/layout/activity_main.xml*. This opens the view designer. 
-2. Click the highglighted icon in the top right corner to switch to the XML view.
+2. Click the highlighted icon in the top right corner to switch to the XML view.
 
 ![img4](Figures/04.png)
 

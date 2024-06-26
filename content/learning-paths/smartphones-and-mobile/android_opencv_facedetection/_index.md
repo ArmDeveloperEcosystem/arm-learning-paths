@@ -7,7 +7,7 @@ who_is_this_for: This is an intermediate topic for developers who are interested
 
 learning_objectives:
    - Describe how you can use OpenCV for face detection.   
-   - Acquire images from the camera.
+   - Use OpenCV to retrieve camera frames.
    - Use Haar cascade classifier for face detection.
 
 prerequisites:
