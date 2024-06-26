@@ -92,7 +92,7 @@ For the rest of this walk-through you will look over the reference kernel functi
 
 ## Understand KleidiAI's operation
 
-Next you will look at the KleidiAI's reference implementation in the example file to understand with the micro-kernels do to accelerate AI inference. The reference implementation is easier to understand by looking at the code and functionally equivilant to KleidiAI's actual micro-kernels. Links to KleidiAI's specific micro-kernel routines will also be included.
+Next you will look at the KleidiAI's reference implementation in the example file to understand with the micro-kernels do to accelerate AI inference. The reference implementation is easier to understand by looking at the code and functionally equivalent to KleidiAI's actual micro-kernels. Links to KleidiAI's specific micro-kernel routines will also be included.
 
 We'll look at three main routines:
 1. Quantizing & Packing the RHS matrix
@@ -112,7 +112,7 @@ The function takes in the following parameters:
 * Output matrix location (`rhs_qs4cx`). This is a 1-dimensional matrix that packs the INT4 numbers into 8-bit chunks of memory.
 * Scale factors (`rhs_scales_f32`). This provides the exact number used to quantize the incoming model weight numbers (up to FP32 format) to INT4. Each channel is quantized independently and thus has a unique scale factor.
 
-You can tell the target is of the INT4 type based on the naming, `qs4cx`, which translates to quantized (q), symmetric (s), 4-bit integres (4) per channel (cx). Each 'channel' in this matrix refers to all the weights feeding into a given channel (ie. a given neuron). Because the weights feeding into different neurons may vary significantly, quantizing by channel offers improved percision and flexibility.
+You can tell the target is of the INT4 type based on the naming, `qs4cx`, which translates to quantized (q), symmetric (s), 4-bit integers (4) per channel (cx). Each 'channel' in this matrix refers to all the weights feeding into a given channel (ie. a given neuron). Because the weights feeding into different neurons may vary significantly, quantizing by channel offers improved precision and flexibility.
 
 After calculating variables like the destination matrix stride length and scale factors, the quantization and packing occurs:
 
@@ -159,11 +159,11 @@ The function takes in the following parameters:
 * Input matrix location (`lhs_f32`).
 * Output matrix location (`lhs_qa8xd`). This is a 1-dimensional matrix.
 
-Scale factors are also required in the LHS quantization, but for computational efficiency are stored in the LHS output matrix directy. 
+Scale factors are also required in the LHS quantization, but for computational efficiency are stored in the LHS output matrix directly. 
 
-You can tell the target is of the INT8 type based on the naming, qa8dx, which translates to quantized (q), asymmetric (a), 8-bit integres (8) per dimension (dx). Each ‘dimension’ in this matrix refers to a different feature in the input data (ie. in image processing, input dimensions being RGB - red, green, and blue). Because each input dimension can have a different distribution of values, quantizing by dimension offers improved percision and consistency.
+You can tell the target is of the INT8 type based on the naming, qa8dx, which translates to quantized (q), asymmetric (a), 8-bit integers (8) per dimension (dx). Each ‘dimension’ in this matrix refers to a different feature in the input data (ie. in image processing, input dimensions being RGB - red, green, and blue). Because each input dimension can have a different distribution of values, quantizing by dimension offers improved precision and consistency.
 
-The next few steps in this LHS micro-kernel are functionally equal to the RHS micro-kernel: Calculating the stride length and scale factor. However, before the quantization takes place, the LHS matrix calculates where the appropriate zero point should be to handle a wider range of input values not centred around zero with more flexibility. This is refered to as ‘asymmetric’ quantization, allowing for different scale and zero points for each matrix row.
+The next few steps in this LHS micro-kernel are functionally equal to the RHS micro-kernel: Calculating the stride length and scale factor. However, before the quantization takes place, the LHS matrix calculates where the appropriate zero point should be to handle a wider range of input values not centered around zero with more flexibility. This is referred to as ‘asymmetric’ quantization, allowing for different scale and zero points for each matrix row.
 
 The zero point is calculated here:
 ```C
@@ -211,7 +211,7 @@ The function takes in the following parameters:
 * The pointer to the output matrix (`dst_ref_mtx_f32`).
 * Upper and lower bounds on floating point numbers for easier processing (`-FLT_MAX`, `FLT_MAX`).
 
-The function's name describes what it does and its input/output formats. It is the reference (ref) matrix multiplication (matmul), outputing in floating-point 32-bit format (f32), taking in two matricies of previously described formats.
+The function's name describes what it does and its input/output formats. It is the reference (ref) matrix multiplication (matmul), outputting in floating-point 32-bit format (f32), taking in two matrices of previously described formats.
 
 The implementation of the matrix multiplication is relatively straightforward to understand. First the function calculates how far to stride to move over each input matrix's rows while iterating: 
 
@@ -246,12 +246,11 @@ These dot product calculations, `iacc += lhs_v0 * rhs_v0;  iacc += lhs_v1 * rhs_
 
 The last step is to convert the result back into the native number format, using the LHS and RHS scale factors. The final result is `dst_ref_mtx_f32`, the output matrix in the native number format. This matrix is represented in 1D, and is the ultimate output of the KleidiAI micro-kernels.
 
-#### KleidiAI micro-kernel varients explained
+#### KleidiAI micro-kernel variants explained
 
-If you navigate to the [/kleidiai/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp](https://gitlab.arm.com/kleidi/kleidiai/-/tree/main/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp?ref_type=heads) directory where the KleidiAI INT8/INT4 micro-kernel implementation is located, you'll notice multiple varients of the same micro-kernel. The difference between them lies in the in/out matrix processing block size. Instead of performing matrix multiplication on the entire `m`x`k` and `n`x`k` matricies at once, KleidiAI provides matmul varients that perform smaller operations using hand-optimized assembly code. This leads to more efficient matrix multiplication. 
+If you navigate to the [/kleidiai/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp](https://gitlab.arm.com/kleidi/kleidiai/-/tree/main/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp?ref_type=heads) directory where the KleidiAI INT8/INT4 micro-kernel implementation is located, you'll notice multiple variants of the same micro-kernel. The difference between them lies in the in/out matrix processing block size. Instead of performing matrix multiplication on the entire `m`x`k` and `n`x`k` matrices at once, KleidiAI provides matmul variants that perform smaller operations using hand-optimized assembly code. This leads to more efficient matrix multiplication. 
 
-Different ML workloads and models will perform better/worse across the KleidiAI matmul varients, and the correct micro-kernel will be selected by your ML framework to maximize workload performance.
+Different ML workloads and models will perform better/worse across the KleidiAI matmul variants, and the correct micro-kernel will be selected by your ML framework to maximize workload performance.
 
 ## KleidiAI enhances AI workload performance
 You now have an understanding of how KleidiAI accelerates matrix multiplication, and ultimately how GenAI models can run efficiently on Arm CPUs from servers to smartphones. To view the performance increases KleidiAI delivers in real-world applications you can reference the [KleidiAI announcement blog](https://newsroom.arm.com/blog/arm-kleidi).
-
