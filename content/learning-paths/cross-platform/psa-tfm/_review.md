@@ -13,23 +13,24 @@
 review:
     - questions:
         question: >
-            Q1 to do
+            Arm Trusted Firmware is
         answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                 
+            - "A framework to create custom Linux-based systems"
+            - "A web-based platform to explore Arm IP"
+            - "A reference implementation of Platform Security Architecture (PSA)"
+        correct_answer: 3                 
         explanation: >
-            To do
+            You can run Arm Trusted Firmware on a number of platforms, including the Corstone-1000 Fixed Virtual Platform (FVP) and the MPS3 FPGA prototyping board.
 
     - questions:
         question: >
-            Q2 to do
+            How can you Arm Trusted Firmware on the Corstone-1000 FVP?
         answers:
-            - "Yes"
-            - "No"
+            - "Through Arm Virtual Hardware or the Arm Ecosystem FVP page"
+            - "Through Arm Virtual Hardware and the MPS3 FPGA prototyping board"
         correct_answer: 1                  
         explanation: >
-            To do
+            The Corstone-1000 FVP is a reference implementation which is available with no license control and direct download. You can review this in the "Corstone-1000 FVP or MPS3 image" section.
                
 
 # ================================================================================
