@@ -18,10 +18,6 @@ prerequisites:
 
 author_primary: Pareena Verma
 
-### Ronan show this version
-draft: false
-
-
 ### Tags
 skilllevels: Advanced
 subjects: ML

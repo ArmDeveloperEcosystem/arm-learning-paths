@@ -6,17 +6,17 @@ weight: 5
 layout: learningpathall
 ---
 
-In the previous section, you created the core (or the boiler plate)
-needed for `Matrix` objects. They can now be constructed, assigned to/from,
-and dumped to the screen, but the library is still missing actual matrix
-operations: add, subtract, and multiply.
+In the previous section, you created the core (or the boiler plate) needed for
+`Matrix` objects. They can now be constructed, assigned to/from, and dumped to
+the screen, but the library is still missing actual matrix operations: add,
+subtract, and multiply.
 
 In this section, you will add the missing operations.
 
 ## Operations architecture
 
 When designing matrix processing, it's desirable to separate 2 concerns:
-- the traversal of the matrices 
+- the traversal of the matrices
 - the actual data processing
 
 This allows you to develop the independent parts and then compose them, allowing for
@@ -91,8 +91,8 @@ implemented as classes with the function operator (`operator()`) defined. This
 makes them suitable for using in bigger algorithms and is a common pattern used
 for example in the C++ standard library.
 
-One point worth mentioning is related to the `Abs` class: depending on the type used
-at instantiation, the compiler will select an optimized implementation for
+One point worth mentioning is related to the `Abs` class: depending on the type
+used at instantiation, the compiler will select an optimized implementation for
 unsigned types, and there is no need to compute the absolute value of an always
 positive value. This optimization is transparent to users.
 
@@ -203,6 +203,16 @@ The tests do not attempt to check all corner cases. Please note the use of
 type traits (from `<numeric_limit>`) such as `max` to get the maximum value
 representable for a given type.
 
+As those tests have been added to a new source file, it needs to be known to the
+build system, so add it now to the matrix-test target in `CMakeLists.txt`:
+
+```TXT
+add_executable(matrix-test tests/main.cpp
+  tests/Matrix.cpp
+  tests/Operators.cpp
+  tests/Version.cpp)
+```
+
 ```BASH { output_lines = "4-61" }
 cd build
 ninja
@@ -294,15 +304,16 @@ First, create a `applyEltWiseUnaryOp` helper routine in the public section of
     }
 ```
 
-Although `applyEltWiseUnaryOp` does not need to be a public
-member, it allows users to add their own operations should they lack one
-specific to their usage. In other words, this provides easy extendability for
-the library. `applyEltWiseUnaryOp` also checks at compile time, with the
-`static_assert` statement, that the operation that it has to perform is a unary
-operation.
+Although `applyEltWiseUnaryOp` does not need to be a public member, it allows
+users to add their own operations should they lack one specific to their usage.
+In other words, this provides easy extendability for the library.
+`applyEltWiseUnaryOp` also checks at compile time, with the `static_assert`
+statement, that the operation that it has to perform is a unary operation.
 
-You can eventually add, still in the `Matrix` public section in
-`include/Matrix/Matrix.h`, the `neg`, `abs`, `sqrt` and `log` member operations:
+Now include `Matrix/Operators.h` at the top of `Matrix/Matrix.h` so you can use
+the `Neg`, 'Abs`, 'Sqrt` and `log` with `applyEltWiseUnaryOp`. In the `Matrix`
+public section in `include/Matrix/Matrix.h`, add the `neg`, `abs`, `sqrt` and
+`log` member operations:
 
 ```CPP
     /// Apply negate to each element of this Matrix.
@@ -319,7 +330,7 @@ You can eventually add, still in the `Matrix` public section in
 ```
 
 Those member operations are modifying the object in place, which might not be
-desirable, so you can also provide a functional version of these
+desirable, so you will also provide a functional version of these
 operators, that is to say a version that will modify a copy of the object
 instead. This is achieved by providing functions outside of the `Matrix` class
 (but still in the `MatComp` namespace). Add these after the `Matrix` class
@@ -353,7 +364,7 @@ Users can now write either:
  - `abs(m)` which will return a copy of `m` with the absolute value of each of
  `m` elements, leaving `m` untouched.
 
-Of course, each of these function needs to have tests. 
+Of course, each of these function needs to have tests.
 
 Add the following
 tests in `tests/Matrix.cpp`:
@@ -502,11 +513,11 @@ ninja check
 
 ## Binary scalar operations
 
-Users also need to have binary operations, that is
-operations that have 2 inputs: addition, subtraction, and multiplication are the
-most popular representatives of binary operations. Using the same pattern than
-for unary operations, add those binary operations to
-`include/Matrix/Operators.h`:
+Users also need to have binary operations, that is operations that have 2
+inputs: addition, subtraction, and multiplication are the most popular
+representatives of binary operations. Using the same pattern than for unary
+operations, add those binary operations to `include/Matrix/Operators.h` in
+the `MatComp` namespace:
 
 ```CPP
 struct binaryOperation {};
@@ -537,7 +548,6 @@ template <typename Ty> class Mul : public binaryOperation {
 ```
 
 Add the tests to `tests/Operators.cpp`:
-
 
 ```CPP
 TEST(binaryOperator, Add) {
@@ -938,7 +948,7 @@ Last, but not least, the `Matrix` class still needs the most important operation
 matrix multiplication.
 
 Add the `multiply` function, outside of the `Matrix` class, but in the
-`MatComp` namespace in `include/Matrix/Operators.h`. `multiply` will check that
+`MatComp` namespace in `include/Matrix/Matrix.h`. `multiply` will check that
 the arguments have compatible dimensions, then create an uninitialized
 matrix that will hold the multiplication result and eventually perform the
 multiplication to fill it.
@@ -1110,7 +1120,7 @@ content.
 
 ## What have you achieved so far?
 
-At this stage, the code structure looks like: 
+At this stage, the code structure looks like:
 
 ```TXT
 Matrix/

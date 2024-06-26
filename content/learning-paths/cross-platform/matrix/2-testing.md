@@ -13,7 +13,7 @@ might appear unnecessary in the beginning, tests provide significant
 advantages:
 
 - Confidence for developers, when adding new functionality, or when porting
-  to a new platform 
+  to a new platform
 - Confidence for the users that the quality is good
 - Ability to catch regressions
 - Show how to use the library in practice
@@ -24,20 +24,20 @@ You'll notice that setting up testing comes before the actual library code devel
 
 Many unit testing frameworks exist in general, and C++ is not short of them as
 you can notice in this [wikipedia
-article](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++). 
+article](https://en.wikipedia.org/wiki/List_of_unit_testing_frameworks#C++).
 This project uses [GoogleTest](https://github.com/google/googletest) as the testing framework.
 
 ## Setup GoogleTest
 
-You could rely on the operating system platform to provide GoogleTest, then 
+You could rely on the operating system platform to provide GoogleTest, then
 ask developers to install it on each computer they use, but this feels like an
-unnecessary step. 
+unnecessary step.
 
 As testing is a corner stone of your Matrix library
 development, GoogleTest should be installed automatically as a dependency in the
-build tree of your project. 
+build tree of your project.
 
-One great feature of GoogleTest is that it provides a seamless integration with CMake. 
+One great feature of GoogleTest is that it provides a seamless integration with CMake.
 
 Adding external dependencies is easily done with CMake. This is done with a
 separate `CMakeLists.txt` file, placed in the `external/` directory. This file covers
@@ -48,11 +48,11 @@ Create the file `external/CMakeLists.txt` with the following content:
 
 {{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-2/external/CMakeLists.txt" >}}
 
-You may notice a new new CMake feature, variables. Variables start with the `$`
+You may notice a new CMake feature: variables. Variables start with the `$`
 character and have a name in between curly braces. A CMake variable can be set by
-the CMake itself, or by the user, and they can be modified or used. 
+the CMake itself, or by the user, and they can be modified or used.
 
-In this case, the variable `${EXTERNAL_PROJECT_CMAKE_ARGS}` is set with the options to 
+In this case, the variable `${EXTERNAL_PROJECT_CMAKE_ARGS}` is set with the options to
 pass to CMake for installing the external dependencies:
 
 - `${CMAKE_CXX_COMPILER}`: the C++ compiler used by CMake
@@ -138,7 +138,7 @@ At configuration time, CMake will download, build and install GoogleTest and
 make it available to your project using `find_package`.
 
 Now if you build the project, CMake notices it has been updated and will
-perform all necessary steps. 
+perform all necessary steps.
 
 The output belows shows that besides the
 executable, CMake has configured, built, and installed GoogleTest.
@@ -242,7 +242,7 @@ Now that GoogleTest is available, you can add the first test.
 
 In order to keep the project clean, all tests go inside a `tests/`
 directory. One file, `tests/main.cpp`, contains the top level directions for
-testing. 
+testing.
 
 As a project may contain many tests, it's good to split them across
 several files inside the `tests/` directory.
@@ -261,7 +261,7 @@ This test invokes `getVersion` and checks that the
 The last step is to tell CMake about the tests. All tests will
 linked together in a single `matrix-test` executable (linking with the Matrix
 library and GoogleTest), and you will add a convenience `check` target so the
-tests can be run easily. 
+tests can be run easily.
 
 Add the following at the bottom of the top-level `CMakeLists.txt`:
 
@@ -276,9 +276,9 @@ add_custom_target(check
 )
 ```
 
-Run the build again and test:
+Run the build again:
 
-```BASH { output_lines = "3-21" }
+```BASH { output_lines = "3-9" }
 cd build
 ninja
 ...
@@ -288,7 +288,12 @@ ninja
 -- Generating done (0.0s)
 -- Build files have been written to: .../chapter-2/build
 [3/3] Linking CXX executable matrix-test
-$ ninja check
+```
+
+And run the tests:
+
+```BASH { output_lines = "2-12" }
+ninja check
 ...
 [==========] Running 1 test from 1 test suite.
 [----------] Global test environment set-up.
@@ -341,5 +346,5 @@ CMake makes it easy to use GoogleTest as an external project. Adding unit
 tests as you go is now very easy.
 
 You have created the unit testing environment for your Matrix library and
-added a test. The infrastructure is now in place to 
+added a test. The infrastructure is now in place to
 implement the core of the Matrix processing library.

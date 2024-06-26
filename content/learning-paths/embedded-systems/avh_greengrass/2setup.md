@@ -22,9 +22,11 @@ Click the `Create an AWS Account` button to start creating a new account.
 
 ## Create a Device
 
-Log in to AVH to begin.
+Log in to [AVH](https://app.avh.arm.com/) to begin.
 
-From the AVH dashboard, click the `Create Device` button. You will be presented with a list of devices to choose from. 
+From the AVH dashboard, click the `Create Device` button. Next, select the project to add the device to. 
+
+You will be presented with a list of devices to choose from. 
 
 Select Raspberry Pi 4 from the list of devices and proceed to the configure dialog. 
 

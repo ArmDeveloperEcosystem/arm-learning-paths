@@ -34,8 +34,8 @@ def patch(article, results, lk):
     arr = []
     
     # Check if this is a learning path
-    if isinstance(results, list):
-        for res in data['test_images']:
+    if isinstance(results, list) and data.get("test_images"):
+        for res in data["test_images"]:
             failed = False
             for el in (results):
                 if el[res] != 0:
@@ -47,8 +47,8 @@ def patch(article, results, lk):
             if not failed:
                 logging.debug("Status on {}: passed".format(res))
                 arr.append("passed")
-    else:
-        for res in data['test_images']:
+    elif data.get("test_images"):
+        for res in data["test_images"]:
             if results[res] != 0:
                 logging.debug("Status on {}: FAILED".format(res))
                 arr.append("failed")
@@ -82,7 +82,7 @@ def check(json_file, start, stop):
         data = json.load(jf)
 
     # Start instances for all images
-    if start:
+    if start and data.get("image"):
         for i, img in enumerate(data["image"]):
             # Launch
             logging.info("Container instance test_{} is {}".format(i, img))
@@ -139,15 +139,14 @@ def check(json_file, start, stop):
     else:
         logging.debug("Skip container(s) launch")
 
-    # Create 1 test suite for each image
-    test_cases= []
-    for img in data["image"]:
-        test_cases.append([])
-
-    # Create array to store test result
-    results = {}
-    for img in data["image"]:
-        results[img] = 0
+    if data.get("image"):
+        # Create 1 test suite for each image
+        test_cases= [[] for img in data["image"]]
+        # Create array to store test result
+        results = {img:0 for img in data["image"]}
+    else:
+        test_cases = []
+        results = {}
 
     # Check if there are tests
     if not "ntests" in data.keys():

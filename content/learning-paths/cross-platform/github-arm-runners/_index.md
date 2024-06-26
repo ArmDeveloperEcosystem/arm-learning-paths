@@ -1,8 +1,6 @@
 ---
 title: Build multi-architecture container images with GitHub Arm-hosted runners
 
-draft: false 
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to use Arm-hosted runners for GitHub Actions jobs. 

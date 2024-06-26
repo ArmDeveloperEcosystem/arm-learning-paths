@@ -3,8 +3,8 @@ title: AWS IoT Greengrass
 author_primary: Michael Hall
 additional_search_terms:
 - iot
-- cloud
-- deploy
+- AWS
+- Greengrass
 
 layout: installtoolsall
 minutes_to_complete: 15

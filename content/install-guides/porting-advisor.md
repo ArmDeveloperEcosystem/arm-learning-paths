@@ -126,6 +126,7 @@ Enter the Python virtual environment and install the required packages:
 ```bash
 source .venv/bin/activate
 pip install -r requirements.txt
+pip install pyinstaller certifi
 ```
 
 Confirm Porting Advisor runs as a script:
@@ -183,15 +184,20 @@ The Porting Advisor includes some small examples in the `sample-projects` direct
 Run Porting Advisor on a Go sample with the executable:
 
 ```bash
-./dist/porting-advisor-linux-aarch64 sample-projects/go-samples/incompatible
+./dist/porting-advisor-linux-aarch64 sample-projects/java-samples/
 ```
 
 The recommendations for this application will be printed along with links on where to get more details.
 
 ```output
+Porting Advisor for Graviton v1.1.1
+Report date: 2024-06-25 08:47:06
+
 2 files scanned.
-detected go code. min version 1.16 is required. version 1.18 or above is recommended. we detected that you have version 1.15. see https://github.com/aws/aws-graviton-getting-started/blob/main/golang.md for more details.
-sample-projects/go-samples/incompatible/go.mod: using dependency library github.com/golang/snappy version 0.0.1. upgrade to at least version 0.0.2
+detected java code. we recommend using Corretto. see https://aws.amazon.com/corretto/ for more details.
+detected java code. min version 8 is required. version 11 or above is recommended. see https://github.com/aws/aws-graviton-getting-started/blob/main/java.md for more details.
+
+Report generated successfully. Hint: you can use --output FILENAME.html to generate an HTML report.
 ```
 
 Try out the other sample projects. 
