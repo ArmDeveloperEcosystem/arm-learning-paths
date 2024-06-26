@@ -1,22 +1,23 @@
 ---
-title: Detect faces with OpenCV on arm64-powered Android Devices
+title: Detect faces with OpenCV on Arm64-powered Android Devices
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an intermediate topic for developers who are interested in creating Computer Vision Applications with OpenCV on arm64-powered Android Devices. Specifically, we explain how to use OpenCV for face detection with Haar cascade classifier.
+who_is_this_for: This is an intermediate topic for developers who are interested in creating Computer Vision applications with OpenCV on Arm64-powered Android devices. 
 
 learning_objectives:
-   - Gain familiarity with OpenCV.   
-   - Acquire images from the camera.
+   - Describe how you can use OpenCV for face detection.   
+   - Use OpenCV to retrieve camera frames.
    - Use Haar cascade classifier for face detection.
 
 prerequisites:
-    - Review [OpenCV getting started](/content/learning-paths/smartphones-and-mobile/android_opencv_camera) before you begin.
+    - Familiarity with [OpenCV getting started](/content/learning-paths/smartphones-and-mobile/android_opencv_camera).
+    - A development computer with Android Studio  installed (this Learning Path uses Android Studio Jellyfish | 2023.3.1 Patch 1).
 
 author_primary: Dawid Borycki
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Intermediate
 subjects: ML
 armips:
     - Cortex-A
