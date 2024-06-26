@@ -28,7 +28,7 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-[Arm Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) is the complete software development environment for a range of Arm Cortex-M based microcontroller devices. MDK includes the µVision IDE and debugger, Arm C/C++ compiler, and essential middleware components. It supports more than 9,500 devices and is easy to learn and use.
+[Arm Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) is the complete software development environment for a range of Arm Cortex-M based microcontroller devices. MDK includes the µVision IDE and debugger, Arm C/C++ compiler, and essential middleware components. It supports more than 10,000 devices and is easy to learn and use.
 
 ## Before you begin
 
