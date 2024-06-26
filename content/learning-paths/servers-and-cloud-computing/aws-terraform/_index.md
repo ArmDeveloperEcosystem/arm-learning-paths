@@ -27,6 +27,7 @@ tools_software_languages:
     - Terraform
     - AWS
     - Bastion
+cloud_service_provider: AWS
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

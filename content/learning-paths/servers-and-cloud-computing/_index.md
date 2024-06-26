@@ -8,6 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
+- Baremetal: 1
 - Linux: 86
 - macOS: 2
 - Windows: 5
@@ -111,8 +112,8 @@ tools_software_languages_filter:
 - SVE2: 1
 - Sysbench: 1
 - Telemetry: 1
-- Tensorflow: 1
 - TensorFlow: 1
+- Tensorflow: 1
 - Terraform: 11
 - ThirdAI: 1
 - Trusted Firmware: 1

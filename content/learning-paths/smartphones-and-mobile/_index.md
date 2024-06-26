@@ -40,6 +40,7 @@ tools_software_languages_filter:
 - Fixed Virtual Platform: 1
 - Frame Advisor: 1
 - GCC: 8
+- GoogleTest: 1
 - Java: 3
 - Kotlin: 2
 - MediaPipe: 1

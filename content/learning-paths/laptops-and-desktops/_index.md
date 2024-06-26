@@ -9,6 +9,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
+- Baremetal: 1
 - ChromeOS: 1
 - Linux: 20
 - macOS: 2

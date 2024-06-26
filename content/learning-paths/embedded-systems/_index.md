@@ -8,7 +8,7 @@ key_ip:
 - Cortex-R
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 9
+- Baremetal: 10
 - Linux: 19
 - macOS: 1
 - Windows: 1
