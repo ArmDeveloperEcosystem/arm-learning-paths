@@ -43,13 +43,12 @@ implementation("org.opencv:opencv:4.10.0")
 
 Then, click the **Sync Now** link in the top pane that appears.
 
-From now on, you can use OpenCV in your application. In the next step, we will initialize OpenCV. To do so, we will slightly modify the application view to display the OpenCV initialization status in the TextView.
+From now on, you can use OpenCV in your application. In the next step, you will initialize OpenCV. To do so, you will slightly modify the application view to display the OpenCV initialization status in the TextView.
 
 ## Use OpenCV to retrieve camera frames
 You will now initialize OpenCV and prepare the application to stream frames from the front camera. In the next step you will process the frames to detect faces in the video stream.
 
-Start by creating the 
-1. Under the Project (left window) double-click *app/res/layout/activity_main.xml*. This opens the view designer. 
+1. Under the Project in the left window, double-click *app/res/layout/activity_main.xml*. This opens the view designer. 
 2. Click the highglighted icon in the top right corner to switch to the XML view.
 
 ![img4](Figures/04.png)
@@ -101,7 +100,7 @@ Start by creating the
 </LinearLayout>
 ```
 
-4. Open the *AndroidManifest.xml* file (*app/manifests/AndroidManifest.xml*) and add the following declarations (make sure to add them above the application tag):
+4. Open the *AndroidManifest.xml* file (*app/manifests/AndroidManifest.xml*) and add the following declarations, making sure to add them above the application tag:
 ```XML
 <uses-permission android:name="android.permission.CAMERA"/>
 <uses-feature android:name="android.hardware.camera"/>
@@ -210,18 +209,18 @@ The above Kotlin code first imports necessary Android and OpenCV libraries, incl
 - isPreviewActive and isOpenCvInitialized: Flags to track the preview state and OpenCV initialization status.
 - cameraPermissionRequestCode: A constant for the camera permission request.
 
-The onCreate method initializes the buttons and camera view. Checks and requests camera permission if not already granted. Then, it initializes OpenCV using OpenCVLoader.initLocal(). Then, we set the camera index to 1 to get an access to the front camera. Subsequently, we configure onClickListeners for the buttons to start and stop the camera preview.
+The onCreate method initializes the buttons and camera view. Checks and requests camera permission if not already granted. Then, it initializes OpenCV using OpenCVLoader.initLocal(), before you set the camera index to 1 to get an access to the front camera. Subsequently, you configure onClickListeners for the buttons to start and stop the camera preview.
 
-Finally, we call updateControls(), which updates the enabled state of the start and stop preview buttons based on whether OpenCV is initialized and if the preview is active.
+Finally, you call updateControls(), which updates the enabled state of the start and stop preview buttons based on whether OpenCV is initialized and if the preview is active.
 
-The above code also declares CameraBridgeViewBase.CvCameraViewListener2 methods: onCameraViewStarted, onCameraViewStopped, and onCameraFrame. The first two will be called when the camera view starts or stops. Here, we use these methods to set the isPreviewActive variable. The last method will be called for each frame from the camera. Here, we just pass the camera frame as OpenCV's Mat object.
+The above code also declares CameraBridgeViewBase.CvCameraViewListener2 methods: onCameraViewStarted, onCameraViewStopped, and onCameraFrame. The first two will be called when the camera view starts or stops. Here, you use these methods to set the isPreviewActive variable. The last method will be called for each frame from the camera. Here, you just pass the camera frame as OpenCV's Mat object.
 
 ## Launch the application
 You have just prepared the application to stream camera frames. You can now launch the application in the emulator. To do so, click the green 'run' button as shown here:
 
 ![click run](Figures/05.png)
 
-The application should start, and you should see the app running in an emulator (it will ask you for camera permissions).
+The application should start, and you should see the app running in an emulator - it will ask you for camera permissions.
 
 After ensuring that the application starts, you will next need to set up the application to run on an actual device in order to complete the face detection section. Follow [these steps](https://developer.android.com/studio/run/device).
 
