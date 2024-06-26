@@ -54,7 +54,7 @@ In the next step, you will initialize OpenCV. To do so, you will slightly modify
 To initialize OpenCV and check the initialization status, follow these steps:
 1. Under the Project (left window) double-click `app/res/layout/activity_main.xml`. This opens the view designer. 
 
-2. Click the highglighted icon in the top-right corner to switch to the XML view.
+2. Click the highlighted icon in the top-right corner to switch to the XML view.
 
 ![img6](Figures/06.png)
 
