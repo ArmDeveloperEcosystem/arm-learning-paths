@@ -3,7 +3,7 @@ title: Create Computer Vision Applications with OpenCV on Android Devices
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for developers who are interested in creating Computer Vision Applications with OpenCV on Android Devices.
+who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision Applications with OpenCV on Android Devices.
 
 learning_objectives:
    - Describe what OpenCV is, and what it can offer.
@@ -17,7 +17,7 @@ prerequisites:
 author_primary: Dawid Borycki
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: Graphics
 armips:
     - Cortex-A

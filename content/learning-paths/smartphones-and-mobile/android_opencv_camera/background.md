@@ -41,4 +41,4 @@ The Learning Path comprises three steps:
 2. Extend the project to access the device’s camera and retrieve camera frames with OpenCV.
 3. Process camera images using OpenCV.
 
-You can find all the code used in this learning path in a [GitHub repository](https://github.com/dawidborycki/Arm64OpenCVCamera.git).
+You can find all the code used in this Learning Path in a [GitHub repository](https://github.com/dawidborycki/Arm64OpenCVCamera.git).
