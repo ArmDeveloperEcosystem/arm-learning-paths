@@ -6,10 +6,12 @@ weight: 3
 
 layout: "learningpathall"
 ---
-## Before you begin
-You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (we have used Android Studio Jellyfish | 2023.3.1 Patch 1). 
-
 ## Create a project
+
+{{% notice Note %}}
+You will need a development computer with [Android Studio](https://developer.android.com/studio) installed (this example uses Android Studio Jellyfish | 2023.3.1 Patch 1). 
+{{% /notice %}}
+
 Follow these steps to create a project and add OpenCV:
 
 1. Open Android Studio on your development machine and then click the **+ New Project** icon:
@@ -21,19 +23,19 @@ Follow these steps to create a project and add OpenCV:
 ![img2](Figures/02.png)
 
 3. Configure the project as follows (see figure below):
-- Name: **Arm64.OpenCV.FaceDetection**
-- Package name: **com.example.arm64opencvfacedetection**
-- Save location: **select location**
-- Language: **Kotlin**
-- Minimum SDK: **API 24**
-- Build configuration language: **Kotlin DSL**
+- Name: **Arm64.OpenCV.FaceDetection**.
+- Package name: **com.example.arm64opencvfacedetection**.
+- Save location: **select location**.
+- Language: **Kotlin**.
+- Minimum SDK: **API 24**.
+- Build configuration language: **Kotlin DSL**.
 
 ![img3](Figures/03.png)
 
 4. Click the **Finish** button. 
 
 ## Add OpenCV support
-To add OpenCV for arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
+To add OpenCV for Arm64, open the *build.gradle.ts (Module: app)*, and add the following line under the dependencies:
 
 ```JSON
 implementation("org.opencv:opencv:4.10.0")

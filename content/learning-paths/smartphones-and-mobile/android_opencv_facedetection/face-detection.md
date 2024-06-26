@@ -7,16 +7,21 @@ weight: 4
 layout: "learningpathall"
 ---
 
-In this section, you will use Haar cascades for face detection. This classical machine learning approach is provided by OpenCV, which includes pre-trained Haar cascades for various types of object detection.
+
 
 ## Cascade file
+
+{{% notice Note %}}
+This Learning Path uses Haar cascades for face detection. OpenCV provides this classic machine learning approach, which includes pre-trained Haar cascades for various types of object detection.
+{{% /notice %}}
+
 A Haar cascade file is an XML file used in computer vision, specifically within the OpenCV library, to perform object detection. It contains pre-trained data for detecting specific objects, such as faces, eyes, and cars. The file is created using the Haar cascade classifier algorithm, which is based on machine learning.
 
-The Haar cascade classifier uses Haar-like features to identify objects. These features are essentially rectangular regions in an image that capture the differences in intensity (contrast) between adjacent areas. For example, a feature might capture the difference in brightness between the eyes and the bridge of the nose.
+The Haar cascade classifier uses Haar-like features to identify objects. These features are essentially rectangular regions in an image that capture the differences in intensity between adjacent areas. For example, a feature might capture the difference in brightness between the eyes and the bridge of the nose.
 
-The classifier is trained using a large number of positive images (containing the object) and negative images (without the object). The AdaBoost algorithm is commonly used to select a small number of critical features from a large set and combine them into a strong classifier. The result of this training is stored in the XML file, which includes the selected features and their corresponding weights and thresholds for each stage of the cascade.
+The classifier is trained using a large number of positive images (containing the object) and negative images (without the object). The AdaBoost algorithm is commonly used to select a small number of critical features from a large set, and combine them into a strong classifier. The result of this training is stored in the XML file, which includes the selected features, their corresponding weights, and thresholds for each stage of the cascade.
 
-You will need to download the pre-trained Haar cascade file for face detection from the [OpenCV GitHub repository](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml). You can do so as follows (this assumes your project is in the Android Studio default directory):
+You will need to download the pre-trained Haar cascade file for face detection from the [OpenCV GitHub repository](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml). Ensure your project is in the Android Studio default directory, and follow these steps:
 
 ```bash
 cd ~/AndroidStudioProjects/Arm64OpenCVFaceDetection/app/src/main/
@@ -42,7 +47,7 @@ import java.io.IOException
 import java.io.InputStream
 ```
 
-And then add the following statements to that same file:
+Then add the following statements to that same file:
 
 ```kotlin
 private lateinit var faceCascade: CascadeClassifier
@@ -62,9 +67,9 @@ private fun loadHaarCascade() {
 }
 ```
 
-The above code prepares the faceCascade variable to hold the Haar cascade classifier. The loadHaarCascade function loads the Haar cascade XML file from the app’s assets. It initializes the CascadeClassifier with the file and checks if it was loaded successfully, logging appropriate messages for success or failure. If an exception occurs, it is caught and logged.
+This above code prepares the faceCascade variable to hold the Haar cascade classifier. The loadHaarCascade function loads the Haar cascade XML file from the app’s assets. It initializes the CascadeClassifier with the file and checks if it was loaded successfully, logging appropriate messages for success or failure. If an exception occurs, it is caught and logged.
 
-In Android, files stored in the assets directory cannot be directly accessed as file paths. Instead, they need to be read as input streams. To get input streams, we use the getPath method. Its definition (which should be placed in the MainActivity) is shown below:
+In Android, files stored in the assets directory cannot be directly accessed as file paths. Instead, they need to be read as input streams. To get input streams, you can use the getPath method. Its definition (which should be placed in the MainActivity) is shown below:
 
 ```kotlin
 @Throws(IOException::class)
@@ -175,23 +180,23 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-In the above code, we first declared two Mat objects:
+In this code above, you first declared two Mat objects:
 - frame - to store the color image captured from the camera.
 - grayFrame - to store the grayscale version of the captured image.
 
-Then, our onCameraFrame method checks if frame has been initialized. If not, we initialize frame and grayFrame with the size of the input frame. To do so, we use:
+Then, the onCameraFrame method checks if frame has been initialized. If not, you can initialize frame and grayFrame with the size of the input frame. To do so, you can use:
 - CvType.CV_8UC4, which specifies the type for frame as an 8-bit, 4-channel image (RGBA).
 - CvType.CV_8UC1, which specifies the type for grayFrame as an 8-bit, single-channel image (grayscale).
 
-Next, we convert the color frame to grayscale and store it in grayFrame. Afterward, we apply histogram equalization to grayFrame to improve the contrast, which helps in better face detection. To actually detect faces in the grayscale image, we use faceCascade.detectMultiScale. The result is stored in the faces variable, which is of type MatOfRect.
+Next, you can convert the color frame to grayscale and store it in grayFrame. Afterwards, you apply histogram equalization to grayFrame to improve the contrast, which helps in better face detection. To actually detect faces in the grayscale image, you use faceCascade.detectMultiScale. The result is stored in the faces variable, which is of type MatOfRect.
 
-If at least one face is detected, we retrieve the first detected face, and based on that, we draw a rectangle around the detected face on frame using Imgproc.rectangle.
+If at least one face is detected, you retrieve the first detected face, and based on that, you draw a rectangle around the detected face on frame using Imgproc.rectangle.
 
 After running the application, click the Start button, and you will see a green rectangle around the detected face as shown below:
 
 ![img5](Figures/06.jpg)
 
 ## Summary
-In this learning path, we learned how to use the Haar cascade classifier to detect faces in camera images. We added the pre-trained Haar cascade XML file for face detection to the project’s assets directory. We implemented the loadHaarCascade method to load the Haar cascade file from the assets and initialize the CascadeClassifier. We also created the getPath method to convert the Haar cascade asset file into a file path that can be used by OpenCV.
+In this Learning Path, you learned how to use the Haar cascade classifier to detect faces in camera images. You added the pre-trained Haar cascade XML file for face detection to the project’s assets directory. You implemented the loadHaarCascade method to load the Haar cascade file from the assets and initialize the CascadeClassifier. You also created the getPath method to convert the Haar cascade asset file into a file path that can be used by OpenCV.
 
-We modified the onCameraFrame method to process each frame captured by the camera. Specifically, we converted the captured color image to grayscale and applied histogram equalization to enhance the contrast of the grayscale image. After this preprocessing, we used the CascadeClassifier to detect faces in the processed image. Finally, we drew a rectangle around the first detected face on the color image.
+You modified the onCameraFrame method to process each frame captured by the camera. Specifically, you converted the captured color image to grayscale and applied histogram equalization to enhance the contrast of the grayscale image. After this preprocessing, you used the CascadeClassifier to detect faces in the processed image. Finally, you drew a rectangle around the first detected face on the color image.
