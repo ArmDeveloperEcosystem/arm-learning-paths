@@ -1,6 +1,5 @@
 ---
 title: "Deploy WordPress with MySQL on Elastic Kubernetes Service (EKS)"
-draft: false
 minutes_to_complete: 60
 
 who_is_this_for: >
