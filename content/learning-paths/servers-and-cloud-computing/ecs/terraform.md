@@ -132,7 +132,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
 Terraform has created the repository in ECR. You can confirm this on your Amazon Elastic Container Registry Repositories list.
 
-![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/7c31127b-ca5e-438c-9888-3cf2ae3b2c83)
+![ecs33 #center](./images/ecs33.png)
 
 Push the container image to the new repository using `docker push` as in the previous section.
 
@@ -142,7 +142,7 @@ docker push [your account number].dkr.ecr.us-east-2.amazonaws.com/myapp
 
 Refresh the repository’s page to verify you’ve successfully pushed the image to the AWS ECR repository.
 
-![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/a5908779-39a3-4729-a680-f472d166598e)
+![ecs34 #center](./images/ecs34.png)
 
 ## Create an ECS Cluster
 
@@ -171,7 +171,7 @@ terraform apply
 
 Navigate to Amazon ECS Clusters and verify that you can see the changes:
 
-![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/784dcd60-109d-41e4-9a75-1141dee2743e)
+![ecs35 #center](./images/ecs35.png)
 
 ## Configure an AWS ECS task 
 
@@ -262,7 +262,7 @@ terraform apply
 
 Navigate to Amazon ECS Task Definitions and you can see the task definitions: 
 
-![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/6734dd1d-1c8d-41a7-9c4c-02970ed0717e)
+![ecs36 #center](./images/ecs36.png)
 
 ## Launch the Container
 
@@ -416,11 +416,11 @@ resource "aws_security_group" "service_security_group" {
 }
 ```
 
-Add an output configuration to `main.tf`` that will extract the load balancer URL value from the state file and print it to the terminal.
+Add an output configuration to `main.tf` that will extract the load balancer URL value from the state file and print it to the terminal.
 
 ```console
 # main.tf
-#Log the load balancer app URL
+# Log the load balancer app URL
 output "app_url" {
   value = aws_alb.application_load_balancer.dns_name
 }
@@ -511,7 +511,7 @@ Copy the URL to your browser.
 
 You will see NGINX running:
 
-![image #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/52271e11-a078-4c52-8462-cd89cc1fd973)
+![ecs37 #center](./images/ecs37.png)
 
 {{% notice Note %}} 
 If you see a `503 Service Temporarily Unavailable` immediately after running the `terraform apply` command you should wait a few seconds for all infrastructure to be created and try again. 

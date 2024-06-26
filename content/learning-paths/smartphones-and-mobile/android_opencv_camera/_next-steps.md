@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to use OpenCV in your Android project. You can now learn how to accelerate Android applications with intrinsics.
+   You have learned how to use OpenCV in your Android project. You can now learn how to use OpenCV to detect faces.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/smartphones-and-mobile/android_neon"
+recommended_path: "/learning-paths/smartphones-and-mobile/android_opencv_facedetection/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 

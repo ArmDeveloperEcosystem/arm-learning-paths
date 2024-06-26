@@ -16,12 +16,33 @@ The Haar cascade classifier uses Haar-like features to identify objects. These f
 
 The classifier is trained using a large number of positive images (containing the object) and negative images (without the object). The AdaBoost algorithm is commonly used to select a small number of critical features from a large set and combine them into a strong classifier. The result of this training is stored in the XML file, which includes the selected features and their corresponding weights and thresholds for each stage of the cascade.
 
-You can download the pre-trained Haar cascade file for face detection from the [OpenCV GitHub repository](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml). 
+You will need to download the pre-trained Haar cascade file for face detection from the [OpenCV GitHub repository](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml). You can do so as follows (this assumes your project is in the Android Studio default directory):
 
-Then, proceed as follows:
-1. Go back to Android Studio and create the assets folder under app/src/main.
-2. Copy the Haar cascade file to the assets folder.
-3. Open the MainActivity.kt file and add the following statements:
+```bash
+cd ~/AndroidStudioProjects/Arm64OpenCVFaceDetection/app/src/main/
+mkdir assets
+cd assets
+wget https://raw.githubusercontent.com/opencv/opencv/master/data/haarcascades/haarcascade_frontalface_default.xml
+```
+
+After downloading the cascade file to the assets folder, add necessary imports to the `MainActivity.kt` file:
+
+```kotlin
+import android.content.Context
+import android.util.Log
+import org.opencv.core.CvType
+import org.opencv.core.MatOfRect
+import org.opencv.core.Point
+import org.opencv.core.Scalar
+import org.opencv.imgproc.Imgproc
+import org.opencv.objdetect.CascadeClassifier
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+```
+
+And then add the following statements to that same file:
 
 ```kotlin
 private lateinit var faceCascade: CascadeClassifier
@@ -168,7 +189,7 @@ If at least one face is detected, we retrieve the first detected face, and based
 
 After running the application, click the Start button, and you will see a green rectangle around the detected face as shown below:
 
-![img5](Figures/05.jpg)
+![img5](Figures/06.jpg)
 
 ## Summary
 In this learning path, we learned how to use the Haar cascade classifier to detect faces in camera images. We added the pre-trained Haar cascade XML file for face detection to the project’s assets directory. We implemented the loadHaarCascade method to load the Haar cascade file from the assets and initialize the CascadeClassifier. We also created the getPath method to convert the Haar cascade asset file into a file path that can be used by OpenCV.
