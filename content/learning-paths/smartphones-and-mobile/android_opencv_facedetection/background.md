@@ -38,4 +38,4 @@ Overall, OpenCV’s importance in face detection lies in its robust, versatile, 
 
 In this Learning Path, you will learn how to use the Haar classifier from OpenCV to detect human face in the frames acquired from the mobile's device camera.
 
-You can find the companion code [here](https://github.com/dawidborycki/Arm64OpenCVFaceDetection.git).
+You can find the companion code used in this Learning path in a [GitHub repository](https://github.com/dawidborycki/Arm64OpenCVFaceDetection.git).
