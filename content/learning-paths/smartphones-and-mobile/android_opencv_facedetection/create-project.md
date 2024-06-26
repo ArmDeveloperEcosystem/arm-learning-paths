@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Create a project, add OpenCV and read camera frames"
+title: "Create a project, add OpenCV, and read camera frames"
 
 weight: 3
 
@@ -202,14 +202,14 @@ class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListe
 }
 ```
 
-The above Kotlin code first imports necessary Android and OpenCV libraries, including those for handling permissions and camera views. MainActivity extends AppCompatActivity and implements CameraBridgeViewBase.CvCameraViewListener2 for handling camera frames. There are several variables:
+The above Kotlin code imports necessary Android and OpenCV libraries, including those for handling permissions and camera views. MainActivity extends AppCompatActivity and implements CameraBridgeViewBase.CvCameraViewListener2 for handling camera frames. There are several variables:
 
-- buttonStartPreview and buttonStopPreview: Buttons to start and stop the camera preview.
-- openCvCameraView: An instance of CameraBridgeViewBase for displaying camera frames.
-- isPreviewActive and isOpenCvInitialized: Flags to track the preview state and OpenCV initialization status.
-- cameraPermissionRequestCode: A constant for the camera permission request.
+- buttonStartPreview and buttonStopPreview: buttons to start and stop the camera preview.
+- openCvCameraView: an instance of CameraBridgeViewBase for displaying camera frames.
+- isPreviewActive and isOpenCvInitialized: flags to track the preview state and OpenCV initialization status.
+- cameraPermissionRequestCode: a constant for the camera permission request.
 
-The onCreate method initializes the buttons and camera view. Checks and requests camera permission if not already granted. Then, it initializes OpenCV using OpenCVLoader.initLocal(), before you set the camera index to 1 to get an access to the front camera. Subsequently, you configure onClickListeners for the buttons to start and stop the camera preview.
+The onCreate method initializes the buttons and camera view. It checks and requests camera permission if not already granted. Then, it initializes OpenCV using OpenCVLoader.initLocal(), before you set the camera index to 1 to get an access to the front camera. Subsequently, you can configure onClickListeners for the buttons to start and stop the camera preview.
 
 Finally, you call updateControls(), which updates the enabled state of the start and stop preview buttons based on whether OpenCV is initialized and if the preview is active.
 
@@ -220,7 +220,7 @@ You have just prepared the application to stream camera frames. You can now laun
 
 ![click run](Figures/05.png)
 
-The application should start, and you should see the app running in an emulator - it will ask you for camera permissions.
+The application should start, and you should see the app running in an emulator. It will ask you for camera permissions.
 
 After ensuring that the application starts, you will next need to set up the application to run on an actual device in order to complete the face detection section. Follow [these steps](https://developer.android.com/studio/run/device).
 
