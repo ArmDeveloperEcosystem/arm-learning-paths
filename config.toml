@@ -25,6 +25,8 @@ cloudFrontDistributionID = "E2VDQ2CYZATMO9"
     skilllevel              = "skilllevels"
     tool_software_language  = "tools_software_languages"
     armip                   = "armips"
+    cloud_service_provider  = "cloud_service_providers"
+
 
 [permalinks]
     tools_software_languages = "/tag/:slug/"

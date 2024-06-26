@@ -25,6 +25,11 @@ Calls to:
 
 <!-- Display filters for specific categories -->
 {{ if eq .page_type "learning-path-category"}}
+    {{/* Only display Cloud Service Providers in Server & Cloud Computing area */}}
+    {{ if eq "Servers and Cloud Computing" .context.Title}}
+        {{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Cloud Service Providers" "routing" "cloud_service_providers" "tagnames" .context.Params.cloud_service_providers_filter)}} 
+    {{end}}
+
     {{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Subjects" "routing" "subjects" "tagnames" .context.Params.subjects_filter)}} 
     {{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "OS" "routing" "operatingsystems" "tagnames" .context.Params.operatingsystems_filter)}} 
     {{ partial "filter-search-sort/closed-expansion.html" (dict "context" .context "displayname" "Skill Level" "routing" "skilllevels" "tagnames" (slice "Introductory" "Advanced"))}}

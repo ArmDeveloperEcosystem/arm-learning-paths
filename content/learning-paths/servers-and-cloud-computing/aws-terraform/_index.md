@@ -19,15 +19,14 @@ author_primary: Jason Andrews
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
+cloud_service_providers: AWS
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-    - AWS
     - Bastion
-cloud_service_provider: AWS
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

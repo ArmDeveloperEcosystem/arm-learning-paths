@@ -40,9 +40,9 @@ tools_software_languages_filter:
 - ArmRAL: 1
 - ASP.NET Core: 2
 - Assembly: 4
-- AWS: 14
+- AWS: 13
 - AWS CodeBuild: 1
-- Azure: 12
+- Azure: 11
 - Bastion: 3
 - BOLT: 1
 - C: 3
@@ -124,4 +124,7 @@ tools_software_languages_filter:
 - zlib: 1
 - Zookeeper: 1
 weight: 1
+cloud_service_providers_filter:
+- AWS: 2
+- Microsoft Azure: 2
 ---
