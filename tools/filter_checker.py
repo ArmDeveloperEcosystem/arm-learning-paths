@@ -316,12 +316,13 @@ def addCloudServiceProvidersToStatusDict():
 
 
 
-def checker(report = '', update_md_files = False):
+def checker(report = 'all', update_md_files = False):
     global status_dic, dir_relative_of_learning_paths, dic_allow_list, learning_path_metadata, dir_main_category
 
     #
     # -1
     # Parse arguments if used as a standalone file
+    '''
     arg_parser = argparse.ArgumentParser(description='Filter updater & Checker.', prefix_chars='-')
     arg_parser.add_argument('-u', '--update-md-files', action='store_true', help='Update .md index files filtering information.')
     arg_parser.add_argument('-r', '--report', action='store', help='Report only specific information. Default is none. Set to "all", "subjects", "oses", "csps", or "tools-software-languages"')
@@ -329,6 +330,7 @@ def checker(report = '', update_md_files = False):
     args = arg_parser.parse_args()
     update_md_files = args.update_md_files
     report = args.report
+    '''
 
     #
     # 0
@@ -431,6 +433,7 @@ def checker(report = '', update_md_files = False):
         print()
         sys.exit(0)
 
-
+'''
 if __name__ == "__main__":
     checker()
+'''
