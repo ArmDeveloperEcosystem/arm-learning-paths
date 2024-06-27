@@ -12,6 +12,7 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer running Linux, macOS, or Windows.
     - An intermediate understanding of C++ programming.
+    - A suitable Integrated Development Environment (IDE).
     - The [CMake](/install-guides/cmake/) build tool.
     - A C++ compiler with C++17 support.
     - A build system [GNU Make](https://www.gnu.org/software/make/) or [Ninja](https://ninja-build.org/).

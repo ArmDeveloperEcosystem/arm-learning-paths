@@ -5,21 +5,16 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## How do I get started on setting up my development platform?
 
-In this section you will setup the structure for the Matrix processing library.
-At the end, you will be able to build the library and an application that uses the library on
-all supported platforms: macOS, Linux, and Windows.
-
-## Before you begin
-
-You will need the following tools, make sure they are available on your development platform:
+To begin, make sure you have the following tools available on your development platform:
 
 - A C++ compiler with C++17 support. Any recent version of Clang or the GNU compiler
   (gcc) will work.
-- [CMake](/install-guides/cmake/) build tool
+- [CMake](/install-guides/cmake/) build tool.
 - A build system: [GNU Make](https://www.gnu.org/software/make/) or
-  [Ninja](https://ninja-build.org/)
-- A documentation generator: [Doxygen](https://www.doxygen.nl/)
+  [Ninja](https://ninja-build.org/).
+- A documentation generator: [Doxygen](https://www.doxygen.nl/).
 
 On a Ubuntu machine, they can be installed with:
 
@@ -27,13 +22,15 @@ On a Ubuntu machine, they can be installed with:
 sudo apt-get install build-essential clang ninja-build cmake doxygen -y
 ```
 
-On top of those tools, you will also need an IDE (Integrated Development
-Environment). [Visual Studio Code](https://code.visualstudio.com/) is a popular
-choice, and you can install it by following the
+In addition to these tools, you will also need an IDE (Integrated Development
+Environment).
+
+[Visual Studio Code](https://code.visualstudio.com/) is a popular
+choice, and you can install it by following these
 [instructions](https://code.visualstudio.com/docs/setup/linux). Alternatively,
 you can use a text editor like [Vim](https://www.vim.org/), [GNU
-Emacs](https://www.gnu.org/software/emacs/) or [Sublime
-Text](https://www.sublimetext.com/) which are also popular choices and all
+Emacs](https://www.gnu.org/software/emacs/), or [Sublime
+Text](https://www.sublimetext.com/), which are also popular choices and all
 support extensions that make C++ development easy.
 
 
