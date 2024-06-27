@@ -3,7 +3,7 @@ title: Detect faces with OpenCV on Android Devices
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an intermediate topic for developers who are interested in creating Computer Vision applications with OpenCV on Android devices. 
+who_is_this_for: This is an introductory topic for developers who are interested in creating Computer Vision applications with OpenCV on Android devices. 
 
 learning_objectives:
    - Describe how you can use OpenCV for face detection.   
