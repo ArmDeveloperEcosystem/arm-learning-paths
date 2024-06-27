@@ -24,7 +24,6 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - AWS
     - Coding
     - Neon
     - SVE

@@ -32,7 +32,6 @@ title: Servers and Cloud Computing
 tools_software_languages_filter:
 - .NET SDK: 1
 - 5G: 1
-- Alibaba: 2
 - Ansible: 2
 - Arm Development Studio: 4
 - armclang: 1
@@ -40,9 +39,7 @@ tools_software_languages_filter:
 - ArmRAL: 1
 - ASP.NET Core: 2
 - Assembly: 4
-- AWS: 13
 - AWS CodeBuild: 1
-- Azure: 11
 - Bastion: 3
 - BOLT: 1
 - C: 3
@@ -59,7 +56,7 @@ tools_software_languages_filter:
 - Django: 1
 - Docker: 13
 - ECS: 1
-- EKS: 1
+- EKS: 2
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
@@ -72,7 +69,6 @@ tools_software_languages_filter:
 - GitHub: 1
 - Glibc: 1
 - Go: 2
-- Google Cloud: 8
 - GoogleTest: 1
 - HammerDB: 1
 - InnoDB: 1
@@ -94,7 +90,6 @@ tools_software_languages_filter:
 - Neon: 3
 - Nexmark: 1
 - Nginx: 3
-- Oracle: 4
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
@@ -125,6 +120,8 @@ tools_software_languages_filter:
 - Zookeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 2
-- Microsoft Azure: 2
+- AWS: 9
+- Google Cloud: 3
+- Microsoft Azure: 7
+- Oracle: 2
 ---

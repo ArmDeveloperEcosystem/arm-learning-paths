@@ -19,6 +19,7 @@ author_primary: Jason Andrews
 ##### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers: AWS
 armips:
     - Neoverse
 operatingsystems:

@@ -26,7 +26,7 @@ tools_software_languages_filter:
 - Alacritty: 1
 - Arm Development Studio: 2
 - Arm64EC: 1
-- Azure: 2
+- Azure: 1
 - C: 2
 - C#: 5
 - C++: 2

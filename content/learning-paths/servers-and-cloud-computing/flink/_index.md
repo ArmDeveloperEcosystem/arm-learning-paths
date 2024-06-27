@@ -18,6 +18,7 @@ author_primary: Ying Yu
 ### Tags
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers: AWS
 
 armips:
 - Neoverse
@@ -31,7 +32,6 @@ operatingsystems:
 
 tools_software_languages:
 - Flink
-- AWS
 - JAVA
 - Nexmark
 
