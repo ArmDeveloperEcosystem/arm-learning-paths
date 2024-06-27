@@ -22,7 +22,7 @@ To launch from the command line run:
 armds_ide
 ```
 
-If this is your first time opening the workspace, you will be presented with a pane to set some basic visual preferences. You can click `Finish` to accept the default setup.  
+If this is your first time opening the workspace, you will be presented with a pane to set some basic workspace configurations. You can click `Finish` to accept the default setup.  
 
 The IDE opens a workspace, a base directory on your host machine is used to store all projects.
 
