@@ -27,7 +27,7 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Coding
-    - Tensorflow
+    - TensorFlow
     - STM32
 
 ### FIXED, DO NOT MODIFY

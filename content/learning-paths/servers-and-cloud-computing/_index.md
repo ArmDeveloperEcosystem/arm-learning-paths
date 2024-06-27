@@ -40,6 +40,8 @@ tools_software_languages_filter:
 - ASP.NET Core: 2
 - Assembly: 4
 - AWS CodeBuild: 1
+- AWS Elastic Container Service (ECS): 1
+- AWS Elastic Kubernetes Service (EKS): 2
 - Bastion: 3
 - BOLT: 1
 - C: 3
@@ -47,22 +49,18 @@ tools_software_languages_filter:
 - C++: 1
 - CCA: 2
 - Clair: 1
-- clang: 1
-- Clang: 7
+- Clang: 8
 - ClickBench: 1
 - ClickHouse: 1
 - CMake: 1
 - Coding: 14
 - Django: 1
 - Docker: 13
-- ECS: 1
-- EKS: 2
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
 - FVP: 3
-- GCC: 15
-- gcc: 1
+- GCC: 16
 - gdb: 1
 - Geekbench: 1
 - GenAI: 1
@@ -107,8 +105,7 @@ tools_software_languages_filter:
 - SVE2: 1
 - Sysbench: 1
 - Telemetry: 1
-- TensorFlow: 1
-- Tensorflow: 1
+- TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
 - Trusted Firmware: 1

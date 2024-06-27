@@ -26,7 +26,6 @@ tools_software_languages_filter:
 - Arm Development Studio: 5
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 5
-- AWS: 2
 - AWS IoT Greengrass: 1
 - Balena Cloud: 1
 - Balena OS: 1

@@ -27,7 +27,7 @@ operatingsystems:
 tools_software_languages:
     - Coding
     - Fortran
-    - gcc
+    - GCC
     - Linaro Forge
     - gdb
     - mpi

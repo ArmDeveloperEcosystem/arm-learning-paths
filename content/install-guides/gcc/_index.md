@@ -3,7 +3,7 @@ title: GNU Compiler
 author_primary: Jason Andrews
 additional_search_terms:
 - compiler
-- gcc
+- GCC
 - linux
 
 ### FIXED, DO NOT MODIFY

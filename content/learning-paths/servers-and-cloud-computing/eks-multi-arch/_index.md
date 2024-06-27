@@ -25,7 +25,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Kubernetes
-    - EKS
+    - AWS Elastic Kubernetes Service (EKS)
 operatingsystems:
     - Linux
 

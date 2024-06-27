@@ -27,7 +27,7 @@ tools_software_languages_filter:
 - Arm Compiler for Embedded: 5
 - Arm Development Studio: 3
 - Arm Virtual Hardware: 11
-- AWS: 3
+- AWS: 1
 - CMSIS: 5
 - CMSIS-Toolbox: 3
 - Coding: 21
@@ -44,7 +44,7 @@ tools_software_languages_filter:
 - Raspberry Pi: 1
 - RTX: 1
 - STM32: 2
-- Tensorflow: 2
+- TensorFlow: 2
 - Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
