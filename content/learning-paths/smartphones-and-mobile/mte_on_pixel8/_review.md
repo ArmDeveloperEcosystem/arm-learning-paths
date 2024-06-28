@@ -2,17 +2,17 @@
 review:
     - questions:
         question: >
-            Can MTE be enabled strightforward in my Google Pixel 8?
+            Can MTE be enabled on my Google Pixel 8?
         answers:
-            - Yes, this option is available in phone settings.
-            - No, we need to enable first Developer options in phone settings.
-        correct_answer: 2                    
+            - "Yes"
+            - "No"
+        correct_answer: 1                    
         explanation: >
-            MTE option is part of Developer options. Developer options need to be enabled first in phone settings to access MTE option.
+            MTE option is part of Developer options. Developer options need to be enabled first on your Google Pixel 8 phone to access MTE.
 
     - questions:
         question: >
-            Which of the below statements is false?
+            Which of the statements below is false?
         answers:
             - MTE working principle is based on a Lock and Key model.
             - Tagging memory implements the lock.
@@ -26,12 +26,12 @@ review:
         question: >
             Which of the statements below is true?
         answers:
-            - The bug report is automatically generated for us everytime the application crashes.
-            - We need to trigger the creation of the bug report using Bug report option in Developer options.
-            - The bug report is a single file we can visualize directly in our phone.            
+            - The bug report is automatically generated everytime the application crashes.
+            - You need to trigger the creation of the bug report using the Bug report option in Developer options.
+            - The bug report is a single file you can visualize directly in our phone.            
         correct_answer: 2          
         explanation: >
-           We have to tap Bug report option in Developer options to capture the bug report.
+           You have to tap Bug report option in Developer options to capture the bug report.
 
 
 
