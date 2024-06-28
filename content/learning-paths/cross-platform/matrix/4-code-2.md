@@ -1106,7 +1106,7 @@ desirable, but there are cases where data have different types and *explicit*
 conversion is necessary.
 - Transposition, that is swapping the rows and columns, is another important
 operation, with some room for optimization in the implementation. Can you think
-of different ways to implement the `transpose` operator for the `Matrix` class ?
+of different ways to implement the `transpose` operator for the `Matrix` class?
 - Broadcasting: these are useful shortcuts for the `Matrix` users, as they allow
 to transform a scalar or a row-vector/column-vector by replicating it to make
 it look like a 2-D matrix. Again, on top of syntactic sugar for the users, this
@@ -1144,14 +1144,11 @@ Matrix/
     └── main.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-4.tar.xz) of the
-project in its current state to experiment locally on your machine.
+You can download the [archive](/artifacts/matrix/chapter-4.tar.xz) of the project in its current state to experiment locally on your machine.
 
-Congratulations, you now have a minimalistic, yet fully-functional, matrix
-processing library, with some level of regression testing, that can be easily
+Congratulations, you now have a minimalistic, yet fully-functional, matrix processing library, with some level of regression testing, that can be easily
 built and used.
 
-The testing could - and *should* - go much deeper, as a number of
-corner cases have not been covered.
+The testing could - and *should* - go much deeper, as a number of corner cases have not been covered.
 
-You can continue to add more functions (and more tests).
+You can continue to add more functions, and more tests.
