@@ -26,7 +26,6 @@ armips:
 operatingsystems:
     - Baremetal
 tools_software_languages:
-    - AWS
     - Arm Virtual Hardware
     - Coding
     - GCC
