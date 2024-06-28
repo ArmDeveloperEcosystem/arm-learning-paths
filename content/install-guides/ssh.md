@@ -163,3 +163,15 @@ Add a new public key to `authorized_keys`. You can also delete the current publi
 If you ran `ssh-keygen` on your local machine, the public key is at `~/.ssh/id_rsa.pub` 
 
 Use the new private key on the local machine to connect. If you have `~/.ssh/id_rsa` on your local machine it will be used automatically and you can SSH to the remote machine.
+
+### Port forwarding
+
+You can use port forwarding to access a port on a remote computer which is blocked by a firewall or security group. This is helpful when your application is running on a remote computer with SSH access, but no other ports are open. For example, if you are running a web application on a cloud instance and it uses port 3000 you can SSH to the cloud instance with port forwarding and access the application.
+
+```console
+ssh -i <private_key> -L 3000:localhost:3000 ubuntu@<public_ip_address>  
+```
+
+Once you SSH, you can access `localhost:3000` and the traffic is forwarded to the remote computer.
+
+Search for additional tutorials to learn more about port forwarding.

@@ -2,30 +2,30 @@
 review:
     - questions:
         question: >
-            Which tool can ease the development, configuration and build of your C++ project on different platforms?
+            Which tool can ease the development, configuration, and build of your C++ project on different platforms?
         answers:
-            - Autoconf / automake
-            - CMake
-            - Vim
-            - GNU Emacs
+            - Autoconf/automake.
+            - CMake.
+            - Vim.
+            - GNU Emacs.
         correct_answer: 2
         explanation: >
-            CMake is often used as the configuration and build infrastructure, from small projects to the largest, like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/). Vim and GNU Emacs are very powerful text editors (and more). Autoconf and automake are tools that were achieving a similar goal across \*nix platforms.
+            CMake is often used as the configuration and build infrastructure, from small projects to the largest, such as [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/). Vim and GNU Emacs are powerful text editors. Autoconf and automake are tools that achieve a similar goal across \*nix platforms.
 
     - questions:
         question: >
             When should you use unit testing ?
         answers:
-            - Once the project is finished, to ensure it works
-            - Right from the start so tests can be added along the development and ensure it works bottom up.
+            - Once the project is finished, to ensure it works.
+            - Right from the start so tests can be added during the development phase and ensure it works bottom up.
             - Testing?  My code is always first time right, and I never introduce bugs!
         correct_answer: 2
         explanation: >
-            While the first answer is not fully wrong, it's not that bad if a program has tests, the second approach is the best as it's much easier to add test along the way at the time the functionality is developed.
+            While the first answer is not factually incorrect, the second approach is best as it's much easier to add test along the way as the functionality is developed.
 
     - questions:
         question: >
-            Supporting Matrices with different data type requires to rewrite the operators ?
+            Is there a requirement to rewrite the operators to support Matrices with different data types?
         answers:
             - Yes
             - No

@@ -75,6 +75,9 @@ Calls to:
                                 {{ with .Params.subjects }}
                                     tag-{{. | urlize}}
                                 {{ end }}
+                                {{ with .Params.cloud_service_providers }}
+                                    tag-{{. | urlize}}
+                                {{ end }}
                                 {{ with .Params.armips }}
                                     {{range .}}
                                         tag-{{. | urlize}}

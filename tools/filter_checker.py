@@ -2,7 +2,7 @@ import os
 import sys
 import yaml
 from pathlib import Path
-
+import argparse
 
 def mdToMetadata(md_file_path):
     metadata_text = ""
@@ -10,7 +10,7 @@ def mdToMetadata(md_file_path):
     inMetadata = False
 
     # print the files so if 1 has an error, it can be fixed
-    print(md_file_path)
+    #print(md_file_path)
 
     # Remove last '---' to propery read in yaml metadata component of .md file
     with open(md_file_path) as f:
@@ -74,8 +74,12 @@ def updateFiltersInIndexMD(main_category):
     subjects_filter:  
         - ["CI-CD", 8]
     '''
-
+    
+    
     to_iterate = ['subjects','operatingsystems','tools_software_languages']
+    if main_category == "servers-and-cloud-computing":
+        to_iterate.append('cloud_service_providers')
+
     for filter_name in to_iterate:
         all_existing_filters = status_dic[filter_name][main_category]
         final_filter_with_counts = []
@@ -196,6 +200,40 @@ def printToolsSoftwareLanguagesReport():
     print()
     print() 
 
+def printCSPsReport():
+    global status_dic, dic_allow_list
+    print()
+    print()
+    print('='*50)
+    print('Cloud Service Providers')
+    for main_category in status_dic['cloud_service_providers']:
+        cat_dic = status_dic['cloud_service_providers'][main_category]
+
+        print('     '+main_category)
+        print('         '+'Allowed')
+        for csp in cat_dic:
+            if cat_dic[csp]['allowed']:
+                print('             '+str(cat_dic[csp]['count'])+': '+csp)
+        print('         '+'Not Allowed')
+        for csp in cat_dic:
+            if not cat_dic[csp]['allowed']:
+                print('             '+csp+'     '+str(cat_dic[csp]['count']))
+                for learning_paths in cat_dic[csp]['learning-path-titles']:
+                    print('                 '+learning_paths)
+        print('         '+'Unused')
+        
+        for allowed_OS in dic_allow_list["cloud_service_providers"]:
+            if allowed_OS not in cat_dic:
+                print('             '+allowed_OS)
+        print()
+    print('='*50)
+    print()
+    print()
+
+
+
+
+
 
 
 def addSubjectsToStatusDict():
@@ -255,8 +293,44 @@ def addToolsSoftwareLanguagesToStatusDict():
     return status_dic
 
 
+def addCloudServiceProvidersToStatusDict():
+    global status_dic, learning_path_metadata
+    if 'cloud_service_providers' in learning_path_metadata: # since not all LPs have this filtering mechanism, need this check to avoid errors
+        cloud_service_providers = learning_path_metadata['cloud_service_providers']
+        if cloud_service_providers is not None:
+            if cloud_service_providers not in status_dic['cloud_service_providers'][dir_main_category]:
+                # create subject key in dic
+                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers] = {}
+                # check if in allow list
+                if cloud_service_providers in dic_allow_list["cloud_service_providers"]:
+                    status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['allowed']          = True              
+                else:
+                    status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['allowed']          = False              
+                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['count']                = 1                # make count one
+                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
+            else:
+                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['count']               += 1                # increase count by one
+                status_dic['cloud_service_providers'][dir_main_category][cloud_service_providers]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
+
+    return status_dic
+
+
+
 def checker(report = 'all', update_md_files = False):
     global status_dic, dir_relative_of_learning_paths, dic_allow_list, learning_path_metadata, dir_main_category
+
+    #
+    # -1
+    # Parse arguments if used as a standalone file
+    '''
+    arg_parser = argparse.ArgumentParser(description='Filter updater & Checker.', prefix_chars='-')
+    arg_parser.add_argument('-u', '--update-md-files', action='store_true', help='Update .md index files filtering information.')
+    arg_parser.add_argument('-r', '--report', action='store', help='Report only specific information. Default is none. Set to "all", "subjects", "oses", "csps", or "tools-software-languages"')
+
+    args = arg_parser.parse_args()
+    update_md_files = args.update_md_files
+    report = args.report
+    '''
 
     #
     # 0
@@ -283,7 +357,8 @@ def checker(report = 'all', update_md_files = False):
     status_dic = {
         'subjects':{},
         'operatingsystems':{},
-        'tools_software_languages': {}
+        'tools_software_languages': {},
+        'cloud_service_providers': {}
         }
 
     # iterate over main categories as defined in the dic allow list (embedded, mobile, etc.)
@@ -293,6 +368,9 @@ def checker(report = 'all', update_md_files = False):
         status_dic['subjects'][dir_main_category] = {}
         status_dic['operatingsystems'][dir_main_category] = {}
         status_dic['tools_software_languages'][dir_main_category] = {}
+        if dir_main_category == "servers-and-cloud-computing":
+            status_dic['cloud_service_providers'][dir_main_category] = {}
+            
 
         # iterate over every directory in this category
         learning_paths_in_category = [ Path(f.path+"/_index.md") for f in os.scandir(dir_relative_of_learning_paths+dir_main_category) if f.is_dir() ]
@@ -303,6 +381,8 @@ def checker(report = 'all', update_md_files = False):
             status_dic = addSubjectsToStatusDict()
             status_dic = addOperatingSystemsToStatusDict()
             status_dic = addToolsSoftwareLanguagesToStatusDict()
+            if dir_main_category == "servers-and-cloud-computing":
+                status_dic = addCloudServiceProvidersToStatusDict()
 
     #
     # 2.5
@@ -319,7 +399,8 @@ def checker(report = 'all', update_md_files = False):
                 status_dic = addSubjectsToStatusDict()
                 status_dic = addOperatingSystemsToStatusDict()
                 status_dic = addToolsSoftwareLanguagesToStatusDict()
-
+                if dir_main_category == "servers-and-cloud-computing":
+                    status_dic = addCloudServiceProvidersToStatusDict()
 
     #
     # 3
@@ -327,10 +408,14 @@ def checker(report = 'all', update_md_files = False):
     if report == 'all':
         printSubjectReport()
         printOSesReport()
+        printCSPsReport()
+        printToolsSoftwareLanguagesReport()
     elif report == 'subjects':
         printSubjectReport()
     elif report == 'oses':
         printOSesReport()
+    elif report == 'csps':
+        printCSPsReport()
     elif report == 'tools-software-languages':
         printToolsSoftwareLanguagesReport()
 
@@ -347,3 +432,8 @@ def checker(report = 'all', update_md_files = False):
         print('No overwriting specifed with --update-md-files flag. Exiting.')
         print()
         sys.exit(0)
+
+'''
+if __name__ == "__main__":
+    checker()
+'''

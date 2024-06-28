@@ -28,7 +28,6 @@ operatingsystems:
 tools_software_languages:
     - Coding
     - GitHub
-    - Azure
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -32,17 +32,28 @@ Calls to:
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
     <div class="c-col filter-column-div u-hide lg:u-display-block u-flex-shrink-0">
-        <h3 class="u-margin-top-0">Filter</h3>
-        {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
+        {{if eq "cloud_service_provider" .Data.Singular}}
+            <h3 class="u-margin-top-0">{{.Data.Term}} Learning Paths</h3>
+            <p>
+                This page lists all Learning Paths focused on {{.Data.Term}} in the Server and Cloud Computing category. 
+            </p>
+        {{else}}
+            <h3 class="u-margin-top-0">Filter</h3>
+            {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
+        {{end}}
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
-        <!-- Mobile: Search & Filter -->
-        {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
-
-        <!-- Bars: Active Filters, # content displayed, sort by. -->
-        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        
+        {{if eq "cloud_service_provider" .Data.Singular}}
+            {{ partial "filter-search-sort/csp-term-page.html" (dict  "context" . "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        {{else}}
+            <!-- Mobile: Search & Filter -->
+            {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
+            <!-- Bars: Active Filters, # content displayed, sort by. -->
+            {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        {{end}}
 
         <!-- List of learning paths on right -->
         <div class="c-row">

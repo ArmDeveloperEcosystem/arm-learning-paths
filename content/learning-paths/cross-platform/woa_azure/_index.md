@@ -16,12 +16,13 @@ author_primary: Pareena Verma
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers: Microsoft Azure
+
 armips:
     - Neoverse
 operatingsystems:
     - Windows
 tools_software_languages:
-    - Azure
 
 ### Cross-platform metadata only
 shared_path: true

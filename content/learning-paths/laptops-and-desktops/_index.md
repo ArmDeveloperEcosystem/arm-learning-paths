@@ -9,6 +9,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
+- Baremetal: 1
 - ChromeOS: 1
 - Linux: 20
 - macOS: 2
@@ -25,7 +26,6 @@ tools_software_languages_filter:
 - Alacritty: 1
 - Arm Development Studio: 2
 - Arm64EC: 1
-- Azure: 2
 - C: 2
 - C#: 5
 - C++: 2

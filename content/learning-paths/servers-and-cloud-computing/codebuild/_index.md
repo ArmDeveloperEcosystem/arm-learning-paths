@@ -18,12 +18,13 @@ author_primary: Jason Andrews
 ### Tags
 skilllevels: Advanced
 subjects: CI-CD
+cloud_service_providers: AWS
+
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
-    - AWS
     - Docker
     - AWS CodeBuild
 

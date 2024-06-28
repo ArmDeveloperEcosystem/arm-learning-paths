@@ -17,6 +17,7 @@ author_primary: Jason Andrews
 ##### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
+cloud_service_providers: Google Cloud
 
 armips:
     - Neoverse
@@ -24,7 +25,6 @@ armips:
 tools_software_languages:
     - Terraform
     - Kubernetes
-    - Google Cloud
 
 operatingsystems:
     - Linux

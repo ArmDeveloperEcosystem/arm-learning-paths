@@ -26,7 +26,6 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Coding
-    - AWS
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

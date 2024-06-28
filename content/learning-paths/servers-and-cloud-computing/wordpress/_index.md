@@ -17,6 +17,8 @@ learning_objectives:
 ### Tags
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers: Oracle
+
 armips:
     - Neoverse
 
@@ -26,7 +28,6 @@ operatingsystems:
 tools_software_languages:
     - MySQL
     - WordPress
-    - Oracle
 
 
 ### FIXED, DO NOT MODIFY
