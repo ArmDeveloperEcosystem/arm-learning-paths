@@ -199,7 +199,7 @@ intended to be used by other methods from the `Matrix` class.  Users of the `Mat
 
 With this in place, you can add some constructors in the public section of the `Matrix` class.
 
-The very first `Matrix` you should be able to construct is an invalid `Matrix`. While this might sound strange, this is actually very useful in practice, to signal some errors. In this case, an invalid `Matrix` is a matrix with 0 rows and 0 columns. You can use the default constructor - that is a constructor with no parameters) for this.
+The very first `Matrix` you should be able to construct is an invalid `Matrix`. While this might sound strange, this is useful in practice, to signal errors. In this case, an invalid `Matrix` is a matrix with 0 rows and 0 columns. You can use the default constructor - that is a constructor with no parameters) for this.
 
 Add the following code
 in the public section of class `Matrix` in `include/Matrix/Matrix.h`:
@@ -365,7 +365,7 @@ TEST(Matrix, uninitializedConstruct) {
 ```
 
 This constructs a valid `Matrix` if it contains elements), and the
-`uninitializedConstruct` test checks that 2 valid matrices of different types
+`uninitializedConstruct` test checks that two valid matrices of different types
 and dimensions can be constructed.
 
 Compile and test again, all should pass:
@@ -393,9 +393,9 @@ ninja check
 [  PASSED  ] 4 tests.
 ```
 
-The `Matrix` class is missing 2 important methods:
-- a *getter*, to read the matrix element at (row, col)
-- a *setter*, to modify the matrix element at (row, col)
+The `Matrix` class is missing two important methods:
+- a *getter*, to read the matrix element at (row, col).
+- a *setter*, to modify the matrix element at (row, col).
 
 Add them now in the public section of `Matrix` in `include/Matrix/Matrix.h`:
 
@@ -964,8 +964,7 @@ TEST(Matrix, dump) {
 ```
 
 This test makes uses of string streams, which enable you to capture and check
-the output without actually writing to the standard output. You'll need to add
-an include file at the top of `tests/Matrix.cpp` for the above test to compile:
+the output without writing to the standard output. You need to add an include file at the top of `tests/Matrix.cpp` for the above test to compile:
 
 ```CPP
 #include <sstream>
@@ -1125,5 +1124,4 @@ Modern C++ enabled you to express move and copy
 semantics, and to use smart pointers to make memory management easy.
 
 The compiler will also catch a large number of type or misuse errors. With this core
-functionality in place, you have all you need to actually implement matrix
-operations in the next section.
+functionality in place, you have all you need to implement matrix operations in the next section.
