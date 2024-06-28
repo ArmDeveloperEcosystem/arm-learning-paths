@@ -1,0 +1,38 @@
+{{/*
+Displays the search status under the search bar: how many results are displaying.
+
+Where it is used:
+    - term list page
+
+Called from:
+    - _default/term.html
+*/}}
+
+
+
+
+<!-- Search (no filtering) -->
+<div class="u-flex u-justify-content-between c-col c-col-12 u-flex u-position-relative u-width-100% lg:u-width-auto u-margin-bottom-0">
+    <ads-search id="search-box" class="u-margin-top-0 u-width-100%" has-search-button="" placeholder="Search by Learning Path name"></ads-search>
+</div>
+
+<!-- Current results & sorting bar -->
+<div id="result-sort-div">
+    <div id="results-status-bar">
+        <!-- Automatically updates the currently shown number span based on dynamic filtering -->
+        Displaying 
+        <span id="currently-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
+        of 
+        <span id="total-shown-number" class="num-of-paths-text">{{len .content_to_list }}</span>
+        {{.page_type}}.
+    </div>
+
+    <!-- Sorting display -->
+    {{- if ne .page_type "tools" -}}
+        <div id="sorting-bar">
+            <span class="sorting-criteria active">Date</span>
+        </div>
+    {{- end -}}
+</div>
+
+
