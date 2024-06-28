@@ -94,7 +94,7 @@ In this case, the project is built in the `build/` directory.
 
 {{% notice Note%}}
 If the project is under version control, then the `build/` directory can be
-ignored because the contents can always be regenerated. If you are using `git`,
+ignored as the contents can always be regenerated. If you are using `git`,
 the way to configure `git` to ignore the `build/` directory is to add it to a
 `.gitignore` file. Other revision control systems have a similar way to ignore
 files and directories.
@@ -104,7 +104,7 @@ You will also note that the Matrix library headers are located in a `Matrix/`
 directory. It is highly probable that some of the header files (`Matrix.h` for
 example) will collide with some other file for some users. In order to be sure
 that compilers pick the right files, all the headers are placed in a `Matrix/`
-directory, effectively giving some form of namespace to the include file look-up
+directory, effectively providing some form of namespace to the include file look-up
 by the tools.
 
 The source code for the Matrix library will live in `lib/Matrix` and the
@@ -115,7 +115,7 @@ applications' source code will be located in `src/`.
 There is nothing like creating the canonical `Hello, World!` application!
 
 Use your favorite text editor or IDE to
-create the file `src/howdy.cpp` and add the following content to it:
+create the file `src/howdy.cpp` and add the following content:
 
 {{< include-code CPP "content/learning-paths/cross-platform/matrix/projects/chapter-1/src/howdy.cpp" >}}
 
@@ -125,7 +125,7 @@ CMake reads a file named `CMakeLists.txt` to get the project description
 and all of its instructions.
 
 At the top of your project, create file `CMakeLists.txt` and add the following
-content to it with your text editor:
+content to it, using your text editor:
 
 ```TXT
 cmake_minimum_required(VERSION 3.5)
@@ -136,7 +136,7 @@ add_executable(howdy src/howdy.cpp)
 ```
 
 The `cmake_minimum_required` command at the first line tells CMake that the
-project wants it to be at least version 3.5. This is a very old version because
+project requires at least version 3.5. This is an old version because
 your Matrix project is not using any new commands or options from CMake.
 `cmake_minimum_required` is required, as it helps diagnose version
 mismatches.
@@ -200,8 +200,8 @@ Execute the `howdy` application with:
 Hello, World !
 ```
 
-Depending on your platform, the application may be named slightly differently,
-On Windows it would be `howdy.exe`, so to execute it you would instead
+Depending on your platform, the application might be named slightly differently.
+On Windows, it would be `howdy.exe`, so to execute it you would instead
 have to type:
 
 ```BASH { output_lines = "2" }
@@ -211,14 +211,13 @@ Hello, World !
 
 {{% notice Note%}}
 You can remove the `build` directory at any point without any fear of losing
-important data, as you can always recreate those files with the above configure
-and build steps.
+important data, as you can always recreate those files with the configure-and-build steps described above.
 {{% /notice %}}
 
 ## Add the Matrix library foundations
 
 You will now add the Matrix library foundations: a header file, source code,
-build instructions, and another example program using the library to check
+build instructions, and another example program using the library to check that
 everything is working.
 
 The simplest function you can add at this stage is one that will return the
@@ -244,8 +243,7 @@ Finally, add the instructions below in the top-level `CMakeLists.txt`:
 {{< include-code TXT "content/learning-paths/cross-platform/matrix/projects/chapter-1/CMakeLists.txt" >}}
 
 The `add_library` instructs CMake how to build the Matrix library. The
-`target_include_directories` specifies where the Matrix library header are
-located, and the `target_compile_features` specifies that C++17 is the version
+`target_include_directories` specifies where the Matrix library header is located, and the `target_compile_features` specifies that C++17 is the version
 of the C++ language that is used by the Matrix library. The `matrix-getVersion`
 executable is compiled from the `src/getVersion.cpp` source file with the
 `add_executable` command and has to be linked with our Matrix library with the
@@ -265,12 +263,11 @@ and run it with:
 Using Matrix version: 0.1.0
 ```
 
-Congratulations, you have constructed a library and a program to test it.
+Congratulations, you have constructed a library and a program to test it!
 
 ## What have you achieved so far ?
 
-At this stage, your Matrix project has the following directory structure:
-slightly different on Windows or Linux):
+At this stage, your Matrix project has the following directory structure, which is slightly different depending on whether it is Windows or Linux:
 
 ```TXT
 Matrix/
@@ -296,14 +293,14 @@ You can download the [archive](/artifacts/matrix/chapter-1.tar.xz) of the
 project in its current state to experiment locally on your machine.
 
 You have created the foundation for developing and evolving your Matrix
-library in a platform agnostic way, meaning it can be easily developed and used
+library in a platform-agnostic way, meaning that it can be easily developed and used
 on macOS, Linux, and Windows. This was done *almost* effortlessly thanks to
-CMake, which shields developers from all the platform specific details like how
+CMake, which shields developers from all the platform-specific details such as how
 to invoke the compiler, build libraries, and link with those libraries on each of
 those platforms.
 
-On top of hiding the platform specific details, CMake also does not force a
-development environment onto project developers as you can use your favorite editor or IDE.
+On top of hiding the platform-specific details, CMake also does not force a particular
+development environment on to project developers. You can use your favorite editor or IDE.
 For example, Visual Studio Code can work seamlessly with CMake thanks to some plugins, and CMake can
 generate project files for several popular IDEs, such as Xcode, Sublime Text, Eclipse,
 CodeBlocks, and CodeLite. You can run `cmake --help` to get a
