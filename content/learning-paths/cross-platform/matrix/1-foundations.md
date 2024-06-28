@@ -34,39 +34,39 @@ Text](https://www.sublimetext.com/), which are also popular choices and all
 support extensions that make C++ development easy.
 
 
-## About configuring vs. building
+## What are the differences between configuring the project and building the code?
 
-When developing software, two separate but linked aspects must be
-considered:
-- How to configure the project
-- How to build the source code
+When developing software, there are two separate but linked stages:
 
-The first aspect is about configuring the project, which covers:
-- The platform itself (Windows, macOS, Linux): each platform has specific
+- Configuring the project.
+- Building the source code.
+
+**Configuring the project** includes making decisions and preparatory work around:
+- Selecting a platform, such as Windows, macOS, or Linux: each platform has specific
   requirements and usage.
-- Discovering what is available on the platform. For example, `libpng` might be
-  required by the project to process images in the PNG format, and it may or may
+- Discovering what is available on the platform: for example, `libpng` might be
+  required by the project to process images in PNG format, and it may or may
   not be available on the platform. Alternatively, it might be available, but
   not with a suitable configuration for the project needs. You may need to
   maintain a custom version of required dependencies.
 - Selecting project features: in some cases, projects might offer some degree of
-  configuration, for example to disable support for PNG format images when a
+  configuration, for example, to disable support for PNG format images when a
   user knows that a feature will never be used. This is done to avoid bloating
-  the application with never used code and functionality.
+  the application with never-used code and functionality.
 
-The second aspect is about building the project, which covers:
-- Compiling the human readable source code to produce binaries (executables and
-  libraries) that can be run. This involves invoking tools
-  like compilers and linkers.
-- Managing dependencies: this ensures the different parts of the project are built
-  in the proper order, and that when a rebuild is necessary (because a file has
-  changed for example), only the required parts of the project are re-built. It
+
+**Building the source code** includes:
+- Compiling the human-readable source code to produce binaries (executables and
+  libraries) that can be run. This involves invoking tools like compilers and linkers.
+- Managing dependencies: this ensures that the different parts of the project are built
+  in the correct order, and that when a rebuild is necessary (for example, because a file has
+  changed), only the required parts of the project are rebuilt. It
   is an important optimization to save build time, especially for developers as
   they spend most of their time in an edit-compile-run loop.
 
-These two aspects are so common that tools are available to ease development and
-cover all situations and platforms. The tool used for this project is
-CMake. CMake is available on all platforms and used by
+These two considerations are fundamental to the process of getting set up. Accordingly, tools are available to ease development and
+cover a wide variety of situations and platforms. The tool used for this project is
+**CMake**. CMake is available on all platforms and used by
 numerous projects, from very small projects to large
 projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
@@ -74,14 +74,13 @@ projects like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/).
 
 Organizing the files in a project is important because it allows you to:
 
-- Easily navigate and find information for new people as well as experienced
-  developers
-- Organize the information for the tools, such as compilers and linkers
-- Organize the information of what will be exported or installed and what is
-  only relevant for building the project
+- Easily navigate the structure and find information.  
+- Organize information for the tools, such as compilers and linkers.
+- Organize information in terms of what will be exported or installed, and what is
+  only relevant for building the project.
 - Accommodate for future growth: over time, features will be added to the
-  project, which usually translates to more source files. Having the proper
-  directory structure in place will help to keep the project tidy
+  project, which usually translates to more source files. Having an organized
+  directory structure will improve the efficiency of the project.
 
 The directory structure of this project is:
 
@@ -95,14 +94,11 @@ Matrix/
 └── src/
 ```
 
-It's a common practice, and CMake recommends it, to build projects outside of
-the source tree as this provides several advantages:
+CMake recommends that you build projects outside of the source tree as this provides several advantages:
 
-- Keeps clutter out of the source tree, which is often under version control
-- Provides an easy way to remove the build artifacts (object files, libraries,
-  executables, libraries)
-- Allows several build trees to co-exist at the same time, to have for example
-  debug and optimized builds, or builds with different configuration options
+- Keeps clutter out of the source tree, which is often under version control.
+- Provides an easy way to remove the build artifacts, such as object files, libraries, executables, and libraries.
+- Allows several build trees to co-exist at the same time. For example, to have debug and optimized builds, or builds with different configuration options.
 
 In this case, the project will be built in the `build/` directory.
 

@@ -6,8 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-With the infrastructure setup to build and test the Matrix library, it's
-now time to actually code the library.
+With the infrastructure set up to build and test the Matrix library, you can now code the library.
 
 In this section, you will add the core functionality of the library as well as
 unit tests to ensure functional correctness.
@@ -20,7 +19,7 @@ may vary. For example, in the case of high performance computing for weather
 forecast, the dataset is extremely large (and ever increasing), but can be
 considered secure and curated. On the other hand, if the data used in the
 computations can be adversely computed or altered, it is preferable to have
-checks, such as out of bound access, enabled.
+checks, such as out-of-bound access, enabled.
 
 In the Matrix processing library, you will implement 2 types of
 checks:
