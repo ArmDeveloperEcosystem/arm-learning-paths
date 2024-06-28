@@ -299,9 +299,8 @@ CMake, which shields developers from all the platform-specific details such as h
 to invoke the compiler, build libraries, and link with those libraries on each of
 those platforms.
 
-On top of hiding the platform-specific details, CMake also does not force a particular
-development environment on to project developers. You can use your favorite editor or IDE.
-For example, Visual Studio Code can work seamlessly with CMake thanks to some plugins, and CMake can
+In addition to concealing the platform-specific details, CMake also does not restrict project developers to one specific development environment. You can use your favorite editor or IDE.
+For example, Visual Studio Code can work seamlessly with CMake with plugins, and CMake can
 generate project files for several popular IDEs, such as Xcode, Sublime Text, Eclipse,
 CodeBlocks, and CodeLite. You can run `cmake --help` to get a
 list of supported *generators* (in CMake terminology) for your platform.
