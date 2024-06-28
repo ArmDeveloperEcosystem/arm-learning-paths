@@ -482,9 +482,6 @@ The C++ `std::initializer_list`  enables users to provide a list of literal
 values (in row major order) to use to initialize the matrix with:
 
 ```CPP
-```
-
-```CPP
     /// Construct a \p numRows x \p numColumns Matrix with elements
     /// initialized from the values from \p il in row-major order.
     Matrix(size_t numRows, size_t numCols, std::initializer_list<Ty> il)
