@@ -27,8 +27,8 @@ review:
         question: >
             Is there a requirement to rewrite the operators to support Matrices with different data types?
         answers:
-            - Yes
-            - No
+            - "Yes"
+            - "No"
         correct_answer: 2
         explanation: >
             C++ templates are a powerful feature as they enable generic programming, where code is parameterized by types. This allows to write code once, and let the compiler specialize it for a specific types.
