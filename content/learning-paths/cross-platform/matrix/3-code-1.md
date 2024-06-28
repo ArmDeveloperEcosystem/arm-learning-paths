@@ -155,7 +155,7 @@ First, add a private helper function `allocate`  that the Matrix constructors wi
     }
 ```
 
-You use the method to allocate memory for the element array. `new` will get enough memory to store `numElements` of type `Ty`. This is stored in the `data` `unique_ptr` with the `reset` function which enforces freeing memory
+You use this method to allocate memory for the element array. `new` will get enough memory to store `numElements` of type `Ty`. This is stored in the `data` `unique_ptr` with the `reset` function which enforces freeing memory
 previously referred to by `data`. If allocation fails, which is signaled with a `nullptr` (a zero pointer), `data` will not be valid and the program should be terminated. This helper method is made private because it is only
 intended to be used by other methods from the `Matrix` class.  Users of the `Matrix` objects have no reason for directly invoking this method.
 
