@@ -354,8 +354,8 @@ ninja check
 ```
 
 The `Matrix` class is missing two important methods:
-- a *getter*, to read the matrix element at (row, col).
-- a *setter*, to modify the matrix element at (row, col).
+- A *getter*, to read the matrix element at (row, col).
+- A *setter*, to modify the matrix element at (row, col).
 
 Add them now in the public section of `Matrix` in `include/Matrix/Matrix.h`:
 
@@ -1017,7 +1017,7 @@ ninja check
 
 Congratulations, you now have a working library!
 
-## What have you achieved so far ?
+## What have you achieved so far?
 
 At this stage, the code looks like this:
 
