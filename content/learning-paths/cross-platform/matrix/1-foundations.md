@@ -21,7 +21,7 @@ On a Ubuntu machine, they can be installed with:
 sudo apt-get install build-essential clang ninja-build cmake doxygen -y
 ```
 
-In addition to these tools, you will also need an IDE (Integrated Development
+In addition to these tools, you also need an IDE (Integrated Development
 Environment).
 
 [Visual Studio Code](https://code.visualstudio.com/) is a popular
