@@ -8,7 +8,7 @@ key_ip:
 - Cortex-R
 maintopic: true
 operatingsystems_filter:
-- Baremetal: 9
+- Baremetal: 10
 - Linux: 19
 - macOS: 1
 - Windows: 1
@@ -26,7 +26,6 @@ tools_software_languages_filter:
 - Arm Development Studio: 5
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 5
-- AWS: 2
 - AWS IoT Greengrass: 1
 - Balena Cloud: 1
 - Balena OS: 1

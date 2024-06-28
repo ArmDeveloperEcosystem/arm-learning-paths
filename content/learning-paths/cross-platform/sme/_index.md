@@ -28,7 +28,7 @@ tools_software_languages:
     - Arm Development Studio
 
 operatingsystems:
-    - Bare-metal
+    - Baremetal
 
 ### Cross-platform metadata only
 shared_path: true

@@ -25,14 +25,15 @@ author_primary: Dawid Borycki
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-    
+cloud_service_providers: Microsoft Azure
+
 armips:
     - Neoverse
     
 tools_software_languages:
     - .NET SDK
     - C#
-    - Azure
+
 operatingsystems:
     - Linux
 

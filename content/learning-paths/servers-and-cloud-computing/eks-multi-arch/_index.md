@@ -20,12 +20,12 @@ author_primary: Pranay Bakre
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
+cloud_service_providers: AWS
 armips:
     - Neoverse
-
 tools_software_languages:
     - Kubernetes
-    - AWS
+    - AWS Elastic Kubernetes Service (EKS)
 operatingsystems:
     - Linux
 

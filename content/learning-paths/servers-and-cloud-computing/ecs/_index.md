@@ -19,13 +19,14 @@ author_primary: Jason Andrews
 ##### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers: AWS
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-    - ECS
+    - AWS Elastic Container Service (ECS)
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

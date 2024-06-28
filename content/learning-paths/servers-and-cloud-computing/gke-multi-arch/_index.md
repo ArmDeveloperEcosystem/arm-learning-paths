@@ -21,12 +21,14 @@ author_primary: Pranay Bakre
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
+cloud_service_providers: Google Cloud
+
 armips:
     - Neoverse
 
 tools_software_languages:
     - Kubernetes
-    - Google Cloud
+
 operatingsystems:
     - Linux
 

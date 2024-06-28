@@ -27,9 +27,6 @@ test_status:
 title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm based servers
 tools_software_languages:
 - Memcached
-- AWS
-- Azure
-- Google Cloud
 - SQL
 - MySQL
 - PostgreSQL

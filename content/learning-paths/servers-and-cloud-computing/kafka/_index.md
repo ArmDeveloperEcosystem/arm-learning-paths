@@ -27,8 +27,7 @@ operatingsystems:
 tools_software_languages:
     - Kafka
     - Zookeeper
-    - AWS
-    - Google Cloud
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

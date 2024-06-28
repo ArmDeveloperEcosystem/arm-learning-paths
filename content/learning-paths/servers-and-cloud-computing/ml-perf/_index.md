@@ -24,7 +24,7 @@ test_status:
 - passed
 title: Measure Machine Learning Inference Performance on Arm servers
 tools_software_languages:
-- Tensorflow
+- TensorFlow
 weight: 1
 who_is_this_for: This is an introductory topic for software developers interested
   in benchmarking machine learning workloads on Arm servers.
