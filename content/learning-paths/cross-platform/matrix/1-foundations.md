@@ -9,12 +9,11 @@ layout: learningpathall
 
 To begin, make sure you have the following tools available on your development platform:
 
-- A C++ compiler with C++17 support. Any recent version of Clang or the GNU compiler
-  (gcc) will work.
+- A C++ compiler with C++17 support. Clang or the GNU compiler (gcc) both work.
 - [CMake](/install-guides/cmake/) build tool.
-- A build system: [GNU Make](https://www.gnu.org/software/make/) or
+- A build system. You can use [GNU Make](https://www.gnu.org/software/make/) or
   [Ninja](https://ninja-build.org/).
-- A documentation generator: [Doxygen](https://www.doxygen.nl/).
+- A documentation generator. You can use [Doxygen](https://www.doxygen.nl/).
 
 On a Ubuntu machine, they can be installed with:
 
@@ -30,39 +29,30 @@ choice, and you can install it by following these
 [instructions](https://code.visualstudio.com/docs/setup/linux). Alternatively,
 you can use a text editor like [Vim](https://www.vim.org/), [GNU
 Emacs](https://www.gnu.org/software/emacs/), or [Sublime
-Text](https://www.sublimetext.com/), which are also popular choices and all
+Text](https://www.sublimetext.com/), which are also popular and they all
 support extensions that make C++ development easy.
 
 
 ## What are the differences between configuring the project and building the code?
 
-When developing software, there are two separate but linked stages:
+When developing software, there are two separate, but linked, stages:
 
 - Configuring the project.
 - Building the source code.
 
 **Configuring the project** includes making decisions and preparatory work around:
-- Selecting a platform, such as Windows, macOS, or Linux: each platform has specific
+- Selecting a platform, such as Windows, macOS, or Linux - each platform has its own specific
   requirements and usage.
-- Discovering what is available on the platform: for example, `libpng` might be
-  required by the project to process images in PNG format, and it may or may
-  not be available on the platform. Alternatively, it might be available, but
-  not with a suitable configuration for the project needs. You may need to
-  maintain a custom version of required dependencies.
-- Selecting project features: in some cases, projects might offer some degree of
-  configuration, for example, to disable support for PNG format images when a
-  user knows that a feature will never be used. This is done to avoid bloating
-  the application with never-used code and functionality.
+- Discovering what is available on the platform - for example, `libpng` might be
+  required by the project to process images in PNG format, but it might not be available on the platform. Alternatively, it might be available, but not with a suitable configuration for the project requirements. You may need to maintain a customized version of required dependencies.
+- Selecting project features - in some cases, projects might offer some degree of configuration, for example, disabling support for a feature that will never be used. This is done to avoid bloating the application with never-used code and functionality.
 
 
 **Building the source code** includes:
 - Compiling the human-readable source code to produce binaries (executables and
   libraries) that can be run. This involves invoking tools like compilers and linkers.
-- Managing dependencies: this ensures that the different parts of the project are built
-  in the correct order, and that when a rebuild is necessary (for example, because a file has
-  changed), only the required parts of the project are rebuilt. It
-  is an important optimization to save build time, especially for developers as
-  they spend most of their time in an edit-compile-run loop.
+- Managing dependencies - this ensures that the different parts of the project are built
+  in the correct order, and that when a rebuild is necessary, such as when a file changes, only the required parts of the project are rebuilt. It is an important optimization to save build time, especially for developers who spend most of their time in an edit-compile-run loop.
 
 These two considerations are fundamental to the process of getting set up. Accordingly, tools are available to ease development and
 cover a wide variety of situations and platforms. The tool used for this project is
@@ -76,11 +66,11 @@ Organizing the files in a project is important because it allows you to:
 
 - Easily navigate the structure and find information.  
 - Organize information for the tools, such as compilers and linkers.
-- Organize information in terms of what will be exported or installed, and what is
+- Make a distinction between information that is exported or installed, and what is
   only relevant for building the project.
-- Accommodate for future growth: over time, features will be added to the
+- Accommodate for future growth - over time, features are added to the
   project, which usually translates to more source files. Having an organized
-  directory structure will improve the efficiency of the project.
+  directory structure improves the efficiency of the project.
 
 The directory structure of this project is:
 
@@ -94,13 +84,13 @@ Matrix/
 └── src/
 ```
 
-CMake recommends that you build projects outside of the source tree as this provides several advantages:
+CMake recommends that you build projects outside of the source tree for the following reasons:
 
-- Keeps clutter out of the source tree, which is often under version control.
-- Provides an easy way to remove the build artifacts, such as object files, libraries, executables, and libraries.
-- Allows several build trees to co-exist at the same time. For example, to have debug and optimized builds, or builds with different configuration options.
+- Reduces clutter in the source tree, which is often under version control.
+- Provides an easy way to remove the build artifacts, such as object files, libraries, and executables.
+- Allows several build trees to co-exist. For example, to have debug and optimized builds, or builds with differing configuration options.
 
-In this case, the project will be built in the `build/` directory.
+In this case, the project is built in the `build/` directory.
 
 {{% notice Note%}}
 If the project is under version control, then the `build/` directory can be
@@ -122,7 +112,7 @@ applications' source code will be located in `src/`.
 
 ## Add a demo application
 
-There is nothing like creating the canonical `Hello, World!` application.
+There is nothing like creating the canonical `Hello, World!` application!
 
 Use your favorite text editor or IDE to
 create the file `src/howdy.cpp` and add the following content to it:
