@@ -1,5 +1,5 @@
 ---
-title: Learn to use PMUV3_PLUGIN to do performance analysis at a code level and analyse hotspots
+title: Performance analysis at a code level using PMUv3_plugin 
 
 minutes_to_complete: 60
 
