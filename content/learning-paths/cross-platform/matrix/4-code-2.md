@@ -91,14 +91,14 @@ implemented as classes with the function operator (`operator()`) defined. This
 makes them suitable for using in bigger algorithms and is a common pattern used in the C++ standard library.
 
 One point worth mentioning is related to the `Abs` class: depending on the type
-used at instantiation, the compiler will select an optimized implementation for
+used at instantiation, the compiler selects an optimized implementation for
 unsigned types, and there is no need to compute the absolute value of an always
 positive value. This optimization is transparent to users.
 
 Those operators are marked as `constexpr` so that the compiler can optimize the
 computation by performing them at compile time rather than runtime if the actual
 values are known at compile time. They are marked `const`, because the operator
-will not modify the object state - as these objects don't have a state.
+does not modify the object state - as these objects don't have a state.
 
 The new operations must have tests, so add those into
 a separate `tests/Operators.cpp` file:
@@ -285,7 +285,7 @@ All the whole matrix operations have the same pattern of operation: each element
 in the matrix needs to be transformed with the unary scalar operation, the order
 in which the element are modified does not matter, so there is no need to apply
 the scalar operations taking into account rows and columns. Giving the compiler
-one simple big loop will give it the most optimization opportunities.
+one simple big loop gives it the most optimization opportunities.
 
 First, create a `applyEltWiseUnaryOp` helper routine in the public section of
  `Matrix` in `include/Matrix/Matrix.h` which is templated on the desired scalar
@@ -357,9 +357,9 @@ template <typename Ty> Matrix<Ty> log(const Matrix<Ty> &m) {
 ```
 
 Users can now write either:
- - `m.abs()` which will modify matrix `m` *in-place* so that it contains the
+ - `m.abs()` which modifies matrix `m` *in-place* so that it contains the
  absolute value of each of its elements
- - `abs(m)` which will return a copy of `m` with the absolute value of each of
+ - `abs(m)` which returns a copy of `m` with the absolute value of each of
  `m` elements, leaving `m` untouched.
 
 Of course, each of these function needs to have tests.
@@ -946,9 +946,9 @@ Last, but not least, the `Matrix` class still requires the most important operat
 matrix multiplication.
 
 Add the `multiply` function, outside of the `Matrix` class, but in the
-`MatComp` namespace in `include/Matrix/Matrix.h`. `multiply` will check that
+`MatComp` namespace in `include/Matrix/Matrix.h`. `multiply` checks that
 the arguments have compatible dimensions, then create an uninitialized
-matrix that will hold the multiplication result and eventually perform the
+matrix that holds the multiplication result and eventually perform the
 multiplication to fill it.
 
 ```CPP
