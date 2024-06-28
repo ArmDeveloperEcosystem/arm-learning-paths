@@ -27,7 +27,6 @@ tools_software_languages_filter:
 - Arm Compiler for Embedded: 5
 - Arm Development Studio: 3
 - Arm Virtual Hardware: 11
-- AWS: 1
 - CMSIS: 5
 - CMSIS-Toolbox: 3
 - Coding: 21
