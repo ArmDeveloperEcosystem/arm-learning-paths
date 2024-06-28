@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 Follow the steps outline below to connect the AXI4 peripheral you created in the previous section to the ZYNQ Processing System.
 
-1. Right-click on the empty space again in the diagram and choose “Create Ports” (Ctrl+K). Create 2 ports with the following settings and names: 
+1. Right-click on the empty space again in the diagram and choose “Create Port...” (Ctrl+K). Create 2 ports with the following settings and names: 
 
     ![Creating output port](Images/Picture15.png) 
 
@@ -57,7 +57,7 @@ Right-click the “Constraints” under the sources tab and select “Add source
 
     *Figure 3.7. Creating a constraints file*
 
-8. Expand the “Constraints” folder within the “Sources” tab and double-click the file you just created to open it. Add the following constraints from “https://github.com/Digilent/Zybo-Z7-10-Pmod-VGA/blob/master/src/constraints/Zybo-Z7-Master.xdc”, and save the file: 
+8. Expand the “Constraints” folder within the “Sources” tab and double-click the file you just created to open it. Add the following constraints from [Digilent/Zybo-Z7-10-Pmod-VGA/blob/master/src/constraints/Zybo-Z7-Master.xdc](https://github.com/Digilent/Zybo-Z7-10-Pmod-VGA/blob/master/src/constraints/Zybo-Z7-Master.xdc), and save the file: 
 
     ![Editing constraints file](Images/Picture22.png) 
 
