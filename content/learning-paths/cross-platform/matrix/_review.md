@@ -10,7 +10,7 @@ review:
             - GNU Emacs.
         correct_answer: 2
         explanation: >
-            CMake is often used as the configuration and build infrastructure, from small projects to the largest, like [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/). Vim and GNU Emacs are very powerful text editors, and more. Autoconf and automake are tools that were achieving a similar goal across \*nix platforms.
+            CMake is often used as the configuration and build infrastructure, from small projects to the largest, such as [LLVM](https://www.llvm.org) or [Qt](https://www.qt.io/). Vim and GNU Emacs are powerful text editors. Autoconf and automake are tools that achieve a similar goal across \*nix platforms.
 
     - questions:
         question: >
@@ -21,7 +21,7 @@ review:
             - Testing?  My code is always first time right, and I never introduce bugs!
         correct_answer: 2
         explanation: >
-            While the first answer is not wrong, it's not that bad if a program has tests, the second approach is the best as it's much easier to add test along the way at the time the functionality is developed.
+            While the first answer is not factually incorrect, the second approach is best as it's much easier to add test along the way as the functionality is developed.
 
     - questions:
         question: >
