@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Arm Confidential Compute Architecture (CCA) is available on all Arm devices
+            Arm Confidential Compute Architecture (CCA) is available on all Arm devices.
         answers:
             - "True"
             - "False"
@@ -22,7 +22,7 @@ review:
             CCA requires the Realm Management Extension (RME) of Armv9-A architecture, as well as support within the software stack running on the device.
     - questions:
         question: >
-            The secure monitor would run in which world?
+            The Secure Monitor runs in which world?
         answers:
             - "Normal"
             - "Secure"
