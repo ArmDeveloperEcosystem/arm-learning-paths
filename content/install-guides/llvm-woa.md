@@ -33,7 +33,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Download and install
 
-The latest version of the LLVM toolchain with Windows on Arm native support is 16.0.0. [Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-16.0.0/LLVM-16.0.0-woa64.exe).
+The latest version (at the time of writing) of the LLVM toolchain with Windows on Arm native support is 18.1.8. [Download the pre-built binary](https://github.com/llvm/llvm-project/releases/download/llvmorg-18.1.8/LLVM-18.1.8-woa64.exe).
 
 {{% notice Note %}}
 A warning message may appear in your browser due to the publisher being listed as `Unknown`. The warning is:
@@ -43,7 +43,7 @@ A warning message may appear in your browser due to the publisher being listed a
 It is safe to ignore this warning and proceed.
 {{% /notice %}}
 
-After download, run `LLVM-16.0.0-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
+After download, run `LLVM-18.1.8-woa64.exe` on a Windows on Arm machine. The installer will start. By default, the installer does not add LLVM to the system `PATH`. If you easily want to invoke LLVM from any directory, select the option to `Add LLVM to the system PATH for all users`.
 
 ![img1 #center](/install-guides/_images/llvm-setup.png)
 
@@ -63,7 +63,7 @@ clang --version
 The output should look like:
 
 ```output
-clang version 16.0.0
+clang version 18.1.8
 Target: aarch64-pc-windows-msvc
 Thread model: posix
 InstalledDir: C:\Program Files\LLVM\bin
