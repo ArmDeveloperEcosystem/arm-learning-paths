@@ -13,7 +13,7 @@ By default, Android Studio displays your project files in the Android view. Clic
  
 ![alt-text-2](pictures/02_project_source_file_view.png "Project Source Files view of Android project.")
 
-Unfold the file structure as indicated in the picture and double click on the *native-lib.cpp* file to open it. This file contains the implementation of several most common memory safety bugs.
+Unfold the file structure as indicated in the picture and double click on the *native-lib.cpp* file to open it. This file contains the implementation of several of the most common memory safety bugs.
 For example, the function below implements a common case that tries to access an array element after the array has been freed.
 
 ```
