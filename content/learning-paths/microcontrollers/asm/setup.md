@@ -37,13 +37,17 @@ Click the `Options for target` icon.
 
 In the `Debug` tab, select `Models Cortex-M Debugger`. Click `Settings`, and browse for the FVP provided with MDK in the `Command` pane.
 ```
-Keil_v5/ARM/VHT/VHT_MPS2_Cortex-M4_MDK.exe
+Keil_v5/ARM/avh-fvp/bin/models/FVP_MPS2_Cortex-M4_MDK.exe
 ```
 
 {{% notice  Note%}}
 MDK versions before 5.37 will find the FVP at
 
 `Keil_v5/ARM/FVP/MPS2_Cortex-M/FVP_MPS2_Cortex-M4_MDK.exe`
+
+and in 5.38, 5.39 it is available at
+
+`Keil_v5/ARM/VHT/VHT_MPS2_Cortex-M4_MDK.exe`
 {{% /notice %}}
 
 ### Configure build settings
