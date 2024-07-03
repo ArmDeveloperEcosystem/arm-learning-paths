@@ -44,8 +44,7 @@ from PIL import Image
 import os
 ```
 
-Next, load the `CIFAR-10` dataset. TensorFlow provides API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the 
-dataset.
+Next, load the `CIFAR-10` dataset. TensorFlow provides an API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the dataset.
 
 ```python
 # Load data from TF Keras
