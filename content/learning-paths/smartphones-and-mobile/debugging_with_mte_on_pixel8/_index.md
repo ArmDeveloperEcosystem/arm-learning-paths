@@ -1,13 +1,13 @@
 ---
-title: Debugging with MTE on Google Pixel 8
+title: Debug with MTE on Google Pixel 8
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an advanced topic for developers interested in learning how to use the Arm Memory Tagging Extension (MTE) to detect memory safety bugs with Android Studio. 
+who_is_this_for: This is an advanced topic for developers interested in learning how to use the Arm Memory Tagging Extension (MTE) to detect memory safety bugs with Android Studio on a Google Pixel 8 smartphone. 
 
 learning_objectives: 
     - Recognize common memory safety bugs in Android applications.
-    - Understand an Android MTE Test app implementing common memory bugs. 
+    - Describe how you can use an Android MTE Test app to implement common memory bugs. 
     - Build the MTE Test app in Android Studio.
     - Enable and disable MTE in the Android Manifest.
     - Debug the MTE Test app in Android Studio on a Google Pixel 8 smartphone.
