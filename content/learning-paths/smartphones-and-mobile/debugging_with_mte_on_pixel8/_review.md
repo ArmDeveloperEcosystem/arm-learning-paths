@@ -14,7 +14,7 @@ review:
 
     - questions:
         question: >
-           Which of the below statements is false?
+           Which statement is false?
         answers:
             - The MTE Test application implements common memory safety bugs.
             - The MTE Test application implements four common memory safety bugs.
@@ -22,19 +22,19 @@ review:
             - The MTE Test application implements four functions which are common in the Android codebase.
         correct_answer: 4                   
         explanation: >
-            The MTE Test application implements common memory safety bugs. It implements four common memory safety bugs using four functions. Each funtion triggers a memory safety bug.
+            The MTE Test application implements common memory safety bugs. It implements four common memory safety bugs using four functions. Each function triggers a memory safety bug.
                
     - questions:
         question: >
             Which of the below statements is true?
         answers:
-            - To debug an application in Android Studio with MTE you need to enable MTE in the phone settings.
-            - To debug an application in Android Studio with MTE you need to enable MTE in the Android manifest.
+            - To debug an application in Android Studio with MTE you only need to enable MTE in the phone settings.
+            - To debug an application in Android Studio with MTE you only need to enable MTE in the Android manifest.
             - To debug an application in Android Studio with MTE you need to enable MTE in the Android settings and in the Android manifest.
-            - To debug an application in Android Studio with MTE you need to launch Android Studio with the device connected.
+            - To debug an application in Android Studio with MTE you just need to launch Android Studio with the device connected.
         correct_answer: 3          
         explanation: >
-            To debug an application in Android Studio with MTE you need to enable MTE in the Android manifest by assigning to *memTagMode* attribute any of the values: *sync*, *async*, or *asymm*. Neverteless, this is not enough. MTE also must be enabled in *System-> Developer options-> Memory tagging Extension*.
+            To debug an application in Android Studio with MTE you need to enable MTE in the Android manifest by assigning to the *memTagMode* attribute any of the values: *sync*, *async*, or *asymm*. However, this is not enough. MTE also must be enabled in *System-> Developer options-> Memory tagging Extension*.
 
     - questions:
         question: >

@@ -6,15 +6,13 @@ weight: 2
 layout: learningpathall
 ---
 
-## Most common memory safety bugs in Android space 
+## Understanding common memory safety bugs in Android applications 
 
-[ YOUR CONTENT GOES HERE ]: #
-
-Memory safety bugs are errors in handling memory by software.
+Memory safety bugs are errors in handling memory by software. They are the most common type of security bug in Android applications.
 
 Memory safety bugs in native code continue to be a major source of end-user crashes, a negative contributor to quality and stability, and the biggest source of security vulnerabilities.
 
-Memory safety bugs are the most common issue in the Android codebases. They account for over 70% of high severity security vulnerabilities and for millions of user-visible crashes.
+Memory safety bugs account for over 70% of high severity security vulnerabilities and for millions of user-visible crashes.
 
 Native code written in memory-unsafe languages like C, C++, and assembly, represents over 70% of the Android platform code and is present in approximately 50% of Play Store applications.
 
