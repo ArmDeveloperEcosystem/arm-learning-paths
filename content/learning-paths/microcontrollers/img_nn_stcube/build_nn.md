@@ -169,7 +169,7 @@ model.add(Dense(10)) #The number of classes
 model.add(Activation('softmax'))
 ```
 
-Execute the code blocks below to compile and train the model. If tens of epochs are used, the training could take more than 10 hours because the dataset has 50,000 training images. Therefore, the model trained for 50 epochs is provided for testing (File: ‘Data/models/cifar10_model.h5’). You can use the model if you don't have enough time to train your own model. 
+Execute the code blocks below to compile and train the model. If tens of epochs are used, the training might take more than 10 hours because the dataset has 50,000 training images. Therefore, the model trained for 50 epochs is provided for testing (File: ‘Data/models/cifar10_model.h5’). You can use the model if you don't have enough time to train your own model. 
 
 ```python
 # Check model structure and the number of parameters
