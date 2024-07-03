@@ -1,5 +1,5 @@
 ---
-title: Android app implementing memory safety bugs
+title: Implement memory safety bugs with the Android app
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -23,7 +23,7 @@ By default, Android Studio displays your project files in the Android view.
 
 Click on the **Project** view selector in the top-left area, below the menu bar, and select **Project Source Files** option. 
 
-You see the actual file structure of the Android project as shown below:
+You see the file structure of the Android project as shown below:
  
 ![alt-text-2](pictures/02_project_source_file_view.png "Project Source Files view of Android project.")
 
@@ -50,7 +50,7 @@ This association is implemented in the `activity_main.xml` file.
 
 To see this file, expand the content of the **res** folder in the **project** view and next the **layout** folder. Double-click on the file to open it. You can visualize this file in code and design modes.
 
-Explore the code and see the implementation of each button. For example, the implementation of the button associated with the function listed above looks like this:
+Explore the code and see the implementation of each button. For example, the implementation of the buttons associated with the function listed above looks like this:
 
 ```
 <Button
@@ -69,6 +69,6 @@ Explore the code and see the implementation of each button. For example, the imp
 /Button>
 ```
 
-The app buttons look like this:
+This translates to buttons that look like this:
 
 ![alt-text-2](pictures/03_app_buttons.png "App user interface.")

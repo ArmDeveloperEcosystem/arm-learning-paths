@@ -1,12 +1,12 @@
 ---
-title: Debugging in Android Studio with MTE
+title: Debug in Android Studio with MTE
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Debugging in Android Studio
+## Debug in Android Studio
 
 You are now ready to debug the MTE Test application in Android Studio.
 
@@ -16,7 +16,7 @@ In the image below, you should see the device name in the box, as highlighted.
 
 ![alt-text-2](pictures/05_android_sutio_device_connected.png "Device recognized by Android Studio.")
 
-Press the *Debug* button as shown in the image above to build and start debugging the application. Look at your device where the application is about to start. 
+Press the *Debug* button as shown in the image above to build and start debugging the application. Look at your device in the location where the application starts. 
 
 You see the message below on your screen. Wait until the application interface shows up.
 
@@ -29,13 +29,13 @@ This opens the debug console. The first time you do this, it can take about a mi
 
 ![alt-text-2](pictures/07_debug_console.png "Debug terminal shows that Android Studio is connected to the target VM.")
 
-At this point you are ready to debug the application. 
+You can now debug the application. 
 
 Look at your device where the application is running.
 
-You can press any of the buttons of the application. For example, the first button that implements the case *Use After Free*.  As MTE is enabled, it detects a mismatch between the tag in the address, and the tag in memory. The application crashes. 
+You can press any of the buttons of the application. For example, you can press the first button that implements the case *Use After Free*.  As MTE is enabled, it detects a mismatch between the tag in the address, and the tag in memory. The application crashes. 
 
-The debug process takes you to the line immediately before to the instruction that triggers the memory safety bug, as shown in the image below.
+The debug process takes you to the line immediately before the instruction that triggers the memory safety bug, as shown in the image below.
 
 ![alt-text-2](pictures/08_debugger_shows_memory_bug.png "Debugger signals the memory bug.")
 

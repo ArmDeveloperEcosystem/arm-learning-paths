@@ -1,5 +1,5 @@
 ---
-title: Setting up the app for debugging with MTE
+title: Set up the app for debugging with MTE
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -61,7 +61,7 @@ The attribute *memTagMode* can have the following values: *off*, *sync*, *async*
 
 If the *android:memtagMode* attribute is not specified, then MTE is disabled.
 
-This Learning Path demonstrates the the *sync* value of *memtagMode* attribute.
+This Learning Path demonstrates the *sync* value of *memtagMode* attribute.
 
 In synchronous mode (*sync*), a mismatch between the tag in the address and the tag in memory causes the processor to abort execution immediately. It terminates the process with SIGSEGV (code SEGV_MTESERR), which is a synchronous exception. This identifies the precise instruction and address that caused
 the failure. 
