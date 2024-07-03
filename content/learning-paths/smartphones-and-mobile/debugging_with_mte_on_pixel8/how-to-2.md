@@ -18,7 +18,7 @@ On your development machine, clone the repository:
 git clone https://github.com/rlopez3d/mte_test_app
 ```
 
-Once downloaded to your local machine, launch Android Studio and open the Android project in this location.
+Once downloaded to your local machine, launch Android Studio, and open the Android project in the same location.
 By default, Android Studio displays your project files in the Android view. 
 
 Click on the **Project** view selector in the top-left area, below the menu bar, and select **Project Source Files** option. 
@@ -48,9 +48,9 @@ Each of the four functions is associated with one of the buttons in the app.
 
 This association is implemented in the `activity_main.xml` file. 
 
-To see this file, expand the content of the *res* folder in the **project** view and next the *layout* folder. Double-click on the file to open it. You can visualize this file in code and design modes.
+To see this file, expand the content of the **res** folder in the **project** view and next the **layout** folder. Double-click on the file to open it. You can visualize this file in code and design modes.
 
-Explore the code and see the implementation of each button. For example, the implementation of the button associated with the function listed above looks like:
+Explore the code and see the implementation of each button. For example, the implementation of the button associated with the function listed above looks like this:
 
 ```
 <Button

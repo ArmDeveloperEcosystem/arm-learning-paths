@@ -24,7 +24,7 @@ You see the message below on your screen. Wait until the application interface s
 
 Press the *Debug* button at the bottom of the Android Studio window, as shown in the image below. 
 
-This opens the debug console. The first time you do this it could take about a minute for the console to show that Android Studio is "connected to the target VM".
+This opens the debug console. The first time you do this, it can take about a minute for the console to show that Android Studio is "connected to the target VM".
 
 
 ![alt-text-2](pictures/07_debug_console.png "Debug terminal shows that Android Studio is connected to the target VM.")
@@ -33,7 +33,7 @@ At this point you are ready to debug the application.
 
 Look at your device where the application is running.
 
-Press any of the buttons of the application. For example, the first button that implements the case *Use After Free*.  As MTE is enabled, it detects a mismatch between the tag in the address and the tag in memory and the application crashes. 
+You can press any of the buttons of the application. For example, the first button that implements the case *Use After Free*.  As MTE is enabled, it detects a mismatch between the tag in the address, and the tag in memory. The application crashes. 
 
 The debug process takes you to the line immediately before to the instruction that triggers the memory safety bug, as shown in the image below.
 

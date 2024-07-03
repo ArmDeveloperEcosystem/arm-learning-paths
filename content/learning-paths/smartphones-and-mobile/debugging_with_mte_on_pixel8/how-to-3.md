@@ -10,11 +10,11 @@ layout: learningpathall
 
 There are different ways to enable MTE in Android projects. 
 
-For a detailed description see [Memory safety](https://source.android.com/docs/security/test/memory-safety). 
+For a detailed description, see [Memory safety](https://source.android.com/docs/security/test/memory-safety). 
 
 You can use the application manifest to enable MTE.
 
-To open the application manifest, switch the project view to Project Files and expand `app->src->main->res` folders as shown in the picture below. Double-click on the `AndroidManifes.xml` file to open it. 
+To open the application manifest, switch the project view to **Project Files** and expand `app->src->main->res` folders as shown in the picture below. Double-click on the `AndroidManifes.xml` file to open it. 
 
 ![alt-text-2](pictures/04_android_manifest_path.png "Android Manifest file path.")
 

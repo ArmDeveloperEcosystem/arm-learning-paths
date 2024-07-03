@@ -31,7 +31,7 @@ review:
             - To debug an application in Android Studio with MTE, you only need to enable MTE in the phone settings.
             - To debug an application in Android Studio with MTE, you only need to enable MTE in the Android manifest.
             - To debug an application in Android Studio with MTE, you need to enable MTE in the Android settings and in the Android manifest.
-            - To debug an application in Android Studio with MTE, you just need to launch Android Studio with the device connected.
+            - To debug an application in Android Studio with MTE, you only need to launch Android Studio with the device connected.
         correct_answer: 3          
         explanation: >
             To debug an application in Android Studio with MTE, you need to enable MTE in the Android manifest by assigning to the *memTagMode* attribute any of the values: *sync*, *async*, or *asymm*. However, this is not enough. MTE also must be enabled in *System-> Developer options-> Memory tagging Extension*.
