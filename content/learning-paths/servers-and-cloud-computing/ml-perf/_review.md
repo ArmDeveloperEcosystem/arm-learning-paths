@@ -19,7 +19,7 @@ review:
             - "No"
         correct_answer: 1                    
         explanation: >
-            Yes, different backends are supported. Such as tensorflow, onnxruntime, pytorch and tflite
+            Yes, different backends such as TensorFlow, ONNX Runtime, PyTorch and TFLite are supported.
 
     - questions:
         question: >
