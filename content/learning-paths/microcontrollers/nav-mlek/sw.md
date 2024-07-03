@@ -61,11 +61,11 @@ Use an editor or program such as `more` or `cat` to view the Dockerfile.
 
 ## Machine learning Frameworks
 
-[TensorFlow Lite for Microcontrollers (TFLM)](https://www.tensorflow.org/lite/microcontrollers/) is the most common framework for microcontroller ML applications.
+[TensorFlow Lite for Microcontrollers (TFLM)](https://www.tensorflow.org/lite/microcontrollers/) is on of the more common framework for microcontroller ML applications.
 
 TensorFlow uses [`xxd`](https://linux.die.net/man/1/xxd/) to convert TensorFlow Lite models into C data structures. 
 
-[PyTorch](https://pytorch.org/) is also used on microcontrollers. 
+[PyTorch](https://pytorch.org/) is also commonly used on microcontrollers. 
 
 [Apache TVM](https://tvm.apache.org/) is an open-source compiler framework for ML and can be used on microcontrollers.
 
