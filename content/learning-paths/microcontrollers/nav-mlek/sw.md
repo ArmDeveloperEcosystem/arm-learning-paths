@@ -96,9 +96,9 @@ Resources for learning about ML applications are listed below for you to investi
 
 ### Arm ML Evaluation Kit (MLEK)
 
-The MLEK provides a number of example ML applications.
+The [MLEK](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) provides a number of example ML applications.
 
-[Build the ML Evaluation Kit examples](/learning-paths/microcontrollers/mlek/) is the fastest way to build and run the MLEK examples, and includes next steps to learn more. 
+[The Quick Start Guide](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit/+/HEAD/docs/quick_start.md) guides you through running an example application.
 
 ### Micro speech
 
