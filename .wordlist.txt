@@ -658,7 +658,7 @@ TargetBoard
 TargetOptions
 Tbrk
 Tcl
-Tensorflow
+TensorFlow
 Tera
 TestScenario
 ThinkPad
@@ -674,7 +674,7 @@ Tracepoint
 Tracepoints
 Traefik
 Transactional
-Trustzone
+TrustZone
 Tunings
 UART
 UDP

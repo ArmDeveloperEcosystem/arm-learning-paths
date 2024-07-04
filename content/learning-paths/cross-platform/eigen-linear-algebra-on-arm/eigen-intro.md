@@ -31,7 +31,7 @@ It has also been ported to SYCL and CUDA backends and further ports are in progr
 Eigen is a useful library and its success is proven by the number of projects that use it. 
 [The list of projects using Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page#Projects_using_Eigen) is rich, but here are a few high profile projects:
 
-* [Tensorflow](https://www.tensorflow.org/) - an open source software library for Machine Intelligence.
+* [TensorFlow](https://www.tensorflow.org/) - an open source software library for Machine Intelligence.
 * [Celestia](https://celestiaproject.space/) - the 3D astronomical visualization application Celestia (all orbital and geometric calculations are done with Eigen).
 * [ATLAS](https://home.cern/science/experiments/atlas) - the ATLAS experiment at the LHC (Large Hadron Collider) at CERN.
 * [Quantum++](https://github.com/softwareQinc/qpp) - a modern C++ general purpose quantum computing library.
