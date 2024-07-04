@@ -25,7 +25,7 @@ Before running the training phase, you need to install some additional tools. Th
 
 * TensorFlow - Machine learning library [https://www.tensorflow.org](https://www.tensorflow.org/)
 
-* TensorBoard - visualization tool for Tensorflow [https://www.tensorflow.org/tensorboard](https://www.tensorflow.org/tensorboard)
+* TensorBoard - visualization tool for TensorFlow [https://www.tensorflow.org/tensorboard](https://www.tensorflow.org/tensorboard)
 
 * ML Agents - part of the ML Agents Toolkit from Unity which provides imitation and reinforcement learning [https://pypi.org/project/mlagents](https://pypi.org/project/mlagents/). The Unity ML Agents toolkit github is [https://github.com/Unity-Technologies/ml-agents](https://github.com/Unity-Technologies/ml-agents)
 
