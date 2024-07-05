@@ -13,24 +13,23 @@
 review:
     - questions:
         question: >
-            Arm Trusted Firmware is
+            Arm Trusted Firmware is?
         answers:
             - "A framework to create custom Linux-based systems"
             - "A web-based platform to explore Arm IP"
-            - "A reference implementation of Platform Security Architecture (PSA)"
-        correct_answer: 3                 
+            - "A reference implementation of the Platform Security Architecture (PSA)"
+        correct_answer: 3
         explanation: >
-            You can run Arm Trusted Firmware on a number of platforms, including the Corstone-1000 Fixed Virtual Platform (FVP) and the MPS3 FPGA prototyping board.
-
+            Arm Trusted Software forms the foundations of a Trusted Execution Environment (TEE) or Secure Processing Environment (SPE).
     - questions:
         question: >
-            How can you Arm Trusted Firmware on the Corstone-1000 FVP?
+            What is Corstone-1000?
         answers:
-            - "Through Arm Virtual Hardware or the Arm Ecosystem FVP page"
-            - "Through Arm Virtual Hardware and the MPS3 FPGA prototyping board"
-        correct_answer: 1                  
+            - An Arm processor with secure capabilities
+            - A configurable subsystem of Arm processor and security IP			
+        correct_answer: 2
         explanation: >
-            The Corstone-1000 FVP is a reference implementation which is available with no license control and direct download. You can review this in the "Corstone-1000 FVP or MPS3 image" section.
+            Corstone-1000 is pre-verified, configurable subsystem to enable designers build secure SoCs faster.
                
 
 # ================================================================================
