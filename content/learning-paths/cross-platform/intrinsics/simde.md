@@ -77,3 +77,9 @@ and observe the output:
 ```output
 result equals 6,8,10,12
 ```
+
+## Further reading
+
+For more information on the use of `SIMDe`, see the below blog.
+
+* [Porting to Arm Intrinsics with SIMDe](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/porting-to-arm-intrinsics-with-simde)
