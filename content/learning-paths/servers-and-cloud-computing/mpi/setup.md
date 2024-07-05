@@ -46,6 +46,13 @@ sudo apt install -y make mpich \
   libblas-dev
 sudo ln -s /usr/bin/f2py3 /usr/bin/f2py
 ```
+Some additional packages that have been proven necessary:
+
+```bash
+sudo apt install -y libx11-xcb1 libice6 libsm6 libopenmpi-dev \
+  libc6 libglapi-mesa libxdamage1 libxfixes3 libxcb-glx0 libxcb-dri2-0 \
+  libxcb-dri3-0 libxcb-present0 libxcb-sync1 libxshmfence1 libxxf86vm1 
+```
 
 3. Enable profiling
 
