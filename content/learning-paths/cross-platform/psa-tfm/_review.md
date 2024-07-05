@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Arm Trusted Firmware is?
+            Arm Trusted Firmware is
         answers:
             - "A framework to create custom Linux-based systems"
             - "A web-based platform to explore Arm IP"
