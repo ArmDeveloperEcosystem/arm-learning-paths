@@ -42,7 +42,13 @@ Arm Compiler for Embedded FuSa must also be [downloaded separately](#download).
 
 ## Standalone compiler packages {#download}
 
-Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](../pdh).
+Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](#pdh) or the [Arm Tools Artifactory](#artifactory).
+
+Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) or the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/).
+
+### Product Download Hub {#pdh}
+
+All compiler packages can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) (requires login):
 
 - [Arm Compiler for Embedded](https://developer.arm.com/downloads/view/ACOMPE)
 - [Arm Compiler for Embedded FuSa](https://developer.arm.com/downloads/view/ACOMP616)
@@ -51,7 +57,9 @@ These can either be used standalone or [integrated](#armds) into your Arm Develo
 
 See also: [What should I do if I want to download a legacy release of Arm Compiler?](https://developer.arm.com/documentation/ka005184)
 
-## Install compiler packages
+See [Arm Product Download Hub](../pdh) for additional information on usage.
+
+### Install compiler packages
 
 To install on Windows, unzip the downloaded package, launch the installer, and follow on-screen prompts.
 ```console
@@ -59,7 +67,7 @@ win-x86_64\setup.exe
 ```
 To install on Linux hosts, `untar` the downloaded package and run the install script (note the exact filenames are version and host dependent). For example:
 
-### x86_64
+#### x86_64
 ```console
 mkdir tmp
 mv ARMCompiler6.22_standalone_linux-x86_64.tar.gz tmp
@@ -67,7 +75,7 @@ cd tmp
 tar xvfz ARMCompiler6.22_standalone_linux-x86_64.tar.gz
 ./install_x86_64.sh --i-agree-to-the-contained-eula --no-interactive -d /home/$USER/ArmCompilerforEmbedded6.22
 ```
-### aarch64
+#### aarch64
 ```console
 mkdir tmp
 mv ARMCompiler6.22_standalone_linux-aarch64.tar.gz tmp
@@ -81,15 +89,34 @@ cd ..
 rm -r tmp
 ```
 Add the `bin` directory of the installation to the `PATH` and confirm `armclang` can be invoked.
-### bash
+#### bash
 ```console
 export PATH=/home/$USER/ArmCompilerforEmbedded6.22/bin:$PATH
 armclang --version
 ```
-### csh/tcsh
+#### csh/tcsh
 ```console
 set path=(/home/$USER/ArmCompilerforEmbedded6.22/bin $path)
 armclang --version
+```
+
+### Arm Tools Artifactory {#artifactory}
+
+The Arm Compiler for Embedded, as well as other tools and utilities are available in the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/). The Keil Studio VS Code [Extensions](../keilstudio_vs) use the artifactory to fetch and install and the necessary components.
+
+Available packages can also be fetched directly from the artifactory. This is particularly useful for automated CI/CD flows.
+
+```command
+wget https://artifacts.tools.arm.com/arm-compiler/6.22/45/standalone-linux-armv8l_64-rel.tar.gz
+```
+
+Note that the artifactory packages do not have their own installers. You should manually extract files and configure, for example:
+```command
+mkdir ArmCompilerforEmbedded6.22
+tar xvzf ./standalone-linux-armv8l_64-rel.tar.gz -C ./ArmCompilerforEmbedded6.22 --strip-components=1
+rm ./standalone-linux-armv8l_64-rel.tar.gz
+export PATH=/home/$USER/ArmCompilerforEmbedded6.22/bin:$PATH
+export AC6_TOOLCHAIN_6_22_0=/home/$USER/ArmCompilerforEmbedded6.22/bin
 ```
 
 ## Set up the product license
