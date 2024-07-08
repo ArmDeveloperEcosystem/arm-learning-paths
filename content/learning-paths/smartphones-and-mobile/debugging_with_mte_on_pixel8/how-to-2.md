@@ -1,5 +1,5 @@
 ---
-title: Android app implementing memory safety bugs
+title: Implement memory safety bugs with the Android app
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Example implementations of most common memory safety bugs
 
-A simple Android is available to accompany this Learning Path. You can use it from Android Studio with your Pixel 8 in debug mode. 
+A simple Android app is available to accompany this Learning Path. You can use it from Android Studio with your Pixel 8 smartphone in debug mode. 
 
 The project is [available on GitHub](https://github.com/rlopez3d/mte_test_app)
 
@@ -18,16 +18,16 @@ On your development machine, clone the repository:
 git clone https://github.com/rlopez3d/mte_test_app
 ```
 
-Once downloaded to your local machine, launch Android Studio and open the Android project in this location.
+Once downloaded to your local machine, launch Android Studio, and open the Android project in the same location.
 By default, Android Studio displays your project files in the Android view. 
 
-Click on the project view selector at the top left below the menu bar and select Project Source Files option. 
+Click on the **Project** view selector in the top-left area, below the menu bar, and select **Project Source Files** option. 
 
-You see the actual file structure of the as shown below:
+You see the file structure of the Android project as shown below:
  
 ![alt-text-2](pictures/02_project_source_file_view.png "Project Source Files view of Android project.")
 
-Unfold the file structure as indicated in the picture and double click on the `native-lib.cpp` file to open it. 
+Expand the file structure as shown in the image, and double-click on the `native-lib.cpp` file to open it. 
 
 This file contains the implementation of several of the most common memory safety bugs.
 
@@ -48,9 +48,9 @@ Each of the four functions is associated with one of the buttons in the app.
 
 This association is implemented in the `activity_main.xml` file. 
 
-To see this file, expand the content of the *res* folder in the project view and next the *layout* folder. Double click on the file to open it. You can visualize this file in code and design modes.
+To see this file, expand the content of the **res** folder in the **project** view and next the **layout** folder. Double-click on the file to open it. You can visualize this file in code and design modes.
 
-Explore the code and see the implementation of each button. For example, the implementation of the button associated with the function listed above looks like:
+Explore the code and see the implementation of each button. For example, the implementation of the buttons associated with the function listed above looks like this:
 
 ```
 <Button
@@ -69,6 +69,6 @@ Explore the code and see the implementation of each button. For example, the imp
 /Button>
 ```
 
-The app buttons look like this:
+This translates to buttons that look like this:
 
 ![alt-text-2](pictures/03_app_buttons.png "App user interface.")

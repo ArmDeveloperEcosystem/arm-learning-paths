@@ -1,5 +1,5 @@
 ---
-title: Setting up the app for debugging with MTE
+title: Set up the app for debugging with MTE
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -10,11 +10,11 @@ layout: learningpathall
 
 There are different ways to enable MTE in Android projects. 
 
-For a detailed description see [Memory safety](https://source.android.com/docs/security/test/memory-safety). 
+For a detailed description, see [Memory safety](https://source.android.com/docs/security/test/memory-safety). 
 
 You can use the application manifest to enable MTE.
 
-To open the application manifest switch the project view to Project Files and expand `app->src->main->res` folders as shown in the picture below. Double click on `AndroidManifes.xml` file to open it. 
+To open the application manifest, switch the project view to **Project Files** and expand `app->src->main->res` folders as shown in the picture below. Double-click on the `AndroidManifes.xml` file to open it. 
 
 ![alt-text-2](pictures/04_android_manifest_path.png "Android Manifest file path.")
 
@@ -61,10 +61,9 @@ The attribute *memTagMode* can have the following values: *off*, *sync*, *async*
 
 If the *android:memtagMode* attribute is not specified, then MTE is disabled.
 
-This Learning Path demonstrates the the *sync* value of *memtagMode* attribute.
+This Learning Path demonstrates the *sync* value of *memtagMode* attribute.
 
-In synchronous mode (*sync*), a mismatch between the tag in the address and the tag in memory
-causes the processor to abort execution immediately and it terminates the process with SIGSEGV (code SEGV_MTESERR) - a synchronous exception. This identifies the precise instruction and address that caused
+In synchronous mode (*sync*), a mismatch between the tag in the address and the tag in memory causes the processor to abort execution immediately. It terminates the process with SIGSEGV (code SEGV_MTESERR), which is a synchronous exception. This identifies the precise instruction and address that caused
 the failure. 
 
 *Sync* mode is recommended when debugging your application.
