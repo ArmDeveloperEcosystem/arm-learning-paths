@@ -33,7 +33,7 @@ For example, in the image below, *z1* is calculated as a dot product of connecte
 ![Neural Network example#center](neural-node-pic.jpg "Figure 1. Zoomed in on neural network node")
 
 
-Sidebar:  In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training and make up a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what it learned during training. Generally speaking, the more parameters a model has, the more information it can retain from its training, leading to more capable models.
+Sidebar:  In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training and make up a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what it learned during training. Generally speaking, the more parameters a model has, the more information it can retain from its training, leading to more capable models. For more information about Llama 3 view its [Hugging Face model card](https://huggingface.co/meta-llama/Meta-Llama-3-8B).
 
 ### Why is speeding up matrix multiplication crucial for AI performance?
 What does this all mean? An 8 billion parameter model generating one token requires billions of dot product calculations, with at least hundreds of millions of matrix multiplication operations. Therefore speeding up matrix multiplication is a critical piece to both running massive Generative AI models on servers and smaller models constrained devices like smartphones.
