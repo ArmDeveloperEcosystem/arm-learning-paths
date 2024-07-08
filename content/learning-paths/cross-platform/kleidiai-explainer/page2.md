@@ -9,17 +9,17 @@ layout: learningpathall
 ## High-level KleidiAI architecture
 This section aims to provide an abstracted overview of KleidiAI's components before diving into the specifics. The KleidiAI source files are publicly accessible in the [KleidiAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai). Navigate there in your web browser to follow along and understand KleidiAI's structure.
 
-KlediAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; navigate there now. There are essentially two types of KleidiAI micro-kernels:
+KlediAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; navigate there now. There are essentially two types of KleidiAI micro-kernels today:
 1. Quantizing/Packing routines    - under the `pack` directory.
 2. Matrix Multiplication routines - the three directories starting with `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
 
-![KleidiAI stuff](KleidiAI-src.jpg "Figure 3. KleidiAI src directory")
+![KleidiAI stuff](KleidiAI-src.JPG "Figure 3. KleidiAI src directory")
 
 ### What quantization levels does KleidiAI support?
 KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot#quantization-format).
 
-KleidiAI has three matrix multiplication directories that each handle differently input/output types:
+KleidiAI currently has three matrix multiplication directories that each handle differently input/output types, which will evolve to support more over time:
 
 | uKernel                           |  Output type     | Input types     |
 | ---------                         | -----------------   | --------------  | 
@@ -29,7 +29,7 @@ KleidiAI has three matrix multiplication directories that each handle differentl
 
 ### How to select the right KleidiAI micro-kernel?
 
-Only one matrix multiply micro-kernel will be used for your given AI application. Each AI model and workload (for example using a [Gemma](https://huggingface.co/blog/gemma) model running text generation), has unique characteristics that certain KleidiAI matrix multiplication micro-kernels are better architected to optimize for. The ML Framework provider selects the optimal micro-kernel on your behalf when implementing KleidiAI in their framework. No extra effort is required when using a framework with KleidiAI.
+Only one matrix multiply micro-kernel will be used for your given AI application. Each AI model and workload (for example using a [Gemma](https://huggingface.co/blog/gemma) model running text generation), has unique inference characteristics. KleidiAI has various matrix multiplication micro-kernel routines to optimize the inference speed of different workloads. The ML Framework provider selects the optimal micro-kernel on your behalf when implementing KleidiAI in their framework. No extra effort is required when using a framework with KleidiAI.
 
 ## KleidiAI in a real-world example 
 Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro-kernels interact with an GenAI model and ML Framework at a high-level. The steps below describe in words how KleidiAI speeds up matrix multiplication. The example is of a user asking a chatbot app a question on their smartphone. This is the example application stack to analyze:
@@ -41,7 +41,7 @@ Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro
 #### Stage 1: Input
 * **A user** inputs their question into the chatbot, such as "What is the capital of the United States?"
 * **The chatbot app** uses MediaPipe to convert that text into a series of tokens representing the question as a matrix of FP16 numbers (as the Gemma-2b model is in FP16 format). 
-* **MediaPipe** invokes the LLM inference with the tokenized input, feeding it into the first neural network layer of the Gemma-2b model.
+* **MediaPipe** invokes the large language model (LLM) inference with the tokenized input, feeding it into the first neural network layer of the Gemma-2b model.
 * **XNNPack** starts executing the inference, managing the mathmatical operations inside the LLM's neural network layers. 
 * **KleidiAI** is called to accelerate the essential matrix multiplication operations propogating the input through the neural network.
 
@@ -79,7 +79,7 @@ As a result, KleidiAI strategically selected INT4 quantization for model paramet
 {{% notice What AI model size should you select %}}
 Most models are trained in FP32 or FP16 formats and are by default available to download at that size. To realize the benefits of lower memory footprint, select a pre-quantized version of your desired AI model, ideally in INT4 format. You can quantize models yourself through various tools, but the quickest and easiest way is to locate a pre-quantized version of the same model.
 
-KleidiAI supports matrix multiplication of models quantized to FP32, FP16, INT8, and INT4 - your ML framework provider will select the optimal KleidiAI micro-kernel to balance inference speed and accuracy for your use-case. 
+KleidiAI supports matrix multiplication of models across FP32, FP16, INT8, and INT4 formats - your ML framework provider will select the optimal KleidiAI micro-kernel to balance inference speed and accuracy for your use-case. 
 
 In short, it is highly recommended to select an INT4 pre-quantized model when inference speed is critical, and especially on smartphones / edge devices.
 {{% /notice %}}
