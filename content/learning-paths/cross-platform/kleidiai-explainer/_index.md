@@ -11,7 +11,7 @@ learning_objectives:
     - Run a basic C++ matrix multiplication example to showcase the speedup the KleidiAI micro-kernels deliver.
     
 prerequisites:
-    - An Arm Linux machine that implements the *i8mm* architecture feature; this example uses an AWS Graviton 3 instance.
+    - An Arm Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature; this example uses an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A basic understanding of linear algebra terminology such as dot product and matrix multiplication.
 
 author_primary: Zach Lasiuk
