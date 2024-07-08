@@ -102,15 +102,15 @@ Connect to the lowest numbered port (`COM0`) with a serial terminal, such as `Pu
 
 Recommend to also connect to `COM1` and `COM2`.
 
-| Attribute   | Setting     |
-|-------------|-------------|
-| Baud        | 115200      |
-| Data        | 8b          |
-| Stop-bits   | 1           |
-| Parity      | None        |
-| Flow        | None        |
-| New line    | CR (COM0)   |
-|             | LF (COM1-3) |
+| Attribute | Setting     |
+| --------- | ----------- |
+| Baud      | 115200      |
+| Data      | 8b          |
+| Stop-bits | 1           |
+| Parity    | None        |
+| Flow      | None        |
+| New line  | CR (COM0)   |
+|           | LF (COM1-3) |
 
 ### Reprogram MPS3
 
@@ -122,7 +122,7 @@ If you have issues with this, you can also manually remove the micro-SD card fro
 
 Reboot the board, either by power-cycling, or using the `reboot` command on the terminal. The FPGA will be updated and the software stack will be executed.
 
-Observe the steps of the secure boot process reported on the `Secure Enclave (SE)` UART (`COM1`), and Linux on the `SSE-710` UART (`COM2`).
+Observe the steps of the secure boot process reported on the `Secure Enclave (SE)` UART (`COM1`), and Linux on the `SSE-710` UART (`COM2`). All components outside of the enclave are considered as less trustworthy. It is only after verification that the host is taken out of reset.
 
 After a few minutes you will see login terminal on the `SSE-710` UART (`COM2`).
 ```output

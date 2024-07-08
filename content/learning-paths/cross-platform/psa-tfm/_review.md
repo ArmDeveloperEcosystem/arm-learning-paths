@@ -30,6 +30,15 @@ review:
         correct_answer: 2
         explanation: >
             Corstone-1000 is pre-verified, configurable subsystem to enable designers build secure SoCs faster.
+    - questions:
+        question: >
+            The Cortex-A ("host") processor is considered secure by the Secure Enclave
+        answers:
+            - True
+            - False		
+        correct_answer: 2
+        explanation: >
+            All components outside of the enclave are considered as less trustworthy. It is only after verification that the host is taken out of reset.
                
 
 # ================================================================================
