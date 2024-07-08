@@ -289,9 +289,6 @@ Matrix/
     └── howdy.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-1.tar.xz) of the
-project in its current state to experiment locally on your machine.
-
 You have created the foundation for developing and evolving your Matrix
 library in a platform-agnostic way, meaning that it can be easily developed and used
 on macOS, Linux, and Windows. This was done *almost* effortlessly thanks to
