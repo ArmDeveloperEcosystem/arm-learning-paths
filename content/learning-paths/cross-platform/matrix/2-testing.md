@@ -322,8 +322,6 @@ Matrix/
     └── main.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-2.tar.xz) of the project in its current state to experiment on your computer.
-
 CMake makes it easy to use GoogleTest as an external project. Adding unit tests as you go is now easy.
 
 You have created the unit testing environment for your Matrix library and added a test. The infrastructure is now in place to implement the core of the Matrix processing library.
