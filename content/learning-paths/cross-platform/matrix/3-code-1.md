@@ -1040,8 +1040,6 @@ Matrix/
     └── main.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-3.tar.xz) of the project in its current state to experiment locally on your machine.
-
 After this rather long exercise, you have a minimalistic, yet fully-functional core for the matrix processing library, with some level of regression testing.
 
 Modern C++ enables you to express move and copy semantics, and to use smart pointers to make memory management easy.
