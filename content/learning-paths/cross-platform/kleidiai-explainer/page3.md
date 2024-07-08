@@ -20,7 +20,7 @@ The example code is structured to take in two matricies and compare KleidiAI's m
 
 Follow these steps to build and run the KleidiAI library and example script reviewing the:
 
-1. Create an Ubuntu 24 Arm Linux machine on an AWS EC2 instance. Use an M7g-medium, which uses the Graviton 3 SoC supporting the *i8mm* Arm architecture feature. The 1 CPU and 4 GB of RAM in the M7g-medium are sufficient for this basic example run.
+1. Create an Ubuntu 24.04 Arm Linux machine on an AWS EC2 instance. For more details view the Learning Path on [setting up AWS EC2 Graviton instances](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/). Use an M7g-medium instance type, which uses the Graviton 3 SoC supporting the *i8mm* Arm architecture feature. The 1 CPU and 4 GB of RAM in the M7g-medium are sufficient for this basic example run.
 
 2. Initialize your system by installing essential packages.
 ```bash
