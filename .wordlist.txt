@@ -1390,6 +1390,7 @@ instrinsics
 dotProduct
 uint
 TextView
+TextView's
 Spack
 MMU
 SDDiskTool
@@ -2931,7 +2932,6 @@ OpenCV's
 OpenCVLoader
 OpenCV’s
 RGBA
-TextView’s
 UC
 YOLO
 buttonStartPreview
@@ -2968,3 +2968,11 @@ setContentView
 textViewStatus
 thresholding
 updateControls
+AAR
+Artifactory
+SoCs
+TFLite
+artifactory
+asymm
+memTagMode
+memtagMode
