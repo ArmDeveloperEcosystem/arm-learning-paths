@@ -79,12 +79,12 @@ There are additional resources which may help you find answers to your migration
 - [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started) contains a wealth of information. 
 
 Additional migration resources:
- - [Programming Languages](languages/)
- - [Optimized Libraries](libraries/)
- - [Containers](containers/)
- - [Databases](databases/)
- - [Web applications](web/)
- - [Networking](networking/)
+ - [Programming Languages](/migration/languages/)
+ - [Optimized Libraries](/migration/libraries/)
+ - [Containers](/migration/containers/)
+ - [Databases](/migration/databases/)
+ - [Web applications](/migration/web/)
+ - [Networking](/migration/networking/)
 
 
 ## Build and run
