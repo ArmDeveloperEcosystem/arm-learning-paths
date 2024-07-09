@@ -81,6 +81,26 @@ git clone https://github.com/VectorCamp/vectorscan.git
 cd vectorscan
 ```
 
+## Determine if your processor has SVE
+
+[Scalable Vector Extensions (SVE)](https://developer.arm.com/Architectures/Scalable%20Vector%20Extensions) is a SIMD extension of the Arm architecture which is available on some Arm processors. For example, the Neoverse-N1 does not include SVE and the Neoverse-V1 does include SVE. 
+
+Vectorscan will run faster if you have an processor with SVE and you enable it when building the software. 
+
+To determine if SVE is available on your processor run:
+
+```console
+lscpu | grep sve
+```
+
+If SVE is available the Flags will be printed: 
+
+```output
+Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm ssbs paca pacg dcpodp svei8mm svebf16 i8mm bf16 dgh rng
+```
+
+If no SVE is present, there will be no output. 
+
 ### Build Vectorscan 
 
 Create a build directory and build with cmake:
@@ -88,6 +108,13 @@ Create a build directory and build with cmake:
 ```bash { cwd="./vectorscan" }
 mkdir build; cd build; cmake ../
 ```
+
+For processors with SVE, use the flag:
+
+```bash { cwd="./vectorscan/build" }
+cmake -DBUILD_SVE=1 ../
+```
+
 Use `make` to build the vectorscan library:
 
 ```bash { cwd="./vectorscan/vectorscan-build" }
