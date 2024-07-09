@@ -8,16 +8,14 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for embedded software developers new to Raspberry Pi Pico.
 
 learning_objectives: 
-    - Install the Raspberry Pi Pico SDK
-    - Run a hello world example
-    - Measure application performance
-    - Debug applications with gdb
+    - Install the Raspberry Pi Pico SDK.
+    - Run a hello world example.
+    - Measure application performance.
+    - Debug applications with gdb.
 
 prerequisites:
-    - Familiar with C programming on microcontrollers
-    - Comfortable with the Linux terminal 
-    - Raspberry Pi Pico board
-    - Raspberry Pi 3, 4, or 400 as a development computer
+    - Raspberry Pi Pico board.
+    - Raspberry Pi 3, 4, 400, or 5 as a development computer.
 
 author_primary: Jason Andrews
 
