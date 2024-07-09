@@ -94,8 +94,8 @@ waiting:   // Wait for ChildrenAsleep to read 0
 ## Other functions
 
 Define these functions in your `gic.s` source:
-* `readIAR0()` reads the value of the [Interrupt Controller Interrupt Acknowledge Register 0, ICC_IAR0_EL1](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ICC-IAR0-EL1--Interrupt-Controller-Interrupt-Acknowledge-Register-0). The lower 24 bits of this register give the interrupt identifier, `INTID`.
-* `writeEOIR0()` writes `INTID` to the [Interrupt Controller End of Interrupt Register 0, ICC_EOIR0_EL1](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ICC-EOIR0-EL1--Interrupt-Controller-End-Of-Interrupt-Register-0), which tells the processor that that interrupt is complete.
+* `readIAR0()` reads the value of the [Interrupt Controller Interrupt Acknowledge Register 0, ICC_IAR0_EL1](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/ICC-IAR0-EL1--Interrupt-Controller-Interrupt-Acknowledge-Register-0). The lower 24 bits of this register give the interrupt identifier, `INTID`.
+* `writeEOIR0()` writes `INTID` to the [Interrupt Controller End of Interrupt Register 0, ICC_EOIR0_EL1](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/ICC-EOIR0-EL1--Interrupt-Controller-End-Of-Interrupt-Register-0), which tells the processor that that interrupt is complete.
 
 #### gic.s
 ```C
@@ -120,8 +120,8 @@ These functions will be used in your `fiqHandler()` implementation (written in C
 A [Generic Timer](https://developer.arm.com/documentation/102379) is present in all Armv8-A processors.
 
 Create `timer.s` defining the following functions:
-* `setTimerPeriod()` which writes to [CNTPS_TVAL_EL1, Counter-timer Physical Secure Timer TimerValue register](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/CNTPS-TVAL-EL1--Counter-timer-Physical-Secure-Timer-TimerValue-register).
-* `enableTimer()` and `disableTimer()` which write to [CNTPS_CTL_EL1, Counter-timer Physical Secure Timer Control register](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/CNTPS-CTL-EL1--Counter-timer-Physical-Secure-Timer-Control-register).
+* `setTimerPeriod()` which writes to [CNTPS_TVAL_EL1, Counter-timer Physical Secure Timer TimerValue register](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/CNTPS-TVAL-EL1--Counter-timer-Physical-Secure-Timer-TimerValue-Register).
+* `enableTimer()` and `disableTimer()` which write to [CNTPS_CTL_EL1, Counter-timer Physical Secure Timer Control register](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/CNTPS-CTL-EL1--Counter-timer-Physical-Secure-Timer-Control-Register).
 
 #### timer.s
 ```C

@@ -8,17 +8,17 @@ Where it is used:
     - Install guide _intro
 
 Called from:
-    - partials general-formatting/metadata-table.html
     - partials learning-paths/list.html
+    - partials general-formatting/metadata-table.html
 */}}
 
 {{- $index_file_path := (print .File.Dir) -}}
 
-{{- $most_recent := "0001-01-01" }} {{/* YYYY-MM-DD for chronological comparison */}}
+{{- $most_recent := time "0001-01-01T00:00:00Z" }}
 {{- range  site.Pages }}
     {{- if .File -}}
         {{- if hasPrefix .File.Dir $index_file_path }}
-            {{ $page_date := .Lastmod.UTC.Format "2006-01-02" }}
+            {{ $page_date := .Lastmod.UTC }}
             {{- if gt $page_date $most_recent }}
                 {{- $most_recent = $page_date }}
             {{- end }}
@@ -26,9 +26,8 @@ Called from:
     {{end}}
 {{end}}
 
-{{ $most_recent_formatted := dateFormat "02 Jan 2006" $most_recent }}
-{{$most_recent_formatted }}
 
+{{/* {{ $most_recent_formatted := dateFormat "02 Jan 2006" $most_recent }} */}}
+{{ return $most_recent }}
 
-{{/*  {{ .Lastmod.UTC.Format "2 Jan 2006" }}   */}}
 

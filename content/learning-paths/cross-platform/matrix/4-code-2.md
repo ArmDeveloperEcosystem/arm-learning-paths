@@ -1144,8 +1144,6 @@ Matrix/
     └── main.cpp
 ```
 
-You can download the [archive](/artifacts/matrix/chapter-4.tar.xz) of the project in its current state to experiment locally on your machine.
-
 Congratulations, you now have a minimalistic, yet fully-functional, matrix processing library, with some level of regression testing, that can be easily
 built and used.
 

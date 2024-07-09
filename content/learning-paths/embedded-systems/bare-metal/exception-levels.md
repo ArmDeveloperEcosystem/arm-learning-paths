@@ -15,7 +15,7 @@ Switching between levels is performed by the `ERET` exception return instruction
 
 ## Changing exception levels
 
-Extend the example to make use of `El1`.
+Extend the example to make use of `EL1`.
 
 Create `startup_el1.s` as below. The `el1_entry` function will be the `EL1` entry point, and this function will call our application code starting from `__main()`.
 
@@ -93,9 +93,9 @@ Remove the call to `gicInit()` from your `main()` function.
 ### Switch to EL1
 Rather than branching to `__main`, the `EL3` reset handler must instead perform an exception return (`ERET`) to `EL1`. Set this up by configuring the appropriate registers:
 
-* Initialize [SCTLR_EL1, System Control Register (EL1)](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/SCTLR-EL1--System-Control-Register--EL1-) so that `El1` is in a known state
-* Set [SPSR_EL3, Saved Program Status Register (EL3)](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/SPSR-EL3--Saved-Program-Status-Register--EL3-) so that the code will return to `EL1` exception level.
-* Set [ELR_EL3, Exception Link Register (EL3)](https://developer.arm.com/documentation/ddi0595/latest/AArch64-Registers/ELR-EL3--Exception-Link-Register--EL3-) with the address of the `EL1` entry point.
+* Initialize [SCTLR_EL1, System Control Register (EL1)](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/SCTLR-EL1--System-Control-Register--EL1-) so that `EL1` is in a known state
+* Set [SPSR_EL3, Saved Program Status Register (EL3)](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/SPSR-EL3--Saved-Program-Status-Register--EL3-) so that the code will return to `EL1` exception level.
+* Set [ELR_EL3, Exception Link Register (EL3)](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/ELR-EL3--Exception-Link-Register--EL3-?lang=en) with the address of the `EL1` entry point.
 
 #### startup_el3.s
 ```C

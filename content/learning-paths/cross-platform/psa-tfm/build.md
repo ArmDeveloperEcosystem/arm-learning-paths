@@ -45,7 +45,7 @@ sudo pip3 install kas
 Clone the [Yocto repository](https://www.yoctoproject.org/software-overview/downloads/) to your build machine:
 
 ```console
-git clone -b langdale git://git.yoctoproject.org/poky.git
+git clone -b scarthgap git://git.yoctoproject.org/poky.git
 ```
 
 ## Clone Arm platform build recipes

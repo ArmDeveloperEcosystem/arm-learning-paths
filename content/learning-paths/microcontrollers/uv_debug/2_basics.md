@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-To follow the instructions in this Learning Path, clone or download the [Blinky example project repo](https://github.com/Arm-Examples/Blinky_AVH_uV) on the same machine where you have installed Arm Keil MDK and the Corstone-300 Ecosystem FVP. Double-click the `Blinky.uvprojx` file to open it in µVision.
+To follow the instructions in this Learning Path, clone or download the [Blinky example project repo](https://github.com/Arm-Examples/Blinky_AVH_uV) on the same machine where you have installed Arm Keil MDK and the Corstone-300 Ecosystem FVP. Double-click the `Blinky.Debug+AVH.uvprojx` file to open it in µVision.
 
 ## Hardware Breakpoints
 

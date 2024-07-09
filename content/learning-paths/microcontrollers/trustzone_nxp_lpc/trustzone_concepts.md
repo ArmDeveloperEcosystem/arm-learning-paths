@@ -8,14 +8,14 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-In this section, the application is broken down to understand some basic concepts of Trustzone which include:
+In this section, the application is broken down to understand some basic concepts of TrustZone which include:
 
 * Switching security states
 * Calling secure functions from the non-secure world
 
 ## Switching security states
 
-Start another debug session with the application. This time, instead of hitting "Run" and viewing the complete output you will walk through some key Trustzone concepts used in this application.
+Start another debug session with the application. This time, instead of hitting "Run" and viewing the complete output you will walk through some key TrustZone concepts used in this application.
 At the start of execution, the program counter is at the start of `main()` in `hello_world_s.c`. The secure mode copy of the startup code has already been executed right at reset time. 
 
 In the `main()` function, board hardware initialization is performed followed by the first 2 `printf` statements you saw in the console output:
@@ -39,4 +39,4 @@ PRINTF_NSE("This is a test printed from the normal world!\r\n");
 `PRINTF_NSE()` function is defined with `__attribute__((cmse_nonsecure_entry))`. This attribute is used to call the `PRINTF()` function. which is defined in secure mode. 
 Using this attribute, a secure function can be called from the non-secure world. The functions executes an `SG` instruction which is a Secure Gateway instruction. Non-secure code can only call a secure function if the first instruction is a Secure Gateway instruction and it is in a non-secure callable memory region. If these rules are not followed during execution then it results in a security violation. 
 
-You have now summarized some important attributes and instructions used while building Trustzone applications all using the simple hello world example on the NXP LPCXpresso55S69 board.
+You have now summarized some important attributes and instructions used while building TrustZone applications all using the simple hello world example on the NXP LPCXpresso55S69 board.

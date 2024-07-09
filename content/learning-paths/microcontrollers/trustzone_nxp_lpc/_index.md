@@ -3,11 +3,11 @@ title: Get started with TrustZone on NXP LPCXpresso55S69
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers new to using Trustzone.
+who_is_this_for: This is an introductory topic for software developers new to using TrustZone.
 
 learning_objectives: 
     - Install the Keil MDK Tools
-    - Run a hello world Trustzone example
+    - Run a hello world TrustZone example
     - Understand switching of security states
     - Learn how secure functions are called from a non-secure state
 

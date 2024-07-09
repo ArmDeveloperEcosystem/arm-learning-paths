@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            The Raspberry Pi Pico SDK works only on a Raspberry Pi 3, 4, or 400.
+            The Raspberry Pi Pico SDK works only on Raspberry Pi OS.
         answers:
             - "True"
             - "False"

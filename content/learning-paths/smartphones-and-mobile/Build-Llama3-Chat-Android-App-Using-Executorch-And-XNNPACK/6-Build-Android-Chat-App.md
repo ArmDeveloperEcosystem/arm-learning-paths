@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Build the JNI library
+## Build the Android Archive (AAR)
 {{% notice Note %}}
 You can use the Android demo application included in ExecuTorch repository [LlamaDemo](https://github.com/pytorch/executorch/tree/main/examples/demo-apps/android/LlamaDemo) to demonstrate local inference with ExecuTorch.
 {{% /notice %}}
@@ -33,6 +33,9 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 4. Run the following commands to set up the required JNI library:
 
     ``` bash
+    pushd extension/android
+    ./gradlew build
+    popd
     pushd examples/demo-apps/android/LlamaDemo
     ./gradlew :app:setup
     popd

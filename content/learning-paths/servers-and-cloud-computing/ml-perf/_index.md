@@ -4,9 +4,9 @@ armips:
 author_primary: Pareena Verma
 layout: learningpathall
 learning_objectives:
-- Install and run tensorflow on your Arm-based cloud server
+- Install and run TensorFlow on your Arm-based cloud server.
 - Use MLPerf Inference benchmark suite, an open-sourced benchmark from MLCommons to
-  test ML performance on your Arm server
+  test ML performance on your Arm server.
 learning_path_main_page: 'yes'
 minutes_to_complete: 20
 operatingsystems:

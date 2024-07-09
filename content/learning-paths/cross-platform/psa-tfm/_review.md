@@ -13,23 +13,32 @@
 review:
     - questions:
         question: >
-            Q1 to do
+            Arm Trusted Firmware is
         answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                 
+            - "A framework to create custom Linux-based systems"
+            - "A web-based platform to explore Arm IP"
+            - "A reference implementation of the Platform Security Architecture (PSA)"
+        correct_answer: 3
         explanation: >
-            To do
-
+            Arm Trusted Software forms the foundations of a Trusted Execution Environment (TEE) or Secure Processing Environment (SPE).
     - questions:
         question: >
-            Q2 to do
+            What is Corstone-1000?
         answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                  
+            - An Arm processor with secure capabilities
+            - A configurable subsystem of Arm processor and security IP			
+        correct_answer: 2
         explanation: >
-            To do
+            Corstone-1000 is pre-verified, configurable subsystem to enable designers build secure SoCs faster.
+    - questions:
+        question: >
+            The Cortex-A ("host") processor is considered secure by the Secure Enclave
+        answers:
+            - True
+            - False		
+        correct_answer: 2
+        explanation: >
+            All components outside of the enclave are considered as less trustworthy. It is only after verification that the host is taken out of reset.
                
 
 # ================================================================================
