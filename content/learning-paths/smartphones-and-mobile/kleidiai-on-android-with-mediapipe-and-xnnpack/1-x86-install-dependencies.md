@@ -8,21 +8,11 @@ layout: learningpathall
 
 ## Option 1: Run a docker container with dependencies pre-installed
 
-We have created a Dockerfile and built a Docker image that contains all the requirements for running this learning path. If you'd like to install the dependencies yourself, please jump to (Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu)[##option-2-install-dependencies-on-an-x86-64-linux-machine-running-ubuntu].
+You can use the Dockerfile included in this learning path and build a Docker image that contains all the requirements for running this learning path. If you would like to install the dependencies yourself, please jump to [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
 
-#### Obtaining the pre-built image from Docker Hub
+#### Build the Docker image
 
-To get a pre-built image from Docker Hub, run:
-
-TODO: add in docker hub path here.
-
-```
-docker pull
-```
-
-#### Build the image yourself
-
-Save the following lines in a Dockerfile:
+Use a file editor of your choice and save the following lines in a file named `Dockerfile`:
 
 ```
 FROM amd64/ubuntu:22.04 
@@ -79,7 +69,7 @@ Run a shell on the Docker container:
 docker run -it --rm ubuntu-x86 /bin/bash
 ```
 
-You can now jump to (testing your setup)[##test-your-setup].
+You can now jump to [testing your setup](#test-your-setup).
 
 ## Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
 
