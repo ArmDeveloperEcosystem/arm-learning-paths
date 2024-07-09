@@ -168,10 +168,10 @@ The output from `find` will be similar to the below.
 
 ```output
 Image                       Aliases           Version          Description
-20.04                       focal             20231011         Ubuntu 20.04 LTS
-22.04                       jammy,lts         20231026         Ubuntu 22.04 LTS
-23.04                       lunar             20231025         Ubuntu 23.04
-23.10                       mantic,devel      20231011         Ubuntu 23.10
+20.04                       focal             20240626         Ubuntu 20.04 LTS
+22.04                       jammy             20240701         Ubuntu 22.04 LTS
+23.10                       mantic            20240701         Ubuntu 23.10
+24.04                       noble,lts         20240702         Ubuntu 24.04 LTS
 
 Blueprint                   Aliases           Version          Description
 anbox-cloud-appliance                         latest           Anbox Cloud Appliance
@@ -220,7 +220,7 @@ multipass exec m1u -- uname -a
 The `uname` output will look similar to:
 
 ```output
-Linux m1u 5.15.0-58-generic #64-Ubuntu SMP Thu Jan 5 12:06:43 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
+Linux m1u 6.8.0-36-generic #36-Ubuntu SMP PREEMPT_DYNAMIC Mon Jun 10 13:20:23 UTC 2024 aarch64 aarch64 aarch64 GNU/Linux
 ```
 
 ### Run an application
@@ -232,13 +232,13 @@ Download and install [OpenVSCode Server](/install-guides/openvscode-server/).
 On the macOS host computer use `wget` for the download.
 
 ```console
-wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.79.2/openvscode-server-v1.79.2-linux-arm64.tar.gz
+wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.90.0/openvscode-server-v1.90.0-linux-arm64.tar.gz
 ```
 
 To copy a file to the instance
 
 ```console
-multipass transfer openvscode-server-v1.79.2-linux-arm64.tar.gz m1u:/home/ubuntu
+multipass transfer openvscode-server-v1.90.0-linux-arm64.tar.gz m1u:/home/ubuntu
 ```
 
 Now switch to the instance and extract the download and run the application. 
@@ -252,13 +252,13 @@ multipass shell m1u
 Extract the download. 
 
 ```console
-tar xvfz openvscode-server-v1.79.2-linux-arm64.tar.gz
+tar xvfz openvscode-server-v1.90.0-linux-arm64.tar.gz
 ```
 
 Run the application.
 
 ```console
-./openvscode-server-v1.79.2-linux-arm64/bin/openvscode-server --host=0.0.0.0 --without-connection-token
+./openvscode-server-v1.90.0-linux-arm64/bin/openvscode-server --host=0.0.0.0 --without-connection-token
 ```
 
 Connect to OpenVSCode Server using a browser. From the macOS host computer use the `info` command to get the IP address of the instance.
