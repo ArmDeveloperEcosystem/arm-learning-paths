@@ -138,7 +138,7 @@ cd ~/snort_src
 wget https://github.com/snort3/snort3/archive/refs/tags/3.2.2.0.tar.gz -O snort3-3.2.2.0.tar.gz
 tar -xzvf snort3-3.2.2.0.tar.gz
 cd snort3-3.2.2.0
-./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc --enable-jemalloc
+./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc 
 cd build
 make -j$(nproc)
 sudo make install
@@ -158,20 +158,20 @@ You should see output similar to the following:
 
 ```output
    ,,_     -*> Snort++ <*-
-  o"  )~   Version 3.1.18.0
+   o"  )~   Version 3.2.2.0
    ''''    By Martin Roesch & The Snort Team
            http://snort.org/contact#team
-           Copyright (C) 2014-2021 Cisco and/or its affiliates. All rights reserved.
+           Copyright (C) 2014-2024 Cisco and/or its affiliates. All rights reserved.
            Copyright (C) 1998-2013 Sourcefire, Inc., et al.
-           Using DAQ version 3.0.5
-           Using LuaJIT version 2.1.0-beta3
-           Using OpenSSL 3.0.2 15 Mar 2022
+           Using DAQ version 3.0.15
+           Using Hyperscan version 5.4.11 2024-07-09
            Using libpcap version 1.10.1 (with TPACKET_V3)
+           Using LuaJIT version 2.1.0-beta3
+           Using LZMA version 5.2.5
+           Using OpenSSL 3.0.2 15 Mar 2022
            Using PCRE version 8.45 2021-06-15
            Using ZLIB version 1.2.11
-           Using FlatBuffers 2.0.0
-           Using Hyperscan version 5.3.0 2022-07-26
-           Using LZMA version 5.2.5
+
 ```
 
 ## Test Snort 3 with Vectorscan
