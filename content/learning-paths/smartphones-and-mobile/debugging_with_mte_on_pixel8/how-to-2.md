@@ -10,7 +10,7 @@ layout: learningpathall
 
 A simple Android app is available to accompany this Learning Path. You can use it from Android Studio with your Pixel 8 smartphone in debug mode. 
 
-The project is [available on GitHub](https://github.com/rlopez3d/mte_test_app)
+The project is [available on GitHub](https://github.com/rlopez3d/mte_test_app).
 
 On your development machine, clone the repository:
 
