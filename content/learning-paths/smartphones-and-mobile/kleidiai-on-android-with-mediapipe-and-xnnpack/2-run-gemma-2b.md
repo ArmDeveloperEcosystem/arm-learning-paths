@@ -10,29 +10,11 @@ layout: learningpathall
 
 Now that you have your environment set up correctly, it's time to build the inference engine. This executable can run an LLM model on an Android device, it will produce an output, given an initial prompt.
 
-Before building, add the model path in `mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main.cc` as the default value of the model_path argument. Search for:
-
-```
-ABSL_FLAG(std::optional<std::string>, model_path, std::nullopt,
-```
- 
-and replace with
-
-```
-ABSL_FLAG(std::optional<std::string>, model_path, "./gemma-2b-it-cpu-int4.bin",
-```
- 
-This adds the Gemma model file (that you will download in a moment) to the default model path.
-
-{{% notice Note %}}
-This modification is necessary due to an argument parsing bug in the inference executable.
-{{% /notice %}}
-
 Build the inference tool using this command:
 
 ```bash
 
-bazel build -c opt --config=android_arm64 mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main
+bazel build --cxxopt=-DABSL_FLAGS_STRIP_NAMES=0 -c opt --config=android_arm64 mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main
 
 ```
 
@@ -107,7 +89,7 @@ Run the binary:
 
 ```bash
 cd /data/local/tmp/gen_ai
-./llm_inference_engine_cpu_main
+./llm_inference_engine_cpu_main --model_path <path_to_gemma-2b-it-cpu-int4.bin>
 ```
 
 The default behavior of this executable is to prompt the LLM to "Write an email". The output you see should be a unique generated email. It will start like this:
