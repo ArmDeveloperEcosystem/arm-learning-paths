@@ -9,8 +9,8 @@ review:
             - Both, one can use the generics version or the original way of passing via the function arguments
         correct_answer: 3
         explanation: >
-            While the new syntax tries to use Rust's generics, the old systax is still supported, to allow easier migration from code bases written in C.
-            No decision has been made to obsolete the older syntax however.
+            While the new syntax tries to use Rust's generics, the one that mimics C prototypes is still supported, to allow easier migration from code bases written in C.
+            No decision has been made to obsolete the C syntax.
 
     - questions:
         question: >

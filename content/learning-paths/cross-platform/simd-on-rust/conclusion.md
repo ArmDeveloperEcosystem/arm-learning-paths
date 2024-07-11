@@ -18,7 +18,7 @@ So in the end it is mostly about your personal preference, Rust is a modern lang
 
 ### What about SVE, SVE2 or even SME?
 
-What we have mentioned so far applies only to ASIMD/Neon, as it is a "traditional" SIMD architecture. With the recent addition of SVE and its newer sibling SVE2 or the future SME (Scalable Matrix Extension), things become quite more complicated.
+What we have mentioned so far applies only to ASIMD/Neon. With the recent addition of SVE and its newer sibling SVE2 or the future SME (Scalable Matrix Extension), a different approach is required.
 
 At the time of writing, there is no support of SVE intrinsics in Rust, not even on nightly compilers, as supporting those requires some fundamental changes which have to be agreed by the Rust compiler engineers. [It is still under discussion](https://github.com/rust-lang/rfcs/pull/3268), but it is expected this will be agreed upon by all sides soon and it will be part of the a compiler specification. Similarly for SVE2. There are no indications about SME yet, but it is also expected that it will follow a bit later.
 

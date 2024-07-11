@@ -35,18 +35,16 @@ void init_vec(uint8_t *A, uint8_t *B, int w, int h) {
   }
 }
 
-uint32_t sad_neon(const uint8_t *a_ptr, const uint8_t *b_ptr, int w, int h) {
+uint32_t sad_neon(const uint8_t *a, const uint8_t *b, int w, int h) {
   uint32x4_t sum = vdupq_n_u32(0);
 
   for (int i = 0; i < h; i++) {
     for (int j = 0; j < w; j+= 16) {
-      uint8x16_t a = vld1q_u8(a_ptr + j);
-      uint8x16_t b = vld1q_u8(b_ptr + j);
+      uint8x16_t a = vld1q_u8(a[i*w + j]);
+      uint8x16_t b = vld1q_u8(b[i*w + j]);
       uint8x16_t diff = vabdq_u8(a, b);
       sum = vdotq_u32(sum, diff, vdupq_n_u8(1));
     }
-    a_ptr += w;
-    b_ptr += w;
   }
 
   return vaddvq_u32(sum);
