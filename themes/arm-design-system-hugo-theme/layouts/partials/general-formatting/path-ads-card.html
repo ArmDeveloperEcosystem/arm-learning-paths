@@ -10,31 +10,31 @@ Called from:
     - _default/term.html
 */}}
 
-<ads-card link="{{.Permalink}}" class='path-card'>
+<ads-card link="{{.learning_path.Permalink}}" class='path-card'>
     <ads-card-content slot="content">
         <!-- SUBJECT -->
         <p class="card-subject u-margin-top-0 u-margin-bottom-1/2">
-            {{ upper .Params.subjects }}
+            {{ upper .learning_path.Params.subjects }}
         </p>
         <!-- Title of Learning Path -->
         <div class="learning-path-title-div">
-            <h6 class="search-title learning-path-title">{{.Title}}</h6>
+            <h6 class="search-title learning-path-title">{{.learning_path.Title}}</h6>
         </div>
         <!-- Tags from Learning Path (first 5 only) -->
         <div class="card-tag-details-div">
             <p class="card-tag-details">
-                {{ delimit ( (union .Params.tools_software_languages .Params.operatingsystems) | first 5 ) " - "}}
+                {{ delimit ( (union .learning_path.Params.tools_software_languages .learning_path.Params.operatingsystems) | first 5 ) " - "}}
             </p>
         </div>
         <!-- Date updated & time to complete -->
         <p class="card-date u-margin-bottom-0" style="margin-top: auto">
             <span><i class="fa-light fa-calendar-days"></i></span>
-            &nbsp; {{partial "server-side-processing/update-update-time.html" .}}
+            &nbsp; {{.calculated_date.Format "02 Jan 2006"}}
 
             &nbsp;&nbsp;&nbsp;&nbsp;
             
             <span><i class="fa-light fa-clock"></i></span>
-            &nbsp;<span class="time-to-complete-string" name="{{.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .Params.minutes_to_complete}}</span>
+            &nbsp;<span class="time-to-complete-string" name="{{.learning_path.Params.minutes_to_complete}}">{{partial "partials/server-side-processing/time-beautifier.html" .learning_path.Params.minutes_to_complete}}</span>
         </p>
     </ads-card-content>   
 </ads-card>

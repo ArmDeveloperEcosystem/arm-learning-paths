@@ -55,7 +55,7 @@ Download a release of OpenVSCode Server from the [GitHub release area](https://g
 For example, use `wget` to download.
 
 ```bash
-wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.79.2/openvscode-server-v1.79.2-linux-arm64.tar.gz 
+wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.90.0/openvscode-server-v1.90.0-linux-arm64.tar.gz 
 ```
 
 ## Install 
@@ -63,7 +63,7 @@ wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode
 Install the download by extracting the file
 
 ```bash 
-tar xvfz openvscode-server-v1.79.2-linux-arm64.tar.gz
+tar xvfz openvscode-server-v1.90.0-linux-arm64.tar.gz
 ```
 
 ## Start OpenVSCode Server
@@ -71,7 +71,7 @@ tar xvfz openvscode-server-v1.79.2-linux-arm64.tar.gz
 To start OpenVSCode Server run:
 
 ```bash
-./openvscode-server-v1.79.2-linux-arm64/bin/openvscode-server 
+./openvscode-server-v1.90.0-linux-arm64/bin/openvscode-server 
 ```
 
 The server will print a URL to access VS Code in a browser. The URL is localhost URL. If your machine is a remote system or a Linux subsystem there are two options to connect using your local browser.
@@ -114,7 +114,7 @@ On ChromeOS you can use the Linux configuration settings to automatically do por
 There are command line options to change the port, the token, and other configuration options. To see the options run:
 
 ```bash
-./openvscode-server-v1.79.2-linux-arm64/bin/openvscode-server --help
+./openvscode-server-v1.90.0-linux-arm64/bin/openvscode-server --help
 ```
 
 If you are running all on a local machine the token can be eliminated using the `--without-connection-token` option.

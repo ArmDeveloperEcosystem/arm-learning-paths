@@ -25,9 +25,9 @@ review:
         question: >
             What is Haar XML file?
         answers:
-            - "It contains device description"
-            - "It is used to record images from the camera"
-            - "It contains pre-trained data for detecting specific objects, such as faces, eyes, and cars"
+            - "It contains device description."
+            - "It is used to record images from the camera."
+            - "It contains pre-trained data for detecting specific objects, such as faces, eyes, and cars."
         correct_answer: 3
         explanation: >
             A Haar cascade file is an XML file used in computer vision, specifically within the OpenCV library, to perform object detection. It contains pre-trained data for detecting specific objects, such as faces, eyes, and cars. The file is created using the Haar cascade classifier algorithm, which is based on machine learning.
@@ -37,11 +37,11 @@ review:
             What you can do to accelerate face detection?
         answers:
         answers:
-            - "Upscale the image"
-            - "Downscale the image"                        
+            - "Upscale the image."
+            - "Downscale the image."                        
         correct_answer: 2
         explanation: >
-            Downscaling the image will accelerate face detection.
+            Downscaling the image accelerates face detection.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

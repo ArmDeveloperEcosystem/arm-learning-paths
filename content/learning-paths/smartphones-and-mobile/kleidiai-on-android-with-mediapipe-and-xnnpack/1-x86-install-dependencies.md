@@ -8,21 +8,11 @@ layout: learningpathall
 
 ## Option 1: Run a docker container with dependencies pre-installed
 
-We have created a Dockerfile and built a Docker image that contains all the requirements for running this learning path. If you'd like to install the dependencies yourself, please jump to (Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu)[##option-2-install-dependencies-on-an-x86-64-linux-machine-running-ubuntu].
+You can use the Dockerfile included in this learning path and build a Docker image that contains all the requirements for running this learning path. If you would like to install the dependencies yourself, please jump to [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
 
-#### Obtaining the pre-built image from Docker Hub
+#### Build the Docker image
 
-To get a pre-built image from Docker Hub, run:
-
-TODO: add in docker hub path here.
-
-```
-docker pull
-```
-
-#### Build the image yourself
-
-Save the following lines in a Dockerfile:
+Use a file editor of your choice and save the following lines in a file named `Dockerfile`:
 
 ```
 FROM amd64/ubuntu:22.04 
@@ -60,10 +50,6 @@ RUN bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bu
 
 ENV PATH "$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
-RUN sed -i 's/libdc1394-22-dev/libdc1394-dev/g' setup_opencv.sh
-RUN sed -i 's/apt install/apt -y install/g' setup_opencv.sh
-RUN bash setup_opencv.sh
-
 ENV GLOG_logtostderr=1
 ```
 
@@ -79,7 +65,7 @@ Run a shell on the Docker container:
 docker run -it --rm ubuntu-x86 /bin/bash
 ```
 
-You can now jump to (testing your setup)[##test-your-setup].
+You can now jump to [testing your setup](#test-your-setup).
 
 ## Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
 
@@ -92,7 +78,6 @@ In order to cross-compile your inference engine, you'll need the following insta
 * MediaPipe Python package requirements
 * Android NDK v25, with configurations
 * Android SDK
-* OpenCV
 
 #### Install pip3
 
@@ -149,20 +134,6 @@ Add the NDK bin folder to your PATH variable:
 
 export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/
 
-```
-
-#### Install OpenCV and its dependencies
-
-{{% notice Note %}}
-In Ubuntu 21.10, [libc1394-dev replaced libc1394-22-dev.](https://github.com/ros/rosdistro/issues/34921)
-
-Check your Ubuntu version using `lsb_release -a`, and if you're running 21.10 or later, change libc1394-22-dev to libc1394-dev in the setup_opencv.sh script.
-{{% /notice %}}
-
-To install opencv, run:
-
-```
-bash setup_opencv.sh
 ```
 
 ## Test your setup

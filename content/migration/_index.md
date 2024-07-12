@@ -11,7 +11,7 @@ This three step migration guide covers the most common scenarios for adopting Ar
 
 ## STEP 1: Learn and explore
 
-Before you start migrating applications, some background on Arm Neoverse is helpful. 
+Before you start migrating applications, some background on Arm Neoverse is helpful.
 
 ### What is Arm Neoverse?
 
@@ -61,7 +61,7 @@ Migration typically falls into 3 categories:
 2. Software installed using scripts or binary downloads requires minor changes to strings, such as changing “x86_64” and “amd64” to “arm64” or “aarch64”.
 3. A few software projects still don't support Arm Linux, some are well known projects like the Edge browser, and the others are smaller projects that haven't added Arm support, yet. Some could be blockers and others may be easy to compile yourself.
 
-The [Software Ecosystem Dashboard for Arm](https://learn.arm.com/learning-paths/cross-platform/intrinsics/) is a resource to identify if your software dependencies are available for Arm. 
+The [Software Ecosystem Dashboard for Arm](https://www.arm.com/developer-hub/ecosystem-dashboard/) is a resource to identify if your software dependencies are available for Arm. 
 
 Use the Ecosystem Dashboard to find software and understand if everything you need runs on Arm. If you don't find software listed, please raise an issue in the [GitHub project](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm/) or submit a pull request. 
 
@@ -73,17 +73,22 @@ If your code uses intrinsics from another architecture, you can use the librarie
 
 There are additional resources which may help you find answers to your migration questions:
 
-- [Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) 
+- [All Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) 
+    - [AWS Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=aws/#)
+    - [Google Cloud Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=google-cloud/#)
+    - [Microsoft Azure Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=microsoft-azure/#)
+    - [Oracle Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=oracle/#)
+- [Infrastructure Solutions blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/)
 - [Arm software install guides](https://learn.arm.com/install-guides)
 - [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started) contains a wealth of information. 
 
 Additional migration resources:
- - [Programming Languages](languages/)
- - [Optimized Libraries](libraries/)
- - [Containers](containers/)
- - [Databases](databases/)
- - [Web applications](web/)
- - [Networking](networking/)
+ - [Programming Languages](/migration/languages/)
+ - [Optimized Libraries](/migration/libraries/)
+ - [Containers](/migration/containers/)
+ - [Databases](/migration/databases/)
+ - [Web applications](/migration/web/)
+ - [Networking](/migration/networking/)
 
 
 ## Build and run
@@ -122,6 +127,8 @@ This may involve a variety of steps:
 - Creating a complete version of your application in a dev environment for additional testing
 
 Make sure to research the details needed for these tasks by checking any places you use infrastructure as code or other places you store details about virtual machine types and sizes, as well as parameters for managed services.
+
+You can also check [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) for the latest cloud and CI/CD initiatives for developers.
 
 ## Summary
 

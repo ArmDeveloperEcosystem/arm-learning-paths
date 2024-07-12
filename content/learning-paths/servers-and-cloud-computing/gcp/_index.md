@@ -20,6 +20,8 @@ author_primary: Jason Andrews
 ##### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers: Google Cloud
+
 armips:
     - Neoverse
 operatingsystems:
@@ -27,7 +29,6 @@ operatingsystems:
 tools_software_languages:
     - Terraform
     - Bastion
-    - Google Cloud
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

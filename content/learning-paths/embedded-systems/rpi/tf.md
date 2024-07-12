@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Tensorflow"
+title: "TensorFlow"
 
 weight: 6 # 1 is first, 2 is second, etc.
 
@@ -82,7 +82,7 @@ time python ./example.py
 
 The results below show the time taken to run the tensorflow example on the Raspberry Pi and the Arm server. This gives you an idea of the relative performance.
 
-| System | Time to complete              |
-|--------|------------------------------:|				
-| Raspberry Pi 4 | 1 min 46 sec	|	
-| Arm server (4 vCPU)  | 22 sec      |
+| System              | Time to complete |
+| ------------------- | ---------------: |
+| Raspberry Pi 4      |     1 min 46 sec |
+| Arm server (4 vCPU) |           22 sec |

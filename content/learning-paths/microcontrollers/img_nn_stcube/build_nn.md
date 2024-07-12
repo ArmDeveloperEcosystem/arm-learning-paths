@@ -18,7 +18,14 @@ For each step, you will see
 
 To create the NN model, there are certain data pre-processing steps that need to be performed.
 
-Execute the first code block to import the required packages:
+First, open the Jupyter Notebook through an Anaconda Prompt.
+
+```console
+jupyter notebook
+```
+Open `lab.ipynb` from the extracted project files folder on the notebook.
+
+Execute (click `Run`) the first code block to import the required packages:
 ```python
 import tensorflow as tf
 
@@ -36,9 +43,9 @@ from PIL import Image
 
 import os
 ```
-Next, load the `CIFAR-10` dataset. TensorFlow provides API for downloading well-known datasets, such as `CIFAR-10` and `MNIST`.
 
-Execute the next code block to get the dataset.
+Next, load the `CIFAR-10` dataset. TensorFlow provides an API for downloading well-known datasets, such as CIFAR-10 and MNIST. Execute the next code block to get the dataset.
+
 ```python
 # Load data from TF Keras
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
@@ -49,7 +56,7 @@ class_names = ['Airplane', 'Automobile', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog',
 num_classes = len(class_names)
 ```
 
-Then, save one image per class from the test set for testing with the board later. Execute the following to save the images.
+Then, you will save one image per class from the test set for testing with the board later. Execute the following code block to save the images.
 
 ```python
 path_images = "./Data/images/"
@@ -64,7 +71,9 @@ for image_index in range(0,100):
  im = Image.fromarray(x_test[image_index])
  im.save("./images/"+str(class_names[int(y_test[image_index])])+ext)
 ```
+
 This code block below will visualize the saved images.
+
 ```python
 # Show saved images
 files = os.listdir(path_images) 
@@ -79,6 +88,7 @@ for img in files:
  plt.xlabel(os.path.splitext(img)[0])
 plt.show()
 ```
+
 The expected output is shown below
 
 ![output1](Images/lab4_1.PNG)
@@ -98,7 +108,9 @@ print('y_train shape:', y_train.shape)
 print('x_test shape:', x_test.shape)
 print('y_test shape:', y_test.shape)
 ```
+
 The expected output is shown below:
+
 ```output
 x_train shape: (50000, 32, 32, 3)
 y_train shape: (50000, 10)
@@ -106,9 +118,9 @@ x_test shape: (10000, 32, 32, 3)
 y_test shape: (10000, 10)
 ```
 
-### Create the Model
+## Create the Model
 
-You will create a small convolutional neural network for image classification. The image size of CIFAR-10 dataset is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is `(32, 32, 3)`. Since the number of classes is 10, so the last dense layer should have 10 units.
+You are going to create a small convolutional neural network for image classification. The image size of CIFAR10 is 32 by 32, and the number of colour channels is 3. So, the input shape of the first convolution layer is (32, 32, 3). Since the number of classes is 10, so the last dense layer should have 10 units.
 
 Here is an image illustrating the network architecture. Note that only convolution and dense layers are illustrated in this image.
 
@@ -156,16 +168,15 @@ model.add(Dropout(0.5))
 model.add(Dense(10)) #The number of classes
 model.add(Activation('softmax'))
 ```
-Execute the code blocks below to compile and train the model. This training uses only one epoch for time constraint, but will still take ~15 minutes to execute.
+
+Execute the code blocks below to compile and train the model. If tens of epochs are used, the training might take more than 10 hours because the dataset has 50,000 training images. Therefore, the model trained for 50 epochs is provided for testing (File: ‘Data/models/cifar10_model.h5’). You can use the model if you don't have enough time to train your own model. 
 
 ```python
 # Check model structure and the number of parameters
 model.summary()
-# train the model using Adam optimizer
+# Let's train the model using Adam optimizer
 model.compile(loss='categorical_crossentropy', optimizer='adam', 
 metrics=['accuracy'])
-```
-```python
 # Train model
 history = model.fit(x=x_train,
  y=y_train,
@@ -173,9 +184,8 @@ history = model.fit(x=x_train,
  epochs=epochs, 
  validation_data=(x_test, y_test))
 ```
-Save and evaluate the model. Note that since the model was trained for 1 epoch only, the accuracy will not be that good.
 
-You can retry with a larger number of epochs later to obtain better performance. A model trained for 50 epochs is provided (`Data/models/cifar10_model.h5`).
+Save the model and evaluate the model. Note that since the model was trained for 1 epoch only, the accuracy would not be that good. Please try a larger number of epochs later to obtain better performance.
 
 ```python
 # Save keras model
@@ -190,11 +200,10 @@ scores = model.evaluate(x_test, y_test, verbose=1)
 print('Test loss:', scores[0])
 print('Test accuracy:', scores[1])
 ```
-### Validation data
 
-Finally, save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in `CSV` format.
+## Save Data for Testing
 
-Execute the code block to save the test data.
+Finally, save the validation data and the labels for testing. This code block will sample 50 images from the dataset and save them in CSV format. Execute the code block to save the test data.
 
 ```python
 path_csv = "./Data/"

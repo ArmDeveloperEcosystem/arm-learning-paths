@@ -146,7 +146,8 @@ Called from:
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
                             {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
                             {{ if $is_learning_path}}
-                                {{partial "server-side-processing/update-update-time.html" .}}
+                                {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
+                                {{$true_last_mod_date.Format "02 Jan 2006"}}
                             {{else}}
                                 {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                             {{end}} 
@@ -199,7 +200,8 @@ Called from:
                             <span><i class="fa-light fa-calendar-days fa-sm"></i></span>&nbsp;
                             {{/* If learning path, obtain last modified date from any LP file; install guide just display from this file. */}} 
                             {{ if $is_learning_path}}
-                                {{partial "server-side-processing/update-update-time.html" .}}
+                                {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
+                                {{$true_last_mod_date.Format "02 Jan 2006"}}
                             {{else}}
                                 {{ .Lastmod.UTC.Format "2 Jan 2006" }}
                             {{end}} 
@@ -273,11 +275,18 @@ Called from:
                         <td id="tags-for-content" class="td-metadata-value">
                             <span>
                                 {{ if .Params.subjects}}
-                                <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
-                                    <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
-                                    <span class="fa-solid fa-tag"></span>
-                                    {{ .Params.subjects }}
-                                </ads-tag> 
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
+                                        <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                                        <span class="fa-solid fa-tag"></span>
+                                        {{ .Params.subjects }}
+                                    </ads-tag> 
+                                {{end}}
+                                {{ if .Params.cloud_service_providers }}
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
+                                        <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                                        <span class="fa-solid fa-tag"></span>
+                                        {{ .Params.cloud_service_providers }}
+                                    </ads-tag>
                                 {{end}}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
@@ -375,13 +384,20 @@ Called from:
                         <tr>
                             <td id="tags-for-content" class="td-metadata-value margin-l-0">
                                 <span>
-                                    {{ if .Params.subjects}}
+                                {{ if .Params.subjects}}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
                                         {{ .Params.subjects }}
                                     </ads-tag>
-                                    {{end}}
+                                {{end}}
+                                {{ if .Params.cloud_service_providers }}
+                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.cloud_service_providers | urlize}}' style="margin-bottom: 4px;">
+                                        <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
+                                        <span class="fa-solid fa-tag"></span>
+                                        {{ .Params.cloud_service_providers }}
+                                    </ads-tag>
+                                {{end}}
                                 {{ range .Params.operatingsystems }}
                                     <ads-tag    href='{{ "/" | relLangURL}}tag/{{. | urlize}}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">

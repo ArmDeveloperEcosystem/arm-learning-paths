@@ -1,6 +1,5 @@
 ---
 title: "Deploy WordPress with MySQL on Elastic Kubernetes Service (EKS)"
-draft: false
 minutes_to_complete: 60
 
 who_is_this_for: >
@@ -18,13 +17,13 @@ author_primary: Jason Andrews
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
+cloud_service_providers: AWS
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
-    - EKS
-    - AWS
+    - AWS Elastic Kubernetes Service (EKS)
     - Kubernetes
     - SQL
     - MySQL

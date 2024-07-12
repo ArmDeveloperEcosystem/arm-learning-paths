@@ -24,7 +24,6 @@ test_status:
 title: Test the performance of MongoDB on Arm servers
 tools_software_languages:
 - MongoDB
-- AWS
 - GCC
 - Snort
 weight: 1

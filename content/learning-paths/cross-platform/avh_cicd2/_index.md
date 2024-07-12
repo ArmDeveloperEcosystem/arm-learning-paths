@@ -26,7 +26,6 @@ tools_software_languages:
     - Coding
     - Arm Virtual Hardware
     - GitHub
-    - AWS
 
 ### Cross-platform metadata only
 shared_path: true

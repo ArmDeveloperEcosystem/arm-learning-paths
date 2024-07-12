@@ -22,8 +22,8 @@ further_reading:
         link: https://developer.arm.com/documentation/100720/0100
         type: documentation
     - resource:
-        title: Using LPC55S69 SDK Trustzone examples with MCUXpresso IDE
-        link: https://community.nxp.com/t5/Blogs/Using-LPC55S69-SDK-Trustzone-examples-with-MCUXpresso-IDE-v11-0/ba-p/1131075
+        title: Using LPC55S69 SDK TrustZone examples with MCUXpresso IDE
+        link: https://community.nxp.com/t5/Blogs/Using-LPC55S69-SDK-TrustZone-examples-with-MCUXpresso-IDE-v11-0/ba-p/1131075
         type: blog
 
 # ================================================================================

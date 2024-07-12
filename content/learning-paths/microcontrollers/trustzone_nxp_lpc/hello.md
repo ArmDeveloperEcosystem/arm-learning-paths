@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Run Trustzone Hello World example"
+title: "Run TrustZone Hello World example"
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -12,13 +12,13 @@ layout: "learningpathall"
 
 Install [Keil MDK](/install-guides/mdk) and [Arm Compiler for Embedded](/install-guides/armclang) on a Windows machine and connect the NXP LPCXpresso55S69 board to it.
 
-## Build and Run the Hello World Trustzone example
+## Build and Run the Hello World TrustZone example
 
-The hello world Trustzone example can be obtained using the Pack installer in Keil µVision. 
+The hello world TrustZone example can be obtained using the Pack installer in Keil µVision. 
 
-Using the Pack Installer widget, select the LPC55S69 device and then copy the `hello_ns` and `hello_s` examples into your workspace. These are the non-secure and secure sub-projects of the Trustzone example. Then select `Project-> Open Project` on the IDE and select the `hello_world_s` example. Under this example, open the `hello_world.uvmpw` µVision Multi-Project file.
+Using the Pack Installer widget, select the LPC55S69 device and then copy the `hello_ns` and `hello_s` examples into your workspace. These are the non-secure and secure sub-projects of the TrustZone example. Then select `Project-> Open Project` on the IDE and select the `hello_world_s` example. Under this example, open the `hello_world.uvmpw` µVision Multi-Project file.
 
-![Project dialog](nxp-trustzone.png "Hello world Trustzone project")
+![Project dialog](nxp-trustzone.png "Hello world TrustZone project")
 
 Now proceed to build the project by selecting the `Batch Build` button. This step will build both the `hello_ns` and `hello_s` sub-projects. 
 
@@ -41,4 +41,4 @@ Both strings are equal!
 
 As shown by the printed messages, the application boots in secure world and then switches to the non-secure world. From the non-secure world it calls from secure functions and then exits. 
 
-In the following section you will learn some of the key Trustzone concepts used in this application.
+In the following section you will learn some of the key TrustZone concepts used in this application.

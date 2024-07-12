@@ -14,7 +14,7 @@ The print statements are directed to USB.
 
 ## How do I build "hello" for Raspberry Pi Pico?
 
-Save the C code below to a file named hello.c
+Save the C code below to a file named `hello.c`
 
 ```c
 #include <stdio.h>
@@ -42,7 +42,7 @@ int main()
 }
 ```
 
-The Pico SDK uses cmake. Save the information below as CMakeLists.txt
+The Pico SDK uses cmake. Save the information below as `CMakeLists.txt`
 
 ```cmake
 cmake_minimum_required(VERSION 3.18)

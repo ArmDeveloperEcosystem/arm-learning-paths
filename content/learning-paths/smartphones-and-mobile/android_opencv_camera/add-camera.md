@@ -6,7 +6,9 @@ weight: 4
 
 layout: "learningpathall"
 ---
-You will now extend the application by adding camera support using OpenCV. Start by adding additional controls that will be used to start and stop the camera preview, and to display images from the camera. Additionally, you will add a CheckBox control that will enable or disable real-time processing. For the real-time processing, you will use [adaptive thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) from OpenCV.
+You will now extend the application by adding camera support using OpenCV. Start by adding additional controls that will be used to start and stop the camera preview, and to display images from the camera. 
+
+Additionally, you will add a checkbox control that will enable or disable real-time processing. For the real-time processing, you will use [adaptive thresholding](https://docs.opencv.org/4.x/d7/d4d/tutorial_py_thresholding.html) from OpenCV.
 
 ## Modify the application view
 To modify the application view, open `activity_main.xml` and replace the file contents with the following code:
@@ -84,11 +86,11 @@ To modify the application view, open `activity_main.xml` and replace the file co
 </LinearLayout>
 ```
 
-After adding this code, re-run the 'app'. The above declarations will render the following:
+After adding this code, re-run the application. The above declarations render the following:
 
 ![img8](Figures/08.png)
 
-The view now contains two buttons: Start and Stop. They will be used to start and stop the camera preview. Below the buttons, there is a CheckBox that will enable or disable real-time image processing. Though not visible, below the CheckBox there is a `JavaCameraView`.
+The view now contains two buttons: Start and Stop. They will be used to start and stop the camera preview. Below the buttons, there is a checkbox that will enable or disable real-time image processing. Though not visible, below the checkbox there is a `JavaCameraView`.
 
 `JavaCameraView` is a class provided by the OpenCV library for Android, which serves as a bridge between the Android camera and the OpenCV library. It allows developers to capture frames from the camera and process them using OpenCV functions. JavaCameraView integrates the Android camera seamlessly with the OpenCV library, providing a way to capture video frames directly. `JavaCameraView` implements the `CameraBridgeViewBase.CvCameraViewListener2` interface, which includes methods for handling camera events and frame processing. `JavaCameraView` handles the lifecycle of the camera, including starting and stopping the camera preview, and releasing the camera when not in use.
 
@@ -150,7 +152,9 @@ Click the **While using the app** button to enable camera access. You are now re
 ## Control the camera
 You will now extend the MainActivity.kt by an additional logic that enables to start and stop the camera preview, when user clicks corresponding buttons. Also, you will extend the MainActivity class by implementing the CameraBridgeViewBase.CvCameraViewListener2 interface to access the JavaCameraView events associated with the camera lifecycle: 
 1. onCameraViewStarted - This method is called when the camera preview starts. You typically use this method to initialize resources needed for processing frames, such as creating OpenCV's Mat objects that will hold the image data.
+
 2. onCameraViewStopped - This method is called when the camera preview stops. You use this method to release or clean up resources that were allocated in onCameraViewStarted, such as releasing Mat objects or stopping background processing tasks
+
 3. onCameraFrame - This method is called for each frame captured by the camera. You use this method to process each frame. In this learning path you will use this method to process camera image using adaptive thresholding.
 
 Proceed as follows (all changes are to be made in the MainActivity.kt file):
@@ -169,7 +173,7 @@ import org.opencv.core.Mat
 ```java
 class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {
 ```
-3. In the MainActivity class declare the following additional variables (right below class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {)
+3. In the MainActivity class declare the following additional variables (right below class MainActivity : AppCompatActivity(), CameraBridgeViewBase.CvCameraViewListener2 {):
 
 ```
 private lateinit var buttonStartPreview: Button
@@ -267,11 +271,11 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-We started by declaring TextView, Button, CheckBox, and ImageView elements, along with the OpenCV camera view. We also added an additional variable, isPreviewActive, which tracks the camera preview status. Then, we modified the onCreate method to bind UI elements to the variables. After checking if the camera permission is granted, we set the camera index to 0 to access the rear camera. If you want to record images from the front camera, you will need to change the camera index to 1. Afterward, we set the activity as the listener for camera events.
+You began by declaring TextView, Button, CheckBox, and ImageView elements, along with the OpenCV camera view. You also added an additional variable, isPreviewActive, which tracks the camera preview status. Then, you modified the onCreate method to bind UI elements to the variables. After checking if the camera permission is granted, you set the camera index to 0 to access the rear camera. If you want to record images from the front camera, you will need to change the camera index to 1. Afterwards, you set the activity as the listener for camera events.
 
-Next, we implemented click event handlers for the buttons. Specifically, when the user clicks the Start button, we set the camera permission as granted (openCvCameraView.setCameraPermissionGranted()) and enable the camera view (openCvCameraView.enableView()). Then, we modified the updateControls method to change the UI elements based on the current state. We disable the Start button when the camera preview is active. Conversely, when the camera preview is inactive, the Stop button is disabled.
+Next, you implemented click event handlers for the buttons. Specifically, when the user clicks the Start button, you set the camera permission as granted (openCvCameraView.setCameraPermissionGranted()) and enable the camera view (openCvCameraView.enableView()). Then, you modified the updateControls method to change the UI elements based on the current state. You disable the Start button when the camera preview is active. Conversely, when the camera preview is inactive, the Stop button is disabled.
 
-Finally, we implemented onCameraViewStarted, onCameraViewStopped, and onCameraFrame as follows:
+Finally, you implemented onCameraViewStarted, onCameraViewStopped, and onCameraFrame as follows:
 - onCameraViewStarted - sets isPreviewActive to true and updates the controls.
 - onCameraViewStopped - sets isPreviewActive to false and updates the controls.
 - onCameraFrame - returns the frame in RGBA format for processing.
@@ -391,7 +395,7 @@ After re-launching the application and pressing the Start button you will see th
 ![img10](Figures/10.png)
 
 ## Display images
-To display images, we need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
+To display images, you need to modify the onCameraFrame method so that the image from the camera is displayed in the ImageView. You will also declare Mat objects to store the image from the camera. 
 
 Follow these steps (all changes to be made in `MainActivity.kt`):
 
@@ -450,93 +454,8 @@ override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?):
 }
 ```
 
-To test the code, you will need to run the application on an actual device. Follow [these steps](https://developer.android.com/studio/run/device).
+To test the code, you will need to run the application on an actual device. Follow the steps in [Run apps on a hardware device](https://developer.android.com/studio/run/device) to test the app.
 
 After running the app, remember to grant permissions to the camera. Then, click the Start button, and the application will display images from the camera:
 
 ![img11](Figures/11.jpg)
-
-## Process images
-In the final step, you will process the camera image with OpenCV. To do so, you will declare another Mat for storing the processed image. Then, depending on whether the CheckBox is checked, you will apply the adaptive thresholding algorithm to the input image.
-
-Proceed as follows (all changes to be made in MainActivity.kt):
-
-1. Import the `Imgproc` package from OpenCV in order to add adaptive thresholding:
-
-```java
-import org.opencv.imgproc.Imgproc
-```
-
-2. Declare another Mat object:
-```java
-private lateinit var processedMat: Mat
-```
-
-3. Add Mat initialization and release:
-```java
-override fun onCameraViewStarted(width: Int, height: Int) {
-    isPreviewActive = true
-
-    inputMat = Mat(height, width, CvType.CV_8UC4)    
-    processedMat = Mat(height, width, CvType.CV_8UC1)
-
-    updateControls()
-}
-
-override fun onCameraViewStopped() {
-    isPreviewActive = false
-
-    inputMat.release()    
-    processedMat.release()
-
-    updateControls()
-}
-```
-
-4. Process the image within the onCameraFrame:
-
-```java
-override fun onCameraFrame(inputFrame: CameraBridgeViewBase.CvCameraViewFrame?): Mat {
-    inputFrame!!.rgba().copyTo(inputMat)
-
-    var matToDisplay = inputMat
-    if(checkBoxProcessing.isChecked) {
-        Imgproc.cvtColor(inputMat, processedMat, Imgproc.COLOR_RGBA2GRAY)
-        Imgproc.adaptiveThreshold(
-            processedMat, processedMat, 255.0,
-            Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C,
-            Imgproc.THRESH_BINARY, 21, 0.0
-        )
-
-        matToDisplay = processedMat
-    }
-
-    // Prepare the bitmap
-    val bitmapToDisplay = Bitmap.createBitmap(matToDisplay.cols(), matToDisplay.rows(), Bitmap.Config.ARGB_8888)
-    Utils.matToBitmap(matToDisplay, bitmapToDisplay)
-
-    // Display it on UI Thread
-    runOnUiThread {
-        imageView.setImageBitmap(bitmapToDisplay)
-    }
-
-    return inputMat
-}
-```
-
-The major modification you made is following: If the CheckBox checkBoxProcessing is checked, the frame is converted to grayscale and an adaptive thresholding operation is applied. `matToDisplay` is set to the processed frame if processing is enabled; otherwise, the input frame is used.
-
-To process the image, you will use the `Imgproc.adaptiveThreshold` openCV function which applies adaptive thresholding to a grayscale image. Before you can apply thresholding, you will convert the color image to grayscale using the `Imgproc.cvtColor` OpenCV function.
-
-The adaptive thresholding implemented in OpenCV has two versions. They differ in how the threshold value is calculated within the block. Here, you used `Imgproc.ADAPTIVE_THRESH_GAUSSIAN_C`, which uses the mean of a Gaussian window to calculate the threshold for each pixel. Then, you specified the thresholding type as `Imgproc.THRESH_BINARY`. It converts pixels above the threshold to the maximum value (255) and below the threshold to 0.
-
-You used 21 as the size of the block to use for calculating the threshold for each pixel and 0 as a constant subtracted from the mean or weighted mean calculated.
-
-After re-running the application, starting the preview, and enabling the processing, you should see the following result:
-
-![img12](Figures/12.jpg)
-
-## Summary
-In this learning path, you created an Android application to capture and process camera images using OpenCV. First, you integrated the OpenCV library into your Android project. Then, you enabled camera permissions to ensure the application can access the device’s camera. Next, you set up `JavaCameraView` to capture real-time frames from the camera. You declared and initialized Mat objects to store and process camera frames. Finally, you implemented adaptive thresholding using OpenCV’s `Imgproc.adaptiveThreshold` to process the camera frames when a CheckBox is checked.
-
-By following these steps, you successfully created an Android application that captures real-time images from the camera, processes them using OpenCV, and displays the processed images, demonstrating adaptive thresholding.
