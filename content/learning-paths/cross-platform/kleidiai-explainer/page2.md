@@ -7,19 +7,19 @@ layout: learningpathall
 ---
 
 ## High-level KleidiAI architecture
-This section aims to provide an abstracted overview of KleidiAI's components before diving into the specifics. The KleidiAI source files are publicly accessible in the [KleidiAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai). Navigate there in your web browser to follow along and understand KleidiAI's structure.
+This section provides an abstracted overview of KleidiAI's components before diving into the specifics. The KleidiAI source files are publicly accessible in the [KleidiAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai). Navigate there in your web browser to follow along and discover KleidiAI's structure.
 
-KlediAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; navigate there now. There are essentially two types of KleidiAI micro-kernels today:
+KleidiAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; navigate there now. There are essentially two types of KleidiAI micro-kernels today:
 1. Quantizing/Packing routines    - under the `pack` directory.
-2. Matrix Multiplication routines - the three directories starting with `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
+2. Matrix Multiplication routines - the three directories with the prefix `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
 
 ![KleidiAI stuff](KleidiAI-src.JPG "Figure 3. KleidiAI src directory")
 
-### What quantization levels does KleidiAI support?
+### What are the quantization levels that KleidiAI supports?
 KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot#quantization-format).
 
-KleidiAI currently has three matrix multiplication directories that each handle differently input/output types, which will evolve to support more over time:
+KleidiAI currently has three matrix multiplication directories that each handle input/output types differently, and which will evolve to broaden the reach of their support:
 
 | uKernel                           |  Output type     | Input types     |
 | ---------                         | -----------------   | --------------  | 
