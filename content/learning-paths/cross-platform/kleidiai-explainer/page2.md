@@ -42,11 +42,11 @@ Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro
 * **A user** inputs their question into the chatbot, such as "What is the capital of the United States?"
 * **The chatbot app** uses MediaPipe to convert that text into a series of tokens representing the question as a matrix of FP16 numbers (as the Gemma-2b model is in FP16 format). 
 * **MediaPipe** invokes the large language model (LLM) inference with the tokenized input, feeding it into the first neural network layer of the Gemma-2b model.
-* **XNNPack** starts executing the inference, managing the mathmatical operations inside the LLM's neural network layers. 
-* **KleidiAI** is called to accelerate the essential matrix multiplication operations propogating the input through the neural network.
+* **XNNPack** starts executing the inference, managing the mathematical operations inside the LLM's neural network layers. 
+* **KleidiAI** is called to accelerate the essential matrix multiplication operations propagating the input through the neural network.
 
 #### Stage 2: KleidiAI Quantizing and Packing micro-kernels
-* **KleidiAI** recieves two large matricies of FP16 numbers to perform matrix multiplication. The *i8mm* micro-kernels were selected for this workload, requiring quantization from FP16 to lower percision numbers to enhance computational efficiency.
+* **KleidiAI** receives two large matrices of FP16 numbers to perform matrix multiplication. The *i8mm* micro-kernels were selected for this workload, requiring quantization from FP16 to lower precision numbers to enhance computational efficiency.
 * **The matrix of inputs**, also known as the Left-Hand Side matrix (LHS), is quantized into INT8.
 * **The matrix of model weights**, also known the Right-Hand Side matrix (RHS), is quantized into INT4, with two numbers packed into an INT8 memory space. This packing is done to take advantage of the *i8mm* architecture feature, which operates on 8-bit memory chunks.
 
