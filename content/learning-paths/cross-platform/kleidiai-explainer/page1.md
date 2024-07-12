@@ -9,26 +9,26 @@ layout: learningpathall
 
 KleidiAI is a set of micro-kernels that integrates into machine learning frameworks, accelerating your AI inference on Arm-based platforms. KleidiAI's micro-kernels are hand-optimized in Arm assembly code to leverage modern architecture instructions that greatly speed up AI inference on Arm CPUs. 
 
-You don't need to do anything to get the benefits of KleidiAI. It will automatically apply if two conditions are met:
-1. Your ML Framework integrates KleidiAI, and
-2. Your hardware platform supports the required Arm instructions for your inference (covered further down this page).
+Without the need for further action, you can benefit from KleidiAI automatically, if both of these two conditions are met:
+* Your ML Framework integrates KleidiAI.
+* Your hardware platform supports the required Arm instructions for your inference.
 
 ![KleidiAI#center](Arm_KleidiAI_square_color.png "Optimized micro-kernels for AI workloads on Arm CPUs")
 
 
-## How does Generative AI mathematically execute in hardware?
+## How does Generative AI execute mathematically in hardware?
 
 {{% notice Quote %}}
 “Any sufficiently advanced technology is indistinguishable from magic” - Arthur C. Clarke
 {{% /notice %}}
 
-In the case of Generative AI models today, the math behind the perceived magic is **matrix multiplication**. To understand this, and better understand KleidiAI itself, this section offers a high-level explanation of neural network architecture.
+In the case of Generative AI models today, the math behind the perceived magic is *matrix multiplication*. To understand this, and better understand KleidiAI itself, this section offers a high-level explanation of neural network architecture.
 
 Neural networks consist of layers of neurons. Each neuron in a layer is connected to all neurons in the previous layer. Each of these connections has a unique connection strength, learned through training. This is called a connection's *weight*. 
 
-During inference (such as trying to generate the next token/word with a given input), each neuron performs a weighted sum of inputs and then decides its value via an activation function. The weighted sum is the dot product of each connected neuron's input (*x*) and its connection weight (*w*). A layer of neuron's calculations can be efficiently calculated via matrix multiplication, where the input matrix is multiplied by the weight matrix. 
+During inference, such as trying to generate the next token/word with a given input, each neuron performs a weighted sum of inputs and then decides its value via an activation function. The weighted sum is the dot product of each connected neuron's input (*x*) and its connection weight (*w*). A layer of neuron's calculations can be efficiently calculated via matrix multiplication, where the input matrix is multiplied by the weight matrix. 
 
-For example, in the image below, *z1* is calculated as a dot product of connected *x*'s and *w*'s from the previous layer. All *z* values in Layer 0 can therefore be efficiently calculated with a matrix multiplication operation.
+For example, in the image below, *z1* is calculated as a dot product of connected *x*s and *w*s from the previous layer. All *z* values in Layer 0 can therefore be efficiently calculated with a matrix multiplication operation.
 
 ![Neural Network example#center](neural-node-pic.jpg "Figure 1. Zoomed in on neural network node")
 
