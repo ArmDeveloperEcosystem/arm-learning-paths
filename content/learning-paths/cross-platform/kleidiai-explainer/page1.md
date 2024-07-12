@@ -13,16 +13,13 @@ Without the need for further action, you can benefit from KleidiAI automatically
 * Your ML Framework integrates KleidiAI.
 * Your hardware platform supports the required Arm instructions for your inference.
 
-![KleidiAI#center](Arm_KleidiAI_square_color.png "Optimized micro-kernels for AI workloads on Arm CPUs")
-
-
-## How does Generative AI execute mathematically in hardware?
+### How does Generative AI execute mathematically in hardware?
 
 {{% notice Quote %}}
 “Any sufficiently advanced technology is indistinguishable from magic” - Arthur C. Clarke
 {{% /notice %}}
 
-In the case of Generative AI models today, the math behind the perceived magic is *matrix multiplication*. To understand this, and better understand KleidiAI itself, this section offers a high-level explanation of neural network architecture.
+In the case of Generative AI models today, the math behind the perceived magic is *matrix multiplication*. To help you grasp this concept, and better understand KleidiAI, this section offers a high-level explanation of neural network architecture.
 
 Neural networks consist of layers of neurons. Each neuron in a layer is connected to all neurons in the previous layer. Each of these connections has a unique connection strength, learned through training. This is called a connection's *weight*. 
 

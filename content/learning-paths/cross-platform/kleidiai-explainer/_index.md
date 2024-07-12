@@ -3,7 +3,7 @@ title: Accelerate Generative AI workloads using KleidiAI
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic on how KleidiAI can accelerate the execution of Generative AI workloads on hardware, wherever computing happens.
+who_is_this_for: This is an introductory topic for developers who want to learn how to use KleidiAI to accelerate the execution of Generative AI workloads on hardware.
 
 learning_objectives: 
     - Describe how basic math operations power Large Language Models.

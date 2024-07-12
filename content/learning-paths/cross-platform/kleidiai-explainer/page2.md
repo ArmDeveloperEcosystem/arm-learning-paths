@@ -45,7 +45,7 @@ Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro
 * **XNNPack** starts executing the inference, managing the mathmatical operations inside the LLM's neural network layers. 
 * **KleidiAI** is called to accelerate the essential matrix multiplication operations propogating the input through the neural network.
 
-#### Stage 2: KleidiAI Quantizing & Packing micro-kernels
+#### Stage 2: KleidiAI Quantizing and Packing micro-kernels
 * **KleidiAI** recieves two large matricies of FP16 numbers to perform matrix multiplication. The *i8mm* micro-kernels were selected for this workload, requiring quantization from FP16 to lower percision numbers to enhance computational efficiency.
 * **The matrix of inputs**, also known as the Left-Hand Side matrix (LHS), is quantized into INT8.
 * **The matrix of model weights**, also known the Right-Hand Side matrix (RHS), is quantized into INT4, with two numbers packed into an INT8 memory space. This packing is done to take advantage of the *i8mm* architecture feature, which operates on 8-bit memory chunks.
@@ -89,7 +89,7 @@ In short, it is highly recommended to select an INT4 pre-quantized model when in
 ### Why does KleidiAI need to 'pack' before matrix multiplication?
 The goal of KleidiAI's packing micro-kernels is to prepare the incoming matrices for efficient matrix multiplication. For each matrix multiplication routine is a corresponding packing routine, which may or may not require dynamic quantization depending on the incoming number formats. 
 
-For example, the *SMMLA* instruction operates on 8-bit numbers. The role of packing after quantization is to organize two 4-bit integers into a single 8-bit memory space, and the *SMMLA* instructions are hand-written to efficiently operate on the two packed integers at once.
+For example, the *SMMLA* instruction operates on 8-bit numbers. The role of packing after quantization is to organize two 4-bit integers into a single 8-bit memory space, and the *SMMLA* instructions are handwritten to efficiently operate on the two packed integers at once.
 
 The power of KleidiAI comes from its deep understanding of AI workload requirements, quantization techniques, data packing strategies, and advanced Arm instructions combining to squeeze the most performance out of AI models on Arm CPUs.
 

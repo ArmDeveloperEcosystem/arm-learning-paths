@@ -2,16 +2,16 @@
 review:
     - questions:
         question: >
-            What devices does KleidiAI NOT work on?
+            Which of these devices does KleidiAI NOT work on?
         answers:
-            - AWS Graviton 3 (C7g, M7g, R7g)
-            - NVIDIA Grace (GB200 NVL72)
-            - Google Pixel 8 Pro
-            - Vivo Y22
-            - It runs on all of these
+            - AWS Graviton 3 (C7g, M7g, R7g).
+            - NVIDIA Grace (GB200 NVL72).
+            - Google Pixel 8 Pro.
+            - Vivo Y22.
+            - This is a trick question! It runs on all of these.
         correct_answer: 5                    
         explanation: >
-            KleidiAI runs on all of the above devices lists and more.
+            KleidiAI runs on all of these devices.
 
     - questions:
         question: >
