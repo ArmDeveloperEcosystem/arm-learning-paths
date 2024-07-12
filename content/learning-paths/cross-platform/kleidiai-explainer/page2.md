@@ -14,7 +14,7 @@ KleidiAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; na
 2. Matrix Multiplication routines - the three directories with the prefix `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
 
-![KleidiAI stuff](KleidiAI-src.JPG "Figure 3. KleidiAI src directory")
+![KleidiAI stuff](KleidiAI-src.JPG "KleidiAI src directory")
 
 ### What are the quantization levels that KleidiAI supports?
 KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot#quantization-format).

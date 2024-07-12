@@ -9,7 +9,7 @@ layout: learningpathall
 ## KleidiAI GitLab Repo
 This section will probe into the intricate details of what KlediAI is doing and how it is beneficial to AI performance optimization. Navigate to the [KlediAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai) and view the [example file](https://gitlab.arm.com/kleidi/kleidiai/-/blob/main/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/matmul_clamp_f32_qai8dxp_qsi4cxp.cpp?ref_type=heads) you will be running. This example highlights the *i8mm* matrix multiplication micro-kernel, alongside the enabling packing/quantization micro-kernels.
 
-**Note:** This example is intended to illustrite KleidiAI microkernel performance. In practice you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically if supported. 
+**Note:** This example is intended to illustrate KleidiAI microkernel performance. In practice, you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically if supported. 
 
 The example code is structured to take in two matricies and compare KleidiAI's micro-kernel results to a reference implementation. This reference code is functionally identical to KleidiAI's micro-kernels, and is present for two reasons:
 1. To check for KleidiAI micro-kernel output validity as a sanity check, and
@@ -94,7 +94,7 @@ For the rest of this walk-through you will look over the reference kernel functi
 
 Next you will look at the KleidiAI's reference implementation in the example file to understand with the micro-kernels do to accelerate AI inference. The reference implementation is easier to understand by looking at the code and functionally equivalent to KleidiAI's actual micro-kernels. Links to KleidiAI's specific micro-kernel routines will also be included.
 
-We'll look at three main routines:
+You will now look at the three main routines:
 1. Quantizing & Packing the RHS matrix
 2. Quantizing & Packing the LHS matrix
 3. Matrix multiplication
