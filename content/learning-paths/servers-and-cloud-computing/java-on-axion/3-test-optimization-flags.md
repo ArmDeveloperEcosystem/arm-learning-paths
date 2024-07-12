@@ -12,6 +12,25 @@ Now that you've built the Renaissance Benchmark jar, you can use it to test some
 
 In this Learning Path we are using the Renaissance Benchmarks as examples, but if you have an existing Java application that you'd like to optimize, you can perform these steps on your application instead.
 
+## Build the Renaissance Benchmark Suite
+
+The Renaissance Benchmark Suite is an aggregation of common workloads for the JVM. It's maintained by a collaboration of Oracle Labs and several universities around the world. The benchmarks can be used to optimize the JVM software stack, as well as test JVM performance on specific hardware.
+
+To build the benchmark jar, first clone the repo:
+
+```bash
+git clone https://github.com/renaissance-benchmarks/renaissance.git
+```
+
+Then switch to the repo directory and run the build:
+
+```bash
+cd renaissance
+tools/sbt/bin/sbt renaissancePackage
+```
+
+The jar will be built in the `target` directory. We will use this jar in the next section.
+
 ### Running the kmeans benchmark
 
 *k*-means is a very commonly used clustering algorithm. There's an implementation built in to the Renaissance Benchmarks called scala-kmeans. We'll be using the scala-kmeans benchmark here as an example, but there are many different kinds of big data, machine-learning, and functional programming benchmarks included in the Renaissance suite. A list of them can be found on the (Renaissance docs page)[https://renaissance.dev/docs].
@@ -51,13 +70,6 @@ On a the `c4a-standard-2` instance running Ubuntu 24.04 with JDK 21, this should
 ```
 Average duration (ns): 116.159
 ```
-
-### Comparing benchmarks to the equivalent x86 instance
-
-When run on the x86 equivalent Google Cloud instance, `c4-standard-2`, this benchmark takes approximately 10% longer to run. You can verify this yourself by spinning up a `c4-standard-2` instance and setting up the environment identically to your Axion environment.
-
-TODO finish some additional benchmark comparisons
-
 
 ### Try some optimizations
 

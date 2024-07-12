@@ -1,21 +1,17 @@
 ---
 next_step_guidance: PLACEHOLDER TEXT 1
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/gcp/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
-        type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: Exploring JVM Tuning Flags
+        link: https://www.baeldung.com/jvm-tuning-flags
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+        title: The java Command 
+        link: https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html
+        type: blog
 
 
 # ================================================================================
