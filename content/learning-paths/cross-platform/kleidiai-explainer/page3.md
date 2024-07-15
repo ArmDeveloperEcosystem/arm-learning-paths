@@ -260,4 +260,8 @@ If you navigate to the [/kleidiai/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_q
 Different ML workloads and models have a varying performance across the KleidiAI matmul variants. Your ML framework selects the correct micro-kernel to maximize workload performance.
 
 ## KleidiAI enhances AI workload performance
-You now have an understanding of how KleidiAI accelerates matrix multiplication, and ultimately how GenAI models can run efficiently on Arm CPUs from servers to smartphones. To view the performance increases KleidiAI delivers in real-world applications you can reference the [KleidiAI announcement blog](https://newsroom.arm.com/blog/arm-kleidi).
+You now have an understanding of how KleidiAI accelerates matrix multiplication, and ultimately how GenAI models can run efficiently on Arm CPUs from servers to smartphones.
+
+Integrating KleidiAI to software frameworks is leading to significant performance boosts in real world generative AI workloads. For instance, Meta’s Llama 3 and Microsoft’s Phi-3 LLMs experience a 190 percent faster time-to-first token on the new [Arm Cortex-X925 CPU](https://newsroom.arm.com/blog/armv9-cpus-consumer-devices). Additionally, KleidiAI improved the time-to-first token for Gemma 2B on the Google Pixel 8 Pro by 25 percent.
+
+
