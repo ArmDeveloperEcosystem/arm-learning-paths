@@ -9,7 +9,9 @@ layout: learningpathall
 ## High-level KleidiAI architecture
 This section provides an abstracted overview of KleidiAI's components before diving into the specifics. The KleidiAI source files are publicly accessible in the [KleidiAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai). Navigate there in your web browser to follow along and discover KleidiAI's structure.
 
-KleidiAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; navigate there now. There are essentially two types of KleidiAI micro-kernels today:
+KleidiAI's micro-kernels are located in the `/kai/ukernels/matmul` directory; navigate there now. 
+
+There are essentially two types of KleidiAI micro-kernels today:
 1. Quantizing/Packing routines    - under the `pack` directory.
 2. Matrix Multiplication routines - the three directories with the prefix `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
@@ -29,10 +31,10 @@ KleidiAI currently has three matrix multiplication directories that each handle 
 
 ### How to select the right KleidiAI micro-kernel?
 
-Only one matrix multiply micro-kernel will be used for your given AI application. Each AI model and workload (for example using a [Gemma](https://huggingface.co/blog/gemma) model running text generation), has unique inference characteristics. KleidiAI has various matrix multiplication micro-kernel routines to optimize the inference speed of different workloads. The ML Framework provider selects the optimal micro-kernel on your behalf when implementing KleidiAI in their framework. No extra effort is required when using a framework with KleidiAI.
+Only one matrix multiply micro-kernel is used for your given AI application. Each AI model and workload (for example using a [Gemma](https://huggingface.co/blog/gemma) model running text generation), has unique inference characteristics. KleidiAI has various matrix multiplication micro-kernel routines to optimize the inference speed of different workloads. The ML Framework provider selects the optimal micro-kernel on your behalf when implementing KleidiAI in their framework. No extra effort is required when using a framework with KleidiAI.
 
 ## KleidiAI in a real-world example 
-Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro-kernels interact with an GenAI model and ML Framework at a high-level. The steps below describe in words how KleidiAI speeds up matrix multiplication. The example is of a user asking a chatbot app a question on their smartphone. This is the example application stack to analyze:
+Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro-kernels interact with a GenAI model and a ML Framework at a high-level. The steps below describe how KleidiAI speeds up matrix multiplication. The example is of a user asking a chatbot app a question on their smartphone. This is the example application stack to analyze:
 
 ![KleidiAI in Stack](sw-stack.png "KleidiAI in a real-world software stack.")
 
@@ -40,7 +42,7 @@ Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro
 
 #### Stage 1: Input
 * **A user** inputs their question into the chatbot, such as "What is the capital of the United States?"
-* **The chatbot app** uses MediaPipe to convert that text into a series of tokens representing the question as a matrix of FP16 numbers (as the Gemma-2b model is in FP16 format). 
+* **The chatbot app** uses MediaPipe to convert that text into a series of tokens representing the question as a matrix of FP16 numbers (the Gemma-2b model is in FP16 format). 
 * **MediaPipe** invokes the large language model (LLM) inference with the tokenized input, feeding it into the first neural network layer of the Gemma-2b model.
 * **XNNPack** starts executing the inference, managing the mathematical operations inside the LLM's neural network layers. 
 * **KleidiAI** is called to accelerate the essential matrix multiplication operations propagating the input through the neural network.
@@ -61,29 +63,29 @@ Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro
 * **The chatbot app** receives these tokens from MediaPipe and displays the answer to the user as it streams in from multiple inferences. 
 * **The user** sees the answer on the screen: “The capital of the USA is Washington, D.C.”
 
+{{% notice Note %}}
+This is a brief overview, but is helpful to help you understand how KleidiAI interacts with ML Frameworks and Generative AI models.
+{{% /notice %}}
 
-Note that this overview leaves out details for the sake of brevity, but is helpful for a conceptual understanding of how KleidiAI interacts with ML Frameworks and Generative AI models.
 
-There are several nuances on the above process that will help you understand KleidiAI better.
+There are further details and nuances to these processes that will help you understand KleidiAI better.
 
 
 ### Why are model weights quantized to INT4, and inputs quantized to INT8?
 KleidiAI optimizes for a balance of size, accuracy, and execution speed.
 
-Model weights can be quantized down to INT4 without inducing large errors because after training, weights typically stay within a range suitable for INT4 quantization. Furthermore, model sizes are halved by selecting INT4 over INT8 or FP16 quantization, a significant benefit to both memory storage and throughput (especially critical when deploying to constrained devices like smartphones).
+Model weights can be quantized down to INT4 without inducing large errors because after training, weights typically stay within a range suitable for INT4 quantization. Furthermore, model sizes are halved by selecting INT4 over INT8 or FP16 quantization, a significant benefit to both memory storage and throughput - especially critical when deploying to constrained devices like smartphones.
 
-In contrast, neural network activations (described as 'inputs' so far) are highly variable and not as evenly distributed across the full data range. For example, a common activation function - ReLU - outputs zero for any negative input and leaves any positive input unchanged. This results in a number distribution with many small values but also occasional large values. Having only 16 distinct values (from INT4 quantization) would result in large quantization errors. 
+In contrast, neural network activations (described as 'inputs' so far) are highly variable and not as evenly distributed across the full data range. For example, a common activation function - ReLU - outputs zero for any negative input and leaves any positive input unchanged. This results in a number distribution with many small values but also occasional large values. Having only 16 distinct values (from INT4 quantization) results in large quantization errors. 
 
-As a result, KleidiAI strategically selected INT4 quantization for model parameters and INT8 for inputs propagating through the neural network. 
+As a result, KleidiAI strategically-selected INT4 quantization for model parameters and INT8 for inputs propagating through the neural network. 
 
-{{% notice What AI model size should you select %}}
+### Which AI model size should I select? 
 Most models are trained in FP32 or FP16 formats and are by default available to download at that size. To realize the benefits of lower memory footprint, select a pre-quantized version of your desired AI model, ideally in INT4 format. You can quantize models yourself through various tools, but the quickest and easiest way is to locate a pre-quantized version of the same model.
 
-KleidiAI supports matrix multiplication of models across FP32, FP16, INT8, and INT4 formats - your ML framework provider will select the optimal KleidiAI micro-kernel to balance inference speed and accuracy for your use-case. 
+KleidiAI supports matrix multiplication of models across FP32, FP16, INT8, and INT4 formats. Your ML framework provider selects the optimal KleidiAI micro-kernel to balance inference speed and accuracy for your use case. 
 
-In short, it is highly recommended to select an INT4 pre-quantized model when inference speed is critical, and especially on smartphones / edge devices.
-{{% /notice %}}
-
+In short, it is recommended that you select an INT4 pre-quantized model when inference speed is critical, and especially on constrained devices like smartphones.
 
 
 ### Why does KleidiAI need to 'pack' before matrix multiplication?
@@ -91,6 +93,6 @@ The goal of KleidiAI's packing micro-kernels is to prepare the incoming matrices
 
 For example, the *SMMLA* instruction operates on 8-bit numbers. The role of packing after quantization is to organize two 4-bit integers into a single 8-bit memory space, and the *SMMLA* instructions are handwritten to efficiently operate on the two packed integers at once.
 
-The power of KleidiAI comes from its deep understanding of AI workload requirements, quantization techniques, data packing strategies, and advanced Arm instructions combining to squeeze the most performance out of AI models on Arm CPUs.
+The power of KleidiAI stems from its deep understanding of AI workload requirements, quantization techniques, data packing strategies, and advanced Arm instructions, which combine to accelerate and optimize the performance of AI models on Arm CPUs.
 
-The next section dives into the technical specifics of how KleidiAI delivers these performance uplifts by stepping through a C++ example.
+The next section dives into the technical details of how KleidiAI delivers these performance uplifts by stepping through a C++ example.

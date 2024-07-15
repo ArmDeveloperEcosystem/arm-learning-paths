@@ -33,7 +33,7 @@ For example, in the image below, *z1* is calculated as a dot product of connecte
 In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training, and make up a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what the model learned during training. Generally speaking, the higher the number of parameters a model has, the more information it can retain from its training, which increases its performance capability. For more information about Llama 3 view its [Hugging Face model card](https://huggingface.co/meta-llama/Meta-Llama-3-8B).
 
 ### Why is speeding up matrix multiplication crucial for AI performance?
-What does this all mean? An 8 billion parameter model generating one token requires billions of dot product calculations, with at least hundreds of millions of matrix multiplication operations. Speeding up matrix multiplication is therefore a critical piece to both running massive Generative AI models on servers and smaller-model constrained devices, like smartphones.
+What does this all mean? An 8-billion parameter model generating one token requires billions of dot product calculations, with at least hundreds of millions of matrix multiplication operations. Speeding up matrix multiplication is therefore a critical piece to both running massive Generative AI models on servers and smaller-model constrained devices, like smartphones.
 
 KleidiAI uses modern Arm CPU instructions to accelerate matrix multiplication and overall AI inference.
 
@@ -49,6 +49,7 @@ Each KleidiAI matrix multiplication micro-kernel uses a specific Arm architectur
 * **FMOPA**: This instruction stands for *Floating-point outer product and accumulate*. It is included in the Arm Scalable Vector Extension 2 (SVE2). The single precision `FMOPA` variant enables optimized matrix multiplication on 32-bit numbers. View the `FMOPA` documentation [here](https://developer.arm.com/documentation/ddi0602/2023-12/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en).
 
 Today, Arm-powered hardware containing these instructions exist in cloud servers and smartphones. Here are some examples of the first products from popular vendors that support KleidiAI:
+
 
 | Area        | Example Product     | Arm-based SoC      | Arm Architecture  |
 | ---------   | -----------------   | ----------------   | ----------- |
