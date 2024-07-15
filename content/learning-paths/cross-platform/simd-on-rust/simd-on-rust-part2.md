@@ -157,6 +157,7 @@ fn sad_vec(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
             return unsafe { sad_vec_asimd(a, b, w, h) };
         }
     }
+    // Scalar implementation should be included here as fallback
     return 0
 }
 

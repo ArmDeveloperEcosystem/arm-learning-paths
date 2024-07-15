@@ -327,6 +327,7 @@ fn fdct4x4_vec(input: &[i16], output: &mut [i16], stride: usize) -> () {
             return unsafe { fdct4x4_vec_asimd(input, output, stride) };
         }
     }
+    // Scalar implementation should be included here as fallback
 }
 
 unsafe fn fdct4x4_vec_asimd(input: &[i16], output: &mut [i16], stride: usize) -> () {

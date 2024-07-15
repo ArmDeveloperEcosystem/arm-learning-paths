@@ -146,6 +146,7 @@ fn transpose_s16_4x4(a: &mut [i16]) -> () {
             return unsafe { transpose_s16_4x4_asimd(a) };
         }
     }
+    // Scalar implementation should be included here as fallback
 }
 
 #[cfg(target_arch = "aarch64")]
