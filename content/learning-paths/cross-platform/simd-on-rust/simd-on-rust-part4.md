@@ -98,21 +98,6 @@ static inline void butterfly_one_coeff_half(const int16x4_t a,
   *sub = vqrshrn_n_s32(diff, DCT_CONST_BITS);
 }
 
-// fdct_round_shift((a +/- b) * c)
-// Variant that performs normal implementation on half vector
-// more accurate does 32-bit processing, takes and returns 16-bit values
-// returns narrowed results
-static inline void butterfly_one_coeff_half(const int16x4_t a,
-                                            const int16x4_t b,
-                                            const int16_t c,
-                                            int16x4_t *add, int16x4_t *sub) {
-  const int32x4_t a32 = vmull_n_s16(a, c);
-  const int32x4_t sum = vmlal_n_s16(a32, b, c);
-  const int32x4_t diff = vmlsl_n_s16(a32, b, c);
-  *add = vqrshrn_n_s32(sum, DCT_CONST_BITS);
-  *sub = vqrshrn_n_s32(diff, DCT_CONST_BITS);
-}
-
 // fdct_round_shift(a * c1 +/- b * c2)
 // Variant that performs normal implementation on half vector
 // more accurate does 32-bit processing, takes and returns 16-bit values
