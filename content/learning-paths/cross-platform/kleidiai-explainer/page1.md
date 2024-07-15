@@ -7,30 +7,30 @@ layout: learningpathall
 ---
 ## What is KleidiAI?
 
-KleidiAI is a set of micro-kernels that integrates into machine learning frameworks, accelerating your AI inference on Arm-based platforms. KleidiAI's micro-kernels are hand-optimized in Arm assembly code to leverage modern architecture instructions that greatly speed up AI inference on Arm CPUs. 
+KleidiAI is a set of micro-kernels that integrates into machine learning frameworks, accelerating AI inference on Arm-based platforms. KleidiAI's micro-kernels are hand-optimized in Arm assembly code to leverage modern architecture instructions that greatly speed up AI inference on Arm CPUs. 
 
-Without the need for further action, you can benefit from KleidiAI automatically, if both of these two conditions are met:
+If both of the following two conditions are met, you can benefit from KleidiAI automatically, without any further action:
 * Your ML Framework integrates KleidiAI.
 * Your hardware platform supports the required Arm instructions for your inference.
 
 ### How does Generative AI execute mathematically in hardware?
 
-{{% notice Quote %}}
+{{% notice Quote%}}
 “Any sufficiently advanced technology is indistinguishable from magic” - Arthur C. Clarke
 {{% /notice %}}
 
-In the case of Generative AI models today, the math behind the perceived magic is *matrix multiplication*. To help you grasp this concept, and better understand KleidiAI, this section offers a high-level explanation of neural network architecture.
+The math behind the perceived magic of the Generative AI models today is *matrix multiplication*. To help you grasp this concept, and better understand KleidiAI, this section offers a high-level explanation of neural network architecture.
 
-Neural networks consist of layers of neurons. Each neuron in a layer is connected to all neurons in the previous layer. Each of these connections has a unique connection strength, learned through training. This is called a connection's *weight*. 
+Neural networks consist of layers of neurons. Each neuron in a layer is connected to all the neurons in the previous layer. Each of these connections has a unique connection strength, learned through training. This is called a connection's *weight*. 
 
-During inference, such as trying to generate the next *token* or *word* with a given input, each neuron performs a weighted sum of inputs, and then decides its value through an activation function. The weighted sum is the dot product of each connected neuron's input (*x*) and its connection weight (*w*). A layer of neuron's calculations can be efficiently calculated through matrix multiplication, where the input matrix is multiplied by the weight matrix. 
+During inference, such as when trying to generate the next *token* or *word* with a given input, each neuron performs a weighted sum of inputs, and then decides its value through an activation function. The weighted sum is the dot product of each connected neuron's input (*x*) and its connection weight (*w*). A layer of neuron's calculations can be efficiently calculated through matrix multiplication, where the input matrix is multiplied by the weight matrix. 
 
-For example, in the image below, *z1* is calculated as a dot product of connected *x*s and *w*s from the previous layer. All *z* values in Layer 0 can therefore be efficiently calculated with a matrix multiplication operation.
+For example, in the image below, *z1* is calculated as a dot product of connected *x*s and *w*s from the previous layer. A matrix multiplication operation can therefore efficiently calculate all *z* values in Layer 0.
 
 ![Neural Network example#center](neural-node-pic.jpg "Zoomed-in neural network node.")
 
 
-In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training and constitute a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what it learned during training. Generally speaking, the higher the number of parameters a model has, the more information it can retain from its training, leading to more capable models. For more information about Llama 3 view its [Hugging Face model card](https://huggingface.co/meta-llama/Meta-Llama-3-8B).
+In addition to *weights*, each neuron in a neural network is assigned a *bias*. These weights and biases are learned during training, and make up a model's parameters. For example, in the Llama 3 model with 8 billion parameters, the model has around 8 billion individual weights and biases that embody what the model learned during training. Generally speaking, the higher the number of parameters a model has, the more information it can retain from its training, which increases its performance capability. For more information about Llama 3 view its [Hugging Face model card](https://huggingface.co/meta-llama/Meta-Llama-3-8B).
 
 ### Why is speeding up matrix multiplication crucial for AI performance?
 What does this all mean? An 8 billion parameter model generating one token requires billions of dot product calculations, with at least hundreds of millions of matrix multiplication operations. Speeding up matrix multiplication is therefore a critical piece to both running massive Generative AI models on servers and smaller-model constrained devices, like smartphones.
