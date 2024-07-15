@@ -22,6 +22,17 @@ review:
         correct_answer: 1                   
         explanation: >
             Once your ML framework adopts KleidiAI, you will automatically see AI workload acceleration on supported machines.
+          
+    - questions:
+        question: >
+            Which operation forms the foundation of deep neural network/GenAI computations?
+        answers:
+            - Matrix multiplication.
+            - Exponentials.
+            - Bit shifting. 
+        correct_answer: 1                   
+        explanation: >
+            Matrix multiplication is the mathematical basis of deep neural network/GenAI computations. 
 
 
 
