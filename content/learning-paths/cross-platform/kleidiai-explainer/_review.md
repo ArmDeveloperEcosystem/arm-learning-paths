@@ -2,16 +2,16 @@
 review:
     - questions:
         question: >
-            What devices does KleidiAI NOT work on?
+            Which of these devices does KleidiAI NOT work on?
         answers:
-            - AWS Graviton 3 (C7g, M7g, R7g)
-            - NVIDIA Grace (GB200 NVL72)
-            - Google Pixel 8 Pro
-            - Vivo Y22
-            - It runs on all of these
+            - AWS Graviton 3 (C7g, M7g, R7g).
+            - NVIDIA Grace (GB200 NVL72).
+            - Google Pixel 8 Pro.
+            - Vivo Y22.
+            - This is a trick question! It runs on all of these.
         correct_answer: 5                    
         explanation: >
-            KleidiAI runs on all of the above devices lists and more.
+            KleidiAI runs on all of these devices.
 
     - questions:
         question: >
@@ -22,6 +22,17 @@ review:
         correct_answer: 1                   
         explanation: >
             Once your ML framework adopts KleidiAI, you will automatically see AI workload acceleration on supported machines.
+          
+    - questions:
+        question: >
+            Which operation forms the foundation of deep neural network/GenAI computations?
+        answers:
+            - Matrix multiplication.
+            - Exponentials.
+            - Bit shifting. 
+        correct_answer: 1                   
+        explanation: >
+            Matrix multiplication is the mathematical basis of deep neural network/GenAI computations. 
 
 
 
