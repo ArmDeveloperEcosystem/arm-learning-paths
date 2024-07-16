@@ -12,7 +12,7 @@ learning_objectives:
     - Compare the pre-quantized Llama 2 model weights performance to the re-quantized weights on your Arm CPU
 
 prerequisites:
-    - An an AWS Graviton3 c7g.2xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+    - An AWS Graviton3 c7g.2xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author_primary: Pareena Verma, Jason Andrews, and Zach Lasiuk
 
