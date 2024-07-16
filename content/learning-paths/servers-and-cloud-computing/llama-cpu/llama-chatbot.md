@@ -158,7 +158,7 @@ Some examples:
 
 Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies are outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter.
 
-In this guide, we will not be using any alternative quantization methods, because Arm has not made kernel optimizations for alternative quantization types.
+In this guide, you will not use any other quantization methods, because Arm has not made kernel optimizations for other quantization types.
 
 ## Re-quantize the model weights
 
