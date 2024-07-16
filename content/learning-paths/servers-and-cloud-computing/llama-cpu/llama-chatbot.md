@@ -162,13 +162,13 @@ In this guide, we will not be using any alternative quantization methods, becaus
 
 ## Re-quantize the model weights
 
-To see improvements for Arm optimized kernels, we need to generate a new weights file with rearranged Q4_0 weights. As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for three types of GEMV/GEMM kernels corresponding to three processor types:
+To see improvements for Arm optimized kernels, you need to generate a new weights file with rearranged Q4_0 weights. As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for three types of GEMV/GEMM kernels corresponding to three processor types:
 
-* Graviton2, where we only have NEON support (we see less improvement for these GEMV/GEMM kernels),
-* Graviton3, where our GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
-* Graviton4, where our GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8
+* AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels),
+* AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
+* AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support
 
-Currently the largest performance improvement is seen in Graviton3, which is where we'll focus this guide.
+Currently the largest performance improvement is seen in Graviton3 instances, which is the focus of this guide.
 
 To re-quantize optimally for Graviton3, run
 
@@ -176,7 +176,7 @@ To re-quantize optimally for Graviton3, run
 ./llama-quantize --allow-requantize llama-2-7b-chat.Q4_0.gguf llama-2-7b-chat.Q4_0_8_8.gguf Q4_0_8_8
 ```
 
-This will output a new file, `llama-2-7b-chat.Q4_0_8_8.gguf`, which contains reconfigured weights that allow llama-cli to use SVE 256 and MATMUL_INT8 support.
+This will output a new file, `llama-2-7b-chat.Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
 
 {{% notice Note %}} 
 This requantization is optimal only for Graviton3. For Graviton2, requantization should optimally be done in `Q4_0_4_4` format, and for Graviton4, `Q4_0_4_8` is the optimal requantization format. 
