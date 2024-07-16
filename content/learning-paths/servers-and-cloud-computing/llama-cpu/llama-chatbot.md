@@ -162,7 +162,7 @@ In this guide, we will not be using any alternative quantization methods, becaus
 
 ## Re-quantize the model weights
 
-To see improvements for Arm optimized kernels, we need to generate a new weights file with rearranged Q4_0 weights. As of llama.cpp commit 0f1a39f3, Arm has contributed code for three types of GEMV/GEMM kernels corresponding to three processor types:
+To see improvements for Arm optimized kernels, we need to generate a new weights file with rearranged Q4_0 weights. As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for three types of GEMV/GEMM kernels corresponding to three processor types:
 
 * Graviton2, where we only have NEON support (we see less improvement for these GEMV/GEMM kernels),
 * Graviton3, where our GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
