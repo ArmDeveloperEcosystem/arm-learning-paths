@@ -6,11 +6,15 @@ weight: 2
 layout: learningpathall
 ---
 
-## Option 1: Run a docker container with dependencies pre-installed
+## Install dependencies
 
-You can use the Dockerfile included in this learning path and build a Docker image that contains all the requirements for running this learning path. If you would like to install the dependencies yourself, please jump to [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
+There are two options outlined in this learning path to install the dependencies. Click on the option of your choice:
 
-#### Build the Docker image
+  * [Option 1: Build a Docker container with the dependencies](#option-1-build-a-docker-container-with-the-dependencies).
+  * [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
+
+#### Option 1: Build a Docker container with the dependencies
+Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
 Use a file editor of your choice and save the following lines in a file named `Dockerfile`:
 
@@ -67,14 +71,14 @@ docker run -it --rm ubuntu-x86 /bin/bash
 
 You can now jump to [testing your setup](#test-your-setup).
 
-## Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
+#### Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
 
-In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local Ubuntu development environment:
+In order to cross-compile the inference engine, you will need the following packages installed or downloaded on your Ubuntu development machine:
 
 * Package Installer for Python (pip)
 * JDK
 * Bazel
-* MediaPipe Github repo
+* MediaPipe Github repository
 * MediaPipe Python package requirements
 * Android NDK v25, with configurations
 * Android SDK
@@ -82,6 +86,7 @@ In order to cross-compile your inference engine, you'll need the following insta
 #### Install pip3
 
 ```bash
+sudo apt update
 sudo apt install unzip python3-pip -y
 ```
 
@@ -106,7 +111,7 @@ wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-6.1.1-ins
 sudo bash bazel-6.1.1-installer-linux-x86_64.sh
 ```
 
-#### Clone the MediaPipe repo
+#### Clone the MediaPipe repository
 
 
 ```bash
