@@ -10,23 +10,12 @@ review:
         correct_answer: 3                    
         explanation: >
             Performance improvements are only noticeable in the mixed int4/int8 benchmarks. These improvements are due to more efficient use of the Arm i8mm instructions when using int4 quantization.
-
-    - questions:
-        question: >
-            How does KleidiAI achieve better performance with int4 quantization?
-        answers:
-            - By using the i4mm processor feature
-            - By packing two int4 weights into a single 8-bit memory space
-            - By using float32 instead of int4
-        correct_answer: 2                   
-        explanation: >
-            KleidiAI packs int4 weights into a single 8-bit memory space in order to better use the Arm int8 matrix multiply instructions.
                
     - questions:
         question: >
             What is MediaPipe?
         answers:
-            - A cross-platform framework from Google used for building multimodal applied ML pipelines
+            - A cross-platform framework from Google AI Edge used for building multimodal applied ML pipelines
             - A library for efficient matrix multiplication on Arm processors
             - A tool for quantizing machine learning models
         correct_answer: 1          
