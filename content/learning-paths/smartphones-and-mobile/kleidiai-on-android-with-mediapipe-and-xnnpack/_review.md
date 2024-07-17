@@ -22,7 +22,7 @@ review:
         explanation: >
             MediaPipe abstracts away low-level details when building ML pipelines, allowing developers to quickly build and iterate on multimodal AI applications.
 
-- questions:
+    - questions:
         question: >
             Does Android NDK r21 include support for i8mm instructions?
         answers:
