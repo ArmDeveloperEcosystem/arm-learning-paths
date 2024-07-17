@@ -1,5 +1,5 @@
 ---
-title: Run the Gemma 2B model using Google MediaPipe with XNNPACK
+title: Run the Gemma 2B model using MediaPipe with XNNPACK
 weight: 3
 
 ### FIXED, DO NOT MODIFY
