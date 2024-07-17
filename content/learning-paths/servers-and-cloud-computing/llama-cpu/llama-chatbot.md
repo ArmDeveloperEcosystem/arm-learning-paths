@@ -156,7 +156,7 @@ Some examples:
 * IQ2_XXS --> I-quant method (indicated with _IQ), with the _XXS quantization mix type used.
 * F16  --> Using a 16 bit floating point number per parameter (no other quantization method used, only rounding a number if starting from a 32 bit floating point number).
 
-Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies are outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter.
+Each quantization method has a unique approach to quantizing parameters. The deeper technical details of different quantization methodologies are outside the scope of this guide. The main takeaway is that selecting the right model quantization is critical to running an LLM effectively on your hardware, and the most impactful quantization decision is the number of bits per parameter.You will need also need to check you have enough system memory before deploying larger models or models with higher precision/quantization. 
 
 In this guide, you will not use any other quantization methods, because Arm has not made kernel optimizations for other quantization types.
 
@@ -167,8 +167,6 @@ To see improvements for Arm optimized kernels, you need to generate a new weight
 * AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels),
 * AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
 * AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support
-
-Currently the largest performance improvement is seen in Graviton3 instances, which is the focus of this guide.
 
 To re-quantize optimally for Graviton3, run
 
