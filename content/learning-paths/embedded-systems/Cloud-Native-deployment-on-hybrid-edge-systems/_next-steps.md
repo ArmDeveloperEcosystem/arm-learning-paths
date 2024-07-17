@@ -13,8 +13,8 @@ further_reading:
         link: PLACEHOLDER BLOG LINK
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: Hybrid-runtime GitHub page 
+        link: https://github.com/smarter-project/hybrid-runtime/tree/main
         type: website
 
 
