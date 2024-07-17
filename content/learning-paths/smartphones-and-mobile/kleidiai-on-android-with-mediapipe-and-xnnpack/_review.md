@@ -22,6 +22,16 @@ review:
         explanation: >
             MediaPipe abstracts away low-level details when building ML pipelines, allowing developers to quickly build and iterate on multimodal AI applications.
 
+    - questions:
+        question: >
+            Does Android NDK r21 include support for i8mm instructions?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 2
+        explanation: >
+            Android NDK r21 does not have suipport for i8mm instructions. You will need to use Android NDK r25 to add support for it in your builds.
+
 
 
 # ================================================================================

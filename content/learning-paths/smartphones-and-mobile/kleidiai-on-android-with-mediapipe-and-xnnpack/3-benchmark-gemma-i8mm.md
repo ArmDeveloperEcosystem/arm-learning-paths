@@ -1,5 +1,5 @@
 ---
-title: Benchmark the Gemma 2B Model using Android NDK r25 with and without KleidiAI
+title: Benchmark the Gemma 2B Model with KleidiAI
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Test inference engine performance with and without i8mm and KleidiAI
 
-Recently Arm has created a set of micro-kernels called [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. Arm has worked with Google to integrate KleidiAI into the MediaPipe AI framework through XNNPACK. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
+Recently Arm has created a set of micro-kernels called [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. Arm has worked with the Google AI Edge team to integrate KleidiAI into the MediaPipe framework through XNNPACK. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
 
 In this step, you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will give you an understanding of the performance gains attained by using KleidiAI micro-kernels.
 
@@ -112,7 +112,9 @@ And replace with this line:
 ```
 std::string, benchmark_method, "encode",
 ```
-#### Build and run llm_test without i8mm and KleidiAI
+#### Build and run llm_test 
+
+You can now build the `llm_test` executable. First, lets build without including support for i8mm and KleidiAI:
 
 ```bash
 bazel build -c opt --config=android_arm64 --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
@@ -195,7 +197,7 @@ As you might expect, this will take ten times as long to run, but will give you 
 
 #### Build and run llm_test with i8mm and KleidiAI
 
-Rebuild `llm_test` but this time with the i8mm flag enabled:
+You can now rebuild `llm_test`, but this time with the i8mm flag enabled:
 
 ```bash
 bazel build -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
