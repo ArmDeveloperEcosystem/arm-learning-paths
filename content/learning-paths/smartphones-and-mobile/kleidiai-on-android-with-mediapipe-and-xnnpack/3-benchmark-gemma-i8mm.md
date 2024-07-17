@@ -252,6 +252,6 @@ And as in the previous section, if you want to run multiple times and get a coef
 ./llm_test --benchmark_repetitions=10
 ```
 
-As you can see by comparing this output to the output in the previous section, these performance improvements are only noticeable in the mixed int4/int8 benchmarks. These improvements are due to more efficient use of the Arm i8mm instructions when using int4 quantization, by packing two int4 weights into a single 8-bit memory space. This allows KleidiAI to get more performance out of the i8mm processor feature.
+As you can see by comparing this output to the output in the previous section, the performance improvements are noticeable in the mixed int4/int8 benchmarks. By taking advantage of the KleidiAI micro-kernels, you are able to get more performance out of the i8mm processor feature.
 
-If you'd like to learn more about KleidiAI, please check out the [KleidiAI announcement blog post](https://newsroom.arm.com/blog/arm-kleidi).
+If you would like to learn more about KleidiAI Integration with MediaPipe, please check out this [KleidiAI blog post](https://newsroom.arm.com/blog/kleidiai-integration-mediapipe).
