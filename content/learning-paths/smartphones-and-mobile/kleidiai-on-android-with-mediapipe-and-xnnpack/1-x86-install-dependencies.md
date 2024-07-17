@@ -73,12 +73,12 @@ You can now jump to [testing your setup](#test-your-setup).
 
 #### Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
 
-In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local Ubuntu development environment:
+In order to cross-compile the inference engine, you will need the following packages installed or downloaded on your Ubuntu development machine:
 
 * Package Installer for Python (pip)
 * JDK
 * Bazel
-* MediaPipe Github repo
+* MediaPipe Github repository
 * MediaPipe Python package requirements
 * Android NDK v25, with configurations
 * Android SDK
