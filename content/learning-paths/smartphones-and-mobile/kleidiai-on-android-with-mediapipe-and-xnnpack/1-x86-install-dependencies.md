@@ -71,7 +71,7 @@ docker run -it --rm ubuntu-x86 /bin/bash
 
 You can now jump to [testing your setup](#test-your-setup).
 
-## Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
+#### Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
 
 In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local Ubuntu development environment:
 
