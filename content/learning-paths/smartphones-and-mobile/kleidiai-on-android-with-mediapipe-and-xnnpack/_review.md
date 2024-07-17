@@ -15,7 +15,7 @@ review:
         question: >
             What is MediaPipe?
         answers:
-            - A cross-platform framework from Google used for building multimodal applied ML pipelines
+            - A cross-platform framework from Google AI Edge used for building multimodal applied ML pipelines
             - A library for efficient matrix multiplication on Arm processors
             - A tool for quantizing machine learning models
         correct_answer: 1          
