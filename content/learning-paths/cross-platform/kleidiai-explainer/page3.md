@@ -7,33 +7,38 @@ layout: learningpathall
 ---
 
 ## KleidiAI GitLab Repo
-This section will probe into the intricate details of what KlediAI is doing and how it is beneficial to AI performance optimization. Navigate to the [KlediAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai) and view the [example file](https://gitlab.arm.com/kleidi/kleidiai/-/blob/main/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/matmul_clamp_f32_qai8dxp_qsi4cxp.cpp?ref_type=heads) you will be running. This example highlights the *i8mm* matrix multiplication micro-kernel, alongside the enabling packing/quantization micro-kernels.
+This section probes the intricate details of what KlediAI is doing and how it is beneficial to AI performance optimization. 
 
-**Note:** This example is intended to illustrite KleidiAI microkernel performance. In practice you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically if supported. 
+Navigate to the [KlediAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai) and view the [example file](https://gitlab.arm.com/kleidi/kleidiai/-/blob/main/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/matmul_clamp_f32_qai8dxp_qsi4cxp.cpp?ref_type=heads) that you will be running. This example highlights the *i8mm* matrix multiplication micro-kernel, alongside the enabling packing/quantization micro-kernels.
 
-The example code is structured to take in two matricies and compare KleidiAI's micro-kernel results to a reference implementation. This reference code is functionally identical to KleidiAI's micro-kernels, and is present for two reasons:
-1. To check for KleidiAI micro-kernel output validity as a sanity check, and
-2. To explain how KleidiAI micro-kernels work. The implementation within KleidiAI's micro-kernels use hand-optimized C and Arm Assembly code, naturally being difficult to interpret.
+{{% notice Note %}}This example illustrates KleidiAI microkernel performance. In practice, you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically, if supported.{{% /notice %}} 
+
+The example code is structured to take in two matricies and compare KleidiAI's micro-kernel results to a reference implementation. 
+
+This reference code is functionally-identical to KleidiAI's micro-kernels, and is present for two reasons:
+1. To check for KleidiAI micro-kernel output validity as a sanity check.
+2. To explain how KleidiAI micro-kernels work. The implementation within KleidiAI's micro-kernels use hand-optimized C and Arm Assembly code, which can be difficult to interpret.
 
 
 ## Build and Run the KleidiAI C++ example (i8mm micro-kernel)
 
-Follow these steps to build and run the KleidiAI library and example script reviewing the:
+Follow these steps to build and run the KleidiAI library and example script:
 
-1. Create an Ubuntu 24.04 Arm Linux machine on an AWS EC2 instance. For more details view the Learning Path on [setting up AWS EC2 Graviton instances](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/). Use an M7g-medium instance type, which uses the Graviton 3 SoC supporting the *i8mm* Arm architecture feature. The 1 CPU and 4 GB of RAM in the M7g-medium are sufficient for this basic example run.
+1. Create an Ubuntu 24.04 Arm Linux machine on an AWS EC2 instance. 
+For more details view the Learning Path on [setting up AWS EC2 Graviton instances](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/). Use an M7g-medium instance type, which uses the Graviton 3 SoC supporting the *i8mm* Arm architecture feature. The 1 CPU and 4 GB of RAM in the M7g-medium are sufficient for this basic example run.
 
-2. Initialize your system by installing essential packages.
+2. Initialize your system by installing essential packages:
 ```bash
 sudo apt update
 sudo apt install cmake g++ make
 ```
 
-3. Clone the KleidiAI directory to your server.
+3. Clone the KleidiAI directory to your server:
 ```bash
 git clone https://git.gitlab.arm.com/kleidi/kleidiai.git
 ```
 
-4. Build KleidiAI library with CMake. After running these commands you should see a library file named `libkleidiai.a`.
+4. Build KleidiAI library with CMake. After running these commands you should see a library file named `libkleidiai.a`:
 ```bash
 cd kleidiai
 mkdir build
@@ -50,7 +55,9 @@ cd build
 cmake ..
 make
 ```
-If you get an error that looks like `#error "Dotprod and I8mm extensions required to compile this example"` then you'll need to signal to KleidiAI that your machine supports the Dotprod and i8mm extensions. Do this by adding the following add_compile_options line to the `CMakeLists.txt` file in the `/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/` directory:
+If you get an error that looks like `#error "Dotprod and I8mm extensions required to compile this example"` then you need to signal to KleidiAI that your machine supports the Dotprod and i8mm extensions. 
+
+Do this by adding the following add_compile_options line to the `CMakeLists.txt` file in the `/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/` directory:
 
 ```
 cmake_minimum_required(VERSION 3.16)
@@ -67,7 +74,7 @@ add_compile_options(-march=armv8.6-a+dotprod+i8mm)
 Then clear your build directory and build again.
 
 
-6. Run the example. You will see each micro-kernel being tested, followed by confirmation that the reference implementation and KleidiAI's implementation are numerically equal (signalling success).
+6. Run the example. You will see each micro-kernel being tested, followed by confirmation that the reference implementation and KleidiAI's implementation are numerically equal - signalling success!
 ```bash
 ./matmul_clamp_f32_qai8dxp_qsi4cxp
 ```
@@ -86,22 +93,22 @@ TEST[4] = PASSED
 Testing matmul_clamp
 ```
 
-Again, this manual interaction with KleidiAI is for example purposes. In real-world applications your supported ML Framework will handle interfacing with the KleidiAI library.
+Again, this manual interaction with KleidiAI is for demonstration purposes. In real-world applications, your supported ML Framework handles interfacing with the KleidiAI library.
 
-For the rest of this walk-through you will look over the reference kernel functions to understand what KleidiAI is doing before viewing under the hood snippets of hand-coded Arm instructions.
+For the rest of this walk-through, you will look over the reference kernel functions to understand what KleidiAI is doing before viewing under-the-hood snippets of hand-coded Arm instructions.
 
 ## Understand KleidiAI's operation
 
-Next you will look at the KleidiAI's reference implementation in the example file to understand with the micro-kernels do to accelerate AI inference. The reference implementation is easier to understand by looking at the code and functionally equivalent to KleidiAI's actual micro-kernels. Links to KleidiAI's specific micro-kernel routines will also be included.
+Next you will look at the KleidiAI's reference implementation in the example file to understand with the micro-kernels do to accelerate AI inference. The reference implementation is easier to understand by looking at the code and is functionally equivalent to KleidiAI's actual micro-kernels. Links to KleidiAI's specific micro-kernel routines are also included.
 
-We'll look at three main routines:
-1. Quantizing & Packing the RHS matrix
-2. Quantizing & Packing the LHS matrix
-3. Matrix multiplication
+You will now look at the three main routines:
+1. Quantizing & Packing the RHS matrix.
+2. Quantizing & Packing the LHS matrix.
+3. Matrix multiplication.
 
 ### Quantizing & Packing the RHS matrix code (model weights)
 
-Recall that the RHS matrix will be populated by the AI model weights, which will be dynamically quantized to INT4 format (if they are not in that format already). The RHS quantizing and packing function is defined in the example file as this:
+Recall that the RHS matrix is populated by the AI model weights, which are dynamically quantized to INT4 format - if they are not in that format already. The RHS quantizing and packing function is defined in the example file as this:
 ```C
 static void quant_qs4cx_f32(size_t n, size_t k, const float* rhs_f32, uint8_t* rhs_qs4cx, float* rhs_scales_f32)
 ```
@@ -248,9 +255,13 @@ The last step is to convert the result back into the native number format, using
 
 #### KleidiAI micro-kernel variants explained
 
-If you navigate to the [/kleidiai/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp](https://gitlab.arm.com/kleidi/kleidiai/-/tree/main/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp?ref_type=heads) directory where the KleidiAI INT8/INT4 micro-kernel implementation is located, you'll notice multiple variants of the same micro-kernel. The difference between them lies in the in/out matrix processing block size. Instead of performing matrix multiplication on the entire `m`x`k` and `n`x`k` matrices at once, KleidiAI provides matmul variants that perform smaller operations using hand-optimized assembly code. This leads to more efficient matrix multiplication. 
+If you navigate to the [/kleidiai/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp](https://gitlab.arm.com/kleidi/kleidiai/-/tree/main/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp?ref_type=heads) directory where the KleidiAI INT8/INT4 micro-kernel implementation is located, you can see multiple variants of the same micro-kernel. The difference between them lies in the in/out matrix processing block size. Instead of performing matrix multiplication on the entire `m`x`k` and `n`x`k` matrices at once, KleidiAI provides matmul variants that perform smaller operations using hand-optimized assembly code. This leads to more efficient matrix multiplication. 
 
-Different ML workloads and models will perform better/worse across the KleidiAI matmul variants, and the correct micro-kernel will be selected by your ML framework to maximize workload performance.
+Different ML workloads and models have a varying performance across the KleidiAI matmul variants. Your ML framework selects the correct micro-kernel to maximize workload performance.
 
 ## KleidiAI enhances AI workload performance
-You now have an understanding of how KleidiAI accelerates matrix multiplication, and ultimately how GenAI models can run efficiently on Arm CPUs from servers to smartphones. To view the performance increases KleidiAI delivers in real-world applications you can reference the [KleidiAI announcement blog](https://newsroom.arm.com/blog/arm-kleidi).
+You now have an understanding of how KleidiAI accelerates matrix multiplication, and ultimately how GenAI models can run efficiently on Arm CPUs from servers to smartphones.
+
+Integrating KleidiAI to software frameworks is leading to significant performance boosts in real world generative AI workloads. For instance, Meta’s Llama 3 and Microsoft’s Phi-3 LLMs experience a 190 percent faster time-to-first token on the new [Arm Cortex-X925 CPU](https://newsroom.arm.com/blog/arm-kleidi). Additionally, KleidiAI improved the time-to-first token for Gemma 2B on the Google Pixel 8 Pro by 25 percent.
+
+

@@ -1,18 +1,18 @@
 ---
-title: KleidiAI basics - Improving AI/ML workloads from servers to phones
+title: Accelerate Generative AI workloads using KleidiAI 
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for people wanting to learn how Generative AI workloads execute on hardware, and how KleidiAI accelerates it.
+who_is_this_for: This is an introductory topic for developers who want to learn how to use KleidiAI to accelerate the execution of Generative AI workloads on hardware.
 
 learning_objectives: 
-    - Understand how basic math operations power Large Language Models.
-    - Learn how the KleidiAI micro-kernels speed up Generative AI inference performance.
-    - Run a basic C++ matrix multiplication example to showcase the speedup the KleidiAI micro-kernels deliver.
+    - Describe how basic math operations power Large Language Models.
+    - Describe how the KleidiAI micro-kernels speed up Generative AI inference performance.
+    - Run a basic C++ matrix multiplication example to showcase the speedup that KleidiAI micro-kernels can deliver.
     
 prerequisites:
-    - An Arm Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature; this example uses an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
-    - A basic understanding of linear algebra terminology such as dot product and matrix multiplication.
+    - An Arm-based Linux machine that implements the Int8 Matrix Multiplication (*i8mm*) architecture feature. The example in this Learning Path is run on an AWS Graviton 3 instance. Instructions on setting up an Arm-based server are [found here](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
+    - A basic understanding of linear algebra terminology, such as dot product and matrix multiplication.
 
 author_primary: Zach Lasiuk
 ### Tags
