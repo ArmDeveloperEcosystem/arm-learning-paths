@@ -14,7 +14,7 @@ prerequisites:
     - You will need an x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can run a provided x86_64 image.
     - You will need an Android phone with support for i8mm (tested on Google Pixel 8 Pro)
 
-author_primary: Pareena Verma, Joe Stech
+author_primary: Pareena Verma, Joe Stech, Adnan AlSinan
 
 ### Tags
 skilllevels: Advanced
