@@ -1,5 +1,5 @@
 ---
-title: Running the Gemma 2B model using Google MediaPipe with XNNPACK
+title: Run the Gemma 2B model using Google MediaPipe with XNNPACK
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Cross-compile the inference engine for CPU (Android)
 
-Now that you have your environment set up correctly, it's time to build the inference engine. This executable can run an LLM model on an Android device, it will produce an output, given an initial prompt.
+Now that you have your environment set up correctly, you can build the inference engine. This executable can run an LLM model on an Android device, it will produce an output, given an initial prompt.
 
 Build the inference tool using this command:
 
@@ -25,9 +25,9 @@ ls bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main
 ```
 
 
-## Running the inference engine on your Android device
+## Run the inference engine on your Android device
 
-First, you will also need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
+You will need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
 
 Once you have enabled USB debugging and connected via USB, run
 
@@ -35,7 +35,7 @@ Once you have enabled USB debugging and connected via USB, run
 adb devices
 ```
 
-From your local environment to ensure that the Android device is properly connected. If you get the following output (with a unique device ID in place of XXXXXXXXXXXXXX), then your device is ready:
+From your local environment, ensure that your Android device is properly connected. If you get the following output (with a unique device ID in place of XXXXXXXXXXXXXX), then your device is ready:
 
 ```
 List of devices attached
