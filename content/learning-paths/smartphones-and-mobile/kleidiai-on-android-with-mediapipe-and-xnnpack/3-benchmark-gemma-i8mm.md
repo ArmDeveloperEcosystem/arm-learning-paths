@@ -1,5 +1,5 @@
 ---
-title: Benchmarking the Gemma 2B Model using Android NDK r25 with and without KleidiAI
+title: Benchmark the Gemma 2B Model using Android NDK r25 with and without KleidiAI
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Test inference engine performance with and without i8mm and KleidiAI
 
-Recently Arm has created a set of micro-kernels called "KleidiAI" that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. These improvements will increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
+Recently Arm has created a set of micro-kernels called "KleidiAI" that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
 
-In this step you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will give you an understanding of the performance gains attainable using i8mm and KleidiAI.
+In this step, you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will give you an understanding of the performance gains attained by using KleidiAI micro-kernels.
 
-#### Ensure that your device has the i8mm feature
+#### Check that your device has the i8mm feature
 
 To test whether your phone chipset contains the i8mm feature, run
 
@@ -23,9 +23,9 @@ adb shell cat /proc/cpuinfo | grep i8mm
 If any lines are returned, then your phone has the i8mm capability.
 
 
-#### Setting up the build
+#### Set up the build
 
-Download NDK r25. Bazel only supports up to NDK r21, which does not have support for i8mm instructions. Google has released a workaround that lets us build the binary with NDK r25 (with support for i8mm instructions) by modifying the WORKSPACE file at the root of the MediaPipe repo to use `rules_android_ndk`.
+Download Android NDK r25. Mediapipe only supports up to NDK r21, which does not have support for i8mm instructions. Google has released a workaround that lets us build the binary with NDK r25 (with support for i8mm instructions) by modifying the WORKSPACE file at the root of the MediaPipe repo to use `rules_android_ndk`.
 
 ```bash
 
@@ -45,7 +45,7 @@ export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c/toolchains/llvm/
 
 ```
 
-Modify the WORKSPACE file to add the path to Android NDK r25:
+Modify the Mediapipe WORKSPACE file to add the path to Android NDK r25:
 
 ```bash
 
@@ -59,7 +59,7 @@ android_sdk_repository(name = "androidsdk", path = "/home/ubuntu/Android/Sdk")
 The functions above require absolute paths, so if your `$HOME` directory is not `/home/ubuntu`, change `/home/ubuntu` to your home directory instead.
 {{% /notice %}}
 
-Modify the WORKSPACE file to add the Starlark rules for integrating Bazel with the Android NDK.
+Modify the Mediapipe WORKSPACE file to add the Starlark rules for integrating Bazel with Android NDK.
 
 First search for:
 
