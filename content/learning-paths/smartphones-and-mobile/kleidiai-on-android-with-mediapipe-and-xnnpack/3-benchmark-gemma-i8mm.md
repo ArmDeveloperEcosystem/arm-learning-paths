@@ -99,6 +99,19 @@ load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
 register_toolchains("@androidndk//:all")
 ```
 
+Modify the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc` file to specify `encode` as the benchmarking method.
+
+Search for this line:
+
+```
+std::string, benchmark_method, "decode",
+```
+
+And replace with this line:
+
+```
+std::string, benchmark_method, "encode",
+```
 #### Build and run llm_test without i8mm and KleidiAI
 
 ```bash
