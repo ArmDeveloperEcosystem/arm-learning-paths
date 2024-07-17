@@ -195,11 +195,15 @@ As you might expect, this will take ten times as long to run, but will give you 
 
 #### Build and run llm_test with i8mm and KleidiAI
 
-Rebuild llm_test with the i8mm flag enabled like this:
+Rebuild llm_test but this time with the i8mm flag enabled:
 
 ```bash
 bazel build -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
 ```
+{{% notice Note %}}
+When you use "--define=xnn_enable_arm_i8mm=true", the use of KleidiAI micro-kernels is enabled by default. 
+{{% /notice %}}
+
 
 Perform the same steps as before to push the `llm_test` executable to the phone.
 
