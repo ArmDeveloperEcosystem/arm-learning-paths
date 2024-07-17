@@ -1,6 +1,6 @@
 ---
 title: How to write effective SIMD on Arm using Rust
-
+draft: true
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers who want to take advantage of SIMD on Arm systems using Rust
