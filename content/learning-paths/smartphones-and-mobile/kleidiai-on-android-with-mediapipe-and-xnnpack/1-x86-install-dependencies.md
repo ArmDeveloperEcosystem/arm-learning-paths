@@ -82,6 +82,7 @@ In order to cross-compile your inference engine, you'll need the following insta
 #### Install pip3
 
 ```bash
+sudo apt update
 sudo apt install unzip python3-pip -y
 ```
 
