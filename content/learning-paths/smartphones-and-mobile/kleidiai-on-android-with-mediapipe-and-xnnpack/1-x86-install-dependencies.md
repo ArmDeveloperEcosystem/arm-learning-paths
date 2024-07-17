@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Install dependencies
 
-There are two options outlined in this learning path to install the dependencies. Click on the option of your choice.
-[Option 1: Build a Docker container with the dependencies](#option-1-build-a-docker-container-with-the-dependencies] 
-[Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
+There are two options outlined in this learning path to install the dependencies. Click on the option of your choice:
+  [Option 1: Build a Docker container with the dependencies](#option-1-build-a-docker-container-with-the-dependencies)
+  [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
 
 #### Option 1: Build a Docker container with the dependencies
 Install [docker engine](/install-guides/docker/docker-engine) on your machine.
