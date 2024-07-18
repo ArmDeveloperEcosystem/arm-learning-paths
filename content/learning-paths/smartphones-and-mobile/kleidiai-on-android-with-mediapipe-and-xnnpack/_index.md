@@ -6,13 +6,13 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for Android developers who want to efficiently run LLMs on-device.
 
 learning_objectives:
-    - Install prerequisites for cross-compiling new inference engines for Android.
+    - Install the prerequisites for cross-compiling new inference engines for Android.
     - Run LLM inference on an Android device with the Gemma 2B model using the Google AI Edge's MediaPipe framework.
-    - Benchmark LLM inference speed with and without the KleidiAI-enhanced Arm i8mm processor feature
+    - Benchmark LLM inference speed with and without the KleidiAI-enhanced Arm i8mm processor feature.
 
 prerequisites:
-    - You will need an x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can build and run a provided x86_64 Dockerfile.
-    - You will need an Android phone with support for i8mm (tested on Google Pixel 8 Pro)
+    - An x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can build and run a provided x86_64 Dockerfile.
+    - An Android phone with support for i8mm (tested on Google Pixel 8 Pro).
 
 author_primary: Pareena Verma, Joe Stech, Adnan AlSinan
 

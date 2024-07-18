@@ -10,11 +10,11 @@ layout: learningpathall
 
 Recently Arm has created a set of micro-kernels called [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. Arm has worked with the Google AI Edge team to integrate KleidiAI into the MediaPipe framework through XNNPACK. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
 
-In this step, you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will give you an understanding of the performance gains attained by using KleidiAI micro-kernels.
+In this step, you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will demonstrate the performance gains achieved by using KleidiAI micro-kernels.
 
 #### Check that your device has the i8mm feature
 
-To test whether your phone chipset contains the i8mm feature, run
+To test whether your phone chipset contains the i8mm feature, run:
 
 ```
 adb shell cat /proc/cpuinfo | grep i8mm
@@ -254,6 +254,6 @@ And as in the previous section, if you want to run multiple times and get a coef
 ./llm_test --benchmark_repetitions=10
 ```
 
-As you can see by comparing this output to the output in the previous section, the performance improvements are noticeable in the mixed int4/int8 benchmarks. By taking advantage of the KleidiAI micro-kernels, you are able to get more performance out of the i8mm processor feature.
+As you can see, by comparing this output to the output in the previous section, the performance improvements are noticeable in the mixed int4/int8 benchmarks. By taking advantage of the KleidiAI micro-kernels, you are able to increase the performance of the i8mm processor feature.
 
-If you would like to learn more about KleidiAI Integration with MediaPipe, please check out this [KleidiAI blog post](https://newsroom.arm.com/blog/kleidiai-integration-mediapipe).
+If you would like to learn more about KleidiAI Integration with MediaPipe, please see this [KleidiAI blog post](https://newsroom.arm.com/blog/kleidiai-integration-mediapipe).
