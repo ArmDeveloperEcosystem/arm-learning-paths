@@ -1,7 +1,7 @@
 ---
-next_step_guidance: Check out the KleidiAI further reading to further understand what it is capable of. 
+next_step_guidance: Proceed to the next learning path to learn how to efficiently run LLMs on Android using KleidiAI with Google AI Edge's MediaPipe framework.
 
-recommended_path: /learning-paths/servers-and-cloud-computing/llama-cpu/
+recommended_path: /learning-paths/smartphones-and-mobile/kleidiai-on-android-with-mediapipe-and-xnnpack
 
 further_reading:
     - resource:
