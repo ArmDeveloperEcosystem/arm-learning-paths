@@ -38,7 +38,7 @@ Before deep-diving into KleidiAI's code, it is helpful to see how KleidiAI micro
 
 ![KleidiAI in Stack](sw-stack.png "KleidiAI in a real-world software stack.")
 
-### Simple inference walkthrough
+### Simple inference walk through
 
 #### Stage 1: Input
 * **A user** inputs their question into the chatbot, such as "What is the capital of the United States?"
