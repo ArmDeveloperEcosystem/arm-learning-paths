@@ -7,7 +7,7 @@ who_is_this_for: This is an advanced topic for developers who are interested in 
 
 learning_objectives:   
    - Describe the integration between DynamoDB and AWS Lambda.
-   - Describe the publish process of AWS Lambda Function.
+   - Describe how to work with DynamoDB to scan and aggregate records.
 
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), a Lenovo Thinkpad X13s running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   

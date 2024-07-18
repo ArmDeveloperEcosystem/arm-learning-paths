@@ -2,44 +2,10 @@
 # User change
 title: "Implement Lambda Function"
 
-weight: 4
+weight: 5
 
 layout: "learningpathall"
 ---
-## Objective
-You will now implement the Lambda function to scan records from the DynamoDB. We assume the records are already written to the table as demonstrated in this [learning path](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb/).
-
-## Create and configure a Lambda function
-Go the AWS Lambda console. Then, create the function as follows:
-1. Click the *Create function* button:
-
-![fig1](Figures/01.png)
-
-2. This opens a *Create function* wizard, in which you:
-* Select **Author from scratch**
-* Type **GetAverageTemperature** for the Function name
-* Select **Node.js 20.x** as the runtime
-* Select **arm64** under Architecture
-
-At this point your wizard should look as follows:
-
-![fig2](Figures/02.png)
-
-Afterward, in the *Create function* wizard expand *Change default execution role*, and proceed as follows:
-1. Select **Create a new role from AWS policy templates**.
-2. Type **role-lambda-to-dynamodb** under the Role name.
-3. Under the *Policy templates - optional* select **Simple microservice permissions**.
-
-![fig3](Figures/03.png)
-
-This, ensures your Lambda function has necessary permissions to access the items in the DynamoDB table.
-
-Finally, scroll down, and click the **Create function** button. This will take you to the GetAverageTemperature function dashboard: 
-
-![fig4](Figures/04.png)
-
-In the next step, you will use this dashboard to modify the function code.
-
 # Implementation
 To implement the Lambda function scroll down to the Code source section and paste the following code under index.mjs. The *.mjs* extension in AWS Lambda indicates that the file is an ECMAScript (ES) module.
 
@@ -232,26 +198,3 @@ return {
 
 If no items are found we return 0 as the average value. Otherwise, we convert the attribute values to numbers and filters out any non-numeric values. Afterward, we calculate the sum and average of the numerical values. Finally, this average value is returned to the caller.
 
-# Testing the function
-To test the function launch the IoT emulator to write some data to the DynamoDB table. Refer to this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb).
-
-Then, in the GetAverageTemperature function dashboard click the Deploy button:
-
-![fig5](Figures/05.png)
-
-Afterward, click the **Test** button. This will open the *Configure test event* window, in which you type **Test** in the Event name and click the **Save** button. This will take you back to the GetAverageTemperature function dashboard, where you click the **Test** button again. You will see the execution status, including the average value of the temperature:
-
-![fig6](Figures/06.png)
-
-# Summary
-In this learning path, we developed an AWS Lambda function that processes data stored in a DynamoDB table. We utilized the AWS SDK for JavaScript v3 to interact with DynamoDB. Specifically, to create a DynamoDB query, we constructed a DynamoDB ScanCommand with a FilterExpression to retrieve records from the last N minutes.
-
-We learned how to handle date and time by implementing date and time calculations using native JavaScript to ensure accurate time threshold calculations. Specifically, we used the toISOString() method to format the time threshold as an ISO 8601 string, ensuring consistent and accurate time comparisons across different time zones.
-
-We also processed the items retrieved from DynamoDB. First, we converted numerical attribute values (stored as strings) to numbers for accurate calculations. Then, we calculated the average of the specified numerical attribute (in this case, temperature).
-
-We implemented error handling to manage potential issues during DynamoDB operations and returned appropriate HTTP responses, including the calculated average or error messages.
-
-The goal of this path was to highlight the usefulness of AWS Lambda and DynamoDB for serverless applications, particularly IoT solutions. Serverless architecture eliminates the need for server provisioning and management.
-
-By following this approach, you can create a robust, scalable, and efficient solution for processing and analyzing IoT data stored in DynamoDB, leveraging the power of AWS Lambda and serverless computing.
