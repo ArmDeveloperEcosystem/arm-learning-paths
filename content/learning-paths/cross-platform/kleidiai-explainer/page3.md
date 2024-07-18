@@ -13,7 +13,7 @@ Navigate to the [KlediAI GitLab repository](https://gitlab.arm.com/kleidi/kleidi
 
 {{% notice Note %}}This example illustrates KleidiAI microkernel performance. In practice, you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically, if supported.{{% /notice %}} 
 
-The example code is structured to take in two matricies and compare KleidiAI's micro-kernel results to a reference implementation. 
+The example code is structured to take in two matrices and compare KleidiAI's micro-kernel results to a reference implementation. 
 
 This reference code is functionally-identical to KleidiAI's micro-kernels, and is present for two reasons:
 1. To check for KleidiAI micro-kernel output validity as a sanity check.
@@ -74,7 +74,7 @@ add_compile_options(-march=armv8.6-a+dotprod+i8mm)
 Then clear your build directory and build again.
 
 
-6. Run the example. You will see each micro-kernel being tested, followed by confirmation that the reference implementation and KleidiAI's implementation are numerically equal - signalling success!
+6. Run the example. You will see each micro-kernel being tested, followed by confirmation that the reference implementation and KleidiAI's implementation are numerically equal - signaling success!
 ```bash
 ./matmul_clamp_f32_qai8dxp_qsi4cxp
 ```
