@@ -68,6 +68,6 @@ Today, Arm-powered hardware containing these instructions exist in cloud servers
 
 
 This Learning Path now moves on to answer the following questions while stepping through a C++ example:
-* How does KleidAI 'just work' with ML Frameworks?
+* How does KleidiAI 'just work' with ML Frameworks?
 * What do the micro-kernels in KleidiAI do?
 * How are the KleidiAI micro-kernels speeding up matrix multiplication?
