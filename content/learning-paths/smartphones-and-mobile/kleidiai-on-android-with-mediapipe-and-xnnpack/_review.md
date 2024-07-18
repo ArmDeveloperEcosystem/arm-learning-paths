@@ -30,7 +30,7 @@ review:
             - "No"
         correct_answer: 2
         explanation: >
-            Android NDK r21 does not have suipport for i8mm instructions. You will need to use Android NDK r25 to add support for it in your builds.
+            Android NDK r21 does not have support for i8mm instructions. You will need to use Android NDK r25 to add support for it in your builds.
 
 
 
