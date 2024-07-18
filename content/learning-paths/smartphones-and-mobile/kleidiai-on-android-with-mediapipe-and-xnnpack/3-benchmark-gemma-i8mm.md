@@ -98,8 +98,9 @@ http_archive(
 load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
 register_toolchains("@androidndk//:all")
 ```
+You can choose either 'decode' or 'encode' as the method to benchmark latency. Encode in this context, refers to how many tokens are processed in a second. This affects the time to first token, which is the time needed to process the input from the user. Decode refers to how many tokens are generated in a second.
 
-Modify the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc` file to specify `encode` as the benchmarking method.
+Modify the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc` file to specify `encode` as the benchmarking method. 
 
 Search for this line:
 
