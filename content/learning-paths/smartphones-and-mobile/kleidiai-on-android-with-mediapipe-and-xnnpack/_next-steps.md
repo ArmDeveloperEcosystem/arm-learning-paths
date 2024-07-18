@@ -1,7 +1,7 @@
 ---
 next_step_guidance: Now that you are familiar with building LLM applications with MediaPipe and KleidiAI, you are ready to incorporate LLMs into your Android applications.
 
-recommended_path: learning-paths/smartphones-and-mobile/ams/
+recommended_path: learning-paths/cross-platform/kleidiai-explainer/
 
 further_reading:
     - resource:

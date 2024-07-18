@@ -6,23 +6,17 @@ weight: 2
 layout: learningpathall
 ---
 
-## Option 1: Run a docker container with dependencies pre-installed
+## Install dependencies
 
-We have created a Dockerfile and built a Docker image that contains all the requirements for running this learning path. If you'd like to install the dependencies yourself, please jump to (Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu)[##option-2-install-dependencies-on-an-x86-64-linux-machine-running-ubuntu].
+There are two options outlined in this Learning Path to install the dependencies. Click on the option of your choice:
 
-#### Obtaining the pre-built image from Docker Hub
+  * [Option 1: Build a Docker container with the dependencies](#option-1-build-a-docker-container-with-the-dependencies).
+  * [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
 
-To get a pre-built image from Docker Hub, run:
+#### Option 1: Build a Docker container with the dependencies
+Install [docker engine](/install-guides/docker/docker-engine) on your machine.
 
-TODO: add in docker hub path here.
-
-```
-docker pull
-```
-
-#### Build the image yourself
-
-Save the following lines in a Dockerfile:
+Use a file editor of your choice and save the following lines in a file named `Dockerfile`:
 
 ```
 FROM amd64/ubuntu:22.04 
@@ -60,10 +54,6 @@ RUN bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bu
 
 ENV PATH "$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
-RUN sed -i 's/libdc1394-22-dev/libdc1394-dev/g' setup_opencv.sh
-RUN sed -i 's/apt install/apt -y install/g' setup_opencv.sh
-RUN bash setup_opencv.sh
-
 ENV GLOG_logtostderr=1
 ```
 
@@ -79,24 +69,24 @@ Run a shell on the Docker container:
 docker run -it --rm ubuntu-x86 /bin/bash
 ```
 
-You can now jump to (testing your setup)[##test-your-setup].
+You can now jump to [testing your setup](#test-your-setup).
 
-## Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
+#### Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu
 
-In order to cross-compile your inference engine, you'll need the following installed/downloaded within your local Ubuntu development environment:
+In order to cross-compile the inference engine, you will need the following packages installed or downloaded on your Ubuntu development machine:
 
-* Package Installer for Python (pip)
-* JDK
-* Bazel
-* MediaPipe Github repo
-* MediaPipe Python package requirements
-* Android NDK v25, with configurations
-* Android SDK
-* OpenCV
+* Package Installer for Python (pip).
+* JDK.
+* Bazel.
+* MediaPipe GitHub repository.
+* MediaPipe Python package requirements.
+* Android NDK v25, with configurations.
+* Android SDK.
 
 #### Install pip3
 
 ```bash
+sudo apt update
 sudo apt install unzip python3-pip -y
 ```
 
@@ -109,7 +99,7 @@ export PATH=$PATH:$JAVA_HOME
 ```
 
 {{% notice Note %}}
-If you want these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file.
+If you would like these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file.
 {{% /notice %}}
 
 #### Install Bazel
@@ -121,7 +111,7 @@ wget https://github.com/bazelbuild/bazel/releases/download/6.1.1/bazel-6.1.1-ins
 sudo bash bazel-6.1.1-installer-linux-x86_64.sh
 ```
 
-#### Clone the MediaPipe repo
+#### Clone the MediaPipe repository
 
 
 ```bash
@@ -151,32 +141,18 @@ export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/p
 
 ```
 
-#### Install OpenCV and its dependencies
-
-{{% notice Note %}}
-In Ubuntu 21.10, [libc1394-dev replaced libc1394-22-dev.](https://github.com/ros/rosdistro/issues/34921)
-
-Check your Ubuntu version using `lsb_release -a`, and if you're running 21.10 or later, change libc1394-22-dev to libc1394-dev in the setup_opencv.sh script.
-{{% /notice %}}
-
-To install opencv, run:
-
-```
-bash setup_opencv.sh
-```
-
 ## Test your setup
 
-Verify your setup by running a simple hello world example in MediaPipe:
+Verify your setup by running a simple "hello world" example in MediaPipe:
 
 ```bash
 export GLOG_logtostderr=1
 bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
 ```
 
-The bazel flag `MEDIAPIPE_DISABLE_GPU=1` disables the desktop GPU since it's not required.
+The bazel flag `MEDIAPIPE_DISABLE_GPU=1` disables the desktop GPU as it is not required.
 
-The output from this test run will be ```Hello World!``` printed ten times, like this:
+The output from this test run is ```Hello World!``` printed ten times, like this:
 
 ```output
 INFO: Build completed successfully, 371 total actions

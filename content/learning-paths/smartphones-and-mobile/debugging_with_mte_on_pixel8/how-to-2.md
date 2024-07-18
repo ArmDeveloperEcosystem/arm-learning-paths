@@ -10,7 +10,7 @@ layout: learningpathall
 
 A simple Android app is available to accompany this Learning Path. You can use it from Android Studio with your Pixel 8 smartphone in debug mode. 
 
-The project is [available on GitHub](https://github.com/rlopez3d/mte_test_app)
+The project is [available on GitHub](https://github.com/rlopez3d/mte_test_app).
 
 On your development machine, clone the repository:
 
@@ -21,7 +21,7 @@ git clone https://github.com/rlopez3d/mte_test_app
 Once downloaded to your local machine, launch Android Studio, and open the Android project in the same location.
 By default, Android Studio displays your project files in the Android view. 
 
-Click on the **Project** view selector in the top-left area, below the menu bar, and select **Project Source Files** option. 
+Click on the **Project** view selector in the top-left area, below the menu bar, and select the **Project Source Files** option. 
 
 You see the file structure of the Android project as shown below:
  
