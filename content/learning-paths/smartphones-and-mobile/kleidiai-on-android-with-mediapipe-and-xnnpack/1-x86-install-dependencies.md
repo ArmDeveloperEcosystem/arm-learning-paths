@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install dependencies
 
-There are two options outlined in this learning path to install the dependencies. Click on the option of your choice:
+There are two options outlined in this Learning Path to install the dependencies. Click on the option of your choice:
 
   * [Option 1: Build a Docker container with the dependencies](#option-1-build-a-docker-container-with-the-dependencies).
   * [Option 2: Install dependencies on an x86_64 Linux machine running Ubuntu](#option-2-install-dependencies-on-an-x86_64-linux-machine-running-ubuntu).
@@ -75,13 +75,13 @@ You can now jump to [testing your setup](#test-your-setup).
 
 In order to cross-compile the inference engine, you will need the following packages installed or downloaded on your Ubuntu development machine:
 
-* Package Installer for Python (pip)
-* JDK
-* Bazel
-* MediaPipe Github repository
-* MediaPipe Python package requirements
-* Android NDK v25, with configurations
-* Android SDK
+* Package Installer for Python (pip).
+* JDK.
+* Bazel.
+* MediaPipe GitHub repository.
+* MediaPipe Python package requirements.
+* Android NDK v25, with configurations.
+* Android SDK.
 
 #### Install pip3
 
@@ -99,7 +99,7 @@ export PATH=$PATH:$JAVA_HOME
 ```
 
 {{% notice Note %}}
-If you want these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file.
+If you would like these environment variables to persist the next time you open a shell, add them to your [.bashrc](https://unix.stackexchange.com/questions/129143/what-is-the-purpose-of-bashrc-and-how-does-it-work) file.
 {{% /notice %}}
 
 #### Install Bazel
@@ -143,16 +143,16 @@ export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/p
 
 ## Test your setup
 
-Verify your setup by running a simple hello world example in MediaPipe:
+Verify your setup by running a simple "hello world" example in MediaPipe:
 
 ```bash
 export GLOG_logtostderr=1
 bazel run --define MEDIAPIPE_DISABLE_GPU=1 mediapipe/examples/desktop/hello_world:hello_world
 ```
 
-The bazel flag `MEDIAPIPE_DISABLE_GPU=1` disables the desktop GPU since it's not required.
+The bazel flag `MEDIAPIPE_DISABLE_GPU=1` disables the desktop GPU as it is not required.
 
-The output from this test run will be ```Hello World!``` printed ten times, like this:
+The output from this test run is ```Hello World!``` printed ten times, like this:
 
 ```output
 INFO: Build completed successfully, 371 total actions
