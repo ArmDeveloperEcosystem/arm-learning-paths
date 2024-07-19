@@ -46,12 +46,12 @@ The files of interest are:
 ```console
 bl1.bin
 es_flashfw.bin
-corstone1000-image-corstone1000-<timestamp>-mps3.wic.nopt
+corstone1000-mps3_image.nopt
 ```
 Because of the `8.3` naming convention of MPS3, you must rename latter files:
 ```console
 mv es_flashfw.bin es0.bin
-mv corstone1000-image-corstone1000-<timestamp>-mps3.wic.nopt cs1000.bin
+mv corstone1000-mps3_image.nopt cs1000.bin
 ```
 
 ### Set up MPS3
@@ -70,7 +70,7 @@ cs1000.bin
 ```
 ### Create new image.txt
 
-Navigate to `Boardfiles\MB\HBI0309C`. Delete (or rename) the existing `image.txt` file, and create a new one containing the following.
+Navigate to `Boardfiles\MB\HBI0309C\AN550`. Delete (or rename) the existing `images.txt` file, and create a new one containing the following:
 ```console
 [IMAGES]
 TOTALIMAGES: 3      ;Number of Images (Max: 32)
