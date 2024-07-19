@@ -6,10 +6,10 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for developers interested in running LLMs on Arm-based servers. 
 
 learning_objectives:
-    - Download and build llama.cpp on your Arm server
-    - Download a pre-quantized Llama 2 model from Hugging Face
-    - Re-quantize the model weights to take advantage of Arm improvements
-    - Compare the pre-quantized Llama 2 model weights performance to the re-quantized weights on your Arm CPU
+    - Download and build llama.cpp on your Arm server.
+    - Download a pre-quantized Llama 2 model from Hugging Face.
+    - Re-quantize the model weights to take advantage of Arm improvements.
+    - Compare the pre-quantized Llama 2 model weights performance to the re-quantized weights on your Arm CPU.
 
 prerequisites:
     - An AWS Graviton3 c7g.2xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
