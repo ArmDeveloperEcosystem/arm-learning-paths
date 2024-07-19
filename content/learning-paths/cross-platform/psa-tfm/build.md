@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 The Trusted Firmware software stack uses the [Yocto Project](https://www.yoctoproject.org/) to build a tiny Linux distribution suitable for the Corstone-1000 platform.
 
-Use your Linux development machine to build the software and run on the Corstone-1000 FVP. The below has been tested with Ubuntu 22.04 host.
+Use your Linux development machine to build the software and run on the Corstone-1000 FVP. The instructions have been tested with an Ubuntu 22.04 host.
 
 ## Set up the build environment
 
