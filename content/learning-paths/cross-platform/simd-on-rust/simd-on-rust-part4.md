@@ -6,9 +6,10 @@ weight: 6
 layout: learningpathall
 ---
 
-The example chosen is a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)` which is the basis of many DCT algorithms as used in multiple video codecs, including VP9, AV1, etc.
+In this section, you will create a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)`. T
+his operation is the basis of many DCT algorithms used in multiple video codecs, including VP9, AV1, etc.
 
-It is called a 'butterfly' operation in DCT and it is defined as
+It is called a 'butterfly' operation in DCT and it is defined as:
 
 ```C
 #define ROUND_POWER_OF_TWO(value, n) (((value) + (1 << ((n)-1))) >> (n))
@@ -42,7 +43,7 @@ static INLINE void butterfly_two_coeff_half(const int16x4_t a,
 }
 ```
 
-Some explanation needs to be done here. This algorithm will use the widening versions of `mul`, `mull` which will take 16-bit quantities and produce a 32-bit product. In this case, the initial half 4x16-bit vectors produce products in 4 x 32-bit vectors, `a1`, `a2`. These vectors hold the quantities for the first part of the expression `a * c1` and `a * c2`.
+This algorithm uses the widening versions of `mul`, `mull` which will take 16-bit quantities and produce a 32-bit product. In this case, the initial half 4x16-bit vectors produce products in 4 x 32-bit vectors, `a1`, `a2`. These vectors hold the quantities for the first part of the expression `a * c1` and `a * c2`.
 
 Next the `vmlal_n_s16` and `vmlsl_n_s16` intrinsics are used, which produce the quantities `a * c1 + b * c2` or `a * c1 - b * c2`, respectively.
 
@@ -50,7 +51,7 @@ Finally, the rounding to the power of two is performed using a single intrinsic 
 
 ### A complete DCT 4x4 example
 
-Copy the following program which includes the function above and save it as `butterfly1.c`.
+Copy the following program which includes the function above and save it in a file named `butterfly1.c`:
 
 ```C
 #include <stdio.h>
@@ -200,10 +201,17 @@ int main() {
 }
 ```
 
-As usual, compile the file:
-```bash { output_lines = "3-12" }
+Compile the program:
+```bash 
 gcc -O3 butterfly1.c -o butterfly1
-$ ./butterfly1
+```
+Run it:
+```bash
+./butterfly1
+```
+
+The output should look like:
+```output
 A[] =
 0001 0002 0003 0004
 0005 0006 0007 0008
@@ -216,11 +224,11 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-The code may look complicated, but really it's not. A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does 2 passes of the same algorithm on the elements of the array, involving amongst other things calling the 2 butterfly functions, for one and two coefficients respectively, transposing the results inbetween calculations. The result is rounded and stored in the output buffer `dct`.
+A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does 2 passes of the same algorithm on the elements of the array, calls the 2 butterfly functions, for one and two coefficients respectively, transposes the results in between calculations. The result is rounded and stored in the output buffer `dct`.
 
-The assembly output is linked [here](../butterfly1.asm) instead of embedded due to its size.
+The assembly output is linked [here](../butterfly1.asm) instead of being displayed due to its size.
 
-Now, let's look at the Rust version of this algorithm:
+Now create a Rust version of this algorithm and save the contents below in a file named `butterfly2.rs`:
 
 ```Rust
 #[cfg(target_arch = "aarch64")]
@@ -363,11 +371,17 @@ unsafe fn fdct4x4_vec_asimd(input: &[i16], output: &mut [i16], stride: usize) ->
 }
 ```
 
-Save this file as `butterfly2.rs`. Compile and run it:
+Compile the program:
 
-```bash { output_lines = "3-12" }
+```bash 
 rustc -O butterfly2.rs
-$ ./butterfly2
+```
+Run it:
+```bash
+./butterfly2
+```
+The output should look like:
+```output
 A[] =
 0001 0002 0003 0004
 0005 0006 0007 0008
@@ -380,13 +394,13 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-The assembly output is linked [here](../butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart perhaps from the cpu feature check at the start.
+The disassembly output is linked [here](../butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart perhaps from the cpu feature check at the start.
 
 ### Comments
 
-There are some things you probably have noticed that are different from the previous examples.
+There are some things to highlight here, different from the previous examples:
 
-* The config declaration `#[cfg(target_arch = "aarch64")]` and the `use std::arch::aarch64::*;` have both gone to the top of the file, as there are many functions that need to use SIMD intrinsics and it is simple than having to add it to every function.
+* The config declaration `#[cfg(target_arch = "aarch64")]` and the `use std::arch::aarch64::*;` are used at the top of the file, as there are many functions that need to use SIMD intrinsics and it is simpler than having to add it to every function.
 * Rust functions can return pairs of values, so there is no need for the pointer values of `add`, `sub` to be passed as arguments to the butterfly functions, like in C.
 This leads to better and more readable code. A similar thing can be achieved with C++'s `std::pair`.
 ```Rust
@@ -398,14 +412,13 @@ This leads to better and more readable code. A similar thing can be achieved wit
 ```C
 vin[0] = vshl_n_s16(vin[0], 4);
 ```
-In Rust, while that syntax is still allowed -which you can also verify by modifying the code and recompiling- it is however encouraged to use the new generics syntax:
+In Rust, while that syntax is still allowed, it is encouraged to use the new generics syntax:
 
 ```Rust
 vin[0] = vshl_n_s16::<4>(vin[0]);
 ```
 
-### What about std::simd?
+### Alternative way with std::simd
 
-Although such an example is doable with `std::simd`, it is left as an exercise for you to implement.
+Although you could create this example with `std::simd`, it is not included in the learning path and left as an exercise for you to experiment with.
 
-Start small, try implementing a small part of the code, for example, the transpose function, and only when you know that it's done correctly and it produces the correct result, move to the next.
