@@ -1,11 +1,13 @@
 ---
 title: Best Practices for Hardware Ray Tracing Lumen Performance on Android Devices
-draft: true
+##draft: true
 minutes_to_complete: 30
 
 who_is_this_for: Unreal developers interested in optimizing hardware ray tracing with Lumen on Arm devices.
 
 learning_objectives:
+    - What is ray tracing.
+    - What is acceleration structure.
     - Best practices for getting the maximum performance of hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:

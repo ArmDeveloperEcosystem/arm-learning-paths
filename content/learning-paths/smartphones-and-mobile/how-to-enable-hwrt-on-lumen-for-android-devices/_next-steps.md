@@ -13,8 +13,8 @@ further_reading:
         link: https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/mobile-gaming-success-with-ray-tracing
         type: blog
     - resource:
-        title: Arm Mobile Studio 
-        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio
+        title: Arm Performance Studio 
+        link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio
         type: website
 
 
