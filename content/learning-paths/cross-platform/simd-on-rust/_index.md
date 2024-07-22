@@ -1,15 +1,15 @@
 ---
-title: How to write effective SIMD on Arm using Rust
-draft: true
+title: Learn how to write effective SIMD code on Arm using Rust
+
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for developers who want to take advantage of SIMD on Arm systems using Rust
+who_is_this_for: This is an advanced topic for software developers who want take advantage of SIMD code on Arm systems using Rust.
 
 learning_objectives: 
-    - Learn how to do SIMD programming with Rust on Arm
+    - Learn how to write SIMD code with Rust on Arm.
 
 prerequisites:
-    - An Arm-based computer and a recent version of a C compiler (Clang or GCC) and a recent rust compiler.
+    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a rust compiler installed.
 
 author_primary: Konstantinos Margaritis
 

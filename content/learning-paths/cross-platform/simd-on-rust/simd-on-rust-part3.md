@@ -6,7 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-Consider the following simple program in C that does a matrix transpose operation on a 4x4 matrix of `uint16_t` elements:
+In this section, you will build and run C and Rust examples to perform a matrix transpose. 
+ 
+Shown below is a simple program in C that does a matrix transpose operation on a 4x4 matrix of `uint16_t` elements. Copy and save the contents in a file named `transpose1.c`:
 
 ```C
 #include <stdio.h>
@@ -65,11 +67,17 @@ int main() {
 }
 ```
 
-Save the above program as `transpose1.c`, compile it and run it:
+Compile the program:
 
-```bash { output_lines = "3-12" }
+```bash 
 gcc -O3 transpose1.c -o transpose1
-$ ./transpose1
+```
+Run the program:
+```bash
+./transpose1
+```
+The output should look like:
+```output
 A[] =
 0001 0002 0003 0004
 0005 0006 0007 0008
@@ -82,10 +90,13 @@ A[] =
 0004 0008 000c 0010
 ```
 
-You will note the special types `int16x4x2_t` and `int32x2x2_t` which are used by the transpose `vtrn_s16` and `vtrn_s32` respectively. The pairs denote that there are going to be actually two instructions executed with a specific outcome, and are provided for convenience. The corresponding assembly instructions executed are `trn1`/`trn2` for the first intrinsic and `zip1`/`zip2` for the second intrinsic.
+Notice the special data types `int16x4x2_t` and `int32x2x2_t` which are used by the transpose `vtrn_s16` and `vtrn_s32` respectively. The pairs denote that there are going to be two instructions executed with a specific outcome. The corresponding assembly instructions executed are `trn1`/`trn2` for the first intrinsic and `zip1`/`zip2` for the second intrinsic.
 
-The assembly output of the `transpose_s16_4x4` is the following (as observed by `objdump -S transpose1`):
-
+Generate the disassembly output:
+```bash
+objdump -S transpose1
+```
+The disassembly output of the `transpose_s16_4x4` function should look like:
 ```asm
 00000000000008f0 <transpose_s16_4x4>:
  8f0:   6d400c00        ldp     d0, d3, [x0]
@@ -103,9 +114,9 @@ The assembly output of the `transpose_s16_4x4` is the following (as observed by 
  920:   d65f03c0        ret
 ```
 
-Pretty straightforward, as expected the relevant instructions are executed in sequence without any surprises.
+This looks fairly straightforward with the expected sequence of instructions.
 
-Let's look at the equivalent Rust implementation:
+Now create an equivalent program implemented in Rust. Save the contents shown below in a file named `transpose2.rs`:
 
 ```Rust
 const N : usize = 4;
@@ -172,15 +183,23 @@ unsafe fn transpose_s16_4x4_asimd(a: &mut [i16]) -> () {
 
 You will note two important differences here:
 
-* initialization of the `int16x4_t va` array at the start of the `transpose_s16_4x4_asimd` function. In C you can just declare the variable `va` and the compiler may not complain much. Even with the relevant compile flags, it will understand that the SIMD variable will be immediately initialized by the respective load instructions `vld1q_s16`.
-In Rust this is not the case, as the compiler will insist that *all* variables are initialized on definition. Zero-Initialization here might just waste a few cycles so it's just better to initialize the array with all elements right at the beginning. Of course we could do that in C as well, it's just that the C compiler doesn't care that much. But Rust does.
+* Initialization of the `int16x4_t va` array at the start of the `transpose_s16_4x4_asimd` function. In C you can just declare the variable `va` and the compiler may not complain. The compiler understands that the SIMD variable will be immediately initialized by the respective load instructions `vld1q_s16`.
+In Rust this is not the case, as the compiler insists on *all* variables being initialized on definition. It is better to initialize the array with all elements right at the beginning. You could do that in C as well, it's just that the C compiler doesn't care as much. But Rust does.
 * meta-vector constructs such as `int16x4x2_t` and `int32x2x2_t` are defined as structs in C with each element as the corresponding element of the nested array `val[]`. In Rust however they are defined as tuples, and each element is accessed directly as `0` or `1` in these cases, eg `b0.0` and `c1.1`.
 
-As before, save and compile this file as `transpose2.rs` and run it:
+Compile the program:
 
-```bash { output_lines = "3-12" }
+```bash 
 rustc -O transpose2.rs
+```
+
+Run the program:
+```bash
 ./transpose2
+```
+
+The output should look similar to:
+```output
 A[] =
 A[] =
 0001 0002 0003 0004
@@ -193,8 +212,12 @@ A[] =
 0003 0007 000b 000f
 0004 0008 000c 0010
 ```
+Generate the disassembly output
+```bash
+objdump -S transpose2
+```
 
-Similarly, the assembly output of the Rust implementation `transpose_s16_4x4_asimd` is the following (as observed by `objdump -S transpose2`):
+The disassembly output of the Rust implementation of `transpose_s16_4x4_asimd` is shown:
 
 ```asm
 00000000000064b0 <_ZN10transpose217transpose_s16_4x417ha75632bf6146b962E>:
@@ -212,7 +235,6 @@ Similarly, the assembly output of the Rust implementation `transpose_s16_4x4_asi
     64dc:       6d010004        stp     d4, d0, [x0, #16]
     64e0:       d65f03c0        ret
 ```
+This matches the C disassembly as you would expect.
 
-Which is exactly the same as the C implementation. As expected.
-
-In the next section you will look at a more complicated example that uses this one.
+In the next section you will look at a more complex example.
