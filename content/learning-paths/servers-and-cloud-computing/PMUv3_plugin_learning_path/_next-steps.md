@@ -1,7 +1,7 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: If you need a more detailed documentation, request repo access from author and access this [Documentation-PMUV3_plugin](https://github.com/GayathriNarayana19/PMUv3_plugin/blob/main/Documentation-PMUV3_plugin.pdf)
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/pmuv3_plugin_learning_path/
 
 further_reading:
     - resource:

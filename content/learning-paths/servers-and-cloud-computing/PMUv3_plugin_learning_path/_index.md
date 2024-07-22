@@ -7,8 +7,9 @@ who_is_this_for: Engineers working on a workload/codebase to carry out performan
 
 learning_objectives: 
     - Get a fine-grained and precise measurement of functions handling a specific task. 
-    - The plugin is grouped into 15 categories also known as bundles, and each bundle has a set of PMU events. The values of the same can be obtained in one shot.   
-    - Apart from raw PMU event values, the backend tool also provides the KPI/metric values like MPKI, stalls, IPC and many more, thus helping in performance analysis tasks. 
+    - Instrument at a code/function level by choosing one of the 4 scenarios detailed in this learning path. 
+    - Run and collect the CSV of all the 15 bundles in one shot.
+    - Use the backend tool to plot raw PMU event values along with the KPI/metric values like MPKI, stalls, IPC and many more, thus helping in performance analysis tasks. 
 
 prerequisites:
     - Some familiarity with performance analysis.

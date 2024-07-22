@@ -1,38 +1,35 @@
 ---
 review:
     - questions:
-        question: >
-            PLACEHOLDER QUESTION 1?
+        question: Where to find the detailed documentation with example instrumentations?
+            
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
+            - If you need a more detailed documentation, request repo access from author and access this [Documentation-PMUV3_plugin](https://github.com/GayathriNarayana19/PMUv3_plugin/blob/main/Documentation-PMUV3_plugin.pdf)
         correct_answer: 1                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            If you want to instrument in a C++ codebase around a single chunk of code, which scenario will you adopt?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - Scenario I
+            - Scenario II
+            - Scenario III
+            - Scenario IV
+        correct_answer: 2                   
         explanation: >
-            PLACEHOLDER EXPLANATION 2
                
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            What are the advantages of using PMUv3_plugin?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
+            - Avoids context switches
+            - Ability to collect the PMU events and metrics in one shot. 
+            - Scope to create Custom bundles is present.
+            - More precise and accurate compared to generic instrumentation methods due to direct counter accesis
+            - All the above
+        correct_answer: 5         
         explanation: >
-            PLACEHOLDER EXPLANATION 3
 
 
 
