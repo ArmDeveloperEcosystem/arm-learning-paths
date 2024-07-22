@@ -1,5 +1,5 @@
 ---
-title: Learn how to write effective SIMD code on Arm using Rust
+title: Learn how to write SIMD code on Arm using Rust
 
 minutes_to_complete: 30
 

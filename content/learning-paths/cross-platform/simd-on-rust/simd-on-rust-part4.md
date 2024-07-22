@@ -418,7 +418,7 @@ In Rust, while that syntax is still allowed, it is encouraged to use the new gen
 vin[0] = vshl_n_s16::<4>(vin[0]);
 ```
 
-### What about std::simd?
+### Alternative way with std::simd
 
 Although you could create this example with `std::simd`, it is not included in the learning path and left as an exercise for you to experiment with.
 
