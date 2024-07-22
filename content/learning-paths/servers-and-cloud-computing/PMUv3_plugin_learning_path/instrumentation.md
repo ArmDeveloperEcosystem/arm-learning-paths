@@ -118,8 +118,6 @@ shutdown_resources();
 process_data(cur_bundle_no);
 ```
 
----
-
 ## Scenario II – Instrumentation Around Single Code block in C++ codebase
 
 For Pmuv3_Bundles Instrumentation "SINGLE CHUNK OF CODE" in  C++ CODEBASE, refer the below steps.
@@ -228,7 +226,6 @@ process_data(cur_bundle_no);
 ```yaml
 shutdown_resources();
 ```
----
 
 ## Scenario IV – Instrumentation around single code blocks in C codebase
 For Pmuv3_Bundles Instrumentation in a C Codebase around a Single Chunk Of Code, refer below steps.

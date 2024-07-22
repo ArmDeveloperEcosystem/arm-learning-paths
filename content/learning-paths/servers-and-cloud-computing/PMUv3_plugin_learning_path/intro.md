@@ -5,7 +5,7 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Introduction to the PMUv3 Plugin
+## Why should one use PMUv3 Plugin?
 
 There is a way to measure profiling of the target application as a whole box, but sometimes we need to add the instrumentation into the code itself to get more fine-grained and precise measurement of the functions handling a specific task we are interested to know its performance. For that intention, we developed the PMUv3 Plugin to allow the users to do so. This performance monitoring plugin helps to do performance analysis based on the Hardware events available in PMUV3.
 

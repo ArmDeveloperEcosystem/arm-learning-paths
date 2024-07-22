@@ -5,18 +5,17 @@ recommended_path: /learning-paths/servers-and-cloud-computing/pmuv3_plugin_learn
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Arm Neoverse N2 PMU Guide
+        link: https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
+        title: Arm CPU Telemetry Solution Topdown Methodology Specification
+        link: https://developer.arm.com/documentation/109542/0100/?lang=en
+        type: documentation
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
-
+        title: Arm Neoverse N2 Core Telemetry Specification
+        link: https://developer.arm.com/documentation/109215/0200/?lang=en
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
