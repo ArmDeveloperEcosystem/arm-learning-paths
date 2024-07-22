@@ -195,9 +195,25 @@ int main() {
 
     init_vec(a);
     print_vec(a);
-    vpx_fdct4x4_neon(a, dct, N);
+    fdct4x4_neon(a, dct, N);
     print_vec(dct);
 }
+```
+
+As usual, compile the file:
+```bash { output_lines = "3-12" }
+gcc -O3 butterfly1.c -o butterfly1
+$ ./butterfly1
+A[] =
+0001 0002 0003 0004
+0005 0006 0007 0008
+0009 000a 000b 000c
+000d 000e 000f 0010
+A[] =
+0110 ffdc 0000 fffd
+ff71 0000 0000 0000
+0000 0000 0000 0000
+fff6 0000 0000 0000
 ```
 
 The code may look complicated, but really it's not. A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does 2 passes of the same algorithm on the elements of the array, involving amongst other things calling the 2 butterfly functions, for one and two coefficients respectively, transposing the results inbetween calculations. The result is rounded and stored in the output buffer `dct`.
@@ -345,6 +361,23 @@ unsafe fn fdct4x4_vec_asimd(input: &[i16], output: &mut [i16], stride: usize) ->
     vst1q_s16(&mut output[ 0 * 8], out_01);
     vst1q_s16(&mut output[ 1 * 8], out_23);
 }
+```
+
+Save this file as `butterfly2.rs`. Compile and run it:
+
+```bash { output_lines = "3-12" }
+rustc -O butterfly2.rs
+$ ./butterfly2
+A[] =
+0001 0002 0003 0004
+0005 0006 0007 0008
+0009 000a 000b 000c
+000d 000e 000f 0010
+A[] =
+0110 ffdc 0000 fffd
+ff71 0000 0000 0000
+0000 0000 0000 0000
+fff6 0000 0000 0000
 ```
 
 The assembly output is linked [here](../butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart perhaps from the cpu feature check at the start.

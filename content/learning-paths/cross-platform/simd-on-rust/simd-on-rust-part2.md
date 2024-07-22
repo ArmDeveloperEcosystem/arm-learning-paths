@@ -40,9 +40,9 @@ uint32_t sad_neon(const uint8_t *a, const uint8_t *b, int w, int h) {
 
   for (int i = 0; i < h; i++) {
     for (int j = 0; j < w; j+= 16) {
-      uint8x16_t a = vld1q_u8(a[i*w + j]);
-      uint8x16_t b = vld1q_u8(b[i*w + j]);
-      uint8x16_t diff = vabdq_u8(a, b);
+      uint8x16_t va = vld1q_u8(&a[i*w + j]);
+      uint8x16_t vb = vld1q_u8(&b[i*w + j]);
+      uint8x16_t diff = vabdq_u8(va, vb);
       sum = vdotq_u32(sum, diff, vdupq_n_u8(1));
     }
   }
