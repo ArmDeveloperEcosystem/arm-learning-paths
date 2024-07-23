@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Using Process Watch
-Process Watch can be used to prove the presence (or absence) of certain instructions. For example consider the following simple workload
+Process Watch can be used to determine the presence (or absence) of certain instructions. In this section, you will use Process Watch to detect the use of NEON and SVE instructions by this example workload. Start by saving the simple workload shown below in a file name `workload.c`:
 ```C
 #include <stdint.h>
 #define LEN 1024
@@ -23,16 +23,23 @@ void main() {
     doLoop();
 }
 ```
+### Case 1: No optimization
+Compile the workload without applying any optimizations:
 
-With no optimisation applied, I can see that the workload is not making use of NEON of SVE instructions.
-
-```output
+```bash
 aarch64-linux-gnu-gcc workload.c -o workload_none -O0
+```
+Now, run the workload in the background and launch `processwatch` on the workload to detect the use of NEON and SVE instructions:
+```bash
 ./workload_none &
 [1] 126958
 
 sudo ./processwatch -p 126958 -f HasNEON -f HasSVEorSME
+```
+You will need to change the PID in the `processwatch command with the PID of the workload running in the background.
 
+The output should look like:
+```output
 PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     0.00     100.00   24726
 126958   workload_none    0.00     0.00     100.00   24726
@@ -43,15 +50,25 @@ ALL      ALL              0.00     0.00     100.00   26006
 ^C
 ```
 
-However, recompiling to make use of NEON instructions, I can now see my workload is retiring NEON instructions
+You can see that in this case, the workload is not making use of NEON or SVE instructions.
 
-```output
+## Case 2: Use NEON instructions
+Now recompile the same workload to make use of NEON instructions:
+
+```bash
 aarch64-linux-gnu-gcc workload.c -o workload_neon  -O2 -ftree-vectorize -march=armv8.6-a
+```
+Run the workload in the background and launch `processwatch` on the workload to detect the use of NEON and SVE instructions:
+```bash
 ./workload_neon &
 [1] 126987
 
 sudo ./processwatch -p 126987 -f HasNEON -f HasSVEorSME
+```
+You will need to change the PID in the `processwatch command with the PID of the workload running in the background.
 
+The output should look like:
+```output
 PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
 ALL      ALL              31.75    0.00     100.00   24828
 126987   workload_neon    31.75    0.00     100.00   24828
@@ -61,8 +78,14 @@ ALL      ALL              32.45    0.00     100.00   26143
 126987   workload_neon    32.45    0.00     100.00   26143
 ^C
 ```
-And by running objdump on the binary, I can see those instructions
+You can now see the workload is retiring NEON instructions as you would expect.
 
+You can run `objdump` on the binary to view the disassembled NEON instructions:
+
+```bash
+objdump -S workload_neon
+```
+The output should look like:
 ```output
  788:   4ee18400        add     v0.2d, v0.2d, v1.2d
  78c:   3ca06860        str     q0, [x3, x0]
@@ -71,15 +94,31 @@ And by running objdump on the binary, I can see those instructions
  798:   54ffff41        b.ne    780 <doLoop+0x20>  // b.any
  ```
 
- Similarly by recompiling for SVE, I can now see my workload is retiring SVE instructions
+### Case 3: Use SVE instructions
+Before you run this part, make sure the Arm machine you are running on has support for SVE.
 
-```output
+To check which features are available on your platform, use:
+```bash
+cat /proc/cpuinfo
+```
+Look at the flags values and check for presence of sve.
+
+Recompile the workload again. This time include support for SVE instructions:
+
+```bash
 aarch64-linux-gnu-gcc workload.c -o workload_sve  -O2 -ftree-vectorize -march=armv8.5-a+sve
+```
+Run the workload in the background and launch `processwatch` on the workload to detect the use of NEON and SVE instructions:
+```bash
 ./workload_sve &
 [1] 126997
 
 sudo ./processwatch -p 126997 -f HasNEON -f HasSVEorSME
+```
+You will need to change the PID in the `processwatch command with the PID of the workload running in the background.
 
+The output should look like:
+```output
 PID      NAME             NEON     SVEorSME %TOTAL   TOTAL
 ALL      ALL              0.00     96.68    100.00   24914
 126997   workload_sve     0.00     96.68    100.00   24914
@@ -90,7 +129,14 @@ ALL      ALL              0.00     96.74    100.00   26137
 ^C
 ```
 
-Again, by objdumping the binary I see 
+You can see the retired SVE instructions from running this workload.
+
+Verify the SVE instructions by using `objdump` on the binary:
+
+```bash
+objdump -S workload_sve
+```
+The output should look similar to:
 ```output
  7c4:   25e20fe0        whilelo p0.d, wzr, w2
  7c8:   a5e04080        ld1d    {z0.d}, p0/z, [x4, x0, lsl #3]
