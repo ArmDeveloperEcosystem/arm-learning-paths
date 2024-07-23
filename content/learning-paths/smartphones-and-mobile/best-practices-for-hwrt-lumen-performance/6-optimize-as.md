@@ -8,7 +8,7 @@ layout: learningpathall
 
 To achieve the best performance in ray traversal, it is essential to minimize the overlap of meshes. Overlapping meshes increase the cost of ray traversal because the hardware needs to check more meshes, many of which may not intersect with the ray. Therefore, it is crucial to ensure that the bounding box of each actor covers the least amount of empty space.
 
-You can use the `Instance Overlap` view under the **"Ray Tracing Debug"** options in the Unreal Editor to check the overlap in your level.
+You can use the `Instance Overlap` view under the `Ray Tracing Debug` options in the Unreal Editor to check the overlap in your level.
 
 ![Instance Overlap View](images/instance-overlap.png)
 

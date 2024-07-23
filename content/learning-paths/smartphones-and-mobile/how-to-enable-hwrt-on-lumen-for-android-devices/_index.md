@@ -6,8 +6,8 @@ minutes_to_complete: 10
 who_is_this_for: Unreal developers interested in using hardware ray tracing with Lumen on Arm devices.
 
 learning_objectives:
-    - What is Lumen
-    - What is global illumination
+    - What is Lumen.
+    - What is global illumination.
     - Instructions on how to enable hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:
