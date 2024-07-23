@@ -97,7 +97,7 @@ There are  approximately 110 groups (processwatch -l) and  around 1700 mnemonics
 
 To override the default groups, you can use the `-f` argument and specify the group or mnemonic name. You can specify multiple `-f` arguments. However you cannot have mnemonics and groups together.
 
-`Here is an example:
+Here is an example:
 
 ```bash
  sudo ./processwatch -f HasSVE2BitPerm -f HasNEONorSME
