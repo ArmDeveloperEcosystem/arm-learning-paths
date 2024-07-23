@@ -1,5 +1,5 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Now that you understand how to create and deploy to a single Axion instance, you are ready to undertake more advanced deployment methods.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/gcp/
 
