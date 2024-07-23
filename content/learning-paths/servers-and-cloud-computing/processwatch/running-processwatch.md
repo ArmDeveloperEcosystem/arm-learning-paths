@@ -1,23 +1,28 @@
 ---
-title: Running Process Watch
+title: Run Process Watch
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Root or not root
-Process Watch can be ran by a non-root user, however to do so requires root to modify your system to be non-standard and less secure. It is recommended that Process Watch is instead ran by root.
+## Root user
+Although Process Watch can be run by a non-root user, it requires modifications made by root, which make your system less secure. It is recommended that Process Watch is instead run by root.
 
-To enable non-root users to run Process Watch. You'll need to run the following as root
-* setcap CAP_PERFMON,CAP_BPF=+ep ./processwatch
-* sysctl -w kernel.perf_event_paranoid=-1
-* sysctl kernel.unprivileged_bpf_disabled=0 (this is only needed on later Ubuntu versions from 21.10 onwards)
+To enable non-root users to run Process Watch, you need to run the following as root:
+```bash
+sudo setcap CAP_PERFMON,CAP_BPF=+ep ./processwatch
+sudo sysctl -w kernel.perf_event_paranoid=-1
+sudo sysctl kernel.unprivileged_bpf_disabled=0
+```
 
-## Running Process Watch
-The Process Watch tool accepts a number of CLI arguments; These can be seen by running
-```output
+## Run Process Watch
+The Process Watch tool accepts a number of command-line arguments. You can view these by running:
+```bash
 sudo ./processwatch -h
+```
+The output should look like:
+```output
 usage: processwatch [options]
 
 options:
@@ -37,19 +42,21 @@ options:
 
 By default, Process Watch will:
  * Print results every 2 seconds
- * Print results until the tool is killed (via ctrl+c)
- * Print all results in a table format on stdout
+ * Print results until the tool is killed (via Ctrl+c)
+ * Print all results in a table format on `stdout`
  * Profile all running processes
  * Display counts for the default filters, which are 'FPARMv8', 'NEON', 'SVE' and 'SVE2'
  * Set the sample period to every 10000 events
 
-
 ## Default Process Watch output
-Running Process Watch with no arguments results in the following output:
+You can run Process Watch with no arguments:
 
 ```output
 sudo ./processwatch
+```
 
+The output should look like:
+```output
 PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL
 ALL      ALL              0.00     0.29     0.00     0.00     100.00   346
 17400    processwatch     0.00     0.36     0.00     0.00     80.64    279
@@ -72,5 +79,7 @@ ALL      ALL              1.18     5.12     0.00     0.00     100.00   254
 6651     packagekitd      0.00     0.00     0.00     0.00     0.39     01
 4939     sshd             0.00     0.00     0.00     0.00     0.39     01
 ```
-
 Every 2 seconds, the next set of samples will be appended to the bottom of the output.
+
+Now use Ctrl+c to terminate the run.
+
