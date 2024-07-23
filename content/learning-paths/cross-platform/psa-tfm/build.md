@@ -41,43 +41,37 @@ The [kas](https://pypi.org/project/kas/) utility is used to build the supplied p
 sudo pip3 install kas
 ```
 
-## Clone Yocto project
-
-Clone the [Yocto repository](https://www.yoctoproject.org/software-overview/downloads/) to your build machine:
-
-```console
-git clone -b scarthgap git://git.yoctoproject.org/poky.git
-```
-
 ## Clone Arm platform build recipes
 
-Navigate into the project, and clone the `meta-arm` layer.
+Create a build directory, and clone the repository:
 
 ```console
-cd poky
-git clone https://git.yoctoproject.org/git/meta-arm
+mkdir corstone1000
+cd corstone1000
+git clone https://git.yoctoproject.org/git/meta-arm -b CORSTONE1000-2024.06
 ```
 
 ## Build the software 
 
-You can build the software for FVP or MPS3
+You can build the software for [FVP](#fvp) or [MPS3](#mps3)
 
 {{% notice Note%}}
-Each build can take over one hour to complete!
+The build can take over one hour to complete!
 {{% /notice %}}
 
-### Build for Corstone-1000 FVP
+### Build for Corstone-1000 FVP {#fvp}
 
-Start the build:
+Start the build, accepting the EULA to install the FVP.
 
 ```console
-kas build meta-arm/kas/corstone1000-fvp.yml
+export ARM_FVP_EULA_ACCEPT="True"
+kas build meta-arm/kas/corstone1000-fvp.yml:meta-arm/ci/debug.yml
 ```
 
-### Build for MPS3 AN550
+### Build for MPS3 AN550 {#mps3}
 
 Start the build:
 
 ```console
-kas build meta-arm/kas/corstone1000-mps3.yml
+kas build meta-arm/kas/corstone1000-mps3.yml:meta-arm/ci/debug.yml
 ```
