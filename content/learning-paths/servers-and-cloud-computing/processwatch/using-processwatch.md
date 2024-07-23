@@ -23,7 +23,7 @@ void main() {
     doLoop();
 }
 ```
-### Case 1: No optimization
+## Case 1: No optimization
 Compile the workload without applying any optimizations:
 
 ```bash
