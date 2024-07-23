@@ -36,7 +36,7 @@ Now, run the workload in the background and launch `processwatch` on the workloa
 
 sudo ./processwatch -p 126958 -f HasNEON -f HasSVEorSME
 ```
-You will need to change the PID in the `processwatch command with the PID of the workload running in the background.
+You will need to change the PID in the `processwatch` command with the PID of the workload running in the background.
 
 The output should look like:
 ```output
@@ -65,7 +65,7 @@ Run the workload in the background and launch `processwatch` on the workload to 
 
 sudo ./processwatch -p 126987 -f HasNEON -f HasSVEorSME
 ```
-You will need to change the PID in the `processwatch command with the PID of the workload running in the background.
+You will need to change the PID in the `processwatch` command with the PID of the workload running in the background.
 
 The output should look like:
 ```output
@@ -115,7 +115,7 @@ Run the workload in the background and launch `processwatch` on the workload to 
 
 sudo ./processwatch -p 126997 -f HasNEON -f HasSVEorSME
 ```
-You will need to change the PID in the `processwatch command with the PID of the workload running in the background.
+You will need to change the PID in the `processwatch` command with the PID of the workload running in the background.
 
 The output should look like:
 ```output
