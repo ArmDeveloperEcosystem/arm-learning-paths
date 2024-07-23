@@ -25,11 +25,14 @@ cloudFrontDistributionID = "E2VDQ2CYZATMO9"
     skilllevel              = "skilllevels"
     tool_software_language  = "tools_software_languages"
     armip                   = "armips"
+    cloud_service_provider  = "cloud_service_providers"
+
 
 [permalinks]
     tools_software_languages = "/tag/:slug/"
     operatingsystems = "/tag/:slug/"
     subjects = "/tag/:slug/"
+    cloud_service_providers = "/tag/:slug/"
     armips   = "/tag/:slug/"
 
 [related]
@@ -38,15 +41,15 @@ cloudFrontDistributionID = "E2VDQ2CYZATMO9"
     toLower = false
 
     [[related.indices]]
-        name = "software"
+        name = "cloud_service_providers"
         weight = 100
 
     [[related.indices]]
-        name = "tools"
+        name = "tools_software_languages"
         weight = 80
     
     [[related.indices]]
-        name = "armips"
+        name = "subjects"
         weight = 50
 
 [params]

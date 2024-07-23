@@ -8,6 +8,7 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Android: 1
+- Baremetal: 1
 - Linux: 86
 - macOS: 2
 - Windows: 5
@@ -31,7 +32,6 @@ title: Servers and Cloud Computing
 tools_software_languages_filter:
 - .NET SDK: 1
 - 5G: 1
-- Alibaba: 2
 - Ansible: 2
 - Arm Development Studio: 4
 - armclang: 1
@@ -39,9 +39,9 @@ tools_software_languages_filter:
 - ArmRAL: 1
 - ASP.NET Core: 2
 - Assembly: 4
-- AWS: 14
 - AWS CodeBuild: 1
-- Azure: 12
+- AWS Elastic Container Service (ECS): 1
+- AWS Elastic Kubernetes Service (EKS): 2
 - Bastion: 3
 - BOLT: 1
 - C: 3
@@ -49,29 +49,24 @@ tools_software_languages_filter:
 - C++: 1
 - CCA: 2
 - Clair: 1
-- clang: 1
-- Clang: 7
+- Clang: 8
 - ClickBench: 1
 - ClickHouse: 1
 - CMake: 1
 - Coding: 14
 - Django: 1
 - Docker: 13
-- ECS: 1
-- EKS: 1
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
 - FVP: 3
-- GCC: 15
-- gcc: 1
+- GCC: 16
 - gdb: 1
 - Geekbench: 1
 - GenAI: 1
 - GitHub: 1
 - Glibc: 1
 - Go: 2
-- Google Cloud: 8
 - GoogleTest: 1
 - HammerDB: 1
 - InnoDB: 1
@@ -93,7 +88,6 @@ tools_software_languages_filter:
 - Neon: 3
 - Nexmark: 1
 - Nginx: 3
-- Oracle: 4
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
@@ -111,8 +105,7 @@ tools_software_languages_filter:
 - SVE2: 1
 - Sysbench: 1
 - Telemetry: 1
-- Tensorflow: 1
-- TensorFlow: 1
+- TensorFlow: 2
 - Terraform: 11
 - ThirdAI: 1
 - Trusted Firmware: 1
@@ -123,4 +116,9 @@ tools_software_languages_filter:
 - zlib: 1
 - Zookeeper: 1
 weight: 1
+cloud_service_providers_filter:
+- AWS: 9
+- Google Cloud: 3
+- Microsoft Azure: 7
+- Oracle: 2
 ---

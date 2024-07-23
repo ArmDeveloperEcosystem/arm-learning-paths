@@ -17,6 +17,8 @@ author_primary: Jason Andrews
 ### Tags
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers: AWS
+
 armips:
     - Neoverse
 operatingsystems:

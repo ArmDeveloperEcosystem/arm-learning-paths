@@ -11,7 +11,7 @@ This three step migration guide covers the most common scenarios for adopting Ar
 
 ## STEP 1: Learn and explore
 
-Before you start migrating applications, some background on Arm Neoverse is helpful. 
+Before you start migrating applications, some background on Arm Neoverse is helpful.
 
 ### What is Arm Neoverse?
 
@@ -73,18 +73,22 @@ If your code uses intrinsics from another architecture, you can use the librarie
 
 There are additional resources which may help you find answers to your migration questions:
 
-- [Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) 
+- [All Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) 
+    - [AWS Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=aws/#)
+    - [Google Cloud Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=google-cloud/#)
+    - [Microsoft Azure Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=microsoft-azure/#)
+    - [Oracle Learning Paths](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=oracle/#)
 - [Infrastructure Solutions blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/)
 - [Arm software install guides](https://learn.arm.com/install-guides)
 - [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started) contains a wealth of information. 
 
 Additional migration resources:
- - [Programming Languages](languages/)
- - [Optimized Libraries](libraries/)
- - [Containers](containers/)
- - [Databases](databases/)
- - [Web applications](web/)
- - [Networking](networking/)
+ - [Programming Languages](/migration/languages/)
+ - [Optimized Libraries](/migration/libraries/)
+ - [Containers](/migration/containers/)
+ - [Databases](/migration/databases/)
+ - [Web applications](/migration/web/)
+ - [Networking](/migration/networking/)
 
 
 ## Build and run

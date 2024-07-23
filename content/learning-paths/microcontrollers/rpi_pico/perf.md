@@ -18,9 +18,9 @@ The code computes the Fibonacci series in two different ways and counts the numb
 
 ## How do I build the RPi Pico application?
 
-Save the C code bellow to a file named fib.c
+Save the C code bellow to a file named `fib.c`
 
-```c
+```C
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "systick.h"
@@ -107,7 +107,7 @@ int main()
 }
 ```
 
-Save the information below as CMakeLists.txt
+Save the information below as `CMakeLists.txt`
 
 ```cmake
 cmake_minimum_required(VERSION 3.18)
@@ -136,7 +136,7 @@ pico_add_extra_outputs(${PROJECT_NAME})
 
 Two more files are needed for SysTick. 
 
-Save the code below as systick.h
+Save the code below as `systick.h`
 
 ```c
 #include <stdint.h>
@@ -156,7 +156,7 @@ uint32_t stop_systick(void);
 #define SysTick_ClockSource   0x4
 ```
 
-Finally, the fourth file is systick.c
+Finally, the fourth file is `systick.c`
 
 ```c
 #include <stdio.h>
@@ -182,7 +182,7 @@ uint32_t stop_systick()
 }
 ```
 
-Build the application.
+Build the application:
 
 ```bash
 mkdir build ; cd build
@@ -214,7 +214,7 @@ The cycle counts will be printed to the USB serial.
 
 Connect to USB serial using minicom. 
 
-For a Raspberry Pi or Ubuntu development computer the USB device to connect to is /dev/ttyACM0
+For a Raspberry Pi or Ubuntu development computer the USB device to connect to is `/dev/ttyACM0`
 
 ```bash
 sudo minicom -b 115200 -o -D /dev/ttyACM0

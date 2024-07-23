@@ -150,13 +150,13 @@ If you right click on the PuTTY application and select `Properties`, on the `Com
 
 If you would like to build with a different version of LLVM, you will need to make a change in the CMake settings. 
 
-At the time of writing, the latest version with Windows on Arm support is LLVM 16.0.0. 
+At the time of writing, the latest version with Windows on Arm support is LLVM 18.1.8. 
 
-Ensure you have downloaded and installed [LLVM 16.0.0](/install-guides/llvm-woa)
+Ensure you have downloaded and installed [LLVM 18.1.8](/install-guides/llvm-woa)
 
 On `CMake Settings` page in Visual Studio, select the `Show advanced variables`checkbox under `CMake variables and cache`.
 
-Change the value of `CMAKE_C_COMPILER` to point to the location where you have installed LLVM 16.0.0. 
+Change the value of `CMAKE_C_COMPILER` to point to the location where you have installed LLVM 18.1.8. 
 
 For example: `C:\Program Files\LLVM\bin\clang-cl.exe`. Click on the `Save to JSON` checkbox next to this field and `Save`.
 
@@ -167,9 +167,9 @@ Saving this change will automatically trigger the CMake cache variables to be re
 You should see output similar to what is shown below:
 
 ```output
-1> [CMake] -- The C compiler identification is Clang 16.0.0 with MSVC-like command-line
+1> [CMake] -- The C compiler identification is Clang 18.1.8 with MSVC-like command-line
 1> [CMake] -- Detecting C compiler ABI info
 1> [CMake] -- Detecting C compiler ABI info - done
 ```
 
-The Clang version is now 16.0.0.
+The Clang version is now 18.1.8.

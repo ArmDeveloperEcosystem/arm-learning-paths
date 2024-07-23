@@ -22,6 +22,26 @@ Calls to:
 <!-- Sort pages with this term by most recently changed first -->
 {{ $paths_to_list := (sort .Data.Pages ".Lastmod").Reverse }}
 
+
+
+
+
+{{/*
+    Calculate the proper Last Modified date, originating from any .md file for each Learning Path.
+*/}}
+{{ $blogs := slice }}
+
+<!-- Create a dictionary of Learning Paths that matches the page to the 'last modified' date.     -->
+{{ range $paths_to_list }}
+    {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
+    {{- $blogs = $blogs | append (dict "learning_path" . "calculated_date" $true_last_mod_date) }}
+{{ end }}
+
+<!-- Sort using the CalculatedDate -->
+{{ $sorted_paths_to_list := sort $blogs "calculated_date" "desc" }}
+
+
+
 <!--  Hugo crawl over learning path directories and display the main categories -->
 {{ $main_category_titles := slice }}
 {{ range where $.Site.Pages "Params.maintopic" true}}
@@ -32,17 +52,28 @@ Calls to:
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
     <div class="c-col filter-column-div u-hide lg:u-display-block u-flex-shrink-0">
-        <h3 class="u-margin-top-0">Filter</h3>
-        {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
+        {{if eq "cloud_service_provider" .Data.Singular}}
+            <h3 class="u-margin-top-0">{{.Data.Term}} Learning Paths</h3>
+            <p>
+                This page lists all Learning Paths focused on {{.Data.Term}} in the Server and Cloud Computing category. 
+            </p>
+        {{else}}
+            <h3 class="u-margin-top-0">Filter</h3>
+            {{ partial "filter-search-sort/filter-definition.html" (dict "context" . "page_type" "learning-path-term")}} 
+        {{end}}
     </div>
 
     <!-- Search & Results on Right -->
     <div class="c-col">
-        <!-- Mobile: Search & Filter -->
-        {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
-
-        <!-- Bars: Active Filters, # content displayed, sort by. -->
-        {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        
+        {{if eq "cloud_service_provider" .Data.Singular}}
+            {{ partial "filter-search-sort/csp-term-page.html" (dict  "context" . "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        {{else}}
+            <!-- Mobile: Search & Filter -->
+            {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-term")}} 
+            <!-- Bars: Active Filters, # content displayed, sort by. -->
+            {{ partial "filter-search-sort/active-filter-and-sort-bar.html" (dict "content_to_list" $paths_to_list "page_type" "learning paths")}} 
+        {{end}}
 
         <!-- List of learning paths on right -->
         <div class="c-row">
@@ -52,20 +83,20 @@ Calls to:
 
             <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
-                    {{ range $paths_to_list.ByLastmod.Reverse }}
+                    {{ range $sorted_paths_to_list }}
                         <!-- This div assigns a category tag for each LP for filtering (cross platform need to iterate over the shared_between var) -->
                         <div class='path-div search-div
-                                    {{if eq .Parent.Title "Cross Platform"}}
-                                        {{ with .Params.shared_between }}
+                                    {{if eq .learning_path.Parent.Title "Cross Platform"}}
+                                        {{ with .learning_path.Params.shared_between }}
                                             {{ range .}}
                                                 tag-{{. | urlize}}
                                             {{ end }}
                                         {{ end }}   
                                     {{else}}
-                                        tag-{{.Parent.Title | urlize}}
+                                        tag-{{.learning_path.Parent.Title | urlize}}
                                     {{end}}'>  
                             <!-- Path card formatting -->
-                            {{ partial "general-formatting/path-ads-card.html" . }}                    
+                            {{ partial "general-formatting/path-ads-card.html" (dict "learning_path" .learning_path "calculated_date" .calculated_date) }}    
                         </div>           
                     {{ end }}
                 </div>

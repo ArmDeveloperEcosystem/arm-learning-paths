@@ -1,22 +1,25 @@
 ---
-title: Develop a native C++ library on an Arm based machine
+title: Develop a native C++ library on an Arm-based machine
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for developers who want to learn how to develop a library in modern C++ on Arm using matrix processing as an example.
+who_is_this_for: This is an advanced topic for developers who want to learn how to develop a library in modern C++ on Arm, using matrix processing as an example.
 
 learning_objectives:
-    - Develop a new C++ library
-    - Test the library, ensuring it does not regress functionally
+    - Develop a new C++ library.
+    - Test a C++ library, ensuring it does not regress functionally.
 
 prerequisites:
-    - An Arm based computer running Linux, macOS, or Windows
-    - An intermediate understanding of C++ programming
-    - A decent IDE
+    - An Arm-based computer running Linux, macOS, or Windows.
+    - An intermediate understanding of C++ programming.
+    - A suitable Integrated Development Environment (IDE).
+    - The [CMake](/install-guides/cmake/) build tool.
+    - A C++ compiler with C++17 support.
+    - A build system [GNU Make](https://www.gnu.org/software/make/) or [Ninja](https://ninja-build.org/).
+    - A documentation generator [Doxygen](https://www.doxygen.nl/).
 
 author_primary: Arnaud de Grandmaison
 
-draft: false
 
 ### Tags
 skilllevels: Advanced

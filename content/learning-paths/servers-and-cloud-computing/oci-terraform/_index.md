@@ -17,6 +17,8 @@ author_primary: Frédéric -lefred- Descamps
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
+cloud_service_providers: Oracle
+
 armips:
     - Neoverse
 
@@ -25,7 +27,6 @@ operatingsystems:
 
 tools_software_languages:
     - Terraform
-    - Oracle
 
 
 ### FIXED, DO NOT MODIFY

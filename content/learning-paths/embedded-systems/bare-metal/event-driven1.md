@@ -19,7 +19,7 @@ Modify `startup_el3.s` to extend the `boot` code to perform the following, befor
 
 ### Enable exception routing to EL3
 
-Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/SCR-EL3--Secure-Configuration-Register) to route FIQ exceptions to `EL3`.
+Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/SCR-EL3--Secure-Configuration-Register?lang=en) to route FIQ exceptions to `EL3`.
 #### startup_el3.s
 ```C
 // Configure SCR_EL3
@@ -28,7 +28,7 @@ Configure the [SCR_EL3, Secure Configuration Register](https://developer.arm.com
 	MSR  SCR_EL3, x1
 ```
 ### Point to the exception vector table
-Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. You will create `vectors` in the next section.
+Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/VBAR-EL3--Vector-Base-Address-Register--EL3-) to the location of the exception vector table. You will create `vectors` in the next section.
 #### startup_el3.s
 ```C
 // Install vector table
@@ -38,7 +38,7 @@ Set the [VBAR_EL3, Vector Based Address Register](https://developer.arm.com/docu
 	ISB
 ```
 ### Disable masking of exceptions at EL3 by PSTATE
-Clear appropriate bits within [DAIF, Interrupt Mask Bits](https://developer.arm.com/documentation/ddi0595/2021-12/AArch64-Registers/DAIF--Interrupt-Mask-Bits).
+Clear appropriate bits within [DAIF, Interrupt Mask Bits](https://developer.arm.com/documentation/ddi0601/latest/AArch64-Registers/DAIF--Interrupt-Mask-Bits).
 #### startup_el3.s
 ```C
 // Clear interrupt masks

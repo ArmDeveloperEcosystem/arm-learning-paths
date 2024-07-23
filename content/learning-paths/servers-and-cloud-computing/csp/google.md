@@ -57,7 +57,7 @@ To view the latest information on which available regions and zones support Arm-
 
 Select `T2A` from the `Series` pull-down menu. Then select an appropriate `Machine type` configuration for your needs.
 
-![google5 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/6bd82b54-c254-483e-a017-d09e129e98b5 "Select an appropriate T2A machine type")
+![google5 #center](images/gcp_instance.png "Select an appropriate T2A machine type")
 
 ### Boot disk configuration
 

@@ -27,9 +27,6 @@ tools_software_languages:
     - Terraform
     - Ansible
     - MariaDB
-    - AWS
-    - Azure
-    - Google Cloud
     - Docker
 
 ### FIXED, DO NOT MODIFY

@@ -18,10 +18,6 @@ prerequisites:
 
 author_primary: Pareena Verma
 
-### Ronan show this version
-draft: false
-
-
 ### Tags
 skilllevels: Advanced
 subjects: ML
@@ -31,7 +27,7 @@ operatingsystems:
     - Baremetal
 tools_software_languages:
     - Coding
-    - Tensorflow
+    - TensorFlow
     - STM32
 
 ### FIXED, DO NOT MODIFY

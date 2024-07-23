@@ -54,7 +54,7 @@ In the next step, you will initialize OpenCV. To do so, you will slightly modify
 To initialize OpenCV and check the initialization status, follow these steps:
 1. Under the Project (left window) double-click `app/res/layout/activity_main.xml`. This opens the view designer. 
 
-2. Click the highglighted icon in the top-right corner to switch to the XML view.
+2. Click the highlighted icon in the top-right corner to switch to the XML view.
 
 ![img6](Figures/06.png)
 
@@ -124,7 +124,7 @@ The `MainActivity` class declares a TextView to display the status of OpenCV ini
 
 The onCreate method is a lifecycle method called when the activity is created. You will use it to enable edge-to-edge design for the activity (enableEdgeToEdge), set the layout for the activity using `activity_main.xml` (setContentView), and bind the TextView with the textViewStatus declared in the XML layout (findViewById). Next, you will use the OpenCVLoader.initLocal() method, which attempts to initialize OpenCV and sets `isOpenCvInitialized` based on the success or failure of the initialization.
 
-Finally, you call updateControls(), which updates the UI based on whether OpenCV was initialized successfully. Specifically, if `isOpenCvInitialized` is false, it sets the TextView’s text to “OpenCV initialization error”. Otherwise, the text is set to “OpenCV initialized”.
+Finally, you call updateControls(), which updates the UI based on whether OpenCV was initialized successfully. Specifically, if `isOpenCvInitialized` is false, it sets the TextView's text to “OpenCV initialization error”. Otherwise, the text is set to “OpenCV initialized”.
 
 ## Launch the application
 You can now launch the application in the simulator. To do so, use the top menu, where you click Run -> Run ‘app’. The application should start, and you should see the “OpenCV initialized” text as shown below:

@@ -33,6 +33,31 @@ Calls to:
     {{end}}
 {{end}}
 
+
+{{/*
+    Calculate the proper Last Modified date, originating from any .md file for each Learning Path.
+*/}}
+{{ $blogs := slice }}
+
+<!-- Create a dictionary of Learning Paths that matches the page to the 'last modified' date.     -->
+{{ range $paths_to_list }}
+    {{- $true_last_mod_date := partial "server-side-processing/calculate-last-update.html" . }}
+    {{- $blogs = $blogs | append (dict "learning_path" . "calculated_date" $true_last_mod_date) }}
+{{ end }}
+
+<!-- Sort using the CalculatedDate -->
+{{ $sorted_paths_to_list := sort $blogs "calculated_date" "desc" }}
+
+{{/* 
+{{ range $sorted_paths_to_list }}
+  <p>{{ .learning_path.Title }}</p>
+  <p>{{ .calculated_date.Format "02 Jan 2006" }} </p>
+  <p></p>
+{{ end }}
+*/}}
+
+
+
 <!-- Page wrapping row -->
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-2 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
@@ -66,33 +91,36 @@ Calls to:
             
             <div class="c-col c-col-12">
                 <div id='path-container' class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 xl:u-grid-columns-2 xxl:u-grid-columns-3 u-margin-top-1">
-                    {{ range $paths_to_list.ByLastmod.Reverse }}
+                    {{ range $sorted_paths_to_list }}
                         <!-- This div assigns tags for each LP for filtering. -->
                         <div class='path-div search-div gradient-box
-                                {{ with .Params.skillLevels }}
+                                {{ with .learning_path.Params.skillLevels }}
                                     tag-{{. | urlize}}
                                 {{ end }}
-                                {{ with .Params.subjects }}
+                                {{ with .learning_path.Params.subjects }}
                                     tag-{{. | urlize}}
                                 {{ end }}
-                                {{ with .Params.armips }}
+                                {{ with .learning_path.Params.cloud_service_providers }}
+                                    tag-{{. | urlize}}
+                                {{ end }}
+                                {{ with .learning_path.Params.armips }}
                                     {{range .}}
                                         tag-{{. | urlize}}
                                     {{end}}
                                 {{ end }}
-                                {{ with .Params.operatingsystems }}
+                                {{ with .learning_path.Params.operatingsystems }}
                                     {{ range .}}
                                         tag-{{. | urlize}}
                                     {{ end }}
                                 {{ end }}
-                                {{ with .Params.tools_software_languages }}
+                                {{ with .learning_path.Params.tools_software_languages }}
                                     {{ range .}}
                                         tag-{{replace (. | urlize) "+" "plus"}}
                                     {{end}}
                                 {{ end }}
                                 '>                            
                             <!-- Path card formatting -->
-                            {{ partial "general-formatting/path-ads-card.html" . }}    
+                            {{ partial "general-formatting/path-ads-card.html" (dict "learning_path" .learning_path "calculated_date" .calculated_date) }}    
                         </div>           
                     {{ end }}
                 </div>

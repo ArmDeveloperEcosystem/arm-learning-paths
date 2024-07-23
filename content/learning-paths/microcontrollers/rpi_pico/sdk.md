@@ -22,7 +22,7 @@ The Pico SDK installation script is managed in GitHub and is named pico_setup.sh
 
 The installation script is designed to run on a Debian-based Linux distribution. 
 
-The script checks if you are running on a Raspberry Pi 3, 4, or 400. There will be a warning if not, but the script will continue. 
+The script checks if you are running on a Raspberry Pi 3, 4, 400, or 5. There will be a warning if not, but the script will continue. 
 
 Installation has been tested on a Raspberry Pi 4, Ubuntu 22.04 and Ubuntu 20.04.
 
@@ -37,7 +37,7 @@ wget https://raw.githubusercontent.com/raspberrypi/pico-setup/master/pico_setup.
 On Ubuntu some additional packages are needed. Use the tabs to install extra packages. 
 
 {{< tabpane code=true >}}
-  {{< tab header="Ubuntu 22.04" >}}
+  {{< tab header="Ubuntu 22.04 or 24.04" >}}
 sudo apt-get install jq minicom make cmake gdb-multiarch automake autoconf libtool libftdi-dev libusb-1.0-0-dev pkg-config clang-format -y
   {{< /tab >}}
   {{< tab header="Ubuntu 20.04" >}}
@@ -57,7 +57,7 @@ If desired, VS Code can be installed from the [download area](https://code.visua
 The UART is not needed because a non-Raspberry Pi computer doesn't have the I/O pins to the connect to the Pico UART.
 
 {{< tabpane code=true >}}
-  {{< tab header="Ubuntu 22.04 or 20.04" >}}
+  {{< tab header="Ubuntu 20.04, 22.04 or 24.04" >}}
 SKIP_VSCODE=1 SKIP_UART=1 bash ./pico_setup.sh
   {{< /tab >}}
   {{< tab header="Raspberry Pi OS" >}}
