@@ -1,20 +1,20 @@
 ---
-title: Processwatch 
+title: Run Process watch on your Arm machine
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to build and run the Process Watch tool on their aarch64 machine. This tool can be used to see whether the system, or an individual workload, is making use of specific Arm instructions/features.
+who_is_this_for: This is an introductory topic for software developers who want to build and run the Process Watch tool on their Arm machine. You can use this tool to check if your system or workload, is using specific Arm instructions.
 
 learning_objectives: 
-    - To be able to clone, build and run the Process Watch tool
+    - Build and run the Process Watch tool on your Arm machine
     - Understand how Process Watch works
-    - To be able to see in real-time whether any workloads are using specific Arm instructions/features
+    - Check in real-time whether any workloads are using specific Arm instructions or features
 
 prerequisites:
-    - An Arm-based system (bare metal server, cloud instance, developer board) running Linux with kernel version 5.8.0 or later
+    - An Arm-based system (bare metal server, cloud instance or developer board) running Linux with kernel version 5.8.0 or later
     - Root access, or the ability to run the sudo command
 
-author_primary: Graham Woodward, Arm
+author_primary: Graham Woodward
 
 ### Tags
 skilllevels: Introductory
