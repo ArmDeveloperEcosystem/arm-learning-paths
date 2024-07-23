@@ -14,7 +14,7 @@ In the `GetAverageTemperature` function dashboard click the Deploy button:
 
 ![fig5](Figures/05.png)
 
-YOu can then click the **Test** button. This will open the *Configure test event* window, in which you type **Test** in the Event name and click the **Save** button. This will take you back to the GetAverageTemperature function dashboard, where you click the **Test** button again. You will see the execution status, including the average temperature value:
+You can then click the **Test** button. This will open the *Configure test event* window, in which you type **Test** in the Event name and click the **Save** button. This will take you back to the GetAverageTemperature function dashboard, where you click the **Test** button again. You will see the execution status, including the average temperature value:
 
 ![fig6](Figures/06.png)
 
