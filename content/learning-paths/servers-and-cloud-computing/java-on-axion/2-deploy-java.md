@@ -50,11 +50,33 @@ It's important to ensure that your version of OpenJDK is at least 11.0.9. There 
 {{% /notice %}}
 
 
-## Deploy a Java application on Compute Engine using Google Jump Start
+## Deploy Spring Petclinic
 
-Google provides a Jump Start Solution to quickly deploy a load balanced Java application on Compute Engine along with a high availability database:
+spring-petclinic is an example Spring-based application that is simple to build and run.
 
-[Deploy a Java application using Compute Engine](https://cloud.google.com/architecture/application-development/java-app-gce)
+First, download the repo:
 
-When configuring for Axion, you will just have to change the compute type to C4A.
+```bash
+git clone https://github.com/spring-projects/spring-petclinic.git
+```
 
+Next, enter the cloned directory and run the build script:
+
+```bash
+cd spring-petclinic
+./mvnw package
+```
+
+This will build the jar file. Once built, you can test the web server by running the jar:
+
+```bash
+java -jar target/*.jar
+```
+
+Once the application is running, you can open the web app in a web browser by visiting
+
+```bash
+http://[EXTERNAL IP]:8080
+```
+
+Where `[EXTERNAL IP]` is the value you obtained in the [last section](1-create-instance/#obtain-the-ip-of-your-instance).

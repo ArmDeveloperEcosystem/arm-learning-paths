@@ -8,38 +8,63 @@ layout: learningpathall
 
 ## Create an Axion instance
 
-You can create an Axion instance from either the Google Cloud console or using your choice of IaC (Infrastructure as Code). Here are two options:
+There are several ways to create an Axion compute instance: the Google Cloud console, the gcloud CLI tool, or using your choice of IaC (Infrastructure as Code).
 
-#### Option 1: Create an instance from the Google Cloud console
+This guide will use the gcloud CLI. If you would like to read more about deploying to Google Cloud via IaC, please check out the [Learning Path to Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/gcp/).
 
-From [console.cloud.google.com](https://console.cloud.google.com), find "Compute Engine" on the left navigation bar. Under that menu, click "VM instances", and from the resulting page click the "CREATE INSTANCE" button at the top of the page.
+#### Open and configure the Google Cloud Shell Editor
 
-From the machine configuration menu, select "C4A" as shown:
+The Cloud Shell Editor has the gcloud CLI pre-installed, and is the quickest way to access a terminal with the gcloud CLI. It can be found at [shell.cloud.google.com](https://shell.cloud.google.com/).
 
-![select C4A as the image type](select_axion_instance.png)
+Once the shell is available, configure it to use your Google Cloud project ID:
 
-Optionally change the machine type to something with higher CPU and RAM, and then select Ubuntu 24.04 LTS as the boot disk:
-
-![set Ubuntu 24.04 LTS as the boot disk](set_ubuntu.png)
-
-All other settings can be left as defaults. The last step is to push the "CREATE" button.
-
-#### Option 2: Create an instance using Terraform
-
-If you already have your Google Cloud instances templated with Terraform (or any other Infrastructure as Code), all you need to do is change the machine type in your IaC.
-
-For instance, here's the Terraform script equivalent to what was deployed from the console in the "Option 1" section above:
-
-```tf
-resource "google_compute_instance" "axion_instance" {
-  name         = "c4a-instance"
-  machine_type = "c4a-standard-2"
-  zone         = "us-central1-a"
-
-  boot_disk {
-    initialize_params {
-      image = "ubuntu-os-cloud/ubuntu-2404-lts-arm64"
-    }
-  }
-}
+```bash
+gcloud config set project [PROJECT_ID]
 ```
+#### Create the instance
+
+Run the following command, being careful to replace `[YOUR ZONE]` with the appropriate zone:
+
+```bash
+gcloud compute instances create test-app-instance --image-family=ubuntu-2404-lts-arm64  --image-project=ubuntu-os-cloud  --machine-type=c4a-standard-2 --scopes userinfo-email,cloud-platform  --zone [YOUR ZONE] --tags http-server
+```
+
+{{% notice Note %}}
+The command above will use the default network in your GCP project. If you want to use an existing network and subnet that's different from the default, please use the following flags:
+
+```bash
+--network=[YOUR NETWORK] --subnet=[YOUR SUBNET]
+```
+{{% /notice %}}
+
+#### Configure network access
+
+In the next section we will be running a Java web server that serves on port 8080. To set up access to your instance for this, run:
+
+```bash
+gcloud compute firewall-rules create default-allow-http-8080 --network=[YOUR NETWORK] --allow tcp:8080 --source-ranges 0.0.0.0/0 --target-tags http-server --description "Allow port 8080 access to http-server"
+```
+
+If you want to use the default network, you can omit the `--network` flag.
+
+#### Obtain the IP of your instance
+
+To obtain the external IP of your instance, run
+
+```bash
+gcloud compute instances list
+```
+
+You will see an entry that looks like this:
+
+```bash
+NAME: test-app-instance
+ZONE: us-central1-a
+MACHINE_TYPE: c4a-standard-2
+PREEMPTIBLE: 
+INTERNAL_IP: XX.XX.XX.XX
+EXTERNAL_IP: XX.XX.XX.XX
+STATUS: RUNNING
+```
+
+Save the EXTERNAL_IP for the next section.

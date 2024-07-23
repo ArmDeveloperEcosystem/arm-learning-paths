@@ -2,37 +2,24 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            Which instance type denotes an Axion processor?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-        correct_answer: 1                    
+            - T2A
+            - C4A
+        correct_answer: 2                
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            C4A denotes an Axion processor. T2A refers to the older Ampere Altra processors.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            Which flag is best for long running applications with predictable workloads?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - -XX:InitialCodeCacheSize
+            - -XX:-TieredCompilation
+            - -XX:ReservedCodeCacheSize
+        correct_answer: 2                   
         explanation: >
-            PLACEHOLDER EXPLANATION 2
-               
-    - questions:
-        question: >
-            PLACEHOLDER QUESTION 3?
-        answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
-        explanation: >
-            PLACEHOLDER EXPLANATION 3
+            Turning off tiered compilation is best for long running applications with predictable workloads.
 
 
 

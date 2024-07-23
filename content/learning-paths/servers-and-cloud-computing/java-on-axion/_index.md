@@ -1,5 +1,5 @@
 ---
-title: Optimizing Java applications for Google Axion processors
+title: Running Java applications on Google Axion processors
 
 minutes_to_complete: 20
 
@@ -9,7 +9,6 @@ learning_objectives:
     - Create an Axion instance
     - Deploy a Java application on Axion
     - Understand Arm performance for different JDK versions
-    - Run Java benchmarks
     - Test common performance optimization flags
 
 prerequisites:

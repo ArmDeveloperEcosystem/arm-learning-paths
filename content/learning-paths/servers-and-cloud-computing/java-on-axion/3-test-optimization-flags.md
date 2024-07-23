@@ -8,75 +8,81 @@ layout: learningpathall
 
 ## Test Java application performance and optimize
 
-Now that you've built the Renaissance Benchmark jar, you can use it to test some common performance optimization flags on Arm processors. You can also use it to test performance on different Java workloads between Google Cloud x86 instances and Axion instances.
+Now that you've built and deployed the Spring Petclinic application, you can use it to test some common JVM performance optimization flags. You can also use it to test the performance difference between Axion instances and previous-generation Google Cloud Arm instances.
 
-In this Learning Path we are using the Renaissance Benchmarks as examples, but if you have an existing Java application that you'd like to optimize, you can perform these steps on your application instead.
+## Run performance tests with jmeter
 
-## Build the Renaissance Benchmark Suite
+The spring-petclinic repo comes with a jmx file that can be used by the jmeter application to test spring-petclinic performance.
 
-The Renaissance Benchmark Suite is an aggregation of common workloads for the JVM. It's maintained by a collaboration of Oracle Labs and several universities around the world. The benchmarks can be used to optimize the JVM software stack, as well as test JVM performance on specific hardware.
-
-To build the benchmark jar, first clone the repo:
+To install jmeter, first open a new ssh terminal to your instance (so that you don't interrupt the running spring-petclinic application in your existing terminal window) and run:
 
 ```bash
-git clone https://github.com/renaissance-benchmarks/renaissance.git
+wget https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.tgz
+tar -xzf apache-jmeter-5.6.3.tgz
+sudo mv apache-jmeter-5.6.3 /opt/jmeter
+sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
 ```
 
-Then switch to the repo directory and run the build:
+to test that jmeter was installed correctly, run
 
 ```bash
-cd renaissance
-tools/sbt/bin/sbt renaissancePackage
+jmeter --version
 ```
 
-The jar will be built in the `target` directory. We will use this jar in the next section.
-
-### Running the kmeans benchmark
-
-*k*-means is a very commonly used clustering algorithm. There's an implementation built in to the Renaissance Benchmarks called scala-kmeans. We'll be using the scala-kmeans benchmark here as an example, but there are many different kinds of big data, machine-learning, and functional programming benchmarks included in the Renaissance suite. A list of them can be found on the (Renaissance docs page)[https://renaissance.dev/docs].
-
-To run the benchmark, first change to the `target` directory that you built in the last section and list the contents of the directory:
+Once you have verified installation, change directories to the jmeter test file directory (assuming you are already in the spring-petclinic repo base directory):
 
 ```bash
-cd target
-ls -la
+cd src/test/jmeter
 ```
 
-The jar that you built should look like `renaissance-gpl-{version string}.jar` where {version string} will be the version that you built. Run the jar like this, replacing the version string with your values: 
+Assuming that the spring-petclinic jar is still running in your other ssh terminal, from your new terminal you can run
 
 ```bash
-java -jar renaissance-gpl-{version string}.jar scala-kmeans --csv scala-kmeans-default.csv
+jmeter -n -t petclinic_test_plan.jmx -l results1.jtl
 ```
 
-By default the benchmark will run 50 iterations that look like this:
+In order to test the petclinic application and write results to the `results1.jtl` file.
 
-```
-====== scala-kmeans (scala) [default], iteration 0 started ======
-GC before operation: completed in 29.958 ms, heap usage 41.335 MB -> 26.363 MB.
-====== scala-kmeans (scala) [default], iteration 0 completed (214.788 ms) ======
-====== scala-kmeans (scala) [default], iteration 1 started ======
-GC before operation: completed in 19.807 ms, heap usage 54.160 MB -> 26.348 MB.
-====== scala-kmeans (scala) [default], iteration 1 completed (118.817 ms) ======
-```
-
-The `--csv scala-kmeans-default.csv` will cause the application to write the benchmark data to a CSV file. You can find the average runtime with an `awk` one-liner like this:
+This file will contain tens of thousands of rows of results, but you can parse it into high level statistics like this:
 
 ```bash
-awk -F',' 'NR>1 {sum+=$2; count++} END {print "Average duration (ns): " (sum/count)/1000000}' scala-kmeans-default.csv
+jmeter -g results1.jtl -o ./summary_report1
 ```
 
-On a the `c4a-standard-2` instance running Ubuntu 24.04 with JDK 21, this should yield something like:
+This command will create an output directory called `summary_report1`, which will contain a file called `statistics.json` with summary statistics.
 
-```
-Average duration (ns): 116.159
-```
+### Compare Axion with the previous-generation Google Cloud Arm instance type
 
-### Try some optimizations
+If you follow the same steps in this guide but generate a `t2a-standard-2` instance instead (the equivalently sized Ampere Altra instance type), you can compare the T2A `./summary_report1` results with your results obtained from your C4A Axion instance.
+
+You will see that in the `Total` data structure the average response time (`meanResTime`) will be approximately 4x longer on `t2a-standard-2` than `c4a-standard-2`. This is a significant performance improvement out-of-the-box, so if you are deciding on which instance type to use, do careful performance measurements with your own application. You may find that Axion gives you significantly better performance per unit price.
+
+### Optimizations
 
 There are a large number of Java flags that can alter runtime performance of your applications. Here are some examples:
 
 1. `-XX:-TieredCompilation`: This flag turns off intermediate compilation tiers. This can help if you've got a long-running applications that have predictable workloads, and/or you've observed that the warmup period doesn't significantly impact overall performance.
 2. `-XX:ReservedCodeCacheSize` and `-XX:InitialCodeCacheSize`: You can increase these values if you see warnings about code cache overflow in your logs. You can decrease these values if you're in a memory constrained environment, or your application doesn't use much compiled code. The only way to determine optimal values for your application is to test.
+
+Your Petclinic application is a good candidate for the `-XX:-TieredCompilation` flag, because it is long-running and has predictable workloads. To test this, stop the Petclinic application and re-run the jar with
+
+```bash
+java -XX:-TieredCompilation -jar target/*.jar
+```
+
+From a different window, you can run
+
+```bash
+jmeter -n -t petclinic_test_plan.jmx -l results2.jtl
+```
+
+Which will save test results from your new jar run to the results2.jtl file. You can then create a new summary report:
+
+```bash
+jmeter -g results2.jtl -o ./summary_report2
+```
+
+And then compare the contents of `summary_report1/statistics.json` to the contents of `summary_report2/statistics.json`. In the `Total` data structure you'll notice that the average response time (`meanResTime`) will be approximately 15% lower for the new run!
 
 To list and explore all of the available tuning flags for your JVM, run
 
@@ -84,8 +90,14 @@ To list and explore all of the available tuning flags for your JVM, run
 java -XX:+PrintFlagsFinal -version
 ```
 
-### Applying your knowledge
+You'll notice that this command will show you both the flags and their default settings.
 
-This Learning Path has only provided a sampling of possible benchmarks, but you can try the same steps with the other benchmarks on the (Renaissance docs page)[https://renaissance.dev/docs]. All workloads will have different performance characteristics, so if you are planning a new application, it may be helpful to find the Renaissance workload that most closely matches your planned workload, and do some tests with various settings to find the optimal JVM environment.
+Pay particular attention to the flags labeled `{ARCH product}`, since this denotes an architecture-specific flag.
 
-Ultimately, though, just remember that most performance tuning will be unnecessary, and you can just move your Java workloads to Axion with no changes required.
+Some very useful Arm-specific flags are:
+
+* `UseLSE`: Enables the use of Large System Extensions, which are ARM-specific features that can improve performance in multi-core systems.
+* `UseNeon`: When true, this enables the use of an advanced single instruction multiple data (SIMD) architecture extension that vastly improves use cases such as multimedia encoding/decoding, user interface, 2D/3D graphics and gaming.
+* `UseSVE`: Enables Scalable Vector Extensions, which improves vector operation performance.
+
+Ultimately just remember, though, that most performance tuning will be unnecessary, and you can just move your Java workloads to Axion with no changes required.
