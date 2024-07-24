@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## What is Acceleration Structure
+## What is an Acceleration Structure
 
 An acceleration structure is a data structure designed to improve ray traversal speed on ray tracing hardware. It uses a hierarchical tree to store the geometry data of the scene, minimizing the number of hit tests between rays and geometry. Ray tracing hardware typically utilizes this structure to quickly identify the triangles that intersect with a ray.
 
