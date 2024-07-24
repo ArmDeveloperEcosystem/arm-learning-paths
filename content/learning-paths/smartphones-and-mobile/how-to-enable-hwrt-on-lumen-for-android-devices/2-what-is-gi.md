@@ -10,7 +10,7 @@ Global illumination (GI) is a sophisticated lighting technique that considers th
 
 1. **Direct Lighting**: These are the well-defined areas directly illuminated by light sources. Think of sunlight streaming through a window or a spotlight on a stage.
 
-2. **Indirect Lighting**: Here, we delve into the subtle dance of photons. Indirect lighting occurs when light bounces off surfaces and indirectly illuminates other areas. It's responsible for soft glows and ambient lighting.
+2. **Indirect Lighting**: Indirect lighting occurs when light bounces off surfaces and indirectly illuminates other areas. It's responsible for soft glows and ambient lighting.
 
 3. **Indirect Shadows**: As photons bounce around, they create shadows in areas not directly lit. These shadows add depth and realism to the scene.
 
