@@ -6,11 +6,11 @@ weight: 5
 layout: learningpathall
 ---
 
-To harness the power of hardware ray tracing with Lumen in your application, follow these steps to configure your project settings.
+To harness the power of hardware ray tracing with Lumen in your application, follow these steps to configure your project settings:
 
 1. **Enable SM5 Shader Format**:
    - Lumen operates only when the SM5 shader format is active. Navigate to your project settings under `Platforms - Android`.
-   - Enable the option labeled `Support Vulkan Desktop [Experimented]` to activate SM5 shader format support.
+   - Enable the option labeled `Support Vulkan Desktop [Experimental]` to activate SM5 shader format support.
 
    ![SM5 Shader Format](images/sm5.png)
 
@@ -41,4 +41,4 @@ To harness the power of hardware ray tracing with Lumen in your application, fol
    r.RayTracing.AllowInline=1
    ```
 
-Now your Lumen-powered application is ready to dazzle with hardware-accelerated ray tracing! 
+Now your Lumen powered application is ready to dazzle with hardware-accelerated ray tracing! 
