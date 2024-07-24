@@ -3,12 +3,11 @@ title: How to Enable Hardware Ray Tracing on Lumen for Android Devices
 ##draft: true
 minutes_to_complete: 10
 
-who_is_this_for: Unreal developers interested in using hardware ray tracing with Lumen on Arm devices.
+who_is_this_for: This is an introductory topics for Unreal developers interested in using hardware ray tracing with Lumen on Arm devices.
 
 learning_objectives:
-    - What is Lumen.
-    - What is global illumination.
-    - Instructions on how to enable hardware ray tracing on Lumen for Arm devices.
+    - Learn about Lumen and global illumination.
+    - Enable hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:
 - A computer capable of running Unreal Engine 5.3 or later version.
