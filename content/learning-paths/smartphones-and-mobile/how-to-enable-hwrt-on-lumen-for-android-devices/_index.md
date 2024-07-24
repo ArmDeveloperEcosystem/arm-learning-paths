@@ -10,7 +10,7 @@ learning_objectives:
     - Enable hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:
-- A computer capable of running Unreal Engine 5.3 or later version.
+- A computer capable of running [Unreal Engine 5.3 or later version](https://www.unrealengine.com/en-US/download).
 - An Android mobile device that has a Mali GPU with hardware ray tracing support.
 - A USB cable to connect the mobile device to your computer.
 
