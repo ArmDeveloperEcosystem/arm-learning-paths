@@ -43,7 +43,7 @@ std::string, benchmark_method, "encode",
 
 #### Build and run llm_test 
 
-You can now build the `llm_test` executable. First, lets build without including support for i8mm and KleidiAI:
+You can now build the `llm_test` executable. First, lets build it by including support for `i8mm` without KleidiAI micro-kernels:
 
 ```bash
 bazel build -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true --define=xnn_enable_kleidiai=false --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
