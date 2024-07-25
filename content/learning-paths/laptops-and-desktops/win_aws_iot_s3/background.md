@@ -1,0 +1,16 @@
+---
+# User change
+title: "Background"
+
+weight: 2
+
+layout: "learningpathall"
+---
+
+Amazon S3 (Simple Storage Service) is a scalable, high-speed, web-based cloud storage service designed for online backup and archiving of data and applications on Amazon Web Services (AWS). Launched in 2006, S3 provides developers and IT teams with secure, durable, and highly-scalable object storage. It offers a simple web services interface that can be used to store and retrieve any amount of data from anywhere on the web, making it ideal for data storage, distribution, and computation tasks. S3 is designed to deliver 99.999999999% durability, ensuring that data is redundantly stored across multiple devices in multiple facilities. It supports a range of use cases, including big data analytics, content distribution, disaster recovery, and serverless computing. With features like lifecycle management, versioning, and access controls, Amazon S3 helps organizations manage data at scale while maintaining security and compliance.
+
+In addition to its core storage capabilities, Amazon S3 can also be used for static website hosting. This feature allows users to host static web pages directly from an S3 bucket, making it a cost-effective and simple solution for serving static content such as HTML, CSS, JavaScript, and images. By configuring the bucket for website hosting, users can define index and error documents, and take advantage of S3’s high availability and scalability to ensure their website is accessible and performant. This makes S3 an excellent choice for personal blogs, company websites, and landing pages that do not require server-side scripting.
+
+Moreover, Amazon S3 provides Software Development Kits (SDKs) for various programming languages and can be accessed through the AWS Command Line Interface (CLI). The SDKs simplify the integration of S3 into applications by providing comprehensive APIs that facilitate file uploads, downloads, and management directly from the codebase. The AWS CLI, on the other hand, allows developers and administrators to interact with S3 from the command line, accelerating many programming and administrative tasks. These tools streamline processes such as automating backups, synchronizing files across environments, and managing bucket configurations, thereby enhancing productivity and efficiency in managing cloud storage operations.
+
+In this Learning Path, you will learn how to use Amazon S3 to host a static website that interacts with AWS Lambda, showcasing the integration of S3 with other AWS services. Specifically, the Lambda function will consume data from a DynamoDB table, which is populated by a hypothetical IoT device streaming data to the cloud as explained in this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_lambda/). This setup not only demonstrates the seamless connectivity between various AWS services but also serves as a foundation for building an efficient dashboard for IoT solutions, providing real-time insights and data visualization.
