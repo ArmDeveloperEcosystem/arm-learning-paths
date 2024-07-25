@@ -145,11 +145,11 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 ```
 
 The results are the same apart from the formatting, which is not that important at this stage.
-Firstly, note that the Rust compiler is much stricter than the C compiler and there were many things that had to be fixed before the program compiled.
+Firstly, note that the Rust compiler is much stricter than the C compiler; there were many things that had to be fixed before the program compiled.
 
 This particular example is not complicated, but you might notice some differences between C and Rust already:
 
-* Uninitialized variables, mutable or immutable arguments passed to the functions don't really bother a C developer when hacking a proof of concept program. This is not the case with Rust, which forces the developer to care about these things right from the start. This might mean that is takes a bit longer to write a simple program, but you can be certain that the program is unlikely to encounter trivial bugs like buffer overflows, out of bounds, and illegal conversions.
+* Uninitialized variables, mutable or immutable arguments passed to the functions don't really bother a C developer when hacking a proof of concept program. This is not the case with Rust, which forces the developer to care about these things right from the start. This might mean that is takes a bit longer to write a simple program, but you are unlikely to encounter trivial bugs like buffer overflows, out of bounds, and illegal conversions.
 * Conversions/Castings need to be explicit, eg `2.0_f32 * ((i+1) as f32)`.
 * No need to pass around size as parameter, Rust includes size information in its arrays.
 
@@ -206,9 +206,9 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 
 The results are the same, as expected. Let's explain some of the differences:
 
-* Need to use `target_arch` and `target_feature` to use specific hardware extensions (this is Rust's feature detection, explained in the next section).
-* All definitions/functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the latter.
-* You will note `#[inline(never)]` in the definition of `average_vec`. This is to hint to the compiler that it should not inline this function for the same reason as previously, to help comparing against the C version.
+* To use specific hard ware extensions, you need to use `target_arch` and `target_feature`. This is Rust's feature detection, which is explained in the next section.
+* All definitions and functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the second one.
+* You will note `#[inline(never)]` in the definition of `average_vec`. This is to hint to the compiler that it should not inline this function to demonstrate a comparison against the C version.
 
 Let's check the assembly output, using `objdump -S average2` to check `average_vec` function:
 
@@ -227,7 +227,7 @@ Let's check the assembly output, using `objdump -S average2` to check `average_v
     69ec:       d65f03c0        ret
 ```
 
-Apart from minor differences, you will note that the main loop is the same, as we expected, the 2 x `ldr` instructions followed by `fadd`, `fmul` and an `str`.
+Apart from minor differences, you will note that the main loop is the same, as expected, and there are the 2 x `ldr` instructions followed by `fadd`, `fmul` and an `str`.
 
 ### Feature detection in Rust
 
@@ -235,7 +235,7 @@ Let's expand a bit more on the feature detection.
 
 Using SIMD intrinsics in Rust is only possible if the specific feature of the architecture that enables these intrinsics is enabled.
 
-This can only happen in architecture specific portion of the code marked by `#[cfg(target_arch = "aarch64")]`. This code will only be compiled for that particular `target_arch`, which means you might have to provide some architecture-independent implementation that will work in the other architectures if you care about your code being portable.
+This can only happen in architecture-specific portion of the code marked by `#[cfg(target_arch = "aarch64")]`. This code will only be compiled for that particular `target_arch`, which means you might have to provide some architecture-independent implementation that works in the other architectures if you care about your code being portable.
 
 The feature detection in particular refers to particular minor extensions in the ISA not covered by the main `target_arch` detection. For example, in the case of Aarch64, there is the `dotprod` extension that includes intrinsics such as `vdotq_u32`. The equivalent check in C would be something like:
 
