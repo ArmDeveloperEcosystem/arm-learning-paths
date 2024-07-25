@@ -9,9 +9,9 @@ layout: learningpathall
 ## Difference with programming with intrinsics in C
 
 There is a recent Arm Community blog post about [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics).
-The differences listed will be expanded and explained in this Learning Path with examples.
+The differences listed are expanded and explained in this Learning Path with examples.
 
-Take an example using Arm ASIMD intrinsics in C, a program that computes the average values of every pair of elements in 2 arrays:
+Take an example using Arm ASIMD intrinsics in C, a program that computes the average values of every pair of elements in two arrays:
 
 ```C
 #include <stdio.h>
@@ -70,7 +70,7 @@ A[7] = 16.00, B[7] = -30.00 -> C[7] = -7.00
 ...
 ```
 
-You will note the `-fno-inline` option passed to the compiler. This is because we want to see the assembly output of the `average_vec` function individually to compare it against the Rust version. Here is the output for the C version as given by `objdump -S average_neon`:
+You can see that the `-fno-inline` option passed to the compiler. This is to demonstrate the assembly output of the `average_vec` function individually to compare it against the Rust version. Here is the output for the C version as given by `objdump -S average_neon`:
 
 ```asm
 0000000000000870 <average_vec>:
@@ -145,11 +145,11 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 ```
 
 The results are the same apart from the formatting, which is not that important at this stage.
-First, you should note that the Rust compiler is much more strict than the C compiler and there were many things that had to be fixed before the program would compile.
+Firstly, note that the Rust compiler is much stricter than the C compiler and there were many things that had to be fixed before the program compiled.
 
-This particular example is not very complicated but you will notice some differences between C and Rust already:
+This particular example is not complicated, but you might notice some differences between C and Rust already:
 
-* Things like uninitialized variables, mutable/immutable arguments passed to the functions don't really bother a C developer when hacking a proof of concept program. This is not the case with Rust, which forces the developer to care about these things right from the start. This may mean it will take a bit longer to write some simple program, but you can be certain that this program will not suffer from trivial bugs like buffer overflows, out of bounds, illegal conversions etc.
+* Uninitialized variables, mutable or immutable arguments passed to the functions don't really bother a C developer when hacking a proof of concept program. This is not the case with Rust, which forces the developer to care about these things right from the start. This might mean that is takes a bit longer to write a simple program, but you can be certain that the program is unlikely to encounter trivial bugs like buffer overflows, out of bounds, and illegal conversions.
 * Conversions/Castings need to be explicit, eg `2.0_f32 * ((i+1) as f32)`.
 * No need to pass around size as parameter, Rust includes size information in its arrays.
 

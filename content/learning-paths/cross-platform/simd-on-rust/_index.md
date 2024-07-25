@@ -1,9 +1,9 @@
 ---
-title: Write effective SIMD on Arm using Rust
+title: Write SIMD code on Arm using Rust.
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for developers who want to take advantage of SIMD on Arm systems using Rust
+who_is_this_for: This is an advanced topic for developers who want to take advantage of SIMD on Arm systems using Rust.
 
 learning_objectives: 
     - Describe how to do SIMD programming with Rust on Arm.
