@@ -25,80 +25,7 @@ If any lines are returned, then your phone has the i8mm capability.
 
 #### Set up the build
 
-Download Android NDK r25. Mediapipe only supports up to NDK r21, which does not have support for i8mm instructions. Google has released a workaround that lets us build the binary with NDK r25 (with support for i8mm instructions) by modifying the WORKSPACE file at the root of the MediaPipe repo to use `rules_android_ndk`.
-
-```bash
-
-cd $HOME/Android/Sdk/ndk-bundle/
-
-wget https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
-
-unzip android-ndk-r25c-linux.zip
-
-```
-
-Add NDK bin folder to your PATH variable:
-
-```bash
-
-export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/
-
-```
-
-Modify the Mediapipe WORKSPACE file to add the path to Android NDK r25:
-
-```bash
-
-android_ndk_repository(name = "androidndk", api_level=30, path="/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r25c")
-
-android_sdk_repository(name = "androidsdk", path = "/home/ubuntu/Android/Sdk")
-
-```
-
-{{% notice Note %}}
-The functions above require absolute paths, so if your `$HOME` directory is not `/home/ubuntu`, change `/home/ubuntu` to your home directory instead.
-{{% /notice %}}
-
-Modify the Mediapipe WORKSPACE file to add the Starlark rules for integrating Bazel with Android NDK.
-
-First search for:
-
-```
-bind(
-    name = "python_headers",
-    actual = "@local_config_python//:python_headers",
-)
-```
-
-Replace the lines above with this expanded version:
-
-```
-
-bind(
-    name = "python_headers",
-    actual = "@local_config_python//:python_headers",
-)
-
-# Add binding rule for the toolchain, so the added rules and existing bazel rules can use the same reference
-bind(
-name = "android/crosstool",
-actual = "@androidndk//:toolchain",
-)
-
-################## Starlark rules
-
-RULES_ANDROID_NDK_COMMIT= "010f4f17dd13a8baaaacc28ba6c8c2c75f54c68b"
-RULES_ANDROID_NDK_SHA = "2ab6a97748772f289331d75caaaee0593825935d1d9d982231a437fb8ab5a14d"
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-http_archive(
-	name = "rules_android_ndk", url = "https://github.com/bazelbuild/rules_android_ndk/archive/%s.zip" % RULES_ANDROID_NDK_COMMIT,
-	sha256 = RULES_ANDROID_NDK_SHA,
-	strip_prefix = "rules_android_ndk-%s" % RULES_ANDROID_NDK_COMMIT,
-)
-load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
-register_toolchains("@androidndk//:all")
-```
-You can choose either 'decode' or 'encode' as the method to benchmark latency. Encode in this context, refers to how many tokens are processed in a second. This affects the time to first token, which is the time needed to process the input from the user. Decode refers to how many tokens are generated in a second.
+You can choose either 'decode' or 'encode' as the method to benchmark latency. Encode in this context, refers to how many tokens are processed in a second. This affects the time to first token, which is the time needed to process the input from the user. Decode refers to how many tokens are generated in a second. These instructions use 'encode' to benchmark.
 
 Modify the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc` file to specify `encode` as the benchmarking method. 
 
@@ -113,6 +40,7 @@ And replace with this line:
 ```
 std::string, benchmark_method, "encode",
 ```
+
 #### Build and run llm_test 
 
 You can now build the `llm_test` executable. First, lets build without including support for i8mm and KleidiAI:
