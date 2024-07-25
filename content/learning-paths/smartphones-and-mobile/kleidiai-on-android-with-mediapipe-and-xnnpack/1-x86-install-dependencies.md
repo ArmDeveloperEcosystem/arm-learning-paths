@@ -131,7 +131,7 @@ pip3 install -r requirements.txt
 
 #### Install and configure the Android NDK and SDK
 
-Bazel only natively supports the Android NDK up to version 21. Use the script included in MediaPipe to install the Android NDK and SDK:
+Use the script included in MediaPipe to install the Android NDK and SDK:
 
 ```bash
 bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bundle r26d --accept-licenses

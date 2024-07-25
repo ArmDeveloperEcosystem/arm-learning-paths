@@ -46,7 +46,7 @@ std::string, benchmark_method, "encode",
 You can now build the `llm_test` executable. First, lets build without including support for i8mm and KleidiAI:
 
 ```bash
-bazel build -c opt --config=android_arm64 --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
+bazel build -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true --define=xnn_enable_kleidiai=false --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
 ```
 
 Push the resulting binary to the phone:
@@ -89,31 +89,31 @@ The output should look like this:
 
 ```bash
 husky:/data/local/tmp/gen_ai $ ./llm_test
-2024-02-21T20:17:09-06:00
+2024-02-22T16:11:35-06:00
 Running ./llm_test
 Run on (9 X 1704 MHz CPU s)
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 --------------------------------------------------------------------------------------------------
 Benchmark                                        Time             CPU   Iterations UserCounters...
 --------------------------------------------------------------------------------------------------
-BM_Llm_QCINT8/512/128/1/real_time       1003557414 ns    987891597 ns            1 items_per_second=127.546/s
-BM_Llm_QCINT8/512/128/4/real_time       1032959636 ns   1015699095 ns            1 items_per_second=123.916/s
-BM_Llm_QCINT8/512/128/7/real_time       1048154704 ns   1031147568 ns            1 items_per_second=122.119/s
-BM_Llm_QCINT8/512/128/14/real_time      1093941773 ns   1076049151 ns            1 items_per_second=117.008/s
-BM_Llm_QCINT8/512/128/16/real_time      1045623292 ns   1037152577 ns            1 items_per_second=122.415/s
-BM_Llm_QCINT8/512/128/28/real_time      1059079712 ns   1044604110 ns            1 items_per_second=120.86/s
-BM_Llm_QCINT8/512/128/32/real_time      1087658611 ns   1077976514 ns            1 items_per_second=117.684/s
-BM_Llm_QCINT8/512/128/48/real_time      1087161580 ns   1078361074 ns            1 items_per_second=117.738/s
-BM_Llm_QCINT8/512/128/64/real_time      1072282227 ns   1060130805 ns            1 items_per_second=119.372/s
-BM_Llm_Mixed_INT48/512/128/1/real_time  1155142457 ns   1114548822 ns            1 items_per_second=110.809/s
-BM_Llm_Mixed_INT48/512/128/4/real_time  1130182496 ns   1095820501 ns            1 items_per_second=113.256/s
-BM_Llm_Mixed_INT48/512/128/7/real_time  1167092530 ns   1128940055 ns            1 items_per_second=109.674/s
-BM_Llm_Mixed_INT48/512/128/14/real_time 1165201458 ns   1145621858 ns            1 items_per_second=109.852/s
-BM_Llm_Mixed_INT48/512/128/16/real_time 1173947022 ns   1125000126 ns            1 items_per_second=109.034/s
-BM_Llm_Mixed_INT48/512/128/28/real_time 1147032837 ns   1104482669 ns            1 items_per_second=111.592/s
-BM_Llm_Mixed_INT48/512/128/32/real_time 1138706178 ns   1095870886 ns            1 items_per_second=112.408/s
-BM_Llm_Mixed_INT48/512/128/48/real_time 1188765625 ns   1160558175 ns            1 items_per_second=107.675/s
-BM_Llm_Mixed_INT48/512/128/64/real_time 1189585776 ns   1136016289 ns            1 items_per_second=107.6/s
+BM_Llm_QCINT8/512/128/1/real_time        838363322 ns    829751099 ns            1 items_per_second=152.678/s
+BM_Llm_QCINT8/512/128/4/real_time        841265137 ns    834988592 ns            1 items_per_second=152.152/s
+BM_Llm_QCINT8/512/128/7/real_time        852055258 ns    841642618 ns            1 items_per_second=150.225/s
+BM_Llm_QCINT8/512/128/14/real_time       860270793 ns    851762316 ns            1 items_per_second=148.79/s
+BM_Llm_QCINT8/512/128/16/real_time       841513062 ns    833101183 ns            1 items_per_second=152.107/s
+BM_Llm_QCINT8/512/128/28/real_time       864154582 ns    853668539 ns            1 items_per_second=148.122/s
+BM_Llm_QCINT8/512/128/32/real_time       830871257 ns    825545782 ns            1 items_per_second=154.055/s
+BM_Llm_QCINT8/512/128/48/real_time       854287110 ns    844283619 ns            1 items_per_second=149.833/s
+BM_Llm_QCINT8/512/128/64/real_time       854422201 ns    843630972 ns            1 items_per_second=149.809/s
+BM_Llm_Mixed_INT48/512/128/1/real_time   782606446 ns    759264361 ns            1 items_per_second=163.556/s
+BM_Llm_Mixed_INT48/512/128/4/real_time   822570557 ns    796060223 ns            1 items_per_second=155.61/s
+BM_Llm_Mixed_INT48/512/128/7/real_time   792235759 ns    775831486 ns            1 items_per_second=161.568/s
+BM_Llm_Mixed_INT48/512/128/14/real_time  778684611 ns    761880662 ns            1 items_per_second=164.38/s
+BM_Llm_Mixed_INT48/512/128/16/real_time  776865235 ns    759403033 ns            1 items_per_second=164.765/s
+BM_Llm_Mixed_INT48/512/128/28/real_time  814798707 ns    791258841 ns            1 items_per_second=157.094/s
+BM_Llm_Mixed_INT48/512/128/32/real_time  795295655 ns    764343419 ns            1 items_per_second=160.946/s
+BM_Llm_Mixed_INT48/512/128/48/real_time  792191082 ns    771217878 ns            1 items_per_second=161.577/s
+BM_Llm_Mixed_INT48/512/128/64/real_time  775814250 ns    756604293 ns            1 items_per_second=164.988/s
 ```
 
 There is a bit of throughput variation that can happen in each iteration of this benchmark, if you want to run multiple times and get a coefficient of variation you can run it like this:
