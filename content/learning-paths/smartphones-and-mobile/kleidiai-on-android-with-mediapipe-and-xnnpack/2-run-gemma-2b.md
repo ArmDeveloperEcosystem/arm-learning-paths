@@ -14,7 +14,7 @@ Build the inference tool using this command:
 
 ```bash
 
-bazel build --cxxopt=-DABSL_FLAGS_STRIP_NAMES=0 -c opt --config=android_arm64 mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main
+bazel build --cxxopt=-DABSL_FLAGS_STRIP_NAMES=0 -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main
 
 ```
 
