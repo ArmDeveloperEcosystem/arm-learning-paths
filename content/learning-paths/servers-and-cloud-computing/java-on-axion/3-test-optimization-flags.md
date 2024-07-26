@@ -51,13 +51,8 @@ jmeter -g results1.jtl -o ./summary_report1
 
 This command will create an output directory called `summary_report1`, which will contain a file called `statistics.json` with summary statistics.
 
-### Compare Axion with the previous-generation Google Cloud Arm instance type
 
-If you follow the same steps in this guide but generate a `t2a-standard-2` instance instead (the equivalently sized Ampere Altra instance type), you can compare the T2A `./summary_report1` results with your results obtained from your C4A Axion instance.
-
-You will see that in the `Total` data structure the average response time (`meanResTime`) will be approximately 4x longer on `t2a-standard-2` than `c4a-standard-2`. This is a significant performance improvement out-of-the-box, so if you are deciding on which instance type to use, do careful performance measurements with your own application. You may find that Axion gives you significantly better performance per unit price.
-
-### Optimizations
+### Best practices for optimizing your Java application
 
 There are a large number of Java flags that can alter runtime performance of your applications. Here are some examples:
 
@@ -100,4 +95,4 @@ Some very useful Arm-specific flags are:
 * `UseNeon`: When true, this enables the use of an advanced single instruction multiple data (SIMD) architecture extension that vastly improves use cases such as multimedia encoding/decoding, user interface, 2D/3D graphics and gaming.
 * `UseSVE`: Enables Scalable Vector Extensions, which improves vector operation performance.
 
-Ultimately just remember, though, that most performance tuning will be unnecessary, and you can just move your Java workloads to Axion with no changes required.
+The performance tuning parameters are dependent on the application workload and its implementation. Most of the Java based workloads can be migrated to Axion with little to no changes required.

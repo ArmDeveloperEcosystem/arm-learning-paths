@@ -3,10 +3,10 @@ title: Running Java applications on Google Axion processors
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to save money by running their Java applications on Axion processors in Google Cloud. Most Java applications will run on Axion with no changes needed, but there are optimizations that can help improve application performance on Axion.
+who_is_this_for: This is an introductory topic for software developers who want to learn how to run their Java-based applications on Arm-based Google Axion processors in Google Cloud. Most Java applications will run on Axion with no changes needed, but there are optimizations that can help improve application performance on Axion.
 
 learning_objectives: 
-    - Create an Axion instance
+    - Create an Arm-based VM instance with Axion
     - Deploy a Java application on Axion
     - Understand Arm performance for different JDK versions
     - Test common performance optimization flags

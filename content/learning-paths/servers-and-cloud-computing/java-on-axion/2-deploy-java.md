@@ -33,6 +33,14 @@ Check to ensure that the JRE is properly installed:
 java -version
 ```
 
+The output will look like this:
+
+```bash
+openjdk version "21.0.3" 2024-04-16
+OpenJDK Runtime Environment (build 21.0.3+9-Ubuntu-1ubuntu1)
+OpenJDK 64-Bit Server VM (build 21.0.3+9-Ubuntu-1ubuntu1, mixed mode, sharing)
+```
+
 Once the JRE is installed, you will want to install the default JDK:
 
 ```bash
@@ -43,6 +51,12 @@ After completion of the JDK installation, check the version:
 
 ```bash
 javac -version
+```
+
+The output will look like this:
+
+```bash
+javac 21.0.3
 ```
 
 {{% notice Note %}}

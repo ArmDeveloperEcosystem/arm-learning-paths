@@ -1,5 +1,5 @@
 ---
-title: Create an Axion instance
+title: Create Arm-based VM instance with Google Axion CPU
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,9 +8,17 @@ layout: learningpathall
 
 ## Create an Axion instance
 
-There are several ways to create an Axion compute instance: the Google Cloud console, the gcloud CLI tool, or using your choice of IaC (Infrastructure as Code).
+Axion is Google's first Arm-based CPU, designed with the Armv9 Neoverse N2 architecture. Created specifically for the data center, Axion delivers industry-leading performance and energy efficiency.
+
+{{% notice Note %}}
+The Axion instance type (C4A) is currently in public preview. A GA (General Availability) release will happen in the coming months.
+{{% /notice %}}
+
+There are several ways to create an Arm-based Google Axion VM: the Google Cloud console, the gcloud CLI tool, or using your choice of IaC (Infrastructure as Code).
 
 This guide will use the gcloud CLI. If you would like to read more about deploying to Google Cloud via IaC, please check out the [Learning Path to Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/gcp/).
+
+If you have never used the Google Cloud Platform before, please review [Getting Started with Google Cloud Platform](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/google/).
 
 #### Open and configure the Google Cloud Shell Editor
 
