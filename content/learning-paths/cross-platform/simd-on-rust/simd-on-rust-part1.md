@@ -145,13 +145,13 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 ```
 
 The results are the same apart from the formatting, which is not that important at this stage.
-Firstly, note that the Rust compiler is much stricter than the C compiler; there were many things that had to be fixed before the program compiled.
+Note that the Rust compiler is much stricter than the C compiler; there were many things that had to be fixed before the program compiled.
 
 This particular example is not complicated, but you might notice some differences between C and Rust already:
 
-* Uninitialized variables, mutable or immutable arguments passed to the functions don't really bother a C developer when hacking a proof of concept program. This is not the case with Rust, which forces the developer to care about these things right from the start. This might mean that is takes a bit longer to write a simple program, but you are unlikely to encounter trivial bugs like buffer overflows, out of bounds, and illegal conversions.
-* Conversions/Castings need to be explicit, eg `2.0_f32 * ((i+1) as f32)`.
-* No need to pass around size as parameter, Rust includes size information in its arrays.
+* Whilst uninitialized variables, mutable or immutable arguments passed to the functions might not bother a C developer when hacking a proof of concept program, this is not the case with Rust, which forces the developer to care about these things right from the start. This might mean that it takes a bit longer to write a simple program, but you are unlikely to encounter trivial bugs like buffer overflows, out-of-bounds, and illegal conversions.
+* Conversions/Castings need to be explicit; for example `2.0_f32 * ((i+1) as f32)`.
+* No need to pass around size as parameter; Rust includes size information in its arrays.
 
 Note that this program is not written in the optimal way for Rust, it's not idiomatic Rust. It is just a 'port' of the C program into Rust, with the minimal changes to compile and run.
 
@@ -227,7 +227,7 @@ Let's check the assembly output, using `objdump -S average2` to check `average_v
     69ec:       d65f03c0        ret
 ```
 
-Apart from minor differences, you will note that the main loop is the same, as expected, and there are the 2 x `ldr` instructions followed by `fadd`, `fmul` and an `str`.
+Apart from minor differences, you will note that the main loop is the same, as expected, and there are the 2 x `ldr` instructions followed by `fadd`, `fmul`, and an `str`.
 
 ### Feature detection in Rust
 
@@ -235,9 +235,9 @@ Let's expand a bit more on the feature detection.
 
 Using SIMD intrinsics in Rust is only possible if the specific feature of the architecture that enables these intrinsics is enabled.
 
-This can only happen in architecture-specific portion of the code marked by `#[cfg(target_arch = "aarch64")]`. This code will only be compiled for that particular `target_arch`, which means you might have to provide some architecture-independent implementation that works in the other architectures if you care about your code being portable.
+This can only happen in architecture-specific portion of the code marked by `#[cfg(target_arch = "aarch64")]`. This code is only compiled for that particular `target_arch`, which means you might have to provide some architecture-independent implementation that works in the other architectures if you care about your code being portable.
 
-The feature detection in particular refers to particular minor extensions in the ISA not covered by the main `target_arch` detection. For example, in the case of Aarch64, there is the `dotprod` extension that includes intrinsics such as `vdotq_u32`. The equivalent check in C would be something like:
+The feature detection in particular refers to particular minor extensions in the ISA not covered by the main `target_arch` detection. For example, in the case of AArch64, there is the `dotprod` extension that includes intrinsics such as `vdotq_u32`. The equivalent check in C would be something like:
 
 ```C
 #if defined(__ARM_FEATURE_DOTPROD)
@@ -251,7 +251,7 @@ A full list of current extensions for Arm can be found [here](https://doc.rust-l
 
 ## Alternative way with Rust using std::simd
 
-You read that there are 2 ways to do SIMD programming with Rust, `std::arch` and `std::simd`, you only saw the first. What about `std::simd`? What would the equivalent program look like using that method?
+Whilst there are two ways to do SIMD programming with Rust, `std::arch` and `std::simd`, so far you have only seen the first. What about `std::simd`? What would the equivalent program look like using that method?
 
 Here is the same program modified to use `std::simd`. Replace the functions in `average2.rs` with the following:
 
@@ -345,4 +345,4 @@ The assembly output follows:
 
 You will be pleased to see that the assembly output is exactly the same as the version using `std::arch`. The difference will be that the second version will work on other architectures as well.
 
-However there are some caveats. Some operations may benefit from using specialized intrinsics that are just not easily mapped in an architecture-agnostic method, so you will have to break portability for performance in these cases. But most of the times such a modification is justified.
+However there are some caveats. Some operations can benefit from using specialized intrinsics that are just not easily mapped in an architecture-agnostic method, so you will have to break portability for performance in these cases. But most of the time such a modification is justified.

@@ -11,10 +11,10 @@ Even if you have never programmed or looked at Rust code before, you will probab
 
 * A modern, strong-typed language.
 * Memory-safe by design: bugs like a buffer overflow are rare in Rust.
-* The compiler is very strict and doesn't permit easy mistakes as C does, therefore there can be is a steep learning curve to learn Rust.
-* It is quickly evolving to many architectures and operating systems.
+* A strict compiler that doesn't permit simple mistakes as C does, therefore there can be is a steep learning curve to learn Rust.
+* It is quickly evolving to work with many architectures and operating systems.
 
-This Learning Path is not about learning how to write Rust. There are plenty of resources for this online. You will however learn the basics of how to program SIMD code on Arm using Rust.
+{{% notice Note%}}This Learning Path is not about learning how to write Rust. There are plenty of resources for this online. You will however learn the basics of how to program SIMD code on Arm using Rust.{{% /notice %}}
 
 ## SIMD on Rust
 
