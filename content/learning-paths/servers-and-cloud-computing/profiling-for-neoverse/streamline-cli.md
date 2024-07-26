@@ -18,16 +18,22 @@ Profiling with the Streamline CLI tools is a three-step process:
 
 ![Streamline CLI tools workflow](images/streamline-cli-workflow.svg)
 
-### Procedure
+### Before you begin {.section}
+
+Before you can capture a software profile you must build your application with debug information. This enables the profiler to map instruction addresses back to specific functions in your source code. For C and C++ you do this by passing the `-g` option to the compiler.
+
+Arm recommends that you profile an optimized release build of your application, as this ensures you are profiling a realistic code workload. For C and C++ you do this by passing the `-O2` or `-O3` option to the compiler. However, we also recommend that you disable invasive optimization techniques, such as link-time optimization (LTO), because they heavily restructure the code and make the profile difficult to understand.
+
+### Procedure {.section}
 
 1. Download and extract the Streamline CLI tools on your Arm server:
 
     ```sh
-    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.2/Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
-    tar -xzf Arm_Streamline_CLI_Tools_9.2.0_linux_arm64.tgz 
+    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.3/Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
+    tar -xzf Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
     ```
     
-    Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly.
+1. Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly.
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
 
@@ -46,6 +52,8 @@ Profiling with the Streamline CLI tools is a three-step process:
 
 1. Use `sl-record` to capture a raw profile of your application and save the data to a directory on the filesystem.
 
+  Arm recommends making a profile of at least 20 seconds in duration, which ensures that the profiler can capture a statistically significant number of samples for all of the metrics.
+
     ```sh
     sl-record -C workflow_topdown_basic -o <output.apc> -A <your app command-line>
     ```
@@ -55,10 +63,6 @@ Profiling with the Streamline CLI tools is a three-step process:
     * The `-o` option provides the output directory for the capture data. The directory must not already exist because it is created by the tool when profiling starts.
   
     * The `-A` option provides the command-line for the user application. This option must be the last option provided to `sl-record` because all subsequent arguments are passed to the user application.
-
-      * Your application should be a release build, but needs to include symbol information. Build your application with the `-g` option to include symbol information. Arm recommends that you disable link-time-optimization to make the profile easier to understand.
-
-      * If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
 
     * Optionally, to enable SPE, add the `-X workflow_spe` option. Enabling SPE significantly increases the amount of data captured and the `sl-analyze` processing time, so only use this option if you need this data.
 
