@@ -49,7 +49,7 @@ accurate.
 
 Before you can capture a software profile you must build your application with debug information. This enables the profiler to map instruction addresses back to specific functions in your source code. For C and C++ you do this by passing the `-g` option to the compiler.
 
-Arm recommends that you profile an optimized release build of your application, as this ensures you are profiling a realistic code workload. For C and C++ you do this by passing the `-O2` or `-O3` option to the compiler. However, we also recommend that you disable invasive optimization techniques, such as link-time optimization (LTO), because they heavily restructure the code and make the profile difficult to understand.
+Arm recommends that you profile an optimized release build of your application, as this ensures you are profiling a realistic code workload. For C and C++ you do this by passing the `-O2` or `-O3` option to the compiler. However, it is recommended that you disable invasive optimization techniques, such as link-time optimization (LTO), because they heavily restructure the code and make the profile difficult to understand.
 
 If you are using the `workflow_topdown_basic option`, ensure that your application workload is at least 20 seconds long, in order to give the core time to capture all of the metrics needed. This time increases linearly as you add more metrics to capture.
 
