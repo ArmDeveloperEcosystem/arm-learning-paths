@@ -1,16 +1,25 @@
 ---
-title: Run the model on the edge device (optional)
+title: Run the model on the edge device
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Set up your Raspberry Pi 5
+
+If you want to see how the LLM behaves in an embedded environment, you need a Raspberry Pi 5 running Raspberry Pi OS. Install Raspberry Pi OS on your Raspberry Pi 5 using the [Raspberry Pi documentation](https://www.raspberrypi.com/documentation/computers/getting-started.html). There are numerous ways to prepare an SD card, but Raspberry Pi recommends [Raspberry Pi Imager](https://www.raspberrypi.com/software/) on a Windows, Linux, or macOS computer with an SD card slot or SD card adapter.
+
+Make sure to install the 64-bit version of Raspberry Pi OS. 
+
+The 8GB RAM Raspberry Pi 5 model is preferred for exploring an LLM.
 
 ## Download files and run on your Raspberry Pi
 
-Open a new terminal in your AWS instance to copy over the files. Replace `CONTAINER` with the name of the container, and the bracketed file names with the absolute paths to the corresponding files.
+Open a new terminal outside of the container shell to copy over the files. Replace `CONTAINER` with the name of the container, and the bracketed file names with the absolute paths to the corresponding files.
 
 ```bash
+mkdir llama3-files
+cd llama3-files
 docker cp CONTAINER:<cmake-out/examples/models/llama2/llama_main> .
 docker cp CONTAINER:<llama3/Meta-Llama-3-8B/> .
 docker cp CONTAINER:<llama3_kv_sdpa_xnn_qe_4_32.pte> .
@@ -19,7 +28,12 @@ If you don't know the container name, you can list it using:
 ```bash
 docker container ls
 ```
-Now you can transfer the files from the AWS instance to your Raspberry Pi 5. There are multiple ways to do this: via cloud storage services, with a USB thumb drive or using SSH. Use any method that is convenient for you. Transfer the two files and the directory you downloaded from the Docker container. 
+Now you can transfer the files from the host machine to your Raspberry Pi 5. There are multiple ways to do this: via cloud storage services, with a USB thumb drive or using SSH. Use any method that is convenient for you. Transfer the two files and the directory you downloaded from the Docker container. For example, you can use SCP running from a terminal in your Raspberry Pi 5 device:
+
+```bash
+scp -P <port> <user>@<host IP>:</path/to/llama3-files>/* <destination>
+```
+where `<port>` is the port you set up, `<user>` the username and `<host IP>` the public IP address, all on your host machine. `</path/to/llama3-files>/*` is the path leading to the directory on the host machine that you created, with the wildcard symbol (*) copying the full contents of the directory. The `<destination>` is where you want the file to end up on the Raspberry Pi 5. 
 
 Finally, run the model using the same command as before:
 

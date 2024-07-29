@@ -6,14 +6,14 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for anyone interested in running the Llama 3 model on a Raspberry Pi 5. It also touches on techniques for running large language models (LLMs) in an embedded environment.
 
 learning_objectives:
-    - Use AWS and Docker to emulate an embedded operating system.
+    - Use Docker to emulate an embedded operating system.
     - Compile a Large Language Model (LLM) using ExecuTorch.
     - Deploy the Llama 3 model on an edge device.
 
 
 prerequisites:
-    - A valid [AWS account](https://aws.amazon.com/).
-    - (optional) A Raspberry Pi 5.
+    - An Arm based machine.
+    - A Raspberry Pi 5.
 
 author_primary: Annie Tallund
 

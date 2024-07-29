@@ -1,33 +1,53 @@
 ---
-title: Prepare Llama model for ExecuTorch
+title: Set up Llama 3
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Overview
+
+Llama is a family of publicly available large language models (LLMs). Llama models have shown to perform well on a variety of natural language processing tasks, such as:
+
+The models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and the [responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
+
+### Quantization
+
+If you are not familiar with the topic of quantization, take a minute to read a few sentences describing why it matters when you are working with LLMs.
+
+Given the large size of many neural networks, a technique called quantization is often used to reduce the memory footprint. It allows large models to be run in memory constrained environments. In a nutshell, quantization takes floating point tensors in a neural network and converts it into data format with a smaller bit-width. It is possible to go from the FP32 data format to INT8 without seeing significant loss in model accuracy. *Dynamic quantization* is when the quantization happens at runtime.
+
+The Llama model requires at least 4-bit quantization to fit into smaller devices, such as the Raspberry Pi 5. Read more about quantization in [the PyTorch Quantization documentation](https://pytorch.org/docs/stable/quantization.html).
+
+Let's move on to getting, compiling and running the Llama model.
 
 ## Download and export the Llama 3 8B model
 
 To get started with Llama 3, you obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3 8B model is used for this part, but the same instructions apply for other options as well with minimal modification. 
 
+Install the following requirements using a package manager of your choice, for example apt-get:
+```bash
+apt-get install md5sum wget
+```
+
 Clone the Llama 3 Git repository and install the dependencies in the Docker container:
 
 ```bash
-git clone https://github.com/meta-llama/llama3.git
-cd llama3
+git clone https://github.com/meta-llama/llama-models
+cd llama-models
 pip install -e .
 ```
-Run the script to download, and paste the download link from the email when prompted:
+Run the script to download, and paste the download link from the email when prompted. You will be asked what models you would like to download. Enter `8B` for this, which will only download one of the many options. 
 ```bash
+cd models/llama3_1
 ./download.sh
 ```
 
 When the download is finished, you should see the following files in the new folder
 
 ```bash
-# Update the folder name if necessary
 $ ls ./Meta-Llama-3-8B
-checklist.chk   consolidated.00.pth   params.json   tokenizer.model
+consolidated.00.pth   params.json   tokenizer.model
 ```
 
 
@@ -37,13 +57,14 @@ checklist.chk   consolidated.00.pth   params.json   tokenizer.model
 
 ## Compile model file
 
-The next step is to generate a `.pte` file that can be used for prompts. From the `executorch` directory, compile the model executable:
+The next step is to generate a `.pte` file that can be used for prompts. From the `executorch` directory, compile the model executable. Note the quantization option, which reduces the model size significantly.
+
 ```bash {cwd="executorch"}
+cd ..
 python -m examples.models.llama2.export_llama --checkpoint <consolidated.00.pth> \
 -p <params.json> -kv --use_sdpa_with_kv_cache -X -qmode 8da4w \ 
 --group_size 128 -d fp32 --metadata '{"get_bos_id":128000, "get_eos_id":128001}' \
 --embedding-quantize 4,32 --output_name="llama3_kv_sdpa_xnn_qe_4_32.pte"
-# Note the quantization option, which reduces the model size significantly
 ```
 
 Where `<consolidated.00.pth>` and `<params.json>` are the paths to the downloaded model files, found in llama3/Meta-Llama-3-8B by default. This step might take some time.
@@ -67,6 +88,10 @@ Model evaluation without a GPU will take a long time, therefore this step is opt
 Follow the steps below to build ExecuTorch and the Llama runner to run models. 
 
 The final step for running the model is to build the `llama_runner` which is the executable to interact with the model. Compile and build ExecuTorch with `cmake`:
+
+{{% notice Note %}}
+Omit the `-DEXECUTORCH_USE_TIKTOKEN=ON` option if you are building Llama 2.
+{{% /notice %}}
 
 ``` bash
 cmake -DPYTHON_EXECUTABLE=python \
@@ -102,9 +127,7 @@ cmake -DPYTHON_EXECUTABLE=python \
 
 cmake --build cmake-out/examples/models/llama2 -j16 --config Release
 ```
-{{% notice Note %}}
-Omit the `-DEXECUTORCH_USE_TIKTOKEN=ON` option if you are not building Llama 3.
-{{% /notice %}}
+
 
 Now you know how to compile an LLM with ExecuTorch. At this point, you have everything you need to put the model to the test.
 
