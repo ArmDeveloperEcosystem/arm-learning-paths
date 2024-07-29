@@ -147,7 +147,7 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 The results are the same apart from the formatting, which is not that important at this stage.
 Note that the Rust compiler is much stricter than the C compiler; there were many things that had to be fixed before the program compiled.
 
-This particular example is not complicated, but you might notice some differences between C and Rust already:
+This example is not complicated, but you might notice some differences between C and Rust already:
 
 * Whilst uninitialized variables, mutable or immutable arguments passed to the functions might not bother a C developer when hacking a proof of concept program, this is not the case with Rust, which forces the developer to care about these things right from the start. This might mean that it takes a bit longer to write a simple program, but you are unlikely to encounter trivial bugs like buffer overflows, out-of-bounds, and illegal conversions.
 * Conversions/Castings need to be explicit; for example `2.0_f32 * ((i+1) as f32)`.

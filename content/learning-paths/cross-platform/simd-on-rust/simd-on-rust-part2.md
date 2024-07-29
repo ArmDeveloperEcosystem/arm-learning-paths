@@ -76,7 +76,7 @@ B[31] = [ 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 0
 sad = 7400
 ```
 
-Note the extra compiler flag `-march=armv8.2-a+dotprod`. This is to actually enable the code generation for `dotprod` instructions, otherwise the compiler will not be aware of these instructions and will fail to compile any code that uses them.
+Note the extra compiler flag `-march=armv8.2-a+dotprod`. This is to enable the code generation for `dotprod` instructions, otherwise the compiler will not be aware of these instructions and will fail to compile any code that uses them.
 
 Here is the assembly code of the `sad_neon` function as displayed by `objdump -S dotprod1`:
 
@@ -255,13 +255,13 @@ Now observe the generated assembly using `objdump -S dotprod2`
 
 You might notice something strange. Where there should be a `udot` instruction there is a `bl` which indicates a branch, and we see that the `udot` instruction is indeed called in another function, which does the loads again.
 
-This certainly seems counter-intuitive and difficult to comprehend. The reason for this is that in constract to C, Rust treats the intrinsics like normal functions.
+This certainly seems counter-intuitive and difficult to comprehend. The reason for this is that in contrast to C, Rust treats the intrinsics like normal functions.
 
 Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, then code generation and performance is almost the same as the one you get using C. If however, it is not possible, then you will find that the same code in Rust performs much worse due to this exact reason.
 
 Because of this, you have to be vigilant that your SIMD Rust code generates the expected assembly. So, how can you fix this behaviour and get the generated code that you expect?
 
-As you have already seen, Rust is quite peculiar about the enabled target features. In this particular case, you have to remember to add that `dotprod` is the required target feature that you want to use. So first you have to change it in the function `sad_vec_asimd`:
+As you have already seen, Rust is quite peculiar about the enabled target features. In this case, you have to remember to add that `dotprod` is the required target feature that you want to use. So first you have to change it in the function `sad_vec_asimd`:
 
 ```Rust
 #[cfg(target_arch = "aarch64")]

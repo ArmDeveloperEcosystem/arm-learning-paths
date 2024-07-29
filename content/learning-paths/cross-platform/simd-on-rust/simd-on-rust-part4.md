@@ -200,7 +200,7 @@ int main() {
 }
 ```
 
-The code might look complicated, but it's not. A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does two passes of the same algorithm on the elements of the array, involving amongst other things calling the 2 butterfly functions, for one and two coefficients respectively, transposing the results inbetween calculations. The result is rounded and stored in the output buffer `dct`.
+The code might look complicated, but it's not. A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does two passes of the same algorithm on the elements of the array, involving amongst other things calling the 2 butterfly functions, for one and two coefficients respectively, transposing the results in between calculations. The result is rounded and stored in the output buffer `dct`.
 
 The assembly output is linked [here](../butterfly1.asm) instead of embedded due to its size.
 

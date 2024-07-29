@@ -213,6 +213,6 @@ Similarly, the assembly output of the Rust implementation `transpose_s16_4x4_asi
     64e0:       d65f03c0        ret
 ```
 
-Which is exactly the same as the C implementation. As expected.
+Which is exactly the same as the C implementation, as expected.
 
 In the next section you will look at a more complicated example that uses this one.
