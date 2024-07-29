@@ -67,6 +67,7 @@ git submodule update --init
 The install_requirements for Llama 3  are the same as for Llama 2, so you can use the instructions for both models up until the very last step.
 
 You can safely ignore the error on failing to import lm_eval running the install_requirements.sh scripts.
+"Failed to import examples.models due to lm_eval conflict"
 {{% /notice %}}
 
 If these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!

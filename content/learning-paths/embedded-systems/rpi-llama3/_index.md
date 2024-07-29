@@ -12,7 +12,7 @@ learning_objectives:
 
 
 prerequisites:
-    - An Arm based machine.
+    - An Arm-based machine or cloud instance.
     - A Raspberry Pi 5.
 
 author_primary: Annie Tallund

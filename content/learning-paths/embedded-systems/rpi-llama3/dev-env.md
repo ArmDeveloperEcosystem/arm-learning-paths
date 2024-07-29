@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 The rise of Large Language Models (LLM) re-shapes the landscape of what is possible. The *transformer networks* are known for their ability to generate coherent responses to complex strings of text. A known collection of LLMs is [Llama](https://llama.meta.com/). It successfully generates text so contextually accurate that it can be indistinguishable from a real human.
 
-In this learning path, you will prepare an LLM for edge deployment on the Raspberry Pi 5. A Docker container emulates the edge device, which means you can complete the guide without needing access to the actual board. 
+In this learning path, you will prepare an LLM for edge deployment on the Raspberry Pi 5. A Docker container emulates the edge device, which is used to build the binaries needed to deploy the model on the actual device.
 
 ## Arm machine memory requirements
 
-You can run the steps in this learning path on any Arm-based Linux, either a physical machine or instance in the cloud (later on referred to as _host_). Because of the size of the model you will run, you need one with quite a bit of memory, required to compile the transformer model. These instructions were tested on an AWS instance of type `m7gd.4xlarge`, with 64 GB of memory (RAM) and a 100 GB disk volume. 
+You can run the steps in this learning path on any Arm-based Linux, either a physical machine or instance in the cloud (later on referred to as _host_). Because of the size of the model you will run, you need one with some extra bit of memory (RAM), required to compile the transformer model. These instructions were tested on an AWS instance of type `m7gd.4xlarge` and `c7g.8xlarge`, with 64 GB of memory (RAM) and a 100 GB disk volume. 
 
 Information about launching an AWS instance is available in the [Getting Started with AWS](/learning-paths/servers-and-cloud-computing/csp/aws/) install guide.
 

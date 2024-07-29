@@ -23,7 +23,9 @@ Let's move on to getting, compiling and running the Llama model.
 
 ## Download and export the Llama 3 8B model
 
-To get started with Llama 3, you obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3 8B model is used for this part, but the same instructions apply for other options as well with minimal modification. 
+To get started with Llama 3, you obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3 8B model is used for this part, but the same instructions apply for other options as well with minimal modification.
+
+
 
 Install the following requirements using a package manager of your choice, for example apt-get:
 ```bash
@@ -36,18 +38,28 @@ Clone the Llama 3 Git repository and install the dependencies in the Docker cont
 git clone https://github.com/meta-llama/llama-models
 cd llama-models
 pip install -e .
+pip install buck
 ```
-Run the script to download, and paste the download link from the email when prompted. You will be asked what models you would like to download. Enter `8B` for this, which will only download one of the many options. 
+Run the script to download, and paste the download link from the email when prompted. You will be asked what models you would like to download. Enter `8B` for this, which will only download one of the many options.
 ```bash
 cd models/llama3_1
 ./download.sh
 ```
-
+chmod?
+```console
+ **** Model list ***
+ -  meta-llama-3.1-405b
+ -  meta-llama-3.1-70b
+ -  meta-llama-3.1-8b
+ -  meta-llama-guard-3-8b
+ -  prompt-guard
+```
+meta-llama-3.1-8b choose model
 When the download is finished, you should see the following files in the new folder
 
 ```bash
-$ ls ./Meta-Llama-3-8B
-consolidated.00.pth   params.json   tokenizer.model
+$ ls Meta-Llama-3.1-8B
+consolidated.00.pth  params.json  tokenizer.model
 ```
 
 
@@ -59,10 +71,13 @@ consolidated.00.pth   params.json   tokenizer.model
 
 The next step is to generate a `.pte` file that can be used for prompts. From the `executorch` directory, compile the model executable. Note the quantization option, which reduces the model size significantly.
 
+If you've followed the tutorial, this should now take you to the `executorch` base directory.
 ```bash {cwd="executorch"}
-cd ..
-python -m examples.models.llama2.export_llama --checkpoint <consolidated.00.pth> \
--p <params.json> -kv --use_sdpa_with_kv_cache -X -qmode 8da4w \ 
+cd ../../../
+```
+```bash
+python -m examples.models.llama2.export_llama --checkpoint llama-models/models/llama3_1/Meta-Llama-3.1-8B/consolidated.00.pth \
+-p llama-models/models/llama3_1/Meta-Llama-3.1-8B/params.json -kv --use_sdpa_with_kv_cache -X -qmode 8da4w \
 --group_size 128 -d fp32 --metadata '{"get_bos_id":128000, "get_eos_id":128001}' \
 --embedding-quantize 4,32 --output_name="llama3_kv_sdpa_xnn_qe_4_32.pte"
 ```
@@ -85,7 +100,7 @@ Model evaluation without a GPU will take a long time, therefore this step is opt
 
 ## Compile and build the executable
 
-Follow the steps below to build ExecuTorch and the Llama runner to run models. 
+Follow the steps below to build ExecuTorch and the Llama runner to run models.
 
 The final step for running the model is to build the `llama_runner` which is the executable to interact with the model. Compile and build ExecuTorch with `cmake`:
 
@@ -105,7 +120,8 @@ cmake -DPYTHON_EXECUTABLE=python \
     -DEXECUTORCH_BUILD_KERNELS_OPTIMIZED=ON \
     -DEXECUTORCH_BUILD_KERNELS_CUSTOM=ON \
     -Bcmake-out .
-
+```
+```bash
 cmake --build cmake-out -j16 --target install --config Release
 ```
 
@@ -124,7 +140,8 @@ cmake -DPYTHON_EXECUTABLE=python \
     -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
     -Bcmake-out/examples/models/llama2 \
     examples/models/llama2
-
+```
+```bash
 cmake --build cmake-out/examples/models/llama2 -j16 --config Release
 ```
 
@@ -134,8 +151,8 @@ Now you know how to compile an LLM with ExecuTorch. At this point, you have ever
 ## Run the model
 
 ``` bash
-cmake-out/examples/models/llama2/llama_main --model_path=<model pte file> \
---tokenizer_path=<tokenizer.model> --prompt="what is the meaning of life?"
+cmake-out/examples/models/llama2/llama_main --model_path=<model pte file> --tokenizer_path=<tokenizer.model> \
+--prompt="Write a python script that prints the first 15 numbers in the Fibonacci series. Annotate the script with comments explaining what the code does."
 ```
 
 The run options are available on [GitHub](https://github.com/pytorch/executorch/blob/main/examples/models/llama2/main.cpp#L18-L40).
@@ -144,14 +161,14 @@ The run options are available on [GitHub](https://github.com/pytorch/executorch/
 If you are not running Llama 3, you must convert the `tokenizer.model` to a `.bin` file. This step is described in the [ExecuTorch examples guide](https://github.com/pytorch/executorch/blob/main/examples/models/llama2/README.md#option-a-download-and-export-llama-2-7b-model).
 {{% /notice %}}
 
-If all goes well, you will see the model output along with some memory statistics:
+If all goes well, you will see the model output along with some memory statistics. Some output has been omitted for better readability.
 ```console
 pi@raspberrypi5:~ $ ./llama_main  \
     --model_path=./llama3_kv_sdpa_xnn_qe_4_32.pte  \
     --tokenizer_path=./tokenizer.model \
     --cpu_threads=4 \
-    --prompt="what is the meaning of life?"  
-                       
+    --prompt="Write a python script that prints the first 15 numbers in the Fibonacci series. Annotate the script with comments explaining what the code does."
+
 I 00:00:00.000242 executorch:main.cpp:64] Resetting threadpool with num threads = 4
 I 00:00:00.000715 executorch:runner.cpp:50] Creating LLaMa runner: model_path=./llama3_kv_sdpa_xnn_qe_4_32.pte, tokenizer_path=./tokenizer.model
 I 00:00:46.844266 executorch:runner.cpp:69] Reading metadata from model
@@ -164,21 +181,7 @@ I 00:00:46.844386 executorch:runner.cpp:134] get_max_seq_len: 128
 I 00:00:46.844392 executorch:runner.cpp:134] use_kv_cache: 1
 I 00:00:46.844396 executorch:runner.cpp:134] use_sdpa_with_kv_cache: 1
 I 00:00:46.844400 executorch:runner.cpp:134] append_eos_to_prompt: 0
-
-what is the meaning of life for you?
-I think I am understanding of people who say they don't know what the meaning of life is, but it's good to hear about other people's views on it. So, here's my view on it:
-I think life is simply existing and living. If you can't live, you can't really live, so you shouldn't exist at all. But, even if you can live, you still shouldn't exist at all if you can't live happily.
-Life is about living and living happily. Life is about enjoying it and living
-
-PyTorchObserver {"prompt_tokens":7,"generated_tokens":120,"model_load_start_ms":1713804343168,"model_load_end_ms":1713804390147,"inference_start_ms":1713804390147,"inference_end_ms":1713804451862,"prompt_eval_end_ms":1713804393539,"first_token_ms":1713804394025,"aggregate_sampling_time_ms":140733463036888,"SCALING_FACTOR_UNITS_PER_SECOND":1000}
-I 00:01:48.694592 executorch:runner.cpp:415]    Prompt Tokens: 7    Generated Tokens: 120
-I 00:01:48.694608 executorch:runner.cpp:421]    Model Load Time:                46.979000 (seconds)
-I 00:01:48.694625 executorch:runner.cpp:428]    Total inference time:           61.715000 (seconds)              Rate:  1.944422 (tokens/second)
-I 00:01:48.694646 executorch:runner.cpp:438]            Prompt evaluation:      3.392000 (seconds)               Rate:  2.063679 (tokens/second)
-I 00:01:48.694667 executorch:runner.cpp:447]            Generated 120 tokens:   58.323000 (seconds)              Rate:  2.057507 (tokens/second)
-I 00:01:48.694688 executorch:runner.cpp:458]    Time to first generated token:  3.878000 (seconds)
-I 00:01:48.694700 executorch:runner.cpp:464]    Sampling time over 127 tokens:  140733463036.888000 (seconds)
 ```
 
-You now know how to run a Llama model in RaspBerry Pi OS using ExecuTorch. Put the model to the test by experimenting with different prompts. If you have access to the RPi 5, move on to deploy it in the next section.
+You now know how to run a Llama model in RaspBerry Pi OS using ExecuTorch. If you have access to the RPi 5, move on to deploy it in the next section.
 
