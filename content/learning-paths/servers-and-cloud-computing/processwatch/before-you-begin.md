@@ -9,12 +9,11 @@ layout: learningpathall
 ## Before you begin
 
 You need to install some linux packages before you start building Process Watch on your machine. The packages are listed below:
-  * CMake
-  * Clang
-  * LLVM
-  * POSIX Threads
+  * CMake.
+  * Clang.
+  * LLVM.
+  * POSIX Threads.
   * libelf
-
 To install these dependencies on an Ubuntu 20.04 and later machine, run:
 ```console
 sudo apt-get update
@@ -27,14 +26,14 @@ You can now clone the Process Watch repository:
 git clone --recursive https://github.com/intel/processwatch.git
 ```
 
-Note that the --recursive option will ensure all submodules are cloned. Now change into the top level directory of the repository:
+Note that the --recursive option ensures all submodules are cloned. Now change into the top level directory of the repository:
 ```console
 cd processwatch
 ```
 ## Process Watch dependencies
-For the Arm build, Process Watch is dependent on two submodules. These are
-* bpftool - For building and installing the eBPF program, this is dependent on libbpf
-* Capstone - For instruction decoding, this is dependent on LLVM
+For the Arm build, Process Watch is dependent on two submodules. These are:
+* bpftool - for building and installing the eBPF program, this is dependent on libbpf.
+* Capstone - for instruction decoding, this is dependent on LLVM.
 
 ## Building Process Watch
 You are now ready to build Process Watch. Use the `build.sh` shell script included in the repository to build it:
