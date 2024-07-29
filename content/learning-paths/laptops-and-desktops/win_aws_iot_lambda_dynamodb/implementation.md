@@ -122,7 +122,7 @@ export const handler = async (event) => {
 }
 ```
 
-The handler receives an event object, which in this case is ignored. Then, the handler declares four constants (variables, whose values cannot be reaasigned):
+The handler receives an event object, which in this case is ignored. Then, the handler declares four constants (variables, whose values cannot be reassigned):
 * **now** - gets the current date and time.
 * **N** - the number of minutes to look back from the current time.
 * **timeThreshold** - calculates the time threshold by subtracting N minutes from the current time.

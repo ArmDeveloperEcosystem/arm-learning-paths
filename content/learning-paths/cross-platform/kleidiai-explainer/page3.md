@@ -7,9 +7,9 @@ layout: learningpathall
 ---
 
 ## KleidiAI GitLab Repo
-This section probes the intricate details of what KlediAI is doing and how it is beneficial to AI performance optimization. 
+This section probes the intricate details of what KleidiAI is doing and how it is beneficial to AI performance optimization. 
 
-Navigate to the [KlediAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai) and view the [example file](https://gitlab.arm.com/kleidi/kleidiai/-/blob/main/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/matmul_clamp_f32_qai8dxp_qsi4cxp.cpp?ref_type=heads) that you will be running. This example highlights the *i8mm* matrix multiplication micro-kernel, alongside the enabling packing/quantization micro-kernels.
+Navigate to the [KleidiAI GitLab repository](https://gitlab.arm.com/kleidi/kleidiai) and view the [example file](https://gitlab.arm.com/kleidi/kleidiai/-/blob/main/examples/matmul_clamp_f32_qai8dxp_qsi4cxp/matmul_clamp_f32_qai8dxp_qsi4cxp.cpp?ref_type=heads) that you will be running. This example highlights the *i8mm* matrix multiplication micro-kernel, alongside the enabling packing/quantization micro-kernels.
 
 {{% notice Note %}}This example illustrates KleidiAI microkernel performance. In practice, you will not interact with KleidiAI's microkernels as your ML framework will leverage it automatically, if supported.{{% /notice %}} 
 
@@ -213,7 +213,7 @@ The reference matrix multiplication takes place in the function `ref_matmul_f32_
 
 The function takes in the following parameters:
 * Input matrix dimensions (`m`, `n`, `k`).
-* Input matricies, quantized and packed (`lhs_ref_matx_qa8xd`, `rhs_native_mtx_qs4cx`)
+* Input matrices, quantized and packed (`lhs_ref_matx_qa8xd`, `rhs_native_mtx_qs4cx`)
 * The scale factor for the RHS matrix (`rhs_scales_f32`). Recall that the LHS offsets are stored in the matrix itself.
 * The pointer to the output matrix (`dst_ref_mtx_f32`).
 * Upper and lower bounds on floating point numbers for easier processing (`-FLT_MAX`, `FLT_MAX`).
@@ -227,7 +227,7 @@ The implementation of the matrix multiplication is relatively straightforward to
     const size_t rhs_stride = (k / 2) * sizeof(uint8_t);
 ```
 
-Next the main loop begins, incrementing row and column indexes to obtain the correct pointers (`lhs_ptr` and `rhs_ptr`) to access individual rows in each input matrix. This is the loop where matrix multiplication actually takes place. The loop iterates over the input matrcies' shared dimension `k`. It steps in increments of 2 (`b += 2`) as the LHS matrix needs to get two INT8 numbers to multiply against the two INT4 numbers from the RHS matrix's INT8 memory location. The numbers from each matrix are multiplied and added to the FP32 sized `iacc` variable. 
+Next the main loop begins, incrementing row and column indexes to obtain the correct pointers (`lhs_ptr` and `rhs_ptr`) to access individual rows in each input matrix. This is the loop where matrix multiplication actually takes place. The loop iterates over the input matrices' shared dimension `k`. It steps in increments of 2 (`b += 2`) as the LHS matrix needs to get two INT8 numbers to multiply against the two INT4 numbers from the RHS matrix's INT8 memory location. The numbers from each matrix are multiplied and added to the FP32 sized `iacc` variable. 
 
 ```C
     for (size_t b = 0; b < k; b += 2) {
