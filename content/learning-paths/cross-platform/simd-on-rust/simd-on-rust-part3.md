@@ -172,8 +172,8 @@ unsafe fn transpose_s16_4x4_asimd(a: &mut [i16]) -> () {
 
 You will note two important differences here:
 
-* initialization of the `int16x4_t va` array at the start of the `transpose_s16_4x4_asimd` function. In C you can just declare the variable `va` and the compiler may not complain much. Even with the relevant compile flags, it will understand that the SIMD variable will be immediately initialized by the respective load instructions `vld1q_s16`.
-In Rust this is not the case, as the compiler will insist that *all* variables are initialized on definition. Zero-Initialization here might just waste a few cycles so it's just better to initialize the array with all elements right at the beginning. Of course we could do that in C as well, it's just that the C compiler doesn't care that much. But Rust does.
+* initialization of the `int16x4_t va` array at the start of the `transpose_s16_4x4_asimd` function. In C you can simply declare the variable `va` and the compiler might not complain much. Even with the relevant compile flags, it understands that the SIMD variable is immediately initialized by the respective load instructions `vld1q_s16`.
+In Rust this is not the case, as the compiler insists that *all* variables are initialized on definition. Zero-Initialization here might just waste a few cycles so it's better to initialize the array with all elements right at the beginning. Of course we could do that in C as well, it's just that the C compiler doesn't care that much. But Rust does.
 * meta-vector constructs such as `int16x4x2_t` and `int32x2x2_t` are defined as structs in C with each element as the corresponding element of the nested array `val[]`. In Rust however they are defined as tuples, and each element is accessed directly as `0` or `1` in these cases, eg `b0.0` and `c1.1`.
 
 As before, save and compile this file as `transpose2.rs` and run it:

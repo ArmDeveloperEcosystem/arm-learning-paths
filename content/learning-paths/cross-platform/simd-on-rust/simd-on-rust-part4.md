@@ -6,9 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-The example chosen is a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)` which is the basis of many DCT algorithms as used in multiple video codecs, including VP9, AV1, etc.
+The example chosen is a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)` which is the basis of many DCT algorithms as used in multiple video codecs, such as VP9, and AV1.
 
-It is called a 'butterfly' operation in DCT and it is defined as
+It is called a 'butterfly' operation in DCT and it is defined as:
 
 ```C
 #define ROUND_POWER_OF_TWO(value, n) (((value) + (1 << ((n)-1))) >> (n))
@@ -17,7 +17,7 @@ It is called a 'butterfly' operation in DCT and it is defined as
 
 where `DCT_CONST_BITS` is defined with the value `14` for many codecs.
 
-Now SIMD implementations are able to calculate both the expressions `fdct_round_shift(a * c1 + b * c2)` and `fdct_round_shift(a * c1 - b * c2)` in a single function, for 8 x 16-bit pixel elements, reusing computations and saving multiple instructions in the process.
+SIMD implementations are able to calculate both the expressions `fdct_round_shift(a * c1 + b * c2)` and `fdct_round_shift(a * c1 - b * c2)` in a single function, for 8 x 16-bit pixel elements, reusing computations and saving multiple instructions in the process.
 
 Here is what one implementation looks like, as [taken from the `libvpx` video codec library](https://chromium.googlesource.com/webm/libvpx/+/refs/heads/main/vpx_dsp/arm/fdct_neon.h):
 
@@ -42,7 +42,7 @@ static INLINE void butterfly_two_coeff_half(const int16x4_t a,
 }
 ```
 
-Some explanation needs to be done here. This algorithm will use the widening versions of `mul`, `mull` which will take 16-bit quantities and produce a 32-bit product. In this case, the initial half 4x16-bit vectors produce products in 4 x 32-bit vectors, `a1`, `a2`. These vectors hold the quantities for the first part of the expression `a * c1` and `a * c2`.
+Some explanation needs to be done here. This algorithm uses the widening versions of `mul`, `mull` which takes 16-bit quantities and produce a 32-bit product. In this case, the initial half 4x16-bit vectors produce products in 4 x 32-bit vectors, `a1`, `a2`. These vectors hold the quantities for the first part of the expression `a * c1` and `a * c2`.
 
 Next the `vmlal_n_s16` and `vmlsl_n_s16` intrinsics are used, which produce the quantities `a * c1 + b * c2` or `a * c1 - b * c2`, respectively.
 
@@ -200,7 +200,7 @@ int main() {
 }
 ```
 
-The code may look complicated, but really it's not. A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does 2 passes of the same algorithm on the elements of the array, involving amongst other things calling the 2 butterfly functions, for one and two coefficients respectively, transposing the results inbetween calculations. The result is rounded and stored in the output buffer `dct`.
+The code might look complicated, but it's not. A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does two passes of the same algorithm on the elements of the array, involving amongst other things calling the 2 butterfly functions, for one and two coefficients respectively, transposing the results inbetween calculations. The result is rounded and stored in the output buffer `dct`.
 
 The assembly output is linked [here](../butterfly1.asm) instead of embedded due to its size.
 
@@ -347,13 +347,13 @@ unsafe fn fdct4x4_vec_asimd(input: &[i16], output: &mut [i16], stride: usize) ->
 }
 ```
 
-The assembly output is linked [here](../butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart perhaps from the cpu feature check at the start.
+The assembly output is linked [here](../butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart perhaps from the CPU feature check at the start.
 
 ### Comments
 
 There are some things you probably have noticed that are different from the previous examples.
 
-* The config declaration `#[cfg(target_arch = "aarch64")]` and the `use std::arch::aarch64::*;` have both gone to the top of the file, as there are many functions that need to use SIMD intrinsics and it is simple than having to add it to every function.
+* The config declaration `#[cfg(target_arch = "aarch64")]` and the `use std::arch::aarch64::*;` have both moved to the top of the file, as there are many functions that need to use SIMD intrinsics and it is simple than having to add it to every function.
 * Rust functions can return pairs of values, so there is no need for the pointer values of `add`, `sub` to be passed as arguments to the butterfly functions, like in C.
 This leads to better and more readable code. A similar thing can be achieved with C++'s `std::pair`.
 ```Rust
@@ -365,7 +365,7 @@ This leads to better and more readable code. A similar thing can be achieved wit
 ```C
 vin[0] = vshl_n_s16(vin[0], 4);
 ```
-In Rust, while that syntax is still allowed -which you can also verify by modifying the code and recompiling- it is however encouraged to use the new generics syntax:
+In Rust, while that syntax is still allowed - which you can also verify by modifying the code and recompiling- it is however encouraged to use the new generics syntax:
 
 ```Rust
 vin[0] = vshl_n_s16::<4>(vin[0]);
