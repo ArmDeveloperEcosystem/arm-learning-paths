@@ -48,6 +48,10 @@ jobs:
           task_name: Markdown
           output_file: spellcheck-output.txt
 
+      - name: Refine spelling results
+        continue-on-error: true
+        run: tools/process-spelling.sh
+
       - name: Spelling results
         uses: actions/upload-artifact@v3
         with:
