@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Understanding Process Watch
-Process Watch uses the Linux `perf_events` interface to sample retired instructions. It uses a Berkley Packet Filter (BPF) program to retrieve the Program Counter (PC) and the process ID (PID) of the process being executed. It then decodes the instruction at the PC and internally maintains counts for each instruction that is sampled.
+Process Watch uses the Linux `perf_events` interface to sample retired instructions. It uses a Berkeley Packet Filter (BPF) program to retrieve the Program Counter (PC) and the process ID (PID) of the process being executed. It then decodes the instruction at the PC and internally maintains counts for each instruction that is sampled.
 
 In the previous section, you saw what the output of Process Watch looks like. Lets look at what each field in the output means:
 
