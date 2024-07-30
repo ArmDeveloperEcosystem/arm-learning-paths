@@ -13,3 +13,6 @@ grep -v '^>' "$input_file" | grep -v '^\s*$' | awk 'NF==1' | grep '^[a-zA-Z0-9]'
 mv "$tmp_file" "$input_file"
 
 echo "New spelling issues to check are now available in '$input_file'"
+
+echo -e "\nWords to check:"
+cat $input_file
