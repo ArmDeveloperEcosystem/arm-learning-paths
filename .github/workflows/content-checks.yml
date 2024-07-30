@@ -79,7 +79,7 @@ jobs:
             5.0.x
             6.0.x
       - name: Run Microsoft Security DevOps
-        uses: microsoft/security-devops-action@preview
+        uses: microsoft/security-devops-action@latest
         id: msdo
 
       - name: Upload results to Security tab
