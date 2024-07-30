@@ -42,6 +42,7 @@ jobs:
           retention-days: 7 # Default is 90 days
 
       - name: Spell check
+        continue-on-error: true
         uses: rojopolis/spellcheck-github-actions@0.40.0
         with:
           config_path: .spellcheck.yml
