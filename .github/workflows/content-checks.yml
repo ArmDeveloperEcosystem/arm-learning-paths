@@ -47,6 +47,9 @@ jobs:
           config_path: .spellcheck.yml
           task_name: Markdown
           output_file: spellcheck-output.txt
+
+      - name: Refine spelling results
+        continue-on-error: true
         run: tools/process-spelling.sh
 
       - name: Spelling results
