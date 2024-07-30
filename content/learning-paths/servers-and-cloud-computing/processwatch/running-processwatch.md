@@ -40,13 +40,13 @@ options:
   ```
 
 
-By default, Process Watch will:
- * Print results every two seconds.
- * Print results until the tool is killed (via Ctrl+c).
- * Print all results in a table format on `stdout`.
- * Profile all running processes.
- * Display counts for the default filters, which are 'FPARMv8', 'NEON', 'SVE', and 'SVE2'.
- * Set the sample period to every 10000 events.
+By default, Process Watch:
+ * Prints results every two seconds.
+ * Prints results until the tool is killed (via Ctrl+c).
+ * Prints all results in a table format on `stdout`.
+ * Profiles all running processes.
+ * Displays counts for the default filters, which are 'FPARMv8', 'NEON', 'SVE', and 'SVE2'.
+ * Sets the sample period to every 10000 events.
 
 ## Default Process Watch output
 You can run Process Watch with no arguments:
