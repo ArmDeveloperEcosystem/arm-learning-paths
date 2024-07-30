@@ -14,13 +14,13 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: '0.98.0'
           extended: true
@@ -35,14 +35,14 @@ jobs:
         run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
 
       - name: HTML test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: htmltest-report
           path: htmltest.log
           retention-days: 7 # Default is 90 days
 
       - name: Spell check
-        uses: rojopolis/spellcheck-github-actions@0.30.0
+        uses: rojopolis/spellcheck-github-actions@0.40.0
         with:
           config_path: .spellcheck.yml
           task_name: Markdown
@@ -53,7 +53,7 @@ jobs:
         run: tools/process-spelling.sh
 
       - name: Spelling results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: spellcheck-output
           path: spellcheck-output.txt
@@ -65,14 +65,14 @@ jobs:
           clamscan -r -i public -l scanlog
 
       - name: Scan results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: clamscan-log
           path: scanlog
           retention-days: 7 # Default is 90 days
 
       - name: Azure DevOps Security Scan
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
             5.0.x
@@ -82,7 +82,7 @@ jobs:
         id: msdo
 
       - name: Upload results to Security tab
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.msdo.outputs.sarifFile }}
           retention-days: 7 # Default is 90 days
