@@ -22,7 +22,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.98.0'
+          hugo-version: '0.130.0'
           extended: true
 
       - name: Build
@@ -39,7 +39,7 @@ jobs:
         with:
           name: htmltest-report
           path: htmltest.log
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
 
       - name: Spell check
         continue-on-error: true
@@ -58,7 +58,7 @@ jobs:
         with:
           name: spellcheck-output
           path: spellcheck-output.txt
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
 
       - name: Scan for malware
         run: |
@@ -70,7 +70,7 @@ jobs:
         with:
           name: clamscan-log
           path: scanlog
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
 
       - name: Azure DevOps Security Scan
         uses: actions/setup-dotnet@v4
@@ -86,4 +86,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.msdo.outputs.sarifFile }}
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
