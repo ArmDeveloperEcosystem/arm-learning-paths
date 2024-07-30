@@ -9,8 +9,8 @@ layout: learningpathall
 ## Setup i.MX 8M Plus model
 
 AVH offers a 30-day free trial to use.
--	Create an account in AVH. https://app.avh.arm.com/login 
--	Once logged in, you should see a similar screen as shown below. 
+-	Create an account in [Arm Virtual Hardware](https://app.avh.arm.com/login)
+-	Once logged in, you should see a similar screen as shown below.
 -	Click on create device.
 ![create device alt-text#center](avh_images/avh1.png "Figure 1. Create device")
 - Click on Default Project.
@@ -24,32 +24,36 @@ AVH offers a 30-day free trial to use.
 
 -	Click on Create device, this could take few minutes.
 
--	A console to Linux running on the Cortex-A should appear. use “root” to login.
+-	A console to Linux running on the Cortex-A should appear. Use “root” to login.
 
--	Run ip addr to find the ip address for the board model. This will be needed to ssh into the device.
-![A runnign model alt-text#center](avh_images/avh6.png "Figure 6. A running model")
+-	Find the IP address for the board model by running the command. This will be needed access the device using SSH.
+```bash
+ip addr
+```
+![A running model alt-text#center](avh_images/avh6.png "Figure 6. A running model")
 
 {{% notice Note %}}
-The GUI on the right side doesn’t always work for some reason, if you see the error shown in the picture above, just ignore it and continue with the demo.
+The GUI on the right side may not work. You can safely ignore the error you see in the picture above and continue with the learning path.
 {{% /notice %}}
 
 ### Useful AVH tips
- 
+
 ![AVH connect interface alt-text#center](avh_images/avh7.png "Figure 7. AVH connect interface")
 
-The “connect” pane shows the different ways that you can connect to the simulated board. The ip address specified should be the same as that visible in the output of the ip addr command. 
+The “Connect” pane shows the different ways that you can connect to the simulated board. The IP address specified should be the same as that visible in the output of the `ip addr` command.
 
+“Quick Connect” lets you SSH to the AVH model without having to use a VPN configuration. Similarly, you can replace `ssh` for `scp` to copy files from and to the virtual device. In order to use Quick Connect, it is necessary to add your public key via the `Manage SSH keys here` link.
+![Generate SSH key alt-text#center](avh_images/avh8.png "Figure 8. Generate SSH key")
 
-“Quick connect” allows you to ssh/scp to the AVH model without having to use a VPN configuration. In order to use Quick connect, it is necessary to add your ed25519 public key via the “manage ssh keys” here link.
+To generate an SSH key, you can run the following command on your machine.
+```bash
+ssh-keygen -t ed25519
+```
 
-{{% notice Note %}}
-To generate an ssh key, you can run on your machine:  *ssh-keygen -t ed25519*
-![Generate ssh key alt-text#center](avh_images/avh8.png "Figure 8. Generate ssh key")
-{{% /notice %}}
 
 ## Download the pre-built hybrid-runtime
 
-Once your AVH model is setup, we already have a pre-built hybrid-runtime and some necessary scripts packaged in a GitHub package, to download this package, run:
+Once your AVH model is set up, you can download the pre-built hybrid-runtime. This GitHub package contains the runtime and some necessary scripts.
 
 ```console
 wget https://github.com/smarter-project/hybrid-runtime/releases/download/v1.5/hybrid.tar.gz
@@ -60,22 +64,21 @@ Extract the files to /usr/local/bin using:
 tar -C /usr/local/bin/ -xvf hybrid.tar.gz
 ```
 {{% notice Note %}}
-If you want to build the hybrid-runtime on your own instructions can be found at the very end of this learning path.
+If you want to build the hybrid-runtime on your own, instructions can be found in the section of this learning path called [Building the hybrid-runtime and container image](../build-runtime/).
 {{% /notice %}}
 
 ## Download Firmware container image
 
-We provide a pre-built lightweight Docker container image available on GitHub for the i.MX8M-PLUS-EVK board that can be used for the AVH demo. The container image contains a simple FreeRTOS hello-world application built using the NXP SDK.
+For this learning path, there is also a pre-built lightweight Docker container image available on GitHub. You can use it for the `i.MX8M-PLUS-EVK` board. The container image contains a simple FreeRTOS hello-world application built using the NXP SDK.
 
-You can pull the pre-built image onto the AVH model using:
+You can pull the pre-built image onto the AVH model by running the command.
 
 ```console
 ctr image pull ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest
 ```
-Make sure the container image was pulled successfully:
+Make sure the container image was pulled successfully. An image with the name *ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest* should appear as an output.
 
 ```console
 ctr image ls
 ```
 
-An image with the name *ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest* should appear as an output of the previous command.  

@@ -3,17 +3,17 @@ title: Deploy firmware on hybrid edge systems using containers
 
 minutes_to_complete: 20
 
-who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy software (embedded applications and firmware) onto other processors in the system via Linux running on the application core.
+who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy software (embedded applications and firmware) onto other processors in the system, using Linux running on the application core.
 
-learning_objectives: 
-    - Deploy a containerized embedded application onto an M-core from an A-core using Containerd and k3s.	
+learning_objectives:
+    - Deploy a containerized embedded application onto a Cortex-M core from an A-core using containerd and K3s.
     - Build a firmware container image.
-    - Build the Hybrid runtime components.
-    
+    - Build the hybrid-runtime components.
+
 
 prerequisites:
-    - Access to Arm Virtual Hardware to use the i.MX 8M Plus model. AVH provides a free 30-day trial if you do not have a subscription. https://app.avh.arm.com/login
-    - If you want to build your own runtime and container image, you will need a Linux host machine with Docker, buildx and Git.
+    - A valid account with [Arm Virtual Hardware](https://app.avh.arm.com/login)
+    - or, an Arm Linux host machine (if you want to build your own runtime and container image)
 
 author_primary: Basma El Gaabouri
 
