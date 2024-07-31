@@ -9,15 +9,15 @@ Containerd is a cloud-native container runtime used to deploy workloads accross 
 
 ## Hello World example
 
-Now that the container image has been pulled, we will showcase a few of the commands from the OCI specification. The expected output will show after each command.
+Now that the container image has been pulled, you can try few of the commands from the OCI specification. The expected output is shown after each command.
 
-Create and start the container.
+Create and start the container:
 ```bash
 ctr run --runtime io.containerd.hybrid \
 ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest test
 ```
 
-Check that the container was created.
+Check that the container was created:
 ```bash
 ctr c ls
 ```
@@ -26,7 +26,7 @@ CONTAINER    IMAGE                                                              
 test         ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest    io.containerd.hybrid
 ```
 
-Check that the container is running.
+Check that the container is running:
 ```bash
 ctr t ls
 ```
@@ -38,11 +38,11 @@ The output from the hello-world application running on the Cortex-M can be seen 
 
 ![Cortex-M output alt-text#center](containerd1.png "Figure 1. Cortex-M output")
 
-Check the container info
+Check the container info:
 ```bash
 ctr c info test
 ```
-The output should look something like this. Some of it has been omitted here for better readability.
+The output should look something like this:
 
 ```output
 {
@@ -94,11 +94,11 @@ The output should look something like this. Some of it has been omitted here for
 }
 ```
 
-Stop the container.
+Stop the container:
 ```console
 ctr t kill test
 ```
-Check that the container was stopped.
+Check that the container was stopped:
 ```console
 ctr t ls
 ```
@@ -106,7 +106,7 @@ ctr t ls
 TASK    PID    STATUS
 test    808    STOPPED
 ```
-Delete the container.
+Delete the container:
 ```console
 ctr c rm test
 ```
@@ -120,11 +120,11 @@ You can pull the pre-built image onto the AVH model using:
 ```console
 ctr image pull ghcr.io/smarter-project/smart-camera-hybrid-application/hybrid_app_imx8mp:latest
 ```
-Create and run the container.
+Create and run the container:
 ```console
 ctr run --runtime io.containerd.hybrid ghcr.io/smarter-project/smart-camera-hybrid-application/hybrid_app_imx8mp:latest test2
 ```
-The Cortex-M Console output will now show as below.
+The Cortex-M Console output will now show as below:
 
 ![Cortex-M output alt-text#center](containerd2.png "Figure 2. Cortex-M output")
 
@@ -143,7 +143,7 @@ Timestamp: 8
 Timestamp: 9
 Timestamp: 10
 ```
-When the container is deleted, the log file will also be removed.
+When the container is deleted, the log file will also be removed as shown:
 ```console
 ctr t kill test2
 ctr c rm test2
