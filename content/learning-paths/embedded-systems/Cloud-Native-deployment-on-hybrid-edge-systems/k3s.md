@@ -9,7 +9,7 @@ K3s is a lightweight Kubernetes distribution, built to work well in embedded env
 
 ## K3s setup
 
-We’ll be using a single node K3s cluster setup. To download K3s and set it up, run the following commands.
+You will use a single node K3s cluster setup. To download K3s and set it up, run the following commands:
 ```bash
 export INSTALL_K3S_EXEC="server --disable traefik --disable metrics-server --disable coredns --disable local-storage --flannel-backend=none --cluster-dns 169.254.0.2 --container-runtime-endpoint=unix://var/run/containerd/containerd.sock"
 ```
@@ -123,9 +123,9 @@ A pod with the name `example3` should be running.
 
 2. Check the Cortex-M Console. If there is any output here, the firmware is running.
 
-### Kill the demo
+### Stop the demo
 
-To kill the demo, run the command. The termination process can take a few minutes.
+To stop the demo, run the command shown below. The termination process can take a few minutes.
 ```bash
 kubectl delete pod example3 --grace-period=0 --force
 ```
@@ -157,6 +157,6 @@ ls /var/lib/hybrid-runtime/
 
 ## Summary
 
-The hybrid-runtime can be used to improve the experience for systems with multiple IPs on a single SoC. You know know how to use cloud tools such as K3s and containerd to deploy and run workloads on hybrid systems using the hybrid-runtime.
+The hybrid-runtime can be used to improve the experience for systems with multiple IPs on a single SoC. You now know how to use cloud tools such as K3s and containerd to deploy and run workloads on hybrid systems using the hybrid-runtime.
 
 If you have an Arm Linux host, you can run the hello world example by following the instructions in the next section.
