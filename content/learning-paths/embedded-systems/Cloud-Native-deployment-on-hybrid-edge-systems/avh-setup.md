@@ -12,7 +12,7 @@ AVH offers a 30-day free trial to use.
 -	Create an account in [Arm Virtual Hardware](https://app.avh.arm.com/login)
 -	Once logged in, you should see a similar screen as shown below.
 -	Click on create device.
-![create device alt-text#center](avh_images/avh1.png "Figure 1. Create device")
+![img1 #center](avh_images/avh1.png "Figure 1. Create device")
 - Click on Default Project.
 ![select project alt-text#center](avh_images/avh2.png "Figure 2. Select project")
 - Select the i.MX 8M Plus device. The platform runs four Cortex-A53 processors.
