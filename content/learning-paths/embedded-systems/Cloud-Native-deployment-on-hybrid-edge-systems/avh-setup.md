@@ -12,7 +12,6 @@ AVH offers a 30-day free trial to use.
 -	Create an account in [Arm Virtual Hardware](https://app.avh.arm.com/login)
 -	Once logged in, you should see a similar screen as shown below.
 -	Click on create device.
--	![foo](avh_images/av1.png)
 ![create device alt-text#center](avh_images/avh1.png "Figure 1. Create device")
 - Click on Default Project.
 ![select project alt-text#center](avh_images/avh2.png "Figure 2. Select project")
