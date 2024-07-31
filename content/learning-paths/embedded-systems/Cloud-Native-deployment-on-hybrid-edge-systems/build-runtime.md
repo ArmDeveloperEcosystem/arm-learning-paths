@@ -9,7 +9,7 @@ This section shows how you can build the hello world example on your Arm Linux h
 
 Install Git by running.
 ```bash
-apt install git
+sudo apt install git
 ```
 
 ## Building the hybrid-runtime
