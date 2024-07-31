@@ -40,13 +40,13 @@ cd llama-models
 pip install -e .
 pip install buck
 ```
-Run the script to download, and paste the download link from the email when prompted. You will be asked what models you would like to download. Enter `8B` for this, which will only download one of the many options.
+Run the script to download, and paste the download link from the email when prompted.
 ```bash
 cd models/llama3_1
 ./download.sh
 ```
-chmod?
-```console
+You will be asked which models you would like to download. Enter `meta-llama-3.1-8b` to get the model used for this learning path.
+```output
  **** Model list ***
  -  meta-llama-3.1-405b
  -  meta-llama-3.1-70b
@@ -54,7 +54,6 @@ chmod?
  -  meta-llama-guard-3-8b
  -  prompt-guard
 ```
-meta-llama-3.1-8b choose model
 When the download is finished, you should see the following files in the new folder
 
 ```bash
@@ -64,7 +63,8 @@ consolidated.00.pth  params.json  tokenizer.model
 
 
 {{% notice Note %}}
-1. If you encounter the error `"Sorry, we could not process your request at this moment"`, it might mean you have initiated two license processes simultaneously. Try modifying the affiliation field to work around it.
+1. If you encounter the error "Sorry, we could not process your request at this moment", it might mean you have initiated two license processes simultaneously. Try modifying the affiliation field to work around it.
+2. You may have to run the `download.sh` script as root, or modify the execution privileges with `chmod`.
 {{% /notice %}}
 
 ## Compile model file
