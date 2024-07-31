@@ -1,17 +1,17 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: If you are interested in learning more about deploying IoT applications using Arm Virtual Hardware, please continue the learning path below:
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/embedded-systems/avh_balena/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: K3s Quick start Guide 
+        link: https://docs.k3s.io/quick-start
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
+        title: Smarter Project GitHub page
+        link: https://github.com/smarter-project/
+        type: website
     - resource:
         title: Hybrid-runtime GitHub page 
         link: https://github.com/smarter-project/hybrid-runtime/tree/main
