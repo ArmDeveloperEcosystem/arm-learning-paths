@@ -15,7 +15,8 @@ AVH offers a 30-day free trial to use.
 ![create device alt-text#center](avh_images/avh1.png "Figure 1. Create device")
 - Click on Default Project.
 ![select project alt-text#center](avh_images/avh2.png "Figure 2. Select project")
-- Select the i.MX 8M Plus device.
+- Select the i.MX 8M Plus device. The platform runs four Cortex-A53 processors.
+
 ![Select the i.MX 8M Plus device alt-text#center](avh_images/avh3.png "Figure 3. Select device")
 - Select the Yocto Linux (full) (2.2.1) image.
 ![Select the Yocto Linux (full) (2.2.1) alt-text#center](avh_images/avh4.png "Figure 4. Select the Yocto Linux (full) (2.2.1) image")
