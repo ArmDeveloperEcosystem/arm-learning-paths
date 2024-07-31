@@ -47,7 +47,7 @@ The command above will use the default network in your GCP project. If you want 
 
 #### Configure network access
 
-In the next section we will be running a Java web server that serves on port 8080. To set up access to your instance for this, run:
+In the next section you will run a Java web server that serves on port 8080. To set up access to your instance for this, run:
 
 ```bash
 gcloud compute firewall-rules create default-allow-http-8080 --network=[YOUR NETWORK] --allow tcp:8080 --source-ranges 0.0.0.0/0 --target-tags http-server --description "Allow port 8080 access to http-server"
