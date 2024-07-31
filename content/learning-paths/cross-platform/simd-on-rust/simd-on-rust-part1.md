@@ -139,7 +139,7 @@ fn average_vec(c: &mut [f32], a: &[f32], b: &[f32]) -> () {
 
 fn print_vec(a: &[f32], b: &[f32], c: &[f32]) -> () {
     for i in 0..c.len() {
-        println!("A[{}] = {}, B[{}] = {} -> C[{}] = {}", i, a[i], i, b[i], i, c[i]);
+        println!("A[{i}] = {}, B[{i}] = {} -> C[{i}] = {}", a[i], b[i], c[i]);
     }
 }
 ```
