@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Using Process Watch
-Process Watch can be used to determine the presence (or absence) of certain instructions. In this section, you will use Process Watch to detect the use of NEON and SVE instructions by this example workload. Start by saving the simple workload shown below in a file name `workload.c`:
+You can use Process Watch to determine the presence or absence of certain instructions. In this section, you will use Process Watch to detect the use of NEON and SVE instructions by this example workload. Start by saving the simple workload shown below in a file name `workload.c`:
 ```C
 #include <stdint.h>
 #define LEN 1024
