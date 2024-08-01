@@ -2,7 +2,7 @@
 # User change
 title: "Create Lambda Function"
 
-weight: 4
+weight: 3
 
 layout: "learningpathall"
 ---
