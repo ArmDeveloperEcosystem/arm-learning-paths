@@ -1,20 +1,20 @@
 ---
-title: Learn how to migrate an x86 application to multi-architecture with Arm-based Google Axion processors on GKE
+title: How to build a CI/CD pipeline with GitLab on Google Axion
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who are looking to migrate their existing x86 containerized applications to Arm
+who_is_this_for: This is an advanced topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion based self-hosted GitLab runners. 
 
 learning_objectives: 
-    - Add Arm-based (Google Axion) nodes to an existing x86-based GKE cluster
-    - Rebuild an x86-based application to make it multi-arch and run on Arm
-    - Learn how to add taints and tolerations to GKE clusters to schedule application pods on architecture specific nodes
-    - Run a multi-arch application across multiple architectures on a single GKE cluster
+    - Create a Google Axion based GitLab self-hosted runner
+    - Build a CI/CD pipeline with multi-architecture support
+    - Build multi-architecture docker images using native GitLab runners on x86 and Arm
+    - Automate the build and deployment of a multi-arch application with GitLab CI/CD
 
 prerequisites:
     - A [Google Cloud account](https://console.cloud.google.com/). Create an account if needed.
     - A computer with [Google Cloud CLI](/install-guides/gcloud) and [kubectl](/install-guides/kubectl/)installed.
-    - An existing Google Kubernetes Engine (GKE) cluster with x86-based nodes
+    - A valid GitLab account
 
 author_primary: Pranay Bakre
 
@@ -28,10 +28,18 @@ armips:
 
 tools_software_languages:
     - Kubernetes
+    - Docker
+    - GitLab
 
 operatingsystems:
     - Linux
 
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - embedded-systems
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

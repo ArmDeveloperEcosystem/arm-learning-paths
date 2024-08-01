@@ -69,7 +69,7 @@ resource "google_project_iam_member" "project" {
 resource "google_compute_instance" "bastion_host" {
   project      = var.project
   name         = "bastion-vm"
-  machine_type = "t2a-standard-1"
+  machine_type = "c4a-standard-1"
   zone         = var.zone
   tags         = ["public"]
   boot_disk {
@@ -91,7 +91,7 @@ resource "google_compute_instance" "bastion_host" {
 resource "google_compute_instance" "private" {
   project                   = var.project
   name                      = "bastion-private"
-  machine_type              = "t2a-standard-1"
+  machine_type              = "c4a-standard-1"
   zone                      = var.zone
   allow_stopping_for_update = true
   tags                      = ["private"]
@@ -154,7 +154,7 @@ zone = "us-central1-a"
 ```
 
 {{% notice Note %}}
-Replace `project_ID` with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type. In this case, it's the [Tau T2A](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) series.
+Replace `project_ID` with your value which can be found in the [Dashboard](https://console.cloud.google.com/home?_ga=2.56408877.721166205.1675053595-562732326.1671688536&_gac=1.125526520.1675155465.CjwKCAiAleOeBhBdEiwAfgmXfwdH3kCFBFeYzoKSuP1DzwJq7nY083_qzg7oyP2gwxMvaE0PaHVgFhoCmXoQAvD_BwE) of Google Cloud console. The [region and zone](https://cloud.google.com/compute/docs/regions-zones#available) are selected depending on the machine type.
 {{% /notice %}}
 
 Now create a `modules` directory and inside it create a `network-firewall` and `vpc-network` directories.
