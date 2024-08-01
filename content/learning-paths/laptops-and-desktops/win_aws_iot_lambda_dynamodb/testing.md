@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 
 # Testing the function
-To test the function, launch the IoT emulator to write some data to the DynamoDB table. Refer to this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb).
+To test the function, launch the IoT emulator to write some data to the DynamoDB table. Refer to this [Learning Path for more information](/learning-paths/laptops-and-desktops/win_aws_iot_dynamodb).
 
 In the `GetAverageTemperature` function dashboard click the **Deploy** button:
 
