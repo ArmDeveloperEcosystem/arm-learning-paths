@@ -1,35 +1,36 @@
 ---
 review:
     - questions:
-        question: Where to find the detailed documentation with example instrumentations?
-            
+        question: >
+           To permanently enable userspace access for performance monitoring, you need to add kernel.perf_user_access = 1 to the /etc/sysctl.conf file. 
         answers:
-            - If you need a more detailed documentation, request repo access from author and access this [Documentation-PMUV3_plugin](https://github.com/GayathriNarayana19/PMUv3_plugin/blob/main/Documentation-PMUV3_plugin.pdf)
-        correct_answer: 1                    
-        explanation: >
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >        
+            You need to edit the sysctl configuration file to make the change permanent. 
 
     - questions:
         question: >
-            If you want to instrument in a C++ codebase around a single chunk of code, which scenario will you adopt?
+            The PMUv3 plugin can be used to analyze performance of Python applications.
         answers:
-            - Scenario I
-            - Scenario II
-            - Scenario III
-            - Scenario IV
+            - "True"
+            - "False"
         correct_answer: 2                   
         explanation: >
+            The PMUv3 plugin collects performance information for C/C++ applications.
                
     - questions:
         question: >
-            What are the advantages of using PMUv3_plugin?
+            What are the advantages of using the PMUv3 plugin?
         answers:
             - Avoids context switches
-            - Ability to collect the PMU events and metrics in one shot. 
-            - Scope to create Custom bundles is present.
-            - More precise and accurate compared to generic instrumentation methods due to direct counter accesis
+            - Ability to easily collect the PMU events and metrics 
+            - More precise and accurate compared to generic instrumentation methods due to direct counter access
             - All the above
-        correct_answer: 5         
+        correct_answer: 4         
         explanation: >
+            All of the advantages listed are correct for the PMUv3 plugin.
 
 
 

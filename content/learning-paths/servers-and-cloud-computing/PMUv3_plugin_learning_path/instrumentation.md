@@ -1,265 +1,145 @@
 ---
-title: How to instrument at code level?
+title: Instrument one section of code
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## INSTRUMENTATION USING PMUV3_PLUGIN
-There are 4 scenarios listed below. Ideally, pick the scenario you are looking for and refer to that usage. 
+The instrumentation scenarios are listed below, covering the most common situations.
 
-## Scenario I – Instrumentation In Different Code Blocks in C++ codebase
-For Pmuv3_Bundles Instrumentation IN DIFFERENT CHUNK OF CODES in C++ codebase (e.g.: Multiple chunks of code in same testcase, Multiple functions or Nested functions), follow the below steps.  
+## Directory structure
 
-1. In your application source code where the PMUv3 instrumentation will be embedded, you need to include header this way.
+So far you have the Linux kernel source tree and the PMUv3 plugin source code. 
 
-```yaml
-#include "processing.hpp" 
+Next, create a third directory to learn how to integrate the PMUv3 plugin into an application.
 
-#ifdef PMUV3_CPU_BUNDLES
-extern "C" {
-    #ifdef PARENT_DIR
-        #include "pmuv3_plugin_bundle.h"
-    #endif
-}
-#endif
+```console
+mkdir test
 ```
 
-2. Initialize the PMUv3 Event Bundle - void pmuv3_bundle_init(int)
-In testcases, in main function, we need to pass the argument for which bundle to choose:
+The instructions assume you have all three directories in parallel. If you have a different directory structure you may need to adjust the build commands to find the header files and libraries. 
 
-```yaml
-int main(int argc, char** argv)
-{
-    if (argc != 2) {
-        printf("Usage: %s <arg>\n", argv[0]);
-        exit(1);
-    }
-     int cur_bundles_no = atoi(argv[1]);
-    // then call initialization once:
-    pmuv3_bundle_init(cur_bundles_no);
-}
+Here are the 3 directories you now have:
+
+```output
+./linux
+./PMUv3_plugin
+./test
 ```
 
-3. local_index is a unique variable specific to every piece of instrumentation. It will be used to map the end_count to corresponding start_count and helps in post processing to calculate the cycle difference.
-The get_next_index() API will help to increment the local_index by 1 at every call.
+You can use the test directory to try out the integration scenarios. 
 
-```yaml
-uint64_t local_index = get_next_index();
-```
-NOTE: This local_index variable that you define should be unique everytime. You call this before calling the get_start_count() API and every single time give unique variable name like local1, local2, local3 etc instead of using local_index everytime. This uniqueness will be useful when there are multiple functions of the same level within a function. Eg: When f2(), f3() are present within f1() and f2(), f3() are of same level, not nested.
+## Instrumenting a single code block in C
 
-4. Start Event Bundle - uint64_t get_start_count(struct PerfData *perf_data, struct CountData *count_data, const char* context, uint64_t index);
-For example:
+The first scenario is to instrument a single section of code in C. 
 
-```yaml
-get_start_count(&count_data, "DU_HIGH1", local_index);
-```
+The general process to instrument code includes the following steps: 
+- Include 2 header files
+- Initialize the plugin by calling `pmuv3_bundle_init()` with the bundle number as an argument
+- Start counting by calling the function `process_start_count()` 
+- Call the function `process_end_count()` to stop counting
+- Write the collected data to a CSV file by calling `post_process()` with the same bundle number
+- Clean up with `shutdown_resources()` 
 
-NOTE: The third variable is a context. NOTE: Whatever context (3rd parameter) and index (4th parameter) one passes in get_start_count() should be passed to corresponding get_end_count()
+As an example, use a text editor to create a file `test1.c` in the `test` directory with the contents below.
 
-5. End Event Bundle - uint64_t get_end_count(struct PerfData *perf_data, struct CountData *count_data, const char* context, uint64_t index);
-
-```yaml
-get_end_count(&count_data, "DU_HIGH1", local_index);
-```
-
-6. Define this in a place after all instrumentation is done.
-
-```yaml
-process_data(cur_bundle_no);
-```
-7. Shutdown and release resource for Event Bundle Instrument - int shutdown_resources(struct PerfData *perf_data);
-
-```yaml
-shutdown_resources();
-```
-
-Example Instrumentation For Reference
-
-```yaml
-//Just once in main()
-int main(int argc, char** argv)
-{
-    if (argc != 2) {
-        printf("Usage: %s <arg>\n", argv[0]);
-        exit(1);
-    }
-     int cur_bundles_no = atoi(argv[1]);
-    // then call initialization once:
-    pmuv3_bundle_init(cur_bundles_no);
-}
-//In places of instrumentation, do like below. Remember that every get_start_count will have a separate get_end_count API. 
-uint64_t local_1 = get_next_index();
-
-get_start_count(&count_data,"CONTEXT_1", local_1);
-
-/********************************1ST CODE CHUNK***********************************/
-
-get_end_count(&count_data, "CONTEXT_1", local_1);
-
-
-.
-.
-.
-.
-
-uint64_t local_2 = get_next_index();
-
-get_start_count(&count_data,"CONTEXT_2", local_2);
-
-/********************************2ND CODE CHUNK***********************************/
-
-get_end_count(&count_data,"CONTEXT_2", local_2);
-// Below APIs will be invoked only once per testcase after instrumenting in several places.
-shutdown_resources();
-
-process_data(cur_bundle_no);
-```
-
-## Scenario II – Instrumentation Around Single Code block in C++ codebase
-
-For Pmuv3_Bundles Instrumentation "SINGLE CHUNK OF CODE" in  C++ CODEBASE, refer the below steps.
-
-1.In your application source code where the PMUv3 instrument will be embedded, you need to include header this way.
-
-```yaml
-#include "processing.hpp"
-
-#ifdef PMUV3_CPU_BUNDLES
-
-extern "C" {
-    #ifdef PARENT_DIR
-        #include "pmuv3_plugin_bundle.h"
-    #endif
-}
-#endif
-```
-
-2. Initialize the PMUv3 Event Bundle - void pmuv3_bundle_init(int)
-
-In testcases, in main function, we need to pass the argument for which bundle to choose:
-
-```yaml
-int main(int argc, char** argv)
-{
-    if (argc != 2) {
-        printf("Usage: %s <arg>\n", argv[0]);
-        exit(1);
-    }
-    int cur_bundles_no = atoi(argv[1]);
-
-    // then call initialization once:
-
-    pmuv3_bundle_init(cur_bundles_no);
-}
-```
-
-3. Instrument around single chunk of code
-
-```yaml
-process_start_count(&count_data);
-
-///////////CODE CHUNK TO BE INSTRUMENTED//////////////
-
-process_end_count(&count_data);
-```
-
-4. Define this in a place after all instrumentation is done.
-
-```yaml
-process_single_chunk(cur_bundle_no);
-```
-
-5. Shutdown and release resource for Event Bundle Instrument
-
-```yaml
-shutdown_resources();
-```
-
-This populates bundle0.csv, bundle1.csv etc. as requested by user in the directory where you ran the testcase. 
-
-## Scenario III– Instrumentation around different code blocks in C codebase 
-For Pmuv3_Bundles Instrumentation in a C Codebase around different Chunks Of Code, refer below steps.
-
- Follow the same procedure described above with small changes.
-
-Reminder: Before you run ./build.sh, vim build.sh and uncomment line 20 and comment line 19. This was already mentioned in Requirements section. 
-1. No need for extern in C code base so we include directly.
-
-```yaml
-#include <processing.h>
+```C
+#include <stdio.h>
+#include <stdint.h>
+#include <math.h>
 
 #include "pmuv3_plugin_bundle.h"
+#include "processing.h"
+
+#define VECTOR_SIZE 100
+
+void initialize_vectors(double vector_a[], double vector_b[], int size) {
+    for (int i = 0; i < size; i++) {
+        vector_a[i] = sin(i);
+        vector_b[i] = cos(i);
+    }
+}
+
+void calculate_result(double result[], double vector_a[], double vector_b[], int size) {
+    for (int i = 0; i < size; i++) {
+        result[i] = vector_a[i] + vector_b[i];
+    }
+}
+
+int main(int argc, char **argv) {
+    int bundle_number;
+    struct CountData counter_data;
+
+    /* Bundle number is passed as an argument */
+    if (argc != 2) {
+        fprintf(stderr, "Usage: %s <bundle number>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+    bundle_number = atoi(argv[1]);
+
+    /* Initialize the bundle of events */
+    if (pmuv3_bundle_init(bundle_number) != 0) {
+        fprintf(stderr, "Failed to initialize PMU bundle\n");
+        return EXIT_FAILURE;
+    }
+
+    /* Code to be analyzed */
+    process_start_count(&counter_data);
+
+    /* Declare vectors */
+    double vector_a[VECTOR_SIZE], vector_b[VECTOR_SIZE], result[VECTOR_SIZE];
+
+    /* Initialize and calculate vectors */
+    initialize_vectors(vector_a, vector_b, VECTOR_SIZE);
+    calculate_result(result, vector_a, vector_b, VECTOR_SIZE);
+
+    process_end_count(&counter_data);
+
+    /* Write CSV file and clean up */
+    post_process(bundle_number);
+    shutdown_resources();
+
+    return EXIT_SUCCESS;
+}
 ```
 
-2. Initialization and instrumentation APIs are the same as mentioned in C++ sections for DIFFERENT CHUNK OF CODES (Section I) scenario. 
-- 	DIFFERENT CHUNK OF CODES
+The include files and function calls are added in the code to provide the performance instrumentation.
 
-```yaml
-uint64_t local_1 = get_next_index();
+Build the application:
 
-get_start_count(&count_data, "CONTEXT_1" ,local_1);
-
-/********************************1ST CODE CHUNK***********************************/
-
-get_end_count(&count_data, "CONTEXT_1", local_1);
-
-
-uint64_t local_2 = get_next_index();
-
-get_start_count(&count_data, "CONTEXT_2", local_2);
-
-/********************************2ND CODE CHUNK***********************************/
-
-get_end_count(&count_data, "CONTEXT_2", local_2);
+```console
+gcc -I ../linux/tools/lib/perf/include  -I ../PMUv3_plugin/ test1.c -o test1 -L ../PMUv3_plugin/  -lpmuv3_plugin_bundle -lperf -lapi -lm
 ```
 
-3. In post processing,
+Run the application and pass the bundle number of 4 (to capture stall information):
 
-```yaml
-process_data(cur_bundle_no);
-```
-4. Shutdown resources
-
-```yaml
-shutdown_resources();
+```console
+sudo ./test1 4
 ```
 
-## Scenario IV – Instrumentation around single code blocks in C codebase
-For Pmuv3_Bundles Instrumentation in a C Codebase around a Single Chunk Of Code, refer below steps.
+The output prints:
 
- Follow the same procedure described above with small changes.
-
-Reminder: Before you run ./build.sh, vim build.sh and uncomment line 20 and comment line 19. This was already mentioned in Requirements section. 
-1. No need for extern in C code base so we include directly.
-
-```yaml
-#include <processing.h>
-
-#include "pmuv3_plugin_bundle.h"
+```output
+- running pmuv3_plugin_bundle.c...OK
+End is 1404713, Start is 119346
+End is 112270, Start is 43884
+End is 285708, Start is 6714
 ```
 
-2. Initialization and instrumentation APIs are the same as mentioned in C++ sections of SINGLE CHUNK OF CODE (Section II) scenario.
-Scenario 1 - SINGLE CHUNK OF CODES
+The results are captured in the file `bundle4.csv`.
 
-```yaml
-process_start_count(&count_data);
+Display the text file to see the contents:
 
-///////////CODE CHUNK TO BE INSTRUMENTED//////////////
-
-process_end_count(&count_data);
+```console
+cat bundle4.csv
 ```
 
-3. In post processing,
+The data shows the metrics on the first line and the values on the second line.
 
-```yaml
-post_process(bundle_num);
-```
-4. Shutdown resources
-
-```yaml
-shutdown_resources();
+```output
+CPU_CYCLES,STALL_FRONTEND,STALL_BACKEND
+1285367,68386,278994
 ```
 
+The next section explains how to instrument multiple sections of code. 
