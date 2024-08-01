@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 ## What is a multi-architecture application?
-A multi-architecture application is designed to run on multiple architectures, typically arm64 and amd64. There are two most common ways to build a containerized multi-architecture application - `docker buildx` and `docker manifest`. 
- - `docker buildx` - builds a multi-architecture application at the same time using emulation
- - `docker manifest` - joins two different architecture images into a single multi-architecture image
+A multi-architecture application is designed to run on multiple architectures, typically arm64 and amd64. The two common ways to build a containerized multi-architecture application is using `docker buildx` and `docker manifest`. 
+ - `docker buildx` builds a multi-architecture application at the same time using emulation.
+ - `docker manifest` joins two different architecture images into a single multi-architecture image.
 
-In this learning path we will use the `docker manifest` way to build a multi-architecture image
+In this learning path you will use the `docker manifest` way to build a multi-architecture image.
 
 ## Create a Docker repository in Google Artifact Registry
 You can create a docker repository in the Google Artifact Registry from the Google Cloud UI or with the following command:
