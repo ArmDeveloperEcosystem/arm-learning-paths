@@ -2,7 +2,7 @@
 # User change
 title: "Background"
 
-weight: 3
+weight: 2
 
 layout: "learningpathall"
 ---
