@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            What is ISO 8601 Format?
+            What is the ISO 8601 Format?
         answers:
             - "The ISO 8601 format is a standardized way to represent dates and times"
             - "The ISO 8601 format is a standardized way to represent compute units in serverless"
