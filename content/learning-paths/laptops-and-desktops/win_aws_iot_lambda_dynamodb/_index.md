@@ -1,5 +1,5 @@
 ---
-title: Integrate AWS Lambda with DynamoDB for IoT applications running on Windows on Arm
+title: Integrate AWS Lambda with DynamoDB for IoT applications running Windows on Arm
 
 minutes_to_complete: 45
 
