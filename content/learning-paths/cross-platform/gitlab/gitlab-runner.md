@@ -30,9 +30,9 @@ Once the repository gets created, in the left-hand pane, navigate to `Settings->
 
 ![arm64-runner #center](_images/create-gitlab-runner.png)
 
-In GitLab, `Tags` are used to specify the jobs that can be executed on the runner. In the `Tags` field, enter `arm64`. In `Runner description` enter `google-axion-arm64-runner` and click the `Create Runner` button
+Use `Tags` to specify the jobs that can be executed on the runner. In the `Tags` field, enter `arm64`. In `Runner description` enter `google-axion-arm64-runner` and click the `Create Runner` button
 
-Once it runner is created, we need to register this runner. Select Linux as the Operating System.
+Once the runner is created, you need to register this runner. Select Linux as the Operating System.
 
 In Google Cloud, the `C4A` VM instance is based on Google Axion. Create a `C4A` VM by following this learning path. [Create Arm-based VM in Google Cloud](/learning-paths/servers-and-cloud-computing/csp/google/)
 
