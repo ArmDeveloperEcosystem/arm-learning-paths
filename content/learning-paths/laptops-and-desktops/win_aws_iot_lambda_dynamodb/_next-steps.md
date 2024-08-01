@@ -4,7 +4,7 @@
 # ================================================================================
 
 next_step_guidance: >
-   You have learned how to use Lambda for an IoT solution. You can now learn how to develop IoT applications with .NET 8 on Windows on Arm.
+   You have now learned how to use AWS Lambda for an IoT solution. You can now learn how to develop IoT applications with .NET 8 on Windows on Arm.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
 recommended_path: "/learning-paths/laptops-and-desktops/win_net8"
@@ -26,7 +26,7 @@ further_reading:
         link: https://aws.amazon.com/dynamodb/
         type: website
     - resource:
-        title: Overview of AWS
+        title: Overview of Amazon Web Services
         link: https://docs.aws.amazon.com/whitepapers/latest/aws-overview/introduction.html
         type: documentation
 
