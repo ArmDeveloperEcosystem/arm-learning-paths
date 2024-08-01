@@ -198,5 +198,5 @@ return {
 };
 ```
 
-If no items are found, you will return 0 as the average value. Otherwise, you will convert the attribute values to numbers and this filters out any non-numeric values. Next, you will calculate the sum and average of the numerical values. Finally, this average value is returned to the caller.
+If no items are found, it will return 0 as the average value. Otherwise, it will convert the attribute values to numbers and this filters out any non-numeric values. Next, it will calculate the sum and average of the numerical values. Finally, this average value is returned to the caller.
 
