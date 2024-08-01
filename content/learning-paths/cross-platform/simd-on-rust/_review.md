@@ -2,10 +2,10 @@
 review:
     - questions:
         question: >
-            Are immediate values in SIMD intrinsics handled different in Rust?
+            Are immediate values in SIMD intrinsics handled differently in Rust?
         answers:
             - Yes, they are only passed using generics
-            - No, nothing changes, they are still passed via the function arguments
+            - No, nothing changes as they are still passed via the function arguments
             - Both, one can use the generics version or the original way of passing via the function arguments
         correct_answer: 3
         explanation: >
@@ -43,7 +43,7 @@ review:
             - Sometimes
         correct_answer: 3
         explanation: >
-            `std::simd` can be quite powerful and generate optimal code, but there are specific instructions on all architectures that do not exactly map well to a portable API. To take advantage of these instructions, you have to use `std::arch` if they have corresponding intrinsics enabled.
+            `std::simd` can be quite powerful and generate optimal code but there are specific instructions on all architectures that do not map well to a portable API. To take advantage of these instructions, you have to use `std::arch` if they have corresponding intrinsics enabled.
 
 
 # ================================================================================
