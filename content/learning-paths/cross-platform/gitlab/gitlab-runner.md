@@ -16,7 +16,7 @@ A GitLab Runner is an application that works with GitLab CI/CD to run jobs in a 
 3. Multi-architecture support: GitLab runners support multiple architectures including - `x86/amd64` and `arm64`
 
 ## What is Google Axion?
-Google Axion is the latest generation of Arm Neoverse based CPU offered by Google Cloud. The VM instances are part of the `C4A` family of compute instances. To learn more about Google Axion checkout this page.
+Google Axion is the latest generation of Arm Neoverse based CPU offered by Google Cloud. The VM instances are part of the `C4A` family of compute instances. To learn more about Google Axion refer to this [blog](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 Note: These `C4A` VM instances are in public preview and needs a signup to be enabled in your Google Cloud account/project.
 
