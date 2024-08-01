@@ -1,24 +1,25 @@
 ---
-title: Code level Performance Analysis using PMUv3_plugin 
+title: Code level Performance Analysis using the PMUv3 plugin 
 
 minutes_to_complete: 60
 
-who_is_this_for: Engineers working on a workload/codebase to carry out performance analysis at code block level.
+who_is_this_for: Engineers who want to do C/C++ performance analysis by instrumenting code at the block level.
 
 learning_objectives: 
-    - Get a fine-grained and precise measurement of functions or chunk of code handling a specific task. 
-    - Instrument at a code/function level by choosing one of the 4 scenarios detailed in this learning path. 
-    - Run and collect the performance metrics as well as raw event values of 15 groups/bundles of PMUs in one shot.
-    - Use the backend tool to plot raw PMU event values along with the KPI/metric values like MPKI, stalls, IPC and many more, thus helping in performance analysis tasks. 
+    - Generate a fine-grained, precise measurement of functions and other sections of code.
+    - Instrument your code to analyze a single section or multiple sections using the provided instrumentation scenarios.
+    - Run and collect performance metrics and raw event values for any of the 15 event groups (bundles) in a single run.
+    - Use a tool to plot raw PMU event values along with KPI metric values such as MPKI, stalls, and IPC to aid performance visualization.
 
 prerequisites:
-    - Some familiarity with performance analysis.
+    - An Arm-based computer running Linux.
+    - Some familiarity with Linux application performance analysis.
 
 author_primary: Gayathri Narayana Yegna Narayanan
 
 ### Tags
 skilllevels: Advanced
-subjects: Performance Analysis at code level
+subjects: Performance and Architecture
 armips:
     - Neoverse
 tools_software_languages:

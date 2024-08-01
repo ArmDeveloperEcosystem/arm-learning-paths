@@ -1,7 +1,7 @@
 ---
-next_step_guidance: If you need a more detailed documentation, request repo access from author and access this [Documentation-PMUV3_plugin](https://github.com/GayathriNarayana19/PMUv3_plugin/blob/main/Documentation-PMUV3_plugin.pdf)
+next_step_guidance: To continue learning about performance analysis continue to the next Learning Path.
 
-recommended_path: /learning-paths/servers-and-cloud-computing/pmuv3_plugin_learning_path/
+recommended_path: /learning-paths/servers-and-cloud-computing/arm_pmu/
 
 further_reading:
     - resource:
