@@ -24,10 +24,10 @@ review:
 
     - questions:
         question: >
-            What is the name of the Arm based processor that powers AWS?
+            What is the name of the Arm based processor that powers GCP?
         answers:
+            - "Axion"
             - "Graviton"
-            - "Groverton"
             - "Gallileo"
         correct_answer: 1
         explanation: >

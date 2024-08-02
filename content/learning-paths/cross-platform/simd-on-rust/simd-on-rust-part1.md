@@ -139,7 +139,7 @@ fn average_vec(c: &mut [f32], a: &[f32], b: &[f32]) -> () {
 
 fn print_vec(a: &[f32], b: &[f32], c: &[f32]) -> () {
     for i in 0..c.len() {
-        println!("A[{}] = {}, B[{}] = {} -> C[{}] = {}", i, a[i], i, b[i], i, c[i]);
+        println!("A[{i}] = {}, B[{i}] = {} -> C[{i}] = {}", a[i], b[i], c[i]);
     }
 }
 ```
@@ -240,7 +240,7 @@ The results are the same as expected. Lets look at some of the differences:
 
 * You need to use `target_arch` and `target_feature` to use specific hardware extensions. This is Rust's feature detection, which is explained in the next section.
 * All definitions and functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the latter.
-* You will notice `#[inline(never)]` in the definition of `average_vec`. This is to let the compiler know that it should not inline this function becauase you will compare the disassembly against the C version.
+* You will notice `#[inline(never)]` in the definition of `average_vec`. This is to let the compiler know that it should not inline this function because you will compare the disassembly against the C version.
 
 Now generate the disassembly output for `average2`:
 

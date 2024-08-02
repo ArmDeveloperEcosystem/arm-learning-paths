@@ -14,15 +14,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
           fetch-depth: 0
 
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: '0.98.0'
+          hugo-version: '0.130.0'
           extended: true
 
       - name: Build
@@ -35,25 +35,30 @@ jobs:
         run: bin/htmltest -c .htmltest.yml -s 2>&1 | tee htmltest.log
 
       - name: HTML test results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: htmltest-report
           path: htmltest.log
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
 
       - name: Spell check
-        uses: rojopolis/spellcheck-github-actions@0.30.0
+        continue-on-error: true
+        uses: rojopolis/spellcheck-github-actions@0.40.0
         with:
           config_path: .spellcheck.yml
           task_name: Markdown
           output_file: spellcheck-output.txt
 
+      - name: Refine spelling results
+        continue-on-error: true
+        run: tools/process-spelling.sh
+
       - name: Spelling results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: spellcheck-output
           path: spellcheck-output.txt
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
 
       - name: Scan for malware
         run: |
@@ -61,24 +66,24 @@ jobs:
           clamscan -r -i public -l scanlog
 
       - name: Scan results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: clamscan-log
           path: scanlog
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days
 
       - name: Azure DevOps Security Scan
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: |
             5.0.x
             6.0.x
       - name: Run Microsoft Security DevOps
-        uses: microsoft/security-devops-action@preview
+        uses: microsoft/security-devops-action@latest
         id: msdo
 
       - name: Upload results to Security tab
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: ${{ steps.msdo.outputs.sarifFile }}
-          retention-days: 7 # Default is 90 days
+          retention-days: 5 # Default is 90 days

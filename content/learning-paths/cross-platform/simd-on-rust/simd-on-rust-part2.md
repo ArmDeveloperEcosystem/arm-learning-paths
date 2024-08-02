@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Example with Dot product intructions
+## Example with Dot product instructions
 
 You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the Sum of Absolute Differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c`:
 
@@ -166,7 +166,7 @@ fn sad_vec(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
     #[cfg(target_arch = "aarch64")]
     {
         use std::arch::is_aarch64_feature_detected;
-        if is_aarch64_feature_detected!("neon") {
+        if is_aarch64_feature_detected!("dotprod") {
             return unsafe { sad_vec_asimd(a, b, w, h) };
         }
     }
@@ -175,7 +175,7 @@ fn sad_vec(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
 }
 
 #[cfg(target_arch = "aarch64")]
-#[target_feature(enable = "neon")]
+#[target_feature(enable = "dotprod")]
 unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
     use std::arch::aarch64::*;
 
@@ -291,7 +291,11 @@ As you have seen, Rust has a very particular way to enable target features. In t
 unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
 ```
 
-Remember that `neon` support is implied with `dotprod` so there is no need to add it as well.
+Remember that `neon` support is implied with `dotprod` so there is no need to add it as well. That may not be the case for all extensions however so you may have to add both, like this:
+
+```Rust
+#[target_feature(enable = "neon", enable = "dotprod")]
+```
 
 Next, you also need to add the `#!feature` for the module's code generation at the top of the file:
 
