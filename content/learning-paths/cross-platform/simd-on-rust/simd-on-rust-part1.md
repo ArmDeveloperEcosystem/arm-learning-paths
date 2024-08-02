@@ -10,7 +10,7 @@ layout: learningpathall
 
 As per the Arm Community blog post about [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics), there are some differences between C and Rust when programming with intrinsics which are listed in the blog and which will be expanded on in this Learning Path with code examples.
 
-Start with an example that uses Arm Advanced SIMD (Neon) intrinsics in C. Create a file named `average_neon.c` with the contents shown below. This program computes the average value of every pair of elements in 2 arrays:
+We start with an example that uses Arm Advanced SIMD (Neon) intrinsics in C. Create a file named `average_neon.c` with the contents shown below. This program computes the average value of every pair of elements in 2 arrays:
 
 ```C
 #include <stdio.h>
@@ -174,7 +174,7 @@ This particular example is not very complicated but you will notice some key dif
 
 * Uninitialized variables - mutable/immutable arguments passed to the functions are not a concern for a C developer creating a proof of concept program. This is not the case with Rust programming, which forces the developer to think about these things right from the start. This usually means that it takes longer to write a simple program in Rust but you can be certain that this program will not suffer from trivial bugs such as buffer overflows, out of bounds, illegal conversions etc.
 * Conversions/Castings need to be explicit, e.g., `2.0_f32 * ((i+1) as f32)`.
-* There is no need to pass size as parameter as Rust includes size information in its arrays.
+* There is no need to pass size as a parameter as Rust includes size information in its arrays.
 
 Note that this program is not written in the most optimal way for Rust. It is just a 'port' of the C program into Rust with the minimal changes needed to compile and run.
 
@@ -286,7 +286,7 @@ A full list of current extensions for Arm can be found [here](https://doc.rust-l
 
 ## An alternative way with Rust using std::simd
 
-In the introduction you read about 2 ways to do SIMD programming with Rust, `std::arch` and `std::simd`. You implemented the first approach. Now you can create an equivalent program in Rust using the `std::simd` approach.
+In the introduction you read about 2 ways to carry out SIMD programming with Rust, `std::arch` and `std::simd`. You implemented the first approach. Now you can create an equivalent program in Rust using the `std::simd` approach.
 
 Shown below is the same program modified to use `std::simd`. Replace the functions in `average2.rs` with the following and save the updated contents in a file name `average3.rs`:
 
