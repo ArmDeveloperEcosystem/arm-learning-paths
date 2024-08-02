@@ -64,7 +64,13 @@ git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
 
 The Linux kernel repository is large so it will take some time to download. 
 
-When the download is complete, build the Perf libraries, `libperf.a` and `libapi.a`:
+Install the GNU compiler. If you are running on Ubuntu you can run:
+
+```console
+sudo apt install build-essential -y
+```
+
+When the Linux source download is complete, build the Perf libraries, `libperf.a` and `libapi.a`:
 
 ```console
 pushd linux/tools/lib/perf

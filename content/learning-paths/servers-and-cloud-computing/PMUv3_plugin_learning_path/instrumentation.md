@@ -15,7 +15,7 @@ So far you have the Linux kernel source tree and the PMUv3 plugin source code.
 Next, create a third directory to learn how to integrate the PMUv3 plugin into an application.
 
 ```console
-mkdir test
+cd ../ ; mkdir test ; cd test
 ```
 
 The instructions assume you have all three directories in parallel. If you have a different directory structure you may need to adjust the build commands to find the header files and libraries. 
@@ -52,7 +52,7 @@ As an example, use a text editor to create a file `test1.c` in the `test` direct
 #include "pmuv3_plugin_bundle.h"
 #include "processing.h"
 
-#define VECTOR_SIZE 100
+#define VECTOR_SIZE 10000
 
 void initialize_vectors(double vector_a[], double vector_b[], int size) {
     for (int i = 0; i < size; i++) {
