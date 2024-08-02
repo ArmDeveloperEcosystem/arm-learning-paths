@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-In this section, you will create a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)`. This operation is the basis of many DCT algorithms used in multiple video codecs, including VP9, AV1, etc.
+In this section, you will create a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)`. This operation is the basis of many discrete cosine transform (DCT) algorithms used in multiple video codecs, including VP9, AV1, etc.
 
 It is called a 'butterfly' operation in DCT and it is defined as the following:
 
@@ -204,7 +204,7 @@ Compile the program:
 ```bash 
 gcc -O3 butterfly1.c -o butterfly1
 ```
-Run it:
+Run it as follows:
 ```bash
 ./butterfly1
 ```
@@ -375,7 +375,7 @@ Compile the program as follows:
 ```bash 
 rustc -O butterfly2.rs
 ```
-Run the program :
+Run the program:
 ```bash
 ./butterfly2
 ```
