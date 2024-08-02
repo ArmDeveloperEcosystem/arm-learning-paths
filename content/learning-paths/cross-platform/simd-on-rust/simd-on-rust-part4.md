@@ -223,7 +223,7 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-A 4x4 matrix `a` is initialized and a `fDCT` function is called on it. The function carries out 2 passes of the same algorithm on the elements of the array, calls the 2 butterfly functions (for one and two coefficients respectively) and transposes the results inbetween the calculations. The result is rounded and stored in the output buffer `dct`.
+A 4x4 matrix `a` is initialized and a `fDCT` function is called on it. The function carries out 2 passes of the same algorithm on the elements of the array, calls the 2 butterfly functions (for one and two coefficients respectively) and transposes the results in between the calculations. The result is rounded and stored in the output buffer `dct`.
 
 The assembly output is linked [here](../butterfly1.asm) instead of being displayed due to its size.
 

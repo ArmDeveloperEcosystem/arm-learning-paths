@@ -25,7 +25,7 @@ tools_software_languages:
     - Java
     - Google Axion
 operatingsystems:
-    - Ubuntu
+    - Linux
 
 
 ### FIXED, DO NOT MODIFY
