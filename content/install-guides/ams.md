@@ -40,6 +40,8 @@ It comprises of a suite of easy-to-use tools that show you how well your game or
 
 [RenderDoc for Arm GPUs](https://community.arm.com/arm-community-blogs/b/graphics-gaming-and-vr-blog/posts/beyond-mobile-arm-mobile-studio-is-now-arm-performance-studio) is available in `2024.0` and later.
 
+[Graphics Analyzer](https://developer.arm.com/Tools%20and%20Software/Graphics%20Analyzer) is no longer provided. The final release was provided in the `2024.2` release.
+
 All features of Arm Performance Studio are available free of charge without any additional license as of the `2022.4` release.
 
 ## Installation
@@ -56,7 +58,7 @@ Run the supplied `Arm_Performance_Studio_<version>_windows_x86-64.exe` installer
 
 Unpack the supplied `Arm Performance Studio` bundle to the desired location. For example:
 ```command
-tar -xf Arm_Performance_Studio_2024.0_linux_x86-64.tgz
+tar -xf Arm_Performance_Studio_2024.3_linux_x86-64.tgz
 ```
 ### macOS
 

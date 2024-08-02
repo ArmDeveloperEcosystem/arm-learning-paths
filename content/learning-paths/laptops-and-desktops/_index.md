@@ -11,14 +11,14 @@ operatingsystems_filter:
 - Android: 1
 - Baremetal: 1
 - ChromeOS: 1
-- Linux: 20
+- Linux: 22
 - macOS: 2
-- Windows: 29
+- Windows: 30
 subjects_filter:
 - CI-CD: 3
-- Containers and Virtualization: 4
-- Migration to Arm: 23
-- Performance and Architecture: 15
+- Containers and Virtualization: 5
+- Migration to Arm: 24
+- Performance and Architecture: 16
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
 tools_software_languages_filter:
@@ -30,34 +30,37 @@ tools_software_languages_filter:
 - C#: 5
 - C++: 2
 - C/C++: 3
-- Clang: 7
+- Clang: 8
 - CMake: 2
-- Coding: 14
+- Coding: 15
 - CSS: 1
-- Docker: 3
-- GCC: 7
+- Docker: 4
+- GCC: 8
 - GitHub: 2
+- GitLab: 1
 - GoogleTest: 1
 - HTML: 2
 - Hyper-V: 1
 - i3: 1
 - Intrinsics: 1
 - JavaScript: 2
+- Kubernetes: 1
 - Linux: 1
 - LLVM: 1
 - MTE: 1
 - Neon: 1
 - Neovim: 1
-- Node.js: 1
+- Node.js: 2
 - perf: 1
 - Python: 2
 - Qt: 2
 - Remote.It: 1
+- Rust: 1
 - SVE: 1
 - SVE2: 1
 - Trusted Firmware: 1
 - Visual Studio: 9
-- Visual Studio Code: 7
+- Visual Studio Code: 8
 - VS Code: 2
 - Windows Forms: 1
 - Windows Presentation Foundation: 1

@@ -1,12 +1,12 @@
 ---
-title: Access the chatbot using the OpenAI compatible API 
+title: Access the chatbot using the OpenAI-compatible API 
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-You can use the `llama.cpp` server program and submit requests using an OpenAI compatible API.
+You can use the `llama.cpp` server program and submit requests using an OpenAI-compatible API.
 This enables applications to be created which access the LLM multiple times without starting and stopping it. You can also access the server over the network to another machine hosting the LLM.
 
 One additional software package is required for this section. Install `jq` on your computer using:
@@ -15,7 +15,7 @@ One additional software package is required for this section. Install `jq` on yo
 sudo apt install jq -y
 ```
 
-The server executable was already compiled when you ran `make` in the previous section. 
+The server executable has already compiled during the stage detailed in the previous section, when you ran `make`. 
 
 Start the server from the command line, it listens on port 8080:
 
@@ -83,7 +83,7 @@ In the returned JSON data you see the LLM output, including the content created 
 
 ## Use Python
 
-You can also use a Python program to access the OpenAI compatible API.
+You can also use a Python program to access the OpenAI-compatible API.
 
 Install the OpenAI Python package.
 

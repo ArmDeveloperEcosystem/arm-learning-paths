@@ -17,7 +17,7 @@ MPS3 users can jump to [here](#mps3).
 When the build is complete, run the image on the FVP:
 
 ```console
-meta-arm/scripts/runfvp --terminals=xterm build/tmp/deploy/images/corstone1000-fvp/corstone1000-image-corstone1000-fvp.fvpconf
+kas shell meta-arm/kas/corstone1000-fvp.yml:meta-arm/ci/debug.yml -c "../meta-arm/scripts/runfvp --terminals=xterm"
 ```
 
 When the boot sequence is complete, you will be presented with a login prompt.
@@ -46,12 +46,12 @@ The files of interest are:
 ```console
 bl1.bin
 es_flashfw.bin
-corstone1000-image-corstone1000-<timestamp>-mps3.wic.nopt
+corstone1000-flash-firmware-image-corstone1000-mps3.wic
 ```
 Because of the `8.3` naming convention of MPS3, you must rename latter files:
 ```console
 mv es_flashfw.bin es0.bin
-mv corstone1000-image-corstone1000-<timestamp>-mps3.wic.nopt cs1000.bin
+mv corstone1000-flash-firmware-image-corstone1000-mps3.wic cs1000.bin
 ```
 
 ### Set up MPS3
@@ -70,8 +70,19 @@ cs1000.bin
 ```
 ### Create new image.txt
 
-Navigate to `Boardfiles\MB\HBI0309C`. Delete (or rename) the existing `image.txt` file, and create a new one containing the following.
+Navigate to `Boardfiles\MB\HBI0309C\AN550`. Delete (or rename) the existing `images.txt` file, and create a new one containing the following:
 ```console
+;************************************************
+;       Preload port mapping                    *
+;************************************************
+;  PORT 0 & ADDRESS: 0x00_0000_0000 QSPI Flash (XNVM) (32MB)
+;  PORT 0 & ADDRESS: 0x00_8000_0000 OCVM (DDR4 2GB)
+;  PORT 1        Secure Enclave (M0+) ROM (64KB)
+;  PORT 2        External System 0 (M3) Code RAM (256KB)
+;  PORT 3        Secure Enclave OTP memory (8KB)
+;  PORT 4        CVM (4MB)
+;************************************************
+
 [IMAGES]
 TOTALIMAGES: 3      ;Number of Images (Max: 32)
 
@@ -81,7 +92,7 @@ IMAGE0UPDATE: RAM
 IMAGE0FILE: \SOFTWARE\bl1.bin
 
 IMAGE1PORT: 0
-IMAGE1ADDRESS: 0x00_0010_0000
+IMAGE1ADDRESS: 0x00_0000_0000
 IMAGE1UPDATE: AUTOQSPI
 IMAGE1FILE: \SOFTWARE\cs1000.bin
 

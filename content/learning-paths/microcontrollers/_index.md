@@ -16,9 +16,9 @@ subjects_filter:
 - CI-CD: 3
 - Libraries: 3
 - ML: 6
-- Performance and Architecture: 10
+- Performance and Architecture: 11
 - RTOS Fundamentals: 3
-- Security: 3
+- Security: 2
 - Virtual Hardware: 2
 subtitle: Learn best practices for microcontroller development
 title: Microcontrollers

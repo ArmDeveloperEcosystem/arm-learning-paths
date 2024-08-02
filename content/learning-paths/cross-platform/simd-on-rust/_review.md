@@ -2,10 +2,10 @@
 review:
     - questions:
         question: >
-            Are immediate values in SIMD intrinsics handled different in Rust?
+            Are immediate values in SIMD intrinsics handled differently in Rust?
         answers:
             - Yes, they are only passed using generics
-            - No, nothing changes, they are still passed via the function arguments
+            - No, nothing changes as they are still passed via the function arguments
             - Both, one can use the generics version or the original way of passing via the function arguments
         correct_answer: 3
         explanation: >
@@ -26,13 +26,13 @@ review:
                
     - questions:
         question: >
-            CPU features detection is handled directly in Rust, no need for manual checking using eg. HWCAPS
+            CPU features code generation and feature detection is handled directly in Rust.
         answers:
             - Correct
             - Incorrect
         correct_answer: 1
         explanation: >
-            Correct, Rust provides the `#[target_feature(enable = "<extension>")]` which can be used to denote that a particular function requires the needed `<extension>` to be executed. In C on Linux that can be done using IFUNC and FMV (Function Multi Versioning) but only on GCC/Clang compilers.
+            Correct, Rust provides the `#[target_feature(enable = "<extension>")]` which can be used to denote that a particular function requires the needed `<extension>` to be executed. The generated code will use instructions from that `<extension>`. In C there is no common way to do that, though there are some GCC/Clang extensions that might do this. Note that the runtime detection still has to be done manually, using `is_aarch64_feature_detected` macro in the case of Aarch64. In C one would have to check `HWCAPS` directly, but many applications/libraries are doing that in a non-uniform way.
 
     - questions:
         question: >
@@ -43,7 +43,7 @@ review:
             - Sometimes
         correct_answer: 3
         explanation: >
-            `std::simd` can be quite powerful and generate optimal code, but there are specific instructions on all architectures that do not exactly map well to a portable API. To take advantage of these instructions, you have to use `std::arch` if they have corresponding intrinsics enabled.
+            `std::simd` can be quite powerful and generate optimal code but there are specific instructions on all architectures that do not map well to a portable API. To take advantage of these instructions, you have to use `std::arch` if they have corresponding intrinsics enabled.
 
 
 # ================================================================================

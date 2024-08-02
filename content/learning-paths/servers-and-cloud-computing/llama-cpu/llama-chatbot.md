@@ -242,7 +242,7 @@ The end of the output shows several model timings:
 * prompt eval time refers to the time taken to process the prompt before generating the new text. In this example, it shows that it evaluated 16 tokens in 1998.79 ms. 
 * eval time refers to the time taken to generate the output. Generally anything above 10 tokens per second is faster than what humans can read.
 
-You can compare these timings to the optimized model weights by running
+You can compare these timings to the optimized model weights by running:
 
 ```bash
 ./llama-cli -m llama-2-7b-chat.Q4_0_8_8.gguf -p "Building a visually appealing website can be done in ten simple steps:" -n 64 -t 2
