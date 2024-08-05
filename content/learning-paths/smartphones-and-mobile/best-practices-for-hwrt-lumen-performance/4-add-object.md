@@ -1,6 +1,6 @@
 ---
 title: Only Add Important Objects into Ray Tracing
-weight: 5
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
