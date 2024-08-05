@@ -1,6 +1,6 @@
 ---
 title: Lumen General Setting Optimizations
-weight: 4
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
