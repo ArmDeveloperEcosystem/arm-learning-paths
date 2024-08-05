@@ -1,13 +1,13 @@
 ---
 layout: learningpathall
-title: Build and Run VP9 codec on Arm servers
+title: Build and Run VP9 codec on Arm Servers and Apple Silicon
 weight: 2
 ---
 
 ## Install necessary software packages
 
 `libvpx` is a free software video codec library from Google. It serves as the reference software implementation for the VP9 video coding formats.
-There have been significant efforts to optimize the open-source libvpx implementation of the VP9 encoder on Arm Neoverse platforms which supports Neon and SVE2 instructions.
+There have been significant efforts to optimize the open-source `libvpx` implementation of the VP9 encoder on Arm Neoverse platforms which supports Neon and SVE2 instructions.
 Install GCC for your Arm Linux distribution. Refer to the [install guide](/install-guides/gcc/native/) for additional information. 
 
 Install `Cmake`, `gcc`, `g++`and other dependencies:
@@ -49,10 +49,13 @@ However, the number of tests is huge, and it takes far too long to run them all.
 ```
 
 Or, you can filter runs only the Neon Sum of Absolute Difference (SAD) tests.
-```
+```bash
 ./test_libvpx --gtest_filter="*NEON*SAD*"
+```
 
+Then, the outout will looks like:
 
+```output
 [ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/42
 [ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/43
 [ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/44
@@ -72,7 +75,7 @@ Or, you can filter runs only the Neon Sum of Absolute Difference (SAD) tests.
 
 There are some useful speed unit tests that can act as a good smoke test for an optimization idea. You can run these speed tests (disabled by default) like so:
 
-```
+```bash
 # Example: This filter runs only the Neon Sum of Absolute Difference (SAD) speed tests.
 ./test_libvpx --gtest_filter="*NEON*SAD*Speed*" --gtest_also_run_disabled_tests
 ```
@@ -86,41 +89,43 @@ wget https://ultravideo.fi/video/Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z 
 wget https://ultravideo.fi/video/Bosphorus_3840x2160_120fps_420_10bit_YUV_Y4M.7z // 10-bit 4K 
 ```
 
+Next, extract the contents of the 7z file into your preferred benchmark directory. While I used 7za for this, feel free to use any decompression tool you prefer.
+
+```bash
+7za e Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z
+7za e Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z
+7za e Bosphorus_3840x2160_120fps_420_10bit_YUV_Y4M.7z 
+```
 
 ### On-Demand Video Encoding Benchmarking
-
 For VoD encoding with --good, you should care about --cpu-used in the range [2-6] - so you have to run the following commands five times to cover all cases.
 
 Standard Bitdepth
-```
-./vpxenc --good --cpu-used=[0-2] --profile=0 --bit-depth=8 -o output.mkv <8-bit-input-video>.y4m # --limit=<x> (only encode x frames to reduce waiting time)
+```bash
+./vpxenc --good --cpu-used=2 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m # --limit=<x> (only encode x frames to reduce waiting time)
 ```
 
 High Bitdepth
-```
-./vpxenc --good --cpu-used=[0-2] --profile=2 --bit-depth=10 -o output.mkv <10-bit-input-video>.y4m # --limit=<x> (only encode x frames to reduce waiting time)
+```bash
+./vpxenc --good --cpu-used=2 --profile=2 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit_YUV.y4m # --limit=<x> (only encode x frames to reduce waiting time)
 ```
 
 ### Live-Stream Video Encoding Benchmarking
 For the live-stream case with --rt, you should care about --cpu-used in the range [5-9] - so 5 different runs to cover all cases.
 
-```
-./vpxenc --rt --cpu-used=[5-9] --profile=0 --bit-depth=8 -o output.mkv <8-bit-input-video>.y4m
+```bash
+./vpxenc --rt --cpu-used=8 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
 ```
 
 High Bitdepth
+```bash
+./vpxenc --rt --cpu-used=8 --profile=2 --bit-depth=10 -o output.mkvBosphorus_3840x2160_120fps_420_10bit_YUV.y4m
 ```
-./vpxenc --rt --cpu-used=[5-9] --profile=2 --bit-depth=10 -o output.mkv <10-bit-input-video>.y4m
-```
-
-
-
 
 
 ## View Results
 
 The encoding Frame Rate (Frames per second) for the video files is output at the end of each run.
-
 Shown below is example output from running the codec on the 8-bit FHD sample video file:
 
 ```output
