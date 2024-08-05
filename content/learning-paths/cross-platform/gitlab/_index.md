@@ -1,5 +1,5 @@
 ---
-title: How to build a CI/CD pipeline with GitLab on Google Axion
+title: Build a CI/CD pipeline with GitLab on Google Axion
 draft: true
 minutes_to_complete: 30
 
