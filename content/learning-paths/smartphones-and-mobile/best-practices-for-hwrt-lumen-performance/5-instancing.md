@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-Instanced actors can share the same geometry data in the BLAS of the acceleration structure, thereby saving memory usage and increasing cache hits. To achieve the best performance and memory efficiency when using hardware ray tracing, you should use object instancing as much as possible.
+The next optimization is around Instanced actors. Instanced actors can share the same geometry data in the BLAS of the acceleration structure, thereby saving memory usage and increasing cache hits. To achieve the best performance and memory efficiency when using hardware ray tracing, you should use object instancing as much as possible.
 
 Here are the steps for checking the instancing status in Unreal Editor:
 
