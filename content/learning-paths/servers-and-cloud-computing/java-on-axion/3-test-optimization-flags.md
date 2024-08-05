@@ -12,7 +12,7 @@ Now that you've built and deployed the Spring Petclinic application, you can use
 
 ## Run performance tests with jmeter
 
-The spring-petclinic repo comes with a jmx file that can be used by the jmeter application to test spring-petclinic performance.
+The spring-petclinic repo includes a jmx file that you can use with the jmeter application to test spring-petclinic performance.
 
 To install jmeter, first open a new ssh terminal to your instance (so that you don't interrupt the running spring-petclinic application in your existing terminal window) and run:
 
@@ -23,7 +23,7 @@ sudo mv apache-jmeter-5.6.3 /opt/jmeter
 sudo ln -s /opt/jmeter/bin/jmeter /usr/local/bin/jmeter
 ```
 
-to test that jmeter was installed correctly, run
+To test that jmeter was installed correctly, run
 
 ```bash
 jmeter --version
@@ -49,17 +49,16 @@ This file will contain tens of thousands of rows of results, but you can parse i
 jmeter -g results1.jtl -o ./summary_report1
 ```
 
-This command will create an output directory called `summary_report1`, which will contain a file called `statistics.json` with summary statistics.
-
+This command creates an output directory called `summary_report1`, which contains a file called `statistics.json` with summary statistics.
 
 ### Best practices for optimizing your Java application
 
-There are a large number of Java flags that can alter runtime performance of your applications. Here are some examples:
+Many Java flags can alter runtime performance of your applications. Here are some examples:
 
 1. `-XX:-TieredCompilation`: This flag turns off intermediate compilation tiers. This can help if you've got a long-running applications that have predictable workloads, and/or you've observed that the warmup period doesn't significantly impact overall performance.
 2. `-XX:ReservedCodeCacheSize` and `-XX:InitialCodeCacheSize`: You can increase these values if you see warnings about code cache overflow in your logs. You can decrease these values if you're in a memory constrained environment, or your application doesn't use much compiled code. The only way to determine optimal values for your application is to test.
 
-Your Petclinic application is a good candidate for the `-XX:-TieredCompilation` flag, because it is long-running and has predictable workloads. To test this, stop the Petclinic application and re-run the jar with
+Your Petclinic application is a good candidate for the `-XX:-TieredCompilation` flag because it is long-running and has predictable workloads. To test this, stop the Petclinic application and re-run the jar with
 
 ```bash
 java -XX:-TieredCompilation -jar target/*.jar
@@ -79,7 +78,7 @@ jmeter -g results2.jtl -o ./summary_report2
 
 And then compare the contents of `summary_report1/statistics.json` to the contents of `summary_report2/statistics.json`. In the `Total` data structure you'll notice that the average response time (`meanResTime`) will be approximately 15% lower for the new run!
 
-To list and explore all of the available tuning flags for your JVM, run
+Run the following command to list and explore all of the available tuning flags for your JVM:
 
 ```bash
 java -XX:+PrintFlagsFinal -version
