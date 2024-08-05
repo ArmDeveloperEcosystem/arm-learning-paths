@@ -1,7 +1,7 @@
 ---
 title: Implement an example Virtual Peripheral with Arm Virtual Hardware
 
-minutes_to_complete: 15
+minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers new to Arm Virtual Hardware and its features.
 
