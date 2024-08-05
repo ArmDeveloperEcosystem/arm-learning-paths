@@ -20,13 +20,13 @@ dname = ["content/install-guides",
          "content/learning-paths/servers-and-cloud-computing"]
 
 
-'''
-Recursive content search in d. 
-Returns: 
+"""
+Recursive content search in d.
+Returns:
 - list of articles older than period in d
 - count of articles found in d
 - list of primary authors in d
-'''
+"""
 def content_parser(d, period):
     count = 0
     art_list = {}
@@ -39,14 +39,14 @@ def content_parser(d, period):
             if "learning-paths" in d:
                 item = "_index.md"
 
-            logging.debug("Checking {}...".format(d+"/"+item))
+            logging.debug(f"Checking {d+"/"+item}")
 
             date = subprocess.run(["git", "log", "-1" ,"--format=%cs", d +"/" + item], stdout=subprocess.PIPE)
             # strip out '\n' and decode byte to string
             date = date.stdout.rstrip().decode("utf-8")
             logging.debug("Last updated on: " + date)
             author = "None"
-            for l in open(d +"/" + item): 
+            for l in open(d +"/" + item):
                 if re.search("author_primary", l):
                     # split and strip out '\n'
                     author = l.split(": ")[1].rstrip()
@@ -60,9 +60,9 @@ def content_parser(d, period):
                 # check if article is older than the period
                 if date < datetime.now() - timedelta(days = period):
                     if item == "_index.md":
-                        art_list[d + "/"] = "{} days ago".format((datetime.now() - date).days)
+                        art_list[d + "/"] = f"{(datetime.now() - date).days} days ago"
                     else:
-                        art_list[d + "/" + item] = "{} days ago".format((datetime.now() - date).days)
+                        art_list[d + "/" + item] = f"{(datetime.now() - date).days} days ago"
 
             if "learning-paths" in d:
                 # no need to iterate further
@@ -80,14 +80,14 @@ def content_parser(d, period):
     return [art_list, count, auth_list]
 
 
-'''
+"""
 Initialize Plotly data structure for stats
-1 graph on the left with data for install tool guides 
+1 graph on the left with data for install tool guides
 1 graph on the right with data for learning paths
 Input: title for the graph
-'''
+"""
 def init_graph(title):
-    data = { 
+    data = {
             "data": [
                 {
                     "x": [],
@@ -139,29 +139,29 @@ def init_graph(title):
                     "xaxis": "x2"
                 }
             ],
-            "layout": 
+            "layout":
             {
-                "title": title, 
-                "xaxis": 
+                "title": title,
+                "xaxis":
                 {
                     "tickangle": -45,
                     "domain": [0, 0.45],
                     "anchor": "x1"
-                }, 
-                "xaxis2": 
+                },
+                "xaxis2":
                 {
                     "tickangle": -45,
                     "domain": [0.55, 1],
                     "anchor": "x2"
-                }, 
-                "barmode": "stack", 
+                },
+                "barmode": "stack",
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",
-                "font": 
+                "font":
                 {
                     "color": "rgba(130,130,130,1)"
                 },
-                "legend": 
+                "legend":
                 {
                     "bgcolor": "rgba(0,0,0,0)"
                 }
@@ -171,9 +171,9 @@ def init_graph(title):
     return data
 
 
-'''
+"""
 Generate JSON data for stats page
-'''
+"""
 def stats():
     global dname
 
@@ -222,12 +222,12 @@ def stats():
         contrib_data["data"][d_idx]["y"].append(len(authors))
 
         if "learning-paths" in d:
-            logging.info("{} Learning Paths found in {} and {} contributor(s).".format(count, d, len(authors)))
+            logging.info(f"{count} Learning Paths found in {d} and {len(authors)} contributor(s)")
             total += count
         else:
-            logging.info("{} articles found in {} and {} contributor(s).".format(count, d, len(authors)))
+            logging.info(f"{count} articles found in {d} and {len(authors)} contributor(s)")
 
-    logging.info("Total number of Learning Paths is {}.".format(total))
+    logging.info(f"Total number of Learning Paths is {total}")
 
     fn_lp='content/stats/lp_data.json'
     fn_contrib='content/stats/contrib_data.json'
@@ -240,16 +240,16 @@ def stats():
     f_contrib = open(fn_contrib, 'w')
     # Write results to file
     json.dump(lp_data, f_lp)
-    json.dump(contrib_data, f_contrib)    
+    json.dump(contrib_data, f_contrib)
     # Closing JSON file
     f_lp.close()
     f_contrib.close()
 
 
-'''
+"""
 List pages older than a period in days and save result as CSV
 Generate JSON file with data
-'''
+"""
 def report(period):
     global dname
 
@@ -265,12 +265,12 @@ def report(period):
         res, count, authors = content_parser(d, period)
         result.update(res)
         if "learning-paths" in d:
-            logging.info("Found {} Learning Paths in {}. {} of them are outdated.".format(count, d, len(res)))
+            logging.info(f"Found {count} Learning Paths in {d}. {len(res)} of them are outdated")
             total += count
         else:
-            logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
+            logging.info(f"Found {count} articles in {d}. {len(res)} of them are outdated")
 
-    logging.info("Total number of Learning Paths is {}.".format(total))
+    logging.info(f"Total number of Learning Paths is {total}")
 
     fn="outdated_files.csv"
     fields=["File", "Last updated"]
