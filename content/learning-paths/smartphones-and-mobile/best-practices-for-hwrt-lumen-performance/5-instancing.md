@@ -1,6 +1,6 @@
 ---
 title: Take Full Advantage of Instancing
-weight: 6
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
