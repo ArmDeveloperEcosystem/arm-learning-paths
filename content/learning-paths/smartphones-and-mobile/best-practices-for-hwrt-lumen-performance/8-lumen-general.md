@@ -6,7 +6,7 @@ weight: 8
 layout: learningpathall
 ---
 
-To use Lumen in your game scene, you can add a **Post Process Volume** actor (found under Place Actors > Visual Effects). Within the details panel of **Post Process Volume**, there are several options that you can change and amend. During the development of the Lumen content, **“Steel Arms”**, we found a few recommended values for these options that are suitable for Android devices. The following images show all of the option values that were used in **“Steel Arms”** with some additional explanation provided.
+We now look at how best to optimize within the general settings. To use Lumen in your game scene, you can add a **Post Process Volume** actor (found under Place Actors > Visual Effects). Within the details panel of **Post Process Volume**, there are several options that you can change and amend. During the development of the Lumen content, **“Steel Arms”**, we found a few recommended values for these options that are suitable for Android devices. The following images show all of the option values that were used in **“Steel Arms”** with some additional explanation provided.
 
 ## Global Illumination Settings
 ![](images/gl-setting.png "Figure1. These global illumination parameters are used in our Lumen content - Steel Arms.")
@@ -54,3 +54,5 @@ To use Lumen in your game scene, you can add a **Post Process Volume** actor (fo
 • This controls the number of reflection bounces; higher values increase the GPU cost.
 
 • <font color=#00FF00>**1**</font> is recommended for mobile games.
+
+This learning path has taken you through some key areas and best practices for using and optimizing hardware ray tracing with Lumen. 
