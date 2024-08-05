@@ -1,5 +1,5 @@
 ---
-title: "Create Google Axion based GitLab self-hosted runner"
+title: "Create a Google Axion-based GitLab self-hosted runner"
 
 weight: 2
 
@@ -7,26 +7,26 @@ layout: "learningpathall"
 ---
 
 ## What is a GitLab runner?
-A GitLab Runner is an application that works with GitLab CI/CD to run jobs in a pipeline. It acts as an agent that executes the jobs defined in your GitLab CI/CD configuration. Some key points to note about GitLab Runner:
+A GitLab Runner works with GitLab CI/CD to run jobs in a pipeline. It acts as an agent and executes the jobs you define in your GitLab CI/CD configuration. Some key points to note about GitLab Runner:
 
-1. GitLab offers multiple types of runners - You can use GitLab-hosted runners, self-managed runners, or a combination of both. GitLab-hosted runners are managed by GitLab, while self-managed runners are installed and managed on your own infrastructure.
+1. GitLab offers multiple types of runners - You can use GitLab-hosted runners, self-managed runners, or a combination of both. GitLab manages GitLab-hosted runners, while you install and manage self-managed runners on your own infrastructure.
 
 2. Each runner is configured as an Executor - When you register a runner, you choose an executor, which determines the environment in which the job runs. Executors can be Docker, Shell, Kubernetes, etc.
 
 3. Multi-architecture support: GitLab runners support multiple architectures including - `x86/amd64` and `arm64`
 
 ## What is Google Axion?
-Google Axion is the latest generation of Arm Neoverse based CPU offered by Google Cloud. The VM instances are part of the `C4A` family of compute instances. To learn more about Google Axion refer to this [blog](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
+Google Axion is the latest generation of Arm Neoverse-based CPU offered by Google Cloud. The VM instances are part of the `C4A` family of compute instances. To learn more about Google Axion refer to this [blog](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 Note: These `C4A` VM instances are in public preview and needs a signup to be enabled in your Google Cloud account/project.
 
 ## Install GitLab runner on a Google Axion VM
 
-Create a repository in your GitLab account by clicking on "+" sign on top-left corner. Click on `New project/repository` and select a blank project, provide a name and initiate your project/repository.
+Create a repository in your GitLab account by clicking the "+" sign on top-left corner. Click on `New project/repository` and select a blank project, provide a name and initiate your project/repository.
 
 ![repository #center](_images/repository.png)
 
-Once the repository gets created, in the left-hand pane, navigate to `Settings->CI/CD`. Expand the `Runners` section and under `Project Runners`, select `New Project Runner`.
+After you create the repository, navigate to `Settings->CI/CD` in the left-hand pane. Expand the `Runners` section and under `Project Runners`, select `New Project Runner`.
 
 ![arm64-runner #center](_images/create-gitlab-runner.png)
 
@@ -57,7 +57,7 @@ Install the runner and run it as a service
 sudo gitlab-runner install --user=gitlab-runner --working-directory=/home/gitlab-runner
 sudo gitlab-runner start
 ```
-In the GitLab console, on the `Register Runner` page, copy the command from `Step 1` and run it on the `C4A` VM. It should look like below
+In the GitLab console, on the `Register Runner` page, copy the command from `Step 1` and run it on the `C4A` VM. The command should look like this:
 ```console
 sudo gitlab-runner register  --url https://gitlab.com  --token <your-runner-token>
 ```
@@ -69,7 +69,7 @@ After answering the prompts, the runner should be registered and you should see 
 Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!
 ```
 
-You should be able to see the newly registered runner in the `Runners` section of GitLab console like below
+You should see the newly registered runner in the Runners section of the GitLab console as shown below.
 
 ![registered-runner #center](_images/registered-runner.png)
 
