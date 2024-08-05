@@ -1,7 +1,7 @@
 ---
 title: Use Arm64EC with Windows 11 on Arm
 
-minutes_to_complete: 20
+minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to use Arm64EC with Windows on Arm devices. 
 
