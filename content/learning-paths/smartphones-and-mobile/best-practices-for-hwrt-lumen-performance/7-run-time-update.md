@@ -1,6 +1,6 @@
 ---
 title: Reduce Acceleration Structure Run-time Update Cost
-weight: 8
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
