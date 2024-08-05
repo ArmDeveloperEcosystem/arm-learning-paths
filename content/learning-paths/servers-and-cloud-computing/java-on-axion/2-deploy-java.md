@@ -14,7 +14,7 @@ Now that you have an Axion instance running Ubuntu 24.04, you can SSH into it vi
 
 This will bring up a separate window with a shell connected to your instance.
 
-Java is not yet installed on this Ubuntu image, so you'll want to install Java. First update `apt`:
+This Ubuntu image does not include Java, so you need to install it. First update `apt`:
 
 ```bash
 sudo apt update
@@ -33,7 +33,7 @@ Check to ensure that the JRE is properly installed:
 java -version
 ```
 
-The output will look like this:
+Your output will look like this:
 
 ```bash
 openjdk version "21.0.3" 2024-04-16
