@@ -1,5 +1,5 @@
 ---
-title: Create Arm-based VM instance with Google Axion CPU
+title: Create an Arm-based VM instance with Google Axion CPU
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -22,7 +22,7 @@ If you have never used the Google Cloud Platform before, please review [Getting 
 
 #### Open and configure the Google Cloud Shell Editor
 
-The Cloud Shell Editor has the gcloud CLI pre-installed, and is the quickest way to access a terminal with the gcloud CLI. It can be found at [shell.cloud.google.com](https://shell.cloud.google.com/).
+The gcloud CLI is pre-installed in Cloud Shell Editor, which is the quickest way to access a terminal with the gcloud CLI. It can be found at [shell.cloud.google.com](https://shell.cloud.google.com/).
 
 Once the shell is available, configure it to use your Google Cloud project ID:
 
