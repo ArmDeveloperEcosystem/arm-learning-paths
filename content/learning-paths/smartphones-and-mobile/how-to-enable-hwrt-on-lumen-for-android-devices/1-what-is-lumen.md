@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-Lumen is a dynamic global illumination feature in Unreal Engine which also supports hardware ray tracing. Lighting indoor scenes using only direct lighting does not produce high-quality rendering results. To achieve a much better quality of indoor lighting, you also need to use indirect lighting but rendering dynamic indirect lighting is computationally expensive. 
+Lumen is a dynamic global illumination and reflections system in Unreal Engine 5, which also supports hardware ray tracing. Lighting indoor scenes using only direct lighting does not produce high-quality rendering results. To achieve a much better quality of indoor lighting, you also need to use indirect lighting but rendering dynamic indirect lighting is computationally expensive. 
 
 Lumen introduces a new ray-tracing based solution that allows developers to render both dynamic direct lighting and indirect lighting in real-time.
 
