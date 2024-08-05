@@ -12,7 +12,7 @@ learning_objectives:
     - Test common performance optimization flags
 
 prerequisites:
-    - A [Google Cloud](https://cloud.google.com/) account with access to Axion based instances(C4A).
+    - A [Google Cloud](https://cloud.google.com/) account with access to Axion based instances (C4A).
 
 author_primary: Joe Stech
 
