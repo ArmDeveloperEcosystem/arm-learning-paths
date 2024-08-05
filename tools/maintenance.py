@@ -109,6 +109,7 @@ def main():
         results_dict = {}
         # check if article is a csv file corresponding to a file list
         if args.instructions.endswith(".csv"):
+            # TODO idea: separate parsing of CSV into list, run in same way as a single one passed
             logging.info("Parsing CSV " + args.instructions)
             with open(args.instructions) as f:
                 next(f) # skip header
