@@ -26,11 +26,5 @@ The TLAS only stores the instancing data of the BLAS, such as the transform data
 ### BLAS
 The BLAS stores the geometry data and hierarchical bounding boxes of the scene. Multiple instances in the TLAS can point to a single BLAS.
 
-### Add only important objects into ray tracing
-The first optimization is to remove unnecessary geometry data from the acceleration structure.
-
-To do this, exclude actors that do not contribute to lighting from ray tracing. Additionally, exclude any small actors from ray tracing as they contribute very little to the final lighting and may cause additional noise in indirect lighting. In the actor details panel, uncheck **Visible in Ray Tracing** to exclude the actor from ray tracing.
-
-![](images/add_object.png)
 
 
