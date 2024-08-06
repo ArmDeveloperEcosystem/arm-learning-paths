@@ -3,7 +3,7 @@ title: Deploy firmware on hybrid edge systems using containers
 draft: true
 minutes_to_complete: 20
 
-who_is_this_for: This learning path is dedicated to developers interested in learning how to deploy software (embedded applications and firmware) onto other processors in the system, using Linux running on the application core.
+who_is_this_for: This learning path is for developers interested in learning how to deploy software (embedded applications and firmware) onto other processors in the system, using Linux running on the application core.
 
 learning_objectives:
     - Deploy a containerized embedded application onto an Arm Cortex-M core from an Arm Cortex-A core using containerd and K3s.
