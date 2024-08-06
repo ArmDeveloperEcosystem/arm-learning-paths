@@ -29,7 +29,7 @@ AVH offers a 30-day free trial to use.
 
 -	A console to Linux running on the Cortex-A should appear. Use “root” to login.
 
--	Find the IP address for the board model by running the following command. This will be needed to access the device using SSH.
+-	Find the IP address for the board model by running the following command (this will be needed to access the device using SSH):
 ```bash
 ip addr
 ```
