@@ -18,7 +18,7 @@ curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC=$INSTALL_K3S_EXEC sh -s -
 ```
 This can take a few minutes to complete.
 
-Make sure K3s is running. A snippet of the expected output is shown below.
+Make sure K3s is running. A snippet of the expected output is shown below:
 ```bash
 systemctl status k3s
 ```
@@ -33,28 +33,28 @@ systemctl status k3s
      CGroup: /system.slice/k3s.service
              `-2069 "/usr/local/bin/k3s agent"
 ```
-For things to work properly, you need to make K3s aware of the `hybrid-runtime` by configuring this with `containerd`. You find the config file with the K3s example YAML files in GitHub.
+For things to work properly, you need to make K3s aware of the `hybrid-runtime` by configuring this with `containerd`. You can find the config file with the K3s example YAML files in GitHub.
 
 Download the K3s demo example YAML files:
 ```bash
 wget https://github.com/smarter-project/hybrid-runtime/releases/download/v1.5/example.tar.gz
 ```
-Extract the files.
+Extract the files:
 ```bash
 tar -xvf example.tar.gz
 ```
 
-Create a `containerd` directory under `/etc` and copy the config file there.
+Create a `containerd` directory under `/etc` and copy the config file to there:
 ```bash
 mkdir /etc/containerd
 mv example/config.toml /etc/containerd/
 ```
-Restart containerd, and make sure that it's running.
+Restart containerd, and make sure that it's running:
 ```bash
 systemctl restart containerd
 systemctl status containerd
 ```
-If you run the `kubectl` command below, you will see that the node is not ready.
+If you run the `kubectl` command below, you will see that the node is not ready:
 ```bash
 kubectl get nodes
 ```
@@ -62,12 +62,12 @@ kubectl get nodes
 NAME     STATUS     ROLES                  AGE   VERSION
 narsil   NotReady   control-plane,master   18m   v1.29.6+k3s2
 ```
-To fix this, you need to apply a Container Network Interface (CNI). Run the command to use the "smarter_cni", and label the node.
+To fix this, you need to apply a Container Network Interface (CNI). Run the command to use the `smarter_cni`, and label the node as follows:
 ```console
 kubectl apply -f example/smarter_cni.yaml
 kubectl label node narsil smarter.cni=deploy
 ```
-Re-run the kubectl command.
+Re-run the kubectl command:
 ```bash
 kubectl get nodes
 ```
@@ -84,7 +84,7 @@ narsil   Ready    control-plane,master   24m   v1.29.6+k3s2
 
 The smarter camera demo is used as an example to show the capabilities of K3s.
 
-First, you need to set a `runtimeClass` in K3s. It allows you to select the container runtime we want to use.
+First, you need to set a `runtimeClass` in K3s. It allows you to select the container runtime we want to use:
 ```bash
 kubectl apply -f example/runtime_class.yaml
 ```
@@ -130,11 +130,11 @@ To stop the demo, run the command shown below. The termination process can take 
 kubectl delete pod example3 --grace-period=0 --force
 ```
 Make sure the pod was terminated.
-1. Go to the Cortex-M Console and check that there are no new outputs.
+1. Go to the Cortex-M Console and check that there are no new outputs:
 
 ![Cortex-M output alt-text#center](k3s.png "Figure 1. Cortex-M output")
 
-2.	Check that the firmware is offline.
+2.	Check that the firmware is offline:
 ```bash
 cat /sys/class/remoteproc/remoteproc0/state
 ```
@@ -142,7 +142,7 @@ Output:
 ```output
 offline
 ```
-3.	Make sure the created pod above was deleted.
+3.	Make sure the created pod above was deleted:
 ```bash
 kubectl get pods -A
 ```
@@ -150,7 +150,7 @@ kubectl get pods -A
 NAMESPACE     NAME                READY   STATUS    RESTARTS       AGE
 kube-system   smarter-cni-wplzn   1/1     Running   3 (143m ago)   4h31m
 ```
-4.	Make sure all the container resources were deleted. The command below should give no output.
+4.	Make sure all the container resources were deleted. The command below should give no output:
 ```console
 ls /var/lib/hybrid-runtime/
 ```
