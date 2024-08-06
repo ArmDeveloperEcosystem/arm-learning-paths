@@ -19,6 +19,7 @@ review:
         correct_answer: 2
         explanation: >
             Each embedded core can only run a single container at once.
+            
     - questions:
         question: >
             Which command is used to interact with the hybrid-runtime from containerd?
