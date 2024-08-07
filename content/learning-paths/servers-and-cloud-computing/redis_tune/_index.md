@@ -11,7 +11,7 @@ learning_objectives:
     - Tune a Redis configuration file for deployment
 
 prerequisites:
-    - Cloud (e.g. Google Axion) or bare-metal installation of an Redis file server 
+    - Cloud or bare-metal installation of an Redis file server
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
 
 author_primary: Elham Harirpoush

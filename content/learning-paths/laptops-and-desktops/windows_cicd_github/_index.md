@@ -9,7 +9,7 @@ who_is_this_for: This is an introductory topic for software developers intereste
 
 learning_objectives: 
     - Setup a CI/CD flow with GitHub Actions to use Windows on Arm as the self-hosted runner host
-    - Run a simple workflow
+    - Run a simple GitHub Actions workflow
 
 prerequisites:
     - Some familiarity with CI/CD concepts is assumed

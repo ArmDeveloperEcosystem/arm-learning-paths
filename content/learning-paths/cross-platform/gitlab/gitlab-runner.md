@@ -16,7 +16,7 @@ A GitLab Runner is an application that works with GitLab CI/CD to run jobs in a 
 3. Multi-architecture support: GitLab runners support multiple architectures including - `x86/amd64` and `arm64`
 
 ## What is Google Axion?
-Google Axion is the latest generation of Arm Neoverse based CPU offered by Google Cloud. The VM instances are part of the `C4A` family of compute instances. To learn more about Google Axion checkout this page.
+Google Axion is the latest generation of Arm Neoverse based CPU offered by Google Cloud. The VM instances are part of the `C4A` family of compute instances. To learn more about Google Axion refer to this [blog](https://cloud.google.com/blog/products/compute/introducing-googles-new-arm-based-cpu).
 
 Note: These `C4A` VM instances are in public preview and needs a signup to be enabled in your Google Cloud account/project.
 
@@ -30,11 +30,11 @@ Once the repository gets created, in the left-hand pane, navigate to `Settings->
 
 ![arm64-runner #center](_images/create-gitlab-runner.png)
 
-In GitLab, `Tags` are used to specify the jobs that can be executed on the runner. In the `Tags` field, enter `arm64`. In `Runner description` enter `google-axion-arm64-runner` and click the `Create Runner` button
+Use `Tags` to specify the jobs that can be executed on the runner. In the `Tags` field, enter `arm64`. In `Runner description` enter `google-axion-arm64-runner` and click the `Create Runner` button
 
-Once it runner is created, we need to register this runner. Select Linux as the Operating System.
+Once the runner is created, you need to register this runner. Select Linux as the Operating System.
 
-In Google Cloud, the `C4A` VM instance is based on Google Axion. Create a `C4A` VM by following this learning path. [Create Arm-based VM in Google Cloud](/learning-paths/servers-and-cloud-computing/csp/google/)
+In Google Cloud, the `C4A` VM instance is based on Google Axion. Create a `C4A` VM by following the [Create Arm-based VM in Google Cloud learning path](/learning-paths/servers-and-cloud-computing/csp/google/)
 
 SSH to this VM and use the following steps to install GitLab Runner binaries.
 
@@ -61,9 +61,9 @@ In the GitLab console, on the `Register Runner` page, copy the command from `Ste
 ```console
 sudo gitlab-runner register  --url https://gitlab.com  --token <your-runner-token>
 ```
-Go back to the SSH session for `C4A` VM. When prompted by the command line, keep the default for `GitLab instance URL` and enter a name for the runner. For the executor, we'll be using the `shell` option.
+Go back to the SSH session for `C4A` VM. When prompted by the command line, keep the default for `GitLab instance URL` and enter a name for the runner. For the executor, use `shell` as the option.
 
-After answering the prompts, the runner should be registered and you should see a message like below
+After answering the prompts, the runner should be registered and you should see a message like the one below:
 
 ```output
 Runner registered successfully. Feel free to start it, but if it's running already the config should be automatically reloaded!

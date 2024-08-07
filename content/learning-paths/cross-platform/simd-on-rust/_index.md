@@ -9,7 +9,7 @@ learning_objectives:
     - Learn how to write SIMD code with Rust on Arm.
 
 prerequisites:
-    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a rust compiler installed.
+    - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed.
 
 author_primary: Konstantinos Margaritis
 

@@ -119,6 +119,10 @@ git clone --depth 1 https://github.com/google/mediapipe.git
 cd mediapipe
 ```
 
+{{% notice Note %}}
+These steps have been tested with MediaPipe commit 7c625938d8074b77e6cefcc29beabd995c613e2b.
+{{% /notice %}}
+
 #### Install MediaPipe python packages
 
 ```bash
@@ -127,17 +131,17 @@ pip3 install -r requirements.txt
 
 #### Install and configure the Android NDK and SDK
 
-Bazel only natively supports the Android NDK up to version 21. Use the script included in MediaPipe to install the Android NDK and SDK:
+Use the script included in MediaPipe to install the Android NDK and SDK:
 
 ```bash
-bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bundle r21 --accept-licenses
+bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bundle r26d --accept-licenses
 ```
 
 Add the NDK bin folder to your PATH variable:
 
 ```bash
 
-export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin/
+export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r26d/toolchains/llvm/prebuilt/linux-x86_64/bin/
 
 ```
 

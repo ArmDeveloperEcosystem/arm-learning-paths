@@ -17,7 +17,7 @@ author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: Security
+subjects: Performance and Architecture
 armips:
     - Cortex-A
     - Cortex-M
