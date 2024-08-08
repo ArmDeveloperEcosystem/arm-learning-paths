@@ -25,9 +25,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Installing Vivaldi
 
-The Vivaldi browser runs on Windows using emulation, but Vivaldi is available for Arm Linux. 
+Vivaldi is available for Arm Linux and Windows on Arm. 
 
 Visit [Download Vivaldi](https://vivaldi.com/download/) to obtain packages for various operating systems. 
+
+
 
 ### Linux
 
@@ -64,7 +66,9 @@ sudo dnf install vivaldi-stable -y
 
 ### Windows 
 
-Vivaldi runs on Windows on Arm using emulation. 
+The stable release of Vivaldi runs on Windows using emulation, but there is a snapshot release for ARM64.
+
+Stable Vivaldi runs on Windows on Arm using emulation. 
 
 Emulation is slower than native and shortens battery life, but may provide required functionality.
 
@@ -75,6 +79,6 @@ Emulation is slower than native and shortens battery life, but may provide requi
 3. Find and start Vivaldi from the applications menu
 
 
-
+The [snapshot release](https://downloads.vivaldi.com/snapshot/Vivaldi.6.9.3425.3.arm64.exe) is available as a native ARM64 application. Install the snapshot release using the same 3 steps above.
 
 
