@@ -103,4 +103,3 @@ The project automatically creates `main.c` within the `Source Files` group. We w
 {{% notice  Note%}}
 To skip μVision settings, go to [Writing assembly functions](..//coding/).
 {{% /notice %}}
-
