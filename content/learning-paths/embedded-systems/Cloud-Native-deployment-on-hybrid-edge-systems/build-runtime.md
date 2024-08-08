@@ -23,7 +23,7 @@ Navigate to the `hybrid-runtime/docker` directory and build the hybrid-runtime c
 cd hybrid-runtime/docker
 make all
 ```
-This builds the `hybrid-runtime` CLI and containerd `hybrid-shim`.
+This builds the `hybrid-runtime` CLI and `containerd` `hybrid-shim`.
 
 Navigate to the `hybrid_runtime/cortexm_console`  directory and build the application:
 ```bash
@@ -37,7 +37,7 @@ You may have to be root to run Docker. Try adding `sudo` to the beginning of the
 
 This builds the helper application, `cortexm_console`, that can capture output from a Cortex-M application. The binary is created in the directory.
 
-By default, containerd will look in `/usr/local/bin` to find the hybrid-runtime components. Therefore, copy the hybrid-runtime components and the `cortexm_console` application into `/usr/local/bin` on the AVH model.
+By default, `containerd` will look in `/usr/local/bin` to find the hybrid-runtime components. Therefore, copy the hybrid-runtime components and the `cortexm_console` application into `/usr/local/bin` on the AVH model.
 
 Copy the `containerd-shim-containerd-hybrid` to the board under `/usr/local/bin` using *SCP* and the IP address from before.
 
