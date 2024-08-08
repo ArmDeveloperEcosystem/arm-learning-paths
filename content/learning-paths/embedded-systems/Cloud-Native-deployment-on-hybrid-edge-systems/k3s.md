@@ -108,8 +108,8 @@ spec:
         image: ghcr.io/smarter-project/smart-camera-hybrid-application/hybrid_app_imx8mp:latest
         imagePullPolicy: IfNotPresent
 ```
-There are two ways to check that the firmware is running.
-1. Run and observe the output.
+There are two ways to check that the firmware is running:
+1. Run and observe the output (a pod with the name `example3` should be running).
 ```bash
 kubectl get pods -A
 ```
@@ -119,17 +119,17 @@ NAMESPACE     NAME                READY   STATUS    RESTARTS       AGE
 default       example3            1/1     Running   0              6m57s
 kube-system   smarter-cni-wplzn   1/1     Running   3 (141m ago)   4h29m
 ```
-A pod with the name `example3` should be running.
 
 2. Check the Cortex-M Console. If there is any output here, the firmware is running.
 
 ### Stop the demo
 
-To stop the demo, run the command shown below. The termination process can take a few minutes.
+To stop the demo, run the command shown below (the termination process can take a few minutes):
 ```bash
 kubectl delete pod example3 --grace-period=0 --force
 ```
-Make sure the pod was terminated.
+To make sure the pod was terminated, check the following:
+
 1. Go to the Cortex-M Console and check that there are no new outputs:
 
 ![Cortex-M output alt-text#center](k3s.png "Figure 1. Cortex-M output")
@@ -138,7 +138,7 @@ Make sure the pod was terminated.
 ```bash
 cat /sys/class/remoteproc/remoteproc0/state
 ```
-Output:
+The output should be as follows:
 ```output
 offline
 ```
