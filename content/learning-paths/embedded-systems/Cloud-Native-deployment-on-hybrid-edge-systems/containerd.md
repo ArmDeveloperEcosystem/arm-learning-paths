@@ -1,11 +1,11 @@
 ---
-title: Deploy firmware container using containerd
+title: Deploy firmware container using `containerd`
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-Containerd is a cloud-native container runtime used to deploy workloads across an array of platforms.
+`Containerd` is a cloud-native container runtime used to deploy workloads across an array of platforms.
 
 ## Hello World example
 
