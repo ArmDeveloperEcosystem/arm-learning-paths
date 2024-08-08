@@ -9,7 +9,7 @@ review:
             - 4
         correct_answer: 2                    
         explanation: >
-            Acceleration structure has 2 levels, TLAS and BLAS.
+            Acceleration structure has 2 levels: TLAS and BLAS.
 
     - questions:
         question: >
@@ -19,7 +19,7 @@ review:
             - "No"
         correct_answer: 1                    
         explanation: >
-            Acceleration structure can be updated at run-time but remember that it has performance cost.
+            The acceleration structure can be updated at run-time but remember that there is a performance cost.
                
     - questions:
         question: >

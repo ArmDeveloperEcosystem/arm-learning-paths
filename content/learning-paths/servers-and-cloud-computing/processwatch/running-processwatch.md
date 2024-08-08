@@ -51,7 +51,7 @@ By default, Process Watch:
 ## Default Process Watch output
 You can run Process Watch with no arguments:
 
-```output
+```bash
 sudo ./processwatch
 ```
 
