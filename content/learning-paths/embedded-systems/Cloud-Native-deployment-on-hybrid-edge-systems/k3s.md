@@ -49,7 +49,7 @@ Create a `containerd` directory under `/etc` and copy the config file to there:
 mkdir /etc/containerd
 mv example/config.toml /etc/containerd/
 ```
-Restart containerd, and make sure that it's running:
+Restart `containerd`, and make sure that it's running:
 ```bash
 systemctl restart containerd
 systemctl status containerd
@@ -157,6 +157,6 @@ ls /var/lib/hybrid-runtime/
 
 ## Summary
 
-The hybrid-runtime can be used to improve the experience for systems with multiple IPs on a single SoC. You now know how to use cloud tools such as K3s and containerd to deploy and run workloads on hybrid systems using the hybrid-runtime.
+The hybrid-runtime can be used to improve the experience for systems with multiple IPs on a single SoC. You now know how to use cloud tools such as K3s and `containerd` to deploy and run workloads on hybrid systems using the hybrid-runtime.
 
 If you have an Arm Linux host, you can run the hello world example by following the instructions in the next section.
