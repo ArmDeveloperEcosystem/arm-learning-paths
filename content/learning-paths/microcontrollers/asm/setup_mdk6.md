@@ -46,7 +46,9 @@ From the various pull-downs, ensure that the most up to date versions of the fol
 
 Others can be set as `None` as they are not needed for this example.
 
-If you open `vcpkg-configuration.json` in the text editor you will see these set as selected.
+If you open `vcpkg-configuration.json` in the text editor you will see these set as selected. Close the file to save.
+
+All necessary components will be downloaded and installed as necessary (if not already installed).
 
 ## Configure CMSIS options
 
@@ -62,7 +64,7 @@ Close this view to save.
 
 Select `Run and Debug` from the Extensions icon list.
 
-Click the gear icon to Open `launch.json`. This is the file that defines the debug instance.
+Click the gear icon to open `launch.json`. This is the file that defines the debug instance.
 
 Right-click on `launch.json` and select `Open Run and Debug Configuration`.
 
