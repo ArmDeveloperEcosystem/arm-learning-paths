@@ -15,7 +15,7 @@ Install `Cmake`, `gcc`, `g++`and other dependencies:
 sudo apt install gcc g++ git wget cmake
 ```
 
-## Download and build AV1 source
+## Download and build VP9 source
 
 ```bash
 git clone https://chromium.googlesource.com/webm/libvpx
@@ -30,7 +30,7 @@ make -j 12
 For detailed instructions refer to this [README](https://aomedia.googlesource.com/aom/?pli=1#basic-build).
 
 
-## Run AV1 on unit test
+## Run VP9 on unit test
 
 `libvpx` has a comprehensive suite of unit tests, written using the GTest framework.
 Building the code as per the sections above will produce a number of binaries. Among them will be `test_libvpx` and running the project unit tests is as simple as doing:
@@ -88,7 +88,6 @@ wget https://ultravideo.fi/video/Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z 
 wget https://ultravideo.fi/video/Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z // 8-bit 4K
 wget https://ultravideo.fi/video/Bosphorus_3840x2160_120fps_420_10bit_YUV_Y4M.7z // 10-bit 4K 
 ```
-
 Next, extract the contents of the 7z file into your preferred benchmark directory. While I used 7za for this, feel free to use any decompression tool you prefer.
 
 ```bash

@@ -5,7 +5,7 @@ weight: 2
 ---
 
 ## Install necessary software packages
-`libaom` is a free software video codec library from the Alliance for Open Media ([AOM](https://aomedia.org/)). It serves as the reference software implementation for the AV1 video coding format. It will also be the foundation for AV2 development. There have been significant efforts to optimize the open-source libxaom implementation of the AV2 encoder on Arm Neoverse platforms which supports Neon instructions. The optimized code is available on [googlesource](https://aomedia.googlesource.com/aom/)
+`libaom` is a free software video codec library from the Alliance for Open Media ([AOM](https://aomedia.org/)). It serves as the reference software implementation for the AV1 video coding format. It will also be the foundation for AV2 development. There have been significant efforts to optimize the open-source libxaom implementation of the AV1 encoder on Arm Neoverse platforms which supports Neon & SVE2 instructions. The optimized code is available on [googlesource](https://aomedia.googlesource.com/aom/)
 There have been significant efforts to optimize the open-source implementation of the AV1 encoder on Arm Neoverse platforms which supports Neon and SVE2 instructions.
 Install GCC for your Arm Linux distribution. Refer to the [install guide](/install-guides/gcc/native/) for additional information. 
 

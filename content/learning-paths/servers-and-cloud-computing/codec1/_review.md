@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            Does AV2 run on Arm servers?
+            Does AV1 run on Arm servers?
         answers:
             - "Yes"
             - "No"
