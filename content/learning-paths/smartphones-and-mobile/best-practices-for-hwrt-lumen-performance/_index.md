@@ -1,6 +1,6 @@
 ---
 title: Best Practices for hardware ray tracing with Lumen on Android Devices
-draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for Unreal Engine developers interested in optimizing hardware ray tracing with Lumen on android devices.
