@@ -14,7 +14,7 @@ A multi-architecture application is designed to run on multiple architectures, t
 In this learning path you will use the `docker manifest` way to build a multi-architecture image.
 
 ## Create a Docker repository in Google Artifact Registry
-You can create a docker repository in the Google Artifact Registry from the Google Cloud UI or with the following command:
+You can create a Docker repository in the Google Artifact Registry from the Google Cloud UI or with the following command:
 
 ```console
 gcloud artifacts repositories create quickstart-docker-repo --repository-format=docker \
@@ -31,7 +31,7 @@ gcloud auth configure-docker us-central1-docker.pkg.dev
 
 ## Create project variables
 
-Create the following variables in your GitLab repository by navigating to `CI/CD->Variables`. Expand the section and click on `Add Variable`
+Create the following variables in your GitLab repository by navigating to `CI/CD->Variables`. Expand the section and click on `Add Variable`.
 
 - `GCP_PROJECT` - Your Google Cloud project ID that also hosts the Google Artifact registry
 - `GKE_ZONE` - Zone for your GKE cluster - e.g. - us-central1-c
@@ -103,7 +103,7 @@ RUN apk add --update --no-cache file
 CMD [ "/hello" ]
 ```
 
-The `deployment.yaml` file references the multi-architecture docker image from the registry. Create the file using the contents below
+The `deployment.yaml` file references the multi-architecture docker image from the registry. Create the file using the contents below.
 ```yml
 apiVersion: apps/v1
 kind: Deployment
@@ -142,7 +142,7 @@ spec:
           requests:
             cpu: 300m
 ```
-Create a Kubernetes Service of type `LoadBalancer` with the following `hello-service.yaml` contents
+Create a Kubernetes Service of type `LoadBalancer` with the following `hello-service.yaml` contents:
 
 ```yml
 apiVersion: v1
@@ -164,7 +164,7 @@ spec:
 
 ## Automate the GitLab CI/CD build process 
 
-In this section, the individual docker images for each architecture - `amd64` and `arm64`- are built natively on their respective runner. For e.g. the `arm64` build is run on Google Axion runner and vice versa. Each runner is differentiated with `tags` in the pipeline. To build a CI/CD pipeline in GitLab, you'll need to create a `.gitlab-ci.yml` file in your repository. Use the following contents to populate the file
+In this section, the individual Docker images for each architecture - `amd64` and `arm64`- are built natively on their respective runner. For example, the `arm64` build is run on Google Axion runner and vice versa. Each runner is differentiated with `tags` in the pipeline. To build a CI/CD pipeline in GitLab, you'll need to create a `.gitlab-ci.yml` file in your repository. Use the following contents to populate the file:
 
 ```yml
 workflow:
@@ -220,7 +220,7 @@ deploy:
     - kubectl apply -f deployment.yaml
 
 ```
-This file has three `stages`. A `stage` is a set of commands that are executed in a sequence to achieve the desired result. In the `build` stage of the file there are two jobs that run in parallel. The `arm64-build` job gets executed on the Google Axion based C4A runner and the `amd64-build` job gets executed on an AMD64 based E2 runner. Both of these jobs push a docker image to the registry. 
+This file has three `stages`. A `stage` is a set of commands that are executed in a sequence to achieve the desired result. In the `build` stage of the file there are two jobs that run in parallel. The `arm64-build` job gets executed on the Google Axion based C4A runner and the `amd64-build` job gets executed on an AMD64 based E2 runner. Both of these jobs push a Docker image to the registry. 
 
 In the `manifest` stage, using `docker manifest` command both of these images are joined to create a single multi-architecture image and pushed to the registry. 
 
