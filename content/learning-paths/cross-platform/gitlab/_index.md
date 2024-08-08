@@ -1,6 +1,6 @@
 ---
 title: Build a CI/CD pipeline with GitLab on Google Axion
-draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for DevOps professionals who are looking to build a CI/CD pipeline with GitLab on Google Axion based self-hosted GitLab runners. 
