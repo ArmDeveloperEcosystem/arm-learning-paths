@@ -1,5 +1,5 @@
 ---
-next_step_guidance: If you are interested in learning more about deploying IoT applications using Arm Virtual Hardware, please continue the learning path below
+next_step_guidance: If you are interested in learning more about deploying IoT applications using Arm Virtual Hardware, please continue to the learning path below
 
 recommended_path: /learning-paths/embedded-systems/avh_balena/
 
