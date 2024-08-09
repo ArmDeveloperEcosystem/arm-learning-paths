@@ -13,34 +13,15 @@
 review:
     - questions:
         question: >
-            Which header file must you include in your sources to access the library functions?
+            Which function is used to invoke an OS thread?
         answers:
-            - arm_dsp.h
-            - arm_math.h
-            - arm_cmsis.h
-        correct_answer: 2             
-        explanation: >
-            The library is released in source form. The functions are declared in arm_math.h, which resides in the Include folder of the repository.
-    - questions:
-        question: >
-            Does the CMSIS-DSP library provide vectorized implementations of algorithms?
-        answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1                  
-        explanation: >
-            The library is provides vectorized versions of most algorithms for Helium and of most f32 algorithms for Neon.
-    - questions:
-        question: >
-            How is CMSIS-DSP library provided?
-        answers:
-            - Within a CMSIS-Pack
-            - In source code on Github
-            - Both
+            - "osKernelInitialize()"
+            - "osKernelStart()"
+            - "osThreadNew()"
         correct_answer: 3
         explanation: >
-            CMSIS-DSP is distributed in source form on Github and within the CMSIS-Core software pack. It is licensed under Apache License 2.0.
-              
+            osThreadNew() is called before osKernelStart() to define the main thread, and then by the main thread to start other threads.
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

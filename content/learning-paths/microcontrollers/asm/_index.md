@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Some familiarity with C/Assembly.
-    - A Windows computer to run Keil MDK.
+    - An installation of Keil MDK
 
 ### Tags
 skilllevels: Introductory

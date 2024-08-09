@@ -1,8 +1,8 @@
 ---
 # User change
 title: "Build and run CMSIS-DSP tests on Corstone-300 FVP"
-
-weight: 3 # 1 is first, 2 is second, etc.
+draft: true
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
