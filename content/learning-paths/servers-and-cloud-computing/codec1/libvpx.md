@@ -1,122 +1,116 @@
 ---
 layout: learningpathall
-title: Build and Run VP9 codec on Arm Servers and Apple Silicon
-weight: 2
+title: Build and Run the VP9 codec
+weight: 3
 ---
 
-## Install necessary software packages
+## What is the VP9 codec?
 
-`libvpx` is a free software video codec library from Google. It serves as the reference software implementation for the VP9 video coding formats.
-There have been significant efforts to optimize the open-source `libvpx` implementation of the VP9 encoder on Arm Neoverse platforms which supports Neon and SVE2 instructions.
-Install GCC for your Arm Linux distribution. Refer to the [install guide](/install-guides/gcc/native/) for additional information. 
+VP9 is a next-generation video compression format developed by the [WebM Project](https://www.webmproject.org/).
 
-Install `Cmake`, `gcc`, `g++`and other dependencies:
-```bash
-sudo apt install gcc g++ git wget cmake
-```
+Like AV1, significant efforts to optimize VP9, known as`libvpx`, available for Arm Neoverse platforms with Neon and SVE2 instructions. You can learn more on [Google for Developers](https://developers.google.com/media/vp9).
 
-## Download and build VP9 source
+## Download and build VP9 from source
+
+Download the VP9 source code:
 
 ```bash
 git clone https://chromium.googlesource.com/webm/libvpx
-
-mkdir build_libvpx
-cd build_libvpx
-# ./<path-to-libvpx-source>/configure --help is interesting...
-./<path-to-libvpx-source>/configure --disable-vp8 --enable-vp9 --enable-vp9-highbitdepth
-make -j 12
+cd libvpx
 ```
 
-For detailed instructions refer to this [README](https://aomedia.googlesource.com/aom/?pli=1#basic-build).
+The configuration allows for different options to be enabled and disabled. 
 
+To see the options run:
 
-## Run VP9 on unit test
-
-`libvpx` has a comprehensive suite of unit tests, written using the GTest framework.
-Building the code as per the sections above will produce a number of binaries. Among them will be `test_libvpx` and running the project unit tests is as simple as doing:
-
-```console
-./test_libvpx
-```
-
-However, the number of tests is huge, and it takes far too long to run them all. Thankfully you can constrain the number of tests by specifying a regex filter:
-```console
-# Show all of the options that GTest affords us.
-./test_libvpx --help
- 
-# List all of the tests - you probably want to pipe this into 'less'.
-./test_libvpx --gtest_list_tests
-```
-
-Or, you can filter runs only the Neon Sum of Absolute Difference (SAD) tests.
 ```bash
-./test_libvpx --gtest_filter="*NEON*SAD*"
+./configure --help
 ```
 
-Then, the outout will looks like:
+Configure and build with VP8 disabled, VP9 enabled, and unit tests enabled:
+
+```bash
+./configure --disable-vp8 --enable-vp9 --enable-vp9-highbitdepth --enable-unit-tests
+make -j$(nproc)
+```
+
+For more information refer to the [README](https://github.com/webmproject/libvpx/blob/main/README).
+
+## Run VP9 unit tests
+
+You can run VP9 unit tests using `make`. For example, to run the decoder test run:
+
+```bash
+make testdata
+make test TEST_NAME=vp9_decoder_test
+```
+
+The output is:
 
 ```output
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/42
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/43
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/44
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/45
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/46
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/47
-[ DISABLED ] NEON/SADSkipx4Test.DISABLED_Speed/48
-[----------] 294 tests from NEON/SADSkipx4Test (6 ms total)
-[----------] Global test environment tear-down
-[==========] 1511 tests from 9 test suites ran. (29 ms total)
-[  PASSED  ] 1511 tests.
+Note: Google Test filter = *-:NEON_I8MM.*:NEON_I8MM/*:SVE.*:SVE/*:SVE2.*:SVE2/*
+Note: This is test shard 1 of 10.
+[==========] Running 1592 tests from 132 test suites.
+[----------] Global test environment set-up.
+[----------] 1 test from ByteAlignmentTest
+[ RUN      ] ByteAlignmentTest.SwitchByteAlignment
+[       OK ] ByteAlignmentTest.SwitchByteAlignment (5248 ms)
+[----------] 1 test from ByteAlignmentTest (5248 ms total)
 
-  YOU HAVE 281 DISABLED TESTS
+[----------] 4 tests from EncodeAPI
+[ RUN      ] EncodeAPI.SetRoi
+[       OK ] EncodeAPI.SetRoi (4 ms)
+[ RUN      ] EncodeAPI.DynamicDeadlineChange
+[       OK ] EncodeAPI.DynamicDeadlineChange (4 ms)
+[ RUN      ] EncodeAPI.Buganizer311294795
+[       OK ] EncodeAPI.Buganizer311294795 (212 ms)
+[ RUN      ] EncodeAPI.Buganizer329179808RowMT1BitDepth10
+[       OK ] EncodeAPI.Buganizer329179808RowMT1BitDepth10 (26 ms)
+[----------] 4 tests from EncodeAPI (248 ms total)
+
+< output omitted >
 ```
 
 ## Performance Benchmarking
 
-There are some useful speed unit tests that can act as a good smoke test for an optimization idea. You can run these speed tests (disabled by default) like so:
+You can benchmark video encoding either on-demand or live-stream using the same video files from the previous section.
+
+{{% notice Note %}}
+The video files are large so adjust the paths to the y4m files in the commands below. You can also copy them to the current directory.
+{{% /notice %}}
+
+### On-demand video encoding 
+
+For on-demand encoding you can experiment different number of processors and monitor performance. 
+
+For example, run with `--good` and use the `--cpu-used` argument to vary the number of processors from 2 to 6.
+
+Run standard bit depth and change the CPU count and see the results using:
 
 ```bash
-# Example: This filter runs only the Neon Sum of Absolute Difference (SAD) speed tests.
-./test_libvpx --gtest_filter="*NEON*SAD*Speed*" --gtest_also_run_disabled_tests
+./vpxenc --good --cpu-used=2 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m 
 ```
 
-Now, you can benchmark video encoding either On-Demand or Live-Stream.
+Try the above command with different `--cpu-used` values.
 
-First of all, you need Download the `8-bit FHD`, `8-bit 4K` and `10-bit 4K` video files:
-```bash
-wget https://ultravideo.fi/video/Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z // 8-bit FHD
-wget https://ultravideo.fi/video/Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z // 8-bit 4K
-wget https://ultravideo.fi/video/Bosphorus_3840x2160_120fps_420_10bit_YUV_Y4M.7z // 10-bit 4K 
-```
-Next, extract the contents of the 7z file into your preferred benchmark directory. While I used 7za for this, feel free to use any decompression tool you prefer.
+You can do the same for high bit depth:
 
 ```bash
-7za e Bosphorus_1920x1080_120fps_420_8bit_YUV_Y4M.7z
-7za e Bosphorus_3840x2160_120fps_420_8bit_YUV_Y4M.7z
-7za e Bosphorus_3840x2160_120fps_420_10bit_YUV_Y4M.7z 
+./vpxenc --good --cpu-used=2 --profile=2 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit_YUV.y4m
 ```
 
-### On-Demand Video Encoding Benchmarking
-For VoD encoding with --good, you should care about --cpu-used in the range [2-6] - so you have to run the following commands five times to cover all cases.
+### Live-stream video encoding
 
-Standard Bitdepth
-```bash
-./vpxenc --good --cpu-used=2 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m # --limit=<x> (only encode x frames to reduce waiting time)
-```
+For live-stream encoding you can experiment different number of processors and monitor performance using the `--cpus-used` in the range from 5 to 9. 
 
-High Bitdepth
-```bash
-./vpxenc --good --cpu-used=2 --profile=2 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit_YUV.y4m # --limit=<x> (only encode x frames to reduce waiting time)
-```
-
-### Live-Stream Video Encoding Benchmarking
-For the live-stream case with --rt, you should care about --cpu-used in the range [5-9] - so 5 different runs to cover all cases.
+For standard bit depth with 8 CPUs run:
 
 ```bash
 ./vpxenc --rt --cpu-used=8 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
 ```
 
-High Bitdepth
+For high bit depth run:
+
 ```bash
 ./vpxenc --rt --cpu-used=8 --profile=2 --bit-depth=10 -o output.mkvBosphorus_3840x2160_120fps_420_10bit_YUV.y4m
 ```

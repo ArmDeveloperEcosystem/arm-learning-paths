@@ -18,10 +18,6 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/mongodb/"
 
 further_reading:
     - resource:
-        title: x265 Documentation
-        link: https://x265.readthedocs.io/en/master/
-        type: documentation
-    - resource:
         title: Ampere Altra Max Delivers Sustainable High-Resolution H.265 Encoding
         link: https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/ampere-altra-max-delivers-sustainable-high-resolution-h-265-video-encoding-without-compromise
         type: blog
