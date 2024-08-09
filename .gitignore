@@ -15,3 +15,6 @@ nohup.out
 
 venv/
 z_local_saved/
+
+# CTags symbol index
+tags
