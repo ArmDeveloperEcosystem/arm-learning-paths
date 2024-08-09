@@ -128,7 +128,7 @@ Shown below is the disassembly output for the `sad_neon` function:
 
 You will notice the use of `uabd` and `udot` assembly instructions that correspond to the `vabdq_u8`/`vdotq_u32` intrinsics.
 
-Now create an equivalent Rust program using `std::arch` `dotprod` intrinsics. Save the contents shown below in a file named `dotprod2.rs`:
+Now create an equivalent Rust program using `std::arch` `neon` intrinsics. Save the contents shown below in a file named `dotprod2.rs`:
 
 ```Rust
 #![feature(stdarch_neon_dotprod)]
@@ -166,7 +166,7 @@ fn sad_vec(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
     #[cfg(target_arch = "aarch64")]
     {
         use std::arch::is_aarch64_feature_detected;
-        if is_aarch64_feature_detected!("dotprod") {
+        if is_aarch64_feature_detected!("neon") {
             return unsafe { sad_vec_asimd(a, b, w, h) };
         }
     }
@@ -175,7 +175,7 @@ fn sad_vec(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
 }
 
 #[cfg(target_arch = "aarch64")]
-#[target_feature(enable = "dotprod")]
+#[target_feature(enable = "neon")]
 unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
     use std::arch::aarch64::*;
 
@@ -291,13 +291,13 @@ As you have seen, Rust has a very particular way to enable target features. In t
 unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
 ```
 
-Remember that `neon` support is implied with `dotprod` so there is no need to add it as well. However, this may not be the case for all extensions so you may have to add both, like this:
+Add support for both `neon` and `dotprod` target features as shown:
 
 ```Rust
 #[target_feature(enable = "neon", enable = "dotprod")]
 ```
 
-Next, you will also need to add the `#!feature` for the module's code generation at the top of the file:
+Next, check that you have added the `#!feature` for the module's code generation at the top of the file:
 
 ```Rust
 #![feature(stdarch_neon_dotprod)]
