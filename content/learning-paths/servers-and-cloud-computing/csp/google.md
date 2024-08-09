@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 As with most cloud service providers, Google Cloud offers a pay-as-you-use [pricing policy](https://cloud.google.com/pricing), including a number of [free](https://cloud.google.com/free/docs/free-cloud-features) services.
 
-This section is to help you get started with [Google Cloud Compute Engine](https://cloud.google.com/compute) compute services, using Arm-based virtual machines. Google Cloud offers two generations of Arm-based VMs, the latest one - C4A - powered by Google Axion processors (in public preview) and previous generation - T2A - powered by Ampere Altra processors (generally available). These VMs are general-purpose compute VMs, essentially your own personal computer in the cloud.
+This section is to help you get started with [Google Cloud Compute Engine](https://cloud.google.com/compute) compute services, using Arm-based [Tau T2A](https://cloud.google.com/tau-vm) Virtual Machines. This is a general-purpose compute platform, essentially your own personal computer in the cloud.
 
 Detailed instructions are available in the Google Cloud [documentation](https://cloud.google.com/compute/docs/instances). 
 
@@ -23,7 +23,7 @@ If using an organization's account, you will likely need to consult with your in
 
 ## Browse for an appropriate instance
 
-Google Cloud offers a wide range of instance types, covering all performance (and pricing) points. For an overview of the Tau T2A instance types, see the [General-purpose machine family](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) overview. The C4A instances are in public preview and can be requested by following this link.
+Google Cloud offers a wide range of instance types, covering all performance (and pricing) points. For an overview of the Tau T2A instance types, see the [General-purpose machine family](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) overview. 
 
 Also note which [regions](https://cloud.google.com/compute/docs/regions-zones#available) these servers are available in.
 
@@ -55,11 +55,9 @@ To view the latest information on which available regions and zones support Arm-
 
 ### Machine configuration
 
-Note: If you have signed up for public preview and have access to `C4A` instances, you should be able to see those VMs in the list.
+Select `T2A` from the `Series` pull-down menu. Then select an appropriate `Machine type` configuration for your needs.
 
-Select `C4A` from the `Series` pull-down menu. Then select an appropriate `Machine type` configuration for your needs.
-
-![alt-text #center](images/gcp_instance_new.png "Select an appropriate C4A machine type")
+![google5 #center](images/gcp_instance.png "Select an appropriate T2A machine type")
 
 ### Boot disk configuration
 

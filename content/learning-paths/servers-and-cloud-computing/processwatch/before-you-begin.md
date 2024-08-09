@@ -18,7 +18,7 @@ You need to install some linux packages before you start building Process Watch 
 To install these dependencies on an Ubuntu 20.04 and later machine, run:
 ```console
 sudo apt-get update
-sudo apt-get install libelf-dev cmake clang llvm llvm-dev
+sudo apt-get install libelf-dev cmake clang llvm llvm-dev -y
 ```
 
 ## Clone Process Watch Repository

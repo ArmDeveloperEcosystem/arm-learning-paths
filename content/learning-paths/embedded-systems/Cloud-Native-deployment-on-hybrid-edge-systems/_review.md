@@ -8,7 +8,7 @@ review:
             - "False"
         correct_answer: 2
         explanation: >
-            The firmware runs on a Cortex-M, from containerd's perspective it appears to runs as a normal Linux container.
+            The firmware runs on a Cortex-M, from `containerd`'s perspective it appears to runs as a normal Linux container.
 
     - questions:
         question: >
@@ -19,9 +19,10 @@ review:
         correct_answer: 2
         explanation: >
             Each embedded core can only run a single container at once.
+            
     - questions:
         question: >
-            Which command is used to interact with the hybrid-runtime from containerd?
+            Which command is used to interact with the hybrid-runtime from `containerd`?
         answers:
             - ctr run --runtime io.containerd.hybrid hybrid_app_imx8mp:latest test-container
             - ctr run --runtime runc hybrid_app_imx8mp:latest test-container

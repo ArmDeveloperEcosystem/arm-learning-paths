@@ -31,7 +31,7 @@ You can repeat for additional segments, but getting the next segment number and 
 
 The example below collects separate for the `initialize_vectors()` function and the `calculate_result()` functions instead of collecting the data for both of them as in the previous example. 
 
-Use a text editor to create a file test2.c in the test directory with the contents below.
+Use a text editor to create a file `test2.c` in the test directory with the contents below.
 
 ```C
 #include <stdio.h>
@@ -41,7 +41,7 @@ Use a text editor to create a file test2.c in the test directory with the conten
 #include "pmuv3_plugin_bundle.h"
 #include "processing.h"
 
-#define VECTOR_SIZE 100
+#define VECTOR_SIZE 10000
 
 void initialize_vectors(double vector_a[], double vector_b[], int size) {
     for (int i = 0; i < size; i++) {

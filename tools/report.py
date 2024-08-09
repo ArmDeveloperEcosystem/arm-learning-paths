@@ -1,13 +1,11 @@
 #/usr/bin/env python3
 
-import argparse
 import logging
 import os
 import subprocess
 import csv
 import json
 import re
-from pathlib import Path
 from datetime import datetime, timedelta
 
 # List of directories to parse for learning paths
@@ -20,57 +18,70 @@ dname = ["content/install-guides",
          "content/learning-paths/servers-and-cloud-computing"]
 
 
+
+
 '''
-Recursive content search in d. 
-Returns: 
-- list of articles older than period in d
-- count of articles found in d
-- list of primary authors in d
+Returns the date (yyyy-mm-dd) which a file in the given directory was last updated.
+If Learning Path, changes in any file in the directory will count.
 '''
-def content_parser(d, period):
+def get_latest_updated(directory, is_lp, item):
+    article_path = directory if is_lp else f"{directory}/{item}"
+    date = subprocess.run(["git", "log", "-1" ,"--format=%cs", str(article_path)], stdout=subprocess.PIPE)
+    return date
+
+'''
+Recursive content search in a given directory.
+Returns:
+- list of articles older than a given period found
+- count of articles found
+- list of primary authors found
+'''
+def content_parser(directory, period):
     count = 0
     art_list = {}
     auth_list = []
-    l = os.listdir(d)
-    for i in l:
+    directory_list = os.listdir(directory)
+    for i in directory_list:
         item = i
+        is_lp = False
         if item.endswith(".md") and not item.startswith("_"):
             count = count + 1
-            if "learning-paths" in d:
+            if "learning-paths" in directory:
                 item = "_index.md"
+                is_lp = True
 
-            logging.debug("Checking {}...".format(d+"/"+item))
+            logging.debug(f"Checking {directory}/{item}")
 
-            date = subprocess.run(["git", "log", "-1" ,"--format=%cs", d +"/" + item], stdout=subprocess.PIPE)
+            date = get_latest_updated(directory, is_lp, item)
             # strip out '\n' and decode byte to string
             date = date.stdout.rstrip().decode("utf-8")
-            logging.debug("Last updated on: " + date)
+            logging.debug(f"Last updated: {date}")
             author = "None"
-            for l in open(d +"/" + item): 
-                if re.search("author_primary", l):
+            for directory_list in open(directory +"/" + item):
+                if re.search("author_primary", directory_list):
                     # split and strip out '\n'
-                    author = l.split(": ")[1].rstrip()
-            logging.debug("Primary author: " + author)
+                    author = directory_list.split(": ")[1].rstrip()
+            logging.debug(f"Primary author {author}")
             if not author in auth_list:
                 auth_list.append(author)
 
-            # if empty, this is a temporary file which is not part of the repo
-            if(date != ""):
+            # if date is None, this is a temporary file which is not part of the repo
+            if date:
                 date = datetime.strptime(date, "%Y-%m-%d")
                 # check if article is older than the period
                 if date < datetime.now() - timedelta(days = period):
-                    if item == "_index.md":
-                        art_list[d + "/"] = "{} days ago".format((datetime.now() - date).days)
+                    if is_lp:
+                        art_list[directory + "/"] = "{} days ago".format((datetime.now() - date).days)
                     else:
-                        art_list[d + "/" + item] = "{} days ago".format((datetime.now() - date).days)
+                        art_list[directory + "/" + item] = "{} days ago".format((datetime.now() - date).days)
 
-            if "learning-paths" in d:
+            if "learning-paths" in directory:
                 # no need to iterate further
                 break
 
         # if this is a folder, let's get down one level deeper
-        elif os.path.isdir(d + "/" + item):
-            res, c, a_l = content_parser(d + "/" + item, period)
+        elif os.path.isdir(directory + "/" + item):
+            res, c, a_l = content_parser(directory + "/" + item, period)
             art_list.update(res)
             count = count + c
             for a in a_l:
@@ -82,12 +93,12 @@ def content_parser(d, period):
 
 '''
 Initialize Plotly data structure for stats
-1 graph on the left with data for install tool guides 
+1 graph on the left with data for install tool guides
 1 graph on the right with data for learning paths
 Input: title for the graph
 '''
 def init_graph(title):
-    data = { 
+    data = {
             "data": [
                 {
                     "x": [],
@@ -139,29 +150,29 @@ def init_graph(title):
                     "xaxis": "x2"
                 }
             ],
-            "layout": 
+            "layout":
             {
-                "title": title, 
-                "xaxis": 
+                "title": title,
+                "xaxis":
                 {
                     "tickangle": -45,
                     "domain": [0, 0.45],
                     "anchor": "x1"
-                }, 
-                "xaxis2": 
+                },
+                "xaxis2":
                 {
                     "tickangle": -45,
                     "domain": [0.55, 1],
                     "anchor": "x2"
-                }, 
-                "barmode": "stack", 
+                },
+                "barmode": "stack",
                 "paper_bgcolor": "rgba(0,0,0,0)",
                 "plot_bgcolor": "rgba(0,0,0,0)",
-                "font": 
+                "font":
                 {
                     "color": "rgba(130,130,130,1)"
                 },
-                "legend": 
+                "legend":
                 {
                     "bgcolor": "rgba(0,0,0,0)"
                 }
@@ -177,6 +188,7 @@ Generate JSON data for stats page
 def stats():
     global dname
 
+    # get working directory
     orig = os.path.abspath(os.getcwd())
 
     # If file exists, load data. Create structure otherwise
@@ -222,25 +234,25 @@ def stats():
         contrib_data["data"][d_idx]["y"].append(len(authors))
 
         if "learning-paths" in d:
-            logging.info("{} Learning Paths found in {} and {} contributor(s).".format(count, d, len(authors)))
+            logging.info(f"{count} Learning Paths found in {d} and {len(authors)} contributor(s)")
             total += count
         else:
-            logging.info("{} articles found in {} and {} contributor(s).".format(count, d, len(authors)))
+            logging.info(f"{count} articles found in {d} and {len(authors)} contributor(s)")
 
-    logging.info("Total number of Learning Paths is {}.".format(total))
+    logging.info(f"Total number of Learning Paths is {total}")
 
-    fn_lp='content/stats/lp_data.json'
-    fn_contrib='content/stats/contrib_data.json'
+    lp_data_file='content/stats/lp_data.json'
+    contrib_data_file='content/stats/contrib_data.json'
     os.chdir(orig)
-    logging.info("Learning Path data written in " + orig + "/" + fn_lp)
-    logging.info("Contributors data written in " + orig + "/" + fn_contrib)
+    logging.info(f"Learning Path data written to {orig}/{lp_data_file}")
+    logging.info(f"Contributors data written to {orig}/{contrib_data_file}")
 
     # Save data in json file
-    f_lp = open(fn_lp, 'w')
-    f_contrib = open(fn_contrib, 'w')
+    f_lp = open(lp_data_file, 'w')
+    f_contrib = open(contrib_data_file, 'w')
     # Write results to file
     json.dump(lp_data, f_lp)
-    json.dump(contrib_data, f_contrib)    
+    json.dump(contrib_data, f_contrib)
     # Closing JSON file
     f_lp.close()
     f_contrib.close()
@@ -253,33 +265,35 @@ Generate JSON file with data
 def report(period):
     global dname
 
-    orig = os.path.abspath(os.getcwd())
 
-    # chdir to the root folder
+    # get working directory
+    function_start_directory = os.path.abspath(os.getcwd())
+    # change directory to the repository root
     os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
 
     result = {}
-
     total=0
-    for d_idx, d in enumerate(dname):
-        res, count, authors = content_parser(d, period)
+
+    for d_idx, directory in enumerate(dname):
+        res, count, _ = content_parser(directory, period)
         result.update(res)
-        if "learning-paths" in d:
-            logging.info("Found {} Learning Paths in {}. {} of them are outdated.".format(count, d, len(res)))
+        if "learning-paths" in directory:
             total += count
-        else:
-            logging.info("Found {} articles in {}. {} of them are outdated.".format(count, d, len(res)))
 
-    logging.info("Total number of Learning Paths is {}.".format(total))
+        logging.info(f"Found {count} Learning Paths in {directory}. {len(res)} of them are outdated")
 
-    fn="outdated_files.csv"
+
+    logging.info(f"Total number of Learning Paths is {total}")
+
+    outdated_files_csv="outdated_files.csv"
     fields=["File", "Last updated"]
-    os.chdir(orig)
-    logging.info("Results written in " + orig + "/" + fn)
+    # Moving back to the directory which we started in
+    os.chdir(function_start_directory)
 
-    with open(fn, 'w') as csvfile:
+    with open(outdated_files_csv, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames = fields)
         writer.writeheader()
         for key in result.keys():
             csvfile.write("%s, %s\n" % (key, result[key]))
+    logging.info(f"Results written to {function_start_directory}/{outdated_files_csv}")
 

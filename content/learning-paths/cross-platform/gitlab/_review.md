@@ -20,6 +20,18 @@ review:
         explanation: >
             GitLab allows executing jobs parallely on two different self-hosted runners with tags
 
+    - questions:
+        question: >
+            What is the primary role of a GitLab Runner in GitLab CI/CD?
+        answers:
+            - To manage the GitLab repository.
+            - To execute jobs defined in the GitLab CI/CD configuration.
+            - To provide multi-architecture support for different processors.
+            - To create virtual machines in Google Cloud.
+        correct_answer: 2
+        explanation: >
+            To execute jobs defined in the GitLab CI/CD configuration.
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

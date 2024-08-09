@@ -1,5 +1,5 @@
 ---
-next_step_guidance: You can continue learning about building applications with Arm. The learning path covering deployment of a multi-architecture application with GKE should be the next one in your list.
+next_step_guidance: Continue learning about building applications with Arm by reviewing the learning path covering deployment of a multi-architecture application with GKE.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/gke-multi-arch"
 

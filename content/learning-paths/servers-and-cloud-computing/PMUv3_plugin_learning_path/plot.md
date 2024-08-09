@@ -18,10 +18,17 @@ If you are running on Ubuntu, install the following packages:
 sudo apt install python-is-python3 python3-pip python3-venv -y
 ```
 
+Create and activate a Python virtual environment:
+
+```console
+python3 -m venv venv
+source venv/bin/activate
+```
+
 Next, use Pip to install the required packages:
 
 ```console
-  pip install pandas pyyaml matplotlib PyPDF2
+pip install pandas pyyaml matplotlib PyPDF2
 ```
 
 Download the Python application code to plot and analyze results:
@@ -29,8 +36,6 @@ Download the Python application code to plot and analyze results:
 ```console
 git clone https://github.com/GayathriNarayana19/Performance_Analysis_Backend.git
 ```
-
-Navigate to your `test/` directory and use a text editor to create the required configuration file.
 
 Copy the code below into a file named `config.yaml` in your `test/` directory which contains your CSV files.
 
