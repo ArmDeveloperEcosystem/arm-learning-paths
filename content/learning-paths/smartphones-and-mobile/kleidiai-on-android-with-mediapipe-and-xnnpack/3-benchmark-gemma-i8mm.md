@@ -65,7 +65,7 @@ docker ps
 And then replace `[container ID]` in this command with your running container ID:
 
 ```
-docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_test .
+docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test .
 ```
 
 You can then run
