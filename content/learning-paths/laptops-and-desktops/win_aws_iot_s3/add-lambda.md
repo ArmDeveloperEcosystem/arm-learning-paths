@@ -7,8 +7,8 @@ weight: 4
 layout: "learningpathall"
 ---
 
-You will now use the AWS Lambda console to retrieve the AWS Lambda endpoint for the static website. Before you begin make sure to prepare the GetAverageTemperature AWS Lambda function as explained in this [Learning Path](/content/learning-paths/laptops-and-desktops/win_aws_iot_lambda_dynamodb/). Then proceed as follows:
-1. Go to AWS Lambda console, and click GetAverageTemperature Lambda function.
+You will now use the AWS Lambda console to retrieve the AWS Lambda endpoint for the static website. Before you begin make sure to prepare the `GetAverageTemperature` AWS Lambda function as explained in this [Learning Path](/content/learning-paths/laptops-and-desktops/win_aws_iot_lambda_dynamodb/). Then proceed as follows:
+1. Go to AWS Lambda console, and click `GetAverageTemperature` Lambda function.
 2. In the Lambda function dashboard click Configuration tab, and then Function URL:
 
 ![fig2](Figures/02.png)
@@ -21,7 +21,7 @@ The function URL will appear as follows:
 
 ![fig3](Figures/03.png)
 
-Copy this link, and use it to replace the YOUR_API_GATEWAY_ENDPOINT_URL placeholder in the index.js file:
+Copy this link, and use it to replace the YOUR_API_GATEWAY_ENDPOINT_URL placeholder in the `index.js` file:
 
 ```JavaScript
 document.getElementById('fetchTemperatureButton').addEventListener('click', function() {
@@ -38,7 +38,7 @@ document.getElementById('fetchTemperatureButton').addEventListener('click', func
 });
 ```
 
-Save the file, and open index.html. Then, click the Get temperature button, and the average temperature will appear as shown below:
+Save the file, and open `index.html`. Then, click the Get temperature button, and the average temperature will appear as shown below:
 
 ![fig4](Figures/04.png)
 
