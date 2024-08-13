@@ -1,5 +1,5 @@
 ---
-title: Use Amazon Simple Storage Service (S3) for your IoT applications running on Windows on Arm
+title: Use Amazon S3 for your IoT applications running Windows on Arm
 
 minutes_to_complete: 30
 
