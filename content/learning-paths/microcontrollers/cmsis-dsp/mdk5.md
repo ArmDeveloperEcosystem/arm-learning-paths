@@ -23,19 +23,6 @@ Click `Copy`, and save the project to an appropriate location on your host.
 
 The project contains build targets for different Cortex-M processors.
 
-{{% notice  Note%}}
-Due to some changes in the structure of the CMSIS-Core software pack, you may be prompted that certain devices are not present, using the latest version of the example available at time of writing.
-
-Choose another device, changing:
-
-* `ARMCM4_FP` > `ARM` > `ARM Cortex-M4` > `CMSDK_CM4_FP`
-* `ARMCM7_SP` > `ARM` > `ARM Cortex-M7` > `CMSDK_CM7_SP`
-
-You will also need to update `Device` > `Startup` code in the `Manage Run-Time Environment` pane.
-
-These target builds are not used below.
-{{% /notice %}}
-
 ### CMSIS-DSP Software Pack
 
 The example is already configured to use the CMSIS-DSP software pack. To see this, open the `Manage Run-Time Environment` pane, and see `CMSIS` > `DSP`.
@@ -44,7 +31,7 @@ The example is already configured to use the CMSIS-DSP software pack. To see thi
 
 ### Rebuild
 
-Open the `Project` > `Batch Setup` pane from the menu bar, and select `ARMCM3` and `ARMCM55_FP_MVE` targets. Click `Rebuild`.
+Open the `Project` > `Batch Setup` pane from the menu bar, and select (at least) `ARMCM3` and `ARMCM55_FP_MVE` targets. Click `Rebuild`.
 
 ![Batch Setup #center](images/batch.png)
 

@@ -74,7 +74,7 @@ Close this view to save.
 
 Move cursor over the top level project, and click `Open File` to open the `cproject.yml` file, which defines the build options for the different targets.
 
-Locate the `Link` settings for the `ARMCM4FP` and `ARMCM55FPMVE` targets, and add the following to the linker options list:
+Locate the `Link` settings for the `ARMCM4FP` and `ARMCM55FPMVE` targets (and any other targets you wish to build), and add the following to the linker options list if not already present:
 ```command
             - --entry=Reset_Handler
 ```
@@ -88,15 +88,6 @@ Click on the `Manage Solution Settings` gear icon to open the `csolution.yml` fi
 Set `ARMCM3` as the `Active Target`.
 
 Click the `Build` hammer icon to build for Cortex-M3.
-
-{{% notice  Note%}}
-Due to some changes in the structure of the CMSIS-Core software pack, some build targets do not work as expected in version of the example available at time of writing.
-
-* `ARMCM4FP`
-* `ARMCM7SP`
-
-These target builds are not used below.
-{{% /notice %}}
 
 ## Run example on Cortex-M3 FVP {#run}
 
@@ -136,7 +127,7 @@ Repeat the steps above to [build](#build) for `ARMCM55FPMVE`.
 
 Repeat the steps above to [run](#run) on `Corstone-300 FVP`.
 
-If the `Corstone-300 FVP` is not available in the pulldown, you will need to manually configure in `launch.json`.
+If the `Corstone-300 FVP` is not available in the pulldown, you will need to manually configure in `launch.json`. Note the `cdbEntry` line in the below.
 ```json
     "configurations": [
         {
