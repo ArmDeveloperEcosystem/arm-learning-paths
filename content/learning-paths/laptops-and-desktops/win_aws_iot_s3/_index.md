@@ -3,7 +3,7 @@ title: Use Amazon Simple Storage Service (S3) for your IoT applications running 
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for developers who are interested in using Amazon (AWS) S3 for hosting their IoT websites.
+who_is_this_for: This is an advanced topic for developers who are interested in using Amazon Web Services (AWS) S3 for hosting their IoT websites.
 
 learning_objectives:
    - Gain familiarity with Amazon S3.
