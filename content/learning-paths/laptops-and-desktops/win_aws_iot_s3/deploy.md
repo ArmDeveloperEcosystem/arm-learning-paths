@@ -7,7 +7,6 @@ weight: 5
 layout: "learningpathall"
 ---
 In this section you will deploy the website to Amazon S3 using the Amazon Command Line interface (AWS CLI) version 2. Start by [installing AWS CLI](/install-guides/aws-cli/).
-
 ### AWS CLI
 To configure the AWS CLI you first need to create the [AWS CLI user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console). Then, you need to generate the access keys by following this [tutorial](https://docs.aws.amazon.com/cli/v1/userguide/cli-authentication-user.html).
 
@@ -31,7 +30,7 @@ aws lambda list-functions --region eu-central-1 --output table
 
 The command will display the AWS Lambda functions in a table.
 
-## S3 bucket
+### S3 bucket
 You are now ready to deploy the website to the AWS S3. To do so you will first create the S3 bucket. Then, you will upload the website files, and finally you will configure the S3 bucket for static website hosting.
 
 Proceed as follows:
@@ -89,4 +88,4 @@ Finally, access the website by typing http://<unique-bucket-name>.s3-website-<re
 ## Summary
 In this learning path you learned how to create a simple static website that fetches and displays temperature data from an AWS Lambda function. The website consists of an HTML file (`index.html`), a CSS file (`styles.css`), and a JavaScript file (`index.js`). The JavaScript code within the website sends an HTTP request to an AWS Lambda function, which processes the request and returns temperature data in JSON format. This data is then displayed on the webpage.
 
-After developing the website, we deployed it to Amazon S3 for static website hosting. We created an S3 bucket, disabled the default block public access settings, and uploaded the website files to the bucket. We then applied a bucket policy to allow public read access to the objects, and configured the bucket to serve as a static website. Finally, we accessed the website using the S3 static website endpoint, successfully integrating our web application with AWS Lambda and deploying it to the cloud.
+After developing the website, you deployed it to Amazon S3 for static website hosting. You created an S3 bucket, disabled the default block public access settings, and uploaded the website files to the bucket. You then applied a bucket policy to allow public read access to the objects, and configured the bucket to serve as a static website. Finally, you accessed the website using the S3 static website endpoint, successfully integrating our web application with AWS Lambda and deploying it to the cloud.
