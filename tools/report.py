@@ -19,8 +19,6 @@ dname = ["content/install-guides",
          "content/learning-paths/automotive"]
 
 
-
-
 """
 Returns the date (yyyy-mm-dd) which a file in the given directory was last updated.
 If Learning Path, changes in any file in the directory will count.
@@ -72,9 +70,9 @@ def content_parser(directory, period):
                 # check if article is older than the period
                 if date < datetime.now() - timedelta(days = period):
                     if is_lp:
-                        art_list[directory + "/"] = f"{(datetime.now() - date).days} days ago"
+                        art_list[directory + "/"] = "{} days ago".format((datetime.now() - date).days)
                     else:
-                        art_list[directory + "/" + item] = f"{(datetime.now() - date).days} days ago"
+                        art_list[directory + "/" + item] = "{} days ago".format((datetime.now() - date).days)
 
             if "learning-paths" in directory:
                 # no need to iterate further
@@ -304,3 +302,4 @@ def report(period):
         for key in result.keys():
             csvfile.write("%s, %s\n" % (key, result[key]))
     logging.info(f"Results written to {function_start_directory}/{outdated_files_csv}")
+
