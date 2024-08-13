@@ -6,11 +6,9 @@ weight: 5
 
 layout: "learningpathall"
 ---
+In this section you will deploy the website to Amazon S3 using the Amazon Command Line interface (AWS CLI) version 2. Start by [installing AWS CLI](/install-guides/aws-cli/).
 
-## Objective
-In this section you will deploy the website to Amazon S3 using the Amazon Command Line interface (AWS CLI) version 2. Start by [installing AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
-
-## AWS CLI
+### AWS CLI
 To configure the AWS CLI you first need to create the [AWS CLI user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console). Then, you need to generate the access keys by following this [tutorial](https://docs.aws.amazon.com/cli/v1/userguide/cli-authentication-user.html).
 
 Once you have the access key, go to the Command Prompt and type:
