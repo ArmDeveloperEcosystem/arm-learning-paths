@@ -7,14 +7,14 @@ weight: 3
 layout: "learningpathall"
 ---
 
-Start by creating the website. To do this, create a new folder, for example, named IoTPage. Within the IoTPage folder, create three essential files:
+Start by creating the website. To do this, create a new folder, for example, named `IoTPage`. Within the `IoTPage` folder, create three essential files:
 * index.html
 * styles.css
 * index.js
 
-These files will serve as the backbone of your static website. The index.html file will contain the structure and content of your webpage, styles.css will define the styling and layout, and index.js will handle the interactive functionalities, such as fetching data from AWS Lambda and displaying it on your site.
+These files will serve as the backbone of your static website. The `index.html` file will contain the structure and content of your webpage, `styles.css` will define the styling and layout, and `index.js` will handle the interactive functionalities, such as fetching data from AWS Lambda and displaying it on your site.
 
-Open index.html and modify it as follows:
+Open `index.html` and modify it as follows:
 
 ```html
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ The above declarations link to an external CSS file (styles.css) for styling the
 
 Finally, the declarations link to an external JavaScript file (index.js) that will handle the button click and fetch the temperature data.
 
-Afterward, open the styles.css and modify it as follows:
+Next, open the `styles.css` file and modify it as follows:
 ```css
 body {
     font-family: Arial, sans-serif;
@@ -87,16 +87,16 @@ button:hover {
 }
 ```
 
-The first part of the declration relates to the body of the document. It sets the font to Arial or a sans-serif alternative. Will use flexbox to center content both vertically and horizontally. The height is set to 100% of the viewport height. Also, the declarations apply a light gray background color, and remove the default margin.
+The first part of the declaration relates to the body of the document. It sets the font to Arial or a sans-serif alternative. You use flexbox to center content both vertically and horizontally. The height is set to 100% of the viewport height. Also, the declarations apply a light gray background color, and remove the default margin.
 
-Then, there is a declaration of the .container class. It does the following:
+Then, there is a declaration of the `.container` class. It does the following:
 * centers the text within the container,
 * sets a white background,
 * adds padding inside the container,
 * rounds the corners with a border radius,
 * adds a subtle shadow for a 3D effect.
 
-Subsequently, we have a declaration of the button style, which:
+Subsequently, you have a declaration of the button style, which:
 * sets a green background color,
 * changes the text color to white,
 * removes the default border,
@@ -110,7 +110,7 @@ Subsequently, we have a declaration of the button style, which:
 
 A CSS file also styles the button element on hover by darkening the green background color.
 
-Finally, we have the .display-box class, which:
+Finally, you have the `.display-box` class, which:
 * adds a top margin for spacing,
 * adds padding inside the display box,
 * sets a light gray border,
@@ -119,7 +119,7 @@ Finally, we have the .display-box class, which:
 
 This CSS file provides a clean, centered, and modern look for the webpage with distinct styling for buttons and display boxes, enhancing the user experience.
 
-After declaring the CSS we implement the index.js file as follows:
+After declaring the CSS you will implement the `index.js` file as follows:
 ```JavaScript
 document.getElementById('fetchTemperatureButton').addEventListener('click', function() {
     fetch('YOUR_API_GATEWAY_ENDPOINT_URL')
@@ -135,7 +135,7 @@ document.getElementById('fetchTemperatureButton').addEventListener('click', func
 });
 ```
 
-After saving all the files, open the index.html file in a web browser. It should render as follows:
+After saving all the files, open the `index.html` file in a web browser. It should render as follows:
 
 ![fig1](Figures/01.png)
 
