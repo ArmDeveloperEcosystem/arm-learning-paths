@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-**Create a static website**
+### Create a static website
 
 Start by creating the static website. To do this, create a new folder, for example, named **IoTPage**. Within the **IoTPage** folder, create three further (and essential) files:
 * index.html - contains the structure and content of your webpage
