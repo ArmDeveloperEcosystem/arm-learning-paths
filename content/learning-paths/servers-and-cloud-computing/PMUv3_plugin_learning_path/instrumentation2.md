@@ -1,13 +1,12 @@
 ---
 title: Instrument multiple sections of code
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 You can also instrument multiple sections of code. 
-
 
 
 ## Instrumenting multiple code blocks in C 
@@ -150,29 +149,4 @@ SECTION_1,60569,254,10871,0,0,0,0
 SECTION_2,7413,22,1917,0,0,0,0
 ```
 
-## Collect data for all bundles
-
-You can quickly collect the data for all bundles by passing 
-
-Save the code below in a file named `run.sh`.
-
-```console
-#!/bin/bash
-
-for i in {0..14}
-do
-  echo $i
-  sudo ./test2 $i
-done
-```
-
-Run the script:
-
-```console
-bash ./run.sh
-```
-
-All 15 of the bundle CSV files are generated. 
-
-Next, learn how you can visualize the data.
-
+You can use this methodology to instrument multiple sections of code and generate the data for all bundles by modifying the `run.sh` file from the single section instrumentation. All you need to do is change the command from `test1` to `test2` and invoke the `run.sh` script again.

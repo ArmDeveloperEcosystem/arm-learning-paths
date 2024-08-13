@@ -1,6 +1,6 @@
 ---
 title: Plot, visualize, and analyze the results
-weight: 7                      # _index.md always has weight of 1 to order correctly
+weight: 5                      # _index.md always has weight of 1 to order correctly
 
 ### FIXED, DO NOT MODIFY
 layout: "learningpathall"       
@@ -48,7 +48,7 @@ base_filename: 'bundle{}.csv'
 num_bundles: 15
 scenarios:
   - "test1: section1"
-context: 'SECTION_1'
+title: 'Section1'
 
 #########DO NOT MODIFY BELOW THIS LINE##########
 kpi_metrics:
@@ -103,8 +103,9 @@ kpi_file_groups:
 Run the Python application to create the performance plots.
 
 ```console
-python3 ../Performance_Analysis_Backend/PMUv3_Backend/pmuv3_plotting.py -config config.yaml
+python3 Performance_Analysis_Backend/PMUv3_Backend/pmuv3_plotting.py -config config.yaml
 ```
 
-Look in the `test_plotting/` directory for the PDF file with the results.
+Look in the `test_plotting/` directory for a CSV file and the PDF files with the results.
 
+The next section explains how to instrument multiple sections of code. 
