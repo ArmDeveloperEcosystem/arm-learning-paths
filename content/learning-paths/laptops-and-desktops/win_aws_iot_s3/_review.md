@@ -36,8 +36,8 @@ review:
         question: >
             Can you use Amazon S3 for static website hosting?        
         answers:
-            - "Yes."
-            - "No."                        
+            - "Yes"
+            - "No"                        
         correct_answer: 1
         explanation: >
             Amazon S3 can also be used for static website hosting. This feature allows users to host static web pages directly from an S3 bucket, making it a cost-effective and simple solution for serving static content such as HTML, CSS, JavaScript, and images.
