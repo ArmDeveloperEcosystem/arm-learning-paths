@@ -6,7 +6,7 @@ weight: 2
 
 layout: "learningpathall"
 ---
-**What is Amazon S3?**
+### What is Amazon S3?
 
 Amazon Simple Storage Service (S3) is a scalable, high-speed, web-based cloud storage service designed for online backup and archiving of data and applications on Amazon Web Services (AWS). It provides developers and IT teams with secure, durable, and highly-scalable object storage. It also offers a simple web service interface that can be used to store and retrieve any amount of data from anywhere on the web, making it ideal for data storage, distribution, and computation tasks. It supports a range of use cases, including big data analytics, content distribution, disaster recovery, and serverless computing. With features like lifecycle management, versioning, and access controls, Amazon S3 helps organizations manage data at scale while maintaining security and compliance.
 
