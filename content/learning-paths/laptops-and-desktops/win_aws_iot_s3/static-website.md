@@ -38,7 +38,7 @@ Open **index.html** and modify it as follows:
 </html>
 ```
 
-The above declarations link to an external CSS file (styles.css) which styles the webpage. The body of the website contains a heading called “Temperature”, a button “Get Temperature” which, when clicked, will fetch the temperature using the AWS Lambda function, and a display box where the fetched temperature will be shown.
+The above declarations link to an external CSS file (styles.css) which styles the webpage. The body of the website contains a heading called “Temperature”, a “Get Temperature” button which, when clicked, will fetch the temperature using the AWS Lambda function, and a display box where the fetched temperature will be shown.
 
 Finally, the declarations link to an external JavaScript file (index.js) which will handle the button click and fetch the temperature data.
 
