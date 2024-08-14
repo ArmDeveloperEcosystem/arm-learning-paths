@@ -40,4 +40,6 @@ Keil Studio Cloud does not require any installation. To run the browser-based ID
 
 ## Get started
 
-[Get started with an Mbed OS Blinky example](https://developer.arm.com/documentation/102497/latest/Tutorials/Get-started-with-an-Mbed-OS-Blinky-example) is a great way to start.
+The [Keil Studio Cloud](/learning-paths/microcontrollers/keilstudiocloud/) Learning Path is a great way to start with an example project.
+
+You can explore more tutorials in the [Keil Studio documentation](https://developer.arm.com/documentation/102497/1-7/Tutorials).
