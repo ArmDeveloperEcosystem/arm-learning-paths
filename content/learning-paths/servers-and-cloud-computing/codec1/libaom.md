@@ -6,15 +6,13 @@ weight: 2
 
 ## What is the AV1 codec?
 
-AV1 is a free software video codec library from the [Alliance for Open Media (AOM)](https://aomedia.org/). 
+AV1 is a next-generation video compression format from the [Alliance for Open Media (AOM)](https://aomedia.org/). 
 
-It serves as the reference software implementation for the AV1 video coding format. 
-
-Significant efforts to optimize the open-source implementation, known as `libxaom`, of the AV1 encoder are available for Arm Neoverse platforms with Neon and SVE2 instructions. The optimized code is available on [Google Git](https://aomedia.googlesource.com/aom/).
+The reference software implementation for AV1 encoding and decoding can be found in the `libxaom` library. Similar to our efforts around VP9, Arm has invested significant effort to optimize the `libxaom` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms.  The optimized code is available on [Google Git](https://aomedia.googlesource.com/aom/).
 
 ## Install the necessary software packages
 
-You will need various development tools to build AV1 including CMake and the GNU compiler.
+You will need various development tools to build `libxaom` including CMake and the GNU compiler.
 
 The instructions assume you are running Ubuntu. 
 
@@ -24,9 +22,9 @@ Install the required tools by running:
 sudo apt install gcc g++ wget cmake p7zip-full -y
 ```
 
-## Download and build AV1 from source
+## Download and build libaom from source
 
-Download the AV1 source code:
+Download the `libxaom` source code:
 
 ```bash
 git clone https://aomedia.googlesource.com/aom
@@ -43,9 +41,9 @@ make -j$(nproc)
 
 For additional details refer to the [README](https://aomedia.googlesource.com/aom/?pli=1#basic-build).
 
-## Run AV1 unit tests
+## Run libaom unit tests
 
-The AV1 library has a comprehensive suite of unit tests, written using the GTest framework.
+The `libxaom` library has a comprehensive suite of unit tests, written using the GTest framework.
 
 The build above includes the `test_libaom` executable. 
 
@@ -106,7 +104,9 @@ Note: Google Test filter = *NEON*SAD*-:NEON_I8MM.*:NEON_I8MM/*:NEON_I8MM_*:SVE.*
 
 ## Performance benchmarking
 
-You can benchmark video encoding either on-demand or live-stream.
+Since the majority of developers on Arm servers come from the encoding field, let's focus on explaining this aspect in the following sections.
+
+For Performance benchmarking, you can select video encoding either on-demand or live-stream.
 
 To start, download some example `8-bit FHD`, `8-bit 4K` and `10-bit 4K` video files:
 
@@ -124,11 +124,15 @@ Next, extract the contents of the 7z files:
 7za e Bosphorus_3840x2160_120fps_420_10bit_YUV_Y4M.7z 
 ```
 
-### On-demand video encoding 
+### On-demand video encoding
 
-For on-demand encoding you can experiment different number of processors and monitor performance. 
+For on-demand encoding you can experiment different number of processors and monitor performance.
 
-For example, run with `--good` and use the `--cpu-used` argument to vary the number of processors from 2 to 6.
+For example, run with `--good` and use the `--cpu-used` argument to vary video quality/compression options from 2 to 6.
+
+{{% notice Note %}}
+The naming of `--cpu-used` flag is to trade off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality and longer encoding time.
+{{% /notice %}}
 
 Run standard bit depth and change the CPU count and see the results using:
 
@@ -137,6 +141,9 @@ Run standard bit depth and change the CPU count and see the results using:
 ```
 
 Try the above command with different `--cpu-used` values.
+```bash
+./aomenc --good --cpu-used=6 --bit-depth=8 -o output_cpu_used_2.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m 
+```
 
 You can do the same for high bit depth:
 
@@ -162,11 +169,24 @@ For high bit depth run:
 
 ## View Results
 
-The encoding frame rate (Frames per second) for the video files is output at the end of each run.
+The encoding frame rate (frames per second) for the video files is output at the end of each run.
 
-Shown below is example output from running the AV1 codec on the 8-bit FHD sample video file:
+Shown below is example output from running the `libxaom` codec on the 8-bit FHD sample video file with different --cpu-used settings to compare the encoding time.
 
+As demonstrated in these examples, --cpu-used=6 is significantly faster than --cpu-used=2, by a factor of 2 to 10.
+
+--cpu-used=2
 ```output
+./aomenc --good --cpu-used=2 --bit-depth=8 -o output_cpu_used_2.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
+
 Pass 1/2 frame  600/601   139432B    1859b/f   55770b/s   62641 ms (9.58 fps)
 Pass 2/2 frame  600/600   638429B    8512b/f  255360b/s 1103538 ms (0.54 fps)
+```
+
+--cpu-used=6
+```output
+./aomenc --good --cpu-used=6 --bit-depth=8 -o output_cpu_used_6.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
+
+Pass 1/2 frame  600/601   139432B    1859b/f   55770b/s   17500 ms (34.28 fps)
+Pass 2/2 frame  600/600   637902B    8505b/f  255150b/s  103754 ms (5.78 fps)
 ```
