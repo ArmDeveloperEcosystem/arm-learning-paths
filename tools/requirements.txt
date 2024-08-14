@@ -4,3 +4,4 @@ inclusivewriting
 pyspellchecker
 better-profanity
 setuptools
+alive-progress

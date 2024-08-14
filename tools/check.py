@@ -46,8 +46,7 @@ def init_container(i_img, img):
         package_manager = "yum"
         user = "wheel"
     else:
-        pass
-        #raise IOError(f"Image {img} not supported")
+        raise IOError(f"Image {img} not supported")
 
     docker_cmd = [f"docker exec test_{i_img} {package_manager} update"]
     logging.debug(docker_cmd)
@@ -118,7 +117,9 @@ Write a command to a file and log it for debugging.
 """
 def write_cmd_to_file(f, test_cmd_filename, cmd):
     logging.debug(f"Command argument written to {test_cmd_filename}: {cmd}")
-    f.write(f"{cmd}\n")
+    cmd_str = f"{cmd}\n"
+    f.write(cmd_str)
+    logging.info(cmd_str)
 
 """
 Parse JSON file with commands from the Markdown article,
@@ -185,21 +186,23 @@ def check(json_file, start, stop, md_article):
                 subprocess.run(docker_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 logging.debug(docker_cmd)
 
+                test_type = test["type"]
                 # Check type
-                if test["type"] == "fvp":
+                if test_type == "fvp":
                     ethos_u65 = ""
                     fvp_name = test["fvp_name"]
                     if fvp_name == "FVP_Corstone_SSE-300_Ethos-U65":
                         ethos_u65 = "ETHOS_U65=1 -e"
+                        test_cwd = test["cwd"]
                     # Only allow single line commands
                     docker_cmd = test["0"].replace(f"{fvp_name}",
-                                                f"docker run --rm -ti -v $PWD/shared:/shared -w {test["cwd"]} -e \
+                                                    f"docker run --rm -ti -v $PWD/shared:/shared -w {test_cwd} -e \
                                                     {ethos_u65} NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp"
                     )
-                elif test["type"] == "bash":
+                elif test_type == "bash":
                     docker_cmd = [f"docker exec -u {username} -w /home/{username} test_{n_image} bash {test_cmd_filename}"]
                 else:
-                    logging.debug(f"Type '{test["type"]}' not supported for testing. Contact the maintainers if you think this is a mistake.")
+                    logging.debug(f"Type '{test_type}' not supported for testing. Contact the maintainers if you think this is a mistake.")
                     bar(skipped=True)
                     continue
 
@@ -208,7 +211,8 @@ def check(json_file, start, stop, md_article):
                 process_output = process.stdout.rstrip().decode("utf-8")
 
                 # Create test case
-                test_case = TestCase(f"{json_file.replace("_cmd.json","")}_{test_images[n_image]}_test-{n_image}",
+                test_case_name = json_file.replace("_cmd.json","")
+                test_case = TestCase(f"{test_case_name}_{test_images[n_image]}_test-{n_image}",
                                         cmd, 0, process_output, '')
                 test_cases[n_image].append(test_case)
                 test_ret_code = int(test["ret_code"]) if test.get("ret_code") else 0
@@ -235,7 +239,7 @@ def check(json_file, start, stop, md_article):
                     test_cases[n_image][-1].add_failure_info(msg)
                     results[test_images[n_image]] = results[test_images[n_image]]+1
                 bar()
-                logging.info(f"{cmd}\n{msg}")
+                logging.info(f"{msg}")
                 if not test_passed:
                     logging.debug(f"{process_output}")
                 else:

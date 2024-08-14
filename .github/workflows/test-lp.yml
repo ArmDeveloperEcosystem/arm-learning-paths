@@ -1,5 +1,5 @@
-name: Test Learning Path 
-on: workflow_dispatch
+name: Test Learning Path
+on: push
 jobs:
   Test-Suite:
     runs-on: ubuntu-latest
@@ -9,5 +9,4 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
+        run: bash ./.github/workflows/test_lp.sh ${{ github.workspace }}
