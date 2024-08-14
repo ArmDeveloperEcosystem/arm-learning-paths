@@ -9,7 +9,7 @@ layout: learningpathall
 In this section you will set up the Serverless Framework for AWS. This involves several steps, including installing the Serverless Framework, configuring AWS credentials, and creating a new Serverless service.
 
 ## Installation
-Start by installing Node.js and npm (Node Package Manager). You can download and install them from the [official Node.js website](https://nodejs.org/en).
+Start by installing Node.js version 18.20.3 or greater and npm (Node Package Manager). You can download and install them from the [official Node.js website](https://nodejs.org/en).
 
 Then, open the terminal or command prompt and type
 ```console
