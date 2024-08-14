@@ -93,7 +93,7 @@ handler.js
 serverless.yml
 ```
 
-Let's open the serverless.yml:
+Open and view the contents of the `serverless.yml` file:
 ```yml
 # "org" ensures this Service is used with the correct Serverless Framework Access Key.
 org: <your_org>
@@ -110,7 +110,7 @@ functions:
     handler: handler.hello
 ```
 
-This serverless.yml file starts with org:. It contains the organization or account name within the Serverless Framework’s dashboard. It is used to group and manage services under a specific account in the Serverless Framework’s cloud platform. This is particularly useful for managing multiple projects or teams.
+This `serverless.yml` file contains the organization or account name within the Serverless Framework’s dashboard. It is used to group and manage services under a specific account in the Serverless Framework’s cloud platform. This is particularly useful for managing multiple projects or teams.
 
 Then, the service keyword defines the name of your Serverless service. This name will be used as a prefix for all the AWS resources created by the framework. It helps in organizing and identifying resources associated with this particular service.
 
@@ -118,11 +118,11 @@ The provider section specifies the cloud provider and the runtime environment fo
 * name: aws. This indicates that the service will be deployed to Amazon Web Services (AWS).
 * runtime: nodejs20.x. This specifies the runtime environment for your AWS Lambda functions. Here, nodejs20.x indicates that the functions will run using Node.js version 20.x.
 
-Afterward, we have functions section, which defines the AWS Lambda functions that are part of this service: 
+Next, you have the functions section, which defines the AWS Lambda functions that are part of this service: 
 * hello. This is the name of the function. You can name it whatever you like, but in this case, it is named hello.
 * handler: handler.hello. This specifies the handler method for the function. It follows the format file.method. handler is the name of the file (e.g., handler.js), and hello is the name of the exported function within that file.
 
-The serverless.yml file defines a Serverless service named AwsServerlessLambda under the specified organization. The service is configured to run on AWS with Lambda functions using the Node.js 20.x runtime. It declares a single Lambda function named hello, which is handled by the hello method in the handler.js file.
+The `serverless.yml` file defines a Serverless service named AwsServerlessLambda under the specified organization. The service is configured to run on AWS with Lambda functions using the Node.js 20.x runtime. It declares a single Lambda function named hello, which is handled by the hello method in the `handler.js` file.
 
 Let's now open the handler.js:
 
@@ -174,7 +174,7 @@ You will see the following output:
 }
 ```
 
-Finally, login to AWS console. Change the region to es-east-1 (N. Virgina). Then, go to Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
+Finally, login to AWS console. Change the region to us-east-1 (N. Virgina). Then, go to Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
 
 ![fig1](figures/01.png)
 
