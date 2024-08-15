@@ -10,7 +10,7 @@ further_reading:
         type: documentation
     - resource:
         title: Arm CPU Telemetry Solution Topdown Methodology Specification
-        link: https://developer.arm.com/documentation/109542/0100/?lang=en
+        link: [https://developer.arm.com/documentation/109542/0100/?lang=en](https://developer.arm.com/documentation/PJDOC-466751330-590448/2-0/?lang=en)
         type: documentation
     - resource:
         title: Arm Neoverse N2 Core Telemetry Specification
