@@ -1,9 +1,9 @@
 ---
-title: Deploy AWS services using Serverless Framework
+title: Deploy AWS services using the Serverless Framework
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for software developers interested in learning how to deploy AWS cloud resources using Serverless Framework.
+who_is_this_for: This learning path is for software developers interested in learning how to deploy AWS cloud resources using the Serverless Framework.
 
 learning_objectives: 
     - Learn how to set up Serverless Framework for AWS.
