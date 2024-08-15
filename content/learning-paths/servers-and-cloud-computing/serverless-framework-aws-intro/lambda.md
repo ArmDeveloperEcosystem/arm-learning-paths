@@ -6,16 +6,16 @@ weight: 4
 layout: learningpathall
 ---
 
-You are now ready to create a Serverless Framework and deploy Lambda function.
+You are now ready to create a Serverless Framework and deploy the Lambda function.
 
 ## Create a project
-Open terminal or command prompty and type:
+Open the terminal or command prompt and type:
 
 ```console
 serverless
 ```
 
-This will start the wizard, in which you first select the Template. Use the arrow keys to select **AWS / Node.js / Simple Function** and hit Enter:
+This will start the wizard, in which you first select the Template. Use the arrow keys to select **AWS / Node.js / Simple Function** (as shown below) and then hit **Enter**:
 
 ```output
 Welcome to Serverless Framework V.4
@@ -35,7 +35,7 @@ Create a new project by selecting a Template to generate scaffolding for a speci
   AWS / Python / Simple Function
 ```
 
-Then, type the name for your project, e.g. **AwsServerlessLambda**. You will see the following output:
+Next, type the name for your project, e.g., **AwsServerlessLambda**. You will see the following output:
 
 ```console
 Name Your Project: · AwsServerlessLambda
@@ -53,7 +53,7 @@ Please login/register or enter your license key: …
   Explain Licensing Basics
 ```
 
-Select **Login/Register**. This will open the web browser, where you can create a Serverless Framework account. Then use this account to login.
+Select **Login/Register**. This will open the web browser where you can create a Serverless Framework account. Then use this account to login.
 
 The wizard will display the following:
 ```console
@@ -72,10 +72,10 @@ Your new Service "AwsServerlessLambda" is ready. Here are next steps:
 • Deploy & Develop Your Service: serverless dev
 ```
 
-The project is now ready for deployment. Before deploying it let's review the project files
+The project is now ready for deployment. Before deploying it, let's review the project files.
 
-## Review the project files
-To review the project files created by the Serverless Framework CLI navigate to AwsServerlessLambda folder:
+## Reviewing the project files
+To review the project files created by the Serverless Framework CLI, navigate to the AwsServerlessLambda folder as follows:
 
 ```console
 cd AwsServerlessLambda
@@ -112,7 +112,7 @@ functions:
 
 This `serverless.yml` file contains the organization or account name within the Serverless Framework’s dashboard. It is used to group and manage services under a specific account in the Serverless Framework’s cloud platform. This is particularly useful for managing multiple projects or teams.
 
-Then, the service keyword defines the name of your Serverless service. This name will be used as a prefix for all the AWS resources created by the framework. It helps in organizing and identifying resources associated with this particular service.
+The service keyword defines the name of your Serverless service. This name will be used as a prefix for all the AWS resources created by the framework. It helps in organizing and identifying resources associated with this particular service.
 
 The provider section specifies the cloud provider and the runtime environment for your service:
 * name: aws. This indicates that the service will be deployed to Amazon Web Services (AWS).
@@ -120,9 +120,9 @@ The provider section specifies the cloud provider and the runtime environment fo
 
 Next, you have the functions section, which defines the AWS Lambda functions that are part of this service: 
 * hello. This is the name of the function. You can name it whatever you like, but in this case, it is named hello.
-* handler: handler.hello. This specifies the handler method for the function. It follows the format file.method. handler is the name of the file (e.g., handler.js), and hello is the name of the exported function within that file.
+* handler: handler.hello. This specifies the handler method for the function. It follows the format file.method. **handler** is the name of the file (e.g., handler.js), and **hello** is the name of the exported function within that file.
 
-The `serverless.yml` file defines a Serverless service named AwsServerlessLambda under the specified organization. The service is configured to run on AWS with Lambda functions using the Node.js 20.x runtime. It declares a single Lambda function named hello, which is handled by the hello method in the `handler.js` file.
+The `serverless.yml` file defines a Serverless service named AwsServerlessLambda under the specified organization. The service is configured to run on AWS with Lambda functions using the Node.js 20.x runtime. It declares a single Lambda function named **hello**, which is handled by the hello method in the `handler.js` file.
 
 Let's now open the handler.js:
 
@@ -137,10 +137,10 @@ exports.hello = async (event) => {
 };
 ```
 
-This JavaScript code defines a simple AWS Lambda function handler named hello. When triggered, it returns an HTTP response with a status code of 200 and a JSON-formatted message indicating that the function executed successfully. This handler function is designed to be used in a serverless environment, such as one managed by the Serverless Framework, and can be easily expanded to include more complex logic and event processing. For example you can use the Lambda to interact with other AWS resources.
+This JavaScript code defines a simple AWS Lambda function handler named **hello**. When triggered, it returns an HTTP response with a status code of 200 and a JSON-formatted message indicating that the function executed successfully. This handler function is designed to be used in a serverless environment, such as one managed by the Serverless Framework, and can be easily expanded to include more complex logic and event processing. For example, you can use Lambda to interact with other AWS resources.
 
 ## Deploy resources
-After getting familiar with the project, you can now deploy it to the AWS cloud. To do so, in the terminal or command prompt type the following command:
+After becoming familiar with the project, you can now deploy it to the AWS cloud. In the terminal or command prompt, type the following command:
 
 ```console
 serverless deploy
@@ -174,7 +174,7 @@ You will see the following output:
 }
 ```
 
-Finally, login to AWS console. Change the region to us-east-1 (N. Virgina). Then, go to Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
+Finally, log into the AWS console. Change the region to us-east-1 (N. Virgina). Then, go to the Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
 
 ![fig1](figures/01.png)
 
