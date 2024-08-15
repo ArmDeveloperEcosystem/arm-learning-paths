@@ -29,7 +29,7 @@ Keep in mind that more client connections means more resources will be consumed 
 
 `max_prepared_transactions` is 0 by default. 
 
-This means that stored procedures and functions cannot be used out of the box. It must be enabled by setting `max_prepared_transactions` to a value greater than 0. If this is set to a number larger than 0, a good number to start with would be at least as large as `max_connections`. In a test or development environment, it doesn't hurt to go even larger (10000) to avoid errors.
+This means that stored procedures and functions cannot be used out of the box. It must be enabled by setting `max_prepared_transactions` to a value greater than 0. If this is set to a number larger than 0, a good number to start with would be at least as large as `max_connections`. In a test or development environment, it doesn't hurt to set it to an even larger value(10000) to avoid errors.
 
 Using procedures and functions can greatly improve performance. 
 
