@@ -6,13 +6,13 @@ weight: 3
 layout: learningpathall
 ---
 
-## Objective
+### Objective
 In this section, you will declare the serverless service composed of the following AWS resources:  
 	1. DynamoDB Table: This will store hypothetical sensor data, including timestamps and randomly generated temperatures.  
 	2. Two AWS Lambda Functions: The first function will write temperatures to the DynamoDB table, and the second will retrieve the average temperature value.  
 	3. IAM Role: A set of permissions that enable the AWS Lambda functions to write and read data from the DynamoDB table.  
 
-## Declare a service
+### Declare a service
 To create a new serverless service, open the command prompt or terminal and type:
 
 ```console
@@ -29,7 +29,7 @@ The tool will generate the project composed of the following files:
 1.	`serverless.yml`: Contains the declaration of the infrastructure and services for a serverless application.
 2.	`handler.js`: You use this file to implement the core functionality of your serverless application, handling business logic and interactions with other services. Here, you will use this file to implement Lambda functions.
 
-## serverless.yml
+### serverless.yml
 To define the AWS resources open `serverless.yml` and modify it as follows:
 ```YAML
 org: <KEEP_YOUR_ORG_NAME>
@@ -139,7 +139,7 @@ In the resources section you define a DynamoDB table resource with the following
 
 Finally, the outputs section is used to display the endpoints of both Lambda functions. You will use those endpoints to trigger AWS Lambda functions.
 
-## handler.js
+### handler.js
 You will now implement two AWS Lambda functions. Open the `handler.js`, and replace its contents with the following code:
 
 ```JavaScript
@@ -336,7 +336,7 @@ The `getAverageFunction` retrieves the last 10 temperature records and calculate
 
 The above code demonstrates a common pattern in serverless applications, where functions interact with AWS services like DynamoDB to store and retrieve data.
 
-## package.json
+### package.json
 To make the code function properly, we need to add the package.json file (save it next to handler.js):
 ```JSON
 {
