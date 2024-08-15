@@ -1,4 +1,4 @@
-if file -b --mime-type $1 | grep -q md; then
+if [[ $1 == *.md ]]; then
    pip install -r tools/requirements.txt
    tools/maintenance.py -i $1
 else
