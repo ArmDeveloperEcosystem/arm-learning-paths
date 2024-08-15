@@ -6,12 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-## Difference with programming with intrinsics in C
+## Differences with programming with intrinsics in C and Rust
 
-There is a recent Arm Community blog post about [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics).
-The differences listed will be expanded and explained in this Learning Path with examples.
+As per the Arm Community blog post about [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics), there are some differences between C and Rust when programming with intrinsics which are listed in the blog and which will be expanded on in this Learning Path with code examples.
 
-Take an example using Arm ASIMD intrinsics in C, a program that computes the average values of every pair of elements in 2 arrays:
+We start with an example that uses Arm Advanced SIMD (Neon) intrinsics in C. Create a file named `average_neon.c` with the contents shown below. This program computes the average value of every pair of elements in 2 arrays:
 
 ```C
 #include <stdio.h>
@@ -54,11 +53,19 @@ int main() {
 }
 ```
 
-You can save this as `average_neon.c`. Compile with the following command and run it:
+Compile the code as follows:
 
-```bash { output_lines = "3-10" }
+```bash
 gcc -O3 -fno-inline average_neon.c -o average_neon
-average_neon
+```
+Now run the program as follows:
+
+```bash
+./average_neon
+```
+The output should look like the following:
+
+```output
 A[0] = 2.00, B[0] = -9.00 -> C[0] = -3.50
 A[1] = 4.00, B[1] = -12.00 -> C[1] = -4.00
 A[2] = 6.00, B[2] = -15.00 -> C[2] = -4.50
@@ -70,7 +77,15 @@ A[7] = 16.00, B[7] = -30.00 -> C[7] = -7.00
 ...
 ```
 
-You will note the `-fno-inline` option passed to the compiler. This is because we want to see the assembly output of the `average_vec` function individually to compare it against the Rust version. Here is the output for the C version as given by `objdump -S average_neon`:
+Note that the `-fno-inline` option was passed to the compiler. Use this option to prevent the C compiler from inlining the `average_vec` function. This is needed to compare the disassembly output of the `average_vec` function from the C version against the disassembly output from the Rust version. 
+
+Generate the disassembly output from the C version as shown below:
+
+```bash
+objdump -S average_neon
+```
+
+The output should look like the following:
 
 ```asm
 0000000000000870 <average_vec>:
@@ -93,7 +108,7 @@ You will note the `-fno-inline` option passed to the compiler. This is because w
  8b0:   d65f03c0        ret
 ```
 
-And here is the equivalent Rust example, first without using SIMD intrinsics:
+Now create the equivalent Rust example of the C program, first without using SIMD intrinsics. Save the contents in a file named `average1.rs` as per below:
 
 ```Rust
 const N : usize = 32;
@@ -123,16 +138,25 @@ fn average_vec(c: &mut [f32], a: &[f32], b: &[f32]) -> () {
 
 fn print_vec(a: &[f32], b: &[f32], c: &[f32]) -> () {
     for i in 0..c.len() {
-        println!("A[{}] = {}, B[{}] = {} -> C[{}] = {}", i, a[i], i, b[i], i, c[i]);
+        println!("A[{i}] = {}, B[{i}] = {} -> C[{i}] = {}", a[i], b[i], c[i]);
     }
 }
 ```
 
-Similarly, save this file under `average1.rs` and compile it using the `rustc` compiler. Run it afterwards:
+Compile it using the `rustc` compiler:
 
-```bash { output_lines = "3-10" }
+```bash 
 rustc -O average1.rs
-average1
+```
+
+Run the program as follows:
+```bash
+./average1
+```
+
+The output should look like the following:
+
+```output
 A[0] = 2, B[0] = -9 -> C[0] = -3.5
 A[1] = 4, B[1] = -12 -> C[1] = -4
 A[2] = 6, B[2] = -15 -> C[2] = -4.5
@@ -144,18 +168,17 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 ...
 ```
 
-The results are the same apart from the formatting, which is not that important at this stage.
-First, you should note that the Rust compiler is much more strict than the C compiler and there were many things that had to be fixed before the program would compile.
+The outputs shown from these 2 versions are the same apart from the formatting.
 
-This particular example is not very complicated but you will notice some differences between C and Rust already:
+This particular example is not very complicated but you will notice some key differences between C and Rust already:
 
-* Things like uninitialized variables, mutable/immutable arguments passed to the functions don't really bother a C developer when hacking a proof of concept program. This is not the case with Rust, which forces the developer to care about these things right from the start. This may mean it will take a bit longer to write some simple program, but you can be certain that this program will not suffer from trivial bugs like buffer overflows, out of bounds, illegal conversions etc.
-* Conversions/Castings need to be explicit, eg `2.0_f32 * ((i+1) as f32)`.
-* No need to pass around size as parameter, Rust includes size information in its arrays.
+* Uninitialized variables - mutable/immutable arguments passed to the functions are not a concern for a C developer creating a proof of concept program. This is not the case with Rust programming, which forces the developer to think about these things right from the start. This usually means that it takes longer to write a simple program in Rust but you can be certain that this program will not suffer from trivial bugs such as buffer overflows, out of bounds, illegal conversions etc.
+* Conversions/Castings need to be explicit, e.g., `2.0_f32 * ((i+1) as f32)`.
+* There is no need to pass size as a parameter as Rust includes size information in its arrays.
 
-Note that this program is not written in the optimal way for Rust, it's not idiomatic Rust. It is just a 'port' of the C program into Rust, with the minimal changes to compile and run.
+Note that this program is not written in the most optimal way for Rust. It is just a 'port' of the C program into Rust with the minimal changes needed to compile and run.
 
-The next step is to use SIMD intrinsics for the averaging loop like in the C program. Replace the previous `average_vec` function with the following:
+The next step is to use SIMD intrinsics in your Rust program for the averaging loop. Replace the previous `average_vec` function with the function shown below and save the updated contents in a file named `average2.rs` as shown below:
 
 ```Rust
 #[inline(never)]
@@ -188,11 +211,19 @@ unsafe fn average_vec_asimd(c: &mut [f32], a: &[f32], b: &[f32]) -> () {
 }
 ```
 
-Now save the new file under `average2.rs` and again compile it using the `rustc` compiler, and run it:
+Now compile it using the `rustc` compiler as shown below:
 
-```bash { output_lines = "3-10" }
+```bash
 rustc -O average2.rs
-average2
+```
+
+Run the program as follows:
+```bash
+./average2
+```
+The output should look like the following:
+
+```output
 A[0] = 2, B[0] = -9 -> C[0] = -3.5
 A[1] = 4, B[1] = -12 -> C[1] = -4
 A[2] = 6, B[2] = -15 -> C[2] = -4.5
@@ -204,13 +235,19 @@ A[7] = 16, B[7] = -30 -> C[7] = -7
 ...
 ```
 
-The results are the same, as expected. Let's explain some of the differences:
+The results are the same but let's look at some of the differences:
 
-* Need to use `target_arch` and `target_feature` to use specific hardware extensions (this is Rust's feature detection, explained in the next section).
-* All definitions/functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the latter.
-* You will note `#[inline(never)]` in the definition of `average_vec`. This is to hint to the compiler that it should not inline this function for the same reason as previously, to help comparing against the C version.
+* You need to use `target_arch` and `target_feature` to use specific hardware extensions. This is Rust's feature detection which is explained in more detail in the next section.
+* All definitions and functions need to be enabled with `use`, either selectively, for example `use std::arch::aarch64::float32x4_t` or with a wildcard `use std::arch::aarch64::*`. If in doubt, use the latter.
+* You will notice `#[inline(never)]` in the definition of `average_vec`. This is to let the compiler know that it should not inline this function because you will compare the disassembly against the C version.
 
-Let's check the assembly output, using `objdump -S average2` to check `average_vec` function:
+Now generate the disassembly output for `average2`as follows:
+
+```bash
+objdump -S average2
+```
+
+The disassembly for the `average_vec` function should look like this:
 
 ```asm
 00000000000069c4 <_ZN8average211average_vec17h7214a2d335bcab6cE>:
@@ -227,17 +264,15 @@ Let's check the assembly output, using `objdump -S average2` to check `average_v
     69ec:       d65f03c0        ret
 ```
 
-Apart from minor differences, you will note that the main loop is the same, as we expected, the 2 x `ldr` instructions followed by `fadd`, `fmul` and an `str`.
+Apart from some minor differences, you will notice that the main loop is the same with the 2 x `ldr` instructions followed by `fadd`, `fmul` and an `str`.
 
 ### Feature detection in Rust
 
-Let's expand a bit more on the feature detection.
+Using SIMD intrinsics in Rust is only possible if the specific features of the architecture that enables these intrinsics is enabled.
 
-Using SIMD intrinsics in Rust is only possible if the specific feature of the architecture that enables these intrinsics is enabled.
+This can only happen in the architecture-specific portion of the code marked by `#[cfg(target_arch = "aarch64")]`. This code will only be compiled for that particular `target_arch` which means that you might have to provide some architecture-independent implementations that will work in the other architectures to make your code portable.
 
-This can only happen in architecture specific portion of the code marked by `#[cfg(target_arch = "aarch64")]`. This code will only be compiled for that particular `target_arch`, which means you might have to provide some architecture-independent implementation that will work in the other architectures if you care about your code being portable.
-
-The feature detection in particular refers to particular minor extensions in the ISA not covered by the main `target_arch` detection. For example, in the case of Aarch64, there is the `dotprod` extension that includes intrinsics such as `vdotq_u32`. The equivalent check in C would be something like:
+Feature detection in particular refers to minor extensions in the ISA that are not covered by the main `target_arch` detection. For example, in the case of AArch64, there is the `dotprod` extension that includes intrinsics such as `vdotq_u32`. The equivalent check in C would be something like the following:
 
 ```C
 #if defined(__ARM_FEATURE_DOTPROD)
@@ -247,13 +282,13 @@ The feature detection in particular refers to particular minor extensions in the
 #endif
 ```
 
-A full list of current extensions for Arm can be found [here](https://doc.rust-lang.org/std/arch/macro.is_aarch64_feature_detected.html), while the full list of supported intrinsics is [here](https://doc.rust-lang.org/core/arch/aarch64/index.html).
+A full list of current extensions for Arm can be found [here](https://doc.rust-lang.org/std/arch/macro.is_aarch64_feature_detected.html) while the full list of supported intrinsics is [here](https://doc.rust-lang.org/core/arch/aarch64/index.html).
 
-## Alternative way with Rust using std::simd
+## An alternative way with Rust using std::simd
 
-You read that there are 2 ways to do SIMD programming with Rust, `std::arch` and `std::simd`, you only saw the first. What about `std::simd`? What would the equivalent program look like using that method?
+In the introduction you read about 2 ways to carry out SIMD programming with Rust, `std::arch` and `std::simd`. You implemented the first approach. Now you can create an equivalent program in Rust using the `std::simd` approach.
 
-Here is the same program modified to use `std::simd`. Replace the functions in `average2.rs` with the following:
+Shown below is the same program modified to use `std::simd`. Replace the functions in `average2.rs` with the following and save the updated contents in a file name `average3.rs`:
 
 ```Rust
 #[inline(never)]
@@ -277,18 +312,25 @@ unsafe fn average_vec_asimd(c: &mut [f32], a: &[f32], b: &[f32]) -> () {
 }
 ```
 
-Add the following lines at the top of the file:
+Add the following lines at the top of the file as follows:
 
 ```Rust
 #![feature(portable_simd)]
 use std::simd::*;
 ```
 
-Save the new file under `average3.rs`, compile and run it:
+Now compile the code as shown below:
 
-```bash { output_lines = "3-10" }
+```bash
 rustc -O average3.rs
-average3
+```
+Run the program as per below:
+```
+./average3
+```
+
+The output should look like the following:
+```output
 A[0] = 2, B[0] = -9 -> C[0] = -3.5
 A[1] = 4, B[1] = -12 -> C[1] = -4
 A[2] = 6, B[2] = -15 -> C[2] = -4.5
@@ -298,35 +340,12 @@ A[5] = 12, B[5] = -24 -> C[5] = -6
 A[6] = 14, B[6] = -27 -> C[6] = -6.5
 A[7] = 16, B[7] = -30 -> C[7] = -7
 ```
+Now generate the disassembly for `average3`:
 
-Note: `std::simd` a.k.a `portable_simd` currently exists only in `rustc` 'nightlies' which you can get in multiple ways.
-
-The simplest way is using `rustup` as follows:
-
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
-
-Answer yes to have both the distro compiler and the nightly. After that you need to execute the following commands:
 ```bash
-. "$HOME/.cargo/env"
-rustup toolchain link system /usr
-rustup default system
-rustup install nightly
-rustup default nightly
+objdump -S average3
 ```
-
-That way, running `rustc --version` should report something that looks like the following:
-```bash { output_lines = "2" }
-$ rustc --version
-rustc 1.81.0-nightly (cf2df68d1 2024-07-01)
-```
-
-You can switch between the default and the nightly version by executing `rustup default [system|nightly]`.
-
-Now, let's check the assembly output of `average_vec` using std::simd:
-
-The assembly output follows:
+The disassembly output for `average_vec` using `std::simd` should look like the following:
 
 ```asm
 00000000000069c4 <_ZN8average311average_vec17h154eda43e5fca9f1E>:
@@ -343,6 +362,6 @@ The assembly output follows:
     69ec:       d65f03c0        ret
 ```
 
-You will be pleased to see that the assembly output is exactly the same as the version using `std::arch`. The difference will be that the second version will work on other architectures as well.
+You will see that the disassembly output is exactly the same as the version using `std::arch`. The only difference is that the second version will work on other architectures as well.
 
-However there are some caveats. Some operations may benefit from using specialized intrinsics that are just not easily mapped in an architecture-agnostic method, so you will have to break portability for performance in these cases. But most of the times such a modification is justified.
+However, there are some caveats: some operations may benefit from using specialized intrinsics that are not easily mapped in an architecture-agnostic method. In such cases, you might have to choose performance over portability. 

@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            What kind of lighting Lumen can support?
+            What kind of lighting does Lumen support?
         answers:
             - Direct lighting
             - Indirect lighting
@@ -13,20 +13,20 @@ review:
 
     - questions:
         question: >
-            Lumen only supports software ray tracing.
+            Lumen only supports software ray tracing?
         answers:
-            - True
-            - False
+            - "True"
+            - "False"
         correct_answer: 2                    
         explanation: >
-            Lumen can support hardware ray tracing if the hardware has ray tracing feature.
+            Lumen can support hardware ray tracing if the hardware has the ray tracing feature.
                
     - questions:
         question: >
-            Lumen can work with forward shading mode.
+            Lumen can work with forward shading mode?
         answers:
-            - True
-            - False
+            - "True"
+            - "False"
         correct_answer: 2                    
         explanation: >
             Lumen can only work with deferred shading mode.

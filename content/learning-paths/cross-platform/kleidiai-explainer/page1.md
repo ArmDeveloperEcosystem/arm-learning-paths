@@ -46,7 +46,7 @@ Each KleidiAI matrix multiplication micro-kernel uses a specific Arm architectur
 
 * **FMLA**: This instruction, which stands for *Floating-point Multiply Accumulate*, is for 16-bit operations. It is included as part of the Advanced SIMD extension, multiplying and accumulating two vectors together, each containing eight 16-bit numbers. View the `FMLA` documentation [here](https://developer.arm.com/documentation/ddi0602/2024-03/SIMD-FP-Instructions/FMLA--vector---Floating-point-fused-Multiply-Add-to-accumulator--vector--).
 
-* **FMOPA**: This instruction stands for *Floating-point outer product and accumulate*. It is included in the Arm Scalable Vector Extension 2 (SVE2). The single precision `FMOPA` variant enables optimized matrix multiplication on 32-bit numbers. View the `FMOPA` documentation [here](https://developer.arm.com/documentation/ddi0602/2023-12/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en).
+* **FMOPA**: This instruction stands for *Floating-point outer product and accumulate*. It is included in the Arm Scalable Matrix Extension (SME). The single precision `FMOPA` variant enables optimized matrix multiplication on 32-bit numbers. View the `FMOPA` documentation [here](https://developer.arm.com/documentation/ddi0602/2023-12/SME-Instructions/FMOPA--non-widening---Floating-point-outer-product-and-accumulate-?lang=en).
 
 Today, Arm-powered hardware containing these instructions exist in cloud servers and smartphones. Here are some examples of the first products from popular vendors that support KleidiAI:
 
@@ -68,6 +68,6 @@ Today, Arm-powered hardware containing these instructions exist in cloud servers
 
 
 This Learning Path now moves on to answer the following questions while stepping through a C++ example:
-* How does KleidAI 'just work' with ML Frameworks?
+* How does KleidiAI 'just work' with ML Frameworks?
 * What do the micro-kernels in KleidiAI do?
 * How are the KleidiAI micro-kernels speeding up matrix multiplication?

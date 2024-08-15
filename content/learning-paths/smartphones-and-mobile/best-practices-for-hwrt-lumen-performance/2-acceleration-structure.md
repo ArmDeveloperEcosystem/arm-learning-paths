@@ -6,27 +6,25 @@ weight: 3
 layout: learningpathall
 ---
 
-## Acceleration Structure
+## What is an Acceleration Structure?
 
-Acceleration structure is a data structure for improving the ray traversal speed on ray tracing hardware. Acceleration structure use a hierarchical tree to store the geometry data of the scene in order to minimize the hit test of ray and geometry. Ray tracing hardware usually uses this structure to quickly find the triangles which have hit with a ray.
+An acceleration structure is a data structure designed to improve ray traversal speed on ray tracing hardware. It uses a hierarchical tree to store the geometry data of the scene, minimizing the number of hit tests between rays and geometry. Ray tracing hardware typically utilizes this structure to quickly identify the triangles that intersect with a ray.
 
-As the Figure 1 shows, the scene will be split to several smaller volumes and the acceleration structure store the hierarchical tree of all small volumes. When doing a ray traversal, hardware can use this structure to quickly find the volumes which have hit with a ray. Then the hardware can find the intersections of ray and triangles inside those volumes.
+As shown in the image below, the scene is divided into boxes, and the acceleration structure stores the hierarchical tree of all these smaller boxes. During ray traversal, the hardware can use this structure to quickly locate the boxes that intersect with a ray. Subsequently, the hardware can then find the intersections between the ray and the triangles within those volumes.
 
-![](images/as2.png "Figure1. The acceleration structure used to present a scene.")
+![](images/as2.png "Figure1. The acceleration structure used to represent a scene.")
 
 
-
-Usually there will be many duplicated objects in a regular game scene, these objects share the same geometry data but have some different instance attributes like position or color. So acceleration structure has 2 levels. Top Level Acceleration Structure (TLAS) and Bottom Level Acceleration Structure (BLAS) as Figure 2 shows. 
+In a typical game scene, there are often many duplicated objects that share the same geometry data but have different instance attributes, such as position or color. Therefore, the acceleration structure is divided into two levels: the Top Level Acceleration Structure (TLAS) and the Bottom Level Acceleration Structure (BLAS), as shown below.
 
 ![](images/as.png "Figure2. The acceleration structure tree.")
 
 ### TLAS 
-TLAS only stores instancing data of BLAS, for example, transform data of each instance. TLAS doesn't store any geometry data, it only store which BLAS is related. By this way, the hardware can save memory usage by just storing one geometry data for many duplicated objects.
+The TLAS only stores the instancing data of the BLAS, such as the transform data of each instance. It does not store any geometry data. Instead, it references the relevant BLAS. This approach allows the hardware to save memory by storing a single set of geometry data for many duplicated objects.
 
 
 ### BLAS
-BLAS stores the geometry data and Hierarchical bounding volumes of the scene. Multiple instances at TLAS can point to the one BLAS.
-
+The BLAS stores the geometry data and hierarchical bounding boxes of the scene. Multiple instances in the TLAS can point to a single BLAS.
 
 
 

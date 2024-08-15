@@ -1,20 +1,20 @@
 ---
-title: Run the Gemma 2B model using Google MediaPipe with XNNPACK
+title: Run the Gemma 2B model using MediaPipe with XNNPACK
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Cross-compile the inference engine for CPU (Android)
+## Cross-compile the inference engine for Android CPU
 
-Now that you have your environment set up correctly, you can build the inference engine. This executable can run an LLM model on an Android device, it will produce an output, given an initial prompt.
+Now that you have your environment set up correctly, you can build the inference engine. This executable can run an LLM model on an Android device. It produces an output, given an initial prompt.
 
 Build the inference tool using this command:
 
 ```bash
 
-bazel build --cxxopt=-DABSL_FLAGS_STRIP_NAMES=0 -c opt --config=android_arm64 mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main
+bazel build --cxxopt=-DABSL_FLAGS_STRIP_NAMES=0 -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main
 
 ```
 
@@ -27,15 +27,17 @@ ls bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main
 
 ## Run the inference engine on your Android device
 
-You will need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
+Firstly, you need to enable USB debugging on your Android device. Please follow [the official Android documentation on developer options](https://developer.android.com/studio/debug/dev-options) to enable USB debugging.
 
-Once you have enabled USB debugging and connected via USB, run
+Once you have enabled USB debugging and connected via USB, run:
 
 ```
 adb devices
 ```
 
-From your local environment, ensure that your Android device is properly connected. If you get the following output (with a unique device ID in place of XXXXXXXXXXXXXX), then your device is ready:
+From your local environment, ensure that your Android device is properly connected. 
+
+If you see the following output (with a unique device ID in place of XXXXXXXXXXXXXX), then your device is ready:
 
 ```
 List of devices attached
@@ -61,7 +63,7 @@ And then replace `[container ID]` in this command with your running container ID
 docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_inference_engine_cpu_main .
 ```
 
-You can then run
+You can then run:
 
 ```
 adb push llm_inference_engine_cpu_main /data/local/tmp/gen_ai
@@ -92,7 +94,7 @@ cd /data/local/tmp/gen_ai
 ./llm_inference_engine_cpu_main --model_path <path_to_gemma-2b-it-cpu-int4.bin>
 ```
 
-The default behavior of this executable is to prompt the LLM to "Write an email". The output you see should be a unique generated email. It will start like this:
+The default behavior of this executable is to prompt the LLM to "write an email". The output you see should be a unique generated email that starts like this:
 
 ```output
 husky:/data/local/tmp/gen_ai $ ./llm_inference_engine_cpu_main

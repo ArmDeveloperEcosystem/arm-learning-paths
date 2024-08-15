@@ -41,8 +41,8 @@ Download and extract the appropriate installation package from [Linaro Forge Dow
 
 ```bash { target="ubuntu:latest" }
 sudo apt install wget
-wget https://downloads.linaroforge.com/23.0/linaro-forge-23.0-linux-aarch64.tar
-tar -xf linaro-forge-23.0-linux-aarch64.tar
+wget https://downloads.linaroforge.com/24.0.3/linaro-forge-24.0.3-linux-aarch64.tar
+tar -xf linaro-forge-24.0.3-linux-aarch64.tar
 ```
 
 ## Installation
@@ -60,7 +60,7 @@ If no install directory is specified, you will be prompted to specify this while
 To install to the default directory, non-interactively:
 
 ```bash { target="ubuntu:latest" }
-linaro-forge-23.0-linux-aarch64/textinstall.sh --accept-license /home/ubuntu/linaro/forge/23.0
+linaro-forge-24.0.3-linux-aarch64/textinstall.sh --accept-license /home/ubuntu/linaro/forge/24.0.3
 ```
 
 ### Install on macOS (remote client only)
@@ -70,6 +70,15 @@ Drag and drop the client application bundle icon into the Applications directory
 ### Install on Windows (remote client only)
 
 Run the Windows file executable to install the Linaro Forge Remote Client.
+
+### Graphical installer
+
+Optionally, you can run the installer executable with a graphical interface. 
+
+```bash 
+cd linaro-forge-24.0.3-linux-aarch64/
+./installer
+```
 
 ## Setting up the product license
 
@@ -143,7 +152,7 @@ A *.map file will be created in the current directory with profiling results whe
 map myapp_128p_<timestamp>.map
 ```
 
-### Reporting
+### Performance Reports
 
 Linaro Forge's reporting tool Linaro Performance Reports is designed to run on unmodified production executables, so in general no preparation step is necessary. However, there is one important exception: statically linked applications require additional libraries at the linking step (see [user guide](https://developer.arm.com/documentation/101136/latest/Performance-Reports/Run-real-programs)).
 

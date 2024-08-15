@@ -2966,22 +2966,22 @@
     percent_closed_vs_total: 0.0
 - a_date: '2024-07-29'
   content:
-    cross-platform: 21
+    cross-platform: 22
     embedded-systems: 17
     install-guides: 84
-    laptops-and-desktops: 29
+    laptops-and-desktops: 30
     microcontrollers: 24
-    servers-and-cloud-computing: 74
-    smartphones-and-mobile: 20
-    total: 269
+    servers-and-cloud-computing: 75
+    smartphones-and-mobile: 22
+    total: 274
   contributions:
-    external: 33
-    internal: 311
+    external: 35
+    internal: 377
   github_engagement:
     num_forks: 30
     num_prs: 9
   individual_authors:
-    arm: 3
+    arm: 5
     arnaud-de-grandmaison: 1
     bolt-liu: 2
     brenda-strech: 1
@@ -2989,13 +2989,14 @@
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
-    dawid-borycki: 24
+    dawid-borycki: 25
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
+    graham-woodward: 1
     james-whitaker,-arm: 1
     jason-andrews: 83
     johanna-skinnider: 2
@@ -3004,7 +3005,7 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
-    konstantinos-margaritis: 6
+    konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
@@ -3031,17 +3032,17 @@
     percent_closed_vs_total: 0.0
 - a_date: '2024-08-05'
   content:
-    cross-platform: 21
+    cross-platform: 22
     embedded-systems: 17
     install-guides: 84
-    laptops-and-desktops: 29
+    laptops-and-desktops: 30
     microcontrollers: 24
-    servers-and-cloud-computing: 74
+    servers-and-cloud-computing: 76
     smartphones-and-mobile: 20
-    total: 269
+    total: 273
   contributions:
-    external: 33
-    internal: 311
+    external: 35
+    internal: 315
   github_engagement:
     num_forks: 30
     num_prs: 8
@@ -3054,13 +3055,15 @@
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
-    dawid-borycki: 24
+    dawid-borycki: 25
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
+    gayathri-narayana-yegna-narayanan: 1
+    graham-woodward: 1
     james-whitaker,-arm: 1
     jason-andrews: 83
     johanna-skinnider: 2
@@ -3069,7 +3072,7 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
-    konstantinos-margaritis: 6
+    konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
@@ -3096,36 +3099,39 @@
     percent_closed_vs_total: 0.0
 - a_date: '2024-08-12'
   content:
-    cross-platform: 21
-    embedded-systems: 17
+    cross-platform: 22
+    embedded-systems: 18
     install-guides: 84
-    laptops-and-desktops: 29
+    laptops-and-desktops: 30
     microcontrollers: 24
-    servers-and-cloud-computing: 74
-    smartphones-and-mobile: 20
-    total: 269
+    servers-and-cloud-computing: 77
+    smartphones-and-mobile: 22
+    total: 277
   contributions:
-    external: 33
-    internal: 311
+    external: 35
+    internal: 319
   github_engagement:
     num_forks: 30
     num_prs: 10
   individual_authors:
     arm: 3
     arnaud-de-grandmaison: 1
+    basma-el-gaabouri: 1
     bolt-liu: 2
     brenda-strech: 1
     christopher-seidl: 7
     daniel-gubay: 1
     daniel-nguyen: 1
     david-spickett: 2
-    dawid-borycki: 24
+    dawid-borycki: 25
     diego-russo: 1
     diego-russo-and-leandro-nunes: 1
     elham-harirpoush: 2
     florent-lebeau: 5
     "fr\xE9d\xE9ric--lefred--descamps": 2
     gabriel-peterson: 5
+    gayathri-narayana-yegna-narayanan: 1
+    graham-woodward: 1
     james-whitaker,-arm: 1
     jason-andrews: 83
     johanna-skinnider: 2
@@ -3134,11 +3140,13 @@
     julie-gaskin: 4
     julio-suarez: 5
     kasper-mecklenburg: 1
-    konstantinos-margaritis: 6
+    konstantinos-margaritis: 7
     kristof-beyls: 1
     liliya-wu: 1
     mathias-brossard: 1
     michael-hall: 5
+    odin-shen: 1
+    owen-wu,-arm: 2
     pareena-verma: 35
     pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
     pareena-verma,-joe-stech,-adnan-alsinan: 1

@@ -1,5 +1,5 @@
 ---
-title: Benchmark the Gemma 2B Model using Android NDK r25 with and without KleidiAI
+title: Benchmark the Gemma 2B Model with KleidiAI
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Test inference engine performance with and without i8mm and KleidiAI
 
-Recently Arm has created a set of micro-kernels called [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. Arm has worked with Google to integrate KleidiAI into the MediaPipe AI framework through XNNPACK. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
+Recently Arm has created a set of micro-kernels called [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) that more efficiently use Arm's i8mm (8-bit integer matrix multiply) processor feature. Arm has worked with the Google AI Edge team to integrate KleidiAI into the MediaPipe framework through XNNPACK. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm feature.
 
-In this step, you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will give you an understanding of the performance gains attained by using KleidiAI micro-kernels.
+In this step, you will cross-compile an inference benchmarking executable with and without the i8mm build flag, which will demonstrate the performance gains achieved by using KleidiAI micro-kernels.
 
 #### Check that your device has the i8mm feature
 
-To test whether your phone chipset contains the i8mm feature, run
+To test whether your phone chipset contains the i8mm feature, run:
 
 ```
 adb shell cat /proc/cpuinfo | grep i8mm
@@ -25,81 +25,9 @@ If any lines are returned, then your phone has the i8mm capability.
 
 #### Set up the build
 
-Download Android NDK r25. Mediapipe only supports up to NDK r21, which does not have support for i8mm instructions. Google has released a workaround that lets us build the binary with NDK r25 (with support for i8mm instructions) by modifying the WORKSPACE file at the root of the MediaPipe repo to use `rules_android_ndk`.
+You can choose either 'decode' or 'encode' as the method to benchmark latency. Encode in this context, refers to how many tokens are processed in a second. This affects the time to first token, which is the time needed to process the input from the user. Decode refers to how many tokens are generated in a second. These instructions use 'encode' to benchmark.
 
-```bash
-
-cd $HOME/Android/Sdk/ndk-bundle/
-
-wget https://dl.google.com/android/repository/android-ndk-r25c-linux.zip
-
-unzip android-ndk-r25c-linux.zip
-
-```
-
-Add NDK bin folder to your PATH variable:
-
-```bash
-
-export PATH=$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r25c/toolchains/llvm/prebuilt/linux-x86_64/bin/
-
-```
-
-Modify the Mediapipe WORKSPACE file to add the path to Android NDK r25:
-
-```bash
-
-android_ndk_repository(name = "androidndk", api_level=30, path="/home/ubuntu/Android/Sdk/ndk-bundle/android-ndk-r25c")
-
-android_sdk_repository(name = "androidsdk", path = "/home/ubuntu/Android/Sdk")
-
-```
-
-{{% notice Note %}}
-The functions above require absolute paths, so if your `$HOME` directory is not `/home/ubuntu`, change `/home/ubuntu` to your home directory instead.
-{{% /notice %}}
-
-Modify the Mediapipe WORKSPACE file to add the Starlark rules for integrating Bazel with Android NDK.
-
-First search for:
-
-```
-bind(
-    name = "python_headers",
-    actual = "@local_config_python//:python_headers",
-)
-```
-
-Replace the lines above with this expanded version:
-
-```
-
-bind(
-    name = "python_headers",
-    actual = "@local_config_python//:python_headers",
-)
-
-# Add binding rule for the toolchain, so the added rules and existing bazel rules can use the same reference
-bind(
-name = "android/crosstool",
-actual = "@androidndk//:toolchain",
-)
-
-################## Starlark rules
-
-RULES_ANDROID_NDK_COMMIT= "010f4f17dd13a8baaaacc28ba6c8c2c75f54c68b"
-RULES_ANDROID_NDK_SHA = "2ab6a97748772f289331d75caaaee0593825935d1d9d982231a437fb8ab5a14d"
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-http_archive(
-	name = "rules_android_ndk", url = "https://github.com/bazelbuild/rules_android_ndk/archive/%s.zip" % RULES_ANDROID_NDK_COMMIT,
-	sha256 = RULES_ANDROID_NDK_SHA,
-	strip_prefix = "rules_android_ndk-%s" % RULES_ANDROID_NDK_COMMIT,
-)
-load("@rules_android_ndk//:rules.bzl", "android_ndk_repository")
-register_toolchains("@androidndk//:all")
-```
-
-Modify the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc` file to specify `encode` as the benchmarking method.
+Modify the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test.cc` file to specify `encode` as the benchmarking method. 
 
 Search for this line:
 
@@ -112,10 +40,13 @@ And replace with this line:
 ```
 std::string, benchmark_method, "encode",
 ```
-#### Build and run llm_test without i8mm and KleidiAI
+
+#### Build and run llm_test 
+
+You can now build the `llm_test` executable. First, lets build it by including support for `i8mm` without KleidiAI micro-kernels:
 
 ```bash
-bazel build -c opt --config=android_arm64 --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
+bazel build -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true --define=xnn_enable_kleidiai=false --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
 ```
 
 Push the resulting binary to the phone:
@@ -134,7 +65,7 @@ docker ps
 And then replace `[container ID]` in this command with your running container ID:
 
 ```
-docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/c/llm_test .
+docker cp [container ID]:/home/ubuntu/mediapipe/bazel-bin/mediapipe/tasks/cc/genai/inference/utils/xnn_utils/llm_test .
 ```
 
 You can then run
@@ -158,31 +89,31 @@ The output should look like this:
 
 ```bash
 husky:/data/local/tmp/gen_ai $ ./llm_test
-2024-02-21T20:17:09-06:00
+2024-02-22T16:11:35-06:00
 Running ./llm_test
 Run on (9 X 1704 MHz CPU s)
 ***WARNING*** CPU scaling is enabled, the benchmark real time measurements may be noisy and will incur extra overhead.
 --------------------------------------------------------------------------------------------------
 Benchmark                                        Time             CPU   Iterations UserCounters...
 --------------------------------------------------------------------------------------------------
-BM_Llm_QCINT8/512/128/1/real_time       1003557414 ns    987891597 ns            1 items_per_second=127.546/s
-BM_Llm_QCINT8/512/128/4/real_time       1032959636 ns   1015699095 ns            1 items_per_second=123.916/s
-BM_Llm_QCINT8/512/128/7/real_time       1048154704 ns   1031147568 ns            1 items_per_second=122.119/s
-BM_Llm_QCINT8/512/128/14/real_time      1093941773 ns   1076049151 ns            1 items_per_second=117.008/s
-BM_Llm_QCINT8/512/128/16/real_time      1045623292 ns   1037152577 ns            1 items_per_second=122.415/s
-BM_Llm_QCINT8/512/128/28/real_time      1059079712 ns   1044604110 ns            1 items_per_second=120.86/s
-BM_Llm_QCINT8/512/128/32/real_time      1087658611 ns   1077976514 ns            1 items_per_second=117.684/s
-BM_Llm_QCINT8/512/128/48/real_time      1087161580 ns   1078361074 ns            1 items_per_second=117.738/s
-BM_Llm_QCINT8/512/128/64/real_time      1072282227 ns   1060130805 ns            1 items_per_second=119.372/s
-BM_Llm_Mixed_INT48/512/128/1/real_time  1155142457 ns   1114548822 ns            1 items_per_second=110.809/s
-BM_Llm_Mixed_INT48/512/128/4/real_time  1130182496 ns   1095820501 ns            1 items_per_second=113.256/s
-BM_Llm_Mixed_INT48/512/128/7/real_time  1167092530 ns   1128940055 ns            1 items_per_second=109.674/s
-BM_Llm_Mixed_INT48/512/128/14/real_time 1165201458 ns   1145621858 ns            1 items_per_second=109.852/s
-BM_Llm_Mixed_INT48/512/128/16/real_time 1173947022 ns   1125000126 ns            1 items_per_second=109.034/s
-BM_Llm_Mixed_INT48/512/128/28/real_time 1147032837 ns   1104482669 ns            1 items_per_second=111.592/s
-BM_Llm_Mixed_INT48/512/128/32/real_time 1138706178 ns   1095870886 ns            1 items_per_second=112.408/s
-BM_Llm_Mixed_INT48/512/128/48/real_time 1188765625 ns   1160558175 ns            1 items_per_second=107.675/s
-BM_Llm_Mixed_INT48/512/128/64/real_time 1189585776 ns   1136016289 ns            1 items_per_second=107.6/s
+BM_Llm_QCINT8/512/128/1/real_time        838363322 ns    829751099 ns            1 items_per_second=152.678/s
+BM_Llm_QCINT8/512/128/4/real_time        841265137 ns    834988592 ns            1 items_per_second=152.152/s
+BM_Llm_QCINT8/512/128/7/real_time        852055258 ns    841642618 ns            1 items_per_second=150.225/s
+BM_Llm_QCINT8/512/128/14/real_time       860270793 ns    851762316 ns            1 items_per_second=148.79/s
+BM_Llm_QCINT8/512/128/16/real_time       841513062 ns    833101183 ns            1 items_per_second=152.107/s
+BM_Llm_QCINT8/512/128/28/real_time       864154582 ns    853668539 ns            1 items_per_second=148.122/s
+BM_Llm_QCINT8/512/128/32/real_time       830871257 ns    825545782 ns            1 items_per_second=154.055/s
+BM_Llm_QCINT8/512/128/48/real_time       854287110 ns    844283619 ns            1 items_per_second=149.833/s
+BM_Llm_QCINT8/512/128/64/real_time       854422201 ns    843630972 ns            1 items_per_second=149.809/s
+BM_Llm_Mixed_INT48/512/128/1/real_time   782606446 ns    759264361 ns            1 items_per_second=163.556/s
+BM_Llm_Mixed_INT48/512/128/4/real_time   822570557 ns    796060223 ns            1 items_per_second=155.61/s
+BM_Llm_Mixed_INT48/512/128/7/real_time   792235759 ns    775831486 ns            1 items_per_second=161.568/s
+BM_Llm_Mixed_INT48/512/128/14/real_time  778684611 ns    761880662 ns            1 items_per_second=164.38/s
+BM_Llm_Mixed_INT48/512/128/16/real_time  776865235 ns    759403033 ns            1 items_per_second=164.765/s
+BM_Llm_Mixed_INT48/512/128/28/real_time  814798707 ns    791258841 ns            1 items_per_second=157.094/s
+BM_Llm_Mixed_INT48/512/128/32/real_time  795295655 ns    764343419 ns            1 items_per_second=160.946/s
+BM_Llm_Mixed_INT48/512/128/48/real_time  792191082 ns    771217878 ns            1 items_per_second=161.577/s
+BM_Llm_Mixed_INT48/512/128/64/real_time  775814250 ns    756604293 ns            1 items_per_second=164.988/s
 ```
 
 There is a bit of throughput variation that can happen in each iteration of this benchmark, if you want to run multiple times and get a coefficient of variation you can run it like this:
@@ -195,7 +126,7 @@ As you might expect, this will take ten times as long to run, but will give you 
 
 #### Build and run llm_test with i8mm and KleidiAI
 
-Rebuild `llm_test` but this time with the i8mm flag enabled:
+You can now rebuild `llm_test`, but this time with the i8mm flag enabled:
 
 ```bash
 bazel build -c opt --config=android_arm64 --define=xnn_enable_arm_i8mm=true --dynamic_mode=off mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test
@@ -252,6 +183,6 @@ And as in the previous section, if you want to run multiple times and get a coef
 ./llm_test --benchmark_repetitions=10
 ```
 
-As you can see by comparing this output to the output in the previous section, the performance improvements are noticeable in the mixed int4/int8 benchmarks. By taking advantage of the KleidiAI micro-kernels, you are able to get more performance out of the i8mm processor feature.
+As you can see, by comparing this output to the output in the previous section, the performance improvements are noticeable in the mixed int4/int8 benchmarks. By taking advantage of the KleidiAI micro-kernels, you are able to increase the performance of the i8mm processor feature.
 
-If you would like to learn more about KleidiAI Integration with MediaPipe, please check out this [KleidiAI blog post](https://newsroom.arm.com/blog/kleidiai-integration-mediapipe).
+If you would like to learn more about KleidiAI Integration with MediaPipe, please see this [KleidiAI blog post](https://newsroom.arm.com/blog/kleidiai-integration-mediapipe).

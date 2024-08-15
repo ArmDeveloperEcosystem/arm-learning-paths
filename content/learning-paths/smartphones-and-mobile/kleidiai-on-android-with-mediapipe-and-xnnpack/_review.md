@@ -15,12 +15,22 @@ review:
         question: >
             What is MediaPipe?
         answers:
-            - A cross-platform framework from Google AI Edge used for building multimodal applied ML pipelines
-            - A library for efficient matrix multiplication on Arm processors
-            - A tool for quantizing machine learning models
+            - A cross-platform framework from Google AI Edge used for building multimodal applied ML pipelines.
+            - A library for efficient matrix multiplication on Arm processors.
+            - A tool for quantizing machine learning models.
         correct_answer: 1          
         explanation: >
             MediaPipe abstracts away low-level details when building ML pipelines, allowing developers to quickly build and iterate on multimodal AI applications.
+
+    - questions:
+        question: >
+            Does Android NDK r21 include support for i8mm instructions?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 2
+        explanation: >
+            Android NDK r21 does not have support for i8mm instructions. You will need to use Android NDK r25 to add support for it in your builds.
 
 
 

@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Example with Dot product
+## An example with Dot product instructions
 
-Since `dotprod` extension was mentioned previously, let's continue with an example around these intrinsics, a program that calculates the Sum of Absolute Differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic:
+You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the sum of absolute differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c` as shown below:
 
 ```C
 #include <stdio.h>
@@ -40,9 +40,9 @@ uint32_t sad_neon(const uint8_t *a, const uint8_t *b, int w, int h) {
 
   for (int i = 0; i < h; i++) {
     for (int j = 0; j < w; j+= 16) {
-      uint8x16_t a = vld1q_u8(a[i*w + j]);
-      uint8x16_t b = vld1q_u8(b[i*w + j]);
-      uint8x16_t diff = vabdq_u8(a, b);
+      uint8x16_t va = vld1q_u8(&a[i*w + j]);
+      uint8x16_t vb = vld1q_u8(&b[i*w + j]);
+      uint8x16_t diff = vabdq_u8(va, vb);
       sum = vdotq_u32(sum, diff, vdupq_n_u8(1));
     }
   }
@@ -59,11 +59,18 @@ int main() {
 }
 ```
 
-Save this file as `dotprod1.c`. Compile with the following command and run it:
+Now compile the program as follows:
 
-```bash { output_lines = "3-12" }
+```bash 
 gcc -O3 -march=armv8.2-a+dotprod dotprod1.c -o dotprod1
+```
+
+And run the program as per below:
+```bash
 ./dotprod1
+```
+The output should look like the following:
+```output
 A[0] = [ 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f ]
 B[0] = [ 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 ]
 A[1] = [ 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 20 ]
@@ -76,9 +83,15 @@ B[31] = [ 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 0
 sad = 7400
 ```
 
-Note the extra compiler flag `-march=armv8.2-a+dotprod`. This is to actually enable the code generation for `dotprod` instructions, otherwise the compiler will not be aware of these instructions and will fail to compile any code that uses them.
+Note the extra compiler flag `-march=armv8.2-a+dotprod` as this flag is used to enable the code generation for `dotprod` instructions.
 
-Here is the assembly code of the `sad_neon` function as displayed by `objdump -S dotprod1`:
+Generate the disassembly output as per below:
+
+```bash
+objdump -S dotprod1
+```
+
+Shown below is the disassembly output for the `sad_neon` function:
 
 ```asm
 0000000000000a10 <sad_neon>:
@@ -113,9 +126,9 @@ Here is the assembly code of the `sad_neon` function as displayed by `objdump -S
  a80:   d65f03c0        ret
  ```
 
-You will note the use of the `uabd` and `udot` assembly instructions that correspond to the `vabdq_u8`/`vdotq_u32` intrinsics.
+You will notice the use of `uabd` and `udot` assembly instructions that correspond to the `vabdq_u8`/`vdotq_u32` intrinsics.
 
-Now observe the equivalent Rust program using the same `std::arch` `dotprod` intrinsics:
+Now create an equivalent Rust program using `std::arch` `neon` intrinsics. Save the contents shown below in a file named `dotprod2.rs`:
 
 ```Rust
 #![feature(stdarch_neon_dotprod)]
@@ -179,14 +192,20 @@ unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
     return vaddvq_u32(sum);
 }
 ```
+Compile the program as follows:
 
-More or less the same comments apply here. The use of intrinsics is pretty straightforward as it looks very similar to the C implementation.
-
-Save this file under `dotprod2.rs`, compile it and run it:
-
-```bash { output_lines = "3-10" }
+```bash 
 rustc -O dotprod2.rs
+```
+
+Run the program as per below:
+```bash
 ./dotprod2
+```
+
+The output should look like the following:
+
+```output
 A[0] = [ 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f ]
 B[0] = [ 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 ]
 A[1] = [ 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f 20 ]
@@ -199,10 +218,13 @@ B[31] = [ 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 0
 sad = 7400
 ```
 
-As you can see both executables produce the same output, so at least the code is correct.
+As you can see both executables produce the same output.
 
-Now observe the generated assembly using `objdump -S dotprod2`
-
+Now generate the disassembly output as shown below:
+```bash
+objdump -S dotprod2
+```
+The output should look like the following:
 ```asm
 0000000000006394 <_ZN4core9core_arch10arm_shared4neon9generated9vdotq_u3217h5c7bc8d63e4a993fE>:
     6394:       3dc00000        ldr     q0, [x0]
@@ -253,15 +275,15 @@ Now observe the generated assembly using `objdump -S dotprod2`
     6724:       d65f03c0        ret
 ```
 
-You will immediately notice something strange. Where there should be a `udot` instruction there is a `bl` which indicates a branch, and we see that the `udot` instruction is indeed called in another function, which does the loads again.
+Note that where you might expect to see a `udot` instruction, there is a `bl` instruction which indicates a branch. The `udot` instruction is instead called in another function, which carries out the loads again.
 
-This certainly seems counter-intuitive and difficult to comprehend. The reason for that is that in constract to C, Rust treats the intrinsics like normal functions.
+This seems counter-intuitive but the reason is that, unlike C, Rust treats the intrinsics like normal functions.
 
-Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, then code generation and performance will be almost the same as the one you would get using C. If however, it is not possible, then you would find that the same code in Rust would perform much worse due to this exact reason.
+Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, code generation and performance would be almost as that with C. If it is not possible, you might find that the same code in Rust performs worse than in C.
 
-Because of this, you have to be vigilant that your SIMD Rust code generates the expected assembly. So, how can you fix this behaviour and get the generated code that you would expect?
+Because of this, you have to look carefully at the disassembly generated from your SIMD Rust code. So, how can you fix this behaviour and get the expected generated code?
 
-As you have already seen, Rust is quite peculiar about the enabled target features. In this particular case, you have to remember to add that `dotprod` is the required target feature that you want to use. So first you have to change it in the function `sad_vec_asimd`:
+As you have seen, Rust has a very particular way to enable target features. In this case, you have to remember to add that `dotprod` is the required target feature. Make this change in the function `sad_vec_asimd` as shown below:
 
 ```Rust
 #[cfg(target_arch = "aarch64")]
@@ -269,21 +291,30 @@ As you have already seen, Rust is quite peculiar about the enabled target featur
 unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
 ```
 
-Remember that `neon` is implied with `dotprod` so there is no need to add it as well.
+Add support for both `neon` and `dotprod` target features as shown:
 
-Secondly, you also need to add the `#!feature` for the module's code generation at the top of the file:
+```Rust
+#[target_feature(enable = "neon", enable = "dotprod")]
+```
+
+Next, check that you have added the `#!feature` for the module's code generation at the top of the file:
 
 ```Rust
 #![feature(stdarch_neon_dotprod)]
 ```
 
-Save the file again and recompile as before.
+Save the file again and recompile as before:
 
 ```bash
 rustc -O dotprod2.rs
 ```
 
-Let's look at the assembly output once more:
+Generate the disassembly output again:
+
+```bash
+objdump -S dotprod2
+```
+Now look at the changed disassembly output as follows:
 
 ```asm
 000000000000667c <_ZN8dotprod213sad_vec_asimd17h2989b6ba09be74edE>:
@@ -306,6 +337,5 @@ Let's look at the assembly output once more:
     66bc:       d65f03c0        ret
 ```
 
-This output is much better and we see that the compile automatically unrolled the loop twice because it was able to figure out that the number of iterations was small. Increasing the iterations will probably disable aggressive unrolling but it will at least inline the intrinsics properly.
+This disassembly output is now as you would expect it to be as well as being better performant. You will see that the compiler automatically unrolled the loop twice because it was able to figure out that the number of iterations was small. Increasing the iterations will probably disable aggressive unrolling but it will at least inline the intrinsics properly.
 
-In the next section you will learn one more important thing you need to know about the use of SIMD intrinsics in Rust.

@@ -1,21 +1,24 @@
 ---
-title: Take Good Advantage of Instancing
-weight: 6
+title: Take Full Advantage of Instancing
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Take Good Advantage of Instancing
-Instanced actor can share the same geometry data in BLAS of acceleration structure hence save the memory usage and increase the cache hit. So you should try to use object instancing as many as possible when using hardware ray tracing to get the best performance and memory usage. 
+The next optimization is around instanced actors. Instanced actors can share the same geometry data in the BLAS of the acceleration structure, thereby saving memory usage and increasing cache hits. To achieve the best performance and memory efficiency when using hardware ray tracing, you should use object instancing as much as possible.
 
-You can also use Picker view under ray tracing debug of Unreal editor to check the instancing status of acceleration structure. Here are the steps for checking the instancing status in Unreal editor:
+Here are the steps for checking the instancing status in Unreal Editor:
 
-1. Use command “r.RayTracing.Debug.PickerDomain 1” to select instance mode for picker.
+1. Use command `r.RayTracing.Debug.PickerDomain 1` to select the instance mode for picker:
+
 ![](images/picker-command.png)
 
-1. Select `Picker` view under Ray Tracing Debug on viewport of Unreal editor.
+2. In the Unreal editor, under **Ray Tracing Debug**, select **Picker**:
+
 ![](images/picker-view.png)
 
-1. Use mouse cursor to select the instance which you want to check then there will be acceleration structure information of this instance on the screen. Use the detail information under [BLAS] to check if two instance share the same BLAS data.
+3. Use the mouse cursor to select the instance you want to check. The acceleration structure information for this instance will be displayed on the screen. Use the detailed information under **[BLAS]** to verify if two instances share the same BLAS data:
+
 ![](images/blas.png)
+
