@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Objective
 In this section, you will declare the serverless service composed of the following AWS resources:
-	1.	DynamoDB Table: This will store hypothetical sensor data, including timestamps and randomly generated temperatures.
-	2.	Two AWS Lambda Functions: The first function will write temperatures to the DynamoDB table, and the second will retrieve the average temperature value.
-	3.	IAM Role: A set of permissions that enable the AWS Lambda functions to write and read data from the DynamoDB table.
+	1. DynamoDB Table: This will store hypothetical sensor data, including timestamps and randomly generated temperatures.
+	2. Two AWS Lambda Functions: The first function will write temperatures to the DynamoDB table, and the second will retrieve the average temperature value.
+	3. IAM Role: A set of permissions that enable the AWS Lambda functions to write and read data from the DynamoDB table.
 
 ## Declare a service
 To create a new serverless service, open the command prompt or terminal and type:
