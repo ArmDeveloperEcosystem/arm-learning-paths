@@ -141,13 +141,13 @@ The `vm.dirty_background_ratio` sets the percentage of the page cache that needs
 
 Setting this value to lower than the default (typically 10) helps write heavy workloads. This is because by lowering this threshold, you are spreading writes to storage over time. This reduces the probability of saturating storage.
 
-Setting this to 5 can help performance.
+Setting this value to 5 can improve performance.
 
 The `vm.dirty_ratio` sets the percentage of the page cache that needs to be dirty in order for threads that are writing to storage to be paused to allow flushing to catch up. 
 
 Setting this value higher than default (typically 10-20) helps performance when disk writes are bursty. A higher value gives the background flusher (controlled by `vm.dirty_background_ratio`) more time to catch up. 
 
-Setting this as high as 80 can help performance.
+Setting this as high as 80 can improve performance.
 
 ##  Compiler Considerations
 
