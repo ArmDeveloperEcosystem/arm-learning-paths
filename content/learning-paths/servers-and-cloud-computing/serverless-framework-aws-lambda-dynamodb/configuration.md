@@ -26,11 +26,11 @@ In the wizard that appears, proceed as follows:
 4.	In the Create Or Select An Existing App section, select **Skip Adding An App**.
 
 The tool will generate the project composed of the following files:
-1.	serverless.yml: Contains the declaration of the infrastructure and services for a serverless application.
-2.	handler.js: You use this file to implement the core functionality of your serverless application, handling business logic and interactions with other services. Here, we will use this file to implement Lambda functions.
+1.	`serverless.yml`: Contains the declaration of the infrastructure and services for a serverless application.
+2.	`handler.js`: You use this file to implement the core functionality of your serverless application, handling business logic and interactions with other services. Here, you will use this file to implement Lambda functions.
 
 ## serverless.yml
-To define the AWS resources open serverless.yml and modify it as follows:
+To define the AWS resources open `serverless.yml` and modify it as follows:
 ```YAML
 org: <KEEP_YOUR_ORG_NAME>
 
@@ -116,31 +116,31 @@ The first section of the above file includes the following:
 
 In the Serverless Framework, a service is the fundamental unit of organization. It represents a single project or application and encapsulates all the functions, resources, and configurations necessary to deploy and manage that project in a serverless environment. A service can consist of multiple functions, each with its own triggers and configuration, and can define the necessary cloud resources such as databases, storage, and other infrastructure components.
 
-After the service definition we have the provider section, which specifies the cloud provider (e.g., AWS) and general settings such as runtime, region, and environment variables. Here, the provider section contains the following:
+After the service definition you have the provider section, which specifies the cloud provider (e.g., AWS) and general settings such as runtime, region, and environment variables. Here, the provider section contains the following:
 * name: aws - this specifies that the provider is AWS,
 * runtime: nodejs20.x - sets the runtime environment for the Lambda functions to Node.js 20.x,
 * region: us-east-1 - defines the AWS region where the service will be deployed,
 * stage: dev - sets the deployment stage to dev.
 
-Then, we have the environment, section, which includes one item:
+Next, you have the environment, section, which includes one item:
 * DYNAMODB_TABLE: SensorReadings. This defines an environment variable DYNAMODB_TABLE with the value SensorReadings, which will be used to name the DynamoDB table.
 
-Afterward, in the iam section we define one role. This role specifies a list of actions that are allowed (dynamodb:BatchWriteItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:GetItem, dynamodb:Scan, dynamodb:Query) on a given resource. The resource is specified using Amazon Resource Name (ARN). 
+In the iam section you define one role. This role specifies a list of actions that are allowed (dynamodb:BatchWriteItem, dynamodb:PutItem, dynamodb:UpdateItem, dynamodb:GetItem, dynamodb:Scan, dynamodb:Query) on a given resource. The resource is specified using Amazon Resource Name (ARN). 
 
 ARN is a unique identifier used to identify resources in AWS (Amazon Web Services). ARNs are used throughout AWS to uniquely identify resources such as EC2 instances, S3 buckets, DynamoDB tables, Lambda functions, IAM roles, and more. 
 
-Here, we use ARN to identify the DynamoDB table that role actions are allowed on, using the ${self:provider.region} and ${self:provider.environment.DYNAMODB_TABLE} variables to dynamically insert the region and table name.
+Here, you use ARN to identify the DynamoDB table that role actions are allowed on, using the ${self:provider.region} and ${self:provider.environment.DYNAMODB_TABLE} variables to dynamically insert the region and table name.
 
-Then, the serverless.yml defines two AWS Lambda functions:
+The `serverless.yml` defines two AWS Lambda functions:
 1. writeTemperatures. Its handler is set to handler.writeTemperatures. This function will be triggered through the HTTP POST event.
 2. getAverageTemperature with handler.getAverageTemperature handler. This function will be triggered through the GET POST event.
 
-In the resources section we define a DynamoDB table resource with the following attributes id as a string and timestamp as a number. Additionally, we set the read and write capacity units to 1 each (provisioned throughput).
+In the resources section you define a DynamoDB table resource with the following attributes id as a string and timestamp as a number. Additionally, set the read and write capacity units to 1 each (provisioned throughput).
 
-Finally, we have an outputs section, which is used to display the endpoints of both Lambda functions. We will use those endpoints to trigger AWS Lambda functions.
+Finally, the outputs section is used to display the endpoints of both Lambda functions. You will use those endpoints to trigger AWS Lambda functions.
 
 ## handler.js
-You will now implement two AWS Lambda functions. Open the handler.js, and replace its contents with the following code:
+You will now implement two AWS Lambda functions. Open the `handler.js`, and replace its contents with the following code:
 
 ```JavaScript
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
@@ -239,16 +239,16 @@ imports the following components:
 * DynamoDBClient and DynamoDBDocumentClient: Used to interact with DynamoDB. The DynamoDBClient is the base client for AWS SDK operations, while DynamoDBDocumentClient provides a higher-level abstraction for working with documents in DynamoDB.
 * BatchWriteCommand and ScanCommand: Commands used to perform batch writes and scans on DynamoDB tables.
 
-Then, we have the following statements:
+Then, you have the following statements:
 ```JavaScript
 const client = new DynamoDBClient({ region: "us-east-1" });
 const dynamoDb = DynamoDBDocumentClient.from(client);
 const tableName = process.env.DYNAMODB_TABLE;
 ```
 
-These statements initialize a new DynamoDBClient targeting the us-east-1 AWS region, create a DynamoDBDocumentClient from the base DynamoDBClient to work with DynamoDB documents. The final statement fetches the table name from the environment variable DYNAMODB_TABLE. This variable is set automatically by the Serverless Framework, when we deploy the resources (it comes from the serverless.yml)
+These statements initialize a new DynamoDBClient targeting the us-east-1 AWS region, create a DynamoDBDocumentClient from the base DynamoDBClient to work with DynamoDB documents. The final statement fetches the table name from the environment variable DYNAMODB_TABLE. This variable is set automatically by the Serverless Framework, when you deploy the resources (it comes from the serverless.yml)
 
-Then, there is a definition of the writeTemperatures function: 
+Next, there is a definition of the `writeTemperatures` function: 
 ```JavaScript
 export const writeTemperatures = async (event) => {
   const records = [];
@@ -297,9 +297,9 @@ The purpose of the above function is to write 20 random temperature records (in 
 * timestamp - the current time in milliseconds.
 * temperature - a random fractional value between 20 and 50.
 
-Then, the function uses BatchWriteCommand to send the records to the table. Also it catches and returns errors with an appropriate HTTP status code.
+Then, the function uses `BatchWriteCommand` to send the records to the table. Also it catches and returns errors with an appropriate HTTP status code.
 
-The second function, getAverageTemperature is defined as follows:
+The second function, `getAverageTemperature` is defined as follows:
 ```JavaScript
 export const getAverageTemperature = async (event) => {
   const N = 10;
@@ -332,7 +332,7 @@ export const getAverageTemperature = async (event) => {
   }
 };
 ```
-The getAverageFunction retrieves the last 10 temperature records and calculates their average. To do so, the function uses the ScanCommand to fetch items from the table, limiting to 10 records. The retrieved records are mapped to extract temperatures, and then the function calculates the average using the reduce JavaScript function. The getAverageTemperature returns the average temperature in the response body. Similarly, as write writeTemperatures, the function catches errors and returns an appropriate HTTP status code.
+The `getAverageFunction` retrieves the last 10 temperature records and calculates their average. To do so, the function uses the `ScanCommand` to fetch items from the table, limiting to 10 records. The retrieved records are mapped to extract temperatures, and then the function calculates the average using the reduce JavaScript function. The `getAverageTemperature` returns the average temperature in the response body. 
 
 The above code demonstrates a common pattern in serverless applications, where functions interact with AWS services like DynamoDB to store and retrieve data.
 
@@ -348,4 +348,4 @@ The "type": "module" field in the package.json file is necessary when using ES M
 1. To enable ES Module Syntax. By default, Node.js treats files as CommonJS modules. The "type": "module" declaration in package.json tells Node.js to interpret .js files as ES Modules. This allows you to use modern JavaScript features such as import and export statements, which are part of the ES Module specification.
 2. To enable compatibility with AWS Lambda. AWS Lambda supports Node.js runtimes that can interpret both CommonJS and ES Modules. However, to use ES Module syntax directly, you need to explicitly set the module type in your package.json. Without "type": "module", Node.js will throw errors if you try to use import and export syntax, as it defaults to CommonJS which uses require and module.exports.
 
-We are now ready to deploy the serverless application.
+You are now ready to deploy the serverless application.
