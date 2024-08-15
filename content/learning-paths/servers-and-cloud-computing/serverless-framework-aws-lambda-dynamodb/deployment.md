@@ -59,5 +59,5 @@ To clean up the resources you created you can use a single command:
 serverless remove
 ```
 
-## Summary
+### Summary
 In this Learning Path, you built a complete serverless application using the Serverless Framework, configured AWS resources, deployed Lambda functions, and ensured proper management and accessibility of the services. This workflow demonstrates how serverless architecture can simplify the deployment and scaling of cloud applications, allowing developers to focus on business logic rather than infrastructure management.
