@@ -1,5 +1,5 @@
 ---
-title: Deploy and integrate AWS Lambda with DynamoDB using Serverless Framework
+title: Deploy and integrate AWS Lambda with DynamoDB using the Serverless Framework
 
 minutes_to_complete: 30
 
