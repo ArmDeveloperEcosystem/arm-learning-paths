@@ -8,7 +8,7 @@ weight: 3
 
 VP9 is a next-generation video compression format developed by the [WebM Project](https://www.webmproject.org/).
 
-The reference software implementation for VP9 encoding and decoding can be found in the `libvpx` library. Similar to our efforts around AV1, Arm has invested significant effort to optimize the `libvpx` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms. You can learn more on [Google for Developers](https://developers.google.com/media/vp9).
+The reference software implementation for VP9 encoding and decoding can be found in the `libvpx` library. Similar to AV1, significant effort has been made to optimize the `libvpx` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms. You can learn more on [Google for Developers](https://developers.google.com/media/vp9).
 
 ## Download and build libvpx from source
 
