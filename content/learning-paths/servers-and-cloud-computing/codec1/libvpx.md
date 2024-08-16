@@ -134,11 +134,10 @@ For high bit depth run:
 
 The encoding frame rate (frames per second) for the video files is output at the end of each run.
 
-Shown below is example output from running the `libvpx` codec on the 8-bit FHD sample video file with different --cpu-used settings to compare the encoding time.
+Shown below is the example output from running the `libvpx` codec on the 8-bit FHD sample video file with different --cpu-used settings to compare the encoding time.
 
-As demonstrated in these examples, --cpu-used=6 is 30% faster than --cpu-used=2.
+The output from running the codec with `--cpu-used=2` is similar to:
 
---cpu-used=2
 ```output
 Pass 1/2 frame  175/174    37584B 7956010 us 22.00 fps [ETA  0:00:00] Error reading Y4M frame data.
 Pass 1/2 frame  175/176    38016B    1737b/f   52136b/s 8002966 us (21.87 fps)
@@ -146,10 +145,11 @@ Pass 2/2 frame  175/150   177340B   35578 ms 4.92 fps [ETA  0:00:05]     213FErr
 Pass 2/2 frame  175/151   177553B   35715 ms 4.90 fps [ETA  0:00:05]     272F    213F    212F    224F    205F    183F    164F    160F    146F     52F   4604F    27Pass 2/2 frame  175/175   186760B    8537b/f  256128b/s   29706 ms (5.89 fps)
 ```
 
---cpu-used=6
+The output from running the codec with `--cpu-used=6` is similar to:
 ```output
 Pass 1/2 frame  175/174    37584B 7975777 us 21.94 fps [ETA  0:00:00] Error reading Y4M frame data.
 Pass 1/2 frame  175/176    38016B    1737b/f   52136b/s 8022443 us (21.81 fps)
 Pass 2/2 frame  175/150   189400B   27014 ms 6.48 fps [ETA  0:00:04]     227FError reading Y4M frame data.
 Pass 2/2 frame  175/151   189627B   27048 ms 6.47 fps [ETA  0:00:04]     252F    209F    226F    215F    210F    197F    180F    171F    158F     49F   5257F    16Pass 2/2 frame  175/175   199034B    9098b/f  272960b/s   20373 ms (8.59 fps)
 ```
+As demonstrated in these examples, `--cpu-used=6` is 30% faster than `--cpu-used=2`.
