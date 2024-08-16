@@ -153,7 +153,7 @@ You can do the same for high bit depth:
 
 ### Live-stream video encoding
 
-For live-stream encoding you can experiment different number of processors and monitor performance using the `--cpus-used` in the range from 5 to 9. 
+For live-stream encoding you can experiment with different number of processors and monitor performance using the `--cpus-used` flag, varying the range from 5 to 9. 
 
 For standard bit depth with 8 CPUs run:
 
@@ -171,22 +171,25 @@ For high bit depth run:
 
 The encoding frame rate (frames per second) for the video files is output at the end of each run.
 
-Shown below is example output from running the `libxaom` codec on the 8-bit FHD sample video file with different --cpu-used settings to compare the encoding time.
+Shown below is example output from running the `libxaom` codec on the 8-bit FHD sample video file with different `--cpu-used` settings to compare the encoding time.
 
-As demonstrated in these examples, --cpu-used=6 is significantly faster than --cpu-used=2, by a factor of 2 to 10.
-
---cpu-used=2
-```output
+First, run the codec with `--cpu-used=2`:
+```bash
 ./aomenc --good --cpu-used=2 --bit-depth=8 -o output_cpu_used_2.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
-
+```
+ The output is similar to:
+```output
 Pass 1/2 frame  600/601   139432B    1859b/f   55770b/s   62641 ms (9.58 fps)
 Pass 2/2 frame  600/600   638429B    8512b/f  255360b/s 1103538 ms (0.54 fps)
 ```
 
---cpu-used=6
-```output
+Now, run the codec with `--cpu-used=6`:
+```bash
 ./aomenc --good --cpu-used=6 --bit-depth=8 -o output_cpu_used_6.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
-
+```
+The output is similar to:
+```output
 Pass 1/2 frame  600/601   139432B    1859b/f   55770b/s   17500 ms (34.28 fps)
 Pass 2/2 frame  600/600   637902B    8505b/f  255150b/s  103754 ms (5.78 fps)
 ```
+As demonstrated in these examples, `--cpu-used=6` is significantly faster than `--cpu-used=2`, by a factor of 2 to 10.
