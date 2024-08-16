@@ -73,7 +73,7 @@ Note: This is test shard 1 of 10.
 
 ## Performance Benchmarking
 
-Since the majority of developers on Arm servers come from the encoding field, let's focus on explaining this aspect in the following sections.
+You can benchmark either the encoding or decoding processes. In this section, you will focus on encoding. 
 
 For Performance benchmarking, you can select video encoding either on-demand or live-stream.
 
