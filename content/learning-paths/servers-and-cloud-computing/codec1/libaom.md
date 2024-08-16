@@ -8,7 +8,7 @@ weight: 2
 
 AV1 is an open video compression format from the [Alliance for Open Media (AOM)](https://aomedia.org/). 
 
-The reference software implementation for AV1 encoding and decoding can be found in the `libxaom` library. Similar to our efforts around VP9, Arm has invested significant effort to optimize the `libxaom` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms.  The optimized code is available on [Google Git](https://aomedia.googlesource.com/aom/).
+The reference software implementation for AV1 encoding and decoding can be found in the `libxaom` library. Significant efforts have been made to optimize the `libxaom` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms.  The optimized code is available on [Google Git](https://aomedia.googlesource.com/aom/).
 
 ## Install the necessary software packages
 
