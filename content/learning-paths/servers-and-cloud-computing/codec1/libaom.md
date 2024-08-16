@@ -131,7 +131,7 @@ For on-demand encoding you can experiment different number of processors and mon
 For example, run with `--good` and use the `--cpu-used` argument to vary video quality/compression options from 2 to 6.
 
 {{% notice Note %}}
-The naming of `--cpu-used` flag is to trade off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality and longer encoding time.
+The `--cpu-used` flag is used to trade off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality and longer encoding time.
 {{% /notice %}}
 
 Run standard bit depth and change the CPU count and see the results using:
