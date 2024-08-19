@@ -1,7 +1,7 @@
 name: Test Learning Path
 on: push
 jobs:
-  Test-Suite:
+  Test-Pull-Request:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -9,6 +9,12 @@ jobs:
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v44
+        with:
+          # Check only Markdown files
+          files: |
+             **.md
+      - name: Install dependencies
+        run: pip install -r tools/requirements.txt
       - name: Run test suite for all changed files
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
