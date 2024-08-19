@@ -142,4 +142,29 @@ CPU_CYCLES,STALL_FRONTEND,STALL_BACKEND
 1285367,68386,278994
 ```
 
-The next section explains how to instrument multiple sections of code. 
+## Collect data for all bundles
+
+You can quickly collect the data for all bundles by passing 
+
+Save the code below in a file named `run.sh`.
+
+```console
+#!/bin/bash
+
+for i in {0..14}
+do
+  echo $i
+  sudo ./test1 $i
+done
+```
+
+Run the script:
+
+```console
+bash ./run.sh
+```
+
+All 15 of the bundle CSV files are generated. 
+
+Next, learn how you can visualize the data.
+
