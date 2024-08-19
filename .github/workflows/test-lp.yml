@@ -6,18 +6,18 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Get changed files
-        id: changed-files
+      - name: Get all changed markdown files
+        id: changed-markdown-files
         uses: tj-actions/changed-files@v44
         with:
-          # Check only Markdown files
+          # Avoid using single or double quotes for multiline patterns
           files: |
              **.md
+
       - name: Install dependencies
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
+
       - name: Run test suite for all changed files
-        if: steps.changed-files-specific.outputs.any_changed == 'true'
-        env:
-          ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
-        run: ./.github/workflows/test_lp.sh ${ALL_CHANGED_FILES}
+        if: steps.changed-markdown-files.outputs.any_changed == 'true'
+        run: ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }}
