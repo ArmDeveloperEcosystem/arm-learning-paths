@@ -14,8 +14,10 @@ jobs:
           files: |
              **.md
       - name: Install dependencies
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
       - name: Run test suite for all changed files
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
         env:
           ALL_CHANGED_FILES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: ./.github/workflows/test_lp.sh ${ALL_CHANGED_FILES}

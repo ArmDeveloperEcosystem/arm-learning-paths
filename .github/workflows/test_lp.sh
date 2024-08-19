@@ -1,10 +1,10 @@
 ALL_CHANGED_FILES=$@
 
-echo "All changed content paths:       ${ALL_CHANGED_FILES}"
 
 # Install dependencies and run tests,
 # if we found tests to run
-if [ ${#ALL_CHANGED_FILES[@]} -ne 0 ]; then
+if [ -z "${ALL_CHANGED_FILES[@]}" ]; then
+   echo "All changed content paths:       ${ALL_CHANGED_FILES}"
    # Keep full paths for install guides,
    # get parent directory for learning paths
    CONTENT_PATHS=()
