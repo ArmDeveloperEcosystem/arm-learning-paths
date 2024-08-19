@@ -1,5 +1,5 @@
 name: Test Learning Path
-on: push
+on: pull_request
 jobs:
   Test-Pull-Request:
     runs-on: ubuntu-latest
