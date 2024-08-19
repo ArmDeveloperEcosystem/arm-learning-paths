@@ -8,7 +8,7 @@ weight: 3
 
 VP9 is a next-generation video compression format developed by the [WebM Project](https://www.webmproject.org/).
 
-The reference software implementation for VP9 encoding and decoding can be found in the `libvpx` library. Similar to our efforts around AV1, Arm has invested significant effort to optimize the `libvpx` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms. You can learn more on [Google for Developers](https://developers.google.com/media/vp9).
+The reference software implementation for VP9 encoding and decoding can be found in the `libvpx` library. Similar to AV1, significant effort has been made to optimize the `libvpx` implementation on Arm platforms. This includes making use of the Neon and SVE2 vector extensions available on Arm Neoverse platforms. You can learn more on [Google for Developers](https://developers.google.com/media/vp9).
 
 ## Download and build libvpx from source
 
@@ -73,7 +73,7 @@ Note: This is test shard 1 of 10.
 
 ## Performance Benchmarking
 
-Since the majority of developers on Arm servers come from the encoding field, let's focus on explaining this aspect in the following sections.
+You can benchmark either the encoding or decoding processes. In this section, you will focus on encoding. 
 
 For Performance benchmarking, you can select video encoding either on-demand or live-stream.
 
@@ -134,17 +134,19 @@ For high bit depth run:
 
 The encoding frame rate (frames per second) for the video files is output at the end of each run.
 
-Shown below is example output from running the `libvpx` codec on the 8-bit FHD sample video file with different --cpu-used settings to compare the encoding time.
+Shown below is the example output from running the `libvpx` codec on the 8-bit FHD sample video file with different --cpu-used settings to compare the encoding time.
 
-As demonstrated in these examples, --cpu-used=6 is 30% faster than --cpu-used=2.
+The output from running the codec with `--cpu-used=2` is similar to:
 
 --cpu-used=2
-```outputPass 1/2 frame  600/601   129816B    1730b/f   51926b/s   29485 ms (20.35 fps)
-Pass 2/2 frame  600/576   625752B  135883 ms 4.42 fps [ETA  0:00:05]     196F    260F    220F    227F    242F    166F     66F   4066F    316F    386F    337F    24Pass 2/2 frame  600/600   639729B    8529b/f  255891b/s  109980 ms (5.46 fps)
+```output
+Pass 1/2 frame  600/601   129816B    1730b/f   51926b/s   29486 ms (20.35 fps)
+Pass 2/2 frame  600/576   625752B  135925 ms 4.41 fps [ETA  0:00:05]     196F    260F    220F    227F    242F    166F     66F   4066F    316F    386F    337F    24Pass 2/2 frame  600/600   639729B    8529b/f  255891b/s  109956 ms (5.46 fps)
 ```
 
---cpu-used=6
-```output
+The output from running the codec with `--cpu-used=6` is similar to:
+```
 Pass 1/2 frame  600/601   129816B    1730b/f   51926b/s   29446 ms (20.38 fps)
 Pass 2/2 frame  600/576   629484B  101687 ms 5.90 fps [ETA  0:00:04]     344F    249F    215F    206F    195F    168F     70F   5095F    186F    230F    206F    21Pass 2/2 frame  600/600   643500B    8580b/f  257400b/s   74431 ms (8.06 fps)
 ```
+As demonstrated in these examples, `--cpu-used=6` is 30% faster than `--cpu-used=2`.
