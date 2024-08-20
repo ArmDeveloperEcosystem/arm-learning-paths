@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about how to deploy serverless applications using the Serverless Framework and AWS. 
+    You can continue learning about migrating applications to Arm. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb"
+recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
@@ -18,16 +18,16 @@ recommended_path: "/learning-paths/servers-and-cloud-computing/serverless-framew
 
 further_reading:
     - resource:
-        title: Serverless Framework
-        link: https://www.serverless.com
-        type: website
+        title: Terraform on Azure
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-terraform/
+        type: Tutorial
     - resource:
-        title: Serverless Framework documentation
-        link: https://www.serverless.com/framework/docs
-        type: Documentation
+        title: Azure Virtual Machines with Ampere Altra Arm–based processors—generally available
+        link: https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/
+        type: Blog
     - resource:
-        title: AWS Lambda
-        link: https://aws.amazon.com/lambda/
+        title: About Azure bastion
+        link: https://learn.microsoft.com/en-us/azure/bastion/bastion-overview
         type: Documentation
 
 

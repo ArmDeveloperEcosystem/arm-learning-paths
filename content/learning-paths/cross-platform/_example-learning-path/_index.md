@@ -25,6 +25,8 @@ armips:
     - All
 operatingsystems:
 tools_software_languages:
+    - Hugo
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

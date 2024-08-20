@@ -13,7 +13,7 @@ review:
 
     - questions:
         question: >
-            What is the serverless.yml file
+            What is the serverless.yml file?
         answers:
             - It includes the structure and configuration options for setting up a Serverless service
             - It provides AWS credentials            
@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            Is Serverless Framework compatible only with AWS?
+            Is the Serverless Framework compatible only with AWS?
         answers:
             - No
             - Yes
