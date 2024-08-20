@@ -1,6 +1,6 @@
 ---
 title: Implement Code level Performance Analysis using the PMUv3 plugin 
-draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: Engineers who want to carry out C/C++ performance analysis by instrumenting code at the block level.
