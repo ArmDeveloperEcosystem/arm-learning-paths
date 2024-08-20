@@ -69,7 +69,7 @@ source ~/.bashrc
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v0.1.9-alpha-aarch64/aperf /usr/local/bin 
+sudo cp aperf-v0.1.12-alpha-aarch64/aperf /usr/local/bin 
 ```
 
 Confirm `aperf` is installed by printing the version:
