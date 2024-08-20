@@ -19,7 +19,7 @@ The configurations below can be directly pasted into a `PostgreSQL` configuratio
 ### Connections and prepared transactions
 
 ```output
-max_connections = 1000    # Default 100
+max_connections = 1000             # Default 100
 max_prepared_transactions = 1000   # Default 0
 ```
 
@@ -29,7 +29,7 @@ Keep in mind that more client connections means more resources will be consumed 
 
 `max_prepared_transactions` is 0 by default. 
 
-This means that stored procedures and functions cannot be used out of the box. It must be enabled by setting `max_prepared_transactions` to a value greater than 0. If this is set to a number larger than 0, a good number to start with would be at least as large as `max_connections`.
+This means that stored procedures and functions cannot be used out of the box. It must be enabled by setting `max_prepared_transactions` to a value greater than 0. If this is set to a number larger than 0, a good number to start with would be at least as large as `max_connections`. In a test or development environment, it doesn't hurt to set it to an even larger value(10000) to avoid errors.
 
 Using procedures and functions can greatly improve performance. 
 
@@ -55,7 +55,7 @@ However, you can explicitly set it to `on` because errors will be produced if hu
 ### Processing and process count
 
 ```output
-deadlock_timeout = 10s    # Default is 1s
+deadlock_timeout = 10s                      # Default is 1s
 max_worker_processes = <num_system_cpus>    # Default is 8
 ```
 
@@ -67,13 +67,14 @@ max_worker_processes = <num_system_cpus>    # Default is 8
 
 ```output
 synchronous_commit = off    # Default is on
-max_wal_size = 20GB    # Default is 1GB
-wal_recycle = off    # Default is on
+max_wal_size = 20GB         # Default is 1GB
+min_wal_size = 1GB          # Default is 80MB
+wal_recycle = off           # Default is on
 ```
 
 If `synchronous_commit` is on (default), it tells the WAL processor to wait until more of the log is applied before reporting success to clients. Turning this off means that the PostgreSQL instance will report success to clients sooner. This will result in a performance improvement. It is safe to turn this off in most cases, but keep in mind that it will increase the risk of losing transactions if there is a crash. However, it will not increase the risk of data corruption.
 
-In high load scenarios, check pointing can happen very often. In fact, in testing with HammerDB, there may be so much check pointing that PostgreSQL reports warnings. One way to reduce how often check pointing occurs is to increase the `max_wal_size` of the WAL log. Setting it to 20GB can make the excessive check pointing warnings go away. 
+In high load scenarios, check pointing can happen very often. In fact, in testing with HammerDB, there may be so much check pointing that PostgreSQL reports warnings. One way to reduce how often check pointing occurs is to increase the `max_wal_size` of the WAL log. Setting it to 20GB can make the excessive check pointing warnings go away. `min_wal_size` can also be increased to help absorb spikes in WAL log usage under high load.
 
 `wal_recycle` does not impact performance. However, in scenarios where a large amount of data is being loaded (for example, restoring a database), turning this off will speed up the data load and reduce the chances of replication errors to occur if streaming replication is used.
 

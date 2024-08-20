@@ -12,13 +12,13 @@ The instrumentation scenarios are listed below, covering the most common situati
 
 So far you have the Linux kernel source tree and the PMUv3 plugin source code. 
 
-Next, create a third directory to learn how to integrate the PMUv3 plugin into an application.
+Next, create a third directory to learn how to integrate the PMUv3 plugin into an application as follows:
 
 ```console
 cd ../ ; mkdir test ; cd test
 ```
 
-The instructions assume you have all three directories in parallel. If you have a different directory structure you may need to adjust the build commands to find the header files and libraries. 
+The instructions assume you have all three directories in parallel. If you have a different directory structure, you may need to adjust the build commands to find the header files and libraries. 
 
 Here are the 3 directories you now have:
 
@@ -27,7 +27,6 @@ Here are the 3 directories you now have:
 ./PMUv3_plugin
 ./test
 ```
-
 You can use the test directory to try out the integration scenarios. 
 
 ## Instrumenting a single code block in C
@@ -42,7 +41,7 @@ The general process to instrument code includes the following steps:
 - Write the collected data to a CSV file by calling `post_process()` with the same bundle number
 - Clean up with `shutdown_resources()` 
 
-As an example, use a text editor to create a file `test1.c` in the `test` directory with the contents below.
+As an example, use a text editor to create a file `test1.c` in the `test` directory with the contents below:
 
 ```C
 #include <stdio.h>
@@ -103,10 +102,9 @@ int main(int argc, char **argv) {
     return EXIT_SUCCESS;
 }
 ```
-
 The include files and function calls are added in the code to provide the performance instrumentation.
 
-Build the application:
+Build the application as follows:
 
 ```console
 gcc -I ../linux/tools/lib/perf/include  -I ../PMUv3_plugin/ test1.c -o test1 -L ../PMUv3_plugin/  -lpmuv3_plugin_bundle -lperf -lapi -lm
@@ -118,7 +116,7 @@ Run the application and pass the bundle number of 4 (to capture stall informatio
 sudo ./test1 4
 ```
 
-The output prints:
+The output prints the following:
 
 ```output
 - running pmuv3_plugin_bundle.c...OK
@@ -135,11 +133,33 @@ Display the text file to see the contents:
 cat bundle4.csv
 ```
 
-The data shows the metrics on the first line and the values on the second line.
+The data shows the metrics on the first line and the values on the second line as shown below:
 
 ```output
 CPU_CYCLES,STALL_FRONTEND,STALL_BACKEND
 1285367,68386,278994
 ```
 
-The next section explains how to instrument multiple sections of code. 
+## Collect data for all bundles
+
+You can quickly collect the data for all bundles. Save the code below in a file named `run.sh`:
+
+```console
+#!/bin/bash
+
+for i in {0..14}
+do
+  echo $i
+  sudo ./test1 $i
+done
+```
+
+Run the script:
+```console
+bash ./run.sh
+```
+
+All 15 of the bundle CSV files have been generated. 
+
+Next, learn how you can visualize the data.
+

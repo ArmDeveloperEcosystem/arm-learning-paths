@@ -10,27 +10,27 @@ To get started, navigate to an empty directory on your Arm Linux computer and pr
 
 ## User space PMU access
 
-To use the PMUv3 plugin, you need permission to access to the performance counters from userspace applications. 
+To use the PMUv3 plugin, you need permission to access the performance counters from userspace applications. 
 
-To enable userspace access until the next reboot run:
+To enable userspace access until the next reboot, run the following:
 
 ```console
 sudo sysctl kernel/perf_user_access=1
 ```
 
-If access is allowed, the command output is:
+If access is allowed, the command output is as follows:
 
 ```output
 kernel.perf_user_access = 1
 ```
 
-You can check if userspace access is enabled any time by running:
+You can check if userspace access is enabled any time by running the following:
 
 ```console
 cat /proc/sys/kernel/perf_user_access
 ```
 
-A value of 1 means userspace access is enabled and value of 0 indicates disabled. 
+A value of 1 means userspace access is enabled and a value of 0 indicates that it's disabled. 
 
 To permanently change the value, add the following line to the file `/etc/sysctl.conf`:
 
@@ -40,7 +40,7 @@ kernel.perf_user_access = 1
 
 ## Directory structure
 
-The instructions assume you have the Linux kernel source tree, the PMUv3 plugin source code, and your test application in parallel. If you have a different directory structure you may need to adjust the build commands to find the header files and libraries. 
+The instructions assume you have the Linux kernel source tree, the PMUv3 plugin source code, and your test application in parallel. If you have a different directory structure, you may need to adjust the build commands to find the header files and libraries. 
 
 Here are the 3 directories you will create:
 
@@ -56,7 +56,7 @@ The PMUv3 plugin requires two Linux Perf related libraries.
 
 The easiest way to get them is to build them from the Linux source tree.
 
-Download the Linux source using the `git` command:
+Download the Linux source using the `git` command as follows:
 
 ```console
 git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
@@ -64,13 +64,13 @@ git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
 
 The Linux kernel repository is large so it will take some time to download. 
 
-Install the GNU compiler. If you are running on Ubuntu you can run:
+Install the GNU compiler. If you are running on Ubuntu, you can run the following:
 
 ```console
 sudo apt install build-essential -y
 ```
 
-When the Linux source download is complete, build the Perf libraries, `libperf.a` and `libapi.a`:
+When the Linux source download is complete, build the Perf libraries `libperf.a` and `libapi.a`:
 
 ```console
 pushd linux/tools/lib/perf
@@ -86,7 +86,7 @@ Get the PMUv3 plugin source code by running:
 git clone https://github.com/GayathriNarayana19/PMUv3_plugin.git
 ```
 
-Copy the Perf libs.
+Copy the Perf libs:
 
 ```console
 cd PMUv3_plugin
@@ -106,9 +106,9 @@ ar rcs libpmuv3_plugin_bundle.a pmuv3_plugin_bundle.o processing.o
 ar rcs libpmuv3_plugin_bundle.a pmuv3_plugin_bundle.o  processing_c.o
 ```
 
-To do the static library compilation, run ./build.sh from /home/ubuntu/ut_integration/PMUv3_plugin/directory.
-Run ./build.sh if you are going to instrument around a C++ codebase. If it is a C codebase, then comment line 19 of build.sh and uncomment line 20 and run ./build.sh
+To do the static library compilation, run `./build.sh` from **/home/ubuntu/ut_integration/PMUv3_plugin/directory**.
+Run `./build.sh` if you are going to instrument around a C++ codebase. If it is a C codebase, comment line 19 of `build.sh`, uncomment line 20, and run `./build.sh`.
 
-You are now ready to use the PMUv3 plugin in your software project. You need to add the library `-lpmuv3_plugin_bundle.a` to your C/C++ link command. You can use `-I` to point to the plugin include files and `-L` to point to the library location. 
+You are now ready to use the PMUv3 plugin in your software project. You will now need to add the library `-lpmuv3_plugin_bundle.a` to your C/C++ link command. You can use `-I` to point to the plugin files and `-L` to point to the library location. 
 
-Continue to see the options for instrumenting code.
+Continue to the next section see the options for instrumenting code.
