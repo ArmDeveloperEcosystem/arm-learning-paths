@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about migrating applications to Arm. 
+    You can continue learning about how to deploy serverless applications using the Serverless Framework and AWS. 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/migration/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb"
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
