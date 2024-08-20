@@ -14,7 +14,7 @@ Create code panes via horizontal tabs. Uses the 'prismjs-codeblock.html' partial
 <div class="normal-tabpane">
   <ads-horizontal-tabs class="normal-horizontal-tabs {{if $titles}}{{range $titles}} header-{{.}} {{end}}{{end}}" id="tabs-{{- $.Ordinal -}}" alt-emphasis="yes">
     {{- range $index, $element := $.Scratch.Get "tabs" -}}
-      <div slot="content" class="header-tab-{{urlize $element.header}}" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
+      <div slot="content" class="normal-tab header-tab-{{urlize $element.header}}" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
         {{ $element.content | markdownify }}
       </div>
     {{end}}

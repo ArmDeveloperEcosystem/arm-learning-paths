@@ -186,8 +186,7 @@ div.answer label {
     padding-left: 16px;
     padding-right: 16px;
     padding-bottom: 16px;
-}
-.normal-tabpane { 
+
     background-color:                                  var(--arm-color-surface);
     --ads-horizontal-tabs-navigation-background-color: var(--arm-color-surface); 
 }
@@ -199,21 +198,20 @@ div.answer label {
     --ads-horizontal-tabs-tab-color-hover: var(--arm-green);
     --ads-horizontal-tabs-tab-content-background-color: var(--arm-color-footing);
 }
-.normal-horizontal-tabs h2 {
-    margin-top: 8px!important;
-    
+
+.normal-horizontal-tabs table, .normal-horizontal-tabs p {
+    padding-top: 16px;
     padding-left: 16px;
     padding-right: 16px;
-}
-.normal-horizontal-tabs table {
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 16px;
 }
 .normal-horizontal-tabs table thead th {
     background-color: var(--arm-color-footing);
     color: var(--arm-light-grey);
 }
+.normal-horizontal-tabs table thead th, .normal-horizontal-tabs table tbody td {
+    border: 1px solid var(--arm-black);
+}
+
 
 
 /* Tags */

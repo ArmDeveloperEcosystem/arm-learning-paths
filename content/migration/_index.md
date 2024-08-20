@@ -22,71 +22,99 @@ csp_hardware:
 
 ## STEP 1: Learn and explore
 
-Before you start migrating applications, some background on Arm Neoverse is helpful.
+Arm Neoverse is a family of processor cores designed for servers and cloud data centers. There are 2 families of processors currently available, Neoverse V-series and Neoverse N-series.
 
 ### What is Arm Neoverse?
 
-Arm Neoverse is a family of processor cores designed for servers and cloud data centers. There are 2 families of processors currently available, Neoverse V-series and Neoverse N-series.
+Neoverse V-series offers the highest overall performance, and Neoverse N-series offers industry-leading performance-per-watt and serves a broad set of server and cloud use cases. Each Neoverse CPU implements a version of the [Arm architecture](https://www.arm.com/architecture/cpu). Arm continually works with partners to advance the architecture and increase computing capability. Neoverse cores generally focus on high per-socket performance and do not rely on multithreading or extreme clock speeds to provide predictable performance. 
 
-Neoverse V-series offers the highest overall performance, and Neoverse N-series offers industry-leading performance-per-watt and serves a broad set of server and cloud use cases. Each Neoverse CPU implements a version of the [Arm architecture](https://www.arm.com/architecture/cpu). Arm continually works with partners to advance the architecture and increase computing capability.
+Below is a list of Neoverse CPUs, the architecture versions, and key benefits for that CPU.
 
-Below is a list of Neoverse CPUs, the architecture versions, and examples of systems which use them. 
+| CPU         | Architecture version | Key features / benefits |
+| ----------- | -------------------- | --------------------------------------------------------- |
+| Neoverse N1 | Armv8.2-A            | SVE - Flexible vector processing for HPC and AI workloads |
+| Neoverse V1 | Armv8.4-A            | SVE - Flexible vector processing for HPC and AI workloads |
+| Neoverse V2 | Armv9.0-A            | SVE2 and security features such as MTE (Memory Tagging Extension) |
+| Neoverse N2 | Armv9.0-A            | Excellent security with Arm CCA (Confidential Compute Archtecture). |
 
+### What cloud hardware is availible today?
 
-
-| CPU         | Architecture version | Example Cloud processors                      |
-| ----------- | -------------------- | --------------------------------------------- |
-| Neoverse V1 | Armv8.4-A            | AWS Graviton3                                 |
-| Neoverse V2 | Armv9.0-A            | NVIDIA Grace, AWS Graviton4, Google Axion     |
-| Neoverse N1 | Armv8.2-A            | Ampere Altra, Oracle A1, AWS Graviton2        |
-| Neoverse N2 | Armv9.0-A            | Microsoft Cobalt                              |
-
+Click on each cloud service provider to see what Arm-based servers they offer with some helpful context.
 
 {{< tabpane-normal >}}
   {{< tab header="AWS">}}
-## AWS Arm Compute
 
-| AWS Product| Arm CPU | Abbreviation | Largest Instance  | Baremetal Option | Comments               |
-|----------------------|-|------------------|-----------------------|--------------|---------------------------------------|
-| **Graviton**  | Cortex-A72    | A1          | 16 CPUs, 32Gb RAM     | YES          | First public Arm-based server.             |
-| **Graviton2** | Neoverse-N1  | M6G, R6G    | 64 CPUs, 512Gb RAM    | YES          | 600% performance and efficiency increases. |
-| **Graviton3** | Cortex-A72   | A1          | 16 CPUs, 32Gb RAM     | YES          | First public Arm-based server.        |
-| **Graviton4** | Cortex-A72   | A1          | 16 CPUs, 32Gb RAM     | YES          | First public Arm-based server.        |
-  {{< /tab >}}
-  {{< tab header="GCP">}}
+The AWS Graviton server line offers instances as large as 64 vCPUs and 512 Gb of RAM in '16xlarge' formats. It also offers bare-metal instances (look for '.metal') for XYZ benefits. It offers compute for general-purpose workloads (M_g), memory-intensive workloads (R_g),  compute-intensive workloads (C_g).
 
-  {{< /tab >}}
-  {{< tab header="Oracle">}}
+| Generation    | Arm CPU      | Abbreviation   | Comments                                                                    |
+|---------------|--------------|----------------|-----------------------------------------------------------------------------|
+| **Graviton**  | Cortex-A72   | A1             | First public Arm-based server.                                              |
+| **Graviton2** | Neoverse-N1  | C6g, M6g, R6g  | 600% performance and efficiency increases.                                  |
+| **Graviton3** | Neoverse-V1  | C7g, M7g, R7g  | 25% performance increase, DDR5 memory added, 50% more memory bandwidth      |
+| **Graviton4** | Neoverse-V2  | R8g            | 75% more memory bandwidth, up to 40% faster for databases and 30% faster for web applications.   |
 
   {{< /tab >}}
+  {{< tab header="Microsoft Azure">}}
+The Microsoft Azure server line offers instances as large as 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
+
+| Generation    | Arm CPU      | Variations         | Comments  |  
+| --------------|--------------|--------------------|-----------|
+| **psv5**      | Neoverse-N1  | Dpsv5, Epsv5       | First pass |
+| **psv6**      | Neoverse-N2  | Dpsv6, Epsv6, Fsv6 | Offering improved performance over v5. |
+| **Cobalt**    | Neoverse-N2  | Cobalt 100         | 40% improved performance over v6 generation. |
+
+
+  {{< /tab >}}
+  {{< tab header="Google GCP">}} 
+The Google GCP server line offers instances as large as 80 vCPUs and 640 Gb of RAM in the 'c3a-highmem' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (standard) and memory-optimized workloads (highmem).
+
+| Generation    | Arm CPU      | Variations         | Comments  |  
+| --------------|--------------|--------------------|-----------|
+| **T2A**         | Neoverse-N1 | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
+| **C3A**         | Custom (AmpereOne)   | c3a-standard, c3a-highmem | Compute-optimized - large-scale databases, media transcoding, and HPC. |
+| **Axion (C4A)** | Neoverse-V2 | c4a-standard, c4a-highmem          | General-purpose and AI/ML workloads. |
+
+
+  {{< /tab >}}
+  {{< tab header="Oracle OCI">}} 
+The Oracle OCI server line offers instances as large as 160 vCPUs and 1024 Gb of RAM in the 'BM.Standard.A1' format. It offers bare-metal instances (look for 'BM' as opposed to 'VM'). It offers compute for general-purpose workloads (?), memory-optimized workloads (?),  compute-intensive workloads (?).
+
+| Generation    | Arm CPU      | Variations         | Comments  |  
+| --------------|--------------|--------------------|-----------|
+| **A1**    | Neoverse-N1          | VM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
+| **A2**    | Custom (AmpereOne)   | VM.Standard.A2, VM.Optimized3.A2 | This generation is tailored for high-performance and memory-intensive workloads. |
+
+  {{< /tab >}}
+
+  {{< tab header="NVIDIA">}} 
+
+| Generation    | Arm CPU      | Variations         | Comments  |  
+| --------------|--------------|--------------------|-----------|
+| **Grace Hopper**  | Neoverse-V2          | ?  | Delivers excellent ML performance. |
+
+  {{< /tab >}}
+
+
 {{< /tabpane-normal >}}
-
-
-
-
-Neoverse cores generally focus on high per-socket performance and do not rely on multithreading or extreme clock speeds to provide predictable performance. 
 
 Read [Get started with Servers and Cloud Computing](https://learn.arm.com/learning-paths/servers-and-cloud-computing/intro) to learn more where you can find Arm hardware in the cloud.
 
 ## STEP 2: Plan your transition
 
-Start your transition by researching your software requirements and identifying possible challenges.
+Newer software is  generally easier to migrate because Arm support continues to improve and  performance optimizations are typically better in newer versions of  software. Interpreted languages and Jit compilers, such as Python, Java, PHP, and Node.js are easiest to migrate. Compiled languages such as C/C++, Go, and Rust are slightly more difficult because they need to be recompiled. The most difficult situations involve a language, runtime, operating  system, or something else which is not available on Arm and would be  difficult to run on Arm.
+
+Make notes about operating  system versions, programming languages, development tools, container  tools, performance analysis tools, deployment tools, and any other  important scripts included in the project. Start with the [Migrating applications to Arm servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/) Learning Path to start your migration journey. It explains how to set  up a development machine, some migration challenges, and other tips for  different programming languages.
 
 ### Survey your software
+Depending on your situation, you may want to try the migration using a bottom-up approach or a top-down approach. The below graphic explains their differences and  advantages.
 
-[Migrating applications to Arm servers](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/) is a good place to start your migration journey. It explains how to set up a development machine, some migration challenges, and other tips for different programming languages. 
+![Top-down porting methodology#center](Top-down.png) 
 
-Make notes about operating system versions, programming languages, development tools, container tools, performance analysis tools, deployment tools, and any other important scripts included in the project.
 
-Newer software is generally easier to migrate because Arm support continues to improve and performance optimizations are typically better in newer versions of software. 
 
-Interpreted languages and Jit compilers, such as Python, Java, PHP, and Node.js are easiest to migrate. 
 
-Compiled languages such as C/C++, Go, and Rust are slightly more difficult because they need to be recompiled. 
+![Bottom-up porting methodology#center](Bottom-up.png) 
 
-The most difficult situations involve a language, runtime, operating system, or something else which is not available on Arm and would be difficult to run on Arm. 
-
-Depending on your situation, you may want to try the migration using a bottom-up approach or a top-down approach. A top-down example is to change the virtual machine instance types in your infrastructure-as-code to Arm instances, run the code, and debug as things fail. A bottom-up example is to to manually create an Arm virtual machine, pick out a part of your application or some of the dependencies, try to build and run on Arm, and slowly work up to running the complete application.
 
 ### Research dependencies
 
