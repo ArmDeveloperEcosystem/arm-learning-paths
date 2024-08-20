@@ -1,9 +1,9 @@
 ---
-title: Deploy and integrate AWS Lambda with DynnamoDB using Serverless Framework
+title: Deploy and integrate AWS Lambda with DynamoDB using the Serverless Framework
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for software developers interested in learning how to deploy serverless applications using Serverless Framework and Amazon Web Services. This Learning Path automates several manual deployment steps that developers typically need to perform, when deploying microservice-based or IoT applications.
+who_is_this_for: This learning path is for software developers interested in learning how to deploy serverless applications using the Serverless Framework and Amazon Web Services. It automates several manual deployment steps that developers typically need to perform when deploying microservice-based or IoT applications.
 
 learning_objectives: 
     - Create a multi-resource Serverless Framework solution.
