@@ -1,13 +1,24 @@
 ---
 title: "How can I migrate my applications to Arm?"
 layout: "migration"       # Easier for dynamic content loading, keep the same
+description: Software developers are embracing the Arm architecture for its superior price performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services. This three step migration guide covers the most common scenarios for adopting Arm. It also provides links to additional resources.
+
+csp_hardware:
+  - AWS:
+      Graviton:
+        Arm_CPU: "Cortex-A72"
+        Abbreviation: "A1"
+        Largest_instance: "16 CPUs, 32Gb RAM"
+        Baremetal: true
+        value_over_prev_gen: "-"
+      Graviton2:
+        Arm_CPU: "Neoverse-N1"
+        Abbreviation: "M6G, R6G"
+        Largest_instance: "64 CPUs, 512Gb RAM"
+        Baremetal: true
+        value_over_prev_gen: "600% performance and efficiency increases"
+
 ---
-
-Software developers are embracing the Arm architecture for its superior price performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. 
-
-To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services.
-
-This three step migration guide covers the most common scenarios for adopting Arm. It also provides links to additional resources.
 
 ## STEP 1: Learn and explore
 
@@ -21,12 +32,37 @@ Neoverse V-series offers the highest overall performance, and Neoverse N-series 
 
 Below is a list of Neoverse CPUs, the architecture versions, and examples of systems which use them. 
 
+
+
 | CPU         | Architecture version | Example Cloud processors                      |
 | ----------- | -------------------- | --------------------------------------------- |
 | Neoverse V1 | Armv8.4-A            | AWS Graviton3                                 |
 | Neoverse V2 | Armv9.0-A            | NVIDIA Grace, AWS Graviton4, Google Axion     |
 | Neoverse N1 | Armv8.2-A            | Ampere Altra, Oracle A1, AWS Graviton2        |
 | Neoverse N2 | Armv9.0-A            | Microsoft Cobalt                              |
+
+
+{{< tabpane-normal >}}
+  {{< tab header="AWS">}}
+## AWS Arm Compute
+
+| AWS Product| Arm CPU | Abbreviation | Largest Instance  | Baremetal Option | Comments               |
+|----------------------|-|------------------|-----------------------|--------------|---------------------------------------|
+| **Graviton**  | Cortex-A72    | A1          | 16 CPUs, 32Gb RAM     | YES          | First public Arm-based server.             |
+| **Graviton2** | Neoverse-N1  | M6G, R6G    | 64 CPUs, 512Gb RAM    | YES          | 600% performance and efficiency increases. |
+| **Graviton3** | Cortex-A72   | A1          | 16 CPUs, 32Gb RAM     | YES          | First public Arm-based server.        |
+| **Graviton4** | Cortex-A72   | A1          | 16 CPUs, 32Gb RAM     | YES          | First public Arm-based server.        |
+  {{< /tab >}}
+  {{< tab header="GCP">}}
+
+  {{< /tab >}}
+  {{< tab header="Oracle">}}
+
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
+
+
 
 Neoverse cores generally focus on high per-socket performance and do not rely on multithreading or extreme clock speeds to provide predictable performance. 
 
