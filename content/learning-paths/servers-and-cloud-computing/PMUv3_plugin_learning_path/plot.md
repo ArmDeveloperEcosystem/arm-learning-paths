@@ -37,7 +37,7 @@ Download the Python application code to plot and analyze results:
 git clone https://github.com/GayathriNarayana19/Performance_Analysis_Backend.git
 ```
 
-Copy the code below into a file named `config.yaml` in your `test/` directory which contains your CSV files.
+Copy the code below into a file named `config.yaml` in your `test/` directory which contains your CSV files:
 
 ```yaml
 base_dirs:
@@ -100,7 +100,7 @@ kpi_file_groups:
   - ["bundle8.csv", "bundle9.csv", "bundle14.csv"]
 ```
 
-Run the Python application to create the performance plots.
+Run the Python application to create the performance plots as follows:
 
 ```console
 python3 Performance_Analysis_Backend/PMUv3_Backend/pmuv3_plotting.py -config config.yaml
