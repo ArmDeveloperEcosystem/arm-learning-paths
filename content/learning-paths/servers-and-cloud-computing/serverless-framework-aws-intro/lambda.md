@@ -174,7 +174,7 @@ You will see the following output:
 }
 ```
 
-Finally, log into the AWS console. Change the region to us-east-1 (N. Virgina). Then, go to the Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
+Finally, log into the AWS console. Change the region to us-east-1 (N. Virginia). Then, go to the Lambda dashboard to see the deployed Lambda function. It will be named *AwsServerlessLambda-dev-hello*:
 
 ![fig1](figures/01.png)
 
