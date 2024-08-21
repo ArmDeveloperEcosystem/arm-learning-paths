@@ -204,6 +204,9 @@ div.answer label {
     padding-left: 16px;
     padding-right: 16px;
 }
+.normal-horizontal-tabs table{
+    padding-bottom: 8px;
+}
 .normal-horizontal-tabs table thead th {
     background-color: var(--arm-color-footing);
     color: var(--arm-light-grey);
