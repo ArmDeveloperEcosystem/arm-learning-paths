@@ -10,13 +10,13 @@ layout: learningpathall
 In this section you will deploy the resources you declared earlier.
 
 ### Deployment
-To deploy the resources open the terminal or command prompt and navigate to AwsServerlessDynamoDbLambda folder. Then invoke the following command:
+To deploy the resources, open the terminal or command prompt and navigate to AwsServerlessDynamoDbLambda folder. Then invoke the following command:
 
 ```console
 serverless deploy
 ```
 
-When you invoke the serverless deploy command, the Serverless Framework orchestrates a series of steps to deploy your serverless application to the specified cloud provider (e.g., AWS). Here’s a brief description of what happens during this process. The Serverless Framework validates your `serverless.yml` configuration file to ensure there are no syntax errors or missing information. Then, it compiles the service definition and resolves any variable references (e.g., environment variables, stage variables).
+When you invoke the serverless deploy command, the Serverless Framework orchestrates a series of steps to deploy your serverless application to the specified cloud provider (e.g., AWS). Here’s a brief description of what happens during this process. The Serverless Framework validates your `serverless.yml` configuration file to ensure there are no syntax errors or missing information. Then, it compiles the service definition and resolves any variable references (e.g., environment variables or stage variables).
 
 In the next step, the framework packages your application code, including all necessary dependencies, into a deployable artifact (e.g., a ZIP file). It respects any packaging configuration specified in the `serverless.yml`, such as including or excluding specific files or directories.
 
@@ -28,7 +28,7 @@ The Serverless Framework initiates the deployment process by executing the infra
 
 The cloud provider provisions the specified resources, such as Lambda functions, API Gateway endpoints, DynamoDB tables, S3 buckets, and any other services required by the application. IAM roles and permissions are configured to ensure that functions have the necessary access to interact with other resources.
 
-Once deployment is successful, the framework outputs relevant information such as API endpoints, function ARNs, and any other specified outputs defined in your `serverless.yml`. In this case, you will see the following
+Once deployment is successful, the framework outputs relevant information such as API endpoints, function ARNs, and any other specified outputs defined in your `serverless.yml`. In this case, you will see the following:
 
 ```output
 endpoints:
@@ -49,11 +49,11 @@ Then, you invoke the second function that retrieves the records and averages the
 curl <YOUR_URL_GOES_HERE>
 ```
 
-The output of the above commands should like in the figure below:
+The output of the above commands should be similar to the figure shown below:
 
 ![fig1](figures/01.png)
 
-To clean up the resources you created you can use a single command:
+To clean up the resources you created, you can use a single command:
 
 ```console
 serverless remove

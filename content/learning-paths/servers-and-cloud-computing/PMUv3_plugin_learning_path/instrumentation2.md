@@ -8,14 +8,13 @@ layout: learningpathall
 
 You can also instrument multiple sections of code. 
 
-
 ## Instrumenting multiple code blocks in C 
 
-The second scenario is to instrument a single section of code in C. 
+The next scenario is to instrument a single section of code in C. 
 
 The API is slightly different, but the concept is the same. 
 
-For multiple code segments the first two steps and cleanup are the same, but the start and stop functions are slightly different because they include markers to indicate which segment you are profiling.
+For multiple code segments the first two steps and cleanup are the same but the start and stop functions are slightly different because they include markers to indicate which segment you are profiling.
 
 Here are the steps for multiple segments:
 - Include 2 header files (same)
@@ -26,11 +25,11 @@ Here are the steps for multiple segments:
 - Write the collected data to a CSV file by calling `process_data()` with the same bundle number
 - Clean up with `shutdown_resources()` 
 
-You can repeat for additional segments, but getting the next segment number and using the start and stop functions again.
+You can repeat for additional segments by getting the next segment number and using the start and stop functions again.
 
-The example below collects separate for the `initialize_vectors()` function and the `calculate_result()` functions instead of collecting the data for both of them as in the previous example. 
+The example below collects the `initialize_vectors()` function and the `calculate_result()` functions separately instead of collecting the data for both of them as in the previous example. 
 
-Use a text editor to create a file `test2.c` in the test directory with the contents below.
+Use a text editor to create a file `test2.c` in the test directory with the contents below:
 
 ```C
 #include <stdio.h>
@@ -105,7 +104,7 @@ Build the application:
 gcc -I ../linux/tools/lib/perf/include  -I ../PMUv3_plugin/ test2.c -o test2 -L ../PMUv3_plugin/  -lpmuv3_plugin_bundle -lperf -lapi -lm
 ```
 
-Run the application and pass the bundle number of 3 (to capture stall information):
+Run the application and pass the bundle number of 3 (to capture the stall information):
 
 ```console
 sudo ./test2 3
