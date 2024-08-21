@@ -98,8 +98,8 @@ Close to save.
 
 ## main.c
 
-The project automatically creates `main.c` within the `Source Files` group. We will modify this in the next section.
+The project automatically creates `main.c` within the `Source Files` group. We will modify this in the [Writing assembly functions](..//coding/) section.
 
 {{% notice  Note%}}
-To skip μVision settings, go to [Writing assembly functions](..//coding/).
+`Next` button below goes to μVision settings. Go to [Writing assembly functions](..//coding/) to skip this section.
 {{% /notice %}}
