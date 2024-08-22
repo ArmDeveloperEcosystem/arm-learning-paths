@@ -7,6 +7,7 @@ import sys
 # Local import
 import report
 import parse
+import patch
 import check
 import filter_checker
 
@@ -48,7 +49,6 @@ def check_lp(lp_path, link, debug):
             article_per_weight = { i: parse.header(lp_path + "/" + i.replace("_cmd.json",""))["weight"] for i in l }
             # Sort dict by value
             test_image_results_list = []
-            results_list = []
             # sort LP by weight value to have it run sequentially
             for idx, i in enumerate(sorted(article_per_weight.items(), key=lambda item: item[1])):
                 logging.info("Checking " + i[0].replace("_cmd.json",""))
@@ -60,9 +60,8 @@ def check_lp(lp_path, link, debug):
                     launch = False
                 if i[1] != -1 and idx != len(article_per_weight.keys())-1:
                     terminate = False
-                test_image_results, result_str = check.check(lp_path + "/" + i[0], start=launch, stop=terminate, md_article=lp_path)
+                test_image_results = check.check(lp_path + "/" + i[0], start=launch, stop=terminate, md_article=lp_path)
                 test_image_results_list.append(test_image_results)
-                results_list.append(result_str)
 
             if not debug:
                 for i in os.listdir(lp_path):
@@ -72,7 +71,7 @@ def check_lp(lp_path, link, debug):
            logging.warning(f"Learning Path {lp_path} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
     else:
         logging.warning("No _index.md found in Learning Path")
-    return results_list
+    return test_image_results
 
 
 """
@@ -96,7 +95,6 @@ def main():
     arg_group.add_argument('-r', '--report', metavar='DAYS', action='store', type=int, default=1, help='List articles older than a period in days (default is 1). Output a CSV file. This option is used by default.')
 
     args = arg_parser.parse_args()
-    test_results = []
 
     if args.debug:
         verbosity = logging.DEBUG
@@ -105,9 +103,11 @@ def main():
     logging.debug("Verbosity level is set to " + level[verbosity])
 
     if args.instructions:
+        if not os.path.exists(args.instructions):
+            raise FileNotFoundError(f"No such file or directory: {args.instructions}")
+        results_dict = {}
         # check if article is a csv file corresponding to a file list
         if args.instructions.endswith(".csv"):
-            # TODO idea: separate parsing of CSV into list, run in same way as a single one passed
             logging.info("Parsing CSV " + args.instructions)
             with open(args.instructions) as f:
                 next(f) # skip header
@@ -115,8 +115,7 @@ def main():
                     fn = line.split(",")[0]
                     # Check if this article is a learning path
                     if "/learning-paths/" in os.path.abspath(fn):
-                        result_str = check_lp(fn, args.link, args.debug)
-                        test_results += result_str
+                        results_dict = check_lp(fn, args.link, args.debug)
                     elif fn.endswith(".md"):
                         logging.info("Parsing " + fn)
                         # check if maintenance if enabled
@@ -124,37 +123,40 @@ def main():
                             cmd = parse.parse(fn)
                             parse.save_commands_to_json(fn, cmd)
                             logging.info("Checking " + fn)
-                            results_dict, result_str = check.check(fn+"_cmd.json", start=True, stop=True, md_article=fn)
-                            test_results += [result_str]
+                            results_dict = check.check(fn+"_cmd.json", start=True, stop=True, md_article=fn)
                             if not args.debug:
                                 os.remove(fn+"_cmd.json")
                         else:
                             logging.warning(f"{fn} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
+                            sys.exit(0)
                     else:
                         logging.error("Unknown type " + fn)
         elif args.instructions.endswith(".md"):
             # Check if this article is a learning path
             if "/learning-paths/" in os.path.abspath(args.instructions):
-                result_str = check_lp(args.instructions, args.link, args.debug)
-                test_results += result_str
+                results_dict = check_lp(args.instructions, args.link, args.debug)
             else:
                 logging.info("Parsing " + args.instructions)
                 # check if maintenance if enabled
                 if parse.header(args.instructions)["test_maintenance"]:
                     cmd = parse.parse(args.instructions)
                     parse.save_commands_to_json(args.instructions, cmd)
-                    results_dict, result_str = check.check(args.instructions+"_cmd.json", start=True, stop=True, md_article=args.instructions)
-                    test_results += [result_str]
+                    results_dict = check.check(args.instructions+"_cmd.json", start=True, stop=True, md_article=args.instructions)
                     if not args.debug:
                         os.remove(args.instructions+"_cmd.json")
                 else:
                     logging.warning(f"{args.instructions} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
+                    sys.exit(0)
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
-            result_str = check_lp(args.instructions, args.link, args.debug)
-            test_results += result_str
+            results_dict = check_lp(args.instructions, args.link, args.debug)
+            if not args.debug:
+                os.remove(args.instructions+"_cmd.json")
         else:
             logging.error("-i/--instructions expects a .md file, a CSV with a list of files or a Learning Path directory")
-        if "failed" in test_results:
+        # If all test results are zero, all tests have passed
+        patch.patch(args.instructions, results_dict, args.link)
+        if not all(results_dict.get(k) for k in results_dict):
+            # Errors exist
             sys.exit(1)
     elif args.spelling:
         logging.info(f"Checking spelling of {args.spelling}")

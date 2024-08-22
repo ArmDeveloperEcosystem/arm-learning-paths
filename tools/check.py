@@ -185,6 +185,8 @@ def check(json_file, start, stop, md_article):
                 docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
                 subprocess.run(docker_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 logging.debug(docker_cmd)
+                # Remove file with list of commands
+                os.remove(test_cmd_filename)
 
                 test_type = test["type"]
                 # Check type
@@ -244,21 +246,10 @@ def check(json_file, start, stop, md_article):
                     logging.debug(f"{process_output}")
                 else:
                     logging.debug(f"{process_output}")
-                # Remove file with list of commands
-            os.remove(test_cmd_filename)
+
 
         result = "failed" if results[test_images[n_image]] else "passed"
         logging.info(f"Tests {result} on {test_image}")
-
-    # add to test suite and write junit results
-    ts = []
-    for n_instance in range(0, len(test_images)):
-        ts.append(TestSuite(f"{json_file} {test_images[n_instance]}", test_cases[n_instance]))
-        json_file_name = json_file.replace(".json", ".xml")
-
-    with open(json_file_name, mode='w') as lFile:
-        TestSuite.to_file(lFile, ts, prettyprint=True)
-        lFile.close()
 
     # Stop instance
     if stop:
@@ -275,4 +266,4 @@ def check(json_file, start, stop, md_article):
     else:
         logging.debug("Parameter stop is false, skipping container(s) termination")
 
-    return results, result
+    return results
