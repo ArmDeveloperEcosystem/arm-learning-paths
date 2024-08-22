@@ -1386,7 +1386,6 @@ vht
 fszI
 youtu
 NDK
-instrinsics
 dotProduct
 uint
 TextView
