@@ -38,8 +38,6 @@ It is also used for the creation and maintenance of such packs.
 
 Windows, Linux, and macOS host platforms are supported.
 
-The below assumes Ubuntu Linux on an Arm based host. Instructions are similar for other platforms.
-
 {{% notice Note %}}
 This install guide is for manual installation of `CMSIS-Toolbox`.
 
@@ -50,7 +48,7 @@ For automation instructions using `vcpkg` see [Install tools on the command line
 
 ## Dependencies
 
-You will need to install `cmake` and `ninja`:
+You will need to install `CMake` and `Ninja`:
 ```command
 sudo apt update
 sudo apt install cmake ninja-build -y
@@ -60,32 +58,51 @@ Check the versions of each tool:
 cmake --version
 ninja --version
 ```
-If `cmake` is earlier than `3.25.2`, or `ninja` is earlier than `1.10.2`, you will need to uninstall that version and install by other means:
+Ensure version of `CMake` is at least `3.25.2`, and `Ninja` is at least `1.10.2`.
 
-#### cmake
-```command
-sudo apt remove -y cmake
-sudo snap install cmake --classic
-```
-#### ninja
-```command
-sudo apt remove -y ninja-build
-wget http://mirror.archlinuxarm.org/aarch64/extra/ninja-1.11.1-3-aarch64.pkg.tar.xz
-sudo tar -xf ninja-1.11.1-3-aarch64.pkg.tar.xz -C /
-```
+You can also download installers for all supported hosts from the below:
+* [CMake](https://cmake.org/download/)
+* [Ninja](https://github.com/ninja-build/ninja/releases)
 
-## Download 
+## Download CMSIS-Toolbox
 
-Download and unpack the latest version of `CMSIS-Toolbox` from the [Keil Artifactory](https://artifacts.keil.arm.com/cmsis-toolbox/).
-
-Windows, Linux, and MacOS versions are available.
+Download and unpack the latest version of `CMSIS-Toolbox` from the [Arm Tools Artifactory](https://artifacts.tools.arm.com/cmsis-toolbox/).
 
 Full details of the contents is given in the [Releases area](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) of the GitHub repository.
 
-```console
-wget https://artifacts.keil.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-linux-arm64.tar.gz
+### Arm64 hosts
+
+{{< tabpane code=true >}}
+  {{< tab header="Windows" language="shell">}}
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-windows-arm64.zip
+tar -xf cmsis-toolbox-windows-arm64.zip
+  {{< /tab >}}
+  {{< tab header="Linux" language="shell">}}
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-linux-arm64.tar.gz
 tar -xf cmsis-toolbox-linux-arm64.tar.gz
-```
+  {{< /tab >}}
+  {{< tab header="macOS" language="shell">}}
+curl -L -o cmsis-toolbox-darwin-arm64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-darwin-arm64.tar.gz
+tar -xf cmsis-toolbox-darwin-arm64.tar.gz
+  {{< /tab >}}
+{{< /tabpane >}}
+
+### x86_64 hosts
+
+{{< tabpane code=true >}}
+  {{< tab header="Windows" language="shell">}}
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-windows-amd64.zip
+tar -xf cmsis-toolbox-windows-amd64.zip
+  {{< /tab >}}
+  {{< tab header="Linux" language="shell">}}
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-linux-amd64.tar.gz
+tar -xf cmsis-toolbox-linux-amd64.tar.gz
+  {{< /tab >}}
+  {{< tab header="macOS" language="shell">}}
+curl -L -o cmsis-toolbox-darwin-amd64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.5.0/cmsis-toolbox-darwin-amd64.tar.gz
+tar -xf cmsis-toolbox-darwin-amd64.tar.gz
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ## Install an appropriate compiler toolchain
 
@@ -110,16 +127,26 @@ Set environment variables as below. Note the exact name of the `TOOLCHAIN` varia
 | `PATH`                                     | Add CMSIS-Toolbox `bin` to path       | Also path to `CMake` and `Ninja` if necessary |
 
 For example:
-```command
+{{< tabpane code=true >}}
+  {{< tab header="Windows" language="shell">}}
+set AC6_TOOLCHAIN_6_22_0=%ProgramFiles%/ArmCompilerforEmbedded6.22/bin
+set CMSIS_PACK_ROOT=%LocalAppData%/Arm/Packs
+set CMSIS_COMPILER_ROOT=%UserProfile%/cmsis-toolbox-windows-amd64/etc
+set PATH=%PATH%;%UserProfile%/cmsis-toolbox-windows-amd64/bin
+  {{< /tab >}}
+  {{< tab header="Linux/macOS" language="shell">}}
 export AC6_TOOLCHAIN_6_22_0=$HOME/ArmCompilerforEmbedded6.22/bin
 export CMSIS_PACK_ROOT=$HOME/packs
 export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
 export PATH=$HOME/cmsis-toolbox-linux-arm64/bin:$PATH
-```
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Exact paths will depend on version installed and the install directory.
 
 ## Initialize CMSIS-Pack directory
 
-To get the latest available packs, run the following command.
+Run the following command to initialize the directory specified by `CMSIS_PACK_ROOT` above.
 ```command
 cpackget init https://www.keil.com/pack/index.pidx
 ```
@@ -140,26 +167,28 @@ Navigate to the `Hello` example:
 cd csolution-examples/Hello
 ```
 
-### Install CMSIS-Packs
-
-Determine and install the necessary `CMSIS-Packs`:
-
-```command
-csolution list packs -s Hello.csolution.yml -m > packs.txt
-cpackget add -f packs.txt
-```
-
 ### Build the solution
 
-Use the `cbuild` utility to build.
+Use the [cbuild](https://github.com/Open-CMSIS-Pack/cbuild) utility (a component of `CMSIS-Toolbox`) to build.
+
+Add `--packs` to the command line to download and install any necessary software packs not currently installed.
 
 ```command
-cbuild Hello.csolution.yml
+cbuild Hello.csolution.yml --packs
 ```
 
 The build will proceed and generate an executable image(s). You will see output similar to:
 
 ```output
+ARM::CMSIS@6.0.0
+ARM::CMSIS-Compiler@2.0.0
+ARM::CMSIS-RTX@5.8.0
+ARM::V2M_MPS3_SSE_300_BSP@1.5.0
+I: Downloading ARM.CMSIS.pdsc...
+I: Adding pack "ARM::CMSIS@6.0.0"
+I: Downloading ARM.CMSIS.6.0.0.pack...
+...
+...
 (1/2) Building context: "Hello.Debug+AVH"
 Building CMake target 'Hello.Debug+AVH'
 [1/31] Building C object CMakeFiles/Group_Main.dir/home/ubuntu/csolution-examples/Hello/main.o
