@@ -3,7 +3,7 @@ title: FlexNet Publisher Floating license setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/dui0209
 author_primary: Ronan Synnott
-weight: 5                 
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 tool_install: false             # Set to true to be listed in main selection page, else false
@@ -57,7 +57,7 @@ export ARMLMD_LICENSE_FILE=port@server
 
 The license can also be activated in the various Arm tool IDEs.
 
-For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager`.
+For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio), via `Help` > `Arm License Manager`.
 
 If `ARMLMD_LICENSE_FILE` is not set, use `Add` > `Add product license`, and specify `port` and `server` information for your license server.
 
