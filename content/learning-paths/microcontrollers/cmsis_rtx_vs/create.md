@@ -11,7 +11,7 @@ This learning path will introduce the steps to create a basic RTX based RTOS app
 
 For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
-You will use [Keil Studio for VS Code](/install-guides/keilstudio_vs) through this Learning Path.
+You will use [Keil Studio for VS Code](/install-guides/keilstudio_vs) in this Learning Path.
 
 This Learning Path is written for the supplied (Cortex-M4) Fixed Virtual Platform (FVP), however it could be run on any of the 10000+ devices supported by [CMSIS-Pack](https://www.open-cmsis-pack.org/).
 
