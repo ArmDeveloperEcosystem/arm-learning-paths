@@ -30,9 +30,9 @@ void app_main (void *argument) {
 ```
 ## Create threads
 
-You can now implement the functionality of the threads themselves. Start with a simple example... each thread will say hello, and then pause for a period, forever.
+You can now implement the functionality of the threads themselves. Start with a simple example. Each thread will say hello, and then pause for a period, forever.
 
-Click on the `+` icon within the `Source Files` Group, and add a new file `threads.c`. Populate with the below.
+Click on the `+` icon within the `Source Files` Group, and add a new file `threads.c`. Populate with the contents below.
 
 ```C
 #include "cmsis_os2.h"
