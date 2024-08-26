@@ -11,7 +11,11 @@ This learning path will introduce the steps to create a basic RTX based RTOS app
 
 For more information on the latest update, see the [CMSIS v6 is here](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/cmsis-v6-is-here) blog.
 
-You will primarily use [Keil MDK](/install-guides/mdk) through this Learning Path. If you are using [Arm Development Studio](/install-guides/armds) refer to the appropriate comments.
+You will use [Keil MDK](/install-guides/mdk) through this Learning Path. If you are using [Arm Development Studio](/install-guides/armds) refer to the appropriate comments.
+
+{{% notice  Note%}}
+If using `Arm Keil Studio for Visual Studio Code` please go to [Build an RTX5 RTOS application with Keil Studio (VS Code)](/learning-paths/microcontrollers/cmsis_rtx_vs/).
+{{% /notice %}}
 
 ## Install (update) to latest CMSIS Packs
 
@@ -19,7 +23,7 @@ Open the 'Pack installer' and install the latest CMSIS packs. At a minimum the f
 
 * `ARM::CMSIS`
 * `ARM::CMSIS-RTX`
-* 'ARM::CMSIS-View
+* `ARM::CMSIS-View`
 
 {{% notice  Arm Development Studio%}}
 Add required `CMSIS-Packs` via the `CMSIS Pack Manager` perspective.
@@ -79,9 +83,27 @@ Click `Options for Target`, to open that dialog. This is where build and other s
 
 ### Set FVP as debug target
 
-Navigate to the `Debug` tab, and select `Models Cortex-M Debugger` from the `Use` pull-down list.
 
-Click `Settings`, then the `Command` browse (`...`) button, to locate `VHT_MPS2_Cortex-M4.exe` within your Keil MDK installation (`ARM\VHT\` folder). Click `OK`.
+### Configure the FVP
+
+In the `Debug` tab, select `Models Cortex-M Debugger`. Click `Settings`, and browse for the FVP provided with MDK in the `Command` pane.
+```
+Keil_v5/ARM/avh-fvp/bin/models/FVP_MPS2_Cortex-M4_MDK.exe
+```
+
+{{% notice  Note%}}
+MDK versions 5.37 and earlier will find the FVP at:
+
+`Keil_v5/ARM/FVP/MPS2_Cortex-M/FVP_MPS2_Cortex-M4_MDK.exe`
+
+In 5.38 and 5.39 the FVP is installed at:
+
+`Keil_v5/ARM/VHT/VHT_MPS2_Cortex-M4_MDK.exe`
+
+In 5.40 and later the FVP is installed at:
+
+`Keil_v5/ARM/avh-fvp/bin/models/FVP_MPS2_Cortex-M4_MDK.exe`
+{{% /notice %}}
 
 {{% notice  Arm Development Studio%}}
 Ignore this step for now. Debug configuration will be set up later.

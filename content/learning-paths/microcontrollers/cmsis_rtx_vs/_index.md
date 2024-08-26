@@ -1,35 +1,31 @@
 ---
-title: Get started with the CMSIS-DSP library
+title: Build an RTX5 RTOS application with Keil Studio (VS Code)
 
-minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for software developers new to CMSIS-DSP.
+minutes_to_complete: 30
+
+who_is_this_for: This is an introductory topic for software developers new to RTOS development.
 
 learning_objectives: 
-    - Build a simple application using CMSIS-DSP library
-    - Compare relative performance on different processors
-#     - Build a CMSIS-DSP test suite on the Corstone-300 FVP
+    - Implement a basic RTOS-based application
 
 prerequisites:
-    - Some familiarity with embedded programming
-    - A host machine to run Keil MDK development tools
+    - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs)
+    - Some familiarity with CMSIS is assumed
 
 author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: Libraries
+subjects: RTOS Fundamentals
 armips:
     - Cortex-M
-    - Corstone
 operatingsystems:
-    - Baremetal
+    - RTOS
 tools_software_languages:
-    - Arm Virtual Hardware
-    - CMSIS
     - Coding
-    - Keil
-    - MDK
+    - RTX
+    - Keil MDK
     - Arm Development Studio
 
 ### FIXED, DO NOT MODIFY

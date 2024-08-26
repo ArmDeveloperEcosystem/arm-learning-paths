@@ -4,11 +4,11 @@
 # ================================================================================
 
 next_step_guidance: >
-    You can continue learning about other embedded applications that are available to run on Arm FVPs. The Learning Path on running TF-M tests is a great next step.
+   You have created a simple RTOS application using Keil RTX5. If you are interested in running Zephyr RTOS on Corstone-300 FVP, follow this recommended learning path:
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/microcontrollers/tfm/"
-# Link to the next learning path being recommended.
+recommended_path: "/learning-paths/microcontrollers/zephyr"
+# Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 
 
 # further_reading links to references related to this path. Can be:
@@ -18,14 +18,13 @@ recommended_path: "/learning-paths/microcontrollers/tfm/"
 
 further_reading:
     - resource:
-        title: CMSIS-DSP Documentation
-        link: https://arm-software.github.io/CMSIS_5/DSP/html/modules.html
+        title: CMSIS-RTOS2 Documentation
+        link: https://www.keil.com/pack/doc/CMSIS/RTOS2/html/index.html
         type: documentation
-#    - resource:
-#        title: CMSIS-DSP Testing Framework
-#        link: https://github.com/ARM-software/CMSIS-DSP/tree/main/Testing
-#        type: documentation
-
+    - resource:
+        title: Event Recorder and Component Viewer
+        link: https://www.keil.com/pack/doc/compiler/EventRecorder/html/index.html
+        type: documentation
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
