@@ -15,7 +15,8 @@ learning_objectives:
 
 ## Setting to draft = true to hide this LP. Can it be deleted? Replication of content in //asm.
 draft: true
-
+cascade:
+    draft: true
 
 prerequisites:
     - Keil MDK IDE
