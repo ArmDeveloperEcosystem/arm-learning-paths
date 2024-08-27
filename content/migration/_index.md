@@ -32,41 +32,38 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 
 | Generation    | Arm CPU      | Instance types | Comments                                                                    |
 |---------------|--------------|----------------|-----------------------------------------------------------------------------|
-| **Graviton**  | Cortex-A72   | A1             | First Arm-based instance.
-| **Graviton2** | Neoverse-N1  | C6g, M6g, R6g  | 600% performance and efficiency increases.                                  |
-| **Graviton3** | Neoverse-V1  | C7g, M7g, R7g  | 25% performance increase, DDR5 memory added, 50% more memory bandwidth.     |
-| **Graviton4** | Neoverse-V2  | R8g            | 75% more memory bandwidth, up to 40% faster for databases and 30% faster for web applications.   |
-
-  {{< /tab >}}
-  {{< tab header="Microsoft Azure">}}
-The Microsoft Azure server line offers instances as large as 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
-
-| Generation    | Arm CPU      | Instance types     | Comments  |  
-| --------------|--------------|--------------------|-----------|
-| **psv5**      | Neoverse-N1  | Dpsv5, Epsv5       | First pass |
-| **psv6**      | Neoverse-N2  | Dpsv6, Epsv6, Fsv6 | Offering improved performance over v5. |
-| **Cobalt**    | Neoverse-N2  | Cobalt 100         | 40% improved performance over v6 generation. |
-
+| Graviton  | Cortex-A72   | A1             | First Arm-based instance.
+| Graviton2 | Neoverse-N1  | C6g, M6g, R6g  | 600% performance and efficiency increases.                                  |
+| Graviton3 | Neoverse-V1  | C7g, M7g, R7g  | 25% performance increase, DDR5 memory added, 50% more memory bandwidth.     |
+| Graviton4 | Neoverse-V2  | R8g            | 75% more memory bandwidth, up to 40% faster for databases and 30% faster for web applications.   |
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
-The Google GCP server line offers instances as large as 80 vCPUs and 640 Gb of RAM in the 'c3a-highmem' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (standard) and memory-optimized workloads (highmem).
+Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The largest instance has 80 vCPUs and 640 Gb of RAM in the 'c3a-highmem' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (standard) and memory-optimized workloads (highmem).
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| **T2A**       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-| **C3A**       | AmpereOne    | c3a-standard, c3a-highmem   | Compute-optimized - large-scale databases, media transcoding, and HPC. |
-| **Axion (C4A)** | Neoverse-V2 | c4a-standard, c4a-highmem  | General-purpose and AI/ML workloads. |
+| T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
+| C3A       | AmpereOne    | c3a-standard, c3a-highmem   | Compute-optimized - large-scale databases, media transcoding, and HPC. |
+<!-- | Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem  | General-purpose and AI/ML workloads. | -->
 
+  {{< /tab >}}
+  {{< tab header="Microsoft Azure">}}
+Microsoft Azure offers a varity of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/dpsv5-dpdsv5-series). The largest instance has 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
+
+| Generation    | Arm CPU      | Instance types     | Comments  |  
+| --------------|--------------|--------------------|-----------|
+| psv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized intstances. |
+| psv6      | Neoverse-N2  | Dpsv6, Epsv6, Fsv6 | Cobalt processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized). |
 
   {{< /tab >}}
   {{< tab header="Oracle OCI">}} 
-The Oracle OCI server line offers instances as large as 160 vCPUs and 1024 Gb of RAM in the 'BM.Standard.A1' format. It offers bare-metal instances (look for 'BM' as opposed to 'VM'). 
+Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.com/cloud/compute/arm/) provides market-leading price-performance for AI, containers, big data, web services, and related workloads. The largest intsance has 160 vCPUs and 1024 Gb of RAM in the 'BM.Standard.A1' format. It offers bare-metal instances (look for 'BM' as opposed to 'VM'). 
 
 | Generation    | Arm CPU      | Instance types         | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| **A1**        | Neoverse-N1  | VM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
-| **A2**        | AmpereOne    | VM.Standard.A2, VM.Optimized3.A2 | Tailored for high-performance and memory-intensive workloads. |
+| A1            | Neoverse-N1  | VM.Standard.A1  | Offers predefined (.#CPUs) or dynamic OCPU and memory allocation (.Flex) |
+| A2            | AmpereOne    | VM.Standard.A2, VM.Optimized3.A2 | Tailored for high-performance and memory-intensive workloads. |
 
   {{< /tab >}}
 
