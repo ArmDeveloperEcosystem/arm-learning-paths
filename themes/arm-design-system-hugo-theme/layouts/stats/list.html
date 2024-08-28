@@ -251,7 +251,8 @@
                                         {{if eq $key "install-guides"}}
                                             {{$level_one_dir = "/"}}
                                         {{end}}
-                                        <a href="{{$level_one_dir}}{{$key}}/{{$name}}">{{$info.readable_title}}</a>
+                                        {{/* <a href="{{$level_one_dir}}{{$key}}/{{$name}}">{{$info.readable_title}}</a>  */}}
+                                        {{$info.readable_title}}
                                     </td>
                                     <td>
                                         <ul>

@@ -72,9 +72,15 @@ Calls to:
         <!-- {{ partial "general-formatting/guided-modules.html" . }}  -->
 
         <!-- Guided content for new starters -->
-        <div style="text-align: center; margin-top: -16px; padding-bottom: 16px;">
-            <a href="intro"><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
-        </div>
+            <!-- Don't load for cross platform or main page to avoid link htmltest issues -->
+        {{if ne "Cross Platform" .Title}}
+            {{if ne "learning-paths" (.Title | urlize)}}
+                <div style="text-align: center; margin-top: -16px; padding-bottom: 16px;">
+                    <a href="/learning-paths/{{.Title | urlize}}/intro/"><h6 class="basics-title">New? Learn the basics of {{.Title}}.</h6></a>
+                </div>
+            {{end}}
+        {{end}}
+        
 
         <!-- Mobile: Search & Filter -->
         {{ partial "filter-search-sort/mobile-search-and-filter.html" (dict "context" . "page_type" "learning-path-category")}} 

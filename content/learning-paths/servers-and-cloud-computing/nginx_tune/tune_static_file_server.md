@@ -110,4 +110,4 @@ server {
   * This directive sets up a cache that stores information on open file descriptors. This can significantly increase performance.
 * [`ssl_ciphers`](https://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_ciphers):
   * The cipher suite used for HTTPS can greatly impact performance. It is important to understand both the security and performance implications of the chosen cipher suite.
-  * The version of OpenSSL and how it was compiled can also impact the performance of the cipher suite. This was discussed in the [Kernel, compiler, and OpenSSL](../kernel_comp_lib) section of this learning path. 
+  * The version of OpenSSL and how it was compiled can also impact the performance of the cipher suite. This was discussed in the [Kernel, compiler, and OpenSSL](/learning-paths/servers-and-cloud-computing/nginx_tune/kernel_comp_lib/) section of this learning path. 

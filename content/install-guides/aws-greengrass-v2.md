@@ -112,13 +112,13 @@ Log in to the AWS console, set the AWS region you want to use in upper right cor
 
 You can find your account ID by clicking on your user name in the top-right corner of the AWS console. 
 
-![Role Permissions Editor #center](../_images/gg-role-permissions.png)
+![Role Permissions Editor #center](/install-guides/_images/gg-role-permissions.png)
 
 6. Name the new policy `GGDeploymentAccess`
 
 7. Back on the group creation page, click the refresh button then search for and select `GGDeploymentAccess` 
 
-![Group Policy Selection #center](../_images/gg-group-policy.png)
+![Group Policy Selection #center](/install-guides/_images/gg-group-policy.png)
 
 8. Click `Create user group`
 
@@ -132,7 +132,7 @@ You can find your account ID by clicking on your user name in the top-right corn
 
 13. Copy your `Access key` and `Secret access key`. 
 
-![Access Keys #center](../_images/gg-access-keys.png)
+![Access Keys #center](/install-guides/_images/gg-access-keys.png)
 
 You will use the credentials in the next section. 
 
@@ -210,6 +210,6 @@ You will see the new device listed in the Greengrass core devices.
 
 Click on the device name to see more device details. 
 
-![Greengrass Devices #center](../_images/greengrass-devices.png)
+![Greengrass Devices #center](/install-guides/_images/greengrass-devices.png)
 
 You are now ready to use AWS IoT Greengrass v2 on your device. 

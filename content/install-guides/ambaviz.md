@@ -41,7 +41,7 @@ It is available to download at the [Arm Product Download Hub](https://developer.
 
 You can download AMBA Viz as an individual standalone component, or you can download the complete Success Kits.
 
-For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
 ## Installation
 
@@ -73,7 +73,7 @@ docs/public/assets/pdfs/ambaviz-release-note.pdf
 
 AMBA Viz is license-managed. A Hardware Success Kit license is necessary.
 
-License set up instructions are available in the [Arm License install guide](../license/).
+License set up instructions are available in the [Arm License install guide](/install-guides/license/).
 
 ## Get started
 

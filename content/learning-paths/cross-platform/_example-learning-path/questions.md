@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 The search index is not automatically generated, but you can add it to enable the search box. 
 
-Refer to the information about the search box in the [Learning Path setup](../setup/#search) section.
+Refer to the information about the search box in the [Learning Path setup](/learning-paths/cross-platform/_example-learning-path/setup/#search) section.
 
 ### Why are my Learning Path pages in the wrong order?
 

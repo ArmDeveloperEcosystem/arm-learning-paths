@@ -30,7 +30,7 @@ Windows Sandbox is a lightweight, desktop environment from Microsoft that enable
 
 You can install Windows Sandbox on an Arm device running Windows 11, version 22H2, and later. 
 
-A number of developer-ready [Windows on Arm devices](../../learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
+A number of developer-ready [Windows on Arm devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
 ## Enable Virtualization
 
