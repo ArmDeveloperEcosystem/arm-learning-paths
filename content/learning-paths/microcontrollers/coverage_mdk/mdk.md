@@ -15,7 +15,7 @@ Code coverage can be performed on any project that runs on a suitable target. Yo
 
 ## Import and build the example project
 
-Open the uVision IDE, and then the Pack Installer.
+Open the uVision IDE, and click to open the Pack Installer ![Pack Installer Icon](images/b_uv4_packinst.png)
 
 In the `Devices` tree, select `ARM` > `ARM Cortex M3` > `ARMCM3` (use search text box if necessary).
 
@@ -27,7 +27,7 @@ Open the project in MDK, and build.
 
 By default, this project uses the legacy simulator provided with MDK, which does not support code coverage.
 
-To run on the FVP, open 'Options for Target...', navigate to `Debug` pane, and select `Models Cortex-M Debugger` from the `Use:` pull-down. Click `Settings`, and under `Command`, browse for one of the supplied FVPS in the `ARM\FVP\` folder of your MDK installation (eg `FVP_MPS2_Cortex-M3_MDK,exe`).
+To run on the FVP, open Options for Target ![Options for Target Icon](images/b_target_options.png), navigate to `Debug` pane, and select `Models Cortex-M Debugger` from the `Use:` pull-down. Click `Settings`, and under `Command`, browse for one of the supplied FVPS in the `ARM\FVP\` folder of your MDK installation (eg `FVP_MPS2_Cortex-M3_MDK.exe`).
 
 Specify a `Coverage File`, and enable `Load` and `Store` of that file. Because of the way that the data is created, code coverage cannot be updated in real-time.
 

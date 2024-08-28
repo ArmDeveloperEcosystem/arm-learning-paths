@@ -3,7 +3,7 @@ title: UBL LLS End-user setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/102516
 author_primary: Ronan Synnott
-weight: 3                       
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 tool_install: false             # Set to true to be listed in main selection page, else false
@@ -52,7 +52,7 @@ You can now [confirm your license has been checked out](#confirm).
 
 The license can also be activated in the various Arm tool IDEs.
 
-For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager` > `Manage Arm User-Based Licenses`.
+For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio), via `Help` > `Arm License Manager` > `Manage Arm User-Based Licenses`.
 
 Select `Activate with` > `License Server`, and enter the appropriate license server address. Click `Query` to see what license types are available, and select the appropriate one from the pull down. Click `Activate`.
 

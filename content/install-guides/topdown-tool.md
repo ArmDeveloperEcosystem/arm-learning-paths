@@ -29,11 +29,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 The Arm Telemetry Solution provides tools and data for performance analysis.
 
-The Arm Topdown Methodology specifies a set of metrics and steps to measure them using the Telemetry Solution. 
+The Arm Topdown Methodology specifies a set of metrics and steps to measure them using the Telemetry Solution.
 
-The Telemetry Solution requires Linux Perf to collect metrics. 
+The Telemetry Solution requires Linux Perf to collect metrics.
 
-The Telemetry Solution also includes data for defining PMU events, a test suite to stress CPU resources, and a tool to parse Statistical Profiling Extension (SPE) data for analysis. 
+The Telemetry Solution also includes data for defining PMU events, a test suite to stress CPU resources, and a tool to parse Statistical Profiling Extension (SPE) data for analysis.
 
 ## Before you begin
 
@@ -57,15 +57,16 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 Install Perf using the [Perf for Linux on Arm install guide](/install-guides/perf).
 
-3. Install Python 3 and pip 
+3. Install Python 3 and pip
 
-Python 3.7 or later and pip are required. 
+Python 3.7 or later and pip are required.
 
-Install these on your Linux distribution. 
+Install these on your Linux distribution.
 
 For Debian based distributions (including Ubuntu) run:
 
 ```bash { target="ubuntu:latest" }
+sudo apt update
 sudo apt install python3-pip python-is-python3 -y
 ```
 
@@ -80,11 +81,21 @@ cd telemetry-solution/tools/topdown_tool
 
 2. Install the `topdown-tool` executable:
 
-Install `topdown-tool` in `/usr/local/bin` using: 
+Install `topdown-tool` in `/usr/local/bin` using:
 
 ```console
-sudo pip3 install .
+pip3 install -e .
 ```
+
+{{% notice Note %}}
+If you are getting errors on the environment being externally managed, try creating a virtual environment.
+```
+sudo apt install python3-venv
+python3 -m venv topdown-venv
+source topdown-venv/bin/activate
+pip3 install -e .
+```
+{{% /notice %}}
 
 3. Confirm you can run `top-down` using the `version` command:
 
@@ -151,7 +162,7 @@ output options:
   --debug               enable debug output
 ```
 
-4. Test `topdown-tool` 
+4. Test `topdown-tool`
 
 {{% notice Note %}}
 You may need to enable access to the counters. More information about the options is in the [Linux Perf install guide](/install-guides/perf/).
@@ -177,5 +188,15 @@ Stage 1 (Topdown metrics)
 Frontend Stalled Cycles 57.67% cycles
 Backend Stalled Cycles. 21.06% cycles
 ```
+
+{{% notice Note %}}
+If you encounter the error `Could not detect CPU. Specify via --cpu`, you can check what CPUs are available, and pass it to the command.
+
+```console
+topdown-tool --list-cpus
+topdown-tool --cpu <cpu-name> -m Cycle_Accounting -a sleep 5
+
+```
+{{% /notice %}}
 
 Your output may be different, but if values are printed you are ready to apply the Arm Top Down methodology.

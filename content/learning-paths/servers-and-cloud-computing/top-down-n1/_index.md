@@ -12,7 +12,7 @@ learning_objectives:
     - Make an application code change and see improved performance
 
 prerequisites:
-    - An Arm Neoverse N1 computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but it may offer fewer counters and some commands might not succeed. 
+    - An Arm Neoverse N1 computer running Linux. A bare metal or cloud metal instance is best because they expose more counters. You can use a virtual machine (VM), but it may offer fewer counters and some commands might not succeed. These instructions have been tested on the `a1.metal` instance type.
 
 author_primary: Jason Andrews
 
@@ -23,8 +23,8 @@ armips:
     - Neoverse
 tools_software_languages:
     - perf
-    - Telemetry 
-    
+    - Telemetry
+
 operatingsystems:
     - Linux
 
