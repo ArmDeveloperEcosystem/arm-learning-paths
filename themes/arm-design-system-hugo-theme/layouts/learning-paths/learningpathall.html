@@ -70,6 +70,8 @@ Calls to:
         {{if .File}}
             {{ if eq .File.TranslationBaseName "_index" }}
                 {{partial "learning-paths/introduction" .  }}
+            {{else if eq .File.TranslationBaseName "_demo"}}
+                {{partial "learning-paths/demo" .  }}
             {{else if eq .File.TranslationBaseName "_review"}}
                 {{partial "learning-paths/review" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
             {{else if eq .File.TranslationBaseName "_next-steps"}}
@@ -80,8 +82,9 @@ Calls to:
         {{end}}
 
         <!-- Next steps for buttons -->
-        {{partial "navigation/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-
+        {{ if ne .File.TranslationBaseName "_demo"}}
+            {{partial "navigation/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+        {{end}}
     </div>
 </div>
 
