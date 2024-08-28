@@ -5,14 +5,14 @@ layout: "learningpathall"
 ---
 
 {{% notice Note %}}
-The hardware used in the white paper is the [Neoverse N1 Software Development Platform (N1SDP)](https://developer.arm.com/Tools%20and%20Software/Neoverse%20N1%20SDP). This hardware is different from Neoverse N1 servers and cloud instances so your results will be different. 
+The hardware used in the white paper is the [Neoverse N1 Software Development Platform (N1SDP)](https://developer.arm.com/Tools%20and%20Software/Neoverse%20N1%20SDP). This hardware is different from Neoverse N1 servers and cloud instances so your results will be different.
 
 You can also run this Learning Path on single board computers with the Cortex-A76 processors and the results will be closer to those in the white paper. Example boards include the [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/), [Khadas Edge2](https://www.khadas.com/edge2), and [Orange Pi 5](http://www.orangepi.org/html/hardWare/computerAndMicrocontrollers/details/Orange-Pi-5.html).
 
 The example output provided is from the Khadas Edge2, but yours will be different with different hardware.
 {{% /notice %}}
 
-The white paper explains the definitions of the metrics and the performance analysis results for the stride benchmark in more detail. The section below provides the collection commands and interpretation of the metrics in the same order as the white paper. 
+The white paper explains the definitions of the metrics and the performance analysis results for the stride benchmark in more detail. The section below provides the collection commands and interpretation of the metrics in the same order as the white paper.
 
 ## Workload characterization using counting
 
@@ -59,7 +59,7 @@ Instructions Per Cycle 0.224 per cycle
 
 ##### Front end and back end stall rate
 
-The next metrics are front end and back end stall rate. 
+The next metrics are front end and back end stall rate.
 
 To collect the stall information using `perf` run:
 
@@ -93,7 +93,7 @@ Frontend Stalled Cycles 0.00% cycles
 Backend Stalled Cycles. 84.38% cycles
 ```
 
-The metrics indicate the application is back end bound. 
+The metrics indicate the application is back end bound.
 
 According to the methodology the next step is to investigate L1 data cache and unified L2 and last level caches, instruction mix, and data TLB.
 
@@ -179,9 +179,9 @@ Branch Operations Percentage........ 20.00% operations
 Crypto Operations Percentage........ 0.00% operations
 ```
 
-The instruction mix shows 60% integer operations, 20% load operations, and 20% branches. 
+The instruction mix shows 60% integer operations, 20% load operations, and 20% branches.
 
-This suggests that the application is memory bound and would benefit from improved caching. 
+This suggests that the application is memory bound and would benefit from improved caching.
 
 The workload is not front end bound, but it is still useful to check the branch effectiveness as the instruction mix shows 20% branches.
 
@@ -203,7 +203,7 @@ Branch MPKI............... 0.002 misses per 1,000 instructions
 Branch Misprediction Ratio 0.000 per branch
 ```
 
-As expected, mispredicted branches are very low. 
+As expected, mispredicted branches are very low.
 
 ### Translation lookaside buffer (TLB)
 
@@ -251,9 +251,9 @@ L2 Unified TLB Miss Ratio 0.891 per TLB access
 
 Instruction TLB misses are very low as expected. Data TLB misses are higher. This suggests data-side page misses resulting in page table walks for some memory accesses.
 
-## Hot spot analysis using sampling 
+## Hot spot analysis using sampling
 
-To identify execution bottlenecks, use `perf record` to run with sampling. 
+To identify execution bottlenecks, use `perf record` to run with sampling.
 
 There are two ways to control the sampling rate:
 - counting events: record a sample every n number of events for a given event list
@@ -277,7 +277,7 @@ To record a sample every 100 last level cache misses run:
 perf record -e ll_cache_rd -c 100 ./stride
 ```
 
-Because the application runs in a tight loop the sampling frequency doesn't have any impact. 
+Because the application runs in a tight loop the sampling frequency doesn't have any impact.
 
 To view the recorded data use `perf report`:
 
@@ -297,7 +297,7 @@ You will see the source code of the `main` function with the percent of samples 
 
 ![main #center](report-3.png)
 
-All the samples are on `subs` instruction which is right after the load instruction which reads the array and causes the high cache miss rate. 
+All the samples are on `subs` instruction which is right after the load instruction which reads the array and causes the high cache miss rate. Press the `q` key to exit the report.
 
 The next section demonstrates an optimization to increase performance.
 
