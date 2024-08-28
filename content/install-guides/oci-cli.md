@@ -94,4 +94,4 @@ To locate your API KEYS open your profile and click API KEYS:
 
 ![oci2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/7844c9fa-7307-450e-82f4-90116fab6ece "Click add API key, from there generate your API key pair")
 
-After a successful log in, you can use the OCI CLI and automation tools like [Terraform](../terraform) from the terminal.
+After a successful log in, you can use the OCI CLI and automation tools like [Terraform](/install-guides/terraform/) from the terminal.

@@ -7,7 +7,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Now that you have seen an [Arm Streamline example capture](../streamline_example), you can use it to capture data from your own application.
+Now that you have seen an [Arm Streamline example capture](/learning-paths/smartphones-and-mobile/ams/streamline_example/), you can use it to capture data from your own application.
 
 ## Select the device and application in Streamline
 

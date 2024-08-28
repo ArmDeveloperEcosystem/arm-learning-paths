@@ -105,9 +105,9 @@ elapsed time: 28.926221
 
 Using `-O3` reduces the execution time by about 21%. This is good, but you might be expecting more. Checking the assembly output will tell you that it's not as good as you expected. 
 
-Check the [assembly output for -O2](../simulate_objects_O2.s). It doesn't show any SIMD instructions, which is expected with `-O2`.
+Check the [assembly output for -O2](/learning-paths/cross-platform/vectorization-friendly-data-layout/simulate_objects_O2.s). It doesn't show any SIMD instructions, which is expected with `-O2`.
 
-Now observe the [assembly output for -O3](../simulate_objects_O3.s) and in particular these lines:
+Now observe the [assembly output for -O3](/learning-paths/cross-platform/vectorization-friendly-data-layout/simulate_objects_O3.s) and in particular these lines:
 
 ```simulate2_objects_O3.s
      c48:       6ea0e4ea        fcmgt   v10.4s, v7.4s, v0.4s

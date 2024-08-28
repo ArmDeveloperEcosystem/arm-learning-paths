@@ -24,8 +24,8 @@ A number of example projects are also provided.
 
 See the below install guides for set up instructions:
 
-* [Keil Studio VS Code Extensions](../../../../install-guides/keilstudio_vs)
-* [Keil μVision](../../../../install-guides/mdk)
+* [Keil Studio VS Code Extensions](/install-guides/keilstudio_vs/)
+* [Keil μVision](/install-guides/mdk/)
 
 Install the appropriate IDE you wish to use.
 

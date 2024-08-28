@@ -57,7 +57,7 @@ These can either be used standalone or [integrated](#armds) into your Arm Develo
 
 See also: [What should I do if I want to download a legacy release of Arm Compiler?](https://developer.arm.com/documentation/ka005184)
 
-See [Arm Product Download Hub](../pdh) for additional information on usage.
+See [Arm Product Download Hub](/install-guides/pdh/) for additional information on usage.
 
 ### Install compiler packages
 
@@ -102,7 +102,7 @@ armclang --version
 
 ### Arm Tools Artifactory {#artifactory}
 
-The Arm Compiler for Embedded, as well as other tools and utilities are available in the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/). The Keil Studio VS Code [Extensions](../keilstudio_vs) use the artifactory to fetch and install and the necessary components.
+The Arm Compiler for Embedded, as well as other tools and utilities are available in the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/). The Keil Studio VS Code [Extensions](/install-guides/keilstudio_vs/) use the artifactory to fetch and install and the necessary components.
 
 Available packages can also be fetched directly from the artifactory. This is particularly useful for automated CI/CD flows.
 
@@ -121,7 +121,7 @@ export AC6_TOOLCHAIN_6_22_0=/home/$USER/ArmCompilerforEmbedded6.22/bin
 
 ## Set up the product license
 
-Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed. License setup instructions are available in the [Arm Licensing install guide](../license/).
+Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
 
 ## Verify installation
 

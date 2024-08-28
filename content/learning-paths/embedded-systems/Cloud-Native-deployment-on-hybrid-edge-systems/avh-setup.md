@@ -68,7 +68,7 @@ Extract the files to /usr/local/bin using:
 tar -C /usr/local/bin/ -xvf hybrid.tar.gz
 ```
 {{% notice Note %}}
-If you want to build the hybrid-runtime on your own, instructions can be found in the section of this learning path called [Building the hybrid-runtime and container image](../build-runtime/).
+If you want to build the hybrid-runtime on your own, instructions can be found in the section of this learning path called [Building the hybrid-runtime and container image](/learning-paths/embedded-systems/cloud-native-deployment-on-hybrid-edge-systems/build-runtime/).
 {{% /notice %}}
 
 ## Download Firmware container image

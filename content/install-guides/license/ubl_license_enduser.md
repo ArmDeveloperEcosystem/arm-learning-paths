@@ -13,7 +13,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 ## Local License Server
 
-A [Local License Server (LLS)](../ubl_license_admin) must first be set up by your license administration team.
+A [Local License Server (LLS)](/install-guides/license/ubl_license_admin/) must first be set up by your license administration team.
 
 {{% notice Notice%}}
 A Software Success Kit is a subset of a Hardware Success Kit.

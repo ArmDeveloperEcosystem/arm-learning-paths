@@ -19,7 +19,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 This install guide is for developers using Rust for their embedded applications. 
 
-If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](../rust) instead.
+If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](/install-guides/rust/) instead.
 
 This install guide describes a setup using an Ubuntu Linux host.
 

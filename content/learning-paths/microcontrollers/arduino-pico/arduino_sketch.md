@@ -20,7 +20,7 @@ This Learning Path provides a complete sketch that you can upload onto your Rasp
 
 First, open the sketch in the Arduino IDE:
 
-1. Right click and select `Save Link As` to save the [pir_sensor.ino](../pir_sensor_1.ino) sketch to your computer
+1. Right click and select `Save Link As` to save the [pir_sensor.ino](/learning-paths/microcontrollers/arduino-pico/pir_sensor_1.ino) sketch to your computer
 2. In the Arduino IDE, go to `File -> Open`
 3. Find and select the `pir_sensor.ino` file that you just downloaded to your computer and click `Open`
 
