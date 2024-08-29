@@ -20,7 +20,7 @@ Calls to:
 
     <div class="c-row u-gap-1/2 u-flex-nowrap">
         <!-- Left - Demo steps -->
-        <div class="c-col md:c-col-12 lg:c-col-6">
+        <div class="c-col md:c-col-12 lg:c-col-8">
             <h3>Running the Demo</h3>
             <ul>
             {{ range .Params.demo_steps }}
@@ -29,10 +29,19 @@ Calls to:
             </ul>
         </div>
         <!-- Right - Architecture Diagram -->
-        <div class="c-col lg:c-col-6 u-hide lg:u-display-block u-flex-shrink-0">
-            <div class="demo-test" style="margin-top: 16px;">
-                Architecture Diagram, expandable
-            </div>
+        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
+                <!-- modal setup -->
+                <ads-modal id="modal-diagram-expansion">
+                    <div slot="body">
+                        <div class="demo-pic-in-modal">
+                            <img src="/learning-paths/servers-and-cloud-computing/aaademo-chatbot-lp/arch_diagram.png" alt="Demo architecture diagram"> 
+                        </div>
+                    </div>
+                    <!-- Visible on main page -->
+                    <div slot="trigger" style="cursor: pointer;">
+                        <img id="modal-diagram-expansion-trigger" src="/learning-paths/servers-and-cloud-computing/aaademo-chatbot-lp/arch_diagram.png" alt="Demo architecture diagram" style=" max-width: 100%; height: auto;"> 
+                    </div>
+                </ads-modal>
         </div>        
     </div>
 
@@ -41,16 +50,122 @@ Calls to:
 
 
 <div class="content-box">
-    <h2>Demo and Stats</h2>
     <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
         <!-- Left - Demo -->
         <div class="c-col md:c-col-12 lg:c-col-9 lg:u-display-block ">
-            <p>demo goes here</p>
+            <h2>Demo</h2>
+            <div id="demo-container">
+                <div id="all-messages-div">
+
+                </div>
+                <div id="demo-actions">
+                    <div class="c-row">
+                        <div class="c-col" id="input-and-submit">
+                            <textarea id="user-input-for-demo" placeholder="enter info" rows="1"></textarea>
+                            <ads-button id="submit-button" level="primary">Submit</ads-button>
+                        </div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-col">
+                            <p id="reset-demo-txt">Reset chat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Right - Stats -->
         <div class="c-col lg:c-col-3 u-hide lg:u-display-block u-flex-shrink-0">
-            <p>Stats go here</p>
+            <h2>Stats</h2>
+            <p>Type a message to the chatbot to view metrics.</p>
         </div>        
     </div>
 
 </div>
+
+
+
+
+
+
+
+
+<script>
+    function insertRandomSentenceWithDelay(div) {
+        const sentences = [
+            "The quick brown fox jumps over the lazy dog.",
+            "A journey of a thousand miles begins with a single step.",
+            "To be or not to be, that is the question.",
+            "All that glitters is not gold.",
+            "The early bird catches the worm."
+        ];
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        const randomDelay = Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
+    
+        setTimeout(() => {
+            div.textContent = sentences[randomIndex];
+        }, randomDelay);
+    }
+    
+    
+</script>
+
+<script>
+    const message_history = document.querySelector('#all-messages-div');
+    const reset_demo_text = document.querySelector('#reset-demo-txt');
+    reset_demo_text.addEventListener('click', function() {
+        message_history.innerHTML = "";
+        // SEND FORGET MESSAGE TO API?
+    });
+
+
+    const textarea = document.querySelector('#user-input-for-demo');
+    textarea.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
+    });
+
+    const submit_button = document.querySelector('#submit-button');
+    submit_button.addEventListener('click', function() {
+        // Get initial vars
+        const all_messages_div = document.getElementById('all-messages-div');
+        const textarea_input = document.querySelector('#user-input-for-demo');
+        // Do something
+        console.log('clicked!', this);
+
+        // Get user's message
+        const user_input = textarea_input.value;
+        console.log(user_input);
+
+        // If blank, encourage an entry via placeholder and pulse
+        if (user_input === "") {
+            console.log('blank')
+        }
+        else {
+            // Clear message box
+            textarea_input.value = '';
+
+            // Add new chat message in UI
+            const user_div = document.createElement('div');
+            user_div.classList.add('user-message');
+            
+            user_div.textContent = user_input;
+            all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
+
+            // Trigger 'thinking response in chatbot'
+            const chatbot_div = document.createElement('div');
+            chatbot_div.classList.add('chatbot-message');
+
+            const new_loader = document.createElement('ads-loader');
+            new_loader.setAttribute('label', 'chatbot thinking');
+            
+            chatbot_div.appendChild(new_loader);
+            all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
+
+           // SEND MESSAGE TO API
+           insertRandomSentenceWithDelay(chatbot_div);
+
+        }
+
+
+    });
+</script>

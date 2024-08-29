@@ -1,6 +1,127 @@
-.demo-test {
-    background-color: darkblue;
+#demo-container {
+    background-color: #516170;
+    border: 5px solid #6B747D;
+
+    margin-top: 16px;
+
     min-width: 200px;
     min-height: 200px;
     text-align: center;
+}
+
+#modal-diagram-expansion {
+    --ads-modal-content-height: 3000px;
+    --ads-modal-content-max-height: 2000px;   
+}
+
+
+
+
+
+
+
+#all-messages-div {
+    height: 300px;
+    display: flex;
+    flex-direction: column-reverse;
+
+    overflow-y: auto;
+}
+
+
+
+
+
+
+
+#input-and-submit {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+#user-input-for-demo {
+    width: 100%;
+    flex-grow: 1;
+    padding: 10px;
+
+    color: black;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+    overflow: hidden;
+
+    font-family: (--ads-font-family);
+}
+#user-input-for-demo::placeholder {
+    color: darkgrey;
+
+    font-family: (--ads-font-family);
+}
+
+
+#submit-button {
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+
+
+#reset-demo-txt {
+    margin-top: 8px;
+    float: left;
+    color: var(--arm-light-blue);
+    text-decoration: underline;
+    cursor: pointer;
+}
+#reset-demo-txt:hover {
+    color: var(--arm-green);
+}
+
+.user-message {
+    background-color: #545454;
+    border-radius: 20px;
+    width: 70%;
+    align-self: flex-end; /* float right */
+
+    margin-right: 16px;
+    margin-bottom: 16px;
+
+    
+    padding: 8px;
+    padding-left: 16px;
+
+    /* text alignment */
+    text-align: left;
+    font-size: 18px!important;
+
+    /* Enable fade in */
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+
+.chatbot-message {
+    background-color: transparent;
+    border-radius: 20px;
+    width: 70%;
+    /*align-self: flex-end; */
+
+    margin-left: 16px;
+    margin-bottom: 16px;
+    
+    padding: 8px;
+    padding-left: 16px;
+
+    /* text alignment */
+    text-align: left;
+    font-size: 18px!important;
 }

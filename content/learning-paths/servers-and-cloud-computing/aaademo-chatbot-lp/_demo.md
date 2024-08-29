@@ -8,7 +8,7 @@ demo_steps:
   - View answer and result metrics to understand its performance.
   - Repeat steps 1-3 as desired. Results will update with each message.
 
-architecture_diagram: diagram.png
+architecture_diagram: arch_diagram.png
 
 configuration_popup_details: Super long list of configuration information to provide to the user. Should be context and all that to be crystal clear what the setup is.
 
