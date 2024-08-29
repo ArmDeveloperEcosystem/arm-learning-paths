@@ -7,21 +7,21 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-You are now ready to build and run the application.
+You are now ready to build and run your application.
 
 ## Build
 
-In the CMSIS Extension view,  save all files, and click the hammer icon to build the example.
+In the CMSIS Extension view,  save all your files. Then, click the hammer icon to build the example.
 
 ## Debug
 
-Click the `Debug` icon, or enter the `Run and Debug` extension view.
+To start debugging, click the `Debug` icon, or enter the `Run and Debug` extension view.
 
-Select the debug connection previously configured to launch the FVP.
+Choose the debug connection you configured earlier to launch the FVP (Fixed Virtual Platform).
 
-Use the controls to step through the code.
+Use the debugging controls to step through your code.
 
-Once the OS is initialized, the output from the threads is displayed in the `Debug Console`.
+Once the OS is initialized, you will see the output from the threads displayed in the `Debug Console`.
 
 ```
 [model] hello from thread 1
@@ -31,10 +31,10 @@ Once the OS is initialized, the output from the threads is displayed in the `Deb
 [model] hello from thread 2
 ...
 ```
-Click `Stop` (`Ctrl`+`F5`) to terminate the debug session.
+To end the debug session, click `Stop` or press `Ctrl`+`F5`.
 
 {{% notice  Note%}}
-For a more feature rich debug environment, it is recommended to use `Arm Keil μVision IDE`.
+For a more feature-rich debugging environment, consider using the `Arm Keil μVision IDE`.
 
-See [Build an RTX5 RTOS application with Keil μVision](/learning-paths/microcontrollers/cmsis_rtx/).
+For more details, see [Build an RTX5 RTOS application with Keil μVision](/learning-paths/microcontrollers/cmsis_rtx/).
 {{% /notice %}}
