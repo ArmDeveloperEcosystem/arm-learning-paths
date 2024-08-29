@@ -53,7 +53,7 @@ Copy and paste the URL below into your browser to download the latest release fr
 https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Darwin-universal.dmg
 ```
 
-Install the toolchain by clicking on the dmg file and follow the gui process.
+Install the toolchain by clicking on the dmg file and following the instructions. 
 
 Add the LLVM `bin` directory to your `PATH`:
 
