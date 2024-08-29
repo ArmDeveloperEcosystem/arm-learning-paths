@@ -23,6 +23,9 @@ prerequisites:
 - An Arm Linux system or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a 
   cloud service provider. 
 
+operatingsystems:
+    - Linux
+
 skilllevels: Introductory
 subjects: Libraries
 
