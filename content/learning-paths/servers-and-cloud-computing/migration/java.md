@@ -115,7 +115,7 @@ The output is:
      intx VMThreadStackSize       = 2048  {pd product} {default}
 ```
 
-The default can be changed on the command line with either `-XX:ThreadStackSize=<kbytes>` or `-Xss<bytes>`. Note that the first option is in kbytes and the second is in bytes. 
+The default can be changed on the command line with either `-XX:ThreadStackSize=<kbytes>` or `-Xss<bytes>`. Note that the first option is in kilobytes and the second is in bytes. 
 
 Usually, there's no need to change the default stack size, because the thread stack will be committed as it grows. 
 
