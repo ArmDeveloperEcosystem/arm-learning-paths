@@ -24,8 +24,8 @@
     height: 300px;
     display: flex;
     flex-direction: column-reverse;
-
     overflow-y: auto;
+    padding-top: 16px;
 }
 
 
@@ -84,7 +84,8 @@
 .user-message {
     background-color: #545454;
     border-radius: 20px;
-    width: 70%;
+    width: fit-content;
+    max-width: 70%;
     align-self: flex-end; /* float right */
 
     margin-right: 16px;
@@ -92,7 +93,8 @@
 
     
     padding: 8px;
-    padding-left: 16px;
+    padding-left: 24px;
+    padding-right: 24px;
 
     /* text alignment */
     text-align: left;
@@ -112,8 +114,11 @@
 .chatbot-message {
     background-color: transparent;
     border-radius: 20px;
-    width: 70%;
+    width: 90%;
     /*align-self: flex-end; */
+
+    display: flex; 
+    align-items: flex-start;
 
     margin-left: 16px;
     margin-bottom: 16px;
@@ -125,3 +130,63 @@
     text-align: left;
     font-size: 18px!important;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**************************************************/
+/*      Graphing */
+.chart-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 50px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+  }
+  
+  .bar {
+    height: 100%;
+    background-color: #4caf50;
+    width: 0;
+    text-align: right;
+    padding-right: 5px;
+    box-sizing: border-box;
+    color: white;
+    line-height: 50px;
+    font-weight: bold;
+  }
+  
+  .context-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background-color: red;
+    text-align: center;
+    font-size: 12px;
+    color: red;
+    transform: translateX(-50%);
+  }
+  

@@ -14,7 +14,13 @@ Called from:
             {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">
             <!-- set id and data-step-num of active step to make analytics easier -->
             <h6 class="tab-right-card-header" data-step-num="{{.counter}}" {{ if eq .context.File.TranslationBaseName .thisfile}}id="learning-path-step-active"{{end}}>
-                {{ if eq .context.File.TranslationBaseName "_index" }} Introduction {{else}} {{.context.Title}} {{ end }}
+                {{ if eq .context.File.TranslationBaseName "_demo" }} 
+                    <i class="fa-solid fa-gear" style="margin-right: 8px;"></i>Demo<i class="fa-solid fa-gear" style="margin-left: 8px;"></i>
+                {{ else if eq .context.File.TranslationBaseName "_index" }} 
+                    Introduction 
+                {{else}} 
+                    {{.context.Title}} 
+                {{ end }}
             </h6>
         </div>
     </div>

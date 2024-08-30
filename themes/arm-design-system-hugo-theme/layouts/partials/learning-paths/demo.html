@@ -21,12 +21,12 @@ Calls to:
     <div class="c-row u-gap-1/2 u-flex-nowrap">
         <!-- Left - Demo steps -->
         <div class="c-col md:c-col-12 lg:c-col-8">
-            <h3>Running the Demo</h3>
-            <ul>
+            <h3 style="margin-left: -16px;">Running the Demo</h3>
+            <ol>
             {{ range .Params.demo_steps }}
-                <li class="u-margin-left-2">{{.}}</li>
+                <li class="u-margin-left-1/2">{{.}}</li>
             {{end}}
-            </ul>
+            </ol>
         </div>
         <!-- Right - Architecture Diagram -->
         <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
@@ -52,11 +52,14 @@ Calls to:
 <div class="content-box">
     <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
         <!-- Left - Demo -->
-        <div class="c-col md:c-col-12 lg:c-col-9 lg:u-display-block ">
+        <div class="c-col md:c-col-12 lg:c-col-8 lg:u-display-block ">
             <h2>Demo</h2>
             <div id="demo-container">
                 <div id="all-messages-div">
-
+                    <div class="chatbot-message">
+                        <img src="/learning-paths/servers-and-cloud-computing/aaademo-chatbot-lp/chatbot-icon.png" style="margin-right: 10px;" alt="Chatbot Icon">
+                        <span id="initial-message-span"><ads-loader></ads-loader></span>
+                    </div>
                 </div>
                 <div id="demo-actions">
                     <div class="c-row">
@@ -74,9 +77,29 @@ Calls to:
             </div>
         </div>
         <!-- Right - Stats -->
-        <div class="c-col lg:c-col-3 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
             <h2>Stats</h2>
-            <p>Type a message to the chatbot to view metrics.</p>
+            <div id="stats-initial">
+                <p>Type a message to the chatbot to view metrics.</p> 
+            </div>
+            <div id="stats-populated" hidden>
+                <p>Full conversation average Tokens per Second: <span id="avg-tps-metric">???</span>.</p>
+                <div id="chart-container" class="chart-container">
+                    <div id="bar" class="bar"></div>
+                    <div class="context-line" style="left: 20%;">10</div>
+                    <div class="context-line" style="left: 50%;">25</div>
+                    <div class="context-line" style="left: 80%;">40</div>
+                  </div>
+                <br>
+                <h5>Last Message:</h5>
+                <p><span id="total-time-metric">4</span> seconds to display <span id="num-tokens-metric">245</span> tokens.</p>
+                <p>Tokens per second: <span id="tps-metric">????</span></p>
+                <p>Time to first token: <span id="ttft-metric">????</span></p>
+                <p>Context: <span id="overall-context-metric"></span></p>
+            </div>
+
+              
+
         </div>        
     </div>
 
@@ -100,17 +123,151 @@ Calls to:
         ];
         const randomIndex = Math.floor(Math.random() * sentences.length);
         const randomDelay = Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
-    
+        const sentence = sentences[randomIndex];
+
         setTimeout(() => {
-            div.textContent = sentences[randomIndex];
+            div.textContent = sentence;
         }, randomDelay);
+
+        // Return last message
+        return sentence
+
     }
     
+
+    function insertRandomSentenceWithStreaming(div, custom_delay=null, custom_sentence=null) {
+        const charsPerSecond = 40;
+
+        const sentences = [
+            "The quick brown fox jumps over the lazy dog.",
+            "A journey of a thousand miles begins with a single step.",
+            "To be or not to be, that is the question.",
+            "All that glitters is not gold.",
+            "The early bird catches the worm."
+        ];
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        const randomDelay = custom_delay || Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
+        const sentence = custom_sentence || sentences[randomIndex];
+        const interval = 1000 / charsPerSecond; // Interval in milliseconds
+    
+        setTimeout(() => {
+            let currentIndex = 0;
+            const intervalId = setInterval(() => {
+                div.textContent += sentence[currentIndex];
+                currentIndex++;
+                if (currentIndex === sentence.length) {
+                    clearInterval(intervalId);
+                    if (!custom_sentence) { updateMetrics(sentence);}
+                }
+            }, interval);
+        }, randomDelay);
+
+        // Return last message
+        return sentence
+    }
+    
+
+
+    function onVisibilityChange(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                var initial_message_span = document.getElementById('initial-message-span');
+                insertRandomSentenceWithStreaming(initial_message_span, 0,"Hi! I'm a LLM-based generative chatbot running on a Graviton server! Pretty cool right? I'm ready to talk if you are.");
+                observer.unobserve(entry.target); // Stop observing after the function is called
+            }
+        });
+    }
+
+
+
+
+    function getMessageForNumber(num) {
+
+        const resultMessages = [
+            { min: 10, max: 30, message: "Eh, noticably slow. Here is why." },
+            { min: 30, max: 40, message: "Good, high quality." },
+            { min: 40, max: 60, message: "Excellent!" },
+        ];
+
+        for (let i = 0; i < resultMessages.length; i++) {
+            if (num >= resultMessages[i].min && num <= resultMessages[i].max) {
+                return resultMessages[i].message;
+            }
+        }
+        return "Number out of range.";
+    }
+
+    function updateMetrics(chatbot_message) {
+        // Show stats if they are not already shown
+        document.getElementById('stats-populated').hidden = false;
+        document.getElementById('stats-initial').hidden = true;
+
+        // obtain spans to replace
+        const avg_tps = document.getElementById('avg-tps-metric');
+        const total_time = document.getElementById('total-time-metric');
+        const tokens = document.getElementById('num-tokens-metric');
+        const tps = document.getElementById('tps-metric');
+        const ttft = document.getElementById('ttft-metric');
+        const context = document.getElementById('overall-context-metric');
+
+
+
+        // replace last message metrics
+            // TPS = [10 - 40]
+        num_tps = Math.floor(Math.random() * 30 + 10);
+        tps.textContent = num_tps;
+            // TTFT = [0.4 - 4]
+        num_ttft = parseFloat((Math.random() * (4 - 0.4) + 0.4).toFixed(2));
+        ttft.textContent = num_ttft;
+            // tokens = from chatbot_message
+        num_tokens = chatbot_message.split(" ").length;
+        tokens.textContent = num_tokens;
+            // total time = TTFT + (tokens / TPS)
+        num_time = (num_ttft + (num_tokens/num_tps)).toFixed(2);
+        total_time.textContent = num_time;
+
+        // Overall metric
+            // AVG-TPS = (current displayed + new) / 2
+        prev_tps = 0;
+        if (!isNaN(parseFloat(avg_tps.textContent)) && isFinite(avg_tps.textContent)) {
+            console.log("The string is a number.");
+            prev_tps = parseFloat(avg_tps.textContent);
+        } else {
+            prev_tps = num_tps;
+        }
+        num_avg_tps = ((num_tps + prev_tps) / 2).toFixed(2);
+        avg_tps.textContent = num_avg_tps;
+
+        num_avg_tps = Math.round(num_avg_tps);
+        const maxValue = 50;        
+        const bar = document.getElementById('bar');
+        const barWidth = (num_avg_tps / maxValue) * 100; // Calculate width as a percentage
+        bar.style.width = `${barWidth}%`;
+        bar.textContent = num_avg_tps; // Display the value inside the bar
+        
+
+        // Context
+        context.textContent = getMessageForNumber(num_tps);
+
+    }
     
 </script>
 
 <script>
+
+    // Initalize vars
     const message_history = document.querySelector('#all-messages-div');
+
+    // Set 'Intersection Observer' to display a welcome message when user sees the chatbot input box.
+    const observer = new IntersectionObserver(onVisibilityChange, {
+        root: null,     // full viewport = root
+        threshold: 0.1  // Trigger when at least 10% of the element is visible
+    });
+    const chatbot_detection_div = document.getElementById('input-and-submit');
+    observer.observe(chatbot_detection_div);
+    
+    
+    
     const reset_demo_text = document.querySelector('#reset-demo-txt');
     reset_demo_text.addEventListener('click', function() {
         message_history.innerHTML = "";
@@ -151,18 +308,29 @@ Calls to:
             user_div.textContent = user_input;
             all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
 
-            // Trigger 'thinking response in chatbot'
             const chatbot_div = document.createElement('div');
             chatbot_div.classList.add('chatbot-message');
 
+            const new_icon = document.createElement('img');
+            new_icon.setAttribute('src', '/learning-paths/servers-and-cloud-computing/aaademo-chatbot-lp/chatbot-icon.png');
+            new_icon.setAttribute('style', 'margin-right: 10px;');
+            new_icon.setAttribute('alt', 'Chatbot Icon');
+          
             const new_loader = document.createElement('ads-loader');
-            new_loader.setAttribute('label', 'chatbot thinking');
             
-            chatbot_div.appendChild(new_loader);
+
+            const chatbot_span_for_message = document.createElement('span');
+
+
+            chatbot_div.appendChild(new_icon);
+            chatbot_span_for_message.appendChild(new_loader);
+            chatbot_div.appendChild(chatbot_span_for_message);
             all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
 
-           // SEND MESSAGE TO API
-           insertRandomSentenceWithDelay(chatbot_div);
+            // SEND MESSAGE TO API
+            //last_message = insertRandomSentenceWithDelay(chatbot_span_for_message);
+            last_message = insertRandomSentenceWithStreaming(chatbot_span_for_message);
+
 
         }
 
