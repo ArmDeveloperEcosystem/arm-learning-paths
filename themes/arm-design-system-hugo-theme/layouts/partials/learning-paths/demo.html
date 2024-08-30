@@ -106,7 +106,25 @@ Calls to:
 </div>
 
 
+{{/* 
 
+    What FE sends:
+        - Current user message
+        - History of all conversation
+
+    What we get back from the API SSE streams (just like OpenAI API):
+        - 1st stream elements
+            - Resource stats = We're good, or still occupied. (implicit 'start').
+        - 2nd stream elements
+            - Tokens.
+        - 3rd stream elements
+            - Stats about the run (implicit 'end').
+
+        - Connection handeling
+            - backend will send 'error' if there has been an error
+            - frontend will know if stream hasen't sent info in 3 sec, connectivity issue. We should try to reconnect, then help.
+
+*/}}
 
 
 
