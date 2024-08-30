@@ -23,7 +23,7 @@ If using `Arm Keil μVision IDE` or Arm Development Studio, refer to the [Build 
 
 Keil Studio projects are based on the [CMSIS Solution](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/YML-Input-Format.md) standard.
 
-1. Open the VS Code IDE, and select `File` > `New File` from the `File` menu. (`Ctrl`+`Alt`+`Windows`+`N`). You will be prompted for the type of file. Select `New Solution` (`Arm CMSIS Solution`).
+1. Open the VS Code IDE, and select `File` > `New File` from the `File` menu. You will be prompted for the type of file. Select `New Solution` (`Arm CMSIS Solution`).
 2. The `Create New Solution` window will open. Click the `Target Device` pulldown, and search for `ARMCM4`.
 3. From the `Templates, Reference Applications, and Examples` pulldown, select `Blank Solution`.
 4. Ensure `Arm Compiler 6` is the selected compiler.
