@@ -69,4 +69,4 @@ make image
 ```
 This should build a docker image with the name `ghcr.io/smarter-project/hybrid-runtime/hello_world_imx8mp:latest`.
 
-The `image.dockerfile` file pulls the NXP SDK and builds the hello world example present in the NXP SDK. Finally, the Dockerfile creates a new image, copies the hello world binary into it, sets the entrypoint and adds the correct labels. You can use this Dockerfile to run the example as shown in the section [Deploy firmware container using containerd](../containerd/).
+The `image.dockerfile` file pulls the NXP SDK and builds the hello world example present in the NXP SDK. Finally, the Dockerfile creates a new image, copies the hello world binary into it, sets the entrypoint and adds the correct labels. You can use this Dockerfile to run the example as shown in the section [Deploy firmware container using containerd](/learning-paths/embedded-systems/cloud-native-deployment-on-hybrid-edge-systems/containerd/).

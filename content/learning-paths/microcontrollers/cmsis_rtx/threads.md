@@ -7,11 +7,11 @@ weight: 4 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Implement the main RTOS thread (`app_main()`), whose role is primarily to start and manage the other threads of the system.
+Implement the main RTOS thread (`app_main`), whose role is primarily to start and manage the other threads of the system.
 
 In this example you shall create 3 threads. The number and naming of the threads is arbitrary.
 
-## Create app_main()
+## Create app_main
 
 Right click on the `Source` folder under the `FVP` target, and `Add a new item`. Select `C file (.c)`, and create the `app_main.c` file with the contents below:
 

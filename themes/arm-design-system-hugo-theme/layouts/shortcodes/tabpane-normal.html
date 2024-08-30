@@ -1,0 +1,35 @@
+{{/*
+Create code panes via horizontal tabs. Uses the 'prismjs-codeblock.html' partial to align formatting with normal code blocks.
+*/}}
+
+
+<!-- Scratchpad gets populated through call to .Inner -->  
+{{- .Inner -}}
+
+{{$titles := slice}}
+{{- range $index, $element := $.Scratch.Get "tabs" -}}
+  {{$titles = $titles | append (urlize $element.header)}}
+{{end}}
+
+<div class="normal-tabpane">
+  <ads-horizontal-tabs class="normal-horizontal-tabs {{if $titles}}{{range $titles}} header-{{.}} {{end}}{{end}}" id="tabs-{{- $.Ordinal -}}" alt-emphasis="yes">
+    {{- range $index, $element := $.Scratch.Get "tabs" -}}
+      <div slot="content" class="normal-tab header-tab-{{urlize $element.header}}" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
+        {{ $element.content | markdownify }}
+      </div>
+    {{end}}
+  </ads-horizontal-tabs>
+</div>
+
+<!-- This javascript uses Hugo vars, requiring it to be in this HTML file and not a seperate JS file. -->
+<script>
+  (() => {
+    const tabs = document.querySelector('#tabs-{{- $.Ordinal -}}');
+    tabs.data = [
+      {{- range $index, $element := $.Scratch.Get "tabs" -}}
+        { id: "tab-{{- $.Ordinal -}}-slot-{{$index}}", label: "{{$element.header}}" },
+      {{end}}
+    ];
+    console.log('hi!',tabs.data)
+  })();
+</script>

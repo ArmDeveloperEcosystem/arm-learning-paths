@@ -16,7 +16,7 @@ Because MySQL libraries are needed by Sysbench, you will need to build and insta
 
 You do not need to configure and run MySQL, just the build and install steps.
 
-Refer to [Setup, configure, and run MySQL server](../setup_mysql_server) to build and install MySQL server and provide the required libraries to Sysbench on the client system. 
+Refer to [Setup, configure, and run MySQL server](/learning-paths/servers-and-cloud-computing/mysql_benchmark/setup_mysql_server) to build and install MySQL server and provide the required libraries to Sysbench on the client system. 
 
 
 ## Build and install Sysbench

@@ -51,7 +51,7 @@ Execution can be controlled by the `Debug Control` pane icon bar (eg `Step Instr
 
 ## Understand the example
 
-![example image alt-text#center](armds_sme2.png "Figure 2. Debugging the SME2 example in Arm Development Studio")
+![example image alt-text#center](/learning-paths/cross-platform/sme/armds_sme2.png "Figure 2. Debugging the SME2 example in Arm Development Studio")
 
 1. In the Registers view, expand AArch64 > System > ID > ID_AA64PFR1_EL1. Notice the SME bits are set to 2, meaning the SME2 architectural state and programmers model are implemented on this target.
 2. This bit can also be inspected in the Commands view, by entering `output $AArch64::$System::$ID::$ID_AA64PFR1_EL1.SME`. Other bits in other registers may be inspected similarly.

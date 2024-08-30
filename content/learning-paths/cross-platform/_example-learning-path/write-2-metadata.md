@@ -34,11 +34,11 @@ The following metadata is defined in the `_index.md` file:
 Look at other Learning Paths for inspiration about how to write a good title, learning objectives, and prerequisites. 
 
 {{% notice Note%}}
-To specify a prerequisite Learning Path, do so with a relative path. For example:
+To specify a prerequisite Learning Path, do so with an absolute path from the root of the website. For example:
 
-- The Learning Path [Learn how to use Docker](../../docker) should be completed first 
+- The Learning Path [Learn how to use Docker](/learning-paths/cross-platform/docker/) should be completed first 
 
-Note the relative path of `../../docker` 
+Note the absolute path of `/learning-paths/cross-platform/docker/` 
 {{% /notice %}}
 
 ### Author information
@@ -145,7 +145,7 @@ This is where you provide a specific next step for a reader, and provide further
 | Next Steps Metadata   | Explanation |
 |-----------------------|-------------|
 | next_step_guidance    | A 1-3 sentence description of how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.   |
-| recommended_path      | Link to the next learning path being recommended (For example, this could be [Learn How to Use Docker](../../docker)) |
+| recommended_path      | Link to the next learning path being recommended (For example, this could be [Learn How to Use Docker](/learning-paths/cross-platform/docker/)) |
 | further_reading       | Links to references related to information covered |
 | resource > title      | The displayed title of the provided further_reading resource |
 | resource > link       | The website link to the specific resource |

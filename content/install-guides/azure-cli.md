@@ -105,4 +105,4 @@ You should see an output similar to below
 }
 ```
 
-After a successful log in, you can use the [Azure CLI](../azure-cli) and automation tools like [Terraform](../terraform) from the terminal.
+After a successful log in, you can use the [Azure CLI](/install-guides/azure-cli/) and automation tools like [Terraform](/install-guides/terraform/) from the terminal.

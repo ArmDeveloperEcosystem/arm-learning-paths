@@ -1386,7 +1386,6 @@ vht
 fszI
 youtu
 NDK
-instrinsics
 dotProduct
 uint
 TextView
@@ -3088,3 +3087,18 @@ flexbox
 getAverageTemperature
 libaom
 writeTemperatures
+ACCP
+AES
+ArmCompilerforEmbedded
+JMeter
+LocalAppData
+Microsystems
+ProgramFiles
+ThreadStackSize
+UseTransparentHugePages
+UserProfile
+configurability
+darwin
+dmg
+madvise
+osKernelInitialize

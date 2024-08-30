@@ -36,7 +36,7 @@ The [LLVM Embedded Toolchain for Arm](https://github.com/ARM-software/LLVM-embed
 Copy and paste the URL below into your browser to download the latest release from GitHub:
 
 ```url
-https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-16.0.0/LLVMEmbeddedToolchainForArm-16.0.0-Windows-x86_64.zip
+https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Windows-x86_64.zip
 ```
 
 Unzip the download to a location of your choice on your host machine.
@@ -50,25 +50,21 @@ Open a `Command Prompt` and [test your installation](#test).
 Copy and paste the URL below into your browser to download the latest release from GitHub:
 
 ```url
-https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-16.0.0/LLVMEmbeddedToolchainForArm-16.0.0-Darwin.tar.gz
+https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Darwin-universal.dmg
 ```
 
-Open a terminal application and use `tar` to extract the file:
-
-```command
-tar -xf ~/Downloads/LLVMEmbeddedToolchainForArm-16.0.0-Darwin.tar.gz -C $HOME
-```
+Install the toolchain by clicking on the dmg file and following the instructions. 
 
 Add the LLVM `bin` directory to your `PATH`:
 
 ```command
-export PATH=$HOME/LLVMEmbeddedToolchainForArm-16.0.0-Darwin/bin:$PATH
+export PATH=/Applications/LLVM-ET-Arm-18.1.3-Darwin-universal/bin:$PATH
 ```
 
 The toolchain binaries may be quarantined. Navigate to the `bin` directory and use the `xattr` command to remove the quarantine: 
 
 ``` command
-cd $HOME/LLVMEmbeddedToolchainForArm-16.0.0-Darwin/bin
+cd /Applications/LLVM-ET-Arm-18.1.3-Darwin-universal/bin
 find . -type f -perm +0111 | xargs xattr -d com.apple.quarantine
 ```
 
@@ -81,25 +77,19 @@ The information below assumes `Ubuntu Linux` on an `AArch64` host. Modify the fi
 Download the latest release using `wget`: 
 
 ```command
-wget https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-16.0.0/LLVMEmbeddedToolchainForArm-16.0.0-Linux-AArch64.tar.gz
+wget https://github.com/ARM-software/LLVM-embedded-toolchain-for-Arm/releases/download/release-18.1.3/LLVM-ET-Arm-18.1.3-Linux-AArch64.tar.xz
 ```
 
 Open a terminal application and use `tar` to extract the file:
 
 ```command
-tar -xf LLVMEmbeddedToolchainForArm-16.0.0-Linux-AArch64.tar.gz -C $HOME
+tar xfJ LLVM-ET-Arm-18.1.3-Linux-AArch64.tar.xz -C $HOME
 ```
 
 Add the LLVM `bin` directory to your `PATH`:
 
 ```command
-export PATH=$HOME/LLVMEmbeddedToolchainForArm-16.0.0-Linux-AArch64/bin:$PATH
-```
-
-Install the required library `libtinfo5`:
-
-``` command
-sudo apt install -y libtinfo5
+export PATH=$HOME/LLVM-ET-Arm-18.1.3-Linux-AArch64/bin:$PATH
 ```
 
 You can now [test your installation](#test).
@@ -117,10 +107,10 @@ clang --version
 You should observe output similar to:
 
 ```output
-clang version 16.0.0
+clang version 18.1.3
 Target: aarch64-unknown-linux-gnu
 Thread model: posix
-InstalledDir: /home/ubuntu/LLVMEmbeddedToolchainForArm-16.0.0-Linux-AArch64/bin
+InstalledDir: /home/ubuntu/LLVM-ET-Arm-18.1.3-Linux-AArch64/bin
 ```
 
 ### Build a simple application

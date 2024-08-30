@@ -36,7 +36,7 @@ CMSIS-Build is a component of the CMSIS-Toolbox.
 
 For most users, it is recommended to install the complete toolbox package.
 
-See the [CMSIS-Toolbox Install Guide](../cmsis-toolbox).
+See the [CMSIS-Toolbox Install Guide](/install-guides/cmsis-toolbox/).
 {{% /notice %}}
 
 [CMSIS-Build](https://open-cmsis-pack.github.io/devtools/buildmgr/latest/index.html) is a set of tools to enable IDEs and command-line tools to share the same projects. 

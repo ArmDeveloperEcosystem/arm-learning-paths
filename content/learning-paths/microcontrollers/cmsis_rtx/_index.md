@@ -1,5 +1,6 @@
 ---
-title: Build an RTX5 RTOS application
+title: Build an RTX5 RTOS application with Keil μVision
+
 
 minutes_to_complete: 30
 
@@ -9,7 +10,7 @@ learning_objectives:
     - Implement a basic RTOS-based application
 
 prerequisites:
-    - Arm [Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
+    - An installation of [Arm Keil MDK](/install-guides/mdk) or [Arm Development Studio](/install-guides/armds) (MDK recommended)
     - Some familiarity with CMSIS is assumed
 
 author_primary: Ronan Synnott

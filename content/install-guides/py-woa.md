@@ -29,9 +29,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. The latest version at time of writing is 3.12.0.
 
-A number of developer ready Windows on Arm [devices](../../learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
+A number of developer ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
-Windows on Arm instances are available with Microsoft Azure. For more information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](../../learning-paths/cross-platform/woa_azure/).
+Windows on Arm instances are available with Microsoft Azure. For more information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
 
 ## Download and install
 
