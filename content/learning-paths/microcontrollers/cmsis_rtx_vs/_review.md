@@ -12,7 +12,7 @@
 
 review:
   - questions:
-      - question: >
+        question: >
           Which function is used to invoke an OS thread?
         answers:
           - "osKernelInitialize()"
@@ -21,7 +21,8 @@ review:
         correct_answer: 3
         explanation: >
           osThreadNew() is called before osKernelStart() to define the main thread, and then by the main thread to start other threads.
-      - question: >
+  - questions:
+        question: >
           What is the purpose of the `osKernelStart()` function?
         answers:
           - "To create the main application thread"
@@ -30,7 +31,8 @@ review:
         correct_answer: 2
         explanation: >
           `osKernelStart()` starts the RTOS kernel and enables thread switching, making it essential for multitasking.
-      - question: >
+  - questions:
+        question: >
           What happens if the code execution reaches the infinite while(1) loop in the main function?
         answers:
           - "All threads are successfully started."
