@@ -10,12 +10,12 @@ layout: learningpathall
 
 #### Code Generation example
 
-In this example we have specified two versions of `foo` using the `target_clones` attribute (the order in which they are listed does not matter). At certain optimization levels compilers can decide to perform loop vectorization depending on the target's vector capabilities. Our intention is to enable the compiler to use SVE instructions in the specialized case, whilst restricting it to use only Armv8 instructions in the default one.
+In this example we have specified two versions of `sumPosEltsScaledByIndex` using the `target_clones` attribute (the order in which they are listed does not matter). At certain optimization levels compilers can decide to perform loop vectorization depending on the target's vector capabilities. Our intention is to enable the compiler to use SVE instructions in the specialized case, whilst restricting it to use only Armv8 instructions in the default one.
 
 loop.c
 ```c
 __attribute__((target_clones("sve", "default")))
-int foo(int *v, unsigned n) {
+int sumPosEltsScaledByIndex(int *v, unsigned n) {
   int s = 0;
   for (unsigned i = 0; i < n; ++i)
     if (v[i] > 0)
@@ -34,13 +34,13 @@ $ gcc -march=armv8-a -O3 -S -o - loop.c
 ```
 Note that when using the `clang` compiler, the option `--rtlib=compiler-rt` should be specified on the command line. This allows the compiler to generate runtime checks for detecting the presence of hardware features on your host target.
 
-Here is the generated compiler output for the SVE version of `foo` (using `clang`):
+Here is the generated compiler output for the SVE version of `sumPosEltsScaledByIndex` (using `clang`):
 ```
 	.text
-	.globl	foo._Msve
+	.globl	sumPosEltsScaledByIndex._Msve
 	.p2align	2
-	.type	foo._Msve,@function
-foo._Msve:
+	.type	sumPosEltsScaledByIndex._Msve,@function
+sumPosEltsScaledByIndex._Msve:
 	cbz	w1, .LBB0_3
 	mov	w9, w1
 	cnth	x8
@@ -96,7 +96,7 @@ foo._Msve:
 	ret
 ```
 
-This is the default version of `foo`:
+This is the default version of `sumPosEltsScaledByIndex`:
 ```
 	.section	.rodata.cst16,"aM",@progbits,16
 	.p2align	4, 0x0
@@ -106,10 +106,10 @@ This is the default version of `foo`:
 	.word	2
 	.word	3
 	.text
-	.globl	foo.default
+	.globl	sumPosEltsScaledByIndex.default
 	.p2align	2
-	.type	foo.default,@function
-foo.default:
+	.type	sumPosEltsScaledByIndex.default,@function
+sumPosEltsScaledByIndex.default:
 	cbz	w1, .LBB2_3
 	cmp	w1, #8
 	mov	w9, w1
@@ -164,35 +164,35 @@ foo.default:
 	ret
 ```
 
-Any calls to `foo` are routed through `foo.resolver`. This is the function which contains the runtime checks for feature detection. More on this later.
+Any calls to `sumPosEltsScaledByIndex` are routed through `sumPosEltsScaledByIndex.resolver`. This is the function which contains the runtime checks for feature detection. More on this later.
 ```
-	.section	.text.foo.resolver,"axG",@progbits,foo.resolver,comdat
-	.weak	foo.resolver
+	.section	.text.sumPosEltsScaledByIndex.resolver,"axG",@progbits,sumPosEltsScaledByIndex.resolver,comdat
+	.weak	sumPosEltsScaledByIndex.resolver
 	.p2align	2
-	.type	foo.resolver,@function
-foo.resolver:
+	.type	sumPosEltsScaledByIndex.resolver,@function
+sumPosEltsScaledByIndex.resolver:
 	str	x30, [sp, #-16]!
 	bl	__init_cpu_features_resolver
 	adrp	x8, __aarch64_cpu_features+3
-	adrp	x9, foo._Msve
-	add	x9, x9, :lo12:foo._Msve
+	adrp	x9, sumPosEltsScaledByIndex._Msve
+	add	x9, x9, :lo12:sumPosEltsScaledByIndex._Msve
 	ldrb	w8, [x8, :lo12:__aarch64_cpu_features+3]
 	tst	w8, #0x40
-	adrp	x8, foo.default
-	add	x8, x8, :lo12:foo.default
+	adrp	x8, sumPosEltsScaledByIndex.default
+	add	x8, x8, :lo12:sumPosEltsScaledByIndex.default
 	csel	x0, x8, x9, eq
 	ldr	x30, [sp], #16
 	ret
 ```
 
-The called symbol `foo` is an indirect function (IFUNC) which points to the resolver.
+The called symbol `sumPosEltsScaledByIndex` is an indirect function (IFUNC) which points to the resolver.
 ```
-.weak	foo
-.type	foo,@gnu_indirect_function
-.set foo, foo.resolver
+.weak	sumPosEltsScaledByIndex
+.type	sumPosEltsScaledByIndex,@gnu_indirect_function
+.set sumPosEltsScaledByIndex, sumPosEltsScaledByIndex.resolver
 ```
 
-The names `foo._Msve` and `foo.default` correspond to the function versions of `foo`. See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#name-mangling) document for more details on the name mangling rules.
+The names `sumPosEltsScaledByIndex._Msve` and `sumPosEltsScaledByIndex.default` correspond to the function versions of `sumPosEltsScaledByIndex`. See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#name-mangling) document for more details on the name mangling rules.
 
 #### Runtime example with use of ACLE intrinsics
 

@@ -18,7 +18,7 @@ In order to select the most appropriate version of a function, each call to a ve
 
 #### Resolver emission with LLVM
 
-When using the LLVM compiler the resolver is emitted in the translation unit which contains the definition of the default version. To correctly generate a resolver the compiler must be aware of all the versions of a function. Therefore, the user must declare every function version in the TU where the default version resides. For example:
+When using the LLVM compiler, the resolver is emitted in the translation unit which contains the definition of the default version. To correctly generate a resolver the compiler must be aware of all the versions of a function. Therefore, the user must declare every function version in the TU where the default version resides. For example:
 
 file1.c
 ```c

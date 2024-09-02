@@ -33,8 +33,8 @@ operatingsystems:
     - Android
     - macOS
 
-
-### FIXED, DO NOT MODIFY
+# ================================================================================
+#       FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
