@@ -12,7 +12,7 @@ In this exercise, you will execute assembly code using the `Keil MDK`, and exami
 
 This exercise is adapted from the [Efficient Embedded Systems Education Kit](https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit).
 
-Please make sure to read and go through the [Getting Started with MDK](https://developer.arm.com/documentation/KGS1/latest/) documentation or [Learning Path](../../uv_debug/) if you are unfamiliar with its usage.
+Please make sure to read and go through the [Getting Started with MDK](https://developer.arm.com/documentation/KGS1/latest/) documentation or [Learning Path](/learning-paths/microcontrollers/uv_debug/) if you are unfamiliar with its usage.
 
 The example can run on any supported development platform. Instructions are provided for the `Nucleo-F401RE` development board from ST Microelectronics as well as the Cortex-M3 Virtual Hardware Target (`VHT`) supplied with MDK Professional Edition.
 

@@ -13,6 +13,11 @@ learning_objectives:
     - Use Arm register calling conventions when writing subroutines in assembly language.  
     - Use the debugger to view and analyse the processor state.  
 
+## Setting to draft = true to hide this LP. Can it be deleted? Replication of content in //asm.
+draft: true
+cascade:
+    draft: true
+
 prerequisites:
     - Keil MDK IDE
     - Some familiarity with C/Assembly

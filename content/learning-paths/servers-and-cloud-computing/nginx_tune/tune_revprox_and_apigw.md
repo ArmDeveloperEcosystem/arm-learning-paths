@@ -12,11 +12,11 @@ In the [Setup Reverse Proxy and API Gateway](/learning-paths/servers-and-cloud-c
 
 ### Top Level nginx.conf
 
-The same top level config used in [Tune a static file server](../tune_static_file_server) is suggested.
+The same top level config used in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server) is suggested.
 
   ### Reverse Proxy and API Gateway configuration
 
-A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](../tune_static_file_server) are explained here.
+A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server) are explained here.
 ```
 # Upstreams for https
 upstream ssl_file_server_com {

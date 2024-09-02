@@ -27,7 +27,7 @@ Similarly, when accessing 32-bit elements, tiles would have height and width bot
 
 You can read or write a ZA tile slice, which is a one-dimensional vector representing a complete row or column within a tile slice.
 
-![example image alt-text#center](ZA.png "Figure 1. The ZA storage, accessed by 32-bit elements, shown for SVL = 256 bits, and showing the mapping to horizontal and vertical slices of the four ZA0-3 tiles.")
+![example image alt-text#center](/learning-paths/cross-platform/sme/ZA.png "Figure 1. The ZA storage, accessed by 32-bit elements, shown for SVL = 256 bits, and showing the mapping to horizontal and vertical slices of the four ZA0-3 tiles.")
 
 The Scalable Matrix Extension version 2 (SME2) extends the SME architecture to increase the number of applications that can benefit from the computational efficiency of SME, beyond its initial focus on outer products and matrix-matrix multiplication.  SME2 adds:
 * Data processing instructions with multi-vector operands and a multi-vector predication mechanism.

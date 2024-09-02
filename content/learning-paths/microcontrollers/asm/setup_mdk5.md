@@ -1,27 +1,16 @@
 ---
 # User change
-title: "Setting Up A Project In Keil MDK" 
+title: "Setting up a Project in Keil MDK (μVision)"
 
-weight: 2 # 1 is first, 2 is second, etc.
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Though Cortex-M processors have been designed so that all operations can be programmed with C/C++ code, it can be useful to also understand how to create assembler level code, which can be more efficient than compiler generated code.
-
-You will write assembly level functions conforming to the [Arm Procedure Call Standard](https://github.com/ARM-software/abi-aa/blob/main/aapcs32/aapcs32.rst).
-
-[Keil MDK](https://www2.keil.com/mdk5) is used as the toolchain. For installation instructions, refer to the [Keil MDK install guide](/install-guides/mdk/).
-
-## Efficient Embedded Systems Education Kit
-
-This Learning Path is based on examples from the [Efficient Embedded Systems Education Kit](https://github.com/arm-university/Efficient-Embedded-Systems-Design-Education-Kit), which uses the [Nucleo-F401RE](https://www.st.com/en/evaluation-tools/nucleo-f401re.html) development board.
-
-You will use the Cortex-M4 Fixed Virtual Platform provided with MDK.
 
 ## Create MDK Project
 
-The first thing to do is set up a new project. Go to 'Project' > 'New uVision Project'.
+The first thing to do is set up a new project. Go to 'Project' > 'New μVision Project'.
 
 Select an appropriate place and name for the project.
 
@@ -41,20 +30,28 @@ Keil_v5/ARM/avh-fvp/bin/models/FVP_MPS2_Cortex-M4_MDK.exe
 ```
 
 {{% notice  Note%}}
-MDK versions before 5.37 will find the FVP at
+MDK versions 5.37 and earlier will find the FVP at:
 
 `Keil_v5/ARM/FVP/MPS2_Cortex-M/FVP_MPS2_Cortex-M4_MDK.exe`
 
-and in 5.38, 5.39 it is available at
+In 5.38 and 5.39 the FVP is installed at:
 
 `Keil_v5/ARM/VHT/VHT_MPS2_Cortex-M4_MDK.exe`
+
+In 5.40 and later the FVP is installed at:
+
+`Keil_v5/ARM/avh-fvp/bin/models/FVP_MPS2_Cortex-M4_MDK.exe`
 {{% /notice %}}
 
 ### Configure build settings
 
 In the `C/C++` tab, set the `Optimization` level to `-O1`.
 
-In the `Linker` tab, deselect `Use Memory Layout from Target Dialog`. and a `Scatter File` will be created. Click the `Edit` button to open in the background. Click `OK` to save all `Options`.
+In the `Linker` tab, deselect `Use Memory Layout from Target Dialog`. and a `Scatter File` will be created.
+
+Click the `Edit` button to open in the background.
+
+Click `OK` to save all `Options`.
 
 In this scatter file, add a region `ARM_LIB_STACK`. The C library initialization code will initialize the stack at the top of this region.
 ```text
@@ -74,3 +71,17 @@ LR_IROM1 0x00000000 0x00040000  {    ; load region size_region
 ### Rename Project items (optional)
 
 Rename `Target 1` and `Source Group 1` to more meaningful names, via the `Project > Manage... > Project Items` menu.
+
+## Basic functionality
+
+### New C source file
+
+Right-click `Source Group 1` and select `Add New Item`. Select `C file (.c)`.
+
+### Build
+
+Save all files, and click the `Build` button (`F7`).
+
+### Debug
+
+Click the `Debug` button (`Ctrl+F5`) to load the example to the FVP. The code will stop at `main()`.

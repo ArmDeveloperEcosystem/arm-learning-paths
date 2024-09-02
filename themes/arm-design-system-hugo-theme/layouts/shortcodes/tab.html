@@ -6,7 +6,9 @@ Only used by 'tabpane' shortcode to process code in tabs.
 <!-- Make sure that we are enclosed within a tabpane shortcode block -->
 {{ with $.Parent }}
 {{- if ne $.Parent.Name "tabpane" -}}
-{{- errorf "tab must be used within a tabpane block" -}}
+     {{- if ne $.Parent.Name "tabpane-normal" -}}
+          {{- errorf "tab must be used within a tabpane block" -}}
+     {{- end -}}
 {{- end -}}
 {{- end -}}
 

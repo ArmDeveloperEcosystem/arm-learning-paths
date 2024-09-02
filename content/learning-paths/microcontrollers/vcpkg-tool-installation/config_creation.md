@@ -36,7 +36,7 @@ Create a new file called `vcpkg-configuration.json`. The following template give
 ```
 
 {{% notice Note %}}
-If you are using the [conversion flow for MDK v5 uvprojx files](../../uvprojx-conversion/), a configuration file is automatically created.
+If you are using the [conversion flow for MDK v5 uvprojx files](/learning-paths/microcontrollers/uvprojx-conversion/), a configuration file is automatically created.
 {{% /notice %}}
 
 ### Anatomy of the JSON file
@@ -47,7 +47,7 @@ If you are using the [conversion flow for MDK v5 uvprojx files](../../uvprojx-co
 
 {{% notice Tip %}}
 - Refer to the [vcpkg-configuration.json reference](https://learn.microsoft.com/en-gb/vcpkg/reference/vcpkg-configuration-json) for more information.
-- You can also use vcpkg commands to work with the configuration file. Refer to [Working with the vcpkg-configuration.json file](../usage#working-with-the-vcpkg-configurationjson-file)
+- You can also use vcpkg commands to work with the configuration file. Refer to [Working with the vcpkg-configuration.json file](/learning-paths/microcontrollers/vcpkg-tool-installation/usage#working-with-the-vcpkg-configurationjson-file)
 {{% /notice %}}
 
 You can now start using the vcpkg environment.

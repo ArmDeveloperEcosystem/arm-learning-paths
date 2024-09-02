@@ -130,7 +130,7 @@ You will see the following output when successful.
 ```output
 Licenses have been successfully updated. No confirmation is required.
 ```
-The licenses are now ready to use by the [end-users](../ubl_license_enduser).
+The licenses are now ready to use by the [end-users](/install-guides/license/ubl_license_enduser/).
 
 
 ## Changing installed licenses per server

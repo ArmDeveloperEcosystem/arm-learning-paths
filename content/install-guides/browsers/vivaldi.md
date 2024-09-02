@@ -30,7 +30,6 @@ Vivaldi is available for Arm Linux and Windows on Arm.
 Visit [Download Vivaldi](https://vivaldi.com/download/) to obtain packages for various operating systems. 
 
 
-
 ### Linux
 
 Vivaldi is available for Arm Linux. 
@@ -66,19 +65,12 @@ sudo dnf install vivaldi-stable -y
 
 ### Windows 
 
-The stable release of Vivaldi runs on Windows using emulation, but there is a snapshot release for ARM64.
+The stable release of Vivaldi is an Arm native application. 
 
-Stable Vivaldi runs on Windows on Arm using emulation. 
+To install Vivaldi on Windows on Arm:
 
-Emulation is slower than native and shortens battery life, but may provide required functionality.
+1. Go to the [download page](https://vivaldi.com/download/) and click the Download for Windows button. 
 
-1. Download the 32-bit Windows version from [Download Vivaldi](https://vivaldi.com/download/).
-
-2. Run the downloaded `.exe` file
+2. Run the downloaded `.exe` file 
 
 3. Find and start Vivaldi from the applications menu
-
-
-The [snapshot release](https://downloads.vivaldi.com/snapshot/Vivaldi.6.9.3425.3.arm64.exe) is available as a native ARM64 application. Install the snapshot release using the same 3 steps above.
-
-

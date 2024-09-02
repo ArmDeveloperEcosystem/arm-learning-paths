@@ -23,7 +23,7 @@ To further improve performance, you need to use assembly code. However, with Arm
 
 ## Enable Neon Intrinsics support in Android Studio
 
-In this section, you will setup your Android development environment to use Neon instrinsics.
+In this section, you will setup your Android development environment to use Neon Intrinsics.
 
 1. Open Android Studio on your development machine.
 

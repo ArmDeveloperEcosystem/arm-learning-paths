@@ -58,15 +58,16 @@ The C library looks for a chunk of memory with a size of at least X bytes within
 parameter passed to `malloc`. For instance, on Ubuntu Linux, this is done by GLIBC.
 
 The example at the top of the page is trivial, of course. As it is we could just
-statically allocate both integers like this:
+initialize both `a` and `b` at compilation time like this:
 
 ```C
 void fn() {
-    int a, b = 0;
+    int a = 0;
+    int *b = NULL;
 }
 ```
 
-Variables `a` and `b` work fine if they are not needed outside of the function. In other
+This works fine as `a` and `b` are not needed outside of the function or in other
 words, if the lifetime of the data is equal to that of the function.
 
 A more complex example (shown below) demonstrates when this is not the case, and the values
