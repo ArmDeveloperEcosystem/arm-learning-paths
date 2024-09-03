@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Before you begin
 
-You should have an Arm Linux system with gcc installed. Refer to the [GNU compiler](/install-guides/gcc/native/) install guide for instructions. The examples use gcc as the compiler but you can also use Clang. 
+You should have an Arm system with either the gcc or Clang compiler installed. The examples use gcc as the compiler but you can also use Clang. Refer to the [GNU compiler](/install-guides/gcc/native/) install guide for instructions.
 
 ## Introduction to autovectorization
 
