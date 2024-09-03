@@ -21,7 +21,7 @@ Use a text editor to create a file named `dotprod.c` with the code below:
 #include <arm_sve.h>
 
 __attribute__((target_version("sve")))
-int dotProduct(short *vec1, short* vec2, short len) 
+int dotProduct(short *vec1, short* vec2, short len) {
   printf("Running the sve version of dotProduct\n");
 
   int i = 0;
