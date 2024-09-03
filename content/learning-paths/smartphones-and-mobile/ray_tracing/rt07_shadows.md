@@ -10,17 +10,14 @@ layout: learningpathall
 
 Light sources emit light that will illuminate most objects. However, not all the emitted light will reach all objects; some light rays will be intercepted by other objects before they can reach a light source. This process creates darker areas and produces some shadows in our images.
 
-![Example 1: shadows OFF #center](images/city_shadows_off.png "Example 1: shadows OFF")
-
-![Example 1: shadows ON #center](images/city_shadows_on.png "Example 1: shadows ON")
-
-![Example 2: shadows OFF #center](images/bonza_shadows_off.png "Example 2: shadows OFF")
-
-![Example 2: shadows ON #center](images/bonza_shadows_on.png "Example 2: shadows ON")
-
-![Example 3: shadows OFF #center](images/immortalis_shadows_off.png "Example 3: shadows OFF")
-
-![Example 3: shadows ON #center](images/immortalis_shadows_on.png "Example 3: shadows ON")
+{{< tabpane >}}
+  {{< tab header="Example 1: ON" title="Example 1: shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_shadows_on.png">}} {{< /tab >}}
+  {{< tab header="Example 1: OFF" title="Example 1: shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_shadows_off.png">}} {{< /tab >}}
+  {{< tab header="Example 2: ON" title="Example 2: shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_shadows_on.png">}} {{< /tab >}}
+  {{< tab header="Example 2: OFF" title="Example 2: shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_shadows_off.png">}} {{< /tab >}}
+  {{< tab header="Example 3: ON" title="Example 3: shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_on.png">}} {{< /tab >}}
+  {{< tab header="Example 3: OFF" title="Example 3: shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_off.png">}} {{< /tab >}}
+{{< /tabpane >}}
 
 In our demo, we use a similar algorithm, to produce all our ray tracing effects. For shadows, similarly to what we did for reflections, we start by sampling some information from the G-buffer, like our position and normal. Then we use this information to generate shadows rays, that we can trace either using Ray Tracing Pipeline or Ray Query. If our shadow ray hits an object, it means that the ray is obstructed and we are in shadow, however, if the ray reaches the light without hitting anything it means that we are illuminated.
 

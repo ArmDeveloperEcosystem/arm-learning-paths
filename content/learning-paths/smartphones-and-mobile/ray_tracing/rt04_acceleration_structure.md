@@ -161,9 +161,10 @@ void build_as(VkAccelerationStructureBuildGeometryInfoKHR as_geom_info, std::vec
 
 Finally, the quality of your geometry can have a huge impact when building your acceleration structure. Try to reduce the number of vertices as much as possible. Grouping objects close together into the same BLAS can also have a positive impact. At the same time, try to reduce overlapping across BLASes and reduce empty space inside a BLAS as much as possible. Empty space will increase the size of a BLAS, which might cause extra AABB hits. Similarly, if BLASes overlap, we might need to evaluate triangles on multiples BLASes.
 
-![Example of a scene with a bad acceleration structure #center](images/city_scene_as_overlapping.png "Example of a scene with a bad acceleration structure: Significant overlap and empty space. This will result in unnecessary triangle intersections.")
-
-![Example of a scene with a good acceleration structure #center](images/city_scene_as_separate.png "Example of a scene with a good acceleration structure: Minimum overlap and empty space.")
+{{< tabpane >}}
+  {{< tab header="Example of a scene with a bad acceleration structure" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_scene_as_overlapping.png" title="Example of a scene with a bad acceleration structure: Significant overlap and empty space. This will result in unnecessary triangle intersections." >}}{{< /tab >}}
+  {{< tab header="Example of a scene with a good acceleration structure" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_scene_as_separate.png" title="Example of a scene with a good acceleration structure: Minimum overlap and empty space." >}}{{< /tab >}}
+{{< /tabpane >}}
 
 When tracing a scene, it is common to have opaque and non-opaque objects. Non opaque objects will invoke the `Any-Hit` shader and require extra evaluation in ray query. Vulkan allows to use the flags `VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR` and `VK_GEOMETRY_OPAQUE_BIT_KHR` to mark specific instances and geometries as opaque. We recommend using the appropriate flags to mark relevant geometry as opaque.
 

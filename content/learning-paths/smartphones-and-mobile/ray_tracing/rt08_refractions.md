@@ -12,11 +12,11 @@ Refractions are one of the main advantages of ray tracing. They are extremely di
 
 To simulate transparency and opacity, we usually use an alpha texture, to indicate that the light can pass thought the object. At first glance transparency and refractions might look similar, but in a transparent material light goes through in a straight line, so light rays enter and exit the material in the same direction. Refractions bend the light inside the object and change the direction of the ray, allowing artists to create impressive effects that are not feasible without ray tracing. Transparency is a special case of refractions with a refraction index of 1.0, however there are more efficient and simple ways to simulate ray tracing transparency and opacity than using refractions.
 
-![Example: no refractions #center](images/refractions_no.png "Example: no refractions")
-
-![Example: RT refractions #center](images/refractions_10.png "Example: RT refractions")
-
-![Example: transparency #center](images/refractions_transparent.png "Example: transparency")
+{{< tabpane >}}
+  {{< tab header="Example: no refractions" title="Example 1: no refractions or transparency" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_no.png">}} {{< /tab >}}
+  {{< tab header="Example: refractions" title="Example: ray tracing refractions" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_10.png">}} {{< /tab >}}
+  {{< tab header="Example: transparency" title="Example: transparency" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_transparent.png">}} {{< /tab >}}
+{{< /tabpane >}}
 
 Refractions are simulated using *Snell's law*. Similarly to reflections, GLSL has a built-in function `refract` that allows us to compute the direction of the refracted ray using the direction of the incident ray, the surface normal, and the ratio between materials' refraction indices.
 
@@ -109,12 +109,10 @@ vec4 main()
 
 To obtain a good refractive result we will need to launch a ray with multiple bounces; to obtain a useful result we will need to use a minimum of 2 bounces. Increasing the number of bounces will produce better visual quality, however refractions are a costly effect, and launching rays with multiple bounces can have a significant performance cost, so one should considered the performance impact.
 
-![Example: no refractions #center](images/refractions_no.png "Example: no refractions")
-
-![Example: RT refractions 1 bounce #center](images/refractions_1.png "Example: RT refractions 1 bounce")
-
-![Example: RT refractions 2 bounces #center](images/refractions_2.png "Example: RT refractions 2 bounces")
-
-![Example: RT refractions 4 bounces #center](images/refractions_4.png "Example: RT refractions 4 bounces")
-
-![Example: RT refractions 10 bounces #center](images/refractions_10.png "Example: RT refractions 10 bounces")
+{{< tabpane >}}
+  {{< tab header="Example: no" title="Example 1: no refractions" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_no.png">}} {{< /tab >}}
+  {{< tab header="Example: 1 bounce" title="Example: ray tracing refractions with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_1.png">}} {{< /tab >}}
+  {{< tab header="Example: 2 bounces" title="Example: ray tracing refractions with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_2.png">}} {{< /tab >}}
+  {{< tab header="Example: 4 bounces" title="Example: ray tracing refractions with 4 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_4.png">}} {{< /tab >}}
+  {{< tab header="Example: 10 bounces" title="Example: ray tracing refractions with 10 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_10.png">}} {{< /tab >}}
+{{< /tabpane >}}

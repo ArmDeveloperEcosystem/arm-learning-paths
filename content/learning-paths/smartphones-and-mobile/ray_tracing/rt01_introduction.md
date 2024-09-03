@@ -24,14 +24,11 @@ In path tracing we do not need to use rasterization, instead we will launch rays
 
 Path tracing is extremely costly since we will need to launch thousands of rays per pixel to produce a non-noisy image. Rendering a frame in real time using path tracing is not feasible even on desktop high end GPUs. The common approach is to have a hybrid renderer, with a traditional rasterization pass to resolve visibility and compute the G-buffer, and then implement each ray tracing effect as a separate post-process.
 
-![Example 1: RT ON #center](images/city_rt_on.png "Example 1: RT ON")
-
-![Example 1: RT OFF #center](images/city_rt_off.png "Example 1: RT OFF")
-
-![Example 2: RT ON #center](images/bonza_rt_on.png "Example 2: RT ON")
-
-![Example 2: RT OFF #center](images/bonza_rt_off.png "Example 2: RT OFF")
-
-![Example 3: RT ON #center](images/immortalis_rt_on.png "Example 3: RT ON")
-
-![Example 3: RT OFF #center](images/immortalis_rt_off.png "Example 3: RT OFF")
+{{< tabpane >}}
+  {{< tab header="Example 1: RT ON" title="Example 1: ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_rt_on.png">}}{{< /tab >}}
+  {{< tab header="Example 1: RT OFF" title="Example 1: ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_rt_off.png">}}{{< /tab >}}
+  {{< tab header="Example 2: RT ON" title="Example 2: ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_rt_on.png">}}{{< /tab >}}
+  {{< tab header="Example 2: RT OFF" title="Example 2: ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_rt_off.png">}}{{< /tab >}}
+  {{< tab header="Example 3: RT ON" title="Example 3: ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_rt_on.png">}}{{< /tab >}}
+  {{< tab header="Example 3: RT OFF" title="Example 3: ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_rt_off.png">}}{{< /tab >}}
+{{< /tabpane >}}
