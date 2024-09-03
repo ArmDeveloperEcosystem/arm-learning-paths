@@ -1,8 +1,5 @@
 ---
 title: Run the AV1 and VP9 codecs on Arm Linux
-draft: true
-cascade:
-    draft: true
 
 author_primary: Odin Shen
 
