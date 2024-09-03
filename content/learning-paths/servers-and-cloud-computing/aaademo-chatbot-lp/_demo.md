@@ -14,46 +14,37 @@ configuration_popup_details: Super long list of configuration information to pro
 
 configuration_dropdown_options:
   - parameters:
-      param_name: Instance Type
-      options:
-        - name: C7g.2xlarge
-          specs: 
-            - 8 CPUs
-            - 16 GB RAM
-        - name: C7g.4xlarge
-          specs: 
-            - 16 CPUs
-            - 16 GB RAM
-        - name: C7g.8xlarge
-          specs: 
-            - 32 CPUs
-            - 32 GB RAM
-      selectable: false
-      explanation: The specific hardware specs you will be using.
-
-  - parameters:
       param_name: LLM
       options:
         - name: llama-3-8b-instruct
-          specs: 
-            - Details here as well
+          specs: The newest Llama model, with 8 billion parameters.
         - name: llama-2-7b
-          specs: 
-            - Details here
-      selectable: false
+          specs: Llama2 has 7 billion paramters.
+      selectable: true
       explanation: The LLM selected affects how performant the model is and such.
+
+  - parameters:
+      param_name: Instance Type
+      options:
+        - name: C7g.2xlarge
+          specs: This instance has 8 CPUs with 16 GB RAM.
+        - name: C7g.4xlarge
+          specs: This instance has 16 CPUs with 16 GB RAM.
+        - name: C7g.8xlarge
+          specs: This instance has 32 CPUs with 32 GB RAM.
+      selectable: true
+      explanation: The specific hardware specs you will be using.
 
   - parameters:
       param_name: Compute Platform
       options:
         - name: AWS Graviton3
-          specs: 
-            - Details here as well
+          specs: Details here as well
         - name: AWS Graviton2
-          specs: 
-            - Details here
+          specs: Details here
       selectable: false
       explanation: The compute hardware series to select between.
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
