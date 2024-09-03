@@ -1,0 +1,52 @@
+{{/*
+Overview box for all demos on learn.arm.com. Contains the overview summary, a reference picture, and instructions to run the demo.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+*/}}
+
+
+
+{{/* translate .Params.diagram into its appropriate path, into the Learning Path directory where it comes from */}}
+{{ $diagram := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) .Params.diagram }}
+
+
+
+
+<div class="content-box">
+    <h2>Overview</h2>
+        <p class="u-margin-left-1">{{.Params.overview}}</p>
+
+    <div class="c-row u-gap-1/2 u-flex-nowrap">
+        <!-- Left - Demo steps -->
+        <div class="c-col md:c-col-12 lg:c-col-8">
+            <h3 style="margin-left: -16px;">Running the Demo</h3>
+            <ol>
+            {{ range .Params.demo_steps }}
+                <li class="u-margin-left-1/2">{{.}}</li>
+            {{end}}
+            </ol>
+        </div>
+        <!-- Right - Architecture Diagram -->
+        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
+            <!-- modal setup -->
+            <ads-modal id="modal-diagram-expansion">
+                <div slot="body">
+                    <div class="demo-pic-in-modal">
+                        <img src="{{$diagram}}" alt="Demo architecture diagram"> 
+                    </div>
+                </div>
+                <!-- Visible on main page -->
+                <div slot="trigger" style="cursor: pointer;">
+                    <img id="modal-diagram-expansion-trigger" src="{{$diagram}}" alt="Demo architecture diagram" style=" max-width: 100%; height: auto;"> 
+                </div>
+            </ads-modal>
+        </div>        
+    </div>
+</div>

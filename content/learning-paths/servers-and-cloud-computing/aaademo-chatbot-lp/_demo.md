@@ -8,7 +8,7 @@ demo_steps:
   - View answer and result metrics to understand its performance.
   - Repeat steps 1-3 as desired. Results will update with each message.
 
-architecture_diagram: arch_diagram.png
+diagram: arch_diagram.png
 
 configuration_popup_details: Super long list of configuration information to provide to the user. Should be context and all that to be crystal clear what the setup is.
 
@@ -45,9 +45,29 @@ configuration_dropdown_options:
       selectable: false
       explanation: The compute hardware series to select between.
 
+### Specific details to this demo
+# ================================================================================
+tps_max: 50   # sets stat visuals for tps
+tps_ranges:
+  - name: Low
+    context: Low context here.
+    color: red
+    min: 0
+    max: 10
+  - name: Mid
+    context: Mid context here.
+    color: yellow
+    min: 10
+    max: 25
+  - name: High
+    context: High context here.
+    color: green
+    min: 25
+    max: 1000
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
+demo_template_name: llm_chatbot_first_demo   # allows the 'demo.html' partial to route to the correct Configuration and Demo/Stats sub partials for page render.
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.

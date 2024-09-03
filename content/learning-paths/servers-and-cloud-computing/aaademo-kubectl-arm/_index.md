@@ -1,9 +1,9 @@
 ---
-title: Chatbot on Arm CPU server aaaaa
+title: Kubernetes Arm quicktool aaaa
 
 minutes_to_complete: 60
 
-who_is_this_for: This is for developers who want to reproduce the provided chatbot demo.
+who_is_this_for: This is for developers who want to use the Kubernetes migration tool.
 
 learning_objectives:
     - One
@@ -17,17 +17,13 @@ author_primary: Zach Lasiuk
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: Containers and Virtualization 
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
-    - LLM
-    - GenAI
-    - Python
-    - LangChain
-    - AWS EC2
+    - Kubernetes
 
 
 ### FIXED, DO NOT MODIFY

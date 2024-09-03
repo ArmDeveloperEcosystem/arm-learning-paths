@@ -82,7 +82,12 @@ Where it is used:
     {{ $css_prism := slice | append (resources.Get "/css/prism-dark.css") (resources.Get "/css/prism-added-styles.css")
         | resources.Concat "css/mini_prism.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
-
+{{end}}
+<!-- Also add prism to any _demo page that needs it, set as a 'prismjs' variable -->
+{{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo") .Params.prismjs }}
+    {{ $css_prism := slice | append (resources.Get "/css/prism-dark.css") (resources.Get "/css/prism-added-styles.css")
+    | resources.Concat "css/mini_prism.css" | minify | fingerprint  }}
+    <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
 {{end}}
 
 
