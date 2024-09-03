@@ -1,5 +1,5 @@
 ---
-title: Function Multiversioning
+title: Learn about function multiversioning
 
 minutes_to_complete: 30
 
@@ -9,23 +9,24 @@ learning_objectives:
     - Take advantage of hardware features for tuning your applications at function level granularity.
     - Create multiple versions of C/C++ functions for the targets you intend to run your applications on.
     - Assist the compiler in generating better code for those targets, or provide your own optimized versions at the source level.
-    - Automatically select the most appropriate function version for your host target at runtime.
+    - Automatically select the most appropriate function version at runtime.
     - Reuse your optimized application binaries across various targets.
 
 prerequisites:
-    - Basic knowledge of GNU function attributes. Familiarity with indirect functions (ifuncs) is a plus.
+    - Basic knowledge of GNU function attributes. 
+    - Familiarity with indirect functions (ifuncs) is helpful, but not required.
     - Basic understanding of loop vectorization.
     - Familiarity with Arm assembly.
     - LLVM 19 compiler with runtime library support or GCC 14.
 
-author_primary: Arm
+author_primary: Alexandros Lamprineas
 
 ### Tags
-skilllevels: Intermediate
-subjects: Tuning
+skilllevels: Advanced
+subjects: Performance and Architecture
 armips:
-    - Armv8
-    - Armv9
+    - Cortex-A
+    - Neoverse
 tools_software_languages:
     - C/C++
 operatingsystems:

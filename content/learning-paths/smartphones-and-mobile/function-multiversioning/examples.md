@@ -1,18 +1,19 @@
 ---
-title: Examples
+title: Code generation example
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Examples
+This example specifies two versions of `sumPosEltsScaledByIndex` using the `target_clones` attribute (the order in which they are listed does not matter). 
 
-#### Code Generation example
+At certain optimization levels compilers can decide to perform loop vectorization depending on the target's vector capabilities. 
 
-In this example we have specified two versions of `sumPosEltsScaledByIndex` using the `target_clones` attribute (the order in which they are listed does not matter). At certain optimization levels compilers can decide to perform loop vectorization depending on the target's vector capabilities. Our intention is to enable the compiler to use SVE instructions in the specialized case, whilst restricting it to use only Armv8 instructions in the default one.
+The intention is to enable the compiler to use SVE instructions in the specialized case, while restricting it to use only Armv8 instructions in the default case.
 
-loop.c
+Use a text editor to create a file named `loop.c` with the code below:
+
 ```c
 __attribute__((target_clones("sve", "default")))
 int sumPosEltsScaledByIndex(int *v, unsigned n) {
@@ -24,18 +25,27 @@ int sumPosEltsScaledByIndex(int *v, unsigned n) {
 }
 ```
 
-Below are the commands for compiling this example using either `clang` or `gcc`.
+You can use either Clang or GCC to compile the code example.
+
+To compile with Clang run:
+
+```console
+clang --target=aarch64-linux-gnu -march=armv8-a -O3 --rtlib=compiler-rt -S -o - loop.c
 ```
-$ clang --target=aarch64-linux-gnu -march=armv8-a -O3 --rtlib=compiler-rt -S -o - loop.c
+
+To compile with GCC use:
+
+```console
+gcc -march=armv8-a -O3 -S -o - loop.c
 ```
-or
-```
-$ gcc -march=armv8-a -O3 -S -o - loop.c
-```
-Note that when using the `clang` compiler, the option `--rtlib=compiler-rt` should be specified on the command line. This allows the compiler to generate runtime checks for detecting the presence of hardware features on your host target.
+
+{{% notice Note %}}
+When using the `clang` compiler, specify the option `--rtlib=compiler-rt` on the command line. This allows the compiler to generate runtime checks for detecting the presence of hardware features.
+{{% /notice %}}
 
 Here is the generated compiler output for the SVE version of `sumPosEltsScaledByIndex` (using `clang`):
-```
+
+```output
 	.text
 	.globl	sumPosEltsScaledByIndex._Msve
 	.p2align	2
@@ -97,7 +107,8 @@ sumPosEltsScaledByIndex._Msve:
 ```
 
 This is the default version of `sumPosEltsScaledByIndex`:
-```
+
+```output
 	.section	.rodata.cst16,"aM",@progbits,16
 	.p2align	4, 0x0
 .LCPI2_0:
@@ -164,8 +175,9 @@ sumPosEltsScaledByIndex.default:
 	ret
 ```
 
-Any calls to `sumPosEltsScaledByIndex` are routed through `sumPosEltsScaledByIndex.resolver`. This is the function which contains the runtime checks for feature detection. More on this later.
-```
+Any calls to `sumPosEltsScaledByIndex` are routed through `sumPosEltsScaledByIndex.resolver`. This is the function which contains the runtime checks for feature detection. 
+
+```output
 	.section	.text.sumPosEltsScaledByIndex.resolver,"axG",@progbits,sumPosEltsScaledByIndex.resolver,comdat
 	.weak	sumPosEltsScaledByIndex.resolver
 	.p2align	2
@@ -185,233 +197,14 @@ sumPosEltsScaledByIndex.resolver:
 	ret
 ```
 
-The called symbol `sumPosEltsScaledByIndex` is an indirect function (IFUNC) which points to the resolver.
-```
+The called symbol `sumPosEltsScaledByIndex` is an indirect function (ifunc) which points to the resolver.
+
+```output
 .weak	sumPosEltsScaledByIndex
 .type	sumPosEltsScaledByIndex,@gnu_indirect_function
 .set sumPosEltsScaledByIndex, sumPosEltsScaledByIndex.resolver
 ```
 
-The names `sumPosEltsScaledByIndex._Msve` and `sumPosEltsScaledByIndex.default` correspond to the function versions of `sumPosEltsScaledByIndex`. See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#name-mangling) document for more details on the name mangling rules.
+The names `sumPosEltsScaledByIndex._Msve` and `sumPosEltsScaledByIndex.default` correspond to the function versions of `sumPosEltsScaledByIndex`. 
 
-#### Runtime example with use of ACLE intrinsics
-
-In this example we are computing the dot product of two vectors using ACLE intrinsics. Our intention is to enable the compiler to use SVE instructions in the specialized case, whilst restricting it to use only Armv8 instructions in the default one.
-
-More details on the default implementation can be found here: [Implement dot product of two vectors](/learning-paths/smartphones-and-mobile/android_neon/dot_product_neon)
-
-dotprod.c
-```c
-#include <stdio.h>
-#include <stdlib.h>
-#include <arm_neon.h>
-#include <arm_sve.h>
-
-__attribute__((target_version("sve")))
-int dotProduct(short *vec1, short* vec2, short len) {
-  printf("Running the sve version of dotProduct\n");
-
-  int i = 0;
-  svbool_t pg = svwhilelt_b32(i, len);
-  svbool_t pt = svptrue_b32();
-  svint32_t res = svdup_s32(0);
-  while (svptest_any(pt, pg)) {
-    svint32_t sv1 = svld1sh_s32(pg, vec1 + i);
-    svint32_t sv2 = svld1sh_s32(pg, vec2 + i);
-    res = svmla_m(pg, res, sv1, sv2);
-    i += svcntw();
-    pg = svwhilelt_b32(i, len);
-  }
-  return (int) svaddv(pt, res);
-}
-
-__attribute__((target_version("default")))
-int dotProduct(short* vec1, short* vec2, short len) {
-  printf("Running the default version of dotProduct\n");
-
-  const short transferSize = 4;
-  short segments = len / transferSize;
-
-  // 4-element vector of zeros
-  int32x4_t partialSumsNeon = vdupq_n_s32(0);
-  int32x4_t sum1 = vdupq_n_s32(0);
-  int32x4_t sum2 = vdupq_n_s32(0);
-  int32x4_t sum3 = vdupq_n_s32(0);
-  int32x4_t sum4 = vdupq_n_s32(0);
-
-  // Main loop (note that loop index goes through segments). Unroll with 4
-  int i = 0;
-  for(; i+3 < segments; i+=4) {
-    // Load vector elements to registers
-    int16x8_t v11 = vld1q_s16(vec1);
-    int16x4_t v11_low = vget_low_s16(v11);
-    int16x4_t v11_high = vget_high_s16(v11);
-
-    int16x8_t v12 = vld1q_s16(vec2);
-    int16x4_t v12_low = vget_low_s16(v12);
-    int16x4_t v12_high = vget_high_s16(v12);
-
-    int16x8_t v21 = vld1q_s16(vec1+8);
-    int16x4_t v21_low = vget_low_s16(v21);
-    int16x4_t v21_high = vget_high_s16(v21);
-
-    int16x8_t v22 = vld1q_s16(vec2+8);
-    int16x4_t v22_low = vget_low_s16(v22);
-    int16x4_t v22_high = vget_high_s16(v22);
-
-    // Multiply and accumulate: partialSumsNeon += vec1Neon * vec2Neon
-    sum1 = vmlal_s16(sum1, v11_low, v12_low);
-    sum2 = vmlal_s16(sum2, v11_high, v12_high);
-    sum3 = vmlal_s16(sum3, v21_low, v22_low);
-    sum4 = vmlal_s16(sum4, v21_high, v22_high);
-
-    vec1 += 16;
-    vec2 += 16;
-  }
-  partialSumsNeon = sum1 + sum2 + sum3 + sum4;
-
-  // Sum up remain parts
-  int remain = len % transferSize;
-  for(i = 0; i < remain; i++) {
-    int16x4_t vec1Neon = vld1_s16(vec1);
-    int16x4_t vec2Neon = vld1_s16(vec2);
-    partialSumsNeon = vmlal_s16(partialSumsNeon, vec1Neon, vec2Neon);
-    vec1 += 4;
-    vec2 += 4;
-  }
-
-  // Store partial sums
-  int partialSums[transferSize];
-  vst1q_s32(partialSums, partialSumsNeon);
-
-  // Sum up partial sums
-  int result = 0;
-  for(i = 0; i < transferSize; i++)
-    result += partialSums[i];
-
-  return result;
-}
-
-int scanVector(short *vec, short len) {
-  short *p = vec;
-  for (int i = 0; i < len; i++, p++)
-    if (scanf("%hd", p) != 1)
-      return 0;
-  return 1;
-}
-
-int main(int argc, char **argv) {
-  if (argc == 2) {
-    int n = atoi(argv[1]);
-    if (n < 16 || n > 1024)
-      return -1;
-    short v1[1024];
-    short v2[1024];
-    if (!scanVector(v1, n) || !scanVector(v2, n))
-      return -1;
-    int result = dotProduct(v1, v2, n);
-    printf("dotProduct = %d\n", result);
-  }
-  return 0;
-}
-```
-
-We are compiling and running the above example on hardware that has both SVE and Armv8 instructions:
-```
-$ clang --target=aarch64-linux-gnu -march=armv8-a -O3 dotprod.c --rtlib=compiler-rt
-```
-or
-```
-$ g++ -march=armv8-a -O3 dotprod.c
-```
-Note that gcc-14 does not yet support `target_version` when using the c-frontend, therefore it is recommended to use g++-14 instead.
-
-```
-$ echo 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 | ./a.out 16
-$ Running the sve version of dotProduct
-$ dotProduct = 32
-```
-The SVE version is being selected because it has higher priority than the default, as indicated by the table [here](https://arm-software.github.io/acle/main/acle.html#mapping).
-
-#### Runtime example with use of inline assembly
-
-In this example we are manipulating strings with the use of SVE2 instructions via inline assembly. Moreover we rely on the compiler in generating an optimized version of memcpy using FEAT_MOPS.
-
-More details on the SkipWord implementation can be found here: [SVE Programming Examples](https://developer.arm.com/documentation/dai0548/latest)
-
-skip-word.c
-```c
-#include <stdio.h>
-#include <string.h>
-
-__attribute__((target_clones("default", "mops")))
-char *CopyWord(char *dst, const char *src) {
-  size_t n = strlen(src);
-  memcpy(dst, src, n + 1);
-  return dst + n;
-}
-
-__attribute__((target_version("sve2")))
-const char *SkipWord(const char *p, const char *end) {
-  printf("Running the sve2 SkipWord\n");
-  __asm volatile (
-    "mov w2, #0xd090000\n\t"
-    "add w2, w2, #0xa20\n\t"
-    "mov z1.s, w2\n\t"
-    "whilelt p0.b, %0, %1\n"
-    "1:\n\t"
-    "ld1b z0.b, p0/z, [%0]\n\t"
-    "match p1.b, p0/z, z0.b, z1.b\n\t"
-    "b.any 2f\n\t"
-    "incb %0\n\t"
-    "whilelt p0.b, %0, %1\n\t"
-    "b.first 1b\n\t"
-    "mov %0, %1\n\t"
-    "b 3f\n"
-    "2:\n\t"
-    "brkb p2.b, p0/z, p1.b\n\t"
-    "incp %0, p2.b\n"
-    "3:\n\t"
-    : "+r" (p)
-    : "r" (end)
-    : "w2", "p0", "p1", "p2", "z0", "z1");
-    return p;
-}
-
-__attribute__((target_version("default")))
-const char *SkipWord(const char *p, const char *end) {
-  printf("Running the default SkipWord\n");
-  while (p != end && *p != ' ' && *p != '\n' && *p != '\r' && *p != '\t')
-    p++;
-  return p;
-}
-
-int main(int argc, char **argv) {
-  if (argc != 3)
-    return -1;
-  char buffer[256];
-  char *end = CopyWord(buffer, argv[1]);
-  end = CopyWord(end, argv[2]);
-  printf("%s\n", buffer);
-  printf("%s\n", SkipWord(buffer, buffer + strlen(buffer)));
-  return 0;
-}
-```
-
-We are compiling and running the above example on hardware that has both SVE2 and Armv8 instructions:
-```
-$ clang --target=aarch64-linux-gnu -march=armv8-a -O3 skip-word.c --rtlib=compiler-rt
-```
-or
-```
-$ g++ -march=armv8-a -O3 skip-word.c
-```
-Note that gcc++-14 does not support "mops" as a Function Multiversioning feature, so to compile this example with gcc remove the `target_clones` from CopyWord.
-
-```
-$ ./a.out "foo 2" " bar"
-$ foo 2 bar
-$ Running the sve2 SkipWord
-$  2 bar
-```
-The SVE2 version is being selected because it has higher priority than the default, as indicated by the table [here](https://arm-software.github.io/acle/main/acle.html#mapping).
+See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#name-mangling) for more details on the name mangling rules.
