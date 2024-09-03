@@ -34,6 +34,14 @@ operatingsystems:
     - Android
     - macOS
 
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - smartphones-and-mobile
+    - laptops-and-desktops
+    - embedded-systems
+
 # ================================================================================
 #       FIXED, DO NOT MODIFY
 # ================================================================================
