@@ -8,9 +8,11 @@ layout: learningpathall
 
 ## What is function multiversioning?
 
-Function multiversioning allows compiling several implementations of a function into the same binary and then selecting the most appropriate version at runtime. The intention is to take advantage of hardware features for accelerating your application at function level granularity.
+Function multiversioning allows the compiling of several implementations of a function into the same binary and then selects the most appropriate version at runtime. The benefit of this is that the developer can take advantage of hardware features to accelerate applications at function level granularity.
 
-To specify a function version you can annotate its declaration with either of  `__attribute__((target_version("name")))` or `__attribute__((target_clones("name",...)))`, where "name" denotes one or more architectural features separated by '+'. This annotation implies a dependency between a function version and the feature set it is specified for. The compiler generates optimized versions of the function for the specified targets. The `target_clones` attribute behaves just like `target_version` but specifies multiple versions for the same function definition. The former is perhaps suitable for functions that the compiler can optimize differently depending on the requested features, whereas the latter allows the user to manually optimize a version at the source level using intrinsics or inline assembly.
+To specify a function version, you can annotate its declaration with either of  `__attribute__((target_version("name")))` or `__attribute__((target_clones("name",...)))`, where "name" denotes one or more architectural features separated by '+'. 
+
+This annotation implies a dependency between a function version and the feature set it is specified for. The compiler generates optimized versions of the function for the specified targets. The `target_clones` attribute behaves in the same way as `target_version`, but specifies multiple versions for the same function definition. The former is suitable for functions that the compiler can optimize differently depending on the requested features, whereas the latter allows the user to manually optimize a version at the source level using intrinsics or inline assembly.
 
 A hardware platform may support multiple architectural features from the dependency sets, or it may not support any. 
 

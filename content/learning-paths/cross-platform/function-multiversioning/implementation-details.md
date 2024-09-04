@@ -1,5 +1,5 @@
 ---
-title: Implementation details
+title: Further information on implementation 
 weight: 6
 
 ### FIXED, DO NOT MODIFY

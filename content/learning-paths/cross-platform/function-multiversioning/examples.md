@@ -6,9 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-This example specifies two versions of `sumPosEltsScaledByIndex` using the `target_clones` attribute (the order in which they are listed does not matter). 
+This example specifies two versions of `sumPosEltsScaledByIndex` using the `target_clones` attribute. The order in which they are listed does not matter. 
 
-At certain optimization levels compilers can decide to perform loop vectorization depending on the target's vector capabilities. 
+At certain optimization levels, compilers can decide to perform loop vectorization depending on the target's vector capabilities. 
 
 The intention is to enable the compiler to use SVE instructions in the specialized case, while restricting it to use only Armv8 instructions in the default case.
 
@@ -27,13 +27,13 @@ int sumPosEltsScaledByIndex(int *v, unsigned n) {
 
 You can use either Clang or GCC to compile the code example.
 
-To compile with Clang run:
+To compile with Clang, run:
 
 ```console
 clang --target=aarch64-linux-gnu -march=armv8-a -O3 --rtlib=compiler-rt -S -o - loop.c
 ```
 
-To compile with GCC use:
+To compile with GCC, use:
 
 ```console
 gcc -march=armv8-a -O3 -S -o - loop.c
