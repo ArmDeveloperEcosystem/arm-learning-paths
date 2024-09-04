@@ -19,7 +19,7 @@ The 8GB RAM Raspberry Pi 5 model is preferred for exploring an LLM.
 
 ### Option 1: From the Docker container
 
-By collecting the files you need to run in the container directly, you can transfer them in a compressed format. This way you only have to do it once. Start by getting the model files in a separate folder. The bracketed file names are the absolute paths to the corresponding files that have been created in previous steps.
+By collecting the files you need to run in the container directly, you can transfer them in a compressed format. This means you can transfer all files with one command in the next section. Start by getting the model files in a separate folder. The bracketed file names are the absolute paths to the corresponding files that have been created in previous steps.
 
 ```bash
 mkdir llama3-files
@@ -98,3 +98,5 @@ Finally, run the model in the terminal of your Raspberry Pi 5 using the same com
 llama_main --model_path=<model pte file> --tokenizer_path=<tokenizer.model> --cpu_threads=4 \
 --prompt="Write a python script that prints the first 15 numbers in the Fibonacci series. Annotate the script with comments explaining what the code does."
 ```
+
+From here, you can play around with different prompts on your embedded device.

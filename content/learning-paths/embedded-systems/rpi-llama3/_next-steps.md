@@ -1,7 +1,7 @@
 ---
 next_step_guidance: >
-    Thank you for completing this Learning path on how to run a LLM on a Raspberry Pi 5 using Arm servers. You might be interested in learning how to TODO
-    
+    Thank you for completing this Learning path on how to run a LLM on a Raspberry Pi 5 using Arm servers. You might be interested in learning how to run the same model in the cloud.
+
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/llama-cpu/"
 

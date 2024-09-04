@@ -7,13 +7,13 @@ layout: learningpathall
 ---
 ## Overview
 
-Llama is a family of publicly available large language models (LLMs). Llama models have shown to perform well on a variety of natural language processing tasks, such as:
+Llama is a family of publicly available large language models (LLMs). Llama models have shown to perform well on a variety of natural language processing tasks.
 
 The models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and the [responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
 
 ### Quantization
 
-If you are not familiar with the topic of quantization, take a minute to read a few sentences describing why it matters when you are working with LLMs.
+If you are not familiar with the topic of quantization, take a minute to learn why it matters when you are working with LLMs.
 
 Given the large size of many neural networks, a technique called quantization is often used to reduce the memory footprint. It allows large models to be run in memory constrained environments. In a nutshell, quantization takes floating point tensors in a neural network and converts it into data format with a smaller bit-width. It is possible to go from the FP32 data format to INT8 without seeing significant loss in model accuracy. *Dynamic quantization* is when the quantization happens at runtime.
 

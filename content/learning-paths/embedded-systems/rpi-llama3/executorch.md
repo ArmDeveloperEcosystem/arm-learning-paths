@@ -18,7 +18,7 @@ python -m venv executorch-venv
 source executorch-venv/bin/activate
 ```
 
-The prompt of your terminal has (executorch-venv) as a prefix to indicate the virtual environment is active.
+Your terminal displays `(executorch-venv)` to indicate that the virtual environment is active.
 
 ### Option 2: Create a Conda virtual environment
 
@@ -33,7 +33,7 @@ conda activate executorch-venv
 
 ## Install clang
 
-Install clang if it is not already installed. 
+Install clang if it is not already installed.
 ```bash
 sudo apt install clang
 ```
@@ -66,8 +66,8 @@ git submodule update --init
 {{% notice Note %}}
 The install_requirements for Llama 3  are the same as for Llama 2, so you can use the instructions for both models up until the very last step.
 
-You can safely ignore the error on failing to import lm_eval running the install_requirements.sh scripts.
-"Failed to import examples.models due to lm_eval conflict"
+You can safely ignore the following error on failing to import lm_eval running the install_requirements.sh scripts:
+`Failed to import examples.models due to lm_eval conflict`
 {{% /notice %}}
 
 If these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!
