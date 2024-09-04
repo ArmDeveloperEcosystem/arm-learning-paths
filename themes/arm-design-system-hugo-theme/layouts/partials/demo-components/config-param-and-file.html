@@ -21,11 +21,11 @@ Calls to:
 <div class="content-box">
     <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
         <div class="c-col">
-            <h2>Configuration</h2>
-            <p>View the full configuration details on <a href="https://www.google.com">this page.</a></p>
             <div class="c-row u-gap-1/2 u-padding-top-0">
                 {{- $counter := 0 -}}
                     <div class="c-col config-param-div">
+                        <h2>Configuration</h2>
+                        <p>View the full configuration details on <a href="https://www.google.com">this page.</a></p>
                         {{- range .Params.configuration_dropdown_options -}}
                         <h6>{{ .parameters.param_name }}</h6>
                         <ads-select 

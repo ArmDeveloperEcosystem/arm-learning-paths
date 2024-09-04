@@ -108,6 +108,45 @@ Calls to:
 </div>
 
 
+<script>
+    function startPingCheck() {
+        setInterval(() => {
+            fetch('http://localhost:3000/ping')
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Ping failed');
+                    }
+                })
+                .then(data => {
+                    console.log('Ping success:', data);
+                    // Handle successful ping response here
+                })
+                .catch(error => {
+                    console.error('Ping error:', error);
+                    // Handle the error (e.g., notify the user, retry, etc.)
+                });
+        }, 3000); // 3000 milliseconds = 3 seconds
+    }
+    
+    // Start the ping check
+    startPingCheck();
+    
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -248,7 +287,6 @@ Calls to:
             // AVG-TPS = (current displayed + new) / 2
         prev_tps = 0;
         if (!isNaN(parseFloat(avg_tps.textContent)) && isFinite(avg_tps.textContent)) {
-            console.log("The string is a number.");
             prev_tps = parseFloat(avg_tps.textContent);
         } else {
             prev_tps = num_tps;
@@ -270,7 +308,132 @@ Calls to:
     
 </script>
 
+
+
+
+
+
+{{/*  =======================================================
+=============================================================
+                API INTERACTIONS 
+=============================================================
+=============================================================
+=============================================================
+*/}}
 <script>
+
+    function displayError(error_message) {
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+        chatbot_message_span.textContent += messageData;
+
+    }
+
+
+    function displayMessage(messageData) {
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+        chatbot_message_span.textContent += messageData;
+
+    }
+
+    function sendToServer(data) {
+        // API SEND --> SEND DATA TO SERVER AND HANDLE SSE RESPONSE
+        fetch('http://localhost:3000/send-message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data })
+        })
+        .then(response => {
+            if (response.ok) {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder("utf-8");
+    
+                function readStream() {
+                    return reader.read().then(({ done, value }) => {
+                        if (done) {
+                            console.log("Stream complete");
+                            return;
+                        }
+    
+                        // Decode and process the SSE message
+                        const text = decoder.decode(value, { stream: true });
+                        const lines = text.split("\n");
+    
+                        lines.forEach(line => {
+                            if (line.startsWith("data: ")) {
+                                const messageData = JSON.parse(line.slice(6)); // Extract JSON after "data: "
+                                displayMessage(messageData.value);
+                            }
+                        });
+    
+                        // Continue reading the stream
+                        return readStream();
+                    });
+                }
+    
+                return readStream();
+            } else {
+                console.error('Error sending message to the server');
+                // update last chato
+                displayError("No response from the server: timeout occured. Darn. Try refreshing or spinning up the server.")
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+</script>
+{{/*===============================================================
+===============================================================*/}}
+
+
+
+
+
+
+
+
+
+<script>
+
+
+    function prepareConversationData() {
+        const messages_div = document.getElementById('all-messages-div');
+        const all_messages = messages_div.children;
+        
+        var conversation_data = [];
+    
+        for (let i = 0; i < all_messages.length; i++) {
+            const messages_div = all_messages[i];
+            const message_text = messages_div.querySelector('span').textContent;
+    
+            if (messages_div.classList.contains('user-message')) {
+                conversation_data.push({ sender: "user", text: message_text });
+            } else if (messages_div.classList.contains('chatbot-message')) {
+                conversation_data.push({ sender: "model", text: message_text });
+            }
+        }
+
+        // remove useless unfilled model placeholder
+        conversation_data.reverse();
+        conversation_data.pop();
+    
+        return conversation_data;
+    }
+
+
+
+
 
     // Initalize vars
     const message_history = document.querySelector('#all-messages-div');
@@ -298,17 +461,17 @@ Calls to:
         this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
     });
 
+
     const submit_button = document.querySelector('#submit-button');
     submit_button.addEventListener('click', function() {
         // Get initial vars
         const all_messages_div = document.getElementById('all-messages-div');
         const textarea_input = document.querySelector('#user-input-for-demo');
-        // Do something
-        console.log('clicked!', this);
+        
+        
 
         // Get user's message
         const user_input = textarea_input.value;
-        console.log(user_input);
 
         // If blank, encourage an entry via placeholder and pulse
         if (user_input === "") {
@@ -321,8 +484,12 @@ Calls to:
             // Add new chat message in UI
             const user_div = document.createElement('div');
             user_div.classList.add('user-message');
+
+            const user_span_for_message = document.createElement('span');
+            user_div.appendChild(user_span_for_message);
+
             
-            user_div.textContent = user_input;
+            user_span_for_message.textContent = user_input;
             all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
 
             const chatbot_div = document.createElement('div');
@@ -338,15 +505,28 @@ Calls to:
 
             const chatbot_span_for_message = document.createElement('span');
 
-
             chatbot_div.appendChild(new_icon);
             chatbot_span_for_message.appendChild(new_loader);
             chatbot_div.appendChild(chatbot_span_for_message);
             all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
 
+            //////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////
+            //                  API CODE                                //
+            /////////////////////////////////////////////////////////////
+
+            // Get history of user chatbot interaction to send
+            const conversation_history = prepareConversationData();
+            console.log('conversation history:', conversation_history);
+
+
+            sendToServer(conversation_history)
+
+
             // SEND MESSAGE TO API
             //last_message = insertRandomSentenceWithDelay(chatbot_span_for_message);
-            last_message = insertRandomSentenceWithStreaming(chatbot_span_for_message);
+            //last_message = insertRandomSentenceWithStreaming(chatbot_span_for_message);
 
 
         }

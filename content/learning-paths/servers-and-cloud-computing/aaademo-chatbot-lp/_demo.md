@@ -50,17 +50,17 @@ configuration_dropdown_options:
 tps_max: 50   # sets stat visuals for tps
 tps_ranges:
   - name: Low
-    context: Low context here.
+    context: TPS is low right now. The reasons why are x, y, and z.
     color: red
     min: 0
     max: 10
   - name: Mid
-    context: Mid context here.
+    context: Average TPS throughput. This is considered good enough for human readability.
     color: yellow
     min: 10
     max: 25
   - name: High
-    context: High context here.
+    context: Excellent TPS - a high quality UX is being delivered. Due to x, y, and z reasons.
     color: green
     min: 25
     max: 1000
