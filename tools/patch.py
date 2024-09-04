@@ -31,6 +31,9 @@ def patch(article_path: str, results: dict, link: str):
     results_values[0] = "passed"
 
     for image, i in zip(test_images, range(len(test_images))):
+        if content_title not in data["sw_categories"][sw_category]:
+            raise KeyError(f"{content_title} does not exist in {stats_file}. Add it to update the stats report.")
+
         data["sw_categories"][sw_category][content_title]["tests_and_status"][i][image] = results_values[results[image]]
 
     if link:

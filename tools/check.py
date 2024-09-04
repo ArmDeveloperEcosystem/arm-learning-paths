@@ -183,7 +183,7 @@ def check(json_file, start, stop, md_article):
 
                 # Copy over the file with commands
                 docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
-                subprocess.run(docker_cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                subprocess.run(docker_cmd, shell=True, capture_output=True)
                 logging.debug(docker_cmd)
                 # Remove file with list of commands
                 os.remove(test_cmd_filename)
@@ -209,7 +209,7 @@ def check(json_file, start, stop, md_article):
                     continue
 
                 logging.debug(docker_cmd)
-                process = subprocess.run(docker_cmd, shell=True, stderr=subprocess.PIPE, stdout=subprocess.PIPE)
+                process = subprocess.run(docker_cmd, shell=True, check=False, capture_output=True)
                 process_output = process.stdout.rstrip().decode("utf-8")
 
                 # Create test case
@@ -243,7 +243,7 @@ def check(json_file, start, stop, md_article):
                 bar()
                 logging.info(f"{msg}")
                 if not test_passed:
-                    logging.debug(f"{process_output}")
+                    logging.info(f"{process.stderr.rstrip().decode("utf-8")}")
                 else:
                     logging.debug(f"{process_output}")
 
