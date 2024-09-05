@@ -1,5 +1,5 @@
 ---
-title: Code generation example
+title: Example 1 - code generation
 weight: 3
 
 ### FIXED, DO NOT MODIFY

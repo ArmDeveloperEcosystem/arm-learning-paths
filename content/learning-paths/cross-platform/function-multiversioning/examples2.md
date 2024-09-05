@@ -1,5 +1,5 @@
 ---
-title: Runtime example using ACLE intrinsics
+title: Example 2 - runtime using ACLE intrinsics
 weight: 4
 
 ### FIXED, DO NOT MODIFY

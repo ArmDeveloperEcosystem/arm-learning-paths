@@ -1,5 +1,5 @@
 ---
-title: Inline assembly at runtime example
+title: Example 3 - inline assembly at runtime
 weight: 5
 
 ### FIXED, DO NOT MODIFY

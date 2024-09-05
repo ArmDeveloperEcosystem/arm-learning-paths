@@ -1,20 +1,20 @@
 ---
-title: Semantics
+title: About Function Multiversioning
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is function multiversioning?
+## What is function multiversioning, and how does it work?
 
-Function multiversioning allows the compiling of several implementations of a function into the same binary and then selects the most appropriate version at runtime. The benefit of this is that the developer can take advantage of hardware features to accelerate applications at function level granularity.
+Function multiversioning enables the compiling of several implementations of a function into the same binary, and then selects the most appropriate version at runtime. The benefit of this is that you can use hardware features to accelerate applications at function level.
 
 To specify a function version, you can annotate its declaration with either of  `__attribute__((target_version("name")))` or `__attribute__((target_clones("name",...)))`, where "name" denotes one or more architectural features separated by '+'. 
 
-This annotation implies a dependency between a function version and the feature set it is specified for. The compiler generates optimized versions of the function for the specified targets. The `target_clones` attribute behaves in the same way as `target_version`, but specifies multiple versions for the same function definition. The former is suitable for functions that the compiler can optimize differently depending on the requested features, whereas the latter allows the user to manually optimize a version at the source level using intrinsics or inline assembly.
+This annotation implies a dependency between a function version and the feature set it is specified for. The compiler generates optimized versions of the function for the specified targets. The `target_clones` attribute behaves in the same way as `target_version`, but specifies multiple versions for the same function definition. The former is suitable for functions that the compiler can optimize differently depending on the requested features, whereas the latter allows the user to manually optimize a version at source level using intrinsics or inline assembly.
 
-A hardware platform may support multiple architectural features from the dependency sets, or it may not support any. 
+A hardware platform is able to support multiple architectural features from the dependency sets, or it might not support any. 
 
 Function multiversioning provides a convenient way to select the most appropriate version of a function at runtime. The selection is permanent for the lifetime of the process and works as follows:
 
