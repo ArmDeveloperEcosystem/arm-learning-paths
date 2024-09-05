@@ -54,12 +54,29 @@ Calls to:
                         {{- end -}}             
                     </div>
                     <div class="c-col config-file-div">
-                        <div class="config-file-display">
-                            <div class="config-file-header">hosted-llm-chatbot.yaml</div>
-                            <div class="config-file-content">
-                                {{ $file_path := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "hosted-llm-chatbot.yaml" }}
 
-                                <pre>{{ readFile $file_path }}</pre>
+                        <div class="element-to-blow-up">
+                            <!-- on page -->
+                            <div class="clickable-blowup">
+                                <div class="config-file-display">
+                                    <div class="config-file-header">hosted-llm-chatbot.yaml</div>
+                                    <div class="config-file-content small">
+                                        {{ $file_path := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "hosted-llm-chatbot.yaml" }}
+        
+                                        <pre>{{ readFile $file_path }}</pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- blown up -->
+                            <div id="diagram-overlay" class="content-blowup">
+                                <div class="config-file-display ">
+                                    <div class="config-file-header">hosted-llm-chatbot.yaml</div>
+                                    <div class="config-file-content large">
+                                        {{ $file_path := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "hosted-llm-chatbot.yaml" }}
+        
+                                        <pre>{{ readFile $file_path }}</pre>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -68,7 +85,6 @@ Calls to:
         </div>    
     </div>
 </div>
-
 
 
 
@@ -123,3 +139,5 @@ Calls to:
         {{- end -}}
 
 </script>
+
+

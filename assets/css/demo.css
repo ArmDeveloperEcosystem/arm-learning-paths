@@ -77,11 +77,16 @@
 }
 
 .config-file-content {
-    max-height: 250px; /* Match the length of content about */
     flex-grow: 1; 
     overflow-y: auto; 
     padding: 10px;
     background-color: #C6C6C6;
+}
+.config-file-content.small {
+    max-height: 250px; /* Match the length of content about */
+}
+.config-file-content.large {
+    max-height: 80vh; /* Match the length of content about */
 }
 
 .config-file-content pre {
@@ -163,6 +168,13 @@
 #reset-demo-txt:hover {
     color: var(--arm-green);
 }
+#ping-info {
+    margin-top: 8px;
+    margin-left: 24px;
+    text-align: center;
+    float: left;
+    color: grey;
+}
 
 .user-message {
     background-color: #545454;
@@ -182,6 +194,8 @@
     /* text alignment */
     text-align: left;
     font-size: 18px!important;
+    overflow-wrap: break-word; /* First attempt to break the word naturally */
+    word-break: break-word;    /* Then break at any character if needed */
 
     /* Enable fade in */
     opacity: 0;
@@ -212,6 +226,8 @@
     /* text alignment */
     text-align: left;
     font-size: 18px!important;
+    overflow-wrap: break-word; /* First attempt to break the word naturally */
+    word-break: break-word;    /* Then break at any character if needed */
 }
 
 
@@ -277,12 +293,37 @@
 
 
   .pie-chart {
-    width: 150px;
-    height: 150px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
     background: conic-gradient(
         var(--arm-green) 0% 81.81%,   /* 9/11 segments in green */
         var(--arm-yellow) 81.81% 90.91%,  /* 1/11 segment in yellow */
         var(--arm-orange) 90.91% 100%   /* 1/11 segment in red */
     );
+}
+
+
+
+
+.clickable-blowup {
+    cursor: pointer;
+}
+
+.content-blowup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.blown-up-image {
+    max-width: 90%;
+    max-height: 90%;
 }

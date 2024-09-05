@@ -41,6 +41,7 @@ Calls to:
 
 
 {{ $chatbot_icon := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "chatbot-icon.png" }}
+{{ $system_icon := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "system-icon.png" }}
 
 
 <div class="content-box">
@@ -51,7 +52,7 @@ Calls to:
             <div id="demo-container">
                 <div id="all-messages-div">
                     <div class="chatbot-message">
-                        <img src="{{$chatbot_icon}}" style="margin-right: 10px;" alt="Chatbot Icon">
+                        <img src="{{$system_icon}}" style="margin-right: 10px;" alt="System Icon">
                         <span id="initial-message-span"><ads-loader></ads-loader></span>
                     </div>
                 </div>
@@ -59,12 +60,13 @@ Calls to:
                     <div class="c-row">
                         <div class="c-col" id="input-and-submit">
                             <textarea id="user-input-for-demo" placeholder="enter info" rows="1"></textarea>
-                            <ads-button id="submit-button" level="primary">Submit</ads-button>
+                            <ads-button id="submit-button" level="primary" disabled>Submit</ads-button>
                         </div>
                     </div>
                     <div class="c-row">
                         <div class="c-col">
                             <p id="reset-demo-txt">Reset chat</p>
+                            <span id="ping-info"></span>
                         </div>
                     </div>
                 </div>
@@ -110,27 +112,59 @@ Calls to:
 
 <script>
     function startPingCheck() {
-        setInterval(() => {
-            fetch('http://localhost:3000/ping')
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Ping failed');
-                    }
-                })
-                .then(data => {
-                    console.log('Ping success:', data);
-                    // Handle successful ping response here
-                })
-                .catch(error => {
-                    console.error('Ping error:', error);
-                    // Handle the error (e.g., notify the user, retry, etc.)
-                });
-        }, 3000); // 3000 milliseconds = 3 seconds
+        console.log('sending initial ping...');
+        const startTime = Date.now();
+        fetch('http://localhost:3000/ping', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ timestamp: startTime })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Ping failed');
+            }
+        })
+        .then(data => {
+            const endTime = Date.now();
+            const ping = (endTime - startTime)/2;
+            console.log('Ping:', ping, 'ms');
+            //console.log('Server received ping at:', data.serverReceivedTime);
+            console.log('Connection status:', data.status);
+
+            // UPDATE UI
+            //   Enable submit, update ping
+            document.getElementById('submit-button').disabled = false;
+            document.getElementById('ping-info').textContent = `Round-trip ping: ${ping}ms`
+
+
+            if (data.status == 'normal') {
+                systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `Hi! You are connected to a Graviton backend server running an LLM. Minimal traffic on the server. Your round-trip ping time is ${ping}ms.`);
+            }
+            else if (data.status == 'high') {
+                systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `Hi! You are connected to a Graviton backend server running an LLM. High traffic on the server, you may have to re-send messages if the server gets overloaded. Your round-trip ping time is ${ping}ms.`);
+            }
+            else if (data.status == 'at-limit') {
+                systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `Hi! You are connected to a Graviton backend server running an LLM. The server is at capacity, it is likely you'll have to re-send messages if the server gets overloaded. Your round-trip ping time is ${ping}ms.`);
+            }
+
+        })
+        .catch(error => {       // Auto errors after ~2 seconds timeout
+            console.error('Ping error:', error);
+            // Disable submit button and entry buttons
+            document.getElementById('user-input-for-demo').disabled = true;
+
+            systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `No connection established. The problem may be with us, try coming back later.`);
+            
+
+        });
     }
     
-    // Start the ping check
     startPingCheck();
     
 
@@ -154,6 +188,25 @@ Calls to:
 
 
 <script>
+
+    function systemMessageStreaming(div, message) {
+        setTimeout(() => {
+            let currentIndex = 0;
+            const intervalId = setInterval(() => {
+                div.textContent += message[currentIndex];
+                currentIndex++;
+                if (currentIndex === message.length) {
+                    clearInterval(intervalId);
+                }
+            }, 5);
+        });
+    }
+
+
+
+
+
+
     function insertRandomSentenceWithDelay(div) {
         const sentences = [
             "The quick brown fox jumps over the lazy dog.",
@@ -305,6 +358,61 @@ Calls to:
         context.textContent = getMessageForNumber(num_avg_tps);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+    function updateLLMMetrics(metrics_object) {
+        // Show stats if they are not already shown
+        document.getElementById('stats-populated').hidden = false;
+        document.getElementById('stats-initial').hidden = true;
+
+        // obtain spans to replace
+        const avg_tps = document.getElementById('avg-tps-metric');
+        const total_time = document.getElementById('total-time-metric');
+        const tokens = document.getElementById('num-tokens-metric');
+        const tps = document.getElementById('tps-metric');
+        const ttft = document.getElementById('ttft-metric');
+        const context = document.getElementById('overall-context-metric');
+
+        // replace last message metrics
+        var num_tps = parseInt(metrics_object['tps'],10);
+        tps.textContent = num_tps;
+        ttft.textContent = metrics_object['ttft'];
+        tokens.textContent = metrics_object['prompt_tokens'];
+        total_time.textContent = metrics_object['completion_time'];
+
+        // Overall TPS
+            // AVG-TPS = (current displayed + new) / 2
+        prev_tps = 0;
+        if (!isNaN(parseFloat(avg_tps.textContent)) && isFinite(avg_tps.textContent)) {
+            prev_tps = parseFloat(avg_tps.textContent);
+        } else {
+            prev_tps = num_tps;
+        }
+        var num_avg_tps = ((num_tps + prev_tps) / 2).toFixed(2);
+        avg_tps.textContent = num_avg_tps;
+
+        num_avg_tps = Math.round(num_avg_tps);
+        const maxValue = {{.Params.tps_max}};        
+        const bar = document.getElementById('bar');
+        const barWidth = (num_avg_tps / maxValue) * 100; // Calculate width as a percentage
+        bar.style.width = `${barWidth}%`;
+        bar.textContent = num_avg_tps; // Display the value inside the bar      
+
+        // Context
+        context.textContent = getMessageForNumber(num_avg_tps);
+        console.log(metrics_object);
+    }
+
+
     
 </script>
 
@@ -365,15 +473,17 @@ Calls to:
                         }
     
                         // Decode and process the SSE message
-                        const text = decoder.decode(value, { stream: true });
-                        const lines = text.split("\n");
-    
-                        lines.forEach(line => {
-                            if (line.startsWith("data: ")) {
-                                const messageData = JSON.parse(line.slice(6)); // Extract JSON after "data: "
-                                displayMessage(messageData.value);
-                            }
-                        });
+                        const return_message = decoder.decode(value, { stream: true });
+
+                        const return_json = JSON.parse(return_message.split('data: ')[1]);
+
+                        console.log("JSON:",return_json);
+                        if (return_json.message_type === 'chunk') {
+                            displayMessage(return_json.value+" ");
+                        } else if (return_json.message_type === 'completion_metadata') {                            
+                            updateLLMMetrics(return_json.value);
+                        }
+
     
                         // Continue reading the stream
                         return readStream();
@@ -439,12 +549,14 @@ Calls to:
     const message_history = document.querySelector('#all-messages-div');
 
     // Set 'Intersection Observer' to display a welcome message when user sees the chatbot input box.
+    /*
     const observer = new IntersectionObserver(onVisibilityChange, {
         root: null,     // full viewport = root
         threshold: 0.1  // Trigger when at least 10% of the element is visible
     });
     const chatbot_detection_div = document.getElementById('input-and-submit');
     observer.observe(chatbot_detection_div);
+    */
     
     
     

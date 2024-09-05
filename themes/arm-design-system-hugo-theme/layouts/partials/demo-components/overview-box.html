@@ -35,18 +35,50 @@ Calls to:
         </div>
         <!-- Right - Architecture Diagram -->
         <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
-            <!-- modal setup -->
-            <ads-modal id="modal-diagram-expansion">
-                <div slot="body">
-                    <div class="demo-pic-in-modal">
-                        <img src="{{$diagram}}" alt="Demo architecture diagram"> 
-                    </div>
+            <div class="element-to-blow-up">
+                <!-- on page -->
+                <div class="clickable-blowup">
+                    <img src="{{$diagram}}" alt="summary picture" id="diagram-picture" style="max-width:100%; height: auto;">
                 </div>
-                <!-- Visible on main page -->
-                <div slot="trigger" style="cursor: pointer;">
-                    <img id="modal-diagram-expansion-trigger" src="{{$diagram}}" alt="Demo architecture diagram" style=" max-width: 100%; height: auto;"> 
+                <!-- blown up overlay -->
+                <div id="diagram-overlay" class="content-blowup">
+                    <img src="{{$diagram}}" alt="Blown Up Diagram" class="blown-up-image" id="blown-up-image">
                 </div>
-            </ads-modal>
+            </div>
         </div>        
     </div>
 </div>
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const elementsToBlowUp = document.querySelectorAll('.element-to-blow-up');
+        elementsToBlowUp.forEach(element => {
+            const clickableElement = element.querySelector('.clickable-blowup');
+            const overlay = element.querySelector('.content-blowup');
+    
+            clickableElement.addEventListener('click', () => {
+                overlay.style.display = 'flex';
+            });
+    
+            overlay.addEventListener('click', (e) => {
+                if (!overlay.contains(e.target) || e.target === overlay) {
+                    overlay.style.display = 'none';
+                }
+            });
+    
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    overlay.style.display = 'none';
+                }
+            });
+        });
+    });   
+
+</script>
+
+
+
