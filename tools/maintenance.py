@@ -150,14 +150,11 @@ def main():
                     sys.exit(0)
         elif os.path.isdir(args.instructions) and "/learning-paths/" in os.path.abspath(args.instructions):
             results_dict = check_lp(args.instructions, args.link, args.debug)
-            if not args.debug:
-                os.remove(args.instructions+"_cmd.json")
         else:
             logging.error("-i/--instructions expects a .md file, a CSV with a list of files or a Learning Path directory")
         if args.stats_report:
             # If all test results are zero, all tests have passed
             patch.patch(args.instructions, results_dict, args.link)
-
         if not all(results_dict.get(k) for k in results_dict):
             # Errors exist
             sys.exit(1)
