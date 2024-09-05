@@ -211,6 +211,7 @@ def check(json_file, start, stop, md_article):
                 logging.debug(docker_cmd)
                 process = subprocess.run(docker_cmd, shell=True, check=False, capture_output=True)
                 process_output = process.stdout.rstrip().decode("utf-8")
+                process_error = process.stderr.rstrip().decode("utf-8")
 
                 # Create test case
                 test_case_name = json_file.replace("_cmd.json","")
@@ -243,7 +244,7 @@ def check(json_file, start, stop, md_article):
                 bar()
                 logging.info(f"{msg}")
                 if not test_passed:
-                    logging.info(f"{process.stderr.rstrip().decode("utf-8")}")
+                    logging.info(f"{process_error}")
                 else:
                     logging.debug(f"{process_output}")
 
