@@ -1,21 +1,17 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Research which lightweight ML models can be used for TinyML, and what device is best for a specific project.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/microcontrollers/intro/
+
+recommended_path: /learning-paths/microcontrollers/nav-mlek/
+
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
-        type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: TinyML Brings AI to Smallest Arm Devices 
+        link: https://newsroom.arm.com/blog/tinyml
         type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+    
 
 
 # ================================================================================

@@ -30,8 +30,8 @@ review:
         answers:
             - Smart sensors for soil moisture monitoring.
             - Wearable devices monitoring vital signs and detecting heart arrhythmias.
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
+            - Predictive maintenance for factory machines.
+            - Object detection for smart home cameras.
         correct_answer: 2          
         explanation: >
             Wearable devices that monitor vital signs and detect heart arrhythmias show TinyML's ability to perform complex analyses in real-time on resource-constrained device.
