@@ -59,7 +59,7 @@ import streamlit as st
 import time
 from openai import OpenAI
 
-st.title("ARM PyTorch Demo")
+st.title("Llama 3.1 Chatbot Demo with PyTorch on Arm")
 response_max_tokens = 1024
 start_state = [
     {"role": "assistant", "content": "How can I help you?"},
