@@ -61,6 +61,7 @@ Calls to:
                         <div class="c-col" id="input-and-submit">
                             <textarea id="user-input-for-demo" placeholder="enter info" rows="1"></textarea>
                             <ads-button id="submit-button" level="primary" disabled>Submit</ads-button>
+                            <div id="notification-popup" class="hide-popup"></div>
                         </div>
                     </div>
                     <div class="c-row">
@@ -109,66 +110,6 @@ Calls to:
 
 </div>
 
-
-<script>
-    function startPingCheck() {
-        console.log('sending initial ping...');
-        const startTime = Date.now();
-        fetch('http://localhost:3000/ping', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ timestamp: startTime })
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Ping failed');
-            }
-        })
-        .then(data => {
-            const endTime = Date.now();
-            const ping = (endTime - startTime)/2;
-            console.log('Ping:', ping, 'ms');
-            //console.log('Server received ping at:', data.serverReceivedTime);
-            console.log('Connection status:', data.status);
-
-            // UPDATE UI
-            //   Enable submit, update ping
-            document.getElementById('submit-button').disabled = false;
-            document.getElementById('ping-info').textContent = `Round-trip ping: ${ping}ms`
-
-
-            if (data.status == 'normal') {
-                systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `Hi! You are connected to a Graviton backend server running an LLM. Minimal traffic on the server. Your round-trip ping time is ${ping}ms.`);
-            }
-            else if (data.status == 'high') {
-                systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `Hi! You are connected to a Graviton backend server running an LLM. High traffic on the server, you may have to re-send messages if the server gets overloaded. Your round-trip ping time is ${ping}ms.`);
-            }
-            else if (data.status == 'at-limit') {
-                systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `Hi! You are connected to a Graviton backend server running an LLM. The server is at capacity, it is likely you'll have to re-send messages if the server gets overloaded. Your round-trip ping time is ${ping}ms.`);
-            }
-
-        })
-        .catch(error => {       // Auto errors after ~2 seconds timeout
-            console.error('Ping error:', error);
-            // Disable submit button and entry buttons
-            document.getElementById('user-input-for-demo').disabled = true;
-
-            systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `No connection established. The problem may be with us, try coming back later.`);
-            
-
-        });
-    }
-    
-    startPingCheck();
-    
-
-</script>
 
 
 
@@ -430,6 +371,64 @@ Calls to:
 */}}
 <script>
 
+
+    function startPingCheck() {
+        console.log('sending initial ping...');
+        const startTime = Date.now();
+        fetch('http://localhost:3000/ping', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ timestamp: startTime })
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Ping failed');
+            }
+        })
+        .then(data => {
+            const endTime = Date.now();
+            const ping = (endTime - startTime)/2;
+            console.log('Ping:', ping, 'ms');
+            //console.log('Server received ping at:', data.serverReceivedTime);
+            console.log('Connection status:', data.status);
+
+            // UPDATE UI
+            //   Enable submit, update ping
+            document.getElementById('submit-button').disabled = false;
+
+            if (data.status == 'normal') {
+                systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `System message: You are connected to a Graviton backend server running an LLM. Start interacting with the chatbot to see the stats on the right.`);
+                document.getElementById('ping-info').textContent = `Server traffic: Low. Ping: ${ping}ms`
+
+            }
+            else if (data.status == 'high') {
+                systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `System message: You are connected to a Graviton backend server running an LLM. Start interacting with the chatbot to see the stats on the right.`);
+                document.getElementById('ping-info').textContent = `Server traffic: High (delays possible).   Ping: ${ping}ms`
+            }
+            else if (data.status == 'at-limit') {
+                systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `System message: You are connected to a Graviton backend server running an LLM. Start interacting with the chatbot to see the stats on the right.`);
+                document.getElementById('ping-info').textContent = `Server traffic: At limit (expect delays).   Ping: ${ping}ms`
+
+            }
+
+        })
+        .catch(error => {       // Auto errors after ~2 seconds timeout
+            console.error('Ping error:', error);
+            // Disable submit button and entry buttons
+            document.getElementById('user-input-for-demo').disabled = true;
+
+            systemMessageStreaming(document.getElementById('initial-message-span'),
+                    `System message: No connection established. The problem may be with us, try refreshing the page or coming back later.`);
+            
+
+        });
+    }
+    
     function displayError(error_message) {
         const all_messages_div = document.getElementById('all-messages-div');
         const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
@@ -441,6 +440,7 @@ Calls to:
     }
 
 
+
     function displayMessage(messageData) {
         const all_messages_div = document.getElementById('all-messages-div');
         const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
@@ -449,6 +449,27 @@ Calls to:
 
         chatbot_message_span.textContent += messageData;
 
+    }
+
+
+    function showPopup(message) {
+        // Remove pending chatbot message
+        var all_messages_div = document.getElementById('all-messages-div');
+        var first_chatbot_message = all_messages_div.querySelector('.chatbot-message');
+        if (first_chatbot_message) {all_messages_div.removeChild(first_chatbot_message);}      
+
+        // Show popup
+        var popup_div = document.getElementById('notification-popup');
+        popup_div.textContent = message;
+        popup_div.classList.remove('hide-popup');
+        popup_div.classList.add('show-popup');
+    }
+    function hidePopup() {
+        var popup_div = document.getElementById('notification-popup');
+
+        // fade it out
+        popup_div.classList.remove('show-popup');
+        popup_div.classList.add('hide-popup');
     }
 
     function sendToServer(data) {
@@ -478,6 +499,16 @@ Calls to:
                         const return_json = JSON.parse(return_message.split('data: ')[1]);
 
                         console.log("JSON:",return_json);
+
+
+
+                        if (return_json.message_type == 'initial_response' && return_json.value == 'NO_RESOURCES_AVAILABLE') {
+                            showPopup("No open resources -  try sending a new message.");                                                 
+                        }
+                        else if (return_json.message_type == 'initial_response' && return_json.value == 'STREAM_STARTING') {
+                            hidePopup();
+                        }
+
                         if (return_json.message_type === 'chunk') {
                             displayMessage(return_json.value+" ");
                         } else if (return_json.message_type === 'completion_metadata') {                            
@@ -497,10 +528,26 @@ Calls to:
                 displayError("No response from the server: timeout occured. Darn. Try refreshing or spinning up the server.")
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
+        .catch(error => { // Timeout of some length
+            
+            if (error.message === 'NetworkError when attempting to fetch resource.') {
+                console.error('Network error: Please check your internet connection and try again.');
+                showPopup('Server timeout - it could be us or your internet connection.')
+
+            } else if (error.message === 'Error in input stream') {
+                console.error('Input stream error: There was a problem with the data stream.');
+                showPopup('Stream interrupted - try sending a new message.')
+
+            } else {
+                console.error('An unexpected error occurred:', error.message);
+                showPopup('Unknown error - try sending a new message.')
+
+            }
         });
     }
+
+    startPingCheck();
+
 
 </script>
 {{/*===============================================================
