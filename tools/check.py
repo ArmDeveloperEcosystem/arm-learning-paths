@@ -4,7 +4,7 @@ import logging
 import os
 import subprocess
 import json
-from junit_xml import TestSuite, TestCase
+from junit_xml import TestCase
 import alive_progress
 
 """
@@ -185,6 +185,8 @@ def check(json_file, start, stop, md_article):
                 docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
                 subprocess.run(docker_cmd, shell=True, capture_output=True)
                 logging.debug(docker_cmd)
+                # Remove the file storing the command since we now copied it to container
+                os.remove(test_cmd_filename)
 
                 test_type = test["type"]
                 # Check type
@@ -207,7 +209,7 @@ def check(json_file, start, stop, md_article):
                     continue
 
                 logging.debug(docker_cmd)
-                process = subprocess.run(docker_cmd, shell=True, check=False, capture_output=True)
+                process = subprocess.run(docker_cmd, shell=True, capture_output=True)
                 process_output = process.stdout.rstrip().decode("utf-8")
                 process_error = process.stderr.rstrip().decode("utf-8")
 
@@ -229,7 +231,7 @@ def check(json_file, start, stop, md_article):
                                 test_passed = True
                                 msg = "PASSED"
                             else:
-                                msg = f"ERROR. Expected {exp}. Run with --debug to see output."
+                                msg = f"ERROR. Expected '{exp}'"
                                 test_cases[n_image][-1].add_failure_info(msg)
                                 results[test_images[n_image]] = results[test_images[n_image]]+1
                     else:
@@ -240,15 +242,21 @@ def check(json_file, start, stop, md_article):
                     test_cases[n_image][-1].add_failure_info(msg)
                     results[test_images[n_image]] = results[test_images[n_image]]+1
                 bar()
-                logging.info(f"{msg}")
-                if not test_passed:
+                if not test_passed and process_error:
                     logging.info(f"{process_error}")
+                elif not test_passed and process_output:
+                    logging.info(f"{process_output}")
                 else:
                     logging.debug(f"{process_output}")
-
+                logging.info(f"{msg}")
+                logging.info("---------")
 
         result = "failed" if results[test_images[n_image]] else "passed"
         logging.info(f"Tests {result} on {test_image}")
+
+    # Remove command file if no tests existed
+    if os.path.exists(test_cmd_filename):
+        os.remove(test_cmd_filename)
 
     # Stop instance
     if stop:

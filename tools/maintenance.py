@@ -155,7 +155,7 @@ def main():
         if args.stats_report:
             # If all test results are zero, all tests have passed
             patch.patch(args.instructions, results_dict, args.link)
-        if not all(results_dict.get(k) for k in results_dict):
+        if all(results_dict.get(k) for k in results_dict):
             # Errors exist
             sys.exit(1)
     elif args.spelling:
