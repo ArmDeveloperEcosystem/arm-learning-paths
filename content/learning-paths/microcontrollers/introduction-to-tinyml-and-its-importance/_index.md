@@ -1,5 +1,5 @@
 ---
-title: Introduction to TinyML and its Importance
+title: Introduction to TinyML on Arm
 
 minutes_to_complete: 10
 
