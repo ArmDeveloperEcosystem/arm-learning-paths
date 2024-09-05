@@ -3,8 +3,6 @@ next_step_guidance: Research which lightweight ML models can be used for TinyML,
 
 recommended_path: /learning-paths/microcontrollers/intro/
 
-recommended_path: /learning-paths/microcontrollers/nav-mlek/
-
 
 further_reading:
     - resource:
