@@ -40,18 +40,21 @@ Clone and patch Torchao and Torchchat repositories:
 git clone --recursive https://github.com/pytorch/ao.git
 cd ao
 git checkout 174e630af2be8cd18bc47c5e530765a82e97f45b
-git apply /path/to/0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+git apply 0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
 cd ../
 
 git clone --recursive https://github.com/pytorch/torchchat.git
 cd torchchat
 git checkout f384d4ffd42065397d37c71819e3bc578f7c3179
-git apply /path/to/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+wget https://github.com/ArmDeveloperEcosystem/PyTorch-arm-patches/blob/main/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
 ./install_requirements.sh
 ```
 You will now override the installed PyTorch version with a specific version of PyTorch needed to take advantage of KleidiAI optimizations:
 
 ```
+wget https://github.com/ArmDeveloperEcosystem/PyTorch-arm-patches/raw/main/torch-2.5.0.dev20240828+cpu-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
 pip install --force-reinstall torch-2.5.0.dev20240828+cpu-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
 pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
 ```
