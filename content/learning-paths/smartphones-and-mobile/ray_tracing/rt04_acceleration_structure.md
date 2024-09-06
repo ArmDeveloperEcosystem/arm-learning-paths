@@ -16,7 +16,7 @@ The API makes a distinction between *Bottom-Level Acceleration Structures* (BLAS
 
 *Bottom-Level Acceleration Structures* contain the actual geometry data, usually as triangles, but they could also be mathematically defined models. The actual implementation of a BLAS is opaque to users, but the driver usually organizes this data in a Bounding Volume Hierarchy (BVH), so that when we cast a ray, we can minimize the number of triangle intersection checks.
 
-*Top-Level Accelerations Structures* contain other Bottom-Level Acceleration Structures. Top-Level Acceleration Structures use instances to group BLASes, and link them with other properties, such as a custom ID, which we can use to define a material; or a transform matrix, which we can use to efficiently update animations.
+*Top-Level Accelerations Structures* contain Bottom-Level Acceleration Structures. Top-Level Acceleration Structures use instances to group BLASes and link them with other properties. These properties include a custom ID, which we can use to define a material; or a transform matrix, which we can use to efficiently update animations.
 
 ![Scheme of an Acceleration structure #center](images/tlas_blas_diagram.png "Scheme of an Acceleration structure")
 
@@ -32,7 +32,7 @@ When building new TLASes we recommend using `PREFER_FAST_BUILD`. For TLASes `PRE
 
 Similarly, building a new acceleration structure is significantly slower than updating or refitting an existing one. Try to avoid creating new acceleration structures from scratch, and if possible, set the `srcAccelerationStructure` field. Setting a previous version of the acceleration structure as a base for the new acceleration structure will be significantly faster since it triggers an update or refit instead of a build. Remember to also set `VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR` when creating the acceleration structure.
 
-In [our ray tracing best practices](https://developer.arm.com/documentation/101897/0302/Ray-tracing/Acceleration-structures) we recommend to use `PREFER_FAST_TRACE` for static BLASes. For TLASes and dynamic BLASes we recommend `PREFER_FAST_BUILD`, usually in combination with `ALLOW_UPDATE`.
+In [our ray tracing best practices](https://developer.arm.com/documentation/101897/latest/Ray-tracing/Acceleration-structures) we recommend to use `PREFER_FAST_TRACE` for static BLASes. For TLASes and dynamic BLASes we recommend `PREFER_FAST_BUILD`, usually in combination with `ALLOW_UPDATE`.
 
 ``` cpp
 void create_blas(bool allow_update, std::vector<VkAccelerationStructureGeometryKHR> &&geometries, std::vector<uint32_t> &&geometry_primitive_counts, VkAccelerationStructureKHR prev_as = VK_NULL_HANDLE)
@@ -83,7 +83,7 @@ void create_tlas(bool allow_update, std::vector<VkAccelerationStructureGeometryK
 
     if (allow_update)
     {
-        // TLASes can change each frame. Prefer fast build, it is generally faster for TLAS
+        // Updating a TLAS is faster than creating a new one from scratch.
         tlas_geom_info.flags |= VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR;
     }
     build_as(tlas_geom_info, geometries, geometry_primitive_counts);
@@ -166,9 +166,9 @@ Finally, the quality of your geometry can have a huge impact when building your 
   {{< tab header="Example of a scene with a good acceleration structure" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_scene_as_separate.png" title="Example of a scene with a good acceleration structure: Minimum overlap and empty space." >}}{{< /tab >}}
 {{< /tabpane >}}
 
-When tracing a scene, it is common to have opaque and non-opaque objects. Non opaque objects will invoke the `Any-Hit` shader and require extra evaluation in ray query. Vulkan allows to use the flags `VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR` and `VK_GEOMETRY_OPAQUE_BIT_KHR` to mark specific instances and geometries as opaque. We recommend using the appropriate flags to mark relevant geometry as opaque.
+When tracing a scene, it is common to have opaque and non-opaque objects. Non-opaque objects will invoke the `Any-Hit` shader and require extra evaluation in ray query. Vulkan allows to use the flags `VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR` and `VK_GEOMETRY_OPAQUE_BIT_KHR` to mark specific instances and geometries as opaque. We recommend using the appropriate flags to mark relevant geometry as opaque.
 
-Vulkan also offers shader flags, they will affect all objects, but they offer better performance. You can use `gl_RayFlagsCullNoOpaqueEXT` to cull no opaque geometries or `gl_RayFlagsOpaqueEXT`, to mark all objects as opaque. To enable compiler optimizations you should also use `gl_RayFlagsSkipAABBEXT` and ensure the flags can be resolved statically, if possible, prefer `gl_RayFlagsCullNoOpaqueEXT` it might improve shader performance.
+Vulkan also offers shader flags, they will affect all objects, but they offer better performance. You can use `gl_RayFlagsCullNoOpaqueEXT` to cull non-opaque geometries or `gl_RayFlagsOpaqueEXT`, to mark all objects as opaque. To enable compiler optimizations, you should also use `gl_RayFlagsSkipAABBEXT` and ensure the flags can be resolved statically. If possible, prefer `gl_RayFlagsCullNoOpaqueEXT` it might improve shader performance.
 
 ```glsl
 // [GOOD] Compiler optimizations enabled

@@ -20,7 +20,7 @@ Once ray traversal is complete, one of two things can happen: If the ray does no
 
 If instead we have a confirmed hit, the GPU will invoke our `Closest-Hit` shader. In this shader we can then determine what data we need from the object that we intersected, and return that data to the `Ray Generation` shader. For example, we may illuminate the object and later store the generated color into an output image.
 
-![Diagram of Ray Tracing Pipeline #center](images/RTPipeline_diagram.png "Diagram of Ray Tracing Pipeline")
+![Diagram of Ray Tracing Pipeline #center](images/RTPipeline_diagram.svg "Diagram of Ray Tracing Pipeline")
 
 ### Ray Query
 
@@ -28,7 +28,7 @@ The `VK_KHR_ray_query` extension allows us to use ray tracing from existing shad
 
 This makes it very easy to add ray tracing to our existing shaders, but it will mean that we will need to manage the ray traversal ourselves. However, ray traversal is very simple to manage in most cases. In the shader, we will first define a ray using `rayQueryInitializeEXT` to set its ray parameters. Then we can start ray traversal using `rayQueryProceedEXT`. `rayQueryProceedEXT` will return false once ray traversal is complete, in non-opaque geometry we will need to use `rayQueryConfirmIntersectionEXT` to confirm non-opaque candidates. If we only have opaque geometry, we recommend to just call `rayQueryProceedEXT` and ignore its return value.
 
-![Diagram of Ray Query #center](images/RQuery_diagram.png "Diagram of Ray Query")
+![Diagram of Ray Query #center](images/RQuery_diagram.svg "Diagram of Ray Query")
 
 Once the ray traversal is complete, we would use `rayQueryGetIntersectionTypeEXT` to query if we have hit something or missed. If we hit something, we can use other ray query functions to query some data and use this result in our shader:
 
@@ -40,7 +40,7 @@ void trace_ray()
     rayQueryEXT rayQuery;
 
     // If possible, use gl_RayFlagsSkipAABBEXT combined with gl_RayFlagsCullNoOpaqueEXT
-    // This will cull non opaque geometry and enable compiler optimizations.
+    // This will cull non-opaque geometry and enable compiler optimizations.
     const uint flags = gl_RayFlagsCullNoOpaqueEXT | gl_RayFlagsSkipAABBEXT;
 
     // Upper 24 bits ignored, if is 0 when combined with acceleration structure cull mask, the instance is ignored
@@ -75,4 +75,6 @@ void trace_ray()
 }
 ```
 
-For most simple examples, Ray Query usually offers better performance, and it is what we recommend you use to implement ray tracing effects. Right now, Mali devices in the market only offer Ray Query support. On Arm GPUs, Ray Query is hardware accelerated for both `Compute` and `Fragment` shaders, but we recommend using `Fragment` shaders, to benefit from frame buffer compression. We recommend reading our [AFBC best practices](https://developer.arm.com/documentation/101897/0302/Buffers-and-textures/AFBC-textures) to learn more.
+### Which one to use
+
+For most simple examples, Ray Query usually offers better performance, and it is what we recommend you use to implement ray tracing effects. Right now, Mali devices in the market only offer Ray Query support. On Arm GPUs, Ray Query is hardware accelerated for both `Compute` and `Fragment` shaders, but we recommend using `Fragment` shaders, to benefit from frame buffer compression. We recommend reading our [AFBC best practices](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures) to learn more.

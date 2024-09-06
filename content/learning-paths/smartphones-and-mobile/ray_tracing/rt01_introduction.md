@@ -14,13 +14,13 @@ Vulkan includes a new set of extensions for ray intersection tests, designed to 
 
 The API allows applications to define a ray, setting an origin and a direction and then test this ray against the scene geometry. By default, the API will return the closest hit that the ray will intercept in our scene.
 
-Vulkan's ray tracing API is very flexible and allows creative uses like collision detection in physics simulations. However, the main use case for ray tracing is rendering. This is because ray tracing allows applications to efficiently simulate the behavior of light, in a way resembling physical reality.
+Vulkan's ray tracing API is very flexible and allows creative uses like collision detection in physics simulations. However, the main use case for ray tracing is rendering. This is because ray tracing allows applications to simulate the behavior of light, in a way resembling physical reality.
 
 In the real world a light source emits light rays in all directions, these rays interact with multiple objects. When a ray intersects an object, the light will interact with it, causing the object to absorb and reflect certain amounts of light.
 
 Traditionally, developers render games using rasterization. Rasterization works by transforming the geometry into triangle primitives and projecting them onto the screen. GPUs then use a depth buffer to resolve the visibility and decide which pixels are covered by each triangle.
 
-In path tracing we do not need to use rasterization, instead we will launch rays from the camera. These rays will bounce around the scene until they produce a final image, resolving visibility using the closest hit. In the real world, rays travel from a light until they reach the camera, but this is extremely inefficient since most rays will not reach our eyes, this is why in rendering we launch rays in the inverse order, starting from the camera.
+With ray tracing, we can instead use path tracing. A path tracer does not need to use rasterization, instead it can launch rays from the camera. These rays will bounce around the scene until they produce a final image, resolving visibility using the closest hit. In the real world, rays travel from a light until they reach the camera, but this is extremely inefficient since most rays will not reach our eyes, this is why in rendering we launch rays in the reverse order, starting from the camera.
 
 Path tracing is extremely costly since we will need to launch thousands of rays per pixel to produce a non-noisy image. Rendering a frame in real time using path tracing is not feasible even on desktop high end GPUs. The common approach is to have a hybrid renderer, with a traditional rasterization pass to resolve visibility and compute the G-buffer, and then implement each ray tracing effect as a separate post-process.
 

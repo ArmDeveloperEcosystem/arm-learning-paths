@@ -6,7 +6,7 @@ recommended_path: /learning-paths/smartphones-and-mobile/ams/
 further_reading:
     - resource:
         title: "Arm GPU Best Practices Developer Guide: Ray Tracing"
-        link: https://developer.arm.com/documentation/101897/0302/Ray-tracing
+        link: https://developer.arm.com/documentation/101897/latest/Ray-tracing
         type: documentation
     - resource:
         title: "Ray Tracing: delivering immersive gaming experiences on mobile (Vulkanised 2023)"

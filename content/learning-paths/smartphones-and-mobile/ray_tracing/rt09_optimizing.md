@@ -8,11 +8,11 @@ layout: learningpathall
 
 ## Optimizing
 
-We recommend developers to check [our ray tracing best practices](https://developer.arm.com/documentation/101897/0302/Ray-tracing) to learn how to optimize ray tracing content. We also greatly recommend that you profile early and often, since ray tracing can be very costly.
+We recommend developers to check [our ray tracing best practices](https://developer.arm.com/documentation/101897/latest/Ray-tracing) to learn how to optimize ray tracing content. We also greatly recommend that you profile early and often, since ray tracing can be very costly.
 
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) provides developers with a set of tools to help you ensure everything works correctly and efficiently:
 
--   Render Doc for Arm GPUs, with support for Ray Query, can greatly help you debug your effects.
+-   [RenderDoc for Arm GPUs](https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs), with support for Ray Query, can greatly help you debug your effects.
 
 -   [Streamline Performance Analyzer](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) contains useful counters to optimize your ray tracing content, and verify you have a coherent and efficient ray traversal.
 

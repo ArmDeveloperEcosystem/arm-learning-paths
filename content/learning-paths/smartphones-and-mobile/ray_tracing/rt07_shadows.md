@@ -23,7 +23,7 @@ In our demo, we use a similar algorithm, to produce all our ray tracing effects.
 
 ![Diagram of our shadow algorithm #  center](images/shadows_algorithm_diagram.drawio.svg "Diagram of our shadow algorithm")
 
-When tracing shadows we launch a ray from the objects towards the lights, so we will need to launch a separate ray for each light that casts shadows, so please, consider limiting the number of lights casting shadows in your scenes. Launching a single ray per light source will only allow us to produce hard shadows, it is possible to obtain accurate soft shadows by launching multiple shadow rays and doing disk sampling. Soft shadows are more costly to produce, so please evaluate if they are necessary.
+When tracing shadows we launch a ray from the objects towards the lights, so we will need to launch a separate ray for each light that casts shadows, so please, consider limiting the number of lights casting shadows in your scenes. Launching a single ray per light source will only allow us to produce hard shadows, but it is possible to obtain accurate soft shadows by launching multiple shadow rays and doing some area sampling, you can learn more in [this tutorial](https://medium.com/@alexander.wester/ray-tracing-soft-shadows-in-real-time-a53b836d123b). Soft shadows are more costly to produce, so evaluate if they are necessary.
 
 ![Diagram of shadows #center](images/shadows_diagram.png "Diagram of shadows")
 

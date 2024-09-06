@@ -18,7 +18,7 @@ prerequisites:
 author_primary: Iago Calvo Lista, Arm
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Intermediate
 subjects: Graphics
 armips:
     - Mali

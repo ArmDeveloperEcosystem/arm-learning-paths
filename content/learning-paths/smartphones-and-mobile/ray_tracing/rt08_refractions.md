@@ -20,7 +20,7 @@ To simulate transparency and opacity, we usually use an alpha texture, to indica
 
 Refractions are simulated using *Snell's law*. Similarly to reflections, GLSL has a built-in function `refract` that allows us to compute the direction of the refracted ray using the direction of the incident ray, the surface normal, and the ratio between materials' refraction indices.
 
-![Diagram of refractions #center](images/refractions_diagram.png "Diagram of refractions")
+![Diagram of refractions #center](images/refractions_diagram.svg "Diagram of refractions")
 
 Our refractions algorithm is like our reflection algorithm. We start by retrieving some information from the G-buffer like normal, position or refractive index. Then we use this information to generate our ray, that we trace using either Ray Tracing Pipeline or Ray Query.
 

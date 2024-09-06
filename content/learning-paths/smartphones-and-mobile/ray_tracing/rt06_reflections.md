@@ -21,7 +21,7 @@ Illuminating and lighting a scene is a complex topic. When a light hits an objec
 
 The direction of the reflected ray depends on the surface normal and the direction of the incident ray, and it is very easy to compute since GLSL already offers the built-in function `reflect` to compute it.
 
-![Diagram of reflections #center](images/reflections_diagram.png "Diagram of reflections")
+![Diagram of reflections #center](images/reflections_diagram.svg "Diagram of reflections")
 
 As one can see, reflections are very suited for ray tracing. Traditional non ray tracing techniques try to simulate this ray in multiple ways, but they produce small artifacts. For example, most games use Screen Space Reflections (SSR).
 
@@ -259,11 +259,11 @@ vec4 main()
 }
 ```
 
-### Glossy reflections
+### Glossy and Rough reflections
 
 When creating our rays, we can use the roughness to decide how many reflection rays we need to launch.
 
-When we think of reflections, we usually think of mirror like reflections, however non mirror objects also reflect part of their incident light producing glossy or rough reflections. In a PBR render we use the material roughness to decide the reflected light dispersion. A roughness of 0 will indicate that the material is a mirror, so we will need a single ray to solve it. On the other hand, objects with a higher roughness will reflect the incident ray in multiple directions, producing glossy reflections. A render will need to launch multiple rays to solve the color of glossy reflections.
+When we think of reflections, we usually think of mirror-like reflections, however non-mirror objects also reflect part of their incident light producing glossy or rough reflections. In a PBR render we use the material roughness to decide the reflected light dispersion. A roughness of 0 will indicate that the material is a mirror, so we will need a single ray to solve it. On the other hand, objects with a higher roughness will reflect the incident ray in multiple directions, producing rough reflections. A render will need to launch multiple rays to solve the color of rough reflections.
 
 ``` glsl
 vec4 main()
@@ -313,15 +313,15 @@ vec4 main()
 }
 ```
 
-Launching multiple rays can be expensive, so we recommend limiting the number of rays in your shaders. At the same time, glossy reflections will launch rays with more divergence, being more expensive than pure mirror reflections. It is more efficient to traverse the acceleration structure if all rays in the same warp follow a similar path, so try to minimize ray divergence. If we want glossy reflections, we might need to add a denoising pass to deal with this noise. This will further increase the cost of glossy reflections. Please considered the performance impact before adding glossy reflections
+Launching multiple rays can be expensive, so we recommend limiting the number of rays in your shaders. At the same time, rough reflections will launch rays with more divergence, being more expensive than pure mirror reflections. It is more efficient to traverse the acceleration structure if all rays in the same warp follow a similar path, so try to minimize ray divergence. If we want glossy and rough reflections, we might need to add a denoising pass to deal with this noise. This will further increase the cost of reflections. Please consider the performance impact before adding non-mirror reflections.
 
 {{< tabpane >}}
   {{< tab header="Example 1: No" title="Example 1: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no.png">}}{{< /tab >}}
   {{< tab header="Example 1: Mirror" title="Example 1: mirror reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_mirror.png">}}{{< /tab >}}
-  {{< tab header="Example 1: Glossy" title="Example 1: glossy reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_glossy.png">}}{{< /tab >}}
+  {{< tab header="Example 1: Rough" title="Example 1: rough reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no_mirror.png">}}{{< /tab >}}
   {{< tab header="Example 2: No" title="Example 2: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no.png">}}{{< /tab >}}
   {{< tab header="Example 2: Mirror" title="Example 2: mirror reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_mirror.png">}}{{< /tab >}}
-  {{< tab header="Example 2: Glossy" title="Example 2: glossy reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_glossy.png">}}{{< /tab >}}
+  {{< tab header="Example 2: Rough" title="Example 2: rough reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no_mirror.png">}}{{< /tab >}}
 {{< /tabpane >}}
 
 ### Reflections with multiple bounces
