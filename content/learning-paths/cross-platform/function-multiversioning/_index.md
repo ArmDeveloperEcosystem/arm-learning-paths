@@ -1,7 +1,7 @@
 ---
 title: Learn about function multiversioning
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers interested in optimizing their C/C++ applications across Arm64 targets.
 
