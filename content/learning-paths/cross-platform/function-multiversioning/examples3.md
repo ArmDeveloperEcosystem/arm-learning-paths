@@ -1,5 +1,5 @@
 ---
-title: Inline assembly at runtime example
+title: Example 3 - inline assembly at runtime
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -74,13 +74,13 @@ int main(int argc, char **argv) {
 
 You can compile and run the above example on hardware that has both SVE2 and Armv8 instructions (no SVE2):
 
-To compile with Clang use:
+To compile with Clang, use:
 
 ```console
 clang --target=aarch64-linux-gnu -march=armv8-a -O3 skip-word.c --rtlib=compiler-rt
 ```
 
-To compile with GCC run:
+To compile with GCC, run:
 
 ```console
 g++ -march=armv8-a -O3 skip-word.c
@@ -104,4 +104,4 @@ Running the sve2 SkipWord
 2 strings
 ```
 
-The SVE2 version is being selected because it has higher priority than the default, as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping).
+The SVE2 version is selected as it has higher priority than the default, as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping).

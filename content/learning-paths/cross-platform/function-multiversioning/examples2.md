@@ -1,5 +1,5 @@
 ---
-title: Runtime example using ACLE intrinsics
+title: Example 2 - runtime using ACLE intrinsics
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -131,13 +131,13 @@ int main(int argc, char **argv) {
 
 You can compile and run the above example on hardware that has both SVE and Armv8 instructions (no SVE):
 
-To compile with Clang run:
+To compile with Clang, run:
 
 ```console
 clang --target=aarch64-linux-gnu -march=armv8-a -O3 dotprod.c --rtlib=compiler-rt
 ```
 
-To compile with GCC use:
+To compile with GCC, use:
 
 ```console
 g++ -march=armv8-a -O3 dotprod.c
