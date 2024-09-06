@@ -19,7 +19,7 @@ The 8GB RAM Raspberry Pi 5 model is preferred for exploring an LLM.
 
 ## Collect the files into an archive
 
-There are just a few files you need to transfer to the Raspberry Pi 5. You can bundle them together and transfer them from running container to the development machine, and then to the Raspberry Pi 5. 
+There are just a few files that you need to transfer to the Raspberry Pi 5. You can bundle them together and transfer them from the running container to the development machine, and then to the Raspberry Pi 5. 
 
 You should still be in the container, in the `$HOME/executorch` directory. 
 
@@ -72,7 +72,7 @@ docker cp 88c34c899c8c:/home/pi/executorch/llama3-files.tar.gz  .
 
 Now you can transfer the archive from the development machine to your Raspberry Pi 5. 
 
-There are multiple ways to do this: via cloud storage services, with a USB thumb drive or using SSH. Use any method that is convenient for you. 
+There are multiple ways to do this: via cloud storage services, with a USB thumb drive, or using SSH. Use any method that is convenient for you. 
 
 For example, you can use `scp` running from a terminal in your Raspberry Pi 5 device as shown. Follow the same option as you did in the previous step.
 
@@ -108,7 +108,7 @@ LD_LIBRARY_PATH=. ./llama_main --model_path=llama3_kv_sdpa_xnn_qe_4_32.pte  --to
 ```
 
 {{% notice Note %}}
-The `llama_main` program uses dynamic linking so you need to inform the dynamic linker to look for the 2 libraries in the current directory. 
+The `llama_main` program uses dynamic linking, so you need to inform the dynamic linker to look for the 2 libraries in the current directory. 
 {{% /notice %}}
 
 From here, you can experiment with different prompts and command line options on your Raspberry Pi 5.

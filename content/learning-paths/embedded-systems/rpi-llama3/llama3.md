@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## Overview
 
-Llama is a family of publicly available large language models (LLMs). Llama models have shown to perform well on a variety of natural language processing tasks.
+Llama is a family of publicly-available large language models (LLMs). Llama models have been shown to perform well on a variety of natural language processing tasks.
 
 The models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and the [responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
 
@@ -15,7 +15,7 @@ The models are subject to the [acceptable use policy](https://github.com/faceboo
 
 If you are not familiar with the topic of quantization, take a minute to learn why it matters when you are working with LLMs.
 
-Given the large size of many neural networks, a technique called quantization is often used to reduce the memory footprint. It allows large models to be run in memory constrained environments. In a nutshell, quantization takes floating point tensors in a neural network and converts them into data format with a smaller bit-width. It is possible to go from the FP32 (floating point, 32-bit) data format to INT8 (integer, 8-bit) without seeing significant loss in model accuracy. *Dynamic quantization* is when the quantization happens at runtime.
+Given the large size of many neural networks, a technique called *quantization* is often used to reduce the memory footprint. It allows large models to be run in memory-constrained environments. In a nutshell, quantization takes floating point tensors in a neural network and converts them into data format with a smaller bit-width. It is possible to go from the FP32 (floating point, 32-bit) data format to INT8 (integer, 8-bit) without seeing significant loss in model accuracy. *Dynamic quantization* is when the quantization happens at runtime.
 
 The Llama model requires at least 4-bit quantization to fit into smaller devices, such as the Raspberry Pi 5. Read more about quantization in [the PyTorch Quantization documentation](https://pytorch.org/docs/stable/quantization.html).
 
@@ -25,7 +25,7 @@ The next steps explain how to compile and run the Llama 3 model.
 
 To get started with Llama 3, you can obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. 
 
-Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3 8B model is used for this part, but the same instructions apply for other models.
+Request access by filling out your details, and read through and accept the Responsible Use Guide. This grants you a license and a download link that is valid for 24 hours. The Llama 3 8B model is used for this part, but the same instructions apply for other models.
 
 Clone the Llama 3 Git repository and install the dependencies:
 
@@ -36,14 +36,14 @@ pip install -e .
 pip install buck torchao
 ```
 
-Run the script to download, and paste the download link from the email when prompted.
+Run the script to download, and paste the download link from the email when prompted:
 
 ```bash
 cd models/llama3_1
 ./download.sh
 ```
 
-You will be asked which models you would like to download. Enter `meta-llama-3.1-8b` to get the model used for this Learning Path.
+You are asked which models you would like to download. Enter `meta-llama-3.1-8b` to get the model used for this Learning Path:
 
 ```output
  **** Model list ***
@@ -106,7 +106,7 @@ python -m examples.models.llama2.export_llama --checkpoint llama-models/models/l
 
 Where `consolidated.00.pth` and `params.json` are the paths to the downloaded model files, found in `llama3/Meta-Llama-3-8B`.
 
-Be patient, this step will take some time and will run out of memory if you have 32 GB RAM or less. 
+This step takes some time and will run out of memory if you have 32 GB RAM or less. 
 
 ## Compile and build the executable
 
