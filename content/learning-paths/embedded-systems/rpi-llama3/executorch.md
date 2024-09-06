@@ -13,16 +13,18 @@ The best practice is to create an isolated Python environment in which you insta
 
 ### Option 1: Create a Python virtual environment
 
+Create a Python virtual environment using:
+
 ```bash
 python -m venv executorch-venv
 source executorch-venv/bin/activate
 ```
 
-Your terminal displays `(executorch-venv)` to indicate that the virtual environment is active.
+Your terminal displays `(executorch-venv)` in the prompt indicating the virtual environment is active.
 
 ### Option 2: Create a Conda virtual environment
 
-Install Miniconda on your development machine by following the [Anaconda](/install-guides/anaconda/) Install Guide.
+Install Miniconda on your development machine by following the [Anaconda install guide](/install-guides/anaconda/).
 
 Once `conda` is installed create the environment:
 
@@ -31,14 +33,16 @@ conda create -yn executorch-venv
 conda activate executorch-venv
 ```
 
-## Install clang
+## Install Clang
 
-Install clang if it is not already installed.
+Install Clang, which is required to build ExecuTorch: 
+
 ```bash
-sudo apt install clang
+sudo apt install clang -y
 ```
 
-Then, make clang the default compiler for cc and c++
+Then, make clang the default C/C++ compiler:
+
 ```bash
 sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
 sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
@@ -46,28 +50,24 @@ sudo update-alternatives --set cc /usr/bin/clang
 sudo update-alternatives --set c++ /usr/bin/clang++
 ```
 
-This will allow ExecuTorch to compile and build properly.
-
 ## Clone ExecuTorch and install the required dependencies
 
-From within the environment, run the commands below to download the ExecuTorch repository and install the required packages. After cloning the repository, you need to update and pull the project's submodules. Finally, you run two scripts that install a few dependencies.
+Continue in your Python virtual environment, and run the commands below to download the ExecuTorch repository and install the required packages. 
+
+After cloning the repository, the project's submodules are updated, and two scripts install additional dependencies.
 
 ``` bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-
 git submodule sync
 git submodule update --init
-
 ./install_requirements.sh --pybind xnnpack
-
 ./examples/models/llama2/install_requirements.sh
 ```
-{{% notice Note %}}
-The install_requirements for Llama 3  are the same as for Llama 2, so you can use the instructions for both models up until the very last step.
 
+{{% notice Note %}}
 You can safely ignore the following error on failing to import lm_eval running the install_requirements.sh scripts:
 `Failed to import examples.models due to lm_eval conflict`
 {{% /notice %}}
 
-If these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!
+When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!
