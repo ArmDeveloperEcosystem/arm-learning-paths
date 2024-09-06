@@ -3,7 +3,7 @@ title: Learn about function multiversioning
 
 minutes_to_complete: 30
 
-who_is_this_for: Developers interested in optimizing their C/C++ applications across Arm64 targets.
+who_is_this_for: This is an advanced topic for developers interested in optimizing their C/C++ applications across Arm64 targets.
 
 learning_objectives:
     - Use hardware features to tune your applications at function level.
