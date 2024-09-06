@@ -47,9 +47,9 @@ The `libxaom` library has a comprehensive suite of unit tests, written using the
 
 The build above includes the `test_libaom` executable. 
 
-You can run all unit tests by starting `test_libaom` with no arguments. However, the number of tests is huge, and it takes a long to run them all. Instead, you can constrain the number of tests by specifying a filter.
+You can run all unit tests by starting `test_libaom` with no arguments. However, the number of tests is huge, and it takes a long to run. Instead, you can constrain the number of tests by specifying a filter.
 
-There is a help argument you can try: 
+You can try this help argument:
 
 ```bash
 ./test_libaom --help
@@ -106,7 +106,7 @@ Note: Google Test filter = *NEON*SAD*-:NEON_I8MM.*:NEON_I8MM/*:NEON_I8MM_*:SVE.*
 
 You can benchmark either the encoding or decoding processes. In this section, you will focus on encoding. 
 
-For Performance benchmarking, you can select video encoding either on-demand or live-stream.
+For Performance benchmarking, you can select video encoding either on-demand or live stream.
 
 To start, download some example `8-bit FHD`, `8-bit 4K` and `10-bit 4K` video files:
 
@@ -131,7 +131,7 @@ For on-demand encoding you can experiment different number of processors and mon
 For example, run with `--good` and use the `--cpu-used` argument to vary video quality/compression options from 2 to 6.
 
 {{% notice Note %}}
-The `--cpu-used` flag is used to trade off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality and longer encoding time.
+The `--cpu-used` flag is used to trade-off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality and longer encoding time.
 {{% /notice %}}
 
 Run standard bit depth and change the CPU count and see the results using:
@@ -151,9 +151,9 @@ You can do the same for high bit depth:
 ./aomenc --good --cpu-used=4 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit.y4m 
 ```
 
-### Live-stream video encoding
+### Live stream video encoding
 
-For live-stream encoding you can experiment with different number of processors and monitor performance using the `--cpus-used` flag, varying the range from 5 to 9. 
+For live stream encoding you can experiment with different number of processors and monitor performance using the `--cpus-used` flag, varying the range from 5 to 9. 
 
 For standard bit depth with 8 CPUs run:
 
@@ -169,7 +169,7 @@ For high bit depth run:
 
 ## View Results
 
-The encoding frame rate (frames per second) for the video files is output at the end of each run.
+The encoding frame rate (which is frames per second) for the video files is output at the end of each run.
 
 Shown below is example output from running the `libxaom` codec on the 8-bit FHD sample video file with different `--cpu-used` settings to compare the encoding time.
 
