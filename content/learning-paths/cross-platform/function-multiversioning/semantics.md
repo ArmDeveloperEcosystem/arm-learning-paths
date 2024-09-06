@@ -22,8 +22,8 @@ Function multiversioning provides a convenient way to select the most appropriat
 2. Select the version with the highest priority, as indicated by the [mapping table](https://arm-software.github.io/acle/main/acle.html#mapping), else
 3. Select a default version if no other versions are suitable.
 
-The `default` version is the version of the function that would be generated without these attributes.
+The `default` version is the version of the function that is generated without these attributes.
 
-Imagine your application has a hot function with a vectorizable loop. Your application must be deployed on hardware which only supports Armv8 instructions, but also on hardware which supports SVE instructions as well. By providing two function versions, a default and an SVE specific, you ensure optimal performance on either platform using the same binary.
+Imagine your application has a hot function with a vectorizable loop. Your application must be deployed on hardware which only supports Armv8 instructions, but also on hardware which supports SVE instructions as well. By providing two function versions, a default and an SVE- specific, you can ensure optimal performance on either platform using the same binary.
 
-See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#mapping) for the list of supported features and their priorities.
+See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#mapping) for a list of supported features and their priorities.

@@ -207,4 +207,4 @@ The called symbol `sumPosEltsScaledByIndex` is an indirect function (ifunc) whic
 
 The names `sumPosEltsScaledByIndex._Msve` and `sumPosEltsScaledByIndex.default` correspond to the function versions of `sumPosEltsScaledByIndex`. 
 
-See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#name-mangling) for more details on the name mangling rules.
+See the [Arm C Language Extensions](https://arm-software.github.io/acle/main/acle.html#name-mangling) for further information on the name mangling rules.
