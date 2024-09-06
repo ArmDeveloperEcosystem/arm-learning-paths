@@ -6,17 +6,17 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will learn how to configure and run the chatbot server as a backend service and create a Streamlit-based frontend. This setup will enable you to communicate with the chatbot via a web interface accessible in your browser.
+In this section, you will learn how to configure and run the chatbot server as a backend service and create a Streamlit-based frontend. This setup will enable communication with the chatbot through a web interface accessible in your browser.
 
 ### Activate the Virtual Environment to install dependencies
-Activate the Python virtual environment you have used in the previous section, incase if its deactivated.
+Activate the Python virtual environment you have used in the previous section, incase its deactivated.
 
 ```sh
 source torch_env/bin/activate
 ```
 
 ### Install Additional Tools
-Following are the additional libraries to install:
+Install the additional packages:
 
 ```sh
 pip3 install streamlit
@@ -24,7 +24,7 @@ pip3 install openai
 ```
 
 ### Running LLM Inference Backend Server
-Start the LLM Inference Backend Server in a new terminal window.
+Start the LLM Inference Backend Server in a new terminal window:
 
 ```sh
 cd torchchat
@@ -46,14 +46,14 @@ Press CTRL+C to quit
 ```
 
 ### Streamlit Frontend Server File
-Create a `browser.py` file in your `torchchat` directory
+Now open a new terminal window and create a file named `browser.py` in your `torchchat` directory
 
 ```sh
 cd torchchat
 vim browser.py
 ```
 
-Add the following Streamlit code in `browser.py` file:
+Add the following Streamlit code in the `browser.py` file:
 ```code
 import streamlit as st
 import time
@@ -113,7 +113,7 @@ if prompt := st.chat_input():
 ```
 
 ### Running Streamlit Frontend Server
-Open a new terminal window and start the Streamlit Frontend Server:
+Start the Streamlit Frontend Server:
 
 ```sh
 cd torchchat
@@ -133,4 +133,7 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to fals
 ```
 
 ### Accessing the Streamlit Frontend using Browser
+
+Open the local URL from above in a browser and you should see the chatbot running:
+
 ![Chatbot](images/chatbot.png)

@@ -13,9 +13,9 @@ learning_objectives:
     - Measure performance metrics of the LLM inference running on an Arm-based CPU.
 
 prerequisites:
-    - An AWS Graviton3 c7g.8xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) with at least 16 CPUs from a cloud service provider or an on-premise Arm server.
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) with at least 16 CPUs from a cloud service provider or an on-premise Arm server.
 
-author_primary: Pareena Verma, Nobel Chowdary Mandepudi 
+author_primary: Nikhil Gupta, Pareena Verma, Nobel Chowdary Mandepudi 
 
 ### Tags
 skilllevels: Introductory
