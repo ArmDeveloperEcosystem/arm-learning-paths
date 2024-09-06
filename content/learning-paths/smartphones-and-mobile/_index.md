@@ -10,15 +10,15 @@ key_ip:
 - Mali
 maintopic: true
 operatingsystems_filter:
-- Android: 19
-- Linux: 14
-- macOS: 4
+- Android: 20
+- Linux: 15
+- macOS: 5
 - Windows: 4
 subjects_filter:
 - Gaming: 6
 - Graphics: 2
 - ML: 4
-- Performance and Architecture: 21
+- Performance and Architecture: 22
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Smartphones and Mobile
 tools_software_languages_filter:
@@ -34,6 +34,7 @@ tools_software_languages_filter:
 - Bazel: 1
 - C#: 3
 - C++: 3
+- C/C++: 1
 - Clang: 8
 - CMake: 1
 - Coding: 13
