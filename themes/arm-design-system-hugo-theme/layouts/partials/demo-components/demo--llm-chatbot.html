@@ -378,9 +378,6 @@ Calls to:
         .then(data => {
             const endTime = Date.now();
             const ping = (endTime - startTime);
-
-            // UPDATE UI
-            submit_btn.disabled = false;
             
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
@@ -551,107 +548,89 @@ Calls to:
         return conversation_data;
     }
 
+    function addUserMessage_andChatbotPlaceholder(user_input) {
+        const all_messages_div = document.getElementById('all-messages-div');
+            
+        const user_div = document.createElement('div');
+        user_div.classList.add('user-message');
 
+        const user_span_for_message = document.createElement('span');
+        user_div.appendChild(user_span_for_message);
 
+        user_span_for_message.textContent = user_input;
+        all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
 
+        const chatbot_div = document.createElement('div');
+        chatbot_div.classList.add('chatbot-message');
 
-    // Initalize vars
-    const message_history = document.querySelector('#all-messages-div');
+        const new_icon = document.createElement('img');
+        new_icon.setAttribute('src', '{{$chatbot_icon}}');
+        new_icon.setAttribute('style', 'margin-right: 10px;');
+        new_icon.setAttribute('alt', 'Chatbot Icon');
+      
+        const new_loader = document.createElement('ads-loader');
 
-    // Set 'Intersection Observer'
-    /*
-    const observer = new IntersectionObserver(onVisibilityChange, {
-        root: null,     // full viewport = root
-        threshold: 0.1  // Trigger when at least 10% of the element is visible
-    });
-    const chatbot_detection_div = document.getElementById('input-and-submit');
-    observer.observe(chatbot_detection_div);
-    */
+        const chatbot_span_for_message = document.createElement('span');
+
+        chatbot_div.appendChild(new_icon);
+        chatbot_span_for_message.appendChild(new_loader);
+        chatbot_div.appendChild(chatbot_span_for_message);
+        all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
     
-    
-    const reset_demo_text = document.querySelector('#reset-demo-txt');
-    reset_demo_text.addEventListener('click', function() {
-        message_history.innerHTML = "";
-        
+    }
+
+    // Function to check textarea content and enable/disable the button
+    function toggleButton() {
+        const text_area = document.querySelector('#user-input-for-demo');
+        const submit_button = document.getElementById("submit-button");
+        if (text_area.value.trim() === "") {
+            submit_button.disabled = true;
+        } else {
+            submit_button.disabled = false;
+        }
+    }
+
+
+
+    toggleButton();     // Initial check in case the textarea has content on page load
+
+
+    // 'Reset chat' text behavior
+    document.querySelector('#reset-demo-txt').addEventListener('click', function() {
+        document.querySelector('#all-messages-div').innerHTML = ""; // Clear all messages
     });
 
 
-    const textarea = document.querySelector('#user-input-for-demo');
-    textarea.addEventListener('input', function() {
+    document.querySelector('#user-input-for-demo').addEventListener('input', function() {
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
+        // enable input button
+        toggleButton();
     });
 
 
-    const submit_button = document.querySelector('#submit-button');
-    submit_button.addEventListener('click', function() {
-        // Get initial vars
-        const all_messages_div = document.getElementById('all-messages-div');
-        const textarea_input = document.querySelector('#user-input-for-demo');
-        
-        
-
+    document.getElementById("submit-button").addEventListener('click', function() {
+        const text_area = document.querySelector('#user-input-for-demo');        
         // Get user's message
-        const user_input = textarea_input.value;
-
-        // If blank, encourage an entry via placeholder and pulse
-        if (user_input === "") {
-            console.log('blank')
+        const user_input = text_area.value;
+        if (user_input === "") {           
         }
         else {
-            // Clear message box
-            textarea_input.value = '';
+            // Clear message box & toggle button
+            text_area.value = '';
+            toggleButton();
+            text_area.focus();
 
             // Add new chat message in UI
-            const user_div = document.createElement('div');
-            user_div.classList.add('user-message');
-
-            const user_span_for_message = document.createElement('span');
-            user_div.appendChild(user_span_for_message);
-
-            
-            user_span_for_message.textContent = user_input;
-            all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
-
-            const chatbot_div = document.createElement('div');
-            chatbot_div.classList.add('chatbot-message');
-
-            const new_icon = document.createElement('img');
-            new_icon.setAttribute('src', '{{$chatbot_icon}}');
-            new_icon.setAttribute('style', 'margin-right: 10px;');
-            new_icon.setAttribute('alt', 'Chatbot Icon');
-          
-            const new_loader = document.createElement('ads-loader');
-            
-
-            const chatbot_span_for_message = document.createElement('span');
-
-            chatbot_div.appendChild(new_icon);
-            chatbot_span_for_message.appendChild(new_loader);
-            chatbot_div.appendChild(chatbot_span_for_message);
-            all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
-
-            //////////////////////////////////////////////////////////////
-            /////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////
-            //                  API CODE                                //
-            /////////////////////////////////////////////////////////////
+            addUserMessage_andChatbotPlaceholder(user_input);
 
             // Get history of user chatbot interaction to send
             const conversation_history = prepareConversationData();
             console.log('conversation history:', conversation_history);
 
-
+            // Send to server via API
             sendToServer(conversation_history)
-
-
-            // SEND MESSAGE TO API
-            //last_message = insertRandomSentenceWithDelay(chatbot_span_for_message);
-            //last_message = insertRandomSentenceWithStreaming(chatbot_span_for_message);
-
-
         }
-
 
     });
 </script>
