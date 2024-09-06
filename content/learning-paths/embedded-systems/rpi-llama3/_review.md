@@ -14,9 +14,9 @@ review:
         question: >
             What quantization scheme does Llama require to run on an embedded device such as the Raspberry Pi 5?
         answers:
-            - 8-bit groupwise per token dynamic quantization of all the linear layers.
-            - 4-bit groupwise per token dynamic quantization of all the linear layers.
-            - No quantization is needed.
+            - "8-bit groupwise per token dynamic quantization of all the linear layers."
+            - "4-bit groupwise per token dynamic quantization of all the linear layers."
+            - "No quantization is needed."
         correct_answer: 2
         explanation: >
             The 4-bit quantization scheme yields the smallest memory footprint for Llama 3 in this case.
@@ -24,8 +24,8 @@ review:
         question: >
             Dynamic quantization happens at runtime.
         answers:
-            - False
-            - True
+            - "False"
+            - "True"
         correct_answer: 2
         explanation: >
             Dynamic quantization refers to quantizing activations at runtime.

@@ -6,13 +6,12 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for anyone interested in running the Llama 3 model on a Raspberry Pi 5. It also touches on techniques for running large language models (LLMs) in an embedded environment.
 
 learning_objectives:
-    - Use Docker to emulate an embedded operating system.
+    - Use Docker to run Raspberry Pi OS on an Arm Linux server. 
     - Compile a Large Language Model (LLM) using ExecuTorch.
     - Deploy the Llama 3 model on an edge device.
 
-
 prerequisites:
-    - An Arm-based machine or cloud instance.
+    - An Arm Linux machine or an [Arm cloud instance](/learning-paths/servers-and-cloud-computing/csp/).
     - A Raspberry Pi 5.
 
 author_primary: Annie Tallund
@@ -24,7 +23,6 @@ armips:
     - Cortex-A
 operatingsystems:
     - Linux
-    - Raspberry Pi OS
 tools_software_languages:
     - LLM
     - GenAI
