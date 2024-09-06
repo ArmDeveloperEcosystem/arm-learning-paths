@@ -242,14 +242,18 @@
     left: 0;
     width: calc(100% - 32px); /* Subtract gutter space from width */
     margin-left: 16px;
-    background-color: #f8d7da; /* Light red background color */
-    color: #721c24; /* Dark red text color */
+
     padding: 4px;
     border-radius: 4px;
     font-size: 14px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
     z-index: 1000;
+
+    
+    background-color: black; 
+    color: white;
+
     white-space: nowrap; /* Prevent the message from wrapping */
     box-sizing: border-box; /* Ensure padding doesn't affect the width */
 

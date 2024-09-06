@@ -3,12 +3,11 @@ title: Demo - Run a chatbot on an Arm CPU
 overview: Running a chatbot can be expensive at scale, and surprising performance can be achieved with quantized (4 or 8 bit) small LLMs (~7 billion parameters) on Arm CPUs. CPUs are more accessible than GPUs and easier to program for ML for those new to the space. Cost is the largest benefit. Chat with an LLM here to see the price performance for yourself. This demo is running on AWS Graviton 4, on r8g.4xlarge instances via Lambdas.
 
 demo_steps:
-  - Set configurable options (or use defaults).
   - Type & send a message to the chatbot.
-  - View answer and result metrics to understand its performance.
-  - Repeat steps 1-3 as desired. Results will update with each message.
+  - Get the chatbot's reply.
+  - View stats showing how Graviton runs LLMs. 
 
-diagram: arch_diagram.png
+diagram: config-diagram.png
 
 configuration_popup_details: Super long list of configuration information to provide to the user. Should be context and all that to be crystal clear what the setup is.
 

@@ -20,7 +20,7 @@ Calls to:
 
 <!-- 2) Configuration box -->
 {{if eq .Params.demo_template_name "llm_chatbot_first_demo"}}
-    {{partial "demo-components/config-params-only.html" .}}
+    {{/* {{partial "demo-components/config-params-only.html" .}} */}}
 {{else if eq .Params.demo_template_name "kubectl_demo"}}
     {{partial "demo-components/config-param-and-file.html" .}}
 {{else}}

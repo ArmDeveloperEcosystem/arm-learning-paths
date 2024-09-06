@@ -51,17 +51,14 @@ Calls to:
             <h2>Demo</h2>
             <div id="demo-container">
                 <div id="all-messages-div">
-                    <div class="chatbot-message">
-                        <img src="{{$system_icon}}" style="margin-right: 10px;" alt="System Icon">
-                        <span id="initial-message-span"><ads-loader></ads-loader></span>
-                    </div>
+                    
                 </div>
                 <div id="demo-actions">
                     <div class="c-row">
                         <div class="c-col" id="input-and-submit">
-                            <textarea id="user-input-for-demo" placeholder="enter info" rows="1"></textarea>
+                            <textarea id="user-input-for-demo" placeholder="Talk to Graviton-based LLM" rows="1"></textarea>
                             <ads-button id="submit-button" level="primary" disabled>Submit</ads-button>
-                            <div id="notification-popup" class="hide-popup"></div>
+                            <div id="notification-popup" class="show-popup"><span id="initial-message-span">Pinging LLM server <ads-loader></ads-loader></span></div>
                         </div>
                     </div>
                     <div class="c-row">
@@ -192,7 +189,7 @@ Calls to:
                 currentIndex++;
                 if (currentIndex === sentence.length) {
                     clearInterval(intervalId);
-                    if (!custom_sentence) { updateMetrics(sentence);}
+                    if (!custom_sentence) { updateLLMMetrics(sentence);}
                 }
             }, interval);
         }, randomDelay);
@@ -206,8 +203,7 @@ Calls to:
     function onVisibilityChange(entries, observer) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                var initial_message_span = document.getElementById('initial-message-span');
-                insertRandomSentenceWithStreaming(initial_message_span, 0,"Hi! I'm a LLM-based generative chatbot running on a Graviton server! Pretty cool right? I'm ready to talk if you are.");
+                //document.getElementById('user-input-for-demo').focus();
                 observer.unobserve(entry.target); // Stop observing after the function is called
             }
         });
@@ -217,95 +213,29 @@ Calls to:
 
 
     function getMessageForNumber(num) {
-
-
-        /* 
-        const resultMessages = [
+        /* const resultMessages = [
             { min: 0,  max: 10, message: "Terrible", color: "red" },
             { min: 10, max: 25, message: "Eh, noticably slow. Here is why.", color: "yellow" },
             { min: 25, max: 60, message: "Good, high quality.", color: "green" },
-        ];
-        */
+        ];*/
 
+        // From Hugo metadata
         const resultMessages = [
-
-        {{range .Params.tps_ranges}}
-            { min: {{.min}},  max: {{.max}}, message: "{{.context}}", color: "{{.color}}" },
-        {{end}}
+            {{range .Params.tps_ranges}}
+                { min: {{.min}},  max: {{.max}}, message: "{{.context}}", color: "{{.color}}" },
+            {{end}}
         ]
         
-
-
         for (let i = 0; i < resultMessages.length; i++) {
             if (num >= resultMessages[i].min && num <= resultMessages[i].max) {
                 // Change bar color
                 document.getElementById('bar').style.backgroundColor = resultMessages[i].color;
-
                 // return message
                 return resultMessages[i].message;
             }
         }
         return "Number out of range.";
     }
-
-    function updateMetrics(chatbot_message) {
-        // Show stats if they are not already shown
-        document.getElementById('stats-populated').hidden = false;
-        document.getElementById('stats-initial').hidden = true;
-
-        // obtain spans to replace
-        const avg_tps = document.getElementById('avg-tps-metric');
-        const total_time = document.getElementById('total-time-metric');
-        const tokens = document.getElementById('num-tokens-metric');
-        const tps = document.getElementById('tps-metric');
-        const ttft = document.getElementById('ttft-metric');
-        const context = document.getElementById('overall-context-metric');
-
-
-
-        // replace last message metrics
-            // TPS = [10 - 40]
-        num_tps = Math.floor(Math.random() * 30 + 10);
-        tps.textContent = num_tps;
-            // TTFT = [0.4 - 4]
-        num_ttft = parseFloat((Math.random() * (4 - 0.4) + 0.4).toFixed(2));
-        ttft.textContent = num_ttft;
-            // tokens = from chatbot_message
-        num_tokens = chatbot_message.split(" ").length;
-        tokens.textContent = num_tokens;
-            // total time = TTFT + (tokens / TPS)
-        num_time = (num_ttft + (num_tokens/num_tps)).toFixed(2);
-        total_time.textContent = num_time;
-
-        // Overall metric
-            // AVG-TPS = (current displayed + new) / 2
-        prev_tps = 0;
-        if (!isNaN(parseFloat(avg_tps.textContent)) && isFinite(avg_tps.textContent)) {
-            prev_tps = parseFloat(avg_tps.textContent);
-        } else {
-            prev_tps = num_tps;
-        }
-        num_avg_tps = ((num_tps + prev_tps) / 2).toFixed(2);
-        avg_tps.textContent = num_avg_tps;
-
-        num_avg_tps = Math.round(num_avg_tps);
-        const maxValue = {{.Params.tps_max}};        
-        const bar = document.getElementById('bar');
-        const barWidth = (num_avg_tps / maxValue) * 100; // Calculate width as a percentage
-        bar.style.width = `${barWidth}%`;
-        bar.textContent = num_avg_tps; // Display the value inside the bar      
-
-        // Context
-        context.textContent = getMessageForNumber(num_avg_tps);
-
-    }
-
-
-
-
-
-
-
 
 
 
@@ -324,11 +254,11 @@ Calls to:
         const context = document.getElementById('overall-context-metric');
 
         // replace last message metrics
-        var num_tps = parseInt(metrics_object['tps'],10);
+        var num_tps = metrics_object['tps'] || 19;
         tps.textContent = num_tps;
-        ttft.textContent = metrics_object['ttft'];
-        tokens.textContent = metrics_object['prompt_tokens'];
-        total_time.textContent = metrics_object['completion_time'];
+        ttft.textContent = metrics_object['ttft'] || 2.4;
+        tokens.textContent = metrics_object['prompt_tokens'] || 48;
+        total_time.textContent = metrics_object['completion_time'] || 3.6;
 
         // Overall TPS
             // AVG-TPS = (current displayed + new) / 2
@@ -349,11 +279,64 @@ Calls to:
         bar.textContent = num_avg_tps; // Display the value inside the bar      
 
         // Context
+        console.log(num_avg_tps,prev_tps,typeof(num_avg_tps));
         context.textContent = getMessageForNumber(num_avg_tps);
         console.log(metrics_object);
     }
 
 
+
+    function displayMessage(messageData) {
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+        chatbot_message_span.textContent += messageData;
+
+    }
+
+
+    function showPopup(message,type,keep_last_message=false) {
+        
+        if (!keep_last_message){
+            // Remove pending chatbot message
+            var all_messages_div = document.getElementById('all-messages-div');
+            var first_chatbot_message = all_messages_div.querySelector('.chatbot-message');
+            if (first_chatbot_message) {all_messages_div.removeChild(first_chatbot_message);}          
+        }
+    
+
+        // Show popup
+        var popup_div = document.getElementById('notification-popup');
+        popup_div.textContent = message;
+        if (type == "info") {
+            popup_div.style.backgroundColor = 'black'; 
+            popup_div.style.color = 'white';             
+        }
+        else if (type == "error") {
+            popup_div.style.backgroundColor = '#f8d7da'; // Light red
+            popup_div.style.color = 'black';             // #721c24 was this dark red, black better
+        }
+        else if (type == "success") {
+            popup_div.style.backgroundColor = 'var(--arm-green)'; 
+            popup_div.style.color = 'black';                      
+        }
+        else if (type == 'warning') {
+            popup_div.style.backgroundColor = 'var(--arm-yellow)'; 
+            popup_div.style.color = 'black';             
+        }
+
+        popup_div.classList.remove('hide-popup');
+        popup_div.classList.add('show-popup');
+    }
+    function hidePopup() {
+        var popup_div = document.getElementById('notification-popup');
+
+        // fade it out
+        popup_div.classList.remove('show-popup');
+        popup_div.classList.add('hide-popup');
+    }
     
 </script>
 
@@ -373,12 +356,17 @@ Calls to:
 
 
     function startPingCheck() {
+        var entry_div = document.getElementById('user-input-for-demo');
+        var submit_btn= document.getElementById('submit-button');
+        var ping_txt  = document.getElementById('ping-info');
+
         console.log('sending initial ping...');
         const startTime = Date.now();
+        //http://localhost:3000/ping
+        //http://54.202.189.213:5000/ping
         fetch('http://localhost:3000/ping', {
-            method: 'POST',
+            method: 'GET',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ timestamp: startTime })
         })
         .then(response => {
             if (response.ok) {
@@ -389,99 +377,62 @@ Calls to:
         })
         .then(data => {
             const endTime = Date.now();
-            const ping = (endTime - startTime)/2;
-            console.log('Ping:', ping, 'ms');
-            //console.log('Server received ping at:', data.serverReceivedTime);
-            console.log('Connection status:', data.status);
+            const ping = (endTime - startTime);
 
             // UPDATE UI
-            //   Enable submit, update ping
-            document.getElementById('submit-button').disabled = false;
-
-            if (data.status == 'normal') {
-                systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `System message: You are connected to a Graviton backend server running an LLM. Start interacting with the chatbot to see the stats on the right.`);
-                document.getElementById('ping-info').textContent = `Server traffic: Low. Ping: ${ping}ms`
-
+            submit_btn.disabled = false;
+            
+            // Update ping & popup status
+            if (data.cluster_utilization == 'normal') {
+                showPopup('Connected to Graviton-based LLM! Start chatting now.',"success");
+                ping_txt.textContent = `Server traffic: Low. Ping: ${ping}ms`
             }
-            else if (data.status == 'high') {
-                systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `System message: You are connected to a Graviton backend server running an LLM. Start interacting with the chatbot to see the stats on the right.`);
-                document.getElementById('ping-info').textContent = `Server traffic: High (delays possible).   Ping: ${ping}ms`
+            else if (data.cluster_utilization == 'high') {
+                showPopup('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
+                ping_txt.textContent = `Server traffic: High (delays possible).   Ping: ${ping}ms`
             }
-            else if (data.status == 'at-limit') {
-                systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `System message: You are connected to a Graviton backend server running an LLM. Start interacting with the chatbot to see the stats on the right.`);
-                document.getElementById('ping-info').textContent = `Server traffic: At limit (expect delays).   Ping: ${ping}ms`
-
+            else if (data.cluster_utilization == 'at-limit') {
+                showPopup('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
+                ping_txt.textContent = `Server traffic: At limit (expect delays).   Ping: ${ping}ms`
             }
-
         })
         .catch(error => {       // Auto errors after ~2 seconds timeout
-            console.error('Ping error:', error);
+
             // Disable submit button and entry buttons
-            document.getElementById('user-input-for-demo').disabled = true;
+            entry_div.disabled = true;
+            entry_div.style.opacity = '0.75';
+            entry_div.setAttribute('placeholder','No connection');
 
-            systemMessageStreaming(document.getElementById('initial-message-span'),
-                    `System message: No connection established. The problem may be with us, try refreshing the page or coming back later.`);
-            
-
+            showPopup('Unable to connect. The problem may be with us; try refreshing the page.',"error");
         });
     }
     
-    function displayError(error_message) {
-        const all_messages_div = document.getElementById('all-messages-div');
-        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
-        const chatbot_response_div = chatbot_messages[0];
-        const chatbot_message_span = chatbot_response_div.querySelector('span');
-
-        chatbot_message_span.textContent += messageData;
-
-    }
-
-
-
-    function displayMessage(messageData) {
-        const all_messages_div = document.getElementById('all-messages-div');
-        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
-        const chatbot_response_div = chatbot_messages[0];
-        const chatbot_message_span = chatbot_response_div.querySelector('span');
-
-        chatbot_message_span.textContent += messageData;
-
-    }
-
-
-    function showPopup(message) {
-        // Remove pending chatbot message
-        var all_messages_div = document.getElementById('all-messages-div');
-        var first_chatbot_message = all_messages_div.querySelector('.chatbot-message');
-        if (first_chatbot_message) {all_messages_div.removeChild(first_chatbot_message);}      
-
-        // Show popup
-        var popup_div = document.getElementById('notification-popup');
-        popup_div.textContent = message;
-        popup_div.classList.remove('hide-popup');
-        popup_div.classList.add('show-popup');
-    }
-    function hidePopup() {
-        var popup_div = document.getElementById('notification-popup');
-
-        // fade it out
-        popup_div.classList.remove('show-popup');
-        popup_div.classList.add('hide-popup');
-    }
 
     function sendToServer(data) {
+        hidePopup();
+        
+
+
+        // Set timeout
+        const controller = new AbortController();
+        let timeout;
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => controller.abort(), 5000); // Adjust the timeout duration as needed
+        }
+        resetTimeout(); // Start the timeout right before sending
+
         // API SEND --> SEND DATA TO SERVER AND HANDLE SSE RESPONSE
-        fetch('http://localhost:3000/send-message', {
+        // http://localhost:3000/chat_completion
+        // http://54.202.189.213:5000/chat_completion
+        fetch('http://localhost:3000/chat_completion', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ data })
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify( data ),
+            signal: controller.signal
         })
         .then(response => {
+            resetTimeout(); // Reset the timeout when any response recieved
             if (response.ok) {
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder("utf-8");
@@ -490,31 +441,42 @@ Calls to:
                     return reader.read().then(({ done, value }) => {
                         if (done) {
                             console.log("Stream complete");
+                            clearTimeout(timeout);          // Clear the timeout at the end of the response.
                             return;
                         }
-    
+
+                        resetTimeout(); // Reset the timeout with each chunk received
+
                         // Decode and process the SSE message
                         const return_message = decoder.decode(value, { stream: true });
+                        const messages_array = return_message.split('\n');
+                        
+                        for (let return_message of messages_array) {
+                            if (return_message) {
+                                const return_json = JSON.parse(return_message.split('data: ')[1]);
 
-                        const return_json = JSON.parse(return_message.split('data: ')[1]);
+                                if (return_json.message_type == 'initial_response') {
+                                    if (return_json.value == 'NO_RESOURCES_AVAILABLE') {
+                                        showPopup("No open resources -  try sending a new message.","warning");                                                 
+                                    }
+                                    else if (return_json.value == 'STREAM_STARTING') {
+                                        hidePopup();
+                                    }
+                                }
+                                else if (return_json.message_type === 'chunk') {
+                                    displayMessage(return_json.value);
+                                }
+                                else if (return_json.message_type === 'completion_metadata') {
+                                    updateLLMMetrics(return_json.value);
+                                }
+                                else {
+                                    showPopup("Unexpected server response - try a new message.","error");                                                 
+                                }
 
-                        console.log("JSON:",return_json);
-
-
-
-                        if (return_json.message_type == 'initial_response' && return_json.value == 'NO_RESOURCES_AVAILABLE') {
-                            showPopup("No open resources -  try sending a new message.");                                                 
+                                console.log(return_json);
+                            }
+                            
                         }
-                        else if (return_json.message_type == 'initial_response' && return_json.value == 'STREAM_STARTING') {
-                            hidePopup();
-                        }
-
-                        if (return_json.message_type === 'chunk') {
-                            displayMessage(return_json.value+" ");
-                        } else if (return_json.message_type === 'completion_metadata') {                            
-                            updateLLMMetrics(return_json.value);
-                        }
-
     
                         // Continue reading the stream
                         return readStream();
@@ -524,24 +486,25 @@ Calls to:
                 return readStream();
             } else {
                 console.error('Error sending message to the server');
-                // update last chato
-                displayError("No response from the server: timeout occured. Darn. Try refreshing or spinning up the server.")
+                showPopup("Problem sending message - try a new message.","error");                                                 
             }
         })
-        .catch(error => { // Timeout of some length
-            
-            if (error.message === 'NetworkError when attempting to fetch resource.') {
-                console.error('Network error: Please check your internet connection and try again.');
-                showPopup('Server timeout - it could be us or your internet connection.')
-
-            } else if (error.message === 'Error in input stream') {
-                console.error('Input stream error: There was a problem with the data stream.');
-                showPopup('Stream interrupted - try sending a new message.')
-
-            } else {
-                console.error('An unexpected error occurred:', error.message);
-                showPopup('Unknown error - try sending a new message.')
-
+        .catch(error => { 
+            if (error.name === 'AbortError') { 
+                console.error('Timeout error: Please check your internet connection and try again.',error);
+                showPopup('Server timeout - it could be us or your internet connection.',"error",true)
+            }
+            else if (error.name === 'NetworkError') {  // Not 100% sure what triggers this
+                console.error('Network error: Please check your internet connection and try again.',error);
+                showPopup('Network error - it could be us or your internet connection.',"error",true)
+            }
+            else if (error.name === 'TypeError') {
+                console.error('Input stream error: There was a problem with the data stream.',error);
+                showPopup('Stream interrupted - try sending a new message.',"warning",true);
+            }
+            else {
+                console.error('An unexpected error occurred:', error);
+                showPopup('Unknown error - try sending a new message.',"error",true);
             }
         });
     }
@@ -595,7 +558,7 @@ Calls to:
     // Initalize vars
     const message_history = document.querySelector('#all-messages-div');
 
-    // Set 'Intersection Observer' to display a welcome message when user sees the chatbot input box.
+    // Set 'Intersection Observer'
     /*
     const observer = new IntersectionObserver(onVisibilityChange, {
         root: null,     // full viewport = root
@@ -606,11 +569,10 @@ Calls to:
     */
     
     
-    
     const reset_demo_text = document.querySelector('#reset-demo-txt');
     reset_demo_text.addEventListener('click', function() {
         message_history.innerHTML = "";
-        // SEND FORGET MESSAGE TO API?
+        
     });
 
 

@@ -25,16 +25,16 @@ Calls to:
 
     <div class="c-row u-gap-1/2 u-flex-nowrap">
         <!-- Left - Demo steps -->
-        <div class="c-col md:c-col-12 lg:c-col-8">
+        <div class="c-col md:c-col-12 lg:c-col-6">
             <h3 style="margin-left: -16px;">Running the Demo</h3>
             <ol>
             {{ range .Params.demo_steps }}
-                <li class="u-margin-left-1/2">{{.}}</li>
+                <li class="u-margin-left-1/2">{{. | markdownify }}</li>
             {{end}}
             </ol>
         </div>
         <!-- Right - Architecture Diagram -->
-        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="c-col lg:c-col-6 u-hide lg:u-display-block u-flex-shrink-0">
             <div class="element-to-blow-up">
                 <!-- on page -->
                 <div class="clickable-blowup">
