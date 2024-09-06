@@ -7,10 +7,10 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Android: 1
+- Android: 2
 - Baremetal: 1
-- Linux: 94
-- macOS: 3
+- Linux: 95
+- macOS: 4
 - Windows: 7
 pinned_modules:
 - module:
@@ -24,7 +24,7 @@ subjects_filter:
 - Databases: 15
 - Libraries: 6
 - ML: 8
-- Performance and Architecture: 34
+- Performance and Architecture: 35
 - Storage: 1
 - Web: 9
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -48,7 +48,7 @@ tools_software_languages_filter:
 - C: 4
 - C#: 1
 - C++: 3
-- C/C++: 1
+- C/C++: 2
 - Capstone: 1
 - CCA: 2
 - Clair: 1

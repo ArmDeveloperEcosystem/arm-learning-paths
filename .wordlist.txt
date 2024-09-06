@@ -3102,3 +3102,16 @@ darwin
 dmg
 madvise
 osKernelInitialize
+Alexandros
+CopyWord
+Lamprineas
+Multiversioning
+SkipWord
+Tallund
+VoD
+autocomplete
+ifunc
+ifuncs
+lm
+memcpy
+multiversioning
