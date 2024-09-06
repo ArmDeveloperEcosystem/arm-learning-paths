@@ -110,20 +110,20 @@ You can do the same for high bit depth:
 
 ### Live stream video encoding
 
-For live stream encoding you can experiment different number of processors and monitor performance using the `--cpus-used` in the range from 5 to 9. 
+For live stream encoding, you can experiment different number of processors and monitor performance using the `--cpus-used` in the range from 5 to 9. 
 
 {{% notice Note %}}
 The naming of `--cpu-used` flag is to trade-off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality but longer encoding time. For live stream a reasonable range of quality settings is 5-9.
 {{% /notice %}}
 
 
-For standard bit depth with 8 CPUs run:
+For standard bit depth with 8 CPUs, run:
 
 ```bash
 ./vpxenc --rt --cpu-used=8 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
 ```
 
-For high bit depth run:
+For high bit depth, run:
 
 ```bash
 ./vpxenc --rt --cpu-used=8 --profile=2 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit_YUV.y4m
