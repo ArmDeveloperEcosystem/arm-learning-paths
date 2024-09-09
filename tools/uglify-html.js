@@ -13,11 +13,9 @@ function findFiles(dir, fileList = []) {
         const stat = fs.statSync(filePath);
 
         if (stat.isDirectory()) {
-            // If it's a directory, recurse into it
-            findFiles(filePath, fileList);
+            findFiles(filePath, fileList);  // recursive look into directory
         } else if (file === 'index.html' && path.basename(path.dirname(filePath)) === '_demo') {
-            // Check if the file is 'index.html' directly under a '_demo' directory
-            fileList.push(filePath);
+            fileList.push(filePath); // Check if the file is 'index.html' directly under a '_demo' directory
         }
     });
 
@@ -28,23 +26,14 @@ function findFiles(dir, fileList = []) {
 function uglifyLastScriptTag(filePath) {
     let htmlContent = fs.readFileSync(filePath, 'utf8');
 
-    // Regex to find all script tags
-    const scriptTags = [...htmlContent.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+    const scriptTags = [...htmlContent.matchAll(/<script>([\s\S]*?)<\/script>/g)];     // Regex to find all script tags
 
     if (scriptTags.length > 0) {
-        // Get the last script tag content
-        const lastScriptContent = scriptTags[scriptTags.length - 1][1];
-
-        // Uglify the content
-        const uglifiedContent = uglifyJS.minify(lastScriptContent).code;
-
-        // Replace the last script content with the uglified version
-        htmlContent = htmlContent.replace(lastScriptContent, uglifiedContent);
-
-        // Write the updated HTML back to the file
-        fs.writeFileSync(filePath, htmlContent, 'utf8');
-
-        console.log(`Uglified last <script> in ${filePath}`);
+        const lastScriptContent = scriptTags[scriptTags.length - 1][1];         // Get the last script tag content (demo script info will be here)
+        const uglifiedContent = uglifyJS.minify(lastScriptContent).code;        // Uglify the content
+        htmlContent = htmlContent.replace(lastScriptContent, uglifiedContent);  // Replace the last script content with the uglified version
+        fs.writeFileSync(filePath, htmlContent, 'utf8');                        // Write the updated HTML back to the file
+        console.log(`Uglified last <script> in ${filePath}`);                   // Report back
     } else {
         console.log(`No <script> tags found in ${filePath}`);
     }
@@ -52,6 +41,4 @@ function uglifyLastScriptTag(filePath) {
 
 // Find all relevant index.html files and uglify them
 const filesToUglify = findFiles(baseDir);
-
-
 filesToUglify.forEach(uglifyLastScriptTag);
