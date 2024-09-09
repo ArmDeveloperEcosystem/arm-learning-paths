@@ -1,5 +1,5 @@
 ---
-title: Self-hosted arm runners for GitHub Actions
+title: Managed, self-hosted Arm runners for GitHub Actions
  
 minutes_to_complete: 15
 
