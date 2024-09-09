@@ -54,7 +54,7 @@ sudo apt update
 sudo apt install gcc g++ -y
 ```
 
-Another meta-package on Ubuntu is ``build-essential``. This will install the most common tools libraries with a single command.
+Another meta-package on Ubuntu is ``build-essential``. This will install the most common tools and libraries with a single command.
 
 ```bash { target="ubuntu:latest" }
 sudo apt install build-essential -y
@@ -62,18 +62,18 @@ sudo apt install build-essential -y
 
 ### Installing on Red Hat / Fedora / Amazon Linux
 
-These Linux distributions use `yum` as the package manager. 
+These Linux distributions use `dnf` as the package manager.
 
 To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
 
 ```bash { target="fedora:latest" }
-sudo yum update -y
-sudo yum groupinstall 'Development Tools' -y
+sudo dnf update -y
+sudo dnf groupinstall 'Development Tools' -y
 ```
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
-yum update
-yum groupinstall 'Development Tools' -y
+dnf update -y
+dnf groupinstall 'Development Tools' -y
 ```
 ## Setting up product license
 

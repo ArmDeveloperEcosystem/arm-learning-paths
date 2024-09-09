@@ -1,5 +1,5 @@
 ---
-title: "How can I migrate my applications to Arm?"
+title: "How can I migrate applications to Arm Neoverse?"
 layout: "migration"       # Easier for dynamic content loading, keep the same
 description: Software developers are embracing the Arm architecture for its superior price performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services. A three step migration process covers the most common scenarios, and provides links to additional resources.
 ---
@@ -217,7 +217,7 @@ Based on your initial research, decide how to proceed with trying your software 
 
 Top-down porting involves moving the complete software stack to an Arm machine and trying to build and run it straightaway. You will almost certainly face errors, which you can address one at a time until the full application runs on Arm. 
 
-![Top-down porting methodology](Top-down.png) 
+![Top-down porting methodology](/migration/Top-down.png) 
 
 This methodology is great for simpler stacks, when breaking down the problem would take more time than fixing errors iteratively. 
 
@@ -225,7 +225,7 @@ This methodology is great for simpler stacks, when breaking down the problem wou
 
 Bottom-up porting is more systematic. Here, you break apart your software stack, starting with the foundations of your app to get those running on an Arm server first. Then add back one or two software packages at a time, and recompile and run to ensure it works on Arm. If errors arise, fix them or replace the incompatible package with an Arm compatible version. Continue building back your stack until it is fully formed on an Arm server. 
 
-![Bottom-up porting methodology](Bottom-up.png) 
+![Bottom-up porting methodology](/migration/Bottom-up.png) 
 
 This methodology is sensible for large stacks, where running the whole app on Arm immediately would cause too many errors to effectively work through.
 
