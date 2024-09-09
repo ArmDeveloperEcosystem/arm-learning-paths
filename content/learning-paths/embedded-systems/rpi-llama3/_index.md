@@ -31,7 +31,7 @@ tools_software_languages:
     - LLM
     - GenAI
     - Raspberry Pi
-    - ML
+    
 
 
 ### FIXED, DO NOT MODIFY
