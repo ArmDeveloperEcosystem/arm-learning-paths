@@ -1,0 +1,17 @@
+graph TD;
+    gbuffer[Retrieve GBuffer info]
+    generate[Use PBR data to generate the ray]
+    trace[Trace ray, using RT pipeline or ray query]
+    Hit{Ray Hit?}
+    illuminate[Retrieve bindless materials <br> and illuminate]
+    blending[Stop tracing and do inverse blending]
+    relaunch[Optional. If refractive <br> Launch more rays to have extra bounces <br> Minimum 2 bounces recommended 4 ]
+
+    gbuffer-->generate;
+    generate-->trace;
+    trace-->Hit;
+    Hit-->|Ray Miss| blending;
+    Hit-->|Ray Hit| illuminate;
+    illuminate-->relaunch
+    relaunch-->generate
+    relaunch-->blending

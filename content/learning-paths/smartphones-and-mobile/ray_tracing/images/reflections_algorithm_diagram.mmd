@@ -1,0 +1,21 @@
+graph TD;
+    gbuffer[Retrieve G-Buffer info]
+    roughness[Use roughness to decide number of rays]
+    generate[Use PBR data to generate the ray]
+    trace[Trace ray, using RT pipeline or ray query]
+    Hit{Ray Hit?}
+    illuminate[Retrieve bindless materials <br> and illuminate]
+    skybox[Reflect the sky. <br> Sample a skybox <br> or environment map]
+    denoise[If using high roughness add a denoiser pass]
+    relaunch[Optional. If reflective <br> Launch more rays to have extra bounces]
+
+    gbuffer-->roughness;
+    roughness-->generate;
+    generate-->trace;
+    trace-->Hit;
+    Hit-->|Ray Hit| illuminate;
+    Hit-->|Ray Miss| skybox;
+    illuminate-->relaunch
+    skybox-->relaunch
+    relaunch-->roughness
+    relaunch-->denoise
