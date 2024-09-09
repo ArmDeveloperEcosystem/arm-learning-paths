@@ -3,14 +3,14 @@ title: Self-hosted arm runners for GitHub Actions
  
 minutes_to_complete: 15
 
-who_is_this_for: Developers who want to use the (cheaper and faster) arm runners offered by AWS to execute their GitHub Actions workflows.
+who_is_this_for: Developers who want to use (cheaper and faster) Arm runners offered by AWS to execute GitHub Actions workflows.
 
 learning_objectives:
-    - Install the self-hosted runner manager (RunsOn) in your AWS account.
-    - Execute GitHub Actions workflows on arm runners.
+    - Install RunsOn, a self-hosted runner manager, in your AWS account.
+    - Execute GitHub Actions workflows on Arm runners.
 
 prerequisites:
-    - An Amazon Web Services account.
+    - An [Amazon Web Services account](https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/aws/).
     - A GitHub account (personal or organization).
 
 author_primary: Cyril Rohr
