@@ -76,7 +76,7 @@ In this step you will download the [Meta Llama3.1 8B Instruct model](https://hug
 
 
 ```sh
-cd torchchat
+cd ../torchchat
 python torchchat.py export llama3.1 --output-dso-path exportedModels/llama3.1.so --quantize config/data/aarch64_cpu_channelwise.json --device cpu --max-seq-length 2048
 ```
 The output from this command should look like:
