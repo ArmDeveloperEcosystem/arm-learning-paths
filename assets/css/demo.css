@@ -156,6 +156,7 @@
 #submit-button {
     margin-left: 10px;
     flex-shrink: 0;
+    width: 60px; /* prevent slight movement based on icon sizes */
 }
 
 

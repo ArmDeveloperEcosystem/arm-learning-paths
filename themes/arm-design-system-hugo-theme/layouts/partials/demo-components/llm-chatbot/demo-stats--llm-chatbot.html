@@ -26,8 +26,8 @@ Calls to:
                 <div id="demo-actions">
                     <div class="c-row">
                         <div class="c-col" id="input-and-submit">
-                            <textarea id="user-input-for-demo" placeholder="Talk to Graviton-based LLM" rows="1"></textarea>
-                            <ads-button id="submit-button" level="primary" disabled>Submit</ads-button>
+                            <textarea id="user-input-for-demo" placeholder="Talk to Graviton-based LLM" tabindex="1" rows="1"></textarea>
+                            <ads-button id="submit-button" level="primary" disabled><i class="fa-solid fa-spinner fa-spin"></i></ads-button>
                             <div id="notification-popup" class="show-popup"><span id="initial-message-span">Pinging LLM server <ads-loader></ads-loader></span></div>
                         </div>
                     </div>
@@ -68,7 +68,6 @@ Calls to:
                 <h5>Last Message:</h5>
                 <p><span id="total-time-metric">#</span> seconds to display <span id="num-tokens-metric">#</span> tokens.</p>
                 <p>Tokens per second: <span id="tps-metric">#</span></p>
-                <p>Time to first token: <span id="ttft-metric">#</span></p>
             </div>
 
               
