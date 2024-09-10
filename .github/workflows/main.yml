@@ -37,8 +37,6 @@ jobs:
       - name: Install Post-CSS
         run: npm install postcss-cli
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
 
       # Builds arm-software-developer repo
       - name: Build
@@ -48,11 +46,6 @@ jobs:
           bin/pagefind --site "public"
         env:
          HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
-
-     # - name: Uglify the Endpoint
-     #   run: |
-      #      npm install uglify-js
-      #      node tools/uglify-html.js
 
       # Deploys website to AWS S3
       - name: Deploy to S3
