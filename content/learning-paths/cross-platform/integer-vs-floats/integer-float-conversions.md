@@ -145,7 +145,7 @@ The second type of conversions are called implicit and are harder to track.
 
 When a conversion is not explicitly stated it is called implicit. In general, it's a conversion that the compiler issues when there is an operation involving two (or more) elements of different data types.
 
-In that case, the compiler has to convert one of the values to the same datatype as the other, as most operations require elements of the same size. 
+In that case, the compiler has to convert one of the values to the same datatype as the other, as most operations require elements of the same type.
 
 {{% notice Note %}}
 There are some conversion exceptions, for example, the `SADDW`/`UADDW` Advanced SIMD instructions which add elements of different widths. Such instructions do not require any kind of conversion. 

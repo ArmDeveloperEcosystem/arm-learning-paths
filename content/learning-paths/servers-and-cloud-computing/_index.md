@@ -7,11 +7,11 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Android: 1
+- Android: 2
 - Baremetal: 1
-- Linux: 92
-- macOS: 2
-- Windows: 5
+- Linux: 95
+- macOS: 4
+- Windows: 7
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -22,11 +22,11 @@ subjects_filter:
 - CI-CD: 2
 - Containers and Virtualization: 23
 - Databases: 15
-- Libraries: 5
+- Libraries: 6
 - ML: 8
-- Performance and Architecture: 34
+- Performance and Architecture: 35
 - Storage: 1
-- Web: 7
+- Web: 9
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
@@ -48,7 +48,7 @@ tools_software_languages_filter:
 - C: 4
 - C#: 1
 - C++: 3
-- C/C++: 1
+- C/C++: 2
 - Capstone: 1
 - CCA: 2
 - Clair: 1
@@ -96,6 +96,7 @@ tools_software_languages_filter:
 - NEON: 1
 - Nexmark: 1
 - Nginx: 3
+- Node.js: 2
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
@@ -120,14 +121,15 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - TypeScript: 1
 - Vectorscan: 1
+- Visual Studio Code: 2
 - WordPress: 3
 - x265: 1
 - zlib: 1
 - Zookeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 9
-- Google Cloud: 6
+- AWS: 11
+- Google Cloud: 8
 - Microsoft Azure: 7
 - Oracle: 2
 ---

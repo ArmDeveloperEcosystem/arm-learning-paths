@@ -7,7 +7,9 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers new to RTOS development.
 
 learning_objectives: 
-    - Implement a basic RTOS-based application
+    - Understand the basics of RTX-based RTOS application development
+    - Configure and manage an RTOS project in Keil Studio, including defining the memory map, selecting software components, and setting up debugging configurations for Cortex-M processors
+    - Create and manage multiple threads within an RTX5 RTOS application
 
 prerequisites:
     - Installation of [Arm Keil Studio for VS Code](/install-guides/keilstudio_vs)

@@ -12,7 +12,7 @@ To begin, decide which functions your memory allocator will provide. We
 have already described `malloc` and `free` but there are more provided by the
 [C library](https://en.cppreference.com/w/c/memory).
 
-This demo assumes you just need `malloc` and `free`. The new implementations will
+This learning path assumes you just need `malloc` and `free`. The new implementations will
 be called `simple_malloc` and `simple_free`. Start with just these two functions and write
 out their behaviors.
 
@@ -96,7 +96,7 @@ range = 0x0 + 4 = 0x4;
 
 Pointer: 0x4 Size: N-4 Allocated: False
 
-range = 0x4 + (N-4) = 1 beyond the end of the heap, so the walk is finished.
+range = 0x4 + (N-4) = N beyond the end of the heap, so the walk is finished.
 ```
 
 `simple_free` uses the pointer given to it to find the range it needs to de-allocate.

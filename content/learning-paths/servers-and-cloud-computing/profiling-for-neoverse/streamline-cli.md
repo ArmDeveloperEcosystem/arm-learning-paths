@@ -29,11 +29,11 @@ Arm recommends that you profile an optimized release build of your application, 
 1. Download and extract the Streamline CLI tools on your Arm server:
 
     ```sh
-    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.3/Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
-    tar -xzf Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
+    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.4/Arm_Streamline_CLI_Tools_9.3_linux_arm64.tgz 
+    tar -xzf Arm_Streamline_CLI_Tools_9.3_linux_arm64.tgz 
     ```
     
-1. Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly.
+1. Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly. Arm recommends that you apply the kernel patch as described in this guide, to improve support for capturing function-attributed top-down metrics on Arm systems.
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
 
