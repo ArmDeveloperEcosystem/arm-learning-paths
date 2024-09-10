@@ -1,0 +1,116 @@
+{{/*
+Configuration box for demo page.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+
+*/}}
+
+
+
+
+
+
+
+<div class="content-box">
+    <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0" style="--column-count: {{ len .Params.configuration_dropdown_options }}">
+        <div class="c-col">
+            <h2>Configuration</h2>
+            <p>View the full configuration details on <a href="https://www.google.com">this page.</a></p>
+            <div class="c-row u-gap-1/2 u-padding-top-0">
+                {{- $counter := 0 -}}
+                {{- range .Params.configuration_dropdown_options -}}
+                    <div class="c-col eq-width-cols">
+                        <h6>{{ .parameters.param_name }}</h6>
+                        <ads-select 
+                            id="config_{{ $counter }}" 
+                            name="Select {{ .parameters.param_name }}" 
+                            level="{{ if .parameters.selectable }}secondary{{ else }}tertiary{{ end }}"
+                            {{ if not .parameters.selectable }}disabled{{ end }}
+                            >
+                        </ads-select> 
+
+                        <!-- Prepopulated hidden paragraphs for each spec -->
+                        <div class="spcs-div"> 
+                            {{- $first := true -}} 
+                            {{- range .parameters.options -}}
+                                <p 
+                                    id="specs_{{ $counter }}_{{ .name | urlize }}" 
+                                    class="config-specs"
+                                    {{- if $first -}}style="display: block;"{{- else -}}style="display: none;"{{- end -}}
+                                >
+                                    {{ .specs }}
+                                </p>
+                                {{- $first = false -}}  <!-- Hide all other params by default -->
+                            {{- end -}}
+                        </div>
+
+                                                
+                    </div>
+                    {{- $counter = add $counter 1 -}}
+                {{- end -}}          
+            </div>  
+        </div>    
+    </div>
+</div>
+
+
+
+
+<script>
+    function handleSelectChange(selectElement) {
+        var counter = selectElement.id.split('_')[1]; // Extract counter from id
+        
+        // Access the shadow root
+        var shadowRoot = selectElement.shadowRoot;
+        if (shadowRoot) {
+            // Access the <select> element inside the shadow DOM
+            var selectInsideShadow = shadowRoot.querySelector('select');
+            var selectedValue = selectInsideShadow.value;
+
+            // Hide all specs paragraphs for this select element
+            var allSpecs = document.querySelectorAll(`[id^="specs_${counter}_"]`);
+            allSpecs.forEach(function(p) {
+                p.style.display = 'none';
+            });
+
+            // Show the selected specs paragraph
+            var selectedSpecsParagraph = document.getElementById(`specs_${counter}_${selectedValue}`);
+            if (selectedSpecsParagraph) {
+                selectedSpecsParagraph.style.display = 'block';
+            }
+        } else {
+            console.error("Shadow DOM is not accessible.");
+        }
+    }
+
+
+        {{- $counter := 0 -}}
+        {{- range .Params.configuration_dropdown_options -}}
+            {{ $varName := printf "items_%d" $counter | safeJS }}
+            var {{ $varName }} = [
+                {{- range $i, $opt := .parameters.options -}}
+                    {{ if $i }},{{ end }}{
+                        value: '{{ $opt.name | urlize }}',
+                        text: '{{ $opt.name }}',
+                        type: 'option'
+                    }
+                {{- end -}}
+            ];
+            document.getElementById('config_{{ $counter }}').items = {{ $varName }};
+
+            // Attach the event handler directly in JS
+            document.getElementById('config_{{ $counter }}').selectChangeHandler = function() {
+                handleSelectChange(document.getElementById('config_{{ $counter }}'));
+            };
+
+            {{- $counter = add $counter 1 -}}
+        {{- end -}}
+
+</script>

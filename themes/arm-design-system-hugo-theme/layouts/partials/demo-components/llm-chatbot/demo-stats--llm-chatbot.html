@@ -1,0 +1,79 @@
+{{/*
+Demo page for the llm-chatbot, the first demo created in learn.arm.com.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+
+*/}}
+
+
+
+<div class="content-box">
+    <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
+        <!-- Left - Demo -->
+        <div class="c-col md:c-col-12 lg:c-col-8 lg:u-display-block ">
+            <h2>Demo</h2>
+            <div id="demo-container">
+                <div id="all-messages-div">
+                    
+                </div>
+                <div id="demo-actions">
+                    <div class="c-row">
+                        <div class="c-col" id="input-and-submit">
+                            <textarea id="user-input-for-demo" placeholder="Talk to Graviton-based LLM" rows="1"></textarea>
+                            <ads-button id="submit-button" level="primary" disabled>Submit</ads-button>
+                            <div id="notification-popup" class="show-popup"><span id="initial-message-span">Pinging LLM server <ads-loader></ads-loader></span></div>
+                        </div>
+                    </div>
+                    <div class="c-row">
+                        <div class="c-col">
+                            <p id="reset-demo-txt">Reset chat</p>
+                            <span id="ping-info"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right - Stats -->
+        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
+            <h2>Stats</h2>
+            <div id="stats-initial">
+                <p>Type a message to the chatbot to view metrics.</p> 
+            </div>
+            <div id="stats-populated" hidden>
+                <div id="tps-average-container" data-tps-array=""></div>
+                <h5>Avg Tokens per Second (TPS)</h5>
+                <div id="chart-container" class="chart-container">
+                    <div id="bar" class="bar"></div>
+
+                        {{/* Automatically calculate low, mid, and great lines 
+                                <div class="context-line" style="left: 20%;"></div> <!-- 10 / 50 --> 
+                        */}}
+                        {{range .Params.tps_ranges}}
+                            {{ if lt .max $.Params.tps_max }}
+                                {{ $fraction := div (float .max) $.Params.tps_max }}  <!-- Divide .max by tps_max -->
+                                {{ $percentage := mul $fraction 100 }}        <!-- Multiply by 100 to get percentage -->
+                                <div class="context-line" style='left: {{ printf "%.0f%%" $percentage }};'></div>
+                            {{end}}
+                        {{end}}
+                  </div>
+                <p><span id="overall-context-metric"></span></p>
+                <br>
+                <h5>Last Message:</h5>
+                <p><span id="total-time-metric">#</span> seconds to display <span id="num-tokens-metric">#</span> tokens.</p>
+                <p>Tokens per second: <span id="tps-metric">#</span></p>
+                <p>Time to first token: <span id="ttft-metric">#</span></p>
+            </div>
+
+              
+
+        </div>        
+    </div>
+
+</div>
