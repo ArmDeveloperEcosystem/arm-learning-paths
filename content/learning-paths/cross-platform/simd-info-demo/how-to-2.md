@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-### 2.1. Comprehensive SIMD.info Capabilities
+### Comprehensive SIMD.info Capabilities
 [SIMD.info](https://simd.info/) offers a variety of powerful tools to help developers work more efficiently with SIMD code across different architectures. With a database of over 12,000 intrinsics, it provides detailed information to support effective SIMD development.
 For each intrinsic (instruction), SIMD.info provides comprehensive details, including:
 
@@ -47,13 +47,13 @@ This detailed information ensures you have all the necessary resources to effect
 
 - **Discussion forum (Stack Overflow-type):** The integrated discussion forum allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support.
 
-### 2.2 Work in Progress & Future Development
+### Work in Progress & Future Development
 - **Sudo-code:** Currently under development, the Sudo-code feature will enable users to generate high-level pseudo-code based on specific SIMD instructions. This tool aims to make writing and understanding SIMD code even easier.
 
 - **[SIMD.ai](https://simd.ai/):** SIMD.ai is an upcoming feature that promises to bring AI-assisted insights and recommendations to the SIMD development process, making it faster and more efficient to write and port SIMD code.
 
 
-### 2.3. How These Features Aid in SIMD Development
+### How These Features Aid in SIMD Development
 SIMD.info offers a range of features that streamline the process of porting SIMD code across different architectures. The hierarchical structure of tree-based navigation allows you to easily locate instructions within a clear framework. This organization into broad categories and specific subcategories, such as Arithmetic and Boolean Logic, makes it straightforward to identify the relevant SIMD instructions needed for your project.
 
 When you need to port code from one architecture to another, the advanced search functionality proves invaluable. You can either search for specific intrinsics or use broader terms to find equivalent instructions across platforms. This capability ensures you quickly find the right commands for Intel, ARM, or Power architectures, facilitating a smoother transition between different SIMD environments.

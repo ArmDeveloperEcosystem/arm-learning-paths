@@ -3,7 +3,7 @@ title: SIMD.info Tool Demonstration
 
 minutes_to_complete: 30
 
-who_is_this_for: This is for software developers and engineers looking to understand SIMD code  portability across platforms, specifically between Intel and ARM architectures.
+who_is_this_for: This is for software developers and engineers looking to understand SIMD code  portability across platforms, specifically between Intel, ARM & PowerPC architectures.
 
 learning_objectives: 
     - Understand the challenges of porting SIMD code from one platform to another.
@@ -22,8 +22,9 @@ armips:
     - PLACEHOLDER IP A
     - PLACEHOLDER IP B
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - GCC
+    - SIMD
+    - CODING
 operatingsystems:
     - Linux
 
