@@ -45,7 +45,7 @@ cd ../
 
 git clone --recursive https://github.com/pytorch/torchchat.git
 cd torchchat
-git checkout f384d4ffd42065397d37c71819e3bc578f7c3179
+git checkout 925b7bd73f110dd1fb378ef80d17f0c6a47031a6
 wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
 git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
 ./install_requirements.sh
@@ -62,10 +62,9 @@ pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
 ### Login to Hugging Face
 You can now download the LLM.
 
-Log in to the Hugging Face repository, and accept the license agreement for the Meta Llama 3.1 model:
+Log in to the Hugging Face repository and enter your API key from Hugging face:
 
 ```sh
-pip install huggingface_hub
 huggingface-cli login
 ```
 Before you can download the model, accept the license agreement at: [Meta Llama 3.1](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
@@ -98,7 +97,7 @@ You can now run the LLM on the Arm CPU on your server.
 To run the model inference:
 
 ```sh
-LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc.so.4 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 OMP_NUM_THREADS=16 python torchchat.py generate llama3 --dso-path exportedModels/llama3.1.so --device cpu --max-new-tokens 32 --chat
+LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc.so.4 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 OMP_NUM_THREADS=16 python torchchat.py generate llama3.1 --dso-path exportedModels/llama3.1.so --device cpu --max-new-tokens 32 --chat
 ```
 The output from running the inference will look like:
 
