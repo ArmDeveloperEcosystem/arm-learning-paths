@@ -6,10 +6,10 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will learn how to configure and run the chatbot server as a backend service and create a Streamlit-based frontend. This setup will enable communication with the chatbot through a web interface accessible in your browser.
+In this section, you will learn how to configure and run the chatbot server as a backend service and create a Streamlit-based frontend. This setup enables communication with the chatbot through a web interface accessible in your browser.
 
 ### Activate the Virtual Environment to install dependencies
-Activate the Python virtual environment you have used in the previous section, incase its deactivated.
+Activate the Python virtual environment you have used in the previous section, in case it is deactivated:
 
 ```sh
 source torch_env/bin/activate
@@ -31,7 +31,7 @@ cd torchchat
 LD_PRELOAD=/usr/lib/aarch64-linux-gnu/libtcmalloc.so.4 TORCHINDUCTOR_CPP_WRAPPER=1 TORCHINDUCTOR_FREEZING=1 OMP_NUM_THREADS=16 python3 torchchat.py server llama3.1 --dso-path exportedModels/llama3.1.so
 ```
 
-The output while the backend server starts will look like:
+The output while the backend server starts looks like this:
 
 ```output
 Using device=cpu 
@@ -46,7 +46,7 @@ Press CTRL+C to quit
 ```
 
 ### Streamlit Frontend Server File
-Now open a new terminal window and create a file named `browser.py` in your `torchchat` directory
+Now open a new terminal window and create a file named `browser.py` in your `torchchat` directory:
 
 ```sh
 cd torchchat
@@ -112,15 +112,15 @@ if prompt := st.chat_input():
     st.session_state.messages.append({"role": "assistant", "content": response})
 ```
 
-### Running Streamlit Frontend Server
-Start the Streamlit Frontend Server:
+### Running Streamlit frontend server
+Start the Streamlit frontend server:
 
 ```sh
 cd torchchat
 streamlit run browser.py
 ```
 
-The output while the streamlit frontend server starts will look like:
+The output while the streamlit frontend server starts looks like this:
 
 ```output
 Collecting usage statistics. To deactivate, set browser.gatherUsageStats to false.
@@ -132,8 +132,8 @@ Collecting usage statistics. To deactivate, set browser.gatherUsageStats to fals
   External URL: http://3.86.224.131:8501
 ```
 
-### Accessing the Streamlit Frontend using Browser
+### Accessing the Streamlit frontend using browser
 
-Open the local URL from above in a browser and you should see the chatbot running:
+Open the local URL from the link above in a browser and you should see the chatbot running:
 
 ![Chatbot](images/chatbot.png)
