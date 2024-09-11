@@ -19,7 +19,6 @@ source torch_env/bin/activate
 Install the additional packages:
 
 ```sh
-pip3 install streamlit
 pip3 install openai
 ```
 
@@ -113,10 +112,9 @@ if prompt := st.chat_input():
 ```
 
 ### Running Streamlit frontend server
-Start the Streamlit frontend server:
+Within you activated `venv`, start the Streamlit frontend server:
 
 ```sh
-cd torchchat
 streamlit run browser.py
 ```
 
