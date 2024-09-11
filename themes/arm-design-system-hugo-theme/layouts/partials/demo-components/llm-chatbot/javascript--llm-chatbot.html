@@ -173,12 +173,10 @@ Calls to:
         const total_time = document.getElementById('total-time-metric');
         const tokens = document.getElementById('num-tokens-metric');
         const tps = document.getElementById('tps-metric');
-        const ttft = document.getElementById('ttft-metric');
 
         // replace last message metrics
         var tps_num = metrics_object['tps'];
         tps.textContent = tps_num;
-        ttft.textContent = metrics_object['ttft'] || NaN;
         tokens.textContent = metrics_object['completion_tokens'];
         total_time.textContent = metrics_object['completion_time'];
 
@@ -200,7 +198,11 @@ Calls to:
     }
 
 
-    function showPopup(message,type,keep_last_message=false) {
+    function showPopupPostConnection(message,type,keep_last_message=false) {
+
+        // Connection is done, enable people to submit new entry
+        connectionStatus.isActive = false;
+        toggleButton();
 
         var all_messages_div = document.getElementById('all-messages-div');
 
@@ -317,6 +319,22 @@ function addUserMessage_andChatbotPlaceholder(user_input) {
 function toggleButton() {
     const text_area = document.querySelector('#user-input-for-demo');
     const submit_button = document.getElementById("submit-button");
+    const submit_icon = submit_button.querySelector("i");
+
+    if (connectionStatus.isActive) {
+        // Make submit icon a spinner, if not already
+        submit_icon.classList.remove('fa-arrow-up');
+        submit_icon.classList.add('fa-spinner');
+        submit_icon.classList.add('fa-spin');
+
+    }
+    else {
+        // Make submit icon a message sender, if not already
+        submit_icon.classList.remove('fa-spinner');
+        submit_icon.classList.remove('fa-spin');
+        submit_icon.classList.add('fa-arrow-up');
+    }
+
     if (text_area.value.trim() === "") {
         submit_button.disabled = true;
     } else {
@@ -335,24 +353,20 @@ document.addEventListener("DOMContentLoaded", function() {
     /*
         Event Listeners
             1) Reset Chat button        -> clears all messages
-            2) User enters text         -> enables input button, sets input height dynamically
-            3) User submits text        -> Clear msg box, add text to UI, send chat history to server
+            2) User submits text        -> Clear msg box, add text to UI, send chat history to server
+            3) User enters text         -> enables input button, sets input height dynamically
     */
+
+    var submit_button = document.getElementById("submit-button");
+    var text_area     = document.getElementById("user-input-for-demo");
 
     // 'Reset chat'
     document.querySelector('#reset-demo-txt').addEventListener('click', function() {
         document.querySelector('#all-messages-div').innerHTML = ""; // Clear all messages
     });
 
-    // User enters any text in textinput
-    document.querySelector('#user-input-for-demo').addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
-        toggleButton();         // enable input button
-    });
-
     // User submits text
-    document.getElementById("submit-button").addEventListener('click', function() {
+    submit_button.addEventListener('click', function() {
         const text_area = document.querySelector('#user-input-for-demo');        
         // Get user's message
         const user_input = text_area.value;
@@ -375,7 +389,21 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    toggleButton();     // Initial check in case the textarea has content on page load
+    // User enters any text in textinput
+    text_area.addEventListener('input', function() {
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
+        toggleButton();         // enable input button
+    });
+    // User hits enter in textinput
+    text_area.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();     // Prevents the default newline behavior
+            submit_button.click();      // Triggers the click event on the submit button
+        }
+    });
+
+
     startPingCheck();   // Probe server connection to see if active or not
 
 });
@@ -394,6 +422,9 @@ document.addEventListener("DOMContentLoaded", function() {
         var submit_btn= document.getElementById('submit-button');
         var ping_txt  = document.getElementById('ping-info');
     
+        connectionStatus.isActive = true;       // reset button status
+        toggleButton();                         // Initial check in case the textarea has content on page load
+
         const server_location_ping = 'http://'+atob(server_location_encoded)+'/ping'; // decode
         const startTime = Date.now();
         fetch(server_location_ping, {
@@ -402,6 +433,8 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => {
             if (response.ok) {
+                connectionStatus.isActive = false;      // reset button status
+                toggleButton();                    
                 return response.json();
             } else {
                 throw new Error('Ping failed');
@@ -413,15 +446,15 @@ document.addEventListener("DOMContentLoaded", function() {
             
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
-                showPopup('Connected to Graviton-based LLM! Start chatting now.',"success");
+                showPopupPostConnection('Connected to Graviton-based LLM! Start chatting now.',"success");
                 ping_txt.textContent = `Server traffic: Low. Ping: ${ping}ms`
             }
             else if (data.cluster_utilization == 'high') {
-                showPopup('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
+                showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
                 ping_txt.textContent = `Server traffic: High (delays possible).   Ping: ${ping}ms`
             }
             else if (data.cluster_utilization == 'at-limit') {
-                showPopup('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
+                showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
                 ping_txt.textContent = `Server traffic: At limit (expect delays).   Ping: ${ping}ms`
             }
         })
@@ -431,15 +464,14 @@ document.addEventListener("DOMContentLoaded", function() {
             entry_div.disabled = true;
             entry_div.style.opacity = '0.75';
             entry_div.setAttribute('placeholder','No connection');
-    
-            showPopup('Unable to connect. The problem may be with us; try refreshing the page.',"error");
+
+            showPopupPostConnection('Unable to connect. The problem may be with us; try refreshing the page.',"error");
         });
     }
     
     
     function sendToServer(data) {
         hidePopup();    // Hide previous messages, to make room for others or clear for responses
-        
       
         // Set timeout
         const controller = new AbortController();
@@ -453,6 +485,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         connectionStatus.isActive = true; // set connectionStatus to active
+        toggleButton(); 
 
         const server_location_chat = 'http://'+atob(server_location_encoded)+'/chat_completion'; // decode
         fetch(server_location_chat, {
@@ -489,12 +522,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
                                 if (return_json.message_type == 'initial_response') {
                                     if (return_json.value == 'NO_RESOURCES_AVAILABLE') {
-                                        showPopup("No open resources -  try sending a new message.","warning");                                                 
-                                        connectionStatus.isActive = false;      // reset button status
-                                        toggleButton();
+                                        showPopupPostConnection("No open resources -  try sending a new message.","warning");                                                 
                                     }
                                     else if (return_json.value == 'STREAM_STARTING') {
-                                        console.log('stream starting',return_json);
                                         hidePopup();
                                     }
                                 }
@@ -503,13 +533,9 @@ document.addEventListener("DOMContentLoaded", function() {
                                 }
                                 else if (return_json.message_type === 'completion_metadata') {
                                     updateLLMMetrics(return_json.value);
-                                    connectionStatus.isActive = false;      // reset button status
-                                    toggleButton();
                                 }
                                 else {
-                                    showPopup("Unexpected server response - try a new message.","error");
-                                    connectionStatus.isActive = false;      // reset button status
-                                    toggleButton();                                                 
+                                    showPopupPostConnection("Unexpected server response - try a new message.","error");                                                
                                 }    
                             }
                         }
@@ -519,35 +545,25 @@ document.addEventListener("DOMContentLoaded", function() {
                 return readStream(); // Read the stream
             } else {
                 console.error('Error sending message to the server');
-                showPopup("Problem sending message - try a new message.","error");     
-                connectionStatus.isActive = false;      // reset button status
-                toggleButton();                                            
+                showPopupPostConnection("Problem sending message - try a new message.","error");                                      
             }
         })
         .catch(error => { 
             if (error.name === 'AbortError') { 
                 console.error('Timeout error: Please check your internet connection and try again.',error);
-                showPopup('Server timeout - please try again.',"error",true);
-                connectionStatus.isActive = false;      // reset button status
-                toggleButton();
+                showPopupPostConnection('Server timeout - please try again.',"error");
             }
             else if (error.name === 'NetworkError') {
                 console.error('Network error: Please check your internet connection and try again.',error);
-                showPopup('Network error - please try again.',"error",true);
-                connectionStatus.isActive = false;      // reset button status
-                toggleButton();
+                showPopupPostConnection('Network error - please try again.',"error");
             }
             else if (error.name === 'TypeError') {
                 console.error('Input stream error: There was a problem with the data stream.',error);
-                showPopup('Stream interrupted - try sending a new message.',"warning",true);
-                connectionStatus.isActive = false;      // reset button status
-                toggleButton();
+                showPopupPostConnection('Stream interrupted - try sending a new message.',"warning");
             }
             else {
                 console.error('An unexpected error occurred:', error);
-                showPopup('Unknown error - try sending a new message.',"error",true);
-                connectionStatus.isActive = false;      // reset button status
-                toggleButton();
+                showPopupPostConnection('Unknown error - try sending a new message.',"error");
             }
         });
     }
