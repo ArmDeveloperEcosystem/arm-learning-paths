@@ -49,18 +49,18 @@ configuration_dropdown_options:
 tps_max: 50   # sets stat visuals for tps
 tps_ranges:
   - name: Low
-    context: TPS is low right now. The reasons why are x, y, and z.
-    color: red
+    context: Poor throughput - this is likely due to high server load and/or network latency.
+    color: var(--arm-orange)
     min: 0
     max: 10
   - name: Mid
-    context: Average TPS throughput. This is considered good enough for human readability.
-    color: yellow
+    context: An acceptable rate - this is considered good enough for human readability, balancing speed and clarity.
+    color: var(--arm-yellow)
     min: 10
     max: 25
   - name: High
-    context: Excellent TPS - a high quality UX is being delivered. Due to x, y, and z reasons.
-    color: green
+    context: An excellent rate - high-quality UX is being delivered. This is due to optimized model performance, stable network conditions, and efficient resource allocation.
+    color: var(--arm-green)
     min: 25
     max: 1000
 

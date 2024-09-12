@@ -238,6 +238,10 @@
     overflow-wrap: break-word; /* First attempt to break the word naturally */
     word-break: break-word;    /* Then break at any character if needed */
 }
+.chatbot-message span,
+.user-message span {
+    white-space: pre-wrap;
+}
 
 
 
@@ -255,7 +259,7 @@
     font-size: 16px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 2;
 
     
     background-color: black; 
@@ -329,7 +333,7 @@
   
   .bar {
     height: 100%;
-    background-color: var(--arm-green);
+    background-color: white;
     width: 0;
     text-align: right;
     padding-right: 5px;
@@ -347,11 +351,24 @@
     background-color: var(--arm-color-footing);
     text-align: center;
     font-size: 12px;
-    color: blue;
     transform: translateX(-30%);
   }
-  
+  .context-line.inline {
+    background-color: #ccc;
+}
 
+  
+.context-line-axis {
+    position: absolute;
+    top: 28px;
+    left: -8px;
+}
+.context-line-axis.inline {
+    left: -16px;
+}
+#overall-context-metric-p {
+    margin-top: 24px;
+}
 
 
   .pie-chart {

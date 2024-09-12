@@ -15,9 +15,9 @@ Calls to:
 
 
 <div class="content-box">
-    <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
+    <div class="c-row u-gap-1/2 lg:u-flex-nowrap u-padding-top-0">
         <!-- Left - Demo -->
-        <div class="c-col md:c-col-12 lg:c-col-8 lg:u-display-block ">
+        <div class="c-col u-display-block md:c-col-12 lg:c-col-8 ">
             <h2>Demo</h2>
             <div id="demo-container">
                 <div id="all-messages-div">
@@ -48,7 +48,7 @@ Calls to:
             </div>
         </div>
         <!-- Right - Stats -->
-        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
+        <div class="c-col u-display-block c-col-12 lg:c-col-4">
             <h2>Stats</h2>
             <div id="stats-initial">
                 <p>Type a message to the chatbot to view metrics.</p> 
@@ -66,15 +66,21 @@ Calls to:
                             {{ if lt .max $.Params.tps_max }}
                                 {{ $fraction := div (float .max) $.Params.tps_max }}  <!-- Divide .max by tps_max -->
                                 {{ $percentage := mul $fraction 100 }}        <!-- Multiply by 100 to get percentage -->
-                                <div class="context-line" style='left: {{ printf "%.0f%%" $percentage }};'></div>
+                                <div class="context-line" style='left: {{ printf "%.0f%%" $percentage }};'>
+                                    <div class="context-line-axis">{{.max}}</div>
+                                </div>
                             {{end}}
                         {{end}}
+                        <div class="context-line inline" style='left: 100%;'>
+                            <div class="context-line-axis inline">{{ $.Params.tps_max }}</div>
+                        </div>
                   </div>
-                <p><span id="overall-context-metric"></span></p>
+                <p id="overall-context-metric-p"><span id="overall-context-metric"></span></p>
                 <br>
                 <h5>Last Message:</h5>
-                <p><span id="total-time-metric">#</span> seconds to display <span id="num-tokens-metric">#</span> tokens.</p>
-                <p>Tokens per second: <span id="tps-metric">#</span></p>
+                <p> <b><span id="total-time-metric">#</span></b> seconds to display 
+                    <b><span id="num-tokens-metric">#</span></b> tokens at a rate of 
+                    <b><span id="tps-metric">#</span></b>        tokens per second.</p>
             </div>
 
               

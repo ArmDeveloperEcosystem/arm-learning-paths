@@ -120,18 +120,22 @@ Calls to:
                 { min: {{.min}},  max: {{.max}}, message: "{{.context}}", color: "{{.color}}" },
             {{end}}
         ]
+
+        console.log('result messages:',resultMessages);
+
         
         for (let i = 0; i < resultMessages.length; i++) {
-            if (num >= resultMessages[i].min && num <= resultMessages[i].max) {
+            console.log(num,resultMessages[i].min,resultMessages[i].max);
+            console.log(num >= resultMessages[i].min,num <= resultMessages[i].max)
+            if (num >= Number(resultMessages[i].min) && num <= Number(resultMessages[i].max)) {
                 // Change bar color
                 document.getElementById('bar').style.backgroundColor = resultMessages[i].color;
                 // return message
-                return resultMessages[i].message;
+                return `${num} tokens per second. ${resultMessages[i].message}`;
             }
         }
         return "Number out of range.";
     }
-
 
 
 
@@ -156,9 +160,17 @@ Calls to:
         avg_tps = Math.round(avg_tps);
         const maxValue = {{.Params.tps_max}};        
         const bar = document.getElementById('bar');
-        const barWidth = (avg_tps / maxValue) * 100; // Calculate width as a percentage
-        bar.style.width = `${barWidth}%`;
-        bar.textContent = avg_tps; // Display the value inside the bar      
+        var barWidth = (avg_tps / maxValue) * 100; // Calculate width as a percentage
+        if (barWidth > 100) {
+            bar.style.width = `100%`;
+            bar.textContent = `→ ${avg_tps}`; // Display the value inside the bar            
+
+        }
+        else {
+            bar.style.width = `${barWidth}%`;
+            bar.textContent = avg_tps; // Display the value inside the bar            
+        }
+      
 
         // Context
         document.getElementById('overall-context-metric').textContent = getMessageForNumber(avg_tps);
