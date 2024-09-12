@@ -8,31 +8,31 @@ layout: learningpathall
 
 ## Acceleration structure
 
-For ray tracing, the first thing that we need is to create an acceleration structure to represent our scene.
+For ray tracing, the first thing that you need is to create an acceleration structure to represent a scene.
 
-An acceleration structure is an optimised data structure for fast ray intersection tests. It organizes the geometry so that we can efficiently narrow down what each ray intersects. Vulkan represents them using `VK_KHR_acceleration_structure`, and although the actual structure is opaque and defined by the implementation, it is usually implemented as a treelike structure, and the API gives us some options to control the topology and keep it balanced.
+An acceleration structure is an optimized data structure for fast ray intersection tests. It organizes the geometry so that you can efficiently narrow down what each ray intersects. Vulkan represents them using `VK_KHR_acceleration_structure`, and although the actual structure is opaque and defined by the implementation, it is usually implemented as a tree-like structure, and the API gives some options to control the topology and keep it balanced.
 
 The API makes a distinction between *Bottom-Level Acceleration Structures* (BLAS) and *Top-Level Accelerations Structures* (TLAS).
 
-*Bottom-Level Acceleration Structures* contain the actual geometry data, usually as triangles, but they could also be mathematically defined models. The actual implementation of a BLAS is opaque to users, but the driver usually organizes this data in a Bounding Volume Hierarchy (BVH), so that when we cast a ray, we can minimize the number of triangle intersection checks.
+*Bottom-Level Acceleration Structures* contain the actual geometry data, usually as triangles, but they can also be mathematically-defined models. The actual implementation of a BLAS is opaque to users, but the driver usually organizes this data in a Bounding Volume Hierarchy (BVH), so that when you cast a ray, you can minimize the number of triangle intersection checks.
 
-*Top-Level Accelerations Structures* contain Bottom-Level Acceleration Structures. Top-Level Acceleration Structures use instances to group BLASes and link them with other properties. These properties include a custom ID, which we can use to define a material; or a transform matrix, which we can use to efficiently update animations.
+*Top-Level Accelerations Structures* contain Bottom-Level Acceleration Structures. Top-Level Acceleration Structures use instances to group BLASes and link them with other properties. These properties include a custom ID, which you can use to define a material; or a transform matrix, which you can use to efficiently update animations.
 
 ![Scheme of an Acceleration structure #center](images/tlas_blas_diagram.png "Scheme of an Acceleration structure")
 
 ### Acceleration structure best practice
 
-Building BLASes and TLASes is relatively expensive, so we recommend trying to reduce the number of acceleration structures builds and updates.
+Building BLASes and TLASes is relatively expensive, it is best to try to reduce the number of acceleration structures builds and updates.
 
-Skinned animations are costly in ray tracing as they require us to continuously update the BLASes of these meshes. We recommend limiting the number of skinned objects in your scenes. Depending on your use case you might consider not updating all the acceleration structures every frame. It is usually possible to reuse the same old acceleration structure across a few frames, without noticeable artifacts. Similarly, we can implement some kind of heuristic to reduce the update frequency of objects too far from the camera, although this can be tricky since most effects still need to consider objects outside the view frustum.
+Skinned animations are costly in ray tracing as they require you to continuously update the BLASes of these meshes. It is recommended to limit the number of skinned objects in your scenes. Depending on your use case you might consider not updating all the acceleration structures in every frame. It is usually possible to reuse the same old acceleration structure across a few frames, without noticeable artifacts. Similarly, you can implement some kind of heuristic to reduce the update frequency of objects too far from the camera, although this can be tricky since most effects still need to consider objects outside the view frustum.
 
-When building a new BLAS, we generally recommend using `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR` for static geometry. `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR` can be faster in certain situations, like dynamic geometry or streaming. If updating BLASes becomes problematic, one should consider testing different options.
+When building a new BLAS, it is generally recommended to use `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR` for static geometry. `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR` can be faster in certain situations, such as dynamic geometry or streaming. If updating BLASes becomes problematic, you can consider testing different options.
 
-When building new TLASes we recommend using `PREFER_FAST_BUILD`. For TLASes `PREFER_FAST_TRACE` can be useful for a static scene without updates; however, the build itself is more expensive. In general, BLASes are in use for a long time, but TLASes are only in use for a few frames. This means that it is usually not worth it to build your TLAS with `PREFER_FAST_TRACE`.
+When building new TLASes, it is recommended to use `PREFER_FAST_BUILD`. For TLASes, `PREFER_FAST_TRACE` can be useful for a static scene without updates; however, the build itself is more expensive. In general, BLASes are in use for a long time, but TLASes are only in use for a few frames. This means that it is usually not worth it to build your TLAS with `PREFER_FAST_TRACE`.
 
 Similarly, building a new acceleration structure is significantly slower than updating or refitting an existing one. Try to avoid creating new acceleration structures from scratch, and if possible, set the `srcAccelerationStructure` field. Setting a previous version of the acceleration structure as a base for the new acceleration structure will be significantly faster since it triggers an update or refit instead of a build. Remember to also set `VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR` when creating the acceleration structure.
 
-In [our ray tracing best practices](https://developer.arm.com/documentation/101897/latest/Ray-tracing/Acceleration-structures) we recommend to use `PREFER_FAST_TRACE` for static BLASes. For TLASes and dynamic BLASes we recommend `PREFER_FAST_BUILD`, usually in combination with `ALLOW_UPDATE`.
+In [ray tracing best practices](https://developer.arm.com/documentation/101897/latest/Ray-tracing/Acceleration-structures) it is recommended that you use `PREFER_FAST_TRACE` for static BLASes. For TLASes and dynamic BLASes we recommend `PREFER_FAST_BUILD`, usually in combination with `ALLOW_UPDATE`.
 
 ``` cpp
 void create_blas(bool allow_update, std::vector<VkAccelerationStructureGeometryKHR> &&geometries, std::vector<uint32_t> &&geometry_primitive_counts, VkAccelerationStructureKHR prev_as = VK_NULL_HANDLE)
@@ -166,9 +166,9 @@ Finally, the quality of your geometry can have a huge impact when building your 
   {{< tab header="Example of a scene with a good acceleration structure" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_scene_as_separate.png" title="Example of a scene with a good acceleration structure: Minimum overlap and empty space." >}}{{< /tab >}}
 {{< /tabpane >}}
 
-When tracing a scene, it is common to have opaque and non-opaque objects. Non-opaque objects will invoke the `Any-Hit` shader and require extra evaluation in ray query. Vulkan allows to use the flags `VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR` and `VK_GEOMETRY_OPAQUE_BIT_KHR` to mark specific instances and geometries as opaque. We recommend using the appropriate flags to mark relevant geometry as opaque.
+When tracing a scene, it is common to have opaque and non-opaque objects. Non-opaque objects will invoke the `Any-Hit` shader and require extra evaluation in ray query. Vulkan allows you to use the flags `VK_GEOMETRY_INSTANCE_FORCE_OPAQUE_BIT_KHR` and `VK_GEOMETRY_OPAQUE_BIT_KHR` to mark specific instances and geometries as opaque. It is recommended that you use the appropriate flags to mark relevant geometry as opaque.
 
-Vulkan also offers shader flags, they will affect all objects, but they offer better performance. You can use `gl_RayFlagsCullNoOpaqueEXT` to cull non-opaque geometries or `gl_RayFlagsOpaqueEXT`, to mark all objects as opaque. To enable compiler optimizations, you should also use `gl_RayFlagsSkipAABBEXT` and ensure the flags can be resolved statically. If possible, prefer `gl_RayFlagsCullNoOpaqueEXT` it might improve shader performance.
+Vulkan also offers shader flags. These affect all objects, but they offer better performance. You can use `gl_RayFlagsCullNoOpaqueEXT` to cull non-opaque geometries or `gl_RayFlagsOpaqueEXT`, to mark all objects as opaque. To enable compiler optimizations, you should also use `gl_RayFlagsSkipAABBEXT` and ensure the flags can be resolved statically. If possible, as a preference, use `gl_RayFlagsCullNoOpaqueEXT` as it might improve shader performance.
 
 ```glsl
 // [GOOD] Compiler optimizations enabled
