@@ -3,17 +3,16 @@ title: SIMD.info Tool Demonstration
 
 minutes_to_complete: 30
 
-who_is_this_for: This is for software developers and engineers looking to understand SIMD code  portability across platforms, specifically between Intel, ARM & PowerPC architectures.
+who_is_this_for: This is for software developers looking to understand SIMD code  portability across platforms.
 
 learning_objectives: 
-    - Understand the challenges of porting SIMD code from one platform to another.
     - Learn how to use SIMD.info’s tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD instructions and improving code portability.
 
 prerequisites:
     - A basic understanding of SIMD instructions and how they are used in parallel processing.
-    - Access to platform-based systems, such as ARM, Intel, or Power, with recent versions of a C compiler (Clang or GCC) installed.
+    - Access to a platform with SIMD supported engine, with recent versions of a C compiler (Clang or GCC) installed.
 
-author_primary: Konstantinos Margaritis & Georgios Mermigkis, VectorCamp
+author_primary: Georgios Mermigkis & Konstantinos Margaritis, VectorCamp
 
 ### Tags
 skilllevels: Advanced

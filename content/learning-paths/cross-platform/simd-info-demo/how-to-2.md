@@ -41,17 +41,18 @@ This detailed information ensures you have all the necessary resources to effect
         - **Bit Clear** 
         - **XOR**
 
-- **Advanced search functionality:** With its robust search engine, SIMD.info allows you to either search for a specific intrinsic (e.g. vadd_p64) or enter more general terms (e.g. How to add 2 vectors), and it will return the corresponding intrinsics. Whether you’re looking for Intel, ARM, or Power equivalents, this functionality streamlines the process of finding the right commands for your project.
+- **Advanced search functionality:** With its robust search engine, SIMD.info allows you to either search for a specific intrinsic (e.g. vadd_p64) or enter more general terms (e.g. How to add 2 vectors), and it will return the corresponding intrinsics. You can also filter results based on the specific engine you're working with, such as VSX, NEON, SSE4.2, AVX, AVX512. This functionality streamlines the process of finding the right commands tailored to your project needs.
 
-- **Comparison tools:** This feature lets you directly compare SIMD instructions from different platforms side by side, offering a clear view of the similarities and differences. It’s an invaluable tool for porting code across architectures, as it ensures accuracy and efficiency.
+- **Comparison tools:** This feature lets you directly compare SIMD instructions from different (or the same) platforms side by side, offering a clear view of the similarities and differences. It’s an invaluable tool for porting code across architectures, as it ensures accuracy and efficiency.
 
-- **Discussion forum (Stack Overflow-type):** The integrated discussion forum allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support.
+- **Discussion forum (Stack Overflow-type):** The integrated discussion forum, powered by **[discuss](https://disqus.com/)** allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support, fostering collaboration and knowledge-sharing among SIMD developers.
 
 ### Work in Progress & Future Development
-- **Sudo-code:** Currently under development, the Sudo-code feature will enable users to generate high-level pseudo-code based on specific SIMD instructions. This tool aims to make writing and understanding SIMD code even easier.
+- **Pseudo-code:** Currently under development, this feature will enable users to generate high-level pseudo-code based on specific SIMD instructions. This tool aims to enable better understanding of the SIMD instructions. This will also be used in the next feature, which will be **intrinsic diagrams** .
+
+- **Intrinsic diagrams:** A feature under progress, creating detailed diagrams for each intrinsic to visualize how it operates on a low level using registers. These diagrams will help developers grasp the mechanics of SIMD instructions more clearly, aiding in optimization and debugging.
 
 - **[SIMD.ai](https://simd.ai/):** SIMD.ai is an upcoming feature that promises to bring AI-assisted insights and recommendations to the SIMD development process, making it faster and more efficient to write and port SIMD code.
-
 
 ### How These Features Aid in SIMD Development
 SIMD.info offers a range of features that streamline the process of porting SIMD code across different architectures. The hierarchical structure of tree-based navigation allows you to easily locate instructions within a clear framework. This organization into broad categories and specific subcategories, such as Arithmetic and Boolean Logic, makes it straightforward to identify the relevant SIMD instructions needed for your project.

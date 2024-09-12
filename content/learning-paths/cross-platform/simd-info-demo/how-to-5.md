@@ -13,8 +13,8 @@ After successfully porting the code from SSE4.2 to NEON, it's time to verify tha
 #include <stdio.h>
 
 int main() {
-    float32x4_t a = {16.0f, 9.0f, 4.0f, 1.0f};
-    float32x4_t b = {4.0f, 3.0f, 2.0f, 1.0f};
+    float32x4_t a = {1.0f, 4.0f, 9.0f, 16.0f};
+    float32x4_t b = {1.0f, 2.0f, 3.0f, 4.0f};
 
     uint32x4_t cmp_result = vcgtq_f32(a, b);
 
@@ -32,6 +32,7 @@ int main() {
             printf("Element %d: %.2f is not larger than %.2f\n", i, a_arr[i], b_arr[i]);
         }
     }
+    printf("\n");
 
     float32x4_t add_result = vaddq_f32(a, b);
     float32x4_t mul_result = vmulq_f32(add_result, b);
@@ -64,18 +65,20 @@ Now run the program:
 
 The output should look like: 
 ```output
-Element 0: 16.00 is larger than 4.00
-Element 1: 9.00 is larger than 3.00
-Element 2: 4.00 is larger than 2.00
-Element 3: 1.00 is not larger than 1.00
-Addition Result: 20.00 12.00 6.00 2.00
-Multiplication Result: 80.00 36.00 12.00 2.00
-Square Root Result: 8.94 6.00 3.46 1.41
-```
+Element 0: 1.00 is not larger than 1.00
+Element 1: 4.00 is larger than 2.00
+Element 2: 9.00 is larger than 3.00
+Element 3: 16.00 is larger than 4.00
 
-As you can see, the results are exactly the same as in the SSE4.2 example, though they appear in reverse order. This reversal is due to how different SIMD engines handle data. Additionally, the size of the code remains identical, demonstrating that the NEON code is a direct and efficient translation of the SSE4.2 code.
+Addition Result: 2.00 6.00 12.00 20.00
+Multiplication Result: 2.00 12.00 36.00 80.00
+Square Root Result: 1.41 3.46 6.00 8.94
+```
+As you can clearly see, the results are exactly the same as in the SSE4.2 example. However, we initialized the vectors in reverse order compared to the SSE4.2 version because NEON loads vectors from LSB to MSB, ensuring consistent output across both architectures. Additionally, the size of the code remains identical, demonstrating that the NEON code is a direct and efficient translation of the SSE4.2 code.
+
+<!-- paragraph about instructions that we may not found equivalents for. Mention that the purpose helps us to better understand the operation -->
 
 ## Conclusion and Additional Resources
-In conclusion, successfully porting SIMD code from SSE4.2 to NEON illustrates how well the two architectures can be aligned to perform equivalent operations. SIMD.info was instrumental in this process, providing a centralized and user-friendly resource for finding NEON equivalents to SSE4.2 intrinsics. It saved considerable time and effort by offering detailed descriptions, prototypes, and comparisons directly, eliminating the need for extensive web searches and manual lookups.
+In conclusion, successfully porting SIMD code from SSE4.2 to NEON illustrates how well the two architectures can be aligned to perform equivalent operations. SIMD.info was instrumental in this process, providing a centralized and user-friendly resource for finding NEON equivalents to SSE4.2 intrinsics. It saved considerable time and effort by offering detailed descriptions, prototypes, and comparisons directly, eliminating the need for extensive web searches and manual lookups. While porting between vectors of different sizes is more complex, work is already underway to match instructions like SVE/SVE2 with AVX512.
 
 For those interested in further exploration, consider diving into additional resources such as SIMD documentation, architecture manuals, and online forums. These can provide deeper insights into SIMD optimizations and new techniques. Leveraging these resources will enhance your understanding and ability to work with various SIMD architectures efficiently.
