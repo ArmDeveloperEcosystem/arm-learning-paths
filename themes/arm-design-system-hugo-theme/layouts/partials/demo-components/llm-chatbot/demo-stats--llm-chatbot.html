@@ -26,14 +26,21 @@ Calls to:
                 <div id="demo-actions">
                     <div class="c-row">
                         <div class="c-col" id="input-and-submit">
-                            <textarea id="user-input-for-demo" placeholder="Talk to Graviton-based LLM" tabindex="1" rows="1"></textarea>
-                            <ads-button id="submit-button" level="primary" disabled><i class="fa-solid fa-spinner fa-spin"></i></ads-button>
+                            <textarea id="user-input-for-demo" placeholder="Enter message" tabindex="1" rows="1"></textarea>
+                            <ads-button id="submit-button" level="primary" tabindex="2" disabled>
+                                <i id="submit-icon" class="fa-solid fa-spinner fa-spin"></i>
+                            </ads-button>
                             <div id="notification-popup" class="show-popup"><span id="initial-message-span">Pinging LLM server <ads-loader></ads-loader></span></div>
                         </div>
                     </div>
-                    <div class="c-row">
-                        <div class="c-col">
-                            <p id="reset-demo-txt">Reset chat</p>
+                    <div class="c-row u-margin-top-1/2 u-margin-bottom-1/2">
+                        <div class="c-col xs:c-col-12 xl:c-col-4">
+                            <span id="reset-demo-txt">Reset chat</span>
+                        </div>
+                        <div class="c-col xs:c-col-12 xl:c-col-4" style="min-height: 24px;">
+                            <span id="traffic-info"></span>
+                        </div>
+                        <div class="c-col xs:c-col-12 xl:c-col-4" style="min-height: 24px;">
                             <span id="ping-info"></span>
                         </div>
                     </div>

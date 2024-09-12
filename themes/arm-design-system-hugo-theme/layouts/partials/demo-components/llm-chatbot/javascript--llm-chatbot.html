@@ -225,7 +225,8 @@ Calls to:
 
         // Show popup
         var popup_div = document.getElementById('notification-popup');
-        popup_div.textContent = message;
+        var popup_span = popup_div.querySelector('#initial-message-span');
+        popup_span.textContent = message;
         if (type == "info") {
             popup_div.style.backgroundColor = 'black'; 
             popup_div.style.color = 'white';             
@@ -421,7 +422,8 @@ document.addEventListener("DOMContentLoaded", function() {
         var entry_div = document.getElementById('user-input-for-demo');
         var submit_btn= document.getElementById('submit-button');
         var ping_txt  = document.getElementById('ping-info');
-    
+        var traffic_txt  = document.getElementById('traffic-info');
+
         connectionStatus.isActive = true;       // reset button status
         toggleButton();                         // Initial check in case the textarea has content on page load
 
@@ -442,20 +444,32 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             const endTime = Date.now();
-            const ping = (endTime - startTime);
-            
+            var ping = (endTime - startTime);
+            if (ping < 300) {
+               ping = `${ping} ms`; 
+            }
+            else {
+                ping = ping/1000;
+                ping = ping.toFixed(2);
+                ping = `${ping} seconds`; 
+            }
+
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Start chatting now.',"success");
-                ping_txt.textContent = `Server traffic: Low. Ping: ${ping}ms`
+                ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = 'Server traffic: Low'
             }
             else if (data.cluster_utilization == 'high') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
-                ping_txt.textContent = `Server traffic: High (delays possible).   Ping: ${ping}ms`
+                ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High (delays possible).`   
             }
             else if (data.cluster_utilization == 'at-limit') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
-                ping_txt.textContent = `Server traffic: At limit (expect delays).   Ping: ${ping}ms`
+                ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: At limit (delays possible).`   
+
             }
         })
         .catch(error => {       // Auto errors after ~2 seconds timeout
