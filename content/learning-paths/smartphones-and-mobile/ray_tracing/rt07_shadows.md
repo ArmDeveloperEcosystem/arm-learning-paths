@@ -11,12 +11,12 @@ layout: learningpathall
 Light sources emit light that illuminates most objects. However, not all the emitted light reaches all objects; some light rays are intercepted by other objects before they can reach a light source. This process creates darker areas and produces some shadows in the images.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: ON" title="Example 1: shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_shadows_on.png">}} {{< /tab >}}
-  {{< tab header="Example 1: OFF" title="Example 1: shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_shadows_off.png">}} {{< /tab >}}
-  {{< tab header="Example 2: ON" title="Example 2: shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_shadows_on.png">}} {{< /tab >}}
-  {{< tab header="Example 2: OFF" title="Example 2: shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_shadows_off.png">}} {{< /tab >}}
-  {{< tab header="Example 3: ON" title="Example 3: shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_on.png">}} {{< /tab >}}
-  {{< tab header="Example 3: OFF" title="Example 3: shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_off.png">}} {{< /tab >}}
+  {{< tab header="Example 1: ON" title="Example 1: Shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_shadows_on.png">}} {{< /tab >}}
+  {{< tab header="Example 1: OFF" title="Example 1: Shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_shadows_off.png">}} {{< /tab >}}
+  {{< tab header="Example 2: ON" title="Example 2: Shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_shadows_on.png">}} {{< /tab >}}
+  {{< tab header="Example 2: OFF" title="Example 2: Shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_shadows_off.png">}} {{< /tab >}}
+  {{< tab header="Example 3: ON" title="Example 3: Shadows ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_on.png">}} {{< /tab >}}
+  {{< tab header="Example 3: OFF" title="Example 3: Shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_off.png">}} {{< /tab >}}
 {{< /tabpane >}}
 
 In the demo, there is a similar algorithm to produce all the ray tracing effects. For shadows, similarly to what was done for reflections, you start by sampling some information from the G-buffer, like our position and normal. Then you use this information to generate shadows rays, that you can trace either using ray tracing pipeline or ray query. If your shadow ray hits an object, it means that the ray is obstructed and you are in shadow, however, if the ray reaches the light without hitting anything, it means that you are illuminated.

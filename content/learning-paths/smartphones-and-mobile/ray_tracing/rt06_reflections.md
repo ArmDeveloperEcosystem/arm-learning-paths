@@ -11,12 +11,12 @@ layout: learningpathall
 Illuminating and lighting a scene is a complex topic. When a light hits an object, part of that light is reflected; this is known as specular reflection.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: ON" title="Example 1: reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_reflections_on.png">}} {{< /tab >}}
-  {{< tab header="Example 1: OFF" title="Example 1: reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_reflections_off.png">}} {{< /tab >}}
-  {{< tab header="Example 2: ON" title="Example 2: reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_mirror.png">}} {{< /tab >}}
-  {{< tab header="Example 2: OFF" title="Example 2: reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no.png">}} {{< /tab >}}
-  {{< tab header="Example 3: ON" title="Example 3: reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_mirror.png">}} {{< /tab >}}
-  {{< tab header="Example 3: OFF" title="Example 3: reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no.png">}} {{< /tab >}}
+  {{< tab header="Example 1: ON" title="Example 1: Reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_reflections_on.png">}} {{< /tab >}}
+  {{< tab header="Example 1: OFF" title="Example 1: Reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_reflections_off.png">}} {{< /tab >}}
+  {{< tab header="Example 2: ON" title="Example 2: Reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_mirror.png">}} {{< /tab >}}
+  {{< tab header="Example 2: OFF" title="Example 2: Reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no.png">}} {{< /tab >}}
+  {{< tab header="Example 3: ON" title="Example 3: Reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_mirror.png">}} {{< /tab >}}
+  {{< tab header="Example 3: OFF" title="Example 3: Reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no.png">}} {{< /tab >}}
 {{< /tabpane >}}
 
 The direction of the reflected ray depends on the surface and the direction of the incident ray. It is easy to compute as GLSL already offers the built-in function `reflect` to compute it.
@@ -28,14 +28,14 @@ As you can see, reflections are ideal for ray tracing. Other traditional techniq
 It is common to find corner cases and bugs on Screen Space Reflection at the same time. This technique is more difficult to implement, requiring more magic numbers. The main limitation of Screen Space Reflections is that they depend on the G-buffer information, so occluded objects and objects outside the view frustum cannot be reflected, causing visible artifacts that are common in current games.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: SSR" title="Example 1: screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_1_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 1: RT" title="Example 1: ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_1_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 2: SSR" title="Example 2: screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_2_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 2: RT" title="Example 2: ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_2_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 3: SSR" title="Example 3: screen space teflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 3: RT" title="Example 3: ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 4: SSR" title="Example 4: screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_4_ssr.png">}}{{< /tab >}}
-  {{< tab header="Example 4: RT" title="Example 4: ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_4_rt.png">}}{{< /tab >}}
+  {{< tab header="Example 1: SSR" title="Example 1: Screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_1_ssr.png">}}{{< /tab >}}
+  {{< tab header="Example 1: RT" title="Example 1: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_1_rt.png">}}{{< /tab >}}
+  {{< tab header="Example 2: SSR" title="Example 2: Screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_2_ssr.png">}}{{< /tab >}}
+  {{< tab header="Example 2: RT" title="Example 2: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_2_rt.png">}}{{< /tab >}}
+  {{< tab header="Example 3: SSR" title="Example 3: Screen space teflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_ssr.png">}}{{< /tab >}}
+  {{< tab header="Example 3: RT" title="Example 3: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_rt.png">}}{{< /tab >}}
+  {{< tab header="Example 4: SSR" title="Example 4: Screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_4_ssr.png">}}{{< /tab >}}
+  {{< tab header="Example 4: RT" title="Example 4: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_4_rt.png">}}{{< /tab >}}
 {{< /tabpane >}}
 
 ### Generating Reflection rays from the G-buffer
@@ -316,12 +316,12 @@ vec4 main()
 Launching multiple rays can be expensive, so it is better to limit the number of rays in your shaders. At the same time, rough reflections will launch rays with more divergence, being more expensive than pure mirror reflections. It is more efficient to traverse the acceleration structure if all rays in the same warp follow a similar path, so try to minimize ray divergence. If you want glossy and rough reflections, you might need to add a denoising pass to deal with the noise. This further increases the cost of reflections. Do consider the performance impact before adding non-mirror reflections.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: No" title="Example 1: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no.png">}}{{< /tab >}}
-  {{< tab header="Example 1: Mirror" title="Example 1: mirror reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_mirror.png">}}{{< /tab >}}
-  {{< tab header="Example 1: Rough" title="Example 1: rough reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no_mirror.png">}}{{< /tab >}}
-  {{< tab header="Example 2: No" title="Example 2: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no.png">}}{{< /tab >}}
-  {{< tab header="Example 2: Mirror" title="Example 2: mirror reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_mirror.png">}}{{< /tab >}}
-  {{< tab header="Example 2: Rough" title="Example 2: rough reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no_mirror.png">}}{{< /tab >}}
+  {{< tab header="Example 1: No" title="Example 1: No reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no.png">}}{{< /tab >}}
+  {{< tab header="Example 1: Mirror" title="Example 1: Mirror reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_mirror.png">}}{{< /tab >}}
+  {{< tab header="Example 1: Rough" title="Example 1: Rough reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no_mirror.png">}}{{< /tab >}}
+  {{< tab header="Example 2: No" title="Example 2: No reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no.png">}}{{< /tab >}}
+  {{< tab header="Example 2: Mirror" title="Example 2: Mirror reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_mirror.png">}}{{< /tab >}}
+  {{< tab header="Example 2: Rough" title="Example 2: Rough reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no_mirror.png">}}{{< /tab >}}
 {{< /tabpane >}}
 
 ### Reflections with multiple bounces
@@ -329,13 +329,13 @@ Launching multiple rays can be expensive, so it is better to limit the number of
 In the real world, ray lights usually have multiple bounces. You can simulate this behavior by launching additional reflection rays if you hit a reflective surface. However, this will be expensive, and you should evaluate to see if the extra complexity is worth it.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: No" title="Example 1: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_no.png">}}{{< /tab >}}
-  {{< tab header="Example 1: 1 bounce" title="Example 1: reflections with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_1.png">}}{{< /tab >}}
-  {{< tab header="Example 1: 2 bounces" title="Example 1: reflections with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_2.png">}}{{< /tab >}}
-  {{< tab header="Example 2: No" title="Example 2: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_no.png">}}{{< /tab >}}
-  {{< tab header="Example 2: 1 bounce" title="Example 2: reflections with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_1.png">}}{{< /tab >}}
-  {{< tab header="Example 2: 2 bounces" title="Example 2: reflections with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_2.png">}}{{< /tab >}}
-  {{< tab header="Example 2: 4 bounces" title="Example 2: reflections with 4 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_4.png">}}{{< /tab >}}
+  {{< tab header="Example 1: No" title="Example 1: No reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_no.png">}}{{< /tab >}}
+  {{< tab header="Example 1: 1 bounce" title="Example 1: Reflections with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_1.png">}}{{< /tab >}}
+  {{< tab header="Example 1: 2 bounces" title="Example 1: Reflections with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_2.png">}}{{< /tab >}}
+  {{< tab header="Example 2: No" title="Example 2: No reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_no.png">}}{{< /tab >}}
+  {{< tab header="Example 2: 1 bounce" title="Example 2: Reflections with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_1.png">}}{{< /tab >}}
+  {{< tab header="Example 2: 2 bounces" title="Example 2: Reflections with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_2.png">}}{{< /tab >}}
+  {{< tab header="Example 2: 4 bounces" title="Example 2: Reflections with 4 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_a_4.png">}}{{< /tab >}}
 {{< /tabpane >}}
 
 ``` glsl
