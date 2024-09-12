@@ -1,5 +1,5 @@
 ---
-title: "Setup: Enabling ray tracing"
+title: "Setup: enabling ray tracing"
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Setup: Enabling ray tracing
 
-Vulkan uses the same API for ray tracing on PC and mobile devices. This makes it extremely easy to implement and test our ray tracing effects on PC and deploy them on mobile. Porting existing ray tracing effects from PC to mobile should also be simple.
+Vulkan uses the same API for ray tracing on PC and mobile devices. This makes it extremely easy to implement and test ray tracing effects on PC and deploy them on mobile. Porting existing ray tracing effects from PC to mobile should also be simple.
 
-Arm® Mali™-G7-series GPUs after the [Arm® Mali™-G715](https://developer.arm.com/Processors/Mali-G715) might or might not support for ray tracing, depending on the phone. Immortalis GPUs like [Arm® Immortalis-G715](https://developer.arm.com/Processors/Immortalis-G715), [Arm® Immortalis-G720](https://developer.arm.com/Processors/Immortalis-G720) or [Arm® Immortalis-G925](https://developer.arm.com/Processors/Immortalis-G925) always support ray tracing. These GPUs are available in multiple devices already in the market. Moreover, ray tracing is a promising modern technology, so multiple GPU vendors are supporting the API. Most recent high end Android smartphones support ray tracing, making it a feature game developers can rely on.
+Arm® Mali™-G7-series GPUs after the [Arm® Mali™-G715](https://developer.arm.com/Processors/Mali-G715) might or might not support ray tracing, depending on the phone. Immortalis GPUs like [Arm® Immortalis-G715](https://developer.arm.com/Processors/Immortalis-G715), [Arm® Immortalis-G720](https://developer.arm.com/Processors/Immortalis-G720), or [Arm® Immortalis-G925](https://developer.arm.com/Processors/Immortalis-G925) always support ray tracing. These GPUs are available in multiple devices already in the market. Moreover, ray tracing is a promising modern technology, so multiple GPU vendors support the API. Most recent high-end Android smartphones support ray tracing, making it a feature game developers can rely on.
 
-Vulkan offers ray tracing as a series of extensions, making it easy to query for support and to enable it. The most relevant extensions are: `VK_KHR_acceleration_structure`, `VK_KHR_ray_query` and `VK_KHR_ray_tracing_pipeline`.
+Vulkan offers ray tracing as a series of extensions, making it easy to query for support and to enable it. The most relevant extensions are: `VK_KHR_acceleration_structure`, `VK_KHR_ray_query`, and `VK_KHR_ray_tracing_pipeline`.
 
-We can query the physical device to check if it supports the necessary extensions. Here is a helper function:
+You can query the physical device to check if it supports the extensions. Here is a helper function:
 
 ``` cpp
 uint32_t device_extension_count;
@@ -37,7 +37,7 @@ auto is_extension_supported =
     };
 ```
 
-We can use it to query the ray tracing extensions' features:
+You can use it to query the ray tracing extensions' features:
 
 ``` cpp
 VkPhysicalDeviceFeatures2 features2{VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2};

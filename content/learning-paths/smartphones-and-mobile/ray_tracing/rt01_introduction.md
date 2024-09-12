@@ -1,5 +1,5 @@
 ---
-title: "What is Ray Tracing?"
+title: "What is ray tracing?"
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -20,13 +20,13 @@ Traditionally, developers render games using *rasterization*. Rasterization work
 
 With ray tracing, we can instead use *path tracing*. A path tracer does not need to use rasterization, instead it can launch rays from the camera. These rays bounce around the scene until they produce a final image, resolving visibility using the closest hit. In the real world, rays travel from a light until they reach the camera, but this is extremely inefficient as most rays do not reach our eyes. This is why in rendering we launch rays in the reverse order, starting from the camera.
 
-Path tracing is extremely costly it requires thousands of rays per pixel to be launched to produce a non-noisy image. Rendering a frame in real time using path tracing is just not feasible, even on desktop high-end GPUs. The common solution therefore is to have a hybrid renderer, with a traditional rasterization pass to resolve visibility and compute the G-buffer, and then implement each ray tracing effect as a separate post-process.
+Path tracing is extremely costly as it requires thousands of rays per pixel to be launched to produce a non-noisy image. Rendering a frame in real time using path tracing is just not feasible, even on desktop high-end GPUs. The common solution therefore is to have a hybrid renderer, with a traditional rasterization pass to resolve visibility and compute the G-buffer, and then implement each ray tracing effect as a separate post-process.
 
 {{< tabpane >}}
-  {{< tab header="Example 1: RT ON" title="Example 1: ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_rt_on.png">}}{{< /tab >}}
-  {{< tab header="Example 1: RT OFF" title="Example 1: ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_rt_off.png">}}{{< /tab >}}
-  {{< tab header="Example 2: RT ON" title="Example 2: ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_rt_on.png">}}{{< /tab >}}
-  {{< tab header="Example 2: RT OFF" title="Example 2: ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_rt_off.png">}}{{< /tab >}}
-  {{< tab header="Example 3: RT ON" title="Example 3: ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_rt_on.png">}}{{< /tab >}}
-  {{< tab header="Example 3: RT OFF" title="Example 3: ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_rt_off.png">}}{{< /tab >}}
+  {{< tab header="Example 1: RT ON" title="Example 1: Ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_rt_on.png">}}{{< /tab >}}
+  {{< tab header="Example 1: RT OFF" title="Example 1: Ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_rt_off.png">}}{{< /tab >}}
+  {{< tab header="Example 2: RT ON" title="Example 2: Ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_rt_on.png">}}{{< /tab >}}
+  {{< tab header="Example 2: RT OFF" title="Example 2: Ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_rt_off.png">}}{{< /tab >}}
+  {{< tab header="Example 3: RT ON" title="Example 3: Ray tracing ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_rt_on.png">}}{{< /tab >}}
+  {{< tab header="Example 3: RT OFF" title="Example 3: Ray tracing OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_rt_off.png">}}{{< /tab >}}
 {{< /tabpane >}}
