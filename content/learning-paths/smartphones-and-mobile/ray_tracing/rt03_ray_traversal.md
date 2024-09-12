@@ -12,7 +12,7 @@ To control ray traversal, and launch rays, Vulkan offers two options:
 
 The first option is to use `VK_KHR_ray_tracing_pipeline`. This is an opaque and more driver-managed approach. It uses a new set of shader stages to allow users to control ray traversal.
 
-First, you can use a `Ray Generation` shader to define rays and set the origin and direction of each ray that you want to trace. As the GPU traverses the acceleration structure, it may call one of two shaders. If it intersects user-defined geometry it will call the `Intersection` shader. If it intersects non-opaque geometry, it will call an `Any-Hit` shader to decide if the hit should be considered.
+First, you can use a `Ray Generation` shader to define rays and set the origin and direction of each ray that you want to trace. As the GPU traverses the acceleration structure, it may call one of two shaders. If it intersects user-defined geometry, it will call the `Intersection` shader. If it intersects non-opaque geometry, it will call an `Any-Hit` shader to decide if the hit should be considered.
 
 Once ray traversal is complete, one of two things can happen: If the ray does not hit anything in the scene, you call the `Miss` shader. A common use case of a `Miss` shader is to sample an environment map containing the sky.
 
@@ -75,4 +75,4 @@ void trace_ray()
 
 ### Do I use ray query or ray tracing?
 
-For most simple examples, Ray Query usually offers better performance, and it is what we recommend you use to implement ray tracing effects. Right now, Mali devices in the market only offer Ray Query support. On Arm GPUs, Ray Query is hardware accelerated for both `Compute` and `Fragment` shaders, but we recommend using `Fragment` shaders, to benefit from frame buffer compression. We recommend reading our [AFBC best practices](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures) to learn more.
+For most simple examples, Ray Query usually offers better performance, and it is what is recommended to use for implementing ray tracing effects. At the time of writing, Mali devices in the market only offer Ray Query support. On Arm GPUs, Ray Query is hardware accelerated for both `Compute` and `Fragment` shaders, but it is recommended to use `Fragment` shaders, to benefit from frame buffer compression. For further information, see [AFBC best practices](https://developer.arm.com/documentation/101897/latest/Buffers-and-textures/AFBC-textures) to learn more.
