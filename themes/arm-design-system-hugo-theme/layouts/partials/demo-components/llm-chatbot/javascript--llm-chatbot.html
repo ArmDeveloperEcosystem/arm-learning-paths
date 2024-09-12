@@ -62,29 +62,45 @@ Calls to:
     }
     
 
-    function insertRandomSentenceWithStreaming(div, custom_delay=null, custom_sentence=null) {
-        const charsPerSecond = 40;
+    function insertRandomSentenceWithStreaming(custom_delay=null) {
 
-        const sentences = [
-            "The quick brown fox jumps over the lazy dog.",
-            "A journey of a thousand miles begins with a single step.",
-            "To be or not to be, that is the question.",
-            "All that glitters is not gold.",
-            "The early bird catches the worm."
-        ];
-        const randomIndex = Math.floor(Math.random() * sentences.length);
+
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+
+        // Editable params
+        const charsPerSecond = 100000;
+        const sentence = "Hi there! Currently too much traffic on the server to support this chat, my Arm Neoverse CPU resources are being used by other users 😊. Sorry about that! For now, see what I'm capable of here: ";
+
         const randomDelay = custom_delay || Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
-        const sentence = custom_sentence || sentences[randomIndex];
         const interval = 1000 / charsPerSecond; // Interval in milliseconds
     
+
+        const startTime = Date.now();
         setTimeout(() => {
             let currentIndex = 0;
             const intervalId = setInterval(() => {
-                div.textContent += sentence[currentIndex];
-                currentIndex++;
-                if (currentIndex === sentence.length) {
+                var chunk = sentence.slice(currentIndex, currentIndex + 3);
+                chatbot_message_span.textContent += chunk;
+                currentIndex += 3;
+                if (currentIndex >= sentence.length) {
                     clearInterval(intervalId);
-                    if (!custom_sentence) { updateLLMMetrics(sentence);}
+                    // DONE HERE
+                    // add video
+                    chatbot_message_span.innerHTML +=  '<a target="_blank" href="https://www.youtube.com/">Video demo of me in action.</a>';
+                    connectionStatus.isActive = false;      // reset button status
+                    toggleButton();
+                    // LLM metrics
+                    const endTime = Date.now();
+                    var completion_time = (endTime - startTime);
+
+                    completion_time = (completion_time/1000).toFixed(1);
+                    tokens = sentence.trim().split(/\s+/).length+3;
+                    var tps = (tokens/completion_time).toFixed(0);
+                    atlaunchupdateLLMMetrics({'tps': 29, 'completion_tokens': tokens, 'completion_time': completion_time })
                 }
             }, interval);
         }, randomDelay);
@@ -93,6 +109,9 @@ Calls to:
         return sentence
     }
     
+
+
+
 
 
     function onVisibilityChange(entries, observer) {
@@ -131,13 +150,14 @@ Calls to:
                 // Change bar color
                 document.getElementById('bar').style.backgroundColor = resultMessages[i].color;
                 // return message
-                return `${num} tokens per second. ${resultMessages[i].message}`;
+                return `Other demo users are recieving an average of ${num} tokens per second.<br><br>${resultMessages[i].message}`; //atlaunch
+                //return `Recieving an average of ${num} tokens per second.<br><br>${resultMessages[i].message}`;
             }
         }
         return "Number out of range.";
     }
 
-
+    
 
     function updateTPSAverage(new_tps_number) {
 
@@ -173,7 +193,7 @@ Calls to:
       
 
         // Context
-        document.getElementById('overall-context-metric').textContent = getMessageForNumber(avg_tps);
+        document.getElementById('overall-context-metric').innerHTML = getMessageForNumber(avg_tps);
     }
 
     function updateLLMMetrics(metrics_object) {
@@ -196,6 +216,31 @@ Calls to:
         updateTPSAverage(tps_num);
         
     }
+
+function atlaunchupdateLLMMetrics(metrics_object) {
+    
+    // Show stats if they are not already shown
+    document.getElementById('last-message-metrics').hidden = true;
+    document.getElementById('stats-populated').hidden = false;
+    document.getElementById('stats-initial').hidden = true;
+
+    // obtain spans to replace
+    const total_time = document.getElementById('total-time-metric');
+    const tokens = document.getElementById('num-tokens-metric');
+    const tps = document.getElementById('tps-metric');
+
+    // replace last message metrics
+    var tps_num = metrics_object['tps'];
+    tps.textContent = tps_num;
+    tokens.textContent = metrics_object['completion_tokens'];
+    total_time.textContent = metrics_object['completion_time'];
+
+    // Overall TPS
+    updateTPSAverage(tps_num);
+
+
+}
+    
 
 
 
@@ -398,7 +443,8 @@ document.addEventListener("DOMContentLoaded", function() {
             const conversation_history = prepareConversationData();
 
             // Send to server via API
-            sendToServer(conversation_history)
+            //sendToServer(conversation_history);
+            atlaunchsendToServer();
         }
     });
 
@@ -417,7 +463,8 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
 
-    startPingCheck();   // Probe server connection to see if active or not
+    //startPingCheck();   // Probe server connection to see if active or not
+    atlaunchPingCheck();
 
 });
 
@@ -428,6 +475,31 @@ document.addEventListener("DOMContentLoaded", function() {
 
 (function() {
     const server_location_encoded = '{{ getenv "HUGO_LLM_API" | base64Encode }}';
+
+
+
+
+    function atlaunchPingCheck() {
+        // Display connection
+        var entry_div = document.getElementById('user-input-for-demo');
+        var submit_btn= document.getElementById('submit-button');
+        var ping_txt  = document.getElementById('ping-info');
+        var traffic_txt  = document.getElementById('traffic-info');
+
+        connectionStatus.isActive = true;       // reset button status
+        toggleButton();                         // Initial check in case the textarea has content on page load
+  
+        // Display message
+        showPopupPostConnection('Connected! Note we are currently experiencing high demand, you may experience delays.',"success");
+        ping_txt.textContent = ``
+        traffic_txt.textContent = `Server traffic: Very high.`   
+
+        connectionStatus.isActive = false;      // reset button status
+        toggleButton();    
+    }
+
+
+
 
 
     function startPingCheck() {
@@ -469,19 +541,18 @@ document.addEventListener("DOMContentLoaded", function() {
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Start chatting now.',"success");
-                ping_txt.textContent = `Ping: ${ping}`
+                //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = 'Server traffic: Low'
             }
             else if (data.cluster_utilization == 'high') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
-                ping_txt.textContent = `Ping: ${ping}`
+                //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = `Server traffic: High (delays possible).`   
             }
             else if (data.cluster_utilization == 'at-limit') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
-                ping_txt.textContent = `Ping: ${ping}`
+                //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = `Server traffic: At limit (delays possible).`   
-
             }
         })
         .catch(error => {       // Auto errors after ~2 seconds timeout
@@ -496,6 +567,40 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     
+
+    function atlaunchsendToServer() {
+        hidePopup();
+        connectionStatus.isActive = true;      // reset button status
+        toggleButton();
+
+
+
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        console.log(chatbot_messages);
+
+        // if no chatbot message yet, give one
+        if (chatbot_messages.length == 1) {
+            insertRandomSentenceWithStreaming();
+        }
+        else {
+            showPopupPostConnection('Rate limited. View a video of this demo linked from the chatbot, or try again.',"success");
+        }
+        
+
+        // otherwise, give error you're rate limited
+
+
+        //displayMessage('Hi there!');
+        
+        // DONE
+        //updateLLMMetrics();
+
+
+    }
+
+
+
     function sendToServer(data) {
         hidePopup();    // Hide previous messages, to make room for others or clear for responses
       
@@ -598,6 +703,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Expose functions globally
     window.sendToServer = sendToServer;
     window.startPingCheck = startPingCheck;
+    window.atlaunchPingCheck = atlaunchPingCheck;
+    window.atlaunchsendToServer = atlaunchsendToServer;
   })();
 
 

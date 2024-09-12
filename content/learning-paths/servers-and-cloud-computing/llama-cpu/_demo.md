@@ -46,22 +46,17 @@ configuration_dropdown_options:
 
 ### Specific details to this demo
 # ================================================================================
-tps_max: 50   # sets stat visuals for tps
+tps_max: 30   # sets stat visuals for tps
 tps_ranges:
   - name: Low
-    context: Poor throughput - this is likely due to high server load and/or network latency.
-    color: var(--arm-orange)
-    min: 0
-    max: 10
-  - name: Mid
-    context: An acceptable rate - this is considered good enough for human readability, balancing speed and clarity.
-    color: var(--arm-yellow)
-    min: 10
-    max: 25
-  - name: High
-    context: An excellent rate - high-quality UX is being delivered. This is due to optimized model performance, stable network conditions, and efficient resource allocation.
+    context: Around the average human reading rate of 3-5 words per second.
     color: var(--arm-green)
-    min: 25
+    min: 0
+    max: 5
+  - name: High
+    context: This is significantly higher than the average human reading rate of 5 words per second, delivering a stable and usable user chatbot experience from the Llama 3.1 LLM.
+    color: var(--arm-green)
+    min: 5
     max: 1000
 
 ### FIXED, DO NOT MODIFY
