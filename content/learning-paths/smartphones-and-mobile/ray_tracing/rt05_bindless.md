@@ -8,13 +8,13 @@ layout: learningpathall
 
 ## Bindless materials
 
-Bindless resources is implemented by `VK_EXT_descriptor_indexing` and has been a core feature of Vulkan since version 1.2. It is independent of ray tracing and technically it is possible to implement our ray tracing effects without using it, however it will make it very easy and simple to access the data of the intercepted objects.
+Bindless resources are implemented by `VK_EXT_descriptor_indexing` and have been a core feature of Vulkan since version 1.2. It is independent of ray tracing, and technically it is possible to implement ray tracing effects without using it, however it makes it easy and simple to access the data of the intercepted objects.
 
-Descriptor Indexing allows applications to define arrays of buffers and textures that shaders can access using dynamic and non-uniform indices. This extension will then enable us to keep all our resources organized in look-up tables.
+Descriptor Indexing allows applications to define arrays of buffers and textures that shaders can access using dynamic and non-uniform indices. This extension hen enables you to keep all your resources organized in look-up tables.
 
-In a traditional rasterized renderer, applications bind all the necessary information of an object to each draw call, allowing us to retrieve the material, position, texture, etc. that is needed to draw it. However, when we use ray tracing, we cannot follow this approach to identify the materials of the hit object. Instead, we use a unique identifier to retrieve the necessary information from look-up tables.
+In a traditional rasterized renderer, applications bind all the necessary information of an object to each draw call, allowing you to retrieve the material, position, and texture that is needed to draw it. However, when you use ray tracing, you cannot follow this approach to identify the materials of the hit object. Instead, you must use a unique identifier to retrieve the necessary information from look-up tables.
 
-The ray query API allows us to obtain an instance ID, a geometry ID, and a primitive ID from the acceleration structure that we can use to query these tables.
+The ray query API allows you to obtain an instance ID, a geometry ID, and a primitive ID from the acceleration structure that you can use to query these tables.
 
 ``` glsl
 #extension GL_EXT_ray_query : require
@@ -25,7 +25,7 @@ uint intersection_primitive_id = rayQueryGetIntersectionPrimitiveIndexEXT(rayQue
 uint intersection_geometry_global_index = intersection_custom_instance_id + intersection_geometry_id;
 ```
 
-As we build the acceleration structure, we keep track of how many geometries each instance contains, and make sure that everything can be identified uniquely using the sum of the instance custom ID and the geometry ID. We build a set of look-up tables so that with this unique identifier we can access everything that we need to render the intersected triangle.
+As you build the acceleration structure, you can keep track of how many geometries each instance contains, and make sure that everything can be identified uniquely using the sum of the instance custom ID and the geometry ID. You can build a set of look-up tables so that with this unique identifier you can access everything that you need to render the intersected triangle:
 
 ``` cpp
 uint32_t custom_index = 0;
@@ -42,7 +42,7 @@ for (const auto &scene_blas : get_scene_blases())
 }
 ```
 
-With the Primitive ID we can access the relevant index buffer and retrieve all the vertex attributes, including texture coordinates. The API also provides the barycentric coordinates of the intersection point. Using this we can mimic a `Fragment` shader and interpolate the attributes, like for example the UV coordinates.
+With the Primitive ID you can access the relevant index buffer and retrieve all the vertex attributes, including texture coordinates. The API also provides the barycentric coordinates of the intersection point. Using this, you can mimic a `Fragment` shader and interpolate the attributes, for example the UV coordinates.
 
 ``` glsl
 #extension GL_EXT_nonuniform_qualifier : require
@@ -112,9 +112,9 @@ vec2 get_intersection_uv(in rayQueryEXT rayQuery)
 }
 ```
 
-Note that to optimize memory consumption, we have compressed the mesh and material identifier in a single `uint`.
+Note that to optimize memory consumption, you have compressed the mesh and material identifier in a single `uint`.
 
-Once we have our UV coordinates, we can retrieve the material ID from a different table and use it to index into our texture arrays. We also keep separate bindless arrays, each one containing the different textures we will need to use. Finally, we can then use the UV coordinates to sample the textures and compute the final color.
+Once you have our UV coordinates, you can retrieve the material ID from a different table and use it to index into our texture arrays. You also keep separate bindless arrays, each one containing the different textures we will need to use. Finally, you can then use the UV coordinates to sample the textures and compute the final color.
 
 ``` glsl
 layout(set = BINDLESS_MATERIALS_SET, binding = binding_index) uniform texture2D base_color_textures[BINDLESS_MAX_MATERIALS];

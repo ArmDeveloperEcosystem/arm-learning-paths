@@ -22,9 +22,9 @@ The API makes a distinction between *Bottom-Level Acceleration Structures* (BLAS
 
 ### Acceleration structure best practice
 
-Building BLASes and TLASes is relatively expensive, it is best to try to reduce the number of acceleration structures builds and updates.
+As building BLASes and TLASes is relatively expensive, it is best to try to reduce the number of acceleration structures builds and updates.
 
-Skinned animations are costly in ray tracing as they require you to continuously update the BLASes of these meshes. It is recommended to limit the number of skinned objects in your scenes. Depending on your use case you might consider not updating all the acceleration structures in every frame. It is usually possible to reuse the same old acceleration structure across a few frames, without noticeable artifacts. Similarly, you can implement some kind of heuristic to reduce the update frequency of objects too far from the camera, although this can be tricky since most effects still need to consider objects outside the view frustum.
+Skinned animations are costly in ray tracing as they require you to continuously update the BLASes of the meshes. It is recommended to limit the number of skinned objects in your scenes. Depending on your use case, you might consider not updating all the acceleration structures in every frame. It is usually possible to reuse the same old acceleration structure across a few frames, without noticeable artifacts. Similarly, you can implement some kind of heuristic to reduce the update frequency of objects too far from the camera, although this can be tricky since most effects still need to consider objects outside the view frustum.
 
 When building a new BLAS, it is generally recommended to use `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR` for static geometry. `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR` can be faster in certain situations, such as dynamic geometry or streaming. If updating BLASes becomes problematic, you can consider testing different options.
 
@@ -159,7 +159,7 @@ void build_as(VkAccelerationStructureBuildGeometryInfoKHR as_geom_info, std::vec
 }
 ```
 
-Finally, the quality of your geometry can have a huge impact when building your acceleration structure. Try to reduce the number of vertices as much as possible. Grouping objects close together into the same BLAS can also have a positive impact. At the same time, try to reduce overlapping across BLASes and reduce empty space inside a BLAS as much as possible. Empty space will increase the size of a BLAS, which might cause extra AABB hits. Similarly, if BLASes overlap, we might need to evaluate triangles on multiples BLASes.
+Finally, the quality of your geometry can have a huge impact when building your acceleration structure. Try to reduce the number of vertices as much as possible. Grouping objects close together into the same BLAS can also have a positive impact. At the same time, try to reduce overlapping across BLASes and reduce empty space inside a BLAS as much as possible. Empty space will increase the size of a BLAS, which might cause extra AABB hits. Similarly, if BLASes overlap, you might need to evaluate triangles on multiples BLASes.
 
 {{< tabpane >}}
   {{< tab header="Example of a scene with a bad acceleration structure" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_scene_as_overlapping.png" title="Example of a scene with a bad acceleration structure: Significant overlap and empty space. This will result in unnecessary triangle intersections." >}}{{< /tab >}}

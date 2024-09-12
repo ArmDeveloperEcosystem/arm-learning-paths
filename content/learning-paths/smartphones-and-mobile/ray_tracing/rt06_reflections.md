@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Reflections
 
-Illuminating and lighting a scene is a complex topic. When a light hits an object part of that light is reflected; this is known as specular reflection.
+Illuminating and lighting a scene is a complex topic. When a light hits an object, part of that light is reflected; this is known as specular reflection.
 
 {{< tabpane >}}
   {{< tab header="Example 1: ON" title="Example 1: reflections ON" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/city_reflections_on.png">}} {{< /tab >}}
@@ -19,13 +19,13 @@ Illuminating and lighting a scene is a complex topic. When a light hits an objec
   {{< tab header="Example 3: OFF" title="Example 3: reflections OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_reflections_no.png">}} {{< /tab >}}
 {{< /tabpane >}}
 
-The direction of the reflected ray depends on the surface normal and the direction of the incident ray, and it is very easy to compute since GLSL already offers the built-in function `reflect` to compute it.
+The direction of the reflected ray depends on the surface and the direction of the incident ray. It is easy to compute as GLSL already offers the built-in function `reflect` to compute it.
 
 ![Diagram of reflections #center](images/reflections_diagram.svg "Diagram of reflections")
 
-As one can see, reflections are very suited for ray tracing. Traditional non ray tracing techniques try to simulate this ray in multiple ways, but they produce small artifacts. For example, most games use Screen Space Reflections (SSR).
+As you can see, reflections are ideal for ray tracing. Other traditional techniques that do not implement ray tracing to simulate this ray in multiple ways, but they produce small artifacts. For example, most games use Screen Space Reflections (SSR).
 
-It is common to find corner cases and bugs on Screen Space Reflection, at the same time, this technique is more difficult to implement, requiring more magic numbers. The main limitation of Screen Space Reflections is that they depend on the G-buffer information, so occluded objects and objects outside the view frustum cannot be reflected, causing visible artifacts that are common in current games.
+It is common to find corner cases and bugs on Screen Space Reflection at the same time. This technique is more difficult to implement, requiring more magic numbers. The main limitation of Screen Space Reflections is that they depend on the G-buffer information, so occluded objects and objects outside the view frustum cannot be reflected, causing visible artifacts that are common in current games.
 
 {{< tabpane >}}
   {{< tab header="Example 1: SSR" title="Example 1: screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_1_ssr.png">}}{{< /tab >}}
@@ -40,7 +40,7 @@ It is common to find corner cases and bugs on Screen Space Reflection, at the sa
 
 ### Generating Reflection rays from the G-buffer
 
-In this demo, we have a raster pass to compute our G-buffer, so we are already saving all the information we need to compute our reflection rays when producing the G-buffer. The first step is just to read this information from the G-Buffer, and use the normal, position and roughness to generate the reflection ray that we will launch.
+In this demo, there is a raster pass to compute the G-buffer, so you are already saving all the information you need to compute your reflection rays when producing the G-buffer. The first step is just to read this information from the G-Buffer, and use the normal, position and roughness to generate the reflection ray that we will launch.
 
 ``` glsl
 vec3 get_g_buffer_depth(ivec2 depth_coord_texel)
@@ -102,7 +102,7 @@ vec4 main()
 
 ### Trace our reflection rays
 
-Once we have created our rays, we can trace them, either using the Ray Tracing Pipeline or Ray Query. As we explained previously in [the ray traversal section](../rt03_ray_traversal) we currently recommend using Ray Query from a `Fragment` shader.
+Once you have created your rays, you can trace them, either using the ray tracing pipeline or ray query. As explained previously in [the ray traversal section](../rt03_ray_traversal), it is recommend using Ray Query from a `Fragment` shader.
 
 ``` glsl
 bool trace_ray(vec3 ray_orig, vec3 ray_dir, rayQueryEXT rayQuery, uint flags, uint cull_mask, float ray_t_min, float ray_t_max)
@@ -162,7 +162,7 @@ vec4 main()
 
 ### Solving reflections hits
 
-If our ray hits a valid object, we will need to retrieve some material information to illuminate the hit. Previously, in the [bindless material section](../rt05_bindless) we showed that obtaining this information is quite easy thanks to descriptor indexing, which will allow us to access the material information necessary to illuminate the ray. If the ray fails to hit anything, we can just sample the environment map of the skybox to reflect the sky.
+If the ray hits a valid object, you need to retrieve some material information to illuminate the hit. Previously, in the [bindless material section](../rt05_bindless) it was demonstrated that obtaining this information is easy thanks to descriptor indexing, which allows you to access the material information necessary to illuminate the ray. If the ray fails to hit anything, you can sample the environment map of the skybox to reflect the sky.
 
 ``` glsl
 void obtain_rq_hit_data(rayQueryEXT rayQuery, out vec4 hit_material_properties, out vec3 hit_pos, out vec3 hit_normal, out vec2 hit_uv, out uint material_id)
@@ -261,9 +261,9 @@ vec4 main()
 
 ### Glossy and Rough reflections
 
-When creating our rays, we can use the roughness to decide how many reflection rays we need to launch.
+When creating rays, you can use the roughness to decide how many reflection rays you need to launch.
 
-When we think of reflections, we usually think of mirror-like reflections, however non-mirror objects also reflect part of their incident light producing glossy or rough reflections. In a PBR render we use the material roughness to decide the reflected light dispersion. A roughness of 0 will indicate that the material is a mirror, so we will need a single ray to solve it. On the other hand, objects with a higher roughness will reflect the incident ray in multiple directions, producing rough reflections. A render will need to launch multiple rays to solve the color of rough reflections.
+When one thinks of reflections, one usually thinks of mirror-like reflections, however non-mirror objects also reflect part of their incident light producing glossy or rough reflections. In a PBR render, you can use the material roughness to decide the reflected light dispersion. A roughness of 0 indicates that the material is a mirror, so you will need a single ray to solve it. On the other hand, objects with a higher roughness will reflect the incident ray in multiple directions, producing rough reflections. A render will need to launch multiple rays to solve the color of rough reflections.
 
 ``` glsl
 vec4 main()
@@ -313,7 +313,7 @@ vec4 main()
 }
 ```
 
-Launching multiple rays can be expensive, so we recommend limiting the number of rays in your shaders. At the same time, rough reflections will launch rays with more divergence, being more expensive than pure mirror reflections. It is more efficient to traverse the acceleration structure if all rays in the same warp follow a similar path, so try to minimize ray divergence. If we want glossy and rough reflections, we might need to add a denoising pass to deal with this noise. This will further increase the cost of reflections. Please consider the performance impact before adding non-mirror reflections.
+Launching multiple rays can be expensive, so it is better to limit the number of rays in your shaders. At the same time, rough reflections will launch rays with more divergence, being more expensive than pure mirror reflections. It is more efficient to traverse the acceleration structure if all rays in the same warp follow a similar path, so try to minimize ray divergence. If you want glossy and rough reflections, you might need to add a denoising pass to deal with the noise. This further increases the cost of reflections. Do consider the performance impact before adding non-mirror reflections.
 
 {{< tabpane >}}
   {{< tab header="Example 1: No" title="Example 1: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/bonza_reflections_no.png">}}{{< /tab >}}
@@ -326,7 +326,7 @@ Launching multiple rays can be expensive, so we recommend limiting the number of
 
 ### Reflections with multiple bounces
 
-In the real world, ray lights usually have multiple bounces. We can simulate this behavior by launching additional reflection rays if we hit a reflective surface. However, this will be expensive, and we recommend evaluating if the extra complexity is worth it.
+In the real world, ray lights usually have multiple bounces. You can simulate this behavior by launching additional reflection rays if you hit a reflective surface. However, this will be expensive, and you should evaluate to see if the extra complexity is worth it.
 
 {{< tabpane >}}
   {{< tab header="Example 1: No" title="Example 1: no reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_bounce_b_no.png">}}{{< /tab >}}
@@ -434,6 +434,6 @@ vec4 main()
 }
 ```
 
-Finally, we can see how our reflection algorithm looks:
+Finally, you can see how your reflection algorithm looks:
 
 ![Diagram of our reflection algorithm #center](images/reflections_algorithm_diagram.drawio.svg "Diagram of our reflection algorithm")
