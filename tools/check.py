@@ -264,7 +264,6 @@ def check(json_file, start, stop, md_article):
                     logging.debug(f"{process_output}")
                 logging.info(f"{msg}")
                 logging.info("---------")
-
         result = "failed" if results[test_images[n_image]] else "passed"
         logging.info(f"Tests {result} on {test_image}")
 
