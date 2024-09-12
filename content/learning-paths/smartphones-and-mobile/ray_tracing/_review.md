@@ -4,8 +4,8 @@ review:
         question: >
             Which is the recommended way to do ray traversal on Arm GPUs?
         answers:
-            - Ray Query
-            - Ray Tracing Pipeline
+            - Ray query
+            - Ray tracing pipeline
         correct_answer: 1
         explanation: >
             Ray query is the most efficient way to implement ray traversal on Arm GPUs.
@@ -19,7 +19,7 @@ review:
             - A BLAS contains the model geometry
         correct_answer: 3
         explanation: >
-            BLASes (Bottom-Level Acceleration Structures) contain the actual geometry data, usually as triangles. TLASes (Top-Level Accelerations Structures) contain other BLASes and use instances to group and link them with other properties.
+            BLASes (Bottom-Level Acceleration Structures) contain the geometry data, usually as triangles. TLASes (Top-Level Accelerations Structures) contain other BLASes and use instances to group and link them with other properties.
 
     - questions:
         question: >
@@ -37,8 +37,8 @@ review:
         question: >
             Is bindless necessary for ray tracing?
         answers:
-            - We do not need it for shadows, but it is needed for reflections and refractions.
-            - Technically no, but we need it to implement our effects.
+            - You do not need it for shadows, but it is needed for reflections and refractions.
+            - Technically no, but you need it to implement our effects.
             - It is not needed, but it makes implementing our effects a lot easier.
         correct_answer: 3
         explanation: >
@@ -60,12 +60,12 @@ review:
         question: >
             Which sentence is true for our ray tracing effects?
         answers:
-            - In ray tracing shadows and reflections we use bindless to retrieve the material of the intercepted object and illuminate it.
-            - In ray tracing shadows we do not care about which objects we hit, only whether we hit an object or not.
-            - In ray tracing reflections we can use the flag gl_RayFlagsTerminateOnFirstHitEXT.
+            - In ray tracing shadows and reflections, you use bindless to retrieve the material of the intercepted object and illuminate it.
+            - In ray tracing shadows, you do not care about which objects you hit, only whether you hit an object or not.
+            - In ray tracing reflections, you can use the flag gl_RayFlagsTerminateOnFirstHitEXT.
         correct_answer: 2
         explanation: >
-            In ray tracing reflections we need to know which object we are hitting to retrieve its material and illuminate it. In ray tracing shadows we do not care which exact object we hit, just whether we hit an object at all. This allows us to enable the gl_RayFlagsTerminateOnFirstHitEXT optimization for shadows but not for reflections.
+            In ray tracing reflections, you need to know which object you are hitting to retrieve its material and illuminate it. In ray tracing shadows, you do not care which exact object you hit, just whether you hit an object at all. This allows us to enable the gl_RayFlagsTerminateOnFirstHitEXT optimization for shadows but not for reflections.
 
 
     - questions:
