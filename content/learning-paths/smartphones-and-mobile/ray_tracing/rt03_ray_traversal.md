@@ -57,7 +57,7 @@ void trace_ray()
     float ray_t_max = 1e24;         // Will reject candidates if the distance is greater. Useful for point lights with a radius.
     rayQueryInitializeEXT(rayQuery, top_level_acceleration_structure, flags, cull_mask, ray_origin, ray_t_min, ray_direction, ray_t_max);
 
-    // The geometry is opaque so we do not need to check the return value
+    // The geometry is opaque so you do not need to check the return value
     rayQueryProceedEXT(rayQuery);
 
     const bool committed_intersection = true;

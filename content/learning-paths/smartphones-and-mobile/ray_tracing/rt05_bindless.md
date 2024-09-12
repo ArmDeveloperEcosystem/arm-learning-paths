@@ -114,7 +114,7 @@ vec2 get_intersection_uv(in rayQueryEXT rayQuery)
 
 Note that to optimize memory consumption, you have compressed the mesh and material identifier in a single `uint`.
 
-Once you have our UV coordinates, you can retrieve the material ID from a different table and use it to index into our texture arrays. You also keep separate bindless arrays, each one containing the different textures we will need to use. Finally, you can then use the UV coordinates to sample the textures and compute the final color.
+Once you have our UV coordinates, you can retrieve the material ID from a different table and use it to index into our texture arrays. You also keep separate bindless arrays, each one containing the different textures you will need to use. Finally, you can then use the UV coordinates to sample the textures and compute the final color.
 
 ``` glsl
 layout(set = BINDLESS_MATERIALS_SET, binding = binding_index) uniform texture2D base_color_textures[BINDLESS_MAX_MATERIALS];

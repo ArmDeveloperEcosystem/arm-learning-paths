@@ -40,7 +40,7 @@ It is common to find corner cases and bugs on Screen Space Reflection at the sam
 
 ### Generating Reflection rays from the G-buffer
 
-In this demo, there is a raster pass to compute the G-buffer, so you are already saving all the information you need to compute your reflection rays when producing the G-buffer. The first step is just to read this information from the G-Buffer, and use the normal, position and roughness to generate the reflection ray that we will launch.
+In this demo, there is a raster pass to compute the G-buffer, so you are already saving all the information you need to compute your reflection rays when producing the G-buffer. The first step is just to read this information from the G-Buffer, and use the normal, position and roughness to generate the reflection ray that you will launch.
 
 ``` glsl
 vec3 get_g_buffer_depth(ivec2 depth_coord_texel)
@@ -109,7 +109,7 @@ bool trace_ray(vec3 ray_orig, vec3 ray_dir, rayQueryEXT rayQuery, uint flags, ui
 {
     rayQueryInitializeEXT(rayQuery, top_level_acceleration_structure, flags, cull_mask, ray_origin, ray_t_min, ray_direction, ray_t_max);
 
-    // The geometry is opaque so we do not need to check the return value
+    // The geometry is opaque so you do not need to check the return value
     rayQueryProceedEXT(rayQuery);
 
     const bool committed_intersection = true;

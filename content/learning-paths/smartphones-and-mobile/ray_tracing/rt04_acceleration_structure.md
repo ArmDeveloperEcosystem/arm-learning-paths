@@ -32,7 +32,7 @@ When building new TLASes, it is recommended to use `PREFER_FAST_BUILD`. For TLAS
 
 Similarly, building a new acceleration structure is significantly slower than updating or refitting an existing one. Try to avoid creating new acceleration structures from scratch, and if possible, set the `srcAccelerationStructure` field. Setting a previous version of the acceleration structure as a base for the new acceleration structure will be significantly faster since it triggers an update or refit instead of a build. Remember to also set `VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR` when creating the acceleration structure.
 
-In [ray tracing best practices](https://developer.arm.com/documentation/101897/latest/Ray-tracing/Acceleration-structures) it is recommended that you use `PREFER_FAST_TRACE` for static BLASes. For TLASes and dynamic BLASes we recommend `PREFER_FAST_BUILD`, usually in combination with `ALLOW_UPDATE`.
+In [ray tracing best practices](https://developer.arm.com/documentation/101897/latest/Ray-tracing/Acceleration-structures) it is recommended that you use `PREFER_FAST_TRACE` for static BLASes. For TLASes and dynamic BLASes `PREFER_FAST_BUILD` is recommended, usually in combination with `ALLOW_UPDATE`.
 
 ``` cpp
 void create_blas(bool allow_update, std::vector<VkAccelerationStructureGeometryKHR> &&geometries, std::vector<uint32_t> &&geometry_primitive_counts, VkAccelerationStructureKHR prev_as = VK_NULL_HANDLE)
