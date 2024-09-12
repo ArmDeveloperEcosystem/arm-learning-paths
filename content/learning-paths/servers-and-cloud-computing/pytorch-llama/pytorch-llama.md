@@ -40,7 +40,7 @@ git clone --recursive https://github.com/pytorch/ao.git
 cd ao
 git checkout 174e630af2be8cd18bc47c5e530765a82e97f45b
 wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
-git apply 0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
+git apply --whitespace=nowarn 0001-Feat-Add-support-for-kleidiai-quantization-schemes.patch
 cd ../
 
 git clone --recursive https://github.com/pytorch/torchchat.git
