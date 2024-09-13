@@ -250,7 +250,7 @@
 #notification-popup {
     position: absolute;
     /*top: -34px;*/
-    bottom: 46px; 
+    bottom: 46px; /* 66 at 2 lines....86 at 3 lines....106px at 4 lines */
 
     left: 0;
     width: calc(100% - 32px); /* Subtract gutter space from width */

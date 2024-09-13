@@ -1,6 +1,6 @@
 ---
 title: Access the chatbot using the OpenAI-compatible API 
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

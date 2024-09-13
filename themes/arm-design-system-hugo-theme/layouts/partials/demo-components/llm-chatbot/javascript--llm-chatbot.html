@@ -227,7 +227,7 @@ Calls to:
         const chatbot_response_div = chatbot_messages[0];
         const chatbot_message_span = chatbot_response_div.querySelector('span');
 
-        chatbot_message_span.textContent += messageData.replace(/</g, "").replace(/>/g, "");
+        chatbot_message_span.textContent += messageData;
 
     }
 
@@ -379,7 +379,22 @@ function toggleButton() {
     }
 }
 
+// Check if textarea input makes a new line
+function hidePopupOnInputHeightIncrease() {
+    const text_area = document.getElementById('user-input-for-demo');
+    const popup = document.getElementById('notification-popup');
+    if (text_area.scrollHeight > 44) {
+        popup.classList.remove('show-popup');
+        popup.classList.add('hide-popup');
+    }
+}
 
+function adjustInputHeight() {
+    const text_area = document.getElementById('user-input-for-demo');
+    text_area.style.height = 'auto'; // Reset height to recalculate
+    text_area.style.height = (text_area.scrollHeight > text_area.clientHeight ? text_area.scrollHeight : text_area.clientHeight) + 'px';
+    hidePopupOnInputHeightIncrease(); // Auto-hide popup if height is above default (multiple lines)
+}
 
 
 
@@ -410,6 +425,7 @@ document.addEventListener("DOMContentLoaded", function() {
         else {
             // Clear message box & toggle button
             text_area.value = '';
+            adjustInputHeight();
             toggleButton();
             text_area.focus();
 
@@ -426,8 +442,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // User enters any text in textinput
     text_area.addEventListener('input', function() {
-        this.style.height = 'auto';
-        this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
+        //this.style.height = 'auto';
+        //this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
+        adjustInputHeight();
         toggleButton();         // enable input button
     });
     // User hits enter in textinput
@@ -491,17 +508,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
-                showPopupPostConnection('Connected to Graviton-based LLM! Start chatting now.',"success");
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Start chatting now.',"success");
                 //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = 'Server traffic: Low'
             }
             else if (data.cluster_utilization == 'high') {
-                showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
                 //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = `Server traffic: High`   
             }
             else if (data.cluster_utilization == 'at-limit') {
-                showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
                 //ping_txt.textContent = `Ping: ${ping}`
                 traffic_txt.textContent = `Server traffic: High`   
             }
@@ -513,7 +530,7 @@ document.addEventListener("DOMContentLoaded", function() {
             entry_div.style.opacity = '0.75';
             entry_div.setAttribute('placeholder','No connection');
 
-            showPopupPostConnection('Unable to connect. The problem may be with us; try refreshing the page.',"error");
+            showPopupPostConnection('Unable to connect to the server; try refreshing the page or returning later.',"error");
         });
     }
     
@@ -571,7 +588,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
                                 if (return_json.message_type == 'initial_response') {
                                     if (return_json.value == 'NO_RESOURCES_AVAILABLE') {
-                                        showPopupPostConnection("No open resources -  try sending a new message.","warning");                                                 
+                                        showPopupPostConnection("I'm sorry, too many people are trying to access me at once! Try again a bit later.","warning");                                                 
                                     }
                                     else if (return_json.value == 'STREAM_STARTING') {
                                         hidePopup();
@@ -584,7 +601,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     updateLLMMetrics(return_json.value);
                                 }
                                 else {
-                                    showPopupPostConnection("Unexpected server response - try a new message.","error");                                                
+                                    showPopupPostConnection("Unexpected server response - try a new message or return later.","error");                                                
                                 }    
                             }
                         }
@@ -594,7 +611,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 return readStream(); // Read the stream
             } else {
                 console.error('Error sending message to the server');
-                showPopupPostConnection("Problem sending message - try a new message.","error");                                      
+                showPopupPostConnection("Problem sending message - try sending a new message.","error");                                      
             }
         })
         .catch(error => { 
@@ -612,7 +629,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             else {
                 console.error('An unexpected error occurred:', error);
-                showPopupPostConnection('Unknown error - try sending a new message.',"error");
+                showPopupPostConnection('Server error - try sending a new message.',"error");
             }
         });
     }
