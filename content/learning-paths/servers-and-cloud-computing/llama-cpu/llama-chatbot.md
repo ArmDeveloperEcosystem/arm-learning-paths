@@ -264,7 +264,7 @@ This is the same command as before, but with the model file swapped out for the 
 
 The timings on this one look like:
 
-```
+```output
 llama_perf_sampler_print:    sampling time =      41.13 ms /   526 runs   (    0.08 ms per token, 12789.96 tokens per second)
 llama_perf_context_print:        load time =    4846.73 ms
 llama_perf_context_print: prompt eval time =      48.22 ms /    14 tokens (    3.44 ms per token,   290.32 tokens per second)
