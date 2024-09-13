@@ -2,7 +2,7 @@
 next_step_guidance: >
     Click below to view more articles about using Arm for your applications.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/"
+recommended_path: "/learning-paths/cross-platform/github-arm-runners/"
 
 further_reading:
     - resource:

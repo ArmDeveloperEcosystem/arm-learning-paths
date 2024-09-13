@@ -9,13 +9,13 @@ learning_objectives:
     - Download the Meta Llama 3.1 model from the Meta Hugging Face repository.
     - 4-bit quantize the model using optimized INT4 KleidiAI Kernels for PyTorch.
     - Run an LLM inference using PyTorch on an Arm-based CPU.
-    - Expose this as a browser application with Streamlit as the frontend and Torchchat framework in PyTorch as the LLM backend server.
+    - Expose an LLM inference as a browser application with Streamlit as the frontend and Torchchat framework in PyTorch as the LLM backend server.
     - Measure performance metrics of the LLM inference running on an Arm-based CPU.
 
 prerequisites:
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) with at least 16 CPUs from a cloud service provider or an on-premise Arm server.
+    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) with at least 16 CPUs from a cloud service provider or an on-premise Arm server.
 
-author_primary: Nikhil Gupta, Pareena Verma, Nobel Chowdary Mandepudi 
+author_primary: Nikhil Gupta, Pareena Verma, Nobel Chowdary Mandepudi, Ravi Malhotra
 
 ### Tags
 skilllevels: Introductory
