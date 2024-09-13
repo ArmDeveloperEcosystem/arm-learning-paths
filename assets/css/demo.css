@@ -154,32 +154,38 @@
 
 
 #submit-button {
-    margin-left: 10px;
-    flex-shrink: 0;
-    width: 60px; /* prevent slight movement based on icon sizes */
+    margin-left: 4px;
+    width: 40px; /* prevent slight movement based on icon sizes */
+}
+#submit-icon {
+    position: absolute;
+    left: 11px;
+    bottom: 12px;
 }
 
-
-
 #reset-demo-txt {
-    margin-top: 8px;
     float: left;
     color: var(--arm-light-blue);
     text-decoration: underline;
     cursor: pointer;
+    font-size: 14px!important;
 }
 #reset-demo-txt:hover {
     color: var(--arm-green);
 }
-#ping-info {
-    margin-top: 8px;
-    margin-left: 24px;
-    text-align: center;
+#ping-info, #traffic-info, #terms-of-use {
     float: left;
     color: var(--arm-light-grey);
     font-style: italic;
-
+    text-align: left;
+    font-size: 14px!important;
 }
+@media (max-width: 576px) { /* xs */
+    #ping-info, #traffic-info {
+        /*hi */
+    }
+}
+
 
 .user-message {
     background-color: #545454;
@@ -234,34 +240,56 @@
     overflow-wrap: break-word; /* First attempt to break the word naturally */
     word-break: break-word;    /* Then break at any character if needed */
 }
+.chatbot-message span,
+.user-message span {
+    white-space: pre-wrap;
+}
 
 
 
 #notification-popup {
     position: absolute;
-    top: -34px; /* Adjust this value to position the message as needed */
+    /*top: -34px;*/
+    bottom: 46px; 
+
     left: 0;
     width: calc(100% - 32px); /* Subtract gutter space from width */
     margin-left: 16px;
 
     padding: 4px;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
+    z-index: 2;
 
     
     background-color: black; 
     color: white;
 
-    white-space: nowrap; /* Prevent the message from wrapping */
     box-sizing: border-box; /* Ensure padding doesn't affect the width */
 
     opacity: 0;
     transition: opacity 1s ease-in-out; /* Fade-in effect */
     visibility: hidden;
 }
+#initial-message-span {
+    font-size: 16px;
+}
+@media (max-width: 576px) { /* xs */
+    #notification-popup {
+        bottom: 46px; 
+        /*top: -43px;*/
+
+        line-height: 16px;
+    }
+    #initial-message-span {
+        font-size: 14px;
+    }
+}
+
+
+
 #notification-popup.hide-popup {
     opacity: 0;
     visibility: hidden;
@@ -274,7 +302,9 @@
 
 
 
-
+#initial-message-span {
+    font-size: 14px;
+}
 
 
 
@@ -305,7 +335,7 @@
   
   .bar {
     height: 100%;
-    background-color: var(--arm-green);
+    background-color: white;
     width: 0;
     text-align: right;
     padding-right: 5px;
@@ -323,11 +353,24 @@
     background-color: var(--arm-color-footing);
     text-align: center;
     font-size: 12px;
-    color: blue;
     transform: translateX(-30%);
   }
-  
+  .context-line.inline {
+    background-color: #ccc;
+}
 
+  
+.context-line-axis {
+    position: absolute;
+    top: 28px;
+    left: -8px;
+}
+.context-line-axis.inline {
+    left: -16px;
+}
+#overall-context-metric-p {
+    margin-top: 24px;
+}
 
 
   .pie-chart {

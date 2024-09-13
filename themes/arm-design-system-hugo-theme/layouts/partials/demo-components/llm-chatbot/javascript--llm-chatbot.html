@@ -62,29 +62,46 @@ Calls to:
     }
     
 
-    function insertRandomSentenceWithStreaming(div, custom_delay=null, custom_sentence=null) {
-        const charsPerSecond = 40;
+    function insertRandomSentenceWithStreaming(custom_delay=null) {
 
-        const sentences = [
-            "The quick brown fox jumps over the lazy dog.",
-            "A journey of a thousand miles begins with a single step.",
-            "To be or not to be, that is the question.",
-            "All that glitters is not gold.",
-            "The early bird catches the worm."
-        ];
-        const randomIndex = Math.floor(Math.random() * sentences.length);
+
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+
+        // Editable params
+        const charsPerSecond = 100000;
+        const sentence = "Hi there!";
+
         const randomDelay = custom_delay || Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
-        const sentence = custom_sentence || sentences[randomIndex];
         const interval = 1000 / charsPerSecond; // Interval in milliseconds
     
+
+        const startTime = Date.now();
         setTimeout(() => {
             let currentIndex = 0;
             const intervalId = setInterval(() => {
-                div.textContent += sentence[currentIndex];
-                currentIndex++;
-                if (currentIndex === sentence.length) {
+                var chunk = sentence.slice(currentIndex, currentIndex + 3);
+                chatbot_message_span.textContent += chunk;
+                currentIndex += 3;
+                if (currentIndex >= sentence.length) {
                     clearInterval(intervalId);
-                    if (!custom_sentence) { updateLLMMetrics(sentence);}
+                    // DONE HERE
+                    // add video
+                    chatbot_message_span.innerHTML +=  '<a target="_blank" href="https://www.youtube.com/">Video demo of me in action.</a>';
+                    connectionStatus.isActive = false;      // reset button status
+                    toggleButton();
+                    // LLM metrics
+                    const endTime = Date.now();
+                    var completion_time = (endTime - startTime);
+
+                    completion_time = (completion_time/1000).toFixed(1);
+                    tokens = sentence.trim().split(/\s+/).length+3;
+                    var tps = (tokens/completion_time).toFixed(0);
+                    // Send to LLM Metrics
+                    //?
                 }
             }, interval);
         }, randomDelay);
@@ -93,6 +110,9 @@ Calls to:
         return sentence
     }
     
+
+
+
 
 
     function onVisibilityChange(entries, observer) {
@@ -120,20 +140,24 @@ Calls to:
                 { min: {{.min}},  max: {{.max}}, message: "{{.context}}", color: "{{.color}}" },
             {{end}}
         ]
+
+        
+
         
         for (let i = 0; i < resultMessages.length; i++) {
-            if (num >= resultMessages[i].min && num <= resultMessages[i].max) {
+        
+        
+            if (num >= Number(resultMessages[i].min) && num <= Number(resultMessages[i].max)) {
                 // Change bar color
                 document.getElementById('bar').style.backgroundColor = resultMessages[i].color;
                 // return message
-                return resultMessages[i].message;
+                return `Recieving an average of ${num} tokens per second.<br><br>${resultMessages[i].message}`;
             }
         }
         return "Number out of range.";
     }
 
-
-
+    
 
     function updateTPSAverage(new_tps_number) {
 
@@ -156,12 +180,20 @@ Calls to:
         avg_tps = Math.round(avg_tps);
         const maxValue = {{.Params.tps_max}};        
         const bar = document.getElementById('bar');
-        const barWidth = (avg_tps / maxValue) * 100; // Calculate width as a percentage
-        bar.style.width = `${barWidth}%`;
-        bar.textContent = avg_tps; // Display the value inside the bar      
+        var barWidth = (avg_tps / maxValue) * 100; // Calculate width as a percentage
+        if (barWidth > 100) {
+            bar.style.width = `100%`;
+            bar.textContent = `→ ${avg_tps}`; // Display the value inside the bar            
+
+        }
+        else {
+            bar.style.width = `${barWidth}%`;
+            bar.textContent = avg_tps; // Display the value inside the bar            
+        }
+      
 
         // Context
-        document.getElementById('overall-context-metric').textContent = getMessageForNumber(avg_tps);
+        document.getElementById('overall-context-metric').innerHTML = getMessageForNumber(avg_tps);
     }
 
     function updateLLMMetrics(metrics_object) {
@@ -185,6 +217,8 @@ Calls to:
         
     }
 
+    
+
 
 
     function displayMessage(messageData) {
@@ -193,7 +227,7 @@ Calls to:
         const chatbot_response_div = chatbot_messages[0];
         const chatbot_message_span = chatbot_response_div.querySelector('span');
 
-        chatbot_message_span.textContent += messageData;
+        chatbot_message_span.textContent += messageData.replace(/</g, "").replace(/>/g, "");
 
     }
 
@@ -225,7 +259,8 @@ Calls to:
 
         // Show popup
         var popup_div = document.getElementById('notification-popup');
-        popup_div.textContent = message;
+        var popup_span = popup_div.querySelector('#initial-message-span');
+        popup_span.textContent = message;
         if (type == "info") {
             popup_div.style.backgroundColor = 'black'; 
             popup_div.style.color = 'white';             
@@ -385,7 +420,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const conversation_history = prepareConversationData();
 
             // Send to server via API
-            sendToServer(conversation_history)
+            sendToServer(conversation_history);
         }
     });
 
@@ -405,6 +440,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     startPingCheck();   // Probe server connection to see if active or not
+    
 
 });
 
@@ -421,11 +457,12 @@ document.addEventListener("DOMContentLoaded", function() {
         var entry_div = document.getElementById('user-input-for-demo');
         var submit_btn= document.getElementById('submit-button');
         var ping_txt  = document.getElementById('ping-info');
-    
+        var traffic_txt  = document.getElementById('traffic-info');
+
         connectionStatus.isActive = true;       // reset button status
         toggleButton();                         // Initial check in case the textarea has content on page load
 
-        const server_location_ping = 'http://'+atob(server_location_encoded)+'/ping'; // decode
+        const server_location_ping = atob(server_location_encoded)+'/ping'; // decode
         const startTime = Date.now();
         fetch(server_location_ping, {
             method: 'GET',
@@ -442,20 +479,31 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(data => {
             const endTime = Date.now();
-            const ping = (endTime - startTime);
-            
+            var ping = (endTime - startTime);
+            if (ping < 300) {
+               ping = `${ping} ms`; 
+            }
+            else {
+                ping = ping/1000;
+                ping = ping.toFixed(2);
+                ping = `${ping} seconds`; 
+            }
+
             // Update ping & popup status
             if (data.cluster_utilization == 'normal') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Start chatting now.',"success");
-                ping_txt.textContent = `Server traffic: Low. Ping: ${ping}ms`
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = 'Server traffic: Low'
             }
             else if (data.cluster_utilization == 'high') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
-                ping_txt.textContent = `Server traffic: High (delays possible).   Ping: ${ping}ms`
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High`   
             }
             else if (data.cluster_utilization == 'at-limit') {
                 showPopupPostConnection('Connected to Graviton-based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
-                ping_txt.textContent = `Server traffic: At limit (expect delays).   Ping: ${ping}ms`
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High`   
             }
         })
         .catch(error => {       // Auto errors after ~2 seconds timeout
@@ -470,6 +518,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     
+
     function sendToServer(data) {
         hidePopup();    // Hide previous messages, to make room for others or clear for responses
       
@@ -487,7 +536,7 @@ document.addEventListener("DOMContentLoaded", function() {
         connectionStatus.isActive = true; // set connectionStatus to active
         toggleButton(); 
 
-        const server_location_chat = 'http://'+atob(server_location_encoded)+'/chat_completion'; // decode
+        const server_location_chat = atob(server_location_encoded)+'/chat_completion'; // decode
         fetch(server_location_chat, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
