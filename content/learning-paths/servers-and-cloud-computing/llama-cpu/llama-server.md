@@ -85,8 +85,14 @@ In the returned JSON data you see the LLM output, including the content created 
 
 You can also use a Python program to access the OpenAI-compatible API.
 
-Install the OpenAI Python package.
+Create a Python `venv`:
 
+```bash
+python -m venv pytest
+source pytest/bin/activate
+```
+
+Install the OpenAI Python package:
 ```bash
 pip install openai==1.45.0
 ```
