@@ -1,6 +1,6 @@
 ---
 title: "Refractions"
-weight: 9us
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

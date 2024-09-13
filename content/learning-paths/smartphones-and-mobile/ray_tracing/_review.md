@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Which is the recommended way to do ray traversal on Arm GPUs?
+            Which of these is the recommended way to do ray traversal on Arm GPUs?
         answers:
             - Ray query
             - Ray tracing pipeline
@@ -14,16 +14,16 @@ review:
         question: >
             Select the correct statement:
         answers:
-            - A TLAS contains the model geometry
-            - A BLAS uses instances to group other TLASes
-            - A BLAS contains the model geometry
+            - A TLAS contains the model geometry.
+            - A BLAS uses instances to group other TLASes.
+            - A BLAS contains the model geometry.
         correct_answer: 3
         explanation: >
             BLASes (Bottom-Level Acceleration Structures) contain the geometry data, usually as triangles. TLASes (Top-Level Accelerations Structures) contain other BLASes and use instances to group and link them with other properties.
 
     - questions:
         question: >
-            How should we design the acceleration structure?
+            When designing acceleration structure, which of the following statements is true?
         answers:
             - Empty space does not matter, reduce BLAS overlap.
             - Minimize empty space and minimize overlap.
@@ -50,7 +50,7 @@ review:
         answers:
             - Ray tracing reflections can reflect objects not on the screen but Screen Space Reflections can only reflect objects on the screen.
             - Both Screen Space Reflections and ray tracing reflections can reflect objects not on the screen.
-            - Neither Screen Space Reflections or ray tracing reflections can reflect objects on the screen.
+            - Neither Screen Space Reflections nor ray tracing reflections can reflect objects on the screen.
             - Ray tracing reflections can only reflect objects on the screen but Screen Space Reflections can reflect objects not on the screen.
         correct_answer: 1
         explanation: >
@@ -65,7 +65,7 @@ review:
             - In ray tracing reflections, you can use the flag gl_RayFlagsTerminateOnFirstHitEXT.
         correct_answer: 2
         explanation: >
-            In ray tracing reflections, you need to know which object you are hitting to retrieve its material and illuminate it. In ray tracing shadows, you do not care which exact object you hit, just whether you hit an object at all. This allows us to enable the gl_RayFlagsTerminateOnFirstHitEXT optimization for shadows but not for reflections.
+            In ray tracing reflections, you need to know which object you are hitting to retrieve its material and illuminate it. In ray tracing shadows, you do not care which exact object you hit, just whether you hit an object at all. This allows you to enable the gl_RayFlagsTerminateOnFirstHitEXT optimization for shadows but not for reflections.
 
 
     - questions:
