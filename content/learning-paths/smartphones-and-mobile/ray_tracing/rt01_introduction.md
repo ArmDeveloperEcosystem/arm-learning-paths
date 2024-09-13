@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-Ray tracing is a technique to render images using ray casting methods to simulate light transport. Historically, this was not suitable for real-time computer graphics or gaming, and was mostly used by CGI or movies.
+Ray tracing is a technique to render images using ray casting methods to simulate light transport. Historically, this was not suitable for real-time computer graphics or gaming, and was mostly used by CGI in movies.
 
 Vulkan includes a new set of extensions for ray intersection tests, designed to facilitate ray tracing.
 
