@@ -19,7 +19,7 @@ source torch_env/bin/activate
 Install the additional packages:
 
 ```sh
-pip3 install openai
+pip3 install openai==1.45.0
 ```
 
 ### Running LLM Inference Backend Server
@@ -44,78 +44,12 @@ WARNING: This is a development server. Do not use it in a production deployment.
 Press CTRL+C to quit
 ```
 
-### Streamlit Frontend Server File
-Now open a new terminal window and create a file named `browser.py` in your `torchchat` directory:
-
-```sh
-cd torchchat
-vim browser.py
-```
-
-Add the following Streamlit code in the `browser.py` file:
-```code
-import streamlit as st
-import time
-from openai import OpenAI
-
-st.title("Llama 3.1 Chatbot Demo with PyTorch on Arm")
-response_max_tokens = 1024
-start_state = [
-    {"role": "assistant", "content": "How can I help you?"},
-]
-
-if "messages" not in st.session_state:
-    st.session_state["messages"] = start_state
-
-for msg in st.session_state.messages:
-    st.chat_message(msg["role"]).write(msg["content"])
-
-if prompt := st.chat_input():
-    client = OpenAI(
-        base_url="http://127.0.0.1:5000/v1",
-        api_key="813",  # The OpenAI API requires an API key. This can be any non-empty string.
-    )
-
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt)
-
-    with st.chat_message("assistant"), st.status(
-        "Generating...", expanded=True
-    ) as status:
-
-        def get_streamed_completion(completion_generator):
-            start = time.time()
-            tokcount = 0
-            for chunk in completion_generator:
-                tokcount += 1
-                yield chunk.choices[0].delta.content
-
-            status.update(
-                label="Done, averaged {:.2f} tokens/second".format(
-                    tokcount / (time.time() - start)
-                ),
-                state="complete",
-            )
-
-        response = st.write_stream(
-            get_streamed_completion(
-                client.chat.completions.create(
-                    model="llama3.1",
-                    messages=st.session_state.messages,
-                    max_tokens=response_max_tokens,
-                    stream=True,
-                )
-            )
-        )[0]
-
-    st.session_state.messages.append({"role": "assistant", "content": response})
-```
-
 ### Running Streamlit frontend server
 Within you activated `venv`, start the Streamlit frontend server:
 
 ```sh
-streamlit run browser.py
+cd torchchat
+streamlit run browser/browser.py
 ```
 
 The output while the streamlit frontend server starts looks like this:
