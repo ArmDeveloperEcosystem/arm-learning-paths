@@ -46,7 +46,9 @@ cd ../
 git clone --recursive https://github.com/pytorch/torchchat.git
 cd torchchat
 git checkout 925b7bd73f110dd1fb378ef80d17f0c6a47031a6
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-modified-generate.py-for-cli-and-browser.patch
 wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply 0001-modified-generate.py-for-cli-and-browser.patch
 git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
 ./install_requirements.sh
 ```
@@ -76,7 +78,7 @@ In this step, you will download the [Meta Llama3.1 8B Instruct model](https://hu
 
 ```sh
 cd ../torchchat
-python torchchat.py export llama3.1 --output-dso-path exportedModels/llama3.1.so --quantize config/data/aarch64_cpu_channelwise.json --device cpu --max-seq-length 2048
+python torchchat.py export llama3.1 --output-dso-path exportedModels/llama3.1.so --quantize config/data/aarch64_cpu_channelwise.json --device cpu --max-seq-length 1024
 ```
 The output from this command should look like:
 
