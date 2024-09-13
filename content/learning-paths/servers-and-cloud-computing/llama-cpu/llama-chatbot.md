@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 8GB of RAM to run this example. The instructions have been tested on an AWS Graviton3 c7g.16xlarge instance.
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 64GB of RAM to run this example. The instructions have been tested on an AWS Graviton3 c7g.16xlarge instance.
 
 ## Overview
 
@@ -15,7 +15,7 @@ Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Pa
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
-## About the Llama 2 model and GGUF model format
+## About the Llama 3.1 model and GGUF model format
 
 The [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
