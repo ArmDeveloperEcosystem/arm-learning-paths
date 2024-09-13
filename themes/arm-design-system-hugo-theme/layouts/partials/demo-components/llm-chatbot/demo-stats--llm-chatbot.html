@@ -34,15 +34,40 @@ Calls to:
                         </div>
                     </div>
                     <div class="c-row u-margin-top-1/2 u-margin-bottom-1/2">
-                        <div class="c-col xs:c-col-12 xl:c-col-4">
+                        <div class="c-col xs:c-col-12 xl:c-col-2">
                             <span id="reset-demo-txt">Reset chat</span>
                         </div>
-                        <div class="c-col xs:c-col-12 xl:c-col-4" style="min-height: 24px;">
+                        <div class="c-col xs:c-col-12 xl:c-col-7" style="text-align: left;">
+                            <ads-modal id="modal-custom-trigger" modal-title="Chatbot Demo Terms and Conditions">
+                                <div slot="body">
+                                    {{ $ts_and_cs_file := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) .Params.terms_and_conditions }}
+                                    {{ $ts_and_cs := readFile $ts_and_cs_file }}
+                                    {{ $ts_and_cs_final := replace $ts_and_cs "[URL]" .Permalink }} <!-- Replace [URL] with the current page URL -->
+                                    <div style="white-space: pre-wrap; word-wrap: break-word; text-align: left;">{{ $ts_and_cs_final }}</div>
+                                </div>
+                                <div slot="trigger" style="cursor: pointer;">
+                                    <span id="terms-of-use">Your use of this demo is subject to the <u>Terms of Use.</u></span>
+                                </div>
+                              </ads-modal>
+                              <script>
+                                (() => {
+                                  const modal = document.getElementById('modal-custom-trigger');
+                                  modal.querySelectorAll('.js-modal-button').forEach((button) => {
+                                    button.addEventListener('click', function() {
+                                      modal.close();
+                                    });
+                                  });
+                                })();
+                              </script>
+                        </div>
+                        <div class="c-col xs:c-col-12 xl:c-col-3" style="min-height: 24px;">
                             <span id="traffic-info"></span>
                         </div>
+                        {{/* 
                         <div class="c-col xs:c-col-12 xl:c-col-4" style="min-height: 24px;">
                             <span id="ping-info"></span>
                         </div>
+                        */}}
                     </div>
                 </div>
             </div>

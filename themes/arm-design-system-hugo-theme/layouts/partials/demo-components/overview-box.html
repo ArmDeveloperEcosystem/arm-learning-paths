@@ -15,6 +15,7 @@ Calls to:
 
 {{/* translate .Params.diagram into its appropriate path, into the Learning Path directory where it comes from */}}
 {{ $diagram := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) .Params.diagram }}
+{{ $diagram_blowup := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) .Params.diagram_blowup }}
 
 
 
@@ -34,7 +35,7 @@ Calls to:
             </ol>
         </div>
         <!-- Right - Architecture Diagram -->
-        <div class="c-col md:c-col-12 lg:c-col-6">
+        <div class="c-col md:c-col-12 lg:c-col-6" style="padding-left:0px;">
             <div class="element-to-blow-up">
                 <!-- on page -->
                 <div class="clickable-blowup">
@@ -42,7 +43,7 @@ Calls to:
                 </div>
                 <!-- blown up overlay -->
                 <div id="diagram-overlay" class="content-blowup">
-                    <img src="{{$diagram}}" alt="Blown Up Diagram" class="blown-up-image" id="blown-up-image">
+                    <img src="{{$diagram_blowup}}" alt="Blown Up Diagram" class="blown-up-image" id="blown-up-image">
                 </div>
             </div>
         </div>        

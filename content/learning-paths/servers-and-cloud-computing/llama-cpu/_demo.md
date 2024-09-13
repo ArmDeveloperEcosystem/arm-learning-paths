@@ -1,13 +1,16 @@
 ---
-title: Demo - Run a chatbot on an Arm CPU
-overview: Running a chatbot can be expensive at scale, and surprising performance can be achieved with quantized (4 or 8 bit) small LLMs (~7 billion parameters) on Arm CPUs. CPUs are more accessible than GPUs and easier to program for ML for those new to the space. Cost is the largest benefit. Chat with an LLM here to see the price performance for yourself. This demo is running on AWS Graviton 4, on r8g.4xlarge instances via Lambdas.
+title: Run a llama.cpp chatbot powered by Arm Kleidi technology
+overview: Running a chatbot can be expensive at scale, and surprising performance can be achieved with quantized (4 or 8 bit) small LLMs (~8 billion parameters) on Arm Neoverse CPUs. CPUs are generally more accessible and lower cost than traditional GPU solutions. Chat with the Llama-3.1-8b LLM here to see the performance for yourself. This demo is running on AWS Graviton 3, on C7g.16xlarge instances.
 
 demo_steps:
   - Type & send a message to the chatbot.
   - Get the chatbot's reply.
-  - View stats showing how Graviton runs LLMs. 
+  - View stats showing how well AWS Graviton runs LLMs. 
 
-diagram: config-diagram.png
+diagram: config-diagram-dark.png
+diagram_blowup: config-diagram.png
+
+terms_and_conditions: demo-terms-and-conditions.txt
 
 configuration_popup_details: Super long list of configuration information to provide to the user. Should be context and all that to be crystal clear what the setup is.
 
@@ -54,7 +57,7 @@ tps_ranges:
     min: 0
     max: 5
   - name: High
-    context: This is significantly higher than the average human reading rate of 5 words per second, delivering a stable and usable user chatbot experience from the Llama 3.1 LLM.
+    context: This is significantly higher than the average human reading rate of 5 words per second, delivering a stable and usable user chatbot experience from the Llama-3.1-8B LLM.
     color: var(--arm-green)
     min: 5
     max: 1000

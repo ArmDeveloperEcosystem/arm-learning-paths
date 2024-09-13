@@ -168,15 +168,17 @@
     color: var(--arm-light-blue);
     text-decoration: underline;
     cursor: pointer;
+    font-size: 14px!important;
 }
 #reset-demo-txt:hover {
     color: var(--arm-green);
 }
-#ping-info, #traffic-info {
+#ping-info, #traffic-info, #terms-of-use {
     float: left;
     color: var(--arm-light-grey);
     font-style: italic;
     text-align: left;
+    font-size: 14px!important;
 }
 @media (max-width: 576px) { /* xs */
     #ping-info, #traffic-info {
