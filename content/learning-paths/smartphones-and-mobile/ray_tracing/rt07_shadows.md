@@ -19,9 +19,9 @@ Light sources emit light that illuminates most objects. However, not all the emi
   {{< tab header="Example 3: OFF" title="Example 3: Shadows OFF" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/immortalis_shadows_off.png">}} {{< /tab >}}
 {{< /tabpane >}}
 
-In the demo, there is a similar algorithm to produce all the ray tracing effects. For shadows, similarly to what was done for reflections, you start by sampling some information from the G-buffer, like our position and normal. Then you use this information to generate shadows rays, that you can trace either using ray tracing pipeline or ray query. If your shadow ray hits an object, it means that the ray is obstructed and you are in shadow, however, if the ray reaches the light without hitting anything, it means that you are illuminated.
+In the demo, there is a similar algorithm to produce all the ray tracing effects. For shadows, similarly to what was done for reflections, you start by sampling some information from the G-buffer, like the position and normal. Then you use this information to generate shadows rays, that you can trace either using ray tracing pipeline or ray query. If your shadow ray hits an object, it means that the ray is obstructed and you are in shadow, however, if the ray reaches the light without hitting anything, it means that you are illuminated.
 
-![Diagram of our shadow algorithm #  center](images/shadows_algorithm_diagram.drawio.svg "Diagram of our shadow algorithm")
+![Diagram of the shadow algorithm #  center](images/shadows_algorithm_diagram.drawio.svg "Diagram of the shadow algorithm")
 
 When tracing shadows, a ray is launched from the objects towards the lights, so you will need to launch a separate ray for each light that casts shadows, so consider limiting the number of lights casting shadows in your scenes. Launching a single ray per light source will only allow you to produce hard shadows, but it is possible to obtain accurate soft shadows by launching multiple shadow rays and doing some area sampling, you can learn more in [this tutorial](https://medium.com/@alexander.wester/ray-tracing-soft-shadows-in-real-time-a53b836d123b). Soft shadows are more costly to produce, so evaluate if they are necessary.
 

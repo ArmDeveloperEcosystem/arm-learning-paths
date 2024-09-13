@@ -8,7 +8,7 @@ layout: learningpathall
 
 To control ray traversal, and launch rays, Vulkan offers two options:
 
-### Ray Tracing Pipeline
+### Ray tracing pipeline
 
 The first option is to use `VK_KHR_ray_tracing_pipeline`. This is an opaque and more driver-managed approach. It uses a new set of shader stages to allow users to control ray traversal.
 
@@ -20,7 +20,7 @@ If instead you have a confirmed hit, the GPU invokes our `Closest-Hit` shader. I
 
 ![Diagram of Ray Tracing Pipeline #center](images/RTPipeline_diagram.svg "Diagram of Ray Tracing Pipeline")
 
-### Ray Query
+### Ray query
 
 The `VK_KHR_ray_query` extension allows you to use ray tracing from existing shader stages. Usually, you will launch rays from `Compute` or `Fragment` shaders, but it is also possible to launch rays from other stages, such as `Vertex` or even `Ray Generation`.
 
@@ -35,7 +35,8 @@ This makes it easy to add ray tracing to existing shaders, but it means that you
 ![Diagram of Ray Query #center](images/RQuery_diagram.svg "Diagram of Ray Query")
 
 * Once the ray traversal is complete, you can use `rayQueryGetIntersectionTypeEXT` to query if you have hit something, or missed. 
-* If you hit something, you can use other ray query functions to query the data and use the result in your shader:
+
+If you hit something, you can use other ray query functions to query the data and use the result in your shader:
 
 ``` glsl
 layout(set = 0, binding = 10) uniform accelerationStructureEXT top_level_acceleration_structure;

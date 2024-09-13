@@ -162,7 +162,7 @@ vec4 main()
 
 ### Solving reflections hits
 
-If the ray hits a valid object, you need to retrieve some material information to illuminate the hit. Previously, in the [bindless material section](../rt05_bindless) it was demonstrated that obtaining this information is easy thanks to descriptor indexing, which allows you to access the material information necessary to illuminate the ray. If the ray fails to hit anything, you can sample the environment map of the skybox to reflect the sky.
+If the ray hits a valid object, you need to retrieve some material information to illuminate the hit. In the [bindless material section](../rt05_bindless) it was demonstrated that obtaining this information is easy thanks to descriptor indexing, which allows you to access the material information necessary to illuminate the ray. If the ray fails to hit anything, you can sample the environment map of the skybox to reflect the sky.
 
 ``` glsl
 void obtain_rq_hit_data(rayQueryEXT rayQuery, out vec4 hit_material_properties, out vec3 hit_pos, out vec3 hit_normal, out vec2 hit_uv, out uint material_id)

@@ -10,9 +10,9 @@ layout: learningpathall
 
 Bindless resources are implemented by `VK_EXT_descriptor_indexing` and have been a core feature of Vulkan since version 1.2. It is independent of ray tracing, and technically it is possible to implement ray tracing effects without using it, however it makes it easy and simple to access the data of the intercepted objects.
 
-Descriptor Indexing allows applications to define arrays of buffers and textures that shaders can access using dynamic and non-uniform indices. This extension hen enables you to keep all your resources organized in look-up tables.
+Descriptor Indexing allows applications to define arrays of buffers and textures that shaders can access using dynamic and non-uniform indices. This extension then enables you to keep all your resources organized in look-up tables.
 
-In a traditional rasterized renderer, applications bind all the necessary information of an object to each draw call, allowing you to retrieve the material, position, and texture that is needed to draw it. However, when you use ray tracing, you cannot follow this approach to identify the materials of the hit object. Instead, you must use a unique identifier to retrieve the necessary information from look-up tables.
+In a traditional rasterized renderer, applications bind all the necessary information of an object to each draw call, allowing you to retrieve the material, position, and texture that is needed to draw it. However, when you use ray tracing, this approach will not enable you to identify the materials of the hit object. Instead, you must use a unique identifier to retrieve the necessary information from look-up tables.
 
 The ray query API allows you to obtain an instance ID, a geometry ID, and a primitive ID from the acceleration structure that you can use to query these tables.
 

@@ -1,6 +1,6 @@
 ---
 title: "Refractions"
-weight: 9
+weight: 9us
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -13,16 +13,16 @@ Refractions are one of the main advantages of ray tracing. They are extremely di
 To simulate transparency and opacity, an alpha texture is usually used, to indicate that the light can pass thought the object. At first glance, transparency and refractions might look similar, but in a transparent material light goes through in a straight line, so light rays enter and exit the material in the same direction. Refractions bend the light inside the object and change the direction of the ray, allowing artists to create impressive effects that are not feasible without ray tracing. Transparency is a special case of refractions with a refraction index of 1.0, however there are more efficient and simple ways to simulate ray tracing transparency and opacity than using refractions.
 
 {{< tabpane >}}
-  {{< tab header="Example: No refractions" title="Example 1: no refractions or transparency" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_no.png">}} {{< /tab >}}
-  {{< tab header="Example: Refractions" title="Example: ray tracing refractions" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_10.png">}} {{< /tab >}}
-  {{< tab header="Example: Transparency" title="Example: transparency" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_transparent.png">}} {{< /tab >}}
+  {{< tab header="Example: No refractions" title="Example 1: No refractions or transparency" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_no.png">}} {{< /tab >}}
+  {{< tab header="Example: Refractions" title="Example: Ray tracing refractions" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_10.png">}} {{< /tab >}}
+  {{< tab header="Example: Transparency" title="Example: Transparency" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_transparent.png">}} {{< /tab >}}
 {{< /tabpane >}}
 
-Refractions are simulated using *Snell's law*. Similarly to reflections, GLSL has a built-in function `refract` that allows us to compute the direction of the refracted ray using the direction of the incident ray, the surface normal, and the ratio between materials' refraction indices.
+Refractions are simulated using *Snell's law*. Similarly to reflections, GLSL has a built-in function `refract` that allows you to compute the direction of the refracted ray using the direction of the incident ray, the surface normal, and the ratio between materials' refraction indices.
 
 ![Diagram of refractions #center](images/refractions_diagram.svg "Diagram of refractions")
 
-The refractions algorithm is like the reflection algorithm. You start by retrieving some information from the G-buffer like normal, position or refractive index. Then you use this information to generate a ray, that you trace using either Ray Tracing Pipeline or Ray Query.
+The refractions algorithm is like the reflection algorithm. You start by retrieving some information from the G-buffer like normal, position or refractive index. Then you use this information to generate a ray, that you trace using either ray tracing pipeline or ray query.
 
 ![Diagram of our refraction algorithm #center](images/refractions_algorithm_diagram.drawio.svg "Diagram of our refraction algorithm")
 
@@ -111,8 +111,8 @@ To obtain a good refractive result, you will need to launch a ray with multiple 
 
 {{< tabpane >}}
   {{< tab header="Example: no" title="Example 1: No refractions" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_no.png">}} {{< /tab >}}
-  {{< tab header="Example: 1 bounce" title="Example: Ray tracing refractions with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_1.png">}} {{< /tab >}}
-  {{< tab header="Example: 2 bounces" title="Example: Ray tracing refractions with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_2.png">}} {{< /tab >}}
-  {{< tab header="Example: 4 bounces" title="Example: Ray tracing refractions with 4 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_4.png">}} {{< /tab >}}
-  {{< tab header="Example: 10 bounces" title="Example: Ray tracing refractions with 10 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_10.png">}} {{< /tab >}}
+  {{< tab header="Example: 1 Bounce" title="Example: Ray tracing refractions with 1 bounce" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_1.png">}} {{< /tab >}}
+  {{< tab header="Example: 2 Bounces" title="Example: Ray tracing refractions with 2 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_2.png">}} {{< /tab >}}
+  {{< tab header="Example: 4 Bounces" title="Example: Ray tracing refractions with 4 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_4.png">}} {{< /tab >}}
+  {{< tab header="Example: 10 Bounces" title="Example: Ray tracing refractions with 10 bounces" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/refractions_10.png">}} {{< /tab >}}
 {{< /tabpane >}}
