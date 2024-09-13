@@ -48,8 +48,8 @@ cd torchchat
 git checkout 925b7bd73f110dd1fb378ef80d17f0c6a47031a6
 wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-modified-generate.py-for-cli-and-browser.patch
 wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/PyTorch-arm-patches/main/0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
-git apply 0001-modified-generate.py-for-cli-and-browser.patch
 git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
+git apply --whitespace=nowarn 0001-modified-generate.py-for-cli-and-browser.patch
 ./install_requirements.sh
 ```
 {{% notice Note %}} You will need Python version 3.10 to apply these patches. This is the default version of Python installed on an Ubuntu 22.04 Linux machine. {{% /notice %}}
