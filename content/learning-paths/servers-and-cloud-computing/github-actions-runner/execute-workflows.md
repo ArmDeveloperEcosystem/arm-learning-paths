@@ -2,13 +2,11 @@
 # User change
 title: "Execute GitHub Actions workflows on Arm runners"
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-
-## Run GitHub Actions workflows
 
 After installing RunsOn, you can execute jobs on Arm-based runners by modifying your GitHub Actions workflow files.
 
@@ -49,7 +47,7 @@ jobs:
 
 You can learn more about the supported Linux runners in the [official documentation](https://runs-on.com/runners/linux/).
 
-If you want to further customize the CPU count, RAM, disk sizes, and more, you can review the [job labels](https://runs-on.com/configuration/job-labels/).
+If you would like to further customize the CPU count, RAM, disk sizes, and more, you can review the [job labels](https://runs-on.com/configuration/job-labels/).
 
 ## A complete GitHub Actions example
 
@@ -63,7 +61,7 @@ git init
 mkdir -p .github/workflows
 ```
 
-Use a text editor to save the workflow file below as a file named `test.yml` in the `.github/workflows/` directory.
+Use a text editor to save the workflow file below as a file named `test.yml` in the `.github/workflows/` directory:
 
 ```yaml
 name: test
