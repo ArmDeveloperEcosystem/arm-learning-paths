@@ -1,27 +1,27 @@
 ---
 title: Run a Large Language model (LLM) chatbot on Arm servers
-weight: 2
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 8GB of RAM to run this example. The instructions have been tested on an AWS Graviton3 c7g.2xlarge instance.
+The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 8GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an AWS Graviton3 c7g.16xlarge instance.
 
 ## Overview
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) on your Arm-based CPU using `llama.cpp`. 
+Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) on your Arm-based CPU using `llama.cpp`. 
 
 [llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project developed by Georgi Gerganov that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. 
 
-## About the Llama 2 model and GGUF model format
+## About the Llama 3.1 model and GGUF model format
 
-The [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF) from Meta belongs to the Llama 2 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
+The [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
 
-Llama 2 collection of models perform general natural language processing (NLP) tasks such as text generation. You can access the base foundation Llama 2 model or select the specialized chat Llama 2 version that is already optimized for back-and-forth dialogue. In this Learning Path, you run the specialized chat model.
-The Llama 2 family of models range in size from 7 billion to 70 billion parameters. The greater the number of parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 7 billion (7b) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
+The [Meta Llama 3.1 collection of models](https://github.com/meta-llama/llama-models/blob/main/models/llama3_1/MODEL_CARD.md) perform general natural language processing (NLP) tasks such as text generation.
+The Llama 3.1 family of models range in size from 8 billion to 405 billion parameters. The greater the number of parameters, the more information the model can store. This directly affects how well the model understands language and the model's general capabilities. LLMs that run efficiently on CPUs typically have lower numbers of parameters. For this example, the 8 billion (8B) model is ideal for retaining quality chatbot capability while also running efficiently on your Arm-based CPU. 
 
 Traditionally, the training and inference of LLMs has been done on GPUs using full-precision 32-bit (FP32) or half-precision 16-bit (FP16) data type formats for the model parameter and weights. Recently, a new binary model format called GGUF was introduced by the `llama.cpp` team. This new GGUF model format uses compression and quantization techniques that remove the dependency on using FP32 and FP16 data type formats. For example, GGUF supports quantization where model weights that are generally stored as FP16 data types are scaled down to 4-bit integers. This significantly reduces the need for computational resources and the amount of RAM required. These advancements made in the model format and the data types used make Arm CPUs a great fit for running LLM inferences.   
  
@@ -99,13 +99,13 @@ general:
 
 ## Install Hugging Face Hub
 
-There are a few different ways you can download the Llama-2-7B Chat model. In this Learning Path, you download the model from Hugging Face.
+There are a few different ways you can download the Meta Llama-3.1 8B model. In this Learning Path, you download the model from Hugging Face.
 
-{{% notice Note %}} Use of Llama-2-7B-Chat model is governed by the Meta license. Before you proceed to download the model, please visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
+{{% notice Note %}} Use of Llama 3.1 8B model is governed by the Meta license. Before you proceed to download the model, please visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form. {{% /notice %}}
 
 [Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio, and computer vision.
 
-The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Llama-2-7B-Chat model](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGUF).
+The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Llama-3.1 8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf).
 
 Install the required Python packages:
 
@@ -131,7 +131,7 @@ pip install huggingface_hub
 You can now download the model using the huggingface cli:
 
 ```bash
-huggingface-cli download TheBloke/Llama-2-7b-Chat-GGUF llama-2-7b-chat.Q4_0.gguf --local-dir . --local-dir-use-symlinks False
+huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 ```
 Before you proceed and run this model, take a quick look at what `Q4_0` in the model name denotes.
 
@@ -139,9 +139,7 @@ Before you proceed and run this model, take a quick look at what `Q4_0` in the m
 
 `Q4_0` in the model name refers to the quantization method the model uses. The goal of quantization is to reduce the size of the model (to reduce the memory space required) and faster (to reduce memory bandwidth bottlenecks transferring large amounts of data from memory to a processor). The primary trade-off to keep in mind when reducing a model's size is maintaining quality of performance. Ideally, a model is quantized to meet size and speed requirements while not having a negative impact on performance. 
 
-Llama 2 was originally trained and published using the bfloat16 data type, meaning that each of the 7 billion model parameters takes up 16 bits of memory to store. Putting that into real terms, multiplying 16 bits per parameter by 7 billion parameters, the base foundation llama-2-7b model is just over 13Gb in size. 
-
-This model is `llama-2-7b-chat.Q4_0.gguf`, so what does each component mean in relation to the quantization level? The main thing to note is the number of bits per parameter, which is denoted by 'Q4' in this case or 4-bit integer. As a result, by only using 4 bits per parameter for 7 billion parameters, the model drops to be 3.6Gb in size.
+This model is `llama3.1-8b-Q4_0.gguf`, so what does each component mean in relation to the quantization level? The main thing to note is the number of bits per parameter, which is denoted by 'Q4' in this case or 4-bit integer. As a result, by only using 4 bits per parameter for 8 billion parameters, the model drops to be 4.7Gb in size.
 
 Here is a quick lookup to the rest of the quantization parts for the Llama-2 model family as it exists today:
 
@@ -171,61 +169,75 @@ To see improvements for Arm optimized kernels, you need to generate a new weight
 To re-quantize optimally for Graviton3, run
 
 ```bash
-./llama-quantize --allow-requantize llama-2-7b-chat.Q4_0.gguf llama-2-7b-chat.Q4_0_8_8.gguf Q4_0_8_8
+./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 ```
 
-This will output a new file, `llama-2-7b-chat.Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
+This will output a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
 
 {{% notice Note %}} 
 This requantization is optimal only for Graviton3. For Graviton2, requantization should optimally be done in `Q4_0_4_4` format, and for Graviton4, `Q4_0_4_8` is the optimal requantization format. 
 {{% /notice %}}
 
-## Compare the pre-quantized Llama-2-7B-Chat LLM model weights to the optimized weights
+## Compare the pre-quantized Llama-3.1-8B LLM model weights to the optimized weights
 
-First, run the pre-quantized llama-2-7b-chat model exactly as the weights were downloaded from huggingface:
+First, run the pre-quantized llama-3.1-8b model exactly as the weights were downloaded from huggingface:
 
 ```bash
-./llama-cli -m llama-2-7b-chat.Q4_0.gguf -p "Building a visually appealing website can be done in ten simple steps:" -n 64 -t 2
+./llama-cli -m dolphin-2.9.4-llama3.1-8b-Q4_0.gguf -p "Building a visually appealing website can be done in ten simple steps:" -n 512 -t 64 
 ```
 
-This command will use the downloaded model (`-m` flag), with the specified prompt (`-p` flag), and target a 64 token completion (`-n` flag), using two threads (`-t` flag).
+This command will use the downloaded model (`-m` flag), with the specified prompt (`-p` flag), and target a 512 token completion (`-n` flag), using 64 threads (`-t` flag).
 
-You will see lots of interesting statistics being printed from llama.cpp about the model and the system, followed by the prompt and completion. The tail of the output from running this model on an AWS Graviton3 c7g.2xlarge instance is shown below:
+You will see lots of interesting statistics being printed from llama.cpp about the model and the system, followed by the prompt and completion. The tail of the output from running this model on an AWS Graviton3 c7g.16xlarge instance is shown below:
 
 ```output
 llm_load_tensors: ggml ctx size =    0.14 MiB
-llm_load_tensors:        CPU buffer size =  3647.87 MiB
-..................................................................................................
-llama_new_context_with_model: n_ctx      = 4096
+llm_load_tensors:        CPU buffer size =  4437.82 MiB
+.......................................................................................
+llama_new_context_with_model: n_ctx      = 131072
 llama_new_context_with_model: n_batch    = 2048
 llama_new_context_with_model: n_ubatch   = 512
 llama_new_context_with_model: flash_attn = 0
-llama_new_context_with_model: freq_base  = 10000.0
+llama_new_context_with_model: freq_base  = 500000.0
 llama_new_context_with_model: freq_scale = 1
-llama_kv_cache_init:        CPU KV buffer size =  2048.00 MiB
-llama_new_context_with_model: KV self size  = 2048.00 MiB, K (f16): 1024.00 MiB, V (f16): 1024.00 MiB
-llama_new_context_with_model:        CPU  output buffer size =     0.12 MiB
-llama_new_context_with_model:        CPU compute buffer size =   296.01 MiB
+llama_kv_cache_init:        CPU KV buffer size = 16384.00 MiB
+llama_new_context_with_model: KV self size  = 16384.00 MiB, K (f16): 8192.00 MiB, V (f16): 8192.00 MiB
+llama_new_context_with_model:        CPU  output buffer size =     0.49 MiB
+llama_new_context_with_model:        CPU compute buffer size =  8480.01 MiB
 llama_new_context_with_model: graph nodes  = 1030
 llama_new_context_with_model: graph splits = 1
 
-system_info: n_threads = 2 / 8 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 1 | SVE = 1 | ARM_FMA = 1 | F16C = 0 | FP16_VA = 1 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 1 | LLAMAFILE = 0 |
-sampling:
-    repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
-    top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
-    mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
-sampling order:
-CFG -> Penalties -> top_k -> tfs_z -> typical_p -> top_p -> min_p -> temperature
-generate: n_ctx = 4096, n_batch = 2048, n_predict = 64, n_keep = 1
+system_info: n_threads = 64 (n_threads_batch = 64) / 64 | AVX = 0 | AVX_VNNI = 0 | AVX2 = 0 | AVX512 = 0 | AVX512_VBMI = 0 | AVX512_VNNI = 0 | AVX512_BF16 = 0 | FMA = 0 | NEON = 1 | SVE = 1 | ARM_FMA = 1 | F16C = 0 | FP16_VA = 1 | RISCV_VECT = 0 | WASM_SIMD = 0 | BLAS = 0 | SSE3 = 0 | SSSE3 = 0 | VSX = 0 | MATMUL_INT8 = 1 | LLAMAFILE = 0 |
+sampling seed: 4210375779
+sampling params:
+        repeat_last_n = 64, repeat_penalty = 1.000, frequency_penalty = 0.000, presence_penalty = 0.000
+        top_k = 40, tfs_z = 1.000, top_p = 0.950, min_p = 0.050, typical_p = 1.000, temp = 0.800
+        mirostat = 0, mirostat_lr = 0.100, mirostat_ent = 5.000
+sampler constr:
+        logits -> logit-bias -> penalties -> top-k -> tail-free -> typical -> top-p -> min-p -> temp-ext -> softmax -> dist
+generate: n_ctx = 131072, n_batch = 2048, n_predict = 512, n_keep = 1
 
 
- Building a visually appealing website can be done in ten simple steps:
- Einzeln, a UX/UI Designer at Designhill, provides a list of ten simple steps to create a visually appealing website. These steps include using high-quality images, choosing a consistent color scheme, and incorporating negative space. Additionally, Using a clean and simple layout, creating a clear hierarchy
-llama_print_timings:        load time =    1120.85 ms
-llama_print_timings:      sample time =       2.11 ms /    64 runs   (    0.03 ms per token, 30303.03 tokens per second)
-llama_print_timings: prompt eval time =    1998.79 ms /    16 tokens (  124.92 ms per token,     8.00 tokens per second)
-llama_print_timings:        eval time =   15991.48 ms /    63 runs   (  253.83 ms per token,     3.94 tokens per second)
-llama_print_timings:       total time =   17996.97 ms /    79 tokens
+Building a visually appealing website can be done in ten simple steps: Plan, design, wireframe, write content, optimize for SEO, choose the right platform, add interactive elements, test and fix bugs, launch, and finally, maintain. These steps are crucial for creating a user-friendly and effective website that attracts visitors and converts them into customers.
+1. Planning the Website
+Planning is the first and most crucial stage in building a website. It involves determining your target audience, identifying their needs, and outlining what the website will offer them. The planning process also includes setting goals for the website and figuring out how it will be used. This stage is essential as it will guide the design, content, and functionality of your website.
+2. Designing the Website
+Once you have a clear plan, you can proceed to design the website. The design stage involves creating a visual representation of your website, including its layout, color scheme, typography, and imagery. A well-designed website is crucial for capturing the attention of your target audience and encouraging them to engage with your content.
+3. Creating a Wireframe
+A wireframe is a simple, low-fidelity version of your website that outlines its structure and layout. It is a critical stage in the website-building process as it helps you visualize how your website will look and function before you invest in the design and development stages. A wireframe also allows you to gather feedback from stakeholders and refine your design before it goes live.
+4. Writing Quality Content
+Content is the lifeblood of any website. It is essential to create high-quality, engaging, and informative content that resonates with your target audience. The content should be well-researched, optimized for SEO, and written in a style that is easy to understand. It is also essential to keep your content fresh and up-to-date to keep your audience engaged.
+5. Optimizing for SEO
+Search Engine Optimization (SEO) is the process of optimizing your website to rank higher in search engine results pages (SERPs). It involves optimizing your website's content, structure, and technical aspects to make it more visible and accessible to search engines. SEO is critical for driving organic traffic to your website and increasing its visibility online.
+6. Choosing the Right Platform
+Choosing the right platform for your website is essential for its success. There are various website-building platforms available, such as WordPress, Squarespace, and Wix. Each platform has its strengths and weaknesses, and it is essential to choose the one that best suits your needs.
+7. Adding Interactive Elements
+Interactive elements, such as videos, quizzes, and gam
+llama_perf_sampler_print:    sampling time =      41.44 ms /   526 runs   (    0.08 ms per token, 12692.44 tokens per second)
+llama_perf_context_print:        load time =    4874.27 ms
+llama_perf_context_print: prompt eval time =      87.00 ms /    14 tokens (    6.21 ms per token,   160.92 tokens per second)
+llama_perf_context_print:        eval time =   11591.53 ms /   511 runs   (   22.68 ms per token,    44.08 tokens per second)
+llama_perf_context_print:       total time =   11782.00 ms /   525 tokens
 ```
 
 The `system_info` printed from llama.cpp highlights important architectural features present on your hardware that improve the performance of the model execution. In the output shown above from running on an AWS Graviton3 instance, you will see:
@@ -245,22 +257,23 @@ The end of the output shows several model timings:
 You can compare these timings to the optimized model weights by running:
 
 ```bash
-./llama-cli -m llama-2-7b-chat.Q4_0_8_8.gguf -p "Building a visually appealing website can be done in ten simple steps:" -n 64 -t 2
+./llama-cli -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -p "Building a visually appealing website can be done in ten simple steps:" -n 512 -t 64
 ```
 
 This is the same command as before, but with the model file swapped out for the re-quantized file.
 
 The timings on this one look like:
 
-```
-llama_print_timings:        load time =     984.78 ms
-llama_print_timings:      sample time =       2.12 ms /    64 runs   (    0.03 ms per token, 30245.75 tokens per second)
-llama_print_timings: prompt eval time =     463.98 ms /    16 tokens (   29.00 ms per token,    34.48 tokens per second)
-llama_print_timings:        eval time =    6890.95 ms /    63 runs   (  109.38 ms per token,     9.14 tokens per second)
-llama_print_timings:       total time =    7362.13 ms /    79 tokens
+```output
+llama_perf_sampler_print:    sampling time =      41.13 ms /   526 runs   (    0.08 ms per token, 12789.96 tokens per second)
+llama_perf_context_print:        load time =    4846.73 ms
+llama_perf_context_print: prompt eval time =      48.22 ms /    14 tokens (    3.44 ms per token,   290.32 tokens per second)
+llama_perf_context_print:        eval time =   11233.92 ms /   511 runs   (   21.98 ms per token,    45.49 tokens per second)
+llama_perf_context_print:       total time =   11385.65 ms /   525 tokens
+
 ```
 
-As you can see, load time improves, but the biggest improvement can be seen in eval times. The number of tokens per second for prompt eval quadruples, while the speed of inference more than doubles.
+As you can see, load time improves, but the biggest improvement can be seen in prompt eval times.
 
 You have successfully run a LLM chatbot with Arm optimizations, all running on your Arm AArch64 CPU on your server. You can continue experimenting and trying out the model with different prompts.
 

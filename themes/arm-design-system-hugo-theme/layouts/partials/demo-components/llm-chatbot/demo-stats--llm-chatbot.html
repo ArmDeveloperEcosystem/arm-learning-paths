@@ -1,0 +1,118 @@
+{{/*
+Demo page for the llm-chatbot, the first demo created in learn.arm.com.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+
+*/}}
+
+
+
+<div class="content-box">
+    <div class="c-row u-gap-1/2 lg:u-flex-nowrap u-padding-top-0">
+        <!-- Left - Demo -->
+        <div class="c-col u-display-block md:c-col-12 lg:c-col-8 ">
+            <h2>Arm KleidiAI Demo</h2>
+            <div id="demo-container">
+                <div id="all-messages-div">
+                    
+                </div>
+                <div id="demo-actions">
+                    <div class="c-row">
+                        <div class="c-col" id="input-and-submit">
+                            <textarea id="user-input-for-demo" placeholder="Enter message" tabindex="1" rows="1"></textarea>
+                            <ads-button id="submit-button" level="primary" tabindex="2" disabled>
+                                <i id="submit-icon" class="fa-solid fa-spinner fa-spin"></i>
+                            </ads-button>
+                            <div id="notification-popup" class="show-popup"><span id="initial-message-span">Pinging LLM server <ads-loader></ads-loader></span></div>
+                        </div>
+                    </div>
+                    <div class="c-row u-margin-top-1/2 u-margin-bottom-1/2">
+                        <div class="c-col xs:c-col-12 xl:c-col-2">
+                            <span id="reset-demo-txt">Reset chat</span>
+                        </div>
+                        <div class="c-col xs:c-col-12 xl:c-col-7" style="text-align: left;">
+                            <ads-modal id="modal-custom-trigger" modal-title="Chatbot Demo Terms and Conditions">
+                                <div slot="body">
+                                    {{ $ts_and_cs_file := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) .Params.terms_and_conditions }}
+                                    {{ $ts_and_cs := readFile $ts_and_cs_file }}
+                                    {{ $ts_and_cs_final := replace $ts_and_cs "[URL]" .Permalink }} <!-- Replace [URL] with the current page URL -->
+                                    <div style="white-space: pre-wrap; word-wrap: break-word; text-align: left;">{{ $ts_and_cs_final }}</div>
+                                </div>
+                                <div slot="trigger" style="cursor: pointer;">
+                                    <span id="terms-of-use">Your use of this demo is subject to the <u>Terms of Use.</u></span>
+                                </div>
+                              </ads-modal>
+                              <script>
+                                (() => {
+                                  const modal = document.getElementById('modal-custom-trigger');
+                                  modal.querySelectorAll('.js-modal-button').forEach((button) => {
+                                    button.addEventListener('click', function() {
+                                      modal.close();
+                                    });
+                                  });
+                                })();
+                              </script>
+                        </div>
+                        <div class="c-col xs:c-col-12 xl:c-col-3" style="min-height: 24px;">
+                            <span id="traffic-info"></span>
+                        </div>
+                        {{/* 
+                        <div class="c-col xs:c-col-12 xl:c-col-4" style="min-height: 24px;">
+                            <span id="ping-info"></span>
+                        </div>
+                        */}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right - Stats -->
+        <div class="c-col u-display-block c-col-12 lg:c-col-4">
+            <h2>Stats</h2>
+            <div id="stats-initial">
+                <p>Type a message to the chatbot to view metrics.</p> 
+            </div>
+            <div id="stats-populated" hidden>
+                <div id="tps-average-container" data-tps-array=""></div>
+                <h5>Avg Tokens per Second (TPS)</h5>
+                <div id="chart-container" class="chart-container">
+                    <div id="bar" class="bar"></div>
+
+                        {{/* Automatically calculate low, mid, and great lines 
+                                <div class="context-line" style="left: 20%;"></div> <!-- 10 / 50 --> 
+                        */}}
+                        {{range .Params.tps_ranges}}
+                            {{ if lt .max $.Params.tps_max }}
+                                {{ $fraction := div (float .max) $.Params.tps_max }}  <!-- Divide .max by tps_max -->
+                                {{ $percentage := mul $fraction 100 }}        <!-- Multiply by 100 to get percentage -->
+                                <div class="context-line" style='left: {{ printf "%.0f%%" $percentage }};'>
+                                    <div class="context-line-axis">{{.max}}</div>
+                                </div>
+                            {{end}}
+                        {{end}}
+                        <div class="context-line inline" style='left: 100%;'>
+                            <div class="context-line-axis inline">{{ $.Params.tps_max }}</div>
+                        </div>
+                  </div>
+                <p id="overall-context-metric-p"><span id="overall-context-metric"></span></p>
+                <br>
+                <div id='last-message-metrics'>
+                <h5>Last Message:</h5>
+                <p> <b><span id="total-time-metric">#</span></b> seconds to display 
+                    <b><span id="num-tokens-metric">#</span></b> tokens at a rate of 
+                    <b><span id="tps-metric">#</span></b>        tokens per second.</p>
+                </div>
+            </div>
+
+              
+
+        </div>        
+    </div>
+
+</div>

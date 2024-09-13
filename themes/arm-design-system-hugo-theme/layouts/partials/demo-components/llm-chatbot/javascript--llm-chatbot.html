@@ -1,0 +1,645 @@
+{{/*
+Demo page for the llm-chatbot, the first demo created in learn.arm.com.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+
+*/}}
+
+
+
+<script>
+
+
+    // Global variable to track state changes on site
+    var connectionStatus = {
+        isActive: false
+    };
+
+    function systemMessageStreaming(div, message) {
+        setTimeout(() => {
+            let currentIndex = 0;
+            const intervalId = setInterval(() => {
+                div.textContent += message[currentIndex];
+                currentIndex++;
+                if (currentIndex === message.length) {
+                    clearInterval(intervalId);
+                }
+            }, 5);
+        });
+    }
+
+
+
+
+
+
+    function insertRandomSentenceWithDelay(div) {
+        const sentences = [
+            "The quick brown fox jumps over the lazy dog.",
+            "A journey of a thousand miles begins with a single step.",
+            "To be or not to be, that is the question.",
+            "All that glitters is not gold.",
+            "The early bird catches the worm."
+        ];
+        const randomIndex = Math.floor(Math.random() * sentences.length);
+        const randomDelay = Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
+        const sentence = sentences[randomIndex];
+
+        setTimeout(() => {
+            div.textContent = sentence;
+        }, randomDelay);
+
+        // Return last message
+        return sentence
+
+    }
+    
+
+    function insertRandomSentenceWithStreaming(custom_delay=null) {
+
+
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+
+        // Editable params
+        const charsPerSecond = 100000;
+        const sentence = "Hi there!";
+
+        const randomDelay = custom_delay || Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
+        const interval = 1000 / charsPerSecond; // Interval in milliseconds
+    
+
+        const startTime = Date.now();
+        setTimeout(() => {
+            let currentIndex = 0;
+            const intervalId = setInterval(() => {
+                var chunk = sentence.slice(currentIndex, currentIndex + 3);
+                chatbot_message_span.textContent += chunk;
+                currentIndex += 3;
+                if (currentIndex >= sentence.length) {
+                    clearInterval(intervalId);
+                    // DONE HERE
+                    // add video
+                    chatbot_message_span.innerHTML +=  '<a target="_blank" href="https://www.youtube.com/">Video demo of me in action.</a>';
+                    connectionStatus.isActive = false;      // reset button status
+                    toggleButton();
+                    // LLM metrics
+                    const endTime = Date.now();
+                    var completion_time = (endTime - startTime);
+
+                    completion_time = (completion_time/1000).toFixed(1);
+                    tokens = sentence.trim().split(/\s+/).length+3;
+                    var tps = (tokens/completion_time).toFixed(0);
+                    // Send to LLM Metrics
+                    //?
+                }
+            }, interval);
+        }, randomDelay);
+
+        // Return last message
+        return sentence
+    }
+    
+
+
+
+
+
+    function onVisibilityChange(entries, observer) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                //document.getElementById('user-input-for-demo').focus();
+                observer.unobserve(entry.target); // Stop observing after the function is called
+            }
+        });
+    }
+
+
+
+
+    function getMessageForNumber(num) {
+        /* const resultMessages = [
+            { min: 0,  max: 10, message: "Terrible", color: "red" },
+            { min: 10, max: 25, message: "Eh, noticably slow. Here is why.", color: "yellow" },
+            { min: 25, max: 60, message: "Good, high quality.", color: "green" },
+        ];*/
+
+        // From Hugo metadata
+        const resultMessages = [
+            {{range .Params.tps_ranges}}
+                { min: {{.min}},  max: {{.max}}, message: "{{.context}}", color: "{{.color}}" },
+            {{end}}
+        ]
+
+        
+
+        
+        for (let i = 0; i < resultMessages.length; i++) {
+        
+        
+            if (num >= Number(resultMessages[i].min) && num <= Number(resultMessages[i].max)) {
+                // Change bar color
+                document.getElementById('bar').style.backgroundColor = resultMessages[i].color;
+                // return message
+                return `Recieving an average of ${num} tokens per second.<br><br>${resultMessages[i].message}`;
+            }
+        }
+        return "Number out of range.";
+    }
+
+    
+
+    function updateTPSAverage(new_tps_number) {
+
+        // get previous numbers
+        const avg_container = document.getElementById('tps-average-container');
+        // get the current array in HTML already
+        let tps_array = avg_container.getAttribute('data-tps-array').split(',').map(Number);
+        if (tps_array.length === 1 && tps_array[0] === 0) {
+            tps_array = [];
+        }
+
+        // Add the new number to the array
+        tps_array.push(new_tps_number);
+        avg_container.setAttribute('data-tps-array', tps_array.join(','));
+        
+        // Calculate the running average
+        const sum = tps_array.reduce((acc, num) => acc + num, 0);
+        var avg_tps = sum / tps_array.length;
+
+        avg_tps = Math.round(avg_tps);
+        const maxValue = {{.Params.tps_max}};        
+        const bar = document.getElementById('bar');
+        var barWidth = (avg_tps / maxValue) * 100; // Calculate width as a percentage
+        if (barWidth > 100) {
+            bar.style.width = `100%`;
+            bar.textContent = `→ ${avg_tps}`; // Display the value inside the bar            
+
+        }
+        else {
+            bar.style.width = `${barWidth}%`;
+            bar.textContent = avg_tps; // Display the value inside the bar            
+        }
+      
+
+        // Context
+        document.getElementById('overall-context-metric').innerHTML = getMessageForNumber(avg_tps);
+    }
+
+    function updateLLMMetrics(metrics_object) {
+        // Show stats if they are not already shown
+        document.getElementById('stats-populated').hidden = false;
+        document.getElementById('stats-initial').hidden = true;
+
+        // obtain spans to replace
+        const total_time = document.getElementById('total-time-metric');
+        const tokens = document.getElementById('num-tokens-metric');
+        const tps = document.getElementById('tps-metric');
+
+        // replace last message metrics
+        var tps_num = metrics_object['tps'];
+        tps.textContent = tps_num;
+        tokens.textContent = metrics_object['completion_tokens'];
+        total_time.textContent = metrics_object['completion_time'];
+
+        // Overall TPS
+        updateTPSAverage(tps_num);
+        
+    }
+
+    
+
+
+
+    function displayMessage(messageData) {
+        const all_messages_div = document.getElementById('all-messages-div');
+        const chatbot_messages = all_messages_div.getElementsByClassName('chatbot-message');        
+        const chatbot_response_div = chatbot_messages[0];
+        const chatbot_message_span = chatbot_response_div.querySelector('span');
+
+        chatbot_message_span.textContent += messageData;
+
+    }
+
+
+    function showPopupPostConnection(message,type,keep_last_message=false) {
+
+        // Connection is done, enable people to submit new entry
+        connectionStatus.isActive = false;
+        toggleButton();
+
+        var all_messages_div = document.getElementById('all-messages-div');
+
+        // If chatbot is thinking, remove it      
+        const chatbot_loading_element = all_messages_div ? all_messages_div.querySelector('ads-loader') : null;
+
+        if (chatbot_loading_element) {
+            const loading_chatbot_message = chatbot_loading_element.closest('.chatbot-message'); // get the div of that ads-loader
+            if (loading_chatbot_message) {all_messages_div.removeChild(loading_chatbot_message);}          
+        }
+
+        /*
+        if (!keep_last_message){
+            // Remove pending chatbot message
+            var first_chatbot_message = all_messages_div.querySelector('.chatbot-message');
+            if (first_chatbot_message) {all_messages_div.removeChild(first_chatbot_message);}          
+        }
+        */
+    
+
+        // Show popup
+        var popup_div = document.getElementById('notification-popup');
+        var popup_span = popup_div.querySelector('#initial-message-span');
+        popup_span.textContent = message;
+        if (type == "info") {
+            popup_div.style.backgroundColor = 'black'; 
+            popup_div.style.color = 'white';             
+        }
+        else if (type == "error") {
+            popup_div.style.backgroundColor = '#f8d7da'; // Light red
+            popup_div.style.color = 'black';             // #721c24 was this dark red, black better
+        }
+        else if (type == "success") {
+            popup_div.style.backgroundColor = 'var(--arm-green)'; 
+            popup_div.style.color = 'black';                      
+        }
+        else if (type == 'warning') {
+            popup_div.style.backgroundColor = 'var(--arm-yellow)'; 
+            popup_div.style.color = 'black';             
+        }
+
+        popup_div.classList.remove('hide-popup');
+        popup_div.classList.add('show-popup');
+    }
+    function hidePopup() {
+        var popup_div = document.getElementById('notification-popup');
+
+        // fade it out
+        popup_div.classList.remove('show-popup');
+        popup_div.classList.add('hide-popup');
+    }
+    
+
+
+
+// Gather all chat messages in the UI to send to the server in an array
+function prepareConversationData() {
+    const messages_div = document.getElementById('all-messages-div');
+    const all_messages = messages_div.children;
+    
+    var conversation_data = [];
+
+    for (let i = 0; i < all_messages.length; i++) {
+        const messages_div = all_messages[i];
+        const message_text = messages_div.querySelector('span').textContent;
+
+        if (messages_div.classList.contains('user-message')) {
+            conversation_data.push({ sender: "user", text: message_text });
+        } else if (messages_div.classList.contains('chatbot-message')) {
+            conversation_data.push({ sender: "model", text: message_text });
+        }
+    }
+
+    // remove useless unfilled model placeholder
+    conversation_data.reverse();
+    conversation_data.pop();
+
+    return conversation_data;
+}
+
+// Add the user's input to the chat history, and spawn a new thinking chatbot response placeholder
+function addUserMessage_andChatbotPlaceholder(user_input) {
+    const all_messages_div = document.getElementById('all-messages-div');
+        
+    const user_div = document.createElement('div');
+    user_div.classList.add('user-message');
+
+    const user_span_for_message = document.createElement('span');
+    user_div.appendChild(user_span_for_message);
+
+    user_span_for_message.textContent = user_input;
+    all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
+
+    const chatbot_div = document.createElement('div');
+    chatbot_div.classList.add('chatbot-message');
+
+    const new_icon = document.createElement('img');
+    {{ $chatbot_icon := printf "%s%s" (replaceRE "/[^/]+/?$" "/" .RelPermalink) "chatbot-icon.png" }}
+    new_icon.setAttribute('src', '{{$chatbot_icon}}');
+    new_icon.setAttribute('style', 'margin-right: 10px;');
+    new_icon.setAttribute('alt', 'Chatbot Icon');
+  
+    const new_loader = document.createElement('ads-loader');
+
+    const chatbot_span_for_message = document.createElement('span');
+
+    chatbot_div.appendChild(new_icon);
+    chatbot_span_for_message.appendChild(new_loader);
+    chatbot_div.appendChild(chatbot_span_for_message);
+    all_messages_div.insertBefore(chatbot_div, all_messages_div.firstChild);
+
+}
+
+// Check textarea content and enable/disable the button
+function toggleButton() {
+    const text_area = document.querySelector('#user-input-for-demo');
+    const submit_button = document.getElementById("submit-button");
+    const submit_icon = submit_button.querySelector("i");
+
+    if (connectionStatus.isActive) {
+        // Make submit icon a spinner, if not already
+        submit_icon.classList.remove('fa-arrow-up');
+        submit_icon.classList.add('fa-spinner');
+        submit_icon.classList.add('fa-spin');
+
+    }
+    else {
+        // Make submit icon a message sender, if not already
+        submit_icon.classList.remove('fa-spinner');
+        submit_icon.classList.remove('fa-spin');
+        submit_icon.classList.add('fa-arrow-up');
+    }
+
+    if (text_area.value.trim() === "") {
+        submit_button.disabled = true;
+    } else {
+        if (!connectionStatus.isActive) { // Don't enable button if there is a live connection. Prevents overdoing messages.
+            submit_button.disabled = false;
+        }
+    }
+}
+
+// Check if textarea input makes a new line
+function hidePopupOnInputHeightIncrease() {
+    const text_area = document.getElementById('user-input-for-demo');
+    const popup = document.getElementById('notification-popup');
+    if (text_area.scrollHeight > 44) {
+        popup.classList.remove('show-popup');
+        popup.classList.add('hide-popup');
+    }
+}
+
+function adjustInputHeight() {
+    const text_area = document.getElementById('user-input-for-demo');
+    text_area.style.height = 'auto'; // Reset height to recalculate
+    text_area.style.height = (text_area.scrollHeight > text_area.clientHeight ? text_area.scrollHeight : text_area.clientHeight) + 'px';
+    hidePopupOnInputHeightIncrease(); // Auto-hide popup if height is above default (multiple lines)
+}
+
+
+
+// Event listener additions to key demo components
+document.addEventListener("DOMContentLoaded", function() {
+    /*
+        Event Listeners
+            1) Reset Chat button        -> clears all messages
+            2) User submits text        -> Clear msg box, add text to UI, send chat history to server
+            3) User enters text         -> enables input button, sets input height dynamically
+    */
+
+    var submit_button = document.getElementById("submit-button");
+    var text_area     = document.getElementById("user-input-for-demo");
+
+    // 'Reset chat'
+    document.querySelector('#reset-demo-txt').addEventListener('click', function() {
+        document.querySelector('#all-messages-div').innerHTML = ""; // Clear all messages
+    });
+
+    // User submits text
+    submit_button.addEventListener('click', function() {
+        const text_area = document.querySelector('#user-input-for-demo');        
+        // Get user's message
+        const user_input = text_area.value;
+        if (user_input === "") {           
+        }
+        else {
+            // Clear message box & toggle button
+            text_area.value = '';
+            adjustInputHeight();
+            toggleButton();
+            text_area.focus();
+
+            // Add new chat message in UI
+            addUserMessage_andChatbotPlaceholder(user_input);
+
+            // Get history of user chatbot interaction to send
+            const conversation_history = prepareConversationData();
+
+            // Send to server via API
+            sendToServer(conversation_history);
+        }
+    });
+
+    // User enters any text in textinput
+    text_area.addEventListener('input', function() {
+        //this.style.height = 'auto';
+        //this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
+        adjustInputHeight();
+        toggleButton();         // enable input button
+    });
+    // User hits enter in textinput
+    text_area.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();     // Prevents the default newline behavior
+            submit_button.click();      // Triggers the click event on the submit button
+        }
+    });
+
+
+    startPingCheck();   // Probe server connection to see if active or not
+    
+
+});
+
+
+
+
+
+
+(function() {
+    const server_location_encoded = '{{ getenv "HUGO_LLM_API" | base64Encode }}';
+
+
+    function startPingCheck() {
+        var entry_div = document.getElementById('user-input-for-demo');
+        var submit_btn= document.getElementById('submit-button');
+        var ping_txt  = document.getElementById('ping-info');
+        var traffic_txt  = document.getElementById('traffic-info');
+
+        connectionStatus.isActive = true;       // reset button status
+        toggleButton();                         // Initial check in case the textarea has content on page load
+
+        const server_location_ping = atob(server_location_encoded)+'/ping'; // decode
+        const startTime = Date.now();
+        fetch(server_location_ping, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        })
+        .then(response => {
+            if (response.ok) {
+                connectionStatus.isActive = false;      // reset button status
+                toggleButton();                    
+                return response.json();
+            } else {
+                throw new Error('Ping failed');
+            }
+        })
+        .then(data => {
+            const endTime = Date.now();
+            var ping = (endTime - startTime);
+            if (ping < 300) {
+               ping = `${ping} ms`; 
+            }
+            else {
+                ping = ping/1000;
+                ping = ping.toFixed(2);
+                ping = `${ping} seconds`; 
+            }
+
+            // Update ping & popup status
+            if (data.cluster_utilization == 'normal') {
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Start chatting now.',"success");
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = 'Server traffic: Low'
+            }
+            else if (data.cluster_utilization == 'high') {
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"success");
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High`   
+            }
+            else if (data.cluster_utilization == 'at-limit') {
+                showPopupPostConnection('Connected to Arm Neoverse V2 based LLM! Traffic is high, delays may occur. Start chatting now.',"warning");
+                //ping_txt.textContent = `Ping: ${ping}`
+                traffic_txt.textContent = `Server traffic: High`   
+            }
+        })
+        .catch(error => {       // Auto errors after ~2 seconds timeout
+    
+            // Disable submit button and entry buttons
+            entry_div.disabled = true;
+            entry_div.style.opacity = '0.75';
+            entry_div.setAttribute('placeholder','No connection');
+
+            showPopupPostConnection('Unable to connect to the server; try refreshing the page or returning later.',"error");
+        });
+    }
+    
+    
+
+    function sendToServer(data) {
+        hidePopup();    // Hide previous messages, to make room for others or clear for responses
+      
+        // Set timeout
+        const controller = new AbortController();
+        let timeout;
+        function resetTimeout() {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => controller.abort(), 5000); // Adjust the timeout duration as needed
+        }
+        resetTimeout(); // Start the timeout right before sending
+
+
+
+        connectionStatus.isActive = true; // set connectionStatus to active
+        toggleButton(); 
+
+        const server_location_chat = atob(server_location_encoded)+'/chat_completion'; // decode
+        fetch(server_location_chat, {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify( data ),
+            signal: controller.signal
+        })
+        .then(response => {
+            resetTimeout(); // Reset the timeout when any response recieved
+            if (response.ok) {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder("utf-8");
+    
+                function readStream() {
+                    return reader.read().then(({ done, value }) => {
+                        if (done) {
+                            clearTimeout(timeout);                  // Clear the timeout at the end of the response.
+                            connectionStatus.isActive = false;      // reset button status
+                            toggleButton();     
+                            return;
+                        }
+    
+                        resetTimeout(); // Reset the timeout with each chunk received
+                        connectionStatus.isActive = true; // set global status variable
+    
+                        // Decode and process the SSE message
+                        const return_message = decoder.decode(value, { stream: true });
+                        const messages_array = return_message.split('\n');
+                        
+                        for (let return_message of messages_array) {
+                            if (return_message) {
+                                const return_json = JSON.parse(return_message.split('data: ')[1]);
+    
+                                if (return_json.message_type == 'initial_response') {
+                                    if (return_json.value == 'NO_RESOURCES_AVAILABLE') {
+                                        showPopupPostConnection("I'm sorry, too many people are trying to access me at once! Try again a bit later.","warning");                                                 
+                                    }
+                                    else if (return_json.value == 'STREAM_STARTING') {
+                                        hidePopup();
+                                    }
+                                }
+                                else if (return_json.message_type === 'chunk') {
+                                    displayMessage(return_json.value);
+                                }
+                                else if (return_json.message_type === 'completion_metadata') {
+                                    updateLLMMetrics(return_json.value);
+                                }
+                                else {
+                                    showPopupPostConnection("Unexpected server response - try a new message or return later.","error");                                                
+                                }    
+                            }
+                        }
+                        return readStream(); // Continue reading the stream
+                    });
+                }
+                return readStream(); // Read the stream
+            } else {
+                console.error('Error sending message to the server');
+                showPopupPostConnection("Problem sending message - try sending a new message.","error");                                      
+            }
+        })
+        .catch(error => { 
+            if (error.name === 'AbortError') { 
+                console.error('Timeout error: Please check your internet connection and try again.',error);
+                showPopupPostConnection('Server timeout - please try again.',"error");
+            }
+            else if (error.name === 'NetworkError') {
+                console.error('Network error: Please check your internet connection and try again.',error);
+                showPopupPostConnection('Network error - please try again.',"error");
+            }
+            else if (error.name === 'TypeError') {
+                console.error('Input stream error: There was a problem with the data stream.',error);
+                showPopupPostConnection('Stream interrupted - try sending a new message.',"warning");
+            }
+            else {
+                console.error('An unexpected error occurred:', error);
+                showPopupPostConnection('Server error - try sending a new message.',"error");
+            }
+        });
+    }
+    
+
+    // Expose functions globally
+    window.sendToServer = sendToServer;
+    window.startPingCheck = startPingCheck;
+  })();
+
+
+
+</script>

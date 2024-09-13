@@ -1,0 +1,230 @@
+{{/*
+Demo page for the llm-chatbot, the first demo created in learn.arm.com.
+
+Where it is used:
+    - learning paths, demo page
+
+Called from:
+    - partials learning-paths/demo.html
+
+Calls to:
+    - the demo's frontmater metadata (.Params)
+
+*/}}
+
+
+
+
+<div class="content-box">
+    <div class="c-row u-gap-1/2 u-flex-nowrap u-padding-top-0">
+        <!-- Left - Demo -->
+        <div class="c-col md:c-col-12 lg:c-col-8 lg:u-display-block ">
+            <h2>Demo</h2>
+            <div id="demo-container">
+                <div id="whaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaat">
+                    <pre>
+                        <code class='language-sh'>
+                            # Initialization commands
+                            aws configure
+                            aws eks --region _region_ update-kubeconfig --name _cluster_name_
+
+                            # Run the Arm KubeCTL migration diagnostic tool
+                            ./armer.sh
+                        </code>
+                    </pre>
+                    <div id="output-message-div" hidden>
+                        <pre>
+                            <code id="output-code" class='language-output output-lines' style="color:grey;">
+                            </code>
+                        </pre>
+                    </div>
+                </div>
+                
+                    <div class="c-row">
+                        <div class="c-col">
+                            <p id="reset-demo-txt">Reset chat</p>
+                        </div>
+                        <div class="c-col">
+                            <ads-button id="submit-button" level="primary">Run</ads-button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- Right - Stats -->
+        <div class="c-col lg:c-col-4 u-hide lg:u-display-block u-flex-shrink-0">
+            <h2>Stats</h2>
+            <div id="stats-initial">
+                <p>Type a message to the chatbot to view metrics.</p> 
+            </div>
+            <div id="stats-populated" hidden>
+                <h5>Arm Support Status</h5>
+                <div style="display: flex;">
+                    <div class="pie-chart"></div>
+                    <div style="margin-left: 16px; margin-top: 16px;">
+                        <p>11 Total containers.<br>
+                        9 - Support Arm.<br>
+                        1 - not supported.<br>
+                        1 - Unknown error.</p>
+                    </div>
+                </div>
+                
+
+                <p><span id="overall-context-metric"></span></p>
+                <br>
+                <h5>Migration methodology</h5>
+                    <p>Given these results, you can continue migrating your Kubernetes cluster to Arm following these steps:</p>
+                    <p><b>1) Replace non-Arm compatible containers</b></p>
+                    <p style="margin-left:16px">The official tensorflow container does not support Arm. However, Arm has created an image that does support Arm Linux servers on <a href="https://www.google.com">Docker Hub here.</a></p>
+
+                    <p><b>2) Mix your cluster architectures</b></p>
+                    <p style="margin-left:16px">You don't have to deploy all your containers to one architecture - deploy what works today on Arm to Arm, and keep your other containers where they are. For more information <a href="https://www.google.com">read here.</a></p>
+                    
+                    <p><b>3) Follow the Arm Migration checklist </b></p>
+                    <p style="margin-left:16px">Read Arm's full tips & tricks on how to migrate your apps to Arm servers <a href="https://www.google.com">here.</a></p>
+                           
+            
+                    
+            </div>
+
+              
+
+        </div>        
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+    function updateMetrics(sentence) {
+        // Show stats if they are not already shown
+        document.getElementById('stats-populated').hidden = false;
+        document.getElementById('stats-initial').hidden = true;
+
+    }
+
+
+    function replaceIcons(div) {
+        div.innerHTML = div.innerHTML
+            .replace(/__icon_check__/g, '<i class="fas fa-check-circle" style="color:var(--arm-green)"></i>')
+            .replace(/__icon_xmark__/g, '<i class="fas fa-times-circle" style="color:var(--arm-orange);"></i>')
+            .replace(/__icon_exclamation__/g, '<i class="fas fa-exclamation-circle" style="color:var(--arm-yellow);"></i>');
+    }
+
+
+
+    function insertRandomSentenceWithStreaming(div) {
+        const charsPerSecond =500;
+
+        const sentence = `Legends:
+__icon_check__ - Supports arm64,  __icon_xmark__ - Does not support arm64,  __icon_exclamation__ - Error
+------------------------------------------------------------
+rancher/mirrored-coredns-coredns:1.10.1 __icon_check__
+rancher/local-path-provisioner:v0.0.24 __icon_check__
+rancher/klipper-helm:v0.8.0-build20230510 __icon_check__
+rancher/klipper-lb:0.4.4 __icon_check__
+rancher/mirrored-library-traefik:2.9.10 __icon_check__
+rancher/mirrored-metrics-server:v0.6.3 __icon_check__
+redis:5.0.5 __icon_check__
+nginx:1.14.2 __icon_check__
+docker.io/mongo:4.0.10 __icon_check__
+tensorflow/tensorflow:2.16.1 __icon_xmark__
+rocket.chat:6.7.0 __icon_exclamation__
+------------------------------------------------------------
+        `
+        const randomDelay = 0;
+        const interval = 1000 / charsPerSecond; // Interval in milliseconds
+    
+        setTimeout(() => {
+            let currentIndex = 0;
+            const intervalId = setInterval(() => {
+                //div.textContent += sentence[currentIndex];
+                //div.innerHTML += sentence[currentIndex];
+                div.innerHTML += sentence.slice(currentIndex, currentIndex + 3);
+                replaceIcons(div);
+                currentIndex += 3; // Move to the next set of 3 characters
+                //currentIndex++;
+                if (currentIndex === sentence.length) {
+                    clearInterval(intervalId);
+                    updateMetrics(sentence);
+                }
+            }, interval);
+        }, randomDelay);
+
+        // Return last message
+        return sentence
+    }
+    
+
+
+
+
+
+
+    function insertLinesWithDelay(div) {
+        const lines = [
+            "Legends:",
+            "__icon_check__ - Supports arm64,  __icon_xmark__ - Does not support arm64,  __icon_exclamation__ - Error",
+            "------------------------------------------------------------",
+            "rancher/mirrored-coredns-coredns:1.10.1 __icon_check__",
+            "rancher/local-path-provisioner:v0.0.24 __icon_check__",
+            "rancher/klipper-helm:v0.8.0-build20230510 __icon_check__",
+            "rancher/klipper-lb:0.4.4 __icon_check__",
+            "rancher/mirrored-library-traefik:2.9.10 __icon_check__",
+            "rancher/mirrored-metrics-server:v0.6.3 __icon_check__",
+            "redis:5.0.5 __icon_check__",
+            "nginx:1.14.2 __icon_check__",
+            "docker.io/mongo:4.0.10 __icon_check__",
+            "tensorflow/tensorflow:2.16.1 __icon_xmark__",
+            "rocket.chat:6.7.0 __icon_exclamation__",
+            "------------------------------------------------------------"
+        ];
+        
+        let totalDelay = 0;
+        
+        lines.forEach((line, index) => {
+            const delay = Math.floor(Math.random() * 4 + 1) * 1000; // Random delay between 1 and 4 seconds
+            totalDelay += delay; // Accumulate delay for each line
+            
+            setTimeout(() => {
+                //div.textContent += line + "\n"; // Append each line with a newline
+                div.innerHTML += line + "<br>"; // Append each line with a line break
+                
+                // Translate icons to icons!
+                replaceIcons(div);
+            }, totalDelay);
+        });
+    }
+    
+
+
+
+
+
+
+
+
+
+
+
+    const submit_button = document.querySelector('#submit-button');
+    submit_button.addEventListener('click', function() {
+
+        // Show output div
+        document.getElementById('output-message-div').removeAttribute('hidden');
+
+        // Start populating
+        var output_div = document.getElementById('output-code');
+        last_message = insertRandomSentenceWithStreaming(output_div);
+        //insertLinesWithDelay(output_div);
+    });
+
+</script>
+
