@@ -107,7 +107,7 @@ Save the project to GitHub:
 git push -u origin master
 ```
 
-The `git push` commmand will trigger the GitHub Action to run. 
+The `git push` command will trigger the GitHub Action to run. 
 
 You can use a browser to view the Actions tab for the repository and see the job. 
 
