@@ -52,6 +52,8 @@ git apply 0001-modified-generate.py-for-cli-and-browser.patch
 git apply 0001-Feat-Enable-int4-quantized-models-to-work-with-pytor.patch
 ./install_requirements.sh
 ```
+{{% notice Note %}} You will need Python version 3.10 to apply these patches. This is the default version of Python installed on an Ubuntu 22.04 Linux machine. {{% /notice %}}
+
 You will now override the installed PyTorch version with a specific version of PyTorch required to take advantage of Arm KleidiAI optimizations:
 
 ```
