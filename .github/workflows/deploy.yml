@@ -42,6 +42,8 @@ jobs:
           hugo --minify
           cp learn-image-sitemap.xml public/learn-image-sitemap.xml
           bin/pagefind --site "public"
+        env:
+          HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
         
       #  Copy SSH Key
       - name: copy key
