@@ -1,5 +1,5 @@
 ---
-title: Verification & Conclusion
+title: Code Verification
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -76,9 +76,3 @@ Square Root Result: 1.41 3.46 6.00 8.94
 ```
 As you can clearly see, the results are exactly the same as in the SSE4.2 example. However, we initialized the vectors in reverse order compared to the SSE4.2 version because NEON loads vectors from LSB to MSB, ensuring consistent output across both architectures. Additionally, the size of the code remains identical, demonstrating that the NEON code is a direct and efficient translation of the SSE4.2 code.
 
-<!-- paragraph about instructions that we may not found equivalents for. Mention that the purpose helps us to better understand the operation -->
-
-## Conclusion and Additional Resources
-In conclusion, successfully porting SIMD code from SSE4.2 to NEON illustrates how well the two architectures can be aligned to perform equivalent operations. SIMD.info was instrumental in this process, providing a centralized and user-friendly resource for finding NEON equivalents to SSE4.2 intrinsics. It saved considerable time and effort by offering detailed descriptions, prototypes, and comparisons directly, eliminating the need for extensive web searches and manual lookups. While porting between vectors of different sizes is more complex, work is already underway to match instructions like SVE/SVE2 with AVX512.
-
-For those interested in further exploration, consider diving into additional resources such as SIMD documentation, architecture manuals, and online forums. These can provide deeper insights into SIMD optimizations and new techniques. Leveraging these resources will enhance your understanding and ability to work with various SIMD architectures efficiently.
