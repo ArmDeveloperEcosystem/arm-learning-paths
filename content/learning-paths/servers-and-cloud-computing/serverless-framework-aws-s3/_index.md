@@ -18,7 +18,7 @@ author_primary: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
-subjects: Cloud Computing
+subjects: Web
 cloud_service_providers: Amazon Web Services
 
 armips:
