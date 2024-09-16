@@ -15,7 +15,7 @@ The following commands help you to work with `vcpkg`. The most important one is 
 #### Activate tools specified by vcpkg-configuration.json
 
 ```bash { output_lines = "2-8" }
-vcpkg activate
+vcpkg-shell activate
 
 warning: vcpkg-artifacts is experimental and may change at any time.
 Artifact                                Version Status    Dependency Summary                                             
@@ -28,7 +28,7 @@ microsoft:tools/ninja-build/ninja       1.10.2  installed            Ninja is a 
 #### Deactivate artifacts specified by vcpkg-configuration.json
 
 ```bash { output_lines = "2-4" }
-vcpkg deactivate
+vcpkg-shell deactivate
 
 warning: vcpkg-artifacts is experimental and may change at any time.
 Deactivating: /Users/myuser/projects/myproject
@@ -37,7 +37,7 @@ Deactivating: /Users/myuser/projects/myproject
 #### Activating tools without vcpkg-configuration.json
 
 ```bash { output_lines = "2-5" }
-vcpkg use cmsis-toolbox
+vcpkg-shell use cmsis-toolbox
 
 warning: vcpkg-artifacts is experimental and may change at any time.
 Artifact                                Version Status    Dependency Summary                                  
@@ -47,7 +47,7 @@ arm:tools/open-cmsis-pack/cmsis-toolbox 2.0.0   installed            Arm distrib
 #### Retrieve all available versions of a tool
 
 ```bash { output_lines = "2-14" }
-vcpkg use open-cmsis-pack
+vcpkg-shell use open-cmsis-pack
 
 warning: vcpkg-artifacts is experimental and may change at any time.
 error: Unable to resolve artifact: open-cmsis-pack
@@ -68,7 +68,7 @@ Possible matches:
 #### For example, tools
 
 ```bash { output_lines = "2-16" }
-vcpkg find artifact tools
+vcpkg-shell find artifact tools
 
 warning: vcpkg-artifacts is experimental and may change at any time.
 Artifact                                    Version    Summary                                             
@@ -85,7 +85,7 @@ arm:tools/arm/uv2csolution                  v1.0.0     *.uvprojx/*.uvmpw to csol
 #### For example, compilers
 
 ```bash { output_lines = "2-9" }
-vcpkg find artifact compilers
+vcpkg-shell find artifact compilers
 
 warning: vcpkg-artifacts is experimental and may change at any time.
 Artifact                                                         Version        Summary                              
@@ -100,19 +100,19 @@ arm:compilers/arm/armclang                                       6.20.0         
 #### Create a new vcpkg-configuration.json file
 
 ```shell
-vcpkg new --application
+vcpkg-shell new --application
 ```
 
 #### Add artifact to vcpkg-configuration.json file
 
 ```shell
- vcpkg add artifact cmake
+ vcpkg-shell add artifact cmake
 ```
 
 #### Remove artifact to vcpkg-configuration.json file
 
 ```shell
- vcpkg remove microsoft:tools/kitware/cmake
+ vcpkg-shell remove microsoft:tools/kitware/cmake
 ```
 
 #### Update a registry
@@ -120,7 +120,7 @@ vcpkg new --application
 For example, the `arm` registry:
 
 ```shell
-vcpkg x-update-registry arm
+vcpkg-shell x-update-registry arm
 ```
 
 Before using the Arm Compiler, you need to activate a license. The next step shows how to do that.
