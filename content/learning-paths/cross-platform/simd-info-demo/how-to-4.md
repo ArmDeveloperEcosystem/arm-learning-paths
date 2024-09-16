@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Using SIMD.info to Find NEON Equivalents
+### Using SIMD.info to Find NEON Equivalents
 Now that you have a clear view of the example, you can start the process of porting the code to NEON. This is where [SIMD.info](https://simd.info/) comes in. In SIMD programming, the primary concern is usually the calculations, as they constitute the core workload of the program. Ensuring that these calculations are correctly ported and optimized is crucial for maintaining performance and correctness.
 
 For the operations in your SSE4.2 example, you have the following intrinsics:
@@ -28,7 +28,7 @@ To gain a deeper understanding of how these intrinsics work and to get detailed 
 
 Now that you have found the NEON equivalents for each SSE4.2 intrinsic, you're ready to begin porting the code. Understanding these equivalents is key to ensuring that the performance and correctness of the calculations remain intact as you switch between SIMD engines.
 
-## Step-by-Step Porting
+### Step-by-Step Porting
 1. The first step is to change the loading process to follow NEON's method for initializing vectors. Unlike SSE4.2, where we use intrinsics like _mm_set_ps, in NEON, we can directly define the vector using curly braces {}. This is simpler and aligns with how NEON works with floating-point vectors.
 2. Next, you will replace the SSE4.2 intrinsics with the NEON equivalents we identified earlier. The key is to ensure that the operations perform the same tasks, such as comparison, addition, multiplication, and square root calculations.
 3. Finally, modify the storing process to match NEON’s way of moving data from vectors to memory. In NEON, you use functions like vst1q_f32 for storing 128-bit floating-point vectors and [**vst1q_u32**](https://simd.info/c_intrinsic/vst1q_u32/) for storing 128-bit integer vectors.

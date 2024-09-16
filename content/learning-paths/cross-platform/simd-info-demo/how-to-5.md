@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Verifying the Ported Code
+### Verifying the Ported Code
 After successfully porting the code from SSE4.2 to NEON, it's time to verify that the functionality remains intact and performs as expected. Porting SIMD code involves translating low-level operations, and it's critical to ensure that the behavior is consistent in both performance and results. To do this, you will write a simple program that mimics the original SSE operations but now uses NEON intrinsics. Create a new file for the ported NEON code named calculation_sse.c with the contents shown below:
 ```C
 #include <arm_neon.h>

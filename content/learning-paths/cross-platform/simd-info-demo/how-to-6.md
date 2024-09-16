@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## Handling Intrinsics Without Direct Equivalents
+### Handling Intrinsics Without Direct Equivalents
 As we successfully port the code from SSE4.2 to NEON, we observe that certain instructions translate seamlessly. However, there are cases where direct equivalents for some intrinsics may not be readily available across architectures. For example, the [**_mm_hadd_ps**](https://simd.info/c_intrinsic/_mm_hadd_ps/) intrinsic from SSE4.2, which performs horizontal addition of packed single-precision floating-point elements, does not have a direct counterpart in NEON. 
 
 In this situation, SIMD.info’s purpose description becomes essential for understanding the operation at a high level. By analyzing the core functionality of **_mm_hadd_ps**, we can implement an alternative solution using available NEON intrinsics. For **_mm_hadd_ps**, which combines the elements of two vectors in a way that sums adjacent elements both horizontally and vertically, we break down the operation into a series of steps. For instance, to achieve the same result, we extract the [lower](https://simd.info/c_intrinsic/vget_low_f32/) and [upper](https://simd.info/c_intrinsic/vget_high_f32/) halves of the vectors, perform horizontal additions on each half separately using [vpadd_f32](https://simd.info/c_intrinsic/vpadd_f32/), and then [combine](https://simd.info/c_intrinsic/vcombine_f32/) the results into a single vector. This approach ensures that the intended horizontal addition operation is preserved, even though there is no direct one-to-one match between SSE4.2 and NEON for this specific instruction.
@@ -89,7 +89,7 @@ NEON Result: 3.00 7.00 11.00 15.00
 
 The results match, although the order differs due to how the data is handled in each architecture. SIMD.info was especially helpful in this process, providing detailed descriptions and examples that guided the translation of complex intrinsics between different SIMD architectures.
 
-## Conclusion and Additional Resources
+### Conclusion and Additional Resources
 In conclusion, porting SIMD code from SSE4.2 to NEON demonstrates how well the two architectures can be aligned to perform equivalent operations. SIMD.info was instrumental in this process, providing a centralized and user-friendly resource for finding NEON equivalents to SSE4.2 intrinsics. It saved considerable time and effort by offering detailed descriptions, prototypes, and comparisons directly, eliminating the need for extensive web searches and manual lookups. While porting between vectors of different sizes is more complex, work is already underway to match instructions like SVE/SVE2 with AVX512.
 
 For those interested in further exploration, consider diving into additional resources such as SIMD documentation, architecture manuals, and online forums. These can provide deeper insights into SIMD optimizations and new techniques. Leveraging these resources will enhance your understanding and ability to work with various SIMD architectures efficiently.
