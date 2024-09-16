@@ -16,4 +16,4 @@ In the previous [Learning Path](/learning-paths/servers-and-cloud-computing/serv
 
 Although manual resource provisioning has certain advantages, it can become increasingly challenging as you deploy applications to the cloud. As your solutions expand and grow in complexity, the difficulties of manual provisioning multiply. This is where the Serverless Framework becomes valuable, providing a streamlined and efficient method for managing cloud resources.
 
-In this learning path, you will learn how to extend the previous example by a website that interacts with AWS Lambda functions and deploy it to an S3 bucket using the Serverless Framework. This is similar to what you learned in this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_s3).
+In this learning path, you will learn how to extend the previous example through a website that interacts with AWS Lambda functions and deploy it to an S3 bucket using the Serverless Framework. This is similar to what you learned in this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_s3).
