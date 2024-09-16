@@ -5,21 +5,19 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-### Objective
-In this section you will deploy the resources you declared earlier.
+In this section you will deploy the resources you declared in the previous section.
 
 ### Deployment
-To deploy the resources, open the terminal or command prompt and navigate to AwsServerlessDynamoDbLambda folder. Then invoke the following commands:
+To deploy the resources, open the terminal or command prompt and navigate to `AwsServerlessDynamoDbLambda` folder. Then invoke the following commands:
 
 ```console
 npm install --save-dev   
 serverless deploy
 ```
 
-The first command will save required dependencies (declared in project.json). The second command will deploy the AWS resources. After the deployment you will see the following output:
+The first command will save required dependencies declared in `project.json`. The second command will deploy the AWS resources. After the deployment you will see the following output:
 
-```console
+```output
 Deploying "AwsServerlessDynamoDbLambdaS3" to stage "dev" (us-east-1)
 
 ⠹ Packaging
@@ -40,7 +38,7 @@ functions:
   getAverageTemperature: AwsServerlessDynamoDbLambdaS3-dev-getAverageTemperature (83 kB)
 ```
 
-Wait for the deployment to complete, and then type
+Wait for the deployment to complete, and then type:
 
 ```console
 serverless info --verbose
@@ -68,7 +66,7 @@ Stack Outputs:
   ServerlessDeploymentBucketName: awsserverlessdynamodblamb-serverlessdeploymentbuck-jsu0xxspizjo
 ```
 
-Use the WebsiteURL to open your website:
+Use the `WebsiteURL` to open your website:
 
 ![fig1](figures/01.png)
 
