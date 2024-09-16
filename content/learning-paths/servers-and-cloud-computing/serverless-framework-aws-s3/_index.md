@@ -1,9 +1,9 @@
 ---
-title: Deploy a static website to Amazon S3 and integrate with with AWS Lambda and DynamoDB using the Serverless Framework
+title: Deploy a static website to Amazon S3 and integrate with AWS Lambda and DynamoDB using the Serverless Framework
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for software developers interested in learning how to deploy serverless applications using the Serverless Framework and Amazon Web Services. It automates several manual deployment steps that developers typically need to perform when deploying microservice-based or IoT applications.
+who_is_this_for: This learning path is for software developers interested in learning how to deploy serverless applications using the Serverless Framework and Amazon Web Services. 
 
 learning_objectives: 
     - Create a multi-resource Serverless Framework solution.
