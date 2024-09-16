@@ -8,10 +8,10 @@ layout: learningpathall
 
 ### Service Declaration
 In this section, you will declare a serverless service composed of the following AWS resources:
-	1. DynamoDB Table - This will store hypothetical sensor data, including timestamps and randomly generated temperatures.
-	2. Two AWS Lambda Functions - The first function will write temperatures to the DynamoDB table, and the second will retrieve the average temperature value.
-	3. IAM Role - A set of permissions that enable the AWS Lambda functions to write to and read data from the DynamoDB table.
-	4. S3 Bucket - A bucket to host the static website.
+  1. DynamoDB Table - This will store hypothetical sensor data, including timestamps and randomly generated temperatures.
+  2. Two AWS Lambda Functions - The first function will write temperatures to the DynamoDB table, and the second will retrieve the average temperature value.
+  3. IAM Role - A set of permissions that enable the AWS Lambda functions to write to and read data from the DynamoDB table.
+  4. S3 Bucket - A bucket to host the static website.
 
 Additionally, the service will use the Serverless S3 Sync plugin to deploy the static website to the S3 bucket. The website will contain two buttons and a text box: the buttons will allow the user to invoke the Lambda functions, and the text box will display the average temperature stored in the DynamoDB table.
 
