@@ -15,7 +15,7 @@ In this section, you will declare a serverless service composed of the following
 
 Additionally, the service will use the Serverless S3 Sync plugin to deploy the static website to the S3 bucket. The website will contain two buttons and a text box: the buttons will allow the user to invoke the Lambda functions, and the text box will display the average temperature stored in the DynamoDB table.
 
-We will also add JavaScript code that reads the API endpoints of the two AWS Lambda functions and dynamically updates the static website.
+You will also add JavaScript code that reads the API endpoints of the two AWS Lambda functions and dynamically updates the static website.
 
 ### Declare a service
 To create a new serverless service, open the command prompt or terminal and type the following:
@@ -168,35 +168,35 @@ package:
   exclude:
     - node_modules/**
 ```
-The above declaration builds upon the configuration you created earlier in this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb/). Specifically, it includes a declaration for a DynamoDB table, an IAM role, and two Lambda functions:
-	1.	writeTemperatures - its handler is set to handler.writeTemperatures. This function is triggered through an HTTP POST event.
-	2.	getAverageTemperature -i ts handler is set to handler.getAverageTemperature. This function is triggered through an HTTP GET event.
+The declaration above builds upon the configuration you created earlier in this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb/). Specifically, it includes a declaration for a DynamoDB table, an IAM role, and two Lambda functions:
+ * `writeTemperatures` - its handler is set to handler.writeTemperatures. This function is triggered through an HTTP POST event.
+ * `getAverageTemperature` -its handler is set to handler.getAverageTemperature. This function is triggered through an HTTP GET event.
 
-There are a few new additions. Under the Resources section, we have the S3 Bucket configuration, which specifies the following:
-* WebsiteBucket - creates an S3 bucket named iot-temperature-service-${self:provider.stage}-website, where ${self:provider.stage} dynamically inserts the deployment stage (e.g., dev, prod).
-* WebsiteConfiguration - configures the S3 bucket to host a static website, specifying index.html as the main page and error.html as the error page.
-* OwnershipControls - ensures that the bucket enforces ownership for all objects (BucketOwnerEnforced).
-* PublicAccessBlockConfiguration - disables public access block settings, allowing the bucket to serve content publicly.
-* WebsiteBucketPolicy - sets a bucket policy that grants public read (s3:GetObject) access to all objects within the S3 bucket.
+There are a few new additions. Under the Resources section, you have the S3 Bucket configuration, which specifies the following:
+* WebsiteBucket - creates an S3 bucket named `iot-temperature-service-${self:provider.stage}-website`, where `${self:provider.stage}` dynamically inserts the deployment stage (e.g., dev, prod).
+* `WebsiteConfiguration` - configures the S3 bucket to host a static website, specifying `index.html` as the main page and error.html as the error page.
+* `OwnershipControls` - ensures that the bucket enforces ownership for all objects.
+* `PublicAccessBlockConfiguration` - disables public access block settings, allowing the bucket to serve content publicly.
+* `WebsiteBucketPolicy` - sets a bucket policy that grants public read access to all objects within the S3 bucket.
 
 These settings are required to make the website publicly available.
 
-Next, we define outputs for the Serverless deployment:
-* WriteTemperaturesEndpoint and GetAverageTemperatureEndpoint - provide the full URLs of the API Gateway endpoints for the two AWS Lambda functions.
-* WebsiteURL - generates the URL for the S3-hosted static website.
+Next, you define outputs for the Serverless deployment:
+* `WriteTemperaturesEndpoint` and `GetAverageTemperatureEndpoint` - provide the full URLs of the API Gateway endpoints for the two AWS Lambda functions.
+* `WebsiteURL` - generates the URL for the S3-hosted static website.
 
-Additionally, we define the Plugins section:
-* serverless-s3-sync - syncs local files from the website directory to the specified S3 bucket (iot-temperature-service-${self:provider.stage}-website) during deployment.
-* serverless-plugin-scripts - allows custom scripts to be run before deployment.
+In the Plugins section, you define:
+* `serverless-s3-sync` - syncs local files from the website directory to the specified S3 bucket during deployment.
+* `serverless-plugin-scripts` - allows custom scripts to be run before deployment.
 
-Then, we specify custom settings for the plugins:
-* custom: Defines custom settings for the S3 sync plugin.
-* s3Sync: Specifies the local directory (website) to be synced to the S3 bucket.
+Then, you specify custom settings for the plugins:
+* `custom`: Defines custom settings for the S3 sync plugin.
+* `s3Sync`: Specifies the local directory (website) to be synced to the S3 bucket.
 
-Lastly, we exclude the node_modules directory from the deployment package using package.exclude to reduce the package size.
+Lastly, you will exclude the `node_modules` directory from the deployment package using `package.exclude` to reduce the package size.
   
 ### handler.js
-You will now implement the two AWS Lambda functions. Open the `handler.js`, and replace its contents with the following code:
+You will now implement the two AWS Lambda functions. Open the file `handler.js`, and replace its contents with the following code:
 
 ```JavaScript
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
@@ -272,9 +272,9 @@ export const getAverageTemperature = async (event) => {
 ```
 
 The code defines the two AWS Lambda functions that interact with a DynamoDB table:
-	1.	writeTemperatures - writes a batch of random temperature records to the DynamoDB table.
-	2.	getAverageTemperature - retrieves the last N temperature records from the table, calculates the average, and returns it.
+ 1. `writeTemperatures` - writes a batch of random temperature records to the DynamoDB table.
+ 2. `getAverageTemperature` - retrieves the last N temperature records from the table, calculates the average, and returns it.
 
-They are the same as in this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb/). The only difference is that we now have a helper function, **createResponse**, which is a utility function used to standardize HTTP responses for AWS Lambda functions. This function formats the response to ensure it includes the necessary HTTP status code, headers, and body, making it easier to handle CORS (Cross-Origin Resource Sharing) and JSON responses consistently across different Lambda functions. CORS is configured because the S3 bucket domain might differ from the AWS Lambda function endpoints.
+They are the same as in this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb/). The only difference is that you now have a helper function, **createResponse**, which is a utility function used to standardize HTTP responses for AWS Lambda functions. This function formats the response to ensure it includes the necessary HTTP status code, headers, and body, making it easier to handle CORS (Cross-Origin Resource Sharing) and JSON responses consistently across different Lambda functions. CORS is configured because the S3 bucket domain might differ from the AWS Lambda function endpoints.
 
 The service configuration is now ready, and you can move on to prepare the website and supporting files.
