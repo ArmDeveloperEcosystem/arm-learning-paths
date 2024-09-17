@@ -19,7 +19,7 @@ Follow this three-step process to install RunsOn:
     
     Once you have your key, proceed with the installation guide by selecting the AWS region you would like to use, creating the CloudFormation stack, and installing the GitHub app. 
 
-3. At the end, follow the link to the deployed AppRunner service endpoint, and you should see a page indicating that your installation is successful. 
+3. At the end, follow the link to the deployed App Runner service endpoint, and you should see a page indicating that your installation is successful. 
 
     At this point you can start using RunsOn to spawn runners for your GitHub Actions workflows.
 

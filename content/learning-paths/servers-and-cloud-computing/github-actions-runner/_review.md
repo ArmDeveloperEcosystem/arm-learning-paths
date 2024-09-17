@@ -29,7 +29,7 @@ review:
             - "Yes"
         correct_answer: 2                   
         explanation: >
-            RunsOn is free for non-commerical projects. You pay the cost of the EC2 instances that are used and a small free for the  AWS AppRunner service. 
+            RunsOn is free for non-commerical projects. You pay the cost of the EC2 instances that are used and a small free for the  AWS App Runner service. 
 
     - questions:
         question: >

@@ -32,7 +32,7 @@ It is common to find corner cases and bugs on Screen Space Reflection at the sam
   {{< tab header="Example 1: RT" title="Example 1: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_1_rt.png">}}{{< /tab >}}
   {{< tab header="Example 2: SSR" title="Example 2: Screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_2_ssr.png">}}{{< /tab >}}
   {{< tab header="Example 2: RT" title="Example 2: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_2_rt.png">}}{{< /tab >}}
-  {{< tab header="Example 3: SSR" title="Example 3: Screen space teflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_ssr.png">}}{{< /tab >}}
+  {{< tab header="Example 3: SSR" title="Example 3: Screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_ssr.png">}}{{< /tab >}}
   {{< tab header="Example 3: RT" title="Example 3: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_3_rt.png">}}{{< /tab >}}
   {{< tab header="Example 4: SSR" title="Example 4: Screen space reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_4_ssr.png">}}{{< /tab >}}
   {{< tab header="Example 4: RT" title="Example 4: Ray tracing reflections" img_src="/learning-paths/smartphones-and-mobile/ray_tracing/images/reflections_artifacts_4_rt.png">}}{{< /tab >}}
