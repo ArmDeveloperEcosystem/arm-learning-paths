@@ -13,25 +13,25 @@
 review:
     - questions:
         question: >
-            When tuning a thread count configuration parameter like innodb_read_io_threads or innodb_write_io_threads. What can often be a good starting value?
+            How do you select the number of huge pages that should be used?
         answers:
-            - "One"
-            - "Total number of CPUs on the system"
-            - "Half the number of CPUs on the system"
+            - "Set to the size of the redo log file"
+            - "Divide the buffer pool size by the huge page size"
+            - "Set to the buffer pool size"
         correct_answer: 2                     
         explanation: >
-            The total number of CPUs is a good starting point because it can ensure you are using all compute resources on the system. 
+            We divide by the bugger pool size because we want as much huge page space as there is buffer pool space. 
 
     - questions:
         question: >
             What is the recommended size for the MySQL buffer pool?
         answers:
-            - "Up to 40% of system memory"
-            - "Up to 20% of system memory"
-            - "Up to 80% of system memory"
+            - "Up to 30-40% of system memory"
+            - "Up to 10-20% of system memory"
+            - "Up to 70-80% of system memory"
         correct_answer: 3
         explanation: >
-            The MySQL documentation suggests up to 80% of system memory. Depending on the use case, it's also possible that a much smaller percentage performs just as well as 80%.
+            The MySQL documentation suggests up to 80% of system memory. Depending on the use case, it's also possible that a much smaller percentage performs just as well as 80%. Buffer pool size is also automatically set to 75% of system memory if you use the innodb_dedicated_server option (See MySQL docs).
                
     - questions:
         question: >
