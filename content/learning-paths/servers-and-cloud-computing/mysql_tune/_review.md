@@ -20,7 +20,7 @@ review:
             - "Set to the buffer pool size"
         correct_answer: 2                     
         explanation: >
-            We divide by the bugger pool size because we want as much huge page space as there is buffer pool space. 
+            You should divide the buffer pool size by the huge page size because you want as much huge page space as there is buffer pool space. 
 
     - questions:
         question: >
