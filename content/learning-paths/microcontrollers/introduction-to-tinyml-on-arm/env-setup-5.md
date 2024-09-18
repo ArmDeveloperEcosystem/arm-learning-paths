@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Environment Setup for TinyML Development on Arm"
+title: "Environment Setup"
 
 weight: 6 # 1 is first, 2 is second, etc.
 
@@ -77,8 +77,7 @@ edge-impulse-daemon
 ```
 Follow the prompts to log in.
 
-4. Verify Setup
-Connect to your device
+4. Verify Setup: Connect to your device
 
 ```console
 edge-impulse-run-impulse --api-key YOUR_API_KEY

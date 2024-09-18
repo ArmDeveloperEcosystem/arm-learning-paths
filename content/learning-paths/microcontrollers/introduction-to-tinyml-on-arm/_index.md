@@ -1,9 +1,9 @@
 ---
-title: Introduction to TinyML on Arm using PyTorch v2.0 and Executorch
+title: Introduction to TinyML on Arm using PyTorch v2.x and Executorch
 
 minutes_to_complete: 40
 
-who_is_this_for: This learning module is tailored for developers, engineers, and data scientists who are new to TinyML and interested in exploring its potential for edge AI. If you have an interest in deploying machine learning models on low-power, resource-constrained devices, this course will help you get started using PyTorch v2.0 and Executorch on Arm-based platforms.
+who_is_this_for: This learning module is tailored for developers, engineers, and data scientists who are new to TinyML and interested in exploring its potential for edge AI. If you have an interest in deploying machine learning models on low-power, resource-constrained devices, this course will help you get started using PyTorch v2.x and Executorch on Arm-based platforms.
 
 learning_objectives: 
     - Identify TinyML and how it's different from the AI you might be used to.
@@ -18,7 +18,9 @@ learning_objectives:
 prerequisites:
     - Basic knowledge of machine learning concepts.
     - Understanding of IoT and embedded systems (helpful but not required).
-
+    - A Linux host machine or VM running Ubuntu 20.04 or higher, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
+    - Target device, preferably Cortex-M boards but you can use Cortex-A7 boards as well.
+ 
 author_primary: Dominica Abena O. Amanfo
 
 ### Tags
@@ -36,7 +38,7 @@ tools_software_languages:
     - Grove - Vision AI Module V2
     - Arm Virtual Hardware
     - Python
-    - PyTorch v2.0
+    - PyTorch v2.x
     - Executorch
     - Arm Compute Library 
     - GCC

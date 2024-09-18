@@ -1,6 +1,6 @@
 ---
-title: Benefits of TinyML for Edge Computing on Arm Devices
-weight: 4
+title: Troubleshooting and Best Practices
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
