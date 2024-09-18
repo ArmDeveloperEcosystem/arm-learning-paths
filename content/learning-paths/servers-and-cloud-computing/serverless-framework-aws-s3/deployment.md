@@ -5,9 +5,11 @@ weight: 5
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-In this section you will deploy the resources you declared in the previous section.
+
 
 ### Deployment
+In this section you will deploy the resources you declared in the previous section.
+
 To deploy the resources, open the terminal or command prompt and navigate to `AwsServerlessDynamoDbLambda` folder. Then invoke the following commands:
 
 ```console
@@ -15,7 +17,7 @@ npm install --save-dev
 serverless deploy
 ```
 
-The first command will save required dependencies declared in `project.json`. The second command will deploy the AWS resources. After the deployment you will see the following output:
+The first command saves the required dependencies declared in `project.json`. The second command deploys the AWS resources. After the deployment, you will see the following output:
 
 ```output
 Deploying "AwsServerlessDynamoDbLambdaS3" to stage "dev" (us-east-1)
@@ -44,7 +46,7 @@ Wait for the deployment to complete, and then type:
 serverless info --verbose
 ```
 
-This command will generate the following output:
+This command generates the following output:
 ```output
 service: AwsServerlessDynamoDbLambdaS3
 stage: dev
@@ -70,7 +72,7 @@ Use the `WebsiteURL` to open your website:
 
 ![fig1](figures/01.png)
 
-Click the Write Temperatures button to invoke the Lambda function that writes records to the DynamoDB. Then click the Get Average Temperature button to retrieve the average value. It will be displayed in the page.
+Click the **Write Temperatures** button to invoke the Lambda function that writes records to the DynamoDB. Then click the **Get Average Temperature** button to retrieve the average value. It is displayed on the page.
 
 To clean up the resources you created, you can use a single command:
 
@@ -81,7 +83,7 @@ serverless remove
 ### Summary
 In this Learning Path, you built a serverless solution that integrates AWS Lambda, DynamoDB, and S3 to create a scalable, cloud-based application with minimal operational overhead. Specifically, you configured and deployed essential AWS resources, including a DynamoDB table to store temperature data, two Lambda functions to manage this data (writing temperatures and calculating the average), and an S3 bucket to host a static website.
 
-The Serverless Framework allowed you to automate the deployment and management of these AWS resources, reducing manual setup and ensuring consistent infrastructure as code. Using custom scripts, you dynamically updated the index.js file on the website with the actual API endpoints generated during deployment, ensuring seamless integration between the front-end and back-end services.
+The Serverless Framework allowed you to automate the deployment and management of these AWS resources, reducing manual setup and ensuring consistent infrastructure as code. Using custom scripts, you dynamically updated the index.js file on the website with the API endpoints generated during deployment, ensuring seamless integration between the frontend and backend services.
 
 The S3 bucket was configured to host a static website, providing a user interface that allows interaction with the deployed Lambda functions through a web page.
 

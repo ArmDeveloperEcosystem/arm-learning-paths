@@ -32,11 +32,11 @@ review:
             - To compile all source files before deploying them to AWS.
             - To dynamically update the index.js file with actual API endpoint URLs before deployment.
             - To create a backup of all project files before starting the deployment process.
-            - To validate the serverless.yml file for syntax errors..
+            - To validate the serverless.yml file for syntax errors.
 
         correct_answer: 2                    
         explanation: >
-            We used custom prepare.js file to implement the script, which dynamically updated the index.js file with actual API endpoint URLs before deployment.
+            You used custom prepare.js file to implement the script, which dynamically updated the index.js file with actual API endpoint URLs before deployment.
 
 
 # ================================================================================
