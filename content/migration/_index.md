@@ -49,11 +49,11 @@ Google GCP offers a varity of [virtual machine instances with Arm processors](ht
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
-Microsoft Azure offers a varity of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/dpsv5-dpdsv5-series). The largest instance has 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
+Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/dpsv5-dpdsv5-series). The largest instance has 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| psv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized intstances. |
+| psv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized instances. |
 | psv6      | Neoverse-N2  | Dpsv6, Epsv6, Fsv6 | Cobalt processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized). |
 
   {{< /tab >}}
@@ -98,6 +98,7 @@ You can quickly find out if software dependencies are available for Arm using th
 The below resources are curated to address migration challenges on specific cloud providers. Look through them for additional context.
 - [Porting architecture specific intrinsics](https://learn.arm.com/learning-paths/cross-platform/intrinsics/) - perfect for porting intrinsics from another architecture.
 - [Arm software install guides](https://learn.arm.com/install-guides) - good for quickly installing common tools and software.
+- [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines
 - [Arm Infrastructure Solutions blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/) - an Arm-specific technical blog.
 - [Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) - general tutorials for Arm servers. You can search for specific cloud service providers, including [AWS](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=aws/#), [Google Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=google-cloud/#), [Microsoft Azure](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=microsoft-azure/#), and [Oracle](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=oracle/#).
      
