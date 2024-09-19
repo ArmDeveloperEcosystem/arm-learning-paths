@@ -98,7 +98,7 @@ You can quickly find out if software dependencies are available for Arm using th
 The below resources are curated to address migration challenges on specific cloud providers. Look through them for additional context.
 - [Porting architecture specific intrinsics](https://learn.arm.com/learning-paths/cross-platform/intrinsics/) - perfect for porting intrinsics from another architecture.
 - [Arm software install guides](https://learn.arm.com/install-guides) - good for quickly installing common tools and software.
-- [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines
+- [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines.
 - [Arm Infrastructure Solutions blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/) - an Arm-specific technical blog.
 - [Arm Learning Paths for Servers and Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/) - general tutorials for Arm servers. You can search for specific cloud service providers, including [AWS](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=aws/#), [Google Cloud](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=google-cloud/#), [Microsoft Azure](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=microsoft-azure/#), and [Oracle](https://learn.arm.com/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=oracle/#).
      
