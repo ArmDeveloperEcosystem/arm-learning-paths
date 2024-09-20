@@ -18,7 +18,7 @@ Cloud providers offer Arm instances based on Neoverse processors. For example:
 - [Microsoft Azure](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/)
 - [Oracle Cloud](https://www.oracle.com/cloud/compute/arm/)
 - [Equinix](https://deploy.equinix.com/product/servers/c3-large-arm64/)
-- [Scaleway](https://www.scaleway.com/en/amp2-instances/)
+- [Scaleway](https://www.scaleway.com/en/cost-optimized-instances-based-on-arm/)
 - [Hetzner Cloud](https://www.hetzner.com/news/arm64-cloud)
 
 Free tier offers are currently available.

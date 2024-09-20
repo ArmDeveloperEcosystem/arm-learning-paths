@@ -19,7 +19,7 @@ author_primary: Dawid Borycki
 ### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers: Amazon Web Services
+cloud_service_providers: AWS
 
 armips:
     - Neoverse
@@ -31,7 +31,7 @@ tools_software_languages:
 operatingsystems:
     - Linux
     - Windows
-    - MacOS
+    - macOS
 
 
 ### FIXED, DO NOT MODIFY
