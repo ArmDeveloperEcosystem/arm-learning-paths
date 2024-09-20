@@ -3174,3 +3174,17 @@ uQ
 vulkan
 vulkanised
 writeTemperaturesUrl
+IPython
+NeuralNetwork
+Sigmoid
+Softmax
+Tanh
+backpropagation
+diskio
+feedforward
+logits
+prem
+softmax
+subclassing
+tanh
+torchsummary

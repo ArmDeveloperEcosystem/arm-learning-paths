@@ -52,7 +52,6 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - LLM: 2
 - Matter: 1
-- ML: 1
 - MXNet: 1
 - Neon: 1
 - Porcupine: 1
