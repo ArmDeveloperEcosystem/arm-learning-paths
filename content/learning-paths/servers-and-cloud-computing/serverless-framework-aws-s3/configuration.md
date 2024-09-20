@@ -8,17 +8,17 @@ layout: learningpathall
 
 ### Service Declaration
 In this section, you will declare a serverless service composed of the following AWS resources:
-  1. DynamoDB Table - This will store hypothetical sensor data, including timestamps and randomly generated temperatures.
-  2. Two AWS Lambda Functions - The first function will write temperatures to the DynamoDB table, and the second will retrieve the average temperature value.
-  3. IAM Role - A set of permissions that enable the AWS Lambda functions to write to and read data from the DynamoDB table.
-  4. S3 Bucket - A bucket to host the static website.
+  * DynamoDB Table - this stores hypothetical sensor data, including timestamps and randomly-generated temperatures.
+  * Two AWS Lambda Functions - the first function writes temperatures to the DynamoDB table, and the second retrieves the average temperature value.
+  * IAM Role - a set of permissions that enable the AWS Lambda functions to write to and read data from the DynamoDB table.
+  * S3 Bucket - a bucket that hosts the static website.
 
-Additionally, the service will use the Serverless S3 Sync plugin to deploy the static website to the S3 bucket. The website will contain two buttons and a text box: the buttons will allow the user to invoke the Lambda functions, and the text box will display the average temperature stored in the DynamoDB table.
+Additionally, the service uses the Serverless S3 Sync plugin to deploy the static website to the S3 bucket. The website contains two buttons and a text box: the buttons allow the user to invoke the Lambda functions, and the text box displays the average temperature stored in the DynamoDB table.
 
 You will also add JavaScript code that reads the API endpoints of the two AWS Lambda functions and dynamically updates the static website.
 
 ### Declare a service
-To create a new serverless service, open the command prompt or terminal and type the following:
+To create a new serverless service, open the command prompt or terminal and enter the following:
 
 ```console
 serverless
@@ -26,13 +26,13 @@ serverless
 
 In the wizard that appears, proceed as follows:
 1.	Select the **AWS / Node.js / Simple Function** template.
-2.	In the *Name Your Project field*, type **AwsServerlessDynamoDbLambdaS3**.
-3.	In the *Please login/register* or enter your license key section, select **Login/Register** and sign in to the Serverless Framework.
-4.	In the *Create Or Select An Existing App section*, select **Skip Adding An App**.
+2.	In the *Name Your Project* field, type **AwsServerlessDynamoDbLambdaS3**.
+3.	In the *Please login/register* or *enter your license key* section, select **Login/Register** and sign in to the Serverless Framework.
+4.	In the *Create Or Select An Existing App* section, select **Skip Adding An App**.
 
-The tool will generate the project composed of the following files:
-1.	`serverless.yml` - this contains the declaration of the infrastructure and services for a serverless application.
-2.	`handler.js` - you use this file to implement the core functionality of your serverless application, handling business logic and interactions with other services. Here, you will use this file to implement Lambda functions.
+The tool generates the project composed of the following files:
+*	`serverless.yml` - this contains the declaration of the infrastructure and services for a serverless application.
+*	`handler.js` - you use this file to implement the core functionality of your serverless application, handling business logic and interactions with other services. Here, you will use this file to implement Lambda functions.
 
 ### serverless.yml
 To define the AWS resources, open `serverless.yml` and modify it as follows:
@@ -168,12 +168,12 @@ package:
   exclude:
     - node_modules/**
 ```
-The declaration above builds upon the configuration you created earlier in this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb/). Specifically, it includes a declaration for a DynamoDB table, an IAM role, and two Lambda functions:
+This declaration builds upon the configuration you created in the Learning Path entitled [Deploy and integrate AWS Lambda with DynamoDB using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-lambda-dynamodb/). Specifically, it includes a declaration for a DynamoDB table, an IAM role, and two Lambda functions:
  * `writeTemperatures` - its handler is set to handler.writeTemperatures. This function is triggered through an HTTP POST event.
- * `getAverageTemperature` -its handler is set to handler.getAverageTemperature. This function is triggered through an HTTP GET event.
+ * `getAverageTemperature` - its handler is set to handler.getAverageTemperature. This function is triggered through an HTTP GET event.
 
-There are a few new additions. Under the Resources section, you have the S3 Bucket configuration, which specifies the following:
-* WebsiteBucket - creates an S3 bucket named `iot-temperature-service-${self:provider.stage}-website`, where `${self:provider.stage}` dynamically inserts the deployment stage (e.g., dev, prod).
+There are a few new additions. Under the *Resources* section, you have the S3 Bucket configuration, which specifies the following:
+* `WebsiteBucket` - creates an S3 bucket named `iot-temperature-service-${self:provider.stage}-website`, where `${self:provider.stage}` dynamically inserts the deployment stage (for example, dev, prod).
 * `WebsiteConfiguration` - configures the S3 bucket to host a static website, specifying `index.html` as the main page and error.html as the error page.
 * `OwnershipControls` - ensures that the bucket enforces ownership for all objects.
 * `PublicAccessBlockConfiguration` - disables public access block settings, allowing the bucket to serve content publicly.
@@ -182,7 +182,7 @@ There are a few new additions. Under the Resources section, you have the S3 Buck
 These settings are required to make the website publicly available.
 
 Next, you define outputs for the Serverless deployment:
-* `WriteTemperaturesEndpoint` and `GetAverageTemperatureEndpoint` - provide the full URLs of the API Gateway endpoints for the two AWS Lambda functions.
+* `WriteTemperaturesEndpoint` and `GetAverageTemperatureEndpoint` - these provide the full URLs of the API Gateway endpoints for the two AWS Lambda functions.
 * `WebsiteURL` - generates the URL for the S3-hosted static website.
 
 In the Plugins section, you define:
@@ -190,10 +190,10 @@ In the Plugins section, you define:
 * `serverless-plugin-scripts` - allows custom scripts to be run before deployment.
 
 Then, you specify custom settings for the plugins:
-* `custom`: Defines custom settings for the S3 sync plugin.
-* `s3Sync`: Specifies the local directory (website) to be synced to the S3 bucket.
+* `custom`: defines custom settings for the S3 sync plugin.
+* `s3Sync`: specifies the local directory (website) to be synced to the S3 bucket.
 
-Lastly, you will exclude the `node_modules` directory from the deployment package using `package.exclude` to reduce the package size.
+Lastly, you exclude the `node_modules` directory from the deployment package using `package.exclude` to reduce the package size.
   
 ### handler.js
 You will now implement the two AWS Lambda functions. Open the file `handler.js`, and replace its contents with the following code:

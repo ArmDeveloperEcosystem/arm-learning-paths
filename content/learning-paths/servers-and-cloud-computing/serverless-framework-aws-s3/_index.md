@@ -1,7 +1,7 @@
 ---
 title: Deploy a static website to Amazon S3 and integrate with AWS Lambda and DynamoDB using the Serverless Framework
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
 who_is_this_for: This learning path is for software developers interested in learning how to deploy serverless applications using the Serverless Framework and Amazon Web Services. 
 
@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as [Windows Dev Kit 2023](https://learn.microsoft.com/en-us/windows/arm/dev-kit), a Lenovo Thinkpad X13s running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
-    - Completion of this [Learning Path](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
+    - Completion of the Learning Path that shows you how to [Deploy AWS services using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
 
 author_primary: Dawid Borycki
 
