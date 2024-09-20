@@ -9,10 +9,6 @@ further_reading:
         link: https://libeigen.gitlab.io/docs/group__TutorialMatrixClass.html
         type: documentation
     - resource:
-        title: CS Tutorial on Eigen
-        link: https://cs2240.graphics/assignments/eigen_tutorial.pdf
-        type: documentation
-    - resource:
         title: Eigen Webinar from Linaro
         link: https://static.linaro.org/connect/webinars/presentations/Eigen_Webinar_3.pdf
         type: documentation

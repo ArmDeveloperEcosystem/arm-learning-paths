@@ -12,37 +12,32 @@
 
 review:
     - questions:
-        question: >
-            With RunsOn, any AWS EC2 instance with Graviton processors can be used for GitHub Actions.
+        question: >        
+            Does the input layer of the model flatten the 28x28 pixel image into a 1D array of 784 elements?
         answers:
-            - "True"
-            - "False"
-        correct_answer: 1                   
-        explanation: >
-            You can select any instance type and use job labels to configure details such as number of vCPU and RAM size.
-
-    - questions:
-        question: >
-            Is RunsOn free for non-commercial projects?
-        answers:
-            - "No"
             - "Yes"
-        correct_answer: 2                   
+            - "No"
+        correct_answer: 1
         explanation: >
-            RunsOn is free for non-commerical projects. You pay the cost of the EC2 instances that are used and a small free for the  AWS App Runner service. 
-
+            Yes, the model uses nn.Flatten() to reshape the 28x28 pixel image into a 1D array of 784 elements for processing by the fully connected layers.
     - questions:
         question: >
-            Which Neoverse processor is not available for GitHub Actions when using RunsOn in AWS?
+            Does the model use dropout layers with a 20% dropout rate after each hidden layer?
         answers:
-            - "Neoverse N1"
-            - "Neoverse N2"
-            - "Neoverse V1"
-            - "Neoverse V2"
-        correct_answer: 2                    
+            - "Yes"
+            - "No"
+        correct_answer: 1
         explanation: >
-            Neoverse N2 is not available in AWS. Graviton2 is Neoverse N1, Graviton3 is Neoverse V1, and Graviton4 is Neoverse V2.
-               
+            Yes, the model applies dropout layers after each hidden layer, randomly setting 20% of the neurons to 0 during training to prevent overfitting. 
+    - questions:
+        question: >
+            Will the model make random predictions if it’s run before training?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 1
+        explanation: >
+            Yes, however in such the case the model will produce random outputs, as the network has not been trained to recognize any patterns from the data. 
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

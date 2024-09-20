@@ -10,7 +10,7 @@ layout: "learningpathall"
 In this section, you connect the emulator to AWS IoT Core.
 
 ## Connecting the emulator
-Log in to the AWS Console at https://www.console.aws.amazon.com, and then search for IoT. From the list that appears, select **IoT Core**:
+Log in to the AWS Console at https://aws.amazon.com, and then search for IoT. From the list that appears, select **IoT Core**:
 
 ![fig1](Figures/01.png)
 

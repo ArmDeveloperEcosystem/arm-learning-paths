@@ -24,7 +24,7 @@ armips:
     - Neoverse
 
 tools_software_languages:
-    - Cloudformation
+    - CloudFormation
     - GitHub
     - AWS EC2
 

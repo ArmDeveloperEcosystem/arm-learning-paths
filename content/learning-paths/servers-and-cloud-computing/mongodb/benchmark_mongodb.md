@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 To further measure the performance of MongoDB, you will run the [Yahoo Cloud Serving Benchmark](http://github.com/brianfrankcooper/YCSB).
 
-[YCSB](https://research.yahoo.com/news/yahoo-cloud-serving-benchmark/) is an open sourced project which provides the framework and common set of workloads to evaluate the performance of different "key-value" and "cloud" serving stores. Here are the steps to run YCSB to evaluate the performance of MongoDB running on 64-bit Arm machine.
+YCSB is an open sourced project which provides the framework and common set of workloads to evaluate the performance of different "key-value" and "cloud" serving stores. Here are the steps to run YCSB to evaluate the performance of MongoDB running on 64-bit Arm machine.
 
 ## Additional software packages
 

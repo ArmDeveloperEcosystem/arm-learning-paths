@@ -28,7 +28,7 @@ configuration_dropdown_options:
         - name: llama-3-8b-instruct
           specs: The newest Llama model, with 8 billion parameters.
         - name: llama-2-7b
-          specs: Llama2 has 7 billion paramters.
+          specs: Llama2 has 7 billion parameters.
       selectable: true
       explanation: The LLM selected affects how performant the model is and such.
 
