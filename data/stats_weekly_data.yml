@@ -3520,3 +3520,78 @@
     avg_close_time_hrs: 0
     num_issues: 10
     percent_closed_vs_total: 0.0
+- a_date: '2024-09-23'
+  content:
+    cross-platform: 22
+    embedded-systems: 19
+    install-guides: 85
+    laptops-and-desktops: 31
+    microcontrollers: 24
+    servers-and-cloud-computing: 82
+    smartphones-and-mobile: 23
+    total: 286
+  contributions:
+    external: 40
+    internal: 331
+  github_engagement:
+    num_forks: 30
+    num_prs: 6
+  individual_authors:
+    alexandros-lamprineas: 1
+    annie-tallund: 1
+    arm: 3
+    arnaud-de-grandmaison: 1
+    basma-el-gaabouri: 1
+    bolt-liu: 2
+    brenda-strech: 1
+    christopher-seidl: 7
+    cyril-rohr: 1
+    daniel-gubay: 1
+    daniel-nguyen: 1
+    david-spickett: 2
+    dawid-borycki: 29
+    diego-russo: 1
+    diego-russo-and-leandro-nunes: 1
+    elham-harirpoush: 2
+    florent-lebeau: 5
+    "fr\xE9d\xE9ric--lefred--descamps": 2
+    gabriel-peterson: 5
+    gayathri-narayana-yegna-narayanan: 1
+    graham-woodward: 1
+    iago-calvo-lista,-arm: 1
+    james-whitaker,-arm: 1
+    jason-andrews: 84
+    johanna-skinnider: 2
+    jonathan-davies: 2
+    jose-emilio-munoz-lopez,-arm: 1
+    julie-gaskin: 4
+    julio-suarez: 5
+    kasper-mecklenburg: 1
+    konstantinos-margaritis: 7
+    kristof-beyls: 1
+    liliya-wu: 1
+    mathias-brossard: 1
+    michael-hall: 5
+    nikhil-gupta,-pareena-verma,-nobel-chowdary-mandepudi,-ravi-malhotra: 1
+    odin-shen: 1
+    owen-wu,-arm: 2
+    pareena-verma: 35
+    pareena-verma,-jason-andrews,-and-zach-lasiuk: 1
+    pareena-verma,-joe-stech,-adnan-alsinan: 1
+    pranay-bakre: 2
+    przemyslaw-wirkus: 1
+    roberto-lopez-mendez: 2
+    ronan-synnott: 45
+    thirdai: 1
+    tom-pilar: 1
+    uma-ramalingam: 1
+    varun-chari: 1
+    visualsilicon: 1
+    ying-yu: 1
+    ying-yu,-arm: 1
+    zach-lasiuk: 1
+    zhengjun-xing: 2
+  issues:
+    avg_close_time_hrs: 0
+    num_issues: 10
+    percent_closed_vs_total: 0.0
