@@ -5,6 +5,14 @@ weight: 2
 layout: learningpathall
 ---
 
+### Before you start
+Familiarise yourself with the terms below:
+- Instruction scheduling: If two instructions appear in a sequence in a program, but are independent from each other, the compiler can swap them without affecting the program's behaviour. The goal of instruction scheduling is to find a valid permutation of the program instructions that also optimises the program's performance, by making use of processor resources.
+- Pipeline: A pipeline is the mechanism used by the processor to execute instructions. Pipelining makes efficient use of processor resources by dividing instructions into stages that can overlap and be processed in parallel, reducing the time it takes for instructions to execute. Instructions can only be executed if the required data is available, otherwise this leads to a delay in execution called a pipeline stall.
+- Resource pressure: Resources refer to the hardware units used to execute instructions. If instructions in a program all rely on the same resources, then it leads to pressure. Execution is slowed down as instructions must wait until the unit they need becomes available.
+- Data dependency: Data dependency refers to the relationship between instructions. When an instruction requires data from a previous instruction this creates a data dependency.
+
+
 ### What is MCA?
 MCA stands for Machine Code Analyser. It is a performance analysis tool that uses information available in [LLVM](https://github.com/llvm/llvm-project) to measure performance on a specific CPU.
 
@@ -180,6 +188,11 @@ These states are represented by the following characters:
 - = : Instruction already dispatched, waiting to be executed.
 - \- : Instruction executed, waiting to be retired.
 
+Looking at the `Index` in the timeline view, on the horizontal axis we have cycles and on the vertical axis we have a pair of indices representing iterations and instructions. Since we did not pass the `-timeline-max-iterations` flag to specify an iteration number to be used for the timeline view, `llvm-mca` used its default (10 iterations) so the iteration indices range from 0-9 inclusively. Since there are 5 instructions in `sum_test1`, the instruction indices range from 0-4 inclusively.
+From the timeline view of `sum_test1.s` we have the following:
+- Instruction `[0, 4]` corresponds to the first iteration of the fifth instruction `add x1, x1, x6`. This instruction was dispatched on cycle 0, it started execution on cycle 5, finished execution at cycle 6 and retired at cycle 7.
+- Instruction `[2, 2]` corresponds to the third iteration of the third instruction `add x1, x1, x4`. This instruction was dispatched on cycle 0, it started execution on cycle 13, finished execution at cycle 14 and retired at cycle 15.
+
 The iterations timeline shows that in subsequent iterations, instructions spend a longer time waiting to start the execution. That is because all add instructions in the code block are in a Read After Write (RAW) dependency chain. Register x1 written by the first instruction `add x1, x1, x2` is immediately used by the next instruction `add x1, x1, x3` and so on. Long register dependencies negatively impact performance. The `Average Wait times` section of the timeline view also highlights this. The number of cycles spent in the ready state is very small compared to the number of cycles spent waiting in a scheduler's queue.
 
 After analysing the information provided by MCA, we now understand that a long chain of dependencies is affecting the performance of the program. With this understanding, we can now write assembly code to compute the sum of 6 numbers, this time avoiding register dependencies.
@@ -263,7 +276,7 @@ We can immediately see an improvement in the performance of our program by looki
 |                   | sum_test1 | sum_test2 |
 | ----------------- | --------- | --------- |
 | Iterations        | 100       | 100       |
-| Instructions      | 500       | 300       |
+| Instructions      | 500       | 500       |
 | Total Cycles      | 503       | 88        |
 | Total uOps        | 500       | 500       |
 | Dispatch Width    | 16        | 16        |
