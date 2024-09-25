@@ -1,27 +1,26 @@
 ---
-title: Running MCA with Arm assembly
+title: Use LLVM Machine Code Analyzer to understand code performance
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for Arm developers who want to diagnose performance issues of Arm programs using MCA and Compiler Explorer.
+who_is_this_for: This is an introductory topic for Arm developers who want to diagnose performance issues of Arm programs using LLVM Machine Code Analyzer (MCA) and Compiler Explorer.
 
 learning_objectives:
-    - Estimate the hardware resource pressure and the number of cycles taken to execute your code snippet using llvm-mca
-    - Understand how this estimate can help diagnose possible performance issues
-    - Use Compiler Explorer to run llvm-mca
+    - Estimate the hardware resource pressure and the number of cycles taken to execute your code snippet using llvm-mca.
+    - Understand how this estimate can help diagnose possible performance issues.
+    - Use Compiler Explorer to run llvm-mca.
 
 prerequisites:
-    - Familiarity with Arm assembly
-    - clang compiler or access to Compiler Explorer
+    - Familiarity with Arm assembly.
+    - LLVM version 16 or newer (to include Neoverse V2 support).
 
 author_primary: Rin Dobrescu
 
 ### Tags
 skilllevels: Introductory
-subjects: Performance
+subjects: Performance and Architecture
 armips:
     - Neoverse
-    - Armv8
 tools_software_languages:
     - assembly
     - llvm-mca
