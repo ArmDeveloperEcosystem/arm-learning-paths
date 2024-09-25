@@ -21,6 +21,7 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Neoverse
+    - Cortex-A
 tools_software_languages:
     - assembly
     - llvm-mca
@@ -29,6 +30,12 @@ operatingsystems:
     - Windows
     - macOS
 
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - smartphones-and-mobile
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
