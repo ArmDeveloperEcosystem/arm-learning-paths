@@ -8,23 +8,27 @@ layout: "learningpathall"
 ---
 
 The inference process involves using a trained model to make predictions on new, unseen data. It typically follows these steps:
-1. Load the Trained Model. The model, along with its learned parameters (weights and biases), is loaded from a saved file.
-2. Prepare the Input Data. The input data is preprocessed in the same way as during training (e.g., normalization, tensor conversion) to ensure compatibility with the model.
-3. Make Predictions. The preprocessed data is fed into the model, which computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
-4. Interpret the Results. The predicted class is usually the one with the highest probability. The results can then be used for further analysis or decision-making.
+
+1. **Load the Trained Model**: the model, along with its learned parameters (weights and biases), is loaded from a saved file.
+2. **Prepare the Input Data**: the input data is preprocessed in the same way as during training (e.g., normalization, tensor conversion) to ensure compatibility with the model.
+3. **Make Predictions**: the preprocessed data is fed into the model, which computes the output based on its trained parameters. The output is often a probability distribution over possible classes.
+4. **Interpret the Results**: the predicted class is usually the one with the highest probability. The results can then be used for further analysis or decision-making.
 
 This process allows the model to generalize its learned knowledge to make accurate predictions on new data.
 
 # Runing inference in PyTorch
-We will now see how to run inference in PyTorch using previously saved model. To display results we will use matplotlib. So, start by installing matplotlib package:
+
+You can inference in PyTorch using the previously saved model. To display results you can use matplotlib. 
+
+Start by installing matplotlib package:
 
 ```console
 pip install matplotlib
 ```
 
-Then, in Visual Studio Code create a new file, pytorch-digits-inference.ipynb, and modify that file as follows:
+Then, in Visual Studio Code create a new file named `pytorch-digits-inference.ipynb` and modify the file to include the code below:
 
-```Python
+```python
 import torch
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
@@ -79,29 +83,30 @@ plt.tight_layout()
 plt.show()
 ```
 
-The above code performs inference on a saved PyTorch model using 16 randomly selected images from the MNIST test dataset and displays them along with their actual and predicted labels.
+The above code performs inference on the saved PyTorch model using 16 randomly selected images from the MNIST test dataset and displays them along with their actual and predicted labels.
 
-As before, we start by importing the necessary Python libraries: torch, datasets, transforms, matplotlib.pyplot, and random. torch is used for loading the model and performing tensor operations. datasets and transforms from torchvision are used for loading and transforming the MNIST dataset. We use matplotlib.pyplot for plotting and displaying images, and random is used for selecting random images from the dataset.
+As before, start by importing the necessary Python libraries: torch, datasets, transforms, matplotlib.pyplot, and random. torch is used for loading the model and performing tensor operations. datasets and transforms from torchvision are used for loading and transforming the MNIST dataset. Use matplotlib.pyplot for plotting and displaying images, and random is used for selecting random images from the dataset.
 
-Next, we load the MNIST test dataset using datasets.MNIST() with train=False to specify that it’s the test data. The dataset is automatically downloaded if it’s not available locally.
+Next, load the MNIST test dataset using datasets.MNIST() with train=False to specify that it’s the test data. The dataset is automatically downloaded if it’s not available locally.
 
-We then load the saved model using torch.jit.load("model.pth") and set the model to evaluation mode using model.eval(). This ensures that layers like dropout and batch normalization behave appropriately during inference.
+Load the saved model using torch.jit.load("model.pth") and set the model to evaluation mode using model.eval(). This ensures that layers like dropout and batch normalization behave appropriately during inference.
 
-Subsequently, we select 16 random images and create a 4x4 grid of subplots using plt.subplots(4, 4, figsize=(12, 12)) for displaying the images.
+Subsequently, select 16 random images and create a 4x4 grid of subplots using plt.subplots(4, 4, figsize=(12, 12)) for displaying the images.
 
-Afterward, we perform inference and display the images in a loop. Specifically, for each of the 16 selected images, the image and its label are retrieved from the dataset using the random index. The image tensor is expanded to include a batch dimension (image.unsqueeze(0)) because the model expects a batch of images. Inference is performed with model(image_batch) to get the prediction. The predicted label is determined using torch.argmax() to find the index of the maximum probability in the output. Each image is displayed in its respective subplot with the actual and predicted labels. We use plt.tight_layout() to ensure that the layout is adjusted nicely, and plt.show() to display the 16 images with their actual and predicted labels.
+Afterward, perform inference and display the images in a loop. Specifically, for each of the 16 selected images, the image and its label are retrieved from the dataset using the random index. The image tensor is expanded to include a batch dimension (image.unsqueeze(0)) because the model expects a batch of images. Inference is performed with model(image_batch) to get the prediction. The predicted label is determined using torch.argmax() to find the index of the maximum probability in the output. Each image is displayed in its respective subplot with the actual and predicted labels. We use plt.tight_layout() to ensure that the layout is adjusted nicely, and plt.show() to display the 16 images with their actual and predicted labels.
 
-This code effectively demonstrates how to use a saved PyTorch model for inference and visualization of predictions on a subset of the MNIST test dataset.
+This code demonstrates how to use a saved PyTorch model for inference and visualization of predictions on a subset of the MNIST test dataset.
 
 After running the code, you should see results similar to the following figure:
 
 ![image](Figures/03.png)
 
 # Summary
-In this exercise, we went through the complete process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, we optimized the model’s weights and biases over multiple epochs. We employed the CrossEntropyLoss function and the Adam optimizer to minimize prediction errors and improve accuracy. We periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
 
-After training, we saved the model using TorchScript, which captures both the model’s architecture and its learned parameters. This made the model portable and independent of the original class definition, simplifying deployment.
+In this exercise, you went through the complete process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, you optimized the model’s weights and biases over multiple epochs. You employed the CrossEntropyLoss function and the Adam optimizer to minimize prediction errors and improve accuracy. You periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
 
-Next, we moved on to inference. We loaded the saved model and set it to evaluation mode to ensure that layers like dropout and batch normalization behaved correctly during inference. We randomly selected 16 images from the MNIST test dataset to evaluate the model’s performance on unseen data. For each selected image, we used the model to predict the digit, comparing the predicted labels with the actual ones. We displayed the images alongside their actual and predicted labels in a 4x4 grid, visually assessing the model’s accuracy and performance.
+After training, you saved the model using TorchScript, which captures both the model’s architecture and its learned parameters. This made the model portable and independent of the original class definition, simplifying deployment.
 
-This comprehensive process—from model training and saving to inference and visualization—illustrates the end-to-end workflow for building and deploying a machine learning model in PyTorch. It demonstrates how to train a model, save it in a portable format, and then use it to make predictions on new data.
+Next, you performed inference. You loaded the saved model and set it to evaluation mode to ensure that layers like dropout and batch normalization behaved correctly during inference. You randomly selected 16 images from the MNIST test dataset to evaluate the model’s performance on unseen data. For each selected image, you used the model to predict the digit, comparing the predicted labels with the actual ones. You displayed the images alongside their actual and predicted labels in a 4x4 grid, visually assessing the model’s accuracy and performance.
+
+This comprehensive process, from model training and saving to inference and visualization, illustrates the end-to-end workflow for building and deploying a machine learning model in PyTorch. It demonstrates how to train a model, save it in a portable format, and then use it to make predictions on new data.

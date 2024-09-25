@@ -4,11 +4,11 @@
 # ================================================================================
 
 next_step_guidance: >
-   Proceed to Get Started with Arm Performance Studio for mobile to continue learning about Android performance analysis.
+   Proceed to Use Keras Core with TensorFlow, PyTorch, and JAX backends to continue exploring Machine Learning.
 
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
+recommended_path: "/learning-paths/servers-and-cloud-computing/keras-core/"
 
 # Link to the next learning path being recommended(For example this could be /learning-paths/servers-and-cloud-computing/mongodb).
 

@@ -1,8 +1,5 @@
 ---
 title: Create a PyTorch model for digit classification
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 40
 

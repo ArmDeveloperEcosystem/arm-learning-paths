@@ -1,31 +1,39 @@
 ---
-title: Learn how to train the PyTorch model for digit classification
+title: Train a PyTorch model for digit classification
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use PyTorch to train a feedforward neural network for digit classification. 
 
 learning_objectives:
-    - Download and prepare the dataset.
+    - Download and prepare the MNIST dataset.
     - Train a neural network using PyTorch.
 
 prerequisites:
-    - A x86_64 or Apple development machine with Code Editor (we recommend Visual Studio Code).    
+    - Any computer which can run Python3 and Visual Studio Code, this can be Windows, Linux, or macOS.
+    - You should complete [Create a PyTorch model for digit classification](/learning-paths/cross-platform/pytorch-digit-classification-architecture/) before starting this Learning Path.
 
 author_primary: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory
-subjects: Neural Networks
+subjects: ML
 armips:
     - Cortex-A
     - Cortex-X
+    - Neoverse
 operatingsystems:
     - Windows
     - Linux
-    - MacOS
+    - macOS
 tools_software_languages:
-    - Android Studio
     - Coding
+
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - laptops-and-desktops
+    - smartphones-and-mobile
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
