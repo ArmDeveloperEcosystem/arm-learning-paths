@@ -34,6 +34,17 @@ The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on
 
 Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
 
+## Academic offers from Arm Cloud Service Providers
+
+This is a non-exhaustive list of Arm cloud partners that have existing academic offers for students and teaching staff who wish to use Arm-based instances. 
+
+- [Microsoft Azure Student Offer](https://azure.microsoft.com/en-us/free/students)
+- [Google Cloud for Faculty](https://cloud.google.com/edu/faculty?hl=en)
+- [Google Cloud for Researchers](https://cloud.google.com/edu/researchers?hl=en)
+- [Alibaba Cloud Academic Empowerment Program](https://edu.alibabacloud.com/campus/index?spm=a3c0i.11593861.4363105600.24.6d326d84ZWObih)
+- [NVIDIA Higher Education Research](https://www.nvidia.com/en-gb/industries/higher-education-research/academic-grant-program/)
+- [Oracle Cloud Education](https://www.oracle.com/uk/government/education/)
+
 ##  Arm SystemReady Certified hardware
 
 [Arm SystemReady](https://www.arm.com/architecture/system-architectures/systemready-certification-program) is a program that certifies that systems meet the SystemReady standards, giving confidence that operating systems (OS) and subsequent layers of software just work.
