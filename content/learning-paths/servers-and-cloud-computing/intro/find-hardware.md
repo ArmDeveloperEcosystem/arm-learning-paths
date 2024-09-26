@@ -34,9 +34,9 @@ The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on
 
 Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
 
-## Academic offers from Arm Cloud Service Providers
+## Academic offers from Cloud Service Providers
 
-This is a non-exhaustive list of Arm cloud partners that have existing academic offers for students and teaching staff who wish to use Arm-based instances. 
+Below is a list of Arm cloud partners that have existing academic offers for students and teaching staff who wish to use Arm-based instances. 
 
 - [Microsoft Azure Student Offer](https://azure.microsoft.com/en-us/free/students)
 - [Google Cloud for Faculty](https://cloud.google.com/edu/faculty?hl=en)
