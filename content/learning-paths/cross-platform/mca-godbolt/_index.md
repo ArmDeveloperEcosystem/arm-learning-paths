@@ -1,5 +1,5 @@
 ---
-title: Use LLVM Machine Code Analyzer to understand code performance
+title: Learn about LLVM Machine Code Analyzer
 
 minutes_to_complete: 60
 
