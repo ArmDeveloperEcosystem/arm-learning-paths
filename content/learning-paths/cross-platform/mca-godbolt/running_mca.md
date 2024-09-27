@@ -4,37 +4,9 @@ weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-### Terminology
-
-Before you get started, familiarize yourself with the terms below:
-
-- **Instruction scheduling**: If two instructions appear in a sequence in a program, but are independent from each other, the compiler can swap them without affecting the program's behavior. The goal of instruction scheduling is to find a valid permutation of the program instructions that also optimizes the program's performance, by making use of processor resources.
-
-- **Pipeline**: A pipeline is the mechanism used by the processor to execute instructions. Pipelining makes efficient use of processor resources by dividing instructions into stages that can overlap and be processed in parallel, reducing the time it takes for instructions to execute. Instructions can only be executed if the required data is available, otherwise this leads to a delay in execution called a pipeline stall.
-
-- **Resource pressure**: Resources refer to the hardware units used to execute instructions. If instructions in a program all rely on the same resources, then it leads to pressure. Execution is slowed down as instructions must wait until the unit they need becomes available.
-
-- **Data dependency**: Data dependency refers to the relationship between instructions. When an instruction requires data from a previous instruction this creates a data dependency.
-
-
-### What is Machine Code Analyzer (MCA)?
-
-Machine Code Analyzer (MCA) is a performance analysis tool that uses information available in [LLVM](https://github.com/llvm/llvm-project) to measure performance on a specific CPU.
-
-
-### How can MCA be useful?
-
-MCA takes as input a snippet of assembly code and then simulates the execution of that code in a loop of iterations (default is 100). 
-
-MCA then outputs a performance report, which contains information such as the latency and throughput of the assembly block and the resource usage for each instruction. 
-
-Using this information, you can identify bottlenecks in performance such as resource pressure and data dependencies. There are many options you can give MCA to get performance metrics. The options are explained in the [llvm-mca documentation](https://llvm.org/docs/CommandGuide/llvm-mca.html).
-
-
 ### MCA example with Arm assembly
 
-You have learned what MCA is and what kind of information it can provide. Now you are going to use MCA to identify a performance issue and improve a snippet of Arm assembly. 
+You have learned what MCA is and what kind of information it provides. Now you are going to use MCA to identify a performance issue and improve a snippet of Arm assembly. 
 
 The example below demonstrates how to run `llvm-mca`, what the expected output is, and the conclusions you can draw using the performance metrics MCA provides.
 
@@ -121,11 +93,11 @@ Resource pressure by instruction:
 
 The MCA output shows a lot of information. The most relevant parts are covered below. For further details, you can look at the [llvm-mca documentation](https://llvm.org/docs/CommandGuide/llvm-mca.html#how-llvm-mca-works).
 
-The first part of the output, up to the `Instruction Info` section, is general information about the loop and the hardware. MCA simulated the execution of the code in a loop for 100 iterations. It executed a total of 500 instructions in 503 cycles. If you calculate the instructions per cycle (IPC) on average you get 500/503≈0.99 IPC. The dispatch width of 16 means the CPU is capable of dispatching 16 instructions per cycle.
+The first part of the output, up to the `Instruction Info` section, is general information about the loop and the hardware. MCA simulated the execution of the code in a loop for 100 iterations. It executed a total of 500 instructions in 503 cycles. If you calculate the instructions per cycle (IPC), on average you get 500/503≈0.99 IPC. The dispatch width of 16 means the CPU is capable of dispatching 16 instructions per cycle.
 
 The second part of the output, up to the `Resources` section, gives information about each individual instruction. Latency represents how many cycles each instruction takes to execute. Throughput represents the rate at which instructions are executed per cycle. Reciprocal throughput (RThroughput) is the inverse of throughput (1/throughput) and represents cycles per instruction.
 
-An important part of this output is the `Resource pressure by instruction` section. It shows which instructions are executed on which pipelines. You can see that the add instructions use resources `[4]-[9]` and that pressure is equally spread through the available resources.
+An important part of this output is the `Resource pressure by instruction` section. It shows the instructions that are are executed on each pipeline. You can see that the add instructions use resources `[4]-[9]` and that pressure is equally spread through the available resources.
 
 The [Arm Neoverse V2 Software Optimization Guide](https://developer.arm.com/documentation/109898/latest/) shows which pipelines are used by which instructions.
 
