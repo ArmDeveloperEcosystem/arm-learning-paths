@@ -245,6 +245,13 @@
     white-space: pre-wrap;
 }
 
+.char-limit-mesg {
+    font-size: 14px!important;
+    margin-top: 4px;
+    font-style: italic;
+}
+
+
 
 
 #notification-popup {
