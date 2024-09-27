@@ -320,15 +320,27 @@ function prepareConversationData() {
 // Add the user's input to the chat history, and spawn a new thinking chatbot response placeholder
 function addUserMessage_andChatbotPlaceholder(user_input) {
     const all_messages_div = document.getElementById('all-messages-div');
-        
+    const text_area = document.querySelector('#user-input-for-demo');
+
     const user_div = document.createElement('div');
     user_div.classList.add('user-message');
 
     const user_span_for_message = document.createElement('span');
     user_div.appendChild(user_span_for_message);
-
     user_span_for_message.textContent = user_input;
+
+    if (Array.from(user_input).length >= text_area.maxLength) {
+        const user_text_limit_update = document.createElement('div');
+        user_text_limit_update.classList.add('char-limit-mesg');
+        user_div.appendChild(user_text_limit_update);
+        user_text_limit_update.textContent = "Char limit reached - truncated to 10,000.";
+    }
+
+
     all_messages_div.insertBefore(user_div, all_messages_div.firstChild);
+
+
+
 
     const chatbot_div = document.createElement('div');
     chatbot_div.classList.add('chatbot-message');
@@ -397,6 +409,16 @@ function adjustInputHeight() {
 }
 
 
+function tellUserServerIsThinking() {
+    document.getElementById('all_messages_div')
+    const current_chatbot_message = document.querySelector("#all-messages-div .chatbot-message");
+    if (current_chatbot_message) {
+        const ads_loader_element = current_chatbot_message.querySelector("span ads-loader");
+
+        ads_loader_element.setAttribute('label','Still thinking, one moment...')
+    }    
+}
+
 
 // Event listener additions to key demo components
 document.addEventListener("DOMContentLoaded", function() {
@@ -442,11 +464,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // User enters any text in textinput
     text_area.addEventListener('input', function() {
-        //this.style.height = 'auto';
-        //this.style.height = (this.scrollHeight > this.clientHeight ? this.scrollHeight : this.clientHeight) + 'px';
         adjustInputHeight();
         toggleButton();         // enable input button
     });
+
     // User hits enter in textinput
     text_area.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
@@ -541,10 +562,23 @@ document.addEventListener("DOMContentLoaded", function() {
       
         // Set timeout
         const controller = new AbortController();
-        let timeout;
-        function resetTimeout() {
+        let timeout; // for server timeout
+        let tell_user_timeout;  // to inform user the UI is thinking
+        const timeout_duration = 5000; // 5 seconds by default 
+        const tell_user_timeout_duration = 6000; // 6 seconds by default
+        function resetTimeout(duration = timeout_duration) {
             clearTimeout(timeout);
-            timeout = setTimeout(() => controller.abort(), 5000); // Adjust the timeout duration as needed
+            clearTimeout(tell_user_timeout);
+
+            
+            timeout = setTimeout(() => controller.abort(), duration); 
+            
+            if (duration > 5000) {
+                tell_user_timeout = setTimeout(() => {
+                    tellUserServerIsThinking(); 
+                }, tell_user_timeout_duration); // trigger at 6 seconds
+            }
+
         }
         resetTimeout(); // Start the timeout right before sending
 
@@ -592,6 +626,7 @@ document.addEventListener("DOMContentLoaded", function() {
                                     }
                                     else if (return_json.value == 'STREAM_STARTING') {
                                         hidePopup();
+                                        resetTimeout(15000); // Set timeout to 15 seconds
                                     }
                                 }
                                 else if (return_json.message_type === 'chunk') {
