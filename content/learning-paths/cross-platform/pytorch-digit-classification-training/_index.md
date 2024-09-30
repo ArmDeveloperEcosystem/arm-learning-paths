@@ -1,7 +1,9 @@
 ---
 title: Train a PyTorch model for digit classification
 minutes_to_complete: 40
-
+draft: true
+cascade:
+    draft: true
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use PyTorch to train a feedforward neural network for digit classification. 
 
 learning_objectives:
