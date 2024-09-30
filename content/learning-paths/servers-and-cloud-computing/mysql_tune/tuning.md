@@ -22,7 +22,7 @@ Last, keep in mind, that in general, it's usually best to leave most configs at 
 
 ### Connections and prepared transactions
 
-```output
+```
 max_connections=100000    # Default 151
 max_prepared_stmt_count=4194304   # Default 16382
 ```
@@ -34,7 +34,7 @@ Keep in mind that more connections means more resources will be consumed, especi
 `max_prepared_stmt_count` is 16382 by default. It's a good idea to set this as small as possible in order to help prevent denial of service attacks. You can make it very large in a test environment that uses many prepared statements.
 
 ### Dedicated Server Configuration
-```output
+```
 innodb_dedicated_server=ON
 ```
 If the node will only run `MySQL` and no other application. One of the easiest ways to gain performance is by setting `innodb_dedicated_server=ON`. This setting does different things depending on the version of `MySQL`, so it's important to check the [documentation](https://dev.mysql.com/doc/refman/en/innodb-dedicated-server.html) for the specific version of `MySQL` being deployed. As of version 8.4, this setting will automatically set both `innodb_buffer_pool_size` and `innodb_redo_log_capacity`. Two configurations that impact performance.
@@ -45,7 +45,7 @@ On systems with a large amount of RAM (greater than 4GB), the `innodb_buffer_poo
 
 ### Huge Pages
 
-```output
+```
 large_pages=ON    # default is OFF
 ```
 
@@ -69,7 +69,7 @@ In general, there's no need to adjust other memory parameters unless an issue is
 
 ### Disk flush behavior
 
-```output
+```
 innodb_use_fdatasync=ON    # Default is OFF prior to MySQL 8.4
 ```
 
@@ -79,11 +79,9 @@ Setting `innodb_use_fdatasync` to ON helps reduce the number of system calls tha
 
 Increasing parallelism uses available resources more efficiently. It's always a good idea to look at parameters related to parallel execution.
 
-```output
+```
 innodb_io_capacity=10000    # Default is 200 prior to MySQL 8.4 and 10000 from 8.4
 innodb_io_capacity_max=20000    # Default is 2x innodb_io_capacity
-innodb_read_io_threads=<system CPU count>    # Default is 4
-innodb_write_io_threads=<system CPU count>    # Default is 4
 ```
 
 `innodb_io_capacity` tells the `InnoDB` storage engine how many IOPS it can issue to storage. Prior to `MySQL` 8.4, the default was 200 which is very low and more appropriate for rotational storage. Modern SSD storage and even cloud based storage can benefit greatly from increasing this value. As of `MySQL` 8.4, the default value has been increased to 10000. If you are using an older version of `MySQL` where this is defaulted to 200, it might benefit you to set this to 10000. See the [MySQL InnoDB I/O Capacity documentation](https://dev.mysql.com/doc/refman/en/innodb-configuring-io-capacity.html) for more.
@@ -92,7 +90,7 @@ innodb_write_io_threads=<system CPU count>    # Default is 4
 
 ### Spin lock configuration
 
-```output
+```
 innodb_sync_spin_loops=120    # Default is 30
 ```
 

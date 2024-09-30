@@ -84,13 +84,13 @@ cd telemetry-solution/tools/topdown_tool
 Install `topdown-tool` in `/usr/local/bin` using:
 
 ```console
-pip3 install -e .
+sudo pip3 install -e .
 ```
 
 {{% notice Note %}}
 If you are getting errors on the environment being externally managed, try creating a virtual environment.
 ```
-sudo apt install python3-venv
+sudo apt install python3-venv -y
 python3 -m venv topdown-venv
 source topdown-venv/bin/activate
 pip3 install -e .
