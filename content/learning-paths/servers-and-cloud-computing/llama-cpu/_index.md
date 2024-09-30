@@ -8,7 +8,7 @@ who_is_this_for: This is an introductory topic for developers interested in runn
 learning_objectives:
     - Download and build llama.cpp on your Arm server.
     - Download a pre-quantized Llama 3.1 model from Hugging Face.
-    - Re-quantize the model weights to take advantage of Arm improvements.
+    - Re-quantize the model weights to take advantage of the Arm KleidiAI kernels.
     - Compare the pre-quantized Llama 3.1 model weights performance to the re-quantized weights on your Arm CPU.
 
 prerequisites:
