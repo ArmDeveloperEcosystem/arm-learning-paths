@@ -1,6 +1,10 @@
 ---
 title: Create a PyTorch model for digit classification
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use PyTorch to create a feedforward neural network for digit classification. 
