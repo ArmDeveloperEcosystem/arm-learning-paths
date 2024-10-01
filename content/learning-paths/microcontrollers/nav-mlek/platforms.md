@@ -13,7 +13,7 @@ There are very many Cortex-M microcontrollers with available [development boards
 
 ### MPS3 FPGA prototyping board
 
-The [Arm MPS3 FPGA Prototyping Board](https://www.arm.com/products/development-tools/development-boards/mps3/) can be programmed with [FPGA images](https://developer.arm.com/downloads/-/download-fpga-images/) for the Corstone reference designs. The FPGA images are good for early software development.
+The [Arm MPS3 FPGA Prototyping Board](https://www.arm.com/products/development-tools/development-boards/mps3/) can be programmed with [FPGA images](https://developer.arm.com/downloads/-/download-fpga-images/) for the for the Corstone-300, Corstone-310 and Corstone-1000 reference designs. The FPGA images are good for early software development.
 
 MPS3 is the recommended solution for evaluating performance, but boards are in short supply and may be difficult to obtain.
 
