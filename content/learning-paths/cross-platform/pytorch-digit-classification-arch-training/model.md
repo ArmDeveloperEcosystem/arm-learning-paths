@@ -7,15 +7,15 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images (60,000 training and 10,000 testing images) of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
+You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
 
 ![img3](Figures/3.png)
 
-The neural network will begin with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from an MNIST image. 
+The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from an MNIST image. 
 
-Next, you will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, a dropout layer will be applied, randomly setting 20% of the nodes to zero.
+Next, you will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, a dropout layer is applied, randomly setting 20% of the nodes to zero.
 
-You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, the output layer will consist of ten nodes, each representing the probability of recognizing one of the digits (0-9).
+You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, the output layer consists of ten nodes, each representing the probability of recognizing one of the digits (0-9).
 
 The total number of trainable parameters for this network is calculated as follows:
 
@@ -69,11 +69,11 @@ First initialize the nn.Module with super(NeuralNetwork, self).__init__(). Insid
 Next, create a sequential stack of layers using nn.Sequential. 
 
 The network consists of:
-* A fully connected (Linear) layer with 96 nodes, followed by the Tanh activation function.
+* A fully-connected (Linear) layer with 96 nodes, followed by the Tanh activation function.
 * A Dropout layer with a 20% dropout rate to prevent overfitting.
-* A second Linear layer with 256 nodes, followed by the Sigmoid activation function.
-* Another Dropout layer that removes 20% of the nodes.
-* A final Linear layer with 10 nodes (matching the number of classes in the dataset), followed by a Softmax activation function that outputs class probabilities.
+* A second Linear layer, with 256 nodes, followed by the Sigmoid activation function.
+* Another Dropout layer, that removes 20% of the nodes.
+* A final Linear layer, with 10 nodes (matching the number of classes in the dataset), followed by a Softmax activation function that outputs class probabilities.
 
 2. **forward** method 
 
@@ -97,11 +97,11 @@ You will see a detailed summary of the NeuralNetwork model’s architecture, inc
 
 1.	Layer Details
 
-The summary will list each layer of the network sequentially, including:
+The summary lists each layer of the network sequentially, including:
 
 * The Flatten layer, which reshapes the 28x28 input images into a 784-element vector.
 * The Linear layers with 96 and 256 nodes, respectively, along with the activation functions (Tanh and Sigmoid) applied after each linear transformation.
-* The Dropout layers that randomly deactivate 20% of the neurons in the respective layers.
+* The Dropout layers that randomly-deactivate 20% of the neurons in the respective layers.
 * The final Linear layer with 10 nodes, corresponding to the output probabilities for the 10 digit classes, followed by the Softmax function.
 
 2. Input and Output Shapes 
@@ -121,13 +121,13 @@ This includes:
 
 This summary provides a clear overview of the model architecture, the dimensional transformations happening at each layer, and the number of parameters that will be optimized during training.
 
-Running the model now will produce random outputs, as the network has not been trained to recognize any patterns from the data. The next step is to train the model using a dataset and an optimization process (like gradient descent) so that it can learn to make accurate predictions.
+Running the model now will produce random outputs, as the network has not been trained to recognize any patterns from the data. The next step is to train the model using a dataset and an optimization process, such as gradient descent, so that it can learn to make accurate predictions.
 
-At this point, the model will make predictions, but since it hasn’t been trained, the predictions will be random and unreliable. The network’s weights are initialized randomly (or using default initialization methods), so the output probabilities from the softmax layer will be essentially random.
+At this point, the model makes predictions, but since it hasn’t been trained, the predictions are random and unreliable. The network’s weights are initialized randomly, or use the default initialization methods, so the output probabilities from the softmax layer are essentially random.
 
-The output will still be a probability distribution over the 10 digit classes (0-9), but the values won’t correspond to the actual images, because the model hasn’t learned the patterns from the MNIST dataset.
+The output is still a probability distribution over the 10 digit classes (0-9), but the values do not correspond to the images, because the model has not learned the patterns from the MNIST dataset.
 
-Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions (28x28 pixels). The model can accept input, pass it through the layers, and return a prediction (a vector of 10 probabilities). However, the results won’t be useful until the model is trained.
+Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions, which is 28x28 pixels. The model can accept input, pass it through the layers, and return a prediction - a vector of 10 probabilities. However, the results are nout seful until the model is trained.
 
 # Summary
 
