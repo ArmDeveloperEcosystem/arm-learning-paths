@@ -91,7 +91,7 @@ summary(model, (1, 28, 28))
 
 After running the notebook you will see the following output:
 
-![img4](Figures/04.png)
+![img4](Figures/4.png)
 
 You will see a detailed summary of the NeuralNetwork model’s architecture, including the following information:
 
