@@ -9,26 +9,26 @@ layout: "learningpathall"
 
 ## Background
 
-PyTorch is an open-source deep learning framework developed by Meta AI and now part of the Linux Foundation.
+PyTorch is an open-source deep learning framework that is developed by Meta AI and now part of the Linux Foundation.
 
-It is designed to provide a flexible and efficient platform for building and training neural networks. It is widely used due to its dynamic computational graph, which allows users to modify the architecture during runtime, making debugging and experimentation easier. 
+PyTorch is designed to provide a flexible and efficient platform for building and training neural networks. It is widely used due to its dynamic computational graph, which allows users to modify the architecture during runtime, making debugging and experimentation easier. 
 
-The major motivation for introducing PyTorch was to provide a more flexible, user-friendly deep learning framework that addressed the limitations of static computational graphs found in earlier tools like TensorFlow. 
+PyTorch's objective was to provide a more flexible, user-friendly deep learning framework that addresses the limitations of static computational graphs found in earlier tools like TensorFlow. 
 
-Prior to PyTorch, many frameworks used static computation graphs that required the entire model structure to be defined before training, making experimentation and debugging more cumbersome. PyTorch introduced dynamic computational graphs (also known as “define-by-run”), which allow the graph to be constructed on the fly as operations are executed. This flexibility significantly improved ease of use for researchers and developers, enabling faster prototyping, easier debugging, and more intuitive code.
+Prior to PyTorch, many frameworks used static computation graphs that required the entire model structure to be defined before training, making experimentation and debugging cumbersome. PyTorch introduced dynamic computational graphs (also known as “define-by-run”), which allow the graph to be constructed dynamicly as operations are executed. This flexibility significantly improved ease of use for researchers and developers, enabling faster prototyping, easier debugging, and more intuitive code.
 
 
-Additionally, PyTorch was designed to have seamless integration with Python, encouraging a more native coding experience. Its deep integration with GPU acceleration also made it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance contributed to PyTorch’s rapid adoption, especially in academic research, where experimentation and iteration are crucial.
+Additionally, PyTorch seamlessly integrates with Python, encouraging a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has contributed to PyTorch’s rapid adoption, especially in academic research, where experimentation and iteration are crucial.
 
-A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully connected layers (also known as linear layers). Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
+A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully-connected layers, which are also known as *linear layers*. Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
 
-To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch’s intuitive API and strong support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks like image classification and digit recognition.
+To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch’s intuitive API and support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks such as image classification and digit recognition.
 
-In this Learning Path, you will explore how to use PyTorch for creating a model for digit recognition. 
+In this Learning Path, you will explore how to use PyTorch for creating a model for digit recognition, before then proceeding to train it. 
 
 ## Before you begin
 
-Before you begin make sure Python3 is installed on your system. You can check by running:
+Before you begin make sure Python3 is installed on your system. You can check this by running:
 
 ```console
 python3 --version
@@ -123,4 +123,4 @@ print(torch.__version__)
 It will look as follows:
 ![img2](Figures/2.png)
 
-With your development environment created you can proceed to creating a PyTorch model.
+With your development environment created, you can proceed to creating a PyTorch model.
