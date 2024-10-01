@@ -7,7 +7,7 @@ weight: 5 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-The [CMSIS-DSP tests](https://github.com/ARM-software/CMSIS-DSP/blob/main/Testing) are publicly available, and are used for validation of the library. They can be run on the [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Fixed Virtual Platform (FVP).
+The [CMSIS-DSP tests](https://github.com/ARM-software/CMSIS-DSP/blob/main/Testing) are publicly available, and are used for validation of the library. They can be run on the [Corstone reference design](https://www.arm.com/products/silicon-ip-subsystems/), for example [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Fixed Virtual Platform (FVP).
 
 These tests are primarily for Arm internal use, but users can replicate if they wish. Else proceed to the [next step](/learning-paths/microcontrollers/cmsis-dsp/_review/).
 

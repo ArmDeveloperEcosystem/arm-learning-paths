@@ -13,34 +13,33 @@ There are very many Cortex-M microcontrollers with available [development boards
 
 ### MPS3 FPGA prototyping board
 
-The [Arm MPS3 FPGA Prototyping Board](https://www.arm.com/products/development-tools/development-boards/mps3/) can be programmed with [FPGA images](https://developer.arm.com/downloads/-/download-fpga-images/) for the Corstone-300 and the Corstone-310 designs. The FPGA images are good for early software development. 
+The [Arm MPS3 FPGA Prototyping Board](https://www.arm.com/products/development-tools/development-boards/mps3/) can be programmed with [FPGA images](https://developer.arm.com/downloads/-/download-fpga-images/) for the Corstone reference designs. The FPGA images are good for early software development.
 
 MPS3 is the recommended solution for evaluating performance, but boards are in short supply and may be difficult to obtain.
 
-
 ## Virtual Hardware
 
-Virtual implementations of the Corstone-300 and Corstone-310 are also available for software development. These can be accessed locally or in the cloud.
+Virtual implementations of the Corstone platforms are also available for software development. These can be accessed locally or in the cloud.
 
 ### Ecosystem FVPs
 
 Ecosystem FVPs are free-of-charge and target a variety of applications. They run on Linux and Windows.
 
-The Corstone-300 and Corstone-310 FVPs are available on the [Arm Ecosystem FVP page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps/). General ecosystem FVP setup instructions are provided in the [install guide](/install-guides/fm_fvp/eco_fvp/).
+The Corstone platforms are available on the [Arm Ecosystem FVP page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps/). General ecosystem FVP setup instructions are provided in the [install guide](/install-guides/fm_fvp/eco_fvp/).
 
 The Ecosystem FVP can be used in conjunction with [Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
 Keil MDK Professional Edition also provides these virtual platforms.
 
-### Arm Virtual Hardware 
+### Arm Virtual Hardware
 
-[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone-300 and Corstone-310 platforms. These are intended for use as software test and validation environments suitable for CI/CD integration.
+[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone platforms. These are intended for use as software test and validation environments suitable for CI/CD integration.
 
 Both versions of AVH offer FVPs. Choose the one which best matches your preferences. You can use your AWS account and pay for the compute you use or pay for the hardware-as-a-service directly using your Arm account. Both methods offer free trials.
 
 The marketing information provides more details about the similarities and differences.
 
-- [Arm Virtual Hardware Corstone and CPUs](#aws) AWS AMI (Amazon Machine Image) provides Virtual Hardware Targets (`VHT`) in a cloud instance (virtual machine). The AMI is available in the [AWS marketplace](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g/). 
+- [Arm Virtual Hardware Corstone and CPUs](#aws) AWS AMI (Amazon Machine Image) provides Virtual Hardware Targets (`VHT`) in a cloud instance (virtual machine). The AMI is available in the [AWS marketplace](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g/).
 
 - [Arm Virtual Hardware Third-Party Hardware](#3rdparty) uses hypervisor technology to model real hardware provided by Arm’s partners. It also offers FVPs as part of the cloud service.
 
@@ -84,13 +83,13 @@ If you can start the FVPs you are ready for ML application development.
 
 #### Arm Virtual Hardware Third-Party Hardware {#3rdparty}
 
-Arm Virtual Hardware Third-Party Hardware is currently in public beta. 
+Arm Virtual Hardware Third-Party Hardware is currently in public beta.
 
 [Log in to AVH](https://app.avh.arm.com/login/) using your Arm account or create a new one using the `Create an Arm account` link.
 
 After log in, you can use the AVH console to create a new device and select `Corstone-300fvp` or `Corstone-310fvp`.
 
-You can use the AVH console to upload software and control FVP execution. 
+You can use the AVH console to upload software and control FVP execution.
 
 There is also documentation available in the console you can read to continue learning about AVH.
 
@@ -105,12 +104,13 @@ The [AVH simulation model documentation](https://arm-software.github.io/AVH/main
 
 ### Number of MACs
 
-Ethos-U55 and Ethos-U65 offer a configurable number of MACs (multiply-accumulate units). During IP evaluation and performance analysis you need to understand the numbers of MACs available in the hardware and create your software to use the same configuration.
+Ethos-U55, Ethos-U65 and Ethos-U85 offer a configurable number of MACs (multiply-accumulate units). During IP evaluation and performance analysis you need to understand the numbers of MACs available in the hardware and create your software to use the same configuration.
 
-| Ethos-U NPU | Number of MACs supported |
-| ----------- | -----------              |
-| Ethos-U55   | 32, 64, 128, 256         |
-| Ethos-U65   | 256, 512                 |
+| Ethos-U NPU | Number of MACs supported    |
+| ----------- | -----------                 |
+| Ethos-U55   | 32, 64, 128, 256            |
+| Ethos-U65   | 256, 512                    |
+| Ethos-U85   | 128, 256, 512, 1024, 2048   |
 
 FVP and VHT platforms can be configured with:
 ```console
@@ -118,7 +118,7 @@ FVP and VHT platforms can be configured with:
 ```
 ### Fast mode
 
-The Ethos-U model used in FVPs can run at a faster speed with less simulation detail. 
+The Ethos-U model used in FVPs can run at a faster speed with less simulation detail.
 
 Use this configuration parameter to enable fast mode:
 
@@ -128,20 +128,24 @@ Use this configuration parameter to enable fast mode:
 
 ### Hardware memory maps
 
-A memory map is available for each configuration of Corstone-300 and Corstone-310. For example, the Corstone-300 with Cortex-M55 and Ethos-U55 [memory map](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/Memory-map-overview-for-Corstone-SSE-300/) describes the address ranges for memory and peripherals.
+A memory map is available for each configuration of the Corstone kits. For example, the Corstone-300 with Cortex-M55 and Ethos-U55 [memory map](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/Memory-map-overview-for-Corstone-SSE-300/) describes the address ranges for memory and peripherals.
 
-Refer to the [Corstone-300 Reference Guide](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-300-FVP/) and [Corstone-310 Reference Guide](https://developer.arm.com/documentation/100966/1118/Arm--Corstone-SSE-310-FVP/) for details about the hardware models.
+Refer to the reference guides for details about the hardware models:
+- [Corstone-300 Reference Guide](https://developer.arm.com/documentation/100966/latest/Arm--Corstone-SSE-300-FVP/)
+- [Corstone-310 Reference Guide](https://developer.arm.com/documentation/100966/latest/Arm--Corstone-SSE-310-FVP/)
+- [Corstone-315 Reference Guide](https://developer.arm.com/documentation/109395/latest)
+- [Corstone-320 Reference Guide](https://developer.arm.com/documentation/109760/latest)
 
 The memory map of FVPs is NOT configurable.
 
 ## Arm IP Explorer
 
-Arm IP Explorer is used by SoC architects to select IP for new designs. It includes simulation features which provide cycle accurate simulation of Arm processors for the purpose of processor selection. It covers Cortex-M and Ethos-U and can help you determine the best processor configurations for a project. 
+Arm IP Explorer is used by SoC architects to select IP for new designs. It includes simulation features which provide cycle accurate simulation of Arm processors for the purpose of processor selection. It covers Cortex-M and Ethos-U and can help you determine the best processor configurations for a project.
 
-Refer to the [Arm IP Explorer install guide](/install-guides/ipexplorer/) for links to more information. 
+Refer to the [Arm IP Explorer install guide](/install-guides/ipexplorer/) for links to more information.
 
 ## Summary
 
-You should have a general understanding of the hardware options for Corstone-300 and Corstone-310 for application development. You can use an MPS3 board or an FVP on your local machine or using one of the cloud solutions. 
+You should have a general understanding of the hardware options for Corstone-300 and Corstone-310 for application development. You can use an MPS3 board or an FVP on your local machine or using one of the cloud solutions.
 
 The next section covers similar information for software, tools, and example applications.
