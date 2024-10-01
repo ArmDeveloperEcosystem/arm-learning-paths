@@ -13,7 +13,7 @@ You can create and train a feedforward neural network to classify handwritten di
 
 The neural network begins with an input layer containing 28x28 = 784 input nodes, with each node accepting a single pixel from an MNIST image. 
 
-Next, you will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, a dropout layer is applied, randomly setting 20% of the nodes to zero.
+You will add a linear hidden layer with 96 nodes, using the hyperbolic tangent (tanh) activation function. To prevent overfitting, a dropout layer is applied, randomly setting 20% of the nodes to zero.
 
 You will then include another hidden layer with 256 nodes, followed by a second dropout layer that again removes 20% of the nodes. Finally, the output layer consists of ten nodes, each representing the probability of recognizing one of the digits (0-9).
 
@@ -127,7 +127,7 @@ At this point, the model makes predictions, but since it hasn’t been trained, 
 
 The output is still a probability distribution over the 10 digit classes (0-9), but the values do not correspond to the images, because the model has not learned the patterns from the MNIST dataset.
 
-Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions, which is 28x28 pixels. The model can accept input, pass it through the layers, and return a prediction - a vector of 10 probabilities. However, the results are nout seful until the model is trained.
+Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions, which is 28x28 pixels. The model can accept input, pass it through the layers, and return a prediction - a vector of 10 probabilities. However, the results are not useful until the model is trained.
 
 # Summary
 
