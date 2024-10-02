@@ -8,17 +8,24 @@ layout: "learningpathall"
 
 ## Overview
 
-In this learning path, you will build a .NET 8 based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in a Azure Kubernetes Cluster, running on Microsoft Cobalt 100 based VMs. Self-hosted runners offer more control and flexibility in terms of infrastructure, operating systems and tools than GitHub-hosted runners.
+In this learning path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools than GitHub-hosted runners.
 
 {{% notice Note %}}
-GitHub hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to understand how you can configure a GitHub managed runner.
+GitHub-hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub-hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to learn how you can configure a GitHub-managed runner.
 {{% /notice %}}
 
 ## What is Azure Cobalt 100?
 
-Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale out cloud-based applications. The Azure Cobalt 100 VM instances include: General purpose -`Dpsv6 and Dplsv6` and Memory optimized - `Epsv6`virtual machines. To learn more about Azure Cobalt 100 refer to this [blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
+Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale out cloud-based applications. 
 
-Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create this VM, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. Select `Create Azure Virtual Machine` in the portal and fill in the details like `Name`, `Region` etc. In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
+The Azure Cobalt 100 VM instances include: 
+
+* General purpose -`Dpsv6 and Dplsv6`. 
+* Memory optimized - `Epsv6`virtual machines. 
+
+To learn more about Azure Cobalt 100, refer to this [blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
+
+Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create this VM, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. Select `Create Azure Virtual Machine` in the portal and fill in the details such as `Name`, and `Region`. In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
 
 ![azure-cobalt-vm #center](_images/azure-cobalt-vm.png)
 
@@ -52,7 +59,7 @@ Create a container registry in Azure Container Registry to host the docker image
 ```console
 az acr create --resource-group myResourceGroup --name mycontainerregistry
 ```
-## Setup GitHub Secrets
+## Set up GitHub Secrets
 
 GitHub Actions needs access to Azure Container Registry to push application docker images and Azure Kubernetes Service to deploy application pods. Create the following secrets in your GitHub repository:
 
@@ -209,19 +216,21 @@ jobs:
             msbuilddemo.azurecr.io/githubactions-aks-demo:${{github.sha }}
 ```
 
-This GitHub Actions yaml file defines a workflow to deploy a .NET application to Azure Kubernetes Service (AKS). This workflow runs on a self-hosted GitHub Actions runner that you configured earlier. This workflow can be triggered manually or on a push to the repository. It has the following main steps:
+This GitHub Actions yaml file defines a workflow to deploy a .NET application to Azure Kubernetes Service (AKS). This workflow runs on the self-hosted GitHub Actions runner that you configured earlier. This workflow can be triggered manually or on a push to the repository. 
 
-1. `Checkout repo` - Checks out the repository code
-2. `Build image` - Builds a Docker image of the application
-3. `Azure login` - Logs into Azure using stored credentials in GitHub Secrets
-4. `ACR login` - Logs into Azure Container Registry (ACR)
-5. `Tag and push image` - Tags and pushes the Docker image to Azure Container Registry
-6. `Get AKS credentials` - Retrieves Azure Kubernetes Cluster credentials
-7. `Deploy application` - Deploys the application to AKS using specified Kubernetes manifests
+It has the following main steps:
+
+1. `Checkout repo` - Checks out the repository code.
+2. `Build image` - Builds a Docker image of the application.
+3. `Azure login` - Logs in to Azure using stored credentials in GitHub Secrets.
+4. `ACR login` - Logs in to Azure Container Registry (ACR).
+5. `Tag and push image` - Tags and pushes the Docker image to Azure Container Registry.
+6. `Get AKS credentials` - Retrieves Azure Kubernetes Cluster credentials.
+7. `Deploy application` - Deploys the application to AKS using specified Kubernetes manifests.
 
 ## Run the CI/CD pipeline
 
-Trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app` and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should Actions output similar to what is shown below:
+Trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app` and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should see the Actions output similar to what is shown below:
 
 ![github-run #center](_images/github-run.png)
 
