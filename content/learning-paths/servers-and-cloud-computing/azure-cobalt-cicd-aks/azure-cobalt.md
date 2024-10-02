@@ -8,15 +8,15 @@ layout: "learningpathall"
 
 ## Overview
 
-In this learning path, you will build a sample .NET 8 based web application on a self-hosted GitHub Actions Arm64 runner and deploy the application in a Azure Kubernetes Cluster, running on Microsoft Cobalt 100 based VMs. Self-hosted runners offer more control and flexibility in terms of infrastructure, operating systems and tools than GitHub-hosted runners.
+In this learning path, you will build a .NET 8 based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in a Azure Kubernetes Cluster, running on Microsoft Cobalt 100 based VMs. Self-hosted runners offer more control and flexibility in terms of infrastructure, operating systems and tools than GitHub-hosted runners.
 
-Note: GitHub hosted Arm64 runners are now Generally Available for certain types of users in GitHub. If you're GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to understand how you can configure a GitHub managed runner.
+Note: GitHub hosted Arm64 runners are now Generally Available for certain types of users in GitHub. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to understand how you can configure a GitHub managed runner.
 
-To configure a self-hosted GitHub Actions runner in GitHub Actions. To create an Arm-based self-hosted runner follow this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/)
+To create an Arm-based self-hosted runner follow this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/)
 
 ## What is Azure Cobalt 100?
 
-Azure Cobalt 100 is the latest generation of Arm Neoverse based CPU offered by Microsoft. The Cobalt 100 processor is based on the Neoverse N-series (N2) Arm CPU design, which is optimized for the performance of scale out cloud-based applications. This generation of VM instances include: General purpose -`Dpsv6 and Dplsv6` and Memory optimized - `Epsv6`virtual machines. To learn more about Azure Cobalt 100 refer to this [blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
+Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale out cloud-based applications. The Azure Cobalt 100 VM instances include: General purpose -`Dpsv6 and Dplsv6` and Memory optimized - `Epsv6`virtual machines. To learn more about Azure Cobalt 100 refer to this [blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
 
 Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create this VM, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. Select `Create Azure Virtual Machine` in the portal and fill in the details like `Name`, `Region` etc. In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
 
@@ -26,23 +26,26 @@ To learn more about Arm-based VMs in Azure, refer to this [learning path](/learn
 
 ## Configure GitHub Repository
 
-The source code of the application and configuration files required for this learning path are hosted in this [github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests required to deploy this .NET 8 based application. Clone this repository by log in to your GitHub account.
+The source code for the application and configuration files required to follow this learning path are hosted in this [github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests required to deploy this .NET 8 based application. 
 
-Once the GitHub repository is cloned successfully, navigate to the `Settings` tab and click `Actions` in the left navigation pane. In `Runners`, select `New self-hosted runner` which opens up a new page to configure the runner. For `Runner image` select `Linux` and `Architecture` as `Arm64`. Execute the commands shown on the new `D2psv6` VM created in previous step.
+Start by forking this repository.
 
-Once the runner is configured successfully, you'll see a self-hosted runner appear on the same page in GitHub.
+Once the GitHub repository is forked successfully, navigate to the `Settings` tab and click `Actions` in the left navigation pane. In `Runners`, select `New self-hosted runner` which opens up a new page to configure the runner. For `Runner image` select `Linux` and `Architecture` as `ARM64`. Execute the commands shown on this page on the `D2psv6` VM you created in previous step.
 
-## Create AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform
+Once the runner is configured successfully, you will see a self-hosted runner appear on the same page in GitHub.
 
-You can create an Arm-based AKS cluster using this [learning path](/learning-paths/servers-and-cloud-computing/aks/cluster-deployment/). Make sure to update the `main.tf` file with the following:
+## Create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform
 
+You can create an Arm-based AKS cluster by following the steps in this [learning path](/learning-paths/servers-and-cloud-computing/aks/cluster-deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
+
+```console
 `vm_size` = `Standard_D2ps_v6`
-
+```
 Once the cluster creation is successful, you can proceed to the next section.
 
 ## Create container registry with ACR
 
-Create a container registry in Azure Container Registry to host the docker images of application. Use the following command to create the registry
+Create a container registry in Azure Container Registry to host the docker images for your application. Use the following command to create the registry:
 
 ```console
 az acr create --resource-group myResourceGroup --name mycontainerregistry
@@ -51,18 +54,18 @@ az acr create --resource-group myResourceGroup --name mycontainerregistry
 
 GitHub Actions needs access to Azure Container Registry to push application docker images and Azure Kubernetes Service to deploy application pods. Create the following secrets in your GitHub repository:
 
-- `ACR_Name` with name of ACR registry
+- `ACR_Name` with the name of your Azure Container Registry
 - `AZURE_CREDENTIALS` with Azure Credentials of a Service Principal
-- `CLUSTER_NAME` with name of AKS cluster
-- `CLUSTER_RESOURCE_GROUP_NAME` with name of resource group
+- `CLUSTER_NAME` with the name of your AKS cluster
+- `CLUSTER_RESOURCE_GROUP_NAME` with the name of your resource group
 
-Refer to this [documentation](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-secret) if you need help in signing into Azure using GitHub Actions. 
+Refer to this [guide](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-secret) if you need help with signing into Azure using GitHub Actions. 
 
 ## Deploy a .NET based application 
 
-.NET added support for arm64 applications starting with version 6. Since then, there were several performance enhancements done over the years. .NET 9 is the latest version to support Arm64 targets. In this learning path we're using .NET 8 SDK for application development.
+.NET added support for arm64 applications starting with version 6. Several performance enhancements have been made in later versions. The latest version that supports Arm64 targets is .NET 9. In this learning path you will use the .NET 8 SDK for application development.
 
-In the github repoisotry locate `aks-ga-demo.csproj` file. Verify that the `TargetFramework` field has `net8.0` value.
+In your fork of the github repository inspect the `aks-ga-demo.csproj` file. Verify that the `TargetFramework` field has `net8.0` as the value. The contents of the file are shown below:
 
 ```console
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -75,11 +78,11 @@ In the github repoisotry locate `aks-ga-demo.csproj` file. Verify that the `Targ
 </Project>
 ```
 
-In the same path, locate the `Dockerfile` and browse its contents. This is a multi-stage dockerfile with the following stages: 
+You can inspect the contents of the `Dockerfile` within your repository as well. This is a multi-stage Dockerfile with the following stages: 
 
 1. `base` stage - Prepares the base environment with the `.NET 8 SDK` and exposes ports 80 and 443.
 2. `build` stage - Restores dependencies and builds the application
-3. `publish` stage - Publishes the application, ready for deployment
+3. `publish` stage - Publishes the application making it ready for deployment
 4. `final` stage - Copies the published application into the final image and sets the entry point to run the application
 
 ```console
@@ -132,7 +135,7 @@ spec:
         - containerPort: 80
 ```
 
-Let's also look at `service.yml` file, that defines a `Service` and uses `LoadBalancer` to expose the service externally on port 8080, directing traffic to the application’s container on port 80.
+The `service.yml` file defines a `Service` and uses `LoadBalancer` to expose the service externally on port 8080, directing traffic to the application’s container on port 80.
 
 ```yaml
 apiVersion: v1
@@ -204,7 +207,7 @@ jobs:
             msbuilddemo.azurecr.io/githubactions-aks-demo:${{github.sha }}
 ```
 
-This GitHub Actions yaml file defines a workflow to deploy a .NET application to Azure Kubernetes Service (AKS). This workflow runs on a self-hosted GitHub Actions runner, configured earlier. This workflow can be triggered manually or on a push to the repository. It has the following main steps:
+This GitHub Actions yaml file defines a workflow to deploy a .NET application to Azure Kubernetes Service (AKS). This workflow runs on a self-hosted GitHub Actions runner that you configured earlier. This workflow can be triggered manually or on a push to the repository. It has the following main steps:
 
 1. `Checkout repo` - Checks out the repository code
 2. `Build image` - Builds a Docker image of the application
@@ -216,11 +219,11 @@ This GitHub Actions yaml file defines a workflow to deploy a .NET application to
 
 ## Run the CI/CD pipeline
 
-Trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app` and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should see an output similar to below:
+Trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app` and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should Actions output similar to what is shown below:
 
 ![github-run #center](_images/github-run.png)
 
-You can check your kubernetes cluster and should see new application pods deployed on the cluster as shown below:
+You can check your kubernetes cluster and see new application pods deployed on the cluster as shown below:
 
 ![kubernetes-deployment #center](_images/kubernetes-deployment.png)
 
