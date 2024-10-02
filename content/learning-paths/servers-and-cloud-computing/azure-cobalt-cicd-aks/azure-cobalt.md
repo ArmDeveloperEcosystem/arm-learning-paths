@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 In this learning path, you will build a .NET 8 based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in a Azure Kubernetes Cluster, running on Microsoft Cobalt 100 based VMs. Self-hosted runners offer more control and flexibility in terms of infrastructure, operating systems and tools than GitHub-hosted runners.
 
-Note: GitHub hosted Arm64 runners are now Generally Available for certain types of users in GitHub. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to understand how you can configure a GitHub managed runner.
-
-To create an Arm-based self-hosted runner follow this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/)
+{{% notice Note %}}
+GitHub hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to understand how you can configure a GitHub managed runner.
+{{% /notice %}}
 
 ## What is Azure Cobalt 100?
 
@@ -33,6 +33,8 @@ Start by forking this repository.
 Once the GitHub repository is forked successfully, navigate to the `Settings` tab and click `Actions` in the left navigation pane. In `Runners`, select `New self-hosted runner` which opens up a new page to configure the runner. For `Runner image` select `Linux` and `Architecture` as `ARM64`. Execute the commands shown on this page on the `D2psv6` VM you created in previous step.
 
 Once the runner is configured successfully, you will see a self-hosted runner appear on the same page in GitHub.
+
+To learn more about creating an Arm-based self-hosted runner refer to this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/)
 
 ## Create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform
 
