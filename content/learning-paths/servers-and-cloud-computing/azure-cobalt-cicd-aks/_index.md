@@ -1,15 +1,14 @@
 ---
-title: Build a .NET based cloud native application with GitHub Actions and Azure Kubernetes Service on Microsoft Cobalt
+title: Deploy a .NET application with GitHub Actions and Azure Kubernetes Service on Azure Cobalt 100 VMs
 
 minutes_to_complete: 60   
 
 who_is_this_for: This is an advanced topic for software developers who want to develop cloud native applications using GitHub Actions and Azure Kubernetes Service (AKS)
 
 learning_objectives: 
-    - Build a CI/CD pipeline with multi-architecture support
-    - Build a CI/CD pipeline with multi-architecture support
-    - Build multi-architecture docker images using native GitLab runners on x86 and Arm
-    - Automate the build and deployment of a multi-arch application with GitLab CI/CD
+    - Configure an Azure Cobalt 100 VM as a self-hosted GitHub runner.
+    - Create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform.
+    - Deploy a .NET application to AKS with GitHub Actions using the self-hosted Arm64 based runner.
 
 prerequisites:
     - A Microsoft Azure account. Create an account if needed.
