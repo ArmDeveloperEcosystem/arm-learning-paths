@@ -39,7 +39,7 @@ In summary, Sysbox is a powerful container runtime that provides many of the ben
 
 Sysbox runs on Linux and supports Arm. 
 
-There are some limitations for older versions of Linux, but recent Linux versions do not require any special consideration.
+Sysbox has limited suppot for older versions of Linux, but recent Linux versions are easily compatible.
 
 If you are unsure about your Linux distribution and Linux kernel version, you can check [Sysbox Distro Compatibility](https://github.com/nestybox/sysbox/blob/master/docs/distro-compat.md)
 
@@ -72,7 +72,7 @@ Install the package using the `apt` command:
 sudo apt-get install ./sysbox-ce_0.6.4-0.linux_arm64.deb -y
 ```
 
-If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from source code. Refer to [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md) for further information.
+If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from the source code. Refer to [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md) for further information.
 
 Run `systemctl` to confirm if Sysbox is running:
 
@@ -80,7 +80,7 @@ Run `systemctl` to confirm if Sysbox is running:
 systemctl list-units -t service --all | grep sysbox
 ```
 
-If Sysbox is running, you should see the output:
+If Sysbox is running, you see the output:
 
 ```output
   sysbox-fs.service                              loaded    active   running sysbox-fs (part of the Sysbox container runtime)
