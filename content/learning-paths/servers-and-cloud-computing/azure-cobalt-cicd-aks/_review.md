@@ -2,13 +2,13 @@
 review:
     - questions:
         question: >
-            .NET based applications can be deployed on Azure Cobalt 100 Arm-based VMs
+            .NET based applications can be deployed on Azure Cobalt 100 Arm-based VMs.
         answers:
             - "True"
             - "False"
         correct_answer: 1                     
         explanation: >
-            Arm Neoverse based Azure Cobalt 100 VMs support .NET based applications
+            Arm Neoverse based Azure Cobalt 100 VMs support .NET based applications.
     - questions:
         question: >
             What is the general purpose VM series supported by Azure Cobalt 100 processors?
@@ -20,7 +20,7 @@ review:
             General purpose VM series Dpsv6 and Dplsv6 are based on Azure Cobalt 100 processors. Epsv6 series VMs are memory optimized VMs based on Azure Cobalt 100 processors.
     - questions:
         question: >
-            GitHub Actions does not support Arm-based runners
+            GitHub Actions does not support Arm-based runners.
         answers:
             - "True"
             - "False"
