@@ -1,5 +1,5 @@
 ---
-title: Deploy a .NET application with GitHub Actions and Azure Kubernetes Service on Azure Cobalt 100 VMs
+title: Deploy a .NET application with GitHub Actions on Azure Cobalt 100 VMs
 
 minutes_to_complete: 60   
 
