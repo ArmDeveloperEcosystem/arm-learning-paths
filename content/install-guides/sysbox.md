@@ -54,7 +54,7 @@ sudo usermod -aG docker $USER ; newgrp docker
 
 Refer to the [Docker install guide](/install-guides/docker/docker-engine/) for more information. 
 
-Sysbox can be used on a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/intro/find-hardware/), a Raspberry Pi 5, or a Arm Chromebook with Linux enabled.
+Sysbox can be used on a virtual machine from a [cloud service provider](/learning-paths/servers-and-cloud-computing/intro/find-hardware/), a Raspberry Pi 5, or any other Arm Linux computer. 
 
 ## How do I install Sysbox?
 
