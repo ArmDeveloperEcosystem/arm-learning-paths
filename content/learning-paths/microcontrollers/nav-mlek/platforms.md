@@ -13,7 +13,7 @@ There are very many Cortex-M microcontrollers with available [development boards
 
 ### MPS3 FPGA prototyping board
 
-The [Arm MPS3 FPGA Prototyping Board](https://www.arm.com/products/development-tools/development-boards/mps3/) can be programmed with [FPGA images](https://developer.arm.com/downloads/-/download-fpga-images/) for the for the Corstone-300, Corstone-310 and Corstone-1000 reference designs. The FPGA images are good for early software development.
+The [Arm MPS3 FPGA Prototyping Board](https://www.arm.com/products/development-tools/development-boards/mps3/) can be programmed with [FPGA images](https://developer.arm.com/downloads/-/download-fpga-images/) for the for the Corstone-300, Corstone-310 and Corstone-1000 reference packages. The FPGA images are good for early software development.
 
 MPS3 is the recommended solution for evaluating performance, but boards are in short supply and may be difficult to obtain.
 
@@ -25,7 +25,7 @@ Virtual implementations of the Corstone platforms are also available for softwar
 
 Ecosystem FVPs are free-of-charge and target a variety of applications. They run on Linux and Windows.
 
-The Corstone platforms are available on the [Arm Ecosystem FVP page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps/). General ecosystem FVP setup instructions are provided in the [install guide](/install-guides/fm_fvp/eco_fvp/).
+The Corstone reference systems are available on the [Arm Ecosystem FVP page](https://developer.arm.com/downloads/-/arm-ecosystem-fvps/). General ecosystem FVP setup instructions are provided in the [install guide](/install-guides/fm_fvp/eco_fvp/).
 
 The Ecosystem FVP can be used in conjunction with [Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
@@ -33,7 +33,7 @@ Keil MDK Professional Edition also provides these virtual platforms.
 
 ### Arm Virtual Hardware
 
-[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone platforms. These are intended for use as software test and validation environments suitable for CI/CD integration.
+[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone reference systems. These are intended for use as software test and validation environments suitable for CI/CD integration.
 
 Both versions of AVH offer FVPs. Choose the one which best matches your preferences. You can use your AWS account and pay for the compute you use or pay for the hardware-as-a-service directly using your Arm account. Both methods offer free trials.
 

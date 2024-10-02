@@ -9,7 +9,7 @@ layout: "learningpathall"
 ---
 The [Arm ML Evaluation Kit (MLEK)](https://review.mlplatform.org/plugins/gitiles/ml/ethos-u/ml-embedded-evaluation-kit) provides a number of ready-to-use ML applications. These allow you to investigate the embedded software stack and evaluate performance on the Cortex-M55 and Ethos-U55 processors.
 
-You can use the MLEK source code to build sample applications and run them on the [Corstone platform](https://www.arm.com/products/silicon-ip-subsystems/), for example the [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Fixed Virtual Platform (FVP).
+You can use the MLEK source code to build sample applications and run them on the [Corstone reference systems](https://www.arm.com/products/silicon-ip-subsystems/), for example the [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Fixed Virtual Platform (FVP).
 
 ## Before you begin
 
