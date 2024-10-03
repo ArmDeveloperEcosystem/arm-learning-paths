@@ -7,9 +7,7 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Background
-
-In [Create a PyTorch model for digit classification](/learning-paths/cross-platform/pytorch-digit-classification-architecture/), you created a feedforward neural network for digit classification using the MNIST dataset. The network was left untrained and lacks the ability to make accurate predictions. Make sure to create that Learning Path before starting this one.
+In the previous section, you created a feedforward neural network for digit classification using the MNIST dataset. The network was left untrained and lacks the ability to make accurate predictions. 
 
 To enable the network to recognize handwritten digits effectively, training is needed. Training in PyTorch involves configuring the network's parameters, such as weights and biases, by exposing the model to labeled data and iteratively adjusting these parameters to minimize prediction errors. This process allows the model to learn the patterns in the data, enabling it to make accurate classifications on new, unseen inputs.
 

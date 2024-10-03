@@ -7,8 +7,6 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Background
-
 PyTorch is an open-source deep learning framework that is developed by Meta AI and is now part of the Linux Foundation.
 
 PyTorch is designed to provide a flexible and efficient platform for building and training neural networks. It is widely used due to its dynamic computational graph, which allows users to modify the architecture during runtime, making debugging and experimentation easier. 

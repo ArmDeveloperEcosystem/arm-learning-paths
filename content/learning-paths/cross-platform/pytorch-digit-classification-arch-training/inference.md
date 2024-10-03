@@ -101,7 +101,7 @@ After running the code, you should see results similar to the following figure:
 
 ![image](Figures/03.png)
 
-# Summary
+# What you have learned 
 
 In this exercise, you went through the complete process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, you optimized the model’s weights and biases over multiple epochs. You employed the CrossEntropyLoss function and the Adam optimizer to minimize prediction errors and improve accuracy. You periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
 
