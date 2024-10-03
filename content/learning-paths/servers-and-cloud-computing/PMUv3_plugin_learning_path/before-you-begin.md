@@ -83,7 +83,7 @@ popd
 Get the PMUv3 plugin source code by running:
 
 ```console
-git clone https://github.com/GayathriNarayana19/PMUv3_plugin.git
+git clone https://github.com/ARM-software/PMUv3_plugin.git
 ```
 
 Copy the Perf libs:
