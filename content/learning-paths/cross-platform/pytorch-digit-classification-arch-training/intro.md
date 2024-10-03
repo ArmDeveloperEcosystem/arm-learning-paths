@@ -13,7 +13,7 @@ PyTorch is designed to provide a flexible and efficient platform for building an
 
 PyTorch's objective is to provide a more flexible, user-friendly deep learning framework that addresses the limitations of static computational graphs found in earlier tools like TensorFlow. 
 
-Prior to PyTorch, many frameworks used static computation graphs that require the entire model structure to be defined before training, making experimentation and debugging cumbersome. PyTorch introduced dynamic computational graphs, also known as “define-by-run”, that allow the graph to be constructed dynamicly as operations are executed. This flexibility significantly improves ease of use for researchers and developers, enabling faster prototyping, easier debugging, and more intuitive code.
+Prior to PyTorch, many frameworks used static computation graphs that require the entire model structure to be defined before training, making experimentation and debugging cumbersome. PyTorch introduced dynamic computational graphs, also known as “define-by-run”, that allow the graph to be constructed dynamically as operations are executed. This flexibility significantly improves ease of use for researchers and developers, enabling faster prototyping, easier debugging, and more intuitive code.
 
 
 Additionally, PyTorch seamlessly integrates with Python, encouraging a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has contributed to PyTorch’s rapid adoption, especially in academic research, where experimentation and iteration are crucial.
