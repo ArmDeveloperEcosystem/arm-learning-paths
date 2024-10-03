@@ -1,5 +1,5 @@
 ---
-title: "Create self-hosted GitHub Actions Runner and AKS cluster based on Arm-based Microsoft Cobalt VMs"
+title: "Create self-hosted GitHub Actions Runner and AKS cluster based on Arm-based Azure Cobalt VMs"
 
 weight: 2
 
@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Overview
 
-In this learning path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools than GitHub-hosted runners.
+In this learning path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools compared to GitHub-hosted runners.
 
 {{% notice Note %}}
 GitHub-hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub-hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to learn how you can configure a GitHub-managed runner.
@@ -21,29 +21,29 @@ Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Ar
 The Azure Cobalt 100 VM instances include: 
 
 * General purpose -`Dpsv6 and Dplsv6`. 
-* Memory optimized - `Epsv6`virtual machines. 
+* Memory-optimized - `Epsv6` virtual machines. 
 
-To learn more about Azure Cobalt 100, refer to this [blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
+To learn more about Azure Cobalt 100, refer to this blog[blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
 
-Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create this VM, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. Select `Create Azure Virtual Machine` in the portal and fill in the details such as `Name`, and `Region`. In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
+Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create an Azure virtual machine, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. Select `Create Azure Virtual Machine`, and fill in the details such as `Name`, and `Region`. In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
 
 ![azure-cobalt-vm #center](_images/azure-cobalt-vm.png)
 
 To learn more about Arm-based VMs in Azure, refer to this [learning path](/learning-paths/servers-and-cloud-computing/csp/azure)
 
-## Configure GitHub Repository
+## How do I configure the GitHub repository?
 
-The source code for the application and configuration files required to follow this learning path are hosted in this [github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests required to deploy this .NET 8 based application. 
+The source code for the application and configuration files that you require to follow this learning path are hosted in this [github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests that you require to deploy this .NET 8 based application. 
 
-Start by forking this repository.
+Start by forking the repository.
 
-Once the GitHub repository is forked successfully, navigate to the `Settings` tab and click `Actions` in the left navigation pane. In `Runners`, select `New self-hosted runner` which opens up a new page to configure the runner. For `Runner image` select `Linux` and `Architecture` as `ARM64`. Execute the commands shown on this page on the `D2psv6` VM you created in previous step.
+Once the GitHub repository is forked, navigate to the `Settings` tab, and click `Actions` in the left navigation pane. In `Runners`, select `New self-hosted runner`, which opens up a new page to configure the runner. For `Runner image`, select `Linux` and for `Architecture`, select `ARM64`. Execute the commands shown on this page on the `D2psv6` VM you created in the previous step.
 
 Once the runner is configured successfully, you will see a self-hosted runner appear on the same page in GitHub.
 
-To learn more about creating an Arm-based self-hosted runner refer to this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/)
+To learn more about creating an Arm-based self-hosted runner, refer to this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/).
 
-## Create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform
+## How do I create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform?
 
 You can create an Arm-based AKS cluster by following the steps in this [learning path](/learning-paths/servers-and-cloud-computing/aks/cluster-deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
 
@@ -52,9 +52,9 @@ You can create an Arm-based AKS cluster by following the steps in this [learning
 ```
 Once the cluster creation is successful, you can proceed to the next section.
 
-## Create container registry with ACR
+## How do I create a container registry with ACR?
 
-Create a container registry in Azure Container Registry to host the docker images for your application. Use the following command to create the registry:
+To create a container registry in Azure Container Registry to host the docker images for your application, Use the following command:
 
 ```console
 az acr create --resource-group myResourceGroup --name mycontainerregistry
@@ -70,7 +70,7 @@ GitHub Actions needs access to Azure Container Registry to push application dock
 
 Refer to this [guide](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-secret) if you need help with signing into Azure using GitHub Actions. 
 
-## Deploy a .NET based application 
+## Deploy a .NET-based application 
 
 .NET added support for arm64 applications starting with version 6. Several performance enhancements have been made in later versions. The latest version that supports Arm64 targets is .NET 9. In this learning path you will use the .NET 8 SDK for application development.
 
@@ -228,9 +228,9 @@ It has the following main steps:
 6. `Get AKS credentials` - Retrieves Azure Kubernetes Cluster credentials.
 7. `Deploy application` - Deploys the application to AKS using specified Kubernetes manifests.
 
-## Run the CI/CD pipeline
+## How do I run the CI/CD pipeline?
 
-Trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app` and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should see the Actions output similar to what is shown below:
+The next step is to trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app`, and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should see the Actions output in a format similar to what is shown below:
 
 ![github-run #center](_images/github-run.png)
 
