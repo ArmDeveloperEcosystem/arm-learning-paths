@@ -89,7 +89,7 @@ model = NeuralNetwork()
 summary(model, (1, 28, 28))
 ```
 
-After running the notebook you will see the following output:
+After running the notebook, you will see the following output:
 
 ![img4](Figures/4.png)
 

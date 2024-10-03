@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 Start by downloading the MNIST dataset. Proceed as follows:
 
-1. Open the pytorch-digits.ipynb you created in [Create a PyTorch model for digit classification](/learning-paths/cross-platform/pytorch-digit-classification-architecture/).
+1. Open the pytorch-digits.ipynb you created earlier.
 
 2. Add the following statements:
 
