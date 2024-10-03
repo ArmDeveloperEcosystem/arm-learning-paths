@@ -49,7 +49,7 @@ To learn more about creating an Arm-based self-hosted runner, see this Learning 
 
 ## How do I create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform?
 
-You can create an Arm-based AKS cluster by following the steps in this [learning path](/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
+You can create an Arm-based AKS cluster by following the steps in this Learning Path [*Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service*](/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
 
 ```console
 `vm_size` = `Standard_D2ps_v6`
