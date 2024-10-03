@@ -234,7 +234,7 @@ It has the following main steps:
 
 ## How do I run the CI/CD pipeline?
 
-The next step is to trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app`, and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you should see the Actions output in a format similar to what is shown below:
+The next step is to trigger the pipeline manually by navigating to `Actions` tab in the GitHub repository. Select `Deploy .NET app`, and click on `Run Workflow`. You can also execute the pipeline by making a commit to the repository. Once the pipeline executes successfully, you will see the Actions output in a format similar to what is shown below:
 
 ![github-run #center](_images/github-run.png)
 
