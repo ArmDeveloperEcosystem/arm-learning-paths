@@ -12,7 +12,7 @@ learning_objectives:
     - Train a neural network using PyTorch.
 
 prerequisites:
-    - A computer that can run Python3 and Visual Studio Code. The OS can can be Windows, Linux, or macOS.
+    - A computer that can run Python3 and Visual Studio Code. The OS can be Windows, Linux, or macOS.
   
 
 author_primary: Dawid Borycki
