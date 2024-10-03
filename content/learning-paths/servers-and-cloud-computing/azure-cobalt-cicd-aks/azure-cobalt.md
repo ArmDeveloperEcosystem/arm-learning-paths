@@ -43,11 +43,13 @@ The source code for the application and configuration files that you require to 
 
 * Once you have configured the runner successfully, you will see a self-hosted runner appear on the same page in GitHub.
 
-To learn more about creating an Arm-based self-hosted runner, refer to this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/).
+{{% notice Note %}}
+To learn more about creating an Arm-based self-hosted runner, see this Learning Path [*Use Self-Hosted Arm64-based runners in GitHub Actions for CI/CD*](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/).
+{{% /notice %}}
 
 ## How do I create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform?
 
-You can create an Arm-based AKS cluster by following the steps in this [learning path](/learning-paths/servers-and-cloud-computing/aks/cluster-deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
+You can create an Arm-based AKS cluster by following the steps in this [learning path](/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
 
 ```console
 `vm_size` = `Standard_D2ps_v6`
