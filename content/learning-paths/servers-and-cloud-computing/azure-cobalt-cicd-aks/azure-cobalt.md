@@ -1,45 +1,47 @@
 ---
-title: "Create self-hosted GitHub Actions Runner and AKS cluster based on Arm-based Azure Cobalt VMs"
+title: "Build and deploy a .NET application"
 
-weight: 2
+weight: 3
 
 layout: "learningpathall"
 ---
 
-## Overview
-
-In this learning path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools compared to GitHub-hosted runners.
+In this learning path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools, in comparison to GitHub-hosted runners.
 
 {{% notice Note %}}
-GitHub-hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub-hosted Arm64 runners. Follow this [learning path](/learning-paths/cross-platform/github-arm-runners/) to learn how you can configure a GitHub-managed runner.
+* GitHub-hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub-hosted Arm64 runners. 
+
+* To learn how you can configure a GitHub-managed runner, see the Learning Path [*Build multi-architecture container images with GitHub Arm-hosted runners*](/learning-paths/cross-platform/github-arm-runners/).
 {{% /notice %}}
 
-## What is Azure Cobalt 100?
+## How do I create an Azure Virtual Machine?
+Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create an Azure virtual machine, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. 
 
-Cobalt 100 is Microsoft’s first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. The Cobalt 100 processor is optimized for the performance of scale out cloud-based applications. 
+Select `Create Azure Virtual Machine`, and fill in the details such as `Name`, and `Region`. 
 
-The Azure Cobalt 100 VM instances include: 
-
-* General purpose -`Dpsv6 and Dplsv6`. 
-* Memory-optimized - `Epsv6` virtual machines. 
-
-To learn more about Azure Cobalt 100, refer to this blog[blog](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
-
-Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create an Azure virtual machine, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. Select `Create Azure Virtual Machine`, and fill in the details such as `Name`, and `Region`. In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
+In the `Size` field, click on `See all sizes` and select the `D-Series v6` family of VMs. Select `D2psv6` from the list and create the VM.
 
 ![azure-cobalt-vm #center](_images/azure-cobalt-vm.png)
 
-To learn more about Arm-based VMs in Azure, refer to this [learning path](/learning-paths/servers-and-cloud-computing/csp/azure)
+{{% notice Note %}}
+To learn more about Arm-based VMs in Azure, refer to "Getting Started with Microsoft Azure" in  [*Get started with Arm-based cloud instances*](/learning-paths/servers-and-cloud-computing/csp/azure).
+{{% /notice %}}
 
 ## How do I configure the GitHub repository?
 
-The source code for the application and configuration files that you require to follow this learning path are hosted in this [github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests that you require to deploy this .NET 8 based application. 
+The source code for the application and configuration files that you require to follow this learning path are hosted in this [msbuild-azure github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests that you require to deploy the .NET 8 based application. 
 
-Start by forking the repository.
+* Start by forking the repository.
 
-Once the GitHub repository is forked, navigate to the `Settings` tab, and click `Actions` in the left navigation pane. In `Runners`, select `New self-hosted runner`, which opens up a new page to configure the runner. For `Runner image`, select `Linux` and for `Architecture`, select `ARM64`. Execute the commands shown on this page on the `D2psv6` VM you created in the previous step.
+* Once the GitHub repository is forked, navigate to the `Settings` tab, and click `Actions` in the left navigation pane. 
 
-Once the runner is configured successfully, you will see a self-hosted runner appear on the same page in GitHub.
+ * In `Runners`, select `New self-hosted runner`, which opens up a new page to configure the runner. 
+
+* For `Runner image`, select `Linux` and for `Architecture`, select `ARM64`. 
+
+* Execute the commands shown on this page on the `D2psv6` VM you created in the previous step.
+
+* Once you have configured the runner successfully, you will see a self-hosted runner appear on the same page in GitHub.
 
 To learn more about creating an Arm-based self-hosted runner, refer to this [learning path](/learning-paths/laptops-and-desktops/self_hosted_cicd_github/).
 
