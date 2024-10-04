@@ -47,7 +47,9 @@ Called from:
 
 
 <!-- Get metadata of author from CSV file -->
-{{ range $i, $row := getCSV "," "contributors.csv" }}
+{{ $csv := resources.Get "contributors.csv" }}
+{{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
+{{ range $i, $row := $csv_content }}
 
 {{/*  
     {{ if gt (len $authors_multiple) 0 }}
