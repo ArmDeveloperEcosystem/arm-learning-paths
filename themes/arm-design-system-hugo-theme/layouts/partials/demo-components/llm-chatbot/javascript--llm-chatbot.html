@@ -645,7 +645,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 return readStream(); // Read the stream
             } else {
-                console.error('Error sending message to the server');
+                console.error('Error sending message to the server',error);
+                console.log(response);
                 showPopupPostConnection("Problem sending message - try sending a new message.","error");                                      
             }
         })
