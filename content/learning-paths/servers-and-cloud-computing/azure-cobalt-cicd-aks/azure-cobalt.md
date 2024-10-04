@@ -15,7 +15,7 @@ In this learning path, you will build a .NET 8-based web application using a sel
 {{% /notice %}}
 
 ## How do I create an Azure Virtual Machine?
-Creating a virtual machine based on Azure Cobalt 100 is no different than creating any other VM in Azure. To create an Azure virtual machine, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. 
+Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other VM in Azure. To create an Azure virtual machine, launch the [Azure portal](https://portal.azure.com/) and navigate to Virtual Machines. 
 
 Select `Create Azure Virtual Machine`, and fill in the details such as `Name`, and `Region`. 
 
@@ -31,15 +31,17 @@ To learn more about Arm-based VMs in Azure, refer to "Getting Started with Micro
 
 The source code for the application and configuration files that you require to follow this learning path are hosted in this [msbuild-azure github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests that you require to deploy the .NET 8 based application. 
 
+Follow these steps:
+
 * Start by forking the repository.
 
-* Once the GitHub repository is forked, navigate to the `Settings` tab, and click `Actions` in the left navigation pane. 
+* Once the GitHub repository is forked, navigate to the `Settings` tab, and click on `Actions` in the left navigation pane. 
 
  * In `Runners`, select `New self-hosted runner`, which opens up a new page to configure the runner. 
 
-* For `Runner image`, select `Linux` and for `Architecture`, select `ARM64`. 
+* For `Runner image`, select `Linux`, and for `Architecture`, select `ARM64`. 
 
-* Execute the commands shown on this page on the `D2psv6` VM you created in the previous step.
+* Using the commands shown, execute them on the `D2psv6` VM you created in the previous step.
 
 * Once you have configured the runner successfully, you will see a self-hosted runner appear on the same page in GitHub.
 
@@ -49,36 +51,46 @@ To learn more about creating an Arm-based self-hosted runner, see this Learning 
 
 ## How do I create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform?
 
-You can create an Arm-based AKS cluster by following the steps in this Learning Path [*Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service*](/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/). Make sure to update the `main.tf` file with the correct VM as shown:
+You can create an Arm-based AKS cluster by following the steps in this Learning Path [*Create an Arm-based Kubernetes cluster on Microsoft Azure Kubernetes Service*](/learning-paths/servers-and-cloud-computing/aks/cluster_deployment/). 
+
+Make sure to update the `main.tf` file with the correct VM as shown below:
 
 ```console
 `vm_size` = `Standard_D2ps_v6`
 ```
-Once the cluster creation is successful, you can proceed to the next section.
+Once you have successfully created the cluster, you can proceed to the next section.
 
-## How do I create a container registry with ACR?
+## How do I create a container registry with Azure Container Registry (ACR)?
 
-To create a container registry in Azure Container Registry to host the docker images for your application, Use the following command:
+To create a container registry in Azure Container Registry to host the docker images for your application, use the following command:
 
 ```console
 az acr create --resource-group myResourceGroup --name mycontainerregistry
 ```
-## Set up GitHub Secrets
+## How do I set up GitHub Secrets?
 
-GitHub Actions needs access to Azure Container Registry to push application docker images and Azure Kubernetes Service to deploy application pods. Create the following secrets in your GitHub repository:
+The next step allows GitHub Actions to access the Azure Container Registry to push application docker images and Azure Kubernetes Service to deploy application pods. 
 
-- `ACR_Name` with the name of your Azure Container Registry
-- `AZURE_CREDENTIALS` with Azure Credentials of a Service Principal
-- `CLUSTER_NAME` with the name of your AKS cluster
-- `CLUSTER_RESOURCE_GROUP_NAME` with the name of your resource group
+Create the following secrets in your GitHub repository:
 
-Refer to this [guide](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-secret) if you need help with signing into Azure using GitHub Actions. 
+- Populate `ACR_Name` with the name of your Azure Container Registry.
+- Populate `AZURE_CREDENTIALS` with Azure Credentials of a Service Principal.
+- Populate `CLUSTER_NAME` with the name of your AKS cluster.
+- Populate `CLUSTER_RESOURCE_GROUP_NAME` with the name of your resource group.
+
+Refer to this [guide](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure-secret) for further information about signing into Azure using GitHub Actions. 
 
 ## Deploy a .NET-based application 
 
-.NET added support for arm64 applications starting with version 6. Several performance enhancements have been made in later versions. The latest version that supports Arm64 targets is .NET 9. In this learning path you will use the .NET 8 SDK for application development.
+.NET added support for Arm64 applications starting with version 6. Several performance enhancements have been made in later versions. The latest version that supports Arm64 targets is .NET 9. In this learning path, you will use the .NET 8 SDK for application development.
 
-In your fork of the github repository inspect the `aks-ga-demo.csproj` file. Verify that the `TargetFramework` field has `net8.0` as the value. The contents of the file are shown below:
+Follow these steps:
+
+* In your fork of the github repository, inspect the `aks-ga-demo.csproj` file. 
+
+* Verify that the `TargetFramework` field has `net8.0` as the value. 
+
+The contents of the file are shown below:
 
 ```console
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -93,10 +105,13 @@ In your fork of the github repository inspect the `aks-ga-demo.csproj` file. Ver
 
 You can inspect the contents of the `Dockerfile` within your repository as well. This is a multi-stage Dockerfile with the following stages: 
 
-1. `base` stage - Prepares the base environment with the `.NET 8 SDK` and exposes ports 80 and 443.
-2. `build` stage - Restores dependencies and builds the application
-3. `publish` stage - Publishes the application making it ready for deployment
-4. `final` stage - Copies the published application into the final image and sets the entry point to run the application
+1. `base` stage - prepares the base environment with the `.NET 8 SDK` and exposes ports 80 and 443.
+
+2. `build` stage - restores dependencies and builds the application.
+
+3. `publish` stage - publishes the application making it ready for deployment.
+
+4. `final` stage - copies the published application into the final image and sets the entry point to run the application.
 
 ```console
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
@@ -121,7 +136,7 @@ COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "aks-ga-demo.dll"]
 ```
 
-Now, navigate to the `k8s` folder and check the Kubernetes yaml files. The `deployment.yml` file defines a deployment for the application. It specifies the container image to use from ACR and exposes port 80 for the application. The deployment ensures that the application runs with the defined resource constraints and is accessible on the specified port.
+Next, navigate to the `k8s` folder and check the Kubernetes yaml files. The `deployment.yml` file defines a deployment for the application. It specifies the container image to use from ACR and exposes port 80 for the application. The deployment ensures that the application runs with the defined resource constraints and is accessible on the specified port.
 
 ```yaml
 apiVersion: apps/v1
@@ -164,7 +179,7 @@ spec:
     targetPort: 80
 ```
 
-Finally, let's look at the GitHub Actions file located at `.github/workflows/deploytoAKS.yml` 
+Finally, have a look at the GitHub Actions file located at `.github/workflows/deploytoAKS.yml` 
 
 ```yaml
 name: Deploy .NET app
@@ -220,17 +235,17 @@ jobs:
             msbuilddemo.azurecr.io/githubactions-aks-demo:${{github.sha }}
 ```
 
-This GitHub Actions yaml file defines a workflow to deploy a .NET application to Azure Kubernetes Service (AKS). This workflow runs on the self-hosted GitHub Actions runner that you configured earlier. This workflow can be triggered manually or on a push to the repository. 
+This GitHub Actions yaml file defines a workflow to deploy a .NET application to Azure Kubernetes Service (AKS). This workflow runs on the self-hosted GitHub Actions runner that you configured in a previous step. This workflow can be triggered manually, or on a push to the repository. 
 
 It has the following main steps:
 
-1. `Checkout repo` - Checks out the repository code.
-2. `Build image` - Builds a Docker image of the application.
-3. `Azure login` - Logs in to Azure using stored credentials in GitHub Secrets.
-4. `ACR login` - Logs in to Azure Container Registry (ACR).
-5. `Tag and push image` - Tags and pushes the Docker image to Azure Container Registry.
-6. `Get AKS credentials` - Retrieves Azure Kubernetes Cluster credentials.
-7. `Deploy application` - Deploys the application to AKS using specified Kubernetes manifests.
+1. `Checkout repo` - checks out the repository code.
+2. `Build image` - builds a Docker image of the application.
+3. `Azure login` - logs in to Azure using stored credentials in GitHub Secrets.
+4. `ACR login` - logs in to Azure Container Registry (ACR).
+5. `Tag and push image` - tags and pushes the Docker image to Azure Container Registry.
+6. `Get AKS credentials` - retrieves Azure Kubernetes Cluster credentials.
+7. `Deploy application` - deploys the application to AKS using specified Kubernetes manifests.
 
 ## How do I run the CI/CD pipeline?
 
