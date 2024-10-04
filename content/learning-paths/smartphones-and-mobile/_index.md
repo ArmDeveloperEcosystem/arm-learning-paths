@@ -10,14 +10,14 @@ key_ip:
 - Mali
 maintopic: true
 operatingsystems_filter:
-- Android: 20
-- Linux: 15
-- macOS: 5
-- Windows: 4
+- Android: 21
+- Linux: 16
+- macOS: 6
+- Windows: 5
 subjects_filter:
 - Gaming: 6
-- Graphics: 2
-- ML: 4
+- Graphics: 3
+- ML: 5
 - Performance and Architecture: 22
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Smartphones and Mobile
@@ -27,7 +27,7 @@ tools_software_languages_filter:
 - Android: 2
 - Android NDK: 1
 - Android SDK: 1
-- Android Studio: 5
+- Android Studio: 6
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
 - Arm Performance Studio: 2
@@ -37,7 +37,7 @@ tools_software_languages_filter:
 - C/C++: 1
 - Clang: 8
 - CMake: 1
-- Coding: 13
+- Coding: 15
 - Fixed Virtual Platform: 1
 - Frame Advisor: 1
 - GCC: 9
@@ -60,7 +60,7 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - Unity: 6
 - Unreal Engine: 2
-- Vulkan: 1
+- Vulkan: 2
 - XNNPACK: 1
 weight: 3
 ---

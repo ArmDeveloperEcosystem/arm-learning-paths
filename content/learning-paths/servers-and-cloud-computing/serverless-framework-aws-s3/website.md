@@ -5,10 +5,10 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-In this section you will create the files for the static website.
-
 ### index.html
-Start by creating a subfolder for the website. Make sure to create it under the folder, in which you created the serverless project( e.g. AwsServerlessDynamoDbLambdaS3).
+In this section you will create the files for the static website. 
+
+Start by creating a subfolder; make sure to create it under the folder in which you created the serverless project (for example, AwsServerlessDynamoDbLambdaS3).
 
 Then, in the website folder create `index.html` and modify it as follows:
 ```HTML
@@ -33,10 +33,10 @@ Then, in the website folder create `index.html` and modify it as follows:
 </html>
 ```
 
-This HTML code defines a simple web page titled **IoTPage** for interacting with the AWS Lambda Functions. The page includes a link to a stylesheet `styles.css` for styling the page, two buttons with IDs **writeTemperatures** and **getAverageTemperature** to allow users to interact with the temperature service. Also, the HTML includes a div with the ID `temperatureDisplay` serves as a placeholder to display the temperature results. Finally, the code includes an external JavaScript file `index.js` at the end of the body to add interactive functionality to the page.
+This HTML code defines a simple web page titled **IoTPage** for interacting with the AWS Lambda Functions. The page includes a link to a stylesheet `styles.css` for styling the page, two buttons with IDs **writeTemperatures**, and **getAverageTemperature** to allow users to interact with the temperature service. Also, the HTML includes a div with the ID `temperatureDisplay` that serves as a placeholder to display the temperature results. Finally, the code includes an external JavaScript file, `index.js`, at the end of the body to add interactive functionality to the page.
 
 ### Styles
-In the same folder as `index.html` create a `styles.css` file, and add the content below:
+In the same folder as `index.html`, create a `styles.css` file, and add the content below:
 
 ```CSS
 body {
@@ -84,10 +84,10 @@ button:hover {
 }
 ```
 
-The above file declares the same styles as used in this [Learning Path](/learning-paths/laptops-and-desktops/win_aws_iot_s3/).
+This file declares the same styles as used in the Learning Path that shows you how to [Use Amazon S3 for your IoT applications running Windows on Arm](/learning-paths/laptops-and-desktops/win_aws_iot_s3/).
 
 ### JavaScript
-Finally, under the website folder add the `index.js` file, and add the content shown below:
+Finally, under the website folder, add the `index.js` file, and add the content shown below:
 
 ```JavaScript
 const writeTemperaturesButton = document.getElementById('writeTemperatures');
@@ -126,18 +126,18 @@ getAverageTemperatureButton.addEventListener('click', async () => {
 });
 ```
 
-This JavaScript code adds interactivity to a web page by enabling two buttons to trigger HTTP requests to specific API endpoints for managing temperature data. The code selects the two buttons from the HTML by their IDs: `writeTemperaturesButton` and `getAverageTemperatureButton``.
+This JavaScript code adds interactivity to a web page by enabling two buttons to trigger HTTP requests to specific API endpoints for managing temperature data. The code selects the two buttons from the HTML by their IDs: `writeTemperaturesButton` and `getAverageTemperatureButton`.
 
-Two API endpoints, `writeTemperaturesUrl` and `getAverageTemperatureUrl`, are defined as placeholders for the actual API URLs that the buttons will call. These placeholders will be replaced by the actual values output by the Serverless Framework after the resource deployment.
+Two API endpoints, `writeTemperaturesUrl` and `getAverageTemperatureUrl`, are defined as placeholders for the actual API URLs that the buttons call. These placeholders are replaced by the values that the Serverless Framework outputs after the resource deployment.
 
 The code then defines event listeners for the buttons:
- 1. `writeTemperaturesButton` click event. When clicked, it sends a POST request to the writeTemperaturesUrl endpoint to write temperature data. If successful, it displays a message with the response data; if there’s an error, it logs the error and shows an alert.
- 2. `getAverageTemperatureButton` click event. When clicked, it sends a GET request to the getAverageTemperatureUrl endpoint to retrieve the average temperature. If successful, it displays the average temperature in a specific div on the web page; if there’s an error, it logs the error and shows an alert.
+ * `writeTemperaturesButton` click event. When clicked, it sends a POST request to the writeTemperaturesUrl endpoint to write temperature data. If successful, it displays a message with the response data. If there’s an error, it logs the error and shows an alert.
+ * `getAverageTemperatureButton` click event. When clicked, it sends a GET request to the getAverageTemperatureUrl endpoint to retrieve the average temperature. If successful, it displays the average temperature in a specific div on the web page. If there’s an error, it logs the error and shows an alert.
 
-This code interacts with a backend service (composed of AWS Lambda functions) to write new temperature data and fetch the average temperature, enhancing the functionality of the web page.
+This code interacts with a backend service composed of AWS Lambda functions to write new temperature data and fetch the average temperature, enhancing the functionality of the web page.
 
 ### prepare.js
-You will now add the JavaScript code that reads the outputs of the Serverless Framework, and use them to replace the `writeTemperaturesUrl` and `getAverageTemperatureUrl` placeholders in the `index.js`.
+You will now add the JavaScript code that reads the outputs of the Serverless Framework, and use it to replace the `writeTemperaturesUrl` and `getAverageTemperatureUrl` placeholders in the `index.js`.
 
 To implement this functionality, create a new `prepare.js` file, and save it in the same folder as `serverless.yml`. Then, modify `prepare.js` as follows:
 ```JavaScript
@@ -192,7 +192,7 @@ The code uses the following JavaScript modules:
  2. `path` for handling file paths.
  3. `execSync` from `child_process` to execute shell commands synchronously.
 
-The code runs the `serverless info --verbose` command to retrieve deployment details (e.g., API endpoints) and stores the output in the output variable. Then, using regular expressions, it extracts the URLs for the `writeTemperatures` and `getAverageTemperature` API endpoints from the Serverless output. If the endpoints are not found, it assigns default placeholder URLs.
+The code runs the `serverless info --verbose` command to retrieve deployment details (for example, API endpoints) and stores the output in the output variable. Then, using regular expressions, it extracts the URLs for the `writeTemperatures` and `getAverageTemperature` API endpoints from the Serverless output. If the endpoints are not found, it assigns default placeholder URLs.
 
 Subsequently, the code sets the path to `index.js` by joining the directory (website) with the file name `index.js`. Once this is done, the code reads the `index.js` file content and replaces the placeholder strings (WRITE_TEMPERATURES_URL and GET_AVERAGE_TEMPERATURE_URL) with the actual API endpoint URLs.
 
@@ -216,9 +216,9 @@ Finally, add the `package.json` file. Save it next to `serverless.yml`, and modi
 }
 ```
 
-This is the package file for a `Node.js` project that uses the Serverless Framework to deploy AWS resources, including DynamoDB, Lambda, and S3. The file specifies the name of the project (aws-serverless-dynamodb-lambda-s3), its version, and sets the type to module, which means the project uses ES module syntax (e.g., import and export).
+This is the package file for a `Node.js` project that uses the Serverless Framework to deploy AWS resources, including DynamoDB, Lambda, and S3. The file specifies the name of the project (aws-serverless-dynamodb-lambda-s3), its version, and sets the type to module, which means the project uses ES module syntax (for example, import and export).
 
-The file then defines a script named prepare that runs `prepare.js` using Node.js to set up or configure resources before deployment (this script is used to dynamically update index.js).
+The file then defines a script named prepare that runs `prepare.js` using Node.js to set up or configure resources before deployment - this script is used to dynamically update index.js.
 
 Next, it lists the development dependencies required for the project:
 * serverless-plugin-scripts - a Serverless plugin to run custom scripts during the deployment lifecycle.
