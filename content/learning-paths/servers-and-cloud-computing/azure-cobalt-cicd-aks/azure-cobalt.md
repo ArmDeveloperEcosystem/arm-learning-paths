@@ -62,7 +62,7 @@ Once you have successfully created the cluster, you can proceed to the next sect
 
 ## How do I create a container registry with Azure Container Registry (ACR)?
 
-To create a container registry in Azure Container Registry to host the docker images for your application, use the following command:
+To create a container registry in Azure Container Registry to host the Docker images for your application, use the following command:
 
 ```console
 az acr create --resource-group myResourceGroup --name mycontainerregistry
@@ -86,7 +86,7 @@ Refer to this [guide](https://learn.microsoft.com/en-us/azure/developer/github/c
 
 Follow these steps:
 
-* In your fork of the github repository, inspect the `aks-ga-demo.csproj` file. 
+* In your fork of the GitHub repository, inspect the `aks-ga-demo.csproj` file. 
 
 * Verify that the `TargetFramework` field has `net8.0` as the value. 
 
