@@ -6,7 +6,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-In this learning path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools, in comparison to GitHub-hosted runners.
+In this Learning Path, you will build a .NET 8-based web application using a self-hosted GitHub Actions Arm64 runner. You will deploy the application in an Azure Kubernetes Cluster, running on Microsoft Cobalt 100-based VMs. Self-hosted runners offer increased control and flexibility in terms of infrastructure, operating systems, and tools, in comparison to GitHub-hosted runners.
 
 {{% notice Note %}}
 * GitHub-hosted Arm64 runners are now Generally Available. If your GitHub account is part of a Team or an Enterprise Cloud plan, you can use GitHub-hosted Arm64 runners. 
@@ -29,7 +29,7 @@ To learn more about Arm-based VMs in Azure, refer to "Getting Started with Micro
 
 ## How do I configure the GitHub repository?
 
-The source code for the application and configuration files that you require to follow this learning path are hosted in this [msbuild-azure github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests that you require to deploy the .NET 8 based application. 
+The source code for the application and configuration files that you require to follow this Learning Path are hosted in this [msbuild-azure github repository](https://github.com/pbk8s/msbuild-azure). This repository also contains the Dockerfile and Kubernetes deployment manifests that you require to deploy the .NET 8 based application. 
 
 Follow these steps:
 
@@ -62,7 +62,7 @@ Once you have successfully created the cluster, you can proceed to the next sect
 
 ## How do I create a container registry with Azure Container Registry (ACR)?
 
-To create a container registry in Azure Container Registry to host the docker images for your application, use the following command:
+To create a container registry in Azure Container Registry to host the Docker images for your application, use the following command:
 
 ```console
 az acr create --resource-group myResourceGroup --name mycontainerregistry
@@ -82,11 +82,11 @@ Refer to this [guide](https://learn.microsoft.com/en-us/azure/developer/github/c
 
 ## Deploy a .NET-based application 
 
-.NET added support for Arm64 applications starting with version 6. Several performance enhancements have been made in later versions. The latest version that supports Arm64 targets is .NET 9. In this learning path, you will use the .NET 8 SDK for application development.
+.NET added support for Arm64 applications starting with version 6. Several performance enhancements have been made in later versions. The latest version that supports Arm64 targets is .NET 9. In this Learning Path, you will use the .NET 8 SDK for application development.
 
 Follow these steps:
 
-* In your fork of the github repository, inspect the `aks-ga-demo.csproj` file. 
+* In your fork of the GitHub repository, inspect the `aks-ga-demo.csproj` file. 
 
 * Verify that the `TargetFramework` field has `net8.0` as the value. 
 

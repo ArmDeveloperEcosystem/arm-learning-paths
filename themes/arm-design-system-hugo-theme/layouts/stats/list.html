@@ -15,7 +15,9 @@
         <!-- find company name of author -->
         {{$company := ""}}
         {{$author := replace $author_urlized "-" " " | title }}
-        {{ range $i, $row := getCSV "," "contributors.csv" }}
+        {{ $csv := resources.Get "contributors.csv" }}
+        {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
+        {{ range $i, $row := $csv_content }}
             {{ if eq  $author (index $row 0)}}
                 <!-- Get company name of author -->
                 {{ $company = index $row 1 }}
