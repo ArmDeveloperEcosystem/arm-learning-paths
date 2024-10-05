@@ -3,7 +3,7 @@ title: Deploy a .NET application on Microsoft Azure Cobalt 100 VMs
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an advanced topic for software developers who want to develop cloud-native applications using GitHub Actions and Azure Kubernetes Service (AKS), and run it on Microsoft Azure Cobalt 100 VMs.
+who_is_this_for: This is an advanced topic for software developers who want to develop cloud-native applications using GitHub Actions and Azure Kubernetes Service (AKS), and run them on Microsoft Azure Cobalt 100 VMs.
 
 learning_objectives: 
     - Configure an Azure Cobalt 100 VM as a self-hosted GitHub runner.
