@@ -1,0 +1,38 @@
+{{/*
+Demo page for learning path formatting.
+
+Where it is used:
+    - learning paths
+
+Called from:
+    - partials learning-paths/learningpathall.html
+
+Calls to:
+    - 
+*/}}
+
+
+
+<!-- 1) Overview box -->
+{{partial "demo-components/overview-box.html" .}}
+
+
+
+<!-- 2) Configuration box -->
+{{if eq .Params.demo_template_name "llm_chatbot_first_demo"}}
+    {{/* {{partial "demo-components/config-params-only.html" .}} */}}
+{{else if eq .Params.demo_template_name "kubectl_demo"}}
+    {{partial "demo-components/config-param-and-file.html" .}}
+{{else}}
+{{end}}
+
+
+<!-- 3) Demo & Stats box -->
+{{if eq .Params.demo_template_name "llm_chatbot_first_demo"}}
+    {{partial "demo-components/llm-chatbot/demo-stats--llm-chatbot.html" .}} 
+    {{partial "demo-components/llm-chatbot/javascript--llm-chatbot.html" .}}
+
+{{else if eq .Params.demo_template_name "kubectl_demo"}}
+    {{partial "demo-components/demo--kubectl.html" .}}
+{{else}}
+{{end}}

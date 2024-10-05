@@ -20,6 +20,7 @@ Linux Distribution      | GCC                  | Clang/LLVM
 ------------------------|----------------------|-------------
 Amazon Linux 2023       | 11*                  | 15*
 Amazon Linux 2          | 7*, 10               | 7, 11*
+Ubuntu 24.04		| 9, 10, 11, 12, 13*, 14 | 14, 15, 16, 17, 18*	
 Ubuntu 22.04            | 9, 10, 11*, 12       | 11, 12, 13, 14*
 Ubuntu 20.04            | 7, 8, 9*, 10         | 6, 7, 8, 9, 10, 11, 12
 Ubuntu 18.04            | 4.8, 5, 6, 7*, 8     | 3.9, 4, 5, 6, 7, 8, 9, 10
@@ -41,6 +42,7 @@ Any | `-mcpu=native` | All | All
 Neoverse-N1 | `-mcpu=neoverse-n1` | GCC-9+ | Clang/LLVM 10+
 Neoverse-V1 | `-mcpu=neoverse-v1` | GCC-11+ | Clang/LLVM 12+
 Neoverse-N2 | `-mcpu=neoverse-n2` | GCC-11+ | Clang/LLVM 12+
+Neoverse-V2 | `-mcpu=neoverse-v2` | GCC-13+    | Clang/LLVM 16+
 
 The Neoverse-N1 option `-mcpu=neoverse-n1` is available in GCC-7 on Amazon Linux2.
 

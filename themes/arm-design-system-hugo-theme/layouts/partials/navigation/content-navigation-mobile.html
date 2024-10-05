@@ -39,7 +39,13 @@ Called from:
                         <a href="{{.Permalink}}" class="content-individual-a-mobile inner-learning-path-navbar-element {{$counter}}-weight">
                             <div class="content-individual-mobile {{ if eq .File.TranslationBaseName $thisfile}} active {{else}} inactive {{ end }}">
                                 <p class="content-individual-txt-mobile {{ if eq .File.TranslationBaseName $thisfile}} active {{else}} inactive {{ end }}">
-                                    {{ if eq .File.TranslationBaseName "_index" }} Introduction {{else}} {{.Title}} {{ end }}
+                                    {{ if eq .File.TranslationBaseName "_demo" }} 
+                                        <i class="fa-solid fa-gear" style="margin-right: 8px;"></i>Demo<i class="fa-solid fa-gear" style="margin-left: 8px;"></i>
+                                    {{ else if eq .File.TranslationBaseName "_index" }} 
+                                        Introduction 
+                                    {{else}} 
+                                        {{.Title}} 
+                                    {{ end }}
                                 </p>
                             </div>
                         </a>

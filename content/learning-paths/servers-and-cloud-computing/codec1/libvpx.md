@@ -34,7 +34,7 @@ Configure and build with VP8 disabled, VP9 enabled, and unit tests enabled:
 make -j$(nproc)
 ```
 
-For more information refer to the [README](https://github.com/webmproject/libvpx/blob/main/README).
+For more information, refer to the [README](https://github.com/webmproject/libvpx/blob/main/README).
 
 ## Run libvpx unit tests
 
@@ -75,7 +75,7 @@ Note: This is test shard 1 of 10.
 
 You can benchmark either the encoding or decoding processes. In this section, you will focus on encoding. 
 
-For Performance benchmarking, you can select video encoding either on-demand or live-stream.
+For Performance benchmarking, you can select video encoding either on-demand or live stream.
 
 {{% notice Note %}}
 The video files are large so adjust the paths to the y4m files in the commands below. You can also copy them to the current directory.
@@ -83,21 +83,21 @@ The video files are large so adjust the paths to the y4m files in the commands b
 
 ### On-demand video encoding 
 
-For on-demand encoding you can experiment different number of processors and monitor performance. 
+For on-demand encoding, you can experiment different number of processors and monitor performance. 
 
 For example, run with `--good` and use the `--cpu-used` argument to vary the number from 2 to 6.
 
 {{% notice Note %}}
-The naming of `--cpu-used` flag is to trade off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality but longer encoding time. For VoD a reasonable range of quality settings is 0-4 inclusive.
+The naming of `--cpu-used` flag is to trade-off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality but longer encoding time. For VoD a reasonable range of quality settings is 0-4 inclusive.
 {{% /notice %}}
 
-Run standard bit depth and change the CPU count and see the results using:
+Run standard bit depth and change the CPU count, then see the results using:
 
 ```bash
 ./vpxenc --good --cpu-used=2 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m 
 ```
 
-Try the above command with different `--cpu-used` values.
+Try the above command with different `--cpu-used` values:
 ```bash
 ./vpxenc --good --cpu-used=6 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m 
 ```
@@ -108,22 +108,22 @@ You can do the same for high bit depth:
 ./vpxenc --good --cpu-used=2 --profile=2 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit_YUV.y4m
 ```
 
-### Live-stream video encoding
+### Live stream video encoding
 
-For live-stream encoding you can experiment different number of processors and monitor performance using the `--cpus-used` in the range from 5 to 9. 
+For live stream encoding, you can experiment different number of processors and monitor performance using the `--cpus-used` in the range from 5 to 9. 
 
 {{% notice Note %}}
-The naming of `--cpu-used` flag is to trade off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality but longer encoding time. For live-stream a reasonable range of quality settings is 5-9.
+The naming of `--cpu-used` flag is to trade-off encoding speed for resulting video quality/compression, not to determine how many CPUs to use for parallel encoding. Lower numbers indicate better quality but longer encoding time. For live stream a reasonable range of quality settings is 5-9.
 {{% /notice %}}
 
 
-For standard bit depth with 8 CPUs run:
+For standard bit depth with 8 CPUs, run:
 
 ```bash
 ./vpxenc --rt --cpu-used=8 --profile=0 --bit-depth=8 -o output.mkv Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m
 ```
 
-For high bit depth run:
+For high bit depth, run:
 
 ```bash
 ./vpxenc --rt --cpu-used=8 --profile=2 --bit-depth=10 -o output.mkv Bosphorus_3840x2160_120fps_420_10bit_YUV.y4m

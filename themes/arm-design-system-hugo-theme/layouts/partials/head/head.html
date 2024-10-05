@@ -70,7 +70,7 @@ Where it is used:
 <!-- Content pages -->
 {{if $is_content}}
     {{ $css_content := $all_page_css | append 
-        (resources.Get "css/content.css") (resources.Get "css/feedback.css") (resources.Get "css/context-tables.css") (resources.Get "css/content-pages.css") (resources.Get "css/ads-radio-button.css")
+        (resources.Get "css/content.css") (resources.Get "css/demo.css") (resources.Get "css/feedback.css") (resources.Get "css/context-tables.css") (resources.Get "css/content-pages.css") (resources.Get "css/ads-radio-button.css")
         | resources.Concat "css/mini_content.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_content.Permalink }}">
 {{end}}
@@ -82,7 +82,12 @@ Where it is used:
     {{ $css_prism := slice | append (resources.Get "/css/prism-dark.css") (resources.Get "/css/prism-added-styles.css")
         | resources.Concat "css/mini_prism.css" | minify | fingerprint  }}
     <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
-
+{{end}}
+<!-- Also add prism to any _demo page that needs it, set as a 'prismjs' variable -->
+{{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo") .Params.prismjs }}
+    {{ $css_prism := slice | append (resources.Get "/css/prism-dark.css") (resources.Get "/css/prism-added-styles.css")
+    | resources.Concat "css/mini_prism.css" | minify | fingerprint  }}
+    <link rel="stylesheet" href="{{ $css_prism.Permalink }}" media="print" onload="this.media='all'">
 {{end}}
 
 

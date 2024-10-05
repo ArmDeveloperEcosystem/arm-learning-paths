@@ -8,31 +8,32 @@ key_ip:
 - Cortex-A
 maintopic: true
 operatingsystems_filter:
-- Android: 1
+- Android: 2
 - Baremetal: 1
 - ChromeOS: 1
-- Linux: 22
-- macOS: 2
-- Windows: 31
+- Linux: 24
+- macOS: 4
+- Windows: 32
 subjects_filter:
 - CI-CD: 3
 - Containers and Virtualization: 5
 - Migration to Arm: 25
-- Performance and Architecture: 16
+- Performance and Architecture: 17
 subtitle: Create and migrate apps for power efficient performance
 title: Laptops and Desktops
 tools_software_languages_filter:
 - .NET: 12
 - Alacritty: 1
+- Android Studio: 1
 - Arm Development Studio: 2
 - Arm64EC: 1
 - C: 2
 - C#: 5
 - C++: 2
-- C/C++: 3
+- C/C++: 4
 - Clang: 8
 - CMake: 2
-- Coding: 15
+- Coding: 16
 - CSS: 1
 - Docker: 4
 - GCC: 8

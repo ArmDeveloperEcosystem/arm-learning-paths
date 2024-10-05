@@ -1,23 +1,23 @@
 ---
 title: Learn about function multiversioning
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
-who_is_this_for: Developers who want to optimize their C/C++ applications across various Arm64 targets.
+who_is_this_for: This is an advanced topic for developers interested in optimizing their C/C++ applications across Arm64 targets.
 
 learning_objectives:
-    - Take advantage of hardware features for tuning your applications at function level granularity.
-    - Create multiple versions of C/C++ functions for the targets you intend to run your applications on.
-    - Assist the compiler in generating better code for those targets, or provide your own optimized versions at the source level.
+    - Use hardware features to tune your applications at function level.
+    - Create multiple versions of C/C++ functions for the targets that you intend to run applications on.
+    - Assist the compiler in generating optimal code for the targets, or provide your own optimized versions at source level.
     - Automatically select the most appropriate function version at runtime.
     - Reuse your optimized application binaries across various targets.
 
 prerequisites:
     - Basic knowledge of GNU function attributes. 
-    - Familiarity with indirect functions (ifuncs) is helpful, but not required.
-    - Basic understanding of loop vectorization.
+    - Familiarity with indirect functions (ifuncs).
+    - Basic knowledge of loop vectorization.
     - Familiarity with Arm assembly.
-    - LLVM 19 compiler with runtime library support or GCC 14.
+    - A LLVM 19 compiler with runtime library support or GCC 14.
 
 author_primary: Alexandros Lamprineas
 

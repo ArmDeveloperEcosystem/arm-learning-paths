@@ -6,8 +6,12 @@ layout: "learningpathall"
 
 ##  About database performance tuning
 
-Deployment configurations and the profile of SQL requests made by clients will differ based on your use case. This means there is no one size fits all set of tuning parameters for `MySQL`.  Use the information in this learning path to help you tune `MySQL` for your use case.
+The configuration of a database and the types of requests made by clients to it will differ from use case to use case. This means there is no one size fits all set of tuning parameters for `MySQL`. Use the information in this learning path as general guidance to help with tuning `MySQL`.
 
 ##  Importance of tuning
 
-Application tuning allows you to gain performance without scaling your deployment up (bigger machines) or out (more machines). You have the option to use the gained performance or trade it for cost savings by reducing the total compute resources provisioned. Requirements vary based on the use case. 
+Application tuning allows you to gain performance without scaling a deployment up (bigger machines) or out (more machines). This gives the option to use the gained performance, or to trade it for cost savings by reducing the total compute resources provisioned. 
+
+##  Note on MySQL Documentation
+
+All links to [MySQL documentation](https://dev.mysql.com/doc/refman/en/) in this learning path point to the latest version of the documentation. If you are using an older version of MySQL, be sure to change the documentation version after clicking the links.

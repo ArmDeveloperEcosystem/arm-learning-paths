@@ -32,7 +32,13 @@ Below are some of the common methods to install Java. This includes both the Jav
 
 Pick the one that works best for you.
 
-## Install Java using the Linux package manager
+{{% notice Note %}}
+The Java Technology Compatibility Kit (TCK) is a test suite that verifies whether a Java implementation conforms to the Java SE Platform Specification. It's a crucial tool for ensuring that Java applications can run consistently across different platforms and implementations.
+
+Check the [OCTLA Signatories List](https://openjdk.org/groups/conformance/JckAccess/jck-access.html) to see who has been granted access to the TCK.
+{{% /notice %}}
+
+## Can I install Java using the Linux package manager?
 
 For distributions using `apt` - including Debian and Ubuntu:
 
@@ -55,7 +61,15 @@ sudo pacman -S jdk-openjdk
 sudo pacman -S jre-openjdk  
 ```
 
-## Install Java using Amazon Corretto
+## Can I install Java using Snap?
+
+For Linux distributions with `snap` you can install Java using:
+
+```console
+sudo snap install openjdk
+```
+
+## How do I install Amazon Corretto?
 
 Amazon Corretto is a no-cost distribution of the Open Java Development Kit (OpenJDK). It is maintained and supported by Amazon Web Services (AWS).
 
@@ -69,15 +83,64 @@ sudo apt-get update; sudo apt-get install -y java-21-amazon-corretto-jdk
 
 More installation options for Corretto are available in the [Amazon Corretto 21 Guide for Linux](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/linux-info.html)
 
-## Install Java using Snap
+## How do I install the Microsoft Build of OpenJDK?
 
-For Linux distributions with `snap` you can install Java using:
+The Microsoft Build of OpenJDK is a no-cost, open source distribution of OpenJDK. It includes Long-Term Support (LTS) binaries for Java 11 and Java 17 and runs on Arm Linux.
+
+{{% notice Note %}}
+The Arm architecture is not available in the repositories for the `apt` package manager. 
+{{% /notice %}}
+
+You can download a tar.gz file from [Download the Microsoft Build of OpenJDK](https://learn.microsoft.com/en-gb/java/openjdk/download)
+
+For example:
 
 ```console
-sudo snap install openjdk
+wget https://aka.ms/download-jdk/microsoft-jdk-21.0.4-linux-aarch64.tar.gz
 ```
 
-## Is there a way to install Java from the official website?
+Extract the contents of the file:
+
+```console
+tar xvf microsoft-jdk-21.0.4-linux-aarch64.tar.gz
+```
+
+Move the contents to a directory of your choice: 
+
+```console
+sudo mv  jdk-21.0.4+7/ /usr/local
+```
+
+Set up environment variables to locate your installation:
+
+```console
+export JAVA_HOME=/usr/local/jdk-21.0.4+7
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
+Add the environment variables to your `~/.bashrc` file to set them permanently.
+
+For more information about the available versions and supported platforms refer to [About the Microsoft Build of OpenJDK](https://learn.microsoft.com/en-gb/java/openjdk/overview).
+
+## How do I install Eclipse Temurin from the Adoptium Working Group?
+
+The Adoptium Working Group promotes and supports high-quality, TCK certified runtimes and associated technology for use across the Java ecosystem. 
+
+Eclipse Temurin is the name of the OpenJDK distribution from Adoptium.
+
+To install Temurin on Ubuntu run:
+
+```console
+sudo apt install -y wget apt-transport-https gpg
+wget -qO - https://packages.adoptium.net/artifactory/api/gpg/key/public | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/adoptium.gpg > /dev/null
+echo "deb https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+sudo apt update 
+sudo apt install temurin-17-jdk -y
+```
+
+For more information about the available versions and supported platforms refer to [Temurin documentation](https://adoptium.net/docs/).
+
+## How do I install Java from Oracle?
 
 You can download Java from the [Oracle website](https://www.oracle.com/java/technologies/javase-downloads.html) and install it manually. Look for the files with ARM64 in the description.
 
@@ -159,7 +222,7 @@ javac 21.0.4
 
 ## Which version of Java should I use for Arm Linux systems?
 
-It’s important to ensure that your version of Java is at least 11.0.9. There are large performance improvements starting from version 11.0.9. Since then, Java performance has steadily increased over time and newer versions will provide better performance.
+For performance and security, it’s important to ensure that your version of Java is at least 11.0.12. Earlier versions lack significant performance improvements. Java performance has steadily increased over time and newer versions will provide better performance.
 
 ## Which flags are available for tuning the JVM?
 

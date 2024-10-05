@@ -119,7 +119,9 @@ The default can be changed on the command line with either `-XX:ThreadStackSize=
 
 Usually, there's no need to change the default stack size, because the thread stack will be committed as it grows. 
 
-There is one situation to be aware of. If Transparent Huge Pages (THP) are set to always, the page size matches the default stack size. In this case the full stack size is commit to memory. If you have a very high number of threads the memory usage will be large. 
+## Transparent Huge Pages
+
+If Transparent Huge Pages (THP) are set to always, the page size matches the default stack size. In this case, the full stack size is committed to memory. If you have a very high number of threads the memory usage will be large. 
 
 To mitigate this issue, you can either manually change the stack size using the flags or change the THP setting to madvise. 
 
