@@ -42,6 +42,8 @@ tools_software_languages:
     - Executorch
     - Arm Compute Library 
     - GCC
+    - Edge Impulse
+    - Nodejs
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
