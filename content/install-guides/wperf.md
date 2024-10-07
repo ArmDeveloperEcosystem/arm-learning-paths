@@ -18,7 +18,7 @@ additional_search_terms:
 minutes_to_complete: 15
 
 ### Link to official documentation
-official_docs: https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/blob/main/wperf/README.md
+official_docs: https://github.com/arm-developer-tools/windowsperf/blob/main/INSTALL.md
 
 author_primary: Jason Andrews
 
@@ -32,13 +32,15 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 WindowsPerf is an open-source command line tool for performance analysis on Windows on Arm devices.
 
-WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. The command-line tool is modeled after the Linux `perf` command. 
+WindowsPerf consists of a kernel-mode driver and a user-space command-line tool, or [VS Code Extension](#vscode). The command-line tool is modeled after the Linux `perf` command. 
 
 WindowsPerf includes a **counting model** for counting events such as cycles, instructions, and cache events and a **sampling model** to understand how frequently events occur.
 
 {{% notice  Virtual Machines%}}
 WindowsPerf cannot be used on virtual machines, such as cloud instances.
 {{% /notice %}}
+
+You can interact with the 
 
 ## Visual Studio and the Windows Driver Kit (WDK)
 
@@ -57,20 +59,37 @@ https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
 To download directly from command prompt, use:
 
 ```console
-mkdir windowsperf-bin-3.2.1
-cd windowsperf-bin-3.2.1
-curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.2.1/windowsperf-bin-3.2.1.zip --output windowsperf-bin-3.2.1.zip
+mkdir windowsperf-bin-3.8.0
+cd windowsperf-bin-3.8.0
+curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.8.0/windowsperf-bin-3.8.0.zip --output windowsperf-bin-3.8.0.zip
 ```
 
 Unzip the package:
 
 ```console
-tar -xmf windowsperf-bin-3.2.1.zip
+tar -xmf windowsperf-bin-3.8.0.zip
 ```
+
+## Install VS Code Extension (optional) {#vscode}
+
+In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
+
+Install by opening the `Extensions` view (`Ctrl`+`Shift`+`X`) and searching for `WindowsPerf`.　Click `Install`.
+
+Open `Settings` (`Ctrl`+`,`) > `Extensions` > `WindowsPerf`, and specify the path to the `wperf` executable.
+
+{{% notice Non-Windows on Arm host%}}
+You can only generate reports from a Windows on Arm device.
+
+If using a non-Windows on Arm host, you can import and analyze `WindowsPerf` JSON reports from such devices.
+
+You do not need to install `wperf` on non-Windows on Arm devices.
+{{% /notice %}}
+
 
 ## Install wperf driver
 
-You can install the kernel driver using either the Visual Studio [devcon](#devcon) utility or the supplied [installer](#devgen).
+You can install the kernel driver using either the Visual Studio [devcon](#devcon_install) utility or the supplied [installer](#devgen_install).
 
 {{% notice  Note%}}
 You must install the driver as `Administrator`.
@@ -80,10 +99,10 @@ Open a `Windows Command Prompt` terminal with `Run as administrator` enabled.
 
 Navigate to the `windowsperf-bin-<version>` directory.
 ```command
-cd windowsperf-bin-3.2.1
+cd windowsperf-bin-3.8.0
 ```
 
-### Install with devcon {#devcon}
+### Install with devcon {#devcon_install}
 
 Navigate into the `wperf-driver` folder, and use `devcon` to install the driver:
 
@@ -99,12 +118,8 @@ Updating drivers for Root\WPERFDRIVER from <path>\wperf-driver.inf.
 Drivers installed successfully.
 ```
 
-### Install with wperf-devgen {#devgen}
+### Install with wperf-devgen {#devgen_install}
 
-Copy the `wperf-devgen.exe` executable to the `wperf-driver` folder.
-```command
-copy wperf-devgen.exe wperf-driver\
-```
 Navigate to the `wperf-driver` folder and run the installer:
 ```command
 cd wperf-driver
@@ -134,21 +149,22 @@ wperf --version
 ```
 You should see output similar to:
 ```output
-Component     Version  GitVer
-=========     =======  ======
-wperf         3.2.1    c831cfc2
-wperf-driver  3.2.1    c831cfc2
+        Component     Version  GitVer    FeatureString
+        =========     =======  ======    =============
+        wperf         3.8.0    6d15ddfc  +etw-app
+        wperf-driver  3.8.0    6d15ddfc  +etw-drv
+
 ```
 
 ## Uninstall wperf driver
 
-You can uninstall (aka "remove") the kernel driver using either the Visual Studio [devcon](#devcon) utility or the supplied [installer](#devgen).
+You can uninstall (aka "remove") the kernel driver using either the Visual Studio [devcon](#devcon_uninstall) utility or the supplied [installer](#devgen_uninstall).
 
 {{% notice  Note%}}
 You must uninstall the driver as `Administrator`.
 {{% /notice %}}
 
-### Uninstall with devcon {#devcon}
+### Uninstall with devcon {#devcon_uninstall}
 
 Below command removes the device from the device tree and deletes the device stack for the device. As a result of these actions, child devices are removed from the device tree and the drivers that support the device are unloaded. See [DevCon Remove](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon-remove) article for more details.
 
@@ -161,7 +177,7 @@ ROOT\SYSTEM\0001                                            : Removed
 1 device(s) were removed.
 ```
 
-### Uninstall with wperf-devgen {#devgen}
+### Uninstall with wperf-devgen {#devgen_uninstall}
 
 ```command
 wperf-devgen uninstall
