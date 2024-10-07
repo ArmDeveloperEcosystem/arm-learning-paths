@@ -21,13 +21,25 @@ The Ubuntu version should be `20.04 or higher`. The `x86_64` architecture must b
 
 If you want to use Arm Virtual Hardware the [Arm Virtual Hardware install guide](/install-guides/avh#corstone) provides setup instructions.
 
+## Setup on Host Machine
+1. Setup if you don't have access to the physical board: We would use the Corstone-300 FVP, it is pre-configured.
+2. Setup if you have access to the board: Skip to "Compilers" Section
+
+
+### Corstone-300 FVP {#fvp} Setup for ExecuTorch
+For Arm Virtual Hardware users, the Corstone-300 FVP is pre-installed. 
+
+To install and set up the Corstone-300 FVP and ExecuTorch on your machine, refer to [Building and Running ExecuTorch with ARM Ethos-U Backend](https://pytorch.org/executorch/stable/executorch-arm-delegate-tutorial.html)). Follow this tutorial till "Install the TOSA reference model" Section. It should be the last thing you do from this tutorial.
+
+Since you already have the compiler installed from the above tutorial, skip to ## Install PyTorch.
+
 ### Compilers 
 
 The examples can be built with [Arm Compiler for Embedded](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Embedded) or [Arm GNU Toolchain](https://developer.arm.com/Tools%20and%20Software/GNU%20Toolchain). 
 
 Both compilers are pre-installed in Arm Virtual Hardware.
 
-Alternatively, if you are using Arch Linux or its derivatives, you can use Pacman to install GCC. 
+Alternatively, if you use Arch Linux or its derivatives, you can use Pacman to install GCC. 
 
 Use the install guides to install the compilers on your computer:
 - [Arm Compiler for Embedded](/install-guides/armclang/)
@@ -37,12 +49,6 @@ Use the install guides to install the compilers on your computer:
 ```console
 pacman -S aarch64-linux-gnu-gcc
 ```
-
-### Corstone-300 FVP {#fvp}
-
-To install the Corstone-300 FVP on your computer refer to the [install guide for Arm Ecosystem FVPs](/install-guides/fm_fvp). 
-
-The Corstone-300 FVP is pre-installed in Arm Virtual Hardware. 
 
 ## Install PyTorch
 The latest version needs Python 3.8 or later
@@ -56,7 +62,7 @@ pip3 install torch torchvision torchaudio --index-url https://download.pytorch.o
 
 1. Follow the [Setting Up ExecuTorch guide](https://pytorch.org/executorch/stable/getting-started-setup.html ) to install it.
 
-2. Activate the `executorch` virtual environment from the installation guide:
+2. Activate the `executorch` virtual environment from the installation guide to ensure it is ready for use:
 
 ```console
 conda activate executorch
@@ -86,7 +92,9 @@ Grove Vision V2 [Edge impulse Firmware](https://cdn.edgeimpulse.com/firmware/see
 
 
 ## Setup on Grove - Vision AI Module V2 
-Due to its constrained environment, we'll focus on lightweight, optimized tools and models (will be introcuded in the next learning path).
+**Kindly Note:** Only follow this part of the tutorial if you have the board.
+
+Due to its constrained environment, we'll focus on lightweight, optimized tools and models (which will be introduced in the next learning path).
 
 ![Hardware Overview #center](Overview.png)
 
