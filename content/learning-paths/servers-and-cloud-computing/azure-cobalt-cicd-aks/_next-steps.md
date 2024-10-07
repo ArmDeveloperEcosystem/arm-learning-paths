@@ -1,6 +1,6 @@
 ---
 next_step_guidance: >
-    .NET based applications are supported on both Linux and Windows on Arm. Continue reading the learning paths to know more. 
+    .NET based applications are supported on both Linux and Windows on Arm. Continue reading the Learning Paths to discover more. 
 
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/aks/"
