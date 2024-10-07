@@ -34,23 +34,20 @@ conda activate executorch
 
 ### Clone ExecuTorch and install the required dependencies
 
-From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages: 
+From within the conda environment, run the commands below to download the ExecuTorch repository and install the required packages:
 
 ``` bash
-# Clone the ExecuTorch repo from GitHub
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-
-# Update and pull submodules
 git submodule sync
 git submodule update --init
-
-# Install ExecuTorch pip package and its dependencies, as well as
-# development tools like CMake.
 ./install_requirements.sh --pybind xnnpack
-
-# Install a few more dependencies
 ./examples/models/llama2/install_requirements.sh
 ```
 
-You are now ready to start building the application. 
+{{% notice Note %}}
+You can safely ignore the following error on failing to import lm_eval running the install_requirements.sh scripts:
+`Failed to import examples.models due to lm_eval conflict`
+{{% /notice %}}
+
+When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!

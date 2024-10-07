@@ -16,7 +16,7 @@ The first step is to prepare a development environment with the required softwar
 - Android NDK version 25.0.8775105.
 - Java 17 JDK.
 - Git.
-- Python 3.10.
+- Python 3.10 or later (these instructions have been tested with 3.10 and 3.12)
 
 The instructions assume macOS with Apple Silicon, an x86 Debian, or Ubuntu Linux machine with at least 16GB of RAM.
 
@@ -24,7 +24,7 @@ The instructions assume macOS with Apple Silicon, an x86 Debian, or Ubuntu Linux
 
 Follow these steps to install and configure Android Studio:
 
-1. Download and install the latest version of [Android Studio](https://developer.android.com/studio/). 
+1. Download and install the latest version of [Android Studio](https://developer.android.com/studio/).
 
 2. Start Android Studio and open the `Settings` dialog.
 
@@ -63,20 +63,20 @@ export ANDROID_HOME="$(realpath ~/Library/Android/sdk)"
 
 Open the [Java SE 17 Archive Downloads](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) page in your browser.
 
-Select an appropriate download for your development machine operating system. 
+Select an appropriate download for your development machine operating system.
 
 Downloads are available for macOS as well as Linux.
 
 ## Install Git
 
 For macOS use [Homebrew](https://brew.sh/):
-  
+
 ``` bash
 brew install git
 ```
 
 For Linux, use the package manager for your distribution:
-  
+
 ``` bash
 sudo apt install git-all
 ```
@@ -84,13 +84,13 @@ sudo apt install git-all
 ## Install Python 3.10
 
 For macOS:
-  
+
 ``` bash
 brew install python@3.10
 ```
 
 For Linux:
-  
+
 ``` bash
 sudo apt update
 udo apt install software-properties-common -y
