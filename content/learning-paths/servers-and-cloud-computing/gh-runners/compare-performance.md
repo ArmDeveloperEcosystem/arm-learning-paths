@@ -10,7 +10,7 @@ This section introduces how you can use Arm software in PyTorch to enhance the n
 
 ## OneDNN with Arm Compute Library (ACL)
 
-The Compute Library is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-based GitHub runner uses Neoverse, which makes it possible to optimize your neural networks even further. In a nutshell, ACL implements kernels (which you may know as the operators or layers), which uses specific instructions that run faster on Aarch64.
+The Arm Compute Library is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-based GitHub runner uses Neoverse, which makes it possible to optimize your neural networks even further. In a nutshell, ACL implements kernels (which you may know as the operators or layers), which uses specific instructions that run faster on Aarch64.
 
 ACL is integrated into PyTorch through the [oneDNN engine](https://github.com/oneapi-src/oneDNN), and is enabled by default in the [PyTorch pip package](https://pypi.org/project/torch/). PyTorch can be run with other backends as well. Two [Docker images](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse) with different configurations of the framework are available to easily switch between the backends, as doing so with `pip` requires a deeper understanding of the PyTorch internals.
 
