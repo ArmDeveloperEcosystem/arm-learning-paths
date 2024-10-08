@@ -12,7 +12,7 @@ layout: learningpathall
 
 TODO: update these scripts to the final form, update images from final repository
 
-In this Learning Path, you execute the script through the _Train Model_ workflow in the GitHub Actions UI. This workflow pulls a Docker container with PyTorch configured from DockerHub, and runs the training in that container. The model file returned from the python script is saved as an artifact to the job.
+In this section, you will execute the script through the _Train Model_ workflow in the GitHub Actions UI. This workflow pulls a [PyTorch 2.3.0 Docker Image compiled with OpenBLAS from DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse), and runs the training script `scripts/train_model.py` within that container. The model is trained on the GTSRB dataset using this script and saved as an artifact of the job.
 
 ```yaml
 name: Train Model
@@ -40,7 +40,7 @@ jobs:
           retention-days: 5
 ```
 
-Navigate to the _Train Model_ workflow under the _Actions_ tab, and press the _Run workflow_ button. Your artifact can be used to run the next step: testing the performance.
+Navigate to the _Train Model_ workflow under the _Actions_ tab, and press the _Run workflow_ button. Your trained model that is generated as an artifact will be used to run the next step: testing the performance.
 
 ### Test Model
 
