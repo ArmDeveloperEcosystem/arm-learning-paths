@@ -42,7 +42,7 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 
 ### What software packages are needed?
 
-Before you install Swift on Ubuntu 24.04, install the following pacakges: 
+Before you install Swift on Ubuntu 24.04, install the following packages: 
 
 ```bash
 sudo apt update
@@ -81,7 +81,7 @@ wget https://download.swift.org/swift-6.0.1-release/ubuntu2404-aarch64/swift-6.0
 Extract the archive:
 
 ```bash
-sudo tar -xf swift-6.0.1-RELEASE-ubuntu24.04-aarch64.tar.gz  -C /usr/local
+sudo tar -xf swift-6.0.1-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
 ```
 
 Add the `bin/` directory to your search path:
