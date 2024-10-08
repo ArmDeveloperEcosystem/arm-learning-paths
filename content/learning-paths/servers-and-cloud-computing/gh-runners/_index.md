@@ -1,5 +1,5 @@
 ---
-title: ML Ops with Arm-based GitHub Runners
+title: MLOps with Arm-based GitHub Runners
 
 minutes_to_complete: 30
 
@@ -7,20 +7,21 @@ who_is_this_for: This is an introductory topic for software developers intereste
 
 learning_objectives:
     - Set up an Arm-based GitHub runner
-    - Use GitHub Actions to set up an ML Ops workflow
-    - Train and deploy an ML model with the German Traffic Sign Recognition Benchmark (GTSRB)
-    - Use Arm Compute Library to improve the CPU performance
+    - Use GitHub Actions to set up an MLOps workflow
+    - Train and deploy a PyTorch ML model with the German Traffic Sign Recognition Benchmark (GTSRB)
+    - Use PyTorch compiled with OpenBlas and OneDNN with Arm Compute Library to compare the performance of your trained model 
+    - Containerize the model and push your container to DockerHub
 
 
 prerequisites:
     - A GitHub account with access to Arm-based GitHub runners
-    - Some familiarity with ML and continuos integration and deployment (CI/CD) concepts is assumed
+    - Some familiarity with ML and continuous integration and deployment (CI/CD) concepts is assumed
 
 author_primary: Pareena Verma, Annie Tallund
 
 ### Tags
-skilllevels: Beginner
-subjects: ML, GitHub
+skilllevels: Introductory
+subjects: CI/CD
 armips:
     - Neoverse
 tools_software_languages:
