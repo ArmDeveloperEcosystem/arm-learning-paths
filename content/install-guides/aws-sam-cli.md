@@ -48,14 +48,14 @@ To install, run the following command:
 sudo apt install python-is-python3 python3-pip -y
 ```
 
-## Download and install the AWS SAM CLI:
+## Download and install the AWS SAM CLI
 
 There are two options to install the SAM CLI, you can select your preferred method:
 
 * From a zip file.
 * Using the Python `pip` command.
 
-### Download and install from zip file:
+### Download and install from zip file
 
 Use `wget`:
 
@@ -65,7 +65,7 @@ unzip aws-sam-cli-linux-arm64.zip -d sam-install
 sudo ./sam-install/install
 ```
 
-### Install the SAM CLI using Python pip:
+### Install the SAM CLI using Python pip
 
 ```
 sudo apt install python3-venv -y
@@ -74,7 +74,7 @@ source .venv/bin/activate
 pip install aws-sam-cli
 ```
 
-### Confirm that the SAM CLI has been installed:
+### Confirm that the SAM CLI has been installed
 
 ```bash
 sam --version
