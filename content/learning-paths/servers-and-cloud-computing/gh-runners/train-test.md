@@ -101,8 +101,9 @@ torch.save(model.state_dict(), './models/traffic_sign_net.pth')
 
 ### Test model
 
-The `test_model.py` script verifies how accurately the ML model can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Thanks to the profiler, we will be able to see the performance uplift on Arm using the oneDNN backend with ACL.
-
+The `test_model.py` script verifies how accurately the ML model can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to measure 
+ and compare the model inference time using two different PyTorch backends. 
+ 
 #### Load model and create test set
 By loading the weights into the same class as before, we obtain the same model set up as in the last step. The `eval` function set the model up for evaluation. Just like before, we define transformations for the testing data and load it from the GTSRB dataset.
 
@@ -143,4 +144,4 @@ print(f'Accuracy of the model on the test images: {100 * correct / total:.2f}%')
 print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=10))
 ```
 
-You should now have an idea of the code behind the training and testing steps. In the next section, the GitHub actions workflows that run them is explained.
+You should now have an overview of the code in the training and testing scripts. In the next section, you will learn how to setup the GitHub actions workflows to automate running these scripts.
