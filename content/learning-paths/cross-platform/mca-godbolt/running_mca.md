@@ -1,6 +1,6 @@
 ---
 title: Run MCA with Arm assembly
-weight: 2
+weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
