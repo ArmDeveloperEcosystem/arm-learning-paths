@@ -70,23 +70,6 @@ Unzip the package:
 tar -xmf windowsperf-bin-3.8.0.zip
 ```
 
-## Install VS Code Extension (optional) {#vscode}
-
-In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
-
-Install by opening the `Extensions` view (`Ctrl`+`Shift`+`X`) and searching for `WindowsPerf`.　Click `Install`.
-
-Open `Settings` (`Ctrl`+`,`) > `Extensions` > `WindowsPerf`, and specify the path to the `wperf` executable.
-
-{{% notice Non-Windows on Arm host%}}
-You can only generate reports from a Windows on Arm device.
-
-If using a non-Windows on Arm host, you can import and analyze `WindowsPerf` JSON reports from such devices.
-
-You do not need to install `wperf` on non-Windows on Arm devices.
-{{% /notice %}}
-
-
 ## Install wperf driver
 
 You can install the kernel driver using either the Visual Studio [devcon](#devcon_install) utility or the supplied [installer](#devgen_install).
@@ -191,6 +174,22 @@ Device uninstalled successfully.
 Trying to remove driver <path>\wperf-driver.inf.
 Driver removed successfully.
 ```
+
+## Install VS Code Extension (optional) {#vscode}
+
+In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
+
+Install by opening the `Extensions` view (`Ctrl`+`Shift`+`X`) and searching for `WindowsPerf`.　Click `Install`.
+
+Open `Settings` (`Ctrl`+`,`) > `Extensions` > `WindowsPerf`, and specify the path to the `wperf` executable.
+
+{{% notice Non-Windows on Arm host%}}
+You can only generate reports from a Windows on Arm device.
+
+If using a non-Windows on Arm host, you can import and analyze `WindowsPerf` JSON reports from such devices.
+
+You do not need to install `wperf` on non-Windows on Arm devices.
+{{% /notice %}}
 
 ## Further reading
 
