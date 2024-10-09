@@ -4,10 +4,10 @@
 # ================================================================================
 
 next_step_guidance: >
-    You may also be interested in Kubernetes on Arm.
+    You may also be interested in Sysbox to run multiple services in a container.
 # 1-3 sentence recommendation outlining how the reader can generally keep learning about these topics, and a specific explanation of why the next step is being recommended.
 
-recommended_path: "/learning-paths/servers-and-cloud-computing/eks-multi-arch/"
+recommended_path: "/install-guides/sysbox/"
 # Link to the next learning path being recommended.
 
 
