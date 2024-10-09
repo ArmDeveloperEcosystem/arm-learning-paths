@@ -12,7 +12,7 @@ In this Learning Path, you will learn how to automate your MLOps workflow using 
 
 GitHub Actions is a platform that automates software development workflows, including continuous integration and continuous delivery. Every repository on GitHub has a tab named _Actions_.
 
-![#actions-gui](/images/actions-gui.png))
+![#actions-gui](images/actions-gui.png))
 
 From here, you can create different _workflow files_ which automates processes that run when specific events occur in your GitHub code repository. You use [YAML](https://yaml.org/) to define a workflow. You specify how a job is triggered, the running environment, and the workflow commands. The machine which the workflow runs in is called a _runner_.
 
