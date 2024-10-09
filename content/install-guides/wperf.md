@@ -175,6 +175,14 @@ Trying to remove driver <path>\wperf-driver.inf.
 Driver removed successfully.
 ```
 
+## Install WindowsPerf Virtual Studio Extension (optional) {#vs2022}
+
+WindowsPerf GUI (Graphical User Interface) project, a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. Extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
+
+In order to set the path to the `wperf.exe` executable, go to `Tools -> Options -> Windows Perf -> WindowsPerf Path` and set the absolute path to the wperf.exe executable and then on the Validate button.
+
+Also, visit WindowsPerf GUI project website on [GitHub](https://github.com/arm-developer-tools/windowsperf-vs-extension).
+
 ## Install VS Code Extension (optional) {#vscode}
 
 In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
