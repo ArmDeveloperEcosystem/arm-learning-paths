@@ -183,7 +183,7 @@ In order to set the path to the `wperf.exe` executable, go to `Tools -> Options 
 
 Also, visit WindowsPerf GUI project website on [GitHub](https://github.com/arm-developer-tools/windowsperf-vs-extension).
 
-## Install VS Code Extension (optional) {#vscode}
+## Install WindowsPerf VS Code Extension (optional) {#vscode}
 
 In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
 
