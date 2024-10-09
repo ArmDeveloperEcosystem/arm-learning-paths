@@ -154,7 +154,7 @@ This workflow will trigger after the testing workflow completes successfully.
 After the `deploy-model.yml` workflow completes successfully, you will see the docker container image is pushed to your DockerHub repository.
 You can validate this by logging into DockerHub and checking your repository:
 
-![dockerhub_img](images/dockerhub_img.PNG)
+![dockerhub_img](images/dockerhub_img.png)
 
 You can then pull this docker container image on your local machine and start the container. 
 
