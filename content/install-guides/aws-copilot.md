@@ -73,13 +73,60 @@ To install Copilot on macOS:
 curl -Lo copilot https://github.com/aws/copilot-cli/releases/latest/download/copilot-darwin && chmod +x copilot && sudo mv copilot /usr/local/bin/copilot && copilot --help
 ```
 
+The help message is printed:
+
+```output
+👩‍✈️ Launch and manage containerized applications on AWS.
+
+Commands
+  Getting Started 🌱
+    init        Create a new ECS or App Runner application.
+    docs        Open the copilot docs.
+
+  Develop ✨
+    app         Commands for applications.
+                Applications are a collection of services and environments.
+    env         Commands for environments.
+                Environments are deployment stages shared between services.
+    svc         Commands for services.
+                Services are long-running ECS or App Runner services.
+    job         Commands for jobs.
+                Jobs are tasks that are triggered by events.
+    task        Commands for tasks.
+                One-off Amazon ECS tasks that terminate once their work is done.
+    run         Run the workload locally.
+
+  Release 🚀
+    pipeline    Commands for pipelines.
+                Continuous delivery pipelines to release services.
+    deploy      Deploy one or more Copilot jobs or services.
+
+  Extend 🧸
+    storage     Commands for working with storage and databases.
+    secret      Commands for secrets.
+                Secrets are sensitive information that you need in your application.
+
+  Settings ⚙️
+    version     Print the version number.
+    completion  Output shell completion code.
+
+Flags
+  -h, --help      help for copilot
+  -v, --version   version for copilot
+
+Examples
+  Displays the help menu for the "init" command.
+  `$ copilot init --help`
+```
+
 Verify Copilot CLI is installed by running:
 
 ```console
 copilot --version
 ```
-The version should be printed:
+
+The installed version is displayed:
 
 ```output
-copilot version: v1.33.0
+copilot version: v1.34.0
 ```

@@ -38,12 +38,12 @@ You will also use Remote.It for container access. For more background informatio
 
 ## An example project
 
-You can use an Apache web server running on Ubuntu 22.04 as an example application. It serves a simple `index.html` file which is visible in a browser.
+You can use an Apache web server running on Ubuntu 24.04 as an example application. It serves a simple `index.html` file which is visible in a browser.
 
 To begin, use a text editor to copy the code below into a file named `Dockerfile`:
 
 ```console
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 RUN apt-get update
 RUN apt-get install -y apache2
