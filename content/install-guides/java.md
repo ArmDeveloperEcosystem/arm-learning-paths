@@ -33,14 +33,14 @@ Below are some of the common methods that you can use to install Java. This incl
 Pick the one that works best for you.
 
 {{% notice Note %}}
-The Java Technology Compatibility Kit (TCK) is a test suite that you can use to verify whether a Java implementation conforms to the Java SE Platform Specification. It's a crucial tool for ensuring that Java applications can run consistently across different platforms and implementations.
+The Java Technology Compatibility Kit (TCK) is a test suite that you can use to verify whether a Java implementation conforms to the Java SE Platform Specification. It is a crucial tool for ensuring that Java applications can run consistently across different platforms and implementations.
 
 Check the [OCTLA Signatories List](https://openjdk.org/groups/conformance/JckAccess/jck-access.html) to see who has been granted access to the TCK.
 {{% /notice %}}
 
 ## Can I install Java using the Linux package manager?
 
-For distributions using `apt` - including Debian and Ubuntu, you can install Java using this code:
+For distributions using `apt`, including Debian and Ubuntu, you can install Java using this code:
 
 ```console
 sudo apt update
@@ -48,13 +48,13 @@ sudo apt install default-jre -y
 sudo apt install default-jdk -y
 ```
 
-For distributions using `dnf` - including Fedora and Red Hat, you can install Java using this code:
+For distributions using `dnf`, including Fedora and Red Hat, you can install Java using this code:
 
 ```console
 sudo dnf install java-latest-openjdk
 ```
 
-For distributions using `pacman` - including Arch and Manjaro, you can install Java using this code:
+For distributions using `pacman`, including Arch and Manjaro, you can install Java using this code:
 
 ```console
 sudo pacman -S jdk-openjdk  
@@ -63,7 +63,7 @@ sudo pacman -S jre-openjdk
 
 ## Can I install Java using Snap?
 
-For Linux distributions with `snap` you can install Java using this code:
+For Linux distributions using `snap`, you can install Java using this code:
 
 ```console
 sudo snap install openjdk
@@ -81,7 +81,7 @@ echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corre
 sudo apt-get update; sudo apt-get install -y java-21-amazon-corretto-jdk
 ```
 
-More installation options for Corretto are available in the [Amazon Corretto 21 Guide for Linux](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/linux-info.html).
+You can find out more about the installation options for Corretto in the [Amazon Corretto 21 Guide for Linux](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/linux-info.html).
 
 ## How do I install the Microsoft Build of OpenJDK?
 
