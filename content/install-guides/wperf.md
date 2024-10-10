@@ -52,16 +52,17 @@ See also the [Visual Studio for Windows on Arm install guide](/install-guides/vs
 
 ## Download WindowsPerf
 
-The latest release package `windowsperf-bin-<version>.zip` can be downloaded from the Linaro GitLab repository:
+The latest release package `windowsperf-bin-<version>.zip` can be downloaded from the Arm GitHub repository:
 ```url
-https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
+https://github.com/arm-developer-tools/windowsperf/releases
 ```
+
 To download directly from command prompt, use:
 
 ```console
 mkdir windowsperf-bin-3.8.0
 cd windowsperf-bin-3.8.0
-curl https://gitlab.com/api/v4/projects/40381146/packages/generic/windowsperf/3.8.0/windowsperf-bin-3.8.0.zip --output windowsperf-bin-3.8.0.zip
+curl -L -O https://github.com/arm-developer-tools/windowsperf/releases/download/3.8.0/windowsperf-bin-3.8.0.zip
 ```
 
 Unzip the package:
