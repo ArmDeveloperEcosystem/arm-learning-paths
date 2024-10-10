@@ -202,9 +202,18 @@ You do not need to install `wperf` on non-Windows on Arm devices.
 
 ## Further reading
 
+### WindowsPerf
+
 - [WindowsPerf Release 3.7.2 blog post](https://www.linaro.org/blog/expanding-profiling-capabilities-with-windowsperf-372-release)
 - [WindowsPerf Release 3.3.0 blog post](https://www.linaro.org/blog/windowsperf-release-3-3-0/)
 - [WindowsPerf Release 3.0.0 blog post](https://www.linaro.org/blog/windowsperf-release-3-0-0/)
 - [WindowsPerf Release 2.5.1 blog post](https://www.linaro.org/blog/windowsperf-release-2-5-1/)
 - [WindowsPerf release 2.4.0 introduces the first stable version of sampling model support](https://www.linaro.org/blog/windowsperf-release-2-4-0-introduces-the-first-stable-version-of-sampling-model-support/)
 - [Announcing WindowsPerf: Open-source performance analysis tool for Windows on Arm](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf)
+
+### WindowsPerf GUI
+
+- [Introducing the WindowsPerf GUI: the Visual Studio 2022 extension](https://www.linaro.org/blog/introducing-the-windowsperf-gui-the-visual-studio-2022-extension/)
+- [Introducing 1.0.0-beta release of WindowsPerf Visual Studio extension](https://www.linaro.org/blog/introducing-1-0-0-beta-release-of-windowsperf-visual-studio-extension/)
+- [New Release: WindowsPerf Visual Studio Extension v1.0.0](https://www.linaro.org/blog/new-release-windowsperf-visual-studio-extension-v1000/)
+- [Launching WindowsPerf Visual Studio Extension v2.1.0](https://www.linaro.org/blog/launching--windowsperf-visual-studio-extension-v210/)
