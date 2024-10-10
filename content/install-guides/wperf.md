@@ -152,9 +152,13 @@ Driver removed successfully.
 
 WindowsPerf GUI (Graphical User Interface) project, a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. Extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
 
-In order to set the path to the `wperf.exe` executable, go to `Tools -> Options -> Windows Perf -> WindowsPerf Path` and set the absolute path to the wperf.exe executable and then on the Validate button.
+Install by opening `Extensions` menu, select `Manage Extensions` and click `Browse`. Type `WindowsPerf` to search for Arm WindowsPerf GUI extension. Click `Install`.
 
-Also, visit WindowsPerf GUI project website on [GitHub](https://github.com/arm-developer-tools/windowsperf-vs-extension).
+{{% notice How to set up wperf.exe path in the extension%}}
+In order to set the path to the `wperf.exe` executable, go to `Tools -> Options -> Windows Perf -> WindowsPerf Path` and set the absolute path to the wperf.exe executable and then on the Validate button.
+{{% /notice %}}
+
+Also, visit WindowsPerf GUI project website on [GitHub](https://github.com/arm-developer-tools/windowsperf-vs-extension) for more details and latest updates.
 
 ## Install WindowsPerf VS Code Extension (optional) {#vscode}
 
