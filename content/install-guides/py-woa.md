@@ -27,42 +27,44 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. The latest version at time of writing is 3.13.0.
+Python has native support for [Windows on Arm](https://learn.microsoft.com/en-us/windows/arm/overview). Starting with version 3.11, an official installer is available. The latest version is 3.13.0.
 
-A number of developer ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
+A number of developer-ready Windows on Arm [devices](/learning-paths/laptops-and-desktops/intro/find-hardware/) are available.
 
-Windows on Arm instances are available with Microsoft Azure. For more information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
+Windows on Arm instances are available with Microsoft Azure. For further information, see [Deploy a Windows on Arm virtual machine on Microsoft Azure](/learning-paths/cross-platform/woa_azure/).
 
 ## How do I download and install Python for Windows on Arm?
 
-The installer can be downloaded from the [Python website](https://www.python.org/downloads/windows/). Locate the `ARM64` installer.
+To download and install Python for Windows on Arm, there is more than one option:
 
-You can also download from a PowerShell terminal.
+* You can download the installer from the [Python website](https://www.python.org/downloads/windows/). Locate the `ARM64` installer.
+
+* You can download from a PowerShell terminal:
 ```command
 curl https://www.python.org/ftp/python/3.13.0/python-3.13.0-arm64.exe --output python-3.13.0-arm64.exe
 ```
 
-Once downloaded, run the installer `exe` file on a Windows on Arm machine. 
+Once you have downloaded Python, run the installer `exe` file on a Windows on Arm machine. 
 
 The installer will start. 
 
-Check `Add python.exe to PATH` if you want to easily invoke python from any directory.
+Tick the checkbox **Add python.exe to PATH** if you want to easily invoke python from any directory.
 
 ![Install #center](/install-guides/_images/py1-woa.png)
 
-`Setup was successful` is displayed when complete.
+**Setup was successful** is displayed when complete.
 
 ![Complete #center](/install-guides/_images/py2-woa.png)
 
 ## How do I start Python on Windows? 
 
-At a Windows Command prompt or a PowerShell prompt use `python` or `py` to start the interpreter.
+To start Python on Windows, at a Windows Command prompt or a PowerShell prompt, use `python` or `py` to start the interpreter:
 
 ```cmd
 py
 ```
 
-The interpreter starts with output similar to:
+The interpreter starts with an output similar to:
 
 ```output
 Python 3.13.0 (tags/v3.13.0:60403a5, Oct  7 2024, 10:17:29) [MSC v.1941 64 bit (ARM64)] on win32
@@ -78,7 +80,7 @@ exit()
 
 ## How can I run a Python example?
 
-To confirm python is working, use a text editor to save the code below to a file named `uname.py`.
+To run a Python example, and confirm that python is working, use a text editor to save the code below to a file named `uname.py`.
 
 ```python
 import platform
@@ -92,7 +94,7 @@ Run the code:
 py uname.py
 ```
 
-Running on a Windows on Arm machine produces the output similar to:
+Running on a Windows on Arm machine produces an output similar to:
 
 ```output
 Python version 3.13.0
@@ -101,7 +103,7 @@ Machine is Windows 11 ARM64
 
 ## How do I install Python packages?
 
-Python `pip` can be used to install packages. 
+To install Python packages, you can use Python `pip`. 
 
 For example, to install [Flask](https://palletsprojects.com/p/flask/):
 ```console
@@ -138,7 +140,7 @@ WARNING: This is a development server. Do not use it in a production deployment.
  * Running on http://10.8.0.10:5000
 Press CTRL+C to quit
 ```
-Open a browser with the URL printed by the application. In this example:
+Using the URL that the application prints, open a browser. Here is an example:
 ```url
 http://127.0.0.1:5000
 ```
@@ -155,17 +157,17 @@ The accesses are reported in the command window:
 10.8.0.10 - - [<timestamp>] "GET /favicon.ico HTTP/1.1" 404 -
 ```
 
-Use `Ctrl+C` to stop the application.
+Use **Ctrl + C** to stop the application.
 
 ## Is Python IDLE available?
 
-Python `IDLE` is included in the installation. IDLE is a simple IDE for python development. You can locate it in your start menu.
+Python `IDLE` is included in the installation. IDLE is a simple IDE for Python development. You can locate it in the start menu.
 
 You can create and run Python applications in this environment.
 
-For example, use `File` > `Open...` (`Ctrl+O`) to open the above `uname.py`.
+For example, use **File**, then **Open...** (or **Ctrl + O**) to open the above `uname.py`.
 
-Then select `Run` > `Run module` (`F5`) to execute.
+Then select **Run** and **Run module** (or **F5**) to execute.
 
 ![IDLE uname #center](/install-guides/_images/py3-woa.png)
 
