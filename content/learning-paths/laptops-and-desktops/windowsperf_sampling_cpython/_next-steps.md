@@ -32,6 +32,14 @@ further_reading:
         link: https://www.linaro.org/blog/windowsperf-release-3-0-0/
         type: blog
     - resource:
+        title: WindowsPerf Release 3.3.0
+        link: https://www.linaro.org/blog/windowsperf-release-3-3-0/
+        type: blog
+    - resource:
+        title: WindowsPerf Release 3.7.2
+        link: https://www.linaro.org/blog/expanding-profiling-capabilities-with-windowsperf-372-release
+        type: blog
+    - resource:
         title: Windows on Arm overview
         link: https://learn.microsoft.com/en-us/windows/arm/overview
         type: website
