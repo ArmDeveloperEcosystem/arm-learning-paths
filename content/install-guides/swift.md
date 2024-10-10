@@ -18,7 +18,7 @@ tool_install: true
 weight: 1
 ---
 
-[Swift](https://swift.org/) is an open-source programming language developed by Apple. It was initially created for use with Apple's iOS, macOS, watchOS, and tvOS operating systems, but has since gained popularity as a general-purpose language suitable for a wide range of Linux and Windows applications.  Swift is known for its safety, speed, and expressiveness, making it a great choice for both beginners and experienced programmers.
+[Swift](https://swift.org/) is an open-source programming language developed by Apple. It was initially created for use with Apple's iOS, macOS, watchOS, and tvOS operating systems, but has since gained popularity as a general-purpose language suitable for a wide range of Linux and Windows applications. Swift is known for its safety, speed, and expressiveness, making it ideal for both beginners and experienced programmers.
 
 ## What do I need to install Swift?
 
@@ -70,7 +70,7 @@ sudo apt-get -y install \
 
 This guide uses Swift version 6.0.1 on Ubuntu 24.04. 
 
-You can get more information about other versions and platforms from [Download Swift](https://www.swift.org/download/).  
+You can get more information about other versions and platforms from [Download Swift](https://www.swift.org/download/).
 
 Download Swift for Arm Linux:
 
