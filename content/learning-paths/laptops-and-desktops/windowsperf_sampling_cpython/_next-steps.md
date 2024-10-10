@@ -41,7 +41,7 @@ further_reading:
         type: website
     - resource:
         title: WindowsPerf releases
-        link: https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases
+        link: https://github.com/arm-developer-tools/windowsperf/releases
         type: website
 # ================================================================================
 #       FIXED, DO NOT MODIFY
