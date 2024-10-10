@@ -73,7 +73,9 @@ tar -xmf windowsperf-bin-3.8.0.zip
 
 ## Install wperf driver
 
-You can install the kernel driver using either the Visual Studio [devcon](#devcon_install) utility or the supplied [installer](#devgen_install).
+You can install the kernel driver using supplied [wperf-devgen](#devgen_install) installer.
+
+The [wperf-devgen](https://github.com/arm-developer-tools/windowsperf/blob/main/wperf-devgen/README.md) tool has been designated as the preferred installer and uninstaller for the WindowsPerf Kernel Driver in the latest release. This tool offers a simple process for managing the installation and removal of the driver.
 
 {{% notice  Note%}}
 You must install the driver as `Administrator`.
@@ -84,22 +86,6 @@ Open a `Windows Command Prompt` terminal with `Run as administrator` enabled.
 Navigate to the `windowsperf-bin-<version>` directory.
 ```command
 cd windowsperf-bin-3.8.0
-```
-
-### Install with devcon {#devcon_install}
-
-Navigate into the `wperf-driver` folder, and use `devcon` to install the driver:
-
-```command
-cd wperf-driver
-devcon install wperf-driver.inf Root\WPERFDRIVER
-```
-You will see output similar to:
-
-```output
-Device node created. Install is complete when drivers are installed...
-Updating drivers for Root\WPERFDRIVER from <path>\wperf-driver.inf.
-Drivers installed successfully.
 ```
 
 ### Install with wperf-devgen {#devgen_install}
@@ -142,24 +128,11 @@ You should see output similar to:
 
 ## Uninstall wperf driver
 
-You can uninstall (aka "remove") the kernel driver using either the Visual Studio [devcon](#devcon_uninstall) utility or the supplied [installer](#devgen_uninstall).
+You can uninstall (aka "remove") the kernel driver using supplied [wperf-devgen](#devgen_uninstall) uninstaller.
 
 {{% notice  Note%}}
 You must uninstall the driver as `Administrator`.
 {{% /notice %}}
-
-### Uninstall with devcon {#devcon_uninstall}
-
-Below command removes the device from the device tree and deletes the device stack for the device. As a result of these actions, child devices are removed from the device tree and the drivers that support the device are unloaded. See [DevCon Remove](https://learn.microsoft.com/en-us/windows-hardware/drivers/devtest/devcon-remove) article for more details.
-
-```command
-devcon remove wperf-driver.inf Root\WPERFDRIVER
-```
-You should see output similar to:
-```output
-ROOT\SYSTEM\0001                                            : Removed
-1 device(s) were removed.
-```
 
 ### Uninstall with wperf-devgen {#devgen_uninstall}
 
