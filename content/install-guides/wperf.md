@@ -30,11 +30,10 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-WindowsPerf is an open-source command line tool for performance analysis on Windows on Arm devices.
+WindowsPerf is (Linux perf inspired) Windows on Arm performance profiling tool. Profiling is based on ARM64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of special events, and sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.  WindowsPerf is an open-source project hosted on [GitHub](https://github.com/arm-developer-tools/windowsperf).
 
-WindowsPerf consists of a kernel-mode driver and a user-space command-line tool, or [VS Code Extension](#vscode). The command-line tool is modeled after the Linux `perf` command. 
+WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. The WindowsPerf command line tool can be seamlessly integrated with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which can be downloaded from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a more user-friendly interface and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
 
-WindowsPerf includes a **counting model** for counting events such as cycles, instructions, and cache events and a **sampling model** to understand how frequently events occur.
 
 {{% notice  Virtual Machines%}}
 WindowsPerf cannot be used on virtual machines, such as cloud instances.
