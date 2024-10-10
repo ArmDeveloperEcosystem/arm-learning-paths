@@ -39,8 +39,6 @@ WindowsPerf consists of a kernel-mode driver and a user-space command-line tool.
 WindowsPerf cannot be used on virtual machines, such as cloud instances.
 {{% /notice %}}
 
-You can interact with the 
-
 ## Visual Studio and the Windows Driver Kit (WDK)
 
 WindowsPerf relies on `dll` files installed with Visual Studio (Community Edition or higher) and (optionally) installers from the Windows Driver Kit extension.
