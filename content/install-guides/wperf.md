@@ -201,4 +201,9 @@ You do not need to install `wperf` on non-Windows on Arm devices.
 
 ## Further reading
 
-[Announcing WindowsPerf: Open-source performance analysis tool for Windows on Arm](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf)
+- [WindowsPerf Release 3.7.2 blog post](https://www.linaro.org/blog/expanding-profiling-capabilities-with-windowsperf-372-release)
+- [WindowsPerf Release 3.3.0 blog post](https://www.linaro.org/blog/windowsperf-release-3-3-0/)
+- [WindowsPerf Release 3.0.0 blog post](https://www.linaro.org/blog/windowsperf-release-3-0-0/)
+- [WindowsPerf Release 2.5.1 blog post](https://www.linaro.org/blog/windowsperf-release-2-5-1/)
+- [WindowsPerf release 2.4.0 introduces the first stable version of sampling model support](https://www.linaro.org/blog/windowsperf-release-2-4-0-introduces-the-first-stable-version-of-sampling-model-support/)
+- [Announcing WindowsPerf: Open-source performance analysis tool for Windows on Arm](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf)
