@@ -37,9 +37,9 @@ Windows on Arm instances are available with Microsoft Azure. For further informa
 
 To download and install Python for Windows on Arm, there is more than one option:
 
-* You can download the installer from the [Python website](https://www.python.org/downloads/windows/). Locate the `ARM64` installer.
+* Firstly, you can download the installer from the [Python website](https://www.python.org/downloads/windows/). Locate the `ARM64` installer.
 
-* You can download from a PowerShell terminal:
+* Or secondly, you can download from a PowerShell terminal, by running the following:
 ```command
 curl https://www.python.org/ftp/python/3.13.0/python-3.13.0-arm64.exe --output python-3.13.0-arm64.exe
 ```
@@ -48,7 +48,7 @@ Once you have downloaded Python, run the installer `exe` file on a Windows on Ar
 
 The installer will start. 
 
-Tick the checkbox **Add python.exe to PATH** if you want to easily invoke python from any directory.
+Tick the checkbox **Add python.exe to PATH** to enable you to easily invoke Python from any directory.
 
 ![Install #center](/install-guides/_images/py1-woa.png)
 
@@ -80,7 +80,7 @@ exit()
 
 ## How can I run a Python example?
 
-To run a Python example, and confirm that python is working, use a text editor to save the code below to a file named `uname.py`.
+To run a Python example, and confirm that Python is working, use a text editor to save the code below to a file named `uname.py`.
 
 ```python
 import platform
