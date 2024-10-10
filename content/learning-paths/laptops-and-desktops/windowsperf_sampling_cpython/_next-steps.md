@@ -12,7 +12,7 @@ recommended_path: "/learning-paths/laptops-and-desktops/win_net/"
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
     # Blog about related topics                 (type: blog)
-    # General online references                 (type: website) 
+    # General online references                 (type: website)
 
 further_reading:
     - resource:
@@ -38,6 +38,22 @@ further_reading:
     - resource:
         title: WindowsPerf Release 3.7.2
         link: https://www.linaro.org/blog/expanding-profiling-capabilities-with-windowsperf-372-release
+        type: blog
+    - resource:
+        title: Introducing the WindowsPerf GUI: the Visual Studio 2022 extension
+        link: https://www.linaro.org/blog/introducing-the-windowsperf-gui-the-visual-studio-2022-extension
+        type: blog
+    - resource:
+        title: Introducing 1.0.0-beta release of WindowsPerf Visual Studio extension
+        link: https://www.linaro.org/blog/introducing-1-0-0-beta-release-of-windowsperf-visual-studio-extension
+        type: blog
+    - resource:
+        title: New Release: WindowsPerf Visual Studio Extension v1.0.0
+        link: https://www.linaro.org/blog/new-release-windowsperf-visual-studio-extension-v1000
+        type: blog
+    - resource:
+        title: Launching WindowsPerf Visual Studio Extension v2.1.0
+        link: https://www.linaro.org/blog/launching--windowsperf-visual-studio-extension-v210
         type: blog
     - resource:
         title: Windows on Arm overview
