@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting and Best Practices
-weight: 10
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

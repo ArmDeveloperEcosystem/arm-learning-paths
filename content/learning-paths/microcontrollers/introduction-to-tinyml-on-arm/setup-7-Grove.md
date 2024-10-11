@@ -1,8 +1,8 @@
 ---
 # User change
-title: "Setup on Grove - Vision AI Module V2"
+title: "Set up the Grove Vision AI Module V2"
 
-weight: 8 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
