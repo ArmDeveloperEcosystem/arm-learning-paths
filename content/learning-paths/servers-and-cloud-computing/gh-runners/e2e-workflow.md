@@ -95,9 +95,30 @@ jobs:
           name: acl
       - name: Parse output
         run: python scripts/parse_output.py openblas.txt acl.txt
+      - name: Remove output files
+        run: rm -rf openblas.txt acl.txt
+  push-artifact:
+    name: Push the updated model
+    needs: compare-results
+    runs-on: ubuntu-22.04-arm-os
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download model artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: traffic_sign_net
+          path: models/
+      - name: Push updated model to repository
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@users.noreply.github.com"
+          git add models/traffic_sign_net.pth
+          git commit -m "Add updated model"
+          git push
   deploy-to-dockerhub:
     name: Build and Push Docker Image to DockerHub
-    needs: compare-results
+    needs: push-artifact
     runs-on: ubuntu-22.04-arm-os
     steps:
       - name: Checkout code
@@ -117,7 +138,7 @@ jobs:
           docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/gtsrb-image:latest --push .
 ```
 
-These steps should look familiar from earlier parts of the learning path, and now they are put together to curate the lifecycle of our example. The training and testing steps are run like before. The output report is saved and parsed to show the improvement in inference time. The deployment step connects to DockerHub and pushes the model, which can then be downloaded by users from DockerHub. The steps depend on each other, requiring the previous one to run before the next is triggered. The dependencies should look like this after the job is run.
+These steps should look familiar from earlier parts of the learning path, and now they are put together to curate the lifecycle of our example. The training and testing steps are run like before. The output report is saved and parsed to show the improvement in inference time. The re-trained model is updated in the repository. The deployment step connects to DockerHub and pushes the model, which can then be downloaded by users from DockerHub. The steps depend on each other, requiring the previous one to run before the next is triggered. The dependencies should look like this after the job is run.
 
 ![#e2e-workflow](/images/e2e-workflow.png)
 
