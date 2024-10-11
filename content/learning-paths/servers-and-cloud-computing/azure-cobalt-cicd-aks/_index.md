@@ -1,19 +1,19 @@
 ---
-title: Deploy a .NET application with GitHub Actions on Azure Cobalt 100 VMs
+title: Deploy a .NET application on Microsoft Azure Cobalt 100 VMs
 
 minutes_to_complete: 60   
 
-who_is_this_for: This is an advanced topic for software developers who want to develop cloud native applications using GitHub Actions and Azure Kubernetes Service (AKS)
+who_is_this_for: This is an advanced topic for software developers who want to develop cloud-native applications using GitHub Actions and Azure Kubernetes Service (AKS), and run them on Microsoft Azure Cobalt 100 VMs.
 
 learning_objectives: 
     - Configure an Azure Cobalt 100 VM as a self-hosted GitHub runner.
     - Create an AKS cluster with Arm-based Azure Cobalt 100 nodes using Terraform.
-    - Deploy a .NET application to AKS with GitHub Actions using the self-hosted Arm64 based runner.
+    - Deploy a .NET application to AKS with GitHub Actions using the self-hosted Arm64-based runner.
 
 prerequisites:
-    - A Microsoft Azure account. Create an account if needed.
-    - A valid GitHub account
-    - A machine with [Terraform](/install-guides/terraform/),[Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
+    - A Microsoft Azure account. 
+    - A GitHub account.
+    - A machine with [Terraform](/install-guides/terraform/),[Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed.
 
 author_primary: Pranay Bakre
 

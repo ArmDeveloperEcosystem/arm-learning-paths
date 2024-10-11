@@ -12,7 +12,7 @@ Test that the firmware implementation builds and boots on a FVP. The firmware st
 
 Launch the container:
 ```bash 
-./container-scrits/container.sh -v /home/ubuntu/rd-infra/ run
+./container-scripts/container.sh -v /home/ubuntu/rd-infra/ run
 ```
 
 Perform a build inside the container:
