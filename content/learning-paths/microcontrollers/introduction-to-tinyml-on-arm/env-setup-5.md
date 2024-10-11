@@ -18,13 +18,7 @@ The host machine is where you will perform most of your development work, especi
 
 - The Ubuntu version should be `20.04 or higher`. 
 - If you do not have the board, the `x86_64` architecture must be used because the Corstone-300 FVP is not currently available for the Arm architecture.
-- Also, though Executorch supports Windows via WSL, it is limited in resource.
-
-
-### Corstone-300 FVP Setup for ExecuTorch
-
-To install and set up the Corstone-300 FVP and ExecuTorch on your machine, refer to [Building and Running ExecuTorch with ARM Ethos-U Backend](https://pytorch.org/executorch/stable/executorch-arm-delegate-tutorial.html). Follow this tutorial till the **"Install the TOSA reference model"** Section. It should be the last thing you do from this tutorial.
-
+- Though Executorch supports Windows via WSL, it is limited in resource.
 
 
 ## Install Executorch
@@ -65,5 +59,5 @@ sudo apt install screen
 ```
 
 ## Next Steps
-1. If you don't have access to the physical board: Skip to [Environment Setup Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/setup-6-FVP.md)
-2. If you have access to the board: Skip to [Setup on Grove - Vision AI Module V2](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/setup-6-Grove.md)
+1. If you don't have access to the physical board: Go to [Environment Setup Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/)
+2. If you have access to the board: Go to [Setup on Grove - Vision AI Module V2](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/)

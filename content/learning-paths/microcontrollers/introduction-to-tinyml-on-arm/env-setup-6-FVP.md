@@ -14,4 +14,4 @@ To install and set up the Corstone-300 FVP on your machine, refer to [Building a
 
 
 ## Next Steps
-1. Go to [Build a Simple PyTorch Model](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/build-model-8.md) to test your environment setup.
+1. Go to [Build a Simple PyTorch Model](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/build-model-8/) to test your environment setup.

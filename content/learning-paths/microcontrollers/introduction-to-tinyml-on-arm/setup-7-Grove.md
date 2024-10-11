@@ -8,9 +8,7 @@ weight: 8 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 ## Before you begin 
-Only follow this part of the tutorial if you have the board. 
-
-Due to its constrained environment, we'll focus on lightweight, optimized tools and models (which will be introduced in the next learning path).
+Only follow this part of the tutorial if you have the board. Due to its constrained environment, we'll focus on lightweight, optimized tools and models (which will be introduced in the next learning path).
 
 
 ### Compilers 
@@ -52,10 +50,8 @@ edge-impulse-daemon
 ```
 Follow the prompts to log in.
 
-5. Verify your board is connected
-
-If successful, you should see your Grove - Vision AI Module V2 under 'Devices' in Edge Impulse.
+5. If successful, you should see your Grove - Vision AI Module V2 under 'Devices' in Edge Impulse.
 
 
 ## Next Steps
-1. Go to [Build a Simple PyTorch Model](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/build-model-8.md) to test your environment setup.
+1. Go to [Build a Simple PyTorch Model](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/build-model-8/) to test your environment setup.
