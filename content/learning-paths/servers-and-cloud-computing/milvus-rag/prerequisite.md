@@ -1,24 +1,23 @@
 ---
-title: Prerequisite
+title: Install dependencies
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Before you begin
+## Overview
 
-In this tutorial, you learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based infrastructures. For vector storage, we utilize [Zilliz Cloud](https://zilliz.com/cloud), the fully-managed Milvus vector database. Zilliz Cloud is available on major cloud such as AWS, GCP and Azure. In this demo we use Zilliz Cloud deployed on AWS with Arm machines. For LLM, we use the `Llama-3.1-8B` model on the AWS Arm-based server CPU using `llama.cpp`. 
+In this Learning Path, you will learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based servers. RAG applications often use vector databases to efficiently store and retrieve high-dimensional vector representations of text data. Vector databases are optimized for similarity search and can handle large volumes of vector data, making them ideal for the retrieval component of RAG systems. In this example, you will utilize [Zilliz Cloud](https://zilliz.com/cloud), the fully-managed Milvus vector database as your vector storage. Zilliz Cloud is available on major cloud such as AWS, GCP and Azure. In this demo you will use Zilliz Cloud deployed on AWS with Arm based servers. For the LLM, you will use the `Llama-3.1-8B` model running on an AWS Arm-based server using `llama.cpp`. 
 
 
-## Prerequisite
-To run this example, we recommend you to use [AWS Graviton](https://aws.amazon.com/ec2/graviton/), which provides a cost-effective way to run ML workloads on Arm-based servers. This notebook has been tested on an AWS Graviton3 `c7g.2xlarge` instance with Ubuntu 22.04 LTS system.
-
-You need at least four cores and 8GB of RAM to run this example. Configure disk storage up to at least 32 GB. We recommend that you use an instance of the same or better specification.
+## Install dependencies
+This Learning Path has been tested on an AWS Graviton3 `c7g.2xlarge` instance running Ubuntu 22.04 LTS system.
+You need at least four cores and 8GB of RAM to run this example. Configure disk storage up to at least 32 GB.
 
 After you launch the instance, connect to it and run the following commands to prepare the environment.
 
-Install python on the server:
+Install python:
 
 ```bash
 sudo apt update

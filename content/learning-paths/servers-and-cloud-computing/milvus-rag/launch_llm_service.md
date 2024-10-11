@@ -1,12 +1,12 @@
 ---
-title: Launch LLM Service on Arm
+title: Launch LLM Server 
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, we will build and launch the `llama.cpp` service on the Arm-based CPU.
+In this section, you will build and run the `llama.cpp` server program using an OpenAI-compatible API on your running AWS Arm-based server instance.
 
 ### Llama 3.1 model & llama.cpp
 
@@ -69,7 +69,7 @@ The GGUF model format, introduced by the llama.cpp team, uses compression and qu
 
 ### Re-quantize the model weights
 
-To re-quantize, run
+To re-quantize the model, run:
 
 ```bash
 ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
@@ -77,24 +77,25 @@ To re-quantize, run
 
 This will output a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
 
-> This requantization is optimal specifically for Graviton3. For Graviton2, the optimal requantization should be performed in the `Q4_0_4_4` format, and for Graviton4, the `Q4_0_4_8` format is the most suitable for requantization.
+This requantization is optimal specifically for Graviton3. For Graviton2, the optimal requantization should be performed in the `Q4_0_4_4` format, and for Graviton4, the `Q4_0_4_8` format is the most suitable for requantization.
 
-### Start the LLM Service
-You can utilize the llama.cpp server program and send requests via an OpenAI-compatible API. This allows you to develop applications that interact with the LLM multiple times without having to repeatedly start and stop it. Additionally, you can access the server from another machine where the LLM is hosted over the network.
+### Start the LLM Server
+You can utilize the `llama.cpp` server program and send requests via an OpenAI-compatible API. This allows you to develop applications that interact with the LLM multiple times without having to repeatedly start and stop it. Additionally, you can access the server from another machine where the LLM is hosted over the network.
 
 Start the server from the command line, and it listens on port 8080:
 
-```shell
+```bash
 ./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf -n 2048 -t 64 -c 65536  --port 8080
 ```
-```text
+
+The output from this command should look like:
+
+```output
 'main: server is listening on 127.0.0.1:8080 - starting the main loop
 ```
 
 You can also adjust the parameters of the launched LLM to adapt it to your server hardware to obtain ideal performance. For more parameter information, see the `llama-server --help` command.
 
-If you struggle to perform this step, you can refer to the [this documents](https://learn.arm.com/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/) for more information.
-
-You have started the LLM service on your Arm-based CPU. Next, we directly interact with the service using the OpenAI SDK.
+You have started the LLM service on your AWS Graviton instance with an Arm-based CPU. In the next section, you will directly interact with the service using the OpenAI SDK.
 
 
