@@ -16,6 +16,17 @@ LSE introduces additional atomic instructions and operations, such as Load-Acqui
 
 When glibc is compiled with LSE support, it can take advantage of these enhanced atomic operations provided by the LSE extension. This can potentially improve the performance of multi-threaded applications that heavily rely on atomic operations and synchronization primitives.
 
+{{% notice Note %}}
+Your version of the GNU C Library may already have support for LSE. Before you build a new version check if LSE is already included by running:
+
+```console
+objdump -d /lib/aarch64-linux-gnu/libc.so.6 | grep -i 'cas\|casp\|swp\|ldadd\|stadd\|ldclr\|stclr\|ldeor\|steor\|ldset\|stset\|ldsmax\|stsmax\|ldsmin\|stsmin\|ldumax\|stumin' | wc -l
+```
+
+If a non-zero number is printed your GNU C Library already has LSE.
+
+{{% /notice %}}
+
 ## Before you begin
 
 Launch an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu version 20.04.
