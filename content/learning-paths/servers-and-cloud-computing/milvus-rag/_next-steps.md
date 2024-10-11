@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Thank you for completing the Milvus RAG tutorial.
+next_step_guidance: Thank you for completing the RAG with Zilliz Cloud Learning Path. You might be interested in learning how to run the Llama 3.1 8B model with KleidiAI optimizations on Arm servers.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/llama-cpu/
 

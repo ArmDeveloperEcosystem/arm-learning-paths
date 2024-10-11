@@ -6,20 +6,15 @@ weight: 5
 layout: learningpathall
 ---
 
-In this section, we will build the online RAG part of the application.
+In this section, you will build the online RAG part of your application.
 
-### LLM Client and Embedding Model
+### Prepare the embedding model
 
-We initialize the LLM client and prepare the embedding model.
+In your python script, generate a test embedding and print its dimension and first few elements.
 
-For the LLM, we use the OpenAI SDK to request the Llama service launched before. We don't need to use any API key because it is actually our local llama.cpp service.
+For the LLM, you will use the OpenAI SDK to request the Llama service launched before. You don't need to use any API key because it is running locally on your machine.
 
-```python
-from openai import OpenAI
-
-llm_client = OpenAI(base_url="http://localhost:8080/v1", api_key="no-key")
-```
-Generate a test embedding and print its dimension and first few elements.
+Append the code below to `zilliz-llm-rag.py`:
 
 ```python
 test_embedding = embedding_model.embed_query("This is a test")
@@ -27,21 +22,22 @@ embedding_dim = len(test_embedding)
 print(embedding_dim)
 print(test_embedding[:10])
 ```
+Run the script. The output should look like:
 
-```text
+```output
 384
 [0.03061249852180481, 0.013831384479999542, -0.02084377221763134, 0.016327863559126854, -0.010231520049273968, -0.0479842908680439, -0.017313342541456223, 0.03728749603033066, 0.04588735103607178, 0.034405000507831573]
 ```
 
 ### Retrieve data for a query
 
-Let's specify a frequent question about Milvus.
-```python
-question = "How is data stored in milvus?"
-```
-Search for the question in the collection and retrieve the semantic top-3 matches.
+You will specify a frequent question about Milvus and then search for the question in the collection and retrieve the semantic top-3 matches.
+
+Append the code shown below to `zilliz-llm-rag.py`:
 
 ```python
+question = "How is data stored in milvus?"
+
 search_res = milvus_client.search(
     collection_name=collection_name,
     data=[
@@ -51,9 +47,7 @@ search_res = milvus_client.search(
     search_params={"metric_type": "IP", "params": {}},  # Inner product distance
     output_fields=["text"],  # Return the text field
 )
-```
-Let's take a look at the search results of the query
-```python
+
 import json
 
 retrieved_lines_with_distances = [
@@ -61,8 +55,9 @@ retrieved_lines_with_distances = [
 ]
 print(json.dumps(retrieved_lines_with_distances, indent=4))
 ```
+Run the script again and the output with the top 3 matches will look like:
 
-```shell
+```output
 [
     [
         " Where does Milvus store data?\n\nMilvus deals with two types of data, inserted data and metadata. \n\nInserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends, including [MinIO](https://min.io/), [AWS S3](https://aws.amazon.com/s3/?nc1=h_ls), [Google Cloud Storage](https://cloud.google.com/storage?hl=en#object-storage-for-companies-of-all-sizes) (GCS), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs), [Alibaba Cloud OSS](https://www.alibabacloud.com/product/object-storage-service), and [Tencent Cloud Object Storage](https://www.tencentcloud.com/products/cos) (COS).\n\nMetadata are generated within Milvus. Each Milvus module has its own metadata that are stored in etcd.\n\n###",
@@ -80,15 +75,23 @@ print(json.dumps(retrieved_lines_with_distances, indent=4))
 ```
 ### Use LLM to get a RAG response
 
-Convert the retrieved documents into a string format.
+You are now ready to use the LLM and obtain a RAG response. 
+
+For the LLM, you will use the OpenAI SDK to request the Llama service you launched in the previous section. You don't need to use any API key because it is running locally on your machine. 
+
+You will then convert the retrieved documents into a string format. Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus. Finally use the LLM to generate a response based on the prompts.
+
+Append the code below into `zilliz-llm-rag.py`:
+
 ```python
+from openai import OpenAI
+
+llm_client = OpenAI(base_url="http://localhost:8080/v1", api_key="no-key")
+
 context = "\n".join(
     [line_with_distance[0] for line_with_distance in retrieved_lines_with_distances]
 )
-```
-Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus.
 
-```python
 SYSTEM_PROMPT = """
 Human: You are an AI assistant. You are able to find answers to the questions from the contextual passage snippets provided.
 """
@@ -101,10 +104,7 @@ Use the following pieces of information enclosed in <context> tags to provide an
 {question}
 </question>
 """
-```
-Use LLM to generate a response based on the prompts. We set the `model` parameter to `not-used` since it is a redundant parameter for the llama.cpp service.
 
-```python
 response = llm_client.chat.completions.create(
     model="not-used",
     messages=[
@@ -115,9 +115,16 @@ response = llm_client.chat.completions.create(
 print(response.choices[0].message.content)
 
 ```
-```text
+
+{{% notice Note %}}
+Make sure your llama.cpp server from the previous section is running before you proceed
+{{% /notice  %}}
+
+Run the script one final time with these changes using `python3 zilliz-llm-rag.py`. The output should look like:
+
+```output
 Milvus stores data in two types: inserted data and metadata. Inserted data, including vector data, scalar data, and collection-specific schema, are stored in persistent storage as incremental log. Milvus supports multiple object storage backends such as MinIO, AWS S3, Google Cloud Storage (GCS), Azure Blob Storage, Alibaba Cloud OSS, and Tencent Cloud Object Storage (COS). Metadata are generated within Milvus and each Milvus module has its own metadata that are stored in etcd.
 ```
-Congratulations! You have built a RAG application on top of the Arm-based infrastructures.
+Congratulations! You have successfully built a RAG application using a LLM and Zilliz Cloud all on your Arm-based infrastructure.
 
 
