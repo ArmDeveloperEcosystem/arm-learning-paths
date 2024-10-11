@@ -24,12 +24,12 @@ You can find information about other Linux distributions following the Ubuntu in
 
 ## Download an Ubuntu disk image
 
-Download the [Ubuntu 22.04 ISO file](https://cdimage.ubuntu.com/jammy/daily-live/current/jammy-desktop-arm64.iso) for Arm.
+Download the [Ubuntu 24.04 ISO file](https://cdimage.ubuntu.com/noble/daily-live/current/noble-desktop-arm64.iso) for Arm.
 
 Alternatively, you can download the `.iso` file from the Command Prompt or Windows PowerShell by running:
 
 ```console
-curl https://cdimage.ubuntu.com/jammy/daily-live/current/jammy-desktop-arm64.iso -O jammy-desktop-arm64.iso
+curl https://cdimage.ubuntu.com/noble/daily-live/current/noble-desktop-arm64.iso --output noble-desktop-arm64.iso
 ```
 
 ## Install Ubuntu using Hyper-V 
