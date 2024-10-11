@@ -2,13 +2,17 @@
 # User change
 title: "Build a Simple PyTorch Model"
 
-weight: 9 # 1 is first, 2 is second, etc.
+weight: 7 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 
-With our Environment ready, we will create a simple program to test our setup. This example will define a simple feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between. Create a file called simple_nn.py with the following code:
+With our Environment ready, you can create a simple program to test the setup. 
+
+This example defines a small feedforward neural network for a classification task. The model consists of 2 linear layers with ReLU activation in between. 
+
+Use a text editor to create a file named `simple_nn.py` with the following code:
 
 ```python
 import torch
@@ -55,45 +59,55 @@ with open("simple_nn.pte", "wb") as file:
 print("Model successfully exported to simple_nn.pte")
 ```
 
-Run it from your terminal:
+Run the model from the Linux command line:
 
 ```console
 python3 simple_nn.py
 ```
 
-If everything runs successfully, the output will be:
-```bash { output_lines = "1" }
+The output is:
+
+```output
 Model successfully exported to simple_nn.pte
 ```
-Finally, the model is saved as a .pte file, which is the format used by ExecuTorch for deploying models to the edge.
 
-Now, we will run the ExecuTorch version, first run: 
+The model is saved as a .pte file, which is the format used by ExecuTorch for deploying models to the edge.
+
+Run the ExecuTorch version, first build the executable: 
 
 ```console
 # Clean and configure the build system
-rm -rf cmake-out && mkdir cmake-out && cd cmake-out && cmake ..
+(rm -rf cmake-out && mkdir cmake-out && cd cmake-out && cmake ..)
 
 # Build the executor_runner target
-cmake --build cmake-out --target executor_runner -j9
+cmake --build cmake-out --target executor_runner -j$(nproc)
 ```
 
-You should see an output similar to:
-```bash { output_lines = "1" }
+You see the build output and it ends with:
+
+```output
+[100%] Linking CXX executable executor_runner
 [100%] Built target executor_runner
 ```
 
-Now, run the executor_runner with the Model:
+When the build is complete, run the executor_runner with the model as an argument:
+
 ```console
 ./cmake-out/executor_runner --model_path simple_nn.pte
 ```
 
-Expected Output: Since the model is a simple feedforward model, you can expect a tensor of shape [1, 2]
+Since the model is a simple feedforward model, you see a tensor of shape [1, 2]
 
-```bash { output_lines = "1-3" }
-Input tensor shape: [1, 10]
-Output tensor shape: [1, 2]
-Inference output: tensor([[0.5432, -0.3145]]) #will vary due to random initialization
+```output
+I 00:00:00.006598 executorch:executor_runner.cpp:73] Model file simple_nn.pte is loaded.
+I 00:00:00.006628 executorch:executor_runner.cpp:82] Using method forward
+I 00:00:00.006635 executorch:executor_runner.cpp:129] Setting up planned buffer 0, size 320.
+I 00:00:00.007225 executorch:executor_runner.cpp:152] Method loaded.
+I 00:00:00.007237 executorch:executor_runner.cpp:162] Inputs prepared.
+I 00:00:00.012885 executorch:executor_runner.cpp:171] Model executed successfully.
+I 00:00:00.012896 executorch:executor_runner.cpp:175] 1 outputs: 
+Output 0: tensor(sizes=[1, 2], [-0.105369, -0.178723])
 ```
 
-If the model execution completes successfully, you’ll see confirmation messages similar to those above, indicating successful loading, inference, and output tensor shapes.
+When the model execution completes successfully, you’ll see confirmation messages similar to those above, indicating successful loading, inference, and output tensor shapes.
 
