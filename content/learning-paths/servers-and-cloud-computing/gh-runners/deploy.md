@@ -6,12 +6,12 @@ weight: 6
 layout: learningpathall
 ---
 
-After your model has been trained and validated using the GitHub Actions workflows, your next step is to deploy the model into a prodcution environment.
+After your model has been trained and validated using the GitHub Actions workflows, your next step is to deploy the model into a production environment.
 In this section, you will walk through the steps to containerize your trained model and push the container image to DockerHub.
 
 ## Containerize the Model
 
-In order to create a docker container for the trained model with the scripts to deploy this model, you will add a Dockerfile to your project with the contents as shown:
+In order to create a docker container for the trained model with the scripts to deploy this model, observe the Dockerfile in the project containing the contents as shown:
 
 ```console
 # Use the official PyTorch image as the base image
@@ -34,12 +34,12 @@ EXPOSE 8000
 CMD ["uvicorn", "scripts.serve_model:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
 The Dockerfile uses the PyTorch image with the ACL backend as the base image for the container. The working directory is set to `/app` where the trained model and the scripts to deploy the model are copied.
-The container runs a FastAPI application (scripts/serve_model.py) on port 8000. This script is called by `uvicorn` when the container is run.
+The container runs a FastAPI application (`scripts/serve_model.py`) on port 8000. This script is called by `uvicorn` when the container is run.
 
 ## Deploy the trained model using FastAPI
-FastAPI is an easy way to serve your trained model as API. You will create a FastAPI application (scripts/serve_model.py) that loads your pre-trained model, accepts image uploads, and makes predictions on thhe uploaded images:
+FastAPI is an easy way to serve your trained model as API. You use a FastAPI application (´scripts/serve_model.py`) that loads your pre-trained model, accepts image uploads, and makes predictions on the uploaded images:
 
-```console
+```python
 import torch
 import torchvision.transforms as transforms
 from fastapi import FastAPI, UploadFile, File, HTTPException
@@ -65,7 +65,7 @@ class TrafficSignNet(torch.nn.Module):
         x = torch.relu(self.fc1(x))
         x = self.fc2(x)
         return x
-    
+
 # Load the trained model
 model = TrafficSignNet()
 model.load_state_dict(torch.load("/app/models/traffic_sign_net.pth",
@@ -89,7 +89,7 @@ async def predict(file: UploadFile = File(...)):
         # Read the image
         image_bytes = await file.read()
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
-    
+
         # Preprocess the image
         image = transform(image).unsqueeze(0) # Add batch dimension
 
@@ -103,13 +103,13 @@ async def predict(file: UploadFile = File(...)):
 
        # Return the prediction as a JSON response
         return JSONResponse(content={"prediction": prediction.tolist()})
-        
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 ```
 ## Deploy with GitHub Actions
 
-You can now create a new workflow YAML file named `deploy-model.yml` with the contents shown below in the `.github/workflows` directory:
+You can now navigate to the workflow YAML file named `deploy-model.yml` with the contents shown below in the `.github/workflows` directory:
 
 ```console
 name: Deploy to DockerHub
@@ -142,12 +142,12 @@ jobs:
         run: |
           docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/gtsrb-image:latest --push .
 ```
-In this workflow you will build the Docker container for Arm64 architecture and push the container image to DockerHub. 
+In this workflow you will build the Docker container for Arm64 architecture and push the container image to DockerHub.
 In order to push the image to DockerHub, you will need to add the following secrets to your GitHub repository:
  * DOCKER_USERNAME: Your DockerHub username
  * DOCKER_PASSOWORD: Your DockerHub password
 
-This workflow will trigger after the testing workflow completes successfully. 
+This workflow will trigger after the testing workflow completes successfully.
 
 ## Verify the Deployment
 
@@ -156,7 +156,7 @@ You can validate this by logging into DockerHub and checking your repository:
 
 ![dockerhub_img](images/dockerhub_img.png)
 
-You can then pull this docker container image on your local machine and start the container. 
+You can then pull this docker container image on your local machine and start the container.
 
 ```console
 docker pull <docker-username>/gtsrb-image
@@ -171,6 +171,6 @@ The output should look like:
 {"predicted_class":1}
 ```
 
-You have now validated that you were able to successully deploy your application and make predictions on the uploaded test image.
+You have now validated that you were able to successfully deploy your application and make predictions on the uploaded test image.
 
-In the next section, you will learn how to build a complete end-to-end MLOps workflow.
+In the last section, you will learn how to build a complete end-to-end MLOps workflow.

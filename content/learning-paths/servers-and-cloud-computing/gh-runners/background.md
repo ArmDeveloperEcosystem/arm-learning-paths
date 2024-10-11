@@ -12,7 +12,7 @@ In this Learning Path, you will learn how to automate your MLOps workflow using 
 
 GitHub Actions is a platform that automates software development workflows, including continuous integration and continuous delivery. Every repository on GitHub has a tab named _Actions_.
 
-![#actions-gui](images/actions-gui.png))
+![#actions-gui](images/actions-gui.png)
 
 From here, you can create different _workflow files_ which automates processes that run when specific events occur in your GitHub code repository. You use [YAML](https://yaml.org/) to define a workflow. You specify how a job is triggered, the running environment, and the workflow commands. The machine which the workflow runs in is called a _runner_.
 
@@ -26,7 +26,7 @@ Arm-hosted runners are available for Linux and Windows. This Learning Path uses 
 You must have a Team or Enterprise Cloud plan to use Arm-hosted runners.
 {{% /notice %}}
 
-Getting started with Arm-based GitHub runners is straightforward. Follow [these steps to create a Linux Arm-based runner within your organization](/learning-paths/cross-platform/github-arm-runners/runner/#how-can-i-create-an-arm-hosted-runner). 
+Getting started with Arm-based GitHub runners is straightforward. Follow [these steps to create a Linux Arm-based runner within your organization](/learning-paths/cross-platform/github-arm-runners/runner/#how-can-i-create-an-arm-hosted-runner).
 
 Once you have created the runner within your organization, you can use the `runs-on` syntax in your GitHub Actions workflow file to execute the workflow on Arm. Shown here is an example workflow that executes on your Arm-hosted runner named `ubuntu-22.04-arm`:
 

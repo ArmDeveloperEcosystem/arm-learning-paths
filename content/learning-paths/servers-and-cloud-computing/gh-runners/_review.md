@@ -24,15 +24,13 @@ review:
 
     - questions:
         question: >
-            What is not a valid way to use the Arm Compute Library for your ML application?
+            ACL is integrated into PyTorch by default.
         answers:
-            -
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2
+            - True
+            - False
+        correct_answer: 1
         explanation: >
-            PLACEHOLDER EXPLANATION 3
+            While it is possible to use ACL stand-alone, the optimized kernels are built into PyTorch through the oneDNN backend.
 
 
 

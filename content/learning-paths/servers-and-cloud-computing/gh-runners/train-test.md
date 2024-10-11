@@ -7,14 +7,9 @@ layout: learningpathall
 ---
 ## Fork repository
 
-TODO: fix this section when the repo is publicly available
+Fork the repository using the `Fork` button in GitHubs UI.
 
-Clone the repository.
-
-```bash
-git clone ...
-cd ...
-```
+![#fork](/images/fork.png)
 
 ## The code
 The repository contains two main scripts. This section walks you through the code and explains what it does.
@@ -44,7 +39,7 @@ test_loader = DataLoader(test_set, batch_size=64, shuffle=False)
 
 #### Define the model
 
-The next step is to define a class for the actual model, listing the different layers used. We also define the forward-pass function, which is used at training time to update the weights. Additionally, we define the loss function and optimizer for the model parameters are listed.
+The next step is to define a class for the actual model, listing the different layers used. We also define the forward-pass function, which is used at training time to update the weights. Additionally, we define the loss function and optimizer for the model.
 
 ```python
 class TrafficSignNet(nn.Module):
@@ -101,9 +96,9 @@ torch.save(model.state_dict(), './models/traffic_sign_net.pth')
 
 ### Test model
 
-The `test_model.py` script verifies how accurately the ML model can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to measure 
- and compare the model inference time using two different PyTorch backends. 
- 
+The `test_model.py` script verifies how accurately the ML model can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to measure
+ and compare the model inference time using two different PyTorch backends.
+
 #### Load model and create test set
 By loading the weights into the same class as before, we obtain the same model set up as in the last step. The `eval` function set the model up for evaluation. Just like before, we define transformations for the testing data and load it from the GTSRB dataset.
 
