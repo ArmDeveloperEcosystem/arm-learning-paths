@@ -19,7 +19,8 @@ prerequisites:
     - Basic knowledge of machine learning concepts.
     - Understanding of IoT and embedded systems (helpful but not required).
     - A Linux host machine or VM running Ubuntu 20.04 or higher, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
-    - Target device, preferably Cortex-M boards but you can use Cortex-A7 boards as well.
+    - Target device, phyisical or using the or Corstone-300 FVP, preferably Cortex-M boards but you can use Cortex-A7 boards as well.
+
  
 author_primary: Dominica Abena O. Amanfo
 
@@ -36,7 +37,6 @@ operatingsystems:
 tools_software_languages:
     - Corstone 300 FVP
     - Grove - Vision AI Module V2
-    - Arm Virtual Hardware
     - Python
     - PyTorch v2.x
     - Executorch
