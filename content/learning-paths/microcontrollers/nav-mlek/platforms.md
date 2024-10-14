@@ -19,7 +19,7 @@ MPS3 is the recommended solution for evaluating performance, but boards are in s
 
 ## Virtual Hardware
 
-Virtual implementations of the Corstone platforms are also available for software development. These can be accessed locally or in the cloud.
+Virtual implementations of the Corstone reference systems are also available for software development. These can be accessed locally or in the cloud.
 
 ### Ecosystem FVPs
 

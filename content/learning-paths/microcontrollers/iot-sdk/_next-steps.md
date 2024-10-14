@@ -26,7 +26,7 @@ further_reading:
         link: https://devsummit.arm.com/flow/arm/devsummit22/sessions-catalog/page/sessions/session/16600464346670018mPQ
         type: website
     - resource:
-        title: Learn more about the Corstone platform
+        title: Learn more about the Corstone reference systems
         link: https://www.arm.com/products/silicon-ip-subsystems/
         type: website
 
