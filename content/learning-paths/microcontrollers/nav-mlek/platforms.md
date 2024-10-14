@@ -104,13 +104,12 @@ The [AVH simulation model documentation](https://arm-software.github.io/AVH/main
 
 ### Number of MACs
 
-Ethos-U55, Ethos-U65 and Ethos-U85 offer a configurable number of MACs (multiply-accumulate units). During IP evaluation and performance analysis you need to understand the numbers of MACs available in the hardware and create your software to use the same configuration.
+Ethos-U55 and Ethos-U65 offer a configurable number of MACs (multiply-accumulate units). During IP evaluation and performance analysis you need to understand the numbers of MACs available in the hardware and create your software to use the same configuration.
 
 | Ethos-U NPU | Number of MACs supported    |
 | ----------- | -----------                 |
 | Ethos-U55   | 32, 64, 128, 256            |
 | Ethos-U65   | 256, 512                    |
-| Ethos-U85   | 128, 256, 512, 1024, 2048   |
 
 FVP and VHT platforms can be configured with:
 ```console
