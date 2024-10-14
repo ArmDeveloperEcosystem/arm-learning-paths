@@ -64,8 +64,8 @@ wperf --version
 ```output
         Component     Version  GitVer          FeatureString
         =========     =======  ======          =============
-        wperf         3.8.0    0d3eba3d        +etw-app+spe
-        wperf-driver  3.8.0    0d3eba3d        +trace+spe
+        wperf         3.8.0    6d15ddfc        +etw-app+spe
+        wperf-driver  3.8.0    6d15ddfc        +trace+spe
 ```
 
 If `FeatureString` for both components (`wperf` and `wperf-driver`) contains `+spe` (and `spe_device.version_name` contains `FEAT_SPE`) you are good to go!
