@@ -105,7 +105,11 @@ Open the training job which uploaded the ML model as an artifact by navigating t
 
 ![#run-id](/images/run-id.png)
 
-Trigger the _Test Model_ job by clicking the _Run workflow_ button on the _Actions_ tab. You will see the workflow running and it should complete succesfully. Click on the workflow to see the output from each step of the workflow. 
+Trigger the _Test Model_ job by clicking the _Run workflow_ button on the _Actions_ tab. 
+
+![#run-workflow](images/run-workflow.png)
+
+You will see the workflow running and it should complete succesfully. Click on the workflow to see the output from each step of the workflow. 
 
 ![Actions_test](/images/actions_test.png)
 
@@ -129,7 +133,5 @@ Accuracy of the model on the test images: 90.48%
 -------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------
 Self CPU time total: 14.141ms
 ```
-
-![#run-workflow](images/run-workflow.png)
 
 In the next section, you will learn how to modify the testing workflow to compare the inference performance of the model using PyTorch with a different backend.
