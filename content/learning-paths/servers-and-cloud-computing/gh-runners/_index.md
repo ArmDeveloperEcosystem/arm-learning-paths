@@ -7,10 +7,10 @@ who_is_this_for: This is an introductory topic for software developers intereste
 
 learning_objectives:
     - Set up an Arm-based GitHub runner
-    - Use GitHub Actions to set up an MLOps workflow
-    - Train and deploy a PyTorch ML model with the German Traffic Sign Recognition Benchmark (GTSRB)
+    - Train and test a PyTorch ML model with the German Traffic Sign Recognition Benchmark (GTSRB) dataset on Arm
     - Use PyTorch compiled with OpenBLAS and oneDNN with Arm Compute Library to compare the performance of your trained model
     - Containerize the model and push your container to DockerHub
+    - Automate all the steps in the ML workflow using GitHub Actions
 
 
 prerequisites:
