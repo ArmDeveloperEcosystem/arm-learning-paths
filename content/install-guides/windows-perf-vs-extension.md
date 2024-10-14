@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Perf for Windows on Arm (WindowsPerf)
+title: WidnowsPerf ecosystem - Visual Studio Extension
 minutes_to_complete: 5
 
 official_docs: https://github.com/nader-zouaoui/windowsperf-vs-extension
