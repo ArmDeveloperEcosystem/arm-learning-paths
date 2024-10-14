@@ -17,7 +17,7 @@ In a web browser, navigate to the repository at:
 https://github.com/Arm-Labs/gh_armrunner_mlops_gtsrb
 ```
 
-Fork the repository using the `Fork` button in GitHubs UI. 
+Fork the repository, using the `Fork` button:
 
 ![#fork](/images/fork.png)
 
@@ -103,13 +103,14 @@ torch.save(model.state_dict(), './models/traffic_sign_net.pth')
 ```
 With this script, you have learnt how to load the GTSRB dataset, define a neural network, train the model on the dataset and save the trained model using PyTorch.
 
+Lets now look at testing this trained model.
+
 ### Test model
 
-The `test_model.py` script verifies how accurately the ML model can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to measure
- and compare the model inference time using two different PyTorch backends.
+The `test_model.py` Python script verifies how accurately the ML model you have trained, can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to compare the model inference time when you use two different PyTorch backends to test the model.
 
 #### Load model and create test set
-By loading the weights into the same class as before, we obtain the same model set up as in the last step. The `eval` function set the model up for evaluation. Just like before, we define transformations for the testing data and load it from the GTSRB dataset.
+You will load the model that was saved after training and prepare it for evaluation on a test dataset. Just like training, you will define transformations for the testing data and load it from the GTSRB dataset.
 
 ```python
 model_path = args.model if args.model else './models/traffic_sign_net.pth'
@@ -129,7 +130,7 @@ test_loader = DataLoader(test_set, batch_size=64, shuffle=False)
 ```
 
 #### Testing and display profiling results
-The testing snippet loops through the test samples, and records whether the model hits or misses. The accuracy and PyTorch profiler report is printed at the end of the script.
+The testing snippet loops through the test data, passing each batch through the model and compares predictions to the actual labels to calculate accuracy. The accuracy is calculated as a percentage of correctly classified images. Both the accuracy and PyTorch profiler report is printed at the end of the script.
 
 ```python
 correct = 0
@@ -148,4 +149,4 @@ print(f'Accuracy of the model on the test images: {100 * correct / total:.2f}%')
 print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=10))
 ```
 
-You should now have an overview of the code in the training and testing scripts. In the next section, you will learn how to setup the GitHub actions workflows to automate running these scripts.
+You should now have an overview of the code for training and testing the model on the GTSRB dataset using PyTorch. In the next section, you will learn how to setup the GitHub Actions workflows to automate running both the training and testing scripts.
