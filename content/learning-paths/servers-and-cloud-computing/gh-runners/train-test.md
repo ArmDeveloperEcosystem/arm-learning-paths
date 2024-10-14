@@ -1,27 +1,38 @@
 ---
-title: Train and test the neural network
+title: Train and test the neural network model
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Fork repository
 
-Fork the repository using the `Fork` button in GitHubs UI.
+In this section, you will fork the provided example GitHub repository which contains all the code to follow this learning path. You will then learn how to train and test the neural network model using the provided scripts.
+
+## Fork the example repository
+As you will be making modifications to the example and will run the GitHub Actions workflows within your own fork, you must make your own copy of the example repository.
+
+In a web browser, navigate to the repository at:
+
+```bash
+https://github.com/Arm-Labs/gh_armrunner_mlops_gtsrb
+```
+
+Fork the repository using the `Fork` button in GitHubs UI. 
 
 ![#fork](/images/fork.png)
 
-## The code
-The repository contains two main scripts. This section walks you through the code and explains what it does.
+Create a fork within a GitHub Enterprise Organization where you have access to the Arm-based GitHub runners. 
+
+You will now inspect and walk through the code included in the repository to train and test a NN model on the GTSRB dataset. 
 
 ### Train model
+Within the `scripts` directory, open and view the contents of `train_model.py`.
 
-`train_model.py` is a script which creates and and trains the model on the GTSRB dataset. Since it's a computer vision use-case, it utilizes `torchvision` in addition to the main PyTorch package.
-
+`train_model.py` is a Python script which creates and and trains the model using PyTorch. This script will load the GTSRB dataset, define a neural network, and train the model on the dataset. Lets look at all the steps to train the model in more detail.
 
 #### Pre-processing
 
-The GTSRB dataset is built into `torchvision`, which makes loading it easier. The first step is to define the transformations which are used when loading the training data and testing data. The transformations are part of the *pre-processing* step, which makes the data uniform and ready to run through the extensive math operations of your ML model. In accordance with best machine learning practices, we separate the data used for training and testing, to avoid over-fitting the neural network.
+First, you need to load the GTSRB dataset to prepare it for training. The GTSRB dataset is built into `torchvision`, which makes loading it easier. You will define the transformations which are used when loading the training data. The transformations are part of the *pre-processing* step, which makes the data uniform and ready to run through the extensive math operations of your ML model. In accordance with best machine learning practices, you will separate the data used for training and testing, to avoid over-fitting the neural network.
 
 ```python
 transform = transforms.Compose([
@@ -32,14 +43,11 @@ transform = transforms.Compose([
 
 train_set = torchvision.datasets.GTSRB(root='./data', split='train', download=True, transform=transform)
 train_loader = DataLoader(train_set, batch_size=64, shuffle=True)
-
-test_set = torchvision.datasets.GTSRB(root='./data', split='test', download=True, transform=transform)
-test_loader = DataLoader(test_set, batch_size=64, shuffle=False)
 ```
 
 #### Define the model
 
-The next step is to define a class for the actual model, listing the different layers used. We also define the forward-pass function, which is used at training time to update the weights. Additionally, we define the loss function and optimizer for the model.
+The next step is to define a class for the actual model, listing the different layers used. You will define the forward-pass function, which is used at training time to update the weights. Additionally, you will define the loss function and optimizer for the model.
 
 ```python
 class TrafficSignNet(nn.Module):
@@ -65,9 +73,9 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
 ```
 
-#### Training with PyTorch and saving the file
+#### Training with PyTorch and saving the model
 
-A loop is responsible for the actual training, pulling all these things together. The number of epochs is arbitrarily set to 10. When the training is finished, the model weights are saved to the `.pth` file format.
+A loop is responsible for the actual training, pulling all the steps together. The number of epochs is arbitrarily set to 10 for this example. When the training is finished, the model weights are saved to a `.pth` file format.
 
 ```python
 num_epochs = 10
@@ -93,6 +101,7 @@ for epoch in range(num_epochs):
 
 torch.save(model.state_dict(), './models/traffic_sign_net.pth')
 ```
+With this script, you have learnt how to load the GTSRB dataset, define a neural network, train the model on the dataset and save the trained model using PyTorch.
 
 ### Test model
 
