@@ -188,7 +188,7 @@ See the [Arm Compiler for Linux and Arm PL now available in Spack](https://commu
 
 ### Setup Spack
 
-Clone the `Spack` repostitory and add `bin` directory to the path:
+Clone the `Spack` repository and add `bin` directory to the path:
 
 ```console
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git
