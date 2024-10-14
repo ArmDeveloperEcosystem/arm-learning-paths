@@ -8,18 +8,18 @@ layout: learningpathall
 
 Continuously monitoring the performance of your machine learning models in production is crucial to maintaining their effectiveness over time. The performance of your ML model can change due to various factors ranging from data-related issues to model-specific and environmental factors.
 
-In this section, you will introduce a change to the PyTorch backend being used to test the trained model. You will learn how to measure and continuously monitor the inference performance with your workflow.
+In this section, you will change the PyTorch backend being used to test the trained model. You will learn how to measure and continuously monitor the inference performance with your workflow.
 
 ## OneDNN with Arm Compute Library (ACL)
 
 In the previous section, you used the PyTorch 2.3.0 Docker Image compiled with OpenBLAS from DockerHub to run your testing workflow. PyTorch can be run with other backends as well. You will now modify the testing workflow to use PyTorch 2.3.0 Docker Image compiled with OneDNN and the Arm Compute Library. 
 
-The Arm Compute Library is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-based GitHub runners use Arm Neoverse CPUs, which makes it possible to optimize your neural networks to take advantange of the features available on the runners. ACL implements kernels (which you may know as the operators or layers), which uses specific instructions that run faster on Aarch64.
+The Arm Compute Library is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-based GitHub runners use Arm Neoverse CPUs, which makes it possible to optimize your neural networks to take advantange of the features available on the runners. ACL implements kernels (which you may know as operators or layers), which uses specific instructions that run faster on AArch64.
 ACL is integrated into PyTorch through the [oneDNN engine](https://github.com/oneapi-src/oneDNN). 
 
 ## Compare results
 
-You can change what backend PyTorch uses for the neural network, and observe a performance uplift for some of the operators. This is done by updating the `container` in the workflow file. To make things easier, two different Docker images are hosted on [DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse). Up until this point the `r24.07-torch-2.3.0-openblas` container has been used. The other one uses `oneDNN` with ACL. Go to `test_model.yml` in the GitHub UI. Update the `container.image` parameter to `armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl` and save the file:
+You can change what backend PyTorch uses for the neural network, and observe a performance uplift for some of the operators. Start by updating the `container` in the workflow file. To make things easier, two different Docker images are hosted on [DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse). Up until this point the `r24.07-torch-2.3.0-openblas` container has been used. The other one uses `oneDNN` with ACL. Go to `test_model.yml` in the GitHub UI. Update the `container.image` parameter to `armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl` and save the file:
 
 ```yaml
 jobs:
