@@ -6,15 +6,17 @@ weight: 2
 layout: learningpathall
 ---
 
+## Overview 
+
 In this Learning Path, you will learn how to automate your MLOps workflow using an Arm-based GitHub runner and GitHub Actions. You will learn how to train and test a neural network model with PyTorch. You will compare the model inference time for your trained model using two different PyTorch backends. You will then containerize your trained model and deploy the container image to DockerHub for easy deployment of your application.
 
-## Overview of GitHub Actions
+## GitHub Actions
 
 GitHub Actions is a platform that automates software development workflows, including continuous integration and continuous delivery. Every repository on GitHub has a tab named _Actions_.
 
 ![#actions-gui](images/actions-gui.png)
 
-From here, you can create different _workflow files_ which automates processes that run when specific events occur in your GitHub code repository. You use [YAML](https://yaml.org/) to define a workflow. You specify how a job is triggered, the running environment, and the workflow commands. The machine which the workflow runs in is called a _runner_.
+From here, you can create different _workflow files_ which automates processes that run when specific events occur in your GitHub code repository. You use [YAML](https://yaml.org/) to define a workflow. You specify how a job is triggered, the running environment, and the workflow commands. The machine on which the workflow runs is called a _runner_.
 
 ## Arm-based GitHub runners
 
@@ -53,4 +55,4 @@ With machine learning use-cases evolving and scaling, comes an increased need fo
 
 In this Learning path, you will train and test a PyTorch model for use in Traffic Sign recognition. You will use the GTSRB dataset to train the model. The dataset is free to use under the [Creative Commons](https://creativecommons.org/publicdomain/zero/1.0/) license. It contains thousands of images of traffic signs found in Germany. Thanks to the availability and real-world connection, it has become a well-known resource to showcase ML applications. Additionally, given that it is a benchmark, you can apply it in a MLOps context to compare model improvements. This makes it a great candidate for this Learning Path, where you compare the performance of your trained model using two different PyTorch backends.
 
-With this background, let's review the code.
+Now that you have an overview, in the following sections you will learn how to setup an end-to-end MLOps workflow using the Arm-based GitHub runners.
