@@ -102,7 +102,7 @@ Let's build CPython locally in debug mode using the `build.bat` script. You have
 #### Clone CPython source code
 
 ```command
-git clone git@github.com:python/cpython.git
+git clone https://github.com/python/cpython.git
 ```
 
 The output from this command will be similar to:
