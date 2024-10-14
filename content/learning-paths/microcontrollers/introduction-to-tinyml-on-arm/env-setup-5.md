@@ -28,7 +28,7 @@ The host machine is where you will perform most of your development work, especi
 
 ## Install Python
 
-Python 3 is included in Ubuntu, but some additonal packages are needed. 
+Python 3 is included in Ubuntu, but some additional packages are needed. 
 
 ```console
 sudo apt update
@@ -37,7 +37,7 @@ sudo apt install python-is-python3 gcc g++ make -y
 
 ## Install PyTorch
 
-Create a Python virtual environemnt using Miniconda. 
+Create a Python virtual environment using Miniconda. 
 
 For Arm Linux:
 
@@ -97,7 +97,7 @@ The Edge Impulse CLI tools require Node.js.
 sudo apt install nodejs npm -y
 ```
 
-Confirm `node` is avilable by running: 
+Confirm `node` is available by running: 
 
 ```console
 node -v 

@@ -60,7 +60,7 @@ Install the download using the package command.
 sudo installer -pkg multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg -target /
 ```
 
-The getting started instructions below use the command line interface. If you perfer to use the graphical interface start it from the macOS Launchpad, the initial screen is shown below. You can use the UI to create, start, and stop virtual machines. 
+The getting started instructions below use the command line interface. If you prefer to use the graphical interface start it from the macOS Launchpad, the initial screen is shown below. You can use the UI to create, start, and stop virtual machines. 
 
 ![Connect #center](/install-guides/_images/multipass-gui.png)
 
