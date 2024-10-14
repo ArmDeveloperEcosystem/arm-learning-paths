@@ -101,11 +101,11 @@ Fetch the `ACfL` installers:
 #### Ubuntu Linux:
 
 ```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.04/arm-compiler-for-linux_24.04_Ubuntu-22.04_aarch64.tar
+wget  https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10/arm-compiler-for-linux_24.10_Ubuntu-22.04_aarch64.tar
 ```
 #### Red Hat Linux:
 ```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.04/arm-compiler-for-linux_24.04_RHEL-8_aarch64.tar
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10/arm-compiler-for-linux_24.10_RHEL-9_aarch64.tar
 ```
 
 ### Install
@@ -118,19 +118,26 @@ Each command sequence includes accepting the license agreement to automate the i
 
 ```bash { target="ubuntu:latest", env="DEBIAN_FRONTEND=noninteractive" }
 sudo -E apt-get -y install environment-modules python3 libc6-dev
-tar -xvf arm-compiler-for-linux_24.04_Ubuntu-22.04_aarch64.tar
-cd ./arm-compiler-for-linux_24.04_Ubuntu-22.04
-sudo ./arm-compiler-for-linux_24.04_Ubuntu-22.04.sh --accept
+tar -xvf arm-compiler-for-linux_24.10_Ubuntu-22.04_aarch64.tar
+cd ./arm-compiler-for-linux_24.10_Ubuntu-22.04
+sudo ./arm-compiler-for-linux_24.10_Ubuntu-22.04.sh --accept
 ```
 
 #### Red Hat Linux:
 
 ```bash { target="fedora:latest" }
 sudo yum -y install environment-modules python3 glibc-devel
-tar -xvf arm-compiler-for-linux_24.04_RHEL-8_aarch64.tar
-cd arm-compiler-for-linux_24.04_RHEL-8
-sudo ./arm-compiler-for-linux_24.04_RHEL-8.sh --accept
+tar -xvf arm-compiler-for-linux_24.10_RHEL-9_aarch64.tar
+cd arm-compiler-for-linux_24.10_RHEL-9
+sudo ./arm-compiler-for-linux_24.10_RHEL-9.sh --accept
 ```
+
+⚠️ **Compatability with Non-ACfL GCC:** On RPM based (Red Hat) systems, if an
+alternative version of GCC (not the GCC bundled with ACfL) is installed
+**after** ACfL, you will not be able to uninstall ACfL fully. For example, a GDB
+(GNU Project Debugger) installation will install the native system GCC.  If this
+install takes place **after** ACfL, you will no longer be able to fully
+uninstall ACfL.
 
 ### Set up environment
 
@@ -163,13 +170,13 @@ module avail
 To configure Arm Compiler for Linux:
 
 ```bash { env_source="~/.bashrc" }
-module load acfl/24.04
+module load acfl/24.10
 ```
 
 To configure GCC:
 
 ```bash { env_source="~/.bashrc" }
-module load gnu/13.2.0
+module load gnu/14.2.0
 ```
 `ACfL` is now [ready to use](#armclang).
 
@@ -226,7 +233,7 @@ spack compiler find
 To get started with the Arm C/C++ Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10" }
 armclang --version
 ```
 
@@ -244,13 +251,13 @@ int main()
 
 Build the application with:
 
-```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
+```console { env_source="~/.bashrc", pre_cmd="module load acfl/24.10" }
 armclang hello.c -o hello
 ```
 
 Run the application with:
 
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10" }
 ./hello
 ```
 
@@ -264,7 +271,7 @@ Hello, C World!
 To get started with the Arm Fortran Compiler and compile a simple application follow the steps below.
 
 Check that the correct compiler version is being used:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10" }
 armflang --version
 ```
 
@@ -278,12 +285,12 @@ end program hello
 ```
 
 Build the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10" }
 armflang hello.f90 -o hello
 ```
 
 Run the application with:
-```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.04" }
+```bash { env_source="~/.bashrc", pre_cmd="module load acfl/24.10" }
 ./hello
 ```
 
