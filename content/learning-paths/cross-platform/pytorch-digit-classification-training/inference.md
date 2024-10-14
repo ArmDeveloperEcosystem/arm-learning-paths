@@ -16,7 +16,7 @@ The inference process involves using a trained model to make predictions on new,
 
 This process allows the model to generalize its learned knowledge to make accurate predictions on new data.
 
-# Runing inference in PyTorch
+# Running inference in PyTorch
 
 You can inference in PyTorch using the previously saved model. To display results you can use matplotlib. 
 
