@@ -180,7 +180,7 @@ The folder `cpython\PCbuild\arm64` should contain all the executables built in t
 On your Windows ARM64 machine, open a command prompt and run:
 
 ```console
-cd LearningPath\PCbuild\arm64
+cd c:\path\to\cpython\PCbuild\arm64
 python_d.exe
 ```
 You should see CPython being invoked in interactive mode:
