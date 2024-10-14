@@ -39,7 +39,7 @@ In summary, Sysbox is a powerful container runtime that provides many of the ben
 
 Sysbox runs on Linux and supports Arm. 
 
-Sysbox has limited suppot for older versions of Linux, but recent Linux versions are easily compatible.
+Sysbox has limited support for older versions of Linux, but recent Linux versions are easily compatible.
 
 If you are unsure about your Linux distribution and Linux kernel version, you can check [Sysbox Distro Compatibility](https://github.com/nestybox/sysbox/blob/master/docs/distro-compat.md)
 
