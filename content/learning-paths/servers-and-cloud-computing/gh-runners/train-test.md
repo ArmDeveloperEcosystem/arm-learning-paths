@@ -26,9 +26,8 @@ Create a fork within a GitHub Enterprise Organization where you have access to t
 Lets inspect and walk through the code included in the repository to train and test a NN model on the GTSRB dataset. 
 
 ### Train model
-Within the `scripts` directory, open and view the contents of `train_model.py`.
 
-`train_model.py` is a Python script which creates and and trains the model using PyTorch. This script will load the GTSRB dataset, define a neural network, and train the model on the dataset. Lets look at all the steps to train the model in more detail.
+Within the `scripts` directory, there is a Python script incuded called `train_model.py`. This script creates and and trains the model using PyTorch. Using this script, you will load the GTSRB dataset, define a neural network, and train the model on the dataset. Lets look at all the steps to train the model in more detail.
 
 #### Pre-processing
 
