@@ -138,7 +138,9 @@ jobs:
           docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/gtsrb-image:latest --push .
 ```
 
-These steps should look familiar and now they are put together to curate an end-to-end MLOPs workflow. The training and testing steps are run like before. The output report is saved and parsed to show the compare the performance changes in inference time. The trained model is updated in the repository. The deployment step connects to DockerHub, pushes the containerized model and scripts, which can then be downloaded and run. The steps depend on each other, requiring the previous one to run before the next is triggered. The entire workflow is triggered automatically any time a change is pushed into the main branch of your repository. You can also navigate to the _Train, Test and Deploy_ workflow and trigger it to run manually. The diagram below shows the end-to-end workflow:
+These steps should look familiar and now they are put together to curate an end-to-end MLOPs workflow. The training and testing steps are run like before. The output report is saved and parsed to show the compare the performance changes in inference time. The trained model is updated in the repository. The deployment step connects to DockerHub, pushes the containerized model and scripts, which can then be downloaded and run. 
+
+The steps depend on each other, requiring the previous one to run before the next is triggered. The entire workflow is triggered automatically any time a change is pushed into the main branch of your repository. You can also navigate to the _Train, Test and Deploy_ workflow and trigger it to run manually. The diagram below shows the end-to-end workflow:
 
 ![#e2e-workflow](/images/e2e-workflow.png)
 
