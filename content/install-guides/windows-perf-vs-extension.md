@@ -82,7 +82,7 @@ You need to make sure that any previous version of the extension is uninstalled 
 
 For those preferring to build from the source, simply clone [the repository](https://github.com/arm-developer-tools/windowsperf-vs-extension) and build the `WindowsPerfGUI` solution using the default configuration on Visual Studio. This alternative installation method offers flexibility and customization.
 
-### Setup
+### WindowsPerf Setup
 
 To get started, you must link the GUI with the executable file `wperf.exe` by navigating to `Tools -> Options -> WindowsPerf -> WindowsPerf Path`. This step is crucial for utilizing the GUI. The extension **will not work** without it!
 
