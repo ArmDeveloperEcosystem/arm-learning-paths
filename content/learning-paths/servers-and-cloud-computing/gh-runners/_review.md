@@ -2,13 +2,13 @@
 review:
     - questions:
         question: >
-            What does ML Ops stand for?
+            Can Arm-hosted runners be used with GitHub Actions?
         answers:
-            - Machine Learning Operations
-            - Machine Learning Operators
+            - "Yes"
+            - "No"
         correct_answer: 1
         explanation: >
-            The term MLOps is a combination of Machine Learning (ML) and Developer Operations (DevOps).
+            Arm-hosted runners for use with GitHub Actions are available for Linux and Windows.
 
     - questions:
         question: >
@@ -26,8 +26,8 @@ review:
         question: >
             ACL is integrated into PyTorch by default.
         answers:
-            - True
-            - False
+            - "True"
+            - "False"
         correct_answer: 1
         explanation: >
             While it is possible to use ACL stand-alone, the optimized kernels are built into PyTorch through the oneDNN backend.
