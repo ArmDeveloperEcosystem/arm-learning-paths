@@ -30,19 +30,22 @@ layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 
 **WindowsPerf** is a lightweight performance profiling tool inspired by Linux perf, specifically tailored for Windows on ARM. It leverages the ARM64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities. Recognizing the complexities of command-line interaction, the WindowsPerf GUI project is a Visual Studio 2022 extension that was initiated to provide a more intuitive, integrated within the development environment (IDE) experience. This tool enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly within the IDE.
 
-## A Glimpse of the UI
+## A Glimpse of the available features
 
 The WindowsPerf GUI extension is composed of several key features, each designed to streamline the user experience:
-
-![Sampling preview #center](../_images/wperf-vs-extension-sampling-preview.png)
 
 - **WindowsPerf Configuration**: Connect directly to `wperf.exe` for a seamless integration. Configuration is accessible via `Tools -> Options -> Windows Perf -> WindowsPerf Path`.
 - **Host Data**: Understand your environment with `Tools -> WindowsPerf Host Data`, offering insights into tests run by WindowsPerf and their outcomes.
 - **Output Logging**: All commands executed through the GUI are meticulously logged, ensuring transparency and aiding in performance analysis.
 - **Sampling UI**: Customize your sampling experience by selecting events, setting frequency and duration, choosing programs for sampling, and comprehensively analyzing results.
+
+![Sampling preview #center](../_images/wperf-vs-extension-sampling-preview.png)
+_Sampling settings UI Overview_
+
 - **Counting Settings UI**: Build a `wperf stat` command from scratch using our configurator, then view the output on the IDE or open it on WPA
 
 ![Counting preview #center](../_images/wperf-vs-extension-counting-preview.png)
+_Counting settings UI Overview_
 
 ## Getting Started
 
@@ -66,7 +69,7 @@ To install WindowsPerf Visual Studio Extension you can do that from Visual Studi
 4. Click on the search bar ( or tap `Ctrl` + `L` ) and type `WindowsPerf`
 5. Click on the install button and restart Visual Studio
 
-![WindwosPerf install page #center](../_images/wperf-vs-extension-install-page.png)
+![WindowsPerf install page #center](../_images/wperf-vs-extension-install-page.png)
 
 ### Installation (Option 2)
 
