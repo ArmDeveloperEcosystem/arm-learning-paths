@@ -41,7 +41,11 @@ jobs:
 ```
 This workflow specifies one job named "Train the model". This job runs in a runner environment specified by `runs-on`. The `runs-on: ubuntu-22.04-arm-os` points to the Arm-based GitHub runner you setup in the first section.
 
-Now, navigate to the _Train Model_ workflow under the _Actions_ tab, and press the _Run workflow_ button. You will see the workflow running and it should complete succesfully. Click on the workflow to see the output from each step of the workflow. 
+Now, navigate to the _Train Model_ workflow under the _Actions_ tab, and press the _Run workflow_ button. 
+
+![Train_worfklow](/images/run_train.png)
+
+You will see the workflow running and it should complete succesfully. Click on the workflow to see the output from each step of the workflow. 
 
 ![Actions_train](/images/actions_train.png)
 
