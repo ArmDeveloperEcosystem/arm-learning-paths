@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-So far, you have run individual workflows for each task of the ML lifecycle: training, testing, performance monitoring and deployment. With GitHub Actions you can build an end-to-end custom MLOPs workflow that combines and automates these individual workflows all running on your Arm-based runner. To demonstrate this, the repository contains a workflow in `.github/workflows/train-test-deploy-model.yml` that automates the individual steps: 
+So far, you have run individual workflows for each task of the ML lifecycle: training, testing, performance monitoring and deployment. With GitHub Actions you can build an end-to-end custom MLOPs workflow that combines and automates these individual workflows all running on your Arm-hosted runner. To demonstrate this, the repository contains a workflow in `.github/workflows/train-test-deploy-model.yml` that automates the individual steps: 
 
 ```yaml
 name: Train, Test and Deploy Model
@@ -144,4 +144,4 @@ These steps should look familiar and now they are put together to curate an end-
 
 All steps of the workflow should complete successfully.
 
-You have now run an MLOps workflow using GitHub Actions with Arm-based runners for managing all of the steps in your application's lifecycle.
+You have now run an MLOps workflow using GitHub Actions with Arm-hosted runners for managing all of the steps in your application's lifecycle.
