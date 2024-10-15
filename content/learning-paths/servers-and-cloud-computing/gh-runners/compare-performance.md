@@ -14,7 +14,7 @@ In this section, you will change the PyTorch backend being used to test the trai
 
 In the previous section, you used the PyTorch 2.3.0 Docker Image compiled with OpenBLAS from DockerHub to run your testing workflow. PyTorch can be run with other backends as well. You will now modify the testing workflow to use PyTorch 2.3.0 Docker Image compiled with OneDNN and the Arm Compute Library. 
 
-The [Arm Compute Library](https://github.com/ARM-software/ComputeLibrary) is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-based GitHub runners use Arm Neoverse CPUs, which makes it possible to optimize your neural networks to take advantange of the features available on the runners. ACL implements kernels (which you may know as operators or layers), which uses specific instructions that run faster on AArch64.
+The [Arm Compute Library](https://github.com/ARM-software/ComputeLibrary) is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-hosted GitHub runners use Arm Neoverse CPUs, which makes it possible to optimize your neural networks to take advantange of the features available on the runners. ACL implements kernels (which you may know as operators or layers), which uses specific instructions that run faster on AArch64.
 ACL is integrated into PyTorch through the [oneDNN engine](https://github.com/oneapi-src/oneDNN). 
 
 ## Modify the test workflow and compare results
