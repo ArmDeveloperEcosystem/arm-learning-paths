@@ -1,5 +1,5 @@
 ---
-title: Modify Test workflow and compare performance
+title: Modify test workflow and compare performance
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -17,9 +17,11 @@ In the previous section, you used the PyTorch 2.3.0 Docker Image compiled with O
 The Arm Compute Library is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors, and the Mali GPUs. The Arm-based GitHub runners use Arm Neoverse CPUs, which makes it possible to optimize your neural networks to take advantange of the features available on the runners. ACL implements kernels (which you may know as operators or layers), which uses specific instructions that run faster on AArch64.
 ACL is integrated into PyTorch through the [oneDNN engine](https://github.com/oneapi-src/oneDNN). 
 
-## Compare results
+## Modify the test workflow and compare results
 
-You can change what backend PyTorch uses for the neural network, and observe a performance uplift for some of the operators. Start by updating the `container` in the workflow file. To make things easier, two different Docker images are hosted on [DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse). Up until this point the `r24.07-torch-2.3.0-openblas` container has been used. The other one uses `oneDNN` with ACL. Go to `test_model.yml` in the GitHub UI. Update the `container.image` parameter to `armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl` and save the file:
+Start by updating the `container` image you are using in the test workflow file. Two different PyTorch docker images for Arm Neoverse are available on [DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse). Up until this point, you used the `r24.07-torch-2.3.0-openblas` container image in your workflows. You will now update `test_model.yml` to use the `r24.07-torch-2.3.0-onednn-acl` container image instead. 
+
+Open and edit `.github/workflows/test_model.yml` in your browser. Update the `container.image` parameter to `armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl` and save the file:
 
 ```yaml
 jobs:
@@ -32,9 +34,9 @@ jobs:
     # Steps omitted
 ```
 
-Trigger the _Test Model_ job again.
+Trigger the Test Model job again by clicking the Run workflow button on the Actions tab.
 
-For the ACL results, observe that the **Self CPU time total** is lower compared to the OpenBLAS run in the previous section. The names of the layers have changed as well, where the `aten::mkldnn_convolution` is the kernel optimized to run on Aarch64. That operator is the main reason our inference time is improved, made possible by ACL.
+Expand the Run testing script step from your Actions tab. You should see a change in the performance results with OneDNN and ACL kernels being used. 
 
 ```output
 Accuracy of the model on the test images: 90.48%
@@ -55,5 +57,6 @@ Accuracy of the model on the test images: 90.48%
 Self CPU time total: 6.565ms
 
 ```
+For the ACL results, observe that the **Self CPU time total** is lower compared to the OpenBLAS run in the previous section. The names of the layers have changed as well, where the `aten::mkldnn_convolution` is the kernel optimized to run on Aarch64. That operator is the main reason our inference time is improved, made possible by using ACL kernels.
 
-In the next section, the process of deploying the model is described, automating any updates that are made to the model.
+In the next section, you will learn how to automate the deployment of your trained and tested model.
