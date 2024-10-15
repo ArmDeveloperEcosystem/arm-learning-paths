@@ -80,7 +80,7 @@ You need to make sure that any previous version of the extension is uninstalled 
 
 ### Build from source
 
-For those preferring to build from the source, simply clone the repository and build the `WindowsPerfGUI` Project using the default configuration on Visual Studio. This alternative installation method offers flexibility and customization.
+For those preferring to build from the source, simply clone [the repository](https://github.com/arm-developer-tools/windowsperf-vs-extension) and build the `WindowsPerfGUI` solution using the default configuration on Visual Studio. This alternative installation method offers flexibility and customization.
 
 ### Setup
 
