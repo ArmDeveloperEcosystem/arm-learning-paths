@@ -11,7 +11,7 @@ In this section, you will walk through the steps to containerize your trained mo
 
 ## Containerize the Model
 
-In order to create a docker container for the trained model with the scripts to deploy this model, observe the Dockerfile in the project containing the contents as shown:
+You will use the Dockerfile included in your repository to create a docker container for the trained model and the scripts to deploy this model. Lets look at the `Dockerfile`:
 
 ```console
 # Use the official PyTorch image as the base image
