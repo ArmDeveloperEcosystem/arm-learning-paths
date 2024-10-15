@@ -56,7 +56,7 @@ The WindowsPerf GUI extension is composed of several key features, each designed
 The disassembly feature needs to have `llvm-objdump` available at `%PATH%` to work properly.
 {{% /notice %}}
 
-### Installation (Option 1)
+### Installation (VS Extension Manager)
 
 To install WindowsPerf Visual Studio Extension you can do that from Visual Studio itself.
 
