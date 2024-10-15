@@ -21,7 +21,7 @@ Fork the repository, using the `Fork` button:
 
 ![#fork](/images/fork.png)
 
-Create a fork within a GitHub Enterprise Organization where you have access to the Arm-based GitHub runners. 
+Create a fork within a GitHub Enterprise Organization where you have access to the Arm-hosted GitHub runners. 
 
 You will now inspect and walk through the code included in the repository to train and test a NN model on the GTSRB dataset. 
 
