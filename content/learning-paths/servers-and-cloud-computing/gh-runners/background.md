@@ -16,7 +16,7 @@ GitHub Actions is a platform that automates software development workflows, incl
 
 ![#actions-gui](images/actions-gui.png)
 
-From here, you can create different _workflow files_ which automates processes that run when specific events occur in your GitHub code repository. You use [YAML](https://yaml.org/) to define a workflow. You specify how a job is triggered, the running environment, and the workflow commands. The machine on which the workflow runs is called a _runner_.
+From here, you can run different _workflow files_ which automate processes that run when specific events occur in your GitHub code repository. You use [YAML](https://yaml.org/) to define a workflow. You specify how a job is triggered, the running environment, and the workflow commands. The machine on which the workflow runs is called a _runner_.
 
 ## Arm-based GitHub runners
 
