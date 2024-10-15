@@ -48,7 +48,7 @@ The WindowsPerf GUI extension is composed of several key features, each designed
 
 ### Prerequisites
 
-- **Visual Studio 2022**: Ensure you have Visual Studio 2022 installed on your Windows on ARM device.
+- **Visual Studio 2022**: Ensure you have Visual Studio 2022 installed on your Windows on Arm device.
 - **WindowsPerf**: Download and install WindowsPerf. You can follow this [learning path](../wperf) for further details
 - **LLVM** (Optional): You can install the LLVM toolchain by following this [guide](../llvm-woa).
 
