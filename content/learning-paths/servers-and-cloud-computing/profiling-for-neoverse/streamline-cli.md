@@ -100,7 +100,7 @@ Arm recommends that you profile an optimized release build of your application, 
 
 ## Capturing a system-wide profile
 
-To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A ` application-specific option and following arguments.
+To capture a system-wide profile, which captures all processes and threads, run `sl-record` with the `-S yes` option and omit the `-A` application-specific option and following arguments.
 
 In systems without the kernel patches, system-wide profiles can capture the top-down metrics. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
@@ -108,7 +108,7 @@ In systems without the kernel patches, system-wide profiles can capture the top-
 
 To capture top-down metrics in a system without the kernel patches, there are three options available:
 
-* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A ` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
+* To capture a system-wide profile, which captures all processes and threads, run with the `-S yes` option and omit the `-A` application-specific option and following arguments. To keep the captures to a usable size, it may be necessary to limit the duration of the profiles to less than 5 minutes.
 
 * To reliably capture single-threaded application profile, add the `--inherit no` option to the command line. However, in this mode metrics are only captured for the first thread in the application process and any child threads or processes are ignored.
 
