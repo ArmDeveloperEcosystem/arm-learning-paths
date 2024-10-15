@@ -171,7 +171,7 @@ You can then pull this docker container image on your local machine and start th
 docker pull <docker-username>/gtsrb-image
 docker run -d -p 8000:8000 <docker-username>/gtsrb-image
 ```
-Now test the application by running a curl command to make a POST request to the predict endpoint using a test image:
+Now test the application by running a curl command to make a POST request to the predict endpoint using a test image that is included in your container:
 
 ```bash
 curl -X 'POST'   'http://localhost:8000/predict/'   -H 'accept: application/json'   -H 'Content-Type: multipart/form-data'   -F 'file=@test-img.png;type=image/png'
