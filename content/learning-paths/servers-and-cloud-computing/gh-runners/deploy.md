@@ -36,7 +36,7 @@ CMD ["uvicorn", "scripts.serve_model:app", "--host", "0.0.0.0", "--port", "8000"
 The Dockerfile uses the PyTorch image with the ACL backend as the base image for the container. The working directory is set to `/app` where the trained model and the scripts to deploy the model are copied. The container runs a FastAPI application (`scripts/serve_model.py`) on port 8000. This script is called by `uvicorn` when the container is run. Uvicorn is a fast, lightweight ASGI (Asynchronous Server Gateway Interface) server, a good fit for serving Python web applications such as this.
 
 ## Deploy the trained model using FastAPI
-FastAPI is an easy way to serve your trained model as API. You use a FastAPI application that loads your pre-trained model, accepts image uploads, and makes predictions on the uploaded images as shown in ´scripts/serve_model.py`:
+FastAPI is an easy way to serve your trained model as API. You use a FastAPI application that loads your pre-trained model, accepts image uploads, and makes predictions on the uploaded images as shown in `scripts/serve_model.py`:
 
 ```python
 import torch
@@ -108,7 +108,7 @@ async def predict(file: UploadFile = File(...)):
 ```
 ## Deploy with GitHub Actions
 
-You can now automate the deployment of your containerized model on the Arm-based runner in GitHub Actions.
+You can now automate the deployment of your containerized model on the Arm-hosted runner in GitHub Actions.
 Navigate to the `.github/workflows` directory and inspect the YAML file named `deploy-model.yml`:
 
 ```console
@@ -144,7 +144,7 @@ jobs:
 ```
 In this workflow, you build the Docker container for Arm64 architecture and push the container image to DockerHub.
 
-Before you run this workflow, you need your Docker Hub username and a Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account.
+Before you run this workflow, you need your Docker Hub username and a Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account. These credentials are passed to the workflow as secrets.
 
 To save your secrets, click on the Settings tab in your new GitHub repository. Expand the Secrets and variables on the left side and click Actions.
 
