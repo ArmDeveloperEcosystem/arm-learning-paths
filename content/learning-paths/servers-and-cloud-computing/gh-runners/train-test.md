@@ -27,7 +27,7 @@ Lets inspect and walk through the code included in the repository to train and t
 
 ### Train model
 
-Within the `scripts` directory, there is a Python script incuded called `train_model.py`. This script creates and and trains the model using PyTorch. Using this script, you will load the GTSRB dataset, define a neural network, and train the model on the dataset. Lets look at all the steps to train the model in more detail.
+Within the `scripts` directory, there is a Python script incuded called `train_model.py`. Using this script, you will load the GTSRB dataset, define a neural network, and train the model on the dataset using PyTorch. Lets look at all the steps to train the model in more detail.
 
 #### Pre-processing
 
