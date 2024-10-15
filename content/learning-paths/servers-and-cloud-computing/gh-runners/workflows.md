@@ -10,7 +10,7 @@ layout: learningpathall
 
 ### Train Model
 
-In this section, you will automate the training phase by executing the _Train Model_ workflow on your Arm-based GitHub runner using GitHub Actions. This workflow pulls a [PyTorch 2.3.0 Docker Image compiled with OpenBLAS from DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse), and runs the training script `scripts/train_model.py` within that container. The model that is trained on the GTSRB dataset using this script is saved as an artifact of the job. 
+In this section, you will automate the training step by executing the _Train Model_ workflow (.github/workflows/train-model.yml) on your Arm-hosted GitHub runner using GitHub Actions. This workflow pulls a [PyTorch 2.3.0 Docker Image compiled with OpenBLAS from DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse), and runs the training script `scripts/train_model.py` within that container. The model that is trained on the GTSRB dataset using this script is saved as an artifact of the workflow. 
 
 Inspect the _Train Model_ workflow by opening up the `.github/workflows/train-model.yml` file within your fork:
 
