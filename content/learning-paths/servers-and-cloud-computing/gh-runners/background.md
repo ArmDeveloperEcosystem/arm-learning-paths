@@ -20,7 +20,7 @@ From here, you can run different _workflow files_ which automate processes that 
 
 ## Arm-hosted GitHub runners
 
-Arm-hosted GitHub runners are a powerful addition to your CI/CD toolkit. They leverage the efficiency and performance of Arm64 architecture, making your build systems faster and easier to scale. By using the Arm-based GitHub runners, you can optimize your workflows, reduce costs, and improve energy consumption. Additionally, the Arm-based runners are preloaded with essential tools, making it easier for you to develop and test your applications.
+Arm-hosted GitHub runners are a powerful addition to your CI/CD toolkit. They leverage the efficiency and performance of Arm64 architecture, making your build systems faster and easier to scale. By using the Arm-hosted GitHub runners, you can optimize your workflows, reduce costs, and improve energy consumption. Additionally, the Arm-hosted runners are preloaded with essential tools, making it easier for you to develop and test your applications.
 
 Arm-hosted runners are available for Linux and Windows. This Learning Path uses Linux.
 
