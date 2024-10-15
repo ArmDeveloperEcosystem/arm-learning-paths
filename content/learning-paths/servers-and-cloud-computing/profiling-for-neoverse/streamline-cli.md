@@ -28,21 +28,21 @@ Arm recommends that you profile an optimized release build of your application, 
 
 1. Use the download utility script to download the latest version of the tool and extract it to the current working directory on your Arm server:
 
-  ```sh
-  wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
+    ```sh
+    wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
 
-  python3 get-streamline-cli.py install
-  ```
+    python3 get-streamline-cli.py install
+    ```
 
-  The script can also be used to download a specific version, or install to a user-specified directory. Refer to the [Install Guide](/install-guides/streamline-cli/) for details on all the script options.
+    The script can also be used to download a specific version, or install to a user-specified directory. Refer to the [Install Guide](/install-guides/streamline-cli/) for details on all the script options.
 
-  {{% notice %}}
-  Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly. Arm recommends that you apply the kernel patch as described in this guide, to improve support for capturing function-attributed top-down metrics on Arm systems.
-  {{% /notice %}}
+    {{% notice %}}
+    Follow the instructions in the [Install Guide](/install-guides/streamline-cli/) to ensure you have everything set up correctly. Arm recommends that you apply the kernel patch as described in this guide, to improve support for capturing function-attributed top-down metrics on Arm systems.
+    {{% /notice %}}
 
 1. Use `sl-record` to capture a raw profile of your application and save the data to a directory on the filesystem.
 
-  Arm recommends making a profile of at least 20 seconds in duration, which ensures that the profiler can capture a statistically significant number of samples for all of the metrics.
+    Arm recommends making a profile of at least 20 seconds in duration, which ensures that the profiler can capture a statistically significant number of samples for all of the metrics.
 
     ```sh
     sl-record -C workflow_topdown_basic -o <output.apc> -A <your app command-line>
