@@ -106,7 +106,7 @@ Lets now look at testing this trained model.
 
 ### Test model
 
-The `test_model.py` Python script verifies how accurately the ML model you have trained, can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to compare the model inference time when you use two different PyTorch backends to test the model.
+The `test_model.py` Python script included in the `scripts` directory verifies how accurately the ML model you have trained, can classify the traffic signs. It uses the PyTorch profiler to measure the CPU performance in terms of execution time. Using the profiler, you will be able to measure the model inference time when you use two different PyTorch backends to test the model.
 
 #### Load model and create test set
 You will load the model that was saved after training and prepare it for evaluation on a test dataset. Just like training, you will define transformations for the testing data and load it from the GTSRB dataset.
@@ -148,4 +148,4 @@ print(f'Accuracy of the model on the test images: {100 * correct / total:.2f}%')
 print(prof.key_averages().table(sort_by="cpu_time_total", row_limit=10))
 ```
 
-You should now have an overview of the code for training and testing the model on the GTSRB dataset using PyTorch. In the next section, you will learn how to setup the GitHub Actions workflows to automate running both the training and testing scripts.
+You should now have an overview of the code for training and testing the model on the GTSRB dataset using PyTorch. In the next section, you will learn how to setup the GitHub Actions workflows to automate running both the training and testing scripts on your Arm-hosted GitHub runner.
