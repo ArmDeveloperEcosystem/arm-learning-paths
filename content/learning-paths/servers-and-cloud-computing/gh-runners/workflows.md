@@ -105,7 +105,7 @@ jobs:
 
 In order to use the model created by your _Train Model_ job, you will edit the _Test Model_ workflow file.
 
-Open the training job which uploaded the ML model as an artifact by navigating to the _Actions_ tab on your GitHub repository. Choose the _Train Model_ under _All workflows_, and select the latest successful job. The URL from here contains an 11-digit number. Note down this number, which is the _run ID_ from training your model. Open the workflow file for _Test Model_, `test-model.yml`, and update the `run-id` parameter. Save the changes to the file.
+Open the training job which uploaded the ML model as an artifact by navigating to the _Actions_ tab on your GitHub repository. Choose the _Train Model_ under _All workflows_, and select the latest successful job. The URL from here contains an 11-digit number. Note down this number, which is the _run ID_ from training your model. Open `.github/workflows/test-model.yml`, and update the `run-id` parameter. Save the changes to the file.
 
 ![#run-id](/images/run-id.png)
 
