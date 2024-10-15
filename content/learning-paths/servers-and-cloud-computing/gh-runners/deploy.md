@@ -178,7 +178,7 @@ curl -X 'POST'   'http://localhost:8000/predict/'   -H 'accept: application/json
 ```
 The output should look like:
 ```ouput
-{"predicted_class":1}
+{"predicted_class":6}
 ```
 
 You have now validated that you were able to successfully deploy your application, serve your model as an API and make predictions on a test image.
