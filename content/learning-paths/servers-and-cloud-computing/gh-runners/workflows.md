@@ -43,7 +43,7 @@ This workflow specifies one job named "Train the model". This job runs in a runn
 
 Now, navigate to the _Train Model_ workflow under the _Actions_ tab, and press the _Run workflow_ button. 
 
-![Train_worfklow](/images/run_train.png)
+![Train_workflow](/images/train_run.png)
 
 You will see the workflow running and it should complete succesfully. Click on the workflow to see the output from each step of the workflow. 
 
