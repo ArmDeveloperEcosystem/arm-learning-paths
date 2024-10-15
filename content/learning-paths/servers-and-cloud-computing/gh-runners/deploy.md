@@ -33,11 +33,10 @@ EXPOSE 8000
 # Specify the command to run the model server
 CMD ["uvicorn", "scripts.serve_model:app", "--host", "0.0.0.0", "--port", "8000"]
 ```
-The Dockerfile uses the PyTorch image with the ACL backend as the base image for the container. The working directory is set to `/app` where the trained model and the scripts to deploy the model are copied.
-The container runs a FastAPI application (`scripts/serve_model.py`) on port 8000. This script is called by `uvicorn` when the container is run.
+The Dockerfile uses the PyTorch image with the ACL backend as the base image for the container. The working directory is set to `/app` where the trained model and the scripts to deploy the model are copied. The container runs a FastAPI application (`scripts/serve_model.py`) on port 8000. This script is called by `uvicorn` when the container is run. Uvicorn is a fast, lightweight ASGI (Asynchronous Server Gateway Interface) server, a good fit for serving Python web applications such as this.
 
 ## Deploy the trained model using FastAPI
-FastAPI is an easy way to serve your trained model as API. You use a FastAPI application (´scripts/serve_model.py`) that loads your pre-trained model, accepts image uploads, and makes predictions on the uploaded images:
+FastAPI is an easy way to serve your trained model as API. You use a FastAPI application that loads your pre-trained model, accepts image uploads, and makes predictions on the uploaded images as shown in ´scripts/serve_model.py`:
 
 ```python
 import torch
@@ -109,7 +108,8 @@ async def predict(file: UploadFile = File(...)):
 ```
 ## Deploy with GitHub Actions
 
-You can now navigate to the workflow YAML file named `deploy-model.yml` with the contents shown below in the `.github/workflows` directory:
+You can now automate the deployment of your containerized model on the Arm-based runner in GitHub Actions.
+Navigate to the `.github/workflows` directory and inspect the YAML file named `deploy-model.yml`:
 
 ```console
 name: Deploy to DockerHub
@@ -142,27 +142,37 @@ jobs:
         run: |
           docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/gtsrb-image:latest --push .
 ```
-In this workflow you will build the Docker container for Arm64 architecture and push the container image to DockerHub.
-In order to push the image to DockerHub, you will need to add the following secrets to your GitHub repository:
- * DOCKER_USERNAME: Your DockerHub username
- * DOCKER_PASSOWORD: Your DockerHub password
+In this workflow, you build the Docker container for Arm64 architecture and push the container image to DockerHub.
 
-This workflow will trigger after the testing workflow completes successfully.
+Before you run this workflow, you need your Docker Hub username and a Personal Access Token (PAT). This enables you to automate the login to your Docker Hub account.
+
+To save your secrets, click on the Settings tab in your new GitHub repository. Expand the Secrets and variables on the left side and click Actions.
+
+Add two secrets using the New repository secret button:
+
+ * DOCKER_USERNAME: Your DockerHub username
+ * DOCKER_PASSWORD: Your DockerHub Personal Access Token
+
+To run the action, navigate to the Actions tab in your repository. Select Deploy to DockerHub on the left.
+
+Use the Run workflow drop-down on the right-hand side to click Run workflow.
 
 ## Verify the Deployment
 
-After the `deploy-model.yml` workflow completes successfully, you will see the docker container image is pushed to your DockerHub repository.
+After the `deploy-model.yml` workflow completes successfully, the docker container image is pushed to your DockerHub repository.
+
 You can validate this by logging into DockerHub and checking your repository:
 
 ![dockerhub_img](images/dockerhub_img.png)
 
-You can then pull this docker container image on your local machine and start the container.
+You can then pull this docker container image on your local machine and start the container:
 
 ```console
 docker pull <docker-username>/gtsrb-image
 docker run -d -p 8000:8000 <docker-username>/gtsrb-image
 ```
 Now test the application by running a curl command to make a POST request to the predict endpoint using a test image:
+
 ```bash
 curl -X 'POST'   'http://localhost:8000/predict/'   -H 'accept: application/json'   -H 'Content-Type: multipart/form-data'   -F 'file=@test-img.png;type=image/png'
 ```
@@ -171,6 +181,6 @@ The output should look like:
 {"predicted_class":1}
 ```
 
-You have now validated that you were able to successfully deploy your application and make predictions on the uploaded test image.
+You have now validated that you were able to successfully deploy your application, serve your model as an API and make predictions on a test image.
 
-In the last section, you will learn how to build a complete end-to-end MLOps workflow.
+In the last section, you will learn how to build a complete end-to-end MLOps workflow by combining the individual workflows.
