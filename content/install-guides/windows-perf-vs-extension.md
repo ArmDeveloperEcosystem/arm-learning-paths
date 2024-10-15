@@ -84,7 +84,7 @@ For those preferring to build from the source, simply clone [the repository](htt
 
 ### Setup
 
-To get started, you must link the GUI with the executable file `wperf.exe` by navigating to `Tools -> Options -> Windows Perf -> WindowsPerf Path`. This step is crucial for utilizing the GUI. The extension **will not work** without it!
+To get started, you must link the GUI with the executable file `wperf.exe` by navigating to `Tools -> Options -> WindowsPerf -> WindowsPerf Path`. This step is crucial for utilizing the GUI. The extension **will not work** without it!
 
 ## How to uninstall old WindowsPerfGUI extension
 
