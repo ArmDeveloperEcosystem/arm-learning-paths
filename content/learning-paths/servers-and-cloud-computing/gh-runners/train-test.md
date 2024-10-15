@@ -9,7 +9,7 @@ layout: learningpathall
 In this section, you will fork the provided example GitHub repository which contains all the code to complete this learning path. You will then learn how to train and test the neural network model using the provided scripts.
 
 ## Fork the example repository
-As you will be making modifications to the example and will run the GitHub Actions workflows within your own fork, you must make your own copy of the example repository.
+As you will be making modifications to the example and will run the GitHub Actions workflows within your own copy of the repository, start by forking the example repository.
 
 In a web browser, navigate to the repository at:
 
