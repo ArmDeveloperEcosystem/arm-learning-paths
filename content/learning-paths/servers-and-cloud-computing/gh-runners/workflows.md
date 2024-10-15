@@ -39,7 +39,7 @@ jobs:
           path: ${{ github.workspace }}/models/traffic_sign_net.pth
           retention-days: 5
 ```
-This workflow specifies one job named "Train the model". This job runs in a runner environment specified by `runs-on`. The `runs-on: ubuntu-22.04-arm-os` points to the Arm-based GitHub runner you setup in the first section.
+This workflow specifies one job named "Train the model". This job runs in a runner environment specified by `runs-on`. The `runs-on: ubuntu-22.04-arm-os` points to the Arm-hosted GitHub runner you setup in the first section.
 
 Now, navigate to the _Train Model_ workflow under the _Actions_ tab, and press the _Run workflow_ button. 
 
@@ -113,7 +113,7 @@ Trigger the _Test Model_ job by clicking the _Run workflow_ button on the _Actio
 
 ![#run-workflow](images/run-workflow.png)
 
-You will see the workflow running and it should complete succesfully. Click on the workflow to view the output from eaach step.
+You will see the workflow running and it should complete succesfully. Click on the workflow to view the output from each step.
 
 ![Actions_test](/images/actions_test.png)
 
