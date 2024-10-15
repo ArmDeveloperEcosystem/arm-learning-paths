@@ -19,7 +19,7 @@ ACL is integrated into PyTorch through the [oneDNN engine](https://github.com/on
 
 ## Modify the test workflow and compare results
 
-Start by updating the `container` image you are using in the test workflow file. Two different PyTorch docker images for Arm Neoverse are available on [DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse). Up until this point, you used the `r24.07-torch-2.3.0-openblas` container image in your workflows. You will now update `test_model.yml` to use the `r24.07-torch-2.3.0-onednn-acl` container image instead. 
+Two different PyTorch docker images for Arm Neoverse CPUs are available on [DockerHub](https://hub.docker.com/r/armswdev/pytorch-arm-neoverse). Up until this point, you used the `r24.07-torch-2.3.0-openblas` container image in your workflows. You will now update `test_model.yml` to use the `r24.07-torch-2.3.0-onednn-acl` container image instead. 
 
 Open and edit `.github/workflows/test_model.yml` in your browser. Update the `container.image` parameter to `armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl` and save the file:
 
