@@ -1,5 +1,5 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Thank you for completing the learning path on running MLOps with Arm-hosted GitHub runners. You might be interested in learning how to build Arm images and multi-architecture images with these Arm-hosted runners.
 
 recommended_path: /learning-paths/cross-platform/github-arm-runners
 
@@ -12,6 +12,10 @@ further_reading:
         title: Arm Compute Library
         link: https://github.com/ARM-software/ComputeLibrary
         type: website
+    - resource:
+        title: Streamlining your MLOps pipeline with GitHub Actions and Arm64 runners
+        link: https://github.blog/enterprise-software/ci-cd/streamlining-your-mlops-pipeline-with-github-actions-and-arm64-runners/
+        type: blog
 
 
 # ================================================================================
