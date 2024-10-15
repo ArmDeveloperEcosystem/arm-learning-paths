@@ -113,11 +113,11 @@ Trigger the _Test Model_ job by clicking the _Run workflow_ button on the _Actio
 
 ![#run-workflow](images/run-workflow.png)
 
-You will see the workflow running and it should complete succesfully. Click on the workflow to see the output from each step of the workflow. 
+You will see the workflow running and it should complete succesfully. Click on the workflow to view the output from eaach step.
 
 ![Actions_test](/images/actions_test.png)
 
-If you click on the "Run testing script" step, you should see the accuracy of the model and a table of the results printed from the PyTorch profiler. To test the model you used PyTorch with the OpenBLAS backend. The output should look similar to:
+If you click on the "Run testing script" step, you should see the accuracy of the model and a table of the results printed from the PyTorch profiler. The output from testing the model with PyTorch using OpenBLAS should look similar to:
 
 ```output
 Accuracy of the model on the test images: 90.48%
