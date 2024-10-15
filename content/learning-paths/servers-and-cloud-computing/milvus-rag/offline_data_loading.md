@@ -10,7 +10,7 @@ In this section, you will learn how to setup a cluster on Zilliz Cloud. You will
 
 ### Create a dedicated cluster
 
-You will need to [register](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
+Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
 
 After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retreive the vector data as shown:
 
@@ -21,14 +21,14 @@ When you select the `Create Cluster` Button, you should see the cluster running 
 ![running](running_cluster.png)
 
 {{% notice Note %}}
-You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. We can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
+You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
 {{% /notice  %}}
 
 ### Create the Collection
 
 With the dedicated cluster running in Zilliz Cloud, you are now ready to create a collection in your cluster.
 
-Within your activated python `venv`, start by creating a file named `zilliz-llm-rag.py` and copy the contents below into it:
+Within your activated python virtual environment `venv`, start by creating a file named `zilliz-llm-rag.py`, and copy the contents below into it:
 
 ```python
 from pymilvus import MilvusClient
