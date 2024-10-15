@@ -56,7 +56,7 @@ The installation instructions in the next section go through the steps shown abo
 
 ## Download and open the Dr Arm Unity project
 
-1. Download and extract the accompanying Unity project from the [supporting zip file](../files/MLAgentsWorkshopSupportingFiles.zip).
+1. Download and extract the accompanying Unity project from the [supporting zip file](/learning-paths/smartphones-and-mobile/using_unity_machine_learning_agents/files/MLAgentsWorkshopSupportingFiles.zip).
 
 1. Open Unity Hub
 

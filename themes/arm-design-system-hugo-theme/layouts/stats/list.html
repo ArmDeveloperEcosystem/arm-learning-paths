@@ -15,7 +15,9 @@
         <!-- find company name of author -->
         {{$company := ""}}
         {{$author := replace $author_urlized "-" " " | title }}
-        {{ range $i, $row := getCSV "," "contributors.csv" }}
+        {{ $csv := resources.Get "contributors.csv" }}
+        {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ",") }}
+        {{ range $i, $row := $csv_content }}
             {{ if eq  $author (index $row 0)}}
                 <!-- Get company name of author -->
                 {{ $company = index $row 1 }}
@@ -251,7 +253,8 @@
                                         {{if eq $key "install-guides"}}
                                             {{$level_one_dir = "/"}}
                                         {{end}}
-                                        <a href="{{$level_one_dir}}{{$key}}/{{$name}}">{{$info.readable_title}}</a>
+                                        {{/* <a href="{{$level_one_dir}}{{$key}}/{{$name}}">{{$info.readable_title}}</a>  */}}
+                                        {{$info.readable_title}}
                                     </td>
                                     <td>
                                         <ul>

@@ -52,29 +52,31 @@ sudo apt install gcc-arm-linux-gnueabihf -y
 sudo apt install gcc-aarch64-linux-gnu -y
 ```
 
-### Installing on Red Hat / Fedora / Amazon Linux
+### Installing on Fedora
 
-These Linux distributions use `yum` as the package manager. 
+Fedora uses the `dnf` package manager.
 
-To install the most common development tools use the commands below. If the machine has `sudo` you can use it or run `yum` as _root_.
+To install the most common development tools use the commands below.
 
-```bash { target="fedora:latest" }
-sudo yum update -y
-sudo yum install arm-none-eabi-gcc-cs -y
-sudo yum install arm-none-eabi-newlib -y
-sudo yum install gcc-aarch64-linux-gnu -y
-sudo yum install gcc-arm-linux-gnu -y
-```
+- If the machine has `sudo` you can use it:
 
-If `sudo` is not available become _root_ and omit the `sudo`.
+  ```bash { target="fedora:latest" }
+  sudo dnf update -y
+  sudo dnf install arm-none-eabi-gcc-cs -y
+  sudo dnf install arm-none-eabi-newlib -y
+  sudo dnf install gcc-aarch64-linux-gnu -y
+  sudo dnf install gcc-arm-linux-gnu -y
+  ```
 
-```console
-yum update
-yum install arm-none-eabi-gcc-cs -y
-yum install arm-none-eabi-newlib -y
-yum install gcc-aarch64-linux-gnu -y
-yum install gcc-arm-linux-gnu -y
-```
+- If `sudo` is not available become _root_ and omit the `sudo` from the above commands:
+
+  ```console
+  dnf update -y
+  dnf install arm-none-eabi-gcc-cs -y
+  dnf install arm-none-eabi-newlib -y
+  dnf install gcc-aarch64-linux-gnu -y
+  dnf install gcc-arm-linux-gnu -y
+  ```
 
 ## Setting up product license {#license}
 

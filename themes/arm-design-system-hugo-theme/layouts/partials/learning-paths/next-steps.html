@@ -30,7 +30,7 @@ Called from:
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
             <div id="similar-lp-div" class="content-box">
                 <h4>Similar Learning Paths</h4>
-                <p>To learn about topics related to this one.</p>
+                <p>Learn about related topics:</p>
                 <ul>
                     {{$related := (where (.context.Site.Pages.Related (index .learningpathfiles 0) ) "Params.learning_path_main_page" "yes") | first 2 }}
                     {{range $related}}
@@ -41,7 +41,7 @@ Called from:
 
             <div id="further-reading-div" class="content-box">
                 <h4>Further Reading</h4>
-                <p>With more information on topics in this learning path.</p>
+                <p>Find more information about the topics in this Learning Path:</p>
                 <ul class="fa-ul u-margin-left-0">
                 {{ range $index, $r := .context.Params.further_reading }}
                     {{ with $r.resource}}
@@ -65,7 +65,7 @@ Called from:
 
             <div id="explore-tags-div" class="content-box">
                 <h4>Explore Tags</h4>
-                <p>Look at more learning paths under these tags.</p>
+                <p>Find additional Learning Paths using tags:</p>
                 <span>
                         <ads-tag    href='{{ "/" | relLangURL}}tag/{{(index .learningpathfiles 0).Params.subjects | urlize}}' style="margin-bottom: 4px;">
                             <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">

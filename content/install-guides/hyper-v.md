@@ -78,7 +78,7 @@ A dialog should appear:
 
 ## How do I enable Hyper-V from the command line?
 
-1. Open a Command Prompt or Windows PowerShell
+1. Open a Command Prompt or Windows PowerShell (as Administrator)
 
 2. Run the `DISM` command below to enable Hyper-V:
 

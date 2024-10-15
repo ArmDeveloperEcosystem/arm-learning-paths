@@ -1,17 +1,17 @@
 ---
 # User change
-title: "Create RTOS threads"
+title: "Create RTOS Threads"
 
 weight: 4 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Implement the main RTOS thread (`app_main`), whose role is primarily to start and manage the other threads of the system.
+In this step, you will implement the main RTOS thread (`app_main`), which is primarily responsible for starting and managing the other threads in the system.
 
-In this example you shall create 3 threads. The number and naming of the threads is arbitrary.
+You will create three threads. The number and naming of the threads are flexible, so feel free to adjust as needed.
 
-## Create app_main
+## Create `app_main`
 
 Click on the `+` icon within the `Source Files` Group, and add a new file `app_main.c`. Populate with the below.
 
@@ -28,9 +28,9 @@ void app_main (void *argument) {
 	osThreadNew(thread3, NULL, NULL);	// Create thread3
 }
 ```
-## Create threads
+## Create Threads
 
-You can now implement the functionality of the threads themselves. Start with a simple example. Each thread will say hello, and then pause for a period, forever.
+Now you can implement the functionality of the threads themselves. Start with a simple example. Each thread will say hello, and then pause for a period, forever.
 
 Click on the `+` icon within the `Source Files` Group, and add a new file `threads.c`. Populate with the contents below.
 

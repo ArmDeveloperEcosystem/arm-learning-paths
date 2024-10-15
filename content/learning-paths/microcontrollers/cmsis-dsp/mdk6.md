@@ -8,7 +8,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 {{% notice  Note%}}
-If using Keil μVision, go to [Build example with Keil μVision](..//mdk5/).
+If using Keil μVision, go to [Build example with Keil μVision](/learning-paths/microcontrollers/cmsis-dsp/mdk5/).
 {{% /notice %}}
 
 ## Clone the repository to get the example code

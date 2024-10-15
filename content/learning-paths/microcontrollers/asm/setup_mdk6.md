@@ -8,7 +8,7 @@ weight: 4 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 {{% notice  Note%}}
-If using Keil μVision, go to [Setting up a Project in Keil MDK (μVision)](..//setup_mdk5/).
+If using Keil μVision, go to [Setting up a Project in Keil MDK (μVision)](/learning-paths/microcontrollers/asm/setup_mdk5/).
 {{% /notice %}}
 
 ## Create a new project (csolution)
@@ -98,8 +98,8 @@ Close to save.
 
 ## main.c
 
-The project automatically creates `main.c` within the `Source Files` group. We will modify this in the [Writing assembly functions](..//coding/) section.
+The project automatically creates `main.c` within the `Source Files` group. We will modify this in the [Writing assembly functions](/learning-paths/microcontrollers/asm/coding/) section.
 
 {{% notice  Note%}}
-`Next` button below goes to μVision settings. Go to [Writing assembly functions](..//coding/) to skip this section.
+`Next` button below goes to μVision settings. Go to [Writing assembly functions](/learning-paths/microcontrollers/asm/coding/) to skip this section.
 {{% /notice %}}

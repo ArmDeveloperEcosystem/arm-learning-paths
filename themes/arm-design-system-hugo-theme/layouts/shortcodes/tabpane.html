@@ -15,12 +15,17 @@ Create code panes via horizontal tabs. Uses the 'prismjs-codeblock.html' partial
   <ads-horizontal-tabs class="code-horizontal-tabs {{if $titles}}{{range $titles}} header-{{.}} {{end}}{{end}}" id="tabs-{{- $.Ordinal -}}" alt-emphasis="yes">
     {{- range $index, $element := $.Scratch.Get "tabs" -}}
       <div slot="content" class="header-tab-{{urlize $element.header}}" data-id="tab-{{- $.Ordinal -}}-slot-{{$index}}">
-        {{partial "general-formatting/prismjs-codeblock.html" (dict "input_from" "tabpane" 
+        {{- if $element.img_src -}}
+          <img src="{{-  $element.img_src  -}}" alt='Image Alt Text: {{-   $element.title   -}}' title="{{-  $element.title  -}}" class="content-uploaded-image centered" />
+          <span class="content-image-caption centered">{{- $element.title -}}</span>
+        {{- else -}}
+          {{partial "general-formatting/prismjs-codeblock.html" (dict "input_from" "tabpane" 
                                                                     "code" $element.content
                                                                     "language" $element.language
                                                                     "line_numbers" $element.line_numbers 
                                                                     "output_lines" $element.output_lines
                                                                     "command_line" $element.command_line) }}
+        {{- end -}}
       </div>
     {{end}}
   </ads-horizontal-tabs>

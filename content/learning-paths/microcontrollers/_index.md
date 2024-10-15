@@ -8,16 +8,16 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 25
-- Linux: 3
+- Linux: 4
 - macOS: 2
-- RTOS: 9
+- RTOS: 10
 - Windows: 2
 subjects_filter:
 - CI-CD: 3
 - Libraries: 3
-- ML: 6
+- ML: 7
 - Performance and Architecture: 11
-- RTOS Fundamentals: 3
+- RTOS Fundamentals: 4
 - Security: 2
 - Virtual Hardware: 2
 subtitle: Learn best practices for microcontroller development
@@ -25,23 +25,29 @@ title: Microcontrollers
 tools_software_languages_filter:
 - Arduino: 1
 - Arm Compiler for Embedded: 5
-- Arm Development Studio: 3
-- Arm Virtual Hardware: 11
+- Arm Compute Library: 1
+- Arm Development Studio: 4
+- Arm Virtual Hardware: 12
 - CMSIS: 5
 - CMSIS-Toolbox: 3
-- Coding: 21
-- Fixed Virtual Platform: 8
+- Coding: 22
+- Edge Impulse: 1
+- ExecuTorch: 1
+- Fixed Virtual Platform: 9
 - FVP: 1
-- GCC: 4
+- GCC: 5
 - GitHub: 2
 - IP Explorer: 2
 - Keil: 7
-- Keil MDK: 2
+- Keil MDK: 3
 - MDK: 2
 - MPS3: 1
+- Node.js: 1
 - Paddle: 1
+- Python: 1
+- PyTorch: 1
 - Raspberry Pi: 1
-- RTX: 1
+- RTX: 2
 - STM32: 2
 - TensorFlow: 2
 - Trusted Firmware: 2

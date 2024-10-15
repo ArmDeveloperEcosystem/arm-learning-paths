@@ -2,7 +2,7 @@
 # User change
 title: "Migrating Go applications"
 
-weight: 4
+weight: 5
 
 layout: "learningpathall"
 

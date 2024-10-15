@@ -33,9 +33,10 @@ jobs:
             hugo-version: '0.130.0'
             extended: true
             
-      # Post-CSS install
+      # Post-CSS install and Node.js
       - name: Install Post-CSS
         run: npm install postcss-cli
+
 
       # Builds arm-software-developer repo
       - name: Build
@@ -43,6 +44,8 @@ jobs:
           hugo --minify
           cp learn-image-sitemap.xml public/learn-image-sitemap.xml
           bin/pagefind --site "public"
+        env:
+         HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
 
       # Deploys website to AWS S3
       - name: Deploy to S3

@@ -29,6 +29,21 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 The Streamline CLI tools are native command-line tools that are designed to run directly on an Arm server running Linux. The tools provide a software profiling methodology that gives you clear and actionable performance data. You can use this data to guide the optimization of the heavily used functions in your software.
 
+## Platform support
+
+Streamline CLI tools are supported with the following host operating systems running on an Arm AArch64 host machine:
+
+* Amazon Linux 2023 or newer
+* Debian 10 or newer
+* RHEL 8 or newer
+* Ubuntu 20.04 or newer
+
+Streamline CLI tools are supported on the following Arm CPUs:
+
+* Arm Neoverse N1
+* Arm Neoverse N2
+* Arm Neoverse V1
+
 ## Before you begin
 
 Use the Arm Sysreport utility to determine whether your system configuration supports hardware-assisted profiling. Follow the instructions in [Get ready for performance analysis with Sysreport][1] to discover how to download and run this utility.
@@ -79,8 +94,7 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ## Applying the kernel patch
 
-For best results, we provide a Linux kernel patch that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down
-metrics on Arm systems. This patch provides two new capabilities:
+For best results, we provide a Linux kernel patch that modifies the behavior of Linux perf to improve support for capturing function-attributed top-down metrics on Arm systems. This patch provides two new capabilities:
 
 * It allows a new thread to inherit the perf counter group configuration of its parent.
 * It decouples the perf event-based sampling window size from the overall sample rate. This allows strobed mark-space sampling patterns where the tool can capture a small window without using a high sample rate.
@@ -119,6 +133,12 @@ patch -p 1 -i v6.7-combined.patch
 
 Follow these steps to integrate these patches into an RPM-based distribution's kernel:
 
+1. Install the RPM build tools:
+
+    ```
+    sudo yum install rpm-build rpmdevtools
+    ```
+    
 1. Remove any existing `rpmbuild` directory, renaming as appropriate:
 
     ```sh
@@ -165,6 +185,12 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
     ```
 
 1. Save the changes and exit the editor.
+
+1. Install the build dependencies:
+
+    ```sh
+    sudo dnf builddep SPECS/kernel.spec
+    ```
 
 1. Build the kernel and other rpms:
 

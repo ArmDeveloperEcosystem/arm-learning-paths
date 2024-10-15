@@ -13,7 +13,7 @@ The tool allows you to observe API call arguments and return values, and interac
 
 ## Prerequisites
 
-Build your application, and setup your Android device as described in [Setup tasks](../setup_tasks).
+Build your application, and setup your Android device as described in [Setup tasks](/learning-paths/smartphones-and-mobile/ams/setup_tasks/).
 
 ## Capture data from the device
 

@@ -7,11 +7,11 @@ key_ip:
 - Neoverse
 maintopic: true
 operatingsystems_filter:
-- Android: 1
+- Android: 2
 - Baremetal: 1
-- Linux: 92
-- macOS: 2
-- Windows: 5
+- Linux: 105
+- macOS: 9
+- Windows: 12
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -19,19 +19,21 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 2
-- Containers and Virtualization: 23
+- CI-CD: 3
+- Containers and Virtualization: 25
 - Databases: 15
-- Libraries: 5
-- ML: 8
-- Performance and Architecture: 34
+- Libraries: 6
+- ML: 13
+- Performance and Architecture: 36
 - Storage: 1
-- Web: 7
+- Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
 title: Servers and Cloud Computing
 tools_software_languages_filter:
+- .NET: 1
 - .NET SDK: 1
 - 5G: 1
+- Android Studio: 2
 - Ansible: 2
 - Arm Development Studio: 4
 - armclang: 1
@@ -39,7 +41,9 @@ tools_software_languages_filter:
 - ArmRAL: 1
 - ASP.NET Core: 2
 - Assembly: 4
+- assembly: 1
 - AWS CodeBuild: 1
+- AWS EC2: 1
 - AWS Elastic Container Service (ECS): 1
 - AWS Elastic Kubernetes Service (EKS): 2
 - Bastion: 3
@@ -48,17 +52,18 @@ tools_software_languages_filter:
 - C: 4
 - C#: 1
 - C++: 3
-- C/C++: 1
+- C/C++: 2
 - Capstone: 1
-- CCA: 2
+- CCA: 3
 - Clair: 1
 - Clang: 9
 - ClickBench: 1
 - ClickHouse: 1
+- CloudFormation: 1
 - CMake: 1
-- Coding: 16
+- Coding: 19
 - Django: 1
-- Docker: 14
+- Docker: 15
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
@@ -66,8 +71,8 @@ tools_software_languages_filter:
 - GCC: 17
 - gdb: 1
 - Geekbench: 1
-- GenAI: 2
-- GitHub: 1
+- GenAI: 4
+- GitHub: 2
 - GitLab: 1
 - Glibc: 1
 - Go: 2
@@ -81,11 +86,12 @@ tools_software_languages_filter:
 - JAX: 1
 - Kafka: 1
 - Keras: 1
-- Kubernetes: 7
+- Kubernetes: 9
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
-- LLM: 1
+- LLM: 2
+- llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
 - Memcached: 2
@@ -96,14 +102,16 @@ tools_software_languages_filter:
 - NEON: 1
 - Nexmark: 1
 - Nginx: 3
+- Node.js: 3
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
-- Python: 8
-- PyTorch: 3
+- Python: 10
+- PyTorch: 4
+- RAG: 1
 - Redis: 3
 - Remote.It: 2
-- RME: 2
+- RME: 3
 - Rust: 1
 - snappy: 1
 - Snort: 1
@@ -120,14 +128,15 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - TypeScript: 1
 - Vectorscan: 1
+- Visual Studio Code: 3
 - WordPress: 3
 - x265: 1
 - zlib: 1
 - Zookeeper: 1
 weight: 1
 cloud_service_providers_filter:
-- AWS: 9
-- Google Cloud: 6
-- Microsoft Azure: 7
+- AWS: 13
+- Google Cloud: 8
+- Microsoft Azure: 8
 - Oracle: 2
 ---

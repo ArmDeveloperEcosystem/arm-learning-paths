@@ -44,7 +44,7 @@ You can download the Development Studio installer from the [Product Download Hub
 
 Versions of Arm Development Studio denoted by `year.index`, where `index` is a letter (for example `2023.a`) are only available to certain Arm licensees, as they contain support for non publicly announced IP (at time of release).
 
-For more information about the Product Download Hub, refer to the [Product Download Hub guide](../pdh).
+For more information about the Product Download Hub, refer to the [Product Download Hub guide](/install-guides/pdh/).
 
 ## Install Arm Development Studio
 
@@ -136,7 +136,7 @@ Arm Development Studio is license managed. When you launch the IDE for the first
 
 A free 30 day evaluation license for Arm Development Studio is also available. You can generate this in `Arm License Manager`. Click on `Add`, and follow instructions therein to obtain the evaluation license (requires Arm login).
 
-Full license setup instructions are available in the [Arm Software Licensing install guide](../license/).
+Full license setup instructions are available in the [Arm Software Licensing install guide](/install-guides/license/).
 
 ## Get started
 

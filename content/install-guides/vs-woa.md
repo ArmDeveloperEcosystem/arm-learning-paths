@@ -62,7 +62,7 @@ Two results are displayed: The LLVM compiler and MSBuild support for LLVM. Selec
 {{% notice  Note%}}
 Different versions of Visual Studio include different LLVM toolchain versions.
 
-For example, Visual Studio 2022 Version `17.5.3` installs `LLVM 15.0.1`.
+For example, Visual Studio 2022 Version `17.11.5` installs `LLVM 17.0.3`.
 {{% /notice %}}
 
 LLVM supports `clang-cl`, a compatibility layer for Microsoft Visual C++ (MSVC). This means that most developers can use `clang-cl` to compile their C/C++ applications on Visual Studio/MSBuild on the Windows on Arm device, without needing to change the command line. This allows you to easily modify legacy projects that use MSVC to use native compilation.

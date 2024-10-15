@@ -16,7 +16,7 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Most Arm commercial tools are license managed. Arm is migrating to user-based licensing (UBL) which greatly simplifies license configuration. It is available for [Arm Success Kits](../successkits/) as well as [Arm Development Studio](../armds).
+Most Arm commercial tools are license managed. Arm is migrating to user-based licensing (UBL) which greatly simplifies license configuration. It is available for [Arm Success Kits](/install-guides/successkits/) as well as [Arm Development Studio](/install-guides/armds).
 
 Success kits are available as `Hardware Success Kits` (`HSK`) or `Software Success Kits` (`SSK`). See the table below for tooling provided. SSK is a subset of HSK.
 

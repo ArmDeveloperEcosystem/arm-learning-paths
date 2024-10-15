@@ -18,7 +18,7 @@ Cloud providers offer Arm instances based on Neoverse processors. For example:
 - [Microsoft Azure](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/)
 - [Oracle Cloud](https://www.oracle.com/cloud/compute/arm/)
 - [Equinix](https://deploy.equinix.com/product/servers/c3-large-arm64/)
-- [Scaleway](https://www.scaleway.com/en/amp2-instances/)
+- [Scaleway](https://www.scaleway.com/en/cost-optimized-instances-based-on-arm/)
 - [Hetzner Cloud](https://www.hetzner.com/news/arm64-cloud)
 
 Free tier offers are currently available.
@@ -33,6 +33,17 @@ Free tier offers are currently available.
 The [Works on Arm](https://www.arm.com/markets/computing-infrastructure/works-on-arm) initiative enables developers to build, test, and optimize projects on the Arm64 architecture by providing free access to Arm based developer platforms, cloud instances, and CI/CD environments. Arm has partnered with cloud service providers to make Neoverse compute available to developers.
 
 Consider [applying for Arm resources on an Equinix Cluster](https://github.com/WorksOnArm/equinix-metal-arm64-cluster).
+
+## Academic offers from Cloud Service Providers
+
+Below is a list of Arm cloud partners that have existing academic offers for students and teaching staff who wish to use Arm-based instances. 
+
+- [Microsoft Azure Student Offer](https://azure.microsoft.com/en-us/free/students)
+- [Google Cloud for Faculty](https://cloud.google.com/edu/faculty?hl=en)
+- [Google Cloud for Researchers](https://cloud.google.com/edu/researchers?hl=en)
+- [Alibaba Cloud Academic Empowerment Program](https://edu.alibabacloud.com/campus/index?spm=a3c0i.11593861.4363105600.24.6d326d84ZWObih)
+- [NVIDIA Higher Education Research](https://www.nvidia.com/en-gb/industries/higher-education-research/academic-grant-program/)
+- [Oracle Cloud Education](https://www.oracle.com/uk/government/education/)
 
 ##  Arm SystemReady Certified hardware
 

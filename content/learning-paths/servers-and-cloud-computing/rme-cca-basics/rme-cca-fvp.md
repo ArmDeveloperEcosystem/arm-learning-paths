@@ -125,23 +125,25 @@ exit
 
 The binary executables built in the previous step can run on an Armv-A Base Architecture Envelop Model (AEM) FVP with support for RME extensions. AEM FVPs are fixed configuration virtual platforms of Armv8-A and  Armv9-A architectures with comprehensive system IP. You can download and run the FVP on either x86_64 or aarch64 host machines.
 
-Dependent on the architecture of your host machine, run the steps below to download and extract this FVP. Create an environment variable `MODEL` and set it to point to the FVP executable.
+Depending on the architecture of your host machine, run the steps below to download and extract this FVP, create an environment variable `MODEL` and set it to point to the FVP executable:
 
-### aarch64
-```console
-cd ~/cca-stack
-wget https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
-tar -xvzf FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
-export MODEL=~/cca-stack/Base_RevC_AEMvA_pkg/models/Linux64_armv8l_GCC-9.3/FVP_Base_RevC-2xAEMvA
-```
+- host machine architecture: aarch64
 
-### x86_64
-```console
-cd ~/cca-stack
-wget https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC-2xAEMvA_11.23_9_Linux64.tgz
-tar -xvzf FVP_Base_RevC-2xAEMvA_11.23_9_Linux64.tgz
-export MODEL=~/cca-stack/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3/FVP_Base_RevC-2xAEMvA
-```
+  ```console
+  cd ~/cca-stack
+  wget https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
+  tar -xvzf FVP_Base_RevC-2xAEMvA_11.23_9_Linux64_armv8l.tgz
+  export MODEL=~/cca-stack/Base_RevC_AEMvA_pkg/models/Linux64_armv8l_GCC-9.3/FVP_Base_RevC-2xAEMvA
+  ```
+
+- host machine architecture: x86_64
+
+  ```console
+  cd ~/cca-stack
+  wget https://developer.arm.com/-/media/Files/downloads/ecosystem-models/FVP_Base_RevC-2xAEMvA_11.23_9_Linux64.tgz
+  tar -xvzf FVP_Base_RevC-2xAEMvA_11.23_9_Linux64.tgz
+  export MODEL=~/cca-stack/Base_RevC_AEMvA_pkg/models/Linux64_GCC-9.3/FVP_Base_RevC-2xAEMvA
+  ```
 
 Launch the `boot.sh` script to run the binaries on the FVP:
 

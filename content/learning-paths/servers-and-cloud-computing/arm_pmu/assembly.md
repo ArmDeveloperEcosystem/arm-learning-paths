@@ -8,7 +8,7 @@ There are two Arm instructions that allow access to system registers. These are 
 
 ## Using assembly for system counter access
 
-If you only need to count time/cycles, then the [system counter](https://developer.arm.com/documentation/102379/0102/System-Counter?lang=en)] can be used. You can do this from user space. An example of measuring system counter ticks across a function is shown below:
+If you only need to count time/cycles, then the [system counter](https://developer.arm.com/documentation/102379/0102/System-Counter?lang=en) can be used. You can do this from user space. An example of measuring system counter ticks across a function is shown below:
 
 Use a text editor to create a file named `syscnt.c` with the code below:
 

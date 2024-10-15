@@ -1,6 +1,6 @@
 The Arm Learning Paths website is available at https://learn.arm.com/
 
-# Arm Learning Paths 
+# Arm Learning Paths  
 
 This repository contains the source files for the Arm Learning Paths static website, serving learning based technical content for Arm software developers. 
 

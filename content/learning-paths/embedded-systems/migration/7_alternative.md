@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 In this section you will learn alternative ways to build the development environment and compile with a different compiler, on Arm hardware. 
 
-The changes you made in `main.cpp` and `CMakeLists.txt` in [Application porting](../5_application_porting) stay the same when running on actual Arm hardware.
+The changes you made in `main.cpp` and `CMakeLists.txt` in [Application porting](/learning-paths/embedded-systems/migration/5_application_porting) stay the same when running on actual Arm hardware.
 
 ## Arm hardware
 
@@ -60,7 +60,7 @@ Refer to [Get started with the Raspberry Pi 4](/learning-paths/embedded-systems/
 
 ## Development environment and application porting
 
-Use the same Dockerfile as before, see [Development environment](../4_development_environment#gcc-container).
+Use the same Dockerfile as before, see [Development environment](/learning-paths/embedded-systems/migration/4_development_environment#gcc-container).
 
 You can build the development environment natively on Arm using `docker build` instead of `docker buildx`. 
 
@@ -76,7 +76,7 @@ Run the container:
 docker run --rm -ti --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix/:/tmp/.X11-unix/ -v $HOME/.Xauthority:/home/ubuntu/.Xauthority sobel_gcc_example
 ```
 
-Follow the same steps to port the application as described in [Application porting](../5_application_porting) to build and run the application.
+Follow the same steps to port the application as described in [Application porting](/learning-paths/embedded-systems/migration/5_application_porting/) to build and run the application.
 
 ### ACfL
 
@@ -103,7 +103,7 @@ Install OpenCV by running the command:
 sudo apt-get update && sudo apt-get install -y libopencv-dev
 ```
 
-Follow the same steps to port the application as described in [Application porting](../5_application_porting). 
+Follow the same steps to port the application as described in [Application porting](/learning-paths/embedded-systems/migration/5_application_porting). 
 
 To use Arm Compiler for Linux you need to change the compiler in `CMakeLists.txt` as shown below:
 

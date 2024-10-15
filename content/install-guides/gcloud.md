@@ -109,4 +109,4 @@ Credentials saved to file: [/home/ubuntu/.config/gcloud/application_default_cred
 These credentials will be used by any library that requests Application Default Credentials (ADC).
 ```
 
-After a successful log in, you will be able to use the `Google Cloud CLI` and automation tools like [Terraform](../terraform) from the terminal.
+After a successful log in, you will be able to use the `Google Cloud CLI` and automation tools like [Terraform](/install-guides/terraform/) from the terminal.

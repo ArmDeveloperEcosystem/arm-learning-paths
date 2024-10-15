@@ -1,8 +1,5 @@
 ---
 title: Run the AV1 and VP9 codecs on Arm Linux
-draft: true
-cascade:
-    draft: true
 
 author_primary: Odin Shen
 
@@ -22,6 +19,9 @@ armips:
 prerequisites:
 - An Arm Linux system or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a 
   cloud service provider. 
+
+operatingsystems:
+    - Linux
 
 skilllevels: Introductory
 subjects: Libraries

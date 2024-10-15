@@ -24,8 +24,8 @@ A number of example projects are also provided.
 
 See the below install guides for set up instructions:
 
-* [Keil Studio VS Code Extensions](../../../../install-guides/keilstudio_vs)
-* [Keil μVision](../../../../install-guides/mdk)
+* [Keil Studio VS Code Extensions](/install-guides/keilstudio_vs/)
+* [Keil μVision](/install-guides/mdk/)
 
 Install the appropriate IDE you wish to use.
 
@@ -44,4 +44,4 @@ The [Dot Product example](https://www.keil.com/pack/doc/CMSIS/DSP/html/group__Do
 
 The appropriate implementation is selected at build time based on the processor.
 
-Full documentation for the CMSIS-DSP libary is available [here](https://arm-software.github.io/CMSIS-DSP/latest/index.html).
+For more information refer to the [CMSIS-DSP library documentation](https://arm-software.github.io/CMSIS-DSP/latest/index.html).

@@ -1,25 +1,25 @@
 ---
 # User change
-title: "Initialize the operating system"
+title: "Initialize the Operating System"
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-[Keil RTX5](https://www2.keil.com/mdk5/cmsis/rtx) is quite a feature rich real-time operating system (RTOS). CMSIS and the [CMSIS-RTOS2](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html) API makes it very easy to work with.
+[Keil RTX5](https://www2.keil.com/mdk5/cmsis/rtx) is a feature-rich real-time operating system (RTOS). CMSIS and the [CMSIS-RTOS2](https://arm-software.github.io/CMSIS_5/RTOS2/html/index.html) API makes it easy to work with.
 
-When setting up the project Run-time environment, the appropriate system initialization code (`C Startup`) was added.
+When setting up the project's Run-Time Environment, ensure you add the appropriate system initialization code (`C Startup`).
 
-From there, the `RTX5` initialization code is always essentially the same, setting up the `SysTick` timer with the [SystemCoreClockUpdate()](https://www.keil.com/pack/doc/CMSIS/Core/html/group__system__init__gr.html#gae0c36a9591fe6e9c45ecb21a794f0f0f) function, then initializing and starting the RTOS.
+Once this is done, the `RTX5` initialization code is typically the same. It involves setting up the `SysTick` timer with the [SystemCoreClockUpdate()](https://www.keil.com/pack/doc/CMSIS/Core/html/group__system__init__gr.html#gae0c36a9591fe6e9c45ecb21a794f0f0f) function, then initializing and starting the RTOS.
 
-## Create main()
+## Create `main()`
 
 Return to the `CMSIS` view.
 
-Within the `Source Files` Group, a `main.c` is automatically created. Click on the file to open in text editor.
+Within the `Source Files` group, a `main.c` is automatically created. Click on the file to open it in the text editor.
 
-Delete any auto created code therein, and add the following.
+Delete any auto-generated code and replace it with the following:
 
 ```C
 #include "RTE_Components.h"
@@ -42,16 +42,18 @@ int __attribute__((noreturn)) main (void) {
 }
 ```
 
-## Understanding the code
+## Understanding the Code
 
-The function [osKernelStart()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__KernelCtrl.html#ga9ae2cc00f0d89d7b6a307bba942b5221) should never return.
+The function [osKernelStart()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__KernelCtrl.html#ga9ae2cc00f0d89d7b6a307bba942b5221) is designed to never return.
 
-If your code gets to the infinite `while()` loop, something has gone wrong - most likely with the platform initialization code.
+If your code reaches the infinite `while()` loop, something has gone wrong - most likely with the platform initialization code.
 
-All threads use a prototype of the form:
+All threads should follow a prototype like this:
 ```C
 void thread(void *);
 ```
-where the argument is passed as the second parameter of the [osThreadNew()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html#ga48d68b8666d99d28fa646ee1d2182b8f) function. Use `NULL` if no argument to pass.
+The argument for this function is provided as the second parameter of the [osThreadNew()](https://arm-software.github.io/CMSIS_6/latest/RTOS2/group__CMSIS__RTOS__ThreadMgmt.html#ga48d68b8666d99d28fa646ee1d2182b8f) function. Use `NULL` if no argument to pass.
 
-In the above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, you shall spawn all other threads of the RTOS.
+In the example above, `app_main` is used as the main application thread, but this naming is arbitrary. From here, you will spawn all other threads in the RTOS.
+
+{{% notice %}} Tip: Naming the main application thread is flexible. Choose a name that clearly reflects its function. {{% /notice %}}

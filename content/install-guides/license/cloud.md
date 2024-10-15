@@ -3,7 +3,7 @@ title: UBL Cloud server setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author_primary: Ronan Synnott
-weight: 4        
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 tool_install: false             # Set to true to be listed in main selection page, else false
@@ -38,7 +38,7 @@ armlm activate --code xxxxxxxx-xxxx-xxxx-xxxxxxxx
 
 The license can also be activated in the various Arm tool IDEs.
 
-For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager` > `Manage Arm User-Based Licenses`.
+For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio), via `Help` > `Arm License Manager` > `Manage Arm User-Based Licenses`.
 
 Select `Activate with` > `Activation Code`, and enter your product activation code. Click `Activate`.
 

@@ -51,4 +51,4 @@ You will see the command line details as shown below after you log in.
 
 ![azure #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/40816837/1b11ecbe-0e70-48c3-a9bf-6712ad2fba4a)
 
-After a successful log in, you will be able to use the [Azure CLI](../azure-cli) and automation tools like [Terraform](../terraform) from the terminal.
+After a successful log in, you will be able to use the [Azure CLI](/install-guides/azure-cli/) and automation tools like [Terraform](/install-guides/terraform/) from the terminal.

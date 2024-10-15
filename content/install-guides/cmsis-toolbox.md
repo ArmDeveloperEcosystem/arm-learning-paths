@@ -123,26 +123,27 @@ Set environment variables as below. Note the exact name of the `TOOLCHAIN` varia
 | ------------------------------------------ | ------------------------------------- | --------------------------------------------- |
 | `<name>_TOOLCHAIN_<major>_<minor>_<patch>` | Path to toolchain binaries            | `<name>` = `AC6`, `GCC`, `IAR`, or `CLANG`    |
 | `CMSIS_PACK_ROOT`                          | Path to CMSIS-Pack root directory     | Use `cpackget init` to initialize             |
-| `CMSIS_COMPILER_ROOT`                      | Path to CMSIS-Toolbox `etc` directory |                                               |
 | `PATH`                                     | Add CMSIS-Toolbox `bin` to path       | Also path to `CMake` and `Ninja` if necessary |
+| `CMSIS_COMPILER_ROOT`                      | Path to CMSIS-Toolbox `etc` directory | Optional                                      |
+
 
 For example:
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
 set AC6_TOOLCHAIN_6_22_0=%ProgramFiles%/ArmCompilerforEmbedded6.22/bin
 set CMSIS_PACK_ROOT=%LocalAppData%/Arm/Packs
-set CMSIS_COMPILER_ROOT=%UserProfile%/cmsis-toolbox-windows-amd64/etc
 set PATH=%PATH%;%UserProfile%/cmsis-toolbox-windows-amd64/bin
+set CMSIS_COMPILER_ROOT=%UserProfile%/cmsis-toolbox-windows-amd64/etc
   {{< /tab >}}
   {{< tab header="Linux/macOS" language="shell">}}
 export AC6_TOOLCHAIN_6_22_0=$HOME/ArmCompilerforEmbedded6.22/bin
 export CMSIS_PACK_ROOT=$HOME/packs
-export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
 export PATH=$HOME/cmsis-toolbox-linux-arm64/bin:$PATH
+export CMSIS_COMPILER_ROOT=$HOME/cmsis-toolbox-linux-arm64/etc
   {{< /tab >}}
 {{< /tabpane >}}
 
-Exact paths will depend on version installed and the install directory.
+Exact paths will depend on tools versions installed and their install locations.
 
 ## Initialize CMSIS-Pack directory
 
