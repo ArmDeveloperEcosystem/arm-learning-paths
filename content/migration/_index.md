@@ -18,8 +18,8 @@ Below is a list of Neoverse CPUs, the architecture versions, and the key additio
 | ----------- | -------------------- | --------------------------------------------------------- |
 | Neoverse-N1 | Armv8.2-A            | LSE - Large System Extensions improves multi-threaded performance. |
 | Neoverse-V1 | Armv8.4-A            | SVE - Scalable Vector Extension adds high performance vector processing for HPC and AI workloads. |
-| Neoverse-N2 | Armv9.0-A            | SVE2 and Arm CCA - Extends SVE and adds Arm Confidential Compute Architecture for hardware isolation and security. |
-| Neoverse-V2 | Armv9.0-A            | SVE2 and Arm CCA - Targets high single threaded performance for HPC and AI workloads. |
+| Neoverse-N2 | Armv9.0-A            | SVE2 - Extends SVE for improved data parallelism and wider vectors. |
+| Neoverse-V2 | Armv9.0-A            | SVE2 - Targets high single threaded performance for HPC and AI workloads. |
 
 ### What cloud hardware is available today?
 
@@ -39,12 +39,11 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
-Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The largest instance has 80 vCPUs and 640 Gb of RAM in the 'c3a-highmem' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (standard) and memory-optimized workloads (highmem).
+Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The largest instance has 48 vCPUs and 192 Gb of RAM. It does not offer bare-metal instances.
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
 | T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-| C3A       | AmpereOne    | c3a-standard, c3a-highmem   | Compute-optimized - large-scale databases, media transcoding, and HPC. |
 <!-- | Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem  | General-purpose and AI/ML workloads. | -->
 
   {{< /tab >}}
