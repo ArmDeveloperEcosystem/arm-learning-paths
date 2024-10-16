@@ -1,9 +1,9 @@
 ---
-title: Build a Retrieval-Augmented Generation (RAG) application using Zilliz Cloud on Arm servers
+title: Build a RAG application using Zilliz Cloud on Arm servers
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for software developers who want to create a RAG application on Arm servers.
+who_is_this_for: This is an introductory topic for software developers who want to create a Retrieval-Augmented Generation (RAG) application on Arm servers.
 
 learning_objectives: 
     - Create a simple RAG application using Zilliz Cloud.
