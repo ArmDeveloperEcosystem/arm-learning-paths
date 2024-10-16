@@ -4,7 +4,7 @@
 title: WindowsPerf Ecosystem - the Visual Studio Extension
 minutes_to_complete: 5
 
-official_docs: https://github.com/nader-zouaoui/windowsperf-vs-extension
+official_docs: https://github.com/arm-developer-tools/windowsperf-vs-extension
 
 author_primary: Nader Zouaoui
 
