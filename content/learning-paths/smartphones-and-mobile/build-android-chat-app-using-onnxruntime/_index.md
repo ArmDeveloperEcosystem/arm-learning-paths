@@ -1,23 +1,22 @@
 ---
-title: Build an Android chat app with ONNX Runtime generate() API
+title: Build an Android chat application with ONNX Runtime API
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an intermediate topic for software developers interested in learning how to build an Android chat app with ONNX Runtime and ONNX Runtime Generate() API.
+who_is_this_for: This is an advanced topic for software developers interested in learning how to build an Android chat app with ONNX Runtime and ONNX Runtime Generate() API.
 
 learning_objectives: 
-    - Install the prerequisites for cross-compiling ONNX Runtime for Android.
     - Build ONNX Runtime and ONNX Runtime generate() API for Android.
     - Run the Phi-3 model using ONNX Runtime on an Arm-based smartphone.
 
 prerequisites:
-    - A Windows development machine with at least 16GB of RAM. (You should also be able to use Linux or Apple machines, so please replace the paths and commands as appropriate. Please note that the operation has not been tested.)
-    - An Android phone with at least 8GB of RAM (tested on Samsung Galaxy S24).
+    - A Windows development machine with at least 16GB of RAM. You should also be able to use Linux or MacOS for the build, but the instructions for it have not been included in this learning path.
+    - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
 
 author_primary: Koki Mitsunami
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
