@@ -33,16 +33,12 @@ layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 It leverages the ARM64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
 The **WindowsPerf WPA plugin** bridges the gap between the detailed output of **WindowsPerf** and the powerful capabilities of **Windows Performance Analyzer**.
 
-The plugin is built on the [`microsoft-performance-toolkit-sdk`](https://github.com/microsoft/microsoft-performance-toolkit-sdk)
-and is shipped as a single `.dll` file.
+The plugin is built on the [`microsoft-performance-toolkit-sdk`](https://github.com/microsoft/microsoft-performance-toolkit-sdk) and is shipped as a single `.dll` file.
 
 
-**Windows Performance Analyzer (WPA)** is a tool that creates graphs and data tables of Event Tracing for Windows (ETW) events
-that are recorded by Windows Performance Recorder (WPR), Xperf, or an assessment that is run in the
-Assessment Platform. WPA can open any event trace log (ETL) file for analysis.
+**Windows Performance Analyzer (WPA)** is a tool that creates graphs and data tables of Event Tracing for Windows (ETW) events that are recorded by Windows Performance Recorder (WPR), Xperf, or an assessment that is run in the Assessment Platform. WPA can open any event trace log (ETL) file for analysis.
 
-WPA's capabilities can be expanded upon using the `microsoft-performance-toolkit-sdk` by creating
-plugins which enables parsing any type of data (`.json` in this case).
+WPA's capabilities can be expanded upon using the `microsoft-performance-toolkit-sdk` by creating plugins which enables parsing any type of data (`.json` in this case).
 
 
 ## A Glimpse of the available features
@@ -58,13 +54,11 @@ The WindowsPerf GUI extension is composed of several key features, each designed
 ## Getting Started
 ### Installation 
 
-WPA is included in the Windows Assessment and Deployment Kit (Windows ADK)
-that can be downloaded [here](https://go.microsoft.com/fwlink/?linkid=2243390).
+WPA is included in the Windows Assessment and Deployment Kit (Windows ADK) that can be downloaded [here](https://go.microsoft.com/fwlink/?linkid=2243390).
 
 > The wperf WPA plugin requires a WPA version of `11.0.7.2` or higher.
 
-Once downloaded, make sure that "Windows Performance Toolkit" checkbox is
-checked under "Select the features you want to install/change".
+Once downloaded, make sure that "Windows Performance Toolkit" checkbox is checked under "Select the features you want to install/change".
 
 ![WPA Installation](_images/wpa-installation.png)
 
@@ -72,11 +66,9 @@ The plugin can be downloaded from the [releases page](https://github.com/arm-dev
 
 To install the plugin you have the option between:
 
-- Moving the plugin dll to the **CustomDataSources** directory next
-to the WPA executable (defaults to `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\CustomDataSources`).
+- Moving the plugin dll to the **CustomDataSources** directory next to the WPA executable (defaults to `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\CustomDataSources`).
 - Setting up the `WPA_ADDITIONAL_SEARCH_DIRECTORIES` env variable and moving the dll to that directory
-- Calling `wpa` from the command line and passing the plugin directory
-to the `-addsearchdir` flag (example : `wpa -addsearchdir "%USERPROFILE%\plugins"`).
+- Calling `wpa` from the command line and passing the plugin directory to the `-addsearchdir` flag (example : `wpa -addsearchdir "%USERPROFILE%\plugins"`).
 
 <img
     src="_images/about-wpa.png"
@@ -84,22 +76,18 @@ to the `-addsearchdir` flag (example : `wpa -addsearchdir "%USERPROFILE%\plugins
     style="display: block; margin: 0 auto"
 />
 
-> To verify that the plugin is loaded successfully, launch WPA then the plugin
-should appear under Help > About Windows Performance Analyzer.
+> To verify that the plugin is loaded successfully, launch WPA then the plugin should appear under Help > About Windows Performance Analyzer.
 
 
 ### Running from the command line
 
 After installing WPA, it should be added automatically to the path environnment variable.
-If it's not the case, add the WPA directory (defaults to `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit`)
-to your environnment variable.
+If it's not the case, add the WPA directory (defaults to `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit`) to your environnment variable.
 
 
-To open a json file directly from the command line, you can use the `-i` flag to specify the
-file path to open.
+To open a json file directly from the command line, you can use the `-i` flag to specify the file path to open.
 
-Example: to open a `timeline_long.json` that sits in the Downloads directory, run the following
-command in the command line:
+Example: to open a `timeline_long.json` that sits in the Downloads directory, run the following command in the command line:
 
 `wpa -i \"%USERPROFILE%\\Downloads\\timeline_long.json\"`
 
