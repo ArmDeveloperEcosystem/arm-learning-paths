@@ -21,10 +21,10 @@ further_reading:
         title: CMSIS-DSP Documentation
         link: https://arm-software.github.io/CMSIS_5/DSP/html/modules.html
         type: documentation
-    - resource:
-        title: CMSIS-DSP Testing Framework
-        link: https://github.com/ARM-software/CMSIS-DSP/tree/main/Testing
-        type: documentation
+#    - resource:
+#        title: CMSIS-DSP Testing Framework
+#        link: https://github.com/ARM-software/CMSIS-DSP/tree/main/Testing
+#        type: documentation
 
 
 # ================================================================================

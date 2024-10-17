@@ -8,16 +8,17 @@ key_ip:
 - Cortex-R
 maintopic: true
 operatingsystems_filter:
+- Android: 1
 - Baremetal: 10
-- Linux: 19
-- macOS: 1
+- Linux: 23
+- macOS: 2
 - Windows: 1
 subjects_filter:
 - CI-CD: 4
-- Containers and Virtualization: 5
+- Containers and Virtualization: 7
 - Embedded Linux: 5
-- ML: 3
-- Performance and Architecture: 11
+- ML: 4
+- Performance and Architecture: 13
 subtitle: Build secure, connected, smart IoT devices
 title: Embedded Systems
 tools_software_languages_filter:
@@ -26,31 +27,37 @@ tools_software_languages_filter:
 - Arm Development Studio: 5
 - Arm Fast Models: 4
 - Arm Virtual Hardware: 5
+- AVH: 1
 - AWS IoT Greengrass: 1
 - Balena Cloud: 1
 - Balena OS: 1
 - C: 1
+- C/C++: 1
 - ChatGPT: 1
 - Clang: 1
 - Coding: 10
+- Containerd: 1
 - DetectNet: 1
-- Docker: 7
+- Docker: 9
 - DSTREAM: 2
 - Fixed Virtual Platform: 1
 - FPGA: 1
 - Fusion 360: 1
 - GCC: 3
-- GenAI: 1
+- GenAI: 2
 - GitHub: 4
+- GitLab: 1
 - IP Explorer: 2
-- LLM: 1
+- K3s: 1
+- Kubernetes: 1
+- LLM: 2
 - Matter: 1
 - MXNet: 1
 - Neon: 1
 - Porcupine: 1
 - Python: 2
 - QEMU: 1
-- Raspberry Pi: 5
+- Raspberry Pi: 6
 - Remote.It: 1
 - Slicing software: 1
 - System Ready: 1

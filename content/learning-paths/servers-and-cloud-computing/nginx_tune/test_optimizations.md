@@ -37,7 +37,7 @@ shown below is an image of a typical multi-node test setup. On the left, there i
 
 ## Running a wrk2 test
 
-The Nginx file servers should have files to serve. If you are using the configuration files discussed in [Tune a static file server](../tune_static_file_server) or [Tune a Reverse Proxy or API Gateway](../tune_revprox_and_apigw), the following commands can be run to create some samples files to serve. You do not need to create these files in Reverse Proxies or API Gateways, because these do not serve files directly.
+The Nginx file servers should have files to serve. If you are using the configuration files discussed in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) or [Tune a Reverse Proxy or API Gateway](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_revprox_and_apigw), the following commands can be run to create some samples files to serve. You do not need to create these files in Reverse Proxies or API Gateways, because these do not serve files directly.
 
 ```
 # Create 1kb file in RP use case directory
@@ -66,4 +66,4 @@ Below is a sample command for testing an API Gateway.
 ./wrk --rate 10000000000 -t 64 -c 640 -d 60s https://<rp_apigw_ip_dns>/api_old/1kb
 ```
 
-The API Gateway shown in [Tune a Reverse Proxy or API Gateway](../tune_revprox_and_apigw) will rewrite `api_old` to `api_new`. This is why the sample files are stored in `/usr/share/nginx/html/10kb /usr/share/nginx/html/api_new` on the file servers.
+The API Gateway shown in [Tune a Reverse Proxy or API Gateway](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_revprox_and_apigw) will rewrite `api_old` to `api_new`. This is why the sample files are stored in `/usr/share/nginx/html/10kb /usr/share/nginx/html/api_new` on the file servers.

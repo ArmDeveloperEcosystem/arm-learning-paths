@@ -21,7 +21,7 @@ jobs:
     steps:
       # Check out repo and the whole history
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -33,7 +33,7 @@ jobs:
 
       # Upload report as artifact
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: outdated
           path: outdated_files.csv
@@ -49,11 +49,11 @@ jobs:
     steps:
       # Check out repo
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Download list of outdated files to test
       - name: Download a single artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: outdated
           
@@ -81,7 +81,7 @@ jobs:
            
       # Upload test reports as artifact
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: results
           path: junit-reports/*_cmd.xml

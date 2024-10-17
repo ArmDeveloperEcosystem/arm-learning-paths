@@ -33,7 +33,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Keil Studio](https://keil.arm.com/) is the next generation software development environment for Arm Cortex-M based microcontroller devices. The desktop version is available as a set of [Visual Studio Code](https://code.visualstudio.com/) extensions.
 
-Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides the same functionality, but runs in a browser and requires no installation. 
+Alternatively, [Keil Studio Cloud](/install-guides/keilstudiocloud/) provides similar functionality, but runs in a browser and requires no installation. 
 
 ## Before you begin
 
@@ -53,7 +53,7 @@ Install the Keil Studio extensions:
 
 Visual Studio Code installs the extensions. The extensions are now available in the `Activity Bar`.
 
-You will be prompted to enable an [MDK Community License](https://www.keil.arm.com/community/) for non-commercial use. Accept this option if you do not have a license and agree to non-commercial use.
+You will be prompted to enable an [MDK Community License](https://www.keil.arm.com/mdk-community/) for non-commercial use. Accept this option if you do not have a license and agree to non-commercial use.
 
 If you have a commercial license for `Keil MDK` installed, decline this option.
 

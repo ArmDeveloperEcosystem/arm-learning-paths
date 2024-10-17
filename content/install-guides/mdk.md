@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: Arm Keil MDK
+title: Arm Keil μVision
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -46,7 +46,7 @@ Follow the installation instructions provided in the [µVision User's Guide](htt
 
 Arm Keil MDK is license managed. Follow the [license setup instructions](https://developer.arm.com/documentation/101454/latest/License-Management).
 
-The MDK-Community license is free for non-commercial use. Visit [keil.arm.com](https://keil.arm.com/mdk-community) to cut your personal license (requires Arm login).
+The MDK-Community license is free for non-commercial use. Visit [Arm Keil MDK-Community Edition](https://keil.arm.com/mdk-community) for set up instructions.
 
 A free 30 day evaluation license for MDK-Professional is also available by completing the [request form](https://www.keil.com/MDKEvaluationRequest/).
 

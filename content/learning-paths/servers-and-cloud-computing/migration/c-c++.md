@@ -20,6 +20,7 @@ Linux Distribution      | GCC                  | Clang/LLVM
 ------------------------|----------------------|-------------
 Amazon Linux 2023       | 11*                  | 15*
 Amazon Linux 2          | 7*, 10               | 7, 11*
+Ubuntu 24.04		| 9, 10, 11, 12, 13*, 14 | 14, 15, 16, 17, 18*	
 Ubuntu 22.04            | 9, 10, 11*, 12       | 11, 12, 13, 14*
 Ubuntu 20.04            | 7, 8, 9*, 10         | 6, 7, 8, 9, 10, 11, 12
 Ubuntu 18.04            | 4.8, 5, 6, 7*, 8     | 3.9, 4, 5, 6, 7, 8, 9, 10
@@ -41,10 +42,11 @@ Any | `-mcpu=native` | All | All
 Neoverse-N1 | `-mcpu=neoverse-n1` | GCC-9+ | Clang/LLVM 10+
 Neoverse-V1 | `-mcpu=neoverse-v1` | GCC-11+ | Clang/LLVM 12+
 Neoverse-N2 | `-mcpu=neoverse-n2` | GCC-11+ | Clang/LLVM 12+
+Neoverse-V2 | `-mcpu=neoverse-v2` | GCC-13+    | Clang/LLVM 16+
 
 The Neoverse-N1 option `-mcpu=neoverse-n1` is available in GCC-7 on Amazon Linux2.
 
-There are other options like `-march` (ISA version) and `-mtune` (specific processor implementation). These are discussed in the [GCC Arm options documentation](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html). However, in general, only `-mcpu` should be used. `-mcpu` is basically a single option that combines `-march` and `-mcpu` together. Last, keep in mind that if an application targets an older processor, it will likely be able to execute on a newer processor (less some optimizations for the newer processor). However, if the application targets a newer processor, it might not execute on an older processor. This is true for any processor architecture, not just Arm.
+There are other options like `-march` (ISA version) and `-mtune` (specific processor implementation). These are discussed in the [GCC Arm options documentation](https://gcc.gnu.org/onlinedocs/gcc/ARM-Options.html). However, in general, only `-mcpu` should be used. `-mcpu` is basically a single option that combines `-march` and `-mtune` together. Last, keep in mind that if an application targets an older processor, it will likely be able to execute on a newer processor (less some optimizations for the newer processor). However, if the application targets a newer processor, it might not execute on an older processor. This is true for any processor architecture, not just Arm.
 
 If `-mcpu` (and `-march` and `-mtune` for that matter) are not used, GCC will use a default value for `-march` (ISA version). This default for a given version of GCC can be viewed by running the following command.
 

@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Now you know how to use the Process Watch tool to analyse your workloads to determine whether certain instructions/groups of instructions are being used. You might be interested in learning about more performance analysis methodologies on Arm based servers.
+next_step_guidance: Now you know how to use the Process Watch tool to analyse your workloads to determine whether particular instructions, or groups of instructions, are being used. You might be interested in learning about further performance analysis methodologies on Arm-based servers.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
 

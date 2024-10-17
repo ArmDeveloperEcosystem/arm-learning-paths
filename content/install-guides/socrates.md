@@ -39,7 +39,7 @@ It is available to download via the [Arm Product Download Hub](https://developer
 
 You can download Socrates as an individual standalone component, or you can download the complete success kits.
 
-For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
 ## Installation
 
@@ -63,7 +63,7 @@ See also the output of:
 
 ## Set up the product license
 
-Arm Socrates is license managed. License setup instructions are available in the [Arm License install guide](../license/).
+Arm Socrates is license managed. License setup instructions are available in the [Arm License install guide](/install-guides/license/).
 
 Configuration of some Arm IP products require a corresponding license for that IP.
 

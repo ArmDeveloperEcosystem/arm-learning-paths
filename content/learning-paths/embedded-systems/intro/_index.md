@@ -1,7 +1,7 @@
 ---
 title: Get started with Embedded Systems
 
-minutes_to_complete: 10
+minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers working on embedded systems and new to the Arm architecture.
 

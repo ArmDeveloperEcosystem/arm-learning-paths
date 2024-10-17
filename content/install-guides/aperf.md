@@ -15,7 +15,7 @@ weight: 1
 
 APerf (AWS Perf) is an open source command line performance analysis tool which saves time by collecting information which is normally collected by multiple tools such as `perf`, `sysstat`, and `sysctl`.
 
-APerf was recently created by AWS to help with Linux performance analysis.
+APerf was created by AWS to help with Linux performance analysis.
 
 In addition to the CLI, APerf includes an HTML view to visualize the collected data. 
 
@@ -50,26 +50,26 @@ Visit the [releases page](https://github.com/aws/aperf/releases/) to see a list 
 You can also download a release from the command line:
 
 ```bash { target="ubuntu:latest" }
-wget https://github.com/aws/aperf/releases/download/v0.1.9-alpha/aperf-v0.1.9-alpha-aarch64.tar.gz
+wget https://github.com/aws/aperf/releases/download/v0.1.12-alpha/aperf-v0.1.12-alpha-aarch64.tar.gz
 ```
 
 Extract the release:
 
 ```bash { target="ubuntu:latest" }
-tar xvfz aperf-v0.1.9-alpha-aarch64.tar.gz
+tar xvfz aperf-v0.1.12-alpha-aarch64.tar.gz
 ```
 
 Add the path to `aperf` in your `.bashrc` file. 
 
 ```console
-echo 'export PATH="$PATH:$HOME/aperf-v0.1.9-alpha-aarch64"' >> ~/.bashrc
+echo 'export PATH="$PATH:$HOME/aperf-v0.1.12-alpha-aarch64"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
 Alternatively, you can copy the `aperf` executable to a directory already in your search path.
 
 ```bash { target="ubuntu:latest" }
-sudo cp aperf-v0.1.9-alpha-aarch64/aperf /usr/local/bin 
+sudo cp aperf-v0.1.12-alpha-aarch64/aperf /usr/local/bin 
 ```
 
 Confirm `aperf` is installed by printing the version:
@@ -81,7 +81,7 @@ aperf --version
 The output should print the version:
 
 ```output
-aperf 0.1.0 (0c4f58c)
+aperf 0.1.0 (4b910d2)
 ```
 
 ## Verify APerf is working

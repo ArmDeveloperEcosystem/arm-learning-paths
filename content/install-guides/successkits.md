@@ -43,7 +43,7 @@ Arm Success Kits are a component of [Arm Flexible Access](https://www.arm.com/en
 
 All downloads are provided via the [Arm Product Download Hub](https://developer.arm.com/downloads).
 
-For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](../pdh).
+For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh).
 
 You can download individual components, or the complete Success Kits.
 
@@ -51,15 +51,15 @@ Bundles are provided for Windows, Linux, or Mac OS. Not all components are suppo
 
 ## Component installation and setup
 
-[User license setup](../license/)
+[User license setup](/install-guides/license/)
 
-[Install Arm Development Studio](../armds/)
+[Install Arm Development Studio](/install-guides/armds/)
 
-[Install Arm Compiler for Embedded](../armclang/)
+[Install Arm Compiler for Embedded](/install-guides/armclang/)
 
-[Install Arm Fast Models](../fm_fvp/)
+[Install Arm Fast Models](/install-guides/fm_fvp/)
 
-[Install Arm Socrates](../socrates/)
+[Install Arm Socrates](/install-guides/socrates/)
 
-[Install Arm AMBA Viz](../ambaviz/)
+[Install Arm AMBA Viz](/install-guides/ambaviz/)
 

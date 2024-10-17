@@ -7,7 +7,7 @@ weight: 3 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-Your AWS account is now [ready](../prep_aws) to be integrated into the CI/CD flow.
+Your AWS account is now [ready](/learning-paths/cross-platform/avh_cicd2/prep_aws/) to be integrated into the CI/CD flow.
 
 ## Define AWS settings to repository
 

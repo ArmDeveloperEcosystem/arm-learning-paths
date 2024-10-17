@@ -38,7 +38,7 @@ This file copies the installers to the Docker image. The exact filename(s) will 
 
 Edit the Dockerfile as necessary (`ACfE` and `FVP` arguments), else edit on the build command line (see later).
 
-Whilst installing the [compiler](/install-guides/armclang/) and [FVP library](/install-guides/fm_fvp/fvp/), the EULA(s) are silently accepted. Be sure that this is satisfactory for you.
+While installing the [compiler](/install-guides/armclang/) and [FVP library](/install-guides/fm_fvp/fvp/), the EULA(s) are silently accepted. Be sure that this is satisfactory for you.
 
 You will need to edit the licensing portion of the file to match your internal license setup. See [Arm User-Based Licenses](/install-guides/license/) for more information.
 

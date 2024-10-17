@@ -14,7 +14,7 @@ If you can record ETM on your Arm Linux system you should use it. It will genera
 
 ### What can I do about the large perf.data files ETM generates?
 
-You can use ETM AutoFDO which uses trace strobing to record small slices and will output much smaller files compared to ETM. See [Using ETM AutoFDO](../bolt-etm/#using-etm-autofdo) section for more details. Otherwise you can use SPE or Samples. SPE also generates large files.
+You can use ETM AutoFDO which uses trace strobing to record small slices and will output much smaller files compared to ETM. See [Using ETM AutoFDO](/learning-paths/servers-and-cloud-computing/bolt/bolt-etm/#using-etm-autofdo) section for more details. Otherwise you can use SPE or Samples. SPE also generates large files.
 
 ### What should I run when collecting performance profile?
 

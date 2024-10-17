@@ -1,6 +1,10 @@
 ---
 title: Build and run Arm Trusted Firmware examples on Corstone-1000
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120
 
 who_is_this_for: This an introductory topic is for software developers new to Platform Security Architecture (PSA) and Arm Trusted Firmware components
@@ -17,7 +21,7 @@ author_primary: Ronan Synnott
 
 ### Tags
 skilllevels: Introductory
-subjects: Security
+subjects: Performance and Architecture
 armips:
     - Cortex-A
     - Cortex-M

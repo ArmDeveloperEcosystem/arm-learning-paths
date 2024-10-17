@@ -10,7 +10,7 @@ The white paper presents a micro-benchmark from the DynamoRIO project. The strid
 
 The original source code is at https://github.com/DynamoRIO/dynamorio/blob/master/clients/drcachesim/tests/stride_benchmark.cpp
 
-The code below is slightly modified to increase the number of iterations so that it runs longer for performance analysis. 
+The code below is slightly modified to increase the number of iterations so that it runs longer for performance analysis.
 
 1. Use a text editor to copy the code below into a text file named `stride.cpp`:
 
@@ -119,4 +119,4 @@ The program runs for about 10-20 seconds, depending on your hardware, and the ex
 Value = 12779520
 ```
 
-The next section demonstrates how to collect metrics for performance analysis. 
+The next section demonstrates how to collect metrics for performance analysis.

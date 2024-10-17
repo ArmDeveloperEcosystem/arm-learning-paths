@@ -12,7 +12,7 @@ If you plan to build Nginx from source, you can skip to the next section. Howeve
 
 ## About Nginx documentation
 
-There are two sets of Nginx documentation. [Documentation](https://nginx.org/en/docs/) on [nginx.org](https://nginx.org) and [documentation](https://docs.nginx.com/nginx/) on [nginx.com](https://www.nginx.com/). The nginx.org documentation covers the open source version of Nginx and the nginx.com documentation covers Nginx Plus. Even if you are working with the open source version, you should explore the documentation on nginx.com and the helpful [Admin Guide](https://docs.nginx.com/nginx/admin-guide/).
+There are two sets of Nginx documentation. [Documentation](https://nginx.org/en/docs/) on [nginx.org](https://nginx.org) and [documentation](https://docs.nginx.com/nginx/) from [www.f5.com/products/nginx/nginx-plus](https://www.f5.com/products/nginx/nginx-plus). The nginx.org documentation covers the open source version of Nginx and the docs.nginx.com documentation covers Nginx Plus. Even if you are working with the open source version, you should explore the documentation on docs.nginx.com and the helpful [Admin Guide](https://docs.nginx.com/nginx/admin-guide/).
 
 You can explore the documentation to gain key insights that will help with deployment, configuration, and performance. 
 

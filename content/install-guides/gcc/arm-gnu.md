@@ -72,9 +72,9 @@ export PATH=/path/to/install/dir/bin:$PATH
 Here is a specific example for an Arm Linux host and the AArch32 bare-metal target.
 
 ```bash { target="ubuntu:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-aarch64-arm-none-eabi.tar.xz
-tar xJf arm-gnu-toolchain-12.3.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
-echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-12.3.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi.tar.xz
+tar xJf arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
+echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -98,7 +98,7 @@ Use a text editor to add the `bin` directory as a new line in `/etc/paths`.
 ```console
 sudo nano /etc/paths
 ```
-For example the path could be: `/Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/bin`
+For example the path could be: `/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin`
 
 The `/etc/paths` file is a list of paths to search.
 
@@ -109,15 +109,15 @@ The `/etc/paths` file is a list of paths to search.
 /bin
 /usr/sbin
 /sbin
-/Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/bin
+/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin
 ```
 ### Apple Silicon
 Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target. 
 
 ```console
-wget https://developer.arm.com/-/media/Files/downloads/gnu/12.3.rel1/binrel/arm-gnu-toolchain-12.3.rel1-darwin-arm64-arm-none-eabi.pkg
-sudo installer -pkg arm-gnu-toolchain-12.3.rel1-darwin-arm64-arm-none-eabi.pkg -target /
-echo '/Applications/ArmGNUToolchain/12.3.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.pkg
+sudo installer -pkg arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.pkg -target /
+echo '/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
 ```
 
 ## Installing on Windows
@@ -150,5 +150,5 @@ arm-none-eabi-gcc -v
 
 Additional examples are included in the toolchain installation at:
 ```console
-${install_dir}/_version_/share/gcc-arm-none-eabi/samples
+${install_dir}/share/gcc-arm-none-eabi/samples
 ```

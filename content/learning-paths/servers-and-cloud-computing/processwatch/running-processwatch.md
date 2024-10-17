@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Root user
-Although Process Watch can be run by a non-root user, it requires modifications made by root, which make your system less secure. It is recommended that Process Watch is instead run by root.
+Although you can run Process Watch as a non-root user, it requires modifications made by root, which makes your system less secure. It is recommended that Process Watch is instead run by root.
 
 To enable non-root users to run Process Watch, you need to run the following as root:
 ```bash
@@ -40,18 +40,18 @@ options:
   ```
 
 
-By default, Process Watch will:
- * Print results every 2 seconds
- * Print results until the tool is killed (via Ctrl+c)
- * Print all results in a table format on `stdout`
- * Profile all running processes
- * Display counts for the default filters, which are 'FPARMv8', 'NEON', 'SVE' and 'SVE2'
- * Set the sample period to every 10000 events
+By default, Process Watch:
+ * Prints results every two seconds.
+ * Prints results until the tool is killed (via Ctrl+c).
+ * Prints all results in a table format on `stdout`.
+ * Profiles all running processes.
+ * Displays counts for the default filters, which are 'FPARMv8', 'NEON', 'SVE', and 'SVE2'.
+ * Sets the sample period to every 10000 events.
 
 ## Default Process Watch output
 You can run Process Watch with no arguments:
 
-```output
+```bash
 sudo ./processwatch
 ```
 
@@ -79,7 +79,7 @@ ALL      ALL              1.18     5.12     0.00     0.00     100.00   254
 6651     packagekitd      0.00     0.00     0.00     0.00     0.39     01
 4939     sshd             0.00     0.00     0.00     0.00     0.39     01
 ```
-Every 2 seconds, the next set of samples will be appended to the bottom of the output.
+Every two seconds, the next set of samples are appended to the bottom of the output.
 
 Now use Ctrl+c to terminate the run.
 

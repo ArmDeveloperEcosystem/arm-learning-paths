@@ -47,13 +47,13 @@ The easiest way to install Go for Ubuntu on Arm is to download a release, extrac
 Download a Go release:
 
 ```bash { target="ubuntu:latest" }
-wget https://go.dev/dl/go1.20.5.linux-arm64.tar.gz
+wget https://go.dev/dl/go1.23.1.linux-arm64.tar.gz
 ```
 
 Extract the release to `/usr/local/go`:
 
 ```bash { target="ubuntu:latest" }
-sudo tar -C /usr/local -xzf ./go1.20.5.linux-arm64.tar.gz
+sudo tar -C /usr/local -xzf ./go1.23.1.linux-arm64.tar.gz
 ```
 
 Add the path to `go` in your `.bashrc` file. 
@@ -72,7 +72,7 @@ go version
 The output should print the version:
 
 ```output
-go version go1.20.5 linux/arm64
+go version go1.23.1 linux/arm64
 ```
 
 You are ready to use the Go programming language on your Arm machine running Ubuntu.

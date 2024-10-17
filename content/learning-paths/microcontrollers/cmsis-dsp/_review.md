@@ -30,6 +30,16 @@ review:
         correct_answer: 1                  
         explanation: >
             The library is provides vectorized versions of most algorithms for Helium and of most f32 algorithms for Neon.
+    - questions:
+        question: >
+            How is CMSIS-DSP library provided?
+        answers:
+            - Within a CMSIS-Pack
+            - In source code on Github
+            - Both
+        correct_answer: 3
+        explanation: >
+            CMSIS-DSP is distributed in source form on Github and within the CMSIS-Core software pack. It is licensed under Apache License 2.0.
               
 
 # ================================================================================

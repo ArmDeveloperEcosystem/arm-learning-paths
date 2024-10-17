@@ -62,7 +62,7 @@ Arm Development Studio supports Windows and Linux hosts.
 
 Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
 
-See also the Arm Performance Studio [install guide](../ams/).
+See also the Arm Performance Studio [install guide](/install-guides/ams/).
 
 If working with an Android target, you must also install Android Debug Bridge (`adb`) available with [Android SDK platform tools](https://developer.android.com/studio/releases/platform-tools).
 
@@ -72,11 +72,11 @@ Add the Android SDK platform tools directory to your `PATH` environment variable
 
 Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 
-See also the Arm Development Studio [install guide](../armds/).
+See also the Arm Development Studio [install guide](/install-guides/armds/).
 
 ## Setting up product license
 
-Arm Development Studio is license managed. License setup instructions are available in the Arm Software Licensing [install guide](../license/).
+Arm Development Studio is license managed. License setup instructions are available in the Arm Software Licensing [install guide](/install-guides/license/).
 
 Arm Performance Studio is free of charge and is not license managed.
 
@@ -96,4 +96,4 @@ Depending on your type of application, choose the appropriate guide below to get
 
 For Android users, a thorough [tutorial](https://developer.arm.com/documentation/102477) is also available.
 
-See also the [Get started with Arm Performance Studio](../../learning-paths/smartphones-and-mobile/ams/) learning path.
+See also the [Get started with Arm Performance Studio](/learning-paths/smartphones-and-mobile/ams/) learning path.

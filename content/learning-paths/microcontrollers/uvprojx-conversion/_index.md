@@ -11,8 +11,8 @@ learning_objectives:
     - Convert and build uvprojx-based projects on the command line.
 
 prerequisites:
-    - Install [Keil Studio](../../../install-guides/keilstudio_vs/) on your machine.
-    - Install [µVision](../../../install-guides/mdk/) on your machine.
+    - Install [Keil Studio](/install-guides/keilstudio_vs/) on your machine.
+    - Install [µVision](/install-guides/mdk/) on your machine.
     - Install [vcpkg](https://vcpkg.io/en/getting-started.html) for the command line flow.
     - The &micro;Vision project must use Arm Compiler 6 as the default toolchain. Arm Compiler 5 is not supported.
 

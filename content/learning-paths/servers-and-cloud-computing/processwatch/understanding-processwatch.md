@@ -7,9 +7,10 @@ layout: learningpathall
 ---
 
 ## Understanding Process Watch
-Process Watch uses the Linux `perf_events` interface to sample retired instructions. It uses a Berkeley Packet Filter (BPF) program to retrieve the Program Counter (PC) and the process ID (PID) of the process being executed. It then decodes the instruction at the PC and internally maintains counts for each instruction that is sampled.
 
-In the previous section, you saw what the output of Process Watch looks like. Lets look at what each field in the output means:
+Process Watch uses the Linux `perf_events` interface to sample retired instructions. It uses a Berkeley Packet Filter (BPF) program to retrieve the Program Counter (PC) and the Process ID (PID) of the process being executed. It then decodes the instruction at the PC and internally maintains counts for each instruction that is sampled.
+
+In the previous section, you saw what the output of Process Watch looks like. Let's look at what each field in the output means:
 
 ```output
 PID      NAME             FPARMv8  NEON     SVE      SVE2     %TOTAL   TOTAL
@@ -22,14 +23,14 @@ ALL      ALL              0.00     0.29     0.00     0.00     100.00   346
 296      multipathd       0.00     0.00     0.00     0.00     0.58     02
 ```
 
-The two columns on the far left show the process ID and name of all running processes that were sampled during that sampling period.
+The two columns on the far left show the Process ID and name of all running processes that were sampled during that sampling period.
 
-The two columns on the far right show the total number of retired instructions for each process - and what percentage of the overall system-wide retired instruction count this processes count relates to. For example, in the 2 second sample period above, there were 346 retired instructions. Of those, 279 instructions were when the processwatch (PID 17400) was running, and 279 is 80.64% of the total 346.
+The two columns on the far right show the total number of retired instructions for each process, and what percentage of the overall system-wide retired instruction count this processes count relates to. For example, in the two second sample period above, there were 346 retired instructions. Of those, 279 instructions were when the processwatch (PID 17400) was running, and 279 is 80.64% of the total 346.
 
-As can be seen, the totals per process/row add up to the overall total.
+As can be seen, the totals per process and row add up to the overall total.
 
 ## Mnemonics / Group columns
-By default, Process Watch will output counts of retired instructions for the following groups:
+By default, Process Watch output counts of retired instructions for the following groups:
 
 ```output
 FPARMv8, NEON, SVE, SVE2
@@ -37,7 +38,7 @@ FPARMv8, NEON, SVE, SVE2
 
 You can change this by using the command-line options. It is also possible to specify mnemonics instead. The allowed group names and allowed mnemonics are derived from LLVM, with the Capstone decoder providing an API to retrieve them.
 
-Lets look at an example:
+Let's look at an example:
 ```bash
  sudo ./processwatch -l
 ```
@@ -73,7 +74,7 @@ HasNEONorSME
 ...
 ```
 
-Adding `-m` to the command line arguments will list the available mnemonics:
+Adding `-m` to the command line arguments lists the available mnemonics:
 
 ```bash
  sudo ./processwatch -l -m
@@ -93,7 +94,7 @@ bfi
 bfxil
 ```
 
-There are  approximately 110 groups (processwatch -l) and  around 1700 mnemonics (processwatch -l -m)
+There are approximately 110 groups (processwatch -l) and around 1700 mnemonics (processwatch -l -m)
 
 To override the default groups, you can use the `-f` argument and specify the group or mnemonic name. You can specify multiple `-f` arguments. However you cannot have mnemonics and groups together.
 

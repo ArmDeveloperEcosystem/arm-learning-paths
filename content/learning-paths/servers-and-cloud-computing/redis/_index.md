@@ -18,6 +18,7 @@ author_primary: Elham Harirpoush
 ### Tags
 skilllevels: Introductory
 subjects: Databases
+cloud_service_providers: Google Cloud
 armips:
     - Neoverse
 operatingsystems:

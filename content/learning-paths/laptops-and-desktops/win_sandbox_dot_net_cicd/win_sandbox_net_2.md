@@ -75,7 +75,7 @@ To check that your application has been published correctly in the last step, yo
 The application should be published in your runner folder under **actions-runner\_work\sandbox-ci-cd-net\sandbox-ci-cd-net\TSP.WPF\bin\Release\net8.0-windows7.0\win-arm64\publish\**.
 
 Double-click TSP.WPF to run the application. The application starts as shown:
-![img6](../win_net/net12.png)
+![img6](net12.png)
 
 This process demonstrates how you can seamlessly integrate Windows Sandbox with GitHub Actions to automate the build and deployment of your application.
 

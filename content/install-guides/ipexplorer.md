@@ -72,7 +72,7 @@ A `SoC Concept` is the first step towards the architectural design of your devic
 
 You can select any of the Arm IPs that you wish to use, including those configured previously, and define how they can be connected.
 
-![SoC Concept #center](../_images/soc_concept.png "SoC Concept")
+![SoC Concept #center](/install-guides/_images/soc_concept.png "SoC Concept")
 
 You can invite other users to help review your design. These could be others from your organization, contacts within Arm that you are engaged with, or from a different organization that you are working with on the project.
 

@@ -2,7 +2,7 @@
 # User change
 title: Writing assembly functions
 
-weight: 3 # 1 is first, 2 is second, etc.
+weight: 6 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
@@ -11,7 +11,9 @@ You will create a C application, but add assembly language subroutines to perfor
 
 ## Create main.c
 
-Right-click `Source Group 1` and select `Add New Item`. Select `C file (.c)` and name it `main.c'.
+If using μVision, Right-click `Source Group 1` and select `Add New Item`. Select `C file (.c)` and name it `main.c`.
+
+If using Keil Studio, open `main.c` within the `Source Files` group.
 
 ## The main Function
 
@@ -120,12 +122,14 @@ To use the conditional `BLS` branch instruction, reduce by one the value `r1` is
 
 ## Build the example
 
-Save all files, and click the `Build` button (`F7`).
+Save all files, and click the `Build` icon.
 
 ## Debug the example
 
-Click the `Debug` button (`Ctrl+F5`) to load the example to the FVP. The code will stop at `main()`.
+Click the `Debug` icon to load the example to the FVP. The code will stop at `main()`.
 
-The `Call Stack + Locals` tab show the value of `a` and `b`. Initially they will have no meaningful data.
+Observe the values of `a` and `b` in the μVision `Call Stack + Locals` tab, or the Keil Studio `Watch` pane (click `+` to add to this view).
 
-`Step` (`F11`) through the code and notice how the values of `a` and `b` change. You should see the string `Hello world!` copy to `b` and then capitalize.
+Initially they will have no meaningful data.
+
+`Step` through the code and notice how the values of `a` and `b` change. Observe the string `Hello world!` copy to `b` and then capitalize.

@@ -36,7 +36,7 @@ RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 WORKDIR /home/$USER
 USER ubuntu
 
-RUN sudo apt install unzip python3-pip -y 
+RUN sudo apt-get install unzip python3-pip -y
 RUN sudo apt-get install openjdk-11-jdk -y
 
 ENV JAVA_HOME "/usr/lib/jvm/java-11-openjdk-amd64"
@@ -50,9 +50,9 @@ RUN git clone --depth 1 https://github.com/google/mediapipe.git
 WORKDIR /home/$USER/mediapipe
 
 RUN pip3 install -r requirements.txt
-RUN bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bundle r21 --accept-licenses
+RUN bash setup_android_sdk_and_ndk.sh $HOME/Android/Sdk $HOME/Android/Sdk/ndk-bundle r26d --accept-licenses
 
-ENV PATH "$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r21/toolchains/llvm/prebuilt/linux-x86_64/bin"
+ENV PATH "$PATH:$HOME/Android/Sdk/ndk-bundle/android-ndk-r26d/toolchains/llvm/prebuilt/linux-x86_64/bin"
 
 ENV GLOG_logtostderr=1
 ```
@@ -60,7 +60,7 @@ ENV GLOG_logtostderr=1
 Build the Docker image:
 
 ```
-docker build -t ubuntu-x86 -f Dockerfile .
+docker build -t ubuntu-x86 -f Dockerfile . --platform=linux/amd64
 ```
 
 Run a shell on the Docker container:

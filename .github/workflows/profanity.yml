@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true  # Fetch Hugo Themes
           fetch-depth: 0 
@@ -32,8 +32,8 @@ jobs:
           cat profanity_log.txt
       
       - name: Export profanities
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: profanities
           path: profanity_log.txt
-          retention-days: 7
+          retention-days: 5

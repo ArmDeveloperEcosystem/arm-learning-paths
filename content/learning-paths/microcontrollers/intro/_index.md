@@ -6,8 +6,8 @@ minutes_to_complete: 10
 who_is_this_for: This is an introductory topic for software developers working on microcontroller applications and new to the Arm architecture.
 
 learning_objectives:
-    - Understand where the Arm architecture is used in microcontrollers
-    - Find microcontroller hardware to use for software development
+    - Understand where the Arm architecture is used in microcontrollers.
+    - Find microcontroller hardware to use for software development.
 
 prerequisites:
     - None

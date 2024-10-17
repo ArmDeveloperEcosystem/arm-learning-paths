@@ -1,15 +1,15 @@
 ---
 # User change
 title: "Build and run CMSIS-DSP tests on Corstone-300 FVP"
-
-weight: 3 # 1 is first, 2 is second, etc.
+draft: true
+weight: 5 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
 The [CMSIS-DSP tests](https://github.com/ARM-software/CMSIS-DSP/blob/main/Testing) are publicly available, and are used for validation of the library. They can be run on the [Corstone-300](https://developer.arm.com/Processors/Corstone-300) Fixed Virtual Platform (FVP).
 
-These tests are primarily for Arm internal use, but users can replicate if they wish. Else proceed to the [next step](../../cmsis-dsp/_review/).
+These tests are primarily for Arm internal use, but users can replicate if they wish. Else proceed to the [next step](/learning-paths/microcontrollers/cmsis-dsp/_review/).
 
 These instructions assume an Ubuntu Linux host machine, or use of [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware).
 

@@ -67,7 +67,7 @@ int main() {
 }
 ```
 
-Compile the program:
+Compile the program as follows:
 
 ```bash 
 gcc -O3 transpose1.c -o transpose1
@@ -76,7 +76,7 @@ Run the program:
 ```bash
 ./transpose1
 ```
-The output should look like:
+The output should look like the following:
 ```output
 A[] =
 0001 0002 0003 0004
@@ -90,13 +90,13 @@ A[] =
 0004 0008 000c 0010
 ```
 
-Notice the special data types `int16x4x2_t` and `int32x2x2_t` which are used by the transpose `vtrn_s16` and `vtrn_s32` respectively. The pairs denote that there are going to be two instructions executed with a specific outcome. The corresponding assembly instructions executed are `trn1`/`trn2` for the first intrinsic and `zip1`/`zip2` for the second intrinsic.
+Note the special data types `int16x4x2_t` and `int32x2x2_t` which are used by the transpose `vtrn_s16` and `vtrn_s32` respectively. The pairs denote that there are going to be two instructions executed with a specific outcome. The corresponding assembly instructions executed are `trn1`/`trn2` for the first intrinsic and `zip1`/`zip2` for the second intrinsic.
 
-Generate the disassembly output:
+Generate the disassembly output as per below:
 ```bash
 objdump -S transpose1
 ```
-The disassembly output of the `transpose_s16_4x4` function should look like:
+The disassembly output of the `transpose_s16_4x4` function should look like the following:
 ```asm
 00000000000008f0 <transpose_s16_4x4>:
  8f0:   6d400c00        ldp     d0, d3, [x0]
@@ -183,11 +183,12 @@ unsafe fn transpose_s16_4x4_asimd(a: &mut [i16]) -> () {
 
 You will note two important differences here:
 
-* Initialization of the `int16x4_t va` array at the start of the `transpose_s16_4x4_asimd` function. In C you can just declare the variable `va` and the compiler may not complain. The compiler understands that the SIMD variable will be immediately initialized by the respective load instructions `vld1q_s16`.
-In Rust this is not the case, as the compiler insists on *all* variables being initialized on definition. It is better to initialize the array with all elements right at the beginning. You could do that in C as well, it's just that the C compiler doesn't care as much. But Rust does.
-* meta-vector constructs such as `int16x4x2_t` and `int32x2x2_t` are defined as structs in C with each element as the corresponding element of the nested array `val[]`. In Rust however they are defined as tuples, and each element is accessed directly as `0` or `1` in these cases, eg `b0.0` and `c1.1`.
+* Initialization of the `int16x4_t va` array at the start of the `transpose_s16_4x4_asimd` function.
+  - In C you can just declare the variable `va` and the compiler will not complain. The compiler knows that the SIMD variable will be immediately initialized by the respective load instructions `vld1q_s16`.
+  - In Rust this is not the case, as the compiler insists on *all* variables being initialized on definition. It is much better to initialize the array with all elements right at the beginning (you could do that in C as well but it's not enforced unlike in Rust).
+* meta-vector constructs such as `int16x4x2_t` and `int32x2x2_t` are defined as structs in C with each element as the corresponding element of the nested array `val[]`. In Rust, however, they are defined as tuples, and each element is accessed directly as `0` or `1` in these cases, e.g., `b0.0` and `c1.1`.
 
-Compile the program:
+Compile the program as follows:
 
 ```bash 
 rustc -O transpose2.rs
@@ -198,7 +199,7 @@ Run the program:
 ./transpose2
 ```
 
-The output should look similar to:
+The output should look similar to the below:
 ```output
 A[] =
 A[] =
@@ -212,12 +213,12 @@ A[] =
 0003 0007 000b 000f
 0004 0008 000c 0010
 ```
-Generate the disassembly output
+Generate the disassembly output:
 ```bash
 objdump -S transpose2
 ```
 
-The disassembly output of the Rust implementation of `transpose_s16_4x4_asimd` is shown:
+The disassembly output of the Rust implementation of `transpose_s16_4x4_asimd` is shown below:
 
 ```asm
 00000000000064b0 <_ZN10transpose217transpose_s16_4x417ha75632bf6146b962E>:
@@ -235,6 +236,6 @@ The disassembly output of the Rust implementation of `transpose_s16_4x4_asimd` i
     64dc:       6d010004        stp     d4, d0, [x0, #16]
     64e0:       d65f03c0        ret
 ```
-This matches the C disassembly as you would expect.
+As you would expect this matches the C disassembly.
 
-In the next section you will look at a more complex example.
+In the next section, you will look at a more complex example.

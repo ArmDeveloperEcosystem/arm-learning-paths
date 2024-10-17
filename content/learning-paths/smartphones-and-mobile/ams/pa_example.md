@@ -11,7 +11,7 @@ Performance Advisor creates an easy-to-read report from a Streamline capture. Th
 
 ## Generate a performance report
 
-The supplied [Arm Streamline example capture](../streamline_example) can be used to generate a `Performance Advisor` report.
+The supplied [Arm Streamline example capture](/learning-paths/smartphones-and-mobile/ams/streamline_example/) can be used to generate a `Performance Advisor` report.
 
 1. Open a terminal, and navigate to the location of the imported capture.
 

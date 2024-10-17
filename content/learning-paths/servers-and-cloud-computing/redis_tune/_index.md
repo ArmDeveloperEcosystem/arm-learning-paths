@@ -3,7 +3,7 @@ title: Learn how to tune Redis
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers who want to use Redis on Arm.
+who_is_this_for: This is an advanced topic for software developers who want to deploy Redis on Arm-based servers and follow best practices to get performance benefits.
 
 learning_objectives:
     - Learn about kernel parameters that can impact Redis performance
@@ -11,7 +11,7 @@ learning_objectives:
     - Tune a Redis configuration file for deployment
 
 prerequisites:
-    - Cloud or bare-metal installation of an Redis file server 
+    - Cloud or bare-metal installation of an Redis file server
     - Review [Learn how to deploy Redis](/learning-paths/servers-and-cloud-computing/redis/) if you do not already have Redis setup
 
 author_primary: Elham Harirpoush
@@ -19,6 +19,7 @@ author_primary: Elham Harirpoush
 ### Tags
 skilllevels: Advanced
 subjects: Databases
+cloud_service_providers: Google Cloud
 armips:
     - Neoverse
 tools_software_languages:

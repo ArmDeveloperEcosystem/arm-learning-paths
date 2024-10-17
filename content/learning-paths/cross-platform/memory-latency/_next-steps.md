@@ -5,6 +5,10 @@ recommended_path: /learning-paths/servers-and-cloud-computing/top-down-n1/
 
 further_reading:
     - resource:
+        title: Write a Dynamic Memory Allocator
+        link: https://learn.arm.com/learning-paths/cross-platform/dynamic-memory-allocator/
+        type: website
+    - resource:
         title: Memory Latency
         link: https://en.algorithmica.org/hpc/cpu-cache/latency/
         type: website

@@ -43,7 +43,7 @@ Here is a quick summary to get you started:
 | Brave         | native         | yes               |
 | Chrome        | native         | no                |
 | Edge          | native         | no                |
-| Vivaldi       | emulation      | yes               |
+| Vivaldi       | native         | yes               |
 
 Windows on Arm runs native ARM64 applications, but can also emulate 32-bit x86 and 64-bit x64 applications. Emulation is slower than native and shortens battery life, but may provide functionality you need.
 

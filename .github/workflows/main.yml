@@ -21,21 +21,22 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: true  # Fetch Hugo Themes
           fetch-depth: 0 
 
       # Sets Up Hugo
       - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-            hugo-version: '0.98.0'
+            hugo-version: '0.130.0'
             extended: true
             
-      # Post-CSS install
+      # Post-CSS install and Node.js
       - name: Install Post-CSS
         run: npm install postcss-cli
+
 
       # Builds arm-software-developer repo
       - name: Build
@@ -43,6 +44,8 @@ jobs:
           hugo --minify
           cp learn-image-sitemap.xml public/learn-image-sitemap.xml
           bin/pagefind --site "public"
+        env:
+         HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
 
       # Deploys website to AWS S3
       - name: Deploy to S3

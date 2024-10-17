@@ -6,10 +6,9 @@ weight: 6
 layout: learningpathall
 ---
 
-In this section, you will create a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)`. T
-his operation is the basis of many DCT algorithms used in multiple video codecs, including VP9, AV1, etc.
+In this section, you will create a function that implements the common operation `fdct_round_shift(a * c1 +/- b * c2)`. This operation is the basis of many discrete cosine transform (DCT) algorithms used in multiple video codecs, including VP9, AV1, etc.
 
-It is called a 'butterfly' operation in DCT and it is defined as:
+It is called a 'butterfly' operation in DCT and it is defined as the following:
 
 ```C
 #define ROUND_POWER_OF_TWO(value, n) (((value) + (1 << ((n)-1))) >> (n))
@@ -18,7 +17,7 @@ It is called a 'butterfly' operation in DCT and it is defined as:
 
 where `DCT_CONST_BITS` is defined with the value `14` for many codecs.
 
-Now SIMD implementations are able to calculate both the expressions `fdct_round_shift(a * c1 + b * c2)` and `fdct_round_shift(a * c1 - b * c2)` in a single function, for 8 x 16-bit pixel elements, reusing computations and saving multiple instructions in the process.
+SIMD implementations are able to calculate both the expressions `fdct_round_shift(a * c1 + b * c2)` and `fdct_round_shift(a * c1 - b * c2)` in a single function, for 8 x 16-bit pixel elements, reusing computations and saving multiple instructions in the process.
 
 Here is what one implementation looks like, as [taken from the `libvpx` video codec library](https://chromium.googlesource.com/webm/libvpx/+/refs/heads/main/vpx_dsp/arm/fdct_neon.h):
 
@@ -43,11 +42,11 @@ static INLINE void butterfly_two_coeff_half(const int16x4_t a,
 }
 ```
 
-This algorithm uses the widening versions of `mul`, `mull` which will take 16-bit quantities and produce a 32-bit product. In this case, the initial half 4x16-bit vectors produce products in 4 x 32-bit vectors, `a1`, `a2`. These vectors hold the quantities for the first part of the expression `a * c1` and `a * c2`.
+The above algorithm uses the widening versions of `mul` which is `mull`. This will take 16-bit quantities and produce a 32-bit product. In this case, the initial half of the 4x16-bit vectors produce products in 4 x 32-bit vectors, `a1`, `a2`. These vectors hold the quantities for the first part of the expression `a * c1` and `a * c2`.
 
-Next the `vmlal_n_s16` and `vmlsl_n_s16` intrinsics are used, which produce the quantities `a * c1 + b * c2` or `a * c1 - b * c2`, respectively.
+Next the `vmlal_n_s16` and `vmlsl_n_s16` intrinsics are used which produce the quantities `a * c1 + b * c2` or `a * c1 - b * c2` respectively.
 
-Finally, the rounding to the power of two is performed using a single intrinsic `vqrshrn_n_s32` which also narrows the results to half the original size. So in effect this calls the `SQRSHRN` instruction which performs exactly the `ROUND_POWER_OF_TWO` operation, shifting right by `DCT_CONST_BITS`. The results are placed in the respective pointer variables, as C does not allow returning a pair of values.
+Finally, the rounding to the power of two is performed using a single intrinsic `vqrshrn_n_s32` which also narrows the results to half the original size. In effect this calls the `SQRSHRN` instruction which performs exactly the `ROUND_POWER_OF_TWO` operation, shifting right by `DCT_CONST_BITS`. The results are placed in the respective pointer variables, as C does not allow returning a pair of values.
 
 ### A complete DCT 4x4 example
 
@@ -205,7 +204,7 @@ Compile the program:
 ```bash 
 gcc -O3 butterfly1.c -o butterfly1
 ```
-Run it:
+Run it as follows:
 ```bash
 ./butterfly1
 ```
@@ -224,11 +223,11 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-A 4x4 matrix `a` is initialized and a fDCT function is called on it. The function does 2 passes of the same algorithm on the elements of the array, calls the 2 butterfly functions, for one and two coefficients respectively, transposes the results in between calculations. The result is rounded and stored in the output buffer `dct`.
+A 4x4 matrix `a` is initialized and a `fDCT` function is called on it. The function carries out 2 passes of the same algorithm on the elements of the array, calls the 2 butterfly functions (for one and two coefficients respectively) and transposes the results in between the calculations. The result is rounded and stored in the output buffer `dct`.
 
-The assembly output is linked [here](../butterfly1.asm) instead of being displayed due to its size.
+The assembly output is linked [here](/learning-paths/cross-platform/simd-on-rust/butterfly1.asm) instead of being displayed due to its size.
 
-Now create a Rust version of this algorithm and save the contents below in a file named `butterfly2.rs`:
+Now create a Rust version of this algorithm and save the contents below in a file called `butterfly2.rs`:
 
 ```Rust
 #[cfg(target_arch = "aarch64")]
@@ -371,16 +370,16 @@ unsafe fn fdct4x4_vec_asimd(input: &[i16], output: &mut [i16], stride: usize) ->
 }
 ```
 
-Compile the program:
+Compile the program as follows:
 
 ```bash 
 rustc -O butterfly2.rs
 ```
-Run it:
+Run the program:
 ```bash
 ./butterfly2
 ```
-The output should look like:
+The output should look like the following:
 ```output
 A[] =
 0001 0002 0003 0004
@@ -394,20 +393,20 @@ ff71 0000 0000 0000
 fff6 0000 0000 0000
 ```
 
-The disassembly output is linked [here](../butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart perhaps from the cpu feature check at the start.
+The disassembly output is linked [here](/learning-paths/cross-platform/simd-on-rust/butterfly2.asm) for size reasons. You will see that it is very similar to the C version, apart from the cpu feature check at the start.
 
 ### Comments
 
-There are some things to highlight here, different from the previous examples:
+There are some things to highlight here:
 
-* The config declaration `#[cfg(target_arch = "aarch64")]` and the `use std::arch::aarch64::*;` are used at the top of the file, as there are many functions that need to use SIMD intrinsics and it is simpler than having to add it to every function.
-* Rust functions can return pairs of values, so there is no need for the pointer values of `add`, `sub` to be passed as arguments to the butterfly functions, like in C.
-This leads to better and more readable code. A similar thing can be achieved with C++'s `std::pair`.
+* The config declaration `#[cfg(target_arch = "aarch64")]` and the `use std::arch::aarch64::*;` are used at the top of the file as there are many functions that need to use SIMD intrinsics and it is simpler than having to add it to every function.
+* Rust functions can return pairs of values so there is no need for the pointer values of `add`, `sub` to be passed as arguments to the butterfly functions, as done in C.
+This leads to more readable code as shown below (a similar thing can also be achieved with C++'s `std::pair`).
 ```Rust
   // Rust functions can return pair of values
   (vqrshrn_n_s32::<DCT_CONST_BITS>(sum), vqrshrn_n_s32::<DCT_CONST_BITS>(diff))
 ```
-* You have probably noticed the different syntax for the intrinsics `vshl_n_s16`, `vqrshrn_n_s32` and `vshrq_n_s16`. The shift immediate is not passed as an argument but as a Rust *generics* parameter, which is similar to the C++ template system. In C you would just write:
+* You have probably noticed the different syntax for the intrinsics `vshl_n_s16`, `vqrshrn_n_s32` and `vshrq_n_s16`. The shift immediate is not passed as an argument but as a Rust *generics* parameter, which is similar to the C++ template system. In C you would just write the following:
 
 ```C
 vin[0] = vshl_n_s16(vin[0], 4);
@@ -418,7 +417,7 @@ In Rust, while that syntax is still allowed, it is encouraged to use the new gen
 vin[0] = vshl_n_s16::<4>(vin[0]);
 ```
 
-### Alternative way with std::simd
+### An alternative way with std::simd
 
-Although you could create this example with `std::simd`, it is not included in the learning path and left as an exercise for you to experiment with.
+Although you could create this example with `std::simd`, it is not included in the learning path and is left as an exercise for you to experiment with.
 

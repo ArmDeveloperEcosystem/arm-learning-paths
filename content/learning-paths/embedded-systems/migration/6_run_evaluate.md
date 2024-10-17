@@ -45,4 +45,4 @@ Emulation does not give a representative view of how efficiently the algorithms 
 
 You have now ported an `x86_64` application to `aarch64`, built and run the ported application on `aarch64` using emulation, well done!
 
-If you have access to Arm hardware, continue to the next section [Evaluating real hardware](../7_alternative). If you don't have access to Arm hardware you can jump straight to the [Review](../_review) and test your knowledge.
+If you have access to Arm hardware, continue to the next section [Evaluating real hardware](/learning-paths/embedded-systems/migration/7_alternative). If you don't have access to Arm hardware you can jump straight to the [Review](/learning-paths/embedded-systems/migration/_review) and test your knowledge.

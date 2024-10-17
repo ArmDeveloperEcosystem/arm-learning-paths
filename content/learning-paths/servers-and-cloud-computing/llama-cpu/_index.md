@@ -1,5 +1,5 @@
 ---
-title: Deploy a Large Language Model (LLM) chatbot on Arm servers
+title: Deploy a Large Language Model (LLM) chatbot with llama.cpp using KleidiAI on Arm servers
 
 minutes_to_complete: 30
 
@@ -7,12 +7,12 @@ who_is_this_for: This is an introductory topic for developers interested in runn
 
 learning_objectives:
     - Download and build llama.cpp on your Arm server.
-    - Download a pre-quantized Llama 2 model from Hugging Face.
-    - Re-quantize the model weights to take advantage of Arm improvements.
-    - Compare the pre-quantized Llama 2 model weights performance to the re-quantized weights on your Arm CPU.
+    - Download a pre-quantized Llama 3.1 model from Hugging Face.
+    - Re-quantize the model weights to take advantage of the Arm KleidiAI kernels.
+    - Compare the pre-quantized Llama 3.1 model weights performance to the re-quantized weights on your Arm CPU.
 
 prerequisites:
-    - An AWS Graviton3 c7g.2xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+    - An AWS Graviton3 c7g.16xlarge instance to test Arm performance optimizations, or any [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
 author_primary: Pareena Verma, Jason Andrews, and Zach Lasiuk
 

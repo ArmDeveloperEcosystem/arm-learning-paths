@@ -2,7 +2,7 @@ name: Test Learning Path
 on: pull_request
 jobs:
   Test-Pull-Request:
-    runs-on: ubuntu-latest
+    runs-on: arm-linux-runner
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4

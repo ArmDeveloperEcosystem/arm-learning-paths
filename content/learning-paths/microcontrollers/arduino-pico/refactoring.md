@@ -57,4 +57,4 @@ That's it! You have learned how to use interrupts. You can see how much smaller 
 
 Not only that but using interrupts makes other improvements possible. For example, you could stop the `loop()` and put the device into a very low-power state while no motion is detected, and let the interrupt power it back up to respond.
 
-You can download the complete [pir_sensor.ino](../pir_sensor_2.ino) and try it out yourself.
+You can download the complete [pir_sensor.ino](/learning-paths/microcontrollers/arduino-pico/pir_sensor_2.ino) and try it out yourself.

@@ -2,6 +2,8 @@
 title: Get started with the Scalable Matrix Extension (SME)
 
 draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 20
 

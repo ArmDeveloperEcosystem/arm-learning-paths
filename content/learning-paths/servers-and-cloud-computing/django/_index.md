@@ -11,10 +11,10 @@ learning_objectives:
     - Verify that the Django application is working correctly
 
 prerequisites:
-    - At least either an [Arm based instance](../csp/) from a cloud service provider, on-premises Arm server, or a Linux virtual machine on your Arm device.
+    - At least either an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, on-premises Arm server, or a Linux virtual machine on your Arm device.
     - Sudo access to install dependencies and to modify system configuration files.
     - Be comfortable with SSH/Linux terminal and basic system administration tasks.
-    - To install both [Nginx](../nginx/) and [PostgreSQL](../postgresql/)
+    - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
 
 author_primary: Diego Russo
 

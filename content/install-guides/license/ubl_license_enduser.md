@@ -3,7 +3,7 @@ title: UBL LLS End-user setup
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/102516
 author_primary: Ronan Synnott
-weight: 3                       
+weight: 3
 
 ### FIXED, DO NOT MODIFY
 tool_install: false             # Set to true to be listed in main selection page, else false
@@ -13,7 +13,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 ## Local License Server
 
-A [Local License Server (LLS)](../ubl_license_admin) must first be set up by your license administration team.
+A [Local License Server (LLS)](/install-guides/license/ubl_license_admin/) must first be set up by your license administration team.
 
 {{% notice Notice%}}
 A Software Success Kit is a subset of a Hardware Success Kit.
@@ -52,7 +52,7 @@ You can now [confirm your license has been checked out](#confirm).
 
 The license can also be activated in the various Arm tool IDEs.
 
-For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio)), via `Help` > `Arm License Manager` > `Manage Arm User-Based Licenses`.
+For example [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio), via `Help` > `Arm License Manager` > `Manage Arm User-Based Licenses`.
 
 Select `Activate with` > `License Server`, and enter the appropriate license server address. Click `Query` to see what license types are available, and select the appropriate one from the pull down. Click `Activate`.
 

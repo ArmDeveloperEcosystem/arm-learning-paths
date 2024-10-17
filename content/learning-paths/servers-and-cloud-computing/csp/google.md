@@ -23,7 +23,7 @@ If using an organization's account, you will likely need to consult with your in
 
 ## Browse for an appropriate instance
 
-Google Cloud offers a wide range of instance types, covering all performance (and pricing) points. For an overview of the Tau T2A instance types, see the [General-purpose machine family](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) overview.
+Google Cloud offers a wide range of instance types, covering all performance (and pricing) points. For an overview of the Tau T2A instance types, see the [General-purpose machine family](https://cloud.google.com/compute/docs/general-purpose-machines#t2a_machines) overview. 
 
 Also note which [regions](https://cloud.google.com/compute/docs/regions-zones#available) these servers are available in.
 
@@ -61,7 +61,7 @@ Select `T2A` from the `Series` pull-down menu. Then select an appropriate `Machi
 
 ### Boot disk configuration
 
-Click the `CHANGE` button if you wish to change the virtual disk size, or the operating system or version, for example to `Ubuntu 20.04 LTS`. Be sure to select Arm compatible image.
+Click the `CHANGE` button if you wish to change the virtual disk size, or the operating system or version, for example to `Ubuntu 24.04 LTS`. Be sure to select Arm compatible image.
 
 ![alt-text #center](https://user-images.githubusercontent.com/67620689/204448755-f1259724-a386-4dc3-9b88-8ece7057d4de.PNG "Edit boot disk configuration if necessary")
 

@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Example with Dot product instructions
+## An example with Dot product instructions
 
-You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the Sum of Absolute Differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c`:
+You can now continue with an example around `dotprod` intrinsics. Shown below is a program that calculates the sum of absolute differences (SAD) of a 32x32 array of 8-bit unsigned integers (`uint8_t`) using the `vdotq_u32` intrinsic. Save the contents in a file named `dotprod1.c` as shown below:
 
 ```C
 #include <stdio.h>
@@ -59,17 +59,17 @@ int main() {
 }
 ```
 
-Compile the program:
+Now compile the program as follows:
 
 ```bash 
 gcc -O3 -march=armv8.2-a+dotprod dotprod1.c -o dotprod1
 ```
 
-Run the program:
+And run the program as per below:
 ```bash
 ./dotprod1
 ```
-The output should look like:
+The output should look like the following:
 ```output
 A[0] = [ 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f ]
 B[0] = [ 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 ]
@@ -83,9 +83,9 @@ B[31] = [ 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 04 04 00 00 00 00 04 04 0
 sad = 7400
 ```
 
-Note the extra compiler flag `-march=armv8.2-a+dotprod`. This flag is used to enable the code generation for `dotprod` instructions.
+Note the extra compiler flag `-march=armv8.2-a+dotprod` as this flag is used to enable the code generation for `dotprod` instructions.
 
-Generate the disassembly output:
+Generate the disassembly output as per below:
 
 ```bash
 objdump -S dotprod1
@@ -126,9 +126,9 @@ Shown below is the disassembly output for the `sad_neon` function:
  a80:   d65f03c0        ret
  ```
 
-You will notice the use `uabd` and `udot` assembly instructions that correspond to the `vabdq_u8`/`vdotq_u32` intrinsics.
+You will notice the use of `uabd` and `udot` assembly instructions that correspond to the `vabdq_u8`/`vdotq_u32` intrinsics.
 
-Now create an equivalent Rust program using `std::arch` `dotprod` intrinsics. Save the contents shown below in a file named `dotprod2.rs`:
+Now create an equivalent Rust program using `std::arch` `neon` intrinsics. Save the contents shown below in a file named `dotprod2.rs`:
 
 ```Rust
 #![feature(stdarch_neon_dotprod)]
@@ -192,18 +192,18 @@ unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
     return vaddvq_u32(sum);
 }
 ```
-Compile the program:
+Compile the program as follows:
 
 ```bash 
 rustc -O dotprod2.rs
 ```
 
-Run it:
+Run the program as per below:
 ```bash
 ./dotprod2
 ```
 
-The output should look like:
+The output should look like the following:
 
 ```output
 A[0] = [ 00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 17 18 19 1a 1b 1c 1d 1e 1f ]
@@ -220,11 +220,11 @@ sad = 7400
 
 As you can see both executables produce the same output.
 
-Now generate the disassembly output:
+Now generate the disassembly output as shown below:
 ```bash
 objdump -S dotprod2
 ```
-The output should look like:
+The output should look like the following:
 ```asm
 0000000000006394 <_ZN4core9core_arch10arm_shared4neon9generated9vdotq_u3217h5c7bc8d63e4a993fE>:
     6394:       3dc00000        ldr     q0, [x0]
@@ -275,15 +275,15 @@ The output should look like:
     6724:       d65f03c0        ret
 ```
 
-You might notice that where you expect to see a `udot` instruction there is a `bl` which indicates a branch. The `udot` instruction is instead called in another function, which does the loads again.
+Note that where you might expect to see a `udot` instruction, there is a `bl` instruction which indicates a branch. The `udot` instruction is instead called in another function, which carries out the loads again.
 
-This seems counter-intuitive and hard to understand. The reason is that unlike C, Rust treats the intrinsics like normal functions.
+This seems counter-intuitive but the reason is that, unlike C, Rust treats the intrinsics like normal functions.
 
-Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, then code generation and performance will be almost as that with C. If it is not possible, then you might find that the same code in Rust would perform much worse than in C.
+Like functions, inlining them is not always guaranteed. If it is possible to inline the intrinsic, code generation and performance would be almost as that with C. If it is not possible, you might find that the same code in Rust performs worse than in C.
 
-Because of this, you have look carefully at the disassembly generated from your SIMD Rust code. So, how can you fix this behaviour and get the expected generated code?
+Because of this, you have to look carefully at the disassembly generated from your SIMD Rust code. So, how can you fix this behaviour and get the expected generated code?
 
-As you have seen, Rust has a very particular way to enable target features. In this particular case, you have to remember to add that `dotprod` is the required target feature. Make this change in the function `sad_vec_asimd`:
+As you have seen, Rust has a very particular way to enable target features. In this case, you have to remember to add that `dotprod` is the required target feature. Make this change in the function `sad_vec_asimd` as shown below:
 
 ```Rust
 #[cfg(target_arch = "aarch64")]
@@ -291,9 +291,13 @@ As you have seen, Rust has a very particular way to enable target features. In t
 unsafe fn sad_vec_asimd(a: &[u8], b: &[u8], w: usize, h: usize) -> u32 {
 ```
 
-Remember that `neon` support is implied with `dotprod` so there is no need to add it as well.
+Add support for both `neon` and `dotprod` target features as shown:
 
-Next, you also need to add the `#!feature` for the module's code generation at the top of the file:
+```Rust
+#[target_feature(enable = "neon", enable = "dotprod")]
+```
+
+Next, check that you have added the `#!feature` for the module's code generation at the top of the file:
 
 ```Rust
 #![feature(stdarch_neon_dotprod)]
@@ -310,7 +314,7 @@ Generate the disassembly output again:
 ```bash
 objdump -S dotprod2
 ```
-Now look at the changed disassembly output:
+Now look at the changed disassembly output as follows:
 
 ```asm
 000000000000667c <_ZN8dotprod213sad_vec_asimd17h2989b6ba09be74edE>:
@@ -333,5 +337,5 @@ Now look at the changed disassembly output:
     66bc:       d65f03c0        ret
 ```
 
-This disassembly output is now as you would expect and better performant. You will see that the compiler automatically unrolled the loop twice because it was able to figure out that the number of iterations was small. Increasing the iterations will probably disable aggressive unrolling but it will at least inline the intrinsics properly.
+This disassembly output is now as you would expect it to be as well as being better performant. You will see that the compiler automatically unrolled the loop twice because it was able to figure out that the number of iterations was small. Increasing the iterations will probably disable aggressive unrolling but it will at least inline the intrinsics properly.
 
