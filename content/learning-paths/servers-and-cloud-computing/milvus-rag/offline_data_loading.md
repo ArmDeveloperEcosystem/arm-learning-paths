@@ -5,10 +5,9 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Create a dedicated cluster
 
-In this section, you will learn how to set up a cluster on Zilliz Cloud. You will then learn how to load your private knowledge database into the cluster.
-
-### Create a dedicated cluster
+In this section, you will learn how to set up a cluster on Zilliz Cloud.
 
 Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
 
@@ -16,7 +15,7 @@ After you register, [create a cluster](https://docs.zilliz.com/docs/create-clust
 
 ![cluster](create_cluster.png)
 
-When you select the `Create Cluster` Button, you should see the cluster running in your Default Project.
+When you select the **Create Cluster** Button, you should see the cluster running in your Default Project.
 
 ![running](running_cluster.png)
 
@@ -24,7 +23,7 @@ When you select the `Create Cluster` Button, you should see the cluster running 
 You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
 {{% /notice  %}}
 
-### Create the Collection
+## Create the Collection
 
 With the dedicated cluster running in Zilliz Cloud, you are now ready to create a collection in your cluster.
 
@@ -63,7 +62,7 @@ You will use inner product distance as the default metric type. For more informa
 
 You can now prepare the data to use in this collection.
 
-### Prepare the data
+## Prepare the data
 
 In this example, you will use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the private knowledge that is loaded in your RAG dataset/collection.
 
