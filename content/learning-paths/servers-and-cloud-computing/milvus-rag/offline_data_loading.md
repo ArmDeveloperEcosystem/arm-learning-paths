@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will learn how to setup a cluster on Zilliz Cloud. You will then learn how to load your private knowledge database into the cluster.
+In this section, you will learn how to set up a cluster on Zilliz Cloud. You will then learn how to load your private knowledge database into the cluster.
 
 ### Create a dedicated cluster
 
