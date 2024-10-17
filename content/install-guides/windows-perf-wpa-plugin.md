@@ -19,6 +19,7 @@ additional_search_terms:
   - open source windows on arm
   - windows performance analyzer
   - wpa
+  - windowsperf
 ### FIXED, DO NOT MODIFY
 weight: 1 # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true # Set to true to be listed in main selection page, else false
@@ -29,8 +30,8 @@ layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 
 ## Introduction
 
-[**WindowsPerf**](https://gitlab.com/Linaro/WindowsPerf/windowsperf) is a lightweight performance profiling tool inspired by Linux perf, specifically tailored for Windows on ARM.
-It leverages the ARM64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
+[**WindowsPerf**](https://github.com/arm-developer-tools/windowsperf) is a lightweight performance profiling tool inspired by Linux perf, specifically tailored for Windows on Arm.
+It leverages the Arm64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
 The **WindowsPerf WPA plugin** bridges the gap between the detailed output of **WindowsPerf** and the powerful capabilities of **Windows Performance Analyzer**.
 
 The plugin is built on the [`microsoft-performance-toolkit-sdk`](https://github.com/microsoft/microsoft-performance-toolkit-sdk) and is shipped as a single `.dll` file.
