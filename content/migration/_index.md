@@ -48,12 +48,12 @@ Google GCP offers a varity of [virtual machine instances with Arm processors](ht
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
-Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/dpsv5-dpdsv5-series). The largest instance has 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
+Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The latest generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps).
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| psv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized instances. |
-| psv6      | Neoverse-N2  | Dpsv6, Epsv6, Fsv6 | Cobalt processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized). |
+| Dpsv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized instances. |
+| Dpsv6      | Neoverse-N2  | Dpsv6, Dpls6, Epsv6 | Cobalt 100 processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized, 8:1 mem:cpu ratio). |
 
   {{< /tab >}}
   {{< tab header="Oracle OCI">}} 
