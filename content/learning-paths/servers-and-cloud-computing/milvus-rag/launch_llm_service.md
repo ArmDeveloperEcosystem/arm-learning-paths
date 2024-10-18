@@ -6,18 +6,18 @@ weight: 4
 layout: learningpathall
 ---
 
-### Llama 3.1 model and llama.cpp
+### Llama 3.1 Model and Llama.cpp
 
 In this section, you will build and run the `llama.cpp` server program using an OpenAI-compatible API on your AWS Arm-based server instance.
 
 The [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
-[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. You can conveniently host a Llama 3.1 model using `llama.cpp`.
+[Llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. You can conveniently host a Llama 3.1 model using `llama.cpp`.
 
 
-### Download and build llama.cpp
+### Download and build Llama.cpp
 
-Run the following commands to install make, cmake, gcc, g++, and other essential tools required for building llama.cpp from source:
+Run the following commands to install make, cmake, gcc, g++, and other essential tools required for building Llama.cpp from source:
 
 ```bash
 sudo apt install make cmake -y
@@ -27,7 +27,7 @@ sudo apt install build-essential -y
 
 You are now ready to start building `llama.cpp`. 
 
-Clone the source repository for llama.cpp:
+Clone the source repository for Llama.cpp:
 
 ```bash
 git clone https://github.com/ggerganov/llama.cpp
@@ -64,7 +64,7 @@ You can now download the model using the huggingface cli:
 ```bash
 huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir . --local-dir-use-symlinks False
 ```
-The GGUF model format, introduced by the llama.cpp team, uses compression and quantization to reduce weight precision to 4-bit integers, significantly decreasing computational and memory demands and making Arm CPUs effective for LLM inference.
+The GGUF model format, introduced by the Llama.cpp team, uses compression and quantization to reduce weight precision to 4-bit integers, significantly decreasing computational and memory demands and making Arm CPUs effective for LLM inference.
 
 
 ### Re-quantize the model weights
@@ -91,10 +91,10 @@ Start the server from the command line, and it listens on port 8080:
 The output from this command should look like:
 
 ```output
-'main: server is listening on 127.0.0.1:8080 - starting the main loop
+main: server is listening on 127.0.0.1:8080 - starting the main loop
 ```
 
-You can also adjust the parameters of the launched LLM to adapt it to your server hardware to obtain ideal performance. For more parameter information, see the `llama-server --help` command.
+You can also adjust the parameters of the launched LLM to adapt it to your server hardware to achieve an ideal performance. For more parameter information, see the `llama-server --help` command.
 
 You have started the LLM service on your AWS Graviton instance with an Arm-based CPU. In the next section, you will directly interact with the service using the OpenAI SDK.
 

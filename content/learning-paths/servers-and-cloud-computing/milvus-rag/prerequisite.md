@@ -14,7 +14,7 @@ RAG applications often use vector databases to efficiently store and retrieve hi
 
 In this Learning Path, you will use [Zilliz Cloud](https://zilliz.com/cloud) for your vector storage, which is a fully managed Milvus vector database. Zilliz Cloud is available on major cloud computing service providers; for example, AWS, GCP, and Azure. 
 
-Specifically, you will use Zilliz Cloud deployed on AWS with Arm-based servers. For the LLM, you will use the Llama-3.1-8B model running on an AWS Arm-based server using `llama.cpp`. 
+Here, you will use Zilliz Cloud deployed on AWS with an Arm-based server. For the LLM, you will use the Llama-3.1-8B model also running on an AWS Arm-based server, but using `llama.cpp`. 
 
 
 ## Install dependencies

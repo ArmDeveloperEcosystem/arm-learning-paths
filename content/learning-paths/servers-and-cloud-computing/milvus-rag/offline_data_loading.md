@@ -7,29 +7,29 @@ layout: learningpathall
 ---
 ## Create a dedicated cluster
 
-In this section, you will learn how to set up a cluster on Zilliz Cloud.
+In this section, you will set up a cluster on Zilliz Cloud.
 
 Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
 
-After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. 
+After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster). 
 
-In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
+Now create a **Dedicated** cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
 
 ![cluster](create_cluster.png)
 
-When you select the **Create Cluster** Button, you should see the cluster running in your Default Project.
+When you select the **Create Cluster** Button, you should see the cluster running in your **Default Project**.
 
 ![running](running_cluster.png)
 
 {{% notice Note %}}
-You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
+You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about installing Milvus, see the [Milvus installation documentation](https://milvus.io/docs/install-overview.md).
 {{% /notice  %}}
 
 ## Create the Collection
 
-With the dedicated cluster running in Zilliz Cloud, you are now ready to create a collection in your cluster.
+With the Dedicated cluster running in Zilliz Cloud, you are now ready to create a collection in your cluster.
 
-Within your activated python virtual environment `venv`, start by creating a file named `zilliz-llm-rag.py`, and copy the contents below into it:
+Within your activated Python virtual environment `venv`, start by creating a file named `zilliz-llm-rag.py`, and copy the contents below into it:
 
 ```python
 from pymilvus import MilvusClient
@@ -59,7 +59,7 @@ milvus_client.create_collection(
 ```
 This code checks if a collection already exists and drops it if it does. If this happens, you can create a new collection with the specified parameters.
 
-If you do not specify any field information, Milvus automatically creates a default `id` field for the primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.
+If you do not specify any field information, Milvus automatically creates a default `id` field for the primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema defined fields and their values.
 You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
 
 You can now prepare the data to use in this collection.
@@ -116,10 +116,10 @@ for i, (line, embedding) in enumerate(
 
 milvus_client.insert(collection_name=collection_name, data=data)
 ```
-Run the python script, to check that you have successfully created the embeddings on the data you loaded into the RAG collection:
+Run the Python script, to check that you have successfully created the embeddings on the data you loaded into the RAG collection:
 
 ```bash
-python3 python3 zilliz-llm-rag.py
+python3 zilliz-llm-rag.py
 ```
 
 The output should look like:
