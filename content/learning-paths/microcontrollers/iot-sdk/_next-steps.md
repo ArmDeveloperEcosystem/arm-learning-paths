@@ -14,7 +14,7 @@ recommended_path: "/learning-paths/microcontrollers/tfm"
 # further_reading links to references related to this path. Can be:
     # Manuals for a tool / software mentioned   (type: documentation)
     # Blog about related topics                 (type: blog)
-    # General online references                 (type: website) 
+    # General online references                 (type: website)
 
 further_reading:
     - resource:
@@ -24,6 +24,10 @@ further_reading:
     - resource:
         title: Arm Speech Recognition Total Solution example video, using the Arm Open IoT SDK, Corstone-310 and AVH
         link: https://devsummit.arm.com/flow/arm/devsummit22/sessions-catalog/page/sessions/session/16600464346670018mPQ
+        type: website
+    - resource:
+        title: Learn more about the Corstone reference systems
+        link: https://www.arm.com/products/silicon-ip-subsystems/
         type: website
 
 # ================================================================================
