@@ -12,6 +12,9 @@ learning_objectives:
 
 prerequisites:
     - Windows desktop or development machine
+    - Windows Performance Analyzer installed
+    - WindowsPerf WPA Plugin installed
+    - (Optional) WindowsPerf installed on a WoA machine [(Installation guide)](/install-guides/wperf/)
 
 author_primary: Alaaeddine Chakroun
 
@@ -24,6 +27,8 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - WindowsPerf
+    - perf
+    - Windows Performance Analyzer
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
