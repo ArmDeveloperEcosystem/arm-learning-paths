@@ -11,7 +11,7 @@ In this section, you will learn how to set up a cluster on Zilliz Cloud.
 
 Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
 
-After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retreive the vector data as shown:
+After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
 
 ![cluster](create_cluster.png)
 
