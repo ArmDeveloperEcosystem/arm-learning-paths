@@ -24,7 +24,7 @@ review:
 
     - questions:
         question: >
-            ACL is integrated into PyTorch by default.
+            ACL is included in PyTorch.
         answers:
             - "True"
             - "False"

@@ -6,7 +6,17 @@ weight: 7
 layout: learningpathall
 ---
 
-So far, you have run individual workflows for each task of the ML lifecycle: training, testing, performance monitoring and deployment. With GitHub Actions you can build an end-to-end custom MLOPs workflow that combines and automates these individual workflows all running on your Arm-hosted runner. To demonstrate this, the repository contains a workflow in `.github/workflows/train-test-deploy-model.yml` that automates the individual steps: 
+So far, you have run three individual workflows covering the tasks in the ML lifecycle: 
+- Training 
+- Testing
+- Performance monitoring
+- Deployment
+
+With GitHub Actions, you can build an end-to-end custom MLOPs workflow that combines and automates the individual workflows.
+
+To demonstrate this, the repository contains a workflow in `.github/workflows/train-test-deploy-model.yml` that automates the individual steps. 
+
+Here is the complete **Train, Test, and Deploy Model** workflow file: 
 
 ```yaml
 name: Train, Test and Deploy Model
@@ -138,12 +148,20 @@ jobs:
           docker buildx build --platform linux/arm64 -t ${{ secrets.DOCKER_USERNAME }}/gtsrb-image:latest --push .
 ```
 
-These steps should look familiar and now they are put together to curate an end-to-end MLOPs workflow. The training and testing steps are run like before. The output report is saved and parsed to show the compare the performance changes in inference time. The trained model is updated in the repository. The deployment step connects to DockerHub, pushes the containerized model and scripts, which can then be downloaded and run. 
+These steps should look familiar and now they are put together to curate an end-to-end MLOPs workflow. 
 
-The steps depend on each other, requiring the previous one to run before the next is triggered. The entire workflow is triggered automatically any time a change is pushed into the main branch of your repository. You can also navigate to the _Train, Test and Deploy_ workflow and trigger it to run manually. The diagram below shows the end-to-end workflow:
+The training and testing steps are run like before. The output report is saved and parsed to show the compare the performance changes in inference time. 
+
+The trained model is updated in the repository. 
+
+The deployment step connects to DockerHub, pushes the containerized model and scripts, which can then be downloaded and run. 
+
+The steps depend on each other, requiring the previous one to run before the next is triggered. The entire workflow is triggered automatically any time a change is pushed into the main branch of your repository. 
+
+Using what you have learned, navigate to the **Train, Test and Deploy** workflow and run it.
+
+The diagram below shows the end-to-end workflow, the relationship between the steps, and the time required to run each step:
 
 ![#e2e-workflow](/images/e2e-workflow.png)
 
-All steps of the workflow should complete successfully.
-
-You have now run an MLOps workflow using GitHub Actions with Arm-hosted runners for managing all of the steps in your application's lifecycle.
+You have run an MLOps workflow using GitHub Actions with Arm-hosted runners for managing all of the steps in your ML application's lifecycle.
