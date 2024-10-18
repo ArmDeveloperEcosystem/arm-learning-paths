@@ -30,26 +30,26 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-WindowsPerf is a Linux Perf inspired Windows on Arm performance profiling tool. Profiling is based on ARM64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of special events, and sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.  WindowsPerf is an open-source project hosted on [GitHub](https://github.com/arm-developer-tools/windowsperf).
+WindowsPerf is a Linux Perf-inspired Windows on Arm performance profiling tool. Profiling is based on the Arm AArch64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of PMU events, and the sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.  WindowsPerf is an open-source project hosted on [GitHub](https://github.com/arm-developer-tools/windowsperf).
 
-WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. The WindowsPerf command line tool can be seamlessly integrated with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which can be downloaded from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a more user-friendly interface and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
+WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. You can seamlessly integrate the WindowsPerf command line tool with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which you can download from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a more user-friendly interface, and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
 
 
-{{% notice  Virtual Machines%}}
-WindowsPerf cannot be used on virtual machines, such as cloud instances.
+{{% notice  Note%}}
+You cannot use WindowsPerf on virtual machines, such as cloud instances.
 {{% /notice %}}
 
 ## Visual Studio and the Windows Driver Kit (WDK)
 
-WindowsPerf relies on `dll` files installed with Visual Studio (Community Edition or higher) and (optionally) installers from the Windows Driver Kit extension.
+WindowsPerf relies on `dll` files installed with Visual Studio, from the Community Edition or higher, and optionally, installers from the Windows Driver Kit extension.
 
-[Download the Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk) explains the WDK installation process.
+For information about the WDK installation process, see [Download the Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
 See also the [Visual Studio for Windows on Arm install guide](/install-guides/vs-woa/).
 
 ## Download WindowsPerf
 
-The latest release package `windowsperf-bin-<version>.zip` can be downloaded from the Arm GitHub repository:
+You can download the latest release package, `windowsperf-bin-<version>.zip` from the Arm GitHub repository:
 ```url
 https://github.com/arm-developer-tools/windowsperf/releases
 ```
@@ -70,7 +70,7 @@ tar -xmf windowsperf-bin-3.8.0.zip
 
 ## Install wperf driver
 
-You can install the kernel driver using supplied `wperf-devgen` installer.
+You can install the kernel driver using the supplied `wperf-devgen` installer.
 
 The [wperf-devgen](https://github.com/arm-developer-tools/windowsperf/blob/main/wperf-devgen/README.md) tool has been designated as the preferred installer and uninstaller for the WindowsPerf Kernel Driver in the latest release. This tool offers a simple process for managing the installation and removal of the driver.
 
@@ -108,7 +108,7 @@ Device installed successfully
 You can check everything is working by running the `wperf` executable.
 
 {{% notice  Note%}}
-Once the above driver is installed, you can use `wperf` without `Administrator` privileges.
+Once you have installed the driver, you can use `wperf` without `Administrator` privileges.
 {{% /notice %}}
 
 For example:
@@ -129,7 +129,7 @@ You see output similar to:
 ```
 ## Uninstall wperf driver
 
-You can uninstall (aka "remove") the kernel driver using supplied [wperf-devgen](#devgen_uninstall) uninstaller.
+You can uninstall (or *remove*) the kernel driver using supplied [wperf-devgen](#devgen_uninstall) uninstaller.
 
 {{% notice  Note%}}
 You must uninstall the driver as `Administrator`.
@@ -149,7 +149,7 @@ Executing command: uninstall.
 Uninstall requested.
 Root\WPERFDRIVER
 Device found
-Device uninstalled sucessfully
+Device uninstalled successfully
 ```
 
 ## Install WindowsPerf Virtual Studio Extension (optional) {#vs2022}
