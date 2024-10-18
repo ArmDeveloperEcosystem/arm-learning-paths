@@ -1,0 +1,67 @@
+---
+layout: learningpathall
+title: WindowsPerf WPA Plugin
+weight: 2
+---
+
+# Overview
+
+[**WindowsPerf**](https://github.com/arm-developer-tools/windowsperf) is a lightweight performance profiling tool inspired by Linux perf, specifically tailored for Windows on Arm.
+It leverages the Arm64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
+The **WindowsPerf WPA plugin** bridges the gap between the detailed output of **WindowsPerf** and the powerful capabilities of **Windows Performance Analyzer**.
+
+## WindowsPerf WPA Plugin releases
+
+You can find all binary releases of `WindowsPerf WPA Plugin` [here](https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases).
+
+# Installation
+
+For installation instructions see the [install guide](/install-guides/windows-perf-wpa-plugin).
+
+## Using WindowsPerf WPA Plugin
+
+In order to use the `WindowsPerf WPA Plugin`, we first need to get a `.json` output from a `wperf stat` command running on a Windows on Arm machine.
+
+### Timeline
+
+For this example we will be running the following command:
+
+```bash 
+wperf stat -m dcache -c 0,1,2,3,4,5,6,7 -t -i 0 -n 50 --json
+```
+
+Importing the generated output in WPA will show us the following graph:
+![timeline-by-core](figures/timeline-by-core.png)
+
+We can change the default grouping from `Group by core` to `Group by event` to see the following graph instead:
+![timeline-by-event](figures/timeline-by-event.png)
+
+The WindowsPerf WPA Plugin also generates a graph per event note in order to provide a more in-depth grouping of events. To see all the generated graphs we can expand the `Counting timeline` section in the graph explorer section of WPA.
+
+For this example, the following command was used instead: 
+
+```bash 
+wperf stat -t -i 0 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --json
+```
+
+![timeline-events-by-key](figures/timeline-events-by-key.png)
+
+We can double click on any graph to expand it under the Analysis tab for further data visualization. 
+
+### Telemetry
+
+The WindowsPerf WPA Plugin also allows the visualization of telemetry metrics counted similarly to counting events.
+
+For this example, the following command was used: 
+
+```bash 
+wperf stat -t -i 0 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --json
+```
+
+Similarlry to the graphs generated per event note for timeline events, we can also see the generated telemetry timeline graphs under the grapher explorer level in WPA. These graphs are generated dynamically so only the relevant metrics for the given `.json` output file are visible.
+
+![telemetry-preview](figures/telemetry-preview.png)
+
+Once expanded, a more in-depth view is visible under the Analysis tab of WPA.
+
+![telemetry-table](figures/telemetry-table.png)
