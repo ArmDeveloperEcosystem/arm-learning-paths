@@ -17,7 +17,9 @@ def dictionary_lookup(dictionary, key):
         assert value
         return True
     except Exception:
-        raise KeyError(f"\"{key}\" was not found in dictionary.")
+        logging.debug(f"\"{key}\" was not found in dictionary {dictionary}.")
+        return False
+
 
 """
 Initializes a Docker container and runs a few commands to set it up.
@@ -129,15 +131,11 @@ def check(json_file, start, stop, md_article):
     with open(json_file) as jf:
         data = json.load(jf)
 
-    # Start instances for all images
-    dictionary_lookup(data, "test_images")
-    test_images = data["test_images"]
-    if start:
-        for i_img, img in enumerate(test_images):
-            container_name = init_container(i_img=i_img, img=img)
-            logging.info(f"{container_name} initialized")
+    if dictionary_lookup(data, "test_images"):
+        test_images = data["test_images"]
     else:
-        logging.debug("Parameter start is false, skipping container(s) initialization")
+        logging.info(f"No test_images could be parsed from {md_article}, skipping")
+        return {}
 
     # Create one test suite for each image
     test_cases= [[] for img in test_images]
@@ -145,10 +143,7 @@ def check(json_file, start, stop, md_article):
     results = {img:0 for img in test_images}
 
     # Check if there are tests / code blocks
-    try:
-        dictionary_lookup(data, "ntests")
-    except KeyError as err:
-        logging.error(err)
+    if not dictionary_lookup(data, "ntests"):
         logging.info(f"No tests were parsed from {md_article}, skipping")
         return results
 
@@ -158,8 +153,11 @@ def check(json_file, start, stop, md_article):
         logging.info(f"--- Testing on {test_image} ---")
         with alive_progress.alive_bar(data["ntests"], title=test_image, stats=False) as bar:
             for n_test in range(0, data["ntests"]):
-                dictionary_lookup(data, f"{n_test}")
-                test = data[f"{n_test}"]
+                if dictionary_lookup(data, f"{n_test}"):
+                    test = data[f"{n_test}"]
+                else:
+                    logging.info(f"Error getting test from JSON file, skipping")
+                    continue
 
                 test_target = test.get("target")
                 if test_target and test_target != test_image:
@@ -181,37 +179,53 @@ def check(json_file, start, stop, md_article):
 
                 username = "ubuntu" if "arm-tools" in test_images[0] else "user"
 
-                # Copy over the file with commands
-                docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
-                subprocess.run(docker_cmd, shell=True, capture_output=True)
-                logging.debug(docker_cmd)
-                # Remove the file storing the command since we now copied it to container
-                os.remove(test_cmd_filename)
-
                 test_type = test["type"]
                 # Check type
-                if test_type == "fvp":
+                if test_type == "bash":
+                    # chmod cmd file
+                    run_command = [f"chmod +x {test_cmd_filename}"]
+                    subprocess.run(run_command, shell=True, capture_output=True)
+                    logging.debug(run_command)
+                    # execute file as is with bash
+                    run_command = [f"./{test_cmd_filename}"]
+                elif test_type == "fvp":
+                    # Start instance for image
+                    if start:
+                        container_name = init_container(i_img=n_image, img=test_image)
+                        logging.info(f"{container_name} initialized")
+                    else:
+                        logging.debug("Parameter start is false, skipping container(s) initialization")
+
+                    # copy files to docker
+                    docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
+                    subprocess.run(docker_cmd, shell=True, capture_output=True)
+                    logging.debug(docker_cmd)
+
+
                     ethos_u65 = ""
                     fvp_name = test["fvp_name"]
                     if fvp_name == "FVP_Corstone_SSE-300_Ethos-U65":
                         ethos_u65 = "ETHOS_U65=1 -e"
                         test_cwd = test["cwd"]
                     # Only allow single line commands
-                    docker_cmd = test["0"].replace(f"{fvp_name}",
+                    run_command = test["0"].replace(f"{fvp_name}",
                                                     f"docker run --rm -ti -v $PWD/shared:/shared -w {test_cwd} -e \
                                                     {ethos_u65} NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp"
                     )
-                elif test_type == "bash":
-                    docker_cmd = [f"docker exec -u {username} -w /home/{username} test_{n_image} bash {test_cmd_filename}"]
                 else:
                     logging.debug(f"Type '{test_type}' not supported for testing. Contact the maintainers if you think this is a mistake.")
                     bar(skipped=True)
                     continue
 
-                logging.debug(docker_cmd)
-                process = subprocess.run(docker_cmd, shell=True, capture_output=True)
+
+
+                logging.debug(run_command)
+                process = subprocess.run(run_command, shell=True, capture_output=True)
                 process_output = process.stdout.rstrip().decode("utf-8")
                 process_error = process.stderr.rstrip().decode("utf-8")
+
+                # Remove the file storing the command since we now ran it
+                os.remove(test_cmd_filename)
 
                 # Create test case
                 test_case_name = json_file.replace("_cmd.json","")

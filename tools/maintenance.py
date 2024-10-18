@@ -41,7 +41,6 @@ def check_lp(lp_path, link, debug):
                     # Generate _cmd.json file with instructions
                     parse.save_commands_to_json(_k, cmd, idx_header["test_maintenance"], idx_header["test_images"])
 
-
             logging.info("Checking Learning Path " + lp_path)
             # Look for _cmd.json
             l = [i for i in os.listdir(lp_path) if i.endswith("_cmd.json")]
@@ -69,6 +68,7 @@ def check_lp(lp_path, link, debug):
                         os.remove(lp_path+"/"+i)
         else:
            logging.warning(f"Learning Path {lp_path} maintenance is turned off. Add or set \"test_maintenance: true\" otherwise.")
+           exit(0)
     else:
         logging.warning("No _index.md found in Learning Path")
     return test_image_results
