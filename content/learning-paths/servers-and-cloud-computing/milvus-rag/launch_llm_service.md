@@ -6,13 +6,13 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you will build and run the `llama.cpp` server program using an OpenAI-compatible API on your running AWS Arm-based server instance.
+### Llama 3.1 model and llama.cpp
 
-### Llama 3.1 model & llama.cpp
+In this section, you will build and run the `llama.cpp` server program using an OpenAI-compatible API on your AWS Arm-based server instance.
 
 The [Llama-3.1-8B model](https://huggingface.co/cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf) from Meta belongs to the Llama 3.1 model family and is free to use for research and commercial purposes. Before you use the model, visit the Llama [website](https://llama.meta.com/llama-downloads/) and fill in the form to request access.
 
-[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open source C/C++ project that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. You can conveniently host a Llama 3.1 model using `llama.cpp`.
+[llama.cpp](https://github.com/ggerganov/llama.cpp) is an open-source C/C++ project that enables efficient LLM inference on a variety of hardware - both locally, and in the cloud. You can conveniently host a Llama 3.1 model using `llama.cpp`.
 
 
 ### Download and build llama.cpp
@@ -33,7 +33,7 @@ Clone the source repository for llama.cpp:
 git clone https://github.com/ggerganov/llama.cpp
 ```
 
-By default, `llama.cpp` builds for CPU only on Linux and Windows. You don't need to provide any extra switches to build it for the Arm CPU that you run it on.
+By default, `llama.cpp` builds for CPU only on Linux and Windows. You do not need to provide any extra switches to build it for the Arm CPU that you run it on.
 
 Run `make` to build it:
 
