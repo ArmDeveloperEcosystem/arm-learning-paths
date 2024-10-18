@@ -60,7 +60,7 @@ milvus_client.create_collection(
 This code checks if a collection already exists and drops it if it does. If this happens, you can create a new collection with the specified parameters.
 
 If you do not specify any field information, Milvus automatically creates a default `id` field for the primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema defined fields and their values.
-You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
+You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating).
 
 You can now prepare the data to use in this collection.
 
@@ -75,7 +75,7 @@ wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/m
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 ```
 
-Now load all the markdown files from the folder `milvus_docs/en/faq` into your data collection. For each document, use "# " to separate the content in the file, which can separate the content of each main part of the markdown file.
+Now load all the markdown files from the folder `milvus_docs/en/faq` into your data collection. For each document, use "# " to separate the content in the file. This divides the content of each main part of the markdown file.
 
 Open `zilliz-llm-rag.py` and append the following code to it:
 

@@ -76,7 +76,7 @@ You are now ready to use the LLM and obtain a RAG response.
 
 For the LLM, you will use the OpenAI SDK to request the Llama service you launched in the previous section. You do not need to use an API key because it is running locally on your machine. 
 
-You will then convert the retrieved documents in to a string format. Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus. Finally, use the LLM to generate a response based on the prompts.
+You will then convert the retrieved documents into a string format. Define system and user prompts for the Language Model. This prompt is assembled with the retrieved documents from Milvus. Finally, use the LLM to generate a response based on the prompts.
 
 Append the code below into `zilliz-llm-rag.py`:
 

@@ -1,5 +1,5 @@
 ---
-title: Launch LLM Server 
+title: Launch the LLM Server 
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -67,20 +67,20 @@ huggingface-cli download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf do
 The GGUF model format, introduced by the Llama.cpp team, uses compression and quantization to reduce weight precision to 4-bit integers, significantly decreasing computational and memory demands and making Arm CPUs effective for LLM inference.
 
 
-### Re-quantize the model weights
+### Requantize the model weights
 
-To re-quantize the model, run:
+To requantize the model, run:
 
 ```bash
 ./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
 ```
 
-This will output a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
+This outputs a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
 
 This requantization is optimal specifically for Graviton3. For Graviton2, the optimal requantization should be performed in the `Q4_0_4_4` format, and for Graviton4, the `Q4_0_4_8` format is the most suitable for requantization.
 
 ### Start the LLM Server
-You can utilize the `llama.cpp` server program and send requests via an OpenAI-compatible API. This allows you to develop applications that interact with the LLM multiple times without having to repeatedly start and stop it. Additionally, you can access the server from another machine where the LLM is hosted over the network.
+You can utilize the `llama.cpp` server program and send requests through an OpenAI-compatible API. This allows you to develop applications that interact with the LLM multiple times without having to repeatedly start and stop it. Additionally, you can access the server from another machine where the LLM is hosted over the network.
 
 Start the server from the command line, and it listens on port 8080:
 
