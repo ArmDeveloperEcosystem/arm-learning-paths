@@ -11,7 +11,9 @@ In this section, you will learn how to set up a cluster on Zilliz Cloud.
 
 Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
 
-After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
+After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. 
+
+In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
 
 ![cluster](create_cluster.png)
 
@@ -37,7 +39,7 @@ milvus_client = MilvusClient(
 )
 
 ```
-Replace <your_zilliz_public_endpoint> and <your zilliz_api_key> with the `URI` and `Token` for your running cluster. Refer to [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud for more details.
+Replace *<your_zilliz_public_endpoint>* and *<your zilliz_api_key>* with the `URI` and `Token` for your running cluster. Refer to [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud for further information.
 
 Now, append the following code to `zilliz-llm-rag.py` and save the contents:
 
@@ -55,16 +57,16 @@ milvus_client.create_collection(
     consistency_level="Strong",  # Strong consistency level
 )
 ```
-This code checks if a collection already exists and drops it if it does. You then, create a new collection with the specified parameters.
+This code checks if a collection already exists and drops it if it does. If this happens, you can create a new collection with the specified parameters.
 
-If you do not specify any field information, Milvus will automatically create a default `id` field for primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.
-You will use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
+If you do not specify any field information, Milvus automatically creates a default `id` field for the primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.
+You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
 
 You can now prepare the data to use in this collection.
 
 ## Prepare the data
 
-In this example, you will use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the private knowledge that is loaded in your RAG dataset/collection.
+In this example, you will use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the private knowledge that is loaded in your RAG dataset.
 
 Download the zip file and extract documents to the folder `milvus_docs`.
 
@@ -73,7 +75,7 @@ wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/m
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 ```
 
-You will load all the markdown files from the folder `milvus_docs/en/faq` into your data collection. For each document, use "# " to separate the content in the file, which can separate the content of each main part of the markdown file.
+Now load all the markdown files from the folder `milvus_docs/en/faq` into your data collection. For each document, use "# " to separate the content in the file, which can separate the content of each main part of the markdown file.
 
 Open `zilliz-llm-rag.py` and append the following code to it:
 
@@ -90,9 +92,9 @@ for file_path in glob("milvus_docs/en/faq/*.md", recursive=True):
 ```
 
 ### Insert data
-You will now prepare a simple but efficient embedding model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) that can convert the loaded text into embedding vectors.
+Now you can prepare a simple but efficient embedding model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) that can convert the loaded text into embedding vectors.
 
-You will iterate through the text lines, create embeddings, and then insert the data into Milvus.
+You can iterate through the text lines, create embeddings, and then insert the data into Milvus.
 
 Append and save the code shown below into `zilliz-llm-rag.py`:
 
