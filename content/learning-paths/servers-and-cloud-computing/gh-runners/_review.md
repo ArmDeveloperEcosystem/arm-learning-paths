@@ -8,23 +8,23 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Arm-hosted runners for use with GitHub Actions are available for Linux and Windows.
+            You can use Arm-hosted runners with GitHub Actions, and they are available for both Linux and Windows.
 
     - questions:
         question: >
-            What is the GTSRB dataset made up of?
+            What does the GTSRB dataset consist of?
         answers:
-            - Sound files of spoken German words
-            - Sound files of animal sounds
-            - Images of flower petals
-            - Images of German traffic signs
+            - Sound files of spoken German words.
+            - Sound files of animal sounds.
+            - Images of flower petals.
+            - Images of German traffic signs.
         correct_answer: 4
         explanation: >
-            GTSRB stands for German Traffic Signs Recognition Benchmark
+            GTSRB stands for German Traffic Signs Recognition Benchmark, and the dataset consists of images of German traffic signs.
 
     - questions:
         question: >
-            ACL is included in PyTorch.
+            Is ACL included in PyTorch?
         answers:
             - "True"
             - "False"
