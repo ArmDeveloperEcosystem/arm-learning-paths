@@ -30,7 +30,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            While it is possible to use ACL stand-alone, the optimized kernels are built into PyTorch through the oneDNN backend.
+            While it is possible to use Arm Compute Library independently, the optimized kernels are built into PyTorch through the oneDNN backend.
 
 
 
