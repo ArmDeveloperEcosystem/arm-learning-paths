@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for software developers intereste
 learning_objectives:
     - Set up an Arm-hosted GitHub runner.
     - Train and test a PyTorch ML model with the German Traffic Sign Recognition Benchmark (GTSRB) dataset.
-    - Compare the performance of two trained PyTorch ML models; one model compiled with OpenBLAS and oneDNN, and the other model compiled with Arm Compute Library.
+    - Compare the performance of two trained PyTorch ML models; one model compiled with OpenBLAS (Open Basic Linear Algebra Subprograms Library) and oneDNN (Deep Neural Network Library), and the other model compiled with Arm Compute Library (ACL).
     - Containerize a ML model and push the container to DockerHub.
     - Automate steps in an ML workflow using GitHub Actions.
 
