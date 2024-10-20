@@ -1,24 +1,23 @@
 ---
-title: MLOps with Arm-hosted GitHub Runners
-draft: true
+title: Optimize MLOps with Arm-hosted GitHub Runners
+
 cascade:
-    draft: true
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for software developers interested in automation for machine learning (ML) tasks.
+who_is_this_for: This is an introductory topic for software developers interested in automation for Machine Learning (ML) tasks.
 
 learning_objectives:
     - Set up an Arm-hosted GitHub runner.
     - Train and test a PyTorch ML model with the German Traffic Sign Recognition Benchmark (GTSRB) dataset.
-    - Use PyTorch compiled with OpenBLAS and oneDNN with Arm Compute Library to compare the performance of a trained model.
-    - Containerize the model and push the container to DockerHub.
-    - Automate all the steps in the ML workflow using GitHub Actions.
+    - Compare the performance of two trained PyTorch ML models; one model compiled with OpenBLAS and oneDNN, and the other model compiled with Arm Compute Library.
+    - Containerize a ML model and push the container to DockerHub.
+    - Automate steps in an ML workflow using GitHub Actions.
 
 prerequisites:
     - A GitHub account with access to Arm-hosted GitHub runners.
     - A Docker Hub account for storing container images.
-    - Some familiarity with ML and continuous integration and deployment (CI/CD) concepts.
+    - Familiarity with ML and continuous integration and deployment (CI/CD) concepts.
 
 author_primary: Pareena Verma, Annie Tallund
 
