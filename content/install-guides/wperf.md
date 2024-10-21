@@ -30,9 +30,9 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-WindowsPerf is a Linux Perf-inspired Windows on Arm performance profiling tool. Profiling is based on the Arm AArch64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of PMU events, and the sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.  WindowsPerf is an open-source project hosted on [GitHub](https://github.com/arm-developer-tools/windowsperf).
+WindowsPerf is a Linux Perf-inspired Windows on Arm performance profiling tool. Profiling is based on the Arm AArch64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of PMU events, and the sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and instruction levels.  WindowsPerf is an open-source project hosted on [GitHub](https://github.com/arm-developer-tools/windowsperf).
 
-WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. You can seamlessly integrate the WindowsPerf command line tool with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which you can download from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a more user-friendly interface, and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
+WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. You can seamlessly integrate the WindowsPerf command line tool with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which you can download from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a user-friendly interface, and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
 
 
 {{% notice  Note%}}
@@ -78,9 +78,9 @@ The [wperf-devgen](https://github.com/arm-developer-tools/windowsperf/blob/main/
 You must install the driver as `Administrator`.
 {{% /notice %}}
 
-Open a `Windows Command Prompt` terminal with `Run as administrator` enabled.
+Open a **Windows Command Prompt** terminal with **Run as administrator** selected.
 
-Make sure you are in the `windowsperf-bin-<version>` directory. 
+Make sure you are in the `windowsperf-bin-<version>` directory:
 
 ```command
 cd windowsperf-bin-3.8.0
@@ -95,7 +95,7 @@ cd wperf-driver
 wperf-devgen install
 ```
 
-The output is similar to:
+The output should be similar to:
 
 ```output 
 Executing command: install.
@@ -154,12 +154,12 @@ Device uninstalled successfully
 
 ## Install WindowsPerf Virtual Studio Extension (optional) {#vs2022}
 
-WindowsPerf GUI (Graphical User Interface) project, a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. Extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
+WindowsPerf GUI (Graphical User Interface) is a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. Extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
 
-Install by opening `Extensions` menu, select `Manage Extensions` and click `Browse`. Type `WindowsPerf` to search for Arm WindowsPerf GUI extension. Click `Install`.
+Install by opening **Extensions** menu, click **Manage Extensions**, and click **Browse**. Type `WindowsPerf` to search for Arm WindowsPerf GUI extension. Click **Install**.
 
 {{% notice How to set up wperf.exe path in the extension%}}
-In order to set the path to the `wperf.exe` executable, go to `Tools -> Options -> WindowsPerf -> WindowsPerf Path` and set the absolute path to the wperf.exe executable and then on the Validate button.
+In order to set the path to the `wperf.exe` executable, go to **Tools** -> **Options** -> **WindowsPerf** -> **WindowsPerf Path** and set the absolute path to the wperf.exe executable and then click on the **Validate** button.
 {{% /notice %}}
 
 Also, visit WindowsPerf GUI project website on [GitHub](https://github.com/arm-developer-tools/windowsperf-vs-extension) for more details and latest updates.
@@ -168,9 +168,9 @@ Also, visit WindowsPerf GUI project website on [GitHub](https://github.com/arm-d
 
 In addition to the command-line tools, `WindowsPerf` is available on the [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.windowsperf).
 
-Install by opening the `Extensions` view (`Ctrl`+`Shift`+`X`) and searching for `WindowsPerf`.　Click `Install`.
+Install by opening the **Extensions** view (Ctrl+Shift+X) and searching for `WindowsPerf`. Click **Install**.
 
-Open `Settings` (`Ctrl`+`,`) > `Extensions` > `WindowsPerf`, and specify the path to the `wperf` executable.
+Open **Settings** (Ctrl+,) > **Extensions** > **WindowsPerf**, and specify the path to the `wperf` executable.
 
 {{% notice Non-Windows on Arm host%}}
 You can only generate reports from a Windows on Arm device.
