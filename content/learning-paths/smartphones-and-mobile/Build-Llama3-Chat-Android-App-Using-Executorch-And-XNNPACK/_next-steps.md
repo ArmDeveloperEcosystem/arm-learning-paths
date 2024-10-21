@@ -1,5 +1,8 @@
 ---
-recommended_path: /learning-paths/smartphones-and-mobile/mte_on_pixel8/ 
+next_step_guidance: Now that you are familiar with building LLM applications with ExecuTorch, XNNPack and KleidiAI, you are ready to incorporate LLMs into your Android applications.
+
+recommended_path: /learning-paths/cross-platform/kleidiai-explainer/
+
 
 further_reading:
     - resource:
