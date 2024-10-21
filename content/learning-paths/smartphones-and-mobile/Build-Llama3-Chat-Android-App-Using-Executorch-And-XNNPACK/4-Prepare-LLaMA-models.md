@@ -6,15 +6,9 @@ weight: 5
 layout: learningpathall
 ---
 
-## Download and export the Llama 3 8B model
+## Download and export the Llama 3.2 1B model
 
-To get started with Llama 3, you obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3 8B model is used for this part, but the same instructions apply for other options as well with minimal modification.
-
-Install the following requirements:
-```bash
-apt-get install md5sum wget
-pip install torch fairscale fire blobfile torchao
-```
+To get started with Llama 3, you obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3.2 1B model is used for this part, but the same instructions apply for other options as well with minimal modification.
 
 Install the `llama-stack` package from `pip`.
 ```bash
@@ -30,18 +24,12 @@ When the download is finished, the installation path is printed as output.
 Successfully downloaded model to /<path-to-home>/.llama/checkpoints/Llama3.2-1B
 ```
 
-Verify by viewing the files under this path.
+Verify by viewing the downloaded files under this path:
 
 ```bash
 ls $HOME/.llama/checkpoints/Llama3.2-1B
 checklist.chk           consolidated.00.pth     params.json             tokenizer.model
 ```
-
-
-{{% notice Note %}}
-1. If you encounter the error "Sorry, we could not process your request at this moment", it might mean you have initiated two license processes simultaneously. Try modifying the affiliation field to work around it.
-2. You may have to run the `download.sh` script as root, or modify the execution privileges with `chmod`.
-{{% /notice %}}
 
 {{% notice Working Directory %}}
 The rest of the instructions should be executed from the ExecuTorch base directory.
@@ -50,14 +38,14 @@ The rest of the instructions should be executed from the ExecuTorch base directo
 Export model and generate `.pte` file. Run the Python command to export the model to your current directory.
 
 ```bash
-python3 -m examples.models.llama2.export_llama \
+python3 -m examples.models.llama.export_llama \
 --checkpoint $HOME/.llama/checkpoints/Llama3.2-1B/consolidated.00.pth \
 --params $HOME/.llama/checkpoints/Llama3.2-1B/params.json \
--kv --use_sdpa_with_kv_cache -X -qmode 8da4w \
+-kv --use_sdpa_with_kv_cache -X --xnnpack-extended-ops -qmode 8da4w \
 --group_size 256 -d fp32 \
---metadata '{"get_bos_id":128000, "get_eos_ids":[128009, 128001]}' \
+--metadata '{"get_bos_id":128000, "get_eos_ids":[128009, 128001, 128006, 128007]}' \
 --embedding-quantize 4,32 \
---output_name="llama3.2_bl256_maxlen1024.pte" \
+--output_name="llama3_1B_kv_sdpa_xnn_qe_4_128_1024_embedding_4bit.pte" \
 --max_seq_length 1024
 ```
 
