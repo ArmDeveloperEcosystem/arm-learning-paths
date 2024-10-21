@@ -8,12 +8,12 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this Learning Path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ExecuTorch and XNNPACK. You will learn how to build the ExecuTorch runtime for Llama models, build JNI libraries for the Android application, and use the libraries in the application.
+In this Learning Path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ExecuTorch and XNNPACK with KleidiAI. You will learn how to build the ExecuTorch runtime for Llama models, build JNI libraries for the Android application, and use the libraries in the application.
 
 The first step is to prepare a development environment with the required software:
 
 - Android Studio (latest version recommended).
-- Android NDK version 25.0.8775105.
+- Android NDK version 28.0.12433566.
 - Java 17 JDK.
 - Git.
 - Python 3.10 or later (these instructions have been tested with 3.10 and 3.12)
@@ -49,14 +49,16 @@ curl https://dl.google.com/android/repository/commandlinetools-mac-11076708_late
 Unzip the Android command line tools:
 
 ```
-unzip commandlinetools.zip
+unzip commandlinetools.zip -d android-sdk
 ```
 
-Install the NDK in the directory that Android Studio installed the SDK. This is generally `~/Library/Android/sdk` by default:
+Install the NDK in the directory that Android Studio installed the SDK. This is generally `~/Library/Android/sdk` by default. Set the requirement environment variables:
 
 ```
 export ANDROID_HOME="$(realpath ~/Library/Android/sdk)"
-./cmdline-tools/bin/sdkmanager --sdk_root="${ANDROID_HOME}" --install "ndk;25.0.8775105"
+export PATH=$ANDROID_HOME/cmdline-tools/bin/:$PATH
+sdkmanager --sdk_root="${ANDROID_HOME}" --install "ndk;28.0.12433566"
+export ANDROID_NDK=$ANDROID_HOME/ndk/28.0.12433566/
 ```
 
 ## Install Java 17 JDK
@@ -67,18 +69,18 @@ Select an appropriate download for your development machine operating system.
 
 Downloads are available for macOS as well as Linux.
 
-## Install Git
+## Install Git and cmake
 
 For macOS use [Homebrew](https://brew.sh/):
 
 ``` bash
-brew install git
+brew install git cmake
 ```
 
 For Linux, use the package manager for your distribution:
 
 ``` bash
-sudo apt install git-all
+sudo apt install git-all cmake
 ```
 
 ## Install Python 3.10
@@ -93,7 +95,7 @@ For Linux:
 
 ``` bash
 sudo apt update
-udo apt install software-properties-common -y
+sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt install Python3.10
 ```
