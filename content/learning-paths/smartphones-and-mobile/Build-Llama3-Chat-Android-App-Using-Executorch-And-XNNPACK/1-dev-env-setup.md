@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this Learning Path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ExecuTorch and XNNPACK with KleidiAI. You will learn how to build the ExecuTorch runtime for Llama models, build JNI libraries for the Android application, and use the libraries in the application.
+In this Learning Path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ExecuTorch and XNNPACK with [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai). Arm has worked with the Meta team to integrate KleidiAI into ExecuTorch through XNNPACK. These improvements increase the throughput of quantized LLMs running on Arm chips that contain the i8mm (8-bit integer matrix multiply) processor feature. You will learn how to build the ExecuTorch runtime for Llama models with KleidiAI, build JNI libraries for the Android application, and use the libraries in the application.
 
 The first step is to prepare a development environment with the required software:
 
