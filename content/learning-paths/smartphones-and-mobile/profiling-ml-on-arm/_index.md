@@ -17,7 +17,7 @@ author_primary: Ben Clark
 
 ### Tags
 skilllevels: Intermediate
-subjects: PLACEHOLDER SUBJECT
+subjects: Machine Learning
 armips:
     - Cortex-X
     - Cortex-A

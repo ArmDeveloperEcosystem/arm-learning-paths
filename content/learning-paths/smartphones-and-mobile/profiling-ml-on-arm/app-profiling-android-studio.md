@@ -6,8 +6,6 @@ weight: 4
 layout: learningpathall
 ---
 
-## PLACEHOLDER HEADER OF SECOND STEP
-YOUR CONTENT GOES HERE
+## Android Memory Profiling
+Memory is often a problem in ML, with ever bigger models and data. For profiling an Android app's memory, Android Studio has a built-in profiler. This can be used to monitor the memory usage of your app, and to find memory leaks.
 
-IMAGE HERE:
-![example image alt-text#center](example-picture.png "Figure 1. Example image caption")
