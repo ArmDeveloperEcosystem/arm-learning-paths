@@ -3,7 +3,7 @@ title: Optimize MLOps with Arm-hosted GitHub Runners
 
 cascade:
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers interested in automation for Machine Learning (ML) tasks.
 
