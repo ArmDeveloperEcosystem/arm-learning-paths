@@ -97,7 +97,7 @@ For Linux:
 sudo apt update
 sudo apt install software-properties-common -y
 sudo add-apt-repository ppa:deadsnakes/ppa
-sudo apt install Python3.10
+sudo apt install Python3.10 python3.10-venv
 ```
 
 You now have the required development tools installed.
