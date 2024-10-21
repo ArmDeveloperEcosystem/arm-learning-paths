@@ -32,7 +32,7 @@ The machine running workflows is called a _runner_.
 
 ## Arm-hosted GitHub runners
 
-Hosted GitHub runners are provided by GitHub so you don't need to setup and manage cloud infrastructure. Arm-hosted GitHub runners use the Arm architecture so you can build and test software without cross-compiling or instruction emulation.
+Hosted GitHub runners are provided by GitHub so you don't need to set up and manage cloud infrastructure. Arm-hosted GitHub runners use the Arm architecture so you can build and test software without cross-compiling or instruction emulation.
 
 Arm-hosted GitHub runners enable you to optimize your workflows, reduce cost, and improve energy consumption. 
 
@@ -84,4 +84,4 @@ You will learn how to use the GTSRB dataset to train the model. The dataset is f
 
 The GTSRB dataset is also good for comparing performance and accuracy of different models and to compare and contrast different PyTorch backends. 
 
-Continue to the next section to learn how to setup an end-to-end MLOps workflow using Arm-hosted GitHub runners.
+Continue to the next section to learn how to set up an end-to-end MLOps workflow using Arm-hosted GitHub runners.
