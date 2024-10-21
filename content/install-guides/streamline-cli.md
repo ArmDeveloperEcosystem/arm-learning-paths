@@ -70,20 +70,20 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ## Using Python scripts
 
-The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
+The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. 
+
+Create a virtual environment:
 
 ```sh
 # From Bash
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
-
-# From inside the virtual environment
-python3 -m pip install -r ./<install>/bin/requirements.txt
 ```
 
+The prompt of your terminal has (sl-venv) as a prefix indicating the virtual environment is active.
+
 {{% notice Note%}}
-The instructions in this guide assume you have added the `<install>/bin/`
-directory to your `PATH` environment variable, and that you run all Python commands from inside the virtual environment.
+The instructions assume that you run all Python commands from inside the virtual environment.
 {{% /notice %}}
 
 ## Installing the tools {.reference}
@@ -94,8 +94,14 @@ To download the latest version of the tool and extract it to the current working
 
 ```sh
 wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
-
 python3 get-streamline-cli.py install
+python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
+```
+
+If you want to add the Streamline tools to your search path:
+
+```sh
+export PATH=$PATH:$PWD/streamline_cli_tools/bin
 ```
 
 The script can also be used to download a specific version, or install to a user-specified directory:
