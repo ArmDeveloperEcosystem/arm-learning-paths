@@ -24,6 +24,8 @@ Make sure you can confirm $ANDROID_NDK/build/cmake/android.toolchain.cmake is av
 
 ### 2. Build ExecuTorch and associated libraries for Android with KleidiAI 
 
+You are now ready to build ExecuTorch for Android by taking advantage of the performance optimization provided by the [KleidiAI](https://gitlab.arm.com/kleidi/kleidiai) kernels. 
+
 Use `cmake` to cross-compile ExecuTorch:
 
 ``` bash
@@ -46,6 +48,9 @@ cmake -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
 
 cmake --build cmake-out-android -j7 --target install --config Release
 ```
+{{% notice Note %}}
+Make sure you add -DEXECUTORCH_XNNPACK_ENABLE_KLEIDI=ON option to enable support for KleidiAI kernels in ExecuTorch with XNNPack.
+{{% /notice %}}
 
 ### 3. Build Llama runner for android
 
@@ -117,4 +122,4 @@ I 00:00:09.624432 executorch:stats.h:154] 	Time to first generated token:	0.2020
 I 00:00:09.624434 executorch:stats.h:161] 	Sampling time over 127 tokens:	0.110000 (seconds)
 ```
 
-You have successfully run the llama 3.1 1B model on your Android smartphone with ExecuTorch using KleidiAI.
+You have successfully run the llama 3.1 1B model on your Android smartphone with ExecuTorch using KleidiAI kernels.
