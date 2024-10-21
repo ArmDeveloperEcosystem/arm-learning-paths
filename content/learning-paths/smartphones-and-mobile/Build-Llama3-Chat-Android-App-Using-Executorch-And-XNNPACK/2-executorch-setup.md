@@ -41,13 +41,9 @@ git clone https://github.com/pytorch/executorch.git
 cd executorch
 git submodule sync
 git submodule update --init
+./install_requirements.sh
 ./install_requirements.sh --pybind xnnpack
-./examples/models/llama2/install_requirements.sh
+./examples/models/llama/install_requirements.sh
 ```
-
-{{% notice Note %}}
-You can safely ignore the following error on failing to import lm_eval running the install_requirements.sh scripts:
-`Failed to import examples.models due to lm_eval conflict`
-{{% /notice %}}
 
 When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!
