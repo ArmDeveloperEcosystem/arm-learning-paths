@@ -4,298 +4,287 @@ import logging
 import os
 import subprocess
 import json
-import yaml
-from junit_xml import TestSuite, TestCase
+from junit_xml import TestCase
+import alive_progress
+
+"""
+Checks a dictionary for a given key. Helper function to avoid runtime errors.
+"""
+def dictionary_lookup(dictionary, key):
+    try:
+        # Try that the value exists, and that it is not None
+        value = dictionary[key]
+        assert value
+        return True
+    except Exception:
+        logging.debug(f"\"{key}\" was not found in dictionary {dictionary}.")
+        return False
 
 
-'''
-Parse header and patch file with test results
-'''
-def patch(article, results, lk):
-    with open(article, mode='r') as f:
-        content = f.read()
-        f.close()
-        header = []
+"""
+Initializes a Docker container and runs a few commands to set it up.
 
-    for i in content:
-        start = content.find("---") + 3
-        end = content.find("---", start)
+    - Install dependencies
+    - Set up user permissions
+    - Remove the default .bashrc on Ubuntu (since it returns when not interactive)
+    - Allow write permissions on shared folder
 
-        if end == start-3:
-            # No header
-            logging.debug("No header found in {}".format(article))
-            return
-        else:
-            header = content[start:end]
-            markdown = content[end+3:]
-            data = yaml.safe_load(header, )
+If the passed image is not supported, an IOError is thrown.
+"""
+def init_container(i_img, img):
+    # Launch
+    container_name = f"test_{i_img}"
+    logging.info(f"Initializing {container_name} -> {img}")
+    init_docker_cmd = [f"docker run --rm -t -d -v $PWD/shared:/shared --name test_{i_img} {img}"]
+    logging.debug(init_docker_cmd)
+    subprocess.run(init_docker_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
-    # Update status or create section
-    arr = []
-    
-    # Check if this is a learning path
-    if isinstance(results, list) and data.get("test_images"):
-        for res in data["test_images"]:
-            failed = False
-            for el in (results):
-                if el[res] != 0:
-                    logging.debug("Status on {}: FAILED".format(res))
-                    arr.append("failed")
-                    failed = True
-                    break
+    package_manager = ""
+    user = ""
+    if img.startswith(("ubuntu", "mongo", "arm-tools")):
+        package_manager = "apt"
+        user = "sudo"
+    elif "fedora" in img:
+        package_manager = "yum"
+        user = "wheel"
+    else:
+        raise IOError(f"Image {img} not supported")
 
-            if not failed:
-                logging.debug("Status on {}: passed".format(res))
-                arr.append("passed")
-    elif data.get("test_images"):
-        for res in data["test_images"]:
-            if results[res] != 0:
-                logging.debug("Status on {}: FAILED".format(res))
-                arr.append("failed")
-            else:
-                logging.debug("Status on {}: passed".format(res))
-                arr.append("passed")    
+    docker_cmd = [f"docker exec test_{i_img} {package_manager} update"]
+    logging.debug(docker_cmd)
+    subprocess.run(docker_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
-    data["test_status"] = arr
+    if "arm-tools" in img:
+        # These images already have a 'ubuntu' user account set up
+        pass
 
-    data["test_link"] = lk
+    docker_cmd = [
+                f"docker exec {container_name} {package_manager} install -y sudo wget curl git",
+                f"docker exec {container_name} useradd user -m -G {user}",
+                f"docker exec {container_name} bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"",
+                f"docker exec {container_name} rm /home/user/.bashrc",
+                f"docker exec {container_name} chmod ugo+rw /shared"
+                ]
+    for cmd in docker_cmd:
+        logging.debug(cmd)
+        subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
-    # update markdown files with test results
-    with open(article, mode='w') as f:
-        f.write("---\n")
-        yaml.dump(data, f)
-        f.write("---")
-        f.close()
+    return container_name
 
-    # write the rest of the content
-    with open(article, mode='a') as f:
-        for i in markdown:
-            f.write(i)
-        f.close()
+"""
+Checks the test for a number of commands and write it to the test command file.
+"""
+def write_commands_to_file(test_cmd_filename, test):
+    # Write series of commands in this file
+    cmd = ""
+    f = open(test_cmd_filename, "w")
 
+    # Check if:
+    # - A file needs to be sourced
+    # - Working directory is specified
+    # - An environment variable is specified
+    cmd_args = {
+                "env_source":"source",
+                "cwd":"cwd",
+                "env":"export"
+                }
+    for cmd_arg in cmd_args.keys():
+        if cmd_arg in test:
+            # Retrieve the command as string
+            cmd_arg_test = test[cmd_arg] if isinstance(test[cmd_arg], str) else test[cmd_arg][0]
+            cmd = cmd_args[cmd_arg] + cmd_arg_test
+            write_cmd_to_file(f, test_cmd_filename, cmd)
 
-'''
-Read json file and run commands in Docker
-'''
-def check(json_file, start, stop):
+    # Check if commands need to be run before the test
+    if "pre_cmd" in test:
+        pre_cmd = test["pre_cmd"]
+        cmd = pre_cmd
+        write_cmd_to_file(f, test_cmd_filename, cmd)
+
+    # Check if the test has multiple lines
+    if test.get("ncmd"):
+        for cmd_line in range(0, test["ncmd"]):
+            if "expected" in test.keys():
+                # Do not run output commands
+                if cmd_line in test["expected"]:
+                    continue
+            cmd = test[f"{cmd_line}"]
+            write_cmd_to_file(f, test_cmd_filename, cmd)
+
+    f.close()
+    return cmd
+
+"""
+Write a command to a file and log it for debugging.
+"""
+def write_cmd_to_file(f, test_cmd_filename, cmd):
+    logging.debug(f"Command argument written to {test_cmd_filename}: {cmd}")
+    cmd_str = f"{cmd}\n"
+    f.write(cmd_str)
+    logging.info(cmd_str)
+
+"""
+Parse JSON file with commands from the Markdown article,
+run commands in Docker and log the result in the console.
+"""
+def check(json_file, start, stop, md_article):
     with open(json_file) as jf:
         data = json.load(jf)
 
-    # Start instances for all images
-    if start and data.get("image"):
-        for i, img in enumerate(data["image"]):
-            # Launch
-            logging.info("Container instance test_{} is {}".format(i, img))
-            cmd = ["docker run --rm -t -d -v $PWD/shared:/shared --name test_{} {}".format(i, img)]
-            logging.debug(cmd)
-            subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-
-            # Create user and configure
-            if  "arm-tools" in img:
-                # These images already have a 'ubunutu' user account set up.
-                cmd = ["docker exec test_{} apt update".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-            elif "ubuntu" in img or "mongo" in img:
-                cmd = ["docker exec test_{} apt update".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} apt install -y sudo wget curl git".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} useradd user -m -G sudo".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                # The default .bashrc on Ubuntu returns when not interactive so removing it
-                cmd = ["docker exec test_{} rm /home/user/.bashrc".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                # Allow write permissions on shared folder
-                cmd = ["docker exec test_{} chmod ugo+rw /shared".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-            elif "fedora" in img:
-                cmd = ["docker exec test_{} yum update".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} yum install -y sudo wget curl git".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} useradd user -m -G wheel".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                cmd = ["docker exec test_{} bash -c \"cat << EOF > /etc/sudoers.d/user\n user ALL=(ALL) NOPASSWD:ALL\nEOF\"".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-                # Allow write permissions on shared folder
-                cmd = ["docker exec test_{} chmod ugo+rw /shared".format(i)]
-                logging.debug(cmd)
-                subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
-
-        logging.info("Container(s) initialization completed")
+    if dictionary_lookup(data, "test_images"):
+        test_images = data["test_images"]
     else:
-        logging.debug("Skip container(s) launch")
+        logging.info(f"No test_images could be parsed from {md_article}, skipping")
+        return {}
 
-    if data.get("image"):
-        # Create 1 test suite for each image
-        test_cases= [[] for img in data["image"]]
-        # Create array to store test result
-        results = {img:0 for img in data["image"]}
-    else:
-        test_cases = []
-        results = {}
+    # Create one test suite for each image
+    test_cases= [[] for img in test_images]
+    # Create array to store test result
+    results = {img:0 for img in test_images}
 
-    # Check if there are tests
-    if not "ntests" in data.keys():
+    # Check if there are tests / code blocks
+    if not dictionary_lookup(data, "ntests"):
+        logging.info(f"No tests were parsed from {md_article}, skipping")
         return results
 
-    # Run bash commands
-    print(data["ntests"])
-    for i in range(0, data["ntests"]):
-        if not data.get("{}".format(i)):
-            continue
-        print(i)
-        t = data["{}".format(i)]
-        print(t)
-
-        # Check if file name is specified
-        if "file_name" in t:
-            fn = t["file_name"]
-        else:
-            fn = ".tmpcmd"
-
-        # Write series of commands in this file
-        c = ""
-        f = open(fn, "w")
-        # Check if a file needs to be sourced
-        if "env_source" in t:
-            env_source = t["env_source"]
-            c = "source " + env_source
-            logging.debug("Copying command to file to file {}: {}".format(fn, c))
-            f.write("{}\n".format(c))
-        # Check if env var are specified
-        if "env" in t:
-            env = t["env"]
-            for el in env:
-                c = "export " + el
-                logging.debug("Copying command to file to file {}: {}".format(fn, c))
-                f.write("{}\n".format(c))
-        # Check if commands need to be run beforehand
-        if "pre_cmd" in t:
-            pre_cmd = t["pre_cmd"]
-            c = pre_cmd
-            logging.debug("Copying command to file to file {}: {}".format(fn, c))
-            f.write("{}\n".format(c))
-        # Check if cwd is specified
-        if "cwd" in t:
-            c = "cd " + t["cwd"]
-            logging.debug("Copying command to file {}: {}".format(fn, c))
-            f.write("{}\n".format(c))
-        if t.get("ncmd"):
-            for j in range(0, t["ncmd"]):
-                if "expected" in t.keys():
-                    # Do not run output commands
-                    if j == (int(eval(t["expected"]))-1):
-                        break
-                c = t["{}".format(j)]
-                logging.debug("Copying command to file {}: {}".format(fn, c))
-                f.write("{}\n".format(c))
-        f.close()
-
-        # Check if a target is specified
-        if "target" in t:
-            # get element index of instance
-            idx = data["image"].index(t["target"])
-            inst = range(idx, idx+1)
-        else:
-            inst = range(0, len(data["image"]))
-
-        username = "ubuntu" if "arm-tools" in data["image"][0] else "user"
-        for k in inst:
-            # Copy over the file with commands
-            cmd = ["docker cp {} test_{}:/home/{}/".format(fn, k, username)]
-            subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            logging.debug(cmd)
-
-            # Check type
-            if t["type"] == "fvp":
-                # Only allow single line commands
-                if t["fvp_name"] == "FVP_Corstone_SSE-300_Ethos-U65":
-                    cmd = t["0"].replace("FVP_Corstone_SSE-300_Ethos-U65", "docker run --rm -ti -v $PWD/shared:/shared -w {} -e ETHOS_U65=1 -e NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp".format(t["cwd"]))
+    # Run code blocks
+    test_images = data["test_images"]
+    for n_image, test_image in zip(range(0, len(test_images)), test_images):
+        logging.info(f"--- Testing on {test_image} ---")
+        with alive_progress.alive_bar(data["ntests"], title=test_image, stats=False) as bar:
+            for n_test in range(0, data["ntests"]):
+                if dictionary_lookup(data, f"{n_test}"):
+                    test = data[f"{n_test}"]
                 else:
-                    cmd = t["0"].replace("FVP_Corstone_SSE-300_Ethos-U55", "docker run --rm -ti -v $PWD/shared:/shared -w {} -e NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp".format(t["cwd"]))
-            elif t["type"] == "bash":
-                cmd = ["docker exec -u {} -w /home/{} test_{} bash {}".format(username, username, k, fn)]
-            else:
-                logging.debug("Omitting type: {}".format(t["type"]))
-                cmd = []
+                    logging.info(f"Error getting test from JSON file, skipping")
+                    continue
 
-            if cmd != []:
-                logging.debug(cmd)
-                p = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                test_target = test.get("target")
+                if test_target and test_target != test_image:
+                    pass
+                elif not test_target:
+                    pass
+                elif test_target:
+                    pass
+                else:
+                    bar(skipped=True)
+                    continue
 
-                # create test case
-                test_cases[k].append(TestCase("{}_{}_test-{}".format(json_file.replace("_cmd.json",""), data["image"][k], i), c, 0, p.stdout.rstrip().decode("utf-8"), ''))
+                if "file_name" in test:
+                    test_cmd_filename = test["file_name"]
+                else:
+                    test_cmd_filename = ".tmpcmd"
 
-                ret_code = 0
-                if "ret_code" in t.keys():
-                    ret_code = int(t["ret_code"])
+                cmd = write_commands_to_file(test_cmd_filename, test)
 
-                # if success
-                if p.returncode == ret_code:
-                    # check with expected result if any
-                    if "expected" in t.keys():
-                        t_expected = t.get("{}".format(int(eval(t["expected"]))-1))
-                        if t_expected:
-                            exp = t[t_expected]
-                            # strip out '\n' and decode byte to string
-                            if exp == p.stdout.rstrip().decode("utf-8"):
-                                msg = "Test passed"
-                            else:
-                                msg = "ERROR (unexpected output. Expected {} but got {})".format(exp, p.stdout.rstrip().decode("utf-8"))
-                                test_cases[k][-1].add_failure_info(msg)
-                                results[data["image"][k]] = results[data["image"][k]]+1
+                username = "ubuntu" if "arm-tools" in test_images[0] else "user"
+
+                test_type = test["type"]
+                # Check type
+                if test_type == "bash":
+                    # chmod cmd file
+                    run_command = [f"chmod +x {test_cmd_filename}"]
+                    subprocess.run(run_command, shell=True, capture_output=True)
+                    logging.debug(run_command)
+                    # execute file as is with bash
+                    run_command = [f"./{test_cmd_filename}"]
+                elif test_type == "fvp":
+                    # Start instance for image
+                    if start:
+                        container_name = init_container(i_img=n_image, img=test_image)
+                        logging.info(f"{container_name} initialized")
                     else:
-                        msg = "Test passed"
+                        logging.debug("Parameter start is false, skipping container(s) initialization")
+
+                    # copy files to docker
+                    docker_cmd = [f"docker cp {test_cmd_filename} test_{n_image}:/home/{username}/"]
+                    subprocess.run(docker_cmd, shell=True, capture_output=True)
+                    logging.debug(docker_cmd)
+
+
+                    ethos_u65 = ""
+                    fvp_name = test["fvp_name"]
+                    if fvp_name == "FVP_Corstone_SSE-300_Ethos-U65":
+                        ethos_u65 = "ETHOS_U65=1 -e"
+                        test_cwd = test["cwd"]
+                    # Only allow single line commands
+                    run_command = test["0"].replace(f"{fvp_name}",
+                                                    f"docker run --rm -ti -v $PWD/shared:/shared -w {test_cwd} -e \
+                                                    {ethos_u65} NON_INTERACTIVE=1 --name test_fvp flebeau/arm-corstone-300-fvp"
+                    )
                 else:
-                    msg = "ERROR (command failed. Return code is {} but expected {})".format(p.returncode, ret_code)
-                    test_cases[k][-1].add_failure_info(msg)
-                    results[data["image"][k]] = results[data["image"][k]]+1
+                    logging.debug(f"Type '{test_type}' not supported for testing. Contact the maintainers if you think this is a mistake.")
+                    bar(skipped=True)
+                    continue
 
-                logging.debug("Test {}: {}".format(i, msg))
-                logging.info("{:.0f}% of all tests completed on instance test_{}".format(i/data["ntests"]*100, k))
 
-        # Remove file with list of commands
-        os.remove(fn)
 
-    logging.info("100% of all tests completed")
+                logging.debug(run_command)
+                process = subprocess.run(run_command, shell=True, capture_output=True)
+                process_output = process.stdout.rstrip().decode("utf-8")
+                process_error = process.stderr.rstrip().decode("utf-8")
 
-    # add to test suite and write junit results
-    ts = []
-    for k in range(0, len(data["image"])):
-        ts.append(TestSuite("{} {}".format(json_file,data["image"][k]), test_cases[k]))
+                # Remove the file storing the command since we now ran it
+                os.remove(test_cmd_filename)
 
-    with open(json_file.replace(".json", ".xml"), mode='w') as lFile:
-        TestSuite.to_file(lFile, ts, prettyprint=True)
-        lFile.close()
-        logging.info("Results written in {}".format(json_file.replace(".json", ".xml")))
+                # Create test case
+                test_case_name = json_file.replace("_cmd.json","")
+                test_case = TestCase(f"{test_case_name}_{test_images[n_image]}_test-{n_image}",
+                                        cmd, 0, process_output, '')
+                test_cases[n_image].append(test_case)
+                test_ret_code = int(test["ret_code"]) if test.get("ret_code") else 0
+
+                test_passed = False
+                # if success
+                if process.returncode == test_ret_code:
+                    # check with expected result if any
+                    if "expected" in test.keys():
+                        for line in test["expected"]:
+                            exp = test[str(line)]
+                            if exp == process_output:
+                                test_passed = True
+                                msg = "PASSED"
+                            else:
+                                msg = f"ERROR. Expected '{exp}'"
+                                test_cases[n_image][-1].add_failure_info(msg)
+                                results[test_images[n_image]] = results[test_images[n_image]]+1
+                    else:
+                        test_passed = True
+                        msg = "PASSED"
+                else:
+                    msg = f"ERROR. Expected return code {test_ret_code} but got {process.returncode}"
+                    test_cases[n_image][-1].add_failure_info(msg)
+                    results[test_images[n_image]] = results[test_images[n_image]]+1
+                bar()
+                if not test_passed and process_error:
+                    logging.info(f"{process_error}")
+                elif not test_passed and process_output:
+                    logging.info(f"{process_output}")
+                else:
+                    logging.debug(f"{process_output}")
+                logging.info(f"{msg}")
+                logging.info("---------")
+
+        result = "failed" if results[test_images[n_image]] else "passed"
+        logging.info(f"Tests {result} on {test_image}")
+
+    # Remove command file if no tests existed
+    if os.path.exists(test_cmd_filename):
+        os.remove(test_cmd_filename)
 
     # Stop instance
     if stop:
-        logging.info("Terminating container(s)...")
-        for i, img in enumerate(data["image"]):
-            cmd = ["docker stop test_{}".format(i)]
-            logging.debug(cmd)
-            subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        logging.debug("Terminating container(s)")
+        for i_img, img in enumerate(test_images):
+            cleanup_cmd = [f"docker stop test_{i_img}"]
+            logging.debug(cleanup_cmd)
+            subprocess.run(cleanup_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
 
-        logging.info("Removing shared directory...")
-        cmd = ["sudo rm -rf shared"]
-        logging.debug(cmd)
-        subprocess.run(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+        logging.debug("Removing shared directory")
+        cleanup_cmd = ["rm -rf shared"]
+        logging.debug(cleanup_cmd)
+        subprocess.run(cleanup_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     else:
-        logging.debug("Skip container(s) termination...")
+        logging.debug("Parameter stop is false, skipping container(s) termination")
 
     return results
