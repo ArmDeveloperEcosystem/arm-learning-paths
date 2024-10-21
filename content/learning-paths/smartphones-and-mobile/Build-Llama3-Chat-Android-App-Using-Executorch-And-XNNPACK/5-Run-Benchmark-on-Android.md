@@ -108,13 +108,13 @@ adb shell "cd /data/local/tmp/llama && ./llama_main --model_path llama3_1B_kv_sd
 The output should look something like this.
 
 ```
-I 00:00:06.316668 executorch:stats.h:111]       Prompt Tokens: 55    Generated Tokens: 54
-I 00:00:06.316669 executorch:stats.h:117]       Model Load Time:                3.929000 (seconds)
-I 00:00:06.316671 executorch:stats.h:127]       Total inference time:           1.500000 (seconds)       Rate:   36.000000 (tokens/second)
-I 00:00:06.316674 executorch:stats.h:135]               Prompt evaluation:      0.154000 (seconds)       Rate:   357.142857 (tokens/second)
-I 00:00:06.316676 executorch:stats.h:146]               Generated 54 tokens:    1.346000 (seconds)       Rate:   40.118871 (tokens/second)
-I 00:00:06.316678 executorch:stats.h:154]       Time to first generated token:  0.154000 (seconds)
-I 00:00:06.316680 executorch:stats.h:161]       Sampling time over 109 tokens:  0.052000 (seconds)
+I 00:00:09.624421 executorch:stats.h:111] 	Prompt Tokens: 54    Generated Tokens: 73
+I 00:00:09.624423 executorch:stats.h:117] 	Model Load Time:		3.464000 (seconds)
+I 00:00:09.624425 executorch:stats.h:127] 	Total inference time:		2.871000 (seconds)		 Rate: 	25.426681 (tokens/second)
+I 00:00:09.624427 executorch:stats.h:135] 		Prompt evaluation:	0.202000 (seconds)		 Rate: 	267.326733 (tokens/second)
+I 00:00:09.624430 executorch:stats.h:146] 		Generated 73 tokens:	2.669000 (seconds)		 Rate: 	27.351068 (tokens/second)
+I 00:00:09.624432 executorch:stats.h:154] 	Time to first generated token:	0.202000 (seconds)
+I 00:00:09.624434 executorch:stats.h:161] 	Sampling time over 127 tokens:	0.110000 (seconds)
 ```
 
 You have successfully run the llama 3.1 1B model on your Android smartphone with ExecuTorch using KleidiAI.
