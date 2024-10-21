@@ -2,34 +2,36 @@
 review:
     - questions:
         question: >
-            Can Milvus run on Arm?
+            Can Arm-hosted runners be used with GitHub Actions?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            Milvus can run on Arm-based systems. Milvus supports deployment on Arm-based machines, whether it's through Zilliz Cloud, Docker, or Kubernetes.
+            Arm-hosted runners for use with GitHub Actions are available for Linux and Windows.
 
     - questions:
         question: >
-            Can Meta Llama 3.1 run on Arm?
+            What is the GTSRB dataset made up of?
         answers:
-            - "Yes"
-            - "No"
-        correct_answer: 1
+            - Sound files of spoken German words
+            - Sound files of animal sounds
+            - Images of flower petals
+            - Images of German traffic signs
+        correct_answer: 4
         explanation: >
-            You can use the Llama 3.1-8B model from Meta on Arm-based servers with llama.cpp. 
+            GTSRB stands for German Traffic Signs Recognition Benchmark
 
     - questions:
         question: >
-            Which of the following is true about Zilliz Cloud?
+            ACL is included in PyTorch.
         answers:
-            - "It is a fully managed version of Milvus vector database."
-            - "It is a self-hosted version of Milvus vector database."
+            - "True"
+            - "False"
         correct_answer: 1
         explanation: >
-            Zilliz Cloud is a fully managed version of Milvus. 
-               
+            While it is possible to use ACL stand-alone, the optimized kernels are built into PyTorch through the oneDNN backend.
+
 
 
 # ================================================================================

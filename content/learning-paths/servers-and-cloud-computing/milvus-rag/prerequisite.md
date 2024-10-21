@@ -1,5 +1,5 @@
 ---
-title: Install dependencies
+title: Overview and Install dependencies
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,14 +8,20 @@ layout: learningpathall
 
 ## Overview
 
-In this Learning Path, you will learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based servers. RAG applications often use vector databases to efficiently store and retrieve high-dimensional vector representations of text data. Vector databases are optimized for similarity search and can handle large volumes of vector data, making them ideal for the retrieval component of RAG systems. In this example, you will utilize [Zilliz Cloud](https://zilliz.com/cloud), the fully-managed Milvus vector database as your vector storage. Zilliz Cloud is available on major cloud such as AWS, GCP and Azure. In this demo you will use Zilliz Cloud deployed on AWS with Arm based servers. For the LLM, you will use the `Llama-3.1-8B` model running on an AWS Arm-based server using `llama.cpp`. 
+In this Learning Path, you will learn how to build a Retrieval-Augmented Generation (RAG) application on Arm-based servers. 
+
+RAG applications often use vector databases to efficiently store and retrieve high-dimensional vector representations of text data. Vector databases are optimized for similarity search and can handle large volumes of vector data, making them ideal for the retrieval component of RAG systems. 
+
+In this Learning Path, you will use [Zilliz Cloud](https://zilliz.com/cloud) for your vector storage, which is a fully managed Milvus vector database. Zilliz Cloud is available on major cloud computing service providers; for example, AWS, GCP, and Azure. 
+
+Here, you will use Zilliz Cloud deployed on AWS with an Arm-based server. For the LLM, you will use the Llama-3.1-8B model also running on an AWS Arm-based server, but using `llama.cpp`. 
 
 
 ## Install dependencies
-This Learning Path has been tested on an AWS Graviton3 `c7g.2xlarge` instance running Ubuntu 22.04 LTS system.
-You need at least four cores and 8GB of RAM to run this example. Configure disk storage up to at least 32 GB.
+This Learning Path has been tested on an AWS Graviton3 `C7g.2xlarge` instance running an Ubuntu 22.04 LTS system.
+You need at least four cores and 8GB of RAM to run this example. Configure the disk storage up to at least 32 GB.
 
-After you launch the instance, connect to it and run the following commands to prepare the environment.
+After you have launched the instance, connect to it, and run the following commands to prepare the environment.
 
 Install python:
 
