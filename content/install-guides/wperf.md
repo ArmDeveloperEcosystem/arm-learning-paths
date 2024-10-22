@@ -41,7 +41,7 @@ You cannot use WindowsPerf on virtual machines, such as cloud instances.
 
 ## Visual Studio and the Windows Driver Kit (WDK)
 
-WindowsPerf relies on `dll` files installed with Visual Studio, from the Community Edition or higher, and optionally, installers from the Windows Driver Kit extension.
+WindowsPerf relies on `dll` files installed with Visual Studio, from the Community Edition or higher and, optionally, installers from the Windows Driver Kit extension.
 
 For information about the WDK installation process, see [Download the Windows Driver Kit (WDK)](https://learn.microsoft.com/en-us/windows-hardware/drivers/download-the-wdk).
 
@@ -154,7 +154,7 @@ Device uninstalled successfully
 
 ## Install WindowsPerf Virtual Studio Extension (optional) {#vs2022}
 
-WindowsPerf GUI (Graphical User Interface) is a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. Extension is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
+WindowsPerf GUI (Graphical User Interface) is a Visual Studio 2022 extension designed to bring a seamless UI experience to WindowsPerf, the command-line performance profiling tool for Windows on Arm. It is available on the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Arm.WindowsPerfGUI).
 
 Install by opening **Extensions** menu, click **Manage Extensions**, and click **Browse**. Type `WindowsPerf` to search for Arm WindowsPerf GUI extension. Click **Install**.
 
