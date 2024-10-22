@@ -163,4 +163,4 @@ You can output `wperf stat` command in JSON format. Use `--json` command line op
 {{% /notice %}}
 
 
-Example use cases are provided in the WindowsPerf [documentation](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/blob/main/wperf/README.md#counting-model).
+Example `wperf stat` command use cases are provided in the WindowsPerf [documentation](https://github.com/arm-developer-tools/windowsperf/tree/main/wperf#counting-model).
