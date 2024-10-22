@@ -28,7 +28,8 @@ Currently SPE is available on Windows On Arm in Test Mode only!
 
 For this learning path you will need:
 * A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
-* CPU must support Arm SPE, an optional feature in ARMv8.2 hardware - we will show you how to check your CPU compatibility using WindowsPerf command-line tool.
+  * Note: The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with Arm SPE (Statistical Profiling Extension) support enabled. To install this version download release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
+* CPU must support Arm SPE extension, an optional feature in ARMv8.2 hardware - we will show you how to check your CPU compatibility using WindowsPerf command-line tool.
 * Basic knowledge of git and Python.
   * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
 
