@@ -10,12 +10,6 @@ The cheat sheet for the `wperf` command line tool focuses specifically on counti
 
 ## WindowsPerf cheat sheet (PMU Counting Examples)
 
-- List all events and metrics available on your host with extended information:
-
-```command
-wperf list -v
-```
-
 - Count events `inst_spec`, `vfp_spec`, `ase_spec` and `ld_spec` on core #0 for 3 seconds:
 
 ```command
@@ -28,7 +22,7 @@ wperf stat -e inst_spec,vfp_spec,ase_spec,ld_spec -c 0 --timeout 3
 wperf stat -m imix -e l1i_cache -c 7 --timeout 10.5
 ```
 
-Count in timeline mode (output counting to CSV file) metric `imix` 3 times on core #1 with 2 second intervals (delays between counts). Each count will last 5 seconds:
+- Count in timeline mode (output counting to CSV file) metric `imix` 3 times on core #1 with 2 second intervals (delays between counts). Each count will last 5 seconds:
 
 ```command
 wperf stat -m imix -c 1 -t -i 2 -n 3 --timeout 5
@@ -37,10 +31,12 @@ wperf stat -m imix -c 1 -t -i 2 -n 3 --timeout 5
 ## WindowsPerf cheat sheet (PMU Sampling Examples)
 
 - Launch and pin `python_d.exe –c 10**10**100` to core no. 1 and sample given image name:
+
 ```command
 start /affinity 2 python_d.exe -c 10**10**100
 wperf sample -e ld_spec:100000 -c 1 --pe_file python_d.exe --image_name python_d.exe
 ```
+
 Same workflow can be wrapped with `wperf record` command, see example below:
 
 - Launch `python_d.exe -c 10**10**100` process and start sampling event `ld_spec` with frequency `100000` on core no. 1 for 30 seconds.
@@ -55,13 +51,15 @@ Add `--annotate` or `--disassemble` to `wperf record` command line parameters to
 
 ## WindowsPerf cheat sheet (SPE Examples)
 
-Double-dash operator can be used with SPE as well:
+Use Arm SPE optional extension to sample on core no. 1 process `python_d.exe`. SPE filter `load_filter` / `ld` enables collection of load sampled operations, including atomic operations that return a value to a register.
+
+Note: Double-dash operator `--` can be used with SPE as well to launch the process.
 
 ```command
 wperf record -e arm_spe_0/ld=1/ -c 1 -– python_d.exe -c 10**10**100
 ```
 
-Above command can be replaces below two commands:
+Above command can be replaces by below two commands:
 
 ```command
 start /affinity 2 python_d.exe -c 10**10**100
