@@ -20,7 +20,7 @@ review:
             - Llama is a family of large language models that uses publicly-available data for training.
         correct_answer: 3                   
         explanation: >
-            LLaMA is a state-of-the-art foundational large language model designed to enable researchers to advance their work in this subfield of AI.
+            LLama is a state-of-the-art foundational large language model designed to enable researchers to advance their work in this subfield of AI.
                
     - questions:
         question: >

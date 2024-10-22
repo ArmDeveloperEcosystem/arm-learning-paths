@@ -21,13 +21,14 @@ You can use the Android demo application included in ExecuTorch repository [Llam
     ```
 
 {{% notice Note %}}
-<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
+<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. 
+Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake uses it as the tokenizer. If you run other models like LLaMA 2, skip this step.
+3. (Optional) If you need to use tiktoken as the tokenizer (for LLama 3), set `EXECUTORCH_USE_TIKTOKEN=ON`, and CMake uses it as the tokenizer. If you run other models such as LLama 2, skip this step.
 
     ``` bash
-    export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLaMA3
+    export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLama3
     ```
 
 4. Run the following commands to set up the required JNI library:
@@ -83,7 +84,7 @@ If the files are not on the device, use the device explorer to copy them.
 
 This is the recommended option.
 
-1. Open Android Studio and select “Open an existing Android Studio project” and navigate to open `examples/demo-apps/android/LlamaDemo`.
+1. Open Android Studio and select **Open an existing Android Studio project** and navigate to open `examples/demo-apps/android/LlamaDemo`.
 
 2. Run the app (^R). This builds and launches the app on the phone.
 

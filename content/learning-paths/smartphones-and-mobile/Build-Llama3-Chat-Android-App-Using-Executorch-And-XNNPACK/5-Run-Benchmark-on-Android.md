@@ -12,7 +12,7 @@ Cross-compile Llama runner to run on Android using the steps below.
 
 ### 1. Set Android NDK
 
-Set the environment variable to point to the Android NDK.
+Set the environment variable to point to the Android NDK:
 
 ``` bash
 export ANDROID_NDK=$ANDROID_HOME/ndk/28.0.12433566/
@@ -122,4 +122,4 @@ I 00:00:09.624432 executorch:stats.h:154] 	Time to first generated token:	0.2020
 I 00:00:09.624434 executorch:stats.h:161] 	Sampling time over 127 tokens:	0.110000 (seconds)
 ```
 
-You have successfully run the llama 3.1 1B model on your Android smartphone with ExecuTorch using KleidiAI kernels.
+You have successfully run the Llama 3.1 1B model on your Android smartphone with ExecuTorch using KleidiAI kernels.
