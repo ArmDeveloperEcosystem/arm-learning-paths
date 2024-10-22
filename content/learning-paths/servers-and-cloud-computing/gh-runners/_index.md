@@ -17,7 +17,7 @@ learning_objectives:
 prerequisites:
     - A GitHub account with access to Arm-hosted GitHub runners.
     - A Docker Hub account for storing container images.
-    - Familiarity with ML and continuous integration and deployment (CI/CD) concepts.
+    - Familiarity with the concepts of ML and continuous integration and deployment (CI/CD).
 
 author_primary: Pareena Verma, Annie Tallund
 

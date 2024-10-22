@@ -6,29 +6,28 @@ weight: 3
 layout: learningpathall
 ---
 
-In this section, you will fork the example GitHub repository containing the project code and inspect the Python code for training and testing a neural network model.
-
 ## Fork the example repository
 
-Get started by forking the example repository.
+In this section, you will fork the example GitHub repository containing the project code.
 
-In a web browser, navigate to the repository at:
+Get started by forking the example repository. In a web browser, navigate to the repository at:
 
 ```bash
 https://github.com/Arm-Labs/gh_armrunner_mlops_gtsrb
 ```
-
-Fork the repository, using the `Fork` button:
+Fork the repository, using the **Fork** button:
 
 ![#fork](/images/fork.png)
 
 Create a fork within a GitHub Organization or Team where you have access to Arm-hosted GitHub runners. 
 
 {{% notice Note %}}
-If a repository with the same name `gh_armrunner_mlops_gtsrb` already exists in your Organization or Team you modify the repository name to make it unique.
+If a repository with the same name `gh_armrunner_mlops_gtsrb` already exists in your Organization or Team, you can modify the repository name to make it unique.
 {{% /notice %}}
 
 ## Learn about model training and testing
+
+In this section, you will inspect the Python code for training and testing a neural network model.
 
 Explore the repository using a browser to get familiar with code and the workflow files. 
 
@@ -42,15 +41,15 @@ The purpose is to provide an overview of the code used for training and testing 
 
 In the `scripts` directory, there is a Python script called `train_model.py`. This script loads the GTSRB dataset, defines a neural network, and trains the model on the dataset.
 
-#### Data pre-processing
+#### Data preprocessing
 
 The first section loads the GTSRB dataset to prepare it for training. The GTSRB dataset is built into `torchvision`, which makes loading easier. 
 
-The transformations used when loading data are part of the pre-processing step, which makes the data uniform and ready to run through the extensive math operations of the ML model. 
+The transformations used when loading data are part of the preprocessing step, which makes the data uniform and ready to run through the extensive math operations of the ML model. 
 
-In accordance with common machine learning practices, data is separated into training and testing data to avoid over-fitting the neural network.
+In accordance with common machine learning practices, data is separated into training and testing data to avoid overfitting the neural network.
 
-Here is the code to load the dataset:
+Use this code to load the dataset:
 
 ```python
 transform = transforms.Compose([
@@ -67,9 +66,9 @@ train_loader = DataLoader(train_set, batch_size=64, shuffle=True)
 
 The next step is to define a class for the model, listing the layers used. 
 
-The model defines the forward-pass function used at training time to update the weights. Additionally, the loss function and optimizer for the model are defined.
+The model defines the forward pass function used at training time to update the weights. Additionally, the loss function and optimizer for the model are defined.
 
-Here is the code defining the model:
+Use this code that defines the model:
 
 ```python
 class TrafficSignNet(nn.Module):
@@ -101,7 +100,7 @@ A training loop performs the actual training.
 
 The number of epochs is arbitrarily set to 10 for this example. When the training is finished, the model weights are saved to a `.pth` file.
 
-Here is the code for the training loop:
+Use this code for the training loop:
 
 ```python
 num_epochs = 10
@@ -144,7 +143,7 @@ Testing is done by loading the model that was saved after training and preparing
 
 As in training, transformations are used to load the test data from the GTSRB dataset.
 
-Here is the code to load the model and the test data:
+Use this code to load the model and the test data:
 
 ```python
 model_path = args.model if args.model else './models/traffic_sign_net.pth'
@@ -167,7 +166,7 @@ test_loader = DataLoader(test_set, batch_size=64, shuffle=False)
 
 The testing loop passes each batch of test data through the model and compares predictions to the actual labels to calculate accuracy. 
 
-The accuracy is calculated as a percentage of correctly classified images. Both the accuracy and PyTorch profiler report is printed at the end of the script.
+The accuracy is calculated as a percentage of correctly classified images. Both the accuracy and PyTorch profiler reports are printed at the end of the script.
 
 Here is the testing loop with profiling:
 
