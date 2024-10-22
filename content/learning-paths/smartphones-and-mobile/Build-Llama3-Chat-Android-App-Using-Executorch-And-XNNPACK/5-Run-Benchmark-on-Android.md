@@ -52,7 +52,7 @@ cmake --build cmake-out-android -j7 --target install --config Release
 Make sure you add -DEXECUTORCH_XNNPACK_ENABLE_KLEIDI=ON option to enable support for KleidiAI kernels in ExecuTorch with XNNPack.
 {{% /notice %}}
 
-### 3. Build Llama runner for android
+### 3. Build Llama runner for Android
 
 Use `cmake` to cross-compile Llama runner:
 
@@ -78,7 +78,7 @@ You should now have `llama_main` available for Android.
 
 ## Run on Android via adb shell
 
-### 1. Connect your android phone
+### 1. Connect your Android phone
 
 Connect your phone to your computer using a USB cable.
 

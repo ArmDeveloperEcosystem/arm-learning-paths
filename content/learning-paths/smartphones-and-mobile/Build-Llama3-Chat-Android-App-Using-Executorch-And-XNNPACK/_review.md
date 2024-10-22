@@ -6,7 +6,7 @@ review:
         answers:
             - ExecuTorch is an end-to-end solution for enabling on-device inference capabilities across mobile and edge devices.
             - It is a Pytorch method to quantize LLMs.
-            - It is a program to execute pytorch models.
+            - It is a program to execute PyTorch models.
         correct_answer: 1                    
         explanation: >
             ExecuTorch is part of the PyTorch Edge ecosystem and enables efficient deployment of PyTorch models to edge devices.
