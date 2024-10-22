@@ -77,6 +77,7 @@ cmake --build cmake-out-android/examples/models/llama -j16 --config Release
 You should now have `llama_main` available for Android.
 
 ## Run on Android via adb shell
+You will need an Arm-powered smartphone with the i8mm feature running Android, with 16GB of RAM. The following steps were tested on a Google Pixel 8 Pro phone.
 
 ### 1. Connect your Android phone
 
