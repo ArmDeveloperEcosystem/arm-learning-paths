@@ -20,13 +20,30 @@ For installation instructions see the [install guide](/install-guides/windows-pe
 
 ## Using WindowsPerf WPA Plugin
 
-In order to use the `WindowsPerf WPA Plugin`, we first need to get a `.json` output from a `wperf stat` command running on a Windows on Arm machine.
+In order to use the `WindowsPerf WPA Plugin`, we first need to get a `.json` output from a WindowsPerf `wperf stat` command running on a Windows on Arm machine.
+> In order to get a `.json` output from WindowsPerf, we need to use the `--output` command followed by the filename.
+
+Example:
+
+```command
+wperf stat -e ld_spec --output example.json
+```
+
+Upon opening Windows Performance Analyzer, we are greeted with the following window:
+![wpa-first-screen](figures/wpa-first-screen.png)
+
+As we can see, the WindowsPerf WPA Plugin is installed correctly and it appears under the Installed Plugins section. We can then click on "Open file..." from the start menu on the left side and we're prompted to choose a `.json` file.
+
+![wpa-open-file](figures/wpa-open-file.png)
+
+By clicking "Open", the output file is then validated to check its format and compatibility with the plugin, and finally the main WPA window opens up.
+
 
 ### Timeline
 
 For this example we will be running the following command:
 
-```bash 
+```command 
 wperf stat -m dcache -c 0,1,2,3,4,5,6,7 -t -i 0 -n 50 --json
 ```
 
@@ -40,7 +57,7 @@ The WindowsPerf WPA Plugin also generates a graph per event note in order to pro
 
 For this example, the following command was used instead: 
 
-```bash 
+```command 
 wperf stat -t -i 0 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --json
 ```
 
@@ -54,7 +71,7 @@ The WindowsPerf WPA Plugin also allows the visualization of telemetry metrics co
 
 For this example, the following command was used: 
 
-```bash 
+```command 
 wperf stat -t -i 0 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --json
 ```
 

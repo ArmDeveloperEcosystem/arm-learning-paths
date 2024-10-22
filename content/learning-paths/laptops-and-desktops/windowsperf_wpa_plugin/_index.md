@@ -14,7 +14,7 @@ prerequisites:
     - Windows desktop or development machine
     - Windows Performance Analyzer installed
     - WindowsPerf WPA Plugin installed
-    - (Optional) WindowsPerf installed on a WoA machine [(Installation guide)](/install-guides/wperf/)
+    - (Optional) [WindowsPerf](/install-guides/wperf/) installed on a WoA machine [(Installation guide)](/install-guides/wperf/)
 
 author_primary: Alaaeddine Chakroun
 
@@ -23,6 +23,7 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
+    - neoverse
 operatingsystems:
     - Windows
 tools_software_languages:
