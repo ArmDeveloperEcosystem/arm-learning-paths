@@ -106,6 +106,30 @@ wperf test
 You can output `wperf test` command in JSON format. Use `--json` command line option to enable JSON output.
 {{% /notice %}}
 
+## Obtain plain text information about specified event, metric, or group of metrics.
+
+Command line option `man` prints on screen information about specified event, metric, or group of metrics.
+
+```command
+wperf man l1d_cache_mpki
+```
+
+```output
+CPU
+    neoverse-n1
+NAME
+    l1d_cache_mpki - L1D Cache MPKI
+EVENTS
+    inst_retired, l1d_cache_refill
+DESCRIPTION
+    This metric measures the number of level 1 data cache accesses missed per
+    thousand instructions executed.
+FORMULA
+    l1d_cache_refill / inst_retired * 1000
+UNIT
+    MPKI
+```
+
 ## Generate sample profile
 
 Specify the `event` to profile with `-e`. Groups of events, known as `metrics` can be specified with `-m`.
