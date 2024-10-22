@@ -14,7 +14,7 @@ In this section, you will change the PyTorch backend being used to test the trai
 
 In the previous section, you used the PyTorch 2.3.0 Docker Image compiled with OpenBLAS from DockerHub to run your testing workflow. PyTorch can be run with other backends. You will now modify the testing workflow to use PyTorch 2.3.0 Docker Image compiled with OneDNN and the Arm Compute Library. 
 
-The [Arm Compute Library](https://github.com/ARM-software/ComputeLibrary) is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors and Mali GPUs. Arm-hosted GitHub runners use Arm Neoverse CPUs, which make it possible to optimize your neural networks to take advantage of processor features. ACL implements kernels (also known as operators or layers), using specific instructions that run faster on AArch64.
+The [Arm Compute Library](https://github.com/ARM-software/ComputeLibrary) is a collection of low-level machine learning functions optimized for Arm's Cortex-A and Neoverse processors and Mali GPUs. Arm-hosted GitHub runners use Arm Neoverse CPUs, which make it possible to optimize your neural networks to take advantage of processor features. ACL implements kernels, which are also known as operators or layers, using specific instructions that run faster on AArch64.
 
 ACL is integrated into PyTorch through [oneDNN](https://github.com/oneapi-src/oneDNN), an open-source deep neural network library.
 
@@ -43,11 +43,11 @@ jobs:
 
 ### Run the test workflow
 
-Trigger the **Test Model** job again by clicking the `Run workflow` button on the `Actions` tab.
+Trigger the **Test Model** job again by clicking the **Run workflow** button on the **Actions** tab.
 
 The test workflow starts running. 
 
-Navigate to the workflow run on the `Actions` tab, click into the job, and expand the **Run testing script** step. 
+Navigate to the workflow run on the **Actions** tab, click into the job, and expand the **Run testing script** step. 
 
 You see a change in the performance results with OneDNN and ACL kernels being used. 
 
