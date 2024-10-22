@@ -6,19 +6,19 @@ weight: 2
 
 # Overview
 
-[WindowsPerf](https://gitlab.com/Linaro/WindowsPerf/windowsperf) is a (Linux [perf](https://perf.wiki.kernel.org) inspired) Windows on Arm performance profiling tool. Profiling is based on ARM64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of special events, and sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
+[WindowsPerf](https://github.com/arm-developer-tools/windowsperf) is a (Linux [perf](https://perf.wiki.kernel.org) inspired) Windows on Arm performance profiling tool. Profiling is based on ARM64 PMU and its hardware counters. WindowsPerf supports the counting model for obtaining aggregate counts of occurrences of special events, and sampling model for determining the frequencies of event occurrences produced by program locations at the function, basic block, and/or instruction levels.
 
 Learn more in this [blog](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/announcing-windowsperf) announcing the first release.
 
 ## WindowsPerf architecture
 
 `WindowsPerf` is composed of two main components:
-- [wperf](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf) a command line interface (CLI) sometimes referred as "user-space app" and
-- [wperf-driver](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/tree/main/wperf-driver) a (signed) Kernel-Mode Driver Framework (KMDF) driver.
+- [wperf](https://github.com/arm-developer-tools/windowsperf/tree/main/wperf) a command line interface (CLI) sometimes referred as "user-space app" and
+- [wperf-driver](https://github.com/arm-developer-tools/windowsperf/tree/main/wperf-driver) a (signed) Kernel-Mode Driver Framework (KMDF) driver.
 
 ## WindowsPerf releases
 
-You can find all binary releases of `WindowsPerf` [here](https://gitlab.com/Linaro/WindowsPerf/windowsperf/-/releases).
+You can find all binary releases of `WindowsPerf` [here](https://github.com/arm-developer-tools/windowsperf/releases).
 
 # Installation
 
