@@ -46,7 +46,7 @@ wperf record -e ld_spec:100000 -c 1 --timeout 30 -- python_d.exe -c 10**10**100
 ```
 
 {{% notice Hint%}}
-Add `--annotate` or `--disassemble` to `wperf record` command line parameters to increase sampling "resolution":
+Add `--annotate` or `--disassemble` to `wperf record` command line parameters to increase sampling "resolution".
 {{% /notice %}}
 
 ## WindowsPerf cheat sheet (SPE Examples)
@@ -67,5 +67,5 @@ wperf sample -e arm_spe_0/ld=1/ -c 1 --pe_file python_d.exe --image_name python_
 ```
 
 {{% notice Hint%}}
-Add `--annotate` or `--disassemble` to `wperf record` command line parameters to increase sampling "resolution":
+Add `--annotate` or `--disassemble` to `wperf record` command line parameters to increase sampling "resolution".
 {{% /notice %}}
