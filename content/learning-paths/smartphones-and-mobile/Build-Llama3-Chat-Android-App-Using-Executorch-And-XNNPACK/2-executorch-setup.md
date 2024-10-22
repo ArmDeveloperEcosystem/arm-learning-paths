@@ -19,13 +19,13 @@ python3.10 -m venv executorch
 source executorch/bin/activate
 ```
 
-The prompt of your terminal has (executorch) as a prefix to indicate the virtual environment is active.
+The prompt of your terminal has `executorch` as a prefix to indicate the virtual environment is active.
 
 ### Option 2: Create a Conda virtual environment
 
 Install Miniconda on your development machine by following the [Installing conda](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) instructions.
 
-Once `conda` is installed create the environment:
+Once `conda` is installed, create the environment:
 
 ```bash
 conda create -yn executorch python=3.10.0
@@ -46,4 +46,4 @@ git submodule update --init
 ./examples/models/llama/install_requirements.sh
 ```
 
-When these scripts finish successfully, ExecuTorch is all set up. That means it's time to dive into the world of Llama models!
+When these scripts finish successfully, ExecuTorch is set up. That means it's time to dive into the world of Llama models!

@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Download and export the Llama 3.2 1B model
 
-To get started with Llama 3, you obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request the access by filling out your details and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3.2 1B model is used for this part, but the same instructions apply for other options as well with minimal modification.
+To get started with Llama 3, you can obtain the pre-trained parameters by visiting [Meta's Llama Downloads](https://llama.meta.com/llama-downloads/) page. Request access by filling out your details, and read through and accept the Responsible Use Guide. This grants you a license and a download link which is valid for 24 hours. The Llama 3.2 1B model is used for this exercise, but the same instructions apply to other options as well with minimal modification.
 
 Install the `llama-stack` package from `pip`.
 ```bash
