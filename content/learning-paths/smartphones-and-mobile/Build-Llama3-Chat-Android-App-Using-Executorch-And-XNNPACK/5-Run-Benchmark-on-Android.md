@@ -107,49 +107,49 @@ adb push cmake-out-android/examples/models/llama/llama_main /data/local/tmp/llam
 Use the Llama runner to execute the model on the phone with the `adb` command:
 
 ``` bash
-adb shell "cd /data/local/tmp/llama && ./llama_main --model_path llama3_1B_kv_sdpa_xnn_qe_4_128_1024_embedding_4bit.pte --tokenizer_path tokenizer.model --prompt "<|start_header_id|>system<|end_header_id|>\nYour name is Cookie. you are helpful, polite, precise, concise, honest, good at writing. You always give precise and brief answers up to 32 words<|eot_id|><|start_header_id|>user<|end_header_id|>\nHey Cookie! how are you today?<|eot_id|><|start_header_id|>assistant<|end_header_id|>" --warmup=1 --cpu_threads=5
+adb shell "cd /data/local/tmp/llama && ./llama_main --model_path llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte --tokenizer_path tokenizer.model --prompt "<|start_header_id|>system<|end_header_id|>\nYour name is Cookie. you are helpful, polite, precise, concise, honest, good at writing. You always give precise and brief answers up to 32 words<|eot_id|><|start_header_id|>user<|end_header_id|>\nHey Cookie! how are you today?<|eot_id|><|start_header_id|>assistant<|end_header_id|>" --warmup=1 --cpu_threads=5
 ```
 
 The output should look something like this.
 
 ```
-I 00:00:00.003002 executorch:main.cpp:69] Resetting threadpool with num threads = 5
-I 00:00:00.009985 executorch:runner.cpp:59] Creating LLaMa runner: model_path=instruct_llama3_1B_kv_sdpa_xnn_qe_4_128_1024_embedding_4bit.pte, tokenizer_path=tokenizer.model
-I 00:00:03.587895 executorch:runner.cpp:88] Reading metadata from model
-I 00:00:03.587950 executorch:runner.cpp:113] Metadata: use_sdpa_with_kv_cache = 1
-I 00:00:03.587954 executorch:runner.cpp:113] Metadata: use_kv_cache = 1
-I 00:00:03.587957 executorch:runner.cpp:113] Metadata: get_vocab_size = 128256
-I 00:00:03.587961 executorch:runner.cpp:113] Metadata: get_bos_id = 128000
-I 00:00:03.587963 executorch:runner.cpp:113] Metadata: get_max_seq_len = 1024
-I 00:00:03.587966 executorch:runner.cpp:113] Metadata: enable_dynamic_shape = 1
-I 00:00:03.587969 executorch:runner.cpp:120] eos_id = 128009
-I 00:00:03.587970 executorch:runner.cpp:120] eos_id = 128001
-I 00:00:03.587972 executorch:runner.cpp:120] eos_id = 128006
-I 00:00:03.587973 executorch:runner.cpp:120] eos_id = 128007
-I 00:00:03.587976 executorch:runner.cpp:168] Doing a warmup run...
-I 00:00:03.887806 executorch:text_prefiller.cpp:53] Prefill token result numel(): 128256
+I 00:00:00.003316 executorch:main.cpp:69] Resetting threadpool with num threads = 5
+I 00:00:00.009329 executorch:runner.cpp:59] Creating LLaMa runner: model_path=llama3_1B_kv_sdpa_xnn_qe_4_64_1024_embedding_4bit.pte, tokenizer_path=tokenizer.model
+I 00:00:03.569399 executorch:runner.cpp:88] Reading metadata from model
+I 00:00:03.569451 executorch:runner.cpp:113] Metadata: use_sdpa_with_kv_cache = 1
+I 00:00:03.569455 executorch:runner.cpp:113] Metadata: use_kv_cache = 1
+I 00:00:03.569459 executorch:runner.cpp:113] Metadata: get_vocab_size = 128256
+I 00:00:03.569461 executorch:runner.cpp:113] Metadata: get_bos_id = 128000
+I 00:00:03.569464 executorch:runner.cpp:113] Metadata: get_max_seq_len = 1024
+I 00:00:03.569466 executorch:runner.cpp:113] Metadata: enable_dynamic_shape = 1
+I 00:00:03.569469 executorch:runner.cpp:120] eos_id = 128009
+I 00:00:03.569470 executorch:runner.cpp:120] eos_id = 128001
+I 00:00:03.569471 executorch:runner.cpp:120] eos_id = 128006
+I 00:00:03.569473 executorch:runner.cpp:120] eos_id = 128007
+I 00:00:03.569475 executorch:runner.cpp:168] Doing a warmup run...
+I 00:00:03.838634 executorch:text_prefiller.cpp:53] Prefill token result numel(): 128256
  
-I 00:00:04.325286 executorch:text_token_generator.h:118]
+I 00:00:03.892268 executorch:text_token_generator.h:118]
 Reached to the end of generation
-I 00:00:04.325299 executorch:runner.cpp:267] Warmup run finished!
-I 00:00:04.325305 executorch:runner.cpp:174] RSS after loading model: 1269.320312 MiB (0 if unsupported)
-<|start_header_id|>system<|end_header_id|>\nYour name is Cookie. you are helpful, polite, precise, concise, honest, good at writing. You always give precise and brief answers up to 32 words<|eot_id|><|start_header_id|>user<|end_header_id|>\nHey Cookie! how are you today?<|eot_id|><|start_header_id|>assistant<|end_header_id|>I 00:00:04.509909 executorch:text_prefiller.cpp:53] Prefill token result numel(): 128256
-"
+I 00:00:03.892281 executorch:runner.cpp:267] Warmup run finished!
+I 00:00:03.892286 executorch:runner.cpp:174] RSS after loading model: 1269.445312 MiB (0 if unsupported)
+<|start_header_id|>system<|end_header_id|>\nYour name is Cookie. you are helpful, polite, precise, concise, honest, good at writing. You always give precise and brief answers up to 32 words<|eot_id|><|start_header_id|>user<|end_header_id|>\nHey Cookie! how are you today?<|eot_id|><|start_header_id|>assistant<|end_header_id|>I 00:00:04.076905 executorch:text_prefiller.cpp:53] Prefill token result numel(): 128256
  
-I 00:00:04.510943 executorch:runner.cpp:243] RSS after prompt prefill: 1269.320312 MiB (0 if unsupported)
-I'm doing well, thanks! I'm always up for helping out with any question or task you'd like assistance with. I'm a large language model, so I can provide information on a wide range of topics. What can I help you with today?<|eot_id|>
-I 00:00:05.882562 executorch:text_token_generator.h:118]
+ 
+I 00:00:04.078027 executorch:runner.cpp:243] RSS after prompt prefill: 1269.445312 MiB (0 if unsupported)
+I'm doing great, thanks! I'm always happy to help, communicate, and provide helpful responses. I'm a bit of a cookie (heh) when it comes to delivering concise and precise answers. What can I help you with today?<|eot_id|>
+I 00:00:05.399304 executorch:text_token_generator.h:118]
 Reached to the end of generation
  
-I 00:00:05.882573 executorch:runner.cpp:257] RSS after finishing text generation: 1269.320312 MiB (0 if unsupported)
-PyTorchObserver {"prompt_tokens":54,"generated_tokens":53,"model_load_start_ms":1710296030044,"model_load_end_ms":1710296033621,"inference_start_ms":1710296034359,"inference_end_ms":1710296035916,"prompt_eval_end_ms":1710296034544,"first_token_ms":1710296034544,"aggregate_sampling_time_ms":50,"SCALING_FACTOR_UNITS_PER_SECOND":1000}
-I 00:00:05.882600 executorch:stats.h:111] 	Prompt Tokens: 54    Generated Tokens: 53
-I 00:00:05.882602 executorch:stats.h:117] 	Model Load Time:		3.577000 (seconds)
-I 00:00:05.882604 executorch:stats.h:127] 	Total inference time:		1.557000 (seconds)		 Rate: 	34.039820 (tokens/second)
-I 00:00:05.882607 executorch:stats.h:135] 		Prompt evaluation:	0.185000 (seconds)		 Rate: 	291.891892 (tokens/second)
-I 00:00:05.882609 executorch:stats.h:146] 		Generated 53 tokens:	1.372000 (seconds)		 Rate: 	38.629738 (tokens/second)
-I 00:00:05.882613 executorch:stats.h:154] 	Time to first generated token:	0.185000 (seconds)
-I 00:00:05.882614 executorch:stats.h:161] 	Sampling time over 107 tokens:	0.050000 (seconds)
+I 00:00:05.399314 executorch:runner.cpp:257] RSS after finishing text generation: 1269.445312 MiB (0 if unsupported)
+PyTorchObserver {"prompt_tokens":54,"generated_tokens":51,"model_load_start_ms":1710296339487,"model_load_end_ms":1710296343047,"inference_start_ms":1710296343370,"inference_end_ms":1710296344877,"prompt_eval_end_ms":1710296343556,"first_token_ms":1710296343556,"aggregate_sampling_time_ms":49,"SCALING_FACTOR_UNITS_PER_SECOND":1000}
+I 00:00:05.399342 executorch:stats.h:111] 	Prompt Tokens: 54    Generated Tokens: 51
+I 00:00:05.399344 executorch:stats.h:117] 	Model Load Time:		3.560000 (seconds)
+I 00:00:05.399346 executorch:stats.h:127] 	Total inference time:		1.507000 (seconds)		 Rate: 	33.842070 (tokens/second)
+I 00:00:05.399348 executorch:stats.h:135] 		Prompt evaluation:	0.186000 (seconds)		 Rate: 	290.322581 (tokens/second)
+I 00:00:05.399350 executorch:stats.h:146] 		Generated 51 tokens:	1.321000 (seconds)		 Rate: 	38.607116 (tokens/second)
+I 00:00:05.399352 executorch:stats.h:154] 	Time to first generated token:	0.186000 (seconds)
+I 00:00:05.399354 executorch:stats.h:161] 	Sampling time over 105 tokens:	0.049000 (seconds)
 ```
 
 You have successfully run the Llama 3.1 1B Instruct model on your Android smartphone with ExecuTorch using KleidiAI kernels.
