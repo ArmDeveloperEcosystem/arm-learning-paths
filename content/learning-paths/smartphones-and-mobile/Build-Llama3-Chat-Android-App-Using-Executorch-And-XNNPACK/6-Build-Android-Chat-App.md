@@ -25,13 +25,7 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. (Optional) If you need to use tiktoken as the tokenizer (for LLama 3), set `EXECUTORCH_USE_TIKTOKEN=ON`, and CMake uses it as the tokenizer. If you run other models such as LLama 2, skip this step.
-
-    ``` bash
-    export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLama3
-    ```
-
-4. Run the following commands to set up the required JNI library:
+3. Run the following commands to set up the required JNI library:
 
     ``` bash
     pushd extension/android
