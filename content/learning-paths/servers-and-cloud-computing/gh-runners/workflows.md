@@ -135,23 +135,23 @@ The `test-model.yml` file needs to be edited to be able to use the saved model f
 
 Complete the steps below to modify the testing workflow file:
 
-1. Navigate to the `Actions` tab on your GitHub repository. 
+1. Navigate to the **Actions** tab on your GitHub repository. 
 
-2. Click on `Train Model` on the left side of the page.
+2. Click on **Train Model** on the left side of the page.
 
-3. Click on the completed `Train Model` workflow. 
+3. Click on the completed **Train Model** workflow. 
 
-4. Copy the The 11 digit ID number from the end of the URL in your browser address bar.
+4. Copy the 11-digit ID number from the end of the URL in your browser address bar.
 
 ![#run-id](/images/run-id.png)
 
-5. Navigate back to the `Code` tab and open the file `.github/workflows/test-model.yml`. 
+5. Navigate back to the **Code** tab and open the file `.github/workflows/test-model.yml`. 
 
 6. Click the Edit button, represented by a pencil on the top right of the file contents.
 
 7. Update the `run-id` parameter with the 11 digit ID number you copied. 
 
-8. Save the file by clicking the `Commit changes` button.
+8. Save the file by clicking the **Commit changes** button.
 
 
 #### Run the workflow file
@@ -160,7 +160,7 @@ You are now ready to run the **Test Model** workflow.
 
 1. Navigate to the `Actions` tab and select the **Test Workflow** on the left side.
 
-2. Click the `Run workflow` button to run the workflow on the main branch.
+2. Click the **Run workflow** button to run the workflow on the main branch.
 
 ![#run-workflow](images/run-workflow.png)
 
@@ -170,7 +170,7 @@ Click on the workflow to view the output from each step.
 
 ![Actions_test](/images/actions_test.png)
 
-Click on the "Run testing script" step to see the accuracy of the model and a table of the results from the PyTorch profiler. 
+Click on the **Run testing script** step to see the accuracy of the model and a table of the results from the PyTorch profiler. 
 
 The output from is similar to:
 
