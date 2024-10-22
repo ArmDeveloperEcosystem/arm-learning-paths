@@ -141,7 +141,7 @@ Complete the steps below to modify the testing workflow file:
 
 3. Click on the completed `Train Model` workflow. 
 
-4. Copy the The 11 digit ID number from the end of the URL in your browser address bar.
+4. Copy the 11-digit ID number from the end of the URL in your browser address bar.
 
 ![#run-id](/images/run-id.png)
 
