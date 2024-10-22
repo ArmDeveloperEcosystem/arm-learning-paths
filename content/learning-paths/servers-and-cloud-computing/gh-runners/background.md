@@ -28,17 +28,25 @@ GitHub Actions runs workflow files to automate processes. Workflows run when spe
 
 [YAML](https://yaml.org/) defines a workflow. 
 
-Workflows specify how a job is triggered, the running environment, and the commands to run. 
+Workflows specify:
 
-The machine running workflows is called a _runner_.
+* How a job is triggered.
+* The running environment.
+* The commands to run. 
+
+The machine running the workflows is called a _runner_.
 
 ## Arm-hosted GitHub runners
 
 Hosted GitHub runners are provided by GitHub, so you do not need to set up and manage cloud infrastructure. Arm-hosted GitHub runners use the Arm architecture so you can build and test software without the necessity for cross-compiling or instruction emulation.
 
-Arm-hosted GitHub runners enable you to optimize your workflows, reduce cost, and improve energy consumption. 
+Arm-hosted GitHub runners enable you to:
 
-Additionally, the Arm-hosted runners are preloaded with essential tools, making it easier for to develop and test your applications.
+* Optimize your workflows.
+* Reduce cost.
+* Improve energy consumption. 
+
+Additionally, the Arm-hosted runners are preloaded with essential tools, which makes it easier for to develop and test your applications.
 
 Arm-hosted runners are available for Linux and Windows. This Learning Path uses Linux.
 

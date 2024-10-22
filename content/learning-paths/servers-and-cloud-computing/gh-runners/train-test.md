@@ -49,7 +49,7 @@ The transformations used when loading data are part of the preprocessing step, w
 
 In accordance with common machine learning practices, data is separated into training and testing data to avoid overfitting the neural network.
 
-Use this code to load the dataset:
+Here is the code to load the dataset:
 
 ```python
 transform = transforms.Compose([
@@ -68,7 +68,7 @@ The next step is to define a class for the model, listing the layers used.
 
 The model defines the forward pass function used at training time to update the weights. Additionally, the loss function and optimizer for the model are defined.
 
-Use this code that defines the model:
+Here is the code that defines the model:
 
 ```python
 class TrafficSignNet(nn.Module):
@@ -100,7 +100,7 @@ A training loop performs the actual training.
 
 The number of epochs is arbitrarily set to 10 for this example. When the training is finished, the model weights are saved to a `.pth` file.
 
-Use this code for the training loop:
+Here is the code for the training loop:
 
 ```python
 num_epochs = 10
@@ -143,7 +143,7 @@ Testing is done by loading the model that was saved after training and preparing
 
 As in training, transformations are used to load the test data from the GTSRB dataset.
 
-Use this code to load the model and the test data:
+Here is the code to load the model and the test data:
 
 ```python
 model_path = args.model if args.model else './models/traffic_sign_net.pth'
