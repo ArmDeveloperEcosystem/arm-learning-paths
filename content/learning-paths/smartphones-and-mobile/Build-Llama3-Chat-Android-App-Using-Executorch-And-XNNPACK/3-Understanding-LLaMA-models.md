@@ -22,7 +22,7 @@ Llama models are powerful and versatile, having the ability to generate coherent
 * Virtual assistants.
 * Language translation.
 
-Please note that the models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and this [responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
+Please note that the models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and [this responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
 
 ## Results
 
