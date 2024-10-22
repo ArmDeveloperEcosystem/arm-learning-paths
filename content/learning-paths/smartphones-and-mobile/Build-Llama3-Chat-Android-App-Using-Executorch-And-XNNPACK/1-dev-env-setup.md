@@ -16,9 +16,9 @@ The first step is to prepare a development environment with the required softwar
 - Android NDK version 28.0.12433566.
 - Java 17 JDK.
 - Git.
-- Python 3.10 or later (these instructions have been tested with 3.10 and 3.12)
+- Python 3.10 or later (these instructions have been tested with 3.10 and 3.12).
 
-The instructions assume macOS with Apple Silicon, an x86 Debian, or Ubuntu Linux machine with at least 16GB of RAM.
+The instructions assume macOS with Apple Silicon, an x86 Debian, or an Ubuntu Linux machine, with at least 16GB of RAM.
 
 ## Install Android Studio and Android NDK
 
@@ -26,13 +26,13 @@ Follow these steps to install and configure Android Studio:
 
 1. Download and install the latest version of [Android Studio](https://developer.android.com/studio/).
 
-2. Start Android Studio and open the `Settings` dialog.
+2. Start Android Studio and open the **Settings** dialog.
 
-3. Navigate to `Languages & Frameworks -> Android SDK`.
+3. Navigate to **Languages & Frameworks**, then **Android SDK**.
 
-4. In the `SDK Platforms` tab, check `Android 14.0 ("UpsideDownCake")`.
+4. In the **SDK Platforms** tab, check **Android 14.0 ("UpsideDownCake")**.
 
-Next, install the specific version of the Android NDK that you need by first installing the Android command line tools:
+Next, install the specific version of the Android NDK that you require by first installing the Android command line tools:
 
 Linux:
 
@@ -52,7 +52,7 @@ Unzip the Android command line tools:
 unzip commandlinetools.zip -d android-sdk
 ```
 
-Install the NDK in the directory that Android Studio installed the SDK. This is generally `~/Library/Android/sdk` by default. Set the requirement environment variables:
+Install the NDK in the same directory that Android Studio installed the SDK. This is generally `~/Library/Android/sdk` by default. Set the requirement environment variables:
 
 ```
 export ANDROID_HOME="$(realpath ~/Library/Android/sdk)"

@@ -22,7 +22,7 @@ Llama models are powerful and versatile, having the ability to generate coherent
 * Virtual assistants.
 * Language translation.
 
-Please note that the models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and this [responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
+Please note that the models are subject to the [acceptable use policy](https://github.com/facebookresearch/llama/blob/main/USE_POLICY.md) and [this responsible use guide](https://ai.meta.com/static-resource/responsible-use-guide/).
 
 ## Results
 
@@ -43,7 +43,7 @@ The results are for two different groupsizes, with max_seq_len 2048, and 1000 sa
 |Llama 2 7B | 9.2 | 10.2 | 10.7
 |Llama 3 8B | 7.9 | 9.4 | 9.7
 
-Note that groupsize less than 128 was not enabled, since such a model was still too large. This is because current efforts have focused on enabling FP32, and support for FP16 is under way.
+Note that groupsize less than 128 was not enabled in this example, since the model was still too large. This is because current efforts have focused on enabling FP32, and support for FP16 is under way.
 
 What this implies for model size is:
 
