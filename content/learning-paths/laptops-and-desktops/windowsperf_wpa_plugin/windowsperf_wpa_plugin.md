@@ -6,9 +6,11 @@ weight: 2
 
 # Overview
 
+WindpwsPerf WPA plugin is a plugin built for WPA that parses JSON output of `wperf` command line tool to visualize counting and telemetry events as timeline graphs.
+
 [**WindowsPerf**](https://github.com/arm-developer-tools/windowsperf) is a lightweight performance profiling tool inspired by Linux perf, specifically tailored for Windows on Arm.
-It leverages the Arm64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
-The **WindowsPerf WPA plugin** bridges the gap between the detailed output of **WindowsPerf** and the powerful capabilities of **Windows Performance Analyzer**.
+It leverages the ARM64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
+The [WindowsPerf WPA plugin](https://github.com/arm-developer-tools/windowsperf-wpa-plugin) bridges the gap between the detailed output of **WindowsPerf** and the powerful capabilities of [Windows Performance Analyzer](https://learn.microsoft.com/en-us/windows-hardware/test/wpt/windows-performance-analyzer).
 
 ## WindowsPerf WPA Plugin releases
 
@@ -21,7 +23,9 @@ For installation instructions see the [install guide](/install-guides/windows-pe
 ## Using WindowsPerf WPA Plugin
 
 In order to use the `WindowsPerf WPA Plugin`, we first need to get a `.json` output from a WindowsPerf `wperf stat` command running on a Windows on Arm machine.
-> In order to get a `.json` output from WindowsPerf, we need to use the `--output` command followed by the filename.
+{{% notice Note%}}
+In order to get a `.json` output from WindowsPerf, we need to use the `--output` command followed by the filename.
+{{% /notice %}}
 
 Example:
 
@@ -32,7 +36,7 @@ wperf stat -e ld_spec --output example.json
 Upon opening Windows Performance Analyzer, we are greeted with the following window:
 ![wpa-first-screen](figures/wpa-first-screen.png)
 
-As we can see, the WindowsPerf WPA Plugin is installed correctly and it appears under the Installed Plugins section. We can then click on "Open file..." from the start menu on the left side and we're prompted to choose a `.json` file.
+As we can see, the `WindowsPerf WPA Plugin` is installed correctly and it appears under the Installed Plugins section. We can then click on "Open file..." from the start menu on the left side and we're prompted to choose a `.json` file.
 
 ![wpa-open-file](figures/wpa-open-file.png)
 
@@ -40,6 +44,11 @@ By clicking "Open", the output file is then validated to check its format and co
 
 
 ### Timeline
+
+The WindowsPerf timeline feature (command line option -t) enable continuous counting of Performance Monitoring Unit (PMU) events.
+Users can specify sleep intervals (with -i) between counts and set the number of repetitions (with -n), allowing for detailed and flexible data collection.
+Users can take advantage of the `WindowsPerf WPA Plugin` to visualize these complex measurements.
+This plugin allows for detailed graphical representation of the PMU event data in WPA.
 
 For this example we will be running the following command:
 
@@ -67,7 +76,7 @@ We can double click on any graph to expand it under the Analysis tab for further
 
 ### Telemetry
 
-The WindowsPerf WPA Plugin also allows the visualization of telemetry metrics counted similarly to counting events.
+The `WindowsPerf WPA Plugin` also allows the visualization of [Arm telemetry metrics](https://developer.arm.com/documentation/109542/0100/About-Arm-CPU-Telemetry-Solution) counted similarly to counting events.
 
 For this example, the following command was used: 
 
