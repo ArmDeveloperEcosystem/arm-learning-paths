@@ -12,23 +12,23 @@ review:
 
     - questions:
         question: >
-            Can Llama3.1 model run on Arm?
+            Can Meta Llama 3.1 run on Arm?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            The Llama-3.1-8B model from Meta can be used on Arm-based servers with llama.cpp. 
+            You can use the Llama 3.1-8B model from Meta on Arm-based servers with llama.cpp. 
 
     - questions:
         question: >
-            Which of the following is true about about Zilliz Cloud?
+            Which of the following is true about Zilliz Cloud?
         answers:
-            - "It is a fully-managed version of Milvus vector database"
-            - "It is a self-hosted version of Milvus vector database"
+            - "It is a fully managed version of Milvus vector database."
+            - "It is a self-hosted version of Milvus vector database."
         correct_answer: 1
         explanation: >
-            Zilliz Cloud is a fully-managed version of Milvus. 
+            Zilliz Cloud is a fully managed version of Milvus. 
                
 
 
