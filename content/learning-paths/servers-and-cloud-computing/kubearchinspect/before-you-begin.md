@@ -28,7 +28,7 @@ tar xvfz kubearchinspect_Linux_arm64.tar.gz
 
 The `kubearchinspect` binary is now in the current directory. 
 
-If you are using a different platform, such as Windows or macOS, you can get other release packges from the [GitHub releases area](https://github.com/ArmDeveloperEcosystem/kubearchinspect/releases/).
+If you are using a different platform, such as Windows or macOS, you can get other release packages from the [GitHub releases area](https://github.com/ArmDeveloperEcosystem/kubearchinspect/releases/).
 
 You can run `kubearchinspect` from the current location or copy it to a directory in your search path such as `/usr/local/bin`.
 
