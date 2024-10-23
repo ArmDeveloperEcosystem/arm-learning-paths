@@ -2,6 +2,10 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: WindowsPerf Visual Studio Extension
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 10
 
 official_docs: https://github.com/arm-developer-tools/windowsperf-vs-extension
