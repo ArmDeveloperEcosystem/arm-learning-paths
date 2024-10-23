@@ -6,7 +6,7 @@ cascade:
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for software developers who want to know if the containers running in a Kubernetes cluster are avilable for the Arm architecture.
+who_is_this_for: This is an introductory topic for software developers who want to know if the containers running in a Kubernetes cluster are available for the Arm architecture.
 
 learning_objectives: 
     - Run KubeArchInspect to get a quick report of the containers running in a Kubernetes cluster.

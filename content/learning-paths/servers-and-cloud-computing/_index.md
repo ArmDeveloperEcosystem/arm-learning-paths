@@ -9,7 +9,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 105
+- Linux: 107
 - macOS: 9
 - Windows: 12
 pinned_modules:
@@ -19,12 +19,12 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
-- CI-CD: 3
+- CI-CD: 4
 - Containers and Virtualization: 25
 - Databases: 15
 - Libraries: 6
 - ML: 13
-- Performance and Architecture: 36
+- Performance and Architecture: 37
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -33,6 +33,7 @@ tools_software_languages_filter:
 - .NET: 1
 - .NET SDK: 1
 - 5G: 1
+- ACL: 1
 - Android Studio: 2
 - Ansible: 2
 - Arm Development Studio: 4
@@ -72,7 +73,7 @@ tools_software_languages_filter:
 - gdb: 1
 - Geekbench: 1
 - GenAI: 4
-- GitHub: 2
+- GitHub: 3
 - GitLab: 1
 - Glibc: 1
 - Go: 2
@@ -86,7 +87,7 @@ tools_software_languages_filter:
 - JAX: 1
 - Kafka: 1
 - Keras: 1
-- Kubernetes: 9
+- Kubernetes: 10
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
@@ -106,8 +107,8 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
-- Python: 10
-- PyTorch: 4
+- Python: 11
+- PyTorch: 5
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
