@@ -18,7 +18,7 @@ The first step is to prepare a development environment with the required softwar
 - CMake (tested with version 3.28.1)
 - Ninja (tested with version 1.11.1)
 
-The instructions assume x86 Windows with at least 16GB of RAM.
+The instructions were tested on an x86 Windows machine with at least 16GB of RAM.
 
 ## Install Android Studio and Android NDK
 
@@ -32,18 +32,20 @@ Follow these steps to install and configure Android Studio:
 
 4. In the `SDK Tools` tab, check `NDK (Side by side)`.
 
+5. Click Ok and Apply.
+
 ## Install Python 3.11
 
-Download and install Python: https://www.python.org/downloads/
+Download and install [Python version 3.11](https://www.python.org/downloads/release/python-3110/)
 
 ## Install CMake
 
 CMake is an open-source tool that automates the build process for software projects, helping to generate platform-specific build configurations.
 
-Download and install CMake: https://cmake.org/download/
+[Download and install CMake](https://cmake.org/download/)
 
 {{% notice Note %}}
-We tested with version 3.28.1
+The instructions were tested with version 3.28.1
 {{% /notice %}}
 
 ## Install Ninja
@@ -52,10 +54,10 @@ Ninja is a minimalistic build system designed to efficiently handle incremental 
 
 The Ninja generator needs to be used to build on Windows for Android.
 
-Download and install Ninja: https://github.com/ninja-build/ninja/releases
+[Download and install Ninja]( https://github.com/ninja-build/ninja/releases)
 
 {{% notice Note %}}
-We tested with version 1.11.1
+The instructions were tested with version 1.11.1
 {{% /notice %}}
 
-You now have the required development tools installed.
+You now have the required development tools installed to follow this learning path.
