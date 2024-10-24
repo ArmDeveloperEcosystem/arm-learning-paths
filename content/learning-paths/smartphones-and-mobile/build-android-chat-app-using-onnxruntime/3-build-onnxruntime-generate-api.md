@@ -27,7 +27,7 @@ You might be able to use later commits. These steps have been tested with the co
 
 ### Build for Android CPU
 
-The Ninja generator needs to be used to build on Windows for Android. Run the following command:
+The Ninja generator needs to be used to build on Windows for Android. Make sure JAVA_HOME is set before running the following command:
 
 ```bash
 python -m pip install requests 
