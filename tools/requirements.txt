@@ -2,3 +2,4 @@ junit-xml
 pyyaml
 inclusivewriting
 pyspellchecker
+setuptools
