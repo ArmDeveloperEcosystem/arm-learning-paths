@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 ## How does KubeArchInspect help?
 
-KubeArchInspect provides an efficient way to understand and improve the Arm architecture support within your Kubernetes cluster, ensuring your cluster runs efficiently and effectively.
+KubeArchInspect is a tool developed by Arm. It provides an efficient way to understand and improve the Arm architecture support within your Kubernetes cluster, ensuring your cluster runs efficiently and effectively.
 
 KubeArchInspect identifies images in a Kubernetes cluster which support the Arm architecture. It does this by checking each image against the source registry for the image and identifying which architectures are available. You can use the results to identify potential issues or opportunities for optimizing the cluster to run on Arm.
 
