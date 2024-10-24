@@ -12,16 +12,17 @@ The Generate() API in ONNX Runtime is designed for text generation tasks using m
 
 
 ### Clone onnxruntime-genai repo
-
-Checkout the source tree:
+Open up a Windows Powershell prompt and checkout the source repo:
 
 ```bash
+C:\Users\$env:USERNAME
 git clone https://github.com/microsoft/onnxruntime-genai
 cd onnxruntime-genai
+git checkout 1e4d289502a61265c3b07efb17d8796225bb0b7f
 ```
 
 {{% notice Note %}}
-These steps have been tested with the commit `1e4d289502a61265c3b07efb17d8796225bb0b7f`.
+You might be able to use later commits. These steps have been tested with the commit `1e4d289502a61265c3b07efb17d8796225bb0b7f`.
 {{% /notice %}}
 
 ### Build for Android CPU
@@ -29,9 +30,8 @@ These steps have been tested with the commit `1e4d289502a61265c3b07efb17d8796225
 The Ninja generator needs to be used to build on Windows for Android.
 
 ```bash
-python build.py --build_java --android --android_home <Android SDK Path> --android_ndk_path <Android NDK Path> --android_abi arm64-v8a --config Release
  
- # Example for building with default SDK/NDK paths
+ # Example
 python3.11 build.py --build_java --android --android_home C:\Users\$env:USERNAME\AppData\Local\Android\Sdk --android_ndk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.0.12077973 --android_abi arm64-v8a --config Release
 
 ```
