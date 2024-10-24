@@ -10,7 +10,7 @@ learning_objectives:
     - Run the Phi-3 model using ONNX Runtime on an Arm-based smartphone.
 
 prerequisites:
-    - A Windows development machine with at least 16GB of RAM. You should also be able to use Linux or MacOS for the build, but the instructions for it have not been included in this learning path.
+    - A Windows x86_64 development machine with at least 16GB of RAM. You should also be able to use Linux or MacOS for the build, but the instructions for it have not been included in this learning path.
     - An Android phone with at least 8GB of RAM. This learning path was tested on Samsung Galaxy S24.
 
 author_primary: Koki Mitsunami
