@@ -39,7 +39,7 @@ provider "google" {
 
 resource "google_compute_instance" "vm_instance" {
   name         = "instance-arm"
-  machine_type = "t2a-standard-1"
+  machine_type = "c4a-standard-1"
 
   boot_disk {
     initialize_params {
