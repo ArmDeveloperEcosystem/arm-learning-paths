@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Now that you are familiar with building LLM applications with ONNX Runtime, you are ready to incorporate LLMs into your Android applications.
+next_step_guidance: Now that you are familiar with building LLM applications with ONNX Runtime, you are ready to incorporate LLMs into your Android applications. You can learn how to further accelerate the performance of your LLMs using KleidiAI:
 
 recommended_path: /learning-paths/cross-platform/kleidiai-explainer/
 
