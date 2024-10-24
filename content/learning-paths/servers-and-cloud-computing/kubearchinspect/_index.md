@@ -1,15 +1,12 @@
 ---
 title: Migrate containers to Arm using KubeArchInspect
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for software developers who want to know if the containers running in a Kubernetes cluster are available for the Arm architecture.
+who_is_this_for: This is an introductory topic for software developers who want to ensure containers running in a Kubernetes cluster support the Arm architecture.
 
 learning_objectives: 
-    - Run KubeArchInspect to get a quick report of the containers running in a Kubernetes cluster.
+    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster.
     - Discover which images support the Arm architecture.
     - Understand common reasons for an image not supporting Arm.
     - Make configuration changes to upgrade images with Arm support.
