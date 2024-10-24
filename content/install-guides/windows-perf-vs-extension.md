@@ -28,7 +28,7 @@ layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 
 Recognizing the complexities of command-line interaction, the WindowsPerf GUI is a Visual Studio 2022 extension created to provide a more intuitive, integrated experience within the integrated development environment (IDE). This tool enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
 
-## Overview of key features
+## Overview key features
 
 The WindowsPerf GUI extension is composed of several key features, each designed to streamline the user experience:
 
