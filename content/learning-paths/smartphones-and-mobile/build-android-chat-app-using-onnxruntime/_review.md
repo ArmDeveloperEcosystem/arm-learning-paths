@@ -16,7 +16,7 @@ review:
             What is Phi?
         answers:
             - A new optimization algorithm for neural networks.
-            - A family of pre-trained language model.
+            - A family of pre-trained language models.
             - A toolkit for converting machine learning models to ONNX format.
         correct_answer: 2                   
         explanation: >
