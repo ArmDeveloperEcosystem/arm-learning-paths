@@ -30,7 +30,13 @@ You might be able to use a later commit. These steps have been tested with the c
 
 ### Build for Android CPU
 
-The Ninja generator needs to be used to build on Windows. Run the following command:
+The Ninja generator needs to be used to build on Windows. First, set JAVA_HOME to the path to your JDK install. You can point to the JDK from Android Studio, or a standalone JDK install.
+
+```bash
+$env:JAVA_HOME="C:\Program Files\Android\Android Studio\jbr"
+```
+
+Now run the following command:
 
 ```bash
 
