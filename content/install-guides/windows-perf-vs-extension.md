@@ -24,11 +24,11 @@ multi_install: FALSE # Set to true if first page of multi-page article, else fal
 multitool_install_part: false # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 ---
-[WindowsPerf](https://learn.arm.com/install-guides/wperf/) is a lightweight performance profiling tool inspired by Linux Perf, and specifically tailored for Windows on Arm. It leverages the ARM64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities. 
+[WindowsPerf](/install-guides/wperf/) is a lightweight performance profiling tool inspired by Linux Perf, and specifically tailored for Windows on Arm. It leverages the AArch64 Performance Monitoring Unit (PMU) and its hardware counters to offer precise profiling capabilities. 
 
-Recognizing the complexities of command-line interaction, the WindowsPerf GUI is a Visual Studio 2022 extension created to provide a more intuitive, integrated experience within the integrated development environment (IDE). This tool enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
+Recognizing the complexities of command-line interaction, the WindowsPerf GUI is a Visual Studio 2022 extension created to provide a more intuitive, integrated experience within the Integrated Development Environment (IDE). This tool enables developers to interact with WindowsPerf, adjust settings, and visualize performance data seamlessly in Visual Studio.
 
-## Overview key features
+## Overview of key features
 
 The WindowsPerf GUI extension is composed of several key features, each designed to streamline the user experience:
 
@@ -53,7 +53,7 @@ Before installing WindowsPerf Visual Studio Extension, check the following:
 3. (Recommended) You can install the LLVM toolchain by following the [LLVM toolchain for Windows on Arm install guide](/install-guides/llvm-woa).
 
 {{% notice llvm-objdump %}}
-Note that the disassembly feature needs to have `llvm-objdump` available at `%PATH%` to work properly.
+The disassembly feature needs to have `llvm-objdump` available at `%PATH%` to work properly.
 {{% /notice %}}
 
 ### Installation from Visual Studio Extension Manager
@@ -93,4 +93,4 @@ To get started, you must link the GUI with the executable file `wperf.exe` by na
 
 In Visual Studio go to **Extensions > Manage Extensions > Installed > All > WindowsPerfGUI** and select **Uninstall**. 
 
-Please note that this will be scheduled by Visual Studio. You may need to close the VS instance and follow the uninstall wizard to remove the extension.
+As this will be scheduled by Visual Studio, you might need to close the VS instance and follow the uninstall wizard to remove the extension.
