@@ -11,7 +11,7 @@ layout: learningpathall
 
 ### Build model runner
 
-Cross-compile the model runner to run on Android using the commands below.
+You will now cross-compile the model runner to run on Android using the commands below:
 
 ``` bash
 cd onnxruntime-genai
@@ -20,12 +20,10 @@ copy src\ort_genai_c.h examples\c\include\
 cd examples\c
 mkdir build
 cd build
+``
+Run the cmake command as shown:
 
-### Build for Android
-cmake -DCMAKE_TOOLCHAIN_FILE=<Android NDK Path>\build\cmake\android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-<api> -DCMAKE_BUILD_TYPE=Release -G "Ninja" ..
-ninja
- 
-# example for building on Windows
+```bash
 cmake -DCMAKE_TOOLCHAIN_FILE=C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.0.12077973\build\cmake\android.toolchain.cmake -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-27 -DCMAKE_BUILD_TYPE=Release -G "Ninja" ..
 ninja
 ```
@@ -34,16 +32,15 @@ After successful build, a binary program called `phi3` will be created.
 
 ### Prepare phi-3-mini model
 
-Phi-3 ONNX models are hosted on HuggingFace. You can download the Phi-3-mini model with huggingface-cli command.
+Phi-3 ONNX models are hosted on HuggingFace. You can download the Phi-3-mini model with huggingface-cli command:
 
 ``` bash
 pip install huggingface-hub[cli]
- 
-# This command downloads the model into a folder called cpu_and_mobile
 huggingface-cli download microsoft/Phi-3-mini-4k-instruct-onnx --include cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4/* --local-dir .
 ```
+This command downloads the model into a folder called cpu_and_mobile.
 
-The phi-3-mini (3B) have a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produce longer output text, but it does consume more memory. This tutorial uses the short context version, which is quantized to 4-bits.
+The phi-3-mini (3B) model has a short (4k) context version and a long (128k) context version. The long context version can accept much longer prompts and produce longer output text, but it does consume more memory. In this learning path, you will use the short context version, which is quantized to 4-bits.
 
 
 ### Run on Android via adb shell
@@ -82,10 +79,10 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/data/local/tmp
 ./phi3 cpu-int4-rtn-block-32-acc-level-4
 ```
 
-This will allow the runner program to load the model, and then it will prompt you to input the text prompt to be given to the model. After inputting, the text output by the model will be displayed sequentially, and upon completion, the following performance metrics should be displayed.
+This will allow the runner program to load the model, and then it will prompt you to input the text prompt to the model. After you enter yout input prompt, the text output by the model will be displayed. On completion, the performance metrics similar to what is shown below should be displayed:
 
 ```
 Prompt length: 64, New tokens: 931, Time to first: 1.79s, Prompt tokens per second: 35.74 tps, New tokens per second: 6.34 tps
 ```
 
-You have successfully run a model on your Android smartphone.
+You have successfully run the Phi-3 model on your Android smartphone powered by Arm.
