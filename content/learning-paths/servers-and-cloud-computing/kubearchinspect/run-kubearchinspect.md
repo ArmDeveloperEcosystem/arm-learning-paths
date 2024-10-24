@@ -6,8 +6,6 @@ weight: 3
 layout: learningpathall
 ---
 
-KubeArchInspect identifies images in a Kubernetes cluster which have support for the Arm architecture. It checks each image against the image registry, checking the available architectures for each image tag. The results can be used to identify potential issues or opportunities for optimizing the cluster for Arm.
-
 ## How do I run KubeArchInspect?
 
 To run KubeArchInspect, you need to have `kubearchinspect` installed and ensure that the `kubectl` command is configured to connect to your cluster. If not already configured, you should set up `kubectcl` to connect to your cluster. 
@@ -65,9 +63,3 @@ quay.io/prometheus/alertmanager:v0.25.0 ✅
 602401143452.dkr.ecr.eu-west-1.amazonaws.com/amazon-k8s-cni-init:v1.15.4-eksbuild.1 ❗
 602401143452.dkr.ecr.eu-west-1.amazonaws.com/amazon-k8s-cni:v1.15.4-eksbuild.1 ❗
 ```
-
-Each image running in the cluster appears on a separate line, including name, tag (version), and test result.
-
-A green tick indicates the image already supports arm64, a red cross that arm64 support is not available, an upward arrow shows that arm64 support is included in a newer version.
-
-A red exclamation mark is shown when an error occurs checking the image. This may indicate an error connecting to the image registry.

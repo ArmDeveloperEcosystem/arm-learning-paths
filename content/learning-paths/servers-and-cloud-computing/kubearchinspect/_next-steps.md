@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Now you know how to use the KubeArchInspect tool to understand the Arm support of your Kubernetes cluster images.
+next_step_guidance: You now know how to use the KubeArchInspect tool to ensure containers running in a Kubernetes cluster support the Arm architecture. To learn more about related topics, please explore the resources below.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/eks-multi-arch/
 
