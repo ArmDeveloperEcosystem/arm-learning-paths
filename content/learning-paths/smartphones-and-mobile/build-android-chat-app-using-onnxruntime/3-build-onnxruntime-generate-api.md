@@ -12,7 +12,7 @@ The Generate() API in ONNX Runtime is designed for text generation tasks using m
 
 
 ### Clone onnxruntime-genai repo
-Open up a Windows Powershell prompt and checkout the source repo:
+Within your Windows Powershell prompt, checkout the source repo:
 
 ```bash
 C:\Users\$env:USERNAME
@@ -27,17 +27,15 @@ You might be able to use later commits. These steps have been tested with the co
 
 ### Build for Android CPU
 
-The Ninja generator needs to be used to build on Windows for Android.
+The Ninja generator needs to be used to build on Windows for Android. Run the following command:
 
 ```bash
- 
- # Example
+python -m pip install requests 
 python3.11 build.py --build_java --android --android_home C:\Users\$env:USERNAME\AppData\Local\Android\Sdk --android_ndk_path C:\Users\$env:USERNAME\AppData\Local\Android\Sdk\ndk\27.0.12077973 --android_abi arm64-v8a --config Release
-
 ```
 
 When the build is complete, confirm the shared library has been created:
 
-```
+```output
 ls build\Android\Release\onnxruntime-genai.so
 ```
