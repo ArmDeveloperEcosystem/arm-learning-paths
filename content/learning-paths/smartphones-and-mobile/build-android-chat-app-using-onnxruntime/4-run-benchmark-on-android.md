@@ -20,7 +20,7 @@ copy src\ort_genai_c.h examples\c\include\
 cd examples\c
 mkdir build
 cd build
-``
+```
 Run the cmake command as shown:
 
 ```bash
