@@ -19,7 +19,7 @@ review:
             - "False"
         correct_answer: 1
         explanation: >
-            The available counters may vary between processors. Use `wprof -l` to generate a list of available counters.
+            The available counters may vary between processors. Use `wperf list` to generate a list of available counters.
 
     - questions:
         question: >
@@ -40,6 +40,26 @@ review:
         correct_answer: 1
         explanation: >
             Some `wperf` commands such as `list`, `test` or `stat` can output data in JSON format.
+
+    - questions:
+        question: >
+            Command `wperf sample` can be used together with  `--annotate` or `--disassemble` command line options.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Yes, you can add annotate and disassemble output to `wperf sample` command.
+
+    - questions:
+        question: >
+            Command `wperf record` can be used together with  `--annotate` or `--disassemble` command line options.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Yes, you can add annotate and disassemble output to `wperf record` command.
 
 
 # ================================================================================
