@@ -9,7 +9,7 @@ review:
             - A cloud-based data storage service for deep learning models.
         correct_answer: 1                    
         explanation: >
-            ONNX Runtime is a cross-platform  inference engine designed to to run machine-learning models in the ONNX format. It optimizes model performance across various hardware environments, including CPUs, GPUs, and specialized accelerators.
+            ONNX Runtime is a cross-platform  inference engine designed to to run machine learning models in the ONNX format. It optimizes model performance across various hardware environments, including CPUs, GPUs and specialized accelerators.
 
     - questions:
         question: >
@@ -20,7 +20,7 @@ review:
             - A toolkit for converting machine learning models to ONNX format.
         correct_answer: 2                   
         explanation: >
-            Phi models are a series of large language models developed to perform natural language processing tasks such as text generation, completion, and comprehension. 
+            Phi models are a series of Large Language Models developed to perform natural language processing tasks such as text generation, completion and comprehension. 
                
     - questions:
         question: >
@@ -31,7 +31,7 @@ review:
             - It allows models to be exchanged between different frameworks, such as PyTorch and TensorFlow.
         correct_answer: 3          
         explanation: >
-            The ONNX (Open Neural Network Exchange) format is an open-source standard designed to enable the sharing and use of machine learning models across different frameworks such as PyTorch, TensorFlow, and others. It allows models to be exported in a unified format, making them interoperable and ensuring they can run on various platforms or hardware.
+            The ONNX (Open Neural Network Exchange) format is an open-source standard designed to enable the sharing and use of machine learning models across different frameworks such as PyTorch and TensorFlow. It allows models to be exported in a unified format, making them interoperable and ensuring they can run on various platforms or hardware.
 
 
 
