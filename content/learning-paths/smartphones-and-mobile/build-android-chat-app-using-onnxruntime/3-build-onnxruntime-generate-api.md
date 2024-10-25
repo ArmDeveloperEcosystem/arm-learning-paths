@@ -6,9 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## Cross-compile the ONNX Runtime generate() API for Android CPU
+## Cross-compile the ONNX Runtime Generate() API for Android CPU
 
-The Generate() API in ONNX Runtime is designed for text generation tasks using models like Phi-3. It implements the generative AI loop for ONNX models, including pre and post processing, inference with ONNX Runtime, logits processing, search and sampling, and KV cache management. You can learn more by reading the [ONNX Runtime generate() API page](https://onnxruntime.ai/docs/genai/).
+The Generate() API in ONNX Runtime is designed for text generation tasks using models like Phi-3. It implements the generative AI loop for ONNX models, including:
+- pre- and post-processing
+- inference with ONNX Runtime
+- logits processing
+- search and sampling
+- KV cache management. 
+You can learn more by reading the [ONNX Runtime generate() API page](https://onnxruntime.ai/docs/genai/).
 
 
 ### Clone onnxruntime-genai repo
@@ -27,7 +33,7 @@ You might be able to use later commits. These steps have been tested with the co
 
 ### Build for Android CPU
 
-The Ninja generator needs to be used to build on Windows for Android. Make sure JAVA_HOME is set before running the following command:
+Ninja generator is used to build on Windows for Android. Make sure you have set JAVA_HOME before running the following command:
 
 ```bash
 python -m pip install requests 

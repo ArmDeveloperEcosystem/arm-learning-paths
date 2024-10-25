@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Set up your development environment
 
-In this Learning Path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ONNX Runtime. You will learn how to build the ONNX runtime and ONNX Runtime generate() API and how to run the Phi-3 model for the Android application.
+In this learning path, you will learn how to build and deploy a simple LLM-based chat app to an Android device using ONNX Runtime. You will learn how to build the ONNX Runtime and ONNX Runtime generate() API and how to run the Phi-3 model for the Android application.
 
-The first step is to prepare a development environment with the required software:
+Your first task is to prepare a development environment with the required software:
 
 - Android Studio (latest version recommended)
 - Android NDK (tested with version 27.0.12077973)
@@ -18,7 +18,7 @@ The first step is to prepare a development environment with the required softwar
 - CMake (tested with version 3.28.1)
 - Ninja (tested with version 1.11.1)
 
-The instructions were tested on an x86 Windows machine with at least 16GB of RAM.
+The following instructions were tested on an x86 Windows machine with at least 16GB of RAM.
 
 ## Install Android Studio and Android NDK
 
@@ -26,13 +26,13 @@ Follow these steps to install and configure Android Studio:
 
 1. Download and install the latest version of [Android Studio](https://developer.android.com/studio/). 
 
-2. Navigate to `Tools -> SDK Manager`.
+2. Navigate to **Tools > SDK Manager**.
 
-3. In the `SDK Platforms` tab, check `Android 14.0 ("UpsideDownCake")`.
+3. In the **SDK Platforms** tab, check **Android 14.0 ("UpsideDownCake")**.
 
-4. In the `SDK Tools` tab, check `NDK (Side by side)`.
+4. In the **SDK Tools** tab, check **NDK (Side by side)**.
 
-5. Click Ok and Apply.
+5. Click **OK** and **Apply**.
 
 ## Install Python 3.11
 
@@ -50,9 +50,7 @@ The instructions were tested with version 3.28.1
 
 ## Install Ninja
 
-Ninja is a minimalistic build system designed to efficiently handle incremental builds, particularly in large-scale software projects, by focusing on speed and simplicity.
-
-The Ninja generator needs to be used to build on Windows for Android.
+Ninja is a minimalistic build system designed to efficiently handle incremental builds, particularly in large-scale software projects, by focusing on speed and simplicity. The Ninja generator is used to build on Windows for Android.
 
 [Download and install Ninja]( https://github.com/ninja-build/ninja/releases)
 
