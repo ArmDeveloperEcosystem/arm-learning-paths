@@ -9,9 +9,9 @@ layout: learningpathall
 
 In this section, you will set up a cluster on Zilliz Cloud.
 
-Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
+Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) for a free account on Zilliz Cloud. 
 
-After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster). 
+After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm). 
 
 Now create a **Dedicated** cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
 
@@ -22,7 +22,7 @@ When you select the **Create Cluster** Button, you should see the cluster runnin
 ![running](running_cluster.png)
 
 {{% notice Note %}}
-You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about installing Milvus, see the [Milvus installation documentation](https://milvus.io/docs/install-overview.md).
+You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) on Arm-based machines. For more information about installing Milvus, see the [Milvus installation documentation](https://milvus.io/docs/install-overview.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm).
 {{% /notice  %}}
 
 ## Create the Collection
@@ -39,7 +39,7 @@ milvus_client = MilvusClient(
 )
 
 ```
-Replace *<your_zilliz_public_endpoint>* and *<your zilliz_api_key>* with the `URI` and `Token` for your running cluster. Refer to [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud for further information.
+Replace *<your_zilliz_public_endpoint>* and *<your zilliz_api_key>* with the `URI` and `Token` for your running cluster. Refer to [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) in Zilliz Cloud for further information.
 
 Now, append the following code to `zilliz-llm-rag.py` and save the contents:
 
@@ -60,7 +60,7 @@ milvus_client.create_collection(
 This code checks if a collection already exists and drops it if it does. If this happens, you can create a new collection with the specified parameters.
 
 If you do not specify any field information, Milvus automatically creates a default `id` field for the primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema defined fields and their values.
-You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating).
+You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm).
 
 You can now prepare the data to use in this collection.
 
