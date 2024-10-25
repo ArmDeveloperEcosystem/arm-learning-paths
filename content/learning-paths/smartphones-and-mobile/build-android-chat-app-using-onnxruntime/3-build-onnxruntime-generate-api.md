@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Cross-compile the ONNX Runtime generate() API for Android CPU
+## Cross-compile the ONNX Runtime Generate() API for Android CPU
 
 The Generate() API in ONNX Runtime is designed for text generation tasks using models like Phi-3. It implements the generative AI loop for ONNX models, including:
 - pre- and post-processing
