@@ -9,22 +9,22 @@ layout: learningpathall
 ## Application Profiling
 Application profiling can be split into 2 main types - *Instrumentation* and *Sampling*. Streamline, for example, is a sampling profiler, that takes regular samples of various counters and registers in the system to provide a detailed view of the system's performance. Sampling will only provide a statistical view, but it is less intrusive and has less processing overhead than instrumentation.
 
-The profiler can look at memory, CPU activity and cycles, cache misses, and may parts of the GPU as well as other performance metrics. It can also provide a timeline view of these counters to show the application's performance over time. This will show bottlenecks, and help you understand where to focus your optimization efforts.
+The profiler can look at memory, CPU activity and cycles, cache misses, and many parts of the GPU as well as other performance metrics. It can also provide a timeline view of these counters to show the application's performance over time. This will show bottlenecks, and help you understand where to focus your optimization efforts.
 
 ![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline timeline view")
 
 ## Streamline
-Streamline (and Performance Studio) will be installed on a host machine, and will connect to your target Arm device to capture the data. In our example, this will be an Android phone. The data is captured over a USB connection, and the data is then analyzed on the host machine.
+[Streamline](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) (and Performance Studio) will be installed on a host machine, and will connect to your target Arm device to capture the data. In our example, this will be an Android phone. The data is captured over a USB connection, and then analyzed on the host machine.
 
-There are many <a href="https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio">tutorials and training videos</a> on Streamline, which you can refer to for more depth. Our example will be Android-based, but you can use <a href="https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application">these instructions for Linux</a> setup and capture.
+There are many [tutorials and training videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) on Streamline, which you can refer to for more depth. Our example will be Android-based, but you can use [these instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application) setup and capture.
 
-For now, as per these <a href="https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en">setup instructions</a>, make sure you have `adb` (Android Debug Bridge) installed. We will be looking at Android Studio profiling shortly, and if you have installed Android Studio, it will have installed adb. Otherwise, you can get it as part of the Android SDK platform tools <a href="https://developer.android.com/studio/releases/platform-tools.html">here</a>.
+For now, as per these [setup instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), make sure you have `adb` (Android Debug Bridge) installed. We will be looking at Android Studio profiling shortly, and if you have installed Android Studio, it will have installed adb. Otherwise, you can get it as part of the Android SDK platform tools [here](https://developer.android.com/studio/releases/platform-tools.html).
 
-Make sure adb is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by adding the platform-tools directory to your path. The instructions for this will depend on your host machine's operating system.
+Make sure adb is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by adding the `platform-tools` directory to your path. The instructions for this (and location of the directory) will depend on your host machine's operating system.
 
-Next, install <a href="https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads">Arm Performance Studio</a>, which includes Streamline. 
+Next, install [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads), which includes Streamline. 
 
-Connect your device to your computer through USB. Ensure that your device is set to Developer mode.
+Connect your Android phone to your computer through USB. Ensure that your device is set to [Developer mode](https://developer.android.com/studio/debug/dev-options).
 
 On your device, go to `Settings > Developer Options` and enable USB Debugging. If your device asks you to authorize connection to your computer, confirm this. Test the connection by running `adb devices` in a terminal. You should see your device ID listed.
 
@@ -38,11 +38,11 @@ You can now run Streamline, and do a capture of your application. This can be us
 
 ## Custom Annotations
 
-In Streamline it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This can help you understand the performance of your application in relation to these events. In the picture above there are annotations to show when inference, pre-processing, and post-processing are happening.
+In Streamline it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This can help you understand the performance of your application in relation to these events. At the bottom of the picture above there are annotations to show when inference, pre-processing, and post-processing are happening.
 
-To add annotations, we need to add some files into our project from the Gator daemon that Streamline uses. These files are `streamline_annotate.c`, `streamline_annotate.h` and `streamline_annotate_logging.h` from <a href="https://github.com/ARM-software/gator/tree/main/annotate">here</a>. Then we will be able to show log strings, markers, counters and Custom Activity Maps.
+To add annotations, we need to add some files into our project from the Gator daemon that Streamline uses. These files are `streamline_annotate.c`, `streamline_annotate.h` and `streamline_annotate_logging.h` from [here](https://github.com/ARM-software/gator/tree/main/annotate). Then we will be able to show log strings, markers, counters and Custom Activity Maps.
 
-These files are obviously C code, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is skightly trickier than just adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this <a href="https://developer.android.com/studio/projects/add-native-code">here</a>.
+These files are obviously C code, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is slightly trickier than just adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this [here](https://developer.android.com/studio/projects/add-native-code).
 
 For us, we create a file the we will call `annotate_jni_wrapper.c`. This will be a wrapper around the Gator daemon's functions, and will be called from our Kotlin code. It starts as below and continues with very similar wrapper functions for the other Gator daemon functions you want.
 

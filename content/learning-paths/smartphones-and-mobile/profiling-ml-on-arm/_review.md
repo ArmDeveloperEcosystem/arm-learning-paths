@@ -2,37 +2,37 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            Streamline Profiling lets you profile:
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-        correct_answer: 1                    
+            - Arm CPU activity
+            - Arm GPU activity
+            - when your Neural Network is running
+            - All of the above
+        correct_answer: 4                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            Streamline will show you CPU and GPU activity (and a lot more counters!), and if Custom Activity Maps are used, you can see when your Neural Network and other parts of your application are running.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            Does Android Studio have a profiler?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - Yes
+            - No
+        correct_answer: 1                   
         explanation: >
-            PLACEHOLDER EXPLANATION 2
+            Yes, Android Studio has a built-in profiler that can be used to monitor the memory usage of your app among other things
                
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            Is there a way to profile what is happening inside your Neural Network?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
+            - Yes, Streamline just shows you out of the box
+            - No
+            - Yes, ArmNN's ExecuteNetwork can do this
+            - Yes, Android Studio Profiler can do this
+        correct_answer: 3          
         explanation: >
-            PLACEHOLDER EXPLANATION 3
+            Standard profilers don't have an easy way to see what is happening inside an ML framework to see a model running inside it. ArmNN's ExecuteNetwork can do this for TensorFlow Lite models, and ExecuTorch has tools that can do this for PyTorch models.
 
 
 

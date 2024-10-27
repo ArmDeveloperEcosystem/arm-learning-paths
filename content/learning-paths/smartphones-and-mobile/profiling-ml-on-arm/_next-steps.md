@@ -1,21 +1,15 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Continue Learning
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/smartphones-and-mobile/build-llama3-chat-android-app-using-executorch-and-xnnpack/
+recommended_path: /learning-paths/smartphones-and-mobile/kleidiai-on-android-with-mediapipe-and-xnnpack/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Arm Streamline User Guide  
+        link: https://developer.arm.com/documentation/101816/latest/
         type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+
 
 
 # ================================================================================

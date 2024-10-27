@@ -15,9 +15,9 @@ We will be looking at an Android example using TFLite in this learning path, but
 
 ## Tools
 
-Currently different tools are needed if you want to look inside the NN inference, or at the application's performance as a whole.
+Currently, you need to use different tools to profile the ML inference or the application's performance as a whole.
 
-For profiling the ML inference we will look at <a href="https://github.com/ARM-software/armnn/releases">ArmNN</a>'s ExecuteNetwork.
+For profiling the ML inference we will look at [ArmNN](https://github.com/ARM-software/armnn/releases)'s ExecuteNetwork.
 
-For profiling the application as a whole we will look at <a href="https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio">Arm Performance Studio</a>'s Streamline, and at the Android Studio Profiler.
+For profiling the application as a whole we will look at [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio)'s Streamline, and at the Android Studio Profiler.
 
