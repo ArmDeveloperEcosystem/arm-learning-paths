@@ -52,7 +52,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 
 Download Multipass for macOS.
 
-```console
+```bash
 wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg
 ```
 
@@ -60,7 +60,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multip
 
 Install the download using the package command.
 
-```console
+```bash
 sudo installer -pkg multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg -target /
 ```
 
@@ -90,7 +90,7 @@ sudo apt install cpu-checker -y
 
 To check if KVM is available run:
 
-```console
+```bash
 kvm-ok
 ```
 

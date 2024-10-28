@@ -46,7 +46,7 @@ aarch64
 If you see a different result, then you are not using an Arm computer running 64-bit Linux.
 
 
-PyTorch requires Python 3, and this can be installed with `pip`. 
+PyTorch requires Python 3, and this can be installed with `pip`.
 
 For Ubuntu, run:
 
@@ -65,7 +65,7 @@ alias python=python3
 
 It is recommended that you install PyTorch in your own Python virtual environment. Set up your virtual environment:
 
-```bash 
+```bash
 python -m venv venv
 source venv/bin/activate
 ```
@@ -127,7 +127,7 @@ PyTorch built with:
 
   - Build settings: BLAS_INFO=open, BUILD_TYPE=Release, CXX_COMPILER=/opt/rh/devtoolset-10/root/usr/bin/c++, CXX_FLAGS=-ffunction-sections -fdata-sections -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOCUPTI -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=open, TORCH_VERSION=2.5.1, USE_CUDA=OFF, USE_CUDNN=OFF, USE_CUSPARSELT=OFF, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=OFF, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF,
 ```
-The configuration output is an advanced option to check the tools and structure used to build PyTorch. 
+The configuration output is an advanced option to check the tools and structure used to build PyTorch.
 
 ## BFloat16 floating-point number format
 
@@ -135,7 +135,7 @@ Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For 
 
 To check if your system includes BFloat16, use the `lscpu` command:
 
-```console
+```bash
 lscpu | grep bf16
 ```
 
@@ -147,7 +147,7 @@ Flags: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asi
 
 If the result is blank, you do not have a processor with BFloat16.
 
-BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You might experience a drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications. 
+BFloat16 provides improved performance and smaller memory footprint with the same dynamic range. You might experience a drop in model inference accuracy with BFloat16, but the impact is acceptable for the majority of applications.
 
 You can use an environment variable to enable BFloat16:
 
@@ -171,7 +171,7 @@ export LRU_CACHE_CAPACITY=1024
 
 ## Transparent huge pages
 
-Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP might result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size. 
+Transparent huge pages (THP) provide an alternative method of utilizing huge pages for virtual memory. Enabling THP might result in improved performance because it reduces the overhead of Translation Lookaside Buffer (TLB) lookups by using a larger virtual memory page size.
 
 To check if THP is available on your system, run:
 
@@ -207,7 +207,7 @@ To profile a [Vision Transformer (ViT) model](https://huggingface.co/google/vit-
 
 ```
 pip install transformers datasets
-``` 
+```
 
 Use a text editor to save the code below as `profile-vit.py`:
 
@@ -298,7 +298,7 @@ Self CPU time total: 786.880ms
 ```
 
 
-Experiment with the two environment variables for BFloat16 and THP and observe the performance differences. 
+Experiment with the two environment variables for BFloat16 and THP and observe the performance differences.
 
 You can set each variable and run the test again and observe the new profile data and run time.
 
@@ -397,7 +397,7 @@ The output will be similar to:
 Self CPU time total: 633.541ms
 ```
 
-You should see the `quantized::linear_dynamic` layer being profiled. You can see the improvement in the model inference performance using dynamic quantization. 
+You should see the `quantized::linear_dynamic` layer being profiled. You can see the improvement in the model inference performance using dynamic quantization.
 
 You are now ready to use PyTorch on Arm Linux.
 

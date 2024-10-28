@@ -140,7 +140,7 @@ You can copy it to a location in your search path or run it from the current loc
 
 To copy it use:
 
-```console
+```bash
 sudo cp tools/perf/perf /usr/local/bin
 ```
 
