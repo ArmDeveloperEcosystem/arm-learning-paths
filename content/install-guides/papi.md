@@ -66,7 +66,7 @@ git clone https://github.com/icl-utk-edu/papi/
 ```bash { target="ubuntu:latest" }
 cd papi/src
 chmod +x configure
-configure && make
+./configure && make
 ```
 
 3. Configure and compile the source code:
