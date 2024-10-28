@@ -111,7 +111,6 @@ You can install BOLT in 2 different ways, by building the source code or by down
 1. Clone the repository
 
 ```bash
-cd $HOME
 git clone https://github.com/llvm/llvm-project.git
 ```
 
@@ -146,7 +145,6 @@ You are now ready to [verify BOLT is installed](#verify).
 For Arm Linux use the file with `aarch64` in the name:
 
 ```bash
-cd $HOME
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-17.0.5/clang+llvm-17.0.5-aarch64-linux-gnu.tar.xz
 ```
 

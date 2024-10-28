@@ -56,7 +56,7 @@ Download the zip file with `curl`, extract the installer, and run it.
 ```bash { target="ubuntu:latest" }
 curl "https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
-sudo ./aws/install
+sudo ./aws/install --update
 ```
 
 Confirm the CLI version 2 is available by invoking the `aws` command to print the version.
