@@ -2,6 +2,7 @@
 
 import logging
 import os
+import shutil
 import subprocess
 import json
 from junit_xml import TestCase
@@ -283,7 +284,7 @@ def check(json_file, start, stop, md_article):
             if os.path.isfile(path):
                 os.remove(path)
             elif os.path.isdir(path):
-                os.removedirs(path)
+                shutil.rmtree(path)
             logging.debug(f"Removed {path}")
 
     # Stop instance

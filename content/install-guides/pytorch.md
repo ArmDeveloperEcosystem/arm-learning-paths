@@ -74,7 +74,7 @@ Test PyTorch:
 
 Use a text editor to copy and paste the code below into a text file named `pytorch.py`
 
-```python
+```python { file_name="pytorch.py" }
 import torch
 print(torch.__version__)
 x = torch.rand(5,3)
@@ -198,7 +198,7 @@ export THP_MEM_ALLOC_ENABLE=1
 
 Use a text editor to save the code below as `profile.py`:
 
-```python
+```python { file_name="profile.py" }
 import torch
 from torch.profiler import profile, record_function, ProfilerActivity
 
