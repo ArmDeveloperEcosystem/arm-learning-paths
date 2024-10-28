@@ -271,6 +271,16 @@ def check(json_file, start, stop, md_article):
     if os.path.exists(test_cmd_filename):
         os.remove(test_cmd_filename)
 
+    # Remove files that were generated from the tests, if any
+    untracked_files_process = subprocess.run("git ls-files --others --exclude-standard", shell=True, capture_output=True)
+    generated_files = untracked_files_process.stdout.splitlines()
+    if generated_files:
+        logging.info(f"Removing files that was created during testing from repository")
+        logging.info(generated_files)
+        for file in generated_files:
+            os.remove(file)
+            logging.debug(f"Removed {file}")
+
     # Stop instance
     if stop:
         logging.debug("Terminating container(s)")

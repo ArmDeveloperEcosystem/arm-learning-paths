@@ -56,14 +56,14 @@ source $HOME/.bashrc
 
 Confirm `pulumi` is now in the search path:
 
-```bash { env_source="~/.bashrc" output_lines = "2"}
+```bash { env_source="~/.bashrc" | "2"}
 which pulumi
 /home/ubuntu/.pulumi/bin/pulumi
 ```
 
 Print the version:
 
-```bash { env_source="~/.bashrc" output_lines = "2"}
+```bash { env_source="~/.bashrc" | "2"}
 pulumi version
 v3.78.0
 ```
@@ -72,17 +72,17 @@ You are ready to use Pulumi on your Linux machine.
 
 ## Get started {#start}
 
-Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud visit [app.pulumi.com](https://app.pulumi.com/) and sign up. 
+Pulumi keeps your projects and state information in Pulumi Cloud, making it easy to access them from anywhere. If you want to use Pulumi Cloud visit [app.pulumi.com](https://app.pulumi.com/) and sign up.
 
-It's not necessary to use Pulumi Cloud to get started, you can store project information on your local computer. 
+It's not necessary to use Pulumi Cloud to get started, you can store project information on your local computer.
 
 Below is a simple example to try out Pulumi.
 
-The example demonstrates using Docker to pull a container image from Docker Hub to your local machine using Python. 
+The example demonstrates using Docker to pull a container image from Docker Hub to your local machine using Python.
 
-To run the example, you need to install Docker. Refer to the [Docker install guide](/install-guides/docker/) for instructions. 
+To run the example, you need to install Docker. Refer to the [Docker install guide](/install-guides/docker/) for instructions.
 
-You also need Python. Make sure you have `python` and `pip` installed. 
+You also need Python. Make sure you have `python` and `pip` installed.
 
 For `Ubuntu 22.04` on Arm you can run the commands below to install:
 
@@ -97,7 +97,7 @@ Create a new directory for the example:
 mkdir pulumi-test ; cd pulumi-test
 ```
 
-Log in to your local machine, a shortcut to use `~/.pulumi` to store project data. 
+Log in to your local machine, a shortcut to use `~/.pulumi` to store project data.
 
 ```bash { env_source="~/.bashrc" }
 pulumi login --local
@@ -154,9 +154,9 @@ There are 4 prompts to respond to:
 
 2. Enter a name for the stack.
 
-3. When prompted, enter a passphrase for the stack (twice). 
+3. When prompted, enter a passphrase for the stack (twice).
 
-4. Answer `yes` to the final question to create the stack. 
+4. Answer `yes` to the final question to create the stack.
 
 An example output for `pulumi up` is shown below:
 
@@ -164,12 +164,12 @@ An example output for `pulumi up` is shown below:
 Please choose a stack, or create a new one:  [Use arrows to move, type to filterPlease choose a stack, or create a new one: <create a new stack>
 Please enter your desired stack name: test1
 Created stack 'test1'
-Enter your passphrase to protect config/secrets: 
-Re-enter your passphrase to confirm: 
+Enter your passphrase to protect config/secrets:
+Re-enter your passphrase to confirm:
 Previewing update (test1):
-     Type                         Name               Plan       
- +   pulumi:pulumi:Stack          alpine-pull-test1  create     
- +   └─ docker:index:RemoteImage  alpineImage        create     
+     Type                         Name               Plan
+ +   pulumi:pulumi:Stack          alpine-pull-test1  create
+ +   └─ docker:index:RemoteImage  alpineImage        create
 
 
 Outputs:
@@ -180,9 +180,9 @@ Resources:
 
 Do you want to perform this update? yes
 Updating (test1):
-     Type                         Name               Status              
- +   pulumi:pulumi:Stack          alpine-pull-test1  created (0.07s)     
- +   └─ docker:index:RemoteImage  alpineImage        created (0.03s)     
+     Type                         Name               Status
+ +   pulumi:pulumi:Stack          alpine-pull-test1  created (0.07s)
+ +   └─ docker:index:RemoteImage  alpineImage        created (0.03s)
 
 
 Outputs:
@@ -197,7 +197,7 @@ Duration: 1s
 
 After the Python script runs you have the container on your machine. Confirm this using the `docker images` command:
 
-```bash
+```console
 docker images
 ```
 
