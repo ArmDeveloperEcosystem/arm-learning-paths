@@ -59,14 +59,14 @@ sudo apt install -y make gcc
 
 ```bash { target="ubuntu:latest" }
 git clone https://github.com/icl-utk-edu/papi/
-cd papi/src
 ```
 
 2. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
+cd papi/src
 chmod +x configure
-./configure && make
+configure && make
 ```
 
 3. Configure and compile the source code:

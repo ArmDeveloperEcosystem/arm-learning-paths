@@ -194,7 +194,6 @@ branch:
        [Mispredicted or not predicted branch speculatively executed]
   br_pred
        [Predictable branch speculatively executed]
-
 ```
 
 Perf is not working correctly if you see output similar to the messages below. To fix the errors you need to [build Perf from source](#source).
@@ -223,7 +222,7 @@ E: linux-perf-5.15 is not installed.
 ### Generate a test Perf report
 
 Generate a simple Perf report. For example:
-```bash
+```console
 perf stat -a pwd
 ```
 The `pwd` command output will be shown as well as the report:
@@ -295,7 +294,7 @@ Arm systems use a kernel driver to expose PMU hardware counters. The driver need
 To check if the driver is running use the `dmesg` command:
 
 ```bash
-dmesg | grep "PMU driver"
+sudo dmesg | grep "PMU driver"
 ```
 
 {{% notice Note%}}

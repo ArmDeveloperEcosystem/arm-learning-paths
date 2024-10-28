@@ -274,14 +274,17 @@ def check(json_file, start, stop, md_article):
     # Remove files that were generated from the tests, if any
     untracked_files_process = subprocess.run("git ls-files --others --exclude-standard", shell=True, capture_output=True)
     untracked_files = untracked_files_process.stdout.decode("utf-8").splitlines()
-    files_to_remove = [ file for file in untracked_files if "_cmd.json" not in file ]
+    paths_to_remove = [ file for file in untracked_files if "_cmd.json" not in file ]
 
-    if files_to_remove:
+    if paths_to_remove:
         logging.info(f"Removing files that was created during testing from repository")
-        logging.info(files_to_remove)
-        for file in files_to_remove:
-            os.remove(file)
-            logging.debug(f"Removed {file}")
+        logging.info(paths_to_remove)
+        for path in paths_to_remove:
+            if os.path.isfile(path):
+                os.remove(path)
+            elif os.path.isdir(path):
+                os.removedirs(path)
+            logging.debug(f"Removed {path}")
 
     # Stop instance
     if stop:

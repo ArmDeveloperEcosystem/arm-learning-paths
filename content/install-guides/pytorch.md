@@ -128,7 +128,7 @@ Recent Arm processors support the BFloat16 (BF16) number format in PyTorch. For 
 
 To check if your system includes BFloat16, use the `lscpu` command:
 
-```bash
+```console
 lscpu | grep bf16
 ```
 
