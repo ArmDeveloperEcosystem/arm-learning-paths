@@ -38,13 +38,13 @@ You can now run Streamline, and do a capture of your application. This can be us
 
 ## Custom Annotations
 
-In Streamline it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This can help you understand the performance of your application in relation to these events. At the bottom of the picture above there are annotations to show when inference, pre-processing, and post-processing are happening.
+In Streamline it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This can help you understand the performance of your application in relation to these events. At the bottom of *Figure 1* above there are custom annotations to show when inference, pre-processing, and post-processing are happening.
 
 To add annotations, we need to add some files into our project from the Gator daemon that Streamline uses. These files are `streamline_annotate.c`, `streamline_annotate.h` and `streamline_annotate_logging.h` from [here](https://github.com/ARM-software/gator/tree/main/annotate). Then we will be able to show log strings, markers, counters and Custom Activity Maps.
 
 These files are obviously C code, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is slightly trickier than just adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this [here](https://developer.android.com/studio/projects/add-native-code).
 
-For us, we create a file the we will call `annotate_jni_wrapper.c`. This will be a wrapper around the Gator daemon's functions, and will be called from our Kotlin code. It starts as below and continues with very similar wrapper functions for the other Gator daemon functions you want.
+For us, we create a file that we will call `annotate_jni_wrapper.c` in the `src/main/cpp/` folder under our project. This will be a wrapper around the Gator daemon's functions, and will be called from our Kotlin code. It starts as below and continues with very similar wrapper functions for the other Gator daemon functions you want.
 
 ```c
 #include <jni.h>
@@ -94,7 +94,7 @@ target_link_libraries( # Specifies the target library.
         ${log-lib} )
 ```
 
-If you add the following to your `build.gradle` file, you will be able to call the functions from your Kotlin code:
+If you add the following to the `build.gradle` file of the Module you wish to profile, you will be able to call the functions from your Kotlin code:
 
 ```gradle
     externalNativeBuild {
@@ -158,12 +158,16 @@ class AnnotateStreamline {
 The `AnnotateStreamline` class can now be used in your Kotlin code to add annotations to the Streamline timeline view. Make sure that `AnnotateStreamline.setup()` is called first, and then you can add annotations like this:
 
 ```kotlin
-      AnnotateStreamline.annotateMarkerColorStr(AnnotateStreamline.ANNOTATE_BLUE, "Important event")
+      AnnotateStreamline.annotateMarkerColorStr(AnnotateStreamline.ANNOTATE_BLUE, "Model Load")
 ```
+
+This colored marker with a string will add the string and time to Streamline's log view, and look like the below image in Streamline's timeline:
+
+![Streamline image alt-text#center](streamline_marker.png "Figure 2. Streamline timeline markers")
 
 ## Custom Activity Maps (CAMs)
 
-In addition to adding strings to the log and colored markers to the timeline, a particularly useful set of annotations is the Custom Activity Maps. These are the named colored bands you can see at the bottom of the Streamline timeline view shown above. They can be used to show when specific parts of your application are running, such as the pre-processing or inference, and layered for functions within functions etc.
+In addition to adding strings to the log and colored markers to the timeline, a particularly useful set of annotations is the Custom Activity Maps. These are the named colored bands you can see at the bottom of the Streamline timeline view shown in *Figure 1*. They can be used to show when specific parts of your application are running, such as the pre-processing or inference, and layered for functions within functions etc.
 
 To add these you'll need to import the functions that start `gator_cam_` from `streamline_annotate.h` through your wrapper files in the same way as the functions above. Then you can use CAMs, but first you'll need to set up the tracks the annotations will appear on and an id system for each annotation. The `baseId` code below is to ensure that in the case of multiple places in your code adding annotations, the ids are unique.
 
@@ -197,4 +201,4 @@ Then they can be used like this:
       AnnotateStreamline.camJobEnd(camViewId, preprocess, AnnotateStreamline.getTime())
 ```
 
-Now when you build and deploy a debug version of your application, you can run Streamline and see the annotations and CAMs in the timeline view. This will make it obvious whether the time spent in your application is on the inference, ML pre-processing, ML post-processing, or other parts of your application.
+Now when you build and deploy a debug version of your application, you can run Streamline and see the annotations and CAMs in the timeline view. See the [Streamline documentation](https://developer.arm.com/documentation/101816/latest/) for how to make a capture for profiling. Once the capture is made and analyzed, you will be able to see when your application is running the inference, ML pre-processing, ML post-processing, or other parts of your application. From there you can see where the most time is spent, and how hard the CPU or GPU is working during different parts of the application. From this you can then decide if work is needed to improve performance and where that work needs doing.

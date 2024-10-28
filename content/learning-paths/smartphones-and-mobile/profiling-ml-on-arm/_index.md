@@ -3,7 +3,7 @@ title: How to Profile ML on Arm
 
 minutes_to_complete: 30
 
-who_is_this_for: ML App developers who want to see the performance of their models on Arm devices.
+who_is_this_for: Machine Learning App developers who want to see the performance of their models on Arm devices.
 
 learning_objectives: 
     - Profile timings of ML models on Arm devices.

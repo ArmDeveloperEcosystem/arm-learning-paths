@@ -7,24 +7,25 @@ layout: learningpathall
 ---
 
 ## ArmNN's Network Profiler
-One way of running tflite models is with ArmNN. This is available as a delegate to the standard tflite interpreter. But to profile the model, there is a command-line utility called `ExecuteNetwork`. This program just runs the model without the rest of an app. It is able to output layer timings and other useful information to let you know where there might be bottlenecks within your model.
+One way of running tflite models is with ArmNN. This is available as a delegate to the standard tflite interpreter. But to profile the model, ArmNN comes with a command-line utility called `ExecuteNetwork`. This program just runs the model without the rest of an app. It is able to output layer timings and other useful information to let you know where there might be bottlenecks within your model.
 
-If you are not using tflite, you'll need to look at other tools from your framework to profile your model. If you are using tflite, but not ArmNN, then the output from `ExecuteNetwork` will be more of an indication than a definitive answer. But it can still be useful to see if there are any obvious problems.
+If you are not using tflite, you'll need to look at other tools from your framework to profile your model. If you are using tflite without ArmNN, then the output from `ExecuteNetwork` will be more of an indication than a definitive answer. But it can still be useful to see if there are any obvious problems.
 
 To get `ExecuteNetwork` you can download it from the [ArmNN GitHub](https://github.com/ARM-software/armnn/releases). Download the version appropriate for the Android phone you wish to test on - the Android version and the architecture of the phone. If you are unsure of the architecture, you can use a lower one, but you may miss out on some optimizations. Inside the tar.gz that you download, `ExecuteNetwork` is included. Note among the other release downloads on the ArmNN Github is the separate file for the `aar` delegate which is the easy way to include the ArmNN delegate into your app.
 
 To run `ExecuteNetwork` you'll need to use `adb` to push the model and the executable to your phone, and then run it from the adb shell. `adb` is included with Android Studio, but you may need to add it to your path. Android Studio normally installs it to a location like \<user>\AppData\Local\Android\Sdk\platform-tools. `adb` can also be downloaded separately from the [Android Developer site](https://developer.android.com/studio/releases/platform-tools).
 
-From a command prompt, you can run the following commands to push the files to your phone:
+Unzip the tar.gz folder you downloaded to somewhere convenient. From a command prompt, you can then adapt and run the following commands to push the files to your phone. The `/data/local/tmp` folder of your Android device is a place with relaxed permissions that you can use to run this profiling.
 
 ```bash
-adb push model.tflite /data/local/tmp/
+adb push model.tflite /data/local/tmp/   # the tflite NN model file that you wish to profile
 adb push ExecuteNetwork /data/local/tmp/
 adb push libarm_compute.so /data/local/tmp/
 adb push libarmnn.so /data/local/tmp/
 adb push libarmnn_support_library.so /data/local/tmp/
+# more ArmNN .so library files
 ```
-Push all the `.so` library files that are in the base folder of the tar.gz you downloaded, alongside `ExecuteNetwork`, and all the `.so` files in the `delegate` sub-folder. If you are using a recent version on of Android Studio this copying can be done much more easily with drag and drop in the *Device Explorer > Files*.
+Push all the `.so` library files that are in the base folder of the tar.gz you downloaded, alongside `ExecuteNetwork`, and all the `.so` files in the `delegate` sub-folder. If you are using a recent version of Android Studio this copying can be done much more easily with drag and drop in the *Device Explorer > Files*.
 
 Then you need to set the permissions on the files:
 
@@ -51,7 +52,7 @@ adb pull /data/local/tmp/modelout.txt
 ```
 Once again, this can be done with drag and drop in Android Studio's *Device Explorer > Files*.
 
-Depending on the size of your model, the output will probably be quite large. You can use a text editor or a tool like `less` to view the file. The output is in JSON format, so you can use a JSON viewer to make it more readable. Usually some scripting can be used to extract the information you need more easily out of the very raw data in the file.
+Depending on the size of your model, the output will probably be quite large. You can use a text editor to view the file. The output is in JSON format, so you can use a JSON viewer to make it more readable. Usually some scripting can be used to extract the information you need more easily out of the very raw data in the file.
 
 At the top is the summary, with the setup time and inference time of your 2 runs, which will look something like this:
 ```text
@@ -70,4 +71,4 @@ Info: Execution time: 468.42 ms.
 Info: Inference time: 468.58 ms
 ```
 
-After the summary comes the graph of the model, and then the layers and their timings from the second run. At the start of the layers there are a few optimizations & their timings recorded before the network itself, with the layers' "Wall clock time" in microseconds of how long they took to run. These layers and their timings can then be analysed to see which layers, and which operators, took the most time.
+After the summary comes the graph of the model, and then the layers and their timings from the second run. At the start of the layers there are a few optimizations and their timings recorded before the network itself, so you can skip past the graph and the optimization timings to get to the part that wants analyzing.  The layers' "Wall clock time" in microseconds shows how long they took to run. These layers and their timings can then be analyzed to see which layers, and which operators, took the most time.
