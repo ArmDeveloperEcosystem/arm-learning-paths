@@ -84,7 +84,7 @@ source ~/.bashrc
 
 To list available modules:
 
-```consple
+```console
 module avail
 ```
 
