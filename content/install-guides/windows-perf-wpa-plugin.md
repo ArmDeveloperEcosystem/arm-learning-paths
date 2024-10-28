@@ -1,8 +1,8 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: WindowsPerf Ecosystem - the Windows Performance Analyzer (WPA) Plugin
-minutes_to_complete: 5
+title: Windows Performance Analyzer (WPA) Plugin
+minutes_to_complete: 15
 
 official_docs: https://github.com/arm-developer-tools/windowsperf-wpa-plugin
 
@@ -16,10 +16,9 @@ additional_search_terms:
   - windows
   - woa
   - windows on arm
-  - open source windows on arm
   - windows performance analyzer
   - wpa
-  - windowsperf
+  
 ### FIXED, DO NOT MODIFY
 weight: 1 # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true # Set to true to be listed in main selection page, else false
@@ -28,94 +27,111 @@ multitool_install_part: false # Set to true if a sub-page of a multi-page articl
 layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## Introduction
+## What is the Windows Performance Analyzer plugin?
 
-[**WindowsPerf**](https://github.com/arm-developer-tools/windowsperf) is a lightweight performance profiling tool inspired by Linux perf, specifically tailored for Windows on Arm.
-It leverages the Arm64 PMU (Performance Monitor Unit) and its hardware counters to offer precise profiling capabilities.
-The **WindowsPerf WPA plugin** bridges the gap between the detailed output of **WindowsPerf** and the powerful capabilities of **Windows Performance Analyzer**.
+The Windows Performance Analyzer plugin connects Windows Perf to the Windows Performance Analyzer (WPA).
 
-The plugin is built on the [`microsoft-performance-toolkit-sdk`](https://github.com/microsoft/microsoft-performance-toolkit-sdk) and is shipped as a single `.dll` file.
+[WindowsPerf](https://github.com/arm-developer-tools/windowsperf) is a lightweight performance profiling tool inspired by Linux Perf and designed for Windows on Arm.
 
+Windows Performance Analyzer (WPA) is a tool that creates graphs and data tables of Event Tracing for Windows (ETW) events that are recorded by Windows Performance Recorder (WPR), Xperf, or an assessment that is run in the Assessment Platform. WPA opens event trace log (ETL) files for analysis.
 
-**Windows Performance Analyzer (WPA)** is a tool that creates graphs and data tables of Event Tracing for Windows (ETW) events that are recorded by Windows Performance Recorder (WPR), Xperf, or an assessment that is run in the Assessment Platform. WPA can open any event trace log (ETL) file for analysis.
+The WPA plugin is built using the [Microsoft Performance Toolkit SDK](https://github.com/microsoft/microsoft-performance-toolkit-sdk), a collection of tools to create and extend performance analysis applications. The plugin parses json output from WidowsPerf so that it can be visualized in WPA. 
 
-WPA's capabilities can be expanded upon using the `microsoft-performance-toolkit-sdk` by creating plugins which enables parsing any type of data (`.json` in this case).
-
-
-## A Glimpse of the available features
+## What are some of the features of the WPA plugin? 
 
 The WindowsPerf GUI extension is composed of several key features, each designed to streamline the user experience:
 
-- **Timeline View**: Visualize a `wperf stat` timeline command output as a plotted graph grouped by event group.
-![Timeline By Core Table](_images/wpa-timeline-by-core.png)
+### What is the timeline view?
 
-- **Telemetry View**: Display telemetry events grouped by unit ready to be compared and diagnosed. 
-![Telemetry Table](_images/wpa-telemetry-table.png)
+The timeline view visualizes the `wperf stat` timeline data plotted by event group.
 
-## Getting Started
-### Installation 
+![Timeline By Core Table](/install-guides/_images/wpa-timeline-by-core.png)
 
-WPA is included in the Windows Assessment and Deployment Kit (Windows ADK) that can be downloaded [here](https://go.microsoft.com/fwlink/?linkid=2243390).
+### What is the telemetry view?
 
-> The wperf WPA plugin requires a WPA version of `11.0.7.2` or higher.
+The telemetry view displays telemetry events grouped by unit.
 
-Once downloaded, make sure that "Windows Performance Toolkit" checkbox is checked under "Select the features you want to install/change".
+![Telemetry Table](/install-guides/_images/wpa-telemetry-table.png)
 
-![WPA Installation](_images/wpa-installation.png)
+## How do I install the WPA plugin?
 
-The plugin can be downloaded from the [releases page](https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases).
+Before using the WPA plugin, make sure you have installed WPA.
 
-To install the plugin you have the option between:
+### Windows Performance Analyzer
 
-- Moving the plugin dll to the **CustomDataSources** directory next to the WPA executable (defaults to `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\CustomDataSources`).
-- Setting up the `WPA_ADDITIONAL_SEARCH_DIRECTORIES` env variable and moving the dll to that directory
-- Calling `wpa` from the command line and passing the plugin directory to the `-addsearchdir` flag (example : `wpa -addsearchdir "%USERPROFILE%\plugins"`).
+WPA is included in the Windows Assessment and Deployment Kit (Windows ADK) that can be downloaded from [Microsoft](https://go.microsoft.com/fwlink/?linkid=2243390).
 
-<img
-    src="_images/about-wpa.png"
-    alt="About WPA"
-    style="display: block; margin: 0 auto"
-/>
+{{% notice Note %}}
+The WPA plugin requires WPA version `11.0.7.2` or higher.
+{{% /notice %}}
 
-> To verify that the plugin is loaded successfully, launch WPA then the plugin should appear under Help > About Windows Performance Analyzer.
+Run the downloaded `adksetup.exe` program. 
 
+Specify the default installation location and accept the license agreement. 
 
-### Running from the command line
+Make sure that "Windows Performance Toolkit" is checked under "Select the features you want to install".
 
-After installing WPA, it should be added automatically to the path environnment variable.
-If it's not the case, add the WPA directory (defaults to `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit`) to your environnment variable.
+![WPA Installation](/install-guides/_images/wpa-installation.png)
 
+Finally, click Install.
+
+### Windows Performance Analyzer plugin
+
+The plugin is a single `.dll` file.
+
+Download a `.zip` file from the [GitHub releases page](https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases).
+
+To download the latest version from the command prompt:
+
+```console
+mkdir wpa-plugin
+cd wpa-plugin
+curl -L -O https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases/download/1.0.2/wpa-plugin-1.0.2.zip
+```
+
+Extract the `.dll` file from the downloaded `.zip` file. 
+
+```console
+tar -xmf wpa-plugin-1.0.2.zip
+```
+
+You now have the file `WPAPlugin.dll` in your `wpa-plugin` directory. 
+
+There are three ways you can install the `WPAPlugin.dll` file: 
+
+###### 1. Copy the plugin dll to the CustomDataSources directory next to the WPA executable.
+
+The default location is: 
+        `C:\\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\CustomDataSources`
+
+###### 2. Set an environment variable
+
+Set the `WPA_ADDITIONAL_SEARCH_DIRECTORIES` environment variable to the location of the DLL file.
+
+###### 3. Start WPA from the command line and pass the plugin directory location using a flag.
+
+Use the `-addsearchdir` flag for `wpa`:
+
+```bash
+wpa -addsearchdir "%USERPROFILE%\plugins"
+```
+        
+## How can I verify the WPA plugin is installed?
+
+To verify the plugin is loaded, launch WPA and the plugin should appear under `Help > About Windows Performance Analyzer`
+
+![WPA installation confirmation](/install-guides/_images/about-wpa.png)
+
+## How can I run the WPA plugin from the command line?
 
 To open a json file directly from the command line, you can use the `-i` flag to specify the file path to open.
 
-Example: to open a `timeline_long.json` that sits in the Downloads directory, run the following command in the command line:
+For example: to open `timeline_long.json` in your downloads directory, run the command:
 
-`wpa -i \"%USERPROFILE%\\Downloads\\timeline_long.json\"`
-
-### Running in debug mode
-
-To run the plugin in debug mode, clone the repository then edit `WPAPlugin/Properties/launchSettings.json` file.
-
-```json
-{
-  "profiles": {
-    "Debug": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Program Files (x86)\\Windows Kits\\10\\Windows Performance Toolkit\\wpa.exe",
-      "commandLineArgs": "-nodefault -addsearchdir \"%USERPROFILE%\\devProjects\\wpa-plugin\\WPAPlugin\\bin\\Debug\\netstandard2.0\""
-    }
-  }
-}
-
+```console
+wpa -i "%USERPROFILE%\\Downloads\\timeline_long.json"
 ```
+## How do I uninstall the WPA plugin?
 
-- `executablePath`: Path to the `wpa` executable
-- `commandLineArgs`: Absolute path to `bin/Debug/netstandard2.0`
+To uninstall the plugin simply delete the `WPAPlugin.dll` file.
 
-
-> Make sure that no other version of the plugin is in the same directory as WPA.
-
-
-### Uninstalling the plugin
-
-To uninstall the plugin simply delete the `.dll` file.
