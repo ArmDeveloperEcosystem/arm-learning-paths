@@ -20,8 +20,28 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    ambaviz:
+      readable_title: Arm AMBA Viz
+      tests_and_status:
+      - ubuntu:latest: passed
+    ams:
+      readable_title: Arm Performance Studio
+      tests_and_status:
+      - ubuntu:latest: passed
     anaconda:
       readable_title: Anaconda
+      tests_and_status:
+      - ubuntu:latest: passed
+    ansible:
+      readable_title: Ansible
+      tests_and_status:
+      - ubuntu:latest: passed
+    aperf:
+      readable_title: AWS Perf (APerf)
+      tests_and_status:
+      - ubuntu:latest: passed
+    arduino-pico:
+      readable_title: Arduino core for the Raspberry Pi Pico
       tests_and_status:
       - ubuntu:latest: passed
     arm-gnu:
@@ -29,8 +49,36 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
       - fedora:latest: passed
+    armclang:
+      readable_title: Arm Compiler for Embedded
+      tests_and_status:
+      - ubuntu:latest: passed
+    armds:
+      readable_title: Arm Development Studio
+      tests_and_status:
+      - ubuntu:latest: passed
+    armie:
+      readable_title: Arm Instruction Emulator
+      tests_and_status:
+      - ubuntu:latest: passed
+    armpl:
+      readable_title: Arm Performance Libraries
+      tests_and_status:
+      - ubuntu:latest: passed
+    aws-cli:
+      readable_title: AWS CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    aws-copilot:
+      readable_title: AWS CLI
+      tests_and_status:
+      - ubuntu:latest: passed
     azure-cli:
       readable_title: Azure CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    bolt:
+      readable_title: BOLT
       tests_and_status:
       - ubuntu:latest: passed
     cross:

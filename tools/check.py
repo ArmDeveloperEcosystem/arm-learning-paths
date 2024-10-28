@@ -187,7 +187,7 @@ def check(json_file, start, stop, md_article):
                     subprocess.run(run_command, shell=True, capture_output=True)
                     logging.debug(run_command)
                     # execute file as is with bash
-                    run_command = [f"./{test_cmd_filename}"]
+                    run_command = [f"bash ./{test_cmd_filename}"]
                 elif test_type == "fvp":
                     # Start instance for image
                     if start:
@@ -264,7 +264,6 @@ def check(json_file, start, stop, md_article):
                     logging.debug(f"{process_output}")
                 logging.info(f"{msg}")
                 logging.info("---------")
-
         result = "failed" if results[test_images[n_image]] else "passed"
         logging.info(f"Tests {result} on {test_image}")
 
