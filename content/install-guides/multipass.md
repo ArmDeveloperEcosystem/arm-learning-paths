@@ -52,7 +52,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 
 Download Multipass for macOS.
 
-```bash
+```console
 wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg
 ```
 
@@ -60,7 +60,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multip
 
 Install the download using the package command.
 
-```bash
+```console
 sudo installer -pkg multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg -target /
 ```
 
@@ -91,7 +91,7 @@ sudo apt install cpu-checker -y
 To check if KVM is available run:
 
 ```bash
-kvm-ok
+sudo kvm-ok
 ```
 
 If KVM is available the output will be similar to:
@@ -166,7 +166,7 @@ Multipass runs Ubuntu images. The last three LTS (long-term support) versions ar
 To see the available images run the `find` command. Any of the listed images can be used to create a new instance.
 
 ```bash
-multipass find
+sudo multipass find
 ```
 The output from `find` will be similar to the below.
 

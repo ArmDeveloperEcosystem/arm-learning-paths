@@ -65,6 +65,7 @@ cd papi/src
 2. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
+chmod +x configure
 ./configure && make
 ```
 

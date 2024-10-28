@@ -85,7 +85,7 @@ exit()
 Run the example code:
 
 ```bash
-python ./pytorch.py
+python pytorch.py
 ```
 
 The expected output is similar to:
@@ -219,7 +219,7 @@ print(prof.key_averages().table(sort_by="self_cpu_time_total"))
 Run the example and check the performance information printed:
 
 ```bash
-python ./profile.py
+python profile.py
 ```
 
 The output will be similar to:
