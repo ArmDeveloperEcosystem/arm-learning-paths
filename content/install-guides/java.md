@@ -22,25 +22,25 @@ layout: installtoolsall
 
 Java is a high-level, object-oriented programming language first released by Sun Microsystems in 1995.
 
-It is designed to have as few implementation dependencies as possible, making it a versatile and widely-used language.
+Its aim is to have as few implementation dependencies as possible, making it a versatile and widely-used language.
 
 ## Is Java available for Arm Linux?
 
 Yes, there are numerous ways to install Java on Arm Linux distributions. 
 
-Below are some of the common methods to install Java. This includes both the Java runtime environment (JRE), which is used to run Java applications and the Java development kit (JDK) which is used to create Java applications.
+Below are some of the common methods that you can use to install Java. This includes both the Java runtime environment (JRE), which is used to run Java applications, and the Java Development Kit (JDK), which is used to create Java applications.
 
 Pick the one that works best for you.
 
 {{% notice Note %}}
-The Java Technology Compatibility Kit (TCK) is a test suite that verifies whether a Java implementation conforms to the Java SE Platform Specification. It's a crucial tool for ensuring that Java applications can run consistently across different platforms and implementations.
+The Java Technology Compatibility Kit (TCK) is a test suite that you can use to verify whether a Java implementation conforms to the Java SE Platform Specification. It is a crucial tool for ensuring that Java applications can run consistently across different platforms and implementations.
 
 Check the [OCTLA Signatories List](https://openjdk.org/groups/conformance/JckAccess/jck-access.html) to see who has been granted access to the TCK.
 {{% /notice %}}
 
 ## Can I install Java using the Linux package manager?
 
-For distributions using `apt` - including Debian and Ubuntu:
+For distributions using `apt`, including Debian and Ubuntu, you can install Java using this code:
 
 ```console
 sudo apt update
@@ -48,13 +48,13 @@ sudo apt install default-jre -y
 sudo apt install default-jdk -y
 ```
 
-For distributions using `dnf` - including Fedora and Red Hat:
+For distributions using `dnf`, including Fedora and Red Hat, you can install Java using this code:
 
 ```console
 sudo dnf install java-latest-openjdk
 ```
 
-For distributions using `pacman` - including Arch and Manjaro:
+For distributions using `pacman`, including Arch and Manjaro, you can install Java using this code:
 
 ```console
 sudo pacman -S jdk-openjdk  
@@ -63,7 +63,7 @@ sudo pacman -S jre-openjdk
 
 ## Can I install Java using Snap?
 
-For Linux distributions with `snap` you can install Java using:
+For Linux distributions using `snap`, you can install Java using this code:
 
 ```console
 sudo snap install openjdk
@@ -81,7 +81,7 @@ echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corre
 sudo apt-get update; sudo apt-get install -y java-21-amazon-corretto-jdk
 ```
 
-More installation options for Corretto are available in the [Amazon Corretto 21 Guide for Linux](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/linux-info.html)
+You can find out more about the installation options for Corretto in the [Amazon Corretto 21 Guide for Linux](https://docs.aws.amazon.com/corretto/latest/corretto-21-ug/linux-info.html).
 
 ## How do I install the Microsoft Build of OpenJDK?
 
@@ -124,7 +124,7 @@ For more information about the available versions and supported platforms refer 
 
 ## How do I install Eclipse Temurin from the Adoptium Working Group?
 
-The Adoptium Working Group promotes and supports high-quality, TCK certified runtimes and associated technology for use across the Java ecosystem. 
+The Adoptium Working Group promotes and supports high-quality, TCK-certified runtimes and associated technology for use across the Java ecosystem. 
 
 Eclipse Temurin is the name of the OpenJDK distribution from Adoptium.
 
@@ -175,7 +175,7 @@ Yes, you can change the default version. For systems with `apt` use:
 sudo update-alternatives --config java
 ```
 
-You will be given the option to select a new version. The options are depend on the software currently installed on your computer. 
+You will be given the option to select a new version. The options are dependent on the software currently installed on your computer. 
 
 ```output
 There are 3 choices for the alternative java (providing /usr/bin/java).
@@ -190,11 +190,11 @@ There are 3 choices for the alternative java (providing /usr/bin/java).
 Press <enter> to keep the current choice[*], or type selection number:
 ```
 
-For this case, if you select option 1, Java 17 becomes the default. 
+In this example, if you select option 1, Java 17 becomes the default. 
 
 ## How do I print the Java version?
 
-Print the version of the Java runtime:
+Print the version of the Java runtime, by running:
 
 ```console
 java -version
@@ -222,27 +222,41 @@ javac 21.0.4
 
 ## Which version of Java should I use for Arm Linux systems?
 
-For performance and security, it’s important to ensure that your version of Java is at least 11.0.12. Earlier versions lack significant performance improvements. Java performance has steadily increased over time and newer versions will provide better performance.
+For performance and security, it’s important to ensure that your version of Java is at least 11.0.12. Earlier versions lack significant performance improvements. Java performance has steadily increased over time and newer versions provide improved performance.
 
 ## Which flags are available for tuning the JVM?
 
-The Java virtual machine (JVM) includes a number of flags which are available to tune performance and aid in debugging. Some of the flags are general purpose and some are Arm architecture specific. 
+The Java Virtual Machine (JVM) includes a number of flags which are available to tune performance and aid in debugging. Some of the flags are general-purpose and some are Arm architecture-specific. 
 
-To print the final values of the flags after the JVM has been initialized run:
+To print the final values of the flags after the JVM has been initialized, run:
 
 ```console
 java -XX:+PrintFlagsFinal -version
 ```
 
+Generally the biggest performance improvements from JVM flags can be obtained from heap and garbage collection (GC) tuning, as long as you understand your workload well.
+
+Default initial heap size is 1/64th of RAM and default maximum heap size is 1/4th of RAM. If you know your memory requirements, you should set both of these flags to the same value (e.g. `-Xms12g` and `-Xmx12g` for an application that uses at most 12 GB). Setting both flags to the same value will prevent the JVM from having to periodically allocate additional memory. Additionally, for cloud workloads max heap size is often set to 75%-85% of RAM, much higher than the default setting.
+
+If you are deploying in a cloud scenario where you might be deploying the same stack to systems that have varying amounts of RAM, you might want to use `-XX:MaxRAMPercentage` instead of `-Xmx`, so you can specify a percentage of max RAM rather than a fixed max heap size. This setting can also be helpful in containerized workloads.
+
+Garbage collector choice will depend on the workload pattern for which you're optimizing.
+
+* If your workload is a straightforward serial single-core load with no multithreading, the `UseSerialGC` flag should be set to true.
+* For multi-core small heap batch jobs (<4GB), the `UseParallelGC` flag should be set to true.
+* The G1 garbage collector (`UseG1GC` flag) is better for medium to large heaps (>4GB). This is the most commonly used GC for large parallel workloads, and is the default for high-core environments. If you want to optimize throughput, use this one.
+* The ZGC (`UseZGC` flag) has low pause times, which can drastically improve tail latencies. If you want to prioritize response time at a small cost to throughput, use ZGC.
+* The Shenandoah GC (`UseShenandoahGC` flag) is still fairly niche. It has ultra low pause times and concurrent evacuation, making it ideal for low-latency applications, at the cost of increased CPU use.
+
 ## Are there other tools commonly used in Java projects?
 
-There are a number of Java related tools you may want to install.
+There are a number of Java-related tools you might like to install.
 
 ### Apache Maven
 
 Apache Maven is a powerful build automation tool primarily used for Java projects. 
 
-It simplifies the build process by providing a uniform build system, dependency management, and project management capabilities.
+It simplifies the build process by providing a uniform build system, with dependency and project management capabilities.
 
 You can install it from the `apt` package manager:
 
@@ -299,11 +313,11 @@ The output is similar to:
 Welcome to Gradle 8.10!
 
 Here are the highlights of this release:
- - Support for Java 23
- - Faster configuration cache
- - Better configuration cache reports
+ - Support for Java 23.
+ - Faster configuration cache.
+ - Improved configuration cache reports.
 
-For more details see https://docs.gradle.org/8.10/release-notes.html
+For further information, see https://docs.gradle.org/8.10/release-notes.html.
 
 
 ------------------------------------------------------------

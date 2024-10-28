@@ -49,7 +49,7 @@ Multipass uses the terms virtual machine and instance synonymously.
 Download Multipass for macOS.
 
 ```console
-wget https://github.com/canonical/multipass/releases/download/v1.13.1/multipass-1.13.1+mac-Darwin.pkg
+wget https://github.com/canonical/multipass/releases/download/v1.14.1-rc1/multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg
 ```
 
 ### Install
@@ -57,12 +57,12 @@ wget https://github.com/canonical/multipass/releases/download/v1.13.1/multipass-
 Install the download using the package command.
 
 ```console
-sudo installer -pkg  multipass-1.13.1+mac-Darwin.pkg -target /
+sudo installer -pkg multipass-1.14.1-rc1+mac.14+gf2381bfe9.mac-Darwin.pkg -target /
 ```
 
-The getting started instructions below use the command line interface. Multipass installs a tray icon for those who want to access basic features from the user interface.
+The getting started instructions below use the command line interface. If you prefer to use the graphical interface start it from the macOS Launchpad, the initial screen is shown below. You can use the UI to create, start, and stop virtual machines. 
 
-![Connect #center](/install-guides/_images/multipass-tray.png)
+![Connect #center](/install-guides/_images/multipass-gui.png)
 
 Multipass is now installed. Proceed to [Get Started with Multipass](#getstarted).
 
@@ -168,10 +168,10 @@ The output from `find` will be similar to the below.
 
 ```output
 Image                       Aliases           Version          Description
-20.04                       focal             20240626         Ubuntu 20.04 LTS
-22.04                       jammy             20240701         Ubuntu 22.04 LTS
-23.10                       mantic            20240701         Ubuntu 23.10
-24.04                       noble,lts         20240702         Ubuntu 24.04 LTS
+20.04                       focal             20240821         Ubuntu 20.04 LTS
+22.04                       jammy             20241002         Ubuntu 22.04 LTS
+24.04                       noble,lts         20241004         Ubuntu 24.04 LTS
+daily:24.10                 oracular,devel    20241009         Ubuntu 24.10
 
 Blueprint                   Aliases           Version          Description
 anbox-cloud-appliance                         latest           Anbox Cloud Appliance
@@ -223,45 +223,7 @@ The `uname` output will look similar to:
 Linux m1u 6.8.0-36-generic #36-Ubuntu SMP PREEMPT_DYNAMIC Mon Jun 10 13:20:23 UTC 2024 aarch64 aarch64 aarch64 GNU/Linux
 ```
 
-### Run an application
-
-It's helpful to demonstrate a few other common commands by downloading and installing an application. To demonstrate file copy, the download is done from macOS and the file is copied into the instance.
-
-Download and install [OpenVSCode Server](/install-guides/openvscode-server/).
-
-On the macOS host computer use `wget` for the download.
-
-```console
-wget https://github.com/gitpod-io/openvscode-server/releases/download/openvscode-server-v1.90.0/openvscode-server-v1.90.0-linux-arm64.tar.gz
-```
-
-To copy a file to the instance
-
-```console
-multipass transfer openvscode-server-v1.90.0-linux-arm64.tar.gz m1u:/home/ubuntu
-```
-
-Now switch to the instance and extract the download and run the application. 
-
-If you don't already have an open shell run.
-
-```console
-multipass shell m1u
-```
-
-Extract the download. 
-
-```console
-tar xvfz openvscode-server-v1.90.0-linux-arm64.tar.gz
-```
-
-Run the application.
-
-```console
-./openvscode-server-v1.90.0-linux-arm64/bin/openvscode-server --host=0.0.0.0 --without-connection-token
-```
-
-Connect to OpenVSCode Server using a browser. From the macOS host computer use the `info` command to get the IP address of the instance.
+### Print information
 
 The `info` command prints information about the instance, including the IP address.
 
@@ -269,14 +231,21 @@ The `info` command prints information about the instance, including the IP addre
 multipass info m1u
 ```
 
-Copy the IP address from the info output and paste it into a browser with port 3000.
+The output is similar to:
 
-Modify the IP address to use your information, for example:
 ```output
-http://192.168.64.39:3000
+Name:           m1u
+State:          Running
+Snapshots:      0
+IPv4:           192.168.73.29
+Release:        Ubuntu 24.04.1 LTS
+Image hash:     e380b683b0c4 (Ubuntu 24.04 LTS)
+CPU(s):         4
+Load:           0.00 0.03 0.01
+Disk usage:     2.0GiB out of 15.4GiB
+Memory usage:   355.3MiB out of 3.8GiB
+Mounts:         --
 ```
-
-You now have a running VS Code Server in your Multipass instance with Ubuntu 22.04 running on Arm.
 
 ### Mount a host directory
 

@@ -16,21 +16,16 @@ You can use the Android demo application included in ExecuTorch repository [Llam
 2. Set the following environment variables:
 
     ``` bash
-    export ANDROID_NDK=~/Library/Android/sdk/ndk/25.0.8775105
+    export ANDROID_NDK=$ANDROID_HOME/ndk/28.0.12433566/
     export ANDROID_ABI=arm64-v8a
     ```
 
 {{% notice Note %}}
-<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
+<path_to_android_ndk> is the root for the NDK, which is usually under ~/Library/Android/sdk/ndk/XX.Y.ZZZZZ for macOS, and contains NOTICE and README.md. 
+Make sure you can confirm <path_to_android_ndk>/build/cmake/android.toolchain.cmake is available for CMake to cross-compile.
 {{% /notice %}}
 
-3. (Optional) If you need to use tiktoken as the tokenizer (for LLaMA 3), set `EXECUTORCH_USE_TIKTOKEN=ON` and CMake uses it as the tokenizer. If you run other models like LLaMA 2, skip this step.
-
-    ``` bash
-    export EXECUTORCH_USE_TIKTOKEN=ON # Only for LLaMA3
-    ```
-
-4. Run the following commands to set up the required JNI library:
+3. Run the following commands to set up the required JNI library:
 
     ``` bash
     pushd extension/android
@@ -42,7 +37,7 @@ You can use the Android demo application included in ExecuTorch repository [Llam
     ```
 
 {{% notice Note %}}
-This is running the shell script setup.sh which configures and builds the required core ExecuTorch, Llama 2, and Android libraries. 
+This is running the shell script setup.sh which configures and builds the required core ExecuTorch, Llama, and Android libraries.
 {{% /notice %}}
 
 ## Getting models
@@ -73,7 +68,7 @@ adb push <tokenizer.bin> /data/local/tmp/llama/
 
 2. Upload the files.
 
-If the files are not on the device, use the device explorer to copy them. 
+If the files are not on the device, use the device explorer to copy them.
 
 ![Files Upload](device-explorer-upload.png "Figure 2. Android Studio upload files using Device Explorer")
 
@@ -83,7 +78,7 @@ If the files are not on the device, use the device explorer to copy them.
 
 This is the recommended option.
 
-1. Open Android Studio and select “Open an existing Android Studio project” and navigate to open `examples/demo-apps/android/LlamaDemo`.
+1. Open Android Studio and select **Open an existing Android Studio project** and navigate to open `examples/demo-apps/android/LlamaDemo`.
 
 2. Run the app (^R). This builds and launches the app on the phone.
 
