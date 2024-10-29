@@ -26,7 +26,7 @@ which should open a new window
 
 ## Profiling the application using Streamline
 
-Once you have selected the device, the application and metrics to be collected, click on the **start capture** button. This would automatically start the application and begin collecting the profiling data. Make sure the application is running as desired on your phone, after a few seconds, you can stop the capture. Please wait till Streamline completes processing the data. Switch to *Mali Timeline* view as shown below:
+Once you have selected the device, the application and metrics to be collected, click on the **start capture** button. This should automatically start the application and begin collecting the profiling data. Make sure the application is running as desired on your phone, after a few seconds, you can stop the capture. Please wait until Streamline completes processing the data. Switch to *Mali Timeline* view as shown below:
 
 !["Mali Timeline Streamline"](./images/Streamline-mali-timeline.png "Mali Timeline Streamline")
 
