@@ -23,11 +23,11 @@ jobs:
         # Run the test suite
         # Catch any missed errors if running multiple tests
         run: |
-            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
-            cat output.txt | grep -q 'Tests failed in test suite' && echo "{TEST_SUITE_ERRORS}=true" >> "$GITHUB_ENV" \
+            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+            cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "{TEST_SUITE_ERRORS}=true" >> "$GITHUB_ENV" \
             || echo "{TEST_SUITE_ERRORS}=false" >> "$GITHUB_ENV"
       - name: Test condition
-        if: success() && steps.test-suite-state.outputs.TEST_SUITE_ERRORS == 'true'
+        if: success() && steps.run-suite.outputs.TEST_SUITE_ERRORS == 'true'
         # 'echo $?' returns with exit code 1
         run: echo $?
       - name: Parse maintenance state
@@ -35,7 +35,7 @@ jobs:
         if: success()
         # Check if maintenance is turned off
         run: |
-            cat output.txt | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
+            cat test-lp-output.txt | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
             || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
       - name: Test condition
         if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'off'

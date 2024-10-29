@@ -275,7 +275,7 @@ def check(json_file, start, stop, md_article):
     # Remove files that were generated from the tests, if any
     untracked_files_process = subprocess.run("git ls-files --others --exclude-standard", shell=True, capture_output=True)
     untracked_files = untracked_files_process.stdout.decode("utf-8").splitlines()
-    paths_to_remove = [ file for file in untracked_files if "_cmd.json" not in file ]
+    paths_to_remove = [ file for file in untracked_files if "_cmd.json" or "test-lp-output.txt" not in file ]
 
     if paths_to_remove:
         logging.info(f"Removing files that was created during testing from repository")
