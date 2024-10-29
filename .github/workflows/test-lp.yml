@@ -22,7 +22,18 @@ jobs:
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite, and then determine if maintenance is turned off
         run: |
-          ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
+            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
+      - name: Check test suite for uncaught errors
+        id: test-suite-state
+        if: success()
+        # Catch any missed errors if running multiple tests
+        run: |
+            cat output.txt | grep -q 'Tests failed in test suite' && echo "{TEST_SUITE_ERRORS}=true" >> "$GITHUB_ENV" \
+            || echo "{TEST_SUITE_ERRORS}=false" >> "$GITHUB_ENV"
+      - name: Test condition
+        if: success() && steps.test-suite-state.outputs.TEST_SUITE_ERRORS == 'true'
+        # 'echo $?' returns with exit code 1
+        run: echo $?
       - name: Parse maintenance state
         id: maintenance-state
         if: success()
