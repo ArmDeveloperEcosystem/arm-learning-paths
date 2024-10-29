@@ -20,9 +20,9 @@ Once Render Pipeline is created, using WebGPU APIs to create and render a 3D mes
 
 All these steps are common in graphics programming and WebGPU offers capability to perform all the operations. It is recommended to go through individual chapters in [3D rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section.
 
-### Creating and loading 3D objects
+### Loading 3D objects
 
-Blender is a open-source software widely used to create graphical objects. [Install blender](2-env-setup.md#install-blender) explains how to install blender and export a 3D object in .obj format. In our project we use OBJ files to define 3D meshes. Instead of manually parsing OBJ files, we use the [TinyOBJLoader](https://github.com/tinyobjloader/tinyobjloader) library. The file format is not that complex, but parsing files is not the main point of this learning path, and this library has been intensively tested and has a very small footprint.
+In our project we use OBJ files to define 3D meshes. Instead of manually parsing OBJ files, we use the [TinyOBJLoader](https://github.com/tinyobjloader/tinyobjloader) library. The file format is not that complex, but parsing files is not the main point of this learning path, and this library has been intensively tested and has a very small footprint. You can use open-source softwares like Blender to create your own 3D objects.
 
 {{% notice Note %}}
 Exactly one of your source files must define `TINYOBJLOADER_IMPLEMENTATION` before including it:
