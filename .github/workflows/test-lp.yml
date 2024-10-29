@@ -20,14 +20,10 @@ jobs:
       - name: Run test suite for all changed files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
-        # Run the test suite, and then determine if maintenance is turned off
-        run: |
-            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
-      - name: Check test suite for uncaught errors
-        id: test-suite-state
-        if: success()
+        # Run the test suite
         # Catch any missed errors if running multiple tests
         run: |
+            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
             cat output.txt | grep -q 'Tests failed in test suite' && echo "{TEST_SUITE_ERRORS}=true" >> "$GITHUB_ENV" \
             || echo "{TEST_SUITE_ERRORS}=false" >> "$GITHUB_ENV"
       - name: Test condition
