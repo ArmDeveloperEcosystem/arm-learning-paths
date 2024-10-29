@@ -279,7 +279,6 @@ def check(json_file, start, stop, md_article):
 
     if paths_to_remove:
         logging.info(f"Removing files that was created during testing from repository")
-        logging.info(paths_to_remove)
         for path in paths_to_remove:
             if os.path.isfile(path):
                 os.remove(path)
@@ -301,5 +300,4 @@ def check(json_file, start, stop, md_article):
         subprocess.run(cleanup_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     else:
         logging.debug("Parameter stop is false, skipping container(s) termination")
-
     return results
