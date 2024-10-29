@@ -72,7 +72,7 @@ chmod +x configure
 3. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
-sudo make install
+make install
 ```
 
 4. Copy the test program below and paste it into a text file named `papi-test.c``:

@@ -158,6 +158,8 @@ def main():
         if all(results_dict.get(k) for k in results_dict):
             # Errors exist
             sys.exit(1)
+        else:
+            logging.info(results_dict)
     elif args.spelling:
         logging.info(f"Checking spelling of {args.spelling}")
         output = parse.spelling(args.spelling)
