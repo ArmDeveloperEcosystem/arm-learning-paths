@@ -22,7 +22,7 @@ jobs:
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite, and then determine if maintenance is turned off
         run: |
-            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
+          ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
       - name: Parse maintenance state
         id: maintenance-state
         if: success()
