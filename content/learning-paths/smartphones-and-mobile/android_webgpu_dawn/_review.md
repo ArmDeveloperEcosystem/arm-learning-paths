@@ -24,7 +24,7 @@ review:
                
     - questions:
         question: >
-            Why is Arm Streamline?
+            What is Arm Streamline?
         answers:
             - A profiling tool to profile CPUs.
             - A profiling tool to profile GPUs.

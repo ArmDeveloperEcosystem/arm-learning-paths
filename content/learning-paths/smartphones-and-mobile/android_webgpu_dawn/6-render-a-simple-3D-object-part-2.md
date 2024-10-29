@@ -40,7 +40,7 @@ With all the setup done, we are now ready to render our 3D object
 
 ## Rendering using WebGPU
 
-Now that we have done all the setup, we can run a rendering pass and *draw* something onto our *surface*. To encode any commands to be issued to GPU, we need to create a `CommandEncoder`, which is done:
+Now that we have done all the setup, we can run a rendering pass and *draw* something onto our *surface*. To encode any commands to be issued to GPU, we need to create a `CommandEncoder`. , Modern APIs record commands into command buffers,rather than issuing commands one by one and submit all of them at once. In WebGPU, this is done through CommandEncoder".
 
 ```C++
 wgpu::CommandEncoderDescriptor commandEncoderDesc;
@@ -48,7 +48,12 @@ commandEncoderDesc.label = "Command Encoder";
 wgpu::CommandEncoder encoder = device.createCommandEncoder(commandEncoderDesc);
 ```
 
-Next step is to create `RenderPassEncoder` using `encoder.beginRenderPass()` API:
+Next step is to create `RenderPassEncoder`. It encodes commands related to controlling the vertex and fragment shader stages, as issued by RenderPipeline. It forms part of the overall encoding activity of a CommandEncoder. A render pipeline renders graphics to Texture attachments, typically intended for displaying on a surface, but it could also render to textures used for other purposes that never appear onscreen. It has two main stages:
+
+* A vertex stage, in which a vertex shader takes positioning data fed into the GPU and uses it to position a series of vertices in 3D space by applying specified effects like rotation, translation, or perspective.
+* A fragment stage, in which a fragment shader computes the color for each pixel covered by the primitives produced by the vertex shader
+
+We can create a RenderPassEncoder using `encoder.beginRenderPass()` API:
 
 ```C++
 wgpu::RenderPassDescriptor renderPassDesc{};
@@ -67,7 +72,7 @@ wgpu::RenderPassEncoder renderPass = encoder.beginRenderPass(renderPassDesc);
 ```
 
 {{% notice Note %}}
-`ColorAttachment` is the only mandatory field. Also make sure you have specified `renderPassColorAttachment.depthSlice`
+`ColorAttachment` is the only mandatory field. Also make sure you have specified `renderPassColorAttachment.depthSlice`. It is recommended to go through the ColorAttachment [members](https://gpuweb.github.io/gpuweb/#color-attachments)
 {{% /notice %}}
 
 Now we can invoke the following APIs to draw our 3D object:
@@ -95,8 +100,6 @@ To finish encoding the sequence of commands and issue them to the GPU, few more 
 {{% notice Tip %}}
 Make sure you release the created encoders and buffers by calling the respective `.release()` in order to avoid dangling pointer or other errors.
 {{% /notice %}}
-
-Finally we have to make a call `device_.tick()`, so that the `callbacks` are called and the ensure proper behavior.
 
 {{% notice Note %}}
 By default Dawn runs callbacks only when the device “ticks”, so the error callbacks are invoked in a different call stack than where the error occurred, making the breakpoint less informative. To force Dawn to invoke error callbacks as soon as there is an error, you can enable an instance toggle:

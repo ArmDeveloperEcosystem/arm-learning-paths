@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Setup project
 
-Now that we have `webgpudawn` library built, we can start by removing the extra files included as part of the stock Game Activity project. Delete all the files except `main.cpp`. We will use `webgpuRenderer.cpp` and `webgpuRenderer.h` files for our creating our application.
+Now that we have `webgpudawn` library built, we can start by removing the extra files included as part of the stock Game Activity project. Delete all the files from the top `cpp` directory,except `main.cpp`. We will create `webgpuRenderer.cpp` and `webgpuRenderer.h` files for our creating our application with WebGPU.
 
 ## Using Dawn WebGPU APIs
 
@@ -42,7 +42,7 @@ But before doing that we need to create an instance by using
 wgpu::Instance instance = createInstance(InstanceDescriptor{});
 ```
 
-In order to display something on screen, the operating system needs to provide some place to *draw*, this is commonly known as **window**. The Game Activity provides us with *pApp* member which exposes an Android Window. WebGPU has capability to use an Android Window for rendering. WebGPU cannot use *window* directly, but uses something called **surface**, which can be easily created using the window
+In order to display something on screen, the operating system needs to provide some place to *draw*, this is commonly known as **a window**. The Game Activity provides us with *pApp* member which exposes an Android Window. WebGPU has capability to use an Android Window for rendering. WebGPU cannot use the *window* directly, but uses something called **a surface**, which can be easily created using the window
 
 ```C++
 wgpu::SurfaceDescriptorFromAndroidNativeWindow platformSurfaceDescriptor = {};
@@ -55,7 +55,7 @@ surfaceDescriptor.nextInChain = reinterpret_cast<const ChainedStruct*>(&platform
 wgpu::Surface surface = instance.createSurface(surfaceDescriptor);
 ```
 
-Once Surface is available, we can request the adapter now
+Once a Surface is available, we can request the adapter
 
 ```C++
 wgpu::RequestAdapterOptions adapterOpts{};
@@ -63,7 +63,7 @@ adapterOpts.compatibleSurface = surface;
 wgpu::Adapter adapter = instance.requestAdapter(adapterOpts);
 ```
 
-Now after successful creating adapter, we can make sure it is properly created by querying basic information:
+Now after successful creating adapter, we can query basic information such as the GPU vendor, underlying graphics API, etc.
 
 ```C++
 wgpu::AdapterInfo adapterInfo;
@@ -83,26 +83,44 @@ __android_log_print(ANDROID_LOG_INFO, "NATIVE", "%s", backend.c_str());
 
 ### Creating Device
 
-Before creating a device using the requested adapter, first we need to know the supported limits, as described in above figure. Once we get the supported limits, we can use them to set the *required limits*. We then use the `requestDevice()` API to request device:
+As described above, in order to create a device that meets the requirements for our application, we need to specify *required limits*. There are few options to set theses limits:
+
+* Choose default limits
+
+```C++
+wgpu::RequiredLimits requiredLimits = Default;
+```
+
+* Query the Adapter's *supported limits* and use them as *required limits*
 
 ```C++
 wgpu::SupportedLimits supportedLimits;
 adapter.getLimits(&supportedLimits);
-__android_log_print(ANDROID_LOG_INFO, "NATIVE", "%s", "Requesting device");
+wgpu::RequiredLimits requiredLimits = Default;
+requireLimits.limits = supportedLimits.limits;
+```
+
+* Query the Adapter's *supported limits* and define specific *better* limits in the *required limits*
+
+```C++
+wgpu::SupportedLimits supportedLimits;
+adapter.getLimits(&supportedLimits);
 wgpu::RequiredLimits requiredLimits = Default;
 requiredLimits.limits.maxVertexAttributes = 3;
 requiredLimits.limits.maxVertexBuffers = 1;
-requiredLimits.limits.maxBufferSize = 10000 * sizeof(VertexAttributes);
-requiredLimits.limits.maxVertexBufferArrayStride = sizeof(VertexAttributes);
 requiredLimits.limits.minStorageBufferOffsetAlignment = supportedLimits.limits.minStorageBufferOffsetAlignment;
 requiredLimits.limits.minUniformBufferOffsetAlignment = supportedLimits.limits.minUniformBufferOffsetAlignment;
-requiredLimits.limits.maxInterStageShaderComponents = 6;
-requiredLimits.limits.maxBindGroups = 1;
-requiredLimits.limits.maxUniformBuffersPerShaderStage = 1;
-requiredLimits.limits.maxUniformBufferBindingSize = 16 * 4 * sizeof(float);
-requiredLimits.limits.maxTextureDimension1D = 480;
-requiredLimits.limits.maxTextureDimension2D = 640;
-requiredLimits.limits.maxTextureArrayLayers = 1;
+//Define other limits as required
+
+```
+
+{{% notice Tip %}}
+Setting *better* limits may not necessarily be desirable, as doing so may have a performance impact. Because of this, and to improve portability across devices and implementations, applications should generally only request better limits if they may actually require them. It is recommended to read mre about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["limits"](https://gpuweb.github.io/gpuweb/#limits)
+{{% /notice %}}
+
+We then use the `requestDevice()` API to request device:
+
+```C++
 wgpu::DeviceDescriptor deviceDesc;
 deviceDesc.label = "My Device";
 deviceDesc.requiredFeatureCount = 0;
@@ -110,7 +128,7 @@ deviceDesc.requiredLimits = &requiredLimits;
 deviceDesc.defaultQueue.label = "The default queue";
 wgpu::Device device = adapter.requestDevice(deviceDesc);
 __android_log_print(ANDROID_LOG_INFO, "NATIVE", "%s", "Got device");
-static auto h = device.setUncapturedErrorCallback([](ErrorType type, char const* message) {
+static auto errorCallback = device.setUncapturedErrorCallback([](ErrorType type, char const* message) {
     __android_log_print(ANDROID_LOG_ERROR, "NATIVE", "%s", "Got device error");
     __android_log_print(ANDROID_LOG_ERROR, "NATIVE", "%s", "error type:");
     std::string t = std::to_string((int)type);

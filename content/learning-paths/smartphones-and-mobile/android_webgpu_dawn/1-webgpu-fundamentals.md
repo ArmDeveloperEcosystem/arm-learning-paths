@@ -30,7 +30,7 @@ When designing an API for the Web, the two key constraints are portability and p
 
 ## Why C++?
 
-Initial target for WebGPU was JavaScript and most of the initial implementation was done in JavaScript and the `webgpu.h` header file is written in C. In this learning path, we choose C++ because:
+The initial target for WebGPU was JavaScript and most of the initial implementation was done in JavaScript and the `webgpu.h` header file is written in C. In this learning path, we choose C++ because:
 
 * C++ is still the primary language used for high performance graphics application (video games, render engines, modeling tools, etc.).
 * The level of abstraction and control of C++ is well suited for interacting with graphics APIs in general.
@@ -38,7 +38,7 @@ Initial target for WebGPU was JavaScript and most of the initial implementation 
 
 ## Dawn, Google's WebGPU implementation
 
-Since WebGPU is a standard and not implementation, [Dawn](https://github.com/google/dawn) is an open-source and cross-platform implementation of the WebGPU standard. It implements the WebGPU functionality specified in `webgpu.h`. Dawn is meant to be integrated as part of a larger systems like WebGPU in Chromium or in an native Android Application.
+Since WebGPU is a standard and not implementation, there are different implementations. For this learning path we are using [Dawn](https://github.com/google/dawn), an open-source and cross-platform implementation of the WebGPU standard. It implements the WebGPU functionality specified in `webgpu.h`. Dawn is meant to be integrated as part of a larger systems like WebGPU in Chromium or in an native Android Application.
 Dawn provides several WebGPU building blocks:
 
 * WebGPU C/C++ headers that applications and other building blocks use.

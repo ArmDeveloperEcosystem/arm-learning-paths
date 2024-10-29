@@ -56,7 +56,7 @@ Render Pipeline have to 2 main types of stages, **fixed-function** and **program
 
 ### Fixed Functions stages
 
-Pipeline description consists in the following steps:
+Pipeline description consists of the following steps:
 
 * Describe vertex pipeline state
 * Describe vertex pipeline state
@@ -70,11 +70,11 @@ The fixed function stages are well documented and you can refer to [code](https:
 
 ### Programmable stage
 
-There are two programmable stages, namely give a vertex and a fragment shaders.
+There are two programmable stages, vertex and fragment programmable stages. Both of them uses **Shader Module**
 
 ### Shaders
 
-Both the vertex and fragment programmable stages use the same shader module, that we must first create. This module is kind of a dynamic library (like a .dll, .so or .dylib file), except that it talks the binary language of your GPU rather than your CPU’s.
+Both the vertex and fragment programmable stages can use the same shader module or have individual shader modules. Shader module is kind of a dynamic library (like a .dll, .so or .dylib file), except that it talks the binary language of your GPU rather than your CPU’s.
 
 ### Shader Code
 
@@ -112,3 +112,14 @@ shaderCodeDesc.code = shaderSource;
 ```
 
 In our project, we have used a helper function [`loadShaderModule`](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/webgpuRenderer.cpp#L450), which reads the shader code from a file and creates a shader module for the device.
+
+### Create Render Pipeline
+
+The shaders might need to access input and output resources (buffers and/or textures). These resources are made available to the pipeline by configuring a memory layout.
+Now we can finally create a *render pipeline*  by calling the `createRenderPipeline()` :
+
+```C++
+wgpu::RenderPipelineDescriptor pipelineDesc;
+//Configure fixed and programable stages
+wgpu::RenderPipeline pipeline = device.createRenderPipeline(pipelineDesc);
+```

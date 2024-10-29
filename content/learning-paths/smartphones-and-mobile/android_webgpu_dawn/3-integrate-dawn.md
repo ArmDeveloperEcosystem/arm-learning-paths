@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Set up Android Studio
+## Set up Android Project
 
 After successful [Android Studio](./2-env-setup.md#install-android-studio-and-android-ndk) installation, open Android studio and create a new C++ game activity
 
@@ -16,7 +16,7 @@ GameActivity is a Jetpack library designed to assist Android games in processing
 
 ![Game Activity Architecture](./images/GameActivityArchitecture.png "Figure 2. Game Activity Architecture")
 
-With GameActivity, you can focus on your core game development and avoid spending excessive time dealing with the JNI code.
+With GameActivity, you can focus on your core game development and avoid spending excessive time dealing with the Java Native Interface (JNI) code.
 GameActivity performs the following functions:
 
 * Interacting with Android framework through the Java-side component.
@@ -41,9 +41,14 @@ You can notice in the [FetchDawn.cmake](https://github.com/varunchariArm/Android
 WebGPU is constantly evolving standard and hence its implementation, Dawn is also under active development. For sake of stability, we have chosen a stable branch for our development. Updating to latest or different branch may cause breakage.
 {{% /notice %}}
 
-The [webgpu.cmake](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/webgpu/webgpu.cmake) file facilitates building WebGPU with Dawn implementation.
+To add Dawn to our application, we have 2 options:
 
-Next in the main [CMakeLists.txt](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/CMakeLists.txt) file, we include the `webgpu` directory for building and integrating Dawn into our main project
+* Create a shared/static library from the Dawn source and use it in application.
+* Download the source as a dependency and build it as part of the project build
+
+We are choosing the second option, since it provides more debug flexibility.
+The [webgpu/webgpu.cmake](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/webgpu/webgpu.cmake) and [CMakeLists.txt](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/CMakeLists.txt) file facilitates downloading and building WebGPU with Dawn implementation and integrating Dawn into our main project
+
 We are also setting a few more Dawn build options
 
 ```bash
