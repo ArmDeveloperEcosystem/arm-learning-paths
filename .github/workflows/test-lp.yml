@@ -20,20 +20,32 @@ jobs:
       - name: Run test suite for all changed files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
-        # Run the test suite, and then determine if maintenance is turned off
+        # Run the test suite
         run: |
-            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee output.txt
-      - name: Parse maintenance state
+            set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+      - name: Parse test suite errors
+        id: test-suite-state
+        if: success()
+        # Catch any missed errors if running multiple tests
+        run: |
+            cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "TEST_SUITE_ERRORS=true" >> "$GITHUB_ENV" \
+            || echo "TEST_SUITE_ERRORS=false" >> "$GITHUB_ENV"
+      - name: Test condition
+        if: env.TEST_SUITE_ERRORS == 'true' && success()
+        run: |
+          echo "Test failures detected in test suite, check the output in earlier steps"
+          exit 1
+      - name: Parse test maintenance off
         id: maintenance-state
         if: success()
         # Check if maintenance is turned off
         run: |
-            cat output.txt | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
-            || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
+            cat test-lp-output.txt | grep -q 'maintenance is turned off' && echo "MAINTENANCE=off" >> "$GITHUB_ENV" \
+            || echo "MAINTENANCE=on" >> "$GITHUB_ENV"
       - name: Test condition
-        if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'off'
+        if: env.MAINTENANCE == 'off' && success()
         # Skip opening a PR if tests have not been run
-        run: echo "Maintenance is turned off for one or more files, skipping tests"
+        run: echo "Maintenance is turned off for one or more files"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'on'

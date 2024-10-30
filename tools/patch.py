@@ -24,7 +24,7 @@ def patch(article_path: str, results: dict, link: str):
         content_title = content_title.strip(".md")
         sw_category = content_type
     else:
-        raise IOError("Unknown content path, pass learning paths or install guides only")
+        raise SystemExit("Unknown content path, pass learning paths or install guides only")
 
     test_images = results.keys()
     results_values = defaultdict(lambda: "failed")
@@ -32,7 +32,7 @@ def patch(article_path: str, results: dict, link: str):
 
     for image, i in zip(test_images, range(len(test_images))):
         if content_title not in data["sw_categories"][sw_category]:
-            raise KeyError(f"{content_title} does not exist in {stats_file}. Add it to update the stats report.")
+            raise SystemExit(f"{content_title} does not exist in {stats_file}. Add it to update the stats report.")
 
         data["sw_categories"][sw_category][content_title]["tests_and_status"][i][image] = results_values[results[image]]
 

@@ -191,13 +191,13 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
                     arg_str = cmd_str.split(arg)[1].split("\"")[0]
                     content[cmd_idx].update({arg:arg_str})
             if "|" in cmd_lines_header:
-                expected_result = cmd_str.split("| ")[1].split("\"")[0].split("-")
+                expected_result = cmd_str.split("| ")[1].split("}")[0].split("-")
                 if len(expected_result) > 1:
                     expected_lines = list(range(*[int(x)-1 for x in expected_result]))
                 elif len(expected_result) == 1 and expected_result[0]:
                     expected_lines = [int(expected_result[0])-1]
                 else:
-                    raise IOError(
+                    raise SystemExit(
                     """The expected output line(s) should be specified as one of two options:
                     A single number:  | 2
                     A range:          | 2-10

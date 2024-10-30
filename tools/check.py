@@ -2,6 +2,7 @@
 
 import logging
 import os
+import shutil
 import subprocess
 import json
 from junit_xml import TestCase
@@ -48,7 +49,7 @@ def init_container(i_img, img):
         package_manager = "yum"
         user = "wheel"
     else:
-        raise IOError(f"Image {img} not supported")
+        raise SystemExit(f"Image {img} not supported")
 
     docker_cmd = [f"docker exec test_{i_img} {package_manager} update"]
     logging.debug(docker_cmd)
@@ -271,6 +272,22 @@ def check(json_file, start, stop, md_article):
     if os.path.exists(test_cmd_filename):
         os.remove(test_cmd_filename)
 
+    # Remove files that were generated from the tests, if any
+    untracked_files_process = subprocess.run("git ls-files --others --exclude-standard", shell=True, capture_output=True)
+    untracked_files = untracked_files_process.stdout.decode("utf-8").splitlines()
+    paths_to_remove = [ file_name for file_name in untracked_files \
+                        if "_cmd.json" not in file_name \
+                        and "test-lp-output.txt" not in file_name ]
+
+    if paths_to_remove:
+        logging.info(f"Removing files that was created during testing from repository")
+        for path in paths_to_remove:
+            if os.path.isfile(path):
+                os.remove(path)
+            elif os.path.isdir(path):
+                shutil.rmtree(path)
+            logging.debug(f"Removed {path}")
+
     # Stop instance
     if stop:
         logging.debug("Terminating container(s)")
@@ -285,5 +302,4 @@ def check(json_file, start, stop, md_article):
         subprocess.run(cleanup_cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     else:
         logging.debug("Parameter stop is false, skipping container(s) termination")
-
     return results
