@@ -90,7 +90,7 @@ java -jar target/*.jar
 Once the application is running, you can open the web app in a web browser by visiting
 
 ```bash
-http://[EXTERNAL IP]:8080
+http://<EXTERNAL_IP>:8080
 ```
 
-Where `[EXTERNAL IP]` is the value you obtained in the [last section](/learning-paths/servers-and-cloud-computing/java-on-axion/1-create-instance/#obtain-the-ip-of-your-instance).
+Where `<EXTERNAL_IP>` is the value you obtained in the [last section](/learning-paths/servers-and-cloud-computing/java-on-axion/1-create-instance/#obtain-the-ip-of-your-instance).

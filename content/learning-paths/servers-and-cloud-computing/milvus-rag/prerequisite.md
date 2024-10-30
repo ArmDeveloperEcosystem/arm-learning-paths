@@ -12,7 +12,7 @@ In this Learning Path, you will learn how to build a Retrieval-Augmented Generat
 
 RAG applications often use vector databases to efficiently store and retrieve high-dimensional vector representations of text data. Vector databases are optimized for similarity search and can handle large volumes of vector data, making them ideal for the retrieval component of RAG systems. 
 
-In this Learning Path, you will use [Zilliz Cloud](https://zilliz.com/cloud) for your vector storage, which is a fully managed Milvus vector database. Zilliz Cloud is available on major cloud computing service providers; for example, AWS, GCP, and Azure. 
+In this Learning Path, you will use [Zilliz Cloud](https://zilliz.com/cloud?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) for your vector storage, which is a fully managed Milvus vector database. Zilliz Cloud is available on major cloud computing service providers; for example, AWS, GCP, and Azure. 
 
 Here, you will use Zilliz Cloud deployed on AWS with an Arm-based server. For the LLM, you will use the Llama-3.1-8B model also running on an AWS Arm-based server, but using `llama.cpp`. 
 

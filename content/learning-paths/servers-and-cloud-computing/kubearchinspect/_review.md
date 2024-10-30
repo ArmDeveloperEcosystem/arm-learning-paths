@@ -2,7 +2,7 @@
 review:
     - questions:
         question: >
-            Which of the following statements is true about kubearchinspect?
+            Which of the following statements is true about KubeArchInspect?
         answers:
             - KubeArchInspect displays a report of the images running in a Kubernetes cluster, but it does not identify which images support arm64.
             - KubeArchInspect displays a report of the images running in a Kubernetes cluster and identifies which images support arm64.
@@ -25,7 +25,7 @@ review:
         question: >
             Which of the following is NOT a way to improve your cluster's Arm compatibility?
         answers:
-            - Upgrade images to a newer version -- if they support arm64.
+            - Upgrade images to a newer version that supports arm64.
             - Find an alternative image that supports arm64.
             - Request that the developers of an image build and publish an arm64 version.
             - Contact the Kubernetes community to upgrade your cluster.
