@@ -34,7 +34,7 @@ jobs:
       - name: Test condition
         if: success() && ${{ env.TEST_SUITE_ERRORS == 'true' }}
         # 'echo $?' returns with exit code 1
-        run: echo $?
+        run: exit 1
       - name: Parse test maintenance off
         id: maintenance-state
         if: success()
@@ -45,7 +45,7 @@ jobs:
       - name: Test condition
         if: success() && ${{ env.MAINTENANCE == 'off' }}
         # Skip opening a PR if tests have not been run
-        run: echo "Maintenance is turned off for one or more files, skipping tests"
+        run: echo "Maintenance is turned off for one or more files"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'on'
