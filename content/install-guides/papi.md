@@ -70,13 +70,10 @@ chmod +x configure
 make
 ```
 
-```bash
-pwd
-```
-
 3. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
+cd papi/src
 make install
 ```
 
