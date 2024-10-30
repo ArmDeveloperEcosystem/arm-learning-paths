@@ -191,7 +191,7 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
                     arg_str = cmd_str.split(arg)[1].split("\"")[0]
                     content[cmd_idx].update({arg:arg_str})
             if "|" in cmd_lines_header:
-                expected_result = cmd_str.split("| ")[1].split("\"")[0].split("-")
+                expected_result = cmd_str.split("| ")[1].split("}")[0].split("-")
                 if len(expected_result) > 1:
                     expected_lines = list(range(*[int(x)-1 for x in expected_result]))
                 elif len(expected_result) == 1 and expected_result[0]:
