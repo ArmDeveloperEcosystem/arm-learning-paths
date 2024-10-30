@@ -4,6 +4,8 @@
 title: Windows Performance Analyzer (WPA) Plugin
 minutes_to_complete: 15
 
+draft: true
+
 official_docs: https://github.com/arm-developer-tools/windowsperf-wpa-plugin
 
 author_primary: Alaaeddine Chakroun 
