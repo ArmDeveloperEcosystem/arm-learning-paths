@@ -14,7 +14,6 @@ In this Learning Path, you will learn how to
 * Use the APIs to render a simple 3D object.
 * Profile and analyze the application.
 
-
 The first step is to prepare a development environment with the required software:
 
 * [Android Studio](https://developer.android.com/studio)

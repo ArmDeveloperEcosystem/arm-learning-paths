@@ -16,13 +16,13 @@ WebGPU is the successor to [WebGL](https://www.khronos.org/webgl/wiki/), a well 
 
 WebGPU has been designed taking into learnings from older standards like WebGL, OpenGL etc. and is the only graphics API that benefits from
 
-* Reasonable level of abstraction
+* A Reasonable level of abstraction
 * Good performance
 * Cross-platform
 * Backed by W3C Standards group
-* Future-proof
+* Future-proof design
 
-WebGPU is a standard and not actual API, so the implementation can be adopted and developed as an interface between native applications developed in any programming language and GPUs. Moreover the requirements in terms of performance for web pages is actually the same as for native application.
+WebGPU is a standard and not a true API, so the implementation can be adopted and developed as an interface between native applications developed in any programming language and GPUs. Moreover the requirements in terms of performance for web pages is actually the same as for native application.
 
 {{% notice Note %}}
 When designing an API for the Web, the two key constraints are portability and privacy. We benefit here from the effort developed for portability, and fortunately the limitations of the API due to privacy considerations can be disabled when using WebGPU as a native API
@@ -30,7 +30,7 @@ When designing an API for the Web, the two key constraints are portability and p
 
 ## Why C++?
 
-The initial target for WebGPU was JavaScript and most of the initial implementation was done in JavaScript and the `webgpu.h` header file is written in C. In this learning path, we choose C++ because:
+The initial target for WebGPU was JavaScript and most of the initial implementation was done in JavaScript and the `webgpu.h` header file is written in C. In this learning path, we choose C++ rather than JavaScript or C because:
 
 * C++ is still the primary language used for high performance graphics application (video games, render engines, modeling tools, etc.).
 * The level of abstraction and control of C++ is well suited for interacting with graphics APIs in general.
