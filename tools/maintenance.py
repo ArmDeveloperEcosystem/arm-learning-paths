@@ -105,7 +105,7 @@ def main():
 
     if args.instructions:
         if not os.path.exists(args.instructions):
-            raise FileNotFoundError(f"No such file or directory: {args.instructions}")
+            raise SystemExit(f"No such file or directory: {args.instructions}")
         results_dict = {}
         # check if article is a csv file corresponding to a file list
         if args.instructions.endswith(".csv"):

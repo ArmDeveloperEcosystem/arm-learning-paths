@@ -197,7 +197,7 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
                 elif len(expected_result) == 1 and expected_result[0]:
                     expected_lines = [int(expected_result[0])-1]
                 else:
-                    raise IOError(
+                    raise SystemExit(
                     """The expected output line(s) should be specified as one of two options:
                     A single number:  | 2
                     A range:          | 2-10

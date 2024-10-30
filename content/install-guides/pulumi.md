@@ -57,14 +57,14 @@ source $HOME/.bashrc
 
 Confirm `pulumi` is now in the search path:
 
-```bash { env_source="~/.bashrc" | "2"}
+```bash { env_source="~/.bashrc" | 2 }
 which pulumi
 /home/ubuntu/.pulumi/bin/pulumi
 ```
 
 Print the version:
 
-```bash { env_source="~/.bashrc" | "2"}
+```bash { env_source="~/.bashrc" | 2 }
 pulumi version
 v3.78.0
 ```
@@ -208,4 +208,5 @@ The output will be similar to:
 REPOSITORY   TAG       IMAGE ID       CREATED      SIZE
 alpine       latest    f6648c04cd6c   2 days ago   7.66MB
 ```
+
 
