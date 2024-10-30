@@ -32,7 +32,7 @@ jobs:
             cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "{TEST_SUITE_ERRORS}=true" >> "$GITHUB_ENV" \
             || echo "{TEST_SUITE_ERRORS}=false" >> "$GITHUB_ENV"
       - name: Test condition
-        if: success() && steps.test-suite-state.outputs.TEST_SUITE_ERRORS == 'true'
+        if: steps.test-suite-state.outputs.TEST_SUITE_ERRORS == 'true'
         # 'echo $?' returns with exit code 1
         run: echo $?
       - name: Parse test maintenance off
@@ -43,7 +43,7 @@ jobs:
             cat test-lp-output.txt | grep -q 'maintenance is turned off' && echo "{MAINTENANCE}=off" >> "$GITHUB_ENV" \
             || echo "{MAINTENANCE}=on" >> "$GITHUB_ENV"
       - name: Test condition
-        if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'off'
+        if: steps.maintenance-state.outputs.MAINTENANCE == 'off'
         # Skip opening a PR if tests have not been run
         run: echo "Maintenance is turned off for one or more files, skipping tests"
       - name: Create Pull Request
