@@ -98,6 +98,10 @@ sw_categories:
       readable_title: Linaro Forge
       tests_and_status:
       - ubuntu:latest: passed
+    gcloud:
+      readable_title: Google Cloud Platform (GCP) CLI
+      tests_and_status:
+      - ubuntu:latest: passed
     gfortran:
       readable_title: GFortran
       tests_and_status:
@@ -109,6 +113,10 @@ sw_categories:
       readable_title: Kubectl
       tests_and_status:
       - ubuntu:latest: passed
+    multipass:
+      readable_title: Multipass
+      tests_and_status:
+      - ubuntu:latest: passed
     native:
       readable_title: Native compiler
       tests_and_status:
@@ -116,6 +124,18 @@ sw_categories:
       - fedora:latest: passed
     oci-cli:
       readable_title: Oracle Cloud Infrastructure (OCI) CLI
+      tests_and_status:
+      - ubuntu:latest: passed
+    papi:
+      readable_title: Performance API (PAPI)
+      tests_and_status:
+      - ubuntu:latest: passed
+    perf:
+      readable_title: Perf for Linux on Arm (LinuxPerf)
+      tests_and_status:
+      - ubuntu:latest: passed
+    pulumi:
+      readable_title: Pulumi
       tests_and_status:
       - ubuntu:latest: passed
     pytorch:
