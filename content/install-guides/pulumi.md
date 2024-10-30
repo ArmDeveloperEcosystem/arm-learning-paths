@@ -59,6 +59,9 @@ Confirm `pulumi` is now in the search path:
 
 ```bash
 which pulumi
+```
+
+```output
 /usr/local/bin/pulumi
 ```
 
@@ -66,6 +69,9 @@ Print the version:
 
 ```bash
 pulumi version
+```
+
+```output
 v3.135.1
 ```
 
@@ -101,7 +107,7 @@ mkdir pulumi-test ; cd pulumi-test
 Log in to your local machine, a shortcut to use `~/.pulumi` to store project data.
 
 ```bash
-pulumi login --local --yes
+pulumi login --local
 ```
 
 For the example you need to create 3 files:
@@ -145,8 +151,8 @@ pip install -r requirements.txt
 
 Run the Python script to pull the container image:
 
-```console
-pulumi up
+```bash
+pulumi up --yes
 ```
 
 There are 4 prompts to respond to:
