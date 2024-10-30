@@ -74,7 +74,7 @@ make
 
 ```bash { target="ubuntu:latest" }
 cd papi/src
-make install
+sudo make install
 ```
 
 4. Copy the test program below and paste it into a text file named `papi-test.c``:
