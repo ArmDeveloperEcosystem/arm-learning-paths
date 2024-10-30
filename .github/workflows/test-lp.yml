@@ -24,13 +24,18 @@ jobs:
         # Catch any missed errors if running multiple tests
         run: |
             set -o pipefail; ./.github/workflows/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
+      - name: Parse test suite errors
+        id: test-suite-state
+        if: success()
+        # Check if maintenance is turned off
+        run: |
             cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "{TEST_SUITE_ERRORS}=true" >> "$GITHUB_ENV" \
             || echo "{TEST_SUITE_ERRORS}=false" >> "$GITHUB_ENV"
       - name: Test condition
-        if: success() && steps.run-suite.outputs.TEST_SUITE_ERRORS == 'true'
+        if: success() && steps.test-suite-state.outputs.TEST_SUITE_ERRORS == 'true'
         # 'echo $?' returns with exit code 1
         run: echo $?
-      - name: Parse maintenance state
+      - name: Parse test maintenance off
         id: maintenance-state
         if: success()
         # Check if maintenance is turned off
