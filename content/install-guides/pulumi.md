@@ -152,7 +152,7 @@ pip install -r requirements.txt
 Run the Python script to pull the container image:
 
 ```bash
-pulumi up --yes
+pulumi up --yes --stack
 ```
 
 There are 4 prompts to respond to:
