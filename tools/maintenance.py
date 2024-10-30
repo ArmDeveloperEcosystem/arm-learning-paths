@@ -155,7 +155,6 @@ def main():
         if args.stats_report:
             # If all test results are zero, all tests have passed
             patch.patch(args.instructions, results_dict, args.link)
-        logging.info(results_dict)
         if all(results_dict.get(k) for k in results_dict):
             # Errors exist
             logging.info("Tests failed in test suite")

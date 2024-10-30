@@ -67,13 +67,13 @@ git clone https://github.com/icl-utk-edu/papi/
 cd papi/src
 chmod +x configure
 ./configure
-ls
 make
 ```
 
 3. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
+ls
 make install
 ```
 

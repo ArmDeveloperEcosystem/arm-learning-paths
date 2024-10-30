@@ -34,7 +34,9 @@ jobs:
       - name: Test condition
         if: success() && ${{ env.TEST_SUITE_ERRORS == 'true' }}
         # 'echo $?' returns with exit code 1
-        run: exit 1
+        run: |
+          echo "Test failures detected in test suite, check the output in earlier steps"
+          exit 1
       - name: Parse test maintenance off
         id: maintenance-state
         if: success()
