@@ -57,16 +57,16 @@ source $HOME/.bashrc
 
 Confirm `pulumi` is now in the search path:
 
-```bash { env_source="~/.bashrc" | 2 }
+```bash
 which pulumi
-/home/ubuntu/.pulumi/bin/pulumi
+/usr/local/bin/pulumi
 ```
 
 Print the version:
 
-```bash { env_source="~/.bashrc" | 2 }
+```bash
 pulumi version
-v3.78.0
+v3.135.1
 ```
 
 You are ready to use Pulumi on your Linux machine.
@@ -87,21 +87,21 @@ You also need Python. Make sure you have `python` and `pip` installed.
 
 For `Ubuntu 22.04` on Arm you can run the commands below to install:
 
-```bash { env_source="~/.bashrc" }
+```bash
 sudo apt install python-is-python3 -y
 sudo apt install python3-pip -y
 ```
 
 Create a new directory for the example:
 
-```bash { env_source="~/.bashrc" }
+```bash
 mkdir pulumi-test ; cd pulumi-test
 ```
 
 Log in to your local machine, a shortcut to use `~/.pulumi` to store project data.
 
-```bash { env_source="~/.bashrc" }
-pulumi login --local
+```bash
+pulumi login --local --yes
 ```
 
 For the example you need to create 3 files:
@@ -111,14 +111,14 @@ For the example you need to create 3 files:
 
 Use a text editor to copy the code below to a file named `requirements.txt`.
 
-```python
+```output { file_name="requirements.txt" }
 pulumi>=3.0.0
 pulumi-docker>=4.0.0
 ```
 
 Use a text editor to copy the lines below to a file named `Pulumi.yaml`
 
-```yaml
+```yaml { file_name="Pulimi.yaml" }
 name: alpine-pull
 runtime: python
 description: A pulumi application pull the alpine image
@@ -126,7 +126,7 @@ description: A pulumi application pull the alpine image
 
 Use a text editor to copy the lines below to a file named `__main__.py`
 
-```python
+```python { file_name="__main.py__" }
 import pulumi
 import pulumi_docker as docker
 
@@ -139,13 +139,13 @@ pulumi.export('digest', image.repo_digest)
 
 With the three files created, install the required Python packages:
 
-```bash { env_source="~/.bashrc" }
+```bash
 pip install -r requirements.txt
 ```
 
 Run the Python script to pull the container image:
 
-```bash { env_source="~/.bashrc" }
+```console
 pulumi up
 ```
 
