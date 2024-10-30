@@ -124,7 +124,7 @@ pulumi-docker>=4.0.0
 
 Use a text editor to copy the lines below to a file named `Pulumi.yaml`
 
-```yaml { file_name="Pulimi.yaml" }
+```yaml { file_name="Pulumi.yaml" }
 name: alpine-pull
 runtime: python
 description: A pulumi application pull the alpine image
