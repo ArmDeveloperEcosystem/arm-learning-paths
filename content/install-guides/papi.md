@@ -73,7 +73,7 @@ make
 3. Configure and compile the source code:
 
 ```bash { target="ubuntu:latest" }
-ls
+cd src
 make install
 ```
 
