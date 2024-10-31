@@ -42,7 +42,7 @@ The WPA plugin is built using the [Microsoft Performance Toolkit SDK](https://gi
 
 ## What are some of the features of the WPA plugin? 
 
-The WindowsPerf GUI extension includes a couple of key features, designed to streamline the user experience:
+The WindowsPerf GUI extension includes features, which are designed to streamline the user experience:
 
 ### Timeline view
 
