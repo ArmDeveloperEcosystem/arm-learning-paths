@@ -15,6 +15,7 @@ One additional software package is required for this section. Install `jq` on yo
 sudo apt install jq -y
 ```
 
+# Server
 ## Install Hugging Face Hub
 
 There are a few different ways you can download the Qwen2 0.5B model. In this Learning Path, you download the model from Hugging Face.
@@ -50,7 +51,8 @@ You can now download the model using the huggingface cli:
 huggingface-cli download Qwen/Qwen2-0.5B-Instruct
 ```
 
-The server executable has already compiled during the stage detailed in the previous section, when you ran `make`. 
+## Start rtp-llm server
+The server executable has already compiled during the stage detailed in the previous section, when you ran `bazelisk build`.
 
 Start the server from the command line, it listens on port 8088:
 
@@ -61,6 +63,7 @@ export TOKENIZER_PATH=$CHECKPOINT_PATH
 MODEL_TYPE=qwen_2 FT_SERVER_TEST=1 python3 -m maga_transformer.start_server
 ```
 
+# Client
 ## Use curl
 
 You can access the API using the `curl` command. 

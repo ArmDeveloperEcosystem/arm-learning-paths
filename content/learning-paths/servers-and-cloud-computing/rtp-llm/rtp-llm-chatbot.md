@@ -17,7 +17,7 @@ Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Pa
  
 ## Install dependencies 
 
-Install `micromamba` to setup `python` 3.10 `/opt/conda310`, required by `rtp-llm` build system:
+Install `micromamba` to setup python 3.10 at path `/opt/conda310`, required by `rtp-llm` build system:
 
 ```bash
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
@@ -26,7 +26,7 @@ sudo ${HOME}/.local/bin/micromamba -r /opt/conda310 install python=3.10
 micromamba -r /opt/conda310 shell
 ```
 
-Install `bazalisk` to build `rtp-llm`:
+Install `bazelisk` to build `rtp-llm`:
 
 ```bash
 wget https://github.com/bazelbuild/bazelisk/releases/download/v1.22.1/bazelisk-linux-arm64
@@ -57,6 +57,7 @@ Clone the source repository for rtp-llm:
 
 ```bash
 git clone https://github.com/alibaba/rtp-llm
+git checkout 4656265
 ```
 
 Comment out deps/requirements_lock_torch_arm.txt line 7-10, due to some host not accessible from the Internet.
