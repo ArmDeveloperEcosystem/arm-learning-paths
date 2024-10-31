@@ -39,12 +39,12 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
-Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The largest instance has 48 vCPUs and 192 Gb of RAM. It does not offer bare-metal instances.
+Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The latest generation of Arm-based VMs are based on Google Axion processor. The largest instance has 72 vCPUs and 576 Gb of RAM. It does not offer bare-metal instances. It offers `highcpu` and `highmem` VM instances for compute and memory intensive workloads respectively.
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
 | T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-<!-- | Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem  | General-purpose and AI/ML workloads. | -->
+| Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
@@ -118,7 +118,8 @@ Which tools are available for building and running containers on Arm servers?
 | AWS CodeBuild  | [Build and share Docker images using AWS CodeBuild](https://learn.arm.com/learning-paths/servers-and-cloud-computing/codebuild/) | |
 | Docker Build Cloud | [Build multi-architecture container images with Docker Build Cloud](https://learn.arm.com/learning-paths/cross-platform/docker-build-cloud/) | [Supercharge your Arm builds with Docker Build Cloud: Efficiency meets performance](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/supercharge-arm-builds-with-docker-build-cloud) |
 | GitHub Actions (GitHub runners) | [Build multi-architecture container images with GitHub Arm-hosted runners](https://learn.arm.com/learning-paths/cross-platform/github-arm-runners/) | [Arm64 on GitHub Actions: Powering faster, more efficient build systems](https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/) |
-| GitHub Actions (AWS Graviton runners) | [Managed, self-hosted Arm runners for GitHub Actions](https://learn.arm.com/learning-paths/servers-and-cloud-computing/github-actions-runner/) |  |
+| GitHub Actions (AWS Graviton runners) | [Managed, self-hosted Arm runners for GitHub Actions](https://learn.arm.com/learning-paths/servers-and-cloud-computing/github-actions-runner/) |
+| GitLab (GitLab runners) | [Build a CI/CD pipeline with GitLab on Google Axion](https://learn.arm.com/learning-paths/cross-platform/gitlab/) |  |
 
   {{< /tab >}}
 
@@ -132,11 +133,12 @@ Which programming languages work on Arm servers? - Nearly all of them.
 | Rust | [Rust Install Guide](https://learn.arm.com/install-guides/rust/) | [Neon Intrinsics in Rust](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/rust-neon-intrinsics) |
 | Java | [Java Install Guide](https://learn.arm.com/install-guides/java/) | [Improving Java performance on Neoverse N1 systems](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1) |
 |      | [Migrating Java applications](https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/java/) | [Java Vector API on AArch64](https://community.arm.com/arm-community-blogs/b/high-performance-computing-blog/posts/java-vector-api-on-aarch64) |
-|      | | [Java on Graviton](https://github.com/aws/aws-graviton-getting-started/blob/main/java.md) |
+|      | [Run Java applications on Google Axion](https://learn.arm.com/learning-paths/servers-and-cloud-computing/java-on-axion/)| [Java on Graviton](https://github.com/aws/aws-graviton-getting-started/blob/main/java.md) |
 |      | | [Optimizing Java Workloads on Azure General Purpose D-series v5 VMs with Microsoft’s Build of OpenJDK](https://techcommunity.microsoft.com/t5/azure-compute-blog/optimizing-java-workloads-on-azure-general-purpose-d-series-v5/ba-p/3827610) |
 |      | | [Improving Java performance on OCI Ampere A1 compute instances](https://community.arm.com/arm-community-blogs/b/infrastructure-solutions-blog/posts/performance-of-specjbb2015-on-oci-ampere-a1-compute-instances) |
 | Go | [Go Install Guide](https://learn.arm.com/install-guides/go/) | [Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/)|
 | .NET | [.NET Install Guide](https://learn.arm.com/install-guides/dotnet/) | [Arm64 Performance Improvements in .NET 7](https://devblogs.microsoft.com/dotnet/arm64-performance-improvements-in-dotnet-7/) |
+|      | [Deploy .NET application on Azure Cobalt 100 VMs](https://learn.arm.com/learning-paths/servers-and-cloud-computing/azure-cobalt-cicd-aks/) | [Arm64 Performance Improvements in .NET 8](https://devblogs.microsoft.com/dotnet/this-arm64-performance-in-dotnet-8/) |
 | Python | | [Python on Arm](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/python-on-arm)|
 | PHP | | [Improving performance of PHP for Arm64 and impact on AWS Graviton2 based EC2 instances](https://aws.amazon.com/blogs/compute/improving-performance-of-php-for-arm64-and-impact-on-amazon-ec2-m6g-instances/) |
 
