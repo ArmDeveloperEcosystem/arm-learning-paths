@@ -1,8 +1,5 @@
 ---
 title: Run Java applications on Google Axion processors
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 20
 

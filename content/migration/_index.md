@@ -18,8 +18,8 @@ Below is a list of Neoverse CPUs, the architecture versions, and the key additio
 | ----------- | -------------------- | --------------------------------------------------------- |
 | Neoverse-N1 | Armv8.2-A            | LSE - Large System Extensions improves multi-threaded performance. |
 | Neoverse-V1 | Armv8.4-A            | SVE - Scalable Vector Extension adds high performance vector processing for HPC and AI workloads. |
-| Neoverse-N2 | Armv9.0-A            | SVE2 and Arm CCA - Extends SVE and adds Arm Confidential Compute Architecture for hardware isolation and security. |
-| Neoverse-V2 | Armv9.0-A            | SVE2 and Arm CCA - Targets high single threaded performance for HPC and AI workloads. |
+| Neoverse-N2 | Armv9.0-A            | SVE2 - Extends SVE for improved data parallelism and wider vectors. |
+| Neoverse-V2 | Armv9.0-A            | SVE2 - Targets high single threaded performance for HPC and AI workloads. |
 
 ### What cloud hardware is available today?
 
@@ -39,22 +39,21 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
-Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The largest instance has 80 vCPUs and 640 Gb of RAM in the 'c3a-highmem' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (standard) and memory-optimized workloads (highmem).
+Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The largest instance has 48 vCPUs and 192 Gb of RAM. It does not offer bare-metal instances.
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
 | T2A       | Neoverse-N1  | T2A-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-| C3A       | AmpereOne    | c3a-standard, c3a-highmem   | Compute-optimized - large-scale databases, media transcoding, and HPC. |
 <!-- | Axion (C4A) | Neoverse-V2 | c4a-standard, c4a-highmem  | General-purpose and AI/ML workloads. | -->
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
-Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/dpsv5-dpdsv5-series). The largest instance has 64 vCPUs and 208 Gb of RAM in the 'D64ps_v5' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps), memory-optimized workloads (Eps),  compute-intensive workloads (Fsv), and high-performance (Cobalt).
+Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The latest generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps).
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| psv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized instances. |
-| psv6      | Neoverse-N2  | Dpsv6, Epsv6, Fsv6 | Cobalt processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized). |
+| Dpsv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized instances. |
+| Dpsv6      | Neoverse-N2  | Dpsv6, Dpls6, Epsv6 | Cobalt 100 processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized, 8:1 mem:cpu ratio). |
 
   {{< /tab >}}
   {{< tab header="Oracle OCI">}} 

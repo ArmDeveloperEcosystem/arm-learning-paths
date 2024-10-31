@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 As with most cloud service providers, Azure offers a pay-as-you-use [pricing policy](https://azure.microsoft.com/en-us/pricing/), including a number of [free](https://azure.microsoft.com/en-us/free/) services.
 
-This guide is to help you get started with [Virtual Machines](https://azure.microsoft.com/en-us/products/virtual-machines/), using Arm-based VMs available in Azure. Microsoft Azure offers two generations of Arm-based VMs. The latest generation is based on [Azure Cobalt 100 processors](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353). The previous generation VMs are based on [Ampere](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/) processors. This is a general-purpose compute platform, essentially your own personal computer in the cloud.
+This guide is to help you get started with [Virtual Machines](https://azure.microsoft.com/en-us/products/virtual-machines/), using Arm-based VMs available in Azure. Microsoft Azure offers two generations of Arm-based VMs. The latest generation is based on [Azure Cobalt 100 processors](https://azure.microsoft.com/en-us/blog/azure-cobalt-100-based-virtual-machines-are-now-generally-available/). The previous generation VMs are based on [Ampere](https://azure.microsoft.com/en-us/blog/azure-virtual-machines-with-ampere-altra-arm-based-processors-generally-available/) processors. This is a general-purpose compute platform, essentially your own personal computer in the cloud.
 
 Full [documentation and quickstart guides](https://learn.microsoft.com/en-us/azure/virtual-machines/) are available.
 

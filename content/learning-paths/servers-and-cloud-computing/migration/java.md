@@ -91,7 +91,31 @@ Depending on your application, you may want to investigate the vector processing
 
 You can try [Process Watch](https://learn.arm.com/learning-paths/servers-and-cloud-computing/processwatch/) to monitor the usage of SIMD and CRC instructions. 
 
-Refer to the [Java documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html) for more information about the flags. 
+Refer to the [Java documentation](https://docs.oracle.com/en/java/javase/17/docs/specs/man/java.html) for more information about the flags.
+
+## Memory and Garbage Collection
+
+The default [JVM ergonomics](https://docs.oracle.com/en/java/javase/21/gctuning/ergonomics.html) can generally be improved upon if you understand your workload well.
+
+Default initial heap size is 1/64th of RAM and default maximum heap size is 1/4th of RAM. If you know your memory requirements, you should set both of these flags to the same value (e.g. `-Xms12g` and `-Xmx12g` for an application that uses at most 12 GB). Setting both flags to the same value will prevent the JVM from having to periodically allocate additional memory. Additionally, for cloud workloads max heap size is often set to 75%-85% of RAM, much higher than the default setting.
+
+If you are deploying in a cloud scenario where you might be deploying the same stack to systems that have varying amounts of RAM, you might want to use `-XX:MaxRAMPercentage` instead of `-Xmx`, so you can specify a percentage of max RAM rather than a fixed max heap size. This setting can also be helpful in containerized workloads.
+
+Garbage collector choice will depend on the workload pattern for which you're optimizing.
+
+* If your workload is a straightforward serial single-core load with no multithreading, the `UseSerialGC` flag should be set to true.
+* For multi-core small heap batch jobs (<4GB), the `UseParallelGC` flag should be set to true.
+* The G1 garbage collector (`UseG1GC` flag) is better for medium to large heaps (>4GB). This is the most commonly used GC for large parallel workloads, and is the default for high-core environments. If you want to optimize throughput, use this one.
+* The ZGC (`UseZGC` flag) has low pause times, which can drastically improve tail latencies. If you want to prioritize response time at a small cost to throughput, use ZGC.
+* The Shenandoah GC (`UseShenandoahGC` flag) is still fairly niche. It has ultra low pause times and concurrent evacuation, making it ideal for low-latency applications, at the cost of increased CPU use.
+
+If you'd like to see what the default JVM values are for specific processor counts, you can run
+
+```bash
+java -XX:ActiveProcessorCount=[selected processor count] -XX:+PrintFlagsFinal -version
+```
+
+Where `[selected processor count]` is the number of processors you want to evaluate the defaults for. You can also use this `-XX:ActiveProcessorCount` if you don't want to set GC and RAM sizes manually, if you know which default configuration you want to force the JVM to use.
 
 ## Crypto
 

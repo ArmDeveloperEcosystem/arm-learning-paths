@@ -5,30 +5,31 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Create a dedicated cluster
 
-In this section, you will learn how to setup a cluster on Zilliz Cloud. You will then learn how to load your private knowledge database into the cluster.
+In this section, you will set up a cluster on Zilliz Cloud.
 
-### Create a dedicated cluster
+Begin by [registering](https://docs.zilliz.com/docs/register-with-zilliz-cloud?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) for a free account on Zilliz Cloud. 
 
-You will need to [register](https://docs.zilliz.com/docs/register-with-zilliz-cloud) for a free account on Zilliz Cloud. 
+After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm). 
 
-After you register, [create a cluster](https://docs.zilliz.com/docs/create-cluster) on Zilliz Cloud. In this Learning Path, you will create a dedicated cluster deployed in AWS using Arm-based machines to store and retreive the vector data as shown:
+Now create a **Dedicated** cluster deployed in AWS using Arm-based machines to store and retrieve the vector data as shown:
 
 ![cluster](create_cluster.png)
 
-When you select the `Create Cluster` Button, you should see the cluster running in your Default Project.
+When you select the **Create Cluster** Button, you should see the cluster running in your **Default Project**.
 
 ![running](running_cluster.png)
 
 {{% notice Note %}}
-You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. We can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md) on Arm-based machines. For more information about Milvus installation, please refer to the [installation documentation](https://milvus.io/docs/install-overview.md).
+You can use self-hosted Milvus as an alternative to Zilliz Cloud. This option is more complicated to set up. You can also deploy [Milvus Standalone](https://milvus.io/docs/install_standalone-docker-compose.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) and [Kubernetes](https://milvus.io/docs/install_cluster-milvusoperator.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) on Arm-based machines. For more information about installing Milvus, see the [Milvus installation documentation](https://milvus.io/docs/install-overview.md?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm).
 {{% /notice  %}}
 
-### Create the Collection
+## Create the Collection
 
-With the dedicated cluster running in Zilliz Cloud, you are now ready to create a collection in your cluster.
+With the Dedicated cluster running in Zilliz Cloud, you are now ready to create a collection in your cluster.
 
-Within your activated python `venv`, start by creating a file named `zilliz-llm-rag.py` and copy the contents below into it:
+Within your activated Python virtual environment `venv`, start by creating a file named `zilliz-llm-rag.py`, and copy the contents below into it:
 
 ```python
 from pymilvus import MilvusClient
@@ -38,7 +39,7 @@ milvus_client = MilvusClient(
 )
 
 ```
-Replace <your_zilliz_public_endpoint> and <your zilliz_api_key> with the `URI` and `Token` for your running cluster. Refer to [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details) in Zilliz Cloud for more details.
+Replace *<your_zilliz_public_endpoint>* and *<your zilliz_api_key>* with the `URI` and `Token` for your running cluster. Refer to [Public Endpoint and Api key](https://docs.zilliz.com/docs/on-zilliz-cloud-console#free-cluster-details?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm) in Zilliz Cloud for further information.
 
 Now, append the following code to `zilliz-llm-rag.py` and save the contents:
 
@@ -56,16 +57,16 @@ milvus_client.create_collection(
     consistency_level="Strong",  # Strong consistency level
 )
 ```
-This code checks if a collection already exists and drops it if it does. You then, create a new collection with the specified parameters.
+This code checks if a collection already exists and drops it if it does. If this happens, you can create a new collection with the specified parameters.
 
-If you don't specify any field information, Milvus will automatically create a default `id` field for primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema-defined fields and their values.
-You will use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating)
+If you do not specify any field information, Milvus automatically creates a default `id` field for the primary key, and a `vector` field to store the vector data. A reserved JSON field is used to store non-schema defined fields and their values.
+You can use inner product distance as the default metric type. For more information about distance types, you can refer to [Similarity Metrics page](https://milvus.io/docs/metric.md?tab=floating?utm_source=partner&utm_medium=referral&utm_campaign=2024-10-24_web_arm-dev-hub-data-loading_arm).
 
 You can now prepare the data to use in this collection.
 
-### Prepare the data
+## Prepare the data
 
-In this example, you will use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the private knowledge that is loaded in your RAG dataset/collection.
+In this example, you will use the FAQ pages from the [Milvus Documentation 2.4.x](https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/milvus_docs_2.4.x_en.zip) as the private knowledge that is loaded in your RAG dataset.
 
 Download the zip file and extract documents to the folder `milvus_docs`.
 
@@ -74,7 +75,7 @@ wget https://github.com/milvus-io/milvus-docs/releases/download/v2.4.6-preview/m
 unzip -q milvus_docs_2.4.x_en.zip -d milvus_docs
 ```
 
-You will load all the markdown files from the folder `milvus_docs/en/faq` into your data collection. For each document, use "# " to separate the content in the file, which can roughly separate the content of each main part of the markdown file.
+Now load all the markdown files from the folder `milvus_docs/en/faq` into your data collection. For each document, use "# " to separate the content in the file. This divides the content of each main part of the markdown file.
 
 Open `zilliz-llm-rag.py` and append the following code to it:
 
@@ -91,9 +92,9 @@ for file_path in glob("milvus_docs/en/faq/*.md", recursive=True):
 ```
 
 ### Insert data
-You will now prepare a simple but efficient embedding model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) that can convert the loaded text into embedding vectors.
+Now you can prepare a simple but efficient embedding model [all-MiniLM-L6-v2](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2) that can convert the loaded text into embedding vectors.
 
-You will iterate through the text lines, create embeddings, and then insert the data into Milvus.
+You can iterate through the text lines, create embeddings, and then insert the data into Milvus.
 
 Append and save the code shown below into `zilliz-llm-rag.py`:
 
@@ -115,10 +116,10 @@ for i, (line, embedding) in enumerate(
 
 milvus_client.insert(collection_name=collection_name, data=data)
 ```
-Run the python script, to check that you have successfully created the embeddings on the data you loaded into the RAG collection:
+Run the Python script, to check that you have successfully created the embeddings on the data you loaded into the RAG collection:
 
 ```bash
-python3 python3 zilliz-llm-rag.py
+python3 zilliz-llm-rag.py
 ```
 
 The output should look like:
