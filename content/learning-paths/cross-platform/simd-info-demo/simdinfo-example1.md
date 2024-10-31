@@ -1,13 +1,14 @@
 ---
-title: Example Setup
+title: Example Program
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-### Introducing the Example Code
-We start with an example that uses Intel SIMD (SSE4.2) intrinsics. Create a file named calculation_sse.c with the contents shown below. The program first compares whether elements in one vector are greater than those in another vector, prints the result, and then proceeds to compute the addition of two vectors, multiplies the result with one of the vectors, and finally takes the square root of the multiplication result:
+Consider the following C example that uses Intel SSE4.2 intrinsics.
+
+Create a file named `calculation_sse.c` with the contents shown below.
 
 ```C
 #include <xmmintrin.h>
@@ -51,9 +52,11 @@ int main() {
 }
 ```
 
-Compile the code as follows using a machine that supports SSE-Vector-Extension:
+The program first compares whether elements in one vector are greater than those in another vector, prints the result, and then proceeds to compute the addition of two vectors, multiplies the result with one of the vectors, and finally takes the square root of the multiplication result:
+
+Compile the code as follows on an Intel system that supports **SSE4.2**:
 ```bash
-gcc -O3 calculation_sse.c -o calculation_sse -march=native
+gcc -O3 calculation_sse.c -o calculation_sse -msse4.2
 ```
 
 Now run the program:
@@ -61,7 +64,7 @@ Now run the program:
 ./calculation_sse
 ```
 
-The output should look like: 
+The output should look like the following:
 ```output
 Element 0: 1.00 is not larger than 1.00
 Element 1: 4.00 is larger than 2.00
@@ -73,4 +76,4 @@ Multiplication Result: 2.00 12.00 36.00 80.00
 Square Root Result: 1.41 3.46 6.00 8.94
 ```
 
-The reason you run the code first is to make sure you understand how it works and how the results are being produced. If you don't get this right, switching to another engine like NEON won’t help, as the primary concern is that the results should remain the same.
+It is imperative that you run the code first on the reference platform (here Intel), to make sure you understand how it works and what kind of results are being expected.

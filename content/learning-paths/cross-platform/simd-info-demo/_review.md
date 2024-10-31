@@ -2,37 +2,36 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            What is SIMD.info?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
+            - An online resource for SIMD C intrinsics for all major architectures
+            - It's an online forum for SIMD developers
+            - A book about SIMD programming
         correct_answer: 1                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            While it allows comments in the SIMD intrinsics, SIMD.info is not really a forum. It is an online **free** resource to assist developers porting C code between popular architectures, for example, from SSE/AVX/AVX512 to Arm ASIMD.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            What architectures are listed in SIMD.info?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - Intel SSE and Arm ASIMD
+            - Power VSX and Arm ASIMD/SVE
+            - Intel SSE4.2/AVX/AVX2/AVX512, Arm ASIMD, Power VSX
+        correct_answer: 3
         explanation: >
-            PLACEHOLDER EXPLANATION 2
-               
+            At the time of writing SIMD.info supports Intel SSE4.2/AVX/AVX2/AVX512, Arm ASIMD, Power VSX as SIMD architectures. Work is in progress to include Arm SVE/SVE2, MIPS MSA, RISC-V RVV 1.0, s390 Z and others.
+
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            What are SIMD.info's major features?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
+            - Hierarchical tree, Search, AI code translation
+            - Search, Hierarchical tree, Code examples
+            - Hierarchical tree, Search, Intrinsics Comparison, Code examples, Equivalents mapping, links to official documentation
+        correct_answer: 3
         explanation: >
-            PLACEHOLDER EXPLANATION 3
+            SIMD.info provides multiple features, including a hierarchical tree, Search facility, Intrinsics Comparison, Code examples, Equivalents mapping, links to official documentation and others. AI code translation is not a feature of SIMD.info but will be the focus of another project, SIMD.ai.
 
 
 

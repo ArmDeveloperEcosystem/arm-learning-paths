@@ -1,20 +1,12 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: You should explore **SIMD.info** more and find out porting opportunities between different SIMD engines.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/cross-platform/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
-        type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: SIMD.info
+        link: https://simd.info
         type: website
 
 
