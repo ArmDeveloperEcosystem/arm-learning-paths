@@ -74,12 +74,11 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ## Using Python scripts
 
-The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. 
+The Python scripts provided with Streamline CLI tools require Python 3.8 or later, and depend on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools.
 
 Create a virtual environment:
 
-```sh
-# From Bash
+```bash
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
 ```
@@ -96,7 +95,7 @@ The Streamline CLI tools are available as a standalone download to enable easy i
 
 To download the latest version of the tool and extract it to the current working directory you can use our download utility script:
 
-```sh
+```bash
 wget https://artifacts.tools.arm.com/arm-performance-studio/Streamline_CLI_Tools/get-streamline-cli.py
 python3 get-streamline-cli.py install
 python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
@@ -104,7 +103,7 @@ python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
 
 If you want to add the Streamline tools to your search path:
 
-```sh
+```bash
 export PATH=$PATH:$PWD/streamline_cli_tools/bin
 ```
 
@@ -112,13 +111,11 @@ The script can also be used to download a specific version, or install to a user
 
 * To list all available versions:
 
-
     ```sh
     python3 get-streamline-cli.py list
     ```
 
 * To download, but not install, a specific version:
-
 
     ```sh
     python3 get-streamline-cli.py download --tool-version <version>
@@ -169,13 +166,13 @@ You might need to adapt them slightly to other Linux distributions.
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
-```console
+```bash { cwd="$HOME/streamline_cli_tools" }
 git apply patch/v6.7-combined.patch
 ```
 
 or `patch`:
 
-```console
+```bash { cwd="$HOME/streamline_cli_tools" }
 patch -p 1 -i patch/v6.7-combined.patch
 ```
 
