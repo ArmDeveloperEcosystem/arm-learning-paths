@@ -22,7 +22,7 @@ git version 2.39.3
 
 If not, please follow the steps to install git on your system.
 
-### Step 3.1. Clone the project
+### Step 2.1. Clone the Himax project
 
 You will first need to recusively clone the Himax repository. This will also clone the necessary sub repos such as Arm CMSIS. 
 
@@ -31,7 +31,7 @@ git clone --recursive https://github.com/HimaxWiseEyePlus/Seeed_Grove_Vision_AI_
 cd Seeed_Grove_Vision_AI_Module_V2
 ```
 
-### Step 3.2. Compile the firmware
+### Step 2.2. Compile the firmware
 
 The make build tool is used to compile the source code. This should take up around 2-3 minutes depending on the number of CPU cores available.
 
@@ -42,7 +42,7 @@ make
 ```
 
 
-### Step 3.3. Generate firmware image file
+### Step 2.3. Generate firmware image file
 
 ```bash
 cd ../we2_image_gen_local/

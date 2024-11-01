@@ -8,20 +8,17 @@ layout: learningpathall
 
 ## Flash The Firmware
 
-### Step 4.1. Install xmodem.
+### Step 3.1. Install xmodem.
 
-Change the directory
-```bash
-cd $HOME/Seeed_Grove_Vision_AI_Module_V2 # If you cloned the repo to a different location replace $HOME with the path. 
-```
 
 `Xmodem` is a basic file transfer protocol. Run the following command to install the dependencies for xmodem. 
 
-```python
+```bash
+cd $HOME/Seeed_Grove_Vision_AI_Module_V2 # If you cloned the repo to a different location replace $HOME with the path. 
 pip install -r xmodem/requirements.txt
 ```
 
-### Step 4.2. Connect the module to PC by USB cable.
+### Step 3.2. Connect the module to PC by USB cable.
 
 You will need to insert the FPC cable cable into the Grove Vision AI V2 module. Lift the dark grey latch on the connector as per the image below.
 
@@ -33,7 +30,7 @@ Then, slide the FPC connector in with the metal pins facing down and close the d
 
 Then connect the Groove Vision AI V2 Module to your computer via USB-C.
 
-### Step 4.4. Flash the firmware by the following commands:
+### Step 3.4. Flash the firmware by the following commands:
 
 ```python
 python xmodem\xmodem_send.py --port=[your COM number] --baudrate=921600 --protocol=xmodem --file=we2_image_gen_local\output_case1_sec_wlcsp\output.img 

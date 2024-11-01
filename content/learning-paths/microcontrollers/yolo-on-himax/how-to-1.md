@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Set up the development environment
 
-### Step 2.1. Install Ubuntu
+### Step 1.1. Install Ubuntu
 
-Himax SDK needs to be compiled in a Linux environment. If you use a Windows computer, it is recommended to install WSL, by searching Ubuntu 22.04.3 LTS in Microsoft store. This learning path has been validated on Ubuntu 22.04 LTS. However, we expect other linux distributions to work. To verify the Linux distribution you are using you can run the `cat /etc/*release*` command. 
+This learning path has been tested on Ubuntu. If you use a Windows computer, it is recommended to install WSL, by searching Ubuntu 22.04.3 LTS in Microsoft store. This learning path has been validated on Ubuntu 22.04 LTS. However, we expect other linux distributions to work. To verify the Linux distribution you are using you can run the `cat /etc/*release*` command. 
 
 ```bash
 cat /etc/*release*
@@ -25,11 +25,11 @@ DISTRIB_DESCRIPTION="Ubuntu 22.04.5 LTS"
 ...
 ```
 
-### Step 2.2. (Optional) Install Microsoft VS Code
+### Step 1.2. (Optional) Install Microsoft VS Code
 
 This is only optional. You can use any text editor to view/change code. By typing “wsl” in VS Code terminal, you can switch to Linux environment.
 
-### Step 2.3. Install python 3
+### Step 1.3. Install python 3
 
 Go to website python.org to download and install.
 Verify python is installed by
@@ -38,7 +38,7 @@ You should see an output like the following.
 ```output
 Python 3.12.7
 ```
-### Step 2.4. Install python-pip
+### Step 1.4. Install python-pip
 
 ```bash
 sudo apt update
@@ -52,7 +52,7 @@ If `pip3` is correctly installed you should see an output similar to tht followi
 pip 24.2 from <path to pip3>/pip (python 3.12)
 ```
 
-### Step 2.5. Install make
+### Step 1.5. Install make
 
 You will need to install the make build tool in order to build the firmware in the following section.
 
@@ -73,7 +73,7 @@ This is free software: you are free to change and redistribute it.
 There is NO WARRANTY, to the extent permitted by law.
 ```
 
-### Step 2.6. Install ARM GNU toolchain
+### Step 1.6. Install ARM GNU toolchain
 
 ```bash
 cd ~

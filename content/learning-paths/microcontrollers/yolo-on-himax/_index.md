@@ -20,7 +20,7 @@ author_primary: Chaodong Gong, Alex Su, Kieran Hejmadi
 
 ### Tags
 skilllevels: Beginner
-subjects: Object Detection
+subjects: ML
 armips:
     - Cortex M55
     - Ethos U55
@@ -28,7 +28,6 @@ tools_software_languages:
     - Himax SDK
     - bash scripting
 operatingsystems:
-    - Windows
     - Linux
 
 
