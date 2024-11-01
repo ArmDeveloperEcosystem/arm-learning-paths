@@ -63,7 +63,7 @@ sudo apt-get install tigervnc-standalone-server tigervnc-common -y
 
 Run the password command to set a password for VNC. This is not the password for the user account, just for the VNC client to connect to the VNC server.
 
-```bash
+```console
 vncpasswd
 ```
 

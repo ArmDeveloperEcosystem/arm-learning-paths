@@ -130,7 +130,7 @@ docker build -t sysbox-test -f Dockerfile .
 
 Use Sysbox as the container runtime to create a new container:
 
-```bash
+```console
 docker run --runtime=sysbox-runc -P --hostname=sbox sysbox-test
 ```
 
