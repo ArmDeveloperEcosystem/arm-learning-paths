@@ -1,31 +1,35 @@
 ---
-title: PLACEHOLDER TITLE
+title: Run Yolo computer vision model on a Himax microcontroller
 
-minutes_to_complete: 10
+minutes_to_complete: 90
 
-who_is_this_for: PLACEHOLDER SENTENCE
+who_is_this_for: This is an introduction topic for beginners on how to run a computervision application on an embedded device from Himax. This example uses an off-the-shelf Himax WiseEye2 module which is based on the Arm Cortex-M55 and Ethos-U85.
 
 learning_objectives: 
-    - PLACEHOLDER OBJECTIVE 1
-    - PLACEHOLDER OBJECTIVE 2
+    - Run Yolo model on off-the-shelf hardware based on the Arm Cortex-M55 and Ethos-U55
+    - Build Himax SDK and generate firmware image file
+    - Update firmware on edge device (Himax WiseEye2)
+    
 
 prerequisites:
-    - PLACEHOLDER PREREQ 1
-    - PLACEHOLDER PREREQ 2
+    - [Seeed Grove Vision AI V2 Module](https://www.seeedstudio.com/Grove-Vision-AI-Module-V2-p-5851.html)
+    - [OV5647-62 Camera module and included FPC cable](https://www.seeedstudio.com/OV5647-69-1-FOV-Camera-module-for-Raspberry-Pi-3B-4B-p-5484.html)
+    - An Windows based machine running an x86 archiecture. 
 
-author_primary: PLACEHOLDER NAME
+author_primary: Chaodong Gong
 
 ### Tags
-skilllevels: PLACEHOLDER SKILLLEVEL
-subjects: PLACEHOLDER SUBJECT
+skilllevels: Beginner
+subjects: Object Detection
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
+    - Cortex M55
+    - Ethos U55
 tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - Himax SDK
+    - bash scripting
 operatingsystems:
-    - PLACEHOLDER OS G
+    - Windows
+    - Linux
 
 
 ### FIXED, DO NOT MODIFY
