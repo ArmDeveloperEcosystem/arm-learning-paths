@@ -17,6 +17,10 @@ author_primary: Jason Andrews
 ### Link to official documentation
 official_docs: https://www.openssh.com/manual.html
 
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -25,26 +29,26 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Secure Shell (SSH) is the primary tool used to connect to remote Linux servers. It provides a secure shell on a remote machine, and is used frequently in cloud and server development. 
+Secure Shell (SSH) is the primary tool used to connect to remote Linux servers. It provides a secure shell on a remote machine, and is used frequently in cloud and server development.
 
 This section provides answers to the most frequently asked SSH setup questions related to server and cloud development.
 
-Feel free to seek out additional SSH tutorials or add more information to this page. 
+Feel free to seek out additional SSH tutorials or add more information to this page.
 
-## SSH 
+## SSH
 
 SSH is a client server application.
 
-An SSH server, also called the SSH daemon, runs on a remote machine. 
+An SSH server, also called the SSH daemon, runs on a remote machine.
 
-An SSH client runs on the local machine (the one you are typing on) and connects to the remote daemon. 
+An SSH client runs on the local machine (the one you are typing on) and connects to the remote daemon.
 
 ### Decide if the SSH daemon is already running
 
 For SSH to work, the SSH daemon must be running on the remote machine. Many Linux distributions install and run the SSH daemon automatically.
 
 To find out if the SSH daemon is already running running use the `ps` command.
-```console
+```bash
 ps -ef | grep ssh
 ```
 If the result includes a line with `sshd` the daemon is running.
@@ -52,7 +56,7 @@ If the result includes a line with `sshd` the daemon is running.
 root      1113     1  0 18:48 ?        00:00:00 /usr/sbin/sshd -D
 ```
 Another way to check if the SSH daemon is running is to query the SSH service.
-```console
+```bash
 sudo systemctl status sshd
 ```
 If the output displays "running", then the SSH daemon is already running.
@@ -65,34 +69,34 @@ If the SSH daemon is not running on the remote Linux machine, install it using t
 
 For Ubuntu/Debian distributions:
 ```bash
-sudo apt-get install openssh-server 
+sudo apt-get install openssh-server
 ```
 For Red Hat and Amazon Linux distributions.
-```bash
-sudo yum install openssh-server 
+```console
+sudo yum install openssh-server
 ```
 
 ### Start and stop the SSH daemon {#startstop}
 
-The commands below are for any Linux distribution using `systemd`. This includes Debian, Ubuntu, and Amazon Linux. 
+The commands below are for any Linux distribution using `systemd`. This includes Debian, Ubuntu, and Amazon Linux.
 
 To start the SSH daemon:
-```console
-sudo systemctl start ssh 
+```bash
+sudo systemctl start ssh
 ```
 To stop the SSH daemon:
-```console
-sudo systemctl stop ssh 
+```bash
+sudo systemctl stop ssh
 ```
 To restart the SSH daemon:
-```console
-sudo systemctl restart ssh 
+```bash
+sudo systemctl restart ssh
 ```
 ### Use a password with SSH
 
 For security reasons, cloud instances don’t enable password logins and there is no password set for the user accounts (such as `ubuntu` or `ec2-user`).
 
-Password access is useful to connect when the private key is not available. 
+Password access is useful to connect when the private key is not available.
 
 To enable passwords edit the file `/etc/sshd_config` and set `PasswordAuthentication` to `yes`.
 
@@ -100,16 +104,16 @@ To enable it from the command line, run this command:
 ```console
 sudo sed -i '/PasswordAuthentication no/c\PasswordAuthentication yes' /etc/ssh/sshd_config
 ```
-Restart the SSH daemon using the commands [above](#startstop). 
+Restart the SSH daemon using the commands [above](#startstop).
 
-To use a password for SSH a password must be created. 
+To use a password for SSH a password must be created.
 
 To create a password for the user ubuntu:
 ```console
 sudo passwd ubuntu
 ```
 
-For improved security, set the security group of the cloud instance to allow port 22 traffic (SSH) from a minimal set of IP addresses, not anywhere on the internet. Use password access with caution. 
+For improved security, set the security group of the cloud instance to allow port 22 traffic (SSH) from a minimal set of IP addresses, not anywhere on the internet. Use password access with caution.
 
 ### SSH keys
 
@@ -119,7 +123,7 @@ If a new key pair is needed use the `ssh-keygen` command to generate a key pair:
 ```console
 ssh-keygen
 ```
-Answer the questions. Pressing enter to accept all defaults works fine. 
+Answer the questions. Pressing enter to accept all defaults works fine.
 
 By default, the keys are created in `~/.ssh/id_rsa.pub` (public key) and `~/.ssh/id_rsa` (private key)
 
@@ -131,13 +135,13 @@ Accessing an AWS EC2 instance running Ubuntu using:
 ```console
 ssh -i <private_key> ubuntu@<public_ip_address>
 ```
-To use SSH without specifying `-i <private_key>` every time create an SSH configuration for the remote machine. 
+To use SSH without specifying `-i <private_key>` every time create an SSH configuration for the remote machine.
 
-Edit the file `~/.ssh/config` on the local machine. 
+Edit the file `~/.ssh/config` on the local machine.
 
 Pick a name for the remote machine, such as `myserver`, add the public IP address or DNS name as the Hostname.
 
-User is the username on the remote machine and IdentityFile is the path to the private key on the local machine. 
+User is the username on the remote machine and IdentityFile is the path to the private key on the local machine.
 
 ```output
 Host myserver
@@ -154,13 +158,13 @@ ssh myserver
 
 ### Add a new key pair
 
-If you want to give access to somebody else without enabling password access or sharing your private key, you can add another key pair to the remote machine. You may also want to change the key pair used when the remote machine was created. 
+If you want to give access to somebody else without enabling password access or sharing your private key, you can add another key pair to the remote machine. You may also want to change the key pair used when the remote machine was created.
 
-To add or change the key pair edit the file `~/.ssh/authorized_keys` on the remote machine. 
+To add or change the key pair edit the file `~/.ssh/authorized_keys` on the remote machine.
 
-Add a new public key to `authorized_keys`. You can also delete the current public key and just use the new one. 
+Add a new public key to `authorized_keys`. You can also delete the current public key and just use the new one.
 
-If you ran `ssh-keygen` on your local machine, the public key is at `~/.ssh/id_rsa.pub` 
+If you ran `ssh-keygen` on your local machine, the public key is at `~/.ssh/id_rsa.pub`
 
 Use the new private key on the local machine to connect. If you have `~/.ssh/id_rsa` on your local machine it will be used automatically and you can SSH to the remote machine.
 
@@ -169,7 +173,7 @@ Use the new private key on the local machine to connect. If you have `~/.ssh/id_
 You can use port forwarding to access a port on a remote computer which is blocked by a firewall or security group. This is helpful when your application is running on a remote computer with SSH access, but no other ports are open. For example, if you are running a web application on a cloud instance and it uses port 3000 you can SSH to the cloud instance with port forwarding and access the application.
 
 ```console
-ssh -i <private_key> -L 3000:localhost:3000 ubuntu@<public_ip_address>  
+ssh -i <private_key> -L 3000:localhost:3000 ubuntu@<public_ip_address>
 ```
 
 Once you SSH, you can access `localhost:3000` and the traffic is forwarded to the remote computer.

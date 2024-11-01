@@ -13,8 +13,13 @@ minutes_to_complete: 30
 
 author_primary: Jason Andrews
 
+
 ### Link to official documentation
 official_docs: https://tigervnc.org/
+
+test_images:
+- ubuntu:latest
+test_maintenance: true
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -28,11 +33,11 @@ Virtual Network Computing (VNC) is one of the common tools used to connect to a 
 
 This section provides info about how to setup VNC on a remote Arm Linux machine.
 
-Feel free to seek out additional VNC tutorials or add more information to this page. 
+Feel free to seek out additional VNC tutorials or add more information to this page.
 
 This installation only works on newer versions of Ubuntu and Debian. It was successfully tested on **Ubuntu 22.04** and is known to fail on **Ubuntu 20.04**.
 
-## VNC 
+## VNC
 
 VNC is a client server application. A VNC server runs on a remote machine. A VNC client runs on the local machine and connects to the remote server.
 
@@ -40,7 +45,7 @@ VNC is a client server application. A VNC server runs on a remote machine. A VNC
 
 To use VNC, a VNC server needs to be installed. There are multiple VNC servers which can be used. This recipe uses [TigerVNC](https://tigervnc.org/).
 
-Desktop software is also needed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance. 
+Desktop software is also needed. There are many options for this, but using [xfce4](https://www.xfce.org/) makes for a minimal install with good performance.
 
 Install the desktop software.
 
@@ -62,7 +67,7 @@ Run the password command to set a password for VNC. This is not the password for
 vncpasswd
 ```
 
-Remember the password for later when the client is connected. 
+Remember the password for later when the client is connected.
 
 ### Configure the desktop startup
 
@@ -75,7 +80,7 @@ unset DBUS_SESSION_BUS_ADDRESS
 exec startxfce4
 ```
 Make sure the `xstartup` file has executable permission.
-```bash
+```console
 chmod +x $HOME/.vnc/xstartup
 ```
 
@@ -119,14 +124,14 @@ sudo systemctl stop vncserver@1.service
 To restart the VNC service:
 
 ```console
-sudo systemctl restart vncserver@1.service 
+sudo systemctl restart vncserver@1.service
 ```
 
 ### Use port forwarding via SSH to connect
 
-The default port for the first instance of VNC is `5901`. SSH port forwarding is the best solution for accessing the Linux desktop on a cloud machine. This way no additional ports need to be opened in the security group. 
+The default port for the first instance of VNC is `5901`. SSH port forwarding is the best solution for accessing the Linux desktop on a cloud machine. This way no additional ports need to be opened in the security group.
 
-SSH to your remote Linux machine. Refer to [SSH](/install-guides/ssh/) for additional details. 
+SSH to your remote Linux machine. Refer to [SSH](/install-guides/ssh/) for additional details.
 
 Substitute your private key file and public IP address of the remote machine.
 
@@ -142,6 +147,6 @@ localhost:5901
 ```
 You will be prompted for the password created earlier with `vncpasswd`.
 
-A remote Linux Desktop should appear on your local computer. Make sure to close the VNC client first and then exit the SSH connection. 
+A remote Linux Desktop should appear on your local computer. Make sure to close the VNC client first and then exit the SSH connection.
 
 ![Linux desktop #center](/install-guides/_images/xfce4.png)

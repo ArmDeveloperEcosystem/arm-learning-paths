@@ -19,6 +19,10 @@ author_primary: Jason Andrews
 ### Link to official documentation
 official_docs: https://gitlab.arm.com/telemetry-solution/telemetry-solution
 
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -41,7 +45,7 @@ Follow the instructions below to install the Telemetry Solution on an Arm Linux 
 
 1. Confirm you are using an Arm machine by running:
 
-```console
+```bash
 uname -m
 ```
 
@@ -89,7 +93,7 @@ sudo pip3 install -e .
 
 {{% notice Note %}}
 If you are getting errors on the environment being externally managed, try creating a virtual environment.
-```
+```bash
 sudo apt install python3-venv -y
 python3 -m venv topdown-venv
 source topdown-venv/bin/activate

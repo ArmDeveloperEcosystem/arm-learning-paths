@@ -19,6 +19,10 @@ author_primary: Julie Gaskin
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/109847/latest/
 
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -72,21 +76,18 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 1. Download and extract the Streamline CLI tools on your Arm server:
 
-    ```sh
-    wget https://artifacts.tools.arm.com/arm-performance-studio/2024.3/Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
-    tar -xzf Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
-    ```
+```bash
+wget https://artifacts.tools.arm.com/arm-performance-studio/2024.3/Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
+tar -xzf Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
+```
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
 
-    ```sh
-    # From Bash
-    python3 -m venv sl-venv
-    source ./sl-venv/bin/activate
-
-    # From inside the virtual environment
-    python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
-    ```
+```bash
+python3 -m venv sl-venv
+source ./sl-venv/bin/activate
+python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
+```
 
    {{% notice Note%}}
   The instructions in this guide assume you have added the `<install>/bin/` directory to your `PATH` environment variable, and that you run all Python commands from inside the virtual environment.
@@ -119,13 +120,13 @@ You might need to adapt them slightly to other Linux distributions.
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
-```sh
+```bash
 git apply v6.7-combined.patch
 ```
 
 or `patch`:
 
-```sh
+```bash
 patch -p 1 -i v6.7-combined.patch
 ```
 
@@ -135,10 +136,10 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
 
 1. Install the RPM build tools:
 
-    ```
+    ```sh
     sudo yum install rpm-build rpmdevtools
     ```
-    
+
 1. Remove any existing `rpmbuild` directory, renaming as appropriate:
 
     ```sh

@@ -7,6 +7,10 @@ additional_search_terms:
 - compiler
 - rust
 
+test_images:
+- ubuntu:latest
+test_maintenance: true
+
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
@@ -15,9 +19,9 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Rust](https://www.rust-lang.org/) is an open source programming language. 
+[Rust](https://www.rust-lang.org/) is an open source programming language.
 
-This install guide is for developers using Rust for their embedded applications. 
+This install guide is for developers using Rust for their embedded applications.
 
 If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](/install-guides/rust/) instead.
 
@@ -55,11 +59,11 @@ cargo 1.78.0 (54d8815d0 2024-03-26)
 ### Add Arm cross-compilation support
 
 Add cross compilation support for the required Arm Architectures. For example, to add support for Armv7-M architecture, you can use:
-```command
+```bash
 rustup target add thumbv7m-none-eabi
 ```
 For a full list of supported architectures, use:
-```command
+```bash
 rustup target list
 ```
 
@@ -67,7 +71,7 @@ rustup target list
 
 To generate a project from a template, you need `cargo-generate`. To install and rebuild use:
 
-```command
+```bash
 sudo apt install -y libssl-dev pkg-config
 sudo apt install -y build-essential
 cargo install cargo-generate
