@@ -77,8 +77,8 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 1. Download and extract the Streamline CLI tools on your Arm server:
 
 ```bash
-wget https://artifacts.tools.arm.com/arm-performance-studio/2024.3/Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
-tar -xzf Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
+wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
+tar -xzf Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz 
 ```
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
@@ -86,7 +86,8 @@ tar -xzf Arm_Streamline_CLI_Tools_9.2.2_linux_arm64.tgz 
 ```bash
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
-python3 -m pip install -r ./streamline_cli_tools/bin/requirements.txt
+cd streamline_cli_tools
+python3 -m pip install -r bin/requirements.txt
 ```
 
    {{% notice Note%}}
@@ -121,13 +122,13 @@ You might need to adapt them slightly to other Linux distributions.
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
 ```bash
-git apply v6.7-combined.patch
+git apply patch/v6.7-combined.patch
 ```
 
 or `patch`:
 
 ```bash
-patch -p 1 -i v6.7-combined.patch
+patch -p 1 -i patch/v6.7-combined.patch
 ```
 
 ### Manual application to an RPM-based distribution

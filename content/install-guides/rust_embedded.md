@@ -36,7 +36,7 @@ For a thorough review of all options, refer to the official documentation. See [
 Run the following command to download and install Rust:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
 ```
 
 Start a new shell or run the following command to continue:

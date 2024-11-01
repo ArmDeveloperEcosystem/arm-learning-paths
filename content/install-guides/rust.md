@@ -63,7 +63,7 @@ These Linux distributions use `yum` as the package manager.
 
 Use the `yum` command to install the required software packages. If the machine has `sudo` you can use it.
 
-```bash { target="fedora:latest" }
+```console
 sudo yum update -y
 sudo yum install -y curl gcc
 ```
