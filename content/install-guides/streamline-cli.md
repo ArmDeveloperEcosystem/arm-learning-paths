@@ -78,6 +78,7 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ```bash
 wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
+chmod +x Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
 sudo tar -xzf Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz 
 ```
 
