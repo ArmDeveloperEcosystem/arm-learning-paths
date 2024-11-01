@@ -39,7 +39,7 @@ AWS offers more than [150 instance types with Graviton processors](https://aws.a
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
-Google GCP offers a varity of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The latest generation of Arm-based VMs are based on Google Axion processor. The largest instance has 72 vCPUs and 576 Gb of RAM. It does not offer bare-metal instances. It offers `highcpu` and `highmem` VM instances for compute and memory intensive workloads respectively.
+Google GCP offers a variety of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The latest generation of Arm-based VMs are based on Google Axion processor. The largest instance has 72 vCPUs and 576 Gb of RAM. It does not offer bare-metal instances. It offers `highcpu` and `highmem` VM instances for compute and memory intensive workloads respectively.
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
