@@ -86,7 +86,7 @@ git clone https://git.gitlab.arm.com/telemetry-solution/telemetry-solution.git
 
 Install `topdown-tool` in `/usr/local/bin` using:
 
-```console
+```bash
 sudo pip3 install -e .
 ```
 
@@ -97,7 +97,6 @@ cd telemetry-solution/tools/topdown_tool
 sudo apt install python3-venv -y
 python3 -m venv topdown-venv
 source topdown-venv/bin/activate
-pip3 install -e .
 ```
 {{% /notice %}}
 
