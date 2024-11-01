@@ -33,11 +33,14 @@ cd Seeed_Grove_Vision_AI_Module_V2
 
 ### Step 3.2. Compile the firmware
 
+The make build tool is used to compile the source code. This should take up around 2-3 minutes depending on the number of CPU cores available.
+
 ```bash
 cd EPII_CM55M_APP_S
 make clean
 make
 ```
+
 
 ### Step 3.3. Generate firmware image file
 
@@ -45,4 +48,13 @@ make
 cd ../we2_image_gen_local/
 cp ../EPII_CM55M_APP_S/obj_epii_evb_icv30_bdv10/gnu_epii_evb_WLCSP65/EPII_CM55M_gnu_epii_evb_WLCSP65_s.elf input_case1_secboot/
 ./we2_local_image_gen project_case1_blp_wlcsp.json
+```
+
+Your terminal output should end with the following.
+
+```output
+Output image: output_case1_sec_wlcsp/output.img
+Output image: output_case1_sec_wlcsp/output.img
+
+IMAGE GEN DONE
 ```

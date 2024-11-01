@@ -13,7 +13,8 @@ learning_objectives:
 prerequisites:
     - Seeed Grove Vision AI V2 Module
     - OV5647-62 Camera module and included FPC cable
-    - An Windows based machine running an x86 archiecture. 
+    - A USB-C cable
+    - An Linux-based PC on an x86 archiecture. 
 
 author_primary: Chaodong Gong, Alex Su, Kieran Hejmadi
 

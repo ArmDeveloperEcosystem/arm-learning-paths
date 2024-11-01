@@ -11,7 +11,7 @@ layout: learningpathall
 
 ### Step 5.2. Connect module to PC with USB cable.
 
-You will need to insert the FPC cable cable into the Grove Vision AI V2 module. Lift the dark grey latch on the connector and slide the connector in with the metal pins facing down.
+
 
 ### Step 5.3. Download the Himax AI web toolkit.  
 
