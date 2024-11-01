@@ -10,13 +10,12 @@ learning_objectives:
     - Build Himax SDK and generate firmware image file
     - Update firmware on edge device (Himax WiseEye2)
     
-
 prerequisites:
-    - [Seeed Grove Vision AI V2 Module](https://www.seeedstudio.com/Grove-Vision-AI-Module-V2-p-5851.html)
-    - [OV5647-62 Camera module and included FPC cable](https://www.seeedstudio.com/OV5647-69-1-FOV-Camera-module-for-Raspberry-Pi-3B-4B-p-5484.html)
+    - Seeed Grove Vision AI V2 Module
+    - OV5647-62 Camera module and included FPC cable
     - An Windows based machine running an x86 archiecture. 
 
-author_primary: Chaodong Gong
+author_primary: Chaodong Gong, Alex Su, Kieran Hejmadi
 
 ### Tags
 skilllevels: Beginner
