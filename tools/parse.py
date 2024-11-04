@@ -170,6 +170,7 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
             continue
 
         cmd_lines_header = cmd_lines[0]
+        logging.debug(cmd_lines_header)
         # if fvp type, check for arguments
         if "fvp" in cmd_lines_header:
             content[cmd_idx] = {"type": "fvp"}
@@ -188,7 +189,7 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
             content[cmd_idx] = {"type": "bash"}
             for arg in arg_list:
                 if arg in cmd_str:
-                    arg_str = cmd_str.split(arg)[1].split("\"")[0]
+                    arg_str = cmd_str.split(arg)[1].split("\"")[1]
                     content[cmd_idx].update({arg:arg_str})
             if "|" in cmd_lines_header:
                 expected_result = cmd_str.split("| ")[1].split("}")[0].split("-")
