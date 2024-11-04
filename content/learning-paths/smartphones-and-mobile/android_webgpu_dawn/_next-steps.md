@@ -1,6 +1,8 @@
 ---
 next_step_guidance: Now that you are familiar with building graphical applications using WebGPU, you are ready to incorporate WebGPU into your Android applications.
 
+recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
+
 further_reading:
     - resource:
         title: WebGPU working draft
@@ -13,11 +15,17 @@ further_reading:
     - resource:
         title: WebGPU fundamentals
         link: https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API
+        type: website
+    - resource:
+        title: WebGPU fundamentals 2
         link: https://webgpufundamentals.org/
         type: website
     - resource:
         title: WebGPU examples
         link: https://eliemichel.github.io/LearnWebGPU/index.html
+        type: website
+    - resource:
+        title: WebGPU examples 2
         link: https://github.com/samdauwe/webgpu-native-examples
         type: website
 
