@@ -16,7 +16,7 @@ author_primary: Ben Clark
 
 ### Tags
 skilllevels: Introductory
-subjects: Machine Learning
+subjects: ML
 armips:
     - Cortex-X
     - Cortex-A
