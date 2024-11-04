@@ -184,7 +184,8 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
                 content[cmd_idx].update({"fvp_name": "FVP_Corstone_SSE-300_Ethos-U55" })
         # if bash type, check for arguments
         elif "bash" in cmd_lines_header:
-            arg_list = ["ret_code", "env_source", "env", "pre_cmd", "cwd", "target"]
+            # Equal sign on env so that it's not picked up by env_source
+            arg_list = ["ret_code", "env_source", "env=", "pre_cmd", "cwd", "target"]
             content[cmd_idx] = {"type": "bash"}
             for arg in arg_list:
                 if arg in cmd_lines_header:

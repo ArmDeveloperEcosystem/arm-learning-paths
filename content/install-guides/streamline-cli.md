@@ -120,13 +120,13 @@ You might need to adapt them slightly to other Linux distributions.
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
-```bash { cwd="$HOME/streamline_cli_tools" }
+```console
 git apply patch/v6.7-combined.patch
 ```
 
 or `patch`:
 
-```bash { cwd="$HOME/streamline_cli_tools" }
+```console
 patch -p 1 -i patch/v6.7-combined.patch
 ```
 
