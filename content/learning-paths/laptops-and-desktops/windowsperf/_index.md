@@ -19,7 +19,7 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
-    - neoverse
+    - Neoverse
 operatingsystems:
     - Windows
 tools_software_languages:
