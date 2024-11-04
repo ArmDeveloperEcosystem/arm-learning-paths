@@ -57,6 +57,7 @@ Clone the source repository for rtp-llm:
 
 ```bash
 git clone https://github.com/alibaba/rtp-llm
+cd rtp-llm
 git checkout 4656265
 ```
 
