@@ -84,10 +84,9 @@ sudo tar -xzf Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
 
-```bash
+```bash { cwd="$HOME/streamline_cli_tools" }
 python3 -m venv sl-venv
 source ./sl-venv/bin/activate
-cd streamline_cli_tools
 python3 -m pip install -r bin/requirements.txt
 ```
 
@@ -122,13 +121,13 @@ You might need to adapt them slightly to other Linux distributions.
 
 To apply the patch to the latest 6.7 kernel, you can use `git`:
 
-```bash
+```bash { cwd="$HOME/streamline_cli_tools" }
 git apply patch/v6.7-combined.patch
 ```
 
 or `patch`:
 
-```bash
+```bash { cwd="$HOME/streamline_cli_tools" }
 patch -p 1 -i patch/v6.7-combined.patch
 ```
 
