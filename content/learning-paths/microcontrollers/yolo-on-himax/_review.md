@@ -2,38 +2,13 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            The Grove Vision AI V2 Module can run Yolov8 model in real time?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
+            - True
+            - False
         correct_answer: 1                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
-
-    - questions:
-        question: >
-            PLACEHOLDER QUESTION 2?
-        answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
-        explanation: >
-            PLACEHOLDER EXPLANATION 2
-               
-    - questions:
-        question: >
-            PLACEHOLDER QUESTION 3?
-        answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
-        explanation: >
-            PLACEHOLDER EXPLANATION 3
-
+            The Grove Vision AI V2 Module can run object detection in real time using the Cortex-M55 and Ethos-U55. 
 
 
 # ================================================================================
