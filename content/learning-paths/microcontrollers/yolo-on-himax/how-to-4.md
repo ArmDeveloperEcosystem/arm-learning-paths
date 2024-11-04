@@ -21,6 +21,6 @@ Unzip the archived file and double click `index.html`. This will open the GUI wi
 
 ### Step 4.3. Connect to the Grove Vision AI
 
-Select 'Grove Vision AI(V2)` in the top-right hand corner and press connect button. 
+Select 'Grove Vision AI(V2)' in the top-right hand corner and press connect button. 
 
 ![Himax web UI](./himax_web_ui.jpg)

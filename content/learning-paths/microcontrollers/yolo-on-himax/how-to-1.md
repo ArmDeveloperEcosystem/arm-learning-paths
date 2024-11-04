@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Set up the development environment
+## Set up the Development Environment
 
 ### Step 1.1. Install Ubuntu
 
@@ -27,7 +27,7 @@ DISTRIB_DESCRIPTION="Ubuntu 22.04.5 LTS"
 ...
 ```
 
-### Step 1.2. (Optional) Install Microsoft VS Code
+### Step 1.2. (Optional) Install Microsoft Visual Studio Code
 
 This is only optional. You can use any text editor you are comfortable with to view or edit code. By typing “wsl” in VS Code terminal, you can switch to Linux environment.
 

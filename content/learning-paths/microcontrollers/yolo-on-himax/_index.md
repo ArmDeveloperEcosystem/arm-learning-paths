@@ -1,12 +1,12 @@
 ---
-title: Run Yolo computer vision model on a Himax microcontroller
+title: Run a Computer Vision Model on a Himax Microcontroller
 
 minutes_to_complete: 90
 
 who_is_this_for: This is an introduction topic for beginners on how to run a computervision application on an embedded device from Himax. This example uses an off-the-shelf Himax WiseEye2 module which is based on the Arm Cortex-M55 and Ethos-U55.
 
 learning_objectives: 
-    - Run a you-only-look-once (Yolo) model using off-the-shelf hardware based on the Arm Cortex-M55 and Ethos-U55.
+    - Run a you-only-look-once (YOLO) computer vision model using off-the-shelf hardware based on the Arm Cortex-M55 and Ethos-U55.
     - Learn how to build the Himax SDK and generate firmware image file.
     - Learn how to update firmware on edge device (Himax WiseEye2).
     

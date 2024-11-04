@@ -1,12 +1,12 @@
 ---
-title: Flash Firmware
+title: Flash Firmware onto the Microcontroller
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Flash The Firmware
+## Flash the Firmware
 
 Now that we have generated a firmware file on our local machine, we need to flash the microcontroller with this firmware. 
 

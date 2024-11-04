@@ -31,7 +31,7 @@ git clone --recursive https://github.com/HimaxWiseEyePlus/Seeed_Grove_Vision_AI_
 cd Seeed_Grove_Vision_AI_Module_V2
 ```
 
-### Step 2.2. Compile the firmware
+### Step 2.2. Compile the Firmware
 
 The make build tool is used to compile the source code. This should take up around 2-3 minutes depending on the number of CPU cores available.
 
@@ -42,7 +42,7 @@ make
 ```
 
 
-### Step 2.3. Generate firmware image file
+### Step 2.3. Generate a Firmware Image
 
 ```bash
 cd ../we2_image_gen_local/
