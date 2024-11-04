@@ -86,14 +86,15 @@ def write_commands_to_file(test_cmd_filename, test):
     # - An environment variable is specified
     cmd_args = {
                 "env_source":"source",
-                "cwd":"cwd",
+                "cwd":"cd",
                 "env":"export"
                 }
     for cmd_arg in cmd_args.keys():
         if cmd_arg in test:
             # Retrieve the command as string
             cmd_arg_test = test[cmd_arg] if isinstance(test[cmd_arg], str) else test[cmd_arg][0]
-            cmd = cmd_args[cmd_arg] + cmd_arg_test
+            cmd = cmd_args[cmd_arg] + " " + cmd_arg_test
+            logging.debug(f"FINAL COMMAND: {cmd}")
             write_cmd_to_file(f, test_cmd_filename, cmd)
 
     # Check if commands need to be run before the test
@@ -282,8 +283,9 @@ def check(json_file, start, stop, md_article):
     if paths_to_remove:
         logging.info(f"Removing files that was created during testing from repository")
         for path in paths_to_remove:
-            if os.path.isfile(path):
+            if os.path.isfile(path) or os.path.islink(path):
                 os.remove(path)
+
             elif os.path.isdir(path):
                 shutil.rmtree(path)
             logging.debug(f"Removed {path}")
