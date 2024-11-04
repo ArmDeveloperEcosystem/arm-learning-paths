@@ -8,8 +8,9 @@ layout: learningpathall
 
 ## Flash The Firmware
 
-### Step 3.1. Install xmodem.
+Now that we have generated a firmware file on our local machine, we need to flash the microcontroller with this firmware. 
 
+### Step 3.1. Install xmodem.
 
 `Xmodem` is a basic file transfer protocol. Run the following command to install the dependencies for xmodem. 
 
@@ -28,14 +29,18 @@ Then, slide the FPC connector in with the metal pins facing down and close the d
 
 ![latched](./latched.jpg)
 
-Then connect the Groove Vision AI V2 Module to your computer via USB-C.
+Then connect the Groove Vision AI V2 Module to your computer via the USB-C cable.
 
-### Step 3.4. Flash the firmware by the following commands:
+### Step 3.4. Flash the firmware onto the moule.
+
+Run the python script below to flash the firmware. 
 
 ```python
 python xmodem\xmodem_send.py --port=[your COM number] --baudrate=921600 --protocol=xmodem --file=we2_image_gen_local\output_case1_sec_wlcsp\output.img 
 ```
 
-    Note: For each project, the command might be slightly different. See the instructions on project pages for this command.
+    Note: If running one of the other example models demonstrated in '(Optional) Try Different Models', the command might be slightly different.
 
-After the firmware image burning is completed, the message "Do you want to end file transmission and reboot system? (y)" is displayed. Press the reset button on module to restart.
+After the firmware image burning is completed, the message "Do you want to end file transmission and reboot system? (y)" is displayed. Press the reset button on the module as per the image below.
+
+![reset button](./reset_button.jpg)

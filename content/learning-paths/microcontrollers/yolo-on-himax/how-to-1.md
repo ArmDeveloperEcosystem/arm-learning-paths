@@ -10,7 +10,9 @@ layout: learningpathall
 
 ### Step 1.1. Install Ubuntu
 
-This learning path has been tested on Ubuntu. If you use a Windows computer, it is recommended to install WSL, by searching Ubuntu 22.04.3 LTS in Microsoft store. This learning path has been validated on Ubuntu 22.04 LTS. However, we expect other linux distributions to work. To verify the Linux distribution you are using you can run the `cat /etc/*release*` command. 
+If you are running Windows on your host machine, we recommend using Ubuntu through Windows subsystem for Linux 2 (WSL2). Please see [this learning path](https://learn.arm.com/learning-paths/laptops-and-desktops/wsl2/setup/) for assistance  
+
+This learning path has been validated on Ubuntu 22.04 LTS. However, we expect other linux distributions to work. To verify the Linux distribution you are using you can run the `cat /etc/*release*` command. 
 
 ```bash
 cat /etc/*release*
@@ -27,7 +29,7 @@ DISTRIB_DESCRIPTION="Ubuntu 22.04.5 LTS"
 
 ### Step 1.2. (Optional) Install Microsoft VS Code
 
-This is only optional. You can use any text editor to view/change code. By typing “wsl” in VS Code terminal, you can switch to Linux environment.
+This is only optional. You can use any text editor you are comfortable with to view or edit code. By typing “wsl” in VS Code terminal, you can switch to Linux environment.
 
 ### Step 1.3. Install python 3
 

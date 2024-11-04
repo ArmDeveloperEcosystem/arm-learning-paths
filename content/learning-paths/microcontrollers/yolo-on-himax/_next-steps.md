@@ -1,22 +1,17 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Navigate Machine Learning Development with Ethos-U processors
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/microcontrollers/nav-mlek/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Grove Vision AI Module V2 User Documentation
+        link: https://wiki.seeedstudio.com/grove_vision_ai_v2/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: WiseEye2 HX6538 processor blog (SoC powering Grove Vision AI Module V2) 
+        link: https://www.himax.com.tw/products/wiseeye-ai-sensing/wiseeye2-ai-processor/
         type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
-
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
