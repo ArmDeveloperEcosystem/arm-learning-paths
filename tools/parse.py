@@ -170,6 +170,7 @@ def save_commands_to_json(md_article, cmds_list, learningpath=False, img=None):
             continue
 
         cmd_lines_header = cmd_lines[0]
+        logging.debug(cmd_lines_header)
         # if fvp type, check for arguments
         if "fvp" in cmd_lines_header:
             content[cmd_idx] = {"type": "fvp"}
