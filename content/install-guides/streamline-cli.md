@@ -77,7 +77,6 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 1. Download and extract the Streamline CLI tools on your Arm server:
 
 ```bash
-sudo apt-get install bzip2
 wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz -P .
 sudo tar -xzf Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
 ```
