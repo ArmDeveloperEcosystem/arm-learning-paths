@@ -1,22 +1,21 @@
 ---
-title: How to Profile ML on Arm
+title: Profile the performance of ML models on Arm
 
 minutes_to_complete: 30
 
-who_is_this_for: Machine Learning App developers who want to see the performance of their models on Arm devices.
+who_is_this_for: This is an introductory topic for software developers who want to learn how to profile the performance of their ML models running on Arm devices.
 
 learning_objectives: 
-    - Profile timings of ML models on Arm devices.
+    - Profile the execution times of ML models on Arm devices.
     - Profile ML application performance on Arm devices.
 
 prerequisites:
-    - Some application development.
-    - Arm device with Android OS.
+    - An Arm-powered Android smartphone.
 
 author_primary: Ben Clark
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Introductory
 subjects: Machine Learning
 armips:
     - Cortex-X
