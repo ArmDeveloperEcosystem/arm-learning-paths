@@ -78,8 +78,8 @@ If you are using the `workflow_topdown_basic option`, ensure that your applicati
 
 ```bash
 sudo apt-get install bzip2
-wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
-sudo tar -xzf Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz 
+wget https://artifacts.tools.arm.com/arm-performance-studio/2024.5/Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz -P .
+sudo tar -xzf Arm_Streamline_CLI_Tools_9.3.1_linux_arm64.tgz
 ```
 
 1. The `sl-format.py` Python script requires Python 3.8 or later, and depends on several third-party modules. We recommend creating a Python virtual environment containing these modules to run the tools. For example:
