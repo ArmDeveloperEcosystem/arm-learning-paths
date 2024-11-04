@@ -64,7 +64,6 @@ git checkout 4656265
 Comment out deps/requirements_lock_torch_arm.txt line 7-10, due to some host not accessible from the Internet.
 
 ```bash
-cd rtp-llm
 sed -i '7,10 s/^/#/' deps/requirements_lock_torch_arm.txt
 ```
 
