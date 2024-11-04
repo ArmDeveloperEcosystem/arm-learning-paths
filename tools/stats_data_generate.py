@@ -158,7 +158,7 @@ def authorAdd(author_name,tracking_dic):
     ### Update 'contributions' area, internal vs external contributions
     
     # open the contributors CSV file
-    with open('../contributors.csv', mode ='r')as file:
+    with open('../assets/contributors.csv', mode ='r')as file:
         csvFile = csv.reader(file)
         for line in csvFile:
             company = line[1]
