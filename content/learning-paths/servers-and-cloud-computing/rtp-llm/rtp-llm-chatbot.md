@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 16GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an Alibaba Cloud g8y.8xlarge instance.
+The instructions in this Learning Path are for any Arm Neoverse N2 or Neoverse V2 based server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 16GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an Alibaba Cloud g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance.
 
 ## Overview
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you learn how to run generative AI inference-based use cases like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Qwen2-0.5B-Instruct model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) on your Arm-based CPU using `rtp-llm`.
+Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you will learn how to run generative AI inference-based use case like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Qwen2-0.5B-Instruct model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) on your Arm-based CPU using `rtp-llm`.
 
 [rtp-llm](https://github.com/alibaba/rtp-llm) is an open source C/C++ project developed by Alibaba that enables efficient LLM inference on a variety of hardware. 
  
@@ -41,7 +41,7 @@ sudo apt install git -y
 sudo apt install build-essential -y
 ```
 
-Install `openblas` develop package and fix up header path in ubuntu system:
+Install `openblas` developmwnt package and fix the header paths:
 
 ```bash
 sudo apt install libopenblas-dev
@@ -61,13 +61,13 @@ cd rtp-llm
 git checkout 4656265
 ```
 
-Comment out deps/requirements_lock_torch_arm.txt line 7-10, due to some host not accessible from the Internet.
+Comment out the lines 7-10 in `deps/requirements_lock_torch_arm.txt` as some hosts are not accessible from the Internet.
 
 ```bash
 sed -i '7,10 s/^/#/' deps/requirements_lock_torch_arm.txt
 ```
 
-By default, `rtp-llm` builds for GPU only on Linux. You need to provide extra config `--config=arm` to build it for the Arm CPU that you run it on.
+By default, `rtp-llm` builds for GPU only on Linux. You need to provide extra config `--config=arm` to build it for the Arm CPU that you will run it on:
 
 Configure and build:
 
@@ -81,13 +81,13 @@ INFO: 10094 processes: 8717 internal, 1377 local.
 INFO: Build completed successfully, 10094 total actions
 ```
 
-Install built wheel package:
+Install the built wheel package:
 
 ```bash
 pip install bazel-bin/maga_transformer/maga_transformer-0.2.0-cp310-cp310-linux_aarch64.whl
 ```
 
-Create python-test.py that `rtp-llm` running the help command:
+Create a file named `python-test.py` in your `/tmp` directory with the contents below: 
 
 ```python
 from maga_transformer.pipeline import Pipeline
@@ -132,6 +132,9 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+```
+
+Now run this file:
 
 ```bash
 python /tmp/python-test.py
