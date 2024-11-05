@@ -52,8 +52,12 @@ huggingface-cli download Qwen/Qwen2-0.5B-Instruct
 ```
 
 ## Start rtp-llm server
-The server executable has already compiled during the stage detailed in the previous section, when you ran `bazelisk build`.
+The server executable has already compiled during the stage detailed in the previous section, when you ran `bazelisk build`. Install the pip wheel in your active virtual environment:
 
+```bash
+pip install bazel-bin/maga_transformer/maga_transformer-0.2.0-cp310-cp310-linux_aarch64.whl
+pip install grpcio-tools
+```
 Start the server from the command line, it listens on port 8088:
 
 ```bash
