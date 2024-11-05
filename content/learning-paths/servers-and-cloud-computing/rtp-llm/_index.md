@@ -11,7 +11,7 @@ learning_objectives:
     - Run a Large Language Model with rtp-llm.
 
 prerequisites:
-    - An AliCloud Yitian710 g8y.8xlarge instance to test Arm performance optimizations, or any Neoverse N2 [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
+    - An Arm Neoverse N2 or Neoverse V2 [based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server. This Learning Path was tested on an AliCloud Yitian710 g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance to test Arm performance optimizations.
 
 author_primary: Tianyu Li
 
