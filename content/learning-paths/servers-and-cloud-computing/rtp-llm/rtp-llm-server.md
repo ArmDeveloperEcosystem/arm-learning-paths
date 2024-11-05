@@ -15,7 +15,7 @@ One additional software package is required for this section. Install `jq` on yo
 sudo apt install jq -y
 ```
 
-# Server
+# Running the Server
 ## Install Hugging Face Hub
 
 There are a few different ways you can download the Qwen2 0.5B model. In this Learning Path, you download the model from Hugging Face.
@@ -72,7 +72,7 @@ MODEL_TYPE=qwen_2 FT_SERVER_TEST=1 python3 -m maga_transformer.start_server
 
 You can access the API using the `curl` command. 
 
-In another terminal, use a text editor to create a file named `curl-test.sh` with the commands below: 
+In another terminal, use a text editor to create a file named `curl-test.sh` with the content below: 
 
 ```bash
 curl http://localhost:8088/v1/chat/completions -H "Content-Type: application/json"   -d '{
@@ -183,8 +183,8 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
-
+```
 This program includes the `iostream` library, which is used for input/output operations. The `main` function is the entry point of the program, and it calls the `cout` object to print the message "Hello, World!" to the console.
 ```
 
-You can continue to experiment with different large language models and write scripts to try them.
+You can continue to experiment with different large language models and write scripts to access them.
