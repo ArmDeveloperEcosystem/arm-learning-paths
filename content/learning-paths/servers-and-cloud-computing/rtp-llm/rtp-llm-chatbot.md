@@ -69,10 +69,16 @@ sed -i '7,10 s/^/#/' deps/requirements_lock_torch_arm.txt
 
 By default, `rtp-llm` builds for GPU only on Linux. You need to provide extra config `--config=arm` to build it for the Arm CPU that you run it on.
 
-Run `make` to build it:
+Configure and build:
 
 ```bash
 bazelisk build --config=arm //maga_transformer:maga_transformer_aarch64
+```
+The output from your build should look like:
+
+```output
+INFO: 10094 processes: 8717 internal, 1377 local.
+INFO: Build completed successfully, 10094 total actions
 ```
 
 Install built wheel package:
