@@ -13,10 +13,10 @@ review:
                
     - questions:
         question: >
-            True or False: KubeArchInspect automatically upgrades images to the latest version.
+            Does KubeArchInspect automatically upgrade images to the latest version?
         answers:
-            - "True"
-            - "False"
+            - Yes.
+            - No.
         correct_answer: 2
         explanation: >
             KubeArchInspect does not automatically upgrade images to the latest version. It only identifies the images that are available.
