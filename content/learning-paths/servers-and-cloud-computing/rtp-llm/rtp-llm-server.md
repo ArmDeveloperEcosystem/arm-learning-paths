@@ -63,7 +63,7 @@ Start the server from the command line, it listens on port 8088:
 ```bash
 export CHECKPOINT_PATH=${HOME}/.cache/huggingface/hub/models--Qwen--Qwen2-0.5B-Instruct/snapshots/c540970f9e29518b1d8f06ab8b24cba66ad77b6d/
 export TOKENIZER_PATH=$CHECKPOINT_PATH 
-
+export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
 MODEL_TYPE=qwen_2 FT_SERVER_TEST=1 python3 -m maga_transformer.start_server
 ```
 
