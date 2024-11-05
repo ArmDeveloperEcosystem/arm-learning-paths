@@ -183,7 +183,7 @@ int main() {
     std::cout << "Hello, World!" << std::endl;
     return 0;
 }
-```
+
 This program includes the `iostream` library, which is used for input/output operations. The `main` function is the entry point of the program, and it calls the `cout` object to print the message "Hello, World!" to the console.
 ```
 
