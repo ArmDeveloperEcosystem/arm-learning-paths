@@ -44,16 +44,13 @@ Arm Compiler for Embedded FuSa must also be [downloaded separately](#download).
 
 Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](#pdh) or the [Arm Tools Artifactory](#artifactory).
 
-Individual compiler packages for all supported host platforms can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) or the [Arm Tools Artifactory](https://www.keil.arm.com/artifacts/).
-
 ### Product Download Hub {#pdh}
 
-All compiler packages can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) (requires login):
+All compiler packages can be downloaded from the [Arm Product Download Hub](https://developer.arm.com/downloads) (requires login).
 
-- [Arm Compiler for Embedded](https://developer.arm.com/downloads/view/ACOMPE)
-- [Arm Compiler for Embedded FuSa](https://developer.arm.com/downloads/view/ACOMP616)
+Download links to all available versions are given in the [Arm Compiler downloads index](https://developer.arm.com/documentation/ka005198).
 
-These can either be used standalone or [integrated](#armds) into your Arm Development Studio installation.
+All compiler versions can be used standalone or [integrated](#armds) into your Arm Development Studio installation.
 
 See also: [What should I do if I want to download a legacy release of Arm Compiler?](https://developer.arm.com/documentation/ka005184)
 
@@ -121,7 +118,9 @@ export AC6_TOOLCHAIN_6_22_0=/home/$USER/ArmCompilerforEmbedded6.22/bin
 
 ## Set up the product license
 
-Arm Compiler for Embedded and Arm Compiler for Embedded FuSa are license managed. License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
+`Arm Compiler for Embedded` and `Arm Compiler for Embedded FuSa` are license managed.
+
+License setup instructions are available in the [Arm Licensing install guide](/install-guides/license/).
 
 ## Verify installation
 

@@ -16,11 +16,9 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-Most Arm commercial tools are license managed. Arm is migrating to user-based licensing (UBL) which greatly simplifies license configuration. It is available for [Arm Success Kits](/install-guides/successkits/) as well as [Arm Development Studio](/install-guides/armds).
+Most Arm commercial tools are license managed. Arm is migrating to user-based licensing (UBL) which greatly simplifies license configuration.
 
-Success kits are available as `Hardware Success Kits` (`HSK`) or `Software Success Kits` (`SSK`). See the table below for tooling provided. SSK is a subset of HSK.
-
-With UBL, you have unlimited access to all components in the success kit you have enabled. The license is cached locally for up to 7 days, enabling remote or traveling users to access tools without connecting to their license server.
+A user-based license is cached locally for up to 7 days, enabling remote or traveling users to access tools without connecting to their license server.
 
 Starting any UBL enabled tool when the server is available will renew the license for 7 more days. This renewal attempt is performed once per 24 hours.
 
@@ -52,10 +50,4 @@ Legacy product versions do not support UBL licensing and use FlexLM [floating li
 
 ## User-based Licensing Video Tutorials
 
-In addition to the set up and install instructions below, a collection of video tutorials are available on the Arm Developer website:
-
-* [Accessing the Arm License Portal](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20Accessing%20the%20Arm%20License%20Portal)
-* [Cloud-based Licenses and Activation Codes](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20Cloud-based%20Licenses%20and%20Activation%20Codes)
-* [Local License Server Setup](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20Local%20License%20Server%20Setup)
-* [End-user Setup](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20End%20User%20Setup)
-* [Removal of Licenses and Decommissioning Server](https://developer.arm.com/Additional%20Resources/Video%20Tutorials/User-based%20Licensing%20-%20License%20Removal%20and%20Decommissioning%20Server)
+In addition to the set up and install instructions below, a collection of video tutorials are available on [Arm Developer](https://developer.arm.com//Tools%20and%20Software/User-based%20Licensing).
