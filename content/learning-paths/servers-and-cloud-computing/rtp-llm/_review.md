@@ -18,7 +18,17 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. rtp-llm not only support built and run on GPU, but also it can be run on Arm CPU.
+            Yes. rtp-llm not only supports build-and-run on GPUs, but also it can be run on an Arm CPU.
+
+    - questions:
+        question: >
+            Is there only one way to download the Qwen2 0.5B model?
+        answers:
+            - "Yes"
+            - "No"
+        correct_answer: 2
+        explanation: >
+            No. There are a few different ways you can download the Qwen2 0.5B model. In this Learning Path, you downloaded the model from Hugging Face.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

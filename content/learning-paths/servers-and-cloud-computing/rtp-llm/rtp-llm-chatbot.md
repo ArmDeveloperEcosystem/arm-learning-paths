@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Before you begin
-The instructions in this Learning Path are for any Arm Neoverse N2 or Neoverse V2 based server running Ubuntu 22.04 LTS. You need an Arm server instance with at least four cores and 16GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an Alibaba Cloud g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance.
+You can use the instructions in this Learning Path for any Arm Neoverse N2 or Neoverse V2 based-server running Ubuntu 22.04 LTS. You require an Arm server instance with at least four cores and 16GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an Alibaba Cloud g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance.
 
 ## Overview
 
@@ -17,7 +17,7 @@ Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Pa
  
 ## Install dependencies 
 
-Install `micromamba` to setup python 3.10 at path `/opt/conda310`, required by `rtp-llm` build system:
+Install `micromamba` to set up python 3.10 at path `/opt/conda310`, required by `rtp-llm` build system:
 
 ```bash
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
@@ -41,7 +41,7 @@ sudo apt install git -y
 sudo apt install build-essential -y
 ```
 
-Install `openblas` developmwnt package and fix the header paths:
+Install `openblas` development package and fix the header paths:
 
 ```bash
 sudo apt install libopenblas-dev
