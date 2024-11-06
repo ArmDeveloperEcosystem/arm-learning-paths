@@ -123,5 +123,18 @@ desc.nextInChain = &toggles.chain;
 Toggles are Dawn’s special way of enabling/disabling features at the scale of the whole WebGPU instance. See the whole list in [Toggle.cpp](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn/native/Toggles.cpp#33).
 {{% /notice %}}
 
-Hit the **Run** icon in Android Studio, which build the application and launch it on the connected device, producing the following output
+## Building and Running the application
+
+Now we can build and run the application, but first copy the file with shader code and 3D object files to connected phone
+
+``` bash
+cd app/src/main/cpp
+adb shell "mkdir /data/local/tmp/webgpu/"
+adb push resources/shader_texture_file.wgsl /data/local/tmp/webgpu/
+adb push resources/cone_in_turdis.obj /data/local/tmp/webgpu/
+adb push resources/cone_in_turdis.mtl /data/local/tmp/webgpu/
+```
+
+Now click the **Run** icon in Android Studio, which builds the application and launches it on the connected device, producing the following output
+
 !["Output"](./images/output.gif, "Output")
