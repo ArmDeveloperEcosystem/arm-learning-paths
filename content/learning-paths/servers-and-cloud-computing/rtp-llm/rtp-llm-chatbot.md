@@ -7,17 +7,21 @@ layout: learningpathall
 ---
 
 ## Before you begin
-You can use the instructions in this Learning Path for any Arm Neoverse N2 or Neoverse V2 based-server running Ubuntu 22.04 LTS. You require an Arm server instance with at least four cores and 16GB of RAM to run this example. Configure disk storage up to at least 32 GB. The instructions have been tested on an Alibaba Cloud g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance.
+You can use the instructions in this Learning Path for any Arm Neoverse N2-based or Arm Neoverse V2-based server running Ubuntu 22.04 LTS. To run this example, you require an Arm server instance with at least four cores and 16GB of RAM. Configure disk storage up to at least 32 GB. 
+
+{{% notice Note %}}
+This Learning Path has been tested on an Alibaba Cloud g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance.
+{{% /notice %}}
 
 ## Overview
 
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you will learn how to run generative AI inference-based use case like a LLM chatbot on Arm-based CPUs. You do this by deploying the [Qwen2-0.5B-Instruct model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) on your Arm-based CPU using `rtp-llm`.
+Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you will learn how to run the generative AI inference-based use case of an LLM chatbot on an Arm-based CPU. You will do this by deploying the [Qwen2-0.5B-Instruct model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) on your Arm-based CPU using `rtp-llm`.
 
 [rtp-llm](https://github.com/alibaba/rtp-llm) is an open source C/C++ project developed by Alibaba that enables efficient LLM inference on a variety of hardware. 
  
 ## Install dependencies 
 
-Install `micromamba` to set up python 3.10 at path `/opt/conda310`, required by `rtp-llm` build system:
+Install `micromamba` to set up python 3.10 at path `/opt/conda310`, as required by `rtp-llm` build system:
 
 ```bash
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
@@ -34,14 +38,14 @@ chmod +x bazelisk-linux-arm64
 sudo mv bazelisk-linux-arm64 /usr/bin/bazelisk
 ```
 
-Install `git/gcc/g++` on your machine:
+Install `git/gcc/g++`:
 
 ```bash
 sudo apt install git -y
 sudo apt install build-essential -y
 ```
 
-Install `openblas` development package and fix the header paths:
+Install the `openblas` development package and fix the header paths:
 
 ```bash
 sudo apt install libopenblas-dev
@@ -53,7 +57,7 @@ sudo ln -sf /usr/include/aarch64-linux-gnu/cblas.h /usr/include/openblas/cblas.h
 
 You are now ready to start building `rtp-llm`. 
 
-Clone the source repository for rtp-llm:
+Start by cloning the source repository for rtp-llm:
 
 ```bash
 git clone https://github.com/alibaba/rtp-llm
@@ -61,13 +65,13 @@ cd rtp-llm
 git checkout 4656265
 ```
 
-Comment out the lines 7-10 in `deps/requirements_lock_torch_arm.txt` as some hosts are not accessible from the Internet.
+Next, comment out the lines 7-10 in `deps/requirements_lock_torch_arm.txt` as some hosts are not accessible from the Internet:
 
 ```bash
 sed -i '7,10 s/^/#/' deps/requirements_lock_torch_arm.txt
 ```
 
-By default, `rtp-llm` builds for GPU only on Linux. You need to provide extra config `--config=arm` to build it for the Arm CPU that you will run it on:
+By default, `rtp-llm` builds for GPU only on Linux. You need to provide the additional flag `--config=arm` to build it for the Arm CPU that you will run it on:
 
 Configure and build:
 

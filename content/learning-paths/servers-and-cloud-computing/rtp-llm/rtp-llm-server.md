@@ -9,7 +9,7 @@ layout: learningpathall
 You can use the `rtp-llm` server program and submit requests using an OpenAI-compatible API.
 This enables applications to be created which access the LLM multiple times without starting and stopping it. You can also access the server over the network to another machine hosting the LLM.
 
-One additional software package is required for this section. Install `jq` on your computer using:
+One additional software package is required for this section. Install `jq` on your computer using the following commands:
 
 ```bash
 sudo apt install jq -y
@@ -18,9 +18,9 @@ sudo apt install jq -y
 # Running the Server
 ## Install Hugging Face Hub
 
-There are a few different ways you can download the Qwen2 0.5B model. In this Learning Path, you download the model from Hugging Face.
+There are a few different ways you can download the Qwen2 0.5B model. In this Learning Path, you will download the model from Hugging Face.
 
-[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases like NLP, audio, and computer vision.
+[Hugging Face](https://huggingface.co/) is an open source AI community where you can host your own AI models, train them, and collaborate with others in the community. You can browse through the thousands of models that are available for a variety of use cases such as Natural Language Processing (NLP), audio, and computer vision.
 
 The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Qwen2 0.5B model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct).
 
