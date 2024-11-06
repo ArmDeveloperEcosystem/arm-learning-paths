@@ -1,42 +1,62 @@
-# This is a basic workflow to help you get started with Actions
+name: Deploy Hugo to S3
 
-name: content-deploy
-
-# Controls when the workflow will run
 on:
- # Triggers the workflow on push to production branch
-  push:
-    branches: [ production ]
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  workflow_call:
+    inputs:
+      environment:
+        description: "Choose the environment"
+        required: true
+        type: string
+      target:
+        description: "Hugo target to deploy to"
+        required: true
+        type: string
+      aws-region:
+        description: "AWS Region to use for fetching credentials"
+        required: false
+        type: string
+        default: "us-west-2"
+    secrets:
+      AWS_OIDC_ROLE:
+        required: true
+      HUGO_LLM_API:
+        required: true
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+env:
+  HUGO_VERSION: 0.130.0
+
 jobs:
-  # This workflow contains a single job called "build"
   build_and_deploy:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      # Checks-out the repository under $GITHUB_WORKSPACE, so the job can access it
       - uses: actions/checkout@v4
         with:
-          submodules: true  # Fetch Hugo Themes
-          fetch-depth: 0 
+          submodules: true # Fetch Hugo Themes
+          fetch-depth: 0
 
       # Sets Up Hugo
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
-            hugo-version: '0.130.0'
-            extended: true
-            
-      # Post-CSS install
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      # Installs Post-CSS
       - name: Install Post-CSS
         run: npm install postcss-cli
 
-      # Builds arm-learning-paths repo
+      - name: AWS Github OIDC Login
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
+          aws-region: ${{ inputs.aws-region }}
+
+      # Builds arm-software-developer repo
       - name: Build
         run: |
           hugo --minify
@@ -44,26 +64,7 @@ jobs:
           bin/pagefind --site "public"
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
-        
-      #  Copy SSH Key
-      - name: copy key
-        run: |
-            echo $SSH_KEY | xargs -n 1 > tmpkey
-            base64 -d < tmpkey > key
-            chmod 400 key
-        shell: bash
-        env:
-          SSH_KEY: ${{secrets.SSH_KEY}}
-          
-      # SCP Site contents to netstorage
-      - name: copy site content
-        run: |
-          cd public
-          zip -r public.zip .
-          cd ..
-          scp -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
-        shell: bash
-        env:
-          USR: ${{secrets.SSH_USERNAME}}
-          HOST: ${{secrets.SSH_HOST}}
-          ID: ${{secrets.ID}}
+
+      # Deploys website to AWS S3 and invalidate CloudFront Cache
+      - name: Deploy to S3
+        run: hugo deploy --force --maxDeletes -1 --invalidateCDN --target ${{ inputs.target }}
