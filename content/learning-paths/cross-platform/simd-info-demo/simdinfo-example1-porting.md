@@ -93,3 +93,7 @@ Square Root Result: 1.41 3.46 6.00 8.94
 ```
 
 You can see that the results are the same as in the **SSE4.2** example.
+
+{{% notice Note %}} 
+We initialized the vectors in reverse order compared to the SSE4.2 version because the array initialization and vld1q_f32 function load vectors from LSB to MSB, whereas _mm_set_ps loads elements MSB to LSB.
+{{% /notice %}}
