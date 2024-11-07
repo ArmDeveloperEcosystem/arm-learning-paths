@@ -12,7 +12,7 @@ review:
 
     - questions:
         question: >
-            Can rtp-llm be built and run on CPU?
+            Can rtp-llm be built and run on a CPU?
         answers:
             - "Yes"
             - "No"

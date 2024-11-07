@@ -1,27 +1,13 @@
 ---
-title: Run a Large Language model (LLM) chatbot with rtp-llm on Arm servers
+title: Run an LLM chatbot with rtp-llm on an Arm server
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-## Before you begin
-You can use the instructions in this Learning Path for any Arm Neoverse N2-based or Arm Neoverse V2-based server running Ubuntu 22.04 LTS. To run this example, you require an Arm server instance with at least four cores and 16GB of RAM. Configure disk storage up to at least 32 GB. 
-
-{{% notice Note %}}
-This Learning Path has been tested on an Alibaba Cloud g8y.8xlarge instance and an AWS Graviton4 r8g.8xlarge instance.
-{{% /notice %}}
-
-## Overview
-
-Arm CPUs are widely used in traditional ML and AI use cases. In this Learning Path, you will learn how to run the generative AI inference-based use case of an LLM chatbot on an Arm-based CPU. You will do this by deploying the [Qwen2-0.5B-Instruct model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) on your Arm-based CPU using `rtp-llm`.
-
-[rtp-llm](https://github.com/alibaba/rtp-llm) is an open source C/C++ project developed by Alibaba that enables efficient LLM inference on a variety of hardware. 
- 
 ## Install dependencies 
 
-Install `micromamba` to set up python 3.10 at path `/opt/conda310`, as required by `rtp-llm` build system:
+Install `micromamba` to set up python 3.10 at path `/opt/conda310`, as required by the `rtp-llm` build system:
 
 ```bash
 "${SHELL}" <(curl -L micro.mamba.pm/install.sh)
@@ -65,20 +51,20 @@ cd rtp-llm
 git checkout 4656265
 ```
 
-Next, comment out the lines 7-10 in `deps/requirements_lock_torch_arm.txt` as some hosts are not accessible from the Internet:
+Next, comment out lines 7-10 in `deps/requirements_lock_torch_arm.txt` as some hosts are not accessible from the web:
 
 ```bash
 sed -i '7,10 s/^/#/' deps/requirements_lock_torch_arm.txt
 ```
 
-By default, `rtp-llm` builds for GPU only on Linux. You need to provide the additional flag `--config=arm` to build it for the Arm CPU that you will run it on:
+By default, `rtp-llm` builds for GPU only on Linux. You need to provide the additional flag `--config=arm` to build it for the Arm CPU that you will run it on.
 
 Configure and build:
 
 ```bash
 bazelisk build --config=arm //maga_transformer:maga_transformer_aarch64
 ```
-The output from your build should look like:
+The output from your build should look like this:
 
 ```output
 INFO: 10094 processes: 8717 internal, 1377 local.
@@ -91,7 +77,7 @@ Install the built wheel package:
 pip install bazel-bin/maga_transformer/maga_transformer-0.2.0-cp310-cp310-linux_aarch64.whl
 ```
 
-Create a file named `python-test.py` in your `/tmp` directory with the contents below: 
+Create a file named `python-test.py` in your `/tmp` directory with the contents shown below: 
 
 ```python
 from maga_transformer.pipeline import Pipeline
@@ -144,7 +130,9 @@ Now run this file:
 python /tmp/python-test.py
 ```
 
-If `rtp-llm` has built correctly on your machine, you will see the LLM model response for the prompt input. A snippet of the output is shown below:
+If `rtp-llm` has built correctly on your machine, you will see the LLM model response for the prompt input. 
+
+A snippet of the output is shown below:
 
 ```output
 ['I am a large language model created by Alibaba Cloud. My name is Qwen.']
@@ -178,5 +166,7 @@ If `rtp-llm` has built correctly on your machine, you will see the LLM model res
 ```
 
 
-You have successfully run a LLM chatbot with Arm optimizations, all running on your Arm AArch64 CPU on your server. You can continue experimenting and trying out the model with different prompts.
+You have successfully run a LLM chatbot with Arm optimizations, running on your an Arm AArch64 CPU on your server. 
+
+You can continue to experiment with the chatbot by trying out different prompts on the model.
 

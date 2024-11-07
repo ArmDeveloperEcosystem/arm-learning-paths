@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Background
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -26,7 +26,7 @@ Besides generating text, they are also able to perform actions such as:
 * Processing audio content.
 * Provide multilingual support, with over 27 additional languages, on top of the core languages of English and Chinese.
 
-Qwen is open source, flexible, and encourages development from the software development community. 
+Qwen is open source, flexible, and encourages contribution from the software development community. 
 
 
 
