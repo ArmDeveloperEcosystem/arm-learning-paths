@@ -65,11 +65,3 @@ When you need to port code from one architecture to another, the advanced search
 Furthermore, **SIMD.info**’s comparison tools enhance this process by enabling side-by-side comparisons of instructions from various platforms. This feature highlights the similarities and differences between instructions, which is crucial for accurately adapting your code. By understanding how similar operations are implemented across architectures, you can ensure that your ported code performs optimally.
 
 Let's look at an actual example.
-
-
-
-
-
-
-<!-- IMAGE HERE:
-![example image alt-text#center](example-picture.png "Figure 1. Example image caption") -->

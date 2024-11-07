@@ -14,9 +14,12 @@ Create a file named `calculation_sse.c` with the contents shown below.
 #include <xmmintrin.h>
 #include <stdio.h>
 
+float a_array[4] = {1.0f, 4.0f, 9.0f, 16.0f};
+float b_array[4] = {1.0f, 2.0f, 3.0f, 4.0f};
+
 int main() {
-    __m128 a = _mm_set_ps(16.0f, 9.0f, 4.0f, 1.0f);
-    __m128 b = _mm_set_ps(4.0f, 3.0f, 2.0f, 1.0f);
+    __m128 a = _mm_loadu_ps(a_array);
+    __m128 b = _mm_loadu_ps(b_array);
 
     __m128 cmp_result = _mm_cmpgt_ps(a, b);
 
