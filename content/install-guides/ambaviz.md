@@ -37,9 +37,9 @@ A detailed overview of functionality is described in [Introduction to AMBA Viz](
 
 AMBA Viz is a component of [Arm Hardware Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-It is available to download at the [Arm Product Download Hub](https://developer.arm.com/downloads/view/HWSKT-KS-0002).
+It is available to download at the [Arm Product Download Hub](https://developer.arm.com/downloads/).
 
-You can download AMBA Viz as an individual standalone component, or you can download the complete Success Kits.
+You can download AMBA Viz as an individual component, or you can download complete Success Kits.
 
 For more information on the Download Hub, refer to the [Arm Product Download Hub install guide](/install-guides/pdh/).
 
