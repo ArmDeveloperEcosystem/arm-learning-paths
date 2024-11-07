@@ -139,6 +139,7 @@ arm_spe_0//        [Kernel PMU event]
 ```
 
 If `arm_spe` isn't found you will need to update the Linux Kernel and perf to 5.15 or later.
+To enable it see [Enable the SPE feature in Linux guide](https://developer.arm.com/documentation/ka005362/1-0).
 
 To confirm SPE is working run:
 
