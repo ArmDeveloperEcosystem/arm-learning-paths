@@ -8,7 +8,7 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. The advancements made in the Generative AI space with smaller parameter models make LLM inference on CPUs very efficient.
+            Yes. The advancements made in the Generative AI space with smaller parameter models make LLM inference on CPUs efficient.
 
     - questions:
         question: >
@@ -18,7 +18,7 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. rtp-llm not only supports build-and-run on GPUs, but also it can be run on an Arm CPU.
+            Yes. rtp-llm not only supports build-and-run on GPUs, but it can also be run on an Arm CPU.
 
     - questions:
         question: >

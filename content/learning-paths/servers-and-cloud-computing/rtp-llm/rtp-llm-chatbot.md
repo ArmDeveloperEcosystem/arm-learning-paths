@@ -166,7 +166,7 @@ A snippet of the output is shown below:
 ```
 
 
-You have successfully run a LLM chatbot with Arm optimizations, running on your an Arm AArch64 CPU on your server. 
+You have successfully run a LLM chatbot with Arm optimizations, running on an Arm AArch64 CPU on your server. 
 
 You can continue to experiment with the chatbot by trying out different prompts on the model.
 

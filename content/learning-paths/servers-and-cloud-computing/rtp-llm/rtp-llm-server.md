@@ -5,7 +5,6 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
 ## Setup
 
 You can now move on to using the `rtp-llm` server program and submitting requests using an OpenAI-compatible API.
@@ -14,7 +13,9 @@ This enables applications to be created which access the LLM multiple times with
 
 You can also access the server over the network to another machine hosting the LLM.
 
-One additional software package is required for this section. Install `jq` on your computer using the following commands:
+One additional software package is required for this section. 
+
+Install `jq` on your computer using the following commands:
 
 ```bash
 sudo apt install jq -y
@@ -28,7 +29,7 @@ There are a few different ways you can download the Qwen2 0.5B model. In this Le
 
 The `huggingface_hub` library provides APIs and tools that let you easily download and fine-tune pre-trained models. You will use `huggingface-cli` to download the [Qwen2 0.5B model](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct).
 
-### Install Hugging Face Hub
+## Install Hugging Face Hub
 
 Install the required Python packages:
 
@@ -57,7 +58,7 @@ You can now download the model using the huggingface cli:
 huggingface-cli download Qwen/Qwen2-0.5B-Instruct
 ```
 
-## Start rtp-llm server
+## Start the rtp-llm server
 
 {{% notice Note %}}
 The server executable compiled during the previous stage, when you ran `bazelisk build`. {{% /notice %}}
