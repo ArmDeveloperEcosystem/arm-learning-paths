@@ -1,8 +1,5 @@
 ---
 title: Optimize MLOps with Arm-hosted GitHub Runners
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 60
 

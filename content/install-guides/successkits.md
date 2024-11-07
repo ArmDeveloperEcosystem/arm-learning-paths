@@ -28,16 +28,12 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-Arm Development tools are packaged as [Arm Success Kits](https://www.arm.com/products/development-tools/success-kits). These come in two forms:
+Arm Development tools are packaged as [Arm Success Kits](https://www.arm.com/products/development-tools/success-kits).
 
-- Software Success Kits (SSK)
-- Hardware Success Kits (HSK)
-
-SSKs contain all of the software development tools provided by Arm.
-
-HSKs include SSK as well as additional tools for IP configuration and evaluation.
-
-Arm Success Kits are a component of [Arm Flexible Access](https://www.arm.com/en/products/flexible-access).
+Arm Success Kits are a component of:
+* [Arm Total Access](https://www.arm.com/products/licensing/arm-total-access)
+* [Arm Flexible Access](https://www.arm.com/en/products/flexible-access)
+* [Arm Academic Access](https://www.arm.com/resources/research/enablement/academic-access)
 
 ## Downloading Success Kit components
 
