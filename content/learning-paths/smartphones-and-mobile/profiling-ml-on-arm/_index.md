@@ -1,7 +1,7 @@
 ---
 title: Profile the performance of ML models on Arm
 
-minutes_to_complete: 30
+minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to learn how to profile the performance of their ML models running on Arm devices.
 
@@ -10,7 +10,7 @@ learning_objectives:
     - Profile ML application performance on Arm devices.
 
 prerequisites:
-    - An Arm-powered Android smartphone.
+    - An Arm-powered Android smartphone, and USB cable to connect with it.
 
 author_primary: Ben Clark
 

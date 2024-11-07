@@ -11,6 +11,8 @@ One way of running tflite models is with ArmNN. This is available as a delegate 
 
 If you are not using tflite, you'll need to look at other tools from your framework to profile your model. If you are using tflite without ArmNN, then the output from `ExecuteNetwork` will be more of an indication than a definitive answer. But it can still be useful to see if there are any obvious problems.
 
+If you want to have a tflite to practice this Learning Path with, you can download one from the [Arm Model Zoo](https://github.com/ARM-software/ML-zoo). As an example we'll use a [mobilenet tflite](https://github.com/ARM-software/ML-zoo/blob/master/models/image_classification/mobilenet_v2_1.0_224/tflite_int8/mobilenet_v2_1.0_224_INT8.tflite).
+
 To get `ExecuteNetwork` you can download it from the [ArmNN GitHub](https://github.com/ARM-software/armnn/releases). Download the version appropriate for the Android phone you wish to test on - the Android version and the architecture of the phone. If you are unsure of the architecture, you can use a lower one, but you may miss out on some optimizations. Inside the tar.gz that you download, `ExecuteNetwork` is included. Note among the other release downloads on the ArmNN Github is the separate file for the `aar` delegate which is the easy way to include the ArmNN delegate into your app.
 
 To run `ExecuteNetwork` you'll need to use `adb` to push the model and the executable to your phone, and then run it from the adb shell. `adb` is included with Android Studio, but you may need to add it to your path. Android Studio normally installs it to a location like \<user>\AppData\Local\Android\Sdk\platform-tools. `adb` can also be downloaded separately from the [Android Developer site](https://developer.android.com/studio/releases/platform-tools).
@@ -18,7 +20,8 @@ To run `ExecuteNetwork` you'll need to use `adb` to push the model and the execu
 Unzip the tar.gz folder you downloaded to somewhere convenient. From a command prompt, you can then adapt and run the following commands to push the files to your phone. The `/data/local/tmp` folder of your Android device is a place with relaxed permissions that you can use to run this profiling.
 
 ```bash
-adb push model.tflite /data/local/tmp/   # the tflite NN model file that you wish to profile
+adb push mobilenet_v2_1.0_224_INT8.tflite /data/local/tmp/ # if you are using the example tflite model
+# adb push yourmodel.tflite /data/local/tmp/ # where yourmodel is the tflite NN model file that you wish to profile
 adb push ExecuteNetwork /data/local/tmp/
 adb push libarm_compute.so /data/local/tmp/
 adb push libarmnn.so /data/local/tmp/
@@ -36,13 +39,17 @@ chmod 777 ExecuteNetwork    # to make the file executable
 chmod 777 *.so	   # to make the library files executable
 ```
 
-Then you can run the model with the following command:
+Then you can run ExecuteNetwork to profile the model. If you are using the example tflite, you can use the following command:
 
 ```bash
-LD_LIBRARY_PATH=. ./ExecuteNetwork -m model.tflite -c CpuAcc -T delegate --iterations 2 --do-not-print-output --enable-fast-math --fp16-turbo-mode -e --output-network-details > modelout.txt
+LD_LIBRARY_PATH=. ./ExecuteNetwork -m mobilenet_v2_1.0_224_INT8.tflite -c CpuAcc -T delegate --iterations 2 --do-not-print-output --enable-fast-math --fp16-turbo-mode -e --output-network-details > modelout.txt
 ```
 
-This will run the model twice, outputting the layer timings to `modelout.txt`. Specifically, the `-e` and `--output-network-details` flags will output a lot of timeline information about the model, including the layer timings. The `--do-not-print-output` flag will stop the output of the model, which can be very large, and without sensible input, meaningless. The `--enable-fast-math` and `--fp16-turbo-mode` flags enable some maths optimizations. The `--iterations 2` flag will run the model twice: the first run includes a lot of startup costs and one-off optimizations, so the second run is more indicative of the real performance.
+If you are using your own tflite, replace `mobilenet_v2_1.0_224_INT8.tflite` with the name of your tflite file.
+
+This will run the model twice, outputting the layer timings to `modelout.txt`. The `--iterations 2` flag is the command that means it runs twice: the first run includes a lot of startup costs and one-off optimizations, so the second run is more indicative of the real performance.
+
+For the other flags, of note are the `-e` and `--output-network-details` flags which will output a lot of timeline information about the model, including the layer timings. The `--do-not-print-output` flag will stop the output of the model, which can be very large, and without sensible input, meaningless. The `--enable-fast-math` and `--fp16-turbo-mode` flags enable some maths optimizations. `CpuAcc` is the acclerated CPU backend, it can be replaced with `GpuAcc` for the accelerated GPU backend. 
 
 After running the model, you can pull the output file back to your computer with the following commands:
 
@@ -71,4 +78,8 @@ Info: Execution time: 468.42 ms.
 Info: Inference time: 468.58 ms
 ```
 
-After the summary comes the graph of the model, and then the layers and their timings from the second run. At the start of the layers there are a few optimizations and their timings recorded before the network itself, so you can skip past the graph and the optimization timings to get to the part that wants analyzing.  The layers' "Wall clock time" in microseconds shows how long they took to run. These layers and their timings can then be analyzed to see which layers, and which operators, took the most time.
+After the summary comes the graph of the model, and then the layers and their timings from the second run. At the start of the layers there are a few optimizations and their timings recorded before the network itself, so you can skip past the graph and the optimization timings to get to the part that wants analyzing.  
+
+In the mobilenet example output, the graph is from lines 18 to 1629. After this come the optimization timings, which are part of the runtime, but not the network - these go until line 1989. Next there are a few wall clock recordings for the loading of the network, before the first layer "Convolution2dLayer_CreateWorkload_#18" at line 2036. Here is where the layer info that wants analyzing starts.
+
+The layers' "Wall clock time" in microseconds shows how long they took to run. These layers and their timings can then be analyzed to see which layers, and which operators, took the most time.
