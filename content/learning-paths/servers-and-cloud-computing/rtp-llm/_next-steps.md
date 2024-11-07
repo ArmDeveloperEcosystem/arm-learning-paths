@@ -4,7 +4,12 @@ next_step_guidance: >
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/nlp-hugging-face/"
 
+
 further_reading:
+    - resource: 
+        title: Qwen2-0.5B-Instruct
+        link: https://huggingface.co/Qwen/Qwen2-0.5B-Instruct
+        type: website
     - resource:
         title: Getting started with RTP-LLM
         link: https://github.com/alibaba/rtp-llm
@@ -18,9 +23,10 @@ further_reading:
         link: https://blogs.oracle.com/ai-and-datascience/post/democratizing-generative-ai-with-cpu-based-inference
         type: blog
     - resource: 
-        title: Qwen2-0.5B-Instruct
-        link: https://huggingface.co/Qwen/Qwen2-0.5B-Instruct
+        title: Get started with Arm-based cloud instances
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/csp/
         type: website
+     
 
 
 # ================================================================================
