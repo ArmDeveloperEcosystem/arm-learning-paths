@@ -20,9 +20,12 @@ Create a new file for the ported NEON code named `calculation_neon.c` with the c
 #include <arm_neon.h>
 #include <stdio.h>
 
+float32_t a_array[4] = {1.0f, 4.0f, 9.0f, 16.0f};
+float32_t b_array[4] = {1.0f, 2.0f, 3.0f, 4.0f};
+
 int main() {
-    float32x4_t a = {1.0f, 4.0f, 9.0f, 16.0f};
-    float32x4_t b = {1.0f, 2.0f, 3.0f, 4.0f};
+    float32x4_t a = vld1q_f32(a_array);
+    float32x4_t b = vld1q_f32(b_array);
 
     uint32x4_t cmp_result = vcgtq_f32(a, b);
 
@@ -91,9 +94,6 @@ Square Root Result: 1.41 3.46 6.00 8.94
 
 You can see that the results are the same as in the **SSE4.2** example.
 
-{{% notice Note %}}
-We initialized the vectors in reverse order compared to the **SSE4.2** version because **{}** bracket initialization loads vectors from LSB to MSB, whereas **`_mm_set_ps`** loads the elements MSB to LSB.
+{{% notice Note %}} 
+We initialized the vectors in reverse order compared to the **SSE4.2** version because the array initialization and vld1q_f32 function load vectors from LSB to MSB, whereas **`_mm_set_ps`** loads elements MSB to LSB.
 {{% /notice %}}
-
-
-
