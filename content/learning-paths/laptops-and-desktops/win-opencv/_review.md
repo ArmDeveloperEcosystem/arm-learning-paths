@@ -2,37 +2,36 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            What is OpenCV?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-        correct_answer: 1                    
+            - OpenCV is a game development software that helps create 3D video games quickly.
+            - OpenCV is a library that helps computers see and work with images and videos.
+            - OpenCV is a tool used for creating music and sound effects for apps.
+        correct_answer: 2                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            OpenCV is a powerful open-source library that helps computers process and understand images and videos. It is used in tasks like detecting objects and editing images.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            What is MSVC?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - MSVC is a tool for creating user interfaces in web development.
+            - MSVC is a Microsoft compiler used for building C/C++ applications, mainly on Windows.
+            - MSVC is a library for machine learning and data analysis.
+        correct_answer: 2                   
         explanation: >
-            PLACEHOLDER EXPLANATION 2
+            MSVC (Microsoft Visual C++) is a compiler provided by Microsoft that is part of Visual Studio. It is widely used for building and compiling C/C++ programs on Windows, offering good integration with Windows libraries and debugging tools.
                
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            What is Clang?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
+            - Clang is a tool for designing animations for mobile apps.
+            - Clang is a compiler that is part of the LLVM project, known for cross-platform support and detailed error messages.
+            - Clang is a plugin for adding extra features to text editors.
         correct_answer: 2          
         explanation: >
-            PLACEHOLDER EXPLANATION 3
+            Clang is an open-source compiler that is part of the LLVM project. It is known for its support for C/C++ and other languages, cross-platform capabilities, and clear error diagnostics, making it popular for modern development needs.
 
 
 

@@ -1,21 +1,21 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: You have successfully built OpenCV on Windows on Arm using MSVC/Clang. You might be interested in how to create Windows Forms applications on Windows on Arm.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/laptops-and-desktops/win_forms/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
-        type: documentation
-    - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: Arm Kleidi Libraries
+        link: https://www.arm.com/products/development-tools/embedded-and-software/kleidi-libraries
         type: website
+    - resource:
+        title: OpenCV website
+        link: https://opencv.org/
+        type: website
+    - resource:
+        title: Evolution of SIMD architecture with SVE2 
+        link: https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/sve2
+        type: blog
 
 
 # ================================================================================

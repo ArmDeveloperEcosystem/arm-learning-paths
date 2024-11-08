@@ -22,9 +22,9 @@ git checkout tags/4.10.0
 You might be able to use a later version. These steps have been tested with the version 4.10.0.
 {{% /notice %}}
 
-### Build with MSVC
+### Pre-build configuration
 
-Here, you will use CMake from the command line. First, Run the following command to run the pre-build configuration. 
+Here, you will use CMake from the command line. First, run the following command to run the pre-build configuration. 
 
 ```bash
 mkdir build_msvc
@@ -52,8 +52,9 @@ The given options specify the following:
 - The build will be performed in the current directory.
 - The Visual Studio 2022 MSVC compiler will be used as the compiler.
 - The built library is generated as a single file that includes all of OpenCV's functionality.
-- Disable unnecessary options, assuming processing on Arm CPU.Unnecessary options have been disabled to execute processing on Arm CPUs.
+- Unnecessary options have been disabled, assuming processing on Arm CPUs.
 
+&nbsp;
 
 If the configuration is successful, a message similar to the following should be displayed at the end of the execution:
 
@@ -62,13 +63,13 @@ If the configuration is successful, a message similar to the following should be
 --   Version control:               4.10.0
 --
 --   Platform:
---     Timestamp:                   2024-11-06T17:47:31Z
+--     Timestamp:                   2024-11-08T08:50:24Z
 --     Host:                        Windows 10.0.22631 ARM64
 --     CMake:                       3.28.1
 --     CMake generator:             Visual Studio 17 2022
 --     CMake build tool:            C:/Program Files/Microsoft Visual Studio/2022/Professional/MSBuild/Current/Bin/arm64/MSBuild.exe
 --     MSVC:                        1941
---     Configuration:               Release
+--     Configuration:               Debug Release
 --
 --   CPU/HW features:
 --     Baseline:                    NEON
@@ -88,10 +89,12 @@ If the configuration is successful, a message similar to the following should be
 --   Install to:                    C:/Users/kokmit01/work/opencv/build_msvc/install
 -- -----------------------------------------------------------------
 --
--- Configuring done (93.6s)
+-- Configuring done (97.5s)
 -- Generating done (2.8s)
 -- Build files have been written to: C:/Users/kokmit01/work/opencv/build_msvc
 ```
+
+### Build and install
 
 Now run the following command to build and install:
 
@@ -101,53 +104,72 @@ cmake --build . --target INSTALL --config Release
 ```
 
 {{% notice Note %}}
-The build takes approximately 20 mins on Lenovo X13s
+The build takes approximately 25 mins on Lenovo X13s
 {{% /notice %}}
+
+&nbsp;
 
 When the build and the install is complete, confirm the shared library have been created:
 
-```bash { output_lines = "2-12,14-22" }
+```bash { output_lines = "2-12,15-22" }
 ls ./install/x64/vc17/bin
     Directory: C:\Users\kokmit01\work\opencv\build_msvc\install\x64\vc17\bin
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        07/11/2024     21:56          43008 opencv_annotation.exe
--a----        07/11/2024     21:56         143872 opencv_interactive-calibration.exe
--a----        07/11/2024     21:56          41984 opencv_model_diagnostics.exe
--a----        07/11/2024     22:03          36864 opencv_version.exe
--a----        07/11/2024     22:03          35328 opencv_version_win32.exe
--a----        07/11/2024     16:11       26391552 opencv_videoio_ffmpeg4100_64.dll
--a----        07/11/2024     22:03          56320 opencv_visualisation.exe
--a----        07/11/2024     21:56       27175936 opencv_world4100.dll
+-a----        08/11/2024     09:03          43008 opencv_annotation.exe
+-a----        08/11/2024     09:03         143872 opencv_interactive-calibration.exe
+-a----        08/11/2024     09:03          41984 opencv_model_diagnostics.exe
+-a----        08/11/2024     09:12          36864 opencv_version.exe
+-a----        08/11/2024     09:12          35328 opencv_version_win32.exe
+-a----        08/11/2024     08:50       26391552 opencv_videoio_ffmpeg4100_64.dll
+-a----        08/11/2024     09:12          56320 opencv_visualisation.exe
+-a----        08/11/2024     09:03       27179008 opencv_world4100.dll
+
 ls ./install/x64/vc17/lib
     Directory: C:\Users\kokmit01\work\opencv\build_msvc\install\x64\vc17\lib
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
--a----        07/11/2024     16:11            434 OpenCVConfig-version.cmake
--a----        07/11/2024     16:11          15260 OpenCVConfig.cmake
--a----        07/11/2024     16:11            972 OpenCVModules-release.cmake
--a----        07/11/2024     16:11           3879 OpenCVModules.cmake
--a----        07/11/2024     21:56        2849862 opencv_world4100.lib
+-a----        08/11/2024     08:50            434 OpenCVConfig-version.cmake
+-a----        08/11/2024     08:50          15260 OpenCVConfig.cmake
+-a----        08/11/2024     08:50            972 OpenCVModules-release.cmake
+-a----        08/11/2024     08:50           3879 OpenCVModules.cmake
+-a----        08/11/2024     09:02        2849862 opencv_world4100.lib
 ```
 
-{{% notice Note %}}
-The directory name in the middle is "x64," but there is no need to worry as the generated libraries and executable files will definitely run as ARM64.
-{{% /notice %}}
+&nbsp;
+
+`opencv_world<version>.lib/dll` will be the library used by your application. Once the library files are correctly generated, run the following command to ensure there are no errors.
 
 ```bash { output_lines = "2" }
-./install/x64/vc17/bin/pencv_version.exe
+./install/x64/vc17/bin/opencv_version.exe
 4.10.0
 ```
 
+{{% notice Note %}}
+The genereated directory name contains "x64," but there is no need to worry as the libraries and executable files will definitely run as ARM64.
+{{% /notice %}}
+
+&nbsp;
+
 ## Build OpenCV Applications
 
+Once the OpenCV library has been successfully built, the next step is to link it to a simple application and try using it.
 
-Add C:\Users\kokmit01\work\opencv\build\install\x64\vc17\bin to PATH environment variable (for access to dll)
-put the dll to the directory with exe file if it doesn't work. 
+### Create a new project in Visual Studio
 
-Set include dir/linker path
+First, create a new project in Visual Studio. Launch Visual Studio, click `Create a new project` on the initial screen, then select `Empty Project` and click `Next`. On the next screen, set the `Project name` and `Location`. You can choose any name and location, but for this example, we named the project `TestOpenCV`, as shown below. Then click `Create` to generate the new project.
 
+![MSVC project](msvc_project.png "Create a new project")
 
+### Adding a source code
+
+ In `Solution Explorer`, right-click the `Source Files` folder, select `Add`, and then `New Item...`. Create a file named `test_opencv.cpp`.
+
+![MSVC add file](msvc_add_file.png "Add a source file")
+
+&nbsp;
+
+Once the file is created, it will open in the editor. Copy and paste the following program into it and save the file.
 
 ```cpp
 #include <opencv2/opencv.hpp>
@@ -164,3 +186,42 @@ int main() {
     return 0;
 }
 ```
+
+This program is a simple example that uses OpenCV's functionality to create a 100x100 black image, draw a blue circle on it, and save it as a file.
+
+### Configure build settings
+
+Next, select the `Configuration` dropdown menu in the center of the screen and change it from `Debug` to `Release`. At this stage, your screen should look like the example shown below.
+
+![MSVC screenshot](msvc_screen.png "MSVC screenshot")
+
+&nbsp;
+
+Now, set up the compile and link settings. Select `Project` from the top menu and click on `TestOpenCV properties`. Edit `Include directories`, `Library directories`, and `Additional dependencies` as shown in the images below, and then click OK.
+
+![MSVC include dir](msvc_include_dir.png "Include directories: Specify the directory containing the OpenCV header files.")
+
+&nbsp;
+
+![MSVC link dir](msvc_link_dir.png "Library directories: Specify the directory where the libraries for linking are located.")
+
+&nbsp;
+
+![MSVC link lib](msvc_link_lib.png "Additional dependencies: Specify the names of the libraries to link")
+
+&nbsp;
+
+Finally, ensure that the directory containing the dynamic libraries (DLLs) is added to the `PATH` environment variable. Set this in the Windows system settings. After setting the environment variable, restart Visual Studio to apply the changes.
+
+![path setting](set_path.png "Set the DLL dir to the PATH environment variable")
+
+### Run the build
+
+Once these steps are complete, you're ready to build. From the top menu, select `Debug` and click `Start Without Debugging` or press `Ctrl` + `F5`.
+
+If a console window appears showing that the program exited with code 0 and `test_image.png` is generated in the top-level directory of your Visual Studio project, you have succeeded. When you open the image file, it should look like the example shown below.
+
+![test_image pic](test_image.png "test_image.png")
+
+Congratulations! You are now ready to create your own OpenCV applications.
+

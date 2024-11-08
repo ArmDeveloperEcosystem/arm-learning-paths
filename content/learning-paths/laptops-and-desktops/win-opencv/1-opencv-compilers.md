@@ -1,5 +1,5 @@
 ---
-title: OpenCV and Compilers
+title: OpenCV and Compilers for Windows on Arm
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -30,13 +30,13 @@ When building applications for Windows on Arm, both MSVC (Microsoft Visual C++) 
 
 * __MSVC__: A compiler developed by Microsoft that’s part of the Visual Studio IDE. It’s designed specifically for Windows and integrates well with the Windows development ecosystem.
 
-* __Clang__: An open-source compiler that is part of the LLVM project. It’s known for its modern design and and cross-platform capabilities. 
+* __Clang__: An open-source compiler that is part of the LLVM project. It’s known for its modern design and cross-platform capabilities. 
 
 MSVC is the go-to for Windows-focused projects needing seamless integration with Visual Studio. Clang is ideal for cross-platform projects or when using modern C++ features with flexibility. 
 
 ## Before you begin
 
-Any Windows on Arm computer which has the required tools installed can be used for this Learning Path. You will learn the build methods using both MSVC and Clang. 
+Any Windows on Arm machine which has the required tools installed can be used for this Learning Path. You will learn the build methods using both MSVC and Clang. 
 
 Please install the following tools required for both methods.
 
@@ -76,4 +76,4 @@ The instructions were tested with version 1.11.1
 
 You use the LLVM Clang and the Ninja generator to build. Set PATH to the paths to your LLVM and Ninja install.
 
-You now have the required development tools installed.Please proceed to the page for the compiler you want to build with.
+You now have the required development tools installed. Please proceed to the page for the compiler you want to build with.
