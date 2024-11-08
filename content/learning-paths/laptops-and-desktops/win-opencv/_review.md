@@ -13,23 +13,21 @@ review:
 
     - questions:
         question: >
-            What is MSVC?
+            MSVC is a Microsoft compiler used for building C/C++ applications, mainly on Windows.
         answers:
-            - MSVC is a tool for creating user interfaces in web development.
-            - MSVC is a Microsoft compiler used for building C/C++ applications, mainly on Windows.
-            - MSVC is a library for machine learning and data analysis.
-        correct_answer: 2                   
+            - "True"
+            - "False"
+        correct_answer: 1                   
         explanation: >
             MSVC (Microsoft Visual C++) is a compiler provided by Microsoft that is part of Visual Studio. It is widely used for building and compiling C/C++ programs on Windows, offering good integration with Windows libraries and debugging tools.
                
     - questions:
         question: >
-            What is Clang?
+            Clang is a compiler that is part of the LLVM project, known for cross-platform support.
         answers:
-            - Clang is a tool for designing animations for mobile apps.
-            - Clang is a compiler that is part of the LLVM project, known for cross-platform support and detailed error messages.
-            - Clang is a plugin for adding extra features to text editors.
-        correct_answer: 2          
+            - "True"
+            - "False"
+        correct_answer: 1         
         explanation: >
             Clang is an open-source compiler that is part of the LLVM project. It is known for its support for C/C++ and other languages, cross-platform capabilities, and clear error diagnostics, making it popular for modern development needs.
 
