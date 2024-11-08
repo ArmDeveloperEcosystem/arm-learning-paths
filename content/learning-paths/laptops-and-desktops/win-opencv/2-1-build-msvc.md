@@ -86,12 +86,12 @@ If the configuration is successful, a message similar to the following should be
 [...]
 --     C Compiler:                  C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Tools/MSVC/14.41.34120/bin/Hostarm64/arm64/cl.exe
 [...]
---   Install to:                    C:/Users/kokmit01/work/opencv/build_msvc/install
+--   Install to:                    C:/Users/username/work/opencv/build_msvc/install
 -- -----------------------------------------------------------------
 --
 -- Configuring done (97.5s)
 -- Generating done (2.8s)
--- Build files have been written to: C:/Users/kokmit01/work/opencv/build_msvc
+-- Build files have been written to: C:/Users/username/work/opencv/build_msvc
 ```
 
 ### Build and install
@@ -111,9 +111,9 @@ The build takes approximately 25 mins on Lenovo X13s
 
 When the build and the install is complete, confirm the shared library have been created:
 
-```bash { output_lines = "2-12,15-22" }
+```bash { output_lines = "2-11" }
 ls ./install/x64/vc17/bin
-    Directory: C:\Users\kokmit01\work\opencv\build_msvc\install\x64\vc17\bin
+    Directory: C:\Users\username\work\opencv\build_msvc\install\x64\vc17\bin
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        08/11/2024     09:03          43008 opencv_annotation.exe
@@ -124,9 +124,11 @@ Mode                 LastWriteTime         Length Name
 -a----        08/11/2024     08:50       26391552 opencv_videoio_ffmpeg4100_64.dll
 -a----        08/11/2024     09:12          56320 opencv_visualisation.exe
 -a----        08/11/2024     09:03       27179008 opencv_world4100.dll
+```
 
+```bash { output_lines = "2-9" }
 ls ./install/x64/vc17/lib
-    Directory: C:\Users\kokmit01\work\opencv\build_msvc\install\x64\vc17\lib
+    Directory: C:\Users\username\work\opencv\build_msvc\install\x64\vc17\lib
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        08/11/2024     08:50            434 OpenCVConfig-version.cmake

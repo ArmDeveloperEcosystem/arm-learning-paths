@@ -69,7 +69,7 @@ If the configuration is successful, a message similar to the following should be
 --     Host:                        Windows 10.0.22631 ARM64
 --     CMake:                       3.28.1
 --     CMake generator:             Ninja
---     CMake build tool:            C:/Users/kokmit01/work/venv/Scripts/ninja.exe
+--     CMake build tool:            C:/Users/username/work/venv/Scripts/ninja.exe
 --     Configuration:               Release
 --
 --   CPU/HW features:
@@ -88,12 +88,12 @@ If the configuration is successful, a message similar to the following should be
 [...]
 --     C Compiler:                  C:/Program Files/LLVM/bin/clang.exe
 [...]
---   Install to:                    C:/Users/kokmit01/work/opencv/build_clang/install
+--   Install to:                    C:/Users/username/work/opencv/build_clang/install
 -- -----------------------------------------------------------------
 --
 -- Configuring done (244.5s)
 -- Generating done (1.4s)
--- Build files have been written to: C:/Users/kokmit01/work/opencv/build_clang
+-- Build files have been written to: C:/Users/username/work/opencv/build_clang
 ```
 
 ### Build and install
@@ -113,7 +113,7 @@ The build takes approximately 25 mins on Lenovo X13s
 
 When the build and the install is complete, confirm the shared library have been created:
 
-```bash { output_lines = "2-11,13-20" }
+```bash { output_lines = "2-11" }
 ls ./install/bin
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
@@ -125,8 +125,11 @@ Mode                 LastWriteTime         Length Name
 -a----        08/11/2024     09:23       26391552 opencv_videoio_ffmpeg4100_64.dll
 -a----        08/11/2024     09:51          51712 opencv_visualisation.exe
 -a----        08/11/2024     09:50       20207104 opencv_world4100.dll
+```
+
+```bash { output_lines = "2-9" }
 ls ./install/lib
-    Directory: C:\Users\kokmit01\work\opencv\build_clang\install\lib
+    Directory: C:\Users\username\work\opencv\build_clang\install\lib
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----        08/11/2024     09:23            434 OpenCVConfig-version.cmake
