@@ -1,5 +1,5 @@
 ---
-title: Using BOLT with SPE
+title: Use BOLT with SPE
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,12 @@ layout: learningpathall
 
 ## BOLT with SPE
 
-The steps to optimize an executable with BOLT using Perf SPE is below.
+{{% notice Important Note %}}
+Currently, BOLT may not generate a faster binary when using Perf SPE due to limitations within `perf` and BOLT itself.
+For more information and the latest updates see: [[AArch64] BOLT does not support SPE branch data](https://github.com/llvm/llvm-project/issues/115333).
+{{% /notice %}}
+
+The steps to use BOLT with Perf SPE are listed below.
 
 ### Collect Perf data with SPE 
 
