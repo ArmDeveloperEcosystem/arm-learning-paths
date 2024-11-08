@@ -2,7 +2,7 @@
 # User change
 title: "Build the Arm Automotive Solutions Software Reference Stack"
 
-weight: 3
+weight: 4
 
 layout: "learningpathall"
 ---

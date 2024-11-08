@@ -2,7 +2,7 @@
 # User change
 title: "Run the Parsec demo"
 
-weight: 4
+weight: 5
 
 layout: "learningpathall"
 ---
