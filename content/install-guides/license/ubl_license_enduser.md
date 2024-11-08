@@ -15,15 +15,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 A [Local License Server (LLS)](/install-guides/license/ubl_license_admin/) must first be set up by your license administration team.
 
-{{% notice Notice%}}
-A Software Success Kit is a subset of a Hardware Success Kit.
-
-You should confirm which type of license is appropriate for your needs.
-{{% /notice %}}
-
 ## Activate license on end user machine
 
-The UBL license can be activated on the end user machine in different ways. Select the most appropriate for your needs.
+The user-based license can be activated on the end user machine in different ways. Select the most appropriate for your needs.
 
 * [Activate via environment variable](#envvar)
 * [Activate within tools IDE](#ide)
@@ -31,7 +25,7 @@ The UBL license can be activated on the end user machine in different ways. Sele
 
 ## Activate via environment variable {#envvar}
 
-Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the Success Kit product code and your internal UBL license server. Contact your internal license administrators for information on your internal server.
+Create `ARMLM_ONDEMAND_ACTIVATION` environment variable referencing the product code and your internal license server. Contact your internal license administrators for information on your internal server.
 
 ### HSK
 ```console
@@ -42,7 +36,7 @@ export ARMLM_ONDEMAND_ACTIVATION=HWSKT-STD0@https://internal.ubl.server
 export ARMLM_ONDEMAND_ACTIVATION=SWSKT-STD0@https://internal.ubl.server
 ```
 
-A license will be automatically checked out whenever a UBL enabled tool is run, for example:
+A license will be automatically checked out whenever a user-based licensing enabled tool is run, for example:
 ```command
 armclang --version
 ```
@@ -58,16 +52,11 @@ Select `Activate with` > `License Server`, and enter the appropriate license ser
 
 ## Activate manually {#manual}
 
-Open a command prompt, and navigate to the bin directory of any UBL enabled product.
+Open a command prompt, and navigate to the bin directory of any user-based licensing enabled product.
 
-Activate an appropriate success kit license with `armlm`:
-### HSK
+Activate your user-based license with `armlm`:
 ```console
 armlm activate --server https://internal.ubl.server --product HWSKT-STD0
-```
-### SSK
-```
-armlm activate --server https://internal.ubl.server --product SWSKT-STD0
 ```
 
 ## Confirm license check-out {#confirm}
@@ -84,7 +73,7 @@ You should see an output similar to:
 Hardware Success Kit
     Product code: HWSKT-STD0
     Order Id: xxxxxxxx
-    License valid until: 2023-12-31
+    License valid until: 2025-12-31
     Local cache expires in: 6 days and 23 hours
     License server: https://internal.ubl.server
 ```
@@ -93,7 +82,7 @@ Hardware Success Kit
 
 Your license is cached on your local machine, and is valid for 7 days.
 
-There will be an automatic attempt to refresh this timer on the first usage of a UBL enabled tool in a day. If that fails (for example, if tools are run whilst not connected to your network) the tools can still be used provided there is still time on the locally cached license.
+There will be an automatic attempt to refresh this license once per day. If that fails (for example, if tools are run whilst not connected to your network) the tools can still be used provided there is still time on the locally cached license.
 
 To manually refresh the license, you can deactivate and reactivate your license (when connected to your network). For example:
 ```command
