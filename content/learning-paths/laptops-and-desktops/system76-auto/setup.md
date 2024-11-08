@@ -9,9 +9,9 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path explains how to do automotive software development using the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra) Linux desktop computer running Ubuntu. 
+This Learning Path explains how to do automotive software development using the [System76 Thelio Astra](https://system76.com/arm) Linux desktop computer running Ubuntu. 
 
-Before you begin, install Multipass using the [Multipass install guide](/install-guides/multipass/) for Arm Linux. Multipass is used to create a cloud style virtual machine on your desktop computer. 
+Before you begin, install Multipass using the [Multipass install guide](/install-guides/multipass/) for Arm Linux. You can then use Multipass to create a cloud-style virtual machine on your desktop computer. 
 
 
 
@@ -26,8 +26,10 @@ To get started, create a Multipass virtual machine named `u20-32` with Ubuntu 20
 ```console
 multipass launch 20.04 --name u20-32 --cpus 32 --disk 250G --memory 32G 
 ```
-
-You can configure different values or CPUs, disk space, and memory, but the more resources you use the faster the builds will complete. 
+{{% notice Tip %}}
+You can adjust the configuration of the setup, by changing the number of CPUs, disk space size, and the allotted memory. The more resources you use however, the longer the builds will take to complete.
+{{% /notice %}}
+ 
 
 Start a bash shell in the Ubuntu 20.04 VM:
 
@@ -43,7 +45,7 @@ sudo apt update ; sudo apt upgrade -y
 
 ### Create swap space
 
-Building the automotive software stack requires significant memory resources, so it's best to create swap space. Without swap space, some build processes may fail due to lack of memory. 
+Building the automotive software stack requires significant memory resources, so it's best to create swap space. Without swap space, some build processes might fail due to lack of memory. 
 
 Create 10 GB of swap space:
 
@@ -54,7 +56,7 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 ```
 
-To confirm the swap space has been created run:
+To confirm the swap space has been created, run:
 
 ```console
 swapon --show
