@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 Thelio Astra is an Arm-based desktop computer designed for autonomous vehicle development and other general-purpose Arm software development.
 
-Thelio Astra uses the Ampere Altra processor, which is based on the Arm Neoverse N1, and ships with the Ubuntu operating system.
+Thelio Astra uses the Ampere Altra processor, which is based on the Arm Neoverse N1 CPU, and ships with the Ubuntu operating system.
 
-An NVIDIA GPU is included for high performance graphics, and the system can be configured with up to 512 GB of RAM and up to 16 TB of storage. This Learning Path was created using a Thelio Astra with 64 CPUs, 64 GB of RAM, and 1 TB of storage.
+An NVIDIA GPU is included for high performance graphics, and the system can be configured with up to 512 GB of RAM and up to 16 TB of storage.
 
 Some of the benefits of using a Thelio Astra for automotive development include:
 

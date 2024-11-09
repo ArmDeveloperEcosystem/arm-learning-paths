@@ -26,8 +26,10 @@ To get started, create a Multipass virtual machine named `u20-32` with Ubuntu 20
 ```console
 multipass launch 20.04 --name u20-32 --cpus 32 --disk 250G --memory 32G 
 ```
-{{% notice Tip %}}
-You can adjust the configuration of the setup, by changing the number of CPUs, disk space size, and the allotted memory. The more resources you use however, the longer the builds will take to complete.
+{{% notice Note %}}
+You can adjust the configuration of the setup, by changing the number of CPUs, the allotted memory, and the disk space size. Using more of these resources will speed up the build process.
+
+This Learning Path documents an example using a Thelio Astra with 64 CPUs, 64 GB of RAM, and 1 TB of storage.
 {{% /notice %}}
  
 
@@ -45,7 +47,7 @@ sudo apt update ; sudo apt upgrade -y
 
 ### Create swap space
 
-Building the automotive software stack requires significant memory resources, so it's best to create swap space. Without swap space, some build processes might fail due to lack of memory. 
+Building the automotive software stack requires significant memory resources, so it's good practice to create swap space. Without swap space, some build processes might fail due to lack of memory. 
 
 Create 10 GB of swap space:
 
