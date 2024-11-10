@@ -14,7 +14,7 @@ The [Parsec-enabled TLS demo](https://arm-auto-solutions.docs.arm.com/en/v1.1/de
 
 Parsec, or Platform AbstRaction for SECurity, is an open-source initiative that provides a common API to hardware security and cryptographic services.
 
-This enables applications to interact with the secure hardware of a device without needing to know the specific details of the hardware itself. The Parsec abstraction layer makes it easier to develop secure applications that can run on different devices and platforms.   
+This enables applications to interact with the secure hardware of a device without requiring knowledge of the specific details of the hardware itself. The Parsec abstraction layer makes it easier to develop secure applications that can run on different devices and platforms.   
 
 Follow the instructions below to run the Parsec demo.
 
@@ -28,7 +28,7 @@ tmux new-session -s arm-auto-solutions
 
 Tmux makes it possible to connect to the output from multiple hardware subsystems in the reference design. 
 
-To run the software stack on the FVP run:
+To run the software stack on the FVP, run:
 
 ```console
 cd  ~/arm-auto-solutions
@@ -37,7 +37,7 @@ kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 
 This will run the entire software stack on a model of the hardware. 
 
-At anytime you can use Tmux to interact with the different subsystems using `Ctrl-b` then `w` to bring up a list of windows. Use the arrow keys to select a window. 
+Anytime during the process you can use Tmux to interact with the different subsystems using `Ctrl-b` then `w` to bring up a list of windows. Use the arrow keys to select a window. 
 
 After the software boots, you reach a Linux login prompt: `fvp-rd-kronos login:`
 
