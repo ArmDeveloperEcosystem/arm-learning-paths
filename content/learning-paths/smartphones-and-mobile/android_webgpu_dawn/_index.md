@@ -1,11 +1,11 @@
 ---
-title: Build and profile a simple WebGPU Android Application on a smartphone with a Mali GPU
+title: Build and profile a simple WebGPU Android Application
 
 draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 75
+minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers building GPU based Android applications and interested in trying WebGPU. 
 
@@ -21,13 +21,13 @@ learning_objectives:
     
 prerequisites:
     - Basic knowledge of graphics APIs and experience with developing Android graphics applications.
-    - A development machine with Android Studio, Blender and Arm Streamline installed.
-    - An Arm-powered smartphone with a Mali GPU
+    - A development machine with Android Studio, Blender, and Arm Streamline installed.
+    - An Android phone in developer mode.
 
 author_primary: Varun Chari, Albin Bernhardsson
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: GPU
 armips:
     - Cortex-A

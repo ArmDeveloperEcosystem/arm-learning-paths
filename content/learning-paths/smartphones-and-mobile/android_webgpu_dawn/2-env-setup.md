@@ -16,7 +16,6 @@ The first step is to prepare a development environment with the required softwar
 
 * [Android Studio](https://developer.android.com/studio)
 * [Arm Performance Studio](https://www.arm.com/products/development-tools/graphics/arm-performance-studio) 
-* Git
 * Python 3.10 or later
 
 You can use any computer and operating system which supports the above software. 
@@ -50,7 +49,7 @@ Profiling is an important step in the Android application development cycle.
 
 The default profiler in the Android Studio is great to profile CPU related metrics, but does not provide GPU details. 
 
-Arm Performance Studio is a comprehensive profiling tool to profile both CPU and GPU. 
+Arm Performance Studio is a comprehensive profiling tool to profile both CPUs and GPUs. 
 
 One of the components of Performance Studio is Streamline. Streamline captures data from multiple sources, including:
 
@@ -62,7 +61,7 @@ One of the components of Performance Studio is Streamline. Streamline captures d
 Install Arm Performance Studio using the [install guide](/install-guides/ams/).
 
 {{% notice Tip %}}
-If you want to learn more about Arm Performance Studio and Streamline before continuing, refer to ["Get started with Arm Performance Studio for mobile"](https://learn.arm.com/learning-paths/smartphones-and-mobile/ams/ams/)
+If you want to learn more about Arm Performance Studio and Streamline before continuing, refer to [Get started with Arm Performance Studio for mobile](https://learn.arm.com/learning-paths/smartphones-and-mobile/ams/ams/)
 {{% /notice %}}
 
 Android Studio and Arm Performance Studio are now installed and you are ready to create a WebGPU Android application. 
