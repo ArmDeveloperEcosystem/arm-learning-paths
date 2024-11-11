@@ -2,33 +2,33 @@
 review:
     - questions:
         question: >
-            Can you run LLMs on Arm CPUs?
+            Are at least four cores, 16GB of RAM, and 32GB of disk storage required to run the LLM chatbot using rtp-llm on an Arm-based server?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. The advancements made in the Generative AI space with smaller parameter models make LLM inference on CPUs efficient.
+            Yes. Depends on the LLM model parameters size, bigger the model parameters, more CPU, RAM and disk space is required.
 
     - questions:
         question: >
-            Can rtp-llm be built and run on a CPU?
+            Does the rtp-llm project use the --config=arm option to optimize LLM inference for Arm CPUs?
         answers:
             - "Yes"
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. rtp-llm not only supports build-and-run on GPUs, but it can also be run on an Arm CPU.
+            Yes. rtp-llm uses GPU for inference by default, rtp-llm optimizes LLM inference on Arm architecture by providing a configuration option --config=arm during the build process.
 
     - questions:
         question: >
-            Is there only one way to download the Qwen2 0.5B model?
+            Is the given Python script the only way to run the LLM chatbot on an Arm AArch64 CPU and output a response from the model?
         answers:
             - "Yes"
             - "No"
         correct_answer: 2
         explanation: >
-            No. There are a few different ways you can download the Qwen2 0.5B model. In this Learning Path, you downloaded the model from Hugging Face.
+            No. rtp-llm can also be deployed as a API server, user can use curl or other client to get LLM chatbot response.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
