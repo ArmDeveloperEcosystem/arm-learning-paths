@@ -46,22 +46,8 @@ An example of how the tree structure looks like:
 
 - **Advanced search functionality:** With its robust search engine, **SIMD.info** allows you to either search for a specific intrinsic (e.g. `vaddq_f64`) or enter more general terms (e.g. *How to add 2 vectors*), and it will return a list of the corresponding intrinsics. You can also filter results based on the specific engine you're working with, such as **NEON**, **SSE4.2**, **AVX**, **AVX512**, **VSX**. This functionality streamlines the process of finding the right commands tailored to your needs.
 
-- **Comparison tools:** This feature lets you directly compare SIMD instructions from different (or the same) platforms side by side, offering a clear view of the similarities and differences. It’s an invaluable tool for porting code across architectures, as it ensures accuracy and efficiency.
+- **Comparison tools:** This feature lets you directly compare SIMD instructions from different (or the same) platforms side by side, offering a clear view of the similarities and differences. It’s a very helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
 
 - **Discussion forum (like StackOverflow):** The integrated discussion forum, powered by **[discuss](https://disqus.com/)** allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support, fostering collaboration and knowledge-sharing among SIMD developers. Imagine something like **StackOverflow** but specific to SIMD intrinsics.
 
-### Work in Progress & Future Development
-- **Pseudo-code:** Currently under development, this feature will enable users to generate high-level pseudo-code based on specific SIMD instructions. This tool aims to enable better understanding of the SIMD instructions, in a *common language*. This will also be used in the next feature, **Intrinsics Diagrams**.
-
-- **Intrinsics Diagrams:** A feature under progress, creating detailed diagrams for each intrinsic to visualize how it operates on a low level using registers. These diagrams will help you grasp the mechanics of SIMD instructions more clearly, aiding in optimization and debugging.
-
-- **[SIMD.ai](https://simd.ai/):** SIMD.ai is an upcoming feature that promises to bring AI-assisted insights and recommendations to the SIMD development process, making it faster and more efficient to port SIMD code between architectures.
-
-### How These Features Aid in SIMD Development
-**[SIMD.info](https://simd.info/)** offers a range of features that streamline the process of porting SIMD code across different architectures. The hierarchical structure of tree-based navigation allows you to easily locate instructions within a clear framework. This organization into broad categories and specific subcategories, such as **Arithmetic** and **Boolean Logic**, makes it straightforward to identify the relevant SIMD instructions.
-
-When you need to port code from one architecture to another, the advanced search functionality proves invaluable. You can either search for specific intrinsics or use broader terms to find equivalent instructions across platforms. This capability ensures that you quickly find the right intrinsics for Arm, Intel or Power architectures.
-
-Furthermore, **SIMD.info**’s comparison tools enhance this process by enabling side-by-side comparisons of instructions from various platforms. This feature highlights the similarities and differences between instructions, which is crucial for accurately adapting your code. By understanding how similar operations are implemented across architectures, you can ensure that your ported code performs optimally.
-
-Let's look at an actual example.
+You can now learn how to use these features in the context of an actual example.

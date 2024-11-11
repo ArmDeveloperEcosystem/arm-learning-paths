@@ -3,7 +3,7 @@ title: Introduction to SIMD.info
 
 minutes_to_complete: 30
 
-who_is_this_for: This is for software developers interested in porting SIMD code across platforms.
+who_is_this_for: This is for advanced topic for software developers interested in porting SIMD code across Arm platforms.
 
 learning_objectives: 
     - Learn how to use SIMD.info’s tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD intrinsics between architectures and improving code portability.
