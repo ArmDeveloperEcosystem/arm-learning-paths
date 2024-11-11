@@ -8,41 +8,77 @@ layout: learningpathall
 
 ## Setup project
 
-Now that we have `webgpudawn` library built, we can start by removing the extra files included as part of the stock Game Activity project. Delete all the files from the top `cpp` directory,except `main.cpp`. We will create `webgpuRenderer.cpp` and `webgpuRenderer.h` files for our creating our application with WebGPU.
+With the `webgpudawn` library integrated, you can start by removing the extra files included as part of the stock Game Activity project. 
+
+1. Delete all the files from the top `cpp` directory except `CMakeLists.txt`. 
+
+    You have already reviewed `CMakeLists.txt` in the previous section. 
+
+2. Add the files `webgpuRenderer.cpp` and `webgpuRenderer.h` files for the WebGPU application. 
+
+    Run the commands below to add a new `main.cpp` and WebGPU renderer files:
+
+    ```console
+    cp ~/Android_DawnWebGPU/app/src/main/cpp/main.cpp .
+    cp ~/Android_DawnWebGPU/app/src/main/cpp/tiny_obj_loader.h . 
+    cp ~/Android_DawnWebGPU/app/src/main/cpp/utils.cmake .
+    cp ~/Android_DawnWebGPU/app/src/main/cpp/webgpuRenderer.cpp .
+    cp ~/Android_DawnWebGPU/app/src/main/cpp/webgpuRenderer.h .
+    cp -r  ~/Android_DawnWebGPU/app/src/main/cpp/glm .
+    cp -r  ~/Android_DawnWebGPU/app/src/main/cpp/resources .
+    ```
+
+ 
 
 ## Using Dawn WebGPU APIs
 
 There are several layers of abstraction between a device GPU and an application running the WebGPU API.
 
-![WebGPU Application Interface](./images/webgpu_app_interface.png "WebGPU Application Interface")
+![WebGPU Application Interface #center](images/webgpu_app_interface.png "WebGPU Application Interface")
 
-It is useful to understand these as we begin to use WebGPU APIs in our application
+It is useful to understand these layers as you begin to use WebGPU APIs in an application.
 
 * Physical devices have GPUs. Most devices only have one GPU, but some have more than one.
-* A native GPU API, which is part of the OS (e.g. Vulkan, Metal etc.), is a programming interface allowing native applications to use the capabilities of the GPU. API instructions are sent to the GPU (and responses received) via a driver. It is possible for a system to have multiple native OS APIs and drivers available to communicate with the GPU, although the above diagram assumes a device with only one native API/driver.
+
+* A native GPU API, which is part of the operating system, such as Vulkan or Metal. This is a programming interface allowing native applications to use the capabilities of the GPU. API instructions are sent to the GPU via a driver. It is possible for a system to have multiple native OS APIs and drivers available to communicate with the GPU, although the above diagram assumes a device with only one native API/driver.
+
 * A WebGPU implementation like Dawn handles communicating with the GPU via a native GPU API driver. A WebGPU adapter effectively represents a physical GPU and driver available on the underlying system, in your code.
-* A logical device is an abstraction via which an application can access GPU capabilities in a compartmentalized way. Logical devices are required to provide multiplexing capabilities. A physical device's GPU is used by many applications and processes concurrently. Each app needs to be able to access WebGPU in isolation for security and logic reasons.
 
-### The Adapter
+* A logical device is an abstraction which an application uses to access GPU capabilities. Logical devices are required to provide multiplexing capabilities. A physical device's GPU is used by many applications and processes concurrently. Each app needs to be able to access WebGPU in isolation for security and logic reasons.
 
-Before getting our hand on a **device**, we need to select an **adapter**. The same host system may expose multiple adapters if it has access to multiple physical GPUs. It may also have an adapter that represents an emulated/virtual device. Each adapter advertises a list of optional **features** and **supported limits** that it can handle. These are used to determine the overall capabilities of the system before **requesting the device**.The **adapter** is used to **access the capabilities** of the user’s hardware, which are used to select the behavior of your application among very different code paths. Once a code path is chosen, a device is created with the capabilities we choose. Only the capabilities selected for this device are then allowed in the rest of the application. This way, it is **not** possible to inadvertently rely on capabilities specific to your device.
+### The adapter
 
-![Supported Limits](./images/adapter_supported_limits.png "Adapter Supported Limits")
+Before requesting access to a **device**, you need to select an **adapter**. 
+
+The same host system may expose multiple adapters if it has access to multiple physical GPUs. It may also have an adapter that represents an emulated/virtual device. Each adapter advertises a list of optional **features** and **supported limits** that it can handle. 
+
+These are used to determine the overall capabilities of the system before **requesting the device**. The **adapter** is used to **access the capabilities** of the user’s hardware, which are used to select the behavior of your application among very different code paths. 
+
+Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is **not** possible to inadvertently rely on capabilities specific to a device.
+
+![Supported Limits #center](images/adapter_supported_limits.png "Adapter Supported Limits")
 
 {{% notice Tip %}}
-In an advanced use of the adapter/device duality, we can set up multiple limit presets and select one depending on the adapter. In our case, we have a single preset and abort early if it is not supported.
+In an advanced use of the adapter/device duality, you can set up multiple limit presets and select one depending on the adapter. 
+
+In this case, there is a single preset and abort early if it is not supported.
 {{% /notice %}}
 
-### Requesting Adapter
+### Requesting the adapter
 
-An adapter is not something we create, but rather something that we *request* using the function `requestAdapter()`.
-But before doing that we need to create an instance by using
+An adapter is not something you create, but rather something that you *request* using the function `requestAdapter()`.
+
+Before doing that you need to create an instance using the `createInstance()` function. 
 
 ```C++
 wgpu::Instance instance = createInstance(InstanceDescriptor{});
 ```
 
-In order to display something on screen, the operating system needs to provide some place to *draw*, this is commonly known as **a window**. The Game Activity provides us with *pApp* member which exposes an Android Window. WebGPU has capability to use an Android Window for rendering. WebGPU cannot use the *window* directly, but uses something called **a surface**, which can be easily created using the window
+In order to display something on the screen, the operating system needs to provide a place to *draw*, this is commonly known as **a window**. 
+
+The Game Activity provides a *pApp* member which exposes an Android Window. WebGPU can use an Android Window for rendering. 
+
+WebGPU cannot use the *window* directly, but uses something called **a surface**, which can be easily created using the window. 
 
 ```C++
 wgpu::SurfaceDescriptorFromAndroidNativeWindow platformSurfaceDescriptor = {};
@@ -55,7 +91,7 @@ surfaceDescriptor.nextInChain = reinterpret_cast<const ChainedStruct*>(&platform
 wgpu::Surface surface = instance.createSurface(surfaceDescriptor);
 ```
 
-Once a Surface is available, we can request the adapter
+Once a Surface is available, you can request the adapter using the `requestAdapter()` function as shown below:
 
 ```C++
 wgpu::RequestAdapterOptions adapterOpts{};
@@ -63,7 +99,7 @@ adapterOpts.compatibleSurface = surface;
 wgpu::Adapter adapter = instance.requestAdapter(adapterOpts);
 ```
 
-Now after successful creating adapter, we can query basic information such as the GPU vendor, underlying graphics API, etc.
+After successful adapter creation, you can query basic information such as the GPU vendor, underlying graphics APIs, and more. 
 
 ```C++
 wgpu::AdapterInfo adapterInfo;
@@ -81,17 +117,19 @@ __android_log_print(ANDROID_LOG_INFO, "NATIVE", "%s", "backendType..");
 __android_log_print(ANDROID_LOG_INFO, "NATIVE", "%s", backend.c_str());
 ```
 
-### Creating Device
+### Creating a device
 
-As described above, in order to create a device that meets the requirements for our application, we need to specify *required limits*. There are few options to set theses limits:
+In order to create a device that meets the requirements for the application, you need to specify *required limits*. 
 
-* Choose default limits
+There are few options to set the limits:
+
+* Choose default limits:
 
 ```C++
 wgpu::RequiredLimits requiredLimits = Default;
 ```
 
-* Query the Adapter's *supported limits* and use them as *required limits*
+* Query the Adapter's *supported limits* and use them as *required limits*:
 
 ```C++
 wgpu::SupportedLimits supportedLimits;
@@ -100,7 +138,7 @@ wgpu::RequiredLimits requiredLimits = Default;
 requireLimits.limits = supportedLimits.limits;
 ```
 
-* Query the Adapter's *supported limits* and define specific *better* limits in the *required limits*
+* Query the Adapter's *supported limits* and define specific *better* limits in the *required limits*:
 
 ```C++
 wgpu::SupportedLimits supportedLimits;
@@ -115,10 +153,12 @@ requiredLimits.limits.minUniformBufferOffsetAlignment = supportedLimits.limits.m
 ```
 
 {{% notice Tip %}}
-Setting *better* limits may not necessarily be desirable, as doing so may have a performance impact. Because of this, and to improve portability across devices and implementations, applications should generally only request better limits if they may actually require them. It is recommended to read mre about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["limits"](https://gpuweb.github.io/gpuweb/#limits)
+Setting *better* limits may not be desirable, as doing so may have a performance impact. To improve portability across devices and implementations, applications should generally only request better limits if they are required. 
+
+It is recommended to read more about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["limits"](https://gpuweb.github.io/gpuweb/#limits).
 {{% /notice %}}
 
-We then use the `requestDevice()` API to request device:
+Use the `requestDevice()` API to request device:
 
 ```C++
 wgpu::DeviceDescriptor deviceDesc;
@@ -139,5 +179,7 @@ static auto errorCallback = device.setUncapturedErrorCallback([](ErrorType type,
 ```
 
 {{% notice Tip %}}
-While creating device, we are using a callback function `setUncapturedErrorCallback`, this helps in capturing validation and other errors with the WebGPU device. It is highly recommended to set the callback.
+While creating a device, use a callback function `setUncapturedErrorCallback`, this helps in capturing validation and other errors with the WebGPU device. 
 {{% /notice %}}
+
+Proceed to learn how to render 3D objects. 

@@ -49,7 +49,7 @@ Displaying your name on the content you contributed is a great way to promote yo
 
 If you do not want your name to be displayed leave `author_primary` blank. 
 
-You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/contributors.csv) at the top of the repository. This file collects your company name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
+You can share additional information about yourself by editing the file [`contributors.csv`](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/assets/contributors.csv) at the top of the repository. This file collects your company name, GitHub username, LinkedIn profile, Twitter handle, and your website. All fields are optional, but any you add to `contributors.csv` will appear next to your name in the `Author` field.
 
 ## Tags
 Tagging metadata is also expected to increase visibility through filtering. Some tags are closed (you must select from a pre-defined list) and some are open (enter anything). The tags are:

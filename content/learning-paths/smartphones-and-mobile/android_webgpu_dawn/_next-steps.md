@@ -5,6 +5,10 @@ recommended_path: "/learning-paths/smartphones-and-mobile/ams/"
 
 further_reading:
     - resource:
+        title: WebGPU example application
+        link: https://github.com/varunchariArm/Android_DawnWebGPU
+        type: website
+    - resource:
         title: WebGPU working draft
         link: https://www.w3.org/TR/webgpu/
         type: website
@@ -13,7 +17,7 @@ further_reading:
         link: https://github.com/google/dawn
         type: website
     - resource:
-        title: WebGPU fundamentals
+        title: WebGPU API
         link: https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API
         type: website
     - resource:
@@ -21,7 +25,7 @@ further_reading:
         link: https://webgpufundamentals.org/
         type: website
     - resource:
-        title: WebGPU examples
+        title: Learn WebGPU 
         link: https://eliemichel.github.io/LearnWebGPU/index.html
         type: website
     - resource:
