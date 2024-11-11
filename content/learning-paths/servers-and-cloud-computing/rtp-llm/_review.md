@@ -8,7 +8,7 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. Depends on the LLM model parameters size, bigger the model parameters, more CPU, RAM and disk space is required.
+            It depends on the size of the LLM. The higher the number of parameters of the model, the greater the system requirements. 
 
     - questions:
         question: >
@@ -18,7 +18,7 @@ review:
             - "No"
         correct_answer: 1
         explanation: >
-            Yes. rtp-llm uses GPU for inference by default, rtp-llm optimizes LLM inference on Arm architecture by providing a configuration option --config=arm during the build process.
+            rtp-llm uses the GPU for inference by default. rtp-llm optimizes LLM inference on Arm architecture by providing a configuration option --config=arm during the build process.
 
     - questions:
         question: >
@@ -28,7 +28,7 @@ review:
             - "No"
         correct_answer: 2
         explanation: >
-            No. rtp-llm can also be deployed as a API server, user can use curl or other client to get LLM chatbot response.
+            rtp-llm can also be deployed as an API server, and the user can use curl or another client to generate an LLM chatbot response.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
