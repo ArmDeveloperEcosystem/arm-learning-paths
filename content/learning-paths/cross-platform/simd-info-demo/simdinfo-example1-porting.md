@@ -14,7 +14,7 @@ layout: learningpathall
 
 After identifying the **NEON** intrinsics you will need in the ported program, it's time to actually write the code.
 
-Create a new file for the ported NEON code named `calculation_neon.c` with the contents shown below:
+This time on your Arm Linux machine, create a new file for the ported NEON code named `calculation_neon.c` with the contents shown below:
 
 ```C
 #include <arm_neon.h>
@@ -68,7 +68,7 @@ int main() {
 
 It's time to verify that the functionality remains the same, which means you get the same results and similar performance.
 
-Compile the above code as follows on an Arm system:
+Compile the above code as follows on your Arm Linux machine:
 
 ```bash
 gcc -O3 calculation_neon.c -o calculation_neon
@@ -95,5 +95,5 @@ Square Root Result: 1.41 3.46 6.00 8.94
 You can see that the results are the same as in the **SSE4.2** example.
 
 {{% notice Note %}} 
-We initialized the vectors in reverse order compared to the **SSE4.2** version because the array initialization and vld1q_f32 function load vectors from LSB to MSB, whereas **`_mm_set_ps`** loads elements MSB to LSB.
+You initialized the vectors in reverse order compared to the **SSE4.2** version because the array initialization and vld1q_f32 function load vectors from LSB to MSB, whereas **`_mm_set_ps`** loads elements MSB to LSB.
 {{% /notice %}}

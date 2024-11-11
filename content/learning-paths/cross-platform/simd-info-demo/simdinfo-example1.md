@@ -8,7 +8,7 @@ layout: learningpathall
 
 Consider the following C example that uses Intel SSE4.2 intrinsics.
 
-Create a file named `calculation_sse.c` with the contents shown below.
+On an x86_64 Linux development machine, create a file named `calculation_sse.c` with the contents shown below:
 
 ```C
 #include <xmmintrin.h>
@@ -54,12 +54,14 @@ int main() {
 
 The program first compares whether elements in one vector are greater than those in another vector, prints the result, and then proceeds to compute the addition of two vectors, multiplies the result with one of the vectors, and finally takes the square root of the multiplication result:
 
-Compile the code as follows on an Intel system that supports **SSE4.2**:
+Compile the code on your Linux x86_64 system that supports **SSE4.2**:
+
 ```bash
 gcc -O3 calculation_sse.c -o calculation_sse -msse4.2
 ```
 
 Now run the program:
+
 ```bash
 ./calculation_sse
 ```
@@ -76,4 +78,4 @@ Multiplication Result: 2.00 12.00 36.00 80.00
 Square Root Result: 1.41 3.46 6.00 8.94
 ```
 
-It is imperative that you run the code first on the reference platform (here Intel), to make sure you understand how it works and what kind of results are being expected.
+It is imperative that you run the code first on an Intel x86_64 reference platform, to make sure you understand how it works and what kind of results are being expected.
