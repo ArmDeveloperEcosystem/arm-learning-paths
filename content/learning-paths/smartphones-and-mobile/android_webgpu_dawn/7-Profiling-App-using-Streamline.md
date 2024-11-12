@@ -52,7 +52,7 @@ As you can see from the above picture, there is some overlap between Fragment Qu
 
 This shows that the application is hitting the **Fast Path** that Arm has implemented to optimize performance of Dawn for Mali GPUs. 
 
-The overlap is small since the application is rendering the same simple 3D object under different orientation. You can extend the application to render complex objects with multiple *Uniform BUffers*. This would show the overlap in more detail.
+The overlap is small since the application is rendering the same simple 3D object under different orientation. You can extend the application to render complex objects with multiple *Uniform Buffers*. This would show the overlap in more detail.
 
 {{% notice Tip %}}
 Feel free to experiment with different counters in Streamline and explore the other CPU profiling data as well.

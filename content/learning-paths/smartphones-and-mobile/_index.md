@@ -10,21 +10,21 @@ key_ip:
 - Mali
 maintopic: true
 operatingsystems_filter:
-- Android: 21
-- Linux: 19
-- macOS: 9
-- Windows: 8
+- Android: 23
+- Linux: 21
+- macOS: 10
+- Windows: 10
 subjects_filter:
 - Gaming: 6
 - Graphics: 3
-- ML: 7
-- Performance and Architecture: 23
+- ML: 8
+- Performance and Architecture: 24
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech
 title: Smartphones and Mobile
 tools_software_languages_filter:
 - 7-Zip: 1
 - adb: 1
-- Android: 2
+- Android: 3
 - Android NDK: 1
 - Android SDK: 1
 - Android Studio: 7
@@ -34,30 +34,31 @@ tools_software_languages_filter:
 - assembly: 1
 - Bazel: 1
 - C#: 3
-- C++: 3
+- C++: 5
 - C/C++: 1
 - CCA: 1
-- Clang: 8
+- Clang: 9
 - CMake: 1
-- Coding: 17
+- Coding: 18
 - Fixed Virtual Platform: 1
 - Frame Advisor: 1
-- GCC: 9
+- GCC: 10
 - GenAI: 1
 - GoogleTest: 1
-- Java: 3
-- Kotlin: 2
+- Java: 4
+- Kotlin: 4
 - llvm-mca: 1
 - MediaPipe: 1
 - Memory Bug Report: 1
 - Memory Tagging Extension: 1
-- Mobile: 4
+- Mobile: 6
 - NDK: 1
 - NEON: 1
-- Python: 1
+- ONNX Runtime: 1
+- Python: 2
 - QEMU: 1
 - RME: 1
-- Rust: 1
+- Rust: 2
 - SDDiskTool: 1
 - SVE2: 1
 - Total Compute: 1
