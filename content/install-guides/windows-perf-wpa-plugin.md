@@ -29,7 +29,7 @@ layout: installtoolsall # DO NOT MODIFY. Always true for tool install articles
 
 ## What is the Windows Performance Analyzer plugin?
 
-The Windows Performance Analyzer (WPA) plugin connects [Windows Perf](/learning-paths/laptops-and-desktops/windowsperf/) to the Windows Performance Analyzer. Windows Perf is a lightweight performance profiling tool inspired by Linux Perf and designed for Windows on Arm.
+The Windows Performance Analyzer (WPA) plugin connects [WindowsPerf](/learning-paths/laptops-and-desktops/windowsperf/) to the Windows Performance Analyzer. Windows Perf is a lightweight performance profiling tool inspired by Linux Perf and designed for Windows on Arm.
 
 Windows Performance Analyzer is a useful tool that supports developers with diagnostics and performance tuning. It generates data tables and graphs of Event Tracing for Windows (ETW) events, which are recorded in one of three ways:
 - Windows Performance Recorder (WPR)

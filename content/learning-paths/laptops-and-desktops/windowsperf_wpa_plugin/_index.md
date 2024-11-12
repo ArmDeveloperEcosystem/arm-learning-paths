@@ -1,20 +1,20 @@
 ---
-title: Get started with WindowsPerf WPA Plugin
+title: Get started with the Windows Performance Analyzer (WPA) plugin for WindowsPerf
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for software developers working on laptops and desktops and new to the Arm architecture.
+who_is_this_for: This is an introductory topic for software developers interested in using the Windows Performance Analyzer (WPA) plugin for performance analysis.
 
 learning_objectives:
-    - Install WindowsPerf WPA Plugin on Windows 
-    - Import a WindowsPerf counting timeline as a .json file in WPA
-    - Visualize the timeline in WPA using the Windowsperf WPA Plugin
+    - Import WindowsPerf data as a .json file in WPA.
+    - Visualize the timeline and telemetry data in WPA using the WPA plugin.
 
 prerequisites:
-    - Windows desktop or development machine
-    - Windows Performance Analyzer installed
-    - WindowsPerf WPA Plugin installed
-    - (Optional) [WindowsPerf](/install-guides/wperf/) installed on a WoA machine [(Installation guide)](/install-guides/wperf/)
+    - A Windows on Arm laptop with WindowsPerf, Windows Performance Analyzer (WPA), and the WPA plugin installed.
 
 author_primary: Alaaeddine Chakroun
 
@@ -23,7 +23,7 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
-    - neoverse
+    - Neoverse
 operatingsystems:
     - Windows
 tools_software_languages:
