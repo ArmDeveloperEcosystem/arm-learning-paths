@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Now that you have an idea of how the WindowsPerf WPA Plugin works, You can try exploring the WindowsPerf CLI for more flexibility.
+next_step_guidance: Now that you have an idea of how the WindowsPerf WPA plugin works, You can try exploring the WindowsPerf CLI for more flexibility.
 
 recommended_path: "/learning-paths/laptops-and-desktops/windowsperf_sampling_cpython"
 
