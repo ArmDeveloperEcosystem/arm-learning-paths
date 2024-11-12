@@ -1,19 +1,19 @@
 ---
 # User change
-title: "About the Arm Automotive Solutions Software Reference Stack"
+title: "Arm Automotive Solutions Software Reference Stack"
 
 weight: 4
 
 layout: "learningpathall"
 ---
 
-## Arm Automotive Solutions Software Reference Stack, and Arm Reference Design-1 AE
+## About Arm Automotive Solutions Software Reference Stack, and Arm Reference Design-1 AE
 
-The Arm Automotive Solutions Software Reference Stack can be run on the Arm Reference Design-1 AE. 
+The Arm Automotive Solutions Software Reference Stack can be run on the Arm Reference Design-1 AE (RD-1 AE). 
 
-This is a concept hardware design built on the Neoverse V3AE Application Processor (as primary compute) and augmented with an Arm Cortex-R82AE based safety island. 
+RD-1 AE is a concept hardware design, for the Automotive segment, and built on the Neoverse V3AE Application Processor as primary compute, and augmented with an Arm Cortex-R82AE based Safety Island. 
 
-The system additionally includes a Runtime Security Engine (RSE) used for the secure boot and runtime secure services.
+The system additionally includes a Runtime Security Engine (RSE) used for the secure boot of the system elements and runtime Secure Services.
 
 The software stack consists of:
 

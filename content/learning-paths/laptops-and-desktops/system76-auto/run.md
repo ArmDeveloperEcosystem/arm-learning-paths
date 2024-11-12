@@ -56,7 +56,7 @@ The output from the server is printed:
   . Waiting for a remote connection ...
 ```
 
-The SSL client runs in a standard Ubuntu 22.04 container and requests a web page from the SSL server. The client has been modified to use Parsec, making it more portable and abstracting the details of the hardware security services. 
+The SSL client runs in a standard Ubuntu 22.04 container and requests a web page from the SSL server. The client has been modified to use Parsec, making it more portable, and able to abstract the details of the hardware security services. 
 
 Run the Parsec-enabled SSL client: 
 

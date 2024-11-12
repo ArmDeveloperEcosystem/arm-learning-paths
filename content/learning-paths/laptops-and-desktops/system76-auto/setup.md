@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ## Before you begin
 
-This Learning Path explains how to do automotive software development using the [System76 Thelio Astra](https://system76.com/arm) Linux desktop computer running Ubuntu. 
+This Learning Path explains how to perform automotive software development using the [System76 Thelio Astra](https://system76.com/arm) Linux desktop computer running Ubuntu. 
 
 Before you begin, install Multipass using the [Multipass install guide](/install-guides/multipass/) for Arm Linux. You can then use Multipass to create a cloud-style virtual machine on your desktop computer. 
 
@@ -17,7 +17,7 @@ Before you begin, install Multipass using the [Multipass install guide](/install
 
 ## Create a virtual machine using Multipass
 
-A Multipass virtual machine is a good way to create the required automotive development environment and isolate the build and test process. Using Multipass also allows you to split the resources of the Thelio Astra and specify the number of CPUs and the portion of memory and storage for the development environment. It is also easy to delete an existing VM and create a new one whenever you need one. 
+A Multipass virtual machine is a good way to create the required automotive development environment and isolate the build and test process. Using Multipass also allows you to split the resources of the Thelio Astra and specify the number of CPUs and the portion of memory and storage for the development environment. It is also easy to delete an existing VM and create a new one whenever required. 
 
 The Arm Automotive Solutions Software Reference Stack requires Ubuntu 20.04 for the build and test machine. The Thelio Astra ships with either Ubuntu 22.04 or 24.04. With Multipass, you can use Ubuntu 20.04 for the development environment, isolate the development from the native operating system, and avoid any compatibility issues.
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "About the Thelio Astra"
+title: "Thelio Astra"
 
 weight: 2
 
@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 ### About the Thelio Astra
 
-Thelio Astra is an Arm-based desktop computer designed for autonomous vehicle development and other general-purpose Arm software development.
+Thelio Astra is an Arm-based desktop computer designed by System76 for autonomous vehicle development and other general-purpose Arm software development.
 
 Thelio Astra uses the Ampere Altra processor, which is based on the Arm Neoverse N1 CPU, and ships with the Ubuntu operating system.
 

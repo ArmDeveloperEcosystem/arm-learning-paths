@@ -13,7 +13,7 @@
 review:
     - questions:
         question: >
-            To get enough memory, the Arm Automotive Solutions Software Reference Stack must be built on an Arm cloud instance.
+            To ensure there is efficient memory resource, the Arm Automotive Solutions Software Reference Stack must be built on an Arm cloud instance.
         answers:
             - "True"
             - "False"
@@ -25,10 +25,10 @@ review:
         question: >
             Which things below are benefits of Parsec?
         answers:
-            - "Platform Agnostic API"
-            - "Secure boot and attestation"
-            - "Key management and cryptography"
-            - "All of the above"
+            - "Platform Agnostic API."
+            - "Secure boot and attestation."
+            - "Key management and cryptography."
+            - "All of the above."
         correct_answer: 4                     
         explanation: >
             All of these help Parsec provide unified access to hardware security.

@@ -1,12 +1,14 @@
 ---
 # User change
-title: "About Parsec"
+title: "Parsec"
 
 weight: 6
 
 layout: "learningpathall"
 ---
 
+
+## About Parsec
 
 There are a number of example applications which demonstrate the software stack running the reference hardware system modeled by a Fixed Virtual Platform (FVP). The Parsec demo is explained below. 
 
@@ -16,4 +18,4 @@ Parsec, or Platform AbstRaction for SECurity, is an open-source initiative that 
 
 This enables applications to interact with the secure hardware of a device without requiring knowledge of the specific details of the hardware itself. The Parsec abstraction layer makes it easier to develop secure applications that can run on different devices and platforms.   
 
-Follow the instructions below to run the Parsec demo.
+You can follow the instructions in the next section to run the Parsec demo.
