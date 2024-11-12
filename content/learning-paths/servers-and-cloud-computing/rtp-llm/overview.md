@@ -15,7 +15,7 @@ This Learning Path has been tested on an Alibaba Cloud g8y.8xlarge instance and 
 
 [rtp-llm](https://github.com/alibaba/rtp-llm) is an open-source C/C++ project developed by Alibaba that enables efficient LLM inference on a variety of hardware. 
 
-Qwen is the name given to a series of Large Language Models developed by Alibaba Cloud that are capable of performing a variety of tasks. 
+RTP-LLM is a Large Language Model inference acceleration engine developed by Alibaba. Qwen is the name given to a series of Large Language Models developed by Alibaba Cloud that are capable of performing a variety of tasks. 
 
 Alibaba Cloud offer a wide range of models, each suitable for different tasks and use cases. 
 
