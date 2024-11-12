@@ -1,7 +1,10 @@
 ---
-### Title the install tools article with the name of the tool to be installed
-### Include vendor name where appropriate
 title: Windows Performance Analyzer (WPA) plugin
+
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 15
 
 official_docs: https://github.com/arm-developer-tools/windowsperf-wpa-plugin
