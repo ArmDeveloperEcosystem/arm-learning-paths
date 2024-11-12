@@ -13,16 +13,42 @@ on:
 jobs:
   build_and_deploy_internal_existing:
     name: Build and Deploy Internal Existing
-    uses: ./.github/workflows/deploy.yml
-    permissions:
-      id-token: write
-      contents: read
-    with:
-      environment: internal
-      target: internal-existing
-    secrets:
-      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_INTERNAL }}
-      HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+        with:
+          submodules: true # Fetch Hugo Themes
+          fetch-depth: 0
+
+      # Sets Up Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.130.0"
+          extended: true
+
+      # Post-CSS install and Node.js
+      - name: Install Post-CSS
+        run: npm install postcss-cli
+
+      # Builds arm-software-developer repo
+      - name: Build
+        run: |
+          hugo --minify
+          cp learn-image-sitemap.xml public/learn-image-sitemap.xml
+          bin/pagefind --site "public"
+        env:
+          HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+
+      # Deploys website to AWS S3
+      - name: Deploy to S3
+        run: hugo deploy --force --maxDeletes -1 --invalidateCDN
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   build_and_deploy_internal:
     name: Build and Deploy Internal
