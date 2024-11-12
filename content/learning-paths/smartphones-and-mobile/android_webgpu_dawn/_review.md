@@ -4,8 +4,8 @@ review:
         question: >
             What is WebGPU?
         answers:
-            - A highly customized API to use specific GPUs.
-            - APIs designed to provide a unified access to GPUs whichever the GPU vendor and operating system the application runs with.
+            - A highly customized API for specific GPUs.
+            - APIs designed to provide unified access to GPUs whichever the GPU vendor and operating system the application runs with.
             - APIs designed for cloud-based applications.
         correct_answer: 2                    
         explanation: >
@@ -15,7 +15,7 @@ review:
         question: >
             What is Dawn?
         answers:
-            - A WebGPU implementation lead by Google.
+            - An open-source WebGPU implementation lead by Google.
             - A community-driven WebGPU implementation.
             - A new programming language to program GPUs.
         correct_answer: 1                   

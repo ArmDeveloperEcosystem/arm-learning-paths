@@ -2,25 +2,14 @@
 # User change
 title: "Run the Parsec demo"
 
-weight: 4
+weight: 7
 
 layout: "learningpathall"
 ---
 
-
-There are a number of example applications which demonstrate the software stack running the reference hardware system modeled by a Fixed Virtual Platform (FVP). The Parsec demo is explained below. 
-
-The [Parsec-enabled TLS demo](https://arm-auto-solutions.docs.arm.com/en/v1.1/design/applications/parsec_enabled_tls.html) illustrates a HTTPS session. A simple web page is transferred using a Transport Layer Security (TLS) connection.
-
-Parsec, or Platform AbstRaction for SECurity, is an open-source initiative that provides a common API to hardware security and cryptographic services.
-
-This enables applications to interact with the secure hardware of a device without needing to know the specific details of the hardware itself. The Parsec abstraction layer makes it easier to develop secure applications that can run on different devices and platforms.   
-
-Follow the instructions below to run the Parsec demo.
-
 ## Run the Parsec SSL demo
 
-From the command line, start a Tmux session.
+From the command line, start a Tmux session:
 
 ```console
 tmux new-session -s arm-auto-solutions
@@ -28,20 +17,20 @@ tmux new-session -s arm-auto-solutions
 
 Tmux makes it possible to connect to the output from multiple hardware subsystems in the reference design. 
 
-To run the software stack on the FVP run:
+To run the software stack on the FVP, run:
 
 ```console
 cd  ~/arm-auto-solutions
 kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
 ```
 
-This will run the entire software stack on a model of the hardware. 
+This runs the entire software stack on a model of the hardware. 
 
-At anytime you can use Tmux to interact with the different subsystems using `Ctrl-b` then `w` to bring up a list of windows. Use the arrow keys to select a window. 
+Anytime during the process you can use Tmux to interact with the different subsystems using Ctrl+B then W to bring up a list of windows. Press the arrow keys to select a window. 
 
-After the software boots, you reach a Linux login prompt: `fvp-rd-kronos login:`
+After the software boots, you should see a Linux login prompt: `fvp-rd-kronos login:`
 
-Enter `root` for the login name, no password is required. 
+Enter `root` for the login name. No password is required. 
 
 Make sure the initialization process is complete by running:
 
@@ -49,9 +38,9 @@ Make sure the initialization process is complete by running:
 systemctl is-system-running --wait
 ```
 
-If the output is `running`, continue to the next step. If not, re-run the command until the output is `running`.
+If the output is `running`, continue to the next step. If not, rerun the command until the output is `running`.
 
-On the primary compute run the SSL server:
+On the primary compute, run the SSL server:
 
 ```console
 ssl_server &
@@ -67,17 +56,17 @@ The output from the server is printed:
   . Waiting for a remote connection ...
 ```
 
-The SSL client runs in a standard Ubuntu 22.04 container and requests a web page from the SSL server. The client has been modified to use Parsec, making it more portable and abstracting the details of the hardware security services. 
+The SSL client runs in a standard Ubuntu 22.04 container and requests a web page from the SSL server. The client has been modified to use Parsec, making it more portable, and able to abstract the details of the hardware security services. 
 
-Run the Parsec enabled SSL client: 
+Run the Parsec-enabled SSL client: 
 
 ```console
 docker run  --rm -v /run/parsec/parsec.sock:/run/parsec/parsec.sock -v /usr/bin/ssl_client1:/usr/bin/ssl_client1 --network host docker.io/library/ubuntu:22.04 ssl_client1
 ```
 
-The container will be downloaded and run. The SSL client application named `ssl_client1` runs.
+The container will then download and run. The SSL client application named `ssl_client1` also starts running.
 
-The client application requests a webpage from the SSL server and the output is:
+The client application requests a webpage from the SSL server and you should see this output:
 
 ```output
   . Seeding the random number generator... ok
@@ -116,17 +105,17 @@ Content-Type: text/html
 
 ## Shutdown and clean up
 
-You can shut down the simulated system:
+You can shut down the simulated system by using the following command:
 
 ```console
 shutdown now
 ```
 
-You will return to the command line.
+This will return you to the command line.
 
-Type `exit` to leave the Tmux session and `exit` again to leave the Multipass virtual machine. 
+Type `exit` to leave the Tmux session, and `exit` again to leave the Multipass virtual machine. 
 
-To delete the Multipass VM run the commands:
+To delete the Multipass VM, run the commands:
 
 ```console
 multipass stop u20-32
@@ -136,4 +125,4 @@ multipass purge
 
 You have run the Parsec example from the Arm Automotive Solutions Software Reference Stack.
 
-There are many other example applications you can run, refer to the Further Reading section.
+There are many other example applications you can run. See the Further Reading section at the end of the Learning Path for more information.

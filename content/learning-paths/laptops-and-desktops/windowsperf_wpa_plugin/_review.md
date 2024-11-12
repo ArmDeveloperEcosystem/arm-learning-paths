@@ -13,36 +13,37 @@
 review:
     - questions:
         question: >
-            To ensure there is efficient memory resource, the Arm Automotive Solutions Software Reference Stack must be built on an Arm cloud instance.
+            The WPA plugin connects WindowsPerf to the Windows Performance Analyzer. 
         answers:
-            - "True."
-            - "False."
-        correct_answer: 2               
+            - "True"
+            - "False"
+        correct_answer: 1
         explanation: >
-            You can build the automotive software stack on a local machine using the System76 Thelio Astra Linux desktop.
-    - questions:
-        question: >
-            Which of the following are benefits of Parsec?
-        answers:
-            - "Platform Agnostic API."
-            - "Secure boot and attestation."
-            - "Key management and cryptography."
-            - "All of the above."
-        correct_answer: 4                     
-        explanation: >
-            All of these help Parsec provide unified access to hardware security.
+            The Windows Performance Analyzer (WPA) plugin connects WindowsPerf to the Windows Performance Analyzer.
 
     - questions:
         question: >
-            Which of these are the benefits of using Arm-based desktops for Arm-based software development?
+            Which views can WPA display
         answers:
-            - "ISA compatibility."
-            - "No cross-compilation or Virtualization needed."
-            - "Lower cost and higher performance."
-            - "All of the above."
-        correct_answer: 4                     
+            - "Timeline"
+            - "Telemetry"
+            - "Function profile"
+            - "Timeline and telemetry"
+            - "All of the above"
+        correct_answer: 3
         explanation: >
-            Using Arm-based desktops for Arm-based software development brings all these benefits.
+            WPA can display both the timeline and the telemetry views.
+
+    - questions:
+        question: >
+            WindowsPerf can output data in JSON format with `--json` command line option.
+        answers:
+            - "True"
+            - "False"
+        correct_answer: 1
+        explanation: >
+            Some `wperf` commands such as `list`, `test` or `stat` can output data in JSON format.
+
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
