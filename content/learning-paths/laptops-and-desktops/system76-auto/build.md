@@ -8,7 +8,7 @@ layout: "learningpathall"
 ---
 ## Build the Automotive Software Stack
 
-The Thelio Astra makes it possible to build the complete software stack on an Arm-based local machine, instead of using alternative setups such as an Arm-based cloud instance, or a non-Arm desktop computer.
+The Thelio Astra makes it possible to build the complete software stack on an Arm-based local machine instead of using a non-Arm desktop computer, with the ISA compatibility benefits that it brings to Arm-based software development. Using Arm-based cloud instances is another option.
 
 You can build the Using the Arm Automotive Solutions Software Reference Stack from the command line of the Ubuntu 20.04 Multipass virtual machine. 
 

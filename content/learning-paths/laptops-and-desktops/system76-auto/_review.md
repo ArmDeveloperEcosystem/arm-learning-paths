@@ -15,15 +15,14 @@ review:
         question: >
             To ensure there is efficient memory resource, the Arm Automotive Solutions Software Reference Stack must be built on an Arm cloud instance.
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 2               
         explanation: >
             You can build the automotive software stack on a local machine using the System76 Thelio Astra Linux desktop.
-
     - questions:
         question: >
-            Which things below are benefits of Parsec?
+            Which of the following are benefits of Parsec?
         answers:
             - "Platform Agnostic API."
             - "Secure boot and attestation."
@@ -32,6 +31,18 @@ review:
         correct_answer: 4                     
         explanation: >
             All of these help Parsec provide unified access to hardware security.
+
+    - questions:
+        question: >
+            Which of these are the benefits of using Arm-based desktops for Arm-based software development?
+        answers:
+            - "ISA compatibility."
+            - "No cross-compilation or Virtualization needed."
+            - "Lower cost and higher performance."
+            - "All of the above."
+        correct_answer: 4                     
+        explanation: >
+            Using Arm-based desktops for Arm-based software development brings all these benefits.
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY
