@@ -63,13 +63,13 @@ Download the Sysbox official package from [Sysbox Releases](https://github.com/n
 You can download the Debian package for Arm from the command line: 
 
 ```bash
-wget https://downloads.nestybox.com/sysbox/releases/v0.6.4/sysbox-ce_0.6.4-0.linux_arm64.deb
+wget https://downloads.nestybox.com/sysbox/releases/v0.6.5/sysbox-ce_0.6.5-0.linux_arm64.deb
 ```
 
 Install the package using the `apt` command:
 
 ```bash
-sudo apt-get install ./sysbox-ce_0.6.4-0.linux_arm64.deb -y
+sudo apt-get install ./sysbox-ce_0.6.5-0.linux_arm64.deb -y
 ```
 
 If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from the source code. Refer to [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md) for further information.

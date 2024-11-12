@@ -1,7 +1,7 @@
 summary:
-  content_total: 289
+  content_total: 301
   content_with_all_tests_passing: 32
-  content_with_tests_enabled: 33
+  content_with_tests_enabled: 34
 sw_categories:
   cross-platform:
     dynamic-memory-allocator:
@@ -74,6 +74,9 @@ sw_categories:
       readable_title: PyTorch
       tests_and_status:
       - ubuntu:latest: passed
+    swift:
+      readable_title: Swift
+      tests_and_status: []
     terraform:
       readable_title: Terraform
       tests_and_status:
