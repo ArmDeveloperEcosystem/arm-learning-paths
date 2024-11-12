@@ -9,7 +9,7 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 107
+- Linux: 109
 - macOS: 9
 - Windows: 12
 pinned_modules:
@@ -23,8 +23,8 @@ subjects_filter:
 - Containers and Virtualization: 25
 - Databases: 15
 - Libraries: 6
-- ML: 13
-- Performance and Architecture: 37
+- ML: 14
+- Performance and Architecture: 38
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -57,22 +57,22 @@ tools_software_languages_filter:
 - Capstone: 1
 - CCA: 3
 - Clair: 1
-- Clang: 9
+- Clang: 10
 - ClickBench: 1
 - ClickHouse: 1
 - CloudFormation: 1
 - CMake: 1
-- Coding: 19
+- Coding: 20
 - Django: 1
 - Docker: 15
 - Envoy: 2
 - Flink: 1
 - Fortran: 1
 - FVP: 3
-- GCC: 17
+- GCC: 18
 - gdb: 1
 - Geekbench: 1
-- GenAI: 4
+- GenAI: 5
 - GitHub: 3
 - GitLab: 1
 - Glibc: 1
@@ -91,7 +91,7 @@ tools_software_languages_filter:
 - Lambda: 1
 - libbpf: 1
 - Linaro Forge: 1
-- LLM: 2
+- LLM: 3
 - llvm-mca: 1
 - LSE: 1
 - MariaDB: 1
@@ -107,13 +107,13 @@ tools_software_languages_filter:
 - PAPI: 1
 - perf: 3
 - PostgreSQL: 4
-- Python: 11
+- Python: 12
 - PyTorch: 5
 - RAG: 1
 - Redis: 3
 - Remote.It: 2
 - RME: 3
-- Rust: 1
+- Rust: 2
 - snappy: 1
 - Snort: 1
 - SQL: 7
