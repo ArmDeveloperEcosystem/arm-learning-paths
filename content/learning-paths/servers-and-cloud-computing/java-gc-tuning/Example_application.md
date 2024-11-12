@@ -1,6 +1,6 @@
 ---
 title: Example Application
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Example Application.
 
-Copy and paste the following Java snippet into a file called `HeapUsageExample.java`. This contrived code example allocates 1 million string objects to fill up the heap. We can use this example to easily observe the effects of different GC tuning parameters.
+Copy and paste the following Java snippet into a file called `HeapUsageExample.java`. This code example allocates 1 million string objects to fill up the heap. We can use this example to easily observe the effects of different GC tuning parameters.
 
 ```java
 public class HeapUsageExample {
@@ -34,13 +34,17 @@ public class HeapUsageExample {
 
 ### Enable GC logging
 
-To observe the what the GC is doing, one option is to enabling logging whilst the JVM is running. To enable this, we need to pass in some command-line arguments. The `gc` option logs the GC information we are interested. The `filecount` option creates a rolling log to prevent uncontrolled growth of logs with the drawback that historical logs may be rewritten and lost. Run the following command from the terminal. 
+To observe the what the GC is doing, one option is to enabling logging whilst the JVM is running. To enable this, we need to pass in some command-line arguments. The `gc` option logs the GC information we are interested. The `filecount` option creates a rolling log to prevent uncontrolled growth of logs with the drawback that historical logs may be rewritten and lost. Run the following command from the terminal to enable logging on JDK 11 onwards.
 
 ```bash
 java -Xms512m -Xmx1024m -XX:+UseSerialGC -Xlog:gc:file=gc.log:tags,uptime,time,level:filecount=10,filesize=16m HeapUsageExample.java
 ```
 
-> **_PLEASE NOTE:_** This command will work with JDK 11 onwards (to be checked)
+Use the following command if you are using JDK8.
+
+```bash
+java -Xms512m -Xmx1024m -XX:+UseSerialGC -Xloggc:gc.log -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation HeapUsageExample.java
+```
 
 The `-Xms512m` and `-Xmx1024` options create a minimum and maximum heap size of 512 MiB and 1GiB respectively. This is simply so we do not have to wait for too long to see activity within the GC. Additionally, we force the JVM to use the serial garbage collector with the `-XX:+UseSerialGC` flag. 
 
@@ -52,11 +56,11 @@ You will now see logs, named `gc.log.*` within the same directory. Viewing the c
 [2024-11-08T15:04:54.350+0000][0.759s][info][gc          ] GC(3) Pause Young (Allocation Failure) 139M->3M(494M) 3.699ms
 ```
 
-From these logs we can see how often the Young garbage collection is occuring, by how much of the Young segment is reduced and how long it takes. The results below will vary on your own system. 
+These logs provide insights into the frequency, duration, and impact of Young garbage collection events. The results may vary depending on your system.
 
-- Frequency ~= Every 0.14s 
-- Pause duration ~= 3.6ms
-- Reduction size ~= 139MB -> 3M
+    - Frequency: ~ every 46 ms
+    - Pause duration: ~ 3.6 ms
+    - Reduction size: ~ 139 MB (or 3M objects)
 
 This logging method has the benefit of being verbose but at the tradeoff of clarity. Furthermore, this method clearly isn't suitable for a running process which makes debugging a live environment slightly more challenging. 
 
@@ -108,13 +112,15 @@ jstat -gcutil $(pgrep java) 1000
 ```
 
 
-You will obserse an output like the following:
+You will obserse an output like the following until `ctl+c` is pressed. 
 
 ```output
-  S0     S1     E      O      M     CCS    YGC     YGCT     FGC    FGCT     CGC    CGCT       GCT   
-     -      -  33.33   0.00      -      -      0     0.000     0     0.000     0     0.000     0.000
-     -      -  33.33   0.00      -      -      0     0.000     0     0.000     0     0.000     0.000
-     -      -  33.33   0.00      -      -      0     0.000     0     0.000     0     0.000     0.000
+  S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT    CGC    CGCT     GCT   
+  0.00 100.00   6.11   1.81  71.05  73.21      1    0.010     0    0.000     0    0.000    0.010
+  0.00 100.00   6.11   1.81  71.05  73.21      1    0.010     0    0.000     0    0.000    0.010
+  0.00 100.00   6.11   1.81  71.05  73.21      1    0.010     0    0.000     0    0.000    0.010
+...
+  0.00 100.00   6.11   1.81  71.05  73.21      1    0.010     0    0.000     0    0.000    0.010
 ```
 
 The columns of interest are:

@@ -1,10 +1,22 @@
 ---
-title: Tuning the GC
-weight: 4
+title: Basic GC Tuning
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+### Update the JDK version used
+
+A sensible first step is to use one of the latest long-term-support (LTS) releases of JDK. This is because the GC versions included with recent JDKs offer improvements. For example, the G1GC included with JDK11 offers improvements in the pause time compared to JDK 8. As mentioned earlier, the `java --version` command will show you the version currently in use. 
+
+```output
+$ java --version
+openjdk 21.0.4 2024-07-16 LTS
+OpenJDK Runtime Environment Corretto-21.0.4.7.1 (build 21.0.4+7-LTS)
+OpenJDK 64-Bit Server VM Corretto-21.0.4.7.1 (build 21.0.4+7-LTS, mixed mode, sharing)
+```
+
 
 ### Use an alternative GC
 
@@ -24,7 +36,7 @@ From the created log file `gc.log.*`, we can observe that at a very similar time
 ...
 [2024-11-08T16:13:53.186+0000][0.888s][info][gc          ] GC(3) Pause Young (Normal) (G1 Evacuation Pause) 307M->3M(514M) 1.703ms
 ```
-The output on your machine will vary. 
+As discussed in the previous section, the performance improvement from moving to a G1GC will depend on the CPU overhead of your system. As such, the performance may vary depending on the cloud instance size and available CPU resources. 
 
 ### Add GC Targets
 
@@ -43,48 +55,17 @@ Looking at the output below, we can see that at the same initial state after ~0.
 [2024-11-08T16:27:37.149+0000][0.853s][info][gc] GC(19) Pause Young (Normal) (G1 Evacuation Pause) 193M->3M(514M) 0.482ms
 ```
 
-There are several other target options that you can try:
-- `-XX:InitiatingHeapOccupancyPercent`: Sets the threshold for the old generation occupancy to start a concurrent GC cycle.
-- `-XX:ParallelGCThreads`: Sets the number of threads used for parallel GC operations.
-- `-XX:G1HeapRegionSize`: Sets the size of the G1 regions. The value must be a power of 2 between 1 MB and 32 MB.
+Here are some additional target options you can consider to tune performance:
 
+-   -XX:InitiatingHeapOccupancyPercent: 
 
+Defines the old generation occupancy threshold to trigger a concurrent GC cycle. Adjusting this can be beneficial if your application experiences long GC pauses due to high old generation occupancy. For example, lowering this threshold can help start GC cycles earlier, reducing the likelihood of long pauses during peak memory usage.
+-   -XX:ParallelGCThreads
 
-#### Is your GC NUMA aware?
+Specifies the number of threads for parallel GC operations. Increasing this value can be beneficial for applications running on multi-core processors, as it allows GC tasks to be processed faster. For instance, a high-throughput server application might benefit from more parallel GC threads to minimize pause times and improve overall performance.
+-   -XX:G1HeapRegionSize
 
-Non-uniform memory architecture occurs when the memory performance varies depending on which core the application is running on and where the data is in memory. This is a common occurence if you are using a system with multiple sockets. If your system has multiple sockets you need to ensure the GC is aware of this to optimise memory access patterns. The command line option below can be used to enable NUMA-aware GC.
+Determines the size of G1 regions, which must be a power of 2 between 1 MB and 32 MB. Adjusting this can be useful for applications with specific memory usage patterns. For example, setting a larger region size can reduce the number of regions and associated overhead for applications with large heaps, while smaller regions might be better for applications with more granular memory allocation patterns.
 
-```bash
-+XX:+UseNUMA
-```
-#### Is the GC Heap Size Appropriate?
+We recommend reading [this technical article](https://www.oracle.com/technical-resources/articles/java/g1gc.html) for more information of G1GC tuning. 
 
-If the size of the heap is too small, excessive time will be spent in GC compared to the application logic. However disproportionately large heaps will result in longer GC pauses as there is more memory to parse. It is recommended the max heap size is not greater that the physical memory on your system, if multiple JVMs are running the sum of their heaps must not exceed the total physical memory (the `free -h` command can be used to find the phyisical memory). This is to avoid the high latency accesses to access memory on disk from swapping during a full GC sweep.
-
-The `-Xmx <N>` and `-Xms <N>` options can be used to specify the maximum and minimum memory sizes respectively.
-
-Unfortunately there is no hard rule on which values to set. However a rule of thumb is to aim for 30% occupation of the heap after a full GC. This requires running the application until a steady state has been reached.
-
-The heap size is dynamically resized as the application runs. If you know exactly the heap size, setting the minimum and maximum values will slightly improve the performance since resizing will never take place.
-
-#### Is the GC generation sizes appropriate?
-
-Most GCs further separate the heap into generations. The young generation holds data that is used for a short period and the old generation for long-lived data. This takes advantage of the fact that most data is short lived so it's faster to process just the young generation during GC, resulting in shorted pause times. A full GC refers to going through the entire heap, leading to the so called 'stop-the-world pauses'. 
-
-In most cases, we recommend only hand tuning the generation sizes if you are an advanced java user. 
-
-The following command-line flag adjust the ratio of young to old generations from the default value of 2 for all GC algorithms:
-
-```bash
--XX:NewRatio= <N>
-```
-
-Additionally, the initial size and maximum size of the young generation can be modified with the `-XX:NewSize` and `-XX:MaxNewSize` respectively. 
-
-#### Which adaptive heap sizing strategy is being used?
-
-The JVM attempts to find an optimal sizing solution within the bounds of the policies and parameters through adaptive sizing, varying the generation and heap sizes dynamically during execution. This is on the assumption that historic GC cycles will be similar to future GC cycles. This is generally true. 
-
-To observe how the JVM is resizing an application, set the `-XX:+PrintAdaptiveSizePolicy` to print the information on generation resizing in the GC log. 
-
-In the specific case where you have existing knowledge of the heap requirements, for example a small, short-lived java utility, disabling adaptive sizing using the `-XX:UseAdaptiveSizePolicy` flag can avoid the small overhead and time taken to resize. This can potentially improve the performance in specific cases. 

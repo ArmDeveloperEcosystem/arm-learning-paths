@@ -2,37 +2,34 @@
 review:
     - questions:
         question: >
-            PLACEHOLDER QUESTION 1?
+            What is the purpose of garbage collection?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
+            - To manage memory by automatically reclaiming unused objects
+            - To manually manage memory allocation
         correct_answer: 1                    
         explanation: >
-            PLACEHOLDER EXPLANATION 1
+            Garbage collection is used to manage memory by automatically reclaiming memory occupied by objects that are no longer in use, thus preventing memory leaks and optimizing memory usage.
 
     - questions:
         question: >
-            PLACEHOLDER QUESTION 2?
+            Which JVM flag can be used to enable detailed garbage collection logging?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 4                   
+            - -XX:+UseG1GC
+            - -XX:+PrintGCDetails
+        correct_answer: 2                    
         explanation: >
-            PLACEHOLDER EXPLANATION 2
-               
+            The flag -XX:+PrintGCDetails enables detailed logging of garbage collection events, which helps in monitoring and tuning the GC performance.
+
     - questions:
         question: >
-            PLACEHOLDER QUESTION 3?
+            Which garbage collector is best suited for applications requiring very low latency in a heavily multi-threaded application?
         answers:
-            - PLACEHOLDER ANSWER A
-            - PLACEHOLDER ANSWER B
-            - PLACEHOLDER ANSWER C
-            - PLACEHOLDER ANSWER D
-        correct_answer: 2          
+            - Serial GC
+            - ZGC
+        correct_answer: 2                    
         explanation: >
-            PLACEHOLDER EXPLANATION 3
+            ZGC (Z Garbage Collector) is designed for applications requiring very low latency, as it aims to keep pause times below 10 milliseconds even for large heaps.
+
 
 
 

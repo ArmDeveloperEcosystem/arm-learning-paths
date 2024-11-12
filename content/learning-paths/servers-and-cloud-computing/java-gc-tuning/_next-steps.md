@@ -1,21 +1,17 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Run a Java Application on Google Axion instances. 
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/java-on-axion/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: OpenJDK Wiki 
+        link: https://wiki.openjdk.org/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+        title: G1GC Tuning 
+        link: https://www.oracle.com/technical-resources/articles/java/g1gc.html
+        type: documentation
 
 
 # ================================================================================

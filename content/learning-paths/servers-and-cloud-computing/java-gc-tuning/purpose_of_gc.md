@@ -34,6 +34,8 @@ OpenJDK 64-Bit Server VM Corretto-21.0.4.7.1 (build 21.0.4+7-LTS, mixed mode, sh
 
 Since we are running this command on an AWS instance, we are using a managed version of OpenJDK 21 from AWS also called Corretto. 
 
+If the `java` command is not recognised, please follow the [Arm Java install guide](https://learn.arm.com/install-guides/java/) to install Java on your system. 
+
 ### Checking which GCs are available
 
 Next, we want to understand which standard GCs are available to us. The following command can be used to print the GCs. 
