@@ -2,36 +2,22 @@
 # User change
 title: "Set up an automotive development environment"
 
-weight: 2
+weight: 3
 
 layout: "learningpathall"
 ---
 
 ## Before you begin
 
-This Learning Path explains how to do automotive software development using the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra) Linux desktop computer running Ubuntu. 
+This Learning Path explains how to perform automotive software development using the [System76 Thelio Astra](https://system76.com/arm) Linux desktop computer running Ubuntu. 
 
-Before you begin, install Multipass using the [Multipass install guide](/install-guides/multipass/) for Arm Linux. Multipass is used to create a cloud style virtual machine on your desktop computer. 
+Before you begin, install Multipass using the [Multipass install guide](/install-guides/multipass/) for Arm Linux. You can then use Multipass to create a cloud-style virtual machine on your desktop computer. 
 
-### About the Thelio Astra
 
-Thelio Astra is an Arm-based desktop computer designed for autonomous vehicle development and other general purpose Arm software development.
-
-It uses the Ampere Altra processor, based on Arm Neoverse N1, and ships with the Ubuntu operating system.
-
-An NVIDIA GPU is included for high performance graphics, and the system can be configured with up to 512 GB of RAM and up to 16 TB of storage. This Learning Path was created using a Thelio Astra with 64 CPUs, 64 GB of RAM, and 1 TB of storage.
-
-Some of the benefits of using a Thelio Astra for automotive development include:
-
-- **Access to native performance:** You can execute build and test cycles directly on Arm Neoverse processors, eliminating the performance overhead and complexities associated with instruction emulation and cross-compilation. 
-- **Improved virtualization:** Familiar virtualization and container tools on Arm simplify the development and test process. 
-- **Better cost-effectiveness:** There are cost savings of having a local computer with a high core count, large memory, and plenty of storage. 
-- **Enhanced compatibility:** Support for Arm CPUs and NVIDIA GPUs eliminates the need for Arm instruction emulation, which simplifies the developer process and overall experience. 
-- **Optimized developer process:** The development process can be optimized by enabling you to run large software stacks on your local machine, making it easier to fix issues and improve performance. 
 
 ## Create a virtual machine using Multipass
 
-A Multipass virtual machine is a good way to create the required automotive development environment and isolate the build and test process. Using Multipass also allows you to split the resources of the Thelio Astra and specify the number of CPUs and the portion of memory and storage for the development environment. It's also easy to delete the VM and create a new one anytime. 
+A Multipass virtual machine is a good way to create the required automotive development environment and isolate the build and test process. Using Multipass also allows you to split the resources of the Thelio Astra and specify the number of CPUs and the portion of memory and storage for the development environment. It is also easy to delete an existing VM and create a new one whenever required. 
 
 The Arm Automotive Solutions Software Reference Stack requires Ubuntu 20.04 for the build and test machine. The Thelio Astra ships with either Ubuntu 22.04 or 24.04. With Multipass, you can use Ubuntu 20.04 for the development environment, isolate the development from the native operating system, and avoid any compatibility issues.
 
@@ -40,8 +26,12 @@ To get started, create a Multipass virtual machine named `u20-32` with Ubuntu 20
 ```console
 multipass launch 20.04 --name u20-32 --cpus 32 --disk 250G --memory 32G 
 ```
+{{% notice Note %}}
+You can adjust the configuration of the setup, by changing the number of CPUs, the allotted memory, and the disk space size. Using more of these resources will speed up the build process.
 
-You can configure different values or CPUs, disk space, and memory, but the more resources you use the faster the builds will complete. 
+This Learning Path documents an example using a Thelio Astra with 64 CPUs, 64 GB of RAM, and 1 TB of storage.
+{{% /notice %}}
+ 
 
 Start a bash shell in the Ubuntu 20.04 VM:
 
@@ -57,7 +47,7 @@ sudo apt update ; sudo apt upgrade -y
 
 ### Create swap space
 
-Building the automotive software stack requires significant memory resources, so it's best to create swap space. Without swap space, some build processes may fail due to lack of memory. 
+Building the automotive software stack requires significant memory resources, so it's good practice to create swap space. Without swap space, some build processes might fail due to lack of memory. 
 
 Create 10 GB of swap space:
 
@@ -68,7 +58,7 @@ sudo mkswap /swapfile
 sudo swapon /swapfile
 ```
 
-To confirm the swap space has been created run:
+To confirm the swap space has been created, run:
 
 ```console
 swapon --show
