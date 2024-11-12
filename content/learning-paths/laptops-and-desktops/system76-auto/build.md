@@ -6,7 +6,7 @@ weight: 5
 
 layout: "learningpathall"
 ---
-## Build the automotive software stack
+## Build the Automotive Software Stack
 
 The Thelio Astra makes it possible to build the complete software stack on an Arm-based local machine, instead of using alternative setups such as an Arm-based cloud instance, or a non-Arm desktop computer.
 
