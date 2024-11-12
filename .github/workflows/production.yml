@@ -73,7 +73,6 @@ jobs:
       id-token: write
       contents: read
     with:
-      environment: production
       target: production
     secrets:
       AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_PRODUCTION }}

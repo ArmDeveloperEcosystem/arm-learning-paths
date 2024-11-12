@@ -3,10 +3,6 @@ name: Deploy Hugo to S3
 on:
   workflow_call:
     inputs:
-      environment:
-        description: "Choose the environment"
-        required: true
-        type: string
       target:
         description: "Hugo target to deploy to"
         required: true
