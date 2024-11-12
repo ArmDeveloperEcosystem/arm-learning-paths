@@ -1,6 +1,10 @@
 ---
 title: Introduction to SIMD.info
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is for advanced topic for software developers interested in porting SIMD code across Arm platforms.
