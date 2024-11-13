@@ -1,0 +1,79 @@
+# This workflow will be triggered on a push to the 'production' branch automatically or when called manually.
+# Upon running this workflow, the website will be built and deployed to the production instance.
+name: Build and Deploy Production Website
+
+on:
+  # Runs on pushes to the 'production' branch
+  push:
+    branches: [production]
+
+  # Allows to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build_and_deploy_existing:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v4
+        with:
+          submodules: true # Fetch Hugo Themes
+          fetch-depth: 0
+
+      # Sets Up Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "0.130.0"
+          extended: true
+
+      # Post-CSS install
+      - name: Install Post-CSS
+        run: npm install postcss-cli
+
+      # Builds arm-learning-paths repo
+      - name: Build
+        run: |
+          hugo --minify
+          cp learn-image-sitemap.xml public/learn-image-sitemap.xml
+          bin/pagefind --site "public"
+        env:
+          HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
+
+      #  Copy SSH Key
+      - name: copy key
+        run: |
+          echo $SSH_KEY | xargs -n 1 > tmpkey
+          base64 -d < tmpkey > key
+          chmod 400 key
+        shell: bash
+        env:
+          SSH_KEY: ${{secrets.SSH_KEY}}
+
+      # SCP Site contents to netstorage
+      - name: copy site content
+        run: |
+          cd public
+          zip -r public.zip .
+          cd ..
+          scp -i key -o StrictHostKeyChecking=accept-new -oHostKeyAlgorithms=+ssh-dss -r public/public.zip $USR@$HOST:/$ID/
+        shell: bash
+        env:
+          USR: ${{secrets.SSH_USERNAME}}
+          HOST: ${{secrets.SSH_HOST}}
+          ID: ${{secrets.ID}}
+
+  build_and_deploy_production:
+    name: Build and Deploy Production
+    uses: ./.github/workflows/deploy.yml
+    permissions:
+      id-token: write
+      contents: read
+    with:
+      target: production
+    secrets:
+      AWS_OIDC_ROLE: ${{ secrets.AWS_OIDC_ROLE_PRODUCTION }}
+      HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}
