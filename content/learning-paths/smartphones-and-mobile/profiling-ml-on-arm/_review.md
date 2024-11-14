@@ -16,8 +16,8 @@ review:
         question: >
             Does Android Studio have a profiler?
         answers:
-            - Yes
-            - No
+            - "Yes"
+            - "No"
         correct_answer: 1                   
         explanation: >
             Yes, Android Studio has a built-in profiler that can be used to monitor the memory usage of your app among other things
