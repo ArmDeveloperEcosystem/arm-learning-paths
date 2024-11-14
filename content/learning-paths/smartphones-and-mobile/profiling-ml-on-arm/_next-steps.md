@@ -1,8 +1,7 @@
 ---
-next_step_guidance: Continue Learning
+next_step_guidance: You might be interested in learning how to profile your Unity apps on Android.
 
-recommended_path: /learning-paths/smartphones-and-mobile/build-llama3-chat-android-app-using-executorch-and-xnnpack/
-recommended_path: /learning-paths/smartphones-and-mobile/kleidiai-on-android-with-mediapipe-and-xnnpack/
+recommended_path: /learning-paths/smartphones-and-mobile/profiling-unity-apps-on-android/
 
 further_reading:
     - resource:
