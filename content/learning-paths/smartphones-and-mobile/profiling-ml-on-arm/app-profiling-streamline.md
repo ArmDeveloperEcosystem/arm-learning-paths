@@ -13,16 +13,19 @@ The profiler can look at memory, CPU activity and cycles, cache misses, and many
 
 ![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline timeline view")
 
-If you want a ready-made application to profile for this section you can use [this example](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference). Clone it to your computer and open it in a recent Android Studio. It is generally safest to not update the Gradle version when asked, to ensure nothing else needs updating. 
+## Example Android Application 
+
+In this Learning Path, you will use profile [an example Android application](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference) using Streamline. 
+Start by cloning the repository containing this example on your machine and open it in a recent Android Studio. It is generally safest to not update the Gradle version when prompted. 
 
 ## Streamline
-You will install [Streamline](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads) (and Performance Studio) on your host machine, and will connect to your target Arm device to capture the data. In this example, the target device is an Arm-powered Android phone. The data is captured over a USB connection, and then analyzed on your host machine.
+You will install Streamline and Performance Studio on your host machine and connect to your target Arm device to capture the data. In this example, the target device is an Arm-powered Android phone. The data is captured over a USB connection, and then analyzed on your host machine.
 
-There are many [tutorials and training videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) on Streamline, which you can refer to for more depth. This example will be Android based, but you can use [these instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application) setup and capture.
+For more details on Streamline usage you can refer to these [tutorials and training videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio). While the example you are running is based on Android, you can use [the setup and capture instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application).
 
 First, follow these [setup instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), to make sure you have `adb` (Android Debug Bridge) installed. If you have installed [Android Studio](https://developer.android.com/studio), you will have installed adb already. Otherwise, you can get it as part of the Android SDK platform tools [here](https://developer.android.com/studio/releases/platform-tools.html).
 
-Make sure `adb` is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by adding the Android SDK `platform-tools` directory to your path. The instructions for this (and location of the directory) will depend on your host machine's operating system.
+Make sure `adb` is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by installing the [Android SDK `platform-tools`](https://developer.android.com/tools/releases/platform-tools#downloads) directory to your path. 
 
 Next, install [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads), which includes Streamline. 
 
@@ -36,7 +39,7 @@ Next, you need a debuggable build of the application you want to profile.
 - In Unreal Engine, open Project Settings > Project > Packaging > Project, and ensure that the For Distribution checkbox is not set. 
 - In the general case, you can set `android:debuggable=true` in the application manifest file.
 
-If you're using the example application, the Build Variant is `debug` by default, but you can verify this by going to `Build > Select Build Variant` in Android Studio. Build and install the application on your device.
+For the example application that you cloned earlier, the Build Variant is `debug` by default, but you can verify this by going to `Build > Select Build Variant` in Android Studio. Build and install the application on your device.
 
 You can now run Streamline, and do a [capture](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en) of your application. This can be used to do a general performance analysis of your application, but you will add some useful information first.
 
@@ -237,10 +240,10 @@ In the example app the CAM annotations would be added to the `runInference()` fu
         }
 
         // Update inference time TextView in microseconds
-        inferenceTime.text = "Inference Time: $inferenceTimeMicros µs"
+        inferenceTime.text = "Inference Time: $inferenceTimeMicros Âµs"
     }
 ```
 
-The example app is very fast and simple, so the CAMs will not show much, but in a more complex application you could add more CAMs, including child-level ones, to give more detailed annotations to show where time is spent in your application. Indeed for the example app with its very fast inference, you will be best in Streamline to put the timeline view on the 10µs scale to see the CAM annotations better.
+The example app is very fast and simple, so the CAMs will not show much, but in a more complex application you could add more CAMs, including child-level ones, to give more detailed annotations to show where time is spent in your application. Indeed for the example app with its very fast inference, you will be best in Streamline to put the timeline view on the 10Âµs scale to see the CAM annotations better.
 
 Once you've added in useful CAM annotations, you can build and deploy a debug version of your application, you can run Streamline and see the annotations and CAMs in the timeline view. See the [Streamline documentation](https://developer.arm.com/documentation/101816/latest/) for how to make a capture for profiling. Once the capture is made and analyzed, you will be able to see when your application is running the inference, ML pre-processing, ML post-processing, or other parts of your application. From there you can see where the most time is spent, and how hard the CPU or GPU is working during different parts of the application. From this you can then decide if work is needed to improve performance and where that work needs doing.
