@@ -281,7 +281,7 @@ def check(json_file, start, stop, md_article):
                         and "test-lp-output.txt" not in file_name ]
 
     if paths_to_remove:
-        logging.info(f"Removing files that was created during testing from repository")
+        logging.info(f"Removing files that were created during testing from repository")
         for path in paths_to_remove:
             if os.path.isfile(path) or os.path.islink(path):
                 os.remove(path)

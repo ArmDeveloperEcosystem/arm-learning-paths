@@ -72,7 +72,7 @@ If a specific return code is expected, it can be specified as follows:
 
 #### Command output
 
-You can display the shell which the command should run in by specifying the `command_line` option. You can also test for expected output in the instructions by specifying the line(s) where the expected output should be displayed. This is done by adding the pipe symbol (`|`). Since the first line should contain the command itself, the indexing of the expected output lines starts at 2. You can specify a span (if the expected output is more than one line) with the dash symbol, for example `"| 2-10"`.
+You can visualize the shell by specifying the `command_line` option. You can also test for expected output in the instructions by specifying the line(s) where the expected output should be displayed. This is done by adding the pipe symbol (`|`). Since the first line should contain the command itself, the indexing of the expected output lines starts at 2. You can specify a span (if the expected output is more than one line) with the dash symbol, for example `"| 2-10"`.
 
 ```markdown
     Let's check is this command return the expected output:
@@ -223,7 +223,7 @@ The `test_images` field is a list of Docker container images the framework can p
 From the project root folder, run:
 
 ```bash
-./tools/maintenance.py -i content/learning-paths/servers-and-cloud-computing/mynewlearningpath
+./tools/maintenance.py -i content/learning-paths/microcontrollers/my-new-learning-path
 ```
 
 If the Learning Path contains sub-articles, the framework will run their instructions in order, depending on the sub-articles weight.
@@ -238,7 +238,7 @@ If the tests are successful, that will be communicated through the console.
 
 ### Investigating failures
 
-The framework will print information about any errors to the console. For a more refined analysis, add the `--debug` flag.
+The framework will print information about any errors to the console. To display additional output, run with the `--debug` flag.
 
 ```bash
 ./tools/maintenance.py -i content/install-guides/mytool.md --debug
@@ -247,7 +247,20 @@ The framework will print information about any errors to the console. For a more
 
 ### Saving the results
 
-If you want the results to be saved, add the `--stats-report` flag to the command. This will update a statistics file which publishes the result to the website.
+If you want the results to be saved, add the `--stats-report` flag to the command. This will update a statistics file `stats_current_test_info.yml`, which publishes the result to the website. In order to do that, the Learning Path or Install Guide needs to exist as an entry in the statistics file. Find the category for your content. If it's an Install Guide, the name will be that of the .md file without the extension. If it's a Learning Path, you will use the name of the directory. For example:
+
+```
+install-guides:
+    mytool:
+      readable_title: My Tool
+      tests_and_status:
+      - ubuntu:latest: passed
+microcontrollers:
+    my-new-learning-path:
+      readable_title: My new Learning Path
+      tests_and_status:
+      - ubuntu:latest: passed
+```
 
 ```bash
 ./tools/maintenance.py -i content/install-guides/mytool.md --stats-report

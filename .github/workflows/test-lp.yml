@@ -10,7 +10,6 @@ jobs:
         id: changed-markdown-files
         uses: tj-actions/changed-files@v44
         with:
-          # Avoid using single or double quotes for multiline patterns
           files: |
              **.md
       - name: Install dependencies
