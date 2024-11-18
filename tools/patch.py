@@ -14,7 +14,6 @@ def patch(article_path: str, results: dict, link: str):
         f.close()
 
     article_path_pure = PurePath(re.sub(r"^.*?content/", "", article_path))
-    print(article_path_pure)
     article_path_parts = list(article_path_pure.parts)
     if "learning-paths" in article_path_parts:
         content_type, sw_category, content_title = article_path_parts

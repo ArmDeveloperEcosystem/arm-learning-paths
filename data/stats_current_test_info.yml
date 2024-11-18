@@ -70,7 +70,7 @@ sw_categories:
       tests_and_status:
       - ubuntu:latest: passed
     aws-copilot:
-      readable_title: AWS CLI
+      readable_title: AWS Copilot CLI
       tests_and_status:
       - ubuntu:latest: passed
     azure-cli:
