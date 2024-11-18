@@ -15,7 +15,6 @@ jobs:
       - name: Install dependencies
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         run: pip install -r tools/requirements.txt
-
       - name: Run test suite for all changed files
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
@@ -47,7 +46,7 @@ jobs:
         run: echo "Maintenance is turned off for one or more files"
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
-        if: success() && steps.maintenance-state.outputs.MAINTENANCE == 'on'
+        if: success() && env.MAINTENANCE == 'on'
         with:
           commit-message: update stats_current_test_info.yml
           title: Update stats_current_test_info.yml
