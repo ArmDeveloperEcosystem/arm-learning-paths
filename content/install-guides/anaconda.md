@@ -51,6 +51,7 @@ The installer requires some desktop related libraries. The dependencies can be m
 For Ubuntu/Debian, run the command:
 
 ```bash
+sudo apt update
 sudo apt install xfce4 -y
 ```
 
