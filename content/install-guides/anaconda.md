@@ -22,11 +22,11 @@ tool_install: true
 weight: 1
 ---
 
-[Anaconda Distribution](https://www.anaconda.com/products/distribution) is a popular open-source Python distribution. 
+[Anaconda Distribution](https://www.anaconda.com/products/distribution) is a popular open-source Python distribution.
 
 It includes access to a repository with over 8,000 open-source data science and machine learning packages.
 
-The `conda` command can be used to quickly install and use Python packages. 
+The `conda` command can be used to quickly install and use Python packages.
 
 Follow the instructions below to install and use Anaconda Distribution on an Arm server.
 
@@ -46,11 +46,11 @@ aarch64
 
 If you see a different result, you are not using an Arm computer running 64-bit Linux.
 
-The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment. 
+The installer requires some desktop related libraries. The dependencies can be met by installing a desktop environment.
 
 For Ubuntu/Debian, run the command:
 
-```console
+```bash
 sudo apt install xfce4 -y
 ```
 
@@ -60,7 +60,7 @@ For Amazon Linux, run the command:
 sudo amazon-linux-extras install mate-desktop1.x
 ```
 
-## How do I download the latest Anaconda distribution? 
+## How do I download the latest Anaconda distribution?
 
 To download the latest Anaconda distribution, run:
 
@@ -84,7 +84,7 @@ sh ./Anaconda3-2023.09-0-Linux-aarch64.sh -b
 
 The install takes a couple of minutes to complete.
 
-The batch installation will not set up the shell. 
+The batch installation will not set up the shell.
 
 To set up the shell, run:
 
@@ -133,7 +133,7 @@ Run the example code:
 python ./tf.py
 ```
 
-The expected output format is below. Your version may be slightly different. 
+The expected output format is below. Your version may be slightly different.
 
 ```output
 2.12.0
@@ -180,6 +180,6 @@ tensor([[0.9287, 0.5931, 0.0239],
 ```
 
 
-You are ready to use Anaconda Distribution. 
+You are ready to use Anaconda Distribution.
 
 Explore the many machine learning articles and examples using TensorFlow and PyTorch.
