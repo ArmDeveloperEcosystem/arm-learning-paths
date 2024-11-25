@@ -7,23 +7,25 @@ layout: learningpathall
 ---
 
 ### Comprehensive SIMD.info Capabilities
-**[SIMD.info](https://simd.info/)** offers a variety of powerful tools to help developers work more efficiently with SIMD code across different architectures. With a database of over 10,000 intrinsics, it provides detailed information to support effective SIMD development.
+**[SIMD.info](https://simd.info/)** offers a variety of powerful tools to enable developers to work more efficiently with SIMD code across different architectures. 
 
-For each intrinsic, SIMD.info provides comprehensive details, including:
+With a database of over 10,000 intrinsics, it provides detailed information to support effective SIMD development.
 
-1. **Purpose**: A brief description of what the intrinsic does and its primary use case.
-2. **Result**: Explanation of the output or result of the intrinsic.
-3. **Example**: A code snippet demonstrating how to use the intrinsic.
-4. **Prototypes**: Function prototypes for different programming languages (currently C/C++).
-5. **Assembly Instruction**: The corresponding assembly instruction used by the intrinsic.
-6. **Notes**: Any additional notes or caveats about the intrinsic.
-7. **Architecture**: List of architectures that support the intrinsic
-8. **Link(s) to Official Documentation**
+For each intrinsic, SIMD.info provides the following information:
+
+* Purpose: a brief description of what the intrinsic does and its primary use case.
+* Result: an explanation of the output or result of the intrinsic.
+* Example: a code snippet demonstrating how to use the intrinsic.
+* Prototypes: function prototypes for different programming languages (currently C/C++).
+* Assembly Instruction: the corresponding assembly instruction used by the intrinsic.
+* Notes: any additional notes or caveats about the intrinsic.
+* Architecture: a list of architectures that support the intrinsic.
+* Link(s) to Official Documentation
 
 This detailed information ensures you have all the necessary resources to effectively use and port SIMD instructions across different platforms. Each feature is designed to simplify navigation, improve the search for equivalent instructions, and foster a collaborative environment for knowledge-sharing.
 
-- **Tree-based navigation:** **SIMD.info** uses a clear, hierarchical layout to organize instructions. It categorizes instructions into broad groups like **Arithmetic**, which are further divided into specific subcategories such as **Vector Add** and **Vector Subtract**. This organized structure makes it straightforward to browse through SIMD instruction sets across various platforms, allowing you to efficiently find and access the exact instructions you need.
-An example of how the tree structure looks like:
+- **Tree-based navigation:** **SIMD.info** uses a clear, hierarchical layout to organize instructions. It categorizes instructions into broad groups like **Arithmetic**, which are further divided into specific subcategories such as **Vector Add** and **Vector Subtract**. This organized structure enables you to browse through SIMD instruction sets across various platforms, allowing you to efficiently find and access the exact instructions you need.
+Here is an example of the tree structure:
 
 
     - **Arithmetic** 
