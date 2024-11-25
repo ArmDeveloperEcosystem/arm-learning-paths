@@ -51,7 +51,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         if: success() && env.MAINTENANCE == 'on'
         with:
-          token: ${{ GITHUB_TOKEN }}
+          token: ${{ github.token }}
           commit-message: update stats_current_test_info.yml
           title: Update stats_current_test_info.yml
           body: |
