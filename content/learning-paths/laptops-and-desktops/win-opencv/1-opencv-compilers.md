@@ -6,7 +6,8 @@ weight: 2
 layout: learningpathall
 ---
 
-## OpenCV
+## What is OpenCV?
+
 OpenCV (Open Source Computer Vision Library) is a popular, open-source library that developers use to build computer vision applications. It provides a set of tools and functions that help you handle tasks related to images and videos without needing to write everything from scratch. 
 
 Here’s what developers should know:
@@ -24,19 +25,19 @@ Here’s what developers should know:
 * __Community and Resources__: Being open-source and widely adopted, there is a large community of developers contributing to and supporting OpenCV. This makes it easier to find tutorials, documentation, and answers to questions.
 
 
-## Compilers for Windows on Arm Development
+## Which compilers are available for Windows on Arm Development?
 
-When building applications for Windows on Arm, both MSVC (Microsoft Visual C++) and Clang are options for developers, each with its own advantages.
+MSVC (Microsoft Visual C++) and Clang are options for developers building Windows on Arm applications.
 
 * __MSVC__: A compiler developed by Microsoft that’s part of the Visual Studio IDE. It’s designed specifically for Windows and integrates well with the Windows development ecosystem.
 
 * __Clang__: An open-source compiler that is part of the LLVM project. It’s known for its modern design and cross-platform capabilities. 
 
-MSVC is the go-to for Windows-focused projects needing seamless integration with Visual Studio. Clang is ideal for cross-platform projects or when using modern C++ features with flexibility. 
+MSVC is ideal for Windows-focused projects needing seamless integration with Visual Studio. Clang is ideal for cross-platform projects or when using modern C++ features.
 
 ## Before you begin
 
-Any Windows on Arm machine which has the required tools installed can be used for this Learning Path. You will learn the build methods using both MSVC and Clang. 
+Any Windows on Arm machine which has the required tools installed can be used for this Learning Path. You will learn how to build OpenCV using both MSVC and Clang. 
 
 Please install the following tools required for both methods.
 
@@ -52,7 +53,7 @@ The instructions were tested with the version 3.28.1
 There is currently no Arm version of Git. Install the 64-bit x86 version.
 {{% /notice %}}
 
-Follow the link to intall the required tools for a method using MSVC.
+Follow the link to install the required tools for a method using MSVC.
 
 * [Visual Studio 2022 or higher](/install-guides/vs-woa). 
 
@@ -62,7 +63,7 @@ The instructions were tested with Visual Studio 2022.
 
 To build using Clang, please install the following.
 
-* [LLVM](install-guides/llvm-woa/)
+* [LLVM](/install-guides/llvm-woa/)
 
 {{% notice Note %}}
 The instructions were tested with the version 18.1.8.
