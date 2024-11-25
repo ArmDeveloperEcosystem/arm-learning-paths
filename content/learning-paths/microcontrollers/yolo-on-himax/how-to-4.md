@@ -1,15 +1,12 @@
 ---
 title: Run and view model results
-weight: 3
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-
-## Connect the board with USB cable
-
-Exit the terminal session and connect the module to your host machine using the USB-C cable.
+In this section, you will view a live camera feed with the ML application running.
 
 ## Download the Himax AI web toolkit
 

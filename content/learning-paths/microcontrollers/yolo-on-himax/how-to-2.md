@@ -6,11 +6,11 @@ weight: 3
 layout: learningpathall
 ---
 
-TODO short intro / framing?
+This section will walk you though the process of generating the firmware image file.
 
 ## Clone the Himax project
 
-Himax has set up a repository containing a few examples for the Seeed Grove Vision AI V2 board. By recursively cloning the Himax examples repo, git will include the necessary sub-repositories that have been configured for the project.
+Himax has set up a repository containing a few examples for the Seeed Grove Vision AI V2 board. It contains third-party software and scripts to build and flash the image with the object detection application. By recursively cloning the Himax examples repo, git will include the necessary sub-repositories that have been configured for the project.
 
 ```bash
 git clone --recursive https://github.com/HimaxWiseEyePlus/Seeed_Grove_Vision_AI_Module_V2.git
@@ -19,35 +19,46 @@ cd Seeed_Grove_Vision_AI_Module_V2
 
 ## Compile the firmware
 
-The make build tool is used to compile the source code. This should take up to 10 minutes depending on the number of CPU cores available.
+For the object detection to activate, you need to edit the project's `makefile`, located in the `EPII_CM55M_APP_S` directory.
 
 ```bash
 cd EPII_CM55M_APP_S
+```
+Open the file and scroll down until you find the `APP_TYPE` attribute. Update the value to `tflm_yolov8_od`.
+
+```output
+APP_TYPE = tflm_yolov8_od
+```
+Use the `make` build tool to compile the source code. This should take up to 10 minutes depending on the number of CPU cores available on your host machine. The result is an `.elf` file written to the directory below.
+
+```bash
 make clean
 make
 ```
 
 ## Generate the firmware image
 
-The examples repository contains scripts to generate the image.
+Copy the `.elf` file to the `input_case1_secboot` directory.
 
 ```bash
 cd ../we2_image_gen_local/
 cp ../EPII_CM55M_APP_S/obj_epii_evb_icv30_bdv10/gnu_epii_evb_WLCSP65/EPII_CM55M_gnu_epii_evb_WLCSP65_s.elf input_case1_secboot/
 ```
+The examples repository contains scripts to generate the image. Run the script corresponding to the OS of your host machine.
 
-## Linux
+### Linux
 
 ```bash
 ./we2_local_image_gen project_case1_blp_wlcsp.json
 ```
 
-## macOS
+### macOS
 ```console
 ./we2_local_image_gen_macOS_arm64 project_case1_blp_wlcsp.json
 ```
 
 Your terminal output should end with the following.
+
 ```output
 Output image: output_case1_sec_wlcsp/output.img
 Output image: output_case1_sec_wlcsp/output.img

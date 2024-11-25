@@ -26,17 +26,30 @@ You should see an output like the following.
 Python 3.12.7
 ```
 
-Install `pip` with the following commands, and check the output to verify it's installed correctly.
+Install `pip` and `venv` with the following commands.
 
 ```bash
 sudo apt update
-sudo apt install python3-pip -y
+sudo apt install python3-pip python3-venv -y
+```
+
+check the output to verify `pip` is installed correctly.
+```
 pip3 --version
 ```
 
 ```output
 pip 24.2 from /<path-to>/pip (python 3.12)
 ```
+
+It is considered good practice to manage `pip` packages through a virtual environment. Create one with the steps below.
+
+```bash
+python3 -m venv $HOME/yolo-venv
+source $HOME/yolo-venv/bin/activate
+```
+
+Your terminal displays `(yolo-venv)` in the prompt indicating the virtual environment is active.
 
 You will need to have the git version control system installed. Run the command below to verify that git is installed on your system.
 
@@ -98,7 +111,7 @@ export PATH="$HOME/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/:$PATH"
 cd $HOME
 wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.tar.xz
 tar -xvf arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.tar.xz
-export PATH="$HOME/code/tmp/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/:$PATH"
+export PATH="$HOME/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/:$PATH"
 ```
 
 {{% notice %}}

@@ -6,7 +6,7 @@ minutes_to_complete: 90
 who_is_this_for: This is an introduction topic for beginners on how to run a computer vision application on an embedded device from Himax. This example uses an off-the-shelf Himax WiseEye2 module which is based on the Arm Cortex-M55 and Ethos-U55.
 
 learning_objectives:
-    - Run a you-only-look-once (YOLO) computer vision model on the edge device
+    - Run a you-only-look-once (YOLO) object detection model on the edge device
     - Build the Himax Software Development Kit (SDK) and generate the firmware image file
     - Update the firmware on the edge device (Himax WiseEye2)
 

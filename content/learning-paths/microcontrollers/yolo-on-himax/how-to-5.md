@@ -1,17 +1,14 @@
 ---
 title: Object detection and additional models
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-TODO some more intro here, and showing how to test the model
-Also double check this section
+There are other computer vision applications to try. In this section, you will re-flash the module with a different one and check the results.
 
 ## Modify the Makefile
-
-TODO: why are we doing this?
 
 Change the directory to the where the Makefile is located. If you cloned the repository to a different location, replace $HOME with the path.
 
@@ -19,8 +16,7 @@ Change the directory to the where the Makefile is located. If you cloned the rep
 cd $HOME/Seeed_Grove_Vision_AI_Module_V2/EPII_CM55M_APP_S/
 ```
 
-Modify the `APP_TYPE` field in the Makefile from the default value of `allon_sensor_tflm` to one of the values in the table below
-
+The table shows the different options available to use with the web toolkit. Modify the `APP_TYPE` field in the Makefile to one of the values in the table.
 
 |APP_TYPE =|Description|
 |---|---|
@@ -28,11 +24,22 @@ Modify the `APP_TYPE` field in the Makefile from the default value of `allon_sen
 |tflm_folov8_pose|Pose detection|
 |tflm_fd_fm|Face detection|
 
+
 ## Regenerate the firmware image
 
-Go back to the [Flash firmware onto the microcontroller](/learning-paths/microcontrollers/yolo-on-himax/how-to-3/) section and run the python command to regenerate the firmware image.
+Now you can run `make` to re-generate the `.elf` file.
 
-The images below are examples images from the model.
+```bash
+make clean
+make
+```
+Use the command from [Flash firmware onto the microcontroller](/learning-paths/microcontrollers/yolo-on-himax/how-to-3/) section to run re-generate the firmware image.
+
+```bash
+python xmodem\xmodem_send.py --port=<COM port> --baudrate=921600 --protocol=xmodem --file=we2_image_gen_local\output_case1_sec_wlcsp\output.img
+```
+
+The images below are captured images from the models run in the toolkit.
 
 ### Objection detection
 ![object_detection](./object_detection.jpg)
