@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Build OpenCV with Clang
+## How do I build OpenCV with Clang?
 
-### Clone OpenCV repo
+### Clone the OpenCV repository
 
 Open up a Windows Powershell and checkout the source tree:
 
@@ -19,12 +19,14 @@ git checkout tags/4.10.0
 ```
 
 {{% notice Note %}}
-You might be able to use a later version. These steps have been tested with the version 4.10.0.
+You might be able to use a later version, but these steps have been tested with the version 4.10.0.
 {{% /notice %}}
 
 ### Pre-build configuration
 
-Here, you will use CMake from the command line. First, run the following command to run the pre-build configuration. 
+You can use CMake from the command line. 
+
+First, run the following command to run the pre-build configuration. 
 
 ```bash
 mkdir build_clang
@@ -53,7 +55,7 @@ The given options specify the following:
 - The source code is located one level above the current directory.
 - The build will be performed in the current directory.
 - The Clang compiler will be used as the compiler.
-- The built library is generated as a single file that includes all of OpenCV's functionality.
+- The compiled library is generated as a single file that includes all of OpenCV's functionality.
 - Unnecessary options have been disabled, assuming processing on Arm CPUs.
 
 &nbsp;
@@ -98,7 +100,7 @@ If the configuration is successful, a message similar to the following should be
 
 ### Build and install
 
-Now run the following command to build and install:
+Run the following commands to build and install OpenCV:
 
 ```bash
 ninja
@@ -106,12 +108,12 @@ ninja install
 ```
 
 {{% notice Note %}}
-The build takes approximately 25 mins on Lenovo X13s
+The build takes approximately 25 mins on a Lenovo X13s
 {{% /notice %}}
 
 &nbsp;
 
-When the build and the install is complete, confirm the shared library have been created:
+When the build and the install steps are complete, confirm the shared library has been created by inspecting the results in the `install/bin` directory:
 
 ```bash { output_lines = "2-11" }
 ls ./install/bin
@@ -127,6 +129,8 @@ Mode                 LastWriteTime         Length Name
 -a----        08/11/2024     09:50       20207104 opencv_world4100.dll
 ```
 
+Also inspect the  `install/lib` directory:
+
 ```bash { output_lines = "2-9" }
 ls ./install/lib
     Directory: C:\Users\username\work\opencv\build_clang\install\lib
@@ -141,7 +145,9 @@ Mode                 LastWriteTime         Length Name
 
 &nbsp;
 
-`opencv_world<version>.lib/dll` will be the library used by your application. Once the library files are correctly generated, run the following command to ensure there are no errors.
+The library used in your application is `opencv_world<version>.lib/dll`. 
+
+Once the library files are correctly generated, run the following command to ensure there are no errors.
 
 ```bash { output_lines = "2" }
 ./install/bin/opencv_version.exe
@@ -152,11 +158,11 @@ Mode                 LastWriteTime         Length Name
 
 ## Build OpenCV Applications
 
-Once the OpenCV library has been successfully built, the next step is to link it to a simple application and try using it.
+Once the OpenCV library has been successfully created, you can create a simple application and try using it.
 
 ### Prepare a application program
 
-First, save the following C++ program as `test_opencv.cpp` in an appropriate location. Here, it is assumed that the file is saved under the `build_clang` directory.
+First, use a text editor to save the following C++ program as `test_opencv.cpp` in the `build_clang` directory.
 
 ```cpp
 #include <opencv2/opencv.hpp>
@@ -174,11 +180,12 @@ int main() {
 }
 ```
 
-This program is a simple example that uses OpenCV's functionality to create a 100x100 black image, draw a blue circle on it, and save it as a file.
+This program is a simple example that uses OpenCV to create a 100x100 black image, draw a blue circle on it, and save it as a file.
 
 ### Compile the program
 
-Now, let's compile this code using the command below. 
+Compile the code using the command below: 
+
 ```bash
 clang++ .\test_opencv.cpp -o test_opencv.exe -I.\install\include -L.\install\lib -lopencv_world4100
 ```
@@ -191,7 +198,7 @@ The given options specify the following:
 
 ### Run the program
 
-Now, let's run it. To run this executable, you need to ensure that the directory containing the dynamic libraries (DLLs) is added to the `PATH` environment variable, or place the DLLs in the same location as the executable.
+To run the executable, you need to ensure that the directory containing the dynamic libraries (DLLs) is added to the `PATH` environment variable, or place the DLLs in the same location as the executable.
 
 ```bash
 .\test_opencv.exe
@@ -205,9 +212,10 @@ $env:PATH = "./install/bin;" + $env:PATH
 ```
 {{% /notice %}}
 
-When you execute the command, it should finish quickly, and `test_image.png` should be generated. If the image file looks like the one shown below, it means you've succeeded.
+When you execute the command, it will finish quickly, and `test_image.png` is generated. 
+
+Open the image file, it should look like the example shown below.
 
 ![test_image pic](test_image.png "test_image.png")
 
-
-Congratulations! You are now ready to create your own OpenCV applications.
+Congratulations! You are now ready to create your own OpenCV applications using Clang.

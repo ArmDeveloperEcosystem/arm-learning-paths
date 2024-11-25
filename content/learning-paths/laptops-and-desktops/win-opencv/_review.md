@@ -23,7 +23,7 @@ review:
                
     - questions:
         question: >
-            Clang is a compiler that is part of the LLVM project, known for cross-platform support.
+            Clang is a compiler that is part of the LLVM project, known for its cross-platform support.
         answers:
             - "True"
             - "False"

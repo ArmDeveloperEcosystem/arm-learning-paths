@@ -5,12 +5,12 @@ recommended_path: /learning-paths/laptops-and-desktops/win_forms/
 
 further_reading:
     - resource:
-        title: Arm Kleidi Libraries
-        link: https://www.arm.com/products/development-tools/embedded-and-software/kleidi-libraries
-        type: website
-    - resource:
         title: OpenCV website
         link: https://opencv.org/
+        type: website
+    - resource:
+        title: Arm Kleidi Libraries
+        link: https://www.arm.com/products/development-tools/embedded-and-software/kleidi-libraries
         type: website
     - resource:
         title: Evolution of SIMD architecture with SVE2 
