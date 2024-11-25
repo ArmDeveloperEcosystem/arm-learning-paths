@@ -13,4 +13,4 @@ For example, to port software written using Intel intrinsics, such as SSE/AVX/AV
 
 Porting the code between architectures can increase development time and introduce the risk of errors. Currently, developers rely on ISA documentation and must manually search across various vendor platforms such as [Arm Developer](https://developer.arm.com/architectures/instruction-sets/intrinsics/) and [Intel Intrinsics Guide](https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html) to find equivalent instructions.
 
-[SIMD.info](https://simd.info) aims to solve this problem by helping you find equivalent instructions and providing a more streamlined way to adapt your code for different architectures.
+[SIMD.info](https://simd.info) aims to solve this problem by helping developers find equivalent instructions and providing a streamlined way to adapt code for different architectures.

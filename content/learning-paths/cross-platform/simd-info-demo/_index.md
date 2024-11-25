@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 30
 
-who_is_this_for: This is for software developers interested in porting SIMD code across Arm platforms.
+who_is_this_for: This Learning Path is for software developers who are interested in porting SIMD code across Arm platforms.
 
 learning_objectives: 
     - Describe how to use SIMD.info’s tools and features, such as navigation, search, and comparison, to simplify the process of finding equivalent SIMD intrinsics between architectures and improving code portability.
