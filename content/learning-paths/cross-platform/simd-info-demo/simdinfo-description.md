@@ -20,9 +20,9 @@ For each intrinsic, SIMD.info provides the following information:
 * Assembly Instruction: the corresponding assembly instruction used by the intrinsic.
 * Notes: any additional notes or caveats about the intrinsic.
 * Architecture: a list of architectures that support the intrinsic.
-* Link(s) to Official Documentation
+* Link(s) to official documentation.
 
-This detailed information ensures you have all the necessary resources to effectively use and port SIMD instructions across different platforms. Each feature is designed to simplify navigation, improve the search for equivalent instructions, and foster a collaborative environment for knowledge-sharing.
+This detailed information ensures that you have all the necessary resources to effectively use and port SIMD instructions across different platforms. Each feature is designed to simplify navigation, improve the search for equivalent instructions, and foster a collaborative environment for knowledge-sharing.
 
 - **Tree-based navigation:** **SIMD.info** uses a clear, hierarchical layout to organize instructions. It categorizes instructions into broad groups like **Arithmetic**, which are further divided into specific subcategories such as **Vector Add** and **Vector Subtract**. This organized structure enables you to browse through SIMD instruction sets across various platforms, allowing you to efficiently find and access the exact instructions you need.
 Here is an example of the tree structure:
@@ -46,10 +46,10 @@ Here is an example of the tree structure:
         - **Bit Clear** 
         - **XOR**
 
-- **Advanced search functionality:** With its robust search engine, **SIMD.info** allows you to either search for a specific intrinsic (e.g. `vaddq_f64`) or enter more general terms (e.g. *How to add 2 vectors*), and it will return a list of the corresponding intrinsics. You can also filter results based on the specific engine you're working with, such as **NEON**, **SSE4.2**, **AVX**, **AVX512**, **VSX**. This functionality streamlines the process of finding the right commands tailored to your needs.
+- **Advanced search functionality:** With its robust search engine, **SIMD.info** allows you to either search for a specific intrinsic (for example `vaddq_f64`) or enter more general terms (for example *How to add 2 vectors*), and it returns a list of the corresponding intrinsics. You can also filter results based on the specific engine you're working with, such as **NEON**, **SSE4.2**, **AVX**, **AVX512**, **VSX**. This functionality streamlines the process of finding the right commands tailored to your needs.
 
-- **Comparison tools:** This feature lets you directly compare SIMD instructions from different (or the same) platforms side by side, offering a clear view of the similarities and differences. It’s a very helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
+- **Comparison tools:** This feature lets you directly compare SIMD instructions from different (or the same) platforms side by side, offering a clear view of the similarities and differences. It’s a helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
 
 - **Discussion forum (like StackOverflow):** The integrated discussion forum, powered by **[discuss](https://disqus.com/)** allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support, fostering collaboration and knowledge-sharing among SIMD developers. Imagine something like **StackOverflow** but specific to SIMD intrinsics.
 
-You can now learn how to use these features in the context of an actual example.
+Now let's look at these features in the context of a real example.
