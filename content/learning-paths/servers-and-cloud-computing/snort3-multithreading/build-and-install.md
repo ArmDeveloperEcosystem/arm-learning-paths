@@ -49,7 +49,9 @@ downlaodPackages()
             echo "File $fname already exists. Skipping download."
         else
             # Download the file using wget
+
 	        echo "File $fname not found. Downloading..."
+
             wget -O "$fpath" "$url"
             if [[ $? -eq 0 ]]; then
                 echo "$fname download complete"
@@ -80,20 +82,18 @@ installPackages()
         echo "Error: OS information detection failed"
         exit 1
     fi
+
     apt-get update
     apt-get install -y $LIST_OF_APPS
   
     # required to get optimised result from Snort3
     downlaodPackages
-  
     mkdir -p ${ROOT_DIR}/snort3
     tar -xzf 3.3.5.0.tar.gz --directory  ${ROOT_DIR}/snort3 --strip-components=1
-  
     echo "@@@@@@@@@@@@@@@@@@     Installing Snort3 Dependencies ...     @@@@@@@@@@@@@@@@@@@@"
     mkdir -p ${SNORT_DIR}
     mkdir -p $SNORT_DIR/pcre
     tar -xvf pcre-8.45.tar.gz --directory $SNORT_DIR/pcre --strip-components=1
-    
     #vector scan
     mkdir -p $SNORT_DIR/vectorscan
     tar -xzvf 5.4.11.tar.gz --directory $SNORT_DIR/vectorscan --strip-components=1
@@ -101,7 +101,7 @@ installPackages()
     #libdaq
     mkdir -p $SNORT_DIR/libdaq
     tar -xvzf v3.0.16.tar.gz --directory $SNORT_DIR/libdaq --strip-components=1
-
+    
     #required to get optimized result from vectorscan
     mkdir -p $SNORT_DIR/boost
     tar -xvf boost_1_86_0.tar.gz -C $SNORT_DIR/boost --strip-components=1
@@ -117,7 +117,6 @@ installPackages()
     echo "@@@@@@@@@@@@@@@@@@     Packages installed     @@@@@@@@@@@@@@@@@@@@"
 }
 
-#compile and install the packages
 buildInstall()
 {
     echo "@@@@@@@@@@@@@@@@@@     Build & Installation ... Start    @@@@@@@@@@@@@@@@@@@@"
@@ -169,14 +168,15 @@ SNORT_DIR=${ROOT_DIR}/snort3/dependencies
 set -e
 
 LIST_OF_APPS="sudo net-tools build-essential manpages-dev libnuma-dev python3
-              python3-venv cmake meson pkg-config python3-pyelftools lshw
-              util-linux iperf3 nginx libboost-all-dev ragel libsqlite3-dev
-              libpcap-dev libdumbnet-dev libluajit-5.1-dev zlib1g-dev
-              libhwloc-dev liblzma-dev libssl-dev libgoogle-perftools-dev
-              libpcre++-dev flex openssl libunwind-dev autotools-dev 
+                python3-venv cmake meson pkg-config python3-pyelftools lshw
+                util-linux iperf3 nginx libboost-all-dev ragel libsqlite3-dev
+                libpcap-dev libdumbnet-dev libluajit-5.1-dev zlib1g-dev
+                libhwloc-dev liblzma-dev libssl-dev libgoogle-perftools-dev
+                libpcre++-dev flex openssl libunwind-dev autotools-dev 
 	            libhugetlbfs-bin autoconf libmnl-dev bats wget unzip iproute2 
 	            git pkg-config cpputest libtool bison libcmocka-dev 
 	            libnetfilter-queue-dev ethtool"
+
 # nprc should be a positive integer)
 if ! [[ "$NUM_JOBS" =~ ^[0-9]+$ ]] || [[ "$NUM_JOBS" -le 0 ]]; then
     echo "Error: nprc should be a positive integer."
