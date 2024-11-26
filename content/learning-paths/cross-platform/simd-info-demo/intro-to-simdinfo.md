@@ -9,7 +9,7 @@ layout: learningpathall
 ### The Challenge of SIMD Code Portability
 SIMD instructions are designed to improve performance by executing the same operation on multiple data elements in parallel. One of the biggest challenges developers face when working with SIMD code is making it portable across different platforms.  
 
-Each architecture has its own set of SIMD instructions, which makes it difficult to port code without major changes to either the code itelf, or the algorithm, or both.
+Each architecture has its own set of SIMD instructions, which makes it difficult to port code without major changes to either the code itself, or the algorithm, or both.
 
 For example, to port software written using Intel intrinsics, such as SSE/AVX/AVX512, to Arm Neon, you must address issues with data handling with the different instruction sets.
 

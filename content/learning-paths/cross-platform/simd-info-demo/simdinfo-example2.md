@@ -8,11 +8,13 @@ layout: learningpathall
 
 ### Handling intrinsics without direct equivalents
 
-During the porting process, you will observe that certain instructions translate seamlessly. However, there are cases where direct equivalents for some intrinsics may not be readily available across architectures. For example, the [**`_mm_madd_epi16`**](https://simd.info/c_intrinsic/_mm_madd_epi16/) intrinsic from **SSE2**, which performs multiplication of 16-bit signed integer elements in a vector and then does a pairwise addition of adjacent elements increasing the element width, does not have a direct counterpart in **NEON**. However it can be emulated using another intrinsic. Similarly its 256 and 512-bit counterparts, [**`_mm256_madd_epi16`**](https://simd.info/c_intrinsic/_mm256_madd_epi16/) and [**`_mm512_madd_epi16`**](https://simd.info/c_intrinsic/_mm512_madd_epi16/) can be emulated by a sequence of instructions, but here you will see the 128-bit variant.
+During the porting process, you can see that certain instructions translate seamlessly. However, there are cases where direct equivalents for some intrinsics might not be readily available across architectures. 
 
-You may already know the equivalent operations for this particular intrinsic, but let's assume you don't. In this usecase, reading the **`_mm_madd_epi16`** on the **SIMD.info** might indicate that a key characteristic of the instruction involved is the *widening* of the result elements, from 16-bit to 32-bit signed integers. Unfortunately, that is not the case, as this particular instruction does not actually increase the size of the element holding the result values. You will see how that effects the result in the example.
+For example, the [**`_mm_madd_epi16`**](https://simd.info/c_intrinsic/_mm_madd_epi16/) intrinsic from SSE2, which performs multiplication of 16-bit signed integer elements in a vector and then does a pairwise addition of adjacent elements increasing the element width, does not have a direct counterpart in NEON. However it can be emulated using another intrinsic. Similarly its 256 and 512-bit counterparts, [**`_mm256_madd_epi16`**](https://simd.info/c_intrinsic/_mm256_madd_epi16/) and [**`_mm512_madd_epi16`**](https://simd.info/c_intrinsic/_mm512_madd_epi16/), can be emulated by a sequence of instructions, but here you will see the 128-bit variant.
 
-Consider the following code for **SSE2**. Create a new file on your x86_64 Linux machine named `_mm_madd_epi16_test.c` with the contents shown below:
+You might already know the equivalent operations for this particular intrinsic, but let's assume that you don't. In this particular use case, reading **`_mm_madd_epi16`** on **SIMD.info** might indicate that a key characteristic of the instruction involved is the widening of the result elements, from 16-bit to 32-bit signed integers. Unfortunately, this is not the case. This particular instruction does not increase the size of the element holding the result values. You will see how this affects the result in the example.
+
+Consider the following code for SSE2. Create a new file on your x86_64 Linux machine named `_mm_madd_epi16_test.c`, and populate with the contents as shown below:
 
 ```C
 #include <stdint.h>
@@ -44,7 +46,7 @@ int main() {
 }
 ```
 
-Compile the code as follows on the x86_64 system (no extra flags required as **SSE2** is assumed by default on all 64-bit x86 systems):
+Compile the code as follows on the x86_64 system. No extra flags are required as **SSE2** is assumed by default on all 64-bit x86 systems:
 ```bash
 gcc -O3 _mm_madd_epi16_test.c -o  _mm_madd_epi16_test
 ```
@@ -128,5 +130,5 @@ vpaddq_s16(a, b)              : a4d8 56b8 2198  578    0    0    0    0
 final                         : a4d8    0 56b8    0 2198    0  578    0
 ```
 
-As you can see the results of both executions on different architectures match. You were able to use **SIMD.info** to help with the translation of complex intrinsics between different SIMD architectures.
+As you can see the results of both executions on different architectures match. You used SIMD.info to help with the translation of complex intrinsics between different SIMD architectures.
 

@@ -60,7 +60,7 @@ The program does the following:
 * Multiplies the result with one of the vectors.
 * Takes the square root of the multiplication result.
 
-Compile the code on your Linux x86_64 system that supports **SSE4.2**:
+Compile the code on your Linux x86_64 system that supports SSE4.2:
 
 ```bash
 gcc -O3 calculation_sse.c -o calculation_sse -msse4.2

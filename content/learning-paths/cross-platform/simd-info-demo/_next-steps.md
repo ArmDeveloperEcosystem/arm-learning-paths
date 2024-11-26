@@ -1,7 +1,7 @@
 ---
 next_step_guidance: You should explore **SIMD.info** more and find out porting opportunities between different SIMD engines.
 
-recommended_path: /learning-paths/cross-platform/
+recommended_path: /learning-paths/cross-platform/vectorization-friendly-data-layout/
 
 further_reading:
     - resource:
