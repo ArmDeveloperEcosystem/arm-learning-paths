@@ -9,7 +9,7 @@ layout: learningpathall
 #### SIMD.info categories of information
 **[SIMD.info](https://simd.info/)** offers a variety of powerful tools to enable developers to work more efficiently with SIMD code across different architectures. 
 
-With a database of over 10,000 intrinsics, it provides detailed information to support effective SIMD development.
+With a database of over 10,000 intrinsics, it provides valuable detailed information to support effective SIMD development.
 
 For each intrinsic, SIMD.info provides information in the following categories:
 
@@ -27,12 +27,12 @@ For each intrinsic, SIMD.info provides information in the following categories:
 
 * Architecture: a list of architecture that supports the intrinsic.
 
-* Link(s) to official documentation.
+* Links to official documentation.
 
-This detailed information ensures that you have all the necessary resources to effectively use and port SIMD instructions across different platforms. Each feature is designed to simplify navigation, improve the search for equivalent instructions, and foster a collaborative environment for knowledge-sharing.
+This information ensures that you have all the necessary resources to effectively use and port SIMD instructions across different platforms. Each feature is designed to simplify navigation, improve the search for equivalent instructions, and foster a collaborative environment for knowledge-sharing.
 
 #### Tree-based navigation
-SIMD.info uses a clear, hierarchical layout to present the instructions. It categorizes instructions into broad groups such as **Arithmetic**, which are further divided into specific subcategories such as **Vector Add**, and **Vector Subtract**. 
+SIMD.info uses a clear, hierarchical layout to present the instructions. It categorizes instructions in to high-level groups such as **Arithmetic**, which are then further divided into specific subcategories such as **Vector Add**, and **Vector Subtract**. 
 
 This organized structure enables you to browse through SIMD instruction sets across various platforms, allowing you to efficiently find and access the instructions that you need. Below is an example of the tree structure:
   
@@ -55,7 +55,9 @@ This organized structure enables you to browse through SIMD instruction sets acr
         - XOR
 
 #### Advanced search functionality
-With its robust search engine, SIMD.info allows you to either search for a specific intrinsic, for example `vaddq_f64`, or enter more general terms, for example "How to add 2 vectors", and it returns a list of the corresponding intrinsics. You can also filter results based on the specific engine you're working with, such as **NEON**, **SSE4.2**, **AVX**, **AVX512**, **VSX**. This functionality streamlines the process of finding the right commands tailored to your needs.
+With its robust search engine, SIMD.info allows you to either search for a specific intrinsic, for example `vaddq_f64`, or enter more general terms, for example "How to add 2 vectors", and it returns a list of the corresponding intrinsics. 
+
+You can also filter results based on the specific engine you're working with, such as **NEON**, **SSE4.2**, **AVX**, **AVX512**, or **VSX**. This functionality streamlines the process of finding the right commands tailored to your needs.
 
 #### Comparison tools
 This feature lets you directly compare SIMD instructions from different, or the same, platforms side by side, offering a clear view of the similarities and differences. It’s a helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
