@@ -8,6 +8,8 @@ layout: learningpathall
 
 ## How do I build OpenCV with Clang?
 
+Follow the steps below to build OpenCV and a test application using the library with the Clang compiler.
+
 ### Clone the OpenCV repository
 
 Open up a Windows Powershell and checkout the source tree:
@@ -198,11 +200,7 @@ The given options specify the following:
 
 ### Run the program
 
-To run the executable, you need to ensure that the directory containing the dynamic libraries (DLLs) is added to the `PATH` environment variable, or place the DLLs in the same location as the executable.
-
-```bash
-.\test_opencv.exe
-```
+To run the executable, you need to ensure that the directory containing the dynamic libraries (DLLs) is added to the `PATH` environment variable, or place the DLLs in the same location as the executable. 
 
 {{% notice Note %}}
 The command below adds the DLL directory to the beginning of the `PATH` environment variable. Since this is a temporary setting, the `PATH` will revert to its original state when the PowerShell session is closed. To set it permanently, you need to use the Windows system settings or the `[Environment]::SetEnvironmentVariable()` method.
@@ -212,7 +210,13 @@ $env:PATH = "./install/bin;" + $env:PATH
 ```
 {{% /notice %}}
 
-When you execute the command, it will finish quickly, and `test_image.png` is generated. 
+Run the test program:
+
+```bash
+.\test_opencv.exe
+```
+
+When you execute the command, it will finish quickly, and `test_image.png` is generated. If you don't have the DLL directory in your search path, the program appears to run, but no `test_image.png` is generated. 
 
 Open the image file, it should look like the example shown below.
 

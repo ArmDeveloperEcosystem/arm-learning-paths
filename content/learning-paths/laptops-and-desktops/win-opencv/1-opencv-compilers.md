@@ -75,6 +75,6 @@ The instructions were tested with the version 18.1.8.
 The instructions were tested with version 1.11.1
 {{% /notice %}}
 
-You use the LLVM Clang and the Ninja generator to build. Set PATH to the paths to your LLVM and Ninja install.
+Make sure LLVM Clang and Ninja are in your search path. If they are not, you can use Windows Control Panel to set the PATH environment variable.
 
 You now have the required development tools installed. Please proceed to the page for the compiler you want to build with.
