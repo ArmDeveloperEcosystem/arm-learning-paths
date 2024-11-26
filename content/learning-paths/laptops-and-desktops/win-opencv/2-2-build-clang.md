@@ -12,7 +12,7 @@ Follow the steps below to build OpenCV and a test application using the library 
 
 ### Clone the OpenCV repository
 
-Open up a Windows Powershell and checkout the source tree:
+Open up a Windows PowerShell and checkout the source tree:
 
 ```bash
 git clone https://github.com/opencv/opencv
