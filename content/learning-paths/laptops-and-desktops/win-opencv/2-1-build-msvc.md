@@ -8,6 +8,8 @@ layout: learningpathall
 
 ## How do I build OpenCV with MSVC?
 
+Follow the steps below to build OpenCV and a test application using the library with the MSVC compiler.
+
 ### Clone the OpenCV repository
 
 Open up a Windows PowerShell and checkout the source tree:
@@ -113,7 +115,7 @@ The build takes approximately 25 mins on a Lenovo X13s
 
 When the build and the install steps are complete, confirm the shared library has been created by inspecting the results in the `install/bin` directory:
 
-```bash { output_lines = "2-11" }
+```bash { output_lines = "2-12" }
 ls ./install/x64/vc17/bin
     Directory: C:\Users\username\work\opencv\build_msvc\install\x64\vc17\bin
 Mode                 LastWriteTime         Length Name
