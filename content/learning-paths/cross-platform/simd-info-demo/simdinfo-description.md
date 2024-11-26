@@ -55,7 +55,7 @@ This organized structure enables you to browse through SIMD instruction sets acr
         - XOR
 
 #### Advanced search functionality
-With its robust search engine, SIMD.info allows you to either search for a specific intrinsic, for example `vaddq_f64`, or enter more general terms, for example "How to add 2 vectors", and it returns a list of the corresponding intrinsics. 
+With its robust search engine, SIMD.info allows you to either search for a specific intrinsic, for example `vaddq_f64`, or enter more general terms, for example "How to add 2 vectors," and it returns a list of the corresponding intrinsics. 
 
 You can also filter results based on the specific engine you're working with, such as NEON, SSE4.2, AVX, AVX512, or VSX. This functionality streamlines the process of finding the right commands tailored to your needs.
 
@@ -63,6 +63,6 @@ You can also filter results based on the specific engine you're working with, su
 This feature lets you directly compare SIMD instructions from different, or the same, platforms side by side, offering a clear view of the similarities and differences. It’s a helpful tool for porting code across architectures, as it ensures accuracy and efficiency.
 
 #### Discussion forum 
-The integrated discussion forum, powered by **[discuss](https://disqus.com/)**, allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support. It fosters collaboration and knowledge-sharing among SIMD developers. Imagine something like **[StackOverflow](https://stackoverflow.com/)** but specific to SIMD intrinsics.
+The integrated discussion forum, powered by **[Disqus](https://disqus.com/)**, allows users to ask questions, share insights, and troubleshoot problems together. This community-driven space ensures that you’re never stuck on a complex issue without support. It fosters collaboration and knowledge-sharing among SIMD developers. Imagine something like **[StackOverflow](https://stackoverflow.com/)** but specific to SIMD intrinsics.
 
 Now let's look at these features in the context of a real example.

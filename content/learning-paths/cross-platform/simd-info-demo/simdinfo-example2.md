@@ -63,7 +63,7 @@ b                             :   a0   8c   78   64   50   3c   28   14
 _mm_madd_epi16(a, b)          : a4d8    0 56b8    0 2198    0  578    0
 ```
 
-You will note that the result of the first element is a negative number, even though you added 2 positive results (`130*140` and `150*160`). This is because the result of the addition has to occupy a 16-bit signed integer element, and when the first is larger we have the effect of an negative overflow. The result is the same in binary arithmetic, but when interpreted into a signed integer, it turns the number into a negative.
+You will note that the result of the first element is a negative number, even though you added 2 positive results (`130*140` and `150*160`). This is because the result of the addition has to occupy a 16-bit signed integer element, and when the first is larger we have the effect of a negative overflow. The result is the same in binary arithmetic, but when interpreted into a signed integer, it turns the number into a negative.
 
 The rest of the values are as expected. Notice how each pair has a zero element next to it. The results are correct, but they are not in the correct order. In this example, you used **`vmovl`** to zero-extend values, which achieves the correct order with zero elements in place. While both **`vmovl`** and **`zip`** can be used for this purpose, **`vmovl`** was chosen in this implementation. For more details, see the Arm Software Optimization Guides, such as the [Neoverse V2 guide](https://developer.arm.com/documentation/109898/latest/).
 
