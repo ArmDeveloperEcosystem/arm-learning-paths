@@ -64,7 +64,7 @@ There are other Linux distributions available in the Microsoft Store. Make sure 
 
 Another way to install Linux distributions is using the WSL command. 
 
-Open a Windows Powershell or Command Prompt and list the distributions available:
+Open a Windows PowerShell or Command Prompt and list the distributions available:
 
 ```cmd 
 wsl --list --online
