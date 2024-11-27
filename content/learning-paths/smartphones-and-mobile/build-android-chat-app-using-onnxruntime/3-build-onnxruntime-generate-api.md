@@ -18,7 +18,7 @@ You can learn more by reading the [ONNX Runtime generate() API page](https://onn
 
 
 ### Clone onnxruntime-genai repo
-Within your Windows Powershell prompt, checkout the source repo:
+Within your Windows PowerShell prompt, checkout the source repo:
 
 ```bash
 C:\Users\$env:USERNAME

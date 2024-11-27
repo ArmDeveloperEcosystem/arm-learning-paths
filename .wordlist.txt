@@ -577,7 +577,6 @@ Pmod
 PostgerSQL
 PostgrSQL
 Postgres
-Powershell
 Prefetching
 Prereqs
 ProjectExplorer
