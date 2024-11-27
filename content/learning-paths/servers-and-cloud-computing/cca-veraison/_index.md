@@ -14,22 +14,21 @@ learning_objectives:
 
 
 prerequisites:
-    - Aarc64 or x86 computer running Linux. You can use a server instance from the cloud service provider of your choice.
+    - An Arm-based or x86 computer running Ubuntu. You can use a server instance from the cloud service provider of your choice.
 
 
 author_primary: Paul Howard
 
 ### Tags
 skilllevels: Introductory
-subjects: PLACEHOLDER SUBJECT
+subjects: Performance and Architecture
 armips:
-    - PLACEHOLDER IP A
-    - PLACEHOLDER IP B
-tools_software_languages:
-    - PLACEHOLDER TOOL OR SOFTWARE C
-    - PLACEHOLDER TOOL OR SOFTWARE D
+    - Cortex-A
 operatingsystems:
     - Linux
+tools_software_languages:
+    - CCA
+
 
 
 ### FIXED, DO NOT MODIFY

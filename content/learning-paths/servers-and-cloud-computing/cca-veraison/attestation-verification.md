@@ -1,6 +1,6 @@
 ---
 title: Use the verification service
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -9,7 +9,7 @@ layout: learningpathall
 ## Attestation Verification Service for Pre-Silicon CCA Platforms
 Linaro provides an attestation verifier service for pre-silicon CCA platforms, such as the Fixed Virtual Platform (FVP). This service is available publicly and is hosted on Linaro infrastructure. This verification service can be used to verify CCA attestation tokens that come from emulated Arm platforms, including the example token that you have been using in this exercise.
 
-Linaro’s verification service is implemented using components from the open source Veraison project, which was introduced in the overview step.
+Linaro’s verification service is implemented using components from the open source Veraison project.
 
 The URL for reaching this experimental verifier service is http://veraison.test.linaro.org:8080
 
@@ -49,30 +49,27 @@ This is a simple call to query the well-known characteristics of the verificatio
 }
 ```
 
-This JSON response contains all the information that you need to use the verification service.
+This JSON response contains all the information that you need to use the verification service. Review the different JSON properties.
 
-The `ear-verification-key` is the cryptographic key that you will use later to verify the results that are returned by the service.
+- The `ear-verification-key` is the cryptographic key that you will use later to verify the results that are returned by the service.
 
-The `media-types` entry provides the list of the different attestation data formats that the verification service supports. If you look down this list, you will find an entry for the CCA profile of the EAT format. It is the fourth entry in the list. This tells us that the service is capable of processing Arm CCA attestation tokens.
+- The `media-types` entry provides the list of the different attestation data formats that the verification service supports. If you look down this list, you will find an entry for the CCA profile of the EAT format. It is the fourth entry in the list. This tells us that the service is capable of processing Arm CCA attestation tokens.
 
-The `api-endpoints` entry describes the set of RESTful APIs that are supported by the service. When verifying an attestation token, you will use the challenge-response API.
+- The `api-endpoints` entry describes the set of RESTful APIs that are supported by the service. When verifying an attestation token, you will use the challenge-response API.
 
 If you can reach the verification service, you are now ready to use it to evaluate the CCA example token.
 
 ## Save the Public Key of the Verification Service
-One of the properties that was returned in the previous step was the public key of the verification service. This key will be needed later to check the signature on the attestation results.
 
-All that is needed in this step is to copy the contents of the `ear-verification-key` field from the previous step and save it to a separate JSON file.
+One of the properties that was returned in the previous step was the public key of the verification service. This key will be needed later to check the signature on the attestation results. All that is needed in this step is to copy the contents of the `ear-verification-key` field from the previous step and save it to a separate JSON file.
 
-The easiest way to do this is to use the jq utility, which is a popular command-line tool that can be used to parse and manipulate JSON data. You may have this tool installed already. But, in case you don’t, you can install it using your local package manager, for instance:
+The easiest way to do this is to use the jq utility, which is a popular command-line tool that can be used to parse and manipulate JSON data. You can install it using your local package manager, for instance:
 
 ```bash
 sudo apt install jq
 ```
 
-More options for installing the jq utility are available on the jq homepage.
-
-Now that you have `jq` installed, you can save the public key by repeating the curl command from the previous step and using `jq` to filter the response down to just the public key part. Save it into a file called `pkey.json`. You can store it in the same directory where you downloaded the CCA example token, so remember to substitute this directory path when you run the command below:
+You can save the public key by repeating the curl command from the previous step and use `jq` to filter the response down to just the public key part. Save it into a file called `pkey.json`:
 
 ```bash
 curl http://veraison.test.linaro.org:8080/.well-known/veraison/verification | jq ‘.”ear-verification-key”’ > $HOME/pkey.json
@@ -80,15 +77,13 @@ curl http://veraison.test.linaro.org:8080/.well-known/veraison/verification | jq
 You have now saved the public key of the verification service. You are now ready to submit the CCA example attestation token to the service and get an attestation result.
 
 ## Submit the CCA Example Token to the Verification Service
-To submit the example CCA attestation token to the verification service, you will need to use the `evcli` tool once again.
-
-First, configure the correct API endpoint for the Linaro verifier service:
+To submit the example CCA attestation token to the verification service, you will need to use the `evcli` tool once again. First, configure the correct API endpoint for the Linaro verifier service:
 
 ```bash
 export API_SERVER=http://veraison.test.linaro.org:8080/challenge-response/v1/newSession
 ```
 
-Now submit the token using the following command, once again substituting the directory path with the correct location for your environment. The output of this command is an attestation result, which will be saved in a file called attestation_result.jwt in the same directory as the example token:
+Now submit the token using the following command. The output of this command is an attestation result, which will be saved in a file called `attestation_result.jwt`:
 
 ```bash
 ./evcli cca verify-as relying-party --token $HOME/cca_example_token.cbor > $HOME/attestation_result.jwt

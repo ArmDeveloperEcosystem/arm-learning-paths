@@ -1,5 +1,5 @@
 ---
-next_step_guidance: Now that you have gained some hands-on experience with the data formats and workflows associated with attestation for confidential computing, you may wish to explore some additional resources and specifications, which go into greater detail on some of the individual aspects. 
+next_step_guidance: Now that you have gained some hands-on experience with the data formats and workflows associated with attestation for confidential computing, you may wish to explore some additional resources and specifications, which go into greater detail on some of the individual aspects.
 
 recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
 

@@ -1,6 +1,6 @@
 ---
-title: CCA Attestation
-weight: 5
+title: Evaluate results
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,10 +8,7 @@ layout: learningpathall
 
 ## Build the ARC Tool
 
-TODO: move to setup?
-You are already familiar with the evcli tool, which can be used to process attestation tokens. There is a very similar tool called arc, which can be used to process attestation results.
-
-The arc tool is also part of the Veraison project. Change into a fresh directory and clone its repository as follows:
+You are already familiar with the evcli tool, which can be used to process attestation tokens. There is a very similar tool called `arc`, which can be used to process attestation results. The arc tool is also part of the Veraison project. Clone its repository as follows:
 
 ```bash
 git clone https://github.com/veraison/ear.git
@@ -64,7 +61,7 @@ Sourced Data [none]: no claim being made
 
 This part of the output shows how the verification service has compared the attestation token against its expectations of a trustworthy system. It also shows what conclusions were drawn from that comparison.
 
-It is important to understand that an attestation result is not a simple yes/no answer to the question of whether the system is trustworthy. Instead, it is a set of data points (known as _trustworthiness_ vectors). Each data point shows how a particular aspect of the system compares against the expectations set by the verification service. Each point of comparison can lead to one of the following results:
+It is important to understand that an attestation result is not a simple yes/no answer to the question of whether the system is trustworthy. Instead, it is a set of data points (known as _trustworthiness vectors_). Each data point shows how a particular aspect of the system compares against the expectations set by the verification service. Each point of comparison can lead to one of the following results:
 
 - __Affirming__. This is the most favourable result. It is given when the evidence in the attestation token shows a good match against the expectations of a trustworthy system.
 - __Warning__. This is a less favourable result. It is given when the attestation token does not show a good match against the expectations of a trustworthy system.
