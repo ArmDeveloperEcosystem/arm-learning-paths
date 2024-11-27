@@ -1,5 +1,5 @@
 ---
-title: Introduction to WebGPU
+title: Overview of WebGPU
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,43 +8,43 @@ layout: learningpathall
 
 ## What is WebGPU?
 
-WebGPU is the successor to WebGL, a well adopted modern API standard for interfacing with GPUs. WebGPU provides better compatibility with modern GPUs, support for general-purpose GPU computations, faster operations, and access to more advanced GPU features. It is designed to provide a _unified access_ to GPUs, agnostic to GPU vendors and operating systems.
+WebGPU is the successor to WebGL, a well-adopted modern API standard for interfacing with GPUs. WebGPU provides better compatibility with modern GPUs, support for general-purpose GPU computations, faster operations, and access to more advanced GPU features. It is designed to provide a _unified access_ to GPUs, agnostic to GPU vendors and operating systems.
 
-WebGPU is a Render Hardware Interface built on top of various backend APIs like Vulkan, DirectX, and Metal (depending on the operating system). 
+WebGPU is a Render Hardware Interface built on top of various backend APIs like Vulkan, DirectX, and Metal - though this depends on the operating system. 
 
 WebGPU is available through web browsers using the webgpu.h header file. 
 
-The high level view of WebGPU is shown below:
+The high-level view of WebGPU is shown below in Figure 1:
 
-![WebGPU high level view #center](images/webgpu_highlevel.png "WebGPU High Level View")
+![Figure 1: WebGPU high level view #center](images/webgpu_highlevel.png "Figure 1: WebGPU High-Level View")
 
 ## What are the benefits of WebGPU?
 
-WebGPU takes into account learnings from older standards like WebGL and OpenGL and provides the following benefits: 
+WebGPU takes into account lessons learned from older standards like WebGL and OpenGL, and provides the following benefits: 
 
-* A reasonable level of abstraction
-* Good performance
-* Cross-platform
-* Backed by W3C standards group
-* Future-proof design
+* A reasonable level of abstraction.
+* Improved performance.
+* Cross-platform functionality.
+* Backing from the W3C standards group.
+* A future-proof design.
 
-WebGPU is a standard and not a true API, so the implementation can be adopted and developed as an interface between native applications developed in any programming language.
+WebGPU is a standard, and not a true API, so the implementation can be adopted and developed as an interface between native applications developed in any programming language.
 
-The performance requirements for web pages is actually the same as for native application.
+The performance requirements for web pages are the same as for native application.
 
 {{% notice Note %}}
 When designing an API for the Web, the two key constraints are portability and privacy. 
 
-The limitations of the API due to privacy considerations can be disabled when using WebGPU as a native API.
+Any limitations of the API caused by privacy settings can be disabled when using WebGPU as a native API.
 {{% /notice %}}
 
 ## What are the benefits of using C++ for WebGPU?
 
 The initial target for WebGPU was JavaScript.  The initial `webgpu.h` header file is written in C. 
 
-This Learning Path uses C++ rather than JavaScript or C because for the following reasons:
+This Learning Path uses C++ rather than JavaScript or C for the following reasons:
 
-* C++ is still the primary language used for high performance graphics applications, such as video games, render engines, and modeling tools.
+* C++ remains the primary language used for high performance graphics applications, such as video games, render engines, and modeling tools.
 * The level of abstraction and control of C++ is well suited for interacting with graphics APIs in general.
 * Graphics programming is a good way to learn more C++.
 
