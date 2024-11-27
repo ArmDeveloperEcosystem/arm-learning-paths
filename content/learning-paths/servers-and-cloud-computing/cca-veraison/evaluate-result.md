@@ -11,6 +11,7 @@ layout: learningpathall
 You are already familiar with the evcli tool, which can be used to process attestation tokens. There is a very similar tool called `arc`, which can be used to process attestation results. The arc tool is also part of the Veraison project. Clone its repository as follows:
 
 ```bash
+cd $HOME
 git clone https://github.com/veraison/ear.git
 ```
 

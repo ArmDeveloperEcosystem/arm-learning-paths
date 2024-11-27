@@ -72,7 +72,7 @@ sudo apt install jq
 You can save the public key by repeating the curl command from the previous step and use `jq` to filter the response down to just the public key part. Save it into a file called `pkey.json`:
 
 ```bash
-curl http://veraison.test.linaro.org:8080/.well-known/veraison/verification | jq ‘.”ear-verification-key”’ > $HOME/pkey.json
+curl -s -N http://veraison.test.linaro.org:8080/.well-known/veraison/verification | jq '."ear-verification-key"' > $HOME/pkey.json
 ```
 You have now saved the public key of the verification service. You are now ready to submit the CCA example attestation token to the service and get an attestation result.
 
@@ -86,8 +86,12 @@ export API_SERVER=http://veraison.test.linaro.org:8080/challenge-response/v1/new
 Now submit the token using the following command. The output of this command is an attestation result, which will be saved in a file called `attestation_result.jwt`:
 
 ```bash
-./evcli cca verify-as relying-party --token $HOME/cca_example_token.cbor > $HOME/attestation_result.jwt
+./evcli cca verify-as relying-party --token $HOME/cca_example_token.cbor | tr -d \" > $HOME/attestation_result.jwt
 ```
-The verification service has now evaluated the token and returned a result, which you have saved.
 
+{{% notice Note%}}
+The `| tr -d \"` is used to remove the double quotes in capturing the output from the `evcli` command.
+{{% /notice %}}
+
+The verification service has now evaluated the token and returned a result, which you have saved.
 The last two steps in this learning path will be about understanding the result data that came back from the verification service.
