@@ -24,11 +24,7 @@ For the object detection to activate, you need to edit the project's `makefile`,
 ```bash
 cd EPII_CM55M_APP_S
 ```
-Open the file and scroll down until you find the `APP_TYPE` attribute. Update the value to `tflm_yolov8_od`.
 
-```output
-APP_TYPE = tflm_yolov8_od
-```
 Use the `make` build tool to compile the source code. This should take up to 10 minutes depending on the number of CPU cores available on your host machine. The result is an `.elf` file written to the directory below.
 
 ```bash

@@ -92,4 +92,4 @@ b'person_score:112'
 b'EVT event = 10'
 ```
 
-You have now verified that the model works correctly in the firmware. The next step is to view it using a web toolkit.
+This means the image works correctly on the device, and the end-to-end flow is complete.
