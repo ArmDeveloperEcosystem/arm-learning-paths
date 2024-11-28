@@ -2,42 +2,49 @@
 # User change
 title: "Environment Setup on Host Machine"
 
-weight: 4 # 1 is first, 2 is second, etc.
+weight: 3
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Before you begin 
 
-You will use a Linux computer to run PyTorch and ExecuTorch to prepare a TinyML model to run on edge devices. 
+In this section, you will prepare a development environment to compile the model.
 
-The instructions are for Ubuntu 22.04 or newer.
+## Before you begin ? remove ?
 
-You also need the [Grove Vision AI Module](https://wiki.seeedstudio.com/Grove-Vision-AI-Module/). If you don't have the board you can use the Corstone-300 Fixed Virtual Platform (FVP) instead.
+
+The instructions are for Ubuntu 22.04 or newer. ?
 
 {{% notice Note %}}
 Note that the Corstone-300 FVP is not available for the Arm architecture so your host machine needs to x86_64.
 {{% /notice %}}
+
+^?
 
 The instructions have been tested on:
 - Arm-based cloud instances running Ubuntu 22.04.
 - Desktop computer with Ubuntu 24.04.
 - Windows Subsystem for Linux (WSL).
 
-The host machine is where you will perform most of your development work, especially compiling code for the target Arm devices.
+## Install dependencies
 
-## Install Python
+Python3 is required and comes installed with Ubuntu, but some additional packages are needed.
 
-Python 3 is included in Ubuntu, but some additional packages are needed. 
-
-```console
+```bash
 sudo apt update
-sudo apt install python-is-python3 gcc g++ make -y
+sudo apt install python-is-python3 python3-dev gcc g++ make cmake clang -y
 ```
 
-## Install PyTorch
+```
+???
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+sudo update-alternatives --set cc /usr/bin/clang
+sudo update-alternatives --set c++ /usr/bin/clang++
+```
+## Create a virtual environment
 
-Create a Python virtual environment using Miniconda. 
+Create a Python virtual environment using Miniconda.
 
 For Arm Linux:
 
@@ -60,7 +67,7 @@ conda --version
 Activate the Python virtual environment:
 
 ```bash
-conda create -yn executorch python=3.10.0
+conda create -yn executorch python=3.12.7
 conda activate executorch
 ```
 
@@ -69,19 +76,20 @@ The prompt of your terminal now has (executorch) as a prefix to indicate the vir
 
 ## Install Executorch
 
-From within the Python virtual environment, run the commands below to download the ExecuTorch repository and install the required packages: 
+From within the Python virtual environment, run the commands below to download the ExecuTorch repository and install the required packages:
 
 ``` bash
-# Clone the ExecuTorch repo from GitHub
-git clone --branch v0.3.0 https://github.com/pytorch/executorch.git
+cd $HOME
+git clone https://github.com/pytorch/executorch.git
 cd executorch
+```
 
-# Update and pull submodules
+Run a few commands to set up the ExecuTorch internal dependencies.
+```bash
 git submodule sync
 git submodule update --init
+??? pip install buck
 
-# Install ExecuTorch pip package and its dependencies, as well as
-# development tools like CMake.
 ./install_requirements.sh
 ```
 
@@ -91,16 +99,16 @@ git submodule update --init
 
 2. Install the Edge Impulse CLI tools in your terminal
 
-The Edge Impulse CLI tools require Node.js. 
+The Edge Impulse CLI tools require Node.js.
 
 ```console
 sudo apt install nodejs npm -y
 ```
 
-Confirm `node` is available by running: 
+Confirm `node` is available by running:
 
 ```console
-node -v 
+node -v
 ```
 
 Your version is printed, for example:
@@ -112,7 +120,7 @@ v18.19.1
 Install the Edge Impulse CLI using NPM:
 
 ```console
-npm install -g edge-impulse-cli
+sudo npm install -g edge-impulse-cli
 ```
 
 3. Install Screen to use with edge devices
@@ -123,6 +131,6 @@ sudo apt install screen -y
 
 ## Next Steps
 
-If you don't have the Grove AI vision board and want to use the Corstone-300 FVP proceed to [Environment Setup Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/)
+If you don't have the Grove AI vision board, use the Corstone-300 FVP proceed to [Environment Setup Corstone-300 FVP](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/env-setup-6-fvp/)
 
 If you have the Grove board proceed o to [Setup on Grove - Vision AI Module V2](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/setup-7-grove/)

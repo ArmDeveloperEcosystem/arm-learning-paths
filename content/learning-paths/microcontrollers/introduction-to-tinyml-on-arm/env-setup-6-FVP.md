@@ -8,10 +8,24 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-### Corstone-300 FVP Setup for ExecuTorch
+## Corstone-300 FVP Setup for ExecuTorch
 
-To install and set up the Corstone-300 FVP on your machine, refer to [Building and Running ExecuTorch with ARM Ethos-U Backend](https://pytorch.org/executorch/stable/executorch-arm-delegate-tutorial.html). Follow this tutorial till the **"Install the TOSA reference model"** Section. It should be the last thing you do from this tutorial.
+Navigate to the Arm examples directory in the ExecuTorch repository.
+```bash
+cd $HOME/executorch/examples/arm
+./setup.sh --i-agree-to-the-contained-eula
+```
+?
+```bash
+export FVP_PATH=${pwd}/ethos-u-scratch/FVP-corstone300/models/Linux64_GCC-9.3
+export PATH=$FVP_PATH:$PATH
+```
+Test that the setup was successful by running the `run.sh` script.
 
+```bash
+./run.sh
+```
 
+You will see a number of examples run on the FVP.
 ## Next Steps
 1. Go to [Build a Simple PyTorch Model](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/build-model-8/) to test your environment setup.
