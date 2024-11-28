@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Setup project
+## Project Setup
 
 With the `webgpudawn` library integrated, you can start by removing the extra files included as part of the stock Game Activity project. 
 
@@ -34,7 +34,7 @@ With the `webgpudawn` library integrated, you can start by removing the extra fi
 
 There are several layers of abstraction between a device GPU and an application running the WebGPU API.
 
-![WebGPU Application Interface #center](images/webgpu_app_interface.png "WebGPU Application Interface")
+![WebGPU Application Interface #center](images/webgpu_app_interface.png "Figure 6: WebGPU Application Interface")
 
 It is useful to understand these layers as you begin to use WebGPU APIs in an application.
 
@@ -56,7 +56,7 @@ These are used to determine the overall capabilities of the system before **requ
 
 Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is **not** possible to inadvertently rely on capabilities specific to a device.
 
-![Supported Limits #center](images/adapter_supported_limits.png "Adapter Supported Limits")
+![Supported Limits #center](images/adapter_supported_limits.png "Figure 7: Adapter Supported Limits")
 
 {{% notice Tip %}}
 In an advanced use of the adapter/device duality, you can set up multiple limit presets and select one depending on the adapter. 

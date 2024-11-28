@@ -1,5 +1,5 @@
 ---
-title: Create an application which includes Dawn
+title: Create an application with Dawn
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,17 +8,17 @@ layout: learningpathall
 
 ## Set up Android Project
 
-You can start by creating a new Android Studio project.
+Start by creating a new Android Studio project.
 
-Open Android studio, click `New Project` and select `Game Activity (C++)` as shown below:
+Open Android Studio, click **New Project** and select **Game Activity (C++)** as shown below:
 
-![New Game Activity #center](./images/android_studio_new_game_activity.png "New C++ Game Activity")
+![New Game Activity #center](./images/android_studio_new_game_activity.png "Figure 4: New C++ Game Activity")
 
-Set the `Name` to be `dawnwebgpu`. 
+Set the **Name** field to **dawnwebgpu**. 
 
-Select `Next` to continue. 
+Click **Next** to continue. 
 
-Finish the new project creation by accepting all defaults until the project is created. 
+Finish the new project creation by accepting all the default selections until the project is created. 
 
 The project is created in `~/AndroidStudioProjects`.
 
@@ -28,15 +28,15 @@ GameActivity is a Jetpack library designed to assist Android games in processing
 
 GameActivity is a direct descendant of NativeActivity and shares a similar architecture:
 
-![Game Activity Architecture #center](./images/GameActivityArchitecture.png "Game Activity Architecture")
+![Game Activity Architecture #center](./images/GameActivityArchitecture.png "Figure 5: Game Activity Architecture")
 
-With GameActivity, you can focus on your game development and avoid spending excessive time dealing with the Java Native Interface (JNI) code.
+With GameActivity, you can focus on game development and avoid spending excessive amounts of time dealing with the Java Native Interface (JNI) code.
 
 GameActivity performs the following functions:
 
-* Interacts with the Android framework through the Java-side component.
-* Passes app cycle commands, input events, and input text to the native side.
-* Renders into a SurfaceView, making it easier for games to interact with other UI components.
+* It interacts with the Android framework through the Java-side component.
+* It passes app cycle commands, input events, and input text to the native side.
+* It renders into a SurfaceView, making it easier for games to interact with other UI components.
 
 {{% notice Tip %}}
 You can find more information about Android Game Activity and its capabilities in the [Game Activity documentation](https://developer.android.com/games/agdk/game-activity).
@@ -44,7 +44,9 @@ You can find more information about Android Game Activity and its capabilities i
 
 ## Download project source files
 
-To create a WebGPU application, a number of files from GitHub are doing to be added to your Game Activity project. The objective is to show you how to take the Game Activity template and modify it to become a WebGPU application. 
+The process of creating a WebGPU application involves adding a number of files from GitHub to your Game Activity project. 
+
+The objective of this part of the Learning Path is to show you how to take the Game Activity template and modify it to become a WebGPU application. 
 
 To get started, open a terminal, create a new directory, and download the project files:
 
@@ -59,9 +61,9 @@ Unzip the project files:
 unzip main.zip
 ```
 
-Yow now have a directory named `Android_DawnWebGPU-main` in your `webgpu-files` directory. 
+You now have a directory named **Android_DawnWebGPU-main** in your **webgpu-files** directory. 
 
-During the next sections you will copy some of the required files from the `Android_DawnWebGPU-main` directory to your Game Activity project to learn how to create WebGPU applications.
+During the following sections you will copy some of the required files from the **Android_DawnWebGPU-main** directory into your Game Activity project to learn how to create WebGPU applications.
 
 ## Upgrade the application to include Dawn
 
@@ -73,13 +75,13 @@ You can remove this dependency and replace it with WebGPU.
 
 Add WebGPU to the project using the following steps:
 
-1. In Android Studio, navigate to the project view and find the `app` --> `cpp` folder.
+1. In Android Studio, navigate to the project view and find the **app** --> **cpp** folder.
 
-Open terminal in Android Studio. You should be in the `dawnwebgpu` directory.
+2. Open the terminal in Android Studio. You are now in the **dawnwebgpu** directory.
 
-2. Create a new directory and download the WebGPU header file from GitHub
+3. Create a new directory and download the WebGPU header file from GitHub.
 
-Run the commands below to download the `webgpu.hpp` header file:
+4. Run the commands below to download the `webgpu.hpp` header file:
 
 ```console
 mkdir -p app/src/main/cpp/webgpu/include/webgpu
@@ -88,7 +90,7 @@ cp ~/webgpu-files/Android_DawnWebGPU-main/app/src/main/cpp/webgpu/include/webgpu
 cd ../..
 ```
 
-3. Next copy the remaining WebGPU files to your project. 
+5. Next copy the remaining WebGPU files to your project. 
 
 ```console
 cp ~/webgpu-files/Android_DawnWebGPU-main/app/src/main/cpp/webgpu/CMakeLists.txt .
@@ -101,15 +103,15 @@ cd ..
 Notice that `FetchDawn.cmake` uses a stable `chromium/6536` branch of Dawn repository. 
 
 {{% notice Note %}}
-WebGPU is constantly evolving standard and hence its implementation, Dawn is also under active development. For sake of stability, we have chosen a stable branch for our development. Updating to latest or different branch may cause breakage.
+WebGPU is a constantly evolving standard and hence its implementation, Dawn is also under active development. For sake of stability, we have chosen a stable branch for our development. Updating to latest or different branch may cause breakage.
 {{% /notice %}}
 
-To add Dawn to our application, there are 2 options:
+To add Dawn to our application, there are two options:
 
-* Create a shared/static library from the Dawn source and use it in application.
-* Download the source as a dependency and build it as part of the project build.
+1. Create a shared/static library from the Dawn source and use it in application.
+2. Download the source as a dependency and build it as part of the project build.
 
-You will use the second option, since it provides more debug flexibility.
+You will use the second option here, since it provides more flexibility for debug.
 
 The files `webgpu/webgpu.cmake` and `CMakeLists.txt` facilitate downloading and building WebGPU with Dawn implementation and integrating Dawn into the project.
 
