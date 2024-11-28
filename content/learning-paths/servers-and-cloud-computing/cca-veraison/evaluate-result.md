@@ -74,6 +74,3 @@ You will also notice that the result is grouped into two sections (known as subm
 How is all this data used to make a single yes/no decision about whether this realm is trustworthy for a confidential computation to take place? After all, making such a decision is the whole purpose of the attestation process.
 
 The next learning path in this series on Arm CCA will answer this question by taking you through the steps needed to deploy an example workload that depends on attestation to release some secret data into a running realm. You will learn how to use policies to govern the strictness of the attestation process. You will also see how the workflow steps and data that you have just been using can be orchestrated together to form the common programming patterns of confidential computing.
-
-
-TODO: "next learning path" section?
