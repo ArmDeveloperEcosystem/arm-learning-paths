@@ -2,7 +2,7 @@
 title: (optional) Run additional models in the web toolkit
 weight: 6
 
-draft: true
+#draft: true
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
