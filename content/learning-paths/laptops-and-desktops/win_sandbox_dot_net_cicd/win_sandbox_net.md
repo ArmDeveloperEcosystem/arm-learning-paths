@@ -50,7 +50,7 @@ You will see instructions displayed on this page. These are commands you now nee
 
 On your host machine, click on the Search bar and enter **Windows Sandbox**.
 
-In your running Windows Sandbox, open up Powershell. You will now copy and paste all the commands into Powershell.
+In your running Windows Sandbox, open up PowerShell. You will now copy and paste all the commands into PowerShell.
 
 The commands are also shown here for your convenience. To download the runner package:
 

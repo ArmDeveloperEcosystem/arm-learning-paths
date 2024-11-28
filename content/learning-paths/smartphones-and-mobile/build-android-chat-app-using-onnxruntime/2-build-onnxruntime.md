@@ -15,7 +15,7 @@ ONNX Runtime is an open-source inference engine designed to accelerate the deplo
 
 ### Clone onnxruntime repo
 
-Open up a Windows Powershell and checkout the source tree:
+Open up a Windows PowerShell and checkout the source tree:
 
 ```bash
 cd C:\Users\$env:USERNAME
