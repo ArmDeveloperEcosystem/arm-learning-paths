@@ -10,7 +10,7 @@ layout: learningpathall
 
 Follow these steps to configure Arm Streamline Performance Analyzer to capture Mali GPU related data:
 
-* Confirm your Android device is connected to the development machine.
+* Confirm that your Android device is connected to the development machine.
 * Navigate to the **Start** tab, select **Android (adb)**, select the device, and then select the application to debug.
 * Select **Select Counters**.
 
@@ -38,7 +38,7 @@ Switch to **Mali Timeline** view as shown below:
 
 !["Mali Timeline Streamline" #center](images/Streamline-mali-timeline.png "Mali Timeline Streamline")
 
-You might have to zoom into the data up to the maximum (**500 us**), as you are rendering a very simple 3D object. 
+You might have to zoom into the data up to the maximum (**500 us**), as you are rendering a simple 3D object. 
 
 You can analyze two consecutive frames as shown below:
 
