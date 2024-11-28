@@ -6,17 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-In this Learning Path, you will learn how to:
-
-* Integrate Dawn (WebGPU) in an application.
-* Use the APIs to render a simple 3D object.
-* Profile and analyze the application.
-
 The first step is to prepare a development environment with the required software:
 
-* [Android Studio](https://developer.android.com/studio)
-* [Arm Performance Studio](https://www.arm.com/products/development-tools/graphics/arm-performance-studio) 
-* Python 3.10 or later
+
 
 You can use any computer and operating system which supports the above software. 
 

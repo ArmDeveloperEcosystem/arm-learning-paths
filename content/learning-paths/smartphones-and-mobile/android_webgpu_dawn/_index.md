@@ -1,10 +1,6 @@
 ---
 title: Build and profile a simple WebGPU Android Application
-
-
 cascade:
-
-
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers who are building GPU-based Android applications and are interested in trying WebGPU. 
@@ -19,11 +15,14 @@ learning_objectives:
     - Build and run a WebGPU Android Application.
     - Profile the application using Streamline.
     - Analyze the profiling data.
-    
+       
 prerequisites:
     - Basic knowledge of graphics APIs and experience in developing Android graphics applications.
     - A development machine with Android Studio, Blender, and Arm Streamline installed.
     - An Android phone in developer mode.
+    - [Android Studio](https://developer.android.com/studio)
+    - [Arm Performance Studio](https://www.arm.com/products/development-tools/graphics/arm-performance-studio) 
+    - Python 3.10 or later
 
 author_primary: Varun Chari, Albin Bernhardsson
 
