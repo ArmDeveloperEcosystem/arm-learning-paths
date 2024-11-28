@@ -20,8 +20,8 @@ prerequisites:
     - Basic knowledge of graphics APIs and experience in developing Android graphics applications.
     - A development machine with Android Studio, Blender, and Arm Streamline installed.
     - An Android phone in developer mode.
-    - [Android Studio](https://developer.android.com/studio)
-    - [Arm Performance Studio](https://www.arm.com/products/development-tools/graphics/arm-performance-studio) 
+    - Android Studio
+    - Arm Performance Studio
     - Python 3.10 or later
 
 author_primary: Varun Chari, Albin Bernhardsson

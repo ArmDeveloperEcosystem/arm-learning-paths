@@ -4,7 +4,7 @@ review:
         question: >
             What is WebGPU?
         answers:
-            - A highly customized API for specific GPUs.
+            - A highly-customized API for specific GPUs.
             - APIs designed to provide unified access to GPUs whichever the GPU vendor and operating system the application runs with.
             - APIs designed for cloud-based applications.
         correct_answer: 2                    
@@ -28,7 +28,7 @@ review:
         answers:
             - A profiling tool to profile CPUs.
             - A profiling tool to profile GPUs.
-            - A a comprehensive profiling software to profile both CPUs and GPUs.
+            - A comprehensive profiling software to profile both CPUs and GPUs.
         correct_answer: 3          
         explanation: >
             Streamline is an application profiler that can capture data from multiple sources, including Program Counters (PC), Samples from the hardware Performance Monitoring Unit (PMU) counters in the Arm CPU, Arm® Mali™ GPUs, and Arm Immortalis™ GPUs.
