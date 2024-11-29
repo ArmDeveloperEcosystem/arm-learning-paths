@@ -70,6 +70,8 @@ pip install buck
 
 1. Create an [Edge Impulse Account](https://studio.edgeimpulse.com/signup) and sign in.
 
+TODO is the account needed?
+
 2. Install the Edge Impulse CLI tools in your terminal
 
 The Edge Impulse CLI tools require Node.js.
@@ -97,6 +99,8 @@ sudo npm install -g edge-impulse-cli
 ```
 
 3. Install Screen to use with edge devices
+
+TODO is screen needed for this LP?
 
 ```console
 sudo apt install screen -y
