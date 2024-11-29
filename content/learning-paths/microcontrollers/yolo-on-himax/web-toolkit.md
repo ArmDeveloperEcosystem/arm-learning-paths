@@ -18,13 +18,18 @@ Change the directory to the where the Makefile is located. If you cloned the rep
 cd $HOME/Seeed_Grove_Vision_AI_Module_V2/EPII_CM55M_APP_S/
 ```
 
-The table shows the different options available to use with the web toolkit. Modify the `APP_TYPE` field in the `makefile` to one of the values in the table.
+The table shows the different options available to use with the web toolkit. Modify the `APP_TYPE` field in the `makefile` to one of the values in the table. Then, to the xmodem argument, pass the `--model` argument.
 
-|APP_TYPE           |Description        |
-|---                |---                |
-|tflm_yolov8_od     |Object detection   |
-|tflm_yolov8_pose   |Pose detection     |
-|tflm_fd_fm         |Face detection     |
+|APP_TYPE           |Description        | --model argument |
+|---                |---                |---
+|tflm_yolov8_od     |Object detection   | model_zoo\tflm_yolov8_od\yolov8n_od_192_delete_transpose_0xB7B000.tflite 0xB7B000 0x00000 |
+|tflm_yolov8_pose   |Pose detection     | model_zoo\tflm_yolov8_pose\yolov8n_pose_256_vela_3_9_0x3BB000.tflite 0x3BB000 0x00000 |
+|tflm_fd_fm         |Face detection     | model_zoo\tflm_fd_fm\0_fd_0x200000.tflite 0x200000 0x00000 model_zoo\tflm_fd_fm\1_fm_0x280000.tflite 0x280000 0x00000 model_zoo\tflm_fd_fm\2_il_0x32A000.tflite 0x32A000 0x00000 |
+
+{{% notice Note %}}
+For `tflm_fd_fm`, you need to pass all three models as separate `--model` arguments.
+{{% /notice %}}
+
 
 
 ## Regenerate the firmware image
@@ -57,7 +62,10 @@ cp ../EPII_CM55M_APP_S/obj_epii_evb_icv30_bdv10/gnu_epii_evb_WLCSP65/EPII_CM55M_
 Finally, use `xmodem` to flash the image.
 
 ```bash
-python xmodem\xmodem_send.py --port=<COM port> --baudrate=921600 --protocol=xmodem --file=we2_image_gen_local\output_case1_sec_wlcsp\output.img
+python xmodem\xmodem_send.py --port=<COM port> \
+--baudrate=921600 --protocol=xmodem \
+--file=we2_image_gen_local\output_case1_sec_wlcsp\output.img \
+--model=<model argument>
 ```
 
 Press the reset button when prompted before moving on.
