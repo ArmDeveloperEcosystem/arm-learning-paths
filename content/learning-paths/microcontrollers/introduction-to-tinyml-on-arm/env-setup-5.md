@@ -10,16 +10,17 @@ layout: "learningpathall"
 
 In this section, you will prepare a development environment to compile the model.
 
-## Before you begin ? remove ?
+## Before you begin
+
+TODO remove this section?
 
 
-The instructions are for Ubuntu 22.04 or newer. ?
+The instructions are for Ubuntu 22.04 or newer.
 
 {{% notice Note %}}
 Note that the Corstone-300 FVP is not available for the Arm architecture so your host machine needs to x86_64.
 {{% /notice %}}
 
-^?
 
 The instructions have been tested on:
 - Arm-based cloud instances running Ubuntu 22.04.
@@ -32,45 +33,17 @@ Python3 is required and comes installed with Ubuntu, but some additional package
 
 ```bash
 sudo apt update
-sudo apt install python-is-python3 python3-dev gcc g++ make cmake clang -y
+sudo apt install python-is-python3 python3-dev python3-venv gcc g++ make -y
 ```
 
-```
-???
-sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
-sudo update-alternatives --set cc /usr/bin/clang
-sudo update-alternatives --set c++ /usr/bin/clang++
-```
 ## Create a virtual environment
 
-Create a Python virtual environment using Miniconda.
-
-For Arm Linux:
+Create a Python virtual environment using `python venv`.
 
 ```console
-curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
-sh ./Miniconda3-latest-Linux-aarch64.sh -b
-eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
-conda --version
+python3 -m venv $HOME/executorch
+source $HOME/executorch/bin/activate
 ```
-
-For x86_64 Linux:
-
-```console
-curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
-sh ./Miniconda3-latest-Linux-x86_64.sh -b
-eval "$($HOME/miniconda3/bin/conda shell.bash hook)"
-conda --version
-```
-
-Activate the Python virtual environment:
-
-```bash
-conda create -yn executorch python=3.12.7
-conda activate executorch
-```
-
 The prompt of your terminal now has (executorch) as a prefix to indicate the virtual environment is active.
 
 
@@ -88,8 +61,8 @@ Run a few commands to set up the ExecuTorch internal dependencies.
 ```bash
 git submodule sync
 git submodule update --init
-??? pip install buck
 
+pip install buck
 ./install_requirements.sh
 ```
 

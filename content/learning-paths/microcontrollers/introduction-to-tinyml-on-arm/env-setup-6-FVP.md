@@ -15,7 +15,7 @@ Navigate to the Arm examples directory in the ExecuTorch repository.
 cd $HOME/executorch/examples/arm
 ./setup.sh --i-agree-to-the-contained-eula
 ```
-?
+
 ```bash
 export FVP_PATH=${pwd}/ethos-u-scratch/FVP-corstone300/models/Linux64_GCC-9.3
 export PATH=$FVP_PATH:$PATH
@@ -26,6 +26,6 @@ Test that the setup was successful by running the `run.sh` script.
 ./run.sh
 ```
 
-You will see a number of examples run on the FVP.
-## Next Steps
-1. Go to [Build a Simple PyTorch Model](/learning-paths/microcontrollers/introduction-to-tinyml-on-arm/build-model-8/) to test your environment setup.
+TODO verify that this works with the simple_nn.py
+
+You will see a number of examples run on the FVP. This means you can proceed to the next section to test your environment setup.

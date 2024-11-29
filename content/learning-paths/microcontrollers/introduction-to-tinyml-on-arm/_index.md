@@ -18,8 +18,7 @@ learning_objectives:
 
 
 prerequisites:
-    - Basic knowledge of machine learning concepts. ?
-    - Understanding of IoT and embedded systems. ?
+    - Basic knowledge of machine learning concepts.
     - A Linux host machine or VM running Ubuntu 22.04 or higher.
     - A [Grove Vision AI Module](https://wiki.seeedstudio.com/Grove-Vision-AI-Module/) **or** an Arm license to run the Corstone-300 Fixed Virtual Platform (FVP).
 
