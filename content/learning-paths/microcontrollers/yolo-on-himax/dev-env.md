@@ -67,18 +67,15 @@ git version 2.39.3
 
 Install the make build tool, which is used to build the firmware in the next section.
 
-### Linux
-
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="shell">}}
 sudo apt update
 sudo apt install make -y
-```
-
-### macOS
-
-```console
+  {{< /tab >}}
+  {{< tab header="MacOS" language="shell">}}
 brew install make
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Successful installation of make will show the following when the `make --version` command is run.
 
@@ -96,26 +93,25 @@ To run this learning path on macOS, you need to verify that your installation is
 {{% /notice %}}
 ## Install Arm GNU toolchain
 
-### Linux
+The toolchain is used to compile code from the host to the embedded device architecture.
 
-The toolchain is used to cross-compile from the host architecture (x86) to the embedded device architecture (AArch64).
-
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="shell">}}
 cd $HOME
 wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz
 tar -xvf arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz
 export PATH="$HOME/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin/:$PATH"
-```
-### macOS
-```console
+  {{< /tab >}}
+  {{< tab header="MacOS" language="shell">}}
 cd $HOME
 wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.tar.xz
 tar -xvf arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.tar.xz
 export PATH="$HOME/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/:$PATH"
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice %}}
-You can add the above command to the `.bashrc` file. This was, the Arm GNU toolchain is configured from new terminal sessions as well.
+You can add the `export` command to the `.bashrc` file. This was, the Arm GNU toolchain is configured from new terminal sessions as well.
 {{% /notice %}}
 
 

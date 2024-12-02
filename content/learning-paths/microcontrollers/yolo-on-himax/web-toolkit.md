@@ -1,14 +1,12 @@
 ---
-title: (optional) Run additional models in the web toolkit
+title: Run additional models in the web toolkit
 weight: 6
-
-#draft: true
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-In this section, you will view a live camera feed with the ML application running.
+In this section, you will view a live camera feed with a computer vision application running.
 
 ## Modify the Makefile
 
@@ -18,12 +16,11 @@ Change the directory to the where the Makefile is located. If you cloned the rep
 cd $HOME/Seeed_Grove_Vision_AI_Module_V2/EPII_CM55M_APP_S/
 ```
 
-The table shows the different options available to use with the web toolkit. Modify the `APP_TYPE` field in the `makefile` to one of the values in the table. Then, to the xmodem argument, pass the `--model` argument.
+The table shows the different options available to use with the web toolkit. Modify the `APP_TYPE` field in the `makefile` to one of the values in the table. Then pass the `--model` argument to the python `xmodem` command.
 
-|APP_TYPE           |Description        | --model argument |
+|APP_TYPE           |Description        | Model argument |
 |---                |---                |---
 |tflm_yolov8_od     |Object detection   | model_zoo\tflm_yolov8_od\yolov8n_od_192_delete_transpose_0xB7B000.tflite 0xB7B000 0x00000 |
-|tflm_yolov8_pose   |Pose detection     | model_zoo\tflm_yolov8_pose\yolov8n_pose_256_vela_3_9_0x3BB000.tflite 0x3BB000 0x00000 |
 |tflm_fd_fm         |Face detection     | model_zoo\tflm_fd_fm\0_fd_0x200000.tflite 0x200000 0x00000 model_zoo\tflm_fd_fm\1_fm_0x280000.tflite 0x280000 0x00000 model_zoo\tflm_fd_fm\2_il_0x32A000.tflite 0x32A000 0x00000 |
 
 {{% notice Note %}}
@@ -47,17 +44,17 @@ Use the commands from [Flash firmware onto the microcontroller](/learning-paths/
 cd ../we2_image_gen_local/
 cp ../EPII_CM55M_APP_S/obj_epii_evb_icv30_bdv10/gnu_epii_evb_WLCSP65/EPII_CM55M_gnu_epii_evb_WLCSP65_s.elf input_case1_secboot/
 ```
+Run the script corresponding to the OS of your host machine.
 
-### Linux
-
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="shell">}}
 ./we2_local_image_gen project_case1_blp_wlcsp.json
-```
-
-### macOS
-```console
+  {{< /tab >}}
+  {{< tab header="MacOS" language="shell">}}
 ./we2_local_image_gen_macOS_arm64 project_case1_blp_wlcsp.json
-```
+  {{< /tab >}}
+{{< /tabpane >}}
+
 
 Finally, use `xmodem` to flash the image.
 
@@ -91,9 +88,6 @@ The images below are captured images from the models run in the toolkit.
 
 ### Objection detection
 ![object_detection](./object_detection.jpg)
-
-### Pose estimation
-![Pose estimation](./pose_estimation.jpg)
 
 ### Face detection
 ![object_detection](./face_detection.jpg)

@@ -19,7 +19,7 @@ pip install -r xmodem/requirements.txt
 
 ## Connect the module
 
-Insert the Flexible printed circuit (FPC) into the Grove Vision AI V2 module. Lift the dark grey latch on the connector as per the image below.
+To prepare for the next steps, it's time to get the board set up. Insert the Flexible printed circuit (FPC) into the Grove Vision AI V2 module. Lift the dark grey latch on the connector as per the image below.
 
 ![unlatched](./unlatched.jpg)
 
@@ -27,7 +27,7 @@ Then, slide the FPC connector in with the metal pins facing down and close the d
 
 ![latched](./latched.jpg)
 
-Then connect the Groove Vision AI V2 Module to your computer via the USB-C cable.
+Now you can connect the Groove Vision AI V2 Module to your computer via the USB-C cable.
 
 {{% notice Note %}}
 The development board may have two USB-C connectors. If you are running into issues connecting the board in the next step, make sure you are using the right one.
@@ -37,17 +37,16 @@ The development board may have two USB-C connectors. If you are running into iss
 
 You'll need to provide the communication port (COM) which the board is connected to in order to flash the image. There are commands to list all COMs available on your machine. Once your board is connected through USB, it'll show up in this list. The COM identifier will start with **tty**, which may help you determine which one it is. You can run the command before and after plugging in the board if you are unsure.
 
-### Linux
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="shell">}}
 sudo grep -i 'tty' /var/log/dmesg
-```
-
-### MacOS
-
-```console
+  {{< /tab >}}
+  {{< tab header="MacOS" language="shell">}}
 ls /dev/tty.*
-```
+  {{< /tab >}}
+{{< /tabpane >}}
+
 
 {{% notice Note %}}
 If the port seems unavailable, try changing the permissions temporarily using the `chmod` command. Be sure to reset them afterwards, as this may pose a computer security vulnerability.
@@ -64,11 +63,13 @@ The full path to the port is needed in the next step, so be sure to note it down
 Run the python script below to flash the firmware.
 
 ```bash
-python xmodem\xmodem_send.py --port=<COM port> --baudrate=921600 --protocol=xmodem --file=we2_image_gen_local\output_case1_sec_wlcsp\output.img
+python xmodem\xmodem_send.py --port=<COM port> \
+--baudrate=921600 --protocol=xmodem \
+--file=we2_image_gen_local\output_case1_sec_wlcsp\output.img
 ```
 
 {{% notice Note %}}
-When you run other example models demonstrated in the later section [Object detection and additional models](/learning-paths/microcontrollers/yolo-on-himax/how-to-5/), you need to adapt this command with the right image file.
+When you run other example models demonstrated in the later section [Run additional models in the web toolkit](/learning-paths/microcontrollers/yolo-on-himax/web-toolkit/), you need to adapt this command with `--model` argument.
 {{% /notice %}}
 
 After the firmware image burning is completed, the message `Do you want to end file transmission and reboot system? (y)` is displayed. Press the reset button indicated in the image below.

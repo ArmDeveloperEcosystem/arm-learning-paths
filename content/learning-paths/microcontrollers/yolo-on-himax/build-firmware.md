@@ -34,24 +34,24 @@ make
 
 ## Generate the firmware image
 
-Copy the `.elf` file to the `input_case1_secboot` directory.
+The examples repository contains scripts to generate the image file. Copy the `.elf` file to the `input_case1_secboot` directory.
 
 ```bash
 cd ../we2_image_gen_local/
 cp ../EPII_CM55M_APP_S/obj_epii_evb_icv30_bdv10/gnu_epii_evb_WLCSP65/EPII_CM55M_gnu_epii_evb_WLCSP65_s.elf input_case1_secboot/
 ```
-The examples repository contains scripts to generate the image. Run the script corresponding to the OS of your host machine.
 
-### Linux
+Run the script corresponding to the OS of your host machine. This will create a file named `output.img` in the `output_case1_sec_wlcsp` directory.
 
-```bash
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="shell">}}
 ./we2_local_image_gen project_case1_blp_wlcsp.json
-```
-
-### macOS
-```console
+  {{< /tab >}}
+  {{< tab header="MacOS" language="shell">}}
 ./we2_local_image_gen_macOS_arm64 project_case1_blp_wlcsp.json
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Your terminal output should end with the following.
 
