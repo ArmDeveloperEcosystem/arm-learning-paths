@@ -8,40 +8,40 @@ layout: learningpathall
 
 ## Command queue
 
-Graphic applications have to deal with 2 processors, the CPU and the GPU. 
+Graphic applications must operate with two processors, the CPU and the GPU. 
 
-These 2 processors run on different timelines. For optimal performance, commands intended for the GPU are batched and sent through a command queue. The GPU consumes this queue whenever it is ready, and this way processors minimize the time spent idling for their sibling to respond. 
+These two processors run on different timelines. For optimal performance, commands intended for the GPU are batched and sent through a command queue. The GPU consumes this queue whenever it is ready, and in this way processors minimize the time spent idling for their sibling to respond. 
 
 A WebGPU device has a single queue, which is used to send both commands and data. You can get it with `wgpuDeviceGetQueue()`.
 
-WebGPU offers 3 different ways to submit work to this queue:
+WebGPU offers three different ways to submit work to this queue:
 
-* wgpuQueueSubmit
-* wgpuQueueWriteBuffer
-* wgpuQueueWriteTexture
+* wgpuQueueSubmit.
+* wgpuQueueWriteBuffer.
+* wgpuQueueWriteTexture.
 
 {{% notice Note %}}
-Other graphics API allow you to build multiple queues per device, and future version of WebGPU might as well. 
+Other graphics API allow you to build multiple queues per device. 
 
-If you want to learn more, refer to the [Command Queue](https://eliemichel.github.io/LearnWebGPU/getting-started/the-command-queue.html)
+If you would like to learn more, refer to the [Command Queue](https://eliemichel.github.io/LearnWebGPU/getting-started/the-command-queue.html).
 {{% /notice %}}
 
 ## Getting started to render a 3D object
 
-WebGPU is a very simple system. All it does is run 3 types of functions on the GPU: Vertex Shaders, Fragment Shaders, and Compute Shaders.
+WebGPU is a very simple system. It runs three types of functions on the GPU: 
 
-* A Vertex Shader computes vertices. The shader returns vertex positions.
-* A Fragment Shader computes colors, they indirectly write data to textures. That data does not have to be colors.
-* A Compute Shader is more generic. It’s effectively a function you call and say “execute this function N times”
+* A Vertex Shader that computes vertices. The shader returns vertex positions.
+* A Fragment Shader that computes colors. The shader indirectly writes data to textures. That data does not have to be limited to colors.
+* A Compute Shader that is more generic. It is effectively a function that you can call and request to execute as many times as you require.
 
-Here is a simplified diagram of WebGPU setup to draw triangles by using a vertex shader and a fragment shader:
+Here is a simplified diagram of a WebGPU setup to draw triangles by using a vertex shader and a fragment shader:
 
 !["Triangle using WebGPU" #center](images/webgpu-draw-high-level.svg "Triangle using WebGPU")
 
 The main things to notice in the above image are:
 
-* There is a **Pipeline**. It contains the vertex shader and fragment shader the GPU will run. You could also have a pipeline with a compute shader.
-* The shaders reference resources (buffers, textures, samplers) indirectly through **Bind Groups**.
+* There is a **Pipeline** that contains the vertex shader and fragment shader the GPU runs. Alternatively, you might also have a pipeline with a compute shader.
+* The shaders reference resources such as buffers, textures, and samplers, indirectly through **Bind Groups**.
 * The pipeline defines attributes that reference buffers indirectly through the internal state.
 * Attributes pull data out of buffers and feed the data into the vertex shader.
 * The vertex shader may feed data into the fragment shader.
