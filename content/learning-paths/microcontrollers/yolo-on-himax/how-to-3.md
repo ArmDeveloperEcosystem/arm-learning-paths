@@ -1,6 +1,6 @@
 ---
 title: Flash Firmware onto the Microcontroller
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

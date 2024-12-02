@@ -11,7 +11,7 @@ learning_objectives:
     - Learn how to update firmware on edge device (Himax WiseEye2).
     
 prerequisites:
-    - Seeed Grove Vision AI V2 Module
+    - Seeed Studio [Grove Vision AI V2 Module](https://wiki.seeedstudio.com/grove_vision_ai_v2/) 
     - OV5647-62 Camera module and included FPC cable
     - A USB-C cable
     - A Linux/Windows-based PC on an x86 archiecture. 
