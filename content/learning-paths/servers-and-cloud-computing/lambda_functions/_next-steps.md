@@ -26,8 +26,8 @@ further_reading:
         link: https://aws.amazon.com/lambda/getting-started/
         type: documentation
     - resource:
-        title: A Performance Perspective for Graviton Based Lambda Functions
-        link: https://blog.thundra.io/a-performance-perspective-for-graviton-based-lambda-functions
+        title: AWS Lambda performance with Java 21
+        link: https://community.aws/content/2juXXgrDDaUdmi902LHwilBhvNU/aws-lambda-performance-with-java-21-x86-vs-arm64-part-1-initial-measurements-and-comparisons?lang=en
         type: blog
 
 
