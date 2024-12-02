@@ -28,6 +28,7 @@ You can save a `.json` output from WindowsPerf by using the `--output` command f
     ```console
     wperf stat -e ld_spec --timeout 5 --json --output example.json
     ```
+    Note: This command won't finish automatically. You can use Ctrl+C to terminate it after it has run for 5-10 seconds.
 
 2. Open Windows Performance Analyzer, and see the following window:
 
@@ -71,10 +72,10 @@ The WPA plugin also generates a graph per event note in order to provide a more 
 
 To see all the generated graphs you can expand the `Counting timeline` section in the graph explorer section of WPA.
 
-Run another `wperf` command with different options:
+Before you run another `wperf` command with different options, you use use `wperf -list` to find out supported metrics in your machine.
 
 ```console 
-wperf stat -t -i 0 -n 10 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --timeout 2 --json --output --example3.json
+wperf stat -t -i 0 -n 10 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --timeout 2 --json --output example3.json
 ```
 
 Note: above command will run for ~20 seconds.
