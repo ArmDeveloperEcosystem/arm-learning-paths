@@ -6,11 +6,13 @@ weight: 4
 layout: learningpathall
 ---
 
-Now that you have generated an image file on the local host machine, you are ready to flash the microcontroller with this firmware.
+Now that you have generated an image file on the local host machine, you are ready to flash the microcontroller with the firmware.
 
 ## Install xmodem
 
-`Xmodem` is a basic file transfer protocol which is easily installed using the Himax examples repository. Run the following command to install the dependency. If you cloned the repository to a different location, replace $HOME with the path.
+`Xmodem` is a basic file transfer protocol which is easily installed using the Himax examples repository. 
+
+Run the following command to install the dependency:
 
 ```bash
 cd $HOME/Seeed_Grove_Vision_AI_Module_V2
@@ -19,11 +21,13 @@ pip install -r xmodem/requirements.txt
 
 ## Connect the module
 
-To prepare for the next steps, it's time to get the board set up. Insert the Flexible printed circuit (FPC) into the Grove Vision AI V2 module. Lift the dark grey latch on the connector as per the image below.
+It's time to get the board set up. 
+
+Insert the Flexible printed circuit (FPC) into the Grove Vision AI V2 module. Lift the dark grey latch on the connector as per the image below.
 
 ![unlatched](./unlatched.jpg)
 
-Then, slide the FPC connector in with the metal pins facing down and close the dark grey latch to fasten the connector.
+Slide the FPC connector in with the metal pins facing down and close the dark grey latch to fasten the connector.
 
 ![latched](./latched.jpg)
 
@@ -56,11 +60,11 @@ chmod 0777 <COM port>
 ```
 {{% /notice %}}
 
-The full path to the port is needed in the next step, so be sure to note it down.
+The full path to the port is needed in the next step, so be sure to save it. 
 
 ## Flash the firmware onto the module
 
-Run the python script below to flash the firmware.
+Run the python script below to flash the firmware:
 
 ```bash
 python xmodem\xmodem_send.py --port=<COM port> \
@@ -72,7 +76,7 @@ python xmodem\xmodem_send.py --port=<COM port> \
 When you run other example models demonstrated in the later section [Run additional models in the web toolkit](/learning-paths/microcontrollers/yolo-on-himax/web-toolkit/), you need to adapt this command with `--model` argument.
 {{% /notice %}}
 
-After the firmware image burning is completed, the message `Do you want to end file transmission and reboot system? (y)` is displayed. Press the reset button indicated in the image below.
+After the firmware image flashing is completed, the message `Do you want to end file transmission and reboot system? (y)` is displayed. Press the reset button shown in the image below.
 
 ![reset button](./reset_button.jpg)
 
