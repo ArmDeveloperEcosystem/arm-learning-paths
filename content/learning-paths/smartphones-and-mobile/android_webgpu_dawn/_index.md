@@ -3,7 +3,7 @@ title: Build and profile a simple WebGPU Android Application
 cascade:
 minutes_to_complete: 90
 
-who_is_this_for: This is an introductory topic for developers who are building GPU-based Android applications and are interested in trying WebGPU. 
+who_is_this_for: This is an introductory topic for developers who are building GPU-based Android applications and are interested in experimenting with WebGPU. 
 
 learning_objectives: 
     - Describe the benefits of WebGPU.

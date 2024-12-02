@@ -10,9 +10,15 @@ layout: learningpathall
 
 WebGPU is the successor to WebGL, a well-adopted modern API standard for interfacing with GPUs. 
 
-WebGPU offers improved compatibility with modern GPUs, support for general-purpose GPU computations, faster operations, and access to more advanced GPU features. It is designed to provide a unified access to GPUs, that is both GPU vendor-agnostic and OS-agnostic.
+WebGPU offers the following benefits:
 
-WebGPU is a Render Hardware Interface built on top of various backend APIs such as Vulkan, DirectX, and Metal - though this does depend on the operating system. 
+* Improved compatibility with modern GPUs.
+* Support for general-purpose GPU computations.
+* Fast operations.
+* Access to advanced GPU features. 
+* Unified access to GPUs, which is both GPU vendor-agnostic and OS-agnostic.
+
+WebGPU is a render hardware interface built on top of various backend APIs such as Vulkan, DirectX, and Metal, though this is OS-dependent. 
 
 WebGPU is available through web browsers using the webgpu.h header file. 
 

@@ -8,29 +8,29 @@ layout: learningpathall
 
 ## 3D meshes
 
-Once a Render Pipeline is created, you can use WebGPU APIs to create and render a 3D mesh. This is very similar to other graphics APIs. 
+Once a Render Pipeline is created, you can use WebGPU APIs to create and render a 3D mesh. This is similar to other graphics APIs. 
 
 The steps are listed below:
 
-* Create the Vertex Buffer(s)
-* Create the Index Buffer(s)
-* Create the Uniform Buffer(s)
-* Create a Depth Buffer (Z-Buffer algorithm)
-* Create the Depth Texture and TextureView
-* Create a Depth Stencil
-* Create the Transformation and Projection matrices
+* Create the Vertex Buffer(s).
+* Create the Index Buffer(s).
+* Create the Uniform Buffer(s).
+* Create a Depth Buffer (Z-Buffer algorithm).
+* Create the Depth Texture and TextureView.
+* Create a Depth Stencil.
+* Create the Transformation and Projection matrices.
 
-All these steps are common in graphics programming and WebGPU offers capability to perform all the operations. 
+All these steps are common in graphics programming, and WebGPU allows you to perform these same operations. 
 
-It is recommended to go through individual chapters in the [3D rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section to learn more.
+It is a good idea to read the individual chapters in the [3D rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section to learn more.
 
 ### Loading 3D objects
 
-In this project you can use OBJ files to define 3D meshes. 
+In this Learning Path you can use OBJ files to define 3D meshes. 
 
-Instead of manually parsing OBJ files, use the [TinyOBJLoader](https://github.com/tinyobjloader/tinyobjloader) library. 
+Instead of manually parsing OBJ files, you can use the [TinyOBJLoader](https://github.com/tinyobjloader/tinyobjloader) library. 
 
-The file format is not complex, but parsing files is not the goal of this Learning Path. 
+The file format is not complex, but parsing files is out of the scope of this Learning Path. 
 
 You can use open-source software such as Blender to create your own 3D objects.
 
