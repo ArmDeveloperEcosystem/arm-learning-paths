@@ -90,13 +90,13 @@ Alternatively, you can download the `.zip` file from a command prompt:
 ```console
 mkdir wpa-plugin
 cd wpa-plugin
-curl -L -O https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases/download/1.0.2/wpa-plugin-1.0.2.zip
+curl -L -O https://github.com/arm-developer-tools/windowsperf-wpa-plugin/releases/download/1.0.3/wpa-plugin-1.0.3.zip
 ```
 
 Extract the `.dll` file from the downloaded `.zip` file. 
 
 ```console
-tar -xmf wpa-plugin-1.0.2.zip
+tar -xmf wpa-plugin-1.0.3.zip
 ```
 
 The file `WPAPlugin.dll` is now in your `wpa-plugin` directory. 
@@ -110,7 +110,7 @@ Use the `-addsearchdir` flag to tell `wpa` where to find plugins.
 For example, if you downloaded the `.dll` in your `Downloads` directory, you can run `wpa` as shown below:
 
 ```bash
-wpa -addsearchdir %USERPROFILE%\Downloads\wpa-plugin-1.0.2
+wpa -addsearchdir %USERPROFILE%\Downloads\wpa-plugin-1.0.3
 ```
         
 ##### Option 2: Set an environment variable.
@@ -135,7 +135,7 @@ To open a JSON file directly from the command line, you can use the `-i` flag to
 For example, to open `timeline_long.json` in your  `downloads` directory, run the command:
 
 ```console
-wpa -addsearchdir %USERPROFILE%\Downloads\wpa-plugin-1.0.2 -i %USERPROFILE%\Downloads\timeline_long.json
+wpa -addsearchdir %USERPROFILE%\Downloads\wpa-plugin-1.0.3 -i %USERPROFILE%\Downloads\timeline_long.json
 ```
 ## How do I uninstall the WPA plugin?
 
