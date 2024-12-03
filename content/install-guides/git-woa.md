@@ -47,27 +47,29 @@ Once you have downloaded Git, run the installer `.exe` file on a Windows on Arm 
 
 The installer starts. 
 
-Click Next to acknowledge the GNU General Public License.
+Click **Next** to acknowledge the GNU General Public License.
 
-Set the destination location or accept the default location and click Next.
+Set the destination location or accept the default location, and click **Next**.
 
-Continue to click Next for any configuration settings. You can accept all defaults if you are unsure of specific settings.
+Continue to click **Next** for the configuration settings. You can accept all defaults if you are unsure of specific settings.
 
-At the end of the install process you see the screen below indicating setup has finished installing Git:
+At the end of the install process, you see the screen below indicating setup has finished installing Git:
 
 ![Install](/install-guides/_images/git-woa.png)
 
-Click the Finish button to complete installation. 
+Click the **Finish** button to complete installation. 
 
 ## How do I use Git on Windows? 
 
-You can use Git on Windows from a Command Prompt or using Git Bash, a Linux-like terminal experience which includes Git and many other Linux commands. 
+You can use Git on Windows from a Command Prompt or using Git Bash. 
+
+Git Bash is a Linux-like terminal experience which includes Git and many other Linux commands. 
 
 {{% notice Note %}}
 Git is not automatically added to your search path during installation. 
 {{% /notice %}}
 
-To use Git, click the Windows Start button and then click `All apps`.
+To use Git, click the Windows **Start** button and then click **All apps**.
 
 You see the Git folder in the G section.
 
@@ -77,12 +79,12 @@ There are menu items for multiple ways to start Git.
 
 ## How can I use Git in a Windows Command Prompt?
 
-Start a Git Command Prompt by selecting `Git CMD` from the start menu.
+Start a Git Command Prompt by selecting **Git CMD** from the **Start** menu.
 
 ![CMD](/install-guides/_images/git3-woa.png)
 
 
-To see the help message enter:
+To see the help message, enter:
 
 ```cmd
 git help
@@ -92,11 +94,11 @@ You can use Git from this Command Prompt.
 
 ## How can I use Git with Git Bash?
 
-To use Git in a Linux-like environment, select `Git Bash` from the start menu.
+To use Git in a Linux-like environment, select **Git Bash** from the start menu.
 
 ![CMD](/install-guides/_images/git4-woa.png)
 
-Click the colored icon on the top left corner of the Git Bash window and then click `Options` to change the appearance of the window, including colors, fonts, and font sizes. 
+Click the colored icon in the top-left corner of the Git Bash window, and then click **Options** to change the appearance of the window, including colors, fonts, and font sizes. 
 
 ![Options](/install-guides/_images/git5-woa.png)
 
