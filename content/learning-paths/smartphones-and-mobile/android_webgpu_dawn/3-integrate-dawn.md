@@ -37,7 +37,7 @@ GameActivity performs the following functions:
 * It renders into a SurfaceView, making it easier for games to interact with other UI components.
 
 {{% notice Tip %}}
-You can find more information about Android Game Activity and its capabilities in the [Game Activity documentation](https://developer.android.com/games/agdk/game-activity).
+You can find more information about Android Game Activity and its capabilities in the [Game Activity Documentation](https://developer.android.com/games/agdk/game-activity).
 {{% /notice %}}
 
 ## Download project source files

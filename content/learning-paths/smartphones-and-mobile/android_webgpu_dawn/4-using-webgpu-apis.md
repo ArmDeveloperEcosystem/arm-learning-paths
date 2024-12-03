@@ -56,9 +56,9 @@ The same host system might expose multiple adapters if it has access to multiple
 
 You can use these features and limits to determine the overall capabilities of the system before requesting the device. The adapter is used to access the capabilities of the user’s hardware, which are used to select the behavior of your application among different code paths. 
 
-Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is notpossible to inadvertently rely on capabilities specific to a device.
+Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is not possible to inadvertently rely on capabilities specific to a device.
 
-![Supported Limits #center](images/adapter_supported_limits.png "Figure 7: Adapter Supported Limit s")
+![Supported Limits #center](images/adapter_supported_limits.png "Figure 7: Adapter Supported Limits")
 
 {{% notice Tip %}}
 To use the adapter/device duality in an advanced way, you can set up multiple limit presets and select one depending on the adapter. 
@@ -157,7 +157,7 @@ requiredLimits.limits.minUniformBufferOffsetAlignment = supportedLimits.limits.m
 {{% notice Tip %}}
 Setting *better* limits might not be preferable, as doing so might have a consequential performance impact. To improve portability across devices and implementations, applications should generally only request better limits if they are required. 
 
-It is recommended that you to read more about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["limits"](https://gpuweb.github.io/gpuweb/#limits).
+It is recommended that you to read more about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["Limits"](https://gpuweb.github.io/gpuweb/#limits).
 {{% /notice %}}
 
 Use the `requestDevice()` API to request device:

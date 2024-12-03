@@ -28,7 +28,7 @@ The high-level view of WebGPU is shown below in Figure 1:
 
 ## What are the benefits of WebGPU?
 
-WebGPU takes into account lessons learned from earlier standards such as WebGL and OpenGL, and provides the following benefits: 
+WebGPU uses lessons learned from earlier standards such as WebGL and OpenGL to develop an improved offering, and provides the following benefits: 
 
 * A reasonable level of abstraction.
 * Improved performance.

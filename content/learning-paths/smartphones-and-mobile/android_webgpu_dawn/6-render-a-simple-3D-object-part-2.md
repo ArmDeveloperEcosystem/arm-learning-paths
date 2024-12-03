@@ -22,7 +22,7 @@ The steps are listed below:
 
 All these steps are common in graphics programming, and WebGPU allows you to perform these same operations. 
 
-It is a good idea to read the individual chapters in the [3D rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section to learn more.
+It is a good idea to read the individual chapters in the [3D Rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section to learn more.
 
 ### Loading 3D objects
 
@@ -51,7 +51,7 @@ You are now ready to render a 3D object.
 
 You can run a rendering pass and *draw* something onto our *surface*. 
 
-To encode any commands to be issued to GPU, you need to create a `CommandEncoder`. Modern APIs record commands into command buffers,rather than issuing commands one by one, and submit all of them at once. 
+To encode any commands to be issued to GPU, you need to create a `CommandEncoder`. Modern APIs record commands into command buffers, rather than issuing commands one by one, and submit all of them at once. 
 
 In WebGPU, this is done through a `CommandEncoder` as shown below:
 
@@ -123,7 +123,7 @@ Make sure you release the created encoders and buffers by calling the respective
 {{% /notice %}}
 
 {{% notice Note %}}
-By default Dawn runs callbacks only when the device “ticks”, so the error callbacks are invoked in a different call stack than where the error occurred, making the breakpoint less informative. 
+By default, Dawn runs callbacks only when the device “ticks”, so the error callbacks are invoked in a different call stack than where the error occurred, making the breakpoint less informative. 
 
 To force Dawn to invoke error callbacks as soon as there is an error, you can enable an instance toggle:
 

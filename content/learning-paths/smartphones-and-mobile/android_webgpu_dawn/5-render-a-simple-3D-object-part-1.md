@@ -10,7 +10,7 @@ layout: learningpathall
 
 Graphic applications must operate with two processors, the CPU and the GPU. 
 
-These two processors run on different timelines. For optimal performance, commands intended for the GPU are batched and sent through a command queue. The GPU consumes this queue whenever it is ready, and in this way processors minimize the time spent idling for their sibling to respond. 
+These two processors run on different timelines. For optimal performance, commands intended for the GPU are batched and sent through a command queue. The GPU consumes this queue whenever it is ready, and in this way, processors minimize the time spent idling for their sibling to respond. 
 
 A WebGPU device has a single queue, which is used to send both commands and data. You can get it with `wgpuDeviceGetQueue()`.
 
@@ -50,7 +50,7 @@ The main things to notice in the above image are:
 To execute shaders on the GPU, you need to create all of these resources and set up this state. Creation of resources is relatively straightforward.
 
 {{% notice Note %}}
-Most WebGPU resources can not be changed after creation. You can change their contents but not their size, usage, and format. 
+Most WebGPU resources cannot be changed after creation. You can change their contents but not their size, usage, and format. 
 
 If you want to change something create a new resource and destroy the old one.
 {{% /notice %}}

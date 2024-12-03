@@ -42,7 +42,7 @@ You might have to zoom into the data up to the maximum (**500 us**), as you are 
 
 You can analyze two consecutive frames as shown below:
 
-!["Two consecutive frames" #center](./images/Streamline-mali-analysis.png "Figure 14: Two consecutive frames")
+!["Two Consecutive Frames" #center](./images/Streamline-mali-analysis.png "Figure 14: Two Consecutive Frames")
 
 Arm has worked with the Dawn team to optimize data uploading to GPU buffers for Mali GPUs. 
 
