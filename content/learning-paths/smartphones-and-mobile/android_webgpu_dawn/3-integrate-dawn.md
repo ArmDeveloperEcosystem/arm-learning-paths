@@ -15,9 +15,7 @@ Open Android Studio, click **New Project**, and select **Game Activity (C++)** a
 ![New Game Activity #center](./images/android_studio_new_game_activity.png "Figure 4: New C++ Game Activity")
 
 * Set the **Name** field to **dawnwebgpu**. 
-
 * Click **Next** to continue. 
-
 * Finish setting up the new project by accepting all the default selections until the project is created. 
 
 The project is created in `~/AndroidStudioProjects`.
@@ -106,14 +104,14 @@ WebGPU is a constantly evolving standard and hence its implementation, Dawn is a
 
 To add Dawn to our application, there are two options:
 
-1. Create a shared/static library from the Dawn source and use it in application.
-2. Download the source as a dependency and build it as part of the project build.
+* Create a shared/static library from the Dawn source and use it in application.
+* Download the source as a dependency and build it as part of the project build.
 
 You will use the second option here, since it provides more flexibility for debug.
 
 The files `webgpu/webgpu.cmake` and `CMakeLists.txt` facilitate downloading and building WebGPU with Dawn implementation and integrating Dawn into the project.
 
-4. Add WebGPU to the project.
+## Add WebGPU to the project
 
 WebGPU is added to the project in the file `CMakeLists.txt`.
 
@@ -153,6 +151,6 @@ target_link_libraries(dawnwebgpu
 ```
 
 
-The `webgpu.hpp` header file acts like an interface, exposing all WebGPU functions and variables to the main Application.
+The `webgpu.hpp` header file acts like an interface, exposing all the WebGPU functions and variables to the main Application.
 
 Navigate to the next section to continue building the WebGPU application. 

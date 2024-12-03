@@ -8,13 +8,15 @@ layout: learningpathall
 
 ## Project Setup
 
-With the `webgpudawn` library integrated, you can start by removing the extra files included as part of the stock Game Activity project. 
+With the `webgpudawn` library integrated, you can begin removing the extra files included as part of the stock Game Activity project. 
 
-1. Delete all the files from the top `cpp` directory except `CMakeLists.txt`. 
+* Delete all the files from the top `cpp` directory, except `CMakeLists.txt`. 
 
-    You have already reviewed `CMakeLists.txt` in the previous section. 
+    {{% notice Note %}}
+You have already reviewed `CMakeLists.txt` in the previous section. 
+{{% /notice %}}
 
-2. Add the files `webgpuRenderer.cpp` and `webgpuRenderer.h` files for the WebGPU application. 
+* Add the files `webgpuRenderer.cpp` and `webgpuRenderer.h` files for the WebGPU application. 
 
     Run the commands below to add a new `main.cpp` and WebGPU renderer files:
 
