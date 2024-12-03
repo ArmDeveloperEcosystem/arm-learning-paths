@@ -35,7 +35,7 @@ The file format is not complex, but parsing files is out of the scope of this Le
 You can use open-source software such as Blender to create your own 3D objects.
 
 {{% notice Note %}}
-Exactly one of your source files must define `TINYOBJLOADER_IMPLEMENTATION` before including it:
+Only one of your source files must define `TINYOBJLOADER_IMPLEMENTATION` before including it:
 
 ```C++
 #define TINYOBJLOADER_IMPLEMENTATION // add this to exactly 1 of your C++ files

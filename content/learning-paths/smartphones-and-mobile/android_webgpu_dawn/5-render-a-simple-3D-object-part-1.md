@@ -31,7 +31,7 @@ If you would like to learn more, refer to the [Command Queue](https://eliemichel
 WebGPU is a simple system. It runs three types of functions on the GPU: 
 
 * A Vertex Shader that computes vertices. The shader returns vertex positions.
-* A Fragment Shader that computes colors. The shader indirectly writes data to textures. That data does not have to be limited to colors.
+* A Fragment Shader that computes colors. When an object is drawn, for each pixel to be drawn the GPU calls the fragment shader. The fragment shader then returns a color.
 * A Compute Shader that is more generic. It is effectively a function that you can call and request to execute as many times as you require.
 
 Here is a simplified diagram of a WebGPU setup to draw triangles by using a vertex shader and a fragment shader:
