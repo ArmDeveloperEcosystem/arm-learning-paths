@@ -50,27 +50,27 @@ It is useful to understand these layers as you begin to use WebGPU APIs in an ap
 
 ### The adapter
 
-Before requesting access to a **device**, you need to select an **adapter**. 
+Before requesting access to a device, you need to select an adapter. 
 
-The same host system may expose multiple adapters if it has access to multiple physical GPUs. It may also have an adapter that represents an emulated/virtual device. Each adapter advertises a list of optional **features** and **supported limits** that it can handle. 
+The same host system might expose multiple adapters if it has access to multiple physical GPUs. It might also have an adapter that represents an emulated/virtual device. Each adapter offers optional features and supported limits that it can handle. 
 
-These are used to determine the overall capabilities of the system before **requesting the device**. The **adapter** is used to **access the capabilities** of the user’s hardware, which are used to select the behavior of your application among very different code paths. 
+You can use these features and limits to determine the overall capabilities of the system before requesting the device. The adapter is used to access the capabilities of the user’s hardware, which are used to select the behavior of your application among different code paths. 
 
-Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is **not** possible to inadvertently rely on capabilities specific to a device.
+Once a code path is chosen, a device is created with the chosen capabilities. Only the capabilities selected for this device are  allowed in the rest of the application. This way, it is notpossible to inadvertently rely on capabilities specific to a device.
 
-![Supported Limits #center](images/adapter_supported_limits.png "Figure 7: Adapter Supported Limits")
+![Supported Limits #center](images/adapter_supported_limits.png "Figure 7: Adapter Supported Limit s")
 
 {{% notice Tip %}}
-In an advanced use of the adapter/device duality, you can set up multiple limit presets and select one depending on the adapter. 
+To use the adapter/device duality in an advanced way, you can set up multiple limit presets and select one depending on the adapter. 
 
-In this case, there is a single preset and abort early if it is not supported.
+In this scenario, there is a single preset and an abort early option if it is not supported.
 {{% /notice %}}
 
 ### Requesting the adapter
 
 An adapter is not something you create, but rather something that you *request* using the function `requestAdapter()`.
 
-Before doing that you need to create an instance using the `createInstance()` function. 
+Before doing this you need to create an instance using the `createInstance()` function. 
 
 ```C++
 wgpu::Instance instance = createInstance(InstanceDescriptor{});
@@ -80,7 +80,7 @@ In order to display something on the screen, the operating system needs to provi
 
 The Game Activity provides a *pApp* member which exposes an Android Window. WebGPU can use an Android Window for rendering. 
 
-WebGPU cannot use the *window* directly, but uses something called **a surface**, which can be easily created using the window. 
+WebGPU cannot use the *window* directly, but uses something called a "surface", which can be easily created using the window. 
 
 ```C++
 wgpu::SurfaceDescriptorFromAndroidNativeWindow platformSurfaceDescriptor = {};
@@ -131,7 +131,7 @@ There are few options to set the limits:
 wgpu::RequiredLimits requiredLimits = Default;
 ```
 
-* Query the Adapter's *supported limits* and use them as *required limits*:
+* Query the Adapter's *supported limits*, and use them as *required limits*:
 
 ```C++
 wgpu::SupportedLimits supportedLimits;
@@ -140,7 +140,7 @@ wgpu::RequiredLimits requiredLimits = Default;
 requireLimits.limits = supportedLimits.limits;
 ```
 
-* Query the Adapter's *supported limits* and define specific *better* limits in the *required limits*:
+* Query the Adapter's *supported limits*, and define specific *better* limits in the *required limits*:
 
 ```C++
 wgpu::SupportedLimits supportedLimits;
@@ -155,9 +155,9 @@ requiredLimits.limits.minUniformBufferOffsetAlignment = supportedLimits.limits.m
 ```
 
 {{% notice Tip %}}
-Setting *better* limits may not be desirable, as doing so may have a performance impact. To improve portability across devices and implementations, applications should generally only request better limits if they are required. 
+Setting *better* limits might not be preferable, as doing so might have a consequential performance impact. To improve portability across devices and implementations, applications should generally only request better limits if they are required. 
 
-It is recommended to read more about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["limits"](https://gpuweb.github.io/gpuweb/#limits).
+It is recommended that you to read more about ["Supported Limits"](https://developer.mozilla.org/en-US/docs/Web/API/GPUSupportedLimits) and ["limits"](https://gpuweb.github.io/gpuweb/#limits).
 {{% /notice %}}
 
 Use the `requestDevice()` API to request device:
@@ -181,7 +181,7 @@ static auto errorCallback = device.setUncapturedErrorCallback([](ErrorType type,
 ```
 
 {{% notice Tip %}}
-While creating a device, use a callback function `setUncapturedErrorCallback`, this helps in capturing validation and other errors with the WebGPU device. 
+While creating a device, use the callback function `setUncapturedErrorCallback`. This helps in capturing validation and other errors with the WebGPU device. 
 {{% /notice %}}
 
-Proceed to learn how to render 3D objects. 
+You can now move on to learn how to render 3D objects. 
