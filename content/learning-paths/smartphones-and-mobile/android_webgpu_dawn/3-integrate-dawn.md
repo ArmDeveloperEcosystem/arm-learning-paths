@@ -6,19 +6,19 @@ weight: 4
 layout: learningpathall
 ---
 
-## Set up Android Project
+## Set up your Android Studio Project
 
 Start by creating a new Android Studio project.
 
-Open Android Studio, click **New Project** and select **Game Activity (C++)** as shown below:
+Open Android Studio, click **New Project**, and select **Game Activity (C++)** as shown below:
 
 ![New Game Activity #center](./images/android_studio_new_game_activity.png "Figure 4: New C++ Game Activity")
 
-Set the **Name** field to **dawnwebgpu**. 
+* Set the **Name** field to **dawnwebgpu**. 
 
-Click **Next** to continue. 
+* Click **Next** to continue. 
 
-Finish the new project creation by accepting all the default selections until the project is created. 
+* Finish setting up the new project by accepting all the default selections until the project is created. 
 
 The project is created in `~/AndroidStudioProjects`.
 
@@ -61,27 +61,25 @@ Unzip the project files:
 unzip main.zip
 ```
 
-You now have a directory named **Android_DawnWebGPU-main** in your **webgpu-files** directory. 
+You now have a directory named **Android_DawnWebGPU-main** in the **webgpu-files** directory. 
 
-During the following sections you will copy some of the required files from the **Android_DawnWebGPU-main** directory into your Game Activity project to learn how to create WebGPU applications.
+During the following sections, you will copy some of the required files from the **Android_DawnWebGPU-main** directory into your Game Activity project to learn how to create WebGPU applications.
 
 ## Upgrade the application to include Dawn
 
 Return to Android Studio and start work on the WebGPU application. 
 
-The Android Game Activity framework uses OpenGLES3 for graphics. 
-
-You can remove this dependency and replace it with WebGPU. 
+The Android Game Activity framework uses OpenGLES3 for graphics. You can remove this dependency and replace it with WebGPU. 
 
 Add WebGPU to the project using the following steps:
 
-1. In Android Studio, navigate to the project view and find the **app** --> **cpp** folder.
+* In Android Studio, navigate to the project view, and find the **app** --> **cpp** folder.
 
-2. Open the terminal in Android Studio. You are now in the **dawnwebgpu** directory.
+* Open the terminal in Android Studio. You are now in the **dawnwebgpu** directory.
 
-3. Create a new directory and download the WebGPU header file from GitHub.
+* Create a new directory and download the WebGPU header file from GitHub.
 
-4. Run the commands below to download the `webgpu.hpp` header file:
+* Run the commands below to download the `webgpu.hpp` header file:
 
 ```console
 mkdir -p app/src/main/cpp/webgpu/include/webgpu
@@ -90,7 +88,7 @@ cp ~/webgpu-files/Android_DawnWebGPU-main/app/src/main/cpp/webgpu/include/webgpu
 cd ../..
 ```
 
-5. Next copy the remaining WebGPU files to your project. 
+Next, copy the remaining WebGPU files to your project. 
 
 ```console
 cp ~/webgpu-files/Android_DawnWebGPU-main/app/src/main/cpp/webgpu/CMakeLists.txt .

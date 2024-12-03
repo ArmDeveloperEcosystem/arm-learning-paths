@@ -174,6 +174,6 @@ For example:
 
 Now click the **Run** icon in Android Studio, which builds the application and launches it on the connected device, producing the following output:
 
-![Output #center](images/output.gif  "Output")
+![Output #center](images/output.gif  "Figure 10: Output")
 
 Congratulations! You are run a WebGPU application on an Android device.

@@ -50,27 +50,27 @@ Any limitations of the API caused by privacy constraints can be disabled when us
 
 The initial focus for WebGPU was JavaScript.  The initial `webgpu.h` header file is written in C. 
 
-This Learning Path uses C++ rather than JavaScript or C for the following reasons:
+This Learning Path uses C++ rather than JavaScript or C, for the following reasons:
 
 * C++ remains the primary language used for high performance graphics applications, such as video games, render engines, and modeling tools.
-* The level of abstraction and control of C++ is well suited for interacting with graphics APIs in general.
+* The level of abstraction and control of C++ is well-suited for interacting with graphics APIs in general.
 * Graphics programming is a good way to improve skills in C++.
 
 ## Dawn: the Google WebGPU implementation
 
-Since WebGPU is a standard and not an implementation itself, there are various possible implementations. 
+Since WebGPU is a standard and not an implementation itself, there are various possible options for implementation. 
 
-[Dawn](https://github.com/google/dawn) is an open-source, cross-platform implementation of the WebGPU standard. 
+[Dawn](https://github.com/google/dawn) is an open-source, cross-platform implementation of the WebGPU standard. It implements the WebGPU functionality specified in `webgpu.h`. 
 
-It implements the WebGPU functionality specified in `webgpu.h`. Dawn is designed to be integrated as part of a larger system such as Chromium or a native Android Application.
+Dawn is designed to be integrated as part of a larger system such as Chromium or a native Android Application.
 
 Dawn provides several WebGPU building blocks:
 
-* WebGPU C/C++ headers that applications and other building blocks use, including a header file and C++ wrapper.
-* A "native" implementation of WebGPU using appropriate APIs: D3D12, Metal, Vulkan, and OpenGL. 
-* A client-server implementation of WebGPU for applications that are in a sandbox without access to native drivers.
-* Tint; a compiler for the WebGPU Shader Language (WGSL), that converts shaders to and from WGSL.
+* WebGPU C/C++ headers that applications and other building blocks use, including a header file and a C++ wrapper.
+* A "native" implementation of WebGPU using appropriate APIs, such as D3D12, Metal, Vulkan, and OpenGL. 
+* A client-server implementation of WebGPU, for applications that are in a sandbox without access to native drivers.
+* Tint, a compiler for the WebGPU Shader Language (WGSL), that converts shaders to and from WGSL.
 
-Because it is written in C++, Dawn provides enhanced error message reporting and logging. The fact that it is open source, also means that it is easier to inspect stack traces when applications crash.
+As it is written in C++, Dawn provides enhanced error message reporting and logging. The fact that it is open source, also means that it is easier to inspect stack traces when applications crash.
 
 Dawn is usually ahead of `wgpu-native`, another WebGPU implementation, in terms of new functionality developments and standards changes. 

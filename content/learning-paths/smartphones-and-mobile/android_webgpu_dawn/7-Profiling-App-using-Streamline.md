@@ -14,11 +14,11 @@ Follow these steps to configure Arm Streamline Performance Analyzer to capture M
 * Navigate to the **Start** tab, select **Android (adb)**, select the device, and then select the application to debug.
 * Select **Select Counters**.
 
-![Select device #center](images/streamline_select.png "Select device")
+![Select device #center](images/streamline_select.png "Figure 11: Select device")
 
 This opens a new window:
 
-![Select counters #center](images/streamline_select_counters.png "Select counters")
+![Select counters #center](images/streamline_select_counters.png "Figure 12: Select counters")
 
 * Search for **Mali Timeline Events: Perfetto**.
 * Check that it is listed in **Events to collect**.
@@ -36,13 +36,13 @@ Wait until Streamline completes processing the data.
 
 Switch to **Mali Timeline** view as shown below:
 
-!["Mali Timeline Streamline" #center](images/Streamline-mali-timeline.png "Mali Timeline Streamline")
+!["Mali Timeline Streamline" #center](images/Streamline-mali-timeline.png "Figure 13: Mali Timeline Streamline")
 
 You might have to zoom into the data up to the maximum (**500 us**), as you are rendering a simple 3D object. 
 
 You can analyze two consecutive frames as shown below:
 
-!["Two consecutive frames" #center](./images/Streamline-mali-analysis.png "Two consecutive frames")
+!["Two consecutive frames" #center](./images/Streamline-mali-analysis.png "Figure 14: Two consecutive frames")
 
 Arm has worked with the Dawn team to optimize data uploading to GPU buffers for Mali GPUs. 
 
