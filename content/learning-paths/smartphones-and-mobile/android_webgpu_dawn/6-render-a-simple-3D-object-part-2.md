@@ -176,4 +176,4 @@ Now click the **Run** icon in Android Studio, which builds the application and l
 
 ![Output #center](images/output.gif  "Figure 10: Output")
 
-Congratulations! You are run a WebGPU application on an Android device.
+Congratulations! You have now run a WebGPU application on an Android device.

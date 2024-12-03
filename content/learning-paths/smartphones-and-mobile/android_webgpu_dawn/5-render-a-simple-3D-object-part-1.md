@@ -69,43 +69,42 @@ The Render Pipeline has two main types of stages, **fixed-function** and **progr
 
 The pipeline description consists of the following steps:
 
-* Describe vertex pipeline state
-* Describe vertex pipeline state
-* Describe primitive pipeline state
-* Describe fragment pipeline state
-* Describe stencil/depth pipeline state
-* Describe multi-sampling state
-* Describe pipeline layout
+* Describe the vertex pipeline state.
+* Describe the primitive pipeline state.
+* Describe the fragment pipeline state.
+* Describe the stencil/depth pipeline state.
+* Describe the multi-sampling state.
+* Describe the pipeline layout.
 
-The fixed function stages are well documented and you can refer to [code](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/webgpuRenderer.cpp#L256) and [further reading](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/hello-triangle.html#lit-24) for configuring them. 
+The fixed function stages are well-documented, and you can refer to [code](https://github.com/varunchariArm/Android_DawnWebGPU/blob/main/app/src/main/cpp/webgpuRenderer.cpp#L256) and [further reading](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/hello-triangle.html#lit-24) for information about configuring them. 
 
-Configuring these stages is straight forward and is similar to other graphics APIs.
+Configuring these stages is straightforward and is similar to other graphics APIs.
 
 ### Programmable stage
 
-There are two programmable stages, vertex and fragment programmable stages. Both of them uses **Shader Module**.
+There are two programmable stages, vertex, and fragment programmable stages. Both of them use the **Shader Module**.
 
 ### Shaders
 
 Both the vertex and fragment programmable stages can use the same shader module or have individual shader modules. 
 
-The Shader module is kind of a dynamic library (like a .dll, .so or .dylib file), except that it talks the binary language of your GPU rather than your CPU.
+The Shader module is like a dynamic library (such as a .dll, .so, or a .dylib file), except that it uses the binary language of your GPU rather than that of your CPU.
 
 ### Shader Code
 
 The shader language officially used by WebGPU is called WebGPU Shading Language, [WGSL](https://gpuweb.github.io/gpuweb/wgsl/). 
 
-All implementations of WebGPU support it, and Dawn also offers the possibility to provide shaders written in [SPIR-V](https://www.khronos.org/spir).
+All implementations of WebGPU support it, and Dawn also offers the opportunity to provide shaders written in [SPIR-V](https://www.khronos.org/spir).
 
 {{% notice Note %}}
-WGSL was originally designed to be a human-editable version of SPIR-V programming model, so transpilation from SPIR-V to WGSL is in theory efficient and lossless. You can use [Naga](https://github.com/gfx-rs/naga) or [Tint](https://dawn.googlesource.com/tint) to translate.
+WGSL was originally designed to be a human-editable version of the SPIR-V programming model, so transpilation from SPIR-V to WGSL is in theory efficient and lossless. You can use [Naga](https://github.com/gfx-rs/naga) or [Tint](https://dawn.googlesource.com/tint) to translate.
 {{% /notice %}}
 
-It is highly recommended to understand WGSL syntax and capabilities to better program in WebGPU.
+It is recommended that you learn about the WGSL syntax and capabilities to better program in WebGPU.
 
 ### Shader Module Creation
 
-It is simple to create a Shader module in WebGPU:
+It is simple to create a Shader module in WebGPU. Use the following code:
 
 ```C++
 ShaderModuleDescriptor shaderDesc;
@@ -116,15 +115,15 @@ By default the `nextInChain` member of `ShaderModuleDescriptor` is a `nullptr`.
 
 The `nextInChain` pointer is the entry point of WebGPU’s extension mechanism. It is either null or pointing to a structure of type `WGPUChainedStruct`. 
 
-It may recursively have a next element (again, either null or pointing to some `WGPUChainedStruct`). 
+It may recursively have a next element (again, either null or pointing to a `WGPUChainedStruct`). 
 
-Second, it has a struct type `sType`, which is an enum telling in which struct the chain element can be cast.
+Secondly, it has the struct type `sType`, which is an enum reporting in which struct the chain element can be cast.
 
 To create a shader module from WGSL code, use the `ShaderModuleWGSLDescriptor` SType. 
 
 In Dawn, a SPIR-V shader can similarly be created using the `WGPUShaderModuleSPIRVDescriptor`.
 
-The field shaderCodeDesc.chain corresponds to the chained struct when cast as a simple `WGPUChainedStruct`, which must be set to the corresponding SType enum value:
+The field shaderCodeDesc.chain corresponds to the chained struct when cast as a simple `WGPUChainedStruct`, that must be set to the corresponding SType enum value:
 
 ```C++
 ShaderModuleWGSLDescriptor shaderCodeDesc;

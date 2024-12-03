@@ -30,7 +30,7 @@ Once you have selected the device, the application, and the metrics to be collec
 
 This automatically starts the application and begins collecting the profiling data. 
 
-Make sure the application is running correctly on your Android device. After a few seconds, you can stop the capture. 
+Make sure the application is running correctly on your Android device. After a few seconds, you can stop the capture process. 
 
 Wait until Streamline completes processing the data. 
 
@@ -48,11 +48,11 @@ Arm has worked with the Dawn team to optimize data uploading to GPU buffers for 
 
 Arm has implemented a **Fast Path** mechanism where the Vertex Queue starts processing in parallel while an earlier Fragment Queue is simultaneously being processed. 
 
-As you can see from the above picture, there is some overlap between Fragment Queue of first frame and Vertex Queue of the consecutive frame. 
+As you can see from the above picture, there is some overlap between the Fragment Queue of first frame, and Vertex Queue of the consecutive frame. 
 
 This demonstrates that the application is hitting the **Fast Path** that Arm has implemented to optimize performance of Dawn for Mali GPUs. 
 
-The overlap is small since the application is rendering the same simple 3D object under different orientation. You can extend the application to render complex objects with multiple *Uniform Buffers*. This will demonstrate the overlap in more detail.
+The overlap is small since the application is rendering the same simple 3D object under a different orientation. You can extend the application to render complex objects with multiple *Uniform Buffers*. This demonstrates the overlap in more detail.
 
 {{% notice Tip %}}
 You can experiment with different counters in Streamline and also explore other CPU profiling data.

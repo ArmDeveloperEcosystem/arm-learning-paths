@@ -72,11 +72,8 @@ The Android Game Activity framework uses OpenGLES3 for graphics. You can remove 
 Add WebGPU to the project using the following steps:
 
 * In Android Studio, navigate to the project view, and find the **app** --> **cpp** folder.
-
 * Open the terminal in Android Studio. You are now in the **dawnwebgpu** directory.
-
 * Create a new directory and download the WebGPU header file from GitHub.
-
 * Run the commands below to download the `webgpu.hpp` header file:
 
 ```console
