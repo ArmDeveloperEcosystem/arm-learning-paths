@@ -7,9 +7,9 @@ layout: learningpathall
 ---
 
 ## Android Memory Profiling
-Memory is often a problem in ML, with ever bigger models and data. For profiling an Android app's memory, Android Studio has a built-in profiler. This can be used to monitor the memory usage of your app, and to find memory leaks.
+Memory is often a problem in ML, with ever-bigger models and data. For profiling an Android app's memory, Android Studio has a built-in profiler. This can be used to monitor the memory usage of your app, and to detect memory leaks.
 
-To find the Profiler, open your project in Android Studio and click on the *View* menu, then *Tool Windows*, and then *Profiler*. This opens the Profiler window. Attach your device in Developer Mode with a USB cable, and then you should be able to select your app's process. Here there are a number of different profiling tasks available.
+To find the Profiler, open your project in Android Studio, and select the **View** menu. Next, click  *Tool Windows*, and then *Profiler*. This opens the Profiler window. Attach your device in Developer Mode with a USB cable, and then you should be able to select your app's process. Here there are a number of different profiling tasks available.
 
 Most likely with an Android ML app you'll need to look at memory both from the Java/Kotlin side and the native side. The Java/Kotlin side is where the app runs, and may be where buffers are allocated for input and output if, for example, you're using LiteRT (formerly known as TensorFlow Lite). The native side is where the ML framework will run. Looking at the memory consumption for Java/Kotlin and native is 2 separate tasks in the Profiler: *Track Memory Consumption (Java/Kotlin Allocations)* and *Track Memory Consumption (Native Allocations)*.
 
