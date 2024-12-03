@@ -8,13 +8,15 @@ layout: learningpathall
 
 ### Step-by-Step Porting
 
-1. Change the loading process to follow **NEON**'s method for initializing vectors. The **SSE4.2** intrinsic **`_mm_set_ps`** is in reality a macro, in **NEON** you can do the same thing with curly braces **`{}`** inititialization.
-2. Next, you will replace the **SSE4.2** intrinsics with the **NEON** equivalents we identified earlier. The key is to ensure that the operations perform the same tasks, such as comparison, addition, multiplication, and square root calculations.
-3. Finally, modify the storing process to match **NEON**’s way of moving data from vectors to memory. In **NEON**, you use functions like [**`vst1q_f32`**](https://simd.info/c_intrinsic/vst1q_f32/) for storing 128-bit floating-point vectors and [**`vst1q_u32`**](https://simd.info/c_intrinsic/vst1q_u32/) for storing 128-bit integer vectors.
+Follow this step-by-step process to porting:
 
-After identifying the **NEON** intrinsics you will need in the ported program, it's time to actually write the code.
+1. Change the loading process to follow NEON's method for initializing vectors. The SSE4.2 intrinsic **`_mm_set_ps`** is in reality a macro, in NEON you can do the same thing with curly braces **`{}`** initialization.
+2. Next, replace the SSE4.2 intrinsics with the NEON equivalents that you identified earlier. The key is to ensure that the operations perform the same tasks, such as comparison, addition, multiplication, and square root calculations.
+3. Finally, modify the storing process to match NEON’s way of moving data from vectors to memory. In NEON, you use functions like [**`vst1q_f32`**](https://simd.info/c_intrinsic/vst1q_f32/) for storing 128-bit floating-point vectors and [**`vst1q_u32`**](https://simd.info/c_intrinsic/vst1q_u32/) for storing 128-bit integer vectors.
 
-This time on your Arm Linux machine, create a new file for the ported NEON code named `calculation_neon.c` with the contents shown below:
+After identifying the NEON intrinsics that you require in the ported program, it's now time to write the code.
+
+This time on your Arm Linux machine, create a new file for the ported NEON code named `calculation_neon.c`, populating with the contents as shown below:
 
 ```C
 #include <arm_neon.h>
@@ -66,7 +68,7 @@ int main() {
 
 ### Verifying the Ported Code
 
-It's time to verify that the functionality remains the same, which means you get the same results and similar performance.
+It's time to verify that the functionality remains the same, which means that you achieve the same results and similar performance.
 
 Compile the above code as follows on your Arm Linux machine:
 
@@ -92,8 +94,8 @@ Multiplication Result: 2.00 12.00 36.00 80.00
 Square Root Result: 1.41 3.46 6.00 8.94
 ```
 
-You can see that the results are the same as in the **SSE4.2** example.
+You can see that the results are the same as in the SSE4.2 example.
 
 {{% notice Note %}} 
-You initialized the vectors in reverse order compared to the **SSE4.2** version because the array initialization and vld1q_f32 function load vectors from LSB to MSB, whereas **`_mm_set_ps`** loads elements MSB to LSB.
+You initialized the vectors in reverse order compared to the SSE4.2 version because the array initialization and vld1q_f32 function load vectors from LSB to MSB, whereas **`_mm_set_ps`** loads elements MSB to LSB.
 {{% /notice %}}
