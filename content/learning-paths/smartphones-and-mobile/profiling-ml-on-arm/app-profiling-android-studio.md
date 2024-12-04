@@ -7,17 +7,28 @@ layout: learningpathall
 ---
 
 ## Android Memory Profiling
-Memory is often a problem in ML, with ever-bigger models and data. For profiling an Android app's memory, Android Studio has a built-in profiler. This can be used to monitor the memory usage of your app, and to detect memory leaks.
+Memory is a common problem in ML, with ever-increasing model parameters and datasets. For profiling an Android app's memory, Android Studio has a built-in profiler. You can use this to monitor the memory usage of your app, and to detect memory leaks.
 
-To find the Profiler, open your project in Android Studio, and select the **View** menu. Next, click  *Tool Windows*, and then *Profiler*. This opens the Profiler window. Attach your device in Developer Mode with a USB cable, and then you should be able to select your app's process. Here there are a number of different profiling tasks available.
+### Set up the Profiler
 
-Most likely with an Android ML app you'll need to look at memory both from the Java/Kotlin side and the native side. The Java/Kotlin side is where the app runs, and may be where buffers are allocated for input and output if, for example, you're using LiteRT (formerly known as TensorFlow Lite). The native side is where the ML framework will run. Looking at the memory consumption for Java/Kotlin and native is 2 separate tasks in the Profiler: *Track Memory Consumption (Java/Kotlin Allocations)* and *Track Memory Consumption (Native Allocations)*.
+* To find the Profiler, open your project in Android Studio, and select the **View** menu.
 
-Before you start either task, you have to build your app for profiling. The instructions for this and for general profiling setup can be found [here](https://developer.android.com/studio/profile). You will want to start the correct profiling version of the app depending on the task.
+* Next, click  **Tool Windows**, and then **Profiler**. This opens the Profiler window. 
 
-![Android Studio profiling run types alt-text#center](android-profiling-version.png "Figure 1. Profiling run versions")
+* Attach your device in Developer Mode with a USB cable, and then select your app's process. Here there are a number of different profiling tasks available.
 
-For the Java/Kotlin side, you want the **debuggable** "Profile 'app' with complete data", which is based off the debug variant. For the native side, you want the **profileable** "Profile 'app' with low overhead", which is based off the release variant.
+Most likely with an Android ML app you will need to look at memory both from the Java/Kotlin side, and the native side. The Java/Kotlin side is where the app runs, and might be where buffers are allocated for input and output if, for example, you are using LiteRT (formerly known as TensorFlow Lite). The native side is where the ML framework runs. 
+
+Looking at the memory consumption for Java/Kotlin and native, there are two separate tasks in the Profiler: 
+
+* **Track Memory Consumption (Java/Kotlin Allocations)**.
+* **Track Memory Consumption (Native Allocations)**.
+
+Before you start either task, you must build your app for profiling. The instructions for this, and for general profiling setup can be found [here](https://developer.android.com/studio/profile). You need to start the correct profiling version of the app depending on the task.
+
+![Android Studio profiling run types alt-text#center](android-profiling-version.png "Figure 1. Profiling Run Versions")
+
+For the Java/Kotlin side, select **Profile 'app' with complete data", which is based off the debug variant. For the native side, you want the **profileable** "Profile 'app' with low overhead", which is based off the release variant.
 
 ### Java/Kotlin
 

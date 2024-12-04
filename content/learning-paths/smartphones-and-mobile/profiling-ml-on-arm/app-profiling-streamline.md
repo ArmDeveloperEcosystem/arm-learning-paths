@@ -58,21 +58,21 @@ Next, you need a debuggable-build of the application that you want to profile.
 - In Unreal Engine, open **Project Settings** > **Project** > **Packaging** > **Project**, and ensure that the **For Distribution** checkbox is clear. 
 - Generally, you can set `android:debuggable=true` in the application manifest file.
 
-For the example application that you cloned earlier, the Build Variant is **debug** by default, but you can verify this by going to **Build** > **Select Build Variant** in Android Studio. 
+For the example application that you cloned earlier, the Build Variant is `debug` by default, but you can verify this by going to **Build** > **Select Build Variant** in Android Studio. 
 
 Build and install this application on your device.
 
-You can now run Streamline and [capture a profile](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en) of your application. But before you do, you can add some useful annotations to your code that can help with more specific performance analysis of your application.
+You are now able to run Streamline and [capture a profile](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en) of your application. But before you do, you can add some useful annotations to your code that enables more specific performance analysis of your application.
 
 ## Custom Annotations
 
-In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This can help you understand the performance of your application in relation to these events. At the bottom of *Figure 1* above there are custom annotations to show when inference, pre-processing, and post-processing are happening.
+In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This then allows you to view the performance of your application in relation to these events. At the bottom of *Figure 1* there are custom annotations to show when inference, pre-processing, and post-processing are happening.
 
-To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h` and `streamline_annotate_logging.h` and made available [here](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you will be able to show log strings, markers, counters and Custom Activity Maps. WIthin your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
+To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h`, and `streamline_annotate_logging.h` and made available [here](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you can see log strings, markers, counters, and Custom Activity Maps. Within your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
 
 These files are written in C, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is slightly trickier than just adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this [here](https://developer.android.com/studio/projects/add-native-code).
 
-Create a file in the `app/src/main/cpp/` folder under your project and name it `annotate_jni_wrapper.c`. This will be a wrapper around the gator daemon's functions, and will be called from your Kotlin code. Copy the code below into this file. You can also create very similar wrapper functions for other gator daemon functions.
+Create a file in the `app/src/main/cpp/` folder under your project, and name it `annotate_jni_wrapper.c`. This will be a wrapper around the gator daemon's functions, and will be called from your Kotlin code. Copy the code below into this file. You can also create similar wrapper functions for other gator daemon functions.
 
 ```c
 #include <jni.h>
