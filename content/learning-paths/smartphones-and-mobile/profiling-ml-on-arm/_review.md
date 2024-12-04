@@ -26,7 +26,7 @@ review:
         question: >
             Is there a way to profile what is happening inside your Neural Network?
         answers:
-            - Yes, Streamline just shows you out of the box
+            - Yes, Streamline just shows you out of the box.
             - No.
             - Yes, ArmNN's ExecuteNetwork can do this.
             - Yes, Android Studio Profiler can do this.
