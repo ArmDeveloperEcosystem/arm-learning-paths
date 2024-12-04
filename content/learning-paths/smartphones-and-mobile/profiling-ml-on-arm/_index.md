@@ -1,9 +1,9 @@
 ---
-title: Profile the Performance of ML models on Arm
+title: Profile the Performance of Machine Learning models on Arm
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to profile the performance of ML models running on Arm devices.
+who_is_this_for: This is an introductory topic for software developers who want to learn how to profile the performance of Machine Learning (ML) models running on Arm devices.
 
 learning_objectives: 
     - Profile the execution times of ML models on Arm devices.
