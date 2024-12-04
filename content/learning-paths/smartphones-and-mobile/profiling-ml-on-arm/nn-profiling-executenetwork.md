@@ -48,7 +48,7 @@ If you are using your own LiteRT, replace `mobilenet_v2_1.0_224_INT8.tflite` wit
 
 This will run the model twice, outputting the layer timings to `modelout.txt`. The `--iterations 2` flag is the command that means it runs twice: the first run includes a lot of startup costs and one-off optimizations, so the second run is more indicative of the real performance.
 
-The other flags to note are the `-e` and `--output-network-details` flags which will output a lot of timeline information about the model, including the layer timings. The `--do-not-print-output` flag will stop the output of the model, which can be very large, and without sensible input it is meaningless. The `--enable-fast-math` and `--fp16-turbo-mode` flags enable some math optimizations. `CpuAcc` is the acclerated CPU backend, it can be replaced with `GpuAcc` for the accelerated GPU backend. 
+The other flags to note are the `-e` and `--output-network-details` flags which will output a lot of timeline information about the model, including the layer timings. The `--do-not-print-output` flag will stop the output of the model, which can be very large, and without sensible input it is meaningless. The `--enable-fast-math` and `--fp16-turbo-mode` flags enable some math optimizations. `CpuAcc` is the accelerated CPU backend, it can be replaced with `GpuAcc` for the accelerated GPU backend. 
 
 After running the model, you can pull the output file back to your host machine with the following commands:
 
