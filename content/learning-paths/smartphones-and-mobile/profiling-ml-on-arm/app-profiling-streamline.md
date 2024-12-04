@@ -12,21 +12,34 @@ Application profiling can be split into two main types:
 * Instrumentation.
 * Sampling.
 
-[Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer), for example, is a sampling profiler, that takes regular samples of various counters and registers in the system to provide a detailed view of the system's performance. Sampling only provides a statistical view, but it is less intrusive and has less processing overhead than instrumentation.
+[Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer), is an example of a sampling profiler, that takes regular samples of various counters and registers in the system to provide a detailed view of the system's performance. 
 
-The profiler looks at memory, CPU activity and cycles, cache misses, and many parts of the GPU, as well as other performance metrics. It can also provide a timeline-view of these counters to show any changes in the application's performance. This can reveal bottlenecks, and can help you to understand where to focus your optimization efforts.
+Sampling only provides a statistical view, but it is less intrusive and has less processing overhead than instrumentation.
+
+The profiler looks at memory, CPU activity and cycles, cache misses, and many parts of the GPU, as well as other performance metrics. 
+
+It can also provide a timeline-view of these counters to show any changes in the application's performance, which can reveal bottlenecks, and help you identify where to focus your optimization efforts.
 
 ![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline Timeline View")
 
 ## Example Android Application 
 
-In this Learning Path, you will use profile [an example Android application](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference) using Streamline. 
-Start by cloning the repository containing this example on your machine and open it in a recent Android Studio. It is generally safest to not update the Gradle version when prompted. 
+In this Learning Path, you will use profile [an example Android application](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference) using Streamline.
+
+Start by cloning the repository containing this example on your machine, and open it in a recent version of Android Studio. 
+
+{{% notice Note %}}
+It is generally safest to not update the Gradle version when prompted. 
+{{% /notice %}}
 
 ## Streamline
-You will install Streamline and Performance Studio on your host machine and connect to your target Arm device to capture the data. In this example, the target device is an Arm-powered Android phone. The data is captured over a USB connection, and then analyzed on your host machine.
+You will install Streamline and Performance Studio on your host machine and connect to your target Arm device to capture the data. 
 
-For more details on Streamline usage you can refer to these [tutorials and training videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio). While the example you are running is based on Android, you can use [the setup and capture instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application).
+In this example, the target device is an Arm-powered Android phone. The data is captured over a USB connection, and then analyzed on your host machine.
+
+For more details on Streamline usage you can refer to these [tutorials and training videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio). 
+
+While the example you are running is based on Android, you can use [the Setup and Capture Instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application).
 
 First, follow these [setup instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), to make sure you have `adb` (Android Debug Bridge) installed. If you have installed [Android Studio](https://developer.android.com/studio), you will have installed adb already. Otherwise, you can get it as part of the Android SDK platform tools [here](https://developer.android.com/studio/releases/platform-tools.html).
 

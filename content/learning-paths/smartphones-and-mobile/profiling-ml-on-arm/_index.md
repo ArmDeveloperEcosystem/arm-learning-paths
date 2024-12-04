@@ -11,6 +11,10 @@ learning_objectives:
 
 prerequisites:
     - An Arm-powered Android smartphone, and a USB cable to connect to it.
+    - For profiling the ML inference, [ArmNN](https://github.com/ARM-software/armnn/releases)'s ExecuteNetwork.
+    - For profiling the application as a whole, [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio)'s Streamline.
+    - Android Studio Profiler.
+  
 
 author_primary: Ben Clark
 
@@ -24,7 +28,7 @@ armips:
     - Immortalis
 tools_software_languages:
     - Android Studio
-    - tflite
+    - LiteRT
 operatingsystems:
     - Android
     - Linux
