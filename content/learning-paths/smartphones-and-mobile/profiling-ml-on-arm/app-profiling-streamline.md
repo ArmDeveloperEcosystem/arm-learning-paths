@@ -14,9 +14,9 @@ Application profiling can be split into two main types:
 
 [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer), for example, is a sampling profiler, that takes regular samples of various counters and registers in the system to provide a detailed view of the system's performance. Sampling only provides a statistical view, but it is less intrusive and has less processing overhead than instrumentation.
 
-The profiler can look at memory, CPU activity and cycles, cache misses, and many parts of the GPU, as well as other performance metrics. It can also provide a timeline-view of these counters to show the application's performance over time. This can reveal bottlenecks, and can help you to understand where to focus your optimization efforts.
+The profiler looks at memory, CPU activity and cycles, cache misses, and many parts of the GPU, as well as other performance metrics. It can also provide a timeline-view of these counters to show any changes in the application's performance. This can reveal bottlenecks, and can help you to understand where to focus your optimization efforts.
 
-![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline timeline view")
+![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline Timeline View")
 
 ## Example Android Application 
 

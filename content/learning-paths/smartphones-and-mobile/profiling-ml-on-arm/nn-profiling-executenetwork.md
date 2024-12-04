@@ -1,5 +1,5 @@
 ---
-title: ML profiling of a tflite model with ExecuteNetwork
+title: ML profiling of a LiteRT model with ExecuteNetwork
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -7,11 +7,11 @@ layout: learningpathall
 ---
 
 ## ArmNN's Network Profiler
-One way of running tflite models is with ArmNN. This is available as a delegate to the standard tflite interpreter. But to profile the model, ArmNN comes with a command-line utility called `ExecuteNetwork`. This program just runs the model without the rest of the app. It is able to output layer timings and other useful information to let you know where there might be bottlenecks within your model.
+One way of running LiteRT models is with ArmNN. This is available as a delegate to the standard LiteRT interpreter. But to profile the model, ArmNN comes with a command-line utility called `ExecuteNetwork`. This program just runs the model without the rest of the app. It is able to output layer timings and other useful information to let you know where there might be bottlenecks within your model.
 
-If you are using tflite without ArmNN, then the output from `ExecuteNetwork` will be more of an indication than a definitive answer. But it can still be useful to spot any obvious problems.
+If you are using LiteRT without ArmNN, then the output from `ExecuteNetwork` will be more of an indication than a definitive answer. But it can still be useful to spot any obvious problems.
 
-To try this out, you can download a tflite model from the [Arm Model Zoo](https://github.com/ARM-software/ML-zoo). In this Learning Path, you will download [mobilenet tflite](https://github.com/ARM-software/ML-zoo/blob/master/models/image_classification/mobilenet_v2_1.0_224/tflite_int8/mobilenet_v2_1.0_224_INT8.tflite).
+To try this out, you can download a LiteRT model from the [Arm Model Zoo](https://github.com/ARM-software/ML-zoo). In this Learning Path, you will download [mobilenet tflite](https://github.com/ARM-software/ML-zoo/blob/master/models/image_classification/mobilenet_v2_1.0_224/tflite_int8/mobilenet_v2_1.0_224_INT8.tflite).
 
 To get `ExecuteNetwork` you can download it from the [ArmNN GitHub](https://github.com/ARM-software/armnn/releases). Download the version appropriate for the Android phone you wish to test on - the Android version and the architecture of the phone. If you are unsure of the architecture, you can use a lower one, but you may miss out on some optimizations. Inside the `tar.gz` archive that you download, `ExecuteNetwork` is included. Note among the other release downloads on the ArmNN Github is the separate file for the `aar` delegate which is the easy way to include the ArmNN delegate into your app.
 
@@ -38,13 +38,13 @@ chmod 777 ExecuteNetwork
 chmod 777 *.so	   
 ```
 
-Now you can run ExecuteNetwork to profile the model. With the example tflite, you can use the following command:
+Now you can run ExecuteNetwork to profile the model. With the example LiteRT, you can use the following command:
 
 ```bash
 LD_LIBRARY_PATH=. ./ExecuteNetwork -m mobilenet_v2_1.0_224_INT8.tflite -c CpuAcc -T delegate --iterations 2 --do-not-print-output --enable-fast-math --fp16-turbo-mode -e --output-network-details > modelout.txt
 ```
 
-If you are using your own tflite, replace `mobilenet_v2_1.0_224_INT8.tflite` with the name of your tflite file.
+If you are using your own LiteRT, replace `mobilenet_v2_1.0_224_INT8.tflite` with the name of your tflite file.
 
 This will run the model twice, outputting the layer timings to `modelout.txt`. The `--iterations 2` flag is the command that means it runs twice: the first run includes a lot of startup costs and one-off optimizations, so the second run is more indicative of the real performance.
 
