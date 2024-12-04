@@ -9,32 +9,31 @@ layout: learningpathall
 ## Application Profiling
 Application profiling can be split into two main types:
 
-* Instrumentation.
 * Sampling.
+* Instrumentation.
 
 [Streamline](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer)is an example of a sampling profiler that takes regular samples of various counters and registers in the system to provide a detailed view of the system's performance. 
 
 Whilst sampling only provides a statistical view, it is less intrusive and has less processing overhead than instrumentation.
 
-The profiler looks at memory, CPU activity and cycles, cache misses, and many parts of the GPU, as well as other performance metrics. 
+The profiler looks at memory, CPU activity and cycles, cache misses, and many parts of the GPU, amongst other performance metrics. 
 
 It can also provide a timeline-view of these counters to show any changes in the application's performance, which can reveal bottlenecks, and help you identify where to focus your optimization efforts.
 
 ![Streamline image alt-text#center](Streamline.png "Figure 1. Streamline Timeline View")
 
-## Example Android Application 
+## Get started with an example Android Application 
 
-In this Learning Path, you will use profile [an example Android application](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference) using Streamline.
+In this Learning Path, you will profile [an example Android application](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference) using Streamline.
 
-* Start by cloning the repository containing this example on your machine.
-* Open it in a recent version of Android Studio. 
+Start by cloning the repository containing this example on your machine, then open it in a recent version of Android Studio. 
 
 {{% notice Note %}}
 It is generally safest to not update the Gradle version when prompted. 
 {{% /notice %}}
 
 ## Streamline
-You will install Streamline and Performance Studio on your host machine and connect to your target Arm device to capture the data. 
+You will now install Streamline and Performance Studio on your host machine and connect to your target Arm device to capture the data. 
 
 In this example, the target device is an Arm-powered Android phone. The data is captured over a USB connection, and then analyzed on your host machine.
 
@@ -66,7 +65,7 @@ You are now able to run Streamline and [capture a profile](https://developer.arm
 
 ## Custom Annotations
 
-In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This then allows you to view the performance of your application in relation to these events. At the bottom of *Figure 1* there are custom annotations to show when inference, pre-processing, and post-processing are happening.
+In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This then allows you to view the performance of your application in relation to these events. At the bottom of *Figure 1* there are custom annotations to show when inference, pre-processing, and post-processing occur.
 
 To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h`, and `streamline_annotate_logging.h` and made available [here](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you can see log strings, markers, counters, and Custom Activity Maps. Within your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
 
@@ -87,7 +86,7 @@ JNIEXPORT jlong JNICALL Java_AnnotateStreamline_GetTime(JNIEnv* env, jobject obj
 }
 ```
 
-Some functions have `unsigned int`, but that needs to be a `jint` in the wrapper, with some casting required in your Kotlin code to enforce type correctness at that end. Some functions have strings as arguments, and you will need to do a small conversion as shown below:
+Some functions have `unsigned int`, but this needs to be a `jint` in the wrapper, with some casting required in your Kotlin code to enforce type correctness at that end. Some functions have strings as arguments, and you will need to do a small conversion as shown below:
 
 ```c
 JNIEXPORT void JNICALL Java_AnnotateStreamline_AnnotateMarkerColorStr(JNIEnv* env, jobject obj, jint color, jstring str) {
@@ -97,7 +96,7 @@ JNIEXPORT void JNICALL Java_AnnotateStreamline_AnnotateMarkerColorStr(JNIEnv* en
 }
 ```
 
-In Android Studio `cmake` is used to create your C library, so you will need a `CMakelists.txt` file in the same directory as the C files (`app/src/main/cpp/` in the example). Copy the contents shown below into `CMakelists.txt`:
+In Android Studio, `cmake` is used to create your C library, so you will need a `CMakelists.txt` file in the same directory as the C files (`app/src/main/cpp/` in the example). Copy the contents shown below into `CMakelists.txt`:
 
 ```cmake
 # Sets the minimum CMake version required for this project.
@@ -133,7 +132,7 @@ Now add the code below to the `build.gradle` file of the Module you wish to prof
     }
 ```
 
-This will create a `libStreamlineAnnotationJNI.so` library that you can load in your Kotlin code, and then you can call the functions. Here you will create a singleton `AnnotateStreamline.kt`. Place the file alongside `MainActivity.kt` in `app\src\main\java\com\arm\armpytorchmnistinference` for the example. Add the following code to `AnnotateStreamline.kt` to enable Kotlin calls to the gator daemon from the rest of your code:
+This creates a `libStreamlineAnnotationJNI.so` library that you can load in your Kotlin code, and then you can call the functions. Here now you can create a singleton `AnnotateStreamline.kt`. Place the file alongside `MainActivity.kt` in `app\src\main\java\com\arm\armpytorchmnistinference` for the example. Add the following code to `AnnotateStreamline.kt` to enable Kotlin calls to the gator daemon from the rest of your code:
 
 ```kotlin
 // Kotlin wrapper class for integration into Android project
@@ -191,17 +190,17 @@ The `AnnotateStreamline` class can now be used in your Kotlin code to add annota
       AnnotateStreamline.annotateMarkerColorStr(AnnotateStreamline.ANNOTATE_BLUE, "Model Load")
 ```
 
-In the example app you could add this in the `onCreate()` function of `MainActivity.kt` after the `Module.load()` call to load the `model.pth`.
+In the example app, you can add this in the `onCreate()` function of `MainActivity.kt` after the `Module.load()` call to load the `model.pth`.
 
-This 'colored marker with a string' annotation will add the string and time to Streamline's log view, and look like the image shown below in Streamline's timeline (in the example app ArmNN isn't used, so there are no white ArmNN markers):
+This 'colored marker with a string' annotation will add the string and time to Streamline's log view, and it appears like the image shown below in Streamline's timeline (in the example app, ArmNN is not used, so there are no white ArmNN markers):
 
 ![Streamline image alt-text#center](streamline_marker.png "Figure 2. Streamline timeline markers")
 
 ## Custom Activity Maps (CAMs)
 
-In addition to adding strings to the log and colored markers to the timeline, a particularly useful set of annotations is the Custom Activity Maps. These are the named colored bands you can see at the bottom of the Streamline timeline view shown in *Figure 1*. They can be used to show when specific parts of your application are running, such as the pre-processing or inference, and layered for functions within functions etc.
+In addition to adding strings to the log and colored markers to the timeline, a particularly useful set of annotations is the Custom Activity Maps (CAMs). These are the named colored bands you can see at the bottom of the Streamline timeline view, as shown in *Figure 1*. They can be used to show when specific parts of your application are running, such as the pre-processing or inference, and layered for functions within functions.
 
-To add these you will need to import the functions that start `gator_cam_` from `streamline_annotate.h` through your wrapper files in the same way as the functions above. Then you can use CAMs, but first you will need to set up the tracks the annotations will appear on and an id system for each annotation. The `baseId` code below is to ensure that if you add annotations in multiple places in your code, the ids are unique.
+To add these, you need to import the functions that start `gator_cam_` from `streamline_annotate.h` through your wrapper files in the same way as the functions above. Then you can use CAMs, but first you need to set up the tracks the annotations will appear on, and an ID system for each annotation. The `baseId` code below is used to ensure that if you add annotations in multiple places in your code, the IDs are unique.
 
 Here is an example setup in a class's companion object:
 
@@ -265,6 +264,6 @@ In the example app, the CAM annotations are added to the `runInference()` functi
     }
 ```
 
-The example application is very fast and simple, so the CAMs will not show much information. In a more complex application you could add more CAMs, including child-level ones, to give more detailed annotations to show where time is spent in your application. For this example app with its very fast inference, it's best to change the Streamline timeline view scale to 10µs in order to see the CAM annotations better.
+The example application is fast and simple, and the CAMs do not show much information. In a more complex application, you can add further CAMs, including child-level ones, to give more detailed annotations to show where time is spent in your application. For this example app with its very fast inference, it is best to change the Streamline timeline view scale to 10µs in order to better see the CAM annotations.
 
-Once you've added in useful CAM annotations, you can build and deploy a debug version of your application. You can run Streamline and see the annotations and CAMs in the timeline view. See the [Streamline documentation](https://developer.arm.com/documentation/101816/latest/) for how to make a capture for profiling. After the capture is made and analyzed, you will be able to see when your application is running the inference, ML pre-processing, ML post-processing, or other parts of your application. From there you can see where the most time is spent, and how hard the CPU or GPU is working during different parts of the application. From this you can then decide if work is needed to improve performance and where that work needs doing.
+Once you have added in useful CAM annotations, you can build and deploy a debug version of your application. You can run Streamline and see the annotations and CAMs in the timeline view. See the [Streamline documentation](https://developer.arm.com/documentation/101816/latest/) for information on how to make a capture for profiling. After the capture is made and analyzed, you will be able to see when your application is running the inference, performing ML pre-processing or ML post-processing, or other operations from parts of your application. From there you can see where the most time is spent, and how hard the CPU or GPU is working during different parts of the application. From this you can then decide if work is needed to improve performance and where that work needs doing.
