@@ -26,7 +26,8 @@ It can also provide a timeline-view of these counters to show any changes in the
 
 In this Learning Path, you will use profile [an example Android application](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference) using Streamline.
 
-Start by cloning the repository containing this example on your machine, and open it in a recent version of Android Studio. 
+* Start by cloning the repository containing this example on your machine.
+* Open it in a recent version of Android Studio. 
 
 {{% notice Note %}}
 It is generally safest to not update the Gradle version when prompted. 
@@ -37,11 +38,11 @@ You will install Streamline and Performance Studio on your host machine and conn
 
 In this example, the target device is an Arm-powered Android phone. The data is captured over a USB connection, and then analyzed on your host machine.
 
-For more details on Streamline usage, you can refer to these [tutorials and training videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio). 
+For more information on Streamline usage, see [Tutorials and Training Videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio). 
 
 While the example that you are running is based on Android, you can use [the Setup and Capture Instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application).
 
-Firstly, follow these [setup instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), to make sure you have `adb` (Android Debug Bridge) installed. If you have installed [Android Studio](https://developer.android.com/studio), you will have installed adb already. Otherwise, you can get it as part of the Android SDK platform tools [here](https://developer.android.com/studio/releases/platform-tools.html).
+Firstly, follow these [Setup Instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), to make sure you have `adb` (Android Debug Bridge) installed. If you have installed [Android Studio](https://developer.android.com/studio), you will have adb installed already. Otherwise, you can get it as part of the Android SDK platform tools [here](https://developer.android.com/studio/releases/platform-tools.html).
 
 Make sure `adb` is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by installing the [Android SDK `platform-tools`](https://developer.android.com/tools/releases/platform-tools#downloads) directory to your path. 
 
@@ -49,17 +50,19 @@ Next, install [Arm Performance Studio](https://developer.arm.com/Tools%20and%20S
 
 Connect your Android phone to your host machine through USB. Ensure that your Android phone is set to [Developer mode](https://developer.android.com/studio/debug/dev-options).
 
-On your phone, go to **Settings** > **Developer Options** and enable USB Debugging. If your phone asks you to authorize connection to your host machine, confirm this. Test the connection by running `adb devices` in a terminal. You should see your device ID listed.
+On your phone, go to **Settings** > **Developer Options** and enable **USB Debugging**. If your phone asks you to authorize connection to your host machine, confirm authorization. Test the connection by running `adb devices` in a terminal. You should see your device ID listed.
 
 Next, you need a debuggable-build of the application that you want to profile. 
-- In Android Studio, ensure your *Build Variant* is set to `debug`. You can then build the application and install it on your device. 
-- For a Unity app, select Development Build under File > Build Settings when building your application. 
-- In Unreal Engine, open Project Settings > Project > Packaging > Project, and ensure that the For Distribution checkbox is not set. 
-- In the general case, you can set `android:debuggable=true` in the application manifest file.
+- In Android Studio, ensure your **Build Variant** is set to **debug**. You can then build the application, and install it on your device. 
+- For a Unity app, select **Development Build** under **File** > **Build Settings** when building your application. 
+- In Unreal Engine, open **Project Settings** > **Project** > **Packaging** > **Project**, and ensure that the **For Distribution** checkbox is clear. 
+- Generally, you can set `android:debuggable=true` in the application manifest file.
 
-For the example application that you cloned earlier, the Build Variant is `debug` by default, but you can verify this by going to `Build > Select Build Variant` in Android Studio. Build and install this application on your device.
+For the example application that you cloned earlier, the Build Variant is **debug** by default, but you can verify this by going to **Build** > **Select Build Variant** in Android Studio. 
 
-You can now run Streamline and [capture a profile](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en) of your application. But before you do, lets add some useful annotations to your code that can help with more specific performance analysis of your application.
+Build and install this application on your device.
+
+You can now run Streamline and [capture a profile](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en) of your application. But before you do, you can add some useful annotations to your code that can help with more specific performance analysis of your application.
 
 ## Custom Annotations
 
