@@ -1,6 +1,8 @@
 ---
 title: Build OpenCV applications on Windows on Arm
-
+draft: true
+cascade:
+    draft: true
 minutes_to_complete: 90
 
 who_is_this_for: This is an advanced topic for software developers who want to use OpenCV with Windows on Arm devices.
