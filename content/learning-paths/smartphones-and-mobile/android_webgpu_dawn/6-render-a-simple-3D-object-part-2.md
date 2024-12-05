@@ -8,34 +8,34 @@ layout: learningpathall
 
 ## 3D meshes
 
-Once a Render Pipeline is created, you can use WebGPU APIs to create and render a 3D mesh. This is very similar to other graphics APIs. 
+Once a Render Pipeline is created, you can use WebGPU APIs to create and render a 3D mesh. This is similar to other graphics APIs. 
 
 The steps are listed below:
 
-* Create the Vertex Buffer(s)
-* Create the Index Buffer(s)
-* Create the Uniform Buffer(s)
-* Create a Depth Buffer (Z-Buffer algorithm)
-* Create the Depth Texture and TextureView
-* Create a Depth Stencil
-* Create the Transformation and Projection matrices
+* Create the Vertex Buffer(s).
+* Create the Index Buffer(s).
+* Create the Uniform Buffer(s).
+* Create a Depth Buffer (Z-Buffer algorithm).
+* Create the Depth Texture and TextureView.
+* Create a Depth Stencil.
+* Create the Transformation and Projection matrices.
 
-All these steps are common in graphics programming and WebGPU offers capability to perform all the operations. 
+All these steps are common in graphics programming, and WebGPU allows you to perform these same operations. 
 
-It is recommended to go through individual chapters in the [3D rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section to learn more.
+It is a good idea to read the individual chapters in the [3D Rendering](https://eliemichel.github.io/LearnWebGPU/basic-3d-rendering/index.html) section to learn more.
 
 ### Loading 3D objects
 
-In this project you can use OBJ files to define 3D meshes. 
+In this Learning Path you can use OBJ files to define 3D meshes. 
 
-Instead of manually parsing OBJ files, use the [TinyOBJLoader](https://github.com/tinyobjloader/tinyobjloader) library. 
+Instead of manually parsing OBJ files, you can use the [TinyOBJLoader](https://github.com/tinyobjloader/tinyobjloader) library. 
 
-The file format is not complex, but parsing files is not the goal of this Learning Path. 
+The file format is not complex, but parsing files is out of the scope of this Learning Path. 
 
 You can use open-source software such as Blender to create your own 3D objects.
 
 {{% notice Note %}}
-Exactly one of your source files must define `TINYOBJLOADER_IMPLEMENTATION` before including it:
+Only one of your source files must define `TINYOBJLOADER_IMPLEMENTATION` before including it:
 
 ```C++
 #define TINYOBJLOADER_IMPLEMENTATION // add this to exactly 1 of your C++ files
@@ -51,7 +51,7 @@ You are now ready to render a 3D object.
 
 You can run a rendering pass and *draw* something onto our *surface*. 
 
-To encode any commands to be issued to GPU, you need to create a `CommandEncoder`. Modern APIs record commands into command buffers,rather than issuing commands one by one, and submit all of them at once. 
+To encode any commands to be issued to GPU, you need to create a `CommandEncoder`. Modern APIs record commands into command buffers, rather than issuing commands one by one, and submit all of them at once. 
 
 In WebGPU, this is done through a `CommandEncoder` as shown below:
 
@@ -123,7 +123,7 @@ Make sure you release the created encoders and buffers by calling the respective
 {{% /notice %}}
 
 {{% notice Note %}}
-By default Dawn runs callbacks only when the device “ticks”, so the error callbacks are invoked in a different call stack than where the error occurred, making the breakpoint less informative. 
+By default, Dawn runs callbacks only when the device “ticks”, so the error callbacks are invoked in a different call stack than where the error occurred, making the breakpoint less informative. 
 
 To force Dawn to invoke error callbacks as soon as there is an error, you can enable an instance toggle:
 
@@ -174,6 +174,6 @@ For example:
 
 Now click the **Run** icon in Android Studio, which builds the application and launches it on the connected device, producing the following output:
 
-![Output #center](images/output.gif  "Output")
+![Output #center](images/output.gif  "Figure 10: Output")
 
-Congratulations! You are run a WebGPU application on an Android device.
+Congratulations! You have now run a WebGPU application on an Android device.
