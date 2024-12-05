@@ -8,14 +8,14 @@ key_ip:
 maintopic: true
 operatingsystems_filter:
 - Baremetal: 25
-- Linux: 4
-- macOS: 2
+- Linux: 5
+- macOS: 3
 - RTOS: 10
 - Windows: 2
 subjects_filter:
 - CI-CD: 3
 - Libraries: 3
-- ML: 7
+- ML: 8
 - Performance and Architecture: 11
 - RTOS Fundamentals: 4
 - Security: 2
@@ -37,6 +37,7 @@ tools_software_languages_filter:
 - FVP: 1
 - GCC: 5
 - GitHub: 2
+- Himax SDK: 1
 - IP Explorer: 2
 - Keil: 7
 - Keil MDK: 3
@@ -44,7 +45,7 @@ tools_software_languages_filter:
 - MPS3: 1
 - Node.js: 1
 - Paddle: 1
-- Python: 1
+- Python: 2
 - PyTorch: 1
 - Raspberry Pi: 1
 - RTX: 2

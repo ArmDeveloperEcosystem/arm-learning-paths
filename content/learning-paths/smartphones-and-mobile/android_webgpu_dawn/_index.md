@@ -27,8 +27,8 @@ prerequisites:
 author_primary: Varun Chari, Albin Bernhardsson
 
 ### Tags
-skilllevels: Intermediate
-subjects: GPU
+skilllevels: Advanced
+subjects: Graphics
 armips:
     - Cortex-A
 tools_software_languages:
