@@ -45,11 +45,11 @@ Looking further down you can see the *Table* of Java/Kotlin allocations for your
 
 ### Native
 
-For the [native side](https://developer.android.com/studio/profile/record-native-allocations), the process is similar but with different options. Choose *Profiler: Run 'app' as profileable*, and then select the *Track Memory Consumption (Native Allocations)* task. Here you have to *Start profiler task from: Process Start*. Choose *Stop* once you've captured enough data.
+For the [native side](https://developer.android.com/studio/profile/record-native-allocations), the process is similar but with different options. Select **Profiler: Run 'app' as profileable**, and then select the **Track Memory Consumption (Native Allocations)** task. Here you have to **Start profiler task from: Process Start**. Select **Stop** once you've captured enough data.
 
-The Native view doesn't have the same nice timeline graph as the Java/Kotlin side, but it does have the *Table* and *Visualization* tabs. The *Table* tab no longer has a list of allocations, but options to *Arrange by allocation method* or *callstack*. Choose *Arrange by callstack* and then you can trace down which functions were allocating significant memory. Potentially more useful, you can also see Remaining Size. 
+The Native view does not provide the same kind of timeline graph as the Java/Kotlin side, but it does have the **Table** and **Visualization** tabs. The **Table** tab no longer has a list of allocations, but options to **Arrange by allocation method** or **callstack**. Select **Arrange by callstack** and then you can trace down which functions allocate significant memory resource. Also there is the **Remaining Size** tab, which is arguably more useful. 
 
-In the Visualization tab you can see the callstack as a graph, and once again you can look at total Allocations Size or Remaining Size. If you look at Remaining Size, you can see what is still allocated at the end of the profiling, and by looking a few steps up the stack, probably see which allocations are related to the ML model, by seeing functions that relate to the framework you are using. A lot of the memory may be allocated by that framework rather than in your code, and you may not have much control over it, but it is useful to know where the memory is going.
+In the **Visualization** tab, you can see the callstack as a graph, and once again you can look at total **Allocations Size** or **Remaining Size**. If you look at **Remaining Size**, you can see what remains allocated at the end of the profiling, and by looking a few steps up the stack, probably see which allocations are related to the ML model, by seeing functions that relate to the framework you are using. A lot of the memory may be allocated by that framework rather than in your code, and you may not have much control over it, but it is useful to know where the memory is going.
 
 ## Other platforms
 
