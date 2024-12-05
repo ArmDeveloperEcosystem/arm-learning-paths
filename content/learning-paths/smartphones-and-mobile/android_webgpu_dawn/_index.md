@@ -27,7 +27,7 @@ prerequisites:
 author_primary: Varun Chari, Albin Bernhardsson
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Intermediate
 subjects: GPU
 armips:
     - Cortex-A
