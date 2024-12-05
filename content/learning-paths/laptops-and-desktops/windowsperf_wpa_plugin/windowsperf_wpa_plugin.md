@@ -26,8 +26,9 @@ You can save a `.json` output from WindowsPerf by using the `--output` command f
     To create a file named `example.json`, run the following command:
 
     ```console
-    wperf stat -e ld_spec --output example.json
+    wperf stat -e ld_spec --timeout 5 --json --output example.json
     ```
+    Note: This command won't finish automatically. You can use Ctrl+C to terminate it after it has run for 5-10 seconds.
 
 2. Open Windows Performance Analyzer, and see the following window:
 
@@ -54,8 +55,10 @@ You can use WPA to visualize PMU events in the recorded data.
 To try the timeline feature, run the command:
 
 ```command 
-wperf stat -m dcache -c 0,1,2,3,4,5,6,7 -t -i 0 -n 50 --json
+wperf stat -m dcache -c 0,1,2,3,4,5,6,7 -t -i 0 -n 10 --timeout 2 --json --output example2.json
 ```
+
+Note: above command will run for ~20 seconds.
 
 Open the generated output (`.json` file) in WPA to see the graph:
 
@@ -69,11 +72,13 @@ The WPA plugin also generates a graph per event note in order to provide a more 
 
 To see all the generated graphs you can expand the `Counting timeline` section in the graph explorer section of WPA.
 
-Run another `wperf` command with different options:
+Before you run another `wperf` command with different options, you use use `wperf -list` to find out supported metrics in your machine.
 
 ```console 
-wperf stat -t -i 0 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --json
+wperf stat -t -i 0 -n 10 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --timeout 2 --json --output example3.json
 ```
+
+Note: above command will run for ~20 seconds.
 
 The graph after opening the `.json` file is shown below:
 
@@ -88,8 +93,10 @@ The WPA Plugin also provides visualization of [Arm telemetry metrics](https://de
 To visualize telemetry, run the following command:
 
 ```console 
-wperf stat -t -i 0 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --json
+wperf stat -t -i 0 -n 10 -m imix,l1d_cache_miss_ratio,l1d_cache_mpki,l1d_tlb_miss_ratio,l1d_tlb_mpki -e inst_spec,vfp_spec,ld_spec,st_spec -c 1 --timeout 2 --json --output example4.json
 ```
+
+Note: above command will run for ~20 seconds.
 
 You can also see the telemetry timeline graphs under the graph explorer level in WPA. 
 

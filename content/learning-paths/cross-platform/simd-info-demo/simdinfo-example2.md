@@ -8,11 +8,13 @@ layout: learningpathall
 
 ### Handling intrinsics without direct equivalents
 
-During the porting process, you will observe that certain instructions translate seamlessly. However, there are cases where direct equivalents for some intrinsics may not be readily available across architectures. For example, the [**`_mm_madd_epi16`**](https://simd.info/c_intrinsic/_mm_madd_epi16/) intrinsic from **SSE2**, which performs multiplication of 16-bit signed integer elements in a vector and then does a pairwise addition of adjacent elements increasing the element width, does not have a direct counterpart in **NEON**. However it can be emulated using another intrinsic. Similarly its 256 and 512-bit counterparts, [**`_mm256_madd_epi16`**](https://simd.info/c_intrinsic/_mm256_madd_epi16/) and [**`_mm512_madd_epi16`**](https://simd.info/c_intrinsic/_mm512_madd_epi16/) can be emulated by a sequence of instructions, but here you will see the 128-bit variant.
+During the porting process, you can see that certain instructions translate seamlessly. However, there are cases where direct equivalents for some intrinsics might not be readily available across architectures. 
 
-You may already know the equivalent operations for this particular intrinsic, but let's assume you don't. In this usecase, reading the **`_mm_madd_epi16`** on the **SIMD.info** might indicate that a key characteristic of the instruction involved is the *widening* of the result elements, from 16-bit to 32-bit signed integers. Unfortunately, that is not the case, as this particular instruction does not actually increase the size of the element holding the result values. You will see how that effects the result in the example.
+For example, the [**`_mm_madd_epi16`**](https://simd.info/c_intrinsic/_mm_madd_epi16/) intrinsic from SSE2, which performs multiplication of 16-bit signed integer elements in a vector and then does a pairwise addition of adjacent elements increasing the element width, does not have a direct counterpart in NEON. However, it can be emulated using another intrinsic. Similarly its 256 and 512-bit counterparts, [**`_mm256_madd_epi16`**](https://simd.info/c_intrinsic/_mm256_madd_epi16/) and [**`_mm512_madd_epi16`**](https://simd.info/c_intrinsic/_mm512_madd_epi16/), can be emulated by a sequence of instructions, but here you will see the 128-bit variant.
 
-Consider the following code for **SSE2**. Create a new file on your x86_64 Linux machine named `_mm_madd_epi16_test.c` with the contents shown below:
+You might already know the equivalent operations for this particular intrinsic, but let's assume that you don't. In this particular use case, reading **`_mm_madd_epi16`** on **SIMD.info** might indicate that a key characteristic of the instruction involved is the widening of the result elements, from 16-bit to 32-bit signed integers. Unfortunately, this is not the case. This particular instruction does not increase the size of the element holding the result values. You will see how this affects the result in the example.
+
+Consider the following code for SSE2. Create a new file on your x86_64 Linux machine named `_mm_madd_epi16_test.c`, and populate with the contents as shown below:
 
 ```C
 #include <stdint.h>
@@ -44,7 +46,7 @@ int main() {
 }
 ```
 
-Compile the code as follows on the x86_64 system (no extra flags required as **SSE2** is assumed by default on all 64-bit x86 systems):
+Compile the code as follows on the x86_64 system. No extra flags are required as **SSE2** is assumed by default on all 64-bit x86 systems:
 ```bash
 gcc -O3 _mm_madd_epi16_test.c -o  _mm_madd_epi16_test
 ```
@@ -61,11 +63,11 @@ b                             :   a0   8c   78   64   50   3c   28   14
 _mm_madd_epi16(a, b)          : a4d8    0 56b8    0 2198    0  578    0
 ```
 
-You will note that the result of the first element is a negative number, even though we added 2 positive results (`130*140` and `150*160`). That is because the result of the addition has to occupy a 16-bit signed integer element and when the first is larger we have the effect of an negative overflow. The result is the same in binary arithmetic, but when interpreted into a signed integer, it turns the number into a negative.
+You will note that the result of the first element is a negative number, even though you added 2 positive results (`130*140` and `150*160`). This is because the result of the addition has to occupy a 16-bit signed integer element, and when the first is larger we have the effect of a negative overflow. The result is the same in binary arithmetic, but when interpreted into a signed integer, it turns the number into a negative.
 
-The rest of the values are as expected. Notice how each pair has a zero element next to it. The results are correct, but they are not in the correct order. In this example, you used **`vmovl`** to zero-extend values, which achieves the correct order with zero elements in place. While both **`vmovl`** and **`zip`** could be used for this purpose, **`vmovl`** was chosen in this implementation. For more details, see the Arm Software Optimization Guides, such as the [Neoverse V2 guide](https://developer.arm.com/documentation/109898/latest/).
+The rest of the values are as expected. Notice how each pair has a zero element next to it. The results are correct, but they are not in the correct order. In this example, you used **`vmovl`** to zero-extend values, which achieves the correct order with zero elements in place. While both **`vmovl`** and **`zip`** can be used for this purpose, **`vmovl`** was chosen in this implementation. For more details, see the Arm Software Optimization Guides, such as the [Neoverse V2 guide](https://developer.arm.com/documentation/109898/latest/).
 
-Now switch your Linux Arm machine and create a file called `_mm_madd_epi16_neon.c` with the contents below:
+Now switch to your Linux Arm machine and create a file called `_mm_madd_epi16_neon.c`, populating it with the contents below:
 ```C
 #include <arm_neon.h>
 #include <stdint.h>
@@ -128,5 +130,5 @@ vpaddq_s16(a, b)              : a4d8 56b8 2198  578    0    0    0    0
 final                         : a4d8    0 56b8    0 2198    0  578    0
 ```
 
-As you can see the results of both executions on different architectures match. You were able to use **SIMD.info** to help with the translation of complex intrinsics between different SIMD architectures.
+As you can see, the results of both executions on different architectures match. You used SIMD.info to help with the translation of complex intrinsics between different SIMD architectures.
 

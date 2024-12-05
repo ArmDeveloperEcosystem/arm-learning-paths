@@ -20,7 +20,7 @@ Add the following lines to `/etc/wsl.conf`:
 systemd=true
 ```
 
-Open a Windows Command Prompt or Powershell. Run the following commands to terminate and restart the distribution:
+Open a Windows Command Prompt or PowerShell. Run the following commands to terminate and restart the distribution:
 
 ```cmd
 wsl --terminate Ubuntu-22.04
