@@ -1,57 +1,130 @@
 ---
-title: Test Snort3 Multithreading
+title: Test Snort3 multithreading
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-Before we begin testing, follow the steps below to ensure Snort3 is properly configured
+
+Before testing multithreading performance, perform the following steps to configure your system:
 
 1. Configure Grub settings
-2. Set up the Snort3 Rule Set
+2. Set up the Snort3 rule set
 3. Download the PCAP files
 4. Adjust Lua configurations 
 
-## 1. Configure Grub settings
+## Configure Grub settings
+
 To enable Transparent HugePages (THP) and configure CPU isolation and affinity, append the following line to the /etc/default/grub file:
+
 ```bash
 CMDLINE="cma=128"
 HUGEPAGES="default_hugepagesz=1G hugepagesz=1G hugepages=300"
 MAXCPUS=""
-ISOLCPUS="isolcpus=nohz,domain,<CPU-PINNED-TO-SNORT>"
-IRQAFFINITY="irqaffinity=<CPU-LIST>"
-NOHZ="nohz_full=<CPU-PINNED-TO-SNORT>"
-RCU="rcu_nocbs=<CPU-PINNED-TO-SNORT>"
+ISOLCPUS="isolcpus=nohz,domain,2-12"
+IRQAFFINITY="irqaffinity=2-12"
+NOHZ="nohz_full=2-12"
+RCU="rcu_nocbs=2-12"
 IOMMU="iommu.passthrough=1"
 THP="transparent_hugepage=madvise"
 GRUB_CMDLINE_LINUX="${CMDLINE} ${HUGEPAGES} ${ISOLCPUS} ${IRQAFFINITY} ${NOHZ} ${RCU} ${MAXCPUS} ${IOMMU} ${THP}"
 ```
-After making this change, execute update-grub to apply the configuration, and then reboot the system to activate the settings.
 
-## 2.   Set up the Snort3 Rule Set
-Download the rule set from https://www.snort.org/ and extract it into your working directory. It should be noted that access to the rule set requires a subscription. 
-For testing, I used the file https://www.snort.org/downloads/registered/snortrules-snapshot-3110.tar.gz.
-### 2.1.    Download and unzip the rule set 
+After making this change, execute update-grub to apply the configuration:
+
 ```bash
-mkdir -p Test/snortrules-3110
-tar -xzvf snortrules-snapshot-3110.tar.gz -C Test/snortrules-3110
+sudo update-grub
 ```
-### 2.2.   Copy the "lua" folder from "snort3" source directory into the rules directory
+
+Reboot the system to activate the settings.
+
 ```bash
- cp -r snort3/lua/ Test/snortrules-3110/
+sudo reboot
 ```
-## 3.   Download the PCAP files
-Feel free to use any pcap files that are relevant to your test scenario. For reference, I’m using this one for my testing: 
+
+Confirm the new command line was used for the last boot:
+
+```bash
+cat /proc/cmdline
+```
+
+The output shows the additions to the kernel command line. 
+
+It is similar to:
+
+```output
+BOOT_IMAGE=/boot/vmlinuz-6.8.0-1019-aws root=PARTUUID=20d0887f-2302-4e77-9c05-b78f1f0ad30e ro default_hugepagesz=1G hugepagesz=1G hugepages=300 isolcpus=nohz,domain,2-12 irqaffinity=2-12 nohz_full=2-12 rcu_nocbs=2-12 iommu.passthrough=1 transparent_hugepage=madvise console=tty1 console=ttyS0 nvme_core.io_timeout=4294967295 panic=-1
+```
+
+You can also confirm the isolated processors:
+
+```bash
+cat /sys/devices/system/cpu/isolated
+```
+
+The output shows the isolated processors:
+
+```output
+2-12
+```
+
+## Set up the Snort3 rule set
+
+Download the rule set from https://www.snort.org/ and extract it into your working directory. You should start in the `build` directory you used to build snort. 
+
+```bash
+cd $HOME/build
+```
+
+For testing, you can use the file https://www.snort.org/downloads/registered/snortrules-snapshot-3110.tar.gz.
+
+Download and unzip the rule set:
+
+```bash
+wget https://www.snort.org/downloads/community/snort3-community-rules.tar.gz
+mkdir -p Test/snortrules
+tar -xzvf snort3-community-rules.tar.gz -C Test/snortrules
+```
+
+Copy the `lua` folder from the `snort3` source directory into the rules directory:
+
+```bash
+cp -r snort3/lua/ Test/snortrules/
+```
+
+## Download the packet capture (PCAP) files
+
+You can use any PCAP files that are relevant to your test scenario. 
+
+One place to get PCAP files is:
 https://www.netresec.com/?page=MACCDC
+
+Visit https://share.netresec.com/s/wC4mqF2HNso4Ten and download a PCAP file.
+
+Copy the file to your working directory and extract it, adjust the file name as needed if you downloaded a different PCAP file. 
+
 ```bash
-gunzip maccdc2012_00000.pcap.gz
-mv maccdc2012_00000.pcap Test/Pcap/
+gunzip maccdc2010_00000_20100310205651.pcap.gz
+mkdir Test/Pcap
+cp maccdc2010_00000_20100310205651.pcap Test/Pcap/
 ```
 
-## 4.  Adjust Lua configurations
-First, assign each Snort thread to a unique core, ensuring that the cores match those isolated in the GRUB configuration. Next, modify the Lua configuration files to enable the desired ruleset and profiling settings.
-### 4.1.    Pin snort threads to unique cpu core
-Create a file named 'common.lua' 
+## Adjust Lua configurations
+
+There are two modifications to the Lau configurations:
+- Pin each Snort thread to a unique core, ensuring that the cores match those isolated in the GRUB configuration
+- Enable the desired ruleset and enabling profiling
+
+### Pin snort threads to unique cpu core
+
+Navigate to the `Test/snortrules/lua` directory.
+
+```bash
+cd Test/snortrules/lua
+````
+
+Use an editor to create a file named `common.lua` with the contents below.
+
 ```bash
 -------------------------------------------------------------------------------
 ---- common: shared configuration included at the end of other configs
@@ -74,38 +147,60 @@ threads =
 process = { threads = threads }
 search_engine = { }
 snort_whitelist_append("threads")
-
 ```
  
-Include the above file in snort.lua, to do so edit the snort.lua file add below line at the end of the file
+Include the above file in `snort.lua` by editing the file and adding the line below to the end of the file. 
+
  ``` bash
  include('common.lua')
  ```
-### 4.2.  Tweak Snort.lua file to enable "rules" and profiling 
- Enable all the rules by adding below line in "ips" block
- ``` bash
+
+### Modify the snort.lua file to enable rules and profiling 
+
+Use an editor to modify the `snort.lua` file. 
+
+Enable all the rules by uncommenting the `enable_builtin_rules` line and adding the rule search directory as shown below:
+
+```bash
 enable_builtin_rules = true,
 rules = [[
     include ../rules/includes.rules
 ]],
 ```
-Uncomment "profiler" and "latency" to enable profiling and packet statistics
- 
 
-## Snort Parameters
-### 1.  - -tweaks to select IPS policy
+Continue to edit `snort.lua` and comment out the `profiler` and `latency` lines to enable profiling and packet statistics.
 
-Snort additionally allows you to fine-tune setups with the --tweaks parameter. This feature allows you to use one of Snort's policy files to enhance the detection engine for improved performance or increased security.
+## Review the Snort parameters
+
+### Modify the IPS policy
+
+Snort3 allows you to fine-tune setups with the `--tweaks` parameter. This feature allows you to use one of Snort's policy files to enhance the detection engine for improved performance or increased security.
     
-Snort 3 includes four preset policy files: max_detect, security, balanced, and connectivity. The max_detect policy favors maximum security, whereas the connectivity policy focuses on performance and uptime, which may come at the expense of security.
+Snort3 includes four preset policy files: max_detect, security, balanced, and connectivity. 
 
-### 2.  - -daq to specify Data Acquisition Module
+The max_detect policy favors maximum security, whereas the connectivity policy focuses on performance and uptime, which may come at the expense of security.
+
+### Specify the data acquisition module
+
 Snort supports DAQ modules which serves as an abstraction layer for interfacing with data source such as network interface. 
 
-To see list of DAQ modules supported by snort use "--daq-list" command.
+To see list of DAQ modules supported by snort use `--daq-list` command.
+
+Return to the `build` directory:
+
+```bash
+cd $HOME/build
+```
+
+Run using the command:
 
 ``` bash
-./snort3_src/snort3/build/src/snort  --daq-dir ./snort3_src/snort3/dependencies/libdaq/install/lib/daq --daq-list
+snort  --daq-dir ./snort3/dependencies/libdaq/install/lib/daq --daq-list
+```
+
+The output is:
+
+```output
 Available DAQ modules:
 afpacket(v7): live inline multi unpriv
  Variables:
@@ -151,22 +246,35 @@ trace(v1): inline unpriv wrapper
   file <arg> - Filename to write text traces to (default: inline-out.txt)
 ```
 
-For testing, we will use "dump" to analyse pcap files.
+For testing, you can use `--daq dump` to analyze PCAP files.
 
 ## Spawn Snort3 process with multithreading
-The following example shows how to use multiple Snort threads to analyze Pcap file.
 
-``` bash
-MPSE=hyperscan POLICY=./snortrules-3110/lua/snort.lua TCMALLOC_MEMFS_MALLOC_PATH=/dev/hugepages/test ../snort3_src/snort3/build/src/snort -c ./snortrules-3110/lua/snort.lua --lua detection.allow_missing_so_rules=true --pcap-filter maccdc2012_00000.pcap --pcap-loop 10 --snaplen 0 --max-packet-threads 10 --daq dump --daq-dir  ../snort3_src/snort3/dependencies/libdaq/install/lib/daq --daq-var output=none -H --pcap-dir /root/snort3_learning_path/Test/Pcap -Q --warn-conf-strict --tweaks security
+To run Snort3 with multithread start from the `Test` directory.
+
+```bash
+cd $HOME/build/Test
 ```
---pcap-loop: to loop pcap files for number specified 
---max-packet-threads: to specify threads, which are 10 in this example.
 
-To confirm that the Snort process spans many threads, use the "mpstat" command to evaluate the CPU utilization.
+The following example shows how to use multiple Snort threads to analyze PCAP files.
 
 ``` bash
-mpstat -P 2-14 1
+MPSE=hyperscan POLICY=./snortrules/lua/snort.lua TCMALLOC_MEMFS_MALLOC_PATH=/dev/hugepages/test snort -c ./snortrules/lua/snort.lua --lua detection.allow_missing_so_rules=true --pcap-filter maccdc2010_00000_20100310205651.pcap --pcap-loop 10 --snaplen 0 --max-packet-threads 10 --daq dump --daq-dir /usr/local/lib/daq --daq-var output=none -H --pcap-dir Pcap -Q --warn-conf-strict --tweaks security
+```
 
+Use `--pcap-loop` to loop PCAP files a number of time, 10 in this example.
+
+Use `--max-packet-threads` to specify the number of threads, 10 in this example.
+
+To confirm that the Snort process spans many threads, use the `mpstat` command to evaluate the CPU utilization.
+
+```bash
+mpstat -P 2-14 1
+```
+
+The output is similar to:
+
+```output
 22:52:26     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
 22:52:28       2   98.50    0.00    1.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 22:52:28       3   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
@@ -182,19 +290,22 @@ mpstat -P 2-14 1
 22:52:28      13    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
 22:52:28      14    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
 ```
-## Usecase : Snort3 multi-threading to process single pcap file 
-This use case demonstrates how multithreading increases the number of packets processed per second. 
 
-Pcap File Description
+## Test Snort3 multi-threading to process single pcap file 
+
+The example usage demonstrates how multithreading increases the number of packets processed per second. 
+
+PCAP File Description
 
 | Name                   | Total Packets |
 |------------------------|---------------|
 | maccdc2012_0000.pcap   |    86359430   | 
 
-Result
+Performance results
+
 | Threads | Packets Per Second | Runtime in Sec |
 |---------|--------------------|----------------|
 |    1    |        940960      |    91.777964   |
 |    10   |        9406134     |    9.181182    |
 
-The results above illustrates that increasing the thread count by ten times results in a ten times increase in packets processed per second, while reducing the execution time by ten times.
+The results demonstrate how increasing the thread count by ten times results in a ten times increase in packets processed per second, while reducing the execution time by ten times.
