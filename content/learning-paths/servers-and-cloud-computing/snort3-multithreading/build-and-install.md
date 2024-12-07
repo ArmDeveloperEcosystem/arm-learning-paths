@@ -1,22 +1,24 @@
 ---
-title: Install Snort3 along with all its required dependencies.
+title: Install Snort3 and the required dependencies
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+Snort is an Open Source Intrusion Prevention System (IPS). Snort uses a series of rules to define malicious network activity. If malicious activity is found, Snort generates alerts.
+
 Multithreading in Snort 3 refers to the ability to associate multiple threads with a single Snort instance enabling the concurrent processing of multiple packet files. This optimization frees up additional memory for further packet processing.
 
 In order to enable multithreading in Snort3, specify the quantity of threads designated for processing network traffic using either the '--max-packet-threads' or '-z' option. 
 
 {{%notice Note%}}
-    The instruction provided have been tested on AWS EC2 Graviton4 metal instance (Neoverse V2) 
+    The instructions provided have been tested on AWS EC2 Graviton4 instance, based on Neoverse V2. The examples are easiest to use if you have at least 16 cores in the system. 
 {{%/notice%}}
 
 ## Compile and build Snort3
-Run the script to download and install Snort3 and its dependent libraries.
-Skip this step if Snort3 is already installed.
+
+To install Snort3, use a text editor to save the script below on your Arm server in a file named `install-snort.sh`.
 
 <!-- add github link for the below file [build_snort3.sh]() -->
 ``` bash
@@ -74,7 +76,7 @@ installPackages()
             echo "Error: This script is only for ubuntu"
             exit 1
         fi
-        if [[ "${OS_VERSION_ID}" != "22.04" ] || [ "${OS_VERSION_ID}" != "20.04" ]];then
+        if [[ "${OS_VERSION_ID}" != "22.04" &&  "${OS_VERSION_ID}" != "20.04" ]];then
             echo "Warning: OS: ${OS_NAME} ${OS_VERSION_ID}"
             echo "Warning: Ubuntu 20.04 or 22.04 is recommended"
         fi
@@ -83,8 +85,8 @@ installPackages()
         exit 1
     fi
 
-    apt-get update
-    apt-get install -y $LIST_OF_APPS
+    sudo apt-get update
+    sudo apt-get install -y $LIST_OF_APPS
   
     # required to get optimised result from Snort3
     downlaodPackages
@@ -123,36 +125,34 @@ buildInstall()
     cd $SNORT_DIR/libdaq
     mkdir -p ${SNORT_DIR}/libdaq/install
     ./bootstrap
-    ./configure --prefix=${SNORT_DIR}/libdaq/install
+    ./configure 
     make -j${NUM_JOBS}
-    make install
+    sudo make install
 
     cd ${SNORT_DIR}/safeclib
     ./configure
     make -j${NUM_JOBS}
-    make -j${NUM_JOBS} install
+    sudo make -j${NUM_JOBS} install
 
     cd $SNORT_DIR/gperftools
     ./configure --with-tcmalloc-pagesize=64
-    make -j${NUM_JOBS}
     make -j${NUM_JOBS}
 
     cd $SNORT_DIR/pcre
     ./configure
     make -j${NUM_JOBS}
-    make -j${NUM_JOBS}
 
     cd ${SNORT_DIR}/vectorscan
     cmake -DBOOST_ROOT=$(SNORT_DIR)/boost -DCMAKE_BUILD_TYPE=Release .
     make -j${NUM_JOBS}
-    make -j${NUM_JOBS}
 
     cd ${ROOT_DIR}/snort3
-    ./configure_cmake.sh --build-type=Release --with-daq-includes=${SNORT_DIR}/libdaq/install/include/ --with-daq-libraries=${SNORT_DIR}/libdaq/install/lib/ --enable-unit-tests --enable-tcmalloc
+    ./configure_cmake.sh --prefix=/usr/local --build-type=Release --with-daq-includes=/usr/local/include/ --with-daq-libraries=/usr/local/lib/ --enable-unit-tests --enable-tcmalloc
     cd ${ROOT_DIR}/snort3/build
     make -j$NUM_JOBS
-    make -j$NUM_JOBS install
+    sudo make -j$NUM_JOBS install
     echo "@@@@@@@@@@@@@@@@@@     Build & Installation ... Done    @@@@@@@@@@@@@@@@@@@@"
+
 }
 
 #------ Execution Start ----------#
@@ -187,10 +187,29 @@ mkdir -p ${ROOT_DIR}
 cd ${ROOT_DIR}
 installPackages
 buildInstall
+
+echo 'export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"' >> $HOME/.bashrc
+echo 'make sure to source ~/.bashrc or set LD_LIBRARY_PATH using:"'
+echo '   export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"'
 ```
 
-To check if the installation is complete, run the command below.
-```bash{ output_lines = "2-20" }
+The script takes 2 arguments:
+- the directory used to build Snort3 and its dependencies 
+- the number of processors to use for the build
+
+To build in a new directory named `build` with the number of processors in your system, run the script:
+
+```bash
+bash ./install-snort.sh build `nproc`
+```
+
+You don't need to run the script as `root` but it assumes you are on Ubuntu 20.04 or 22.04 and have sudo permission. 
+
+When the build completes you have the snort3 directory with all compiled software, and the `snort` executable is located in `/usr/local/bin`.
+
+To verify the installation is complete, run the command below and see the version printed:
+
+```bash { output_lines = "2-20" }
  snort -V
 ,,_     -*> Snort++ <*-
   o"  )~   Version 3.3.5.0
@@ -209,4 +228,6 @@ To check if the installation is complete, run the command below.
 
 ```
 
+Don't delete the `build` directory as it will be used in the next step.
 
+Proceed to learn how to test Snort3 multithreading.
