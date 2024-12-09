@@ -20,7 +20,7 @@ The server executable has already compiled during the stage detailed in the prev
 Start the server from the command line, it listens on port 8080:
 
 ```bash
-./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf --port 8080
+./llama-server -m dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --port 8080
 ```
 
 ## Use curl
@@ -62,20 +62,30 @@ The `curl` command accesses the LLM and you see the output:
       "finish_reason": "stop",
       "index": 0,
       "message": {
-        "content": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\" << std::endl;\n    return 0;\n}",
+        "content": "#include <iostream>\n\nint main() {\n    std::cout << \"Hello, World!\";\n    return 0;\n}",
         "role": "assistant"
       }
     }
   ],
-  "created": 1726252907,
+  "created": 1733756813,
   "model": "any-model",
   "object": "chat.completion",
   "usage": {
-    "completion_tokens": 30,
+    "completion_tokens": 25,
     "prompt_tokens": 33,
-    "total_tokens": 63
+    "total_tokens": 58
   },
-  "id": "chatcmpl-wh33d82OqWKibRF0s7waublCpl9YytkI"
+  "id": "chatcmpl-xMWf1T4FYHtYu830y8yAzVdiSfwW1x4V",
+  "timings": {
+    "prompt_n": 33,
+    "prompt_ms": 59.956,
+    "prompt_per_token_ms": 1.816848484848485,
+    "prompt_per_second": 550.403629328174,
+    "predicted_n": 25,
+    "predicted_ms": 361.283,
+    "predicted_per_token_ms": 14.45132,
+    "predicted_per_second": 69.19783106318316
+  }
 }
 ```
 
@@ -94,7 +104,7 @@ source pytest/bin/activate
 
 Install the OpenAI Python package:
 ```bash
-pip install openai==1.45.0
+pip install openai==1.55.3
 ```
 
 Use a text editor to create a file named `python-test.py` with the content below: 
@@ -139,7 +149,7 @@ int main() {
     return 0;
 }
 
-This program includes the standard input/output library, `iostream`. It defines a `main` function, which is the entry point                of the program. Inside `main`, `std::cout` is used to output the string "Hello, World!" to the console, and then `std::endl` is used to print a new line. The `return 0;` statement indicates that the program exited successfully
+In this program, we include the iostream library, which allows us to use cout for output. We then print "Hello, World!" to the console using cout. Finally, we return 0 to indicate that the program has finished successfully.
 ```
 
 You can continue to experiment with different large language models and write scripts to try them.
