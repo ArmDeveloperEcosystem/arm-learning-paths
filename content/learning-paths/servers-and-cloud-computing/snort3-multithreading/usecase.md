@@ -17,14 +17,17 @@ Before testing multithreading performance, perform the following steps to config
 
 To enable Transparent HugePages (THP) and configure CPU isolation and affinity, append the following line to the /etc/default/grub file:
 
+For the total available online CPUs ranging from 0 to 95, with CPUs 0 to 9 pinned to Snort, the grubfile configuration is shown below. 
+
+Feel free to modify the CPU numbers as needed.
 ```bash
 CMDLINE="cma=128"
 HUGEPAGES="default_hugepagesz=1G hugepagesz=1G hugepages=300"
 MAXCPUS=""
-ISOLCPUS="isolcpus=nohz,domain,2-12"
-IRQAFFINITY="irqaffinity=2-12"
-NOHZ="nohz_full=2-12"
-RCU="rcu_nocbs=2-12"
+ISOLCPUS="isolcpus=nohz,domain,0-9"
+IRQAFFINITY="irqaffinity=10-95"
+NOHZ="nohz_full=0-9"
+RCU="rcu_nocbs=0-9"
 IOMMU="iommu.passthrough=1"
 THP="transparent_hugepage=madvise"
 GRUB_CMDLINE_LINUX="${CMDLINE} ${HUGEPAGES} ${ISOLCPUS} ${IRQAFFINITY} ${NOHZ} ${RCU} ${MAXCPUS} ${IOMMU} ${THP}"
@@ -53,7 +56,7 @@ The output shows the additions to the kernel command line.
 It is similar to:
 
 ```output
-BOOT_IMAGE=/boot/vmlinuz-6.8.0-1019-aws root=PARTUUID=20d0887f-2302-4e77-9c05-b78f1f0ad30e ro default_hugepagesz=1G hugepagesz=1G hugepages=300 isolcpus=nohz,domain,2-12 irqaffinity=2-12 nohz_full=2-12 rcu_nocbs=2-12 iommu.passthrough=1 transparent_hugepage=madvise console=tty1 console=ttyS0 nvme_core.io_timeout=4294967295 panic=-1
+BOOT_IMAGE=/boot/vmlinuz-6.5.0-1020-aws root=PARTUUID=2ca5cb77-b92b-4112-a3e0-eb8bd3cee2a2 ro cma=128 default_hugepagesz=1G hugepagesz=1G hugepages=300 isolcpus=nohz,domain,0-9 irqaffinity=10-95 nohz_full=0-9 rcu_nocbs=0-9 iommu.passthrough=1 transparent_hugepage=madvise console=tty1 console=ttyS0 nvme_core.io_timeout=4294967295 panic=-1
 ```
 
 You can also confirm the isolated processors:
@@ -65,7 +68,7 @@ cat /sys/devices/system/cpu/isolated
 The output shows the isolated processors:
 
 ```output
-2-12
+0-9
 ```
 
 ## Set up the Snort3 rule set
@@ -132,17 +135,16 @@ Use an editor to create a file named `common.lua` with the contents below.
 ---- change these mappings so that the first N tests use unique cores
 threads =
 {
-    { thread = 0, cpuset = '2' },
-    { thread = 1, cpuset = '3' },
-    { thread = 2, cpuset = '4' },
-    { thread = 3, cpuset = '5' },
-    { thread = 4, cpuset = '6' },
-    { thread = 5, cpuset = '7' },
-    { thread = 6, cpuset = '8' },
-    { thread = 7, cpuset = '9' },
-    { thread = 8, cpuset = '10' },
-    { thread = 9, cpuset = '11' },
-    { thread = 10, cpuset = '12' }
+    { thread = 0, cpuset = '0' },
+    { thread = 1, cpuset = '1' },
+    { thread = 2, cpuset = '2' },
+    { thread = 3, cpuset = '3' },
+    { thread = 4, cpuset = '4' },
+    { thread = 5, cpuset = '5' },
+    { thread = 6, cpuset = '6' },
+    { thread = 7, cpuset = '7' },
+    { thread = 8, cpuset = '8' },
+    { thread = 9, cpuset = '9' }
 }
 process = { threads = threads }
 search_engine = { }
@@ -164,7 +166,7 @@ Enable all the rules by uncommenting the `enable_builtin_rules` line and adding 
 ```bash
 enable_builtin_rules = true,
 rules = [[
-    include ../rules/includes.rules
+    include ../snort3-community-rules/snort3-community.rules
 ]],
 ```
 
@@ -269,26 +271,23 @@ Use `--max-packet-threads` to specify the number of threads, 10 in this example.
 To confirm that the Snort process spans many threads, use the `mpstat` command to evaluate the CPU utilization.
 
 ```bash
-mpstat -P 2-14 1
+mpstat -P 0-9 1
 ```
 
 The output is similar to:
 
 ```output
 22:52:26     CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+22:52:28       0   98.50    0.00    1.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+22:52:28       1   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 22:52:28       2   98.50    0.00    1.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 22:52:28       3   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28       4   98.50    0.00    1.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28       5   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28       6   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+22:52:28       4   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+22:52:28       5   99.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+22:52:28       6   99.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 22:52:28       7   99.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28       8   99.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28       9   99.00    0.00    1.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28      10   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28      11   97.50    0.00    2.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
-22:52:28      12    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-22:52:28      13    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
-22:52:28      14    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00  100.00
+22:52:28       8   98.00    0.00    2.00    0.00    0.00    0.00    0.00    0.00    0.00    0.00
+22:52:28       9   97.50    0.00    2.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 ```
 
 ## Test Snort3 multi-threading to process single pcap file 

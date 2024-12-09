@@ -158,7 +158,7 @@ buildInstall()
 #------ Execution Start ----------#
 # provide nproc count to the scripts , it will be used as -j for make 
 if [[ $# -ne 2 ]]; then
-	echo "Usage: $0 <current_working_directory> <nprc>"
+	echo "Usage: $0 <current_working_directory> <nproc>"
 	exit 1
 fi
 
