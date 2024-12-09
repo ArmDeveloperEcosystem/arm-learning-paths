@@ -163,25 +163,6 @@ Each quantization method has a unique approach to quantizing parameters. The dee
 
 In this guide, you will not use any other quantization methods, because Arm has not made kernel optimizations for other quantization types.
 
-## 
-
-To see improvements for Arm optimized kernels, you need to generate a new weights file with rearranged Q4_0 weights. As of [llama.cpp commit 0f1a39f3](https://github.com/ggerganov/llama.cpp/commit/0f1a39f3), Arm has contributed code for three types of GEMV/GEMM kernels corresponding to three processor types:
-
-* AWS Graviton2, where you only have NEON support (you will see less improvement for these GEMV/GEMM kernels),
-* AWS Graviton3, where the GEMV/GEMM kernels exploit both SVE 256 and MATMUL INT8 support, and
-* AWS Graviton4, where the GEMV/GEMM kernels exploit NEON/SVE 128 and MATMUL_INT8 support
-
-To re-quantize optimally for Graviton3, run
-
-```bash
-./llama-quantize --allow-requantize dolphin-2.9.4-llama3.1-8b-Q4_0.gguf dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf Q4_0_8_8
-```
-
-This will output a new file, `dolphin-2.9.4-llama3.1-8b-Q4_0_8_8.gguf`, which contains reconfigured weights that allow `llama-cli` to use SVE 256 and MATMUL_INT8 support.
-
-{{% notice Note %}} 
-This requantization is optimal only for Graviton3. For Graviton2, requantization should optimally be done in `Q4_0_4_4` format, and for Graviton4, `Q4_0_4_8` is the optimal requantization format. 
-{{% /notice %}}
 
 ## Run the pre-quantized Llama-3.1-8B LLM model weights on your Arm-based server
 
