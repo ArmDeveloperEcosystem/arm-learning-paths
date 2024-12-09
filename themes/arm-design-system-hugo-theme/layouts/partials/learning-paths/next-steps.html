@@ -18,9 +18,8 @@ Called from:
     }
     .social-icons a {
         color: var(--arm-light-blue);
-        font-size: 30px;
+        font-size: 36px;
         text-decoration: none;
-        transition: color 0.2s ease;
     }
     .social-icons a:hover {
         color: var(--arm-green);
@@ -30,22 +29,94 @@ Called from:
 
 </style>
 
+
+<style>
+    .share-icon {
+        width: 36px;
+        height: 36px;
+        fill: var(--arm-light-blue);
+        text-decoration: none;
+    }
+    .share-icon:hover {
+        fill: var(--arm-green);
+        cursor: pointer;
+      }
+    #link-copied-success {
+        color: var(--arm-green);
+        background-color: var(--arm-black);
+        border-radius: 10px;
+        padding-left:8px;
+        padding-top: 4px;
+        padding-bottom: 8px;
+        padding-right: 16px;
+        font-size: 16px;
+    }
+
+  </style>
+
 <div class="c-row">
     <div class="c-col">
         <h2>Share your Learning Achievement!</h2>
         <p>Keep learning and sharing your achivement with the world.</p>
         <div class="social-sharing">
             <div class="social-icons">
-                <a href="#" target="_blank" title="Share on LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" target="_blank" title="Share on X"><i class="fa-brands fa-square-twitter"></i></a>
-                <a href="#" target="_blank" title="Share on Facebook"><i class="fab fa-square-facebook"></i></a>
-                <a href="mailto:?subject=Check this out!&body=Here is a cool link: [insert your link here]" target="_blank" title="Share via Email"><i class="fas fa-envelope"></i></a>
-                <a href="#" target="_blank" title="Share link"><i class="fas fa-link"></i></a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ (index .learningpathfiles 0).Permalink }}"
+                onclick="window.open(this.href, 'linkedin-share', 'width=900,height=650'); return false;">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+
+                <a href="https://x.com/intent/tweet?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}++%40ArmSoftwareDev++&url={{ (index .learningpathfiles 0).Permalink | urlquery}}"
+                onclick="window.open(this.href, 'x-share', 'width=900,height=650'); return false;">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/square-x-twitter-brands-solid.svg#icon-twitter"></use>
+                    </svg>
+                </a>
+      
+                <a href="https://bsky.app/intent/compose?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}+{{ (index .learningpathfiles 0).Permalink}}"
+                onclick="window.open(this.href, 'bluesky-share', 'width=900,height=650'); return false;">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/square-bluesky-brands-solid.svg#icon-bluesky"></use>
+                    </svg>
+                </a>
+                
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ (index .learningpathfiles 0).Permalink }}" 
+                onclick="window.open(this.href, 'facebook-share', 'width=900,height=650'); return false;">
+                    <i class="fab fa-square-facebook"></i>
+                </a>
+            
+                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ (index .learningpathfiles 0).Permalink }}" target="_blank" title="Share via Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a id="copy-link" href="#" title="Share link">
+                    <i class="fas fa-link"></i>
+                </a>
+                <span id="link-copied-success" hidden>Link copied to clipboard.</span>
+
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    document.getElementById("copy-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent default link behavior
+  
+        // trim off 'next steps'
+        const fullUrl = window.location.href;
+        const trimmedUrl = fullUrl.endsWith("/") 
+        ? fullUrl.split("/").slice(0, -2).join("/") + "/"
+        : fullUrl.split("/").slice(0, -1).join("/") + "/";
+
+
+        navigator.clipboard.writeText(trimmedUrl).then(() => {
+            // Show the success message
+            document.getElementById("link-copied-success").hidden = false;
+        }).catch(err => {
+            console.error("Failed to copy link: ", err);
+        });
+    });
+  </script>
+  
 <br>
 <br>
 
@@ -93,7 +164,12 @@ Called from:
             <div id="arm-dev-program-div" class="content-box">
                 <h4>Talk with Arm Experts</h4>
                 <p>Join the Arm Developer Program to share ideas, ask questions, and interact with fellow peers — all with the support of Arm’s own subject-matter experts.</p>
-                <ads-cta-button level="primary" sr-label="primary button">Join now</ads-cta-button>
+                <ads-cta-button id="join-dev-program" level="primary" sr-label="primary button">Join now</ads-cta-button>    
+                <script>
+                    document.getElementById("join-dev-program").onclick = function () {
+                    window.open("https://www.arm.com/resources/developer-program?#register","_blank");
+                    };
+                </script>
             </div>
 
 
