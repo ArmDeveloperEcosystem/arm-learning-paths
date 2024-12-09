@@ -24,24 +24,33 @@ Looking at the memory consumption for Java/Kotlin and native, there are two sepa
 * **Track Memory Consumption (Java/Kotlin Allocations)**.
 * **Track Memory Consumption (Native Allocations)**.
 
-Before you start either task, you must build your app for profiling. The instructions for this, and for general profiling setup can be found [here](https://developer.android.com/studio/profile). You need to start the correct profiling version of the app depending on the task.
+Before you start either task, you must build your app for profiling. The instructions for this, and for general profiling setup can be found on the Android Studio website at a page called [Profile your app performance](https://developer.android.com/studio/profile). You need to start the correct profiling version of the app depending on the task.
 
-![Android Studio profiling run types alt-text#center](android-profiling-version.png "Figure 1. Profiling Run Versions")
+![Android Studio profiling run types alt-text#center](android-profiling-version.png "Figure 1: Profiling Run Versions")
 
 For the Java/Kotlin side, select **Profile 'app' with complete data", which is based off the debug variant. For the native side, you want the **profileable** "Profile 'app' with low overhead", which is based off the release variant.
 
 ### Java/Kotlin
 
-If you start looking at the [Java/Kotlin side](https://developer.android.com/studio/profile/record-java-kotlin-allocations), choose *Profiler: Run 'app' as debuggable*, and then select the *Track Memory Consumption (Java/Kotlin Allocations)* task. Navigate to the part of the app you wish to profile and then you can start profiling. At the bottom of the Profiling window it should look like Figure 2 below. Click *Start Profiler Task*.
+To investigate the Java/Kotlin side, see the notes on [Record Java/Kotlin allocations](https://developer.android.com/studio/profile/record-java-kotlin-allocations).
 
-![Android Studio Start Profile alt-text#center](start-profile-dropdown.png "Figure 2. Start Profile")
+Select **Profiler: Run 'app' as debuggable**, and then select the **Track Memory Consumption (Java/Kotlin Allocations)** task. 
 
-When you're ready, *Stop* the profiling again. Now there will be a nice timeline graph of memory usage. While Android Studio has a nicer interface for the Java/Kotlin side than the native side, the key to the timeline graph may be missing. This key is shown below in Figure 3, so you can refer to the colors from this.
-![Android Studio memory key alt-text#center](profiler-jk-allocations-legend.png "Figure 3. Memory key for the Java/Kotlin Memory Timeline")
+Navigate to the part of the app that you would like to profile, and then you can start profiling. 
 
-The default height of the Profiling view, as well as the timeline graph within it is usually too small, so adjust these heights to get a sensible graph. You can click at different points of the graph to see the memory allocations at that time. If you look according to the key you can see how much memory is allocated by Java, Native, Graphics, Code etc.
+The bottom of the profiling window should resemble Figure 2. 
 
-Looking further down you can see the *Table* of Java/Kotlin allocations for your selected time on the timeline. With ML a lot of your allocations are likely to be byte[] for byte buffers, or possibly int[] for image data, etc. Clicking on the data type will open up the particular allocations, showing their size and when they were allocated. This will help to quickly narrow down their use, and whether they are all needed etc.
+![Android Studio Start Profile alt-text#center](start-profile-dropdown.png "Figure 2: Start Profile")
+
+Click **Start Profiler Task**.
+
+When you're ready, select *Stop* to stop the profiling again. Now there will be a timeline graph of memory usage. While Android Studio has a more user-friendly interface for the Java/Kotlin side than the native side, the key to the timeline graph might be missing. This key is shown in Figure 3, so you can refer to the colors from this. 
+
+![Android Studio memory key alt-text#center](profiler-jk-allocations-legend.png "Figure 3: Memory key for the Java/Kotlin Memory Timeline")
+
+Adjust the default height of the profiling view, as well as the timeline graph within it, as they are usually too small. You can click on different points of the graph to see the memory allocations at that specific time. Using the key on the graph, you can see how much memory is allocated by different categories of consumption, such as Java, Native, Graphics, and Code.
+
+If you looking further down, you can see the **Table** of Java/Kotlin allocations for your selected time on the timeline. With ML, many of your allocations are likely to be byte[] for byte buffers, or possibly int[] for image data, etc. Clicking on the data type will open up the particular allocations, showing their size and when they were allocated. This will help to quickly narrow down their use, and whether they are all needed etc.
 
 ### Native
 

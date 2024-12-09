@@ -39,37 +39,37 @@ In this example, the target device is an Arm-powered Android phone. The data is 
 
 For more information on Streamline usage, see [Tutorials and Training Videos](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio). 
 
-While the example that you are running is based on Android, you can use [the Setup and Capture Instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application).
+While the example that you are running is based on Android, you can use the [Setup and Capture Instructions for Linux](https://developer.arm.com/documentation/101816/0903/Getting-started-with-Streamline/Profile-your-Linux-application).
 
-Firstly, follow these [Setup Instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), to make sure you have `adb` (Android Debug Bridge) installed. If you have installed [Android Studio](https://developer.android.com/studio), you will have adb installed already. Otherwise, you can get it as part of the Android SDK platform tools [here](https://developer.android.com/studio/releases/platform-tools.html).
+Firstly, follow these [Setup Instructions](https://developer.arm.com/documentation/102477/0900/Setup-tasks?lang=en), to make sure you have `adb` (Android Debug Bridge) installed. If you have installed [Android Studio](https://developer.android.com/studio), you will have adb installed already. Otherwise, you can get it as part of the Android SDK platform tools which can be found on the [SDK Platform Tools Release Notes page](https://developer.android.com/studio/releases/platform-tools.html).
 
-Make sure `adb` is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by installing the [Android SDK `platform-tools`](https://developer.android.com/tools/releases/platform-tools#downloads) directory to your path. 
+Make sure `adb` is in your path. You can check this by running `adb` in a terminal. If it is not in your path, you can add it by installing the SDK platform tools from the [SDK Platform Tools Release Notes Downloads page](https://developer.android.com/tools/releases/platform-tools#downloads). 
 
 Next, install [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads), which includes Streamline. 
 
-Connect your Android phone to your host machine through USB. Ensure that your Android phone is set to [Developer mode](https://developer.android.com/studio/debug/dev-options).
+Connect your Android phone to your host machine through USB. Ensure that your Android phone is set to developer mode. For more information on how to do this, see [Configure on-device developer options](https://developer.android.com/studio/debug/dev-options).
 
-On your phone, go to **Settings** > **Developer Options** and enable **USB Debugging**. If your phone asks you to authorize connection to your host machine, confirm authorization. Test the connection by running `adb devices` in a terminal. You should see your device ID listed.
+On your phone, navigate to **Settings**, then **Developer Options**. Enable **USB Debugging**. If your phone requests authorization for connection to your host machine, confirm authorization. Test the connection by running `adb devices` in a terminal. You will see your device ID listed.
 
-Next, you need a debuggable-build of the application that you want to profile. 
+Next, you need a debuggable build of the application that you want to profile. 
 - In Android Studio, ensure your **Build Variant** is set to **debug**. You can then build the application, and install it on your device. 
-- For a Unity app, select **Development Build** under **File** > **Build Settings** when building your application. 
-- In Unreal Engine, open **Project Settings** > **Project** > **Packaging** > **Project**, and ensure that the **For Distribution** checkbox is clear. 
-- Generally, you can set `android:debuggable=true` in the application manifest file.
+- For a Unity app, select **Development Build** in the **Build Settings** menu under **File**, when building your application. 
+- In Unreal Engine, expand the navigtion menu **Project Settings** > **Project** > **Packaging** > **Project**, and ensure that the **For Distribution** checkbox is clear. 
+- You can set `android:debuggable=true` in the application manifest file.
 
 For the example application that you cloned earlier, the Build Variant is `debug` by default, but you can verify this by going to **Build** > **Select Build Variant** in Android Studio. 
 
 Build and install this application on your device.
 
-You are now able to run Streamline and [capture a profile](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en) of your application. But before you do, you can add some useful annotations to your code that enables more specific performance analysis of your application.
+You are now able to run Streamline and capture a profile of your application by following the instructions [Capture a profile](https://developer.arm.com/documentation/102477/0900/Capture-a-profile?lang=en). But before you do, you can add some useful annotations to your code that enables specific performance analysis of your application.
 
 ## Custom Annotations
 
-In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of specific parts of your application, or to mark when a specific event occurs. This then allows you to view the performance of your application in relation to these events. At the bottom of *Figure 1* there are custom annotations to show when inference, pre-processing, and post-processing occur.
+In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of parts of your application, or to mark when a specific event occurs. This then allows you to view the performance of your application in relation to these events. At the bottom of *Figure 1* there are custom annotations to show when inference, pre-processing, and post-processing occur.
 
-To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h`, and `streamline_annotate_logging.h` and made available [here](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you can see log strings, markers, counters, and Custom Activity Maps. Within your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
+To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h`, and `streamline_annotate_logging.h` and made available at [this Github respository](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you can see log strings, markers, counters, and Custom Activity Maps. Within your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
 
-These files are written in C, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is slightly trickier than just adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this [here](https://developer.android.com/studio/projects/add-native-code).
+These files are written in C, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is slightly trickier than adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this at a page called [Add C and C++ code to your project](https://developer.android.com/studio/projects/add-native-code).
 
 Create a file in the `app/src/main/cpp/` folder under your project, and name it `annotate_jni_wrapper.c`. This will be a wrapper around the gator daemon's functions, and will be called from your Kotlin code. Copy the code below into this file. You can also create similar wrapper functions for other gator daemon functions.
 
