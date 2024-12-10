@@ -8,6 +8,7 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives: 
     - Profile the execution times of ML models on Arm devices.
     - Profile ML application performance on Arm devices.
+    - Describe how profiling can help optimize the performance of Machine Learning applications.
 
 prerequisites:
     - An Arm-powered Android smartphone, and a USB cable to connect to it.
