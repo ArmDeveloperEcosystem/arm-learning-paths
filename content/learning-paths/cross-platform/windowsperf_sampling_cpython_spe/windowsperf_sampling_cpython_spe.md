@@ -1,47 +1,51 @@
 ---
 layout: learningpathall
-title: CPython Sampling with SPE Example Overview
+title: An overview of CPython sampling with SPE 
 weight: 2
 ---
 
-# CPython Sampling with SPE Example
+In this example, you will build a debug build of CPython from sources and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
 
-In this example, you will build a debug build of CPython from sources and then execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from a CPython runtime image.
-
-## The Arm Statistical Profiling Extension Introduction
+## Introduction to the Arm Statistical Profiling Extension (SPE)
 
 The Arm Statistical Profiling Extension (SPE) is a feature defined as part of the Armv8-A architecture, starting from version 8.2. It provides non-invasive, hardware-based statistical sampling for CPUs. Unlike the Performance Monitor Unit (PMU), SPE is a different module that integrates the sampling process into the instruction execution process within the CPU's pipelines.
 
 SPE is particularly useful for performance analysis and optimization, as it provides detailed insights into the behavior of the CPU during execution. This can help identify performance bottlenecks and optimize software for better efficiency.
 
-## Introduction
+## Overview
 
-You will use sampling to determine CPython program "hot" locations provided by Arm Statistical Profiling Extension (SPE).
+You will use sampling to determine the CPython program "hot" locations as provided by the Arm Statistical Profiling Extension (SPE).
 
-WindowsPerf added support (in `record` command) for the [Arm Statistical Profiling Extension (SPE)](https://developer.arm.com/documentation/101136/22-1-3/MAP/Arm-Statistical-Profiling-Extension--SPE-). SPE is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
+WindowsPerf includes `record` support for the Arm Statistical Profiling Extension (SPE). 
+
+SPE is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
 
 {{% notice Note %}}
-Currently SPE is available on Windows On Arm in Test Mode only!
+Currently SPE is available on Windows On Arm in Test Mode only! 
 {{% /notice %}}
 
 ## Before you begin
 
-For this learning path you will need:
-* A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
-  * Note: The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with Arm SPE (Statistical Profiling Extension) support enabled. To install this version download release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
-* CPU must support Arm SPE extension, an optional feature in ARMv8.2 hardware - we will show you how to check your CPU compatibility using WindowsPerf command-line tool.
-* Basic knowledge of git and Python.
-  * See [Install Git on Windows](https://github.com/git-guides/install-git#install-git-on-windows) for more details.
+For this Learning Path you will need:
 
-### How to check if your ARM64 CPU supports Arm SPE extension
+* A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). Refer to the [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
+  * Note: The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with Arm SPE (Statistical Profiling Extension) support enabled. To install this version download release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
+* [Visual Studio](/install-guides/vs-woa/) and [Git](/install-guides/git-woa/) installed.
+* The CPU must support the Arm SPE extension, an optional feature in ARMv8.2 hardware. You can check your CPU compatibility using the WindowsPerf command-line tool (explained below).
+
+### How do I check if my Arm CPU supports the Arm SPE extension?
 
 #### SPE hardware support detection:
 
-You can check if your system supports SPE or if WindowsPerf can detect SPE with `wperf test` command. See below an example of `spe_device.version_name property` value on system with SPE:
+You can check if WindowsPerf detects SPE support with the `wperf test` command. 
+
+Run the command below and if the `spe_device.version_name` property shows `FEAT_SPE` it means WindowsPerf can use the SPE features. 
 
 ```console
 wperf test
 ```
+
+Here is the output for a system with SPE support:
 
 ```output
         Test Name                                           Result
@@ -50,7 +54,7 @@ wperf test
         spe_device.version_name                             FEAT_SPE
 ```
 
-#### How do I know if your WindowsPerf binaries and driver support optional SPE?
+#### How do I know if my WindowsPerf binaries and driver support optional SPE?
 
 {{% notice Note %}}
 Currently WindowsPerf support of SPE is in development, not all versions of WindowsPerf enable SPE support. Some WindowsPerf releases may contain separate binaries with SPE support enables.
@@ -62,6 +66,8 @@ You can check feature string `FeatureString` of both `wperf` and `wperf-driver` 
 wperf --version
 ```
 
+The output is similar to:
+
 ```output
         Component     Version  GitVer          FeatureString
         =========     =======  ======          =============
@@ -69,19 +75,19 @@ wperf --version
         wperf-driver  3.8.0    6d15ddfc        +trace+spe
 ```
 
-If `FeatureString` for both components (`wperf` and `wperf-driver`) contains `+spe` (and `spe_device.version_name` contains `FEAT_SPE`) you are good to go!
+If the `FeatureString` for both `wperf` and `wperf-driver` contains `+spe` you can use the SPE features of WindowsPerf.
 
-### Build CPython targeting ARM64
+### Build CPython for ARM64
 
-Note: all steps are done on Windows on Arm system with ARM64 CPU.
+Perform the build steps below on your Windows on Arm system.
 
-CPython is an open-source project. There is native support in CPython for Windows on Arm starting with version 3.11. In this learning path you will use a debug build of CPython. For this, you will build [CPython](https://github.com/python/cpython) locally from sources in the debug mode on an x86_64 machine and cross-compile it for an ARM64 target. 
+CPython is an open-source project which includes native support for Windows on Arm starting with version 3.11. 
 
-{{% notice Note %}}
-Use the Visual Studio `Developer Command Prompt for VS 2022` which is already set up in the VS environment. Go to Start and search for "Developer Command Prompt for VS 2022".
-{{% /notice %}}
+The SPE features are demonstrated with a debug build of CPython. You can build [CPython](https://github.com/python/cpython) locally from sources in debug mode.
 
-You should see a prompt as shown below:
+Open a Visual Studio `Developer Command Prompt for VS 2022` command prompt. You can find this from Windows Start by searching for "Developer Command Prompt for VS 2022".
+
+When you open the command prompt, you will see output similar to:
 
 ```output
 **********************************************************************
@@ -93,20 +99,20 @@ C:\Program Files\Microsoft Visual Studio\2022\Community>
 ```
 
 {{% notice Note %}}
-Please use `Developer Command Prompt for VS 2022` with all of the next steps.
+Please use the `Developer Command Prompt for VS 2022` command prompt for the remainder of the steps. 
 {{% /notice %}}
 
----
-
-Let's build CPython locally in debug mode using the `build.bat` script. You have the option to build CPython directly on your ARM64 machine or cross-compile it on an x64 machine. Below is an example demonstrating how to build it on an ARM64 machine.
+You can build CPython locally in debug mode using the `build.bat` script using the steps below. 
 
 #### Clone CPython source code
+
+Get the CPython source code from GitHub:
 
 ```command
 git clone https://github.com/python/cpython.git
 ```
 
-The output from this command will be similar to:
+The output from this command is similar to:
 
 ```output
 Cloning into 'cpython'...
@@ -119,19 +125,19 @@ Resolving deltas: 100% (792463/792463), done.
 Updating files: 100% (4647/4647), done.
 ```
 
-#### Checkout CPython at specific SHA
+#### Checkout CPython with a specific SHA
 
 {{% notice Note %}}
-This step is optional, but please remember that you may encounter build issues unrelated to this example as the CPython mainline source code that you've just checked out is not stable. Therefore, we recommend that you check out SHA to avoid any unexpected issues and to ensure you are working off the same code base.
+This step is optional, but you may encounter build issues unrelated to this example if the CPython mainline source code is not stable. It's best to check out a specific SHA to avoid any unexpected issues and to ensure you are working off the same code base.
 {{% /notice %}}
 
-Use a specific CPython commit to match the sampling output in this example:
+Use a specific CPython commit to match the output for this example:
 
 ```console
 cd cpython
 git checkout 1ff81c0cb67215694f084e51c4d35ae53b9f5cf9
 ```
-The output will be similar to:
+The output is similar to:
 
 ```output
 Updating files: 100% (2774/2774), done.
@@ -141,17 +147,18 @@ Note: switching to '1ff81c0cb67215694f084e51c4d35ae53b9f5cf9'.
 
 #### Build CPython from sources
 
-The folder `cpython\PCbuild` contains the `build.bat` script you will use to build CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
+The `build.bat` script builds CPython from sources. Build CPython with debug symbols by invoking the `-d` command line option and select the ARM64 target with `-p ARM64`.
 
-{{% notice Note %}}
 Make sure you are using `Developer Command Prompt for VS 2022`.
-{{% /notice %}}
+
+Change to the `PCbuild` directory and run the build command:
 
 ```console
 cd PCbuild
 build.bat -d -p ARM64
 ```
-The output will be similar to:
+
+The output is similar to:
 
 ```output
 Downloading nuget...
@@ -172,19 +179,20 @@ Build succeeded.
 Time Elapsed 00:00:59.50
 ```
 
-{{% notice Note %}}
-The folder `cpython\PCbuild\arm64` should contain all the executables built in this process. You will use `python_d.exe` in this example.
-{{% /notice %}}
+The folder `cpython\PCbuild\arm64` contains the executables built in this process. 
+
+You will use `python_d.exe` to run Python.
 
 ##### Execute interactive mode to make sure all the CPython dependencies and libraries are loaded
 
-On your Windows ARM64 machine, open a command prompt and run:
+Continue at the same command prompt, and test that Python runs correctly:
 
 ```console
-cd c:\path\to\cpython\PCbuild\arm64
+cd arm64
 python_d.exe
 ```
-You should see CPython being invoked in interactive mode:
+
+You see CPython being invoked in interactive mode:
 
 ```output
 Python 3.12.0a6+ (heads/main:1ff81c0cb6, Mar 14 2023, 16:26:50) [MSC v.1935 64 bit (ARM64)] on win32
@@ -192,6 +200,6 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>>
 ```
 
-{{% notice Note %}}
-Your environment should now be fully set up and you are ready to move on to the next step.
-{{% /notice %}}
+Type `quit()` to exit CPython.
+
+Your environment s now ready to use WindowsPerf with SPE on CPython. 
