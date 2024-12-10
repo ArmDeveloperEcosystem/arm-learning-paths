@@ -54,7 +54,7 @@ On your phone, navigate to **Settings**, then **Developer Options**. Enable **US
 Next, you need a debuggable build of the application that you want to profile. 
 - In Android Studio, ensure your **Build Variant** is set to **debug**. You can then build the application, and install it on your device. 
 - For a Unity app, select **Development Build** in the **Build Settings** menu under **File**, when building your application. 
-- In Unreal Engine, expand the navigtion menu **Project Settings** > **Project** > **Packaging** > **Project**, and ensure that the **For Distribution** checkbox is clear. 
+- In Unreal Engine, expand the navigation menu **Project Settings** > **Project** > **Packaging** > **Project**, and ensure that the **For Distribution** checkbox is clear. 
 - You can set `android:debuggable=true` in the application manifest file.
 
 For the example application that you cloned earlier, the Build Variant is `debug` by default, but you can verify this by going to **Build** > **Select Build Variant** in Android Studio. 
@@ -67,7 +67,7 @@ You are now able to run Streamline and capture a profile of your application by 
 
 In Streamline, it is possible to add custom annotations to the timeline view. This can be useful to mark the start and end of parts of your application, or to mark when a specific event occurs. This then allows you to view the performance of your application in relation to these events. At the bottom of *Figure 1* there are custom annotations to show when inference, pre-processing, and post-processing occur.
 
-To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h`, and `streamline_annotate_logging.h` and made available at [this Github respository](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you can see log strings, markers, counters, and Custom Activity Maps. Within your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
+To add annotations, you will need to add some files into your project from the **gator** daemon that Streamline uses. These files are named `streamline_annotate.c`, `streamline_annotate.h`, and `streamline_annotate_logging.h` and made available at [this GitHub respository](https://github.com/ARM-software/gator/tree/main/annotate). Using these annotations, you can see log strings, markers, counters, and Custom Activity Maps. Within your example project, create a `cpp` folder under the `app/src/main` folder, and add these three files there.
 
 These files are written in C, so if your Android Studio project is in Java or Kotlin, you will need to add a C library to your project. This is slightly trickier than adding a Java or Kotlin file, but it is not difficult. You can find instructions on how to do this at a page called [Add C and C++ code to your project](https://developer.android.com/studio/projects/add-native-code).
 
