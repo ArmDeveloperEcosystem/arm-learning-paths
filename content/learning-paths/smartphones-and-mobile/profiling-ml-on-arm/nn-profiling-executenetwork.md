@@ -33,7 +33,9 @@ adb push libarmnn.so /data/local/tmp/
 adb push libarmnn_support_library.so /data/local/tmp/
 # more ArmNN .so library files
 ```
-Push all the `.so` library files that are in the base folder of the `tar.gz` archive you downloaded, alongside `ExecuteNetwork`, and all the `.so` files in the `delegate` sub-folder. If you are using a recent version of Android Studio this copying can be done much more easily with drag and drop in the *Device Explorer > Files*.
+Push all the `.so` library files that are in the base folder of the `tar.gz` archive you downloaded, alongside `ExecuteNetwork`, and all the `.so` files in the `delegate` sub-folder. 
+
+If you are using a recent version of Android Studio this copying can be done much more easily with with drag-and-drop in Android Studio in **Device Explorer > Files**.
 
 Then you need to set the permissions on the files:
 
@@ -66,7 +68,7 @@ After running the model, you can pull the output file back to your host machine 
 exit        
 adb pull /data/local/tmp/modelout.txt
 ```
-Once again, this can be done with drag-and-drop in Android Studio's **Device Explorer > Files**.
+Once again, you can do this with drag-and-drop in Android Studio in **Device Explorer > Files**.
 
 Depending on the size of your model, the output will probably be quite large. You can use a text editor to view the file. The output is in JSON format, so you can use a JSON viewer to make it more readable. Usually you can use some scripting to extract the information you need more easily out of the raw data in the file.
 
@@ -97,4 +99,4 @@ At the start of the layers, there are a few optimizations and their timings reco
 
 In the mobilenet example output, the graph is from lines 18 to 1629. After this are the optimization timings, which are part of the runtime, but not the network - these go until line 1989. Next there are a few wall clock recordings for the loading of the network, before the first layer "Convolution2dLayer_CreateWorkload_#18" at line 2036. This is where the layer information that requires analysis starts.
 
-The layers' "Wall clock time" in microseconds shows you how long they took to run. These layers and their timings can then be analyzed to see which layers, and which operators, took the most time.
+The layers' wall-clock time in microseconds shows you how much time elapsed. You can then analyze these layers and timings to identify which layers and operators took the most time to run.
