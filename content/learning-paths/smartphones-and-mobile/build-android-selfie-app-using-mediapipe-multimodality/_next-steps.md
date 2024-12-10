@@ -1,21 +1,21 @@
 ---
-next_step_guidance: PLACEHOLDER TEXT 1
+next_step_guidance: Now that you have built a modern Android app leveraging MediaPipe solutions and Jetpack libraries, you are ready to dive deeper into on-device AI topics.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/smartphones-and-mobile/android_opencv_camera/
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Android app architecture
+        link: https://developer.android.com/topic/architecture/intro
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
-        type: blog
-    - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: Android codelabs on ML
+        link: https://developer.android.com/get-started/codelabs?category=androidml
         type: website
+    - resource:
+        title: How to bring your AI Model to Android devices
+        link: https://android-developers.googleblog.com/2024/10/bring-your-ai-model-to-android-devices.html
+        type: blog
 
 
 # ================================================================================
