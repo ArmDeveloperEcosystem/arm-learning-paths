@@ -28,7 +28,7 @@ Before you start either task, you must build your app for profiling. The instruc
 
 ![Android Studio profiling run types alt-text#center](android-profiling-version.png "Figure 1: Profiling Run Versions")
 
-For the Java/Kotlin side, select **Profile 'app' with complete data", which is based off the debug variant. For the native side, you want the **profileable** "Profile 'app' with low overhead", which is based off the release variant.
+For the Java/Kotlin side, select **Profile 'app' with complete data**, which is based off the debug variant. For the native side, you want the **profileable** "Profile 'app' with low overhead", which is based off the release variant.
 
 ### Java/Kotlin
 
