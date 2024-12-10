@@ -21,7 +21,7 @@ Now you have two independent Flows indicating the conditions of face landmark de
         private const val CONDITION_CHECK_STABILITY_THRESHOLD = 500L
 ```
 
-2. Add a private member variable named `_bothOk`. Note that you might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is still in preview.
+2. Add a private member variable named `_bothOk`.
 
 ```kotlin
     private val _bothOk =
@@ -31,6 +31,13 @@ Now you have two independent Flows indicating the conditions of face landmark de
         ) { gestureOk, faceOk -> gestureOk && faceOk }
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), false)
 ```
+
+{{% notice Note %}}
+Kotlin Flow's [`combine`](https://kotlinlang.org/api/kotlinx.coroutines/kotlinx-coroutines-core/kotlinx.coroutines.flow/combine.html) transformation is equivalent to ReactiveX's [`combineLatest`](https://reactivex.io/documentation/operators/combinelatest.html). It combines emissions from multiple observables, so that each time **any** observable emits, the combinator function is called with the latest values from all sources.
+
+You might need to add `@OptIn(FlowPreview::class)` annotation since `sample` is still in preview. For more information on similar transformations, please refer to [this blog](https://kt.academy/article/cc-flow-combine).
+
+{{% /notice %}}
 
 3. Expose a `SharedFlow` variable which emits a `Unit` whenever the face and gesture conditions are met and stay stable for a while, i.e. `500`ms as defined above. Again, add `@OptIn(FlowPreview::class)` if needed.
 
@@ -44,7 +51,9 @@ Now you have two independent Flows indicating the conditions of face landmark de
 
 If this code looks confusing to you, please see the explanations below for Kotlin beginners.
 
-#### Keyword "it"
+{{% notice Info %}}
+
+###### Keyword "it"
 
 The operation `filter { it }` is simplified from `filter { bothOk -> bothOk == true }`. 
 
@@ -52,10 +61,16 @@ Since Kotlin allows for implictly calling the single parameter in a lambda `it`,
 
 See [this doc](https://kotlinlang.org/docs/lambdas.html#it-implicit-name-of-a-single-parameter) for more details.
 
-#### "Unit" type
+{{% /notice %}}
+
+{{% notice Info %}}
+
+###### "Unit" type
 This `SharedFlow` has a generic type `Unit`, which doesn't contain any value. You may think of it as a "pulse" signal.
 
 The operation `map { }` simply maps the upstream `Boolean` value emitted from `_bothOk` to `Unit` regardless their values are true or false. It's simplified from `map { bothOk -> Unit }`, which becomes `map { Unit } ` where the keyword `it` is not used at all. Since an empty block already returns `Unit` implicitly, we don't need to explicitly return it.
+
+{{% /notice %}}
 
 If this still looks confusing, you may also opt to use `SharedFlow<Boolean>` and remove the `map { }` operation. Just note that when you collect this Flow, it doesn't matter whether the emitted `Boolean` values are true or false. In fact, they are always `true` due to the `filter` operation.
 

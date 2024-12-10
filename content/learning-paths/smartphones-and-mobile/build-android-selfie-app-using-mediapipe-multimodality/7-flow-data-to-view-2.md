@@ -6,12 +6,12 @@ weight: 7
 layout: learningpathall
 ---
 
-StateFlow is a subclass of SharedFlow and internally use a SharedFlow to manage its emissions. However, it provides a stricter API, ensuring that:
+`StateFlow` is a subclass of SharedFlow and internally use a SharedFlow to manage its emissions. However, it provides a stricter API, ensuring that:
 1. It always has an initial value.
 2. It emits only the latest state.
 3. It cannot configure its replay cache (always `1`).
 
-Therefore, StateFlow is a specialized type of SharedFlow that represents a state holder, always maintaining the latest value. It is optimized for use cases where you need to observe and react to state changes.
+Therefore, `StateFlow` is a specialized type of `SharedFlow` that represents a state holder, always maintaining the latest value. It is optimized for use cases where you need to observe and react to state changes.
 
 ## Expose UI states in StateFlow
 
@@ -127,4 +127,20 @@ Therefore, StateFlow is a specialized type of SharedFlow that represents a state
                 }
 ```
 
-5. Build and run the app again. Now you should be seeing two switches on the bottom of the screen, which turns on and off while you smile and show thumb-up gestures. Good job!
+5. Build and run the app again. Now you should be seeing two switches on the bottom of the screen as shown below, which turns on and off while you smile and show thumb-up gestures. Good job!
+
+![indicator UI](images/7/indicator%20ui.png)
+
+## Recap on SharedFlow vs StateFlow
+
+This app uses `SharedFlow` for dispatching overlay views' UI events without mandating a specific stateful model, which avoids redundant computation. Meanwhile, it uses `StateFlow` for dispatching condition switches' UI states, which prevents duplicated emission and consequent UI updates.
+
+Here's a breakdown of the differences between `SharedFlow` and `StateFlow`:
+
+|  | SharedFlow | StateFlow |
+| --- | --- | --- |
+| Type of Data | Transient events or actions | State or continuously changing data |
+| Initial Value | Not required | Required | 
+| Replays to New Subscribers | Configurable with replay (e.g., 0, 1, or more) | Always emits the latest value |
+| Default Behavior | Emits only future values unless replay is set | Retains and emits only the current state |
+| Use Case Examples | Short-lived, one-off events that shouldn't persist as part of the state | Long-lived state that represents the current view's state |

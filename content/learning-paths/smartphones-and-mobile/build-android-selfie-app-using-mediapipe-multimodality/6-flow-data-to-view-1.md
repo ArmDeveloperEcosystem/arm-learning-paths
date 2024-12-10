@@ -6,11 +6,11 @@ weight: 6
 layout: learningpathall
 ---
 
-StateFlow and SharedFlow are [Flow APIs](https://developer.android.com/kotlin/flow) that enable flows to optimally emit state updates and emit values to multiple consumers.
+[SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#sharedflow) and [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) are [Kotlin Flow](https://developer.android.com/kotlin/flow) APIs that enable Flows to optimally emit state updates and emit values to multiple consumers.
 
-In this learning path, you will have the opportunity to experiment with both [SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#sharedflow) and [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow). This chapter will focus on SharedFlow while the next chapter will focus on StateFlow.
+In this learning path, you will have the opportunity to experiment with both `SharedFlow` and `StateFlow`. This chapter will focus on SharedFlow while the next chapter will focus on StateFlow.
 
-SharedFlow is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to set the replay cache size, buffer capacity, etc.
+`SharedFlow` is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to set the replay cache size, buffer capacity, etc.
 
 ## Expose UI events in SharedFlow
 
@@ -34,6 +34,10 @@ SharedFlow is a general-purpose, hot flow that can emit values to multiple subsc
     private val _uiEvents = MutableSharedFlow<UiEvent>(1)
     val uiEvents: SharedFlow<UiEvent> = _uiEvents
 ```
+
+{{% notice Info %}}
+This `SharedFlow` is initialized with a replay size of `1`. This retains the most recent value and ensures that new subscribers don't miss the latest event.
+{{% /notice %}}
 
 3. Replace the logging with value emissions in the listener callbacks:
 
@@ -70,7 +74,7 @@ To visualize the results of Face Landmark Detection and Gesture Recognition task
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.hollisticselfiedemo
+package com.example.holisticselfiedemo
 
 import android.content.Context
 import android.graphics.Canvas
@@ -194,7 +198,7 @@ class FaceLandmarkerOverlayView(context: Context?, attrs: AttributeSet?) :
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.hollisticselfiedemo
+package com.example.holisticselfiedemo
 
 import android.content.Context
 import android.graphics.Canvas
@@ -301,12 +305,12 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) :
 1. Add the above two overlay views to `activity_main.xml` layout file:
 
 ```xml
-    <com.example.hollisticselfiedemo.FaceLandmarkerOverlayView
+    <com.example.holisticselfiedemo.FaceLandmarkerOverlayView
         android:id="@+id/overlay_face"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.hollisticselfiedemo.GestureOverlayView
+    <com.example.holisticselfiedemo.GestureOverlayView
         android:id="@+id/overlay_gesture"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

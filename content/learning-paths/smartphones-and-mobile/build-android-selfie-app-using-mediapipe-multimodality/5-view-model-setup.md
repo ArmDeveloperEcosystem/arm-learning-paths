@@ -33,7 +33,7 @@ implementation(libs.androidx.lifecycle.viewmodel)
 1. Create a new file named `MainViewModel.kt` and place it into the same directory of `MainActivity.kt` and other files, then copy the code below into it.
 
 ```kotlin
-package com.example.hollisticselfiedemo
+package com.example.holisticselfiedemo
 
 import android.app.Application
 import android.util.Log
@@ -91,6 +91,10 @@ class MainViewModel : ViewModel(), HolisticRecognizerHelper.Listener {
 }
 ```
 
+{{% notice Info %}}
+You might have noticed that success and failure messages are logged with different APIs. For more information on log level guidelines, please refer to [this doc](https://source.android.com/docs/core/tests/debug/understanding-logging#log-level-guidelines). 
+{{% /notice %}}
+
 2. Bind `MainViewModel` to `MainActivity` by inserting the following line into `MainActivity.kt`, above the `onCreate` method. Don't forget to import `viewModels` [extension function](https://kotlinlang.org/docs/extensions.html#extension-functions) via `import androidx.activity.viewModels`.
 
 ```kotlin
@@ -119,38 +123,36 @@ class MainViewModel : ViewModel(), HolisticRecognizerHelper.Listener {
 private var imageAnalysis: ImageAnalysis? = null
 ```
 
-2. Within `MainActivity`'s `bindCameraUseCases()` method:
-    1.  insert the following code after building `preview`, above `cameraProvider.unbindAll()`:
+2. Within `MainActivity`'s `bindCameraUseCases()` method, insert the following code after building `preview`, above `cameraProvider.unbindAll()`:
 
-    ```kotlin
-            // ImageAnalysis. Using RGBA 8888 to match how MediaPipe models work
-            imageAnalysis =
-                ImageAnalysis.Builder()
-                    .setResolutionSelector(resolutionSelector)
-                    .setTargetRotation(viewBinding.viewFinder.display.rotation)
-                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                    .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
-                    .build()
-                    // The analyzer can then be assigned to the instance
-                    .also {
-                        it.setAnalyzer(
-                            // Forcing a serial executor without parallelism
-                            // to avoid packets sent to MediaPipe out-of-order
-                            Dispatchers.Default.limitedParallelism(1).asExecutor()
-                        ) { image ->
-                            viewModel.recognizeLiveStream(image)
-                        }
+```kotlin
+        // ImageAnalysis. Using RGBA 8888 to match how MediaPipe models work
+        imageAnalysis =
+            ImageAnalysis.Builder()
+                .setResolutionSelector(resolutionSelector)
+                .setTargetRotation(targetRotation)
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .setOutputImageFormat(ImageAnalysis.OUTPUT_IMAGE_FORMAT_RGBA_8888)
+                .build()
+                // The analyzer can then be assigned to the instance
+                .also {
+                    it.setAnalyzer(
+                        // Forcing a serial executor without parallelism
+                        // to avoid packets sent to MediaPipe out-of-order
+                        Dispatchers.Default.limitedParallelism(1).asExecutor()
+                    ) { image ->
+                        viewModel.recognizeLiveStream(image)
                     }
-    ```
+                }
+```
 
-    2. append `imageAnalysis` along with other use cases to `camera`:
+3. Append `imageAnalysis` along with other use cases to `camera`:
 
+```kotlin
+            camera = cameraProvider.bindToLifecycle(
+                this, cameraSelector, preview, imageAnalysis
+            )
+```
 
-    ```kotlin
-                camera = cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageAnalysis
-                )
-    ```
-
-3. Build and run the app again. Now you should be seeing `Face result: ...` and `Gesture result: ...` debug messages in your [Logcat](https://developer.android.com/tools/logcat). Good job!
+4. Build and run the app again. Now you should be seeing `Face result: ...` and `Gesture result: ...` debug messages in your [Logcat](https://developer.android.com/tools/logcat), which proves that MediaPipe tasks are functioning properly. Good job!
 

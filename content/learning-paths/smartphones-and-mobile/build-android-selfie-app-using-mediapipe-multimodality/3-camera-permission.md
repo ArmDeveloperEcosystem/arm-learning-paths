@@ -24,13 +24,13 @@ layout: learningpathall
 4. However, the app shows only a black screen while printing error messages in your [Logcat](https://developer.android.com/tools/logcat) which looks like this:
 
 ```
-2024-11-20 11:15:00.398 18782-18818 Camera2CameraImpl       com.example.hollisticselfiedemo      E  Camera reopening attempted for 10000ms without success.
-2024-11-20 11:30:13.560   667-707   BufferQueueProducer     pid-667                              E  [SurfaceView - com.example.hollisticselfiedemo/com.example.hollisticselfiedemo.MainActivity#0](id:29b00000283,api:4,p:2657,c:667) queueBuffer: BufferQueue has been abandoned
-2024-11-20 11:36:13.100 20487-20499 isticselfiedem          com.example.hollisticselfiedemo      E  Failed to read message from agent control socket! Retrying: Bad file descriptor
-2024-11-20 11:43:03.408  2709-3807  PackageManager          pid-2709                             E  Permission android.permission.CAMERA isn't requested by package com.example.hollisticselfiedemo
+2024-11-20 11:15:00.398 18782-18818 Camera2CameraImpl       com.example.holisticselfiedemo      E  Camera reopening attempted for 10000ms without success.
+2024-11-20 11:30:13.560   667-707   BufferQueueProducer     pid-667                              E  [SurfaceView - com.example.holisticselfiedemo/com.example.holisticselfiedemo.MainActivity#0](id:29b00000283,api:4,p:2657,c:667) queueBuffer: BufferQueue has been abandoned
+2024-11-20 11:36:13.100 20487-20499 isticselfiedem          com.example.holisticselfiedemo      E  Failed to read message from agent control socket! Retrying: Bad file descriptor
+2024-11-20 11:43:03.408  2709-3807  PackageManager          pid-2709                             E  Permission android.permission.CAMERA isn't requested by package com.example.holisticselfiedemo
 ```
 
-5. Worry not. This is expected behavior because we haven't correctly configured this app's [permissions](https://developer.android.com/guide/topics/permissions/overview) yet, therefore Android OS restricts this app's access to camera for privacy reasons. 
+5. Worry not. This is expected behavior because we haven't correctly configured this app's [permissions](https://developer.android.com/guide/topics/permissions/overview) yet, therefore Android OS restricts this app's access to camera features due to privacy reasons. 
 
 ## Request camera permission at runtime
 
@@ -108,6 +108,10 @@ layout: learningpathall
 
 1. Rebuild and run the app. Now you should be seeing a dialog pops up requesting camera permissions! 
 
-2. Tap `Allow` or `While using the app` (depending on your Android OS versions), then you should be seeing your own face in the camera preview. Good job! Sometimes you might need to restart the app to observe the permission change take effect. 
+2. Tap `Allow` or `While using the app` (depending on your Android OS versions), then you should be seeing your own face in the camera preview. Good job!  
+
+{{% notice Tip %}}
+Sometimes you might need to restart the app to observe the permission change take effect.
+{{% /notice %}}
 
 In the next chapter, we will introduce MediaPipe vision solutions.

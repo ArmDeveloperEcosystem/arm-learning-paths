@@ -6,6 +6,10 @@ weight: 4
 layout: learningpathall
 ---
 
+[MediaPipe Solutions](https://ai.google.dev/edge/mediapipe/solutions/guide) provides a suite of libraries and tools for you to quickly apply artificial intelligence (AI) and machine learning (ML) techniques in your applications. 
+
+MediaPipe Tasks provides the core programming interface of the MediaPipe Solutions suite, including a set of libraries for deploying innovative ML solutions onto devices with a minimum of code. It supports multiple platforms, including Android, Web / JavaScript, Python, etc.
+
 ## Introduce MediaPipe dependencies
 
 1. Navigate to `libs.versions.toml` and append the following line to the end of `[versions]` section. This defines the version of MediaPipe library we will be using.
@@ -13,6 +17,10 @@ layout: learningpathall
 ```toml
 mediapipe-vision = "0.10.15"
 ```
+
+{{% notice Note %}}
+Please stick with this version and do not use newer versions due to bugs and unexpected behaviors.
+{{% /notice %}}
 
 2. Append the following lines to the end of `[libraries]` section. This declares MediaPipe's vision dependency.
 
@@ -34,13 +42,17 @@ Choose one of the two options below that aligns best with your learning needs.
 
 ### Basic approach: manual downloading
 
-Simply download the following two files, then move them into the default asset directory: `app/src/main/assets`. You may need to create the `assets` directory if not exist.
+Simply download the following two files, then move them into the default asset directory: `app/src/main/assets`. 
 
 ```
 https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
 
 https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/gesture_recognizer.task
 ```
+
+{{% notice Tip %}}
+You might need to create the `assets` directory if not exist.
+{{% /notice %}}
 
 ### Advanced approach: configure prebuild download tasks 
 
@@ -79,16 +91,20 @@ tasks.named("preBuild") {
 
 ## Encapsulate MediaPipe vision tasks in a helper
 
-1. Sync project again. Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need help.
+1. Sync project again. 
+
+{{% notice Tip %}}
+Refer to [this section](2-app-scaffolding.md#enable-view-binding) if you need help.
+{{% /notice %}}
 
 2. Now you should be seeing both model asset bundles in your `assets` directory, as shown below:
 
-![model asset bundles](/images/4/model%20asset%20bundles.png)
+![model asset bundles](images/4/model%20asset%20bundles.png)
 
 3. Now you are ready to import MediaPipe's Face Landmark Detection and Gesture Recognizer into the project. Actually, we have already implemented the code below for you based on [MediaPipe's sample code](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples). Simply create a new file `HolisticRecognizerHelper.kt` placed in the source directory along with `MainActivity.kt`, then copy paste the code below into it.
 
 ```kotlin
-package com.example.hollisticselfiedemo
+package com.example.holisticselfiedemo
 
 /*
  * Copyright 2022 The TensorFlow Authors. All Rights Reserved.
@@ -129,84 +145,24 @@ class HolisticRecognizerHelper(
 ) {
     var listener: Listener? = null
 
-    private var gestureRecognizer: GestureRecognizer? = null
     private var faceLandmarker: FaceLandmarker? = null
+    private var gestureRecognizer: GestureRecognizer? = null
 
     fun setup(context: Context) {
-        setupGestureRecognizer(context)
         setupFaceLandmarker(context)
+        setupGestureRecognizer(context)
     }
 
     fun shutdown() {
-        gestureRecognizer?.close()
-        gestureRecognizer = null
         faceLandmarker?.close()
         faceLandmarker = null
+        gestureRecognizer?.close()
+        gestureRecognizer = null
     }
 
     // Return running status of the recognizer helper
     val isClosed: Boolean
         get() = gestureRecognizer == null && faceLandmarker == null
-
-    // Initialize the gesture recognizer using current settings on the
-    // thread that is using it. CPU can be used with recognizers
-    // that are created on the main thread and used on a background thread, but
-    // the GPU delegate needs to be used on the thread that initialized the recognizer
-    private fun setupGestureRecognizer(context: Context) {
-        // Set general recognition options, including number of used threads
-        val baseOptionBuilder = BaseOptions.builder()
-
-        // Use the specified hardware for running the model. Default to CPU
-        when (currentDelegate) {
-            DELEGATE_CPU -> {
-                baseOptionBuilder.setDelegate(Delegate.CPU)
-            }
-
-            DELEGATE_GPU -> {
-                baseOptionBuilder.setDelegate(Delegate.GPU)
-            }
-        }
-
-        baseOptionBuilder.setModelAssetPath(MP_RECOGNIZER_TASK)
-
-        try {
-            val baseOptions = baseOptionBuilder.build()
-            val optionsBuilder =
-                GestureRecognizer.GestureRecognizerOptions.builder()
-                    .setBaseOptions(baseOptions)
-                    .setMinHandDetectionConfidence(DEFAULT_HAND_DETECTION_CONFIDENCE)
-                    .setMinTrackingConfidence(DEFAULT_HAND_TRACKING_CONFIDENCE)
-                    .setMinHandPresenceConfidence(DEFAULT_HAND_PRESENCE_CONFIDENCE)
-                    .setNumHands(HANDS_COUNT)
-                    .setRunningMode(runningMode)
-
-            if (runningMode == RunningMode.LIVE_STREAM) {
-                optionsBuilder
-                    .setResultListener(this::returnGestureLivestreamResult)
-                    .setErrorListener(this::returnLivestreamError)
-            }
-            val options = optionsBuilder.build()
-            gestureRecognizer =
-                GestureRecognizer.createFromOptions(context, options)
-        } catch (e: IllegalStateException) {
-            listener?.onGestureError(
-                "Gesture recognizer failed to initialize. See error logs for " + "details"
-            )
-            Log.e(
-                TAG,
-                "MP Task Vision failed to load the task with error: " + e.message
-            )
-        } catch (e: RuntimeException) {
-            listener?.onGestureError(
-                "Gesture recognizer failed to initialize. See error logs for " + "details",
-                GPU_ERROR
-            )
-            Log.e(
-                TAG,
-                "MP Task Vision failed to load the task with error: " + e.message
-            )
-        }
-    }
 
     // Initialize the Face landmarker using current settings on the
     // thread that is using it. CPU can be used with Landmarker
@@ -275,6 +231,66 @@ class HolisticRecognizerHelper(
         }
     }
 
+    // Initialize the gesture recognizer using current settings on the
+    // thread that is using it. CPU can be used with recognizers
+    // that are created on the main thread and used on a background thread, but
+    // the GPU delegate needs to be used on the thread that initialized the recognizer
+    private fun setupGestureRecognizer(context: Context) {
+        // Set general recognition options, including number of used threads
+        val baseOptionBuilder = BaseOptions.builder()
+
+        // Use the specified hardware for running the model. Default to CPU
+        when (currentDelegate) {
+            DELEGATE_CPU -> {
+                baseOptionBuilder.setDelegate(Delegate.CPU)
+            }
+
+            DELEGATE_GPU -> {
+                baseOptionBuilder.setDelegate(Delegate.GPU)
+            }
+        }
+
+        baseOptionBuilder.setModelAssetPath(MP_RECOGNIZER_TASK)
+
+        try {
+            val baseOptions = baseOptionBuilder.build()
+            val optionsBuilder =
+                GestureRecognizer.GestureRecognizerOptions.builder()
+                    .setBaseOptions(baseOptions)
+                    .setMinHandDetectionConfidence(DEFAULT_HAND_DETECTION_CONFIDENCE)
+                    .setMinTrackingConfidence(DEFAULT_HAND_TRACKING_CONFIDENCE)
+                    .setMinHandPresenceConfidence(DEFAULT_HAND_PRESENCE_CONFIDENCE)
+                    .setNumHands(HANDS_COUNT)
+                    .setRunningMode(runningMode)
+
+            if (runningMode == RunningMode.LIVE_STREAM) {
+                optionsBuilder
+                    .setResultListener(this::returnGestureLivestreamResult)
+                    .setErrorListener(this::returnLivestreamError)
+            }
+            val options = optionsBuilder.build()
+            gestureRecognizer =
+                GestureRecognizer.createFromOptions(context, options)
+        } catch (e: IllegalStateException) {
+            listener?.onGestureError(
+                "Gesture recognizer failed to initialize. See error logs for " + "details"
+            )
+            Log.e(
+                TAG,
+                "MP Task Vision failed to load the task with error: " + e.message
+            )
+        } catch (e: RuntimeException) {
+            listener?.onGestureError(
+                "Gesture recognizer failed to initialize. See error logs for " + "details",
+                GPU_ERROR
+            )
+            Log.e(
+                TAG,
+                "MP Task Vision failed to load the task with error: " + e.message
+            )
+        }
+    }
+
     // Convert the ImageProxy to MP Image and feed it to GestureRecognizer and FaceLandmarker.
     fun recognizeLiveStream(
         imageProxy: ImageProxy,
@@ -318,22 +334,8 @@ class HolisticRecognizerHelper(
     fun recognizeAsync(mpImage: MPImage, frameTime: Long) {
         // As we're using running mode LIVE_STREAM, the recognition result will
         // be returned in returnLivestreamResult function
-        gestureRecognizer?.recognizeAsync(mpImage, frameTime)
         faceLandmarker?.detectAsync(mpImage, frameTime)
-    }
-
-    // Return the recognition result to the helper's caller
-    private fun returnGestureLivestreamResult(
-        result: GestureRecognizerResult, input: MPImage
-    ) {
-        val finishTimeMs = SystemClock.uptimeMillis()
-        val inferenceTime = finishTimeMs - result.timestampMs()
-
-        listener?.onGestureResults(
-            GestureResultBundle(
-                listOf(result), inferenceTime, input.height, input.width
-            )
-        )
+        gestureRecognizer?.recognizeAsync(mpImage, frameTime)
     }
 
     // Return the landmark result to this helper's caller
@@ -350,6 +352,20 @@ class HolisticRecognizerHelper(
                 inferenceTime,
                 input.height,
                 input.width
+            )
+        )
+    }
+
+    // Return the recognition result to the helper's caller
+    private fun returnGestureLivestreamResult(
+        result: GestureRecognizerResult, input: MPImage
+    ) {
+        val finishTimeMs = SystemClock.uptimeMillis()
+        val inferenceTime = finishTimeMs - result.timestampMs()
+
+        listener?.onGestureResults(
+            GestureResultBundle(
+                listOf(result), inferenceTime, input.height, input.width
             )
         )
     }
@@ -386,20 +402,13 @@ class HolisticRecognizerHelper(
     }
 
     interface Listener {
-        fun onGestureResults(resultBundle: GestureResultBundle)
-        fun onGestureError(error: String, errorCode: Int = OTHER_ERROR)
-
         fun onFaceLandmarkerResults(resultBundle: FaceResultBundle)
         fun onFaceLandmarkerError(error: String, errorCode: Int = OTHER_ERROR)
+
+        fun onGestureResults(resultBundle: GestureResultBundle)
+        fun onGestureError(error: String, errorCode: Int = OTHER_ERROR)
     }
 }
-
-data class GestureResultBundle(
-    val results: List<GestureRecognizerResult>,
-    val inferenceTime: Long,
-    val inputImageHeight: Int,
-    val inputImageWidth: Int,
-)
 
 data class FaceResultBundle(
     val result: FaceLandmarkerResult,
@@ -407,6 +416,19 @@ data class FaceResultBundle(
     val inputImageHeight: Int,
     val inputImageWidth: Int,
 )
+
+data class GestureResultBundle(
+    val results: List<GestureRecognizerResult>,
+    val inferenceTime: Long,
+    val inputImageHeight: Int,
+    val inputImageWidth: Int,
+)
 ```
+
+{{% notice Info %}}
+In this learning path we are only configuring the MediaPipe vision solutions to recognize one person with at most two hands in the camera. 
+
+If you'd like to experiment with more people, simply change the `FACES_COUNT` constant to be your desired value.
+{{% /notice %}}
 
 In the next chapter, we will connect the dots from this helper class to the UI layer via a ViewModel.

@@ -64,7 +64,7 @@ To address this, implementing a simple cooldown mechanism after each photo captu
     private const val IMAGE_CAPTURE_DEFAULT_COUNTDOWN = 3000L
 ```
 
-2. Add a `delay(IMAGE_CAPTURE_DEFAULT_COUNTDOWN)` before updating `_isCameraBusy` state. You may need to import `kotlinx.coroutines.delay` function.
+2. Add a `delay(IMAGE_CAPTURE_DEFAULT_COUNTDOWN)` before updating `_isCameraBusy` state.
 
 ```kotlin
     fun onPhotoCaptureComplete() {
@@ -75,9 +75,16 @@ To address this, implementing a simple cooldown mechanism after each photo captu
     }
 ```
 
+{{% notice Info %}}
+You may need to import `kotlinx.coroutines.delay` function.
+{{% /notice %}}
+
 3. Build and run the app again. Now you should notice that photo capture cannot be triggered as frequently as before. Good job!
 
-    i. Furthermore, if you remove the `viewModel.onPhotoCaptureComplete()` to simulate something going wrong upon photo capture, the camera won't become available ever again. 
-    
-    ii. However, silently failing without notifying the user is not a good practice for app development. Error handling is omitted in this learning path for the sake of simplicity.
+{{% notice Note %}}
 
+Furthermore, if you remove the `viewModel.onPhotoCaptureComplete()` to simulate something going wrong upon photo capture, the camera won't become available ever again.
+
+However, silently failing without notifying the user is not a good practice for app development. Error handling is omitted in this learning path only for the sake of simplicity.
+
+{{% /notice %}}
