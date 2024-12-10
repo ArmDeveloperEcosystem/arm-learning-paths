@@ -35,7 +35,7 @@ adb push libarmnn_support_library.so /data/local/tmp/
 ```
 Push all the `.so` library files that are in the base folder of the `tar.gz` archive you downloaded, alongside `ExecuteNetwork`, and all the `.so` files in the `delegate` sub-folder. 
 
-If you are using a recent version of Android Studio this copying can be done much more easily with with drag-and-drop in Android Studio in **Device Explorer > Files**.
+If you are using a recent version of Android Studio this copying can be done much more easily with drag-and-drop in Android Studio in **Device Explorer > Files**.
 
 Then you need to set the permissions on the files:
 
