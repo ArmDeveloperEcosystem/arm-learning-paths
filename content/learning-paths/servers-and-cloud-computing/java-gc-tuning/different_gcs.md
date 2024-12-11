@@ -16,11 +16,11 @@ In production deployments, the Serial GC is rarely used in high-throughput or mu
 
 ### Throughput Garbage Collector
 
-The Parallel Garbage Collector, also called the Throughput Garbage Collector, uses the same generational heap structure as the Serial Garbage Collector, dividing memory into young and old generations to manage short-lived and long-lived objects. Unlike the Serial GC however, the Parallel GC uses multiple threads for Garbage Collection, which improves efficiency on larger heaps. When the young generation fills up, a young collection pause occurs, briefly pausing application threads to clear the young space. As shown in the diagram below, data in the young generation space is mostly freed, with surviving objects moved to the old generation.
+The Parallel Garbage Collector, also called the Throughput Garbage Collector, uses the same generational heap structure as the Serial Garbage Collector, dividing memory into young and old generations to manage short-lived and long-lived objects. Unlike the Serial GC however, the Parallel GC uses multiple threads for Garbage Collection, which improves efficiency on larger heaps. When the young generation fills up, a young collection pause occurs, briefly pausing application threads to clear the young space. As shown in Figure 1, data in the young generation space is mostly freed, with surviving objects moved to the old generation.
 
 Once the old generation is full, a full GC pause blocks all application threads for a longer duration to clean both generations. These full GC pauses can degrade performance in latency-sensitive applications, such as database management systems, where interruptions affect responsiveness. The Parallel GC’s multi-threaded approach helps reduce pause times, making it better suited for applications that prioritize throughput and can handle occasional longer pauses for full collection.
 
-![throughput_minor_gc](./throughput_gc.jpg)
+![throughput_minor_gc  alt-text#center]( ./throughput_gc.jpg "Figure 1: Throughput Garbage Collector")
 
 ### Garbage First Garbage Collector (G1GC)
 
@@ -28,7 +28,7 @@ The G1GC is the default garbage collector starting from JDK version 11. G1 Garba
 
 Although collecting a region still necessitates pausing application threads, G1GC can prioritize regions with the most garbage, thereby minimizing the time spent on garbage collection. The result is that the pause times for full GC pauses is less compared to the throughput collector. The diagram below illustrates how the G1GC is divided into discrete chunks and how memory is freed.
 
-![g1gc](./g1gc.jpg)
+![g1gc alt-text#center](./g1gc.jpg "Figure 2: Garbage First Garbage Collector")
 
 ### ZGC and Shenandoah GC
 
@@ -40,7 +40,7 @@ However, the tradeoff with these collectors is a higher CPU overhead, as concurr
 
 ### Comparison Table
 
-The following table can be used as a rough guide for your specific java application.
+The following table can be used as an approximate guide for your specific java application.
 
 
 
