@@ -1,5 +1,5 @@
 ---
-title: Types of GCs
+title: Types of Garbage Collectors
 weight: 3
 
 ### FIXED, DO NOT MODIFY
