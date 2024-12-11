@@ -33,7 +33,7 @@ To make this comparison, change the Garbage Collector from `Serial` to `G1GC` us
 ```bash
 java -Xms512m -Xmx1024m -XX:+UseG1GC -Xlog:gc:file=gc.log:tags,uptime,time,level:filecount=10,filesize=16m HeapUsageExample.java
 ```
-From the created log file `gc.log`, you can see that at a similar time after start up (~0.75s), the Pause Young time reduced from ~3.6ms to ~1.9ms. Further, the time between GC pauses has improved from ~46ms to every ~98ms.
+From the created log file `gc.log`, you can see that at a similar time after startup (~0.75s), the Pause Young time reduced from ~3.6ms to ~1.9ms. Further, the time between GC pauses has improved from ~46ms to every ~98ms.
 
 ```output
 [2024-11-08T16:13:53.088+0000][0.790s][info][gc          ] GC(2) Pause Young (Normal) (G1 Evacuation Pause) 307M->3M(514M) 1.976ms

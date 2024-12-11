@@ -24,9 +24,9 @@ In JDK8, to observe how the JVM is resizing an application, set the `-XX:+PrintA
 
 ### Is your GC NUMA aware?
 
-Non-uniform memory architecture(NUMA) occurs when the memory performance varies depending on which core the application is running on and where the data is in memory. This is a common occurence if you are using a system with multiple sockets. If your system has multiple sockets you need to ensure the GC is aware of this to optimise memory access patterns. The `numactl` command line tool can be used to check if your system is of non-uniform memory architecture. 
+Non-uniform memory architecture(NUMA) occurs when the memory performance varies depending on which core the application is running on and where the data is in memory. This is a common occurrence if you are using a system with multiple sockets. If your system has multiple sockets you need to ensure the GC is aware of this to optimise memory access patterns. The `numactl` command line tool can be used to check if your system is of non-uniform memory architecture. 
 
-You can install `numactl` with your distribution's package manager, For example on Ubuntu, you can run `sudo apt-get install numactl`.
+You can install `numactl` with your distribution's package manager. For example on Ubuntu, you can run `sudo apt-get install numactl`.
 
 The command line option below can be used to enable NUMA-aware GC:
 
@@ -41,7 +41,7 @@ If the size of the heap is too small, excessive time will be spent in GC compare
 
 It is recommended the max heap size is not greater that the physical memory on your system. If multiple JVMs are running the sum of their heaps must not exceed the total physical memory (the `free -h` command can be used to find the phyisical memory). This is to avoid the high latency accesses to access memory on disk from swapping during a full GC sweep.
 
-Unfortunately there is no hard rule on which values to set. However a rule of thumb is to aim for 30% occupancy of the heap after a full GC. This requires running the application until a steady state has been reached.
+Unfortunately, there is no hard rule on which values to set. However, a useful benchmark to apply is to aim for 30% occupancy of the heap after a full GC. This requires running the application until a steady state has been reached.
 
 ### Are the GC generation sizes appropriate?
 
@@ -53,5 +53,5 @@ Use the following command-line flag adjust the ratio of young to old generations
 -XX:NewRatio= <N>
 ```
 
-Additionally, the initial size and maximum size of the young generation can be modified with `-XX:NewSize` and `-XX:MaxNewSize` respectively. For more information, you can refer to the [factors affecting garbage collection performance](https://docs.oracle.com/en/java/javase/11/gctuning/factors-affecting-garbage-collection-performance.html#GUID-4ADBEDE9-5D52-4FBF-ADB2-431C3EB089C5)
+Additionally, the initial size and maximum size of the young generation can be modified with `-XX:NewSize` and `-XX:MaxNewSize` respectively. For more information, see [Factors affecting Garbage Collection Performance](https://docs.oracle.com/en/java/javase/11/gctuning/factors-affecting-garbage-collection-performance.html#GUID-4ADBEDE9-5D52-4FBF-ADB2-431C3EB089C5).
 
