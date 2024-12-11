@@ -5,6 +5,10 @@ recommended_path: /learning-paths/smartphones-and-mobile/android_opencv_camera/
 
 further_reading:
     - resource:
+        title: Completed sample app
+        link: https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality
+        type: website
+    - resource:
         title: Android app architecture
         link: https://developer.android.com/topic/architecture/intro
         type: documentation

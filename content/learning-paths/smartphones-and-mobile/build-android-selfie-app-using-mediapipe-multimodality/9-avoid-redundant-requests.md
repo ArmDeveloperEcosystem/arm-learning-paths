@@ -88,3 +88,9 @@ Furthermore, if you remove the `viewModel.onPhotoCaptureComplete()` to simulate 
 However, silently failing without notifying the user is not a good practice for app development. Error handling is omitted in this learning path only for the sake of simplicity.
 
 {{% /notice %}}
+
+## Completed sample code on GitHub
+
+If you run into any difficulties completing this learning path, feel free to check out the [completed sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) and import it into Android Studio.
+
+If you discover a bug, encounter an issue, or have suggestions for improvement, we’d love to hear from you! Please feel free to [open an issue](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality/issues/new) with detailed information.
