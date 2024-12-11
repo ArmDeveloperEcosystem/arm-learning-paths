@@ -12,7 +12,7 @@ Garbage Collection (GC) is the term used in programming to describe the concept 
 
 In a programming language such as C, developers need to explicitly free variables once they are no longer required. Automatic memory management removes the requirement for this procedure, meaning that there is less potential for human error.
 
-Generally, the Garbage Collector must perform three main tasks:
+The Garbage Collector must perform three main tasks:
 
 * Find the objects to free.
 * Free the memory.

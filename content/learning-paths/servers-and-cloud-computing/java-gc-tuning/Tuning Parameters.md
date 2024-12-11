@@ -73,5 +73,5 @@ This specifies the number of threads for parallel GC operations. Increasing this
 
 This determines the size of G1 regions, which must be a power of 2 between 1 MB and 32 MB. Adjusting this can be useful for applications with specific memory usage patterns. For example, setting a larger region size can reduce the number of regions and associated overhead for applications with large heaps, while smaller regions might be better for applications with more granular memory allocation patterns.
 
-See [this technical article](https://www.oracle.com/technical-resources/articles/java/g1gc.html) for more information of G1GC tuning. 
+See [Garbage First Garbage Collector Tuning](https://www.oracle.com/technical-resources/articles/java/g1gc.html) for more information of G1GC tuning. 
 
