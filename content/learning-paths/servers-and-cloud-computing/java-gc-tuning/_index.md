@@ -3,7 +3,7 @@ title: Tune the Performance of the Java Garbage Collector
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for Java developers aiming to optimize application performance on Arm-based servers. It is especially valuable for those migrating applications from x86-based to Arm-based instances. 
+who_is_this_for: This Learning Path is for Java developers aiming to optimize application performance on Arm-based servers, especially those migrating applications from x86-based to Arm-based instances. 
 
 learning_objectives: 
     - Describe the key differences between individual Java Garbage Collectors (GCs).
