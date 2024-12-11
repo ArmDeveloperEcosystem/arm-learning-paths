@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Optional Tuning Parameters
 
-If you have an intermediate understanding of Java performance, you can experiment with the additional tuning options in this section to see how it impacts your applications performance. This is a non-exhaustive list. Please see the 'Next Steps' tab for further reading. 
+If you have an intermediate understanding of Java performance, you can experiment with the additional tuning options in this section to see how it impacts the performance of your application. This is a non-exhaustive list. Please see the 'Next Steps' tab for further reading. 
 
 ### Which adaptive heap sizing strategy is being used?
 
