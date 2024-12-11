@@ -104,13 +104,17 @@ You might have noticed that success and failure messages are logged with differe
 3. Setup and shutdown the helper's internal MediaPipe tasks upon the app becomes [active and inactive](https://developer.android.com/guide/components/activities/activity-lifecycle#alc).
 
 ```kotlin
+    private var isHelperReady = false
+
     override fun onResume() {
         super.onResume()
         viewModel.setupHelper(baseContext)
+        isHelperReady = true
     }
 
     override fun onPause() {
         super.onPause()
+        isHelperReady = false
         viewModel.shutdownHelper()
     }
 ```
@@ -141,10 +145,17 @@ private var imageAnalysis: ImageAnalysis? = null
                         // to avoid packets sent to MediaPipe out-of-order
                         Dispatchers.Default.limitedParallelism(1).asExecutor()
                     ) { image ->
-                        viewModel.recognizeLiveStream(image)
+                        if (isHelperReady)
+                            viewModel.recognizeLiveStream(image)
                     }
                 }
 ```
+
+{{% notice Note %}}
+
+`isHelperReady` flag is a lightweight mechanism to prevent camera image frames being sent to helper once we have started shutting down the helper.
+
+{{% /notice %}}
 
 3. Append `imageAnalysis` along with other use cases to `camera`:
 

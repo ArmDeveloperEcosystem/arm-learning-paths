@@ -66,7 +66,7 @@ layout: learningpathall
     }
 ```
 
-5. Insert the following lines in `onCreate()`, **before** calling `setupCamera()` method, to request camera permission on runtime.
+5. Add a condition check in `onCreate()` wrapping `setupCamera()` method, to request camera permission on runtime.
 
 ```kotlin
         if (!hasPermissions(baseContext)) {
@@ -74,7 +74,8 @@ layout: learningpathall
                 arrayOf(Manifest.permission.CAMERA),
                 REQUEST_CODE_CAMERA_PERMISSION
             )
-            return
+        } else {
+            setupCamera()
         }
 ```
 
