@@ -28,7 +28,7 @@ You might be able to use a later version, but these steps have been tested with 
 
 You can use CMake from the command line. 
 
-First, run the following command to run the pre-build configuration. 
+First, run the following command to run the pre-build configuration: 
 
 ```bash
 mkdir build_msvc
@@ -108,7 +108,7 @@ cmake --build . --target INSTALL --config Release
 ```
 
 {{% notice Note %}}
-The build takes approximately 25 mins on a Lenovo X13s
+The build takes approximately 25 mins on a Lenovo X13s.
 {{% /notice %}}
 
 &nbsp;
@@ -156,7 +156,7 @@ Once the library files are correctly generated, run the following command to ens
 ```
 
 {{% notice Note %}}
-The genereated directory name contains "x64," but there is no need to worry as the libraries and executable files will definitely run as ARM64.
+The generated directory name contains "x64," but there is no need to worry as the libraries and executable files will definitely run as ARM64.
 {{% /notice %}}
 
 &nbsp;
@@ -169,7 +169,7 @@ Once the OpenCV library has been successfully created, the next step is to link 
 
 First, create a new project in Visual Studio. 
 
-Launch Visual Studio, click `Create a new project` on the initial screen, then select `Empty Project` and click `Next`. 
+Launch Visual Studio, click `Create a new project` on the initial screen, then select `Empty Project`, and click `Next`. 
 
 On the next screen, set the `Project name` and `Location`. You can choose any name and location, but for this example, name the project `TestOpenCV`, as shown below. 
 
@@ -205,17 +205,25 @@ int main() {
 }
 ```
 
-This program is a simple example that uses OpenCV to create a 100x100 black image, draw a blue circle on it, and save it as a file.
+This program is a simple example that uses OpenCV to do the following:
+
+* Create a 100x100 black image.
+* Draw a blue circle on it.
+* Save it as a file.
 
 ### Configure build settings
 
-Next, select the `Configuration` dropdown menu in the center of the screen and change it from `Debug` to `Release`. At this stage, your screen should look like the example shown below.
+Next, select the **Configuration** drop-down menu in the center of the screen, and change it from **Debug** to **Release**. At this stage, your screen should look like the example shown below.
 
 ![MSVC screenshot #center](msvc_screen.png "MSVC screenshot")
 
 &nbsp;
 
-Now, set up the compile and link settings. Select `Project` from the top menu and click on `TestOpenCV properties`. Edit `Include directories`, `Library directories`, and `Additional dependencies` as shown in the images below, and then click OK.
+Now, set up the compile and link settings. 
+
+Select **Project** from the top menu and click on **TestOpenCV properties**. 
+
+Edit **Include directories**, **Library directories**, and **Additional dependencies** as shown in the images below, and then click **OK**.
 
 ![MSVC include dir #center](msvc_include_dir.png "Include directories: Specify the directory containing the OpenCV header files.")
 
