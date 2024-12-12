@@ -7,14 +7,14 @@ who_is_this_for: This is an introductory topic for developers who would like to 
 
 learning_objectives:
     - Run a You-Only-Look-Once (YOLO) object detection model on a Himax WiseEye2 module.
-    - Build Himax Software Development Kit (SDK) and generate a firmware image file.
+    - Build the Himax Software Development Kit (SDK) and generate a firmware image file.
     - Update firmware on the Himax WiseEye2.
     - Connect to and use Grove Vision AI module.
 
 prerequisites:
     - A [Seeed Grove Vision AI Module V2](https://www.seeedstudio.com/Grove-Vision-AI-Module-V2-p-5851.html) development board.
     - An [OV5647-62 Camera Module](https://www.seeedstudio.com/OV5647-69-1-FOV-Camera-module-for-Raspberry-Pi-3B-4B-p-5484.html).
-    - A FPC cable.
+    - A Flexible Printed Circuit (FPC) cable.
     - A USB-C cable.
     - An x86 Linux machine, or a Mac running macOS with Apple Silicon.
 

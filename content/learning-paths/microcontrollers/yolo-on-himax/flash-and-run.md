@@ -10,7 +10,7 @@ Now that you have generated an image file on the local host machine, you are rea
 
 ## Install xmodem
 
-`Xmodem` is a basic file transfer protocol which is easily installed using the Himax examples repository. 
+You can easily install a basic file transfer protocol called `Xmodem` using the Himax repository containing the examples. 
 
 Run the following command to install the dependency:
 
@@ -23,23 +23,30 @@ pip install -r xmodem/requirements.txt
 
 It's time to get the board set up. 
 
-Insert the Flexible printed circuit (FPC) into the Grove Vision AI V2 module. Lift the dark grey latch on the connector as per the image below.
+Insert the Flexible Printed Circuit (FPC) into the Grove Vision AI V2 module. 
+
+Lift the dark grey latch on the connector as shown in the image below.
 
 ![unlatched](./unlatched.jpg)
 
-Slide the FPC connector in with the metal pins facing down and close the dark grey latch to fasten the connector.
+* With the metal pins facing down, slide the FPC connector in.
+* Close the dark grey latch to fasten the connector.
 
 ![latched](./latched.jpg)
 
-Now you can connect the Groove Vision AI V2 Module to your computer via the USB-C cable.
+Now you can connect the Groove Vision AI V2 Module to your computer using the USB-C cable.
 
 {{% notice Note %}}
-The development board may have two USB-C connectors. If you are running into issues connecting the board in the next step, make sure you are using the right one.
+The development board might have two USB-C connectors. If you are running into issues connecting the board in the next step, make sure you are using the right USB-C connector.
 {{% /notice %}}
 
 ## Find the COM port
 
-You'll need to provide the communication port (COM) which the board is connected to in order to flash the image. There are commands to list all COMs available on your machine. Once your board is connected through USB, it'll show up in this list. The COM identifier will start with **tty**, which may help you determine which one it is. You can run the command before and after plugging in the board if you are unsure.
+To flas the image, you need to provide the communication port (COM) which the board is connected to. 
+
+On your machine, you can find commands that you can use to list all COMs available to use. Once your board is connected through USB, it will appear on this list of available COMs. 
+
+The COM identifier is prefixed with **tty**, so you can use this to help you identify which COM it is. You can also run the command before and after plugging in the board if you are unsure, and look for the change in the list.
 
 
 {{< tabpane code=true >}}
@@ -53,14 +60,14 @@ ls /dev/tty.*
 
 
 {{% notice Note %}}
-If the port seems unavailable, try changing the permissions temporarily using the `chmod` command. Be sure to reset them afterwards, as this may pose a computer security vulnerability.
+If the port appears to be unavailable, try changing the permissions temporarily using the `chmod` command. Be sure to reset the permissions again afterwards, as otherwise this can pose a computer security vulnerability.
 
 ```bash
 chmod 0777 <COM port>
 ```
 {{% /notice %}}
 
-The full path to the port is needed in the next step, so be sure to save it. 
+You will require the full path to the port in the next step, so be sure to save it. 
 
 ## Flash the firmware onto the module
 
