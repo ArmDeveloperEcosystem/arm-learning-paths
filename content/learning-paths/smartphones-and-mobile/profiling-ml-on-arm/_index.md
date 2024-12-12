@@ -1,5 +1,5 @@
 ---
-title: Profile the Performance of Machine Learning models on Arm
+title: Profile the Performance of AI and ML Mobile Applications on Arm
 
 minutes_to_complete: 60
 
