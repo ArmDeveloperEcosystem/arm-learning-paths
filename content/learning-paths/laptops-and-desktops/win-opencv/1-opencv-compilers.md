@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is OpenCV?
 
-OpenCV (Open Source Computer Vision Library) is a popular, open-source library that developers use to build computer vision applications. It provides a set of tools and functions that help you handle tasks related to images and videos without needing to write everything from scratch. 
+Open Source Computer Vision Library (OpenCV) is a popular, Open-Source library that developers can use to build computer vision applications. It provides a set of tools and functions that help you handle tasks related to images and videos. 
 
 Here’s what developers should know:
 
