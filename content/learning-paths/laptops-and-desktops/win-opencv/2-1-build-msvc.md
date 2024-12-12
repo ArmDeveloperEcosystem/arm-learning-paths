@@ -1,6 +1,6 @@
 ---
 title: Build OpenCV Applications with MSVC
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
