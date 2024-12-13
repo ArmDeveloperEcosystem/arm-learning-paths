@@ -34,14 +34,14 @@ For `tflm_fd_fm`, you need to pass all three models as separate `--model` argume
 
 ## Regenerate the firmware image
 
-Use Make to re-generate the `.elf` file.
+Use Make to regenerate the `.elf` file.
 
 ```bash
 make clean
 make
 ```
 
-Use the same commands from previous section to run re-generate the firmware image:
+Use the same commands from previous section to regenerate the firmware image:
 
 ```bash
 cd ../we2_image_gen_local/
