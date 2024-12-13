@@ -1,5 +1,5 @@
 ---
-title: Sampling CPython with Arm SPE with WindowsPerf
+title: Sampling CPython WindowsPerf and Arm SPE
 draft: true
 cascade:
     draft: true
@@ -16,7 +16,7 @@ learning_objectives:
 
 prerequisites:
     - Windows on Arm desktop or development machine with [WindowsPerf](/install-guides/wperf), [Visual Studio](/install-guides/vs-woa/), and [Git](/install-guides/git-woa/) installed.
-    - The system must also have an Arm CPU with SPE support. 
+    - The Windows on Arm system must have an Arm CPU with SPE support. 
 
 author_primary: Przemyslaw Wirkus
 
