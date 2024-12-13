@@ -28,7 +28,7 @@ In JDK8, to observe how the JVM resizes an application, set the `-XX:+PrintAdapt
 
 ### Is your GC NUMA aware?
 
-Non-Uniform Memory Architecture (NUMA) occurs when the memory performance varies depending on which core the application is running on and where the data is located in memory. This is a common occurrence if you are using a system with multiple sockets, where you need to ensure that the GC is aware of this to optimise memory access patterns. You can use the `numactl` command line tool to check if your system is of Non-Uniform Memory Architecture. 
+Non-Uniform Memory Architecture (NUMA) occurs when the memory performance varies depending on which core the application is running on and where the data is located in memory. This is a common occurrence if you are using a system with multiple sockets, where you need to ensure that the GC is aware of this to optimize memory access patterns. You can use the `numactl` command line tool to check if your system is of Non-Uniform Memory Architecture. 
 
 You can install `numactl` with your distribution's package manager. For example, on Ubuntu, you can run `sudo apt-get install numactl`.
 

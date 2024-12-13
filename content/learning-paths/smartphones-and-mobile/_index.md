@@ -47,6 +47,7 @@ tools_software_languages_filter:
 - GoogleTest: 1
 - Java: 4
 - Kotlin: 4
+- LiteRT: 1
 - llvm-mca: 1
 - MediaPipe: 1
 - Memory Bug Report: 1
@@ -61,7 +62,6 @@ tools_software_languages_filter:
 - Rust: 2
 - SDDiskTool: 1
 - SVE2: 1
-- tflite: 1
 - Total Compute: 1
 - Trusted Firmware: 1
 - Unity: 6

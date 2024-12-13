@@ -23,7 +23,7 @@ OpenJDK Runtime Environment Corretto-21.0.4.7.1 (build 21.0.4+7-LTS)
 OpenJDK 64-Bit Server VM Corretto-21.0.4.7.1 (build 21.0.4+7-LTS, mixed mode, sharing)
 ```
 
-If the `java` command is not recognised, you can follow the [Arm Java install guide](/install-guides/java/) to install Java on your system. 
+If the `java` command is not recognized, you can follow the [Arm Java install guide](/install-guides/java/) to install Java on your system. 
 
 ### Identify available Garbage Collectors
 
