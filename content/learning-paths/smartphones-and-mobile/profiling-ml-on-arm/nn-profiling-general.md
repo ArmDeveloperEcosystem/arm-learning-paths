@@ -11,8 +11,8 @@ App profilers provide a good overall view of performance, but you might want to 
 
 With general profilers this is hard to do, as there needs to be annotation inside the ML framework code to retrieve the information. It is a complex task to write the profiling annotation throughout the framework, so it is easier to use tools from a framework or inference engine that already has the required instrumentation.
 
-Depending on the model you use, your choice of tools will vary. For example, if you are using LiteRT (formerly TensorFlow Lite), Arm provides the ArmNN delegate that you can run with the model running on Linux or Android, CPU or GPU. 
+Depending on the model you use, your choice of tools will vary. For example, if you are using LiteRT (formerly TensorFlow Lite), Arm provides the Arm NN delegate that you can run with the model running on Linux or Android, CPU or GPU. 
 
-ArmNN in turn provides a tool called ExecuteNetwork that can run the model and provide layer timings, amongst other useful information.
+Arm NN in turn provides a tool called ExecuteNetwork that can run the model and provide layer timings, amongst other useful information.
 
 If you are using PyTorch, you will probably use ExecuTorch, which is the on-device inference runtime for your Android phone. ExecuTorch has a profiler available alongside it.

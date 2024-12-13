@@ -28,11 +28,11 @@ review:
         answers:
             - No.
             - Yes, Streamline just shows you out of the box.
-            - Yes, ArmNN's ExecuteNetwork can do this.
+            - Yes, Arm NN ExecuteNetwork can do this.
             - Yes, Android Studio Profiler can do this.
         correct_answer: 3          
         explanation: >
-            Standard profilers do not have an easy way to see what is happening inside an ML framework to see a model running inside it. ArmNN's ExecuteNetwork can do this for LiteRT models, and ExecuTorch has tools that can do this for PyTorch models.
+            Standard profilers do not have an easy way to see what is happening inside an ML framework to see a model running inside it. Arm NN ExecuteNetwork can do this for LiteRT models, and ExecuTorch has tools that can do this for PyTorch models.
 
 
 
