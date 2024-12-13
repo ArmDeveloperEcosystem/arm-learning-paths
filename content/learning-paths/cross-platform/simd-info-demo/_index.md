@@ -1,10 +1,6 @@
 ---
 title: Introduction to SIMD.info
 
-
-cascade:
-
-
 minutes_to_complete: 30
 
 who_is_this_for: This Learning Path is for software developers who are interested in porting SIMD code across Arm platforms.
