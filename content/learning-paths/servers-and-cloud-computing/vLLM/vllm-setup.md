@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Before you begin
 
-You can follow the instructions for this Learning Path using an Arm server running Ubuntu 22.04 or 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage.
+You can follow the instructions for this Learning Path using an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage.
 
 ## What is vLLM?
 
