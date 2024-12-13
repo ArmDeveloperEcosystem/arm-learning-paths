@@ -28,10 +28,10 @@ review:
             - "Trusted firmware"
             - "Android"
             - "CMSIS"
-            - "ArmNN"
+            - "Arm NN"
         correct_answer: 3
         explanation: >
-            The stack includes open-source code available from these upstream projects: SCP firmware, Trusted firmware, Linux kernel, Android, and ArmNN.
+            The stack includes open-source code available from these upstream projects: SCP firmware, Trusted firmware, Linux kernel, Android, and Arm NN.
 
 
 # ================================================================================

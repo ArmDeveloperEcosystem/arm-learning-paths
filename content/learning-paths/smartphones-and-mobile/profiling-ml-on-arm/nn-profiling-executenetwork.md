@@ -6,10 +6,10 @@ weight: 6
 layout: learningpathall
 ---
 
-## ArmNN's Network Profiler
-One way of running LiteRT models is to use ArmNN, which is open-source network machine learning (ML) software. This is available as a delegate to the standard LiteRT interpreter. But to profile the model, ArmNN comes with a command-line utility called `ExecuteNetwork`. This program runs the model without the rest of the app. It is able to output layer timings and other useful information to report where there might be bottlenecks within your model.
+## Arm NN Network Profiler
+One way of running LiteRT models is to use Arm NN, which is open-source network machine learning (ML) software. This is available as a delegate to the standard LiteRT interpreter. But to profile the model, Arm NN comes with a command-line utility called `ExecuteNetwork`. This program runs the model without the rest of the app. It is able to output layer timings and other useful information to report where there might be bottlenecks within your model.
 
-If you are using LiteRT without ArmNN, then the output from `ExecuteNetwork` is more of an indication than a definitive answer, but it can still be useful in identifying any obvious problems.
+If you are using LiteRT without Arm NN, then the output from `ExecuteNetwork` is more of an indication than a definitive answer, but it can still be useful in identifying any obvious problems.
 
 ### Download a LiteRT Model
 
@@ -17,7 +17,7 @@ To try this out, you can download a LiteRT model from the [Arm Model Zoo](https:
 
 ### Download and setup ExecuteNetwork
 
-You can download `ExecuteNetwork` from the [ArmNN GitHub](https://github.com/ARM-software/armnn/releases). Download the version appropriate for the Android phone that you are testing on, ensuring that it matches the Android version and architecture of the phone. If you are unsure of the architecture, you can use a lower one, but you might miss out on some optimizations.`ExecuteNetwork` is included inside the `tar.gz` archive that you download. Among the other release downloads on the ArmNN Github is a separate file for the `aar` delegate which you can also easily download.
+You can download `ExecuteNetwork` from the [Arm NN GitHub](https://github.com/ARM-software/armnn/releases). Download the version appropriate for the Android phone that you are testing on, ensuring that it matches the Android version and architecture of the phone. If you are unsure of the architecture, you can use a lower one, but you might miss out on some optimizations.`ExecuteNetwork` is included inside the `tar.gz` archive that you download. Among the other release downloads on the Arm NN Github is a separate file for the `aar` delegate which you can also easily download.
 
 To run `ExecuteNetwork,` you need to use `adb` to push the model and the executable to your phone, and then run it from the adb shell. `adb` is included with Android Studio, but you might need to add it to your path. Android Studio normally installs it to a location such as:
 
@@ -31,7 +31,7 @@ adb push ExecuteNetwork /data/local/tmp/
 adb push libarm_compute.so /data/local/tmp/
 adb push libarmnn.so /data/local/tmp/
 adb push libarmnn_support_library.so /data/local/tmp/
-# more ArmNN .so library files
+# more Arm NN .so library files
 ```
 Push all the `.so` library files that are in the base folder of the `tar.gz` archive you downloaded, alongside `ExecuteNetwork`, and all the `.so` files in the `delegate` sub-folder. 
 
@@ -74,7 +74,7 @@ Depending on the size of your model, the output will probably be quite large. Yo
 
 At the top is the summary, with the setup time and inference time of the two runs, which look something like this:
 
-```text
+```output
 Info: ArmNN v33.2.0
 Info: Initialization time: 7.20 ms.
 Info: ArmnnSubgraph creation

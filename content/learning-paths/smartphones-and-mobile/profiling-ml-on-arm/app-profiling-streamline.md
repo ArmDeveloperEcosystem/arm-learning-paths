@@ -204,7 +204,7 @@ For the example project, add it into the `onCreate()` function of `MainActivity.
 
 In the example app, you can add this in the `onCreate()` function of `MainActivity.kt` after the `Module.load()` call to load the `model.pth`.
 
-This *colored marker with a string* annotation will add the string and time to Streamline's log view, and it appears like the image shown below in Streamline's timeline (in the example app, ArmNN is not used, so there are no white ArmNN markers):
+This *colored marker with a string* annotation will add the string and time to Streamline's log view, and it appears like the image shown below in Streamline's timeline (in the example app, Arm NN is not used, so there are no white Arm NN markers):
 
 ![Streamline image alt-text#center](streamline_marker.png "Figure 2. Streamline timeline markers")
 
