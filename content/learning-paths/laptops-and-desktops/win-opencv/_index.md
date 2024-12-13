@@ -1,9 +1,9 @@
 ---
-title: Build OpenCV applications on Windows on Arm
+title: Create OpenCV applications on Windows on Arm
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an advanced topic for software developers who want to use OpenCV with Windows on Arm devices.
+who_is_this_for: This is an advanced topic for software developers who want to build and develop applications on Windows on Arm devices using OpenCV.
 
 learning_objectives: 
     - Build the OpenCV library for Windows on Arm devices.

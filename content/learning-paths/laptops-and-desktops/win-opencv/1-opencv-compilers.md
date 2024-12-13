@@ -33,9 +33,8 @@ Here are some of the benefits of using OpenCV:
 
 MSVC (Microsoft Visual C++) and Clang are both compilers that are available for developers building Windows on Arm applications.
 
-* __MSVC__: Developed by Microsoft, MSVC is a compiler that is part of the Visual Studio IDE. It is designed specifically for Windows, and integrates well with the Windows development ecosystem.
+* __MSVC__: Developed by Microsoft, MSVC is a compiler that is part of the Visual Studio IDE. It is designed specifically for Windows, and integrates well with the Windows development ecosystem. MSVC is ideal for Windows-focused projects requiring seamless integration with Visual Studio.
 
-* __Clang__: Part of the LLVM project, Clang is an Open Source compiler that is known for its modern design and cross-platform capabilities. 
+* __Clang__: Part of the LLVM project, Clang is an Open Source compiler that is known for its modern design and cross-platform capabilities. Clang is better suited to cross-platform projects, or when using modern C++ features.
 
-MSVC is ideal for Windows-focused projects requiring seamless integration with Visual Studio. Clang is better-suited for cross-platform projects, or when using modern C++ features.
 
