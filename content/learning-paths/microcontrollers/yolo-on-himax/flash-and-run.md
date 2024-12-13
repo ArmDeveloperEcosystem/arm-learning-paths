@@ -1,6 +1,6 @@
 ---
 title: Flash firmware onto the microcontroller
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -89,7 +89,7 @@ After the firmware image flashing is completed, the message `Do you want to end 
 
 ## Run the model
 
-After the reset button is pressed, the board will start inference with the object detection automatically. Observe the output in the terminal to verify that the image is built correctly. If a person is in front of the camera, you should see the `person_score` value go over `100`.
+After the reset button is pressed, the board starts inference with the object detection automatically. Observe the output in the terminal to verify that the image is built correctly. If a person is in front of the camera, you should see the `person_score` value exceed `100`.
 
 ```output
 b'SENSORDPLIB_STATUS_XDMA_FRAME_READY 240'
