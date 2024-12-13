@@ -26,7 +26,7 @@ Once the old generation is full, a full GC pause blocks all application threads 
 
 ### Garbage First Garbage Collector (G1GC)
 
-From JDK Version 11, the G1GC is the default Garbage Collector. G1 Garbage Collector (GC) works by dividing the heap into discrete regions, typically around 2,048 by default. These regions can be part of either the old or new generation and do not need to be contiguous. The purpose of having regions in the old generation is to allow concurrent background threads to identify and target regions with a higher concentration of unreferenced objects. The trade-off of using concurrent threads is at the expense of slightly higher CPU utilisation. G1GC is most effective when there is at least 20% unutilised CPU headroom. 
+From JDK Version 11, the G1GC is the default Garbage Collector. G1 Garbage Collector (GC) works by dividing the heap into discrete regions, typically around 2,048 by default. These regions can be part of either the old or new generation and do not need to be contiguous. The purpose of having regions in the old generation is to allow concurrent background threads to identify and target regions with a higher concentration of unreferenced objects. The trade-off of using concurrent threads is at the expense of slightly higher CPU utilization. G1GC is most effective when there is at least 20% unutilized CPU headroom. 
 
 Although collecting a region still necessitates pausing application threads, G1GC can prioritize regions with the most garbage, thereby minimizing the time spent on garbage collection. The result is that the pause times for full GC pauses is less compared to the throughput collector. Figure 2 illustrates how the G1GC is divided into discrete chunks and how memory is freed.
 

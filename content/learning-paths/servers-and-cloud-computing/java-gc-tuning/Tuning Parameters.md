@@ -44,7 +44,7 @@ As described in the previous section, the performance improvement from moving to
 
 ### Add Garbage Collector Targets
 
-You can manually provide targets for specific metrics and the GC will attempt to meet those requirements. For example, if you have a time-sensitive application such as a REST server, you might want to ensure that all customers receive a response within a specific time. You might find that if a client request is sent during Garbage Collection that you need to ensure that the GC pause time is minimised. 
+You can manually provide targets for specific metrics and the GC will attempt to meet those requirements. For example, if you have a time-sensitive application such as a REST server, you might want to ensure that all customers receive a response within a specific time. You might find that if a client request is sent during Garbage Collection that you need to ensure that the GC pause time is minimized. 
 
 Running the command with the `-XX:MaxGCPauseMillis=<N>` sets a target max GC pause time:
 
