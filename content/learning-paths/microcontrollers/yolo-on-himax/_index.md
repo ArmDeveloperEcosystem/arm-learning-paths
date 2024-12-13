@@ -16,7 +16,7 @@ prerequisites:
     - An [OV5647-62 Camera Module](https://www.seeedstudio.com/OV5647-69-1-FOV-Camera-module-for-Raspberry-Pi-3B-4B-p-5484.html).
     - A Flexible Printed Circuit (FPC) cable.
     - A USB-C cable.
-    - An x86 Linux machine, or a Mac running macOS with Apple Silicon.
+    - An x86 Linux machine, or a Mac running macOS.
 
 author_primary: Chaodong Gong, Alex Su, Kieran Hejmadi
 
