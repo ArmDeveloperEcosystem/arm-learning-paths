@@ -28,7 +28,7 @@ In JDK8, to observe how the JVM resizes an application, set the `-XX:+PrintAdapt
 
 ### Is your GC NUMA aware?
 
-Non-Uniform Memory Architecture(NUMA) occurs when the memory performance varies depending on which core the application is running on and where the data is located in memory. This is a common occurrence if you are using a system with multiple sockets, where you need to ensure that the GC is aware of this to optimise memory access patterns. You can use the `numactl` command line tool to check if your system is of Non-Uniform Memory Architecture. 
+Non-Uniform Memory Architecture (NUMA) occurs when the memory performance varies depending on which core the application is running on and where the data is located in memory. This is a common occurrence if you are using a system with multiple sockets, where you need to ensure that the GC is aware of this to optimise memory access patterns. You can use the `numactl` command line tool to check if your system is of Non-Uniform Memory Architecture. 
 
 You can install `numactl` with your distribution's package manager. For example, on Ubuntu, you can run `sudo apt-get install numactl`.
 
@@ -43,7 +43,7 @@ The command line option below can be used to enable NUMA-aware GC:
 
 If the size of the heap is too small, excessive time is spent in GC compared to the application logic. However, disproportionately large heaps result in longer GC pauses as there is more memory to parse. You can use the `-Xmx <N>` and `-Xms <N>` options to specify the maximum and minimum memory sizes respectively. If you know the heap size required based on data, setting the minimum and maximum values slightly improves the performance since resizing never takes place.
 
-It is recommended that the max heap size is not greater that the physical memory on your system. If multiple JVMs are running, the sum of their heaps must not exceed the total physical memory (the `free -h` command can be used to find the physical memory). This is to avoid the high latency accesses to access memory on disk from swapping during a full GC sweep.
+It is recommended that the max heap size is not greater that the physical memory on your system. If multiple JVMs are running, the sum of their heaps must not exceed the total physical memory (the `free -h` command can be used to find the physical memory). This is to avoid the high latency cost to access memory on disk from swapping during a full GC sweep.
 
 Unfortunately, there is no hard rule on which values to set. However, a useful benchmark to apply is to aim for 30% occupancy of the heap after a full GC. This requires running the application until a steady state has been reached.
 
@@ -53,7 +53,7 @@ Going a step further, garbage collectors (GCs) divide the heap into generations:
 
 As an example use case, in a Java application where startup performance is critical, tuning the young generation size can help. By increasing the young generation size, you can reduce the frequency of minor GCs during startup, leading to faster application initialization.
 
-Use the following command-line flag adjust the ratio of young to old generations from the default value of 2 for all GC algorithms:
+Use the following command-line flag to adjust the ratio of young to old generations from the default value of 2 for all GC algorithms:
 
 ```bash
 -XX:NewRatio= <N>
