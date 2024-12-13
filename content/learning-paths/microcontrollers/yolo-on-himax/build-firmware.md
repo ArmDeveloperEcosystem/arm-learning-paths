@@ -45,7 +45,7 @@ cd ../we2_image_gen_local/
 cp ../EPII_CM55M_APP_S/obj_epii_evb_icv30_bdv10/gnu_epii_evb_WLCSP65/EPII_CM55M_gnu_epii_evb_WLCSP65_s.elf input_case1_secboot/
 ```
 
-Run the script your on OS as shown below. This creates a file named `output.img` in the `output_case1_sec_wlcsp` directory:
+Run the script on your OS as shown below. This creates a file named `output.img` in the `output_case1_sec_wlcsp` directory:
 
 
 {{< tabpane code=true >}}

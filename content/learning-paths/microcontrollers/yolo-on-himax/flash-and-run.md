@@ -42,7 +42,7 @@ The development board might have two USB-C connectors. If you are running into i
 
 ## Find the COM port
 
-To flas the image, you need to provide the communication port (COM) which the board is connected to. 
+To flash the image, you need to provide the communication port (COM) which the board is connected to. 
 
 On your machine, you can find commands that you can use to list all COMs available to use. Once your board is connected through USB, it will appear on this list of available COMs. 
 
