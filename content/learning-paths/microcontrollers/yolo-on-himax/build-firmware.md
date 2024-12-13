@@ -57,7 +57,7 @@ Run the script on your OS as shown below. This creates a file named `output.img`
   {{< /tab >}}
 {{< /tabpane >}}
 
-The script output ends with the following output:
+The script output ends with the following:
 
 ```output
 Output image: output_case1_sec_wlcsp/output.img
