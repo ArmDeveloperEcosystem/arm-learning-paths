@@ -37,7 +37,7 @@ Lift the dark grey latch on the connector as shown in the image below.
 Now you can connect the Groove Vision AI V2 Module to your computer using the USB-C cable.
 
 {{% notice Note %}}
-The development board might have two USB-C connectors. If you are running into issues connecting the board in the next step, make sure you are using the right USB-C connector.
+The development board might have two USB-C connectors. If you are running into issues connecting the board in the next step, make sure you are using the correct USB-C connector.
 {{% /notice %}}
 
 ## Find the COM port
