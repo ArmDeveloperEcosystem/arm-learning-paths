@@ -32,7 +32,7 @@ review:
 
     - questions:
         question: >
-            WindowsPerf can be used and executed only on native ARM64 WOA hardware, and not in a virtual environment.
+            WindowsPerf can be used and executed only on native Windows on Arm hardware, and not in a virtual environment.
         answers:
             - "True"
             - "False"
@@ -62,7 +62,7 @@ review:
 
     - questions:
         question: >
-            Is load_filter is one of SPE filters supported by WindowsPerf?
+            load_filter is one of SPE filters supported by WindowsPerf?
         answers:
             - "True"
             - "False"
@@ -72,7 +72,7 @@ review:
 
     - questions:
         question: >
-            Is store_filter is one of SPE filters supported by WindowsPerf?
+            store_filter is one of SPE filters supported by WindowsPerf?
         answers:
             - "True"
             - "False"
@@ -82,7 +82,7 @@ review:
 
     - questions:
         question: >
-            Is branch_filter is one of SPE filters supported by WindowsPerf?
+            branch_filter is one of SPE filters supported by WindowsPerf?
         answers:
             - "True"
             - "False"
