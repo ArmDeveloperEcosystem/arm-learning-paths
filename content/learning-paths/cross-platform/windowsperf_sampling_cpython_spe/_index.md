@@ -1,5 +1,5 @@
 ---
-title: Sampling CPython WindowsPerf and Arm SPE
+title: Sampling CPython with WindowsPerf and Arm SPE
 draft: true
 cascade:
     draft: true
