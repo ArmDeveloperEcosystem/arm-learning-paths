@@ -7,7 +7,7 @@ weight: 2 # 1 is first, 2 is second, etc.
 # Do not modify these elements
 layout: "learningpathall"
 ---
-The [Arm Total Compute](https://developer.arm.com/Tools%20and%20Software/Total%20Compute) reference software stack is a fully integrated open-source stack, from firmware up to Android. he stack includes open-source code available from the relevant upstream projects: SCP firmware, Trusted firmware, Linux kernel, Android, and ArmNN.
+The [Arm Total Compute](https://developer.arm.com/Tools%20and%20Software/Total%20Compute) reference software stack is a fully integrated open-source stack, from firmware up to Android. he stack includes open-source code available from the relevant upstream projects: SCP firmware, Trusted firmware, Linux kernel, Android, and Arm NN.
 
 ## Download and install the FVP
 
