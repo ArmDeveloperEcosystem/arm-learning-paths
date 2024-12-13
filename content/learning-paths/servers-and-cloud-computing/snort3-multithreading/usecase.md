@@ -252,7 +252,7 @@ For testing, you can use `--daq dump` to analyze PCAP files.
 
 ## Spawn Snort3 process with multithreading
 
-To run Snort3 with multithread start from the `Test` directory.
+To run Snort3 with multithreading start from the `Test` directory.
 
 ```bash
 cd $HOME/build/Test

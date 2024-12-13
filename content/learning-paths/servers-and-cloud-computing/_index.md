@@ -9,9 +9,9 @@ maintopic: true
 operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
-- Linux: 109
+- Linux: 111
 - macOS: 9
-- Windows: 12
+- Windows: 13
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -22,9 +22,9 @@ subjects_filter:
 - CI-CD: 4
 - Containers and Virtualization: 25
 - Databases: 15
-- Libraries: 6
+- Libraries: 7
 - ML: 14
-- Performance and Architecture: 38
+- Performance and Architecture: 40
 - Storage: 1
 - Web: 10
 subtitle: Optimize cloud native apps on Arm for performance and cost
@@ -44,9 +44,10 @@ tools_software_languages_filter:
 - Assembly: 4
 - assembly: 1
 - AWS CodeBuild: 1
-- AWS EC2: 1
+- AWS EC2: 2
 - AWS Elastic Container Service (ECS): 1
 - AWS Elastic Kubernetes Service (EKS): 2
+- Bash: 1
 - Bastion: 3
 - BOLT: 1
 - bpftool: 1
@@ -69,7 +70,7 @@ tools_software_languages_filter:
 - Flink: 1
 - Fortran: 1
 - FVP: 3
-- GCC: 18
+- GCC: 19
 - gdb: 1
 - Geekbench: 1
 - GenAI: 5
@@ -83,7 +84,7 @@ tools_software_languages_filter:
 - InnoDB: 1
 - Intrinsics: 1
 - JAVA: 1
-- Java: 1
+- Java: 2
 - JAX: 1
 - Kafka: 1
 - Keras: 1
@@ -105,9 +106,9 @@ tools_software_languages_filter:
 - Nginx: 3
 - Node.js: 3
 - PAPI: 1
-- perf: 3
+- perf: 4
 - PostgreSQL: 4
-- Python: 12
+- Python: 13
 - PyTorch: 5
 - RAG: 1
 - Redis: 3
@@ -116,6 +117,7 @@ tools_software_languages_filter:
 - Rust: 2
 - snappy: 1
 - Snort: 1
+- Snort3: 1
 - SQL: 7
 - Streamline CLI: 1
 - Supervisor: 1
@@ -130,6 +132,7 @@ tools_software_languages_filter:
 - TypeScript: 1
 - Vectorscan: 1
 - Visual Studio Code: 3
+- WindowsPerf: 1
 - WordPress: 3
 - x265: 1
 - zlib: 1
