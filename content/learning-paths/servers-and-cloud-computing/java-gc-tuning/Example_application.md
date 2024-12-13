@@ -99,7 +99,7 @@ public class GenerateRandom {
             // Print random double
             System.out.println("Random Doubles: " + rand_dub1);
 
-            // Sleep for 1 second (1000 milliseconds)
+            // Sleep for 1/4 second (250 milliseconds)
             try {
                 Thread.sleep(250);
             } catch (InterruptedException e) {
