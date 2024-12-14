@@ -1,8 +1,6 @@
 ---
 title: Sample CPython with WindowsPerf and Arm SPE
-draft: true
-cascade:
-    draft: true
+
 
 minutes_to_complete: 30
 
