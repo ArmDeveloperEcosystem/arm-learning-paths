@@ -13,8 +13,11 @@ learning_objectives:
     - Build CPython from sources for Windows on Arm (AArch64).
 
 prerequisites:
-    - Windows on Arm desktop or development machine with [WindowsPerf](/install-guides/wperf), [Visual Studio](/install-guides/vs-woa/), and [Git](/install-guides/git-woa/) installed.
-    - The Windows on Arm system must have an Arm CPU with SPE support. 
+    - Windows on Arm desktop or development machine.
+    - An installation of [WindowsPerf](/install-guides/wperf).
+    - An installation of [Visual Studio](/install-guides/vs-woa/).
+    - An installation of [Git](/install-guides/git-woa/).
+    - CPU support for SPE. 
 
 author_primary: Przemyslaw Wirkus
 
