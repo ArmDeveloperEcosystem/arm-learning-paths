@@ -1,7 +1,7 @@
 ---
 layout: learningpathall
 title: WindowsPerf sample using SPE example
-weight: 3
+weight: 6
 ---
 
 ## Example 1: Sample CPython using SPE

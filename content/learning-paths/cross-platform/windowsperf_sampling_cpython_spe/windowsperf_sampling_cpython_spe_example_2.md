@@ -1,7 +1,7 @@
 ---
 layout: learningpathall
 title: WindowsPerf record using SPE example
-weight: 4
+weight: 5
 ---
 
 ## Example 2: Record CPython using SPE

@@ -1,7 +1,7 @@
 ---
 layout: learningpathall
 title: An overview of CPython sampling with SPE 
-weight: 2
+weight: 4
 ---
 
 In this example, you will build a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
