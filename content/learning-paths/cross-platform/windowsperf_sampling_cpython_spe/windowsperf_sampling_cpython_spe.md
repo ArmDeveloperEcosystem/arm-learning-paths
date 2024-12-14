@@ -1,7 +1,7 @@
 ---
 layout: learningpathall
 title: Setup 
-weight: 4
+weight: 3
 ---
 
 In this example, you will build a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.

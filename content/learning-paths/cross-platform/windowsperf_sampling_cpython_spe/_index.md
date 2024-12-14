@@ -1,7 +1,6 @@
 ---
 title: Sample CPython with WindowsPerf and Arm SPE
 
-
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers who would like to learn about sampling CPU instructions with the Arm Statistical Profiling Extension (SPE).
