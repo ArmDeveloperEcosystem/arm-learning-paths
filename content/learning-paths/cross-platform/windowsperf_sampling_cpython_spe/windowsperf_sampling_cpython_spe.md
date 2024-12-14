@@ -1,16 +1,10 @@
 ---
 layout: learningpathall
-title: An overview of CPython sampling with SPE 
+title: Setup 
 weight: 4
 ---
 
 In this example, you will build a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
-
-## Introduction to the Arm Statistical Profiling Extension (SPE)
-
-The Arm Statistical Profiling Extension (SPE) is a feature defined as part of the Armv8-A architecture, starting from version 8.2. It provides non-invasive, hardware-based statistical sampling for CPUs. Unlike the Performance Monitor Unit (PMU), SPE is a different module that integrates the sampling process into the instruction execution process within the CPU's pipelines.
-
-SPE is particularly useful for performance analysis and optimization, as it provides detailed insights into the behavior of the CPU during execution. This can help identify performance bottlenecks and optimize software for better efficiency.
 
 ## Overview
 
