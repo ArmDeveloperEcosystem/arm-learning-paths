@@ -1,16 +1,17 @@
 ---
 layout: learningpathall
 title: WindowsPerf sample using SPE example
-weight: 6
+weight: 5
 ---
 
 ## Example 1: Sample CPython using SPE
 
-You can use the [CPython](https://github.com/python/cpython) binary that you built from source in debug mode to compute a large integer number called a [Googolplex](https://en.wikipedia.org/wiki/Googolplex). This is a good way to stress CPython to test the profiling capabilities. 
+A good way to stress CPython to test the profiling capabilities is to use the [CPython](https://github.com/python/cpython) binary that you built from source in debug mode to compute a large integer number called a [Googolplex](https://en.wikipedia.org/wiki/Googolplex). 
 
-The steps are:
-- Pin the `python_d.exe` interactive console to an arbitrary CPU core and calculate `10^10^100`.
-- Run counting and sampling to obtain event information.
+To do this, follow these steps:
+
+* Pin the `python_d.exe` interactive console to an arbitrary CPU core and calculate `10^10^100`.
+* Run counting and sampling to obtain event information.
 
 ### Pin CPython to CPU core 1
 
