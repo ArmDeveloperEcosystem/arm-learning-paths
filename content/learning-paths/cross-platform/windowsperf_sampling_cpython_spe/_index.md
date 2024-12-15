@@ -1,5 +1,5 @@
 ---
-title: Sample CPython with WindowsPerf and Arm SPE
+title: Profile Performance with Arm SPE and WindowsPerf
 
 minutes_to_complete: 30
 

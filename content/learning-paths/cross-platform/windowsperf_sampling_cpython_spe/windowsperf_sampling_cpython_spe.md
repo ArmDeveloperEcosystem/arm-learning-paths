@@ -4,20 +4,7 @@ title: Setup
 weight: 3
 ---
 
-In this example, you will build a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
-
-## Overview
-
-You will use sampling to determine the CPython program "hot" locations as provided by the Arm Statistical Profiling Extension (SPE).
-
-WindowsPerf includes `record` support for the Arm Statistical Profiling Extension (SPE). 
-
-SPE is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
-
-{{% notice Note %}}
-SPE is only available on Windows on Arm in Test Mode.
-Windows Test Mode is a feature that allows you to install and test drivers that have not been digitally signed by Microsoft.
-{{% /notice %}}
+In this example, you will create a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
 
 ## Before you begin
 
