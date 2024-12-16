@@ -146,7 +146,7 @@ INFO Evidence submitted for challenge 1302147796: no attestation result was obta
 From the server output you will notice that it did create the challenge for the key broker application, but it complains that it has no known good reference values. It does however provide a way to provision the key broker server with known good values if the client is trusted. 
 In a production environment, the known good reference value would be generated, but for demonstration purposes and simplification, you will use the value proposed by the key broker server.
 
-Now go ahead and terminate the running instance of the key broker server(ctrl+C) and restart it with the known good reference value:
+Now go ahead and terminate the running instance of the key broker server(ctrl+C) and restart it with the known good reference value. Notice here that you need to copy the `--reference-values` argument directly from the previous error message reported by the key broker. When running this next command, ensure that you are using exactly that value, for example::
 
 ```bash
 ./keybroker-server -v --addr 172.17.0.2 --reference-values <(echo '{ "reference-values": [ "tiA66VOokO071FfsCHr7es02vUbtVH5FpLLqTzT7jps=" ] }')
