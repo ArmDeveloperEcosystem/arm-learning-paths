@@ -7,9 +7,8 @@ layout: learningpathall
 ---
 
 ### Objective
-The goal of this task is to deploy a .NET Aspire application onto Google Cloud Platform (GCP). GCP is a suite of cloud computing services that provides scalable, secure, and highly available infrastructure for a wide range of applications. One of its core offerings is the Compute Engine service, which enables users to create and manage virtual machines (VMs) with customizable configurations, including CPU, memory, storage, and operating systems. Compute Engine supports various architectures, such as x86 and Arm-based processors like Google’s Axion or Ampere Altra Arm.
-
-We will start by creating an Arm64 virtual machine. Then, we will connect to it, install the required software, and run the application.
+In this section, you will learn how to deploy a .NET Aspire application onto an Arm-based instance running on Google Cloud Platform (GCP). 
+You will start by creating an instance of an Arm64 virtual machine on GCP. You will then connect to it, install the required software, and run the application.
 
 ### Create an Arm64 Virtual Machine
 Follow these steps to create an Arm64 VM:
@@ -21,7 +20,7 @@ Follow these steps to create an Arm64 VM:
 * Name: arm-server
 * Region/Zone: Choose a region and zone where Arm64 processors are available (e.g., us-central1).
 * Machine Family: Select General-purpose.
-* Series: T2A (Ampere Altra Arm).
+* Series: T2A 
 * Machine Type: Select t2a-standard-1.
 The configuration should resemble the following:
 
@@ -53,50 +52,42 @@ After creating the VM, connect to it as follows:
 
 ### Installing dependencies and deploying an app
 Once the connection is established, you can install the required dependencies (.NET SDK, Aspire workload, Git), fetch the application code, and deploy it:
-1. Update the Package List:
+Update the Package List:
 ```console
 sudo apt update && sudo apt upgrade -y
 ```
-
-2. Install .NET SDK 8.0 or later:
+Install .NET SDK 8.0 or later:
 ```console
 wget https://dot.net/v1/dotnet-install.sh
 bash dotnet-install.sh --channel 8.0
 ```
-
-3. Add .NET to PATH:
+Add .NET to PATH:
 ```console
 export DOTNET_ROOT=$HOME/.dotnet
 export PATH=$PATH:$HOME/.dotnet:$HOME/.dotnet/tools
 ```
-
-4. Verify the installation:
+Verify the installation:
 ```console
 dotnet --version
 ```
-
-5. Install the .NET Aspire workload:
+Install the .NET Aspire workload:
 ```console
 dotnet workload install aspire
 ```
-
-6. Install git:
+Install git:
 ```console
 sudo apt install -y git
 ```
-
-7. Clone the repository:
+Clone the repository:
 ```console
 git clone https://github.com/dawidborycki/NetAspire.Arm.git
 cd NetAspire.Arm/
 ```
-
-7. Trust trust the development certificate:
+Trust the development certificate:
 ```console
 dotnet dev-certs https --trust
 ```
-
-8. Build and run the project
+Build and run the project
 ```console
 dotnet restore
 dotnet run --project NetAspire.Arm.AppHost
