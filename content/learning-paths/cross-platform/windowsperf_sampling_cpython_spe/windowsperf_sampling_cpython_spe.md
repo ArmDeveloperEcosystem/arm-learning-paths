@@ -4,7 +4,7 @@ title: An overview of CPython sampling with SPE
 weight: 2
 ---
 
-In this example, you will build a debug build of CPython from sources and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
+In this example, you will build a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
 
 ## Introduction to the Arm Statistical Profiling Extension (SPE)
 
@@ -21,7 +21,8 @@ WindowsPerf includes `record` support for the Arm Statistical Profiling Extensio
 SPE is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
 
 {{% notice Note %}}
-Currently SPE is available on Windows On Arm in Test Mode only! 
+SPE is only available on Windows on Arm in Test Mode.
+Windows Test Mode is a feature that allows you to install and test drivers that have not been digitally signed by Microsoft.
 {{% /notice %}}
 
 ## Before you begin
@@ -31,7 +32,7 @@ For this Learning Path you will need:
 * A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). Refer to the [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
   * Note: The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with Arm SPE (Statistical Profiling Extension) support enabled. To install this version download release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
 * [Visual Studio](/install-guides/vs-woa/) and [Git](/install-guides/git-woa/) installed.
-* The CPU must support the Arm SPE extension, an optional feature in ARMv8.2 hardware. You can check your CPU compatibility using the WindowsPerf command-line tool (explained below).
+* The CPU must support the Arm SPE extension, an optional feature in ARMv8.2 hardware. You can check your CPU compatibility using the WindowsPerf command-line tool as explained below.
 
 ### How do I check if my Arm CPU supports the Arm SPE extension?
 
