@@ -53,7 +53,7 @@ INFO Actix runtime found; starting in Actix runtime
 INFO starting service: "actix-web-service-172.17.0.2:8088", workers: 16, listening on: 172.17.0.2:8088
 ```
 
-With the key broker server running in one terminal, open up a new terminal in which you will the key broker client.
+With the key broker server running in one terminal, open up a new terminal in which you will run the key broker client.
 
 ## Run the Key Broker Client
 
