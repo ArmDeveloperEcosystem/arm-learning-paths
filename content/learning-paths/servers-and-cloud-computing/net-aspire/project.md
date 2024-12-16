@@ -9,12 +9,29 @@ layout: learningpathall
 In this section, you will set up the project. This involves several steps, including installing the Aspire workload. Then, you will learn about the project structure and launch it locally. Finally, you will modify the project to add additional computations to mimic computationally intensive work.
 
 ## Create a Project
-To create a .NET Aspire application, first ensure that you have .NET 8.0 or later installed on your system. Next, install the Aspire workload by opening your terminal and running:
+To create a .NET Aspire application, first ensure that you have [.NET 8.0 or later installed](https://dotnet.microsoft.com/en-us/download/dotnet) on your Windows on Arm development machine.
+
+Open a Powershell terminal and run:
+```console
+dotnet --version
+```
+The output should return the version of .NET SDK installed on your machine.
+ 
+Next, install the Aspire workload:
 
 ```console
 dotnet workload install aspire
 ```
+You should see the following output:
 
+```output
+Downloading Aspire.Hosting.Sdk.Msi.arm64 (8.2.2)
+Installing Aspire.Hosting.Sdk.Msi.arm64 ..... Done
+Downloading Aspire.ProjectTemplates.Msi.arm64 (8.2.2)
+Installing Aspire.ProjectTemplates.Msi.arm64 ..... Done
+
+Successfully installed workload(s) aspire.
+```
 Once the Aspire workload is installed, you can create a new application by executing:
 
 ```console
@@ -42,9 +59,16 @@ The architecture is also tailored to improve the development experience. Develop
 
 This thoughtfully crafted architecture embodies microservices best practices, promoting scalability, maintainability, and service isolation. It not only simplifies deployment and monitoring but also fosters developer productivity by streamlining workflows and providing intuitive tools for building modern, distributed applications.
 
-## Running the Project
-To run the project, type the following
+## Run the Project
+The application will issue a certificate. Before you run the application, add support to trust the HTTPS development certificate by running:
+ 
 ```console
+dotnet dev-certs https --trust
+```
+
+Now run the project:
+```console
+cd .\NetAspire.Arm\
 dotnet run --project NetAspire.Arm.AppHost 
 ```
 
@@ -63,22 +87,22 @@ info: Aspire.Hosting.DistributedApplication[0]
       Login to the dashboard at https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0
 ```
 
-Click on the link provided: https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0. This will direct you to the application dashboard, as shown below:
+Click on the link generated for the dashboard. In this case it is: https://localhost:17222/login?t=81f99566c9ec462e66f5eab5aa9307b0. This will direct you to the application dashboard, as shown below:
 
 ![fig1](figures/01.png)
 
-Once on the dashboard, locate and click the endpoint link for NetAspire.Arm.Web. This will take you to the Blazor-based web application. In the Blazor app, navigate to the Weather section to access and display data retrieved from the WeatherForecast API:
+On the dashboard, locate and click the endpoint link for `NetAspire.Arm.Web`. This will take you to the Blazor based web application. In the Blazor app, navigate to the Weather section to access and display data retrieved from the WeatherForecast API:
 
 ![fig2](figures/02.png)
 
-Finally, return to the dashboard and select the Traces option. This section provides detailed telemetry tracing, allowing you to view the flow of requests, track service dependencies, and analyze performance metrics for your application:
+Return to the dashboard and select the Traces option. This section provides detailed telemetry tracing, allowing you to view the flow of requests, track service dependencies, and analyze performance metrics for your application:
 
 ![fig3](figures/03.png)
 
-By following these steps, you’ll explore the key components of the .NET Aspire application, including its dashboard, data interaction through APIs, and telemetry tracing capabilities.
+By following these steps, you will explore the key components of the .NET Aspire application, including its dashboard, data interaction through APIs, and telemetry tracing capabilities.
 
 ## Modify the Project
-You will now include the additional code that will mimic computation intense work. Go to NetAspire.Arm.ApiService project, and create a new file ComputationService.cs. Modify this file as follows:
+You will now include additional code for the purpose of demonstrating computation intense work. Go to the `NetAspire.Arm.ApiService` project, and create a new file `ComputationService.cs`. Add the code shown below to this file:
 
 ```cs
 static class ComputationService
@@ -119,12 +143,12 @@ The public method PerformIntensiveCalculations multiplies two matrices (matrix1 
 
 This code is provided for demonstrating heavy computational operations, such as large matrix manipulations, and can simulate workloads in scenarios that mimic intensive data processing or scientific calculations.
 
-Then, open the Program.cs of the NetAspire.Arm.ApiService, and use the above code:
+Then, open the `Program.cs` file in the `NetAspire.Arm.ApiService` directory and add modify the `MapGet` function of the app as shown:
 
 ```cs
 app.MapGet("/weatherforecast", () =>
 {
-    ComputationService.PerformIntensiveCalculations(matrixSize: 1000);
+    ComputationService.PerformIntensiveCalculations(matrixSize: 800);
 
     var forecast = Enumerable.Range(1, 5).Select(index =>
         new WeatherForecast
@@ -150,4 +174,4 @@ Next, navigate to the web frontend, click Weather, and then return to the dashbo
 
 ![fig4](figures/04.png)
 
-Now, when project is ready, and we can deploy it to the cloud.
+You are now ready to deploy the application to the cloud.

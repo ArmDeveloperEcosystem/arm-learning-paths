@@ -7,11 +7,9 @@ layout: learningpathall
 ---
 
 ### Objective
-The goal of this task is to deploy a .NET Aspire application onto an AWS Virtual Machine (using Amazon Elastic Compute Cloud (EC2)) powered by Arm-based processors, such as AWS Graviton. This involves leveraging the cost and performance benefits of Arm architecture while demonstrating the seamless deployment of cloud-native applications on modern infrastructure.
+In this section you will learn how to deploy the .NET Aspire application onto an AWS EC2 Virtual Machine powered by Arm-based processors, such as AWS Graviton. This involves leveraging the cost and performance benefits of Arm architecture while demonstrating the seamless deployment of cloud-native applications on modern infrastructure.
 
-Amazon Elastic Compute Cloud (EC2) is a highly scalable and flexible cloud computing service provided by AWS that allows users to run virtual servers, known as instances, on demand. EC2 offers a wide variety of instance types optimized for different workloads, including general-purpose, compute-intensive, memory-intensive, and GPU-enabled tasks. It supports both x86 and Arm architectures, with Arm-powered Graviton instances providing significant cost and performance advantages for specific workloads. EC2 integrates seamlessly with other AWS services, enabling applications to scale automatically, handle varying traffic loads, and maintain high availability.
-
-### EC2 Instance
+### Setup your AWS EC2 Instance
 Follow these steps to deploy an app to an Arm-powered EC2 instance::
 1. Log in to AWS Management Console [here](http://console.aws.amazon.com)
 2. Navigate to EC2 Service. In the search box type "EC2". Then, click EC2:
@@ -47,7 +45,7 @@ The configuration should look as follows:
 
 ![fig8](figures/08.png)
 
-5. Configure "Inbound Security Group Rules". Specifically, click "Add Rule" and set the following details:
+6. Configure "Inbound Security Group Rules". Specifically, click "Add Rule" and set the following details:
 * Type: Custom TCP
 * Protocol: TCP
 * Port Range: 7133.
@@ -58,13 +56,13 @@ The configuration should look as follows:
 
 ![fig9](figures/09.png)
 
-6. Launch an instance by clicking "Launch instance" button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it. It will take you to the instance dashboard, which looks like the one below:
+7. Launch an instance by clicking "Launch instance" button. You should see the green box with the Success label. This box also contains a link to the EC2 instance. Click it. It will take you to the instance dashboard, which looks like the one below:
 
 ![fig10](figures/10.png)
 
-### Deploying an app
-Once the EC2 instance is ready, we can connect to it and deploy the application. Follow these steps to connect:
-1. Locate the instance public IP (e.g. 98.83.137.101 in my case).
+### Deploy the application
+Once the EC2 instance is ready, you can connect to it and deploy the application. Follow these steps to connect:
+1. Locate the instance public IP (e.g. 98.83.137.101 in this case).
 2. Use an SSH client to connect:
 * Open the terminal
 * Set appropriate permissions for the key pair file (remember to use your IP address)
@@ -75,15 +73,15 @@ ssh -i arm-key-pair.pem ubuntu@98.83.137.101
 
 ![fig11](figures/11.png)
 
-We can now install required components, pull the application code from git, and launch the app:
-1. In the EC2 terminal type 
+You can now install required components, pull the application code from git, and launch the app:
+In the EC2 terminal run: 
 ```console
 sudo apt update && sudo apt upgrade -y
 ```
 
 This will update the package list and upgrade the installed packages.
 
-2. Install .NET SDK using the following commands:
+Install .NET SDK using the following commands:
 ```console
 wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
@@ -95,29 +93,20 @@ Verify the installation:
 ```console
 dotnet --version
 ```
-
-3. Install the Aspire workload using the dotnet CLI
+Install the Aspire workload using the dotnet CLI
 ```console
 dotnet workload install aspire
 ```
-
-4. Install git:
-```console
-sudo apt install -y git
-```
-
-5. Clone the repository:
+Clone the repository which contains the application you created in the previous section:
 ```console
 git clone https://github.com/dawidborycki/NetAspire.Arm.git
 cd NetAspire.Arm/
 ```
-
-6. Trust trust the development certificate:
+Trust the development certificate:
 ```console
 dotnet dev-certs https --trust
 ```
-
-7. Build and run the project
+ Build and run the project
 ```console
 dotnet restore
 dotnet run --project NetAspire.Arm.AppHost
