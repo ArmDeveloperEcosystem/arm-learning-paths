@@ -3,7 +3,7 @@ title: Run an Attestation with Arm Confidential Compute Architecture (CCA)
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for software developers who want to see a practical example of how attestatio is used with Arm's Confidential Computing Architecture (CCA).  
+who_is_this_for: This is an advanced topic for software developers who want to see a practical example of how attestation is used with Arm's Confidential Computing Architecture (CCA).  
 
 learning_objectives:
      - Understand how attestation is used with Arm's Confidential Computing Architecture (CCA).
