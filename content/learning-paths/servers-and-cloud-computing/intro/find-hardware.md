@@ -24,7 +24,6 @@ Cloud providers offer Arm instances based on Neoverse processors. For example:
 Free tier offers are currently available.
 - [Amazon EC2 t4g.small instances powered by AWS Graviton2 processors are free until Dec 31st 2024](https://aws.amazon.com/ec2/instance-types/t4/)
 - [Oracle free tier includes up to 4 instances of ARM Ampere A1 Compute which are always free](https://www.oracle.com/cloud/free/)
-- [Until March 31, 2024 Tau T2A VMs in Google Cloud are available for a free trial](https://cloud.google.com/compute/docs/instances/create-arm-vm-instance#t2afreetrial)
 
 [Get started with Arm-based cloud service platforms](/learning-paths/servers-and-cloud-computing/csp/) explains how to create an account and start an Arm virtual machine using the cloud service providers listed above.
 
