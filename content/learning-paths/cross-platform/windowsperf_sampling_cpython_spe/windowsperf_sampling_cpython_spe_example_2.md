@@ -8,7 +8,9 @@ weight: 6
 
 You can use the `record` command to spawn the Python process and pin it to the core specified by the `-c` option. 
 
-A double-dash (`--`) syntax in shell commands signifies the end of command options and beginning of positional arguments. In other words, it separates the `wperf` CLI options from the arguments passed to the profiled program, `python_d.exe`. 
+A double-dash (`--`) syntax in shell commands signifies the end of command options and beginning of positional arguments. 
+
+In other words, it separates the `wperf` CLI options from the arguments passed to the profiled program, `python_d.exe`. 
 
 Run the `record` command with SPE to collect load events from SPE:
 

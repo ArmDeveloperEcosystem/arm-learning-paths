@@ -16,6 +16,6 @@ If the SPE extension is present, WindowsPerf can leverage hardware sampling to p
 
 Otherwise, it relies on software sampling to gather performance data. This flexibility ensures that WindowsPerf can adapt to different hardware configurations and consistently deliver valuable performance metrics.
 
-Use `wperf sample`, sampling mode, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and instruction levels.
+Use `wperf sample`, which is sampling mode, for determining the frequencies of event occurrences produced by program locations at the function, basic block, and instruction levels.
 
-Use `wperf record`, is the same as sample, but also automatically spawns the process and pins it to the core specified by `-c`. You can use `record` to pass verbatim arguments to the process.
+Use `wperf record`, which is the same as sample, but also automatically spawns the process and pins it to the core specified by `-c`. You can use `record` to pass verbatim arguments to the process.
