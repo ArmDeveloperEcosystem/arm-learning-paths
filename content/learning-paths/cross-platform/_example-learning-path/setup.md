@@ -8,9 +8,9 @@ weight: 3 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Setup a computer
+## Set up a computer
 
-There are multiple ways to setup a computer for Learning Path creation. 
+There are multiple ways to set up a computer for Learning Path creation. 
 
 Three tools are mandatory:
 - A text editor to create and modify markdown files
@@ -30,12 +30,12 @@ This provides your own copy for you to make changes without impacting the main r
 
 ## Set up a development machine 
 
-Three possible ways to setup a development machine are covered below. 
+Three possible ways to set up a development machine are covered below. 
 
 Select **one** that works for you. Please share other ways that work for you
 
 - A [local computer (Linux, macOS, or Windows)](#option-1-set-up-a-local-computer)
-- A [Gitpod instance](#option-2-set-up-gitpod) with tools pre-installed (easiest to setup and manage)
+- A [Gitpod instance](#option-2-set-up-gitpod) with tools pre-installed (easiest to set up and manage)
 - A [remote Linux server](#option-3-set-up-a-remote-linux-server) via SSH (on your local network or from a Cloud Service Provider)
 
 ## Option 1: Set up a local computer

@@ -15,7 +15,7 @@ If you are using LiteRT without Arm NN, then the output from `ExecuteNetwork` is
 
 To try this out, you can download a LiteRT model from the [Arm Model Zoo](https://github.com/ARM-software/ML-zoo). Specifically for this Learning Path, you will download [mobilenet tflite](https://github.com/ARM-software/ML-zoo/blob/master/models/image_classification/mobilenet_v2_1.0_224/tflite_int8/mobilenet_v2_1.0_224_INT8.tflite).
 
-### Download and setup ExecuteNetwork
+### Download and set up ExecuteNetwork
 
 You can download `ExecuteNetwork` from the [Arm NN GitHub](https://github.com/ARM-software/armnn/releases). Download the version appropriate for the Android phone that you are testing on, ensuring that it matches the Android version and architecture of the phone. If you are unsure of the architecture, you can use a lower one, but you might miss out on some optimizations.`ExecuteNetwork` is included inside the `tar.gz` archive that you download. Among the other release downloads on the Arm NN Github is a separate file for the `aar` delegate which you can also easily download.
 
