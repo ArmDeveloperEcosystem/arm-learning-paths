@@ -218,3 +218,17 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
 .info_text_preexplination.smooth-open {
     opacity: 1;
 }
+
+
+
+
+/* Subtitle (for Next steps styling) */
+/**************************************/
+.next-steps-subtitle {
+    color: var(--arm-black);
+    font-family: "Source Code Pro", monospace;
+    font-weight: lighter;
+    color:  #A3A8AE;
+    margin-top: 0px;
+    margin-bottom: 4px;
+}

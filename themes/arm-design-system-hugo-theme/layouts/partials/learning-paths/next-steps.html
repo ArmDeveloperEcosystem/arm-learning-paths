@@ -9,6 +9,7 @@ Called from:
 */}}
 
 
+
 <!-- Share -->
 <style>
     .social-icons {
@@ -174,7 +175,45 @@ Called from:
 
 
             <div id="explore-tags-div" class="content-box">
+                {{ $csv := resources.Get "events.csv" }}
+                {{ $csv_content := $csv | transform.Unmarshal (dict "delimiter" ";") }}
+
+                {{ $event_i := "" }}
+
+                {{ $lp_category := (index .learningpathfiles 0).Parent.Title }}
+                {{ range $i, $row := $csv_content }}
+                    {{ $event_categories := split (index $row 9) ", " }}
+
+                    {{ if in $event_categories $lp_category }}
+                        {{ if eq $event_i "" }}
+                            {{ $event_i = $i}}
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
+            
+                {{ if $event_i }}
+                    {{ $event := index $csv_content $event_i }}
+                    <h4>Attend {{index $event 0}}</h4>
+                    {{ $formatted_dates := partial "server-side-processing/event-date-formatter.html" (dict "startDate" (index $event 2) "endDate" (index $event 3)) }}
+
+                    <p class="next-steps-subtitle">{{ $formatted_dates }}</p>
+                    
+                    <p>{{index $event 7}}</p>
+                    <ads-cta-button id="event-cta" level="secondary">Event sign up</ads-cta-button>
+                    <script>
+                        document.getElementById("event-cta").onclick = function () {
+                        window.open("{{index $event 8}}","_blank");
+                        };
+                    </script>
+
+                {{ else }}
+                    <p>No events found in category {{ $lp_category }}</p>
+                {{ end }}
+
+
+<!--    NEWSLETTER INFORMATION
                 <h4>Stay up to Date</h4>
+               
                 <p>Sign up for the Arm {{(index .learningpathfiles 0).Parent.Title}} newsletter today!</p>
                 
                 <div class="placeholder-div">
@@ -195,7 +234,7 @@ Called from:
                 </style>
                   
                 <ads-button level="primary" sr-label="primary button">Subscribe</ads-button>
-                
+            -->
             </div>
         </div>
     </div>
