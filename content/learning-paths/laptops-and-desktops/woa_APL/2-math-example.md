@@ -6,12 +6,22 @@ weight: 3
 layout: learningpathall
 ---
 
-## Import an sample project from GitHub..
+## Clone a sample project from GitHub..
 
-trace code... [x86 w/o apl]
+## Quick introduction the main function, thread-based 
+
+## Arm64 configuration
+
+## Multithreaded Approach with Semaphores code
+ 
+## Build and Debug
+
+## Show CPU and Mem usage
 
 
-useAPL = false: Using a Multithreaded Approach with Semaphores
+
+
+Using a Multithreaded Approach with Semaphores
 This path focuses on leveraging multiple CPU cores to parallelize the vertex rotation. The code uses semaphores to manage synchronization between worker threads that will perform the work.
 
 

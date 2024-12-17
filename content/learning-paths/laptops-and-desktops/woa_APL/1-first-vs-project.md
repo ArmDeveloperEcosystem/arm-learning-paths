@@ -10,14 +10,14 @@ layout: learningpathall
 A first step towards 
 
 
-{{% notice Note %}}
-Selected Arm64 version
-{{% /notice %}}
+## Create a sample project 
 
+## Quick look the project
 
-## Write the first project from ...
+## Arm64 Configuration setting
 
+## Check exe file format
 
-## Build and test 
+## Executation 
 
 
