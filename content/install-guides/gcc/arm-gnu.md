@@ -27,7 +27,7 @@ There are many versions of the [Arm GNU Toolchain](https://developer.arm.com/Too
 
 However there are reasons you may wish to use earlier compiler versions, so older versions are also available.
 
-## Download toolchain {#download}
+## How do I download the Arm GNU Toolchain? {#download}
 
 Arm GNU Toolchain releases consist of cross toolchains for the following host operating systems:
     
@@ -45,7 +45,7 @@ macOS
     
 Download the correct toolchain variant for your development needs from the [Arm Developer website](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/downloads).
 
-## Installing on Linux
+## How do I install the Arm GNU Toolchain on Linux?
 
 ### Use package installer
 
@@ -72,13 +72,13 @@ export PATH=/path/to/install/dir/bin:$PATH
 Here is a specific example for an Arm Linux host and the AArch32 bare-metal target.
 
 ```bash { target="ubuntu:latest" }
-wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi.tar.xz
-tar xJf arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
-echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-13.3.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
+wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz
+tar xJf arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
+echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-14.2.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-## Installing on macOS
+## How do I install the Arm GNU Toolchain on macOS?
 
 Downloads for `macOS` are available as tar files (`.tar.xz`) and package files (`.pkg`). 
 
@@ -98,7 +98,7 @@ Use a text editor to add the `bin` directory as a new line in `/etc/paths`.
 ```console
 sudo nano /etc/paths
 ```
-For example the path could be: `/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin`
+For example the path could be: `/Applications/ArmGNUToolchain/14.2.rel1/arm-none-eabi/bin`
 
 The `/etc/paths` file is a list of paths to search.
 
@@ -109,18 +109,21 @@ The `/etc/paths` file is a list of paths to search.
 /bin
 /usr/sbin
 /sbin
-/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin
+/Applications/ArmGNUToolchain/14.2.rel1/arm-none-eabi/bin
 ```
+
 ### Apple Silicon
+
 Here is a specific example for macOS with Apple Silicon and the AArch32 bare-metal target. 
 
 ```console
-wget https://developer.arm.com/-/media/Files/downloads/gnu/13.3.rel1/binrel/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.pkg
-sudo installer -pkg arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi.pkg -target /
-echo '/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
+wget https://developer.arm.com/-/media/Files/downloads/gnu/14.2.rel1/binrel/arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi.pkg
+sudo installer -pkg arm-gnu-toolchain-14.2.rel1-darwin-arm64-arm-none-eabi.pkg -target /
+echo '/Applications/ArmGNUToolchain/14.2.rel1/arm-none-eabi/bin' | sudo tee -a /etc/paths
 ```
 
-## Installing on Windows
+## How do I install the Arm GNU Toolchain on Windows?
+
 Double-click on the installer (e.g. `gcc-arm-_version_--mingw-w64-i686-arm-none-eabi.exe`) and follow on-screen instructions.
 
 The installer can also be run on the command line. When run on
