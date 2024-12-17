@@ -7,14 +7,18 @@ weight: 3
 
 ## Before you begin
 
-For this Learning Path you will need:
+For this Learning Path you need:
 
-* A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). Refer to the [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
-  * Note: The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with Arm SPE (Statistical Profiling Extension) support enabled. To install this version download release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
-* [Visual Studio](/install-guides/vs-woa/) and [Git](/install-guides/git-woa/) installed.
-* The CPU must support the Arm SPE extension, an optional feature in ARMv8.2 hardware. You can check your CPU compatibility using the WindowsPerf command-line tool as explained below.
+* A Windows on Arm (ARM64) native machine with pre-installed WindowsPerf (both driver and `wperf` CLI tool). See the [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
+  {{% notice Note %}}
+The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with Arm SPE (Statistical Profiling Extension) support enabled. To install this version download the release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
+{{% /notice %}}
+* Both [Visual Studio](/install-guides/vs-woa/) and [Git](/install-guides/git-woa/) installed.
+* The CPU that supports the Arm SPE extension, an optional feature in ARMv8.2 hardware. 
 
 ### How do I check if my Arm CPU supports the Arm SPE extension?
+
+You can check your CPU compatibility using the WindowsPerf command-line tool in the following instructions.
 
 #### SPE hardware support detection:
 
