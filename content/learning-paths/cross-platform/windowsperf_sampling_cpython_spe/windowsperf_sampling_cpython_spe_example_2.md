@@ -4,7 +4,7 @@ title: WindowsPerf record using SPE example
 weight: 6
 ---
 
-## Example 2: Record CPython using SPE
+## Record CPython using SPE
 
 You can use the `record` command to spawn the Python process and pin it to the core specified by the `-c` option. 
 

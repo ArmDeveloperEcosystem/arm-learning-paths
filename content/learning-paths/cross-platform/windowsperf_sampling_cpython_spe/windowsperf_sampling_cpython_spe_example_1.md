@@ -4,7 +4,7 @@ title: WindowsPerf sample using SPE example
 weight: 5
 ---
 
-## Example 1: Sample CPython using SPE
+## Sample CPython using SPE
 
 A good way to stress CPython to test the profiling capabilities is to use the [CPython](https://github.com/python/cpython) binary that you built from source in debug mode to compute a large integer number called a [Googolplex](https://en.wikipedia.org/wiki/Googolplex). 
 

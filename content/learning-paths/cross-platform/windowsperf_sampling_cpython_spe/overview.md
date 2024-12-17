@@ -1,10 +1,10 @@
 ---
 layout: learningpathall
-title: Overview of SPE
+title: Overview of Arm Statistical Profiling Extenstion 
 weight: 2
 ---
 
-## Introduction to the Arm Statistical Profiling Extension (SPE)
+## Arm Statistical Profiling Extension (SPE)
 
 The Arm Statistical Profiling Extension (SPE) is an optional feature in Armv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
 
@@ -12,11 +12,13 @@ The Arm Statistical Profiling Extension (SPE) is an optional feature in Armv8.2 
 
 SPE is particularly useful for performance analysis and optimization, as it provides detailed insights into the behavior of the CPU during execution. This can help identify performance bottlenecks and optimize software for better efficiency.
 
-## Using SPE in this Learning Path
-
-You will use sampling to surface CPython program hot spots identified by the Arm Statistical Profiling Extension (SPE).
+## Using SPE with WindowsPerf in this Learning Path
 
 WindowsPerf includes `record` support for the Arm Statistical Profiling Extension (SPE). 
+
+You will create a debug build of CPython from source and execute simple instructions in the Python interactive mode to obtain WindowsPerf sampling results from the CPython runtime image.
+
+You will use the sampling to detect CPython program hot spots identified by the Arm Statistical Profiling Extension (SPE). 
 
 {{% notice Note %}}
 SPE is only available on Windows on Arm in Test Mode.
