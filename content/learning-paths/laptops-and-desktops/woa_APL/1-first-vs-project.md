@@ -6,7 +6,6 @@ weight: 2
 layout: learningpathall
 ---
 
-
 ## Install Microsoft Visual Studio 
 A first step towards 
 
