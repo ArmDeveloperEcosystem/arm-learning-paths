@@ -1,12 +1,12 @@
 ---
-title: Optimize Windows on Arm applications using Arm Performance Libraries.
+title: Optimize WoA application using Arm Performance Libraries
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers who want to learn how to optimize Windows application performance on Arm devices.
+who_is_this_for: This is an introductory topic for software developers who want to learn how to optimize Windows-on-Arm (WoA) application performance on Arm64 devices.
 
 learning_objectives: 
-    - Develop Windows on Arm applications using Microsoft Visual Studio.
+    - Develop Windows on Arm (WoA) applications using Microsoft Visual Studio.
     - Describe how to use Arm Performance Libraries to optimize the performance.
 
 prerequisites:

@@ -1,5 +1,5 @@
 ---
-title: Profile one math application.
+title: Build a simple math application and profiling the performance
 weight: 3
 
 ### FIXED, DO NOT MODIFY
