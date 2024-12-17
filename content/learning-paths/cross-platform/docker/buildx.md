@@ -13,11 +13,13 @@ layout: "learningpathall"
 Any computer running Docker can be used for this section. 
 
 Before you begin, confirm Docker `buildx` is installed by running the `docker buildx` command.
+
 ```console
-docker buildx help
+docker buildx --help
 ```
 
 The result should be the usage message from `buildx`. It starts with the the text below:
+
 ```output
 Usage:  docker buildx [OPTIONS] COMMAND
 ```
