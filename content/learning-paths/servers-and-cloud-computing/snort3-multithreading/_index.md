@@ -1,5 +1,5 @@
 ---
-title: Optimize performance of Snort 3 using multithreading
+title: Optimize the performance of Snort 3 using multithreading
 
 minutes_to_complete: 45
 
@@ -11,7 +11,7 @@ learning_objectives:
     - Use multithreading to process capture files and measure performance.
 
 prerequisites:
-    - An Arm-based instance from a cloud provider or an Arm server running Ubuntu 20.04 or 22.04.
+    - An Arm-based instance from a cloud provider, or an Arm server running Ubuntu 20.04 or 22.04.
     - A basic understanding of Snort's operation and configuration.
     
 
