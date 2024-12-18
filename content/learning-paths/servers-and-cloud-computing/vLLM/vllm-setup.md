@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Before you begin
 
-You can follow the instructions for this Learning Path using an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage.
+To follow the instructions for this Learning Path, you will need an Arm server running Ubuntu 24.04 LTS with at least 8 cores, 16GB of RAM, and 50GB of disk storage.
 
 ## What is vLLM?
 
@@ -58,9 +58,9 @@ python -m venv env
 source env/bin/activate
 ```
 
-Your command-line prompt has `(env)` in front of it indicating you are in the Python virtual environment. 
+Your command-line prompt is prefixed by `(env)`, which indicates that you are in the Python virtual environment. 
 
-Update Pip and install Python packages:
+Now update Pip and install Python packages:
 
 ```bash
 pip install --upgrade pip
