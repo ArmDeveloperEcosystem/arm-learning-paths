@@ -26,12 +26,6 @@ Called from:
         color: var(--arm-green);
     }
 
-
-
-</style>
-
-
-<style>
     .share-icon {
         width: 36px;
         height: 36px;
@@ -48,7 +42,7 @@ Called from:
         border-radius: 10px;
         padding-left:8px;
         padding-top: 4px;
-        padding-bottom: 8px;
+        padding-bottom: 6px;
         padding-right: 16px;
         font-size: 16px;
     }
@@ -57,39 +51,53 @@ Called from:
 
 <div class="c-row">
     <div class="c-col">
-        <h2>Share your Learning Achievement!</h2>
-        <p>Keep learning and sharing your achivement with the world.</p>
+        <h2>Share</h2>
+        <p>Show your network what you've learned by sharing this Learning Path with others.</p>
         <div class="social-sharing">
             <div class="social-icons">
                 <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ (index .learningpathfiles 0).Permalink }}"
-                onclick="window.open(this.href, 'linkedin-share', 'width=900,height=650'); return false;">
-                    <i class="fab fa-linkedin"></i>
+                onclick="window.open(this.href, 'linkedin-share', 'width=900,height=650'); return false;"
+                title="Share via LinkedIn">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-linkedin"></use>
+                    </svg>
                 </a>
 
                 <a href="https://x.com/intent/tweet?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}++%40ArmSoftwareDev++&url={{ (index .learningpathfiles 0).Permalink | urlquery}}"
-                onclick="window.open(this.href, 'x-share', 'width=900,height=650'); return false;">
+                onclick="window.open(this.href, 'x-share', 'width=900,height=650'); return false;"
+                title="Share via X">
                     <svg class="share-icon">
-                        <use xlink:href="/img/social-share/square-x-twitter-brands-solid.svg#icon-twitter"></use>
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-twitter"></use>
                     </svg>
                 </a>
       
                 <a href="https://bsky.app/intent/compose?text=Check+out+this+Arm+Learning+Path:+{{(index .learningpathfiles 0).Title | urlquery }}+{{ (index .learningpathfiles 0).Permalink}}"
-                onclick="window.open(this.href, 'bluesky-share', 'width=900,height=650'); return false;">
+                onclick="window.open(this.href, 'bluesky-share', 'width=900,height=650'); return false;"
+                title="Share via Bluesky">
                     <svg class="share-icon">
-                        <use xlink:href="/img/social-share/square-bluesky-brands-solid.svg#icon-bluesky"></use>
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-bluesky"></use>
                     </svg>
                 </a>
                 
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ (index .learningpathfiles 0).Permalink }}" 
-                onclick="window.open(this.href, 'facebook-share', 'width=900,height=650'); return false;">
-                    <i class="fab fa-square-facebook"></i>
+                onclick="window.open(this.href, 'facebook-share', 'width=900,height=650'); return false;"
+                title="Share via Facebook">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-facebook"></use>
+                    </svg>
                 </a>
             
-                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ (index .learningpathfiles 0).Permalink }}" target="_blank" title="Share via Email">
-                    <i class="fas fa-envelope"></i>
+                <a href="mailto:?subject=Check out this Arm Learning Path&body={{(index .learningpathfiles 0).Title}}: {{ (index .learningpathfiles 0).Permalink }}" target="_blank" 
+                title="Share via email">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-mail"></use>
+                    </svg>
                 </a>
-                <a id="copy-link" href="#" title="Share link">
-                    <i class="fas fa-link"></i>
+                <a id="copy-link" href="#" 
+                title="Copy link to Learning Path">
+                    <svg class="share-icon">
+                        <use xlink:href="/img/social-share/all-square-social-icons.svg#icon-link"></use>
+                    </svg>
                 </a>
                 <span id="link-copied-success" hidden>Link copied to clipboard.</span>
 
@@ -118,7 +126,6 @@ Called from:
     });
   </script>
   
-<br>
 <br>
 
 <!-- Feedback -->
