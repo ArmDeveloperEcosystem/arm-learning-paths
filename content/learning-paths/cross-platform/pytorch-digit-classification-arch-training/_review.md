@@ -34,12 +34,12 @@ review:
             Which loss function was used to train the PyTorch model on the MNIST dataset?
         answers:
             - Mean Squared Error Loss
-            - CrossEntropyLoss
+            - Cross Entropy Loss
             - Hinge Loss
             - Binary Cross-Entropy Loss
         correct_answer: 2
         explanation: >
-            The CrossEntropyLoss function was used to train the model because it is suitable for multi-class classification tasks like digit classification. It measures the difference between the predicted probabilities and the true class labels, helping the model learn to make accurate predictions. 
+            Cross Entropy Loss was used to train the model because it is suitable for multi-class classification tasks like digit classification. It measures the difference between the predicted probabilities and the true class labels, helping the model learn to make accurate predictions. 
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

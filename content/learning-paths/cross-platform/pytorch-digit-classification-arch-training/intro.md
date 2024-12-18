@@ -7,6 +7,8 @@ weight: 2
 layout: "learningpathall"
 ---
 
+## Introduction to PyTorch
+
 PyTorch is an open-source deep learning framework that is developed by Meta AI and is now part of the Linux Foundation.
 
 PyTorch is designed to provide a flexible and efficient platform for building and training neural networks. It is widely used due to its dynamic computational graph, which allows users to modify the architecture during runtime, making debugging and experimentation easier. 
@@ -18,11 +20,11 @@ Prior to PyTorch, many frameworks used static computation graphs that require th
 
 Additionally, PyTorch seamlessly integrates with Python, encouraging a native coding experience. Its deep integration with GPU acceleration also makes it a powerful tool for both research and production environments. This combination of flexibility, usability, and performance has contributed to PyTorch’s rapid adoption, especially in academic research, where experimentation and iteration are crucial.
 
-A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully-connected layers, which are also known as *linear layers*. Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
+A typical process for creating a feedforward neural network in PyTorch involves defining a sequential stack of fully-connected layers, which are also known as linear layers. Each layer transforms the input by applying a set of weights and biases, followed by an activation function like ReLU. PyTorch supports this process using the torch.nn module, where layers are easily defined and composed.
 
 To create a model, users subclass the torch.nn.Module class, defining the network architecture in the __init__ method, and implement the forward pass in the forward method. PyTorch’s intuitive API and support for GPU acceleration make it ideal for building efficient feedforward networks, particularly in tasks such as image classification and digit recognition.
 
-In this Learning Path, you will explore how to use PyTorch for creating a model for digit recognition, before then proceeding to train it. 
+In this Learning Path, you will explore how to use PyTorch to create and train a model for digit recognition.
 
 ## Before you begin
 
@@ -40,7 +42,7 @@ Python 3.11.2
 
 If Python3 is not installed, download and install it from [python.org](https://www.python.org/downloads/). 
 
-Alternatively, you can also install Python3 using package managers such as Brew or APT. 
+Alternatively, you can also install Python3 using package managers such as Homebrew or APT. 
 
 If you are using Windows on Arm you can refer to the [Python install guide](https://learn.arm.com/install-guides/py-woa/).
 
@@ -72,9 +74,9 @@ pytorch-env\Scripts\activate
 source pytorch-env/bin/activate
 ```
 
-Once activated, you should see the virtual environment name in your terminal prompt.
+Once activated, you see the virtual environment name `(pytorch-env)` before your terminal prompt.
 
-3. Install PyTorch using `pip`:
+3. Install PyTorch using Pip:
 
 ```console
 pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
