@@ -1,16 +1,12 @@
 ---
-title: Scaling Snort3 - use multithreading for improved performance
-
-draft: true
-cascade:
-    draft: true
+title: Optimize performance of Snort 3 using multithreading
 
 minutes_to_complete: 45
 
-who_is_this_for: This blog is for engineers familiar with Snort who want to enhance its performance by leveraging the benefits of multithreading.
+who_is_this_for: This Learning Path is for software developers familiar with Snort who want to optimize performance by leveraging the benefits of multithreading.
 
 learning_objectives: 
-    - Install Snort with all of its dependencies.
+    - Install Snort and all of its dependencies.
     - Configure Snort Lua files to enable multithreading.
     - Use multithreading to process capture files and measure performance.
 
