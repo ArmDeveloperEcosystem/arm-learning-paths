@@ -88,7 +88,7 @@ The contents of the token are displayed as JSON. Check that the output matches t
 ```output
 {
   "cca-platform-token": {
-    "cca-platform-profile": "http://arm.com/CCA-SSD/1.0.0",
+    "cca-platform-profile": "tag:arm.com,2023:cca_platform#1.0.0",
     "cca-platform-challenge": "tZc8touqn8VVWHhrfsZ/aeQN9bpaqSHNDCf0BYegEeo=",
     "cca-platform-implementation-id": "f0VMRgIBAQAAAAAAAAAAAAMAPgABAAAAUFgAAAAAAAA=",
     "cca-platform-instance-id": "AQcGBQQDAgEADw4NDAsKCQgXFhUUExIREB8eHRwbGhkY",
