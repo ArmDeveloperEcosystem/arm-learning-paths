@@ -1,17 +1,17 @@
 ---
-title: Test Snort3 multithreading
+title: Test Snort 3 multithreading
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Before testing multithreading performance, perform the following steps to configure your system:
+Before testing the Snort 3 multi-threading, configure your system by following these steps:
 
-1. Configure Grub settings
-2. Set up the Snort3 rule set
-3. Download the PCAP files
-4. Adjust Lua configurations 
+1. Configure Grub settings.
+2. Set up the Snort3 rule set.
+3. Download the PCAP files.
+4. Adjust Lua configurations. 
 
 ## Configure Grub settings
 
@@ -39,8 +39,7 @@ After making this change, execute update-grub to apply the configuration:
 sudo update-grub
 ```
 
-Reboot the system to activate the settings.
-
+Reboot the system to activate the settings:
 ```bash
 sudo reboot
 ```
@@ -71,9 +70,9 @@ The output shows the isolated processors:
 0-9
 ```
 
-## Set up the Snort3 rule set
+## Set up the Snort 3 rule set
 
-Download the rule set from https://www.snort.org/ and extract it into your working directory. You should start in the `build` directory you used to build snort. 
+Download the rule set from https://www.snort.org/ and extract it into your working directory. Start in the `build` directory you used to build snort. 
 
 ```bash
 cd $HOME/build
@@ -95,7 +94,7 @@ Copy the `lua` folder from the `snort3` source directory into the rules director
 cp -r snort3/lua/ Test/snortrules/
 ```
 
-## Download the packet capture (PCAP) files
+## Download the Packet Capture (PCAP) files
 
 You can use any PCAP files that are relevant to your test scenario. 
 
@@ -115,10 +114,11 @@ cp maccdc2010_00000_20100310205651.pcap Test/Pcap/
 ## Adjust Lua configurations
 
 There are two modifications to the Lau configurations:
-- Pin each Snort thread to a unique core, ensuring that the cores match those isolated in the GRUB configuration
-- Enable the desired ruleset and enabling profiling
 
-### Pin snort threads to unique cpu core
+* Pin each Snort thread to a unique core, ensuring that the cores match those isolated in the GRUB configuration.
+* Enable the desired ruleset and enabling profiling.
+
+### Pin Snort Threads to Unique CPU Core
 
 Navigate to the `Test/snortrules/lua` directory.
 
@@ -290,7 +290,7 @@ The output is similar to:
 22:52:28       9   97.50    0.00    2.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 ```
 
-## Test Snort3 multi-threading to process single pcap file 
+## Test Snort 3 multi-threading to process a single PCAP file 
 
 The example usage demonstrates how multithreading increases the number of packets processed per second. 
 
