@@ -1,6 +1,6 @@
 ---
 title: Build OpenCV Applications with MSVC
-weight: 3
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## How do I build OpenCV with MSVC?
 
-Follow the steps below to build OpenCV and a test application using the library with the MSVC compiler.
+Follow these steps to build OpenCV and a test application using the library with the MSVC compiler.
 
 ### Clone the OpenCV repository
 
@@ -21,14 +21,14 @@ git checkout tags/4.10.0
 ```
 
 {{% notice Note %}}
-You might be able to use a later version, but these steps have been tested with the version 4.10.0.
+You might be able to use a later version, but these steps have been tested with version 4.10.0.
 {{% /notice %}}
 
 ### Pre-build configuration
 
 You can use CMake from the command line. 
 
-First, run the following command to run the pre-build configuration. 
+First, run the following command to run the pre-build configuration: 
 
 ```bash
 mkdir build_msvc
@@ -51,7 +51,7 @@ cmake `
 -DWITH_CAROTENE=OFF
 ```
 
-The given options specify the following:
+The given options in the code above specify the following:
 - The source code is located one level above the current directory.
 - The build will be performed in the current directory.
 - The Visual Studio 2022 MSVC compiler will be used as the compiler.
@@ -108,12 +108,12 @@ cmake --build . --target INSTALL --config Release
 ```
 
 {{% notice Note %}}
-The build takes approximately 25 mins on a Lenovo X13s
+The build takes approximately 25 mins on a Lenovo X13s.
 {{% /notice %}}
 
 &nbsp;
 
-When the build and the install steps are complete, confirm the shared library has been created by inspecting the results in the `install/bin` directory:
+When you have completed the build and installation steps, confirm the shared library has been created by inspecting the results in the `install/bin` directory:
 
 ```bash { output_lines = "2-12" }
 ls ./install/x64/vc17/bin
@@ -148,7 +148,7 @@ Mode                 LastWriteTime         Length Name
 
 The library used in your application is `opencv_world<version>.lib/dll`. 
 
-Once the library files are correctly generated, run the following command to ensure there are no errors.
+Once the library files are correctly generated, run the following command to ensure that there are no errors.
 
 ```bash { output_lines = "2" }
 ./install/x64/vc17/bin/opencv_version.exe
@@ -156,7 +156,7 @@ Once the library files are correctly generated, run the following command to ens
 ```
 
 {{% notice Note %}}
-The genereated directory name contains "x64," but there is no need to worry as the libraries and executable files will definitely run as ARM64.
+The generated directory name contains "x64," but there is no need to worry as the libraries and executable files will definitely run as AArch64.
 {{% /notice %}}
 
 &nbsp;
@@ -169,23 +169,23 @@ Once the OpenCV library has been successfully created, the next step is to link 
 
 First, create a new project in Visual Studio. 
 
-Launch Visual Studio, click `Create a new project` on the initial screen, then select `Empty Project` and click `Next`. 
+Launch Visual Studio, click **Create a new project** on the initial screen, then select **Empty Project**, and click **Next**. 
 
-On the next screen, set the `Project name` and `Location`. You can choose any name and location, but for this example, name the project `TestOpenCV`, as shown below. 
+On the next screen, set the **Project name** and **Location**. You can choose any name and location, but for this example, name the project `TestOpenCV`, as shown below. 
 
-Click `Create` to generate the new project.
+Click **Create** to generate the new project.
 
 ![MSVC project #center](msvc_project.png "Create a new project")
 
 ### Add source code
 
- In `Solution Explorer`, right-click the `Source Files` folder, select `Add`, and then `New Item...`. Create a file named `test_opencv.cpp`.
+ In **Solution Explorer**, right-click the **Source Files** folder, select **Add**, and then **New Item...**. Create a file named `test_opencv.cpp`.
 
 ![MSVC add file #center](msvc_add_file.png "Add a source file")
 
 &nbsp;
 
-Once the file is created, it will open in the editor. 
+Once the file is created, it opens in the editor. 
 
 Copy and paste the following program into it and save the file.
 
@@ -205,17 +205,25 @@ int main() {
 }
 ```
 
-This program is a simple example that uses OpenCV to create a 100x100 black image, draw a blue circle on it, and save it as a file.
+This program is a simple example that uses OpenCV to do the following:
+
+* Create a 100x100 black image.
+* Draw a blue circle on it.
+* Save it as a file.
 
 ### Configure build settings
 
-Next, select the `Configuration` dropdown menu in the center of the screen and change it from `Debug` to `Release`. At this stage, your screen should look like the example shown below.
+Next, select the **Configuration** drop-down menu in the center of the screen, and change it from **Debug** to **Release**. At this stage, your screen should look like the example shown below.
 
 ![MSVC screenshot #center](msvc_screen.png "MSVC screenshot")
 
 &nbsp;
 
-Now, set up the compile and link settings. Select `Project` from the top menu and click on `TestOpenCV properties`. Edit `Include directories`, `Library directories`, and `Additional dependencies` as shown in the images below, and then click OK.
+Now, set up the compile and link settings. 
+
+Select **Project** from the top menu and click on **TestOpenCV properties**. 
+
+Edit **Include directories**, **Library directories**, and **Additional dependencies** as shown in the images below, and then click **OK**.
 
 ![MSVC include dir #center](msvc_include_dir.png "Include directories: Specify the directory containing the OpenCV header files.")
 
@@ -237,7 +245,7 @@ Finally, ensure that the directory containing the dynamic libraries (DLLs) is ad
 
 You are now ready to build the application. 
 
-From the top menu, select `Debug` and click `Start Without Debugging` or press `Ctrl` + `F5`.
+From the top menu, select **Debug** and click **Start Without Debugging** or press Ctrl+F5.
 
 If a console window appears showing that the program exited with code 0 and `test_image.png` is generated in the top-level directory of your Visual Studio project, you have succeeded. 
 
