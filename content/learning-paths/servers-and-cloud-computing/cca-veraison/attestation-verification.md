@@ -63,12 +63,7 @@ If you can reach the verification service, you are now ready to use it to evalua
 
 One of the properties that was returned in the previous step was the public key of the verification service. This key will be needed later to check the signature on the attestation results. All that is needed in this step is to copy the contents of the `ear-verification-key` field from the previous step and save it to a separate JSON file.
 
-The easiest way to do this is to use the jq utility, which is a popular command-line tool that can be used to parse and manipulate JSON data. You can install it using your local package manager, for instance:
-
-```bash
-sudo apt install jq
-```
-
+The easiest way to do this is to use the `jq` utility. 
 You can save the public key by repeating the curl command from the previous step and use `jq` to filter the response down to just the public key part. Save it into a file called `pkey.json`:
 
 ```bash
