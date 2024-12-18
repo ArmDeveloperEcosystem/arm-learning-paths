@@ -1,6 +1,6 @@
 ---
 next_step_guidance: >
-    Thank you for completing this learning path on how to build and run vLLM on Arm servers. You might be interested in learning how to further optimize and benchmark LLM performance on Arm-based platforms.
+    Thank you for completing this Learning Path on how to build and run vLLM on Arm servers. You might be interested in learning how to further optimize and benchmark LLM performance on Arm-based platforms.
 
 recommended_path: "/learning-paths/servers-and-cloud-computing/benchmark-nlp/"
 
