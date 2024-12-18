@@ -12,31 +12,31 @@
 review:  
     - questions:
         question: >
-            The Arm Statistical Profiling Extension (SPE) is an optional feature in ARMv8.2 hardware.
+            The Arm Statistical Profiling Extension (SPE) is an optional feature in Armv8-A.2 hardware.
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 1
         explanation: >
-            Yes, the Arm Statistical Profiling Extension (SPE) is an optional feature in ARMv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
+            Yes, the Arm Statistical Profiling Extension (SPE) is an optional feature in Armv8.2 hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
     - questions:
         question: >
-            SPE stands for Statistical Profiling Extension.
+            SPE is an acronym for Statistical Profiling Extension. True or false?
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 1
         explanation: >
-            Yes, the Arm Statistical Profiling Extension (SPE) is an optional feature in ARMv8.2 hardware.
+            Yes, SPE is the abbreviated form of Statistical Profiling Extension.
     - questions:
         question: >
-            load_filter is one of SPE filters supported by WindowsPerf?
+            load_filter is one of SPE filters supported by WindowsPerf. True or false?
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 1
         explanation: >
-            Yes, load_filter together with store_filter and branch_filter are SPE filters supported by WindowsPerf.
+            Yes, load_filter, store_filter, and branch_filter are SPE filters that WindowsPerf supports.
 
    
 # ================================================================================

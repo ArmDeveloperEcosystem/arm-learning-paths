@@ -1,5 +1,5 @@
 ---
-title: Sample instructions with WindowsPerf and Arm SPE
+title: Sample Instructions with WindowsPerf and Arm SPE
 
 minutes_to_complete: 30
 

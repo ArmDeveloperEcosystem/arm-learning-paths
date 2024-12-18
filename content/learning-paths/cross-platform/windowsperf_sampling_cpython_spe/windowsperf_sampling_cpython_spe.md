@@ -12,11 +12,11 @@ For this Learning Path, you will need:
 * A Windows on Arm (AArch64) native machine with pre-installed WindowsPerf; both the driver and `wperf` CLI tool. See the [WindowsPerf Install Guide](/install-guides/wperf/) for more details.
   
   {{% notice Note %}}
-The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with support for Arm SPE enabled. To install this version, download the release asset and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
+The [WindowsPerf release 3.8.0](https://github.com/arm-developer-tools/windowsperf/releases/tag/3.8.0) includes a separate build with support for Arm SPE enabled. To install this version, download the release asset, and you will find WindowsPerf SPE build in the `SPE/` subdirectory.
 {{% /notice %}}
 * [Visual Studio](/install-guides/vs-woa/) installed.
 * [Git](/install-guides/git-woa/) installed.
-* A CPU that supports the Arm SPE extension, an optional feature in ARMv8.2 hardware. 
+* A CPU that supports the Arm SPE extension. 
 
 ### How do I check if my Arm CPU supports the Arm SPE extension?
 

@@ -1,6 +1,6 @@
 ---
 layout: learningpathall
-title: WindowsPerf sample using SPE example
+title: WindowsPerf Sample using SPE 
 weight: 5
 ---
 

@@ -6,11 +6,17 @@ weight: 2
 
 ## Arm Statistical Profiling Extension (SPE)
 
-The Arm Statistical Profiling Extension (SPE) was introduced in the Armv8.2-A architecture, and is an optional feature from Armv8.1-A hardware that allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
+The Arm Statistical Profiling Extension (SPE) was introduced in the Armv8.2-A architecture, and is an optional feature from Armv8.1-A. 
 
- It provides non-invasive, hardware-based statistical sampling for CPUs. Unlike the Performance Monitor Unit (PMU), SPE is a different module that integrates the sampling process into the instruction execution process within the CPU's pipelines. SPE provides a statistical view of the performance characteristics of executed instructions, which can be used by software writers to optimize their code for better performance.
+SPE allows CPU instructions to be sampled and associated with the source code location where that instruction occurred.
 
-SPE is particularly useful for performance analysis and optimization, as it provides detailed insights into the behavior of the CPU during execution. This can help identify performance bottlenecks and optimize software for better efficiency.
+ It provides non-invasive, hardware-based, statistical sampling for CPUs. Unlike the Performance Monitor Unit (PMU), SPE is a different module that integrates the sampling process into the instruction execution process within the pipelines of the CPU. 
+ 
+ SPE provides a statistical view of the performance characteristics of executed instructions, which can be used by software writers to optimize their code for better performance.
+
+SPE is particularly useful for performance analysis and optimization, as it provides detailed insights into the behavior of the CPU during execution. 
+
+This can help identify performance bottlenecks and optimize software for better efficiency.
 
 ## Using SPE with WindowsPerf in this Learning Path
 
