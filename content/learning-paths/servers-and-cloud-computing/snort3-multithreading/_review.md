@@ -7,7 +7,7 @@ review:
             - It allows Snort to detect encrypted traffic.
             - It improves packet processing performance. 
             - It enables Snort to be run on legacy hardware.
-            - It support multiple rule sets at the same time.
+            - It supports multiple rule sets at the same time.
         correct_answer: 2                    
         explanation: >
             It improves packet processing performance by parallelizing tasks.
@@ -34,7 +34,7 @@ review:
             - pcap.
         correct_answer: 3          
         explanation: >
-            The dump module in Snort 3 is used to read capture files (such as .pcap or .pcapng files) for offline packet analysis. 
+            The dump module in Snort 3 is used to read capture files, such as .pcap or .pcapng files, for offline packet analysis. 
 
 
 
