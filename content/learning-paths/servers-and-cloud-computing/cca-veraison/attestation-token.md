@@ -113,6 +113,7 @@ The contents of the token are displayed as JSON. Check that the output matches t
     "cca-platform-hash-algo-id": "sha-256"
   },
   "cca-realm-delegated-token": {
+    "cca-realm-profile": "tag:arm.com,2023:realm#1.0.0"
     "cca-realm-challenge": "bobW2XzHE7xt1D285JGmtAMRwCeov4WjnaY+nORMEyqKEZ0pb65qaZnpvz5EcbDOASRdiJQkwx6JeTs7HWsVBA==",
     "cca-realm-personalization-value": "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy5UaGUgcXVpY2sgYnJvd24gZm94IA==",
     "cca-realm-initial-measurement": "MRMUq3NiA1DPdYg0rlxl2ejC3H/r5ufZZUu+hk4wDUk=",
