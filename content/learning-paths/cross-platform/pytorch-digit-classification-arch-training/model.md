@@ -7,7 +7,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprising 60,000 training and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
+You can create and train a feedforward neural network to classify handwritten digits from the MNIST dataset. This dataset contains 70,000 images, comprised of 60,000 training images and 10,000 testing images, of handwritten numerals (0-9), each with dimensions of 28x28 pixels. Some representative MNIST digits with their corresponding labels are shown below.
 
 ![img3](Figures/3.png)
 
@@ -129,7 +129,7 @@ The output is still a probability distribution over the 10 digit classes (0-9), 
 
 Technically, the code will run without errors as long as you provide it with an input image of the correct dimensions, which is 28x28 pixels. The model can accept input, pass it through the layers, and return a prediction - a vector of 10 probabilities. However, the results are not useful until the model is trained.
 
-# What you have learned so far
+# What have you learned so far?
 
 You have successfully defined and initialized a feedforward neural network using PyTorch. 
 

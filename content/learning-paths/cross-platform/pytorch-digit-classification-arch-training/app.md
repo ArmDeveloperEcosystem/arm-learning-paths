@@ -1,20 +1,23 @@
 ---
 # User change
-title: "Running an Application"
+title: "Run the Application"
 
 weight: 10
 
 layout: "learningpathall"
 ---
 
-You are now ready to run the application. You can use either an emulator or a physical device. In this guide, we will use an emulator.
+You are now ready to run the Android application. You can use an emulator or a physical device. 
 
-To run an app in Android Studio using an emulator, follow these steps:
+The screenshots below show an emulator. 
+
+To run the app in Android Studio using an emulator, follow these steps:
+
 1. Configure the Emulator:
 * Go to Tools > Device Manager (or click the Device Manager icon on the toolbar).
 * Click Create Device to set up a new virtual device (if you haven’t done so already).
-* Choose a device model (e.g., Pixel 4) and click Next.
-* Select a system image (e.g., Android 11, API level 30) and click Next.
+* Choose a device model, such as Pixel 4, and click Next.
+* Select a system image, such as Android 11, API level 30, and click Next.
 * Review the settings and click Finish to create the emulator.
 
 2. Run the App:
@@ -29,4 +32,4 @@ Once the application is started, click the Load Image button. It will load a ran
 
 ![img](Figures/06.png)
 
-In the next step you will learn how to further optimise the model.
+In the next step you will learn how to further optimize the model.
