@@ -1,10 +1,6 @@
 ---
 title: Build and Run a Virtual Large Language Model on an Arm Server
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for software developers and AI engineers interested in learning how to use a vLLM (Virtual Large Language Model) on Arm servers.
