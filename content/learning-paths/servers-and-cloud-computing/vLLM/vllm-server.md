@@ -72,7 +72,7 @@ curl http://0.0.0.0:8000/v1/chat/completions \
   }'
 ```
 
-The server processes the request and the output prints the results:
+The server processes the request, and the output prints the results:
 
 ```output
 "id":"chatcmpl-6677cb4263b34d18b436b9cb8c6a5a65","object":"chat.completion","created":1734044182,"model":"Qwen/Qwen2.5-0.5B-Instruct","choices":[{"index":0,"message":{"role":"assistant","content":"Certainly! Here is a simple \"Hello, World!\" program in C:\n\n```c\n#include <stdio.h>\n\nint main() {\n    printf(\"Hello, World!\\n\");\n    return 0;\n}\n```\n\nThis program defines a function called `main` which contains the body of the program. Inside the `main` function, it calls the `printf` function to display the text \"Hello, World!\" to the console. The `return 0` statement indicates that the program was successful and the program has ended.\n\nTo compile and run this program:\n\n1. Save the code above to a file named `hello.c`.\n2. Open a terminal or command prompt.\n3. Navigate to the directory where you saved the file.\n4. Compile the program using the following command:\n   ```\n   gcc hello.c -o hello\n   ```\n5. Run the compiled program using the following command:\n   ```\n   ./hello\n   ```\n   Or simply type `hello` in the terminal.\n\nYou should see the output:\n\n```\nHello, World!\n```","tool_calls":[]},"logprobs":null,"finish_reason":"stop","stop_reason":null}],"usage":{"prompt_tokens":26,"total_tokens":241,"completion_tokens":215,"prompt_tokens_details":null},"prompt_logprobs":null}
