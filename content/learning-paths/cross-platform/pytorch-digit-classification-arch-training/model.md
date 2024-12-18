@@ -60,7 +60,7 @@ class NeuralNetwork(nn.Module):
 
 To build the neural network in PyTorch, define a class that inherits from PyTorch’s nn.Module. This approach is similar to TensorFlow’s subclassing API. In this case, define a class named NeuralNetwork, which consists of two main components:
 
-1. **__init__** method 
+1. __init__ method 
 
 This method serves as the constructor for the class. 
 
@@ -75,7 +75,7 @@ The network consists of:
 * Another Dropout layer, that removes 20% of the nodes.
 * A final Linear layer, with 10 nodes (matching the number of classes in the dataset), followed by a Softmax activation function that outputs class probabilities.
 
-2. **forward** method 
+2. forward method 
 
 This method defines the forward pass of the network. It takes an input tensor x, flattens it using self.flatten, and then passes it through the defined sequential stack of layers (self.linear_stack). 
 
@@ -99,14 +99,14 @@ You will see a detailed summary of the NeuralNetwork model’s architecture, inc
 
 The summary lists each layer of the network sequentially, including:
 
-* The Flatten layer, which reshapes the 28x28 input images into a 784-element vector.
-* The Linear layers with 96 and 256 nodes, respectively, along with the activation functions (Tanh and Sigmoid) applied after each linear transformation.
-* The Dropout layers that randomly-deactivate 20% of the neurons in the respective layers.
-* The final Linear layer with 10 nodes, corresponding to the output probabilities for the 10 digit classes, followed by the Softmax function.
+* The flatten layer, which reshapes the 28x28 input images into a 784-element vector.
+* The linear layers with 96 and 256 nodes, respectively, along with the activation functions (Tanh and Sigmoid) applied after each linear transformation.
+* The dropout layers that randomly-deactivate 20% of the neurons in the respective layers.
+* The final linear layer with 10 nodes, corresponding to the output probabilities for the 10 digit classes, followed by the softmax function.
 
 2. Input and Output Shapes 
 
-For each layer, the summary shows the shape of the input and output tensors, helping to trace how the data flows through the network. For example, the input shape starts as (1, 28, 28) for the image, which gets flattened to (1, 784) after the Flatten layer.
+For each layer, the summary shows the shape of the input and output tensors, helping to trace how the data flows through the network. For example, the input shape starts as (1, 28, 28) for the image, which gets flattened to (1, 784) after the flatten layer.
 
 3.	The summary 
 
