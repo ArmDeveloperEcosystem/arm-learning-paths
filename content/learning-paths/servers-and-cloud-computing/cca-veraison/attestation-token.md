@@ -49,7 +49,7 @@ Use GitHub’s download button, located on the right of the upper toolbar, to do
 Place this file in the `$HOME` folder, while keeping the file name the same. The rest of this learning path will use the notation `$HOME/cca_example_token.cbor` as the file path.
 
 {{% notice Note %}}
-You will notice that the filename extension on the example token is `.cbor`, which also denotes the format of the data. CBOR is the Concise Binary Object Representation. You are likely to already be familiar with JSON (the JavaScript Object Notation). JSON provides a standard way to convey nested structures of key-value pairs. CBOR is conceptually the same as JSON. The difference is that CBOR is a binary format, rather than a text-based format like JSON. CBOR is designed for compactness and ease of machine-readability, but at the expense of human-readability. You can learn more about CBOR here.
+You will notice that the filename extension on the example token is `.cbor`, which also denotes the format of the data. CBOR is the Concise Binary Object Representation. You are likely to already be familiar with JSON (the JavaScript Object Notation). JSON provides a standard way to convey nested structures of key-value pairs. CBOR is conceptually the same as JSON. The difference is that CBOR is a binary format, rather than a text-based format like JSON. CBOR is designed for compactness and ease of machine-readability, but at the expense of human-readability. You can learn more about CBOR [here](https://cbor.io/).
 {{% /notice %}}
 
 ## Build the EVCLI Tool
