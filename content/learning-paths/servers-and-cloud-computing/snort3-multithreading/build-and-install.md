@@ -1,5 +1,5 @@
 ---
-title: Install Snort3 and the required dependencies
+title: Install Snort 3 and dependencies
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -10,15 +10,15 @@ Snort is an Open Source Intrusion Prevention System (IPS). Snort uses a series o
 
 Multithreading in Snort 3 refers to the ability to associate multiple threads with a single Snort instance enabling the concurrent processing of multiple packet files. This optimization frees up additional memory for further packet processing.
 
-In order to enable multithreading in Snort3, specify the quantity of threads designated for processing network traffic using either the '--max-packet-threads' or '-z' option. 
+In order to enable multithreading in Snort 3, specify the quantity of threads designated for processing network traffic using either the '--max-packet-threads' or '-z' option. 
 
 {{%notice Note%}}
-    The instructions provided have been tested on AWS EC2 Graviton4 instance, based on Neoverse V2. The examples are easiest to use if you have at least 16 cores in the system. 
+    The instructions provided have been tested on AWS EC2 Graviton4 instance, based on Arm Neoverse V2. The examples work best if you have at least 16 cores in your system. 
 {{%/notice%}}
 
-## Compile and build Snort3
+## Compile and build Snort 3
 
-To install Snort3, use a text editor to save the script below on your Arm server in a file named `install-snort.sh`.
+To install Snort 3, use a text editor to save the script below on your Arm server in a file named `install-snort.sh`.
 
 <!-- add github link for the below file [build_snort3.sh]() -->
 ``` bash
@@ -193,21 +193,21 @@ echo 'make sure to source ~/.bashrc or set LD_LIBRARY_PATH using:"'
 echo '   export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"'
 ```
 
-The script takes 2 arguments:
-- the directory used to build Snort3 and its dependencies 
-- the number of processors to use for the build
+The script takes two arguments:
+* The directory used to build Snort 3 and its dependencies. 
+* The number of processors to use for the build.
 
-To build in a new directory named `build` with the number of processors in your system, run the script:
+To create a new directory named `build` with the number of processors in your system listed, run the script:
 
 ```bash
 bash ./install-snort.sh build `nproc`
 ```
 
-You don't need to run the script as `root` but it assumes you are on Ubuntu 20.04 or 22.04 and have sudo permission. 
+You do not need to run the script as `root`, but it assumes you are on Ubuntu 20.04 or 22.04 and have sudo permission. 
 
-When the build completes you have the snort3 directory with all compiled software, and the `snort` executable is located in `/usr/local/bin`.
+When the build completes, you will have the snort 3 directory with all compiled software, and the `snort` executable is located in `/usr/local/bin`.
 
-To verify the installation is complete, run the command below and see the version printed:
+To verify the installation is complete, run the command below and observe the version printed:
 
 ```bash { output_lines = "2-20" }
  snort -V
@@ -228,6 +228,6 @@ To verify the installation is complete, run the command below and see the versio
 
 ```
 
-Don't delete the `build` directory as it will be used in the next step.
+Do not delete the `build` directory as you will use it in the next step.
 
-Proceed to learn how to test Snort3 multithreading.
+Now you can move on to learn how to test Snort 3 multithreading.
