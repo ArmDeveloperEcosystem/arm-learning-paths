@@ -1,22 +1,22 @@
 ---
 next_step_guidance: Now that you have gained some hands-on experience with the data formats and workflows associated with attestation for confidential computing, you may wish to explore some additional resources and specifications, which go into greater detail on some of the individual aspects.
 
-recommended_path: /learning-paths/PLACEHOLDER_CATEGORY/PLACEHOLDER_LEARNING_PATH/
+recommended_path: /learning-paths/servers-and-cloud-computing/cca-essentials
 
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL
-        link: PLACEHOLDER MANUAL LINK
+        title: RATS architecture (RFC 9334) 
+        link: https://datatracker.ietf.org/doc/rfc9334/
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG
-        link: PLACEHOLDER BLOG LINK
-        type: blog
+        title: The Realm Management Monitor Specification
+        link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE
-        link: PLACEHOLDER GENERAL WEBSITE LINK
-        type: website
+        title: The Attestation Results for Secure Interactions (AR4SI) 
+        link: https://datatracker.ietf.org/doc/draft-ietf-rats-ar4si/
+        type: documentation
 
 
 # ================================================================================
