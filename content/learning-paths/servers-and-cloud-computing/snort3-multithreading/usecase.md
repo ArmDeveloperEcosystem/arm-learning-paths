@@ -9,7 +9,7 @@ layout: learningpathall
 Before testing the Snort 3 multi-threading, configure your system by following these steps:
 
 1. Configure Grub settings.
-2. Set up the Snort3 rule set.
+2. Set up the Snort 3 rule set.
 3. Download the PCAP files.
 4. Adjust Lua configurations. 
 
@@ -72,7 +72,7 @@ The output shows the isolated processors:
 
 ## Set up the Snort 3 rule set
 
-Download the rule set from https://www.snort.org/ and extract it into your working directory. Start in the `build` directory you used to build snort. 
+Download the rule set from https://www.snort.org/ and extract it into your working directory. Start in the `build` directory you used to build Snort. 
 
 ```bash
 cd $HOME/build
@@ -176,9 +176,9 @@ Continue to edit `snort.lua` and comment out the `profiler` and `latency` lines 
 
 ### Modify the IPS policy
 
-Snort3 allows you to fine-tune setups with the `--tweaks` parameter. This feature allows you to use one of Snort's policy files to enhance the detection engine for improved performance or increased security.
+Snort 3 allows you to fine-tune setups with the `--tweaks` parameter. This feature allows you to use one of Snort's policy files to enhance the detection engine for improved performance or increased security.
     
-Snort3 includes four preset policy files: max_detect, security, balanced, and connectivity. 
+Snort 3 includes four preset policy files: max_detect, security, balanced, and connectivity. 
 
 The max_detect policy favors maximum security, whereas the connectivity policy focuses on performance and uptime, which may come at the expense of security.
 
@@ -186,7 +186,7 @@ The max_detect policy favors maximum security, whereas the connectivity policy f
 
 Snort supports DAQ modules which serves as an abstraction layer for interfacing with data source such as network interface. 
 
-To see list of DAQ modules supported by snort use `--daq-list` command.
+To see list of DAQ modules supported by Snort use `--daq-list` command.
 
 Return to the `build` directory:
 
@@ -250,9 +250,9 @@ trace(v1): inline unpriv wrapper
 
 For testing, you can use `--daq dump` to analyze PCAP files.
 
-## Spawn Snort3 process with multithreading
+## Spawn Snort 3 process with multithreading
 
-To run Snort3 with multithreading start from the `Test` directory.
+To run Snort 3 with multithreading start from the `Test` directory.
 
 ```bash
 cd $HOME/build/Test
