@@ -10,7 +10,7 @@ layout: learningpathall
 
 vLLM is designed to work seamlessly with models from the Hugging Face Hub.
 
-The first time you run vLLM, it downloads the required model. This means that you don't have to explicitly download any models. 
+The first time you run vLLM, it downloads the required model. This means that you do not have to explicitly download any models. 
 
 If you want to use a model that requires you to request access or accept the terms, you need to log in to Hugging Face using a token.
 
