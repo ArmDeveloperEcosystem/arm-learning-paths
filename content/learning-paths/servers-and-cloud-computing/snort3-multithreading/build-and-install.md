@@ -1,5 +1,5 @@
 ---
-title: Install Snort 3 and dependencies
+title: Install Snort 3 and its Dependencies
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 Snort is an Open Source Intrusion Prevention System (IPS). Snort uses a series of rules to define malicious network activity. If malicious activity is found, Snort generates alerts.
 
-Multithreading in Snort 3 refers to the ability to associate multiple threads with a single Snort instance enabling the concurrent processing of multiple packet files. This optimization frees up additional memory for further packet processing.
+Multithreading in Snort 3 refers to the ability to associate multiple threads with a single Snort instance, which enables the concurrent processing of multiple packet files. This optimization frees up additional memory for further packet processing.
 
 In order to enable multithreading in Snort 3, specify the quantity of threads designated for processing network traffic using either the '--max-packet-threads' or '-z' option. 
 
@@ -18,7 +18,7 @@ In order to enable multithreading in Snort 3, specify the quantity of threads de
 
 ## Compile and build Snort 3
 
-To install Snort 3, use a text editor to save the script below on your Arm server in a file named `install-snort.sh`.
+To install Snort 3, use a text editor to copy the text below and save the script on your Arm server in a file named `install-snort.sh`.
 
 <!-- add github link for the below file [build_snort3.sh]() -->
 ``` bash
