@@ -17,7 +17,7 @@ Running a machine learning model on Android involves a few key steps.
 
 First, you train and save the model in a mobile-friendly format, such as TensorFlow Lite, ONNX, or TorchScript, depending on the framework you are using. 
 
-Next, you add the model file to your Android project’s assets directory. In your app’s code, use the corresponding framework’s Android library, such as TensorFlow Lite or PyTorch Mobile, to load the model. 
+Next, you add the model file to your Android project's assets directory. In your application's code, use the corresponding framework's Android library, such as TensorFlow Lite or PyTorch Mobile, to load the model. 
 
 You then prepare the input data, ensuring it is formatted and preprocessed in the same way as during model training. The input data is passed through the model, and the output predictions are retrieved and interpreted accordingly. For improved performance, you can leverage hardware acceleration using Android’s Neural Networks API (NNAPI) or use GPU support if available. This process enables the Android app to make real-time predictions and execute complex machine learning tasks directly on the device.
 

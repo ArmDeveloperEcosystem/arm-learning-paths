@@ -27,7 +27,6 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
-    - Cortex-X
     - Neoverse
 operatingsystems:
     - Windows
