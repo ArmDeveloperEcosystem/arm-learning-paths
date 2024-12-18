@@ -3,9 +3,6 @@ title: Introduction to CCA Attestation with Veraison
 
 minutes_to_complete: 30
 
-draft: true
-cascade:
-    draft: true
 
 who_is_this_for: This learning path is aimed at developers who wish to understand attestation in the context of confidential computing, using Arm’s Confidential Computing Architecture (CCA). It will provide you with some practical, hands-on experience with the data formats and workflows associated with attestation, which will help to provide you with a joined-up understanding of the many separate documents and specifications that exist on this topic.
 
