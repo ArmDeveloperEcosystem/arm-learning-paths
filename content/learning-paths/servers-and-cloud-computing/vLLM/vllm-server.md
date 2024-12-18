@@ -1,20 +1,20 @@
 ---
-title: Run an OpenAI compatible server
+title: Run an OpenAI-compatible server
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Instead of a batch run from Python, you can create an OpenAI compatible server. This allows you to leverage the power of large language models without relying on external APIs. 
+Instead of a batch run from Python, you can create an OpenAI-compatible server. This allows you to leverage the power of Large Language Models without relying on external APIs. 
 
 Running a local LLM offers several advantages:
 
-Cost-Effective: Avoids the costs associated with using external APIs, especially for high-usage scenarios.   
-Privacy: Keeps your data and prompts within your local environment, enhancing privacy and security.
-Offline Capability: Enables operation without an internet connection, making it ideal for scenarios with limited or unreliable network access.
+* Cost-Effective: Avoids the costs associated with using external APIs, especially for high-usage scenarios.   
+* Privacy: Keeps your data and prompts within your local environment, enhancing privacy and security.
+* Offline Capability: Enables operation without an internet connection, making it ideal for scenarios with limited or unreliable network access.
 
-OpenAI compatibility means you can reuse existing software which was designed to communicate with OpenAI and have it talk to your local vLLM service.
+OpenAI compatibility means that you can reuse existing software which was designed to communicate with OpenAI and use it to communicate with your local vLLM service.
 
 Run vLLM with the same `Qwen/Qwen2.5-0.5B-Instruct` model:
 
