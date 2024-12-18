@@ -205,7 +205,7 @@ bash ./install-snort.sh build `nproc`
 
 You do not need to run the script as `root`, but it assumes you are on Ubuntu 20.04 or 22.04 and have sudo permission. 
 
-When the build completes, you will have the snort 3 directory with all compiled software, and the `snort` executable is located in `/usr/local/bin`.
+When the build completes, you will have the Snort 3 directory with all compiled software, and the `snort` executable is located in `/usr/local/bin`.
 
 To verify the installation is complete, run the command below and observe the version printed:
 
