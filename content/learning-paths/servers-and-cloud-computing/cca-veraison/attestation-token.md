@@ -38,6 +38,13 @@ Verify that `git` is installed using the command below. It should output the ver
 git --version
 ```
 
+## Install jq
+The jq utility, is a popular command-line tool that can be used to parse and manipulate JSON data. You can install it using your local package manager, for instance:
+
+```bash
+sudo apt install jq
+```
+
 ## Download the Example CCA Attestation Token
 
 Using your preferred web browser, navigate to the [token in the TrustedFirmware-M tools repository](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor)
