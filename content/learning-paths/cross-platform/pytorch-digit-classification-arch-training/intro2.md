@@ -1,11 +1,13 @@
 ---
 # User change
-title: "PyTorch model training"
+title: "About PyTorch model training"
 
 weight: 4
 
 layout: "learningpathall"
 ---
+
+## PyTorch model training
 
 In the previous section, you created a feedforward neural network for digit classification using the MNIST dataset. The network was left untrained and lacks the ability to make accurate predictions. 
 

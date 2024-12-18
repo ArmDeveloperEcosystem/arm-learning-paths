@@ -1,15 +1,15 @@
 ---
 # User change
-title: "Modify an Android App"
+title: "Update the Android application"
 
 weight: 14
 
 layout: "learningpathall"
 ---
 
-You will now use the optimised model in the Android App we developed earlier in this Learning Path.
+You can now use the optimized model in the Android application you developed earlier.
 
-Start by modifying the activity_main.xml by adding the CheckBox:
+Start by modifying the `activity_main.xml` by adding a `CheckBox` to use the optimized model:
 
 ```XML
 <!-- CheckBox to use optimised model -->
@@ -21,7 +21,9 @@ Start by modifying the activity_main.xml by adding the CheckBox:
     android:textSize="16sp"/>
 ```
 
-Then copy the optimised model to assets folder of the Anroid App project, and replace the MainActivity.kt by the following code:
+Copy the optimized model to the `assets` folder of the Android project.
+
+Replace the `MainActivity.kt` by the following code:
 
 ```Kotlin
 package com.arm.armpytorchmnistinference
@@ -212,17 +214,30 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-Here is the proofread and expanded version:
+The updated version of the Android application includes modifications to the Android Activity to dynamically load the model based on the state of the `CheckBox`.
 
----
+When the `CheckBox` is selected, the app loads the optimized model, which is quantized and fused for improved performance. 
 
-In this updated version of the Android app, we made modifications to the Android Activity to dynamically load the model based on the state of the **CheckBox**. When the **CheckBox** is selected, the app loads the **optimized model**, which has been quantized and fused for improved performance. If the **CheckBox** is not selected, the app loads the original unoptimized model. 
+If the `CheckBox` is not selected, the app loads the original model. 
 
-After the model is loaded, we proceed to run the inference. To better estimate the execution time, we also modified the `runInference` method to execute the inference **100 times** in a loop. This gives us a more reliable measure of the average inference time by smoothing out any inconsistencies from single executions.
+After the model is loaded, the inference is run. To better estimate the execution time, the `runInference()` method executes the inference 100 times in a loop. This provides a more reliable measure of the average inference time by smoothing out any inconsistencies from single executions.
 
-Once you run the app on an actual device, you will see the results shown below. These results indicate that, on average, the optimized model reduced the inference time to about **65%** of the original model's execution time, showing a significant improvement in performance. This optimization showcases the benefits of quantization and layer fusion for mobile inference, and there is further potential for enhancement by enabling **hardware acceleration** on supported devices. This would allow the model to take full advantage of the device's computational capabilities, potentially reducing the inference time even more.
+The results for a run on a physical device are shown below. These results indicate that, on average, the optimized model reduced the inference time to about 65% of the original model's execution time, showing a significant improvement in performance. 
+
+This optimization showcases the benefits of quantization and layer fusion for mobile inference, and there is further potential for enhancement by enabling hardware acceleration on supported devices. 
+
+This would allow the model to take full advantage of the device's computational capabilities, potentially reducing the inference time even more.
+
 ![fig](Figures/07.jpg)
+
 ![fig](Figures/08.jpg)
 
-# Summary
-Here, we successfully optimized a neural network model for mobile inference using techniques such as quantization and layer fusion. The model was optimized through quantization and layer fusion, removing unnecessary elements like the Dropout layers during inference. By running multiple iterations of the inference process, we demonstrated that the optimized model significantly reduced the average inference time to around 65% of the original time, especially beneficial for deployment on resource-constrained mobile devices. Additionally, there is potential for further performance improvements by leveraging hardware acceleration.
+# What have you learned?
+
+You have successfully optimized a neural network model for mobile inference using quantization and layer fusion. 
+
+Quantization and layer fusion removed unnecessary elements such as dropout layers during inference. 
+
+By running multiple iterations of the inference process, you learned that the optimized model significantly reduced the average inference time to around 65% of the original time. 
+
+You also learned that there is potential for further performance improvements by leveraging hardware acceleration.

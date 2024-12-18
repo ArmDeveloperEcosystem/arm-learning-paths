@@ -2,18 +2,25 @@
 # User change
 title: "Prepare Test Data"
 
-weight: 8
+weight: 9
 
 layout: "learningpathall"
 ---
 
-In this section you will add the pre-trained model and prepare the data for the application.
+In this section you will add the pre-trained model and copy the bitmap image data to the Android project.
 
 ## Model
-To add the model, start by creating the assets folder under app/src/main. Then simply copy the pre-trained model you created in this [Learning Path](learning-paths/cross-platform/pytorch-digit-classification-training). The model is also available in [this repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git)
 
-## Data
-To prepare the data, you use the following Python script:
+To add the model, create a folder named `assets` in the `app/src/main` folder. 
+
+Copy the pre-trained model you created in the previous steps, `model.pth` to the `assets` folder.  
+
+The model is also available in the [GitHub repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git) if you need to copy it.
+
+## Image data
+
+The data preparation script is shown below: 
+
 ```Python
 from torchvision import datasets, transforms
 from PIL import Image
@@ -59,8 +66,16 @@ for i, (image, label) in enumerate(test_data):
         break
 ```
 
-The above code snippet processes the MNIST test dataset to generate and save bitmap images for digit classification. It defines constants for the number of unique digits (0-9) and the number of examples to collect per digit. The dataset is loaded using torchvision.datasets with a transformation to convert images to tensors. A directory named mnist_bitmaps is created to store the images. A dictionary tracks the number of collected examples for each digit. The code iterates through the dataset, converting each image tensor back to a PIL image, and saves two examples of each digit in the format digit_index_example_index.png. The loop breaks once the specified number of examples per digit is saved, ensuring that exactly 20 images (2 per digit) are generated and stored in the specified directory.
+The above code processes the MNIST test dataset to generate and save bitmap images for digit classification. 
 
-For your convenience the data is included in [this repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git)
+It defines constants for the number of unique digits (0-9) and the number of examples to collect per digit. The dataset is loaded using `torchvision.datasets` with a transformation to convert images to tensors. 
 
-Once you have a model and data simply copy them under the assets folder of the Android application
+A directory named `mnist_bitmaps` is created to store the images. A dictionary tracks the number of collected examples for each digit. The code iterates through the dataset, converting each image tensor back to a PIL image, and saves two examples of each digit in the format `digit_index_example_index.png`. 
+
+The loop breaks once the specified number of examples per digit is saved, ensuring that exactly 20 images (2 per digit) are generated and stored in the specified directory.
+
+For your convenience the data is included in the [GitHub repository](https://github.com/dawidborycki/Arm.PyTorch.MNIST.Inference.git)
+
+Copy the `mnist_bitmaps` folder to the `assets` folder.
+
+Once you have the `model.pth` and the `mnist_bitmaps` folder in the `assets` folder continue to the next step to run the Android application. 

@@ -1,29 +1,41 @@
 ---
 # User change
-title: "Android App"
+title: "Create an Android application"
 
-weight: 9
+weight: 8
 
 layout: "learningpathall"
 ---
 
-In this section you will create an Android App to run digit classifier. The application will load a randomly selected image containing a handwritten digit, and its true label. Then you will be able to run an inference on this image to predict the digit. 
+In this section you will create an Android application to run digit classification. 
 
-Start by creating a project and an user interface:
+The application randomly loads a selected image containing a handwritten digit and its true label. 
+
+The application runs an inference on the image and predicts the digit value. 
+
+## Create an Android project
+
+Start by creating a project:
+
 1. Open Android Studio and create a new project with an “Empty Views Activity.”
+
 2. Set the project name to **ArmPyTorchMNISTInference**, set the package name to: **com.arm.armpytorchmnistinference**, select **Kotlin** as the language, and set the minimum SDK to **API 27 ("Oreo" Android 8.1)**.
 
-We set the API to Android 8.1 (API level 27) as it introduced NNAPI, providing a standard interface for running computationally intensive machine learning models on Android devices. Devices with ARM-based SoCs and corresponding hardware accelerators can leverage NNAPI to offload ML tasks to specialized hardware, such as NPUs (Neural Processing Units), DSPs (Digital Signal Processors), or GPUs (Graphics Processing Units).
+Set the API to Android 8.1 (API level 27) because this version introduced NNAPI, providing a standard interface for running computationally intensive machine learning models on Android devices. 
 
-## User interface
-You will design the user interface to contain the following:
-1. A header.
-2. An ImageView and TextView to display the image and its true label.
-3. A button to load the image.
-4. A button to run inference.
-5. Two TextView controls to display the predicted label and inference time.
+Devices with hardware accelerators can leverage NNAPI to offload ML tasks to specialized hardware, such as NPUs (Neural Processing Units), DSPs (Digital Signal Processors), or GPUs (Graphics Processing Units).
 
-To do so, replace the contents of activity_main.xml (located under src/main/res/layout) with the following code:
+## User interface design
+
+The user interface design contains the following:
+
+- A header.
+- `ImageView` and `TextView` sections to display the image and its true label.
+- A button to load the image.
+- A button to run inference.
+- Two `TextView` controls to display the predicted label and inference time.
+
+Use the Android Studio editor to replace the contents of `activity_main.xml`, located in `src/main/res/layout` with the following code:
 
 ```XML
 <?xml version="1.0" encoding="utf-8"?>
@@ -97,12 +109,21 @@ To do so, replace the contents of activity_main.xml (located under src/main/res/
 </LinearLayout>
 ```
 
-The provided XML code defines a user interface layout for an Android activity using a vertical LinearLayout. It includes several UI components arranged vertically with padding and centered alignment. At the top, there is a TextView acting as a header, displaying the text “Digit Recognition” in bold and with a large font size. Below the header, an ImageView is used to display an image, with a default source set to sample_image. This is followed by another TextView that shows the true label of the displayed image, initially set to “True Label: N/A”.
+The above XML code defines a user interface layout for an Android activity using a vertical `LinearLayout`. It includes several UI components arranged vertically with padding and centered alignment. 
 
-The layout also contains two buttons: one labeled “Load Image” for selecting an input image, and another labeled “Run Inference” to execute the inference process on the selected image. At the bottom, there are two TextView elements to display the predicted label and the inference time, both initially set to “N/A”. The layout uses margins and appropriate sizes for each element to ensure a clean and organized appearance.
+At the top, there is a `TextView` acting as a header, displaying the text `Digit Recognition` in bold and with a large font size. 
+
+Below the header, an `ImageView` displays an image, with a default source set to `sample_image`. 
+
+This is followed by another `TextView` that shows the true label of the displayed image, initially set to `True Label: N/A`.
+
+The layout also contains two buttons: one labeled `Load Image` for selecting an input image, and another labeled `Run Inference` to execute the inference process on the selected image. 
+
+At the bottom, there are two `TextView` elements to display the predicted label and the inference time, both initially set to `N/A`. The layout uses margins and appropriate sizes for each element to ensure a clean and organized appearance.
 
 ## Add PyTorch to the project
-Before going further you will need to add PyTorch do the Android project. To do so, open the build.gradle.kts (Module:app) file and add the following two lines under dependencies:
+
+Add PyTorch to the project by opening the `build.gradle.kts` file and adding the following two lines under dependencies:
 
 ```XML
 implementation("org.pytorch:pytorch_android:1.10.0")
@@ -127,9 +148,13 @@ dependencies {
 ```
 
 ## Logic implementation
-You will now implement the logic for the application. This will include loading the pre-trained model, loading and displaying images, and running the inference.
 
-Open the MainActivity.kt and modify it as follows:
+You will now implement the logic for the application. 
+
+This includes loading the pre-trained model, loading and displaying images, and running inference.
+
+Open `MainActivity.kt` and modify it as follows:
+
 ```Kotlin
 package com.arm.armpytorchmnistinference
 
@@ -288,20 +313,20 @@ class MainActivity : AppCompatActivity() {
 }
 ```
 
-The above Kotlin code defines an Android app activity (MainActivity) that performs inference on the MNIST dataset using a pre-trained PyTorch model. The app allows the user to load a random MNIST image from the assets and run the model to classify the image. 
+The above Kotlin code defines an Android app activity called `MainActivity` that performs inference on the MNIST dataset using a pre-trained PyTorch model. The app allows the user to load a random MNIST image from the `assets` folder and runs the model to classify the image. 
 
-The MainActivity class contains several methods. The first one, onCreate(Bundle?) is called when the activity is first created. It sets up the user interface by inflating the layout defined in activity_main.xml and initializes several UI components, including an ImageView to display the image, TextView controls to show the true label and predicted label, and two buttons (selectImageButton and runInferenceButton) to select an image and run inference, respectively. The method then loads the PyTorch model from the assets folder using the assetFilePath function and sets up click listeners for the buttons. The selectImageButton is configured to select a random image from the mnist_bitmaps folder, while the runInferenceButton runs the inference on the selected image.
+The MainActivity class contains several methods. The first one, `onCreate()` is called when the activity is first created. It sets up the user interface by inflating the layout defined in `activity_main.xml` and initializes several UI components, including an `ImageView` to display the image, `TextView` controls to show the true label and predicted label, and two buttons (`selectImageButton` and `runInferenceButton`) to select an image and run inference. The method then loads the PyTorch model from the assets folder using the `assetFilePath()` function and sets up click listeners for the buttons. The `selectImageButton` is configured to select a random image from the `mnist_bitmaps` folder, while the `runInferenceButton` runs the inference on the selected image.
 
-Next, the selectRandomImageFromAssets() method is responsible for selecting a random image from the mnist_bitmaps folder in the assets. It lists all the files in the folder, picks one at random, and loads it as a Bitmap. The method then extracts the true label from the filename (e.g., 07_00.png implies a true label of 7), displays the selected image in the ImageView, and updates the trueLabel TextView with the correct label. If there is an error loading the image or the folder is empty, an appropriate error message is displayed in the trueLabel TextView.
+Next, the `selectRandomImageFromAssets()` method is responsible for selecting a random image from the `mnist_bitmaps` folder in the assets. It lists all the files in the folder, picks one at random, and loads it as a bitmap. The method then extracts the true label from the filename (e.g., 07_00.png implies a true label of 7), displays the selected image in the `ImageView`, and updates the `trueLabel TextView` with the correct label. If there is an error loading the image or the folder is empty, an appropriate error message is displayed in the `trueLabel TextView`.
 
-Afterward, the createTensorFromBitmap(Bitmap) converts a grayscale bitmap of size 28x28 (an image from the MNIST dataset) into a PyTorch Tensor. First, the method verifies that the bitmap has the correct dimensions. Then, it extracts pixel data from the bitmap, normalizes each pixel value to a float in the range [0, 1], and stores the values in a float array. The method finally constructs and returns a tensor with the shape [1, 1, 28, 28], where 1 is the batch size, 1 is the number of channels (for grayscale), and 28 represents the width and height of the image. This is required to match the input expected by the model.
+Afterward, the `createTensorFromBitmap()` converts a grayscale bitmap of size 28x28 (an image from the MNIST dataset) into a PyTorch Tensor. First, the method verifies that the bitmap has the correct dimensions. Then, it extracts pixel data from the bitmap, normalizes each pixel value to a float in the range [0, 1], and stores the values in a float array. The method finally constructs and returns a tensor with the shape [1, 1, 28, 28], where 1 is the batch size, 1 is the number of channels (for grayscale), and 28 represents the width and height of the image. This is required to match the input expected by the model.
 
-Subsequently, we have the runInference method. It accepts a Bitmap as input and performs inference using the pre-trained PyTorch model. It first converts the bitmap to a tensor using the createTensorFromBitmap method. Then, it measures the time taken to run the forward pass of the model using the measureTimeMicros method. The output tensor from the model, which contains the scores for each digit class, is processed to determine the predicted label. This predicted label is displayed in the predictedLabel TextView. The method also updates the inferenceTime TextView with the time taken for the inference in microseconds.
+Subsequently, we have the `runInference()` method. It accepts a bitmap as input and performs inference using the pre-trained PyTorch model. It first converts the bitmap to a tensor using the `createTensorFromBitmap()` method. Then, it measures the time taken to run the forward pass of the model using the `measureTimeMicros()` method. The output tensor from the model, which contains the scores for each digit class, is processed to determine the predicted label. This predicted label is displayed in the `predictedLabel TextView`. The method also updates the `inferenceTime TextView` with the time taken for the inference in microseconds.
 
-Also, we have an inline function measureTimeMicros. It is a utility method that measures the execution time of the provided code block in microseconds. It uses the measureNanoTime function to get the execution time in nanoseconds and then converts it to microseconds by dividing the result by 1000. This method is used to measure the time taken for model inference in the runInference method.
+Also, we have an inline function `measureTimeMicros()`. It is a utility method that measures the execution time of the provided code block in microseconds. It uses the `measureNanoTime()` function to get the execution time in nanoseconds and then converts it to microseconds by dividing the result by 1000. This method is used to measure the time taken for model inference in the `runInference()` method.
 
-The assetFilePath method is a helper function that copies a file from the assets folder to the app’s internal storage and returns the absolute path of the copied file. This is necessary because PyTorch’s Module.load() method requires a file path, not an InputStream. The function reads the specified asset file, writes its contents to a file in the internal storage, and returns the path to this file. This method is used in onCreate to load the PyTorch model file (model.pth) from the assets.
+The `assetFilePath()` method is a helper function that copies a file from the assets folder to the application's internal storage and returns the absolute path of the copied file. This is necessary because PyTorch’s `Module.load()` method requires a file path, not an InputStream. The function reads the specified asset file, writes its contents to a file in the internal storage, and returns the path to this file. This method is used in `onCreate()` to load the PyTorch model file, `model.pth`, from the `assets` folder.
 
-The MainActivity class initializes the UI components, loads a pre-trained PyTorch model, and allows the user to select random MNIST images and run inference on them. Each method is designed to handle a specific aspect of the functionality, such as loading images, converting them to tensors, running inference, and measuring execution time. The code is modular and organized, making it easy to understand and maintain.
+The `MainActivity` class initializes the UI components, loads a pre-trained PyTorch model, and allows the user to select random MNIST images and run inference on them. Each method is designed to handle a specific aspect of the functionality, such as loading images, converting them to tensors, running inference, and measuring execution time. The code is modular and organized, making it easy to understand and maintain.
 
-To be able to successfully run the application we will need to add the model and prepare bitmaps.
+To be able to successfully run the application you need to add the model and prepare the bitmaps. Continue to see how to prepare the data.
