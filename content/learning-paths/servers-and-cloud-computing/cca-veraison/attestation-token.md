@@ -77,7 +77,7 @@ The tool is quite small, so this should not take long. Once it has built, you ca
 
 Now that you have built the `evcli` command-line tool, you can use it to inspect the contents of the example CCA attestation token that you downloaded earlier.
 
-Run the following command, taking care to substitute the correct path where you stored the CCA example token from the earlier step.
+Run the following command:
 
 ```bash
 ./evcli cca print --token $HOME/cca_example_token.cbor
