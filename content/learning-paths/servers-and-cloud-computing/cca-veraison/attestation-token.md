@@ -6,11 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
-In this section, you will obtain an example CCA attestation token.
+In this section, you will obtain an example CCA attestation token. To set up the tools that you need for attestation, you need to install the Go language on your system.
 
 ## Install Go
 
-In order to run the tools used for attestation, start by installing the Go language on your system. First, you will remove any existing Go installation. After that, you obtain the install files and
+First, start by removing any existing Go installation. Next, obtain the install files and run the following command:
 
 ```bash
 rm -rf /usr/local/go
@@ -19,12 +19,12 @@ wget https://go.dev/dl/go1.23.3.linux-$(dpkg --print-architecture).tar.gz
 tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
 ```
 
-Export the installation path and add it to your $PATH environment variable.
+Export the installation path and add it to your `$PATH environment` variable.
 
 ```bash
 export PATH=$PATH:/usr/local/go/bin
 ```
-Verify the installation by checking that the command outputs the installed version.
+Verify the installation by running the following command to check the version of the installation:
 
 ```bash
 go version
@@ -32,14 +32,17 @@ go version
 
 ## Install Git
 
-Verify that `git` is installed using the command below. It should output the version available on your computer.
+Verify that `git` is installed by using the command below. It should produce an output that lists the version available on your computer:
 
 ```bash
 git --version
 ```
 
 ## Install jq
-The jq utility, is a popular command-line tool that can be used to parse and manipulate JSON data. You can install it using your local package manager, for instance:
+
+The jq utility is a popular command-line tool that you can use to parse and manipulate JSON data. 
+
+To install it, you can use your local package manager, for instance:
 
 ```bash
 sudo apt install jq
@@ -47,21 +50,21 @@ sudo apt install jq
 
 ## Download the Example CCA Attestation Token
 
-Using your preferred web browser, navigate to the [token in the TrustedFirmware-M tools repository](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor)
+Using your preferred web browser, navigate to the [token in the TrustedFirmware-M tools repository](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor).
 
-Use GitHub’s download button, located on the right of the upper toolbar, to download the token as a *raw* (binary) file.
+Use GitHub’s download button, located on the right of the upper toolbar, to download the token as a `raw` binary file.
 
 ![download_raw.png](./download_raw.png)
 
-Place this file in the `$HOME` folder, while keeping the file name the same. The rest of this learning path will use the notation `$HOME/cca_example_token.cbor` as the file path.
+Place this file in the `$HOME` folder, while retaining the file name. The rest of this Learning Path uses the notation `$HOME/cca_example_token.cbor` as the file path.
 
 {{% notice Note %}}
-You will notice that the filename extension on the example token is `.cbor`, which also denotes the format of the data. CBOR is the Concise Binary Object Representation. You are likely to already be familiar with JSON (the JavaScript Object Notation). JSON provides a standard way to convey nested structures of key-value pairs. CBOR is conceptually the same as JSON. The difference is that CBOR is a binary format, rather than a text-based format like JSON. CBOR is designed for compactness and ease of machine-readability, but at the expense of human-readability. You can learn more about CBOR [here](https://cbor.io/).
+You will notice that the filename extension on the example token is `.cbor`, which also denotes the format of the data. CBOR is an acronym for Concise Binary Object Representation. You might already be familiar with JSON (the JavaScript Object Notation). JSON provides a standard way of conveying the nested structures of key-value pairs. CBOR is conceptually the same as JSON. The difference is that CBOR is a binary format, rather than a text-based format like JSON. CBOR is designed for compactness and machine-readability, but at the expense of human-readability. You can learn more about CBOR [here](https://cbor.io/).
 {{% /notice %}}
 
 ## Build the EVCLI Tool
 
-Now that you have downloaded the example CCA attestation token, the next step is to look inside the token and learn about the data that it contains. Because the token is a binary file, you will need to use a tool to parse the file and display its contents. The tool that you will use is a command-line tool called `evcli` (which is short for the EVidence Command Line Interface – remember that attestation tokens are used to convey evidence about realms and the platforms on which they are hosted).
+Now that you have downloaded the example CCA attestation token, the next step is to look inside the token and learn about the data that it contains. As the token is a binary file, you will need to use a tool to parse the file and display its contents. The tool that you will use is a command-line tool called `evcli` (which is short for the EVidence Command Line Interface – remember that attestation tokens are used to convey evidence about realms and the platforms on which they are hosted).
 
 The `evcli` tool is part of the Veraison open-source project, which was covered in the previous section.
 
