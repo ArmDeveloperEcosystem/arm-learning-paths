@@ -6,10 +6,10 @@ weight: 2
 layout: learningpathall
 ---
 
-All confidential computing architectures provide attestation as a means of building trust. This learning path will help you to understand the common concepts in attestation, while also guiding you through code examples that focuses on how attestation is performed with CCA. This section contains an overview of the topic, building a common understanding before diving into the practical part.
+All confidential computing architectures provide attestation as a means of building trust. In this Learning Path you will learn about the common concepts in attestation, and you will follow code examples that focus on how attestation is performed with CCA. This section contains an overview of the topic, which helps you to grasp the basic concepts before progressing to the practical sections.
 
 ## Overview
-Confidential computing is about protecting data in use. This protection comes from the creation of a security boundary around the computation being performed. This security boundary creates what is normally called a Trusted Execution Environment (TEE). The data and code that executes within the TEE is protected from the outside world. Different technologies exist for creating this secure boundary. In the case of Arm CCA, the secure boundary is provided by the Realm Management Extensions (RME), which are part of the Arm Architecture v9 for A-profile CPUs.
+Confidential computing is about protecting data in use. This protection comes from the creation of a security boundary around the computation being performed. This security boundary creates what is called a Trusted Execution Environment (TEE). The data and code that executes within the TEE is protected from the outside world. Different technologies exist for creating this secure boundary. In the case of Arm CCA, the Realm Management Extension (RME) provides the secure boundary, which are part of the Arm Architecture v9 for A-profile CPUs.
 
 A secure boundary is necessary for confidential computing, but it is not sufficient. There must also be a way to establish trust with the target compute environment that the boundary is protecting (the TEE). Trusting the environment implicitly does not meet the strict definition of confidential computing. Instead, trust needs to be built by a process that is both explicit and transparent. This process is known as attestation. The role of attestation is described in the figure below.
 
