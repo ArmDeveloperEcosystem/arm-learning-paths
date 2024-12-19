@@ -96,7 +96,7 @@ installPackages()
     sudo apt-get install -y $LIST_OF_APPS
   
     # required to get optimized result from Snort3
-    downlaodPackages
+    downloadPackages
     mkdir -p ${ROOT_DIR}/snort3
     tar -xzf 3.3.5.0.tar.gz --directory  ${ROOT_DIR}/snort3 --strip-components=1
     echo "@@@@@@@@@@@@@@@@@@     Installing Snort3 Dependencies ...     @@@@@@@@@@@@@@@@@@@@"
