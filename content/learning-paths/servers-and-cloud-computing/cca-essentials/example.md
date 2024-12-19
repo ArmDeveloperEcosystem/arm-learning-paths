@@ -174,7 +174,7 @@ Now go ahead and terminate the running instance of the key broker server using C
 
 Notice here that you need to copy the `--reference-values` argument directly from the previous error message reported by the key broker. 
 
-When running this next command, ensure that you are using exactly that value, for example::
+When running this next command, ensure that you are using exactly that value, for example:
 
 ```bash
 ./keybroker-server -v --addr 172.17.0.2 --reference-values <(echo '{ "reference-values": [ "tiA66VOokO071FfsCHr7es02vUbtVH5FpLLqTzT7jps=" ] }')
@@ -186,7 +186,7 @@ On the terminal with the running realm, rerun the key broker client application 
 ./keybroker-app -v --endpoint http://172.17.0.2:8088 skywalker
 ```
 
-You should now get a successful attestion as shown:
+You should now get a successful attestation as shown:
 
 ```output
 INFO Requesting key named 'skywalker' from the keybroker server with URL http://172.17.0.2:8088/keys/v1/key/skywalker
