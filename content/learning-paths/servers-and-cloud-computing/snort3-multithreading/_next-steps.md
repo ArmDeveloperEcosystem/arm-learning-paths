@@ -1,5 +1,5 @@
 ---
-next_step_guidance: To continue learning about enabling hyperscan on arm,please refer to the learning path provided below.
+next_step_guidance: To continue learning, try this next Learning Path about enabling hyperscan on Arm.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/vectorscan/
 
