@@ -1,11 +1,11 @@
 ---
-next_step_guidance: You can now try the Learning Path about enabling hyperscan on arm. See the link below.
+next_step_guidance: To continue learning about enabling hyperscan on arm,please refer to the learning path provided below.
 
 recommended_path: /learning-paths/servers-and-cloud-computing/vectorscan/
 
 further_reading:
     - resource:
-        title: Snort 3 Documentation
+        title: Snort3 Documentation
         link: https://docs.snort.org/start/
         type: documentation
     - resource:
@@ -20,3 +20,5 @@ weight: 21                  # set to always be larger than the content in this p
 title: "Next Steps"         # Always the same
 layout: "learningpathall"   # All files under learning paths have this same wrapper
 ---
+
+
