@@ -14,7 +14,7 @@ Before testing the Snort 3 multithreading, configure your system by following th
 * Download the PCAP files.
 * Adjust Lua configurations. 
 
-### Configure Grub settings
+#### Configure Grub settings
 
 To enable Transparent HugePages (THP) and configure CPU isolation and affinity, append the following line to the `/etc/default/grub file`, modifying the CPU numbers as required:
 
@@ -72,7 +72,7 @@ The output shows the isolated processors:
 0-9
 ```
 
-## Set up the Snort 3 rule set
+#### Set up the Snort 3 rule set
 
 Download the rule set from https://www.snort.org/ and extract it into your working directory. 
 
@@ -98,7 +98,7 @@ Copy the `lua` folder from the `snort3` source directory into the rules director
 cp -r snort3/lua/ Test/snortrules/
 ```
 
-## Download the Packet Capture (PCAP) files
+#### Download the Packet Capture (PCAP) files
 
 You can use any PCAP files that are relevant to your test scenario. 
 
@@ -114,14 +114,14 @@ mkdir Test/Pcap
 cp maccdc2010_00000_20100310205651.pcap Test/Pcap/
 ```
 
-## Adjust Lua configurations
+#### Adjust Lua configurations
 
 Now make two modifications to the Lau configurations:
 
 * Pin each Snort thread to a unique core, ensuring that the cores match those isolated in the GRUB configuration.
 * Enable the desired ruleset and enabling profiling.
 
-### Pin Snort Threads to Unique CPU Core
+#### Pin Snort Threads to Unique CPU Core
 
 Navigate to the `Test/snortrules/lua` directory.
 
@@ -160,7 +160,7 @@ Edit `snort.lua` to include the contents above, and then add in the line below t
  include('common.lua')
  ```
 
-### Modify the snort.lua file to enable rules and profiling 
+#### Modify the snort.lua file to enable rules and profiling 
 
 Use an editor to modify the `snort.lua` file. 
 
@@ -175,9 +175,7 @@ rules = [[
 
 Continue to edit `snort.lua` and comment out the `profiler` and `latency` lines to enable profiling and packet statistics.
 
-## Review the Snort parameters
-
-### Modify the IPS policy
+#### Review the Snort parameters: modify the IPS policy
 
 Snort 3 allows you to fine-tune setups with the `--tweaks` parameter. This feature allows you to use one of Snort's policy files to enhance the detection engine for improved performance or increased security.
     
@@ -190,7 +188,7 @@ Snort 3 includes four preset policy files:
 
 The max_detect policy focuses on maximum security, and the connectivity policy focuses on performance and uptime, which might come at the expense of security.
 
-### Specify the data acquisition module
+#### Specify the data acquisition module
 
 Snort supports DAQ modules which serves as an abstraction layer for interfacing with data source such as network interface. 
 
@@ -258,7 +256,7 @@ trace(v1): inline unpriv wrapper
 
 For testing, you can use `--daq dump` to analyze Pthe CAP files.
 
-## Spawn Snort 3 process with multithreading
+#### Spawn Snort 3 process with multithreading
 
 To run Snort 3 with multithreading, start from the `Test` directory.
 
@@ -298,7 +296,7 @@ The output is similar to:
 22:52:28       9   97.50    0.00    2.50    0.00    0.00    0.00    0.00    0.00    0.00    0.00
 ```
 
-## Test Snort 3 multithreading to process a single PCAP file 
+#### Test Snort 3 multithreading to process a single PCAP file 
 
 The example demonstrates how multithreading increases the number of packets processed per second. 
 

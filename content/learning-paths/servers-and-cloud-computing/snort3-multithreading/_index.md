@@ -6,7 +6,7 @@ minutes_to_complete: 45
 who_is_this_for: This Learning Path is for software developers familiar with Snort who want to optimize performance by leveraging the benefits of multithreading.
 
 learning_objectives: 
-    - Install Snort and all of its dependencies.
+    - Install Snort and dependencies.
     - Configure Snort Lua files to enable multithreading.
     - Use multithreading to process capture files and measure performance.
 

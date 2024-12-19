@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-#### Snort 3
+## Snort 3
 
 Snort is an Open Source Intrusion Prevention System (IPS). Snort uses a series of rules to define malicious network activity. If malicious activity is detected, Snort generates alerts.
 
@@ -23,7 +23,7 @@ In order to enable multithreading in Snort 3, specify the quantity of threads de
     These instructions have been tested on an AWS EC2 Graviton4 instance, based on Arm Neoverse V2. The examples work best if you have at least 16 cores in your system. 
 {{%/notice%}}
 
-## Compile and build Snort 3
+### How do I compile and build Snort 3?
 
 To install Snort 3, use a text editor to copy-and-paste the text below and save the script on your Arm server in a file named `install-snort.sh`.
 
@@ -47,7 +47,7 @@ declare -a PACKAGE_URLS=(
 "https://github.com/gperftools/gperftools/releases/download/gperftools-2.13/gperftools-2.13.tar.gz"
 )
 
-downlaodPackages()
+downloadPackages()
 {
     for url in "${PACKAGE_URLS[@]}"; do
         # Extract the file name from the URL
