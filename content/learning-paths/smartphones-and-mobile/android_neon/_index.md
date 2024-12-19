@@ -1,6 +1,10 @@
 ---
 title: Get started with Neon Intrinsics on Android
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use Neon Intrinsics on Arm powered mobile devices running Android. 
