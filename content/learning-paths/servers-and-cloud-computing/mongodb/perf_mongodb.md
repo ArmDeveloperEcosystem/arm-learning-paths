@@ -16,7 +16,7 @@ Install the appropriate run-time environment to be able to use the performance t
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu" >}}
-sudo apt-get install -y openjdk-18-jre
+sudo apt install default-jre default-jdk -y
 {{< /tab >}}
 {{< tab header="RHE/Amazon" >}}
 sudo yum install java-17-openjdk
@@ -64,9 +64,11 @@ As the test runs, the count will be printed periodically. It will increase until
 ## Run Update-one test
 
 Similarly, to run this test, updating one document per query using 10, 20 and finally 30 threads for 1 hour each run (3 hours in total) run the following command:
+
 ```console
 java -jar $jarfile -m update_one -d 3600 -t 10 20 30 -db test -c perf
 ```
+
 For instructions on running any other tests or more details on the metrics reported, refer to the [github project for the performance tool](https://github.com/idealo/mongodb-performance-test#readme).
 
 ## View the results
