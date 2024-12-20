@@ -66,10 +66,10 @@ This part of the output shows how the verification service has compared the atte
 
 It is important to understand that an attestation result is not a simple "yes" or "no" answer to the question of whether the system is trustworthy. Instead, it is a set of data points, known as _trustworthiness vectors_. Each data point shows how a particular aspect of the system compares against the expectations set by the verification service. Each point of comparison can lead to one of the following results:
 
-- __Affirming__. This is the most favourable result. It is given when the evidence in the attestation token shows a good match against the expectations of a trustworthy system.
-- __Warning__. This is a less favourable result. It is given when the attestation token does not show a good match against the expectations of a trustworthy system.
-- __None__. This is an unfavourable result, meaning that no comparison was possible, either because data was missing from the evidence in the attestation token, or because the verification service does not have any expectations to compare the evidence against, and is therefore unable to draw any conclusion.
-- __Contraindicated__. This is the least favourable result. It is given when the evidence in the attestation token specifically contradicts the expectations of a trustworthy system.
+- __Affirming__. This is the most favorable result. It is given when the evidence in the attestation token shows a good match against the expectations of a trustworthy system.
+- __Warning__. This is a less favorable result. It is given when the attestation token does not show a good match against the expectations of a trustworthy system.
+- __None__. This is an unfavorable result, meaning that no comparison was possible, either because data was missing from the evidence in the attestation token, or because the verification service does not have any expectations to compare the evidence against, and is therefore unable to draw any conclusion.
+- __Contraindicated__. This is the least favorable result. It is given when the evidence in the attestation token specifically contradicts the expectations of a trustworthy system.
 
 You will also notice that the result is grouped into two sections known as submodules, and indicated with the `submod()` notation. Recall from the earlier steps that the CCA attestation token is grouped into two parts: the _realm_ token and the _platform_ token. This same grouping is therefore also reflected in the attestation result. There are separate results for each.
 
