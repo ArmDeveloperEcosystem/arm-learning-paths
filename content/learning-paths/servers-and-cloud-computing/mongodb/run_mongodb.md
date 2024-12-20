@@ -15,7 +15,7 @@ The latest released version of MongoDB Community Edition (8.0) is supported on t
 * RHEL/CentOS 8, 9
 * Amazon Linux 2023
 
-Refer to this [page](https://www.mongodb.com/docs/manual/administration/production-notes/#platform-support-matrix) for the complete platform support matrix.
+Refer to [Platform Support Matrix](https://www.mongodb.com/docs/manual/administration/production-notes/#platform-support-matrix) for additional details.
 
 ## Install and Run MongoDB on Ubuntu
 

@@ -2,21 +2,27 @@
 # User change
 title: "MongoDB test configuration and setup"
 
-weight: 3 # 1 is first, 2 is second, etc.
+draft: true
+
+weight: 30 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-The most popular test setup for read world testing is a replica set. A replica set of three equal sized nodes is created and initiated.
+
+The most popular test setup for real world testing is a replica set. A replica set of three equal sized nodes is created and initiated.
 
 ## What is a replica Set?
-A replica set is a group of instances that maintain the same data set. A replica set contains many nodes and in our test three nodes. Out of the three nodes, one and only one member is the primary node, while the other nodes are secondary nodes.
+
+A replica set is a group of instances that maintain the same data set. A replica set contains many nodes, and in this test it is 3 nodes. Of the 3 nodes, one node is the primary node, while the other nodes are secondary nodes.
 
 ## What node size should I use?
-The most common size for testing MongoDB is a 8vCPU instance. You are welcome to test with any sized machine. But If you are looking for ideal testing conditionals 8 is more than enough. 32 Gb of ram is recommended for testing.
+
+The most common size for testing MongoDB is an 8 vCPU instance. You can test with any sized machine, but if you are looking for ideal testing conditions 8 nodes is enough. Each node should have 32GB of RAM.
 
 ## How should I run this test?
-It is recommended to avoid disk and keep the complete date set within memory. The recommended configuration is below and will be explains in detail.
+
+You should keep the complete data set in memory. Additional details abut the recommended configuration are provided below.
 
 ## Mongod.conf
 
