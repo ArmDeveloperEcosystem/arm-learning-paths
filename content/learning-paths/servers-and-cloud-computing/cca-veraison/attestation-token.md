@@ -64,9 +64,9 @@ You will notice that the filename extension on the example token is `.cbor`, whi
 
 ## Build the EVCLI Tool
 
-Now that you have downloaded the example CCA attestation token, the next step is to look inside the token and learn about the data that it contains. As the token is a binary file, you will need to use a tool to parse the file and display its contents. The tool that you will use is a command-line tool called `evcli` (which is short for the EVidence Command Line Interface – remember that attestation tokens are used to convey evidence about realms and the platforms on which they are hosted).
+Now that you have downloaded the example CCA attestation token, the next step is to look inside the token and learn about the data that it contains. As the token is a binary file, you will need to use a tool to parse the file and display its contents. The tool that you will use is a command-line tool called `evcli`. Evcli is an acronym for EVidence Command Line Interface, linking with the idea that attestation tokens are used to convey evidence about realms and the platforms on which they are hosted.
 
-The `evcli` tool is part of the Veraison open-source project, which was covered in the previous section.
+The `evcli` tool is part of the Veraison Open-Source project, which was covered in the previous section.
 
 Clone the source code using git as follows:
 
@@ -140,12 +140,12 @@ The contents of the token are displayed as JSON. Check that the output matches t
 }
 ```
 
-It is not important to understand every detail of the attestation token right now, but here are some of the most important highlights:
+It is not important to understand every detail of the attestation token, but here are some of the highlights:
 
-- The CCA attestation token is a variant of a more general-purpose attestation data format known as the Entity Attestation Token (EAT). The EAT specification has been established to create more alignment across the industry with respect to attestation data, so that common tools and libraries can be used to process it.
+- The CCA attestation token is a variant of a more general-purpose attestation data format known as the Entity Attestation Token (EAT). The EAT specification has been established to create better alignment across the industry with respect to attestation data, so that common tools and libraries can be used to process it.
 - Specific variants of the EAT format are known as profiles, so this token is adopting the Arm CCA profile of the EAT specification.
 - The CCA attestation token is divided at the top level into two sub-tokens. These are known individually as the platform token and the realm token.
-- The platform token contains the evidence about the Arm CCA platform on which the realm is running, which includes details about the state of the hardware and firmware that compose the platform. You can think of the platform as being like a single server or self-contained computing device. A single platform could host many realms, which could be executing as virtual machines or containers. Therefore, many realms might produce the same platform token.
+- The platform token contains the evidence about the Arm CCA platform on which the realm is running, which includes details about the state of the hardware and firmware that compose the platform. You can think of the platform as a single server or self-contained computing device. A single platform can host many realms, which can be executing as virtual machines or containers. Therefore, many realms might produce the same platform token.
 - The realm token contains the evidence about the realm itself, which is running on the platform. It is the more dynamic part of the token. It includes information about the realm’s initial memory contents and boot state.
 - The top-level data items in each sub-token are known as claims. A claim is an individual evidence fragment that describes a specific property of the system.
 - The claims of the platform token are labelled with the prefix `cca-platform-*`
