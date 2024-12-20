@@ -19,7 +19,7 @@ layout: learningpathall
 ## Execution, check cpu/mem usage
 
 
-
+![img1](apl_disable.gif)
 
 ```c++
 void applyRotationBLAS(std::vector<double>& shape, const std::vector<double>& rotMatrix)

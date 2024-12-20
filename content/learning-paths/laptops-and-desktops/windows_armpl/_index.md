@@ -1,5 +1,5 @@
 ---
-title: Optimize WoA application using Arm Performance Libraries
+title: Optimize Windows application using Arm Performance Libraries
 
 minutes_to_complete: 60
 
@@ -21,7 +21,8 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Visual Studio
-    - C++
+    - C#
+    - .NET
 operatingsystems:
     - Windows
 
