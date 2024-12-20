@@ -104,4 +104,4 @@ rm -rf dist
 cd ..
 ```
 
-You are now ready to download an LLM run vLLM.
+You are now ready to download an LLM and run vLLM.
