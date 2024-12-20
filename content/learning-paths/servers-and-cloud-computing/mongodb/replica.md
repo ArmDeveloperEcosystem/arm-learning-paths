@@ -2,6 +2,8 @@
 # User change
 title: "Run YCSB using a 3 node replica set"
 
+draft: true
+
 weight: 5 # (intro is 1), 2 is first, 3 is second, etc.
 
 # Do not modify these elements
@@ -10,7 +12,7 @@ layout: "learningpathall"
 
 The recommended MongoDB YCSB test setup is a relica set containing three nodes of equal size. The primary node is the node you send the YCSB traffic to and the others are secondary nodes.
 
-## What is a replica Set?
+## What is a replica set?
 
 A replica set is a group of instances that maintain the same data set. A replica set contains many nodes, but 3 nodes are used for testing. 
 
@@ -28,6 +30,48 @@ Install MongoDB on each node using the previously provided instructions.
 
 Select 1 instance as the primary node and install YCSB on the instance.
 
+## Initialize the replica set
+
+1. Set variables with the IP addresses of each node:
+
+    ```bash
+    PRIMARY_NODE_IP="<primary-node-ip>"
+    SECONDARY_NODE1_IP="<secondary-node1-ip>"
+    SECONDARY_NODE2_IP="<secondary-node2-ip>"
+    ```
+
+2. Connect to the primary node using the MongoDB shell:
+
+    ```bash
+    mongosh --host <primary-node-ip>:27017
+    ```
+
+3. Initialize the replica set with the following command:
+
+    ```bash
+    PRIMARY_NODE_IP="<primary-node-ip>"
+    SECONDARY_NODE1_IP="<secondary-node1-ip>"
+    SECONDARY_NODE2_IP="<secondary-node2-ip>"
+
+    mongosh --host $PRIMARY_NODE_IP:27017 <<EOF
+    rs.initiate({
+      _id: "rs0",
+      members: [
+        { _id: 0, host: "$PRIMARY_NODE_IP:27017" },
+        { _id: 1, host: "$SECONDARY_NODE1_IP:27017" },
+        { _id: 2, host: "$SECONDARY_NODE2_IP:27017" }
+      ]
+    })
+    EOF
+    ```
+
+3. Verify the replica set status:
+
+    ```bash
+    mongosh --host $PRIMARY_NODE_IP:27017 <<EOF
+    rs.status()
+    EOF
+    ```
 
 ## Modify the MongoDB configuration
 
@@ -91,40 +135,6 @@ setParameter:
 
 If you want to use encryption you will need to add the security and keyFile to your configuration. As well as change some of the parameters in the `mongod.conf` file.
 
-## Initialize the replica set
-
-1. Connect to the primary node using the MongoDB shell:
-
-    ```bash
-    mongo --host <primary-node-ip>:27017
-    ```
-
-2. Initialize the replica set with the following command:
-
-    ```bash
-    PRIMARY_NODE_IP="<primary-node-ip>"
-    SECONDARY_NODE1_IP="<secondary-node1-ip>"
-    SECONDARY_NODE2_IP="<secondary-node2-ip>"
-
-    mongo --host $PRIMARY_NODE_IP:27017 <<EOF
-    rs.initiate({
-      _id: "rs0",
-      members: [
-        { _id: 0, host: "$PRIMARY_NODE_IP:27017" },
-        { _id: 1, host: "$SECONDARY_NODE1_IP:27017" },
-        { _id: 2, host: "$SECONDARY_NODE2_IP:27017" }
-      ]
-    })
-    EOF
-    ```
-
-3. Verify the replica set status:
-
-    ```bash
-    mongo --host $PRIMARY_NODE_IP:27017 <<EOF
-    rs.status()
-    EOF
-    ```
 
 ## Recommended Tests on MongoDB
 
