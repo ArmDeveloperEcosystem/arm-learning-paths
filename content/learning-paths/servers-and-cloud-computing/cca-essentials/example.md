@@ -45,7 +45,7 @@ The output should look like:
     inet 172.17.0.2/16 brd 172.17.255.255 scope global eth0
        valid_lft forever preferred_lft forever
 ```
-Start the KBS on the `eth0` network interface:
+Start the KBS on the `eth0` network interface, and replace 172.17.0.2 shown in the example below with the IP address corresponding to eth0 in the output of "ip -c a" above.
 
 ```bash
 ./keybroker-server -v --addr 172.17.0.2
