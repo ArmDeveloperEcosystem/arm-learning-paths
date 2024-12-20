@@ -1,6 +1,6 @@
 ---
 title: Download and inspect the attestation token
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

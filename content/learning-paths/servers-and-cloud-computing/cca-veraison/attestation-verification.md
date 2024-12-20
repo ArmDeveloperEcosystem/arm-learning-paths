@@ -1,6 +1,6 @@
 ---
 title: Use the verification service
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
