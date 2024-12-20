@@ -1,13 +1,17 @@
 ---
-title: How to use this Learning Path
+title: Using this Learning Path
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-This Learning Path provides you with some practical, hands-on experience with the data formats and workflows associated with attestation, which will help to provide you with a joined-up understanding of the many separate documents and specifications that exist on this topic.
+## Highlights
 
-In this Learning Path you will learn about the common concepts in attestation, and you will follow code examples that demonstrate how CCS performs attestation. 
+Some highlights of using this Learning Path are the following:
 
-The sections on CCA Attestation and Veraison will help you grasp the basic concepts before progressing to the practical sections.
+* Practical, hands-on experience with the data formats and workflows associated with attestation, which in turn will help to provide you with a joined-up understanding of the many separate documents and specifications that exist on this topic.
+
+* An opportunity to learn about the common concepts in attestation, supported by code examples as a demonstration. 
+
+* In advance of the practical sections, a chance to read theoretical overviews of both CCA Attestation and Veraison to help you grasp the basic concepts before progressing to the practical sections.

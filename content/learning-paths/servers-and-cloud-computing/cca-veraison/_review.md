@@ -15,8 +15,8 @@ review:
         question: >
             A secure boundary is sufficient for confidential computing.
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 2                
         explanation: >
             A secure boundary is necessary for confidential computing, but it is not sufficient. There must also be a way to establish trust with the target compute environment that the boundary is protecting (the TEE). Trust needs to be built by a process that is both explicit and transparent. This process is known as attestation.
@@ -24,8 +24,8 @@ review:
         question: >
             The CCA attestation token is divided at the top level into two sub-tokens. 
         answers:
-            - "True"
-            - "False"
+            - "True."
+            - "False."
         correct_answer: 1
         explanation: >
             The CCA attestation token is divided at the top-level into the platform token and the realm token.
