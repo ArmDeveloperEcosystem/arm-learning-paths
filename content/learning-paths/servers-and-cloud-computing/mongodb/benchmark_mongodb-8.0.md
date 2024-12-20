@@ -80,7 +80,7 @@ To test the performance of executing a workload which includes running UPDATE, R
 
 The workloads/workloada file in this example sets the following values `readproportion=0.5` and  `updateproportion=0.5` which means there is an even split between the number of READ and UPDATE operations performed. You can change the type of operations and the splits by providing your own workload parameter file.
 
-For more detailed information on all the parameters for running a workload refer to [this section](https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload).
+For more detailed information on all the parameters for running a workload refer to [Running a Workload.](https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload)
 
 ## View the results
 

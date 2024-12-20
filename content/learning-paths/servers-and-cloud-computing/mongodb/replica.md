@@ -2,6 +2,8 @@
 # User change
 title: "Run YCSB using a 3 node replica set"
 
+draft: true
+
 weight: 5 # (intro is 1), 2 is first, 3 is second, etc.
 
 # Do not modify these elements
@@ -10,7 +12,7 @@ layout: "learningpathall"
 
 The recommended MongoDB YCSB test setup is a relica set containing three nodes of equal size. The primary node is the node you send the YCSB traffic to and the others are secondary nodes.
 
-## What is a replica Set?
+## What is a replica set?
 
 A replica set is a group of instances that maintain the same data set. A replica set contains many nodes, but 3 nodes are used for testing. 
 
@@ -18,11 +20,62 @@ A replica set is a group of instances that maintain the same data set. A replica
 
 The most common size for testing MongoDB is an 8 vCPU instance. You can test with any sized machine, but if you are looking for ideal testing conditions 8 vCPUs is enough. Each node should have 32GB of RAM.
 
-## How should I run this test?
-
 You should keep the complete data set in memory. Additional details abut the recommended configuration are provided below.
 
-## Mongod.conf
+## Create a replica set
+
+Create a 3 node replica set by starting 3 Arm instances with the specifications above. 
+
+Install MongoDB on each node using the previously provided instructions. 
+
+Select 1 instance as the primary node and install YCSB on the instance.
+
+## Initialize the replica set
+
+1. Set variables with the IP addresses of each node:
+
+    ```bash
+    PRIMARY_NODE_IP="<primary-node-ip>"
+    SECONDARY_NODE1_IP="<secondary-node1-ip>"
+    SECONDARY_NODE2_IP="<secondary-node2-ip>"
+    ```
+
+2. Connect to the primary node using the MongoDB shell:
+
+    ```bash
+    mongosh --host <primary-node-ip>:27017
+    ```
+
+3. Initialize the replica set with the following command:
+
+    ```bash
+    PRIMARY_NODE_IP="<primary-node-ip>"
+    SECONDARY_NODE1_IP="<secondary-node1-ip>"
+    SECONDARY_NODE2_IP="<secondary-node2-ip>"
+
+    mongosh --host $PRIMARY_NODE_IP:27017 <<EOF
+    rs.initiate({
+      _id: "rs0",
+      members: [
+        { _id: 0, host: "$PRIMARY_NODE_IP:27017" },
+        { _id: 1, host: "$SECONDARY_NODE1_IP:27017" },
+        { _id: 2, host: "$SECONDARY_NODE2_IP:27017" }
+      ]
+    })
+    EOF
+    ```
+
+3. Verify the replica set status:
+
+    ```bash
+    mongosh --host $PRIMARY_NODE_IP:27017 <<EOF
+    rs.status()
+    EOF
+    ```
+
+## Modify the MongoDB configuration
+
+Use a text editor to edit the file `/etc/mongodb.conf` file and replace the contents of the file with the text below.
 
 ```console
 # Configuration Options: https://docs.mongodb.org/manual/reference/configuration-options/
@@ -57,6 +110,7 @@ setParameter:
   suppressNoTLSPeerCertificateWarning: true
   tlsWithholdClientCertificate: true
 ```
+
 **systemLog:** Contains locations and details of where logging should be contained.
 - **path:** Location for logging
 
@@ -79,74 +133,41 @@ setParameter:
 - **suppressNoTLSPeerCertificateWarning:** allows clients to connect without a certificate. (Only for testing purposes)
 - **tlsWithholdClientCertificate:** Will not send the certification during communication. (Only for testing purposes)
 
-If you would like to use encryption you will need to add the security and keyFile to your configuration. As well as change some of the parameters in the mongod.conf.
+If you want to use encryption you will need to add the security and keyFile to your configuration. As well as change some of the parameters in the `mongod.conf` file.
 
-## Most Common MongoDB Test Setup
-
-The recommended test setup is a relica set. Which contains three nodes each of equal size. A primary will be the node you send the YCSB traffic to.
 
 ## Recommended Tests on MongoDB
 
-The most common real world test to run is a 95/5 test, 95% read and 5% update. 100/0 and 90/10 are also popular. Run the following commands for about 5 mins before collecting data.
+The most common real world test to run is a 95/5 test, 95% read and 5% update. 100/0 and 90/10 are also popular. 
 
-Load the dataset
+Run the following commands for about 5 mins before collecting data.
+
+Load the dataset:
+
 ```console
 ./bin/ycsb load mongodb -s  -P workloads/workloadb  -p mongodb.url=mongodb://localhost:27017 -p compressibility=2 -p fieldlengthdistribution=zipfian -p minfieldlength=50 -threads 64 -p recordcount=20000000
 ```
 
-95/5
+Run the 95/5 test:
+
 ```console
 ./bin/ycsb run mongodb -s  -P workloads/workloadb  -p mongodb.url=mongodb://localhost:27017 -p minfieldlength=50 -p compressibility=2 -p maxexecutiontime=120 -threads 64 -p operationcount=40000000 -p recordcount=20000000 -p requestdistribution=zipfian -p readproportion=0.95 -p updateproportion=0.05
 
 ```
 
-100/0
+Run the 100/0 test:
+
 ```console
 ./bin/ycsb run mongodb -s  -P workloads/workloadc  -p mongodb.url=mongodb://Localhost:27017 -p minfieldlength=50 -p compressibility=2 -p maxexecutiontime=120 -threads 64 -p operationcount=40000000 -p recordcount=20000000 -p requestdistribution=zipfian -p readproportion=1.0 -p updateproportion=0.0
-
 ```
 
-90/10
+Run the 90/10 test:
+
 ```console
 ./bin/ycsb run mongodb -s  -P workloads/workloadb  -p mongodb.url=mongodb://localhost:27017 -p minfieldlength=50 -p compressibility=2 -p maxexecutiontime=120 -threads 64 -p operationcount=40000000 -p recordcount=20000000  -p requestdistribution=zipfian -p readproportion=0.90 -p updateproportion=0.10
-
 ```
 
-For more detailed information on all the parameters for running a workload refer to [this section](https://github.com/brianfrankcooper/YCSB/wiki/Running-a-Workload).
-
-## View the results
-
-At the end of each test, statistics are printed to the console. Shown below is the output from the end of Load/Insert test
-
-```output
-2022-07-06 15:50:18:917 1 sec: 1000 operations; 542.01 current ops/sec; [CLEANUP: Count=10, Max=12951, Min=0, Avg=1295.2, 90=4, 99=12951, 99.9=12951, 99.99=12951] [INSERT: Count=1000, Max=134655, Min=561, Avg=8506.37, 90=10287, 99=39903, 99.9=134015, 99.99=134655]
-[OVERALL], RunTime(ms), 1849
-[OVERALL], Throughput(ops/sec), 540.8328826392644
-[TOTAL_GCS_Copy], Count, 5
-[TOTAL_GC_TIME_Copy], Time(ms), 23
-[TOTAL_GC_TIME_%_Copy], Time(%), 1.2439156300703083
-[TOTAL_GCS_MarkSweepCompact], Count, 0
-[TOTAL_GC_TIME_MarkSweepCompact], Time(ms), 0
-[TOTAL_GC_TIME_%_MarkSweepCompact], Time(%), 0.0
-[TOTAL_GCs], Count, 5
-[TOTAL_GC_TIME], Time(ms), 23
-[TOTAL_GC_TIME_%], Time(%), 1.2439156300703083
-[CLEANUP], Operations, 10
-[CLEANUP], AverageLatency(us), 1295.2
-[CLEANUP], MinLatency(us), 0
-[CLEANUP], MaxLatency(us), 12951
-[CLEANUP], 95thPercentileLatency(us), 12951
-[CLEANUP], 99thPercentileLatency(us), 12951
-[INSERT], Operations, 1000
-[INSERT], AverageLatency(us), 8506.367
-[INSERT], MinLatency(us), 561
-[INSERT], MaxLatency(us), 134655
-[INSERT], 95thPercentileLatency(us), 11871
-[INSERT], 99thPercentileLatency(us), 39903
-[INSERT], Return=OK, 1000
-...
-```
 ## Other tests
 
-For instructions on running any other tests or more details on the metrics reported, refer to the [GitHub project for the YCSB](https://github.com/brianfrankcooper/YCSB/wiki/).
+For instructions on running any other tests or more details on the metrics reported, refer to the [GitHub project for the YCSB.](https://github.com/brianfrankcooper/YCSB/wiki/).
 

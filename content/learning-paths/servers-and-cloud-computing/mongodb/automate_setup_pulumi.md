@@ -4,8 +4,6 @@ title: "Automate MongoDB Performance Benchmarking Infrastructure Setup with Pulu
 
 weight: 8 # (intro is 1), 2 is first, 3 is second, etc.
 
-draft: true
-
 # Do not modify these elements
 layout: "learningpathall"
 ---
