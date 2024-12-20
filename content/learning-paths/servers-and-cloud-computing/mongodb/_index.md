@@ -1,5 +1,5 @@
 ---
-title: Test the performance of MongoDB on Arm servers
+title: Analyze the performance of MongoDB on Arm servers
 
 draft: true
 cascade:
@@ -15,7 +15,7 @@ learning_objectives:
 - Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB). 
 
 prerequisites:
-- An Arm based instance from a cloud service provider. The recommend YCSB configuration requires a cluster of 3 Arm servers.
+- An Arm based instance from a cloud service provider. The recommended YCSB configuration requires 3 Arm servers.
 
 armips:
 - Neoverse
