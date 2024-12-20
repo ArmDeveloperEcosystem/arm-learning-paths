@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Veraison
 
-The tools and services that you will use in this Learning Path derive from an Open-Source project called [Veraison](https://github.com/veraison). Veraison (pronounced “ver-ayy-sjon”) is a project that was founded within Arm but has since been donated to the [Confidential Computing Consortium](https://confidentialcomputing.io/) as an ongoing community project with a growing number of contributors from other organizations. Veraison addresses the verification aspect of attestation. It provides reusable tools and components that can be deployed in the construction of verification services or libraries.
+The tools and services that you will use in this Learning Path derive from an Open-Source project called [Veraison](https://github.com/veraison). Veraison is a project that was founded within Arm but has since been donated to the [Confidential Computing Consortium](https://confidentialcomputing.io/) as an ongoing community project with a growing number of contributors from other organizations. Veraison addresses the verification aspect of attestation. It provides reusable tools and components that can be deployed in the construction of verification services or libraries.
 
 Confidential computing is a new, and fast-growing industry. There are many stakeholders,  including:
 
