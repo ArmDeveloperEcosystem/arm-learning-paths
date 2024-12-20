@@ -148,8 +148,8 @@ It is not important to understand every detail of the attestation token, but her
 - The platform token contains the evidence about the Arm CCA platform on which the realm is running, which includes details about the state of the hardware and firmware that compose the platform. You can think of the platform as a single server or self-contained computing device. A single platform can host many realms, which can be executing as virtual machines or containers. Therefore, many realms might produce the same platform token.
 - The realm token contains the evidence about the realm itself, which is running on the platform. It is the more dynamic part of the token. It includes information about the realm’s initial memory contents and boot state.
 - The top-level data items in each sub-token are known as claims. A claim is an individual evidence fragment that describes a specific property of the system.
-- The claims of the platform token are labelled with the prefix `cca-platform-*`
-- The claims of the realm token are labelled with the prefix `cca-realm-*`
+- The claims of the platform token are labeled with the prefix `cca-platform-*`
+- The claims of the realm token are labeled with the prefix `cca-realm-*`
 - Many of the claims take the form of _measurements_. A measurement is a hash (checksum) that is computed from one of the firmware or software components that are running within the realm or within the platform. Checking these measurements against known-good values is an essential step for evaluating the trustworthiness of the realm. Any mismatch could mean that the system is running some software or firmware that has been tampered with, or is at the wrong patch or version level.
 
 You might find it instructive to view the token in a formatting tool such as https://jsonviewer.stack.hu, where you can interactively expand and collapse different parts of the object tree to gain a better feel for the structure. Doing this may help you to digest the bullet points above.

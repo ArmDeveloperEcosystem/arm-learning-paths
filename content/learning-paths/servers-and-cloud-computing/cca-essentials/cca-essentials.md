@@ -26,7 +26,7 @@ For additional security, the KBS does not release any secrets in clear text, eve
 
 In the example in this Learning Path, you will see that the secret that is exchanged between the KBS and the realm is a small string value, which the realm decrypts and echoes to its console window once all the attestation steps have succeeded.
 
-For convenience, both the KBS and the client software are packaged in docker containers, which you can execute on any suitable AArch64 or x86_64 development machine. Since the client software runs in a realm, it makes use of the Fixed Virtual Platform (FVP) and the reference software stack for Arm CCA. If you have not yet familiarised yourself with running applications in realms using FVP and the reference software stack, see the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container) Learning Path.
+For convenience, both the KBS and the client software are packaged in docker containers, which you can execute on any suitable AArch64 or x86_64 development machine. Since the client software runs in a realm, it makes use of the Fixed Virtual Platform (FVP) and the reference software stack for Arm CCA. If you have not yet familiarized yourself with running applications in realms using FVP and the reference software stack, see the [Run an application in a Realm using the Arm Confidential Computing Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container) Learning Path.
 
 The attestation verification service is hosted by Linaro, so it is not necessary for you to build or deploy this service yourself.
 

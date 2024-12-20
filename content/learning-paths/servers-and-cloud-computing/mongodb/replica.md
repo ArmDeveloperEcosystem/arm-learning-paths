@@ -126,7 +126,7 @@ setParameter:
 - **port:** 27017 is the port used for replica sets
 - **maxIncomingConnections:** The maximum number of incoming connections supported by MongoDB
 
-**setParameter:** Addtional options
+**setParameter:** Additional options
 - **diagnosticDataCollectionDirectorySizeMB:** 400 is based on the docs.
 - **honorSystemUmask:** Sets read and write permissions only to the owner of new files
 - **lockCodeSegmentsInMemory:** Locks code into memory and prevents it from being swapped.
