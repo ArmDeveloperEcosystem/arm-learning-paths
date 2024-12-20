@@ -17,7 +17,7 @@ Visual Studio 2022 offers different editions tailored to various development nee
  - Professional: Offers professional developer tools, services, and subscription benefits for small teams.
  - Enterprise: Provides the most comprehensive set of tools and services for large teams and enterprise-level development.
 
-You can compare the features of each edition on the Visual Studio website to choose the one that best suits your requirements: https://visualstudio.microsoft.com/vs/compare/
+To select the edition best suited to your requirements, compare the features of each on the Visual Studio website: https://visualstudio.microsoft.com/vs/compare/
 
 {{% notice Note %}}
 This Learning Path documents an example using Visual Studio 2022 Community edition, you can also use advance edition as well.
@@ -25,11 +25,11 @@ This Learning Path documents an example using Visual Studio 2022 Community editi
 
 Visit Viscual Studio [Downloads](https://visualstudio.microsoft.com/downloads/) page and click the download the installer executable.
 
-It usually took few minuate to install depend on your network speed. Double-click the downloaded installer and set the default configuration to finish the installation.
+Installation typically takes a few minutes, depending on your network speed. Double-click the downloaded installer and use the default configuration to complete the installation.
 
-You can learn how to install C/C++ and LLVM support in this [learning path] (https://learn.arm.com/install-guides/vs-woa/).
+Learn how to install C/C++ and LLVM support in this [learning path] (https://learn.arm.com/install-guides/vs-woa/).
 
-## Create a sample project
+## Create a Sample Project
 
 Now, you are ready to create a sample Windows application.
 
@@ -49,7 +49,7 @@ Console.WriteLine("Hello, World!");
 
 Microsoft Visual Studio automatically adds the build environment variable for the current hardware's CPU architecture. However, we can still familiarize ourselves with the relevant settings.
 
-## Arm64 Configuration setting
+## Arm64 Configuration Setting
 
 Go the "Debug" -> "Configuration Manager"
  ![img4](./figures/vs_console_config1.png)
@@ -67,7 +67,7 @@ Please reference this [learning path](https://learn.arm.com/learning-paths/lapto
 Click "Build" -> "Build Solution", your first Windows will compile succesfully.
 
 
-## Run your first Windows application
+## Run Your First Windows Application
 
 Use the green arrow to run the program you just compiled, and you'll see the  statement from your code correctly executed in the console.
 
