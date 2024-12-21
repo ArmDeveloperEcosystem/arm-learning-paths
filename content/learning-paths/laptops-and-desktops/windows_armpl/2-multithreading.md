@@ -6,9 +6,9 @@ weight: 3
 layout: learningpathall
 ---
 
-## Clone Example from GitHub..
+## Clone Example from GitHub
 
-We use a Windows application that renders a rotating a 3D cube to perform the calculations on different programming options.
+We use a Windows application that renders a rotating 3D cube to perform the calculations on different programming options.
 
 First, clone this Windows application repository from GitHub:
 
@@ -17,26 +17,25 @@ git clone https://github.com/odincodeshen/SpinTheCubeInGDI.git
 ```
 
 {{% notice Note %}}
-To facilitate explaining the topic, this repository is forked from original author [here](https://github.com/marcpems/SpinTheCubeInGDI) with some modifications to aid in the following explanations.
+To facilitate explaining the topic, this repository is forked from the original author [here](https://github.com/marcpems/SpinTheCubeInGDI) with some modifications to aid in the following explanations.
 {{% /notice %}}
 
 ## Quick Introduction
 
-Click the SpinTheCubeInGDI.sln then you will open the entire project.
-Before you build up the project, here is quick introduce of this project.
+Click the SpinTheCubeInGDI.sln to open the project.
 This source code implements a Windows application that renders a spinning 3D cube.
 
 Four of key components are:
- - Shape Generation: Generate the vertices for a sphere using a golden ratio-based algorithm.
- - Rotation: The application uses a rotation matrix to rotate the 3D shapes. The rotation is applied around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation.
- - Calculation: This code apply two options to calculate:
+ - Shape Generation: Generates the vertices for a sphere using a golden ratio-based algorithm.
+ - Rotation Calculation: 
+   The application uses a rotation matrix to rotate the 3D shape around the X, Y, and Z axes. The rotation angle is incremented over time, creating the animation. This code apply two options to calculate:
     - Multithreading: The application utilizes multithreading to improve performance by distributing the rotation calculations across multiple threads.
-    - Arm Performance Libraries: Use for optimized calculations. Will explain in next session.
+    - Arm Performance Libraries: Used for optimized calculations. (Explained in the next session)
  - Drawing: The application draws the transformed vertices of the shapes on the screen, using Windows API.
  - Performance Measurement: The code measures and displays the number of transforms per second.
 
 
-### Calculation Option#1 -- Multithreading
+## Calculation Option#1 -- Multithreading
 
 In this learning path, our focus is on the impact of different Calculation option on performance.
 The multithreading implement on the project involved two of functions:
@@ -74,6 +73,7 @@ The multithreading implement on the project involved two of functions:
  
  - applyRotation():
     This function applies the rotation matrix to a subset of the shape's vertices.
+
     ```c++
     void applyRotation(std::vector<double>& shape, const std::vector<double>& rotMatrix, int startPoint, int stride)
     {
@@ -113,25 +113,23 @@ The multithreading implement on the project involved two of functions:
     ```
 
 
-## Build and Run
+## Build and Test
 
-After gaining a general understanding of the project, we can start compiling it.
+After gaining a general understanding of the project, you can compile it. 
+Build the project, and once successful, run `SpinTheCubeInGDI.exe`.
 
-Now, you can start build up the project. Once build successfully, run `SpinTheCubeInGDI.exe`.
-
-You'll see a simulated 3D sphere continuously rotating. The number in the upper-left corner represents the number of frames that can be calculated per second (FPS). A higher number indicates better performance, and vice versa.
+You'll see a simulated 3D sphere continuously rotating. The number in the upper-left corner represents the number of frames per second (FPS). A higher number indicates better performance, and vice versa.
 
  ![gif1](./figures/multithreading.gif)
 
-On my test hardware, the performance generally falls between 3 and 6 FPS, which is not very stable.
+On my test machine, the performance generally falls between 3 and 6 FPS, which is unstable.
 
 {{% notice Note %}}
-The performance number may vary on different hardware and system loads.
+Performance may vary depending on the hardware and the system load at the time of testing.
 {{% /notice %}}
 
 
-
-You can also utilize the [profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
+You can also use the [profiling tools](https://learn.microsoft.com/en-us/visualstudio/profiling/profiling-feature-tour?view=vs-2022) to observe the dynamic CPU and memory usage while the program is running.
  ![img8](./figures/mt_cpumem_usage1.png)
 
 
