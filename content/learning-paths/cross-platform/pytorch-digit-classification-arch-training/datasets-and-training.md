@@ -1,11 +1,13 @@
 ---
 # User change
-title: "Datasets and training"
+title: "Perform training and save the model"
 
 weight: 5
 
 layout: "learningpathall"
 ---
+
+## Prepare the MNIST data
 
 Start by downloading the MNIST dataset. Proceed as follows:
 
@@ -60,7 +62,7 @@ The certifi Python package provides the Mozilla root certificates, which are ess
 
 Make sure to replace `x` with the number of Python version you have installed.
 
-After running the code you will see the output that might look like shown below:
+After running the code you see output similar to the screenshot below:
 
 ![image](Figures/01.png)
 
@@ -122,18 +124,18 @@ for t in range(epochs):
     test_loop(test_dataloader, model, loss_fn)
 ```
 
-After running this code, you will see the following output that shows the training progress.
+After running the code, you see the following output showing the training progress.
 
 ![image](Figures/02.png)
 
-Once the training is complete, you will see something like the following:
+Once the training is complete, you see output similar to:
 
 ```output
 Epoch 10:
 Accuracy: 95.4%, Avg loss: 1.507491 
 ```
 
-which shows the model achieved around 95% of accuracy.
+The output shows the model achieved around 95% accuracy.
 
 # Save the model
 
@@ -174,4 +176,4 @@ Setting the model to evaluation mode before tracing is important for several rea
 
 3. Correct Tracing. Tracing captures the operations performed by the model using a given input. If the model is in training mode, the traced graph may include operations related to dropout and batch normalization updates. These operations can affect the correctness and performance of the model during inference.
     
-In the next step, you will use the saved model for inference.
+In the next step, you will use the saved model for ML inference.

@@ -1,5 +1,5 @@
 ---
-title: Scaling Snort3 - use multithreading for improved performance
+title: Scaling Snort 3 - use multithreading for improved performance
 
 draft: true
 cascade:

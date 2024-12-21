@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Inference"
+title: "Use the model for inference"
 
 weight: 6
 
@@ -26,7 +26,7 @@ Start by installing matplotlib package:
 pip install matplotlib
 ```
 
-Then, in Visual Studio Code create a new file named `pytorch-digits-inference.ipynb` and modify the file to include the code below:
+Use Visual Studio Code to create a new file named `pytorch-digits-inference.ipynb` and modify the file to include the code below:
 
 ```python
 import torch
@@ -101,12 +101,14 @@ After running the code, you should see results similar to the following figure:
 
 ![image](Figures/03.png)
 
-# What you have learned 
+# What have you learned?
 
-In this exercise, you went through the complete process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, you optimized the model’s weights and biases over multiple epochs. You employed the CrossEntropyLoss function and the Adam optimizer to minimize prediction errors and improve accuracy. You periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
+You have completed the process of training and using a PyTorch model for digit classification on the MNIST dataset. Using the training dataset, you optimized the model’s weights and biases over multiple epochs. You employed the CrossEntropyLoss function and the Adam optimizer to minimize prediction errors and improve accuracy. You periodically evaluated the model on the test dataset to monitor its performance, ensuring it was learning effectively without overfitting.
 
 After training, you saved the model using TorchScript, which captures both the model’s architecture and its learned parameters. This made the model portable and independent of the original class definition, simplifying deployment.
 
 Next, you performed inference. You loaded the saved model and set it to evaluation mode to ensure that layers like dropout and batch normalization behaved correctly during inference. You randomly selected 16 images from the MNIST test dataset to evaluate the model’s performance on unseen data. For each selected image, you used the model to predict the digit, comparing the predicted labels with the actual ones. You displayed the images alongside their actual and predicted labels in a 4x4 grid, visually assessing the model’s accuracy and performance.
 
 This comprehensive process, from model training and saving to inference and visualization, illustrates the end-to-end workflow for building and deploying a machine learning model in PyTorch. It demonstrates how to train a model, save it in a portable format, and then use it to make predictions on new data.
+
+In the next step, you will learn how to use the model in an Android application.

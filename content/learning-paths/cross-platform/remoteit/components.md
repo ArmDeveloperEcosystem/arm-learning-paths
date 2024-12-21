@@ -14,7 +14,7 @@ weight: 2
 | Desktop          | Windows, macOS, and Linux       | initiator and target |
 | CLI              | Windows, macOS, and Linux       | initiator and target |
 | Device package   | Linux, OpenWRT, and many others | target only          |
-| Mobile           | Andoid, iOS                     | initiator (Android and iOS) and target (Android only)  |
+| Mobile           | Android, iOS                    | initiator (Android and iOS) and target (Android only)  |
 
 Any software package marked as `initiator` can connect to other `target` devices. The target software packages can receive connections from other devices. Packages marked as both initiator and target can do both functions.
 
