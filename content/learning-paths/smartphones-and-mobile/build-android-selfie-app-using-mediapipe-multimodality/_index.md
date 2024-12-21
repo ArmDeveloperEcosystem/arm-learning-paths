@@ -1,6 +1,8 @@
 ---
 title: Build a Hands-Free Selfie app with Modern Android Development and MediaPipe Multimodal AI
-
+draft: true
+cascade:
+    draft: true
 minutes_to_complete: 120
 
 who_is_this_for: This is an introductory topic for mobile application developers interested in learning how to build an Android selfie app with MediaPipe, Kotlin flows and CameraX, following the modern Android architecture design.
