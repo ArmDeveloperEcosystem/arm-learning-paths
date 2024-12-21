@@ -20,7 +20,7 @@ author_primary: Chen Zhang
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-A
+    - Neoverse
 tools_software_languages:
     - Python
     - GenAI

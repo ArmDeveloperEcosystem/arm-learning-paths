@@ -1,6 +1,10 @@
 ---
 title: Get started with Neon Intrinsics on Android
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 40
 
 who_is_this_for: This is an introductory topic for software developers interested in learning how to use Neon Intrinsics on Arm powered mobile devices running Android. 
@@ -14,7 +18,7 @@ prerequisites:
     - A x86_64 or Apple M1 development machine with Android Studio installed.
     - A 64-bit Arm powered smartphone running Android.
 
-author_primary: Pareena Verma
+author_primary: Dawid Borycki
 
 ### Tags
 skilllevels: Introductory

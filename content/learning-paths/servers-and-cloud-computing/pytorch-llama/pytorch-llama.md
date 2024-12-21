@@ -66,12 +66,19 @@ pip uninstall torchao && cd ao/ && rm -rf build && python setup.py install
 ### Login to Hugging Face
 You can now download the LLM.
 
-[Generate an Access Token](https://huggingface.co/settings/tokens) to authenticate your identity with Hugging Face Hub. A token with read-only access is sufficient. Log in to the Hugging Face repository and enter your Access Token key from Hugging face. 
+Install the [Hugging Face CLI](https://huggingface.co/docs/huggingface_hub/main/en/guides/cli) application.
+```sh
+pip install -U "huggingface_hub[cli]"
+```
+
+[Generate an Access Token](https://huggingface.co/settings/tokens) to authenticate your identity with Hugging Face Hub. A token with read-only access is sufficient.
+
+Log in to the Hugging Face repository and enter your Access Token key from Hugging face. 
 
 ```sh
 huggingface-cli login
 ```
-Before you can download the model, accept the license agreement at: [Meta Llama 3.1](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct)
+Before you can download the model, you must accept the license agreement at: [Meta Llama 3.1](https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct).
 
 ### Downloading and Quantizing the LLM Model
 

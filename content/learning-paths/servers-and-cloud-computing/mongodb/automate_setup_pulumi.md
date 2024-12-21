@@ -2,7 +2,7 @@
 # User change
 title: "Automate MongoDB Performance Benchmarking Infrastructure Setup with Pulumi"
 
-weight: 5 # (intro is 1), 2 is first, 3 is second, etc.
+weight: 8 # (intro is 1), 2 is first, 3 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"

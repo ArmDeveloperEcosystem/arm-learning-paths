@@ -11,9 +11,9 @@ operatingsystems_filter:
 - Android: 2
 - Baremetal: 1
 - ChromeOS: 1
-- Linux: 29
-- macOS: 7
-- Windows: 38
+- Linux: 27
+- macOS: 5
+- Windows: 36
 subjects_filter:
 - CI-CD: 3
 - Containers and Virtualization: 6
@@ -24,7 +24,7 @@ title: Laptops and Desktops
 tools_software_languages_filter:
 - .NET: 12
 - Alacritty: 1
-- Android Studio: 2
+- Android Studio: 1
 - Arm Development Studio: 2
 - Arm64EC: 1
 - assembly: 1
@@ -36,7 +36,7 @@ tools_software_languages_filter:
 - CCA: 1
 - Clang: 10
 - CMake: 2
-- Coding: 19
+- Coding: 17
 - CSS: 1
 - Docker: 4
 - GCC: 9
@@ -68,7 +68,7 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - Visual Studio: 10
 - Visual Studio Code: 9
-- VS Code: 2
+- VS Code: 3
 - Windows Forms: 1
 - Windows Performance Analyzer: 1
 - Windows Presentation Foundation: 1

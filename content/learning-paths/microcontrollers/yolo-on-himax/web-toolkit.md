@@ -34,14 +34,14 @@ For `tflm_fd_fm`, you need to pass all three models as separate `--model` argume
 
 ## Regenerate the firmware image
 
-Use Make to re-generate the `.elf` file.
+Use Make to regenerate the `.elf` file.
 
 ```bash
 make clean
 make
 ```
 
-Use the same commands from previous section to run re-generate the firmware image:
+Use the same commands from previous section to regenerate the firmware image:
 
 ```bash
 cd ../we2_image_gen_local/
@@ -101,9 +101,9 @@ The images below are captured images from the models run in the toolkit.
 ### Objection detection
 ![object_detection](./object_detection.jpg)
 
-The Frames Per Second (FPS) index represents the number of ML inferences the hardware can complete per second. A higher number indicates better performance. The colored bounding boxes represent the objects identified by YOLO. The name of the object is labelled in the top left-hand corner of the box, and the number in parentheses is the confidence level as a percentage. This example shows that it can identify 9.53 frames per second with a confidence level of 64% for the 'CPU' object.
+The Frames Per Second (FPS) index represents the number of ML inferences the hardware can complete per second. A higher number indicates better performance. The colored bounding boxes represent the objects identified by YOLO. The name of the object is labeled in the top left-hand corner of the box, and the number in parentheses is the confidence level as a percentage. This example shows that it can identify 9.53 frames per second with a confidence level of 64% for the 'CPU' object.
 
 ### Face detection
 ![object_detection](./face_detection.jpg)
 
-Similar to the previous example, the bounding boxes identify the areas in the image that contain faces and recognize the positions of different facial features. This image shows that YOLO has identified a face with 99% confidence. It has marked the mouth with a yellow line segment and used different colours to mark the eyebrows, eyes, and nose. Within the bounding box for the eyes, it has further identified the gaze direction vector.
+Similar to the previous example, the bounding boxes identify the areas in the image that contain faces and recognize the positions of different facial features. This image shows that YOLO has identified a face with 99% confidence. It has marked the mouth with a yellow line segment and used different colors to mark the eyebrows, eyes, and nose. Within the bounding box for the eyes, it has further identified the gaze direction vector.

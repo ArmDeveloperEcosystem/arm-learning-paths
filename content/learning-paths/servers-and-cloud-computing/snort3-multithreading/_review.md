@@ -2,11 +2,11 @@
 review:
     - questions:
         question: >
-            Which of the following is a key benefit of Snort3's multithreading support?
+            Which of the following is a key benefit of Snort 3's multithreading support?
         answers:
             - It allows Snort to detect encrypted traffic.
-            - It improves packet processing performance 
-            - It enables Snort to be run on legacy hardware
+            - It improves packet processing performance. 
+            - It enables Snort to be run on legacy hardware.
             - It support multiple rule sets at the same time.
         correct_answer: 2                    
         explanation: >
@@ -14,7 +14,7 @@ review:
 
     - questions:
         question: >
-            Which parameter is used to enable multithreading in Snort3?
+            Which parameter is used to enable multithreading in Snort 3?
         answers:
             - --max-packet-threads
             - --enable-threads
@@ -34,7 +34,7 @@ review:
             - pcap
         correct_answer: 3          
         explanation: >
-            The dump module in Snort3 is used to read capture files (such as .pcap or .pcapng files) for offline packet analysis. 
+            The dump module in Snort 3 is used to read capture files (such as .pcap or .pcapng files) for offline packet analysis. 
 
 
 
