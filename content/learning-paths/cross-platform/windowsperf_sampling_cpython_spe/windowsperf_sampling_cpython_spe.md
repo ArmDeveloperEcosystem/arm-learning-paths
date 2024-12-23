@@ -44,7 +44,7 @@ Here an example output for a system with SPE support:
 #### How do I check if the WindowsPerf binaries and driver support SPE?
 
 {{% notice Note %}}
-Currently, the WindowsPerf support of SPE is in development, and not all versions of WindowsPerf enable SPE support. Some WindowsPerf releases might contain separate binaries with SPE support enables.
+Currently, the WindowsPerf support of SPE is in development, and not all versions of WindowsPerf enable SPE support. Some WindowsPerf releases might contain separate binaries with SPE support enabled.
 {{% /notice %}}
 
 You can check the feature string `FeatureString` of both `wperf` and `wperf-driver` with `wperf --version` command:
