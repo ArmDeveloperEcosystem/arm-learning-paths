@@ -1,21 +1,17 @@
 ---
-title: Scaling Snort 3 - use multithreading for improved performance
-
-draft: true
-cascade:
-    draft: true
+title: Optimize the performance of Snort 3 using multithreading
 
 minutes_to_complete: 45
 
-who_is_this_for: This blog is for engineers familiar with Snort who want to enhance its performance by leveraging the benefits of multithreading.
+who_is_this_for: This Learning Path is for software developers familiar with Snort who want to optimize performance by leveraging the benefits of multithreading.
 
 learning_objectives: 
-    - Install Snort with all of its dependencies.
+    - Install Snort and dependencies.
     - Configure Snort Lua files to enable multithreading.
     - Use multithreading to process capture files and measure performance.
 
 prerequisites:
-    - An Arm-based instance from a cloud provider or an Arm server running Ubuntu 20.04 or 22.04.
+    - An Arm-based instance from a cloud provider, or an Arm server running Ubuntu 20.04 or 22.04.
     - A basic understanding of Snort's operation and configuration.
     
 

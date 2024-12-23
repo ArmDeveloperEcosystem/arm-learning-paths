@@ -1,24 +1,32 @@
 ---
-title: Installing Snort 3 and the required dependencies
+
+title: Install Snort 3 and Dependencies
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-Snort is an Open Source Intrusion Prevention System (IPS). Snort uses a series of rules to define malicious network activity. If malicious activity is found, Snort generates alerts.
+## Snort 3
 
-Multithreading in Snort 3 refers to the ability to associate multiple threads with a single Snort instance enabling the concurrent processing of multiple packet files. This optimization frees up additional memory for further packet processing.
+Snort is an Open Source Intrusion Prevention System (IPS). Snort uses a series of rules to define malicious network activity. If malicious activity is detected, Snort generates alerts.
 
-In order to enable multithreading in Snort 3, specify the number of threads designated for processing network traffic using either the `--max-packet-threads` or `-z` option. 
+Snort 3 benefits from multithreading, which means that it enables the concurrent processing of multiple packet processing threads with a single Snort instance. This optimization frees up additional memory for further packet processing.
+
+#### Enable multithreading
+
+In order to enable multithreading in Snort 3, specify the quantity of threads designated for processing network traffic using either of these two options:
+
+* `--max-packet-threads`
+* `-z` 
 
 {{%notice Note%}}
-    The instructions provided have been tested on AWS EC2 Graviton4 instance, based on Neoverse V2. The examples are easiest to use if you have at least 16 cores in the system. 
+    These instructions have been tested on an AWS EC2 Graviton4 instance, based on Arm Neoverse V2. The examples work best if you have at least 16 cores in your system. 
 {{%/notice%}}
 
-## Compile and build Snort3
+### How do I compile and build Snort 3?
 
-To install Snort 3, use a text editor to save the script below on your Arm server in a file named `install-snort.sh`.
+To install Snort 3, use a text editor to copy-and-paste the text below and save the script on your Arm server in a file named `install-snort.sh`.
 
 <!-- add github link for the below file [build_snort3.sh]() -->
 ``` bash
@@ -40,7 +48,7 @@ declare -a PACKAGE_URLS=(
 "https://github.com/gperftools/gperftools/releases/download/gperftools-2.13/gperftools-2.13.tar.gz"
 )
 
-downlaodPackages()
+downloadPackages()
 {
     for url in "${PACKAGE_URLS[@]}"; do
         # Extract the file name from the URL
@@ -89,7 +97,7 @@ installPackages()
     sudo apt-get install -y $LIST_OF_APPS
   
     # required to get optimized result from Snort3
-    downlaodPackages
+    downloadPackages
     mkdir -p ${ROOT_DIR}/snort3
     tar -xzf 3.3.5.0.tar.gz --directory  ${ROOT_DIR}/snort3 --strip-components=1
     echo "@@@@@@@@@@@@@@@@@@     Installing Snort3 Dependencies ...     @@@@@@@@@@@@@@@@@@@@"
@@ -193,21 +201,21 @@ echo 'make sure to source ~/.bashrc or set LD_LIBRARY_PATH using:"'
 echo '   export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"'
 ```
 
-The script takes 2 arguments:
-- the directory used to build Snort3 and its dependencies 
-- the number of processors to use for the build.
+The script takes two arguments:
+* The directory used to build Snort 3 and its dependencies. 
+* The number of processors to use for the build.
 
-To build in a new directory named `build` with the number of processors in your system, run the script:
+To create a new directory named `build` which lists the number of processors in your system, run the script:
 
 ```bash
 bash ./install-snort.sh build `nproc`
 ```
 
-You don't need to run the script as `root` but it assumes you are on Ubuntu 20.04 or 22.04 and have sudo permission. 
+You do not need to run the script as `root`, but you do need to be running Ubuntu 20.04 or 22.04, and have sudo permission. 
 
-When the build completes you have the `snort3` directory with all compiled software, and the `snort` executable is located in `/usr/local/bin`.
+When the build completes, you will have the Snort 3 directory with all compiled software, and the `snort` executable will be located in `/usr/local/bin`.
 
-To verify the installation is complete, run the command below and see the version printed:
+To verify completed installation, run the command below and look at the version that it prints to screen:
 
 ```bash { output_lines = "2-20" }
  snort -V
@@ -228,6 +236,8 @@ To verify the installation is complete, run the command below and see the versio
 
 ```
 
-Don't delete the `build` directory as it will be used in the next step.
+{{% notice Note %}}
+Do not delete the `build` directory as you will use it in the next step.
+{{% /notice %}}
 
-Proceed to learn how to test Snort3 multithreading.
+Now you can move on to learn about how to test Snort 3 multithreading.
