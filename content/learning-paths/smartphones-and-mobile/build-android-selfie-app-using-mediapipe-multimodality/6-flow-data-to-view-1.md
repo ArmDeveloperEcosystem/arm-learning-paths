@@ -8,7 +8,7 @@ layout: learningpathall
 
 [SharedFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#sharedflow) and [StateFlow](https://developer.android.com/kotlin/flow/stateflow-and-sharedflow#stateflow) are [Kotlin Flow](https://developer.android.com/kotlin/flow) APIs that enable Flows to optimally emit state updates and emit values to multiple consumers.
 
-In this learning path, you will have the opportunity to experiment with both `SharedFlow` and `StateFlow`. This chapter will focus on SharedFlow while the next chapter will focus on StateFlow.
+In this learning path, you will experiment with both `SharedFlow` and `StateFlow`. This section will focus on SharedFlow while the next chapter will focus on StateFlow.
 
 `SharedFlow` is a general-purpose, hot flow that can emit values to multiple subscribers. It is highly configurable, allowing you to set the replay cache size, buffer capacity, etc.
 
@@ -54,9 +54,9 @@ This `SharedFlow` is initialized with a replay size of `1`. This retains the mos
 
 ## Visualize face and gesture results
 
-To visualize the results of Face Landmark Detection and Gesture Recognition tasks, we have prepared the following code for you based on [MediaPipe's samples](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples).
+To visualize the results of Face Landmark Detection and Gesture Recognition tasks, based on [MediaPipe's samples](https://github.com/google-ai-edge/mediapipe-samples/tree/main/examples) follow the intructions in this section.
 
-1. Create a new file named `FaceLandmarkerOverlayView.kt` and fill in the content below:
+1. Create a new file named `FaceLandmarkerOverlayView.kt` and copy the content below:
 
 ```kotlin
 /*
@@ -180,7 +180,7 @@ class FaceLandmarkerOverlayView(context: Context?, attrs: AttributeSet?) :
 ```
 
 
-2. Create a new file named `GestureOverlayView.kt` and fill in the content below:
+2. Create a new file named `GestureOverlayView.kt` and copy the content below:
 
 ```kotlin
 /*
@@ -302,7 +302,7 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) :
 
 ## Update UI in the view controller
 
-1. Add the above two overlay views to `activity_main.xml` layout file:
+1. Add the two overlay views to `activity_main.xml` layout file:
 
 ```xml
     <com.example.holisticselfiedemo.FaceLandmarkerOverlayView
@@ -316,7 +316,7 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) :
         android:layout_height="match_parent" />
 ```
 
-2. Collect the new SharedFlow `uiEvents` in `MainActivity` by appending the code below to the end of `onCreate` method, **below** `setupCamera()` method call.
+2. Collect the new SharedFlow `uiEvents` in `MainActivity` by appending the code below to the end of `onCreate` method, below `setupCamera()` method call.
 
 ```kotlin
         lifecycleScope.launch {
@@ -363,7 +363,7 @@ class GestureOverlayView(context: Context?, attrs: AttributeSet?) :
     }
 ```
 
-4. Build and run the app again. Now you should be seeing face and gesture overlays on top of the camera preview as shown below. Good job!
+4. Build and run the app again. Now you should see face and gesture overlays on top of the camera preview as shown below. Good job!
 
 ![overlay views](images/6/overlay%20views.png)
 

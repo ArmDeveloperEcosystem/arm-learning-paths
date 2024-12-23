@@ -1,5 +1,5 @@
 ---
-title: Scaffold a new Android project
+title: Create a new Android project
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +12,7 @@ This learning path will teach you to architect an app following [modern Android 
 
 Download and install the latest version of [Android Studio](https://developer.android.com/studio/) on your host machine.
 
-This learning path's instructions and screenshots are taken on macOS with Apple Silicon, but you may choose any of the supported hardware systems as described [here](https://developer.android.com/studio/install).
+The instructions for this learning path were tested on a Apple Silicon host machine running macOS, but you may choose any of the supported hardware systems as described [here](https://developer.android.com/studio/install).
 
 Upon first installation, open Android Studio and proceed with the default or recommended settings. Accept license agreements and let Android Studio download all the required assets.
 
@@ -26,12 +26,12 @@ Before you proceed to coding, here are some tips that might come handy:
 
 ## Create a new Android project
 
-1. Navigate to **File > New > New Project...**.
+1. Navigate to File > New > New Project....
 
-2. Select **Empty Views Activity** in **Phone and Tablet** galary as shown below, then click **Next**.
+2. Select Empty Views Activity in the Phone and Tablet gallery as shown below, then click Next.
 ![Empty Views Activity](images/2/empty%20project.png)
 
-3. Proceed with a cool project name and default configurations as shown below. Make sure that **Language** is set to **Kotlin**, and that **Build configuration language** is set to **Kotlin DSL**.
+3. Enter a project name and use the default configurations as shown below. Make sure that Language is set to Kotlin, and that Build configuration language is set to Kotlin DSL.
 ![Project configuration](images/2/project%20config.png)
 
 ### Introduce CameraX dependencies
@@ -194,4 +194,4 @@ private fun bindCameraUseCases() {
     }
 ```
 
-In the next chapter, we will build and run the app to make sure the camera works well.
+In the next section, you will build and run the app to make sure the camera works well.

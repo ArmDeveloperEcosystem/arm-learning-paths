@@ -1,5 +1,5 @@
 ---
-title: Handle camera permission
+title: Handle camera permissions
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,18 +8,18 @@ layout: learningpathall
 
 ## Run the app on your device
 
-1. Connect your Android device to your computer via a USB **data** cable. If this is your first time running and debugging Android apps, follow [this guide](https://developer.android.com/studio/run/device#setting-up) and double check this checklist:
+1. Connect your Android device to your computer via a USB data cable. If this is your first time running and debugging Android apps, follow [this guide](https://developer.android.com/studio/run/device#setting-up) and double check this checklist:
     
-    1. You have enabled **USB debugging** on your Android device following [this doc](https://developer.android.com/studio/debug/dev-options#Enable-debugging). 
+    1. You have enabled USB debugging on your Android device following [this doc](https://developer.android.com/studio/debug/dev-options#Enable-debugging). 
     
-    2. You have confirmed by tapping "OK" on your Android device when an **"Allow USB debugging"** dialog pops up, and checked "Always allow from this computer".
+    2. You have confirmed by tapping "OK" on your Android device when an "Allow USB debugging" dialog pops up, and checked "Always allow from this computer".
 
     ![Allow USB debugging dialog](https://ftc-docs.firstinspires.org/en/latest/_images/AllowUSBDebugging.jpg)
 
 
-2. Make sure your device model name and SDK version correctly show up on the top right toolbar. Click the **"Run"** button to build and run, as described [here](https://developer.android.com/studio/run).
+2. Make sure your device model name and SDK version correctly show up on the top right toolbar. Click the "Run" button to build and run the app.
 
-3. After waiting for a while, you should be seeing success notification in Android Studio and the app showing up on your Android device. 
+3. After a while, you should see a success notification in Android Studio and the app showing up on your Android device. 
 
 4. However, the app shows only a black screen while printing error messages in your [Logcat](https://developer.android.com/tools/logcat) which looks like this:
 
@@ -30,11 +30,11 @@ layout: learningpathall
 2024-11-20 11:43:03.408  2709-3807  PackageManager          pid-2709                             E  Permission android.permission.CAMERA isn't requested by package com.example.holisticselfiedemo
 ```
 
-5. Worry not. This is expected behavior because we haven't correctly configured this app's [permissions](https://developer.android.com/guide/topics/permissions/overview) yet, therefore Android OS restricts this app's access to camera features due to privacy reasons. 
+5. Do not worry. This is expected behavior because you haven't correctly configured this app's [permissions](https://developer.android.com/guide/topics/permissions/overview) yet. Android OS restricts this app's access to camera features due to privacy reasons.
 
 ## Request camera permission at runtime
 
-1. Navigate to `manifest.xml` in your `app` subproject's `src/main` path. Declare camera hardware and permission by inserting the following lines into the `<manifest>` element. Make sure it's **outside** and **above** `<application>` element.
+1. Navigate to `manifest.xml` in your `app` subproject's `src/main` path. Declare camera hardware and permission by inserting the following lines into the `<manifest>` element. Make sure it's declared outside and above `<application>` element.
 
 ```xml
     <uses-feature
@@ -107,12 +107,12 @@ layout: learningpathall
 
 ## Verify camera permission
 
-1. Rebuild and run the app. Now you should be seeing a dialog pops up requesting camera permissions! 
+1. Rebuild and run the app. Now you should see a dialog pop up requesting camera permissions! 
 
-2. Tap `Allow` or `While using the app` (depending on your Android OS versions), then you should be seeing your own face in the camera preview. Good job!  
+2. Tap `Allow` or `While using the app` (depending on your Android OS versions). Then you should see your own face in the camera preview. Good job!  
 
 {{% notice Tip %}}
 Sometimes you might need to restart the app to observe the permission change take effect.
 {{% /notice %}}
 
-In the next chapter, we will introduce MediaPipe vision solutions.
+In the next section, you will learn how to integrate MediaPipe vision solutions. 
