@@ -1,6 +1,10 @@
 ---
 title: Build a Hands-Free Selfie Android application with MediaPipe
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 120
 
 who_is_this_for: This is an advanced topic for mobile application developers interested in learning how to build an Android selfie application with MediaPipe, Kotlin flows and CameraX.
