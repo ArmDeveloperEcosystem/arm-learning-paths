@@ -89,7 +89,7 @@ However, silently failing without notifying the user is not a good practice for 
 
 {{% /notice %}}
 
-## Completed sample code on GitHub
+## Entire sample code on GitHub
 
 If you run into any difficulties completing this learning path, you can check out the [complete sample code](https://github.com/hanyin-arm/sample-android-selfie-app-using-mediapipe-multimodality) and import it into Android Studio.
 
